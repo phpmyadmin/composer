@@ -2995,11 +2995,6 @@ AJAX.registerOnload('functions.js', function () {
      */
     $(document).on('click', "form.create_table_form.ajax input[name=submit_num_fields]", function (event) {
         event.preventDefault();
-
-        if (!checkFormElementInRange(this.form, 'added_fields', PMA_messages.strLeastColumnError, 1)) {
-            return;
-        }
-
         submitChangesInCreateTableForm('submit_num_fields=1');
     }); // end create table form (add fields)
 
@@ -3600,7 +3595,7 @@ AJAX.registerOnload('functions.js', function () {
         }
         var seeMore = '';
         if (list_size > maxRows) {
-            seeMore = "<fieldset class='tblFooters' style='text-align:center;font-weight:bold'>" +
+            seeMore = "<fieldset class='tblFooters center' style='font-weight:bold'>" +
                 "<a href='#' id='seeMore'>" + PMA_messages.seeMore + "</a></fieldset>";
         }
         var central_columns_dialog = "<div style='max-height:400px'>" +
@@ -3684,7 +3679,7 @@ AJAX.registerOnload('functions.js', function () {
         while (num_new_rows--) {
             $enum_editor_dialog.find('.values')
                 .append(
-                    "<tr style='display: none;'><td>" +
+                    "<tr class='hide'><td>" +
                     "<input type='text' />" +
                     "</td><td class='drop'>" +
                     PMA_getImage('b_drop.png') +
