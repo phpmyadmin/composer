@@ -19,10 +19,10 @@ use PhpMyAdmin\SqlParser;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\SqlParser\Utils\Table as SqlTable;
 use PMA\libraries\Table;
+use PMA\libraries\Transformations;
 use PMA\libraries\controllers\TableController;
 use PMA\libraries\URL;
 
-require_once 'libraries/transformations.lib.php';
 require_once 'libraries/util.lib.php';
 require_once 'libraries/config/messages.inc.php';
 require_once 'libraries/config/user_preferences.forms.php';
@@ -521,6 +521,7 @@ class TableStructureController extends TableController
         }
 
         include_once 'libraries/StorageEngine.php';
+        include 'libraries/tbl_partition_definition.inc.php';
         $this->response->addHTML(
             Template::get('table/structure/partition_definition_form')
                 ->render(
@@ -1037,7 +1038,7 @@ class TableStructureController extends TableController
                 if (isset($_REQUEST['field_name'][$fieldindex])
                     && strlen($_REQUEST['field_name'][$fieldindex]) > 0
                 ) {
-                    PMA_setMIME(
+                    Transformations::setMIME(
                         $this->db, $this->table,
                         $_REQUEST['field_name'][$fieldindex],
                         $mimetype,
@@ -1163,10 +1164,9 @@ class TableStructureController extends TableController
         $mime_map = array();
 
         if ($GLOBALS['cfg']['ShowPropertyComments']) {
-            include_once 'libraries/transformations.lib.php';
             $comments_map = PMA_getComments($this->db, $this->table);
             if ($cfgRelation['mimework'] && $GLOBALS['cfg']['BrowseMIME']) {
-                $mime_map = PMA_getMIME($this->db, $this->table, true);
+                $mime_map = Transformations::getMIME($this->db, $this->table, true);
             }
         }
         include_once 'libraries/central_columns.lib.php';
@@ -1372,7 +1372,8 @@ class TableStructureController extends TableController
                 'effect_size' => $effect_size,
                 'effect_unit' => $effect_unit,
                 'tot_size' => $tot_size,
-                'tot_unit' => $tot_unit
+                'tot_unit' => $tot_unit,
+                'table' => $GLOBALS['table']
             )
         );
     }
