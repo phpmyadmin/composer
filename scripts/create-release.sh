@@ -260,9 +260,7 @@ if [ ! -d libraries/tcpdf ] ; then
     find vendor/tecnickcom/tcpdf/fonts/ -maxdepth 1 -type f -not -name 'dejavusans.*' -not -name 'dejavusansb.*' -not -name 'helvetica.php' -print0 | xargs -0 rm
     if [ $do_tag -eq 1 ] ; then
         echo "* Commiting composer.lock"
-        sed -i '/composer.lock/D' .gitignore
-        git add .gitignore
-        git add composer.lock
+        git add --force composer.lock
         git commit -s -m "Adding composer lock for $version"
     fi
 fi
@@ -411,6 +409,8 @@ if [ $do_tag -eq 1 ] ; then
     echo "* Tagging release as $tagname"
     git tag -s -a -m "Released $version" $tagname $branch
     echo "   Dont forget to push tags using: git push --tags"
+    git rm --force composer.lock
+    git commit -s -m "Removing composer.lock"
 fi
 
 # Mark as stable release
