@@ -4,17 +4,17 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.7.1-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2017-05-17 09:06+0200\n"
-"PO-Revision-Date: 2017-05-08 08:32+0000\n"
-"Last-Translator: Michal Čihař <michal@cihar.com>\n"
-"Language-Team: Lithuanian <https://hosted.weblate.org/projects/"
-"phpmyadmin/4-7/lt/>\n"
+"PO-Revision-Date: 2017-06-03 12:43+0000\n"
+"Last-Translator: Justas Vilimas <justas@vilimas.eu>\n"
+"Language-Team: Lithuanian "
+"<https://hosted.weblate.org/projects/phpmyadmin/4-7/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.14-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.15-dev\n"
 
 #: changelog.php:39 license.php:34
 #, php-format
@@ -27,12 +27,11 @@ msgstr ""
 
 #: db_central_columns.php:108
 msgid "The central list of columns for the current database is empty."
-msgstr ""
+msgstr "Pagrindinis einamosios duomenų bazės stulpelių sąrašas yra tuščias."
 
 #: db_central_columns.php:133
-#, fuzzy
 msgid "Click to sort."
-msgstr "Spustelėkite, kad surikiuoti"
+msgstr "Spustelėkite surikiuoti."
 
 #: db_central_columns.php:150
 #, php-format
@@ -287,10 +286,8 @@ msgstr "Duomenys"
 
 #: db_export.php:70 libraries/DbSearch.php:434
 #: libraries/display_export.lib.php:45 libraries/replication_gui.lib.php:379
-#, fuzzy
-#| msgid "Select All"
 msgid "Select all"
-msgstr "Pažymėti visas"
+msgstr "Pažymėti visas(-us)"
 
 #: db_operations.php:50 tbl_create.php:23
 msgid "The database name is empty!"
@@ -336,7 +333,7 @@ msgstr "Sekimo duomenys ištrinti sėkmingai."
 #, php-format
 msgid ""
 "Version %1$s was created for selected tables, tracking is active for them."
-msgstr ""
+msgstr "Versija %1$s buvo sukurta pažymėtoms lantelėms, jų sekimas aktyvus."
 
 #: db_tracking.php:93
 msgid "No tables selected."
