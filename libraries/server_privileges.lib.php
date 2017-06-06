@@ -5,6 +5,8 @@
  *
  * @package PhpMyAdmin
  */
+
+use PMA\libraries\Core;
 use PMA\libraries\DatabaseInterface;
 use PMA\libraries\Message;
 use PMA\libraries\Response;
@@ -3614,6 +3616,12 @@ function PMA_getHtmlTableBodyForUserRights($db_rights)
                 break;
             } // end switch
 
+            if (! isset($host['Select_priv'])) {
+                $html_output .= Util::showHint(
+                    __('The selected user was not found in the privilege table.')
+                );
+            }
+
             $html_output .= '</td>' . "\n";
 
             $html_output .= '<td><code>' . "\n"
@@ -4254,17 +4262,17 @@ function PMA_getDataForDBInfo()
     /**
      * Checks if a dropdown box has been used for selecting a database / table
      */
-    if (PMA_isValid($_REQUEST['pred_tablename'])) {
+    if (Core::isValid($_REQUEST['pred_tablename'])) {
         $tablename = $_REQUEST['pred_tablename'];
-    } elseif (PMA_isValid($_REQUEST['tablename'])) {
+    } elseif (Core::isValid($_REQUEST['tablename'])) {
         $tablename = $_REQUEST['tablename'];
     } else {
         unset($tablename);
     }
 
-    if (PMA_isValid($_REQUEST['pred_routinename'])) {
+    if (Core::isValid($_REQUEST['pred_routinename'])) {
         $routinename = $_REQUEST['pred_routinename'];
-    } elseif (PMA_isValid($_REQUEST['routinename'])) {
+    } elseif (Core::isValid($_REQUEST['routinename'])) {
         $routinename = $_REQUEST['routinename'];
     } else {
         unset($routinename);
@@ -4273,7 +4281,7 @@ function PMA_getDataForDBInfo()
     if (isset($_REQUEST['pred_dbname'])) {
         $is_valid_pred_dbname = true;
         foreach ($_REQUEST['pred_dbname'] as $key => $db_name) {
-            if (! PMA_isValid($db_name)) {
+            if (! Core::isValid($db_name)) {
                 $is_valid_pred_dbname = false;
                 break;
             }
@@ -4284,13 +4292,13 @@ function PMA_getDataForDBInfo()
         $is_valid_dbname = true;
         if (is_array($_REQUEST['dbname'])) {
             foreach ($_REQUEST['dbname'] as $key => $db_name) {
-                if (! PMA_isValid($db_name)) {
+                if (! Core::isValid($db_name)) {
                     $is_valid_dbname = false;
                     break;
                 }
             }
         } else {
-            if (! PMA_isValid($_REQUEST['dbname'])) {
+            if (! Core::isValid($_REQUEST['dbname'])) {
                 $is_valid_dbname = false;
             }
         }
@@ -4755,8 +4763,8 @@ function PMA_getHtmlForUserProperties($dbname_is_wildcard,$url_dbname,
     $html_output .= URL::getHiddenInputs($_params);
     $html_output .= PMA_getHtmlToDisplayPrivilegesTable(
         // If $dbname is an array, pass any one db as all have same privs.
-        PMA_ifSetOr($dbname, (is_array($dbname)) ? $dbname[0] : '*', 'length'),
-        PMA_ifSetOr($tablename, '*', 'length')
+        Core::ifSetOr($dbname, (is_array($dbname)) ? $dbname[0] : '*', 'length'),
+        Core::ifSetOr($tablename, '*', 'length')
     );
 
     $html_output .= '</form>' . "\n";

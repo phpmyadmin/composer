@@ -12,6 +12,7 @@ use PhpMyAdmin\SqlParser\Statements\DropStatement;
 use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\SqlParser\Utils\Query;
 use PMA\libraries\Bookmark;
+use PMA\libraries\Core;
 use PMA\libraries\DatabaseInterface;
 use PMA\libraries\DisplayResults;
 use PMA\libraries\Index;
@@ -238,7 +239,6 @@ class Sql
     public static function getHtmlForProfilingChart($url_query, $db, $profiling_results)
     {
         if (! empty($profiling_results)) {
-            $pma_token = $_SESSION[' PMA_token '];
             $url_query = isset($url_query)
                 ? $url_query
                 : URL::getCommon(array('db' => $db));
@@ -287,7 +287,6 @@ class Sql
 
             $profiling_table .= <<<EOT
 <script type="text/javascript">
-    pma_token = '$pma_token';
     url_query = '$url_query';
 </script>
 EOT;
@@ -816,7 +815,7 @@ EOT;
             /**
              * @todo In which scenario does this happen?
              */
-            PMA_sendHeaderLocation(
+            Core::sendHeaderLocation(
                 './' . $goto
                 . '&label=' . $_POST['bkm_fields']['bkm_label']
             );

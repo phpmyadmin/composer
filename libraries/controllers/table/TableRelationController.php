@@ -8,9 +8,8 @@
 
 namespace PMA\libraries\controllers\table;
 
-require_once 'libraries/index.lib.php';
-
 use PMA\libraries\controllers\TableController;
+use PMA\libraries\Core;
 use PMA\libraries\DatabaseInterface;
 use PMA\libraries\Index;
 use PMA\libraries\Table;
@@ -191,7 +190,7 @@ class TableRelationController extends TableController
         );
 
         if (Util::isForeignKeySupported($this->tbl_storage_engine)) {
-            $this->response->addHTML(PMA_getHtmlForDisplayIndexes());
+            $this->response->addHTML(Index::getHtmlForDisplayIndexes());
         }
         $this->response->addHTML('</div>');
     }
@@ -243,7 +242,7 @@ class TableRelationController extends TableController
 
         // If there is a request for SQL previewing.
         if (isset($_REQUEST['preview_sql'])) {
-            PMA_previewSQL($preview_sql_data);
+            Core::previewSQL($preview_sql_data);
         }
 
         if (!empty($display_query) && !$seen_error) {
@@ -308,7 +307,7 @@ class TableRelationController extends TableController
             $columns[] = htmlspecialchars($column);
         }
         if ($GLOBALS['cfg']['NaturalOrder']) {
-            uksort($columns, 'strnatcasecmp');
+            natsort($columns);
         }
         $this->response->addJSON('columns', $columns);
 
@@ -361,7 +360,7 @@ class TableRelationController extends TableController
             }
         }
         if ($GLOBALS['cfg']['NaturalOrder']) {
-            uksort($tables, 'strnatcasecmp');
+            natsort($tables);
         }
         $this->response->addJSON('tables', $tables);
     }
