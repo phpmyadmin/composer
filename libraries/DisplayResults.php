@@ -2128,7 +2128,7 @@ class DisplayResults
             // Incase this is the current column save $single_sort_order
             if ($current_name == $name_to_use_in_sort) {
                 if (mb_strpos($current_name, '(') !== false) {
-                    $single_sort_order = "\n" . 'ORDER BY ' . $current_name . ' ';
+                    $single_sort_order = "\n" . 'ORDER BY ' . Util::backquote($current_name) . ' ';
                 } else {
                     $single_sort_order = "\n" . 'ORDER BY ' . $sort_tbl
                         . Util::backquote(
@@ -3057,7 +3057,7 @@ class DisplayResults
                     $file = $mime_map[$orgFullColName]['transformation'];
                     $include_file = 'libraries/plugins/transformations/' . $file;
 
-                    if (file_exists($include_file)) {
+                    if (@file_exists($include_file)) {
 
                         include_once $include_file;
                         $class_name = PMA_getTransformationClassName($include_file);

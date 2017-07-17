@@ -375,7 +375,7 @@ $token_provided = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (PMA_isValid($_POST['token'])) {
         $token_provided = true;
-        $token_mismatch = ! hash_equals($_SESSION[' PMA_token '], $_POST['token']);
+        $token_mismatch = ! @hash_equals($_SESSION[' PMA_token '], $_POST['token']);
     }
 
     if ($token_mismatch) {
@@ -633,7 +633,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
          * the required auth type plugin
          */
         $auth_class = "Authentication" . ucfirst($cfg['Server']['auth_type']);
-        if (! file_exists(
+        if (! @file_exists(
             './libraries/plugins/auth/'
             . $auth_class . '.php'
         )) {

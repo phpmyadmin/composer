@@ -103,7 +103,7 @@ class Config
      */
     public function checkSystem()
     {
-        $this->set('PMA_VERSION', '4.7.2-dev');
+        $this->set('PMA_VERSION', '4.7.3-dev');
         /**
          * @deprecated
          */
@@ -453,7 +453,7 @@ class Config
         } elseif (function_exists('gzuncompress')) {
             $git_file_name = $git_folder . '/objects/'
                 . substr($hash, 0, 2) . '/' . substr($hash, 2);
-            if (file_exists($git_file_name) ) {
+            if (@file_exists($git_file_name) ) {
                 if (! $commit = @file_get_contents($git_file_name)) {
                     return;
                 }
@@ -464,7 +464,7 @@ class Config
                 $pack_names = array();
                 // work with packed data
                 $packs_file = $git_folder . '/objects/info/packs';
-                if (file_exists($packs_file)
+                if (@file_exists($packs_file)
                     && $packs = @file_get_contents($packs_file)
                 ) {
                     // File exists. Read it, parse the file to get the names of the
@@ -1137,7 +1137,7 @@ class Config
     public function checkPermissions()
     {
         // Check for permissions (on platforms that support it):
-        if ($this->get('CheckConfigurationPermissions')) {
+        if ($this->get('CheckConfigurationPermissions') && @file_exists($this->getSource())) {
             $perms = @fileperms($this->getSource());
             if (!($perms === false) && ($perms & 2)) {
                 // This check is normally done after loading configuration
@@ -1714,7 +1714,7 @@ class Config
     private static function _renderCustom($filename, $id)
     {
         $retval = '';
-        if (file_exists($filename)) {
+        if (@file_exists($filename)) {
             $retval .= '<div id="' . $id . '">';
             ob_start();
             include $filename;
