@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Response;
-use PMA\libraries\Transformations;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Transformations;
 
 /**
  *
@@ -62,17 +62,17 @@ foreach ($request_params as $one_request_param) {
 $GLOBALS['dbi']->selectDb($db);
 if (isset($where_clause)) {
     $result = $GLOBALS['dbi']->query(
-        'SELECT * FROM ' . PMA\libraries\Util::backquote($table)
+        'SELECT * FROM ' . PhpMyAdmin\Util::backquote($table)
         . ' WHERE ' . $where_clause . ';',
         null,
-        PMA\libraries\DatabaseInterface::QUERY_STORE
+        PhpMyAdmin\DatabaseInterface::QUERY_STORE
     );
     $row = $GLOBALS['dbi']->fetchAssoc($result);
 } else {
     $result = $GLOBALS['dbi']->query(
-        'SELECT * FROM ' . PMA\libraries\Util::backquote($table) . ' LIMIT 1;',
+        'SELECT * FROM ' . PhpMyAdmin\Util::backquote($table) . ' LIMIT 1;',
         null,
-        PMA\libraries\DatabaseInterface::QUERY_STORE
+        PhpMyAdmin\DatabaseInterface::QUERY_STORE
     );
     $row = $GLOBALS['dbi']->fetchAssoc($result);
 }

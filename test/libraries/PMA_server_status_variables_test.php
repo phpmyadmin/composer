@@ -6,9 +6,9 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\ServerStatusData;
-use PMA\libraries\Theme;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\ServerStatusData;
+use PhpMyAdmin\Theme;
 
 require_once 'libraries/server_status_variables.lib.php';
 require_once 'libraries/database_interface.inc.php';
@@ -60,7 +60,7 @@ class PMA_ServerStatusVariables_Test extends PHPUnit_Framework_TestCase
         //$_SESSION
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 

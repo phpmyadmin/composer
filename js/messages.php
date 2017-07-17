@@ -26,15 +26,15 @@ if (!defined('TESTSUITE')) {
 }
 
 // But this one is needed for Sanitize::escapeJsString()
-use PMA\libraries\Sanitize;
+use PhpMyAdmin\Sanitize;
 
 
-$buffer = PMA\libraries\OutputBuffering::getInstance();
+$buffer = PhpMyAdmin\OutputBuffering::getInstance();
 $buffer->start();
 if (!defined('TESTSUITE')) {
     register_shutdown_function(
         function () {
-            echo PMA\libraries\OutputBuffering::getInstance()->getContents();
+            echo PhpMyAdmin\OutputBuffering::getInstance()->getContents();
         }
     );
 }
@@ -748,7 +748,7 @@ echo "var themeCalendarImage = '" , $GLOBALS['pmaThemeImage']
 /* Image path */
 echo "var pmaThemeImage = '" , $GLOBALS['pmaThemeImage'] , "';\n";
 
-echo "var mysql_doc_template = '" , PMA\libraries\Util::getMySQLDocuURL('%s')
+echo "var mysql_doc_template = '" , PhpMyAdmin\Util::getMySQLDocuURL('%s')
     , "';\n";
 
 //Max input vars allowed by PHP.

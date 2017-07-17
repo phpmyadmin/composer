@@ -84,6 +84,49 @@ Basic settings
     If you do not want to use those features set this variable to ``true`` to
     stop this message from appearing.
 
+.. config:option:: $cfg['AuthLog']
+
+    :type: string
+    :default: ``'auto'``
+
+    .. versionadded:: 4.8.0
+
+        This is supported since phpMyAdmin 4.8.0.
+
+    Configure authentication logging destination. Failed (or all, depending on
+    :config:option:`$cfg['AuthLogSuccess']`) authentication attempts will be
+    logged according to this directive:
+
+    ``auto``
+        Let phpMyAdmin automatically choose between ``syslog`` and ``php``.
+    ``syslog``
+        Log using syslog, using AUTH facility, on most systems this ends up
+        in :file:`/var/log/auth.log`.
+    ``php``
+        Log into PHP error log.
+    ``sapi``
+        Log into PHP SAPI logging.
+    ``/path/to/file``
+        Any other value is treated as a filename and log entries are written there.
+
+    .. note::
+
+        When logging to a file, make sure its permissions are correctly set
+        for a web server user, the setup should closely match instructions
+        described in :config:option:`$cfg['TempDir']`:
+
+.. config:option:: $cfg['AuthLogSuccess']
+
+    :type: boolean
+    :default: false
+
+    .. versionadded:: 4.8.0
+
+        This is supported since phpMyAdmin 4.8.0.
+
+    Whether to log successful authentication attempts into
+    :config:option:`$cfg['AuthLog']`.
+
 .. config:option:: $cfg['SuhosinDisableWarning']
 
     :type: boolean
@@ -401,7 +444,7 @@ Server connection settings
     there is a chance your SSL connection will fail due to validation.
     Setting this to ``false`` will disable the validation check.
 
-    Since PHP 5.6.0 it also verifies whether server name matches CN of it's
+    Since PHP 5.6.0 it also verifies whether server name matches CN of its
     certificate. There is currently no way to disable just this check without
     disabling complete SSL verification.
     
@@ -1343,6 +1386,8 @@ Server connection settings
 
     :type: string
     :default: ``''``
+
+    .. versionadded:: 3.5.0
 
     Name of PHP script to be sourced and executed to obtain login
     credentials. This is alternative approach to session based single

@@ -6,8 +6,8 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Util;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Util;
 
 /**
  * tries to secure session from hijacking and fixation

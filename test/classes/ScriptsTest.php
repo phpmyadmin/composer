@@ -10,7 +10,7 @@
  * Include to test.
  */
 
-use PMA\libraries\Scripts;
+use PhpMyAdmin\Scripts;
 
 require_once 'test/PMATestCase.php';
 
@@ -63,7 +63,7 @@ class ScriptsTest extends PMATestCase
      */
     private function _callPrivateFunction($name, $params)
     {
-        $class = new ReflectionClass('PMA\libraries\Scripts');
+        $class = new ReflectionClass(Scripts::class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method->invokeArgs($this->object, $params);
@@ -149,12 +149,12 @@ $(function() {});
     public function testGetFiles()
     {
         // codemirror's onload event is blacklisted
-        $this->object->addFile('codemirror/lib/codemirror.js');
+        $this->object->addFile('vendor/codemirror/lib/codemirror.js');
 
         $this->object->addFile('common.js');
         $this->assertEquals(
             array(
-                array('name' => 'codemirror/lib/codemirror.js', 'fire' => 0),
+                array('name' => 'vendor/codemirror/lib/codemirror.js', 'fire' => 0),
                 array('name' => 'common.js', 'fire' => 1)
             ),
             $this->object->getFiles()

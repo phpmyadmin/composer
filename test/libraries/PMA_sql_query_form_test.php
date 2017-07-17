@@ -6,10 +6,10 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Encoding;
-use PMA\libraries\Theme;
-use PMA\libraries\URL;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Encoding;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Url;
 
 //the following definition should be used globally
 $GLOBALS['server'] = 0;
@@ -78,7 +78,7 @@ class PMA_SqlQueryForm_Test extends PHPUnit_Framework_TestCase
         //$_SESSION
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -126,7 +126,7 @@ class PMA_SqlQueryForm_Test extends PHPUnit_Framework_TestCase
 
         //validate 3: showMySQLDocu
         $this->assertContains(
-            PMA\libraries\Util::showMySQLDocu('SELECT'),
+            PhpMyAdmin\Util::showMySQLDocu('SELECT'),
             $html
         );
 
@@ -199,7 +199,7 @@ class PMA_SqlQueryForm_Test extends PHPUnit_Framework_TestCase
         $table  = $GLOBALS['table'];
         $db     = $GLOBALS['db'];
         $this->assertContains(
-            URL::getHiddenInputs($db, $table),
+            Url::getHiddenInputs($db, $table),
             $html
         );
 

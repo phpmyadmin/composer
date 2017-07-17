@@ -6,9 +6,9 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Theme;
-use PMA\libraries\URL;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Url;
 
 require_once 'libraries/display_export.lib.php';
 require_once 'libraries/database_interface.inc.php';
@@ -58,7 +58,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
         //$_SESSION
         $_SESSION['relation'][$GLOBALS['server']] = "";
 
-        $pmaconfig = $this->getMockBuilder('PMA\libraries\Config')
+        $pmaconfig = $this->getMockBuilder('PhpMyAdmin\Config')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -91,7 +91,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             $sql_query_str
         );
 
-        //validate 1: URL::getHiddenInputs
+        //validate 1: Url::getHiddenInputs
         //$single_table
         $this->assertContains(
             '<input type="hidden" name="single_table" value="TRUE"',
@@ -136,7 +136,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
                 'COLUMN_NAME' => 'test_column2'
             )
         );
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -203,7 +203,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             '<input type="checkbox" name="onserver" value="saveit" ',
             $html
         );
-        $dir = htmlspecialchars(PMA\libraries\Util::userDir($cfg['SaveDir']));
+        $dir = htmlspecialchars(PhpMyAdmin\Util::userDir($cfg['SaveDir']));
         $this->assertContains(
             'Save on server in the directory <b>' . $dir . '</b>',
             $html
@@ -273,7 +273,7 @@ class PMA_DisplayExport_Test extends PHPUnit_Framework_TestCase
             )
         );
 
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -7,10 +7,10 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Message;
-use PMA\libraries\Response;
-use PMA\libraries\URL;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Message;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Url;
 
 if (! defined('PHPMYADMIN')) {
     exit;
@@ -46,7 +46,7 @@ if (empty($is_db)) {
                 }
                 Core::sendHeaderLocation(
                     './index.php'
-                    . URL::getCommonRaw($url_params)
+                    . Url::getCommonRaw($url_params)
                 );
             }
             exit;
@@ -67,7 +67,7 @@ if (empty($is_table)
             $_result = $GLOBALS['dbi']->tryQuery(
                 'SHOW TABLES LIKE \''
                 . $GLOBALS['dbi']->escapeString($table) . '\';',
-                null, PMA\libraries\DatabaseInterface::QUERY_STORE
+                null, PhpMyAdmin\DatabaseInterface::QUERY_STORE
             );
             $is_table = @$GLOBALS['dbi']->numRows($_result);
             $GLOBALS['dbi']->freeResult($_result);
@@ -88,10 +88,10 @@ if (empty($is_table)
                  * only happen if IS_TRANSFORMATION_WRAPPER?
                  */
                 $_result = $GLOBALS['dbi']->tryQuery(
-                    'SELECT COUNT(*) FROM ' . PMA\libraries\Util::backquote($table)
+                    'SELECT COUNT(*) FROM ' . PhpMyAdmin\Util::backquote($table)
                     . ';',
                     null,
-                    PMA\libraries\DatabaseInterface::QUERY_STORE
+                    PhpMyAdmin\DatabaseInterface::QUERY_STORE
                 );
                 $is_table = ($_result && @$GLOBALS['dbi']->numRows($_result));
                 $GLOBALS['dbi']->freeResult($_result);

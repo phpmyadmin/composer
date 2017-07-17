@@ -8,7 +8,8 @@
  */
 namespace PMA\libraries\plugins\export;
 
-use PMA\libraries\DatabaseInterface;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\OpenDocument;
 use PMA\libraries\plugins\ExportPlugin;
 use PMA\libraries\properties\plugins\ExportPluginProperties;
 use PMA\libraries\properties\options\groups\OptionsPropertyMainGroup;
@@ -16,9 +17,8 @@ use PMA\libraries\properties\options\groups\OptionsPropertyRootGroup;
 use PMA\libraries\properties\options\items\BoolPropertyItem;
 use PMA\libraries\properties\options\items\RadioPropertyItem;
 use PMA\libraries\properties\options\items\TextPropertyItem;
-use PMA\libraries\OpenDocument;
-use PMA\libraries\Transformations;
-use PMA\libraries\Util;
+use PhpMyAdmin\Transformations;
+use PhpMyAdmin\Util;
 
 $GLOBALS['odt_buffer'] = '';
 

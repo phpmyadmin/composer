@@ -171,6 +171,7 @@ function addDateTimePicker() {
             var showMillisec = false;
             var showMicrosec = false;
             var timeFormat = 'HH:mm:ss';
+            var hourMax = 23;
             // check for decimal places of seconds
             if (decimals > 0 && type.indexOf('time') != -1){
                 if (decimals > 3) {
@@ -182,12 +183,15 @@ function addDateTimePicker() {
                     timeFormat = 'HH:mm:ss.l';
                 }
             }
+            if (type == 'time'){
+                hourMax = 99;
+            }
             PMA_addDatepicker($(this), type, {
                 showMillisec: showMillisec,
                 showMicrosec: showMicrosec,
-                timeFormat: timeFormat
+                timeFormat: timeFormat,
+                hourMax: hourMax
             });
-
             // Add a tip regarding entering MySQL allowed-values
             // for TIME and DATE data-type
             if ($(this).hasClass('timefield')) {
@@ -518,7 +522,7 @@ function PMA_current_version(data)
     if (data && data.version && data.date) {
         var current = parseVersionString($('span.version').text());
         var latest = parseVersionString(data.version);
-        var url = 'https://web.phpmyadmin.net/files/' + escapeHtml(encodeURIComponent(data.version)) + '/';
+        var url = 'https://www.phpmyadmin.net/files/' + escapeHtml(encodeURIComponent(data.version)) + '/';
         var version_information_message = document.createElement('span');
         version_information_message.className = 'latest';
         var version_information_message_link = document.createElement('a');
@@ -595,8 +599,31 @@ function PMA_display_git_revision()
 
 function displayPasswordGenerateButton()
 {
-    $('#tr_element_before_generate_password').parent().append('<tr class="vmiddle"><td>' + PMA_messages.strGeneratePassword + '</td><td><input type="button" class="button" id="button_generate_password" value="' + PMA_messages.strGenerate + '" onclick="suggestPassword(this.form)" /><input type="text" name="generated_pw" id="generated_pw" /></td></tr>');
-    $('#div_element_before_generate_password').parent().append('<div class="item"><label for="button_generate_password">' + PMA_messages.strGeneratePassword + ':</label><span class="options"><input type="button" class="button" id="button_generate_password" value="' + PMA_messages.strGenerate + '" onclick="suggestPassword(this.form)" /></span><input type="text" name="generated_pw" id="generated_pw" /></div>');
+    var generatePwdRow = $('<tr />').addClass('vmiddle');
+    var titleCell = $('<td />').html(PMA_messages.strGeneratePassword).appendTo(generatePwdRow);
+    var pwdCell = $('<td />').appendTo(generatePwdRow);
+    var pwdButton = $('<input />')
+        .attr({type: 'button', id: 'button_generate_password', value: PMA_messages.strGenerate})
+        .addClass('button')
+        .on('click', function() {
+            suggestPassword(this.form);
+        });
+    var pwdTextbox = $('<input />')
+        .attr({type: 'text', name: 'generated_pw', id: 'generated_pw'});
+    pwdCell.append(pwdButton).append(pwdTextbox);
+
+    $('#tr_element_before_generate_password').parent().append(generatePwdRow);
+
+    var generatePwdDiv = $('<div />').addClass('item');
+    var titleLabel = $('<label />').attr({for: 'button_generate_password'})
+        .html(PMA_messages.strGeneratePassword + ':')
+        .appendTo(generatePwdDiv);
+    var optionsSpan = $('<span/>').addClass('options')
+        .appendTo(generatePwdDiv);
+    pwdButton.clone(true).appendTo(optionsSpan);
+    pwdTextbox.clone(true).appendTo(generatePwdDiv);
+
+    $('#div_element_before_generate_password').parent().append(generatePwdDiv);
 }
 
 /**
@@ -2510,6 +2537,12 @@ function PMA_createProfilingChart(target, data)
     dataTable.addColumn(ColumnType.NUMBER, '');
     dataTable.setData(data);
 
+    var windowWidth = $(window).width();
+    var location = 's';
+    if (windowWidth > 768) {
+        var location = 'se';
+    }
+
     // draw the chart and return the chart object
     chart.draw(dataTable, {
         seriesDefaults: {
@@ -2525,7 +2558,7 @@ function PMA_createProfilingChart(target, data)
         },
         legend: {
             show: true,
-            location: 'se',
+            location: location,
             rendererOptions: {
                 numberColumns: 2
             }
@@ -3855,8 +3888,7 @@ function indexEditorDialog(url, title, callback_success, callback_failure)
             .append(data.message)
             .dialog({
                 title: title,
-                width: 450,
-                height: 350,
+                width: 'auto',
                 open: PMA_verifyColumnsProperties,
                 modal: true,
                 buttons: button_options,
@@ -3916,7 +3948,7 @@ function showIndexEditDialog($outer)
 
 /**
  * Function to display tooltips that were
- * generated on the PHP side by PMA\libraries\Util::showHint()
+ * generated on the PHP side by PhpMyAdmin\Util::showHint()
  *
  * @param object $div a div jquery object which specifies the
  *                    domain for searching for tooltips. If we
@@ -4176,7 +4208,7 @@ AJAX.registerOnload('functions.js', function () {
     PMA_init_slider();
 
     /**
-     * Enables the text generated by PMA\libraries\Util::linkOrButton() to be clickable
+     * Enables the text generated by PhpMyAdmin\Util::linkOrButton() to be clickable
      */
     $(document).on('click', 'a.formLinkSubmit', function (e) {
         if (! $(this).hasClass('requireConfirm')) {
@@ -4694,21 +4726,21 @@ AJAX.registerOnload('functions.js', function () {
         }); // end $(document).on()
     }
 
-    syntaxHighlighter = PMA_getSQLEditor($('textarea[name="view[as]"]'));
+    codemirror_editor = PMA_getSQLEditor($('textarea[name="view[as]"]'));
 
 });
 
 function PMA_createViewDialog($this)
 {
     var $msg = PMA_ajaxShowMessage();
-    var syntaxHighlighter = null;
+    var codemirror_editor = null;
     $.get($this.attr('href') + '&ajax_request=1&ajax_dialog=1', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
             PMA_ajaxRemoveMessage($msg);
             var buttonOptions = {};
             buttonOptions[PMA_messages.strGo] = function () {
                 if (typeof CodeMirror !== 'undefined') {
-                    syntaxHighlighter.save();
+                    codemirror_editor.save();
                 }
                 $msg = PMA_ajaxShowMessage();
                 $.post('view_create.php', $('#createViewDialog').find('form').serialize(), function (data) {
@@ -4736,7 +4768,7 @@ function PMA_createViewDialog($this)
                 }
             });
             // Attach syntax highlighted editor
-            syntaxHighlighter = PMA_getSQLEditor($dialog.find('textarea'));
+            codemirror_editor = PMA_getSQLEditor($dialog.find('textarea'));
             $('input:visible[type=text]', $dialog).first().focus();
         } else {
             PMA_ajaxShowMessage(data.error);
@@ -4887,38 +4919,6 @@ AJAX.registerOnload('functions.js', function () {
 });
 
 /**
- * Dynamically adjust the width of the boxes
- * on the table and db operations pages
- */
-(function () {
-    function DynamicBoxes() {
-        var $boxContainer = $('#boxContainer');
-        if ($boxContainer.length) {
-            var minWidth = $boxContainer.data('box-width');
-            var viewport = $(window).width() - $('#pma_navigation').width();
-            var slots = Math.floor(viewport / minWidth);
-            $boxContainer.children()
-            .each(function () {
-                if (viewport < minWidth) {
-                    $(this).width(minWidth);
-                } else {
-                    $(this).css('width', ((1 /  slots) * 100) + "%");
-                }
-            })
-            .removeClass('clearfloat')
-            .filter(':nth-child(' + slots + 'n+1)')
-            .addClass('clearfloat');
-        }
-    }
-    AJAX.registerOnload('functions.js', function () {
-        DynamicBoxes();
-    });
-    $(function () {
-        $(window).resize(DynamicBoxes);
-    });
-})();
-
-/**
  * Formats timestamp for display
  */
 function PMA_formatDateTime(date, seconds) {
@@ -5012,17 +5012,10 @@ function toggleDatepickerIfInvalid($td, $input_field) {
 }
 
 /*
- * Function to enable the 'Go' button on login.
+ * Function to submit the login form after validation is done.
  */
-function loginButtonEnable() {
-    $('#input_go').prop('disabled', false);
-}
-
-/*
- * Function to disable the 'Go' button on login.
- */
-function loginButtonDisable() {
-    $('#input_go').prop('disabled', true);
+function recaptchaCallback() {
+    $('#login_form').submit();
 }
 
 /**
@@ -5046,13 +5039,6 @@ AJAX.registerOnload('functions.js', function () {
             }
         }
     });
-
-    /*
-     * Setting the 'Go' login button to disable if captcha is enabled.
-     */
-    if ($('.g-recaptcha').attr('captcha') == 'enabled'){
-        loginButtonDisable();
-    }
 });
 
 /**
@@ -5060,6 +5046,8 @@ AJAX.registerOnload('functions.js', function () {
  */
 AJAX.registerTeardown('functions.js', function(){
     $(document).off('change', 'input[type=radio][name="pw_hash"]');
+    $(document).off('mouseover', '.sortlink');
+    $(document).off('mouseout', '.sortlink');
 });
 
 AJAX.registerOnload('functions.js', function(){
@@ -5077,4 +5065,12 @@ AJAX.registerOnload('functions.js', function(){
     });
 
     Cookies.defaults.path = PMA_commonParams.get('rootPath');
+
+    // Bind event handlers for toggling sort icons
+    $(document).on('mouseover', '.sortlink', function() {
+        $(this).find('.soimg').toggle();
+    });
+    $(document).on('mouseout', '.sortlink', function() {
+        $(this).find('.soimg').toggle();
+    });
 });

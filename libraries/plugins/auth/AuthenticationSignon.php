@@ -8,9 +8,9 @@
  */
 namespace PMA\libraries\plugins\auth;
 
-use PMA\libraries\Core;
+use PhpMyAdmin\Core;
 use PMA\libraries\plugins\AuthenticationPlugin;
-use PMA;
+use PhpMyAdmin\Util;
 
 /**
  * Handles the SignOn authentication method
@@ -83,7 +83,7 @@ class AuthenticationSignon extends AuthenticationPlugin
 
         /* Handle script based auth */
         if (!empty($script_name)) {
-            if (!file_exists($script_name)) {
+            if (!@file_exists($script_name)) {
                 Core::fatalError(
                     __('Can not find signon authentication script:')
                     . ' ' . $script_name
@@ -189,7 +189,7 @@ class AuthenticationSignon extends AuthenticationPlugin
             /**
              * Clear user cache.
              */
-            PMA\libraries\Util::clearUserCache();
+            Util::clearUserCache();
         }
 
         // Returns whether we get authentication settings or not

@@ -6,7 +6,7 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Encoding;
+use PhpMyAdmin\Encoding;
 
 /**
  * Tests for Charset Conversions
@@ -198,5 +198,11 @@ class EncodingTest extends PHPUnit_Framework_TestCase
             '<input type="checkbox" name="xkana" value="kana" id="kj-kana" />',
             $actual
         );
+    }
+
+    public function testListEncodings()
+    {
+        $result = Encoding::listEncodings();
+        $this->assertContains('utf-8', $result);
     }
 }

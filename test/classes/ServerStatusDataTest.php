@@ -9,8 +9,8 @@
 /*
  * Include to test.
  */
-use PMA\libraries\Core;
-use PMA\libraries\ServerStatusData;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\ServerStatusData;
 
 require_once 'libraries/database_interface.inc.php';
 require_once 'test/PMATestCase.php';
@@ -41,7 +41,7 @@ class ServerStatusDataTest extends PMATestCase
         $GLOBALS['replication_types'] = array();
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 

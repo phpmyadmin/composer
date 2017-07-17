@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\URL;
-use PMA\libraries\Response;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Url;
+use PhpMyAdmin\Response;
 
 /**
  *
@@ -31,7 +31,7 @@ if (isset($_REQUEST['getColumns'])) {
 if (isset($_REQUEST['splitColumn'])) {
     $num_fields = min(4096, intval($_REQUEST['numFields']));
     $html = PMA_getHtmlForCreateNewColumn($num_fields, $db, $table);
-    $html .= URL::getHiddenInputs($db, $table);
+    $html .= Url::getHiddenInputs($db, $table);
     echo $html;
     exit;
 }
@@ -41,7 +41,7 @@ if (isset($_REQUEST['addNewPrimary'])) {
     $html = PMA_getHtmlForCreateNewColumn(
         $num_fields, $db, $table, $columnMeta
     );
-    $html .= URL::getHiddenInputs($db, $table);
+    $html .= Url::getHiddenInputs($db, $table);
     echo $html;
     exit;
 }
@@ -73,7 +73,7 @@ if (isset($_REQUEST['getNewTables3NF'])) {
 $header = $response->getHeader();
 $scripts = $header->getScripts();
 $scripts->addFile('normalization.js');
-$scripts->addFile('jquery/jquery.uitablefilter.js');
+$scripts->addFile('vendor/jquery/jquery.uitablefilter.js');
 $normalForm = '1nf';
 if (Core::isValid($_REQUEST['normalizeTo'], array('1nf', '2nf', '3nf'))) {
     $normalForm = $_REQUEST['normalizeTo'];

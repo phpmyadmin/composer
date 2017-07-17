@@ -7,10 +7,10 @@
  */
 namespace PMA\libraries\plugins\schema\pdf;
 
-use PMA\libraries\PDF as PDF_lib;
+use PhpMyAdmin\Pdf as PdfLib;
 use PMA\libraries\plugins\schema\ExportRelationSchema;
-use PMA\libraries\Transformations;
-use PMA\libraries\Util;
+use PhpMyAdmin\Transformations;
+use PhpMyAdmin\Util;
 
 /**
  * Skip the plugin if TCPDF is not available.
@@ -52,7 +52,7 @@ class PdfRelationSchema extends ExportRelationSchema
      * @var TableStatsPdf[]
      */
     private $_tables = array();
-    private $_ff = PDF_lib::PMA_PDF_FONT;
+    private $_ff = PdfLib::PMA_PDF_FONT;
     private $_xMax = 0;
     private $_yMax = 0;
     private $_scale;

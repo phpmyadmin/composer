@@ -7,11 +7,11 @@
  *          that returns 0 rows - to prevent cyclic redirects or includes
  * @package PhpMyAdmin
  */
-use PMA\libraries\config\PageSettings;
-use PMA\libraries\Response;
-use PMA\libraries\Sql;
-use PMA\libraries\URL;
-use PMA\libraries\Util;
+use PhpMyAdmin\Config\PageSettings;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Sql;
+use PhpMyAdmin\Url;
+use PhpMyAdmin\Util;
 
 /**
  * Gets some core libraries
@@ -26,8 +26,8 @@ PageSettings::showGroup('Browse');
 $response = Response::getInstance();
 $header   = $response->getHeader();
 $scripts  = $header->getScripts();
-$scripts->addFile('jquery/jquery-ui-timepicker-addon.js');
-$scripts->addFile('jquery/jquery.uitablefilter.js');
+$scripts->addFile('vendor/jquery/jquery-ui-timepicker-addon.js');
+$scripts->addFile('vendor/jquery/jquery.uitablefilter.js');
 $scripts->addFile('tbl_change.js');
 $scripts->addFile('indexes.js');
 $scripts->addFile('gis_data_editor.js');
@@ -58,7 +58,7 @@ if (empty($goto)) {
 
 if (! isset($err_url)) {
     $err_url = (! empty($back) ? $back : $goto)
-        . '?' . URL::getCommon(array('db' => $GLOBALS['db']))
+        . '?' . Url::getCommon(array('db' => $GLOBALS['db']))
         . ((mb_strpos(' ' . $goto, 'db_') != 1
             && strlen($table) > 0)
             ? '&amp;table=' . urlencode($table)
@@ -186,7 +186,7 @@ if (isset($_POST['store_bkm'])) {
  */
 if ($goto == 'sql.php') {
     $is_gotofile = false;
-    $goto = 'sql.php' . URL::getCommon(
+    $goto = 'sql.php' . Url::getCommon(
         array(
             'db' => $db,
             'table' => $table,

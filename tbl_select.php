@@ -8,7 +8,10 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\Response;
+
+use PhpMyAdmin\Controllers\Table\TableSearchController;
+use PhpMyAdmin\Di\Container;
+use PhpMyAdmin\Response;
 
 /**
  * Gets some core libraries
@@ -16,15 +19,13 @@ use PMA\libraries\Response;
 require_once 'libraries/common.inc.php';
 require_once 'libraries/tbl_common.inc.php';
 
-use PMA\libraries\controllers\table\TableSearchController;
-
-$container = \PMA\libraries\di\Container::getDefaultContainer();
-$container->factory('PMA\libraries\controllers\table\TableSearchController');
+$container = Container::getDefaultContainer();
+$container->factory('PhpMyAdmin\Controllers\Table\TableSearchController');
 $container->alias(
-    'TableSearchController', 'PMA\libraries\controllers\table\TableSearchController'
+    'TableSearchController', 'PhpMyAdmin\Controllers\Table\TableSearchController'
 );
-$container->set('PMA\libraries\Response', Response::getInstance());
-$container->alias('response', 'PMA\libraries\Response');
+$container->set('PhpMyAdmin\Response', Response::getInstance());
+$container->alias('response', 'PhpMyAdmin\Response');
 
 /* Define dependencies for the concerned controller */
 $dependency_definitions = array(

@@ -7,8 +7,8 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\ServerStatusData;
-use PMA\libraries\URL;
+use PhpMyAdmin\ServerStatusData;
+use PhpMyAdmin\Url;
 
 /**
  * Returns the html for the list filter
@@ -36,7 +36,7 @@ function PMA_getHtmlForFilter($ServerStatusData)
     $retval .= '<fieldset id="tableFilter">';
     $retval .= '<legend>' . __('Filters') . '</legend>';
     $retval .= '<form action="server_status_variables.php'
-        . URL::getCommon() . '">';
+        . Url::getCommon() . '">';
     $retval .= '<input type="submit" value="' . __('Refresh') . '" />';
     $retval .= '<div class="formelement">';
     $retval .= '<label for="filterText">' . __('Containing the word:') . '</label>';
@@ -101,7 +101,7 @@ function PMA_getHtmlForLinkSuggestions($ServerStatusData)
                 $retval .= ', ';
             }
             if ('doc' == $link_name) {
-                $retval .= PMA\libraries\Util::showMySQLDocu($link_url);
+                $retval .= PhpMyAdmin\Util::showMySQLDocu($link_url);
             } else {
                 $retval .= '<a href="' . $link_url . '">' . $link_name . '</a>';
             }
@@ -207,7 +207,8 @@ function PMA_getHtmlForVariablesList($ServerStatusData)
  */
 function PMA_getHtmlForRenderVariables($ServerStatusData, $alerts, $strShowStatus)
 {
-    $retval  = '<table class="data noclick" id="serverstatusvariables">';
+    $retval = '<div class="responsivetable">';
+    $retval  .= '<table class="data noclick" id="serverstatusvariables">';
     $retval .= '<col class="namecol" />';
     $retval .= '<col class="valuecol" />';
     $retval .= '<col class="descrcol" />';
@@ -231,7 +232,7 @@ function PMA_getHtmlForRenderVariables($ServerStatusData, $alerts, $strShowStatu
         // Fields containing % are calculated,
         // they can not be described in MySQL documentation
         if (mb_strpos($name, '%') === false) {
-            $retval .= PMA\libraries\Util::showMySQLDocu(
+            $retval .= PhpMyAdmin\Util::showMySQLDocu(
                 'server-status-variables',
                 false,
                 'statvar_' . $name
@@ -249,22 +250,22 @@ function PMA_getHtmlForRenderVariables($ServerStatusData, $alerts, $strShowStatu
         }
         if (substr($name, -1) === '%') {
             $retval .= htmlspecialchars(
-                PMA\libraries\Util::formatNumber($value, 0, 2)
+                PhpMyAdmin\Util::formatNumber($value, 0, 2)
             ) . ' %';
         } elseif (strpos($name, 'Uptime') !== false) {
             $retval .= htmlspecialchars(
-                PMA\libraries\Util::timespanFormat($value)
+                PhpMyAdmin\Util::timespanFormat($value)
             );
         } elseif (is_numeric($value) && $value > 1000) {
             $retval .= '<abbr title="'
                 // makes available the raw value as a title
-                . htmlspecialchars(PMA\libraries\Util::formatNumber($value, 0))
+                . htmlspecialchars(PhpMyAdmin\Util::formatNumber($value, 0))
                 . '">'
-                . htmlspecialchars(PMA\libraries\Util::formatNumber($value, 3, 1))
+                . htmlspecialchars(PhpMyAdmin\Util::formatNumber($value, 3, 1))
                 . '</abbr>';
         } elseif (is_numeric($value)) {
             $retval .= htmlspecialchars(
-                PMA\libraries\Util::formatNumber($value, 3, 1)
+                PhpMyAdmin\Util::formatNumber($value, 3, 1)
             );
         } else {
             $retval .= htmlspecialchars($value);
@@ -296,7 +297,7 @@ function PMA_getHtmlForRenderVariables($ServerStatusData, $alerts, $strShowStatu
         if (isset($ServerStatusData->links[$name])) {
             foreach ($ServerStatusData->links[$name] as $link_name => $link_url) {
                 if ('doc' == $link_name) {
-                    $retval .= PMA\libraries\Util::showMySQLDocu($link_url);
+                    $retval .= PhpMyAdmin\Util::showMySQLDocu($link_url);
                 } else {
                     $retval .= ' <a href="' . $link_url . '">' . $link_name . '</a>';
                 }
@@ -308,6 +309,7 @@ function PMA_getHtmlForRenderVariables($ServerStatusData, $alerts, $strShowStatu
     }
     $retval .= '</tbody>';
     $retval .= '</table>';
+    $retval .= '</div>';
 
     return $retval;
 }

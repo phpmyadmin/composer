@@ -6,8 +6,8 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Response;
-use PMA\libraries\Transformations;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Transformations;
 
 /**
  * Gets some core libraries and displays a top message if required

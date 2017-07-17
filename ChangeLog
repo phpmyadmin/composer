@@ -15,8 +15,29 @@ phpMyAdmin - ChangeLog
 - issue #6363  phpMyAdmin no longer requires eval() in PHP
 - issue #12386 The mbstring dependency is now optional
 - issue #13269 Small refactoring in preparation to CSP
+- issue #13384 Database link broken in Databases Page
+- issue #13391 Configurable authentication logging using $cfg['AuthLog']
+- issue #13086 Add support for Goole Invisible Captcha
+- issue #13058 Improved error reporting for reCAPTCHA
+- issue #12899 Improved rendering of server variables table
+- issue #12948 Fixed javascript editor for TIME values
+- issue #13095 Fixed alignmnet of foreign keys editing
+- issue #12944 Improved inline editor for JSON
+- issue #13145 Improved layout of operations pages
+- issue #13448 Add "format" query button in edit view form
+- issue #6241  Implement Responsive Design/mobile interface
 
-4.7.2 (not yet released)
+4.7.3 (not yet released)
+- issue #13447 Large multi-line query removes Export operation and blanks query box options
+- issue #13445 Fixed rendering of query results
+- issue #13437 Fixed version check when not connected to a database
+- issue #13465 Fixed creating relation
+- issue #13475 Fixed export without backquotes
+- issue #13482 Improved handling of uploaded files with open_basedir
+- issue #13387 Fixed inline editing of hex values
+- issue #13382 Fixed size of index edit dialog
+
+4.7.2 (2017-06-29)
 - issue #13314 Make theme selection keep current server
 - issue #13311 Fixed direct login for accounts without password
 - issue #13316 Fixed check for mbstring.func_overload
@@ -30,6 +51,11 @@ phpMyAdmin - ChangeLog
 - issue #13327 Fixed Incorrect NavigationTreeEnableExpansion default value in the documentation
 - issue #13008 Fixed export of database with a lot of tables
 - issue #13318 Improved performance when importing with enabled tracking
+- issue #13386 Avoid PHP errors with non existing configuration on OS X
+- issue #13388 Show only supported charsets for conversion
+- issue #13392 Fixed operation with session.auto_start enabled
+- issue #13383 "Create PHP code" is broken
+- issue #13189 Fixed links to resume timeouted import
 
 4.7.1 (2017-05-25)
 - issue #13132 Always execute tracking queries as controluser

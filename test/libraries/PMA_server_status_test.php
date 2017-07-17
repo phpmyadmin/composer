@@ -6,9 +6,9 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\ServerStatusData;
-use PMA\libraries\Theme;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\ServerStatusData;
+use PhpMyAdmin\Theme;
 
 require_once 'libraries/server_status.lib.php';
 require_once 'libraries/database_interface.inc.php';
@@ -49,7 +49,7 @@ class PMA_ServerStatus_Test extends PHPUnit_Framework_TestCase
         //$_SESSION
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -181,7 +181,7 @@ class PMA_ServerStatus_Test extends PHPUnit_Framework_TestCase
         );
 
         //validate 2: PMA_getHtmlForServerStateTraffic
-        $traffic_html = '<table id="serverstatustraffic" class="data noclick">';
+        $traffic_html = '<table id="serverstatustraffic" class="width100 data noclick">';
         $this->assertContains(
             $traffic_html,
             $html
@@ -213,7 +213,7 @@ class PMA_ServerStatus_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            '<table id="serverstatusconnections" class="data noclick">',
+            '<table id="serverstatusconnections" class="width100 data noclick">',
             $html
         );
         $this->assertContains(

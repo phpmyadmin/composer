@@ -12,11 +12,11 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
+use PhpMyAdmin\Core;
 use PMA\libraries\plugins\IOTransformationsPlugin;
-use PMA\libraries\Response;
-use PMA\libraries\Table;
-use PMA\libraries\Transformations;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Table;
+use PhpMyAdmin\Transformations;
 
 /**
  * Gets some core libraries
@@ -29,7 +29,7 @@ require_once 'libraries/common.inc.php';
 require_once 'libraries/insert_edit.lib.php';
 
 // Check parameters
-PMA\libraries\Util::checkParameters(array('db', 'table', 'goto'));
+PhpMyAdmin\Util::checkParameters(array('db', 'table', 'goto'));
 
 $GLOBALS['dbi']->selectDb($GLOBALS['db']);
 
@@ -206,7 +206,7 @@ foreach ($loop_array as $rownumber => $where_clause) {
         // Note: $key is an md5 of the fieldname. The actual fieldname is
         // available in $multi_edit_columns_name[$key]
 
-        $file_to_insert = new PMA\libraries\File();
+        $file_to_insert = new PhpMyAdmin\File();
         $file_to_insert->checkTblChangeForm($key, $rownumber);
 
         $possibly_uploaded_val = $file_to_insert->getContent();
@@ -291,7 +291,7 @@ foreach ($loop_array as $rownumber => $where_clause) {
             $value_sets[] = implode(', ', $query_values);
         } else {
             // build update query
-            $query[] = 'UPDATE ' . PMA\libraries\Util::backquote($GLOBALS['table'])
+            $query[] = 'UPDATE ' . PhpMyAdmin\Util::backquote($GLOBALS['table'])
                 . ' SET ' . implode(', ', $query_values)
                 . ' WHERE ' . $where_clause
                 . ($_REQUEST['clause_is_unique'] ? '' : ' LIMIT 1');
@@ -313,7 +313,7 @@ if ($is_insert && count($value_sets) > 0) {
     // No change -> move back to the calling script
     //
     // Note: logic passes here for inline edit
-    $message = PMA\libraries\Message::success(__('No change'));
+    $message = PhpMyAdmin\Message::success(__('No change'));
     // Avoid infinite recursion
     if ($goto_include == 'tbl_replace.php') {
         $goto_include = 'tbl_change.php';
@@ -338,12 +338,12 @@ list ($url_params, $total_affected_rows, $last_messages, $warning_messages,
         = PMA_executeSqlQuery($url_params, $query);
 
 if ($is_insert && (count($value_sets) > 0 || $row_skipped)) {
-    $message = PMA\libraries\Message::getMessageForInsertedRows(
+    $message = PhpMyAdmin\Message::getMessageForInsertedRows(
         $total_affected_rows
     );
     $unsaved_values = array_values($unsaved_values);
 } else {
-    $message = PMA\libraries\Message::getMessageForAffectedRows(
+    $message = PhpMyAdmin\Message::getMessageForAffectedRows(
         $total_affected_rows
     );
 }
@@ -445,7 +445,7 @@ if ($response->isAjax() && ! isset($_POST['ajax_page_request'])) {
     $extra_data['row_count'] = $_table->countRecords();
 
     $extra_data['sql_query']
-        = PMA\libraries\Util::getMessage($message, $GLOBALS['display_query']);
+        = PhpMyAdmin\Util::getMessage($message, $GLOBALS['display_query']);
 
     $response->setRequestStatus($message->isSuccess());
     $response->addJSON('message', $message);

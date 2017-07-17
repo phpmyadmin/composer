@@ -5,7 +5,7 @@
  *
  * @package PhpMyAdmin-test
  */
-use PMA\libraries\Theme;
+use PhpMyAdmin\Theme;
 
 require_once 'test/PMATestCase.php';
 
@@ -37,7 +37,7 @@ class ThemeTest extends PMATestCase
         $this->object = new Theme();
         $this->backup = $_SESSION['PMA_Theme'];
         $_SESSION['PMA_Theme'] = $this->object;
-        $GLOBALS['PMA_Config'] = new PMA\libraries\Config();
+        $GLOBALS['PMA_Config'] = new PhpMyAdmin\Config();
         $GLOBALS['PMA_Config']->enableBc();
         $GLOBALS['text_dir'] = 'ltr';
         include 'themes/pmahomme/layout.inc.php';

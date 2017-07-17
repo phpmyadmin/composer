@@ -5,11 +5,11 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\config\ConfigFile;
-use PMA\libraries\config\FormDisplay;
-use PMA\libraries\Core;
-use PMA\libraries\Response;
-use PMA\libraries\URL;
+use PhpMyAdmin\Config\ConfigFile;
+use PhpMyAdmin\Config\FormDisplay;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Url;
 
 /**
  * Gets some core libraries and displays a top message if required
@@ -47,7 +47,7 @@ if (isset($_POST['revert'])) {
     $url_params = array('form' => $form_param);
     Core::sendHeaderLocation(
         './prefs_forms.php'
-        . URL::getCommonRaw($url_params)
+        . Url::getCommonRaw($url_params)
     );
     exit;
 }

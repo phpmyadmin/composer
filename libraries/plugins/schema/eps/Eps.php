@@ -7,8 +7,8 @@
  */
 namespace PMA\libraries\plugins\schema\eps;
 
-use PMA\libraries\Core;
-use PMA\libraries\Response;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Response;
 
 /**
  * This Class is EPS Library and

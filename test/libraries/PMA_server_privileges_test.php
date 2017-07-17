@@ -6,9 +6,9 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Theme;
-use PMA\libraries\URL;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Url;
 
 
 require_once 'libraries/database_interface.inc.php';
@@ -36,9 +36,6 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         //Constants
         if (!defined("PMA_USR_BROWSER_AGENT")) {
             define("PMA_USR_BROWSER_AGENT", "other");
-        }
-        if (!defined("PMA_MYSQL_VERSION_COMMENT")) {
-            define("PMA_MYSQL_VERSION_COMMENT", "MySQL");
         }
 
         //$_REQUEST
@@ -90,14 +87,14 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             'menuswork' => true
         );
 
-        $pmaconfig = $this->getMockBuilder('PMA\libraries\Config')
+        $pmaconfig = $this->getMockBuilder('PhpMyAdmin\Config')
             ->disableOriginalConstructor()
             ->getMock();
 
         $GLOBALS['PMA_Config'] = $pmaconfig;
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -522,9 +519,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             '<form class="ajax" id="changeUserGroupForm"',
             $html
         );
-        //URL::getHiddenInputs
+        //Url::getHiddenInputs
         $params = array('username' => $username);
-        $html_output = URL::getHiddenInputs($params);
+        $html_output = Url::getHiddenInputs($params);
         $this->assertContains(
             $html_output,
             $html
@@ -538,7 +535,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         /* Assertion 2 */
         $oldDbi = $GLOBALS['dbi'];
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -561,9 +558,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             '<form class="ajax" id="changeUserGroupForm"',
             $actualHtml
         );
-        //URL::getHiddenInputs
+        //Url::getHiddenInputs
         $params = array('username' => $username);
-        $html_output = URL::getHiddenInputs($params);
+        $html_output = Url::getHiddenInputs($params);
         $this->assertContains(
             $html_output,
             $actualHtml
@@ -605,9 +602,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             '<form class="ajax" id="changeUserGroupForm"',
             $html
         );
-        //URL::getHiddenInputs
+        //Url::getHiddenInputs
         $params = array('username' => $username);
-        $html_output = URL::getHiddenInputs($params);
+        $html_output = Url::getHiddenInputs($params);
         $this->assertContains(
             $html_output,
             $html
@@ -706,7 +703,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $sql = "SELECT * FROM `mysql`.`db`"
             . " WHERE `User` = '" . $GLOBALS['dbi']->escapeString($username) . "'"
             . " AND `Host` = '" . $GLOBALS['dbi']->escapeString($hostname) . "'"
-            . " AND '" . PMA\libraries\Util::unescapeMysqlWildcards($db) . "'"
+            . " AND '" . PhpMyAdmin\Util::unescapeMysqlWildcards($db) . "'"
             . " LIKE `Db`;";
         $this->assertEquals(
             $sql,
@@ -723,7 +720,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             . " FROM `mysql`.`tables_priv`"
             . " WHERE `User` = '" . $GLOBALS['dbi']->escapeString($username) . "'"
             . " AND `Host` = '" . $GLOBALS['dbi']->escapeString($hostname) . "'"
-            . " AND `Db` = '" . PMA\libraries\Util::unescapeMysqlWildcards($db) . "'"
+            . " AND `Db` = '" . PhpMyAdmin\Util::unescapeMysqlWildcards($db) . "'"
             . " AND `Table_name` = '" . $GLOBALS['dbi']->escapeString($table) . "';";
         $this->assertEquals(
             $sql,
@@ -824,15 +821,8 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     public function testPMAAddUser()
     {
         // Case 1 : Test with Newer version
-        $restoreMySQLVersion = "PMANORESTORE";
-        if (! PMA_HAS_RUNKIT) {
-            $this->markTestSkipped(
-                'Cannot redefine constant. Missing runkit extension'
-            );
-        } else {
-            $restoreMySQLVersion = PMA_MYSQL_INT_VERSION;
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', 50706);
-        }
+        $GLOBALS['dbi']->expects($this->any())->method('getVersion')
+            ->will($this->returnValue(50706));
 
         $dbname = 'pma_dbname';
         $username = 'pma_username';
@@ -869,21 +859,28 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             false,
             $_add_user_error
         );
+    }
 
-        if ($restoreMySQLVersion !== "PMANORESTORE") {
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', $restoreMySQLVersion);
-        }
+    /**
+     * Test for PMA_addUser
+     *
+     * @return void
+     */
+    public function testPMAAddUserOld()
+    {
+        $GLOBALS['dbi']->expects($this->any())->method('getVersion')
+            ->will($this->returnValue(50506));
 
-        // Case 2 : Test with older versions
-        $restoreMySQLVersion = "PMANORESTORE";
-        if (! PMA_HAS_RUNKIT) {
-            $this->markTestSkipped(
-                'Cannot redefine constant. Missing runkit extension'
-            );
-        } else {
-            $restoreMySQLVersion = PMA_MYSQL_INT_VERSION;
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', 50506);
-        }
+        $dbname = 'pma_dbname';
+        $username = 'pma_username';
+        $hostname = 'pma_hostname';
+        $_REQUEST['adduser_submit'] = true;
+        $_POST['pred_username'] = 'any';
+        $_POST['pred_hostname'] = 'localhost';
+        $_POST['pred_password'] = 'keep';
+        $_REQUEST['createdb-3'] = true;
+        $_REQUEST['userGroup'] = "username";
+        $_REQUEST['authentication_plugin'] = 'mysql_native_password';
 
         list(
             $ret_message,,, $sql_query,
@@ -911,10 +908,6 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             false,
             $_add_user_error
         );
-
-        if ($restoreMySQLVersion !== "PMANORESTORE") {
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', $restoreMySQLVersion);
-        }
     }
 
     /**
@@ -1021,7 +1014,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['username'] = "username";
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -1155,14 +1148,8 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     {
         $restoreMySQLVersion = "PMANORESTORE";
 
-        if (! PMA_HAS_RUNKIT) {
-            $this->markTestSkipped(
-                'Cannot redefine constant. Missing runkit extension'
-            );
-        } else {
-            $restoreMySQLVersion = PMA_MYSQL_INT_VERSION;
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', 50706);
-        }
+        $GLOBALS['dbi']->expects($this->any())->method('getVersion')
+            ->will($this->returnValue(50706));
 
         $username = "PMA_username";
         $hostname = "PMA_hostname";
@@ -1216,10 +1203,6 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             "You have added a new user.",
             $message->getMessage()
         );
-
-        if ($restoreMySQLVersion !== "PMANORESTORE") {
-            runkit_constant_redefine('PMA_MYSQL_INT_VERSION', $restoreMySQLVersion);
-        }
     }
 
     /**
@@ -1304,7 +1287,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['username'] = 'pma_username';
 
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $fields_info = array(
@@ -1339,7 +1322,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        $output = PMA\libraries\Util::showHint(
+        $output = PhpMyAdmin\Util::showHint(
             __(
                 'When Host table is used, this field is ignored '
                 . 'and values stored in Host table are used instead.'
@@ -1412,7 +1395,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     public function testPMAGetHtmlForAddUser()
     {
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $fields_info = array(
@@ -1431,9 +1414,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
 
         $html = PMA_getHtmlForAddUser($dbname);
 
-        //validate 1: URL::getHiddenInputs
+        //validate 1: Url::getHiddenInputs
         $this->assertContains(
-            URL::getHiddenInputs('', ''),
+            Url::getHiddenInputs('', ''),
             $html
         );
 
@@ -1449,7 +1432,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        $item = PMA\libraries\Template::get('checkbox')
+        $item = PhpMyAdmin\Template::get('checkbox')
             ->render(
                 array(
                     'html_field_name'   => 'createdb-2',
@@ -1487,7 +1470,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     public function testPMAGetHtmlForSpecificDbPrivileges()
     {
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $fields_info = array(
@@ -1506,9 +1489,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
 
         $html = PMA_getHtmlForSpecificDbPrivileges($db);
 
-        //validate 1: URL::getCommon
+        //validate 1: Url::getCommon
         $this->assertContains(
-            URL::getCommon(array('db' => $db)),
+            Url::getCommon(array('db' => $db)),
             $html
         );
 
@@ -1550,7 +1533,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            URL::getCommon(array('checkprivsdb' => $db)),
+            Url::getCommon(array('checkprivsdb' => $db)),
             $html
         );
 
@@ -1565,7 +1548,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     public function testPMAGetHtmlForSpecificTablePrivileges()
     {
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $fields_info = array(
@@ -1591,8 +1574,8 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        //validate 2: URL::getCommon
-        $item = URL::getCommon(
+        //validate 2: Url::getCommon
+        $item = Url::getCommon(
             array(
                 'db' => $db,
                 'table' => $table,
@@ -1635,7 +1618,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            URL::getCommon(
+            Url::getCommon(
                 array('checkprivsdb' => $db, 'checkprivstable' => $table)
             ),
             $html
@@ -1731,7 +1714,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             'edit', $username, $hostname, $dbname, $tablename, ''
         );
 
-        $url_html = URL::getCommon(
+        $url_html = Url::getCommon(
             array(
                 'username' => $username,
                 'hostname' => $hostname,
@@ -1753,7 +1736,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             'revoke', $username, $hostname, $dbname, $tablename, ''
         );
 
-        $url_html = URL::getCommon(
+        $url_html = Url::getCommon(
             array(
                 'username' => $username,
                 'hostname' => $hostname,
@@ -1774,7 +1757,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
 
         $html = PMA_getUserLink('export', $username, $hostname);
 
-        $url_html = URL::getCommon(
+        $url_html = Url::getCommon(
             array(
                 'username' => $username,
                 'hostname' => $hostname,
@@ -1841,7 +1824,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
 
         //sql_query
         $this->assertEquals(
-            PMA\libraries\Util::getMessage(null, $sql_query),
+            PhpMyAdmin\Util::getMessage(null, $sql_query),
             $extra_data['sql_query']
         );
 
@@ -1874,7 +1857,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['cfgRelation']['menuswork'] = true;
 
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $fields_info = array(
@@ -1897,9 +1880,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         //PMA_getChangeLoginInformationHtmlForm
         $html = PMA_getChangeLoginInformationHtmlForm($username, $hostname);
 
-        //URL::getHiddenInputs
+        //Url::getHiddenInputs
         $this->assertContains(
-            URL::getHiddenInputs('', ''),
+            Url::getHiddenInputs('', ''),
             $html
         );
 
@@ -1946,7 +1929,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['cfgRelation']['menuswork'] = true;
 
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $expected_userGroup = "pma_usergroup";
@@ -1988,12 +1971,12 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            PMA\libraries\Util::getScriptNameForOption(
+            PhpMyAdmin\Util::getScriptNameForOption(
                 $GLOBALS['cfg']['DefaultTabDatabase'], 'database'
             ),
             $html
         );
-        $item = URL::getCommon(
+        $item = Url::getCommon(
             array(
                 'db' => $url_dbname,
                 'reload' => 1
@@ -2014,12 +1997,12 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
         $this->assertContains(
-            PMA\libraries\Util::getScriptNameForOption(
+            PhpMyAdmin\Util::getScriptNameForOption(
                 $GLOBALS['cfg']['DefaultTabTable'], 'table'
             ),
             $html
         );
-        $item = URL::getCommon(
+        $item = Url::getCommon(
             array(
                 'db' => $url_dbname,
                 'table' => $tablename,
@@ -2034,7 +2017,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             htmlspecialchars($tablename),
             $html
         );
-        $item = PMA\libraries\Util::getTitleForTarget(
+        $item = PhpMyAdmin\Util::getTitleForTarget(
             $GLOBALS['cfg']['DefaultTabTable']
         );
         $this->assertContains(
@@ -2060,9 +2043,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $result, $db_rights, $pmaThemeImage, $text_dir
         );
 
-        //URL::getHiddenInputs
+        //Url::getHiddenInputs
         $this->assertContains(
-            URL::getHiddenInputs('', ''),
+            Url::getHiddenInputs('', ''),
             $html
         );
 
@@ -2084,9 +2067,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        //PMA\libraries\Util::showHint
+        //PhpMyAdmin\Util::showHint
         $this->assertContains(
-            PMA\libraries\Util::showHint(
+            PhpMyAdmin\Util::showHint(
                 __('Note: MySQL privilege names are expressed in English.')
             ),
             $html
@@ -2142,9 +2125,9 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $result, $db_rights, $pmaThemeImage, $text_dir
         );
 
-        //URL::getCommon
+        //Url::getCommon
         $this->assertContains(
-            URL::getCommon(array('adduser' => 1)),
+            Url::getCommon(array('adduser' => 1)),
             $html
         );
 
@@ -2215,11 +2198,11 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $html = PMA_getAddUserHtmlFieldset();
 
         $this->assertContains(
-            URL::getCommon(array('adduser' => 1)),
+            Url::getCommon(array('adduser' => 1)),
             $html
         );
         $this->assertContains(
-            PMA\libraries\Util::getIcon('b_usradd.png'),
+            PhpMyAdmin\Util::getIcon('b_usradd.png'),
             $html
         );
         $this->assertContains(
@@ -2258,8 +2241,8 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        //URL::getCommon
-        $item = URL::getCommon(
+        //Url::getCommon
+        $item = Url::getCommon(
             array(
                 'username' => $username,
                 'hostname' => $hostname,
@@ -2294,8 +2277,8 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
             $html
         );
 
-        //URL::getCommon
-        $item = URL::getCommon(
+        //Url::getCommon
+        $item = Url::getCommon(
             array(
                 'username' => $username,
                 'hostname' => $hostname,
@@ -2443,7 +2426,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     function testPMAGetDbRightsForUserOverview()
     {
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())
@@ -2491,7 +2474,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
         $oldDbi = $GLOBALS['dbi'];
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())
@@ -2599,7 +2582,7 @@ class PMA_ServerPrivileges_Test extends PHPUnit_Framework_TestCase
     function testPMADeleteUser()
     {
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())

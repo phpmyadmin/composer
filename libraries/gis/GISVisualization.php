@@ -8,10 +8,10 @@
 
 namespace PMA\libraries\gis;
 
-use PMA\libraries\Core;
-use PMA\libraries\Util;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Util;
 use \TCPDF;
-use PMA\libraries\Sanitize;
+use PhpMyAdmin\Sanitize;
 
 /**
  * Handles visualization of GIS data

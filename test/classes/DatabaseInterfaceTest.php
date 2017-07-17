@@ -6,8 +6,8 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\DatabaseInterface;
-use PMA\libraries\Util;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Util;
 
 require_once 'test/PMATestCase.php';
 
@@ -28,8 +28,8 @@ class DatabaseInterfaceTest extends PMATestCase
      */
     function setup()
     {
-        $extension = new PMA\libraries\dbi\DBIDummy();
-        $this->_dbi = new PMA\libraries\DatabaseInterface($extension);
+        $extension = new PhpMyAdmin\Dbi\DbiDummy();
+        $this->_dbi = new DatabaseInterface($extension);
     }
 
     /**
@@ -43,10 +43,10 @@ class DatabaseInterfaceTest extends PMATestCase
     {
         Util::cacheUnset('mysql_cur_user');
 
-        $extension = new PMA\libraries\dbi\DBIDummy();
+        $extension = new PhpMyAdmin\Dbi\DbiDummy();
         $extension->setResult('SELECT CURRENT_USER();', $value);
 
-        $dbi = new PMA\libraries\DatabaseInterface($extension);
+        $dbi = new DatabaseInterface($extension);
 
         $this->assertEquals(
             $expected,
@@ -81,7 +81,7 @@ class DatabaseInterfaceTest extends PMATestCase
      */
     public function testPMAGetColumnMap()
     {
-        $extension = $this->getMockBuilder('PMA\libraries\dbi\DBIDummy')
+        $extension = $this->getMockBuilder('PhpMyAdmin\Dbi\DbiDummy')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -107,7 +107,7 @@ class DatabaseInterfaceTest extends PMATestCase
                 )
             );
 
-        $dbi = new PMA\libraries\DatabaseInterface($extension);
+        $dbi = new DatabaseInterface($extension);
 
         $sql_query = "PMA_sql_query";
         $view_columns = array(
@@ -145,7 +145,7 @@ class DatabaseInterfaceTest extends PMATestCase
     public function testGetSystemDatabase()
     {
         $sd = $this->_dbi->getSystemDatabase();
-        $this->assertInstanceOf('PMA\libraries\SystemDatabase', $sd);
+        $this->assertInstanceOf('PhpMyAdmin\SystemDatabase', $sd);
     }
 
     /**
@@ -387,10 +387,10 @@ class DatabaseInterfaceTest extends PMATestCase
     {
         Util::cacheUnset('is_amazon_rds');
 
-        $extension = new PMA\libraries\dbi\DBIDummy();
+        $extension = new PhpMyAdmin\Dbi\DbiDummy();
         $extension->setResult('SELECT @@basedir', $value);
 
-        $dbi = new PMA\libraries\DatabaseInterface($extension);
+        $dbi = new DatabaseInterface($extension);
 
         $this->assertEquals(
             $expected,

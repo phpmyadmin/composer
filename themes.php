@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\ThemeManager;
-use PMA\libraries\Response;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\ThemeManager;
+use PhpMyAdmin\Response;
 
 /**
  * get some globals

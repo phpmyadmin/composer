@@ -6,9 +6,9 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Theme;
-use PMA\libraries\URL;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Url;
 
 
 require_once 'libraries/server_status_processes.lib.php';
@@ -41,7 +41,7 @@ class PMA_ServerStatusProcesses_Test extends PHPUnit_Framework_TestCase
         //$_SESSION
 
         //Mock DBI
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -201,7 +201,7 @@ class PMA_ServerStatusProcesses_Test extends PHPUnit_Framework_TestCase
             'ajax_request' => true
         );
         $kill_process = 'server_status_processes.php'
-            . URL::getCommon($url_params);
+            . Url::getCommon($url_params);
         $this->assertContains(
             $kill_process,
             $html

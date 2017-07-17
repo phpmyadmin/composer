@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl.html GNU GPL 2.0
  */
 
-use PMA\libraries\Core;
+use PhpMyAdmin\Core;
 
 /**
  * Core libraries.
  */
 require './lib/common.inc.php';
 
-if (file_exists(CONFIG_FILE) && ! $cfg['DBG']['demo']) {
+if (@file_exists(CONFIG_FILE) && ! $cfg['DBG']['demo']) {
     Core::fatalError(__('Configuration already exists, setup is disabled!'));
 }
 
@@ -23,7 +23,7 @@ $page = preg_replace('/[^a-z]/', '', $page);
 if ($page === '') {
     $page = 'index';
 }
-if (!file_exists("./setup/frames/$page.inc.php")) {
+if (!@file_exists("./setup/frames/$page.inc.php")) {
     // it will happen only when entering URL by hand, we don't care for these cases
     Core::fatalError(__('Wrong GET file attribute value'));
 }
@@ -43,8 +43,8 @@ Core::noCacheHeader();
 <link href="../favicon.ico" rel="icon" type="image/x-icon" />
 <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <link href="styles.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery/jquery-ui.min.js">
+<script type="text/javascript" src="../js/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/vendor/jquery/jquery-ui.min.js">
 </script>
 <script type="text/javascript" src="ajax.js"></script>
 <script type="text/javascript" src="../js/config.js"></script>

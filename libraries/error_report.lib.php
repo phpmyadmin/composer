@@ -5,7 +5,7 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\URL;
+use PhpMyAdmin\Url;
 
 if (! defined('PHPMYADMIN')) {
     exit;
@@ -92,7 +92,7 @@ function PMA_getReportData($exception_type = 'js')
             return array();
         }
         foreach ($_SESSION['prev_errors'] as $errorObj) {
-            /* @var $errorObj PMA\libraries\Error */
+            /* @var $errorObj PhpMyAdmin\Error */
             if ($errorObj->getLine()
                 && $errorObj->getType()
                 && $errorObj->getNumber() != E_USER_WARNING
@@ -178,7 +178,7 @@ function PMA_sanitizeUrl($url)
  */
 function PMA_sendErrorReport($report)
 {
-    $response = PMA\libraries\Util::httpRequest(
+    $response = PhpMyAdmin\Util::httpRequest(
         SUBMISSION_URL,
         "POST",
         false,
@@ -308,15 +308,15 @@ function PMA_getErrorReportForm()
 {
     $datas = array(
         'report_data' => PMA_getPrettyReportData(),
-        'hidden_inputs' => URL::getHiddenInputs(),
+        'hidden_inputs' => Url::getHiddenInputs(),
         'hidden_fields' => null,
     );
 
     $reportData = PMA_getReportData();
     if (!empty($reportData)) {
-        $datas['hidden_fields'] = URL::getHiddenFields($reportData);
+        $datas['hidden_fields'] = Url::getHiddenFields($reportData);
     }
 
-    return PMA\libraries\Template::get('error/report_form')
+    return PhpMyAdmin\Template::get('error/report_form')
         ->render($datas);
 }

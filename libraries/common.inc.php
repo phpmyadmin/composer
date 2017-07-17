@@ -31,20 +31,20 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Config;
-use PMA\libraries\Core;
-use PMA\libraries\DatabaseInterface;
-use PMA\libraries\ErrorHandler;
-use PMA\libraries\Message;
+use PhpMyAdmin\Config;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\ErrorHandler;
+use PhpMyAdmin\Message;
 use PMA\libraries\plugins\AuthenticationPlugin;
-use PMA\libraries\DbList;
-use PMA\libraries\ThemeManager;
-use PMA\libraries\Tracker;
-use PMA\libraries\Response;
-use PMA\libraries\TypesMySQL;
-use PMA\libraries\Util;
-use PMA\libraries\LanguageManager;
-use PMA\libraries\Logging;
+use PhpMyAdmin\DbList;
+use PhpMyAdmin\ThemeManager;
+use PhpMyAdmin\Tracker;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\TypesMySQL;
+use PhpMyAdmin\Util;
+use PhpMyAdmin\LanguageManager;
+use PhpMyAdmin\Logging;
 
 /**
  * block attempts to directly run this script
@@ -361,14 +361,14 @@ if (Core::checkPageValidity($_REQUEST['back'], $goto_whitelist)) {
  *
  * remember that some objects in the session with session_start and __wakeup()
  * could access this variables before we reach this point
- * f.e. PMA\libraries\Config: fontsize
+ * f.e. PhpMyAdmin\Config: fontsize
  *
  * Check for token mismatch only if the Request method is POST
  * GET Requests would never have token and therefore checking
  * mis-match does not make sense
  *
  * @todo variables should be handled by their respective owners (objects)
- * f.e. lang, server, collation_connection in PMA\libraries\Config
+ * f.e. lang, server, collation_connection in PhpMyAdmin\Config
  */
 
 $token_mismatch = true;
@@ -377,7 +377,7 @@ $token_provided = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (Core::isValid($_POST['token'])) {
         $token_provided = true;
-        $token_mismatch = ! hash_equals($_SESSION[' PMA_token '], $_POST['token']);
+        $token_mismatch = ! @hash_equals($_SESSION[' PMA_token '], $_POST['token']);
     }
 
     if ($token_mismatch) {
@@ -386,7 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          * or is not provided
          */
         $whitelist = array('ajax_request');
-        PMA\libraries\Sanitize::removeRequestVars($whitelist);
+        PhpMyAdmin\Sanitize::removeRequestVars($whitelist);
     }
 }
 
@@ -487,8 +487,8 @@ $GLOBALS['server'] = 0;
 
 /**
  * Servers array fixups.
- * $default_server comes from PMA\libraries\Config::enableBc()
- * @todo merge into PMA\libraries\Config
+ * $default_server comes from PhpMyAdmin\Config::enableBc()
+ * @todo merge into PhpMyAdmin\Config
  */
 // Do we have some server?
 if (! isset($cfg['Servers']) || count($cfg['Servers']) == 0) {
@@ -590,7 +590,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
 
     /**
      * save some settings in cookies
-     * @todo should be done in PMA\libraries\Config
+     * @todo should be done in PhpMyAdmin\Config
      */
     $GLOBALS['PMA_Config']->setCookie('pma_lang', $GLOBALS['lang']);
     if (isset($GLOBALS['collation_connection'])) {
@@ -612,7 +612,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         // get LoginCookieValidity from preferences cache
         // no generic solution for loading preferences from cache as some settings
         // need to be kept for processing in
-        // PMA\libraries\Config::loadUserPreferences()
+        // PhpMyAdmin\Config::loadUserPreferences()
         $cache_key = 'server_' . $GLOBALS['server'];
         if (isset($_SESSION['cache'][$cache_key]['userprefs']['LoginCookieValidity'])
         ) {
@@ -635,7 +635,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
          * the required auth type plugin
          */
         $auth_class = "Authentication" . ucfirst($cfg['Server']['auth_type']);
-        if (! file_exists(
+        if (! @file_exists(
             './libraries/plugins/auth/'
             . $auth_class . '.php'
         )) {
@@ -785,7 +785,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         /* Log success */
         Logging::logUser($cfg['Server']['user']);
 
-        if (PMA_MYSQL_INT_VERSION < $cfg['MysqlMinVersion']['internal']) {
+        if ($GLOBALS['dbi']->getVersion() < $cfg['MysqlMinVersion']['internal']) {
             Core::fatalError(
                 __('You should upgrade to %s %s or later.'),
                 array('MySQL', $cfg['MysqlMinVersion']['human'])
@@ -798,7 +798,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         $GLOBALS['PMA_Types'] = new TypesMySQL();
 
         // Loads closest context to this version.
-        PhpMyAdmin\SqlParser\Context::loadClosest('MySql' . PMA_MYSQL_INT_VERSION);
+        PhpMyAdmin\SqlParser\Context::loadClosest('MySql' . $GLOBALS['dbi']->getVersion());
 
         // Sets the default delimiter (if specified).
         if (!empty($_REQUEST['sql_delimiter'])) {
@@ -859,10 +859,10 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         $header   = $response->getHeader();
         $scripts  = $header->getScripts();
         $scripts->addFile('chart.js');
-        $scripts->addFile('jqplot/jquery.jqplot.js');
-        $scripts->addFile('jqplot/plugins/jqplot.pieRenderer.js');
-        $scripts->addFile('jqplot/plugins/jqplot.highlighter.js');
-        $scripts->addFile('jquery/jquery.tablesorter.js');
+        $scripts->addFile('vendor/jqplot/jquery.jqplot.js');
+        $scripts->addFile('vendor/jqplot/plugins/jqplot.pieRenderer.js');
+        $scripts->addFile('vendor/jqplot/plugins/jqplot.highlighter.js');
+        $scripts->addFile('vendor/jquery/jquery.tablesorter.js');
     }
 
     /*

@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Response;
-use PMA\libraries\Transformations;
-use PMA\libraries\URL;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Transformations;
+use PhpMyAdmin\Url;
 
 /**
  * Get some core libraries
@@ -21,13 +21,13 @@ $scripts  = $header->getScripts();
 $scripts->addFile('tbl_structure.js');
 
 // Check parameters
-PMA\libraries\Util::checkParameters(array('db', 'table'));
+PhpMyAdmin\Util::checkParameters(array('db', 'table'));
 
 
 /**
  * Defines the url to return to in case of error in a sql statement
  */
-$err_url = 'tbl_sql.php' . URL::getCommon(
+$err_url = 'tbl_sql.php' . Url::getCommon(
     array(
         'db' => $db, 'table' => $table
     )
@@ -90,17 +90,17 @@ if (isset($_REQUEST['do_save_data'])) {
         }
 
         // Go back to the structure sub-page
-        $message = PMA\libraries\Message::success(
+        $message = PhpMyAdmin\Message::success(
             __('Table %1$s has been altered successfully.')
         );
         $message->addParam($table);
         $response->addJSON(
             'message',
-            PMA\libraries\Util::getMessage($message, $sql_query, 'success')
+            PhpMyAdmin\Util::getMessage($message, $sql_query, 'success')
         );
         exit;
     } else {
-        $error_message_html = PMA\libraries\Util::mysqlDie(
+        $error_message_html = PhpMyAdmin\Util::mysqlDie(
             '',
             '',
             false,

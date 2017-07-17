@@ -6,31 +6,29 @@
  * @package    PhpMyAdmin-theme
  * @subpackage PMAHomme
  */
-use PMA\libraries\Theme;
+use PhpMyAdmin\Theme;
 
 // unplanned execution path
 if (! defined('PMA_MINIMUM_COMMON') && ! defined('TESTSUITE')) {
     exit();
 }
 
-/** @var Theme $pmaTheme */
-$pmaTheme = $_SESSION['PMA_Theme'];
-$headerImg = $pmaTheme->getImgPath('pmd/Header.png');
-$headerLinkedImg = $pmaTheme->getImgPath('pmd/Header_Linked.png');
-$minusImg = $pmaTheme->getImgPath('pmd/minus.png');
-$plusImg = $pmaTheme->getImgPath('pmd/plus.png');
-$leftPanelButtonImg = $pmaTheme->getImgPath('pmd/left_panel_butt.png');
-$topPanelImg = $pmaTheme->getImgPath('pmd/top_panel.png');
-$smallTabImg = $pmaTheme->getImgPath('pmd/small_tab.png');
-$frams1Img = $pmaTheme->getImgPath('pmd/1.png');
-$frams2Img = $pmaTheme->getImgPath('pmd/2.png');
-$frams3Img = $pmaTheme->getImgPath('pmd/3.png');
-$frams4Img = $pmaTheme->getImgPath('pmd/4.png');
-$frams5Img = $pmaTheme->getImgPath('pmd/5.png');
-$frams6Img = $pmaTheme->getImgPath('pmd/6.png');
-$frams7Img = $pmaTheme->getImgPath('pmd/7.png');
-$frams8Img = $pmaTheme->getImgPath('pmd/8.png');
-$resizeImg = $pmaTheme->getImgPath('pmd/resize.png');
+$headerImg = $theme->getImgPath('pmd/Header.png');
+$headerLinkedImg = $theme->getImgPath('pmd/Header_Linked.png');
+$minusImg = $theme->getImgPath('pmd/minus.png');
+$plusImg = $theme->getImgPath('pmd/plus.png');
+$leftPanelButtonImg = $theme->getImgPath('pmd/left_panel_butt.png');
+$topPanelImg = $theme->getImgPath('pmd/top_panel.png');
+$smallTabImg = $theme->getImgPath('pmd/small_tab.png');
+$frams1Img = $theme->getImgPath('pmd/1.png');
+$frams2Img = $theme->getImgPath('pmd/2.png');
+$frams3Img = $theme->getImgPath('pmd/3.png');
+$frams4Img = $theme->getImgPath('pmd/4.png');
+$frams5Img = $theme->getImgPath('pmd/5.png');
+$frams6Img = $theme->getImgPath('pmd/6.png');
+$frams7Img = $theme->getImgPath('pmd/7.png');
+$frams8Img = $theme->getImgPath('pmd/8.png');
+$resizeImg = $theme->getImgPath('pmd/resize.png');
 ?>
 
 /* Designer */
@@ -442,13 +440,12 @@ a.active.trigger:hover {
 
 .history_table {
     text-align: center;
-    background-color: #9999CC;
     cursor: pointer;
+    background-color: #DBE4E8;
 }
 
-.history_table2 {
-    text-align: center;
-    background-color: #DBE4E8;
+.history_table:hover {
+    background-color: #9999CC;
 }
 
 #ab {

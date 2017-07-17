@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Linter;
-use PMA\libraries\Response;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Linter;
+use PhpMyAdmin\Response;
 
 $_GET['ajax_request'] = 'true';
 

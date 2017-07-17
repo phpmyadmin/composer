@@ -6,8 +6,8 @@
  * @package PhpMyAdmin-test
  */
 
-use PMA\libraries\Theme;
-use PMA\libraries\Transformations;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Transformations;
 
 /*
  * Include to test.
@@ -214,7 +214,7 @@ class TransformationsTest extends PHPUnit_Framework_TestCase
     public function testClear()
     {
         // Mock dbi
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())

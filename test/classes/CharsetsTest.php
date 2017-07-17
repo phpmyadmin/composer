@@ -6,6 +6,8 @@
  * @package PhpMyAdmin-test
  */
 
+use PhpMyAdmin\Charsets;
+
 /**
  * Tests for MySQL Charsets
  *
@@ -19,7 +21,7 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test case for PMA\libraries\Charsets::getCollationDescr()
+     * Test case for getCollationDescr()
      *
      * @param string $collation Collation for which description is reqd
      * @param string $desc      Expected Description
@@ -32,7 +34,7 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             $desc,
-            PMA\libraries\Charsets::getCollationDescr($collation)
+            Charsets::getCollationDescr($collation)
         );
     }
 
@@ -121,7 +123,7 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
             array('utf8mb4_unicode_ci', 'Unicode (UCA 4.0.0), case-insensitive'),
             array('utf8mb4_tr_0900_ai_ci', 'Turkish (UCA 9.0.0), accent-insensitive, case-insensitive'),
             array('utf8mb4_turkish_ci', 'Turkish (UCA 4.0.0), case-insensitive'),
-            array('utf32_thai_520_w2', 'Thai (UCA 5.2.0), weight=2'),
+            array('utf32_thai_520_w2', 'Thai (UCA 5.2.0), multi-level'),
             array('utf8mb4_czech_ci', 'Czech (UCA 4.0.0), case-insensitive'),
             array('cp1250_czech_cs', 'Czech, case-sensitive'),
             array('latin1_general_ci', 'West European, case-insensitive'),
@@ -137,14 +139,14 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA\libraries\Charsets::getCollationDropdownBox
+     * Test for getCollationDropdownBox
      *
      * @return void
      * @test
      */
     public function testGetCollationDropdownBox()
     {
-        $result = PMA\libraries\Charsets::getCollationDropdownBox();
+        $result = Charsets::getCollationDropdownBox();
 
         $this->assertContains('name="collation"', $result);
         $this->assertNotContains('id="', $result);
@@ -159,14 +161,14 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA\libraries\Charsets::getCharsetDropdownBox
+     * Test for getCharsetDropdownBox
      *
      * @return void
      * @test
      */
     public function testGetCharsetDropdownBox()
     {
-        $result = PMA\libraries\Charsets::getCharsetDropdownBox(
+        $result = Charsets::getCharsetDropdownBox(
             null, "test_id", "latin1", false, true
         );
         $this->assertContains('name="character_set"', $result);
@@ -176,4 +178,3 @@ class CharsetsTest extends PHPUnit_Framework_TestCase
         $this->assertContains('selected="selected">latin1', $result);
     }
 }
-

@@ -9,8 +9,8 @@
 /*
  * Include to test.
  */
-use PMA\libraries\Theme;
-use PMA\libraries\URL;
+use PhpMyAdmin\Theme;
+use PhpMyAdmin\Url;
 
 require_once 'libraries/tracking.lib.php';
 
@@ -58,7 +58,7 @@ class PMA_TblTrackingTest extends PHPUnit_Framework_TestCase
 
         $GLOBALS['cfg']['Server']['tracking_default_statements'] = 'DELETE';
 
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -179,7 +179,7 @@ class PMA_TblTrackingTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertContains(
-            URL::getHiddenInputs($GLOBALS['db']),
+            Url::getHiddenInputs($GLOBALS['db']),
             $html
         );
 
@@ -437,7 +437,7 @@ class PMA_TblTrackingTest extends PHPUnit_Framework_TestCase
         $text_dir = "ltr";
 
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -535,7 +535,7 @@ class PMA_TblTrackingTest extends PHPUnit_Framework_TestCase
         $url_query = "select * from PMA";
 
         $dbi_old = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder('PMA\libraries\DatabaseInterface')
+        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -631,7 +631,7 @@ class PMA_TblTrackingTest extends PHPUnit_Framework_TestCase
         );
 
         $version = '<form method="post" action="tbl_tracking.php'
-            . URL::getCommon(
+            . Url::getCommon(
                 $url_params + array(
                     'report' => 'true', 'version' => $_REQUEST['version']
                 )

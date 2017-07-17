@@ -6,7 +6,7 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
+use PhpMyAdmin\Core;
 
 /* PHP 5.4 stores upload progress data only in the default session.
  * After calling session_name(), we won't find the progress data anymore.
@@ -103,7 +103,7 @@ if (isset($_GET["message"]) && $_GET["message"]) {
         session_start();
 
         if ((time() - $timestamp) > $maximumTime) {
-            $_SESSION['Import_message']['message'] = PMA\libraries\Message::error(
+            $_SESSION['Import_message']['message'] = PhpMyAdmin\Message::error(
                 __('Could not load the progress of the import.')
             )->getDisplay();
             break;

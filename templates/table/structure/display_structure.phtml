@@ -1,14 +1,14 @@
 <?php
-use PMA\libraries\Index;
-use PMA\libraries\Partition;
-use PMA\libraries\Template;
-use PMA\libraries\Tracker;
-use PMA\libraries\Util;
-use PMA\libraries\URL;
+use PhpMyAdmin\Index;
+use PhpMyAdmin\Partition;
+use PhpMyAdmin\Template;
+use PhpMyAdmin\Tracker;
+use PhpMyAdmin\Util;
+use PhpMyAdmin\Url;
 
 $rownum = 0; ?>
 <form method="post" action="tbl_structure.php" name="fieldsForm" id="fieldsForm" class="ajax<?= $HideStructureActions; ?>">
-    <?= URL::getHiddenInputs($db, $table); ?>
+    <?= Url::getHiddenInputs($db, $table); ?>
     <input type="hidden" name="table_type" value=
     <?php if ($db_is_system_schema): ?>
         "information_schema" />
@@ -17,9 +17,10 @@ $rownum = 0; ?>
     <?php else: ?>
         "table" />
     <?php endif; ?>
+    <div class="responsivetable">
     <table id="tablestructure" class="data topmargin">
         <!-- table header -->
-        <?= PMA\libraries\Template::get('table/structure/table_structure_header')->render(
+        <?= PhpMyAdmin\Template::get('table/structure/table_structure_header')->render(
             array(
                 'db_is_system_schema' => $db_is_system_schema,
                 'tbl_is_view' => $tbl_is_view,
@@ -72,7 +73,7 @@ $rownum = 0; ?>
                 }
             ?>
         <tr>
-            <?= PMA\libraries\Template::get('table/structure/table_structure_row')->render(
+            <?= PhpMyAdmin\Template::get('table/structure/table_structure_row')->render(
                 array(
                     'row' => $row,
                     'rownum' => $rownum,
@@ -114,7 +115,7 @@ $rownum = 0; ?>
                         'is_in_central_columns' => in_array($row['Field'], $central_list) ? true : false,
                         'central_columns_work' => $GLOBALS['cfgRelation']['centralcolumnswork'],
                         'table' => $GLOBALS['table'],
-                        'mysql_int_version' => PMA_MYSQL_INT_VERSION
+                        'mysql_int_version' => $GLOBALS['dbi']->getVersion()
                     )
                 ); ?>
             <?php endif; ?>
@@ -122,6 +123,7 @@ $rownum = 0; ?>
         <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <?= Template::get('table/structure/check_all_table_column')->render(
         array(
             'pma_theme_image' => $GLOBALS['pmaThemeImage'],

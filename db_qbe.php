@@ -6,10 +6,10 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Response;
-use PMA\libraries\SavedSearches;
-use PMA\libraries\Sql;
-use PMA\libraries\URL;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\SavedSearches;
+use PhpMyAdmin\Sql;
+use PhpMyAdmin\Url;
 
 /**
  * requirements
@@ -120,10 +120,10 @@ list(
     $tooltip_truename,
     $tooltip_aliasname,
     $pos
-) = PMA\libraries\Util::getDbInfo($db, isset($sub_part) ? $sub_part : '');
+) = PhpMyAdmin\Util::getDbInfo($db, isset($sub_part) ? $sub_part : '');
 
 if ($message_to_display) {
-    PMA\libraries\Message::error(
+    PhpMyAdmin\Message::error(
         __('You have to choose at least one column to display!')
     )
         ->display();
@@ -131,16 +131,16 @@ if ($message_to_display) {
 unset($message_to_display);
 
 // create new qbe search instance
-$db_qbe = new PMA\libraries\DbQbe($GLOBALS['db'], $savedSearchList, $savedSearch);
+$db_qbe = new PhpMyAdmin\DbQbe($GLOBALS['db'], $savedSearchList, $savedSearch);
 
-$url = 'db_designer.php' . URL::getCommon(
+$url = 'db_designer.php' . Url::getCommon(
     array_merge(
         $url_params,
         array('query' => 1)
     )
 );
 $response->addHTML(
-    PMA\libraries\Message::notice(
+    PhpMyAdmin\Message::notice(
         sprintf(
             __('Switch to %svisual builder%s'),
             '<a href="' . $url . '">',

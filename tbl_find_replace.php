@@ -7,7 +7,9 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\Response;
+
+use PhpMyAdmin\Di\Container;
+use PhpMyAdmin\Response;
 
 /**
  * Gets some core libraries
@@ -15,19 +17,19 @@ use PMA\libraries\Response;
 require_once 'libraries/common.inc.php';
 require_once 'libraries/tbl_common.inc.php';
 
-$container = \PMA\libraries\di\Container::getDefaultContainer();
-$container->factory('PMA\libraries\controllers\table\TableSearchController');
+$container = Container::getDefaultContainer();
+$container->factory('PhpMyAdmin\Controllers\Table\TableSearchController');
 $container->alias(
-    'TableSearchController', 'PMA\libraries\controllers\table\TableSearchController'
+    'TableSearchController', 'PhpMyAdmin\Controllers\Table\TableSearchController'
 );
-$container->set('PMA\libraries\Response', Response::getInstance());
-$container->alias('response', 'PMA\libraries\Response');
+$container->set('PhpMyAdmin\Response', Response::getInstance());
+$container->alias('response', 'PhpMyAdmin\Response');
 
 $dependency_definitions = array(
     'searchType' => 'replace',
     'url_query' => &$url_query
 );
 
-/** @var PMA\libraries\controllers\table\TableSearchController $controller */
+/** @var PhpMyAdmin\Controllers\Table\TableSearchController $controller */
 $controller = $container->get('TableSearchController', $dependency_definitions);
 $controller->indexAction();

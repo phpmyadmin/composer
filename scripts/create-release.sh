@@ -131,7 +131,7 @@ if [ $do_ci -eq 0 -a -$do_daily -eq 0 ] ; then
     cat <<END
 
 Please ensure you have incremented rc count or version in the repository :
-     - in $CONFIG_LIB PMA\libraries\Config::__constructor() the line
+     - in $CONFIG_LIB PhpMyAdmin\Config::__constructor() the line
           " \$this->set( 'PMA_VERSION', '$version' ); "
      - in doc/conf.py the line
           " version = '$version' "
@@ -321,7 +321,7 @@ for kit in $KITS ; do
         mv htmldoc doc/html
         rm doc/html/.buildinfo doc/html/objects.inv
         # Javascript sources
-        rm -rf js/jquery/src/ js/openlayers/src/
+        rm -rf js/vendor/jquery/src/ js/vendor/openlayers/src/
     fi
 
     # Remove developer scripts
@@ -444,7 +444,7 @@ Todo now:
     based on documentation.
 
  6. increment rc count or version in the repository :
-        - in $CONFIG_LIB PMA\libraries\Config::__constructor() the line
+        - in $CONFIG_LIB PhpMyAdmin\Config::__constructor() the line
               " \$this->set( 'PMA_VERSION', '2.7.1-dev' ); "
         - in Documentation.html (if it exists) the 2 lines
               " <title>phpMyAdmin 2.2.2-rc1 - Documentation</title> "

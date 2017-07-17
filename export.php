@@ -6,18 +6,18 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Encoding;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Encoding;
 use PMA\libraries\plugins\ExportPlugin;
-use PMA\libraries\URL;
-use PMA\libraries\Sanitize;
+use PhpMyAdmin\Url;
+use PhpMyAdmin\Sanitize;
 
 /**
  * Get the variables sent or posted to this script and a core script
  */
 /**
  * If we are sending the export file (as opposed to just displaying it
- * as text), we have to bypass the usual PMA\libraries\Response mechanism
+ * as text), we have to bypass the usual PhpMyAdmin\Response mechanism
  */
 if (isset($_POST['output_format']) && $_POST['output_format'] == 'sendit') {
     define('PMA_BYPASS_GET_INSTANCE', 1);
@@ -172,7 +172,7 @@ foreach ($post_params as $one_post_param) {
 
 $table = $GLOBALS['table'];
 
-PMA\libraries\Util::checkParameters(array('what', 'export_type'));
+PhpMyAdmin\Util::checkParameters(array('what', 'export_type'));
 
 // sanitize this parameter which will be used below in a file inclusion
 $what = Core::securePath($_POST['what']);
@@ -258,9 +258,9 @@ if ($_REQUEST['output_format'] == 'astext') {
 
 // Generate error url and check for needed variables
 if ($export_type == 'server') {
-    $err_url = 'server_export.php' . URL::getCommon();
+    $err_url = 'server_export.php' . Url::getCommon();
 } elseif ($export_type == 'database' && strlen($db) > 0) {
-    $err_url = 'db_export.php' . URL::getCommon(array('db' => $db));
+    $err_url = 'db_export.php' . Url::getCommon(array('db' => $db));
     // Check if we have something to export
     if (isset($table_select)) {
         $tables = $table_select;
@@ -268,7 +268,7 @@ if ($export_type == 'server') {
         $tables = array();
     }
 } elseif ($export_type == 'table' && strlen($db) > 0 && strlen($table) > 0) {
-    $err_url = 'tbl_export.php' . URL::getCommon(
+    $err_url = 'tbl_export.php' . Url::getCommon(
         array(
             'db' => $db, 'table' => $table
         )
@@ -373,7 +373,7 @@ if ($save_on_server) {
         if ($export_type == 'database') {
             $num_tables = count($tables);
             if ($num_tables == 0) {
-                $message = PMA\libraries\Message::error(
+                $message = PhpMyAdmin\Message::error(
                     __('No tables found in database.')
                 );
                 $active_page = 'db_export.php';

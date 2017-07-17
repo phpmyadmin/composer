@@ -6,9 +6,9 @@
  * @package PhpMyAdmin
  */
 
-use PMA\libraries\Core;
-use PMA\libraries\Sanitize;
-use PMA\libraries\Response;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\Response;
 
 /**
  * Gets core libraries and defines some variables

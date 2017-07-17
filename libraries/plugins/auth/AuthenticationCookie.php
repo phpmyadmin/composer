@@ -9,15 +9,15 @@
 namespace PMA\libraries\plugins\auth;
 
 use phpseclib\Crypt;
-use PMA\libraries\LanguageManager;
-use PMA\libraries\Message;
+use PhpMyAdmin\LanguageManager;
+use PhpMyAdmin\Message;
 use PMA\libraries\plugins\AuthenticationPlugin;
-use PMA\libraries\Response;
-use PMA\libraries\Util;
-use PMA\libraries\Config;
-use PMA\libraries\Core;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Util;
+use PhpMyAdmin\Config;
+use PhpMyAdmin\Core;
 use ReCaptcha;
-use PMA\libraries\URL;
+use PhpMyAdmin\Url;
 
 require_once './libraries/session.lib.php';
 require_once './libraries/hash.lib.php';
@@ -172,7 +172,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         echo '
     <br />
     <!-- Login form -->
-    <form method="post" action="index.php" name="login_form"' , $autocomplete ,
+    <form method="post" id="login_form" action="index.php" name="login_form"' , $autocomplete ,
             ' class="disableAjax login hide js-show">
         <fieldset>
         <legend>';
@@ -228,21 +228,21 @@ class AuthenticationCookie extends AuthenticationPlugin
                 , $GLOBALS['server'] , '" />';
         } // end if (server choice)
 
-        // Add captcha input field if reCaptcha is enabled
-        if (!empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
-            && !empty($GLOBALS['cfg']['CaptchaLoginPublicKey'])
-        ) {
-            // If enabled show captcha to the user on the login screen.
-            echo '<script src="https://www.google.com/recaptcha/api.js?hl='
-                , $GLOBALS['lang'] , '" async defer></script>';
-            echo '<div class="g-recaptcha" data-sitekey="'
-                , htmlspecialchars($GLOBALS['cfg']['CaptchaLoginPublicKey']) ,
-                '" data-callback="loginButtonEnable" data-expired-callback="loginButtonDisable" captcha="enabled"></div>';
-        }
+        echo '</fieldset><fieldset class="tblFooters">';
 
-        echo '</fieldset>
-        <fieldset class="tblFooters">
-            <input value="' , __('Go') , '" type="submit" id="input_go" />';
+        // binds input field with invisible reCaptcha if enabled
+        if (empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
+            && empty($GLOBALS['cfg']['CaptchaLoginPublicKey'])
+        ) {
+            echo '<input value="' , __('Go') , '" type="submit" id="input_go" />';
+        }
+        else {
+            echo '<script src="https://www.google.com/recaptcha/api.js?hl='
+            , $GLOBALS['lang'] , '" async defer></script>';
+            echo '<input class="g-recaptcha" data-sitekey="'
+            , htmlspecialchars($GLOBALS['cfg']['CaptchaLoginPublicKey']),'"'
+                .' data-callback="recaptchaCallback" value="' , __('Go') , '" type="submit" id="input_go" />';
+        }
         $_form_params = array();
         if (! empty($GLOBALS['target'])) {
             $_form_params['target'] = $GLOBALS['target'];
@@ -255,7 +255,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         }
         // do not generate a "server" hidden field as we want the "server"
         // drop-down to have priority
-        echo URL::getHiddenInputs($_form_params, '', 0, 'server');
+        echo Url::getHiddenInputs($_form_params, '', 0, 'server');
         echo '</fieldset>
     </form>';
 
@@ -335,11 +335,17 @@ class AuthenticationCookie extends AuthenticationPlugin
 
                     // Check if the captcha entered is valid, if not stop the login.
                     if ($resp == null || ! $resp->isSuccess()) {
-                        $conn_error = __('Entered captcha is wrong, try again!');
+                        $codes = $resp->getErrorCodes();
+
+                        if (in_array('invalid-json', $codes)) {
+                            $conn_error = __('Failed to connect to the reCAPTCHA service!');
+                        } else {
+                            $conn_error = __('Entered captcha is wrong, try again!');
+                        }
                         return false;
                     }
                 } else {
-                    $conn_error = __('Please enter correct captcha!');
+                    $conn_error = __('Missing reCAPTCHA verification, maybe it has been blocked by adblock?');
                     return false;
                 }
             }
@@ -534,7 +540,7 @@ class AuthenticationCookie extends AuthenticationPlugin
                 ->disable();
 
             Core::sendHeaderLocation(
-                $redirect_url . URL::getCommonRaw($url_params),
+                $redirect_url . Url::getCommonRaw($url_params),
                 true
             );
             if (! defined('TESTSUITE')) {

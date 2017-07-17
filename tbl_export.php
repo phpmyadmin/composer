@@ -5,8 +5,8 @@
  *
  * @package PhpMyAdmin
  */
-use PMA\libraries\config\PageSettings;
-use PMA\libraries\Response;
+use PhpMyAdmin\Config\PageSettings;
+use PhpMyAdmin\Response;
 
 /**
  *
@@ -118,7 +118,7 @@ if (! empty($sql_query)) {
         $sql_query = PhpMyAdmin\SqlParser\TokensList::build($tokens);
     }
 
-    echo PMA\libraries\Util::getMessage(PMA\libraries\Message::success());
+    echo PhpMyAdmin\Util::getMessage(PhpMyAdmin\Message::success());
 }
 
 require_once 'libraries/display_export.lib.php';
