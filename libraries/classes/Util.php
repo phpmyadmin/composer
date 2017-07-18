@@ -130,8 +130,8 @@ class Util
         if (! isset($sprites)) {
             $sprites = array();
             // Try to load the list of sprites
-            if (isset($_SESSION['PMA_Theme'])) {
-                $sprites = $_SESSION['PMA_Theme']->getSpriteData();
+            if (isset($GLOBALS['PMA_Theme'])) {
+                $sprites = $GLOBALS['PMA_Theme']->getSpriteData();
             }
         }
 
@@ -4889,5 +4889,18 @@ class Util
             return '0000-00-00 00:00:00';
         }
         return date($format);
+    }
+
+    /**
+     * Wrapper around php's set_time_limit
+     *
+     * @return void
+     */
+    public static function setTimeLimit()
+    {
+        // The function can be disabled in php.ini
+        if (function_exists('set_time_limit')) {
+            @set_time_limit($GLOBALS['cfg']['ExecTimeLimit']);
+        }
     }
 }
