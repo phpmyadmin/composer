@@ -94,36 +94,6 @@ class ThemeManagerTest extends PMATestCase
     }
 
     /**
-     * Test for checkConfig
-     *
-     * @return void
-     */
-    public function testCheckConfig()
-    {
-        $tm = new ThemeManager();
-        $this->assertNull(
-            $tm->checkConfig()
-        );
-    }
-
-    /**
-     * Test for makeBc
-     *
-     * @return void
-     */
-    public function testMakeBc()
-    {
-        $tm = new ThemeManager();
-        $this->assertNull(
-            $tm->makeBc()
-        );
-        $this->assertEquals($GLOBALS['theme'], 'pmahomme');
-        $this->assertEquals($GLOBALS['pmaThemePath'], './themes/pmahomme');
-        $this->assertEquals($GLOBALS['pmaThemeImage'], './themes/pmahomme/img/');
-
-    }
-
-    /**
      * Test for getPrintPreviews
      *
      * @return void

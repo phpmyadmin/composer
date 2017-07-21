@@ -3938,6 +3938,32 @@ class Util
     }
 
     /**
+     * Returns information about SSL status for current connection
+     *
+     * @return string
+     */
+    public static function getServerSSL()
+    {
+        $server = $GLOBALS['cfg']['Server'];
+        $class = 'caution';
+        if (! $server['ssl']) {
+            $message = __('SSL is not being used');
+            if (! empty($server['socket']) || $server['host'] == '127.0.0.1' || $server['host'] == 'localhost') {
+                $class = '';
+            }
+        } elseif (! $server['ssl_verify']) {
+            $message = __('SSL is used with disabled verification');
+        } elseif (empty($server['ssl_ca']) && empty($server['ssl_ca'])) {
+            $message = __('SSL is used without certification authority');
+        } else {
+            $class = '';
+            $message = __('SSL is used');
+        }
+        return '<span class="' . $class . '">' . $message . '</span> ' . self::showDocu('setup', 'ssl');
+    }
+
+
+    /**
      * Prepare HTML code for display button.
      *
      * @return String
@@ -4902,5 +4928,30 @@ class Util
         if (function_exists('set_time_limit')) {
             @set_time_limit($GLOBALS['cfg']['ExecTimeLimit']);
         }
+    }
+
+    /**
+     * Access to a multidimensional array by dot notation
+     *
+     * @param array        $array   List of values
+     * @param string|array $path    Path to searched value
+     * @param mixed        $default Default value
+     *
+     * @return mixed Searched value
+     */
+    public static function getValueByKey($array, $path, $default = null)
+    {
+        if (is_string($path)) {
+            $path = explode('.', $path);
+        }
+        $p = array_shift($path);
+        while (isset($p)) {
+            if (!isset($array[$p])) {
+                return $default;
+            }
+            $array = $array[$p];
+            $p = array_shift($path);
+        }
+        return $array;
     }
 }
