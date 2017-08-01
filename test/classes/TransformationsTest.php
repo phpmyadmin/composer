@@ -179,7 +179,7 @@ class TransformationsTest extends PHPUnit_Framework_TestCase
     public function testGetMime()
     {
         $_SESSION['relation'][$GLOBALS['server']]['PMA_VERSION'] = PMA_VERSION;
-        $_SESSION['relation'][$GLOBALS['server']]['commwork'] = true;
+        $_SESSION['relation'][$GLOBALS['server']]['mimework'] = true;
         $_SESSION['relation'][$GLOBALS['server']]['db'] = "pmadb";
         $_SESSION['relation'][$GLOBALS['server']]['column_info'] = "column_info";
         $_SESSION['relation'][$GLOBALS['server']]['trackingwork'] = false;
@@ -196,7 +196,7 @@ class TransformationsTest extends PHPUnit_Framework_TestCase
                 'col' => array(
                     'column_name' => 'col',
                     'mimetype' => 'T',
-                    'transformation' => 'o/P',
+                    'transformation' => 'O/P',
                     'transformation_options' => '',
                     'input_transformation' => 'i/p',
                     'input_transformation_options' => '',
@@ -284,6 +284,10 @@ class TransformationsTest extends PHPUnit_Framework_TestCase
             array(
                 'image_jpeg_link.php',
                 'Image_JPEG_Link.php'
+            ),
+            array(
+                'text_plain_dateformat.php',
+                'Text_Plain_Dateformat.php'
             ),
         );
     }

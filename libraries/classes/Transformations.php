@@ -251,7 +251,7 @@ class Transformations
     {
         $cfgRelation = PMA_getRelationsParam();
 
-        if (! $cfgRelation['commwork']) {
+        if (! $cfgRelation['mimework']) {
             return false;
         }
 
@@ -293,7 +293,7 @@ class Transformations
             $dir = explode('/', $values['transformation']);
             $subdir = '';
             if (count($dir) === 2) {
-                $subdir = $dir[0] . '/';
+                $subdir = ucfirst($dir[0]) . '/';
                 $values['transformation'] = $dir[1];
             }
 
@@ -328,7 +328,7 @@ class Transformations
     ) {
         $cfgRelation = PMA_getRelationsParam();
 
-        if (! $cfgRelation['commwork']) {
+        if (! $cfgRelation['mimework']) {
             return false;
         }
 
