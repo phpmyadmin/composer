@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.8.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2017-07-18 13:31+0200\n"
-"PO-Revision-Date: 2017-04-22 23:01+0000\n"
-"Last-Translator: Dadan Setia <da2n_s@yahoo.co.id>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
-"master/id/>\n"
+"PO-Revision-Date: 2017-08-09 14:42+0000\n"
+"Last-Translator: Hizkia Felix <hizkifw@gmail.com>\n"
+"Language-Team: Indonesian "
+"<https://hosted.weblate.org/projects/phpmyadmin/master/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.14-dev\n"
+"X-Generator: Weblate 2.16-dev\n"
 "X-Poedit-Basepath: ../../..\n"
 
 #: ajax.php:16 ajax.php:33 export.php:195 schema_export.php:66
@@ -301,10 +301,8 @@ msgstr "Nama database kosong!"
 
 #: db_operations.php:53
 #, fuzzy
-#| msgid ""
-#| "Cannot rename database to the same name. Change the name and try again"
 msgid "Cannot copy database to the same name. Change the name and try again."
-msgstr "Nama basisdata tidak boleh sama. Gunakan nama lain dan coba lagi"
+msgstr "Nama basis data tidak boleh sama. Gunakan nama lain dan coba lagi."
 
 #: db_operations.php:142
 #, php-format
@@ -615,6 +613,8 @@ msgid ""
 "You were logged out from one server, to logout completely from phpMyAdmin, "
 "you need to logout from all servers."
 msgstr ""
+"Anda keluar dari satu server, untuk keluar sepenuhnya dari phpMyAdmin, Anda "
+"perlu keluar dari semua server."
 
 #: index.php:162 libraries/classes/Footer.php:74
 msgid "phpMyAdmin Demo Server"
@@ -830,6 +830,8 @@ msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
 "templates and will be slow because of this."
 msgstr ""
+"$cfg['TempDir'] (%s) tidak dapat diakses. phpMyAdmin tidak bisa meng-cache "
+"templat-templat dan akan lambat karena ini."
 
 #: js/messages.php:43
 msgid "Confirm"
@@ -1536,22 +1538,16 @@ msgid "Chart"
 msgstr "Bagan"
 
 #: js/messages.php:295 libraries/display_export.lib.php:905
-#, fuzzy
-#| msgid "Database"
 msgctxt "Alias"
 msgid "Database"
 msgstr "Basis data"
 
 #: js/messages.php:296 libraries/display_export.lib.php:917
-#, fuzzy
-#| msgid "Table"
 msgctxt "Alias"
 msgid "Table"
 msgstr "Tabel"
 
 #: js/messages.php:297 libraries/display_export.lib.php:928
-#, fuzzy
-#| msgid "Column"
 msgctxt "Alias"
 msgid "Column"
 msgstr "Kolom"
@@ -2202,13 +2198,12 @@ msgstr ""
 "di nilai-nilai ini secara langsung jika diinginkan"
 
 #: js/messages.php:535
-#, fuzzy
 msgid ""
 "MySQL accepts additional values not selectable by the datepicker; key in "
 "those values directly if desired"
 msgstr ""
-"MySQL menerima nilai tambahan yang tidak dapat terpilih oleh slider; kunci "
-"di nilai-nilai ini secara langsung jika diinginkan"
+"MySQL menerima nilai tambahan yang tidak dapat terpilih oleh pemilih tanggal;"
+" masukkan nilai-nilai ini secara langsung jika diinginkan"
 
 #: js/messages.php:541
 msgid ""
@@ -2254,10 +2249,8 @@ msgstr "Simpan halaman"
 
 #: js/messages.php:557 templates/database/designer/side_menu.phtml:63
 #: templates/database/designer/side_menu.phtml:66
-#, fuzzy
-#| msgid "Select page"
 msgid "Save page as"
-msgstr "simpan halaman sebagai"
+msgstr "Simpan halaman sebagai"
 
 #: js/messages.php:558 templates/database/designer/side_menu.phtml:49
 #: templates/database/designer/side_menu.phtml:52
@@ -2501,16 +2494,12 @@ msgid "Create view"
 msgstr "Buat tampilan"
 
 #: js/messages.php:669
-#, fuzzy
-#| msgid "Send error reports"
 msgid "Send error report"
 msgstr "Kirim laporan kesalahan"
 
 #: js/messages.php:670
-#, fuzzy
-#| msgid "Submit Error Report"
 msgid "Submit error report"
-msgstr "Kirim Laporan Kesalahan"
+msgstr "Kirim laporan kesalahan"
 
 #: js/messages.php:672
 msgid ""
@@ -2521,16 +2510,12 @@ msgstr ""
 "kesalahan?"
 
 #: js/messages.php:674
-#, fuzzy
-#| msgid "Change Report Settings"
 msgid "Change report settings"
-msgstr "Ubah Pengaturan Pelaporan"
+msgstr "Ubah pengaturan pelaporan"
 
 #: js/messages.php:675
-#, fuzzy
-#| msgid "Show Report Details"
 msgid "Show report details"
-msgstr "Tampilkan Detail Laporan"
+msgstr "Tampilkan detail laporan"
 
 #: js/messages.php:678
 msgid ""
@@ -2581,10 +2566,9 @@ msgid "Some error occurred while getting SQL debug info."
 msgstr "Terjadi beberapa kesalahan saat mendapatkan info SQL debug."
 
 #: js/messages.php:720
-#, fuzzy, php-format
-#| msgid "Executed queries"
+#, php-format
 msgid "%s queries executed %s times in %s seconds."
-msgstr "Kueri tereksekusi"
+msgstr "%s kueri tereksekusi %s kali dalam waktu %s detik."
 
 #: js/messages.php:721
 #, fuzzy, php-format
@@ -2598,10 +2582,8 @@ msgid "Show arguments"
 msgstr "Perlihatkan Komentar tabel"
 
 #: js/messages.php:723
-#, fuzzy
-#| msgid "Hide search results"
 msgid "Hide arguments"
-msgstr "Sembunyikan hasil pencarian"
+msgstr "Sembunyikan argumen"
 
 #: js/messages.php:724
 #, fuzzy
@@ -2625,14 +2607,10 @@ msgstr ""
 "tersebut umumnya disebabkan oleh \"Mode Private Browsing\"."
 
 #: js/messages.php:727
-#, fuzzy
-#| msgid "Copy database to"
 msgid "Copy tables to"
-msgstr "Salin basis data ke"
+msgstr "Salin tabel ke"
 
 #: js/messages.php:728
-#, fuzzy
-#| msgid "Add table prefix"
 msgid "Add table prefix"
 msgstr "Tambahkan prefiks tabel"
 
@@ -3148,10 +3126,8 @@ msgid "Add column"
 msgstr "Tambah kolom"
 
 #: libraries/central_columns.lib.php:815
-#, fuzzy
-#| msgid "Select two columns"
 msgid "Select a column."
-msgstr "Pilih dua kolom"
+msgstr "Pilih sebuah kolom."
 
 #: libraries/central_columns.lib.php:1262
 #, fuzzy
@@ -3168,10 +3144,9 @@ msgid "Attributes"
 msgstr "Atribut"
 
 #: libraries/classes/Advisor.php:243
-#, fuzzy, php-format
-#| msgid "Error while creating PDF:"
+#, php-format
 msgid "Error when evaluating: %s"
-msgstr "Terjadi galat sewaktu membuat PDF:"
+msgstr "Terjadi error saat mengevaluasi: %s"
 
 #: libraries/classes/Advisor.php:274
 #, php-format
@@ -3417,7 +3392,7 @@ msgstr "Bulgaria"
 #: libraries/classes/Charsets.php:395
 msgctxt "Collation"
 msgid "Chinese"
-msgstr ""
+msgstr "Cina"
 
 #: libraries/classes/Charsets.php:400
 #, fuzzy
@@ -3490,7 +3465,7 @@ msgstr "Islandia"
 #: libraries/classes/Charsets.php:446
 msgctxt "Collation"
 msgid "Classical Latin"
-msgstr ""
+msgstr "Latin Klasik"
 
 #: libraries/classes/Charsets.php:450
 #, fuzzy
@@ -4335,7 +4310,7 @@ msgstr "Server tidak merespon."
 
 #: libraries/classes/DatabaseInterface.php:2062
 msgid "Logout and try as another user."
-msgstr ""
+msgstr "Keluar dan coba sebagai pengguna lain."
 
 #: libraries/classes/DatabaseInterface.php:2068
 msgid "Please check privileges of directory containing database."
@@ -4543,7 +4518,7 @@ msgstr "Dalam kolom:"
 
 #: libraries/classes/Dbi/DbiMysqli.php:158
 msgid "SSL connection enforced by server, automatically enabling it."
-msgstr ""
+msgstr "Koneksi SSL ditegakkan oleh server, secara otomatis memungkinkannya."
 
 #: libraries/classes/DisplayResults.php:910
 msgid "Save edited data"
@@ -5322,7 +5297,7 @@ msgstr "Tabel"
 #: libraries/classes/Menu.php:289 libraries/classes/Menu.php:308
 #, php-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: libraries/classes/Menu.php:357 libraries/classes/Menu.php:460
 #: libraries/classes/Menu.php:573 libraries/classes/Util.php:3142
@@ -9590,7 +9565,7 @@ msgstr "Lewati tabel lebih besar dari"
 
 #: libraries/display_export.lib.php:897
 msgid "Defined aliases"
-msgstr ""
+msgstr "Nama-nama lain yang ditetapkan"
 
 #: libraries/display_export.lib.php:1013
 msgid "Could not load export plugins, please check your installation!"
@@ -10892,6 +10867,9 @@ msgid ""
 "lead to non working phpMyAdmin or a security risk. Please fix your server "
 "configuration to indicate HTTPS properly."
 msgstr ""
+"Ada ketidakcocokan antara HTTPS yang ditunjukkan server dan client. Hal ini "
+"dapat menyebabkan phpMyAdmin tidak bekerja atau risiko keamanan. Mohon "
+"perbaiki konfigurasi server Anda untuk menunjukkan HTTPS dengan benar."
 
 #: libraries/plugins/auth/AuthenticationCookie.php:179
 msgid "Log in"
@@ -10926,7 +10904,7 @@ msgstr "Captcha yang dimasukan salah, coba lagi!"
 
 #: libraries/plugins/auth/AuthenticationCookie.php:348
 msgid "Missing reCAPTCHA verification, maybe it has been blocked by adblock?"
-msgstr ""
+msgstr "Verifikasi reCAPTCHA hilang, mungkin telah diblokir oleh adblock?"
 
 #: libraries/plugins/auth/AuthenticationCookie.php:372
 #, fuzzy
@@ -11043,7 +11021,7 @@ msgstr "Keluaran JSON cukup-print (Gunakan format terbaca-manusia)"
 
 #: libraries/plugins/export/ExportJson.php:94
 msgid "Output unicode characters unescaped"
-msgstr ""
+msgstr "Karakter unicode output tidak terpengaruh"
 
 #: libraries/plugins/export/ExportLatex.php:49
 msgid "Content of table @TABLE@"
