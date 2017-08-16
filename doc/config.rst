@@ -1609,6 +1609,11 @@ Generic settings
     Path for storing session data (`session\_save\_path PHP parameter
     <https://secure.php.net/session_save_path>`_).
 
+    .. warning::
+
+        This folder should not be publicly accessible through the webserver,
+        otherwise you risk leaking private data from your session.
+
 .. config:option:: $cfg['MemoryLimit']
 
     :type: string [number of bytes]
@@ -2334,8 +2339,8 @@ Editing mode
     :default: 2
 
     Defines the default number of rows to be entered from the Insert page.
-    Users can manually chnage this from the bottom of that page to add more
-    (or fewer) blank rows.
+    Users can manually change this from the bottom of that page to add or remove
+    blank rows.
 
 .. config:option:: $cfg['ForeignKeyMaxLimit']
 
