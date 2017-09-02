@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.7.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2017-08-10 09:13-0400\n"
-"PO-Revision-Date: 2017-09-01 10:50+0000\n"
-"Last-Translator: Imam Ilham Khawarizma <khrzm@tuta.io>\n"
+"PO-Revision-Date: 2017-09-02 16:43+0000\n"
+"Last-Translator: Chandra Chou <developerchan1@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://hosted.weblate.org/projects/phpmyadmin/4-7/id/>\n"
 "Language: id\n"
@@ -177,7 +177,7 @@ msgstr "Komentar"
 #: templates/table/structure/check_all_table_column.phtml:28
 #: templates/table/structure/display_structure.phtml:62
 msgid "Primary"
-msgstr "Kunci Utama"
+msgstr "Utama"
 
 #: db_datadict.php:164 js/messages.php:378 libraries/Index.php:565
 #: libraries/Index.php:593 libraries/IndexColumn.php:141
@@ -244,7 +244,7 @@ msgstr "Tampilkan dump (skema) dari database"
 #: libraries/controllers/database/DatabaseStructureController.php:168
 #: libraries/navigation/NavigationTree.php:924
 msgid "No tables found in database."
-msgstr "Tabel tidak ditemukan di database."
+msgstr "Tidak ada tabel yang ditemukan di dalam database."
 
 #: db_export.php:65 libraries/ServerStatusData.php:128
 #: libraries/config/messages.inc.php:273
@@ -566,7 +566,7 @@ msgstr "Bookmark %s telah dibuat."
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
-msgstr[0] "Impor sukses, %d kueri dieksekusi."
+msgstr[0] "Import telah berhasil diselesaikan , %d kueri dieksekusi."
 
 #: import.php:612
 #, php-format
@@ -574,9 +574,9 @@ msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
 "same file%s and import will resume."
 msgstr ""
-"Batas script sudah melewati batas, jika anda ingin menyelesaikan proses "
-"import, silahkan %skirim ulang berkas yang %ssama agar proses import segera "
-"dilanjutkan."
+"Script telah melewati batas waktu, jika anda ingin menyelesaikan proses "
+"import, harap %skirim ulang berkas yang sama %s dan proses import akan "
+"berlanjut."
 
 #: import.php:622
 msgid ""
@@ -734,10 +734,10 @@ msgid ""
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
 "split strings correctly and it may result in unexpected results."
 msgstr ""
-"Ekstensi PHP mbstring tidak ditemukan dan rupanya Anda menggunakan Charset "
-"Multibyte. Tanpa ekstensi mbstring phpMyAdmin tidak sanggup untuk membagikan "
-"baris-baris dengan cara yang benar. Hal ini mampu mengakibatkan hasil yang "
-"tidak diinginkan."
+"Ekstensi PHP mbstring tidak ditemukan dan sepertinya Anda menggunakan "
+"Charset Multibyte. Tanpa ekstensi mbstring phpMyAdmin tidak dapat membagikan "
+"baris-baris dengan benar dan hal ini mampu mengakibatkan hasil yang tidak "
+"diinginkan."
 
 #: index.php:476
 msgid ""
@@ -899,7 +899,7 @@ msgstr "Anda yakin akan menghapus pengguna yang dipilih?"
 
 #: js/messages.php:75
 msgid "Do you really want to delete this central column?"
-msgstr "Apakah anda yakin untuk menghapus kolom ini?"
+msgstr "Apakah anda yakin untuk menghapus kolom utama ini?"
 
 #: js/messages.php:77
 msgid "Do you really want to delete the selected items?"
@@ -2704,7 +2704,7 @@ msgstr "Apr"
 #: js/messages.php:807 libraries/Util.php:1533
 msgctxt "Short month name"
 msgid "May"
-msgstr "Mei"
+msgstr "Bulan Mei"
 
 #. l10n: Short month name
 #: js/messages.php:809 libraries/Util.php:1535
@@ -3282,11 +3282,9 @@ msgid "accent-sensitive"
 msgstr "tidak peka aksen"
 
 #: libraries/Charsets.php:576
-#, fuzzy
-#| msgid "multilingual"
 msgctxt "Collation variant"
 msgid "multi-level"
-msgstr "banyak tingkat"
+msgstr "banyak level"
 
 #: libraries/Charsets.php:579
 msgctxt "Collation variant"
@@ -3325,12 +3323,13 @@ msgid "Font size"
 msgstr "Ukuran huruf"
 
 #: libraries/Console.php:86
-#, php-format
+#, fuzzy, php-format
 msgid "Showing %1$d bookmark (both private and shared)"
 msgid_plural "Showing %1$d bookmarks (both private and shared)"
 msgstr[0] "Menampilkan bookmark %1$d (baik privat maupun bersama)"
 
 #: libraries/Console.php:93
+#, fuzzy
 msgid "No bookmarks"
 msgstr "Tidak ada bookmark"
 
@@ -3339,10 +3338,8 @@ msgid "SQL Query Console"
 msgstr "Kotak Kueri SQL"
 
 #: libraries/DatabaseInterface.php:1418
-#, fuzzy
-#| msgid "Failed to read configuration file"
 msgid "Failed to set configured collation connection!"
-msgstr "Gagal menyetel konfigurasi pemeriksaan koneksi!"
+msgstr "Gagal untuk menyetel pemeriksaan koneksi yang telah terkonfigurasi!"
 
 #: libraries/DatabaseInterface.php:2030
 msgid ""
@@ -3663,10 +3660,8 @@ msgid "Relational key"
 msgstr "Kunci relasi"
 
 #: libraries/DisplayResults.php:1741
-#, fuzzy
-#| msgid "Display foreign key relationships"
 msgid "Display column for relationships"
-msgstr "Tampilkan kolom untuk hubungan relasi"
+msgstr "Tampilkan kolom untuk hubungan"
 
 #: libraries/DisplayResults.php:1757
 msgid "Show binary contents"
@@ -3786,9 +3781,8 @@ msgstr "Tidak ada"
 
 #. l10n: This is currently used only in Japanese locales
 #: libraries/Encoding.php:324
-#, fuzzy
 msgid "Convert to Kana"
-msgstr "Mengkonversi ke Kana"
+msgstr "Mengonversi ke Kana"
 
 #: libraries/ErrorHandler.php:76
 msgid "Too many error messages, some are not displayed."
@@ -3857,10 +3851,8 @@ msgid "Error while moving uploaded file."
 msgstr "Terjadi galat sewaktu memindahkan berkas unggahan."
 
 #: libraries/File.php:517
-#, fuzzy
-#| msgid "Cannot read (moved) upload file."
 msgid "Cannot read uploaded file."
-msgstr "Tidak bisa membaca file yang telah diunggah."
+msgstr "Tidak dapat membaca file yang telah diunggah."
 
 #: libraries/File.php:609
 #, php-format
@@ -4856,10 +4848,8 @@ msgid "Analyze Explain at %s"
 msgstr "Menganalisis Jelaskan di %s"
 
 #: libraries/Util.php:1119
-#, fuzzy
-#| msgid "Without PHP Code"
 msgid "Without PHP code"
-msgstr "Kode PHP tidak ditemukan"
+msgstr "Tanpa kode PHP"
 
 #: libraries/Util.php:1131
 #, fuzzy
@@ -5124,15 +5114,16 @@ msgid "Invalid authentication method set in configuration:"
 msgstr "Metode autentikasi dalam konfigurasi tidak sah:"
 
 #: libraries/common.inc.php:760
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Unable to use timezone %1$s for server %2$d. Please check your configuration "
 "setting for [em]$cfg['Servers'][%3$d]['SessionTimeZone'][/em]. phpMyAdmin is "
 "currently using the default time zone of the database server."
 msgstr ""
-"Tidak dapat menggunakan zona %1$s untuk server %2$d. Silakan periksa "
-"pengaturan konfigurasi untuk [em]$cfg['Servers'][%3$d]['SessionTimeZone'][/"
-"em]. phpMyAdmin saat ini menggunakan zona waktu default dari server database."
+"Tidak dapat menggunakan zona waktu %1$s untuk server %2$d. Silakan periksa "
+"pengaturan konfigurasi anda untuk "
+"[em]$cfg['Servers'][%3$d]['SessionTimeZone'][/em]. phpMyAdmin saat ini "
+"menggunakan zona waktu semula dari server database."
 
 #: libraries/common.inc.php:798
 #, php-format
@@ -5402,13 +5393,7 @@ msgid "Key should contain letters, numbers [em]and[/em] special characters."
 msgstr "Kunci harus terdiri dari huruf, angka, [em]dan[/em] karakter khusus."
 
 #: libraries/config/ServerConfigChecks.php:384
-#, fuzzy, php-format
-#| msgid ""
-#| "This %soption%s should be disabled as it allows attackers to bruteforce "
-#| "login to any MySQL server. If you feel this is necessary, use %strusted "
-#| "proxies list%s. However, IP-based protection may not be reliable if your "
-#| "IP belongs to an ISP where thousands of users, including you, are "
-#| "connected to."
+#, php-format
 msgid ""
 "This %soption%s should be disabled as it allows attackers to bruteforce "
 "login to any MySQL server. If you feel this is necessary, use %srestrict "
@@ -5416,27 +5401,23 @@ msgid ""
 "protection with trusted proxies list may not be reliable if your IP belongs "
 "to an ISP where thousands of users, including you, are connected to."
 msgstr ""
-"%soption%s ini harus di nonaktifkan karena memungkinkan penyerang untuk "
-"masuk secara membabibuta ke server MySQL. Jika Anda merasa hal ini "
-"diperlukan, gunakan %restrict login to MySQL server%s atau %strusted proxies "
-"list%s. Namun, perlindungan berbasis IP dengan daftar proxy terpercaya "
-"mungkin tidak dapat diandalkan jika IP dari ISP anda digunakan ribuan "
-"pengguna, termasuk Anda, untuk terhubung."
+"%s(1)option%s(2) ini sebaiknya di nonaktifkan karena memungkinkan penyerang "
+"untuk masuk secara bruteforce ke server MySQL. Jika Anda merasa hal ini "
+"diperlukan, gunakan %s(3)restrict login to MySQL server%s(4) atau %s(5)"
+"trusted proxies list%s(6). Bagaimanapun, perlindungan berbasis IP dengan "
+"daftar proxy terpercaya mungkin tidak dapat diandalkan jika IP mu milik ISP "
+"dimana ribuan pengguna, termasuk Anda, saling terhubung."
 
 #: libraries/config/ServerConfigChecks.php:404
-#, fuzzy
-#| msgid ""
-#| "You didn't have blowfish secret set and have enabled cookie "
-#| "authentication, so a key was automatically generated for you. It is used "
-#| "to encrypt cookies; you don't need to remember it."
 msgid ""
 "You didn't have blowfish secret set and have enabled [kbd]cookie[/kbd] "
 "authentication, so a key was automatically generated for you. It is used to "
 "encrypt cookies; you don't need to remember it."
 msgstr ""
-"Anda tidak menentukan blowfish secret dan mengaktifkan otentikasi cookie, "
-"sehingga kunci secara otomatis dihasilkan untuk Anda. Hal ini digunakan "
-"untuk mengenkripsi cookies; Anda tidak perlu mengingatnya."
+"Kamu tidak memiliki kumpulan blowfish secret dan telah mengaktifkan "
+"autentikasi [kbd]cookie[/kbd], sehingga sebuah kunci secara otomatis "
+"dihasilkan untuk Anda. Hal ini digunakan untuk mengenkripsi cookies; Anda "
+"tidak perlu mengingatnya."
 
 #: libraries/config/ServerConfigChecks.php:410
 #, php-format
@@ -5496,22 +5477,17 @@ msgstr ""
 "dengan itu."
 
 #: libraries/config/ServerConfigChecks.php:477
-#, fuzzy, php-format
-#| msgid ""
-#| "If you feel this is necessary, use additional protection settings - "
-#| "%shost authentication%s settings and %strusted proxies list%s. However, "
-#| "IP-based protection may not be reliable if your IP belongs to an ISP "
-#| "where thousands of users, including you, are connected to."
+#, php-format
 msgid ""
 "If you feel this is necessary, use additional protection settings - %shost "
 "authentication%s settings and %strusted proxies list%s. However, IP-based "
 "protection may not be reliable if your IP belongs to an ISP where thousands "
 "of users, including you, are connected to."
 msgstr ""
-"Jika anda merasa ini perlu, gunakan pengaturan perlindungan tambahan - "
+"Jika kamu merasa ini perlu, gunakan pengaturan perlindungan tambahan - "
 "pengaturan %shost authentication%s dan %strusted proxies list%s. Namun, "
-"perlindungan berbasis IP tidak dapat diandalkan jika IP dari ISP anda "
-"digunakan ribuan pengguna, termasuk anda, untuk terhubung."
+"perlindungan berbasis IP tidak dapat diandalkan jika IP mu merupakan milik "
+"ISP dimana ribuan pengguna, termasuk anda, saling terhubung."
 
 #: libraries/config/ServerConfigChecks.php:492
 #, php-format
@@ -8295,17 +8271,15 @@ msgstr "Tabel %s telah dikosongkan."
 
 #: libraries/controllers/database/DatabaseStructureController.php:596
 #: tbl_operations.php:383 view_operations.php:136
-#, fuzzy, php-format
-#| msgid "View %s has been dropped."
+#, php-format
 msgid "View %s has been dropped."
-msgstr "View %s telah dihapus"
+msgstr "Tampilan %s telah dihapus."
 
 #: libraries/controllers/database/DatabaseStructureController.php:597
 #: tbl_operations.php:384
-#, fuzzy, php-format
-#| msgid "Table %s has been dropped."
+#, php-format
 msgid "Table %s has been dropped."
-msgstr "Tabel %s telah dihapus."
+msgstr "Tabel %s telah terhapus."
 
 #: libraries/controllers/database/DatabaseStructureController.php:1001
 msgid "unknown"
@@ -8424,9 +8398,8 @@ msgid "No SQL query was set to fetch data."
 msgstr "Tidak ada query SQL ditetapkan untuk mengambil data."
 
 #: libraries/controllers/table/TableChartController.php:153
-#, fuzzy
 msgid "No numeric columns present in the table to plot."
-msgstr "Tidak ada kolom numerik yang muncul dalam tabel untuk perencanaan."
+msgstr "Tidak ada kolom numerik yang muncul dalam tabel untuk direncanakan."
 
 #: libraries/controllers/table/TableChartController.php:211
 msgid "No data to display"
@@ -8442,13 +8415,11 @@ msgstr "Tabel %1$s berhasil diubah."
 
 #: libraries/controllers/table/TableRelationController.php:212
 msgid "Display column was successfully updated."
-msgstr "Kolum layar telah sukses diupdate."
+msgstr "Kolum tampilan sukses diperbaharui."
 
 #: libraries/controllers/table/TableRelationController.php:282
-#, fuzzy
-#| msgid "Internal relation added"
 msgid "Internal relationships were successfully updated."
-msgstr "Relasi internal sukses diperbarui."
+msgstr "Hubungan internal sukses diperbarui."
 
 #: libraries/controllers/table/TableSearchController.php:768
 msgid "Table search"
@@ -8464,18 +8435,16 @@ msgid "Find and replace"
 msgstr "Cari dan Gantikan"
 
 #: libraries/controllers/table/TableStructureController.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "The name '%s' is a MySQL reserved keyword."
 msgid_plural "The names '%s' are MySQL reserved keywords."
-msgstr[0] "Nama kolom '%s' adalah kata kunci pesanan MySQL."
+msgstr[0] "Nama '%s' adalah kata kunci pesanan MySQL."
 
 #: libraries/controllers/table/TableStructureController.php:250
 msgid "No column selected."
 msgstr "Tidak ada kolom yang dipilih."
 
 #: libraries/controllers/table/TableStructureController.php:465
-#, fuzzy
-#| msgid "The selected users have been deleted successfully."
 msgid "The columns have been moved successfully."
 msgstr "Kolum telah sukses dipindahkan."
 
@@ -8521,10 +8490,8 @@ msgid "Fulltext"
 msgstr "Teks penuh"
 
 #: libraries/controllers/table/TableStructureController.php:1196
-#, fuzzy
-#| msgid "Browse distinct values"
 msgid "Distinct values"
-msgstr "Nilai berbeda"
+msgstr "Nilai yang berbeda"
 
 #: libraries/core.lib.php:297
 #, php-format
@@ -9161,29 +9128,28 @@ msgid "Index cache size"
 msgstr "Besar singgahan indeks"
 
 #: libraries/engines/Pbxt.php:31
-#, fuzzy
 msgid ""
 "This is the amount of memory allocated to the index cache. Default value is "
 "32MB. The memory allocated here is used only for caching index pages."
 msgstr ""
 "Ini adalah jumlah memori yang dialokasikan untuk cache indeks. Nilai default "
-"adalah 32MB. Memori yang dialokasikan di sini hanya digunakan untuk caching "
-"halaman indeks."
+"adalah 32MB. Memori yang dialokasikan di sini hanya digunakan untuk "
+"penyimpanan halaman indeks."
 
 #: libraries/engines/Pbxt.php:38
 msgid "Record cache size"
 msgstr "Besar singgahan data"
 
 #: libraries/engines/Pbxt.php:40
-#, fuzzy
 msgid ""
 "This is the amount of memory allocated to the record cache used to cache "
 "table data. The default value is 32MB. This memory is used to cache changes "
 "to the handle data (.xtd) and row pointer (.xtr) files."
 msgstr ""
-"Ini adalah jumlah memori yang dialokasikan untuk cache record digunakan "
-"untuk data yang tabel cache. Nilai default adalah 32MB. Memori ini digunakan "
-"untuk perubahan cache data handle (.xtd) dan baris pointer (.xtr) file."
+"Ini adalah jumlah memori yang dialokasikan untuk cache record yang digunakan "
+"untuk menyimpan data tabel. Nilai default adalah 32MB. Memori ini digunakan "
+"untuk perubahan cache kepada file data handle (.xtd) dan baris pointer "
+"(.xtr)."
 
 #: libraries/engines/Pbxt.php:48
 msgid "Log cache size"
@@ -9202,7 +9168,6 @@ msgid "Log file threshold"
 msgstr "Ambang berkas log"
 
 #: libraries/engines/Pbxt.php:59
-#, fuzzy
 msgid ""
 "The size of a transaction log before rollover, and a new log is created. The "
 "default value is 16MB."
@@ -9215,25 +9180,23 @@ msgid "Transaction buffer size"
 msgstr "Besar penyangga transaksi"
 
 #: libraries/engines/Pbxt.php:67
-#, fuzzy
 msgid ""
 "The size of the global transaction log buffer (the engine allocates 2 "
 "buffers of this size). The default is 1MB."
 msgstr ""
-"Ukuran global log transaksi penyangga (mesin mengalokasikan 2 buffer ukuran "
-"ini). Standarnya adalah 1MB."
+"Ukuran global log transaksi penyangga (mesin mengalokasikan 2 buffer dari "
+"ukuran ini). Standarnya adalah 1MB."
 
 #: libraries/engines/Pbxt.php:74
 msgid "Checkpoint frequency"
 msgstr "Frekuensi checkpoint"
 
 #: libraries/engines/Pbxt.php:76
-#, fuzzy
 msgid ""
 "The amount of data written to the transaction log before a checkpoint is "
 "performed. The default value is 24MB."
 msgstr ""
-"Jumlah data ditulis ke log transaksi sebelum pos pemeriksaan dilakukan. "
+"Jumlah data ditulis kepada log transaksi sebelum pemeriksaan dilakukan. "
 "Nilai default adalah 24MB."
 
 #: libraries/engines/Pbxt.php:83
@@ -9258,27 +9221,25 @@ msgid "Garbage threshold"
 msgstr "Ambang sampah"
 
 #: libraries/engines/Pbxt.php:96
-#, fuzzy
 msgid ""
 "The percentage of garbage in a data log file before it is compacted. This is "
 "a value between 1 and 99. The default is 50."
 msgstr ""
 "Persentase sampah dalam file log data sebelum dipadatkan. Ini adalah nilai "
-"antara 1 dan 99. Standarnya adalah 50."
+"yang berkisar antara 1 dan 99. Standarnya adalah 50."
 
 #: libraries/engines/Pbxt.php:103
 msgid "Log buffer size"
 msgstr "Besar penyangga log"
 
 #: libraries/engines/Pbxt.php:105
-#, fuzzy
 msgid ""
 "The size of the buffer used when writing a data log. The default is 256MB. "
 "The engine allocates one buffer per thread, but only if the thread is "
 "required to write a data log."
 msgstr ""
 "Ukuran buffer yang digunakan saat menulis log data. Standarnya adalah 256MB. "
-"Mesin mengalokasikan satu buffer per benang, tetapi hanya jika benang "
+"Mesin mengalokasikan satu buffer per thread, tetapi hanya jika thread "
 "diperlukan untuk menulis log data."
 
 #: libraries/engines/Pbxt.php:113
@@ -9286,44 +9247,41 @@ msgid "Data file grow size"
 msgstr "Besar pertumbuhan berkas data"
 
 #: libraries/engines/Pbxt.php:114
-#, fuzzy
 msgid "The grow size of the handle data (.xtd) files."
-msgstr "Ukuran tumbuh dari data (.xtd) file menangani."
+msgstr "Ukuran perkembangan dari file handle data (.xtd)."
 
 #: libraries/engines/Pbxt.php:118
 msgid "Row file grow size"
 msgstr "Besar pertumbuhan berkas baris"
 
 #: libraries/engines/Pbxt.php:119
-#, fuzzy
 msgid "The grow size of the row pointer (.xtr) files."
-msgstr "Ukuran tumbuh dari baris pointer (.xtr) file."
+msgstr "Ukuran perkembangan dari file row pointer (.xtr)."
 
 #: libraries/engines/Pbxt.php:123
 msgid "Log file count"
 msgstr "Jumlah berkas log"
 
 #: libraries/engines/Pbxt.php:125
-#, fuzzy
 msgid ""
 "This is the number of transaction log files (pbxt/system/xlog*.xt) the "
 "system will maintain. If the number of logs exceeds this value then old logs "
 "will be deleted, otherwise they are renamed and given the next highest "
 "number."
 msgstr ""
-"Ini adalah jumlah file log transaksi (pbxt / sistem / xlog * .xt) sistem "
-"akan mempertahankan. Jika jumlah log melebihi nilai ini maka log lama akan "
-"dihapus, jika tidak mereka berganti nama dan mengingat jumlah tertinggi "
+"Ini adalah nilai dari file log transaksi (pbxt / sistem / xlog * .xt) yang "
+"akan sistem pelihara. Jika nilai log melebihi nilai ini maka log lama akan "
+"dihapus, jika tidak mereka berganti nama dan diberikan nilai yang tertinggi "
 "berikutnya."
 
 #: libraries/engines/Pbxt.php:181
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Documentation and further information about PBXT can be found on the "
 "%sPrimeBase XT Home Page%s."
 msgstr ""
 "Dokumentasi dan informasi lebih lanjut mengenai PBXT dapat ditemukan pada %s "
-"PrimeBase XT Halaman %s."
+"Halaman PrimeBase XT  %s."
 
 #: libraries/export.lib.php:122 libraries/export.lib.php:157
 #: libraries/export.lib.php:381
@@ -9601,9 +9559,8 @@ msgid "Do you really want to execute the following query?"
 msgstr "Benarkah Anda ingin untuk "
 
 #: libraries/navigation/Navigation.php:55
-#, fuzzy
 msgid "An error has occurred while loading the navigation display"
-msgstr "Sebuah kesalahan telah terjadi saat memuat pohon navigasi"
+msgstr "Sebuah kesalahan telah terjadi saat memuat tampilan navigasi"
 
 #: libraries/navigation/Navigation.php:193
 msgid "Groups:"
@@ -9622,10 +9579,8 @@ msgid "Procedures:"
 msgstr "Prosedur:"
 
 #: libraries/navigation/Navigation.php:198
-#, fuzzy
-#| msgid "Views"
 msgid "Views:"
-msgstr "Dilihat:"
+msgstr "Penonton:"
 
 #: libraries/navigation/Navigation.php:222 libraries/tracking.lib.php:289
 #: libraries/tracking.lib.php:1601 tbl_change.php:156
@@ -9651,46 +9606,36 @@ msgid "phpMyAdmin documentation"
 msgstr "Dokumentasi phpMyAdmin"
 
 #: libraries/navigation/NavigationHeader.php:210
-#, fuzzy
-#| msgid "Navigation panel"
 msgid "Navigation panel settings"
-msgstr "Panel navigasi"
+msgstr "Pengaturan panel navigasi"
 
 #: libraries/navigation/NavigationHeader.php:221
-#, fuzzy
-#| msgid "Reload navigation frame"
 msgid "Reload navigation panel"
-msgstr "Muat ulang bingkai navigasi"
+msgstr "Muat ulang panel navigasi"
 
 #: libraries/navigation/NavigationTree.php:755
-#, fuzzy
 msgid ""
 "There are large item groups in navigation panel which may affect the "
 "performance. Consider disabling item grouping in the navigation panel."
 msgstr ""
-"Ada kelompok barang besar di panel navigasi yang dapat mempengaruhi kinerja. "
-"Mempertimbangkan untuk menonaktifkan barang pengelompokan di panel navigasi."
+"Terdapat grup item besar di panel navigasi yang dapat mempengaruhi kinerja. "
+"Pertimbangkan untuk menonaktifkan pengelompokan barang di panel navigasi."
 
 #: libraries/navigation/NavigationTree.php:949
-#, fuzzy, php-format
-#| msgid "%s other result found"
-#| msgid_plural "%s other results found"
+#, php-format
 msgid "%s result found"
 msgid_plural "%s results found"
-msgstr[0] "%s hasil lainnya ditemukan"
+msgstr[0] "ditemukan %s hasil"
 
 #: libraries/navigation/NavigationTree.php:1366
 #: libraries/navigation/NavigationTree.php:1398
-#, fuzzy
 msgid "Type to filter these, Enter to search all"
-msgstr "Ketik untuk menyaring ini, Enter untuk mencari semua"
+msgstr "Ketik untuk menyaring ini, tekan Enter untuk mencari semua"
 
 #: libraries/navigation/NavigationTree.php:1368
 #: libraries/navigation/NavigationTree.php:1399
-#, fuzzy
-#| msgid "Clear series"
 msgid "Clear fast filter"
-msgstr "Bersihkan seri"
+msgstr "Bersihkan filter cepat"
 
 #: libraries/navigation/NavigationTree.php:1425
 #, fuzzy
@@ -9699,9 +9644,9 @@ msgstr "Tutup semua"
 
 #. l10n: The word "Node" must not be translated here
 #: libraries/navigation/NodeFactory.php:34
-#, fuzzy, php-format
+#, php-format
 msgid "Invalid class name \"%1$s\", using default of \"Node\""
-msgstr "Nama kelas tidak valid \"%1$s\", menggunakan default \"Node\""
+msgstr "Nama kelas tidak valid \"%1$s\", menggunakan standar \"Node\""
 
 #: libraries/navigation/NodeFactory.php:61
 #, fuzzy, php-format
@@ -9710,9 +9655,8 @@ msgid "Could not load class \"%1$s\""
 msgstr "Tidak dapat menambah kolom!"
 
 #: libraries/navigation/nodes/Node.php:798
-#, fuzzy
 msgid "Expand/Collapse"
-msgstr "Bentangkan/Collapse"
+msgstr "Bentangkan/Tutup"
 
 #: libraries/navigation/nodes/NodeColumnContainer.php:26
 #: libraries/navigation/nodes/NodeColumnContainer.php:27
@@ -9734,10 +9678,8 @@ msgid "Database operations"
 msgstr "Opsi ekspor basis data"
 
 #: libraries/navigation/nodes/NodeDatabase.php:684
-#, fuzzy
-#| msgid "Show hint"
 msgid "Show hidden items"
-msgstr "Tampilkan petunjuk"
+msgstr "Tampilkan item tersembunyi"
 
 #: libraries/navigation/nodes/NodeDatabaseContainer.php:36
 #, fuzzy
@@ -10694,18 +10636,14 @@ msgstr "Inang"
 #: libraries/plugins/export/ExportLatex.php:218
 #: libraries/plugins/export/ExportSql.php:697
 #: libraries/plugins/export/ExportXml.php:240
-#, fuzzy
-#| msgid "Generation Time"
 msgid "Generation Time:"
-msgstr "Waktu pembuatan"
+msgstr "Waktu pembuatan:"
 
 #: libraries/plugins/export/ExportLatex.php:221
 #: libraries/plugins/export/ExportSql.php:703
 #: libraries/plugins/export/ExportXml.php:243
-#, fuzzy
-#| msgid "PHP Version"
 msgid "PHP Version:"
-msgstr "Versi PHP"
+msgstr "Versi PHP:"
 
 #: libraries/plugins/export/ExportLatex.php:251
 #: libraries/plugins/export/ExportSql.php:892
@@ -10718,16 +10656,12 @@ msgstr "Basis data"
 
 #: libraries/plugins/export/ExportLatex.php:324
 #: libraries/plugins/export/ExportSql.php:2185
-#, fuzzy
-#| msgid "Data"
 msgid "Data:"
-msgstr "Data"
+msgstr "Data:"
 
 #: libraries/plugins/export/ExportLatex.php:504
-#, fuzzy
-#| msgid "Structure"
 msgid "Structure:"
-msgstr "Struktur"
+msgstr "Struktur:"
 
 #: libraries/plugins/export/ExportMediawiki.php:79
 #, fuzzy
@@ -10819,10 +10753,9 @@ msgid "(less efficient as indexes will be generated during table creation)"
 msgstr "(Kurang efisien sebagai indeks akan dihasilkan selama pembuatan tabel)"
 
 #: libraries/plugins/export/ExportSql.php:294
-#, fuzzy, php-format
-#| msgid "Session value"
+#, php-format
 msgid "%s value"
-msgstr "Nilai sesi"
+msgstr "Nilai %s"
 
 #: libraries/plugins/export/ExportSql.php:328
 #, fuzzy
@@ -10995,10 +10928,8 @@ msgid "Indexes for dumped tables"
 msgstr "Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)"
 
 #: libraries/plugins/export/ExportSql.php:1751
-#, fuzzy
-#| msgid "Inside tables:"
 msgid "Indexes for table"
-msgstr "Dalam tabel:"
+msgstr "Indeks untuk tabel"
 
 #: libraries/plugins/export/ExportSql.php:1779
 #, fuzzy
@@ -11187,10 +11118,8 @@ msgid "MySQL Spatial Extension does not support ESRI type \"%s\"."
 msgstr "MySQL Spatial Ekstensi tidak mendukung ESRI Jenis \"%s\"."
 
 #: libraries/plugins/import/ImportShp.php:230
-#, fuzzy
-#| msgid "The imported file does not contain any data"
 msgid "The imported file does not contain any data!"
-msgstr "Berkas yang diimpor tidak mengandung data"
+msgstr "Berkas yang diimpor tidak mengandung data!"
 
 #: libraries/plugins/import/ImportSql.php:67
 msgid "SQL compatibility mode:"
@@ -11252,16 +11181,12 @@ msgid "Order of the tables"
 msgstr "tidak keduanya dari yang di atas"
 
 #: libraries/plugins/schema/SchemaPdf.php:104
-#, fuzzy
-#| msgid "Ascending"
 msgid "Name (Ascending)"
-msgstr "Menaik"
+msgstr "Nama (Menaik)"
 
 #: libraries/plugins/schema/SchemaPdf.php:105
-#, fuzzy
-#| msgid "Descending"
 msgid "Name (Descending)"
-msgstr "Menurun"
+msgstr "Nama (Menurun)"
 
 #: libraries/plugins/schema/dia/TableStatsDia.php:74
 #: libraries/plugins/schema/eps/TableStatsEps.php:92
@@ -12327,7 +12252,7 @@ msgstr "Routine %1$s telah diubah."
 #: libraries/rte/rte_routines.lib.php:440
 #, php-format
 msgid "Routine %1$s has been modified."
-msgstr "Routine %1$s telah diubah."
+msgstr "Routine %1$s telah dimodifikasi."
 
 #: libraries/rte/rte_routines.lib.php:893
 msgid "Routine name"
@@ -16647,10 +16572,8 @@ msgid "Reset zoom"
 msgstr "Set ulang pembesaran"
 
 #: templates/table/secondary_tabs.phtml:14
-#, fuzzy
-#| msgid "Relation view"
 msgid "Relation view"
-msgstr "Tampilan relasi"
+msgstr "Tampilan hubungan"
 
 #: templates/table/structure/actions_in_table_structure.phtml:15
 #, php-format
@@ -17688,8 +17611,8 @@ msgid ""
 "%s%% of all temporary tables are being written to disk, this value should be "
 "below 25%%"
 msgstr ""
-"%s%% dari semua tabel sementara yang sedang ditulis ke disk, nilai ini "
-"seharusnya kurang dari 25%%"
+"%s%% dari semua tabel sementara sedang ditulis ke disk, nilai ini seharusnya "
+"kurang dari 25%%"
 
 #: libraries/advisory_rules.txt:269
 msgid "Temp disk rate"
