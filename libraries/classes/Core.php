@@ -692,7 +692,7 @@ class Core
         parse_str($arr["query"], $vars);
         $query = http_build_query(array("url" => $vars["url"]));
 
-        if ($GLOBALS['PMA_Config']->get('is_setup')) {
+        if (!is_null($GLOBALS['PMA_Config']) && $GLOBALS['PMA_Config']->get('is_setup')) {
             $url = '../url.php?' . $query;
         } else {
             $url = './url.php?' . $query;
@@ -931,6 +931,13 @@ class Core
         if (! function_exists('json_encode')) {
             self::warnMissingExtension('json', true);
         }
+
+        /**
+         * ctype is required for Twig.
+         */
+        if (! function_exists('ctype_alpha')) {
+            self::warnMissingExtension('ctype', true);
+        }
     }
 
     /**
@@ -1098,5 +1105,71 @@ class Core
         }
 
         return unserialize($data);
+    }
+
+    /**
+     * Applies changes to PHP configuration.
+     *
+     * @return void
+     */
+    public static function configure()
+    {
+        /**
+         * Set utf-8 encoding for PHP
+         */
+        ini_set('default_charset', 'utf-8');
+        mb_internal_encoding('utf-8');
+
+        /**
+         * Set precision to sane value, with higher values
+         * things behave slightly unexpectedly, for example
+         * round(1.2, 2) returns 1.199999999999999956.
+         */
+        ini_set('precision', 14);
+
+        /**
+         * check timezone setting
+         * this could produce an E_WARNING - but only once,
+         * if not done here it will produce E_WARNING on every date/time function
+         */
+        date_default_timezone_set(@date_default_timezone_get());
+    }
+
+    /**
+     * Check whether PHP configuration matches our needs.
+     *
+     * @return void
+     */
+    public static function checkConfiguration()
+    {
+        /**
+         * As we try to handle charsets by ourself, mbstring overloads just
+         * break it, see bug 1063821.
+         *
+         * We specifically use empty here as we are looking for anything else than
+         * empty value or 0.
+         */
+        if (@extension_loaded('mbstring') && !empty(@ini_get('mbstring.func_overload'))) {
+            self::fatalError(
+                __(
+                    'You have enabled mbstring.func_overload in your PHP '
+                    . 'configuration. This option is incompatible with phpMyAdmin '
+                    . 'and might cause some data to be corrupted!'
+                )
+            );
+        }
+
+        /**
+         * The ini_set and ini_get functions can be disabled using
+         * disable_functions but we're relying quite a lot of them.
+         */
+        if (! function_exists('ini_get') || ! function_exists('ini_set')) {
+            self::fatalError(
+                __(
+                    'You have disabled ini_get and/or ini_set in php.ini. '
+                    . 'This option is incompatible with phpMyAdmin!'
+                )
+            );
+        }
     }
 }

@@ -109,17 +109,9 @@ $GLOBALS['error_handler'] = new ErrorHandler();
 Core::checkExtensions();
 
 /**
- * Set utf-8 encoding for PHP
+ * Configure required PHP settings.
  */
-ini_set('default_charset', 'utf-8');
-mb_internal_encoding('utf-8');
-
-/**
- * Set precision to sane value, with higher values
- * things behave slightly unexpectedly, for example
- * round(1.2, 2) returns 1.199999999999999956.
- */
-ini_set('precision', 14);
+Core::configure();
 
 /******************************************************************************/
 /* start procedural code                       label_start_procedural         */
@@ -206,12 +198,6 @@ if (isset($_POST['usesubform']) && ! defined('PMA_MINIMUM_COMMON')) {
 }
 // end check if a subform is submitted
 
-/**
- * check timezone setting
- * this could produce an E_WARNING - but only once,
- * if not done here it will produce E_WARNING on every date/time function
- */
-date_default_timezone_set(@date_default_timezone_get());
 
 /******************************************************************************/
 /* parsing configuration file                  LABEL_parsing_config_file      */
@@ -455,35 +441,7 @@ if ($GLOBALS['text_dir'] == 'ltr') {
 $GLOBALS['PMA_Config']->checkPermissions();
 $GLOBALS['PMA_Config']->checkErrors();
 
-/**
- * As we try to handle charsets by ourself, mbstring overloads just
- * break it, see bug 1063821.
- *
- * We specifically use empty here as we are looking for anything else than
- * empty value or 0.
- */
-if (@extension_loaded('mbstring') && !empty(@ini_get('mbstring.func_overload'))) {
-    Core::fatalError(
-        __(
-            'You have enabled mbstring.func_overload in your PHP '
-            . 'configuration. This option is incompatible with phpMyAdmin '
-            . 'and might cause some data to be corrupted!'
-        )
-    );
-}
-
-/**
- * The ini_set and ini_get functions can be disabled using
- * disable_functions but we're relying quite a lot of them.
- */
-if (! function_exists('ini_get') || ! function_exists('ini_set')) {
-    Core::fatalError(
-        __(
-            'You have disabled ini_get and/or ini_set in php.ini. '
-            . 'This option is incompatible with phpMyAdmin!'
-        )
-    );
-}
+Core::checkConfiguration();
 
 /******************************************************************************/
 /* setup servers                                       LABEL_setup_servers    */
