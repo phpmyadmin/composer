@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.8.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2017-08-10 09:14-0400\n"
-"PO-Revision-Date: 2017-09-04 07:56+0000\n"
-"Last-Translator: worw <weblate@bzx2.com>\n"
+"PO-Revision-Date: 2017-09-05 12:05+0000\n"
+"Last-Translator: pitchblack <pitchblack@mail.ru>\n"
 "Language-Team: Russian "
 "<https://hosted.weblate.org/projects/phpmyadmin/master/ru/>\n"
 "Language: ru\n"
@@ -304,6 +304,8 @@ msgstr "Не указано имя базы данных!"
 #: db_operations.php:53
 msgid "Cannot copy database to the same name. Change the name and try again."
 msgstr ""
+"Невозможно скопировать базу данных с тем же именем. Измените имя и повторите "
+"попытку."
 
 #: db_operations.php:142
 #, php-format
@@ -612,6 +614,8 @@ msgid ""
 "You were logged out from one server, to logout completely from phpMyAdmin, "
 "you need to logout from all servers."
 msgstr ""
+"Вы вышли из одного сервера, чтобы полностью выйти из phpMyAdmin, вам нужно "
+"выйти со всех серверов."
 
 #: index.php:162 libraries/classes/Footer.php:74
 msgid "phpMyAdmin Demo Server"
@@ -663,10 +667,8 @@ msgid "Server type:"
 msgstr "Тип сервера:"
 
 #: index.php:310
-#, fuzzy
-#| msgid "Master connection:"
 msgid "Server connection:"
-msgstr "Главное соединение:"
+msgstr "Соединение сервера:"
 
 #: index.php:314 libraries/classes/Plugins/Export/ExportLatex.php:221
 #: libraries/classes/Plugins/Export/ExportSql.php:702
@@ -833,6 +835,8 @@ msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
 "templates and will be slow because of this."
 msgstr ""
+"$Cfg['TempDir'] (%s) недоступен. Из-за этого phpMyAdmin не может кэшировать "
+"шаблоны и будет медленным."
 
 #: js/messages.php:43
 msgid "Confirm"
@@ -850,6 +854,8 @@ msgstr "База данных будет полностью УДАЛЕНА!"
 #: js/messages.php:48
 msgid "Cannot rename database to the same name. Change the name and try again"
 msgstr ""
+"Невозможно переименовать базу данных с тем же именем. Измените имя и "
+"повторите попытку"
 
 #: js/messages.php:50
 msgid "You are about to DESTROY a complete table!"
@@ -1541,22 +1547,16 @@ msgid "Chart"
 msgstr "График"
 
 #: js/messages.php:295 libraries/display_export.lib.php:905
-#, fuzzy
-#| msgid "Database"
 msgctxt "Alias"
 msgid "Database"
 msgstr "База данных"
 
 #: js/messages.php:296 libraries/display_export.lib.php:917
-#, fuzzy
-#| msgid "Table"
 msgctxt "Alias"
 msgid "Table"
 msgstr "Таблица"
 
 #: js/messages.php:297 libraries/display_export.lib.php:928
-#, fuzzy
-#| msgid "Column"
 msgctxt "Alias"
 msgid "Column"
 msgstr "Столбец"
@@ -1747,10 +1747,8 @@ msgid "No databases selected."
 msgstr "Ни одна база данных не выбрана."
 
 #: js/messages.php:366
-#, fuzzy
-#| msgid "No column selected."
 msgid "No accounts selected."
-msgstr "Не выбран столбец."
+msgstr "Не выбрано учетных записей."
 
 #: js/messages.php:367
 msgid "Dropping column"
@@ -1843,6 +1841,7 @@ msgstr "Экспорт"
 #: js/messages.php:397
 msgid "No routine is exportable. Required privileges may be lacking."
 msgstr ""
+"Никакой шаблон не экспортируется. Необходимые привилегии могут отсутствовать."
 
 #: js/messages.php:400 libraries/rte/rte_routines.lib.php:747
 msgid "ENUM/SET editor"
@@ -2206,12 +2205,16 @@ msgid ""
 "MySQL accepts additional values not selectable by the slider; key in those "
 "values directly if desired"
 msgstr ""
+"MySQL принимает дополнительные значения, которые нельзя выбрать с помощью "
+"ползунка; введите эти значения непосредственно при необходимости"
 
 #: js/messages.php:536
 msgid ""
 "MySQL accepts additional values not selectable by the datepicker; key in "
 "those values directly if desired"
 msgstr ""
+"MySQL принимает дополнительные значения, недоступные для выбора даты; "
+"введите эти значения непосредственно при необходимости"
 
 #: js/messages.php:542
 msgid ""
@@ -2620,7 +2623,6 @@ msgid "Add table prefix"
 msgstr "Добавить префикс таблицы"
 
 #: js/messages.php:730
-#, fuzzy
 msgid "Replace table with prefix"
 msgstr "Заменить префикс таблицы"
 
@@ -3141,10 +3143,9 @@ msgid "Attributes"
 msgstr "Атрибуты"
 
 #: libraries/classes/Advisor.php:243
-#, fuzzy, php-format
-#| msgid "Error while creating PDF:"
+#, php-format
 msgid "Error when evaluating: %s"
-msgstr "Ошибка при создании PDF:"
+msgstr "Ошибка при оценке: %s"
 
 #: libraries/classes/Advisor.php:274
 #, php-format
@@ -3167,7 +3168,7 @@ msgid "Failed formatting string for rule '%s'."
 msgstr "Не удалось форматировать строку для правила '%s'."
 
 #: libraries/classes/Advisor.php:490
-#, fuzzy, php-format
+#, php-format
 msgid "Error in reading file: The file '%s' does not exist or is not readable!"
 msgstr ""
 "Ошибка чтения файла: Файл '%s' не существует или не доступен для чтения!"
@@ -3221,373 +3222,270 @@ msgid "Charset"
 msgstr "Кодировка"
 
 #: libraries/classes/Charsets.php:265
-#, fuzzy
-#| msgid "unknown"
 msgid "Unknown"
 msgstr "неизвестно"
 
 #: libraries/classes/Charsets.php:279
-#, fuzzy
-#| msgid "Binary"
 msgctxt "Collation"
 msgid "Binary"
 msgstr "Двоичный"
 
 #: libraries/classes/Charsets.php:291 libraries/classes/Charsets.php:521
-#, fuzzy
-#| msgid "Unicode"
 msgctxt "Collation"
 msgid "Unicode"
 msgstr "Юникод"
 
 #: libraries/classes/Charsets.php:301 libraries/classes/Charsets.php:472
-#, fuzzy
-#| msgid "West European"
 msgctxt "Collation"
 msgid "West European"
 msgstr "Западно-Европейский"
 
 #: libraries/classes/Charsets.php:308
-#, fuzzy
-#| msgid "Central European"
 msgctxt "Collation"
 msgid "Central European"
 msgstr "Центрально-Европейский"
 
 #: libraries/classes/Charsets.php:313
-#, fuzzy
-#| msgid "Russian"
 msgctxt "Collation"
 msgid "Russian"
 msgstr "Русский"
 
 #: libraries/classes/Charsets.php:318
-#, fuzzy
-#| msgid "Simplified Chinese"
 msgctxt "Collation"
 msgid "Simplified Chinese"
 msgstr "Китайский упрощенный"
 
 #: libraries/classes/Charsets.php:325 libraries/classes/Charsets.php:443
-#, fuzzy
-#| msgid "Japanese"
 msgctxt "Collation"
 msgid "Japanese"
 msgstr "Японский"
 
 #: libraries/classes/Charsets.php:330
-#, fuzzy
-#| msgid "Baltic"
 msgctxt "Collation"
 msgid "Baltic"
 msgstr "Балтийский"
 
 #: libraries/classes/Charsets.php:335
-#, fuzzy
-#| msgid "Armenian"
 msgctxt "Collation"
 msgid "Armenian"
 msgstr "Армянский"
 
 #: libraries/classes/Charsets.php:338
-#, fuzzy
-#| msgid "Traditional Chinese"
 msgctxt "Collation"
 msgid "Traditional Chinese"
 msgstr "Китайский традиционный"
 
 #: libraries/classes/Charsets.php:341
-#, fuzzy
-#| msgid "Cyrillic"
 msgctxt "Collation"
 msgid "Cyrillic"
 msgstr "Кириллический"
 
 #: libraries/classes/Charsets.php:344
-#, fuzzy
-#| msgid "Arabic"
 msgctxt "Collation"
 msgid "Arabic"
 msgstr "Арабский"
 
 #: libraries/classes/Charsets.php:347 libraries/classes/Charsets.php:458
-#, fuzzy
-#| msgid "Korean"
 msgctxt "Collation"
 msgid "Korean"
 msgstr "Корейский"
 
 #: libraries/classes/Charsets.php:350
-#, fuzzy
-#| msgid "Hebrew"
 msgctxt "Collation"
 msgid "Hebrew"
 msgstr "Иврит"
 
 #: libraries/classes/Charsets.php:353
-#, fuzzy
-#| msgid "Georgian"
 msgctxt "Collation"
 msgid "Georgian"
 msgstr "Грузинский"
 
 #: libraries/classes/Charsets.php:356
-#, fuzzy
-#| msgid "Greek"
 msgctxt "Collation"
 msgid "Greek"
 msgstr "Греческий"
 
 #: libraries/classes/Charsets.php:359
-#, fuzzy
-#| msgid "Czech-Slovak"
 msgctxt "Collation"
 msgid "Czech-Slovak"
 msgstr "Чехословацкий"
 
 #: libraries/classes/Charsets.php:362 libraries/classes/Charsets.php:513
-#, fuzzy
-#| msgid "Ukrainian"
 msgctxt "Collation"
 msgid "Ukrainian"
 msgstr "Украинский"
 
 #: libraries/classes/Charsets.php:365 libraries/classes/Charsets.php:509
-#, fuzzy
-#| msgid "Turkish"
 msgctxt "Collation"
 msgid "Turkish"
 msgstr "Турецкий"
 
 #: libraries/classes/Charsets.php:368 libraries/classes/Charsets.php:501
-#, fuzzy
-#| msgid "Swedish"
 msgctxt "Collation"
 msgid "Swedish"
 msgstr "Шведский"
 
 #: libraries/classes/Charsets.php:371 libraries/classes/Charsets.php:505
-#, fuzzy
-#| msgid "Thai"
 msgctxt "Collation"
 msgid "Thai"
 msgstr "Таи"
 
 #: libraries/classes/Charsets.php:374
-#, fuzzy
-#| msgid "unknown"
 msgctxt "Collation"
 msgid "Unknown"
 msgstr "неизвестно"
 
 #: libraries/classes/Charsets.php:390
-#, fuzzy
-#| msgid "Bulgarian"
 msgctxt "Collation"
 msgid "Bulgarian"
 msgstr "Болгарский"
 
 #: libraries/classes/Charsets.php:395
-#, fuzzy
 msgctxt "Collation"
 msgid "Chinese"
 msgstr "Китайский"
 
 #: libraries/classes/Charsets.php:400
-#, fuzzy
-#| msgid "Croatian"
 msgctxt "Collation"
 msgid "Croatian"
 msgstr "Хорватский"
 
 #: libraries/classes/Charsets.php:404
-#, fuzzy
-#| msgid "Czech"
 msgctxt "Collation"
 msgid "Czech"
 msgstr "Чешский"
 
 #: libraries/classes/Charsets.php:408
-#, fuzzy
-#| msgid "Danish"
 msgctxt "Collation"
 msgid "Danish"
 msgstr "Датский"
 
 #: libraries/classes/Charsets.php:412
-#, fuzzy
-#| msgid "English"
 msgctxt "Collation"
 msgid "English"
 msgstr "Английский"
 
 #: libraries/classes/Charsets.php:416
-#, fuzzy
-#| msgid "Esperanto"
 msgctxt "Collation"
 msgid "Esperanto"
 msgstr "Эсперанто"
 
 #: libraries/classes/Charsets.php:420
-#, fuzzy
-#| msgid "Estonian"
 msgctxt "Collation"
 msgid "Estonian"
 msgstr "Эстонский"
 
 #: libraries/classes/Charsets.php:423 libraries/classes/Charsets.php:540
-#, fuzzy
-#| msgid "Data dictionary"
 msgctxt "Collation"
 msgid "German (dictionary order)"
-msgstr "Словарь данных"
+msgstr "Немецкий (порядок словаря)"
 
 #: libraries/classes/Charsets.php:426 libraries/classes/Charsets.php:537
-#, fuzzy
 msgctxt "Collation"
 msgid "German (phone book order)"
 msgstr "Немецкий (порядок телефонной книги)"
 
 #: libraries/classes/Charsets.php:435
-#, fuzzy
-#| msgid "Hungarian"
 msgctxt "Collation"
 msgid "Hungarian"
 msgstr "Венгерский"
 
 #: libraries/classes/Charsets.php:439
-#, fuzzy
-#| msgid "Icelandic"
 msgctxt "Collation"
 msgid "Icelandic"
 msgstr "Исландский"
 
 #: libraries/classes/Charsets.php:446
-#, fuzzy
 msgctxt "Collation"
 msgid "Classical Latin"
 msgstr "Классическая латынь"
 
 #: libraries/classes/Charsets.php:450
-#, fuzzy
-#| msgid "Latvian"
 msgctxt "Collation"
 msgid "Latvian"
 msgstr "Латвийский"
 
 #: libraries/classes/Charsets.php:454
-#, fuzzy
-#| msgid "Lithuanian"
 msgctxt "Collation"
 msgid "Lithuanian"
 msgstr "Литовский"
 
 #: libraries/classes/Charsets.php:462
-#, fuzzy
 msgctxt "Collation"
 msgid "Burmese"
 msgstr "Бирманский"
 
 #: libraries/classes/Charsets.php:465
-#, fuzzy
-#| msgid "Persian"
 msgctxt "Collation"
 msgid "Persian"
 msgstr "Персидский"
 
 #: libraries/classes/Charsets.php:469
-#, fuzzy
-#| msgid "Polish"
 msgctxt "Collation"
 msgid "Polish"
 msgstr "Польский"
 
 #: libraries/classes/Charsets.php:476
-#, fuzzy
-#| msgid "Romanian"
 msgctxt "Collation"
 msgid "Romanian"
 msgstr "Румынский"
 
 #: libraries/classes/Charsets.php:480
-#, fuzzy
-#| msgid "Sinhalese"
 msgctxt "Collation"
 msgid "Sinhalese"
 msgstr "Сингальский"
 
 #: libraries/classes/Charsets.php:484
-#, fuzzy
-#| msgid "Slovak"
 msgctxt "Collation"
 msgid "Slovak"
 msgstr "Словацкий"
 
 #: libraries/classes/Charsets.php:488
-#, fuzzy
-#| msgid "Slovenian"
 msgctxt "Collation"
 msgid "Slovenian"
 msgstr "Словенский"
 
 #: libraries/classes/Charsets.php:491 libraries/classes/Charsets.php:551
-#, fuzzy
-#| msgid "Spanish"
 msgctxt "Collation"
 msgid "Spanish (modern)"
 msgstr "Испанский"
 
 #: libraries/classes/Charsets.php:498 libraries/classes/Charsets.php:548
-#, fuzzy
 msgctxt "Collation"
 msgid "Spanish (traditional)"
 msgstr "Испанский (традиционный)"
 
 #: libraries/classes/Charsets.php:517
-#, fuzzy
-#| msgid "Vietnamese"
 msgctxt "Collation"
 msgid "Vietnamese"
 msgstr "Вьетнамский"
 
 #: libraries/classes/Charsets.php:584
-#, fuzzy
-#| msgid "case-insensitive"
 msgctxt "Collation variant"
 msgid "case-insensitive"
 msgstr "регистронезависимый"
 
 #: libraries/classes/Charsets.php:587
-#, fuzzy
-#| msgid "case-sensitive"
 msgctxt "Collation variant"
 msgid "case-sensitive"
 msgstr "регистрозависымый"
 
 #: libraries/classes/Charsets.php:590
-#, fuzzy
-#| msgid "case-insensitive"
 msgctxt "Collation variant"
 msgid "accent-insensitive"
-msgstr "регистронезависимый"
+msgstr "акцент нечувствительный"
 
 #: libraries/classes/Charsets.php:593
-#, fuzzy
-#| msgid "case-sensitive"
 msgctxt "Collation variant"
 msgid "accent-sensitive"
-msgstr "регистрозависымый"
+msgstr "акцент чувствительный"
 
 #: libraries/classes/Charsets.php:597
-#, fuzzy
-#| msgid "multilingual"
 msgctxt "Collation variant"
 msgid "multi-level"
-msgstr "многоязычный"
+msgstr "многоуровневый"
 
 #: libraries/classes/Charsets.php:600
-#, fuzzy
-#| msgid "Binary"
 msgctxt "Collation variant"
 msgid "binary"
 msgstr "Двоичный"
@@ -3699,11 +3597,8 @@ msgid "You allow for connecting to the server without a password."
 msgstr "Вы разрешаете соединение с сервером без пароля."
 
 #: libraries/classes/Config/ServerConfigChecks.php:338
-#, fuzzy
-#| msgid "Key is too short, it should have at least 8 characters."
 msgid "Key is too short, it should have at least 32 characters."
-msgstr ""
-"Ключ кодирования слишком короткий, он должен содержать не менее 8 символов."
+msgstr "Ключ слишком короткий, он должен содержать не менее 32 символов."
 
 #: libraries/classes/Config/ServerConfigChecks.php:348
 msgid "Key should contain letters, numbers [em]and[/em] special characters."
@@ -3890,9 +3785,9 @@ msgstr "Некорректно введен IP адрес: %s"
 #, php-format
 msgid "Showing %1$d bookmark (both private and shared)"
 msgid_plural "Showing %1$d bookmarks (both private and shared)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Показать %1$d закладку (как частных, так и общих)"
+msgstr[1] "Показать %1$d закладки (как частных, так и общих)"
+msgstr[2] "Показать %1$d закладок (как частных, так и общих)"
 
 #: libraries/classes/Console.php:94
 msgid "No bookmarks"
@@ -4140,8 +4035,6 @@ msgid "Your SQL query has been executed successfully."
 msgstr "SQL-запрос успешно выполнен."
 
 #: libraries/classes/Controllers/Table/TableRelationController.php:280
-#, fuzzy
-#| msgid "Internal relations were successfully updated."
 msgid "Internal relationships were successfully updated."
 msgstr "Внутренние связи были успешно обновлены."
 
@@ -4239,9 +4132,8 @@ msgid "No change"
 msgstr "Нет изменений"
 
 #: libraries/classes/DatabaseInterface.php:1439
-#, fuzzy
 msgid "Failed to set configured collation connection!"
-msgstr "Ошибка при чтении конфигурационного файла!"
+msgstr "Не удалось установить настроенное соединение для сопоставления!"
 
 #: libraries/classes/DatabaseInterface.php:2051
 msgid ""
@@ -4256,7 +4148,7 @@ msgstr "Сервер не отвечает."
 
 #: libraries/classes/DatabaseInterface.php:2060
 msgid "Logout and try as another user."
-msgstr ""
+msgstr "Выйдите из системы и попробуйте другим пользователем."
 
 #: libraries/classes/DatabaseInterface.php:2066
 msgid "Please check privileges of directory containing database."
@@ -4267,9 +4159,8 @@ msgid "Details…"
 msgstr "Детали…"
 
 #: libraries/classes/DatabaseInterface.php:2375
-#, fuzzy
 msgid "Missing connection parameters!"
-msgstr "Отсутствующий параметр:"
+msgstr "Отсутствуют параметры подключения!"
 
 #: libraries/classes/DatabaseInterface.php:2399
 msgid "Connection for controluser as defined in your configuration failed."
@@ -4378,22 +4269,16 @@ msgid "at least one of the words"
 msgstr "любое из слов"
 
 #: libraries/classes/DbSearch.php:88
-#, fuzzy
-#| msgid "at least one of the words"
 msgid "all of the words"
-msgstr "любое из слов"
+msgstr "все слова"
 
 #: libraries/classes/DbSearch.php:89
-#, fuzzy
-#| msgid "the exact phrase"
 msgid "the exact phrase as substring"
-msgstr "точное соответствие"
+msgstr "точное соответствие как подстрока"
 
 #: libraries/classes/DbSearch.php:90
-#, fuzzy
-#| msgid "the exact phrase"
 msgid "the exact phrase as whole field"
-msgstr "точное соответствие"
+msgstr "точное соответствие как целое поле"
 
 #: libraries/classes/DbSearch.php:91
 msgid "as regular expression"
@@ -4462,7 +4347,7 @@ msgstr "В поле:"
 
 #: libraries/classes/Dbi/DbiMysqli.php:158
 msgid "SSL connection enforced by server, automatically enabling it."
-msgstr ""
+msgstr "SSL-соединение, выполняемое сервером, автоматически включающее его."
 
 #: libraries/classes/DisplayResults.php:910
 msgid "Save edited data"
@@ -4543,9 +4428,8 @@ msgid "Relational key"
 msgstr "Ссылочный ключ"
 
 #: libraries/classes/DisplayResults.php:1749
-#, fuzzy
 msgid "Display column for relationships"
-msgstr "Отобразить связи внешних ключей"
+msgstr "Отобразить столбец для ссылок"
 
 #: libraries/classes/DisplayResults.php:1765
 msgid "Show binary contents"
@@ -5054,7 +4938,6 @@ msgid "Unknown error in file upload."
 msgstr "При время загрузке файла произошла неизвестная ошибка."
 
 #: libraries/classes/File.php:449
-#, fuzzy
 msgid "File is a symbolic link"
 msgstr "Файл является символической ссылкой"
 
@@ -5228,7 +5111,7 @@ msgstr "Таблица"
 #: libraries/classes/Menu.php:289 libraries/classes/Menu.php:308
 #, php-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: libraries/classes/Menu.php:357 libraries/classes/Menu.php:460
 #: libraries/classes/Menu.php:573
@@ -5443,9 +5326,8 @@ msgid "Log out"
 msgstr "Выход"
 
 #: libraries/classes/Navigation/NavigationHeader.php:172
-#, fuzzy
 msgid "Empty session data"
-msgstr "Дамп данных"
+msgstr "Пустые данные сеанса"
 
 #: libraries/classes/Navigation/NavigationHeader.php:190
 msgid "phpMyAdmin documentation"
@@ -5464,6 +5346,9 @@ msgid ""
 "There are large item groups in navigation panel which may affect the "
 "performance. Consider disabling item grouping in the navigation panel."
 msgstr ""
+"На панели навигации есть большие группы элементов, которые могут повлиять на "
+"производительность. Рассмотрите возможность отключения группировки элементов "
+"на панели навигации."
 
 #: libraries/classes/Navigation/NavigationTree.php:949
 #, php-format
@@ -5476,7 +5361,7 @@ msgstr[2] "найдено %s результатов"
 #: libraries/classes/Navigation/NavigationTree.php:1366
 #: libraries/classes/Navigation/NavigationTree.php:1398
 msgid "Type to filter these, Enter to search all"
-msgstr ""
+msgstr "Введите, чтобы отфильтровать их, Enter для поиска всех"
 
 #: libraries/classes/Navigation/NavigationTree.php:1368
 #: libraries/classes/Navigation/NavigationTree.php:1399
@@ -5649,6 +5534,9 @@ msgid ""
 "lead to non working phpMyAdmin or a security risk. Please fix your server "
 "configuration to indicate HTTPS properly."
 msgstr ""
+"Существует несоответствие между HTTPS, указанным на сервере и клиенте. Это "
+"может привести к неработоспособному phpMyAdmin или угрозе безопасности. "
+"Исправьте конфигурацию своего сервера, чтобы правильно указать HTTPS."
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:179
 msgid "Log in"
@@ -5675,10 +5563,8 @@ msgid "Server Choice:"
 msgstr "Выбор сервера:"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:341
-#, fuzzy
-#| msgid "Could not connect to the database server!"
 msgid "Failed to connect to the reCAPTCHA service!"
-msgstr "Не удалось соединиться с сервером базы данных!"
+msgstr "Не удалось соединиться с сервисом reCAPTCHA!"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:343
 msgid "Entered captcha is wrong, try again!"
@@ -5686,7 +5572,7 @@ msgstr "Ошибка при введении captcha, попробуйте ещ�
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:348
 msgid "Missing reCAPTCHA verification, maybe it has been blocked by adblock?"
-msgstr ""
+msgstr "Отсутствует проверка reCAPTCHA, возможно, она заблокирована adblock?"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:372
 msgid "You are not allowed to log in to this MySQL server!"
@@ -5875,11 +5761,11 @@ msgstr "Дублирующая структура для представлен�
 
 #: libraries/classes/Plugins/Export/ExportJson.php:88
 msgid "Output pretty-printed JSON (Use human-readable formatting)"
-msgstr ""
+msgstr "Вывод печатного JSON (используйте человекочитаемое форматирование)"
 
 #: libraries/classes/Plugins/Export/ExportJson.php:94
 msgid "Output unicode characters unescaped"
-msgstr ""
+msgstr "Вывести символы Unicode без сохранения"
 
 #: libraries/classes/Plugins/Export/ExportLatex.php:49
 msgid "Content of table @TABLE@"
@@ -6008,9 +5894,8 @@ msgid "View structure"
 msgstr "Просмотреть структуру"
 
 #: libraries/classes/Plugins/Export/ExportPdf.php:289
-#, fuzzy
 msgid "Stand in"
-msgstr "и затем"
+msgstr "Замена"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:100
 msgid ""
@@ -6080,9 +5965,9 @@ msgstr ""
 "(менее эффективно, т.к. индексы будут созданы во время создания таблицы)"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:295
-#, fuzzy, php-format
+#, php-format
 msgid "%s value"
-msgstr "Значение сессии"
+msgstr "%s значение"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:329
 msgid ""
@@ -6182,9 +6067,8 @@ msgstr ""
 "зонах)</i>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:517
-#, fuzzy
 msgid "It appears your database uses routines;"
-msgstr "Похоже, что база данных использует функции;"
+msgstr "Кажется, ваша база данных использует подпрограммы;"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:520
 #: libraries/classes/Plugins/Export/ExportSql.php:1546
@@ -6222,9 +6106,9 @@ msgid "Last check:"
 msgstr "Последняя проверка:"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1489
-#, fuzzy, php-format
+#, php-format
 msgid "Error reading structure for table %s:"
-msgstr "Структура таблицы"
+msgstr "Структура чтения ошибок для таблицы %s:"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1543
 msgid "It appears your database uses views;"
@@ -6259,10 +6143,8 @@ msgid "MIME TYPES FOR TABLE"
 msgstr "MIME-ТИПЫ ТАБЛИЦЫ"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1879
-#, fuzzy
-#| msgid "RELATIONS FOR TABLE"
 msgid "RELATIONSHIPS FOR TABLE"
-msgstr "СВЯЗИ ТАБЛИЦЫ"
+msgstr "ССЫЛКИ ТАБЛИЦЫ"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2060
 msgid "It appears your table uses triggers;"
@@ -6275,12 +6157,12 @@ msgstr "Структура для представления %s экспорти
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2121
 msgid "(See below for the actual view)"
-msgstr ""
+msgstr "(См. Ниже фактическое представление)"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2205
-#, fuzzy, php-format
+#, php-format
 msgid "Error reading data for table %s:"
-msgstr "Ошибка считывания данных:"
+msgstr "Ошибка считывания данных таблицы %s:"
 
 #: libraries/classes/Plugins/Export/ExportXml.php:97
 msgid "Object creation options (all are recommended)"
@@ -6306,6 +6188,8 @@ msgstr "MIME"
 msgid ""
 "Update data when duplicate keys found on import (add ON DUPLICATE KEY UPDATE)"
 msgstr ""
+"Обновить данные при обнаружении дубликатов ключей при импорте (добавьте "
+"ОБНОВЛЕНИЕ DUPLICATE KEY)"
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:62
 #: libraries/classes/Plugins/Import/ImportOds.php:63
@@ -6615,18 +6499,6 @@ msgstr ""
 "строки."
 
 #: libraries/classes/Plugins/Transformations/Abs/ExternalTransformationsPlugin.php:28
-#, fuzzy
-#| msgid ""
-#| "LINUX ONLY: Launches an external application and feeds it the column data "
-#| "via standard input. Returns the standard output of the application. The "
-#| "default is Tidy, to pretty-print HTML code. For security reasons, you "
-#| "have to manually edit the file libraries/plugins/transformations/output/"
-#| "Text_Plain_External.php and list the tools you want to make available. "
-#| "The first option is then the number of the program you want to use and "
-#| "the second option is the parameters for the program. The third option, if "
-#| "set to 1, will convert the output using htmlspecialchars() (Default 1). "
-#| "The fourth option, if set to 1, will prevent wrapping and ensure that the "
-#| "output appears all on one line (Default 1)."
 msgid ""
 "LINUX ONLY: Launches an external application and feeds it the column data "
 "via standard input. Returns the standard output of the application. The "
@@ -6640,9 +6512,9 @@ msgid ""
 "appears all on one line (Default 1)."
 msgstr ""
 "ТОЛЬКО LINUX: Запускает внешнее приложение и подает ему на ввод данные поля. "
-"Возвращает обычный вывод приложения. По-умолчанию используется Tidy "
-"(форматирование HTML-кода). По соображениям безопасности необходимо вручную "
-"отредактировать файл libraries/plugins/transformations/output/"
+"Возвращает обычный вывод приложения. По-умолчанию используется Tidy ("
+"форматирование HTML-кода). По соображениям безопасности необходимо вручную "
+"отредактировать файл libraries/classes/Plugins/Transformations/Output/"
 "Text_Plain_External.php, вписав доступные программы. Первый параметр задает "
 "номер используемой программы, во втором параметре передаются параметры "
 "собственно программы. При установке третьего параметра в 1 данные вывода "
@@ -6776,15 +6648,15 @@ msgstr "Преобразует IP адрес из формата IPv4/IPv6 в б
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_JsonEditor.php:30
 msgid "Syntax highlighted CodeMirror editor for JSON."
-msgstr ""
+msgstr "Синтаксис выделил редактор CodeMirror для JSON."
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_SqlEditor.php:30
 msgid "Syntax highlighted CodeMirror editor for SQL."
-msgstr ""
+msgstr "Синтаксис выделил редактор CodeMirror для SQL."
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_XmlEditor.php:30
 msgid "Syntax highlighted CodeMirror editor for XML (and HTML)."
-msgstr ""
+msgstr "Синтаксис выделил редактор CodeMirror для XML (и HTML)."
 
 #: libraries/classes/Plugins/Transformations/Output/Text_Plain_Binarytoip.php:30
 msgid ""
@@ -7025,9 +6897,8 @@ msgid "Allows executing stored routines."
 msgstr "Разрешает выполнение хранимых процедур."
 
 #: libraries/classes/Server/Privileges.php:723
-#, fuzzy
 msgid "Does not require SSL-encrypted connections."
-msgstr "Требует SSL-шифрованного соединения."
+msgstr "Не требует SSL-шифрованного соединения."
 
 #: libraries/classes/Server/Privileges.php:739
 msgid "Requires SSL-encrypted connections."
@@ -7035,19 +6906,22 @@ msgstr "Требует SSL-шифрованного соединения."
 
 #: libraries/classes/Server/Privileges.php:753
 msgid "Requires a valid X509 certificate."
-msgstr ""
+msgstr "Требуется действительный сертификат X509."
 
 #: libraries/classes/Server/Privileges.php:778
 msgid "Requires that a specific cipher method be used for a connection."
 msgstr ""
+"Требуется, чтобы для соединения использовался специальный метод шифрования."
 
 #: libraries/classes/Server/Privileges.php:791
 msgid "Requires that a valid X509 certificate issued by this CA be presented."
 msgstr ""
+"Требуется, чтобы был представлен действительный сертификат X509, выданный "
+"этим ЦС."
 
 #: libraries/classes/Server/Privileges.php:804
 msgid "Requires that a valid X509 certificate with this subject be presented."
-msgstr ""
+msgstr "Требуется наличие действительного сертификата X509 с этим предметом."
 
 #: libraries/classes/Server/Privileges.php:834 server_privileges.php:87
 msgid "Limits the number of queries the user may send to the server per hour."
@@ -7086,6 +6960,9 @@ msgid ""
 "Allows user to give to other users or remove from other users privileges "
 "that user possess on this routine."
 msgstr ""
+"Позволяет пользователю предоставлять другим пользователям или удалять из "
+"других пользователей привилегии, которыми обладает пользователь в этой "
+"подпрограмме."
 
 #: libraries/classes/Server/Privileges.php:944
 msgid "Allows altering and dropping this routine."
@@ -7147,17 +7024,17 @@ msgid ""
 "Allows user to give to other users or remove from other users the privileges "
 "that user possess yourself."
 msgstr ""
+"Позволяет пользователю предоставлять другим пользователям или удалять у "
+"других пользователей привилегии, которыми обладает пользователь."
 
 #: libraries/classes/Server/Privileges.php:1432
 #: libraries/classes/Server/Privileges.php:1463
-#, fuzzy
 msgid "Native MySQL authentication"
-msgstr "Авторизация с помощью cookie"
+msgstr "Собственная проверка подлинности MySQL"
 
 #: libraries/classes/Server/Privileges.php:1465
-#, fuzzy
 msgid "SHA256 password authentication"
-msgstr "Авторизация с помощью Signon"
+msgstr "Аутентификация пароля SHA256"
 
 #: libraries/classes/Server/Privileges.php:1499
 #: libraries/classes/Server/Privileges.php:3076
@@ -7323,9 +7200,9 @@ msgstr ""
 "\\_%)."
 
 #: libraries/classes/Server/Privileges.php:2189
-#, fuzzy, php-format
+#, php-format
 msgid "Grant all privileges on database %s."
-msgstr "Предоставить все привилегии на базу данных \"%s\"."
+msgstr "Предоставить все привилегии в базе данных %s."
 
 #: libraries/classes/Server/Privileges.php:2352
 #: libraries/classes/Server/Privileges.php:2426
@@ -7501,14 +7378,13 @@ msgid ""
 "will prevent other users from connecting if the host part of their account "
 "allows a connection from any (%) host."
 msgstr ""
+"Имеется учетная запись пользователя, позволяющая любому пользователю "
+"подключиться к локальному хосту. Это предотвратит подключение других "
+"пользователей, если хост-часть их учетной записи разрешает соединение с "
+"любым (%) хостом."
 
 #: libraries/classes/Server/Privileges.php:4694
-#, fuzzy, php-format
-#| msgid ""
-#| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
-#| "privilege tables. The content of these tables may differ from the "
-#| "privileges the server uses, if they have been changed manually. In this "
-#| "case, you should %sreload the privileges%s before you continue."
+#, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -7521,13 +7397,6 @@ msgstr ""
 "вручную. В этом случае необходимо %sперезагрузить привилегии%s."
 
 #: libraries/classes/Server/Privileges.php:4711
-#, fuzzy
-#| msgid ""
-#| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
-#| "privilege tables. The content of these tables may differ from the "
-#| "privileges the server uses, if they have been changed manually. In this "
-#| "case, the privileges have to be reloaded but currently, you don't have "
-#| "the RELOAD privilege."
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -7854,10 +7723,9 @@ msgid "Error creating foreign key on %1$s (check data types)"
 msgstr "Ошибка создания внешнего ключа на %1$s (проверьте типы данных)"
 
 #: libraries/classes/Template.php:199
-#, fuzzy, php-format
-#| msgid "Error while loading the search."
+#, php-format
 msgid "Error while working with template cache: %s"
-msgstr "Ошибка при загрузке поиска."
+msgstr "Ошибка при работе с кешем шаблона: %s"
 
 #: libraries/classes/Theme.php:184
 #, php-format
@@ -8261,12 +8129,12 @@ msgstr "Вс"
 #: libraries/classes/Util.php:1586
 msgctxt "AM/PM indication in time"
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #: libraries/classes/Util.php:1588
 msgctxt "AM/PM indication in time"
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: libraries/classes/Util.php:1955
 #, php-format
@@ -8278,10 +8146,9 @@ msgid "Missing parameter:"
 msgstr "Отсутствующий параметр:"
 
 #: libraries/classes/Util.php:2534
-#, fuzzy, php-format
-#| msgid "Jump to database \"%s\"."
+#, php-format
 msgid "Jump to database “%s”."
-msgstr "Перейти к базе данных \"%s\"."
+msgstr "Перейти к базе данных “%s”."
 
 #: libraries/classes/Util.php:2559
 #, php-format
@@ -8316,19 +8183,19 @@ msgstr "Выполнить"
 
 #: libraries/classes/Util.php:3953
 msgid "SSL is not being used"
-msgstr ""
+msgstr "SSL не используется"
 
 #: libraries/classes/Util.php:3958
 msgid "SSL is used with disabled verification"
-msgstr ""
+msgstr "SSL используется с отключенной проверкой"
 
 #: libraries/classes/Util.php:3960
 msgid "SSL is used without certification authority"
-msgstr ""
+msgstr "SSL используется без центра сертификации"
 
 #: libraries/classes/Util.php:3963
 msgid "SSL is used"
-msgstr ""
+msgstr "Используется SSL"
 
 #: libraries/classes/Util.php:4084
 msgid "Users"
@@ -8353,18 +8220,12 @@ msgstr ""
 "должен быть выключен!"
 
 #: libraries/common.inc.php:487
-#, fuzzy
-#| msgid ""
-#| "You have enabled mbstring.func_overload in your PHP configuration. This "
-#| "option is incompatible with phpMyAdmin and might cause some data to be "
-#| "corrupted!"
 msgid ""
 "You have disabled ini_get and/or ini_set in php.ini. This option is "
 "incompatible with phpMyAdmin!"
 msgstr ""
-"В конфигурации PHP включен несовместимый с phpMyAdmin параметр mbstring."
-"func_overload. Для предотвращения возможной потери данных данный параметр "
-"должен быть выключен!"
+"Вы отключили ini_get и / или ini_set в php.ini. Этот параметр несовместим с "
+"phpMyAdmin!"
 
 #: libraries/common.inc.php:520
 #, php-format
@@ -8656,9 +8517,8 @@ msgstr ""
 "CodeMirror."
 
 #: libraries/config/messages.inc.php:67
-#, fuzzy
 msgid "Enable linter"
-msgstr "Включение SQL валидатора"
+msgstr "Включить линтер"
 
 #: libraries/config/messages.inc.php:69
 msgid ""
@@ -8794,10 +8654,8 @@ msgid "Hide table structure actions"
 msgstr "Спрятать действия над структурой таблицы"
 
 #: libraries/config/messages.inc.php:121
-#, fuzzy
-#| msgid "Default sorting order"
 msgid "Default transformations for Hex"
-msgstr "Порядок сортировки"
+msgstr "Преобразования по умолчанию для Hex"
 
 #: libraries/config/messages.inc.php:122 libraries/config/messages.inc.php:124
 #: libraries/config/messages.inc.php:126 libraries/config/messages.inc.php:128
@@ -8808,54 +8666,41 @@ msgid ""
 "Values for options list for default transformations. These will be "
 "overwritten if tranformation is filled in at table structure page."
 msgstr ""
+"Значения для списка опций для преобразований по умолчанию. Они будут "
+"перезаписаны, если преобразование будет заполнено на странице структуры "
+"таблицы."
 
 #: libraries/config/messages.inc.php:123
-#, fuzzy
-#| msgid "Input transformation options"
 msgid "Default transformations for Substring"
-msgstr "Параметры преобразования входных"
+msgstr "Преобразования по умолчанию для подстроки"
 
 #: libraries/config/messages.inc.php:125
-#, fuzzy
-#| msgid "Default sorting order"
 msgid "Default transformations for Bool2Text"
-msgstr "Порядок сортировки"
+msgstr "Преобразования по умолчанию для Bool2Text"
 
 #: libraries/config/messages.inc.php:127
-#, fuzzy
-#| msgid "Default sorting order"
 msgid "Default transformations for External"
-msgstr "Порядок сортировки"
+msgstr "Преобразования по умолчанию для External"
 
 #: libraries/config/messages.inc.php:129
-#, fuzzy
-#| msgid "Input transformation options"
 msgid "Default transformations for PreApPend"
-msgstr "Параметры преобразования входных"
+msgstr "Преобразования по умолчанию для PreApPend"
 
 #: libraries/config/messages.inc.php:131
-#, fuzzy
-#| msgid "Default sorting order"
 msgid "Default transformations for DateFormat"
-msgstr "Порядок сортировки"
+msgstr "Преобразования по умолчанию для DateFormat"
 
 #: libraries/config/messages.inc.php:133
-#, fuzzy
-#| msgid "Input transformation options"
 msgid "Default transformations for Inline"
-msgstr "Параметры преобразования входных"
+msgstr "Преобразования по умолчанию для Inline"
 
 #: libraries/config/messages.inc.php:135
-#, fuzzy
-#| msgid "Input transformation options"
 msgid "Default transformations for TextImageLink"
-msgstr "Параметры преобразования входных"
+msgstr "Преобразования по умолчанию для TextImageLink"
 
 #: libraries/config/messages.inc.php:137
-#, fuzzy
-#| msgid "Input transformation options"
 msgid "Default transformations for TextLink"
-msgstr "Параметры преобразования входных"
+msgstr "Преобразования по умолчанию для TextLink"
 
 #: libraries/config/messages.inc.php:141
 msgid "Show server listing as a list instead of a drop down."
@@ -8955,10 +8800,8 @@ msgstr "Идентификатор метки"
 
 #: libraries/config/messages.inc.php:186 libraries/config/messages.inc.php:199
 #: libraries/config/messages.inc.php:240
-#, fuzzy
-#| msgid "Relations"
 msgid "Relationships"
-msgstr "Связи"
+msgstr "Ссылки"
 
 #: libraries/config/messages.inc.php:192
 msgid "Export method"
@@ -9453,9 +9296,8 @@ msgid "Do not use AUTO_INCREMENT for zero values"
 msgstr "Не использовать AUTO_INCREMENT для нулевых значений"
 
 #: libraries/config/messages.inc.php:419
-#, fuzzy
 msgid "Read as multibytes"
-msgstr "Пропуски при чтении"
+msgstr "Читать как мультибайты"
 
 #: libraries/config/messages.inc.php:420
 msgid "Initial state for sliders"
@@ -9804,16 +9646,15 @@ msgstr "Где вывести ссылки строки таблицы"
 
 #: libraries/config/messages.inc.php:562
 msgid "Whether to show row links even in the absence of a unique key."
-msgstr ""
+msgstr "Нужно ли показывать строки ссылок даже в отсутствие уникального ключа."
 
 #: libraries/config/messages.inc.php:564
 msgid "Show row links anyway"
-msgstr ""
+msgstr "Показывать ссылки строк"
 
 #: libraries/config/messages.inc.php:565 libraries/config/messages.inc.php:566
-#, fuzzy
 msgid "Disable shortcut keys"
-msgstr "Отключить проверку внешних ключей"
+msgstr "Отключить сочетания клавиш"
 
 #: libraries/config/messages.inc.php:568
 msgid "Use natural order for sorting table and database names."
@@ -9965,9 +9806,8 @@ msgid "Grid editing: trigger action"
 msgstr "Редактирование сетки: действие триггера"
 
 #: libraries/config/messages.inc.php:625
-#, fuzzy
 msgid "Relational display"
-msgstr "Отображение связанного поля"
+msgstr "Отображение ссылок"
 
 #: libraries/config/messages.inc.php:626
 msgid "For display Options"
@@ -10192,18 +10032,16 @@ msgstr ""
 "рекомендуется: [kbd]pma__export_templates[/kbd]."
 
 #: libraries/config/messages.inc.php:707
-#, fuzzy
 msgid "Central columns table"
 msgstr "Центральные столбцы"
 
 #: libraries/config/messages.inc.php:709
-#, fuzzy
 msgid ""
 "Leave blank for no central columns support, suggested: "
 "[kbd]pma__central_columns[/kbd]."
 msgstr ""
-"Для отключения поддержки PDF схемы оставьте поле пустым, рекомендуется: "
-"[kbd]pma__table_coords[/kbd]."
+"Оставьте поле без поддержки центральной колонки, предположительно: [kbd] "
+"pma__central_columns [/kbd]."
 
 #: libraries/config/messages.inc.php:713
 msgid ""
@@ -10567,16 +10405,12 @@ msgid "Show last check timestamp"
 msgstr "Показать последнее время проверки"
 
 #: libraries/config/messages.inc.php:862
-#, fuzzy
-#| msgid "Show or hide a column displaying the comments for all tables."
 msgid "Show or hide a column displaying the charset for all tables."
-msgstr "Выводить/скрывать столбец, отображающий комментарии для всех таблиц."
+msgstr "Показать или скрыть столбец, отображающий кодировку для всех таблиц."
 
 #: libraries/config/messages.inc.php:864
-#, fuzzy
-#| msgid "Show table comments"
 msgid "Show table charset"
-msgstr "Показать комментарии к таблице"
+msgstr "Показать кодировку таблицы"
 
 #: libraries/config/messages.inc.php:866
 msgid ""
@@ -10607,16 +10441,11 @@ msgid "Show hint"
 msgstr "Показать подсказку"
 
 #: libraries/config/messages.inc.php:877
-#, fuzzy
-#| msgid ""
-#| "Shows link to [a@https://secure.php.net/manual/function.phpinfo."
-#| "php]phpinfo()[/a] output."
 msgid ""
 "Shows link to [a@https://php.net/manual/function.phpinfo.php]phpinfo()[/a] "
 "output."
 msgstr ""
-"Вывести ссылку [a@https://secure.php.net/manual/function.phpinfo."
-"php]phpinfo()[/a]."
+"Вывести ссылку [a@https://php.net/manual/function.phpinfo.php] phpinfo()[/a]."
 
 #: libraries/config/messages.inc.php:880
 msgid "Show phpinfo() link"
@@ -10941,10 +10770,8 @@ msgid "OpenDocument Text"
 msgstr "Текст OpenDocument"
 
 #: libraries/config/user_preferences.forms.php:124
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations"
-msgstr "Преобразование входных"
+msgstr "Преобразования по умолчанию"
 
 #: libraries/database_interface.inc.php:38
 #, php-format
@@ -11153,7 +10980,7 @@ msgstr "Пропускать таблицы большие, чем"
 
 #: libraries/display_export.lib.php:897
 msgid "Defined aliases"
-msgstr ""
+msgstr "Определенные псевдонимы"
 
 #: libraries/display_export.lib.php:1013
 msgid "Could not load export plugins, please check your installation!"
@@ -11766,6 +11593,10 @@ msgid ""
 "value of the column.<br />Note: A column may have no transitive dependency, "
 "in that case you don't have to select any."
 msgstr ""
+"Для каждого столбца ниже выберите <b> minimal set</b> столбцов среди "
+"заданного набора, значения которого объединены вместе, чтобы определить "
+"значение столбца. <br/> Примечание: столбец может не иметь транзитивной "
+"зависимости , в этом случае вам не нужно выбирать."
 
 #: libraries/normalization.lib.php:776
 msgid ""
@@ -11884,9 +11715,8 @@ msgid "Storage Engine"
 msgstr "Тип таблиц"
 
 #: libraries/operations.lib.php:1064
-#, fuzzy
 msgid "Change all column collations"
-msgstr "Сделать все столбцы atomic"
+msgstr "Изменить все сортировки столбцов"
 
 #: libraries/operations.lib.php:1235
 msgid "Copy table to (database<b>.</b>table)"
@@ -11913,9 +11743,8 @@ msgstr "Проверить таблицу"
 
 #: libraries/operations.lib.php:1397
 #: templates/database/structure/check_all_tables.phtml:22
-#, fuzzy
 msgid "Checksum table"
-msgstr "Проверить таблицу"
+msgstr "Контрольная сумма таблицы"
 
 #: libraries/operations.lib.php:1411
 msgid "Defragment table"
@@ -12044,22 +11873,16 @@ msgid "This format has no options"
 msgstr "Для этого формата нет настраиваемых параметров"
 
 #: libraries/pmd_common.php:551
-#, fuzzy
-#| msgid "Error: relation already exists."
 msgid "Error: relationship already exists."
-msgstr "Ошибка: Связь уже существует."
+msgstr "Ошибка: Ссылка уже существует."
 
 #: libraries/pmd_common.php:597
-#, fuzzy
-#| msgid "FOREIGN KEY relation has been added."
 msgid "FOREIGN KEY relationship has been added."
-msgstr "Добавлена связь FOREIGN KEY."
+msgstr "Добавлена ссылка FOREIGN KEY."
 
 #: libraries/pmd_common.php:603
-#, fuzzy
-#| msgid "Error: FOREIGN KEY relation could not be added!"
 msgid "Error: FOREIGN KEY relationship could not be added!"
-msgstr "Ошибка: связь внешнего ключа невозможно добавить!"
+msgstr "Ошибка: ссылку FOREIGN KEY невозможно добавить!"
 
 #: libraries/pmd_common.php:608
 msgid "Error: Missing index on column(s)."
@@ -12070,40 +11893,28 @@ msgid "Error: Relational features are disabled!"
 msgstr "Ошибка: Функция связи отключена!"
 
 #: libraries/pmd_common.php:635
-#, fuzzy
-#| msgid "Internal relation has been added."
 msgid "Internal relationship has been added."
-msgstr "Добавлена внутренняя связь."
+msgstr "Добавлена внутренняя ссылка."
 
 #: libraries/pmd_common.php:641
-#, fuzzy
-#| msgid "Error: Internal relation could not be added!"
 msgid "Error: Internal relationship could not be added!"
-msgstr "Ошибка: внутреннюю связь невозможно добавить!"
+msgstr "Ошибка: внутреннюю ссылку невозможно добавить!"
 
 #: libraries/pmd_common.php:679
-#, fuzzy
-#| msgid "FOREIGN KEY relation has been removed."
 msgid "FOREIGN KEY relationship has been removed."
-msgstr "Связь внешнего ключа была удалена."
+msgstr "Ссылка FOREIGN KEY была удалена."
 
 #: libraries/pmd_common.php:685
-#, fuzzy
-#| msgid "Error: FOREIGN KEY relation could not be removed!"
 msgid "Error: FOREIGN KEY relationship could not be removed!"
-msgstr "Ошибка: связь внешнего ключа невозможно удалить!"
+msgstr "Ошибка: ссылку FOREIGN KEY невозможно удалить!"
 
 #: libraries/pmd_common.php:712
-#, fuzzy
-#| msgid "Error: Internal relation could not be removed!"
 msgid "Error: Internal relationship could not be removed!"
-msgstr "Ошибка: внутреннюю связь невозможно удалить!"
+msgstr "Ошибка: внутреннюю ссылку невозможно удалить!"
 
 #: libraries/pmd_common.php:716
-#, fuzzy
-#| msgid "Internal relation has been removed."
 msgid "Internal relationship has been removed."
-msgstr "Внутренняя связь удалена."
+msgstr "Внутренняя ссылка удалена."
 
 #: libraries/relation.lib.php:92
 msgid "not OK"
@@ -12233,6 +12044,9 @@ msgid ""
 "'phpmyadmin'. You may go to 'Operations' tab of any database to set up the "
 "phpMyAdmin configuration storage there."
 msgstr ""
+"У вас нет необходимых прав для создания базы данных с именем «phpmyadmin». "
+"Вы можете перейти на вкладку «Операции» любой базы данных, чтобы настроить "
+"хранилище конфигурации phpMyAdmin."
 
 #: libraries/relation.lib.php:2001
 #, php-format
@@ -12473,6 +12287,8 @@ msgid ""
 "Connection to server is disabled, please enable $cfg['AllowArbitraryServer'] "
 "in phpMyAdmin configuration."
 msgstr ""
+"Подключение к серверу отключено, включите $cfg['AllowArbitraryServer'] в "
+"конфигурации phpMyAdmin."
 
 #: libraries/replication_gui.lib.php:916
 msgid "Replication started successfully."
@@ -12740,6 +12556,8 @@ msgid ""
 "You do not have sufficient privileges to perform this operation; Please "
 "refer to the documentation for more details"
 msgstr ""
+"У вас недостаточно прав для выполнения этой операции; Более подробную "
+"информацию смотри в документации"
 
 #: libraries/rte/rte_routines.lib.php:1033
 msgid "Security type"
@@ -12863,10 +12681,8 @@ msgid "routine"
 msgstr "процедура"
 
 #: libraries/rte/rte_words.lib.php:32
-#, fuzzy
-#| msgid "You do not have the necessary privileges to create a routine"
 msgid "You do not have the necessary privileges to create a routine."
-msgstr "У вас недостаточно прав для создания процедуры"
+msgstr "У вас недостаточно прав для создания процедуры."
 
 #: libraries/rte/rte_words.lib.php:35
 #, php-format
@@ -12874,6 +12690,8 @@ msgid ""
 "No routine with name %1$s found in database %2$s. You might be lacking the "
 "necessary privileges to edit this routine."
 msgstr ""
+"Нет процедуры с именем %1$s, найденным в базе данных %2$s. Возможно, вам не "
+"нужны необходимые привилегии для редактирования этой процедуры."
 
 #: libraries/rte/rte_words.lib.php:39
 #, php-format
@@ -12881,12 +12699,13 @@ msgid ""
 "No routine with name %1$s found in database %2$s. You might be lacking the "
 "necessary privileges to view/export this routine."
 msgstr ""
+"Нет процедуры с именем %1$s, найденным в базе данных %2$s. Возможно, вам не "
+"хватает необходимых привилегий для просмотра/экспорта этой процедуры."
 
 #: libraries/rte/rte_words.lib.php:42
-#, fuzzy, php-format
-#| msgid "No routine with name %1$s found in database %2$s"
+#, php-format
 msgid "No routine with name %1$s found in database %2$s."
-msgstr "В базе данных %2$s процедура с именем %1$s не найдена"
+msgstr "В базе данных %2$s процедура с именем %1$s не найдена."
 
 #: libraries/rte/rte_words.lib.php:43
 msgid "There are no routines to display."
@@ -12906,16 +12725,13 @@ msgid "trigger"
 msgstr "триггер"
 
 #: libraries/rte/rte_words.lib.php:54
-#, fuzzy
-#| msgid "You do not have the necessary privileges to create a trigger"
 msgid "You do not have the necessary privileges to create a trigger."
-msgstr "У вас недостаточно прав для создания триггера"
+msgstr "У вас недостаточно прав для создания триггера."
 
 #: libraries/rte/rte_words.lib.php:56
-#, fuzzy, php-format
-#| msgid "No trigger with name %1$s found in database %2$s"
+#, php-format
 msgid "No trigger with name %1$s found in database %2$s."
-msgstr "В базе данных %2$s триггер с именем %1$s не найден"
+msgstr "В базе данных %2$s триггер с именем %1$s не найден."
 
 #: libraries/rte/rte_words.lib.php:57
 msgid "There are no triggers to display."
@@ -12935,16 +12751,13 @@ msgid "event"
 msgstr "событие"
 
 #: libraries/rte/rte_words.lib.php:68
-#, fuzzy
-#| msgid "You do not have the necessary privileges to create an event"
 msgid "You do not have the necessary privileges to create an event."
-msgstr "У вас недостаточно прав для создания события"
+msgstr "У вас недостаточно прав для создания события."
 
 #: libraries/rte/rte_words.lib.php:70
-#, fuzzy, php-format
-#| msgid "No event with name %1$s found in database %2$s"
+#, php-format
 msgid "No event with name %1$s found in database %2$s."
-msgstr "В базе данных %2$s не найдено событие с именем %1$s"
+msgstr "В базе данных %2$s не найдено событие с именем %1$s."
 
 #: libraries/rte/rte_words.lib.php:71
 msgid "There are no events to display."
@@ -14087,10 +13900,9 @@ msgid "Table-level tabs"
 msgstr "Вкладки уровня таблицы"
 
 #: libraries/sql_query_form.lib.php:139
-#, fuzzy, php-format
-#| msgid "Run SQL query/queries on server %s"
+#, php-format
 msgid "Run SQL query/queries on server “%s”"
-msgstr "Выполнить SQL-запрос(ы) на сервере %s"
+msgstr "Выполнить SQL-запрос(ы) на сервере “%s”"
 
 #: libraries/sql_query_form.lib.php:156
 #, php-format
@@ -14391,13 +14203,12 @@ msgid "Cannot save settings, submitted form contains errors!"
 msgstr "Невозможно сохранить настройки, отправленная форма содержит ошибки!"
 
 #: prefs_manage.php:53
-#, fuzzy
 msgid "phpMyAdmin configuration snippet"
-msgstr "Отсутствие таблиц хранения конфигурации phpMyAdmin"
+msgstr "Фрагмент настройки phpMyAdmin"
 
 #: prefs_manage.php:54
 msgid "Paste it to your config.inc.php"
-msgstr ""
+msgstr "Вставьте это в свой config.inc.php"
 
 #: prefs_manage.php:94
 msgid "Could not import configuration"
@@ -14449,9 +14260,8 @@ msgstr ""
 "к примеру, используя %sСкрипт настройки%s."
 
 #: prefs_manage.php:333
-#, fuzzy
 msgid "Save as PHP file"
-msgstr "Сохранить как файл"
+msgstr "Сохранить как PHP файл"
 
 #: prefs_manage.php:338
 msgid "Save to browser's storage"
@@ -14481,16 +14291,16 @@ msgid "No Privileges"
 msgstr "Нет привилегий"
 
 #: server_privileges.php:143
-#, fuzzy
-#| msgid "You do not have the necessary privileges to create a trigger"
 msgid "You do not have privileges to manipulate with the users!"
-msgstr "У вас недостаточно прав для создания триггера"
+msgstr "У вас нет прав манипулировать пользователями!"
 
 #: server_privileges.php:157
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
 msgstr ""
+"Имя пользователя и имя хоста не изменились. Если вы хотите изменить пароль, "
+"следует использовать вкладку «Изменить пароль»."
 
 #: server_status.php:36
 msgid "Not enough privilege to view server status."
@@ -14519,7 +14329,7 @@ msgstr "Недостаточно прав для просмотра статис
 
 #: server_status_variables.php:53
 msgid "Not enough privilege to view status variables."
-msgstr "Недостаточно прав для просмотра переменных состояния."
+msgstr "Недостаточно прав для просмотра состояния переменных."
 
 #: setup/frames/config.inc.php:39 setup/frames/index.inc.php:256
 msgid "Download"
@@ -14541,16 +14351,12 @@ msgstr ""
 "незашифрованном виде!"
 
 #: setup/frames/index.inc.php:58
-#, fuzzy
-#| msgid ""
-#| "If your server is also configured to accept HTTPS requests follow [a@"
-#| "%s]this link[/a] to use a secure connection."
 msgid ""
 "If your server is also configured to accept HTTPS requests follow this link "
 "to use a secure connection."
 msgstr ""
-"Если ваш сервер настроен также и на приём HTTPS запросов, перейдите по [a@"
-"%s]данной ссылке[/a] для использования безопасного соединения."
+"Если ваш сервер также настроен на прием HTTPS-запросов, перейдите по этой "
+"ссылке, чтобы использовать безопасное соединение."
 
 #: setup/frames/index.inc.php:62
 msgid "Insecure connection"
@@ -14642,7 +14448,7 @@ msgstr "Добавить новый сервер"
 
 #: setup/index.php:18
 msgid "Configuration already exists, setup is disabled!"
-msgstr ""
+msgstr "Конфигурация уже существует, настройка отключена!"
 
 #: setup/index.php:28
 msgid "Wrong GET file attribute value"
@@ -14706,7 +14512,7 @@ msgstr "Ошибочные данные"
 #: setup/validate.php:32
 #, php-format
 msgid "Wrong data or no validation for %s"
-msgstr ""
+msgstr "Неверные данные или отсутствие проверки для %s"
 
 #: tbl_create.php:35 tbl_get_field.php:28
 #, php-format
@@ -14772,10 +14578,8 @@ msgid "Add"
 msgstr "Добавить"
 
 #: templates/columns_definitions/column_definitions_form.phtml:66
-#, fuzzy
-#| msgid "Add column(s)"
 msgid "column(s)"
-msgstr "Добавить поле(я)"
+msgstr "поле(я)"
 
 #: templates/columns_definitions/column_definitions_form.phtml:94
 msgid "Collation:"
@@ -14856,39 +14660,32 @@ msgid "Subpartition"
 msgstr "Подраздел"
 
 #: templates/columns_definitions/partitions.phtml:78
-#, fuzzy
 msgid "Engine"
-msgstr "Типы таблиц"
+msgstr "Ядро"
 
 #: templates/columns_definitions/partitions.phtml:80
-#, fuzzy
 msgid "Data directory"
-msgstr "Домашний каталог для данных"
+msgstr "Каталог данных"
 
 #: templates/columns_definitions/partitions.phtml:81
-#, fuzzy
 msgid "Index directory"
-msgstr "Каталог сохранения"
+msgstr "Каталог индексов"
 
 #: templates/columns_definitions/partitions.phtml:82
-#, fuzzy
 msgid "Max rows"
-msgstr "Затронуто строк:"
+msgstr "Максимум строк"
 
 #: templates/columns_definitions/partitions.phtml:83
-#, fuzzy
 msgid "Min rows"
-msgstr "Обзор"
+msgstr "Минимум строк"
 
 #: templates/columns_definitions/partitions.phtml:84
-#, fuzzy
 msgid "Table space"
-msgstr "Поиск в таблице"
+msgstr "Интервал таблицы"
 
 #: templates/columns_definitions/partitions.phtml:85
-#, fuzzy
 msgid "Node group"
-msgstr "Группа пользователей"
+msgstr "Группа узлов"
 
 #: templates/columns_definitions/table_fields_definitions.phtml:17
 msgid ""
@@ -14955,9 +14752,8 @@ msgid "Input transformation options"
 msgstr "Параметры преобразования входных"
 
 #: templates/database/designer/database_tables.phtml:29
-#, fuzzy
 msgid "Show/hide columns"
-msgstr "Переместить поля"
+msgstr "Показать/скрыть столбцы"
 
 #: templates/database/designer/database_tables.phtml:37
 msgid "See table structure"
@@ -15029,10 +14825,8 @@ msgstr "Создать таблицу"
 #: templates/database/designer/side_menu.phtml:84
 #: templates/database/designer/side_menu.phtml:87
 #: templates/database/designer/new_relation_panel.twig:42
-#, fuzzy
-#| msgid "Create relation"
 msgid "Create relationship"
-msgstr "Создать связь"
+msgstr "Создать ссылку"
 
 #: templates/database/designer/side_menu.phtml:98
 #: templates/database/designer/side_menu.phtml:101
@@ -15071,10 +14865,8 @@ msgstr "Обратное отображение"
 
 #: templates/database/designer/side_menu.phtml:145
 #: templates/database/designer/side_menu.phtml:148
-#, fuzzy
-#| msgid "Toggle relation lines"
 msgid "Toggle relationship lines"
-msgstr "Переключение линий связи"
+msgstr "Переключение линий ссылки"
 
 #: templates/database/designer/side_menu.phtml:153
 #: templates/database/designer/side_menu.phtml:156
@@ -15101,10 +14893,8 @@ msgid "Hide/Show all"
 msgstr "Скрыть/отобразить все таблицы"
 
 #: templates/database/designer/table_list.phtml:14
-#, fuzzy
-#| msgid "Hide/Show Tables with no relation"
 msgid "Hide/Show Tables with no relationship"
-msgstr "Скрыть/отобразить таблицы не имеющие связей"
+msgstr "Скрыть/отобразить таблицы не имеющие ссылок"
 
 #: templates/database/designer/table_list.phtml:55
 msgid "Number of tables:"
@@ -15127,9 +14917,8 @@ msgid "Check tables having overhead"
 msgstr "Отметить требующие оптимизации"
 
 #: templates/database/structure/check_all_tables.phtml:10
-#, fuzzy
 msgid "Copy table"
-msgstr "Копировать"
+msgstr "Копировать таблицу"
 
 #: templates/database/structure/check_all_tables.phtml:11
 msgid "Show create"
@@ -15272,6 +15061,9 @@ msgid ""
 "an index on it. Alternatively, you can define an index below, before "
 "creating the foreign key."
 msgstr ""
+"Создание внешнего ключа над не индексированным столбцом автоматически "
+"создало бы на нем индекс. Кроме того, перед созданием внешнего ключа вы "
+"можете определить индекс ниже."
 
 #: templates/table/relation/common_form.phtml:21
 msgid ""
@@ -15290,10 +15082,8 @@ msgstr "+ Добавить ограничение"
 
 #: templates/table/relation/common_form.phtml:78
 #: templates/table/relation/common_form.phtml:84
-#, fuzzy
-#| msgid "Internal relations"
 msgid "Internal relationships"
-msgstr "Внутренние связи"
+msgstr "Внутренние ссылки"
 
 #: templates/table/relation/common_form.phtml:88
 msgid "Internal relation"
@@ -15398,8 +15188,6 @@ msgid "Edit partitioning"
 msgstr "Редактировать разбиение"
 
 #: templates/test/gettext/pgettext.phtml:1
-#, fuzzy
-#| msgid "Text"
 msgctxt "Text context"
 msgid "Text"
 msgstr "Текст"
@@ -15552,7 +15340,7 @@ msgstr "Анализ структуры таблицы"
 
 #: templates/table/structure/optional_action_links.twig:70
 msgid "Normalize"
-msgstr ""
+msgstr "Нормировать"
 
 #: templates/table/structure/optional_action_links.twig:86
 msgid "Track view"
@@ -15671,10 +15459,8 @@ msgid "None"
 msgstr "Нет"
 
 #: templates/database/designer/delete_relation_panel.twig:41
-#, fuzzy
-#| msgid "Delete relation"
 msgid "Delete relationship"
-msgstr "Удалить связь"
+msgstr "Удалить ссылку"
 
 #: templates/privileges/delete_user_fieldset.twig:24
 msgid "Remove selected user accounts"
@@ -15759,10 +15545,8 @@ msgstr ""
 "импортировать их для текущей сессии?"
 
 #: templates/prefs_autoload.twig:46
-#, fuzzy
-#| msgid "Delete tracking"
 msgid "Delete settings"
-msgstr "Удаление данных слежени"
+msgstr "Удалить настройки"
 
 #: templates/console/display.twig:24
 msgid "Console"
@@ -15890,9 +15674,8 @@ msgid "Show query history at start"
 msgstr "Показать историю запросов"
 
 #: templates/console/display.twig:192
-#, fuzzy
 msgid "Show current browsing query"
-msgstr "Показать текущий просматриваемый запрос"
+msgstr "Показать текущий запрос на просмотр"
 
 #: templates/console/display.twig:200
 msgid ""
@@ -15996,40 +15779,32 @@ msgstr "Сохранить диаграмму как изображение"
 
 #: templates/database/designer/options_panel.twig:54
 #: templates/database/designer/options_panel.twig:250
-#, fuzzy
-#| msgid "Relation operator"
 msgid "Relationship operator"
-msgstr "Оператор"
+msgstr "Оператор ссылки"
 
 #: templates/export/alias_add.twig:24
 msgid "Define new aliases"
-msgstr ""
+msgstr "Определение новых псевдонимов"
 
 #: templates/export/alias_add.twig:32
-#, fuzzy
-#| msgid "Select database"
 msgid "Select database:"
-msgstr "Выберите базу данных"
+msgstr "Выберите базу данных:"
 
 #: templates/export/alias_add.twig:41
 msgid "New database name"
 msgstr "Имя новой базы данных"
 
 #: templates/export/alias_add.twig:55
-#, fuzzy
-#| msgid "Select table"
 msgid "Select table:"
-msgstr "Выберите таблицу"
+msgstr "Выберите таблицу:"
 
 #: templates/export/alias_add.twig:64
 msgid "New table name"
 msgstr "Имя новой таблицы"
 
 #: templates/export/alias_add.twig:78
-#, fuzzy
-#| msgid "Select a column."
 msgid "Select column:"
-msgstr "Выберите столбец."
+msgstr "Выберите столбец:"
 
 #: templates/export/alias_add.twig:87
 msgid "New column name"
@@ -16057,9 +15832,8 @@ msgid "New"
 msgstr "Новый"
 
 #: url.php:41
-#, fuzzy
 msgid "Taking you to the target site."
-msgstr "Переход к следующему шагу…"
+msgstr "Переход на целевой сайт."
 
 #: user_password.php:35
 msgid "You don't have sufficient privileges to be here right now!"
@@ -16070,14 +15844,12 @@ msgid "The profile has been updated."
 msgstr "Профиль был обновлен."
 
 #: user_password.php:125
-#, fuzzy
-#| msgid "Password Hashing:"
 msgid "Password is too long!"
-msgstr "Хеширование пароля:"
+msgstr "Пароль слишком длинный!"
 
 #: view_create.php:51
 msgid "View name can not be empty!"
-msgstr ""
+msgstr "Имя вида не может быть пустым!"
 
 #: view_operations.php:105
 msgid "Rename view to"

@@ -9,10 +9,8 @@
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Config\FormDisplay;
-use PhpMyAdmin\Theme;
 
 require_once 'test/PMATestCase.php';
-require_once 'libraries/config/config_functions.lib.php';
 require_once 'libraries/user_preferences.lib.php';
 
 /**
@@ -184,13 +182,11 @@ class FormDisplayTest extends PMATestCase
 
         $attrIsValidated->setValue($this->object, $arr);
 
-        $GLOBALS['strConfigForm_foobar'] = 'foobar123';
-
         $result = $this->object->displayErrors();
 
         $this->assertEquals(
-            '<dl><dt>Servers_test2_name</dt>' .
-            '<dd>e1</dd></dl><dl><dt>foobar123</dt><dd>' .
+            '<dl><dt>Servers/1/test2</dt>' .
+            '<dd>e1</dd></dl><dl><dt>Form_foobar</dt><dd>' .
             'e2</dd><dd>e3</dd></dl>',
             $result
         );
@@ -543,6 +539,4 @@ class FormDisplayTest extends PMATestCase
         );
 
     }
-
-
 }
