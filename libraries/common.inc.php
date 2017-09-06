@@ -576,7 +576,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         /**
          * Loads the proper database interface for this server
          */
-        include_once './libraries/database_interface.inc.php';
+        DatabaseInterface::load();
 
         // get LoginCookieValidity from preferences cache
         // no generic solution for loading preferences from cache as some settings
@@ -898,9 +898,4 @@ if (! defined('PMA_MINIMUM_COMMON')
             Relation::fixPmaTables('phpmyadmin', false);
         }
     }
-}
-
-if (! defined('PMA_MINIMUM_COMMON')) {
-    include 'libraries/config/user_preferences.forms.php';
-    include_once 'libraries/config/page_settings.forms.php';
 }

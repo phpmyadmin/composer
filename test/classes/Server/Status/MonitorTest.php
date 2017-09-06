@@ -1,26 +1,23 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * tests for PMA_server_status_monitor.lib.php
+ * tests for PhpMyAdmin\Server\Status\Monitor
  *
  * @package PhpMyAdmin-test
  */
+namespace PhpMyAdmin\Tests\Server\Status;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\Server\Status\Monitor;
 use PhpMyAdmin\ServerStatusData;
 use PhpMyAdmin\Theme;
 
-require_once 'libraries/server_status_monitor.lib.php';
-require_once 'libraries/database_interface.inc.php';
-
 /**
- * class PMA_ServerStatusMonitor_Test
- *
- * this class is for testing PMA_server_status_monitor.lib.php functions
+ * this class is for testing PhpMyAdmin\Server\Status\Monitor methods
  *
  * @package PhpMyAdmin-test
  */
-class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
+class MonitorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Prepares environment for the test.
@@ -117,7 +114,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getHtmlForMonitor
+     * Test for Monitor::getHtmlForMonitor
      *
      * @return void
      * @group medium
@@ -125,9 +122,9 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     public function testPMAGetHtmlForMonitor()
     {
         //Call the test function
-        $html = PMA_getHtmlForMonitor($this->ServerStatusData);
+        $html = Monitor::getHtmlForMonitor($this->ServerStatusData);
 
-        //validate 1: PMA_getHtmlForTabLinks
+        //validate 1: Monitor::getHtmlForTabLinks
         $this->assertContains(
             '<div class="tabLinks">',
             $html
@@ -144,7 +141,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
             __('Done dragging (rearranging) charts'),
             $html
         );
-        //validate 2: PMA_getHtmlForSettingsDialog
+        //validate 2: Monitor::getHtmlForSettingsDialog
         $this->assertContains(
             '<div class="popupContent settingsPopup">',
             $html
@@ -161,7 +158,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
             '<option>3</option>',
             $html
         );
-        //validate 3: PMA_getHtmlForInstructionsDialog
+        //validate 3: Monitor::getHtmlForInstructionsDialog
         $this->assertContains(
             __('Monitor Instructions'),
             $html
@@ -170,7 +167,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
             'monitorInstructionsDialog',
             $html
         );
-        //validate 4: PMA_getHtmlForAddChartDialog
+        //validate 4: Monitor::getHtmlForAddChartDialog
         $this->assertContains(
             '<div id="addChartDialog"',
             $html
@@ -190,16 +187,16 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getHtmlForClientSideDataAndLinks
+     * Test for Monitor::getHtmlForClientSideDataAndLinks
      *
      * @return void
      */
     public function testPMAGetHtmlForClientSideDataAndLinks()
     {
         //Call the test function
-        $html = PMA_getHtmlForClientSideDataAndLinks($this->ServerStatusData);
+        $html = Monitor::getHtmlForClientSideDataAndLinks($this->ServerStatusData);
 
-        //validate 1: PMA_getHtmlForClientSideDataAndLinks
+        //validate 1: Monitor::getHtmlForClientSideDataAndLinks
         $from = '<form id="js_data" class="hide">'
             . '<input type="hidden" name="server_time"';
         $this->assertContains(
@@ -222,7 +219,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getJsonForLogDataTypeSlow
+     * Test for Monitor::getJsonForLogDataTypeSlow
      *
      * @return void
      */
@@ -255,7 +252,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
         //Call the test function
         $start = 0;
         $end = 10;
-        $ret = PMA_getJsonForLogDataTypeSlow($start, $end);
+        $ret = Monitor::getJsonForLogDataTypeSlow($start, $end);
 
         $result_rows = array(
             array('sql_text' => 'insert sql_text', '#' => 11),
@@ -277,7 +274,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getJsonForLogDataTypeGeneral
+     * Test for Monitor::getJsonForLogDataTypeGeneral
      *
      * @return void
      */
@@ -314,7 +311,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
         //Call the test function
         $start = 0;
         $end = 10;
-        $ret = PMA_getJsonForLogDataTypeGeneral($start, $end);
+        $ret = Monitor::getJsonForLogDataTypeGeneral($start, $end);
 
         $result_rows = array(
             $value,
@@ -337,7 +334,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getJsonForLoggingVars
+     * Test for Monitor::getJsonForLoggingVars
      *
      * @return void
      */
@@ -362,7 +359,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['dbi'] = $dbi;
 
         //Call the test function
-        $ret = PMA_getJsonForLoggingVars();
+        $ret = Monitor::getJsonForLoggingVars();
 
         //validate that, the result is the same as fetchResult
         $this->assertEquals(
@@ -372,7 +369,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for PMA_getJsonForQueryAnalyzer
+     * Test for Monitor::getJsonForQueryAnalyzer
      *
      * @return void
      */
@@ -403,7 +400,7 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
         $GLOBALS['dbi'] = $dbi;
 
         //Call the test function
-        $ret = PMA_getJsonForQueryAnalyzer();
+        $ret = Monitor::getJsonForQueryAnalyzer();
 
         $this->assertEquals(
             'cached_affected_rows',
