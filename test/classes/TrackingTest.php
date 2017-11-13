@@ -7,17 +7,16 @@
  */
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\Theme;
 use PhpMyAdmin\Tracking;
 use PhpMyAdmin\Url;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for PhpMyAdmin\Tracking
  *
  * @package PhpMyAdmin-test
  */
-class TrackingTest extends \PHPUnit_Framework_TestCase
+class TrackingTest extends TestCase
 {
 
     /**

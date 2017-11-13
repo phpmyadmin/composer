@@ -32,9 +32,9 @@ class ServerVariablesController extends Controller
     /**
      * Constructs ServerVariablesController
      */
-    public function __construct()
+    public function __construct($response, $dbi)
     {
-        parent::__construct();
+        parent::__construct($response, $dbi);
 
         $this->variable_doc_links = $this->_getDocumentLinks();
     }
@@ -72,9 +72,11 @@ class ServerVariablesController extends Controller
         /**
          * Displays the sub-page heading
          */
-        $doc_link = Util::showMySQLDocu('server_system_variables');
-        $this->response->addHtml(
-            Common::getHtmlForSubPageHeader('variables', $doc_link)
+        $this->response->addHTML(
+            Template::get('server/sub_page_header')->render([
+                'type' => 'variables',
+                'link' => 'server_system_variables',
+            ])
         );
 
         /**
@@ -289,7 +291,7 @@ class ServerVariablesController extends Controller
      *
      * @return string
      */
-    private function _getHtmlForServerVariables($serverVars, $serverVarsSession)
+    private function _getHtmlForServerVariables(array $serverVars, array $serverVarsSession)
     {
         // filter
         $filterValue = ! empty($_REQUEST['filter']) ? $_REQUEST['filter'] : '';
@@ -322,7 +324,7 @@ class ServerVariablesController extends Controller
      * @return string
      */
     private function _getHtmlForServerVariablesItems(
-        $serverVars, $serverVarsSession
+        array $serverVars, array $serverVarsSession
     ) {
         // list of static (i.e. non-editable) system variables
         $static_variables = $this->_getStaticSystemVariables();
@@ -337,21 +339,18 @@ class ServerVariablesController extends Controller
 
             list($formattedValue, $isHtmlFormatted) = $this->_formatVariable($name, $value);
 
-            $output .= Template::get('server/variables/variable_row')
-                ->render(
-                    array(
-                        'rowClass'    => $row_class,
-                        'editable'    => ! in_array(
-                            strtolower($name),
-                            $static_variables
-                        ),
-                        'docLink'     => $docLink,
-                        'name'        => $name,
-                        'value'       => $formattedValue,
-                        'isSuperuser' => $this->dbi->isSuperuser(),
-                        'isHtmlFormatted' => $isHtmlFormatted,
-                    )
-                );
+            $output .= Template::get('server/variables/variable_row')->render(array(
+                'row_class' => $row_class,
+                'editable' => ! in_array(
+                    strtolower($name),
+                    $static_variables
+                ),
+                'doc_link' => $docLink,
+                'name' => $name,
+                'value' => $formattedValue,
+                'is_superuser' => $this->dbi->isSuperuser(),
+                'is_html_formatted' => $isHtmlFormatted,
+            ));
 
             if ($has_session_value) {
                 list($formattedValue, $isHtmlFormatted)= $this->_formatVariable(

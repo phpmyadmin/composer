@@ -307,4 +307,12 @@ lexers['php'] = PhpLexer(startinline=True)
 linkcheck_retries = 10
 linkcheck_timeout = 10
 linkcheck_anchors = False
-linkcheck_ignore = [r'https://software.opensuse.org/package/.*']
+linkcheck_ignore = [
+    # Site is often down
+    r'https://software.opensuse.org/package/.*',
+    # They have messed up SSL setup
+    r'https://php-myadmin.ru/.*',
+    # There seems to be some problem with SNI on Travis CI
+    r'https://www.phpmyadmin.net/.*',
+    r'https://files.phpmyadmin.net/.*',
+]

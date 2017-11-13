@@ -8,10 +8,12 @@
 namespace PhpMyAdmin\Tests\Server\Status;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Server\Status\Queries;
 use PhpMyAdmin\Theme;
 use PhpMyAdmin\Util;
+use PHPUnit\Framework\TestCase;
 
 /**
  * PhpMyAdmin\Tests\Server\Status\QueriesTest class
@@ -20,7 +22,7 @@ use PhpMyAdmin\Util;
  *
  * @package PhpMyAdmin-test
  */
-class QueriesTest extends \PHPUnit_Framework_TestCase
+class QueriesTest extends TestCase
 {
     /**
      * Prepares environment for the test.
@@ -82,7 +84,7 @@ class QueriesTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL STATUS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),
@@ -90,7 +92,7 @@ class QueriesTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL VARIABLES",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_variables
             )

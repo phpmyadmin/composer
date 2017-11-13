@@ -7,16 +7,18 @@
  */
 namespace PhpMyAdmin\Tests\Rte;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Rte\Routines;
-use PhpMyAdmin\TypesMySQL;
+use PhpMyAdmin\Types;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class is for testing PhpMyAdmin\Rte\Routines methods
  *
  * @package PhpMyAdmin-test
  */
-class RoutinesTest extends \PHPUnit_Framework_TestCase
+class RoutinesTest extends TestCase
 {
     /**
      * Set up
@@ -33,8 +35,8 @@ class RoutinesTest extends \PHPUnit_Framework_TestCase
         $cfg['DefaultFunctions']['FUNC_DATE'] = '';
         $cfg['DefaultFunctions']['FUNC_SPATIAL'] = 'GeomFromText';
         $GLOBALS['server'] = 0;
-        $GLOBALS['PMA_Types'] = new TypesMySQL();
         $GLOBALS['pmaThemePath'] = $GLOBALS['PMA_Theme']->getPath();
+        $GLOBALS['cfg']['Server']['DisableIS'] = false;
     }
 
     /**
@@ -1091,7 +1093,6 @@ class RoutinesTest extends \PHPUnit_Framework_TestCase
 
         $cfg['ShowFunctionFields'] = false;
 
-        $GLOBALS['PMA_Types'] = new TypesMySQL();
 
         $errors = array();
         Routines::setGlobals();
@@ -1100,14 +1101,15 @@ class RoutinesTest extends \PHPUnit_Framework_TestCase
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
+        $dbi->types = new Types($dbi);
         $dbi->expects($this->any())
             ->method('escapeString')
             ->will(
                 $this->returnValueMap(
                     array(
-                        array('foo', null, 'foo'),
-                        array("foo's bar", null, "foo\'s bar"),
-                        array('', null, '')
+                        array('foo', DatabaseInterface::CONNECT_USER, 'foo'),
+                        array("foo's bar", DatabaseInterface::CONNECT_USER, "foo\'s bar"),
+                        array('', DatabaseInterface::CONNECT_USER, '')
                     )
                 )
             );

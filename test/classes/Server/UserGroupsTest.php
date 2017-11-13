@@ -10,13 +10,14 @@ namespace PhpMyAdmin\Tests\Server;
 use PhpMyAdmin\Server\UserGroups;
 use PhpMyAdmin\Theme;
 use PhpMyAdmin\Url;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for PhpMyAdmin\Server\UserGroups
  *
  * @package PhpMyAdmin-test
  */
-class UserGroupsTest extends \PHPUnit_Framework_TestCase
+class UserGroupsTest extends TestCase
 {
     /**
      * Prepares environment for the test.

@@ -206,7 +206,7 @@ class ExportJson extends ExportPlugin
         $crlf,
         $error_url,
         $sql_query,
-        $aliases = array()
+        array $aliases = array()
     ) {
         $db_alias = $db;
         $table_alias = $table;
@@ -236,7 +236,7 @@ class ExportJson extends ExportPlugin
 
         $result = $GLOBALS['dbi']->query(
             $sql_query,
-            null,
+            DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_UNBUFFERED
         );
         $columns_cnt = $GLOBALS['dbi']->numFields($result);

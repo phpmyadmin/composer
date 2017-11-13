@@ -11,23 +11,20 @@ use PhpMyAdmin\Import;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PHPUnit\Framework\TestCase;
 
 /*
  * we must set $GLOBALS['server'] here
- * since 'check_user_privileges.lib.php' will use it globally
+ * since 'check_user_privileges.inc.php' will use it globally
  */
 $GLOBALS['server'] = 0;
-
-/*
- * Include to test.
- */
 
 /**
  * Tests for import functions
  *
  * @package PhpMyAdmin-test
  */
-class ImportTest extends \PHPUnit_Framework_TestCase
+class ImportTest extends TestCase
 {
     /**
      * Prepares environment for the test.

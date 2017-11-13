@@ -9,6 +9,7 @@ namespace PhpMyAdmin\Database;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
@@ -22,25 +23,6 @@ use PhpMyAdmin\Util;
 class Designer
 {
     /**
-     * Function to get html to display a page selector
-     *
-     * @param array  $cfgRelation information about the configuration storage
-     * @param string $db          database name
-     *
-     * @return string html content
-     */
-    public static function getHtmlForPageSelector($cfgRelation, $db)
-    {
-        return Template::get('database/designer/page_selector')
-            ->render(
-                array(
-                    'db' => $db,
-                    'cfgRelation' => $cfgRelation
-                )
-            );
-    }
-
-    /**
      * Function to get html for displaying the page edit/delete form
      *
      * @param string $db        database name
@@ -50,13 +32,13 @@ class Designer
      */
     public static function getHtmlForEditOrDeletePages($db, $operation)
     {
-        return Template::get('database/designer/edit_delete_pages')
-            ->render(
-                array(
-                    'db' => $db,
-                    'operation' => $operation
-                )
-            );
+        $cfgRelation = Relation::getRelationsParam();
+        return Template::get('database/designer/edit_delete_pages')->render([
+            'db' => $db,
+            'operation' => $operation,
+            'pdfwork' => $cfgRelation['pdfwork'],
+            'pages' => self::getPageIdsAndNames($db),
+        ]);
     }
 
     /**
@@ -68,12 +50,12 @@ class Designer
      */
     public static function getHtmlForPageSaveAs($db)
     {
-        return Template::get('database/designer/page_save_as')
-            ->render(
-                array(
-                    'db' => $db
-                )
-            );
+        $cfgRelation = Relation::getRelationsParam();
+        return Template::get('database/designer/page_save_as')->render([
+            'db' => $db,
+            'pdfwork' => $cfgRelation['pdfwork'],
+            'pages' => self::getPageIdsAndNames($db),
+        ]);
     }
 
     /**
@@ -114,7 +96,7 @@ class Designer
     {
         /* Scan for schema plugins */
         /* @var $export_list SchemaPlugin[] */
-        $export_list = PMA_getPlugins(
+        $export_list = Plugins::getPlugins(
             "schema",
             'libraries/classes/Plugins/Schema/',
             null
@@ -148,39 +130,38 @@ class Designer
      * @return string html
      */
     public static function getHtmlForJsFields(
-        $script_tables, $script_contr, $script_display_field, $display_page
+        array $script_tables, array $script_contr, array $script_display_field, $display_page
     ) {
-        return Template::get('database/designer/js_fields')
-            ->render(
-                array(
-                    'script_tables' => $script_tables,
-                    'script_contr' => $script_contr,
-                    'script_display_field' => $script_display_field,
-                    'display_page' => $display_page
-                )
-            );
+        $cfgRelation = Relation::getRelationsParam();
+        return Template::get('database/designer/js_fields')->render(array(
+            'server' => $GLOBALS['server'],
+            'db' => $_GET['db'],
+            'script_tables' => json_encode($script_tables),
+            'script_contr' => json_encode($script_contr),
+            'script_display_field' => json_encode($script_display_field),
+            'display_page' => $display_page,
+            'relation_pdfwork' => $cfgRelation['pdfwork'],
+        ));
     }
 
     /**
      * Returns HTML for the menu bar of the designer page
      *
      * @param boolean $visualBuilder whether this is visual query builder
-     * @param string  $selected_page name of the selected page
-     * @param array   $params_array  array with class name for various buttons on side
-     *                               menu
+     * @param string  $selectedPage  name of the selected page
+     * @param array   $paramsArray   array with class name for various buttons
+     *                               on side menu
      *
      * @return string html
      */
-    public static function getPageMenu($visualBuilder, $selected_page, $params_array)
+    public static function getPageMenu($visualBuilder, $selectedPage, array $paramsArray)
     {
-        return Template::get('database/designer/side_menu')
-            ->render(
-                array(
-                    'visualBuilder' => $visualBuilder,
-                    'selected_page' => $selected_page,
-                    'params_array' => $params_array
-                )
-            );
+        return Template::get('database/designer/side_menu')->render([
+            'visual_builder' => $visualBuilder,
+            'selected_page' => $selectedPage,
+            'params_array' => $paramsArray,
+            'theme' => $GLOBALS['PMA_Theme'],
+        ]);
     }
 
     /**
@@ -289,15 +270,17 @@ class Designer
      *
      * @return string html
      */
-    public static function getHtmlTableList($tab_pos, $display_page)
+    public static function getHtmlTableList(array $tab_pos, $display_page)
     {
-        return Template::get('database/designer/table_list')
-            ->render(
-                array(
-                    'tab_pos' => $tab_pos,
-                    'display_page' => $display_page
-                )
-            );
+        return Template::get('database/designer/table_list')->render([
+            'tab_pos' => $tab_pos,
+            'display_page' => $display_page,
+            'theme' => $GLOBALS['PMA_Theme'],
+            'table_names' => $GLOBALS['PMD']['TABLE_NAME'],
+            'table_names_url' => $GLOBALS['PMD_URL']['TABLE_NAME'],
+            'table_names_small_url' => $GLOBALS['PMD_URL']['TABLE_NAME_SMALL'],
+            'table_names_out' => $GLOBALS['PMD_OUT']['TABLE_NAME'],
+        ]);
     }
 
     /**
@@ -312,18 +295,30 @@ class Designer
      * @return string html
      */
     public static function getDatabaseTables(
-        $tab_pos, $display_page, $tab_column, $tables_all_keys, $tables_pk_or_unique_keys
+        array $tab_pos,
+        $display_page,
+        array $tab_column,
+        array $tables_all_keys,
+        array $tables_pk_or_unique_keys
     ) {
-        return Template::get('database/designer/database_tables')
-            ->render(
-                array(
-                    'tab_pos' => $tab_pos,
-                    'display_page' => $display_page,
-                    'tab_column' => $tab_column,
-                    'tables_all_keys' => $tables_all_keys,
-                    'tables_pk_or_unique_keys' => $tables_pk_or_unique_keys
-                )
-            );
+        return Template::get('database/designer/database_tables')->render([
+            'db' => $GLOBALS['db'],
+            'get_db' => $_GET['db'],
+            'query' => isset($_REQUEST['query']) ? $_REQUEST['query'] : null,
+            'tab_pos' => $tab_pos,
+            'display_page' => $display_page,
+            'tab_column' => $tab_column,
+            'tables_all_keys' => $tables_all_keys,
+            'tables_pk_or_unique_keys' => $tables_pk_or_unique_keys,
+            'table_names' => $GLOBALS['PMD']['TABLE_NAME'],
+            'table_names_url' => $GLOBALS['PMD_URL']['TABLE_NAME'],
+            'table_names_small' => $GLOBALS['PMD']['TABLE_NAME_SMALL'],
+            'table_names_small_url' => $GLOBALS['PMD_URL']['TABLE_NAME_SMALL'],
+            'table_names_small_out' => $GLOBALS['PMD_OUT']['TABLE_NAME_SMALL'],
+            'table_types' => $GLOBALS['PMD']['TABLE_TYPE'],
+            'owner_out' => $GLOBALS['PMD_OUT']['OWNER'],
+            'theme' => $GLOBALS['PMA_Theme'],
+        ]);
     }
 
     /**
@@ -405,10 +400,14 @@ class Designer
     /**
      * Returns HTML for the query details panel
      *
+     * @param string $db Database name
+     *
      * @return string html
      */
-    public static function getQueryDetails()
+    public static function getQueryDetails($db)
     {
-        return Template::get('database/designer/query_details')->render();
+        return Template::get('database/designer/query_details')->render([
+            'db' => $db,
+        ]);
     }
 }

@@ -331,7 +331,8 @@ class Core
     {
         $tables = $GLOBALS['dbi']->tryQuery(
             'SHOW TABLES FROM ' . Util::backquote($db) . ';',
-            null, DatabaseInterface::QUERY_STORE
+            DatabaseInterface::CONNECT_USER,
+            DatabaseInterface::QUERY_STORE
         );
         if ($tables) {
             $num_tables = $GLOBALS['dbi']->numRows($tables);
@@ -388,7 +389,7 @@ class Core
      *
      * @return boolean whether $page is valid or not (in $whitelist or not)
      */
-    public static function checkPageValidity(&$page, $whitelist)
+    public static function checkPageValidity(&$page, array $whitelist)
     {
         if (! isset($page) || !is_string($page)) {
             return false;
@@ -592,7 +593,7 @@ class Core
      *
      * @return mixed    array element or $default
      */
-    public static function arrayRead($path, $array, $default = null)
+    public static function arrayRead($path, array $array, $default = null)
     {
         $keys = explode('/', $path);
         $value =& $array;
@@ -614,7 +615,7 @@ class Core
      *
      * @return void
      */
-    public static function arrayWrite($path, &$array, $value)
+    public static function arrayWrite($path, array &$array, $value)
     {
         $keys = explode('/', $path);
         $last_key = array_pop($keys);
@@ -636,7 +637,7 @@ class Core
      *
      * @return void
      */
-    public static function arrayRemove($path, &$array)
+    public static function arrayRemove($path, array &$array)
     {
         $keys = explode('/', $path);
         $keys_last = array_pop($keys);
@@ -828,7 +829,7 @@ class Core
      *
      * @return void
      */
-    public static function setPostAsGlobal($post_patterns)
+    public static function setPostAsGlobal(array $post_patterns)
     {
         foreach (array_keys($_POST) as $post_key) {
             foreach ($post_patterns as $one_post_pattern) {
@@ -1177,6 +1178,61 @@ class Core
                     . 'This option is incompatible with phpMyAdmin!'
                 )
             );
+        }
+    }
+
+    /**
+     * prints list item for main page
+     *
+     * @param string $name            displayed text
+     * @param string $listId          id, used for css styles
+     * @param string $url             make item as link with $url as target
+     * @param string $mysql_help_page display a link to MySQL's manual
+     * @param string $target          special target for $url
+     * @param string $a_id            id for the anchor,
+     *                                used for jQuery to hook in functions
+     * @param string $class           class for the li element
+     * @param string $a_class         class for the anchor element
+     *
+     * @return void
+     */
+    public static function printListItem($name, $listId = null, $url = null,
+        $mysql_help_page = null, $target = null, $a_id = null, $class = null,
+        $a_class = null
+    ) {
+        echo Template::get('list/item')
+            ->render(
+                array(
+                    'content' => $name,
+                    'id' => $listId,
+                    'class' => $class,
+                    'url' => array(
+                        'href' => $url,
+                        'target' => $target,
+                        'id' => $a_id,
+                        'class' => $a_class,
+                    ),
+                    'mysql_help_page' => $mysql_help_page,
+                )
+            );
+    }
+
+    /**
+     * Checks request and fails with fatal error if something problematic is found
+     *
+     * @return void
+     */
+    public static function checkRequest()
+    {
+        if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) {
+            self::fatalError(__("GLOBALS overwrite attempt"));
+        }
+
+        /**
+         * protect against possible exploits - there is no need to have so much variables
+         */
+        if (count($_REQUEST) > 1000) {
+            self::fatalError(__('possible exploit'));
         }
     }
 }

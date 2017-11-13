@@ -48,14 +48,14 @@ class Relation
         if ($show_error) {
             $result = $GLOBALS['dbi']->query(
                 $sql,
-                $GLOBALS['controllink'],
+                DatabaseInterface::CONNECT_CONTROL,
                 $options,
                 $cache_affected_rows
             );
         } else {
             $result = @$GLOBALS['dbi']->tryQuery(
                 $sql,
-                $GLOBALS['controllink'],
+                DatabaseInterface::CONNECT_CONTROL,
                 $options,
                 $cache_affected_rows
             );
@@ -96,7 +96,7 @@ class Relation
      *
      * @return string
      */
-    public static function getRelationsParamDiagnostic($cfgRelation)
+    public static function getRelationsParamDiagnostic(array $cfgRelation)
     {
         $retval = '<br>';
 
@@ -112,7 +112,7 @@ class Relation
         $messages['enabled']  = '<span style="color:green">' . __('Enabled') . '</span>';
         $messages['disabled'] = '<span style="color:red">'   . __('Disabled') . '</span>';
 
-        if (empty($cfgRelation['db'])) {
+        if (strlen($cfgRelation['db']) == 0) {
             $retval .= __('Configuration of pmadb…') . ' '
                  . $messages['error']
                  . Util::showDocu('setup', 'linked-tables')
@@ -121,7 +121,7 @@ class Relation
                  . ' <font color="green">' . __('Disabled')
                  . '</font>' . "\n";
             if ($GLOBALS['cfg']['ZeroConf']) {
-                if (empty($GLOBALS['db'])) {
+                if (strlen($GLOBALS['db']) == 0) {
                     $retval .= self::getHtmlFixPmaTables(true, true);
                 } else {
                     $retval .= self::getHtmlFixPmaTables(true);
@@ -409,7 +409,7 @@ class Relation
      * @return string
      */
     public static function getDiagMessageForFeature($feature_name,
-        $relation_parameter, $messages, $skip_line = true
+        $relation_parameter, array $messages, $skip_line = true
     ) {
         $retval = '    <tr><td colspan=2 class="right">' . $feature_name . ': ';
         if (isset($GLOBALS['cfgRelation'][$relation_parameter])
@@ -437,7 +437,7 @@ class Relation
      * @return string
      */
     public static function getDiagMessageForParameter($parameter,
-        $relationParameterSet, $messages, $docAnchor
+        $relationParameterSet, array $messages, $docAnchor
     ) {
         $retval = '<tr><th class="left">';
         $retval .= '$cfg[\'Servers\'][$i][\'' . $parameter . '\']  ... ';
@@ -497,9 +497,8 @@ class Relation
 
         if ($GLOBALS['server'] == 0
             || empty($GLOBALS['cfg']['Server']['pmadb'])
-            || empty($GLOBALS['controllink'])
             || ! $GLOBALS['dbi']->selectDb(
-                $GLOBALS['cfg']['Server']['pmadb'], $GLOBALS['controllink']
+                $GLOBALS['cfg']['Server']['pmadb'], DatabaseInterface::CONNECT_CONTROL
             )
         ) {
             // No server selected -> no bookmark table
@@ -728,13 +727,13 @@ class Relation
                     ),
                     $query
                 );
-                $GLOBALS['dbi']->tryMultiQuery($query, $GLOBALS['controllink']);
+                $GLOBALS['dbi']->tryMultiQuery($query, DatabaseInterface::CONNECT_CONTROL);
                 // skips result sets of query as we are not interested in it
-                while ($GLOBALS['dbi']->moreResults($GLOBALS['controllink'])
-                    && $GLOBALS['dbi']->nextResult($GLOBALS['controllink'])
+                while ($GLOBALS['dbi']->moreResults(DatabaseInterface::CONNECT_CONTROL)
+                    && $GLOBALS['dbi']->nextResult(DatabaseInterface::CONNECT_CONTROL)
                 ) {
                 }
-                $error = $GLOBALS['dbi']->getError($GLOBALS['controllink']);
+                $error = $GLOBALS['dbi']->getError(DatabaseInterface::CONNECT_CONTROL);
                 // return true if no error exists otherwise false
                 return empty($error);
             }
@@ -778,7 +777,7 @@ class Relation
                     . '\'' . $GLOBALS['dbi']->escapeString($column) . '\'';
             }
             $foreign = $GLOBALS['dbi']->fetchResult(
-                $rel_query, 'master_field', null, $GLOBALS['controllink']
+                $rel_query, 'master_field', null, DatabaseInterface::CONNECT_CONTROL
             );
         }
 
@@ -807,10 +806,10 @@ class Relation
         ) {
             if ($isInformationSchema) {
                 $relations_key = 'information_schema_relations';
-                include_once './libraries/information_schema_relations.lib.php';
+                include_once './libraries/information_schema_relations.inc.php';
             } else {
                 $relations_key = 'mysql_relations';
-                include_once './libraries/mysql_relations.lib.php';
+                include_once './libraries/mysql_relations.inc.php';
             }
             if (isset($GLOBALS[$relations_key][$table])) {
                 foreach ($GLOBALS[$relations_key][$table] as $field => $relations) {
@@ -854,7 +853,7 @@ class Relation
                 . '\'';
 
             $row = $GLOBALS['dbi']->fetchSingleRow(
-                $disp_query, 'ASSOC', $GLOBALS['controllink']
+                $disp_query, 'ASSOC', DatabaseInterface::CONNECT_CONTROL
             );
             if (isset($row['display_field'])) {
                 return $row['display_field'];
@@ -879,7 +878,7 @@ class Relation
         $columns = $GLOBALS['dbi']->getColumnsFull($db, $table);
         if ($columns) {
             foreach ($columns as $column) {
-                if ($GLOBALS['PMA_Types']->getTypeClass($column['DATA_TYPE']) == 'CHAR') {
+                if ($GLOBALS['dbi']->types->getTypeClass($column['DATA_TYPE']) == 'CHAR') {
                     return $column['COLUMN_NAME'];
                 }
             }
@@ -1146,7 +1145,7 @@ class Relation
            ORDER BY `id` DESC';
 
         return $GLOBALS['dbi']->fetchResult(
-            $hist_query, null, null, $GLOBALS['controllink']
+            $hist_query, null, null, DatabaseInterface::CONNECT_CONTROL
         );
     } // end of 'self::getHistory()' function
 
@@ -1182,7 +1181,7 @@ class Relation
             LIMIT ' . $GLOBALS['cfg']['QueryHistoryMax'] . ', 1';
 
         if ($max_time = $GLOBALS['dbi']->fetchValue(
-            $search_query, 0, 0, $GLOBALS['controllink']
+            $search_query, 0, 0, DatabaseInterface::CONNECT_CONTROL
         )) {
             self::queryAsControlUser(
                 'DELETE FROM '
@@ -1206,7 +1205,7 @@ class Relation
      *
      * @access  protected
      */
-    public static function buildForeignDropdown($foreign, $data, $mode)
+    public static function buildForeignDropdown(array $foreign, $data, $mode)
     {
         $reloptions = array();
 
@@ -1279,7 +1278,7 @@ class Relation
      *
      * @access  public
      */
-    public static function foreignDropdown($disp_row, $foreign_field, $foreign_display, $data,
+    public static function foreignDropdown(array $disp_row, $foreign_field, $foreign_display, $data,
         $max = null
     ) {
         if (null === $max) {
@@ -1699,7 +1698,7 @@ class Relation
      *
      * @return int $pdf_page_number
      */
-    public static function createPage($newpage, $cfgRelation, $db)
+    public static function createPage($newpage, array $cfgRelation, $db)
     {
         if (! isset($newpage) || $newpage == '') {
             $newpage = __('no description');
@@ -1713,9 +1712,7 @@ class Relation
             . $GLOBALS['dbi']->escapeString($newpage) . '\')';
         self::queryAsControlUser($ins_query, false);
 
-        return $GLOBALS['dbi']->insertId(
-            isset($GLOBALS['controllink']) ? $GLOBALS['controllink'] : ''
-        );
+        return $GLOBALS['dbi']->insertId(DatabaseInterface::CONNECT_CONTROL);
     }
 
     /**
@@ -1754,11 +1751,11 @@ class Relation
     /**
      * Check child table references and foreign key for a table column.
      *
-     * @param string $db                    name of master table db.
-     * @param string $table                 name of master table.
-     * @param string $column                name of master table column.
-     * @param array  $foreigners_full       foreiners array for the whole table.
-     * @param array  $child_references_full child references for the whole table.
+     * @param string     $db                    name of master table db.
+     * @param string     $table                 name of master table.
+     * @param string     $column                name of master table column.
+     * @param array|null $foreigners_full       foreiners array for the whole table.
+     * @param array|null $child_references_full child references for the whole table.
      *
      * @return array $column_status telling about references if foreign key.
      */
@@ -1825,7 +1822,7 @@ class Relation
      *
      * @return bool|array
      */
-    public static function searchColumnInForeigners($foreigners, $column)
+    public static function searchColumnInForeigners(array $foreigners, $column)
     {
         if (isset($foreigners[$column])) {
             return $foreigners[$column];
@@ -1939,7 +1936,7 @@ class Relation
             'pma__export_templates' => 'export_templates',
         );
 
-        $existingTables = $GLOBALS['dbi']->getTables($db, $GLOBALS['controllink']);
+        $existingTables = $GLOBALS['dbi']->getTables($db, DatabaseInterface::CONNECT_CONTROL);
 
         $createQueries = null;
         $foundOne = false;
@@ -2096,5 +2093,32 @@ class Relation
         } else {
             return true;
         }
+    }
+
+    /**
+     * Get tables for foreign key constraint
+     *
+     * @param string $foreignDb        Database name
+     * @param string $tblStorageEngine Table storage engine
+     *
+     * @return array Table names
+     */
+    public static function getTables($foreignDb, $tblStorageEngine)
+    {
+        $tables = array();
+        $tablesRows = $GLOBALS['dbi']->query(
+            'SHOW TABLE STATUS FROM ' . Util::backquote($foreignDb),
+            DatabaseInterface::CONNECT_USER,
+            DatabaseInterface::QUERY_STORE
+        );
+        while ($row = $GLOBALS['dbi']->fetchRow($tablesRows)) {
+            if (isset($row[1]) && mb_strtoupper($row[1]) == $tblStorageEngine) {
+                $tables[] = $row[0];
+            }
+        }
+        if ($GLOBALS['cfg']['NaturalOrder']) {
+            usort($tables, 'strnatcasecmp');
+        }
+        return $tables;
     }
 }

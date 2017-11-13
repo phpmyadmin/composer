@@ -55,13 +55,17 @@ class TableGisVisualizationController extends TableController
      * @param array  $visualizationSettings visualization settings
      */
     public function __construct(
+        $response,
+        $dbi,
+        $db,
+        $table,
         $sql_query,
-        $url_params,
+        array $url_params,
         $goto,
         $back,
-        $visualizationSettings
+        array $visualizationSettings
     ) {
-        parent::__construct();
+        parent::__construct($response, $dbi, $db, $table);
 
         $this->sql_query = $sql_query;
         $this->url_params = $url_params;

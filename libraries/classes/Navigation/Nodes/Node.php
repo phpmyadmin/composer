@@ -7,6 +7,7 @@
  */
 namespace PhpMyAdmin\Navigation\Nodes;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Util;
 
@@ -111,7 +112,7 @@ class Node
      */
     public function __construct($name, $type = Node::OBJECT, $is_group = false)
     {
-        if (!empty($name)) {
+        if (strlen($name)) {
             $this->name = $name;
             $this->real_name = $name;
         }
@@ -823,7 +824,7 @@ class Node
                 $sqlQuery,
                 'db_name',
                 'count',
-                $GLOBALS['controllink']
+                DatabaseInterface::CONNECT_CONTROL
             );
 
             return $counts;

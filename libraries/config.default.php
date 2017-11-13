@@ -2761,7 +2761,7 @@ $cfg['BrowseMIME'] = true;
  *
  * @global integer $cfg['MaxExactCount']
  */
-$cfg['MaxExactCount'] = 500000;
+$cfg['MaxExactCount'] = 50000;
 
 /**
  * Zero means that no row count is done for views; see the doc
@@ -3047,7 +3047,7 @@ $cfg['DBG']['sql'] = false;
 /**
  * Log executed queries and their execution times to syslog
  *
- * @global boolean $cfg['DBG']['sql']
+ * @global boolean $cfg['DBG']['sqllog']
  */
 $cfg['DBG']['sqllog'] = false;
 
@@ -3057,6 +3057,13 @@ $cfg['DBG']['sqllog'] = false;
  * @global boolean $cfg['DBG']['demo']
  */
 $cfg['DBG']['demo'] = false;
+
+/**
+ * Enable Simple two-factor authentication
+ *
+ * @global boolean $cfg['DBG']['simple2fa']
+ */
+$cfg['DBG']['simple2fa'] = false;
 
 
 /*******************************************************************************

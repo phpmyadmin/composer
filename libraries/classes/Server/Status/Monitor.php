@@ -11,10 +11,14 @@ namespace PhpMyAdmin\Server\Status;
 
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Server\Status\Data;
+use PhpMyAdmin\SysInfo;
 use PhpMyAdmin\Util;
 
-require_once 'libraries/sysinfo.lib.php';
-
+/**
+ * functions for displaying server status sub item: monitor
+ *
+ * @package PhpMyAdmin
+ */
 class Monitor
 {
     /**
@@ -349,7 +353,7 @@ class Monitor
         $input = '<input type="hidden" name="%s" value="%s" />';
         $form  = '<form id="js_data" class="hide">';
         $form .= sprintf($input, 'server_time', microtime(true) * 1000);
-        $form .= sprintf($input, 'server_os', PMA_getSysInfoOs());
+        $form .= sprintf($input, 'server_os', SysInfo::getOs());
         $form .= sprintf($input, 'is_superuser', $GLOBALS['dbi']->isSuperuser());
         $form .= sprintf($input, 'server_db_isLocal', $serverStatusData->db_isLocal);
         $form .= '</form>';
@@ -425,7 +429,7 @@ class Monitor
      *
      * @return array
      */
-    public static function getJsonForChartingDataSet($ret, $statusVarValues, $serverVarValues)
+    public static function getJsonForChartingDataSet(array $ret, array $statusVarValues, array $serverVarValues)
     {
         foreach ($ret as $chart_id => $chartNodes) {
             foreach ($chartNodes as $node_id => $nodeDataPoints) {
@@ -459,7 +463,7 @@ class Monitor
      * @return array
      */
     public static function getJsonForChartingDataGet(
-        $ret, $serverVars, $statusVars, $sysinfo, $cpuload, $memory
+        array $ret, array $serverVars, array $statusVars, $sysinfo, $cpuload, $memory
     ) {
         // For each chart
         foreach ($ret as $chart_id => $chartNodes) {
@@ -494,7 +498,7 @@ class Monitor
      * @return array
      */
     public static function getJsonForChartingDataSwitch(
-        $type, $pName, $serverVars, $statusVars, $ret,
+        $type, $pName, array $serverVars, array $statusVars, array $ret,
         $sysinfo, $cpuload, $memory
     ) {
         switch ($type) {
@@ -522,14 +526,13 @@ class Monitor
 
         case 'cpu':
             if (!$sysinfo) {
-                include_once 'libraries/sysinfo.lib.php';
-                $sysinfo = PMA_getSysInfo();
+                $sysinfo = SysInfo::get();
             }
             if (!$cpuload) {
                 $cpuload = $sysinfo->loadavg();
             }
 
-            if (PMA_getSysInfoOs() == 'Linux') {
+            if (SysInfo::getOs() == 'Linux') {
                 $ret['idle'] = $cpuload['idle'];
                 $ret['busy'] = $cpuload['busy'];
             } else {
@@ -540,8 +543,7 @@ class Monitor
 
         case 'memory':
             if (!$sysinfo) {
-                include_once 'libraries/sysinfo.lib.php';
-                $sysinfo = PMA_getSysInfo();
+                $sysinfo = SysInfo::get();
             }
             if (!$memory) {
                 $memory = $sysinfo->memory();

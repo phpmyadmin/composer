@@ -82,6 +82,11 @@ class Theme
     );
 
     /**
+     * Sprite data
+     */
+    private $sprites;
+
+    /**
      * Loads theme information
      *
      * @return boolean whether loading them info was successful or not
@@ -328,12 +333,13 @@ class Theme
      * If filename is given, it possibly fallbacks to fallback
      * theme for it if image does not exist.
      *
-     * @param string $file file name for image
+     * @param string $file     file name for image
+     * @param string $fallback fallback image
      *
      * @access public
      * @return string image path for this theme
      */
-    public function getImgPath($file = null)
+    public function getImgPath($file = null, $fallback = null)
     {
         if (is_null($file)) {
             return $this->img_path;
@@ -341,6 +347,10 @@ class Theme
 
         if (is_readable($this->img_path . $file)) {
             return $this->img_path . $file;
+        }
+
+        if (! is_null($fallback)) {
+            return $this->getImgPath($fallback);
         }
 
         return './themes/' . ThemeManager::FALLBACK_THEME . '/img/' . $file;
@@ -435,19 +445,22 @@ class Theme
      */
     public function getSpriteData()
     {
-        $sprites = array();
-        $filename = $this->getPath() . '/sprites.lib.php';
-        if (is_readable($filename)) {
+        if (is_null($this->sprites)) {
+            $sprites = array();
+            $filename = $this->getPath() . '/sprites.lib.php';
+            if (is_readable($filename)) {
 
-            // This defines sprites array
-            include $filename;
+                // This defines sprites array
+                include $filename;
 
-            // Backwards compatibility for themes from 4.6 and older
-            if (function_exists('PMA_sprites')) {
-                $sprites = PMA_sprites();
+                // Backwards compatibility for themes from 4.6 and older
+                if (function_exists('PMA_sprites')) {
+                    $sprites = PMA_sprites();
+                }
             }
+            $this->sprites = $sprites;
         }
-        return $sprites;
+        return $this->sprites;
     }
 
     /**

@@ -8,16 +8,16 @@
 namespace PhpMyAdmin\Tests\Server\Status;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status\Data;
-
-require_once 'test/PMATestCase.php';
+use PhpMyAdmin\Tests\PmaTestCase;
 
 /**
  * Test for PhpMyAdmin\Server\Status\Data class
  *
  * @package PhpMyAdmin-test
  */
-class DataTest extends \PMATestCase
+class DataTest extends PmaTestCase
 {
     /**
      * @access protected
@@ -72,7 +72,7 @@ class DataTest extends \PMATestCase
                 "SHOW GLOBAL STATUS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),
@@ -80,7 +80,7 @@ class DataTest extends \PMATestCase
                 "SHOW GLOBAL VARIABLES",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_variables
             ),
@@ -89,7 +89,7 @@ class DataTest extends \PMATestCase
                     . "FROM data_dictionary.GLOBAL_STATEMENTS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),

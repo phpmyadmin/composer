@@ -23,7 +23,7 @@ class GitRevision
     *
     * @return void
     */
-    public static function print()
+    public static function display()
     {
         if (! $GLOBALS['PMA_Config']->get('PMA_VERSION_GIT')) {
             $response = Response::getInstance();
@@ -69,7 +69,7 @@ class GitRevision
 
         $committer = $GLOBALS['PMA_Config']->get('PMA_VERSION_GIT_COMMITTER');
         $author = $GLOBALS['PMA_Config']->get('PMA_VERSION_GIT_AUTHOR');
-        PMA_printListItem(
+        Core::printListItem(
             __('Git revision:') . ' '
             . $branch . ',<br /> '
             . sprintf(

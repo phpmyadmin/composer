@@ -8,6 +8,7 @@
  */
 
 use PhpMyAdmin\Di\Container;
+use PhpMyAdmin\Partition;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
@@ -374,8 +375,8 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
     }
 
     $content_cells[$columnNumber] = array(
-        'columnNumber' => $columnNumber,
-        'columnMeta' => $columnMeta,
+        'column_number' => $columnNumber,
+        'column_meta' => $columnMeta,
         'type_upper' => mb_strtoupper($type),
         'length_values_input_size' => $length_values_input_size,
         'length' => $length,
@@ -385,25 +386,46 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
         'fields_meta' => isset($fields_meta) ? $fields_meta : null,
         'is_backup' => $is_backup,
         'move_columns' => $move_columns,
-        'cfgRelation' => $cfgRelation,
+        'cfg_relation' => $cfgRelation,
         'available_mime' => $available_mime,
         'mime_map' => isset($mime_map) ? $mime_map : array()
     );
 } // end for
 
 include 'libraries/tbl_partition_definition.inc.php';
-$html = Template::get('columns_definitions/column_definitions_form')
-    ->render(
-        array(
-            'is_backup'        => $is_backup,
-            'fields_meta'      => isset($fields_meta) ? $fields_meta : null,
-            'mimework'         => $cfgRelation['mimework'],
-            'action'           => $action,
-            'form_params'      => $form_params,
-            'content_cells'    => $content_cells,
-            'partitionDetails' => $partitionDetails
-        )
-    );
+$html = Template::get('columns_definitions/column_definitions_form')->render([
+    'is_backup' => $is_backup,
+    'fields_meta' => isset($fields_meta) ? $fields_meta : null,
+    'mimework' => $cfgRelation['mimework'],
+    'action' => $action,
+    'form_params' => $form_params,
+    'content_cells' => $content_cells,
+    'partition_details' => $partitionDetails,
+    'primary_indexes' => isset($_REQUEST['primary_indexes']) ? $_REQUEST['primary_indexes'] : null,
+    'unique_indexes' => isset($_REQUEST['unique_indexes']) ? $_REQUEST['unique_indexes'] : null,
+    'indexes' => isset($_REQUEST['indexes']) ? $_REQUEST['indexes'] : null,
+    'fulltext_indexes' => isset($_REQUEST['fulltext_indexes']) ? $_REQUEST['fulltext_indexes'] : null,
+    'spatial_indexes' => isset($_REQUEST['spatial_indexes']) ? $_REQUEST['spatial_indexes'] : null,
+    'table' => isset($_REQUEST['table']) ? $_REQUEST['table'] : null,
+    'comment' => isset($_REQUEST['comment']) ? $_REQUEST['comment'] : null,
+    'tbl_collation' => isset($_REQUEST['tbl_collation']) ? $_REQUEST['tbl_collation'] : null,
+    'tbl_storage_engine' => isset($_REQUEST['tbl_storage_engine']) ? $_REQUEST['tbl_storage_engine'] : null,
+    'connection' => isset($_REQUEST['connection']) ? $_REQUEST['connection'] : null,
+    'change_column' => isset($_REQUEST['change_column']) ? $_REQUEST['change_column'] : null,
+    'is_virtual_columns_supported' => Util::isVirtualColumnsSupported(),
+    'browse_mime' => isset($GLOBALS['cfg']['BrowseMIME']) ? $GLOBALS['cfg']['BrowseMIME'] : null,
+    'server_type' => Util::getServerType(),
+    'max_rows' => intval($GLOBALS['cfg']['MaxRows']),
+    'char_editing' => isset($GLOBALS['cfg']['CharEditing']) ? $GLOBALS['cfg']['CharEditing'] : null,
+    'attribute_types' => $GLOBALS['dbi']->types->getAttributes(),
+    'privs_available' => (isset($GLOBALS['col_priv']) ? $GLOBALS['col_priv'] : false
+        && isset($GLOBALS['is_reload_priv']) ? $GLOBALS['is_reload_priv'] : false
+    ),
+    'max_length' => $GLOBALS['dbi']->getVersion() >= 50503 ? 1024 : 255,
+    'have_partitioning' => Partition::havePartitioning(),
+    'dbi' => $GLOBALS['dbi'],
+    'disable_is' => $GLOBALS['cfg']['Server']['DisableIS'],
+]);
 
 unset($form_params);
 

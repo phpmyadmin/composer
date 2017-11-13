@@ -65,12 +65,14 @@ matrix:
       env: CI_MODE=release
     - php: "7.0"
       env: CI_MODE=docs
+    - php: "7.1"
+      env: CI_MODE=apidocs
     - os: osx
       language: generic
       env: CI_MODE=test
       before_install:
-        - brew tap homebrew/php
         - brew update
+        - brew tap homebrew/php
         - brew install gettext php71 mariadb
         - brew link --force gettext
         - sed -i -e 's/^memory_limit = .*/memory_limit = -1/' /usr/local/etc/php/7.1/php.ini

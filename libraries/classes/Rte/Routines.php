@@ -198,7 +198,7 @@ class Routines
      *
      * @return array
      */
-    public static function handleRequestCreateOrEdit($errors, $db)
+    public static function handleRequestCreateOrEdit(array $errors, $db)
     {
         if (empty($_REQUEST['editor_process_add'])
             && empty($_REQUEST['editor_process_edit'])
@@ -372,7 +372,7 @@ class Routines
     public static function create(
         $routine_query,
         $create_routine,
-        $privilegesBackup
+        array $privilegesBackup
     ) {
         $result = $GLOBALS['dbi']->tryQuery($routine_query);
         if (!$result) {
@@ -697,7 +697,7 @@ class Routines
      *
      * @return string    HTML code of one row of parameter table for the editor.
      */
-    public static function getParameterRow($routine = array(), $index = null, $class = '')
+    public static function getParameterRow(array $routine = array(), $index = null, $class = '')
     {
         global $param_directions, $param_opts_num, $titles;
 
@@ -765,6 +765,8 @@ class Routines
         $retval .= "            <td class='hide no_len'>---</td>\n";
         $retval .= "            <td class='routine_param_opts_text'>\n";
         $retval .= Charsets::getCharsetDropdownBox(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['DisableIS'],
             "item_param_opts_text[$index]",
             null,
             $routine['item_param_opts_text'][$i]
@@ -809,7 +811,7 @@ class Routines
      *
      * @return string   HTML code for the editor.
      */
-    public static function getEditorForm($mode, $operation, $routine)
+    public static function getEditorForm($mode, $operation, array $routine)
     {
         global $db, $errors, $param_sqldataaccess, $param_opts_num;
 
@@ -982,6 +984,8 @@ class Routines
         $retval .= "    <td>" . __('Return options') . "</td>";
         $retval .= "    <td><div>";
         $retval .= Charsets::getCharsetDropdownBox(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['DisableIS'],
             "item_returnopts_text",
             null,
             $routine['item_returnopts_text']
@@ -1093,7 +1097,7 @@ class Routines
      */
     public static function getQueryFromRequest()
     {
-        global $_REQUEST, $errors, $param_sqldataaccess, $param_directions, $PMA_Types;
+        global $_REQUEST, $errors, $param_sqldataaccess, $param_directions, $dbi;
 
         $_REQUEST['item_type'] = isset($_REQUEST['item_type'])
             ? $_REQUEST['item_type'] : '';
@@ -1197,7 +1201,7 @@ class Routines
                         }
                     }
                     if (! empty($_REQUEST['item_param_opts_text'][$i])) {
-                        if ($PMA_Types->getTypeClass($item_param_type[$i]) == 'CHAR') {
+                        if ($dbi->types->getTypeClass($item_param_type[$i]) == 'CHAR') {
                             $params .= ' CHARSET '
                                 . mb_strtolower(
                                     $_REQUEST['item_param_opts_text'][$i]
@@ -1205,7 +1209,7 @@ class Routines
                         }
                     }
                     if (! empty($_REQUEST['item_param_opts_num'][$i])) {
-                        if ($PMA_Types->getTypeClass($item_param_type[$i]) == 'NUMBER') {
+                        if ($dbi->types->getTypeClass($item_param_type[$i]) == 'NUMBER') {
                             $params .= ' '
                                 . mb_strtoupper(
                                     $_REQUEST['item_param_opts_num'][$i]
@@ -1259,13 +1263,13 @@ class Routines
                 }
             }
             if (! empty($_REQUEST['item_returnopts_text'])) {
-                if ($PMA_Types->getTypeClass($item_returntype) == 'CHAR') {
+                if ($dbi->types->getTypeClass($item_returntype) == 'CHAR') {
                     $query .= ' CHARSET '
                         . mb_strtolower($_REQUEST['item_returnopts_text']);
                 }
             }
             if (! empty($_REQUEST['item_returnopts_num'])) {
-                if ($PMA_Types->getTypeClass($item_returntype) == 'NUMBER') {
+                if ($dbi->types->getTypeClass($item_returntype) == 'NUMBER') {
                     $query .= ' '
                         . mb_strtoupper($_REQUEST['item_returnopts_num']);
                 }
@@ -1342,7 +1346,7 @@ class Routines
             $queries   = array();
             $end_query = array();
             $args      = array();
-            $all_functions = $GLOBALS['PMA_Types']->getAllFunctions();
+            $all_functions = $GLOBALS['dbi']->types->getAllFunctions();
             for ($i = 0; $i < $routine['item_num_params']; $i++) {
                 if (isset($_REQUEST['params'][$routine['item_param_name'][$i]])) {
                     $value = $_REQUEST['params'][$routine['item_param_name'][$i]];
@@ -1554,7 +1558,7 @@ class Routines
      *
      * @return string
      */
-    private static function browseRow($row)
+    private static function browseRow(array $row)
     {
         $output = null;
         foreach ($row as $value) {
@@ -1576,7 +1580,7 @@ class Routines
      *
      * @return string   HTML code for the routine execution dialog.
      */
-    public static function getExecuteForm($routine)
+    public static function getExecuteForm(array $routine)
     {
         global $db, $cfg;
 

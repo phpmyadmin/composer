@@ -12,13 +12,9 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\InsertEdit;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
-use PhpMyAdmin\Theme;
-use PhpMyAdmin\Tracker;
-use PhpMyAdmin\Types;
-use PhpMyAdmin\TypesMySQL;
+use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
-
 
 /**
  * Tests for PhpMyAdmin\InsertEdit
@@ -26,7 +22,7 @@ use stdClass;
  * @package PhpMyAdmin-test
  * @group medium
  */
-class InsertEditTest extends \PHPUnit_Framework_TestCase
+class InsertEditTest extends TestCase
 {
     /**
      * Setup for test cases
@@ -41,7 +37,6 @@ class InsertEditTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['text_dir'] = 'ltr';
         $GLOBALS['db'] = 'db';
         $GLOBALS['table'] = 'table';
-        $GLOBALS['PMA_Types'] = new TypesMySQL();
         $GLOBALS['cfg']['LimitChars'] = 50;
         $GLOBALS['cfg']['LongtextDoubleTextarea'] = false;
         $GLOBALS['cfg']['ShowFieldTypesInDataEditView'] = true;
@@ -241,7 +236,7 @@ class InsertEditTest extends \PHPUnit_Framework_TestCase
             ->method('query')
             ->with(
                 'SELECT * FROM `db`.`table` LIMIT 1;',
-                null,
+                DatabaseInterface::CONNECT_USER,
                 DatabaseInterface::QUERY_STORE
             )
             ->will($this->returnValue('result1'));
@@ -599,7 +594,6 @@ class InsertEditTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $GLOBALS['PMA_Types'] = new Types;
         $column['Field'] = 'num';
         $this->assertContains(
             '<select name="funcsa" b tabindex="5" id="field_3_1"',
@@ -1214,7 +1208,7 @@ class InsertEditTest extends \PHPUnit_Framework_TestCase
 
         /**
          * This condition should be tested, however, it gives an undefined function
-         * PMA_getFileSelectOptions error:
+         * PhpMyAdmin\FileListing::getFileSelectOptions error:
          * $GLOBALS['cfg']['UploadDir'] = true;
          *
          */
@@ -2238,7 +2232,7 @@ class InsertEditTest extends \PHPUnit_Framework_TestCase
             ->with(
                 'SELECT `TABLE_COMMENT` FROM `information_schema`.`TABLES` WHERE '
                 . '`f`=1',
-                null,
+                DatabaseInterface::CONNECT_USER,
                 DatabaseInterface::QUERY_STORE
             )
             ->will($this->returnValue('r1'));

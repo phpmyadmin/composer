@@ -388,6 +388,7 @@ img.lightbulb {
 
 /* leave some space between icons and text */
 .icon {
+    image-rendering: pixelated;
     vertical-align:     middle;
     margin-<?php echo $left; ?>:        0.3em;
 }
@@ -1101,6 +1102,15 @@ div#logTable table {
 
 /* end serverstatus */
 
+#sectionlinks {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #CCC;
+}
+#sectionlinks a {
+    margin-<?php echo $right; ?>: 7px;
+}
+
 /* server variables */
 #serverVariables {
     width: 100%;
@@ -1356,6 +1366,10 @@ div.sqlvalidate  {
     background:         <?php echo $GLOBALS['cfg']['BgOne']; ?>;
 }
 
+.result_query div.sqlOuter {
+    text-align: <?php echo $left; ?>;
+}
+
 #PMA_slidingMessage code.sql {
     border:             <?php echo $GLOBALS['cfg']['MainColor']; ?> solid 1px;
     border-top:         0;
@@ -1528,6 +1542,10 @@ select.invalid_value,
 
 .export_table_name {
     vertical-align: middle;
+}
+
+.exportoptions h2 {
+    word-wrap: break-word;
 }
 
 .exportoptions h3, .importoptions h3 {
@@ -2052,6 +2070,13 @@ fieldset .disabled-field td {
     border: 1px solid #aaa;
     float: <?php echo $right; ?>;
     overflow: hidden;
+    width: 450px;
+    height: 300px;
+}
+
+#openlayersmap{
+    width: 450px;
+    height: 300px;
 }
 
 .placeholderDrag {
@@ -2355,6 +2380,10 @@ body .ui-widget {
 
 .ui-dialog fieldset legend a {
     color: #0000FF;
+}
+
+.ui-draggable {
+    z-index: 801;
 }
 
 /* jqPlot */
@@ -3348,4 +3377,10 @@ body .ui-dialog .ui-button-text-only .ui-button-text {
     #serverinfo .item {
         margin: 4px;
     }
+}
+
+/* templates/database/designer */
+/* side menu */
+#name-panel {
+    overflow:hidden;
 }

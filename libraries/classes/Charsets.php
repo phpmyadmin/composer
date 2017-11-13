@@ -7,6 +7,7 @@
  */
 namespace PhpMyAdmin;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Util;
 
 /**
@@ -16,7 +17,6 @@ use PhpMyAdmin\Util;
  */
 class Charsets
 {
-
     /**
      * MySQL charsets map
      *
@@ -56,25 +56,34 @@ class Charsets
     /**
      * Loads charset data from the MySQL server.
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return void
      */
-    public static function loadCharsets()
+    private static function loadCharsets(DatabaseInterface $dbi, $disableIs)
     {
         /* Data already loaded */
         if (count(self::$_charsets) > 0) {
             return;
         }
 
-        $sql = 'SELECT * FROM information_schema.CHARACTER_SETS';
-        $res = $GLOBALS['dbi']->query($sql);
+        if ($disableIs) {
+            $sql = 'SHOW CHARACTER SET';
+        } else {
+            $sql = 'SELECT `CHARACTER_SET_NAME` AS `Charset`,'
+                . ' `DESCRIPTION` AS `Description`'
+                . ' FROM `information_schema`.`CHARACTER_SETS`';
+        }
+        $res = $dbi->query($sql);
 
         self::$_charsets = array();
-        while ($row = $GLOBALS['dbi']->fetchAssoc($res)) {
-            $name = $row['CHARACTER_SET_NAME'];
+        while ($row = $dbi->fetchAssoc($res)) {
+            $name = $row['Charset'];
             self::$_charsets[] = $name;
-            self::$_charsets_descriptions[$name] = $row['DESCRIPTION'];
+            self::$_charsets_descriptions[$name] = $row['Description'];
         }
-        $GLOBALS['dbi']->freeResult($res);
+        $dbi->freeResult($res);
 
         sort(self::$_charsets, SORT_STRING);
     }
@@ -82,26 +91,36 @@ class Charsets
     /**
      * Loads collation data from the MySQL server.
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return void
      */
-    public static function loadCollations()
+    private static function loadCollations(DatabaseInterface $dbi, $disableIs)
     {
         /* Data already loaded */
         if (count(self::$_collations) > 0) {
             return;
         }
 
-        $sql = 'SELECT * FROM information_schema.COLLATIONS';
-        $res = $GLOBALS['dbi']->query($sql);
-        while ($row = $GLOBALS['dbi']->fetchAssoc($res)) {
-            $char_set_name = $row['CHARACTER_SET_NAME'];
-            $name = $row['COLLATION_NAME'];
+        if ($disableIs) {
+            $sql = 'SHOW COLLATION';
+        } else {
+            $sql = 'SELECT `CHARACTER_SET_NAME` AS `Charset`,'
+                . ' `COLLATION_NAME` AS `Collation`, `IS_DEFAULT` AS `Default`'
+                . ' FROM `information_schema`.`COLLATIONS`';
+        }
+
+        $res = $dbi->query($sql);
+        while ($row = $dbi->fetchAssoc($res)) {
+            $char_set_name = $row['Charset'];
+            $name = $row['Collation'];
             self::$_collations[$char_set_name][] = $name;
-            if ($row['IS_DEFAULT'] == 'Yes' || $row['IS_DEFAULT'] == '1') {
+            if ($row['Default'] == 'Yes' || $row['Default'] == '1') {
                 self::$_default_collations[$char_set_name] = $name;
             }
         }
-        $GLOBALS['dbi']->freeResult($res);
+        $dbi->freeResult($res);
 
         foreach (self::$_collations as $key => $value) {
             sort(self::$_collations[$key], SORT_STRING);
@@ -111,63 +130,82 @@ class Charsets
     /**
      * Get MySQL charsets
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return array
      */
-    public static function getMySQLCharsets()
+    public static function getMySQLCharsets(DatabaseInterface $dbi, $disableIs)
     {
-        self::loadCharsets();
+        self::loadCharsets($dbi, $disableIs);
         return self::$_charsets;
     }
 
     /**
      * Get MySQL charsets descriptions
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return array
      */
-    public static function getMySQLCharsetsDescriptions()
+    public static function getMySQLCharsetsDescriptions(DatabaseInterface $dbi, $disableIs)
     {
-        self::loadCharsets();
+        self::loadCharsets($dbi, $disableIs);
         return self::$_charsets_descriptions;
     }
 
     /**
      * Get MySQL collations
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return array
      */
-    public static function getMySQLCollations()
+    public static function getMySQLCollations(DatabaseInterface $dbi, $disableIs)
     {
-        self::loadCollations();
+        self::loadCollations($dbi, $disableIs);
         return self::$_collations;
     }
 
     /**
      * Get MySQL default collations
      *
+     * @param DatabaseInterface $dbi       DatabaseInterface instance
+     * @param boolean           $disableIs Disable use of INFORMATION_SCHEMA
+     *
      * @return array
      */
-    public static function getMySQLCollationsDefault()
+    public static function getMySQLCollationsDefault(DatabaseInterface $dbi, $disableIs)
     {
-        self::loadCollations();
+        self::loadCollations($dbi, $disableIs);
         return self::$_default_collations;
     }
 
     /**
      * Generate charset dropdown box
      *
-     * @param string      $name           Element name
-     * @param string      $id             Element id
-     * @param null|string $default        Default value
-     * @param bool        $label          Label
-     * @param bool        $submitOnChange Submit on change
+     * @param DatabaseInterface $dbi            DatabaseInterface instance
+     * @param boolean           $disableIs      Disable use of INFORMATION_SCHEMA
+     * @param string            $name           Element name
+     * @param string            $id             Element id
+     * @param null|string       $default        Default value
+     * @param bool              $label          Label
+     * @param bool              $submitOnChange Submit on change
      *
      * @return string
      */
     public static function getCharsetDropdownBox(
-        $name = null, $id = null, $default = null, $label = true,
+        DatabaseInterface $dbi,
+        $disableIs,
+        $name = null,
+        $id = null,
+        $default = null,
+        $label = true,
         $submitOnChange = false
     ) {
-        self::loadCharsets();
+        self::loadCharsets($dbi, $disableIs);
         if (empty($name)) {
             $name = 'character_set';
         }
@@ -201,20 +239,27 @@ class Charsets
     /**
      * Generate collation dropdown box
      *
-     * @param string      $name           Element name
-     * @param string      $id             Element id
-     * @param null|string $default        Default value
-     * @param bool        $label          Label
-     * @param bool        $submitOnChange Submit on change
+     * @param DatabaseInterface $dbi            DatabaseInterface instance
+     * @param boolean           $disableIs      Disable use of INFORMATION_SCHEMA
+     * @param string            $name           Element name
+     * @param string            $id             Element id
+     * @param null|string       $default        Default value
+     * @param bool              $label          Label
+     * @param bool              $submitOnChange Submit on change
      *
      * @return string
      */
     public static function getCollationDropdownBox(
-        $name = null, $id = null, $default = null, $label = true,
+        DatabaseInterface $dbi,
+        $disableIs,
+        $name = null,
+        $id = null,
+        $default = null,
+        $label = true,
         $submitOnChange = false
     ) {
-        self::loadCharsets();
-        self::loadCollations();
+        self::loadCharsets($dbi, $disableIs);
+        self::loadCollations($dbi, $disableIs);
         if (empty($name)) {
             $name = 'collation';
         }
@@ -252,11 +297,11 @@ class Charsets
     }
 
     /**
-     * returns description for given collation
+     * Returns description for given collation
      *
      * @param string $collation MySQL collation string
      *
-     * @return string  collation description
+     * @return string collation description
      */
     public static function getCollationDescr($collation)
     {

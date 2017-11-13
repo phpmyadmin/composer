@@ -8,7 +8,6 @@
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Util;
-use stdClass;
 
 /**
  * Responsible for retrieving version information and notifiying about latest version
@@ -136,7 +135,7 @@ class VersionInformation
      *
      * @return array containing the version and date of latest compatible version
      */
-    public function getLatestCompatibleVersion($releases)
+    public function getLatestCompatibleVersion(array $releases)
     {
         foreach ($releases as $release) {
             $phpVersions = $release->php_versions;

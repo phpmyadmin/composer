@@ -8,21 +8,17 @@
 
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Config\FormDisplay;
+use PhpMyAdmin\Config\FormDisplayTemplate;
 use PhpMyAdmin\Config\ServerConfigChecks;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\LanguageManager;
-use PhpMyAdmin\Url;
 use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\Setup\Index as SetupIndex;
+use PhpMyAdmin\Url;
 
 if (!defined('PHPMYADMIN')) {
     exit;
 }
-
-/**
- * Core libraries.
- */
-require_once './setup/lib/index.lib.php';
-require_once './libraries/config/FormDisplay.tpl.php';
 
 // prepare unfiltered language list
 $all_languages = LanguageManager::getInstance()->sortedLanguages();
@@ -31,13 +27,13 @@ $all_languages = LanguageManager::getInstance()->sortedLanguages();
 $cf = $GLOBALS['ConfigFile'];
 
 // message handling
-PMA_messagesBegin();
+SetupIndex::messagesBegin();
 
 //
 // Check phpMyAdmin version
 //
 if (isset($_GET['version_check'])) {
-    PMA_versionCheck();
+    SetupIndex::versionCheck();
 }
 
 //
@@ -59,7 +55,7 @@ $text .= __(
     . 'follow this link to use a secure connection.'
 );
 $text .= '</a>';
-PMA_messagesSet('notice', 'no_https', __('Insecure connection'), $text);
+SetupIndex::messagesSet('notice', 'no_https', __('Insecure connection'), $text);
 
 echo '<form id="select_lang" method="post">';
 echo Url::getHiddenInputs();
@@ -84,7 +80,7 @@ echo '</form>';
 switch ($action_done) {
 case 'config_saved':
     /* Use uniqid to display this message every time configuration is saved */
-    PMA_messagesSet(
+    SetupIndex::messagesSet(
         'notice', uniqid('config_saved'), __('Configuration saved.'),
         Sanitize::sanitize(
             __(
@@ -97,7 +93,7 @@ case 'config_saved':
     break;
 case 'config_not_saved':
     /* Use uniqid to display this message every time configuration is saved */
-    PMA_messagesSet(
+    SetupIndex::messagesSet(
         'notice', uniqid('config_not_saved'), __('Configuration not saved!'),
         Sanitize::sanitize(
             __(
@@ -116,8 +112,8 @@ default:
 echo '<h2>' , __('Overview') , '</h2>';
 
 // message handling
-PMA_messagesEnd();
-PMA_messagesShowHtml();
+SetupIndex::messagesEnd();
+SetupIndex::messagesShowHtml();
 
 echo '<a href="#" id="show_hidden_messages" class="hide">';
 echo __('Show hidden messages (#MSG_COUNT)');
@@ -130,7 +126,7 @@ echo '</legend>';
 //
 // Display server list
 //
-echo PMA_displayFormTop(
+echo FormDisplayTemplate::displayFormTop(
     'index.php', 'get',
     array(
         'page' => 'servers',
@@ -139,7 +135,7 @@ echo PMA_displayFormTop(
 );
 echo '<div class="form">';
 if ($cf->getServerCount() > 0) {
-    echo '<table cellspacing="0" class="datatable" style="table-layout: fixed">';
+    echo '<table cellspacing="0" class="datatable">';
     echo '<tr>';
     echo '<th>#</th>';
     echo '<th>' , __('Name') , '</th>';
@@ -155,7 +151,7 @@ if ($cf->getServerCount() > 0) {
             , htmlspecialchars($cf->getValue("Servers/$id/auth_type"))
             ,  '</td>';
         echo '<td>' , htmlspecialchars($cf->getServerDSN($id)) , '</td>';
-        echo '<td style="white-space: nowrap">';
+        echo '<td class="nowrap">';
         echo '<small>';
         echo '<a href="' , Url::getCommon(array('page' => 'servers', 'mode' => 'edit', 'id' => $id)), '">'
             , __('Edit') , '</a>';
@@ -179,14 +175,14 @@ if ($cf->getServerCount() > 0) {
 
 echo '<table width="100%">';
 echo '<tr>';
-echo '<td class="lastrow" style="text-align: left">';
+echo '<td class="lastrow left">';
 echo '<input type="submit" name="submit" value="' , __('New server') , '" />';
 echo '</td>';
 echo '</tr>';
 echo '</table>';
 echo '</div>';
 
-echo PMA_displayFormBottom();
+echo FormDisplayTemplate::displayFormBottom();
 
 echo '</fieldset>';
 
@@ -197,7 +193,7 @@ echo '<fieldset class="simple"><legend>' , __('Configuration file') , '</legend>
 //
 $form_display = new FormDisplay($cf);
 
-echo PMA_displayFormTop('config.php');
+echo FormDisplayTemplate::displayFormTop('config.php');
 echo '<table width="100%" cellspacing="0">';
 
 // Display language list
@@ -208,7 +204,7 @@ $opts = array(
 foreach ($all_languages as $each_lang) {
     $opts['values'][$each_lang->getCode()] = $each_lang->getName();
 }
-echo PMA_displayInput(
+echo FormDisplayTemplate::displayInput(
     'DefaultLang', __('Default language'), 'select',
     $cf->getValue('DefaultLang'), '', true, $opts
 );
@@ -233,7 +229,7 @@ if ($cf->getServerCount() > 0) {
     $opts['values']['1'] = __('- none -');
     $opts['values_escaped'] = true;
 }
-echo PMA_displayInput(
+echo FormDisplayTemplate::displayInput(
     'ServerDefault', __('Default server'), 'select',
     $cf->getValue('ServerDefault'), '', true, $opts
 );
@@ -245,13 +241,13 @@ $opts = array(
         'win' => 'Windows (\r\n)'),
     'values_escaped' => true);
 $eol = Core::ifSetOr($_SESSION['eol'], (PMA_IS_WINDOWS ? 'win' : 'unix'));
-echo PMA_displayInput(
+echo FormDisplayTemplate::displayInput(
     'eol', __('End of line'), 'select',
     $eol, '', true, $opts
 );
 
 echo '<tr>';
-echo '<td colspan="2" class="lastrow" style="text-align: left">';
+echo '<td colspan="2" class="lastrow left">';
 echo '<input type="submit" name="submit_display" value="' , __('Display') , '" />';
 echo '<input type="submit" name="submit_download" value="' , __('Download') , '" />';
 echo '&nbsp; &nbsp;';
@@ -261,7 +257,7 @@ echo '</td>';
 echo '</tr>';
 echo '</table>';
 
-echo PMA_displayFormBottom();
+echo FormDisplayTemplate::displayFormBottom();
 
 echo '</fieldset>';
 echo '<div id="footer">';

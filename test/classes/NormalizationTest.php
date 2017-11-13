@@ -7,21 +7,22 @@
  */
 namespace PhpMyAdmin\Tests;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Normalization;
 use PhpMyAdmin\Theme;
-use PhpMyAdmin\TypesMySQL;
+use PhpMyAdmin\Types;
 use PhpMyAdmin\Util;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 $GLOBALS['server'] = 1;
-
 
 /**
  * tests for PhpMyAdmin\Normalization
  *
  * @package PhpMyAdmin-test
  */
-class NormalizationTest extends \PHPUnit_Framework_TestCase
+class NormalizationTest extends TestCase
 {
     /**
      * prepares environment for tests
@@ -31,7 +32,6 @@ class NormalizationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $GLOBALS['cfg']['LimitChars'] = 50;
-        $GLOBALS['PMA_Types'] = new TypesMySQL();
         $GLOBALS['cfg']['ServerDefault'] = "PMA_server";
         $GLOBALS['cfg']['ShowHint'] = true;
         $GLOBALS['cfg']['CharEditing'] = '';
@@ -39,6 +39,8 @@ class NormalizationTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['db'] = 'PMA_db';
         $GLOBALS['table'] = 'PMA_table';
         $GLOBALS['server'] = 1;
+        $GLOBALS['cfg']['Server']['DisableIS'] = false;
+        $_REQUEST['change_column'] = null;
 
         //$_SESSION
 
@@ -46,6 +48,7 @@ class NormalizationTest extends \PHPUnit_Framework_TestCase
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
+        $dbi->types = new Types($dbi);
         $GLOBALS['dbi'] = $dbi;
         // set expectations
         $dbi->expects($this->any())
@@ -66,13 +69,13 @@ class NormalizationTest extends \PHPUnit_Framework_TestCase
             ->method('getColumnNames')
             ->will($this->returnValue(array("id", "col1", "col2")));
         $map = array(
-          array('PMA_db', 'PMA_table1', null, array()),
+          array('PMA_db', 'PMA_table1', DatabaseInterface::CONNECT_USER, array()),
           array(
-            'PMA_db', 'PMA_table', null,
+            'PMA_db', 'PMA_table', DatabaseInterface::CONNECT_USER,
             array(array('Key_name'=>'PRIMARY', 'Column_name'=>'id'))
           ),
           array(
-              'PMA_db', 'PMA_table2', null,
+              'PMA_db', 'PMA_table2', DatabaseInterface::CONNECT_USER,
               array(
                 array('Key_name'=>'PRIMARY', 'Column_name'=>'id'),
                 array('Key_name'=>'PRIMARY', 'Column_name'=>'col1')

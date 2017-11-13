@@ -12,21 +12,17 @@ use PhpMyAdmin\Display\Results as DisplayResults;
 use PhpMyAdmin\Plugins\Transformations\Text_Plain_Link;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Utils\Query;
+use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Transformations;
 use ReflectionClass;
 use stdClass;
-
-/*
-* Include to test.
-*/
-require_once 'test/PMATestCase.php';
 
 /**
  * Test cases for displaying results.
  *
  * @package PhpMyAdmin-test
  */
-class ResultsTest extends \PMATestCase
+class ResultsTest extends PmaTestCase
 {
     /**
      * @access protected
@@ -79,7 +75,7 @@ class ResultsTest extends \PMATestCase
      *
      * @return the output from the private method.
      */
-    private function _callPrivateFunction($name, $params)
+    private function _callPrivateFunction($name, array $params)
     {
         $class = new ReflectionClass(DisplayResults::class);
         $method = $class->getMethod($name);
@@ -1320,7 +1316,7 @@ class ResultsTest extends \PMATestCase
                 'BLOB',
                 '1001',
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 [Core::class, 'mimeDefaultFunction'],
                 $meta,
                 $url_params,
@@ -1335,7 +1331,7 @@ class ResultsTest extends \PMATestCase
                 'BLOB',
                 hex2bin('123456'),
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 [Core::class, 'mimeDefaultFunction'],
                 $meta,
                 $url_params,
@@ -1350,7 +1346,7 @@ class ResultsTest extends \PMATestCase
                 'BLOB',
                 '1001',
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 [Core::class, 'mimeDefaultFunction'],
                 $meta,
                 $url_params,
@@ -1365,7 +1361,7 @@ class ResultsTest extends \PMATestCase
                 'BINARY',
                 '1001',
                 $transformation_plugin,
-                '',
+                [],
                 [Core::class, 'mimeDefaultFunction'],
                 $meta,
                 $url_params,
@@ -1378,7 +1374,7 @@ class ResultsTest extends \PMATestCase
                 'GEOMETRY',
                 null,
                 '',
-                '',
+                [],
                 [Core::class, 'mimeDefaultFunction'],
                 $meta,
                 $url_params,
@@ -1399,7 +1395,7 @@ class ResultsTest extends \PMATestCase
      * @param string  $transformation_plugin transformation plugin.
      *                                       Can also be the default function:
      *                                       PhpMyAdmin\Core::mimeDefaultFunction
-     * @param string  $transform_options     transformation parameters
+     * @param array   $transform_options     transformation parameters
      * @param string  $default_function      default transformation function
      * @param object  $meta                  the meta-information about the field
      * @param array   $url_params            parameters that should go to the
@@ -1413,7 +1409,7 @@ class ResultsTest extends \PMATestCase
      */
     public function testHandleNonPrintableContents(
         $display_binary, $display_blob, $category, $content,
-        $transformation_plugin, $transform_options, $default_function,
+        $transformation_plugin, array $transform_options, $default_function,
         $meta, $url_params, $is_truncated, $output
     ) {
         $_SESSION['tmpval']['display_binary'] = $display_binary;
@@ -1493,7 +1489,7 @@ class ResultsTest extends \PMATestCase
                 false,
                 $transformation_plugin,
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 false,
                 array(),
                 0,
@@ -1511,7 +1507,7 @@ class ResultsTest extends \PMATestCase
                 false,
                 $transformation_plugin,
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 false,
                 array(),
                 0,
@@ -1529,7 +1525,7 @@ class ResultsTest extends \PMATestCase
                 false,
                 [Core::class, 'mimeDefaultFunction'],
                 [Core::class, 'mimeDefaultFunction'],
-                '',
+                [],
                 false,
                 array(),
                 0,
@@ -1555,7 +1551,7 @@ class ResultsTest extends \PMATestCase
      *                                       or not
      * @param string  $transformation_plugin the name of transformation function
      * @param string  $default_function      the default transformation function
-     * @param string  $transform_options     the transformation parameters
+     * @param array   $transform_options     the transformation parameters
      * @param boolean $is_field_truncated    is data truncated due to LimitChars
      * @param array   $analyzed_sql_results  the analyzed query
      * @param integer $dt_result             the link id associated to the query
@@ -1570,7 +1566,7 @@ class ResultsTest extends \PMATestCase
     public function testGetDataCellForNonNumericColumns(
         $protectBinary, $column, $class, $meta, $map,
         $_url_params, $condition_field, $transformation_plugin,
-        $default_function, $transform_options, $is_field_truncated,
+        $default_function, array $transform_options, $is_field_truncated,
         $analyzed_sql_results, $dt_result, $col_index, $output
     ) {
         $_SESSION['tmpval']['display_binary'] = true;

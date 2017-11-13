@@ -8,9 +8,11 @@
 namespace PhpMyAdmin\Tests\Server\Status;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status\Advisor;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Theme;
+use PHPUnit\Framework\TestCase;
 
 /**
  * PhpMyAdmin\Tests\Server\Status\AdvisorTest class
@@ -19,7 +21,7 @@ use PhpMyAdmin\Theme;
  *
  * @package PhpMyAdmin-test
  */
-class AdvisorTest extends \PHPUnit_Framework_TestCase
+class AdvisorTest extends TestCase
 {
     /**
      * Prepares environment for the test.
@@ -87,7 +89,7 @@ class AdvisorTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL STATUS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),
@@ -95,7 +97,7 @@ class AdvisorTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL VARIABLES",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_variables
             ),
@@ -104,7 +106,7 @@ class AdvisorTest extends \PHPUnit_Framework_TestCase
                     . "FROM data_dictionary.GLOBAL_STATEMENTS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),

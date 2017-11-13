@@ -181,7 +181,7 @@ class ExportTexytext extends ExportPlugin
         $crlf,
         $error_url,
         $sql_query,
-        $aliases = array()
+        array $aliases = array()
     ) {
         global $what;
 
@@ -199,7 +199,7 @@ class ExportTexytext extends ExportPlugin
         // Gets the data from the database
         $result = $GLOBALS['dbi']->query(
             $sql_query,
-            null,
+            DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_UNBUFFERED
         );
         $fields_cnt = $GLOBALS['dbi']->numFields($result);
@@ -341,7 +341,7 @@ class ExportTexytext extends ExportPlugin
         $show_dates = false,
         $add_semicolon = true,
         $view = false,
-        $aliases = array()
+        array $aliases = array()
     ) {
         global $cfgRelation;
 
@@ -504,7 +504,7 @@ class ExportTexytext extends ExportPlugin
         $do_comments = false,
         $do_mime = false,
         $dates = false,
-        $aliases = array()
+        array $aliases = array()
     ) {
         $db_alias = $db;
         $table_alias = $table;

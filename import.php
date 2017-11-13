@@ -11,6 +11,8 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\File;
 use PhpMyAdmin\Import;
+use PhpMyAdmin\ParseAnalyze;
+use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sql;
@@ -51,7 +53,7 @@ if (isset($_REQUEST['console_bookmark_add'])) {
     if (isset($_REQUEST['label']) && isset($_REQUEST['db'])
         && isset($_REQUEST['bookmark_query']) && isset($_REQUEST['shared'])
     ) {
-        $cfgBookmark = Bookmark::getParams();
+        $cfgBookmark = Bookmark::getParams($GLOBALS['cfg']['Server']['user']);
         $bookmarkFields = array(
             'bkm_database' => $_REQUEST['db'],
             'bkm_user'  => $cfgBookmark['user'],
@@ -59,7 +61,12 @@ if (isset($_REQUEST['console_bookmark_add'])) {
             'bkm_label' => $_REQUEST['label']
         );
         $isShared = ($_REQUEST['shared'] == 'true' ? true : false);
-        $bookmark = Bookmark::createBookmark($bookmarkFields, $isShared);
+        $bookmark = Bookmark::createBookmark(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['user'],
+            $bookmarkFields,
+            $isShared
+        );
         if ($bookmark !== false && $bookmark->save()) {
             $response->addJSON('message', __('Succeeded'));
             $response->addJSON('data', $bookmarkFields);
@@ -327,6 +334,8 @@ if (! empty($_REQUEST['id_bookmark'])) {
     switch ($_REQUEST['action_bookmark']) {
     case 0: // bookmarked query that have to be run
         $bookmark = Bookmark::get(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['user'],
             $db,
             $id_bookmark,
             'id',
@@ -360,7 +369,12 @@ if (! empty($_REQUEST['id_bookmark'])) {
         }
         break;
     case 1: // bookmarked query that have to be displayed
-        $bookmark = Bookmark::get($db, $id_bookmark);
+        $bookmark = Bookmark::get(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['user'],
+            $db,
+            $id_bookmark
+        );
         $import_text = $bookmark->getQuery();
         if ($response->isAjax()) {
             $message = PhpMyAdmin\Message::success(__('Showing bookmark'));
@@ -374,7 +388,12 @@ if (! empty($_REQUEST['id_bookmark'])) {
         }
         break;
     case 2: // bookmarked query that have to be deleted
-        $bookmark = Bookmark::get($db, $id_bookmark);
+        $bookmark = Bookmark::get(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['user'],
+            $db,
+            $id_bookmark
+        );
         if (! empty($bookmark)) {
             $bookmark->delete();
             if ($response->isAjax()) {
@@ -514,10 +533,8 @@ if (! $error && isset($_POST['skip'])) {
 $sql_data = array('valid_sql' => array(), 'valid_queries' => 0);
 
 if (! $error) {
-    // Check for file existence
-    include_once "libraries/plugin_interface.lib.php";
     /* @var $import_plugin ImportPlugin */
-    $import_plugin = PMA_getPlugin(
+    $import_plugin = Plugins::getPlugin(
         "import",
         $format,
         'libraries/classes/Plugins/Import/',
@@ -585,7 +602,7 @@ if (! empty($id_bookmark) && $_REQUEST['action_bookmark'] == 2) {
         );
         $message->addParam($executed_queries);
 
-        if ($import_notice) {
+        if (! empty($import_notice)) {
             $message->addHtml($import_notice);
         }
         if (! empty($local_import_file)) {
@@ -637,13 +654,11 @@ if (isset($message)) {
 //  can choke on it so avoid parsing)
 $sqlLength = mb_strlen($sql_query);
 if ($sqlLength <= $GLOBALS['cfg']['MaxCharactersInDisplayedSQL']) {
-    include_once 'libraries/parse_analyze.lib.php';
-
     list(
         $analyzed_sql_results,
         $db,
         $table_from_sql
-    ) = PMA_parseAnalyze($sql_query, $db);
+    ) = ParseAnalyze::sqlQuery($sql_query, $db);
     // @todo: possibly refactor
     extract($analyzed_sql_results);
 
@@ -675,18 +690,17 @@ if ($go_sql) {
     foreach ($sql_queries as $sql_query) {
 
         // parse sql query
-        include_once 'libraries/parse_analyze.lib.php';
         list(
             $analyzed_sql_results,
             $db,
             $table_from_sql
-        ) = PMA_parseAnalyze($sql_query, $db);
+        ) = ParseAnalyze::sqlQuery($sql_query, $db);
         // @todo: possibly refactor
         extract($analyzed_sql_results);
 
         // Check if User is allowed to issue a 'DROP DATABASE' Statement
         if (Sql::hasNoRightsToDropDatabase(
-            $analyzed_sql_results, $cfg['AllowUserDropDatabase'], $GLOBALS['is_superuser']
+            $analyzed_sql_results, $cfg['AllowUserDropDatabase'], $GLOBALS['dbi']->isSuperuser()
         )) {
             PhpMyAdmin\Util::mysqlDie(
                 __('"DROP DATABASE" statements are disabled.'),
@@ -727,7 +741,7 @@ if ($go_sql) {
     // since only one bookmark has to be added for all the queries submitted through
     // the SQL tab
     if (! empty($_POST['bkm_label']) && ! empty($import_text)) {
-        $cfgBookmark = Bookmark::getParams();
+        $cfgBookmark = Bookmark::getParams($GLOBALS['cfg']['Server']['user']);
         Sql::storeTheQueryAsBookmark(
             $db, $cfgBookmark['user'],
             $_REQUEST['sql_query'], $_POST['bkm_label'],
@@ -742,7 +756,7 @@ if ($go_sql) {
 } else if ($result) {
     // Save a Bookmark with more than one queries (if Bookmark label given).
     if (! empty($_POST['bkm_label']) && ! empty($import_text)) {
-        $cfgBookmark = Bookmark::getParams();
+        $cfgBookmark = Bookmark::getParams($GLOBALS['cfg']['Server']['user']);
         Sql::storeTheQueryAsBookmark(
             $db, $cfgBookmark['user'],
             $_REQUEST['sql_query'], $_POST['bkm_label'],

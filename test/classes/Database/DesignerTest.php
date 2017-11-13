@@ -8,18 +8,14 @@ namespace PhpMyAdmin\Tests\Database;
 
 use PhpMyAdmin\Database\Designer;
 use PhpMyAdmin\DatabaseInterface;
-
-/*
- * Include to test.
- */
-require_once 'libraries/plugin_interface.lib.php';
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for PhpMyAdmin\Database\Designer
  *
  * @package PhpMyAdmin-test
  */
-class DesignerTest extends \PHPUnit_Framework_TestCase
+class DesignerTest extends TestCase
 {
 
     /**
@@ -67,7 +63,7 @@ class DesignerTest extends \PHPUnit_Framework_TestCase
             ->with(
                 "SELECT `page_nr`, `page_descr` FROM `pmadb`.`pdf_pages`"
                 . " WHERE db_name = '" . $db . "' ORDER BY `page_descr`",
-                2,
+                DatabaseInterface::CONNECT_CONTROL,
                 DatabaseInterface::QUERY_STORE,
                 false
             )

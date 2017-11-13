@@ -30,14 +30,14 @@ class ServerBinlogController extends Controller
     /**
      * Constructs ServerBinlogController
      */
-    public function __construct()
+    public function __construct($response, $dbi)
     {
-        parent::__construct();
+        parent::__construct($response, $dbi);
         $this->binary_logs = $this->dbi->fetchResult(
             'SHOW MASTER LOGS',
             'Log_name',
             null,
-            null,
+            DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_STORE
         );
     }
@@ -67,7 +67,11 @@ class ServerBinlogController extends Controller
             $url_params['dontlimitchars'] = 1;
         }
 
-        $this->response->addHTML(Common::getHtmlForSubPageHeader('binlog'));
+        $this->response->addHTML(
+            Template::get('server/sub_page_header')->render([
+                'type' => 'binlog',
+            ])
+        );
         $this->response->addHTML($this->_getLogSelector($url_params));
         $this->response->addHTML($this->_getLogInfo($url_params));
     }
@@ -79,12 +83,13 @@ class ServerBinlogController extends Controller
      *
      * @return string
      */
-    private function _getLogSelector($url_params)
+    private function _getLogSelector(array $url_params)
     {
         return Template::get('server/binlog/log_selector')->render(
             array(
                 'url_params' => $url_params,
                 'binary_logs' => $this->binary_logs,
+                'log' => $_REQUEST['log'],
             )
         );
     }
@@ -96,7 +101,7 @@ class ServerBinlogController extends Controller
      *
      * @return string
      */
-    private function _getLogInfo($url_params)
+    private function _getLogInfo(array $url_params)
     {
         /**
          * Need to find the real end of rows?
@@ -176,7 +181,7 @@ class ServerBinlogController extends Controller
      *
      * @return string
      */
-    private function _getNavigationRow($url_params, $pos, $num_rows, $dontlimitchars)
+    private function _getNavigationRow(array $url_params, $pos, $num_rows, $dontlimitchars)
     {
         $html = "";
         // we do not know how much rows are in the binlog

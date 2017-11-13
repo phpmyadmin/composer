@@ -38,6 +38,10 @@ class UtilExtension extends Twig_Extension
                 'PhpMyAdmin\Util::escapeMysqlWildcards'
             ),
             new Twig_SimpleFunction(
+                'Util_extractColumnSpec',
+                'PhpMyAdmin\Util::extractColumnSpec'
+            ),
+            new Twig_SimpleFunction(
                 'Util_formatByteDown',
                 'PhpMyAdmin\Util::formatByteDown'
             ),
@@ -56,14 +60,42 @@ class UtilExtension extends Twig_Extension
                 array('is_safe' => array('html'))
             ),
             new Twig_SimpleFunction(
+                'Util_getClassForType',
+                'PhpMyAdmin\Util::getClassForType',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
                 'Util_getDivForSliderEffect',
                 'PhpMyAdmin\Util::getDivForSliderEffect',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_getDocuLink',
+                'PhpMyAdmin\Util::getDocuLink',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_getListNavigator',
+                'PhpMyAdmin\Util::getListNavigator',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_showDocu',
+                'PhpMyAdmin\Util::showDocu',
                 array('is_safe' => array('html'))
             ),
             new Twig_SimpleFunction(
                 'Util_getDropdown',
                 'PhpMyAdmin\Util::getDropdown',
                 array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_getGISDatatypes',
+                'PhpMyAdmin\Util::getGISDatatypes'
+            ),
+            new Twig_SimpleFunction(
+                'Util_getGISFunctions',
+                'PhpMyAdmin\Util::getGISFunctions'
             ),
             new Twig_SimpleFunction(
                 'Util_getHtmlTab',
@@ -81,6 +113,16 @@ class UtilExtension extends Twig_Extension
                 array('is_safe' => array('html'))
             ),
             new Twig_SimpleFunction(
+                'Util_getRadioFields',
+                'PhpMyAdmin\Util::getRadioFields',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_getScriptNameForOption',
+                'PhpMyAdmin\Util::getScriptNameForOption',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
                 'Util_getStartAndNumberOfRowsPanel',
                 'PhpMyAdmin\Util::getStartAndNumberOfRowsPanel',
                 array('is_safe' => array('html'))
@@ -89,6 +131,10 @@ class UtilExtension extends Twig_Extension
                 'Util_getSupportedDatatypes',
                 'PhpMyAdmin\Util::getSupportedDatatypes',
                 array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_isForeignKeySupported',
+                'PhpMyAdmin\Util::isForeignKeySupported'
             ),
             new Twig_SimpleFunction(
                 'Util_linkOrButton',
@@ -105,12 +151,22 @@ class UtilExtension extends Twig_Extension
                 array('is_safe' => array('html'))
             ),
             new Twig_SimpleFunction(
+                'Util_showDocu',
+                'PhpMyAdmin\Util::showDocu',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
                 'Util_showIcons',
                 'PhpMyAdmin\Util::showIcons'
             ),
             new Twig_SimpleFunction(
                 'Util_showMySQLDocu',
                 'PhpMyAdmin\Util::showMySQLDocu',
+                array('is_safe' => array('html'))
+            ),
+            new Twig_SimpleFunction(
+                'Util_sortableTableHeader',
+                'PhpMyAdmin\Util::sortableTableHeader',
                 array('is_safe' => array('html'))
             ),
         );

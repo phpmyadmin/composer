@@ -10,6 +10,7 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Export\ExportSql;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\SqlParser\Components\Expression;
@@ -104,6 +105,20 @@ class Table
     }
 
     /**
+     * Table getter
+     *
+     * @param string            $table_name table name
+     * @param string            $db_name    database name
+     * @param DatabaseInterface $dbi        database interface for the table
+     *
+     * @return Table
+     */
+    public static function get($table_name, $db_name, DatabaseInterface $dbi = null)
+    {
+        return new Table($table_name, $db_name, $dbi);
+    }
+
+    /**
      * return the last error
      *
      * @return string the last error
@@ -170,7 +185,7 @@ class Table
     /**
      * Checks the storage engine used to create table
      *
-     * @param array or string $engine Checks the table engine against an
+     * @param array|string $engine Checks the table engine against an
      * array of engine strings or a single string, should be uppercase
      *
      * @return bool True, if $engine matches the storage engine for the table,
@@ -691,7 +706,7 @@ class Table
                     'SELECT 1 FROM ' . Util::backquote($db) . '.'
                     . Util::backquote($table) . ' LIMIT '
                     . $GLOBALS['cfg']['MaxExactCountViews'],
-                    null,
+                    DatabaseInterface::CONNECT_USER,
                     DatabaseInterface::QUERY_STORE
                 );
                 if (!$this->_dbi->getError()) {
@@ -763,8 +778,8 @@ class Table
      *
      * @return int|boolean
      */
-    static public function duplicateInfo($work, $pma_table, $get_fields,
-        $where_fields, $new_fields
+    static public function duplicateInfo($work, $pma_table, array $get_fields,
+        array $where_fields, array $new_fields
     ) {
         $last_id = -1;
 
@@ -908,15 +923,12 @@ class Table
 
         // No table is created when this is a data-only operation.
         if ($what != 'dataonly') {
-
-            include_once "libraries/plugin_interface.lib.php";
-
             /**
              * Instance used for exporting the current structure of the table.
              *
-             * @var \PhpMyAdmin\Plugins\Export\ExportSql
+             * @var PhpMyAdmin\Plugins\Export\ExportSql
              */
-            $export_sql_plugin = PMA_getPlugin(
+            $export_sql_plugin = Plugins::getPlugin(
                 "export",
                 "sql",
                 'libraries/classes/Plugins/Export/',
@@ -1565,7 +1577,7 @@ class Table
      *
      * @return array
      */
-    private function _formatColumns($indexed, $backquoted, $fullName)
+    private function _formatColumns(array $indexed, $backquoted, $fullName)
     {
         $return = array();
         foreach ($indexed as $column) {
@@ -1718,7 +1730,7 @@ class Table
             . "', '" . $GLOBALS['dbi']->escapeString($this->_name) . "', '"
             . $GLOBALS['dbi']->escapeString(json_encode($this->uiprefs)) . "')";
 
-        $success = $this->_dbi->tryQuery($sql_query, $GLOBALS['controllink']);
+        $success = $this->_dbi->tryQuery($sql_query, DatabaseInterface::CONNECT_CONTROL);
 
         if (!$success) {
             $message = Message::error(
@@ -1726,7 +1738,7 @@ class Table
             );
             $message->addMessage(
                 Message::rawError(
-                    $this->_dbi->getError($GLOBALS['controllink'])
+                    $this->_dbi->getError(DatabaseInterface::CONNECT_CONTROL)
                 ),
                 '<br /><br />'
             );
@@ -1745,7 +1757,7 @@ class Table
                 ' ORDER BY last_update ASC' .
                 ' LIMIT ' . $num_rows_to_delete;
             $success = $this->_dbi->tryQuery(
-                $sql_query, $GLOBALS['controllink']
+                $sql_query, DatabaseInterface::CONNECT_CONTROL
             );
 
             if (!$success) {
@@ -1760,7 +1772,7 @@ class Table
                 );
                 $message->addMessage(
                     Message::rawError(
-                        $this->_dbi->getError($GLOBALS['controllink'])
+                        $this->_dbi->getError(DatabaseInterface::CONNECT_CONTROL)
                     ),
                     '<br /><br />'
                 );
@@ -2125,7 +2137,7 @@ class Table
      *
      * @return boolean True on update succeed or False on failure
      */
-    public function updateDisplayField($display_field, $cfgRelation)
+    public function updateDisplayField($display_field, array $cfgRelation)
     {
         $upd_query = false;
         if ($display_field == '') {
@@ -2149,7 +2161,7 @@ class Table
         if ($upd_query) {
             $this->_dbi->query(
                 $upd_query,
-                $GLOBALS['controllink'],
+                DatabaseInterface::CONNECT_CONTROL,
                 0,
                 false
             );
@@ -2170,9 +2182,9 @@ class Table
      *
      * @return boolean
      */
-    public function updateInternalRelations($multi_edit_columns_name,
-        $destination_db, $destination_table, $destination_column,
-        $cfgRelation, $existrel
+    public function updateInternalRelations(array $multi_edit_columns_name,
+        array $destination_db, array $destination_table, array $destination_column,
+        array $cfgRelation, $existrel
     ) {
         $updated = false;
         foreach ($destination_db as $master_field_md5 => $foreign_db) {
@@ -2234,7 +2246,7 @@ class Table
             if (isset($upd_query)) {
                 $this->_dbi->query(
                     $upd_query,
-                    $GLOBALS['controllink'],
+                    DatabaseInterface::CONNECT_CONTROL,
                     0,
                     false
                 );
@@ -2257,9 +2269,9 @@ class Table
      *
      * @return array
      */
-    public function updateForeignKeys($destination_foreign_db,
-        $multi_edit_columns_name, $destination_foreign_table,
-        $destination_foreign_column, $options_array, $table, $existrel_foreign
+    public function updateForeignKeys(array $destination_foreign_db,
+        array $multi_edit_columns_name, array $destination_foreign_table,
+        array $destination_foreign_column, array $options_array, $table, array $existrel_foreign
     ) {
         $html_output = '';
         $preview_sql_data = '';
@@ -2451,10 +2463,10 @@ class Table
      */
     private function _getSQLToCreateForeignKey(
         $table,
-        $field,
+        array $field,
         $foreignDb,
         $foreignTable,
-        $foreignField,
+        array $foreignField,
         $name = null,
         $onDelete = null,
         $onUpdate = null

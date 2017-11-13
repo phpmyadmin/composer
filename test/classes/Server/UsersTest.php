@@ -8,6 +8,7 @@
 namespace PhpMyAdmin\Tests\Server;
 
 use PhpMyAdmin\Server\Users;
+use PHPUnit\Framework\TestCase;
 
 /**
  * PhpMyAdmin\Tests\Server\UsersTest class
@@ -16,7 +17,7 @@ use PhpMyAdmin\Server\Users;
  *
  * @package PhpMyAdmin-test
  */
-class UsersTest extends \PHPUnit_Framework_TestCase
+class UsersTest extends TestCase
 {
     /**
      * Test for Users::getHtmlForSubMenusOnUsersPage
@@ -25,6 +26,7 @@ class UsersTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHtmlForSubMenusOnUsersPage()
     {
+        $GLOBALS['server'] = 1;
         $html = Users::getHtmlForSubMenusOnUsersPage('server_privileges.php');
 
         //validate 1: topmenu2

@@ -8,16 +8,18 @@
 namespace PhpMyAdmin\Tests\Server\Status;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Server\Status\Variables;
 use PhpMyAdmin\Theme;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class is for testing PhpMyAdmin\Server\Status\Variables methods
  *
  * @package PhpMyAdmin-test
  */
-class VariablesTest extends \PHPUnit_Framework_TestCase
+class VariablesTest extends TestCase
 {
     /**
      * Prepares environment for the test.
@@ -83,7 +85,7 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL STATUS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),
@@ -91,7 +93,7 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL VARIABLES",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_variables
             ),
@@ -100,7 +102,7 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
                     . "FROM data_dictionary.GLOBAL_STATEMENTS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),

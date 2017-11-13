@@ -5,17 +5,17 @@
  *
  * @package PhpMyAdmin-test
  */
-/*
- * Include to test
- */
+namespace PhpMyAdmin\Tests;
+
 use PhpMyAdmin\Sanitize;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for methods in Sanitize class
  *
  * @package PhpMyAdmin-test
  */
-class SanitizeTest extends PHPUnit_Framework_TestCase
+class SanitizeTest extends TestCase
 {
     /**
      * Setup various pre conditions

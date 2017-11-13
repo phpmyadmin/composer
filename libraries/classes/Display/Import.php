@@ -12,6 +12,7 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Display\ImportAjax;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Url;
@@ -204,6 +205,8 @@ class Import
             $html .= '<label for="charset_of_file">' . __('Character set of the file:')
                 . '</label>' . "\n";
             $html .= Charsets::getCharsetDropdownBox(
+                $GLOBALS['dbi'],
+                $GLOBALS['cfg']['Server']['DisableIS'],
                 'charset_of_file',
                 'charset_of_file',
                 'utf8',
@@ -308,7 +311,7 @@ class Import
         $html .= '        <div class="formelementrow">';
         $html .= '           <input type="checkbox" name="allow_interrupt" value="yes"';
         $html .= '                  id="checkbox_allow_interrupt" '
-            . PMA_pluginCheckboxCheck('Import', 'allow_interrupt') . '/>';
+            . Plugins::checkboxCheck('Import', 'allow_interrupt') . '/>';
         $html .= '            <label for="checkbox_allow_interrupt">'
             . __(
                 'Allow the interruption of an import in case the script detects '
@@ -325,7 +328,7 @@ class Import
                 )
                 . '</label>';
             $html .= '            <input type="number" name="skip_queries" value="'
-                . PMA_pluginGetDefault('Import', 'skip_queries')
+                . Plugins::getDefault('Import', 'skip_queries')
                 . '" id="text_skip_queries" min="0" />';
             $html .= '        </div>';
 
@@ -334,7 +337,7 @@ class Import
             // do not show the Skip dialog to avoid the risk of someone
             // entering a value here that would interfere with "skip"
             $html .= '         <input type="hidden" name="skip_queries" value="'
-                . PMA_pluginGetDefault('Import', 'skip_queries')
+                . Plugins::getDefault('Import', 'skip_queries')
                 . '" id="text_skip_queries" />';
         }
 
@@ -371,7 +374,7 @@ class Import
     {
         $html  = '   <div class="importoptions">';
         $html .= '       <h3>' . __('Format:') . '</h3>';
-        $html .= PMA_pluginGetChoice('Import', 'format', $import_list);
+        $html .= Plugins::getChoice('Import', 'format', $import_list);
         $html .= '       <div id="import_notification"></div>';
         $html .= '   </div>';
 
@@ -380,7 +383,7 @@ class Import
         $html .= '        <p class="no_js_msg" id="scroll_to_options_msg">'
             . 'Scroll down to fill in the options for the selected format '
             . 'and ignore the options for other formats.</p>';
-        $html .= PMA_pluginGetOptions('Import', $import_list);
+        $html .= Plugins::getOptions('Import', $import_list);
         $html .= '    </div>';
         $html .= '        <div class="clearfloat"></div>';
 
@@ -650,8 +653,6 @@ class Import
     public static function getImportDisplay($import_type, $db, $table, $max_upload_size)
     {
         global $SESSION_KEY;
-        include_once './libraries/file_listing.lib.php';
-        include_once './libraries/plugin_interface.lib.php';
 
         list(
             $SESSION_KEY,
@@ -660,7 +661,7 @@ class Import
 
         /* Scan for plugins */
         /* @var $import_list ImportPlugin[] */
-        $import_list = PMA_getPlugins(
+        $import_list = Plugins::getPlugins(
             "import",
             'libraries/classes/Plugins/Import/',
             $import_type

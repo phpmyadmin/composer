@@ -8,9 +8,11 @@
 namespace PhpMyAdmin\Tests\Server;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Theme;
+use PHPUnit\Framework\TestCase;
 
 /**
  * PhpMyAdmin\Tests\Server\StatusTest class
@@ -19,7 +21,7 @@ use PhpMyAdmin\Theme;
  *
  * @package PhpMyAdmin-test
  */
-class StatusTest extends \PHPUnit_Framework_TestCase
+class StatusTest extends TestCase
 {
     /**
      * Prepares environment for the test.
@@ -76,7 +78,7 @@ class StatusTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL STATUS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),
@@ -84,7 +86,7 @@ class StatusTest extends \PHPUnit_Framework_TestCase
                 "SHOW GLOBAL VARIABLES",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_variables
             ),
@@ -93,7 +95,7 @@ class StatusTest extends \PHPUnit_Framework_TestCase
                     . "FROM data_dictionary.GLOBAL_STATEMENTS",
                 0,
                 1,
-                null,
+                DatabaseInterface::CONNECT_USER,
                 0,
                 $server_status
             ),

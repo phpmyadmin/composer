@@ -28,18 +28,25 @@ class ServerCollationsController extends Controller
      */
     public function indexAction()
     {
+        $dbi = $GLOBALS['dbi'];
+        $disableIs = $GLOBALS['cfg']['Server']['DisableIS'];
+
         /**
          * Does the common work
          */
         include_once 'libraries/server_common.inc.php';
 
-        $this->response->addHTML(Common::getHtmlForSubPageHeader('collations'));
+        $this->response->addHTML(
+            Template::get('server/sub_page_header')->render([
+                'type' => 'collations',
+            ])
+        );
         $this->response->addHTML(
             $this->_getHtmlForCharsets(
-                Charsets::getMySQLCharsets(),
-                Charsets::getMySQLCollations(),
-                Charsets::getMySQLCharsetsDescriptions(),
-                Charsets::getMySQLCollationsDefault()
+                Charsets::getMySQLCharsets($dbi, $disableIs),
+                Charsets::getMySQLCollations($dbi, $disableIs),
+                Charsets::getMySQLCharsetsDescriptions($dbi, $disableIs),
+                Charsets::getMySQLCollationsDefault($dbi, $disableIs)
             )
         );
     }
@@ -54,8 +61,8 @@ class ServerCollationsController extends Controller
      *
      * @return string
      */
-    function _getHtmlForCharsets($mysqlCharsets, $mysqlCollations,
-        $mysqlCharsetsDesc, $mysqlDftCollations
+    function _getHtmlForCharsets(array $mysqlCharsets, array $mysqlCollations,
+        array $mysqlCharsetsDesc, array $mysqlDftCollations
     ) {
         return Template::get('server/collations/charsets')->render(
             array(

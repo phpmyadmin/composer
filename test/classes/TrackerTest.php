@@ -5,23 +5,22 @@
  *
  * @package PhpMyAdmin-test
  */
+namespace PhpMyAdmin\Tests;
 
-/*
- * Include to test.
- */
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Util;
-
-require_once 'test/PMATestCase.php';
+use PHPUnit_Framework_Assert as Assert;
+use ReflectionClass;
 
 /**
  * Tests for PhpMyAdmin\Tracker
  *
  * @package PhpMyAdmin-test
  */
-class TrackerTest extends PMATestCase
+class TrackerTest extends PmaTestCase
 {
-
     /**
      * Setup function for test cases
      *
@@ -65,7 +64,7 @@ class TrackerTest extends PMATestCase
     {
         Tracker::enable();
         $this->assertTrue(
-            PHPUnit_Framework_Assert::readAttribute('PhpMyAdmin\Tracker', 'enabled')
+            Assert::readAttribute('PhpMyAdmin\Tracker', 'enabled')
         );
     }
 
@@ -120,7 +119,7 @@ class TrackerTest extends PMATestCase
      */
     public function testGetTableName($string, $expected)
     {
-        $reflection = new \ReflectionClass('PhpMyAdmin\Tracker');
+        $reflection = new ReflectionClass('PhpMyAdmin\Tracker');
         $method = $reflection->getMethod("getTableName");
         $method->setAccessible(true);
 
@@ -293,12 +292,10 @@ class TrackerTest extends PMATestCase
         "\n',
         '11' )";
 
-        $GLOBALS['controllink'] = null;
-
         $queryResults = array(
             array(
                 $expectedMainQuery,
-                null,
+                DatabaseInterface::CONNECT_CONTROL,
                 0,
                 false,
                 'executed'
@@ -384,11 +381,9 @@ class TrackerTest extends PMATestCase
         "\n',
         'CREATE DATABASE,ALTER DATABASE,DROP DATABASE' )";
 
-        $GLOBALS['controllink'] = null;
-
         $dbi->expects($this->exactly(1))
             ->method('query')
-            ->with($expectedMainQuery, null, 0, false)
+            ->with($expectedMainQuery, DatabaseInterface::CONNECT_CONTROL, 0, false)
             ->will($this->returnValue("executed"));
 
         $dbi->expects($this->any())->method('escapeString')
@@ -429,11 +424,9 @@ class TrackerTest extends PMATestCase
         " AND `table_name` = '" . $tablename . "' " .
         " AND `version` = '" . $version . "' ";
 
-        $GLOBALS['controllink'] = null;
-
         $dbi->expects($this->exactly(1))
             ->method('query')
-            ->with($sql_query, null, 0, false)
+            ->with($sql_query, DatabaseInterface::CONNECT_CONTROL, 0, false)
             ->will($this->returnValue("executed"));
 
         $dbi->expects($this->any())->method('escapeString')
@@ -475,8 +468,6 @@ class TrackerTest extends PMATestCase
             Tracker::changeTrackingData("", "", "", "", "")
         );
 
-        $GLOBALS['controllink'] = null;
-
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
@@ -511,8 +502,8 @@ class TrackerTest extends PMATestCase
             ->will(
                 $this->returnValueMap(
                     array(
-                        array($sql_query_1, null, 0, false, "executed_1"),
-                        array($sql_query_2, null, 0, false, "executed_2")
+                        array($sql_query_1, DatabaseInterface::CONNECT_CONTROL, 0, false, "executed_1"),
+                        array($sql_query_2, DatabaseInterface::CONNECT_CONTROL, 0, false, "executed_2")
                     )
                 )
             );
@@ -579,8 +570,6 @@ class TrackerTest extends PMATestCase
      */
     public function testGetTrackedData($fetchArrayReturn, $expectedArray)
     {
-        $GLOBALS['controllink'] = null;
-
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();

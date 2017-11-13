@@ -39,13 +39,13 @@ class Normalization
     ) {
         $columnTypeList = array();
         if ($colTypeCategory != 'all') {
-            $types = $GLOBALS['PMA_Types']->getColumns();
+            $types = $GLOBALS['dbi']->types->getColumns();
             $columnTypeList = $types[$colTypeCategory];
         }
-        $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+        $GLOBALS['dbi']->selectDb($db);
         $columns = $GLOBALS['dbi']->getColumns(
             $db, $table, null,
-            true, $GLOBALS['userlink']
+            true
         );
         $type = "";
         $selectColHtml = "";
@@ -84,7 +84,7 @@ class Normalization
      * @return string HTML
      */
     public static function getHtmlForCreateNewColumn(
-        $num_fields, $db, $table, $columnMeta=array()
+        $num_fields, $db, $table, array $columnMeta = array()
     ) {
         $cfgRelation = Relation::getRelationsParam();
         $content_cells = array();
@@ -97,8 +97,8 @@ class Normalization
         $comments_map = Relation::getComments($db, $table);
         for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
             $content_cells[$columnNumber] = array(
-                'columnNumber' => $columnNumber,
-                'columnMeta' => $columnMeta,
+                'column_number' => $columnNumber,
+                'column_meta' => $columnMeta,
                 'type_upper' => '',
                 'length_values_input_size' => 8,
                 'length' => '',
@@ -108,7 +108,7 @@ class Normalization
                 'fields_meta' => null,
                 'is_backup' => true,
                 'move_columns' => array(),
-                'cfgRelation' => $cfgRelation,
+                'cfg_relation' => $cfgRelation,
                 'available_mime' => isset($available_mime)?$available_mime:array(),
                 'mime_map' => $mime_map
             );
@@ -122,7 +122,18 @@ class Normalization
                 'is_backup' => true,
                 'fields_meta' => null,
                 'mimework' => $cfgRelation['mimework'],
-                'content_cells' => $content_cells
+                'content_cells' => $content_cells,
+                'change_column' => $_REQUEST['change_column'],
+                'is_virtual_columns_supported' => Util::isVirtualColumnsSupported(),
+                'browse_mime' => $GLOBALS['cfg']['BrowseMIME'],
+                'server_type' => Util::getServerType(),
+                'max_rows' => intval($GLOBALS['cfg']['MaxRows']),
+                'char_editing' => $GLOBALS['cfg']['CharEditing'],
+                'attribute_types' => $GLOBALS['dbi']->types->getAttributes(),
+                'privs_available' => $GLOBALS['col_priv'] && $GLOBALS['is_reload_priv'],
+                'max_length' => $GLOBALS['dbi']->getVersion() >= 50503 ? 1024 : 255,
+                'dbi' => $GLOBALS['dbi'],
+                'disable_is' => $GLOBALS['cfg']['Server']['DisableIS'],
                 )
             );
     }
@@ -341,9 +352,9 @@ class Normalization
         }
         $key = implode(', ', $pk);
         if (count($primarycols) > 1) {
-            $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+            $GLOBALS['dbi']->selectDb($db);
             $columns = (array) $GLOBALS['dbi']->getColumnNames(
-                $db, $table, $GLOBALS['userlink']
+                $db, $table
             );
             if (count($pk) == count($columns)) {
                 $headText = sprintf(
@@ -415,7 +426,7 @@ class Normalization
      *
      * @return string HTML
      */
-    public static function getHtmlForNewTables2NF($partialDependencies,$table)
+    public static function getHtmlForNewTables2NF(array $partialDependencies, $table)
     {
         $html = '<p><b>' . sprintf(
             __(
@@ -448,7 +459,7 @@ class Normalization
      *
      * @return array
      */
-    public static function createNewTablesFor2NF($partialDependencies, $tablesName, $table, $db)
+    public static function createNewTablesFor2NF(array $partialDependencies, $tablesName, $table, $db)
     {
         $dropCols = false;
         $nonPKCols = array();
@@ -465,7 +476,7 @@ class Normalization
             );
         }
         $message = '';
-        $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+        $GLOBALS['dbi']->selectDb($db);
         foreach ($partialDependencies as $key=>$dependents) {
             if ($tablesName->$key != $table) {
                 $backquotedKey = implode(', ', Util::backquote(explode(', ', $key)));
@@ -494,11 +505,11 @@ class Normalization
             $queries[] = 'DROP TABLE ' . Util::backquote($table);
         }
         foreach ($queries as $query) {
-            if (!$GLOBALS['dbi']->tryQuery($query, $GLOBALS['userlink'])) {
+            if (!$GLOBALS['dbi']->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
                     Message::rawError(
-                        $GLOBALS['dbi']->getError($GLOBALS['userlink'])
+                        $GLOBALS['dbi']->getError()
                     ),
                     '<br /><br />'
                 );
@@ -524,7 +535,7 @@ class Normalization
      *
      * @return array containing html and the list of new tables
      */
-    public static function getHtmlForNewTables3NF($dependencies, $tables, $db)
+    public static function getHtmlForNewTables3NF($dependencies, array $tables, $db)
     {
         $html = "";
         $i = 1;
@@ -582,7 +593,7 @@ class Normalization
      *
      * @return array
      */
-    public static function createNewTablesFor3NF($newTables, $db)
+    public static function createNewTablesFor3NF(array $newTables, $db)
     {
         $queries = array();
         $dropCols = false;
@@ -597,7 +608,7 @@ class Normalization
             );
         }
         $message = '';
-        $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+        $GLOBALS['dbi']->selectDb($db);
         foreach ($newTables as $originalTable=>$tablesList) {
             foreach ($tablesList as $table=>$cols) {
                 if ($table != $originalTable) {
@@ -619,7 +630,7 @@ class Normalization
             }
             if ($dropCols) {
                 $columns = (array) $GLOBALS['dbi']->getColumnNames(
-                    $db, $originalTable, $GLOBALS['userlink']
+                    $db, $originalTable
                 );
                 $colPresent = array_merge(
                     explode(', ', $dropCols->pk), explode(', ', $dropCols->nonpk)
@@ -639,11 +650,11 @@ class Normalization
             $dropCols = false;
         }
         foreach ($queries as $query) {
-            if (!$GLOBALS['dbi']->tryQuery($query, $GLOBALS['userlink'])) {
+            if (!$GLOBALS['dbi']->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
                     Message::rawError(
-                        $GLOBALS['dbi']->getError($GLOBALS['userlink'])
+                        $GLOBALS['dbi']->getError()
                     ),
                     '<br /><br />'
                 );
@@ -703,13 +714,13 @@ class Normalization
         }
         $query2 = trim($query2, ',');
         $queries = array($query1, $query2);
-        $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+        $GLOBALS['dbi']->selectDb($db);
         foreach ($queries as $query) {
-            if (!$GLOBALS['dbi']->tryQuery($query, $GLOBALS['userlink'])) {
+            if (!$GLOBALS['dbi']->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
                     Message::rawError(
-                        $GLOBALS['dbi']->getError($GLOBALS['userlink'])
+                        $GLOBALS['dbi']->getError()
                     ),
                     '<br /><br />'
                 );
@@ -730,7 +741,7 @@ class Normalization
      *
      * @return string
      */
-    public static function getHtmlFor3NFstep1($db, $tables)
+    public static function getHtmlFor3NFstep1($db, array $tables)
     {
         $legendText = __('Step 3.') . "1 " . __('Find transitive dependencies');
         $extra = "";
@@ -755,9 +766,9 @@ class Normalization
             foreach ($primarycols as $col) {
                 $pk[] = $col->getName();
             }
-            $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+            $GLOBALS['dbi']->selectDb($db);
             $columns = (array) $GLOBALS['dbi']->getColumnNames(
-                $db, $table, $GLOBALS['userlink']
+                $db, $table
             );
             if (count($columns) - count($pk) <= 1) {
                 continue;
@@ -851,9 +862,9 @@ class Normalization
     public static function findPartialDependencies($table, $db)
     {
         $dependencyList = array();
-        $GLOBALS['dbi']->selectDb($db, $GLOBALS['userlink']);
+        $GLOBALS['dbi']->selectDb($db);
         $columns = (array) $GLOBALS['dbi']->getColumnNames(
-            $db, $table, $GLOBALS['userlink']
+            $db, $table
         );
         $columns = (array)Util::backquote($columns);
         $totalRowsRes = $GLOBALS['dbi']->fetchResult(
@@ -932,7 +943,7 @@ class Normalization
             . 'COUNT(DISTINCT ' . $partialKey . ',' . $column . ') as pkColCnt '
             . 'FROM (SELECT * FROM ' . Util::backquote($table)
             . ' LIMIT 500) as dt'  . ';';
-        $res = $GLOBALS['dbi']->fetchResult($query, null, null, $GLOBALS['userlink']);
+        $res = $GLOBALS['dbi']->fetchResult($query, null, null);
         $pkColCnt = $res[0];
         if ($pkCnt && $pkCnt == $colCnt && $colCnt == $pkColCnt) {
             return true;
@@ -952,7 +963,7 @@ class Normalization
      *
      * @return array associative array containing the count
      */
-    public static function findDistinctValuesCount($columns, $table)
+    public static function findDistinctValuesCount(array $columns, $table)
     {
         $result = array();
         $query = 'SELECT ';
@@ -965,7 +976,7 @@ class Normalization
         $query = trim($query, ', ');
         $query .= ' FROM (SELECT * FROM ' . Util::backquote($table)
             . ' LIMIT 500) as dt' . ';';
-        $res = $GLOBALS['dbi']->fetchResult($query, null, null, $GLOBALS['userlink']);
+        $res = $GLOBALS['dbi']->fetchResult($query, null, null);
         foreach ($columns as $column) {
             if ($column) {
                 $result[$column] = $res[0][$column . '_cnt'];
@@ -981,7 +992,7 @@ class Normalization
      *
      * @return array containing all the possible partial keys(subset of primary key)
      */
-    public static function getAllCombinationPartialKeys($primaryKey)
+    public static function getAllCombinationPartialKeys(array $primaryKey)
     {
         $results = array('');
         foreach ($primaryKey as $element) {

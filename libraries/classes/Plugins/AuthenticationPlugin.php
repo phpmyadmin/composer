@@ -7,8 +7,16 @@
  */
 namespace PhpMyAdmin\Plugins;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
+use PhpMyAdmin\IpAllowDeny;
+use PhpMyAdmin\Logging;
+use PhpMyAdmin\Message;
+use PhpMyAdmin\Response;
 use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\TwoFactor;
+use PhpMyAdmin\Session;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 
 /**
@@ -20,41 +28,70 @@ use PhpMyAdmin\Url;
 abstract class AuthenticationPlugin
 {
     /**
+     * Username
+     *
+     * @var string
+     */
+    public $user = '';
+
+    /**
+     * Password
+     *
+     * @var string
+     */
+    public $password = '';
+
+    /**
      * Displays authentication form
      *
      * @return boolean
      */
-    abstract public function auth();
+    abstract public function showLoginForm();
 
     /**
-     * Gets advanced authentication settings
+     * Gets authentication credentials
      *
      * @return boolean
      */
-    abstract public function authCheck();
+    abstract public function readCredentials();
 
     /**
      * Set the user and password after last checkings if required
      *
      * @return boolean
      */
-    abstract public function authSetUser();
+    public function storeCredentials()
+    {
+        global $cfg;
+
+        $this->setSessionAccessTime();
+
+        $cfg['Server']['user']     = $this->user;
+        $cfg['Server']['password'] = $this->password;
+
+        return true;
+    }
 
     /**
      * Stores user credentials after successful login.
      *
      * @return void
      */
-    public function storeUserCredentials()
+    public function rememberCredentials()
     {
     }
 
     /**
      * User is not allowed to login to MySQL -> authentication failed
      *
-     * @return boolean
+     * @param string $failure String describing why authentication has failed
+     *
+     * @return void
      */
-    abstract public function authFails();
+    public function showFailure($failure)
+    {
+        Logging::logUser($this->user, $failure);
+    }
 
     /**
      * Perform logout
@@ -63,8 +100,6 @@ abstract class AuthenticationPlugin
      */
     public function logOut()
     {
-        global $PHP_AUTH_USER, $PHP_AUTH_PW;
-
         /* Obtain redirect URL (before doing logout) */
         if (! empty($GLOBALS['cfg']['Server']['LogoutURL'])) {
             $redirect_url = $GLOBALS['cfg']['Server']['LogoutURL'];
@@ -73,8 +108,8 @@ abstract class AuthenticationPlugin
         }
 
         /* Clear credentials */
-        $PHP_AUTH_USER = '';
-        $PHP_AUTH_PW = '';
+        $this->user = '';
+        $this->password = '';
 
         /*
          * Get a logged-in server count in case of LoginCookieDeleteAll is disabled.
@@ -121,18 +156,20 @@ abstract class AuthenticationPlugin
     /**
      * Returns error message for failed authentication.
      *
+     * @param string $failure String describing why authentication has failed
+     *
      * @return string
      */
-    public function getErrorMessage()
+    public function getErrorMessage($failure)
     {
-        if (!empty($GLOBALS['login_without_password_is_forbidden'])) {
+        if ($failure == 'empty-denied') {
             return __(
                 'Login without a password is forbidden by configuration'
                 . ' (see AllowNoPassword)'
             );
-        } elseif (!empty($GLOBALS['allowDeny_forbidden'])) {
+        } elseif ($failure == 'root-denied' || $failure == 'allow-denied') {
             return __('Access denied!');
-        } elseif (!empty($GLOBALS['no_activity'])) {
+        } elseif ($failure == 'no-activity') {
             return sprintf(
                 __('No activity within %s seconds; please log in again.'),
                 intval($GLOBALS['cfg']['LoginCookieValidity'])
@@ -187,5 +224,117 @@ abstract class AuthenticationPlugin
             $time = time();
         }
         $_SESSION['browser_access_time'][$guid] = $time;
-     }
+    }
+
+    /**
+     * High level authentication interface
+     *
+     * Gets the credentials or shows login form if necessary
+     *
+     * @return void
+     */
+     public function authenticate()
+     {
+        if (! $this->readCredentials()) {
+            /* Force generating of new session on login */
+            Session::secure();
+            $this->showLoginForm();
+        } else {
+            $this->storeCredentials();
+        }
+
+        $this->checkRules();
+    }
+
+    /**
+     * Check configuration defined restrictions for authentication
+     *
+     * @return void
+     */
+    public function checkRules()
+    {
+        global $cfg;
+
+        // Check IP-based Allow/Deny rules as soon as possible to reject the
+        // user based on mod_access in Apache
+        if (isset($cfg['Server']['AllowDeny'])
+            && isset($cfg['Server']['AllowDeny']['order'])
+        ) {
+            $allowDeny_forbidden         = false; // default
+            if ($cfg['Server']['AllowDeny']['order'] == 'allow,deny') {
+                $allowDeny_forbidden     = true;
+                if (IpAllowDeny::allowDeny('allow')) {
+                    $allowDeny_forbidden = false;
+                }
+                if (IpAllowDeny::allowDeny('deny')) {
+                    $allowDeny_forbidden = true;
+                }
+            } elseif ($cfg['Server']['AllowDeny']['order'] == 'deny,allow') {
+                if (IpAllowDeny::allowDeny('deny')) {
+                    $allowDeny_forbidden = true;
+                }
+                if (IpAllowDeny::allowDeny('allow')) {
+                    $allowDeny_forbidden = false;
+                }
+            } elseif ($cfg['Server']['AllowDeny']['order'] == 'explicit') {
+                if (IpAllowDeny::allowDeny('allow') && ! IpAllowDeny::allowDeny('deny')) {
+                    $allowDeny_forbidden = false;
+                } else {
+                    $allowDeny_forbidden = true;
+                }
+            } // end if ... elseif ... elseif
+
+            // Ejects the user if banished
+            if ($allowDeny_forbidden) {
+                $this->showFailure('allow-denied');
+            }
+        } // end if
+
+        // is root allowed?
+        if (! $cfg['Server']['AllowRoot'] && $cfg['Server']['user'] == 'root') {
+            $this->showFailure('root-denied');
+        }
+
+        // is a login without password allowed?
+        if (! $cfg['Server']['AllowNoPassword']
+            && $cfg['Server']['password'] === ''
+        ) {
+            $this->showFailure('empty-denied');
+        }
+    }
+
+    /**
+     * Checks whether two factor authentication is active
+     * for given user and performs it.
+     *
+     * @return void
+     */
+    public function checkTwoFactor()
+    {
+        $twofactor = new TwoFactor($this->user);
+
+        /* Do we need to show the form? */
+        if ($twofactor->check()) {
+            return;
+        }
+
+        $response = Response::getInstance();
+        if ($response->loginPage()) {
+            if (defined('TESTSUITE')) {
+                return true;
+            } else {
+                exit;
+            }
+        }
+        echo Template::get('login/header')->render(['theme' => $GLOBALS['PMA_Theme']]);
+        Message::rawNotice(
+            __('You have enabled two factor authentication, please confirm your login.')
+        )->display();
+        echo Template::get('login/twofactor')->render(['form' => $twofactor->render()]);
+        echo Template::get('login/footer')->render();
+        echo Config::renderFooter();
+        if (! defined('TESTSUITE')) {
+            exit;
+        }
+    }
 }

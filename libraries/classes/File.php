@@ -7,7 +7,6 @@
  */
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Util;
@@ -344,7 +343,7 @@ class File
      * @static
      */
     public function fetchUploadedFromTblChangeRequestMultiple(
-        $file, $rownumber, $key
+        array $file, $rownumber, $key
     ) {
         $new_file = array(
             'name' => $file['name']['multi_edit'][$rownumber][$key],
@@ -546,18 +545,6 @@ class File
             $this->_error_message = Message::error(__('File could not be read!'));
             return false;
         }
-
-        /**
-         * @todo
-         * get registered plugins for file compression
-
-        foreach (PMA_getPlugins($type = 'compression') as $plugin) {
-            if ($plugin['classname']::canHandle($this->getName())) {
-                $this->setCompressionPlugin($plugin);
-                break;
-            }
-        }
-         */
 
         $this->_compression = Util::getCompressionMimeType($file);
         return $this->_compression;

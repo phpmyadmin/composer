@@ -8,8 +8,10 @@
 namespace PhpMyAdmin\Display;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
@@ -273,7 +275,7 @@ class Export
             return $ret;
         }
 
-        while ($row = $GLOBALS['dbi']->fetchAssoc($result, $GLOBALS['controllink'])) {
+        while ($row = $GLOBALS['dbi']->fetchAssoc($result, DatabaseInterface::CONNECT_CONTROL)) {
             $ret .= '<option value="' . htmlspecialchars($row['id']) . '"';
             if (!empty($_GET['template_id']) && $_GET['template_id'] == $row['id']) {
                 $ret .= ' selected="selected"';
@@ -371,7 +373,7 @@ class Export
     {
         $html  = '<div class="exportoptions" id="format">';
         $html .= '<h3>' . __('Format:') . '</h3>';
-        $html .= PMA_pluginGetChoice('Export', 'what', $export_list, 'format');
+        $html .= Plugins::getChoice('Export', 'what', $export_list, 'format');
         $html .= '</div>';
         return $html;
     }
@@ -393,7 +395,7 @@ class Export
             . 'and ignore the options for other formats.'
         );
         $html .= '</p>';
-        $html .= PMA_pluginGetOptions('Export', $export_list);
+        $html .= Plugins::getOptions('Export', $export_list);
         $html .= '</div>';
 
         if (Encoding::canConvertKanji()) {
@@ -1002,12 +1004,9 @@ class Export
             $GLOBALS['single_table'] = $_REQUEST['single_table'];
         }
 
-        include_once './libraries/file_listing.lib.php';
-        include_once './libraries/plugin_interface.lib.php';
-
         /* Scan for plugins */
         /* @var $export_list ExportPlugin[] */
-        $export_list = PMA_getPlugins(
+        $export_list = Plugins::getPlugins(
             "export",
             'libraries/classes/Plugins/Export/',
             array(
@@ -1066,7 +1065,7 @@ class Export
      *
      * @return void
      */
-    public static function handleExportTemplateActions($cfgRelation)
+    public static function handleExportTemplateActions(array $cfgRelation)
     {
         if (isset($_REQUEST['templateId'])) {
             $id = $GLOBALS['dbi']->escapeString($_REQUEST['templateId']);
@@ -1112,7 +1111,7 @@ class Export
 
         $response = Response::getInstance();
         if (! $result) {
-            $error = $GLOBALS['dbi']->getError($GLOBALS['controllink']);
+            $error = $GLOBALS['dbi']->getError(DatabaseInterface::CONNECT_CONTROL);
             $response->setRequestStatus(false);
             $response->addJSON('message', $error);
             exit;
@@ -1127,7 +1126,7 @@ class Export
         } elseif ('load' == $_REQUEST['templateAction']) {
             $data = null;
             while ($row = $GLOBALS['dbi']->fetchAssoc(
-                $result, $GLOBALS['controllink']
+                $result, DatabaseInterface::CONNECT_CONTROL
             )) {
                 $data = $row['template_data'];
             }

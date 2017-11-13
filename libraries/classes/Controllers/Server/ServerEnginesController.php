@@ -37,7 +37,11 @@ class ServerEnginesController extends Controller
         /**
          * Displays the sub-page heading
          */
-        $this->response->addHTML(Common::getHtmlForSubPageHeader('engines'));
+        $this->response->addHTML(
+            Template::get('server/sub_page_header')->render([
+                'type' => 'engines',
+            ])
+        );
 
         /**
          * Did the user request information about a certain storage engine?
@@ -71,10 +75,10 @@ class ServerEnginesController extends Controller
      *
      * @return string
      */
-    private function _getHtmlForServerEngine($engine)
+    private function _getHtmlForServerEngine(StorageEngine $engine)
     {
-        $pageOutput = ! empty($_REQUEST['page'])
-            ? $engine->getPage($_REQUEST['page']) : '';
+        $page = $_REQUEST['page'];
+        $pageOutput = ! empty($page) ? $engine->getPage($page) : '';
 
         /**
          * Displays details about a given Storage Engine
@@ -82,12 +86,14 @@ class ServerEnginesController extends Controller
         return Template::get('server/engines/engine')->render(
             array(
                 'title' => $engine->getTitle(),
-                'helpPage' => $engine->getMysqlHelpPage(),
+                'help_page' => $engine->getMysqlHelpPage(),
                 'comment' => $engine->getComment(),
-                'infoPages' => $engine->getInfoPages(),
+                'info_pages' => $engine->getInfoPages(),
                 'support' => $engine->getSupportInformationMessage(),
                 'variables' => $engine->getHtmlVariables(),
-                'pageOutput' => $pageOutput,
+                'page_output' => $pageOutput,
+                'page' => $page,
+                'engine' => $_REQUEST['engine'],
             )
         );
     }

@@ -5,16 +5,18 @@
  *
  * @package PhpMyAdmin-test
  */
-use PhpMyAdmin\Theme;
+namespace PhpMyAdmin\Tests;
 
-require_once 'test/PMATestCase.php';
+use PhpMyAdmin\Config;
+use PhpMyAdmin\Tests\PmaTestCase;
+use PhpMyAdmin\Theme;
 
 /**
  * Test class for Theme.
  *
  * @package PhpMyAdmin-test
  */
-class ThemeTest extends PMATestCase
+class ThemeTest extends PmaTestCase
 {
     /**
      * @var Theme
@@ -37,7 +39,7 @@ class ThemeTest extends PMATestCase
         $this->object = new Theme();
         $this->backup = $GLOBALS['PMA_Theme'];
         $GLOBALS['PMA_Theme'] = $this->object;
-        $GLOBALS['PMA_Config'] = new PhpMyAdmin\Config();
+        $GLOBALS['PMA_Config'] = new Config();
         $GLOBALS['PMA_Config']->enableBc();
         $GLOBALS['text_dir'] = 'ltr';
         include 'themes/pmahomme/layout.inc.php';
@@ -341,17 +343,18 @@ class ThemeTest extends PMATestCase
     /**
      * Test for getImgPath
      *
-     * @param string $file   file name for image
-     * @param string $output expected output
+     * @param string $file     file name for image
+     * @param string $fallback fallback image
+     * @param string $output   expected output
      *
      * @return void
      *
      * @dataProvider providerForGetImgPath
      */
-    public function testGetImgPath($file, $output)
+    public function testGetImgPath($file, $fallback, $output)
     {
         $this->assertEquals(
-            $this->object->getImgPath($file),
+            $this->object->getImgPath($file, $fallback),
             $output
         );
     }
@@ -366,17 +369,24 @@ class ThemeTest extends PMATestCase
         return array(
             array(
                 null,
+                null,
                 ''
             ),
             array(
                 'screen.png',
+                null,
                 './themes/pmahomme/img/screen.png'
             ),
             array(
                 'arrow_ltr.png',
+                null,
                 './themes/pmahomme/img/arrow_ltr.png'
-            )
-
+            ),
+            array(
+                'logo_right.png',
+                'pma_logo.png',
+                './themes/pmahomme/img/pma_logo.png'
+            ),
         );
     }
 }
