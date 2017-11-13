@@ -51,7 +51,7 @@ copyright = u'2012 - 2017, The phpMyAdmin devel team'
 # built documents.
 #
 # The short X.Y version.
-version = '4.7.5-dev'
+version = '4.7.6-dev'
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -307,3 +307,12 @@ lexers['php'] = PhpLexer(startinline=True)
 linkcheck_retries = 10
 linkcheck_timeout = 10
 linkcheck_anchors = False
+linkcheck_ignore = [
+    # Site is often down
+    r'https://software.opensuse.org/package/.*',
+    # They have messed up SSL setup
+    r'https://php-myadmin.ru/.*',
+    # There seems to be some problem with SNI on Travis CI
+    r'https://www.phpmyadmin.net/.*',
+    r'https://files.phpmyadmin.net/.*',
+]

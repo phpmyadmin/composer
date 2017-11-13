@@ -1069,7 +1069,7 @@ AJAX.registerOnload('functions.js', function () {
                 end = last_clicked_row;
             }
             $tr.parent().find('tr:not(.noclick)')
-                .slice(start, end + 1)
+                .slice(start, end)
                 .addClass('marked')
                 .find(':checkbox')
                 .prop('checked', true)
@@ -4741,7 +4741,7 @@ $(document).on("change", checkboxes_sel, checkboxes_changed);
 
 $(document).on("change", "input.checkall_box", function () {
     var is_checked = $(this).is(":checked");
-    $(this.form).find(checkboxes_sel).prop("checked", is_checked)
+    $(this.form).find(checkboxes_sel).not('.row-hidden').prop("checked", is_checked)
     .parents("tr").toggleClass("marked", is_checked);
 });
 
