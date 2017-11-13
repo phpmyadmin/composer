@@ -193,7 +193,6 @@ class Header
         } else {
             $theme_id = 'default';
         }
-        $this->_scripts->addFile('get_image.js.php', false, array('theme' => $theme_id));
         $this->_scripts->addFile('config.js');
         $this->_scripts->addFile('doclinks.js');
         $this->_scripts->addFile('functions.js');
@@ -252,7 +251,7 @@ class Header
             'confirm' => $GLOBALS['cfg']['Confirm'],
             'LoginCookieValidity' => $GLOBALS['cfg']['LoginCookieValidity'],
             'session_gc_maxlifetime' => (int)@ini_get('session.gc_maxlifetime'),
-            'logged_in' => $GLOBALS['dbi']->isUserType('logged'),
+            'logged_in' => (isset($GLOBALS['dbi']) ? $GLOBALS['dbi']->isUserType('logged') : false),
             'is_https' => $GLOBALS['PMA_Config']->isHttps(),
             'rootPath' => $GLOBALS['PMA_Config']->getRootPath(),
             'PMA_VERSION' => PMA_VERSION
