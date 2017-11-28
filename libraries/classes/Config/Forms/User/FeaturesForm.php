@@ -24,6 +24,7 @@ class FeaturesForm extends BaseForm
                 'SendErrorReports',
                 'ConsoleEnterExecutes',
                 'DisableShortcutKeys',
+                'FontSize',
             ),
             'Databases' => array(
                 'Servers/1/only_db', // saves to Server/only_db
@@ -52,6 +53,18 @@ class FeaturesForm extends BaseForm
                 'SuhosinDisableWarning',
                 'LoginCookieValidityDisableWarning',
                 'ReservedWordDisableWarning'
+            ),
+            'Console' => array(
+                'Console/Mode',
+                'Console/StartHistory',
+                'Console/AlwaysExpand',
+                'Console/CurrentQuery',
+                'Console/EnterExecutes',
+                'Console/DarkTheme',
+                'Console/Height',
+                'Console/GroupQueries',
+                'Console/OrderBy',
+                'Console/Order',
             ),
         );
         // skip Developer form if no setting is available
