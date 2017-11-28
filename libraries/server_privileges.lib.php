@@ -1905,6 +1905,16 @@ function PMA_updatePassword($err_url, $username, $hostname)
 
             $local_query = $query_prefix
                 . $GLOBALS['dbi']->escapeString($_POST['pma_pw']) . "'";
+        } else if ($serverType == 'MariaDB' && PMA_MYSQL_INT_VERSION >= 10000) {
+            // MariaDB uses "SET PASSWORD" syntax to change user password.
+            // On Galera cluster only DDL queries are replicated, since
+            // users are stored in MyISAM storage engine.
+            $query_prefix = "SET PASSWORD FOR  '"
+                . $GLOBALS['dbi']->escapeString($username)
+                . "'@'" . $GLOBALS['dbi']->escapeString($hostname) . "'"
+                . " = PASSWORD ('";
+            $sql_query = $local_query = $query_prefix
+                . $GLOBALS['dbi']->escapeString($_POST['pma_pw']) . "')";
         } else if ($serverType == 'MariaDB'
             && PMA_MYSQL_INT_VERSION >= 50200
             && $is_superuser
