@@ -45,6 +45,9 @@
         "phpseclib/phpseclib": "^2.0",
         "google/recaptcha": "^1.1"
     },
+    "conflict": {
+        "phpseclib/phpseclib": "2.0.8"
+    },
     "suggest": {
         "ext-openssl": "Cookie encryption",
         "ext-curl": "Updates checking",
