@@ -280,7 +280,6 @@ class InsertEditTest extends TestCase
      */
     public function testShowTypeOrFunction()
     {
-        unset($GLOBALS['collation_connection']);
         $GLOBALS['cfg']['ShowFieldTypesInDataEditView'] = true;
         $GLOBALS['cfg']['ServerDefault'] = 1;
         $url_params = array('ShowFunctionFields' => 2);
@@ -1843,7 +1842,7 @@ class InsertEditTest extends TestCase
             ->setMethods(array('addFile'))
             ->getMock();
 
-        $scriptsMock->expects($this->once())
+        $scriptsMock->expects($this->exactly(4))
             ->method('addFile');
 
         $headerMock = $this->getMockBuilder('PhpMyAdmin\Header')
