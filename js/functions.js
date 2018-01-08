@@ -5026,6 +5026,7 @@ function configSet(key, value, only_local=false)
         data: {
             key: key,
             type: "config-set",
+            server: PMA_commonParams.get('server'),
             value: serialized,
         },
         success: function (data) {
@@ -5070,6 +5071,7 @@ function configGet(key, cached=true)
         dataType: "json",
         data: {
             type: "config-get",
+            server: PMA_commonParams.get('server'),
             key: key
         },
         success: function (data) {
@@ -5084,3 +5086,15 @@ function configGet(key, cached=true)
     });
     return JSON.parse(localStorage.getItem(key));
 }
+
+/**
+ * Return POST data as stored by Util::linkOrButton
+ */
+jQuery.fn.getPostData = function() {
+    var dataPost = this.attr('data-post');
+    // Strip possible leading ?
+    if (dataPost !== undefined && dataPost.startsWith('?')) {
+        dataPost = dataPost.substr(1);
+    }
+    return dataPost;
+};
