@@ -401,6 +401,8 @@ img.lightbulb {
     image-rendering: pixelated;
     vertical-align:     middle;
     margin-<?php echo $left; ?>:        0.3em;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* no extra space in table cells */
@@ -3325,6 +3327,10 @@ body .ui-dialog .ui-button-text-only .ui-button-text {
 
 .scrollindicator {
     display: none;
+}
+
+.responsivetable {
+    overflow-x: auto;
 }
 
 @media only screen and (max-width: 768px) {
