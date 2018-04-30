@@ -55,6 +55,7 @@ class DbiMysqliTest extends PmaTestCase
      * @return void
      *
      * @group medium
+     * @group runkit
      */
     public function testMysqliDBI()
     {
@@ -200,23 +201,6 @@ class DbiMysqliTest extends PmaTestCase
         $this->assertEquals(
             'mysqli_get_client_info',
             $ret
-        );
-    }
-
-    /**
-     * Test for selectDb
-     *
-     * @return void
-     *
-     * @group medium
-     */
-    public function testSelectDb()
-    {
-        $this->markTestIncomplete('Not testing anything');
-        //$link is empty
-        $this->assertEquals(
-            false,
-            $this->object->selectDb("PMA", null)
         );
     }
 
