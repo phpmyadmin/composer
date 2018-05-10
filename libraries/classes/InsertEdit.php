@@ -44,6 +44,11 @@ class InsertEdit
     private $transformations;
 
     /**
+     * @var FileListing
+     */
+    private $fileListing;
+
+    /**
      * Constructor
      *
      * @param DatabaseInterface $dbi DatabaseInterface instance
@@ -53,6 +58,7 @@ class InsertEdit
         $this->dbi = $dbi;
         $this->relation = new Relation();
         $this->transformations = new Transformations();
+        $this->fileListing = new FileListing();
     }
 
     /**
@@ -916,7 +922,6 @@ class InsertEdit
             . ' tabindex="' . ($tabindex + $tabindex_for_value) . '"'
             . ' id="field_' . $idindex . '_3">';
         $html_output .= $this->relation->foreignDropdown(
-            $column,
             $foreignData['disp_row'],
             $foreignData['foreign_field'],
             $foreignData['foreign_display'],
@@ -1503,7 +1508,7 @@ class InsertEdit
      */
     private function getSelectOptionForUpload($vkey, array $column)
     {
-        $files = FileListing::getFileSelectOptions(
+        $files = $this->fileListing->getFileSelectOptions(
             Util::userDir($GLOBALS['cfg']['UploadDir'])
         );
 
