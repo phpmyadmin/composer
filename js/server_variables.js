@@ -37,7 +37,7 @@ AJAX.registerOnload('server_variables.js', function () {
         $cell.addClass('edit'); // variable is being edited
         $myEditLink.remove(); // remove edit link
 
-        $mySaveLink.click(function () {
+        $mySaveLink.on('click', function () {
             var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
             $.post($(this).attr('href'), {
                 ajax_request: true,
@@ -63,7 +63,7 @@ AJAX.registerOnload('server_variables.js', function () {
             return false;
         });
 
-        $myCancelLink.click(function () {
+        $myCancelLink.on('click', function () {
             $valueCell.html($valueCell.data('content'));
             $cell.removeClass('edit').html($myEditLink);
             return false;
@@ -93,7 +93,7 @@ AJAX.registerOnload('server_variables.js', function () {
                     .html($editor)
                     .find('input')
                     .focus()
-                    .keydown(function (event) { // Keyboard shortcuts
+                    .on('keydown', function (event) { // Keyboard shortcuts
                         if (event.keyCode === 13) { // Enter key
                             $mySaveLink.trigger('click');
                         } else if (event.keyCode === 27) { // Escape key
