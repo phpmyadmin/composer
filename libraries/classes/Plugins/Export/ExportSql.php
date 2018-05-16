@@ -6,6 +6,8 @@
  * @package    PhpMyAdmin-Export
  * @subpackage SQL
  */
+declare(strict_types=1);
+
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Charsets;
@@ -1771,8 +1773,13 @@ class ExportSql extends ExportPlugin
                     if (isset($GLOBALS['sql_auto_increment'])
                         && ($statement->entityOptions->has('AUTO_INCREMENT') !== false)
                     ) {
-                        $sql_auto_increments_query .= ', AUTO_INCREMENT='
-                            . $statement->entityOptions->has('AUTO_INCREMENT');
+                        if (!isset($GLOBALS['table_data'])
+                            || (isset($GLOBALS['table_data'])
+                            && in_array($table, $GLOBALS['table_data']))
+                        ) {
+                            $sql_auto_increments_query .= ', AUTO_INCREMENT='
+                                . $statement->entityOptions->has('AUTO_INCREMENT');
+                        }
                     }
                     $sql_auto_increments_query .= ';' . $crlf;
 
