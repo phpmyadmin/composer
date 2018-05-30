@@ -185,7 +185,6 @@ class FontTest extends PmaTestCase
             73,
             $this->font->getStringWidth("phpMyAdmin", "broadway", 10)
         );
-
     }
 
     /**
@@ -230,7 +229,7 @@ class FontTest extends PmaTestCase
         // string "a", with invalid charlist (= array without proper structure)
         $this->assertEquals(
             6,
-            $this->font->getStringWidth("a", "arial", 10, array("list"))
+            $this->font->getStringWidth("a", "arial", 10, ["list"])
         );
 
         // string "a", with invalid charlist (= array without proper structure :
@@ -238,8 +237,10 @@ class FontTest extends PmaTestCase
         $this->assertEquals(
             6,
             $this->font->getStringWidth(
-                "a", "arial", 10,
-                array(array("chars" => "a"))
+                "a",
+                "arial",
+                10,
+                [["chars" => "a"]]
             )
         );
 
@@ -248,8 +249,10 @@ class FontTest extends PmaTestCase
         $this->assertEquals(
             6,
             $this->font->getStringWidth(
-                "a", "arial", 10,
-                array(array("modifier" => 0.61))
+                "a",
+                "arial",
+                10,
+                [["modifier" => 0.61]]
             )
         );
 
@@ -258,8 +261,10 @@ class FontTest extends PmaTestCase
         $this->assertEquals(
             6,
             $this->font->getStringWidth(
-                "a", "arial", 10,
-                array(array("chars" => "a", "modifier" => 0.61))
+                "a",
+                "arial",
+                10,
+                [["chars" => "a", "modifier" => 0.61]]
             )
         );
 
@@ -267,8 +272,10 @@ class FontTest extends PmaTestCase
         $this->assertEquals(
             7,
             $this->font->getStringWidth(
-                "a", "arial", 10,
-                array(array("chars" => array("a"), "modifier" => 0.61))
+                "a",
+                "arial",
+                10,
+                [["chars" => ["a"], "modifier" => 0.61]]
             )
         );
     }

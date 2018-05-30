@@ -65,18 +65,18 @@ class ExportCodegenTest extends PmaTestCase
         $attrCgHandlers->setAccessible(true);
 
         $this->assertEquals(
-            array(
+            [
                 "NHibernate C# DO",
                 "NHibernate XML"
-            ),
+            ],
             $attrCgFormats->getValue($this->object)
         );
 
         $this->assertEquals(
-            array(
+            [
                 "_handleNHibernateCSBody",
                 "_handleNHibernateXMLBody"
-            ),
+            ],
             $attrCgHandlers->getValue($this->object)
         );
     }
@@ -178,10 +178,10 @@ class ExportCodegenTest extends PmaTestCase
         );
 
         $this->assertEquals(
-            array(
+            [
                 "NHibernate C# DO",
                 "NHibernate XML"
-            ),
+            ],
             $select->getValues()
         );
     }
@@ -255,7 +255,11 @@ class ExportCodegenTest extends PmaTestCase
 
         ob_start();
         $this->object->exportData(
-            'testDB', 'testTable', "\n", 'example.com', 'test'
+            'testDB',
+            'testTable',
+            "\n",
+            'example.com',
+            'test'
         );
         $result = ob_get_clean();
 
@@ -282,7 +286,11 @@ class ExportCodegenTest extends PmaTestCase
         $GLOBALS['codegen_format'] = 4;
 
         $this->object->exportData(
-            'testDB', 'testTable', "\n", 'example.com', 'test'
+            'testDB',
+            'testTable',
+            "\n",
+            'example.com',
+            'test'
         );
 
         $this->expectOutputString(
@@ -332,7 +340,7 @@ class ExportCodegenTest extends PmaTestCase
         $dbi->expects($this->at(1))
             ->method('fetchRow')
             ->with(true)
-            ->will($this->returnValue(array('a', 'b', 'c', false, 'e', 'f')));
+            ->will($this->returnValue(['a', 'b', 'c', false, 'e', 'f']));
 
         $dbi->expects($this->at(2))
             ->method('fetchRow')
@@ -397,12 +405,12 @@ class ExportCodegenTest extends PmaTestCase
         $dbi->expects($this->at(1))
             ->method('fetchRow')
             ->with(true)
-            ->will($this->returnValue(array('a', 'b', 'c', false, 'e', 'f')));
+            ->will($this->returnValue(['a', 'b', 'c', false, 'e', 'f']));
 
         $dbi->expects($this->at(2))
             ->method('fetchRow')
             ->with(true)
-            ->will($this->returnValue(array('g', 'h', 'i', 'PRI', 'j', 'k')));
+            ->will($this->returnValue(['g', 'h', 'i', 'PRI', 'j', 'k']));
 
         $dbi->expects($this->at(3))
             ->method('fetchRow')
@@ -450,10 +458,10 @@ class ExportCodegenTest extends PmaTestCase
         $getter->setAccessible(true);
         $setter->setAccessible(true);
 
-        $setter->invoke($this->object, array(1, 2));
+        $setter->invoke($this->object, [1, 2]);
 
         $this->assertEquals(
-            array(1, 2),
+            [1, 2],
             $getter->invoke($this->object)
         );
     }
@@ -475,10 +483,10 @@ class ExportCodegenTest extends PmaTestCase
         $getter->setAccessible(true);
         $setter->setAccessible(true);
 
-        $setter->invoke($this->object, array(1, 2));
+        $setter->invoke($this->object, [1, 2]);
 
         $this->assertEquals(
-            array(1, 2),
+            [1, 2],
             $getter->invoke($this->object)
         );
     }

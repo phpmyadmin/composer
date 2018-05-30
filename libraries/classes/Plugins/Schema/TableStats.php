@@ -33,8 +33,8 @@ abstract class TableStats
     protected $showKeys;
     protected $tableDimension;
     public $displayfield;
-    public $fields = array();
-    public $primary = array();
+    public $fields = [];
+    public $primary = [];
     public $x, $y;
     public $width = 0;
     public $heightCell = 0;
@@ -64,7 +64,13 @@ abstract class TableStats
      *                                from the browser
      */
     public function __construct(
-        $diagram, $db, $pageNumber, $tableName, $showKeys, $tableDimension, $offline
+        $diagram,
+        $db,
+        $pageNumber,
+        $tableName,
+        $showKeys,
+        $tableDimension,
+        $offline
     ) {
         $this->diagram    = $diagram;
         $this->db         = $db;
@@ -109,7 +115,7 @@ abstract class TableStats
 
         if ($this->showKeys) {
             $indexes = Index::getFromTable($this->tableName, $this->db);
-            $all_columns = array();
+            $all_columns = [];
             foreach ($indexes as $index) {
                 $all_columns = array_merge(
                     $all_columns,
@@ -130,7 +136,7 @@ abstract class TableStats
      * @return void
      * @abstract
      */
-    protected abstract function showMissingTableError();
+    abstract protected function showMissingTableError();
 
     /**
      * Loads coordinates of a table
