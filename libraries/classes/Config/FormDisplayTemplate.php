@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
@@ -22,6 +23,26 @@ use PhpMyAdmin\Util;
 class FormDisplayTemplate
 {
     /**
+     * @var int
+     */
+    public $group;
+
+    /**
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * FormDisplayTemplate constructor.
+     *
+     * @param Config $config
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
+
+    /**
      * Displays top part of the form
      *
      * @param string     $action       default: $_SERVER['REQUEST_URI']
@@ -30,7 +51,7 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayFormTop(
+    public function displayFormTop(
         $action = null,
         $method = 'post',
         $hiddenFields = null
@@ -66,7 +87,7 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayTabsTop(array $tabs)
+    public function displayTabsTop(array $tabs): string
     {
         $items = [];
         foreach ($tabs as $tabId => $tabName) {
@@ -99,15 +120,13 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayFieldsetTop(
+    public function displayFieldsetTop(
         $title = '',
         $description = '',
         $errors = null,
         array $attributes = []
-    ) {
-        global $_FormDisplayGroup;
-
-        $_FormDisplayGroup = 0;
+    ): string {
+        $this->group = 0;
 
         $attributes = array_merge(['class' => 'optbox'], $attributes);
 
@@ -147,7 +166,7 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayInput(
+    public function displayInput(
         $path,
         $name,
         $type,
@@ -155,15 +174,14 @@ class FormDisplayTemplate
         $description = '',
         $valueIsDefault = true,
         $opts = null
-    ) {
-        global $_FormDisplayGroup;
+    ): string {
         static $icons;    // An array of IMG tags used further below in the function
 
         if (defined('TESTSUITE')) {
             $icons = null;
         }
 
-        $isSetupScript = $GLOBALS['PMA_Config']->get('is_setup');
+        $isSetupScript = $this->config->get('is_setup');
         if ($icons === null) { // if the static variables have not been initialised
             $icons = [];
             // Icon definitions:
@@ -213,13 +231,13 @@ class FormDisplayTemplate
                 . ($hasErrors ? 'custom field-error' : 'custom');
         }
         $fieldClass = $fieldClass ? ' class="' . $fieldClass . '"' : '';
-        $trClass = $_FormDisplayGroup > 0
-            ? 'group-field group-field-' . $_FormDisplayGroup
+        $trClass = $this->group > 0
+            ? 'group-field group-field-' . $this->group
             : '';
         if (isset($opts['setvalue']) && $opts['setvalue'] == ':group') {
             unset($opts['setvalue']);
-            $_FormDisplayGroup++;
-            $trClass = 'group-header-field group-header-' . $_FormDisplayGroup;
+            $this->group++;
+            $trClass = 'group-header-field group-header-' . $this->group;
         }
         if ($optionIsDisabled) {
             $trClass .= ($trClass ? ' ' : '') . 'disabled-field';
@@ -379,20 +397,18 @@ class FormDisplayTemplate
      *
      * @param string $headerText Text of header
      *
-     * @return string|void
+     * @return string
      */
-    public static function displayGroupHeader($headerText)
+    public function displayGroupHeader(string $headerText): string
     {
-        global $_FormDisplayGroup;
-
-        $_FormDisplayGroup++;
-        if (! $headerText) {
-            return null;
+        $this->group++;
+        if ($headerText === '') {
+            return '';
         }
-        $colspan = $GLOBALS['PMA_Config']->get('is_setup') ? 3 : 2;
+        $colspan = $this->config->get('is_setup') ? 3 : 2;
 
         return Template::get('config/form_display/group_header')->render([
-            'group' => $_FormDisplayGroup,
+            'group' => $this->group,
             'colspan' => $colspan,
             'header_text' => $headerText,
         ]);
@@ -403,11 +419,9 @@ class FormDisplayTemplate
      *
      * @return void
      */
-    public static function displayGroupFooter()
+    public function displayGroupFooter(): void
     {
-        global $_FormDisplayGroup;
-
-        $_FormDisplayGroup--;
+        $this->group--;
     }
 
     /**
@@ -417,11 +431,11 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayFieldsetBottom($showButtons = true)
+    public function displayFieldsetBottom(bool $showButtons = true): string
     {
         return Template::get('config/form_display/fieldset_bottom')->render([
             'show_buttons' => $showButtons,
-            'is_setup' => $GLOBALS['PMA_Config']->get('is_setup'),
+            'is_setup' => $this->config->get('is_setup'),
         ]);
     }
 
@@ -430,7 +444,7 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayTabsBottom()
+    public function displayTabsBottom(): string
     {
         return Template::get('config/form_display/tabs_bottom')->render();
     }
@@ -440,7 +454,7 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayFormBottom()
+    public function displayFormBottom(): string
     {
         return Template::get('config/form_display/form_bottom')->render();
     }
@@ -454,7 +468,7 @@ class FormDisplayTemplate
      *
      * @return void
      */
-    public static function addJsValidate($fieldId, $validators, array &$jsArray)
+    public function addJsValidate($fieldId, $validators, array &$jsArray): void
     {
         foreach ((array)$validators as $validator) {
             $validator = (array)$validator;
@@ -476,10 +490,10 @@ class FormDisplayTemplate
      *
      * @return string
      */
-    public static function displayJavascript(array $jsArray)
+    public function displayJavascript(array $jsArray): string
     {
         if (empty($jsArray)) {
-            return null;
+            return '';
         }
 
         return Template::get('javascript/display')->render(
@@ -495,7 +509,7 @@ class FormDisplayTemplate
      *
      * @return string HTML for errors
      */
-    public static function displayErrors($name, array $errorList)
+    public function displayErrors($name, array $errorList): string
     {
         return Template::get('config/form_display/errors')->render([
             'name' => $name,
