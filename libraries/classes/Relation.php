@@ -28,6 +28,19 @@ use PhpMyAdmin\Util;
 class Relation
 {
     /**
+     * @var Template
+     */
+    public $template;
+
+    /**
+     * Relation constructor.
+     */
+    public function __construct()
+    {
+        $this->template = new Template();
+    }
+
+    /**
      * Executes a query as controluser if possible, otherwise as normal user
      *
      * @param string  $sql        the query to execute
@@ -390,9 +403,7 @@ class Relation
                     'Re-login to phpMyAdmin to load the updated configuration file.'
                 );
 
-                $retval .= Template::get('list/unordered')->render(
-                    ['items' => $items,]
-                );
+                $retval .= $this->template->render('list/unordered', ['items' => $items]);
             }
         }
 
@@ -1477,7 +1488,7 @@ class Relation
                         . ' LIKE "%' . $GLOBALS['dbi']->escapeString($foreign_filter)
                         . '%"'
                     );
-                $f_query_order = ($foreign_display == false) ? '' :' ORDER BY '
+                $f_query_order = ($foreign_display == false) ? '' : ' ORDER BY '
                     . Util::backquote($foreign_table) . '.'
                     . Util::backquote($foreign_display);
 

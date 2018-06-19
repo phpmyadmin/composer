@@ -35,6 +35,11 @@ class Designer
     private $relation;
 
     /**
+     * @var Template
+     */
+    public $template;
+
+    /**
      * Designer constructor.
      *
      * @param DatabaseInterface $dbi DatabaseInterface object
@@ -43,6 +48,7 @@ class Designer
     {
         $this->dbi = $dbi;
         $this->relation = new Relation();
+        $this->template = new Template();
     }
 
     /**
@@ -56,7 +62,7 @@ class Designer
     public function getHtmlForEditOrDeletePages($db, $operation)
     {
         $cfgRelation = $this->relation->getRelationsParam();
-        return Template::get('database/designer/edit_delete_pages')->render([
+        return $this->template->render('database/designer/edit_delete_pages', [
             'db' => $db,
             'operation' => $operation,
             'pdfwork' => $cfgRelation['pdfwork'],
@@ -74,7 +80,7 @@ class Designer
     public function getHtmlForPageSaveAs($db)
     {
         $cfgRelation = $this->relation->getRelationsParam();
-        return Template::get('database/designer/page_save_as')->render([
+        return $this->template->render('database/designer/page_save_as', [
             'db' => $db,
             'pdfwork' => $cfgRelation['pdfwork'],
             'pages' => $this->getPageIdsAndNames($db),
@@ -134,14 +140,11 @@ class Designer
             )->getDisplay();
         }
 
-        return Template::get('database/designer/schema_export')
-            ->render(
-                [
-                    'db' => $db,
-                    'page' => $page,
-                    'export_list' => $export_list
-                ]
-            );
+        return $this->template->render('database/designer/schema_export', [
+            'db' => $db,
+            'page' => $page,
+            'export_list' => $export_list,
+        ]);
     }
 
     /**
@@ -275,7 +278,7 @@ class Designer
                 }
             }
         }
-        return Template::get('database/designer/database_tables')->render([
+        return $this->template->render('database/designer/database_tables', [
             'db' => $GLOBALS['db'],
             'get_db' => $_GET['db'],
             'has_query' => isset($_REQUEST['query']),
@@ -331,11 +334,10 @@ class Designer
         array $tabColumn,
         array $tablesAllKeys,
         array $tablesPkOrUniqueKeys
-    ): string
-    {
+    ): string {
         $cfgRelation = $this->relation->getRelationsParam();
         $tableNames = $GLOBALS['designer']['TABLE_NAME'];
-        $columnsType = array();
+        $columnsType = [];
         foreach ($tableNames as $tableName) {
             $limit = count($tabColumn[$tableName]['COLUMN_ID']);
             for ($j = 0; $j < $limit; $j++) {
@@ -370,10 +372,10 @@ class Designer
         $designerConfig->displayPage = $displayPage;
         $designerConfig->tablesEnabled = $cfgRelation['pdfwork'];
 
-        return Template::get('database/designer/main')->render([
+        return $this->template->render('database/designer/main', [
             'db' => $db,
             'get_db' => $getDb,
-            'designer_config'=> json_encode($designerConfig),
+            'designer_config' => json_encode($designerConfig),
             'display_page' => $displayPage,
             'has_query' => $hasQuery,
             'selected_page' => $selectedPage,
@@ -394,5 +396,4 @@ class Designer
             'columns_type' => $columnsType,
         ]);
     }
-
 }

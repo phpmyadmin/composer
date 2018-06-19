@@ -527,8 +527,8 @@ class Core
         if ($GLOBALS['PMA_Config']->get('PMA_IS_IIS') && mb_strlen($uri) > 600) {
             Response::getInstance()->disable();
 
-            echo Template::get('header_location')
-                ->render(['uri' => $uri]);
+            $template = new Template();
+            echo $template->render('header_location', ['uri' => $uri]);
 
             return;
         }
@@ -727,7 +727,7 @@ class Core
 
         // remove empty nested arrays
         for (; $depth >= 0; $depth--) {
-            if (! isset($path[$depth+1]) || count($path[$depth+1]) == 0) {
+            if (! isset($path[$depth + 1]) || count($path[$depth + 1]) == 0) {
                 unset($path[$depth][$keys[$depth]]);
             } else {
                 break;
@@ -1266,21 +1266,19 @@ class Core
         ?string $class = null,
         ?string $a_class = null
     ): void {
-        echo Template::get('list/item')
-            ->render(
-                [
-                    'content' => $name,
-                    'id' => $listId,
-                    'class' => $class,
-                    'url' => [
-                        'href' => $url,
-                        'target' => $target,
-                        'id' => $a_id,
-                        'class' => $a_class,
-                    ],
-                    'mysql_help_page' => $mysql_help_page,
-                ]
-            );
+        $template = new Template();
+        echo $template->render('list/item', [
+            'content' => $name,
+            'id' => $listId,
+            'class' => $class,
+            'url' => [
+                'href' => $url,
+                'target' => $target,
+                'id' => $a_id,
+                'class' => $a_class,
+            ],
+            'mysql_help_page' => $mysql_help_page,
+        ]);
     }
 
     /**
