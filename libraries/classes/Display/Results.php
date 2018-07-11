@@ -4701,7 +4701,7 @@ class Results
 
         $column_for_last_row = mb_strtoupper(
             mb_substr(
-                $column_for_last_row,
+                (string) $column_for_last_row,
                 0,
                 $GLOBALS['cfg']['LimitChars']
             ) . '...'
@@ -5558,7 +5558,7 @@ class Results
         if (isset($map[$meta->name])) {
             // Field to display from the foreign table?
             if (isset($map[$meta->name][2])
-                && strlen($map[$meta->name][2]) > 0
+                && strlen((string) $map[$meta->name][2]) > 0
             ) {
                 $dispval = $this->_getFromForeign(
                     $map,
