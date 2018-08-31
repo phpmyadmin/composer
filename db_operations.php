@@ -43,6 +43,7 @@ $scripts->addFile('db_operations.js');
 $sql_query = '';
 
 $operations = new Operations();
+$relationCleanup = new RelationCleanup();
 
 /**
  * Rename/move or copy database
@@ -150,7 +151,7 @@ if (strlen($GLOBALS['db']) > 0
                 /**
                  * cleanup pmadb stuff for this db
                  */
-                RelationCleanup::database($GLOBALS['db']);
+                $relationCleanup->database($GLOBALS['db']);
 
                 // if someday the RENAME DATABASE reappears, do not DROP
                 $local_query = 'DROP DATABASE '
@@ -216,7 +217,7 @@ if (strlen($GLOBALS['db']) > 0
 /**
  * Settings for relations stuff
  */
-$relation = new Relation();
+$relation = new Relation($GLOBALS['dbi']);
 
 $cfgRelation = $relation->getRelationsParam();
 

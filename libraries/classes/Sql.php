@@ -42,6 +42,11 @@ class Sql
     private $relation;
 
     /**
+     * @var RelationCleanup
+     */
+    private $relationCleanup;
+
+    /**
      * @var Transformations
      */
     private $transformations;
@@ -51,7 +56,8 @@ class Sql
      */
     public function __construct()
     {
-        $this->relation = new Relation();
+        $this->relation = new Relation($GLOBALS['dbi']);
+        $this->relationCleanup = new RelationCleanup();
         $this->transformations = new Transformations();
     }
 
@@ -1160,12 +1166,12 @@ EOT;
         if (! empty($purge) && strlen($db) > 0) {
             if (strlen($table) > 0) {
                 if (isset($column) && strlen($column) > 0) {
-                    RelationCleanup::column($db, $table, $column);
+                    $this->relationCleanup->column($db, $table, $column);
                 } else {
-                    RelationCleanup::table($db, $table);
+                    $this->relationCleanup->table($db, $table);
                 }
             } else {
-                RelationCleanup::database($db);
+                $this->relationCleanup->database($db);
             }
         }
     }

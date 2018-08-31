@@ -28,9 +28,9 @@ class RelationCleanup
      *
      * @return void
      */
-    public static function column($db, $table, $column)
+    public function column($db, $table, $column)
     {
-        $relation = new Relation();
+        $relation = new Relation($GLOBALS['dbi']);
         $cfgRelation = $relation->getRelationsParam();
 
         if ($cfgRelation['commwork']) {
@@ -90,9 +90,9 @@ class RelationCleanup
      *
      * @return void
      */
-    public static function table($db, $table)
+    public function table($db, $table)
     {
-        $relation = new Relation();
+        $relation = new Relation($GLOBALS['dbi']);
         $cfgRelation = $relation->getRelationsParam();
 
         if ($cfgRelation['commwork']) {
@@ -176,9 +176,9 @@ class RelationCleanup
      *
      * @return void
      */
-    public static function database($db)
+    public function database($db)
     {
-        $relation = new Relation();
+        $relation = new Relation($GLOBALS['dbi']);
         $cfgRelation = $relation->getRelationsParam();
 
         if ($cfgRelation['commwork']) {
@@ -275,9 +275,9 @@ class RelationCleanup
      *
      * @return void
      */
-    public static function user($username)
+    public function user($username)
     {
-        $relation = new Relation();
+        $relation = new Relation($GLOBALS['dbi']);
         $cfgRelation = $relation->getRelationsParam();
 
         if ($cfgRelation['bookmarkwork']) {
