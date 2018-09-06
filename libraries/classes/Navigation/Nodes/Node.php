@@ -119,7 +119,7 @@ class Node
      */
     public function __construct($name, $type = Node::OBJECT, $is_group = false)
     {
-        if (strlen($name)) {
+        if (strlen((string)$name)) {
             $this->name = $name;
             $this->real_name = $name;
         }
@@ -335,7 +335,7 @@ class Node
         $vPath = [];
         $vPath_clean = [];
         foreach ($this->parents(true, true, true) as $parent) {
-            $vPath[] = base64_encode($parent->name);
+            $vPath[] = base64_encode((string)$parent->name);
             $vPath_clean[] = $parent->name;
         }
         $vPath = implode('.', array_reverse($vPath));
