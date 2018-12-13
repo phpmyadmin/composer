@@ -63,12 +63,10 @@ class TriggersTest extends TestCase
      */
     public function testGetDataFromRequestEmpty($in, $out)
     {
-        global $_REQUEST;
-
-        unset($_REQUEST);
+        unset($_POST);
         foreach ($in as $key => $value) {
             if ($value !== '') {
-                $_REQUEST[$key] = $value;
+                $_POST[$key] = $value;
             }
         }
         $this->assertEquals($out, $this->triggers->getDataFromRequest());
@@ -350,17 +348,17 @@ class TriggersTest extends TestCase
         $query,
         $num_err
     ) {
-        global $_REQUEST, $errors;
+        global $errors;
 
         $errors = [];
         $this->triggers->setGlobals();
 
-        $_REQUEST['item_definer']    = $definer;
-        $_REQUEST['item_name']       = $name;
-        $_REQUEST['item_timing']     = $timing;
-        $_REQUEST['item_event']      = $event;
-        $_REQUEST['item_table']      = $table;
-        $_REQUEST['item_definition'] = $definition;
+        $_POST['item_definer']    = $definer;
+        $_POST['item_name']       = $name;
+        $_POST['item_timing']     = $timing;
+        $_POST['item_event']      = $event;
+        $_POST['item_table']      = $table;
+        $_POST['item_definition'] = $definition;
         $GLOBALS['server'] = 1;
 
         $this->assertEquals($query, $this->triggers->getQueryFromRequest());
