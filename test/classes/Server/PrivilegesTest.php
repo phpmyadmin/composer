@@ -1204,8 +1204,20 @@ class PrivilegesTest extends TestCase
         $_POST['authentication_plugin'] = 'mysql_native_password';
         $dbname = "PMA_db";
 
-        list($create_user_real, $create_user_show, $real_sql_query, $sql_query)
-            = $this->serverPrivileges->getSqlQueriesForDisplayAndAddUser($username, $hostname, $password);
+        list(
+            $create_user_real,
+            $create_user_show,
+            $real_sql_query,
+            $sql_query,
+            ,
+            ,
+            $alter_real_sql_query,
+            $alter_sql_query
+        ) = $this->serverPrivileges->getSqlQueriesForDisplayAndAddUser(
+            $username,
+            $hostname,
+            $password
+        );
 
         //validate 1: $create_user_real
         $this->assertEquals(
@@ -1233,6 +1245,16 @@ class PrivilegesTest extends TestCase
             $sql_query
         );
 
+        $this->assertSame(
+            '',
+            $alter_real_sql_query
+        );
+
+        $this->assertSame(
+            '',
+            $alter_sql_query
+        );
+
         //Test for addUserAndCreateDatabase
         list($sql_query, $message) = $this->serverPrivileges->addUserAndCreateDatabase(
             false,
@@ -1240,7 +1262,9 @@ class PrivilegesTest extends TestCase
             $sql_query,
             $username,
             $hostname,
-            $dbname
+            $dbname,
+            $alter_real_sql_query,
+            $alter_sql_query
         );
 
         //validate 5: $sql_query
@@ -1983,7 +2007,7 @@ class PrivilegesTest extends TestCase
 
         $this->assertContains(
             '<input type="hidden" name="old_usergroup" value="'
-                . $expected_userGroup . '" />',
+                . $expected_userGroup . '">',
             $html
         );
 
@@ -2459,11 +2483,11 @@ class PrivilegesTest extends TestCase
         // Test case 1
         $actual = $this->serverPrivileges->getHtmlForAllTableSpecificRights('pma', 'host', 'table', 'pmadb');
         $this->assertContains(
-            '<input type="hidden" name="username" value="pma" />',
+            '<input type="hidden" name="username" value="pma">',
             $actual
         );
         $this->assertContains(
-            '<input type="hidden" name="hostname" value="host" />',
+            '<input type="hidden" name="hostname" value="host">',
             $actual
         );
         $this->assertContains(

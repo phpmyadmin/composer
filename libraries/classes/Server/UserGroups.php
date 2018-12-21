@@ -252,7 +252,7 @@ class UserGroups
 
         if ($userGroup == null) {
             $html_output .= '<label for="userGroup">' . __('Group name:') . '</label>';
-            $html_output .= '<input type="text" name="userGroup" maxlength="64" autocomplete="off" required="required" />';
+            $html_output .= '<input type="text" name="userGroup" maxlength="64" autocomplete="off" required="required">';
             $html_output .= '<div class="clearfloat"></div>';
         }
 
@@ -307,7 +307,7 @@ class UserGroups
 
         $html_output .= '<fieldset id="fieldset_user_group_rights_footer"'
             . ' class="tblFooters">';
-        $html_output .= '<input type="submit" value="' . __('Go') . '">';
+        $html_output .= '<input class="btn btn-primary" type="submit" value="' . __('Go') . '">';
         $html_output .= '</fieldset>';
 
         return $html_output;
@@ -332,7 +332,7 @@ class UserGroups
             $html_output .= '<div class="item">';
             $html_output .= '<input type="checkbox" class="checkall"'
                 . (in_array($tab, $selected) ? ' checked="checked"' : '')
-                . ' name="' . $level . '_' . $tab . '" value="Y" />';
+                . ' name="' . $level . '_' . $tab . '" value="Y">';
             $html_output .= '<label for="' . $level . '_' . $tab . '">'
                 . '<code>' . $tabName . '</code>'
                 . '</label>';

@@ -757,8 +757,8 @@ class Privileges
         if ($submit) {
             $html_output .= '<fieldset id="fieldset_user_privtable_footer" '
                 . 'class="tblFooters">' . "\n"
-                . '<input type="hidden" name="update_privs" value="1" />' . "\n"
-                . '<input type="submit" value="' . __('Go') . '" />' . "\n"
+                . '<input type="hidden" name="update_privs" value="1">' . "\n"
+                . '<input class="btn btn-primary" type="submit" value="' . __('Go') . '">' . "\n"
                 . '</fieldset>' . "\n";
         }
         return $html_output;
@@ -1063,9 +1063,9 @@ class Privileges
         unset($res, $row1, $current);
 
         $html_output = '<input type="hidden" name="grant_count" '
-            . 'value="' . count($row) . '" />' . "\n"
+            . 'value="' . count($row) . '">' . "\n"
             . '<input type="hidden" name="column_count" '
-            . 'value="' . count($columns) . '" />' . "\n"
+            . 'value="' . count($columns) . '">' . "\n"
             . '<fieldset id="fieldset_user_priv">' . "\n"
             . '<legend data-submenu-label="' . __('Table') . '">' . __('Table-specific privileges')
             . '</legend>'
@@ -1190,7 +1190,7 @@ class Privileges
                     ? $GLOBALS[$privGlobalName]
                     : $GLOBALS[$privGlobalName . 'Tbl']
                 )
-                . '"/>' . "\n";
+                . '">' . "\n";
 
             $privGlobalName1 = 'strPrivDesc'
                 . mb_substr(
@@ -1244,7 +1244,7 @@ class Privileges
                 + count($privTable[2])
                 - (isset($row['Grant_priv']) ? 1 : 0)
             )
-            . '" />';
+            . '">';
         if ($db == '*') {
             $legend     = __('Global privileges');
             $menu_label = __('Global');
@@ -1258,7 +1258,7 @@ class Privileges
         $html_output .= '<fieldset id="fieldset_user_global_rights">'
             . '<legend data-submenu-label="' . $menu_label . '">' . $legend
             . '<input type="checkbox" id="addUsersForm_checkall" '
-            . 'class="checkall_box" title="' . __('Check all') . '" /> '
+            . 'class="checkall_box" title="' . __('Check all') . '"> '
             . '<label for="addUsersForm_checkall">' . __('Check all') . '</label> '
             . '</legend>'
             . '<p><small><i>'
@@ -1621,7 +1621,7 @@ class Privileges
             . (! isset($GLOBALS['pred_username'])
                     || $GLOBALS['pred_username'] == 'userdefined'
                 ? 'required="required"'
-                : '') . ' />' . "\n";
+                : '') . '>' . "\n";
 
         $html_output .= '<div id="user_exists_warning"'
             . ' name="user_exists_warning" class="hide">'
@@ -1726,7 +1726,7 @@ class Privileges
                     && $GLOBALS['pred_hostname'] == 'userdefined'
                 ? 'required="required"'
                 : '')
-            . ' />' . "\n"
+            . '>' . "\n"
             . Util::showHint(
                 __(
                     'When Host table is used, this field is ignored '
@@ -1760,7 +1760,7 @@ class Privileges
             . '<input type="password" id="text_pma_pw" name="pma_pw" '
             . 'title="' . __('Password') . '" '
             . (isset($GLOBALS['username']) ? '' : 'required="required"')
-            . '/>' . "\n"
+            . '>' . "\n"
             . '<span>Strength:</span> '
             . '<meter max="4" id="password_strength_meter" name="pw_meter"></meter> '
             . '<span id="password_strength" name="pw_strength"></span>' . "\n"
@@ -1775,7 +1775,7 @@ class Privileges
             . '<input type="password" name="pma_pw2" id="text_pma_pw2" '
             . 'title="' . __('Re-type') . '" '
             . (isset($GLOBALS['username']) ? '' : 'required="required"')
-            . '/>' . "\n"
+            . '>' . "\n"
             . '</div>' . "\n"
             . '<div class="item" id="authentication_plugin_div">'
             . '<label for="select_authentication_plugin" >';
@@ -2198,8 +2198,10 @@ class Privileges
     public function getWithClauseForAddUserAndUpdatePrivs()
     {
         $sql_query = '';
-        if ((isset($_POST['Grant_priv']) && $_POST['Grant_priv'] == 'Y')
-            || (isset($GLOBALS['Grant_priv']) && $GLOBALS['Grant_priv'] == 'Y')
+        if (((isset($_POST['Grant_priv']) && $_POST['Grant_priv'] == 'Y')
+            || (isset($GLOBALS['Grant_priv']) && $GLOBALS['Grant_priv'] == 'Y'))
+            && ! ((Util::getServerType() == 'MySQL' || Util::getServerType() == 'Percona Server')
+                && $this->dbi->getVersion() >= 80011)
         ) {
             $sql_query .= ' GRANT OPTION';
         }
@@ -2261,7 +2263,7 @@ class Privileges
             'onclick' => false,
             'html_field_id' => 'createdb-1',
         ]);
-        $html_output .= '<br />' . "\n";
+        $html_output .= '<br>' . "\n";
         $html_output .= $this->template->render('checkbox', [
             'html_field_name' => 'createdb-2',
             'label' => __('Grant all privileges on wildcard name (username\\_%).'),
@@ -2269,7 +2271,7 @@ class Privileges
             'onclick' => false,
             'html_field_id' => 'createdb-2',
         ]);
-        $html_output .= '<br />' . "\n";
+        $html_output .= '<br>' . "\n";
 
         if (! empty($dbname)) {
             $html_output .= $this->template->render('checkbox', [
@@ -2280,8 +2282,8 @@ class Privileges
                 'html_field_id' => 'createdb-3',
             ]);
             $html_output .= '<input type="hidden" name="dbname" value="'
-                . htmlspecialchars($dbname) . '" />' . "\n";
-            $html_output .= '<br />' . "\n";
+                . htmlspecialchars($dbname) . '">' . "\n";
+            $html_output .= '<br>' . "\n";
         }
 
         $html_output .= '</fieldset>' . "\n";
@@ -2290,8 +2292,8 @@ class Privileges
         }
         $html_output .= '<fieldset id="fieldset_add_user_footer" class="tblFooters">'
             . "\n"
-            . '<input type="hidden" name="adduser_submit" value="1" />' . "\n"
-            . '<input type="submit" id="adduser_submit" value="' . __('Go') . '" />'
+            . '<input type="hidden" name="adduser_submit" value="1">' . "\n"
+            . '<input class="btn btn-primary" type="submit" id="adduser_submit" value="' . __('Go') . '">'
             . "\n"
             . '</fieldset>' . "\n"
             . '</form>' . "\n";
@@ -2376,7 +2378,7 @@ class Privileges
             $html_output .= '<input type="checkbox" class="checkall" '
                 . 'name="selected_usr[]" '
                 . 'id="checkbox_sel_users_' . ($index_checkbox++) . '" '
-                . 'value="' . $value . '" /></td>';
+                . 'value="' . $value . '"></td>';
 
             $html_output .= '<td>' . htmlspecialchars($row['User'])
                 . '</td>'
@@ -2701,7 +2703,7 @@ class Privileges
                 $html_output .= '<input type="checkbox" class="checkall" '
                     . 'name="selected_usr[]" '
                     . 'id="checkbox_sel_users_' . ($index_checkbox++) . '" '
-                    . 'value="' . $value . '" /></td>' . "\n";
+                    . 'value="' . $value . '"></td>' . "\n";
 
                 // user
                 $html_output .= '<td';
@@ -3058,7 +3060,7 @@ class Privileges
                 . 'id="checkbox_sel_users_"'
                 . 'value="'
                 . htmlspecialchars($username)
-                . '&amp;#27;' . htmlspecialchars($hostname) . '" />'
+                . '&amp;#27;' . htmlspecialchars($hostname) . '">'
                 . '</td>' . "\n"
                 . '<td><label for="checkbox_sel_users_">'
                 . (empty($_POST['username'])
@@ -3193,14 +3195,14 @@ class Privileges
             . 'method="post" class="copyUserForm submenu-item">' . "\n"
             . Url::getHiddenInputs('', '')
             . '<input type="hidden" name="old_username" '
-            . 'value="' . htmlspecialchars($username) . '" />' . "\n"
+            . 'value="' . htmlspecialchars($username) . '">' . "\n"
             . '<input type="hidden" name="old_hostname" '
-            . 'value="' . htmlspecialchars($hostname) . '" />' . "\n";
+            . 'value="' . htmlspecialchars($hostname) . '">' . "\n";
 
         $usergroup = $this->getUserGroupForUser($username);
         if ($usergroup !== null) {
             $html_output .= '<input type="hidden" name="old_usergroup" '
-            . 'value="' . htmlspecialchars($usergroup) . '" />' . "\n";
+            . 'value="' . htmlspecialchars($usergroup) . '">' . "\n";
         }
 
         $html_output .= '<fieldset id="fieldset_change_copy_user">' . "\n"
@@ -3224,8 +3226,8 @@ class Privileges
 
         $html_output .= '<fieldset id="fieldset_change_copy_user_footer" '
             . 'class="tblFooters">' . "\n"
-            . '<input type="hidden" name="change_copy" value="1" />' . "\n"
-            . '<input type="submit" value="' . __('Go') . '" />' . "\n"
+            . '<input type="hidden" name="change_copy" value="1">' . "\n"
+            . '<input class="btn btn-primary" type="submit" value="' . __('Go') . '">' . "\n"
             . '</fieldset>' . "\n"
             . '</form>' . "\n";
 
@@ -3670,7 +3672,7 @@ class Privileges
             'export'
         );
         $html_output .= '<input type="hidden" name="initial" '
-            . 'value="' . (isset($_GET['initial']) ? htmlspecialchars($_GET['initial']) : '') . '" />';
+            . 'value="' . (isset($_GET['initial']) ? htmlspecialchars($_GET['initial']) : '') . '">';
         $html_output .= '</div>'
             . '<div class="clearfloat"></div>';
 
@@ -3722,7 +3724,7 @@ class Privileges
                     . $index_checkbox . '" value="'
                     . htmlspecialchars($host['User'] . '&amp;#27;' . $host['Host'])
                     . '"'
-                    . ' /></td>' . "\n";
+                    . '></td>' . "\n";
 
                 $html_output .= '<td><label '
                     . 'for="checkbox_sel_users_' . $index_checkbox . '">'
@@ -4278,8 +4280,14 @@ class Privileges
         }
 
         list(
-            $create_user_real, $create_user_show, $real_sql_query, $sql_query,
-            $password_set_real, $password_set_show
+            $create_user_real,
+            $create_user_show,
+            $real_sql_query,
+            $sql_query,
+            $password_set_real,
+            $password_set_show,
+            $alter_real_sql_query,
+            $alter_sql_query
         ) = $this->getSqlQueriesForDisplayAndAddUser(
             $username,
             $hostname,
@@ -4312,7 +4320,9 @@ class Privileges
                 $sql_query,
                 $username,
                 $hostname,
-                $dbname
+                $dbname,
+                $alter_real_sql_query,
+                $alter_sql_query
             );
             if (!empty($_POST['userGroup']) && $is_menuwork) {
                 $this->setUserGroup($GLOBALS['username'], $_POST['userGroup']);
@@ -4771,7 +4781,7 @@ class Privileges
                 // This message is hardcoded because I will replace it by
                 // a automatic repair feature soon.
                 $raw = 'Your privilege table structure seems to be older than'
-                    . ' this MySQL version!<br />'
+                    . ' this MySQL version!<br>'
                     . 'Please run the <code>mysql_upgrade</code> command'
                     . ' that should be included in your MySQL server distribution'
                     . ' to solve this problem!';
@@ -5128,12 +5138,14 @@ class Privileges
      * Prepares queries for adding users and
      * also create database and return query and message
      *
-     * @param boolean $_error         whether user create or not
-     * @param string  $real_sql_query SQL query for add a user
-     * @param string  $sql_query      SQL query to be displayed
-     * @param string  $username       username
-     * @param string  $hostname       host name
-     * @param string  $dbname         database name
+     * @param boolean $_error               whether user create or not
+     * @param string  $real_sql_query       SQL query for add a user
+     * @param string  $sql_query            SQL query to be displayed
+     * @param string  $username             username
+     * @param string  $hostname             host name
+     * @param string  $dbname               database name
+     * @param string  $alter_real_sql_query SQL query for ALTER USER
+     * @param string  $alter_sql_query      SQL query for ALTER USER to be displayed
      *
      * @return array, $message
      */
@@ -5143,7 +5155,9 @@ class Privileges
         $sql_query,
         $username,
         $hostname,
-        $dbname
+        $dbname,
+        $alter_real_sql_query,
+        $alter_sql_query
     ) {
         if ($_error || (!empty($real_sql_query)
             && !$this->dbi->tryQuery($real_sql_query))
@@ -5151,7 +5165,12 @@ class Privileges
             $_POST['createdb-1'] = $_POST['createdb-2']
                 = $_POST['createdb-3'] = null;
             $message = Message::rawError($this->dbi->getError());
+        } elseif ($alter_real_sql_query !== '' && !$this->dbi->tryQuery($alter_real_sql_query)) {
+            $_POST['createdb-1'] = $_POST['createdb-2']
+                = $_POST['createdb-3'] = null;
+            $message = Message::rawError($this->dbi->getError());
         } else {
+            $sql_query .= $alter_sql_query;
             $message = Message::success(__('You have added a new user.'));
         }
 
@@ -5276,7 +5295,7 @@ class Privileges
      * @param string $password password
      *
      * @return array ($create_user_real, $create_user_show,$real_sql_query, $sql_query
-     *                $password_set_real, $password_set_show)
+     *                $password_set_real, $password_set_show, $alter_real_sql_query, $alter_sql_query)
      */
     public function getSqlQueriesForDisplayAndAddUser($username, $hostname, $password)
     {
@@ -5369,6 +5388,8 @@ class Privileges
                 $create_user_stmt .= ' USING \'%s\'';
             } elseif ($serverType == 'MariaDB') {
                 $create_user_stmt .= ' IDENTIFIED BY \'%s\'';
+            } elseif (($serverType == 'MySQL' || $serverType == 'Percona Server') && $serverVersion >= 80011) {
+                $create_user_stmt .= ' BY \'%s\'';
             } else {
                 $create_user_stmt .= ' AS \'%s\'';
             }
@@ -5392,9 +5413,8 @@ class Privileges
                     '***'
                 );
             } else {
-                if (! ($serverType == 'MariaDB'
-                    && $isMariaDBPwdPluginActive)
-                ) {
+                if (! (($serverType == 'MariaDB' && $isMariaDBPwdPluginActive)
+                    || ($serverType == 'MySQL' || $serverType == 'Percona Server') && $serverVersion >= 80011)) {
                     $hashedPassword = $this->getHashedPassword($_POST['pma_pw']);
                 } else {
                     // MariaDB with validation plugin needs cleartext password
@@ -5437,19 +5457,51 @@ class Privileges
             }
         }
 
+        $alter_real_sql_query = '';
+        $alter_sql_query = '';
+        if (($serverType == 'MySQL' || $serverType == 'Percona Server') && $serverVersion >= 80011) {
+            $sql_query_stmt = '';
+            if ((isset($_POST['Grant_priv']) && $_POST['Grant_priv'] == 'Y')
+                || (isset($GLOBALS['Grant_priv']) && $GLOBALS['Grant_priv'] == 'Y')
+            ) {
+                $sql_query_stmt = ' WITH GRANT OPTION';
+            }
+            $real_sql_query .= $sql_query_stmt;
+            $sql_query .= $sql_query_stmt;
+
+            $alter_sql_query_stmt = sprintf(
+                'ALTER USER \'%s\'@\'%s\'',
+                $slashedUsername,
+                $slashedHostname
+            );
+            $alter_real_sql_query = $alter_sql_query_stmt;
+            $alter_sql_query = $alter_sql_query_stmt;
+        }
+
         // add REQUIRE clause
         $require_clause = $this->getRequireClause();
-        $real_sql_query .= $require_clause;
-        $sql_query .= $require_clause;
-
         $with_clause = $this->getWithClauseForAddUserAndUpdatePrivs();
-        $real_sql_query .= $with_clause;
-        $sql_query .= $with_clause;
 
+        if (($serverType == 'MySQL' || $serverType == 'Percona Server') && $serverVersion >= 80011) {
+            $alter_real_sql_query .= $require_clause;
+            $alter_sql_query .= $require_clause;
+            $alter_real_sql_query .= $with_clause;
+            $alter_sql_query .= $with_clause;
+        } else {
+            $real_sql_query .= $require_clause;
+            $sql_query .= $require_clause;
+            $real_sql_query .= $with_clause;
+            $sql_query .= $with_clause;
+        }
+
+        if ($alter_real_sql_query !== '') {
+            $alter_real_sql_query .= ';';
+            $alter_sql_query .= ';';
+        }
         $create_user_real .= ';';
         $create_user_show .= ';';
-        $real_sql_query   .= ';';
-        $sql_query        .= ';';
+        $real_sql_query .= ';';
+        $sql_query .= ';';
         // No Global GRANT_OPTION privilege
         if (!$GLOBALS['is_grantuser']) {
             $real_sql_query = '';
@@ -5470,12 +5522,15 @@ class Privileges
             $password_set_show .= ";";
         }
 
-        return [$create_user_real,
+        return [
+            $create_user_real,
             $create_user_show,
             $real_sql_query,
             $sql_query,
             $password_set_real,
-            $password_set_show
+            $password_set_show,
+            $alter_real_sql_query,
+            $alter_sql_query,
         ];
     }
 

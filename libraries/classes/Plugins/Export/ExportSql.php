@@ -431,21 +431,21 @@ class ExportSql extends ExportPlugin
                 [
                     'complete' => __(
                         'include column names in every <code>INSERT</code> statement'
-                        . ' <br /> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO'
+                        . ' <br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO'
                         . ' tbl_name (col_A,col_B,col_C) VALUES (1,2,3)</code>'
                     ),
                     'extended' => __(
                         'insert multiple rows in every <code>INSERT</code> statement'
-                        . '<br /> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO'
+                        . '<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO'
                         . ' tbl_name VALUES (1,2,3), (4,5,6), (7,8,9)</code>'
                     ),
                     'both'     => __(
-                        'both of the above<br /> &nbsp; &nbsp; &nbsp; Example:'
+                        'both of the above<br> &nbsp; &nbsp; &nbsp; Example:'
                         . ' <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES'
                         . ' (1,2,3), (4,5,6), (7,8,9)</code>'
                     ),
                     'none'     => __(
-                        'neither of the above<br /> &nbsp; &nbsp; &nbsp; Example:'
+                        'neither of the above<br> &nbsp; &nbsp; &nbsp; Example:'
                         . ' <code>INSERT INTO tbl_name VALUES (1,2,3)</code>'
                     ),
                 ]
@@ -1511,6 +1511,7 @@ class ExportSql extends ExportPlugin
         // Note: SHOW CREATE TABLE, at least in MySQL 5.1.23, does not
         // produce a displayable result for the default value of a BIT
         // column, nor does the mysqldump command. See MySQL bug 35796
+        $GLOBALS['dbi']->tryQuery('USE ' . Util::backquote($db));
         $result = $GLOBALS['dbi']->tryQuery(
             'SHOW CREATE TABLE ' . Util::backquote($db) . '.'
             . Util::backquote($table)
