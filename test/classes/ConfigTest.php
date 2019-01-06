@@ -262,7 +262,7 @@ class ConfigTest extends PmaTestCase
 
         $this->object->set('GD2Available', 'auto');
 
-        if (!function_exists('imagecreatetruecolor')) {
+        if (! function_exists('imagecreatetruecolor')) {
             $this->object->checkGd2();
             $this->assertEquals(
                 0,
@@ -552,7 +552,7 @@ class ConfigTest extends PmaTestCase
             'PMA_USR_OS',
             'PMA_USR_BROWSER_VER',
             'PMA_USR_BROWSER_AGENT'
-            ];
+        ];
 
         foreach ($defines as $define) {
             $this->assertTrue(defined($define));
@@ -779,12 +779,12 @@ class ConfigTest extends PmaTestCase
         //load file permissions for the current permissions file
         $perms = @fileperms($this->object->getSource());
         //testing for permissions for no configuration file
-        $this->assertFalse(!($perms === false) && ($perms & 2));
+        $this->assertFalse(! ($perms === false) && ($perms & 2));
 
         //load file permissions for the current permissions file
         $perms = @fileperms($this->permTestObj->getSource());
 
-        if (!($perms === false) && ($perms & 2)) {
+        if (! ($perms === false) && ($perms & 2)) {
             $this->assertTrue((bool) $this->permTestObj->get('PMA_IS_WINDOWS'));
         } else {
             $this->assertFalse((bool) $this->permTestObj->get('PMA_IS_WINDOWS'));

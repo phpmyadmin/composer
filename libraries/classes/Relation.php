@@ -753,10 +753,12 @@ class Relation
             );
             $this->dbi->tryMultiQuery($query, DatabaseInterface::CONNECT_CONTROL);
             // skips result sets of query as we are not interested in it
-            while ($this->dbi->moreResults(DatabaseInterface::CONNECT_CONTROL)
-                && $this->dbi->nextResult(DatabaseInterface::CONNECT_CONTROL)
-            ) {
-            }
+            do {
+                $hasResult = (
+                    $this->dbi->moreResults(DatabaseInterface::CONNECT_CONTROL)
+                    && $this->dbi->nextResult(DatabaseInterface::CONNECT_CONTROL)
+                );
+            } while ($hasResult);
             $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
             // return true if no error exists otherwise false
             return empty($error);
@@ -874,8 +876,8 @@ class Relation
                 SELECT `display_field`
                 FROM ' . Util::backquote($cfgRelation['db'])
                     . '.' . Util::backquote($cfgRelation['table_info']) . '
-                WHERE `db_name`    = \'' . $this->dbi->escapeString((string)$db) . '\'
-                    AND `table_name` = \'' . $this->dbi->escapeString((string)$table)
+                WHERE `db_name`    = \'' . $this->dbi->escapeString((string) $db) . '\'
+                    AND `table_name` = \'' . $this->dbi->escapeString((string) $table)
                 . '\'';
 
             $row = $this->dbi->fetchSingleRow(
@@ -1262,7 +1264,7 @@ class Relation
             $data = (string) $data;
 
             if (mb_check_encoding($key, 'utf-8')
-                && !preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', $key)
+                && ! preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', $key)
             ) {
                 $selected = ($key == $data);
                 // show as text if it's valid utf-8
@@ -1278,7 +1280,7 @@ class Relation
             }
 
             if (mb_check_encoding($value, 'utf-8')
-                && !preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', $value)
+                && ! preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', $value)
             ) {
                 if (mb_strlen($value) <= $GLOBALS['cfg']['LimitChars']
                 ) {
@@ -1461,7 +1463,7 @@ class Relation
                 ->checkIfMinRecordsExist($GLOBALS['cfg']['ForeignKeyMaxLimit']);
 
             if ($override_total == true
-                || !$moreThanLimit
+                || ! $moreThanLimit
             ) {
                 // foreign_display can be false if no display field defined:
                 $foreign_display = $this->getDisplayField($foreign_db, $foreign_table);
@@ -1490,7 +1492,7 @@ class Relation
 
                 $f_query_limit = ! empty($foreign_limit) ?: '';
 
-                if (!empty($foreign_filter)) {
+                if (! empty($foreign_filter)) {
                     $the_total = $this->dbi->fetchValue(
                         'SELECT COUNT(*)' . $f_query_from . $f_query_filter
                     );

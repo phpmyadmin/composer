@@ -104,7 +104,7 @@ class InsertEdit
      */
     private function getWhereClauseArray($where_clause)
     {
-        if (!isset($where_clause)) {
+        if (! isset($where_clause)) {
             return [];
         }
 
@@ -471,7 +471,7 @@ class InsertEdit
     ) {
         $html_output = '';
         if (($GLOBALS['cfg']['ProtectBinary'] === 'blob'
-            && $column['is_blob'] && !$is_upload)
+            && $column['is_blob'] && ! $is_upload)
             || ($GLOBALS['cfg']['ProtectBinary'] === 'all'
             && $column['is_binary'])
             || ($GLOBALS['cfg']['ProtectBinary'] === 'noblob'
@@ -538,7 +538,7 @@ class InsertEdit
         $html_output .= '<td>' . "\n";
         $html_output .= '<input type="hidden" name="fields_null_prev'
             . $column_name_appendix . '"';
-        if ($real_null_value && !$column['first_timestamp']) {
+        if ($real_null_value && ! $column['first_timestamp']) {
             $html_output .= ' value="on"';
         }
         $html_output .= '>' . "\n";
@@ -592,14 +592,14 @@ class InsertEdit
             }
         } elseif (mb_strstr($column['True_Type'], 'set')) {
             $nullify_code = '3';
-        } elseif (!empty($foreigners)
-            && !empty($foreigner)
+        } elseif (! empty($foreigners)
+            && ! empty($foreigner)
             && $foreignData['foreign_link'] == false
         ) {
             // foreign key in a drop-down
             $nullify_code = '4';
-        } elseif (!empty($foreigners)
-            && !empty($foreigner)
+        } elseif (! empty($foreigners)
+            && ! empty($foreigner)
             && $foreignData['foreign_link'] == true
         ) {
             // foreign key with a browsing icon
@@ -1351,7 +1351,7 @@ class InsertEdit
         $fields_type_val = 'hex';
         if (($GLOBALS['cfg']['ProtectBinary'] === 'blob' && $column['is_blob'])
             || ($GLOBALS['cfg']['ProtectBinary'] === 'all')
-            || ($GLOBALS['cfg']['ProtectBinary'] === 'noblob' && !$column['is_blob'])
+            || ($GLOBALS['cfg']['ProtectBinary'] === 'noblob' && ! $column['is_blob'])
         ) {
             $html_output .= __('Binary - do not edit');
             if (isset($data)) {
@@ -1400,7 +1400,7 @@ class InsertEdit
         }
         $html_output .= sprintf($fields_type_html, $fields_type_val);
 
-        if ($is_upload && $column['is_blob'] && !$readOnly) {
+        if ($is_upload && $column['is_blob'] && ! $readOnly) {
             // We don't want to prevent users from using
             // browser's default drag-drop feature on some page(s),
             // so we add noDragDrop class to the input
@@ -1416,7 +1416,7 @@ class InsertEdit
             $html_output .= $html_out;
         }
 
-        if (!empty($GLOBALS['cfg']['UploadDir']) && !$readOnly) {
+        if (! empty($GLOBALS['cfg']['UploadDir']) && ! $readOnly) {
             $html_output .= $this->getSelectOptionForUpload($vkey, $column);
         }
 
@@ -1457,16 +1457,17 @@ class InsertEdit
 
         $the_class = 'textfield';
         // verify True_Type which does not contain the parentheses and length
-        if ($readOnly) {
-            //NOOP. Disable date/timepicker
-        } elseif ($column['True_Type'] === 'date') {
-            $the_class .= ' datefield';
-        } elseif ($column['True_Type'] === 'time') {
-            $the_class .= ' timefield';
-        } elseif ($column['True_Type'] === 'datetime'
-            || $column['True_Type'] === 'timestamp'
-        ) {
-            $the_class .= ' datetimefield';
+        if (! $readOnly) {
+            if ($column['True_Type'] === 'date') {
+                $the_class .= ' datefield';
+            } elseif ($column['True_Type'] === 'time') {
+                $the_class .= ' timefield';
+            } elseif (
+                $column['True_Type'] === 'datetime'
+                || $column['True_Type'] === 'timestamp'
+            ) {
+                $the_class .= ' datetimefield';
+            }
         }
         $input_min_max = false;
         if (in_array($column['True_Type'], $this->dbi->types->getIntegerTypes())) {
@@ -1514,7 +1515,7 @@ class InsertEdit
         if ($files === false) {
             return '<span style="color:red">' . __('Error') . '</span><br>' . "\n"
                 . __('The directory you set for upload work cannot be reached.') . "\n";
-        } elseif (!empty($files)) {
+        } elseif (! empty($files)) {
             return "<br>\n"
                 . '<i>' . __('Or') . '</i>' . ' '
                 . __('web server upload directory:') . '<br>' . "\n"
@@ -1667,14 +1668,6 @@ class InsertEdit
             if ($column['True_Type'] == 'bit') {
                 $html_output .= '<input type="hidden" name="fields_type'
                     . $column_name_appendix . '" value="bit">';
-            }
-            if ($column['pma_type'] == 'date'
-                || $column['pma_type'] == 'datetime'
-                || substr($column['pma_type'], 0, 9) == 'timestamp'
-            ) {
-                // the _3 suffix points to the date field
-                // the _2 suffix points to the corresponding NULL checkbox
-                // in dateFormat, 'yy' means the year with 4 digits
             }
         }
         return $html_output;
@@ -1983,7 +1976,7 @@ class InsertEdit
         $special_chars_encoded = '';
         $data = null;
         // (we are editing)
-        if (!isset($current_row[$column['Field']])) {
+        if (! isset($current_row[$column['Field']])) {
             $real_null_value = true;
             $current_row[$column['Field']] = '';
             $special_chars = '';
@@ -2162,7 +2155,7 @@ class InsertEdit
             $scripts = $header->getScripts();
             $scripts->addFile('vendor/jquery/additional-methods.js');
             $scripts->addFile('tbl_change.js');
-            if (!defined('TESTSUITE')) {
+            if (! defined('TESTSUITE')) {
                 include ROOT_PATH . 'tbl_change.php';
                 exit;
             }
@@ -2461,7 +2454,7 @@ class InsertEdit
         if ('D' == $_SESSION['tmpval']['relational_display']) {
             // user chose "relational display field" in the
             // display options, so show display field in the cell
-            $output .= !empty($dispval) ? htmlspecialchars($dispval) : '';
+            $output .= ! empty($dispval) ? htmlspecialchars($dispval) : '';
         } else {
             // otherwise display data in the cell
             $output .= htmlspecialchars($relation_field_value);
@@ -2646,13 +2639,13 @@ class InsertEdit
             $query_values[]
                 = Util::backquote($multi_edit_columns_name[$key])
                 . ' = ' . $current_value_as_an_array;
-        } elseif (empty($multi_edit_funcs[$key])
+        } elseif (
+            ! (empty($multi_edit_funcs[$key])
             && isset($multi_edit_columns_prev[$key])
             && (("'" . $this->dbi->escapeString($multi_edit_columns_prev[$key]) . "'" === $current_value)
-            || ('0x' . $multi_edit_columns_prev[$key] === $current_value))
+            || ('0x' . $multi_edit_columns_prev[$key] === $current_value)))
+            && ! empty($current_value)
         ) {
-            // No change for this column and no MySQL function is used -> next column
-        } elseif (! empty($current_value)) {
             // avoid setting a field to NULL when it's already NULL
             // (field had the null checkbox before the update
             //  field still has the null checkbox)
@@ -2706,7 +2699,7 @@ class InsertEdit
         // Fetch the current values of a row to use in case we have a protected field
         if ($is_insert
             && $using_key && isset($multi_edit_columns_type)
-            && is_array($multi_edit_columns_type) && !empty($where_clause)
+            && is_array($multi_edit_columns_type) && ! empty($where_clause)
         ) {
             $protected_row = $this->dbi->fetchSingleRow(
                 'SELECT * FROM ' . Util::backquote($table)
@@ -3132,7 +3125,7 @@ class InsertEdit
             );
         }
         $as_is = false;
-        if (!empty($repopulate) && !empty($current_row)) {
+        if (! empty($repopulate) && ! empty($current_row)) {
             $current_row[$column['Field']] = $repopulate[$column['Field_md5']];
             $as_is = true;
         }
@@ -3184,7 +3177,7 @@ class InsertEdit
         // Prepares the field value
         $real_null_value = false;
         $special_chars_encoded = '';
-        if (!empty($current_row)) {
+        if (! empty($current_row)) {
             // (we are editing)
             list(
                 $real_null_value, $special_chars_encoded, $special_chars,
@@ -3283,7 +3276,7 @@ class InsertEdit
 
         // Check input transformation of column
         $transformed_html = '';
-        if (!empty($column_mime['input_transformation'])) {
+        if (! empty($column_mime['input_transformation'])) {
             $file = $column_mime['input_transformation'];
             $include_file = 'libraries/classes/Plugins/Transformations/' . $file;
             if (is_file($include_file)) {
@@ -3327,7 +3320,7 @@ class InsertEdit
                 }
             }
         }
-        if (!empty($transformed_html)) {
+        if (! empty($transformed_html)) {
             $html_output .= $transformed_html;
         } else {
             $html_output .= $this->getValueColumn(

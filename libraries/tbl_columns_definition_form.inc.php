@@ -17,7 +17,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Util;
 
-if (!defined('PHPMYADMIN')) {
+if (! defined('PHPMYADMIN')) {
     exit;
 }
 
@@ -38,13 +38,13 @@ $template = new Template();
  * Initialize to avoid code execution path warnings
  */
 
-if (!isset($num_fields)) {
+if (! isset($num_fields)) {
     $num_fields = 0;
 }
-if (!isset($mime_map)) {
+if (! isset($mime_map)) {
     $mime_map = null;
 }
-if (!isset($columnMeta)) {
+if (! isset($columnMeta)) {
     $columnMeta = [];
 }
 
@@ -64,7 +64,8 @@ if ($action == 'tbl_create.php') {
         $form_params = array_merge(
             $form_params,
             [
-            'field_where' => Util::getValueByKey($_POST, 'field_where')]
+                'field_where' => Util::getValueByKey($_POST, 'field_where')
+            ]
         );
         if (isset($_POST['field_where'])) {
             $form_params['after_field'] = $_POST['after_field'];
@@ -153,7 +154,7 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
     $submit_attribute = null;
     $extracted_columnspec = [];
 
-    if (!empty($regenerate)) {
+    if (! empty($regenerate)) {
         $columnMeta = array_merge(
             $columnMeta,
             [
@@ -357,7 +358,7 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
             $form_params['field_orig[' . $columnNumber . ']']
                 = $columnMeta['Field'];
             if (isset($columnMeta['column_status'])
-                && !$columnMeta['column_status']['isEditable']
+                && ! $columnMeta['column_status']['isEditable']
             ) {
                 $form_params['field_name[' . $columnNumber . ']']
                     = $columnMeta['Field'];
@@ -371,7 +372,7 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
             // keep in uppercase because the new type will be in uppercase
             $form_params['field_type_orig[' . $columnNumber . ']'] = mb_strtoupper($type);
             if (isset($columnMeta['column_status'])
-                && !$columnMeta['column_status']['isEditable']
+                && ! $columnMeta['column_status']['isEditable']
             ) {
                 $form_params['field_type[' . $columnNumber . ']'] = mb_strtoupper($type);
             }
