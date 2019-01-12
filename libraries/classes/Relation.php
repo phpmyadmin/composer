@@ -1904,11 +1904,8 @@ class Relation
             if (sizeof($child_references, 0) > 0) {
                 $column_status['isReferenced'] = true;
                 foreach ($child_references as $columns) {
-                    array_push(
-                        $column_status['references'],
-                        Util::backquote($columns['table_schema'])
-                        . '.' . Util::backquote($columns['table_name'])
-                    );
+                    $column_status['references'][] = Util::backquote($columns['table_schema'])
+                        . '.' . Util::backquote($columns['table_name']);
                 }
             }
 
@@ -2180,7 +2177,7 @@ class Relation
      */
     public function arePmadbTablesDefined()
     {
-        if (empty($GLOBALS['cfg']['Server']['bookmarktable'])
+        return ! (empty($GLOBALS['cfg']['Server']['bookmarktable'])
             || empty($GLOBALS['cfg']['Server']['relation'])
             || empty($GLOBALS['cfg']['Server']['table_info'])
             || empty($GLOBALS['cfg']['Server']['table_coords'])
@@ -2198,12 +2195,7 @@ class Relation
             || empty($GLOBALS['cfg']['Server']['savedsearches'])
             || empty($GLOBALS['cfg']['Server']['central_columns'])
             || empty($GLOBALS['cfg']['Server']['designer_settings'])
-            || empty($GLOBALS['cfg']['Server']['export_templates'])
-        ) {
-            return false;
-        }
-
-        return true;
+            || empty($GLOBALS['cfg']['Server']['export_templates']));
     }
 
     /**
