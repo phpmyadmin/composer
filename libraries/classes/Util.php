@@ -1425,7 +1425,7 @@ class Util
             -5 => 'f',
             -4 => 'p',
             -3 => 'n',
-            -2 => '&micro;',
+            -2 => 'µ',
             -1 => 'm',
             0 => ' ',
             1 => 'k',
@@ -2769,7 +2769,7 @@ class Util
      * @param string $var variable name
      * @param mixed  $val value
      *
-     * @return mixed
+     * @return void
      */
     public static function cacheSet($var, $val = null)
     {
@@ -2855,7 +2855,7 @@ class Util
     {
         $first_bracket_pos = mb_strpos($columnspec, '(');
         if ($first_bracket_pos) {
-            $spec_in_brackets = chop(
+            $spec_in_brackets = rtrim(
                 mb_substr(
                     $columnspec,
                     $first_bracket_pos + 1,
@@ -2864,7 +2864,7 @@ class Util
             );
             // convert to lowercase just to be sure
             $type = mb_strtolower(
-                chop(mb_substr($columnspec, 0, $first_bracket_pos))
+                rtrim(mb_substr($columnspec, 0, $first_bracket_pos))
             );
         } else {
             // Split trailing attributes such as unsigned,
@@ -4325,7 +4325,7 @@ class Util
             $classes[] = 'disableAjax';
         }
         if (! empty($classes)) {
-            $retval .= ' class="' . join(" ", $classes) . '"';
+            $retval .= ' class="' . implode(" ", $classes) . '"';
         }
         $retval .= ' title="' . $text . '">';
         if ($showIcon) {
