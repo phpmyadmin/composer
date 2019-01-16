@@ -1483,7 +1483,7 @@ class Util
         );
         // If we don't want any zeros, remove them now
         if ($noTrailingZero && strpos($formattedValue, $decimal_sep) !== false) {
-            $formattedValue = preg_replace('/' . preg_quote($decimal_sep) . '?0+$/', '', $formattedValue);
+            $formattedValue = preg_replace('/' . preg_quote($decimal_sep, '/') . '?0+$/', '', $formattedValue);
         }
 
         if ($originalValue != 0 && floatval($value) == 0) {
@@ -1865,8 +1865,7 @@ class Util
         // on most places separator is still hard coded ...
         if ($separator !== '&') {
             // ... so always replace & with $separator
-            $url = str_replace(htmlentities('&'), $separator, $url);
-            $url = str_replace('&', $separator, $url);
+            $url = str_replace([htmlentities('&'), '&'], [$separator, $separator], $url);
         }
 
         $url = str_replace(htmlentities($separator), $separator, $url);
@@ -2820,7 +2819,7 @@ class Util
                     $printable = '0' . $printable;
                 } else {
                     $printable = '1' . $printable;
-                    $value = $value - pow(2, $i);
+                    $value -= pow(2, $i);
                 }
                 --$i;
             }
@@ -2892,7 +2891,7 @@ class Util
             // this would be a BINARY or VARBINARY column type;
             // by the way, a BLOB should not show the BINARY attribute
             // because this is not accepted in MySQL syntax.
-            if (preg_match('@binary@', $printtype)
+            if (false !== strpos($printtype, "binary")
                 && ! preg_match('@binary[\(]@', $printtype)
             ) {
                 $printtype = preg_replace('@binary@', '', $printtype);

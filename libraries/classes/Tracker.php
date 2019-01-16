@@ -106,8 +106,7 @@ class Tracker
         $str = explode("\n", $tablename);
         $tablename = $str[0];
 
-        $tablename = str_replace(';', '', $tablename);
-        $tablename = str_replace('`', '', $tablename);
+        $tablename = str_replace([';', '`'], '', $tablename);
         $tablename = trim($tablename);
 
         return $tablename;
@@ -814,7 +813,7 @@ class Tracker
         }
 
         if (! (substr($query, -1) == ';')) {
-            $query = $query . ";\n";
+            $query .= ";\n";
         }
         // Get some information about query
         $result = self::parseQuery($query);

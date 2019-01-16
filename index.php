@@ -62,7 +62,7 @@ $target_blacklist =  [
 // If we have a valid target, let's load that script instead
 if (! empty($_REQUEST['target'])
     && is_string($_REQUEST['target'])
-    && ! preg_match('/^index/', $_REQUEST['target'])
+    && 0 !== strpos($_REQUEST['target'], "index")
     && ! in_array($_REQUEST['target'], $target_blacklist)
     && Core::checkPageValidity($_REQUEST['target'], [], true)
 ) {
@@ -235,22 +235,20 @@ if ($server > 0 || count($cfg['Servers']) > 1
         include_once ROOT_PATH . 'libraries/check_user_privileges.inc.php';
 
         // Logout for advanced authentication
-        if ($cfg['Server']['auth_type'] != 'config') {
-            if ($cfg['ShowChgPassword']) {
-                $conditional_class = 'ajax';
-                Core::printListItem(
-                    Util::getImage('s_passwd') . "&nbsp;" . __(
-                        'Change password'
-                    ),
-                    'li_change_password',
-                    'user_password.php' . $common_url_query,
-                    null,
-                    null,
-                    'change_password_anchor',
-                    "no_bullets",
-                    $conditional_class
-                );
-            }
+        if (($cfg['Server']['auth_type'] != 'config') && $cfg['ShowChgPassword']) {
+            $conditional_class = 'ajax';
+            Core::printListItem(
+                Util::getImage('s_passwd') . "&nbsp;" . __(
+                    'Change password'
+                ),
+                'li_change_password',
+                'user_password.php' . $common_url_query,
+                null,
+                null,
+                'change_password_anchor',
+                "no_bullets",
+                $conditional_class
+            );
         } // end if
         echo '    <li id="li_select_mysql_collation" class="no_bullets" >';
         echo '        <form class="disableAjax" method="post" action="index.php">' , "\n"

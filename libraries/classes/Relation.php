@@ -746,18 +746,17 @@ class Relation
             // read upgrade query file
             $query = @file_get_contents(SQL_DIR . 'upgrade_column_info_4_3_0+.sql');
             // replace database name from query to with set in config.inc.php
-            $query = str_replace(
-                '`phpmyadmin`',
-                Util::backquote($GLOBALS['cfg']['Server']['pmadb']),
-                $query
-            );
             // replace pma__column_info table name from query
             // to with set in config.inc.php
             $query = str_replace(
-                '`pma__column_info`',
-                Util::backquote(
-                    $GLOBALS['cfg']['Server']['column_info']
-                ),
+                [
+                    '`phpmyadmin`',
+                    '`pma__column_info`',
+                ],
+                [
+                    Util::backquote($GLOBALS['cfg']['Server']['pmadb']),
+                    Util::backquote($GLOBALS['cfg']['Server']['column_info']),
+                ],
                 $query
             );
             $this->dbi->tryMultiQuery($query, DatabaseInterface::CONNECT_CONTROL);
@@ -1280,7 +1279,7 @@ class Relation
                 $key = htmlspecialchars($key);
             } else {
                 $key = '0x' . bin2hex($key);
-                if (preg_match('/0x/', $data)) {
+                if (false !== strpos($data, "0x")) {
                     $selected = ($key == trim($data));
                 } else {
                     $selected = ($key == '0x' . $data);

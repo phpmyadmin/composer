@@ -398,15 +398,13 @@ class Config
                 $_SESSION['git_location'] = null;
                 $_SESSION['is_git_revision'] = false;
                 return false;
+            } elseif (@is_dir($gitmatch[1])) {
+                //Detected git external folder location
+                $git_location = $gitmatch[1];
             } else {
-                if (@is_dir($gitmatch[1])) {
-                    //Detected git external folder location
-                    $git_location = $gitmatch[1];
-                } else {
-                    $_SESSION['git_location'] = null;
-                    $_SESSION['is_git_revision'] = false;
-                    return false;
-                }
+                $_SESSION['git_location'] = null;
+                $_SESSION['is_git_revision'] = false;
+                return false;
             }
         } else {
             $_SESSION['git_location'] = null;
@@ -874,24 +872,28 @@ class Config
          */
         if (! empty($cfg['DefaultTabTable'])) {
             $cfg['DefaultTabTable'] = str_replace(
-                '_properties',
-                '',
-                str_replace(
+                [
                     'tbl_properties.php',
+                    '_properties',
+                ],
+                [
                     'tbl_sql.php',
-                    $cfg['DefaultTabTable']
-                )
+                    '',
+                ],
+                $cfg['DefaultTabTable']
             );
         }
         if (! empty($cfg['DefaultTabDatabase'])) {
             $cfg['DefaultTabDatabase'] = str_replace(
-                '_details',
-                '',
-                str_replace(
+                [
                     'db_details.php',
+                    '_details',
+                ],
+                [
                     'db_sql.php',
-                    $cfg['DefaultTabDatabase']
-                )
+                    '',
+                ],
+                $cfg['DefaultTabDatabase']
             );
         }
 
