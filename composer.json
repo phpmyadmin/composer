@@ -45,6 +45,7 @@
         "ext-pcre": "*",
         "ext-json": "*",
         "ext-hash": "*",
+        "ext-iconv": "*",
         "phpmyadmin/sql-parser": "^4.2.5",
         "phpmyadmin/motranslator": "^4.0",
         "phpmyadmin/shapefile": "^2.0",
