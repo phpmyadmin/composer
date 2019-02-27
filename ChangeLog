@@ -26,12 +26,14 @@ phpMyAdmin - ChangeLog
 - issue #14053 Fix missed padding on query results
 - issue #14765 Add initial support for Bootstrap 4
 - issue #14829 Change table column comment field from input to textarea
+- issue #14725 Console: ctrl+l clear line and ctrl+u clear console
 
 4.8.6 (not yet released)
 - issue #14478 phpMyAdmin no longer streams the export data
 - issue #14514 Tables with SYSTEM VERSIONING show up as views instead of tables
 - issue #14515 Values cannot be edited in SYSTEM VERSIONING tables with INVISIBLE timestamps
 - issue        Fix header icon on server plugins page
+- issue #14298 Fixed error 500 on MultiTableQuery page when a empty query is passed
 
 4.8.5 (2019-01-25)
 - issue        Developer debug data was saved to the PHP error log
