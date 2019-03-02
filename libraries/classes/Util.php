@@ -4063,27 +4063,13 @@ class Util
             }
         } elseif (! $server['ssl_verify']) {
             $message = __('SSL is used with disabled verification');
-        } elseif (empty($server['ssl_ca']) && empty($server['ssl_ca'])) {
+        } elseif (empty($server['ssl_ca'])) {
             $message = __('SSL is used without certification authority');
         } else {
             $class = '';
             $message = __('SSL is used');
         }
         return '<span class="' . $class . '">' . $message . '</span> ' . self::showDocu('setup', 'ssl');
-    }
-
-
-    /**
-     * Prepare HTML code for display button.
-     *
-     * @return String
-     */
-    public static function getButton()
-    {
-        return '<p class="print_ignore">'
-            . '<input type="button" class="btn btn-secondary button" id="print" value="'
-            . __('Print') . '">'
-            . '</p>';
     }
 
     /**
@@ -4469,25 +4455,6 @@ class Util
         $serverVersion = $GLOBALS['dbi']->getVersion();
         return $serverType == 'MySQL' && $serverVersion >= 50705
              || ($serverType == 'MariaDB' && $serverVersion >= 50200);
-    }
-
-    /**
-     * Returns the proper class clause according to the column type
-     *
-     * @param string $type the column type
-     *
-     * @return string the HTML class clause
-     */
-    public static function getClassForType($type)
-    {
-        if ('set' == $type
-            || 'enum' == $type
-        ) {
-            $class_clause = '';
-        } else {
-            $class_clause = ' class="nowrap"';
-        }
-        return $class_clause;
     }
 
     /**
