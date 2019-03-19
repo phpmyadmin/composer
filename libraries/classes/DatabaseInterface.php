@@ -352,19 +352,19 @@ class DatabaseInterface
     /**
      * Run multi query statement and return results
      *
-     * @param string  $multi_query multi query statement to execute
-     * @param \mysqli $link        mysqli object
+     * @param string $multiQuery multi query statement to execute
+     * @param int    $linkIndex  index of the opened database link
      *
-     * @return \mysqli_result[] | boolean(false)
+     * @return \mysqli_result[]|boolean(false)
      */
     public function tryMultiQuery(
-        string $multi_query = '',
-        $link = DatabaseInterface::CONNECT_USER
+        string $multiQuery = '',
+        $linkIndex = DatabaseInterface::CONNECT_USER
     ) {
-        if (! isset($this->_links[$link])) {
+        if (! isset($this->_links[$linkIndex])) {
             return false;
         }
-        return $this->_extension->realMultiQuery($this->_links[$link], $multi_query);
+        return $this->_extension->realMultiQuery($this->_links[$linkIndex], $multiQuery);
     }
 
     /**
@@ -2806,11 +2806,16 @@ class DatabaseInterface
     /**
      * returns a string that represents the client library version
      *
+     * @param integer $link link type
+     *
      * @return string MySQL client library version
      */
-    public function getClientInfo(): string
+    public function getClientInfo($link = DatabaseInterface::CONNECT_USER): string
     {
-        return $this->_extension->getClientInfo();
+        if (! isset($this->_links[$link])) {
+            return '';
+        }
+        return $this->_extension->getClientInfo($this->_links[$link]);
     }
 
     /**
