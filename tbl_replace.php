@@ -139,16 +139,19 @@ $gis_from_text_functions = [
     'MPolyFromText',
 ];
 
-$gis_from_wkb_functions = [
-    'GeomFromWKB',
-    'GeomCollFromWKB',
-    'LineFromWKB',
-    'MLineFromWKB',
-    'PointFromWKB',
-    'MPointFromWKB',
-    'PolyFromWKB',
-    'MPolyFromWKB',
-];
+$gis_from_wkb_functions = [];
+if ($dbi->getVersion() >= 50600) {
+    $gis_from_wkb_functions = [
+        'ST_GeomFromText',
+        'ST_GeomCollFromText',
+        'ST_LineFromText',
+        'ST_MLineFromText',
+        'ST_PointFromText',
+        'ST_MPointFromText',
+        'ST_PolyFromText',
+        'ST_MPolyFromText',
+    ];
+}
 
 //if some posted fields need to be transformed.
 $mime_map = $transformations->getMime($GLOBALS['db'], $GLOBALS['table']);

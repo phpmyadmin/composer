@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2019-04-27 19:16+0200\n"
-"PO-Revision-Date: 2019-01-28 16:52+0000\n"
-"Last-Translator: jasasa <jarlesa@gmail.com>\n"
+"PO-Revision-Date: 2019-04-30 23:15+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "phpmyadmin/master/nb_NO/>\n"
 "Language: nb\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: ajax.php:43 ajax.php:81 export.php:212 libraries/classes/Export.php:1218
 msgid "Bad type!"
@@ -119,7 +119,7 @@ msgstr "Du må velge minst en kolonne for visning!"
 
 #: db_qbe.php:159 templates/database/multi_table_query/form.twig:3
 msgid "Multi-table query"
-msgstr "Flertabell spørring"
+msgstr "Flertabellspørring"
 
 #: db_qbe.php:163 templates/database/multi_table_query/form.twig:3
 msgid "Query by example"
@@ -249,17 +249,18 @@ msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
 "same file%s and import will resume."
 msgstr ""
-"Skripttids-avbrudd. Hvis du ønsker å fortsette vil importen %sgjennopptas "
-"når du laster opp filen%s en gang til."
+"Skript-tidsavbrudd. Hvis du ønsker å fortsette vil importen, %ssend inn "
+"samme fil igjen%s og importen vil tilta igjen."
 
 #: import.php:657
+#, fuzzy
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
 msgstr ""
 "Under den siste kjøringen så ble ingen data lest, dette betyr vanligvis at "
 "phpMyAdmin ikke vil være istand til å fullføre importeringen uten at du øker "
-"php-tidsgrensen."
+"PHP-tidsgrensen."
 
 #: import.php:729 sql.php:183
 msgid "\"DROP DATABASE\" statements are disabled."
@@ -267,7 +268,7 @@ msgstr "\"DROP DATABASE\"-uttrykk er avslått."
 
 #: import_status.php:111
 msgid "Could not load the progress of the import."
-msgstr "Kan ikke laste importprogresjon."
+msgstr "Kan ikke laste importframdrift."
 
 #: import_status.php:120 js/messages.php:470 js/messages.php:636
 #: libraries/classes/Export.php:530
@@ -414,8 +415,9 @@ msgid "Garbled Data"
 msgstr "Uleselig data"
 
 #: js/messages.php:101
+#, fuzzy
 msgid "Are you sure you wish to change the collation and convert the data?"
-msgstr "Er du sikker på du ønsker å endre sortering og konvertere data?"
+msgstr "Er du sikker på at du ønsker å endre sortering og konvertere data?"
 
 #: js/messages.php:103
 msgid ""
@@ -1103,11 +1105,11 @@ msgstr "Vennligst velg filen du vil importere."
 
 #: js/messages.php:339
 msgid "Please enter a valid table name."
-msgstr "Vennligst tast inn et gyldig tabell navn."
+msgstr "Skriv inn et gyldig tabellnavn."
 
 #: js/messages.php:341
 msgid "Please enter a valid database name."
-msgstr "Vennligst tast inn et gyldig database navn."
+msgstr "Skriv inn et gyldig databasenavn."
 
 #: js/messages.php:342
 msgid "No files available on server for import!"
@@ -1339,7 +1341,7 @@ msgstr "Slå på kontroll av fremmednøkler"
 
 #: js/messages.php:398
 msgid "Failed to get real row count."
-msgstr "Klarte ikke hente ekte antall rader."
+msgstr "Klarte ikke hente faktisk antall rader."
 
 #: js/messages.php:401
 msgid "Searching"
@@ -1509,8 +1511,8 @@ msgid ""
 "No columns in the central list. Make sure the Central columns list for "
 "database %s has columns that are not present in the current table."
 msgstr ""
-"Ingen kolonner i sentral listen. Sørg for at sentral kolonne liste for "
-"databasen %s ikke har kolonner som er til stede i den aktuelle tabellen."
+"Ingen kolonner i sentrallisten. Sørg for at hovedkolonnelisten for databasen "
+"%s ikke har kolonner som er til stede i den aktuelle tabellen."
 
 #: js/messages.php:446
 msgid "See more"
@@ -1920,11 +1922,11 @@ msgstr "Ikke navngitt"
 
 #: js/messages.php:581
 msgid "Please select a page to continue"
-msgstr "Vennligst velg en side for å fortsette"
+msgstr "Velg en side for å fortsette"
 
 #: js/messages.php:582
 msgid "Please enter a valid page name"
-msgstr "Vennligst tast inn et gyldig side navn"
+msgstr "Tast inn et gyldig sidenavn"
 
 #: js/messages.php:584
 msgid "Do you want to save the changes to the current page?"
@@ -2285,7 +2287,7 @@ msgstr "Kopier tabeller til"
 
 #: js/messages.php:750
 msgid "Add table prefix"
-msgstr "Legg til tabell prefiks"
+msgstr "Legg til tabellprefiks"
 
 #: js/messages.php:751
 msgid "Replace table with prefix"
@@ -2756,12 +2758,12 @@ msgid "Page number:"
 msgstr "Sidenummer:"
 
 #: libraries/classes/CentralColumns.php:239
+#, fuzzy
 msgid ""
 "The configuration storage is not ready for the central list of columns "
 "feature."
 msgstr ""
-"Konfigurasjonslagringen er ikke klar for den sentrale listen over "
-"kolonnegenskaper."
+"Oppsettslageret er ikke klar for den sentrale listen over kolonnegenskaper."
 
 #: libraries/classes/CentralColumns.php:384
 #, php-format
@@ -3188,7 +3190,7 @@ msgstr "avhengig av fremheving"
 #: libraries/classes/Charsets.php:644
 msgctxt "Collation variant"
 msgid "multi-level"
-msgstr "fler nivå"
+msgstr "flernivå"
 
 #: libraries/classes/Charsets.php:647
 msgctxt "Collation variant"
@@ -3211,14 +3213,14 @@ msgstr "Kunne ikke laste standard konfigurasjonsfil fra: %1$s"
 
 #: libraries/classes/Config.php:1199
 msgid "Failed to read configuration file!"
-msgstr "Kunne ikke lese konfigurasjonsfilen!"
+msgstr "Kunne ikke lese oppsettsfilen!"
 
 #: libraries/classes/Config.php:1202
 msgid ""
 "This usually means there is a syntax error in it, please check any errors "
 "shown below."
 msgstr ""
-"Dette mener vanligvis at det er en syntaksfeil i det, sjekk mulige feil som "
+"Dette betyr vanligvis at det er en syntaksfeil i det, sjekk mulige feil som "
 "vises under."
 
 #: libraries/classes/Config.php:1729
@@ -3254,9 +3256,10 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:76
 msgid "Restrict login to MySQL server"
-msgstr "Begrens innlogging til MySQL-serveren"
+msgstr "Begrens innlogging til MySQL-tjeneren"
 
 #: libraries/classes/Config/Descriptions.php:78
+#, fuzzy
 msgid ""
 "Enabling this allows a page located on a different domain to call phpMyAdmin "
 "inside a frame, and is a potential [strong]security hole[/strong] allowing "
@@ -3264,7 +3267,7 @@ msgid ""
 msgstr ""
 "Å tillate dette gir sider på andre domener muligheten til å legge inn "
 "phpMyAdmin i en ramme, og er et potensielt [strong]sikkerhetshull[/strong] "
-"og muligjør cross-frame skripting."
+"som muliggjør rammeskripting på tvers av sider (XSS)."
 
 #: libraries/classes/Config/Descriptions.php:82
 msgid "Allow third party framing"
@@ -3462,11 +3465,11 @@ msgstr "Aktiver autofullfør for tabell- og kolonneavn"
 
 #: libraries/classes/Config/Descriptions.php:150
 msgid "Whether the table structure actions should be hidden."
-msgstr "Hvorvidt tabellstruktursaksjonene skal være skjult."
+msgstr "Hvorvidt tabellstrukturshandlingene skal være skjult."
 
 #: libraries/classes/Config/Descriptions.php:151
 msgid "Show column comments"
-msgstr "Vis kolonne kommentarer"
+msgstr "Vis kolonnekommentarer"
 
 #: libraries/classes/Config/Descriptions.php:152
 msgid "Whether column comments should be shown in table structure view"
@@ -3474,11 +3477,11 @@ msgstr "Hvorvidt kolonnekommentarer skal vises i tabellstrukturvisning"
 
 #: libraries/classes/Config/Descriptions.php:153
 msgid "Hide table structure actions"
-msgstr "Skjul tabell struktur handlinger"
+msgstr "Skjul tabell-strukturhandlinger"
 
 #: libraries/classes/Config/Descriptions.php:154
 msgid "Default transformations for Hex"
-msgstr "Standard transformasjoner for Hex"
+msgstr "Forvalgte transformasjoner for Hex"
 
 #: libraries/classes/Config/Descriptions.php:155
 #: libraries/classes/Config/Descriptions.php:157
@@ -3510,23 +3513,23 @@ msgstr "Standard transformasjoner for ekstern"
 
 #: libraries/classes/Config/Descriptions.php:162
 msgid "Default transformations for PreApPend"
-msgstr "Standard transformasjoner for PreApPend"
+msgstr "Forvalgte transformasjoner for PreApPend"
 
 #: libraries/classes/Config/Descriptions.php:164
 msgid "Default transformations for DateFormat"
-msgstr "Standard transformasjoner for dato format"
+msgstr "Forvalgte transformasjoner for datoformat"
 
 #: libraries/classes/Config/Descriptions.php:166
 msgid "Default transformations for Inline"
-msgstr "Standard transformasjoner for Inline"
+msgstr "Forvalgte transformasjoner for Inline"
 
 #: libraries/classes/Config/Descriptions.php:168
 msgid "Default transformations for TextImageLink"
-msgstr "Standard transformasjoner for Tekstbildelenke"
+msgstr "Forvalgte transformasjoner for tekstbildelenke"
 
 #: libraries/classes/Config/Descriptions.php:170
 msgid "Default transformations for TextLink"
-msgstr "Standard transformasjoner for Tekstlenke"
+msgstr "Forvalgte transformasjoner for tekstlenke"
 
 #: libraries/classes/Config/Descriptions.php:173
 msgid "Show server listing as a list instead of a drop down."
@@ -3564,7 +3567,7 @@ msgstr "Maks kjøretid"
 #: templates/display/export/options_output.twig:17
 #, php-format
 msgid "Use %s statement"
-msgstr "Bruk %s uttalelse"
+msgstr "Bruk %s-uttrykk"
 
 #: libraries/classes/Config/Descriptions.php:189
 msgid "Save as file"
@@ -3746,11 +3749,11 @@ msgstr "Skriv over eksisterende filer"
 
 #: libraries/classes/Config/Descriptions.php:235
 msgid "Export as separate files"
-msgstr "Eksporter som separate filer"
+msgstr "Eksporter som egne filer"
 
 #: libraries/classes/Config/Descriptions.php:238
 msgid "Remember file name template"
-msgstr "Husk filnavnmal"
+msgstr "Husk filnavnsmal"
 
 #: libraries/classes/Config/Descriptions.php:239
 #: libraries/classes/Operations.php:247 libraries/classes/Operations.php:899
@@ -3787,7 +3790,7 @@ msgstr "Eksporter views som tabeller"
 
 #: libraries/classes/Config/Descriptions.php:246
 msgid "Export related metadata from phpMyAdmin configuration storage"
-msgstr "Eksporter relatert metadata fra phpMyAdmin konfigurasjonslagring"
+msgstr "Eksporter relatert metadata fra phpMyAdmin-oppsettslager"
 
 #: libraries/classes/Config/Descriptions.php:247
 #: libraries/classes/Config/Descriptions.php:248
@@ -3910,7 +3913,7 @@ msgstr "Utvikler"
 
 #: libraries/classes/Config/Descriptions.php:293
 msgid "Settings for phpMyAdmin developers."
-msgstr "Instillinger for phpMyAdmin utviklere."
+msgstr "Innstillinger for phpMyAdmin-utviklere."
 
 #: libraries/classes/Config/Descriptions.php:294
 msgid "Edit mode"
@@ -4069,7 +4072,7 @@ msgid ""
 "what they are for."
 msgstr ""
 "Avanserte tjenerinnstillinger, ikke endre disse hvis du ikke vet hva de er "
-"for."
+"til."
 
 #: libraries/classes/Config/Descriptions.php:342
 msgid "Enter server connection parameters."
@@ -4123,16 +4126,16 @@ msgstr "SQL spørringsboks"
 
 #: libraries/classes/Config/Descriptions.php:356
 msgid "Customize links shown in SQL Query boxes."
-msgstr "Endre lenker vist i SQL spørringsbokser."
+msgstr "Tilpass lenker vist i SQL-spørringsbokser."
 
 #: libraries/classes/Config/Descriptions.php:358
 #: libraries/classes/Config/Forms/User/SqlForm.php:52
 msgid "SQL queries"
-msgstr "SQL spørringer"
+msgstr "SQL-spørringer"
 
 #: libraries/classes/Config/Descriptions.php:359
 msgid "SQL queries settings."
-msgstr "SQL søkeinnstilinger."
+msgstr "SQL-søkeinnstilinger."
 
 #: libraries/classes/Config/Descriptions.php:360
 msgid "Startup"
@@ -4682,13 +4685,13 @@ msgstr "Aktiver utheving"
 #: libraries/classes/Config/Descriptions.php:518
 msgid ""
 "Whether to offer the possibility of tree expansion in the navigation panel."
-msgstr "Enten å tilby muligheten for tre ekspansjon i navigasjonspanelet ."
+msgstr "Hvorvidt muligheten for treekspansjon i navigasjonspanelet skal tilbys."
 
 #: libraries/classes/Config/Descriptions.php:519
 #, fuzzy
 #| msgid "Table navigation bar"
 msgid "Enable navigation tree expansion"
-msgstr "Tabellbasert navigasjonsområde"
+msgstr "Skru på navigasjonstreutvidelse"
 
 #: libraries/classes/Config/Descriptions.php:520
 #, fuzzy
@@ -6628,7 +6631,7 @@ msgstr "Ingen bokmerker"
 
 #: libraries/classes/Console.php:143
 msgid "SQL Query Console"
-msgstr "SQL spørrings konsoll"
+msgstr "SQL-spørringskonsoll"
 
 #: libraries/classes/Controllers/Database/StructureController.php:245
 msgid "Favorite List is full!"
@@ -6921,7 +6924,7 @@ msgstr ""
 #: libraries/classes/Controllers/Server/Status/VariablesController.php:219
 msgid ""
 "The number of connection attempts (successful or not) to the MySQL server."
-msgstr ""
+msgstr "Antalle tilkoblingsforsøk (vellykkede eller ei) til MySQL-tjeneren."
 
 #: libraries/classes/Controllers/Server/Status/VariablesController.php:223
 msgid ""
@@ -9262,13 +9265,11 @@ msgstr "Designer"
 #: libraries/classes/Menu.php:557 libraries/classes/Util.php:4221
 #: templates/database/structure/check_all_tables.twig:32
 msgid "Central columns"
-msgstr "Senter kolonner"
+msgstr "Hovedkolonner"
 
 #: libraries/classes/Menu.php:615
-#, fuzzy
-#| msgid "Users"
 msgid "User accounts"
-msgstr "Brukere"
+msgstr "Brukerkontoer"
 
 #: libraries/classes/Menu.php:648 libraries/classes/Server/Status/Data.php:123
 #: libraries/classes/Util.php:4200 templates/server/binlog/index.twig:3
@@ -13709,7 +13710,7 @@ msgstr "En type som kan lagre en geometri av enhver type"
 
 #: libraries/classes/Types.php:374
 msgid "A point in 2-dimensional space"
-msgstr "Et punkt i 2-dimensjonalt rom"
+msgstr "Et punkt i todimensjonalt rom"
 
 #: libraries/classes/Types.php:376
 msgid "A curve with linear interpolation between points"
@@ -15878,7 +15879,7 @@ msgstr "Bokmerke"
 
 #: templates/console/display.twig:40 templates/console/display.twig:184
 msgid "Query failed"
-msgstr "Spørringen feilet"
+msgstr "Spørringen mislyktes"
 
 #: templates/console/display.twig:42 templates/console/display.twig:184
 msgid "Queried time"
@@ -15963,7 +15964,7 @@ msgstr "Del dette bokmerke"
 
 #: templates/console/display.twig:140
 msgid "Set default"
-msgstr "Angi standard"
+msgstr "Angi forvalg"
 
 #: templates/console/display.twig:162
 msgid ""
@@ -17419,7 +17420,7 @@ msgstr ""
 
 #: templates/table/structure/display_structure.twig:408
 msgid "Track view"
-msgstr "Spor visning"
+msgstr "Sporvisning"
 
 #: templates/table/structure/display_structure.twig:422
 #, php-format

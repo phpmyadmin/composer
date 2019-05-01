@@ -108,14 +108,26 @@ class ErrorReport
             }
             $exception = $_POST['exception'];
             $exception["stack"] = $this->translateStacktrace($exception["stack"]);
-            list($uri, $scriptName) = $this->sanitizeUrl((string) $exception["url"]);
-            $exception["uri"] = $uri;
-            unset($exception["url"]);
+
+            if (isset($exception["url"])) {
+                list($uri, $scriptName) = $this->sanitizeUrl($exception["url"]);
+                $exception["uri"] = $uri;
+                $report["script_name"] = $scriptName;
+                unset($exception["url"]);
+            } elseif (isset($_POST["url"])) {
+                list($uri, $scriptName) = $this->sanitizeUrl($_POST["url"]);
+                $exception["uri"] = $uri;
+                $report["script_name"] = $scriptName;
+                unset($_POST["url"]);
+            } else {
+                $report["script_name"] = null;
+            }
 
             $report["exception_type"] = 'js';
             $report["exception"] = $exception;
-            $report["script_name"] = $scriptName;
-            $report["microhistory"] = $_POST['microhistory'];
+            if (isset($_POST['microhistory'])) {
+                $report["microhistory"] = $_POST['microhistory'];
+            }
 
             if (! empty($_POST['description'])) {
                 $report['steps'] = $_POST['description'];
@@ -130,7 +142,7 @@ class ErrorReport
                 return [];
             }
             foreach ($_SESSION['prev_errors'] as $errorObj) {
-                /* @var $errorObj \PhpMyAdmin\Error */
+                /** @var \PhpMyAdmin\Error  $errorObj */
                 if ($errorObj->getLine()
                     && $errorObj->getType()
                     && $errorObj->getNumber() != E_USER_WARNING
@@ -183,7 +195,7 @@ class ErrorReport
         }
 
         // get script name
-        preg_match("<([a-zA-Z\-_\d]*\.php)$>", $components["path"], $matches);
+        preg_match("<([a-zA-Z\-_\d\.]*\.php|js\/[a-zA-Z\-_\d\/\.]*\.js)$>", $components["path"], $matches);
         if (count($matches) < 2) {
             $scriptName = 'index.php';
         } else {
@@ -214,9 +226,9 @@ class ErrorReport
      *
      * @param array $report the report info to be sent
      *
-     * @return string the reply of the server
+     * @return string|bool the reply of the server
      */
-    public function send(array $report): string
+    public function send(array $report)
     {
         return $this->httpRequest->create(
             $this->submissionUrl,
@@ -243,7 +255,6 @@ class ErrorReport
                     $line = mb_substr($line, 0, 75) . "//...";
                 }
             }
-            unset($level["context"]);
             list($uri, $scriptName) = $this->sanitizeUrl($level["url"]);
             $level["uri"] = $uri;
             $level["scriptname"] = $scriptName;
