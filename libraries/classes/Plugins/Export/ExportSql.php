@@ -727,7 +727,7 @@ class ExportSql extends ExportPlugin
         . $this->_exportComment(
             __('Server version:') . ' ' . $GLOBALS['dbi']->getVersionString()
         )
-        . $this->_exportComment(__('PHP Version:') . ' ' . phpversion())
+        . $this->_exportComment(__('PHP Version:') . ' ' . PHP_VERSION)
         . $this->_possibleCRLF();
 
         if (isset($GLOBALS['sql_header_comment'])
@@ -2436,7 +2436,7 @@ class ExportSql extends ExportPlugin
                     // timestamp is numeric on some MySQL 4.1, BLOBs are
                     // sometimes numeric
                     $values[] = $row[$j];
-                } elseif (stristr($field_flags[$j], 'BINARY') !== false
+                } elseif (false !== stripos($field_flags[$j], 'BINARY')
                     && isset($GLOBALS['sql_hex_for_binary'])
                 ) {
                     // a true BLOB

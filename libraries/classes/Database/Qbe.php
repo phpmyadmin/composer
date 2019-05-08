@@ -1457,7 +1457,7 @@ class Qbe
             // we can check which of our columns has a where clause
             if (! empty($this->_criteria[$column_index])) {
                 if (mb_substr($this->_criteria[$column_index], 0, 1) == '='
-                    || stristr($this->_criteria[$column_index], 'is')
+                    || false !== stripos($this->_criteria[$column_index], 'is')
                 ) {
                     $where_clause_columns[$column] = $column;
                     $where_clause_tables[$table]  = $table;
@@ -1512,8 +1512,8 @@ class Qbe
         if (empty($from_clause)) {
             // Create cartesian product
             $from_clause = implode(
-                ", ",
-                array_map(['PhpMyAdmin\Util', 'backquote'], $search_tables)
+                ', ',
+                array_map([Util::class, 'backquote'], $search_tables)
             );
         }
 
@@ -1622,7 +1622,7 @@ class Qbe
                 // Add these tables as cartesian product before joined tables
                 $join .= implode(
                     ', ',
-                    array_map(['PhpMyAdmin\Util', 'backquote'], $unfinalized)
+                    array_map([Util::class, 'backquote'], $unfinalized)
                 );
             }
         }

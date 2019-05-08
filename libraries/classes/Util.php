@@ -25,6 +25,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
 use Williamdes\MariaDBMySQLKBS\KBException;
+use phpseclib\Crypt\Random;
 
 /**
  * Misc functions used all over the scripts.
@@ -2069,7 +2070,7 @@ class Util
                 ) {
                     $con_val = '= ' . $row[$i];
                 } elseif ((($meta->type == 'blob') || ($meta->type == 'string'))
-                    && stristr($field_flags, 'BINARY')
+                    && false !== stripos($field_flags, 'BINARY')
                     && ! empty($row[$i])
                 ) {
                     // hexify only if this is a true not empty BLOB or a BINARY
@@ -2921,7 +2922,7 @@ class Util
             if (false !== strpos($printtype, "binary")
                 && ! preg_match('@binary[\(]@', $printtype)
             ) {
-                $printtype = preg_replace('@binary@', '', $printtype);
+                $printtype = str_replace("binary", '', $printtype);
                 $binary = true;
             } else {
                 $binary = false;
@@ -4797,9 +4798,9 @@ class Util
     public static function generateRandom($length)
     {
         $result = '';
-        if (class_exists('phpseclib\\Crypt\\Random')) {
+        if (class_exists(Random::class)) {
             $random_func = [
-                'phpseclib\\Crypt\\Random',
+                Random::class,
                 'string',
             ];
         } else {
