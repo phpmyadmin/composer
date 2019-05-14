@@ -30,7 +30,7 @@ if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
-global $url_params;
+global $db, $table, $url_params;
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
@@ -46,7 +46,7 @@ $dbi = $container->get(DatabaseInterface::class);
 // Check parameters
 Util::checkParameters(['db', 'table', 'goto']);
 
-$dbi->selectDb($GLOBALS['db']);
+$dbi->selectDb($db);
 
 /**
  * Initializes some variables
@@ -154,7 +154,7 @@ if ($dbi->getVersion() >= 50600) {
 }
 
 //if some posted fields need to be transformed.
-$mime_map = $transformations->getMime($GLOBALS['db'], $GLOBALS['table']);
+$mime_map = $transformations->getMime($db, $table);
 if ($mime_map === false) {
     $mime_map = [];
 }
@@ -340,7 +340,7 @@ foreach ($loop_array as $rownumber => $where_clause) {
             $value_sets[] = implode(', ', $query_values);
         } else {
             // build update query
-            $query[] = 'UPDATE ' . Util::backquote($GLOBALS['table'])
+            $query[] = 'UPDATE ' . Util::backquote($table)
                 . ' SET ' . implode(', ', $query_values)
                 . ' WHERE ' . $where_clause
                 . ($_POST['clause_is_unique'] ? '' : ' LIMIT 1');
