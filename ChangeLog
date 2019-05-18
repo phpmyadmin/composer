@@ -35,6 +35,7 @@ phpMyAdmin - ChangeLog
 - issue #14977 Add title for group in navigation bar
 - issue #14927 Show InnoDB table overhead (free space)
 - issue #15072 Add 'Close' button to the Monitor Instructions modal
+- issue #15174 Improved filter method in server variables page
 
 4.8.6 (not yet released)
 - issue #14478 phpMyAdmin no longer streams the export data
@@ -134,6 +135,8 @@ phpMyAdmin - ChangeLog
 - issue #14588 Fixed export of geometry objects, GIS objects are now exported as hex
 - issue #14412 Better handling of errors with Signon authentication type
 - issue        Added support for AUTO_INCREMENT when using ROCKSDB, on Operations page
+- issue #15276 Fixed partitioning is missing in Structure page UI (MySQL 8.0)
+- issue #14252 Fixed DisableIS and database tree list (new database missing when refreshing the list)
 
 4.8.5 (2019-01-25)
 - issue        Developer debug data was saved to the PHP error log
