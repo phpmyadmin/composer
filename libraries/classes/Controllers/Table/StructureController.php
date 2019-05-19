@@ -14,12 +14,14 @@ use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\CreateAddField;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Engines\Innodb;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ParseAnalyze;
 use PhpMyAdmin\Partition;
 use PhpMyAdmin\Relation;
+use PhpMyAdmin\Response;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
@@ -27,6 +29,7 @@ use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\StorageEngine;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\TablePartitionDefinition;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
@@ -90,20 +93,22 @@ class StructureController extends AbstractController
     /**
      * StructureController constructor
      *
-     * @param \PhpMyAdmin\Response          $response            Response object
-     * @param \PhpMyAdmin\DatabaseInterface $dbi                 DatabaseInterface object
-     * @param string                        $db                  Database name
-     * @param string                        $table               Table name
-     * @param bool                          $db_is_system_schema DB is information_schema
-     * @param bool                          $tbl_is_view         Table is a view
-     * @param string                        $tbl_storage_engine  Table storage engine
-     * @param int                           $table_info_num_rows Number of rows
-     * @param string                        $tbl_collation       Table collation
-     * @param array                         $showtable           Show table info
+     * @param Response          $response            Response object
+     * @param DatabaseInterface $dbi                 DatabaseInterface object
+     * @param Template          $template            Template object
+     * @param string            $db                  Database name
+     * @param string            $table               Table name
+     * @param bool              $db_is_system_schema DB is information_schema
+     * @param bool              $tbl_is_view         Table is a view
+     * @param string            $tbl_storage_engine  Table storage engine
+     * @param int               $table_info_num_rows Number of rows
+     * @param string            $tbl_collation       Table collation
+     * @param array             $showtable           Show table info
      */
     public function __construct(
         $response,
         $dbi,
+        Template $template,
         $db,
         $table,
         $db_is_system_schema,
@@ -113,7 +118,7 @@ class StructureController extends AbstractController
         $tbl_collation,
         $showtable
     ) {
-        parent::__construct($response, $dbi, $db, $table);
+        parent::__construct($response, $dbi, $template, $db, $table);
 
         $this->_db_is_system_schema = $db_is_system_schema;
         $this->_url_query = Url::getCommonRaw(['db' => $db, 'table' => $table]);
@@ -982,7 +987,18 @@ class StructureController extends AbstractController
                         $_POST['field_orig'][$i]
                     )
                     . ' ' . Util::backquote($_POST['field_orig'][$i])
-                    . ' BLOB;';
+                    . ' BLOB';
+
+                    if (isset($_POST['field_virtuality'][$i])
+                        && isset($_POST['field_expression'][$i])) {
+                        if ($_POST['field_virtuality'][$i]) {
+                            $secondary_query .= ' AS (' . $_POST['field_expression'][$i] . ') '
+                                . $_POST['field_virtuality'][$i];
+                        }
+                    }
+
+                    $secondary_query .= ';';
+
                     $this->dbi->query($secondary_query);
                     $changedToBlob[$i] = true;
                 } else {
@@ -1347,6 +1363,7 @@ class StructureController extends AbstractController
             'relation_mimework' => $GLOBALS['cfgRelation']['mimework'],
             'central_columns_work' => $GLOBALS['cfgRelation']['centralcolumnswork'],
             'mysql_int_version' => $this->dbi->getVersion(),
+            'is_mariadb' => $GLOBALS['dbi']->isMariaDB(),
             'pma_theme_image' => $GLOBALS['pmaThemeImage'],
             'text_dir' => $GLOBALS['text_dir'],
             'is_active' => Tracker::isActive(),
