@@ -73,9 +73,9 @@ function createTemplate (name) {
 
     var params = {
         ajax_request : true,
-        server : PMA_commonParams.get('server'),
-        db : PMA_commonParams.get('db'),
-        table : PMA_commonParams.get('table'),
+        server : CommonParams.get('server'),
+        db : CommonParams.get('db'),
+        table : CommonParams.get('table'),
         exportType : $('input[name="export_type"]').val(),
         templateAction : 'create',
         templateName : name,
@@ -92,7 +92,7 @@ function createTemplate (name) {
                     $(this).prop('selected', true);
                 }
             });
-            PMA_ajaxShowMessage(PMA_messages.strTemplateCreated);
+            PMA_ajaxShowMessage(Messages.strTemplateCreated);
         } else {
             PMA_ajaxShowMessage(response.error, false);
         }
@@ -107,9 +107,9 @@ function createTemplate (name) {
 function loadTemplate (id) {
     var params = {
         ajax_request : true,
-        server : PMA_commonParams.get('server'),
-        db : PMA_commonParams.get('db'),
-        table : PMA_commonParams.get('table'),
+        server : CommonParams.get('server'),
+        db : CommonParams.get('db'),
+        table : CommonParams.get('table'),
         exportType : $('input[name="export_type"]').val(),
         templateAction : 'load',
         templateId : id,
@@ -139,7 +139,7 @@ function loadTemplate (id) {
                 }
             });
             $('input[name="template_id"]').val(id);
-            PMA_ajaxShowMessage(PMA_messages.strTemplateLoaded);
+            PMA_ajaxShowMessage(Messages.strTemplateLoaded);
         } else {
             PMA_ajaxShowMessage(response.error, false);
         }
@@ -156,9 +156,9 @@ function updateTemplate (id) {
 
     var params = {
         ajax_request : true,
-        server : PMA_commonParams.get('server'),
-        db : PMA_commonParams.get('db'),
-        table : PMA_commonParams.get('table'),
+        server : CommonParams.get('server'),
+        db : CommonParams.get('db'),
+        table : CommonParams.get('table'),
         exportType : $('input[name="export_type"]').val(),
         templateAction : 'update',
         templateId : id,
@@ -168,7 +168,7 @@ function updateTemplate (id) {
     PMA_ajaxShowMessage();
     $.post('tbl_export.php', params, function (response) {
         if (response.success === true) {
-            PMA_ajaxShowMessage(PMA_messages.strTemplateUpdated);
+            PMA_ajaxShowMessage(Messages.strTemplateUpdated);
         } else {
             PMA_ajaxShowMessage(response.error, false);
         }
@@ -183,9 +183,9 @@ function updateTemplate (id) {
 function deleteTemplate (id) {
     var params = {
         ajax_request : true,
-        server : PMA_commonParams.get('server'),
-        db : PMA_commonParams.get('db'),
-        table : PMA_commonParams.get('table'),
+        server : CommonParams.get('server'),
+        db : CommonParams.get('db'),
+        table : CommonParams.get('table'),
         exportType : $('input[name="export_type"]').val(),
         templateAction : 'delete',
         templateId : id,
@@ -195,7 +195,7 @@ function deleteTemplate (id) {
     $.post('tbl_export.php', params, function (response) {
         if (response.success === true) {
             $('#template').find('option[value="' + id + '"]').remove();
-            PMA_ajaxShowMessage(PMA_messages.strTemplateDeleted);
+            PMA_ajaxShowMessage(Messages.strTemplateDeleted);
         } else {
             PMA_ajaxShowMessage(response.error, false);
         }
@@ -733,7 +733,7 @@ function check_time_out (time_limit) {
             if (data.message === 'timeout') {
                 PMA_ajaxShowMessage(
                     '<div class="error">' +
-                    PMA_messages.strTimeOutError +
+                    Messages.strTimeOutError +
                     '</div>',
                     false
                 );
@@ -788,7 +788,7 @@ function aliasSelectHandler (event) {
 function createAliasModal (event) {
     event.preventDefault();
     var dlgButtons = {};
-    dlgButtons[PMA_messages.strSaveAndClose] = function () {
+    dlgButtons[Messages.strSaveAndClose] = function () {
         $(this).dialog('close');
         $('#alias_modal').parent().appendTo($('form[name="dump"]'));
     };
@@ -799,8 +799,9 @@ function createAliasModal (event) {
         dialogClass: 'alias-dialog',
         buttons: dlgButtons,
         create: function () {
+            $(this).closest('.ui-dialog').find('.ui-button').addClass('btn btn-secondary');
             $(this).css('maxHeight', $(window).height() - 150);
-            var db = PMA_commonParams.get('db');
+            var db = CommonParams.get('db');
             if (db) {
                 var option = $('<option></option>');
                 option.text(db);
@@ -809,7 +810,7 @@ function createAliasModal (event) {
             } else {
                 var params = {
                     ajax_request : true,
-                    server : PMA_commonParams.get('server'),
+                    server : CommonParams.get('server'),
                     type: 'list-databases'
                 };
                 $.post('ajax.php', params, function (response) {
@@ -917,7 +918,7 @@ AJAX.registerOnload('export.js', function () {
     $('#db_alias_select').on('change', function () {
         aliasToggleRow($(this));
         var db = $(this).val();
-        var table = PMA_commonParams.get('table');
+        var table = CommonParams.get('table');
         if (table) {
             var option = $('<option></option>');
             option.text(table);
@@ -926,7 +927,7 @@ AJAX.registerOnload('export.js', function () {
         } else {
             var params = {
                 ajax_request : true,
-                server : PMA_commonParams.get('server'),
+                server : CommonParams.get('server'),
                 db : $(this).val(),
                 type: 'list-tables'
             };
@@ -948,7 +949,7 @@ AJAX.registerOnload('export.js', function () {
         aliasToggleRow($(this));
         var params = {
             ajax_request : true,
-            server : PMA_commonParams.get('server'),
+            server : CommonParams.get('server'),
             db : $('#db_alias_select').val(),
             table: $(this).val(),
             type: 'list-columns'
@@ -973,7 +974,7 @@ AJAX.registerOnload('export.js', function () {
         e.preventDefault();
         var db = $('#db_alias_select').val();
         addAlias(
-            PMA_messages.strAliasDatabase,
+            Messages.strAliasDatabase,
             db,
             'aliases[' + db + '][alias]',
             $('#db_alias_name').val()
@@ -985,7 +986,7 @@ AJAX.registerOnload('export.js', function () {
         var db = $('#db_alias_select').val();
         var table = $('#table_alias_select').val();
         addAlias(
-            PMA_messages.strAliasTable,
+            Messages.strAliasTable,
             db + '.' + table,
             'aliases[' + db + '][tables][' + table + '][alias]',
             $('#table_alias_name').val()
@@ -998,7 +999,7 @@ AJAX.registerOnload('export.js', function () {
         var table = $('#table_alias_select').val();
         var column = $('#column_alias_select').val();
         addAlias(
-            PMA_messages.strAliasColumn,
+            Messages.strAliasColumn,
             db + '.' + table + '.' + column,
             'aliases[' + db + '][tables][' + table + '][colums][' + column + ']',
             $('#column_alias_name').val()

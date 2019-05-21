@@ -29,7 +29,7 @@ var processList = {
         processList.setRefreshLabel();
         if (processList.refreshUrl === null) {
             processList.refreshUrl = 'server_status_processes.php' +
-                PMA_commonParams.get('common_query');
+                CommonParams.get('common_query');
         }
         if (processList.refreshInterval === null) {
             processList.refreshInterval = $('#id_refreshRate').val();
@@ -47,9 +47,9 @@ var processList = {
      */
     killProcessHandler: function (event) {
         event.preventDefault();
-        var argSep = PMA_commonParams.get('arg_separator');
+        var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
-        params += argSep + 'ajax_request=1' + argSep + 'server=' + PMA_commonParams.get('server');
+        params += argSep + 'ajax_request=1' + argSep + 'server=' + CommonParams.get('server');
         // Get row element of the process to be killed.
         var $tr = $(this).closest('tr');
         $.post($(this).attr('href'), params, function (data) {
@@ -125,10 +125,10 @@ var processList = {
      */
     setRefreshLabel: function () {
         var img = 'play';
-        var label = PMA_messages.strStartRefresh;
+        var label = Messages.strStartRefresh;
         if (processList.autoRefresh) {
             img = 'pause';
-            label = PMA_messages.strStopRefresh;
+            label = Messages.strStopRefresh;
             processList.refresh();
         }
         $('a#toggleRefresh').html(PMA_getImage(img) + escapeHtml(label));

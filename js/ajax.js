@@ -181,7 +181,7 @@ var AJAX = {
         // Show lock icon if locked targets is not empty.
         // otherwise remove lock icon
         if (!jQuery.isEmptyObject(AJAX.lockedTargets)) {
-            $('#lock_page_icon').html(PMA_getImage('s_lock', PMA_messages.strLockToolTip).toString());
+            $('#lock_page_icon').html(PMA_getImage('s_lock', Messages.strLockToolTip).toString());
         } else {
             $('#lock_page_icon').html('');
         }
@@ -247,7 +247,7 @@ var AJAX = {
             event.isTrigger !== true &&
             !jQuery.isEmptyObject(AJAX.lockedTargets)
         ) {
-            if (confirm(PMA_messages.strConfirmNavigation) === false) {
+            if (confirm(Messages.strConfirmNavigation) === false) {
                 return false;
             } else {
                 if (isStorageSupported('localStorage')) {
@@ -270,7 +270,7 @@ var AJAX = {
                 AJAX.xhr.abort();
                 if (AJAX.xhr.status === 0 && AJAX.xhr.statusText === 'abort') {
                     // If aborted
-                    AJAX.$msgbox = PMA_ajaxShowMessage(PMA_messages.strAbortedRequest);
+                    AJAX.$msgbox = PMA_ajaxShowMessage(Messages.strAbortedRequest);
                     AJAX.active = false;
                     AJAX.xhr = null;
                     previousLinkAborted = true;
@@ -289,7 +289,7 @@ var AJAX = {
         $('html, body').animate({ scrollTop: 0 }, 'fast');
 
         var url = isLink ? href : $(this).attr('action');
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var params = 'ajax_request=true' + argsep + 'ajax_page_request=true';
         var dataPost = AJAX.source.getPostData();
         if (! isLink) {
@@ -360,7 +360,7 @@ var AJAX = {
         }
         PMA_ajaxRemoveMessage(AJAX.$msgbox);
 
-        PMA_commonParams.set('token', data.new_token);
+        CommonParams.set('token', data.new_token);
 
         AJAX.scriptHandler.load([]);
 
@@ -394,11 +394,11 @@ var AJAX = {
                 data._stopErrorReportLoop !== '1'
             ) {
                 $('#pma_report_errors_form').submit();
-                PMA_ajaxShowMessage(PMA_messages.phpErrorsBeingSubmitted, false);
+                PMA_ajaxShowMessage(Messages.phpErrorsBeingSubmitted, false);
                 $('html, body').animate({ scrollTop:$(document).height() }, 'slow');
             } else if (data._promptPhpErrors) {
                 // otherwise just prompt user if it is set so.
-                msg = msg + PMA_messages.phpErrorsFound;
+                msg = msg + Messages.phpErrorsFound;
                 // scroll to bottom where all the errors are displayed.
                 $('html, body').animate({ scrollTop:$(document).height() }, 'slow');
             }
@@ -415,9 +415,9 @@ var AJAX = {
 
         if (typeof data.success !== 'undefined' && data.success) {
             // reload page if user trying to login has changed
-            if (PMA_commonParams.get('user') !== data._params.user) {
+            if (CommonParams.get('user') !== data._params.user) {
                 window.location = 'index.php';
-                PMA_ajaxShowMessage(PMA_messages.strLoading, false);
+                PMA_ajaxShowMessage(Messages.strLoading, false);
                 AJAX.active = false;
                 AJAX.xhr = null;
                 return;
@@ -543,7 +543,7 @@ var AJAX = {
                     $('#selflink').find('> a').attr('href', data._selflink);
                 }
                 if (data._params) {
-                    PMA_commonParams.setAll(data._params);
+                    CommonParams.setAll(data._params);
                 }
                 if (data._scripts) {
                     AJAX.scriptHandler.load(data._scripts);
@@ -589,11 +589,11 @@ var AJAX = {
                         data._stopErrorReportLoop !== '1'
                     ) {
                         $('#pma_report_errors_form').submit();
-                        PMA_ajaxShowMessage(PMA_messages.phpErrorsBeingSubmitted, false);
+                        PMA_ajaxShowMessage(Messages.phpErrorsBeingSubmitted, false);
                         $('html, body').animate({ scrollTop:$(document).height() }, 'slow');
                     } else if (data._promptPhpErrors) {
                         // otherwise just prompt user if it is set so.
-                        msg = msg + PMA_messages.phpErrorsFound;
+                        msg = msg + Messages.phpErrorsFound;
                         // scroll to bottom where all the errors are displayed.
                         $('html, body').animate({ scrollTop:$(document).height() }, 'slow');
                     }
@@ -686,10 +686,10 @@ var AJAX = {
             // Clear loaded scripts if they are from another version of phpMyAdmin.
             // Depends on common params being set before loading scripts in responseHandler
             if (self._scriptsVersion === null) {
-                self._scriptsVersion = PMA_commonParams.get('PMA_VERSION');
-            } else if (self._scriptsVersion !== PMA_commonParams.get('PMA_VERSION')) {
+                self._scriptsVersion = CommonParams.get('PMA_VERSION');
+            } else if (self._scriptsVersion !== CommonParams.get('PMA_VERSION')) {
                 self._scripts = [];
-                self._scriptsVersion = PMA_commonParams.get('PMA_VERSION');
+                self._scriptsVersion = CommonParams.get('PMA_VERSION');
             }
             self._scriptsCompleted = false;
             self._scriptsToBeFired = [];
@@ -752,7 +752,7 @@ var AJAX = {
             var self = this;
 
             script.type = 'text/javascript';
-            script.src = 'js/' + name + '?' + 'v=' + encodeURIComponent(PMA_commonParams.get('PMA_VERSION'));
+            script.src = 'js/' + name + '?' + 'v=' + encodeURIComponent(CommonParams.get('PMA_VERSION'));
             script.async = false;
             script.onload = function () {
                 self.done(name, callback);
@@ -878,7 +878,7 @@ $(function () {
             var state = event.originalEvent.state;
             if (state && state.menu) {
                 AJAX.$msgbox = PMA_ajaxShowMessage();
-                var params = 'ajax_request=true' + PMA_commonParams.get('arg_separator') + 'ajax_page_request=true';
+                var params = 'ajax_request=true' + CommonParams.get('arg_separator') + 'ajax_page_request=true';
                 var url = state.url || location.href;
                 $.get(url, params, AJAX.responseHandler);
                 // TODO: Check if sometimes menu is not retrieved from server,
@@ -935,15 +935,15 @@ $(document).ajaxError(function (event, request, settings) {
         var state = request.state();
 
         if (request.status !== 0) {
-            details += '<div>' + escapeHtml(PMA_sprintf(PMA_messages.strErrorCode, request.status)) + '</div>';
+            details += '<div>' + escapeHtml(PMA_sprintf(Messages.strErrorCode, request.status)) + '</div>';
         }
-        details += '<div>' + escapeHtml(PMA_sprintf(PMA_messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
+        details += '<div>' + escapeHtml(PMA_sprintf(Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
         if (state === 'rejected' || state === 'timeout') {
-            details += '<div>' + escapeHtml(PMA_messages.strErrorConnection) + '</div>';
+            details += '<div>' + escapeHtml(Messages.strErrorConnection) + '</div>';
         }
         PMA_ajaxShowMessage(
             '<div class="error">' +
-            PMA_messages.strErrorProcessingRequest +
+            Messages.strErrorProcessingRequest +
             details +
             '</div>',
             false

@@ -556,7 +556,7 @@ function Toggle_fullscreen () {
 
 function Add_Other_db_tables () {
     var button_options = {};
-    button_options[PMA_messages.strGo] = function () {
+    button_options[Messages.strGo] = function () {
         var db = $('#add_table_from').val();
         var table = $('#add_table').val();
         $.post('db_designer.php', {
@@ -564,7 +564,7 @@ function Add_Other_db_tables () {
             'dialog' : 'add_table',
             'db' : db,
             'table' : table,
-            'server': PMA_commonParams.get('server')
+            'server': CommonParams.get('server')
         }, function (data) {
             $new_table_dom = $(data.message);
             $new_table_dom.find('a').first().remove();
@@ -584,7 +584,7 @@ function Add_Other_db_tables () {
         });
         $(this).dialog('close');
     };
-    button_options[PMA_messages.strCancel] = function () {
+    button_options[Messages.strCancel] = function () {
         $(this).dialog('close');
     };
 
@@ -597,7 +597,7 @@ function Add_Other_db_tables () {
     $.post('sql.php', {
         'ajax_request' : true,
         'sql_query' : 'SHOW databases;',
-        'server': PMA_commonParams.get('server')
+        'server': CommonParams.get('server')
     }, function (data) {
         $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
             var val = $(this)[0].innerHTML;
@@ -611,7 +611,7 @@ function Add_Other_db_tables () {
         .append($form)
         .dialog({
             appendTo: '#page_content',
-            title: PMA_messages.strAddTables,
+            title: Messages.strAddTables,
             width: 500,
             modal: true,
             buttons: button_options,
@@ -628,7 +628,7 @@ function Add_Other_db_tables () {
                 'ajax_request' : true,
                 'sql_query': sql_query,
                 'db' : db_name,
-                'server': PMA_commonParams.get('server')
+                'server': CommonParams.get('server')
             }, function (data) {
                 $select_table.html('');
                 $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
@@ -665,7 +665,7 @@ function Save (url) {
 function Get_url_pos (forceString) {
     if (designer_tables_enabled || forceString) {
         var poststr = '';
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         for (var key in j_tabs) {
             poststr += argsep + 't_x[' + key + ']=' + parseInt(document.getElementById(key).style.left, 10);
             poststr += argsep + 't_y[' + key + ']=' + parseInt(document.getElementById(key).style.top, 10);
@@ -689,18 +689,18 @@ function Get_url_pos (forceString) {
 
 function Save2 (callback) {
     if (designer_tables_enabled) {
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var poststr = argsep + 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
         poststr += argsep + 'server=' + server + argsep + 'db=' + db + argsep + 'selected_page=' + selected_page;
         poststr += Get_url_pos();
 
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+        var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
         $.post('db_designer.php', poststr, function (data) {
             if (data.success === false) {
                 PMA_ajaxShowMessage(data.error, false);
             } else {
                 PMA_ajaxRemoveMessage($msgbox);
-                PMA_ajaxShowMessage(PMA_messages.strModificationSaved);
+                PMA_ajaxShowMessage(Messages.strModificationSaved);
                 MarkSaved();
                 if (typeof callback !== 'undefined') {
                     callback();
@@ -723,13 +723,13 @@ function submitSaveDialogAndClose (callback) {
     var $form = $('#save_page');
     var name = $form.find('input[name="selected_value"]').val().trim();
     if (name === '') {
-        PMA_ajaxShowMessage(PMA_messages.strEnterValidPageName, false);
+        PMA_ajaxShowMessage(Messages.strEnterValidPageName, false);
         return;
     }
     $('#page_save_dialog').dialog('close');
 
     if (designer_tables_enabled) {
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+        var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
         PMA_prepareForAjaxRequest($form);
         $.post($form.attr('action'), $form.serialize() + Get_url_pos(), function (data) {
             if (data.success === false) {
@@ -765,11 +765,11 @@ function Save3 (callback) {
         Save2(callback);
     } else {
         var button_options = {};
-        button_options[PMA_messages.strGo] = function () {
+        button_options[Messages.strGo] = function () {
             var $form = $('#save_page');
             $form.submit();
         };
-        button_options[PMA_messages.strCancel] = function () {
+        button_options[Messages.strCancel] = function () {
             $(this).dialog('close');
         };
 
@@ -778,7 +778,7 @@ function Save3 (callback) {
             .append('<input type="hidden" name="db" value="' + db + '">')
             .append('<input type="hidden" name="operation" value="savePage">')
             .append('<input type="hidden" name="save_page" value="new">')
-            .append('<label for="selected_value">' + PMA_messages.strPageName +
+            .append('<label for="selected_value">' + Messages.strPageName +
                 '</label>:<input type="text" name="selected_value">');
         $form.on('submit', function (e) {
             e.preventDefault();
@@ -788,7 +788,7 @@ function Save3 (callback) {
             .append($form)
             .dialog({
                 appendTo: '#page_content',
-                title: PMA_messages.strSavePage,
+                title: Messages.strSavePage,
                 width: 300,
                 modal: true,
                 buttons: button_options,
@@ -803,17 +803,17 @@ function Save3 (callback) {
 function Edit_pages () {
     Prompt_to_save_current_page(function () {
         var button_options = {};
-        button_options[PMA_messages.strGo] = function () {
+        button_options[Messages.strGo] = function () {
             var $form = $('#edit_delete_pages');
             var selected = $form.find('select[name="selected_page"]').val();
             if (selected === '0') {
-                PMA_ajaxShowMessage(PMA_messages.strSelectPage, 2000);
+                PMA_ajaxShowMessage(Messages.strSelectPage, 2000);
                 return;
             }
             $(this).dialog('close');
             Load_page(selected);
         };
-        button_options[PMA_messages.strCancel] = function () {
+        button_options[Messages.strCancel] = function () {
             $(this).dialog('close');
         };
 
@@ -838,7 +838,7 @@ function Edit_pages () {
                     .append(data.message)
                     .dialog({
                         appendTo: '#page_content',
-                        title: PMA_messages.strOpenPage,
+                        title: Messages.strOpenPage,
                         width: 350,
                         modal: true,
                         buttons: button_options,
@@ -854,15 +854,15 @@ function Edit_pages () {
 // -----------------------------  DELETE PAGES ---------------------------------------
 function Delete_pages () {
     var button_options = {};
-    button_options[PMA_messages.strGo] = function () {
+    button_options[Messages.strGo] = function () {
         var $form = $('#edit_delete_pages');
         var selected = $form.find('select[name="selected_page"]').val();
         if (selected === '0') {
-            PMA_ajaxShowMessage(PMA_messages.strSelectPage, 2000);
+            PMA_ajaxShowMessage(Messages.strSelectPage, 2000);
             return;
         }
 
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+        var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
         var deleting_current_page = selected === selected_page;
         PMA_prepareForAjaxRequest($form);
 
@@ -875,7 +875,7 @@ function Delete_pages () {
                     if (deleting_current_page) {
                         Load_page(null);
                     } else {
-                        PMA_ajaxShowMessage(PMA_messages.strSuccessfulPageDelete);
+                        PMA_ajaxShowMessage(Messages.strSuccessfulPageDelete);
                     }
                 }
             }); // end $.post()
@@ -888,7 +888,7 @@ function Delete_pages () {
                     if (deleting_current_page) {
                         Load_page(null);
                     } else {
-                        PMA_ajaxShowMessage(PMA_messages.strSuccessfulPageDelete);
+                        PMA_ajaxShowMessage(Messages.strSuccessfulPageDelete);
                     }
                 }
             });
@@ -896,7 +896,7 @@ function Delete_pages () {
 
         $(this).dialog('close');
     };
-    button_options[PMA_messages.strCancel] = function () {
+    button_options[Messages.strCancel] = function () {
         $(this).dialog('close');
     };
 
@@ -922,7 +922,7 @@ function Delete_pages () {
                 .append(data.message)
                 .dialog({
                     appendTo: '#page_content',
-                    title: PMA_messages.strDeletePage,
+                    title: Messages.strDeletePage,
                     width: 350,
                     modal: true,
                     buttons: button_options,
@@ -937,7 +937,7 @@ function Delete_pages () {
 // ------------------------------ SAVE AS PAGES ---------------------------------------
 function Save_as () {
     var button_options = {};
-    button_options[PMA_messages.strGo] = function () {
+    button_options[Messages.strGo] = function () {
         var $form           = $('#save_as_pages');
         var selected_value  = $form.find('input[name="selected_value"]').val().trim();
         var $selected_page  = $form.find('select[name="selected_page"]');
@@ -946,19 +946,19 @@ function Save_as () {
 
         if (choice === 'same') {
             if ($selected_page.val() === '0') {
-                PMA_ajaxShowMessage(PMA_messages.strSelectPage, 2000);
+                PMA_ajaxShowMessage(Messages.strSelectPage, 2000);
                 return;
             }
             name = $selected_page.find('option:selected').text();
         } else if (choice === 'new') {
             if (selected_value === '') {
-                PMA_ajaxShowMessage(PMA_messages.strEnterValidPageName, 2000);
+                PMA_ajaxShowMessage(Messages.strEnterValidPageName, 2000);
                 return;
             }
             name = selected_value;
         }
 
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+        var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
         if (designer_tables_enabled) {
             PMA_prepareForAjaxRequest($form);
             $.post($form.attr('action'), $form.serialize() + Get_url_pos(), function (data) {
@@ -998,7 +998,7 @@ function Save_as () {
 
         $(this).dialog('close');
     };
-    button_options[PMA_messages.strCancel] = function () {
+    button_options[Messages.strCancel] = function () {
         $(this).dialog('close');
     };
 
@@ -1024,7 +1024,7 @@ function Save_as () {
                 .append(data.message)
                 .dialog({
                     appendTo: '#page_content',
-                    title: PMA_messages.strSavePageAs,
+                    title: Messages.strSavePageAs,
                     width: 450,
                     modal: true,
                     buttons: button_options,
@@ -1043,22 +1043,22 @@ function Save_as () {
 function Prompt_to_save_current_page (callback) {
     if (_change === 1 || selected_page === '-1') {
         var button_options = {};
-        button_options[PMA_messages.strYes] = function () {
+        button_options[Messages.strYes] = function () {
             $(this).dialog('close');
             Save3(callback);
         };
-        button_options[PMA_messages.strNo] = function () {
+        button_options[Messages.strNo] = function () {
             $(this).dialog('close');
             callback();
         };
-        button_options[PMA_messages.strCancel] = function () {
+        button_options[Messages.strCancel] = function () {
             $(this).dialog('close');
         };
         $('<div id="prompt_save_dialog"></div>')
-            .append('<div>' + PMA_messages.strLeavingPage + '</div>')
+            .append('<div>' + Messages.strLeavingPage + '</div>')
             .dialog({
                 appendTo: '#page_content',
-                title: PMA_messages.strSavePage,
+                title: Messages.strSavePage,
                 width: 300,
                 modal: true,
                 buttons: button_options,
@@ -1074,15 +1074,15 @@ function Prompt_to_save_current_page (callback) {
 // ------------------------------ EXPORT PAGES ---------------------------------------
 function Export_pages () {
     var button_options = {};
-    button_options[PMA_messages.strGo] = function () {
+    button_options[Messages.strGo] = function () {
         $('#id_export_pages').submit();
         $(this).dialog('close');
     };
-    button_options[PMA_messages.strCancel] = function () {
+    button_options[Messages.strCancel] = function () {
         $(this).dialog('close');
     };
     var $msgbox = PMA_ajaxShowMessage();
-    var argsep = PMA_commonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
 
     $.post('db_designer.php', {
         'ajax_request': true,
@@ -1118,7 +1118,7 @@ function Export_pages () {
                 .append($form)
                 .dialog({
                     appendTo: '#page_content',
-                    title: PMA_messages.strExportRelationalSchema,
+                    title: Messages.strExportRelationalSchema,
                     width: 550,
                     modal: true,
                     buttons: button_options,
@@ -1133,7 +1133,7 @@ function Export_pages () {
 function Load_page (page) {
     if (designer_tables_enabled) {
         var param_page = '';
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         if (page !== null) {
             param_page = argsep + 'page=' + page;
         }
@@ -1200,7 +1200,7 @@ function Start_relation () {
     if (!ON_relation) {
         document.getElementById('foreign_relation').style.display = '';
         ON_relation = 1;
-        document.getElementById('designer_hint').innerHTML = PMA_messages.strSelectReferencedKey;
+        document.getElementById('designer_hint').innerHTML = Messages.strSelectReferencedKey;
         document.getElementById('designer_hint').style.display = 'block';
         document.getElementById('rel_button').className = 'M_butt_Selected_down';
     } else {
@@ -1215,12 +1215,12 @@ function Start_relation () {
 // table field
 function Click_field (db, T, f, PK) {
     PK = parseInt(PK);
-    var argsep = PMA_commonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     if (ON_relation) {
         if (!click_field) {
             // .style.display=='none'        .style.display = 'none'
             if (!PK) {
-                alert(PMA_messages.strPleaseSelectPrimaryOrUniqueKey);
+                alert(Messages.strPleaseSelectPrimaryOrUniqueKey);
                 return;// 0;
             }// PK
             if (j_tabs[db + '.' + T] !== 1) {
@@ -1228,7 +1228,7 @@ function Click_field (db, T, f, PK) {
             }
             click_field = 1;
             link_relation = 'DB1=' + db + argsep + 'T1=' + T + argsep + 'F1=' + f;
-            document.getElementById('designer_hint').innerHTML = PMA_messages.strSelectForeignKey;
+            document.getElementById('designer_hint').innerHTML = Messages.strSelectForeignKey;
         } else {
             Start_relation(); // hidden hint...
             if (j_tabs[db + '.' + T] !== 1 || !PK) {
@@ -1261,7 +1261,7 @@ function Click_field (db, T, f, PK) {
         document.getElementById('designer_hint').style.display = 'none';
         document.getElementById('display_field_button').className = 'M_butt';
 
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+        var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
         $.post('db_designer.php',
             { operation: 'setDisplayField', ajax_request: true, server: server, db: db, table: T, field: f },
             function (data) {
@@ -1269,7 +1269,7 @@ function Click_field (db, T, f, PK) {
                     PMA_ajaxShowMessage(data.error, false);
                 } else {
                     PMA_ajaxRemoveMessage($msgbox);
-                    PMA_ajaxShowMessage(PMA_messages.strModificationSaved);
+                    PMA_ajaxShowMessage(Messages.strModificationSaved);
                 }
             });
     }
@@ -1277,12 +1277,12 @@ function Click_field (db, T, f, PK) {
 
 function New_relation () {
     document.getElementById('layer_new_relation').style.display = 'none';
-    var argsep = PMA_commonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     link_relation += argsep + 'server=' + server + argsep + 'db=' + db + argsep + 'db2=p';
     link_relation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
     link_relation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
 
-    var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+    var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
     $.post('db_designer.php', link_relation, function (data) {
         if (data.success === false) {
             PMA_ajaxShowMessage(data.error, false);
@@ -1296,13 +1296,13 @@ function New_relation () {
 // -------------------------- create tables -------------------------------------
 
 function Start_table_new () {
-    PMA_commonParams.set('table', '');
-    PMA_commonActions.refreshMain('tbl_create.php');
+    CommonParams.set('table', '');
+    CommonActions.refreshMain('tbl_create.php');
 }
 
 function Start_tab_upd (table) {
-    PMA_commonParams.set('table', table);
-    PMA_commonActions.refreshMain('tbl_structure.php');
+    CommonParams.set('table', table);
+    CommonActions.refreshMain('tbl_structure.php');
 }
 // --------------------------- hide tables --------------------------------------
 
@@ -1504,18 +1504,18 @@ function Canvas_click (id, event) {
         var top = Glob_Y - document.getElementById('layer_upd_relation').offsetHeight - 10;
         document.getElementById('layer_upd_relation').style.top = top + 'px';
         document.getElementById('layer_upd_relation').style.display = 'block';
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         link_relation = 'T1=' + Key0 + argsep + 'F1=' + Key1 + argsep + 'T2=' + Key2 + argsep + 'F2=' + Key3 + argsep + 'K=' + Key;
     }
 }
 
 function Upd_relation () {
     document.getElementById('layer_upd_relation').style.display = 'none';
-    var argsep = PMA_commonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     link_relation += argsep + 'server=' + server + argsep + 'db=' + db;
     link_relation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
 
-    var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
+    var $msgbox = PMA_ajaxShowMessage(Messages.strProcessingRequest);
     $.post('db_designer.php', link_relation, function (data) {
         if (data.success === false) {
             PMA_ajaxShowMessage(data.error, false);
@@ -1692,7 +1692,7 @@ function Start_display_field () {
     }
     if (!ON_display_field) {
         ON_display_field = 1;
-        document.getElementById('designer_hint').innerHTML = PMA_messages.strChangeDisplay;
+        document.getElementById('designer_hint').innerHTML = Messages.strChangeDisplay;
         document.getElementById('designer_hint').style.display = 'block';
         document.getElementById('display_field_button').className = 'M_butt_Selected_down';// '#FFEE99';gray #AAAAAA
 
@@ -1754,7 +1754,7 @@ function Click_option (id_this, column_name, table_name) {
     // var top = Glob_Y - document.getElementById(id_this).offsetHeight - 10;
     document.getElementById(id_this).style.top  = (screen.height / 4) + 'px';
     document.getElementById(id_this).style.display = 'block';
-    document.getElementById('option_col_name').innerHTML = '<strong>' + PMA_sprintf(PMA_messages.strAddOption, decodeURI(column_name)) + '</strong>';
+    document.getElementById('option_col_name').innerHTML = '<strong>' + PMA_sprintf(Messages.strAddOption, decodeURI(column_name)) + '</strong>';
     col_name = column_name;
     tab_name = table_name;
 }
@@ -1866,7 +1866,7 @@ function add_object () {
     var init = history_array.length;
     if (rel.value !== '--') {
         if (document.getElementById('Query').value === '') {
-            PMA_ajaxShowMessage(PMA_sprintf(PMA_messages.strQueryEmpty));
+            PMA_ajaxShowMessage(PMA_sprintf(Messages.strQueryEmpty));
             return;
         }
         p = document.getElementById('Query');
@@ -1909,7 +1909,7 @@ function add_object () {
         sum = sum + 1;
         // make orderby
     }
-    PMA_ajaxShowMessage(PMA_sprintf(PMA_messages.strObjectsCreated, sum));
+    PMA_ajaxShowMessage(PMA_sprintf(Messages.strObjectsCreated, sum));
     // output sum new objects created
     var existingDiv = document.getElementById('ab');
     existingDiv.innerHTML = display(init, history_array.length);

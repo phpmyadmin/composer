@@ -112,7 +112,7 @@ PMA_DROP_IMPORT = {
         $('.pma_sql_import_status div li[data-hash="' + hash +
             '"] span.filesize').html('<span hash="' +
             hash + '" class="pma_drop_file_status" task="cancel">' +
-            PMA_messages.dropImportMessageCancel + '</span>');
+            Messages.dropImportMessageCancel + '</span>');
 
         // -- add event listener to this link to abort upload operation
         $('.pma_sql_import_status div li[data-hash="' + hash +
@@ -120,10 +120,10 @@ PMA_DROP_IMPORT = {
             .on('click', function () {
                 if ($(this).attr('task') === 'cancel') {
                     jqXHR.abort();
-                    $(this).html('<span>' + PMA_messages.dropImportMessageAborted + '</span>');
+                    $(this).html('<span>' + Messages.dropImportMessageAborted + '</span>');
                     PMA_DROP_IMPORT._importFinished(hash, true, false);
                 } else if ($(this).children('span').html() ===
-                    PMA_messages.dropImportMessageFailed) {
+                    Messages.dropImportMessageFailed) {
                     // -- view information
                     var $this = $(this);
                     $.each(PMA_DROP_IMPORT.importStatus,
@@ -132,7 +132,7 @@ PMA_DROP_IMPORT = {
                                 $('.pma_drop_result:visible').remove();
                                 var filename = $this.parent('span').attr('data-filename');
                                 $('body').append('<div class="pma_drop_result"><h2>' +
-                                PMA_messages.dropImportImportResultHeader + ' - ' +
+                                Messages.dropImportImportResultHeader + ' - ' +
                                 filename + '<span class="close">x</span></h2>' + value.message + '</div>');
                                 $('.pma_drop_result').draggable();  // to make this dialog draggable
                             }
@@ -159,10 +159,10 @@ PMA_DROP_IMPORT = {
         if (!PMA_DROP_IMPORT._hasFiles(event)) {
             return;
         }
-        if (PMA_commonParams.get('db') === '') {
-            $('.pma_drop_handler').html(PMA_messages.dropImportSelectDB);
+        if (CommonParams.get('db') === '') {
+            $('.pma_drop_handler').html(Messages.dropImportSelectDB);
         } else {
-            $('.pma_drop_handler').html(PMA_messages.dropImportDropFiles);
+            $('.pma_drop_handler').html(Messages.dropImportDropFiles);
         }
         $('.pma_drop_handler').fadeIn();
     },
@@ -220,7 +220,7 @@ PMA_DROP_IMPORT = {
         var $pma_drop_handler = $('.pma_drop_handler');
         $pma_drop_handler.clearQueue().stop();
         $pma_drop_handler.fadeOut();
-        $pma_drop_handler.html(PMA_messages.dropImportDropFiles);
+        $pma_drop_handler.html(Messages.dropImportDropFiles);
     },
     /**
      * Called when upload has finished
@@ -240,11 +240,11 @@ PMA_DROP_IMPORT = {
             if (status) {
                 $('.pma_sql_import_status div li[data-hash="' + hash +
                    '"] span.filesize span.pma_drop_file_status')
-                    .html('<span>' + PMA_messages.dropImportMessageSuccess + '</a>');
+                    .html('<span>' + Messages.dropImportMessageSuccess + '</a>');
             } else {
                 $('.pma_sql_import_status div li[data-hash="' + hash +
                    '"] span.filesize span.pma_drop_file_status')
-                    .html('<span class="underline">' + PMA_messages.dropImportMessageFailed +
+                    .html('<span class="underline">' + Messages.dropImportMessageFailed +
                    '</a>');
                 icon = 'icon ic_s_error';
             }
@@ -281,8 +281,8 @@ PMA_DROP_IMPORT = {
             return;
         }
 
-        var dbname = PMA_commonParams.get('db');
-        var server = PMA_commonParams.get('server');
+        var dbname = CommonParams.get('db');
+        var server = CommonParams.get('server');
 
         // if no database is selected -- no
         if (dbname !== '') {
@@ -325,7 +325,7 @@ PMA_DROP_IMPORT = {
                     fd.append('noplugin', Math.random().toString(36).substring(2, 12));
                     fd.append('db', dbname);
                     fd.append('server', server);
-                    fd.append('token', PMA_commonParams.get('token'));
+                    fd.append('token', CommonParams.get('token'));
                     fd.append('import_type', 'database');
                     // todo: method to find the value below
                     fd.append('MAX_FILE_SIZE', '4194304');

@@ -244,11 +244,11 @@ AJAX.registerOnload('sql.js', function () {
     // Delete row from SQL results
     $(document).on('click', 'a.delete_row.ajax', function (e) {
         e.preventDefault();
-        var question =  PMA_sprintf(PMA_messages.strDoYouReally, escapeHtml($(this).closest('td').find('div').text()));
+        var question =  PMA_sprintf(Messages.strDoYouReally, escapeHtml($(this).closest('td').find('div').text()));
         var $link = $(this);
         $link.PMA_confirm(question, $link.attr('href'), function (url) {
             $msgbox = PMA_ajaxShowMessage();
-            var argsep = PMA_commonParams.get('arg_separator');
+            var argsep = CommonParams.get('arg_separator');
             var params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
             var postData = $link.getPostData();
             if (postData) {
@@ -269,7 +269,7 @@ AJAX.registerOnload('sql.js', function () {
     $(document).on('submit', '.bookmarkQueryForm', function (e) {
         e.preventDefault();
         PMA_ajaxShowMessage();
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         $.post($(this).attr('action'), 'ajax_request=1' + argsep + $(this).serialize(), function (data) {
             if (data.success) {
                 PMA_ajaxShowMessage(data.message);
@@ -420,7 +420,7 @@ AJAX.registerOnload('sql.js', function () {
     // do not add this link more than once
     if (! $('#sqlqueryform').find('a').is('#togglequerybox')) {
         $('<a id="togglequerybox"></a>')
-            .html(PMA_messages.strHideQueryBox)
+            .html(Messages.strHideQueryBox)
             .appendTo('#sqlqueryform')
         // initially hidden because at this point, nothing else
         // appears under the link
@@ -430,14 +430,14 @@ AJAX.registerOnload('sql.js', function () {
         $('#togglequerybox').bind('click', function () {
             var $link = $(this);
             $link.siblings().slideToggle('fast');
-            if ($link.text() === PMA_messages.strHideQueryBox) {
-                $link.text(PMA_messages.strShowQueryBox);
+            if ($link.text() === Messages.strHideQueryBox) {
+                $link.text(Messages.strShowQueryBox);
                 // cheap trick to add a spacer between the menu tabs
                 // and "Show query box"; feel free to improve!
                 $('#togglequerybox_spacer').remove();
                 $link.before('<br id="togglequerybox_spacer">');
             } else {
-                $link.text(PMA_messages.strHideQueryBox);
+                $link.text(Messages.strHideQueryBox);
             }
             // avoid default click action
             return false;
@@ -495,7 +495,7 @@ AJAX.registerOnload('sql.js', function () {
         var $varDiv = $('#bookmark_variables');
         $varDiv.empty();
         for (var i = 1; i <= varCount; i++) {
-            $varDiv.append($('<label for="bookmark_variable_' + i + '">' + PMA_sprintf(PMA_messages.strBookmarkVariable, i) + '</label>'));
+            $varDiv.append($('<label for="bookmark_variable_' + i + '">' + PMA_sprintf(Messages.strBookmarkVariable, i) + '</label>'));
             $varDiv.append($('<input type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmark_variable_' + i + '">'));
         }
 
@@ -557,7 +557,7 @@ AJAX.registerOnload('sql.js', function () {
 
         PMA_prepareForAjaxRequest($form);
 
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
                 // success happens if the query returns rows or not
@@ -605,21 +605,21 @@ AJAX.registerOnload('sql.js', function () {
                 }
 
                 if (data._params) {
-                    PMA_commonParams.setAll(data._params);
+                    CommonParams.setAll(data._params);
                 }
 
                 if (typeof data.ajax_reload !== 'undefined') {
                     if (data.ajax_reload.reload) {
                         if (data.ajax_reload.table_name) {
-                            PMA_commonParams.set('table', data.ajax_reload.table_name);
-                            PMA_commonActions.refreshMain();
+                            CommonParams.set('table', data.ajax_reload.table_name);
+                            CommonActions.refreshMain();
                         } else {
                             PMA_reloadNavigation();
                         }
                     }
                 } else if (typeof data.reload !== 'undefined') {
                     // this happens if a USE or DROP command was typed
-                    PMA_commonActions.setDb(data.db);
+                    CommonActions.setDb(data.db);
                     var url;
                     if (data.db) {
                         if (data.table) {
@@ -630,7 +630,7 @@ AJAX.registerOnload('sql.js', function () {
                     } else {
                         url = 'server_sql.php';
                     }
-                    PMA_commonActions.refreshMain(url, function () {
+                    CommonActions.refreshMain(url, function () {
                         $('#sqlqueryresultsouter')
                             .show()
                             .html(data.message);
@@ -671,7 +671,7 @@ AJAX.registerOnload('sql.js', function () {
         $form = $(this);
 
         var $msgbox = PMA_ajaxShowMessage();
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
             PMA_ajaxRemoveMessage($msgbox);
             var $sqlqueryresults = $form.parents('.sqlqueryresults');
@@ -717,13 +717,13 @@ AJAX.registerOnload('sql.js', function () {
         if (! $(this).is(':checked')) { // already showing all rows
             submitShowAllForm();
         } else {
-            $form.PMA_confirm(PMA_messages.strShowAllRowsWarning, $form.attr('action'), function (url) {
+            $form.PMA_confirm(Messages.strShowAllRowsWarning, $form.attr('action'), function (url) {
                 submitShowAllForm();
             });
         }
 
         function submitShowAllForm () {
-            var argsep = PMA_commonParams.get('arg_separator');
+            var argsep = CommonParams.get('arg_separator');
             var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
             PMA_ajaxShowMessage();
             AJAX.source = $form;
@@ -751,7 +751,7 @@ AJAX.registerOnload('sql.js', function () {
         }
 
         if (query.length === 0) {
-            alert(PMA_messages.strFormEmpty);
+            alert(Messages.strFormEmpty);
             $('#sqlquery').focus();
             return false;
         }
@@ -761,7 +761,7 @@ AJAX.registerOnload('sql.js', function () {
             type: 'POST',
             url: $form.attr('action'),
             data: {
-                server: PMA_commonParams.get('server'),
+                server: CommonParams.get('server'),
                 db: db_name,
                 ajax_request: '1',
                 simulate_dml: '1',
@@ -775,9 +775,9 @@ AJAX.registerOnload('sql.js', function () {
                     if (response.sql_data) {
                         var len = response.sql_data.length;
                         for (var i = 0; i < len; i++) {
-                            dialog_content += '<strong>' + PMA_messages.strSQLQuery +
+                            dialog_content += '<strong>' + Messages.strSQLQuery +
                                 '</strong>' + response.sql_data[i].sql_query +
-                                PMA_messages.strMatchedRows +
+                                Messages.strMatchedRows +
                                 ' <a href="' + response.sql_data[i].matched_rows_url +
                                 '">' + response.sql_data[i].matched_rows + '</a><br>';
                             if (i < len - 1) {
@@ -790,7 +790,7 @@ AJAX.registerOnload('sql.js', function () {
                     dialog_content += '</div>';
                     var $dialog_content = $(dialog_content);
                     var button_options = {};
-                    button_options[PMA_messages.strClose] = function () {
+                    button_options[Messages.strClose] = function () {
                         $(this).dialog('close');
                     };
                     var $response_dialog = $('<div></div>').append($dialog_content).dialog({
@@ -798,7 +798,7 @@ AJAX.registerOnload('sql.js', function () {
                         maxHeight: 400,
                         modal: true,
                         buttons: button_options,
-                        title: PMA_messages.strSimulateDML,
+                        title: Messages.strSimulateDML,
                         open: function () {
                             PMA_highlightSQL($(this));
                         },
@@ -811,7 +811,7 @@ AJAX.registerOnload('sql.js', function () {
                 }
             },
             error: function (response) {
-                PMA_ajaxShowMessage(PMA_messages.strErrorProcessingRequest);
+                PMA_ajaxShowMessage(Messages.strErrorProcessingRequest);
             }
         });
     });
@@ -823,7 +823,7 @@ AJAX.registerOnload('sql.js', function () {
         e.preventDefault();
         var $button = $(this);
         var $form = $button.closest('form');
-        var argsep = PMA_commonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
         PMA_ajaxShowMessage();
         AJAX.source = $form;
@@ -866,13 +866,13 @@ function browseForeignDialog ($this_a) {
     var tableId = '#browse_foreign_table';
     var filterId = '#input_foreign_filter';
     var $dialog = null;
-    var argSep = PMA_commonParams.get('arg_separator');
+    var argSep = CommonParams.get('arg_separator');
     var params = $this_a.getPostData();
     params += argSep + 'ajax_request=true';
     $.post($this_a.attr('href'), params, function (data) {
         // Creates browse foreign value dialog
         $dialog = $('<div>').append(data.message).dialog({
-            title: PMA_messages.strBrowseForeignValues,
+            title: Messages.strBrowseForeignValues,
             width: Math.min($(window).width() - 100, 700),
             maxHeight: $(window).height() - 100,
             dialogClass: 'browse_foreign_modal',
@@ -931,7 +931,7 @@ function browseForeignDialog ($this_a) {
 
 function checkSavedQuery () {
     if (isStorageSupported('localStorage') && window.localStorage.auto_saved_sql !== undefined) {
-        PMA_ajaxShowMessage(PMA_messages.strPreviousSaveQuery);
+        PMA_ajaxShowMessage(Messages.strPreviousSaveQuery);
     }
 }
 

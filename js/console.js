@@ -81,7 +81,7 @@ var PMA_console = {
             '<input name="token" value="">' +
             '</form>'
         );
-        PMA_console.$requestForm.children('[name=token]').val(PMA_commonParams.get('token'));
+        PMA_console.$requestForm.children('[name=token]').val(CommonParams.get('token'));
         PMA_console.$requestForm.on('submit', AJAX.requestHandler);
 
         // Event binds shouldn't run again
@@ -216,7 +216,7 @@ var PMA_console = {
             return;
         }
         PMA_console.$requestForm.children('textarea').val(queryString);
-        PMA_console.$requestForm.children('[name=server]').attr('value', PMA_commonParams.get('server'));
+        PMA_console.$requestForm.children('[name=server]').attr('value', CommonParams.get('server'));
         if (options && options.db) {
             PMA_console.$requestForm.children('[name=db]').val(options.db);
             if (options.table) {
@@ -226,7 +226,7 @@ var PMA_console = {
             }
         } else {
             PMA_console.$requestForm.children('[name=db]').val(
-                (PMA_commonParams.get('db').length > 0 ? PMA_commonParams.get('db') : ''));
+                (CommonParams.get('db').length > 0 ? CommonParams.get('db') : ''));
         }
         PMA_console.$requestForm.find('[name=profiling]').remove();
         if (options && options.profiling === true) {
@@ -887,7 +887,7 @@ var PMA_consoleMessages = {
         $targetMessage.find('.action.requery').on('click', function () {
             var query = $(this).parent().siblings('.query').text();
             var $message = $(this).closest('.message');
-            if (confirm(PMA_messages.strConsoleRequeryConfirm + '\n' +
+            if (confirm(Messages.strConsoleRequeryConfirm + '\n' +
                 (query.length < 100 ? query : query.slice(0, 100) + '...'))
             ) {
                 PMA_console.execute(query, { db: $message.attr('targetdb'), table: $message.attr('targettable') });
@@ -909,10 +909,10 @@ var PMA_consoleMessages = {
         });
         $targetMessage.find('.action.delete_bookmark').on('click', function () {
             var $message = $(this).closest('.message');
-            if (confirm(PMA_messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
+            if (confirm(Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
                 $.post('import.php',
                     {
-                        server: PMA_commonParams.get('server'),
+                        server: CommonParams.get('server'),
                         action_bookmark: 2,
                         ajax_request: true,
                         id_bookmark: $message.attr('bookmarkid') },
@@ -1047,7 +1047,7 @@ var PMA_consoleBookmarks = {
     refresh: function () {
         $.get('import.php',
             { ajax_request: true,
-                server: PMA_commonParams.get('server'),
+                server: CommonParams.get('server'),
                 console_bookmark_refresh: 'refresh' },
             function (data) {
                 if (data.console_message_bookmark) {
@@ -1075,7 +1075,7 @@ var PMA_consoleBookmarks = {
         $('#pma_bookmarks').find('.card.add [name=submit]').on('click', function () {
             if ($('#pma_bookmarks').find('.card.add [name=label]').val().length === 0
                 || PMA_consoleInput.getText('bookmark').length === 0) {
-                alert(PMA_messages.strFormEmpty);
+                alert(Messages.strFormEmpty);
                 return;
             }
             $(this).prop('disabled', true);
@@ -1084,7 +1084,7 @@ var PMA_consoleBookmarks = {
                     ajax_request: true,
                     console_bookmark_add: 'true',
                     label: $('#pma_bookmarks').find('.card.add [name=label]').val(),
-                    server: PMA_commonParams.get('server'),
+                    server: CommonParams.get('server'),
                     db: $('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
                     bookmark_query: PMA_consoleInput.getText('bookmark'),
                     shared: $('#pma_bookmarks').find('.card.add [name=shared]').prop('checked') },
@@ -1206,7 +1206,7 @@ PMA_consoleDebug = {
                     $('<div class="message welcome">')
                         .text(
                             PMA_sprintf(
-                                PMA_messages.strConsoleDebugArgsSummary,
+                                Messages.strConsoleDebugArgsSummary,
                                 dbgStep.args.length
                             )
                         )
@@ -1269,12 +1269,12 @@ PMA_consoleDebug = {
                                 $('<div class="action_content">')
                                     .append(
                                         '<span class="action dbg_show_args">' +
-                                PMA_messages.strConsoleDebugShowArgs +
+                                Messages.strConsoleDebugShowArgs +
                                 '</span> '
                                     )
                                     .append(
                                         '<span class="action dbg_hide_args">' +
-                                PMA_messages.strConsoleDebugHideArgs +
+                                Messages.strConsoleDebugHideArgs +
                                 '</span> '
                                     )
                             );
@@ -1342,7 +1342,7 @@ PMA_consoleDebug = {
                     .text((parseInt(i) + 1) + '.')
                     .append(
                         $('<span class="time">').text(
-                            PMA_messages.strConsoleDebugTimeTaken +
+                            Messages.strConsoleDebugTimeTaken +
                         ' ' + queryInfo[i].time + 's' +
                         ' (' + ((queryInfo[i].time * 100) / totalTime).toFixed(3) + '%)'
                         )
@@ -1387,7 +1387,7 @@ PMA_consoleDebug = {
         }
         if (debugJson === false) {
             $('#debug_console').find('.debug>.welcome').text(
-                PMA_messages.strConsoleDebugError
+                Messages.strConsoleDebugError
             );
             return;
         }
@@ -1419,7 +1419,7 @@ PMA_consoleDebug = {
         $('#debug_console').find('.debug>.welcome').append(
             $('<span class="debug_summary">').text(
                 PMA_sprintf(
-                    PMA_messages.strConsoleDebugSummary,
+                    Messages.strConsoleDebugSummary,
                     totalUnique,
                     totalExec,
                     totalTime

@@ -13,12 +13,12 @@
  **/
 function displayHelp () {
     $('<div></div>')
-        .append(PMA_messages.strDisplayHelp)
+        .append(Messages.strDisplayHelp)
         .appendTo('#page_content')
         .dialog({
             width: 450,
             height: 'auto',
-            title: PMA_messages.strHelpTitle
+            title: Messages.strHelpTitle
         });
     return false;
 }
@@ -152,9 +152,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         $.post('tbl_zoom_select.php', {
             'ajax_request' : true,
             'change_tbl_info' : true,
-            'server' : PMA_commonParams.get('server'),
-            'db' : PMA_commonParams.get('db'),
-            'table' : PMA_commonParams.get('table'),
+            'server' : CommonParams.get('server'),
+            'db' : CommonParams.get('db'),
+            'table' : CommonParams.get('table'),
             'field' : $('#tableid_0').val(),
             'it' : 0
         }, function (data) {
@@ -176,9 +176,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         $.post('tbl_zoom_select.php', {
             'ajax_request' : true,
             'change_tbl_info' : true,
-            'server' : PMA_commonParams.get('server'),
-            'db' : PMA_commonParams.get('db'),
-            'table' : PMA_commonParams.get('table'),
+            'server' : CommonParams.get('server'),
+            'db' : CommonParams.get('db'),
+            'table' : CommonParams.get('table'),
             'field' : $('#tableid_1').val(),
             'it' : 1
         }, function (data) {
@@ -199,9 +199,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         $.post('tbl_zoom_select.php', {
             'ajax_request' : true,
             'change_tbl_info' : true,
-            'server' : PMA_commonParams.get('server'),
-            'db' : PMA_commonParams.get('db'),
-            'table' : PMA_commonParams.get('table'),
+            'server' : CommonParams.get('server'),
+            'db' : CommonParams.get('db'),
+            'table' : CommonParams.get('table'),
             'field' : $('#tableid_2').val(),
             'it' : 2
         }, function (data) {
@@ -220,9 +220,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         $.post('tbl_zoom_select.php', {
             'ajax_request' : true,
             'change_tbl_info' : true,
-            'server' : PMA_commonParams.get('server'),
-            'db' : PMA_commonParams.get('db'),
-            'table' : PMA_commonParams.get('table'),
+            'server' : CommonParams.get('server'),
+            'db' : CommonParams.get('db'),
+            'table' : CommonParams.get('table'),
             'field' : $('#tableid_3').val(),
             'it' : 3
         }, function (data) {
@@ -241,9 +241,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
      **/
     $('#inputFormSubmitId').on('click', function () {
         if ($('#tableid_0').get(0).selectedIndex === 0 || $('#tableid_1').get(0).selectedIndex === 0) {
-            PMA_ajaxShowMessage(PMA_messages.strInputNull);
+            PMA_ajaxShowMessage(Messages.strInputNull);
         } else if (xLabel === yLabel) {
-            PMA_ajaxShowMessage(PMA_messages.strSameInputs);
+            PMA_ajaxShowMessage(Messages.strSameInputs);
         }
     });
 
@@ -257,14 +257,14 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         .hide();
 
     $('#togglesearchformlink')
-        .html(PMA_messages.strShowSearchCriteria)
+        .html(Messages.strShowSearchCriteria)
         .bind('click', function () {
             var $link = $(this);
             $('#zoom_search_form').slideToggle();
-            if ($link.text() === PMA_messages.strHideSearchCriteria) {
-                $link.text(PMA_messages.strShowSearchCriteria);
+            if ($link.text() === Messages.strHideSearchCriteria) {
+                $link.text(Messages.strShowSearchCriteria);
             } else {
-                $link.text(PMA_messages.strHideSearchCriteria);
+                $link.text(Messages.strHideSearchCriteria);
             }
             // avoid default click action
             return false;
@@ -277,7 +277,7 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
     /*
      * Handle saving of a row in the editor
      */
-    buttonOptions[PMA_messages.strSave] = function () {
+    buttonOptions[Messages.strSave] = function () {
         // Find changed values by comparing form values with selectedRow Object
         var newValues = {};// Stores the values changed from original
         var sqlTypes = {};
@@ -354,7 +354,7 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
 
         // Generate SQL query for update
         if (!isEmpty(newValues)) {
-            var sql_query = 'UPDATE `' + PMA_commonParams.get('table') + '` SET ';
+            var sql_query = 'UPDATE `' + CommonParams.get('table') + '` SET ';
             for (key in newValues) {
                 sql_query += '`' + key + '`=';
                 var value = newValues[key];
@@ -390,8 +390,8 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
 
             // Post SQL query to sql.php
             $.post('sql.php', {
-                'server' : PMA_commonParams.get('server'),
-                'db' : PMA_commonParams.get('db'),
+                'server' : CommonParams.get('server'),
+                'db' : CommonParams.get('db'),
                 'ajax_request' : true,
                 'sql_query' : sql_query,
                 'inline_edit' : false
@@ -406,12 +406,12 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
         }// End database update
         $('#dataDisplay').dialog('close');
     };
-    buttonOptions[PMA_messages.strCancel] = function () {
+    buttonOptions[Messages.strCancel] = function () {
         $(this).dialog('close');
     };
     $('#dataDisplay').dialog({
         autoOpen: false,
-        title: PMA_messages.strDataPointContent,
+        title: Messages.strDataPointContent,
         modal: true,
         buttons: buttonOptions,
         width: $('#dataDisplay').width() + 80,
@@ -427,8 +427,8 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
     $(document).on('keydown', '#dataDisplay :input', function (e) {
         if (e.which === 13) { // 13 is the ENTER key
             e.preventDefault();
-            if (typeof buttonOptions[PMA_messages.strSave] === 'function') {
-                buttonOptions[PMA_messages.strSave].call();
+            if (typeof buttonOptions[Messages.strSave] === 'function') {
+                buttonOptions[Messages.strSave].call();
             }
         }
     });
@@ -443,7 +443,7 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
             .slideToggle()
             .hide();
         $('#togglesearchformlink')
-            .text(PMA_messages.strShowSearchCriteria);
+            .text(Messages.strShowSearchCriteria);
         $('#togglesearchformdiv').show();
         var selectedRow;
         var colorCodes = ['#FF0000', '#00FFFF', '#0000FF', '#0000A0', '#FF0080', '#800080', '#FFFF00', '#00FF00', '#FF00FF'];
@@ -588,9 +588,9 @@ AJAX.registerOnload('tbl_zoom_plot_jqplot.js', function () {
                 var post_params = {
                     'ajax_request' : true,
                     'get_data_row' : true,
-                    'server' : PMA_commonParams.get('server'),
-                    'db' : PMA_commonParams.get('db'),
-                    'table' : PMA_commonParams.get('table'),
+                    'server' : CommonParams.get('server'),
+                    'db' : CommonParams.get('db'),
+                    'table' : CommonParams.get('table'),
                     'where_clause' : data[3]
                 };
 

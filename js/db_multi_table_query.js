@@ -75,7 +75,7 @@ AJAX.registerOnload('db_multi_table_query.js', function () {
                 'db': $('#db_name').val(),
                 'tables': Object.keys(tableAliases),
                 'ajax_request': '1',
-                'token': PMA_commonParams.get('token')
+                'token': CommonParams.get('token')
             },
             success: function (response) {
                 foreignKeys = response.foreignKeyConstrains;
@@ -120,14 +120,14 @@ AJAX.registerOnload('db_multi_table_query.js', function () {
         var query = editor.getDoc().getValue();
         // Verifying that the query is not empty
         if (query === '') {
-            PMA_ajaxShowMessage(PMA_messages.strEmptyQuery, false, 'error');
+            PMA_ajaxShowMessage(Messages.strEmptyQuery, false, 'error');
             return;
         }
         var data = {
             'db': $('#db_name').val(),
             'sql_query': query,
             'ajax_request': '1',
-            'token': PMA_commonParams.get('token')
+            'token': CommonParams.get('token')
         };
         $.ajax({
             type: 'POST',
