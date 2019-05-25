@@ -13,15 +13,16 @@ function Save_to_new_page (db, page_name, table_positions, callback) {
     Create_new_page(db, page_name, function (page) {
         if (page) {
             var tbl_cords = [];
+            var saveCallback = function (id) {
+                tbl_cords.push(id);
+                if (table_positions.length === tbl_cords.length) {
+                    page.tbl_cords = tbl_cords;
+                    DesignerOfflineDB.addObject('pdf_pages', page);
+                }
+            };
             for (var pos = 0; pos < table_positions.length; pos++) {
                 table_positions[pos].pdf_pg_nr = page.pg_nr;
-                Save_table_positions(table_positions[pos], function (id) {
-                    tbl_cords.push(id);
-                    if (table_positions.length === tbl_cords.length) {
-                        page.tbl_cords = tbl_cords;
-                        DesignerOfflineDB.addObject('pdf_pages', page);
-                    }
-                });
+                Save_table_positions(table_positions[pos], saveCallback);
             }
             if (typeof callback !== 'undefined') {
                 callback(page);
@@ -110,19 +111,19 @@ function Show_new_page_tables (check) {
             var element = document.getElementById(input.value);
             element.style.top = Get_random(550, 20) + 'px';
             element.style.left = Get_random(700, 20) + 'px';
-            VisibleTab(input, input.value);
+            DesignerMove.visibleTab(input, input.value);
         }
     }
     selected_page = -1;
     $('#page_name').text(Messages.strUntitled);
-    MarkUnsaved();
+    DesignerMove.markUnsaved();
 }
 
 function Load_HTML_for_page (page_id) {
     Show_new_page_tables(false);
     Load_page_objects(page_id, function (page, tbl_cords) {
         $('#name-panel').find('#page_name').text(page.page_descr);
-        MarkSaved();
+        DesignerMove.markSaved();
         for (var t = 0; t < tbl_cords.length; t++) {
             var tb_id = db + '.' + tbl_cords[t].table_name;
             var table = document.getElementById(tb_id);
@@ -131,7 +132,7 @@ function Load_HTML_for_page (page_id) {
 
             var checkbox = document.getElementById('check_vis_' + tb_id);
             checkbox.checked = true;
-            VisibleTab(checkbox, checkbox.value);
+            DesignerMove.visibleTab(checkbox, checkbox.value);
         }
         selected_page = page.pg_nr;
     });
