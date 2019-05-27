@@ -171,7 +171,7 @@ AJAX.registerOnload('server_privileges.js', function () {
         var $thisButton = $(this);
         var $form = $('#usersForm');
 
-        $thisButton.PMA_confirm(Messages.strDropUserWarning, $form.attr('action'), function (url) {
+        $thisButton.confirm(Messages.strDropUserWarning, $form.attr('action'), function (url) {
             var $drop_users_db_checkbox = $('#checkbox_drop_users_db');
             if ($drop_users_db_checkbox.is(':checked')) {
                 var is_confirmed = confirm(Messages.strDropDatabaseStrongWarning + '\n' + Functions.sprintf(Messages.strDoYouReally, 'DROP DATABASE'));
@@ -211,7 +211,7 @@ AJAX.registerOnload('server_privileges.js', function () {
                             .removeClass('odd').addClass('even');
 
                         // update the checkall checkbox
-                        $(checkboxes_sel).trigger('change');
+                        $(checkboxesSel).trigger('change');
                     });
                 } else {
                     Functions.ajaxShowMessage(data.error, false);
@@ -476,7 +476,7 @@ AJAX.registerOnload('server_privileges.js', function () {
     };
 
     $('input.autofocus').focus();
-    $(checkboxes_sel).trigger('change');
+    $(checkboxesSel).trigger('change');
     Functions.displayPasswordGenerateButton();
     if ($('#edit_user_dialog').length > 0) {
         addOrUpdateSubmenu();
