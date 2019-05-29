@@ -1205,10 +1205,10 @@ Functions.insertQuery = function (queryType) {
         }
         return;
     } else if (queryType === 'saved') {
-        if (isStorageSupported('localStorage') && typeof window.localStorage.auto_saved_sql !== 'undefined') {
-            Functions.setQuery(window.localStorage.auto_saved_sql);
-        } else if (Cookies.get('auto_saved_sql')) {
-            Functions.setQuery(Cookies.get('auto_saved_sql'));
+        if (isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSql !== 'undefined') {
+            Functions.setQuery(window.localStorage.autoSavedSql);
+        } else if (Cookies.get('autoSavedSql')) {
+            Functions.setQuery(Cookies.get('autoSavedSql'));
         } else {
             Functions.ajaxShowMessage(Messages.strNoAutoSavedQuery);
         }
@@ -3014,7 +3014,7 @@ AJAX.registerOnload('functions.js', function () {
                         var argsep = CommonParams.get('arg_separator');
                         var params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
                         if (! (history && history.pushState)) {
-                            params12 += PMA_MicroHistory.menus.getRequestParam();
+                            params12 += MicroHistory.menus.getRequestParam();
                         }
                         var tableStructureUrl = 'tbl_structure.php?server=' + data._params.server +
                             argsep + 'db=' + data._params.db + argsep + 'token=' + data._params.token +
