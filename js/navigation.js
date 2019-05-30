@@ -175,10 +175,10 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
                     })
                     .slideDown('slow');
             }
-            if (data._errors) {
-                var $errors = $(data._errors);
+            if (data.errors) {
+                var $errors = $(data.errors);
                 if ($errors.children().length > 0) {
-                    $('#pma_errors').replaceWith(data._errors);
+                    $('#pma_errors').replaceWith(data.errors);
                 }
             }
             if (callback && typeof callback === 'function') {
@@ -445,34 +445,34 @@ $(function () {
     /** Create a Routine, Trigger or Event */
     $(document).on('click', 'li.new_procedure a.ajax, li.new_function a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('routine');
+        var dialog = new RTE.Object('routine');
         dialog.editorDialog(1, $(this));
     });
     $(document).on('click', 'li.new_trigger a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('trigger');
+        var dialog = new RTE.Object('trigger');
         dialog.editorDialog(1, $(this));
     });
     $(document).on('click', 'li.new_event a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('event');
+        var dialog = new RTE.Object('event');
         dialog.editorDialog(1, $(this));
     });
 
     /** Edit Routines, Triggers or Events */
     $(document).on('click', 'li.procedure > a.ajax, li.function > a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('routine');
+        var dialog = new RTE.Object('routine');
         dialog.editorDialog(0, $(this));
     });
     $(document).on('click', 'li.trigger > a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('trigger');
+        var dialog = new RTE.Object('trigger');
         dialog.editorDialog(0, $(this));
     });
     $(document).on('click', 'li.event > a.ajax', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('event');
+        var dialog = new RTE.Object('event');
         dialog.editorDialog(0, $(this));
     });
 
@@ -480,14 +480,14 @@ $(function () {
     $(document).on('click', 'li.procedure div a.ajax img,' +
         ' li.function div a.ajax img', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object('routine');
+        var dialog = new RTE.Object('routine');
         dialog.executeDialog($(this).parent());
     });
     /** Export Triggers and Events */
     $(document).on('click', 'li.trigger div:eq(1) a.ajax img,' +
         ' li.event div:eq(1) a.ajax img', function (event) {
         event.preventDefault();
-        var dialog = new RTE.object();
+        var dialog = new RTE.Object();
         dialog.exportDialog($(this).parent());
     });
 
@@ -616,8 +616,8 @@ $(function () {
             cache: false,
             type: 'POST',
             data: {
-                'favorite_tables': (isStorageSupported('localStorage') && typeof window.localStorage.favorite_tables !== 'undefined')
-                    ? window.localStorage.favorite_tables
+                'favoriteTables': (isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined')
+                    ? window.localStorage.favoriteTables
                     : '',
                 'server': CommonParams.get('server'),
             },
@@ -632,7 +632,7 @@ $(function () {
                     );
                     // Update localStorage.
                     if (isStorageSupported('localStorage')) {
-                        window.localStorage.favorite_tables = data.favorite_tables;
+                        window.localStorage.favoriteTables = data.favoriteTables;
                     }
                 } else {
                     Functions.ajaxShowMessage(data.message);
