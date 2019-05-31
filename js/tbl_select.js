@@ -6,6 +6,9 @@
  * @requires    js/functions.js
  */
 
+/* global changeValueFieldType */ // js/tbl_change.js
+/* global openGISEditor, gisEditorLoaded, loadJSAndGISEditor, loadGISEditor */ // js/gis_data_editor.js
+
 var TableSelect = {};
 
 /**
@@ -184,7 +187,7 @@ AJAX.registerOnload('tbl_select.js', function () {
     // Initialy hide all the open_gis_editor spans
     $('span.open_search_gis_editor').hide();
 
-    $('select.geom_func').bind('change', function () {
+    $('select.geom_func').on('change', function () {
         var $geomFuncSelector = $(this);
 
         var binaryFunctions = [
