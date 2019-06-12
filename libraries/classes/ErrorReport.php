@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use PhpMyAdmin\Error;
 use PhpMyAdmin\Utils\HttpRequest;
 
 /**
@@ -100,7 +101,7 @@ class ErrorReport
             "user_agent_string" => $_SERVER['HTTP_USER_AGENT'],
             "locale" => $_COOKIE['pma_lang'],
             "configuration_storage" =>
-                is_null($relParams['db']) ? "disabled" : "enabled",
+                $relParams['db'] === null ? "disabled" : "enabled",
             "php_version" => PHP_VERSION
         ];
 
@@ -144,7 +145,7 @@ class ErrorReport
                 return [];
             }
             foreach ($_SESSION['prev_errors'] as $errorObj) {
-                /** @var \PhpMyAdmin\Error  $errorObj */
+                /** @var Error $errorObj */
                 if ($errorObj->getLine()
                     && $errorObj->getType()
                     && $errorObj->getNumber() != E_USER_WARNING

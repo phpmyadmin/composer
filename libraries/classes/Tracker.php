@@ -82,7 +82,7 @@ class Tracker
 
         $pma_table = self::_getTrackingTable();
 
-        return ! is_null($pma_table);
+        return $pma_table !== null;
     }
 
     /**
@@ -558,7 +558,7 @@ class Tracker
                 . $GLOBALS['dbi']->escapeString($tablename) . "' ";
         }
         $sql_query .= " AND `version` = '" . $GLOBALS['dbi']->escapeString($version)
-            . "' " . " ORDER BY `version` DESC LIMIT 1";
+            . "' ORDER BY `version` DESC LIMIT 1";
 
         $mixed = $GLOBALS['dbi']->fetchAssoc($relation->queryAsControlUser($sql_query));
 

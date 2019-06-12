@@ -19,11 +19,11 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Session;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Util;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\Util;
 use phpseclib\Crypt;
-use ReCaptcha;
 use phpseclib\Crypt\Random;
+use ReCaptcha;
 
 /**
  * Remember where to redirect the user
@@ -891,7 +891,7 @@ class AuthenticationCookie extends AuthenticationPlugin
     public function createIV()
     {
         /* Testsuite shortcut only to allow predictable IV */
-        if (! is_null($this->_cookie_iv)) {
+        if ($this->_cookie_iv !== null) {
             return $this->_cookie_iv;
         }
         if ($this->_use_openssl) {

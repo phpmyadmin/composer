@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Response;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -46,7 +47,7 @@ class PmaTestCase extends TestCase
      *
      * @param mixed[] ...$param parameter for header method
      *
-     * @return \PHPUnit\Framework\MockObject\MockBuilder
+     * @return MockBuilder
      */
     public function mockResponse(...$param)
     {
@@ -111,7 +112,7 @@ class PmaTestCase extends TestCase
      */
     protected function tearDown(): void
     {
-        if (! is_null($this->attrInstance) && ! is_null($this->restoreInstance)) {
+        if ($this->attrInstance !== null && $this->restoreInstance !== null) {
             $this->attrInstance->setValue($this->restoreInstance);
             $this->restoreInstance = null;
             $this->attrInstance = null;

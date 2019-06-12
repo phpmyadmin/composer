@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use Closure;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\FileListing;
@@ -23,9 +24,10 @@ use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\Utils\Error as ParserError;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
-use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
-use Williamdes\MariaDBMySQLKBS\KBException;
 use phpseclib\Crypt\Random;
+use stdClass;
+use Williamdes\MariaDBMySQLKBS\KBException;
+use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
 
 /**
  * Misc functions used all over the scripts.
@@ -1013,9 +1015,9 @@ class Util
             $retval .= $message->getDisplay();
         } else {
             $retval .= '<div class="' . $type . '">';
-            $retval .= Sanitize::sanitize($message);
+            $retval .= Sanitize::sanitizeMessage($message);
             if (isset($GLOBALS['special_message'])) {
-                $retval .= Sanitize::sanitize($GLOBALS['special_message']);
+                $retval .= Sanitize::sanitizeMessage($GLOBALS['special_message']);
                 unset($GLOBALS['special_message']);
             }
             $retval .= '</div>';
@@ -1256,7 +1258,7 @@ class Util
             while ($row = $GLOBALS['dbi']->fetchRow($result)) {
                 $values = '|';
                 foreach ($row as $value) {
-                    if (is_null($value)) {
+                    if ($value === null) {
                         $value = 'NULL';
                     }
                     $values .= ' ' . $value . ' |';
@@ -1658,7 +1660,7 @@ class Util
                 || Core::isValid($GLOBALS['active_page'], 'identical', $tab['link'])
             ) {
                 $tab['class'] = 'active';
-            } elseif (is_null($tab['active']) && empty($GLOBALS['active_page'])
+            } elseif ($tab['active'] === null && empty($GLOBALS['active_page'])
                 && (basename($GLOBALS['PMA_PHP_SELF']) == $tab['link'])
             ) {
                 $tab['class'] = 'active';
@@ -1961,7 +1963,7 @@ class Util
      *
      * @param resource       $handle               current query result
      * @param integer        $fields_cnt           number of fields
-     * @param \stdClass[]    $fields_meta          meta information about fields
+     * @param stdClass[]     $fields_meta          meta information about fields
      * @param array          $row                  current row
      * @param boolean        $force_unique         generate condition only on pk
      *                                             or unique
@@ -2052,7 +2054,7 @@ class Util
             } // end if... else...
             $condition = ' ' . $con_key . ' ';
 
-            if (! isset($row[$i]) || is_null($row[$i])) {
+            if (! isset($row[$i]) || $row[$i] === null) {
                 $con_val = 'IS NULL';
             } else {
                 // timestamp is numeric on some MySQL 4.1
@@ -2764,8 +2766,8 @@ class Util
     /**
      * Gets cached information from the session
      *
-     * @param string   $var      variable name
-     * @param \Closure $callback callback to fetch the value
+     * @param string  $var      variable name
+     * @param Closure $callback callback to fetch the value
      *
      * @return mixed
      */
@@ -3291,7 +3293,7 @@ class Util
         ];
 
         /* Optional escaping */
-        if (! is_null($escape)) {
+        if ($escape !== null) {
             if (is_array($escape)) {
                 $escape_class = new $escape[1];
                 $escape_method = $escape[0];
@@ -3320,10 +3322,10 @@ class Util
             );
 
             // sometimes the table no longer exists at this point
-            if (! is_null($columns_list)) {
+            if ($columns_list !== null) {
                 $column_names = [];
                 foreach ($columns_list as $column) {
-                    if (! is_null($escape)) {
+                    if ($escape !== null) {
                         $column_names[] = self::$escape($column['Field']);
                     } else {
                         $column_names[] = $column['Field'];
@@ -4170,7 +4172,7 @@ class Util
 
         foreach ($regex_array as $test_regex) {
             if (preg_match($test_regex, $query, $matches, PREG_OFFSET_CAPTURE)) {
-                if (is_null($minimum_first_occurence_index)
+                if ($minimum_first_occurence_index === null
                     || ($matches[0][1] < $minimum_first_occurence_index)
                 ) {
                     $regex = $test_regex;

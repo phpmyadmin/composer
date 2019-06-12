@@ -195,7 +195,7 @@ class UtilTest extends PmaTestCase
             . '<div id="upload_form_status" class="hide"></div>'
             . '<div id="upload_form_status_info" class="hide"></div>'
             . '<input type="file" name="import_file" id="input_import_file">'
-            . "(" . __('Max: ') . $res . $unit . ")" . "\n"
+            . "(" . __('Max: ') . $res . $unit . ')' . "\n"
             . '<input type="hidden" name="MAX_FILE_SIZE" value="'
             . $size . '">' . "\n"
         );
@@ -1013,7 +1013,7 @@ class UtilTest extends PmaTestCase
                 ],
             ],
             [
-                doubleval(52) + doubleval(2048),
+                floatval(52) + floatval(2048),
                 3,
                 1,
                 [

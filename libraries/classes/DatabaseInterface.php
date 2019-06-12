@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use mysqli_result;
 use PhpMyAdmin\Database\DatabaseList;
 use PhpMyAdmin\Dbi\DbiDummy;
 use PhpMyAdmin\Dbi\DbiExtension;
@@ -355,7 +356,7 @@ class DatabaseInterface
      * @param string $multiQuery multi query statement to execute
      * @param int    $linkIndex  index of the opened database link
      *
-     * @return \mysqli_result[]|boolean(false)
+     * @return mysqli_result[]|boolean (false)
      */
     public function tryMultiQuery(
         string $multiQuery = '',
@@ -1783,7 +1784,7 @@ class DatabaseInterface
      */
     private function _fetchValue(array $row, $value)
     {
-        if (is_null($value)) {
+        if ($value === null) {
             return $row;
         }
 
@@ -2432,7 +2433,7 @@ class DatabaseInterface
      */
     public function getLowerCaseNames()
     {
-        if (is_null($this->_lower_case_table_names)) {
+        if ($this->_lower_case_table_names === null) {
             $this->_lower_case_table_names = $this->fetchValue(
                 "SELECT @@lower_case_table_names"
             );
@@ -2544,7 +2545,7 @@ class DatabaseInterface
                 }
             }
         } else {
-            if (is_null($server)) {
+            if ($server === null) {
                 return [
                     null,
                     null,
@@ -2599,11 +2600,11 @@ class DatabaseInterface
     {
         list($user, $password, $server) = $this->getConnectionParams($mode, $server);
 
-        if (is_null($target)) {
+        if ($target === null) {
             $target = $mode;
         }
 
-        if (is_null($user) || is_null($password)) {
+        if ($user === null || $password === null) {
             trigger_error(
                 __('Missing connection parameters!'),
                 E_USER_WARNING

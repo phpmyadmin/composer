@@ -14,22 +14,23 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Plugins\Transformations\Output\Text_Octetstream_Sql;
+use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Json;
+use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Sql;
 use PhpMyAdmin\Plugins\Transformations\Text_Plain_Link;
+use PhpMyAdmin\Plugins\TransformationsPlugin;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Sql;
+use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\SqlParser\Utils\Query;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use \stdClass;
-use PhpMyAdmin\Plugins\TransformationsPlugin;
-use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Json;
-use PhpMyAdmin\Plugins\Transformations\Output\Text_Octetstream_Sql;
-use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Sql;
+use stdClass;
 
 /**
  * Handle all the functionalities related to displaying results
@@ -1124,7 +1125,7 @@ class Results
                     . 'class="draggable'
                     . ($condition_field ? ' condition"' : '')
                     . '" data-column="' . htmlspecialchars((string) $fields_meta[$i]->name)
-                    . '">' . '        '
+                    . '">        '
                     . htmlspecialchars((string) $fields_meta[$i]->name)
                     . $comments . '    </th>';
             } // end else
@@ -2599,7 +2600,7 @@ class Results
             } // end if (1)
 
             // 2. Displays the rows' values
-            if (is_null($this->__get('mime_map'))) {
+            if ($this->__get('mime_map') === null) {
                 $this->_setMimeMap();
             }
             $table_body_html .= $this->_getRowValues(
@@ -3555,7 +3556,7 @@ class Results
         array $transform_options
     ) {
 
-        if (! isset($column) || is_null($column)) {
+        if (! isset($column) || $column === null) {
             $cell = $this->_buildNullDisplay(
                 'right ' . $class,
                 $condition_field,
@@ -3629,7 +3630,7 @@ class Results
         $transform_options,
         array $analyzed_sql_results
     ) {
-        if (! isset($column) || is_null($column)) {
+        if (! isset($column) || $column === null) {
             $cell = $this->_buildNullDisplay($class, $condition_field, $meta);
             return $cell;
         }
@@ -3808,7 +3809,7 @@ class Results
             $class = str_replace('grid_edit', '', $class);
         }
 
-        if (! isset($column) || is_null($column)) {
+        if (! isset($column) || $column === null) {
             $cell = $this->_buildNullDisplay($class, $condition_field, $meta);
             return $cell;
         }
@@ -4105,7 +4106,7 @@ class Results
     ) {
         /**
          * The statement this table is built for.
-         * @var \PhpMyAdmin\SqlParser\Statements\SelectStatement
+         * @var SelectStatement
          */
         if (isset($analyzed_sql_results['statement'])) {
             $statement = $analyzed_sql_results['statement'];
@@ -4130,7 +4131,7 @@ class Results
         if ($is_innodb && $sql->isJustBrowsing($analyzed_sql_results, true)) {
             $pre_count = '~';
             $after_count = Util::showHint(
-                Sanitize::sanitize(
+                Sanitize::sanitizeMessage(
                     __('May be approximate. See [doc@faq3-11]FAQ 3.11[/doc].')
                 )
             );
@@ -4161,7 +4162,7 @@ class Results
         $sort_expression_nodirection = [];
         $sort_direction = [];
 
-        if (! is_null($statement) && ! empty($statement->order)) {
+        if ($statement !== null && ! empty($statement->order)) {
             foreach ($statement->order as $o) {
                 $sort_expression[] = $o->expr->expr . ' ' . $o->type;
                 $sort_expression_nodirection[] = $o->expr->expr;
@@ -4224,7 +4225,7 @@ class Results
         }
 
         // can the result be sorted?
-        if ($displayParts['sort_lnk'] == '1' && ! is_null($analyzed_sql_results['statement'])) {
+        if ($displayParts['sort_lnk'] == '1' && $analyzed_sql_results['statement'] !== null) {
             // At this point, $sort_expression is an array
             list($unsorted_sql_query, $sort_by_key_html)
                 = $this->_getUnsortedSqlAndSortByKeyDropDown(
@@ -4236,7 +4237,7 @@ class Results
         }
 
         $navigation = '';
-        if ($displayParts['nav_bar'] == '1' && ! is_null($statement) && empty($statement->limit)) {
+        if ($displayParts['nav_bar'] == '1' && $statement !== null && empty($statement->limit)) {
             $navigation = $this->_getTableNavigation(
                 $pos_next,
                 $pos_prev,
@@ -4580,7 +4581,7 @@ class Results
         $message_qt->addParam($this->__get('querytime'));
 
         $message->addMessage($message_qt, '');
-        if (! is_null($sorted_column_message)) {
+        if ($sorted_column_message !== null) {
             $message->addHtml($sorted_column_message, '');
         }
 
@@ -5425,8 +5426,8 @@ class Results
     ) {
         $ret = '';
         if (! empty($edit_url)) {
-            $ret .= '<td class="' . $class . ' center print_ignore" '
-                . ' ><span class="nowrap">'
+            $ret .= '<td class="' . $class . ' center print_ignore">'
+                . '<span class="nowrap">'
                 . Util::linkOrButton($edit_url, $edit_str);
             /*
              * Where clause for selecting this row uniquely is provided as
@@ -5471,7 +5472,7 @@ class Results
                 $ret .= $class . ' ';
             }
 
-            $ret .= 'center print_ignore" ' . ' ><span class="nowrap">'
+            $ret .= 'center print_ignore"><span class="nowrap">'
                . Util::linkOrButton($copy_url, $copy_str);
 
             /*
@@ -5515,7 +5516,7 @@ class Results
             $ret .= $class . ' ';
         }
         $ajax = Response::getInstance()->isAjax() ? ' ajax' : '';
-        $ret .= 'center print_ignore" ' . ' >'
+        $ret .= 'center print_ignore">'
             . Util::linkOrButton(
                 $del_url,
                 $del_str,

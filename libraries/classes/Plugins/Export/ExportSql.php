@@ -2237,7 +2237,7 @@ class ExportSql extends ExportPlugin
         ) {
             $head = $this->_possibleCRLF()
                 . $this->_exportComment()
-                . $this->_exportComment('VIEW ' . ' ' . $formatted_table_name)
+                . $this->_exportComment('VIEW ' . $formatted_table_name)
                 . $this->_exportComment(__('Data:') . ' ' . __('None'))
                 . $this->_exportComment()
                 . $this->_possibleCRLF();
@@ -2426,7 +2426,7 @@ class ExportSql extends ExportPlugin
             $values = [];
             for ($j = 0; $j < $fields_cnt; $j++) {
                 // NULL
-                if (! isset($row[$j]) || is_null($row[$j])) {
+                if (! isset($row[$j]) || $row[$j] === null) {
                     $values[] = 'NULL';
                 } elseif ($fields_meta[$j]->numeric
                     && $fields_meta[$j]->type != 'timestamp'
@@ -2767,7 +2767,7 @@ class ExportSql extends ExportPlugin
                 $flag = true;
             }
 
-            /** @var \PhpMyAdmin\SqlParser\Components\CreateDefinition $field */
+            /** @var CreateDefinition $field */
             foreach ($statement->fields as $field) {
                 // Column name.
                 if (! empty($field->type)) {
