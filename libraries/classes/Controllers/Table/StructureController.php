@@ -191,7 +191,7 @@ class StructureController extends AbstractController
                 if (Context::isKeyword(trim($this->table), true)) {
                     $reserved_keywords_names[] = trim($this->table);
                 }
-                if (count($reserved_keywords_names) == 0) {
+                if (count($reserved_keywords_names) === 0) {
                     $this->response->setRequestStatus(false);
                 }
                 $this->response->addJSON(
@@ -541,7 +541,7 @@ class StructureController extends AbstractController
                 $selected[$i],
                 true
             );
-            if (count($value) == 0) {
+            if (count($value) === 0) {
                 $message = Message::error(
                     __('Failed to get description of column %s!')
                 );
@@ -593,7 +593,7 @@ class StructureController extends AbstractController
     /**
      * Extracts partition details from CREATE TABLE statement
      *
-     * @return array[] array of partition details
+     * @return array[]|null array of partition details
      */
     private function _extractPartitionDetails()
     {
@@ -785,7 +785,7 @@ class StructureController extends AbstractController
     /**
      * Function to get the type of command for multiple field handling
      *
-     * @return string
+     * @return string|null
      */
     protected function getMultipleFieldCommandType()
     {
@@ -1422,7 +1422,7 @@ class StructureController extends AbstractController
             $max_digits,
             $decimals
         );
-        if ($mergetable == false) {
+        if ($mergetable === false) {
             list($index_size, $index_unit) = Util::formatByteDown(
                 $this->_showtable['Index_length'],
                 $max_digits,

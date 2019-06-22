@@ -379,7 +379,7 @@ class FormDisplay
      * @param array     $jsDefault          array which stores JavaScript code
      *                                      to be displayed
      *
-     * @return string HTML for input field
+     * @return string|null HTML for input field
      */
     private function _displayFieldInput(
         Form $form,
@@ -514,12 +514,12 @@ class FormDisplay
     /**
      * Displays errors
      *
-     * @return string HTML for errors
+     * @return string|null HTML for errors
      */
     public function displayErrors()
     {
         $this->_validate();
-        if (count($this->_errors) == 0) {
+        if (count($this->_errors) === 0) {
             return null;
         }
 
@@ -545,7 +545,7 @@ class FormDisplay
     public function fixErrors()
     {
         $this->_validate();
-        if (count($this->_errors) == 0) {
+        if (count($this->_errors) === 0) {
             return;
         }
 

@@ -94,6 +94,9 @@ class Results
     /** array with properties of the class */
     private $_property_array = [
 
+        /** integer server id */
+        'server' => null,
+
         /** string Database name */
         'db' => null,
 
@@ -210,12 +213,13 @@ class Results
      *
      * @param string $db        the database name
      * @param string $table     the table name
+     * @param int    $server    the server id
      * @param string $goto      the URL to go back in case of errors
      * @param string $sql_query the SQL query
      *
      * @access  public
      */
-    public function __construct($db, $table, $goto, $sql_query)
+    public function __construct($db, $table, $server, $goto, $sql_query)
     {
         $this->relation = new Relation($GLOBALS['dbi']);
         $this->transformations = new Transformations();
@@ -225,6 +229,7 @@ class Results
 
         $this->__set('db', $db);
         $this->__set('table', $table);
+        $this->__set('server', $server);
         $this->__set('goto', $goto);
         $this->__set('sql_query', $sql_query);
         $this->__set('unique_id', mt_rand());
@@ -727,7 +732,7 @@ class Results
                 || $this->__get('is_analyse'))
             && ! empty($analyzed_sql_results['select_from'])
             && ! empty($analyzed_sql_results['statement']->from)
-            && (count($analyzed_sql_results['statement']->from) == 1)
+            && (count($analyzed_sql_results['statement']->from) === 1)
             && ! empty($analyzed_sql_results['statement']->from[0]->table);
     }
 
@@ -899,6 +904,7 @@ class Results
         $hiddenFields = [
             'db' => $this->__get('db'),
             'table' => $this->__get('table'),
+            'server' => $this->__get('server'),
             'sql_query' => $this->__get('sql_query'),
             'is_browse_distinct' => $this->__get('is_browse_distinct'),
             'goto' => $this->__get('goto'),
@@ -1307,6 +1313,7 @@ class Results
         $hiddenFields = [
             'db' => $this->__get('db'),
             'table' => $this->__get('table'),
+            'server' => $this->__get('server'),
             'sort_by_key' => '1',
         ];
 
@@ -4362,8 +4369,7 @@ class Results
      *                                             be displayed
      * @param string  $sort_expression_nodirection sort expression without direction
      *
-     * @return  string                              html content
-     *          null                                if not found sorted column
+     * @return string|null html content, null if not found sorted column
      *
      * @access  private
      *
@@ -4924,7 +4930,7 @@ class Results
             && ! isset($printview)
             && empty($analyzed_sql_results['procedure'])
         ) {
-            if (count($analyzed_sql_results['select_tables']) == 1) {
+            if (count($analyzed_sql_results['select_tables']) === 1) {
                 $_url_params['single_table'] = 'true';
             }
 
@@ -5294,16 +5300,19 @@ class Results
                     $title = htmlspecialchars($data);
                 }
 
+                $sqlQuery = 'SELECT * FROM '
+                    . Util::backquote($map[$meta->name][3]) . '.'
+                    . Util::backquote($map[$meta->name][0])
+                    . ' WHERE '
+                    . Util::backquote($map[$meta->name][1])
+                    . $where_comparison;
+
                 $_url_params = [
                     'db'    => $map[$meta->name][3],
                     'table' => $map[$meta->name][0],
                     'pos'   => '0',
-                    'sql_query' => 'SELECT * FROM '
-                        . Util::backquote($map[$meta->name][3]) . '.'
-                        . Util::backquote($map[$meta->name][0])
-                        . ' WHERE '
-                        . Util::backquote($map[$meta->name][1])
-                        . $where_comparison,
+                    'sql_signature' => Core::signSqlQuery($sqlQuery),
+                    'sql_query' => $sqlQuery,
                 ];
 
                 if ($transformation_plugin != $default_function) {

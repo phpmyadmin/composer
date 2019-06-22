@@ -735,7 +735,7 @@ class Core
 
         // remove empty nested arrays
         for (; $depth >= 0; $depth--) {
-            if (! isset($path[$depth + 1]) || count($path[$depth + 1]) == 0) {
+            if (! isset($path[$depth + 1]) || count($path[$depth + 1]) === 0) {
                 unset($path[$depth][$keys[$depth]]);
             } else {
                 break;
@@ -1270,5 +1270,33 @@ class Core
         if (count($_REQUEST) > 1000) {
             self::fatalError(__('possible exploit'));
         }
+    }
+
+    /**
+     * Sign the sql query using hmac using the session token
+     *
+     * @param string $sqlQuery The sql query
+     * @return string
+     */
+    public static function signSqlQuery($sqlQuery)
+    {
+        /** @var array $cfg */
+        global $cfg;
+        return hash_hmac('sha256', $sqlQuery, $_SESSION[' HMAC_secret '] . $cfg['blowfish_secret']);
+    }
+
+    /**
+     * Check that the sql query has a valid hmac signature
+     *
+     * @param string $sqlQuery  The sql query
+     * @param string $signature The Signature to check
+     * @return bool
+     */
+    public static function checkSqlQuerySignature($sqlQuery, $signature)
+    {
+        /** @var array $cfg */
+        global $cfg;
+        $hmac = hash_hmac('sha256', $sqlQuery, $_SESSION[' HMAC_secret '] . $cfg['blowfish_secret']);
+        return hash_equals($hmac, $signature);
     }
 }

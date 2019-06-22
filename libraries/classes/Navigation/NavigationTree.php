@@ -273,7 +273,7 @@ class NavigationTree
         }
 
         $navItems = (int) $GLOBALS['cfg']['FirstLevelNavigationItems'];
-        $retval = floor(count($prefixMap) / $navItems) * $navItems;
+        $retval = (int) floor(count($prefixMap) / $navItems) * $navItems;
 
         return $retval;
     }
@@ -348,7 +348,7 @@ class NavigationTree
      * @param int    $pos3  The position for the pagination of
      *                      the branch at the third level of the tree
      *
-     * @return Node|false The active node or false in case of failure
+     * @return Node|bool    The active node or false in case of failure, true if the path contains <= 1 items
      */
     private function buildPathPart(array $path, $type2, $pos2, $type3, $pos3)
     {
@@ -383,7 +383,7 @@ class NavigationTree
             return $retval;
         }
 
-        if (count($containers) == 1) {
+        if (count($containers) === 1) {
             $container = array_shift($containers);
         } else {
             $container = $db->getChild($path[0], true);
@@ -725,7 +725,7 @@ class NavigationTree
                     if ($sepPos != false
                         && $sepPos != mb_strlen($child->name)
                         && $sepPos != 0
-                        && ($prefixPos == false || $sepPos < $prefixPos)
+                        && ($prefixPos === false || $sepPos < $prefixPos)
                     ) {
                         $prefixPos = $sepPos;
                     }
@@ -759,7 +759,7 @@ class NavigationTree
             }
         }
         // rfe #1634 Don't group if there's only one group and no other items
-        if (count($prefixes) == 1) {
+        if (count($prefixes) === 1) {
             $keys = array_keys($prefixes);
             $key = $keys[0];
             if ($prefixes[$key] == count($node->children) - 1) {
@@ -1059,7 +1059,7 @@ class NavigationTree
         ) {
             $response = Response::getInstance();
             if ($node->type == Node::CONTAINER
-                && count($node->children) == 0
+                && count($node->children) === 0
                 && ! $response->isAjax()
             ) {
                 return '';
