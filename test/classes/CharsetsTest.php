@@ -29,6 +29,34 @@ class CharsetsTest extends TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testFindCollationByName(): void
+    {
+        $this->assertNull(Charsets::findCollationByName(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['DisableIS'],
+            ''
+        ));
+
+        $this->assertNull(Charsets::findCollationByName(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['DisableIS'],
+            'invalid'
+        ));
+
+        $actual = Charsets::findCollationByName(
+            $GLOBALS['dbi'],
+            $GLOBALS['cfg']['Server']['DisableIS'],
+            'utf8_general_ci'
+        );
+
+        $this->assertInstanceOf(Charsets\Collation::class, $actual);
+
+        $this->assertSame('utf8_general_ci', $actual->getName());
+    }
+
+    /**
      * Test case for getCollationDescr()
      *
      * @param string $collation Collation for which description is reqd
