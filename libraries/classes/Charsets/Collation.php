@@ -88,7 +88,7 @@ final class Collation
         $this->isCompiled = $isCompiled;
         $this->sortLength = $sortLength;
         $this->padAttribute = $padAttribute;
-        $this->description = self::getCollationDescription($this->name);
+        $this->description = $this->buildDescription();
     }
 
     /**
@@ -100,10 +100,10 @@ final class Collation
         return new self(
             $state['Collation'] ?? '',
             $state['Charset'] ?? '',
-            (int) $state['Id'] ?? 0,
+            (int) ($state['Id'] ?? 0),
             isset($state['Default']) && ($state['Default'] === 'Yes' || $state['Default'] === '1'),
             isset($state['Compiled']) && ($state['Compiled'] === 'Yes' || $state['Compiled'] === '1'),
-            (int) $state['Sortlen'] ?? 0,
+            (int) ($state['Sortlen'] ?? 0),
             $state['Pad_attribute'] ?? ''
         );
     }
@@ -175,13 +175,11 @@ final class Collation
     /**
      * Returns description for given collation
      *
-     * @param string $collation MySQL collation string
-     *
      * @return string collation description
      */
-    private static function getCollationDescription(string $collation): string
+    private function buildDescription(): string
     {
-        $parts = explode('_', $collation);
+        $parts = explode('_', $this->getName());
 
         $name = __('Unknown');
         $variant = null;
@@ -316,6 +314,7 @@ final class Collation
                         break;
                     case 'chinese':
                     case 'cn':
+                    case 'zh':
                         if ($unicode) {
                             $name = _pgettext('Collation', 'Chinese');
                         }
@@ -400,6 +399,9 @@ final class Collation
                     case 'ro':
                         $name = _pgettext('Collation', 'Romanian');
                         break;
+                    case 'ru':
+                        $name = _pgettext('Collation', 'Russian');
+                        break;
                     case 'si':
                     case 'sinhala':
                         $name = _pgettext('Collation', 'Sinhalese');
@@ -423,6 +425,7 @@ final class Collation
                         $name = _pgettext('Collation', 'Spanish (traditional)');
                         break;
                     case 'swedish':
+                    case 'sv':
                         $name = _pgettext('Collation', 'Swedish');
                         break;
                     case 'thai':
@@ -517,12 +520,18 @@ final class Collation
                     case 'as':
                         $suffixes[] = _pgettext('Collation variant', 'accent-sensitive');
                         break;
+                    case 'ks':
+                        $suffixes[] = _pgettext('Collation variant', 'kana-sensitive');
+                        break;
                     case 'w2':
                     case 'l2':
                         $suffixes[] = _pgettext('Collation variant', 'multi-level');
                         break;
                     case 'bin':
                         $suffixes[] = _pgettext('Collation variant', 'binary');
+                        break;
+                    case 'nopad':
+                        $suffixes[] = _pgettext('Collation variant', 'no-pad');
                         break;
                 }
             }
