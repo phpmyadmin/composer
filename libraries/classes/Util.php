@@ -3179,7 +3179,7 @@ class Util
                 case 'databases':
                     return Url::getFromRoute('/server/databases');
                 case 'status':
-                    return 'server_status.php';
+                    return Url::getFromRoute('/server/status');
                 case 'variables':
                     return Url::getFromRoute('/server/variables');
                 case 'privileges':
@@ -3193,9 +3193,9 @@ class Util
                 case 'sql':
                     return 'db_sql.php';
                 case 'search':
-                    return 'db_search.php';
+                    return Url::getFromRoute('/database/search');
                 case 'operations':
-                    return 'db_operations.php';
+                    return Url::getFromRoute('/database/operations');
             }
         } elseif ($location == 'table') {
             // Values for $cfg['DefaultTabTable'],

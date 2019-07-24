@@ -466,7 +466,7 @@ class Menu
 
         $tabs['search']['text'] = __('Search');
         $tabs['search']['icon'] = 'b_search';
-        $tabs['search']['link'] = 'db_search.php';
+        $tabs['search']['link'] = Url::getFromRoute('/database/search');
         if ($num_tables == 0) {
             $tabs['search']['warning'] = __('Database seems to be empty!');
         }
@@ -497,7 +497,7 @@ class Menu
             $tabs['import']['text'] = __('Import');
             $tabs['import']['icon'] = 'b_import';
 
-            $tabs['operation']['link'] = 'db_operations.php';
+            $tabs['operation']['link'] = Url::getFromRoute('/database/operations');
             $tabs['operation']['text'] = __('Operations');
             $tabs['operation']['icon'] = 'b_tblops';
 
@@ -585,16 +585,16 @@ class Menu
         $tabs['sql']['text'] = __('SQL');
 
         $tabs['status']['icon'] = 's_status';
-        $tabs['status']['link'] = 'server_status.php';
+        $tabs['status']['link'] = Url::getFromRoute('/server/status');
         $tabs['status']['text'] = __('Status');
         $tabs['status']['active'] = in_array(basename($GLOBALS['PMA_PHP_SELF']), [
-            'server_status.php',
             'server_status_advisor.php',
             'server_status_monitor.php',
             'server_status_variables.php',
             'server_status_processes.php',
         ]) || (isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
-            '/server/status/queries'
+            '/server/status',
+            '/server/status/queries',
         ]));
 
         if ($is_superuser || $isCreateOrGrantUser) {
