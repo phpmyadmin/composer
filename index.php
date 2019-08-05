@@ -26,6 +26,12 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             require_once ROOT_PATH . 'libraries/entry_points/home.php';
         });
         $routes->addGroup('/database', function (RouteCollector $routes) {
+            $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/database/central_columns.php';
+            });
+            $routes->addRoute('GET', '/data_dictionary', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/database/datadict.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/operations', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/operations.php';
             });
@@ -33,7 +39,7 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 require_once ROOT_PATH . 'libraries/entry_points/database/search.php';
             });
             $routes->addRoute(['GET', 'POST'], '/sql', function () {
-                require_once ROOT_PATH . 'db_sql.php';
+                require_once ROOT_PATH . 'libraries/entry_points/database/sql.php';
             });
             $routes->addRoute(['GET', 'POST'], '/structure', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/structure.php';
@@ -59,7 +65,7 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 require_once ROOT_PATH . 'libraries/entry_points/server/privileges.php';
             });
             $routes->addRoute(['GET', 'POST'], '/sql', function () {
-                require_once ROOT_PATH . 'server_sql.php';
+                require_once ROOT_PATH . 'libraries/entry_points/server/sql.php';
             });
             $routes->addGroup('/status', function (RouteCollector $routes) {
                 $routes->addRoute('GET', '', function () {
@@ -74,7 +80,7 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             });
         });
         $routes->addRoute(['GET', 'POST'], '/sql', function () {
-            require_once ROOT_PATH . 'sql.php';
+            require_once ROOT_PATH . 'libraries/entry_points/sql.php';
         });
         $routes->addGroup('/table', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/change', function () {
@@ -84,7 +90,7 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 require_once ROOT_PATH . 'libraries/entry_points/table/select.php';
             });
             $routes->addRoute(['GET', 'POST'], '/sql', function () {
-                require_once ROOT_PATH . 'tbl_sql.php';
+                require_once ROOT_PATH . 'libraries/entry_points/table/sql.php';
             });
             $routes->addRoute(['GET', 'POST'], '/structure', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/structure.php';

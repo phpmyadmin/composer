@@ -1,24 +1,22 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Server SQL executor
+ * Database SQL executor
  *
  * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
-use PhpMyAdmin\Controllers\Server\SqlController;
+use PhpMyAdmin\Controllers\Database\SqlController;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\SqlQueryForm;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+if (! defined('PHPMYADMIN')) {
+    exit;
 }
 
 global $containerBuilder;
-
-require_once ROOT_PATH . 'libraries/common.inc.php';
 
 /** @var Response $response */
 $response = $containerBuilder->get(Response::class);
@@ -38,4 +36,11 @@ $scripts->addFile('makegrid.js');
 $scripts->addFile('vendor/jquery/jquery.uitablefilter.js');
 $scripts->addFile('sql.js');
 
-$response->addHTML($controller->index($sqlQueryForm));
+$response->addHTML(
+    $controller->index(
+        [
+            'delimiter' => $_POST['delimiter'] ?? null,
+        ],
+        $sqlQueryForm
+    )
+);
