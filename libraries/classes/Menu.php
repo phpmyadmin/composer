@@ -516,9 +516,10 @@ class Menu
             $tabs['routines']['icon'] = 'b_routines';
 
             if (Util::currentUserHasPrivilege('EVENT', $this->_db)) {
-                $tabs['events']['link'] = 'db_events.php';
+                $tabs['events']['link'] = Url::getFromRoute('/database/events');
                 $tabs['events']['text'] = __('Events');
                 $tabs['events']['icon'] = 'b_events';
+                $tabs['events']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/database/events';
             }
 
             if (Util::currentUserHasPrivilege('TRIGGER', $this->_db)) {
@@ -538,8 +539,9 @@ class Menu
         if (! $db_is_system_schema) {
             $tabs['designer']['text'] = __('Designer');
             $tabs['designer']['icon'] = 'b_relations';
-            $tabs['designer']['link'] = 'db_designer.php';
+            $tabs['designer']['link'] = Url::getFromRoute('/database/designer');
             $tabs['designer']['id'] = 'designer_tab';
+            $tabs['designer']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/database/designer';
         }
 
         if (! $db_is_system_schema

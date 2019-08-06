@@ -25,12 +25,24 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
         $routes->addRoute(['GET', 'POST'], '[/]', function () {
             require_once ROOT_PATH . 'libraries/entry_points/home.php';
         });
+        $routes->addRoute(['GET', 'POST'], '/ajax', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/ajax.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/browse_foreigners', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/browse_foreigners.php';
+        });
         $routes->addGroup('/database', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/central_columns.php';
             });
             $routes->addRoute('GET', '/data_dictionary', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/datadict.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/designer', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/database/designer.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/events', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/database/events.php';
             });
             $routes->addRoute(['GET', 'POST'], '/operations', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/operations.php';
