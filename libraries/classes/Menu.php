@@ -427,9 +427,10 @@ class Menu
             )
             && ! $tbl_is_view
         ) {
-            $tabs['triggers']['link'] = 'tbl_triggers.php';
+            $tabs['triggers']['link'] = Url::getFromRoute('/table/triggers');
             $tabs['triggers']['text'] = __('Triggers');
             $tabs['triggers']['icon'] = 'b_triggers';
+            $tabs['triggers']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/table/triggers';
         }
 
         return $tabs;
@@ -511,9 +512,10 @@ class Menu
                 $tabs['privileges']['icon'] = 's_rights';
             }
 
-            $tabs['routines']['link'] = 'db_routines.php';
+            $tabs['routines']['link'] = Url::getFromRoute('/database/routines');
             $tabs['routines']['text'] = __('Routines');
             $tabs['routines']['icon'] = 'b_routines';
+            $tabs['routines']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/database/routines';
 
             if (Util::currentUserHasPrivilege('EVENT', $this->_db)) {
                 $tabs['events']['link'] = Url::getFromRoute('/database/events');
@@ -523,9 +525,10 @@ class Menu
             }
 
             if (Util::currentUserHasPrivilege('TRIGGER', $this->_db)) {
-                $tabs['triggers']['link'] = 'db_triggers.php';
+                $tabs['triggers']['link'] = Url::getFromRoute('/database/triggers');
                 $tabs['triggers']['text'] = __('Triggers');
                 $tabs['triggers']['icon'] = 'b_triggers';
+                $tabs['triggers']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/database/triggers';
             }
         }
 
