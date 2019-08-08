@@ -475,14 +475,11 @@ class Menu
 
         $tabs['query']['text'] = __('Query');
         $tabs['query']['icon'] = 's_db';
-        $tabs['query']['link'] = 'db_multi_table_query.php';
-        $tabs['query']['active'] = in_array(
-            basename($GLOBALS['PMA_PHP_SELF']),
-            [
-                'db_multi_table_query.php',
-                'db_qbe.php',
-            ]
-        );
+        $tabs['query']['link'] = Url::getFromRoute('/database/multi_table_query');
+        $tabs['query']['active'] = isset($_REQUEST['route'])
+            && ($_REQUEST['route'] === '/database/multi_table_query'
+            || $_REQUEST['route'] === '/database/qbe');
+
         if ($num_tables == 0) {
             $tabs['query']['warning'] = __('Database seems to be empty!');
         }
@@ -636,8 +633,9 @@ class Menu
 
         if (! empty($binary_logs)) {
             $tabs['binlog']['icon'] = 's_tbl';
-            $tabs['binlog']['link'] = 'server_binlog.php';
+            $tabs['binlog']['link'] = Url::getFromRoute('/server/binlog');
             $tabs['binlog']['text'] = __('Binary log');
+            $tabs['binlog']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/binlog';
         }
 
         if ($is_superuser) {

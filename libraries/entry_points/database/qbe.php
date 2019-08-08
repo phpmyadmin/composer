@@ -18,13 +18,11 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+if (! defined('PHPMYADMIN')) {
+    exit;
 }
 
 global $containerBuilder, $db, $pmaThemeImage, $url_query;
-
-require_once ROOT_PATH . 'libraries/common.inc.php';
 
 /** @var Response $response */
 $response = $containerBuilder->get(Response::class);
@@ -127,8 +125,9 @@ if (isset($_POST['submit_sql']) && ! empty($sql_query)) {
 
 $sub_part  = '_qbe';
 require ROOT_PATH . 'libraries/db_common.inc.php';
-$url_query .= '&amp;goto=db_qbe.php';
-$url_params['goto'] = 'db_qbe.php';
+
+$url_params['goto'] = Url::getFromRoute('/database/qbe');
+$url_query .= Url::getCommon($url_params, '&');
 
 list(
     $tables,
@@ -155,11 +154,11 @@ $db_qbe = new Qbe($relation, $template, $dbi, $db, $savedSearchList, $savedSearc
 
 $secondaryTabs = [
     'multi' => [
-        'link' => 'db_multi_table_query.php',
+        'link' => Url::getFromRoute('/database/multi_table_query'),
         'text' => __('Multi-table query'),
     ],
     'qbe' => [
-        'link' => 'db_qbe.php',
+        'link' => Url::getFromRoute('/database/qbe'),
         'text' => __('Query by example'),
     ],
 ];
