@@ -593,12 +593,12 @@ class Menu
         $tabs['status']['link'] = Url::getFromRoute('/server/status');
         $tabs['status']['text'] = __('Status');
         $tabs['status']['active'] = in_array(basename($GLOBALS['PMA_PHP_SELF']), [
-            'server_status_advisor.php',
             'server_status_monitor.php',
             'server_status_variables.php',
             'server_status_processes.php',
         ]) || (isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
             '/server/status',
+            '/server/status/advisor',
             '/server/status/queries',
         ]));
 
@@ -640,8 +640,9 @@ class Menu
 
         if ($is_superuser) {
             $tabs['replication']['icon'] = 's_replication';
-            $tabs['replication']['link'] = 'server_replication.php';
+            $tabs['replication']['link'] = Url::getFromRoute('/server/replication');
             $tabs['replication']['text'] = __('Replication');
+            $tabs['replication']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/replication';
         }
 
         $tabs['vars']['icon'] = 's_vars';
