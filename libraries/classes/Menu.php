@@ -592,22 +592,23 @@ class Menu
         $tabs['status']['icon'] = 's_status';
         $tabs['status']['link'] = Url::getFromRoute('/server/status');
         $tabs['status']['text'] = __('Status');
-        $tabs['status']['active'] = in_array(basename($GLOBALS['PMA_PHP_SELF']), [
-            'server_status_variables.php',
-            'server_status_processes.php',
-        ]) || (isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
+        $tabs['status']['active'] = isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
             '/server/status',
             '/server/status/advisor',
             '/server/status/monitor',
+            '/server/status/processes',
             '/server/status/queries',
-        ]));
+            '/server/status/variables',
+        ]);
 
         if ($is_superuser || $isCreateOrGrantUser) {
             $tabs['rights']['icon'] = 's_rights';
             $tabs['rights']['link'] = Url::getFromRoute('/server/privileges');
             $tabs['rights']['text'] = __('User accounts');
-            $tabs['rights']['active'] = basename($GLOBALS['PMA_PHP_SELF']) === 'server_user_groups.php' ||
-                (isset($_REQUEST['route']) && in_array($_REQUEST['route'], ['/server/privileges']));
+            $tabs['rights']['active'] = isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
+                '/server/privileges',
+                '/server/user_groups',
+            ]);
             $tabs['rights']['args']['viewing_mode'] = 'server';
         }
 

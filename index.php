@@ -115,9 +115,18 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 $routes->addRoute(['GET', 'POST'], '/monitor', function () {
                     require_once ROOT_PATH . 'libraries/entry_points/server/status/monitor.php';
                 });
+                $routes->addRoute(['GET', 'POST'], '/processes', function () {
+                    require_once ROOT_PATH . 'libraries/entry_points/server/status/processes.php';
+                });
                 $routes->addRoute('GET', '/queries', function () {
                     require_once ROOT_PATH . 'libraries/entry_points/server/status/queries.php';
                 });
+                $routes->addRoute(['GET', 'POST'], '/variables', function () {
+                    require_once ROOT_PATH . 'libraries/entry_points/server/status/variables.php';
+                });
+            });
+            $routes->addRoute(['GET', 'POST'], '/user_groups', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/server/user_groups.php';
             });
             $routes->addRoute(['GET', 'POST'], '/variables', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/variables.php';
