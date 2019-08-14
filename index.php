@@ -139,6 +139,12 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             $routes->addRoute(['GET', 'POST'], '/change', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/change.php';
             });
+            $routes->addRoute(['GET', 'POST'], '/find_replace', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/find_replace.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/operations', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/operations.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/search', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/select.php';
             });
@@ -153,6 +159,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             });
             $routes->addRoute(['GET', 'POST'], '/triggers', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/triggers.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/zoom_select', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/zoom_select.php';
             });
         });
     });
