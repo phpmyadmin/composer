@@ -1838,7 +1838,7 @@ class Privileges
             $row = $GLOBALS['dbi']->fetchSingleRow(
                 'SELECT @@default_authentication_plugin'
             );
-            $authentication_plugin = $row['@@default_authentication_plugin'];
+            $authentication_plugin = is_array($row) ? $row['@@default_authentication_plugin'] : null;
         }
 
         return $authentication_plugin;
@@ -5130,6 +5130,7 @@ class Privileges
      */
     public static function getHashedPassword($password)
     {
+        $password = $GLOBALS['dbi']->escapeString($password);
         $result = $GLOBALS['dbi']->fetchSingleRow(
             "SELECT PASSWORD('" . $password . "') AS `password`;"
         );
