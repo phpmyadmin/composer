@@ -36,17 +36,10 @@ class Core
         'pdf_schema.php',
         'server_export.php',
         'server_import.php',
-        'tbl_addfield.php',
-        'tbl_create.php',
         'tbl_import.php',
-        'tbl_indexes.php',
         'tbl_export.php',
-        'tbl_relation.php',
-        'tbl_replace.php',
-        'tbl_row_action.php',
         'transformation_overview.php',
         'transformation_wrapper.php',
-        'user_password.php',
     ];
 
     /**

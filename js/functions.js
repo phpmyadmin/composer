@@ -629,9 +629,7 @@ Functions.displayGitRevision = function () {
 };
 
 /**
- * for PhpMyAdmin\Display\ChangePassword
- *     libraries/user_password.php
- *
+ * for PhpMyAdmin\Display\ChangePassword and /user_password
  */
 Functions.displayPasswordGenerateButton = function () {
     var generatePwdRow = $('<tr></tr>').addClass('vmiddle');
@@ -3823,7 +3821,7 @@ Functions.indexEditorDialog = function (url, title, callbackSuccess, callbackFai
         $(this).dialog('close');
     };
     var $msgbox = Functions.ajaxShowMessage();
-    $.post('tbl_indexes.php', url, function (data) {
+    $.post('index.php?route=/table/indexes', url, function (data) {
         if (typeof data !== 'undefined' && data.success === false) {
             // in the case of an error, show the error message returned.
             Functions.ajaxShowMessage(data.error, false);
@@ -4930,7 +4928,7 @@ AJAX.registerOnload('functions.js', function () {
     /*
      * Display warning regarding SSL when sha256_password
      * method is selected
-     * Used in user_password.php (Change Password link on index.php)
+     * Used in /user_password (Change Password link on index.php)
      */
     $(document).on('change', 'select#select_authentication_plugin_cp', function () {
         if (this.value === 'sha256_password') {

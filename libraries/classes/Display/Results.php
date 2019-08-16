@@ -4963,7 +4963,7 @@ class Results
 
             // prepare chart
             $results_operations_html .= Util::linkOrButton(
-                'tbl_chart.php' . Url::getCommon($_url_params),
+                Url::getFromRoute('/table/chart', $_url_params),
                 Util::getIcon(
                     'b_chart',
                     __('Display chart'),
@@ -4985,8 +4985,7 @@ class Results
             if ($geometry_found) {
                 $results_operations_html
                     .= Util::linkOrButton(
-                        'tbl_gis_visualization.php'
-                        . Url::getCommon($_url_params),
+                        Url::getFromRoute('/table/gis_visualization', $_url_params),
                         Util::getIcon(
                             'b_globe',
                             __('Visualize GIS data'),
@@ -5129,8 +5128,8 @@ class Results
         if (count($url_params) > 0
             && (! empty($tmpdb) && ! empty($meta->orgtable))
         ) {
-            $result = '<a href="tbl_get_field.php'
-                . Url::getCommon($url_params)
+            $result = '<a href="'
+                . Url::getFromRoute('/table/get_field', $url_params)
                 . '" class="disableAjax">'
                 . $result . '</a>';
         }

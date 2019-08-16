@@ -31,6 +31,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
         $routes->addRoute(['GET', 'POST'], '/browse_foreigners', function () {
             require_once ROOT_PATH . 'libraries/entry_points/browse_foreigners.php';
         });
+        $routes->addRoute('GET', '/changelog', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/changelog.php';
+        });
         $routes->addGroup('/database', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/central_columns.php';
@@ -136,14 +139,44 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             require_once ROOT_PATH . 'libraries/entry_points/sql.php';
         });
         $routes->addGroup('/table', function (RouteCollector $routes) {
+            $routes->addRoute(['GET', 'POST'], '/addfield', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/addfield.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/change', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/change.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/chart', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/chart.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/create', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/create.php';
             });
             $routes->addRoute(['GET', 'POST'], '/find_replace', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/find_replace.php';
             });
+            $routes->addRoute(['GET', 'POST'], '/get_field', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/get_field.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/gis_visualization', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/gis_visualization.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/indexes', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/indexes.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/operations', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/operations.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/recent_favorite', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/recent_favorite.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/relation', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/relation.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/replace', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/replace.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/row_action', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/row_action.php';
             });
             $routes->addRoute(['GET', 'POST'], '/search', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/select.php';
@@ -163,6 +196,12 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             $routes->addRoute(['GET', 'POST'], '/zoom_select', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/zoom_select.php';
             });
+        });
+        $routes->addRoute('GET', '/themes', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/themes.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/user_password', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/user_password.php';
         });
     });
     $routeInfo = $dispatcher->dispatch(
