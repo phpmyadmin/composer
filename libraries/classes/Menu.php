@@ -374,9 +374,10 @@ class Menu
         }
 
         $tabs['export']['icon'] = 'b_tblexport';
-        $tabs['export']['link'] = 'tbl_export.php';
+        $tabs['export']['link'] = Url::getFromRoute('/table/export');
         $tabs['export']['args']['single_table'] = 'true';
         $tabs['export']['text'] = __('Export');
+        $tabs['export']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/table/export';
 
         /**
          * Don't display "Import" for views and information_schema
@@ -488,7 +489,8 @@ class Menu
 
         $tabs['export']['text'] = __('Export');
         $tabs['export']['icon'] = 'b_export';
-        $tabs['export']['link'] = 'db_export.php';
+        $tabs['export']['link'] = Url::getFromRoute('/database/export');
+        $tabs['export']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/database/export';
         if ($num_tables == 0) {
             $tabs['export']['warning'] = __('Database seems to be empty!');
         }
@@ -615,8 +617,9 @@ class Menu
         }
 
         $tabs['export']['icon'] = 'b_export';
-        $tabs['export']['link'] = 'server_export.php';
+        $tabs['export']['link'] = Url::getFromRoute('/server/export');
         $tabs['export']['text'] = __('Export');
+        $tabs['export']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/export';
 
         $tabs['import']['icon'] = 'b_import';
         $tabs['import']['link'] = 'server_import.php';

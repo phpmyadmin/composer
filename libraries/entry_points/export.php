@@ -22,13 +22,11 @@ use PhpMyAdmin\SqlParser\Utils\Misc;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+if (! defined('PHPMYADMIN')) {
+    exit;
 }
 
 global $containerBuilder, $db, $export_type, $filename_template, $sql_query;
-
-include_once ROOT_PATH . 'libraries/common.inc.php';
 
 /** @var Response $response */
 $response = $containerBuilder->get(Response::class);
@@ -292,9 +290,9 @@ if (isset($_POST['output_format']) && $_POST['output_format'] == 'sendit' && ! $
 $tables = [];
 // Generate error url and check for needed variables
 if ($export_type == 'server') {
-    $err_url = 'server_export.php' . Url::getCommon();
+    $err_url = Url::getFromRoute('/server/export');
 } elseif ($export_type == 'database' && strlen($db) > 0) {
-    $err_url = 'db_export.php' . Url::getCommon(['db' => $db]);
+    $err_url = Url::getFromRoute('/database/export', ['db' => $db]);
     // Check if we have something to export
     if (isset($table_select)) {
         $tables = $table_select;
@@ -302,12 +300,10 @@ if ($export_type == 'server') {
         $tables = [];
     }
 } elseif ($export_type == 'table' && strlen($db) > 0 && strlen($table) > 0) {
-    $err_url = 'tbl_export.php' . Url::getCommon(
-        [
-            'db' => $db,
-            'table' => $table,
-        ]
-    );
+    $err_url = Url::getFromRoute('/table/export', [
+        'db' => $db,
+        'table' => $table,
+    ]);
 } else {
     Core::fatalError(__('Bad parameters!'));
 }
@@ -415,8 +411,8 @@ if ($save_on_server) {
                 $message = PhpMyAdmin\Message::error(
                     __('No tables found in database.')
                 );
-                $active_page = 'db_export.php';
-                include ROOT_PATH . 'db_export.php';
+                $active_page = Url::getFromRoute('/database/export');
+                include ROOT_PATH . 'libraries/entry_points/database/export.php';
                 exit;
             }
         }

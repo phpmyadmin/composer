@@ -47,6 +47,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             $routes->addRoute(['GET', 'POST'], '/events', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/events.php';
             });
+            $routes->addRoute(['GET', 'POST'], '/export', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/database/export.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/multi_table_query', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/multi_table_query.php';
             });
@@ -83,6 +86,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 require_once ROOT_PATH . 'libraries/entry_points/database/triggers.php';
             });
         });
+        $routes->addRoute(['GET', 'POST'], '/export', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/export.php';
+        });
         $routes->addGroup('/server', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/binlog', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/binlog.php';
@@ -95,6 +101,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             });
             $routes->addRoute('GET', '/engines', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/engines.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/export', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/server/export.php';
             });
             $routes->addRoute('GET', '/plugins', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/plugins.php';
@@ -150,6 +159,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             });
             $routes->addRoute(['GET', 'POST'], '/create', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/create.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/export', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/export.php';
             });
             $routes->addRoute(['GET', 'POST'], '/find_replace', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/find_replace.php';
@@ -247,7 +259,6 @@ unset($drops, $each_drop);
  */
 $target_blacklist =  [
     'import.php',
-    'export.php',
 ];
 
 // If we have a valid target, let's load that script instead
