@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Server import page
+ * Table import
  *
  * @package PhpMyAdmin
  */
@@ -10,14 +10,13 @@ declare(strict_types=1);
 use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Display\Import;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\Url;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+if (! defined('PHPMYADMIN')) {
+    exit;
 }
 
-global $db, $max_upload_size, $table;
-
-require_once ROOT_PATH . 'libraries/common.inc.php';
+global $db, $max_upload_size, $table, $url_query, $url_params;
 
 PageSettings::showGroup('Import');
 
@@ -26,17 +25,20 @@ $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('import.js');
 
-/**
- * Does the common work
- */
-require ROOT_PATH . 'libraries/server_common.inc.php';
-
 $import = new Import();
 
-$response = Response::getInstance();
+/**
+ * Gets tables information and displays top links
+ */
+require_once ROOT_PATH . 'libraries/tbl_common.inc.php';
+
+$url_params['goto'] = Url::getFromRoute('/table/import');
+$url_params['back'] = Url::getFromRoute('/table/import');
+$url_query .= Url::getCommon($url_params, '&');
+
 $response->addHTML(
     $import::get(
-        'server',
+        'table',
         $db,
         $table,
         $max_upload_size

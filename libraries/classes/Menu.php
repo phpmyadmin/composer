@@ -384,8 +384,9 @@ class Menu
          */
         if (! $tbl_is_view && ! $db_is_system_schema) {
             $tabs['import']['icon'] = 'b_tblimport';
-            $tabs['import']['link'] = 'tbl_import.php';
+            $tabs['import']['link'] = Url::getFromRoute('/table/import');
             $tabs['import']['text'] = __('Import');
+            $tabs['import']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/table/import';
         }
         if (($is_superuser || $isCreateOrGrantUser)
             && ! $db_is_system_schema
@@ -623,20 +624,18 @@ class Menu
         $tabs['export']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/export';
 
         $tabs['import']['icon'] = 'b_import';
-        $tabs['import']['link'] = 'server_import.php';
+        $tabs['import']['link'] = Url::getFromRoute('/server/import');
         $tabs['import']['text'] = __('Import');
+        $tabs['import']['active'] = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/import';
 
-        $tabs['settings']['icon']   = 'b_tblops';
-        $tabs['settings']['link']   = 'prefs_manage.php';
-        $tabs['settings']['text']   = __('Settings');
-        $tabs['settings']['active'] = in_array(
-            basename($GLOBALS['PMA_PHP_SELF']),
-            [
-                'prefs_forms.php',
-                'prefs_manage.php',
-                'prefs_twofactor.php',
-            ]
-        );
+        $tabs['settings']['icon'] = 'b_tblops';
+        $tabs['settings']['link'] = Url::getFromRoute('/preferences/manage');
+        $tabs['settings']['text'] = __('Settings');
+        $tabs['settings']['active'] = isset($_REQUEST['route']) && in_array($_REQUEST['route'], [
+            '/preferences/forms',
+            '/preferences/manage',
+            '/preferences/twofactor',
+        ]);
 
         if (! empty($binary_logs)) {
             $tabs['binlog']['icon'] = 's_tbl';

@@ -34,6 +34,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
         $routes->addRoute('GET', '/changelog', function () {
             require_once ROOT_PATH . 'libraries/entry_points/changelog.php';
         });
+        $routes->addRoute(['GET', 'POST'], '/check_relations', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/chk_rel.php';
+        });
         $routes->addGroup('/database', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/database/central_columns.php';
@@ -89,8 +92,49 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
                 require_once ROOT_PATH . 'libraries/entry_points/database/triggers.php';
             });
         });
+        $routes->addRoute(['GET', 'POST'], '/error_report', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/error_report.php';
+        });
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/export.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/gis_data_editor', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/gis_data_editor.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/import', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/import.php';
+        });
+        $routes->addRoute('GET', '/license', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/license.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/lint', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/lint.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/logout', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/logout.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/navigation', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/navigation.php';
+        });
+        $routes->addRoute(['GET', 'POST'], '/normalization', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/normalization.php';
+        });
+        $routes->addRoute('GET', '/phpinfo', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/phpinfo.php';
+        });
+        $routes->addGroup('/preferences', function (RouteCollector $routes) {
+            $routes->addRoute(['GET', 'POST'], '/forms', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/preferences/forms.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/manage', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/preferences/manage.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/twofactor', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/preferences/twofactor.php';
+            });
+        });
+        $routes->addRoute(['GET', 'POST'], '/schema_export', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/schema_export.php';
         });
         $routes->addGroup('/server', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '/binlog', function () {
@@ -107,6 +151,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             });
             $routes->addRoute(['GET', 'POST'], '/export', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/export.php';
+            });
+            $routes->addRoute(['GET', 'POST'], '/import', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/server/import.php';
             });
             $routes->addRoute('GET', '/plugins', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/plugins.php';
@@ -175,6 +222,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
             $routes->addRoute(['GET', 'POST'], '/gis_visualization', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/gis_visualization.php';
             });
+            $routes->addRoute(['GET', 'POST'], '/import', function () {
+                require_once ROOT_PATH . 'libraries/entry_points/table/import.php';
+            });
             $routes->addRoute(['GET', 'POST'], '/indexes', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/table/indexes.php';
             });
@@ -218,6 +268,9 @@ if (isset($_GET['route']) || isset($_POST['route'])) {
         $routes->addRoute(['GET', 'POST'], '/user_password', function () {
             require_once ROOT_PATH . 'libraries/entry_points/user_password.php';
         });
+        $routes->addRoute(['GET', 'POST'], '/version_check', function () {
+            require_once ROOT_PATH . 'libraries/entry_points/version_check.php';
+        });
     });
     $routeInfo = $dispatcher->dispatch(
         $_SERVER['REQUEST_METHOD'],
@@ -256,19 +309,10 @@ foreach ($drops as $each_drop) {
 }
 unset($drops, $each_drop);
 
-/**
- * Black list of all scripts to which front-end must submit data.
- * Such scripts must not be loaded on home page.
- */
-$target_blacklist =  [
-    'import.php',
-];
-
 // If we have a valid target, let's load that script instead
 if (! empty($_REQUEST['target'])
     && is_string($_REQUEST['target'])
     && 0 !== strpos($_REQUEST['target'], "index")
-    && ! in_array($_REQUEST['target'], $target_blacklist)
     && Core::checkPageValidity($_REQUEST['target'], [], true)
 ) {
     include ROOT_PATH . $_REQUEST['target'];

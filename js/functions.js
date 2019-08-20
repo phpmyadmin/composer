@@ -1833,7 +1833,7 @@ AJAX.registerOnload('functions.js', function () {
         var fkCheck = $(this).parent().find('#fk_checks').is(':checked');
 
         var $form = $('a.inline_edit_sql').prev('form');
-        var $fakeForm = $('<form>', { action: 'import.php', method: 'post' })
+        var $fakeForm = $('<form>', { action: 'index.php?route=/import', method: 'post' })
             .append($form.find('input[name=server], input[name=db], input[name=table], input[name=token]').clone())
             .append($('<input>', { type: 'hidden', name: 'show_query', value: 1 }))
             .append($('<input>', { type: 'hidden', name: 'is_js_confirmed', value: 0 }))
@@ -4126,7 +4126,7 @@ AJAX.registerOnload('functions.js', function () {
     if ($('li.jsversioncheck').length > 0) {
         $.ajax({
             dataType: 'json',
-            url: 'version_check.php',
+            url: 'index.php?route=/version_check',
             method: 'POST',
             data: {
                 'server': CommonParams.get('server')
@@ -4844,7 +4844,7 @@ Functions.ignorePhpErrors = function (clearPrevErrors) {
     ) {
         clearPrevious = false;
     }
-    // send AJAX request to error_report.php with send_error_report=0, exception_type=php & token.
+    // send AJAX request to /error_report with send_error_report=0, exception_type=php & token.
     // It clears the prev_errors stored in session.
     if (clearPrevious) {
         var $pmaReportErrorsForm = $('#pma_report_errors_form');

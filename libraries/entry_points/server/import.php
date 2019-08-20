@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Table import
+ * Server import page
  *
  * @package PhpMyAdmin
  */
@@ -11,13 +11,11 @@ use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Display\Import;
 use PhpMyAdmin\Response;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+if (! defined('PHPMYADMIN')) {
+    exit;
 }
 
-global $db, $max_upload_size, $table, $url_query;
-
-require_once ROOT_PATH . 'libraries/common.inc.php';
+global $db, $max_upload_size, $table;
 
 PageSettings::showGroup('Import');
 
@@ -26,17 +24,17 @@ $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('import.js');
 
+/**
+ * Does the common work
+ */
+require ROOT_PATH . 'libraries/server_common.inc.php';
+
 $import = new Import();
 
-/**
- * Gets tables information and displays top links
- */
-require_once ROOT_PATH . 'libraries/tbl_common.inc.php';
-$url_query .= '&amp;goto=tbl_import.php&amp;back=tbl_import.php';
-
+$response = Response::getInstance();
 $response->addHTML(
     $import::get(
-        'table',
+        'server',
         $db,
         $table,
         $max_upload_size

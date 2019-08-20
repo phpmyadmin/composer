@@ -26,12 +26,9 @@ class Core
      * @static array $goto_whitelist
      */
     public static $goto_whitelist = [
-        'import.php',
         'index.php',
         'pdf_pages.php',
         'pdf_schema.php',
-        'server_import.php',
-        'tbl_import.php',
         'transformation_overview.php',
         'transformation_wrapper.php',
     ];
