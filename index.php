@@ -8,8 +8,8 @@
 declare(strict_types=1);
 
 use FastRoute\Dispatcher;
-use PhpMyAdmin\Core;
 use PhpMyAdmin\Message;
+use PhpMyAdmin\Response;
 
 use function FastRoute\simpleDispatcher;
 
@@ -17,56 +17,44 @@ if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
+global $containerBuilder, $route;
+
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-if (isset($_GET['route']) || isset($_POST['route'])) {
-    $routes = require ROOT_PATH . 'libraries/routes.php';
-    $dispatcher = simpleDispatcher($routes);
-    $routeInfo = $dispatcher->dispatch(
-        $_SERVER['REQUEST_METHOD'],
-        rawurldecode($_GET['route'] ?? $_POST['route'])
-    );
-    if ($routeInfo[0] === Dispatcher::NOT_FOUND) {
-        Message::error(sprintf(
-            __('Error 404! The page %s was not found.'),
-            '<code>' . ($_GET['route'] ?? $_POST['route']) . '</code>'
-        ))->display();
-        exit;
-    } elseif ($routeInfo[0] === Dispatcher::METHOD_NOT_ALLOWED) {
-        Message::error(__('Error 405! Request method not allowed.'))->display();
-        exit;
-    } elseif ($routeInfo[0] === Dispatcher::FOUND) {
-        $handler = $routeInfo[1];
-        $handler($routeInfo[2]);
-        exit;
-    }
-}
+/** @var string $route */
+$route = $_GET['route'] ?? $_POST['route'] ?? '/';
 
 /**
- * pass variables to child pages
+ * See FAQ 1.34.
+ * @see https://docs.phpmyadmin.net/en/latest/faq.html#faq1-34
  */
-$drops = [
-    'lang',
-    'server',
-    'collation_connection',
-    'db',
-    'table',
-];
-foreach ($drops as $each_drop) {
-    if (array_key_exists($each_drop, $_GET)) {
-        unset($_GET[$each_drop]);
+if (($route === '/' || $route === '') && isset($_GET['db']) && mb_strlen($_GET['db']) !== 0) {
+    $route = '/database/structure';
+    if (isset($_GET['table']) && mb_strlen($_GET['table']) !== 0) {
+        $route = '/sql';
     }
 }
-unset($drops, $each_drop);
 
-// If we have a valid target, let's load that script instead
-if (! empty($_REQUEST['target'])
-    && is_string($_REQUEST['target'])
-    && 0 !== strpos($_REQUEST['target'], "index")
-    && Core::checkPageValidity($_REQUEST['target'], [], true)
-) {
-    include ROOT_PATH . $_REQUEST['target'];
-    exit;
+$routes = require ROOT_PATH . 'libraries/routes.php';
+$dispatcher = simpleDispatcher($routes);
+$routeInfo = $dispatcher->dispatch(
+    $_SERVER['REQUEST_METHOD'],
+    rawurldecode($route)
+);
+if ($routeInfo[0] === Dispatcher::NOT_FOUND) {
+    /** @var Response $response */
+    $response = $containerBuilder->get(Response::class);
+    $response->setHttpResponseCode(404);
+    Message::error(sprintf(
+        __('Error 404! The page %s was not found.'),
+        '<code>' . ($route) . '</code>'
+    ))->display();
+} elseif ($routeInfo[0] === Dispatcher::METHOD_NOT_ALLOWED) {
+    /** @var Response $response */
+    $response = $containerBuilder->get(Response::class);
+    $response->setHttpResponseCode(405);
+    Message::error(__('Error 405! Request method not allowed.'))->display();
+} elseif ($routeInfo[0] === Dispatcher::FOUND) {
+    $handler = $routeInfo[1];
+    $handler($routeInfo[2]);
 }
-
-require_once ROOT_PATH . 'libraries/entry_points/home.php';

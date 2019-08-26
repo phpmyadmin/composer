@@ -36,28 +36,13 @@ if (isset($_POST['set_theme'])) {
         'set_theme' => $_POST['set_theme'],
     ]);
 
-    header('Location: index.php' . Url::getCommonRaw());
+    header('Location: index.php?route=/' . Url::getCommonRaw([], '&'));
 } elseif (isset($_POST['collation_connection'])) {
     $controller->setCollationConnection([
         'collation_connection' => $_POST['collation_connection'],
     ]);
 
-    header('Location: index.php' . Url::getCommonRaw());
-} elseif (! empty($_REQUEST['db'])) {
-    // See FAQ 1.34
-    $page = null;
-    if (! empty($_REQUEST['table'])) {
-        $page = Util::getScriptNameForOption(
-            $GLOBALS['cfg']['DefaultTabTable'],
-            'table'
-        );
-    } else {
-        $page = Util::getScriptNameForOption(
-            $GLOBALS['cfg']['DefaultTabDatabase'],
-            'database'
-        );
-    }
-    include ROOT_PATH . $page;
+    header('Location: index.php?route=/' . Url::getCommonRaw([], '&'));
 } elseif ($response->isAjax() && ! empty($_REQUEST['recent_table'])) {
     $response->addJSON($controller->reloadRecentTablesList());
 } elseif ($GLOBALS['PMA_Config']->isGitRevision()
