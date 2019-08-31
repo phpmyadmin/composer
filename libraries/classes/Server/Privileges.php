@@ -644,7 +644,6 @@ class Privileges
         $table = '*',
         $submit = true
     ) {
-        $html_output = '';
         $sql_query = '';
 
         if ($db == '*') {
@@ -715,9 +714,10 @@ class Privileges
             }
             unset($res, $row1);
         }
-        // table-specific privileges
+
+        $tablePrivileges = '';
         if (! empty($columns)) {
-            $html_output .= $this->getHtmlForTableSpecificPrivileges(
+            $tablePrivileges = $this->getHtmlForTableSpecificPrivileges(
                 $username,
                 $hostname,
                 $db,
@@ -725,22 +725,16 @@ class Privileges
                 $columns,
                 $row
             );
-        } else {
-            // global or db-specific
-            $html_output .= $this->template->render('server/privileges/global_db_specific_privileges', [
-                'is_global' => $db === '*',
-                'is_database' => $table === '*',
-                'row' => $row,
-            ]);
         }
-        if ($submit) {
-            $html_output .= '<fieldset id="fieldset_user_privtable_footer" '
-                . 'class="tblFooters">' . "\n"
-                . '<input type="hidden" name="update_privs" value="1">' . "\n"
-                . '<input class="btn btn-primary" type="submit" value="' . __('Go') . '">' . "\n"
-                . '</fieldset>' . "\n";
-        }
-        return $html_output;
+
+        return $this->template->render('server/privileges/privileges_table', [
+            'is_table' => ! empty($columns),
+            'table_privileges' => $tablePrivileges,
+            'is_global' => $db === '*',
+            'is_database' => $table === '*',
+            'row' => $row,
+            'has_submit' => $submit,
+        ]);
     }
 
     /**
@@ -874,59 +868,10 @@ class Privileges
         }
         $this->dbi->freeResult($res);
 
-        $notAttachedPrivileges = $this->getNotAttachedPrivilegesToTableSpecificColumn($row);
-
         return $this->template->render('server/privileges/table_specific_privileges', [
             'row' => $row,
             'columns' => $columns,
-            'privileges' => $notAttachedPrivileges,
         ]);
-    }
-
-    /**
-     * Get privileges that are not attached to a specific column
-     *
-     * @param array $row first row from result or boolean false
-     *
-     * @return array
-     */
-    private function getNotAttachedPrivilegesToTableSpecificColumn(array $row): array
-    {
-        $privileges = [];
-        foreach ($row as $grant => $value) {
-            $type = substr($grant, 0, -5);
-            if (in_array($type, ['Select', 'Insert', 'Update', 'References'])) {
-                continue;
-            }
-
-            /**
-             * Make a substitution to match the messages variables;
-             * also we must substitute the grant we get, because we can't generate
-             * a form variable containing blanks (those would get changed to
-             * an underscore when receiving the POST).
-             */
-            if ($grant === 'Create View_priv') {
-                $grantName = 'CreateView_priv';
-                $grant = 'Create_view_priv';
-            } elseif ($grant === 'Show view_priv') {
-                $grantName = 'ShowView_priv';
-                $grant = 'Show_view_priv';
-            } elseif ($grant === 'Delete versioning rows_priv') {
-                $grantName = 'DeleteHistoricalRows_priv';
-                $grant = 'Delete_history_priv';
-            } else {
-                $grantName = $grant;
-            }
-            $descriptionName = 'strPrivDesc' . mb_substr($grantName, 0, -5);
-
-            $privileges[] = [
-                'grant' => $grant,
-                'is_checked' => $value === 'Y',
-                'name' => mb_strtoupper(mb_substr($grant, 0, -5)),
-                'description' => $GLOBALS[$descriptionName] ?? $GLOBALS[$descriptionName . 'Tbl'] ?? '',
-            ];
-        }
-        return $privileges;
     }
 
     /**
