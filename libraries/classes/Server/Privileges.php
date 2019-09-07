@@ -144,24 +144,6 @@ class Privileges
             . $this->dbi->escapeString(mb_strtolower($initial))
             . "%'";
         return $ret;
-    } // end function
-
-    /**
-     * Formats privilege name for a display
-     *
-     * @param array   $privilege Privilege information
-     * @param boolean $html      Whether to use HTML
-     *
-     * @return string
-     */
-    public function formatPrivilege(array $privilege, $html)
-    {
-        if ($html) {
-            return '<dfn title="' . $privilege[2] . '">'
-                . $privilege[1] . '</dfn>';
-        }
-
-        return $privilege[1];
     }
 
     /**
@@ -238,7 +220,12 @@ class Privileges
                     && count($GLOBALS[$current_grant[0]]) == $_REQUEST['column_count']
                     && empty($GLOBALS[$current_grant[0] . '_none']))))
                 ) {
-                    $privs[] = $this->formatPrivilege($current_grant, $enableHTML);
+                    if ($enableHTML) {
+                        $privs[] = '<dfn title="' . $current_grant[2] . '">'
+                        . $current_grant[1] . '</dfn>';
+                    } else {
+                        $privs[] = $current_grant[1];
+                    }
                 } elseif (! empty($GLOBALS[$current_grant[0]])
                     && is_array($GLOBALS[$current_grant[0]])
                     && empty($GLOBALS[$current_grant[0] . '_none'])
@@ -251,8 +238,14 @@ class Privileges
                         $GLOBALS[$current_grant[0]]
                     );
 
-                    $privs[] = $this->formatPrivilege($current_grant, $enableHTML)
-                        . ' (' . implode(', ', $grant_cols) . ')';
+                    if ($enableHTML) {
+                        $privs[] = '<dfn title="' . $current_grant[2] . '">'
+                            . $current_grant[1] . '</dfn>'
+                            . ' (' . implode(', ', $grant_cols) . ')';
+                    } else {
+                        $privs[] = $current_grant[1]
+                            . ' (' . implode(', ', $grant_cols) . ')';
+                    }
                 } else {
                     $allPrivileges = false;
                 }
@@ -2702,59 +2695,18 @@ class Privileges
             $user_group_count = $this->getUserGroupCount();
         }
 
-        $html_output
-            = '<form name="usersForm" id="usersForm" action="' . Url::getFromRoute('/server/privileges')
-            . '" method="post">' . "\n"
-            . Url::getHiddenInputs('', '')
-            . '<div class="responsivetable row">'
-            . '<table id="tableuserrights" class="data">' . "\n"
-            . '<thead>' . "\n"
-            . '<tr><th></th>' . "\n"
-            . '<th>' . __('User name') . '</th>' . "\n"
-            . '<th>' . __('Host name') . '</th>' . "\n"
-            . '<th>' . __('Password') . '</th>' . "\n"
-            . '<th>' . __('Global privileges') . ' '
-            . Util::showHint(
-                __('Note: MySQL privilege names are expressed in English.')
-            )
-            . '</th>' . "\n";
-        if ($GLOBALS['cfgRelation']['menuswork']) {
-            $html_output .= '<th>' . __('User group') . '</th>' . "\n";
-        }
-        $html_output .= '<th>' . __('Grant') . '</th>' . "\n"
-            . '<th colspan="' . ($user_group_count > 0 ? '3' : '2') . '">'
-            . __('Action') . '</th>' . "\n"
-            . '</tr>' . "\n"
-            . '</thead>' . "\n";
+        $userRights = $this->getHtmlTableBodyForUserRights($db_rights);
+        $addUser = $this->getAddUserHtmlFieldset();
 
-        $html_output .= '<tbody>' . "\n";
-        $html_output .= $this->getHtmlTableBodyForUserRights($db_rights);
-        $html_output .= '</tbody>'
-            . '</table></div>' . "\n";
-
-        $html_output .= '<div class="floatleft row">'
-            . $this->template->render('select_all', [
-                'pma_theme_image' => $pmaThemeImage,
-                'text_dir' => $text_dir,
-                'form_name' => 'usersForm',
-            ]) . "\n";
-        $html_output .= Util::getButtonOrImage(
-            'submit_mult',
-            'mult_submit',
-            __('Export'),
-            'b_tblexport',
-            'export'
-        );
-        $html_output .= '<input type="hidden" name="initial" '
-            . 'value="' . (isset($_GET['initial']) ? htmlspecialchars($_GET['initial']) : '') . '">';
-        $html_output .= '</div>'
-            . '<div class="clearfloat"></div>';
-
-        // add/delete user fieldset
-        $html_output .= $this->getFieldsetForAddDeleteUser();
-        $html_output .= '</form>' . "\n";
-
-        return $html_output;
+        return $this->template->render('server/privileges/users_overview', [
+            'menus_work' => $GLOBALS['cfgRelation']['menuswork'],
+            'user_group_count' => $user_group_count,
+            'user_rights' => $userRights,
+            'pma_theme_image' => $pmaThemeImage,
+            'text_dir' => $text_dir,
+            'initial' => $_GET['initial'] ?? '',
+            'add_user' => $addUser,
+        ]);
     }
 
     /**
@@ -2895,20 +2847,6 @@ class Privileges
                 $html_output .= '</tr>';
             }
         }
-        return $html_output;
-    }
-
-    /**
-     * Get HTML fieldset for Add/Delete user
-     *
-     * @return string HTML snippet
-     */
-    public function getFieldsetForAddDeleteUser()
-    {
-        $html_output = $this->getAddUserHtmlFieldset();
-
-        $html_output .= $this->template->render('server/privileges/delete_user_fieldset');
-
         return $html_output;
     }
 
