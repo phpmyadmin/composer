@@ -543,6 +543,9 @@ function Toggle_fullscreen () {
         value_sent = 'on';
         $content.fullScreen(true);
     } else {
+        $img.attr('src', $img.data('enter'))
+            .attr('title', $span.data('enter'));
+        $span.text($span.data('enter'));
         $content.fullScreen(false);
         value_sent = 'off';
     }
@@ -623,6 +626,7 @@ function Add_Other_db_tables () {
             var dbEncoded = $($newTableDom).find('.small_tab_pref').attr('db_url');
             var tableEncoded = $($newTableDom).find('.small_tab_pref').attr('table_name_url');
             j_tabs[dbEncoded + '.' + tableEncoded] = 1;
+            MarkUnsaved();
         });
         $(this).dialog('close');
     };
@@ -814,7 +818,7 @@ function submitSaveDialogAndClose (callback) {
 }
 
 function Save3 (callback) {
-    if (parseInt(selected_page) !== -1) {
+    if (selected_page !== -1) {
         Save2(callback);
     } else {
         var button_options = {};
@@ -1023,7 +1027,7 @@ function Save_as () {
                     if (data.id) {
                         selected_page = data.id;
                     }
-                    $('#page_name').text(name);
+                    Load_page(selected_page);
                 }
             }); // end $.post()
         } else {
@@ -1035,7 +1039,7 @@ function Save_as () {
                     if (page.pg_nr) {
                         selected_page = page.pg_nr;
                     }
-                    $('#page_name').text(page.page_descr);
+                    Load_page(selected_page);
                 });
             } else if (choice === 'new') {
                 Save_to_new_page(db, name, Get_url_pos(), function (page) {
@@ -1044,7 +1048,7 @@ function Save_as () {
                     if (page.pg_nr) {
                         selected_page = page.pg_nr;
                     }
-                    $('#page_name').text(page.page_descr);
+                    Load_page(selected_page);
                 });
             }
         }
@@ -1086,7 +1090,7 @@ function Save_as () {
                     }
                 });
             // select current page by default
-            if (selected_page !== '-1') {
+            if (selected_page !== -1) {
                 $('select[name="selected_page"]').val(selected_page);
             }
         }
@@ -1094,7 +1098,7 @@ function Save_as () {
 }
 
 function Prompt_to_save_current_page (callback) {
-    if (_change === 1 || selected_page === '-1') {
+    if (_change === 1 || selected_page === -1) {
         var button_options = {};
         button_options[PMA_messages.strYes] = function () {
             $(this).dialog('close');
@@ -2119,7 +2123,7 @@ AJAX.registerOnload('designer/move.js', function () {
         return false;
     });
     $('#reloadPage').click(function () {
-        $('#designer_tab').click();
+        Load_page(selected_page);
     });
     $('#angular_direct_button').click(function () {
         Angular_direct();
