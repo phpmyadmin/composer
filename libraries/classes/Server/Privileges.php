@@ -1373,26 +1373,16 @@ class Privileges
      */
     public function getHtmlForSpecificDbPrivileges(string $db): string
     {
-        global $cfg, $pmaThemeImage, $text_dir, $is_createuser;
+        global $cfg, $pmaThemeImage, $text_dir, $is_createuser, $is_grantuser;
 
         $scriptName = Util::getScriptNameForOption(
             $cfg['DefaultTabDatabase'],
             'database'
         );
 
-        $tableBody = '';
+        $privileges = [];
         if ($this->dbi->isSuperuser()) {
-            $privileges = $this->getDatabasePrivileges($db);
-
-            $routinePrivileges = $this->getRoutinesPrivileges($db);
-            foreach ($routinePrivileges as $user => $hosts) {
-                foreach ($hosts as $host => $privs) {
-                    $privileges[$user] = $privileges[$user] ?? [];
-                    $privileges[$user][$host] = array_merge($privileges[$user][$host] ?? [], $privs);
-                }
-            }
-
-            $tableBody = $this->getHtmlTableBodyForSpecificDbOrTablePrivs($privileges, $db);
+            $privileges = $this->getAllPrivileges($db);
         }
 
         $response = Response::getInstance();
@@ -1410,61 +1400,79 @@ class Privileges
             'database_url' => $scriptName,
             'pma_theme_image' => $pmaThemeImage,
             'text_dir' => $text_dir,
-            'table_body' => $tableBody,
             'is_createuser' => $is_createuser,
+            'is_grantuser' => $is_grantuser,
+            'privileges' => $privileges,
         ]);
     }
 
     /**
-     * Get the HTML for user form and check the privileges for a particular table.
-     *
      * @param string $db    database name
      * @param string $table table name
      *
-     * @return string
+     * @return array
      */
-    public function getHtmlForSpecificTablePrivileges(string $db, string $table): string
+    public function getAllPrivileges(string $db, string $table = ''): array
     {
-        global $cfg, $pmaThemeImage, $text_dir, $is_createuser;
-
-        $scriptName = Util::getScriptNameForOption(
-            $cfg['DefaultTabTable'],
-            'table'
-        );
-
-        $tableBody = '';
-        if ($this->dbi->isSuperuser()) {
-            $privileges = $this->getDatabasePrivileges($db);
-
+        $privileges = [];
+        $databasePrivileges = $this->getGlobalAndDatabasePrivileges($db);
+        $tablePrivileges = [];
+        if ($table !== '') {
             $tablePrivileges = $this->getTablePrivileges($db, $table);
-            foreach ($tablePrivileges as $user => $hosts) {
-                foreach ($hosts as $host => $privs) {
-                    $privileges[$user] = $privileges[$user] ?? [];
-                    $privileges[$user][$host] = array_merge($privileges[$user][$host] ?? [], $privs);
-                }
-            }
-
-            $routinePrivileges = $this->getRoutinesPrivileges($db);
-            foreach ($routinePrivileges as $user => $hosts) {
-                foreach ($hosts as $host => $privs) {
-                    $privileges[$user] = $privileges[$user] ?? [];
-                    $privileges[$user][$host] = array_merge($privileges[$user][$host] ?? [], $privs);
-                }
-            }
-
-            $tableBody = $this->getHtmlTableBodyForSpecificDbOrTablePrivs($privileges, $db);
         }
+        $routinePrivileges = $this->getRoutinesPrivileges($db);
+        $allPrivileges = array_merge($databasePrivileges, $tablePrivileges, $routinePrivileges);
 
-        return $this->template->render('server/privileges/table', [
-            'db' => $db,
-            'table' => $table,
-            'is_superuser' => $this->dbi->isSuperuser(),
-            'table_url' => $scriptName,
-            'pma_theme_image' => $pmaThemeImage,
-            'text_dir' => $text_dir,
-            'table_body' => $tableBody,
-            'is_createuser' => $is_createuser,
-        ]);
+        foreach ($allPrivileges as $priv) {
+            $privilege = [
+                'type' => $priv['Type'],
+                'database' => $priv['Db'],
+            ];
+            if ($priv['Type'] === 'r') {
+                $privilege['routine'] = $priv['Routine_name'];
+                $privilege['has_grant'] = strpos(
+                    $priv['Proc_priv'],
+                    'Grant'
+                ) !== false;
+                $privilege['privileges'] = explode(',', $priv['Proc_priv']);
+            } elseif ($priv['Type'] === 't') {
+                $privilege['table'] = $priv['Table_name'];
+                $privilege['has_grant'] = strpos(
+                    $priv['Table_priv'],
+                    'Grant'
+                ) !== false;
+                $tablePrivs = explode(',', $priv['Table_priv']);
+                $specificPrivileges = [];
+                $grantsArr = $this->getTableGrantsArray();
+                foreach ($grantsArr as $grant) {
+                    $specificPrivileges[$grant[0]] = 'N';
+                    foreach ($tablePrivs as $tablePriv) {
+                        if ($grant[0] == $tablePriv) {
+                            $specificPrivileges[$grant[0]] = 'Y';
+                        }
+                    }
+                }
+                $privilege['privileges'] = $this->extractPrivInfo(
+                    $specificPrivileges,
+                    true,
+                    true
+                );
+            } else {
+                $privilege['has_grant'] = $priv['Grant_priv'] === 'Y';
+                $privilege['privileges'] = $this->extractPrivInfo(
+                    $priv,
+                    true
+                );
+            }
+
+            $userHost = $priv['User'] . '@' . $priv['Host'];
+            $privileges[$userHost] = $privileges[$userHost] ?? [];
+            $privileges[$userHost]['user'] = $priv['User'];
+            $privileges[$userHost]['host'] = $priv['Host'];
+            $privileges[$userHost]['privileges'] = $privileges[$userHost]['privileges'] ?? [];
+            $privileges[$userHost]['privileges'][] = $privilege;
+        }
+        return $privileges;
     }
 
     /**
@@ -1472,7 +1480,7 @@ class Privileges
      *
      * @return array
      */
-    private function getDatabasePrivileges(string $db): array
+    private function getGlobalAndDatabasePrivileges(string $db): array
     {
         $listOfPrivileges = '`Select_priv`,
             `Insert_priv`,
@@ -1533,9 +1541,7 @@ class Privileges
 
         $privileges = [];
         while ($row = $this->dbi->fetchAssoc($result)) {
-            $privileges[$row['User']] = $privileges[$row['User']] ?? [];
-            $privileges[$row['User']][$row['Host']] = $privileges[$row['User']][$row['Host']] ?? [];
-            $privileges[$row['User']][$row['Host']][] = $row;
+            $privileges[] = $row;
         }
         return $privileges;
     }
@@ -1564,9 +1570,7 @@ class Privileges
 
         $privileges = [];
         while ($row = $this->dbi->fetchAssoc($result)) {
-            $privileges[$row['User']] = $privileges[$row['User']] ?? [];
-            $privileges[$row['User']][$row['Host']] = $privileges[$row['User']][$row['Host']] ?? [];
-            $privileges[$row['User']][$row['Host']][] = $row;
+            $privileges[] = $row;
         }
         return $privileges;
     }
@@ -1579,7 +1583,7 @@ class Privileges
     private function getRoutinesPrivileges(string $db): array
     {
         $query = '
-            SELECT *, \'r\' AS `Type`, \'Y\' AS `Grant_priv`
+            SELECT *, \'r\' AS `Type`
             FROM `mysql`.`procs_priv`
             WHERE Db = \'' . $this->dbi->escapeString($db) . '\';
         ';
@@ -1590,9 +1594,7 @@ class Privileges
 
         $privileges = [];
         while ($row = $this->dbi->fetchAssoc($result)) {
-            $privileges[$row['User']] = $privileges[$row['User']] ?? [];
-            $privileges[$row['User']][$row['Host']] = $privileges[$row['User']][$row['Host']] ?? [];
-            $privileges[$row['User']][$row['Host']][] = $row;
+            $privileges[] = $row;
         }
         return $privileges;
     }
@@ -1608,211 +1610,6 @@ class Privileges
         return Message::error(
             __('Not enough privilege to view users.')
         )->getDisplay();
-    }
-
-    /**
-     * Get HTML snippet for table body of specific database or table privileges
-     *
-     * @param array  $privMap privilege map
-     * @param string $db      database
-     *
-     * @return string
-     */
-    public function getHtmlTableBodyForSpecificDbOrTablePrivs($privMap, $db)
-    {
-        $html_output = '<tbody>';
-        $index_checkbox = 0;
-        if (empty($privMap)) {
-            $html_output .= '<tr>'
-                . '<td colspan="6">'
-                . __('No user found.')
-                . '</td>'
-                . '</tr>'
-                . '</tbody>';
-            return $html_output;
-        }
-
-        foreach ($privMap as $current_user => $val) {
-            foreach ($val as $current_host => $current_privileges) {
-                $nbPrivileges = count($current_privileges);
-                $html_output .= '<tr>';
-
-                $value = htmlspecialchars($current_user . '&amp;#27;' . $current_host);
-                $html_output .= '<td';
-                if ($nbPrivileges > 1) {
-                    $html_output .= ' rowspan="' . $nbPrivileges . '"';
-                }
-                $html_output .= '>';
-                $html_output .= '<input type="checkbox" class="checkall" '
-                    . 'name="selected_usr[]" '
-                    . 'id="checkbox_sel_users_' . ($index_checkbox++) . '" '
-                    . 'value="' . $value . '"></td>' . "\n";
-
-                // user
-                $html_output .= '<td';
-                if ($nbPrivileges > 1) {
-                    $html_output .= ' rowspan="' . $nbPrivileges . '"';
-                }
-                $html_output .= '>';
-                if (empty($current_user)) {
-                    $html_output .= '<span style="color: #FF0000">'
-                        . __('Any') . '</span>';
-                } else {
-                    $html_output .= htmlspecialchars($current_user);
-                }
-                $html_output .= '</td>';
-
-                // host
-                $html_output .= '<td';
-                if ($nbPrivileges > 1) {
-                    $html_output .= ' rowspan="' . $nbPrivileges . '"';
-                }
-                $html_output .= '>';
-                $html_output .= htmlspecialchars($current_host);
-                $html_output .= '</td>';
-
-                $html_output .= $this->getHtmlListOfPrivs(
-                    $db,
-                    $current_privileges,
-                    $current_user,
-                    $current_host
-                );
-            }
-        }
-        $html_output .= '</tbody>';
-
-        return $html_output;
-    }
-
-    /**
-     * Get HTML to display privileges
-     *
-     * @param string $db                 Database name
-     * @param array  $current_privileges List of privileges
-     * @param string $current_user       Current user
-     * @param string $current_host       Current host
-     *
-     * @return string HTML to display privileges
-     */
-    public function getHtmlListOfPrivs(
-        $db,
-        array $current_privileges,
-        $current_user,
-        $current_host
-    ) {
-        $nbPrivileges = count($current_privileges);
-        $html_output = null;
-        for ($i = 0; $i < $nbPrivileges; $i++) {
-            $current = $current_privileges[$i];
-
-            // type
-            $html_output .= '<td>';
-            if ($current['Type'] == 'g') {
-                $html_output .= __('global');
-            } elseif ($current['Type'] == 'd') {
-                if ($current['Db'] == Util::escapeMysqlWildcards($db)) {
-                    $html_output .= __('database-specific');
-                } else {
-                    $html_output .= __('wildcard') . ': '
-                        . '<code>'
-                        . htmlspecialchars($current['Db'])
-                        . '</code>';
-                }
-            } elseif ($current['Type'] == 't') {
-                $html_output .= __('table-specific');
-            } elseif ($current['Type'] == 'r') {
-                $html_output .= __('routine');
-            }
-            $html_output .= '</td>';
-
-            // privileges
-            $html_output .= '<td>';
-            if (isset($current['Routine_name'])) {
-                $html_output .= '<code>';
-                $html_output .= htmlspecialchars($current['Routine_name']);
-                $html_output .= ' (';
-                $html_output .= strtoupper(htmlspecialchars($current['Proc_priv']));
-                $html_output .= ')</code>';
-            } elseif (isset($current['Table_name'])) {
-                $privList = explode(',', $current['Table_priv']);
-                $privs = [];
-                $grantsArr = $this->getTableGrantsArray();
-                foreach ($grantsArr as $grant) {
-                    $privs[$grant[0]] = 'N';
-                    foreach ($privList as $priv) {
-                        if ($grant[0] == $priv) {
-                            $privs[$grant[0]] = 'Y';
-                        }
-                    }
-                }
-                $html_output .= '<code>'
-                    . implode(
-                        ',',
-                        $this->extractPrivInfo($privs, true, true)
-                    )
-                    . '</code>';
-            } else {
-                $html_output .= '<code>'
-                    . implode(
-                        ',',
-                        $this->extractPrivInfo($current, true, false)
-                    )
-                    . '</code>';
-            }
-            $html_output .= '</td>';
-
-            // grant
-            $html_output .= '<td>';
-            $containsGrant = false;
-            if (isset($current['Table_name'])) {
-                $privList = explode(',', $current['Table_priv']);
-                foreach ($privList as $priv) {
-                    if ($priv == 'Grant') {
-                        $containsGrant = true;
-                    }
-                }
-            } else {
-                $containsGrant = $current['Grant_priv'] == 'Y';
-            }
-            $html_output .= ($containsGrant ? __('Yes') : __('No'));
-            $html_output .= '</td>';
-
-            // action
-            $html_output .= '<td>';
-            $specific_db = isset($current['Db']) && $current['Db'] != '*'
-                ? $current['Db'] : '';
-            $specific_table = isset($current['Table_name'])
-                && $current['Table_name'] != '*'
-                ? $current['Table_name'] : '';
-            $specificRoutine = $current['Routine_name'] ?? '';
-            if ($GLOBALS['is_grantuser']) {
-                $html_output .= $this->getUserLink(
-                    'edit',
-                    $current_user,
-                    $current_host,
-                    $specific_db,
-                    $specific_table,
-                    $specificRoutine
-                );
-            }
-            $html_output .= '</td>';
-            $html_output .= '<td class="center">'
-                . $this->getUserLink(
-                    'export',
-                    $current_user,
-                    $current_host,
-                    $specific_db,
-                    $specific_table,
-                    $specificRoutine
-                )
-                . '</td>';
-
-            $html_output .= '</tr>';
-            if (($i + 1) < $nbPrivileges) {
-                $html_output .= '<tr class="noclick">';
-            }
-        }
-        return $html_output;
     }
 
     /**
