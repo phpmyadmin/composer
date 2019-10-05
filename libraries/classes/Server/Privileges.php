@@ -1800,73 +1800,6 @@ class Privileges
     }
 
     /**
-     * Get the HTML snippet for change user login information
-     *
-     * @param string $username username
-     * @param string $hostname host name
-     *
-     * @return string HTML snippet
-     */
-    public function getChangeLoginInformationHtmlForm($username, $hostname)
-    {
-        $choices = [
-            '4' => __('… keep the old one.'),
-            '1' => __('… delete the old one from the user tables.'),
-            '2' => __(
-                '… revoke all active privileges from '
-                . 'the old one and delete it afterwards.'
-            ),
-            '3' => __(
-                '… delete the old one from the user tables '
-                . 'and reload the privileges afterwards.'
-            ),
-        ];
-
-        $html_output = '<form action="' . Url::getFromRoute('/server/privileges')
-            . '" onsubmit="return checkAddUser(this);" '
-            . 'method="post" class="copyUserForm submenu-item">' . "\n"
-            . Url::getHiddenInputs('', '')
-            . '<input type="hidden" name="old_username" '
-            . 'value="' . htmlspecialchars($username) . '">' . "\n"
-            . '<input type="hidden" name="old_hostname" '
-            . 'value="' . htmlspecialchars($hostname) . '">' . "\n";
-
-        $usergroup = $this->getUserGroupForUser($username);
-        if ($usergroup !== null) {
-            $html_output .= '<input type="hidden" name="old_usergroup" '
-            . 'value="' . htmlspecialchars($usergroup) . '">' . "\n";
-        }
-
-        $html_output .= '<fieldset id="fieldset_change_copy_user">' . "\n"
-            . '<legend data-submenu-label="' . __('Login Information') . '">' . "\n"
-            . __('Change login information / Copy user account')
-            . '</legend>' . "\n"
-            . $this->getHtmlForLoginInformationFields('change', $username, $hostname);
-
-        $html_output .= '<fieldset id="fieldset_mode">' . "\n"
-            . ' <legend>'
-            . __('Create a new user account with the same privileges and …')
-            . '</legend>' . "\n";
-        $html_output .= Util::getRadioFields(
-            'mode',
-            $choices,
-            '4',
-            true
-        );
-        $html_output .= '</fieldset>' . "\n"
-           . '</fieldset>' . "\n";
-
-        $html_output .= '<fieldset id="fieldset_change_copy_user_footer" '
-            . 'class="tblFooters">' . "\n"
-            . '<input type="hidden" name="change_copy" value="1">' . "\n"
-            . '<input class="btn btn-primary" type="submit" value="' . __('Go') . '">' . "\n"
-            . '</fieldset>' . "\n"
-            . '</form>' . "\n";
-
-        return $html_output;
-    }
-
-    /**
      * Provide a line with links to the relevant database and table
      *
      * @param string $url_dbname url database name that urlencode() string
@@ -3372,7 +3305,8 @@ class Privileges
         }
 
         $changePassword = '';
-        $changeLoginInformation = '';
+        $userGroup = '';
+        $changeLoginInfoFields = '';
         if (! is_array($dbname) && strlen($dbname) === 0 && ! $user_does_not_exists) {
             //change login information
             $changePassword = ChangePassword::getHtml(
@@ -3380,7 +3314,8 @@ class Privileges
                 $username,
                 $hostname
             );
-            $changeLoginInformation = $this->getChangeLoginInformationHtmlForm($username, $hostname);
+            $userGroup = $this->getUserGroupForUser($username);
+            $changeLoginInfoFields = $this->getHtmlForLoginInformationFields('change', $username, $hostname);
         }
 
         return $this->template->render('server/privileges/user_properties', [
@@ -3391,7 +3326,6 @@ class Privileges
             'table_specific_rights' => $tableSpecificRights,
             'link_to_database_and_table' => $linkToDatabaseAndTable,
             'change_password' => $changePassword,
-            'change_login_information' => $changeLoginInformation,
             'database' => $dbname,
             'dbname' => $url_dbname,
             'username' => $username,
@@ -3399,6 +3333,8 @@ class Privileges
             'is_databases' => $dbname_is_wildcard || is_array($dbname) && count($dbname) > 1,
             'table' => $tablename,
             'current_user' => $this->dbi->getCurrentUser(),
+            'user_group' => $userGroup,
+            'change_login_info_fields' => $changeLoginInfoFields,
         ]);
     }
 
