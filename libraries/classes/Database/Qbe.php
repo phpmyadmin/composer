@@ -1372,7 +1372,7 @@ class Qbe
 
         // Now let's find out which of the tables has an index
         // (When the control user is the same as the normal user
-        // because he is using one of his databases as pmadb,
+        // because they are using one of their databases as pmadb,
         // the last db selected is not always the one where we need to work)
         $candidate_columns = $this->_getLeftJoinColumnCandidates(
             $search_tables,
@@ -1801,7 +1801,7 @@ class Qbe
         $html_output .= Url::getHiddenInputs(['db' => $this->_db]);
         // get SQL query
         $html_output .= '<div class="floatleft desktop50">';
-        $html_output .= '<fieldset>';
+        $html_output .= '<fieldset id="tblQbe">';
         $html_output .= '<legend>'
             . sprintf(
                 __('SQL query on database <b>%s</b>:'),
@@ -1821,7 +1821,7 @@ class Qbe
         $html_output .= '</textarea>';
         $html_output .= '</fieldset>';
         // displays form's footers
-        $html_output .= '<fieldset class="tblFooters">';
+        $html_output .= '<fieldset class="tblFooters" id="tblQbeFooters">';
         $html_output .= '<input type="hidden" name="submit_sql" value="1">';
         $html_output .= '<input class="btn btn-primary" type="submit" value="' . __('Submit Query') . '">';
         $html_output .= '</fieldset>';
