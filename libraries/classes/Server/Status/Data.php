@@ -193,14 +193,11 @@ class Data
         $links['Slow_queries']['doc'] = 'slow_query_log';
 
         $links['innodb'][__('Variables')] = [
-            'url' => Url::getFromRoute('/server/engines', ['engine' => 'InnoDB']),
+            'url' => Url::getFromRoute('/server/engines/InnoDB'),
             'params' => '',
         ];
         $links['innodb'][__('InnoDB Status')] = [
-            'url' => Url::getFromRoute('/server/engines', [
-                'engine' => 'InnoDB',
-                'page' => 'Status',
-            ]),
+            'url' => Url::getFromRoute('/server/engines/InnoDB/Status'),
             'params' => '',
         ];
         $links['innodb']['doc'] = 'innodb';
@@ -316,6 +313,12 @@ class Data
      */
     public function __construct()
     {
+        global $replication_info;
+
+        if (! isset($replication_info)) {
+            require_once ROOT_PATH . 'libraries/replication.inc.php';
+        }
+
         $this->selfUrl = basename($GLOBALS['PMA_PHP_SELF']);
 
         // get status from server

@@ -7,7 +7,14 @@ declare(strict_types=1);
 
 use FastRoute\RouteCollector;
 use PhpMyAdmin\Controllers\Server\BinlogController;
+use PhpMyAdmin\Controllers\Server\CollationsController;
 use PhpMyAdmin\Controllers\Server\DatabasesController;
+use PhpMyAdmin\Controllers\Server\EnginesController;
+use PhpMyAdmin\Controllers\Server\PluginsController;
+use PhpMyAdmin\Controllers\Server\SqlController;
+use PhpMyAdmin\Controllers\Server\Status\AdvisorController;
+use PhpMyAdmin\Controllers\Server\Status\MonitorController;
+use PhpMyAdmin\Controllers\Server\Status\StatusController;
 use PhpMyAdmin\Response;
 
 global $containerBuilder;
@@ -138,20 +145,20 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/binlog', function () use ($containerBuilder, $response) {
             /** @var BinlogController $controller */
             $controller = $containerBuilder->get(BinlogController::class);
-
             $response->addHTML($controller->index([
                 'log' => $_POST['log'] ?? null,
                 'pos' => $_POST['pos'] ?? null,
                 'is_full_query' => $_POST['is_full_query'] ?? null,
             ]));
         });
-        $routes->addRoute('GET', '/collations', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/collations.php';
+        $routes->addRoute('GET', '/collations', function () use ($containerBuilder, $response) {
+            /** @var CollationsController $controller */
+            $controller = $containerBuilder->get(CollationsController::class);
+            $response->addHTML($controller->index());
         });
         $routes->addGroup('/databases', function (RouteCollector $routes) use ($containerBuilder, $response) {
             /** @var DatabasesController $controller */
             $controller = $containerBuilder->get(DatabasesController::class);
-
             $routes->addRoute(['GET', 'POST'], '', function () use ($response, $controller) {
                 $response->addHTML($controller->index([
                     'statistics' => $_REQUEST['statistics'] ?? null,
@@ -173,8 +180,15 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
                 ]));
             });
         });
-        $routes->addRoute('GET', '/engines', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/engines.php';
+        $routes->addGroup('/engines', function (RouteCollector $routes) use ($containerBuilder, $response) {
+            /** @var EnginesController $controller */
+            $controller = $containerBuilder->get(EnginesController::class);
+            $routes->addRoute('GET', '', function () use ($response, $controller) {
+                $response->addHTML($controller->index());
+            });
+            $routes->addRoute('GET', '/{engine}[/{page}]', function (array $vars) use ($response, $controller) {
+                $response->addHTML($controller->show($vars));
+            });
         });
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/server/export.php';
@@ -182,8 +196,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/import', function () {
             require_once ROOT_PATH . 'libraries/entry_points/server/import.php';
         });
-        $routes->addRoute('GET', '/plugins', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/plugins.php';
+        $routes->addRoute('GET', '/plugins', function () use ($containerBuilder, $response) {
+            /** @var PluginsController $controller */
+            $controller = $containerBuilder->get(PluginsController::class);
+            $response->addHTML($controller->index());
         });
         $routes->addRoute(['GET', 'POST'], '/privileges', function () {
             require_once ROOT_PATH . 'libraries/entry_points/server/privileges.php';
@@ -191,18 +207,59 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/replication', function () {
             require_once ROOT_PATH . 'libraries/entry_points/server/replication.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/sql', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/sql.php';
+        $routes->addRoute(['GET', 'POST'], '/sql', function () use ($containerBuilder, $response) {
+            /** @var SqlController $controller */
+            $controller = $containerBuilder->get(SqlController::class);
+            $response->addHTML($controller->index());
         });
-        $routes->addGroup('/status', function (RouteCollector $routes) {
-            $routes->addRoute('GET', '', function () {
-                require_once ROOT_PATH . 'libraries/entry_points/server/status.php';
+        $routes->addGroup('/status', function (RouteCollector $routes) use ($containerBuilder, $response) {
+            $routes->addRoute('GET', '', function () use ($containerBuilder, $response) {
+                /** @var StatusController $controller */
+                $controller = $containerBuilder->get(StatusController::class);
+                $response->addHTML($controller->index());
             });
-            $routes->addRoute('GET', '/advisor', function () {
-                require_once ROOT_PATH . 'libraries/entry_points/server/status/advisor.php';
+            $routes->addRoute('GET', '/advisor', function () use ($containerBuilder, $response) {
+                /** @var AdvisorController $controller */
+                $controller = $containerBuilder->get(AdvisorController::class);
+                $response->addHTML($controller->index());
             });
-            $routes->addRoute(['GET', 'POST'], '/monitor', function () {
-                require_once ROOT_PATH . 'libraries/entry_points/server/status/monitor.php';
+            $routes->addGroup('/monitor', function (RouteCollector $routes) use ($containerBuilder, $response) {
+                /** @var MonitorController $controller */
+                $controller = $containerBuilder->get(MonitorController::class);
+                $routes->addRoute('GET', '', function () use ($response, $controller) {
+                    $response->addHTML($controller->index());
+                });
+                $routes->addRoute('POST', '/chart', function () use ($response, $controller) {
+                    $response->addJSON($controller->chartingData([
+                        'requiredData' => $_POST['requiredData'] ?? null,
+                    ]));
+                });
+                $routes->addRoute('POST', '/slow-log', function () use ($response, $controller) {
+                    $response->addJSON($controller->logDataTypeSlow([
+                        'time_start' => $_POST['time_start'] ?? null,
+                        'time_end' => $_POST['time_end'] ?? null,
+                    ]));
+                });
+                $routes->addRoute('POST', '/general-log', function () use ($response, $controller) {
+                    $response->addJSON($controller->logDataTypeGeneral([
+                        'time_start' => $_POST['time_start'] ?? null,
+                        'time_end' => $_POST['time_end'] ?? null,
+                        'limitTypes' => $_POST['limitTypes'] ?? null,
+                        'removeVariables' => $_POST['removeVariables'] ?? null,
+                    ]));
+                });
+                $routes->addRoute('POST', '/log-vars', function () use ($response, $controller) {
+                    $response->addJSON($controller->loggingVars([
+                        'varName' => $_POST['varName'] ?? null,
+                        'varValue' => $_POST['varValue'] ?? null,
+                    ]));
+                });
+                $routes->addRoute('POST', '/query', function () use ($response, $controller) {
+                    $response->addJSON($controller->queryAnalyzer([
+                        'database' => $_POST['database'] ?? null,
+                        'query' => $_POST['query'] ?? null,
+                    ]));
+                });
             });
             $routes->addRoute(['GET', 'POST'], '/processes', function () {
                 require_once ROOT_PATH . 'libraries/entry_points/server/status/processes.php';
