@@ -612,10 +612,9 @@ Functions.displayGitRevision = function () {
     $('#is_git_revision').remove();
     $('#li_pma_version_git').remove();
     $.get(
-        'index.php?route=/',
+        'index.php?route=/git-revision',
         {
             'server': CommonParams.get('server'),
-            'git_revision': true,
             'ajax_request': true,
             'no_debug': true
         },
@@ -5044,12 +5043,12 @@ Functions.configSet = function (key, value) {
     var serialized = JSON.stringify(value);
     localStorage.setItem(key, serialized);
     $.ajax({
-        url: 'index.php?route=/ajax',
+        url: 'index.php?route=/ajax/config-set',
         type: 'POST',
         dataType: 'json',
         data: {
+            'ajax_request': true,
             key: key,
-            type: 'config-set',
             server: CommonParams.get('server'),
             value: serialized,
         },
@@ -5094,11 +5093,11 @@ Functions.configGet = function (key, cached) {
         // processing cannot continue until that value is found.
         // Another solution is to provide a callback as a parameter.
         async: false,
-        url: 'index.php?route=/ajax',
+        url: 'index.php?route=/ajax/config-get',
         type: 'POST',
         dataType: 'json',
         data: {
-            type: 'config-get',
+            'ajax_request': true,
             server: CommonParams.get('server'),
             key: key
         },

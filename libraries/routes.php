@@ -6,9 +6,12 @@
 declare(strict_types=1);
 
 use FastRoute\RouteCollector;
+use PhpMyAdmin\Controllers\AjaxController;
+use PhpMyAdmin\Controllers\BrowseForeignersController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
 use PhpMyAdmin\Controllers\Database\StructureController;
+use PhpMyAdmin\Controllers\HomeController;
 use PhpMyAdmin\Controllers\Server\BinlogController;
 use PhpMyAdmin\Controllers\Server\CollationsController;
 use PhpMyAdmin\Controllers\Server\DatabasesController;
@@ -35,14 +38,61 @@ if (! defined('PHPMYADMIN')) {
 $response = $containerBuilder->get(Response::class);
 
 return function (RouteCollector $routes) use ($containerBuilder, $response) {
-    $routes->addRoute(['GET', 'POST'], '[/]', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/home.php';
+    $routes->addGroup('', function (RouteCollector $routes) use ($containerBuilder, $response) {
+        /** @var HomeController $controller */
+        $controller = $containerBuilder->get(HomeController::class);
+        $routes->addRoute(['GET', 'POST'], '[/]', function () use ($response, $controller) {
+            $response->addHTML($controller->index(['access_time' => $_REQUEST['access_time'] ?? null]));
+        });
+        $routes->post('/set-theme', function () use ($controller) {
+            $controller->setTheme(['set_theme' => $_POST['set_theme']]);
+        });
+        $routes->post('/collation-connection', function () use ($controller) {
+            $controller->setCollationConnection(['collation_connection' => $_POST['collation_connection']]);
+        });
+        $routes->addRoute(['GET', 'POST'], '/recent-table', function () use ($response, $controller) {
+            $response->addJSON($controller->reloadRecentTablesList());
+        });
+        $routes->addRoute(['GET', 'POST'], '/git-revision', function () use ($response, $controller) {
+            $response->addHTML($controller->gitRevision());
+        });
     });
-    $routes->addRoute(['GET', 'POST'], '/ajax', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/ajax.php';
+    $routes->addGroup('/ajax', function (RouteCollector $routes) use ($containerBuilder, $response) {
+        /** @var AjaxController $controller */
+        $controller = $containerBuilder->get(AjaxController::class);
+        $routes->post('/list-databases', function () use ($response, $controller) {
+            $response->addJSON($controller->databases());
+        });
+        $routes->post('/list-tables/{database}', function (array $vars) use ($response, $controller) {
+            $response->addJSON($controller->tables($vars));
+        });
+        $routes->post('/list-columns/{database}/{table}', function (array $vars) use ($response, $controller) {
+            $response->addJSON($controller->columns($vars));
+        });
+        $routes->post('/config-get', function () use ($response, $controller) {
+            $response->addJSON($controller->getConfig([
+                'key' => $_POST['key'] ?? null,
+            ]));
+        });
+        $routes->post('/config-set', function () use ($response, $controller) {
+            $response->addJSON($controller->setConfig([
+                'key' => $_POST['key'] ?? null,
+                'value' => $_POST['value'] ?? null,
+            ]));
+        });
     });
-    $routes->addRoute(['GET', 'POST'], '/browse_foreigners', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/browse_foreigners.php';
+    $routes->addRoute(['GET', 'POST'], '/browse-foreigners', function () use ($containerBuilder, $response) {
+        /** @var BrowseForeignersController $controller */
+        $controller = $containerBuilder->get(BrowseForeignersController::class);
+        $response->addHTML($controller->index([
+            'db' => $_POST['db'] ?? null,
+            'table' => $_POST['table'] ?? null,
+            'field' => $_POST['field'] ?? null,
+            'fieldkey' => $_POST['fieldkey'] ?? null,
+            'data' => $_POST['data'] ?? null,
+            'foreign_showAll' => $_POST['foreign_showAll'] ?? null,
+            'foreign_filter' => $_POST['foreign_filter'] ?? null,
+        ]));
     });
     $routes->get('/changelog', function () {
         require_once ROOT_PATH . 'libraries/entry_points/changelog.php';
