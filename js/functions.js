@@ -4,7 +4,7 @@
 /* global DatabaseStructure */ // js/database/structure.js
 /* global mysqlDocBuiltin, mysqlDocKeyword */ // js/doclinks.js
 /* global Indexes */ // js/indexes.js
-/* global maxInputVars, mysqlDocTemplate, pmaThemeImage */ // js/messages.php
+/* global firstDayOfCalendar, maxInputVars, mysqlDocTemplate, pmaThemeImage */ // js/messages.php
 /* global MicroHistory */ // js/microhistory.js
 /* global checkPasswordStrength */ // js/server/privileges.js
 /* global sprintf */ // js/vendor/sprintf.js
@@ -214,7 +214,8 @@ Functions.addDateTimePicker = function () {
                 showMillisec: showMillisec,
                 showMicrosec: showMicrosec,
                 timeFormat: timeFormat,
-                hourMax: hourMax
+                hourMax: hourMax,
+                firstDay: firstDayOfCalendar
             });
             // Add a tip regarding entering MySQL allowed-values
             // for TIME and DATE data-type
@@ -4842,7 +4843,7 @@ Functions.ignorePhpErrors = function (clearPrevErrors) {
     ) {
         clearPrevious = false;
     }
-    // send AJAX request to /error_report with send_error_report=0, exception_type=php & token.
+    // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
     // It clears the prev_errors stored in session.
     if (clearPrevious) {
         var $pmaReportErrorsForm = $('#pma_report_errors_form');

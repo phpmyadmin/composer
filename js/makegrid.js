@@ -1,3 +1,5 @@
+/* global firstDayOfCalendar */ // js/messages.php
+
 /**
  * Create advanced table (resize, reorder, and show/hide columns; and also grid editing).
  * This function is designed mainly for table DOM generated from browsing a table in the database.
@@ -1076,7 +1078,8 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
                     Functions.addDatepicker($inputField, $td.attr('data-type'), {
                         showMillisec: showMillisec,
                         showMicrosec: showMicrosec,
-                        timeFormat: timeFormat
+                        timeFormat: timeFormat,
+                        firstDay: firstDayOfCalendar
                     });
 
                     $inputField.on('keyup', function (e) {

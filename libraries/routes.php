@@ -8,9 +8,13 @@ declare(strict_types=1);
 use FastRoute\RouteCollector;
 use PhpMyAdmin\Controllers\AjaxController;
 use PhpMyAdmin\Controllers\BrowseForeignersController;
+use PhpMyAdmin\Controllers\ChangeLogController;
+use PhpMyAdmin\Controllers\CheckRelationsController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
 use PhpMyAdmin\Controllers\Database\StructureController;
+use PhpMyAdmin\Controllers\ErrorReportController;
+use PhpMyAdmin\Controllers\GisDataEditorController;
 use PhpMyAdmin\Controllers\HomeController;
 use PhpMyAdmin\Controllers\Server\BinlogController;
 use PhpMyAdmin\Controllers\Server\CollationsController;
@@ -94,11 +98,19 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             'foreign_filter' => $_POST['foreign_filter'] ?? null,
         ]));
     });
-    $routes->get('/changelog', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/changelog.php';
+    $routes->get('/changelog', function () use ($containerBuilder) {
+        /** @var ChangeLogController $controller */
+        $controller = $containerBuilder->get(ChangeLogController::class);
+        $controller->index();
     });
-    $routes->addRoute(['GET', 'POST'], '/check_relations', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/chk_rel.php';
+    $routes->addRoute(['GET', 'POST'], '/check-relations', function () use ($containerBuilder, $response) {
+        /** @var CheckRelationsController $controller */
+        $controller = $containerBuilder->get(CheckRelationsController::class);
+        $response->addHTML($controller->index([
+            'create_pmadb' => $_POST['create_pmadb'] ?? null,
+            'fixall_pmadb' => $_POST['fixall_pmadb'] ?? null,
+            'fix_pmadb' => $_POST['fix_pmadb'] ?? null,
+        ]));
     });
     $routes->addGroup('/database', function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
@@ -198,14 +210,18 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             require_once ROOT_PATH . 'libraries/entry_points/database/triggers.php';
         });
     });
-    $routes->addRoute(['GET', 'POST'], '/error_report', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/error_report.php';
+    $routes->addRoute(['GET', 'POST'], '/error-report', function () use ($containerBuilder) {
+        /** @var ErrorReportController $controller */
+        $controller = $containerBuilder->get(ErrorReportController::class);
+        $controller->index();
     });
     $routes->addRoute(['GET', 'POST'], '/export', function () {
         require_once ROOT_PATH . 'libraries/entry_points/export.php';
     });
-    $routes->addRoute(['GET', 'POST'], '/gis_data_editor', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/gis_data_editor.php';
+    $routes->addRoute(['GET', 'POST'], '/gis-data-editor', function () use ($containerBuilder, $response) {
+        /** @var GisDataEditorController $controller */
+        $controller = $containerBuilder->get(GisDataEditorController::class);
+        $response->addJSON($controller->index());
     });
     $routes->addRoute(['GET', 'POST'], '/import', function () {
         require_once ROOT_PATH . 'libraries/entry_points/import.php';
