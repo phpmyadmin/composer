@@ -57,7 +57,6 @@ class InsertTest extends TestBase
         }
         $this->waitAjax();
         $this->expandMore();
-        $this->maximize();
 
         $this->byPartialLinkText("Insert")->click();
         $this->waitAjax();
@@ -85,7 +84,7 @@ class InsertTest extends TestBase
         $this->byId("buttonYes")->click();
         $this->waitAjax();
 
-        $ele = $this->waitForElement('className', "success");
+        $ele = $this->waitForElement('className', "alert-success");
         $this->assertStringContainsString("2 rows inserted", $ele->getText());
 
         // shorter date to prevent error,
@@ -104,7 +103,7 @@ class InsertTest extends TestBase
         // New message
         $ele = $this->waitForElement(
             'xpath',
-            "//div[contains(@class, 'success') and not(contains(@class, 'message'))]"
+            "//div[contains(@class, 'alert-success') and not(contains(@class, 'message'))]"
         );
         $this->assertStringContainsString("1 row inserted", $ele->getText());
 

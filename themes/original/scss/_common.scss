@@ -23,18 +23,6 @@ body {
   margin: 0 0.5em;
 }
 
-.desktop50 {
-  width: 50%;
-}
-
-.all100 {
-  width: 100%;
-}
-
-.all85 {
-  width: 85%;
-}
-
 .auth_config_tbl {
   margin: 0 auto;
 }
@@ -220,11 +208,6 @@ table {
 th.left,
 td.left {
   text-align: $left;
-}
-
-th.center,
-td.center {
-  text-align: center;
 }
 
 th.right,
@@ -486,87 +469,6 @@ td .icon {
 #pma_footer {
   position: relative;
   padding: 0 0.5em;
-}
-
-.success h1,
-.notice h1 {
-  border-bottom: 2px solid;
-  font-weight: bold;
-  text-align: $left;
-  margin: 0 0 0.2em 0;
-}
-
-div {
-  &.error h1 {
-    border-bottom: 2px solid;
-    font-weight: bold;
-    text-align: $left;
-    margin: 0 0 0.2em 0;
-  }
-
-  &.success,
-  &.notice,
-  &.error {
-    margin: 0.3em 0 0 0;
-    border: 2px solid;
-    background-repeat: no-repeat;
-    clear: both;
-
-    @if $direction == rtl {
-      background-position: 99% 50%;
-      padding: 0.1em 40px 0.1em 0.1em;
-    } @else {
-      background-position: 10px 50%;
-      padding: 0.1em 0.1em 0.1em 42px;
-    }
-  }
-
-  &.success img.icon,
-  &.notice img.icon,
-  &.error img.icon {
-    display: block;
-    float: $left;
-    margin-#{$left}: -22px;
-  }
-}
-
-.success {
-  color: #000;
-  background-color: #f0fff0;
-}
-
-h1.success,
-div.success,
-.success h1 {
-  border-color: #0f0;
-}
-
-.notice {
-  color: #000;
-  background-color: #ffd;
-}
-
-h1.notice,
-div.notice,
-.notice h1 {
-  border-color: #ffd700;
-}
-
-.error {
-  background-color: #ffc;
-  color: #f00;
-}
-
-h1.error {
-  border-color: #f00;
-}
-
-div.error {
-  border-color: #f00;
-
-  h1 {
-    border-color: #f00;
-  }
 }
 
 .confirmation {
@@ -2797,7 +2699,6 @@ div#page_content div {
     }
   }
 
-  &.notice,
   &.result_query {
     margin-top: 1em;
   }
@@ -3684,11 +3585,6 @@ body {
     display: none;
   }
 
-  .width100,
-  .desktop50 {
-    width: 100%;
-  }
-
   .width96 {
     width: 96% !important;
   }
@@ -3760,20 +3656,4 @@ body {
 
 #filter_query_text {
   vertical-align: baseline;
-}
-
-// Bootstrap
-
-.card {
-  border-top: none;
-  border-bottom: none;
-  border-#{$right}: none;
-}
-
-.card-header {
-  padding-top: 0.1em;
-  padding-bottom: 0.1em;
-  font-weight: bold;
-  font-size: 120%;
-  border: 0;
 }

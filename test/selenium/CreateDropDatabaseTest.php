@@ -28,7 +28,6 @@ class CreateDropDatabaseTest extends TestBase
         parent::setUp();
         /* TODO: For now this tests needs superuser for deleting database */
         $this->skipIfNotSuperUser();
-        $this->maximize();
         $this->login();
     }
 
@@ -92,7 +91,7 @@ class CreateDropDatabaseTest extends TestBase
 
         $this->waitForElement(
             'cssSelector',
-            "span.ajax_notification div.success"
+            "span.ajax_notification .alert-success"
         );
 
         $result = $this->dbQuery(

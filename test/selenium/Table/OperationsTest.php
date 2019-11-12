@@ -55,7 +55,6 @@ class OperationsTest extends TestBase
             'xpath',
             "//legend[contains(., 'Table maintenance')]"
         );
-        $this->maximize();
     }
 
     /**
@@ -81,7 +80,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'Your SQL query has been executed successfully')]"
         );
 
@@ -113,7 +112,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'Table `" . $this->database_name
             . "`.`test_table` has been "
             . "moved to `" . $this->database_name . "`.`test_table2`.')]"
@@ -148,7 +147,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'Table test_table has been renamed to test_table2')]"
         );
 
@@ -178,7 +177,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'Table `" . $this->database_name
             . "`.`test_table` has been "
             . "copied to `" . $this->database_name . "`.`test_table2`.')]"
@@ -209,7 +208,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'MySQL returned an empty result set')]"
         );
 
@@ -238,7 +237,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and "
+            "//div[@class='alert alert-success' and "
             . "contains(., 'MySQL returned an empty result set')]"
         );
 

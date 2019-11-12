@@ -52,7 +52,6 @@ class StructureTest extends TestBase
         // Let the Database page load
         $this->waitAjax();
         $this->expandMore();
-        $this->maximize();
     }
 
     /**
@@ -74,7 +73,7 @@ class StructureTest extends TestBase
         $this->assertNotNull(
             $this->waitForElement(
                 'xpath',
-                "//div[@class='success' and contains(., "
+                "//div[@class='alert alert-success' and contains(., "
                 . "'MySQL returned an empty result')]"
             )
         );

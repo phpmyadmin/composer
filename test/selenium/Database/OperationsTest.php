@@ -40,7 +40,6 @@ class OperationsTest extends TestBase
 
         $this->navigateDatabase($this->database_name);
         $this->expandMore();
-        $this->maximize();
         $this->waitForElement('partialLinkText', 'Operations')->click();
         $this->waitForElement(
             'xpath',
@@ -135,7 +134,7 @@ class OperationsTest extends TestBase
 
         $this->waitForElement(
             'xpath',
-            "//div[@class='success' and contains(., 'Database "
+            "//div[@class='alert alert-success' and contains(., 'Database "
             . $this->database_name
             . " has been copied to $new_db_name')]"
         );

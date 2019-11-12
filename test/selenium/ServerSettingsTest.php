@@ -28,7 +28,6 @@ class ServerSettingsTest extends TestBase
         parent::setUp();
         $this->login();
         $this->expandMore();
-        $this->maximize();
         $this->waitForElement('partialLinkText', "Settings")->click();
         $this->waitAjax();
 
@@ -56,7 +55,7 @@ class ServerSettingsTest extends TestBase
 
         $this->waitUntilElementIsPresent(
             'xpath',
-            "//div[@class='success' and contains(., 'Configuration has been saved')]",
+            "//div[@class='alert alert-success' and contains(., 'Configuration has been saved')]",
             5000
         );
     }
