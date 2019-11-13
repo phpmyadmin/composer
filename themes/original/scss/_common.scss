@@ -11,12 +11,10 @@ textarea {
 }
 
 body {
-  font-family: $font-family;
   padding: 0;
   margin: 0;
   margin-#{$left}: 240px;
   color: $main-color;
-  background: $main-background;
 }
 
 #page_content {
@@ -31,7 +29,7 @@ textarea,
 tt,
 pre,
 code {
-  font-family: $font-family-fixed;
+  font-family: $font-family-monospace;
 }
 
 h1 {
@@ -390,7 +388,7 @@ table {
 }
 
 .value {
-  font-family: $font-family-fixed;
+  font-family: $font-family-monospace;
 }
 
 .attention {
@@ -838,7 +836,7 @@ ul {
 
     a.tab:hover,
     .tabactive {
-      background-color: $main-background;
+      background-color: $body-bg;
     }
   }
 
@@ -853,7 +851,7 @@ ul {
   }
 
   &#topmenu > li.active {
-    border-bottom: 1pt solid $main-background;
+    border-bottom: 1pt solid $body-bg;
   }
 }
 
@@ -984,7 +982,7 @@ div#tablestatistics table {
 #textSQLDUMP {
   width: 95%;
   height: 95%;
-  font-family: $font-family-fixed;
+  font-family: $font-family-monospace;
   font-size: 110%;
 }
 
@@ -2259,7 +2257,7 @@ input#auto_increment_opt {
   position: fixed;
   top: 44px;
   width: 100%;
-  background: $main-background;
+  background: $body-bg;
 }
 
 #table_columns {
