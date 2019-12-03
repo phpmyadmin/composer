@@ -54,11 +54,14 @@ $bg-two: #d5d5d5;
 // Body
 
 $body-bg: #f5f5f5;
+$body-color: $main-color;
 
 // Typography
 
 $font-family-base: sans-serif;
 $font-family-monospace: monospace;
+
+$font-size-base: 0.82rem;
 
 // Card
 
@@ -67,6 +70,15 @@ $card-border-width: 0.3em;
 $card-border-color: $th-background;
 $card-cap-bg: $th-background;
 $card-bg: none;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0.1rem;
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-bg: white;
+$breadcrumb-divider-color: inherit;
+$breadcrumb-divider: quote("»");
+$breadcrumb-border-radius: 0;
 
 // Alert
 

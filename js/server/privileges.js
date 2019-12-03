@@ -8,15 +8,11 @@
  *
  */
 
-/* global checkboxesSel */ // js/functions.js
-/* global zxcvbn */ // js/vendor/zxcvbn.js
-
 /**
  * Validates the "add a user" form
  *
  * @return boolean  whether the form is validated or not
  */
-// eslint-disable-next-line no-unused-vars
 function checkAddUser (theForm) {
     if (theForm.elements.pred_hostname.value === 'userdefined' && theForm.elements.hostname.value === '') {
         alert(Messages.strHostEmpty);
@@ -31,36 +27,6 @@ function checkAddUser (theForm) {
     }
 
     return Functions.checkPassword($(theForm));
-} // end of the 'checkAddUser()' function
-
-function checkPasswordStrength (value, meterObject, meterObjectLabel, username) {
-    // List of words we don't want to appear in the password
-    var customDict = [
-        'phpmyadmin',
-        'mariadb',
-        'mysql',
-        'php',
-        'my',
-        'admin',
-    ];
-    if (username !== null) {
-        customDict.push(username);
-    }
-    var zxcvbnObject = zxcvbn(value, customDict);
-    var strength = zxcvbnObject.score;
-    strength = parseInt(strength);
-    meterObject.val(strength);
-    switch (strength) {
-    case 0: meterObjectLabel.html(Messages.strExtrWeak);
-        break;
-    case 1: meterObjectLabel.html(Messages.strVeryWeak);
-        break;
-    case 2: meterObjectLabel.html(Messages.strWeak);
-        break;
-    case 3: meterObjectLabel.html(Messages.strGood);
-        break;
-    case 4: meterObjectLabel.html(Messages.strStrong);
-    }
 }
 
 /**
@@ -131,7 +97,7 @@ AJAX.registerOnload('server/privileges.js', function () {
         var meterObjLabel = $('#password_strength');
         var username = $('input[name="username"]');
         username = username.val();
-        checkPasswordStrength($(this).val(), meterObj, meterObjLabel, username);
+        Functions.checkPasswordStrength($(this).val(), meterObj, meterObjLabel, username);
     });
 
     /**
@@ -146,7 +112,7 @@ AJAX.registerOnload('server/privileges.js', function () {
     $('#text_pma_change_pw').on('keyup', function () {
         var meterObj = $('#change_password_strength_meter');
         var meterObjLabel = $('#change_password_strength');
-        checkPasswordStrength($(this).val(), meterObj, meterObjLabel, CommonParams.get('user'));
+        Functions.checkPasswordStrength($(this).val(), meterObj, meterObjLabel, CommonParams.get('user'));
     });
 
     /**
@@ -214,7 +180,7 @@ AJAX.registerOnload('server/privileges.js', function () {
                             .removeClass('odd').addClass('even');
 
                         // update the checkall checkbox
-                        $(checkboxesSel).trigger('change');
+                        $(Functions.checkboxesSel).trigger('change');
                     });
                 } else {
                     Functions.ajaxShowMessage(data.error, false);
@@ -482,7 +448,7 @@ AJAX.registerOnload('server/privileges.js', function () {
     };
 
     $('input.autofocus').trigger('focus');
-    $(checkboxesSel).trigger('change');
+    $(Functions.checkboxesSel).trigger('change');
     Functions.displayPasswordGenerateButton();
     if ($('#edit_user_dialog').length > 0) {
         addOrUpdateSubmenu();
@@ -490,4 +456,12 @@ AJAX.registerOnload('server/privileges.js', function () {
 
     var windowWidth = $(window).width();
     $('.jsresponsive').css('max-width', (windowWidth - 35) + 'px');
+
+    $('#addUsersForm').on('submit', function () {
+        return checkAddUser(this);
+    });
+
+    $('#copyUserForm').on('submit', function () {
+        return checkAddUser(this);
+    });
 });

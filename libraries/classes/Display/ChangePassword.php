@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Display;
 
+use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
@@ -51,7 +52,7 @@ class ChangePassword
 
         $is_privileges = isset($_REQUEST['route']) && $_REQUEST['route'] === '/server/privileges';
 
-        $action = Url::getFromRoute('/user_password');
+        $action = Url::getFromRoute('/user-password');
         if ($is_privileges) {
             $action = Url::getFromRoute('/server/privileges');
         }
@@ -96,7 +97,7 @@ class ChangePassword
             . __('Enter:') . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp'
             . '<input type="password" name="pma_pw" id="text_pma_change_pw" size="10" '
             . 'class="textfield"'
-            . 'onkeyup="checkPasswordStrength($(this).val(), $(\'#change_password_strength_meter\'), meter_obj_label = $(\'#change_password_strength\'), CommonParams.get(\'user\'));" '
+            . 'onkeyup="Functions.checkPasswordStrength($(this).val(), $(\'#change_password_strength_meter\'), meter_obj_label = $(\'#change_password_strength\'), CommonParams.get(\'user\'));" '
             . $chg_evt_handler . '="nopass[1].checked = true">'
             . '<span>Strength:</span> '
             . '<meter max="4" id="change_password_strength_meter" name="pw_meter"></meter> '
@@ -151,7 +152,7 @@ class ChangePassword
                             . 'or an \'<i>unencrypted connection that encrypts the '
                             . 'password using RSA</i>\'; while connecting to the server.'
                         )
-                        . Util::showMySQLDocu(
+                        . MySQLDocumentation::show(
                             'sha256-authentication-plugin'
                         )
                     )

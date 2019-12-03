@@ -86,10 +86,10 @@ class Footer
             include ROOT_PATH . 'revision-info.php';
             $message .= sprintf(
                 __('Currently running Git revision %1$s from the %2$s branch.'),
-                '<a target="_blank" rel="noopener noreferrer" href="' . $repobase . $fullrevision . '">'
-                . $revision . '</a>',
-                '<a target="_blank" rel="noopener noreferrer" href="' . $repobranchbase . $branch . '">'
-                . $branch . '</a>'
+                '<a target="_blank" rel="noopener noreferrer" href="' . htmlspecialchars($repobase . $fullrevision) . '">'
+                . htmlspecialchars($revision) . '</a>',
+                '<a target="_blank" rel="noopener noreferrer" href="' . htmlspecialchars($repobranchbase . $branch) . '">'
+                . htmlspecialchars($branch) . '</a>'
             );
         } else {
             $message .= __('Git information missing!');
@@ -214,7 +214,7 @@ class Footer
         $retval .= '<a href="' . htmlspecialchars($url) . '"'
             . ' title="' . __('Open new phpMyAdmin window') . '" target="_blank" rel="noopener noreferrer">';
         if (Util::showIcons('TabsMode')) {
-            $retval .= Util::getImage(
+            $retval .= Html\Generator::getImage(
                 'window-new',
                 __('Open new phpMyAdmin window')
             );

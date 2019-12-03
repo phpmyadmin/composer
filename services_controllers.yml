@@ -50,6 +50,16 @@ services:
       relation: '@relation'
       transformations: '@transformations'
 
+  PhpMyAdmin\Controllers\Database\DesignerController:
+    class: 'PhpMyAdmin\Controllers\Database\DesignerController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      databaseDesigner: '@designer'
+      designerCommon: '@designer_common'
+
   PhpMyAdmin\Controllers\Database\EventsController:
     class: 'PhpMyAdmin\Controllers\Database\EventsController'
     arguments:
@@ -75,8 +85,25 @@ services:
       db: '%db%'
       privileges: '@server_privileges'
 
+  PhpMyAdmin\Controllers\Database\QueryByExampleController:
+    class: 'PhpMyAdmin\Controllers\Database\QueryByExampleController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\Database\RoutinesController:
     class: 'PhpMyAdmin\Controllers\Database\RoutinesController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+
+  PhpMyAdmin\Controllers\Database\SearchController:
+    class: 'PhpMyAdmin\Controllers\Database\SearchController'
     arguments:
       response: '@response'
       dbi: '@dbi'
@@ -373,3 +400,18 @@ services:
       dbi: '@dbi'
       template: '@template'
       transformations: '@transformations'
+
+  PhpMyAdmin\Controllers\UserPasswordController:
+    class: 'PhpMyAdmin\Controllers\UserPasswordController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPassword: '@user_password'
+
+  PhpMyAdmin\Controllers\VersionCheckController:
+    class: 'PhpMyAdmin\Controllers\VersionCheckController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'

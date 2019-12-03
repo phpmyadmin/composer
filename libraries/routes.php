@@ -11,7 +11,10 @@ use PhpMyAdmin\Controllers\BrowseForeignersController;
 use PhpMyAdmin\Controllers\ChangeLogController;
 use PhpMyAdmin\Controllers\CheckRelationsController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
+use PhpMyAdmin\Controllers\Database\DesignerController;
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
+use PhpMyAdmin\Controllers\Database\QueryByExampleController;
+use PhpMyAdmin\Controllers\Database\SearchController;
 use PhpMyAdmin\Controllers\Database\StructureController;
 use PhpMyAdmin\Controllers\ErrorReportController;
 use PhpMyAdmin\Controllers\GisDataEditorController;
@@ -33,6 +36,8 @@ use PhpMyAdmin\Controllers\Server\Status\QueriesController;
 use PhpMyAdmin\Controllers\Server\Status\StatusController;
 use PhpMyAdmin\Controllers\Server\Status\VariablesController as StatusVariables;
 use PhpMyAdmin\Controllers\Server\VariablesController;
+use PhpMyAdmin\Controllers\UserPasswordController;
+use PhpMyAdmin\Controllers\VersionCheckController;
 use PhpMyAdmin\Response;
 
 global $containerBuilder;
@@ -124,8 +129,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             $controller = $containerBuilder->get(DataDictionaryController::class);
             $response->addHTML($controller->index($vars));
         });
-        $routes->addRoute(['GET', 'POST'], '/designer', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/designer.php';
+        $routes->addRoute(['GET', 'POST'], '/designer', function () use ($containerBuilder) {
+            /** @var DesignerController $controller */
+            $controller = $containerBuilder->get(DesignerController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/events', function () {
             require_once ROOT_PATH . 'libraries/entry_points/database/events.php';
@@ -158,14 +165,18 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/operations', function () {
             require_once ROOT_PATH . 'libraries/entry_points/database/operations.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/qbe', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/qbe.php';
+        $routes->addRoute(['GET', 'POST'], '/qbe', function () use ($containerBuilder) {
+            /** @var QueryByExampleController $controller */
+            $controller = $containerBuilder->get(QueryByExampleController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/routines', function () {
             require_once ROOT_PATH . 'libraries/entry_points/database/routines.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/search', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/search.php';
+        $routes->addRoute(['GET', 'POST'], '/search', function () use ($containerBuilder) {
+            /** @var SearchController $controller */
+            $controller = $containerBuilder->get(SearchController::class);
+            $controller->index();
         });
         $routes->addGroup('/sql', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', function () {
@@ -540,11 +551,15 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             require_once ROOT_PATH . 'libraries/entry_points/transformation/wrapper.php';
         });
     });
-    $routes->addRoute(['GET', 'POST'], '/user_password', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/user_password.php';
+    $routes->addRoute(['GET', 'POST'], '/user-password', function () use ($containerBuilder) {
+        /** @var UserPasswordController $controller */
+        $controller = $containerBuilder->get(UserPasswordController::class);
+        $controller->index();
     });
-    $routes->addRoute(['GET', 'POST'], '/version_check', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/version_check.php';
+    $routes->addRoute(['GET', 'POST'], '/version-check', function () use ($containerBuilder) {
+        /** @var VersionCheckController $controller */
+        $controller = $containerBuilder->get(VersionCheckController::class);
+        $controller->index();
     });
     $routes->addGroup('/view', function (RouteCollector $routes) {
         $routes->addRoute(['GET', 'POST'], '/create', function () {

@@ -6,9 +6,9 @@
 /* global Indexes */ // js/indexes.js
 /* global firstDayOfCalendar, maxInputVars, mysqlDocTemplate, pmaThemeImage */ // js/messages.php
 /* global MicroHistory */ // js/microhistory.js
-/* global checkPasswordStrength */ // js/server/privileges.js
 /* global sprintf */ // js/vendor/sprintf.js
 /* global Int32Array */ // ES6
+/* global zxcvbn */ // js/vendor/zxcvbn.js
 
 /**
  * general function, usually for data manipulation pages
@@ -472,6 +472,36 @@ Functions.prepareForAjaxRequest = function ($form) {
     }
 };
 
+Functions.checkPasswordStrength = function (value, meterObject, meterObjectLabel, username) {
+    // List of words we don't want to appear in the password
+    var customDict = [
+        'phpmyadmin',
+        'mariadb',
+        'mysql',
+        'php',
+        'my',
+        'admin',
+    ];
+    if (username !== null) {
+        customDict.push(username);
+    }
+    var zxcvbnObject = zxcvbn(value, customDict);
+    var strength = zxcvbnObject.score;
+    strength = parseInt(strength);
+    meterObject.val(strength);
+    switch (strength) {
+    case 0: meterObjectLabel.html(Messages.strExtrWeak);
+        break;
+    case 1: meterObjectLabel.html(Messages.strVeryWeak);
+        break;
+    case 2: meterObjectLabel.html(Messages.strWeak);
+        break;
+    case 3: meterObjectLabel.html(Messages.strGood);
+        break;
+    case 4: meterObjectLabel.html(Messages.strStrong);
+    }
+};
+
 /**
  * Generate a new password and copy it to the password input areas
  *
@@ -515,7 +545,7 @@ Functions.suggestPassword = function (passwordForm) {
     passwordForm.elements.pma_pw2.value = passwd.value;
     var meterObj = $jQueryPasswordForm.find('meter[name="pw_meter"]').first();
     var meterObjLabel = $jQueryPasswordForm.find('span[name="pw_strength"]').first();
-    checkPasswordStrength(passwd.value, meterObj, meterObjLabel);
+    Functions.checkPasswordStrength(passwd.value, meterObj, meterObjLabel);
     return true;
 };
 
@@ -628,7 +658,7 @@ Functions.displayGitRevision = function () {
 };
 
 /**
- * for PhpMyAdmin\Display\ChangePassword and /user_password
+ * for PhpMyAdmin\Display\ChangePassword and /user-password
  */
 Functions.displayPasswordGenerateButton = function () {
     var generatePwdRow = $('<tr></tr>').addClass('vmiddle');
@@ -1077,7 +1107,7 @@ AJAX.registerOnload('functions.js', function () {
             lastClickChecked = checked;
 
             // remember the last clicked row
-            lastClickedRow = lastClickChecked ? $table.find('tr:not(.noclick)').index($tr) : -1;
+            lastClickedRow = lastClickChecked ? $table.find('tbody tr:not(.noclick)').index($tr) : -1;
             lastShiftClickedRow = -1;
         } else {
             // handle the shift click
@@ -1103,7 +1133,7 @@ AJAX.registerOnload('functions.js', function () {
             }
 
             // handle new shift click
-            var currRow = $table.find('tr:not(.noclick)').index($tr);
+            var currRow = $table.find('tbody tr:not(.noclick)').index($tr);
             if (currRow >= lastClickedRow) {
                 start = lastClickedRow;
                 end = currRow;
@@ -1112,7 +1142,7 @@ AJAX.registerOnload('functions.js', function () {
                 end = lastClickedRow;
             }
             $tr.parent().find('tr:not(.noclick)')
-                .slice(start, end)
+                .slice(start, end + 1)
                 .addClass('marked')
                 .find(':checkbox')
                 .prop('checked', true)
@@ -4125,7 +4155,7 @@ AJAX.registerOnload('functions.js', function () {
     if ($('li.jsversioncheck').length > 0) {
         $.ajax({
             dataType: 'json',
-            url: 'index.php?route=/version_check',
+            url: 'index.php?route=/version-check',
             method: 'POST',
             data: {
                 'server': CommonParams.get('server')
@@ -4611,7 +4641,7 @@ $(function () {
                 'width': '100%',
                 'z-index': 99
             })
-            .append($('#serverinfo'))
+            .append($('#server-breadcrumb'))
             .append($('#topmenucontainer'));
         // Allow the DOM to render, then adjust the padding on the body
         setTimeout(function () {
@@ -4625,16 +4655,17 @@ $(function () {
 });
 
 /**
- * Scrolls the page to the top if clicking the serverinfo bar
+ * Scrolls the page to the top if clicking the server-breadcrumb bar
  */
 $(function () {
-    $(document).on('click', '#serverinfo, #goto_pagetop', function (event) {
+    $(document).on('click', '#server-breadcrumb, #goto_pagetop', function (event) {
         event.preventDefault();
         $('html, body').animate({ scrollTop: 0 }, 'fast');
     });
 });
 
 var checkboxesSel = 'input.checkall:checkbox:enabled';
+Functions.checkboxesSel = checkboxesSel;
 
 /**
  * Watches checkboxes in a form to set the checkall box accordingly
@@ -4927,7 +4958,7 @@ AJAX.registerOnload('functions.js', function () {
     /*
      * Display warning regarding SSL when sha256_password
      * method is selected
-     * Used in /user_password (Change Password link on index.php)
+     * Used in /user-password (Change Password link on index.php)
      */
     $(document).on('change', 'select#select_authentication_plugin_cp', function () {
         if (this.value === 'sha256_password') {
@@ -5015,7 +5046,7 @@ Functions.getImage = function (image, alternate, attributes) {
     }
     // set css classes
     retval.attr('class', 'icon ic_' + image);
-    // set all other attrubutes
+    // set all other attributes
     for (var i in attr) {
         if (i === 'src') {
             // do not allow to override the 'src' attribute
@@ -5116,7 +5147,7 @@ Functions.configGet = function (key, cached) {
 };
 
 /**
- * Return POST data as stored by Util::linkOrButton
+ * Return POST data as stored by Generator::linkOrButton
  */
 Functions.getPostData = function () {
     var dataPost = this.attr('data-post');

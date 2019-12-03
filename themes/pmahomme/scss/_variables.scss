@@ -51,10 +51,16 @@ $bg-two: #d5d5d5;
 // Bootstrap
 // ---------
 
+// Body
+
+$body-color: $main-color;
+
 // Typography
 
 $font-family-base: sans-serif;
 $font-family-monospace: monospace;
+
+$font-size-base: 0.82rem;
 
 // Buttons
 
@@ -74,6 +80,15 @@ $card-border-color: #999;
 $card-bg: #f3f3f3;
 $card-cap-bg: #bbb;
 $card-cap-color: #fff;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0.1rem;
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-bg: #888;
+$breadcrumb-divider-color: #fff;
+$breadcrumb-divider: quote("»");
+$breadcrumb-border-radius: 0;
 
 // Alert
 

@@ -19,9 +19,6 @@ $navi-pointer-background: #ddd;
 
 // main frame
 
-// foreground (text) color for the main frame
-$main-color: #444;
-
 // foreground (text) color of the pointer in browse mode
 $browse-pointer-color: #000;
 
@@ -47,3 +44,9 @@ $th-color: #000;
 $bg-one: #e5e5e5;
 // table data row background, alternate
 $bg-two: #d5d5d5;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0.5rem;
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-border-radius: 0;
