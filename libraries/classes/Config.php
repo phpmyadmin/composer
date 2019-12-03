@@ -113,7 +113,7 @@ class Config
      */
     public function checkSystem(): void
     {
-        $this->set('PMA_VERSION', '5.0.0-dev');
+        $this->set('PMA_VERSION', '5.0.0-rc1');
         /* Major version */
         $this->set(
             'PMA_MAJOR_VERSION',
@@ -779,13 +779,19 @@ class Config
             $this->error_config_default_file = true;
             return false;
         }
-        $old_error_reporting = error_reporting(0);
+        $canUseErrorReporting = function_exists('error_reporting');
+        $oldErrorReporting = null;
+        if ($canUseErrorReporting) {
+            $oldErrorReporting = error_reporting(0);
+        }
         ob_start();
         $GLOBALS['pma_config_loading'] = true;
         $eval_result = include $this->default_source;
         $GLOBALS['pma_config_loading'] = false;
         ob_end_clean();
-        error_reporting($old_error_reporting);
+        if ($canUseErrorReporting) {
+            error_reporting($oldErrorReporting);
+        }
 
         if ($eval_result === false) {
             $this->error_config_default_file = true;
@@ -831,13 +837,19 @@ class Config
          * Parses the configuration file, we throw away any errors or
          * output.
          */
-        $old_error_reporting = error_reporting(0);
+        $canUseErrorReporting = function_exists('error_reporting');
+        $oldErrorReporting = null;
+        if ($canUseErrorReporting) {
+            $oldErrorReporting = error_reporting(0);
+        }
         ob_start();
         $GLOBALS['pma_config_loading'] = true;
         $eval_result = include $this->getSource();
         $GLOBALS['pma_config_loading'] = false;
         ob_end_clean();
-        error_reporting($old_error_reporting);
+        if ($canUseErrorReporting) {
+            error_reporting($oldErrorReporting);
+        }
 
         if ($eval_result === false) {
             $this->error_config_file = true;
