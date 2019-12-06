@@ -36,9 +36,11 @@ use PhpMyAdmin\Controllers\Server\Status\QueriesController;
 use PhpMyAdmin\Controllers\Server\Status\StatusController;
 use PhpMyAdmin\Controllers\Server\Status\VariablesController as StatusVariables;
 use PhpMyAdmin\Controllers\Server\VariablesController;
+use PhpMyAdmin\Controllers\ThemesController;
 use PhpMyAdmin\Controllers\TransformationOverviewController;
 use PhpMyAdmin\Controllers\UserPasswordController;
 use PhpMyAdmin\Controllers\VersionCheckController;
+use PhpMyAdmin\Controllers\ViewCreateController;
 use PhpMyAdmin\Response;
 
 global $containerBuilder;
@@ -541,8 +543,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             require_once ROOT_PATH . 'libraries/entry_points/table/zoom_select.php';
         });
     });
-    $routes->get('/themes', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/themes.php';
+    $routes->get('/themes', function () use ($containerBuilder, $response) {
+        /** @var ThemesController $controller */
+        $controller = $containerBuilder->get(ThemesController::class);
+        $response->addHTML($controller->index());
     });
     $routes->addGroup('/transformation', function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/overview', function () use ($containerBuilder, $response) {
@@ -564,9 +568,11 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $controller = $containerBuilder->get(VersionCheckController::class);
         $controller->index();
     });
-    $routes->addGroup('/view', function (RouteCollector $routes) {
-        $routes->addRoute(['GET', 'POST'], '/create', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/view/create.php';
+    $routes->addGroup('/view', function (RouteCollector $routes) use ($containerBuilder) {
+        $routes->addRoute(['GET', 'POST'], '/create', function () use ($containerBuilder) {
+            /** @var ViewCreateController $controller */
+            $controller = $containerBuilder->get(ViewCreateController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/operations', function () {
             require_once ROOT_PATH . 'libraries/entry_points/view/operations.php';

@@ -393,6 +393,13 @@ services:
       transformations: '@transformations'
       create_add_field: '@create_add_field'
 
+  PhpMyAdmin\Controllers\ThemesController:
+    class: 'PhpMyAdmin\Controllers\ThemesController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+
   PhpMyAdmin\Controllers\TransformationOverviewController:
     class: 'PhpMyAdmin\Controllers\TransformationOverviewController'
     arguments:
@@ -411,6 +418,13 @@ services:
 
   PhpMyAdmin\Controllers\VersionCheckController:
     class: 'PhpMyAdmin\Controllers\VersionCheckController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+
+  PhpMyAdmin\Controllers\ViewCreateController:
+    class: 'PhpMyAdmin\Controllers\ViewCreateController'
     arguments:
       response: '@response'
       dbi: '@dbi'
