@@ -12,6 +12,7 @@ use PhpMyAdmin\Controllers\ChangeLogController;
 use PhpMyAdmin\Controllers\CheckRelationsController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
 use PhpMyAdmin\Controllers\Database\DesignerController;
+use PhpMyAdmin\Controllers\Database\EventsController;
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
 use PhpMyAdmin\Controllers\Database\QueryByExampleController;
 use PhpMyAdmin\Controllers\Database\SearchController;
@@ -38,9 +39,11 @@ use PhpMyAdmin\Controllers\Server\Status\VariablesController as StatusVariables;
 use PhpMyAdmin\Controllers\Server\VariablesController;
 use PhpMyAdmin\Controllers\ThemesController;
 use PhpMyAdmin\Controllers\TransformationOverviewController;
+use PhpMyAdmin\Controllers\TransformationWrapperController;
 use PhpMyAdmin\Controllers\UserPasswordController;
 use PhpMyAdmin\Controllers\VersionCheckController;
 use PhpMyAdmin\Controllers\ViewCreateController;
+use PhpMyAdmin\Controllers\ViewOperationsController;
 use PhpMyAdmin\Response;
 
 global $containerBuilder;
@@ -137,8 +140,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             $controller = $containerBuilder->get(DesignerController::class);
             $controller->index();
         });
-        $routes->addRoute(['GET', 'POST'], '/events', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/events.php';
+        $routes->addRoute(['GET', 'POST'], '/events', function () use ($containerBuilder) {
+            /** @var EventsController $controller */
+            $controller = $containerBuilder->get(EventsController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/database/export.php';
@@ -554,8 +559,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             $controller = $containerBuilder->get(TransformationOverviewController::class);
             $response->addHTML($controller->index());
         });
-        $routes->addRoute(['GET', 'POST'], '/wrapper', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/transformation/wrapper.php';
+        $routes->addRoute(['GET', 'POST'], '/wrapper', function () use ($containerBuilder) {
+            /** @var TransformationWrapperController $controller */
+            $controller = $containerBuilder->get(TransformationWrapperController::class);
+            $controller->index();
         });
     });
     $routes->addRoute(['GET', 'POST'], '/user-password', function () use ($containerBuilder) {
@@ -574,8 +581,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             $controller = $containerBuilder->get(ViewCreateController::class);
             $controller->index();
         });
-        $routes->addRoute(['GET', 'POST'], '/operations', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/view/operations.php';
+        $routes->addRoute(['GET', 'POST'], '/operations', function () use ($containerBuilder) {
+            /** @var ViewOperationsController $controller */
+            $controller = $containerBuilder->get(ViewOperationsController::class);
+            $controller->index();
         });
     });
 };
