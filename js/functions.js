@@ -112,6 +112,10 @@ $.ajaxPrefilter(function (options, originalOptions) {
  * @param {object} $thisElement a jQuery object pointing to the element
  */
 Functions.addDatepicker = function ($thisElement, type, options) {
+    if (type !== 'date' && type !== 'time' && type !== 'datetime' && type !== 'timestamp') {
+        return;
+    }
+
     var showTimepicker = true;
     if (type === 'date') {
         showTimepicker = false;
@@ -1027,6 +1031,7 @@ AJAX.registerOnload('functions.js', function () {
                         $('input[name=token]').val(data.new_token);
                     }
                     idleSecondsCounter = 0;
+                    Functions.handleRedirectAndReload(data);
                 }
             }
         });
@@ -4888,8 +4893,10 @@ Functions.toggleDatepickerIfInvalid = function ($td, $inputField) {
 
 /**
  * Function to submit the login form after validation is done.
+ * NOTE: do NOT use a module or it will break the callback, issue #15435
  */
-Functions.recaptchaCallback = function () {
+// eslint-disable-next-line no-unused-vars, camelcase
+var Functions_recaptchaCallback = function () {
     $('#login_form').trigger('submit');
 };
 
