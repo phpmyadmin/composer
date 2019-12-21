@@ -20,7 +20,9 @@ use PhpMyAdmin\Controllers\Database\QueryByExampleController;
 use PhpMyAdmin\Controllers\Database\RoutinesController;
 use PhpMyAdmin\Controllers\Database\SearchController;
 use PhpMyAdmin\Controllers\Database\SqlAutoCompleteController;
+use PhpMyAdmin\Controllers\Database\SqlFormatController;
 use PhpMyAdmin\Controllers\Database\StructureController;
+use PhpMyAdmin\Controllers\Database\TrackingController;
 use PhpMyAdmin\Controllers\Database\TriggersController;
 use PhpMyAdmin\Controllers\ErrorReportController;
 use PhpMyAdmin\Controllers\GisDataEditorController;
@@ -28,6 +30,8 @@ use PhpMyAdmin\Controllers\HomeController;
 use PhpMyAdmin\Controllers\ImportStatusController;
 use PhpMyAdmin\Controllers\LicenseController;
 use PhpMyAdmin\Controllers\LintController;
+use PhpMyAdmin\Controllers\LogoutController;
+use PhpMyAdmin\Controllers\NavigationController;
 use PhpMyAdmin\Controllers\PhpInfoController;
 use PhpMyAdmin\Controllers\Server\BinlogController;
 use PhpMyAdmin\Controllers\Server\CollationsController;
@@ -208,8 +212,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
                 $controller = $containerBuilder->get(SqlAutoCompleteController::class);
                 $response->addJSON($controller->index());
             });
-            $routes->post('/format', function () {
-                require_once ROOT_PATH . 'libraries/entry_points/database/sql/format.php';
+            $routes->post('/format', function () use ($containerBuilder, $response) {
+                /** @var SqlFormatController $controller */
+                $controller = $containerBuilder->get(SqlFormatController::class);
+                $response->addJSON($controller->index(['sql' => $_POST['sql'] ?? null]));
             });
         });
         $routes->addGroup('/structure', function (RouteCollector $routes) use ($containerBuilder, $response) {
@@ -240,8 +246,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
                 ]));
             });
         });
-        $routes->addRoute(['GET', 'POST'], '/tracking', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/tracking.php';
+        $routes->addRoute(['GET', 'POST'], '/tracking', function () use ($containerBuilder) {
+            /** @var TrackingController $controller */
+            $controller = $containerBuilder->get(TrackingController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/triggers', function () use ($containerBuilder) {
             /** @var TriggersController $controller */
@@ -283,11 +291,15 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             'options' => $_POST['options'] ?? null,
         ]);
     });
-    $routes->addRoute(['GET', 'POST'], '/logout', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/logout.php';
+    $routes->addRoute(['GET', 'POST'], '/logout', function () use ($containerBuilder) {
+        /** @var LogoutController $controller */
+        $controller = $containerBuilder->get(LogoutController::class);
+        $controller->index();
     });
-    $routes->addRoute(['GET', 'POST'], '/navigation', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/navigation.php';
+    $routes->addRoute(['GET', 'POST'], '/navigation', function () use ($containerBuilder) {
+        /** @var NavigationController $controller */
+        $controller = $containerBuilder->get(NavigationController::class);
+        $controller->index();
     });
     $routes->addRoute(['GET', 'POST'], '/normalization', function () {
         require_once ROOT_PATH . 'libraries/entry_points/normalization.php';

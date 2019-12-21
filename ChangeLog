@@ -52,6 +52,7 @@ phpMyAdmin - ChangeLog
 - issue #15435 Fix ReCAPTCHA couldn't find user-provided function: Functions.recaptchaCallback
 - issue #15623 Fix width of picker modal and remove date picker for int fields
 - issue #14732 Fixed can't rename primary key with auto increment
+- issue #15677 Fix show process-list triggers a php exception
 
 4.9.3 (not yet released)
 - issue #15570 Fix page contents go underneath of floating menubar in some cases
@@ -65,6 +66,8 @@ phpMyAdmin - ChangeLog
 - issue        Fix php 8.0 php notices - Undefined index on login page
 - issue #15640 Fix php 7.4 error when trying to access array offset on value of type null on table browse
 - issue #15641 Fix replication actions where broken (start slave, stop slave, reset, ...)
+- issue #15608 Fix DisableIS is broken when with controluser configured (database list broken)
+- issue #15614 Fix undefined offset on index page for MySQL 5.7.8 (server charset)
 
 4.9.2 (2019-11-21)
 - issue #14184 Change the cookie name from phpMyAdmin to phpMyAdmin_https for HTTPS, fixes many "Failed to set session cookie" errors
