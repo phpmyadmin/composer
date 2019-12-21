@@ -307,7 +307,7 @@ class DatabaseInterface
     public function tryQuery($query, $link = DatabaseInterface::CONNECT_USER, $options = 0,
         $cache_affected_rows = true
     ) {
-        $debug = $GLOBALS['cfg']['DBG']['sql'];
+        $debug = isset($GLOBALS['cfg']['DBG']) ? $GLOBALS['cfg']['DBG']['sql'] : false;
         if (! isset($this->_links[$link])) {
             return false;
         }
@@ -2330,11 +2330,7 @@ class DatabaseInterface
     {
         if (count($this->_current_user) == 0) {
             $user = $this->getCurrentUser();
-            if ($user === '@') {// Request did not succeed, please do not cache
-                return ['', ''];
-            } else {
-                $this->_current_user = explode("@", $user);
-            }
+            $this->_current_user = explode("@", $user);
         }
         return $this->_current_user;
     }
@@ -2517,8 +2513,6 @@ class DatabaseInterface
             /* Run post connect for user connections */
             if ($target == DatabaseInterface::CONNECT_USER) {
                 $this->postConnect();
-            } elseif ($target == DatabaseInterface::CONNECT_CONTROL) {
-                $this->postConnectControl();
             }
             return $result;
         }
