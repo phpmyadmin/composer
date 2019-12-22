@@ -230,12 +230,26 @@ services:
       navigation: '@navigation'
       relation: '@relation'
 
+  PhpMyAdmin\Controllers\NormalizationController:
+    class: 'PhpMyAdmin\Controllers\NormalizationController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      normalization: '@normalization'
+
   PhpMyAdmin\Controllers\PhpInfoController:
     class: 'PhpMyAdmin\Controllers\PhpInfoController'
     arguments:
       response: '@response'
       dbi: '@dbi'
       template: '@template'
+
+  PhpMyAdmin\Controllers\SchemaExportController:
+    class: 'PhpMyAdmin\Controllers\SchemaExportController'
+    arguments:
+      export: '@export'
+      relation: '@relation'
 
   PhpMyAdmin\Controllers\Server\DatabasesController:
     class: 'PhpMyAdmin\Controllers\Server\DatabasesController'
@@ -273,6 +287,14 @@ services:
       template: '@template'
       plugins: '@server_plugins'
 
+  PhpMyAdmin\Controllers\Server\PrivilegesController:
+    class: 'PhpMyAdmin\Controllers\Server\PrivilegesController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\Server\ReplicationController:
     class: 'PhpMyAdmin\Controllers\Server\ReplicationController'
     arguments:
@@ -288,6 +310,14 @@ services:
       dbi: '@dbi'
       template: '@template'
       sqlQueryForm: '@sql_query_form'
+
+  PhpMyAdmin\Controllers\Server\UserGroupsController:
+    class: 'PhpMyAdmin\Controllers\Server\UserGroupsController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      relation: '@relation'
 
   PhpMyAdmin\Controllers\Server\Status\AdvisorController:
     class: 'PhpMyAdmin\Controllers\Server\Status\AdvisorController'

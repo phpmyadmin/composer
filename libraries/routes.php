@@ -32,12 +32,15 @@ use PhpMyAdmin\Controllers\LicenseController;
 use PhpMyAdmin\Controllers\LintController;
 use PhpMyAdmin\Controllers\LogoutController;
 use PhpMyAdmin\Controllers\NavigationController;
+use PhpMyAdmin\Controllers\NormalizationController;
 use PhpMyAdmin\Controllers\PhpInfoController;
+use PhpMyAdmin\Controllers\SchemaExportController;
 use PhpMyAdmin\Controllers\Server\BinlogController;
 use PhpMyAdmin\Controllers\Server\CollationsController;
 use PhpMyAdmin\Controllers\Server\DatabasesController;
 use PhpMyAdmin\Controllers\Server\EnginesController;
 use PhpMyAdmin\Controllers\Server\PluginsController;
+use PhpMyAdmin\Controllers\Server\PrivilegesController;
 use PhpMyAdmin\Controllers\Server\ReplicationController;
 use PhpMyAdmin\Controllers\Server\SqlController;
 use PhpMyAdmin\Controllers\Server\Status\AdvisorController;
@@ -46,6 +49,7 @@ use PhpMyAdmin\Controllers\Server\Status\ProcessesController;
 use PhpMyAdmin\Controllers\Server\Status\QueriesController;
 use PhpMyAdmin\Controllers\Server\Status\StatusController;
 use PhpMyAdmin\Controllers\Server\Status\VariablesController as StatusVariables;
+use PhpMyAdmin\Controllers\Server\UserGroupsController;
 use PhpMyAdmin\Controllers\Server\VariablesController;
 use PhpMyAdmin\Controllers\Table\TriggersController as TableTriggersController;
 use PhpMyAdmin\Controllers\ThemesController;
@@ -301,8 +305,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $controller = $containerBuilder->get(NavigationController::class);
         $controller->index();
     });
-    $routes->addRoute(['GET', 'POST'], '/normalization', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/normalization.php';
+    $routes->addRoute(['GET', 'POST'], '/normalization', function () use ($containerBuilder) {
+        /** @var NormalizationController $controller */
+        $controller = $containerBuilder->get(NormalizationController::class);
+        $controller->index();
     });
     $routes->get('/phpinfo', function () use ($containerBuilder) {
         /** @var PhpInfoController $controller */
@@ -320,8 +326,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             require_once ROOT_PATH . 'libraries/entry_points/preferences/twofactor.php';
         });
     });
-    $routes->addRoute(['GET', 'POST'], '/schema_export', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/schema_export.php';
+    $routes->addRoute(['GET', 'POST'], '/schema-export', function () use ($containerBuilder) {
+        /** @var SchemaExportController $controller */
+        $controller = $containerBuilder->get(SchemaExportController::class);
+        $controller->index();
     });
     $routes->addGroup('/server', function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/binlog', function () use ($containerBuilder, $response) {
@@ -383,8 +391,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
             $controller = $containerBuilder->get(PluginsController::class);
             $response->addHTML($controller->index());
         });
-        $routes->addRoute(['GET', 'POST'], '/privileges', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/privileges.php';
+        $routes->addRoute(['GET', 'POST'], '/privileges', function () use ($containerBuilder) {
+            /** @var PrivilegesController $controller */
+            $controller = $containerBuilder->get(PrivilegesController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/replication', function () use ($containerBuilder, $response) {
             /** @var ReplicationController $controller */
@@ -492,8 +502,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
                 ]));
             });
         });
-        $routes->addRoute(['GET', 'POST'], '/user_groups', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/user_groups.php';
+        $routes->addRoute(['GET', 'POST'], '/user-groups', function () use ($containerBuilder) {
+            /** @var UserGroupsController $controller */
+            $controller = $containerBuilder->get(UserGroupsController::class);
+            $controller->index();
         });
         $routes->addGroup('/variables', function (RouteCollector $routes) use ($containerBuilder, $response) {
             /** @var VariablesController $controller */
