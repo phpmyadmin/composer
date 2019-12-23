@@ -245,6 +245,32 @@ services:
       dbi: '@dbi'
       template: '@template'
 
+  PhpMyAdmin\Controllers\Preferences\FormsController:
+    class: 'PhpMyAdmin\Controllers\Preferences\FormsController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\ManageController:
+    class: 'PhpMyAdmin\Controllers\Preferences\ManageController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\TwoFactorController:
+    class: 'PhpMyAdmin\Controllers\Preferences\TwoFactorController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\SchemaExportController:
     class: 'PhpMyAdmin\Controllers\SchemaExportController'
     arguments:
