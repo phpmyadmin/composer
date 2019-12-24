@@ -403,6 +403,17 @@ services:
       dbi: '@dbi'
       template: '@template'
 
+  PhpMyAdmin\Controllers\Table\AddFieldController:
+    class: 'PhpMyAdmin\Controllers\Table\AddFieldController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      transformations: '@transformations'
+      config: '@config'
+
   PhpMyAdmin\Controllers\Table\ChartController:
     class: 'PhpMyAdmin\Controllers\Table\ChartController'
     arguments:
@@ -411,9 +422,26 @@ services:
       template: '@template'
       db: '%db%'
       table: '%table%'
-      sql_query: null
-      url_query: null
-      cfg: null
+
+  PhpMyAdmin\Controllers\Table\CreateController:
+    class: 'PhpMyAdmin\Controllers\Table\CreateController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      transformations: '@transformations'
+      config: '@config'
+
+  PhpMyAdmin\Controllers\Table\GetFieldController:
+    class: 'PhpMyAdmin\Controllers\Table\GetFieldController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
 
   PhpMyAdmin\Controllers\Table\GisVisualizationController:
     class: 'PhpMyAdmin\Controllers\Table\GisVisualizationController'
@@ -439,6 +467,18 @@ services:
       table: '%table%'
       index: '%index%'
 
+  PhpMyAdmin\Controllers\Table\OperationsController:
+    class: 'PhpMyAdmin\Controllers\Table\OperationsController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      operations: '@operations'
+      checkUserPrivileges: '@check_user_privileges'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\Table\PrivilegesController:
     class: 'PhpMyAdmin\Controllers\Table\PrivilegesController'
     arguments:
@@ -448,6 +488,15 @@ services:
       db: '%db%'
       table: '%table%'
       privileges: '@server_privileges'
+
+  PhpMyAdmin\Controllers\Table\RecentFavoriteController:
+    class: 'PhpMyAdmin\Controllers\Table\RecentFavoriteController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
 
   PhpMyAdmin\Controllers\Table\RelationController:
     class: 'PhpMyAdmin\Controllers\Table\RelationController'
@@ -464,6 +513,15 @@ services:
       existrel_foreign: null
       upd_query: null
       relation: '@relation'
+
+  PhpMyAdmin\Controllers\Table\RowActionController:
+    class: 'PhpMyAdmin\Controllers\Table\RowActionController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
 
   PhpMyAdmin\Controllers\Table\SearchController:
     class: 'PhpMyAdmin\Controllers\Table\SearchController'
@@ -503,6 +561,16 @@ services:
       relation: '@relation'
       transformations: '@transformations'
       create_add_field: '@create_add_field'
+
+  PhpMyAdmin\Controllers\Table\TrackingController:
+    class: 'PhpMyAdmin\Controllers\Table\TrackingController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      tracking: '@tracking'
 
   PhpMyAdmin\Controllers\Table\TriggersController:
     class: 'PhpMyAdmin\Controllers\Table\TriggersController'

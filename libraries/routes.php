@@ -54,6 +54,14 @@ use PhpMyAdmin\Controllers\Server\Status\StatusController;
 use PhpMyAdmin\Controllers\Server\Status\VariablesController as StatusVariables;
 use PhpMyAdmin\Controllers\Server\UserGroupsController;
 use PhpMyAdmin\Controllers\Server\VariablesController;
+use PhpMyAdmin\Controllers\Table\AddFieldController;
+use PhpMyAdmin\Controllers\Table\ChartController;
+use PhpMyAdmin\Controllers\Table\CreateController;
+use PhpMyAdmin\Controllers\Table\GetFieldController;
+use PhpMyAdmin\Controllers\Table\OperationsController as TableOperationsController;
+use PhpMyAdmin\Controllers\Table\RecentFavoriteController;
+use PhpMyAdmin\Controllers\Table\RowActionController;
+use PhpMyAdmin\Controllers\Table\TrackingController as TableTrackingController;
 use PhpMyAdmin\Controllers\Table\TriggersController as TableTriggersController;
 use PhpMyAdmin\Controllers\ThemesController;
 use PhpMyAdmin\Controllers\TransformationOverviewController;
@@ -539,17 +547,23 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         require_once ROOT_PATH . 'libraries/entry_points/sql.php';
     });
     $routes->addGroup('/table', function (RouteCollector $routes) use ($containerBuilder) {
-        $routes->addRoute(['GET', 'POST'], '/addfield', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/addfield.php';
+        $routes->addRoute(['GET', 'POST'], '/add-field', function () use ($containerBuilder) {
+            /** @var AddFieldController $controller */
+            $controller = $containerBuilder->get(AddFieldController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/change', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/change.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/chart', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/chart.php';
+        $routes->addRoute(['GET', 'POST'], '/chart', function () use ($containerBuilder) {
+            /** @var ChartController $controller */
+            $controller = $containerBuilder->get(ChartController::class);
+            $controller->index();
         });
-        $routes->addRoute(['GET', 'POST'], '/create', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/create.php';
+        $routes->addRoute(['GET', 'POST'], '/create', function () use ($containerBuilder) {
+            /** @var CreateController $controller */
+            $controller = $containerBuilder->get(CreateController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/export.php';
@@ -557,8 +571,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/find_replace', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/find_replace.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/get_field', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/get_field.php';
+        $routes->addRoute(['GET', 'POST'], '/get-field', function () use ($containerBuilder) {
+            /** @var GetFieldController $controller */
+            $controller = $containerBuilder->get(GetFieldController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/gis_visualization', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/gis_visualization.php';
@@ -569,11 +585,15 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/indexes', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/indexes.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/operations', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/operations.php';
+        $routes->addRoute(['GET', 'POST'], '/operations', function () use ($containerBuilder) {
+            /** @var TableOperationsController $controller */
+            $controller = $containerBuilder->get(TableOperationsController::class);
+            $controller->index();
         });
-        $routes->addRoute(['GET', 'POST'], '/recent_favorite', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/recent_favorite.php';
+        $routes->addRoute(['GET', 'POST'], '/recent-favorite', function () use ($containerBuilder) {
+            /** @var RecentFavoriteController $controller */
+            $controller = $containerBuilder->get(RecentFavoriteController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/relation', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/relation.php';
@@ -581,8 +601,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/replace', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/replace.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/row_action', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/row_action.php';
+        $routes->addRoute(['GET', 'POST'], '/row-action', function () use ($containerBuilder) {
+            /** @var RowActionController $controller */
+            $controller = $containerBuilder->get(RowActionController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/search', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/select.php';
@@ -593,8 +615,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/structure', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/structure.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/tracking', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/tracking.php';
+        $routes->addRoute(['GET', 'POST'], '/tracking', function () use ($containerBuilder) {
+            /** @var TableTrackingController $controller */
+            $controller = $containerBuilder->get(TableTrackingController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/triggers', function () use ($containerBuilder) {
             /** @var TableTriggersController $controller */
