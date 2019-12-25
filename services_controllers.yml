@@ -451,11 +451,6 @@ services:
       template: '@template'
       db: '%db%'
       table: '%table%'
-      sql_query: null
-      url_params: null
-      goto: null
-      back: null
-      visualizationSettings: null
 
   PhpMyAdmin\Controllers\Table\IndexesController:
     class: 'PhpMyAdmin\Controllers\Table\IndexesController'
@@ -506,12 +501,6 @@ services:
       template: '@template'
       db: '%db%'
       table: '%table%'
-      options_array: null
-      cfgRelation: null
-      tbl_storage_engine: null
-      existrel: null
-      existrel_foreign: null
-      upd_query: null
       relation: '@relation'
 
   PhpMyAdmin\Controllers\Table\RowActionController:
