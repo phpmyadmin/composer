@@ -11,6 +11,7 @@ use PhpMyAdmin\Controllers\AjaxController;
 use PhpMyAdmin\Controllers\BrowseForeignersController;
 use PhpMyAdmin\Controllers\ChangeLogController;
 use PhpMyAdmin\Controllers\CheckRelationsController;
+use PhpMyAdmin\Controllers\Database\CentralColumnsController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
 use PhpMyAdmin\Controllers\Database\DesignerController;
 use PhpMyAdmin\Controllers\Database\EventsController;
@@ -59,6 +60,7 @@ use PhpMyAdmin\Controllers\Table\ChartController;
 use PhpMyAdmin\Controllers\Table\CreateController;
 use PhpMyAdmin\Controllers\Table\GetFieldController;
 use PhpMyAdmin\Controllers\Table\GisVisualizationController;
+use PhpMyAdmin\Controllers\Table\IndexesController;
 use PhpMyAdmin\Controllers\Table\OperationsController as TableOperationsController;
 use PhpMyAdmin\Controllers\Table\RecentFavoriteController;
 use PhpMyAdmin\Controllers\Table\RelationController;
@@ -155,8 +157,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         ]));
     });
     $routes->addGroup('/database', function (RouteCollector $routes) use ($containerBuilder, $response) {
-        $routes->addRoute(['GET', 'POST'], '/central_columns', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/central_columns.php';
+        $routes->addRoute(['GET', 'POST'], '/central-columns', function () use ($containerBuilder) {
+            /** @var CentralColumnsController $controller */
+            $controller = $containerBuilder->get(CentralColumnsController::class);
+            $controller->index();
         });
         $routes->get('/data-dictionary/{database}', function (array $vars) use ($containerBuilder, $response) {
             /** @var DataDictionaryController $controller */
@@ -586,8 +590,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/import', function () {
             require_once ROOT_PATH . 'libraries/entry_points/table/import.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/indexes', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/table/indexes.php';
+        $routes->addRoute(['GET', 'POST'], '/indexes', function () use ($containerBuilder) {
+            /** @var IndexesController $controller */
+            $controller = $containerBuilder->get(IndexesController::class);
+            $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/operations', function () use ($containerBuilder) {
             /** @var TableOperationsController $controller */
