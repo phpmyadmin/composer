@@ -41,11 +41,10 @@ class NodeColumnContainer extends Node
         $this->realName = 'columns';
 
         $newLabel = _pgettext('Create new column', 'New');
-        $new = NodeFactory::getInstance(
-            'Node',
-            $newLabel
+        $new = NodeFactory::getInstanceForNewNode(
+            $newLabel,
+            'new_column italics'
         );
-        $new->isNew = true;
         $new->icon = Generator::getImage('b_column_add', $newLabel);
         $new->links = [
             'text' => Url::getFromRoute('/table/add-field', [
@@ -59,7 +58,6 @@ class NodeColumnContainer extends Node
                 'after_field' => '',
             ]) . '&amp;db=%3$s&amp;table=%2$s',
         ];
-        $new->classes = 'new_column italics';
         $this->addChild($new);
     }
 }

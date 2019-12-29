@@ -78,15 +78,33 @@ class NodeFactory
      * @param bool   $isGroup Whether this object has been created
      *                        while grouping nodes
      *
-     * @return mixed
+     * @return Node
      */
     public static function getInstance(
         $class = 'Node',
         $name = 'default',
         $type = Node::OBJECT,
         $isGroup = false
-    ) {
+    ): Node {
         $class = self::sanitizeClass($class);
         return new $class($name, $type, $isGroup);
+    }
+
+    /**
+     * Instantiates a Node object that will be used only for "New db/table/etc.." objects
+     *
+     * @param string $name    An identifier for the new node
+     * @param string $classes Extra CSS classes for the node
+     *
+     * @return Node
+     */
+    public static function getInstanceForNewNode(
+        string $name,
+        string $classes
+    ): Node {
+        $node = new Node($name, Node::OBJECT, false);
+        $node->isNew = true;
+        $node->classes = $classes;
+        return $node;
     }
 }

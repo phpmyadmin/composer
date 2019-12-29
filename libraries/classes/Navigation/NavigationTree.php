@@ -310,6 +310,7 @@ class NavigationTree
         );
         $hiddenCounts = $this->tree->getNavigationHidingData();
         foreach ($data as $db) {
+            /** @var NodeDatabase $node */
             $node = NodeFactory::getInstance('NodeDatabase', $db);
             if (isset($hiddenCounts[$db])) {
                 $node->setHiddenCount($hiddenCounts[$db]);
@@ -673,16 +674,16 @@ class NavigationTree
     /**
      * Recursively groups tree nodes given a separator
      *
-     * @param mixed $node The node to group or null
-     *                    to group the whole tree. If
-     *                    passed as an argument, $node
-     *                    must be of type CONTAINER
+     * @param Node $node The node to group or null
+     *                   to group the whole tree. If
+     *                   passed as an argument, $node
+     *                   must be of type CONTAINER
      *
      * @return void
      */
-    public function groupTree($node = null)
+    public function groupTree(?Node $node = null): void
     {
-        if (! isset($node)) {
+        if ($node === null) {
             $node = $this->tree;
         }
         $this->groupNode($node);
@@ -823,6 +824,7 @@ class NavigationTree
                         $class = get_class($child);
                         $className = substr($class, strrpos($class, '\\') + 1);
                         unset($class);
+                        /** @var NodeDatabase $newChild */
                         $newChild = NodeFactory::getInstance(
                             $className,
                             mb_substr(

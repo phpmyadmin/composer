@@ -36,11 +36,10 @@ class NodeTriggerContainer extends Node
         ];
         $this->realName = 'triggers';
 
-        $new = NodeFactory::getInstance(
-            'Node',
-            _pgettext('Create new trigger', 'New')
+        $new = NodeFactory::getInstanceForNewNode(
+            _pgettext('Create new trigger', 'New'),
+            'new_trigger italics'
         );
-        $new->isNew = true;
         $new->icon = Generator::getImage('b_trigger_add', '');
         $new->links = [
             'text' => Url::getFromRoute('/database/triggers', [
@@ -52,7 +51,6 @@ class NodeTriggerContainer extends Node
                 'add_item' => 1,
             ]) . '&amp;db=%3$s',
         ];
-        $new->classes = 'new_trigger italics';
         $this->addChild($new);
     }
 }

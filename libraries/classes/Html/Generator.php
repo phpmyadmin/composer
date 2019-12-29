@@ -281,7 +281,7 @@ class Generator
      * @param string $minimum_version of this component
      * @param string $bugref          bug reference for this component
      *
-     * @return String
+     * @return string
      */
     public static function getExternalBug(
         $functionality,
@@ -652,7 +652,7 @@ class Generator
         ) {
             $rows = $_SESSION['tmpval']['max_rows'];
         } else {
-            $rows = $GLOBALS['cfg']['MaxRows'];
+            $rows = (int) $GLOBALS['cfg']['MaxRows'];
             $_SESSION['tmpval']['max_rows'] = $rows;
         }
 

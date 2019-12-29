@@ -41,11 +41,10 @@ class NodeIndexContainer extends Node
         $this->realName = 'indexes';
 
         $newLabel = _pgettext('Create new index', 'New');
-        $new = NodeFactory::getInstance(
-            'Node',
-            $newLabel
+        $new = NodeFactory::getInstanceForNewNode(
+            $newLabel,
+            'new_index italics'
         );
-        $new->isNew = true;
         $new->icon = Generator::getImage('b_index_add', $newLabel);
         $new->links = [
             'text' => Url::getFromRoute('/table/indexes', [
@@ -59,7 +58,6 @@ class NodeIndexContainer extends Node
                 'added_fields' => 2,
             ]) . '&amp;db=%3$s&amp;table=%2$s',
         ];
-        $new->classes = 'new_index italics';
         $this->addChild($new);
     }
 }
