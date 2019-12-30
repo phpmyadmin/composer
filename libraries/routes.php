@@ -15,6 +15,7 @@ use PhpMyAdmin\Controllers\Database\CentralColumnsController;
 use PhpMyAdmin\Controllers\Database\DataDictionaryController;
 use PhpMyAdmin\Controllers\Database\DesignerController;
 use PhpMyAdmin\Controllers\Database\EventsController;
+use PhpMyAdmin\Controllers\Database\ImportController as DatabaseImportController;
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
 use PhpMyAdmin\Controllers\Database\OperationsController;
 use PhpMyAdmin\Controllers\Database\QueryByExampleController;
@@ -26,8 +27,10 @@ use PhpMyAdmin\Controllers\Database\StructureController;
 use PhpMyAdmin\Controllers\Database\TrackingController;
 use PhpMyAdmin\Controllers\Database\TriggersController;
 use PhpMyAdmin\Controllers\ErrorReportController;
+use PhpMyAdmin\Controllers\ExportController;
 use PhpMyAdmin\Controllers\GisDataEditorController;
 use PhpMyAdmin\Controllers\HomeController;
+use PhpMyAdmin\Controllers\ImportController;
 use PhpMyAdmin\Controllers\ImportStatusController;
 use PhpMyAdmin\Controllers\LicenseController;
 use PhpMyAdmin\Controllers\LintController;
@@ -43,6 +46,7 @@ use PhpMyAdmin\Controllers\Server\BinlogController;
 use PhpMyAdmin\Controllers\Server\CollationsController;
 use PhpMyAdmin\Controllers\Server\DatabasesController;
 use PhpMyAdmin\Controllers\Server\EnginesController;
+use PhpMyAdmin\Controllers\Server\ImportController as ServerImportController;
 use PhpMyAdmin\Controllers\Server\PluginsController;
 use PhpMyAdmin\Controllers\Server\PrivilegesController;
 use PhpMyAdmin\Controllers\Server\ReplicationController;
@@ -184,8 +188,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/database/export.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/import', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/database/import.php';
+        $routes->addRoute(['GET', 'POST'], '/import', function () use ($containerBuilder) {
+            /** @var DatabaseImportController $controller */
+            $controller = $containerBuilder->get(DatabaseImportController::class);
+            $controller->index();
         });
         $routes->addGroup('/multi_table_query', function (RouteCollector $routes) use ($containerBuilder, $response) {
             /** @var MultiTableQueryController $controller */
@@ -287,16 +293,20 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $controller = $containerBuilder->get(ErrorReportController::class);
         $controller->index();
     });
-    $routes->addRoute(['GET', 'POST'], '/export', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/export.php';
+    $routes->addRoute(['GET', 'POST'], '/export', function () use ($containerBuilder) {
+        /** @var ExportController $controller */
+        $controller = $containerBuilder->get(ExportController::class);
+        $controller->index();
     });
     $routes->addRoute(['GET', 'POST'], '/gis-data-editor', function () use ($containerBuilder, $response) {
         /** @var GisDataEditorController $controller */
         $controller = $containerBuilder->get(GisDataEditorController::class);
         $response->addJSON($controller->index());
     });
-    $routes->addRoute(['GET', 'POST'], '/import', function () {
-        require_once ROOT_PATH . 'libraries/entry_points/import.php';
+    $routes->addRoute(['GET', 'POST'], '/import', function () use ($containerBuilder) {
+        /** @var ImportController $controller */
+        $controller = $containerBuilder->get(ImportController::class);
+        $controller->index();
     });
     $routes->addRoute(['GET', 'POST'], '/import-status', function () use ($containerBuilder) {
         /** @var ImportStatusController $controller */
@@ -410,8 +420,10 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $routes->addRoute(['GET', 'POST'], '/export', function () {
             require_once ROOT_PATH . 'libraries/entry_points/server/export.php';
         });
-        $routes->addRoute(['GET', 'POST'], '/import', function () {
-            require_once ROOT_PATH . 'libraries/entry_points/server/import.php';
+        $routes->addRoute(['GET', 'POST'], '/import', function () use ($containerBuilder) {
+            /** @var ServerImportController $controller */
+            $controller = $containerBuilder->get(ServerImportController::class);
+            $controller->index();
         });
         $routes->get('/plugins', function () use ($containerBuilder, $response) {
             /** @var PluginsController $controller */

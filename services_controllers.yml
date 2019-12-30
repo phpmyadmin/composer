@@ -68,6 +68,14 @@ services:
       template: '@template'
       db: '%db%'
 
+  PhpMyAdmin\Controllers\Database\ImportController:
+    class: 'PhpMyAdmin\Controllers\Database\ImportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+
   PhpMyAdmin\Controllers\Database\MultiTableQueryController:
     class: 'PhpMyAdmin\Controllers\Database\MultiTableQueryController'
     arguments:
@@ -183,6 +191,15 @@ services:
       errorReport: '@error_report'
       errorHandler: '@error_handler'
 
+  PhpMyAdmin\Controllers\ExportController:
+    class: 'PhpMyAdmin\Controllers\ExportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      export: '@export'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\GisDataEditorController:
     class: 'PhpMyAdmin\Controllers\GisDataEditorController'
     arguments:
@@ -198,6 +215,15 @@ services:
       template: '@template'
       config: '@config'
       themeManager: '@theme_manager'
+
+  PhpMyAdmin\Controllers\ImportController:
+    class: 'PhpMyAdmin\Controllers\ImportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      import: '@import'
+      sql: '@sql'
 
   PhpMyAdmin\Controllers\ImportStatusController:
     class: 'PhpMyAdmin\Controllers\ImportStatusController'
@@ -300,6 +326,13 @@ services:
 
   PhpMyAdmin\Controllers\Server\EnginesController:
     class: 'PhpMyAdmin\Controllers\Server\EnginesController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+
+  PhpMyAdmin\Controllers\Server\ImportController:
+    class: 'PhpMyAdmin\Controllers\Server\ImportController'
     arguments:
       response: '@response'
       dbi: '@dbi'
