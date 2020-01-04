@@ -505,6 +505,17 @@ services:
       transformations: '@transformations'
       config: '@config'
 
+  PhpMyAdmin\Controllers\Table\ExportController:
+    class: 'PhpMyAdmin\Controllers\Table\ExportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      export: '@display_export'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\Table\FindReplaceController:
     class: 'PhpMyAdmin\Controllers\Table\FindReplaceController'
     arguments:
@@ -591,6 +602,18 @@ services:
       table: '%table%'
       relation: '@relation'
 
+  PhpMyAdmin\Controllers\Table\ReplaceController:
+    class: 'PhpMyAdmin\Controllers\Table\ReplaceController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      db: '%db%'
+      table: '%table%'
+      insertEdit: '@insert_edit'
+      transformations: '@transformations'
+      relation: '@relation'
+
   PhpMyAdmin\Controllers\Table\RowActionController:
     class: 'PhpMyAdmin\Controllers\Table\RowActionController'
     arguments:
@@ -619,6 +642,7 @@ services:
       template: '@template'
       db: '%db%'
       table: '%table%'
+      sqlQueryForm: '@sql_query_form'
 
   PhpMyAdmin\Controllers\Table\StructureController:
     class: 'PhpMyAdmin\Controllers\Table\StructureController'
@@ -628,12 +652,6 @@ services:
       template: '@template'
       db: '%db%'
       table: '%table%'
-      db_is_system_schema: null
-      tbl_is_view: null
-      tbl_storage_engine: null
-      table_info_num_rows: null
-      tbl_collation: null
-      showtable: null
       relation: '@relation'
       transformations: '@transformations'
       create_add_field: '@create_add_field'

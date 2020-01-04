@@ -498,6 +498,21 @@ parameters:
 			path: libraries/classes/Controllers/Table/GisVisualizationController.php
 
 		-
+			message: "#^Cannot assign offset mixed to array\\|true\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Table/ReplaceController.php
+
+		-
+			message: "#^Parameter \\#1 \\$messages of method PhpMyAdmin\\\\Message\\:\\:addMessagesString\\(\\) expects array\\<string\\>, array\\<int, PhpMyAdmin\\\\Message\\|string\\|null\\> given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Table/ReplaceController.php
+
+		-
+			message: "#^Argument of an invalid type array\\|true supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Table/ReplaceController.php
+
+		-
 			message: "#^Parameter \\#1 \\$str of function mb_strtolower expects string, array\\<string\\>\\|string given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/SearchController.php
@@ -3168,26 +3183,6 @@ parameters:
 			path: libraries/common.inc.php
 
 		-
-			message: "#^Parameter \\#1 \\$goto_include of method PhpMyAdmin\\\\InsertEdit\\:\\:getGotoInclude\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: libraries/entry_points/table/replace.php
-
-		-
-			message: "#^Cannot assign offset mixed to array\\|true\\.$#"
-			count: 1
-			path: libraries/entry_points/table/replace.php
-
-		-
-			message: "#^Parameter \\#1 \\$messages of method PhpMyAdmin\\\\Message\\:\\:addMessagesString\\(\\) expects array\\<string\\>, array\\<int, PhpMyAdmin\\\\Message\\|string\\|null\\> given\\.$#"
-			count: 1
-			path: libraries/entry_points/table/replace.php
-
-		-
-			message: "#^Argument of an invalid type array\\|true supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/entry_points/table/replace.php
-
-		-
 			message: "#^Parameter \\#9 \\$originalUrlQuery of method PhpMyAdmin\\\\MultSubmits\\:\\:getUrlParams\\(\\) expects string, null given\\.$#"
 			count: 2
 			path: libraries/mult_submits.inc.php
@@ -3294,36 +3289,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$response of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects PhpMyAdmin\\\\Response, PhpMyAdmin\\\\Tests\\\\Stubs\\\\Response given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#10 \\$tbl_collation of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects string, null given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#11 \\$showtable of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects array, null given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#6 \\$db_is_system_schema of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects bool, null given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#7 \\$tbl_is_view of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects bool, null given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#8 \\$tbl_storage_engine of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects string, null given\\.$#"
-			count: 5
-			path: test/classes/Controllers/Table/StructureControllerTest.php
-
-		-
-			message: "#^Parameter \\#9 \\$table_info_num_rows of class PhpMyAdmin\\\\Controllers\\\\Table\\\\StructureController constructor expects int, null given\\.$#"
 			count: 5
 			path: test/classes/Controllers/Table/StructureControllerTest.php
 
