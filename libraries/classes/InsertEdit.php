@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use PhpMyAdmin\Controllers\Table\ChangeController;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Plugins\TransformationsPlugin;
 
@@ -2181,6 +2182,8 @@ class InsertEdit
      */
     public function isInsertRow()
     {
+        global $containerBuilder;
+
         if (isset($_POST['insert_rows'])
             && is_numeric($_POST['insert_rows'])
             && $_POST['insert_rows'] != $GLOBALS['cfg']['InsertRows']
@@ -2192,7 +2195,9 @@ class InsertEdit
             $scripts->addFile('vendor/jquery/additional-methods.js');
             $scripts->addFile('table/change.js');
             if (! defined('TESTSUITE')) {
-                include ROOT_PATH . 'libraries/entry_points/table/change.php';
+                /** @var ChangeController $controller */
+                $controller = $containerBuilder->get(ChangeController::class);
+                $controller->index();
                 exit;
             }
         }
@@ -2252,28 +2257,28 @@ class InsertEdit
         if (isset($_POST['after_insert'])
             && in_array($_POST['after_insert'], $valid_options)
         ) {
-            $goto_include = 'libraries/entry_points/table/change.php';
+            $goto_include = '/table/change';
         } elseif (! empty($GLOBALS['goto'])) {
             if (! preg_match('@^[a-z_]+\.php$@', $GLOBALS['goto'])) {
                 // this should NOT happen
                 //$GLOBALS['goto'] = false;
                 if ($GLOBALS['goto'] === 'index.php?route=/sql') {
-                    $goto_include = 'libraries/entry_points/sql.php';
+                    $goto_include = '/sql';
                 } else {
                     $goto_include = false;
                 }
             } else {
                 $goto_include = $GLOBALS['goto'];
             }
-            if ($GLOBALS['goto'] == 'libraries/entry_points/database/sql.php' && strlen($GLOBALS['table']) > 0) {
+            if ($GLOBALS['goto'] == 'index.php?route=/database/sql' && strlen($GLOBALS['table']) > 0) {
                 $GLOBALS['table'] = '';
             }
         }
         if (! $goto_include) {
             if (strlen($GLOBALS['table']) === 0) {
-                $goto_include = 'libraries/entry_points/database/sql.php';
+                $goto_include = '/database/sql';
             } else {
-                $goto_include = 'libraries/entry_points/table/sql.php';
+                $goto_include = '/table/sql';
             }
         }
         return $goto_include;

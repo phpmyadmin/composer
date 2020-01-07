@@ -1032,7 +1032,8 @@ class ConfigTest extends PmaTestCase
      */
     public function testGetUploadTempDir(): void
     {
-        $this->object->set('TempDir', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
+        $this->object->set('TempDir', realpath(sys_get_temp_dir()) . DIRECTORY_SEPARATOR);
+
         $this->assertEquals(
             $this->object->getTempDir('upload'),
             $this->object->getUploadTempDir()

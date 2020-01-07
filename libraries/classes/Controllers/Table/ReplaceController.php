@@ -6,6 +6,9 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
+use PhpMyAdmin\Controllers\Database\SqlController as DatabaseSqlController;
+use PhpMyAdmin\Controllers\SqlController;
+use PhpMyAdmin\Controllers\Table\SqlController as TableSqlController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\File;
@@ -67,7 +70,7 @@ final class ReplaceController extends AbstractController
      */
     public function index(): void
     {
-        global $db, $table, $url_params, $message;
+        global $containerBuilder, $db, $table, $url_params, $message;
         global $err_url, $mime_map, $unsaved_values, $active_page, $disp_query, $disp_message;
         global $goto_include, $loop_array, $using_key, $is_insert, $is_insertignore, $query;
         global $value_sets, $func_no_param, $func_optional_param, $gis_from_text_functions, $gis_from_wkb_functions;
@@ -385,10 +388,33 @@ final class ReplaceController extends AbstractController
             // Note: logic passes here for inline edit
             $message = Message::success(__('No change'));
             // Avoid infinite recursion
-            if ($goto_include == 'libraries/entry_points/table/replace.php') {
-                $goto_include = 'libraries/entry_points/table/change.php';
+            if ($goto_include == '/table/replace') {
+                $goto_include = '/table/change';
             }
             $active_page = $goto_include;
+
+            if ($goto_include === '/sql') {
+                /** @var SqlController $controller */
+                $controller = $containerBuilder->get(SqlController::class);
+                $controller->index();
+                return;
+            } elseif ($goto_include === '/database/sql') {
+                /** @var DatabaseSqlController $controller */
+                $controller = $containerBuilder->get(DatabaseSqlController::class);
+                $controller->index();
+                return;
+            } elseif ($goto_include === '/table/change') {
+                /** @var ChangeController $controller */
+                $controller = $containerBuilder->get(ChangeController::class);
+                $controller->index();
+                return;
+            } elseif ($goto_include === '/table/sql') {
+                /** @var TableSqlController $controller */
+                $controller = $containerBuilder->get(TableSqlController::class);
+                $controller->index();
+                return;
+            }
+
             include ROOT_PATH . Core::securePath((string) $goto_include);
             return;
         }
@@ -423,7 +449,7 @@ final class ReplaceController extends AbstractController
             );
         }
         if ($row_skipped) {
-            $goto_include = 'libraries/entry_points/table/change.php';
+            $goto_include = '/table/change';
             $message->addMessagesString($insert_errors, '<br>');
             $message->isError(true);
         }
@@ -563,6 +589,28 @@ final class ReplaceController extends AbstractController
          */
         if (isset($_POST['after_insert']) && 'new_insert' == $_POST['after_insert']) {
             unset($_POST['where_clause']);
+        }
+
+        if ($goto_include === '/sql') {
+            /** @var SqlController $controller */
+            $controller = $containerBuilder->get(SqlController::class);
+            $controller->index();
+            return;
+        } elseif ($goto_include === '/database/sql') {
+            /** @var DatabaseSqlController $controller */
+            $controller = $containerBuilder->get(DatabaseSqlController::class);
+            $controller->index();
+            return;
+        } elseif ($goto_include === '/table/change') {
+            /** @var ChangeController $controller */
+            $controller = $containerBuilder->get(ChangeController::class);
+            $controller->index();
+            return;
+        } elseif ($goto_include === '/table/sql') {
+            /** @var TableSqlController $controller */
+            $controller = $containerBuilder->get(TableSqlController::class);
+            $controller->index();
+            return;
         }
 
         /**

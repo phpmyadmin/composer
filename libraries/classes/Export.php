@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use PhpMyAdmin\Controllers\Database\ExportController as DatabaseExportController;
+use PhpMyAdmin\Controllers\Server\ExportController as ServerExportController;
+use PhpMyAdmin\Controllers\Table\ExportController as TableExportController;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 
@@ -1047,16 +1050,23 @@ class Export
      */
     public function showPage(string $db, string $table, string $export_type): void
     {
-        global $cfg;
+        global $active_page, $containerBuilder;
+
         if ($export_type == 'server') {
             $active_page = Url::getFromRoute('/server/export');
-            include_once ROOT_PATH . 'libraries/entry_points/server/export.php';
+            /** @var ServerExportController $controller */
+            $controller = $containerBuilder->get(ServerExportController::class);
+            $controller->index();
         } elseif ($export_type == 'database') {
             $active_page = Url::getFromRoute('/database/export');
-            include_once ROOT_PATH . 'libraries/entry_points/database/export.php';
+            /** @var DatabaseExportController $controller */
+            $controller = $containerBuilder->get(DatabaseExportController::class);
+            $controller->index();
         } else {
             $active_page = Url::getFromRoute('/table/export');
-            include_once ROOT_PATH . 'libraries/entry_points/table/export.php';
+            /** @var TableExportController $controller */
+            $controller = $containerBuilder->get(TableExportController::class);
+            $controller->index();
         }
         exit;
     }
