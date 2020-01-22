@@ -1,8 +1,6 @@
 <?php
 /**
  * Handles visualization of GIS data
- *
- * @package PhpMyAdmin-GIS
  */
 declare(strict_types=1);
 
@@ -12,22 +10,31 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Util;
 use TCPDF;
+use function array_merge;
+use function imagecolorallocate;
+use function imagecreatetruecolor;
+use function imagedestroy;
+use function imagefilledrectangle;
+use function imagepng;
+use function intval;
+use function is_numeric;
+use function mb_strlen;
+use function mb_strtolower;
+use function mb_substr;
+use function ob_get_clean;
+use function ob_start;
+use const PNG_ALL_FILTERS;
+use function base64_encode;
 
 /**
  * Handles visualization of GIS data
- *
- * @package PhpMyAdmin-GIS
  */
 class GisVisualization
 {
-    /**
-     * @var array   Raw data for the visualization
-     */
+    /** @var array   Raw data for the visualization */
     private $_data;
     private $_modified_sql;
-    /**
-     * @var array   Set of default settings values are here.
-     */
+    /** @var array   Set of default settings values are here. */
     private $_settings = [
         // Array of colors to be used for GIS visualizations.
         'colors' => [
@@ -54,9 +61,7 @@ class GisVisualization
         // The height of the GIS visualization.
         'height' => 450,
     ];
-    /**
-     * @var array   Options that the user has specified.
-     */
+    /** @var array   Options that the user has specified. */
     private $_userSpecifiedSettings = null;
 
     /**
@@ -119,7 +124,7 @@ class GisVisualization
     }
 
     /**
-     * Constructor. Stores user specified options.
+     * Stores user specified options.
      *
      * @param string     $sql_query SQL to fetch raw data for visualization
      * @param array      $options   Users specified options

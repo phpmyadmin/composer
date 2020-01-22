@@ -1,29 +1,22 @@
 <?php
 /**
  * Test for faked database access
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Util;
 use stdClass;
 
 /**
  * Tests basic functionality of dummy dbi driver
- *
- * @package PhpMyAdmin-test
  */
 class DatabaseInterfaceTest extends PmaTestCase
 {
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $_dbi;
 
     /**

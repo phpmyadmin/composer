@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Controllers\Setup\ServersController
- *
- * @package PhpMyAdmin\Controllers\Setup
  */
 declare(strict_types=1);
 
@@ -11,10 +9,9 @@ namespace PhpMyAdmin\Controllers\Setup;
 use PhpMyAdmin\Config\Forms\Setup\ServersForm;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Setup\FormProcessing;
+use function ob_get_clean;
+use function ob_start;
 
-/**
- * @package PhpMyAdmin\Controllers\Setup
- */
 class ServersController extends AbstractController
 {
     /**

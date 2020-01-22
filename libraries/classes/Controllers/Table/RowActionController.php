@@ -1,24 +1,17 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\Url;
+use function is_array;
 
 /**
  * Handle row specific actions like edit, delete, export.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class RowActionController extends AbstractController
 {
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $containerBuilder, $db, $goto, $pmaThemeImage, $sql_query, $table;

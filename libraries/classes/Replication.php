@@ -1,17 +1,16 @@
 <?php
 /**
  * Replication helpers
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function explode;
+use function mb_strtoupper;
+
 /**
  * PhpMyAdmin\Replication class
- *
- * @package PhpMyAdmin
  */
 class Replication
 {
@@ -26,7 +25,7 @@ class Replication
     public function extractDbOrTable($string, $what = 'db')
     {
         $list = explode('.', $string);
-        if ('db' == $what) {
+        if ($what == 'db') {
             return $list[0];
         } else {
             return $list[1];
@@ -47,7 +46,6 @@ class Replication
      */
     public function slaveControl($action, $control = null, $link = null)
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
 
         $action = mb_strtoupper($action);

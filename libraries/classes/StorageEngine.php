@@ -1,8 +1,6 @@
 <?php
 /**
  * Library for extracting information about the available storage engines
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -21,7 +19,13 @@ use PhpMyAdmin\Engines\Ndbcluster;
 use PhpMyAdmin\Engines\Pbxt;
 use PhpMyAdmin\Engines\PerformanceSchema;
 use PhpMyAdmin\Html\Generator;
-use PhpMyAdmin\Util;
+use function array_key_exists;
+use function define;
+use function explode;
+use function htmlspecialchars;
+use function mb_stripos;
+use function mb_strtolower;
+use function sprintf;
 
 /**
 * defines
@@ -38,35 +42,23 @@ define('PMA_ENGINE_DETAILS_TYPE_BOOLEAN', 3); // 'ON' or 'OFF'
 
 /**
  * Base Storage Engine Class
- *
- * @package PhpMyAdmin
  */
 class StorageEngine
 {
-    /**
-     * @var string engine name
-     */
+    /** @var string engine name */
     public $engine  = 'dummy';
 
-    /**
-     * @var string engine title/description
-     */
+    /** @var string engine title/description */
     public $title   = 'PMA Dummy Engine Class';
 
-    /**
-     * @var string engine lang description
-     */
+    /** @var string engine lang description */
     public $comment
         = 'If you read this text inside phpMyAdmin, something went wrong...';
 
-    /**
-     * @var integer engine supported by current server
-     */
+    /** @var integer engine supported by current server */
     public $support = PMA_ENGINE_SUPPORT_NO;
 
     /**
-     * Constructor
-     *
      * @param string $engine The engine ID
      */
     public function __construct($engine)
@@ -106,7 +98,7 @@ class StorageEngine
     {
         static $storage_engines = null;
 
-        if (null == $storage_engines) {
+        if ($storage_engines == null) {
             $storage_engines
                 = $GLOBALS['dbi']->fetchResult('SHOW STORAGE ENGINES', 'Engine');
             if ($GLOBALS['dbi']->getVersion() >= 50708) {

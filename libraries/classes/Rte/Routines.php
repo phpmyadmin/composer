@@ -1,8 +1,6 @@
 <?php
 /**
  * Functions for routine management.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -22,42 +20,39 @@ use PhpMyAdmin\SqlParser\Utils\Routine;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function count;
+use function htmlspecialchars;
+use function in_array;
+use function is_array;
+use function max;
+use function mb_strtoupper;
+use function sprintf;
+use function trigger_error;
+use const E_USER_WARNING;
+use function mb_strtolower;
 
 /**
  * PhpMyAdmin\Rte\Routines class
- *
- * @package PhpMyAdmin
  */
 class Routines
 {
-    /**
-     * @var Export
-     */
+    /** @var Export */
     private $export;
 
-    /**
-     * @var Footer
-     */
+    /** @var Footer */
     private $footer;
 
-    /**
-     * @var General
-     */
+    /** @var General */
     private $general;
 
-    /**
-     * @var RteList
-     */
+    /** @var RteList */
     private $rteList;
 
-    /**
-     * @var Words
-     */
+    /** @var Words */
     private $words;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -1660,8 +1655,8 @@ class Routines
             $retval .= '<td>' . $routine['item_param_type'][$i] . "</td>\n";
             if ($cfg['ShowFunctionFields']) {
                 $retval .= "<td>\n";
-                if (false !== stripos($routine['item_param_type'][$i], 'enum')
-                    || false !== stripos($routine['item_param_type'][$i], 'set')
+                if (stripos($routine['item_param_type'][$i], 'enum') !== false
+                    || stripos($routine['item_param_type'][$i], 'set') !== false
                     || in_array(
                         mb_strtolower($routine['item_param_type'][$i]),
                         $no_support_types

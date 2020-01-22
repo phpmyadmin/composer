@@ -2,8 +2,6 @@
 /**
  * Display form for changing/adding table fields/columns.
  * Included by /table/add-field and /table/create
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -63,7 +61,6 @@ $length_values_input_size = 8;
 
 $content_cells = [];
 
-/** @var string $db */
 $form_params = [
     'db' => $db,
 ];
@@ -271,7 +268,7 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
         );
 
         $mime_map[$columnMeta['Field']] = array_merge(
-            isset($mime_map[$columnMeta['Field']]) ? $mime_map[$columnMeta['Field']] : [],
+            $mime_map[$columnMeta['Field']] ?? [],
             [
                 'mimetype' => Util::getValueByKey($_POST, "field_mimetype.${columnNumber}"),
                 'transformation' => Util::getValueByKey(
@@ -323,7 +320,7 @@ for ($columnNumber = 0; $columnNumber < $num_fields; $columnNumber++) {
                 $columnMeta['DefaultType'] = 'USER_DEFINED';
                 $columnMeta['DefaultValue'] = $columnMeta['Default'];
 
-                if ('text' === substr($columnMeta['Type'], -4)) {
+                if (substr($columnMeta['Type'], -4) === 'text') {
                     $textDefault = substr($columnMeta['Default'], 1, -1);
                     $columnMeta['Default'] = stripcslashes($textDefault !== false ? $textDefault : $columnMeta['Default']);
                 }

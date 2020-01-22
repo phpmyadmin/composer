@@ -1,8 +1,6 @@
 <?php
 /**
  * PDF schema handling
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -11,7 +9,16 @@ namespace PhpMyAdmin\Plugins\Schema\Pdf;
 use PhpMyAdmin\Pdf as PdfLib;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Util;
+use function class_exists;
+use function count;
+use function getcwd;
+use function max;
+use function mb_ord;
+use function str_replace;
+use function strlen;
+use function ucfirst;
 
+// phpcs:disable PSR1.Files.SideEffects
 /**
  * Skip the plugin if TCPDF is not available.
  */
@@ -26,14 +33,15 @@ if (! class_exists('TCPDF')) {
 if (getcwd() == __DIR__) {
     die('Attack stopped');
 }
+// phpcs:enable
 
 /**
  * Extends the "TCPDF" class and helps
  * in developing the structure of PDF Schema Export
  *
- * @access  public
- * @package PhpMyAdmin
  * @see     TCPDF
+ *
+ * @access  public
  */
 class Pdf extends PdfLib
 {
@@ -56,9 +64,7 @@ class Pdf extends PdfLib
     private $_withDoc;
     private $_db;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**
@@ -385,7 +391,7 @@ class Pdf extends PdfLib
             if ($c == ' ') {
                 $sep = $i;
             }
-            $l += $cw[mb_ord($c)] ?? 0 ;
+            $l += $cw[mb_ord($c)] ?? 0;
             if ($l > $wmax) {
                 if ($sep == -1) {
                     if ($i == $j) {

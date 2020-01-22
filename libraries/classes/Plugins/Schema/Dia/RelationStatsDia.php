@@ -1,12 +1,13 @@
 <?php
 /**
  * Contains PhpMyAdmin\Plugins\Schema\Dia\RelationStatsDia class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Schema\Dia;
+
+use function array_search;
+use function shuffle;
 
 /**
  * Relation preferences/statistics
@@ -16,9 +17,9 @@ namespace PhpMyAdmin\Plugins\Schema\Dia;
  * master table's master field to foreign table's foreign key
  * in dia XML document.
  *
- * @package PhpMyAdmin
- * @name    Relation_Stats_Dia
  * @see     PMA_DIA
+ *
+ * @name    Relation_Stats_Dia
  */
 class RelationStatsDia
 {
@@ -37,8 +38,6 @@ class RelationStatsDia
     public $referenceColor;
 
     /**
-     * The "PhpMyAdmin\Plugins\Schema\Dia\RelationStatsDia" constructor
-     *
      * @see Relation_Stats_Dia::_getXy
      *
      * @param Dia           $diagram       The DIA diagram

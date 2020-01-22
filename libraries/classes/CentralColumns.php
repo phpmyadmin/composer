@@ -1,8 +1,6 @@
 <?php
 /**
  * Functions for displaying user preferences pages
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -11,12 +9,19 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\Charsets\Charset;
 use PhpMyAdmin\Charsets\Collation;
 use PhpMyAdmin\Html\Generator;
-use PhpMyAdmin\Message;
+use function array_unique;
+use function count;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function is_bool;
+use function mb_strtoupper;
+use function sprintf;
+use function trim;
+use function explode;
 
 /**
  * PhpMyAdmin\CentralColumns class
- *
- * @package PhpMyAdmin
  */
 class CentralColumns
 {
@@ -55,19 +60,13 @@ class CentralColumns
      */
     private $disableIs;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**
-     * Constructor
-     *
      * @param DatabaseInterface $dbi DatabaseInterface instance
      */
     public function __construct(DatabaseInterface $dbi)
@@ -94,7 +93,7 @@ class CentralColumns
     {
         static $cfgCentralColumns = null;
 
-        if (null !== $cfgCentralColumns) {
+        if ($cfgCentralColumns !== null) {
             return $cfgCentralColumns;
         }
 

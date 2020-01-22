@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for FormDisplay class in config folder
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,11 +9,10 @@ namespace PhpMyAdmin\Tests\Config;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Descriptions;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function in_array;
 
 /**
  * Tests for PMA_FormDisplay class
- *
- * @package PhpMyAdmin-test
  */
 class DescriptionTest extends PmaTestCase
 {

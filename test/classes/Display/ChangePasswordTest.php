@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Display\ChangePassword
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -12,15 +10,12 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\Display\ChangePassword;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\TestCase;
-
-require_once ROOT_PATH . 'libraries/config.default.php';
+use function htmlspecialchars;
 
 /**
  * ChangePasswordTest class
  *
  * this class is for testing PhpMyAdmin\Display\ChangePassword functions
- *
- * @package PhpMyAdmin-test
  */
 class ChangePasswordTest extends TestCase
 {

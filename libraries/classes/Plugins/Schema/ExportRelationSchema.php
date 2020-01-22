@@ -2,8 +2,6 @@
 /**
  * Contains PhpMyAdmin\Plugins\Schema\ExportRelationSchema class which is
  * inherited by all schema classes.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,14 +10,14 @@ namespace PhpMyAdmin\Plugins\Schema;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function intval;
 use function rawurldecode;
 
 /**
  * This class is inherited by all schema classes
  * It contains those methods which are common in them
  * it works like factory pattern
- *
- * @package PhpMyAdmin
  */
 class ExportRelationSchema
 {
@@ -34,9 +32,7 @@ class ExportRelationSchema
     protected $pageNumber;
     protected $offline;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     protected $relation;
 
     /**

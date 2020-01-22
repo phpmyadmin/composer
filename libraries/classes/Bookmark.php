@@ -1,17 +1,20 @@
 <?php
 /**
  * Handles bookmarking SQL queries
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function count;
+use function preg_match_all;
+use function preg_replace;
+use function str_replace;
+use function strlen;
+use const PREG_SET_ORDER;
+
 /**
  * Handles bookmarking SQL queries
- *
- * @package PhpMyAdmin
  */
 class Bookmark
 {
@@ -46,9 +49,7 @@ class Bookmark
      */
     private $_query;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -218,7 +219,7 @@ class Bookmark
     {
         static $cfgBookmark = null;
 
-        if (null !== $cfgBookmark) {
+        if ($cfgBookmark !== null) {
             return $cfgBookmark;
         }
 

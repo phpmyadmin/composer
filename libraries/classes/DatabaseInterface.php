@@ -1,8 +1,6 @@
 <?php
 /**
  * Main interface for database interactions
- *
- * @package PhpMyAdmin-DBI
  */
 declare(strict_types=1);
 
@@ -16,11 +14,56 @@ use PhpMyAdmin\Dbal\DbiMysqli;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\SqlParser\Context;
+use function array_diff;
+use function array_keys;
+use function array_map;
+use function array_merge;
+use function array_multisort;
+use function array_reverse;
+use function array_shift;
+use function array_slice;
+use function basename;
+use function closelog;
+use function count;
+use function debug_backtrace;
+use function defined;
+use function explode;
+use function function_exists;
+use function htmlspecialchars;
+use function implode;
+use function intval;
+use function is_array;
+use function is_int;
+use function is_string;
+use function mb_strtolower;
+use function md5;
+use function microtime;
+use function openlog;
+use function reset;
+use function rtrim;
+use function sprintf;
+use function stripos;
+use function strlen;
+use function strncmp;
+use function strpos;
+use function strtolower;
+use function strtoupper;
+use function substr;
+use function syslog;
+use function trigger_error;
+use function uasort;
+use function uksort;
+use function usort;
+use const E_USER_WARNING;
+use const LOG_INFO;
+use const LOG_NDELAY;
+use const LOG_PID;
+use const LOG_USER;
+use const SORT_ASC;
+use const SORT_DESC;
 
 /**
  * Main interface for database interactions
- *
- * @package PhpMyAdmin-DBI
  */
 class DatabaseInterface implements DbalInterface
 {
@@ -56,9 +99,7 @@ class DatabaseInterface implements DbalInterface
      */
     public const CONNECT_AUXILIARY = 0x102;
 
-    /**
-     * @var DbiExtension
-     */
+    /** @var DbiExtension */
     private $_extension;
 
     /**
@@ -68,55 +109,33 @@ class DatabaseInterface implements DbalInterface
      */
     private $_links;
 
-    /**
-     * @var array Table data cache
-     */
+    /** @var array Table data cache */
     private $_table_cache;
 
-    /**
-     * @var array Current user and host cache
-     */
+    /** @var array Current user and host cache */
     private $_current_user;
 
-    /**
-     * @var null|string lower_case_table_names value cache
-     */
+    /** @var null|string lower_case_table_names value cache */
     private $_lower_case_table_names = null;
 
-    /**
-     * @var boolean Whether connection is MariaDB
-     */
+    /** @var boolean Whether connection is MariaDB */
     private $_is_mariadb = false;
-    /**
-     * @var boolean Whether connection is Percona
-     */
+    /** @var boolean Whether connection is Percona */
     private $_is_percona = false;
-    /**
-     * @var integer Server version as number
-     */
+    /** @var integer Server version as number */
     private $_version_int = 55000;
-    /**
-     * @var string Server version
-     */
+    /** @var string Server version */
     private $_version_str = '5.50.0';
-    /**
-     * @var string Server version comment
-     */
+    /** @var string Server version comment */
     private $_version_comment = '';
 
-    /**
-     * @var Types MySQL types data
-     */
+    /** @var Types MySQL types data */
     public $types;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**
-     * Constructor
-     *
      * @param DbiExtension $ext Object to be used for database queries
      */
     public function __construct(DbiExtension $ext)
@@ -124,8 +143,8 @@ class DatabaseInterface implements DbalInterface
         $this->_extension = $ext;
         $this->_links = [];
         if (defined('TESTSUITE')) {
-            $this->_links[DatabaseInterface::CONNECT_USER] = 1;
-            $this->_links[DatabaseInterface::CONNECT_CONTROL] = 2;
+            $this->_links[self::CONNECT_USER] = 1;
+            $this->_links[self::CONNECT_CONTROL] = 2;
         }
         $this->_table_cache = [];
         $this->_current_user = [];
@@ -157,7 +176,7 @@ class DatabaseInterface implements DbalInterface
      */
     public function query(
         string $query,
-        $link = DatabaseInterface::CONNECT_USER,
+        $link = self::CONNECT_USER,
         int $options = 0,
         bool $cache_affected_rows = true
     ) {
@@ -302,7 +321,7 @@ class DatabaseInterface implements DbalInterface
      */
     public function tryQuery(
         string $query,
-        $link = DatabaseInterface::CONNECT_USER,
+        $link = self::CONNECT_USER,
         int $options = 0,
         bool $cache_affected_rows = true
     ) {
@@ -327,7 +346,7 @@ class DatabaseInterface implements DbalInterface
             $this->_dbgQuery($query, $link, $result, $time);
             if ($GLOBALS['cfg']['DBG']['sqllog']) {
                 $warningsCount = '';
-                if (($options & DatabaseInterface::QUERY_STORE) == DatabaseInterface::QUERY_STORE) {
+                if (($options & self::QUERY_STORE) == self::QUERY_STORE) {
                     if (isset($this->_links[$link]->warning_count)) {
                         $warningsCount = $this->_links[$link]->warning_count;
                     }
@@ -361,7 +380,7 @@ class DatabaseInterface implements DbalInterface
      */
     public function tryMultiQuery(
         string $multiQuery = '',
-        $linkIndex = DatabaseInterface::CONNECT_USER
+        $linkIndex = self::CONNECT_USER
     ) {
         if (! isset($this->_links[$linkIndex])) {
             return false;
@@ -377,7 +396,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return array   tables names
      */
-    public function getTables(string $database, $link = DatabaseInterface::CONNECT_USER): array
+    public function getTables(string $database, $link = self::CONNECT_USER): array
     {
         $tables = $this->fetchResult(
             'SHOW TABLES FROM ' . Util::backquote($database) . ';',
@@ -392,7 +411,6 @@ class DatabaseInterface implements DbalInterface
         return $tables;
     }
 
-
     /**
      * returns
      *
@@ -402,7 +420,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return array           array of found foreign keys
      */
-    public function getForeignKeyConstrains(string $database, array $tables, $link = DatabaseInterface::CONNECT_USER): array
+    public function getForeignKeyConstrains(string $database, array $tables, $link = self::CONNECT_USER): array
     {
         $tablesListForQuery = '';
         foreach ($tables as $table) {
@@ -459,7 +477,7 @@ class DatabaseInterface implements DbalInterface
                         )
                     )
                     . '\')';
-            } elseif (true === $tbl_is_group) {
+            } elseif ($tbl_is_group === true) {
                 $sql_where_table = 'AND t.`TABLE_NAME` LIKE \''
                     . Util::escapeMysqlWildcards(
                         $this->escapeString($table)
@@ -560,9 +578,9 @@ class DatabaseInterface implements DbalInterface
         string $sort_by = 'Name',
         string $sort_order = 'ASC',
         ?string $table_type = null,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): array {
-        if (true === $limit_count) {
+        if ($limit_count === true) {
             $limit_count = $GLOBALS['cfg']['MaxTableList'];
         }
 
@@ -646,12 +664,12 @@ class DatabaseInterface implements DbalInterface
         // this is why we fall back to SHOW TABLE STATUS even for MySQL >= 50002
         if (empty($tables)) {
             foreach ($databases as $each_database) {
-                if ($table || (true === $tbl_is_group) || ! empty($table_type)) {
+                if ($table || ($tbl_is_group === true) || ! empty($table_type)) {
                     $sql = 'SHOW TABLE STATUS FROM '
                         . Util::backquote($each_database)
                         . ' WHERE';
                     $needAnd = false;
-                    if ($table || (true === $tbl_is_group)) {
+                    if ($table || ($tbl_is_group === true)) {
                         if (is_array($table)) {
                             $sql .= ' `Name` IN (\''
                                 . implode(
@@ -854,7 +872,6 @@ class DatabaseInterface implements DbalInterface
         return $views;
     }
 
-
     /**
      * returns array with databases containing extended infos about them
      *
@@ -874,7 +891,7 @@ class DatabaseInterface implements DbalInterface
     public function getDatabasesFull(
         ?string $database = null,
         bool $force_stats = false,
-        $link = DatabaseInterface::CONNECT_USER,
+        $link = self::CONNECT_USER,
         string $sort_by = 'SCHEMA_NAME',
         string $sort_order = 'ASC',
         int $limit_offset = 0,
@@ -882,7 +899,7 @@ class DatabaseInterface implements DbalInterface
     ): array {
         $sort_order = strtoupper($sort_order);
 
-        if (true === $limit_count) {
+        if ($limit_count === true) {
             $limit_count = $GLOBALS['cfg']['MaxDbList'];
         }
 
@@ -1010,7 +1027,7 @@ class DatabaseInterface implements DbalInterface
 
                     // for InnoDB, this does not contain the number of
                     // overhead bytes but the total free space
-                    if ('InnoDB' != $row['Engine']) {
+                    if ($row['Engine'] != 'InnoDB') {
                         $databases[$database_name]['SCHEMA_DATA_FREE']
                             += $row['Data_free'];
                     }
@@ -1138,26 +1155,26 @@ class DatabaseInterface implements DbalInterface
         ?string $database = null,
         ?string $table = null,
         ?string $column = null,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): array {
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
             $sql_wheres = [];
             $array_keys = [];
 
             // get columns information from information_schema
-            if (null !== $database) {
+            if ($database !== null) {
                 $sql_wheres[] = '`TABLE_SCHEMA` = \''
                     . $this->escapeString($database, $link) . '\' ';
             } else {
                 $array_keys[] = 'TABLE_SCHEMA';
             }
-            if (null !== $table) {
+            if ($table !== null) {
                 $sql_wheres[] = '`TABLE_NAME` = \''
                     . $this->escapeString($table, $link) . '\' ';
             } else {
                 $array_keys[] = 'TABLE_NAME';
             }
-            if (null !== $column) {
+            if ($column !== null) {
                 $sql_wheres[] = '`COLUMN_NAME` = \''
                     . $this->escapeString($column, $link) . '\' ';
             } else {
@@ -1186,7 +1203,7 @@ class DatabaseInterface implements DbalInterface
         }
 
         $columns = [];
-        if (null === $database) {
+        if ($database === null) {
             foreach ($GLOBALS['dblist']->databases as $database) {
                 $columns[$database] = $this->getColumnsFull(
                     $database,
@@ -1196,7 +1213,7 @@ class DatabaseInterface implements DbalInterface
                 );
             }
             return $columns;
-        } elseif (null === $table) {
+        } elseif ($table === null) {
             $tables = $this->getTables($database);
             foreach ($tables as $table) {
                 $columns[$table] = $this->getColumnsFull(
@@ -1210,7 +1227,7 @@ class DatabaseInterface implements DbalInterface
         }
         $sql = 'SHOW FULL COLUMNS FROM '
             . Util::backquote($database) . '.' . Util::backquote($table);
-        if (null !== $column) {
+        if ($column !== null) {
             $sql .= " LIKE '" . $this->escapeString($column, $link) . "'";
         }
 
@@ -1275,7 +1292,7 @@ class DatabaseInterface implements DbalInterface
             $ordinal_position++;
         }
 
-        if (null !== $column) {
+        if ($column !== null) {
             return reset($columns);
         }
 
@@ -1328,7 +1345,7 @@ class DatabaseInterface implements DbalInterface
         string $table,
         ?string $column = null,
         bool $full = false,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): array {
         $sql = $this->getColumnsSql($database, $table, $column, $full);
         $fields = $this->fetchResult($sql, 'Field', null, $link);
@@ -1374,7 +1391,7 @@ class DatabaseInterface implements DbalInterface
     public function getColumnNames(
         string $database,
         string $table,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): ?array {
         $sql = $this->getColumnsSql($database, $table);
         // We only need the 'Field' column which contains the table's column names
@@ -1420,7 +1437,7 @@ class DatabaseInterface implements DbalInterface
     public function getTableIndexes(
         string $database,
         string $table,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): array {
         $sql = $this->getTableIndexesSql($database, $table);
         $indexes = $this->fetchResult($sql, null, null, $link);
@@ -1444,7 +1461,7 @@ class DatabaseInterface implements DbalInterface
     public function getVariable(
         string $var,
         int $type = self::GETVAR_SESSION,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ) {
         switch ($type) {
             case self::GETVAR_SESSION:
@@ -1476,7 +1493,7 @@ class DatabaseInterface implements DbalInterface
     public function setVariable(
         string $var,
         string $value,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): bool {
         $current_value = $this->getVariable(
             $var,
@@ -1515,13 +1532,13 @@ class DatabaseInterface implements DbalInterface
         $version = $this->fetchSingleRow(
             'SELECT @@version, @@version_comment',
             'ASSOC',
-            DatabaseInterface::CONNECT_USER
+            self::CONNECT_USER
         );
 
         if (is_array($version)) {
-            $this->_version_str = isset($version['@@version']) ? $version['@@version'] : '';
+            $this->_version_str = $version['@@version'] ?? '';
             $this->_version_int = self::versionToInt($this->_version_str);
-            $this->_version_comment = isset($version['@@version_comment']) ? $version['@@version_comment'] : '';
+            $this->_version_comment = $version['@@version_comment'] ?? '';
             if (stripos($this->_version_str, 'mariadb') !== false) {
                 $this->_is_mariadb = true;
             }
@@ -1541,7 +1558,7 @@ class DatabaseInterface implements DbalInterface
         $GLOBALS['charset_connection'] = $default_charset;
         $this->query(
             sprintf('SET NAMES \'%s\' COLLATE \'%s\';', $default_charset, $default_collation),
-            DatabaseInterface::CONNECT_USER,
+            self::CONNECT_USER,
             self::QUERY_STORE
         );
 
@@ -1550,7 +1567,7 @@ class DatabaseInterface implements DbalInterface
         if (! empty($locale)) {
             $this->query(
                 "SET lc_messages = '" . $locale . "';",
-                DatabaseInterface::CONNECT_USER,
+                self::CONNECT_USER,
                 self::QUERY_STORE
             );
         }
@@ -1607,9 +1624,9 @@ class DatabaseInterface implements DbalInterface
         }
         $result = $this->tryQuery(
             "SET collation_connection = '"
-            . $this->escapeString($collation, DatabaseInterface::CONNECT_USER)
+            . $this->escapeString($collation, self::CONNECT_USER)
             . "';",
-            DatabaseInterface::CONNECT_USER,
+            self::CONNECT_USER,
             self::QUERY_STORE
         );
         if ($result === false) {
@@ -1690,7 +1707,7 @@ class DatabaseInterface implements DbalInterface
         string $query,
         int $row_number = 0,
         $field = 0,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ) {
         $value = false;
 
@@ -1752,7 +1769,7 @@ class DatabaseInterface implements DbalInterface
     public function fetchSingleRow(
         string $query,
         string $type = 'ASSOC',
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ) {
         $result = $this->tryQuery(
             $query,
@@ -1861,7 +1878,7 @@ class DatabaseInterface implements DbalInterface
         string $query,
         $key = null,
         $value = null,
-        $link = DatabaseInterface::CONNECT_USER,
+        $link = self::CONNECT_USER,
         int $options = 0
     ) {
         $resultrows = [];
@@ -1876,7 +1893,7 @@ class DatabaseInterface implements DbalInterface
         $fetch_function = 'fetchAssoc';
 
         // no nested array if only one field is in result
-        if (null === $key && 1 === $this->numFields($result)) {
+        if ($key === null && $this->numFields($result) === 1) {
             $value = 0;
             $fetch_function = 'fetchRow';
         }
@@ -1886,7 +1903,7 @@ class DatabaseInterface implements DbalInterface
             $fetch_function = 'fetchRow';
         }
 
-        if (null === $key) {
+        if ($key === null) {
             while ($row = $this->$fetch_function($result)) {
                 $resultrows[] = $this->_fetchValue($row, $value);
             }
@@ -1895,7 +1912,7 @@ class DatabaseInterface implements DbalInterface
                 while ($row = $this->$fetch_function($result)) {
                     $result_target =& $resultrows;
                     foreach ($key as $key_index) {
-                        if (null === $key_index) {
+                        if ($key_index === null) {
                             $result_target =& $result_target[];
                             continue;
                         }
@@ -1948,7 +1965,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return array warnings
      */
-    public function getWarnings($link = DatabaseInterface::CONNECT_USER): array
+    public function getWarnings($link = self::CONNECT_USER): array
     {
         return $this->fetchResult('SHOW WARNINGS', null, null, $link);
     }
@@ -1965,7 +1982,7 @@ class DatabaseInterface implements DbalInterface
     public function getProceduresOrFunctions(
         string $db,
         string $which,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): array {
         $shows = $this->fetchResult(
             'SHOW ' . $which . ' STATUS;',
@@ -1996,7 +2013,7 @@ class DatabaseInterface implements DbalInterface
         string $db,
         string $which,
         string $name,
-        $link = DatabaseInterface::CONNECT_USER
+        $link = self::CONNECT_USER
     ): ?string {
         $returned_field = [
             'PROCEDURE' => 'Create Procedure',
@@ -2345,7 +2362,7 @@ class DatabaseInterface implements DbalInterface
         }
 
         // when connection failed we don't have a $userlink
-        if (! isset($this->_links[DatabaseInterface::CONNECT_USER])) {
+        if (! isset($this->_links[self::CONNECT_USER])) {
             return false;
         }
 
@@ -2508,11 +2525,11 @@ class DatabaseInterface implements DbalInterface
         $user = null;
         $password = null;
 
-        if ($mode == DatabaseInterface::CONNECT_USER) {
+        if ($mode == self::CONNECT_USER) {
             $user = $cfg['Server']['user'];
             $password = $cfg['Server']['password'];
             $server = $cfg['Server'];
-        } elseif ($mode == DatabaseInterface::CONNECT_CONTROL) {
+        } elseif ($mode == self::CONNECT_CONTROL) {
             $user = $cfg['Server']['controluser'];
             $password = $cfg['Server']['controlpass'];
 
@@ -2633,13 +2650,13 @@ class DatabaseInterface implements DbalInterface
         if ($result) {
             $this->_links[$target] = $result;
             /* Run post connect for user connections */
-            if ($target == DatabaseInterface::CONNECT_USER) {
+            if ($target == self::CONNECT_USER) {
                 $this->postConnect();
             }
             return $result;
         }
 
-        if ($mode == DatabaseInterface::CONNECT_CONTROL) {
+        if ($mode == self::CONNECT_CONTROL) {
             trigger_error(
                 __(
                     'Connection for controluser as defined in your '
@@ -2648,7 +2665,7 @@ class DatabaseInterface implements DbalInterface
                 E_USER_WARNING
             );
             return false;
-        } elseif ($mode == DatabaseInterface::CONNECT_AUXILIARY) {
+        } elseif ($mode == self::CONNECT_AUXILIARY) {
             // Do not go back to main login if connection failed
             // (currently used only in unit testing)
             return false;
@@ -2665,7 +2682,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return boolean
      */
-    public function selectDb(string $dbname, $link = DatabaseInterface::CONNECT_USER): bool
+    public function selectDb(string $dbname, $link = self::CONNECT_USER): bool
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2741,7 +2758,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return bool true or false
      */
-    public function moreResults($link = DatabaseInterface::CONNECT_USER): bool
+    public function moreResults($link = self::CONNECT_USER): bool
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2756,7 +2773,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return bool true or false
      */
-    public function nextResult($link = DatabaseInterface::CONNECT_USER): bool
+    public function nextResult($link = self::CONNECT_USER): bool
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2771,7 +2788,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return mixed false when empty results / result set when not empty
      */
-    public function storeResult($link = DatabaseInterface::CONNECT_USER)
+    public function storeResult($link = self::CONNECT_USER)
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2786,7 +2803,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return string|bool type of connection used
      */
-    public function getHostInfo($link = DatabaseInterface::CONNECT_USER)
+    public function getHostInfo($link = self::CONNECT_USER)
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2801,7 +2818,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return int|bool version of the MySQL protocol used
      */
-    public function getProtoInfo($link = DatabaseInterface::CONNECT_USER)
+    public function getProtoInfo($link = self::CONNECT_USER)
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2816,7 +2833,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return string MySQL client library version
      */
-    public function getClientInfo($link = DatabaseInterface::CONNECT_USER): string
+    public function getClientInfo($link = self::CONNECT_USER): string
     {
         if (! isset($this->_links[$link])) {
             return '';
@@ -2831,7 +2848,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return string|bool error or false
      */
-    public function getError($link = DatabaseInterface::CONNECT_USER)
+    public function getError($link = self::CONNECT_USER)
     {
         if (! isset($this->_links[$link])) {
             return false;
@@ -2859,7 +2876,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return int|boolean
      */
-    public function insertId($link = DatabaseInterface::CONNECT_USER)
+    public function insertId($link = self::CONNECT_USER)
     {
         // If the primary key is BIGINT we get an incorrect result
         // (sometimes negative, sometimes positive)
@@ -2881,7 +2898,7 @@ class DatabaseInterface implements DbalInterface
      * @return int|boolean
      */
     public function affectedRows(
-        $link = DatabaseInterface::CONNECT_USER,
+        $link = self::CONNECT_USER,
         bool $get_from_cache = true
     ) {
         if (! isset($this->_links[$link])) {
@@ -2984,7 +3001,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return string a MySQL escaped string
      */
-    public function escapeString(string $str, $link = DatabaseInterface::CONNECT_USER)
+    public function escapeString(string $str, $link = self::CONNECT_USER)
     {
         if ($this->_extension === null || ! isset($this->_links[$link])) {
             return $str;
@@ -3183,7 +3200,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return object|false A statement object or false.
      */
-    public function prepare(string $query, $link = DatabaseInterface::CONNECT_USER)
+    public function prepare(string $query, $link = self::CONNECT_USER)
     {
         return $this->_extension->prepare($this->_links[$link], $query);
     }

@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for all input/output transformation plugins
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -28,11 +26,12 @@ use PhpMyAdmin\Plugins\Transformations\Text_Plain_PreApPend;
 use PhpMyAdmin\Plugins\Transformations\Text_Plain_Substring;
 use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionMethod;
+use function date_default_timezone_set;
+use function function_exists;
+use function method_exists;
 
 /**
  * Tests for different input/output transformation plugins
- *
- * @package PhpMyAdmin-test
  */
 class TransformationPluginsTest extends PmaTestCase
 {

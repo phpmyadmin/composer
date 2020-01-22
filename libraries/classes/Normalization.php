@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Normalization class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -11,11 +9,23 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\Charsets\Charset;
 use PhpMyAdmin\Charsets\Collation;
 use PhpMyAdmin\Html\Generator;
+use function array_merge;
+use function array_unique;
+use function count;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function intval;
+use function json_encode;
+use function mb_strtoupper;
+use function sort;
+use function sprintf;
+use function trim;
+use function str_replace;
 
 /**
  * Set of functions used for normalization
- *
- * @package PhpMyAdmin
  */
 class Normalization
 {
@@ -26,24 +36,16 @@ class Normalization
      */
     private $dbi;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     private $transformations;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**
-     * Constructor
-     *
      * @param DatabaseInterface $dbi             DatabaseInterface instance
      * @param Relation          $relation        Relation instance
      * @param Transformations   $transformations Transformations instance

@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Controllers\HomeController
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -28,20 +26,24 @@ use PhpMyAdmin\ThemeManager;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPreferences;
 use PhpMyAdmin\Util;
+use function count;
+use function extension_loaded;
+use function file_exists;
+use function ini_get;
+use function preg_match;
+use function sprintf;
+use function strlen;
+use function trigger_error;
+use const E_USER_NOTICE;
+use const E_USER_WARNING;
+use const PHP_VERSION;
 
-/**
- * @package PhpMyAdmin\Controllers
- */
 class HomeController extends AbstractController
 {
-    /**
-     * @var Config
-     */
+    /** @var Config */
     private $config;
 
-    /**
-     * @var ThemeManager
-     */
+    /** @var ThemeManager */
     private $themeManager;
 
     /**
@@ -57,7 +59,6 @@ class HomeController extends AbstractController
         $this->config = $config;
         $this->themeManager = $themeManager;
     }
-
 
     /**
      * @param array $params Request parameters
@@ -344,7 +345,6 @@ class HomeController extends AbstractController
     {
         global $PMA_Config;
 
-        /** @var Config $PMA_Config */
         if (! $this->response->isAjax() || ! $PMA_Config->isGitRevision()) {
             return '';
         }
@@ -356,9 +356,6 @@ class HomeController extends AbstractController
         ))->display();
     }
 
-    /**
-     * @return void
-     */
     private function checkRequirements(): void
     {
         global $cfg, $server, $lang;

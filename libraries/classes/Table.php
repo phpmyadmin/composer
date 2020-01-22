@@ -1,21 +1,14 @@
 <?php
 /**
  * Holds the Table class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Html\MySQLDocumentation;
-use PhpMyAdmin\Index;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Export\ExportSql;
-use PhpMyAdmin\Relation;
 use PhpMyAdmin\SqlParser\Components\Expression;
 use PhpMyAdmin\SqlParser\Components\OptionsArray;
 use PhpMyAdmin\SqlParser\Context;
@@ -24,13 +17,11 @@ use PhpMyAdmin\SqlParser\Statements\AlterStatement;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\SqlParser\Statements\DropStatement;
 use PhpMyAdmin\SqlParser\Utils\Table as TableUtils;
-use PhpMyAdmin\Util;
 
 /**
  * Handles everything related to tables
  *
  * @todo make use of Message and Error
- * @package PhpMyAdmin
  */
 class Table
 {
@@ -41,54 +32,34 @@ class Table
     public const PROP_COLUMN_ORDER = 'col_order';
     public const PROP_COLUMN_VISIB = 'col_visib';
 
-    /**
-     * @var string  engine (innodb, myisam, bdb, ...)
-     */
+    /** @var string  engine (innodb, myisam, bdb, ...) */
     public $engine = '';
 
-    /**
-     * @var string  type (view, base table, system view)
-     */
+    /** @var string  type (view, base table, system view) */
     public $type = '';
 
-    /**
-     * @var array UI preferences
-     */
+    /** @var array UI preferences */
     public $uiprefs;
 
-    /**
-     * @var array errors occurred
-     */
+    /** @var array errors occurred */
     public $errors = [];
 
-    /**
-     * @var array messages
-     */
+    /** @var array messages */
     public $messages = [];
 
-    /**
-     * @var string  table name
-     */
+    /** @var string  table name */
     protected $_name = '';
 
-    /**
-     * @var string  database name
-     */
+    /** @var string  database name */
     protected $_db_name = '';
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     protected $_dbi;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**
-     * Constructor
-     *
      * @param string                 $table_name table name
      * @param string                 $db_name    database name
      * @param DatabaseInterface|null $dbi        database interface for the table
@@ -193,7 +164,6 @@ class Table
         . $this->getName($backquoted);
     }
 
-
     /**
      * Checks the storage engine used to create table
      *
@@ -252,7 +222,7 @@ class Table
             WHERE TABLE_SCHEMA = '" . $this->_dbi->escapeString((string) $db) . "'
                 AND TABLE_NAME = '" . $this->_dbi->escapeString((string) $table) . "'"
         );
-        return $result ? true : false;
+        return (bool) $result;
     }
 
     /**
@@ -273,7 +243,7 @@ class Table
                 AND TABLE_NAME = '" . $this->_dbi->escapeString($this->_name) . "'
                 AND IS_UPDATABLE = 'YES'"
         );
-        return $result ? true : false;
+        return (bool) $result;
     }
 
     /**
@@ -330,7 +300,7 @@ class Table
             return '';
         }
 
-        if (null === $info) {
+        if ($info === null) {
             return $this->_dbi->getCachedTableContent([$db, $table]);
         }
 
@@ -403,11 +373,11 @@ class Table
     public function getNumRows()
     {
         $table_num_row_info = $this->getStatusInfo('TABLE_ROWS', false, true);
-        if (false === $table_num_row_info) {
+        if ($table_num_row_info === false) {
             $table_num_row_info = $this->_dbi->getTable($this->_db_name, $GLOBALS['showtable']['Name'])
             ->countRecords(true);
         }
-        return $table_num_row_info ?: 0 ;
+        return $table_num_row_info ?: 0;
     }
 
     /**
@@ -517,7 +487,6 @@ class Table
         //
         // MySQL permits a non-standard syntax for FLOAT and DOUBLE,
         // see https://dev.mysql.com/doc/refman/5.5/en/floating-point-types.html
-        //
         $pattern = '@^(DATE|TINYBLOB|TINYTEXT|BLOB|TEXT|'
             . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|SERIAL|BOOLEAN|UUID)$@i';
         if (strlen($length) !== 0 && ! preg_match($pattern, $type)) {
@@ -530,7 +499,7 @@ class Table
             $query .= ' ' . $attribute;
 
             if ($is_timestamp
-                && false !== stripos($attribute, 'TIMESTAMP')
+                && stripos($attribute, 'TIMESTAMP') !== false
                 && strlen($length) !== 0
                 && $length !== 0
             ) {
@@ -754,7 +723,7 @@ class Table
             }
         }
         // for a VIEW, $row_count is always false at this point
-        if (false !== $row_count
+        if ($row_count !== false
             && $row_count >= $GLOBALS['cfg']['MaxExactCount']
         ) {
             return $row_count;
@@ -1562,7 +1531,7 @@ class Table
             $new_name = strtolower($new_name);
         }
 
-        if (null !== $new_db && $new_db !== $this->getDbName()) {
+        if ($new_db !== null && $new_db !== $this->getDbName()) {
             // Ensure the target is valid
             if (! $GLOBALS['dblist']->databases->exists($new_db)) {
                 $this->errors[] = __('Invalid database:') . ' ' . $new_db;

@@ -1,21 +1,19 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisPolygon
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisPolygon;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisPolygon class
- *
- * @package PhpMyAdmin-test
  */
 class GisPolygonTest extends GisGeomTestCase
 {

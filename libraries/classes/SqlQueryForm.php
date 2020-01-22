@@ -7,24 +7,23 @@
  * @usedby  /table/sql
  * @usedby  /table/structure
  * @usedby  /table/tracking
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Html\MySQLDocumentation;
+use function htmlspecialchars;
+use function sprintf;
+use function strlen;
+use function strpos;
 
 /**
  * PhpMyAdmin\SqlQueryForm class
- *
- * @package PhpMyAdmin
  */
 class SqlQueryForm
 {
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**
@@ -62,7 +61,7 @@ class SqlQueryForm
             $display_tab = 'full';
         }
         // query to show
-        if (true === $query) {
+        if ($query === true) {
             $query = $GLOBALS['sql_query'];
         }
 

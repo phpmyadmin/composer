@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Display\Export
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -13,11 +11,11 @@ use PhpMyAdmin\Display\Export;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Util;
 use PHPUnit\Framework\TestCase;
+use function htmlspecialchars;
 
 /**
  * this class is for testing PhpMyAdmin\Display\Export methods
  *
- * @package PhpMyAdmin-test
  * @group large
  */
 class ExportTest extends TestCase

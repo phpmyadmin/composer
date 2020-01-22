@@ -1,15 +1,12 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Tracker
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Util;
 use ReflectionClass;
@@ -18,8 +15,6 @@ use ReflectionProperty;
 
 /**
  * Tests for PhpMyAdmin\Tracker
- *
- * @package PhpMyAdmin-test
  */
 class TrackerTest extends PmaTestCase
 {
@@ -57,6 +52,7 @@ class TrackerTest extends PmaTestCase
 
         $cfg['dbi'] = $dbi;
     }
+
     /**
      * Test for Tracker::enable
      *

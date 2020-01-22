@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for Advisor class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -10,13 +8,10 @@ namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Advisor;
 use PhpMyAdmin\Config;
-use PhpMyAdmin\Tests\PmaTestCase;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * Tests behaviour of PMA_Advisor class
- *
- * @package PhpMyAdmin-test
  */
 class AdvisorTest extends PmaTestCase
 {

@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationHttp class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,17 +9,16 @@ namespace PhpMyAdmin\Tests\Plugins\Auth;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Plugins\Auth\AuthenticationHttp;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function base64_encode;
+use function ob_get_clean;
+use function ob_start;
 
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationHttp class
- *
- * @package PhpMyAdmin-test
  */
 class AuthenticationHttpTest extends PmaTestCase
 {
-    /**
-     * @var AuthenticationHttp
-     */
+    /** @var AuthenticationHttp */
     protected $object;
 
     /**
@@ -135,7 +132,6 @@ class AuthenticationHttpTest extends PmaTestCase
      */
     public function testAuthLogoutUrl()
     {
-
         $_REQUEST['old_usr'] = '1';
         $GLOBALS['cfg']['Server']['LogoutURL'] = 'https://example.com/logout';
 
@@ -421,7 +417,6 @@ class AuthenticationHttpTest extends PmaTestCase
      */
     public function testAuthFails()
     {
-
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();

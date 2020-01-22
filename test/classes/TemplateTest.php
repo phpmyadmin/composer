@@ -1,27 +1,20 @@
 <?php
 /**
  * Test for PhpMyAdmin\Template class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Tests\PmaTestCase;
 use Twig\Error\LoaderError;
 
 /**
  * Test for PhpMyAdmin\Template class
- *
- * @package PhpMyAdmin-test
  */
 class TemplateTest extends PmaTestCase
 {
-    /**
-     * @var Template
-     */
+    /** @var Template */
     protected $template;
 
     /**

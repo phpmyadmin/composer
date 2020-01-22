@@ -1,21 +1,16 @@
 <?php
 /**
  * tests for PhpMyAdmin\Properties\Plugins\ExportPluginProperties class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Properties\Plugins;
 
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
-use PhpMyAdmin\Tests\Properties\Plugins\ImportPluginPropertiesTest;
 
 /**
  * Tests for PhpMyAdmin\Properties\Plugins\ExportPluginProperties class. Extends PMA_ImportPluginProperties_Tests
  * and adds tests for methods that are not common to both
- *
- * @package PhpMyAdmin-test
  */
 class ExportPluginPropertiesTest extends ImportPluginPropertiesTest
 {

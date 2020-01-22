@@ -1,21 +1,16 @@
 <?php
 /**
  * Tests for methods in PhpMyAdmin\VersionInformation class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\VersionInformation;
 use stdClass;
 
 /**
  * Tests for methods in PhpMyAdmin\VersionInformation class
- *
- * @package PhpMyAdmin-test
  */
 class VersionInformationTest extends PmaTestCase
 {
@@ -91,7 +86,6 @@ class VersionInformationTest extends PmaTestCase
             $versionInformation->versionToInt($version)
         );
     }
-
 
     /**
      * Data provider for version parsing

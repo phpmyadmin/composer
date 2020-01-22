@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Controllers\Database\RoutinesController
- *
- * @package PhpMyAdmin\Controllers\Database
  */
 declare(strict_types=1);
 
@@ -16,11 +14,11 @@ use PhpMyAdmin\Rte\Routines;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function in_array;
+use function strlen;
 
 /**
  * Routines management.
- *
- * @package PhpMyAdmin\Controllers\Database
  */
 class RoutinesController extends AbstractController
 {

@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Controllers\Setup\HomeController
- *
- * @package PhpMyAdmin\Controllers\Setup
  */
 declare(strict_types=1);
 
@@ -15,10 +13,9 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\LanguageManager;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Setup\Index;
+use function preg_replace;
+use function uniqid;
 
-/**
- * @package PhpMyAdmin\Controllers\Setup
- */
 class HomeController extends AbstractController
 {
     /**

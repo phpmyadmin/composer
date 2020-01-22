@@ -1,8 +1,6 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisGeometry
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,17 +9,18 @@ namespace PhpMyAdmin\Tests\Gis;
 use PhpMyAdmin\Gis\GisGeometryCollection;
 use PHPUnit\Framework\TestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function imagesx;
+use function imagesy;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisGeometryCollection class
- *
- * @package PhpMyAdmin-test
  */
 class GisGeometryCollectionTest extends TestCase
 {
-    /**
-     * @access protected
-     */
+    /** @access protected */
     protected $object;
 
     /**

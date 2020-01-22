@@ -1,17 +1,21 @@
 <?php
 /**
  * Saved searches managing
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function count;
+use function intval;
+use function is_string;
+use function json_decode;
+use function json_encode;
+use function max;
+use function min;
+
 /**
  * Saved searches managing
- *
- * @package PhpMyAdmin
  */
 class SavedSearches
 {
@@ -57,14 +61,10 @@ class SavedSearches
      */
     private $_criterias = null;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**
-     * Public constructor
-     *
      * @param array    $config   Global configuration
      * @param Relation $relation Relation instance
      */
@@ -158,7 +158,7 @@ class SavedSearches
      */
     public function setCriterias($criterias, $json = false)
     {
-        if (true === $json && is_string($criterias)) {
+        if ($json === true && is_string($criterias)) {
             $this->_criterias = json_decode($criterias, true);
             return $this;
         }
@@ -265,7 +265,7 @@ class SavedSearches
      */
     public function save()
     {
-        if (null == $this->getSearchName()) {
+        if ($this->getSearchName() == null) {
             $message = Message::error(
                 __('Please provide a name for this bookmarked search.')
             );
@@ -276,10 +276,10 @@ class SavedSearches
             exit;
         }
 
-        if (null == $this->getUsername()
-            || null == $this->getDbname()
-            || null == $this->getSearchName()
-            || null == $this->getCriterias()
+        if ($this->getUsername() == null
+            || $this->getDbname() == null
+            || $this->getSearchName() == null
+            || $this->getCriterias() == null
         ) {
             $message = Message::error(
                 __('Missing information to save the bookmarked search.')
@@ -295,7 +295,7 @@ class SavedSearches
             . Util::backquote($this->_config['cfgRelation']['savedsearches']);
 
         //If it's an insert.
-        if (null === $this->getId()) {
+        if ($this->getId() === null) {
             $wheres = [
                 "search_name = '" . $GLOBALS['dbi']->escapeString($this->getSearchName())
                 . "'",
@@ -366,7 +366,7 @@ class SavedSearches
      */
     public function delete()
     {
-        if (null == $this->getId()) {
+        if ($this->getId() == null) {
             $message = Message::error(
                 __('Missing information to delete the search.')
             );
@@ -394,7 +394,7 @@ class SavedSearches
      */
     public function load()
     {
-        if (null == $this->getId()) {
+        if ($this->getId() == null) {
             $message = Message::error(
                 __('Missing information to load the search.')
             );
@@ -414,7 +414,7 @@ class SavedSearches
 
         $resList = $this->relation->queryAsControlUser($sqlQuery);
 
-        if (false === ($oneResult = $GLOBALS['dbi']->fetchArray($resList))) {
+        if (($oneResult = $GLOBALS['dbi']->fetchArray($resList)) === false) {
             $message = Message::error(__('Error while loading the search.'));
             $response = Response::getInstance();
             $response->setRequestStatus($message->isSuccess());
@@ -438,8 +438,8 @@ class SavedSearches
      */
     public function getList(array $wheres = [])
     {
-        if (null == $this->getUsername()
-            || null == $this->getDbname()
+        if ($this->getUsername() == null
+            || $this->getDbname() == null
         ) {
             return [];
         }

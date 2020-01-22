@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationSignon class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,11 +9,16 @@ namespace PhpMyAdmin\Tests\Plugins\Auth;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Plugins\Auth\AuthenticationSignon;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function ob_get_clean;
+use function ob_start;
+use function phpversion;
+use function session_get_cookie_params;
+use function session_id;
+use function session_name;
+use function version_compare;
 
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationSignon class
- *
- * @package PhpMyAdmin-test
  */
 class AuthenticationSignonTest extends PmaTestCase
 {

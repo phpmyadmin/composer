@@ -1,15 +1,25 @@
 <?php
 /**
  * hold Theme class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Template;
-use PhpMyAdmin\ThemeManager;
+use function file_exists;
+use function file_get_contents;
+use function filemtime;
+use function filesize;
+use function in_array;
+use function is_array;
+use function is_dir;
+use function is_readable;
+use function json_decode;
+use function sprintf;
+use function trigger_error;
+use function trim;
+use function version_compare;
+use const E_USER_ERROR;
 
 /**
  * handles theme
@@ -17,7 +27,6 @@ use PhpMyAdmin\ThemeManager;
  * @todo add the possibility to make a theme depend on another theme
  * and by default on original
  * @todo make all components optional - get missing components from 'parent' theme
- * @package PhpMyAdmin
  */
 class Theme
 {
@@ -83,14 +92,9 @@ class Theme
         'icons',
     ];
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
-    /**
-     * Theme constructor.
-     */
     public function __construct()
     {
         $this->template = new Template();

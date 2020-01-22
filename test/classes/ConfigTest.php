@@ -2,7 +2,6 @@
 /**
  * Test for PhpMyAdmin\Config class
  *
- * @package PhpMyAdmin-test
  * @group current
  */
 declare(strict_types=1);
@@ -10,13 +9,10 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Config;
-use PhpMyAdmin\Tests\PmaTestCase;
 use PHPUnit\Framework\Exception;
 
 /**
  * Tests behaviour of PhpMyAdmin\Config class
- *
- * @package PhpMyAdmin-test
  */
 class ConfigTest extends PmaTestCase
 {
@@ -25,14 +21,10 @@ class ConfigTest extends PmaTestCase
      */
     protected $backupGlobals = false;
 
-    /**
-     * @var Config
-     */
+    /** @var Config */
     protected $object;
 
-    /**
-     * @var Config to test file permission
-     */
+    /** @var Config to test file permission */
     protected $permTestObj;
 
     /**
@@ -90,7 +82,6 @@ class ConfigTest extends PmaTestCase
      */
     public function testCheckOutputCompression()
     {
-
         $this->object->set('OBGzip', 'auto');
 
         $this->object->set('PMA_USR_BROWSER_AGENT', 'IE');

@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Server\Privileges
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -20,19 +18,17 @@ use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use function htmlspecialchars;
+use function implode;
 
 /**
  * PhpMyAdmin\Tests\Server\PrivilegesTest class
  *
  * this class is for testing PhpMyAdmin\Server\Privileges methods
- *
- * @package PhpMyAdmin-test
  */
 class PrivilegesTest extends TestCase
 {
-    /**
-     * @var Privileges $serverPrivileges
-     */
+    /** @var Privileges $serverPrivileges */
     private $serverPrivileges;
 
     /**
@@ -543,7 +539,6 @@ class PrivilegesTest extends TestCase
         unset($_POST['change_copy']);
     }
 
-
     /**
      * Test for getListForExportUserDefinition
      *
@@ -974,7 +969,6 @@ class PrivilegesTest extends TestCase
      */
     public function testGetSqlQueriesForDisplayAndAddUser()
     {
-
         $GLOBALS['dbi']->expects($this->any())->method('getVersion')
             ->will($this->returnValue(50706));
         $this->serverPrivileges->dbi = $GLOBALS['dbi'];

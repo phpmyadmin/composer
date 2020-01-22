@@ -1,8 +1,6 @@
 <?php
 /**
  * Displays a list of server status variables
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -10,10 +8,10 @@ namespace PhpMyAdmin\Controllers\Server\Status;
 
 use PhpMyAdmin\Common;
 use PhpMyAdmin\Html\Generator;
+use function in_array;
+use function is_numeric;
+use function mb_strpos;
 
-/**
- * @package PhpMyAdmin\Controllers\Server\Status
- */
 class VariablesController extends AbstractController
 {
     /**

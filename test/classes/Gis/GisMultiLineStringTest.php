@@ -1,21 +1,19 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisMultiLineString
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisMultiLineString;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisMultiLineString class
- *
- * @package PhpMyAdmin-test
  */
 class GisMultiLineStringTest extends GisGeomTestCase
 {
@@ -261,7 +259,6 @@ class GisMultiLineStringTest extends GisGeomTestCase
             ],
         ];
     }
-
 
     /**
      * test case for prepareRowAsPng() method

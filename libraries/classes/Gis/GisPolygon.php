@@ -1,19 +1,25 @@
 <?php
 /**
  * Handles actions related to GIS POLYGON objects
- *
- * @package PhpMyAdmin-GIS
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Gis;
 
 use TCPDF;
+use function array_merge;
+use function array_slice;
+use function count;
+use function explode;
+use function hexdec;
+use function imagecolorallocate;
+use function imagefilledpolygon;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
 
 /**
  * Handles actions related to GIS POLYGON objects
- *
- * @package PhpMyAdmin-GIS
  */
 class GisPolygon extends GisGeometry
 {
@@ -405,7 +411,6 @@ class GisPolygon extends GisGeometry
      */
     public static function area(array $ring)
     {
-
         $no_of_points = count($ring);
 
         // If the last point is same as the first point ignore it
@@ -446,7 +451,7 @@ class GisPolygon extends GisGeometry
     {
         // If area is negative then it's in clockwise orientation,
         // i.e. it's an outer ring
-        return GisPolygon::area($ring) < 0;
+        return self::area($ring) < 0;
     }
 
     /**
@@ -560,11 +565,11 @@ class GisPolygon extends GisGeometry
 
             // One of the points should be inside the polygon,
             // unless epsilon chosen is too large
-            if (GisPolygon::isPointInsidePolygon($pointA, $ring)) {
+            if (self::isPointInsidePolygon($pointA, $ring)) {
                 return $pointA;
             }
 
-            if (GisPolygon::isPointInsidePolygon($pointB, $ring)) {
+            if (self::isPointInsidePolygon($pointB, $ring)) {
                 return $pointB;
             }
 

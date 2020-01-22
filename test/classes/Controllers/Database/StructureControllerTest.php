@@ -3,8 +3,6 @@
  * StructureControllerTest class
  *
  * this class is for testing StructureController class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -19,35 +17,30 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
+use ReflectionException;
+use function define;
+use function defined;
+use function json_encode;
 
 /**
  * StructureControllerTest class
  *
  * this class is for testing StructureController class
- *
- * @package PhpMyAdmin-test
  */
 class StructureControllerTest extends PmaTestCase
 {
-    /**
-     * @var \PhpMyAdmin\Tests\Stubs\Response
-     */
+    /** @var ResponseStub */
     private $response;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Replication
-     */
+    /** @var Replication */
     private $replication;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**
@@ -448,7 +441,7 @@ class StructureControllerTest extends PmaTestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|RecentFavoriteTable
+     * @return MockObject|RecentFavoriteTable
      */
     private function getFavoriteTablesMock()
     {
@@ -525,7 +518,7 @@ class StructureControllerTest extends PmaTestCase
     /**
      * @return void
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function testDisplayTableList()
     {

@@ -1,20 +1,26 @@
 <?php
 /**
  * Holds class PhpMyAdmin\Error
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use Exception;
-use PhpMyAdmin\Message;
+use Throwable;
+use const E_COMPILE_ERROR;
+use const E_COMPILE_WARNING;
+use const E_CORE_ERROR;
+use const E_CORE_WARNING;
+use const E_ERROR;
+use const E_NOTICE;
+use const E_PARSE;
+use const E_USER_ERROR;
+use const E_USER_WARNING;
+use const E_WARNING;
+use const E_USER_NOTICE;
 
 /**
  * a single error
- *
- * @package PhpMyAdmin
  */
 class Error extends Message
 {
@@ -93,8 +99,6 @@ class Error extends Message
     protected $hide_location = false;
 
     /**
-     * Constructor
-     *
      * @param integer $errno   error number
      * @param string  $errstr  error message
      * @param string  $errfile file
@@ -216,7 +220,6 @@ class Error extends Message
         $this->file = self::relPath($file);
     }
 
-
     /**
      * returns unique PhpMyAdmin\Error::$hash, if not exists it will be created
      *
@@ -226,7 +229,7 @@ class Error extends Message
     {
         try {
             $backtrace = serialize($this->getBacktrace());
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $backtrace = '';
         }
         if ($this->hash === null) {

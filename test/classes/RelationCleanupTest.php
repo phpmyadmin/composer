@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\RelationCleanup
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -12,24 +10,19 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function array_merge;
 
 /**
  * PhpMyAdmin\Tests\RelationCleanupTest class
  *
  * this class is for testing PhpMyAdmin\RelationCleanup methods
- *
- * @package PhpMyAdmin-test
  */
 class RelationCleanupTest extends TestCase
 {
-    /**
-     * @var Relation|MockObject
-     */
+    /** @var Relation|MockObject */
     private $relation;
 
-    /**
-     * @var RelationCleanup
-     */
+    /** @var RelationCleanup */
     private $relationCleanup;
 
     /**

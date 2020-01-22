@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Database
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Database;
@@ -16,10 +13,10 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function is_array;
+use function str_replace;
 
-/**
- * @package PhpMyAdmin\Controllers\Database
- */
 final class ExportController extends AbstractController
 {
     /** @var Export */
@@ -38,9 +35,6 @@ final class ExportController extends AbstractController
         $this->export = $export;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $table, $url_query, $sub_part, $url_params, $sql_query;

@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Normalization
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -19,11 +17,10 @@ use PhpMyAdmin\Url;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
+use function json_encode;
 
 /**
  * tests for PhpMyAdmin\Normalization
- *
- * @package PhpMyAdmin-test
  */
 class NormalizationTest extends TestCase
 {

@@ -1,19 +1,18 @@
 <?php
 /**
  * JavaScript management
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function md5;
+use function strpos;
+
 /**
  * Collects information about which JavaScript
  * files and objects are necessary to render
  * the page and generates the relevant code.
- *
- * @package PhpMyAdmin
  */
 class Scripts
 {
@@ -32,9 +31,7 @@ class Scripts
      */
     private $_code;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**

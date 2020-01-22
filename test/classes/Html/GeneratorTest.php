@@ -1,8 +1,6 @@
 <?php
 /**
  * Test for PhpMyAdmin\Util class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -15,11 +13,12 @@ use Throwable;
 use Twig_Error_Loader;
 use Twig_Error_Runtime;
 use Twig_Error_Syntax;
+use function call_user_func_array;
+use function htmlspecialchars;
+use function urlencode;
 
 /**
  * Test for \PhpMyAdmin\Html\MySQLDocumentation class
- *
- * @package PhpMyAdmin-test
  */
 class GeneratorTest extends PmaTestCase
 {

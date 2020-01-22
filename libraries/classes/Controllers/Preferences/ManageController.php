@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Preferences
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Preferences;
@@ -20,11 +17,22 @@ use PhpMyAdmin\ThemeManager;
 use PhpMyAdmin\UserPreferences;
 use PhpMyAdmin\UserPreferencesHeader;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function is_array;
+use function is_uploaded_file;
+use function json_decode;
+use function json_encode;
+use function parse_url;
+use function str_replace;
+use function urlencode;
+use function var_export;
+use const JSON_PRETTY_PRINT;
+use const PHP_URL_PATH;
+use const UPLOAD_ERR_OK;
+use function mb_strpos;
 
 /**
  * User preferences management page.
- *
- * @package PhpMyAdmin\Controllers\Preferences
  */
 class ManageController extends AbstractController
 {
@@ -53,9 +61,6 @@ class ManageController extends AbstractController
         $this->relation = $relation;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $cf, $error, $filename, $import_handle, $json, $PMA_Config, $lang, $max_upload_size;

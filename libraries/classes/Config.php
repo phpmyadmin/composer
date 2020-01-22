@@ -1,80 +1,58 @@
 <?php
 /**
  * Configuration handling.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use DirectoryIterator;
-use PhpMyAdmin\Config;
-use PhpMyAdmin\Core;
-use PhpMyAdmin\Error;
-use PhpMyAdmin\LanguageManager;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\ThemeManager;
-use PhpMyAdmin\UserPreferences;
 use PhpMyAdmin\Utils\HttpRequest;
-
-/**
- * Indication for error handler (see end of this file).
- */
-$GLOBALS['pma_config_loading'] = false;
+use function array_slice;
+use function defined;
+use function explode;
+use function function_exists;
+use function gd_info;
+use function implode;
+use function ini_get;
+use function intval;
+use function mb_strstr;
+use function preg_match;
+use function stripos;
+use function strtolower;
 
 /**
  * Configuration class
- *
- * @package PhpMyAdmin
  */
 class Config
 {
-    /**
-     * @var string  default config source
-     */
+    /** @var string  default config source */
     public $default_source = ROOT_PATH . 'libraries/config.default.php';
 
-    /**
-     * @var array   default configuration settings
-     */
+    /** @var array   default configuration settings */
     public $default = [];
 
-    /**
-     * @var array   configuration settings, without user preferences applied
-     */
+    /** @var array   configuration settings, without user preferences applied */
     public $base_settings = [];
 
-    /**
-     * @var array   configuration settings
-     */
+    /** @var array   configuration settings */
     public $settings = [];
 
-    /**
-     * @var string  config source
-     */
+    /** @var string  config source */
     public $source = '';
 
-    /**
-     * @var int     source modification time
-     */
+    /** @var int     source modification time */
     public $source_mtime = 0;
     public $default_source_mtime = 0;
     public $set_mtime = 0;
 
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     public $error_config_file = false;
 
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     public $error_config_default_file = false;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     public $default_server = [];
 
     /**
@@ -85,8 +63,6 @@ class Config
     public $done = false;
 
     /**
-     * constructor
-     *
      * @param string $source source to read config from
      */
     public function __construct(?string $source = null)
@@ -323,8 +299,8 @@ class Config
         // some versions return Microsoft-IIS, some Microsoft/IIS
         // we could use a preg_match() but it's slower
         if (Core::getenv('SERVER_SOFTWARE')
-            && false !== stripos(Core::getenv('SERVER_SOFTWARE'), 'Microsoft')
-            && false !== stripos(Core::getenv('SERVER_SOFTWARE'), 'IIS')
+            && stripos(Core::getenv('SERVER_SOFTWARE'), 'Microsoft') !== false
+            && stripos(Core::getenv('SERVER_SOFTWARE'), 'IIS') !== false
         ) {
             $this->set('PMA_IS_IIS', 1);
         } else {
@@ -343,10 +319,10 @@ class Config
         $this->set('PMA_IS_WINDOWS', 0);
         // If PHP_OS is defined then continue
         if (defined('PHP_OS')) {
-            if (false !== stripos(PHP_OS, 'win') && false === stripos(PHP_OS, 'darwin')) {
+            if (stripos(PHP_OS, 'win') !== false && stripos(PHP_OS, 'darwin') === false) {
                 // Is it some version of Windows
                 $this->set('PMA_IS_WINDOWS', 1);
-            } elseif (false !== stripos(PHP_OS, 'OS/2')) {
+            } elseif (stripos(PHP_OS, 'OS/2') !== false) {
                 // Is it OS/2 (No file permissions like Windows)
                 $this->set('PMA_IS_WINDOWS', 1);
             }
@@ -443,10 +419,10 @@ class Config
 
         $branch = false;
         // are we on any branch?
-        if (false !== strpos($ref_head, '/')) {
+        if (strpos($ref_head, '/') !== false) {
             // remove ref: prefix
             $ref_head = substr(trim($ref_head), 5);
-            if (0 === strpos($ref_head, 'refs/heads/')) {
+            if (strpos($ref_head, 'refs/heads/') === 0) {
                 $branch = substr($ref_head, 11);
             } else {
                 $branch = basename($ref_head);
@@ -773,6 +749,8 @@ class Config
      */
     public function loadDefaults(): bool
     {
+        global $isConfigLoading;
+
         /** @var array<string,mixed> $cfg */
         $cfg = [];
         if (! @file_exists($this->default_source)) {
@@ -784,11 +762,13 @@ class Config
         if ($canUseErrorReporting) {
             $oldErrorReporting = error_reporting(0);
         }
+
         ob_start();
-        $GLOBALS['pma_config_loading'] = true;
+        $isConfigLoading = true;
         $eval_result = include $this->default_source;
-        $GLOBALS['pma_config_loading'] = false;
+        $isConfigLoading = false;
         ob_end_clean();
+
         if ($canUseErrorReporting) {
             error_reporting($oldErrorReporting);
         }
@@ -821,9 +801,11 @@ class Config
      */
     public function load(?string $source = null): bool
     {
+        global $isConfigLoading;
+
         $this->loadDefaults();
 
-        if (null !== $source) {
+        if ($source !== null) {
             $this->setSource($source);
         }
 
@@ -842,11 +824,13 @@ class Config
         if ($canUseErrorReporting) {
             $oldErrorReporting = error_reporting(0);
         }
+
         ob_start();
-        $GLOBALS['pma_config_loading'] = true;
+        $isConfigLoading = true;
         $eval_result = include $this->getSource();
-        $GLOBALS['pma_config_loading'] = false;
+        $isConfigLoading = false;
         ob_end_clean();
+
         if ($canUseErrorReporting) {
             error_reporting($oldErrorReporting);
         }
@@ -1266,7 +1250,7 @@ class Config
         $this->set('enable_upload', true);
         // if set "php_admin_value file_uploads Off" in httpd.conf
         // ini_get() also returns the string "Off" in this case:
-        if ('off' == strtolower(ini_get('file_uploads'))) {
+        if (strtolower(ini_get('file_uploads')) == 'off') {
             $this->set('enable_upload', false);
         }
     }
@@ -1304,7 +1288,7 @@ class Config
      */
     public function isHttps(): bool
     {
-        if (null !== $this->get('is_https')) {
+        if ($this->get('is_https') !== null) {
             return $this->get('is_https');
         }
 
@@ -1347,7 +1331,7 @@ class Config
     {
         static $cookie_path = null;
 
-        if (null !== $cookie_path && ! defined('TESTSUITE')) {
+        if ($cookie_path !== null && ! defined('TESTSUITE')) {
             return $cookie_path;
         }
 
@@ -1464,7 +1448,7 @@ class Config
         ?int $validity = null,
         bool $httponly = true
     ): bool {
-        if (strlen($value) > 0 && null !== $default && $value === $default
+        if (strlen($value) > 0 && $default !== null && $value === $default
         ) {
             // default value is used
             if ($this->issetCookie($cookie)) {
@@ -1481,7 +1465,7 @@ class Config
 
         $httpCookieName = $this->getCookieName($cookie);
 
-        if (! $this->issetCookie($cookie) ||  $this->getCookie($cookie) !== $value) {
+        if (! $this->issetCookie($cookie) || $this->getCookie($cookie) !== $value) {
             // set cookie with new value
             /* Calculate cookie validity */
             if ($validity === null) {
@@ -1560,9 +1544,9 @@ class Config
      */
     public static function fatalErrorHandler(): void
     {
-        if (! isset($GLOBALS['pma_config_loading'])
-            || ! $GLOBALS['pma_config_loading']
-        ) {
+        global $isConfigLoading;
+
+        if (! isset($isConfigLoading) || ! $isConfigLoading) {
             return;
         }
 
@@ -1774,8 +1758,4 @@ class Config
             $this->settings['Servers'] = $new_servers;
         }
     }
-}
-
-if (! defined('TESTSUITE')) {
-    register_shutdown_function([Config::class, 'fatalErrorHandler']);
 }

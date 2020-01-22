@@ -1,29 +1,21 @@
 <?php
 /**
  * Library for extracting information about the partitions
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\SubPartition;
+use function array_values;
 
 /**
  * base Partition Class
- *
- * @package PhpMyAdmin
  */
 class Partition extends SubPartition
 {
-    /**
-     * @var string partition description
-     */
+    /** @var string partition description */
     protected $description;
-    /**
-     * @var SubPartition[] sub partitions
-     */
+    /** @var SubPartition[] sub partitions */
     protected $subPartitions = [];
 
     /**
@@ -154,7 +146,7 @@ class Partition extends SubPartition
      */
     public static function getPartitions($db, $table)
     {
-        if (Partition::havePartitioning()) {
+        if (self::havePartitioning()) {
             $result = $GLOBALS['dbi']->fetchResult(
                 'SELECT * FROM `information_schema`.`PARTITIONS`'
                 . " WHERE `TABLE_SCHEMA` = '" . $GLOBALS['dbi']->escapeString($db)
@@ -196,7 +188,7 @@ class Partition extends SubPartition
      */
     public static function getPartitionNames($db, $table)
     {
-        if (Partition::havePartitioning()) {
+        if (self::havePartitioning()) {
             return $GLOBALS['dbi']->fetchResult(
                 'SELECT DISTINCT `PARTITION_NAME` FROM `information_schema`.`PARTITIONS`'
                 . " WHERE `TABLE_SCHEMA` = '" . $GLOBALS['dbi']->escapeString($db)
@@ -217,7 +209,7 @@ class Partition extends SubPartition
      */
     public static function getPartitionMethod($db, $table)
     {
-        if (Partition::havePartitioning()) {
+        if (self::havePartitioning()) {
             $partition_method = $GLOBALS['dbi']->fetchResult(
                 'SELECT `PARTITION_METHOD` FROM `information_schema`.`PARTITIONS`'
                 . " WHERE `TABLE_SCHEMA` = '" . $GLOBALS['dbi']->escapeString($db) . "'"

@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Core class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,13 +9,18 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Sanitize;
-use PhpMyAdmin\Tests\PmaTestCase;
 use stdClass;
+use function hash;
+use function htmlspecialchars;
+use function mb_strpos;
+use function ob_end_clean;
+use function ob_get_contents;
+use function ob_start;
+use function preg_quote;
+use function serialize;
 
 /**
  * Tests for PhpMyAdmin\Core class
- *
- * @package PhpMyAdmin-test
  */
 class CoreTest extends PmaTestCase
 {
@@ -1112,7 +1115,6 @@ class CoreTest extends PmaTestCase
         $compare = '1';
         $this->assertFalse(Core::isValid($var, 'identic', $compare));
     }
-
 
     /**
      * Test for Core::isValid

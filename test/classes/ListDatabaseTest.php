@@ -1,24 +1,16 @@
 <?php
 /**
  * tests for ListDatabase class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\ListDatabase;
-use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionClass;
-
-$GLOBALS['server'] = 1;
-$GLOBALS['cfg']['Server']['DisableIS'] = false;
 
 /**
  * tests for ListDatabase class
- *
- * @package PhpMyAdmin-test
  */
 class ListDatabaseTest extends PmaTestCase
 {
@@ -36,6 +28,8 @@ class ListDatabaseTest extends PmaTestCase
      */
     protected function setUp(): void
     {
+        $GLOBALS['server'] = 1;
+        $GLOBALS['cfg']['Server']['DisableIS'] = false;
         $GLOBALS['cfg']['Server']['only_db'] = ['single\\_db'];
         $this->object = new ListDatabase();
     }

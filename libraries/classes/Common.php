@@ -1,21 +1,17 @@
 <?php
-/**
- * @package PhpMyAdmin
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function explode;
+use function strlen;
+use function strpos;
+
 /**
  * Shared code for server, database and table level pages.
- *
- * @package PhpMyAdmin
  */
 final class Common
 {
-    /**
-     * @return void
-     */
     public static function server(): void
     {
         global $db, $table, $url_query, $viewing_mode, $err_url, $is_grantuser, $is_createuser, $dbi;
@@ -50,9 +46,6 @@ final class Common
         }
     }
 
-    /**
-     * @return void
-     */
     public static function database(): void
     {
         global $cfg, $db, $is_show_stats, $db_is_system_schema, $err_url;
@@ -188,9 +181,6 @@ final class Common
         $url_query = Url::getCommon(['db' => $db]);
     }
 
-    /**
-     * @return void
-     */
     public static function table(): void
     {
         global $db, $table, $db_is_system_schema, $url_query, $url_params, $cfg, $dbi, $err_url, $err_url_0;

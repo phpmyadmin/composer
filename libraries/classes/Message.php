@@ -1,14 +1,20 @@
 <?php
 /**
  * Holds class Message
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Sanitize;
+use function array_unshift;
+use function count;
+use function htmlspecialchars;
+use function is_array;
+use function is_float;
+use function is_int;
+use function md5;
+use function sprintf;
+use function strlen;
 
 /**
  * a single message
@@ -38,8 +44,6 @@ use PhpMyAdmin\Sanitize;
  * // add the retrieved tooltip reference to the original message
  * $message->addMessage($hint);
  * </code>
- *
- * @package PhpMyAdmin
  */
 class Message
 {
@@ -58,9 +62,9 @@ class Message
      * @var array
      */
     public static $level =  [
-        Message::SUCCESS => 'success',
-        Message::NOTICE  => 'notice',
-        Message::ERROR   => 'error',
+        self::SUCCESS => 'success',
+        self::NOTICE  => 'notice',
+        self::ERROR   => 'error',
     ];
 
     /**
@@ -69,7 +73,7 @@ class Message
      * @access protected
      * @var    integer
      */
-    protected $number = Message::NOTICE;
+    protected $number = self::NOTICE;
 
     /**
      * The locale string identifier
@@ -128,8 +132,6 @@ class Message
     protected $addedMessages = [];
 
     /**
-     * Constructor
-     *
      * @param string  $string   The message to be displayed
      * @param integer $number   A numeric representation of the type of message
      * @param array   $params   An array of parameters to use in the message
@@ -138,9 +140,9 @@ class Message
      */
     public function __construct(
         string $string = '',
-        int $number = Message::NOTICE,
+        int $number = self::NOTICE,
         array $params = [],
-        int $sanitize = Message::SANITIZE_NONE
+        int $sanitize = self::SANITIZE_NONE
     ) {
         $this->setString($string, $sanitize & self::SANITIZE_STRING);
         $this->setNumber($number);
@@ -230,7 +232,7 @@ class Message
      *
      * @static
      */
-    public static function raw(string $message, int $type = Message::NOTICE): self
+    public static function raw(string $message, int $type = self::NOTICE): self
     {
         $r = new Message('', $type);
         $r->setMessage($message);
@@ -675,7 +677,7 @@ class Message
      */
     public function getHash(): string
     {
-        if (null === $this->hash) {
+        if ($this->hash === null) {
             $this->hash = md5(
                 $this->getNumber() .
                 $this->string .
@@ -731,7 +733,6 @@ class Message
     {
         return $this->message;
     }
-
 
     /**
      * returns Message::$string
@@ -822,9 +823,9 @@ class Message
      */
     public function getMessageWithIcon(string $message): string
     {
-        if ('error' === $this->getLevel()) {
+        if ($this->getLevel() === 'error') {
             $image = 's_error';
-        } elseif ('success' === $this->getLevel()) {
+        } elseif ($this->getLevel() === 'success') {
             $image = 's_success';
         } else {
             $image = 's_notice';

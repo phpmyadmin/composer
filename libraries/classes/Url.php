@@ -1,17 +1,21 @@
 <?php
 /**
  * Static methods for URL/hidden inputs generating
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function htmlentities;
+use function htmlspecialchars;
+use function http_build_query;
+use function ini_get;
+use function is_array;
+use function mb_strpos;
+use function strlen;
+
 /**
  * Static methods for URL/hidden inputs generating
- *
- * @package PhpMyAdmin
  */
 class Url
 {
@@ -37,7 +41,6 @@ class Url
         $indent = 0,
         $skip = []
     ) {
-        /** @var Config $PMA_Config */
         global $PMA_Config;
 
         if (is_array($db)) {
@@ -73,7 +76,7 @@ class Url
             }
         }
 
-        return Url::getHiddenFields($params);
+        return self::getHiddenFields($params);
     }
 
     /**
@@ -122,7 +125,7 @@ class Url
             }
 
             if (is_array($value)) {
-                $fields .= Url::getHiddenFields($value, $name, true);
+                $fields .= self::getHiddenFields($value, $name, true);
             } else {
                 // do not generate an ending "\n" because
                 // Url::getHiddenInputs() is sometimes called
@@ -168,7 +171,7 @@ class Url
     public static function getCommon($params = [], $divider = '?')
     {
         return htmlspecialchars(
-            Url::getCommonRaw($params, $divider)
+            self::getCommonRaw($params, $divider)
         );
     }
 
@@ -204,9 +207,9 @@ class Url
      */
     public static function getCommonRaw($params = [], $divider = '?')
     {
-        /** @var Config $PMA_Config */
         global $PMA_Config;
-        $separator = Url::getArgSeparator();
+
+        $separator = self::getArgSeparator();
 
         // avoid overwriting when creating navi panel links to servers
         if (isset($GLOBALS['server'])
@@ -248,7 +251,7 @@ class Url
         static $separator = null;
         static $html_separator = null;
 
-        if (null === $separator) {
+        if ($separator === null) {
             // use separators defined by php, but prefer ';'
             // as recommended by W3C
             // (see https://www.w3.org/TR/1999/REC-html401-19991224/appendix

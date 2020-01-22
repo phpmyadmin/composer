@@ -1,21 +1,19 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisLineString
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisLineString;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisLineString class
- *
- * @package PhpMyAdmin-test
  */
 class GisLineStringTest extends GisGeomTestCase
 {

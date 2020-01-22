@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Navigation\Nodes\NodeView class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -10,11 +8,10 @@ namespace PhpMyAdmin\Tests\Navigation\Nodes;
 
 use PhpMyAdmin\Navigation\NodeFactory;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function is_string;
 
 /**
  * Tests for PhpMyAdmin\Navigation\Nodes\NodeView class
- *
- * @package PhpMyAdmin-test
  */
 class NodeViewTest extends PmaTestCase
 {

@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportMediawiki class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -13,11 +11,13 @@ use PhpMyAdmin\Plugins\Export\ExportMediawiki;
 use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionMethod;
 use ReflectionProperty;
+use function array_shift;
+use function ob_get_clean;
+use function ob_start;
 
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportMediawiki class
  *
- * @package PhpMyAdmin-test
  * @group medium
  */
 class ExportMediawikiTest extends PmaTestCase
@@ -338,6 +338,7 @@ class ExportMediawikiTest extends PmaTestCase
             $result
         );
     }
+
     /**
      * Test for PhpMyAdmin\Plugins\Export\ExportMediawiki::exportData
      *

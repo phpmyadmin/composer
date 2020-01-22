@@ -1,21 +1,19 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisMultiPolygon
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisMultiPolygon;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisMultiPolygon class
- *
- * @package PhpMyAdmin-test
  */
 class GisMultiPolygonTest extends GisGeomTestCase
 {
@@ -348,7 +346,6 @@ class GisMultiPolygonTest extends GisGeomTestCase
             ],
         ];
     }
-
 
     /**
      * test case for prepareRowAsPng() method

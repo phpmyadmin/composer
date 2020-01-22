@@ -1,25 +1,20 @@
 <?php
 /**
  * TCPDF wrapper class.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use Exception;
-use PhpMyAdmin\Core;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\Response;
-use PhpMyAdmin\Util;
 use TCPDF;
 use TCPDF_FONTS;
+use function count;
+use function strlen;
+use function strtr;
 
 /**
  * PDF export base class providing basic configuration.
- *
- * @package PhpMyAdmin
  */
 class Pdf extends TCPDF
 {
@@ -68,8 +63,8 @@ class Pdf extends TCPDF
         $this->SetAuthor('phpMyAdmin ' . PMA_VERSION);
         $this->AddFont('DejaVuSans', '', 'dejavusans.php');
         $this->AddFont('DejaVuSans', 'B', 'dejavusansb.php');
-        $this->SetFont(Pdf::PMA_PDF_FONT, '', 14);
-        $this->setFooterFont([Pdf::PMA_PDF_FONT, '', 14]);
+        $this->SetFont(self::PMA_PDF_FONT, '', 14);
+        $this->setFooterFont([self::PMA_PDF_FONT, '', 14]);
     }
 
     /**
@@ -83,7 +78,7 @@ class Pdf extends TCPDF
         // Check if footer for this page already exists
         if (! isset($this->footerset[$this->page])) {
             $this->SetY(-15);
-            $this->SetFont(Pdf::PMA_PDF_FONT, '', 14);
+            $this->SetFont(self::PMA_PDF_FONT, '', 14);
             $this->Cell(
                 0,
                 6,

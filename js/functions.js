@@ -1769,9 +1769,8 @@ Functions.loadForeignKeyCheckbox = function () {
     var params = {
         'ajax_request': true,
         'server': CommonParams.get('server'),
-        'get_default_fk_check_value': true
     };
-    $.get('index.php?route=/sql', params, function (data) {
+    $.get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
         var html = '<input type="hidden" name="fk_checks" value="0">' +
             '<input type="checkbox" name="fk_checks" id="fk_checks"' +
             (data.default_fk_check_value ? ' checked="checked"' : '') + '>' +
@@ -2942,7 +2941,7 @@ AJAX.registerOnload('functions.js', function () {
                             /**
                              * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
                              */
-                            var currLastRow = $(tablesTable).find('tr:last');
+                            var currLastRow = $(tablesTable).find('tr').last();
                             /**
                              * @var curr_last_row_index_string   String containing the index of {@link currLastRow}
                              */
@@ -3320,7 +3319,7 @@ AJAX.registerOnload('functions.js', function () {
 Functions.hideShowConnection = function ($engineSelector) {
     var $connection = $('.create_table_form input[name=connection]');
     var index = $connection.parent('td').index() + 1;
-    var $labelTh = $connection.parents('tr').prev('tr').children('th:nth-child(' + index + ')');
+    var $labelTh = $connection.parents('tr').prev('tr').children(document.querySelectorAll('th:nth-child(' + index + ')'));
     if ($engineSelector.val() !== 'FEDERATED') {
         $connection
             .prop('disabled', true)
@@ -3416,7 +3415,7 @@ var $enumEditorDialog = null;
 AJAX.registerOnload('functions.js', function () {
     $(document).on('click', 'a.open_enum_editor', function () {
         // Get the name of the column that is being edited
-        var colname = $(this).closest('tr').find('input:first').val();
+        var colname = $(this).closest('tr').find('input').first().val();
         var title;
         var i;
         // And use it to make up a title for the page
@@ -3541,7 +3540,7 @@ AJAX.registerOnload('functions.js', function () {
             buttons: buttonOptions,
             open: function () {
                 // Focus the "Go" button after opening the dialog
-                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button:first').trigger('focus');
+                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
             },
             close: function () {
                 $(this).remove();
@@ -3687,7 +3686,7 @@ AJAX.registerOnload('functions.js', function () {
                     }
                     return false;
                 });
-                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button:first').trigger('focus');
+                $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
             },
             close: function () {
                 $('#col_list').off('click', '.pick');
@@ -3714,7 +3713,7 @@ AJAX.registerOnload('functions.js', function () {
                     Functions.getImage('b_drop') +
                     '</td></tr>'
                 )
-                .find('tr:last')
+                .find('tr').last()
                 .show('fast');
         }
     });
@@ -3785,7 +3784,7 @@ AJAX.registerOnload('functions.js', function () {
         while (rowsToAdd--) {
             var $indexColumns = $('#index_columns');
             var $newrow = $indexColumns
-                .find('tbody > tr:first')
+                .find('tbody > tr').first()
                 .clone()
                 .appendTo(
                     $indexColumns.find('tbody')
@@ -4026,7 +4025,7 @@ Functions.toggleButton = function ($obj) {
     var w = parseInt(($('img', $obj).height() / 16) * 22, 10);
     // Resize the central part of the switch on the top
     // layer to match the background
-    $('table td:nth-child(2) > div', $obj).width(w);
+    $(document.querySelectorAll('table td:nth-child(2) > div'), $obj).width(w);
     /**
      *  var  imgw    Width of the background image
      *  var  tblw    Width of the foreground layer
@@ -4043,7 +4042,7 @@ Functions.toggleButton = function ($obj) {
      *  var  btnw    Outer width of the central part of the switch
      */
     var offw = $('td.toggleOff', $obj).outerWidth();
-    var btnw = $('table td:nth-child(2)', $obj).outerWidth();
+    var btnw = $(document.querySelectorAll('table td:nth-child(2)'), $obj).outerWidth();
     // Resize the main div so that exactly one side of
     // the switch plus the central part fit into it.
     $obj.width(offw + btnw + 2);
@@ -4585,7 +4584,7 @@ AJAX.registerOnload('functions.js', function () {
                 // was also prevented in IE
                 $(this).trigger('blur');
 
-                $(this).closest('.ui-dialog').find('.ui-button:first').trigger('click');
+                $(this).closest('.ui-dialog').find('.ui-button').first().trigger('click');
             }
         }); // end $(document).on()
     }
@@ -4954,8 +4953,8 @@ AJAX.registerOnload('functions.js', function () {
 
             // There could be multiple submit buttons on the same form,
             // we assume all of them behave identical and just click one.
-            if (! $form.find('input[type="submit"]:first') ||
-                ! $form.find('input[type="submit"]:first').trigger('click')
+            if (! $form.find('input[type="submit"]').first() ||
+                ! $form.find('input[type="submit"]').first().trigger('click')
             ) {
                 $form.trigger('submit');
             }

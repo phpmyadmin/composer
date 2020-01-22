@@ -1,9 +1,6 @@
 <?php
 /**
  * Set of methods used to build dumps of tables as Latex
- *
- * @package    PhpMyAdmin-Export
- * @subpackage Latex
  */
 declare(strict_types=1);
 
@@ -18,18 +15,19 @@ use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+use function count;
+use function in_array;
+use function mb_strpos;
+use function mb_substr;
+use function str_replace;
+use function stripslashes;
+use const PHP_VERSION;
 
 /**
  * Handles the export for the Latex format
- *
- * @package    PhpMyAdmin-Export
- * @subpackage Latex
  */
 class ExportLatex extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();

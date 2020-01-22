@@ -1,30 +1,29 @@
 <?php
 /**
  * SQL data types definition
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\DatabaseInterface;
+use function array_diff;
+use function array_merge;
+use function htmlspecialchars;
+use function in_array;
+use function mb_strtoupper;
+use function sort;
+use function sprintf;
+use function strncasecmp;
 
 /**
  * Class holding type definitions for MySQL and MariaDB.
- *
- * @package PhpMyAdmin
  */
 class Types
 {
-    /**
-     * @var DatabaseInterface Database interface
-     */
+    /** @var DatabaseInterface Database interface */
     private $_dbi;
 
     /**
-     * Constructor
-     *
      * @param DatabaseInterface $dbi Database interface instance
      */
     public function __construct($dbi)

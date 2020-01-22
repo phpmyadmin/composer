@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
@@ -13,17 +10,19 @@ use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function explode;
+use function htmlspecialchars;
+use function in_array;
+use function sprintf;
+use function strpos;
+use function substr;
 
 /**
  * Handles creation of VIEWs.
- *
- * @package PhpMyAdmin\Controllers
  */
 class ViewCreateController extends AbstractController
 {
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $text_dir, $url_params, $view_algorithm_options, $view_with_options, $view_security_options;

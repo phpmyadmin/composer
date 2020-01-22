@@ -1,27 +1,24 @@
 <?php
 /**
  * Tests for ErrorHandler
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\ErrorHandler;
-use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionClass;
+use const E_RECOVERABLE_ERROR;
+use const E_USER_NOTICE;
+use const E_USER_WARNING;
+use const E_WARNING;
 
 /**
  * Test for PhpMyAdmin\ErrorHandler class.
- *
- * @package PhpMyAdmin-test
  */
 class ErrorHandlerTest extends PmaTestCase
 {
-    /**
-     * @access protected
-     */
+    /** @access protected */
     protected $object;
 
     /**
@@ -170,7 +167,6 @@ class ErrorHandlerTest extends PmaTestCase
      */
     public function testCheckSavedErrors()
     {
-
         $_SESSION['errors'] = [];
 
         $this->_callProtectedFunction(

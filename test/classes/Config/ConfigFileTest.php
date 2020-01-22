@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for Config File Management
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,11 +9,11 @@ namespace PhpMyAdmin\Tests\Config;
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Tests\PmaTestCase;
 use stdClass;
+use function array_keys;
+use function count;
 
 /**
  * Tests for Config File Management
- *
- * @package PhpMyAdmin-test
  */
 class ConfigFileTest extends PmaTestCase
 {

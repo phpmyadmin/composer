@@ -1,9 +1,6 @@
 <?php
 /**
  * Set of functions used to build dumps of tables as PHP Arrays
- *
- * @package    PhpMyAdmin-Export
- * @subpackage PHP
  */
 declare(strict_types=1);
 
@@ -16,18 +13,17 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+use function preg_match;
+use function preg_replace;
+use function stripslashes;
+use function strtr;
+use function var_export;
 
 /**
  * Handles the export for the PHP Array class
- *
- * @package    PhpMyAdmin-Export
- * @subpackage PHP
  */
 class ExportPhparray extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();
@@ -78,7 +74,6 @@ class ExportPhparray extends ExportPlugin
     {
         return strtr($string, '*/', '-');
     }
-
 
     /**
      * Outputs export header

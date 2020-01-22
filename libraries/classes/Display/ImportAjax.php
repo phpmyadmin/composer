@@ -1,19 +1,21 @@
 <?php
 /**
  * Handles plugins that show the upload progress
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Display;
 
 use PhpMyAdmin\Core;
+use function extension_loaded;
+use function function_exists;
+use function ini_get;
+use function json_encode;
+use function ucwords;
+use function uniqid;
 
 /**
  * PhpMyAdmin\Display\ImportAjax class
- *
- * @package PhpMyAdmin
  */
 class ImportAjax
 {
@@ -83,7 +85,7 @@ class ImportAjax
         ) {
             return false;
         }
-        return (ini_get('apc.enabled') && ini_get('apc.rfc1867'));
+        return ini_get('apc.enabled') && ini_get('apc.rfc1867');
     }
 
     /**

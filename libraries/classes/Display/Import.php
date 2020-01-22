@@ -1,8 +1,6 @@
 <?php
 /**
  * functions for displaying import for: server, database and table
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -11,17 +9,16 @@ namespace PhpMyAdmin\Display;
 use PhpMyAdmin\Charsets;
 use PhpMyAdmin\Charsets\Charset;
 use PhpMyAdmin\Core;
-use PhpMyAdmin\Display\ImportAjax;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Template;
+use function function_exists;
+use function intval;
 
 /**
  * PhpMyAdmin\Display\Import class
- *
- * @package PhpMyAdmin
  */
 class Import
 {

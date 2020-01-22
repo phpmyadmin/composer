@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -13,11 +10,15 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_keys;
+use function htmlspecialchars;
+use function in_array;
+use function json_encode;
+use function min;
+use function strlen;
 
 /**
  * Handles creation of the chart.
- *
- * @package PhpMyAdmin\Controllers
  */
 class ChartController extends AbstractController
 {

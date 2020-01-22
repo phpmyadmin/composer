@@ -1,21 +1,18 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisPoint
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisPoint;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisPoint class.
- *
- * @package PhpMyAdmin-test
  */
 class GisPointTest extends GisGeomTestCase
 {

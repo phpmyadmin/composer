@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -20,10 +17,16 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function count;
+use function htmlspecialchars;
+use function implode;
+use function mb_strstr;
+use function mb_strtolower;
+use function mb_strtoupper;
+use function preg_replace;
+use function sprintf;
 
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 class OperationsController extends AbstractController
 {
     /** @var Operations */
@@ -61,9 +64,6 @@ class OperationsController extends AbstractController
         $this->relation = $relation;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $containerBuilder, $url_query, $url_params, $reread_info, $tbl_is_view, $tbl_storage_engine;
@@ -105,7 +105,7 @@ class OperationsController extends AbstractController
         $this->dbi->selectDb($db);
 
         $reread_info = $pma_table->getStatusInfo(null, false);
-        $GLOBALS['showtable'] = $pma_table->getStatusInfo(null, (isset($reread_info) && $reread_info ? true : false));
+        $GLOBALS['showtable'] = $pma_table->getStatusInfo(null, (isset($reread_info) && $reread_info));
         if ($pma_table->isView()) {
             $tbl_is_view = true;
             $tbl_storage_engine = __('View');
@@ -238,7 +238,7 @@ class OperationsController extends AbstractController
                     . Util::backquote($table);
                 $sql_query     .= "\r\n" . implode("\r\n", $table_alters);
                 $sql_query     .= ';';
-                $result         = $this->dbi->query($sql_query) ? true : false;
+                $result         = (bool) $this->dbi->query($sql_query);
                 $reread_info    = true;
                 unset($table_alters);
                 $warning_messages = $this->operations->getWarningMessagesArray();

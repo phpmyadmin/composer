@@ -1,8 +1,6 @@
 <?php
 /**
  * set of functions with the Privileges section in pma
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -24,29 +22,19 @@ use PhpMyAdmin\Util;
 
 /**
  * Privileges class
- *
- * @package PhpMyAdmin
  */
 class Privileges
 {
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
-    /**
-     * @var RelationCleanup
-     */
+    /** @var RelationCleanup */
     private $relationCleanup;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     public $dbi;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     public $relation;
 
     /**
@@ -183,7 +171,6 @@ class Privileges
         }
         unset($row['Table_priv']);
     }
-
 
     /**
      * Extracts the privilege information of a priv table row
@@ -829,9 +816,9 @@ class Privileges
 
         while ($row = $this->dbi->fetchAssoc($resultset)) {
             // if description is known, enable its translation
-            if ('mysql_native_password' == $row['PLUGIN_NAME']) {
+            if ($row['PLUGIN_NAME'] == 'mysql_native_password') {
                 $row['PLUGIN_DESCRIPTION'] = __('Native MySQL authentication');
-            } elseif ('sha256_password' == $row['PLUGIN_NAME']) {
+            } elseif ($row['PLUGIN_NAME'] == 'sha256_password') {
                 $row['PLUGIN_DESCRIPTION'] = __('SHA256 password authentication');
             }
 
@@ -1335,7 +1322,7 @@ class Privileges
             $max_user_connections = max(0, $max_user_connections);
             $sql_query .= ' MAX_USER_CONNECTIONS ' . $max_user_connections;
         }
-        return (! empty($sql_query) ? ' WITH' . $sql_query : '');
+        return ! empty($sql_query) ? ' WITH' . $sql_query : '';
     }
 
     /**
@@ -2381,7 +2368,7 @@ class Privileges
         // Should not do a GRANT USAGE for a table-specific privilege, it
         // causes problems later (cannot revoke it)
         if (! (strlen($tablename) > 0
-            && 'USAGE' == implode('', $this->extractPrivInfo()))
+            && implode('', $this->extractPrivInfo()) == 'USAGE')
         ) {
             $sql_query2 = 'GRANT ' . implode(', ', $this->extractPrivInfo())
                 . ' ON ' . $itemType . ' ' . $db_and_table
@@ -3593,7 +3580,6 @@ class Privileges
 
         return false;
     }
-
 
     /**
      * Get SQL queries for Display and Add user

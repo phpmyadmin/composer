@@ -1,8 +1,6 @@
 <?php
 /**
  * Represents the interface between the linter and the query editor.
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -10,11 +8,10 @@ namespace PhpMyAdmin\Controllers;
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Linter;
+use function json_encode;
 
 /**
  * Represents the interface between the linter and the query editor.
- *
- * @package PhpMyAdmin\Controllers
  */
 class LintController extends AbstractController
 {

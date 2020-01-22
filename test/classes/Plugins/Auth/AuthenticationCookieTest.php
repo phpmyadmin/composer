@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationCookie class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -16,19 +14,21 @@ use PhpMyAdmin\Plugins\Auth\AuthenticationCookie;
 use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionException;
 use ReflectionMethod;
-
-require_once ROOT_PATH . 'libraries/config.default.php';
+use function base64_encode;
+use function function_exists;
+use function is_readable;
+use function json_encode;
+use function ob_get_clean;
+use function ob_start;
+use function strlen;
+use function time;
 
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationCookie class
- *
- * @package PhpMyAdmin-test
  */
 class AuthenticationCookieTest extends PmaTestCase
 {
-    /**
-     * @var AuthenticationCookie
-     */
+    /** @var AuthenticationCookie */
     protected $object;
 
     /**
@@ -1140,6 +1140,7 @@ class AuthenticationCookieTest extends PmaTestCase
             $encryptedCookie
         );
     }
+
     /**
      * Data provider for secrets splitting.
      *

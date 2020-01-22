@@ -1,46 +1,22 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Common;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Template;
+use function count;
+use function is_array;
+use function json_decode;
 
 /**
  * Displays index edit/creation form and handles it.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class IndexesController extends AbstractController
 {
-    /**
-     * @param Response          $response Response object
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Template          $template Template object
-     * @param string            $db       Database name
-     * @param string            $table    Table name
-     */
-    public function __construct(
-        $response,
-        $dbi,
-        Template $template,
-        $db,
-        $table
-    ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
-    }
-
-    /**
-     * @return void
-     */
     public function index(): void
     {
         if (! isset($_POST['create_edit_table'])) {

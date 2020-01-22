@@ -1,8 +1,6 @@
 <?php
 /**
  * Server replications
- *
- * @package PhpMyAdmin\Controllers\Server
  */
 declare(strict_types=1);
 
@@ -15,11 +13,10 @@ use PhpMyAdmin\ReplicationGui;
 use PhpMyAdmin\ReplicationInfo;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
+use function is_array;
 
 /**
  * Server replications
- *
- * @package PhpMyAdmin\Controllers\Server
  */
 class ReplicationController extends AbstractController
 {

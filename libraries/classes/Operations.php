@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Operations class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -16,22 +14,28 @@ use PhpMyAdmin\Html\Forms\Fields\RadioList;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Plugins\Export\ExportSql;
+use function array_merge;
+use function count;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function mb_strtolower;
+use function mb_strtoupper;
+use function sprintf;
+use function str_replace;
+use function strlen;
+use function strtolower;
+use function urldecode;
 
 /**
  * Set of functions with the operations section in phpMyAdmin
- *
- * @package PhpMyAdmin
  */
 class Operations
 {
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -1319,7 +1323,7 @@ class Operations
          * old versions of MySQL/MariaDB must be returning something or not empty.
          * This patch is to support newer MySQL/MariaDB while also for backward compatibilities.
          */
-        if (('Barracuda' == $innodb_file_format) || ($innodb_file_format == '')
+        if (($innodb_file_format == 'Barracuda') || ($innodb_file_format == '')
             && $innodbEnginePlugin->supportsFilePerTable()
         ) {
             $possible_row_formats['INNODB']['DYNAMIC'] = 'DYNAMIC';

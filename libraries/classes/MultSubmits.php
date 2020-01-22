@@ -3,39 +3,34 @@
  * Holds the PhpMyAdmin\MultSubmits class
  *
  * @usedby  mult_submits.inc.php
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Html\Forms\Fields\FKCheckbox;
+use function count;
+use function htmlspecialchars;
+use function in_array;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
+use function preg_replace;
 
 /**
  * Functions for multi submit forms
- *
- * @package PhpMyAdmin
  */
 class MultSubmits
 {
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     private $transformations;
 
-    /**
-     * @var RelationCleanup
-     */
+    /** @var RelationCleanup */
     private $relationCleanup;
 
-    /**
-     * @var Operations
-     */
+    /** @var Operations */
     private $operations;
 
-    /**
-     * MultSubmits constructor.
-     */
     public function __construct()
     {
         $this->transformations = new Transformations();

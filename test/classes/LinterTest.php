@@ -1,20 +1,16 @@
 <?php
 /**
  * Tests for Linter.php.
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Linter;
-use PhpMyAdmin\Tests\PmaTestCase;
+use function str_repeat;
 
 /**
  * Tests for PhpMyAdmin\Linter
- *
- * @package PhpMyAdmin-test
  */
 class LinterTest extends PmaTestCase
 {

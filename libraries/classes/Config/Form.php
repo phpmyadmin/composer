@@ -1,20 +1,28 @@
 <?php
 /**
  * Form handling code.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
-use PhpMyAdmin\Config\ConfigFile;
+use function array_combine;
+use function array_shift;
+use function array_walk;
+use function count;
+use function is_array;
+use function is_bool;
+use function is_int;
+use function ltrim;
+use function mb_strrpos;
+use function mb_substr;
+use function trigger_error;
+use const E_USER_ERROR;
+use function mb_strpos;
 
 /**
  * Base class for forms, loads default configuration options, checks allowed
  * values etc.
- *
- * @package PhpMyAdmin
  */
 class Form
 {
@@ -61,7 +69,7 @@ class Form
     private $_configFile;
 
     /**
-     * Constructor, reads default config values
+     * Reads default config values
      *
      * @param string     $formName Form name
      * @param array      $form     Form data

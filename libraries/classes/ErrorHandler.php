@@ -1,21 +1,27 @@
 <?php
 /**
  * Holds class PhpMyAdmin\ErrorHandler
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Error;
-use PhpMyAdmin\Response;
-use PhpMyAdmin\Url;
+use function array_splice;
+use function count;
+use function defined;
+use function error_reporting;
+use function function_exists;
+use function htmlspecialchars;
+use function set_error_handler;
+use const E_DEPRECATED;
+use const E_STRICT;
+use const E_USER_ERROR;
+use const E_USER_NOTICE;
+use const E_USER_WARNING;
+use const E_NOTICE;
 
 /**
  * handling errors
- *
- * @package PhpMyAdmin
  */
 class ErrorHandler
 {
@@ -36,9 +42,6 @@ class ErrorHandler
      */
     protected $error_reporting = 0;
 
-    /**
-     * Constructor - set PHP error handler
-     */
     public function __construct()
     {
         /**
@@ -357,7 +360,7 @@ class ErrorHandler
         // if preference is not 'never' and
         // there are 'actual' errors to be reported
         if ($GLOBALS['cfg']['SendErrorReports'] != 'never'
-            &&  $this->countErrors() !=  $this->countUserErrors()
+            && $this->countErrors() !=  $this->countUserErrors()
         ) {
             // add report button.
             $retval .= '<form method="post" action="' . Url::getFromRoute('/error-report')
@@ -515,10 +518,8 @@ class ErrorHandler
      */
     public function hasErrorsForPrompt(): bool
     {
-        return (
-            $GLOBALS['cfg']['SendErrorReports'] != 'never'
-            && $this->countErrors() !=  $this->countUserErrors()
-        );
+        return $GLOBALS['cfg']['SendErrorReports'] != 'never'
+            && $this->countErrors() !=  $this->countUserErrors();
     }
 
     /**

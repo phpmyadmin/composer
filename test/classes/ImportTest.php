@@ -1,8 +1,6 @@
 <?php
 /**
  * Test for PhpMyAdmin\Import
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -13,17 +11,17 @@ use PhpMyAdmin\Import;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\TestCase;
+use function implode;
+use function sprintf;
+use function time;
+use const PHP_INT_MAX;
 
 /**
  * Tests for import functions
- *
- * @package PhpMyAdmin-test
  */
 class ImportTest extends TestCase
 {
-    /**
-     * @var Import $import
-     */
+    /** @var Import $import */
     private $import;
 
     /**

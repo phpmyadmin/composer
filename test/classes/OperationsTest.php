@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for operations
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -12,17 +10,14 @@ use PhpMyAdmin\Operations;
 use PhpMyAdmin\Relation;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+use function hash;
 
 /**
  * tests for operations
- *
- * @package PhpMyAdmin-test
  */
 class OperationsTest extends TestCase
 {
-    /**
-     * @var Operations
-     */
+    /** @var Operations */
     private $operations;
 
     /**
@@ -62,7 +57,6 @@ class OperationsTest extends TestCase
      */
     public function testGetHtmlForDatabaseComment()
     {
-
         $this->assertRegExp(
             '/.*\/database\/operations(.|[\n])*Database comment.*name="comment"([\n]|.)*/m',
             $this->operations->getHtmlForDatabaseComment('pma')
@@ -76,7 +70,6 @@ class OperationsTest extends TestCase
      */
     public function testGetHtmlForRenameDatabase()
     {
-
         $db_collation = 'db1';
         $html = $this->operations->getHtmlForRenameDatabase('pma', $db_collation);
         $this->assertStringContainsString('index.php?route=/database/operations', $html);
@@ -93,7 +86,6 @@ class OperationsTest extends TestCase
      */
     public function testGetHtmlForDropDatabaseLink()
     {
-
         $this->assertRegExp(
             '/.*DROP.DATABASE.*%2Fdatabase%2Foperations.*Drop the database.*/',
             $this->operations->getHtmlForDropDatabaseLink('pma')
@@ -121,7 +113,6 @@ class OperationsTest extends TestCase
      */
     public function testGetHtmlForChangeDatabaseCharset()
     {
-
         $db_collation = 'db1';
         $result = $this->operations->getHtmlForChangeDatabaseCharset('pma', $db_collation);
         $this->assertRegExp(
@@ -217,7 +208,6 @@ class OperationsTest extends TestCase
      */
     public function testGetHtmlForDeleteDataOrTable()
     {
-
         $this->assertRegExp(
             '/.*Delete data or table.*Empty the table.*Delete the table.*/m',
             $this->operations->getHtmlForDeleteDataOrTable(
@@ -234,7 +224,6 @@ class OperationsTest extends TestCase
      */
     public function testGetDeleteDataOrTablelink()
     {
-
         $this->assertRegExp(
             '/.*TRUNCATE.TABLE.foo.*id_truncate.*Truncate table.*/m',
             $this->operations->getDeleteDataOrTablelink(

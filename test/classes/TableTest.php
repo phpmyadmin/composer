@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for Table.php
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -12,15 +10,12 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Table;
-use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use ReflectionClass;
 use stdClass;
 
 /**
  * Tests behaviour of Table class
- *
- * @package PhpMyAdmin-test
  */
 class TableTest extends PmaTestCase
 {
@@ -872,7 +867,6 @@ class TableTest extends PmaTestCase
         );
     }
 
-
     /**
      * Test for duplicateInfo
      *
@@ -910,6 +904,7 @@ class TableTest extends PmaTestCase
             $ret
         );
     }
+
     /**
      * Test for isUpdatableView
      *
@@ -1177,7 +1172,6 @@ class TableTest extends PmaTestCase
             $table->getLastMessage()
         );
     }
-
 
     /**
      * Test for getUniqueColumns
@@ -1521,7 +1515,7 @@ class TableTest extends PmaTestCase
 
         //removeUiProp
         $table->removeUiProp($property);
-        $is_define_property = isset($table->uiprefs[$property]) ? true : false;
+        $is_define_property = isset($table->uiprefs[$property]);
         $this->assertEquals(
             false,
             $is_define_property

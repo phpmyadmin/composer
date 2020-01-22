@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -16,11 +13,14 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function is_array;
+use function mb_strtolower;
+use function sprintf;
+use function strlen;
 
 /**
  * Displays table create form and handles it.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class CreateController extends AbstractController
 {
@@ -53,9 +53,6 @@ class CreateController extends AbstractController
         $this->config = $config;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $num_fields, $action, $sql_query, $result, $db, $table;

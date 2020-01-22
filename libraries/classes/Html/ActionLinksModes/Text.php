@@ -1,17 +1,15 @@
 <?php
 /**
  * Text link generator
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Html\ActionLinksModes;
 
+use function htmlspecialchars;
+
 /**
  * Text link generator
- *
- * @package PhpMyAdmin
  */
 class Text implements ActionLinksModesInterface
 {

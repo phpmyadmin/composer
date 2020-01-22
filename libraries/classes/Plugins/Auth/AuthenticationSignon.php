@@ -1,9 +1,6 @@
 <?php
 /**
  * SignOn Authentication plugin for phpMyAdmin
- *
- * @package    PhpMyAdmin-Authentication
- * @subpackage SignOn
  */
 declare(strict_types=1);
 
@@ -12,11 +9,21 @@ namespace PhpMyAdmin\Plugins\Auth;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function defined;
+use function file_exists;
+use function in_array;
+use function session_get_cookie_params;
+use function session_id;
+use function session_name;
+use function session_set_cookie_params;
+use function session_start;
+use function session_write_close;
+use function version_compare;
+use const PHP_VERSION;
 
 /**
  * Handles the SignOn authentication method
- *
- * @package PhpMyAdmin-Authentication
  */
 class AuthenticationSignon extends AuthenticationPlugin
 {

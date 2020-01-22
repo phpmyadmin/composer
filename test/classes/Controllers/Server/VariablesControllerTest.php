@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds VariablesControllerTest class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -18,17 +16,14 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
 use Williamdes\MariaDBMySQLKBS\SlimData as KBSlimData;
+use function htmlspecialchars;
+use function str_replace;
 
 /**
  * Tests for VariablesController class
- *
- * @package PhpMyAdmin-test
  */
 class VariablesControllerTest extends TestCase
 {
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $GLOBALS['PMA_Config'] = new Config();
@@ -83,9 +78,6 @@ class VariablesControllerTest extends TestCase
         $GLOBALS['dbi'] = $dbi;
     }
 
-    /**
-     * @return void
-     */
     public function testIndex(): void
     {
         $controller = new VariablesController(

@@ -1,21 +1,29 @@
 <?php
 /**
  * Form validation for configuration editor
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
-use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Util;
+use function array_map;
+use function array_merge;
+use function array_shift;
+use function call_user_func_array;
+use function count;
+use function htmlspecialchars;
+use function is_array;
+use function mb_strpos;
+use function mb_substr;
 use function mysql_close;
 use function mysql_connect;
 use function mysqli_close;
 use function mysqli_connect;
+use function str_replace;
+use function error_clear_last;
 
 /**
  * Validation class for various validation functions
@@ -28,8 +36,6 @@ use function mysqli_connect;
  * no errors, key must be set with an empty value.
  *
  * Validation functions are assigned in $cfg_db['_validators'] (config.values.php).
- *
- * @package PhpMyAdmin
  */
 class Validator
 {
@@ -363,7 +369,6 @@ class Validator
         }
         return $result;
     }
-
 
     /**
      * Validates regular expression

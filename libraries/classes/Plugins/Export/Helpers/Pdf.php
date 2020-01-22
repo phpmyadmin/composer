@@ -1,9 +1,6 @@
 <?php
 /**
  * PhpMyAdmin\Plugins\Export\Helpers\Pdf class
- *
- * @package    PhpMyAdmin-Export
- * @subpackage PDF
  */
 declare(strict_types=1);
 
@@ -15,12 +12,13 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Util;
 use TCPDF_STATIC;
+use function array_key_exists;
+use function count;
+use function ksort;
+use function stripos;
 
 /**
  * Adapted from a LGPL script by Philip Clarke
- *
- * @package    PhpMyAdmin-Export
- * @subpackage PDF
  */
 class Pdf extends PdfLib
 {
@@ -47,14 +45,10 @@ class Pdf extends PdfLib
     private $currentTable;
     private $aliases;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     private $transformations;
 
     /**
@@ -351,7 +345,7 @@ class Pdf extends PdfLib
     public function getTriggers($db, $table)
     {
         $triggers = $GLOBALS['dbi']->getTriggers($db, $table);
-        if ([] === $triggers) {
+        if ($triggers === []) {
             return; //prevents printing blank trigger list for any table
         }
 
@@ -745,7 +739,7 @@ class Pdf extends PdfLib
                  * @todo do not deactivate completely the display
                  * but show the field's name and [BLOB]
                  */
-                    if (false !== stripos($this->fields[$i]->flags, 'BINARY')) {
+                    if (stripos($this->fields[$i]->flags, 'BINARY') !== false) {
                         $this->display_column[$i] = false;
                         unset($this->colTitles[$i]);
                     }

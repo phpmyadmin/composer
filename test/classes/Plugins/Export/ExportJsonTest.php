@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportJson class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -13,11 +11,11 @@ use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionMethod;
 use ReflectionProperty;
 use stdClass;
+use function array_shift;
 
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportJson class
  *
- * @package PhpMyAdmin-test
  * @group medium
  */
 class ExportJsonTest extends PmaTestCase

@@ -1,9 +1,6 @@
 <?php
 /**
  * Abstract class for the long to IPv4 transformations plugins
- *
- * @package    PhpMyAdmin-Transformations
- * @subpackage LongToIPv4
  */
 declare(strict_types=1);
 
@@ -12,11 +9,11 @@ namespace PhpMyAdmin\Plugins\Transformations\Abs;
 use PhpMyAdmin\Plugins\TransformationsPlugin;
 use PhpMyAdmin\Util;
 use stdClass;
+use function htmlspecialchars;
+use function long2ip;
 
 /**
  * Provides common methods for all of the long to IPv4 transformations plugins.
- *
- * @package PhpMyAdmin
  */
 abstract class LongToIPv4TransformationsPlugin extends TransformationsPlugin
 {

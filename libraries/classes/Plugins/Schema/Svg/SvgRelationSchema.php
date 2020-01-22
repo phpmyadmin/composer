@@ -1,8 +1,6 @@
 <?php
 /**
  * Contains PhpMyAdmin\Plugins\Schema\Svg\RelationStatsSvg class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,8 +10,10 @@ use PhpMyAdmin\Plugins\Schema\Dia\TableStatsDia;
 use PhpMyAdmin\Plugins\Schema\Eps\TableStatsEps;
 use PhpMyAdmin\Plugins\Schema\ExportRelationSchema;
 use PhpMyAdmin\Plugins\Schema\Pdf\TableStatsPdf;
-use PhpMyAdmin\Plugins\Schema\Svg\Svg;
-use PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg;
+use function in_array;
+use function max;
+use function min;
+use function sprintf;
 
 /**
  * RelationStatsSvg Relation Schema Class
@@ -27,14 +27,11 @@ use PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg;
  * inherits ExportRelationSchema class has common functionality added
  * to this class
  *
- * @package PhpMyAdmin
  * @name Svg_Relation_Schema
  */
 class SvgRelationSchema extends ExportRelationSchema
 {
-    /**
-     * @var TableStatsDia[]|TableStatsEps[]|TableStatsPdf[]|TableStatsSvg[]
-     */
+    /** @var TableStatsDia[]|TableStatsEps[]|TableStatsPdf[]|TableStatsSvg[] */
     private $_tables = [];
     /** @var RelationStatsSvg[] Relations */
     private $_relations = [];
@@ -45,8 +42,6 @@ class SvgRelationSchema extends ExportRelationSchema
     private $_tablewidth;
 
     /**
-     * The "PhpMyAdmin\Plugins\Schema\Svg\SvgRelationSchema" constructor
-     *
      * Upon instantiation This starts writing the SVG XML document
      * user will be prompted for download as .svg extension
      *

@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for Form class in config folder
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -14,17 +12,15 @@ use PhpMyAdmin\Config\Form;
 use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionClass;
 use ReflectionProperty;
+use function array_keys;
+use function preg_match;
 
 /**
  * Tests for PMA_Form class
- *
- * @package PhpMyAdmin-test
  */
 class FormTest extends PmaTestCase
 {
-    /**
-     * @var Form
-     */
+    /** @var Form */
     protected $object;
 
     /**

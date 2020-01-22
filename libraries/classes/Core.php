@@ -3,8 +3,6 @@
  * Core functions used all over the scripts.
  * This script is distinct from libraries/common.inc.php because this
  * script is called from /test.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,11 +10,22 @@ namespace PhpMyAdmin;
 
 use PhpMyAdmin\Di\Migration;
 use PhpMyAdmin\Display\Error as DisplayError;
+use function gettype;
+use function in_array;
+use function is_array;
+use function is_numeric;
+use function is_scalar;
+use function is_string;
+use function json_encode;
+use function preg_replace;
+use function sprintf;
+use function strlen;
+use function strtolower;
+use function vsprintf;
+use function strtr;
 
 /**
  * Core class
- *
- * @package PhpMyAdmin
  */
 class Core
 {
@@ -555,7 +564,6 @@ class Core
         // (added this header for Safari but should not harm other browsers)
         header('Last-Modified: ' . gmdate(DATE_RFC1123));
     }
-
 
     /**
      * Sends header indicating file download.
@@ -1225,8 +1233,8 @@ class Core
      */
     public static function signSqlQuery($sqlQuery)
     {
-        /** @var array $cfg */
         global $cfg;
+
         return hash_hmac('sha256', $sqlQuery, $_SESSION[' HMAC_secret '] . $cfg['blowfish_secret']);
     }
 
@@ -1240,8 +1248,8 @@ class Core
      */
     public static function checkSqlQuerySignature($sqlQuery, $signature)
     {
-        /** @var array $cfg */
         global $cfg;
+
         $hmac = hash_hmac('sha256', $sqlQuery, $_SESSION[' HMAC_secret '] . $cfg['blowfish_secret']);
         return hash_equals($hmac, $signature);
     }

@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\InsertEdit
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -18,11 +16,12 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
 use stdClass;
+use function md5;
+use function sprintf;
 
 /**
  * Tests for PhpMyAdmin\InsertEdit
  *
- * @package PhpMyAdmin-test
  * @group medium
  */
 class InsertEditTest extends TestCase

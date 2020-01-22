@@ -2,8 +2,6 @@
 /**
  * This class is responsible for instantiating
  * the various components of the navigation panel
- *
- * @package PhpMyAdmin-navigation
  */
 declare(strict_types=1);
 
@@ -18,32 +16,30 @@ use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function count;
+use function defined;
+use function file_exists;
+use function is_bool;
+use function parse_url;
+use function strpos;
+use function trim;
+use const PHP_URL_HOST;
 
 /**
  * The navigation panel - displays server, db and table selection tree
- *
- * @package PhpMyAdmin-Navigation
  */
 class Navigation
 {
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
-    /**
-     * @var NavigationTree
-     */
+    /** @var NavigationTree */
     private $tree;
 
     /**

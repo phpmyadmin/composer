@@ -1,21 +1,16 @@
 <?php
 /**
  * Used to render the console of PMA's pages
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Bookmark;
-use PhpMyAdmin\Relation;
-use PhpMyAdmin\Template;
+use function count;
+use function sprintf;
 
 /**
  * Class used to output the console
- *
- * @package PhpMyAdmin
  */
 class Console
 {
@@ -35,14 +30,10 @@ class Console
      */
     private $_isAjax;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**

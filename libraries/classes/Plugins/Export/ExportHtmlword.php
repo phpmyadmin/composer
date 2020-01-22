@@ -1,9 +1,6 @@
 <?php
 /**
  * HTML-Word export code
- *
- * @package    PhpMyAdmin-Export
- * @subpackage HTML-Word
  */
 declare(strict_types=1);
 
@@ -18,18 +15,16 @@ use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function in_array;
+use function str_replace;
+use function stripslashes;
 
 /**
  * Handles the export for the HTML-Word format
- *
- * @package    PhpMyAdmin-Export
- * @subpackage HTML-Word
  */
 class ExportHtmlword extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();

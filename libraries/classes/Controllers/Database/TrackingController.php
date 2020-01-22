@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Database
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Database;
@@ -17,11 +14,12 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Tracking;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function count;
+use function htmlspecialchars;
+use function sprintf;
 
 /**
  * Tracking configuration for database.
- *
- * @package PhpMyAdmin\Controllers\Database
  */
 class TrackingController extends AbstractController
 {
@@ -41,9 +39,6 @@ class TrackingController extends AbstractController
         $this->tracking = $tracking;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $pmaThemeImage, $text_dir, $url_query, $url_params, $tables, $num_tables, $pos, $data, $cfg;

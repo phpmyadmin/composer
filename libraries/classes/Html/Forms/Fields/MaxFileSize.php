@@ -1,8 +1,6 @@
 <?php
 /**
  * HTML Generator for hidden "max file size" field
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -10,12 +8,9 @@ namespace PhpMyAdmin\Html\Forms\Fields;
 
 /**
  * HTML Generator for hidden "max file size" field
- *
- * @package PhpMyAdmin
  */
 class MaxFileSize implements FieldGenerator
 {
-
     /**
      * Generates a hidden field which should indicate to the browser
      * the maximum size for upload

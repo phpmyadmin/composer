@@ -2,8 +2,6 @@
 /**
  * PhpMyAdmin\Server\Status\Data class
  * Used by server_status_*.php pages
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -11,6 +9,9 @@ namespace PhpMyAdmin\Server\Status;
 
 use PhpMyAdmin\ReplicationInfo;
 use PhpMyAdmin\Url;
+use function basename;
+use function mb_strpos;
+use function mb_strtolower;
 
 /**
  * This class provides data about the server status
@@ -20,8 +21,6 @@ use PhpMyAdmin\Url;
  * TODO: Use lazy initialisation for some of the properties
  *       since not all of the server_status_*.php pages need
  *       all the data that this class provides.
- *
- * @package PhpMyAdmin
  */
 class Data
 {
@@ -309,9 +308,6 @@ class Data
         ];
     }
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         global $replication_info;

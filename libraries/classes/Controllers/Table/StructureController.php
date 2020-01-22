@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -36,43 +33,40 @@ use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use stdClass;
+use function array_keys;
+use function array_splice;
+use function count;
+use function implode;
+use function in_array;
+use function is_array;
+use function mb_strtoupper;
+use function sprintf;
+use function str_replace;
+use function trim;
+use function strpos;
 
 /**
  * Displays table structure infos like columns, indexes, size, rows
  * and allows manipulation of indexes and columns.
- *
- * @package PhpMyAdmin\Controllers
  */
 class StructureController extends AbstractController
 {
-    /**
-     * @var Table  The table object
-     */
+    /** @var Table  The table object */
     protected $table_obj;
 
-    /**
-     * @var string  The URL query string
-     */
+    /** @var string  The URL query string */
     protected $_url_query;
 
-    /**
-     * @var CreateAddField
-     */
+    /** @var CreateAddField */
     private $createAddField;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     private $transformations;
 
     /**
-     * StructureController constructor
-     *
      * @param Response          $response        Response object
      * @param DatabaseInterface $dbi             DatabaseInterface object
      * @param Template          $template        Template object
@@ -101,9 +95,6 @@ class StructureController extends AbstractController
         $this->table_obj = $this->dbi->getTable($this->db, $this->table);
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $containerBuilder, $sql_query, $reread_info, $showtable;
@@ -113,7 +104,7 @@ class StructureController extends AbstractController
         $reread_info = $this->table_obj->getStatusInfo(null, true);
         $showtable = $this->table_obj->getStatusInfo(
             null,
-            (isset($reread_info) && $reread_info ? true : false)
+            (isset($reread_info) && $reread_info)
         );
         if ($this->table_obj->isView()) {
             $tbl_is_view = true;
@@ -824,8 +815,6 @@ class StructureController extends AbstractController
             $analyzed_sql_results,
             $db,
         ] = ParseAnalyze::sqlQuery($sql_query, $db);
-        // @todo: possibly refactor
-        extract($analyzed_sql_results);
 
         $sql = new Sql();
         $this->response->addHTML(
@@ -938,8 +927,12 @@ class StructureController extends AbstractController
                     $err_url
                 );
             }
+
             $sql_query = 'ALTER TABLE ' . Util::backquote($this->table) . ' ';
             $sql_query .= implode(', ', $changes) . $key_query;
+            if (isset($_POST['online_transaction'])) {
+                $sql_query .= ', ALGORITHM=INPLACE, LOCK=NONE';
+            }
             $sql_query .= ';';
 
             // If there is a request for SQL previewing.
@@ -1317,7 +1310,10 @@ class StructureController extends AbstractController
 
         $engine = $this->table_obj->getStorageEngine();
         return $this->template->render('table/structure/display_structure', [
-            'url_params' => $url_params,
+            'url_params' => [
+                'db' => $this->db,
+                'table' => $this->table,
+            ],
             'collations' => $collations,
             'is_foreign_key_supported' => Util::isForeignKeySupported($engine),
             'displayIndexesHtml' => Index::getHtmlForDisplayIndexes(),

@@ -1,8 +1,6 @@
 <?php
 /**
  * Classes to create relation schema in EPS format.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -10,14 +8,15 @@ namespace PhpMyAdmin\Plugins\Schema\Eps;
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Response;
+use function strlen;
 
 /**
  * This Class is EPS Library and
  * helps in developing structure of EPS Schema Export
  *
- * @package PhpMyAdmin
- * @access  public
  * @see     https://www.php.net/manual/en/book.xmlwriter.php
+ *
+ * @access  public
  */
 class Eps
 {
@@ -26,8 +25,6 @@ class Eps
     public $stringCommands;
 
     /**
-     * The "Eps" constructor
-     *
      * Upon instantiation This starts writing the EPS Document.
      * %!PS-Adobe-3.0 EPSF-3.0 This is the MUST first comment to include
      * it shows/tells that the Post Script document is purely under

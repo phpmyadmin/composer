@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -15,20 +12,24 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function array_key_exists;
+use function array_keys;
+use function array_values;
+use function htmlspecialchars;
 use function mb_strtoupper;
+use function md5;
+use function strtoupper;
+use function uksort;
+use function usort;
 
 /**
  * Display table relations for viewing and editing.
  *
  * Includes phpMyAdmin relations and InnoDB relations.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 final class RelationController extends AbstractController
 {
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**
@@ -338,7 +339,7 @@ final class RelationController extends AbstractController
 
         // @todo should be: $server->db($db)->table($table)->primary()
         $primary = Index::getPrimary($foreignTable, $_POST['foreignDb']);
-        if (false === $primary) {
+        if ($primary === false) {
             return;
         }
 
@@ -368,7 +369,7 @@ final class RelationController extends AbstractController
 
             while ($row = $this->dbi->fetchArray($tables_rs)) {
                 if (isset($row['Engine'])
-                    &&  mb_strtoupper($row['Engine']) == $storageEngine
+                    && mb_strtoupper($row['Engine']) == $storageEngine
                 ) {
                     $tables[] = htmlspecialchars($row['Name']);
                 }

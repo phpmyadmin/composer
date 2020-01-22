@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -22,11 +19,18 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Util;
+use function array_values;
+use function class_exists;
+use function count;
+use function implode;
+use function in_array;
+use function is_file;
+use function method_exists;
+use function parse_str;
+use function sprintf;
 
 /**
  * Manipulation of table data like inserting, replacing and updating.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 final class ReplaceController extends AbstractController
 {
@@ -65,9 +69,6 @@ final class ReplaceController extends AbstractController
         $this->relation = $relation;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $containerBuilder, $db, $table, $url_params, $message;
@@ -587,7 +588,7 @@ final class ReplaceController extends AbstractController
          * WHERE clause information so that /table/change does not go back
          * to the current record
          */
-        if (isset($_POST['after_insert']) && 'new_insert' == $_POST['after_insert']) {
+        if (isset($_POST['after_insert']) && $_POST['after_insert'] == 'new_insert') {
             unset($_POST['where_clause']);
         }
 

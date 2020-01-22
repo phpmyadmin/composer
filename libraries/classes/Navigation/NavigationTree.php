@@ -1,8 +1,6 @@
 <?php
 /**
  * Functionality for the navigation tree
- *
- * @package PhpMyAdmin-Navigation
  */
 declare(strict_types=1);
 
@@ -20,17 +18,24 @@ use PhpMyAdmin\RecentFavoriteTable;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+use function array_key_exists;
+use function array_shift;
+use function base64_decode;
+use function count;
+use function explode;
+use function floor;
+use function sort;
+use function sprintf;
+use function strcasecmp;
+use function strlen;
+use function strstr;
 
 /**
  * Displays a collapsible of database objects in the navigation frame
- *
- * @package PhpMyAdmin-Navigation
  */
 class NavigationTree
 {
-    /**
-     * @var Node Reference to the root node of the tree
-     */
+    /** @var Node Reference to the root node of the tree */
     private $tree;
     /**
      * @var array The actual paths to all expanded nodes in the tree
@@ -89,14 +94,10 @@ class NavigationTree
      */
     private $largeGroupWarning = false;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -879,7 +880,7 @@ class NavigationTree
         $this->groupTree();
         $children = $this->tree->children;
         usort($children, [
-            NavigationTree::class,
+            self::class,
             'sortNode',
         ]);
         $this->setVisibility();
@@ -921,7 +922,7 @@ class NavigationTree
             $listContent .= $this->getPageSelector($node);
             $children = $node->children;
             usort($children, [
-                NavigationTree::class,
+                self::class,
                 'sortNode',
             ]);
 
@@ -1166,7 +1167,7 @@ class NavigationTree
                 }
             }
 
-            $retval .= "<div class='block " . $divClass . "'>";
+            $retval .= "<div class='block second" . $divClass . "'>";
 
             if (isset($node->links['icon']) && ! empty($node->links['icon'])) {
                 $args = [];
@@ -1229,7 +1230,7 @@ class NavigationTree
             usort(
                 $children,
                 [
-                    NavigationTree::class,
+                    self::class,
                     'sortNode',
                 ]
             );
@@ -1315,7 +1316,7 @@ class NavigationTree
 
         $children = $this->tree->children;
         usort($children, [
-            NavigationTree::class,
+            self::class,
             'sortNode',
         ]);
         $this->setVisibility();

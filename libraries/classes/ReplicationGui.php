@@ -1,28 +1,31 @@
 <?php
 /**
  * Functions for the replication GUI
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function in_array;
+use function is_array;
+use function is_int;
+use function mb_strrpos;
+use function mb_substr;
+use function str_replace;
+use function strlen;
+use function strtok;
+use function time;
+use function mb_strtolower;
+
 /**
  * Functions for the replication GUI
- *
- * @package PhpMyAdmin
  */
 class ReplicationGui
 {
-    /**
-     * @var Replication
-     */
+    /** @var Replication */
     private $replication;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**

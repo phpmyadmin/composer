@@ -1,8 +1,6 @@
 <?php
 /**
  * Database structure manipulation
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -26,57 +24,52 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function ceil;
+use function count;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function json_decode;
+use function json_encode;
+use function max;
+use function md5;
+use function sha1;
+use function sprintf;
+use function str_replace;
+use function strtotime;
+use function urlencode;
+use function array_search;
 
 /**
  * Handles database structure logic
- *
- * @package PhpMyAdmin\Controllers
  */
 class StructureController extends AbstractController
 {
-    /**
-     * @var int Number of tables
-     */
+    /** @var int Number of tables */
     protected $numTables;
 
-    /**
-     * @var int Current position in the list
-     */
+    /** @var int Current position in the list */
     protected $position;
 
-    /**
-     * @var bool DB is information_schema
-     */
+    /** @var bool DB is information_schema */
     protected $dbIsSystemSchema;
 
-    /**
-     * @var int Number of tables
-     */
+    /** @var int Number of tables */
     protected $totalNumTables;
 
-    /**
-     * @var array Tables in the database
-     */
+    /** @var array Tables in the database */
     protected $tables;
 
-    /**
-     * @var bool whether stats show or not
-     */
+    /** @var bool whether stats show or not */
     protected $isShowStats;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Replication
-     */
+    /** @var Replication */
     private $replication;
 
     /**
-     * Constructor
-     *
      * @param Response          $response    Response instance
      * @param DatabaseInterface $dbi         DatabaseInterface instance
      * @param Template          $template    Template object
@@ -341,7 +334,7 @@ class StructureController extends AbstractController
         // /database/structure -> libraries/mult_submits.inc.php -> /sql
         // -> /database/structure and if we got an error on the multi submit,
         // we must display it here and not call again mult_submits.inc.php
-        if (! isset($_POST['error']) || false === $_POST['error']) {
+        if (! isset($_POST['error']) || $_POST['error'] === false) {
             include ROOT_PATH . 'libraries/mult_submits.inc.php';
         }
         if (empty($_POST['message'])) {

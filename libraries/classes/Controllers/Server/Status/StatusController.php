@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Controllers\Server\Status\StatusController
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -15,11 +13,10 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function implode;
 
 /**
  * Object the server status page: processes, connections and traffic.
- *
- * @package PhpMyAdmin\Controllers\Server\Status
  */
 class StatusController extends AbstractController
 {
@@ -39,9 +36,6 @@ class StatusController extends AbstractController
         $this->replicationGui = $replicationGui;
     }
 
-    /**
-     * @return string
-     */
     public function index(): string
     {
         global $replication_info;
@@ -88,9 +82,6 @@ class StatusController extends AbstractController
         ]);
     }
 
-    /**
-     * @return int
-     */
     private function getStartTime(): int
     {
         return (int) $this->dbi->fetchValue(
@@ -250,9 +241,6 @@ class StatusController extends AbstractController
         ];
     }
 
-    /**
-     * @return string
-     */
     private function getReplicationInfo(): string
     {
         global $replication_info, $replication_types;

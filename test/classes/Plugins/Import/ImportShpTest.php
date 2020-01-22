@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportShp class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,11 +9,12 @@ namespace PhpMyAdmin\Tests\Plugins\Import;
 use PhpMyAdmin\File;
 use PhpMyAdmin\Plugins\Import\ImportShp;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function define;
+use function defined;
+use function extension_loaded;
 
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportShp class
- *
- * @package PhpMyAdmin-test
  */
 class ImportShpTest extends PmaTestCase
 {
@@ -206,7 +205,6 @@ class ImportShpTest extends PmaTestCase
                 $sql_query
             );
         }
-
 
         $this->assertStringContainsString(
             "GeomFromText('POINT(1294523.1759236",

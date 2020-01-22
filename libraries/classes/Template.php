@@ -1,8 +1,6 @@
 <?php
 /**
  * hold PhpMyAdmin\Template class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -32,11 +30,12 @@ use Twig_Error_Loader;
 use Twig_Error_Runtime;
 use Twig_Error_Syntax;
 use Twig_TemplateWrapper;
+use function sprintf;
+use function trigger_error;
+use const E_USER_WARNING;
 
 /**
  * Handle front end templating
- *
- * @package PhpMyAdmin
  */
 class Template
 {
@@ -52,9 +51,6 @@ class Template
      */
     public const BASE_PATH = 'templates/';
 
-    /**
-     * Template constructor
-     */
     public function __construct()
     {
         global $cfg;

@@ -2,8 +2,6 @@
 
 /**
  * Holds the PhpMyAdmin\Controllers\Server\PluginsController
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
@@ -15,17 +13,17 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Plugins;
 use PhpMyAdmin\Template;
+use function array_keys;
+use function ksort;
+use function mb_strtolower;
+use function preg_replace;
 
 /**
  * Handles viewing server plugin details
- *
- * @package PhpMyAdmin\Controllers
  */
 class PluginsController extends AbstractController
 {
-    /**
-     * @var Plugins
-     */
+    /** @var Plugins */
     private $plugins;
 
     /**

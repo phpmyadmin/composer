@@ -1,8 +1,6 @@
 <?php
 /**
  * Handles DB QBE search
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -18,11 +16,23 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_fill;
+use function array_multisort;
+use function count;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function key;
+use function max;
+use function mb_strlen;
+use function mb_strtoupper;
+use function mb_substr;
+use function str_replace;
+use function reset;
 
 /**
  * Class to handle database QBE search
- *
- * @package PhpMyAdmin
  */
 class Qbe
 {
@@ -216,24 +226,16 @@ class Qbe
      */
     private $_currentSearch = null;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     public $dbi;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**
-     * Public Constructor
-     *
      * @param Relation          $relation        Relation object
      * @param Template          $template        Template object
      * @param DatabaseInterface $dbi             DatabaseInterface object
@@ -269,8 +271,8 @@ class Qbe
      */
     private function _loadCriterias()
     {
-        if (null === $this->_currentSearch
-            || null === $this->_currentSearch->getCriterias()
+        if ($this->_currentSearch === null
+            || $this->_currentSearch->getCriterias() === null
         ) {
             return $this;
         }
@@ -347,7 +349,7 @@ class Qbe
             DatabaseInterface::QUERY_STORE
         );
         $all_tables_count = $this->dbi->numRows($all_tables);
-        if (0 == $all_tables_count) {
+        if ($all_tables_count == 0) {
             Message::error(__('No tables found in database.'))->display();
             exit;
         }
@@ -384,6 +386,7 @@ class Qbe
         // sets the largest width found
         $this->_realwidth = $this->_form_column_width . 'ex';
     }
+
     /**
      * Provides select options list containing column names
      *
@@ -1448,7 +1451,7 @@ class Qbe
             // we can check which of our columns has a where clause
             if (! empty($this->_criteria[$column_index])) {
                 if (mb_substr($this->_criteria[$column_index], 0, 1) == '='
-                    || false !== stripos($this->_criteria[$column_index], 'is')
+                    || stripos($this->_criteria[$column_index], 'is') !== false
                 ) {
                     $where_clause_columns[$column] = $column;
                     $where_clause_tables[$table]  = $table;
@@ -1833,7 +1836,7 @@ class Qbe
         $currentSearch = $this->_getCurrentSearch();
         $currentSearchId = null;
         $currentSearchName = null;
-        if (null != $currentSearch) {
+        if ($currentSearch != null) {
             $currentSearchId = $currentSearch->getId();
             $currentSearchName = $currentSearch->getSearchName();
         }
@@ -1855,7 +1858,7 @@ class Qbe
         $html_output .= '<input type="hidden" name="action" id="action" value="">';
         $html_output .= '<input class="btn btn-secondary" type="submit" name="saveSearch" id="saveSearch" '
             . 'value="' . __('Create bookmark') . '">';
-        if (null !== $currentSearchId) {
+        if ($currentSearchId !== null) {
             $html_output .= '<input class="btn btn-secondary" type="submit" name="updateSearch" '
                 . 'id="updateSearch" value="' . __('Update bookmark') . '">';
             $html_output .= '<input class="btn btn-secondary" type="submit" name="deleteSearch" '

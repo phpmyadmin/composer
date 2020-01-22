@@ -1,8 +1,6 @@
 <?php
 /**
  * Handles Database Search
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -13,11 +11,19 @@ use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function array_intersect;
+use function array_key_exists;
+use function count;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function intval;
+use function is_array;
+use function is_string;
+use function strlen;
 
 /**
  * Class to handle database search
- *
- * @package PhpMyAdmin
  */
 class Search
 {
@@ -85,19 +91,13 @@ class Search
      */
     private $criteriaColumnName;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**
-     * Public Constructor
-     *
      * @param DatabaseInterface $dbi      DatabaseInterface object
      * @param string            $db       Database name
      * @param Template          $template Template object

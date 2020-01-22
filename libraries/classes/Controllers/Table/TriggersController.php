@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -10,17 +7,14 @@ use PhpMyAdmin\Common;
 use PhpMyAdmin\Rte\Triggers;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function in_array;
+use function strlen;
 
 /**
  * Triggers management.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class TriggersController extends AbstractController
 {
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $_PMA_RTE, $db, $table, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats;

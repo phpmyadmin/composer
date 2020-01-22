@@ -1,8 +1,6 @@
 <?php
 /**
  * function for the main export logic
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -16,14 +14,10 @@ use PhpMyAdmin\Plugins\SchemaPlugin;
 
 /**
  * PhpMyAdmin\Export class
- *
- * @package PhpMyAdmin
  */
 class Export
 {
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -233,7 +227,7 @@ class Export
         $memory_limit_num = (int) substr($memory_limit, 0, -1);
         $lowerLastChar = strtolower(substr($memory_limit, -1));
         // 2 MB as default
-        if (empty($memory_limit) || '-1' == $memory_limit) {
+        if (empty($memory_limit) || $memory_limit == '-1') {
             $memory_limit = 2 * 1024 * 1024;
         } elseif ($lowerLastChar == 'm') {
             $memory_limit = $memory_limit_num * 1024 * 1024;

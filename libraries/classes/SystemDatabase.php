@@ -1,31 +1,21 @@
 <?php
 /**
  * hold PhpMyAdmin\SystemDatabase class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use mysqli_result;
-use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Relation;
-use PhpMyAdmin\Util;
+use function count;
+use function sprintf;
 
-/**
- * @package PhpMyAdmin
- */
 class SystemDatabase
 {
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     protected $dbi;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /**

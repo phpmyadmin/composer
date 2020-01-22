@@ -1,8 +1,6 @@
 <?php
 /**
  * Contains PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -10,6 +8,10 @@ namespace PhpMyAdmin\Plugins\Schema\Svg;
 
 use PhpMyAdmin\Plugins\Schema\ExportRelationSchema;
 use PhpMyAdmin\Plugins\Schema\TableStats;
+use function count;
+use function in_array;
+use function max;
+use function sprintf;
 
 /**
  * Table preferences/statistics
@@ -17,9 +19,9 @@ use PhpMyAdmin\Plugins\Schema\TableStats;
  * This class preserves the table co-ordinates,fields
  * and helps in drawing/generating the Tables in SVG XML document.
  *
- * @package PhpMyAdmin
- * @name    Table_Stats_Svg
  * @see     PMA_SVG
+ *
+ * @name    Table_Stats_Svg
  */
 class TableStatsSvg extends TableStats
 {
@@ -30,8 +32,6 @@ class TableStatsSvg extends TableStats
     public $currentCell = 0;
 
     /**
-     * The "PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg" constructor
-     *
      * @see PMA_SVG, Table_Stats_Svg::Table_Stats_setWidth,
      *       PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg::Table_Stats_setHeight
      *

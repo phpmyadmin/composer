@@ -1,17 +1,21 @@
 <?php
 /**
  * Contains functions used by browse foreigners
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function asort;
+use function ceil;
+use function floor;
+use function htmlspecialchars;
+use function is_array;
+use function mb_strlen;
+use function mb_substr;
+
 /**
  * PhpMyAdmin\BrowseForeigners class
- *
- * @package PhpMyAdmin
  */
 class BrowseForeigners
 {
@@ -26,9 +30,7 @@ class BrowseForeigners
     /** @var string */
     private $themeImage;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**

@@ -1,8 +1,6 @@
 <?php
 /**
  * HTML Generator for checkbox for foreign keys
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -17,12 +15,9 @@ use Twig_Error_Syntax;
 
 /**
  * HTML Generator for checkbox for foreign keys
- *
- * @package PhpMyAdmin
  */
 class FKCheckbox implements FieldGenerator
 {
-
     /**
      * Get HTML for Foreign key check checkbox
      *

@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Server
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Server;
@@ -23,11 +20,16 @@ use PhpMyAdmin\Server\Users;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function header;
+use function implode;
+use function is_array;
+use function ob_get_clean;
+use function ob_start;
+use function str_replace;
+use function urlencode;
 
 /**
  * Server privileges and users manipulations.
- *
- * @package PhpMyAdmin\Controllers\Server
  */
 class PrivilegesController extends AbstractController
 {
@@ -46,9 +48,6 @@ class PrivilegesController extends AbstractController
         $this->relation = $relation;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $table, $err_url, $message, $pmaThemeImage, $text_dir, $url_query, $post_patterns;

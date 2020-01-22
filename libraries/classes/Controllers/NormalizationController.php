@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
@@ -12,11 +9,13 @@ use PhpMyAdmin\Normalization;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+use function intval;
+use function json_decode;
+use function json_encode;
+use function min;
 
 /**
  * Normalization process (temporarily specific to 1NF).
- *
- * @package PhpMyAdmin\Controllers
  */
 class NormalizationController extends AbstractController
 {
@@ -35,9 +34,6 @@ class NormalizationController extends AbstractController
         $this->normalization = $normalization;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $table;

@@ -4,8 +4,6 @@
  *
  * @todo       Pretty much everything
  * @todo       Importing of accented characters seems to fail
- * @package    PhpMyAdmin-Import
- * @subpackage ODS
  */
 declare(strict_types=1);
 
@@ -19,18 +17,20 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ImportPluginProperties;
 use SimpleXMLElement;
+use function count;
+use function implode;
+use function libxml_disable_entity_loader;
+use function rtrim;
+use function simplexml_load_string;
+use function strcmp;
+use function strlen;
+use const LIBXML_COMPACT;
 
 /**
  * Handles the import for the ODS format
- *
- * @package    PhpMyAdmin-Import
- * @subpackage ODS
  */
 class ImportOds extends ImportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();
@@ -398,13 +398,13 @@ class ImportOds extends ImportPlugin
                 (string) $cell_attrs['value-type']
             )
         ) {
-            $value = (double) $cell_attrs['value'];
+            $value = (float) $cell_attrs['value'];
 
             return $value;
         } elseif ($_REQUEST['ods_recognize_currency']
             && ! strcmp('currency', (string) $cell_attrs['value-type'])
         ) {
-            $value = (double) $cell_attrs['value'];
+            $value = (float) $cell_attrs['value'];
 
             return $value;
         }

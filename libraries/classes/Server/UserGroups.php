@@ -1,8 +1,6 @@
 <?php
 /**
  * set of functions for user group handling
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -13,12 +11,14 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use PhpMyAdmin\DatabaseInterface;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function mb_substr;
+use function substr;
 
 /**
  * PhpMyAdmin\Server\UserGroups class
- *
- * @package PhpMyAdmin
  */
 class UserGroups
 {
@@ -31,8 +31,8 @@ class UserGroups
      */
     public static function getHtmlForListingUsersofAGroup(string $userGroup): string
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
+
         $users = [];
         $numRows = 0;
         $relation = new Relation($dbi);
@@ -74,8 +74,8 @@ class UserGroups
      */
     public static function getHtmlForUserGroupsTable(): string
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
+
         $relation = new Relation($dbi);
         $cfgRelation = $relation->getRelationsParam();
         $groupTable = Util::backquote($cfgRelation['db'])
@@ -139,7 +139,7 @@ class UserGroups
         $template = new Template();
         return $template->render('server/user_groups/user_groups', [
             'action' => $action,
-            'hidden_inputs' => isset($hidden_inputs) ? $hidden_inputs : '',
+            'hidden_inputs' => $hidden_inputs ?? '',
             'result' => $result,
             'has_rows' => $numRows,
             'user_groups_values' => $userGroupsValues,
@@ -180,8 +180,8 @@ class UserGroups
      */
     public static function delete(string $userGroup): void
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
+
         $relation = new Relation($dbi);
         $cfgRelation = $relation->getRelationsParam();
         $userTable = Util::backquote($cfgRelation['db'])
@@ -207,8 +207,8 @@ class UserGroups
      */
     public static function getHtmlToEditUserGroup(?string $userGroup = null): string
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
+
         $relation = new Relation($dbi);
         $urlParams = [];
 
@@ -317,8 +317,8 @@ class UserGroups
      */
     public static function edit(string $userGroup, bool $new = false): void
     {
-        /** @var DatabaseInterface $dbi */
         global $dbi;
+
         $relation = new Relation($dbi);
         $tabs = Util::getMenuTabList();
         $cfgRelation = $relation->getRelationsParam();

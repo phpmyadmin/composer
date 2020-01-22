@@ -1,8 +1,6 @@
 <?php
 /**
  * Second authentication factor handling
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -18,19 +16,17 @@ use Throwable;
 use Twig_Error_Loader;
 use Twig_Error_Runtime;
 use Twig_Error_Syntax;
+use function json_decode;
+use function json_encode;
 
 /**
  * Hardware key based two-factor authentication
  *
  * Supports FIDO U2F tokens
- *
- * @package PhpMyAdmin
  */
 class Key extends TwoFactorPlugin
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public static $id = 'key';
 
     /**

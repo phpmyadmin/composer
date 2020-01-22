@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds EnginesControllerTest class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -10,17 +8,15 @@ namespace PhpMyAdmin\Tests\Controllers\Server;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Server\EnginesController;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\StorageEngine;
 use PhpMyAdmin\Template;
 use PHPStan\Testing\TestCase;
+use function htmlspecialchars;
 
 /**
  * Tests for EnginesController class
- *
- * @package PhpMyAdmin-test
  */
 class EnginesControllerTest extends TestCase
 {
@@ -41,9 +37,6 @@ class EnginesControllerTest extends TestCase
         $GLOBALS['cfg']['Server']['DisableIS'] = false;
     }
 
-    /**
-     * @return void
-     */
     public function testIndex(): void
     {
         $controller = new EnginesController(
@@ -90,9 +83,6 @@ class EnginesControllerTest extends TestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function testShow(): void
     {
         $controller = new EnginesController(

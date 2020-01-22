@@ -1,27 +1,22 @@
 <?php
 /**
  * Tests for Script.php
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Scripts;
-use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionProperty;
+use function define;
+use function defined;
 
 /**
  * Tests for Script.php
- *
- * @package PhpMyAdmin-test
  */
 class ScriptsTest extends PmaTestCase
 {
-    /**
-     * @var Scripts
-     */
+    /** @var Scripts */
     protected $object;
 
     /**

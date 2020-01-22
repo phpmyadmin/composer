@@ -1,20 +1,23 @@
 <?php
 /**
  * Config file management
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
 use PhpMyAdmin\Core;
+use function array_diff;
+use function array_flip;
+use function array_keys;
+use function array_walk;
+use function count;
+use function is_array;
+use function preg_replace;
 
 /**
  * Config file management class.
  * Stores its data in $_SESSION
- *
- * @package PhpMyAdmin
  */
 class ConfigFile
 {
@@ -84,8 +87,6 @@ class ConfigFile
     private $_flattenArrayResult;
 
     /**
-     * Constructor
-     *
      * @param array|null $baseConfig base configuration read from
      *                               {@link PhpMyAdmin\Config::$base_config},
      *                               use only when not in PMA Setup

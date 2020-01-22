@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Navigation\Nodes\NodeTable class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -13,8 +11,6 @@ use PhpMyAdmin\Tests\PmaTestCase;
 
 /**
  * Tests for PhpMyAdmin\Navigation\Nodes\NodeTable class
- *
- * @package PhpMyAdmin-test
  */
 class NodeTableTest extends PmaTestCase
 {
@@ -35,7 +31,6 @@ class NodeTableTest extends PmaTestCase
         $GLOBALS['cfg']['NavigationTreeTableSeparator'] = '__';
         $GLOBALS['cfg']['NavigationTreeTableLevel'] = 1;
     }
-
 
     /**
      * Test for __construct

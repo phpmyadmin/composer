@@ -1,21 +1,19 @@
 <?php
 /**
  * Test for PhpMyAdmin\Gis\GisMultiPoint
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisMultiPoint;
-use PhpMyAdmin\Tests\Gis\GisGeomTestCase;
 use TCPDF;
+use function function_exists;
+use function imagecreatetruecolor;
+use function preg_match;
 
 /**
  * Tests for PhpMyAdmin\Gis\GisMultiPoint class
- *
- * @package PhpMyAdmin-test
  */
 class GisMultiPointTest extends GisGeomTestCase
 {
@@ -181,7 +179,6 @@ class GisMultiPointTest extends GisGeomTestCase
             ],
         ];
     }
-
 
     /**
      * test case for prepareRowAsPng() method

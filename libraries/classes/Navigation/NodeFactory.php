@@ -1,23 +1,25 @@
 <?php
 /**
  * This class is responsible for creating Node objects
- *
- * @package PhpMyAdmin-navigation
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Navigation;
 
 use PhpMyAdmin\Navigation\Nodes\Node;
+use function class_exists;
+use function preg_match;
+use function sprintf;
+use function trigger_error;
+use const E_USER_ERROR;
 
 /**
  * Node factory - instantiates Node objects or objects derived from the Node class
- *
- * @package PhpMyAdmin-Navigation
  */
 class NodeFactory
 {
     protected static $namespace = 'PhpMyAdmin\\Navigation\\Nodes\\%s';
+
     /**
      * Sanitizes the name of a Node class
      *

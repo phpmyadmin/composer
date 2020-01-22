@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Import class
- *
- * @package PhpMyAdmin-Import
  */
 declare(strict_types=1);
 
@@ -14,11 +12,20 @@ use PhpMyAdmin\SqlParser\Statements\InsertStatement;
 use PhpMyAdmin\SqlParser\Statements\ReplaceStatement;
 use PhpMyAdmin\SqlParser\Statements\UpdateStatement;
 use PhpMyAdmin\SqlParser\Utils\Query;
+use function max;
+use function mb_chr;
+use function mb_ord;
+use function mb_stripos;
+use function mb_strlen;
+use function mb_strtoupper;
+use function mb_substr;
+use function preg_match;
+use function strncmp;
+use function time;
+use function trim;
 
 /**
  * Library that provides common import functions that are used by import plugins
- *
- * @package PhpMyAdmin
  */
 class Import
 {
@@ -42,9 +49,6 @@ class Import
     public const SIZES = 1;
     public const FORMATTEDSQL = 2;
 
-    /**
-     * Import constructor.
-     */
     public function __construct()
     {
         $GLOBALS['cfg']['Server']['DisableIS'] = false;
@@ -348,7 +352,6 @@ class Import
             $reload,
         ];
     }
-
 
     /**
      * Returns next part of imported file/buffer
@@ -712,7 +715,7 @@ class Import
                     return $size[self::FULL];
                 }
 
-                return ($last_cumulative_size . ',' . $size[self::D]);
+                return $last_cumulative_size . ',' . $size[self::D];
             } elseif (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
                 /**
                  * This is the first row to be analyzed
@@ -760,7 +763,7 @@ class Import
                 }
 
                 /* Use $newInt + $oldD as new M */
-                return (($newInt + $oldD) . ',' . $oldD);
+                return ($newInt + $oldD) . ',' . $oldD;
             } elseif ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
                 /**
                  * The last cumulative type was BIGINT or INT
@@ -1339,7 +1342,6 @@ class Import
         global $import_notice;
         $import_notice = $message;
     }
-
 
     /**
      * Stops the import on (mostly upload/file related) error

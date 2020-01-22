@@ -1,8 +1,6 @@
 <?php
 /**
  * Form templates
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,27 +10,30 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Template;
+use function array_flip;
+use function array_merge;
+use function array_shift;
+use function defined;
+use function htmlspecialchars;
+use function htmlspecialchars_decode;
+use function implode;
+use function is_array;
+use function is_bool;
+use function mb_strtolower;
+use function sprintf;
 
 /**
  * PhpMyAdmin\Config\FormDisplayTemplate class
- *
- * @package PhpMyAdmin
  */
 class FormDisplayTemplate
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     public $group;
 
-    /**
-     * @var Config
-     */
+    /** @var Config */
     protected $config;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
     /**

@@ -1,32 +1,21 @@
 <?php
 /**
  * Holds the PhpMyAdmin\UserPassword class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Core;
 use PhpMyAdmin\Html\Generator;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Privileges;
-use PhpMyAdmin\Template;
-use PhpMyAdmin\Url;
-use PhpMyAdmin\Util;
+use function strlen;
 
 /**
  * Functions for user password
- *
- * @package PhpMyAdmin
  */
 class UserPassword
 {
-    /**
-     * @var Privileges
-     */
+    /** @var Privileges */
     private $serverPrivileges;
 
     /**

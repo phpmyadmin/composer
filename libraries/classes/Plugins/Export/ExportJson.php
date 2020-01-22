@@ -1,9 +1,6 @@
 <?php
 /**
  * Set of methods used to build dumps of tables as JSON
- *
- * @package    PhpMyAdmin-Export
- * @subpackage JSON
  */
 declare(strict_types=1);
 
@@ -16,20 +13,20 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+use function bin2hex;
+use function explode;
+use function json_encode;
+use function stripslashes;
+use const JSON_PRETTY_PRINT;
+use const JSON_UNESCAPED_UNICODE;
 
 /**
  * Handles the export for the JSON format
- *
- * @package    PhpMyAdmin-Export
- * @subpackage JSON
  */
 class ExportJson extends ExportPlugin
 {
     private $first = true;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();

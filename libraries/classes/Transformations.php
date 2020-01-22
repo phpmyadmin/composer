@@ -11,22 +11,15 @@
  *
  * Please provide a comment for your function,
  * what it does and what parameters are available.
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Plugins\TransformationsInterface;
-use PhpMyAdmin\Relation;
-use PhpMyAdmin\Util;
 
 /**
  * Transformations class
- *
- * @package PhpMyAdmin
  */
 class Transformations
 {
@@ -99,7 +92,7 @@ class Transformations
     {
         static $stack = null;
 
-        if (null !== $stack) {
+        if ($stack !== null) {
             return $stack;
         }
 
@@ -439,7 +432,6 @@ class Transformations
 
         return false;
     }
-
 
     /**
      * GLOBAL Plugin functions

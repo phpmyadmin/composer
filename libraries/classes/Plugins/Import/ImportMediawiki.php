@@ -1,9 +1,6 @@
 <?php
 /**
  * MediaWiki import plugin for phpMyAdmin
- *
- * @package    PhpMyAdmin-Import
- * @subpackage MediaWiki
  */
 declare(strict_types=1);
 
@@ -12,12 +9,19 @@ namespace PhpMyAdmin\Plugins\Import;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Properties\Plugins\ImportPluginProperties;
+use function count;
+use function explode;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
+use function preg_match;
+use function str_replace;
+use function strcmp;
+use function strlen;
+use function trim;
 
 /**
  * Handles the import for the MediaWiki format
- *
- * @package    PhpMyAdmin-Import
- * @subpackage MediaWiki
  */
 class ImportMediawiki extends ImportPlugin
 {
@@ -28,9 +32,6 @@ class ImportMediawiki extends ImportPlugin
      */
     private $_analyze;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();
@@ -519,7 +520,6 @@ class ImportMediawiki extends ImportPlugin
 
         return $items;
     }
-
 
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
 

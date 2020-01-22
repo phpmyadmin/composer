@@ -1,8 +1,6 @@
 <?php
 /**
  * Abstract class for the export plugins
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,14 +10,13 @@ use PhpMyAdmin\Export;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Transformations;
+use function stripos;
 
 /**
  * Provides a common interface that will have to be implemented by all of the
  * export plugins. Some of the plugins will also implement other public
  * methods, but those are not declared here, because they are not implemented
  * by all export plugins.
- *
- * @package PhpMyAdmin
  */
 abstract class ExportPlugin
 {
@@ -31,24 +28,15 @@ abstract class ExportPlugin
      */
     protected $properties;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     public $relation;
 
-    /**
-     * @var Export
-     */
+    /** @var Export */
     protected $export;
 
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     protected $transformations;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->relation = new Relation($GLOBALS['dbi']);
@@ -311,7 +299,7 @@ abstract class ExportPlugin
         // search each database
         foreach ($aliases as $db_key => $db) {
             // check if id is database and has alias
-            if (false !== stripos($type, 'db')
+            if (stripos($type, 'db') !== false
                 && $db_key === $id
                 && ! empty($db['alias'])
             ) {
@@ -328,7 +316,7 @@ abstract class ExportPlugin
             // search each of its tables
             foreach ($db['tables'] as $table_key => $table) {
                 // check if id is table and has alias
-                if (false !== stripos($type, 'tbl')
+                if (stripos($type, 'tbl') !== false
                     && $table_key === $id
                     && ! empty($table['alias'])
                 ) {
@@ -340,7 +328,7 @@ abstract class ExportPlugin
                 // search each of its columns
                 foreach ($table['columns'] as $col_key => $col) {
                     // check if id is column
-                    if (false !== stripos($type, 'col')
+                    if (stripos($type, 'col') !== false
                         && $col_key === $id
                         && ! empty($col)
                     ) {

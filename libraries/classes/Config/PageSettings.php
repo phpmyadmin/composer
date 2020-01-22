@@ -1,15 +1,11 @@
 <?php
 /**
  * Page-related settings
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
-use PhpMyAdmin\Config\ConfigFile;
-use PhpMyAdmin\Config\FormDisplay;
 use PhpMyAdmin\Config\Forms\Page\PageFormList;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Message;
@@ -18,12 +14,9 @@ use PhpMyAdmin\UserPreferences;
 
 /**
  * Page-related settings
- *
- * @package PhpMyAdmin
  */
 class PageSettings
 {
-
     /**
      * Contains id of the form element
      *
@@ -52,14 +45,10 @@ class PageSettings
      */
     private $_HTML = '';
 
-    /**
-     * @var UserPreferences
-     */
+    /** @var UserPreferences */
     private $userPreferences;
 
     /**
-     * Constructor
-     *
      * @param string $formGroupName The name of config form group to display
      * @param string $elemId        Id of the div containing settings
      */

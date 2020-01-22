@@ -1,20 +1,17 @@
 <?php
 /**
  * Tests for Error.php
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Error;
-use PhpMyAdmin\Tests\PmaTestCase;
+use function preg_match;
+use const DIRECTORY_SEPARATOR;
 
 /**
  * Error class testing.
- *
- * @package PhpMyAdmin-test
  */
 class ErrorTest extends PmaTestCase
 {

@@ -1,9 +1,6 @@
 <?php
 /**
  * CSV export code
- *
- * @package    PhpMyAdmin-Export
- * @subpackage CSV
  */
 declare(strict_types=1);
 
@@ -17,18 +14,18 @@ use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+use function mb_strtolower;
+use function mb_substr;
+use function preg_replace;
+use function str_replace;
+use function stripslashes;
+use function trim;
 
 /**
  * Handles the export for the CSV format
- *
- * @package    PhpMyAdmin-Export
- * @subpackage CSV
  */
 class ExportCsv extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();

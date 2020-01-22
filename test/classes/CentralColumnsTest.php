@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\CentralColumns
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -17,13 +15,11 @@ use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-
-$GLOBALS['server'] = 1;
+use function array_slice;
+use function ceil;
 
 /**
  * tests for PhpMyAdmin\CentralColumns
- *
- * @package PhpMyAdmin-test
  */
 class CentralColumnsTest extends TestCase
 {

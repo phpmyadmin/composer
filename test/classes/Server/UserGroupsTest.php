@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PhpMyAdmin\Server\UserGroups
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,11 +9,10 @@ namespace PhpMyAdmin\Tests\Server;
 use PhpMyAdmin\Server\UserGroups;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\TestCase;
+use function htmlspecialchars;
 
 /**
  * Tests for PhpMyAdmin\Server\UserGroups
- *
- * @package PhpMyAdmin-test
  */
 class UserGroupsTest extends TestCase
 {

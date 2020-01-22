@@ -1,32 +1,24 @@
 <?php
 /**
  * Test class for Theme.
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Config;
-use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Theme;
+use function filemtime;
 
 /**
  * Test class for Theme.
- *
- * @package PhpMyAdmin-test
  */
 class ThemeTest extends PmaTestCase
 {
-    /**
-     * @var Theme
-     */
+    /** @var Theme */
     protected $object;
 
-    /**
-     * @var Theme backup for session theme
-     */
+    /** @var Theme backup for session theme */
     protected $backup;
 
     /**

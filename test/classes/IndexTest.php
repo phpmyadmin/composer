@@ -1,20 +1,16 @@
 <?php
 /**
  * Test for Index class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Index;
-use PhpMyAdmin\Tests\PmaTestCase;
+use function implode;
 
 /**
  * Test for Index class
- *
- * @package PhpMyAdmin-test
  */
 class IndexTest extends PmaTestCase
 {

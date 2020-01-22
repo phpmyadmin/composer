@@ -1,19 +1,16 @@
 <?php
 /**
  * Abstract parent class for all Gis<Geom_type> test classes
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PHPUnit\Framework\TestCase;
+use function imagesx;
 
 /**
  * Abstract parent class for all Gis<Geom_type> test classes
- *
- * @package PhpMyAdmin-test
  */
 abstract class GisGeomTestCase extends TestCase
 {

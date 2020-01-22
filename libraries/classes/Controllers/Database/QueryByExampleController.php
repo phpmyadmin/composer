@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Database
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Database;
@@ -17,11 +14,12 @@ use PhpMyAdmin\Sql;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function sprintf;
+use function stripos;
 
 /**
  * Query by Example controller
- *
- * @package PhpMyAdmin\Controllers\Database
  */
 class QueryByExampleController extends AbstractController
 {
@@ -41,9 +39,6 @@ class QueryByExampleController extends AbstractController
         $this->relation = $relation;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $pmaThemeImage, $url_query, $savedSearchList, $savedSearch, $currentSearchId;
@@ -73,21 +68,21 @@ class QueryByExampleController extends AbstractController
             //Action field is sent.
             if (isset($_POST['action'])) {
                 $savedSearch->setSearchName($_POST['searchName']);
-                if ('create' === $_POST['action']) {
+                if ($_POST['action'] === 'create') {
                     $saveResult = $savedSearch->setId(null)
                         ->setCriterias($_POST)
                         ->save();
-                } elseif ('update' === $_POST['action']) {
+                } elseif ($_POST['action'] === 'update') {
                     $saveResult = $savedSearch->setCriterias($_POST)
                         ->save();
-                } elseif ('delete' === $_POST['action']) {
+                } elseif ($_POST['action'] === 'delete') {
                     $deleteResult = $savedSearch->delete();
                     //After deletion, reset search.
                     $savedSearch = new SavedSearches($GLOBALS, $this->relation);
                     $savedSearch->setUsername($GLOBALS['cfg']['Server']['user'])
                         ->setDbname($db);
                     $_POST = [];
-                } elseif ('load' === $_POST['action']) {
+                } elseif ($_POST['action'] === 'load') {
                     if (empty($_POST['searchId'])) {
                         //when not loading a search, reset the object.
                         $savedSearch = new SavedSearches($GLOBALS, $this->relation);
@@ -110,7 +105,7 @@ class QueryByExampleController extends AbstractController
          */
         $message_to_display = false;
         if (isset($_POST['submit_sql']) && ! empty($sql_query)) {
-            if (0 !== stripos($sql_query, 'SELECT')) {
+            if (stripos($sql_query, 'SELECT') !== 0) {
                 $message_to_display = true;
             } else {
                 $goto = Url::getFromRoute('/database/sql');

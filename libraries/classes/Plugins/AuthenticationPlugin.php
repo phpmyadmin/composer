@@ -1,8 +1,6 @@
 <?php
 /**
  * Abstract class for the authentication plugins
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -18,12 +16,19 @@ use PhpMyAdmin\Session;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\TwoFactor;
 use PhpMyAdmin\Url;
+use function defined;
+use function htmlspecialchars;
+use function intval;
+use function max;
+use function min;
+use function session_destroy;
+use function session_unset;
+use function sprintf;
+use function time;
 
 /**
  * Provides a common interface that will have to be implemented by all of the
  * authentication plugins.
- *
- * @package PhpMyAdmin
  */
 abstract class AuthenticationPlugin
 {
@@ -41,19 +46,12 @@ abstract class AuthenticationPlugin
      */
     public $password = '';
 
-    /**
-     * @var IpAllowDeny
-     */
+    /** @var IpAllowDeny */
     protected $ipAllowDeny;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     public $template;
 
-    /**
-     * AuthenticationPlugin constructor.
-     */
     public function __construct()
     {
         $this->ipAllowDeny = new IpAllowDeny();
@@ -119,7 +117,6 @@ abstract class AuthenticationPlugin
      */
     public function logOut()
     {
-        /** @var Config $PMA_Config */
         global $PMA_Config;
 
         /* Obtain redirect URL (before doing logout) */

@@ -1,20 +1,17 @@
 <?php
 /**
  * tests for File class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\File;
-use PhpMyAdmin\Tests\PmaTestCase;
+use function bin2hex;
+use function file_get_contents;
 
 /**
  * tests for PhpMyAdmin\File class
- *
- * @package PhpMyAdmin-test
  */
 class FileTest extends PmaTestCase
 {

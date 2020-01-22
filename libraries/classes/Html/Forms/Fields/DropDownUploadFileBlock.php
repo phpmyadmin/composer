@@ -1,8 +1,6 @@
 <?php
 /**
  * HTML Generator for drop down for file upload
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,15 +10,14 @@ use PhpMyAdmin\FileListing;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function sprintf;
 
 /**
  * * HTML Generator for drop down for file upload
- *
- * @package PhpMyAdmin
  */
 class DropDownUploadFileBlock implements FieldGenerator
 {
-
     /**
      * Prepare the form used to select a file to import from the server upload
      * directory

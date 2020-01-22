@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds the PhpMyAdmin\UserPreferencesHeader class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -14,11 +12,10 @@ use Throwable;
 use Twig_Error_Loader;
 use Twig_Error_Runtime;
 use Twig_Error_Syntax;
+use function sprintf;
 
 /**
  * Functions for displaying user preferences header
- *
- * @package PhpMyAdmin
  */
 class UserPreferencesHeader
 {
@@ -86,9 +83,6 @@ class UserPreferencesHeader
         ) . '<div class="clearfloat"></div></div>';
     }
 
-    /**
-     * @return string
-     */
     protected static function displayTabsWithIcon(): string
     {
         $form_param = $_GET['form'] ?? null;
@@ -115,9 +109,6 @@ class UserPreferencesHeader
         return $content;
     }
 
-    /**
-     * @return string|null
-     */
     protected static function displayConfigurationSavedMessage(): ?string
     {
         // show "configuration saved" message and reload navigation panel if needed

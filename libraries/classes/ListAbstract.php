@@ -1,28 +1,24 @@
 <?php
 /**
  * hold the ListAbstract base class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use ArrayObject;
+use function htmlspecialchars;
+use function in_array;
 
 /**
  * Generic list class
  *
  * @todo add caching
  * @abstract
- * @package PhpMyAdmin
- * @since   phpMyAdmin 2.9.10
  */
 abstract class ListAbstract extends ArrayObject
 {
-    /**
-     * @var mixed   empty item
-     */
+    /** @var mixed   empty item */
     protected $item_empty = '';
 
     /**
@@ -67,13 +63,13 @@ abstract class ListAbstract extends ArrayObject
         $selected = '',
         $include_information_schema = true
     ) {
-        if (true === $selected) {
+        if ($selected === true) {
             $selected = $this->getDefault();
         }
 
         $options = '';
         foreach ($this as $each_item) {
-            if (false === $include_information_schema
+            if ($include_information_schema === false
                 && $GLOBALS['dbi']->isSystemSchema($each_item)
             ) {
                 continue;

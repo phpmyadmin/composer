@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for PMA_StorageEngine_pbxt
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,17 +9,14 @@ namespace PhpMyAdmin\Tests\Engines;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Engines\Pbxt;
 use PhpMyAdmin\Tests\PmaTestCase;
+use function sprintf;
 
 /**
  * Tests for PhpMyAdmin\Engines\Pbxt;
- *
- * @package PhpMyAdmin-test
  */
 class PbxtTest extends PmaTestCase
 {
-    /**
-     * @access protected
-     */
+    /** @access protected */
     protected $object;
 
     /**

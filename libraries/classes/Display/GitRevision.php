@@ -1,8 +1,6 @@
 <?php
 /**
  * Displays git revision
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -13,27 +11,23 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
+use function sprintf;
+use function strtotime;
+use function substr;
 
 /**
  * PhpMyAdmin\Display\GitRevision class
- *
- * @package PhpMyAdmin
  */
 class GitRevision
 {
-    /**
-     * @var Response
-     */
+    /** @var Response */
     private $response;
 
-    /**
-     * @var Config
-     */
+    /** @var Config */
     private $config;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**

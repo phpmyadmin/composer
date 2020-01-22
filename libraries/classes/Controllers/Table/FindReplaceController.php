@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -12,29 +9,31 @@ use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function array_key_exists;
+use function count;
+use function is_array;
+use function mb_strtolower;
+use function preg_match;
+use function preg_replace;
+use function str_ireplace;
+use function str_replace;
+use function strncasecmp;
+use function strpos;
 
 /**
  * Handles find and replace tab.
  *
  * Displays find and replace form, allows previewing and do the replacing.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class FindReplaceController extends AbstractController
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $_columnNames;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $_columnTypes;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $_connectionCharSet;
 
     /**
@@ -55,9 +54,6 @@ class FindReplaceController extends AbstractController
         );
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         Common::table();
@@ -161,9 +157,6 @@ class FindReplaceController extends AbstractController
         );
     }
 
-    /**
-     * @return void
-     */
     public function findAction(): void
     {
         $useRegex = array_key_exists('useRegex', $_POST)
@@ -179,9 +172,6 @@ class FindReplaceController extends AbstractController
         $this->response->addJSON('preview', $preview);
     }
 
-    /**
-     * @return void
-     */
     public function replaceAction(): void
     {
         $this->replace(

@@ -1,36 +1,36 @@
 <?php
 /**
  * Holds the PhpMyAdmin\Database\Designer\Common class
- *
- * @package PhpMyAdmin-Designer
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Database\Designer;
 
-use PhpMyAdmin\Database\Designer\DesignerTable;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Util;
+use function count;
+use function explode;
+use function in_array;
+use function intval;
+use function is_array;
+use function is_string;
+use function json_decode;
+use function json_encode;
+use function mb_strtoupper;
 use function rawurlencode;
 
 /**
  * Common functions for Designer
- *
- * @package PhpMyAdmin-Designer
  */
 class Common
 {
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
@@ -54,7 +54,7 @@ class Common
     public function getTablesInfo(string $db = null, string $table = null): array
     {
         $designerTables = [];
-        $db = $db === null ? $GLOBALS['db'] : $db;
+        $db = $db ?? $GLOBALS['db'];
         // seems to be needed later
         $this->dbi->selectDb($db);
         if ($db === null && $table === null) {
@@ -417,10 +417,7 @@ class Common
             DatabaseInterface::CONNECT_CONTROL,
             DatabaseInterface::QUERY_STORE
         );
-        if (is_array($pageNos) && count($pageNos) > 0) {
-            return true;
-        }
-        return false;
+        return is_array($pageNos) && count($pageNos) > 0;
     }
 
     /**

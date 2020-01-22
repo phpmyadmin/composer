@@ -1,9 +1,6 @@
 <?php
 /**
  * Set of functions used to build OpenDocument Text dumps of tables
- *
- * @package    PhpMyAdmin-Export
- * @subpackage ODT
  */
 declare(strict_types=1);
 
@@ -19,18 +16,17 @@ use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+use function bin2hex;
+use function htmlspecialchars;
+use function str_replace;
+use function stripos;
+use function stripslashes;
 
 /**
  * Handles the export for the ODT class
- *
- * @package    PhpMyAdmin-Export
- * @subpackage ODT
  */
 class ExportOdt extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();
@@ -307,7 +303,7 @@ class ExportOdt extends ExportPlugin
                         . htmlspecialchars($GLOBALS[$what . '_null'])
                         . '</text:p>'
                         . '</table:table-cell>';
-                } elseif (false !== stripos($field_flags[$j], 'BINARY')
+                } elseif (stripos($field_flags[$j], 'BINARY') !== false
                     && $fields_meta[$j]->blob
                 ) {
                     // ignore BLOB

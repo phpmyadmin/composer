@@ -1,8 +1,6 @@
 <?php
 /**
  * Migration from home-made DI to Symfony DI
- *
- * @package PhpMyAdmin\Di
  */
 declare(strict_types=1);
 
@@ -13,8 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Migration from home-made DI to Symfony DI
- *
- * @package PhpMyAdmin\Di
  */
 class Migration
 {
@@ -33,11 +29,11 @@ class Migration
      */
     public static function getInstance(?ContainerBuilder $containerBuilder = null): self
     {
-        if (null !== self::$instance) {
+        if (self::$instance !== null) {
             return self::$instance;
         }
 
-        if (null === $containerBuilder) {
+        if ($containerBuilder === null) {
             throw new InvalidArgumentException('Container builder should be sent for ' . self::class . ' creation');
         }
 

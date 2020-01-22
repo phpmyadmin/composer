@@ -1,19 +1,25 @@
 <?php
 /**
  * Used to render the footer of PMA's pages
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
 use Traversable;
+use function basename;
+use function file_exists;
+use function htmlspecialchars;
+use function in_array;
+use function is_array;
+use function is_object;
+use function json_encode;
+use function json_last_error;
+use function sprintf;
+use function strlen;
 
 /**
  * Class used to output the footer
- *
- * @package PhpMyAdmin
  */
 class Footer
 {
@@ -47,14 +53,10 @@ class Footer
      */
     private $_isEnabled;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
-    /**
-     * @var Template
-     */
+    /** @var Template */
     private $template;
 
     /**

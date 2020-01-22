@@ -1,8 +1,6 @@
 <?php
 /**
  * Holds MonitorControllerTest
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -10,7 +8,6 @@ namespace PhpMyAdmin\Tests\Controllers\Server\Status;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Server\Status\MonitorController;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Server\Status\Monitor;
@@ -18,19 +15,11 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @package PhpMyAdmin\Tests\Controllers\Server\Status
- */
 class MonitorControllerTest extends TestCase
 {
-    /**
-     * @var Data
-     */
+    /** @var Data */
     private $data;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $GLOBALS['PMA_Config'] = new Config();
@@ -50,9 +39,6 @@ class MonitorControllerTest extends TestCase
         $this->data = new Data();
     }
 
-    /**
-     * @return void
-     */
     public function testIndex(): void
     {
         $controller = new MonitorController(
@@ -148,9 +134,6 @@ class MonitorControllerTest extends TestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function testLogDataTypeSlow(): void
     {
         $response = Response::getInstance();
@@ -198,9 +181,6 @@ class MonitorControllerTest extends TestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function testLogDataTypeGeneral(): void
     {
         $value = [
@@ -257,9 +237,6 @@ class MonitorControllerTest extends TestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function testLoggingVars(): void
     {
         $value = [
@@ -291,9 +268,6 @@ class MonitorControllerTest extends TestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function testQueryAnalyzer(): void
     {
         global $cached_affected_rows;

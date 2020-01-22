@@ -1,8 +1,6 @@
 <?php
 /**
  * Hold the PhpMyAdmin\Util class
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -15,11 +13,22 @@ use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Token;
 use phpseclib\Crypt\Random;
 use stdClass;
+use function array_merge;
+use function count;
+use function explode;
+use function in_array;
+use function is_array;
+use function mb_strstr;
+use function mb_strtolower;
+use function mb_substr;
+use function sprintf;
+use function str_replace;
+use function strtr;
+use function uksort;
+use function strlen;
 
 /**
  * Misc functions used all over the scripts.
- *
- * @package PhpMyAdmin
  */
 class Util
 {
@@ -479,7 +488,6 @@ class Util
             $unit,
         ];
     } // end of the 'formatByteDown' function
-
 
     /**
      * Formats $value to the given length and appends SI prefixes
@@ -954,7 +962,7 @@ class Util
                 ) {
                     $con_val = '= ' . $row[$i];
                 } elseif (($meta->type == 'blob') || ($meta->type == 'string')
-                    && false !== stripos($field_flags, 'BINARY')
+                    && stripos($field_flags, 'BINARY') !== false
                     && ! empty($row[$i])
                 ) {
                     // hexify only if this is a true not empty BLOB or a BINARY
@@ -1195,7 +1203,6 @@ class Util
         return $gotopage;
     } // end function
 
-
     /**
      * Calculate page number through position
      *
@@ -1405,7 +1412,7 @@ class Util
             $spec_in_brackets = '';
         }
 
-        if ('enum' == $type || 'set' == $type) {
+        if ($type == 'enum' || $type == 'set') {
             // Define our working vars
             $enum_set_values = self::parseEnumSetValues($columnspec, false);
             $printtype = $type
@@ -1423,7 +1430,7 @@ class Util
             // this would be a BINARY or VARBINARY column type;
             // by the way, a BLOB should not show the BINARY attribute
             // because this is not accepted in MySQL syntax.
-            if (false !== strpos($printtype, 'binary')
+            if (strpos($printtype, 'binary') !== false
                 && ! preg_match('@binary[\(]@', $printtype)
             ) {
                 $printtype = str_replace('binary', '', $printtype);
@@ -1537,7 +1544,7 @@ class Util
         } elseif ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'disable') {
             return false;
         }
-        return ($GLOBALS['dbi']->getVariable('FOREIGN_KEY_CHECKS') == 'ON');
+        return $GLOBALS['dbi']->getVariable('FOREIGN_KEY_CHECKS') == 'ON';
     }
 
     /**
@@ -1777,7 +1784,7 @@ class Util
         /* Optional escaping */
         if ($escape !== null) {
             if (is_array($escape)) {
-                $escape_class = new $escape[1];
+                $escape_class = new $escape[1]();
                 $escape_method = $escape[0];
             }
             foreach ($replace as $key => $val) {
@@ -2610,7 +2617,7 @@ class Util
         $tooltip_aliasname = [];
 
         // Special speedup for newer MySQL Versions (in 4.0 format changed)
-        if (true === $cfg['SkipLockedTables']) {
+        if ($cfg['SkipLockedTables'] === true) {
             $db_info_result = $GLOBALS['dbi']->query(
                 'SHOW OPEN TABLES FROM ' . self::backquote($db) . ' WHERE In_use > 0;'
             );

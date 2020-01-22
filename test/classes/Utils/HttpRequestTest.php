@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Utils\HttpRequest class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -11,20 +9,18 @@ namespace PhpMyAdmin\Tests\Utils;
 use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Utils\HttpRequest;
 use ReflectionClass;
+use function curl_version;
+use function function_exists;
+use function ini_get;
+use function stripos;
+use const CURLOPT_CAINFO;
+use const CURLOPT_CAPATH;
 
-/**
- * @package PhpMyAdmin\Tests\Utils
- */
 class HttpRequestTest extends PmaTestCase
 {
-    /**
-     * @var HttpRequest
-     */
+    /** @var HttpRequest */
     private $httpRequest;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->httpRequest = new HttpRequest();
@@ -176,7 +172,6 @@ class HttpRequestTest extends PmaTestCase
         $result = $this->callProtectedMethod('fopen', [$url, $method, $return_only_status]);
         $this->validateHttp($result, $expected);
     }
-
 
     /**
      * Test for http request using generic interface

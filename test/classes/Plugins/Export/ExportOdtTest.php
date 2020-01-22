@@ -1,8 +1,6 @@
 <?php
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportOdt class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -15,11 +13,11 @@ use PhpMyAdmin\Tests\PmaTestCase;
 use ReflectionMethod;
 use ReflectionProperty;
 use stdClass;
+use function array_shift;
 
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportOdt class
  *
- * @package PhpMyAdmin-test
  * @group medium
  */
 class ExportOdtTest extends PmaTestCase
@@ -952,7 +950,6 @@ class ExportOdtTest extends PmaTestCase
      */
     public function testExportStructure()
     {
-
         $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
             ->disableOriginalConstructor()
             ->getMock();

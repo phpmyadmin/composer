@@ -1,21 +1,26 @@
 <?php
 /**
  * This class includes various sanitization methods that can be called statically
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Core;
 use PhpMyAdmin\Html\MySQLDocumentation;
-use PhpMyAdmin\Util;
+use function count;
+use function htmlspecialchars;
+use function preg_match;
+use function preg_replace;
+use function preg_replace_callback;
+use function strlen;
+use function strncmp;
+use function strtolower;
+use function strtr;
+use function substr;
+use function str_replace;
 
 /**
  * This class includes various sanitization methods that can be called statically
- *
- * @package PhpMyAdmin
  */
 class Sanitize
 {
@@ -200,7 +205,6 @@ class Sanitize
 
         return $message;
     }
-
 
     /**
      * Sanitize a filename by removing anything besides legit characters

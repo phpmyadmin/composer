@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -14,13 +11,22 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Table\Search;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+use function array_search;
+use function htmlspecialchars;
+use function in_array;
+use function intval;
+use function is_numeric;
+use function mb_strtolower;
+use function preg_match;
+use function str_ireplace;
+use function str_replace;
+use function strncasecmp;
+use function count;
 
 /**
  * Handles table zoom search tab.
  *
  * Display table zoom search form, create SQL queries from form data.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class ZoomSearchController extends AbstractController
 {
@@ -71,9 +77,6 @@ class ZoomSearchController extends AbstractController
         $this->_loadTableInfo();
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $goto;

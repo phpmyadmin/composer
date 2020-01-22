@@ -1,21 +1,17 @@
 <?php
 /**
  * Selenium TestCase for 'query by example' tests
- *
- * @package    PhpMyAdmin-test
- * @subpackage Selenium
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Selenium\Database;
 
 use PhpMyAdmin\Tests\Selenium\TestBase;
+use function trim;
 
 /**
  * QueryByExampleTest class
  *
- * @package    PhpMyAdmin-test
- * @subpackage Selenium
  * @group      selenium
  */
 class QueryByExampleTest extends TestBase

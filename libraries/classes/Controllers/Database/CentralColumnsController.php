@@ -1,8 +1,6 @@
 <?php
 /**
  * Central Columns view/edit
- *
- * @package PhpMyAdmin\Controllers\Database
  */
 declare(strict_types=1);
 
@@ -14,15 +12,13 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
+use function is_bool;
+use function parse_str;
+use function sprintf;
 
-/**
- * @package PhpMyAdmin\Controllers\Database
- */
 class CentralColumnsController extends AbstractController
 {
-    /**
-     * @var CentralColumns
-     */
+    /** @var CentralColumns */
     private $centralColumns;
 
     /**
@@ -38,9 +34,6 @@ class CentralColumnsController extends AbstractController
         $this->centralColumns = $centralColumns;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $cfg, $db, $message, $pos, $num_cols;

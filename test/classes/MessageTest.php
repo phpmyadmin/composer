@@ -1,20 +1,16 @@
 <?php
 /**
  * Test for Message class
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Message;
-use PhpMyAdmin\Tests\PmaTestCase;
+use function md5;
 
 /**
  * Test for Message class
- *
- * @package PhpMyAdmin-test
  */
 class MessageTest extends PmaTestCase
 {

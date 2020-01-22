@@ -1,19 +1,16 @@
 <?php
 /**
  * Image link generator
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Html\ActionLinksModes;
 
 use PhpMyAdmin\Html\Generator;
+use function htmlspecialchars;
 
 /**
  * Image link generator
- *
- * @package PhpMyAdmin
  */
 class Image implements ActionLinksModesInterface
 {

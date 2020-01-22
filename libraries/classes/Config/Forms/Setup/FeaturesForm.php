@@ -1,16 +1,13 @@
 <?php
 /**
  * User preferences form
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config\Forms\Setup;
 
-/**
- * @package PhpMyAdmin\Config\Forms\Setup
- */
+use function array_diff;
+
 class FeaturesForm extends \PhpMyAdmin\Config\Forms\User\FeaturesForm
 {
     /**

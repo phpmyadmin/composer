@@ -1,9 +1,6 @@
 <?php
 /**
  * Set of functions used to build YAML dumps of tables
- *
- * @package    PhpMyAdmin-Export
- * @subpackage YAML
  */
 declare(strict_types=1);
 
@@ -15,18 +12,15 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+use function is_numeric;
+use function str_replace;
+use function stripslashes;
 
 /**
  * Handles the export for the YAML format
- *
- * @package    PhpMyAdmin-Export
- * @subpackage YAML
  */
 class ExportYaml extends ExportPlugin
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         parent::__construct();

@@ -1,31 +1,26 @@
 <?php
 /**
  * Get user's global privileges and some db-specific privileges
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Util;
+use function mb_strpos;
+use function mb_substr;
+use function preg_match;
+use function preg_replace;
+use function strpos;
 
 /**
  * PhpMyAdmin\CheckUserPrivileges class
- *
- * @package PhpMyAdmin
  */
 class CheckUserPrivileges
 {
-    /**
-     * @var DatabaseInterface
-     */
+    /** @var DatabaseInterface */
     private $dbi;
 
     /**
-     * Constructor
-     *
      * @param DatabaseInterface $dbi DatabaseInterface object
      */
     public function __construct(DatabaseInterface $dbi)

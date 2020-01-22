@@ -1,8 +1,6 @@
 <?php
 /**
  * PDF schema handling
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -12,7 +10,20 @@ use PhpMyAdmin\Pdf as PdfLib;
 use PhpMyAdmin\Plugins\Schema\ExportRelationSchema;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Util;
+use function ceil;
+use function class_exists;
+use function getcwd;
+use function in_array;
+use function intval;
+use function max;
+use function min;
+use function rsort;
+use function sort;
+use function sprintf;
+use function str_replace;
+use function strtotime;
 
+// phpcs:disable PSR1.Files.SideEffects
 /**
  * Skip the plugin if TCPDF is not available.
  */
@@ -27,6 +38,7 @@ if (! class_exists('TCPDF')) {
 if (getcwd() == __DIR__) {
     die('Attack stopped');
 }
+// phpcs:enable
 
 /**
  * Pdf Relation Schema Class
@@ -38,7 +50,6 @@ if (getcwd() == __DIR__) {
  * to this class
  *
  * @name Pdf_Relation_Schema
- * @package PhpMyAdmin
  */
 class PdfRelationSchema extends ExportRelationSchema
 {
@@ -49,9 +60,7 @@ class PdfRelationSchema extends ExportRelationSchema
     private $_withDoc;
     private $_tableOrder;
 
-    /**
-     * @var TableStatsPdf[]
-     */
+    /** @var TableStatsPdf[] */
     private $_tables = [];
     private $_ff = PdfLib::PMA_PDF_FONT;
     private $_xMax = 0;
@@ -65,19 +74,13 @@ class PdfRelationSchema extends ExportRelationSchema
     private $_rightMargin = 10;
     private $_tablewidth;
 
-    /**
-     * @var RelationStatsPdf[]
-     */
+    /** @var RelationStatsPdf[] */
     protected $relations = [];
 
-    /**
-     * @var Transformations
-     */
+    /** @var Transformations */
     private $transformations;
 
     /**
-     * The "PdfRelationSchema" constructor
-     *
      * @see PMA_Schema_PDF
      *
      * @param string $db database name

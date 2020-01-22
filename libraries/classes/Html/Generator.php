@@ -1,8 +1,6 @@
 <?php
 /**
  * HTML Generator
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -25,11 +23,23 @@ use Twig_Error_Runtime;
 use Twig_Error_Syntax;
 use Williamdes\MariaDBMySQLKBS\KBException;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
+use function array_merge;
+use function basename;
+use function ceil;
+use function count;
+use function htmlentities;
+use function htmlspecialchars;
+use function implode;
+use function is_array;
+use function mb_strlen;
+use function sprintf;
+use function strpos;
+use function trigger_error;
+use function urlencode;
+use const E_USER_NOTICE;
 
 /**
  * HTML Generator
- *
- * @package PhpMyAdmin
  */
 class Generator
 {
@@ -246,8 +256,8 @@ class Generator
      */
     public static function getDbLink($database = ''): string
     {
-        if ('' === (string) $database) {
-            if ('' === (string) $GLOBALS['db']) {
+        if ((string) $database === '') {
+            if ((string) $GLOBALS['db'] === '') {
                 return '';
             }
             $database = $GLOBALS['db'];
@@ -741,7 +751,7 @@ class Generator
         $template = new Template();
         $retval = '';
 
-        if (null === $sql_query) {
+        if ($sql_query === null) {
             if (! empty($GLOBALS['display_query'])) {
                 $sql_query = $GLOBALS['display_query'];
             } elseif (! empty($GLOBALS['unparsed_sql'])) {
@@ -1411,7 +1421,6 @@ class Generator
         $name = 'pos',
         $classes = []
     ): string {
-
         // This is often coming from $cfg['MaxTableList'] and
         // people sometimes set it to empty string
         $max_count = intval($max_count);

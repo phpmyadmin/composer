@@ -1,18 +1,17 @@
 <?php
 /**
  * Displays query statistics for the server
- *
- * @package PhpMyAdmin\Controllers
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Server\Status;
 
 use PhpMyAdmin\Common;
+use function array_sum;
+use function arsort;
+use function count;
+use function str_replace;
 
-/**
- * @package PhpMyAdmin\Controllers\Server\Status
- */
 class QueriesController extends AbstractController
 {
     /**

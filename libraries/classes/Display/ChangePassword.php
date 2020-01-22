@@ -1,15 +1,11 @@
 <?php
 /**
  * Displays form for password change
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Display;
 
-use PhpMyAdmin\Html\MySQLDocumentation;
-use PhpMyAdmin\Message;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Server\Privileges;
@@ -19,8 +15,6 @@ use PhpMyAdmin\Util;
 
 /**
  * Displays form for password change
- *
- * @package PhpMyAdmin
  */
 class ChangePassword
 {

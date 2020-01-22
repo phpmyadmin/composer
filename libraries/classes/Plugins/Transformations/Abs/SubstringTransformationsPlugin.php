@@ -1,9 +1,6 @@
 <?php
 /**
  * Abstract class for the substring transformations plugins
- *
- * @package    PhpMyAdmin-Transformations
- * @subpackage Substring
  */
 declare(strict_types=1);
 
@@ -11,11 +8,12 @@ namespace PhpMyAdmin\Plugins\Transformations\Abs;
 
 use PhpMyAdmin\Plugins\TransformationsPlugin;
 use stdClass;
+use function htmlspecialchars;
+use function mb_strlen;
+use function mb_substr;
 
 /**
  * Provides common methods for all of the substring transformations plugins.
- *
- * @package PhpMyAdmin
  */
 abstract class SubstringTransformationsPlugin extends TransformationsPlugin
 {
@@ -76,7 +74,6 @@ abstract class SubstringTransformationsPlugin extends TransformationsPlugin
 
         return htmlspecialchars($newtext);
     }
-
 
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
 

@@ -1,8 +1,6 @@
 <?php
 /**
  * Generate HTML for MySQL Documentation
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
@@ -10,11 +8,12 @@ namespace PhpMyAdmin\Html;
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Util;
+use function defined;
+use function file_exists;
+use function htmlspecialchars;
 
 /**
  * Generate HTML for MySQL Documentation
- *
- * @package PhpMyAdmin
  */
 class MySQLDocumentation
 {

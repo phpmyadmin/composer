@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
@@ -16,11 +13,11 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_merge;
+use function sprintf;
 
 /**
  * View manipulations
- *
- * @package PhpMyAdmin\Controllers
  */
 class ViewOperationsController extends AbstractController
 {
@@ -39,9 +36,6 @@ class ViewOperationsController extends AbstractController
         $this->operations = $operations;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $sql_query, $url_query, $url_params, $reload, $result, $warning_messages;

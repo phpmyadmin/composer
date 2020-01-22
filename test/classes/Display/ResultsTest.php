@@ -1,8 +1,6 @@
 <?php
 /**
  * Tests for displaying results
- *
- * @package PhpMyAdmin-test
  */
 declare(strict_types=1);
 
@@ -18,17 +16,15 @@ use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Transformations;
 use ReflectionClass;
 use stdClass;
+use function count;
+use function hex2bin;
 
 /**
  * Test cases for displaying results.
- *
- * @package PhpMyAdmin-test
  */
 class ResultsTest extends PmaTestCase
 {
-    /**
-     * @access protected
-     */
+    /** @access protected */
     protected $object;
 
     /**
@@ -1017,7 +1013,6 @@ class ResultsTest extends PmaTestCase
         );
     }
 
-
     /**
      * Data provider for testGetSpecialLinkUrl
      *
@@ -1067,7 +1062,6 @@ class ResultsTest extends PmaTestCase
             ],
         ];
     }
-
 
     /**
      * Test _getSpecialLinkUrl
@@ -1151,7 +1145,6 @@ class ResultsTest extends PmaTestCase
         );
     }
 
-
     /**
      * Data provider for testGetRowInfoForSpecialLinks
      *
@@ -1198,7 +1191,6 @@ class ResultsTest extends PmaTestCase
             ],
         ];
     }
-
 
     /**
      * Test _getRowInfoForSpecialLinks
@@ -1257,7 +1249,6 @@ class ResultsTest extends PmaTestCase
         ];
     }
 
-
     /**
      * Test _setHighlightedColumnGlobalField
      *
@@ -1280,7 +1271,6 @@ class ResultsTest extends PmaTestCase
             $this->object->__get('highlight_columns')
         );
     }
-
 
     /**
      * Data provider for testGetPartialText
@@ -1333,7 +1323,6 @@ class ResultsTest extends PmaTestCase
         ];
     }
 
-
     /**
      * Test _getPartialText
      *
@@ -1358,7 +1347,6 @@ class ResultsTest extends PmaTestCase
             )
         );
     }
-
 
     /**
      * Data provider for testHandleNonPrintableContents
@@ -1475,7 +1463,6 @@ class ResultsTest extends PmaTestCase
         ];
     }
 
-
     /**
      * Test _handleNonPrintableContents
      *
@@ -1531,7 +1518,6 @@ class ResultsTest extends PmaTestCase
             )
         );
     }
-
 
     /**
      * Data provider for testGetDataCellForNonNumericColumns
@@ -1667,7 +1653,6 @@ class ResultsTest extends PmaTestCase
             ],
         ];
     }
-
 
     /**
      * Test _getDataCellForNonNumericColumns

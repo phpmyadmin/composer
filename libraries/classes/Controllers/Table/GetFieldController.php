@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers\Table
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -10,18 +7,16 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Mime;
 use PhpMyAdmin\Util;
+use function htmlspecialchars;
 use function ini_set;
+use function sprintf;
+use function strlen;
 
 /**
  * Provides download to a given field defined in parameters.
- *
- * @package PhpMyAdmin\Controllers\Table
  */
 class GetFieldController extends AbstractController
 {
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $db, $table;

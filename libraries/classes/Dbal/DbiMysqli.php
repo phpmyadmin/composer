@@ -1,8 +1,6 @@
 <?php
 /**
  * Interface to the MySQL Improved extension (MySQLi)
- *
- * @package PhpMyAdmin-DBI
  */
 declare(strict_types=1);
 
@@ -14,17 +12,27 @@ use mysqli_stmt;
 use PhpMyAdmin\DatabaseInterface;
 use stdClass;
 use function mysqli_init;
+use const MYSQLI_AUTO_INCREMENT_FLAG;
+use const MYSQLI_BLOB_FLAG;
+use const MYSQLI_ENUM_FLAG;
+use const MYSQLI_MULTIPLE_KEY_FLAG;
+use const MYSQLI_NOT_NULL_FLAG;
+use const MYSQLI_NUM_FLAG;
+use const MYSQLI_PART_KEY_FLAG;
+use const MYSQLI_PRI_KEY_FLAG;
+use const MYSQLI_SET_FLAG;
+use const MYSQLI_TIMESTAMP_FLAG;
+use const MYSQLI_UNIQUE_KEY_FLAG;
+use const MYSQLI_UNSIGNED_FLAG;
+use const MYSQLI_ZEROFILL_FLAG;
+use function defined;
 
 /**
  * Interface to the MySQL Improved extension (MySQLi)
- *
- * @package PhpMyAdmin-DBI
  */
 class DbiMysqli implements DbiExtension
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $pma_mysqli_flag_names = [
         MYSQLI_NUM_FLAG => 'num',
         MYSQLI_PART_KEY_FLAG => 'part_key',
@@ -76,27 +84,12 @@ class DbiMysqli implements DbiExtension
                 ! empty($server['ssl_ca_path']) ||
                 ! empty($server['ssl_ciphers'])
             ) {
-                if (! isset($server['ssl_key']) || is_null($server['ssl_key'])) {
-                    $server['ssl_key'] = '';
-                }
-                if (! isset($server['ssl_cert']) || is_null($server['ssl_cert'])) {
-                    $server['ssl_cert'] = '';
-                }
-                if (! isset($server['ssl_ca']) || is_null($server['ssl_ca'])) {
-                    $server['ssl_ca'] = '';
-                }
-                if (! isset($server['ssl_ca_path']) || is_null($server['ssl_ca_path'])) {
-                    $server['ssl_ca_path'] = '';
-                }
-                if (! isset($server['ssl_ciphers']) || is_null($server['ssl_ciphers'])) {
-                    $server['ssl_ciphers'] = '';
-                }
                 $mysqli->ssl_set(
-                    $server['ssl_key'],
-                    $server['ssl_cert'],
-                    $server['ssl_ca'],
-                    $server['ssl_ca_path'],
-                    $server['ssl_ciphers']
+                    $server['ssl_key'] ?? '',
+                    $server['ssl_cert'] ?? '',
+                    $server['ssl_ca'] ?? '',
+                    $server['ssl_ca_path'] ?? '',
+                    $server['ssl_ciphers'] ?? ''
                 );
             }
             /*
@@ -365,14 +358,14 @@ class DbiMysqli implements DbiExtension
     {
         $GLOBALS['errno'] = 0;
 
-        if (null !== $mysqli && false !== $mysqli) {
+        if ($mysqli !== null && $mysqli !== false) {
             $error_number = $mysqli->errno;
             $error_message = $mysqli->error;
         } else {
             $error_number = $mysqli->connect_errno;
             $error_message = $mysqli->connect_error;
         }
-        if (0 == $error_number) {
+        if ($error_number == 0) {
             return false;
         }
 
@@ -583,7 +576,7 @@ class DbiMysqli implements DbiExtension
             if (($type == MYSQLI_TYPE_TINY_BLOB || $type == MYSQLI_TYPE_BLOB
                 || $type == MYSQLI_TYPE_MEDIUM_BLOB || $type == MYSQLI_TYPE_LONG_BLOB
                 || $type == MYSQLI_TYPE_VAR_STRING || $type == MYSQLI_TYPE_STRING)
-                && 63 == $charsetNumber
+                && $charsetNumber == 63
             ) {
                 $flags[] = 'binary';
             }

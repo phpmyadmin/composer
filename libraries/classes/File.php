@@ -1,24 +1,44 @@
 <?php
 /**
  * file upload functions
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Core;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\Util;
-use PhpMyAdmin\ZipExtension;
+use function basename;
+use function bin2hex;
+use function bzopen;
+use function bzread;
+use function extension_loaded;
+use function fclose;
+use function feof;
+use function file_get_contents;
+use function filesize;
+use function fopen;
+use function fread;
+use function function_exists;
+use function gzopen;
+use function gzread;
+use function is_link;
+use function is_readable;
+use function is_string;
+use function is_uploaded_file;
+use function mb_strcut;
+use function move_uploaded_file;
+use function ob_end_clean;
+use function ob_start;
+use function sprintf;
+use function strlen;
+use function tempnam;
+use function trim;
+use function unlink;
 
 /**
  * File wrapper class
  *
  * @todo when uploading a file into a blob field, should we also consider using
  *       chunks like in import? UPDATE `table` SET `field` = `field` + [chunk]
- * @package PhpMyAdmin
  */
 class File
 {
@@ -52,39 +72,25 @@ class File
      */
     protected $_compression = null;
 
-    /**
-     * @var integer
-     */
+    /** @var integer */
     protected $_offset = 0;
 
-    /**
-     * @var integer size of chunk to read with every step
-     */
+    /** @var integer size of chunk to read with every step */
     protected $_chunk_size = 32768;
 
-    /**
-     * @var resource|null file handle
-     */
+    /** @var resource|null file handle */
     protected $_handle = null;
 
-    /**
-     * @var boolean whether to decompress content before returning
-     */
+    /** @var boolean whether to decompress content before returning */
     protected $_decompress = false;
 
-    /**
-     * @var string charset of file
-     */
+    /** @var string charset of file */
     protected $_charset = null;
 
-    /**
-     * @var ZipExtension
-     */
+    /** @var ZipExtension */
     private $zipExtension;
 
     /**
-     * constructor
-     *
      * @param boolean|string $name file name or false
      *
      * @access public
@@ -152,7 +158,7 @@ class File
      */
     public function isTemp(?bool $is_temp = null): bool
     {
-        if (null !== $is_temp) {
+        if ($is_temp !== null) {
             $this->_is_temp = $is_temp;
         }
 
@@ -183,7 +189,7 @@ class File
      */
     public function getRawContent()
     {
-        if (null === $this->_content) {
+        if ($this->_content === null) {
             if ($this->isUploaded() && ! $this->checkUploadedFile()) {
                 return false;
             }
@@ -605,7 +611,7 @@ class File
      */
     public function getHandle()
     {
-        if (null === $this->_handle) {
+        if ($this->_handle === null) {
             $this->open();
         }
         return $this->_handle;
@@ -622,7 +628,6 @@ class File
     {
         $this->_handle = $handle;
     }
-
 
     /**
      * Sets error message for unsupported compression.
@@ -686,7 +691,7 @@ class File
                 return false;
         }
 
-        return ($this->_handle !== false);
+        return $this->_handle !== false;
     }
 
     /**
@@ -793,7 +798,7 @@ class File
      */
     public function getCompression(): string
     {
-        if (null === $this->_compression) {
+        if ($this->_compression === null) {
             return $this->detectCompression();
         }
 

@@ -1,7 +1,4 @@
 <?php
-/**
- * @package PhpMyAdmin\Controllers
- */
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
@@ -10,11 +7,15 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Display\ImportAjax;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Template;
+use function header;
+use function ini_get;
+use function session_start;
+use function session_write_close;
+use function time;
+use function usleep;
 
 /**
  * Import progress bar backend
- *
- * @package PhpMyAdmin\Controllers
  */
 class ImportStatusController
 {
@@ -29,9 +30,6 @@ class ImportStatusController
         $this->template = $template;
     }
 
-    /**
-     * @return void
-     */
     public function index(): void
     {
         global $SESSION_KEY, $upload_id, $plugins, $timestamp;

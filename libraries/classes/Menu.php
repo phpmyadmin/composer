@@ -1,17 +1,24 @@
 <?php
 /**
  * Generates and renders the top menu
- *
- * @package PhpMyAdmin
  */
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function array_key_exists;
+use function in_array;
+use function mb_strpos;
+use function mb_strstr;
+use function mb_substr;
+use function md5;
+use function preg_replace;
+use function strlen;
+use function substr;
+use function count;
+
 /**
  * Class for generating the top menu
- *
- * @package PhpMyAdmin
  */
 class Menu
 {
@@ -30,9 +37,7 @@ class Menu
      */
     private $_table;
 
-    /**
-     * @var Relation
-     */
+    /** @var Relation */
     private $relation;
 
     /** @var Template */
