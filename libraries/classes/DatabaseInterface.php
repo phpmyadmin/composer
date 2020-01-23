@@ -118,11 +118,11 @@ class DatabaseInterface implements DbalInterface
     /** @var null|string lower_case_table_names value cache */
     private $_lower_case_table_names = null;
 
-    /** @var boolean Whether connection is MariaDB */
+    /** @var bool Whether connection is MariaDB */
     private $_is_mariadb = false;
-    /** @var boolean Whether connection is Percona */
+    /** @var bool Whether connection is Percona */
     private $_is_percona = false;
-    /** @var integer Server version as number */
+    /** @var int Server version as number */
     private $_version_int = 55000;
     /** @var string Server version */
     private $_version_str = '5.50.0';
@@ -156,8 +156,6 @@ class DatabaseInterface implements DbalInterface
      * Checks whether database extension is loaded
      *
      * @param string $extension mysql extension to check
-     *
-     * @return bool
      */
     public static function checkDbExtension(string $extension = 'mysqli'): bool
     {
@@ -204,8 +202,6 @@ class DatabaseInterface implements DbalInterface
      *
      * @param array|null $contentPath Array with the target path
      * @param mixed      $value       Target value
-     *
-     * @return void
      */
     public function cacheTableContent(?array $contentPath, $value): void
     {
@@ -234,8 +230,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Clear the table cache.
-     *
-     * @return void
      */
     public function clearTableCache(): void
     {
@@ -248,8 +242,6 @@ class DatabaseInterface implements DbalInterface
      *
      * @param array       $tables information for tables of some databases
      * @param string|bool $table  table name
-     *
-     * @return void
      */
     private function _cacheTableData(array $tables, $table): void
     {
@@ -280,12 +272,10 @@ class DatabaseInterface implements DbalInterface
     /**
      * Stores query data into session data for debugging purposes
      *
-     * @param string         $query  Query text
-     * @param mixed          $link   link type
-     * @param object|boolean $result Query result
-     * @param integer|float  $time   Time to execute query
-     *
-     * @return void
+     * @param string      $query  Query text
+     * @param mixed       $link   link type
+     * @param object|bool $result Query result
+     * @param int|float   $time   Time to execute query
      */
     private function _dbgQuery(string $query, $link, $result, $time): void
     {
@@ -312,10 +302,10 @@ class DatabaseInterface implements DbalInterface
     /**
      * runs a query and returns the result
      *
-     * @param string  $query               query to run
-     * @param mixed   $link                link type
-     * @param integer $options             query options
-     * @param bool    $cache_affected_rows whether to cache affected row
+     * @param string $query               query to run
+     * @param mixed  $link                link type
+     * @param int    $options             query options
+     * @param bool   $cache_affected_rows whether to cache affected row
      *
      * @return mixed
      */
@@ -376,7 +366,7 @@ class DatabaseInterface implements DbalInterface
      * @param string $multiQuery multi query statement to execute
      * @param int    $linkIndex  index of the opened database link
      *
-     * @return mysqli_result[]|boolean (false)
+     * @return mysqli_result[]|bool (false)
      */
     public function tryMultiQuery(
         string $multiQuery = '',
@@ -451,7 +441,7 @@ class DatabaseInterface implements DbalInterface
      * returns a segment of the SQL WHERE clause regarding table name and type
      *
      * @param array|string $table        table(s)
-     * @param boolean      $tbl_is_group $table is a table group
+     * @param bool         $tbl_is_group $table is a table group
      * @param string       $table_type   whether table or view
      *
      * @return string a segment of the WHERE clause
@@ -555,15 +545,15 @@ class DatabaseInterface implements DbalInterface
      * $dbi->getTablesFull('my_database', 'my_tables_', true));
      * </code>
      *
-     * @param string          $database     database
-     * @param string|array    $table        table name(s)
-     * @param boolean         $tbl_is_group $table is a table group
-     * @param integer         $limit_offset zero-based offset for the count
-     * @param boolean|integer $limit_count  number of tables to return
-     * @param string          $sort_by      table attribute to sort by
-     * @param string          $sort_order   direction to sort (ASC or DESC)
-     * @param string          $table_type   whether table or view
-     * @param mixed           $link         link type
+     * @param string       $database     database
+     * @param string|array $table        table name(s)
+     * @param bool         $tbl_is_group $table is a table group
+     * @param int          $limit_offset zero-based offset for the count
+     * @param bool|int     $limit_count  number of tables to return
+     * @param string       $sort_by      table attribute to sort by
+     * @param string       $sort_order   direction to sort (ASC or DESC)
+     * @param string       $table_type   whether table or view
+     * @param mixed        $link         link type
      *
      * @return array           list of tables in given db(s)
      *
@@ -876,11 +866,11 @@ class DatabaseInterface implements DbalInterface
      * returns array with databases containing extended infos about them
      *
      * @param string   $database     database
-     * @param boolean  $force_stats  retrieve stats also for MySQL < 5
-     * @param integer  $link         link type
+     * @param bool     $force_stats  retrieve stats also for MySQL < 5
+     * @param int      $link         link type
      * @param string   $sort_by      column to order by
      * @param string   $sort_order   ASC or DESC
-     * @param integer  $limit_offset starting offset for LIMIT
+     * @param int      $limit_offset starting offset for LIMIT
      * @param bool|int $limit_count  row count for LIMIT or true
      *                               for $GLOBALS['cfg']['MaxDbList']
      *
@@ -1307,12 +1297,10 @@ class DatabaseInterface implements DbalInterface
      *
      * @see getColumns()
      *
-     * @param string  $database name of database
-     * @param string  $table    name of table to retrieve columns from
-     * @param string  $column   name of column, null to show all columns
-     * @param boolean $full     whether to return full info or only column names
-     *
-     * @return string
+     * @param string $database name of database
+     * @param string $table    name of table to retrieve columns from
+     * @param string $column   name of column, null to show all columns
+     * @param bool   $full     whether to return full info or only column names
      */
     public function getColumnsSql(
         string $database,
@@ -1331,11 +1319,11 @@ class DatabaseInterface implements DbalInterface
     /**
      * Returns descriptions of columns in given table (all or given by $column)
      *
-     * @param string  $database name of database
-     * @param string  $table    name of table to retrieve columns from
-     * @param string  $column   name of column, null to show all columns
-     * @param boolean $full     whether to return full info or only column names
-     * @param integer $link     link type
+     * @param string $database name of database
+     * @param string $table    name of table to retrieve columns from
+     * @param string $column   name of column, null to show all columns
+     * @param bool   $full     whether to return full info or only column names
+     * @param int    $link     link type
      *
      * @return array array indexed by column names or,
      *               if $column is given, flat array description
@@ -1511,8 +1499,6 @@ class DatabaseInterface implements DbalInterface
      * Convert version string to integer.
      *
      * @param string $version MySQL server version
-     *
-     * @return int
      */
     public static function versionToInt(string $version): int
     {
@@ -1524,8 +1510,6 @@ class DatabaseInterface implements DbalInterface
      * Function called just after a connection to the MySQL database server has
      * been established. It sets the connection collation, and determines the
      * version of MySQL which is running.
-     *
-     * @return void
      */
     public function postConnect(): void
     {
@@ -1612,8 +1596,6 @@ class DatabaseInterface implements DbalInterface
      * Sets collation connection for user link
      *
      * @param string $collation collation to set
-     *
-     * @return void
      */
     public function setCollation(string $collation): void
     {
@@ -1665,8 +1647,6 @@ class DatabaseInterface implements DbalInterface
      * Function called just after a connection to the MySQL database server has
      * been established. It sets the connection collation, and determines the
      * version of MySQL which is running.
-     *
-     * @return void
      */
     public function postConnectControl(): void
     {
@@ -1693,12 +1673,12 @@ class DatabaseInterface implements DbalInterface
      * // $user_name = 'John Doe'
      * </code>
      *
-     * @param string         $query      The query to execute
-     * @param integer        $row_number row to fetch the value from,
-     *                                   starting at 0, with 0 being default
-     * @param integer|string $field      field to fetch the value from,
-     *                                   starting at 0, with 0 being default
-     * @param integer        $link       link type
+     * @param string     $query      The query to execute
+     * @param int        $row_number row to fetch the value from,
+     *                               starting at 0, with 0 being default
+     * @param int|string $field      field to fetch the value from,
+     *                               starting at 0, with 0 being default
+     * @param int        $link       link type
      *
      * @return mixed value of first field in first row from result
      *               or false if not found
@@ -1758,13 +1738,13 @@ class DatabaseInterface implements DbalInterface
      * // $user = array('id' => 123, 'name' => 'John Doe')
      * </code>
      *
-     * @param string  $query The query to execute
-     * @param string  $type  NUM|ASSOC|BOTH returned array should either numeric
-     *                       associative or both
-     * @param integer $link  link type
+     * @param string $query The query to execute
+     * @param string $type  NUM|ASSOC|BOTH returned array should either numeric
+     *                      associative or both
+     * @param int    $link  link type
      *
-     * @return array|boolean first row from result
-     *                       or false if result is empty
+     * @return array|bool first row from result
+     * or false if result is empty
      */
     public function fetchSingleRow(
         string $query,
@@ -1863,14 +1843,14 @@ class DatabaseInterface implements DbalInterface
      * // $users['admin']['John Doe'] = '123'
      * </code>
      *
-     * @param string               $query   query to execute
-     * @param string|integer|array $key     field-name or offset
-     *                                      used as key for array
-     *                                      or array of those
-     * @param string|integer       $value   value-name or offset
-     *                                      used as value for array
-     * @param integer              $link    link type
-     * @param integer              $options query options
+     * @param string           $query   query to execute
+     * @param string|int|array $key     field-name or offset
+     *                                  used as key for array
+     *                                  or array of those
+     * @param string|int       $value   value-name or offset
+     *                                  used as value for array
+     * @param int              $link    link type
+     * @param int              $options query options
      *
      * @return array resultrows or values indexed by $key
      */
@@ -1961,7 +1941,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns warnings for last query
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return array warnings
      */
@@ -1973,9 +1953,9 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns an array of PROCEDURE or FUNCTION names for a db
      *
-     * @param string  $db    db name
-     * @param string  $which PROCEDURE | FUNCTION
-     * @param integer $link  link type
+     * @param string $db    db name
+     * @param string $which PROCEDURE | FUNCTION
+     * @param int    $link  link type
      *
      * @return array the procedure names or function names
      */
@@ -2002,10 +1982,10 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns the definition of a specific PROCEDURE, FUNCTION, EVENT or VIEW
      *
-     * @param string  $db    db name
-     * @param string  $which PROCEDURE | FUNCTION | EVENT | VIEW
-     * @param string  $name  the procedure|function|event|view name
-     * @param integer $link  link type
+     * @param string $db    db name
+     * @param string $which PROCEDURE | FUNCTION | EVENT | VIEW
+     * @param string $name  the procedure|function|event|view name
+     * @param int    $link  link type
      *
      * @return string|null the definition
      */
@@ -2495,8 +2475,6 @@ class DatabaseInterface implements DbalInterface
      * @param string $schema_name        Name of schema (database) to test
      * @param bool   $testForMysqlSchema Whether 'mysql' schema should
      *                                   be treated the same as IS and DD
-     *
-     * @return bool
      */
     public function isSystemSchema(
         string $schema_name,
@@ -2512,7 +2490,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Return connection parameters for the database server
      *
-     * @param integer    $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
+     * @param int        $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
      *                           or CONNECT_AUXILIARY.
      * @param array|null $server Server information like host/port/socket/persistent
      *
@@ -2615,10 +2593,10 @@ class DatabaseInterface implements DbalInterface
     /**
      * connects to the database server
      *
-     * @param integer    $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
+     * @param int        $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
      *                           or CONNECT_AUXILIARY.
      * @param array|null $server Server information like host/port/socket/persistent
-     * @param integer    $target How to store connection link, defaults to $mode
+     * @param int        $target How to store connection link, defaults to $mode
      *
      * @return mixed false on error or a connection object on success
      */
@@ -2677,10 +2655,8 @@ class DatabaseInterface implements DbalInterface
     /**
      * selects given database
      *
-     * @param string  $dbname database name to select
-     * @param integer $link   link type
-     *
-     * @return boolean
+     * @param string $dbname database name to select
+     * @param int    $link   link type
      */
     public function selectDb(string $dbname, $link = self::CONNECT_USER): bool
     {
@@ -2729,8 +2705,8 @@ class DatabaseInterface implements DbalInterface
     /**
      * Adjusts the result pointer to an arbitrary row in the result
      *
-     * @param object  $result database result
-     * @param integer $offset offset to seek
+     * @param object $result database result
+     * @param int    $offset offset to seek
      *
      * @return bool true on success, false on failure
      */
@@ -2743,8 +2719,6 @@ class DatabaseInterface implements DbalInterface
      * Frees memory associated with the result
      *
      * @param object $result database result
-     *
-     * @return void
      */
     public function freeResult($result): void
     {
@@ -2754,7 +2728,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Check if there are any more query results from a multi query
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return bool true or false
      */
@@ -2769,7 +2743,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Prepare next result from multi_query
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return bool true or false
      */
@@ -2784,7 +2758,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Store the result returned from multi query
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return mixed false when empty results / result set when not empty
      */
@@ -2799,7 +2773,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Returns a string representing the type of connection used
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return string|bool type of connection used
      */
@@ -2814,7 +2788,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * Returns the version of the MySQL protocol used
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return int|bool version of the MySQL protocol used
      */
@@ -2829,7 +2803,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns a string that represents the client library version
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return string MySQL client library version
      */
@@ -2844,7 +2818,7 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns last error message or false if no errors occurred
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
      * @return string|bool error or false
      */
@@ -2872,9 +2846,9 @@ class DatabaseInterface implements DbalInterface
      * returns last inserted auto_increment id for given $link
      * or $GLOBALS['userlink']
      *
-     * @param integer $link link type
+     * @param int $link link type
      *
-     * @return int|boolean
+     * @return int|bool
      */
     public function insertId($link = self::CONNECT_USER)
     {
@@ -2892,10 +2866,10 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns the number of rows affected by last query
      *
-     * @param integer $link           link type
-     * @param bool    $get_from_cache whether to retrieve from cache
+     * @param int  $link           link type
+     * @param bool $get_from_cache whether to retrieve from cache
      *
-     * @return int|boolean
+     * @return int|bool
      */
     public function affectedRows(
         $link = self::CONNECT_USER,
@@ -3012,8 +2986,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Checks if this database server is running on Amazon RDS.
-     *
-     * @return boolean
      */
     public function isAmazonRds(): bool
     {
@@ -3032,8 +3004,6 @@ class DatabaseInterface implements DbalInterface
      * Gets SQL for killing a process.
      *
      * @param int $process Process ID
-     *
-     * @return string
      */
     public function getKillQuery(int $process): string
     {
@@ -3046,8 +3016,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Get the phpmyadmin database manager
-     *
-     * @return SystemDatabase
      */
     public function getSystemDatabase(): SystemDatabase
     {
@@ -3059,8 +3027,6 @@ class DatabaseInterface implements DbalInterface
      *
      * @param string $db_name    DB name
      * @param string $table_name Table name
-     *
-     * @return Table
      */
     public function getTable(string $db_name, string $table_name): Table
     {
@@ -3100,8 +3066,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * returns default server collation from show variables
-     *
-     * @return string
      */
     public function getServerCollation(): string
     {
@@ -3110,8 +3074,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Server version as number
-     *
-     * @return integer
      */
     public function getVersion(): int
     {
@@ -3120,8 +3082,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Server version
-     *
-     * @return string
      */
     public function getVersionString(): string
     {
@@ -3130,8 +3090,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Server version comment
-     *
-     * @return string
      */
     public function getVersionComment(): string
     {
@@ -3140,8 +3098,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Whether connection is MariaDB
-     *
-     * @return boolean
      */
     public function isMariaDB(): bool
     {
@@ -3150,8 +3106,6 @@ class DatabaseInterface implements DbalInterface
 
     /**
      * Whether connection is Percona
-     *
-     * @return boolean
      */
     public function isPercona(): bool
     {
@@ -3162,8 +3116,6 @@ class DatabaseInterface implements DbalInterface
      * Load correct database driver
      *
      * @param DbiExtension|null $extension Force the use of an alternative extension
-     *
-     * @return self
      */
     public static function load(?DbiExtension $extension = null): self
     {

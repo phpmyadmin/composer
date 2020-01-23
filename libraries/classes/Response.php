@@ -6,9 +6,12 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function chdir;
 use function defined;
 use function explode;
 use function getcwd;
+use function headers_sent;
+use function http_response_code;
 use function in_array;
 use function is_array;
 use function json_encode;
@@ -18,11 +21,14 @@ use function register_shutdown_function;
 use function strlen;
 use const JSON_ERROR_CTRL_CHAR;
 use const JSON_ERROR_DEPTH;
+use const JSON_ERROR_INF_OR_NAN;
 use const JSON_ERROR_NONE;
 use const JSON_ERROR_RECURSION;
 use const JSON_ERROR_STATE_MISMATCH;
 use const JSON_ERROR_SYNTAX;
+use const JSON_ERROR_UNSUPPORTED_TYPE;
 use const JSON_ERROR_UTF8;
+use const PHP_SAPI;
 
 /**
  * Singleton class used to manage the rendering of pages in PMA
@@ -199,8 +205,6 @@ class Response
      * we are servicing an ajax request
      *
      * @param bool $isAjax Whether we are servicing an ajax request
-     *
-     * @return void
      */
     public function setAjax(bool $isAjax): void
     {
@@ -227,8 +231,6 @@ class Response
      * whether it is a success or an error
      *
      * @param bool $state Whether the request was successfully processed
-     *
-     * @return void
      */
     public function setRequestStatus(bool $state): void
     {
@@ -238,8 +240,6 @@ class Response
     /**
      * Returns true or false depending on whether
      * we are servicing an ajax request
-     *
-     * @return bool
      */
     public function isAjax(): bool
     {
@@ -563,8 +563,6 @@ class Response
      * Sets http response code.
      *
      * @param int $responseCode will set the response code.
-     *
-     * @return void
      */
     public function setHttpResponseCode(int $responseCode): void
     {

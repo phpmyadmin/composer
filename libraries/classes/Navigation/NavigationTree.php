@@ -19,16 +19,36 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use function array_key_exists;
+use function array_keys;
 use function array_shift;
 use function base64_decode;
 use function count;
 use function explode;
 use function floor;
+use function get_class;
+use function htmlspecialchars;
+use function in_array;
+use function is_array;
+use function is_object;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
+use function method_exists;
 use function sort;
 use function sprintf;
 use function strcasecmp;
 use function strlen;
+use function strnatcasecmp;
+use function strpos;
+use function strrpos;
 use function strstr;
+use function substr;
+use function trigger_error;
+use function trim;
+use function urlencode;
+use function usort;
+use function vsprintf;
+use const E_USER_WARNING;
 
 /**
  * Displays a collapsible of database objects in the navigation frame
@@ -679,8 +699,6 @@ class NavigationTree
      *                   to group the whole tree. If
      *                   passed as an argument, $node
      *                   must be of type CONTAINER
-     *
-     * @return void
      */
     public function groupTree(?Node $node = null): void
     {
@@ -1020,7 +1038,7 @@ class NavigationTree
      * @param array $tree  Tree to check
      * @param array $paths Paths to check
      *
-     * @return boolean
+     * @return bool
      */
     private function findTreeMatch(array $tree, array $paths)
     {

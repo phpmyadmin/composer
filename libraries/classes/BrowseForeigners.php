@@ -52,13 +52,13 @@ class BrowseForeigners
     /**
      * Function to get html for one relational key
      *
-     * @param integer $horizontal_count   the current horizontal count
-     * @param string  $header             table header
-     * @param array   $keys               all the keys
-     * @param integer $indexByKeyname     index by keyname
-     * @param array   $descriptions       descriptions
-     * @param integer $indexByDescription index by description
-     * @param string  $current_value      current value on the edit form
+     * @param int    $horizontal_count   the current horizontal count
+     * @param string $header             table header
+     * @param array  $keys               all the keys
+     * @param int    $indexByKeyname     index by keyname
+     * @param array  $descriptions       descriptions
+     * @param int    $indexByDescription index by description
+     * @param string $current_value      current value on the edit form
      *
      * @return array the generated html
      */
@@ -160,8 +160,6 @@ class BrowseForeigners
      * @param array       $foreignData   foreign column data
      * @param string|null $fieldkey      field key
      * @param string      $current_value current columns's value
-     *
-     * @return string
      */
     public function getHtmlForRelationalFieldSelection(
         string $db,
@@ -307,8 +305,6 @@ class BrowseForeigners
      * Function to get html for the goto page option
      *
      * @param array|null $foreignData foreign data
-     *
-     * @return string
      */
     private function getHtmlForGotoPage(?array $foreignData): string
     {
@@ -343,8 +339,6 @@ class BrowseForeigners
      * Function to get foreign limit
      *
      * @param string|null $foreignShowAll foreign navigation
-     *
-     * @return string
      */
     public function getForeignLimit(?string $foreignShowAll): ?string
     {

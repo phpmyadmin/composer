@@ -24,21 +24,26 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_search;
 use function ceil;
 use function count;
 use function htmlspecialchars;
 use function implode;
 use function in_array;
+use function is_string;
 use function json_decode;
 use function json_encode;
 use function max;
+use function mb_substr;
 use function md5;
+use function preg_match;
+use function preg_quote;
 use function sha1;
 use function sprintf;
 use function str_replace;
+use function strlen;
 use function strtotime;
 use function urlencode;
-use function array_search;
 
 /**
  * Handles database structure logic
@@ -88,8 +93,6 @@ class StructureController extends AbstractController
      * Retrieves database information for further use
      *
      * @param string $subPart Page part name
-     *
-     * @return void
      */
     private function getDatabaseInfo(string $subPart): void
     {
@@ -321,8 +324,6 @@ class StructureController extends AbstractController
 
     /**
      * Handles actions related to multiple tables
-     *
-     * @return void
      */
     public function multiSubmitAction(): void
     {
@@ -703,8 +704,8 @@ class StructureController extends AbstractController
     /**
      * Returns whether the row count is approximated
      *
-     * @param array   $current_table array containing details about the table
-     * @param boolean $table_is_view whether the table is a view
+     * @param array $current_table array containing details about the table
+     * @param bool  $table_is_view whether the table is a view
      *
      * @return array
      */
@@ -849,8 +850,6 @@ class StructureController extends AbstractController
      * Function to check if a table is already in favorite list.
      *
      * @param string $currentTable current table
-     *
-     * @return bool
      */
     protected function checkFavoriteTable(string $currentTable): bool
     {
@@ -894,9 +893,9 @@ class StructureController extends AbstractController
      *
      * @internal param bool $table_is_view whether table is view or not
      *
-     * @param array   $current_table current table
-     * @param integer $sum_size      total table size
-     * @param integer $overhead_size overhead size
+     * @param array $current_table current table
+     * @param int   $sum_size      total table size
+     * @param int   $overhead_size overhead size
      *
      * @return array
      */
@@ -1003,13 +1002,13 @@ class StructureController extends AbstractController
     /**
      * Get values for ARIA/MARIA tables
      *
-     * @param array   $current_table      current table
-     * @param integer $sum_size           sum size
-     * @param integer $overhead_size      overhead size
-     * @param integer $formatted_size     formatted size
-     * @param string  $unit               unit
-     * @param integer $formatted_overhead overhead formatted
-     * @param string  $overhead_unit      overhead unit
+     * @param array  $current_table      current table
+     * @param int    $sum_size           sum size
+     * @param int    $overhead_size      overhead size
+     * @param int    $formatted_size     formatted size
+     * @param string $unit               unit
+     * @param int    $formatted_overhead overhead formatted
+     * @param string $overhead_unit      overhead unit
      *
      * @return array
      */
@@ -1064,8 +1063,8 @@ class StructureController extends AbstractController
     /**
      * Get values for InnoDB table
      *
-     * @param array   $current_table current table
-     * @param integer $sum_size      sum size
+     * @param array $current_table current table
+     * @param int   $sum_size      sum size
      *
      * @return array
      */

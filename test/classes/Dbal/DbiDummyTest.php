@@ -15,8 +15,6 @@ class DbiDummyTest extends TestCase
 {
     /**
      * Configures test parameters.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -56,8 +54,6 @@ class DbiDummyTest extends TestCase
      * @param string $schema   schema name
      * @param bool   $expected expected result
      *
-     * @return void
-     *
      * @dataProvider schemaData
      */
     public function testSystemSchema($schema, $expected): void
@@ -87,11 +83,9 @@ class DbiDummyTest extends TestCase
     /**
      * Test for error formatting
      *
-     * @param integer $number   error number
-     * @param string  $message  error message
-     * @param string  $expected expected result
-     *
-     * @return void
+     * @param int    $number   error number
+     * @param string $message  error message
+     * @param string $expected expected result
      *
      * @dataProvider errorData
      */

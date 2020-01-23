@@ -11,6 +11,8 @@ use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Util;
 use TCPDF;
 use function array_merge;
+use function base64_encode;
+use function count;
 use function imagecolorallocate;
 use function imagecreatetruecolor;
 use function imagedestroy;
@@ -19,12 +21,12 @@ use function imagepng;
 use function intval;
 use function is_numeric;
 use function mb_strlen;
+use function mb_strpos;
 use function mb_strtolower;
 use function mb_substr;
 use function ob_get_clean;
 use function ob_start;
 use const PNG_ALL_FILTERS;
-use function base64_encode;
 
 /**
  * Handles visualization of GIS data
@@ -79,10 +81,10 @@ class GisVisualization
     /**
      * Factory
      *
-     * @param string  $sql_query SQL to fetch raw data for visualization
-     * @param array   $options   Users specified options
-     * @param integer $row       number of rows
-     * @param integer $pos       start position
+     * @param string $sql_query SQL to fetch raw data for visualization
+     * @param array  $options   Users specified options
+     * @param int    $row       number of rows
+     * @param int    $pos       start position
      *
      * @return GisVisualization
      *
@@ -128,8 +130,8 @@ class GisVisualization
      *
      * @param string     $sql_query SQL to fetch raw data for visualization
      * @param array      $options   Users specified options
-     * @param integer    $row       number of rows
-     * @param integer    $pos       start position
+     * @param int        $row       number of rows
+     * @param int        $pos       start position
      * @param array|null $data      raw data. If set, parameters other than $options
      *                              will be ignored
      *
@@ -161,9 +163,9 @@ class GisVisualization
     /**
      * Returns sql for fetching raw data
      *
-     * @param string  $sql_query The SQL to modify.
-     * @param integer $rows      Number of rows.
-     * @param integer $pos       Start position.
+     * @param string $sql_query The SQL to modify.
+     * @param int    $rows      Number of rows.
+     * @param int    $pos       Start position.
      *
      * @return string the modified sql query.
      */

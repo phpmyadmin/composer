@@ -16,7 +16,10 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use function array_diff;
 use function array_fill;
+use function array_keys;
+use function array_map;
 use function array_multisort;
 use function count;
 use function explode;
@@ -28,8 +31,12 @@ use function max;
 use function mb_strlen;
 use function mb_strtoupper;
 use function mb_substr;
-use function str_replace;
+use function min;
 use function reset;
+use function sprintf;
+use function str_replace;
+use function stripos;
+use function strlen;
 
 /**
  * Class to handle database QBE search
@@ -61,14 +68,14 @@ class Qbe
      * Number of columns
      *
      * @access private
-     * @var integer
+     * @var int
      */
     private $_criteria_column_count;
     /**
      * Number of Rows
      *
      * @access private
-     * @var integer
+     * @var int
      */
     private $_criteria_row_count;
     /**
@@ -201,14 +208,14 @@ class Qbe
      * New column count in case of add/delete
      *
      * @access private
-     * @var integer
+     * @var int
      */
     private $_new_column_count;
     /**
      * New row count in case of add/delete
      *
      * @access private
-     * @var integer
+     * @var int
      */
     private $_new_row_count;
     /**
@@ -390,8 +397,8 @@ class Qbe
     /**
      * Provides select options list containing column names
      *
-     * @param integer $column_number Column Number (0,1,2) or more
-     * @param string  $selected      Selected criteria column name
+     * @param int    $column_number Column Number (0,1,2) or more
+     * @param string $selected      Selected criteria column name
      *
      * @return string HTML for select options
      */
@@ -407,8 +414,8 @@ class Qbe
     /**
      * Provides select options list containing sort options (ASC/DESC)
      *
-     * @param integer $columnNumber Column Number (0,1,2) or more
-     * @param string  $selected     Selected criteria 'ASC' or 'DESC'
+     * @param int    $columnNumber Column Number (0,1,2) or more
+     * @param string $selected     Selected criteria 'ASC' or 'DESC'
      *
      * @return string HTML for select options
      */
@@ -426,8 +433,8 @@ class Qbe
     /**
      * Provides select options list containing sort order
      *
-     * @param integer $columnNumber Column Number (0,1,2) or more
-     * @param integer $sortOrder    Sort order
+     * @param int $columnNumber Column Number (0,1,2) or more
+     * @param int $sortOrder    Sort order
      *
      * @return string HTML for select options
      */
@@ -828,7 +835,7 @@ class Qbe
      * Provides And/Or modification cell along with Insert/Delete options
      * (For modifying search form's table columns)
      *
-     * @param integer    $column_number Column Number (0,1,2) or more
+     * @param int        $column_number Column Number (0,1,2) or more
      * @param array|null $selected      Selected criteria column name
      * @param bool       $last_column   Whether this is the last column
      *
@@ -916,8 +923,8 @@ class Qbe
      * Provides Insert/Delete options for criteria inputbox
      * with AND/OR relationship modification options
      *
-     * @param integer $row_index       Number of criteria row
-     * @param array   $checked_options If checked
+     * @param int   $row_index       Number of criteria row
+     * @param array $checked_options If checked
      *
      * @return string HTML
      */
@@ -965,7 +972,7 @@ class Qbe
      * Provides rows for criteria inputbox Insert/Delete options
      * with AND/OR relationship modification options
      *
-     * @param integer $new_row_index New row index if rows are added/deleted
+     * @param int $new_row_index New row index if rows are added/deleted
      *
      * @return string HTML table rows
      */

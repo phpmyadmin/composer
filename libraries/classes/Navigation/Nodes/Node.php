@@ -17,6 +17,8 @@ use function base64_encode;
 use function count;
 use function implode;
 use function in_array;
+use function is_string;
+use function preg_match;
 use function sort;
 use function strlen;
 use function strpos;
@@ -132,8 +134,6 @@ class Node
      * Adds a child node to this node
      *
      * @param Node $child A child node
-     *
-     * @return void
      */
     public function addChild($child): void
     {
@@ -174,8 +174,6 @@ class Node
      * Removes a child node from this node
      *
      * @param string $name The name of child to be removed
-     *
-     * @return void
      */
     public function removeChild($name): void
     {
@@ -269,8 +267,6 @@ class Node
      * the third level of the tree (columns and indexes), for which the function
      * always returns true. This is because we want to render the containers
      * for these nodes
-     *
-     * @return bool
      */
     public function hasSiblings(): bool
     {
@@ -664,7 +660,7 @@ class Node
      *
      * @param string $db database name
      *
-     * @return boolean whether to hide
+     * @return bool whether to hide
      */
     private function isHideDb($db)
     {
@@ -757,7 +753,7 @@ class Node
     /**
      * Returns CSS classes for a node
      *
-     * @param boolean $match Whether the node matched loaded tree
+     * @param bool $match Whether the node matched loaded tree
      *
      * @return string with html classes.
      */
@@ -783,7 +779,7 @@ class Node
     /**
      * Returns icon for the node
      *
-     * @param boolean $match Whether the node matched loaded tree
+     * @param bool $match Whether the node matched loaded tree
      *
      * @return string with image name
      */

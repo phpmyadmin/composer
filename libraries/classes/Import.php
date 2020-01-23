@@ -12,17 +12,35 @@ use PhpMyAdmin\SqlParser\Statements\InsertStatement;
 use PhpMyAdmin\SqlParser\Statements\ReplaceStatement;
 use PhpMyAdmin\SqlParser\Statements\UpdateStatement;
 use PhpMyAdmin\SqlParser\Utils\Query;
+use function abs;
+use function count;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function is_array;
+use function is_numeric;
 use function max;
 use function mb_chr;
 use function mb_ord;
 use function mb_stripos;
 use function mb_strlen;
+use function mb_strpos;
 use function mb_strtoupper;
 use function mb_substr;
+use function mb_substr_count;
+use function pow;
 use function preg_match;
+use function preg_replace;
+use function sprintf;
+use function strcmp;
+use function strlen;
 use function strncmp;
+use function strpos;
+use function strtoupper;
+use function substr;
 use function time;
 use function trim;
+use function unlink;
 
 /**
  * Library that provides common import functions that are used by import plugins
@@ -60,7 +78,7 @@ class Import
     /**
      * Checks whether timeout is getting close
      *
-     * @return boolean true if timeout is close
+     * @return bool true if timeout is close
      *
      * @access public
      */
@@ -87,8 +105,6 @@ class Import
      * @param string $sql      query to run
      * @param string $full     query to display, this might be commented
      * @param array  $sql_data SQL parse data storage
-     *
-     * @return void
      *
      * @access public
      */
@@ -175,8 +191,6 @@ class Import
      * @param string $sql      query to run
      * @param string $full     query to display, this might be commented
      * @param array  $sql_data SQL parse data storage
-     *
-     * @return void
      *
      * @access public
      */
@@ -964,8 +978,6 @@ class Import
      * @param array|null $options        Associative array of options
      * @param array      $sql_data       2-element array with sql data
      *
-     * @return void
-     *
      * @access public
      */
     public function buildSql(
@@ -1348,8 +1360,6 @@ class Import
      *
      * @param Message $error_message The error message
      *
-     * @return void
-     *
      * @access public
      */
     public function stop(Message $error_message): void
@@ -1377,8 +1387,6 @@ class Import
 
     /**
      * Handles request for Simulation of UPDATE/DELETE queries.
-     *
-     * @return void
      */
     public function handleSimulateDmlRequest(): void
     {
@@ -1585,7 +1593,7 @@ class Import
      *
      * @param string $matched_row_query SQL query
      *
-     * @return integer Number of rows returned
+     * @return int Number of rows returned
      */
     public function executeMatchedRowQuery(string $matched_row_query): int
     {
@@ -1602,8 +1610,6 @@ class Import
      * Handles request for ROLLBACK.
      *
      * @param string $sql_query SQL query(s)
-     *
-     * @return void
      */
     public function handleRollbackRequest(string $sql_query): void
     {
@@ -1647,8 +1653,6 @@ class Import
      * Checks if ROLLBACK is possible for a SQL query or not.
      *
      * @param string $sql_query SQL query
-     *
-     * @return bool
      */
     public function checkIfRollbackPossible(string $sql_query): bool
     {
@@ -1686,8 +1690,6 @@ class Import
      * Checks if a table is 'InnoDB' or not.
      *
      * @param string $table Table details
-     *
-     * @return bool
      */
     public function isTableTransactional(string $table): bool
     {

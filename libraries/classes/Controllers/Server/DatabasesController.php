@@ -48,7 +48,7 @@ class DatabasesController extends AbstractController
     /** @var string sort order of databases */
     private $sortOrder;
 
-    /** @var boolean whether to show database statistics */
+    /** @var bool whether to show database statistics */
     private $hasStatistics;
 
     /** @var int position in list navigation */
@@ -296,8 +296,6 @@ class DatabasesController extends AbstractController
      *
      * @param string|null $sortBy    sort by
      * @param string|null $sortOrder sort order
-     *
-     * @return void
      */
     private function setSortDetails(?string $sortBy, ?string $sortOrder): void
     {

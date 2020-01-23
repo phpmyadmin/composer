@@ -12,16 +12,19 @@ use PhpMyAdmin\Table\Search;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
 use function array_search;
+use function count;
 use function htmlspecialchars;
 use function in_array;
 use function intval;
 use function is_numeric;
+use function json_encode;
 use function mb_strtolower;
+use function md5;
 use function preg_match;
+use function preg_replace;
 use function str_ireplace;
 use function str_replace;
 use function strncasecmp;
-use function count;
 
 /**
  * Handles table zoom search tab.
@@ -151,8 +154,6 @@ class ZoomSearchController extends AbstractController
     /**
      * Gets all the columns of a table along with their types, collations
      * and whether null or not.
-     *
-     * @return void
      */
     private function _loadTableInfo(): void
     {
@@ -406,8 +407,8 @@ class ZoomSearchController extends AbstractController
      * Provides a column's type, collation, operators list, and criteria value
      * to display in table search form
      *
-     * @param integer $search_index Row number in table search form
-     * @param integer $column_index Column index in ColumnNames array
+     * @param int $search_index Row number in table search form
+     * @param int $column_index Column index in ColumnNames array
      *
      * @return array Array containing column's properties
      */

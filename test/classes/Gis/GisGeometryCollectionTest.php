@@ -27,8 +27,6 @@ class GisGeometryCollectionTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @return void
-     *
      * @access protected
      */
     protected function setUp(): void
@@ -39,8 +37,6 @@ class GisGeometryCollectionTest extends TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      *
      * @access protected
      */
@@ -54,8 +50,6 @@ class GisGeometryCollectionTest extends TestCase
      *
      * @param string $spatial string to parse
      * @param array  $output  expected parsed output
-     *
-     * @return void
      *
      * @dataProvider providerForScaleRow
      */
@@ -88,12 +82,10 @@ class GisGeometryCollectionTest extends TestCase
     /**
      * Test for generateWkt
      *
-     * @param array   $gis_data array of GIS data
-     * @param integer $index    index in $gis_data
-     * @param string  $empty    empty parameter
-     * @param string  $output   expected output
-     *
-     * @return void
+     * @param array  $gis_data array of GIS data
+     * @param int    $index    index in $gis_data
+     * @param string $empty    empty parameter
+     * @param string $output   expected output
      *
      * @dataProvider providerForGenerateWkt
      */
@@ -144,8 +136,6 @@ class GisGeometryCollectionTest extends TestCase
      *
      * @param string $value  string to parse
      * @param array  $output expected parsed output
-     *
-     * @return void
      *
      * @dataProvider providerForGenerateParams
      */
@@ -366,12 +356,12 @@ class GisGeometryCollectionTest extends TestCase
     /**
      * Test for prepareRowAsOl
      *
-     * @param string  $spatial    string to parse
-     * @param integer $srid       SRID
-     * @param string  $label      field label
-     * @param string  $line_color line color
-     * @param array   $scale_data scaling parameters
-     * @param string  $output     expected output
+     * @param string $spatial    string to parse
+     * @param int    $srid       SRID
+     * @param string $label      field label
+     * @param string $line_color line color
+     * @param array  $scale_data scaling parameters
+     * @param string $output     expected output
      *
      * @return void
      *

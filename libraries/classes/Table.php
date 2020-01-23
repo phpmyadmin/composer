@@ -17,6 +17,35 @@ use PhpMyAdmin\SqlParser\Statements\AlterStatement;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\SqlParser\Statements\DropStatement;
 use PhpMyAdmin\SqlParser\Utils\Table as TableUtils;
+use function array_key_exists;
+use function array_map;
+use function count;
+use function end;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function is_array;
+use function json_decode;
+use function json_encode;
+use function mb_stripos;
+use function mb_strlen;
+use function mb_substr;
+use function preg_match;
+use function preg_replace;
+use function rtrim;
+use function sprintf;
+use function str_replace;
+use function stripos;
+use function strlen;
+use function strpos;
+use function strtolower;
+use function strtoupper;
+use function substr;
+use function substr_compare;
+use function trigger_error;
+use function trim;
+use const E_USER_WARNING;
 
 /**
  * Handles everything related to tables
@@ -124,7 +153,7 @@ class Table
     /**
      * returns table name
      *
-     * @param boolean $backquoted whether to quote name with backticks ``
+     * @param bool $backquoted whether to quote name with backticks ``
      *
      * @return string  table name
      */
@@ -139,7 +168,7 @@ class Table
     /**
      * returns database name for this table
      *
-     * @param boolean $backquoted whether to quote name with backticks ``
+     * @param bool $backquoted whether to quote name with backticks ``
      *
      * @return string  database name for this table
      */
@@ -154,7 +183,7 @@ class Table
     /**
      * returns full name for table, including database name
      *
-     * @param boolean $backquoted whether to quote name with backticks ``
+     * @param bool $backquoted whether to quote name with backticks ``
      *
      * @return string
      */
@@ -192,7 +221,7 @@ class Table
     /**
      * returns whether the table is actually a view
      *
-     * @return boolean whether the given is a view
+     * @return bool whether the given is a view
      */
     public function isView()
     {
@@ -228,7 +257,7 @@ class Table
     /**
      * Returns whether the table is actually an updatable view
      *
-     * @return boolean whether the given is an updatable view
+     * @return bool whether the given is an updatable view
      */
     public function isUpdatableView()
     {
@@ -252,7 +281,7 @@ class Table
      * If the ENGINE of the table is MERGE or MRG_MYISAM (alias),
      * this is a merge table.
      *
-     * @return boolean  true if it is a merge table
+     * @return bool true if it is a merge table
      */
     public function isMerge()
     {
@@ -263,9 +292,9 @@ class Table
      * Returns full table status info, or specific if $info provided
      * this info is collected from information_schema
      *
-     * @param string  $info          specific information to be fetched
-     * @param boolean $force_read    read new rather than serving from cache
-     * @param boolean $disable_error if true, disables error message
+     * @param string $info          specific information to be fetched
+     * @param bool   $force_read    read new rather than serving from cache
+     * @param bool   $disable_error if true, disables error message
      *
      * @return mixed
      *
@@ -368,7 +397,7 @@ class Table
     /**
      * Returns the info about no of rows for current table.
      *
-     * @return integer Return no of rows info if it is not null for the selected table or return 0.
+     * @return int Return no of rows info if it is not null for the selected table or return 0.
      */
     public function getNumRows()
     {
@@ -397,7 +426,7 @@ class Table
     /**
      * Returns the auto increment option for current table.
      *
-     * @return integer Return auto increment info if it is set for the selected table or return blank.
+     * @return int Return auto increment info if it is set for the selected table or return blank.
      */
     public function getAutoIncrement()
     {
@@ -845,7 +874,7 @@ class Table
      *                             from the old entry
      *                             (array('FIELDNAME' => 'NEW FIELDVALUE'))
      *
-     * @return int|boolean
+     * @return int|bool
      */
     public static function duplicateInfo(
         $work,
@@ -1480,10 +1509,10 @@ class Table
      *
      * @see  https://dev.mysql.com/doc/refman/5.0/en/legal-names.html
      *
-     * @param string  $table_name    name to check
-     * @param boolean $is_backquoted whether this name is used inside backquotes or not
+     * @param string $table_name    name to check
+     * @param bool   $is_backquoted whether this name is used inside backquotes or not
      *
-     * @return boolean whether the string is valid or not
+     * @return bool whether the string is valid or not
      *
      * @todo add check for valid chars in filename on current system/os
      */
@@ -2004,7 +2033,7 @@ class Table
      * @param string $table_create_time Needed for PROP_COLUMN_ORDER
      *                                  and PROP_COLUMN_VISIB
      *
-     * @return boolean|Message
+     * @return bool|Message
      */
     public function setUiProp($property, $value, $table_create_time = null)
     {
@@ -2249,7 +2278,7 @@ class Table
      * @param string $display_field display field
      * @param array  $cfgRelation   configuration relation
      *
-     * @return boolean True on update succeed or False on failure
+     * @return bool True on update succeed or False on failure
      */
     public function updateDisplayField($display_field, array $cfgRelation)
     {
@@ -2294,7 +2323,7 @@ class Table
      * @param array      $cfgRelation             configuration relation
      * @param array|null $existrel                db, table, column
      *
-     * @return boolean
+     * @return bool
      */
     public function updateInternalRelations(
         array $multi_edit_columns_name,
@@ -2638,8 +2667,8 @@ class Table
      *
      * @param string $column name of the column
      *
-     * @return array|boolean associative array of column name and their expressions
-     *                       or false on failure
+     * @return array|bool associative array of column name and their expressions
+     * or false on failure
      */
     public function getColumnGenerationExpression($column = null)
     {

@@ -175,8 +175,6 @@ class UserGroups
      * Deletes a user group
      *
      * @param string $userGroup user group name
-     *
-     * @return void
      */
     public static function delete(string $userGroup): void
     {
@@ -310,10 +308,8 @@ class UserGroups
     /**
      * Add/update a user group with allowed menu tabs.
      *
-     * @param string  $userGroup user group name
-     * @param boolean $new       whether this is a new user group
-     *
-     * @return void
+     * @param string $userGroup user group name
+     * @param bool   $new       whether this is a new user group
      */
     public static function edit(string $userGroup, bool $new = false): void
     {

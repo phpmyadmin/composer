@@ -23,10 +23,13 @@ use function is_array;
 use function mb_strpos;
 use function mb_strstr;
 use function mb_substr;
+use function preg_quote;
 use function preg_replace;
 use function rtrim;
 use function serialize;
 use function str_replace;
+use function strtotime;
+use function substr;
 use function trim;
 
 /**
@@ -62,7 +65,7 @@ class Tracker
     /**
      * Gets the on/off value of the Tracker module, starts initialization.
      *
-     * @return boolean (true=on|false=off)
+     * @return bool (true=on|false=off)
      *
      * @static
      */
@@ -121,7 +124,7 @@ class Tracker
      * @param string $dbname    name of database
      * @param string $tablename name of table
      *
-     * @return boolean true or false
+     * @return bool true or false
      *
      * @static
      */
@@ -392,10 +395,10 @@ class Tracker
     /**
      * Changes tracking of a table.
      *
-     * @param string  $dbname    name of database
-     * @param string  $tablename name of table
-     * @param string  $version   version
-     * @param integer $new_state the new state of tracking
+     * @param string $dbname    name of database
+     * @param string $tablename name of table
+     * @param string $version   version
+     * @param int    $new_state the new state of tracking
      *
      * @return int result of SQL query
      *

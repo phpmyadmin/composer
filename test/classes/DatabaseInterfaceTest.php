@@ -21,8 +21,6 @@ class DatabaseInterfaceTest extends PmaTestCase
 
     /**
      * Configures test parameters.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -37,8 +35,6 @@ class DatabaseInterfaceTest extends PmaTestCase
      * @param array  $value    value
      * @param string $string   string
      * @param array  $expected expected result
-     *
-     * @return void
      *
      * @test
      * @dataProvider currentUserData
@@ -236,11 +232,9 @@ class DatabaseInterfaceTest extends PmaTestCase
      * Test for getConnectionParams
      *
      * @param array      $server_cfg Server configuration
-     * @param integer    $mode       Mode to test
+     * @param int        $mode       Mode to test
      * @param array|null $server     Server array to test
      * @param array      $expected   Expected result
-     *
-     * @return void
      *
      * @dataProvider connectionParams
      */
@@ -401,8 +395,6 @@ class DatabaseInterfaceTest extends PmaTestCase
      * @param string $error_message Error message as returned by server
      * @param string $match         Expected text
      *
-     * @return void
-     *
      * @dataProvider errorData
      */
     public function testFormatError($error_number, $error_message, $match): void
@@ -512,8 +504,6 @@ class DatabaseInterfaceTest extends PmaTestCase
      * @param int    $expected expected numeric version
      * @param int    $major    expected major version
      * @param bool   $upgrade  whether upgrade should ne needed
-     *
-     * @return void
      *
      * @dataProvider versionData
      */

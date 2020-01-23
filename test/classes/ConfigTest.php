@@ -10,6 +10,35 @@ namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Config;
 use PHPUnit\Framework\Exception;
+use function array_merge;
+use function array_replace_recursive;
+use function chdir;
+use function constant;
+use function define;
+use function defined;
+use function file_put_contents;
+use function filemtime;
+use function fileperms;
+use function function_exists;
+use function gd_info;
+use function getcwd;
+use function mb_strstr;
+use function mkdir;
+use function ob_end_clean;
+use function ob_get_contents;
+use function ob_start;
+use function phpinfo;
+use function preg_match;
+use function realpath;
+use function rmdir;
+use function strip_tags;
+use function stristr;
+use function sys_get_temp_dir;
+use function unlink;
+use const DIRECTORY_SEPARATOR;
+use const INFO_MODULES;
+use const PHP_EOL;
+use const PHP_OS;
 
 /**
  * Tests behaviour of PhpMyAdmin\Config class
@@ -30,8 +59,6 @@ class ConfigTest extends PmaTestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -50,8 +77,6 @@ class ConfigTest extends PmaTestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     protected function tearDown(): void
     {
@@ -103,8 +128,6 @@ class ConfigTest extends PmaTestCase
      * @param string $os      Expected parsed OS (or null if none)
      * @param string $browser Expected parsed browser (or null if none)
      * @param string $version Expected browser version (or null if none)
-     *
-     * @return void
      *
      * @dataProvider userAgentProvider
      */
@@ -306,10 +329,8 @@ class ConfigTest extends PmaTestCase
     /**
      * Web server detection test
      *
-     * @param string  $server Server identification
-     * @param boolean $iis    Whether server should be detected as IIS
-     *
-     * @return void
+     * @param string $server Server identification
+     * @param bool   $iis    Whether server should be detected as IIS
      *
      * @dataProvider serverNames
      */
@@ -484,8 +505,6 @@ class ConfigTest extends PmaTestCase
      * @param string $pmaAbsoluteUri  phpMyAdmin absolute URI
      * @param int    $port            server port
      * @param bool   $expected        expected result
-     *
-     * @return void
      *
      * @dataProvider httpsParams
      */
@@ -734,8 +753,6 @@ class ConfigTest extends PmaTestCase
      * @param string $absolute The absolute URL used for phpMyAdmin
      * @param string $expected Expected root path
      *
-     * @return void
-     *
      * @dataProvider rootUris
      */
     public function testGetRootPath($request, $absolute, $expected): void
@@ -839,10 +856,8 @@ class ConfigTest extends PmaTestCase
     /**
      * Tests loading of config file
      *
-     * @param string  $source File name of config to load
-     * @param boolean $result Expected result of loading
-     *
-     * @return void
+     * @param string $source File name of config to load
+     * @param bool   $result Expected result of loading
      *
      * @dataProvider configPaths
      */
@@ -1000,8 +1015,6 @@ class ConfigTest extends PmaTestCase
     /**
      * Test for getTempDir
      *
-     * @return void
-     *
      * @group file-system
      */
     public function testGetTempDir(): void
@@ -1016,8 +1029,6 @@ class ConfigTest extends PmaTestCase
 
     /**
      * Test for getUploadTempDir
-     *
-     * @return void
      *
      * @group file-system
      */
@@ -1472,8 +1483,6 @@ class ConfigTest extends PmaTestCase
      * @param array $expected expected result
      * @param bool  $error    error
      *
-     * @return void
-     *
      * @dataProvider serverSettingsProvider
      */
     public function testCheckServers($settings, $expected, $error = false): void
@@ -1529,8 +1538,6 @@ class ConfigTest extends PmaTestCase
      * @param array  $settings settings array
      * @param string $request  request
      * @param int    $expected expected result
-     *
-     * @return void
      *
      * @dataProvider selectServerProvider
      * @depends testCheckServers

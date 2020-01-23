@@ -10,19 +10,61 @@ namespace PhpMyAdmin;
 
 use PhpMyAdmin\Di\Migration;
 use PhpMyAdmin\Display\Error as DisplayError;
+use function array_keys;
+use function array_pop;
+use function array_walk_recursive;
+use function chr;
+use function count;
+use function date_default_timezone_get;
+use function date_default_timezone_set;
+use function defined;
+use function explode;
+use function extension_loaded;
+use function filter_var;
+use function function_exists;
+use function getenv;
 use function gettype;
+use function gmdate;
+use function hash_equals;
+use function hash_hmac;
+use function header;
+use function htmlspecialchars;
+use function http_build_query;
+use function implode;
 use function in_array;
+use function ini_get;
+use function ini_set;
+use function intval;
 use function is_array;
 use function is_numeric;
 use function is_scalar;
 use function is_string;
 use function json_encode;
+use function mb_internal_encoding;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_strrpos;
+use function mb_substr;
+use function parse_str;
+use function parse_url;
+use function preg_match;
 use function preg_replace;
+use function session_write_close;
 use function sprintf;
+use function str_replace;
 use function strlen;
+use function strpos;
 use function strtolower;
-use function vsprintf;
 use function strtr;
+use function substr;
+use function trigger_error;
+use function unserialize;
+use function urldecode;
+use function vsprintf;
+use const DATE_RFC1123;
+use const E_USER_ERROR;
+use const E_USER_WARNING;
+use const FILTER_VALIDATE_IP;
 
 /**
  * Core class
@@ -106,7 +148,7 @@ class Core
      * @param mixed $type    var type or array of valid values to check against $var
      * @param mixed $compare var to compare with $var
      *
-     * @return boolean whether valid or not
+     * @return bool whether valid or not
      *
      * @todo add some more var types like hex, bin, ...?
      */
@@ -212,8 +254,6 @@ class Core
      *
      * @param string       $error_message the error message or named error message
      * @param string|array $message_args  arguments applied to $error_message
-     *
-     * @return void
      */
     public static function fatalError(
         string $error_message,
@@ -299,8 +339,6 @@ class Core
      * @param string $extension Extension name
      * @param bool   $fatal     Whether the error is fatal.
      * @param string $extra     Extra string to append to message.
-     *
-     * @return void
      */
     public static function warnMissingExtension(
         string $extension,
@@ -343,7 +381,7 @@ class Core
      *
      * @param string $db database to count tables for
      *
-     * @return integer count of tables in $db
+     * @return int count of tables in $db
      */
     public static function getTableCount(string $db): int
     {
@@ -369,8 +407,6 @@ class Core
      * in Moodle)
      *
      * @param string|int $size size (Default = 0)
-     *
-     * @return integer
      */
     public static function getRealSize($size = 0): int
     {
@@ -400,11 +436,11 @@ class Core
      * Checks given $page against given $whitelist and returns true if valid
      * it optionally ignores query parameters in $page (script.php?ignored)
      *
-     * @param string  $page      page to check
-     * @param array   $whitelist whitelist to check page against
-     * @param boolean $include   whether the page is going to be included
+     * @param string $page      page to check
+     * @param array  $whitelist whitelist to check page against
+     * @param bool   $include   whether the page is going to be included
      *
-     * @return boolean whether $page is valid or not (in $whitelist or not)
+     * @return bool whether $page is valid or not (in $whitelist or not)
      */
     public static function checkPageValidity(&$page, array $whitelist = [], $include = false): bool
     {
@@ -479,8 +515,6 @@ class Core
      *
      * @param string $uri         the header to send
      * @param bool   $use_refresh whether to use Refresh: header when running on IIS
-     *
-     * @return void
      */
     public static function sendHeaderLocation(string $uri, bool $use_refresh = false): void
     {
@@ -522,8 +556,6 @@ class Core
 
     /**
      * Outputs application/json headers. This includes no caching.
-     *
-     * @return void
      */
     public static function headerJSON(): void
     {
@@ -542,8 +574,6 @@ class Core
 
     /**
      * Outputs headers to prevent caching in browser (and on the way).
-     *
-     * @return void
      */
     public static function noCacheHeader(): void
     {
@@ -573,8 +603,6 @@ class Core
      * @param string $mimetype MIME type to include in headers.
      * @param int    $length   Length of content (optional)
      * @param bool   $no_cache Whether to include no-caching headers.
-     *
-     * @return void
      */
     public static function downloadHeader(
         string $filename,
@@ -635,8 +663,6 @@ class Core
      * @param string $path  path in the array
      * @param array  $array the array
      * @param mixed  $value value to store
-     *
-     * @return void
      */
     public static function arrayWrite(string $path, array &$array, $value): void
     {
@@ -657,8 +683,6 @@ class Core
      *
      * @param string $path  path in the array
      * @param array  $array the array
-     *
-     * @return void
      */
     public static function arrayRemove(string $path, array &$array): void
     {
@@ -731,8 +755,8 @@ class Core
      *
      * @param string $url URL of external site.
      *
-     * @return boolean True: if domain of $url is allowed domain,
-     *                 False: otherwise.
+     * @return bool True: if domain of $url is allowed domain,
+     * False: otherwise.
      */
     public static function isAllowedDomain(string $url): bool
     {
@@ -801,8 +825,6 @@ class Core
      * Displays SQL query before executing.
      *
      * @param array|string $query_data Array containing queries or query itself
-     *
-     * @return void
      */
     public static function previewSQL($query_data): void
     {
@@ -849,8 +871,6 @@ class Core
      * Creates some globals from $_POST variables matching a pattern
      *
      * @param array $post_patterns The patterns to search for
-     *
-     * @return void
      */
     public static function setPostAsGlobal(array $post_patterns): void
     {
@@ -867,8 +887,6 @@ class Core
      * Creates some globals from $_REQUEST
      *
      * @param string $param db|table
-     *
-     * @return void
      */
     public static function setGlobalDbOrTable(string $param): void
     {
@@ -883,8 +901,6 @@ class Core
     /**
      * PATH_INFO could be compromised if set, so remove it from PHP_SELF
      * and provide a clean PHP_SELF here
-     *
-     * @return void
      */
     public static function cleanupPathInfo(): void
     {
@@ -932,8 +948,6 @@ class Core
 
     /**
      * Checks that required PHP extensions are there.
-     *
-     * @return void
      */
     public static function checkExtensions(): void
     {
@@ -1022,8 +1036,6 @@ class Core
      * * strips p: prefix(es)
      *
      * @param string $name User given hostname
-     *
-     * @return string
      */
     public static function sanitizeMySQLHost(string $name): string
     {
@@ -1040,8 +1052,6 @@ class Core
      * * strips part behind null byte
      *
      * @param string $name User given username
-     *
-     * @return string
      */
     public static function sanitizeMySQLUser(string $name): string
     {
@@ -1141,8 +1151,6 @@ class Core
 
     /**
      * Applies changes to PHP configuration.
-     *
-     * @return void
      */
     public static function configure(): void
     {
@@ -1169,8 +1177,6 @@ class Core
 
     /**
      * Check whether PHP configuration matches our needs.
-     *
-     * @return void
      */
     public static function checkConfiguration(): void
     {
@@ -1207,8 +1213,6 @@ class Core
 
     /**
      * Checks request and fails with fatal error if something problematic is found
-     *
-     * @return void
      */
     public static function checkRequest(): void
     {

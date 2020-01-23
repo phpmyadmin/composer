@@ -49,7 +49,7 @@ class HttpRequestTest extends PmaTestCase
     /**
      * Skip test if CURL extension is not installed
      *
-     * @param boolean $ssl_flags Whether to check support for SSL flags
+     * @param bool $ssl_flags Whether to check support for SSL flags
      *
      * @return void
      */
@@ -81,8 +81,6 @@ class HttpRequestTest extends PmaTestCase
      * @param bool   $return_only_status return only status
      * @param bool   $expected           expected result
      *
-     * @return void
-     *
      * @group medium
      * @dataProvider httpRequests
      * @group network
@@ -101,8 +99,6 @@ class HttpRequestTest extends PmaTestCase
      * @param string $method             method
      * @param bool   $return_only_status return only status
      * @param bool   $expected           expected result
-     *
-     * @return void
      *
      * @group medium
      * @dataProvider httpRequests
@@ -130,8 +126,6 @@ class HttpRequestTest extends PmaTestCase
      * @param bool   $return_only_status return only status
      * @param bool   $expected           expected result
      *
-     * @return void
-     *
      * @group medium
      * @dataProvider httpRequests
      * @group network
@@ -158,8 +152,6 @@ class HttpRequestTest extends PmaTestCase
      * @param bool   $return_only_status return only status
      * @param bool   $expected           expected result
      *
-     * @return void
-     *
      * @group medium
      * @dataProvider httpRequests
      * @group network
@@ -180,8 +172,6 @@ class HttpRequestTest extends PmaTestCase
      * @param string $method             method
      * @param bool   $return_only_status return only status
      * @param bool   $expected           expected result
-     *
-     * @return void
      *
      * @group medium
      * @dataProvider httpRequests

@@ -39,11 +39,15 @@ use function count;
 use function implode;
 use function in_array;
 use function is_array;
+use function mb_strpos;
 use function mb_strtoupper;
 use function sprintf;
 use function str_replace;
-use function trim;
+use function strlen;
 use function strpos;
+use function strrpos;
+use function substr;
+use function trim;
 
 /**
  * Displays table structure infos like columns, indexes, size, rows
@@ -844,7 +848,7 @@ class StructureController extends AbstractController
     /**
      * Update the table's structure based on $_REQUEST
      *
-     * @return boolean              true if error occurred
+     * @return bool true if error occurred
      */
     protected function updateColumns()
     {
@@ -1098,7 +1102,7 @@ class StructureController extends AbstractController
      * @param array $adjust_privileges assoc array of old col names mapped to new
      *                                 cols
      *
-     * @return boolean  boolean whether at least one column privileges
+     * @return bool boolean whether at least one column privileges
      * adjusted
      */
     protected function adjustColumnPrivileges(array $adjust_privileges)
@@ -1142,9 +1146,9 @@ class StructureController extends AbstractController
     /**
      * Verifies if some elements of a column have changed
      *
-     * @param integer $i column index in the request
+     * @param int $i column index in the request
      *
-     * @return boolean true if we need to generate ALTER TABLE
+     * @return bool true if we need to generate ALTER TABLE
      */
     protected function columnNeedsAlterTable($i)
     {

@@ -11,6 +11,38 @@ use PhpMyAdmin\Controllers\Server\ExportController as ServerExportController;
 use PhpMyAdmin\Controllers\Table\ExportController as TableExportController;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\SchemaPlugin;
+use function array_merge_recursive;
+use function error_get_last;
+use function fclose;
+use function file_exists;
+use function fopen;
+use function function_exists;
+use function fwrite;
+use function gzencode;
+use function header;
+use function htmlentities;
+use function htmlspecialchars;
+use function implode;
+use function in_array;
+use function ini_get;
+use function is_array;
+use function is_file;
+use function is_numeric;
+use function is_object;
+use function is_writable;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_strtolower;
+use function mb_substr;
+use function ob_list_handlers;
+use function preg_match;
+use function preg_replace;
+use function strlen;
+use function strtolower;
+use function substr;
+use function time;
+use function trim;
+use function urlencode;
 
 /**
  * PhpMyAdmin\Export class
@@ -30,8 +62,6 @@ class Export
 
     /**
      * Sets a session variable upon a possible fatal error during export
-     *
-     * @return void
      */
     public function shutdown(): void
     {
@@ -44,8 +74,6 @@ class Export
 
     /**
      * Detect ob_gzhandler
-     *
-     * @return bool
      */
     public function isGzHandlerEnabled(): bool
     {
@@ -334,8 +362,8 @@ class Export
     /**
      * Open the export file
      *
-     * @param string  $filename     the export filename
-     * @param boolean $quick_export whether it's a quick export or not
+     * @param string $filename     the export filename
+     * @param bool   $quick_export whether it's a quick export or not
      *
      * @return array the full save filename, possible message and the file handle
      */
@@ -450,10 +478,8 @@ class Export
      * Saves the dump_buffer for a particular table in an array
      * Used in separate files export
      *
-     * @param string  $object_name the name of current object to be stored
-     * @param boolean $append      optional boolean to append to an existing index or not
-     *
-     * @return void
+     * @param string $object_name the name of current object to be stored
+     * @param bool   $append      optional boolean to append to an existing index or not
      */
     public function saveObjectInBuffer(string $object_name, bool $append = false): void
     {
@@ -566,8 +592,6 @@ class Export
      * @param bool         $do_dates        whether to add dates
      * @param array        $aliases         alias information for db/table/column
      * @param string       $separate_files  whether it is a separate-files export
-     *
-     * @return void
      */
     public function exportServer(
         $db_select,
@@ -635,8 +659,6 @@ class Export
      * @param bool         $do_dates        whether to add dates
      * @param array        $aliases         Alias information for db/table/column
      * @param string       $separate_files  whether it is a separate-files export
-     *
-     * @return void
      */
     public function exportDatabase(
         string $db,
@@ -887,8 +909,6 @@ class Export
      * @param string       $limit_from      starting limit
      * @param string       $sql_query       query for which exporting is requested
      * @param array        $aliases         Alias information for db/table/column
-     *
-     * @return void
      */
     public function exportTable(
         string $db,
@@ -1039,8 +1059,6 @@ class Export
      * @param string $db          the database name
      * @param string $table       the table name
      * @param string $export_type Export type
-     *
-     * @return void
      */
     public function showPage(string $db, string $table, string $export_type): void
     {
@@ -1193,8 +1211,6 @@ class Export
      * call and include the appropriate Schema Class depending on $export_type
      *
      * @param string|null $export_type format of the export
-     *
-     * @return void
      */
     public function processExportSchema(?string $export_type): void
     {

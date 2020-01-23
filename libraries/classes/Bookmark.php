@@ -71,8 +71,6 @@ class Bookmark
 
     /**
      * Returns the ID of the bookmark
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -81,8 +79,6 @@ class Bookmark
 
     /**
      * Returns the database of the bookmark
-     *
-     * @return string
      */
     public function getDatabase(): string
     {
@@ -91,8 +87,6 @@ class Bookmark
 
     /**
      * Returns the user whom the bookmark belongs to
-     *
-     * @return string
      */
     public function getUser(): string
     {
@@ -101,8 +95,6 @@ class Bookmark
 
     /**
      * Returns the label of the bookmark
-     *
-     * @return string
      */
     public function getLabel(): string
     {
@@ -111,8 +103,6 @@ class Bookmark
 
     /**
      * Returns the query
-     *
-     * @return string
      */
     public function getQuery(): string
     {
@@ -122,7 +112,7 @@ class Bookmark
     /**
      * Adds a bookmark
      *
-     * @return boolean whether the INSERT succeeds or not
+     * @return bool whether the INSERT succeeds or not
      *
      * @access public
      */
@@ -245,7 +235,7 @@ class Bookmark
      * @param string            $user       Current user
      * @param array             $bkm_fields the properties of the bookmark to add; here,
      *                                      $bkm_fields['bkm_sql_query'] is urlencoded
-     * @param boolean           $all_users  whether to make the bookmark
+     * @param bool              $all_users  whether to make the bookmark
      *                                      available for all users
      *
      * @return Bookmark|false
@@ -276,8 +266,6 @@ class Bookmark
      * @param DatabaseInterface $dbi  DatabaseInterface object
      * @param string            $user Current user
      * @param array             $row  Resource used to build the bookmark
-     *
-     * @return Bookmark
      */
     protected static function createFromRow(
         DatabaseInterface $dbi,
@@ -351,9 +339,9 @@ class Bookmark
      * @param string            $db                  the current database name
      * @param int|string        $id                  an identifier of the bookmark to get
      * @param string            $id_field            which field to look up the identifier
-     * @param boolean           $action_bookmark_all true: get all bookmarks regardless
+     * @param bool              $action_bookmark_all true: get all bookmarks regardless
      *                                               of the owning user
-     * @param boolean           $exact_user_match    whether to ignore bookmarks with no user
+     * @param bool              $exact_user_match    whether to ignore bookmarks with no user
      *
      * @return Bookmark|null the bookmark
      *

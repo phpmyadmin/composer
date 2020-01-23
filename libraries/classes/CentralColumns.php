@@ -10,7 +10,9 @@ use PhpMyAdmin\Charsets\Charset;
 use PhpMyAdmin\Charsets\Collation;
 use PhpMyAdmin\Html\Generator;
 use function array_unique;
+use function ceil;
 use function count;
+use function explode;
 use function htmlspecialchars;
 use function implode;
 use function in_array;
@@ -18,7 +20,6 @@ use function is_bool;
 use function mb_strtoupper;
 use function sprintf;
 use function trim;
-use function explode;
 
 /**
  * PhpMyAdmin\CentralColumns class
@@ -56,7 +57,7 @@ class CentralColumns
     /**
      * Disable use of INFORMATION_SCHEMA
      *
-     * @var boolean
+     * @var bool
      */
     private $disableIs;
 
@@ -186,10 +187,10 @@ class CentralColumns
     /**
      * return the existing columns in central list among the given list of columns
      *
-     * @param string  $db        the selected database
-     * @param string  $cols      comma separated list of given columns
-     * @param boolean $allFields set if need all the fields of existing columns,
-     *                           otherwise only column_name is returned
+     * @param string $db        the selected database
+     * @param string $cols      comma separated list of given columns
+     * @param bool   $allFields set if need all the fields of existing columns,
+     *                          otherwise only column_name is returned
      *
      * @return array list of columns in central columns among given set of columns
      */
@@ -233,8 +234,6 @@ class CentralColumns
     /**
      * return error message to be displayed if central columns
      * configuration storage is not completely configured
-     *
-     * @return Message
      */
     private function configErrorMessage(): Message
     {
@@ -580,10 +579,10 @@ class CentralColumns
      * return the columns present in central list of columns for a given
      * table of a given database
      *
-     * @param string  $db        given database
-     * @param string  $table     given table
-     * @param boolean $allFields set if need all the fields of existing columns,
-     *                           otherwise only column_name is returned
+     * @param string $db        given database
+     * @param string $table     given table
+     * @param bool   $allFields set if need all the fields of existing columns,
+     *                          otherwise only column_name is returned
      *
      * @return array columns present in central list from given table of given db.
      */
@@ -926,8 +925,6 @@ class CentralColumns
      *
      * @param string $pmaThemeImage pma theme image url
      * @param string $text_dir      url for text directory
-     *
-     * @return string
      */
     public function getTableFooter(string $pmaThemeImage, string $text_dir): string
     {
@@ -972,8 +969,6 @@ class CentralColumns
      * This method separates them.
      *
      * @param array $columns_list columns list
-     *
-     * @return void
      */
     private function handleColumnExtra(array &$columns_list): void
     {

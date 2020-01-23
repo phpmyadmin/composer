@@ -6,16 +6,18 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use function htmlspecialchars;
 use function in_array;
 use function is_array;
 use function is_int;
 use function mb_strrpos;
+use function mb_strtolower;
 use function mb_substr;
+use function sprintf;
 use function str_replace;
 use function strlen;
 use function strtok;
 use function time;
-use function mb_strtolower;
 
 /**
  * Functions for the replication GUI
@@ -235,10 +237,10 @@ class ReplicationGui
     /**
      * This function returns html code for table with replication status.
      *
-     * @param string  $type     either master or slave
-     * @param boolean $isHidden if true, then default style is set to hidden,
-     *                          default value false
-     * @param boolean $hasTitle if true, then title is displayed, default true
+     * @param string $type     either master or slave
+     * @param bool   $isHidden if true, then default style is set to hidden,
+     *                         default value false
+     * @param bool   $hasTitle if true, then title is displayed, default true
      *
      * @return string HTML code
      */
@@ -471,7 +473,7 @@ class ReplicationGui
     /**
      * handle control requests for Slave Change Master
      *
-     * @return boolean
+     * @return bool
      */
     public function handleRequestForSlaveChangeMaster()
     {
@@ -545,7 +547,7 @@ class ReplicationGui
     /**
      * handle control requests for Slave Server Control
      *
-     * @return boolean
+     * @return bool
      */
     public function handleRequestForSlaveServerControl()
     {
@@ -576,7 +578,7 @@ class ReplicationGui
     /**
      * handle control requests for Slave Skip Error
      *
-     * @return boolean
+     * @return bool
      */
     public function handleRequestForSlaveSkipError()
     {

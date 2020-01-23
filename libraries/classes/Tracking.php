@@ -7,16 +7,24 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Html\Generator;
+use function array_key_exists;
+use function array_merge;
+use function array_multisort;
 use function count;
+use function date;
 use function htmlspecialchars;
 use function in_array;
 use function ini_set;
 use function intval;
 use function is_array;
+use function is_object;
 use function mb_strstr;
-use function sprintf;
-use function strtotime;
 use function preg_replace;
+use function rtrim;
+use function sprintf;
+use function strlen;
+use function strtotime;
+use const SORT_ASC;
 
 /**
  * PhpMyAdmin\Tracking class
@@ -217,14 +225,14 @@ class Tracking
     /**
      * Function to get html for tracking report and tracking report export
      *
-     * @param array   $data             data
-     * @param array   $url_params       url params
-     * @param boolean $selection_schema selection schema
-     * @param boolean $selection_data   selection data
-     * @param boolean $selection_both   selection both
-     * @param int     $filter_ts_to     filter time stamp from
-     * @param int     $filter_ts_from   filter time stamp tp
-     * @param array   $filter_users     filter users
+     * @param array $data             data
+     * @param array $url_params       url params
+     * @param bool  $selection_schema selection schema
+     * @param bool  $selection_data   selection data
+     * @param bool  $selection_both   selection both
+     * @param int   $filter_ts_to     filter time stamp from
+     * @param int   $filter_ts_from   filter time stamp tp
+     * @param array $filter_users     filter users
      *
      * @return string
      */
@@ -306,9 +314,9 @@ class Tracking
     /**
      * Generate HTML element for report form
      *
-     * @param boolean $selection_schema selection schema
-     * @param boolean $selection_data   selection data
-     * @param boolean $selection_both   selection both
+     * @param bool $selection_schema selection schema
+     * @param bool $selection_data   selection data
+     * @param bool $selection_both   selection both
      *
      * @return array
      */
@@ -348,20 +356,20 @@ class Tracking
     /**
      * Generate HTML for export form
      *
-     * @param array   $data               data
-     * @param array   $url_params         url params
-     * @param boolean $selection_schema   selection schema
-     * @param boolean $selection_data     selection data
-     * @param boolean $selection_both     selection both
-     * @param int     $filter_ts_to       filter time stamp from
-     * @param int     $filter_ts_from     filter time stamp tp
-     * @param array   $filter_users       filter users
-     * @param string  $str1               HTML for logtype select
-     * @param string  $str2               HTML for "from date"
-     * @param string  $str3               HTML for "to date"
-     * @param string  $str4               HTML for user
-     * @param string  $str5               HTML for "list report"
-     * @param string  $drop_image_or_text HTML for image or text
+     * @param array  $data               data
+     * @param array  $url_params         url params
+     * @param bool   $selection_schema   selection schema
+     * @param bool   $selection_data     selection data
+     * @param bool   $selection_both     selection both
+     * @param int    $filter_ts_to       filter time stamp from
+     * @param int    $filter_ts_from     filter time stamp tp
+     * @param array  $filter_users       filter users
+     * @param string $str1               HTML for logtype select
+     * @param string $str2               HTML for "from date"
+     * @param string $str3               HTML for "to date"
+     * @param string $str4               HTML for user
+     * @param string $str5               HTML for "list report"
+     * @param string $drop_image_or_text HTML for image or text
      *
      * @return string HTML for form
      */
@@ -641,8 +649,6 @@ class Tracking
      * Function to get html for schema snapshot
      *
      * @param array $params url parameters
-     *
-     * @return string
      */
     public function getHtmlForSchemaSnapshot(array $params): string
     {
@@ -1211,9 +1217,9 @@ class Tracking
     /**
      * Helper function: Recursive function for getting table names from $table_list
      *
-     * @param array   $table_list Table list
-     * @param string  $db         Current database
-     * @param boolean $testing    Testing
+     * @param array  $table_list Table list
+     * @param string $db         Current database
+     * @param bool   $testing    Testing
      *
      * @return array
      */
