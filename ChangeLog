@@ -11,6 +11,7 @@ phpMyAdmin - ChangeLog
 - issue #12726 Made user names clickable in user accounts overview
 - issue #15729 Improve virtuality dropdown for MariaDB > 10.1
 - issue #15312 Added an option to perform ALTER ONLINE (ALGORITHM=INPLACE) when editing a table structure
+- issue        Added missing 'IF EXISTS' to 'DROP EVENT' when exporting databases
 
 5.0.2 (not yet released)
 - issue        Fixed deprecation warning "implode(): Passing glue string after array is deprecated." function on export page
@@ -39,6 +40,7 @@ phpMyAdmin - ChangeLog
 - issue #13326 Added integer validations on search page
 - issue #15200 Fixed server-side HTTPS detection misses support for Forwarded HTTP Extension (RFC 7239)
 - issue #15831 Fixed DB names starting with "b" being cut off in <option>, User account page
+- issue #15850 Fixed display content from "information_schema.PROCESSLIST"
 
 5.0.1 (2020-01-07)
 - issue #15719 Fixed error 500 when browsing a table when $cfg['LimitChars'] used a string and not an int value
