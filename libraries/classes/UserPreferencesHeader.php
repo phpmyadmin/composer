@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Config\Forms\User\UserFormList;
 use PhpMyAdmin\Html\Generator;
 use Throwable;
 use Twig_Error_Loader;
@@ -66,7 +65,59 @@ class UserPreferencesHeader
                 ]
             ) . "\n";
 
-        $content .= self::displayTabsWithIcon();
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/features',
+                    'text' => __('Features'),
+                    'icon' => 'b_tblops',
+                    'active' => $route === '/preferences/features',
+                ]
+            ) . "\n";
+
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/sql',
+                    'text' => __('SQL queries'),
+                    'icon' => 'b_sql',
+                    'active' => $route === '/preferences/sql',
+                ]
+            ) . "\n";
+
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/navigation',
+                    'text' => __('Navigation panel'),
+                    'icon' => 'b_select',
+                    'active' => $route === '/preferences/navigation',
+                ]
+            ) . "\n";
+
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/main-panel',
+                    'text' => __('Main panel'),
+                    'icon' => 'b_props',
+                    'active' => $route === '/preferences/main-panel',
+                ]
+            ) . "\n";
+
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/export',
+                    'text' => __('Export'),
+                    'icon' => 'b_export',
+                    'active' => $route === '/preferences/export',
+                ]
+            ) . "\n";
+
+        $content .= Generator::getHtmlTab(
+                [
+                    'link' => 'index.php?route=/preferences/import',
+                    'text' => __('Import'),
+                    'icon' => 'b_import',
+                    'active' => $route === '/preferences/import',
+                ]
+            ) . "\n";
 
         return '<div class=container-fluid><div class=row>' .
         $template->render(
@@ -77,32 +128,6 @@ class UserPreferencesHeader
                 'content' => $content,
             ]
         ) . '<div class="clearfloat"></div></div>';
-    }
-
-    protected static function displayTabsWithIcon(): string
-    {
-        $form_param = $_GET['form'] ?? null;
-        $tabs_icons = [
-            'Features' => 'b_tblops',
-            'Sql' => 'b_sql',
-            'Navi' => 'b_select',
-            'Main' => 'b_props',
-            'Import' => 'b_import',
-            'Export' => 'b_export',
-        ];
-        $route = $_GET['route'] ?? $_POST['route'] ?? '';
-        $content = null;
-        foreach (UserFormList::getAll() as $formset) {
-            $formset_class = UserFormList::get($formset);
-            $tab = [
-                'link' => 'index.php?route=/preferences/forms',
-                'text' => $formset_class::getName(),
-                'icon' => $tabs_icons[$formset],
-                'active' => $route === '/preferences/forms' && $formset === $form_param,
-            ];
-            $content .= Generator::getHtmlTab($tab, ['form' => $formset]) . "\n";
-        }
-        return $content;
     }
 
     protected static function displayConfigurationSavedMessage(): ?string

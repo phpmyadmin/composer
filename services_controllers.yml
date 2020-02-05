@@ -281,8 +281,35 @@ services:
       dbi: '@dbi'
       template: '@template'
 
-  PhpMyAdmin\Controllers\Preferences\FormsController:
-    class: 'PhpMyAdmin\Controllers\Preferences\FormsController'
+  PhpMyAdmin\Controllers\Preferences\ExportController:
+    class: 'PhpMyAdmin\Controllers\Preferences\ExportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\FeaturesController:
+    class: 'PhpMyAdmin\Controllers\Preferences\FeaturesController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\ImportController:
+    class: 'PhpMyAdmin\Controllers\Preferences\ImportController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\MainPanelController:
+    class: 'PhpMyAdmin\Controllers\Preferences\MainPanelController'
     arguments:
       response: '@response'
       dbi: '@dbi'
@@ -292,6 +319,24 @@ services:
 
   PhpMyAdmin\Controllers\Preferences\ManageController:
     class: 'PhpMyAdmin\Controllers\Preferences\ManageController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\NavigationController:
+    class: 'PhpMyAdmin\Controllers\Preferences\NavigationController'
+    arguments:
+      response: '@response'
+      dbi: '@dbi'
+      template: '@template'
+      userPreferences: '@user_preferences'
+      relation: '@relation'
+
+  PhpMyAdmin\Controllers\Preferences\SqlController:
+    class: 'PhpMyAdmin\Controllers\Preferences\SqlController'
     arguments:
       response: '@response'
       dbi: '@dbi'

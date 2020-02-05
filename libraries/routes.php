@@ -38,8 +38,13 @@ use PhpMyAdmin\Controllers\LogoutController;
 use PhpMyAdmin\Controllers\NavigationController;
 use PhpMyAdmin\Controllers\NormalizationController;
 use PhpMyAdmin\Controllers\PhpInfoController;
-use PhpMyAdmin\Controllers\Preferences\FormsController;
+use PhpMyAdmin\Controllers\Preferences\ExportController as PreferencesExportController;
+use PhpMyAdmin\Controllers\Preferences\FeaturesController;
+use PhpMyAdmin\Controllers\Preferences\ImportController as PreferencesImportController;
+use PhpMyAdmin\Controllers\Preferences\MainPanelController;
 use PhpMyAdmin\Controllers\Preferences\ManageController;
+use PhpMyAdmin\Controllers\Preferences\NavigationController as PreferencesNavigationController;
+use PhpMyAdmin\Controllers\Preferences\SqlController as PreferencesSqlController;
 use PhpMyAdmin\Controllers\Preferences\TwoFactorController;
 use PhpMyAdmin\Controllers\SchemaExportController;
 use PhpMyAdmin\Controllers\Server\BinlogController;
@@ -358,14 +363,39 @@ return function (RouteCollector $routes) use ($containerBuilder, $response) {
         $controller->index();
     });
     $routes->addGroup('/preferences', function (RouteCollector $routes) use ($containerBuilder) {
-        $routes->addRoute(['GET', 'POST'], '/forms', function () use ($containerBuilder) {
-            /** @var FormsController $controller */
-            $controller = $containerBuilder->get(FormsController::class);
+        $routes->addRoute(['GET', 'POST'], '/export', function () use ($containerBuilder) {
+            /** @var PreferencesExportController $controller */
+            $controller = $containerBuilder->get(PreferencesExportController::class);
+            $controller->index();
+        });
+        $routes->addRoute(['GET', 'POST'], '/features', function () use ($containerBuilder) {
+            /** @var FeaturesController $controller */
+            $controller = $containerBuilder->get(FeaturesController::class);
+            $controller->index();
+        });
+        $routes->addRoute(['GET', 'POST'], '/import', function () use ($containerBuilder) {
+            /** @var PreferencesImportController $controller */
+            $controller = $containerBuilder->get(PreferencesImportController::class);
+            $controller->index();
+        });
+        $routes->addRoute(['GET', 'POST'], '/main-panel', function () use ($containerBuilder) {
+            /** @var MainPanelController $controller */
+            $controller = $containerBuilder->get(MainPanelController::class);
             $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/manage', function () use ($containerBuilder) {
             /** @var ManageController $controller */
             $controller = $containerBuilder->get(ManageController::class);
+            $controller->index();
+        });
+        $routes->addRoute(['GET', 'POST'], '/navigation', function () use ($containerBuilder) {
+            /** @var PreferencesNavigationController $controller */
+            $controller = $containerBuilder->get(PreferencesNavigationController::class);
+            $controller->index();
+        });
+        $routes->addRoute(['GET', 'POST'], '/sql', function () use ($containerBuilder) {
+            /** @var PreferencesSqlController $controller */
+            $controller = $containerBuilder->get(PreferencesSqlController::class);
             $controller->index();
         });
         $routes->addRoute(['GET', 'POST'], '/two-factor', function () use ($containerBuilder) {
