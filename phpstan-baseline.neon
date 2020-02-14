@@ -8,21 +8,6 @@ parameters:
 			path: libraries/classes/Advisor.php
 
 		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, array\\<int, string\\>\\|false given\\.$#"
-			count: 1
-			path: libraries/classes/Advisor.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Advisor\\:\\:splitJustification\\(\\) should return array\\<string\\> but returns array\\<int, string\\|null\\>\\.$#"
-			count: 1
-			path: libraries/classes/Advisor.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method PhpMyAdmin\\\\Util\\:\\:formatByteDown\\(\\) expects float\\|int, float\\|string given\\.$#"
-			count: 1
-			path: libraries/classes/Advisor.php
-
-		-
 			message: "#^Parameter \\#2 \\$pieces of function implode expects array, array\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Advisor.php
@@ -741,11 +726,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Qbe\\:\\:_getMasterTable\\(\\) should return string but returns int\\|string\\.$#"
 			count: 1
 			path: libraries/classes/Database/Qbe.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of function strtolower expects string, \\(array\\|float\\|int\\) given\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
 
 		-
 			message: "#^Parameter \\#2 \\$table of method PhpMyAdmin\\\\DatabaseInterface\\:\\:_cacheTableData\\(\\) expects bool\\|string, array\\|string given\\.$#"
@@ -1581,11 +1561,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Menu\\:\\:_getAllowedTabs\\(\\) should return array but returns array\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Menu.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, array\\|string given\\.$#"
-			count: 1
-			path: libraries/classes/Message.php
 
 		-
 			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:fetchArray\\(\\) expects object, resource\\|true given\\.$#"
