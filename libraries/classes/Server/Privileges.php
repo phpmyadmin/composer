@@ -2774,7 +2774,7 @@ class Privileges
                     $html_output .= '<span style="color: #FF0000">'
                         . __('Any') . '</span>';
                 } else {
-                    $html_output .= htmlspecialchars($current_user);
+                    $html_output .= htmlspecialchars((string) $current_user);
                 }
                 $html_output .= '</td>';
 
@@ -5480,7 +5480,12 @@ class Privileges
             } elseif ($serverType == 'MariaDB') {
                 $create_user_stmt .= ' IDENTIFIED BY \'%s\'';
             } elseif (($serverType == 'MySQL' || $serverType == 'Percona Server') && $serverVersion >= 80011) {
-                $create_user_stmt .= ' BY \'%s\'';
+                if (mb_strpos($create_user_stmt, 'IDENTIFIED') === false) {
+                    // Maybe the authentication_plugin was not posted and then a part is missing
+                    $create_user_stmt .= ' IDENTIFIED BY \'%s\'';
+                } else {
+                    $create_user_stmt .= ' BY \'%s\'';
+                }
             } else {
                 $create_user_stmt .= ' AS \'%s\'';
             }
