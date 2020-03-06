@@ -12,8 +12,8 @@ return function (ContainerConfigurator $configurator) {
                 $services->alias($serviceName, $service);
                 continue;
             }
-            $theService = $services->set($serviceName, $service['class']);
-            if ($service['arguments'] !== null) {
+            $theService = $services->set($serviceName, $service['class'] ?? null);
+            if (isset($service['arguments'])) {// !== null check
                 foreach ($service['arguments'] as &$argumentName) {
                     if ($argumentName[0] === '@') {
                         $services->alias($serviceName, substr($argumentName, 1));
@@ -22,14 +22,14 @@ return function (ContainerConfigurator $configurator) {
                 }
                 $theService->args($service['arguments']);
             }
-            if ($service['factory'] !== null) {
+            if (isset($service['factory'])) {// !== null check
                 $theService->factory($service['factory']);
             }
         }
     };
 
-    $servicesFile = include __DIR__ . '/services.php';
+    $servicesFile = include ROOT_PATH . 'libraries/services.php';
     $loadServices($servicesFile, $services);
-    $servicesFile = include __DIR__ . '/services_controllers.php';
+    $servicesFile = include ROOT_PATH . 'libraries/services_controllers.php';
     $loadServices($servicesFile, $services);
 };
