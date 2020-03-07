@@ -22,6 +22,9 @@ use function preg_replace;
  */
 class MultSubmits
 {
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /** @var Transformations */
     private $transformations;
 
@@ -34,27 +37,39 @@ class MultSubmits
     /** @var Template */
     private $template;
 
-    public function __construct()
-    {
-        $this->transformations = new Transformations();
-        $relation = new Relation($GLOBALS['dbi']);
-        $this->relationCleanup = new RelationCleanup($GLOBALS['dbi'], $relation);
-        $this->operations = new Operations($GLOBALS['dbi'], $relation);
-        $this->template = new Template();
+    /**
+     * @param DatabaseInterface $dbi             DatabaseInterface instance.
+     * @param Template          $template        Template instance.
+     * @param Transformations   $transformations Transformations instance.
+     * @param RelationCleanup   $relationCleanup RelationCleanup instance.
+     * @param Operations        $operations      Operations instance.
+     */
+    public function __construct(
+        $dbi,
+        Template $template,
+        Transformations $transformations,
+        RelationCleanup $relationCleanup,
+        Operations $operations
+    ) {
+        $this->dbi = $dbi;
+        $this->template = $template;
+        $this->transformations = $transformations;
+        $this->relationCleanup = $relationCleanup;
+        $this->operations = $operations;
     }
 
     /**
      * Gets url params
      *
-     * @param string     $what             mult submit type
-     * @param bool       $reload           is reload
-     * @param string     $action           action type
-     * @param string     $db               database name
-     * @param string     $table            table name
-     * @param array      $selected         selected rows(table,db)
-     * @param array|null $views            table views
-     * @param string     $originalSqlQuery original sql query
-     * @param string     $originalUrlQuery original url query
+     * @param string      $what             mult submit type
+     * @param bool        $reload           is reload
+     * @param string      $action           action type
+     * @param string      $db               database name
+     * @param string      $table            table name
+     * @param array       $selected         selected rows(table,db)
+     * @param array|null  $views            table views
+     * @param string|null $originalSqlQuery original sql query
+     * @param string|null $originalUrlQuery original url query
      *
      * @return array
      */
@@ -108,14 +123,14 @@ class MultSubmits
     /**
      * Builds or execute queries for multiple elements, depending on $queryType
      *
-     * @param string     $queryType  query type
-     * @param array      $selected   selected tables
-     * @param string     $db         db name
-     * @param string     $table      table name
-     * @param array|null $views      table views
-     * @param string     $primary    table primary
-     * @param string     $fromPrefix from prefix original
-     * @param string     $toPrefix   to prefix original
+     * @param string      $queryType  query type
+     * @param array       $selected   selected tables
+     * @param string      $db         db name
+     * @param string      $table      table name
+     * @param array|null  $views      table views
+     * @param string|null $primary    table primary
+     * @param string|null $fromPrefix from prefix original
+     * @param string|null $toPrefix   to prefix original
      *
      * @return array
      */
@@ -286,13 +301,13 @@ class MultSubmits
                     $subFromPrefix = mb_substr(
                         $current,
                         0,
-                        mb_strlen($fromPrefix)
+                        mb_strlen((string) $fromPrefix)
                     );
                     if ($subFromPrefix == $fromPrefix) {
                         $newTableName = $toPrefix
                             . mb_substr(
                                 $current,
-                                mb_strlen($fromPrefix)
+                                mb_strlen((string) $fromPrefix)
                             );
                     } else {
                         $newTableName = $current;
@@ -311,7 +326,7 @@ class MultSubmits
 
                     $current = $selected[$i];
                     $newTableName = $toPrefix .
-                    mb_substr($current, mb_strlen($fromPrefix));
+                    mb_substr($current, mb_strlen((string) $fromPrefix));
 
                     // COPY TABLE AND CHANGE PREFIX PATTERN
                     Table::moveCopy(
@@ -353,9 +368,9 @@ class MultSubmits
             if ($runParts && ! $copyTable) {
                 $sqlQuery .= $aQuery . ';' . "\n";
                 if ($queryType != 'drop_db') {
-                    $GLOBALS['dbi']->selectDb($db);
+                    $this->dbi->selectDb($db);
                 }
-                $result = $GLOBALS['dbi']->query($aQuery);
+                $result = $this->dbi->query($aQuery);
 
                 if ($queryType == 'drop_db') {
                     $this->transformations->clear($selected[$i]);
