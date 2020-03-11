@@ -405,8 +405,6 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
                                 containment: $('#index_columns').find('tbody'),
                                 tolerance: 'pointer'
                             });
-                            // We dont need the slider at this moment.
-                            $(this).find('fieldset.tblFooters').remove();
                         },
                         modal: true,
                         buttons: buttonOptions,
@@ -668,8 +666,7 @@ AJAX.registerOnload('indexes.js', function () {
                         Functions.highlightSql($('#page_content'));
                     }
                     Navigation.reload();
-                    var tableStructureUrl = 'index.php?route=/table/structure' + CommonParams.getUrlQuery('&');
-                    CommonActions.refreshMain(tableStructureUrl);
+                    CommonActions.refreshMain('index.php?route=/table/structure');
                 } else {
                     Functions.ajaxShowMessage(Messages.strErrorProcessingRequest + ' : ' + data.error, false);
                 }
@@ -703,8 +700,7 @@ AJAX.registerOnload('indexes.js', function () {
         }
         url += CommonParams.get('arg_separator') + 'ajax_request=true';
         Functions.indexEditorDialog(url, title, function () {
-            var tableStructureUrl = 'index.php?route=/table/structure' + CommonParams.getUrlQuery('&');
-            CommonActions.refreshMain(tableStructureUrl);
+            CommonActions.refreshMain('index.php?route=/table/structure');
         });
     });
 

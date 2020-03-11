@@ -176,10 +176,6 @@ select {
 }
 
 input {
-  &[type=number] {
-    width: 50px;
-  }
-
   &[type=text],
   &[type=password],
   &[type=number],
@@ -570,6 +566,11 @@ table tbody:first-of-type tr:nth-child(even) th,
 #table_index tbody:nth-of-type(even) tr,
 #table_index tbody:nth-of-type(even) th {
   background: #dfdfdf;
+}
+
+// only one item
+table tbody:first-of-type tr:only-child {
+  background: none;
 }
 
 table tr {

@@ -14,19 +14,29 @@ class RowActionController extends AbstractController
 {
     public function index(): void
     {
-        global $containerBuilder, $db, $goto, $pmaThemeImage, $sql_query, $table;
+        global $db, $goto, $pmaThemeImage, $sql_query, $table,  $disp_message, $disp_query, $action;
         global $submit_mult, $active_page, $err_url, $original_sql_query, $url_query, $original_url_query;
-        global $disp_message, $disp_query, $single_table, $where_clause, $action;
 
         if (isset($_POST['submit_mult'])) {
             $submit_mult = $_POST['submit_mult'];
             // workaround for IE problem:
         } elseif (isset($_POST['submit_mult_delete_x'])) {
             $submit_mult = 'row_delete';
-        } elseif (isset($_POST['submit_mult_change_x'])) {
-            $submit_mult = 'row_edit';
-        } elseif (isset($_POST['submit_mult_export_x'])) {
-            $submit_mult = 'row_export';
+        }
+
+        if (isset($_POST['submit_mult_change_x'])
+            || $submit_mult === 'row_edit' || $submit_mult === 'edit'
+            || $submit_mult === 'row_copy' || $submit_mult === 'copy'
+        ) {
+            $this->edit();
+
+            return;
+        }
+
+        if (isset($_POST['submit_mult_export_x']) || $submit_mult === 'row_export' || $submit_mult === 'export') {
+            $this->export();
+
+            return;
         }
 
         // If the 'Ask for confirmation' button was pressed, this can only come
@@ -35,33 +45,13 @@ class RowActionController extends AbstractController
             $submit_mult = 'row_delete';
         }
 
-        if (! isset($submit_mult)) {
-            $submit_mult = 'row_edit';
-        }
-
         switch ($submit_mult) {
             case 'row_delete':
-            case 'row_edit':
-            case 'row_copy':
-            case 'row_export':
                 // leave as is
-                break;
-
-            case 'export':
-                $submit_mult = 'row_export';
                 break;
 
             case 'delete':
                 $submit_mult = 'row_delete';
-                break;
-
-            case 'copy':
-                $submit_mult = 'row_copy';
-                break;
-
-            case 'edit':
-            default:
-                $submit_mult = 'row_edit';
                 break;
         }
 
@@ -75,51 +65,6 @@ class RowActionController extends AbstractController
             }
 
             switch ($submit_mult) {
-                /** @noinspection PhpMissingBreakStatementInspection */
-                case 'row_copy':
-                    $_POST['default_action'] = 'insert';
-                // no break to allow for fallthough
-                case 'row_edit':
-                    // As we got the rows to be edited from the
-                    // 'rows_to_delete' checkbox, we use the index of it as the
-                    // indicating WHERE clause. Then we build the array which is used
-                    // for the /table/change script.
-                    $where_clause = [];
-                    if (isset($_POST['rows_to_delete'])
-                        && is_array($_POST['rows_to_delete'])
-                    ) {
-                        foreach ($_POST['rows_to_delete'] as $i => $i_where_clause) {
-                            $where_clause[] = $i_where_clause;
-                        }
-                    }
-                    $active_page = Url::getFromRoute('/table/change');
-                    /** @var ChangeController $controller */
-                    $controller = $containerBuilder->get(ChangeController::class);
-                    $controller->index();
-                    break;
-
-                case 'row_export':
-                    // Needed to allow SQL export
-                    $single_table = true;
-
-                    // As we got the rows to be exported from the
-                    // 'rows_to_delete' checkbox, we use the index of it as the
-                    // indicating WHERE clause. Then we build the array which is used
-                    // for the /table/change script.
-                    $where_clause = [];
-                    if (isset($_POST['rows_to_delete'])
-                        && is_array($_POST['rows_to_delete'])
-                    ) {
-                        foreach ($_POST['rows_to_delete'] as $i => $i_where_clause) {
-                            $where_clause[] = $i_where_clause;
-                        }
-                    }
-                    $active_page = Url::getFromRoute('/table/export');
-                    /** @var ExportController $controller */
-                    $controller = $containerBuilder->get(ExportController::class);
-                    $controller->index();
-                    break;
-
                 case 'row_delete':
                 default:
                     $action = Url::getFromRoute('/table/row-action');
@@ -178,5 +123,70 @@ class RowActionController extends AbstractController
                     );
             }
         }
+    }
+
+    private function edit(): void
+    {
+        global $containerBuilder, $submit_mult, $active_page, $where_clause;
+
+        $submit_mult = $submit_mult === 'copy' ? 'row_copy' : 'row_edit';
+
+        if ($submit_mult === 'row_copy') {
+            $_POST['default_action'] = 'insert';
+        }
+
+        if (isset($_POST['goto']) && (! isset($_POST['rows_to_delete']) || ! is_array($_POST['rows_to_delete']))) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No row selected.'));
+        }
+
+        // As we got the rows to be edited from the
+        // 'rows_to_delete' checkbox, we use the index of it as the
+        // indicating WHERE clause. Then we build the array which is used
+        // for the /table/change script.
+        $where_clause = [];
+        if (isset($_POST['rows_to_delete']) && is_array($_POST['rows_to_delete'])) {
+            foreach ($_POST['rows_to_delete'] as $i => $i_where_clause) {
+                $where_clause[] = $i_where_clause;
+            }
+        }
+
+        $active_page = Url::getFromRoute('/table/change');
+
+        /** @var ChangeController $controller */
+        $controller = $containerBuilder->get(ChangeController::class);
+        $controller->index();
+    }
+
+    private function export(): void
+    {
+        global $containerBuilder, $submit_mult, $active_page, $single_table, $where_clause;
+
+        $submit_mult = 'row_export';
+
+        if (isset($_POST['goto']) && (! isset($_POST['rows_to_delete']) || ! is_array($_POST['rows_to_delete']))) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No row selected.'));
+        }
+
+        // Needed to allow SQL export
+        $single_table = true;
+
+        // As we got the rows to be exported from the
+        // 'rows_to_delete' checkbox, we use the index of it as the
+        // indicating WHERE clause. Then we build the array which is used
+        // for the /table/change script.
+        $where_clause = [];
+        if (isset($_POST['rows_to_delete']) && is_array($_POST['rows_to_delete'])) {
+            foreach ($_POST['rows_to_delete'] as $i => $i_where_clause) {
+                $where_clause[] = $i_where_clause;
+            }
+        }
+
+        $active_page = Url::getFromRoute('/table/export');
+
+        /** @var ExportController $controller */
+        $controller = $containerBuilder->get(ExportController::class);
+        $controller->index();
     }
 }
