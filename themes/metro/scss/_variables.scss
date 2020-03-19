@@ -179,6 +179,10 @@ $btn-padding-x: 0.5rem;
 
 $dropdown-border-radius: 0;
 
+// Forms
+
+$input-border-radius: 0;
+
 // Navbar
 
 $enable-caret: false;
@@ -193,9 +197,9 @@ $navbar-light-disabled-color: #666;
 
 // Card
 
-$card-border-width: 0;
-$card-cap-color: $navi-background;
-$card-cap-bg: $body-bg;
+$card-border-radius: 0;
+$card-cap-bg: $th-background;
+$card-bg: $th-background;
 
 // Breadcrumbs
 

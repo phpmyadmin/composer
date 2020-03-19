@@ -26,13 +26,14 @@ script:
   - ./vendor/bin/phpunit --configuration phpunit.xml.dist --exclude-group selenium
 
 after_script:
-  - if [ -f vendor/bin/codacycoverage ] ; then php vendor/bin/codacycoverage clover || true ; fi
   - if [ -f php.log ] ; then cat php.log ; fi
   - if [ -f nginx-error.log ] ; then cat nginx-error.log ; fi
   - if [ -f config.inc.php ] ; then rm -rf config.inc.php; fi
   - if [ "$CI_MODE" = "selenium" ] ; then ~/browserstack/BrowserStackLocal --daemon stop; fi
 
-after_success: bash <(curl -s https://codecov.io/bash)
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh)
 
 services:
   - mysql
@@ -189,6 +190,7 @@ jobs:
       after_script: skip
       after_success: skip
       install:
+        - nvm install 10
         - source ~/virtualenv/python3.6/bin/activate
         - pip install 'Sphinx'
       script: ./scripts/create-release.sh --ci
@@ -202,6 +204,7 @@ jobs:
         - TESTSUITE_URL=http://127.0.0.1:8000
       before_install: phpenv config-rm xdebug.ini
       install:
+        - nvm install 10
         - ./test/install-browserstack
         - composer install --no-interaction
         - yarn install --non-interactive

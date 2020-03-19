@@ -32,6 +32,7 @@ phpMyAdmin - ChangeLog
 - issue #13519 Add "Preview SQL" option on Index dialog box when creating a new table
 - issue #15954 Fixed export maximal length of created query input is too small
 - issue        Redesign the server status advisor page
+- issue #13124 Use same height for SQL query textarea and Columns select in SQL page
 
 5.0.2 (not yet released)
 - issue        Fixed deprecation warning "implode(): Passing glue string after array is deprecated." function on export page
@@ -92,6 +93,8 @@ phpMyAdmin - ChangeLog
 - issue        Fix error in NavigationTree where $key might be sent as an int instead of a str to urlencode
 - issue #16022 Fix uncaught TypeError on browse foreigners
 - issue        Fix failure if relational display field value is NULL - "Display column for relationships"
+- issue #16033 Remove vendor bin files from non source version of phpMyAdmin
+- issue #15898 [security] Fix escape tbl_storage_engine argument used on tbl_create.php
 
 5.0.1 (2020-01-07)
 - issue #15719 Fixed error 500 when browsing a table when $cfg['LimitChars'] used a string and not an int value
