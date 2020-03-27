@@ -54,7 +54,9 @@
           <div class="input-group">
             {% if database_list is not empty %}
               <select id="moveTableDatabaseInput" class="form-control" name="target_db" aria-label="{% trans 'Database' %}">
-                {{ database_list|raw }}
+                {% for each_db in database_list %}
+                  <option value="{{ each_db.name }}"{{ each_db.is_selected ? ' selected' }}>{{ each_db.name }}</option>
+                {% endfor %}
               </select>
             {% else %}
               <input id="moveTableDatabaseInput" class="form-control" type="text" maxlength="100" name="target_db" value="{{ db }}" aria-label="{% trans 'Database' %}">
@@ -122,11 +124,18 @@
       </div>
 
       <div class="form-group form-inline">
-        <label class="text-nowrap">
+        <label class="text-nowrap" for="newTableStorageEngineSelect">
           {% trans 'Storage engine' %}
           {{ show_mysql_docu('Storage_engines') }}
         </label>
-        {{ storage_engine_select|raw }}
+        <select class="form-control ml-2" name="new_tbl_storage_engine" id="newTableStorageEngineSelect">
+          {% for engine in storage_engines %}
+            <option value="{{ engine.name }}"{% if engine.comment is not empty %} title="{{ engine.comment }}"{% endif %}
+              {{- engine.name|lower == storage_engine|lower or (storage_engine is empty and engine.is_default) ? ' selected' }}>
+              {{- engine.name -}}
+            </option>
+          {% endfor %}
+        </select>
       </div>
 
       <div class="form-group form-inline">
@@ -218,7 +227,9 @@
           <div class="input-group">
             {% if database_list is not empty %}
               <select class="form-control" name="target_db" aria-label="{% trans 'Database' %}">
-                {{ database_list|raw }}
+                {% for each_db in database_list %}
+                  <option value="{{ each_db.name }}"{{ each_db.is_selected ? ' selected' }}>{{ each_db.name }}</option>
+                {% endfor %}
               </select>
             {% else %}
               <input class="form-control" type="text" maxlength="100" name="target_db" value="{{ db }}" aria-label="{% trans 'Database' %}">
