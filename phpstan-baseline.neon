@@ -1816,11 +1816,6 @@ parameters:
 			path: libraries/classes/Import.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, int given\\.$#"
-			count: 1
-			path: libraries/classes/Index.php
-
-		-
 			message: "#^Offset 0 does not exist on array\\|null\\.$#"
 			count: 1
 			path: libraries/classes/InsertEdit.php
@@ -4181,21 +4176,6 @@ parameters:
 			path: libraries/classes/Sql.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function strlen expects string, string\\|null given\\.$#"
-			count: 2
-			path: libraries/classes/Sql.php
-
-		-
-			message: "#^Parameter \\#1 \\$table of static method PhpMyAdmin\\\\Index\\:\\:getHtmlForIndexes\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Sql.php
-
-		-
-			message: "#^Parameter \\#2 \\$schema of static method PhpMyAdmin\\\\Index\\:\\:getHtmlForIndexes\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Sql.php
-
-		-
 			message: "#^Parameter \\#1 \\$message_to_show of method PhpMyAdmin\\\\Sql\\:\\:getMessageForNoRowsReturned\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Sql.php
@@ -5019,11 +4999,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$point of method PhpMyAdmin\\\\Gis\\\\GisPolygon\\:\\:isPointInsidePolygon\\(\\) expects array, array\\|bool given\\.$#"
 			count: 1
 			path: test/classes/Gis/GisPolygonTest.php
-
-		-
-			message: "#^Parameter \\#3 \\$active_choice of static method PhpMyAdmin\\\\Html\\\\Forms\\\\Fields\\\\DropDown\\:\\:generate\\(\\) expects string, null given\\.$#"
-			count: 2
-			path: test/classes/Html/Forms/Fields/DropDownTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$name of method PhpMyAdmin\\\\Import\\:\\:getColumnNumberFromName\\(\\) expects string, string\\|null given\\.$#"
