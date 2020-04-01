@@ -25,17 +25,16 @@ class UtilExtension extends AbstractExtension
                 'PhpMyAdmin\Util::backquote'
             ),
             new TwigFunction(
-                'get_browse_upload_file_block',
-                '\PhpMyAdmin\Html\Forms\Fields\BrowseUploadFileBlock::generate',
-                ['is_safe' => ['html']]
-            ),
-            new TwigFunction(
                 'extract_column_spec',
                 'PhpMyAdmin\Util::extractColumnSpec'
             ),
             new TwigFunction(
                 'format_byte_down',
                 'PhpMyAdmin\Util::formatByteDown'
+            ),
+            new TwigFunction(
+                'get_formatted_maximum_upload_size',
+                'PhpMyAdmin\Util::getFormattedMaximumUploadSize'
             ),
             new TwigFunction(
                 'format_number',
@@ -64,11 +63,6 @@ class UtilExtension extends AbstractExtension
             new TwigFunction(
                 'show_docu',
                 '\PhpMyAdmin\Html\MySQLDocumentation::showDocumentation',
-                ['is_safe' => ['html']]
-            ),
-            new TwigFunction(
-                'get_fk_checkbox',
-                '\PhpMyAdmin\Html\Forms\Fields\FKCheckbox::generate',
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
@@ -163,11 +157,6 @@ class UtilExtension extends AbstractExtension
             new TwigFunction(
                 'timespan_format',
                 'PhpMyAdmin\Util::timespanFormat'
-            ),
-            new TwigFunction(
-                'generate_hidden_max_file_size',
-                '\PhpMyAdmin\Html\Forms\Fields\MaxFileSize::generate',
-                ['is_safe' => ['html']]
             ),
         ];
     }
