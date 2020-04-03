@@ -472,8 +472,8 @@ class Qbe
      */
     private function _getColumnNamesRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Column:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
         for ($column_index = 0; $column_index < $this->_criteria_column_count; $column_index++) {
             if (isset($this->_criteriaColumnInsert[$column_index])
@@ -503,7 +503,7 @@ class Qbe
             $new_column_count++;
         } // end for
         $this->_new_column_count = $new_column_count;
-        $html_output .= '</tr>';
+
         return $html_output;
     }
 
@@ -514,8 +514,8 @@ class Qbe
      */
     private function _getColumnAliasRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Alias:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
 
         for ($colInd = 0; $colInd < $this->_criteria_column_count; $colInd++) {
@@ -550,8 +550,8 @@ class Qbe
                 . ' value="' . htmlspecialchars($tmp_alias) . '">';
             $html_output .= '</td>';
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
+        }
+
         return $html_output;
     }
 
@@ -562,8 +562,8 @@ class Qbe
      */
     private function _getSortRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Sort:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
 
         for ($colInd = 0; $colInd < $this->_criteria_column_count; $colInd++) {
@@ -608,8 +608,8 @@ class Qbe
                 $selected
             );
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
+        }
+
         return $html_output;
     }
 
@@ -620,8 +620,8 @@ class Qbe
      */
     private function _getSortOrder()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Sort order:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
 
         for ($colInd = 0; $colInd < $this->_criteria_column_count; $colInd++) {
@@ -655,8 +655,8 @@ class Qbe
                 $sortOrder
             );
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
+        }
+
         return $html_output;
     }
 
@@ -667,8 +667,8 @@ class Qbe
      */
     private function _getShowRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Show:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
         for ($column_index = 0; $column_index < $this->_criteria_column_count; $column_index++) {
             if (! empty($this->_criteriaColumnInsert)
@@ -700,8 +700,8 @@ class Qbe
                 . $checked_options . '>';
             $html_output .= '</td>';
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
+        }
+
         return $html_output;
     }
 
@@ -712,8 +712,8 @@ class Qbe
      */
     private function _getCriteriaInputboxRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Criteria:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
         for ($column_index = 0; $column_index < $this->_criteria_column_count; $column_index++) {
             if (! empty($this->_criteriaColumnInsert)
@@ -762,72 +762,8 @@ class Qbe
                 . ' size="20">';
             $html_output .= '</td>';
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
-        return $html_output;
-    }
-
-    /**
-     * Provides footer options for adding/deleting row/columns
-     *
-     * @param string $type Whether row or column
-     *
-     * @return string HTML for footer options
-     */
-    private function _getFootersOptions($type)
-    {
-        return $this->template->render('database/qbe/footer_options', [
-            'type' => $type,
-        ]);
-    }
-
-    /**
-     * Provides search form table's footer options
-     *
-     * @return string HTML for table footer
-     */
-    private function _getTableFooters()
-    {
-        $html_output = '<fieldset class="tblFooters">';
-        $html_output .= $this->_getFootersOptions('row');
-        $html_output .= $this->_getFootersOptions('column');
-        $html_output .= '<div class="floatleft">';
-        $html_output .= '<input class="btn btn-secondary" type="submit" name="modify"'
-            . ' value="' . __('Update Query') . '">';
-        $html_output .= '</div>';
-        $html_output .= '</fieldset>';
-        return $html_output;
-    }
-
-    /**
-     * Provides a select list of database tables
-     *
-     * @return string HTML for table select list
-     */
-    private function _getTablesList()
-    {
-        $html_output = '<div class="floatleft w-100">';
-        $html_output .= '<fieldset>';
-        $html_output .= '<legend>' . __('Use Tables') . '</legend>';
-        // Build the options list for each table name
-        $options = '';
-        $numTableListOptions = 0;
-        foreach ($this->_criteriaTables as $key => $val) {
-            $options .= '<option value="' . htmlspecialchars($key) . '"' . $val . '>'
-                . str_replace(' ', '&nbsp;', htmlspecialchars($key)) . '</option>';
-            $numTableListOptions++;
         }
-        $html_output .= '<select name="TableList[]"'
-            . ' multiple="multiple" id="listTable"'
-            . ' size="' . ($numTableListOptions > 30 ? '15' : '7') . '">';
-        $html_output .= $options;
-        $html_output .= '</select>';
-        $html_output .= '</fieldset>';
-        $html_output .= '<fieldset class="tblFooters">';
-        $html_output .= '<input class="btn btn-secondary" type="submit" name="modify" value="'
-            . __('Update Query') . '">';
-        $html_output .= '</fieldset>';
-        $html_output .= '</div>';
+
         return $html_output;
     }
 
@@ -875,8 +811,8 @@ class Qbe
      */
     private function _getModifyColumnsRow()
     {
-        $html_output = '<tr class="noclick">';
-        $html_output .= '<th>' . __('Modify:') . '</th>';
+        $html_output = '';
+
         $new_column_count = 0;
         for ($column_index = 0; $column_index < $this->_criteria_column_count; $column_index++) {
             if (! empty($this->_criteriaColumnInsert)
@@ -914,8 +850,8 @@ class Qbe
                 $column_index + 1 == $this->_criteria_column_count
             );
             $new_column_count++;
-        } // end for
-        $html_output .= '</tr>';
+        }
+
         return $html_output;
     }
 
@@ -1705,79 +1641,48 @@ class Qbe
         return $sql_query;
     }
 
-    /**
-     * Provides the generated QBE form
-     *
-     * @return string QBE form
-     */
-    public function getSelectionForm()
+    public function getSelectionForm(): string
     {
-        $html_output = '<form action="' . Url::getFromRoute('/database/qbe') . '" method="post" id="formQBE" '
-            . 'class="lock-page">';
-        $html_output .= '<div class="w-100">';
-        $html_output .= '<fieldset>';
+        global $cfgRelation;
 
-        if ($GLOBALS['cfgRelation']['savedsearcheswork']) {
-            $html_output .= $this->_getSavedSearchesField();
-        }
+        $savedSearchesField = $cfgRelation['savedsearcheswork'] ? $this->_getSavedSearchesField() : '';
 
-        $html_output .= '<div class="responsivetable jsresponsive">';
-        $html_output .= '<table class="data" style="width: 100%;">';
-        // Get table's <tr> elements
-        $html_output .= $this->_getColumnNamesRow();
-        $html_output .= $this->_getColumnAliasRow();
-        $html_output .= $this->_getShowRow();
-        $html_output .= $this->_getSortRow();
-        $html_output .= $this->_getSortOrder();
-        $html_output .= $this->_getCriteriaInputboxRow();
-        $html_output .= $this->_getInsDelAndOrCriteriaRows();
-        $html_output .= $this->_getModifyColumnsRow();
-        $html_output .= '</table>';
+        $columnNamesRow = $this->_getColumnNamesRow();
+        $columnAliasRow = $this->_getColumnAliasRow();
+        $showRow = $this->_getShowRow();
+        $sortRow = $this->_getSortRow();
+        $sortOrder = $this->_getSortOrder();
+        $criteriaInputBoxRow = $this->_getCriteriaInputboxRow();
+        $insDelAndOrCriteriaRows = $this->_getInsDelAndOrCriteriaRows();
+        $modifyColumnsRow = $this->_getModifyColumnsRow();
+
         $this->_new_row_count--;
         $url_params = [];
         $url_params['db'] = $this->_db;
         $url_params['criteriaColumnCount'] = $this->_new_column_count;
         $url_params['rows'] = $this->_new_row_count;
-        $html_output .= Url::getHiddenInputs($url_params);
-        $html_output .= '</div>';
-        $html_output .= '</fieldset>';
-        $html_output .= '</div>';
-        // get footers
-        $html_output .= $this->_getTableFooters();
-        // get tables select list
-        $html_output .= $this->_getTablesList();
-        $html_output .= '</form>';
-        $html_output .= '<form action="' . Url::getFromRoute('/database/qbe') . '" method="post" class="lock-page">';
-        $html_output .= Url::getHiddenInputs(['db' => $this->_db]);
-        // get SQL query
-        $html_output .= '<div class="floatleft w-50">';
-        $html_output .= '<fieldset id="tblQbe">';
-        $html_output .= '<legend>'
-            . sprintf(
-                __('SQL query on database <b>%s</b>:'),
-                Generator::getDbLink($this->_db)
-            );
-        $html_output .= '</legend>';
-        $text_dir = 'ltr';
-        $html_output .= '<textarea cols="80" name="sql_query" id="textSqlquery"'
-            . ' rows="' . (count($this->_criteriaTables) > 30 ? '15' : '7') . '"'
-            . ' dir="' . $text_dir . '">';
 
         if (empty($this->_formColumns)) {
             $this->_formColumns = [];
         }
-        $html_output .= $this->_getSQLQuery($this->_formColumns);
+        $sqlQuery = $this->_getSQLQuery($this->_formColumns);
 
-        $html_output .= '</textarea>';
-        $html_output .= '</fieldset>';
-        // displays form's footers
-        $html_output .= '<fieldset class="tblFooters" id="tblQbeFooters">';
-        $html_output .= '<input type="hidden" name="submit_sql" value="1">';
-        $html_output .= '<input class="btn btn-primary" type="submit" value="' . __('Submit Query') . '">';
-        $html_output .= '</fieldset>';
-        $html_output .= '</div>';
-        $html_output .= '</form>';
-        return $html_output;
+        return $this->template->render('database/qbe/selection_form', [
+            'db' => $this->_db,
+            'url_params' => $url_params,
+            'db_link' => Generator::getDbLink($this->_db),
+            'criteria_tables' => $this->_criteriaTables,
+            'saved_searches_field' => $savedSearchesField,
+            'column_names_row' => $columnNamesRow,
+            'column_alias_row' => $columnAliasRow,
+            'show_row' => $showRow,
+            'sort_row' => $sortRow,
+            'sort_order' => $sortOrder,
+            'criteria_input_box_row' => $criteriaInputBoxRow,
+            'ins_del_and_or_criteria_rows' => $insDelAndOrCriteriaRows,
+            'modify_columns_row' => $modifyColumnsRow,
+            'sql_query' => $sqlQuery,
+        ]);
     }
 
     /**
