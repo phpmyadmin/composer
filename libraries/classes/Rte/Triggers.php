@@ -1,7 +1,5 @@
 <?php
-/**
- * Functions for trigger management.
- */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Rte;
@@ -24,39 +22,29 @@ use function sprintf;
 use const ENT_QUOTES;
 
 /**
- * PhpMyAdmin\Rte\Triggers class
+ * Functions for trigger management.
  */
 class Triggers
 {
-    /** @var Export */
-    private $export;
-
-    /** @var General */
-    private $general;
-
-    /** @var RteList */
-    private $rteList;
-
-    /** @var Words */
-    private $words;
-
     /** @var DatabaseInterface */
     private $dbi;
 
     /** @var Template */
     private $template;
 
+    /** @var Response */
+    private $response;
+
     /**
-     * @param DatabaseInterface $dbi DatabaseInterface object
+     * @param DatabaseInterface $dbi      DatabaseInterface instance.
+     * @param Template          $template Template instance.
+     * @param Response          $response Response instance.
      */
-    public function __construct(DatabaseInterface $dbi)
+    public function __construct(DatabaseInterface $dbi, Template $template, $response)
     {
         $this->dbi = $dbi;
-        $this->export = new Export($this->dbi);
-        $this->general = new General($this->dbi);
-        $this->rteList = new RteList($this->dbi);
-        $this->words = new Words();
-        $this->template = new Template();
+        $this->template = $template;
+        $this->response = $response;
     }
 
     /**
@@ -87,19 +75,39 @@ class Triggers
      */
     public function main()
     {
-        global $db, $table;
+        global $db, $table, $pmaThemeImage, $text_dir;
 
         $this->setGlobals();
         /**
          * Process all requests
          */
         $this->handleEditor();
-        $this->export->triggers();
-        /**
-         * Display a list of available triggers
-         */
+        $this->export();
+
         $items = $this->dbi->getTriggers($db, $table);
-        echo $this->rteList->get('trigger', $items);
+        $hasDropPrivilege = Util::currentUserHasPrivilege('TRIGGER', $db);
+        $hasEditPrivilege = Util::currentUserHasPrivilege('TRIGGER', $db, $table);
+        $isAjax = $this->response->isAjax() && empty($_REQUEST['ajax_page_request']);
+
+        $rows = '';
+        foreach ($items as $item) {
+            $rows .= $this->template->render('rte/triggers/row', [
+                'db' => $db,
+                'table' => $table,
+                'trigger' => $item,
+                'has_drop_privilege' => $hasDropPrivilege,
+                'has_edit_privilege' => $hasEditPrivilege,
+                'row_class' => $isAjax ? 'ajaxInsert hide' : '',
+            ]);
+        }
+
+        echo $this->template->render('rte/triggers/list', [
+            'db' => $db,
+            'table' => $table,
+            'items' => $items,
+            'rows' => $rows,
+            'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
+        ]);
 
         echo $this->template->render('rte/triggers/footer', [
             'db' => $db,
@@ -152,14 +160,7 @@ class Triggers
                             // new one. Try to restore the backup query.
                             $result = $this->dbi->tryQuery($create_item);
 
-                            $errors = $this->general->checkResult(
-                                $result,
-                                __(
-                                    'Sorry, we failed to restore the dropped trigger.'
-                                ),
-                                $create_item,
-                                $errors
-                            );
+                            $errors = $this->checkResult($result, $create_item, $errors);
                         } else {
                             $message = Message::success(
                                 __('Trigger %1$s has been modified.')
@@ -208,8 +209,8 @@ class Triggers
             }
 
             $output = Generator::getMessage($message, $sql_query);
-            $response = Response::getInstance();
-            if ($response->isAjax()) {
+
+            if ($this->response->isAjax()) {
                 if ($message->isSuccess()) {
                     $items = $this->dbi->getTriggers($db, $table, '');
                     $trigger = false;
@@ -223,8 +224,18 @@ class Triggers
                         || ($trigger !== false && $table == $trigger['table'])
                     ) {
                         $insert = true;
-                        $response->addJSON('new_row', $this->rteList->getTriggerRow($trigger));
-                        $response->addJSON(
+                        $this->response->addJSON(
+                            'new_row',
+                            $this->template->render('rte/triggers/row', [
+                                'db' => $db,
+                                'table' => $table,
+                                'trigger' => $trigger,
+                                'has_drop_privilege' => Util::currentUserHasPrivilege('TRIGGER', $db),
+                                'has_edit_privilege' => Util::currentUserHasPrivilege('TRIGGER', $db, $table),
+                                'row_class' => '',
+                            ])
+                        );
+                        $this->response->addJSON(
                             'name',
                             htmlspecialchars(
                                 mb_strtoupper(
@@ -233,11 +244,11 @@ class Triggers
                             )
                         );
                     }
-                    $response->addJSON('insert', $insert);
-                    $response->addJSON('message', $output);
+                    $this->response->addJSON('insert', $insert);
+                    $this->response->addJSON('message', $output);
                 } else {
-                    $response->addJSON('message', $message);
-                    $response->setRequestStatus(false);
+                    $this->response->addJSON('message', $message);
+                    $this->response->setRequestStatus(false);
                 }
                 exit;
             }
@@ -252,12 +263,12 @@ class Triggers
             && (! empty($_REQUEST['add_item'])
             || ! empty($_REQUEST['edit_item']))) // FIXME: this must be simpler than that
         ) {
-            $mode = null;
+            $mode = '';
             $item = null;
-            $title = null;
+            $title = '';
             // Get the data for the form (if any)
             if (! empty($_REQUEST['add_item'])) {
-                $title = $this->words->get('add');
+                $title = __('Add trigger');
                 $item = $this->getDataFromRequest();
                 $mode = 'add';
             } elseif (! empty($_REQUEST['edit_item'])) {
@@ -274,7 +285,7 @@ class Triggers
                 }
                 $mode = 'edit';
             }
-            $this->general->sendEditor('TRI', $mode, $item, $title, $db);
+            $this->sendEditor($mode, $item, $title, $db);
         }
     }
 
@@ -351,7 +362,6 @@ class Triggers
         global $db, $table, $event_manipulations, $action_timings;
 
         $modeToUpper = mb_strtoupper($mode);
-        $response = Response::getInstance();
 
         // Escape special characters
         $need_escape = [
@@ -447,7 +457,7 @@ class Triggers
         $retval .= "</tr>\n";
         $retval .= "</table>\n";
         $retval .= "</fieldset>\n";
-        if ($response->isAjax()) {
+        if ($this->response->isAjax()) {
             $retval .= "<input type='hidden' name='editor_process_" . $mode . "'\n";
             $retval .= "       value='true'>\n";
             $retval .= "<input type='hidden' name='ajax_request' value='true'>\n";
@@ -519,5 +529,127 @@ class Triggers
         }
 
         return $query;
+    }
+
+    /**
+     * @param resource|bool $result          Query result
+     * @param string        $createStatement Query
+     * @param array         $errors          Errors
+     *
+     * @return array
+     */
+    private function checkResult($result, $createStatement, array $errors)
+    {
+        if ($result) {
+            return $errors;
+        }
+
+        // OMG, this is really bad! We dropped the query,
+        // failed to create a new one
+        // and now even the backup query does not execute!
+        // This should not happen, but we better handle
+        // this just in case.
+        $errors[] = __('Sorry, we failed to restore the dropped trigger.') . '<br>'
+            . __('The backed up query was:')
+            . '"' . htmlspecialchars($createStatement) . '"<br>'
+            . __('MySQL said: ') . $this->dbi->getError();
+
+        return $errors;
+    }
+
+    /**
+     * Send editor via ajax or by echoing.
+     *
+     * @param string      $mode  Editor mode 'add' or 'edit'
+     * @param array|false $item  Data necessary to create the editor
+     * @param string      $title Title of the editor
+     * @param string      $db    Database
+     *
+     * @return void
+     */
+    private function sendEditor($mode, $item, $title, $db)
+    {
+        if ($item !== false) {
+            $editor = $this->getEditorForm($mode, $item);
+            if ($this->response->isAjax()) {
+                $this->response->addJSON('message', $editor);
+                $this->response->addJSON('title', $title);
+            } else {
+                echo "\n\n<h2>" . $title . "</h2>\n\n" . $editor;
+                unset($_POST);
+            }
+            exit;
+        } else {
+            $message  = __('Error in processing request:') . ' ';
+            $message .= sprintf(
+                __('No trigger with name %1$s found in database %2$s.'),
+                htmlspecialchars(Util::backquote($_REQUEST['item_name'])),
+                htmlspecialchars(Util::backquote($db))
+            );
+            $message = Message::error($message);
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $message);
+                exit;
+            } else {
+                $message->display();
+            }
+        }
+    }
+
+    private function export(): void
+    {
+        global $db, $table;
+
+        if (empty($_GET['export_item']) || empty($_GET['item_name'])) {
+            return;
+        }
+
+        $itemName = $_GET['item_name'];
+        $triggers = $this->dbi->getTriggers($db, $table, '');
+        $exportData = false;
+
+        foreach ($triggers as $trigger) {
+            if ($trigger['name'] === $itemName) {
+                $exportData = $trigger['create'];
+                break;
+            }
+        }
+
+        $itemName = htmlspecialchars(Util::backquote($_GET['item_name']));
+        if ($exportData !== false) {
+            $exportData = htmlspecialchars(trim($exportData));
+            $title = sprintf(__('Export of trigger %s'), $itemName);
+
+            if ($this->response->isAjax()) {
+                $this->response->addJSON('message', $exportData);
+                $this->response->addJSON('title', $title);
+
+                exit;
+            }
+
+            $exportData = '<textarea cols="40" rows="15" style="width: 100%;">'
+                . $exportData . '</textarea>';
+            echo "<fieldset>\n" . '<legend>' . $title . "</legend>\n"
+                . $exportData . "</fieldset>\n";
+
+            return;
+        }
+
+        $message = sprintf(
+            __('Error in processing request: No trigger with name %1$s found in database %2$s.'),
+            $itemName,
+            htmlspecialchars(Util::backquote($db))
+        );
+        $message = Message::error($message);
+
+        if ($this->response->isAjax()) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', $message);
+
+            exit;
+        }
+
+        $message->display();
     }
 }

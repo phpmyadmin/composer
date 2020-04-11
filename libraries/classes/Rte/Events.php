@@ -1,7 +1,5 @@
 <?php
-/**
- * Functions for event management.
- */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Rte;
@@ -25,39 +23,29 @@ use function sprintf;
 use const ENT_QUOTES;
 
 /**
- * PhpMyAdmin\Rte\Events class
+ * Functions for event management.
  */
 class Events
 {
-    /** @var Export */
-    private $export;
-
-    /** @var General */
-    private $general;
-
-    /** @var RteList */
-    private $rteList;
-
-    /** @var Words */
-    private $words;
-
     /** @var DatabaseInterface */
     private $dbi;
 
     /** @var Template */
     private $template;
 
+    /** @var Response */
+    private $response;
+
     /**
-     * @param DatabaseInterface $dbi DatabaseInterface object
+     * @param DatabaseInterface $dbi      DatabaseInterface instance.
+     * @param Template          $template Template instance.
+     * @param Response          $response Response instance.
      */
-    public function __construct(DatabaseInterface $dbi)
+    public function __construct(DatabaseInterface $dbi, Template $template, $response)
     {
         $this->dbi = $dbi;
-        $this->export = new Export($this->dbi);
-        $this->general = new General($this->dbi);
-        $this->rteList = new RteList($this->dbi);
-        $this->words = new Words();
-        $this->template = new Template();
+        $this->template = $template;
+        $this->response = $response;
     }
 
     /**
@@ -111,19 +99,42 @@ class Events
      */
     public function main()
     {
-        global $db, $table;
+        global $db, $table, $pmaThemeImage, $text_dir;
 
         $this->setGlobals();
         /**
          * Process all requests
          */
         $this->handleEditor();
-        $this->export->events();
-        /**
-         * Display a list of available events
-         */
+        $this->export();
+
         $items = $this->dbi->getEvents($db);
-        echo $this->rteList->get('event', $items);
+        $hasPrivilege = Util::currentUserHasPrivilege('EVENT', $db);
+        $isAjax = $this->response->isAjax() && empty($_REQUEST['ajax_page_request']);
+
+        $rows = '';
+        foreach ($items as $item) {
+            $sqlDrop = sprintf(
+                'DROP EVENT IF EXISTS %s',
+                Util::backquote($item['name'])
+            );
+            $rows .= $this->template->render('rte/events/row', [
+                'db' => $db,
+                'table' => $table,
+                'event' => $item,
+                'has_privilege' => $hasPrivilege,
+                'sql_drop' => $sqlDrop,
+                'row_class' => $isAjax ? 'ajaxInsert hide' : '',
+            ]);
+        }
+
+        echo $this->template->render('rte/events/list', [
+            'db' => $db,
+            'table' => $table,
+            'items' => $items,
+            'rows' => $rows,
+            'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
+        ]);
 
         echo $this->template->render('rte/events/footer', [
             'db' => $db,
@@ -140,7 +151,7 @@ class Events
      */
     public function handleEditor()
     {
-        global $db, $errors, $message;
+        global $db, $table, $errors, $message;
 
         if (! empty($_POST['editor_process_add'])
             || ! empty($_POST['editor_process_edit'])
@@ -181,14 +192,7 @@ class Events
                             // We dropped the old item, but were unable to create
                             // the new one. Try to restore the backup query
                             $result = $this->dbi->tryQuery($create_item);
-                            $errors = $this->general->checkResult(
-                                $result,
-                                __(
-                                    'Sorry, we failed to restore the dropped event.'
-                                ),
-                                $create_item,
-                                $errors
-                            );
+                            $errors = $this->checkResult($result, $create_item, $errors);
                         } else {
                             $message = Message::success(
                                 __('Event %1$s has been modified.')
@@ -237,25 +241,39 @@ class Events
             }
 
             $output = Generator::getMessage($message, $sql_query);
-            $response = Response::getInstance();
-            if ($response->isAjax()) {
+
+            if ($this->response->isAjax()) {
                 if ($message->isSuccess()) {
                     $events = $this->dbi->getEvents($db, $_POST['item_name']);
                     $event = $events[0];
-                    $response->addJSON(
+                    $this->response->addJSON(
                         'name',
                         htmlspecialchars(
                             mb_strtoupper($_POST['item_name'])
                         )
                     );
                     if (! empty($event)) {
-                        $response->addJSON('new_row', $this->rteList->getEventRow($event));
+                        $sqlDrop = sprintf(
+                            'DROP EVENT IF EXISTS %s',
+                            Util::backquote($event['name'])
+                        );
+                        $this->response->addJSON(
+                            'new_row',
+                            $this->template->render('rte/events/row', [
+                                'db' => $db,
+                                'table' => $table,
+                                'event' => $event,
+                                'has_privilege' => Util::currentUserHasPrivilege('EVENT', $db),
+                                'sql_drop' => $sqlDrop,
+                                'row_class' => '',
+                            ])
+                        );
                     }
-                    $response->addJSON('insert', ! empty($event));
-                    $response->addJSON('message', $output);
+                    $this->response->addJSON('insert', ! empty($event));
+                    $this->response->addJSON('message', $output);
                 } else {
-                    $response->setRequestStatus(false);
-                    $response->addJSON('message', $message);
+                    $this->response->setRequestStatus(false);
+                    $this->response->addJSON('message', $message);
                 }
                 exit;
             }
@@ -271,15 +289,15 @@ class Events
             || ! empty($_POST['item_changetype'])))
         ) { // FIXME: this must be simpler than that
             $operation = '';
-            $title = null;
+            $title = '';
             $item = null;
-            $mode = null;
+            $mode = '';
             if (! empty($_POST['item_changetype'])) {
                 $operation = 'change';
             }
             // Get the data for the form (if any)
             if (! empty($_REQUEST['add_item'])) {
-                $title = $this->words->get('add');
+                $title = __('Add event');
                 $item = $this->getDataFromRequest();
                 $mode = 'add';
             } elseif (! empty($_REQUEST['edit_item'])) {
@@ -297,7 +315,7 @@ class Events
                 }
                 $mode = 'edit';
             }
-            $this->general->sendEditor('EVN', $mode, $item, $title, $db, $operation);
+            $this->sendEditor($mode, $item, $title, $db, $operation);
         }
     }
 
@@ -402,8 +420,6 @@ class Events
 
         $modeToUpper = mb_strtoupper($mode);
 
-        $response = Response::getInstance();
-
         // Escape special characters
         $need_escape = [
             'item_original_name',
@@ -476,7 +492,7 @@ class Events
         $retval .= "<tr>\n";
         $retval .= '    <td>' . __('Event type') . "</td>\n";
         $retval .= "    <td>\n";
-        if ($response->isAjax()) {
+        if ($this->response->isAjax()) {
             $retval .= "        <select name='item_type'>";
             foreach ($event_type as $key => $value) {
                 $selected = '';
@@ -567,7 +583,7 @@ class Events
         $retval .= "</tr>\n";
         $retval .= "</table>\n";
         $retval .= "</fieldset>\n";
-        if ($response->isAjax()) {
+        if ($this->response->isAjax()) {
             $retval .= "<input type='hidden' name='editor_process_" . $mode . "'\n";
             $retval .= "       value='true'>\n";
             $retval .= "<input type='hidden' name='ajax_request' value='true'>\n";
@@ -711,5 +727,124 @@ class Events
             $options,
             'Functions.slidingMessage(data.sql_query);'
         );
+    }
+
+    /**
+     * @param resource|bool $result          Query result
+     * @param string|null   $createStatement Query
+     * @param array         $errors          Errors
+     *
+     * @return array
+     */
+    private function checkResult($result, $createStatement, array $errors)
+    {
+        if ($result) {
+            return $errors;
+        }
+
+        // OMG, this is really bad! We dropped the query,
+        // failed to create a new one
+        // and now even the backup query does not execute!
+        // This should not happen, but we better handle
+        // this just in case.
+        $errors[] = __('Sorry, we failed to restore the dropped event.') . '<br>'
+            . __('The backed up query was:')
+            . '"' . htmlspecialchars((string) $createStatement) . '"<br>'
+            . __('MySQL said: ') . $this->dbi->getError();
+
+        return $errors;
+    }
+
+    /**
+     * Send editor via ajax or by echoing.
+     *
+     * @param string      $mode      Editor mode 'add' or 'edit'
+     * @param array|false $item      Data necessary to create the editor
+     * @param string      $title     Title of the editor
+     * @param string      $db        Database
+     * @param string      $operation Operation 'change' or ''
+     *
+     * @return void
+     */
+    private function sendEditor($mode, $item, $title, $db, $operation)
+    {
+        if ($item !== false) {
+            $editor = $this->getEditorForm($mode, $operation, $item);
+            if ($this->response->isAjax()) {
+                $this->response->addJSON('message', $editor);
+                $this->response->addJSON('title', $title);
+            } else {
+                echo "\n\n<h2>" . $title . "</h2>\n\n" . $editor;
+                unset($_POST);
+            }
+            exit;
+        } else {
+            $message  = __('Error in processing request:') . ' ';
+            $message .= sprintf(
+                __('No event with name %1$s found in database %2$s.'),
+                htmlspecialchars(Util::backquote($_REQUEST['item_name'])),
+                htmlspecialchars(Util::backquote($db))
+            );
+            $message = Message::error($message);
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $message);
+                exit;
+            } else {
+                $message->display();
+            }
+        }
+    }
+
+    private function export(): void
+    {
+        global $db;
+
+        if (empty($_GET['export_item']) || empty($_GET['item_name'])) {
+            return;
+        }
+
+        $itemName = $_GET['item_name'];
+        $exportData = $this->dbi->getDefinition($db, 'EVENT', $itemName);
+
+        if (! $exportData) {
+            $exportData = false;
+        }
+
+        $itemName = htmlspecialchars(Util::backquote($_GET['item_name']));
+        if ($exportData !== false) {
+            $exportData = htmlspecialchars(trim($exportData));
+            $title = sprintf(__('Export of event %s'), $itemName);
+
+            if ($this->response->isAjax()) {
+                $this->response->addJSON('message', $exportData);
+                $this->response->addJSON('title', $title);
+
+                exit;
+            }
+
+            $exportData = '<textarea cols="40" rows="15" style="width: 100%;">'
+                . $exportData . '</textarea>';
+            echo "<fieldset>\n" . '<legend>' . $title . "</legend>\n"
+                . $exportData . "</fieldset>\n";
+
+            return;
+        }
+
+        $message = sprintf(
+            __('Error in processing request: No event with name %1$s found in database %2$s.'),
+            $itemName,
+            htmlspecialchars(Util::backquote($db))
+        );
+        $message = Message::error($message);
+
+        if ($this->response->isAjax()) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', $message);
+
+            exit;
+        }
+
+        $message->display();
     }
 }
