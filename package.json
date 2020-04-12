@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "codemirror": "5.52.0",
-    "jquery": "3.4.1",
-    "jquery-migrate": "3.1.0",
+    "codemirror": "5.52.2",
+    "jquery": "3.5.0",
+    "jquery-migrate": "3.2.0",
     "jquery-mousewheel": "3.1.13",
     "jquery-ui": "1.12.1",
     "jquery-ui-timepicker-addon": "1.6.3",
@@ -21,7 +21,7 @@
     "jquery.event.drag": "2.2.2",
     "js-cookie": "2.2.1",
     "sass": "^1.26.3",
-    "popper.js": "^1.16.0",
+    "popper.js": "^1.16.1",
     "tracekit": "0.4.5",
     "u2f-api-polyfill": "0.4.4",
     "updated-jqplot": "1.0.9",
@@ -29,11 +29,11 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-plugin-no-jquery": "^2.3.1",
-    "stylelint": "^13.2.1",
+    "eslint-plugin-no-jquery": "^2.3.2",
+    "stylelint": "^13.3.2",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-config-standard": "^20.0.0",
-    "stylelint-scss": "^3.14.2"
+    "stylelint-scss": "^3.16.1"
   },
   "resolutions": {
     "kind-of": "^6.0.3"
