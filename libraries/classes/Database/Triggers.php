@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpMyAdmin\Rte;
+namespace PhpMyAdmin\Database;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
@@ -91,7 +91,7 @@ class Triggers
 
         $rows = '';
         foreach ($items as $item) {
-            $rows .= $this->template->render('rte/triggers/row', [
+            $rows .= $this->template->render('database/triggers/row', [
                 'db' => $db,
                 'table' => $table,
                 'trigger' => $item,
@@ -101,7 +101,7 @@ class Triggers
             ]);
         }
 
-        echo $this->template->render('rte/triggers/list', [
+        echo $this->template->render('database/triggers/list', [
             'db' => $db,
             'table' => $table,
             'items' => $items,
@@ -109,7 +109,7 @@ class Triggers
             'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
         ]);
 
-        echo $this->template->render('rte/triggers/footer', [
+        echo $this->template->render('database/triggers/footer', [
             'db' => $db,
             'table' => $table,
             'has_privilege' => Util::currentUserHasPrivilege('TRIGGER', $db, $table),
@@ -132,7 +132,8 @@ class Triggers
 
             $item_query = $this->getQueryFromRequest();
 
-            if (! count($errors)) { // set by PhpMyAdmin\Rte\Routines::getQueryFromRequest()
+            // set by getQueryFromRequest()
+            if (! count($errors)) {
                 // Execute the created query
                 if (! empty($_POST['editor_process_edit'])) {
                     // Backup the old trigger, in case something goes wrong
@@ -226,7 +227,7 @@ class Triggers
                         $insert = true;
                         $this->response->addJSON(
                             'new_row',
-                            $this->template->render('rte/triggers/row', [
+                            $this->template->render('database/triggers/row', [
                                 'db' => $db,
                                 'table' => $table,
                                 'trigger' => $trigger,

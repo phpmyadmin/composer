@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpMyAdmin\Rte;
+namespace PhpMyAdmin\Database;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
@@ -118,7 +118,7 @@ class Events
                 'DROP EVENT IF EXISTS %s',
                 Util::backquote($item['name'])
             );
-            $rows .= $this->template->render('rte/events/row', [
+            $rows .= $this->template->render('database/events/row', [
                 'db' => $db,
                 'table' => $table,
                 'event' => $item,
@@ -128,7 +128,7 @@ class Events
             ]);
         }
 
-        echo $this->template->render('rte/events/list', [
+        echo $this->template->render('database/events/list', [
             'db' => $db,
             'table' => $table,
             'items' => $items,
@@ -136,7 +136,7 @@ class Events
             'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
         ]);
 
-        echo $this->template->render('rte/events/footer', [
+        echo $this->template->render('database/events/footer', [
             'db' => $db,
             'table' => $table,
             'has_privilege' => Util::currentUserHasPrivilege('EVENT', $db, $table),
@@ -160,7 +160,8 @@ class Events
 
             $item_query = $this->getQueryFromRequest();
 
-            if (! count($errors)) { // set by PhpMyAdmin\Rte\Routines::getQueryFromRequest()
+            // set by getQueryFromRequest()
+            if (! count($errors)) {
                 // Execute the created query
                 if (! empty($_POST['editor_process_edit'])) {
                     // Backup the old trigger, in case something goes wrong
@@ -259,7 +260,7 @@ class Events
                         );
                         $this->response->addJSON(
                             'new_row',
-                            $this->template->render('rte/events/row', [
+                            $this->template->render('database/events/row', [
                                 'db' => $db,
                                 'table' => $table,
                                 'event' => $event,

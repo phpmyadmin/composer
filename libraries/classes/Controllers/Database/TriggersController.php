@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Database;
 
 use PhpMyAdmin\Common;
-use PhpMyAdmin\Rte\Triggers;
+use PhpMyAdmin\Database\Triggers;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use function in_array;
@@ -20,11 +20,9 @@ class TriggersController extends AbstractController
 {
     public function index(): void
     {
-        global $_PMA_RTE, $db, $table, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats;
+        global $db, $table, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats;
         global $db_is_system_schema, $tooltip_truename, $tooltip_aliasname, $pos, $url_query;
         global $errors, $titles;
-
-        $_PMA_RTE = 'TRI';
 
         if (! $this->response->isAjax()) {
             /**

@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Database;
 
 use PhpMyAdmin\Common;
-use PhpMyAdmin\Rte\Events;
+use PhpMyAdmin\Database\Events;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use function in_array;
@@ -20,10 +20,8 @@ class EventsController extends AbstractController
 {
     public function index(): void
     {
-        global $_PMA_RTE, $table, $db, $tables, $num_tables, $total_num_tables, $sub_part, $errors, $titles;
+        global $table, $db, $tables, $num_tables, $total_num_tables, $sub_part, $errors, $titles;
         global $is_show_stats, $db_is_system_schema, $tooltip_truename, $tooltip_aliasname, $pos, $url_query;
-
-        $_PMA_RTE = 'EVN';
 
         if (! $this->response->isAjax()) {
             /**

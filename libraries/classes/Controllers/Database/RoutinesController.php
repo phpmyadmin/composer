@@ -8,9 +8,9 @@ namespace PhpMyAdmin\Controllers\Database;
 
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Common;
+use PhpMyAdmin\Database\Routines;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Rte\Routines;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -40,15 +40,13 @@ class RoutinesController extends AbstractController
 
     public function index(): void
     {
-        global $_PMA_RTE, $db, $table, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats;
+        global $db, $table, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats;
         global $db_is_system_schema, $tooltip_truename, $tooltip_aliasname, $pos, $url_query;
         global $errors, $titles;
 
         $params = ['type' => $_REQUEST['type'] ?? null];
 
         $this->checkUserPrivileges->getPrivileges();
-
-        $_PMA_RTE = 'RTN';
 
         if (! $this->response->isAjax()) {
             /**
