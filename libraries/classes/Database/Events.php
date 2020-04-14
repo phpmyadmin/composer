@@ -27,6 +27,34 @@ use const ENT_QUOTES;
  */
 class Events
 {
+    /** @var array<string, array<int, string>> */
+    private $status = [
+        'query' => ['ENABLE', 'DISABLE', 'DISABLE ON SLAVE'],
+        'display' => ['ENABLED', 'DISABLED', 'SLAVESIDE_DISABLED'],
+    ];
+
+    /** @var array<int, string> */
+    private $type = ['RECURRING', 'ONE TIME'];
+
+    /** @var array<int, string> */
+    private $interval = [
+        'YEAR',
+        'QUARTER',
+        'MONTH',
+        'DAY',
+        'HOUR',
+        'MINUTE',
+        'WEEK',
+        'SECOND',
+        'YEAR_MONTH',
+        'DAY_HOUR',
+        'DAY_MINUTE',
+        'DAY_SECOND',
+        'HOUR_MINUTE',
+        'HOUR_SECOND',
+        'MINUTE_SECOND',
+    ];
+
     /** @var DatabaseInterface */
     private $dbi;
 
@@ -48,99 +76,22 @@ class Events
         $this->response = $response;
     }
 
-    /**
-     * Sets required globals
-     *
-     * @return void
-     */
-    public function setGlobals()
+    public function main(): void
     {
-        global $event_status, $event_type, $event_interval;
+        global $db, $pmaThemeImage, $text_dir;
 
-        $event_status = [
-            'query' => [
-                'ENABLE',
-                'DISABLE',
-                'DISABLE ON SLAVE',
-            ],
-            'display' => [
-                'ENABLED',
-                'DISABLED',
-                'SLAVESIDE_DISABLED',
-            ],
-        ];
-        $event_type = [
-            'RECURRING',
-            'ONE TIME',
-        ];
-        $event_interval = [
-            'YEAR',
-            'QUARTER',
-            'MONTH',
-            'DAY',
-            'HOUR',
-            'MINUTE',
-            'WEEK',
-            'SECOND',
-            'YEAR_MONTH',
-            'DAY_HOUR',
-            'DAY_MINUTE',
-            'DAY_SECOND',
-            'HOUR_MINUTE',
-            'HOUR_SECOND',
-            'MINUTE_SECOND',
-        ];
-    }
-
-    /**
-     * Main function for the events functionality
-     *
-     * @return void
-     */
-    public function main()
-    {
-        global $db, $table, $pmaThemeImage, $text_dir;
-
-        $this->setGlobals();
-        /**
-         * Process all requests
-         */
         $this->handleEditor();
         $this->export();
 
         $items = $this->dbi->getEvents($db);
-        $hasPrivilege = Util::currentUserHasPrivilege('EVENT', $db);
-        $isAjax = $this->response->isAjax() && empty($_REQUEST['ajax_page_request']);
 
-        $rows = '';
-        foreach ($items as $item) {
-            $sqlDrop = sprintf(
-                'DROP EVENT IF EXISTS %s',
-                Util::backquote($item['name'])
-            );
-            $rows .= $this->template->render('database/events/row', [
-                'db' => $db,
-                'table' => $table,
-                'event' => $item,
-                'has_privilege' => $hasPrivilege,
-                'sql_drop' => $sqlDrop,
-                'row_class' => $isAjax ? 'ajaxInsert hide' : '',
-            ]);
-        }
-
-        echo $this->template->render('database/events/list', [
+        echo $this->template->render('database/events/index', [
             'db' => $db,
-            'table' => $table,
             'items' => $items,
-            'rows' => $rows,
             'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
-        ]);
-
-        echo $this->template->render('database/events/footer', [
-            'db' => $db,
-            'table' => $table,
-            'has_privilege' => Util::currentUserHasPrivilege('EVENT', $db, $table),
+            'has_privilege' => Util::currentUserHasPrivilege('EVENT', $db),
             'toggle_button' => $this->getFooterToggleButton(),
+            'is_ajax' => $this->response->isAjax() && empty($_REQUEST['ajax_page_request']),
         ]);
     }
 
@@ -417,7 +368,7 @@ class Events
      */
     public function getEditorForm($mode, $operation, array $item)
     {
-        global $db, $table, $event_status, $event_type, $event_interval;
+        global $db, $table;
 
         $modeToUpper = mb_strtoupper($mode);
 
@@ -479,7 +430,7 @@ class Events
         $retval .= '    <td>' . __('Status') . "</td>\n";
         $retval .= "    <td>\n";
         $retval .= "        <select name='item_status'>\n";
-        foreach ($event_status['display'] as $key => $value) {
+        foreach ($this->status['display'] as $key => $value) {
             $selected = '';
             if (! empty($item['item_status']) && $item['item_status'] == $value) {
                 $selected = " selected='selected'";
@@ -495,7 +446,7 @@ class Events
         $retval .= "    <td>\n";
         if ($this->response->isAjax()) {
             $retval .= "        <select name='item_type'>";
-            foreach ($event_type as $key => $value) {
+            foreach ($this->type as $key => $value) {
                 $selected = '';
                 if (! empty($item['item_type']) && $item['item_type'] == $value) {
                     $selected = " selected='selected'";
@@ -532,7 +483,7 @@ class Events
         $retval .= "               name='item_interval_value'\n";
         $retval .= "               value='" . $item['item_interval_value'] . "'>\n";
         $retval .= "        <select class='w-50' name='item_interval_field'>";
-        foreach ($event_interval as $key => $value) {
+        foreach ($this->interval as $key => $value) {
             $selected = '';
             if (! empty($item['item_interval_field'])
                 && $item['item_interval_field'] == $value
@@ -607,7 +558,7 @@ class Events
      */
     public function getQueryFromRequest()
     {
-        global $errors, $event_status, $event_type, $event_interval;
+        global $errors;
 
         $query = 'CREATE ';
         if (! empty($_POST['item_definer'])) {
@@ -628,12 +579,12 @@ class Events
         }
         $query .= 'ON SCHEDULE ';
         if (! empty($_POST['item_type'])
-            && in_array($_POST['item_type'], $event_type)
+            && in_array($_POST['item_type'], $this->type)
         ) {
             if ($_POST['item_type'] == 'RECURRING') {
                 if (! empty($_POST['item_interval_value'])
                     && ! empty($_POST['item_interval_field'])
-                    && in_array($_POST['item_interval_field'], $event_interval)
+                    && in_array($_POST['item_interval_field'], $this->interval)
                 ) {
                     $query .= 'EVERY ' . intval($_POST['item_interval_value']) . ' ';
                     $query .= $_POST['item_interval_field'] . ' ';
@@ -670,9 +621,9 @@ class Events
         }
         $query .= 'PRESERVE ';
         if (! empty($_POST['item_status'])) {
-            foreach ($event_status['display'] as $key => $value) {
+            foreach ($this->status['display'] as $key => $value) {
                 if ($value == $_POST['item_status']) {
-                    $query .= $event_status['query'][$key] . ' ';
+                    $query .= $this->status['query'][$key] . ' ';
                     break;
                 }
             }
