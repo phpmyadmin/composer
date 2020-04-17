@@ -13,14 +13,12 @@ use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use function count;
 use function explode;
-use function htmlentities;
 use function htmlspecialchars;
 use function in_array;
 use function intval;
 use function mb_strpos;
 use function mb_strtoupper;
 use function sprintf;
-use const ENT_QUOTES;
 
 /**
  * Functions for event management.
@@ -74,25 +72,6 @@ class Events
         $this->dbi = $dbi;
         $this->template = $template;
         $this->response = $response;
-    }
-
-    public function main(): void
-    {
-        global $db, $pmaThemeImage, $text_dir;
-
-        $this->handleEditor();
-        $this->export();
-
-        $items = $this->dbi->getEvents($db);
-
-        echo $this->template->render('database/events/index', [
-            'db' => $db,
-            'items' => $items,
-            'select_all_arrow_src' => $pmaThemeImage . 'arrow_' . $text_dir . '.png',
-            'has_privilege' => Util::currentUserHasPrivilege('EVENT', $db),
-            'toggle_button' => $this->getFooterToggleButton(),
-            'is_ajax' => $this->response->isAjax() && empty($_REQUEST['ajax_page_request']),
-        ]);
     }
 
     /**
@@ -483,26 +462,33 @@ class Events
         return $query;
     }
 
-    private function getFooterToggleButton(): string
+    private function getEventSchedulerStatus(): bool
     {
-        global $db, $table;
-
-        $es_state = $this->dbi->fetchValue(
-            "SHOW GLOBAL VARIABLES LIKE 'event_scheduler'",
+        $state = $this->dbi->fetchValue(
+            'SHOW GLOBAL VARIABLES LIKE \'event_scheduler\'',
             0,
             1
         );
-        $es_state = mb_strtolower($es_state);
+        $state = strtoupper($state);
+
+        return $state === 'ON' || $state === '1';
+    }
+
+    public function getFooterToggleButton(): string
+    {
+        global $db, $table;
+
+        $state = $this->getEventSchedulerStatus();
         $options = [
             0 => [
                 'label' => __('OFF'),
                 'value' => 'SET GLOBAL event_scheduler="OFF"',
-                'selected' => $es_state != 'on',
+                'selected' => ! $state,
             ],
             1 => [
                 'label' => __('ON'),
                 'value' => 'SET GLOBAL event_scheduler="ON"',
-                'selected' => $es_state == 'on',
+                'selected' => $state,
             ],
         ];
 
@@ -588,7 +574,7 @@ class Events
         }
     }
 
-    private function export(): void
+    public function export(): void
     {
         global $db;
 
