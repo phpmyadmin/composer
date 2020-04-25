@@ -374,6 +374,7 @@ table {
     margin: 0.1em;
     vertical-align: middle;
     text-shadow: 0 1px 0 #fff;
+    touch-action: manipulation;
   }
 }
 
@@ -2011,6 +2012,10 @@ input#input_import_file {
       margin: 0.1em;
     }
   }
+}
+
+#tablestructure tbody label {
+  margin: 0.3rem 0;
 }
 
 #structure-action-links a {

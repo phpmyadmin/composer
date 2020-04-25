@@ -140,6 +140,7 @@ table {
     padding: 0.1em 0.5em 0.1em 0.5em;
     margin: 0.1em;
     vertical-align: top;
+    touch-action: manipulation;
   }
 }
 
@@ -1632,6 +1633,10 @@ input#input_import_file {
     padding: 0.3em;
     margin: 0.1em;
   }
+}
+
+#tablestructure tbody label {
+  margin: 0.3rem 0;
 }
 
 #structure-action-links a {
