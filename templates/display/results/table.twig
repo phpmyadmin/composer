@@ -40,20 +40,10 @@
           </div>
         </td>
         <td class="navigation_goto">
-          {# if displaying a VIEW, $unlim_num_rows could be zero because #}
-          {# of $cfg['MaxExactCountViews']; in this case, avoid passing #}
-          {# the 5th parameter to Functions.checkFormElementInRange() #}
-          {# (this means we can't validate the upper limit) #}
-          <form action="{{ url('/sql') }}" method="post" onsubmit="return (Functions.checkFormElementInRange(this, 'session_max_rows', '
-            {{- '%d is not valid row number.'|trans|replace({'\'': '\\\''}) -}}
-            ', 1) && Functions.checkFormElementInRange(this, 'pos', '
-            {{- '%d is not valid row number.'|trans|replace({'\'': '\\\''}) -}}
-            ', 0
-            {{- unlim_num_rows > 0 ? ', ' ~ (unlim_num_rows - 1) -}}
-            ));">
-
+          <form action="{{ url('/sql') }}" method="post" id="maxRowsForm">
             {{ get_hidden_fields(navigation.hidden_fields|merge({
-              'pos': navigation.pos
+              'pos': navigation.pos,
+              'unlim_num_rows': unlim_num_rows
             })) }}
 
             <label for="sessionMaxRowsSelect">{% trans 'Number of rows:' %}</label>
@@ -239,4 +229,55 @@
 
 {{ navigation_html }}
 
-{{ operations|raw }}
+{% if operations is not empty %}
+  <fieldset class="print_ignore">
+    <legend>{% trans 'Query results operations' %}</legend>
+
+    {% if operations.has_print_link %}
+      {{ link_or_button(
+        '#',
+        get_icon('b_print', 'Print'|trans, true),
+        {'id': 'printView', 'class': 'btn'},
+        'print_view'
+      ) }}
+
+      {{ link_or_button(
+        '#',
+        get_icon('b_insrow', 'Copy to clipboard'|trans, true),
+        {'id': 'copyToClipBoard', 'class': 'btn'}
+      ) }}
+    {% endif %}
+
+    {% if not operations.has_procedure %}
+      {% if operations.has_export_link %}
+        {{ link_or_button(
+          url('/table/export', operations.url_params),
+          get_icon('b_tblexport', 'Export'|trans, true),
+          {'class': 'btn'}
+        ) }}
+
+        {{ link_or_button(
+          url('/table/chart', operations.url_params),
+          get_icon('b_chart', 'Display chart'|trans, true),
+          {'class': 'btn'}
+        ) }}
+
+        {% if operations.has_geometry %}
+          {{ link_or_button(
+            url('/table/gis-visualization', operations.url_params),
+            get_icon('b_globe', 'Visualize GIS data'|trans, true),
+            {'class': 'btn'}
+          ) }}
+        {% endif %}
+      {% endif %}
+
+      <span>
+        {{ link_or_button(
+          url('/view/create', {'db': db, 'table': table, 'sql_query': sql_query, 'printview': true}),
+          get_icon('b_view_add', 'Create view'|trans, true),
+          {'class': 'btn create_view ajax'}
+        ) }}
+      </span>
+    {% endif %}
+  </fieldset>
+{% endif %}
