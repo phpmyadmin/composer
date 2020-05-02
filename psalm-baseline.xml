@@ -233,9 +233,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Controllers/Database/OperationsController.php">
-    <NullArgument occurrences="1">
-      <code>null</code>
-    </NullArgument>
     <TypeDoesNotContainType occurrences="1">
       <code>$sub_part</code>
     </TypeDoesNotContainType>
@@ -376,9 +373,6 @@
     </PossiblyNullIterator>
   </file>
   <file src="libraries/classes/Controllers/Server/DatabasesController.php">
-    <NullArgument occurrences="1">
-      <code>null</code>
-    </NullArgument>
     <PossiblyInvalidArgument occurrences="1">
       <code>$this-&gt;dbi-&gt;getError()</code>
     </PossiblyInvalidArgument>
@@ -510,11 +504,6 @@
     <PossiblyUndefinedVariable occurrences="1">
       <code>$extra_data</code>
     </PossiblyUndefinedVariable>
-  </file>
-  <file src="libraries/classes/Controllers/Table/RowActionController.php">
-    <PossiblyNullIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyNullIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/SearchController.php">
     <InvalidReturnStatement occurrences="1">
@@ -2301,8 +2290,7 @@
       <code>$result</code>
       <code>$result</code>
     </InvalidArgument>
-    <NullArgument occurrences="3">
-      <code>null</code>
+    <NullArgument occurrences="2">
       <code>null</code>
       <code>null</code>
     </NullArgument>
@@ -2421,6 +2409,15 @@
     <ForbiddenCode occurrences="1">
       <code>shell_exec('kstat -p d ' . $key)</code>
     </ForbiddenCode>
+  </file>
+  <file src="libraries/classes/Server/SysInfo/WindowsNt.php">
+    <PossiblyNullReference occurrences="1">
+      <code>Get</code>
+    </PossiblyNullReference>
+    <UndefinedDocblockClass occurrences="2">
+      <code>COM|null</code>
+      <code>$this-&gt;_wmi</code>
+    </UndefinedDocblockClass>
   </file>
   <file src="libraries/classes/Server/UserGroups.php">
     <InvalidArgument occurrences="8">
