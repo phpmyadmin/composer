@@ -33,7 +33,8 @@ after_script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - bash <(curl -Ls https://coverage.codacy.com/get.sh)
+  - if [ -f build/logs/clover.xml ] ; then curl -LsO https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
+  - if [ -f build/logs/clover.xml ] ; then bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l php -r build/logs/clover.xml --partial; fi
 
 services:
   - mysql
@@ -176,7 +177,9 @@ jobs:
     - stage: "Documentation"
       name: "Build docs"
       before_script: skip
-      after_script: skip
+      after_script:
+        # Mark Codacy coverage final here because all steps of the previous stage did succeed
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) final
       after_success: skip
       install:
         - source ~/virtualenv/python3.6/bin/activate
