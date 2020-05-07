@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.3-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2019-12-23 15:36-0300\n"
-"PO-Revision-Date: 2020-05-06 21:57+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2020-05-06 22:22+0000\n"
+"Last-Translator: Oldřich Strachota <oldrich.strachota@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/4-9/cs/>"
 "\n"
 "Language: cs\n"
@@ -311,7 +311,7 @@ msgstr "Jméno databáze je prázdné!"
 #: db_operations.php:69
 msgid "Cannot copy database to the same name. Change the name and try again."
 msgstr ""
-"Nemohu vytvořit kopii databáze se stejným jménem. Změňte jméno a zkuste to "
+"Nemohu vytvořit kopii databáze se stejným názvem. Změňte název a zkuste to "
 "znovu."
 
 #: db_operations.php:156
@@ -3048,7 +3048,7 @@ msgstr "Chyba"
 #: libraries/classes/Advisor.php:259
 #, php-format
 msgid "Error when evaluating: %s"
-msgstr "Chyba při vytváření: %s"
+msgstr "Chyba při vyhodnocení: %s"
 
 #: libraries/classes/Advisor.php:290
 #, php-format
@@ -9208,7 +9208,7 @@ msgstr "Zadaný kód nebyl správný, zkuste to znovu!"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:320
 msgid "Missing reCAPTCHA verification, maybe it has been blocked by adblock?"
-msgstr ""
+msgstr "Chybí ověření reCAPTCHA, není blokované adblockem?"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:344
 msgid "You are not allowed to log in to this MySQL server!"
@@ -10127,7 +10127,7 @@ msgstr ""
 #: libraries/classes/Plugins/Transformations/Abs/RegexValidationTransformationsPlugin.php:52
 #, php-format
 msgid "Validation failed for the input string %s."
-msgstr ""
+msgstr "Nezdařilo se ověření vstupního řetězce %s."
 
 #: libraries/classes/Plugins/Transformations/Abs/SQLTransformationsPlugin.php:29
 msgid "Formats text as SQL query with syntax highlighting."
@@ -10229,6 +10229,8 @@ msgstr ""
 msgid ""
 "Provides authentication using hardware security tokens supporting FIDO U2F."
 msgstr ""
+"Poskytuje autentizaci pomocí hardwarových bezpečnostních tokenů "
+"podporujících FIDO U2F."
 
 #: libraries/classes/Plugins/TwoFactor/Simple.php:52
 msgid "Simple two-factor authentication"
@@ -10236,7 +10238,7 @@ msgstr "Jednoduchá dvoufaktorová autentizace"
 
 #: libraries/classes/Plugins/TwoFactor/Simple.php:62
 msgid "For testing purposes only!"
-msgstr ""
+msgstr "Pouze pro účely testování!"
 
 #: libraries/classes/Plugins/TwoFactorPlugin.php:70
 #, php-format
@@ -10253,7 +10255,7 @@ msgstr ""
 
 #: libraries/classes/Plugins/TwoFactorPlugin.php:137
 msgid "Login using password only."
-msgstr ""
+msgstr "Přihlášení pouze pomocí hesla."
 
 #: libraries/classes/RecentFavoriteTable.php:145
 msgid "Could not save recent table!"
@@ -11023,6 +11025,8 @@ msgid ""
 "You do not have sufficient privileges to perform this operation; Please "
 "refer to the documentation for more details"
 msgstr ""
+"Nemáte dostatečná oprávnění k provedení této operace, další informace "
+"najdete v dokumentaci"
 
 #: libraries/classes/Rte/Routines.php:1051
 msgid "Security type"
@@ -11423,7 +11427,7 @@ msgstr "Požaduje zabezpečené připojení."
 
 #: libraries/classes/Server/Privileges.php:768
 msgid "Requires a valid X509 certificate."
-msgstr ""
+msgstr "Vyžaduje platný certifikát X509."
 
 #: libraries/classes/Server/Privileges.php:793
 msgid "Requires that a specific cipher method be used for a connection."
@@ -11638,7 +11642,7 @@ msgstr "Přidělování"
 
 #: libraries/classes/Server/Privileges.php:2594
 msgid "Not enough privilege to view users."
-msgstr ""
+msgstr "Nedostatečná oprávnění k zobrazení uživatelů."
 
 #: libraries/classes/Server/Privileges.php:2613
 #: libraries/classes/Server/Privileges.php:3987
@@ -12238,7 +12242,7 @@ msgstr "Příkaz"
 
 #: libraries/classes/Server/Status/Processes.php:93
 msgid "Progress"
-msgstr ""
+msgstr "Postup"
 
 #: libraries/classes/Server/Status/Processes.php:235
 #: libraries/classes/Server/Status/Variables.php:47 templates/filter.twig:2
@@ -14129,7 +14133,7 @@ msgstr ""
 
 #: server_status.php:35
 msgid "Not enough privilege to view server status."
-msgstr ""
+msgstr "Nedostatečná oprávnění k zobrazení stavu serveru."
 
 #: server_status_advisor.php:33
 msgid "Not enough privilege to view the advisor."
@@ -14154,7 +14158,7 @@ msgstr ""
 
 #: server_status_variables.php:52
 msgid "Not enough privilege to view status variables."
-msgstr ""
+msgstr "Nedostatečná oprávnění k zobrazení stavových proměnných."
 
 #: setup/frames/config.inc.php:17 setup/frames/index.inc.php:190
 msgid "Configuration file"
@@ -14274,7 +14278,7 @@ msgstr "Přidat nový server"
 
 #: setup/index.php:18
 msgid "Configuration already exists, setup is disabled!"
-msgstr ""
+msgstr "Konfigurace již existuje, nastavení je zakázáno!"
 
 #: setup/index.php:28
 msgid "Wrong GET file attribute value"
@@ -14561,6 +14565,8 @@ msgid ""
 "By disabling two factor authentication you will be again able to login using "
 "password only."
 msgstr ""
+"Po zakázání dvoufaktorové autentizace se budete moci opět přihlásit pouze "
+"pomocí hesla."
 
 #: templates/prefs_twofactor_confirm.twig:9 templates/prefs_twofactor.twig:37
 msgid "Disable two-factor authentication"
@@ -14932,6 +14938,8 @@ msgid ""
 "Open the two-factor authentication app on your device to view your "
 "authentication code and verify your identity."
 msgstr ""
+"Chcete-li zobrazit ověřovací kód a ověřit svou identitu, otevřete na svém "
+"zařízení aplikaci pro dvoufaktorovou autentizaci."
 
 #: templates/table/structure/move_columns_dialog.twig:1
 #: templates/table/structure/optional_action_links.twig:22
@@ -15065,7 +15073,7 @@ msgstr "Zvolte šablonu"
 
 #: templates/server/variables/variable_row.twig:6
 msgid "This is a read-only variable and can not be edited"
-msgstr ""
+msgstr "Tato proměnná je pouze pro čtení a nelze ji upravovat"
 
 #: templates/console/display.twig:7
 msgid "History"
@@ -15185,7 +15193,7 @@ msgstr "Navrhnout strukturu tabulky"
 
 #: templates/table/structure/optional_action_links.twig:25
 msgid "Normalize"
-msgstr ""
+msgstr "Normalizovat"
 
 #: templates/table/structure/optional_action_links.twig:31
 msgid "Track view"
@@ -15612,7 +15620,7 @@ msgstr "Upravit rozdělení"
 
 #: templates/login/twofactor.twig:5
 msgid "Verify"
-msgstr ""
+msgstr "Ověřit"
 
 #: templates/display/export/option_header.twig:5
 msgid "Exporting databases from the current server"
@@ -15909,7 +15917,7 @@ msgstr ""
 
 #: templates/prefs_twofactor.twig:33
 msgid "You have enabled two factor authentication."
-msgstr ""
+msgstr "Povolili jste dvoufaktorové ověření."
 
 #: templates/display/export/options_output_radio.twig:5
 msgid "View output as text"
