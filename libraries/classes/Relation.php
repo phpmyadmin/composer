@@ -458,6 +458,7 @@ class Relation
         if ($skip_line) {
             $retval .= '<tr><td>&nbsp;</td></tr>';
         }
+
         return $retval;
     }
 
@@ -489,6 +490,7 @@ class Relation
             );
         }
         $retval .= '</td></tr>' . "\n";
+
         return $retval;
     }
 
@@ -554,6 +556,7 @@ class Relation
             // we return the array with the falses in it,
             // to avoid some 'Uninitialized string offset' errors later
             $GLOBALS['cfg']['Server']['pmadb'] = false;
+
             return $cfgRelation;
         }
 
@@ -779,6 +782,7 @@ class Relation
             false,
             DatabaseInterface::QUERY_STORE
         );
+
         return $result !== false;
     }
 
@@ -816,6 +820,7 @@ class Relation
             // no need to upgrade
             if ($rows === 2) {
                 return true;
+
                 // try silent upgrade without disturbing the user
             }
 
@@ -844,9 +849,11 @@ class Relation
                 );
             } while ($hasResult);
             $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+
             // return true if no error exists otherwise false
             return empty($error);
         }
+
         // some failure, either in upgrading or something else
         // make some noise, time to wake up user.
         return false;
@@ -995,6 +1002,7 @@ class Relation
                 }
             }
         }
+
         return false;
     }
 
@@ -1237,6 +1245,7 @@ class Relation
             if (isset($_SESSION['sql_history'])) {
                 return array_reverse($_SESSION['sql_history']);
             }
+
             return false;
         }
 
@@ -1289,21 +1298,25 @@ class Relation
             ORDER BY `timevalue` DESC
             LIMIT ' . $GLOBALS['cfg']['QueryHistoryMax'] . ', 1';
 
-        if ($max_time = $this->dbi->fetchValue(
+        $max_time = $this->dbi->fetchValue(
             $search_query,
             0,
             0,
             DatabaseInterface::CONNECT_CONTROL
-        )) {
-            $this->queryAsControlUser(
-                'DELETE FROM '
-                . Util::backquote($cfgRelation['db']) . '.'
-                . Util::backquote($cfgRelation['history']) . '
-                  WHERE `username` = \'' . $this->dbi->escapeString($username)
-                . '\'
-                    AND `timevalue` <= \'' . $max_time . '\''
-            );
+        );
+
+        if (! $max_time) {
+            return;
         }
+
+        $this->queryAsControlUser(
+            'DELETE FROM '
+            . Util::backquote($cfgRelation['db']) . '.'
+            . Util::backquote($cfgRelation['history']) . '
+              WHERE `username` = \'' . $this->dbi->escapeString($username)
+            . '\'
+                AND `timevalue` <= \'' . $max_time . '\''
+        );
     }
 
     /**
@@ -1920,6 +1933,7 @@ class Relation
                 ]
             );
         }
+
         return $child_references;
     }
 
@@ -2059,19 +2073,23 @@ class Relation
     public function createPmaDatabase()
     {
         $this->dbi->tryQuery('CREATE DATABASE IF NOT EXISTS `phpmyadmin`');
-        if ($error = $this->dbi->getError()) {
-            if ($GLOBALS['errno'] == 1044) {
-                $GLOBALS['message'] =    __(
-                    'You do not have necessary privileges to create a database named'
-                    . ' \'phpmyadmin\'. You may go to \'Operations\' tab of any'
-                    . ' database to set up the phpMyAdmin configuration storage there.'
-                );
-            } else {
-                $GLOBALS['message'] = $error;
-            }
-            return false;
+
+        $error = $this->dbi->getError();
+        if (! $error) {
+            return true;
         }
-        return true;
+
+        $GLOBALS['message'] = $error;
+
+        if ($GLOBALS['errno'] === 1044) {
+            $GLOBALS['message'] = __(
+                'You do not have necessary privileges to create a database named'
+                . ' \'phpmyadmin\'. You may go to \'Operations\' tab of any'
+                . ' database to set up the phpMyAdmin configuration storage there.'
+            );
+        }
+
+        return false;
     }
 
     /**
@@ -2118,10 +2136,14 @@ class Relation
                         $this->dbi->selectDb($db);
                     }
                     $this->dbi->tryQuery($createQueries[$table]);
-                    if ($error = $this->dbi->getError()) {
+
+                    $error = $this->dbi->getError();
+                    if ($error) {
                         $GLOBALS['message'] = $error;
+
                         return;
                     }
+
                     $foundOne = true;
                     $GLOBALS['cfg']['Server'][$feature] = $table;
                 }
@@ -2205,9 +2227,7 @@ class Relation
         );
         $message->addParamHtml('</a>');
 
-        $retval .= $message->getDisplay();
-
-        return $retval;
+        return $retval . $message->getDisplay();
     }
 
     /**
@@ -2235,6 +2255,7 @@ class Relation
             $have_rel = false;
             $res_rel = [];
         } // end if
+
         return [
             $res_rel,
             $have_rel,
@@ -2293,6 +2314,7 @@ class Relation
         if ($GLOBALS['cfg']['NaturalOrder']) {
             usort($tables, 'strnatcasecmp');
         }
+
         return $tables;
     }
 }

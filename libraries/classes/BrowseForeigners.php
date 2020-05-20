@@ -210,10 +210,8 @@ class BrowseForeigners
         $output .= '<table width="100%" id="browse_foreign_table">';
 
         if (! is_array($foreignData['disp_row'])) {
-            $output .= '</tbody>'
+            return $output . '</tbody>'
                 . '</table>';
-
-            return $output;
         }
 
         $header = '<tr>
@@ -295,6 +293,7 @@ class BrowseForeigners
                 . '...'
             );
         }
+
         return [
             $description,
             $descriptionTitle,
@@ -346,6 +345,7 @@ class BrowseForeigners
             return null;
         }
         isset($_POST['pos']) ? $pos = $_POST['pos'] : $pos = 0;
+
         return 'LIMIT ' . $pos . ', ' . $this->maxRows . ' ';
     }
 }

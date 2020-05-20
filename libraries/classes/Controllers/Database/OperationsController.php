@@ -7,7 +7,6 @@ use PhpMyAdmin\Charsets;
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Common;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Display\CreateTable;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Operations;
@@ -247,6 +246,7 @@ class OperationsController extends AbstractController
                     Generator::getMessage('', $sql_query)
                 );
                 $this->response->addJSON('db', $db);
+
                 return;
             }
         }
@@ -322,7 +322,10 @@ class OperationsController extends AbstractController
                     '%sFind out why%s.'
                 )
             );
-            $message->addParamHtml('<a href="' . Url::getFromRoute('/check-relations') . '" data-post="' . $url_query . '">');
+            $message->addParamHtml(
+                '<a href="' . Url::getFromRoute('/check-relations')
+                . '" data-post="' . $url_query . '">'
+            );
             $message->addParamHtml('</a>');
             /* Show error if user has configured something, notice elsewhere */
             if (! empty($cfg['Servers'][$server]['pmadb'])) {

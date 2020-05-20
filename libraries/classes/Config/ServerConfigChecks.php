@@ -226,6 +226,7 @@ class ServerConfigChecks
                 );
             }
         }
+
         return [
             $cookieAuthUsed,
             $blowfishSecret,
@@ -251,6 +252,7 @@ class ServerConfigChecks
             $blowfishSecretSet = true;
             $this->cfg->set('blowfish_secret', Util::generateRandom(32));
         }
+
         return [
             $blowfishSecret,
             $blowfishSecretSet,
@@ -270,9 +272,9 @@ class ServerConfigChecks
         $serverId
     ) {
         if ($serverName == 'localhost') {
-            $serverName .= ' [' . $serverId . ']';
-            return $serverName;
+            return $serverName . ' [' . $serverId . ']';
         }
+
         return $serverName;
     }
 

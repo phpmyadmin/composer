@@ -7,8 +7,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Engines\Innodb;
-use PhpMyAdmin\Html\Generator;
-use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Plugins\Export\ExportSql;
 use function array_merge;
 use function count;
@@ -104,7 +102,7 @@ class Operations
             . Util::backquote($_POST['newname']);
         if (isset($_POST['db_collation'])) {
             $local_query .= ' DEFAULT'
-                . Util::getCharsetQueryPart($_POST['db_collation']);
+                . Util::getCharsetQueryPart($_POST['db_collation'] ?? '');
         }
         $local_query .= ';';
         $GLOBALS['sql_query'] .= $local_query;
@@ -171,6 +169,7 @@ class Operations
                 $GLOBALS['sql_query'] .= "\n" . $sql_view_standin;
             }
         }
+
         return $views;
     }
 
@@ -242,6 +241,7 @@ class Operations
                 }
             }
         }
+
         return $sqlContraints;
     }
 
@@ -842,7 +842,7 @@ class Operations
             && $_POST['tbl_collation'] !== $tbl_collation
         ) {
             $table_alters[] = 'DEFAULT '
-                . Util::getCharsetQueryPart($_POST['tbl_collation']);
+                . Util::getCharsetQueryPart($_POST['tbl_collation'] ?? '');
         }
 
         if ($pma_table->isEngine(['MYISAM', 'ARIA', 'ISAM'])
@@ -932,6 +932,7 @@ class Operations
                     . ' ' . $warning['Message'];
             }
         }
+
         return $warning_messages;
     }
 
@@ -981,15 +982,19 @@ class Operations
 
             // For table specific privileges
             $query_table_specific = 'UPDATE ' . Util::backquote('tables_priv')
-                . 'SET Db = \'' . $this->dbi->escapeString($newDb) . '\', Table_name = \'' . $this->dbi->escapeString($newTable)
-                . '\' where Db = \'' . $this->dbi->escapeString($oldDb) . '\' AND Table_name = \'' . $this->dbi->escapeString($oldTable)
+                . 'SET Db = \'' . $this->dbi->escapeString($newDb)
+                . '\', Table_name = \'' . $this->dbi->escapeString($newTable)
+                . '\' where Db = \'' . $this->dbi->escapeString($oldDb)
+                . '\' AND Table_name = \'' . $this->dbi->escapeString($oldTable)
                 . '\';';
             $this->dbi->query($query_table_specific);
 
             // For column specific privileges
             $query_col_specific = 'UPDATE ' . Util::backquote('columns_priv')
-                . 'SET Db = \'' . $this->dbi->escapeString($newDb) . '\', Table_name = \'' . $this->dbi->escapeString($newTable)
-                . '\' where Db = \'' . $this->dbi->escapeString($oldDb) . '\' AND Table_name = \'' . $this->dbi->escapeString($oldTable)
+                . 'SET Db = \'' . $this->dbi->escapeString($newDb)
+                . '\', Table_name = \'' . $this->dbi->escapeString($newTable)
+                . '\' where Db = \'' . $this->dbi->escapeString($oldDb)
+                . '\' AND Table_name = \'' . $this->dbi->escapeString($oldTable)
                 . '\';';
             $this->dbi->query($query_col_specific);
 

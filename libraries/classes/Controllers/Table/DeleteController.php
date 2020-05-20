@@ -9,6 +9,7 @@ use PhpMyAdmin\Sql;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use function is_array;
+use function sprintf;
 
 class DeleteController extends AbstractController
 {
@@ -35,7 +36,7 @@ class DeleteController extends AbstractController
                 );
                 $sql_query .= $query . "\n";
                 $this->dbi->selectDb($db);
-                $result = $this->dbi->query($query);
+                $this->dbi->query($query);
             }
 
             if (! empty($_REQUEST['pos'])) {

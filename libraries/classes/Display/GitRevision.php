@@ -8,6 +8,7 @@ namespace PhpMyAdmin\Display;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
+use PhpMyAdmin\Git;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
@@ -50,10 +51,12 @@ class GitRevision
     public function display(): string
     {
         // load revision data from repo
-        $this->config->checkGitRevision();
+        $git = new Git($this->config);
+        $git->checkGitRevision();
 
         if (! $this->config->get('PMA_VERSION_GIT')) {
             $this->response->setRequestStatus(false);
+
             return '';
         }
 

@@ -133,6 +133,7 @@ class Privileges
                 $db_and_table = Util::backquote($dbname) . '.*';
             }
         }
+
         return $db_and_table;
     }
 
@@ -151,12 +152,11 @@ class Privileges
             return '';
         }
 
-        $ret = " WHERE `User` LIKE '"
+        return " WHERE `User` LIKE '"
             . $this->dbi->escapeString($initial) . "%'"
             . " OR `User` LIKE '"
             . $this->dbi->escapeString(mb_strtolower($initial))
             . "%'";
-        return $ret;
     }
 
     /**
@@ -283,6 +283,7 @@ class Privileges
                 $privs = ['ALL PRIVILEGES'];
             }
         }
+
         return $privs;
     }
 
@@ -533,6 +534,7 @@ class Privileges
                 . " AND '" . $this->dbi->escapeString(Util::unescapeMysqlWildcards($db)) . "'"
                 . ' LIKE `Db`;';
         }
+
         return 'SELECT `Table_priv`'
             . ' FROM `mysql`.`tables_priv`'
             . " WHERE `User` = '" . $this->dbi->escapeString($username) . "'"
@@ -925,6 +927,7 @@ class Privileges
                 $hostname_length = $val['CHARACTER_MAXIMUM_LENGTH'];
             }
         }
+
         return [
             $username_length,
             $hostname_length,
@@ -1006,6 +1009,7 @@ class Privileges
         foreach ($grants as $one_grant) {
             $response .= $one_grant . ";\n\n";
         }
+
         return $response;
     }
 
@@ -1175,6 +1179,7 @@ class Privileges
                 );
             }
         }
+
         return $message;
     }
 
@@ -1304,6 +1309,7 @@ class Privileges
             $max_user_connections = max(0, $max_user_connections);
             $sql_query .= ' MAX_USER_CONNECTIONS ' . $max_user_connections;
         }
+
         return ! empty($sql_query) ? ' WITH' . $sql_query : '';
     }
 
@@ -1357,6 +1363,7 @@ class Privileges
             $privileges[$userHost]['privileges'] = $privileges[$userHost]['privileges'] ?? [];
             $privileges[$userHost]['privileges'][] = $this->getSpecificPrivilege($privilege);
         }
+
         return $privileges;
     }
 
@@ -1398,6 +1405,7 @@ class Privileges
             $privilege['has_grant'] = $row['Grant_priv'] === 'Y';
             $privilege['privileges'] = $this->extractPrivInfo($row, true);
         }
+
         return $privilege;
     }
 
@@ -1469,6 +1477,7 @@ class Privileges
         while ($row = $this->dbi->fetchAssoc($result)) {
             $privileges[] = $row;
         }
+
         return $privileges;
     }
 
@@ -1507,6 +1516,7 @@ class Privileges
         while ($row = $this->dbi->fetchAssoc($result)) {
             $privileges[] = $row;
         }
+
         return $privileges;
     }
 
@@ -1531,6 +1541,7 @@ class Privileges
         while ($row = $this->dbi->fetchAssoc($result)) {
             $privileges[] = $row;
         }
+
         return $privileges;
     }
 
@@ -1619,9 +1630,8 @@ class Privileges
                 $html .= Generator::getIcon('b_tblexport', __('Export'));
                 break;
         }
-        $html .= '</a>';
 
-        return $html;
+        return $html . '</a>';
     }
 
     /**
@@ -1635,14 +1645,13 @@ class Privileges
         $user_group_table = Util::backquote($cfgRelation['db'])
             . '.' . Util::backquote($cfgRelation['usergroups']);
         $sql_query = 'SELECT COUNT(*) FROM ' . $user_group_table;
-        $user_group_count = $this->dbi->fetchValue(
+
+        return $this->dbi->fetchValue(
             $sql_query,
             0,
             0,
             DatabaseInterface::CONNECT_CONTROL
         );
-
-        return $user_group_count;
     }
 
     /**
@@ -1743,8 +1752,9 @@ class Privileges
             $new_user_initial = mb_strtoupper(
                 mb_substr($username, 0, 1)
             );
-            $newUserInitialString = '<a href="' . Url::getFromRoute('/server/privileges', ['initial' => $new_user_initial]) . '">'
-                . $new_user_initial . '</a>';
+            $newUserInitialString = '<a href="';
+            $newUserInitialString .= Url::getFromRoute('/server/privileges', ['initial' => $new_user_initial]);
+            $newUserInitialString .= '">' . $new_user_initial . '</a>';
             $extra_data['new_user_initial'] = $new_user_initial;
             $extra_data['new_user_initial_string'] = $newUserInitialString;
         }
@@ -1891,6 +1901,7 @@ class Privileges
             }
         }
         $this->dbi->freeResult($result);
+
         return $db_rights;
     }
 
@@ -1915,6 +1926,7 @@ class Privileges
                 $result[$priv . '_priv'] = 'Y';
             }
         }
+
         return $result;
     }
 
@@ -2314,6 +2326,7 @@ class Privileges
                 );
             }
         }
+
         return [
             $sql_query,
             $message,
@@ -2346,6 +2359,8 @@ class Privileges
         } else {
             $sql_query1 = '';
         }
+
+        $sql_query2 = '';
 
         // Should not do a GRANT USAGE for a table-specific privilege, it
         // causes problems later (cannot revoke it)
@@ -2384,9 +2399,8 @@ class Privileges
         }
         if (! empty($sql_query2)) {
             $this->dbi->query($sql_query2);
-        } else {
-            $sql_query2 = '';
         }
+
         $sql_query = $sql_query0 . ' ' . $sql_query1 . ' ' . $sql_query2;
         $message = Message::success(__('You have updated the privileges for %s.'));
         $message->addParam('\'' . $username . '\'@\'' . $hostname . '\'');
@@ -2513,6 +2527,7 @@ class Privileges
                 $GLOBALS['reload'] = true;
             }
         }
+
         return $queries;
     }
 
@@ -3362,6 +3377,7 @@ class Privileges
                 ? ' WITH GRANT OPTION;'
                 : ';');
         }
+
         return $queries;
     }
 
@@ -3507,6 +3523,7 @@ class Privileges
                 $message = Message::rawError($this->dbi->getError());
             }
         }
+
         return [
             $sql_query,
             $message,
@@ -3832,6 +3849,7 @@ class Privileges
                 return $routine['type'];
             }
         }
+
         return '';
     }
 
@@ -3860,6 +3878,7 @@ class Privileges
         if ($privileges === false) {
             $privileges = '';
         }
+
         return $this->parseProcPriv($privileges);
     }
 }

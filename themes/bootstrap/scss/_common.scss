@@ -75,6 +75,10 @@ button.mult_submit {
   color: #235a81;
 }
 
+#navbarDropdown > img {
+  display: none;
+}
+
 #initials_table {
   background: #f3f3f3;
   border: 1px solid #aaa;
@@ -566,6 +570,7 @@ table tbody:first-of-type tr:not(.nopointer):hover th,
 // hovered table rows
 #table_index tbody:hover tr,
 #table_index tbody:hover th,
+#table_index tbody:hover td,
 table tr.hover:not(.nopointer) th {
   background: linear-gradient(#ced6df, #b6c6d7);
   color: $browse-pointer-color;
@@ -3768,4 +3773,18 @@ body .ui-dialog {
 
 #filter_query_text {
   vertical-align: baseline;
+}
+
+.ui_tpicker_hour_slider,
+.ui_tpicker_minute_slider,
+.ui_tpicker_second_slider,
+.ui_tpicker_millisec_slider,
+.ui_tpicker_microsec_slider {
+  margin-left: 40px;
+  margin-top: 4px;
+  height: 0.75rem;
+}
+
+.ui-timepicker-div dl .ui_tpicker_timezone select {
+  margin-left: 50px;
 }

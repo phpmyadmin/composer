@@ -156,6 +156,7 @@ class Export
                                 __('Insufficient space to save the file %s.')
                             );
                             $GLOBALS['message']->addParam($save_filename);
+
                             return false;
                         }
                     } else {
@@ -194,6 +195,7 @@ class Export
                         __('Insufficient space to save the file %s.')
                     );
                     $GLOBALS['message']->addParam($save_filename);
+
                     return false;
                 }
                 $time_now = time();
@@ -209,6 +211,7 @@ class Export
             // We export as html - replace special chars
             echo htmlspecialchars($line);
         }
+
         return true;
     }
 
@@ -276,6 +279,7 @@ class Export
 
         // Some memory is needed for compression, assume 1/3
         $memory_limit /= 8;
+
         return $memory_limit;
     }
 
@@ -319,6 +323,7 @@ class Export
             $filename  .= '.zip';
             $mime_type = 'application/zip';
         }
+
         return [
             $filename,
             $mime_type,
@@ -429,15 +434,20 @@ class Export
                 )
             );
             $message->addParam($save_filename);
-        } elseif (! $file_handle = @fopen($save_filename, 'w')) {
-            $message = Message::error(
-                __(
-                    'The web server does not have permission '
-                    . 'to save the file %s.'
-                )
-            );
-            $message->addParam($save_filename);
+        } else {
+            $file_handle = @fopen($save_filename, 'w');
+
+            if (! $file_handle) {
+                $message = Message::error(
+                    __(
+                        'The web server does not have permission '
+                        . 'to save the file %s.'
+                    )
+                );
+                $message->addParam($save_filename);
+            }
         }
+
         return [
             $save_filename,
             $message,
@@ -478,6 +488,7 @@ class Export
                 [$save_filename]
             );
         }
+
         return $message;
     }
 
@@ -500,6 +511,7 @@ class Export
             // without the optional parameter level because it bugs
             $dump_buffer = gzencode($dump_buffer);
         }
+
         return $dump_buffer;
     }
 
@@ -581,15 +593,18 @@ class Export
         $back_button .= '&amp;repopulate=1">' . __('Back') . '</a> ]</p>';
         $html .= '<br>';
         $html .= $back_button;
-        $refreshButton = '<form id="export_refresh_form" method="POST" action="' . Url::getFromRoute('/export') . '" class="disableAjax">';
+        $refreshButton = '<form id="export_refresh_form" method="POST" action="'
+            . Url::getFromRoute('/export') . '" class="disableAjax">';
         $refreshButton .= '[ <a class="disableAjax" onclick="$(this).parent().submit()">' . __('Refresh') . '</a> ]';
         foreach ($_POST as $name => $value) {
             if (is_array($value)) {
                 foreach ($value as $val) {
-                    $refreshButton .= '<input type="hidden" name="' . htmlentities((string) $name) . '[]" value="' . htmlentities((string) $val) . '">';
+                    $refreshButton .= '<input type="hidden" name="' . htmlentities((string) $name)
+                        . '[]" value="' . htmlentities((string) $val) . '">';
                 }
             } else {
-                $refreshButton .= '<input type="hidden" name="' . htmlentities((string) $name) . '" value="' . htmlentities((string) $value) . '">';
+                $refreshButton .= '<input type="hidden" name="' . htmlentities((string) $name)
+                    . '" value="' . htmlentities((string) $value) . '">';
             }
         }
         $refreshButton .= '</form>';
@@ -947,9 +962,11 @@ class Export
                 $crlf
             )) {
                 $GLOBALS['message'] = Message::error(
+                    // phpcs:disable Generic.Files.LineLength.TooLong
                     /* l10n: A query written by the user is a "raw query" that could be using no tables or databases in particular */
                     __('Exporting a raw query is not supported for this export method.')
                 );
+
                 return;
             }
         }
@@ -1199,6 +1216,7 @@ class Export
                 }
             }
         }
+
         return $aliases;
     }
 
@@ -1220,6 +1238,7 @@ class Export
         }
 
         $sql = 'LOCK TABLES ' . implode(', ', $locks);
+
         return $this->dbi->tryQuery($sql);
     }
 

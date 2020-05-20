@@ -217,6 +217,7 @@ class GisGeometryCollectionTest extends TestCase
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+
         return [
             [
                 'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),'
@@ -291,11 +292,11 @@ class GisGeometryCollectionTest extends TestCase
     /**
      * Test for prepareRowAsSvg
      *
-     * @param string $spatial    string to parse
-     * @param string $label      field label
-     * @param string $line_color line color
-     * @param array  $scale_data scaling parameters
-     * @param string $output     expected output
+     * @param string $spatial   string to parse
+     * @param string $label     field label
+     * @param string $lineColor line color
+     * @param array  $scaleData scaling parameters
+     * @param string $output    expected output
      *
      * @return void
      *
@@ -304,15 +305,15 @@ class GisGeometryCollectionTest extends TestCase
     public function testPrepareRowAsSvg(
         $spatial,
         $label,
-        $line_color,
-        $scale_data,
+        $lineColor,
+        $scaleData,
         $output
     ) {
         $string = $this->object->prepareRowAsSvg(
             $spatial,
             $label,
-            $line_color,
-            $scale_data
+            $lineColor,
+            $scaleData
         );
         $this->assertEquals(1, preg_match($output, $string));
         // assertMatchesRegularExpression added in 9.1
@@ -321,8 +322,8 @@ class GisGeometryCollectionTest extends TestCase
             $this->object->prepareRowAsSvg(
                 $spatial,
                 $label,
-                $line_color,
-                $scale_data
+                $lineColor,
+                $scaleData
             )
         );
     }

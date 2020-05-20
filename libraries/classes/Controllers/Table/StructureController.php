@@ -38,11 +38,15 @@ use stdClass;
 use function array_keys;
 use function array_splice;
 use function count;
+use function define;
+use function htmlspecialchars;
 use function implode;
 use function in_array;
 use function is_array;
+use function is_string;
 use function mb_strpos;
 use function mb_strtoupper;
+use function preg_replace;
 use function sprintf;
 use function str_replace;
 use function strlen;
@@ -112,7 +116,7 @@ class StructureController extends AbstractController
         global $containerBuilder, $sql_query, $reread_info, $showtable;
         global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
         global $db, $table, $goto, $message, $mult_btn, $query_type;
-        global $selected, $selected_fld, $submit_mult, $url_query;
+        global $selected, $selected_fld, $submit_mult, $url_query, $url_params;
 
         $this->dbi->selectDb($this->db);
         $reread_info = $this->table_obj->getStatusInfo(null, true);
@@ -150,6 +154,7 @@ class StructureController extends AbstractController
             && $this->response->isAjax()
         ) {
             $this->moveColumns();
+
             return;
         }
 
@@ -185,6 +190,7 @@ class StructureController extends AbstractController
             } else {
                 $this->response->setRequestStatus(false);
             }
+
             return;
         }
         /**
@@ -195,6 +201,7 @@ class StructureController extends AbstractController
                 null,
                 Url::getFromRoute('/table/structure')
             );
+
             return;
         }
 
@@ -205,6 +212,7 @@ class StructureController extends AbstractController
             && ! isset($_POST['save_partitioning'])
         ) {
             $this->displayHtmlForPartitionChange();
+
             return;
         }
 
@@ -283,7 +291,6 @@ class StructureController extends AbstractController
                             'back' => Url::getFromRoute('/table/sql'),
                         ], '&');
 
-                        $full_query_views = null;
                         $full_query = '';
                         $selectedCount = count($selected);
 
@@ -306,18 +313,6 @@ class StructureController extends AbstractController
                                     }
                                     if ($i == $selectedCount - 1) {
                                         $full_query = preg_replace('@,$@', ');<br>', $full_query);
-                                    }
-                                    break;
-                                case 'drop_fld':
-                                    if ($full_query == '') {
-                                        $full_query .= 'ALTER TABLE '
-                                            . Util::backquote(htmlspecialchars($table));
-                                    }
-                                    $full_query .= '<br>&nbsp;&nbsp;DROP '
-                                        . Util::backquote(htmlspecialchars($selectedValue))
-                                        . ',';
-                                    if ($i == $selectedCount - 1) {
-                                        $full_query = preg_replace('@,$@', ';<br>', $full_query);
                                     }
                                     break;
                             }
@@ -361,20 +356,10 @@ class StructureController extends AbstractController
 
                         $sql_query = '';
                         $sql_query_views = null;
-                        $result = null;
                         $selectedCount = count($selected);
 
                         for ($i = 0; $i < $selectedCount; $i++) {
                             switch ($query_type) {
-                                case 'drop_fld':
-                                    $this->relationCleanup->column($db, $table, $selected[$i]);
-                                    $sql_query .= (empty($sql_query)
-                                            ? 'ALTER TABLE ' . Util::backquote($table)
-                                            : ',')
-                                        . ' DROP ' . Util::backquote($selected[$i])
-                                        . ($i == $selectedCount - 1 ? ';' : '');
-                                    break;
-
                                 case 'primary_fld':
                                     $sql_query .= (empty($sql_query)
                                             ? 'ALTER TABLE ' . Util::backquote($table)
@@ -545,6 +530,152 @@ class StructureController extends AbstractController
         );
     }
 
+    public function drop(): void
+    {
+        global $db, $table, $message;
+        global $sql_query, $reread_info, $showtable, $url_params;
+        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
+
+        $this->dbi->selectDb($this->db);
+        $reread_info = $this->table_obj->getStatusInfo(null, true);
+        $showtable = $this->table_obj->getStatusInfo(
+            null,
+            (isset($reread_info) && $reread_info)
+        );
+
+        $tbl_is_view = false;
+        $tbl_storage_engine = $this->table_obj->getStorageEngine();
+        $tbl_collation = $this->table_obj->getCollation();
+        $table_info_num_rows = $this->table_obj->getNumRows();
+
+        PageSettings::showGroup('TableStructure');
+
+        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
+        $checkUserPrivileges->getPrivileges();
+
+        $this->response->getHeader()->getScripts()->addFiles([
+            'table/structure.js',
+            'indexes.js',
+        ]);
+
+        $selected = $_POST['selected'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No column selected.'));
+
+            return;
+        }
+
+        $sql_query = '';
+
+        if (($_POST['mult_btn'] ?? '') === __('Yes')) {
+            $i = 1;
+            $selectedCount = count($selected);
+            $sql_query = 'ALTER TABLE ' . Util::backquote($table);
+
+            foreach ($selected as $field) {
+                $this->relationCleanup->column($db, $table, $field);
+                $sql_query .= ' DROP ' . Util::backquote($field);
+                $sql_query .= $i++ === $selectedCount ? ';' : ',';
+            }
+
+            $this->dbi->selectDb($db);
+            $result = $this->dbi->tryQuery($sql_query);
+
+            if (! $result) {
+                $message = Message::error((string) $this->dbi->getError());
+            }
+        }
+
+        if (empty($message)) {
+            $message = Message::success();
+        }
+        $this->response->addHTML(
+            Generator::getMessage($message, $sql_query)
+        );
+
+        $cfgRelation = $this->relation->getRelationsParam();
+
+        $url_params = [];
+
+        Common::table();
+
+        $this->_url_query = Url::getCommonRaw([
+            'db' => $db,
+            'table' => $table,
+            'goto' => Url::getFromRoute('/table/structure'),
+            'back' => Url::getFromRoute('/table/structure'),
+        ]);
+
+        $url_params['goto'] = Url::getFromRoute('/table/structure');
+        $url_params['back'] = Url::getFromRoute('/table/structure');
+
+        // 2. Gets table keys and retains them
+        // @todo should be: $server->db($db)->table($table)->primary()
+        $primary = Index::getPrimary($this->table, $this->db);
+        $columns_with_index = $this->dbi
+            ->getTable($this->db, $this->table)
+            ->getColumnsWithIndex(
+                Index::UNIQUE | Index::INDEX | Index::SPATIAL
+                | Index::FULLTEXT
+            );
+        $columns_with_unique_index = $this->dbi
+            ->getTable($this->db, $this->table)
+            ->getColumnsWithIndex(Index::UNIQUE);
+
+        // 3. Get fields
+        $fields = (array) $this->dbi->getColumns(
+            $this->db,
+            $this->table,
+            null,
+            true
+        );
+
+        $this->response->addHTML($this->displayStructure(
+            $cfgRelation,
+            $columns_with_unique_index,
+            $url_params,
+            $primary,
+            $fields,
+            $columns_with_index
+        ));
+    }
+
+    public function dropConfirm(): void
+    {
+        global $db, $table;
+
+        $selected = $_POST['selected_fld'] ?? null;
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No column selected.'));
+
+            return;
+        }
+
+        $this->dbi->selectDb($this->db);
+
+        PageSettings::showGroup('TableStructure');
+
+        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
+        $checkUserPrivileges->getPrivileges();
+
+        $this->response->getHeader()->getScripts()->addFiles([
+            'table/structure.js',
+            'indexes.js',
+        ]);
+
+        Common::table();
+
+        $this->render('table/structure/drop_confirm', [
+            'db' => $db,
+            'table' => $table,
+            'fields' => $selected,
+        ]);
+    }
+
     /**
      * Moves columns in the table's structure based on $_REQUEST
      *
@@ -640,6 +771,7 @@ class StructureController extends AbstractController
         }
         if (empty($changes) && ! isset($_REQUEST['preview_sql'])) { // should never happen
             $this->response->setRequestStatus(false);
+
             return;
         }
         // query for moving the columns
@@ -959,7 +1091,6 @@ class StructureController extends AbstractController
     {
         $types = [
             'change',
-            'drop',
             'primary',
             'index',
             'unique',
@@ -982,6 +1113,7 @@ class StructureController extends AbstractController
             if (isset($_POST['selected'])) {
                 $_POST['selected_fld'] = $_POST['selected'];
             }
+
             return 'row_delete';
         }
 
@@ -1290,6 +1422,7 @@ class StructureController extends AbstractController
                 }
             }
         }
+
         return $regenerate;
     }
 
@@ -1379,6 +1512,7 @@ class StructureController extends AbstractController
                 return true;
             }
         }
+
         return ! empty($_POST['field_move_to'][$i]);
     }
 
@@ -1509,6 +1643,7 @@ class StructureController extends AbstractController
         }
 
         $engine = $this->table_obj->getStorageEngine();
+
         return $this->template->render('table/structure/display_structure', [
             'url_params' => [
                 'db' => $this->db,
@@ -1566,7 +1701,8 @@ class StructureController extends AbstractController
      */
     protected function getTableStats()
     {
-        global $showtable, $db_is_system_schema, $tbl_is_view, $tbl_storage_engine, $table_info_num_rows, $tbl_collation;
+        global $showtable, $db_is_system_schema, $tbl_is_view;
+        global $tbl_storage_engine, $table_info_num_rows, $tbl_collation;
 
         if (empty($showtable)) {
             $showtable = $this->dbi->getTable(
@@ -1661,6 +1797,7 @@ class StructureController extends AbstractController
                 'description' => $collation->getDescription(),
             ];
         }
+
         return $this->template->render('table/structure/display_table_stats', [
             'url_params' => [
                 'db' => $GLOBALS['db'],
@@ -1735,9 +1872,6 @@ class StructureController extends AbstractController
         $mult_btn = null;
         $centralColsError = null;
         switch ($submit_mult) {
-            case 'drop':
-                $what     = 'drop_fld';
-                break;
             case 'primary':
                 // Gets table primary key
                 $primary = $this->getKeyForTablePrimary();

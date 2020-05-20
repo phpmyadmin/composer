@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Auth;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Plugins\Auth\AuthenticationSignon;
 use PhpMyAdmin\Tests\PmaTestCase;
@@ -344,7 +345,9 @@ class AuthenticationSignonTest extends PmaTestCase
         $this->object->showFailure('no-activity');
 
         $this->assertEquals(
-            'You have been automatically logged out due to inactivity of 1440 seconds. Once you log in again, you should be able to resume the work where you left off.',
+            'You have been automatically logged out due to inactivity of'
+            . ' 1440 seconds. Once you log in again, you should be able to'
+            . ' resume the work where you left off.',
             $_SESSION['PMA_single_signon_error_message']
         );
     }
@@ -367,7 +370,7 @@ class AuthenticationSignonTest extends PmaTestCase
         $this->object->expects($this->exactly(1))
             ->method('showLoginForm');
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -403,7 +406,7 @@ class AuthenticationSignonTest extends PmaTestCase
         $this->object->expects($this->exactly(1))
             ->method('showLoginForm');
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -89,6 +89,7 @@ class Monitor
         $ret = $this->getJsonForChartingDataSet($ret, $statusVarValues, $serverVarValues);
 
         $ret['x'] = (int) (microtime(true) * 1000);
+
         return $ret;
     }
 
@@ -122,6 +123,7 @@ class Monitor
                 }
             }
         }
+
         return $ret;
     }
 
@@ -165,6 +167,7 @@ class Monitor
                 } /* foreach */
             } /* foreach */
         }
+
         return [
             $serverVars,
             $statusVars,
@@ -323,6 +326,7 @@ class Monitor
         $return['numRows'] = count($return['rows']);
 
         $this->dbi->freeResult($result);
+
         return $return;
     }
 
@@ -480,13 +484,12 @@ class Monitor
             }
         }
 
-        $loggingVars = $this->dbi->fetchResult(
+        return $this->dbi->fetchResult(
             'SHOW GLOBAL VARIABLES WHERE Variable_name IN'
             . ' ("general_log","slow_query_log","long_query_time","log_output")',
             0,
             1
         );
-        return $loggingVars;
     }
 
     /**
@@ -509,7 +512,9 @@ class Monitor
             $this->dbi->selectDb($database);
         }
 
-        if ($profiling = Util::profilingSupported()) {
+        $profiling = Util::profilingSupported();
+
+        if ($profiling) {
             $this->dbi->query('SET PROFILING=1;');
         }
 
@@ -544,6 +549,7 @@ class Monitor
             }
             $this->dbi->freeResult($result);
         }
+
         return $return;
     }
 }

@@ -1155,7 +1155,7 @@ class RoutinesTest extends TestCase
         $errors = [];
 
         $old_dbi = $GLOBALS['dbi'] ?? null;
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->types = new Types($dbi);
@@ -1219,7 +1219,7 @@ class RoutinesTest extends TestCase
                     'item_definer'              => 'me@home',
                     'item_type'                 => 'PROCEDURE',
                     'item_num_params'           => '0',
-                    'item_param_dir'            => '',
+                    'item_param_dir'            => [],
                     'item_param_name'           => '',
                     'item_param_type'           => '',
                     'item_param_length'         => '',
@@ -1290,7 +1290,7 @@ class RoutinesTest extends TestCase
                     'item_definer'              => '',
                     'item_type'                 => 'FUNCTION',
                     'item_num_params'           => '1',
-                    'item_param_dir'            => '',
+                    'item_param_dir'            => [],
                     'item_param_name'           => ['pa`ram'],
                     'item_param_type'           => ['VARCHAR'],
                     'item_param_length'         => ['45'],

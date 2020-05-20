@@ -16,7 +16,6 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Privileges;
-use PhpMyAdmin\Server\Users;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -56,14 +55,15 @@ class PrivilegesController extends AbstractController
         global $itemType, $tables, $num_tables, $total_num_tables, $sub_part, $is_show_stats, $db_is_system_schema;
         global $tooltip_truename, $tooltip_aliasname, $pos, $title, $export, $grants, $one_grant, $url_dbname;
         global $strPrivDescAllPrivileges, $strPrivDescAlter, $strPrivDescAlterRoutine, $strPrivDescCreateDb,
-               $strPrivDescCreateRoutine, $strPrivDescCreateTbl, $strPrivDescCreateTmpTable, $strPrivDescCreateUser,
+               $strPrivDescCreateRoutine, $strPrivDescCreateTbl, $strPrivDescCreateTmpTable,
                $strPrivDescCreateView, $strPrivDescDelete, $strPrivDescDeleteHistoricalRows, $strPrivDescDropDb,
                $strPrivDescDropTbl, $strPrivDescEvent, $strPrivDescExecute, $strPrivDescFile,
                $strPrivDescGrantTbl, $strPrivDescIndex, $strPrivDescInsert, $strPrivDescLockTables,
-               $strPrivDescMaxConnections, $strPrivDescMaxQuestions, $strPrivDescMaxUpdates, $strPrivDescMaxUserConnections,
+               $strPrivDescMaxConnections, $strPrivDescMaxQuestions, $strPrivDescMaxUpdates,
                $strPrivDescProcess, $strPrivDescReferences, $strPrivDescReload, $strPrivDescReplClient,
                $strPrivDescReplSlave, $strPrivDescSelect, $strPrivDescShowDb, $strPrivDescShowView,
-               $strPrivDescShutdown, $strPrivDescSuper, $strPrivDescTrigger, $strPrivDescUpdate, $strPrivDescUsage;
+               $strPrivDescShutdown, $strPrivDescSuper, $strPrivDescTrigger, $strPrivDescUpdate,
+               $strPrivDescMaxUserConnections, $strPrivDescUsage, $strPrivDescCreateUser;
 
         $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
         $checkUserPrivileges->getPrivileges();
@@ -211,6 +211,7 @@ class PrivilegesController extends AbstractController
                 Message::error(__('No Privileges'))
                     ->getDisplay()
             );
+
             return;
         }
         if (! $GLOBALS['is_grantuser'] && ! $GLOBALS['is_createuser']) {
@@ -236,6 +237,7 @@ class PrivilegesController extends AbstractController
                 )->getDisplay()
             );
             $this->response->setRequestStatus(false);
+
             return;
         }
 
@@ -399,6 +401,7 @@ class PrivilegesController extends AbstractController
                 $this->response->setRequestStatus($message->isSuccess());
                 $this->response->addJSON('message', $message);
                 $this->response->addJSON($extra_data);
+
                 return;
             }
         }
@@ -460,6 +463,7 @@ class PrivilegesController extends AbstractController
             if ($this->response->isAjax()) {
                 $this->response->addJSON('message', $export);
                 $this->response->addJSON('title', $title);
+
                 return;
             } else {
                 $this->response->addHTML('<h2>' . $title . '</h2>' . $export);
@@ -480,6 +484,7 @@ class PrivilegesController extends AbstractController
             } elseif ($this->response->isAjax() === true && empty($_REQUEST['ajax_page_request'])) {
                 $message = Message::success(__('User has been added.'));
                 $this->response->addJSON('message', $message);
+
                 return;
             } else {
                 $this->response->addHTML($databaseController->index([

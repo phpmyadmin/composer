@@ -29,6 +29,7 @@ use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use stdClass;
+use const MYSQLI_TYPE_BIT;
 use function array_filter;
 use function array_key_exists;
 use function array_keys;
@@ -68,7 +69,6 @@ use function strpos;
 use function strtoupper;
 use function substr;
 use function trim;
-use const MYSQLI_TYPE_BIT;
 
 /**
  * Handle all the functionalities related to displaying results
@@ -861,6 +861,7 @@ class Results
                 ),
             ]);
         }
+
         return [
             $output,
             $nbTotalPage,
@@ -1024,7 +1025,7 @@ class Results
             : 'false') . '"';
 
         // display the End button
-        $buttons_html .= $this->_getTableNavigationButton(
+        return $buttons_html . $this->_getTableNavigationButton(
             '&gt;&gt;',
             _pgettext('Last page', 'End'),
             @(ceil(
@@ -1037,8 +1038,6 @@ class Results
             $input_for_real_end,
             $onclick
         );
-
-        return $buttons_html;
     }
 
     /**
@@ -1155,6 +1154,7 @@ class Results
 
             $this->__set('display_params', $display_params);
         } // end for
+
         return $html;
     }
 
@@ -1555,11 +1555,14 @@ class Results
      */
     private function getOptionsBlock(): array
     {
-        if (isset($_SESSION['tmpval']['possible_as_geometry']) && $_SESSION['tmpval']['possible_as_geometry'] == false) {
+        if (isset($_SESSION['tmpval']['possible_as_geometry'])
+            && $_SESSION['tmpval']['possible_as_geometry'] == false
+        ) {
             if ($_SESSION['tmpval']['geoOption'] == self::GEOMETRY_DISP_GEOM) {
                 $_SESSION['tmpval']['geoOption'] = self::GEOMETRY_DISP_WKT;
             }
         }
+
         return [
             'geo_option' => $_SESSION['tmpval']['geoOption'],
             'hide_transformation' => $_SESSION['tmpval']['hide_transformation'],
@@ -1642,8 +1645,7 @@ class Results
      * @param int      $session_max_rows            maximum rows resulted by sql
      * @param string   $comments                    comment for row
      * @param array    $sort_direction              sort direction
-     * @param bool     $col_visib                   column is visible(false)
-     *                                              array                                column isn't visible(string array)
+     * @param bool     $col_visib                   column is visible(false) or column isn't visible(string array)
      * @param string   $col_visib_j                 element of $col_visib array
      *
      * @return array   2 element array - $order_link, $sorted_header_html
@@ -1885,6 +1887,7 @@ class Results
         if (empty($order_img)) {
             $order_img = '';
         }
+
         return [
             $single_sort_order,
             $sort_order,
@@ -2023,6 +2026,7 @@ class Results
                     ]
                 );
         }
+
         return [
             $sort_order,
             $order_img,
@@ -2502,8 +2506,13 @@ class Results
             // 1. Prepares the row
 
             // In print view these variable needs to be initialized
-            $del_url = $del_str = $edit_anchor_class
-                = $edit_str = $js_conf = $copy_url = $copy_str = $edit_url = null;
+            $del_url = null;
+            $del_str = null;
+            $edit_str = null;
+            $js_conf = null;
+            $copy_url = null;
+            $copy_str = null;
+            $edit_url = null;
 
             // 1.2 Defines the URLs for the modify/delete link(s)
 
@@ -2530,8 +2539,6 @@ class Results
                 $whereClauseMap[$row_no][$this->__get('table')] = $where_clause;
                 $this->__set('whereClauseMap', $whereClauseMap);
 
-                $where_clause_html = htmlspecialchars($where_clause);
-
                 // 1.2.1 Modify link(s) - update row case
                 if ($displayParts['edit_lnk'] == self::UPDATE_ROW) {
                     [
@@ -2539,7 +2546,6 @@ class Results
                         $copy_url,
                         $edit_str,
                         $copy_str,
-                        $edit_anchor_class,
                     ]
                             = $this->_getModifiedLinks(
                                 $where_clause,
@@ -2616,7 +2622,11 @@ class Results
                     $table_body_html .= $this->template->render('display/results/checkbox_and_links', [
                         'position' => self::POSITION_RIGHT,
                         'has_checkbox' => ! empty($del_url) && $displayParts['del_lnk'] !== self::KILL_PROCESS,
-                        'edit' => ['url' => $edit_url, 'string' => $edit_str, 'clause_is_unique' => $clause_is_unique ?? true],
+                        'edit' => [
+                            'url' => $edit_url,
+                            'string' => $edit_str,
+                            'clause_is_unique' => $clause_is_unique ?? true,
+                        ],
                         'copy' => ['url' => $copy_url, 'string' => $copy_str],
                         'delete' => ['url' => $del_url, 'string' => $del_str],
                         'row_number' => $row_no,
@@ -2846,10 +2856,13 @@ class Results
                     $mime_map[$orgFullColName]['transformation_options'] ?? ''
                 );
 
+                $orgTable = mb_strtolower($meta->orgtable);
+                $orgName = mb_strtolower($meta->orgname);
+
                 $meta->mimetype = str_replace(
                     '_',
                     '/',
-                    $this->transformation_info[$dbLower][mb_strtolower($meta->orgtable)][mb_strtolower($meta->orgname)][2]
+                    $this->transformation_info[$dbLower][$orgTable][$orgName][2]
                 );
             }
 
@@ -3008,7 +3021,9 @@ class Results
         $field_name
     ) {
         $linking_url_params = [];
-        $link_relations = $specialSchemaLinks[mb_strtolower($this->__get('db'))][mb_strtolower($this->__get('table'))][$field_name];
+        $db = mb_strtolower($this->__get('db'));
+        $table = mb_strtolower($this->__get('table'));
+        $link_relations = $specialSchemaLinks[$db][$table][$field_name];
 
         if (! is_array($link_relations['link_param'])) {
             $linking_url_params[$link_relations['link_param']] = $column_value;
@@ -3196,8 +3211,8 @@ class Results
      * @param bool   $clause_is_unique the unique condition of clause
      * @param string $url_sql_query    the analyzed sql query
      *
-     * @return array   5 element array - $edit_url, $copy_url,
-     *                 $edit_str, $copy_str, $edit_anchor_class
+     * @return array<int,string>       5 element array - $edit_url, $copy_url,
+     *                                                   $edit_str, $copy_str
      *
      * @access private
      */
@@ -3234,18 +3249,11 @@ class Results
             __('Copy')
         );
 
-        // Class definitions required for grid editing jQuery scripts
-        $edit_anchor_class = 'edit_row_anchor';
-        if ($clause_is_unique == 0) {
-            $edit_anchor_class .= ' nonunique';
-        }
-
         return [
             $edit_url,
             $copy_url,
             $edit_str,
             $copy_str,
-            $edit_anchor_class,
         ];
     }
 
@@ -3430,6 +3438,7 @@ class Results
         } else {
             $field_type_class = '';
         }
+
         return $field_type_class;
     }
 
@@ -3545,13 +3554,11 @@ class Results
         array $analyzed_sql_results
     ) {
         if (! isset($column) || $column === null) {
-            $cell = $this->_buildNullDisplay($class, $condition_field, $meta);
-            return $cell;
+            return $this->_buildNullDisplay($class, $condition_field, $meta);
         }
 
         if ($column == '') {
-            $cell = $this->_buildEmptyDisplay($class, $condition_field, $meta);
-            return $cell;
+            return $this->_buildEmptyDisplay($class, $condition_field, $meta);
         }
 
         // Display as [GEOMETRY - (size)]
@@ -3566,12 +3573,11 @@ class Results
                 $_url_params
             );
 
-            $cell = $this->_buildValueDisplay(
+            return $this->_buildValueDisplay(
                 $class,
                 $condition_field,
                 $geometry_text
             );
-            return $cell;
         }
 
         if ($_SESSION['tmpval']['geoOption'] == self::GEOMETRY_DISP_WKT) {
@@ -3586,7 +3592,7 @@ class Results
                 // skip 3rd param
             ] = $this->_getPartialText($wktval);
 
-            $cell = $this->_getRowData(
+            return $this->_getRowData(
                 $class,
                 $condition_field,
                 $analyzed_sql_results,
@@ -3602,7 +3608,6 @@ class Results
                 $is_field_truncated,
                 ''
             );
-            return $cell;
         }
 
         // Prepare in  Well Known Binary (WKB) format.
@@ -3617,7 +3622,7 @@ class Results
                 // skip 3rd param
             ] = $this->_getPartialText($wkbval);
 
-            $cell = $this->_getRowData(
+            return $this->_getRowData(
                 $class,
                 $condition_field,
                 $analyzed_sql_results,
@@ -3633,7 +3638,6 @@ class Results
                 $is_field_truncated,
                 ''
             );
-            return $cell;
         }
 
         $wkbval = $this->_handleNonPrintableContents(
@@ -3646,13 +3650,11 @@ class Results
             $_url_params
         );
 
-        $cell = $this->_buildValueDisplay(
+        return $this->_buildValueDisplay(
             $class,
             $condition_field,
             $wkbval
         );
-
-        return $cell;
     }
 
     /**
@@ -3726,13 +3728,11 @@ class Results
         }
 
         if (! isset($column) || $column === null) {
-            $cell = $this->_buildNullDisplay($class, $condition_field, $meta);
-            return $cell;
+            return $this->_buildNullDisplay($class, $condition_field, $meta);
         }
 
         if ($column == '') {
-            $cell = $this->_buildEmptyDisplay($class, $condition_field, $meta);
-            return $cell;
+            return $this->_buildEmptyDisplay($class, $condition_field, $meta);
         }
 
         // Cut all fields to $GLOBALS['cfg']['LimitChars']
@@ -3797,12 +3797,11 @@ class Results
         }
 
         if ($formatted) {
-            $cell = $this->_buildValueDisplay(
+            return $this->_buildValueDisplay(
                 $class,
                 $condition_field,
                 $displayedColumn
             );
-            return $cell;
         }
 
         // transform functions may enable no-wrapping:
@@ -3821,7 +3820,7 @@ class Results
             . $GLOBALS['dbi']->escapeString($column)
             . '\'';
 
-        $cell = $this->_getRowData(
+        return $this->_getRowData(
             $class,
             $condition_field,
             $analyzed_sql_results,
@@ -3837,8 +3836,6 @@ class Results
             $is_field_truncated,
             $original_length
         );
-
-        return $cell;
     }
 
     /**
@@ -4814,6 +4811,7 @@ class Results
                 $transform_options,
                 $meta
             );
+
             return $result;
         }
 

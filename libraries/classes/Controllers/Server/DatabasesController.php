@@ -190,6 +190,7 @@ class DatabasesController extends AbstractController
 
         if (! isset($params['new_db']) || mb_strlen($params['new_db']) === 0 || ! $this->response->isAjax()) {
             $this->response->addJSON(['message' => Message::error()]);
+
             return;
         }
 
@@ -294,7 +295,6 @@ class DatabasesController extends AbstractController
         $selected = $_POST['selected_dbs'];
         $rebuildDatabaseList = false;
         $sqlQuery = '';
-        $result = null;
         $numberOfDatabases = count($selected);
 
         for ($i = 0; $i < $numberOfDatabases; $i++) {
@@ -304,7 +304,7 @@ class DatabasesController extends AbstractController
             $rebuildDatabaseList = true;
 
             $sqlQuery .= $aQuery . ';' . "\n";
-            $result = $this->dbi->query($aQuery);
+            $this->dbi->query($aQuery);
             $this->transformations->clear($selected[$i]);
         }
 

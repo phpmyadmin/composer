@@ -95,7 +95,11 @@ class AuthenticationCookie extends AuthenticationPlugin
 
         $response = Response::getInstance();
 
-        // When sending login modal after session has expired, send the new token explicitly with the response to update the token in all the forms having a hidden token.
+        /**
+         * When sending login modal after session has expired, send the
+         * new token explicitly with the response to update the token
+         * in all the forms having a hidden token.
+         */
         $session_expired = isset($_REQUEST['check_timeout']) || isset($_REQUEST['session_timedout']);
         if (! $session_expired && $response->loginPage()) {
             if (defined('TESTSUITE')) {
@@ -105,7 +109,11 @@ class AuthenticationCookie extends AuthenticationPlugin
             }
         }
 
-        // When sending login modal after session has expired, send the new token explicitly with the response to update the token in all the forms having a hidden token.
+        /**
+         * When sending login modal after session has expired, send the
+         * new token explicitly with the response to update the token
+         * in all the forms having a hidden token.
+         */
         if ($session_expired) {
             $response->setRequestStatus(false);
             $response->addJSON(
@@ -114,7 +122,10 @@ class AuthenticationCookie extends AuthenticationPlugin
             );
         }
 
-        // logged_in response parameter is used to check if the login, using the modal was successful after session expiration
+        /**
+         * logged_in response parameter is used to check if the login,
+         * using the modal was successful after session expiration.
+         */
         if (isset($_REQUEST['session_timedout'])) {
             $response->addJSON(
                 'logged_in',
@@ -217,7 +228,8 @@ class AuthenticationCookie extends AuthenticationPlugin
             'server_options' => $serversOptions,
             'server' => $GLOBALS['server'],
             'lang' => $GLOBALS['lang'],
-            'has_captcha' => ! empty($GLOBALS['cfg']['CaptchaLoginPrivateKey']) && ! empty($GLOBALS['cfg']['CaptchaLoginPublicKey']),
+            'has_captcha' => ! empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
+                && ! empty($GLOBALS['cfg']['CaptchaLoginPublicKey']),
             'captcha_key' => $GLOBALS['cfg']['CaptchaLoginPublicKey'],
             'form_params' => $_form_params,
             'errors' => $errors,
@@ -302,10 +314,12 @@ class AuthenticationCookie extends AuthenticationPlugin
                         } else {
                             $conn_error = __('Entered captcha is wrong, try again!');
                         }
+
                         return false;
                     }
                 } else {
                     $conn_error = __('Missing reCAPTCHA verification, maybe it has been blocked by adblock?');
+
                     return false;
                 }
             }
@@ -332,6 +346,7 @@ class AuthenticationCookie extends AuthenticationPlugin
                         $conn_error = __(
                             'You are not allowed to log in to this MySQL server!'
                         );
+
                         return false;
                     }
                 }
@@ -339,6 +354,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             }
             /* Secure current session on login to avoid session fixation */
             Session::secure();
+
             return true;
         }
 
@@ -641,6 +657,7 @@ class AuthenticationCookie extends AuthenticationPlugin
                 $_SESSION['encryption_key'] = Crypt\Random::string(32);
             }
         }
+
         return $_SESSION['encryption_key'];
     }
 
@@ -659,6 +676,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         while (strlen($secret) < 16) {
             $secret .= $secret;
         }
+
         return substr($secret, 0, 16);
     }
 
@@ -677,6 +695,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         if ($length > 16) {
             return substr($secret, 0, 16);
         }
+
         return $this->enlargeSecret(
             $length == 1 ? $secret : substr($secret, 0, -1)
         );
@@ -697,6 +716,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         if ($length > 16) {
             return substr($secret, -16);
         }
+
         return $this->enlargeSecret(
             $length == 1 ? $secret : substr($secret, 1)
         );
@@ -754,6 +774,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         }
         $this->cleanSSLErrors();
         $iv = base64_encode($iv);
+
         return json_encode(
             [
                 'iv' => $iv,
@@ -808,6 +829,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             $result = $cipher->decrypt(base64_decode($data['payload']));
         }
         $this->cleanSSLErrors();
+
         return $result;
     }
 
@@ -821,6 +843,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         if ($this->_use_openssl) {
             return openssl_cipher_iv_length('AES-128-CBC');
         }
+
         return (new Crypt\AES(Crypt\Base::MODE_CBC))->block_size;
     }
 

@@ -42,13 +42,11 @@ class TrackerTest extends PmaTestCase
             'tracking' => 'tracking',
         ];
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())->method('escapeString')
             ->will($this->returnArgument(0));
-
-        $cfg['dbi'] = $dbi;
     }
 
     /**
@@ -78,7 +76,7 @@ class TrackerTest extends PmaTestCase
      */
     public function testIsActive()
     {
-        $attr = new ReflectionProperty('PhpMyAdmin\Tracker', 'enabled');
+        $attr = new ReflectionProperty(Tracker::class, 'enabled');
         $attr->setAccessible(true);
         $attr->setValue(false);
 
@@ -120,7 +118,7 @@ class TrackerTest extends PmaTestCase
      */
     public function testGetTableName($string, $expected): void
     {
-        $reflection = new ReflectionClass('PhpMyAdmin\Tracker');
+        $reflection = new ReflectionClass(Tracker::class);
         $method = $reflection->getMethod('getTableName');
         $method->setAccessible(true);
 
@@ -162,7 +160,7 @@ class TrackerTest extends PmaTestCase
      */
     public function testIsTracked()
     {
-        $attr = new ReflectionProperty('PhpMyAdmin\Tracker', 'enabled');
+        $attr = new ReflectionProperty(Tracker::class, 'enabled');
         $attr->setAccessible(true);
         $attr->setValue(false);
 
@@ -221,7 +219,7 @@ class TrackerTest extends PmaTestCase
         $GLOBALS['cfg']['Server']['tracking_add_drop_view'] = true;
         $GLOBALS['cfg']['Server']['user'] = 'pma_test_user';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -332,7 +330,7 @@ class TrackerTest extends PmaTestCase
      */
     public function testDeleteTracking()
     {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -368,7 +366,7 @@ class TrackerTest extends PmaTestCase
         $GLOBALS['cfg']['Server']['tracking_add_drop_view'] = true;
         $GLOBALS['cfg']['Server']['user'] = 'pma_test_user';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -425,7 +423,7 @@ class TrackerTest extends PmaTestCase
         $new_state = '1',
         $type = null
     ) {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -448,7 +446,7 @@ class TrackerTest extends PmaTestCase
         $result = null;
 
         if ($type === null) {
-            $method = new ReflectionMethod('PhpMyAdmin\Tracker', '_changeTracking');
+            $method = new ReflectionMethod(Tracker::class, '_changeTracking');
             $method->setAccessible(true);
             $result = $method->invoke(
                 null,
@@ -482,7 +480,7 @@ class TrackerTest extends PmaTestCase
             Tracker::changeTrackingData('', '', '', '', '')
         );
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -597,7 +595,7 @@ class TrackerTest extends PmaTestCase
      */
     public function testGetTrackedData($fetchArrayReturn, $expectedArray): void
     {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -718,6 +716,7 @@ class TrackerTest extends PmaTestCase
             'schema_snapshot' => 'dataschema',
             'tracking' => 'SELECT, DELETE',
         ];
+
         return [
             [
                 $fetchArrayReturn[0],

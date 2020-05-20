@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Database;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Database\Search;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\PmaTestCase;
@@ -31,7 +32,7 @@ class SearchTest extends PmaTestCase
         $GLOBALS['db'] = 'pma';
 
         //mock DBI
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -75,6 +76,7 @@ class SearchTest extends PmaTestCase
         $class = new ReflectionClass(Search::class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method->invokeArgs($this->object, $params);
     }
 
@@ -111,23 +113,32 @@ class SearchTest extends PmaTestCase
         return [
             [
                 '1',
-                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search%' OR CONVERT(`column2` USING utf8) LIKE '%search%')  OR  (CONVERT(`column1` USING utf8) LIKE '%string%' OR CONVERT(`column2` USING utf8) LIKE '%string%')",
+                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search%'"
+                . " OR CONVERT(`column2` USING utf8) LIKE '%search%') "
+                . " OR  (CONVERT(`column1` USING utf8) LIKE '%string%'"
+                . " OR CONVERT(`column2` USING utf8) LIKE '%string%')",
             ],
             [
                 '2',
-                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search%' OR CONVERT(`column2` USING utf8) LIKE '%search%')  AND  (CONVERT(`column1` USING utf8) LIKE '%string%' OR CONVERT(`column2` USING utf8) LIKE '%string%')",
+                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search%'"
+                . " OR CONVERT(`column2` USING utf8) LIKE '%search%') "
+                . " AND  (CONVERT(`column1` USING utf8) LIKE '%string%'"
+                . " OR CONVERT(`column2` USING utf8) LIKE '%string%')",
             ],
             [
                 '3',
-                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search string%' OR CONVERT(`column2` USING utf8) LIKE '%search string%')",
+                " WHERE (CONVERT(`column1` USING utf8) LIKE '%search string%'"
+                . " OR CONVERT(`column2` USING utf8) LIKE '%search string%')",
             ],
             [
                 '4',
-                " WHERE (CONVERT(`column1` USING utf8) LIKE 'search string' OR CONVERT(`column2` USING utf8) LIKE 'search string')",
+                " WHERE (CONVERT(`column1` USING utf8) LIKE 'search string'"
+                . " OR CONVERT(`column2` USING utf8) LIKE 'search string')",
             ],
             [
                 '5',
-                " WHERE (CONVERT(`column1` USING utf8) REGEXP 'search string' OR CONVERT(`column2` USING utf8) REGEXP 'search string')",
+                " WHERE (CONVERT(`column1` USING utf8) REGEXP 'search string'"
+                . " OR CONVERT(`column2` USING utf8) REGEXP 'search string')",
             ],
         ];
     }

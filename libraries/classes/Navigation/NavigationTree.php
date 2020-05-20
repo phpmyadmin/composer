@@ -18,6 +18,7 @@ use PhpMyAdmin\RecentFavoriteTable;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+use const E_USER_WARNING;
 use function array_key_exists;
 use function array_keys;
 use function array_shift;
@@ -48,7 +49,6 @@ use function trim;
 use function urlencode;
 use function usort;
 use function vsprintf;
-use const E_USER_WARNING;
 
 /**
  * Displays a collapsible of database objects in the navigation frame
@@ -228,7 +228,7 @@ class NavigationTree
             $query .= " WHERE `SCHEMA_NAME` < '%s' ";
             $query .= ') t ';
 
-            $retval = $this->dbi->fetchValue(
+            return $this->dbi->fetchValue(
                 sprintf(
                     $query,
                     (int) $GLOBALS['cfg']['FirstLevelNavigationItems'],
@@ -237,8 +237,6 @@ class NavigationTree
                     $this->dbi->escapeString($GLOBALS['db'])
                 )
             );
-
-            return $retval;
         }
 
         $prefixMap = [];
@@ -292,9 +290,8 @@ class NavigationTree
         }
 
         $navItems = (int) $GLOBALS['cfg']['FirstLevelNavigationItems'];
-        $retval = (int) floor(count($prefixMap) / $navItems) * $navItems;
 
-        return $retval;
+        return (int) floor(count($prefixMap) / $navItems) * $navItems;
     }
 
     /**
@@ -463,9 +460,7 @@ class NavigationTree
             }
         }
         if (count($path) > 1 && $path[0] != 'tables') {
-            $retval = false;
-
-            return $retval;
+            return false;
         }
 
         array_shift($path); // remove container
@@ -997,6 +992,7 @@ class NavigationTree
                 'parent_name' => $parentName ?? '',
             ]);
         }
+
         return false;
     }
 

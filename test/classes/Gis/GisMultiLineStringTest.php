@@ -297,6 +297,7 @@ class GisMultiLineStringTest extends GisGeomTestCase
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+
         return [
             [
                 'MULTILINESTRING((36 14,47 23,62 75),(36 10,17 23,178 53))',
@@ -369,11 +370,11 @@ class GisMultiLineStringTest extends GisGeomTestCase
     /**
      * test case for prepareRowAsSvg() method
      *
-     * @param string $spatial    GIS MULTILINESTRING object
-     * @param string $label      label for the GIS MULTILINESTRING object
-     * @param string $line_color color for the GIS MULTILINESTRING object
-     * @param array  $scale_data array containing data related to scaling
-     * @param string $output     expected output
+     * @param string $spatial   GIS MULTILINESTRING object
+     * @param string $label     label for the GIS MULTILINESTRING object
+     * @param string $lineColor color for the GIS MULTILINESTRING object
+     * @param array  $scaleData array containing data related to scaling
+     * @param string $output    expected output
      *
      * @return void
      *
@@ -382,15 +383,15 @@ class GisMultiLineStringTest extends GisGeomTestCase
     public function testPrepareRowAsSvg(
         $spatial,
         $label,
-        $line_color,
-        $scale_data,
+        $lineColor,
+        $scaleData,
         $output
     ) {
         $string = $this->object->prepareRowAsSvg(
             $spatial,
             $label,
-            $line_color,
-            $scale_data
+            $lineColor,
+            $scaleData
         );
         $this->assertEquals(1, preg_match($output, $string));
     }

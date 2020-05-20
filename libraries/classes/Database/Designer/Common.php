@@ -191,6 +191,7 @@ class Common
             }
             $ti++;
         }
+
         return $retval;
     }
 
@@ -231,6 +232,7 @@ class Common
                 }
             }
         }
+
         return $keys;
     }
 
@@ -316,6 +318,7 @@ class Common
             DatabaseInterface::CONNECT_CONTROL,
             DatabaseInterface::QUERY_STORE
         );
+
         return is_array($page_name) && isset($page_name[0]) ? $page_name[0] : null;
     }
 
@@ -388,6 +391,7 @@ class Common
         if (is_array($default_page_no) && isset($default_page_no[0])) {
             return intval($default_page_no[0]);
         }
+
         return -1;
     }
 
@@ -417,6 +421,7 @@ class Common
             DatabaseInterface::CONNECT_CONTROL,
             DatabaseInterface::QUERY_STORE
         );
+
         return is_array($pageNos) && count($pageNos) > 0;
     }
 
@@ -457,6 +462,7 @@ class Common
                 $page_no = $min_page_no[0];
             }
         }
+
         return intval($page_no);
     }
 
@@ -478,6 +484,7 @@ class Common
                 $db
             );
         }
+
         return null;
     }
 
@@ -558,7 +565,8 @@ class Common
             return [
                 false,
                 _pgettext(
-                    'phpMyAdmin configuration storage is not configured for "Display Features" on designer when user tries to set a display field.',
+                    'phpMyAdmin configuration storage is not configured for'
+                        . ' "Display Features" on designer when user tries to set a display field.',
                     'phpMyAdmin configuration storage is not configured for "Display Features".'
                 ),
             ];
@@ -662,6 +670,7 @@ class Common
                 }
 
                 $error = $this->dbi->getError();
+
                 return [
                     false,
                     __('Error: FOREIGN KEY relationship could not be added!')
@@ -709,6 +718,7 @@ class Common
         }
 
         $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+
         return [
             false,
             __('Error: Internal relationship could not be added!')
@@ -756,6 +766,7 @@ class Common
                 }
 
                 $error = $this->dbi->getError();
+
                 return [
                     false,
                     __('Error: FOREIGN KEY relationship could not be removed!')
@@ -783,6 +794,7 @@ class Common
 
         if (! $result) {
             $error = $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+
             return [
                 false,
                 __('Error: Internal relationship could not be removed!') . '<br>' . $error,

@@ -1,11 +1,17 @@
 <?php
-/**
- * file upload functions
- */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use const UPLOAD_ERR_CANT_WRITE;
+use const UPLOAD_ERR_EXTENSION;
+use const UPLOAD_ERR_FORM_SIZE;
+use const UPLOAD_ERR_INI_SIZE;
+use const UPLOAD_ERR_NO_FILE;
+use const UPLOAD_ERR_NO_TMP_DIR;
+use const UPLOAD_ERR_OK;
+use const UPLOAD_ERR_PARTIAL;
 use function basename;
 use function bin2hex;
 use function bzopen;
@@ -180,29 +186,37 @@ class File
     /**
      * Gets file content
      *
-     * @return string|false the binary file content,
-     *                      or false if no content
+     * @return string|null|false the binary file content,
+     *                           or false if no content
      *
      * @access public
      */
     public function getRawContent()
     {
-        if ($this->_content === null) {
-            if ($this->isUploaded() && ! $this->checkUploadedFile()) {
-                return false;
-            }
+        if ($this->_content !== null) {
+            return $this->_content;
+        }
 
-            if (! $this->isReadable()) {
-                return false;
-            }
+        if ($this->isUploaded() && ! $this->checkUploadedFile()) {
+            return false;
+        }
 
-            if (function_exists('file_get_contents')) {
-                $this->_content = file_get_contents($this->getName());
-            } elseif ($size = filesize($this->getName())) {
-                $handle = fopen($this->getName(), 'rb');
-                $this->_content = fread($handle, $size);
-                fclose($handle);
-            }
+        if (! $this->isReadable()) {
+            return false;
+        }
+
+        if (function_exists('file_get_contents')) {
+            $this->_content = file_get_contents($this->getName());
+
+            return $this->_content;
+        }
+
+        $size = filesize($this->getName());
+
+        if ($size) {
+            $handle = fopen($this->getName(), 'rb');
+            $this->_content = fread($handle, $size);
+            fclose($handle);
         }
 
         return $this->_content;
@@ -219,9 +233,10 @@ class File
     public function getContent()
     {
         $result = $this->getRawContent();
-        if ($result === false) {
+        if ($result === false || $result === null) {
             return false;
         }
+
         return '0x' . bin2hex($result);
     }
 
@@ -267,6 +282,7 @@ class File
         if (! $this->isUploaded()) {
             $this->setName(null);
             $this->_error_message = Message::error(__('File was not an uploaded file.'));
+
             return false;
         }
 
@@ -298,44 +314,40 @@ class File
             $key
         );
 
-        // check for file upload errors
         switch ($file['error']) {
-        // we do not use the PHP constants here cause not all constants
-        // are defined in all versions of PHP - but the correct constants names
-        // are given as comment
-            case 0: //UPLOAD_ERR_OK:
+            case UPLOAD_ERR_OK:
                 return $this->setUploadedFile($file['tmp_name']);
-            case 4: //UPLOAD_ERR_NO_FILE:
+            case UPLOAD_ERR_NO_FILE:
                 break;
-            case 1: //UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_INI_SIZE:
                 $this->_error_message = Message::error(__(
                     'The uploaded file exceeds the upload_max_filesize directive in '
                     . 'php.ini.'
                 ));
                 break;
-            case 2: //UPLOAD_ERR_FORM_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
                 $this->_error_message = Message::error(__(
                     'The uploaded file exceeds the MAX_FILE_SIZE directive that was '
                     . 'specified in the HTML form.'
                 ));
                 break;
-            case 3: //UPLOAD_ERR_PARTIAL:
+            case UPLOAD_ERR_PARTIAL:
                 $this->_error_message = Message::error(__(
                     'The uploaded file was only partially uploaded.'
                 ));
                 break;
-            case 6: //UPLOAD_ERR_NO_TMP_DIR:
+            case UPLOAD_ERR_NO_TMP_DIR:
                 $this->_error_message = Message::error(__('Missing a temporary folder.'));
                 break;
-            case 7: //UPLOAD_ERR_CANT_WRITE:
+            case UPLOAD_ERR_CANT_WRITE:
                 $this->_error_message = Message::error(__('Failed to write file to disk.'));
                 break;
-            case 8: //UPLOAD_ERR_EXTENSION:
+            case UPLOAD_ERR_EXTENSION:
                 $this->_error_message = Message::error(__('File upload stopped by extension.'));
                 break;
             default:
                 $this->_error_message = Message::error(__('Unknown error in file upload.'));
-        } // end switch
+        }
 
         return false;
     }
@@ -373,15 +385,13 @@ class File
         string $rownumber,
         string $key
     ): array {
-        $new_file = [
+        return [
             'name' => $file['name']['multi_edit'][$rownumber][$key],
             'type' => $file['type']['multi_edit'][$rownumber][$key],
             'size' => $file['size']['multi_edit'][$rownumber][$key],
             'tmp_name' => $file['tmp_name']['multi_edit'][$rownumber][$key],
             'error' => $file['error']['multi_edit'][$rownumber][$key],
         ];
-
-        return $new_file;
     }
 
     /**
@@ -450,10 +460,12 @@ class File
         if ($this->setUploadedFromTblChangeRequest($key, $rownumber)) {
             // well done ...
             $this->_error_message = null;
+
             return true;
         } elseif ($this->setSelectedFromTblChangeRequest($key, $rownumber)) {
             // well done ...
             $this->_error_message = null;
+
             return true;
         }
         // all failed, whether just no file uploaded/selected or an error
@@ -482,11 +494,13 @@ class File
         if (@is_link($this->getName())) {
             $this->_error_message = Message::error(__('File is a symbolic link'));
             $this->setName(null);
+
             return false;
         }
         if (! $this->isReadable()) {
             $this->_error_message = Message::error(__('File could not be read!'));
             $this->setName(null);
+
             return false;
         }
 
@@ -529,6 +543,7 @@ class File
             $this->_error_message = Message::error(__(
                 'Error moving the uploaded file, see [doc@faq1-11]FAQ 1.11[/doc].'
             ));
+
             return false;
         }
 
@@ -547,6 +562,7 @@ class File
         ob_end_clean();
         if (! $move_uploaded_file_result) {
             $this->_error_message = Message::error(__('Error while moving uploaded file.'));
+
             return false;
         }
 
@@ -555,6 +571,7 @@ class File
 
         if (! $this->isReadable()) {
             $this->_error_message = Message::error(__('Cannot read uploaded file.'));
+
             return false;
         }
 
@@ -581,10 +598,12 @@ class File
 
         if (! $file) {
             $this->_error_message = Message::error(__('File could not be read!'));
+
             return false;
         }
 
         $this->_compression = Util::getCompressionMimeType($file);
+
         return $this->_compression;
     }
 
@@ -608,6 +627,7 @@ class File
         if ($this->_handle === null) {
             $this->open();
         }
+
         return $this->_handle;
     }
 
@@ -653,6 +673,7 @@ class File
                     $this->_handle = @bzopen($this->getName(), 'r');
                 } else {
                     $this->errorUnsupported();
+
                     return false;
                 }
                 break;
@@ -661,6 +682,7 @@ class File
                     $this->_handle = @gzopen($this->getName(), 'r');
                 } else {
                     $this->errorUnsupported();
+
                     return false;
                 }
                 break;
@@ -670,12 +692,14 @@ class File
                 }
 
                 $this->errorUnsupported();
+
                 return false;
             case 'none':
                 $this->_handle = @fopen($this->getName(), 'r');
                 break;
             default:
                 $this->errorUnsupported();
+
                 return false;
         }
 
@@ -692,10 +716,12 @@ class File
         $result = $this->zipExtension->getContents($this->getName(), $specific_entry);
         if (! empty($result['error'])) {
             $this->_error_message = Message::rawError($result['error']);
+
             return false;
         }
         $this->_content = $result['data'];
         $this->_offset = 0;
+
         return true;
     }
 
@@ -707,6 +733,7 @@ class File
         if ($this->_handle !== null) {
             return feof($this->_handle);
         }
+
         return $this->_offset == strlen($this->_content);
     }
 
@@ -740,6 +767,7 @@ class File
             case 'application/zip':
                 $result = mb_strcut($this->_content, $this->_offset, $size);
                 $this->_offset += strlen($result);
+
                 return $result;
             case 'none':
             default:

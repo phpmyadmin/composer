@@ -9,7 +9,6 @@ namespace PhpMyAdmin;
 use function htmlspecialchars;
 use function in_array;
 use function is_array;
-use function is_int;
 use function mb_strrpos;
 use function mb_strtolower;
 use function mb_substr;
@@ -59,6 +58,7 @@ class ReplicationGui
                 $_SESSION['replication']['sr_action_status'] = 'unknown';
             }
         }
+
         return $html;
     }
 
@@ -267,7 +267,9 @@ class ReplicationGui
 
         $variables = [];
         foreach ($replicationVariables as $variable) {
-            $serverReplicationVariable = is_array($serverReplication) && isset($serverReplication[0]) ? $serverReplication[0][$variable] : '';
+            $serverReplicationVariable = is_array($serverReplication) && isset($serverReplication[0])
+                ? $serverReplication[0][$variable]
+                : '';
 
             $variables[$variable] = [
                 'name' => $variable,
@@ -335,6 +337,7 @@ class ReplicationGui
                 }
             }
         }
+
         return [
             $username_length,
             $hostname_length,
@@ -420,7 +423,10 @@ class ReplicationGui
 
             if (isset($_POST['slave_changemaster']) && ! $GLOBALS['cfg']['AllowArbitraryServer']) {
                 $_SESSION['replication']['sr_action_status'] = 'error';
-                $_SESSION['replication']['sr_action_info'] = __('Connection to server is disabled, please enable $cfg[\'AllowArbitraryServer\'] in phpMyAdmin configuration.');
+                $_SESSION['replication']['sr_action_info'] = __(
+                    'Connection to server is disabled, please enable'
+                    . ' $cfg[\'AllowArbitraryServer\'] in phpMyAdmin configuration.'
+                );
             } elseif (isset($_POST['slave_changemaster'])) {
                 $result = $this->handleRequestForSlaveChangeMaster();
             } elseif (isset($_POST['sr_slave_server_control'])) {
@@ -477,15 +483,18 @@ class ReplicationGui
      */
     public function handleRequestForSlaveChangeMaster()
     {
+        /** @var DatabaseInterface $dbi */
+        global $dbi;
+
         $sr = [];
         $_SESSION['replication']['m_username'] = $sr['username']
-            = $GLOBALS['dbi']->escapeString($_POST['username']);
+            = $dbi->escapeString($_POST['username']);
         $_SESSION['replication']['m_password'] = $sr['pma_pw']
-            = $GLOBALS['dbi']->escapeString($_POST['pma_pw']);
+            = $dbi->escapeString($_POST['pma_pw']);
         $_SESSION['replication']['m_hostname'] = $sr['hostname']
-            = $GLOBALS['dbi']->escapeString($_POST['hostname']);
+            = $dbi->escapeString($_POST['hostname']);
         $_SESSION['replication']['m_port']     = $sr['port']
-            = $GLOBALS['dbi']->escapeString($_POST['text_port']);
+            = $dbi->escapeString($_POST['text_port']);
         $_SESSION['replication']['m_correct']  = '';
         $_SESSION['replication']['sr_action_status'] = 'error';
         $_SESSION['replication']['sr_action_info'] = __('Unknown error');
@@ -593,10 +602,8 @@ class ReplicationGui
         );
         $qStart = $this->replication->slaveControl('START', null, DatabaseInterface::CONNECT_USER);
 
-        $result = ($qStop !== false && $qStop !== -1 &&
+        return $qStop !== false && $qStop !== -1 &&
             $qSkip !== false && $qSkip !== -1 &&
-            $qStart !== false && $qStart !== -1);
-
-        return $result;
+            $qStart !== false && $qStart !== -1;
     }
 }

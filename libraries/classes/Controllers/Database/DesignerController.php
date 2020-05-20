@@ -83,6 +83,7 @@ class DesignerController extends AbstractController
             if (! empty($html)) {
                 $this->response->addHTML($html);
             }
+
             return;
         }
 
@@ -105,6 +106,7 @@ class DesignerController extends AbstractController
                         )
                     );
                     $this->response->setRequestStatus(false);
+
                     return;
                 } else {
                     $page = $this->designerCommon->createNewPage($_POST['selected_value'], $_POST['db']);
@@ -181,7 +183,8 @@ class DesignerController extends AbstractController
 
         foreach ($tab_pos as $position) {
             if (! in_array($position['dbName'] . '.' . $position['tableName'], $fullTableNames)) {
-                foreach ($this->designerCommon->getTablesInfo($position['dbName'], $position['tableName']) as $designerTable) {
+                $designerTables = $this->designerCommon->getTablesInfo($position['dbName'], $position['tableName']);
+                foreach ($designerTables as $designerTable) {
                     $script_display_field[] = $designerTable;
                 }
             }

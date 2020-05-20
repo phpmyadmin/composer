@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Display;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Display\Results as DisplayResults;
@@ -46,7 +47,7 @@ class ResultsTest extends PmaTestCase
         $GLOBALS['cfg']['Server']['DisableIS'] = false;
         $_SESSION[' HMAC_secret '] = 'test';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -80,6 +81,7 @@ class ResultsTest extends PmaTestCase
         $class = new ReflectionClass(DisplayResults::class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method->invokeArgs($this->object, $params);
     }
 
@@ -141,7 +143,7 @@ class ResultsTest extends PmaTestCase
             $actual
         );
         $this->assertStringContainsString(
-            '" method="post">',
+            '" method="post" >',
             $actual
         );
         $this->assertStringContainsString(
@@ -558,6 +560,7 @@ class ResultsTest extends PmaTestCase
         $parser = new Parser(
             'SELECT * FROM db_name WHERE `db_name`.`tbl`.id > 0 AND `id` < 10'
         );
+
         return [
             [
                 ['statement' => $parser->statements[0]],
@@ -1087,7 +1090,7 @@ class ResultsTest extends PmaTestCase
         ];
         $this->object->__set('fields_meta', $fields_meta);
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -10,6 +10,7 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\Util;
 use TCPDF;
+use const PNG_ALL_FILTERS;
 use function array_merge;
 use function base64_encode;
 use function count;
@@ -26,7 +27,6 @@ use function mb_strtolower;
 use function mb_substr;
 use function ob_get_clean;
 use function ob_start;
-use const PNG_ALL_FILTERS;
 
 /**
  * Handles visualization of GIS data
@@ -546,6 +546,7 @@ class GisVisualization
         } elseif ($format == 'ol') {
             return $this->asOl();
         }
+
         return '';
     }
 
@@ -663,11 +664,11 @@ class GisVisualization
     /**
      * Prepares and return the dataset as needed by the visualization.
      *
-     * @param array  $data       Raw data
-     * @param array  $scale_data Data related to scaling
-     * @param string $format     Format of the visualization
-     * @param object $results    Image object in the case of png
-     *                           TCPDF object in the case of pdf
+     * @param array                       $data       Raw data
+     * @param array                       $scale_data Data related to scaling
+     * @param string                      $format     Format of the visualization
+     * @param resource|TCPDF|string|false $results    Image object in the case of png
+     *                                                TCPDF object in the case of pdf
      *
      * @return mixed the formatted array of data
      *
@@ -713,7 +714,7 @@ class GisVisualization
                     $scale_data,
                     $results
                 );
-            } elseif ($format == 'pdf') {
+            } elseif ($format == 'pdf' && $results instanceof TCPDF) {
                 $results = $gis_obj->prepareRowAsPdf(
                     $row[$this->_settings['spatialColumn']],
                     $label,

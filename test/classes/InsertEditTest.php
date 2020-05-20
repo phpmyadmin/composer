@@ -12,6 +12,9 @@ use PhpMyAdmin\InsertEdit;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\Message;
+use PhpMyAdmin\Scripts;
+use PhpMyAdmin\Header;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
@@ -82,6 +85,7 @@ class InsertEditTest extends TestCase
         $class = new ReflectionClass(InsertEdit::class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method->invokeArgs(
             $object ?? $this->insertEdit,
             $params
@@ -165,7 +169,7 @@ class InsertEditTest extends TestCase
             'b="fo\o"',
         ];
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -232,7 +236,7 @@ class InsertEditTest extends TestCase
         $temp->primary_key = 1;
         $meta_arr = [$temp];
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -257,13 +261,13 @@ class InsertEditTest extends TestCase
         // case 2
         $GLOBALS['cfg']['ShowSQL'] = false;
 
-        $responseMock = $this->getMockBuilder('PhpMyAdmin\Response')
+        $responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->setMethods(['addHtml'])
             ->getMock();
 
         $restoreInstance = Response::getInstance();
-        $response = new ReflectionProperty('PhpMyAdmin\Response', '_instance');
+        $response = new ReflectionProperty(Response::class, '_instance');
         $response->setAccessible(true);
         $response->setValue($responseMock);
 
@@ -289,7 +293,7 @@ class InsertEditTest extends TestCase
     {
         $GLOBALS['cfg']['InsertRows'] = 2;
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2303,7 +2307,7 @@ class InsertEditTest extends TestCase
         );
 
         // Case 3 (bit)
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2495,7 +2499,7 @@ class InsertEditTest extends TestCase
         $_POST['insert_rows'] = 5;
         $GLOBALS['cfg']['InsertRows'] = 2;
 
-        $scriptsMock = $this->getMockBuilder('PhpMyAdmin\Scripts')
+        $scriptsMock = $this->getMockBuilder(Scripts::class)
             ->disableOriginalConstructor()
             ->setMethods(['addFile'])
             ->getMock();
@@ -2503,7 +2507,7 @@ class InsertEditTest extends TestCase
         $scriptsMock->expects($this->exactly(2))
             ->method('addFile');
 
-        $headerMock = $this->getMockBuilder('PhpMyAdmin\Header')
+        $headerMock = $this->getMockBuilder(Header::class)
             ->disableOriginalConstructor()
             ->setMethods(['getScripts'])
             ->getMock();
@@ -2512,7 +2516,7 @@ class InsertEditTest extends TestCase
             ->method('getScripts')
             ->will($this->returnValue($scriptsMock));
 
-        $responseMock = $this->getMockBuilder('PhpMyAdmin\Response')
+        $responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->setMethods(['getHeader'])
             ->getMock();
@@ -2522,7 +2526,7 @@ class InsertEditTest extends TestCase
             ->will($this->returnValue($headerMock));
 
         $restoreInstance = Response::getInstance();
-        $response = new ReflectionProperty('PhpMyAdmin\Response', '_instance');
+        $response = new ReflectionProperty(Response::class, '_instance');
         $response->setAccessible(true);
         $response->setValue($responseMock);
 
@@ -2550,7 +2554,7 @@ class InsertEditTest extends TestCase
         $row = ['1' => 1];
         $res = 'foobar';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2685,7 +2689,7 @@ class InsertEditTest extends TestCase
         $GLOBALS['cfg']['IgnoreMultiSubmitErrors'] = false;
         $_POST['submit_type'] = '';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2731,12 +2735,12 @@ class InsertEditTest extends TestCase
         );
 
         $this->assertInstanceOf(
-            'PhpMyAdmin\Message',
+            Message::class,
             $result[2][0]
         );
 
         $msg = $result[2][0];
-        $reflectionMsg = new ReflectionProperty('PhpMyAdmin\Message', 'params');
+        $reflectionMsg = new ReflectionProperty(Message::class, 'params');
         $reflectionMsg->setAccessible(true);
 
         $this->assertEquals(
@@ -2775,7 +2779,7 @@ class InsertEditTest extends TestCase
         $GLOBALS['cfg']['IgnoreMultiSubmitErrors'] = true;
         $_POST['submit_type'] = '';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2821,12 +2825,12 @@ class InsertEditTest extends TestCase
         );
 
         $this->assertInstanceOf(
-            'PhpMyAdmin\Message',
+            Message::class,
             $result[2][0]
         );
 
         $msg = $result[2][0];
-        $reflectionMsg = new ReflectionProperty('PhpMyAdmin\Message', 'params');
+        $reflectionMsg = new ReflectionProperty(Message::class, 'params');
         $reflectionMsg->setAccessible(true);
 
         $this->assertEquals(
@@ -2870,7 +2874,7 @@ class InsertEditTest extends TestCase
             ],
         ];
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -2904,7 +2908,7 @@ class InsertEditTest extends TestCase
         $map['f']['foreign_table'] = 'TABLES';
         $map['f']['foreign_field'] = 'f';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3146,7 +3150,7 @@ class InsertEditTest extends TestCase
         // case 2
         $multi_edit_funcs = ['UUID'];
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3225,7 +3229,7 @@ class InsertEditTest extends TestCase
         $prow = [];
         $prow['a'] = b'101';
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3486,7 +3490,7 @@ class InsertEditTest extends TestCase
 
         $_POST['where_clause'][0] = 1;
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3586,7 +3590,7 @@ class InsertEditTest extends TestCase
      */
     public function testGetTableColumns()
     {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3620,7 +3624,7 @@ class InsertEditTest extends TestCase
      */
     public function testDetermineInsertOrEdit()
     {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -3634,13 +3638,13 @@ class InsertEditTest extends TestCase
         $GLOBALS['cfg']['ShowSQL'] = false;
         $_POST['default_action'] = 'insert';
 
-        $responseMock = $this->getMockBuilder('PhpMyAdmin\Response')
+        $responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->setMethods(['addHtml'])
             ->getMock();
 
         $restoreInstance = Response::getInstance();
-        $response = new ReflectionProperty('PhpMyAdmin\Response', '_instance');
+        $response = new ReflectionProperty(Response::class, '_instance');
         $response->setAccessible(true);
         $response->setValue($responseMock);
 
@@ -3698,7 +3702,7 @@ class InsertEditTest extends TestCase
     {
         $GLOBALS['cfg']['ShowPropertyComments'] = false;
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

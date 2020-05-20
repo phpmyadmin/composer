@@ -21,6 +21,7 @@ use PhpMyAdmin\SqlParser\Utils\Misc;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use const PHP_EOL;
 use function count;
 use function in_array;
 use function ini_set;
@@ -30,7 +31,6 @@ use function ob_get_length;
 use function register_shutdown_function;
 use function strlen;
 use function time;
-use const PHP_EOL;
 
 final class ExportController extends AbstractController
 {
@@ -57,11 +57,11 @@ final class ExportController extends AbstractController
     public function index(): void
     {
         global $containerBuilder, $db, $export_type, $filename_template, $sql_query, $err_url, $message;
-        global $compression, $crlf, $asfile, $buffer_needed, $save_on_server, $file_handle;
+        global $compression, $crlf, $asfile, $buffer_needed, $save_on_server, $file_handle, $separate_files;
         global $output_charset_conversion, $output_kanji_conversion, $table, $what, $export_plugin, $single_table;
-        global $compression_methods, $onserver, $back_button, $refreshButton, $save_filename, $filename, $separate_files;
-        global $quick_export, $cfg, $tables, $table_select, $aliases, $dump_buffer, $dump_buffer_len, $dump_buffer_objects;
-        global $time_start, $charset, $remember_template, $mime_type, $num_tables;
+        global $compression_methods, $onserver, $back_button, $refreshButton, $save_filename, $filename;
+        global $quick_export, $cfg, $tables, $table_select, $aliases, $dump_buffer, $dump_buffer_len;
+        global $time_start, $charset, $remember_template, $mime_type, $num_tables, $dump_buffer_objects;
         global $active_page, $do_relation, $do_comments, $do_mime, $do_dates, $whatStrucOrData, $db_select;
         global $table_structure, $table_data, $lock_tables, $allrows, $limit_to, $limit_from;
 
@@ -415,7 +415,11 @@ final class ExportController extends AbstractController
 
         // For raw query export, filename will be export.extension
         if ($export_type === 'raw') {
-            [$filename ] = $this->export->getFinalFilenameAndMimetypeForFilename($export_plugin, $compression, 'export');
+            [$filename ] = $this->export->getFinalFilenameAndMimetypeForFilename(
+                $export_plugin,
+                $compression,
+                'export'
+            );
         }
 
         // Open file on server if needed
@@ -651,6 +655,7 @@ final class ExportController extends AbstractController
          */
         if (empty($asfile)) {
             echo $this->export->getHtmlForDisplayedExportFooter($back_button, $refreshButton);
+
             return;
         } // end if
 

@@ -8,10 +8,12 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Controllers\Table\StructureController;
 use PhpMyAdmin\CreateAddField;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
+use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\PmaTestCase;
 use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
@@ -43,11 +45,11 @@ class StructureControllerTest extends PmaTestCase
         $GLOBALS['cfg']['Server']['user'] = 'pma_user';
         $GLOBALS['PMA_PHP_SELF'] = 'index.php';
 
-        $table = $this->getMockBuilder('PhpMyAdmin\Table')
+        $table = $this->getMockBuilder(Table::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())->method('getTable')
@@ -215,12 +217,12 @@ class StructureControllerTest extends PmaTestCase
             $method->invoke($ctrl)
         );
 
-        $_POST['submit_mult_drop_x'] = true;
+        $_POST['submit_mult_unique_x'] = true;
         $this->assertEquals(
-            'drop',
+            'unique',
             $method->invoke($ctrl)
         );
-        unset($_POST['submit_mult_drop_x']);
+        unset($_POST['submit_mult_unique_x']);
 
         $_POST['submit_mult'] = 'create';
         $this->assertEquals(
@@ -255,7 +257,7 @@ class StructureControllerTest extends PmaTestCase
      */
     public function testPMAGetDataForSubmitMult()
     {
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->expects($this->any())
@@ -280,8 +282,6 @@ class StructureControllerTest extends PmaTestCase
         );
 
         $submit_mult = 'index';
-        $db = 'PMA_db';
-        $table = 'PMA_table';
         $selected = [
             'table1',
             'table2',

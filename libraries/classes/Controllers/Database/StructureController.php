@@ -31,6 +31,7 @@ use PhpMyAdmin\Util;
 use function array_search;
 use function ceil;
 use function count;
+use function define;
 use function htmlspecialchars;
 use function implode;
 use function in_array;
@@ -38,6 +39,7 @@ use function is_string;
 use function json_decode;
 use function json_encode;
 use function max;
+use function mb_strlen;
 use function mb_substr;
 use function md5;
 use function preg_match;
@@ -250,6 +252,7 @@ class StructureController extends AbstractController
                     $favoriteTables
                 ));
             }
+
             return;
         }
         $changes = true;
@@ -285,6 +288,7 @@ class StructureController extends AbstractController
                 'msg' => __('Favorite List is full!'),
             ]);
             $this->response->addJSON($json);
+
             return;
         }
         // Check if current table is already in favorite list.
@@ -335,6 +339,7 @@ class StructureController extends AbstractController
             $realRowCount = Util::formatNumber($realRowCount, 0);
 
             $this->response->addJSON(['real_row_count' => $realRowCount]);
+
             return;
         }
 
@@ -551,8 +556,6 @@ class StructureController extends AbstractController
                 unset($full_query_views);
             }
 
-            $full_query_views = $full_query_views ?? null;
-
             $_url_params = [
                 'query_type' => $what,
                 'db' => $db,
@@ -601,7 +604,6 @@ class StructureController extends AbstractController
             $run_parts = false;
             // whether to execute the query at the end (to display results)
             $execute_query_later = false;
-            $result = null;
 
             if ($query_type == 'drop_tbl') {
                 $sql_query_views = '';
@@ -745,7 +747,7 @@ class StructureController extends AbstractController
                 if ($run_parts && ! $copyTable) {
                     $sql_query .= $aQuery . ';' . "\n";
                     $this->dbi->selectDb($db);
-                    $result = $this->dbi->query($aQuery);
+                    $this->dbi->query($aQuery);
 
                     if ($query_type == 'drop_tbl') {
                         $this->transformations->clear($db, $selected[$i]);
@@ -1195,6 +1197,7 @@ class StructureController extends AbstractController
                 ]);
             }
         }
+
         return $tracking_icon;
     }
 
@@ -1358,6 +1361,7 @@ class StructureController extends AbstractController
                 return true;
             }
         }
+
         return false;
     }
 
@@ -1382,6 +1386,7 @@ class StructureController extends AbstractController
                 return true;
             }
         }
+
         return false;
     }
 
@@ -1546,6 +1551,7 @@ class StructureController extends AbstractController
                 $overhead_size += $current_table['Data_free'];
             }
         }
+
         return [
             $current_table,
             $formatted_size,

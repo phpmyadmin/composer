@@ -36,7 +36,7 @@ class OperationsTest extends TestBase
         $this->waitForElement('partialLinkText', 'Operations')->click();
         $this->waitForElement(
             'xpath',
-            '//legend[contains(., \'Rename database to\')]'
+            '//div[contains(., \'Rename database to\')]'
         );
     }
 
@@ -118,12 +118,13 @@ class OperationsTest extends TestBase
     {
         $this->_getToDBOperations();
 
+        $this->reloadPage();// Reload or scrolling will not work ..
         $new_db_name = $this->database_name . 'copy';
         $this->byCssSelector('form#copy_db_form input[name=newname]')
             ->sendKeys($new_db_name);
 
         $this->scrollIntoView('copy_db_form', -150);
-        $this->byCssSelector("form#copy_db_form input[type='submit']")->click();
+        $this->byCssSelector('form#copy_db_form input[name="submit_copy"]')->click();
 
         $this->waitForElement(
             'xpath',

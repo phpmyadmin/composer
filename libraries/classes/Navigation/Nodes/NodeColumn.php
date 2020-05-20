@@ -63,6 +63,7 @@ class NodeColumn extends Node
                 $retval = 'pause';
                 break;
         }
+
         return $retval;
     }
 
@@ -84,8 +85,8 @@ class NodeColumn extends Node
                 $retval .= $this->getTruncateValue($key, $value);
             }
         }
-        $retval .= ')';
-        return $retval;
+
+        return $retval . ')';
     }
 
     /**

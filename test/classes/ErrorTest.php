@@ -7,8 +7,8 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Error;
-use function preg_match;
 use const DIRECTORY_SEPARATOR;
+use function preg_match;
 
 /**
  * Error class testing.
@@ -102,7 +102,8 @@ class ErrorTest extends PmaTestCase
             ],
             [
                 __FILE__,
-                '.' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'ErrorTest.php',
+                '.' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR
+                    . 'classes' . DIRECTORY_SEPARATOR . 'ErrorTest.php',
             ],
             [
                 './NONEXISTING',

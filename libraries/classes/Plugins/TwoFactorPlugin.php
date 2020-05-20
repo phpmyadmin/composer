@@ -68,10 +68,12 @@ class TwoFactorPlugin
                     sprintf(__('Two-factor authentication failed: %s'), $this->_message)
                 )->getDisplay();
             }
+
             return Message::rawError(
                 __('Two-factor authentication failed.')
             )->getDisplay();
         }
+
         return '';
     }
 
@@ -160,7 +162,8 @@ class TwoFactorPlugin
             $parsed['host'] = Core::getenv('HTTP_HOST');
         }
         if ($return_url) {
-            return $parsed['scheme'] . '://' . $parsed['host'] . (! empty($parsed['port']) ? ':' . $parsed['port'] : '');
+            return $parsed['scheme'] . '://' . $parsed['host']
+                . (! empty($parsed['port']) ? ':' . $parsed['port'] : '');
         } else {
             return $parsed['host'];
         }

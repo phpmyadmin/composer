@@ -94,15 +94,15 @@ class CreateRemoveUserTest extends TestBase
 
         // Removing the newly added user
         $this->waitForElement('partialLinkText', 'User accounts')->click();
-        $el = $this->waitForElement('id', 'usersForm');
+        $this->waitForElement('id', 'usersForm');
         $temp = $this->_txtUsername . '&amp;#27;localhost';
 
         $this->byXPath(
             "(//input[@name='selected_usr[]'])[@value='" . $temp . "']"
         )->click();
 
-        $this->scrollIntoView('fieldset_delete_user_footer');
-        $this->byId('checkbox_drop_users_db')->click();
+        $this->scrollIntoView('deleteUserCard');
+        $this->byId('dropUsersDbCheckbox')->click();
 
         $this->byId('buttonGo')->click();
         $this->waitForElement('cssSelector', 'button.submitOK')->click();

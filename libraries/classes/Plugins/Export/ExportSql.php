@@ -20,12 +20,13 @@ use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\SqlParser\Components\CreateDefinition;
-use PhpMyAdmin\SqlParser\Components\OptionsArray;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\Util;
+use const E_USER_ERROR;
+use const PHP_VERSION;
 use function bin2hex;
 use function count;
 use function defined;
@@ -47,8 +48,6 @@ use function stripos;
 use function strtotime;
 use function strtoupper;
 use function trigger_error;
-use const E_USER_ERROR;
-use const PHP_VERSION;
 
 /**
  * Handles the export for the SQL class
@@ -659,6 +658,7 @@ class ExportSql extends ExportPlugin
             foreach ($lines as $line) {
                 $result[] = '-- ' . $line . $GLOBALS['crlf'];
             }
+
             return implode('', $result);
         }
 
@@ -1298,9 +1298,8 @@ class ExportSql extends ExportPlugin
             $tmp[] = Util::backquote($col_alias) . ' ' .
                 $definition['Type'] . $crlf;
         }
-        $create_query .= implode(',', $tmp) . ');' . $crlf;
 
-        return $create_query;
+        return $create_query . implode(',', $tmp) . ');' . $crlf;
     }
 
     /**
@@ -1548,6 +1547,7 @@ class ExportSql extends ExportPlugin
             if (! defined('TESTSUITE')) {
                 trigger_error($message, E_USER_ERROR);
             }
+
             return $this->_exportComment($message);
         }
 
@@ -1555,7 +1555,13 @@ class ExportSql extends ExportPlugin
         $old_mode = Context::$MODE;
 
         $warning = '';
-        if ($result != false && ($row = $GLOBALS['dbi']->fetchRow($result))) {
+
+        $row = null;
+        if ($result !== false) {
+            $row = $GLOBALS['dbi']->fetchRow($result);
+        }
+
+        if ($row) {
             $create_query = $row[1];
             unset($row);
 
@@ -1935,7 +1941,8 @@ class ExportSql extends ExportPlugin
         );
 
         if ($do_mime && $cfgRelation['mimework']) {
-            if (! ($mime_map = $this->transformations->getMime($db, $table, true))) {
+            $mime_map = $this->transformations->getMime($db, $table, true);
+            if (! $mime_map) {
                 unset($mime_map);
             }
         }
@@ -2308,6 +2315,7 @@ class ExportSql extends ExportPlugin
             if (! defined('TESTSUITE')) {
                 trigger_error($message, E_USER_ERROR);
             }
+
             return $this->export->outputHandler(
                 $this->_exportComment($message)
             );
@@ -2719,6 +2727,7 @@ class ExportSql extends ExportPlugin
             '" float NOT NULL$3' . "\n",
             $create_query
         );
+
         return preg_replace(
             '/" (float|double)(\([0-9,]+,[0-9,]+\))? NOT NULL DEFAULT \'([^\'])/',
             '" float NOT NULL DEFAULT \'$3',
@@ -2828,7 +2837,8 @@ class ExportSql extends ExportPlugin
                 if (! empty($field->key)) {
                     foreach ($field->key->columns as $key => $column) {
                         if (! empty($aliases[$old_database]['tables'][$old_table]['columns'][$column['name']])) {
-                            $field->key->columns[$key]['name'] = $aliases[$old_database]['tables'][$old_table]['columns'][$column['name']];
+                            $columnAliases = $aliases[$old_database]['tables'][$old_table]['columns'];
+                            $field->key->columns[$key]['name'] = $columnAliases[$column['name']];
                             $flag = true;
                         }
                     }

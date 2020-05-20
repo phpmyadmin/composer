@@ -76,6 +76,7 @@ class Menu
     {
         $retval  = $this->_getBreadcrumbs();
         $retval .= $this->_getMenu();
+
         return $retval;
     }
 
@@ -122,6 +123,7 @@ class Menu
                 unset($tabs[$key]);
             }
         }
+
         return $this->template->render('top_menu', [
             'tabs' => $tabs,
             'url_params' => $url_params,
@@ -137,6 +139,9 @@ class Menu
      */
     private function _getAllowedTabs($level)
     {
+        /** @var DatabaseInterface $dbi */
+        global $dbi;
+
         $cache_key = 'menu-levels-' . $level;
         if (Util::cacheExists($cache_key)) {
             return Util::cacheGet($cache_key);
@@ -155,11 +160,11 @@ class Menu
                 . " AND `tab` LIKE '" . $level . "%'"
                 . ' AND `usergroup` = (SELECT usergroup FROM '
                 . $userTable . " WHERE `username` = '"
-                . $GLOBALS['dbi']->escapeString($GLOBALS['cfg']['Server']['user']) . "')";
+                . $dbi->escapeString($GLOBALS['cfg']['Server']['user']) . "')";
 
             $result = $this->relation->queryAsControlUser($sql_query, false);
             if ($result) {
-                while ($row = $GLOBALS['dbi']->fetchAssoc($result)) {
+                while ($row = $dbi->fetchAssoc($result)) {
                     $tabName = mb_substr(
                         $row['tab'],
                         mb_strpos($row['tab'], '_') + 1
@@ -169,6 +174,7 @@ class Menu
             }
         }
         Util::cacheSet($cache_key, $allowedTabs);
+
         return $allowedTabs;
     }
 
@@ -249,19 +255,20 @@ class Menu
      */
     private function _getTableTabs()
     {
-        global $route;
+        /** @var DatabaseInterface $dbi */
+        global $route, $dbi;
 
-        $db_is_system_schema = $GLOBALS['dbi']->isSystemSchema($this->_db);
-        $tbl_is_view = $GLOBALS['dbi']->getTable($this->_db, $this->_table)
+        $db_is_system_schema = $dbi->isSystemSchema($this->_db);
+        $tbl_is_view = $dbi->getTable($this->_db, $this->_table)
             ->isView();
         $updatable_view = false;
         if ($tbl_is_view) {
-            $updatable_view = $GLOBALS['dbi']->getTable($this->_db, $this->_table)
+            $updatable_view = $dbi->getTable($this->_db, $this->_table)
                 ->isUpdatableView();
         }
-        $is_superuser = $GLOBALS['dbi']->isSuperuser();
-        $isCreateOrGrantUser = $GLOBALS['dbi']->isUserType('grant')
-            || $GLOBALS['dbi']->isUserType('create');
+        $is_superuser = $dbi->isSuperuser();
+        $isCreateOrGrantUser = $dbi->isUserType('grant')
+            || $dbi->isUserType('create');
 
         $tabs = [];
 
@@ -376,13 +383,14 @@ class Menu
      */
     private function _getDbTabs()
     {
-        global $route;
+        /** @var DatabaseInterface $dbi */
+        global $route, $dbi;
 
-        $db_is_system_schema = $GLOBALS['dbi']->isSystemSchema($this->_db);
-        $num_tables = count($GLOBALS['dbi']->getTables($this->_db));
-        $is_superuser = $GLOBALS['dbi']->isSuperuser();
-        $isCreateOrGrantUser = $GLOBALS['dbi']->isUserType('grant')
-            || $GLOBALS['dbi']->isUserType('create');
+        $db_is_system_schema = $dbi->isSystemSchema($this->_db);
+        $num_tables = count($dbi->getTables($this->_db));
+        $is_superuser = $dbi->isSuperuser();
+        $isCreateOrGrantUser = $dbi->isUserType('grant')
+            || $dbi->isUserType('create');
 
         /**
          * Gets the relation settings
@@ -488,6 +496,7 @@ class Menu
             $tabs['central_columns']['route'] = '/database/central-columns';
             $tabs['central_columns']['active'] = $route === '/database/central-columns';
         }
+
         return $tabs;
     }
 
@@ -498,15 +507,16 @@ class Menu
      */
     private function _getServerTabs()
     {
-        global $route;
+        /** @var DatabaseInterface $dbi */
+        global $route, $dbi;
 
-        $is_superuser = $GLOBALS['dbi']->isSuperuser();
-        $isCreateOrGrantUser = $GLOBALS['dbi']->isUserType('grant')
-            || $GLOBALS['dbi']->isUserType('create');
+        $is_superuser = $dbi->isSuperuser();
+        $isCreateOrGrantUser = $dbi->isUserType('grant')
+            || $dbi->isUserType('create');
         if (Util::cacheExists('binary_logs')) {
             $binary_logs = Util::cacheGet('binary_logs');
         } else {
-            $binary_logs = $GLOBALS['dbi']->fetchResult(
+            $binary_logs = $dbi->fetchResult(
                 'SHOW MASTER LOGS',
                 'Log_name',
                 null,
@@ -622,6 +632,7 @@ class Menu
     public function setTable($table)
     {
         $this->_table = $table;
+
         return $this;
     }
 }

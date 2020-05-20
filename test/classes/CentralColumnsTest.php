@@ -13,6 +13,7 @@ use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Types;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Message;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use function array_slice;
@@ -116,7 +117,7 @@ class CentralColumnsTest extends TestCase
         ];
 
         // mock DBI
-        $dbi = $this->getMockBuilder('PhpMyAdmin\DatabaseInterface')
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $dbi->types = new Types($dbi);
@@ -180,6 +181,7 @@ class CentralColumnsTest extends TestCase
         $class = new ReflectionClass(CentralColumns::class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method->invokeArgs(
             $object ?? $this->centralColumns,
             $params
@@ -315,7 +317,7 @@ class CentralColumnsTest extends TestCase
 
         // when column does not exist in the central column list
         $this->assertInstanceOf(
-            'PhpMyAdmin\Message',
+            Message::class,
             $this->centralColumns->deleteColumnsFromList(
                 $_POST['db'],
                 ['column1'],
@@ -324,7 +326,7 @@ class CentralColumnsTest extends TestCase
         );
 
         $this->assertInstanceOf(
-            'PhpMyAdmin\Message',
+            Message::class,
             $this->centralColumns->deleteColumnsFromList(
                 $_POST['db'],
                 ['PMA_table']
@@ -467,6 +469,7 @@ class CentralColumnsTest extends TestCase
      */
     public function testUpdateMultipleColumn()
     {
+        $params = [];
         $params['db'] = 'phpmyadmin';
         $params['orig_col_name'] = [
             'col1',
@@ -728,7 +731,7 @@ class CentralColumnsTest extends TestCase
     public function testConfigErrorMessage()
     {
         $this->assertInstanceOf(
-            'PhpMyAdmin\Message',
+            Message::class,
             $this->callProtectedMethod('configErrorMessage')
         );
     }

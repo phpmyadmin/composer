@@ -49,7 +49,7 @@ class Sanitize
             './doc/html/',
             './index.php?',
         ];
-        $is_setup = $GLOBALS['PMA_Config'] !== null && $GLOBALS['PMA_Config']->get('is_setup');
+        $is_setup = self::isSetup();
         // Adjust path to setup script location
         if ($is_setup) {
             foreach ($valid_starts as $key => $value) {
@@ -74,7 +74,18 @@ class Sanitize
                 return true;
             }
         }
+
         return false;
+    }
+
+    /**
+     * Check if we are currently on a setup folder page
+     *
+     * @return bool
+     */
+    public static function isSetup(): bool
+    {
+        return $GLOBALS['PMA_Config'] !== null && $GLOBALS['PMA_Config']->get('is_setup');
     }
 
     /**
@@ -137,7 +148,8 @@ class Sanitize
                 $page = 'setup';
             }
         }
-        $link = MySQLDocumentation::getDocumentationLink($page, $anchor);
+        $link = MySQLDocumentation::getDocumentationLink($page, $anchor, self::isSetup() ? '../' : '');
+
         return '<a href="' . $link . '" target="documentation">';
     }
 
@@ -181,7 +193,8 @@ class Sanitize
             '[sup]'     => '<sup>',
             '[/sup]'    => '</sup>',
             // used in common.inc.php:
-            '[conferr]' => '<iframe src="show_config_errors.php"><a href="show_config_errors.php">show_config_errors.php</a></iframe>',
+            '[conferr]' => '<iframe src="show_config_errors.php"><a href='
+                . '"show_config_errors.php">show_config_errors.php</a></iframe>',
             // used in libraries/Util.php
             '[dochelpicon]' => Html\Generator::getImage('b_help', __('Documentation')),
         ];
@@ -237,6 +250,7 @@ class Sanitize
         }
         $pattern .= '-]/';
         $filename = preg_replace($pattern, '_', $filename);
+
         return $filename;
     }
 
@@ -346,6 +360,7 @@ class Sanitize
         } else {
             $result .= self::formatJsVal($value) . ";\n";
         }
+
         return $result;
     }
 

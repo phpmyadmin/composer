@@ -11,6 +11,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use const ENT_QUOTES;
 use function count;
 use function explode;
 use function htmlentities;
@@ -19,7 +20,7 @@ use function in_array;
 use function mb_strpos;
 use function mb_strtoupper;
 use function sprintf;
-use const ENT_QUOTES;
+use function trim;
 
 /**
  * Functions for trigger management.
@@ -262,7 +263,7 @@ class Triggers
                     && empty($_POST['editor_process_edit'])
                 ) {
                     $item = $this->getDataFromName($_REQUEST['item_name']);
-                    if ($item !== false) {
+                    if ($item !== null) {
                         $item['item_original_name'] = $item['item_name'];
                     }
                 } else {
@@ -294,6 +295,7 @@ class Triggers
         foreach ($indices as $index) {
             $retval[$index] = $_POST[$index] ?? '';
         }
+
         return $retval;
     }
 
@@ -303,9 +305,9 @@ class Triggers
      *
      * @param string $name The name of the trigger.
      *
-     * @return array|bool Data necessary to create the editor.
+     * @return array|null Data necessary to create the editor.
      */
-    public function getDataFromName($name)
+    public function getDataFromName($name): ?array
     {
         global $db, $table;
 
@@ -317,7 +319,7 @@ class Triggers
             }
         }
         if (empty($temp)) {
-            return false;
+            return null;
         } else {
             $retval = [];
             $retval['create']                  = $temp['create'];
@@ -328,6 +330,7 @@ class Triggers
             $retval['item_event_manipulation'] = $temp['event_manipulation'];
             $retval['item_definition']         = $temp['definition'];
             $retval['item_definer']            = $temp['definer'];
+
             return $retval;
         }
     }
@@ -371,7 +374,8 @@ class Triggers
         // Create the output
         $retval  = '';
         $retval .= '<!-- START ' . $modeToUpper . " TRIGGER FORM -->\n\n";
-        $retval .= '<form class="rte_form" action="' . Url::getFromRoute('/database/triggers') . '" method="post">' . "\n";
+        $retval .= '<form class="rte_form" action="' . Url::getFromRoute('/database/triggers')
+            . '" method="post">' . "\n";
         $retval .= "<input name='" . $mode . "_item' type='hidden' value='1'>\n";
         $retval .= $original_data;
         $retval .= Url::getHiddenInputs($db, $table) . "\n";
@@ -545,16 +549,16 @@ class Triggers
     /**
      * Send editor via ajax or by echoing.
      *
-     * @param string      $mode  Editor mode 'add' or 'edit'
-     * @param array|false $item  Data necessary to create the editor
-     * @param string      $title Title of the editor
-     * @param string      $db    Database
+     * @param string     $mode  Editor mode 'add' or 'edit'
+     * @param array|null $item  Data necessary to create the editor
+     * @param string     $title Title of the editor
+     * @param string     $db    Database
      *
      * @return void
      */
-    private function sendEditor($mode, $item, $title, $db)
+    private function sendEditor($mode, ?array $item, $title, $db)
     {
-        if ($item !== false) {
+        if ($item !== null) {
             $editor = $this->getEditorForm($mode, $item);
             if ($this->response->isAjax()) {
                 $this->response->addJSON('message', $editor);

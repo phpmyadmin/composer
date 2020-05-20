@@ -60,6 +60,7 @@ class ViewCreateController extends AbstractController
                 $message
             );
             $this->response->setRequestStatus(false);
+
             return;
         }
 
@@ -93,7 +94,9 @@ class ViewCreateController extends AbstractController
                 }
             }
 
-            if (isset($_POST['view']['sql_security']) && in_array($_POST['view']['sql_security'], $view_security_options)) {
+            if (isset($_POST['view']['sql_security'])
+                && in_array($_POST['view']['sql_security'], $view_security_options)
+            ) {
                 $sql_query .= $sep . ' SQL SECURITY '
                     . $_POST['view']['sql_security'];
             }
@@ -117,6 +120,7 @@ class ViewCreateController extends AbstractController
             if (! $this->dbi->tryQuery($sql_query)) {
                 if (! isset($_POST['ajax_dialog'])) {
                     $message = Message::rawError($this->dbi->getError());
+
                     return;
                 }
 
@@ -128,6 +132,7 @@ class ViewCreateController extends AbstractController
                     )
                 );
                 $this->response->setRequestStatus(false);
+
                 return;
             }
 

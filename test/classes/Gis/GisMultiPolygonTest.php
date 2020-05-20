@@ -381,6 +381,7 @@ class GisMultiPolygonTest extends GisGeomTestCase
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+
         return [
             [
                 'MULTIPOLYGON(((136 40,147 83,16 75,136 40)),'
@@ -456,11 +457,11 @@ class GisMultiPolygonTest extends GisGeomTestCase
     /**
      * test case for prepareRowAsSvg() method
      *
-     * @param string $spatial    GIS MULTIPOLYGON object
-     * @param string $label      label for the GIS MULTIPOLYGON object
-     * @param string $fill_color color for the GIS MULTIPOLYGON object
-     * @param array  $scale_data array containing data related to scaling
-     * @param string $output     expected output
+     * @param string $spatial   GIS MULTIPOLYGON object
+     * @param string $label     label for the GIS MULTIPOLYGON object
+     * @param string $fillColor color for the GIS MULTIPOLYGON object
+     * @param array  $scaleData array containing data related to scaling
+     * @param string $output    expected output
      *
      * @return void
      *
@@ -469,15 +470,15 @@ class GisMultiPolygonTest extends GisGeomTestCase
     public function testPrepareRowAsSvg(
         $spatial,
         $label,
-        $fill_color,
-        $scale_data,
+        $fillColor,
+        $scaleData,
         $output
     ) {
         $string = $this->object->prepareRowAsSvg(
             $spatial,
             $label,
-            $fill_color,
-            $scale_data
+            $fillColor,
+            $scaleData
         );
         $this->assertEquals(1, preg_match($output, $string));
     }

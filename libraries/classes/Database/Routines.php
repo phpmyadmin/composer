@@ -18,6 +18,8 @@ use PhpMyAdmin\SqlParser\Utils\Routine;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use const E_USER_WARNING;
+use const ENT_QUOTES;
 use function array_merge;
 use function count;
 use function explode;
@@ -36,8 +38,7 @@ use function sprintf;
 use function stripos;
 use function substr;
 use function trigger_error;
-use const E_USER_WARNING;
-use const ENT_QUOTES;
+use function trim;
 
 /**
  * Functions for routine management.
@@ -124,22 +125,6 @@ class Routines
             'table' => $table,
             'has_privilege' => Util::currentUserHasPrivilege('CREATE ROUTINE', $db, $table),
         ]);
-
-        /**
-         * Display a warning for users with PHP's old "mysql" extension.
-         */
-        if (! DatabaseInterface::checkDbExtension('mysqli')) {
-            trigger_error(
-                __(
-                    'You are using PHP\'s deprecated \'mysql\' extension, '
-                    . 'which is not capable of handling multi queries. '
-                    . '[strong]The execution of some stored routines may fail![/strong] '
-                    . 'Please use the improved \'mysqli\' extension to '
-                    . 'avoid any problems.'
-                ),
-                E_USER_WARNING
-            );
-        }
     }
 
     /**
@@ -192,7 +177,7 @@ class Routines
                         $_GET['item_name'],
                         $_GET['item_type']
                     );
-                    if ($routine !== false) {
+                    if ($routine !== null) {
                         $routine['item_original_name'] = $routine['item_name'];
                         $routine['item_original_type'] = $routine['item_type'];
                     }
@@ -201,7 +186,7 @@ class Routines
                 }
                 $mode = 'edit';
             }
-            if ($routine !== false) {
+            if ($routine !== null) {
                 // Show form
                 $editor = $this->getEditorForm($mode, $operation, $routine);
                 if ($this->response->isAjax()) {
@@ -404,12 +389,10 @@ class Routines
         . '" AND Routine_type = "' . $_POST['item_original_type']
         . '";';
 
-        $privilegesBackup = $this->dbi->fetchResult(
+        return $this->dbi->fetchResult(
             $privilegesBackupQuery,
             0
         );
-
-        return $privilegesBackup;
     }
 
     /**
@@ -631,9 +614,9 @@ class Routines
      * @param string $type Type of routine (ROUTINE|PROCEDURE)
      * @param bool   $all  Whether to return all data or just the info about parameters.
      *
-     * @return array|bool    Data necessary to create the routine editor.
+     * @return array|null    Data necessary to create the routine editor.
      */
-    public function getDataFromName($name, $type, $all = true)
+    public function getDataFromName($name, $type, $all = true): ?array
     {
         global $db;
 
@@ -652,7 +635,7 @@ class Routines
         $routine = $this->dbi->fetchSingleRow($query, 'ASSOC');
 
         if (! $routine) {
-            return false;
+            return null;
         }
 
         // Get required data
@@ -667,7 +650,7 @@ class Routines
             );
 
         if ($definition === null) {
-            return false;
+            return null;
         }
 
         $parser = new Parser($definition);
@@ -898,7 +881,8 @@ class Routines
         $retval  = '';
         $retval .= '<!-- START ' . mb_strtoupper($mode)
             . " ROUTINE FORM -->\n\n";
-        $retval .= '<form class="rte_form" action="' . Url::getFromRoute('/database/routines') . '" method="post">' . "\n";
+        $retval .= '<form class="rte_form" action="' . Url::getFromRoute('/database/routines')
+            . '" method="post">' . "\n";
         $retval .= "<input name='" . $mode . "_item' type='hidden' value='1'>\n";
         $retval .= $original_routine;
         $retval .= Url::getHiddenInputs($db) . "\n";
@@ -1098,20 +1082,186 @@ class Routines
     }
 
     /**
+     * Set the found errors and build the params
+     *
+     * @param string[] $itemParamName     The parameter names
+     * @param string[] $itemParamDir      The direction parameter (see $this->directions)
+     * @param array    $itemParamType     The parameter type
+     * @param array    $itemParamLength   A length or not for the paramter
+     * @param array    $itemParamOpsText  An optional charset for the paramter
+     * @param array    $itemParamOpsNum   An optional parameter for a $itemParamType NUMBER
+     * @param string   $itemType          The item type (PROCEDURE/FUNCTION)
+     * @param bool     $warnedAboutLength A boolean that will be switched if a the length warning is given
+     */
+    private function processParamsAndBuild(
+        array $itemParamName,
+        array $itemParamDir,
+        array $itemParamType,
+        array $itemParamLength,
+        array $itemParamOpsText,
+        array $itemParamOpsNum,
+        string $itemType,
+        bool &$warnedAboutLength
+    ): string {
+        global $errors, $dbi;
+
+        $params = '';
+        $warnedAboutDir = false;
+
+        for ($i = 0, $nb = count($itemParamName); $i < $nb; $i++) {
+            if (! empty($itemParamName[$i])
+                && ! empty($itemParamType[$i])
+            ) {
+                if ($itemType === 'PROCEDURE'
+                    && ! empty($itemParamDir[$i])
+                    && in_array($itemParamDir[$i], $this->directions)
+                ) {
+                    $params .= $itemParamDir[$i] . ' '
+                        . Util::backquote($itemParamName[$i])
+                        . ' ' . $itemParamType[$i];
+                } elseif ($itemType === 'FUNCTION') {
+                    $params .= Util::backquote($itemParamName[$i])
+                        . ' ' . $itemParamType[$i];
+                } elseif (! $warnedAboutDir) {
+                    $warnedAboutDir = true;
+                    $errors[] = sprintf(
+                        __('Invalid direction "%s" given for parameter.'),
+                        htmlspecialchars($itemParamDir[$i])
+                    );
+                }
+                if ($itemParamLength[$i] != ''
+                    && ! preg_match(
+                        '@^(DATE|TINYBLOB|TINYTEXT|BLOB|TEXT|'
+                        . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|'
+                        . 'SERIAL|BOOLEAN)$@i',
+                        $itemParamType[$i]
+                    )
+                ) {
+                    $params .= '(' . $itemParamLength[$i] . ')';
+                } elseif ($itemParamLength[$i] == ''
+                    && preg_match(
+                        '@^(ENUM|SET|VARCHAR|VARBINARY)$@i',
+                        $itemParamType[$i]
+                    )
+                ) {
+                    if (! $warnedAboutLength) {
+                        $warnedAboutLength = true;
+                        $errors[] = __(
+                            'You must provide length/values for routine parameters'
+                            . ' of type ENUM, SET, VARCHAR and VARBINARY.'
+                        );
+                    }
+                }
+                if (! empty($itemParamOpsText[$i])) {
+                    if ($dbi->types->getTypeClass($itemParamType[$i]) == 'CHAR') {
+                        if (! in_array($itemParamType[$i], ['VARBINARY', 'BINARY'])) {
+                            $params .= ' CHARSET '
+                                . mb_strtolower(
+                                    $itemParamOpsText[$i]
+                                );
+                        }
+                    }
+                }
+                if (! empty($itemParamOpsNum[$i])) {
+                    if ($dbi->types->getTypeClass($itemParamType[$i]) == 'NUMBER') {
+                        $params .= ' '
+                            . mb_strtoupper(
+                                $itemParamOpsNum[$i]
+                            );
+                    }
+                }
+                if ($i != count($itemParamName) - 1) {
+                    $params .= ', ';
+                }
+            } else {
+                $errors[] = __(
+                    'You must provide a name and a type for each routine parameter.'
+                );
+                break;
+            }
+        }
+        return $params;
+    }
+
+    /**
+     * Set the found errors and build the query
+     *
+     * @param string $query             The existing query
+     * @param bool   $warnedAboutLength If the length warning was given
+     */
+    private function processFunctionSpecificParameters(
+        string $query,
+        bool $warnedAboutLength
+    ): string {
+        global $errors, $dbi;
+
+        $itemReturnType = $_POST['item_returntype'] ?? null;
+
+        if (! empty($itemReturnType)
+            && in_array(
+                $itemReturnType,
+                Util::getSupportedDatatypes()
+            )
+        ) {
+            $query .= 'RETURNS ' . $itemReturnType;
+        } else {
+            $errors[] = __('You must provide a valid return type for the routine.');
+        }
+        if (! empty($_POST['item_returnlength'])
+            && ! preg_match(
+                '@^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|'
+                . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|SERIAL|BOOLEAN)$@i',
+                $itemReturnType
+            )
+        ) {
+            $query .= '(' . $_POST['item_returnlength'] . ')';
+        } elseif (empty($_POST['item_returnlength'])
+            && preg_match(
+                '@^(ENUM|SET|VARCHAR|VARBINARY)$@i',
+                $itemReturnType
+            )
+        ) {
+            if (! $warnedAboutLength) {
+                $errors[] = __(
+                    'You must provide length/values for routine parameters'
+                    . ' of type ENUM, SET, VARCHAR and VARBINARY.'
+                );
+            }
+        }
+        if (! empty($_POST['item_returnopts_text'])) {
+            if ($dbi->types->getTypeClass($itemReturnType) == 'CHAR') {
+                $query .= ' CHARSET '
+                    . mb_strtolower($_POST['item_returnopts_text']);
+            }
+        }
+        if (! empty($_POST['item_returnopts_num'])) {
+            if ($dbi->types->getTypeClass($itemReturnType) == 'NUMBER') {
+                $query .= ' '
+                    . mb_strtoupper($_POST['item_returnopts_num']);
+            }
+        }
+        $query .= ' ';
+
+        return $query;
+    }
+
+    /**
      * Composes the query necessary to create a routine from an HTTP request.
      *
      * @return string  The CREATE [ROUTINE | PROCEDURE] query.
      */
-    public function getQueryFromRequest()
+    public function getQueryFromRequest(): string
     {
-        global $errors, $dbi;
+        global $errors;
 
-        $_POST['item_type'] = $_POST['item_type'] ?? '';
+        $itemType = $_POST['item_type'] ?? '';
+        $itemDefiner = $_POST['item_definer'] ?? '';
+        $itemName = $_POST['item_name'] ?? '';
 
         $query = 'CREATE ';
-        if (! empty($_POST['item_definer'])) {
-            if (mb_strpos($_POST['item_definer'], '@') !== false) {
-                $arr = explode('@', $_POST['item_definer']);
+        if (! empty($itemDefiner)) {
+            if (mb_strpos($itemDefiner, '@') !== false) {
+                $arr = explode('@', $itemDefiner);
 
                 $do_backquote = true;
                 if (substr($arr[0], 0, 1) === '`'
@@ -1132,157 +1282,53 @@ class Routines
                 $errors[] = __('The definer must be in the "username@hostname" format!');
             }
         }
-        if ($_POST['item_type'] == 'FUNCTION'
-            || $_POST['item_type'] == 'PROCEDURE'
+        if ($itemType == 'FUNCTION'
+            || $itemType == 'PROCEDURE'
         ) {
-            $query .= $_POST['item_type'] . ' ';
+            $query .= $itemType . ' ';
         } else {
             $errors[] = sprintf(
                 __('Invalid routine type: "%s"'),
-                htmlspecialchars($_POST['item_type'])
+                htmlspecialchars($itemType)
             );
         }
-        if (! empty($_POST['item_name'])) {
-            $query .= Util::backquote($_POST['item_name']);
+        if (! empty($itemName)) {
+            $query .= Util::backquote($itemName);
         } else {
             $errors[] = __('You must provide a routine name!');
         }
+        $warnedAboutLength = false;
+
+        $itemParamName = $_POST['item_param_name'] ?? '';
+        $itemParamType = $_POST['item_param_type'] ?? '';
+        $itemParamLength = $_POST['item_param_length'] ?? '';
+        $itemParamDir = (array) ($_POST['item_param_dir'] ?? []);
+        $itemParamOpsText = (array) ($_POST['item_param_opts_text'] ?? []);
+        $itemParamOpsNum = (array) ($_POST['item_param_opts_num'] ?? []);
+
         $params = '';
-        $warned_about_dir    = false;
-        $warned_about_length = false;
-
-        if (! empty($_POST['item_param_name'])
-            && ! empty($_POST['item_param_type'])
-            && ! empty($_POST['item_param_length'])
-            && is_array($_POST['item_param_name'])
-            && is_array($_POST['item_param_type'])
-            && is_array($_POST['item_param_length'])
+        if (! empty($itemParamName)
+            && ! empty($itemParamType)
+            && ! empty($itemParamLength)
+            && is_array($itemParamName)
+            && is_array($itemParamType)
+            && is_array($itemParamLength)
         ) {
-            $item_param_name = $_POST['item_param_name'];
-            $item_param_type = $_POST['item_param_type'];
-            $item_param_length = $_POST['item_param_length'];
-
-            for ($i = 0, $nb = count($item_param_name); $i < $nb; $i++) {
-                if (! empty($item_param_name[$i])
-                    && ! empty($item_param_type[$i])
-                ) {
-                    if ($_POST['item_type'] == 'PROCEDURE'
-                        && ! empty($_POST['item_param_dir'][$i])
-                        && in_array($_POST['item_param_dir'][$i], $this->directions)
-                    ) {
-                        $params .= $_POST['item_param_dir'][$i] . ' '
-                            . Util::backquote($item_param_name[$i])
-                            . ' ' . $item_param_type[$i];
-                    } elseif ($_POST['item_type'] == 'FUNCTION') {
-                        $params .= Util::backquote($item_param_name[$i])
-                            . ' ' . $item_param_type[$i];
-                    } elseif (! $warned_about_dir) {
-                        $warned_about_dir = true;
-                        $errors[] = sprintf(
-                            __('Invalid direction "%s" given for parameter.'),
-                            htmlspecialchars($_POST['item_param_dir'][$i])
-                        );
-                    }
-                    if ($item_param_length[$i] != ''
-                        && ! preg_match(
-                            '@^(DATE|TINYBLOB|TINYTEXT|BLOB|TEXT|'
-                            . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|'
-                            . 'SERIAL|BOOLEAN)$@i',
-                            $item_param_type[$i]
-                        )
-                    ) {
-                        $params .= '(' . $item_param_length[$i] . ')';
-                    } elseif ($item_param_length[$i] == ''
-                        && preg_match(
-                            '@^(ENUM|SET|VARCHAR|VARBINARY)$@i',
-                            $item_param_type[$i]
-                        )
-                    ) {
-                        if (! $warned_about_length) {
-                            $warned_about_length = true;
-                            $errors[] = __(
-                                'You must provide length/values for routine parameters'
-                                . ' of type ENUM, SET, VARCHAR and VARBINARY.'
-                            );
-                        }
-                    }
-                    if (! empty($_POST['item_param_opts_text'][$i])) {
-                        if ($dbi->types->getTypeClass($item_param_type[$i]) == 'CHAR') {
-                            if (! in_array($item_param_type[$i], ['VARBINARY', 'BINARY'])) {
-                                $params .= ' CHARSET '
-                                    . mb_strtolower(
-                                        $_POST['item_param_opts_text'][$i]
-                                    );
-                            }
-                        }
-                    }
-                    if (! empty($_POST['item_param_opts_num'][$i])) {
-                        if ($dbi->types->getTypeClass($item_param_type[$i]) == 'NUMBER') {
-                            $params .= ' '
-                                . mb_strtoupper(
-                                    $_POST['item_param_opts_num'][$i]
-                                );
-                        }
-                    }
-                    if ($i != count($item_param_name) - 1) {
-                        $params .= ', ';
-                    }
-                } else {
-                    $errors[] = __(
-                        'You must provide a name and a type for each routine parameter.'
-                    );
-                    break;
-                }
-            }
+            $params = $this->processParamsAndBuild(
+                $itemParamName,
+                $itemParamDir,
+                $itemParamType,
+                $itemParamLength,
+                $itemParamOpsText,
+                $itemParamOpsNum,
+                $itemType,
+                $warnedAboutLength// Will possibly be modified by the function
+            );
         }
-        $query .= '(' . $params . ') ';
-        if ($_POST['item_type'] == 'FUNCTION') {
-            $item_returntype = $_POST['item_returntype'] ?? null;
 
-            if (! empty($item_returntype)
-                && in_array(
-                    $item_returntype,
-                    Util::getSupportedDatatypes()
-                )
-            ) {
-                $query .= 'RETURNS ' . $item_returntype;
-            } else {
-                $errors[] = __('You must provide a valid return type for the routine.');
-            }
-            if (! empty($_POST['item_returnlength'])
-                && ! preg_match(
-                    '@^(DATE|DATETIME|TIME|TINYBLOB|TINYTEXT|BLOB|TEXT|'
-                    . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|SERIAL|BOOLEAN)$@i',
-                    $item_returntype
-                )
-            ) {
-                $query .= '(' . $_POST['item_returnlength'] . ')';
-            } elseif (empty($_POST['item_returnlength'])
-                && preg_match(
-                    '@^(ENUM|SET|VARCHAR|VARBINARY)$@i',
-                    $item_returntype
-                )
-            ) {
-                if (! $warned_about_length) {
-                    $errors[] = __(
-                        'You must provide length/values for routine parameters'
-                        . ' of type ENUM, SET, VARCHAR and VARBINARY.'
-                    );
-                }
-            }
-            if (! empty($_POST['item_returnopts_text'])) {
-                if ($dbi->types->getTypeClass($item_returntype) == 'CHAR') {
-                    $query .= ' CHARSET '
-                        . mb_strtolower($_POST['item_returnopts_text']);
-                }
-            }
-            if (! empty($_POST['item_returnopts_num'])) {
-                if ($dbi->types->getTypeClass($item_returntype) == 'NUMBER') {
-                    $query .= ' '
-                        . mb_strtoupper($_POST['item_returnopts_num']);
-                }
-            }
-            $query .= ' ';
+        $query .= '(' . $params . ') ';
+        if ($itemType == 'FUNCTION') {
+            $query = $this->processFunctionSpecificParameters($query, $warnedAboutLength);
         }
         if (! empty($_POST['item_comment'])) {
             $query .= "COMMENT '" . $this->dbi->escapeString($_POST['item_comment'])
@@ -1293,25 +1339,238 @@ class Routines
         } else {
             $query .= 'NOT DETERMINISTIC ';
         }
-        if (! empty($_POST['item_sqldataaccess'])
-            && in_array($_POST['item_sqldataaccess'], $this->sqlDataAccess)
+
+        $itemSqlDataAccess = $_POST['item_sqldataaccess'] ?? '';
+        if (! empty($itemSqlDataAccess)
+            && in_array($itemSqlDataAccess, $this->sqlDataAccess)
         ) {
-            $query .= $_POST['item_sqldataaccess'] . ' ';
+            $query .= $itemSqlDataAccess . ' ';
         }
-        if (! empty($_POST['item_securitytype'])) {
-            if ($_POST['item_securitytype'] == 'DEFINER'
-                || $_POST['item_securitytype'] == 'INVOKER'
+
+        $itemSecurityType = $_POST['item_securitytype'] ?? '';
+        if (! empty($itemSecurityType)) {
+            if ($itemSecurityType === 'DEFINER'
+                || $itemSecurityType === 'INVOKER'
             ) {
-                $query .= 'SQL SECURITY ' . $_POST['item_securitytype'] . ' ';
+                $query .= 'SQL SECURITY ' . $itemSecurityType . ' ';
             }
         }
-        if (! empty($_POST['item_definition'])) {
-            $query .= $_POST['item_definition'];
+
+        $itemDefinition = $_POST['item_definition'] ?? '';
+        if (! empty($itemDefinition)) {
+            $query .= $itemDefinition;
         } else {
             $errors[] = __('You must provide a routine definition.');
         }
 
         return $query;
+    }
+
+    /**
+     * @see handleExecuteRoutine
+     * @param array $routine The routine params
+     * @return string[] The SQL queries / SQL query parts
+     */
+    private function getQueriesFromRoutineForm(array $routine): array
+    {
+        $queries   = [];
+        $end_query = [];
+        $args      = [];
+        $all_functions = $this->dbi->types->getAllFunctions();
+        for ($i = 0; $i < $routine['item_num_params']; $i++) {
+            if (isset($_POST['params'][$routine['item_param_name'][$i]])) {
+                $value = $_POST['params'][$routine['item_param_name'][$i]];
+                if (is_array($value)) { // is SET type
+                    $value = implode(',', $value);
+                }
+                $value = $this->dbi->escapeString($value);
+                if (! empty($_POST['funcs'][$routine['item_param_name'][$i]])
+                    && in_array(
+                        $_POST['funcs'][$routine['item_param_name'][$i]],
+                        $all_functions
+                    )
+                ) {
+                    $queries[] = 'SET @p' . $i . '='
+                        . $_POST['funcs'][$routine['item_param_name'][$i]]
+                        . "('" . $value . "');\n";
+                } else {
+                    $queries[] = 'SET @p' . $i . "='" . $value . "';\n";
+                }
+                $args[] = '@p' . $i;
+            } else {
+                $args[] = '@p' . $i;
+            }
+            if ($routine['item_type'] == 'PROCEDURE') {
+                if ($routine['item_param_dir'][$i] == 'OUT'
+                    || $routine['item_param_dir'][$i] == 'INOUT'
+                ) {
+                    $end_query[] = '@p' . $i . ' AS '
+                        . Util::backquote($routine['item_param_name'][$i]);
+                }
+            }
+        }
+        if ($routine['item_type'] == 'PROCEDURE') {
+            $queries[] = 'CALL ' . Util::backquote($routine['item_name'])
+                        . '(' . implode(', ', $args) . ");\n";
+            if (count($end_query)) {
+                $queries[] = 'SELECT ' . implode(', ', $end_query) . ";\n";
+            }
+        } else {
+            $queries[] = 'SELECT ' . Util::backquote($routine['item_name'])
+                        . '(' . implode(', ', $args) . ') '
+                        . 'AS ' . Util::backquote($routine['item_name'])
+                        . ";\n";
+        }
+        return $queries;
+    }
+
+    private function handleExecuteRoutine(): void
+    {
+        global $db;
+
+        // Build the queries
+        $routine = $this->getDataFromName(
+            $_POST['item_name'],
+            $_POST['item_type'],
+            false
+        );
+        if ($routine === null) {
+            $message  = __('Error in processing request:') . ' ';
+            $message .= sprintf(
+                __('No routine with name %1$s found in database %2$s.'),
+                htmlspecialchars(Util::backquote($_POST['item_name'])),
+                htmlspecialchars(Util::backquote($db))
+            );
+            $message = Message::error($message);
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $message);
+                exit;
+            } else {
+                echo $message->getDisplay();
+                unset($_POST);
+                //NOTE: Missing exit ?
+            }
+        }
+
+        $queries = is_array($routine) ? $this->getQueriesFromRoutineForm($routine) : [];
+
+        // Get all the queries as one SQL statement
+        $multiple_query = implode('', $queries);
+
+        $outcome = true;
+        $affected = 0;
+
+        // Execute query
+        if (! $this->dbi->tryMultiQuery($multiple_query)) {
+            $outcome = false;
+        }
+
+        // Generate output
+        $output = '';
+        $nbResultsetToDisplay = 0;
+        if ($outcome) {
+            // Pass the SQL queries through the "pretty printer"
+            $output  = Generator::formatSql(implode("\n", $queries));
+
+            // Display results
+            $output .= '<fieldset><legend>';
+            $output .= sprintf(
+                __('Execution results of routine %s'),
+                Util::backquote(htmlspecialchars($routine['item_name']))
+            );
+            $output .= '</legend>';
+
+            do {
+                $result = $this->dbi->storeResult();
+                $num_rows = $this->dbi->numRows($result);
+
+                if (($result !== false) && ($num_rows > 0)) {
+                    $output .= '<table><tr>';
+                    foreach ($this->dbi->getFieldsMeta($result) as $field) {
+                        $output .= '<th>';
+                        $output .= htmlspecialchars($field->name);
+                        $output .= '</th>';
+                    }
+                    $output .= '</tr>';
+
+                    while ($row = $this->dbi->fetchAssoc($result)) {
+                        $output .= '<tr>' . $this->browseRow($row) . '</tr>';
+                    }
+
+                    $output .= '</table>';
+                    $nbResultsetToDisplay++;
+                    $affected = $num_rows;
+                }
+
+                if (! $this->dbi->moreResults()) {
+                    break;
+                }
+
+                $output .= '<br>';
+
+                $this->dbi->freeResult($result);
+
+                $outcome = $this->dbi->nextResult();
+            } while ($outcome);
+        }
+
+        if ($outcome) {
+            $output .= '</fieldset>';
+
+            $message = __('Your SQL query has been executed successfully.');
+            if ($routine['item_type'] == 'PROCEDURE') {
+                $message .= '<br>';
+
+                // TODO : message need to be modified according to the
+                // output from the routine
+                $message .= sprintf(
+                    _ngettext(
+                        '%d row affected by the last statement inside the '
+                        . 'procedure.',
+                        '%d rows affected by the last statement inside the '
+                        . 'procedure.',
+                        $affected
+                    ),
+                    $affected
+                );
+            }
+            $message = Message::success($message);
+
+            if ($nbResultsetToDisplay == 0) {
+                $notice = __(
+                    'MySQL returned an empty result set (i.e. zero rows).'
+                );
+                $output .= Message::notice($notice)->getDisplay();
+            }
+        } else {
+            $output = '';
+            $message = Message::error(
+                sprintf(
+                    __('The following query has failed: "%s"'),
+                    htmlspecialchars($multiple_query)
+                )
+                . '<br><br>'
+                . __('MySQL said: ') . $this->dbi->getError()
+            );
+        }
+
+        // Print/send output
+        if ($this->response->isAjax()) {
+            $this->response->setRequestStatus($message->isSuccess());
+            $this->response->addJSON('message', $message->getDisplay() . $output);
+            $this->response->addJSON('dialog', false);
+            exit;
+        } else {
+            echo $message->getDisplay() , $output;
+            if ($message->isError()) {
+                // At least one query has failed, so shouldn't
+                // execute any more queries, so we quit.
+                exit;
+            }
+            unset($_POST);
+            // Now deliberately fall through to displaying the routines list
+        }
     }
 
     /**
@@ -1327,194 +1586,7 @@ class Routines
          * Handle all user requests other than the default of listing routines
          */
         if (! empty($_POST['execute_routine']) && ! empty($_POST['item_name'])) {
-            // Build the queries
-            $routine = $this->getDataFromName(
-                $_POST['item_name'],
-                $_POST['item_type'],
-                false
-            );
-            if ($routine === false) {
-                $message  = __('Error in processing request:') . ' ';
-                $message .= sprintf(
-                    __('No routine with name %1$s found in database %2$s.'),
-                    htmlspecialchars(Util::backquote($_POST['item_name'])),
-                    htmlspecialchars(Util::backquote($db))
-                );
-                $message = Message::error($message);
-                if ($this->response->isAjax()) {
-                    $this->response->setRequestStatus(false);
-                    $this->response->addJSON('message', $message);
-                    exit;
-                } else {
-                    echo $message->getDisplay();
-                    unset($_POST);
-                }
-            }
-
-            $queries   = [];
-            $end_query = [];
-            $args      = [];
-            $all_functions = $this->dbi->types->getAllFunctions();
-            for ($i = 0; $i < $routine['item_num_params']; $i++) {
-                if (isset($_POST['params'][$routine['item_param_name'][$i]])) {
-                    $value = $_POST['params'][$routine['item_param_name'][$i]];
-                    if (is_array($value)) { // is SET type
-                        $value = implode(',', $value);
-                    }
-                    $value = $this->dbi->escapeString($value);
-                    if (! empty($_POST['funcs'][$routine['item_param_name'][$i]])
-                        && in_array(
-                            $_POST['funcs'][$routine['item_param_name'][$i]],
-                            $all_functions
-                        )
-                    ) {
-                        $queries[] = 'SET @p' . $i . '='
-                            . $_POST['funcs'][$routine['item_param_name'][$i]]
-                            . "('" . $value . "');\n";
-                    } else {
-                        $queries[] = 'SET @p' . $i . "='" . $value . "';\n";
-                    }
-                    $args[] = '@p' . $i;
-                } else {
-                    $args[] = '@p' . $i;
-                }
-                if ($routine['item_type'] == 'PROCEDURE') {
-                    if ($routine['item_param_dir'][$i] == 'OUT'
-                        || $routine['item_param_dir'][$i] == 'INOUT'
-                    ) {
-                        $end_query[] = '@p' . $i . ' AS '
-                            . Util::backquote($routine['item_param_name'][$i]);
-                    }
-                }
-            }
-            if ($routine['item_type'] == 'PROCEDURE') {
-                $queries[] = 'CALL ' . Util::backquote($routine['item_name'])
-                           . '(' . implode(', ', $args) . ");\n";
-                if (count($end_query)) {
-                    $queries[] = 'SELECT ' . implode(', ', $end_query) . ";\n";
-                }
-            } else {
-                $queries[] = 'SELECT ' . Util::backquote($routine['item_name'])
-                           . '(' . implode(', ', $args) . ') '
-                           . 'AS ' . Util::backquote($routine['item_name'])
-                            . ";\n";
-            }
-
-            // Get all the queries as one SQL statement
-            $multiple_query = implode('', $queries);
-
-            $outcome = true;
-            $affected = 0;
-
-            // Execute query
-            if (! $this->dbi->tryMultiQuery($multiple_query)) {
-                $outcome = false;
-            }
-
-            // Generate output
-            $output = '';
-            $nbResultsetToDisplay = 0;
-            if ($outcome) {
-                // Pass the SQL queries through the "pretty printer"
-                $output  = Generator::formatSql(implode("\n", $queries));
-
-                // Display results
-                $output .= '<fieldset><legend>';
-                $output .= sprintf(
-                    __('Execution results of routine %s'),
-                    Util::backquote(htmlspecialchars($routine['item_name']))
-                );
-                $output .= '</legend>';
-
-                do {
-                    $result = $this->dbi->storeResult();
-                    $num_rows = $this->dbi->numRows($result);
-
-                    if (($result !== false) && ($num_rows > 0)) {
-                        $output .= '<table><tr>';
-                        foreach ($this->dbi->getFieldsMeta($result) as $field) {
-                            $output .= '<th>';
-                            $output .= htmlspecialchars($field->name);
-                            $output .= '</th>';
-                        }
-                        $output .= '</tr>';
-
-                        while ($row = $this->dbi->fetchAssoc($result)) {
-                            $output .= '<tr>' . $this->browseRow($row) . '</tr>';
-                        }
-
-                        $output .= '</table>';
-                        $nbResultsetToDisplay++;
-                        $affected = $num_rows;
-                    }
-
-                    if (! $this->dbi->moreResults()) {
-                        break;
-                    }
-
-                    $output .= '<br>';
-
-                    $this->dbi->freeResult($result);
-                } while ($outcome = $this->dbi->nextResult());
-            }
-
-            if ($outcome) {
-                $output .= '</fieldset>';
-
-                $message = __('Your SQL query has been executed successfully.');
-                if ($routine['item_type'] == 'PROCEDURE') {
-                    $message .= '<br>';
-
-                    // TODO : message need to be modified according to the
-                    // output from the routine
-                    $message .= sprintf(
-                        _ngettext(
-                            '%d row affected by the last statement inside the '
-                            . 'procedure.',
-                            '%d rows affected by the last statement inside the '
-                            . 'procedure.',
-                            $affected
-                        ),
-                        $affected
-                    );
-                }
-                $message = Message::success($message);
-
-                if ($nbResultsetToDisplay == 0) {
-                    $notice = __(
-                        'MySQL returned an empty result set (i.e. zero rows).'
-                    );
-                    $output .= Message::notice($notice)->getDisplay();
-                }
-            } else {
-                $output = '';
-                $message = Message::error(
-                    sprintf(
-                        __('The following query has failed: "%s"'),
-                        htmlspecialchars($multiple_query)
-                    )
-                    . '<br><br>'
-                    . __('MySQL said: ') . $this->dbi->getError()
-                );
-            }
-
-            // Print/send output
-            if ($this->response->isAjax()) {
-                $this->response->setRequestStatus($message->isSuccess());
-                $this->response->addJSON('message', $message->getDisplay() . $output);
-                $this->response->addJSON('dialog', false);
-                exit;
-            } else {
-                echo $message->getDisplay() , $output;
-                if ($message->isError()) {
-                    // At least one query has failed, so shouldn't
-                    // execute any more queries, so we quit.
-                    exit;
-                }
-                unset($_POST);
-                // Now deliberately fall through to displaying the routines list
-            }
-            return;
+            $this->handleExecuteRoutine();
         } elseif (! empty($_GET['execute_dialog']) && ! empty($_GET['item_name'])) {
             /**
              * Display the execute form for a routine.
@@ -1524,7 +1596,7 @@ class Routines
                 $_GET['item_type'],
                 true
             );
-            if ($routine !== false) {
+            if ($routine !== null) {
                 $form = $this->getExecuteForm($routine);
                 if ($this->response->isAjax()) {
                     $title = __('Execute routine') . ' ' . Util::backquote(
@@ -1572,6 +1644,7 @@ class Routines
             }
             $output .= '<td>' . $value . '</td>';
         }
+
         return $output;
     }
 
@@ -1581,9 +1654,9 @@ class Routines
      * @param array $routine Data for the routine returned by
      *                       getDataFromName()
      *
-     * @return string   HTML code for the routine execution dialog.
+     * @return string HTML code for the routine execution dialog.
      */
-    public function getExecuteForm(array $routine)
+    public function getExecuteForm(array $routine): string
     {
         global $db, $cfg;
 

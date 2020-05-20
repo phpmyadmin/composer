@@ -86,9 +86,11 @@ class Footer
             include ROOT_PATH . 'revision-info.php';
             $message .= sprintf(
                 __('Currently running Git revision %1$s from the %2$s branch.'),
-                '<a target="_blank" rel="noopener noreferrer" href="' . htmlspecialchars($repobase . $fullrevision) . '">'
+                '<a target="_blank" rel="noopener noreferrer" href="'
+                . htmlspecialchars($repobase . $fullrevision) . '">'
                 . htmlspecialchars($revision) . '</a>',
-                '<a target="_blank" rel="noopener noreferrer" href="' . htmlspecialchars($repobranchbase . $branch) . '">'
+                '<a target="_blank" rel="noopener noreferrer" href="'
+                . htmlspecialchars($repobranchbase . $branch) . '">'
                 . htmlspecialchars($branch) . '</a>'
             );
         } else {
@@ -121,6 +123,7 @@ class Footer
                 $object = '***RECURSION***';
             }
         }
+
         return $object;
     }
 
@@ -139,9 +142,11 @@ class Footer
 
             $retval = json_encode($_SESSION['debug']);
             $_SESSION['debug'] = [];
+
             return json_last_error() ? '\'false\'' : $retval;
         }
         $_SESSION['debug'] = [];
+
         return $retval;
     }
 
@@ -193,6 +198,7 @@ class Footer
         ) {
             $params['single_table'] = $_REQUEST['single_table'];
         }
+
         return basename(Core::getenv('SCRIPT_NAME')) . Url::getCommonRaw($params);
     }
 
@@ -217,6 +223,7 @@ class Footer
         }
         $retval .= '</a>';
         $retval .= '</div>';
+
         return $retval;
     }
 
@@ -345,6 +352,7 @@ class Footer
 
                 $footer = Config::renderFooter();
             }
+
             return $this->template->render('footer', [
                 'is_ajax' => $this->_isAjax,
                 'is_minimal' => $this->_isMinimal,
@@ -356,6 +364,7 @@ class Footer
                 'footer' => $footer ?? '',
             ]);
         }
+
         return '';
     }
 }

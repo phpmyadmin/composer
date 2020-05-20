@@ -138,8 +138,14 @@ return function (RouteCollector $routes) {
         });
         $routes->addGroup('/structure', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [StructureController::class, 'index']);
-            $routes->addRoute(['GET', 'POST'], '/favorite-table', [StructureController::class, 'addRemoveFavoriteTablesAction']);
-            $routes->addRoute(['GET', 'POST'], '/real-row-count', [StructureController::class, 'handleRealRowCountRequestAction']);
+            $routes->addRoute(['GET', 'POST'], '/favorite-table', [
+                StructureController::class,
+                'addRemoveFavoriteTablesAction',
+            ]);
+            $routes->addRoute(['GET', 'POST'], '/real-row-count', [
+                StructureController::class,
+                'handleRealRowCountRequestAction',
+            ]);
         });
         $routes->addRoute(['GET', 'POST'], '/tracking', [TrackingController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/triggers', [TriggersController::class, 'index']);
@@ -245,7 +251,11 @@ return function (RouteCollector $routes) {
         $routes->addRoute(['GET', 'POST'], '/replace', [ReplaceController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/search', [TableSearchController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/sql', [TableSqlController::class, 'index']);
-        $routes->addRoute(['GET', 'POST'], '/structure', [TableStructureController::class, 'index']);
+        $routes->addGroup('/structure', function (RouteCollector $routes) {
+            $routes->addRoute(['GET', 'POST'], '', [TableStructureController::class, 'index']);
+            $routes->post('/drop', [TableStructureController::class, 'drop']);
+            $routes->post('/drop-confirm', [TableStructureController::class, 'dropConfirm']);
+        });
         $routes->addRoute(['GET', 'POST'], '/tracking', [TableTrackingController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/triggers', [TableTriggersController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/zoom-search', [ZoomSearchController::class, 'index']);

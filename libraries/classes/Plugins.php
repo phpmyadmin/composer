@@ -95,11 +95,13 @@ class Plugins
     public static function getPlugins($plugin_type, $plugins_dir, $plugin_param)
     {
         $GLOBALS['plugin_param'] = $plugin_param;
-        /* Scan for plugins */
-        $plugin_list = [];
-        if (! ($handle = @opendir($plugins_dir))) {
-            return $plugin_list;
+
+        $handle = @opendir($plugins_dir);
+        if (! $handle) {
+            return [];
         }
+
+        $plugin_list = [];
 
         $namespace = 'PhpMyAdmin\\' . str_replace('/', '\\', mb_substr($plugins_dir, 18));
         $class_type = mb_strtoupper($plugin_type[0], 'UTF-8')
@@ -144,6 +146,7 @@ class Plugins
                 );
             }
         );
+
         return $plugin_list;
     }
 
@@ -179,6 +182,7 @@ class Plugins
         ) {
             return ' checked="checked"';
         }
+
         return '';
     }
 
@@ -222,6 +226,7 @@ class Plugins
                 $val = str_replace($match, $GLOBALS[$match], $val);
             }
         }
+
         return htmlspecialchars($val);
     }
 
@@ -341,6 +346,7 @@ class Plugins
             }
         }
 
+        $property_class = null;
         if (isset($properties)) {
             /** @var OptionsPropertySubgroup $propertyItem */
             foreach ($properties as $propertyItem) {
@@ -416,17 +422,17 @@ class Plugins
         }
 
         // Close the list element after $doc link is displayed
-        if (isset($property_class)) {
-            if ($property_class == 'PhpMyAdmin\Properties\Options\Items\BoolPropertyItem'
-                || $property_class == 'PhpMyAdmin\Properties\Options\Items\MessageOnlyPropertyItem'
-                || $property_class == 'PhpMyAdmin\Properties\Options\Items\SelectPropertyItem'
-                || $property_class == 'PhpMyAdmin\Properties\Options\Items\TextPropertyItem'
+        if ($property_class !== null) {
+            if ($property_class == BoolPropertyItem::class
+                || $property_class == MessageOnlyPropertyItem::class
+                || $property_class == SelectPropertyItem::class
+                || $property_class == TextPropertyItem::class
             ) {
                 $ret .= '</li>';
             }
         }
-        $ret .= "\n";
-        return $ret;
+
+        return $ret . "\n";
     }
 
     /**
@@ -585,6 +591,7 @@ class Plugins
             default:
                 break;
         }
+
         return $ret;
     }
 
@@ -648,6 +655,7 @@ class Plugins
             }
             $ret .= '</div>';
         }
+
         return $ret;
     }
 }
