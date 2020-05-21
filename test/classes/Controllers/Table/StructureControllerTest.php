@@ -38,6 +38,10 @@ class StructureControllerTest extends PmaTestCase
      */
     protected function setUp(): void
     {
+        parent::setUp();
+        parent::defineVersionConstants();
+        parent::loadDefaultConfig();
+        $GLOBALS['text_dir'] = 'ltr';
         $GLOBALS['server'] = 1;
         $GLOBALS['db'] = 'db';
         $GLOBALS['table'] = 'table';
@@ -281,7 +285,7 @@ class StructureControllerTest extends PmaTestCase
             new RelationCleanup($GLOBALS['dbi'], $relation)
         );
 
-        $submit_mult = 'index';
+        $submit_mult = 'spatial';
         $selected = [
             'table1',
             'table2',
@@ -306,7 +310,7 @@ class StructureControllerTest extends PmaTestCase
 
         //validate 2: $query_type
         $this->assertEquals(
-            'index_fld',
+            'spatial_fld',
             $query_type
         );
 
