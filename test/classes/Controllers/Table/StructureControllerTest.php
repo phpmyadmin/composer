@@ -15,7 +15,7 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Tests\PmaTestCase;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
 use PhpMyAdmin\Transformations;
 use ReflectionClass;
@@ -25,7 +25,7 @@ use ReflectionClass;
  *
  * this class is for testing StructureController class
  */
-class StructureControllerTest extends PmaTestCase
+class StructureControllerTest extends AbstractTestCase
 {
     /** @var ResponseStub */
     private $_response;
@@ -221,13 +221,6 @@ class StructureControllerTest extends PmaTestCase
             $method->invoke($ctrl)
         );
 
-        $_POST['submit_mult_unique_x'] = true;
-        $this->assertEquals(
-            'unique',
-            $method->invoke($ctrl)
-        );
-        unset($_POST['submit_mult_unique_x']);
-
         $_POST['submit_mult'] = 'create';
         $this->assertEquals(
             'create',
@@ -249,129 +242,6 @@ class StructureControllerTest extends PmaTestCase
         $this->assertEquals(
             $_POST['selected'],
             $_POST['selected_fld']
-        );
-    }
-
-    /**
-     * Test for getDataForSubmitMult()
-     *
-     * @return void
-     *
-     * @test
-     */
-    public function testPMAGetDataForSubmitMult()
-    {
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $dbi->expects($this->any())
-            ->method('query')
-            ->will($this->returnValue(true));
-
-        $class = new ReflectionClass(StructureController::class);
-        $method = $class->getMethod('getDataForSubmitMult');
-        $method->setAccessible(true);
-
-        $relation = new Relation($GLOBALS['dbi'], $this->template);
-        $ctrl = new StructureController(
-            $this->_response,
-            $GLOBALS['dbi'],
-            $this->template,
-            $GLOBALS['db'],
-            $GLOBALS['table'],
-            $relation,
-            new Transformations(),
-            new CreateAddField($GLOBALS['dbi']),
-            new RelationCleanup($GLOBALS['dbi'], $relation)
-        );
-
-        $submit_mult = 'spatial';
-        $selected = [
-            'table1',
-            'table2',
-        ];
-        $action = 'db_delete_row';
-
-        list($what, $query_type, $is_unset_submit_mult, $mult_btn, $centralColsError)
-            = $method->invokeArgs(
-                $ctrl,
-                [
-                    $submit_mult,
-                    $selected,
-                    $action,
-                ]
-            );
-
-        //validate 1: $what
-        $this->assertEquals(
-            null,
-            $what
-        );
-
-        //validate 2: $query_type
-        $this->assertEquals(
-            'spatial_fld',
-            $query_type
-        );
-
-        //validate 3: $is_unset_submit_mult
-        $this->assertEquals(
-            true,
-            $is_unset_submit_mult
-        );
-
-        //validate 4:
-        $this->assertEquals(
-            __('Yes'),
-            $mult_btn
-        );
-
-        //validate 5: $centralColsError
-        $this->assertEquals(
-            null,
-            $centralColsError
-        );
-
-        $submit_mult = 'unique';
-
-        list($what, $query_type, $is_unset_submit_mult, $mult_btn, $centralColsError)
-            = $method->invokeArgs(
-                $ctrl,
-                [
-                    $submit_mult,
-                    $selected,
-                    $action,
-                ]
-            );
-
-        //validate 1: $what
-        $this->assertEquals(
-            null,
-            $what
-        );
-
-        //validate 2: $query_type
-        $this->assertEquals(
-            'unique_fld',
-            $query_type
-        );
-
-        //validate 3: $is_unset_submit_mult
-        $this->assertEquals(
-            true,
-            $is_unset_submit_mult
-        );
-
-        //validate 4: $mult_btn
-        $this->assertEquals(
-            __('Yes'),
-            $mult_btn
-        );
-
-        //validate 5: $centralColsError
-        $this->assertEquals(
-            null,
-            $centralColsError
         );
     }
 }

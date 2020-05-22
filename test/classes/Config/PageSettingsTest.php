@@ -8,12 +8,12 @@ namespace PhpMyAdmin\Tests\Config;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\PageSettings;
-use PhpMyAdmin\Tests\PmaTestCase;
+use PhpMyAdmin\Tests\AbstractTestCase;
 
 /**
  * Tests for PhpMyAdmin\Config\PageSettings
  */
-class PageSettingsTest extends PmaTestCase
+class PageSettingsTest extends AbstractTestCase
 {
     /**
      * Setup tests
@@ -27,6 +27,7 @@ class PageSettingsTest extends PmaTestCase
         $GLOBALS['server'] = 1;
         $GLOBALS['db'] = 'db';
         $GLOBALS['table'] = '';
+        $_SERVER['SCRIPT_NAME'] = 'index.php';
         $GLOBALS['PMA_PHP_SELF'] = 'index.php';
         $GLOBALS['cfg']['Server']['DisableIS'] = false;
     }
@@ -59,7 +60,7 @@ class PageSettingsTest extends PmaTestCase
             '<div id="page_settings_modal">'
             . '<div class="page_settings">'
             . '<form method="post" '
-            . 'action="phpunit?db=db&server=1&lang=en" '
+            . 'action="index.php?db=db&server=1&lang=en" '
             . 'class="config-form disableAjax">',
             $html
         );

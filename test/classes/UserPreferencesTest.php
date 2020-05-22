@@ -17,7 +17,7 @@ use function time;
 /**
  * tests for methods under PhpMyAdmin\UserPreferences class
  */
-class UserPreferencesTest extends PmaTestCase
+class UserPreferencesTest extends AbstractNetworkTestCase
 {
     /** @var UserPreferences */
     private $userPreferences;
@@ -398,7 +398,7 @@ class UserPreferencesTest extends PmaTestCase
 
         $_REQUEST['prefs_autoload'] = 'nohide';
         $GLOBALS['cfg']['ServerDefault'] = 1;
-        $GLOBALS['PMA_PHP_SELF'] = 'phpunit';
+        $GLOBALS['PMA_PHP_SELF'] = 'index.php';
         $result = $this->userPreferences->autoloadGetHeader();
 
         $this->assertStringContainsString(
@@ -422,7 +422,7 @@ class UserPreferencesTest extends PmaTestCase
         );
 
         $this->assertStringContainsString(
-            '<input type="hidden" name="return_url" value="phpunit?">',
+            '<input type="hidden" name="return_url" value="index.php?">',
             $result
         );
     }

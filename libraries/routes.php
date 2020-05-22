@@ -253,10 +253,15 @@ return function (RouteCollector $routes) {
         $routes->addRoute(['GET', 'POST'], '/sql', [TableSqlController::class, 'index']);
         $routes->addGroup('/structure', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [TableStructureController::class, 'index']);
+            $routes->post('/central-columns-add', [TableStructureController::class, 'addToCentralColumns']);
+            $routes->post('/central-columns-remove', [TableStructureController::class, 'removeFromCentralColumns']);
             $routes->post('/drop', [TableStructureController::class, 'drop']);
             $routes->post('/drop-confirm', [TableStructureController::class, 'dropConfirm']);
+            $routes->post('/fulltext', [TableStructureController::class, 'fulltext']);
             $routes->post('/index', [TableStructureController::class, 'addIndex']);
             $routes->post('/primary', [TableStructureController::class, 'primary']);
+            $routes->post('/spatial', [TableStructureController::class, 'spatial']);
+            $routes->post('/unique', [TableStructureController::class, 'unique']);
         });
         $routes->addRoute(['GET', 'POST'], '/tracking', [TableTrackingController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/triggers', [TableTriggersController::class, 'index']);

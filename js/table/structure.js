@@ -420,12 +420,22 @@ AJAX.registerOnload('table/structure.js', function () {
         AJAX.source = $form;
         var url = $form.attr('action');
 
-        if (action === 'drop') {
+        if (action === 'add_to_central_columns') {
+            url = 'index.php?route=/table/structure/central-columns-add';
+        } else if (action === 'remove_from_central_columns') {
+            url = 'index.php?route=/table/structure/central-columns-remove';
+        } else if (action === 'drop') {
             url = 'index.php?route=/table/structure/drop-confirm';
+        } else if (action === 'ftext') {
+            url = 'index.php?route=/table/structure/fulltext';
         } else if (action === 'index') {
             url = 'index.php?route=/table/structure/index';
         } else if (action === 'primary') {
             url = 'index.php?route=/table/structure/primary';
+        } else if (action === 'spatial') {
+            url = 'index.php?route=/table/structure/spatial';
+        } else if (action === 'unique') {
+            url = 'index.php?route=/table/structure/unique';
         }
 
         $.post(url, submitData, AJAX.responseHandler);
