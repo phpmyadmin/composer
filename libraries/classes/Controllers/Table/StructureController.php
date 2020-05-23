@@ -113,10 +113,8 @@ class StructureController extends AbstractController
 
     public function index(): void
     {
-        global $containerBuilder, $sql_query, $reread_info, $showtable;
+        global $containerBuilder, $reread_info, $showtable, $url_params;
         global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $table, $goto, $message, $mult_btn, $query_type;
-        global $selected, $selected_fld, $submit_mult, $url_query, $url_params;
 
         $this->dbi->selectDb($this->db);
         $reread_info = $this->table_obj->getStatusInfo(null, true);
@@ -124,6 +122,7 @@ class StructureController extends AbstractController
             null,
             (isset($reread_info) && $reread_info)
         );
+
         if ($this->table_obj->isView()) {
             $tbl_is_view = true;
             $tbl_storage_engine = __('View');
@@ -131,6 +130,7 @@ class StructureController extends AbstractController
             $tbl_is_view = false;
             $tbl_storage_engine = $this->table_obj->getStorageEngine();
         }
+
         $tbl_collation = $this->table_obj->getCollation();
         $table_info_num_rows = $this->table_obj->getNumRows();
 
@@ -139,60 +139,11 @@ class StructureController extends AbstractController
         $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
         $checkUserPrivileges->getPrivileges();
 
-        $this->response->getHeader()->getScripts()->addFiles(
-            [
-                'table/structure.js',
-                'indexes.js',
-            ]
-        );
+        $this->response->getHeader()->getScripts()->addFiles([
+            'table/structure.js',
+            'indexes.js',
+        ]);
 
-        /**
-         * Handle column moving
-         */
-        if (isset($_POST['move_columns'])
-            && is_array($_POST['move_columns'])
-            && $this->response->isAjax()
-        ) {
-            $this->moveColumns();
-
-            return;
-        }
-
-        /**
-         * handle MySQL reserved words columns check
-         */
-        if (isset($_POST['reserved_word_check'])) {
-            if ($GLOBALS['cfg']['ReservedWordDisableWarning'] === false) {
-                $columns_names = $_POST['field_name'];
-                $reserved_keywords_names = [];
-                foreach ($columns_names as $column) {
-                    if (Context::isKeyword(trim($column), true)) {
-                        $reserved_keywords_names[] = trim($column);
-                    }
-                }
-                if (Context::isKeyword(trim($this->table), true)) {
-                    $reserved_keywords_names[] = trim($this->table);
-                }
-                if (count($reserved_keywords_names) === 0) {
-                    $this->response->setRequestStatus(false);
-                }
-                $this->response->addJSON(
-                    'message',
-                    sprintf(
-                        _ngettext(
-                            'The name \'%s\' is a MySQL reserved keyword.',
-                            'The names \'%s\' are MySQL reserved keywords.',
-                            count($reserved_keywords_names)
-                        ),
-                        implode(',', $reserved_keywords_names)
-                    )
-                );
-            } else {
-                $this->response->setRequestStatus(false);
-            }
-
-            return;
-        }
         /**
          * A click on Change has been made for one column
          */
@@ -214,89 +165,6 @@ class StructureController extends AbstractController
             $this->displayHtmlForPartitionChange();
 
             return;
-        }
-
-        /**
-         * handle multiple field commands if required
-         *
-         * submit_mult_*_x comes from IE if <input type="img" ...> is used
-         */
-        $submit_mult = $this->getMultipleFieldCommandType();
-
-        if (! empty($submit_mult)) {
-            if (isset($_POST['selected_fld'])) {
-                if ($submit_mult == 'browse') {
-                    // browsing the table displaying only selected columns
-                    $this->displayTableBrowseForSelectedColumns(
-                        $GLOBALS['goto'],
-                        $GLOBALS['pmaThemeImage']
-                    );
-                } else {
-                    // handle multiple field commands
-                    // handle confirmation of deleting multiple columns
-                    $action = Url::getFromRoute('/table/structure');
-                    $GLOBALS['selected'] = $_POST['selected_fld'];
-                    [
-                        $what_ret,
-                        $query_type_ret,
-                        $is_unset_submit_mult,
-                        $mult_btn_ret,
-                        $centralColsError,
-                    ] = $this->getDataForSubmitMult(
-                        $submit_mult,
-                        $_POST['selected_fld'],
-                        $action
-                    );
-                    //update the existing variables
-                    if (isset($what_ret)) {
-                        $GLOBALS['what'] = $what_ret;
-                        global $what;
-                    }
-                    if (isset($query_type_ret)) {
-                        $GLOBALS['query_type'] = $query_type_ret;
-                        global $query_type;
-                    }
-                    if ($is_unset_submit_mult) {
-                        unset($submit_mult);
-                    }
-                    if (isset($mult_btn_ret)) {
-                        $GLOBALS['mult_btn'] = $mult_btn_ret;
-                        global $mult_btn;
-                    }
-
-                    $goto = $_POST['goto'] ?? $goto ?? null;
-                    $mult_btn = $_POST['mult_btn'] ?? $mult_btn ?? null;
-                    $query_type = $_POST['query_type'] ?? $query_type ?? null;
-                    $selected = $_POST['selected'] ?? $selected ?? null;
-                    $selected_fld = $_POST['selected_fld'] ?? $selected_fld ?? null;
-                    $sql_query = $_POST['sql_query'] ?? $sql_query ?? null;
-                    $submit_mult = $_POST['submit_mult'] ?? $submit_mult ?? null;
-                    $url_query = $_POST['url_query'] ?? $url_query ?? null;
-
-                    if (! empty($submit_mult)
-                        && $submit_mult != __('With selected:')
-                        && ! empty($selected_fld)
-                    ) {
-                        // phpcs:disable PSR1.Files.SideEffects
-                        define('PMA_SUBMIT_MULT', 1);
-                        // phpcs:enable
-                    }
-
-                    /**
-                     * if $submit_mult == 'change', execution will have stopped
-                     * at this point
-                     */
-                    if (empty($message)) {
-                        $message = Message::success();
-                    }
-                    $this->response->addHTML(
-                        Generator::getMessage($message, $sql_query)
-                    );
-                }
-            } else {
-                $this->response->setRequestStatus(false);
-                $this->response->addJSON('message', __('No column selected.'));
-            }
         }
 
         /**
@@ -330,120 +198,6 @@ class StructureController extends AbstractController
             $GLOBALS['reload'] = true;
         }
 
-        /**
-         * Gets the relation settings
-         */
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        /**
-         * Runs common work
-         */
-        // set db, table references, for require_once that follows
-        // got to be eliminated in long run
-        $db = &$this->db;
-        $table = &$this->table;
-        $url_params = [];
-
-        Common::table();
-
-        $this->_url_query = Url::getCommonRaw([
-            'db' => $db,
-            'table' => $table,
-            'goto' => Url::getFromRoute('/table/structure'),
-            'back' => Url::getFromRoute('/table/structure'),
-        ]);
-        /* The url_params array is initialized in above include */
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        // 2. Gets table keys and retains them
-        // @todo should be: $server->db($db)->table($table)->primary()
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        // 3. Get fields
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        //display table structure
-        $this->response->addHTML(
-            $this->displayStructure(
-                $cfgRelation,
-                $columns_with_unique_index,
-                $url_params,
-                $primary,
-                $fields,
-                $columns_with_index
-            )
-        );
-    }
-
-    public function addToCentralColumns(): void
-    {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $message, $url_params;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
-
-        $selected = $_POST['selected_fld'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No column selected.'));
-
-            return;
-        }
-
-        $centralColumns = new CentralColumns($this->dbi);
-        $centralColsError = $centralColumns->syncUniqueColumns(
-            $selected,
-            false
-        );
-
-        if ($centralColsError instanceof Message) {
-            $message = $centralColsError;
-        }
-
-        if (empty($message)) {
-            $message = Message::success();
-        }
-        $this->response->addHTML(
-            Generator::getMessage($message, $sql_query)
-        );
-
         $cfgRelation = $this->relation->getRelationsParam();
 
         $url_params = [];
@@ -483,33 +237,71 @@ class StructureController extends AbstractController
         ));
     }
 
-    public function removeFromCentralColumns(): void
+    public function browse(): void
     {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $message, $url_params;
+        if (empty($_POST['selected_fld'])) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No column selected.'));
 
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
+            return;
+        }
+
+        $this->displayTableBrowseForSelectedColumns(
+            $GLOBALS['goto'],
+            $GLOBALS['pmaThemeImage']
+        );
+    }
+
+    public function change(): void
+    {
+        $selected = $_POST['selected_fld'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No column selected.'));
+
+            return;
+        }
+
+        $this->displayHtmlForColumnChange($selected, Url::getFromRoute('/table/structure'));
+    }
+
+    public function addToCentralColumns(): void
+    {
+        global $sql_query, $message;
+
+        $selected = $_POST['selected_fld'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No column selected.'));
+
+            return;
+        }
+
+        $centralColumns = new CentralColumns($this->dbi);
+        $centralColsError = $centralColumns->syncUniqueColumns(
+            $selected,
+            false
         );
 
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
+        if ($centralColsError instanceof Message) {
+            $message = $centralColsError;
+        }
 
-        PageSettings::showGroup('TableStructure');
+        if (empty($message)) {
+            $message = Message::success();
+        }
+        $this->response->addHTML(
+            Generator::getMessage($message, $sql_query)
+        );
 
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
+        $this->index();
+    }
 
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+    public function removeFromCentralColumns(): void
+    {
+        global $sql_query, $db, $message;
 
         $selected = $_POST['selected_fld'] ?? [];
 
@@ -538,72 +330,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $this->_url_query = Url::getCommonRaw($url_params);
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function fulltext(): void
     {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $table, $message, $url_params;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $sql_query, $db, $table, $message;
 
         $selected = $_POST['selected_fld'] ?? [];
 
@@ -637,72 +369,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $this->_url_query = Url::getCommonRaw($url_params);
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function spatial(): void
     {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $table, $message, $url_params;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $sql_query, $db, $table, $message;
 
         $selected = $_POST['selected_fld'] ?? [];
 
@@ -736,72 +408,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $this->_url_query = Url::getCommonRaw($url_params);
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function unique(): void
     {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $table, $message, $url_params;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $sql_query, $db, $table, $message;
 
         $selected = $_POST['selected_fld'] ?? [];
 
@@ -835,72 +447,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $this->_url_query = Url::getCommonRaw($url_params);
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function addIndex(): void
     {
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-        global $db, $table, $message, $url_params;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $sql_query, $db, $table, $message;
 
         $selected = $_POST['selected_fld'] ?? [];
 
@@ -934,72 +486,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $this->_url_query = Url::getCommonRaw($url_params);
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function primary(): void
     {
-        global $db, $table, $message, $url_params;
-        global $sql_query, $reread_info, $showtable;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $db, $table, $message, $sql_query;
 
         $selected = $_POST['selected'] ?? [];
         $selected_fld = $_POST['selected_fld'] ?? [];
@@ -1061,77 +553,12 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $this->_url_query = Url::getCommonRaw([
-            'db' => $db,
-            'table' => $table,
-            'goto' => Url::getFromRoute('/table/structure'),
-            'back' => Url::getFromRoute('/table/structure'),
-        ]);
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function drop(): void
     {
-        global $db, $table, $message;
-        global $sql_query, $reread_info, $showtable, $url_params;
-        global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
-
-        $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
-            null,
-            (isset($reread_info) && $reread_info)
-        );
-
-        $tbl_is_view = false;
-        $tbl_storage_engine = $this->table_obj->getStorageEngine();
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
+        global $db, $table, $message, $sql_query;
 
         $selected = $_POST['selected'] ?? [];
 
@@ -1170,51 +597,7 @@ class StructureController extends AbstractController
             Generator::getMessage($message, $sql_query)
         );
 
-        $cfgRelation = $this->relation->getRelationsParam();
-
-        $url_params = [];
-
-        Common::table();
-
-        $this->_url_query = Url::getCommonRaw([
-            'db' => $db,
-            'table' => $table,
-            'goto' => Url::getFromRoute('/table/structure'),
-            'back' => Url::getFromRoute('/table/structure'),
-        ]);
-
-        $url_params['goto'] = Url::getFromRoute('/table/structure');
-        $url_params['back'] = Url::getFromRoute('/table/structure');
-
-        // 2. Gets table keys and retains them
-        // @todo should be: $server->db($db)->table($table)->primary()
-        $primary = Index::getPrimary($this->table, $this->db);
-        $columns_with_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::UNIQUE | Index::INDEX | Index::SPATIAL
-                | Index::FULLTEXT
-            );
-        $columns_with_unique_index = $this->dbi
-            ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(Index::UNIQUE);
-
-        // 3. Get fields
-        $fields = (array) $this->dbi->getColumns(
-            $this->db,
-            $this->table,
-            null,
-            true
-        );
-
-        $this->response->addHTML($this->displayStructure(
-            $cfgRelation,
-            $columns_with_unique_index,
-            $url_params,
-            $primary,
-            $fields,
-            $columns_with_index
-        ));
+        $this->index();
     }
 
     public function dropConfirm(): void
@@ -1230,18 +613,6 @@ class StructureController extends AbstractController
             return;
         }
 
-        $this->dbi->selectDb($this->db);
-
-        PageSettings::showGroup('TableStructure');
-
-        $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
-        $checkUserPrivileges->getPrivileges();
-
-        $this->response->getHeader()->getScripts()->addFiles([
-            'table/structure.js',
-            'indexes.js',
-        ]);
-
         Common::table();
 
         $this->render('table/structure/drop_confirm', [
@@ -1253,14 +624,19 @@ class StructureController extends AbstractController
 
     /**
      * Moves columns in the table's structure based on $_REQUEST
-     *
-     * @return void
      */
-    protected function moveColumns()
+    public function moveColumns(): void
     {
+        if (! isset($_POST['move_columns'])
+            || ! is_array($_POST['move_columns'])
+            || ! $this->response->isAjax()
+        ) {
+            return;
+        }
+
         $this->dbi->selectDb($this->db);
 
-        /*
+        /**
          * load the definitions for all columns
          */
         $columns = $this->dbi->getColumnsFull($this->db, $this->table);
@@ -1655,39 +1031,6 @@ class StructureController extends AbstractController
                 )
             );
         }
-    }
-
-    /**
-     * Function to get the type of command for multiple field handling
-     *
-     * @return string|null
-     */
-    protected function getMultipleFieldCommandType()
-    {
-        $types = [
-            'change',
-            'browse',
-        ];
-
-        foreach ($types as $type) {
-            if (isset($_POST['submit_mult_' . $type . '_x'])) {
-                return $type;
-            }
-        }
-
-        if (isset($_POST['submit_mult'])) {
-            return $_POST['submit_mult'];
-        } elseif (isset($_POST['mult_btn'])
-            && $_POST['mult_btn'] == __('Yes')
-        ) {
-            if (isset($_POST['selected'])) {
-                $_POST['selected_fld'] = $_POST['selected'];
-            }
-
-            return 'row_delete';
-        }
-
-        return null;
     }
 
     /**
@@ -2425,37 +1768,39 @@ class StructureController extends AbstractController
     }
 
     /**
-     * Get List of information for Submit Mult
-     *
-     * @param string $submit_mult mult_submit type
-     * @param array  $selected    the selected columns
-     * @param string $action      action type
-     *
-     * @return array
+     * Handles MySQL reserved words columns check.
      */
-    protected function getDataForSubmitMult($submit_mult, $selected, $action)
+    public function reservedWordCheck(): void
     {
-        $what = null;
-        $query_type = null;
-        $is_unset_submit_mult = false;
-        $mult_btn = null;
-        $centralColsError = null;
-        switch ($submit_mult) {
-            case 'change':
-                $this->displayHtmlForColumnChange($selected, $action);
-                // execution stops here but PhpMyAdmin\Response correctly finishes
-                // the rendering
-                exit;
-            case 'browse':
-                // this should already be handled by /table/structure
+        if ($GLOBALS['cfg']['ReservedWordDisableWarning'] !== false) {
+            $this->response->setRequestStatus(false);
+
+            return;
         }
 
-        return [
-            $what,
-            $query_type,
-            $is_unset_submit_mult,
-            $mult_btn,
-            $centralColsError,
-        ];
+        $columns_names = $_POST['field_name'];
+        $reserved_keywords_names = [];
+        foreach ($columns_names as $column) {
+            if (Context::isKeyword(trim($column), true)) {
+                $reserved_keywords_names[] = trim($column);
+            }
+        }
+        if (Context::isKeyword(trim($this->table), true)) {
+            $reserved_keywords_names[] = trim($this->table);
+        }
+        if (count($reserved_keywords_names) === 0) {
+            $this->response->setRequestStatus(false);
+        }
+        $this->response->addJSON(
+            'message',
+            sprintf(
+                _ngettext(
+                    'The name \'%s\' is a MySQL reserved keyword.',
+                    'The names \'%s\' are MySQL reserved keywords.',
+                    count($reserved_keywords_names)
+                ),
+                implode(',', $reserved_keywords_names)
+            )
+        );
     }
 }

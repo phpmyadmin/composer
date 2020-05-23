@@ -420,10 +420,14 @@ AJAX.registerOnload('table/structure.js', function () {
         AJAX.source = $form;
         var url = $form.attr('action');
 
-        if (action === 'add_to_central_columns') {
+        if (action === 'browse') {
+            url = 'index.php?route=/table/structure/browse';
+        } else if (action === 'add_to_central_columns') {
             url = 'index.php?route=/table/structure/central-columns-add';
         } else if (action === 'remove_from_central_columns') {
             url = 'index.php?route=/table/structure/central-columns-remove';
+        } else if (action === 'change') {
+            url = 'index.php?route=/table/structure/change';
         } else if (action === 'drop') {
             url = 'index.php?route=/table/structure/drop-confirm';
         } else if (action === 'ftext') {

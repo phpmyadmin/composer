@@ -253,13 +253,17 @@ return function (RouteCollector $routes) {
         $routes->addRoute(['GET', 'POST'], '/sql', [TableSqlController::class, 'index']);
         $routes->addGroup('/structure', function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [TableStructureController::class, 'index']);
+            $routes->post('/browse', [TableStructureController::class, 'browse']);
             $routes->post('/central-columns-add', [TableStructureController::class, 'addToCentralColumns']);
             $routes->post('/central-columns-remove', [TableStructureController::class, 'removeFromCentralColumns']);
+            $routes->post('/change', [TableStructureController::class, 'change']);
             $routes->post('/drop', [TableStructureController::class, 'drop']);
             $routes->post('/drop-confirm', [TableStructureController::class, 'dropConfirm']);
             $routes->post('/fulltext', [TableStructureController::class, 'fulltext']);
             $routes->post('/index', [TableStructureController::class, 'addIndex']);
+            $routes->post('/move-columns', [TableStructureController::class, 'moveColumns']);
             $routes->post('/primary', [TableStructureController::class, 'primary']);
+            $routes->post('/reserved-word-check', [TableStructureController::class, 'reservedWordCheck']);
             $routes->post('/spatial', [TableStructureController::class, 'spatial']);
             $routes->post('/unique', [TableStructureController::class, 'unique']);
         });
