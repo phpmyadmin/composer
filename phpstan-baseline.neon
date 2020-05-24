@@ -206,11 +206,6 @@ parameters:
 			path: libraries/classes/Config/FormDisplay.php
 
 		-
-			message: "#^Call to function is_bool\\(\\) with string will always evaluate to false\\.$#"
-			count: 2
-			path: libraries/classes/Config/FormDisplay.php
-
-		-
 			message: "#^Parameter \\#2 \\$type of function settype expects string, string\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Config/FormDisplay.php
@@ -239,16 +234,6 @@ parameters:
 			message: "#^Cannot call static method getFields\\(\\) on string\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Config/Forms/BaseFormList.php
-
-		-
-			message: "#^Result of && is always false\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between string and null will always evaluate to false\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
 
 		-
 			message: "#^Parameter \\#1 \\$function of function call_user_func_array expects callable\\(\\)\\: mixed, string given\\.$#"
@@ -3861,16 +3846,6 @@ parameters:
 			path: libraries/classes/Sql.php
 
 		-
-			message: "#^Call to function is_bool\\(\\) with object will always evaluate to false\\.$#"
-			count: 1
-			path: libraries/classes/Sql.php
-
-		-
-			message: "#^Call to function is_bool\\(\\) with object\\|null will always evaluate to false\\.$#"
-			count: 1
-			path: libraries/classes/Sql.php
-
-		-
 			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\Sql\\:\\:sendResponseForGridEdit\\(\\) expects object, object\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Sql.php
@@ -4461,11 +4436,6 @@ parameters:
 			path: test/classes/CoreTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$needle of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, array given\\.$#"
-			count: 2
-			path: test/classes/Database/EventsTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$expectedCount of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\) expects int, array given\\.$#"
 			count: 1
 			path: test/classes/Database/EventsTest.php
@@ -4561,19 +4531,9 @@ parameters:
 			path: test/classes/Engines/PbxtTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with string and 'Error when trying…' will always evaluate to false\\.$#"
-			count: 1
-			path: test/classes/EnvironmentTest.php
-
-		-
 			message: "#^Property PhpMyAdmin\\\\Tests\\\\ErrorHandlerTest\\:\\:\\$object has no typehint specified\\.$#"
 			count: 1
 			path: test/classes/ErrorHandlerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$input of function array_values expects array, array\\|bool given\\.$#"
-			count: 1
-			path: test/classes/FileListingTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, string\\|false given\\.$#"
@@ -5256,11 +5216,6 @@ parameters:
 			path: test/selenium/Table/OperationsTest.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 4
-			path: test/selenium/TestBase.php
-
-		-
 			message: "#^Parameter \\#1 \\$selenium_server_url of static method Facebook\\\\WebDriver\\\\Remote\\\\RemoteWebDriver\\:\\:create\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: test/selenium/TestBase.php
@@ -5272,16 +5227,6 @@ parameters:
 
 		-
 			message: "#^Property PhpMyAdmin\\\\Tests\\\\Selenium\\\\TestBase\\:\\:\\$_mysqli \\(mysqli\\) does not accept null\\.$#"
-			count: 1
-			path: test/selenium/TestBase.php
-
-		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, bool\\|string given\\.$#"
-			count: 1
-			path: test/selenium/TestBase.php
-
-		-
-			message: "#^Else branch is unreachable because previous condition is always true\\.$#"
 			count: 1
 			path: test/selenium/TestBase.php
 

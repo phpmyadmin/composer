@@ -6,7 +6,6 @@
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\FileListing;
-use PhpMyAdmin\Tests\AbstractTestCase;
 use function array_values;
 use function extension_loaded;
 
@@ -27,12 +26,16 @@ class FileListingTest extends AbstractTestCase
 
         $fixturesDir = ROOT_PATH . 'test/classes/_data/file_listing';
 
+        $dirContent = $this->fileListing->getDirContent($fixturesDir);
+        if (is_bool($dirContent)) {
+            $dirContent = [];
+        }
         $this->assertSame(
             array_values([
                 'one.txt',
                 'two.md',
             ]),
-            array_values($this->fileListing->getDirContent($fixturesDir))
+            array_values($dirContent)
         );
     }
 

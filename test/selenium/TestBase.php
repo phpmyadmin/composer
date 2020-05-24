@@ -21,7 +21,6 @@ use Facebook\WebDriver\WebDriverSelect;
 use InvalidArgumentException;
 use mysqli;
 use mysqli_result;
-use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use const CURLOPT_CUSTOMREQUEST;
@@ -94,7 +93,6 @@ abstract class TestBase extends TestCase
      */
     protected function setUp(): void
     {
-        AbstractTestCase::defineTestingGlobals();
         /**
          * Needs to be implemented
          *
@@ -105,36 +103,13 @@ abstract class TestBase extends TestCase
 
         if (! $this->hasTestSuiteDatabaseServer()) {
             $this->markTestSkipped('Database server is not configured.');
-
-            return;
-        }
-
-        try {
-            $this->_mysqli = new mysqli(
-                $GLOBALS['TESTSUITE_SERVER'],
-                $GLOBALS['TESTSUITE_USER'],
-                $GLOBALS['TESTSUITE_PASSWORD'],
-                'mysql',
-                (int) $GLOBALS['TESTSUITE_PORT']
-            );
-        } catch (Throwable $e) {
-            // when localhost is used, it tries to connect to a socket and throws and error
-            $this->markTestSkipped('Failed to connect to MySQL (' . $e->getMessage() . ')');
-
-            return;
-        }
-
-        if ($this->_mysqli->connect_errno) {
-            $this->markTestSkipped('Failed to connect to MySQL (' . $this->_mysqli->error . ')');
-
-            return;
         }
 
         if ($this->getHubUrl() === null) {
             $this->markTestSkipped('Selenium testing is not configured.');
-
-            return;
         }
+
+        $this->connectMySQL();
 
         $capabilities = $this->getCapabilities();
         $this->addCapabilities($capabilities);
@@ -147,7 +122,7 @@ abstract class TestBase extends TestCase
 
         $this->sessionId = $this->webDriver->getSessionId();
 
-        $this->database_name = $GLOBALS['TESTSUITE_DATABASE']
+        $this->database_name = getenv('TESTSUITE_DATABASE')
             . mb_substr(sha1((string) rand()), 0, 7);
         $this->dbQuery(
             'CREATE DATABASE IF NOT EXISTS ' . $this->database_name
@@ -160,16 +135,55 @@ abstract class TestBase extends TestCase
         $this->webDriver->manage()->window()->maximize();
     }
 
+    private function connectMySQL(): void
+    {
+        $mysqlPort = getenv('TESTSUITE_PORT');
+        try {
+            $this->_mysqli = new mysqli(
+                (string) getenv('TESTSUITE_SERVER'),
+                (string) getenv('TESTSUITE_USER'),
+                (string) getenv('TESTSUITE_PASSWORD'),
+                'mysql',
+                $mysqlPort === false ? 3306 : (int) $mysqlPort
+            );
+        } catch (Throwable $e) {
+            // when localhost is used, it tries to connect to a socket and throws and error
+            $this->markTestSkipped('Failed to connect to MySQL (' . $e->getMessage() . ')');
+        }
+
+        if ($this->_mysqli->connect_errno) {
+            $this->markTestSkipped('Failed to connect to MySQL (' . $this->_mysqli->error . ')');
+        }
+    }
+
+    private function getBrowserStackCredentials(): string
+    {
+        return getenv('TESTSUITE_BROWSERSTACK_USER') . ':' . getenv('TESTSUITE_BROWSERSTACK_KEY');
+    }
+
+    protected function getTestSuiteUserLogin(): string
+    {
+        $user = getenv('TESTSUITE_USER');
+        return $user === false ? '' : $user;
+    }
+
+    protected function getTestSuiteUserPassword(): string
+    {
+        $user = getenv('TESTSUITE_PASSWORD');
+        return $user === false ? '' : $user;
+    }
+
     /**
      * Has CI config ( CI_MODE == selenium )
      */
     public function hasCIConfig(): bool
     {
-        if (empty($GLOBALS['CI_MODE'])) {
+        $mode = getenv('CI_MODE');
+        if (empty($mode)) {
             return false;
         }
 
-        return $GLOBALS['CI_MODE'] == 'selenium';
+        return $mode === 'selenium';
     }
 
     /**
@@ -177,8 +191,8 @@ abstract class TestBase extends TestCase
      */
     public function hasBrowserstackConfig(): bool
     {
-        return ! empty($GLOBALS['TESTSUITE_BROWSERSTACK_USER'])
-            && ! empty($GLOBALS['TESTSUITE_BROWSERSTACK_KEY']);
+        return ! empty(getenv('TESTSUITE_BROWSERSTACK_USER'))
+            && ! empty(getenv('TESTSUITE_BROWSERSTACK_KEY'));
     }
 
     /**
@@ -186,8 +200,8 @@ abstract class TestBase extends TestCase
      */
     public function hasSeleniumConfig(): bool
     {
-        return ! empty($GLOBALS['TESTSUITE_SELENIUM_HOST'])
-            && ! empty($GLOBALS['TESTSUITE_SELENIUM_PORT']);
+        return ! empty(getenv('TESTSUITE_SELENIUM_HOST'))
+            && ! empty(getenv('TESTSUITE_SELENIUM_PORT'));
     }
 
     /**
@@ -197,13 +211,12 @@ abstract class TestBase extends TestCase
     {
         if ($this->hasBrowserstackConfig()) {
             return 'https://'
-            . $GLOBALS['TESTSUITE_BROWSERSTACK_USER'] . ':'
-            . $GLOBALS['TESTSUITE_BROWSERSTACK_KEY'] .
+            . $this->getBrowserStackCredentials() .
             '@hub-cloud.browserstack.com/wd/hub';
         } elseif ($this->hasSeleniumConfig()) {
             return 'http://'
-            . $GLOBALS['TESTSUITE_SELENIUM_HOST'] . ':'
-            . $GLOBALS['TESTSUITE_SELENIUM_PORT'] . '/wd/hub';
+            . getenv('TESTSUITE_SELENIUM_HOST') . ':'
+            . getenv('TESTSUITE_SELENIUM_PORT') . '/wd/hub';
         } else {
             return null;
         }
@@ -214,9 +227,9 @@ abstract class TestBase extends TestCase
      */
     public function hasTestSuiteDatabaseServer(): bool
     {
-        return ! empty($GLOBALS['TESTSUITE_SERVER'])
-            && ! empty($GLOBALS['TESTSUITE_USER'])
-            && ! empty($GLOBALS['TESTSUITE_DATABASE']);
+        return ! empty(getenv('TESTSUITE_SERVER'))
+            && ! empty(getenv('TESTSUITE_USER'))
+            && ! empty(getenv('TESTSUITE_DATABASE'));
     }
 
     /**
@@ -226,10 +239,14 @@ abstract class TestBase extends TestCase
      */
     private function navigateTo(string $url): void
     {
-        if (substr($GLOBALS['TESTSUITE_URL'], -1) === '/') {
-            $url = $GLOBALS['TESTSUITE_URL'] . $url;
+        $suiteUrl = getenv('TESTSUITE_URL');
+        if ($suiteUrl === false) {
+            $suiteUrl = '';
+        }
+        if (substr($suiteUrl, -1) === '/') {
+            $url = $suiteUrl . $url;
         } else {
-            $url = $GLOBALS['TESTSUITE_URL'] . '/' . $url;
+            $url = $suiteUrl . '/' . $url;
         }
 
         $this->webDriver->get($url);
@@ -245,6 +262,14 @@ abstract class TestBase extends TestCase
         $buildLocal = true;
         $buildId = 'Manual';
         $projectName = 'phpMyAdmin';
+        /**
+         * Usefull for browserstack
+         *
+         * @see https://github.com/phpmyadmin/phpmyadmin/pull/14595#issuecomment-418541475
+         * Reports the name of the test to browserstack
+         */
+        $className = substr(static::class, strlen('PhpMyAdmin\Tests\Selenium\\'));
+        $testName = $className . ': ' . $this->getName();
 
         if (getenv('BUILD_TAG')) {
             $buildId = getenv('BUILD_TAG');
@@ -256,43 +281,22 @@ abstract class TestBase extends TestCase
             $projectName = 'phpMyAdmin (Travis)';
         }
 
-        $capabilities->setCapability('project', $projectName);
-        $capabilities->setCapability('build', $buildId);
-        $capabilities->setCapability('browserstack.debug', false);
-
-        /**
-         * Usefull for browserstack
-         *
-         * @see https://github.com/phpmyadmin/phpmyadmin/pull/14595#issuecomment-418541475
-         * Reports the name of the test to browserstack
-         */
-        $className = substr(static::class, strlen('PhpMyAdmin\Tests\Selenium\\'));
-        $capabilities->setCapability(
-            'name',
-            $className . ': ' . $this->getName()
-        );
-
         if ($buildLocal) {
             $capabilities->setCapability(
-                'browserstack.local',
-                $buildLocal
-            );
-            $capabilities->setCapability(
-                'browserstack.localIdentifier',
-                $buildId
-            );
-            $capabilities->setCapability(
-                'browserstack.debug',
-                true
-            );
-            $capabilities->setCapability(
-                'browserstack.console',
-                'verbose'
-            );
-
-            $capabilities->setCapability(
-                'browserstack.networkLogs',
-                true
+                'bstack:options',
+                [
+                    'os' => 'Windows',
+                    'osVersion' => '10',
+                    'resolution' => '1920x1080',
+                    'projectName' => $projectName,
+                    'sessionName' => $testName,
+                    'buildName' => $buildId,
+                    'localIdentifier' => $buildId,
+                    'local' => $buildLocal,
+                    'debug' => false,
+                    'consoleLogs' => 'verbose',
+                    'networkLogs' => true,
+                ]
             );
         }
     }
@@ -302,7 +306,7 @@ abstract class TestBase extends TestCase
      */
     public function getCapabilities(): DesiredCapabilities
     {
-        switch ($GLOBALS['TESTSUITE_SELENIUM_BROWSER']) {
+        switch (getenv('TESTSUITE_SELENIUM_BROWSER')) {
             case 'chrome':
             default:
                 $capabilities = DesiredCapabilities::chrome();
@@ -330,7 +334,11 @@ abstract class TestBase extends TestCase
                     );
                     $capabilities->setCapability(
                         'browser_version',
-                        '69.0' // Force chrome 69.0
+                        '80.0' // Force chrome 80.0
+                    );
+                    $capabilities->setCapability(
+                        'resolution',
+                        '1920x1080'
                     );
                 }
 
@@ -427,16 +435,14 @@ abstract class TestBase extends TestCase
      *
      * @param string $username Username
      * @param string $password Password
-     *
-     * @return void
      */
-    public function login($username = '', $password = '')
+    public function login(string $username = '', string $password = ''): void
     {
-        if ($username == '') {
-            $username = $GLOBALS['TESTSUITE_USER'];
+        if ($username === '') {
+            $username = $this->getTestSuiteUserLogin();
         }
-        if ($password == '') {
-            $password = $GLOBALS['TESTSUITE_PASSWORD'];
+        if ($password === '') {
+            $password = $this->getTestSuiteUserPassword();
         }
         $this->navigateTo('');
         /* Wait while page */
@@ -446,9 +452,14 @@ abstract class TestBase extends TestCase
             usleep(5000);
         }
 
-        /* Return if already logged in */
+        // Return if already logged in
         if ($this->isSuccessLogin()) {
             return;
+        }
+
+        // Select English if the Language selector is available
+        if ($this->isElementPresent('id', 'sel-lang')) {
+            $this->selectByLabel($this->byId('sel-lang'), 'English');
         }
 
         // Clear the input for Microsoft Edge (remebers the username)
@@ -574,9 +585,9 @@ abstract class TestBase extends TestCase
     }
 
     /**
-     * webDriver->executeScripts a database query
+     * Execute a database query
      *
-     * @param string $query SQL Query to be webDriver->executeScriptd
+     * @param string $query SQL Query to be executed
      *
      * @return void|bool|mysqli_result
      *
@@ -584,6 +595,10 @@ abstract class TestBase extends TestCase
      */
     public function dbQuery($query)
     {
+        if ($this->_mysqli === null) {
+            $this->connectMySQL();
+        }
+
         return $this->_mysqli->query($query);
     }
 
@@ -832,31 +847,28 @@ abstract class TestBase extends TestCase
     }
 
     /**
-     * Kills the More link in the menu
-     *
-     * @return void
+     * Clicks the "More" link in the menu
      */
-    public function expandMore()
+    public function expandMore(): void
     {
+        // "More" menu is not displayed on large screens
+        if ($this->isElementPresent('cssSelector', 'li.nav-item.dropdown.d-none')) {
+            return;
+        }
+        // Not found, searching for another alternative
         try {
-            // "More" menu is not displayed on large screens
-            $this->byCssSelector('li.nav-item.dropdown.d-none');
+            $ele = $this->waitForElement('cssSelector', 'li.dropdown > a');
+
+            $ele->click();
+            $this->waitForElement('cssSelector', 'li.dropdown.show > a');
+
+            $this->waitUntilElementIsPresent(
+                'cssSelector',
+                'li.nav-item.dropdown.show > ul',
+                5000
+            );
         } catch (WebDriverException $e) {
-            // Not found, searching for another alternative
-            try {
-                $ele = $this->waitForElement('cssSelector', 'li.dropdown > a');
-
-                $ele->click();
-                $this->waitForElement('cssSelector', 'li.dropdown.show > a');
-
-                $this->waitUntilElementIsPresent(
-                    'cssSelector',
-                    'li.nav-item.dropdown.show > ul',
-                    5000
-                );
-            } catch (WebDriverException $e) {
-                return;
-            }
+            return;
         }
     }
 
@@ -1001,17 +1013,21 @@ abstract class TestBase extends TestCase
 
     /**
      * Wait for AJAX completion
-     *
-     * @return void
      */
-    public function waitAjax()
+    public function waitAjax(): void
     {
         /* Wait while code is loading */
-        while ($this->webDriver->executeScript(
-            'return AJAX.active;'
-        )) {
-            usleep(5000);
-        }
+        $this->webDriver->executeAsyncScript(
+            'var callback = arguments[arguments.length - 1];'
+            . 'function startWaitingForAjax() {'
+            . '    if (! AJAX.active) {'
+            . '        callback();'
+            . '    } else {'
+            . '        setTimeout(startWaitingForAjax, 200);'
+            . '    }'
+            . '}'
+            . 'startWaitingForAjax();'
+        );
     }
 
     /**
@@ -1038,7 +1054,7 @@ abstract class TestBase extends TestCase
     protected function tearDown(): void
     {
         if ($this->_mysqli != null) {
-            $this->dbQuery('DROP DATABASE IF EXISTS ' . $this->database_name);
+            $this->dbQuery('DROP DATABASE IF EXISTS `' . $this->database_name . '`;');
             $this->_mysqli->close();
             $this->_mysqli = null;
         }
@@ -1080,8 +1096,7 @@ abstract class TestBase extends TestCase
             curl_setopt(
                 $ch,
                 CURLOPT_USERPWD,
-                $GLOBALS['TESTSUITE_BROWSERSTACK_USER']
-                    . ':' . $GLOBALS['TESTSUITE_BROWSERSTACK_KEY']
+                $this->getBrowserStackCredentials()
             );
 
             $headers = [];
@@ -1089,6 +1104,38 @@ abstract class TestBase extends TestCase
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
             curl_exec($ch);
+            if ($ch !== false && curl_errno($ch)) {
+                echo 'Error: ' . curl_error($ch) . PHP_EOL;
+            }
+            curl_close($ch);
+        }
+    }
+
+    private function getErrorVideoUrl(): void
+    {
+        if ($this->hasBrowserstackConfig()) {
+            /** @var resource $ch */
+            $ch = curl_init();
+            curl_setopt(
+                $ch,
+                CURLOPT_URL,
+                self::SESSION_REST_URL . $this->sessionId . '.json'
+            );
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt(
+                $ch,
+                CURLOPT_USERPWD,
+                $this->getBrowserStackCredentials()
+            );
+            $result = curl_exec($ch);
+            if (is_bool($result)) {
+                echo 'Error: ' . curl_error($ch) . PHP_EOL;
+                return;
+            }
+            $proj = json_decode($result);
+            if (isset($proj->automation_session)) {
+                echo 'Test failed, get more information here: ' . $proj->automation_session->public_url . PHP_EOL;
+            }
             if ($ch !== false && curl_errno($ch)) {
                 echo 'Error: ' . curl_error($ch) . PHP_EOL;
             }
@@ -1105,40 +1152,14 @@ abstract class TestBase extends TestCase
      */
     public function onNotSuccessfulTest(Throwable $t): void
     {
+        $this->markTestAs('failed', $t->getMessage());
+
         // End testing session
         if ($this->webDriver !== null) {
             $this->webDriver->quit();
         }
-        $this->markTestAs('failed', $t->getMessage());
 
-        if ($this->hasBrowserstackConfig()) {
-            $ch = curl_init();
-            if ($ch !== false) {
-                curl_setopt(
-                    $ch,
-                    CURLOPT_URL,
-                    self::SESSION_REST_URL . $this->sessionId . '.json'
-                );
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt(
-                    $ch,
-                    CURLOPT_USERPWD,
-                    $GLOBALS['TESTSUITE_BROWSERSTACK_USER']
-                    . ':' . $GLOBALS['TESTSUITE_BROWSERSTACK_KEY']
-                );
-                $result = curl_exec($ch);
-                $proj = json_decode($result);
-                if (isset($proj->automation_session)) {
-                    echo 'Test failed, get more information here: ' . $proj->automation_session->public_url . PHP_EOL;
-                }
-                if ($ch !== false && curl_errno($ch)) {
-                    echo 'Error: ' . curl_error($ch) . PHP_EOL;
-                }
-                curl_close($ch);
-            } else {
-                echo 'Error: curl_init' . PHP_EOL;
-            }
-        }
+        $this->getErrorVideoUrl();
 
         // Call parent's onNotSuccessful to handle everything else
         parent::onNotSuccessfulTest($t);
