@@ -2,6 +2,7 @@
 /**
  * Tests for NodeFactory class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Navigation;
@@ -35,7 +36,7 @@ class NodeFactoryTest extends AbstractTestCase
         $node = NodeFactory::getInstance();
         $this->assertEquals('default', $node->name);
         $this->assertEquals(Node::OBJECT, $node->type);
-        $this->assertEquals(false, $node->isGroup);
+        $this->assertFalse($node->isGroup);
     }
 
     /**
@@ -52,7 +53,7 @@ class NodeFactoryTest extends AbstractTestCase
         );
         $this->assertEquals('default', $node->name);
         $this->assertEquals(Node::CONTAINER, $node->type);
-        $this->assertEquals(false, $node->isGroup);
+        $this->assertFalse($node->isGroup);
     }
 
     /**
@@ -70,7 +71,7 @@ class NodeFactoryTest extends AbstractTestCase
         );
         $this->assertEquals('default', $node->name);
         $this->assertEquals(Node::CONTAINER, $node->type);
-        $this->assertEquals(true, $node->isGroup);
+        $this->assertTrue($node->isGroup);
     }
 
     /**

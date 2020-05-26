@@ -2,12 +2,12 @@
 /**
  * tests for Advisor class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Advisor;
-use PhpMyAdmin\Config;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**

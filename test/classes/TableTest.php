@@ -2,6 +2,7 @@
 /**
  * Tests for Table.php
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -475,21 +476,18 @@ class TableTest extends AbstractTestCase
     public function testIsView()
     {
         $table = new Table(null, null);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $table->isView()
         );
 
         //validate that it is the same as DBI fetchResult
         $table = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $table->isView()
         );
 
         $table = new Table('PMA_BookMark_2', 'PMA');
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $table->isView()
         );
     }
@@ -892,8 +890,8 @@ class TableTest extends AbstractTestCase
             $where_fields,
             $new_fields
         );
-        $this->assertEquals(
-            true,
+        $this->assertSame(
+            -1,
             $ret
         );
     }
@@ -906,21 +904,18 @@ class TableTest extends AbstractTestCase
     public function testIsUpdatableView()
     {
         $table = new Table(null, null);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $table->isUpdatableView()
         );
 
         //validate that it is the same as DBI fetchResult
         $table = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $table->isUpdatableView()
         );
 
         $table = new Table('PMA_BookMark_2', 'PMA');
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $table->isUpdatableView()
         );
     }
@@ -942,8 +937,7 @@ class TableTest extends AbstractTestCase
             ->method('getCachedTableContent')
             ->will($this->returnValue(['table_name' => 'PMA_BookMark']));
         $tableObj = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $tableObj->isMerge()
         );
     }
@@ -979,8 +973,7 @@ class TableTest extends AbstractTestCase
             ->will($this->returnValueMap($map));
 
         $tableObj = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $tableObj->isMerge()
         );
     }
@@ -1016,8 +1009,7 @@ class TableTest extends AbstractTestCase
             ->will($this->returnValueMap($map));
 
         $tableObj = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $tableObj->isMerge()
         );
     }
@@ -1053,8 +1045,7 @@ class TableTest extends AbstractTestCase
             ->will($this->returnValueMap($map));
 
         $tableObj = new Table('PMA_BookMark', 'PMA');
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $tableObj->isMerge()
         );
     }
@@ -1124,8 +1115,7 @@ class TableTest extends AbstractTestCase
         //rename to same name
         $table_new = 'PMA_BookMark';
         $result = $table->rename($table_new);
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $result
         );
 
@@ -1133,22 +1123,19 @@ class TableTest extends AbstractTestCase
         //space in table name
         $table_new = 'PMA_BookMark ';
         $result = $table->rename($table_new);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $result
         );
         //empty name
         $table_new = '';
         $result = $table->rename($table_new);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $result
         );
         //dot in table name
         $table_new = 'PMA_.BookMark';
         $result = $table->rename($table_new);
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $result
         );
 
@@ -1161,8 +1148,7 @@ class TableTest extends AbstractTestCase
         $table_new = 'PMA_BookMark_new';
         $db_new = 'PMA_new';
         $result = $table->rename($table_new, $db_new);
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $result
         );
         //message
@@ -1517,15 +1503,13 @@ class TableTest extends AbstractTestCase
         //removeUiProp
         $table->removeUiProp($property);
         $is_define_property = isset($table->uiprefs[$property]);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $is_define_property
         );
 
         //getUiProp after removeUiProp
         $is_define_property = $table->getUiProp($property);
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $is_define_property
         );
     }

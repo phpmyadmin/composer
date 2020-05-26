@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Tracking
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -129,16 +130,10 @@ class TrackingTest extends AbstractTestCase
                 'is_group' => 1,
                 'lovely_' => [
                     'is_group' => 1,
-                    'hello_lovely_world' => [
-                        'Name' => 'hello_lovely_world',
-                    ],
-                    'hello_lovely_world2' => [
-                        'Name' => 'hello_lovely_world2',
-                    ],
+                    'hello_lovely_world' => ['Name' => 'hello_lovely_world'],
+                    'hello_lovely_world2' => ['Name' => 'hello_lovely_world2'],
                 ],
-                'hello_world' => [
-                    'Name' => 'hello_world',
-                ],
+                'hello_world' => ['Name' => 'hello_world'],
             ],
         ];
         $untracked_tables = $this->tracking->extractTableNames($table_list, 'db', true);
@@ -329,8 +324,7 @@ class TrackingTest extends AbstractTestCase
     {
         $ret = $this->tracking->getSqlResultForSelectableTables();
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $ret
         );
     }
@@ -446,8 +440,7 @@ class TrackingTest extends AbstractTestCase
     {
         $ret = $this->tracking->getListOfVersionsOfTable();
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $ret
         );
     }
@@ -643,7 +636,7 @@ class TrackingTest extends AbstractTestCase
         $url_params = [];
         $drop_image_or_text = 'text';
 
-        list($html, $count) = $this->tracking->getHtmlForDataDefinitionStatements(
+        [$html, $count] = $this->tracking->getHtmlForDataDefinitionStatements(
             $data,
             $filter_users,
             $filter_ts_from,

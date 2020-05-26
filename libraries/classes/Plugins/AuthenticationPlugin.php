@@ -2,6 +2,7 @@
 /**
  * Abstract class for the authentication plugins
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins;
@@ -361,7 +362,5 @@ abstract class AuthenticationPlugin
         if (! defined('TESTSUITE')) {
             exit;
         }
-
-        return;
     }
 }

@@ -2,18 +2,19 @@
 /**
  * tests for PhpMyAdmin\Plugins\Export\ExportTexytext class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Plugins\Export\ExportTexytext;
-use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
-use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
-use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
+use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
+use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
+use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
+use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
+use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use ReflectionMethod;
@@ -652,9 +653,7 @@ class ExportTexytextTest extends AbstractTestCase
             'Type' => 'set(abc)enum123',
         ];
 
-        $unique_keys = [
-            'field',
-        ];
+        $unique_keys = ['field'];
 
         $this->assertEquals(
             '|//**field**//|set(abc)|Yes|NULL',
@@ -669,9 +668,7 @@ class ExportTexytextTest extends AbstractTestCase
             'Default' => 'def',
         ];
 
-        $unique_keys = [
-            'field',
-        ];
+        $unique_keys = ['field'];
 
         $this->assertEquals(
             '|fields|&amp;nbsp;|No|def',

@@ -2,6 +2,7 @@
 /**
  * Set of functions used to build SQL dumps of tables
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Export;
@@ -1934,7 +1935,7 @@ class ExportSql extends ExportPlugin
         $schema_create = '';
 
         // Check if we can use Relations
-        list($res_rel, $have_rel) = $this->relation->getRelationsAndStatus(
+        [$res_rel, $have_rel] = $this->relation->getRelationsAndStatus(
             $do_relation && ! empty($cfgRelation['relation']),
             $db,
             $table
@@ -2548,7 +2549,7 @@ class ExportSql extends ExportPlugin
                     $insert_line .= $field_set[$i] . ' = ' . $values[$i];
                 }
 
-                list($tmp_unique_condition, $tmp_clause_is_unique)
+                [$tmp_unique_condition, $tmp_clause_is_unique]
                     = Util::getUniqueCondition(
                         $result, // handle
                         $fields_cnt, // fields_cnt

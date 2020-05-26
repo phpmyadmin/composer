@@ -2,12 +2,13 @@
 /**
  * Tests for displaying results
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Display;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Display\Results as DisplayResults;
 use PhpMyAdmin\Plugins\Transformations\Text_Plain_Link;
 use PhpMyAdmin\SqlParser\Parser;

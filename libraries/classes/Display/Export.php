@@ -2,6 +2,7 @@
 /**
  * functions for displaying server, database and table export
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Display;
@@ -102,9 +103,7 @@ class Export
             ];
         }
 
-        return $this->template->render('display/export/select_options', [
-            'databases' => $databases,
-        ]);
+        return $this->template->render('display/export/select_options', ['databases' => $databases]);
     }
 
     /**
@@ -201,9 +200,7 @@ class Export
             $exportMethod = $cfg['Export']['method'];
         }
 
-        return $this->template->render('display/export/method', [
-            'export_method' => $exportMethod,
-        ]);
+        return $this->template->render('display/export/method', ['export_method' => $exportMethod]);
     }
 
     /**
@@ -233,9 +230,7 @@ class Export
     {
         $dropdown = Plugins::getChoice('Export', 'what', $exportList, 'format');
 
-        return $this->template->render('display/export/format_dropdown', [
-            'dropdown' => $dropdown,
-        ]);
+        return $this->template->render('display/export/format_dropdown', ['dropdown' => $dropdown]);
     }
 
     /**

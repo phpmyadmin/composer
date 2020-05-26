@@ -4,6 +4,7 @@
  *
  * @group current
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -368,13 +369,13 @@ class ConfigTest extends AbstractTestCase
 
         if (defined('PHP_OS')) {
             if (stristr(PHP_OS, 'darwin')) {
-                $this->assertEquals(false, $this->object->get('PMA_IS_WINDOWS'));
+                $this->assertFalse($this->object->get('PMA_IS_WINDOWS'));
             } elseif (stristr(PHP_OS, 'win')) {
-                $this->assertEquals(true, $this->object->get('PMA_IS_WINDOWS'));
+                $this->assertTrue($this->object->get('PMA_IS_WINDOWS'));
             } elseif (stristr(PHP_OS, 'OS/2')) {
-                $this->assertEquals(true, $this->object->get('PMA_IS_WINDOWS'));
+                $this->assertTrue($this->object->get('PMA_IS_WINDOWS'));
             } elseif (stristr(PHP_OS, 'Linux')) {
-                $this->assertEquals(false, $this->object->get('PMA_IS_WINDOWS'));
+                $this->assertFalse($this->object->get('PMA_IS_WINDOWS'));
             } else {
                 $this->markTestIncomplete('Not known PHP_OS: ' . PHP_OS);
             }
@@ -382,7 +383,7 @@ class ConfigTest extends AbstractTestCase
             $this->assertEquals(0, $this->object->get('PMA_IS_WINDOWS'));
 
             define('PHP_OS', 'Windows');
-            $this->assertEquals(true, $this->object->get('PMA_IS_WINDOWS'));
+            $this->assertTrue($this->object->get('PMA_IS_WINDOWS'));
         }
     }
 

@@ -2,16 +2,17 @@
 /**
  * tests for PhpMyAdmin\Display\Export
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Display;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Config;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Display\Export;
 use PhpMyAdmin\Plugins;
-use PhpMyAdmin\Util;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Util;
 use function htmlspecialchars;
 
 /**
@@ -115,12 +116,8 @@ class ExportTest extends AbstractTestCase
         $GLOBALS['dbi']->cacheTableContent([$db, $table, 'ENGINE'], 'MERGE');
 
         $columns_info = [
-            'test_column1' => [
-                'COLUMN_NAME' => 'test_column1',
-            ],
-            'test_column2' => [
-                'COLUMN_NAME' => 'test_column2',
-            ],
+            'test_column1' => ['COLUMN_NAME' => 'test_column1'],
+            'test_column2' => ['COLUMN_NAME' => 'test_column2'],
         ];
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
@@ -251,12 +248,8 @@ class ExportTest extends AbstractTestCase
         $columns_info = [
             'test\'_db' => [
                 'test_<b>table' => [
-                    'co"l1' => [
-                        'COLUMN_NAME' => 'co"l1',
-                    ],
-                    'col<2' => [
-                        'COLUMN_NAME' => 'col<2',
-                    ],
+                    'co"l1' => ['COLUMN_NAME' => 'co"l1'],
+                    'col<2' => ['COLUMN_NAME' => 'col<2'],
                 ],
             ],
         ];

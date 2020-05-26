@@ -2,6 +2,7 @@
 /**
  * Exporting of translated messages from PHP to Javascript
  */
+
 declare(strict_types=1);
 
 use PhpMyAdmin\OutputBuffering;
@@ -40,7 +41,7 @@ $buffer = OutputBuffering::getInstance();
 $buffer->start();
 if (! defined('TESTSUITE')) {
     register_shutdown_function(
-        function () {
+        static function () {
             echo OutputBuffering::getInstance()->getContents();
         }
     );

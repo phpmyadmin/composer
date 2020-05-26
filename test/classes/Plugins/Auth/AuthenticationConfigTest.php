@@ -2,12 +2,12 @@
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationConfig class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Auth;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\ErrorHandler;
 use PhpMyAdmin\Plugins\Auth\AuthenticationConfig;
 use PhpMyAdmin\Tests\AbstractTestCase;

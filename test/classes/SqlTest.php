@@ -2,12 +2,12 @@
 /**
  * Tests for PhpMyAdmin\Sql
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Sql;
-use ReflectionMethod;
 use stdClass;
 
 /**
@@ -196,8 +196,7 @@ class SqlTest extends AbstractTestCase
      */
     public function testHasNoRightsToDropDatabase()
     {
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $this->sql->hasNoRightsToDropDatabase(
                 $this->sql->parseAndAnalyze('DROP DATABASE db'),
                 false,
@@ -205,8 +204,7 @@ class SqlTest extends AbstractTestCase
             )
         );
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
                 $this->sql->parseAndAnalyze('DROP TABLE tbl'),
                 false,
@@ -214,8 +212,7 @@ class SqlTest extends AbstractTestCase
             )
         );
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
                 $this->sql->parseAndAnalyze('SELECT * from tbl'),
                 false,

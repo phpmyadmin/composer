@@ -2,6 +2,7 @@
 /**
  * Library for extracting information about the available storage engines
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -104,7 +105,7 @@ class StorageEngine
             if ($GLOBALS['dbi']->getVersion() >= 50708) {
                 $disabled = (string) Util::cacheGet(
                     'disabled_storage_engines',
-                    function () {
+                    static function () {
                         return $GLOBALS['dbi']->fetchValue(
                             'SELECT @@disabled_storage_engines'
                         );

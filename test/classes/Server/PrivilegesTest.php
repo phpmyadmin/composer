@@ -2,6 +2,7 @@
 /**
  * tests for PhpMyAdmin\Server\Privileges
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Server;
@@ -14,10 +15,10 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Server\Privileges;
 use PhpMyAdmin\Template;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use PhpMyAdmin\Tests\AbstractTestCase;
 use stdClass;
 use function htmlspecialchars;
 use function implode;
@@ -162,22 +163,20 @@ class PrivilegesTest extends AbstractTestCase
             '`PMA_dbname`.`PMA_tablename`',
             $db_and_table
         );
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $dbname_is_wildcard
         );
 
         //pre variable have been defined
         $_POST['pred_tablename'] = 'PMA_pred__tablename';
         $_POST['pred_dbname'] = ['PMA_pred_dbname'];
-        list(
-            ,,
+        [,,
             $dbname,
             $tablename,
             $routinename,
             $db_and_table,
             $dbname_is_wildcard,
-        ) = $this->serverPrivileges->getDataForDBInfo();
+        ] = $this->serverPrivileges->getDataForDBInfo();
         $this->assertEquals(
             'PMA_pred_dbname',
             $dbname
@@ -190,8 +189,7 @@ class PrivilegesTest extends AbstractTestCase
             '`PMA_pred_dbname`.`PMA_pred__tablename`',
             $db_and_table
         );
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $dbname_is_wildcard
         );
     }
@@ -622,8 +620,7 @@ class PrivilegesTest extends AbstractTestCase
             . "GRANT ALL PRIVILEGES ON `pma_dbname`.* TO ''@'localhost';",
             $sql_query
         );
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $_add_user_error
         );
     }
@@ -673,8 +670,7 @@ class PrivilegesTest extends AbstractTestCase
             . "GRANT ALL PRIVILEGES ON `pma_dbname`.* TO ''@'localhost';",
             $sql_query
         );
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $_add_user_error
         );
     }
@@ -1495,20 +1491,17 @@ class PrivilegesTest extends AbstractTestCase
         );
 
         //user_exists
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $extra_data['user_exists']
         );
 
         //db_wildcard_privs
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $extra_data['db_wildcard_privs']
         );
 
         //user_exists
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $extra_data['db_specific_privs']
         );
 

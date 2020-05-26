@@ -2,6 +2,7 @@
 /**
  * Set of methods used to build dumps of tables as JSON
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Export;
@@ -227,7 +228,7 @@ class ExportJson extends ExportPlugin
                 'data' => '@@DATA@@',
             ]
         );
-        list($header, $footer) = explode('"@@DATA@@"', $buffer);
+        [$header, $footer] = explode('"@@DATA@@"', $buffer);
 
         if (! $this->export->outputHandler($header . $crlf . '[' . $crlf)) {
             return false;
@@ -306,7 +307,7 @@ class ExportJson extends ExportPlugin
                 'data' => '@@DATA@@',
             ]
         );
-        list($header, $footer) = explode('"@@DATA@@"', $buffer);
+        [$header, $footer] = explode('"@@DATA@@"', $buffer);
 
         if (! $this->export->outputHandler($header . $crlf . '[' . $crlf)) {
             return false;

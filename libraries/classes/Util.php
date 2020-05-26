@@ -2,6 +2,7 @@
 /**
  * Hold the PhpMyAdmin\Util class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -176,7 +177,7 @@ class Util
      *
      * @return string unqoted string
      */
-    public static function unQuote(string $quoted_string, string $quote = null): string
+    public static function unQuote(string $quoted_string, ?string $quote = null): string
     {
         $quotes = [];
 
@@ -1134,7 +1135,6 @@ class Util
      *
      * @param string $collation Collation
      * @param bool   $override  (optional) force 'CHARACTER SET' keyword
-     *
      */
     public static function getCharsetQueryPart(string $collation, bool $override = false): string
     {
@@ -1331,7 +1331,7 @@ class Util
     /**
      * Clears cache content which needs to be refreshed on user change.
      */
-    public static function clearUserCache():void
+    public static function clearUserCache(): void
     {
         self::cacheUnset('is_superuser');
         self::cacheUnset('is_createuser');
@@ -1354,7 +1354,6 @@ class Util
      * Verifies if something is cached in the session
      *
      * @param string $var variable name
-     *
      */
     public static function cacheExists($var): bool
     {
@@ -1390,7 +1389,6 @@ class Util
      *
      * @param string $var variable name
      * @param mixed  $val value
-     *
      */
     public static function cacheSet($var, $val = null): void
     {
@@ -1401,7 +1399,6 @@ class Util
      * Removes cached information from the session
      *
      * @param string $var variable name
-     *
      */
     public static function cacheUnset($var): void
     {
@@ -1659,7 +1656,6 @@ class Util
      * Cleanup changes done for foreign key check
      *
      * @param bool $default_fk_check_value original value for 'FOREIGN_KEY_CHECKS'
-     *
      */
     public static function handleDisableFKCheckCleanup($default_fk_check_value): void
     {
@@ -2240,7 +2236,6 @@ class Util
      * @param string|null $tbl  null, to only check global/db privileges
      *                          string, table name where to also check
      *                          for privileges
-     *
      */
     public static function currentUserHasPrivilege(string $priv, ?string $db = null, ?string $tbl = null): bool
     {
@@ -3057,21 +3052,21 @@ class Util
                 $futureSortOrder = 'DESC';
                 // current sort order is ASC
                 $orderImg = ' ' . Generator::getImage(
-                        's_asc',
-                        __('Ascending'),
-                        [
-                            'class' => 'sort_arrow',
-                            'title' => '',
-                        ]
-                    );
+                    's_asc',
+                    __('Ascending'),
+                    [
+                        'class' => 'sort_arrow',
+                        'title' => '',
+                    ]
+                );
                 $orderImg .= ' ' . Generator::getImage(
-                        's_desc',
-                        __('Descending'),
-                        [
-                            'class' => 'sort_arrow hide',
-                            'title' => '',
-                        ]
-                    );
+                    's_desc',
+                    __('Descending'),
+                    [
+                        'class' => 'sort_arrow hide',
+                        'title' => '',
+                    ]
+                );
                 // but on mouse over, show the reverse order (DESC)
                 $orderLinkParams['onmouseover'] = "$('.sort_arrow').toggle();";
                 // on mouse out, show current sort order (ASC)
@@ -3080,21 +3075,21 @@ class Util
                 $futureSortOrder = 'ASC';
                 // current sort order is DESC
                 $orderImg = ' ' . Generator::getImage(
-                        's_asc',
-                        __('Ascending'),
-                        [
-                            'class' => 'sort_arrow hide',
-                            'title' => '',
-                        ]
-                    );
+                    's_asc',
+                    __('Ascending'),
+                    [
+                        'class' => 'sort_arrow hide',
+                        'title' => '',
+                    ]
+                );
                 $orderImg .= ' ' . Generator::getImage(
-                        's_desc',
-                        __('Descending'),
-                        [
-                            'class' => 'sort_arrow',
-                            'title' => '',
-                        ]
-                    );
+                    's_desc',
+                    __('Descending'),
+                    [
+                        'class' => 'sort_arrow',
+                        'title' => '',
+                    ]
+                );
                 // but on mouse over, show the reverse order (ASC)
                 $orderLinkParams['onmouseover'] = "$('.sort_arrow').toggle();";
                 // on mouse out, show current sort order (DESC)

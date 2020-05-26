@@ -1,13 +1,13 @@
 <?php
-/**
- * Tests for PhpMyAdmin\FileListing
- */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\FileListing;
 use function array_values;
 use function extension_loaded;
+use function is_bool;
 
 class FileListingTest extends AbstractTestCase
 {

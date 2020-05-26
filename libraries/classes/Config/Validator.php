@@ -2,12 +2,12 @@
 /**
  * Form validation for configuration editor
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
 
 use PhpMyAdmin\Core;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Util;
 use const FILTER_FLAG_IPV4;
 use const FILTER_FLAG_IPV6;
@@ -28,8 +28,6 @@ use function is_array;
 use function is_object;
 use function mb_strpos;
 use function mb_substr;
-use function mysql_close;
-use function mysql_connect;
 use function mysqli_close;
 use function mysqli_connect;
 use function preg_match;

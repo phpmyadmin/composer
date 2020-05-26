@@ -2,11 +2,11 @@
 /**
  * Holds EnginesControllerTest class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Server;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Server\EnginesController;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\StorageEngine;

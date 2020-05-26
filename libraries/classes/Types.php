@@ -2,6 +2,7 @@
 /**
  * SQL data types definition
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -774,9 +775,7 @@ class Types
 
         if (($isMariaDB && $serverVersion > 100207)
             || (! $isMariaDB && $serverVersion >= 50708)) {
-            $ret['JSON'] = [
-                'JSON',
-            ];
+            $ret['JSON'] = ['JSON'];
         }
 
         return $ret;

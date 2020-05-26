@@ -2,6 +2,7 @@
 /**
  * Tests for Bookmark class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -36,8 +37,7 @@ class BookmarkTest extends AbstractTestCase
      */
     public function testGetParams()
     {
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             Bookmark::getParams($GLOBALS['cfg']['Server']['user'])
         );
     }

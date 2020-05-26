@@ -77,9 +77,7 @@ final class ColumnsDefinition
 
         $length_values_input_size = 8;
         $content_cells = [];
-        $form_params = [
-            'db' => $db,
-        ];
+        $form_params = ['db' => $db];
 
         if ($action == Url::getFromRoute('/table/create')) {
             $form_params['reload'] = 1;
@@ -138,7 +136,7 @@ final class ColumnsDefinition
             'transformation',
         ];
         foreach ($mime_types as $mime_type) {
-            if (isset($available_mime[$mime_type]) and is_iterable($available_mime[$mime_type])) {
+            if (isset($available_mime[$mime_type]) && is_iterable($available_mime[$mime_type])) {
                 foreach ($available_mime[$mime_type] as $mimekey => $transform) {
                     $available_mime[$mime_type . '_file_quoted'][$mimekey] = preg_quote(
                         $available_mime[$mime_type . '_file'][$mimekey],

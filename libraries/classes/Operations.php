@@ -2,6 +2,7 @@
 /**
  * Holds the PhpMyAdmin\Operations class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -524,9 +525,7 @@ class Operations
         // option values as keys then the dropdown option labels
 
         $possible_row_formats = [
-            'ARCHIVE' => [
-                'COMPRESSED' => 'COMPRESSED',
-            ],
+            'ARCHIVE' => ['COMPRESSED' => 'COMPRESSED'],
             'ARIA'  => [
                 'FIXED'     => 'FIXED',
                 'DYNAMIC'   => 'DYNAMIC',

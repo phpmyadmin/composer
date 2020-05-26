@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportXml class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -151,8 +152,7 @@ class ImportXmlTest extends AbstractTestCase
             'Edit settings for `pma_bookmarktest`',
             $import_notice
         );
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

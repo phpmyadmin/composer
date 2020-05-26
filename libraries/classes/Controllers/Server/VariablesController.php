@@ -2,6 +2,7 @@
 /**
  * Holds the PhpMyAdmin\Controllers\Server\VariablesController
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Server;
@@ -66,9 +67,7 @@ class VariablesController extends AbstractController
 
                 [$formattedValue, $isEscaped] = $this->formatVariable($name, $value);
                 if ($hasSessionValue) {
-                    [
-                        $sessionFormattedValue,
-                    ] = $this->formatVariable(
+                    [$sessionFormattedValue] = $this->formatVariable(
                         $name,
                         $serverVarsSession[$name]
                     );

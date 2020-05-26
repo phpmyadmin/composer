@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportShp class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -248,8 +249,7 @@ class ImportShpTest extends AbstractTestCase
         );
 
         //asset that the import process is finished
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

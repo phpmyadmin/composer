@@ -2,11 +2,11 @@
 /**
  * Test for PhpMyAdmin\Util class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\MoTranslator\Loader;
@@ -115,20 +115,17 @@ class UtilTest extends AbstractTestCase
         $GLOBALS['server'] = 1;
 
         $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'enable';
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             Util::isForeignKeyCheck()
         );
 
         $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'disable';
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             Util::isForeignKeyCheck()
         );
 
         $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'default';
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             Util::isForeignKeyCheck()
         );
     }

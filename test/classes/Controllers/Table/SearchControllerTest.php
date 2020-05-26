@@ -2,12 +2,13 @@
 /**
  * Tests for PMA_TableSearch
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Controllers\Table\SearchController;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Table\Search;
 use PhpMyAdmin\Template;
@@ -154,7 +155,7 @@ class SearchControllerTest extends AbstractTestCase
         $GLOBALS['dbi']->expects($this->any())->method('fetchAssoc')
             ->will(
                 $this->returnCallback(
-                    function () {
+                    static function () {
                         static $count = 0;
                         if ($count == 0) {
                             $count++;

@@ -2,12 +2,12 @@
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationSignon class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Auth;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Plugins\Auth\AuthenticationSignon;
 use PhpMyAdmin\Tests\AbstractNetworkTestCase;
 use function ob_get_clean;
@@ -159,9 +159,7 @@ class AuthenticationSignonTest extends AbstractNetworkTestCase
      */
     public function testAuthCheckToken()
     {
-        $_SESSION = [
-            ' PMA_token ' => 'eefefef',
-        ];
+        $_SESSION = [' PMA_token ' => 'eefefef'];
         $this->mockResponse('Location: https://example.com/SignonURL');
 
         $GLOBALS['cfg']['Server']['SignonURL'] = 'https://example.com/SignonURL';

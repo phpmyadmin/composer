@@ -2,11 +2,11 @@
 /**
  * tests for Form class in config folder
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Config;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Config\Form;
 use PhpMyAdmin\Tests\AbstractTestCase;

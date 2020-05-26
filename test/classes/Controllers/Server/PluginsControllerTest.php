@@ -2,17 +2,17 @@
 /**
  * Holds PluginsControllerTest class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Server;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Server\PluginsController;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Plugins;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Tests\Stubs\Response;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\Response;
 
 /**
  * Tests for PluginsController class

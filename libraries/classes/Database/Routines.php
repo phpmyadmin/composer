@@ -18,7 +18,6 @@ use PhpMyAdmin\SqlParser\Utils\Routine;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use const E_USER_WARNING;
 use const ENT_QUOTES;
 use function array_merge;
 use function count;
@@ -37,7 +36,6 @@ use function preg_match;
 use function sprintf;
 use function stripos;
 use function substr;
-use function trigger_error;
 use function trim;
 
 /**
@@ -1180,6 +1178,7 @@ class Routines
                 break;
             }
         }
+
         return $params;
     }
 
@@ -1240,9 +1239,8 @@ class Routines
                     . mb_strtoupper($_POST['item_returnopts_num']);
             }
         }
-        $query .= ' ';
 
-        return $query;
+        return $query . ' ';
     }
 
     /**
@@ -1368,7 +1366,9 @@ class Routines
 
     /**
      * @see handleExecuteRoutine
+     *
      * @param array $routine The routine params
+     *
      * @return string[] The SQL queries / SQL query parts
      */
     private function getQueriesFromRoutineForm(array $routine): array
@@ -1421,6 +1421,7 @@ class Routines
                         . 'AS ' . Util::backquote($routine['item_name'])
                         . ";\n";
         }
+
         return $queries;
     }
 
@@ -1631,7 +1632,7 @@ class Routines
      *
      * @param array $row Columns
      *
-     * @return null|string
+     * @return string|null
      */
     private function browseRow(array $row): ?string
     {

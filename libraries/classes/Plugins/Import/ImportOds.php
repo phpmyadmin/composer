@@ -5,6 +5,7 @@
  * @todo       Pretty much everything
  * @todo       Importing of accented characters seems to fail
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Import;
@@ -168,7 +169,7 @@ class ImportOds extends ImportPlugin
             }
         }
 
-        list($tables, $rows) = $this->iterateOverTables($sheets);
+        [$tables, $rows] = $this->iterateOverTables($sheets);
 
         /**
          * Bring accumulated rows into the corresponding table
@@ -215,7 +216,7 @@ class ImportOds extends ImportPlugin
          */
 
         /* Set database name to the currently selected one, if applicable */
-        list($db_name, $options) = $this->getDbnameAndOptions($db, 'ODS_DB');
+        [$db_name, $options] = $this->getDbnameAndOptions($db, 'ODS_DB');
 
         /* Non-applicable parameters */
         $create = null;
@@ -350,7 +351,7 @@ class ImportOds extends ImportPlugin
                 continue;
             }
 
-            list($tempRow, $col_names, $col_count) = $this->iterateOverColumns(
+            [$tempRow, $col_names, $col_count] = $this->iterateOverColumns(
                 $row,
                 $col_names_in_first_row,
                 $tempRow,
@@ -404,7 +405,7 @@ class ImportOds extends ImportPlugin
         foreach ($sheets as $sheet) {
             $col_names_in_first_row = isset($_REQUEST['ods_col_names']);
 
-            list($tempRow, $col_names, $max_cols, $tempRows) = $this->iterateOverRows(
+            [$tempRow, $col_names, $max_cols, $tempRows] = $this->iterateOverRows(
                 $sheet,
                 $col_names_in_first_row,
                 $tempRow,

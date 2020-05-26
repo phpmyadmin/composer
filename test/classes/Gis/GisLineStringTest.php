@@ -2,6 +2,7 @@
 /**
  * Test for PhpMyAdmin\Gis\GisLineString
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
@@ -147,9 +148,7 @@ class GisLineStringTest extends GisGeomTestCase
             [
                 'LINESTRING(5.02 8.45,6.14 0.15)',
                 2,
-                [
-                    2 => $temp1,
-                ],
+                [2 => $temp1],
             ],
         ];
     }

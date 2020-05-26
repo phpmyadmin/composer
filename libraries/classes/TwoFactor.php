@@ -2,6 +2,7 @@
 /**
  * Two authentication factor handling
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -250,9 +251,7 @@ class TwoFactor
      */
     public function configure($name)
     {
-        $this->config = [
-            'backend' => $name,
-        ];
+        $this->config = ['backend' => $name];
         if ($name === '') {
             $cls = $this->getBackendClass($name);
             $this->config['settings'] = [];

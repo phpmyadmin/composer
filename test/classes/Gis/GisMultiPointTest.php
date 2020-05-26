@@ -2,6 +2,7 @@
 /**
  * Test for PhpMyAdmin\Gis\GisMultiPoint
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
@@ -151,9 +152,7 @@ class GisMultiPointTest extends GisGeomTestCase
             [
                 'MULTIPOINT(5.02 8.45,6.14 0.15)',
                 2,
-                [
-                    2 => $temp2,
-                ],
+                [2 => $temp2],
             ],
         ];
     }

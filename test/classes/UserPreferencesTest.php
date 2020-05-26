@@ -2,6 +2,7 @@
 /**
  * tests for methods under PhpMyAdmin\UserPreferences class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -56,9 +57,7 @@ class UserPreferencesTest extends AbstractNetworkTestCase
         $this->assertEquals(
             [
                 'Servers' => [
-                    1 => [
-                        'hide_db' => 'testval123',
-                    ],
+                    1 => ['hide_db' => 'testval123'],
                 ],
             ],
             $_SESSION['ConfigFile' . $GLOBALS['server']]
@@ -292,9 +291,7 @@ class UserPreferencesTest extends AbstractNetworkTestCase
 
         $this->assertEquals(
             [
-                'Server' => [
-                    'hide_db' => 1,
-                ],
+                'Server' => ['hide_db' => 1],
             ],
             $result
         );
@@ -309,9 +306,7 @@ class UserPreferencesTest extends AbstractNetworkTestCase
     {
         $GLOBALS['cfg']['UserprefsDeveloperTab'] = true;
         $result = $this->userPreferences->apply(
-            [
-                'DBG/sql' => true,
-            ]
+            ['DBG/sql' => true]
         );
 
         $this->assertEquals(

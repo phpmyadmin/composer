@@ -2,12 +2,12 @@
 /**
  * tests for PhpMyAdmin\Plugins\Auth\AuthenticationCookie class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Auth;
 
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\ErrorHandler;
 use PhpMyAdmin\Footer;
 use PhpMyAdmin\Header;
@@ -1064,8 +1064,7 @@ class AuthenticationCookieTest extends AbstractNetworkTestCase
     public function testCookieDecryptInvalid()
     {
         // works with the openssl extension active or inactive
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $this->object->cookieDecrypt(
                 '{"iv":0,"mac":0,"payload":0}',
                 'sec321'

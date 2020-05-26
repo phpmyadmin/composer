@@ -2,6 +2,7 @@
 /**
  * Get user's global privileges and some db-specific privileges
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -217,11 +218,11 @@ class CheckUserPrivileges
         $re1 = '(^|[^\\\\])(\\\)+'; // escaped wildcards
 
         while ($row = $this->dbi->fetchRow($rs_usr)) {
-            list(
+            [
                 $show_grants_str,
                 $show_grants_dbname,
-                $show_grants_tblname
-            ) = $this->getItemsFromShowGrantsRow($row[0]);
+                $show_grants_tblname,
+            ] = $this->getItemsFromShowGrantsRow($row[0]);
 
             if ($show_grants_dbname == '*') {
                 if ($show_grants_str != 'USAGE') {
@@ -338,7 +339,7 @@ class CheckUserPrivileges
 
         $current = $this->dbi->getCurrentUserAndHost();
         if (! empty($current)) {
-            list($username, ) = $current;
+            [$username] = $current;
         }
 
         // If MySQL is started with --skip-grant-tables

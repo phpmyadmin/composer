@@ -2,6 +2,7 @@
 /**
  * tests for Advisor class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -139,7 +140,7 @@ class LanguageTest extends AbstractTestCase
         $this->assertEquals('Czech', $lang->getEnglishName());
         $this->assertEquals('Čeština', $lang->getNativeName());
         $lang = $this->manager->getLanguage('nonexisting');
-        $this->assertEquals(false, $lang);
+        $this->assertFalse($lang);
     }
 
     /**

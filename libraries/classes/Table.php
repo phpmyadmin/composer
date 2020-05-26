@@ -2,6 +2,7 @@
 /**
  * Holds the Table class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -2597,8 +2598,8 @@ class Table
                         );
                     }
                     $html_output .= MySQLDocumentation::show(
-                            'InnoDB_foreign_key_constraints'
-                        ) . "\n";
+                        'InnoDB_foreign_key_constraints'
+                    ) . "\n";
                 }
             } else {
                 $preview_sql_data .= $create_query . "\n";

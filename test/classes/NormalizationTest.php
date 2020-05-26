@@ -2,18 +2,19 @@
 /**
  * tests for PhpMyAdmin\Normalization
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Message;
 use PhpMyAdmin\Normalization;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Types;
 use PhpMyAdmin\Url;
-use PhpMyAdmin\Message;
 use stdClass;
 use function json_encode;
 
@@ -458,7 +459,7 @@ class NormalizationTest extends AbstractTestCase
         );
         $this->assertArrayHasKey('queryError', $result1);
         $this->assertEquals(__('End of step'), $result1['legendText']);
-        $this->assertEquals(false, $result1['queryError']);
+        $this->assertFalse($result1['queryError']);
     }
 
     /**

@@ -2,6 +2,7 @@
 /**
  * Tests zip extension usage.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -127,8 +128,7 @@ class ZipExtensionTest extends AbstractTestCase
      */
     public function testExtract()
     {
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $this->zipExtension->extract(
                 './test/test_data/test.zip',
                 'wrongName'
@@ -176,8 +176,7 @@ class ZipExtensionTest extends AbstractTestCase
      */
     public function testCreateFailure()
     {
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $this->zipExtension->createFile(
                 'Content',
                 [

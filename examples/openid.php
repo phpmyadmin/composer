@@ -11,6 +11,7 @@
  * User first authenticates using OpenID and based on content of $AUTH_MAP
  * the login information is passed to phpMyAdmin in session data.
  */
+
 declare(strict_types=1);
 
 if (false === @include_once 'OpenID/RelyingParty.php') {
@@ -144,7 +145,7 @@ if (isset($_POST['start'])) {
 } else {
     /* Grab query string */
     if (! count($_POST)) {
-        list(, $queryString) = explode('?', $_SERVER['REQUEST_URI']);
+        [, $queryString] = explode('?', $_SERVER['REQUEST_URI']);
     } else {
         // I hate php sometimes
         $queryString = file_get_contents('php://input');

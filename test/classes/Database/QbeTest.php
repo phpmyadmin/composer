@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Database\Qbe
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Database;
@@ -394,9 +395,7 @@ class QbeTest extends AbstractTestCase
     public function testGetLeftJoinColumnCandidates()
     {
         $this->assertEquals(
-            [
-                0 => 'column2',
-            ],
+            [0 => 'column2'],
             $this->callFunction(
                 $this->object,
                 Qbe::class,

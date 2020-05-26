@@ -2,6 +2,7 @@
 /**
  * Set of methods used to build dumps of tables as Latex
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins\Export;
@@ -517,7 +518,7 @@ class ExportLatex extends ExportPlugin
         $GLOBALS['dbi']->selectDb($db);
 
         // Check if we can use Relations
-        list($res_rel, $have_rel) = $this->relation->getRelationsAndStatus(
+        [$res_rel, $have_rel] = $this->relation->getRelationsAndStatus(
             $do_relation && ! empty($cfgRelation['relation']),
             $db,
             $table

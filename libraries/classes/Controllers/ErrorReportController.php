@@ -2,6 +2,7 @@
 /**
  * Handle error report submission
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
@@ -79,11 +80,9 @@ class ErrorReportController extends AbstractController
                     $this->response->addJSON('stopErrorReportLoop', '1');
                 } else {
                     $_SESSION['prev_error_subm_time'] = time();
-                    $_SESSION['error_subm_count'] = (
-                    isset($_SESSION['error_subm_count'])
+                    $_SESSION['error_subm_count'] = isset($_SESSION['error_subm_count'])
                         ? $_SESSION['error_subm_count'] + 1
-                        : 0
-                    );
+                        : 0;
                 }
             }
             $reportData = $this->errorReport->getData($_POST['exception_type']);
@@ -113,14 +112,14 @@ class ErrorReportController extends AbstractController
                     }
                 } else {
                     $msg = __(
-                            'An error has been detected and an error report has been '
-                            . 'generated but failed to be sent.'
-                        )
-                        . ' '
-                        . __(
-                            'If you experience any '
-                            . 'problems please submit a bug report manually.'
-                        );
+                        'An error has been detected and an error report has been '
+                        . 'generated but failed to be sent.'
+                    );
+                    $msg .= ' ';
+                    $msg .= __(
+                        'If you experience any '
+                        . 'problems please submit a bug report manually.'
+                    );
                 }
                 $msg .= ' ' . __('You may want to refresh the page.');
 

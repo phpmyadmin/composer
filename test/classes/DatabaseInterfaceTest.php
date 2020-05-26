@@ -2,13 +2,14 @@
 /**
  * Test for faked database access
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
+use PhpMyAdmin\Database\DatabaseList;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\SystemDatabase;
-use PhpMyAdmin\Database\DatabaseList;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Util;
 use stdClass;

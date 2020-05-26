@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'services' =>
     [
@@ -328,9 +330,7 @@ return [
         [
             'class' => PhpMyAdmin\Controllers\ImportStatusController::class,
             'arguments' =>
-            [
-                'template' => '@template',
-            ],
+            ['template' => '@template'],
         ],
         PhpMyAdmin\Controllers\LicenseController::class =>
         [

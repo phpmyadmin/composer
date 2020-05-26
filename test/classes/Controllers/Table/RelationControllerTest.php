@@ -2,12 +2,13 @@
 /**
  * Tests for PhpMyAdmin\Controllers\Table\RelationController
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Controllers\Table\RelationController;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
@@ -147,9 +148,7 @@ class RelationControllerTest extends AbstractTestCase
      */
     public function testGetDropdownValueForTableActionNotView()
     {
-        $indexedColumns = [
-            'primaryTableCol',
-        ];
+        $indexedColumns = ['primaryTableCol'];
         $tableMock = $this->getMockBuilder(Table::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -194,7 +193,7 @@ class RelationControllerTest extends AbstractTestCase
             ->method('fetchArray')
             ->will(
                 $this->returnCallback(
-                    function () {
+                    static function () {
                         static $count = 0;
                         if ($count == 0) {
                             $count++;
@@ -243,7 +242,7 @@ class RelationControllerTest extends AbstractTestCase
             ->method('fetchArray')
             ->will(
                 $this->returnCallback(
-                    function () {
+                    static function () {
                         static $count = 0;
                         if ($count == 0) {
                             $count++;

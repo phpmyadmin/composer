@@ -2,14 +2,14 @@
 /**
  * tests for PhpMyAdmin\Display\ChangePassword
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Display;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Display\ChangePassword;
-use PhpMyAdmin\Url;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Url;
 use function htmlspecialchars;
 
 /**

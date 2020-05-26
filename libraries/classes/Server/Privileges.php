@@ -2,6 +2,7 @@
 /**
  * set of functions with the Privileges section in pma
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Server;
@@ -245,7 +246,7 @@ class Privileges
                     // Required for proper escaping of ` (backtick) in a column name
                     $grant_cols = array_map(
                         /** @param string $val */
-                        function ($val) {
+                        static function ($val) {
                             return Util::backquote($val);
                         },
                         $GLOBALS[$current_grant[0]]
@@ -2958,9 +2959,7 @@ class Privileges
             return '';
         }
         $rel_params = [];
-        $url_params = [
-            'adduser' => 1,
-        ];
+        $url_params = ['adduser' => 1];
         if (! empty($db)) {
             $url_params['dbname']
                 = $rel_params['checkprivsdb']

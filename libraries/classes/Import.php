@@ -2,6 +2,7 @@
 /**
  * Holds the PhpMyAdmin\Import class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -171,7 +172,7 @@ class Import
         // If a 'USE <db>' SQL-clause was found and the query
         // succeeded, set our current $db to the new one
         if ($result != false) {
-            list($db, $reload) = $this->lookForUse(
+            [$db, $reload] = $this->lookForUse(
                 $sql,
                 $db,
                 $reload
@@ -462,6 +463,7 @@ class Import
         // UTF-8
         if (strncmp($contents, "\xEF\xBB\xBF", 3) === 0) {
             return substr($contents, 3);
+
             // UTF-16 BE, LE
         } elseif (strncmp($contents, "\xFE\xFF", 2) === 0
             || strncmp($contents, "\xFF\xFE", 2) === 0
@@ -1444,8 +1446,8 @@ class Import
                 'statement' => $statement,
             ];
 
-            if ((! (($statement instanceof UpdateStatement)
-                || ($statement instanceof DeleteStatement)))
+            if (! ($statement instanceof UpdateStatement
+                    || $statement instanceof DeleteStatement)
                 || ! empty($statement->join)
             ) {
                 $error = $error_msg;

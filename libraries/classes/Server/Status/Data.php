@@ -3,6 +3,7 @@
  * PhpMyAdmin\Server\Status\Data class
  * Used by server_status_*.php pages
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Server\Status;
@@ -368,9 +369,11 @@ class Data
         $sectionUsed = [];
 
         // sort vars into arrays
-        list(
-            $allocationMap, $sectionUsed, $used_queries
-        ) = $this->_sortVariables(
+        [
+            $allocationMap,
+            $sectionUsed,
+            $used_queries,
+        ] = $this->_sortVariables(
             $server_status,
             $allocations,
             $allocationMap,

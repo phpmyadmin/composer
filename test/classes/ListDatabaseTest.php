@@ -2,6 +2,7 @@
 /**
  * tests for ListDatabase class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
@@ -51,7 +52,7 @@ class ListDatabaseTest extends AbstractTestCase
     public function testExists()
     {
         $arr = new ListDatabase();
-        $this->assertEquals(true, $arr->exists('single_db'));
+        $this->assertTrue($arr->exists('single_db'));
     }
 
     public function testGetList(): void

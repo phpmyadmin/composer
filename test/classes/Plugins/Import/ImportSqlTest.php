@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportSql class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -96,8 +97,7 @@ class ImportSqlTest extends AbstractTestCase
             $sql_query
         );
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\DependencyInjection\Reference;
 use function is_string;
 use function substr;
 
-return function (ContainerConfigurator $configurator) {
+return static function (ContainerConfigurator $configurator) {
     $services = $configurator->services();
-    $loadServices = function (array $servicesFile, ServicesConfigurator $services): void {
+    $loadServices = static function (array $servicesFile, ServicesConfigurator $services): void {
         foreach ($servicesFile['services'] as $serviceName => $service) {
             if (is_string($service)) {
                 $services->alias($serviceName, $service);

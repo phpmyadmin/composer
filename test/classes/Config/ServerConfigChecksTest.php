@@ -2,11 +2,11 @@
 /**
  * tests for FormDisplay class in config folder
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Config;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Config\ServerConfigChecks;
 use PhpMyAdmin\Tests\AbstractTestCase;

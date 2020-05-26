@@ -2,6 +2,7 @@
 /**
  * Holds the PhpMyAdmin\ErrorReport class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -113,12 +114,12 @@ class ErrorReport
             $exception['stack'] = $this->translateStacktrace($exception['stack']);
 
             if (isset($exception['url'])) {
-                list($uri, $scriptName) = $this->sanitizeUrl($exception['url']);
+                [$uri, $scriptName] = $this->sanitizeUrl($exception['url']);
                 $exception['uri'] = $uri;
                 $report['script_name'] = $scriptName;
                 unset($exception['url']);
             } elseif (isset($_POST['url'])) {
-                list($uri, $scriptName) = $this->sanitizeUrl($_POST['url']);
+                [$uri, $scriptName] = $this->sanitizeUrl($_POST['url']);
                 $exception['uri'] = $uri;
                 $report['script_name'] = $scriptName;
                 unset($_POST['url']);
@@ -227,7 +228,7 @@ class ErrorReport
      *
      * @param array $report the report info to be sent
      *
-     * @return string|null|bool the reply of the server
+     * @return string|bool|null the reply of the server
      */
     public function send(array $report)
     {
@@ -256,7 +257,7 @@ class ErrorReport
                     $line = mb_substr($line, 0, 75) . '//...';
                 }
             }
-            list($uri, $scriptName) = $this->sanitizeUrl($level['url']);
+            [$uri, $scriptName] = $this->sanitizeUrl($level['url']);
             $level['uri'] = $uri;
             $level['scriptname'] = $scriptName;
             unset($level['url']);

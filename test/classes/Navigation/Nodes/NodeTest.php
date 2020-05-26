@@ -2,6 +2,7 @@
 /**
  * Tests for Node class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Navigation\Nodes;
@@ -218,7 +219,7 @@ class NodeTest extends AbstractTestCase
         $parent = NodeFactory::getInstance();
         $child = NodeFactory::getInstance();
         $parent->addChild($child);
-        $this->assertEquals(false, $child->hasSiblings());
+        $this->assertFalse($child->hasSiblings());
     }
 
     /**
@@ -237,7 +238,7 @@ class NodeTest extends AbstractTestCase
         $secondChild = NodeFactory::getInstance();
         $parent->addChild($secondChild);
         // Normal case; two Node:NODE type siblings
-        $this->assertEquals(true, $firstChild->hasSiblings());
+        $this->assertTrue($firstChild->hasSiblings());
 
         $parent = NodeFactory::getInstance();
         $firstChild = NodeFactory::getInstance();
@@ -249,12 +250,12 @@ class NodeTest extends AbstractTestCase
         );
         $parent->addChild($secondChild);
         // Empty Node::CONTAINER type node should not be considered in hasSiblings()
-        $this->assertEquals(false, $firstChild->hasSiblings());
+        $this->assertFalse($firstChild->hasSiblings());
 
         $grandChild = NodeFactory::getInstance();
         $secondChild->addChild($grandChild);
         // Node::CONTAINER type nodes with children are counted for hasSiblings()
-        $this->assertEquals(true, $firstChild->hasSiblings());
+        $this->assertTrue($firstChild->hasSiblings());
     }
 
     /**
@@ -276,9 +277,9 @@ class NodeTest extends AbstractTestCase
         $grandChild->addChild($greatGrandChild);
 
         // Should return false for node that are two levels deeps
-        $this->assertEquals(false, $grandChild->hasSiblings());
+        $this->assertFalse($grandChild->hasSiblings());
         // Should return true for node that are three levels deeps
-        $this->assertEquals(true, $greatGrandChild->hasSiblings());
+        $this->assertTrue($greatGrandChild->hasSiblings());
     }
 
     /**
@@ -462,12 +463,8 @@ class NodeTest extends AbstractTestCase
         $dbi->expects($this->exactly(3))
             ->method('fetchArray')
             ->willReturnOnConsecutiveCalls(
-                [
-                    '0' => 'db',
-                ],
-                [
-                    '0' => 'aa_db',
-                ],
+                ['0' => 'db'],
+                ['0' => 'aa_db'],
                 false
             );
 

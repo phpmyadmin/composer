@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Controllers\Server\Status;
 
 use PhpMyAdmin\Advisor;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Server\Status\AdvisorController;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Tests\Stubs\Response;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\Response;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class AdvisorControllerTest extends AbstractTestCase
@@ -110,9 +109,7 @@ class AdvisorControllerTest extends AbstractTestCase
 
         $controller->index();
 
-        $expected = $this->template->render('server/status/advisor/index', [
-            'data' => $advisorData,
-        ]);
+        $expected = $this->template->render('server/status/advisor/index', ['data' => $advisorData]);
 
         $this->assertSame(
             $expected,

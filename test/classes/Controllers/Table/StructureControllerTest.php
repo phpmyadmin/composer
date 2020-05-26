@@ -4,13 +4,14 @@
  *
  * this class is for testing StructureController class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Controllers\Table\StructureController;
 use PhpMyAdmin\CreateAddField;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Table;
@@ -118,7 +119,7 @@ class StructureControllerTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->will(
                 $this->returnCallback(
-                    function () {
+                    static function () {
                         static $callCount = 0;
                         if ($callCount == 0) {
                             $callCount++;
@@ -184,8 +185,7 @@ class StructureControllerTest extends AbstractTestCase
             new RelationCleanup($GLOBALS['dbi'], $relation)
         );
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $method->invokeArgs($ctrl, [[]])
         );
     }

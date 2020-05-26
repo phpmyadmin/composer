@@ -2,6 +2,7 @@
 /**
  * Holds VariablesControllerTest class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Server;
@@ -11,8 +12,8 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
 use Williamdes\MariaDBMySQLKBS\SlimData as KBSlimData;
 use function htmlspecialchars;
@@ -167,7 +168,7 @@ class VariablesControllerTest extends AbstractTestCase
             '<abbr title="3">3 B</abbr>',
             $formattedValue
         );
-        $this->assertEquals(true, $isHtmlFormatted);
+        $this->assertTrue($isHtmlFormatted);
 
         //name is_numeric and the value type is not byte
         $args = [
@@ -184,7 +185,7 @@ class VariablesControllerTest extends AbstractTestCase
             '3',
             $formattedValue
         );
-        $this->assertEquals(false, $isHtmlFormatted);
+        $this->assertFalse($isHtmlFormatted);
 
         //value is not a number
         $args = [
@@ -201,6 +202,6 @@ class VariablesControllerTest extends AbstractTestCase
             'value',
             $formattedValue
         );
-        $this->assertEquals(false, $isHtmlFormatted);
+        $this->assertFalse($isHtmlFormatted);
     }
 }

@@ -2,6 +2,7 @@
 /**
  * Tests for PMA_StorageEngine_memory
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Engines;
@@ -52,9 +53,7 @@ class MemoryTest extends AbstractTestCase
         $this->assertEquals(
             $this->object->getVariables(),
             [
-                'max_heap_table_size' => [
-                    'type'  => 1,
-                ],
+                'max_heap_table_size' => ['type' => 1],
             ]
         );
     }

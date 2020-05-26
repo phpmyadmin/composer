@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -38,15 +39,12 @@ use stdClass;
 use function array_keys;
 use function array_splice;
 use function count;
-use function define;
-use function htmlspecialchars;
 use function implode;
 use function in_array;
 use function is_array;
 use function is_string;
 use function mb_strpos;
 use function mb_strtoupper;
-use function preg_replace;
 use function sprintf;
 use function str_replace;
 use function strlen;
@@ -734,9 +732,7 @@ class StructureController extends AbstractController
         if (isset($_REQUEST['preview_sql'])) { // preview sql
             $this->response->addJSON(
                 'sql_data',
-                $this->template->render('preview_sql', [
-                    'query_data' => $sql_query,
-                ])
+                $this->template->render('preview_sql', ['query_data' => $sql_query])
             );
         } else { // move column
             $this->dbi->tryQuery($sql_query);

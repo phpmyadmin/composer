@@ -2,6 +2,7 @@
 /**
  * Test for PhpMyAdmin\Gis\GisPolygon
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
@@ -193,9 +194,7 @@ class GisPolygonTest extends GisGeomTestCase
             [
                 'POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30))',
                 2,
-                [
-                    2 => $temp1,
-                ],
+                [2 => $temp1],
             ],
         ];
     }

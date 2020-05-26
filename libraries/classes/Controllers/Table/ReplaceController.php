@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
@@ -508,8 +509,7 @@ final class ReplaceController extends AbstractController
                             $relation_field
                         );
 
-                        $extra_data['relations'][$cell_index]
-                            = $this->insertEdit->getLinkForRelationalDisplayField(
+                        $extra_data['relations'][$cell_index] = $this->insertEdit->getLinkForRelationalDisplayField(
                             $map,
                             $relation_field,
                             $where_comparison,

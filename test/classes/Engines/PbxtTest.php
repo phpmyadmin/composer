@@ -2,6 +2,7 @@
 /**
  * Tests for PMA_StorageEngine_pbxt
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Engines;
@@ -222,9 +223,7 @@ class PbxtTest extends AbstractTestCase
     {
         $this->assertEquals(
             $this->object->getInfoPages(),
-            [
-                'Documentation' => 'Documentation',
-            ]
+            ['Documentation' => 'Documentation']
         );
     }
 

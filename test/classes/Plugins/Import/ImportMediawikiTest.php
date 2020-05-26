@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportMediawiki class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -146,8 +147,7 @@ class ImportMediawikiTest extends AbstractTestCase
             'Edit settings for `pma_bookmarktest`',
             $import_notice
         );
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

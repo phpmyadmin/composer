@@ -2,6 +2,7 @@
 /**
  * Functionality for the navigation tree
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Navigation;
@@ -1393,9 +1394,7 @@ class NavigationTree
         if ($node === $this->tree
             && $this->tree->getPresence() >= $filterDbMin
         ) {
-            $urlParams = [
-                'pos' => 0,
-            ];
+            $urlParams = ['pos' => 0];
             $retval .= '<li class="fast_filter db_fast_filter">';
             $retval .= '<form class="ajax fast_filter">';
             $retval .= Url::getHiddenInputs($urlParams);

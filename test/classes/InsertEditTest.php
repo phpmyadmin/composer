@@ -2,19 +2,19 @@
 /**
  * Tests for PhpMyAdmin\InsertEdit
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Header;
 use PhpMyAdmin\InsertEdit;
+use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\Scripts;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Url;
-use PhpMyAdmin\Message;
-use PhpMyAdmin\Scripts;
-use PhpMyAdmin\Header;
 use ReflectionProperty;
 use stdClass;
 use function md5;
@@ -133,7 +133,7 @@ class InsertEditTest extends AbstractTestCase
                 InsertEdit::class,
                 'getWhereClauseArray',
                 [null]
-                )
+            )
         );
 
         $this->assertEquals(
@@ -147,7 +147,7 @@ class InsertEditTest extends AbstractTestCase
                 InsertEdit::class,
                 'getWhereClauseArray',
                 [[1, 2, 3]]
-                )
+            )
         );
 
         $this->assertEquals(
@@ -157,7 +157,7 @@ class InsertEditTest extends AbstractTestCase
                 InsertEdit::class,
                 'getWhereClauseArray',
                 ['clause']
-                )
+            )
         );
     }
 
@@ -182,21 +182,21 @@ class InsertEditTest extends AbstractTestCase
             ->willReturnOnConsecutiveCalls(
                 'result1',
                 'result2'
-        );
+            );
 
         $dbi->expects($this->exactly(2))
             ->method('fetchAssoc')
             ->willReturnOnConsecutiveCalls(
                 ['assoc1'],
                 ['assoc2']
-        );
+            );
 
         $dbi->expects($this->exactly(2))
             ->method('getFieldsMeta')
             ->willReturnOnConsecutiveCalls(
                 [],
                 []
-        );
+            );
 
         $GLOBALS['dbi'] = $dbi;
         $this->insertEdit = new InsertEdit($GLOBALS['dbi']);
@@ -547,7 +547,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     [],
                 ]
-                ),
+            ),
             'f1&lt;'
         );
 
@@ -663,7 +663,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     false,
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'enum';
@@ -681,7 +681,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     false,
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'timestamp';
@@ -700,7 +700,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     false,
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'timestamp';
@@ -719,7 +719,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     true,
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'SET';
@@ -738,7 +738,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     false,
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = '';
@@ -757,7 +757,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     false,
                 ]
-                )
+            )
         );
     }
 
@@ -790,7 +790,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $GLOBALS['cfg']['ProtectBinary'] = 'all';
@@ -814,7 +814,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $GLOBALS['cfg']['ProtectBinary'] = 'noblob';
@@ -838,7 +838,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $GLOBALS['cfg']['ProtectBinary'] = false;
@@ -862,7 +862,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'set';
@@ -885,7 +885,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = '';
@@ -909,7 +909,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
 
         $column['Field'] = 'num';
@@ -932,7 +932,7 @@ class InsertEditTest extends AbstractTestCase
                     false,
                     [],
                 ]
-                )
+            )
         );
     }
 
@@ -1076,7 +1076,7 @@ class InsertEditTest extends AbstractTestCase
                     $foreigners,
                     [],
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'enum';
@@ -1092,7 +1092,7 @@ class InsertEditTest extends AbstractTestCase
                     $foreigners,
                     [],
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = 'set';
@@ -1107,7 +1107,7 @@ class InsertEditTest extends AbstractTestCase
                     $foreigners,
                     [],
                 ]
-                )
+            )
         );
 
         $column['True_Type'] = '';
@@ -1124,7 +1124,7 @@ class InsertEditTest extends AbstractTestCase
                     $foreigners,
                     $foreignData,
                 ]
-                )
+            )
         );
     }
 
@@ -2266,7 +2266,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     $extracted_columnspec,
                 ]
-                )
+            )
         );
 
         $this->assertEquals(
@@ -2287,7 +2287,7 @@ class InsertEditTest extends AbstractTestCase
                     $column,
                     $extracted_columnspec,
                 ]
-                )
+            )
         );
     }
 
@@ -2309,7 +2309,7 @@ class InsertEditTest extends AbstractTestCase
                 InsertEdit::class,
                 'getHtmlForGisDataTypes',
                 []
-                )
+            )
         );
     }
 
@@ -2514,9 +2514,7 @@ class InsertEditTest extends AbstractTestCase
             $this->insertEdit,
             InsertEdit::class,
             'getHeadAndFootOfInsertRowTable',
-            [
-                $url_params,
-            ]
+            [$url_params]
         );
 
         $this->assertStringContainsString(
@@ -2747,7 +2745,7 @@ class InsertEditTest extends AbstractTestCase
     {
         $column = [];
         $column['True_Type'] = 'bit';
-        $column['Default'] = b'101';
+        $column['Default'] = 'b\'101\'';
         $column['is_binary'] = true;
         $GLOBALS['cfg']['ProtectBinary'] = false;
         $GLOBALS['cfg']['ShowFunctionFields'] = true;
@@ -2765,7 +2763,7 @@ class InsertEditTest extends AbstractTestCase
         $this->assertEquals(
             [
                 false,
-                '101',
+                'b\'101\'',
                 '101',
                 '',
                 '101',
@@ -3349,9 +3347,7 @@ class InsertEditTest extends AbstractTestCase
         ];
         $GLOBALS['cfg']['ServerDefault'] = 1;
         $_POST['where_clause'] = 1;
-        $transformation = [
-            'transformation_options' => "'','option ,, quoted',abd",
-        ];
+        $transformation = ['transformation_options' => "'','option ,, quoted',abd"];
         $result = $this->insertEdit->transformEditedValues(
             'db',
             'table',
@@ -3586,7 +3582,7 @@ class InsertEditTest extends AbstractTestCase
     public function testGetCurrentValueForDifferentTypes()
     {
         $prow = [];
-        $prow['a'] = b'101';
+        $prow['a'] = '101';
 
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
@@ -3601,7 +3597,7 @@ class InsertEditTest extends AbstractTestCase
             ->willReturnOnConsecutiveCalls(
                 $this->returnArgument(0),
                 "20\'12"
-        );
+            );
 
         $GLOBALS['dbi'] = $dbi;
         $this->insertEdit = new InsertEdit($GLOBALS['dbi']);
@@ -4078,7 +4074,7 @@ class InsertEditTest extends AbstractTestCase
                         ],
                     ]
                 )
-        );
+            );
 
         $dbi->expects($this->any())
             ->method('getTable')
@@ -4086,7 +4082,7 @@ class InsertEditTest extends AbstractTestCase
                 $this->returnValue(
                     new Table('table', 'db')
                 )
-        );
+            );
 
         $GLOBALS['dbi'] = $dbi;
         $this->insertEdit = new InsertEdit($GLOBALS['dbi']);
@@ -4166,9 +4162,7 @@ class InsertEditTest extends AbstractTestCase
                 'Privileges' => 'insert,update,select',
             ],
         ];
-        $repopulate = [
-            md5('col') => 'val',
-        ];
+        $repopulate = [md5('col') => 'val'];
         $column_mime = [
             'input_transformation' => 'Input/Image_JPEG_Upload.php',
             'input_transformation_options' => '150',
@@ -4257,9 +4251,7 @@ class InsertEditTest extends AbstractTestCase
                 'Privileges' => 'insert,update,select',
             ],
         ];
-        $repopulate = [
-            md5('qwerty') => '12-10-14',
-        ];
+        $repopulate = [md5('qwerty') => '12-10-14'];
         $actual = $this->callFunction(
             $this->insertEdit,
             InsertEdit::class,

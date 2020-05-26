@@ -2,18 +2,19 @@
 /**
  * Test for PhpMyAdmin\Gis\GisFactory
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\GisFactory;
-use PhpMyAdmin\Gis\GisMultiPolygon;
-use PhpMyAdmin\Gis\GisPolygon;
-use PhpMyAdmin\Gis\GisMultiLineString;
-use PhpMyAdmin\Gis\GisLineString;
-use PhpMyAdmin\Gis\GisMultiPoint;
-use PhpMyAdmin\Gis\GisPoint;
 use PhpMyAdmin\Gis\GisGeometryCollection;
+use PhpMyAdmin\Gis\GisLineString;
+use PhpMyAdmin\Gis\GisMultiLineString;
+use PhpMyAdmin\Gis\GisMultiPoint;
+use PhpMyAdmin\Gis\GisMultiPolygon;
+use PhpMyAdmin\Gis\GisPoint;
+use PhpMyAdmin\Gis\GisPolygon;
 use PhpMyAdmin\Tests\AbstractTestCase;
 
 /**

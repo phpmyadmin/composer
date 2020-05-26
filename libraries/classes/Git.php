@@ -2,6 +2,7 @@
 /**
  * Git inspection
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -9,7 +10,6 @@ namespace PhpMyAdmin;
 use DirectoryIterator;
 use PhpMyAdmin\Utils\HttpRequest;
 use stdClass;
-
 use const DIRECTORY_SEPARATOR;
 use const PHP_EOL;
 use function array_key_exists;
@@ -48,7 +48,6 @@ use function unpack;
  */
 class Git
 {
-
     /**
      * Build a Git class
      *
@@ -177,6 +176,7 @@ class Git
         if ($commit === false) {
             return null;
         }
+
         return $commit;
     }
 
@@ -238,6 +238,7 @@ class Git
             'N',
             substr($index_data, $offset + ($position * 4), 4)
         );
+
         return $packOffsets[1];
     }
 
@@ -246,6 +247,7 @@ class Git
      *
      * @param string $gitFolder The Git folder
      * @param string $hash      The commit hash
+     *
      * @return array|false|null
      */
     private function unPackGz(string $gitFolder, string $hash)
@@ -332,6 +334,7 @@ class Git
                 $_SESSION['PMA_VERSION_COMMITDATA_' . $hash] = $commit;
             }
         }
+
         return $commit;
     }
 
@@ -339,6 +342,7 @@ class Git
      * Extract committer, author and message from commit body
      *
      * @param array $commit The commit body
+     *
      * @return array<int,array<string,string>|string>
      */
     private function extractDataFormTextBody(array $commit): array
@@ -380,9 +384,10 @@ class Git
     /**
      * Is the commit remote
      *
-     * @param mixed   $commit         The commit
-     * @param boolean $isRemoteCommit Is the commit remote ?, will be modified by reference
-     * @param string  $hash           The commit hash
+     * @param mixed  $commit         The commit
+     * @param bool   $isRemoteCommit Is the commit remote ?, will be modified by reference
+     * @param string $hash           The commit hash
+     *
      * @return stdClass|null The commit body from the GitHub API
      */
     private function isRemoteCommit(&$commit, bool &$isRemoteCommit, string $hash): ?stdClass
@@ -416,6 +421,7 @@ class Git
                     break;
             }
         }
+
         return null;
     }
 
@@ -441,6 +447,7 @@ class Git
 
                     return [null, null];
                 }
+
                 return [trim($hash), $branch];
             } else {
                 // deal with packed refs
@@ -475,6 +482,7 @@ class Git
                     // Could not find ref
                     return [null, null];
                 }
+
                 return [$hash, $branch];
             }
         } else {

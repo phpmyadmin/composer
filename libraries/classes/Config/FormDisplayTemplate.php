@@ -2,6 +2,7 @@
 /**
  * Form templates
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Config;
@@ -485,9 +486,7 @@ class FormDisplayTemplate
             return '';
         }
 
-        return $this->template->render('javascript/display', [
-            'js_array' => $jsArray,
-        ]);
+        return $this->template->render('javascript/display', ['js_array' => $jsArray]);
     }
 
     /**

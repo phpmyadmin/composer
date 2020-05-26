@@ -6,6 +6,7 @@
  * in testsuite. Feel free to include other queries which your test will
  * need.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Stubs;
@@ -31,9 +32,6 @@ class DbiDummy implements DbiExtension
     /** @var array */
     private $_queries = [];
 
-    /**
-     * @var int
-     */
     public const OFFSET_GLOBAL = 1000;
 
     public function __construct()
@@ -233,7 +231,6 @@ class DbiDummy implements DbiExtension
      */
     public function freeResult($result)
     {
-        return;
     }
 
     /**
@@ -1303,9 +1300,7 @@ class DbiDummy implements DbiExtension
                     . 'DB_first_level ASC LIMIT 0, 100) t2 WHERE TRUE AND 1 = LOCATE('
                     . "CONCAT(DB_first_level, '_'), CONCAT(SCHEMA_NAME, '_')) "
                     . 'ORDER BY SCHEMA_NAME ASC',
-                'result' => [
-                    'test',
-                ],
+                'result' => ['test'],
             ],
             [
                 'query'  => 'SELECT COUNT(*) FROM ( SELECT DISTINCT SUBSTRING_INDEX('
@@ -1802,17 +1797,13 @@ class DbiDummy implements DbiExtension
                     . ' \'PMA_username\' AND `Host` = \'PMA_hostname\' AND `Db` ='
                     . ' \'PMA_db\' AND `Table_name` = \'PMA_table\';',
                 'result' => [
-                    [
-                        'Table_priv' => 'Select,Insert,Update,References,Create View,Show view',
-                    ],
+                    ['Table_priv' => 'Select,Insert,Update,References,Create View,Show view'],
                 ],
             ],
             [
                 'query' => 'SHOW COLUMNS FROM `mysql`.`tables_priv` LIKE \'Table_priv\';',
                 'result' => [
-                    [
-                        'Type' => 'set(\'Select\',\'Insert\',\'Update\',\'References\',\'Create View\',\'Show view\')',
-                    ],
+                    ['Type' => 'set(\'Select\',\'Insert\',\'Update\',\'References\',\'Create View\',\'Show view\')'],
                 ],
             ],
             [

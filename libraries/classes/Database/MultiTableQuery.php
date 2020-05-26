@@ -2,6 +2,7 @@
 /**
  * Handles DB Multi-table query
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Database;
@@ -108,7 +109,7 @@ class MultiTableQuery
      */
     public static function displayResults($sqlQuery, $db, $pmaThemeImage)
     {
-        list(,$db,) = ParseAnalyze::sqlQuery($sqlQuery, $db);
+        [,$db] = ParseAnalyze::sqlQuery($sqlQuery, $db);
 
         $goto = Url::getFromRoute('/database/multi-table-query');
         $sql = new Sql();

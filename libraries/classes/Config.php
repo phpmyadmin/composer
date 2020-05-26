@@ -2,6 +2,7 @@
 /**
  * Configuration handling.
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin;
@@ -480,7 +481,7 @@ class Config
          */
         $matched_keys = array_filter(
             array_keys($cfg),
-            function ($key) {
+            static function ($key) {
                 return strpos($key, '/') === false;
             }
         );

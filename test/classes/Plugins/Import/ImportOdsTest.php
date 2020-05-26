@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportOds class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -157,8 +158,7 @@ class ImportOdsTest extends AbstractTestCase
         );
 
         //asset that the import process is finished
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

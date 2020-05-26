@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Database;
@@ -56,7 +57,7 @@ final class ExportController extends AbstractController
         $url_params['goto'] = Url::getFromRoute('/database/export');
         $url_query .= Url::getCommon($url_params, '&');
 
-        list(
+        [
             $tables,
             $num_tables,
             $total_num_tables,
@@ -65,8 +66,8 @@ final class ExportController extends AbstractController
             $db_is_system_schema,
             $tooltip_truename,
             $tooltip_aliasname,
-            $pos
-        ) = Util::getDbInfo($db, $sub_part ?? '');
+            $pos,
+        ] = Util::getDbInfo($db, $sub_part ?? '');
 
         /**
          * Displays the form

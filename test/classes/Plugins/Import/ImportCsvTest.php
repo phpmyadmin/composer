@@ -2,6 +2,7 @@
 /**
  * Tests for PhpMyAdmin\Plugins\Import\ImportCsv class
  */
+
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Import;
@@ -127,8 +128,7 @@ class ImportCsvTest extends AbstractTestCase
             $sql_query
         );
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }
@@ -164,8 +164,7 @@ class ImportCsvTest extends AbstractTestCase
             $sql_query
         );
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
 
@@ -223,8 +222,7 @@ class ImportCsvTest extends AbstractTestCase
             $sql_query
         );
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $GLOBALS['finished']
         );
     }

@@ -503,7 +503,7 @@ class StructureController extends AbstractController
             } elseif (strlen($db) > 0) {
                 Common::database();
 
-                list(
+                [
                     $tables,
                     $num_tables,
                     $total_num_tables,
@@ -512,8 +512,8 @@ class StructureController extends AbstractController
                     $db_is_system_schema,
                     $tooltip_truename,
                     $tooltip_aliasname,
-                    $pos
-                ) = Util::getDbInfo($db, $sub_part ?? '');
+                    $pos,
+                ] = Util::getDbInfo($db, $sub_part ?? '');
             } else {
                 Common::server();
             }
@@ -895,10 +895,10 @@ class StructureController extends AbstractController
                 $table_is_view,
                 $sum_size,
             ] = $this->getStuffForEngineTypeTable(
-                    $current_table,
-                    $sum_size,
-                    $overhead_size
-                );
+                $current_table,
+                $sum_size,
+                $overhead_size
+            );
 
             $curTable = $this->dbi
                 ->getTable($this->db, $current_table['TABLE_NAME']);
@@ -1123,8 +1123,7 @@ class StructureController extends AbstractController
             $databaseCharset = $collation->getCharset();
         }
 
-        // table form
-        $html .= $this->template->render('database/structure/table_header', [
+        return $html . $this->template->render('database/structure/table_header', [
             'db' => $this->db,
             'db_is_system_schema' => $this->dbIsSystemSchema,
             'replication' => $GLOBALS['replication_info']['slave']['status'],
@@ -1171,8 +1170,6 @@ class StructureController extends AbstractController
                 'central_columns_work' => $GLOBALS['cfgRelation']['centralcolumnswork'] ?? null,
             ],
         ]);
-
-        return $html;
     }
 
     /**
@@ -1431,14 +1428,14 @@ class StructureController extends AbstractController
                     $overhead_size,
                     $sum_size,
                 ] = $this->getValuesForAriaTable(
-                        $current_table,
-                        $sum_size,
-                        $overhead_size,
-                        $formatted_size,
-                        $unit,
-                        $formatted_overhead,
-                        $overhead_unit
-                    );
+                    $current_table,
+                    $sum_size,
+                    $overhead_size,
+                    $formatted_size,
+                    $unit,
+                    $formatted_overhead,
+                    $overhead_unit
+                );
                 break;
             case 'InnoDB':
             case 'PBMS':
