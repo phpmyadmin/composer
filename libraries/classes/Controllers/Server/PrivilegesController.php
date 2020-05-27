@@ -471,9 +471,9 @@ class PrivilegesController extends AbstractController
                 $this->response->addJSON('title', $title);
 
                 return;
-            } else {
-                $this->response->addHTML('<h2>' . $title . '</h2>' . $export);
             }
+
+            $this->response->addHTML('<h2>' . $title . '</h2>' . $export);
         }
 
         if (isset($_GET['adduser'])) {
@@ -549,10 +549,12 @@ class PrivilegesController extends AbstractController
             }
         }
 
-        if ((isset($_GET['viewing_mode']) && $_GET['viewing_mode'] == 'server')
-            && $cfgRelation['menuswork']
+        if ((! isset($_GET['viewing_mode']) || $_GET['viewing_mode'] != 'server')
+            || ! $cfgRelation['menuswork']
         ) {
-            $this->response->addHTML('</div>');
+            return;
         }
+
+        $this->response->addHTML('</div>');
     }
 }

@@ -956,7 +956,7 @@ parameters:
 			path: libraries/classes/Database/Triggers.php
 
 		-
-			message: "#^Parameter \\#2 \\$table of method PhpMyAdmin\\\\DatabaseInterface\\:\\:_cacheTableData\\(\\) expects bool\\|string, array\\|string given\\.$#"
+			message: "#^Parameter \\#2 \\$table of method PhpMyAdmin\\\\Query\\\\Cache\\:\\:cacheTableData\\(\\) expects bool\\|string, array\\|string given\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
 
@@ -1018,11 +1018,6 @@ parameters:
 		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 2
-			path: libraries/classes/Dbal/DbiMysqli.php
-
-		-
-			message: "#^Else branch is unreachable because previous condition is always true\\.$#"
-			count: 1
 			path: libraries/classes/Dbal/DbiMysqli.php
 
 		-
@@ -3186,11 +3181,6 @@ parameters:
 			path: libraries/classes/Plugins/Transformations/Abs/ExternalTransformationsPlugin.php
 
 		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Transformations/Abs/InlineTransformationsPlugin.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Output\\\\Text_Plain_Binarytoip\\:\\:applyTransformation\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Transformations/Output/Text_Plain_Binarytoip.php
@@ -3231,12 +3221,7 @@ parameters:
 			path: libraries/classes/Relation.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Relation\\:\\:checkRelationsParam\\(\\) should return array\\<string\\> but returns array\\<string, string\\|false\\|null\\>\\.$#"
-			count: 1
-			path: libraries/classes/Relation.php
-
-		-
-			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:fetchRow\\(\\) expects object, resource\\|true given\\.$#"
+			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:fetchRow\\(\\) expects object, resource given\\.$#"
 			count: 1
 			path: libraries/classes/Relation.php
 
@@ -3246,13 +3231,23 @@ parameters:
 			path: libraries/classes/Relation.php
 
 		-
-			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:freeResult\\(\\) expects object, resource\\|true given\\.$#"
-			count: 2
+			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:freeResult\\(\\) expects object, resource given\\.$#"
+			count: 1
+			path: libraries/classes/Relation.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Relation\\:\\:checkRelationsParam\\(\\) should return array\\<string\\> but returns array\\<string, string\\|false\\|null\\>\\.$#"
+			count: 1
 			path: libraries/classes/Relation.php
 
 		-
 			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:numRows\\(\\) expects object, resource\\|true given\\.$#"
 			count: 3
+			path: libraries/classes/Relation.php
+
+		-
+			message: "#^Parameter \\#1 \\$result of method PhpMyAdmin\\\\DatabaseInterface\\:\\:freeResult\\(\\) expects object, resource\\|true given\\.$#"
+			count: 1
 			path: libraries/classes/Relation.php
 
 		-
@@ -4032,11 +4027,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$str of function substr expects string, string\\|true given\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
@@ -4964,11 +4954,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$pma_transformation_data of method PhpMyAdmin\\\\SystemDatabase\\:\\:getNewTransformationDataSql\\(\\) expects object, array given\\.$#"
 			count: 1
 			path: test/classes/SystemDatabaseTest.php
-
-		-
-			message: "#^Access to private property PhpMyAdmin\\\\DatabaseInterface&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$_table_cache\\.$#"
-			count: 1
-			path: test/classes/TableTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$table_name of class PhpMyAdmin\\\\Table constructor expects string, null given\\.$#"

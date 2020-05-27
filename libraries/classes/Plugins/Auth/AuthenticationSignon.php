@@ -44,9 +44,9 @@ class AuthenticationSignon extends AuthenticationPlugin
 
         if (! defined('TESTSUITE')) {
             exit;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -80,9 +80,11 @@ class AuthenticationSignon extends AuthenticationPlugin
         };
 
         foreach (['lifetime', 'path', 'domain', 'secure', 'httponly'] as $key) {
-            if (! isset($sessionCookieParams[$key])) {
-                $sessionCookieParams[$key] = $defaultCookieParams($key);
+            if (isset($sessionCookieParams[$key])) {
+                continue;
             }
+
+            $sessionCookieParams[$key] = $defaultCookieParams($key);
         }
 
         if (isset($sessionCookieParams['samesite'])

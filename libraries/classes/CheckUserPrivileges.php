@@ -96,53 +96,57 @@ class CheckUserPrivileges
         // '... ALL PRIVILEGES ON *.* ...' OR '... ALL PRIVILEGES ON `mysql`.* ..'
         // OR
         // SELECT, INSERT, UPDATE, DELETE .... ON *.* OR `mysql`.*
-        if ($show_grants_str == 'ALL'
-            || $show_grants_str == 'ALL PRIVILEGES'
-            || (mb_strpos(
+        if ($show_grants_str != 'ALL'
+            && $show_grants_str != 'ALL PRIVILEGES'
+            && (mb_strpos(
                 $show_grants_str,
                 'SELECT, INSERT, UPDATE, DELETE'
-            ) !== false)
+            ) === false)
         ) {
-            if ($show_grants_dbname == '*'
-                && $show_grants_tblname == '*'
+            return;
+        }
+
+        if ($show_grants_dbname == '*'
+            && $show_grants_tblname == '*'
+        ) {
+            $GLOBALS['col_priv'] = true;
+            $GLOBALS['db_priv'] = true;
+            $GLOBALS['proc_priv'] = true;
+            $GLOBALS['table_priv'] = true;
+
+            if ($show_grants_str == 'ALL PRIVILEGES'
+                || $show_grants_str == 'ALL'
             ) {
+                $GLOBALS['is_reload_priv'] = true;
+            }
+        }
+
+        // check for specific tables in `mysql` db
+        // Ex. '... ALL PRIVILEGES on `mysql`.`columns_priv` .. '
+        if ($show_grants_dbname != 'mysql') {
+            return;
+        }
+
+        switch ($show_grants_tblname) {
+            case 'columns_priv':
+                $GLOBALS['col_priv'] = true;
+                break;
+            case 'db':
+                $GLOBALS['db_priv'] = true;
+                break;
+            case 'procs_priv':
+                $GLOBALS['proc_priv'] = true;
+                break;
+            case 'tables_priv':
+                $GLOBALS['table_priv'] = true;
+                break;
+            case '*':
                 $GLOBALS['col_priv'] = true;
                 $GLOBALS['db_priv'] = true;
                 $GLOBALS['proc_priv'] = true;
                 $GLOBALS['table_priv'] = true;
-
-                if ($show_grants_str == 'ALL PRIVILEGES'
-                    || $show_grants_str == 'ALL'
-                ) {
-                    $GLOBALS['is_reload_priv'] = true;
-                }
-            }
-
-            // check for specific tables in `mysql` db
-            // Ex. '... ALL PRIVILEGES on `mysql`.`columns_priv` .. '
-            if ($show_grants_dbname == 'mysql') {
-                switch ($show_grants_tblname) {
-                    case 'columns_priv':
-                        $GLOBALS['col_priv'] = true;
-                        break;
-                    case 'db':
-                        $GLOBALS['db_priv'] = true;
-                        break;
-                    case 'procs_priv':
-                        $GLOBALS['proc_priv'] = true;
-                        break;
-                    case 'tables_priv':
-                        $GLOBALS['table_priv'] = true;
-                        break;
-                    case '*':
-                        $GLOBALS['col_priv'] = true;
-                        $GLOBALS['db_priv'] = true;
-                        $GLOBALS['proc_priv'] = true;
-                        $GLOBALS['table_priv'] = true;
-                        break;
-                    default:
-                }
-            }
+                break;
+            default:
         }
     }
 
@@ -261,53 +265,53 @@ class CheckUserPrivileges
                     // @todo we should not break here, cause GRANT ALL *.*
                     // could be revoked by a later rule like GRANT SELECT ON db.*
                     break;
-                } else {
-                    // this array may contain wildcards
-                    $GLOBALS['dbs_where_create_table_allowed'][] = $show_grants_dbname;
+                }
 
-                    $dbname_to_test = Util::backquote($show_grants_dbname);
+                // this array may contain wildcards
+                $GLOBALS['dbs_where_create_table_allowed'][] = $show_grants_dbname;
 
-                    if ($GLOBALS['is_create_db_priv']) {
-                        // no need for any more tests if we already know this
-                        continue;
-                    }
+                $dbname_to_test = Util::backquote($show_grants_dbname);
 
-                    // does this db exist?
-                    if ((preg_match('/' . $re0 . '%|_/', $show_grants_dbname)
-                        && ! preg_match('/\\\\%|\\\\_/', $show_grants_dbname))
-                        || (! $this->dbi->tryQuery(
-                            'USE ' . preg_replace(
-                                '/' . $re1 . '(%|_)/',
-                                '\\1\\3',
-                                $dbname_to_test
-                            )
-                        )
-                        && mb_substr($this->dbi->getError(), 1, 4) != 1044)
-                    ) {
-                        /**
-                         * Do not handle the underscore wildcard
-                         * (this case must be rare anyway)
-                         */
-                        $GLOBALS['db_to_create'] = preg_replace(
-                            '/' . $re0 . '%/',
-                            '\\1',
-                            $show_grants_dbname
-                        );
-                        $GLOBALS['db_to_create'] = preg_replace(
+                if ($GLOBALS['is_create_db_priv']) {
+                    // no need for any more tests if we already know this
+                    continue;
+                }
+
+                // does this db exist?
+                if ((preg_match('/' . $re0 . '%|_/', $show_grants_dbname)
+                    && ! preg_match('/\\\\%|\\\\_/', $show_grants_dbname))
+                    || (! $this->dbi->tryQuery(
+                        'USE ' . preg_replace(
                             '/' . $re1 . '(%|_)/',
                             '\\1\\3',
-                            $GLOBALS['db_to_create']
-                        );
-                        $GLOBALS['is_create_db_priv'] = true;
+                            $dbname_to_test
+                        )
+                    )
+                    && mb_substr($this->dbi->getError(), 1, 4) != 1044)
+                ) {
+                    /**
+                     * Do not handle the underscore wildcard
+                     * (this case must be rare anyway)
+                     */
+                    $GLOBALS['db_to_create'] = preg_replace(
+                        '/' . $re0 . '%/',
+                        '\\1',
+                        $show_grants_dbname
+                    );
+                    $GLOBALS['db_to_create'] = preg_replace(
+                        '/' . $re1 . '(%|_)/',
+                        '\\1\\3',
+                        $GLOBALS['db_to_create']
+                    );
+                    $GLOBALS['is_create_db_priv'] = true;
 
-                        /**
-                         * @todo collect $GLOBALS['db_to_create'] into an array,
-                         * to display a drop-down in the "Create database" dialog
-                         */
-                         // we don't break, we want all possible databases
-                         //break;
-                    } // end if
-                } // end elseif
+                    /**
+                     * @todo collect $GLOBALS['db_to_create'] into an array,
+                     * to display a drop-down in the "Create database" dialog
+                     */
+                     // we don't break, we want all possible databases
+                     //break;
+                } // end if // end elseif
             } // end if
         } // end while
 

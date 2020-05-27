@@ -107,7 +107,9 @@ class ImportMediawiki extends ImportPlugin
                 // Subtract data we didn't handle yet and stop processing
                 $GLOBALS['offset'] -= mb_strlen($buffer);
                 break;
-            } elseif ($data !== true) {
+            }
+
+            if ($data !== true) {
                 // Append new data to buffer
                 $buffer = $data;
                 unset($data);
@@ -149,7 +151,9 @@ class ImportMediawiki extends ImportPlugin
                 if (! strcmp(mb_substr($cur_buffer_line, 0, 4), '<!--')) {
                     $inside_comment = true;
                     continue;
-                } elseif ($inside_comment) {
+                }
+
+                if ($inside_comment) {
                     // Check end of comment
                     if (! strcmp(mb_substr($cur_buffer_line, 0, 4), '-->')
                     ) {
@@ -344,11 +348,13 @@ class ImportMediawiki extends ImportPlugin
      */
     private function _setTableName(&$table_name)
     {
-        if (empty($table_name)) {
-            $result = $GLOBALS['dbi']->fetchResult('SHOW TABLES');
-            // todo check if the name below already exists
-            $table_name = 'TABLE ' . (count($result) + 1);
+        if (! empty($table_name)) {
+            return;
         }
+
+        $result = $GLOBALS['dbi']->fetchResult('SHOW TABLES');
+        // todo check if the name below already exists
+        $table_name = 'TABLE ' . (count($result) + 1);
     }
 
     /**
@@ -362,13 +368,15 @@ class ImportMediawiki extends ImportPlugin
      */
     private function _setTableHeaders(array &$table_headers, array $table_row)
     {
-        if (empty($table_headers)) {
-            // The first table row should contain the number of columns
-            // If they are not set, generic names will be given (COL 1, COL 2, etc)
-            $num_cols = count($table_row);
-            for ($i = 0; $i < $num_cols; ++$i) {
-                $table_headers[$i] = 'COL ' . ($i + 1);
-            }
+        if (! empty($table_headers)) {
+            return;
+        }
+
+        // The first table row should contain the number of columns
+        // If they are not set, generic names will be given (COL 1, COL 2, etc)
+        $num_cols = count($table_row);
+        for ($i = 0; $i < $num_cols; ++$i) {
+            $table_headers[$i] = 'COL ' . ($i + 1);
         }
     }
 

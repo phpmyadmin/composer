@@ -54,7 +54,9 @@ class CentralColumnsController extends AbstractController
             ]);
 
             return;
-        } elseif (isset($_POST['add_new_column'])) {
+        }
+
+        if (isset($_POST['add_new_column'])) {
             $tmp_msg = $this->addNewColumn([
                 'col_name' => $_POST['col_name'] ?? null,
                 'col_default' => $_POST['col_default'] ?? null,
@@ -145,9 +147,11 @@ class CentralColumnsController extends AbstractController
         $message = Message::success(
             sprintf(__('Showing rows %1$s - %2$s.'), $pos + 1, $pos + $num_cols)
         );
-        if (isset($tmp_msg) && $tmp_msg !== true) {
-            $message = $tmp_msg;
+        if (! isset($tmp_msg) || $tmp_msg === true) {
+            return;
         }
+
+        $message = $tmp_msg;
     }
 
     /**

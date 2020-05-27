@@ -53,28 +53,32 @@ final class CacheWarmupCommand extends Command
             $output->writeln('Please specify --twig or --routing');
 
             return 1;
-        } elseif ($input->getOption('twig') === true) {
-            return $this->warmUpTwigCache($output);
-        } elseif ($input->getOption('routing') === true) {
-            return $this->warmUpRoutingCache($output);
-        } else {
-            $output->writeln('Warming up all caches.', OutputInterface::VERBOSITY_VERBOSE);
-            $twigCode = $this->warmUptwigCache($output);
-            if ($twigCode !== 0) {
-                $output->writeln('Twig cache generation had an error.');
-
-                return $twigCode;
-            }
-            $routingCode = $this->warmUpTwigCache($output);
-            if ($routingCode !== 0) {
-                $output->writeln('Routing cache generation had an error.');
-
-                return $twigCode;
-            }
-            $output->writeln('Warm up of all caches done.', OutputInterface::VERBOSITY_VERBOSE);
-
-            return 0;
         }
+
+        if ($input->getOption('twig') === true) {
+            return $this->warmUpTwigCache($output);
+        }
+
+        if ($input->getOption('routing') === true) {
+            return $this->warmUpRoutingCache($output);
+        }
+
+        $output->writeln('Warming up all caches.', OutputInterface::VERBOSITY_VERBOSE);
+        $twigCode = $this->warmUptwigCache($output);
+        if ($twigCode !== 0) {
+            $output->writeln('Twig cache generation had an error.');
+
+            return $twigCode;
+        }
+        $routingCode = $this->warmUpTwigCache($output);
+        if ($routingCode !== 0) {
+            $output->writeln('Routing cache generation had an error.');
+
+            return $twigCode;
+        }
+        $output->writeln('Warm up of all caches done.', OutputInterface::VERBOSITY_VERBOSE);
+
+        return 0;
     }
 
     private function warmUpRoutingCache(OutputInterface $output): int
@@ -135,17 +139,19 @@ final class CacheWarmupCommand extends Command
                 continue;
             }
             // force compilation
-            if ($file->isFile() && $file->getExtension() === 'twig') {
-                $name = str_replace($tplDir . '/', '', $file->getPathname());
-                $output->writeln('Loading: ' . $name, OutputInterface::VERBOSITY_DEBUG);
-                $template = $twig->loadTemplate($name);
-
-                // Generate line map
-                $cacheFilename = $twigCache->generateKey($name, $twig->getTemplateClass($name));
-                $template_file = 'templates/' . $name;
-                $cache_file = str_replace($tmpDir, 'twig-templates', $cacheFilename);
-                $replacements[$cache_file] = [$template_file, $template->getDebugInfo()];
+            if (! $file->isFile() || $file->getExtension() !== 'twig') {
+                continue;
             }
+
+            $name = str_replace($tplDir . '/', '', $file->getPathname());
+            $output->writeln('Loading: ' . $name, OutputInterface::VERBOSITY_DEBUG);
+            $template = $twig->loadTemplate($name);
+
+            // Generate line map
+            $cacheFilename = $twigCache->generateKey($name, $twig->getTemplateClass($name));
+            $template_file = 'templates/' . $name;
+            $cache_file = str_replace($tmpDir, 'twig-templates', $cacheFilename);
+            $replacements[$cache_file] = [$template_file, $template->getDebugInfo()];
         }
 
         $output->writeln('Writing replacements...', OutputInterface::VERBOSITY_VERY_VERBOSE);

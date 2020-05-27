@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.11.4@58e1d8e68e5098bf4fbfdfb420c38d563f882549">
+<files psalm-version="3.11.5@3c60609c218d4d4b3b257728b8089094e5c6c6c2">
   <file src="libraries/classes/Advisor.php">
     <PossiblyNullArgument occurrences="1">
       <code>Util::formatByteDown($value, $limes, $comma)</code>
@@ -250,6 +250,9 @@
       <code>$formatted_size</code>
       <code>$unit</code>
     </PossiblyNullArrayAccess>
+    <PossiblyNullIterator occurrences="1">
+      <code>$selected</code>
+    </PossiblyNullIterator>
     <UndefinedVariable occurrences="1">
       <code>$sub_part</code>
     </UndefinedVariable>
@@ -368,10 +371,6 @@
     <TypeDoesNotContainType occurrences="1">
       <code>(int) $database[$key]</code>
     </TypeDoesNotContainType>
-    <UndefinedVariable occurrences="2">
-      <code>$replication_types</code>
-      <code>$message</code>
-    </UndefinedVariable>
   </file>
   <file src="libraries/classes/Controllers/Server/PrivilegesController.php">
     <PossiblyInvalidArgument occurrences="3">
@@ -1284,12 +1283,10 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Html/Generator.php">
-    <InvalidScalarArgument occurrences="1">
+    <InvalidScalarArgument occurrences="2">
+      <code>$server_msg</code>
       <code>ceil($count / $max_count)</code>
     </InvalidScalarArgument>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$server_msg</code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="libraries/classes/Import.php">
     <InvalidReturnStatement occurrences="1">
@@ -2065,8 +2062,8 @@
   </file>
   <file src="libraries/classes/Relation.php">
     <InvalidArgument occurrences="10">
-      <code>$tab_rs</code>
-      <code>$tab_rs</code>
+      <code>$tableRes</code>
+      <code>$tableRes</code>
       <code>$result</code>
       <code>$result</code>
       <code>$com_rs</code>
@@ -2076,8 +2073,7 @@
       <code>$com_rs</code>
       <code>$com_rs</code>
     </InvalidArgument>
-    <InvalidReturnStatement occurrences="3">
-      <code>$cfgRelation</code>
+    <InvalidReturnStatement occurrences="2">
       <code>$this-&gt;queryAsControlUser($upd_query)</code>
       <code>$this-&gt;dbi-&gt;insertId(DatabaseInterface::CONNECT_CONTROL)</code>
     </InvalidReturnStatement>
@@ -2089,44 +2085,44 @@
       <code>$foreigners</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidArrayAccess occurrences="44">
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
-      <code>$curr_table[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
+      <code>$currTable[0]</code>
       <code>$row['comment']</code>
       <code>$row['comment']</code>
       <code>$row['db_name']</code>
@@ -2507,8 +2503,7 @@
     </PossiblyUndefinedVariable>
   </file>
   <file src="libraries/classes/Table/Search.php">
-    <PossiblyNullArrayOffset occurrences="2">
-      <code>$geom_funcs</code>
+    <PossiblyNullArrayOffset occurrences="1">
       <code>$geom_funcs</code>
     </PossiblyNullArrayOffset>
   </file>
@@ -2638,9 +2633,8 @@
     <InvalidScalarArgument occurrences="1">
       <code>$value</code>
     </InvalidScalarArgument>
-    <NullableReturnStatement occurrences="2">
+    <NullableReturnStatement occurrences="1">
       <code>$wktval</code>
-      <code>$regex</code>
     </NullableReturnStatement>
     <PossiblyFalseOperand occurrences="2">
       <code>mb_strrpos($columnspec, ')')</code>

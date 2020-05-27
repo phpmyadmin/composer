@@ -231,9 +231,11 @@ final class ReplaceController extends AbstractController
             // When a select field is nullified, it's not present in $_POST
             // so initialize it; this way, the foreach($multi_edit_columns) will process it
             foreach ($multi_edit_columns_name as $key => $val) {
-                if (! isset($multi_edit_columns[$key])) {
-                    $multi_edit_columns[$key] = '';
+                if (isset($multi_edit_columns[$key])) {
+                    continue;
                 }
+
+                $multi_edit_columns[$key] = '';
             }
 
             // Iterate in the order of $multi_edit_columns_name,
@@ -341,9 +343,11 @@ final class ReplaceController extends AbstractController
                         $multi_edit_columns_null_prev
                     );
                 }
-                if (isset($multi_edit_columns_null[$key])) {
-                    $multi_edit_columns[$key] = null;
+                if (! isset($multi_edit_columns_null[$key])) {
+                    continue;
                 }
+
+                $multi_edit_columns[$key] = null;
             } //end of foreach
 
             // temporarily store rows not inserted
@@ -351,16 +355,18 @@ final class ReplaceController extends AbstractController
             if ($insert_fail) {
                 $unsaved_values[$rownumber] = $multi_edit_columns;
             }
-            if (! $insert_fail && count($query_values) > 0) {
-                if ($is_insert) {
-                    $value_sets[] = implode(', ', $query_values);
-                } else {
-                    // build update query
-                    $query[] = 'UPDATE ' . Util::backquote($table)
-                        . ' SET ' . implode(', ', $query_values)
-                        . ' WHERE ' . $where_clause
-                        . ($_POST['clause_is_unique'] ? '' : ' LIMIT 1');
-                }
+            if ($insert_fail || count($query_values) <= 0) {
+                continue;
+            }
+
+            if ($is_insert) {
+                $value_sets[] = implode(', ', $query_values);
+            } else {
+                // build update query
+                $query[] = 'UPDATE ' . Util::backquote($table)
+                    . ' SET ' . implode(', ', $query_values)
+                    . ' WHERE ' . $where_clause
+                    . ($_POST['clause_is_unique'] ? '' : ' LIMIT 1');
             }
         }
         unset(
@@ -401,19 +407,25 @@ final class ReplaceController extends AbstractController
                 $controller->index();
 
                 return;
-            } elseif ($goto_include === '/database/sql') {
+            }
+
+            if ($goto_include === '/database/sql') {
                 /** @var DatabaseSqlController $controller */
                 $controller = $containerBuilder->get(DatabaseSqlController::class);
                 $controller->index();
 
                 return;
-            } elseif ($goto_include === '/table/change') {
+            }
+
+            if ($goto_include === '/table/change') {
                 /** @var ChangeController $controller */
                 $controller = $containerBuilder->get(ChangeController::class);
                 $controller->index();
 
                 return;
-            } elseif ($goto_include === '/table/sql') {
+            }
+
+            if ($goto_include === '/table/sql') {
                 /** @var TableSqlController $controller */
                 $controller = $containerBuilder->get(TableSqlController::class);
                 $controller->index();
@@ -604,19 +616,25 @@ final class ReplaceController extends AbstractController
             $controller->index();
 
             return;
-        } elseif ($goto_include === '/database/sql') {
+        }
+
+        if ($goto_include === '/database/sql') {
             /** @var DatabaseSqlController $controller */
             $controller = $containerBuilder->get(DatabaseSqlController::class);
             $controller->index();
 
             return;
-        } elseif ($goto_include === '/table/change') {
+        }
+
+        if ($goto_include === '/table/change') {
             /** @var ChangeController $controller */
             $controller = $containerBuilder->get(ChangeController::class);
             $controller->index();
 
             return;
-        } elseif ($goto_include === '/table/sql') {
+        }
+
+        if ($goto_include === '/table/sql') {
             /** @var TableSqlController $controller */
             $controller = $containerBuilder->get(TableSqlController::class);
             $controller->index();

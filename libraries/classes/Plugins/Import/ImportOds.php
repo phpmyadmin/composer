@@ -121,14 +121,15 @@ class ImportOds extends ImportPlugin
                 /* subtract data we didn't handle yet and stop processing */
                 $GLOBALS['offset'] -= strlen($buffer);
                 break;
-            } elseif ($data !== true) {
-                /* Append new data to buffer */
-                $buffer .= $data;
-                unset($data);
             }
-        }
 
-        unset($data);
+            if ($data === true) {
+                continue;
+            }
+
+            /* Append new data to buffer */
+            $buffer .= $data;
+        }
 
         /**
          * Disable loading of external XML entities.
@@ -247,7 +248,9 @@ class ImportOds extends ImportPlugin
             )
         ) {
             return (float) $cell_attrs['value'];
-        } elseif ($_REQUEST['ods_recognize_currency']
+        }
+
+        if ($_REQUEST['ods_recognize_currency']
             && ! strcmp('currency', (string) $cell_attrs['value-type'])
         ) {
             return (float) $cell_attrs['value'];

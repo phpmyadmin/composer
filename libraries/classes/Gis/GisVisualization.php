@@ -255,12 +255,14 @@ class GisVisualization
      */
     private function _handleOptions()
     {
-        if ($this->_userSpecifiedSettings !== null) {
-            $this->_settings = array_merge(
-                $this->_settings,
-                $this->_userSpecifiedSettings
-            );
+        if ($this->_userSpecifiedSettings === null) {
+            return;
         }
+
+        $this->_settings = array_merge(
+            $this->_settings,
+            $this->_userSpecifiedSettings
+        );
     }
 
     /**
@@ -542,9 +544,13 @@ class GisVisualization
     {
         if ($format == 'svg') {
             return $this->asSVG();
-        } elseif ($format == 'png') {
+        }
+
+        if ($format == 'png') {
             return $this->asPng();
-        } elseif ($format == 'ol') {
+        }
+
+        if ($format == 'ol') {
             return $this->asOl();
         }
 
@@ -626,9 +632,11 @@ class GisVisualization
             }
 
             $c_minY = (float) $scale_data['minY'];
-            if ($min_max['minY'] === 0.0 || $c_minY < $min_max['minY']) {
-                $min_max['minY'] = $c_minY;
+            if ($min_max['minY'] !== 0.0 && $c_minY >= $min_max['minY']) {
+                continue;
             }
+
+            $min_max['minY'] = $c_minY;
         }
 
         // scale the visualization

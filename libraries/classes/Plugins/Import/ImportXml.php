@@ -78,14 +78,15 @@ class ImportXml extends ImportPlugin
                 /* subtract data we didn't handle yet and stop processing */
                 $GLOBALS['offset'] -= strlen($buffer);
                 break;
-            } elseif ($data !== true) {
-                /* Append new data to buffer */
-                $buffer .= $data;
-                unset($data);
             }
-        }
 
-        unset($data);
+            if ($data === true) {
+                continue;
+            }
+
+            /* Append new data to buffer */
+            $buffer .= $data;
+        }
 
         /**
          * Disable loading of external XML entities.
@@ -287,13 +288,15 @@ class ImportXml extends ImportPlugin
             for ($i = 0; $i < $num_tables; ++$i) {
                 $num_rows = count($rows);
                 for ($j = 0; $j < $num_rows; ++$j) {
-                    if (! strcmp($tables[$i][Import::TBL_NAME], $rows[$j][Import::TBL_NAME])) {
-                        if (! isset($tables[$i][Import::COL_NAMES])) {
-                            $tables[$i][] = $rows[$j][Import::COL_NAMES];
-                        }
-
-                        $tables[$i][Import::ROWS][] = $rows[$j][Import::ROWS];
+                    if (strcmp($tables[$i][Import::TBL_NAME], $rows[$j][Import::TBL_NAME])) {
+                        continue;
                     }
+
+                    if (! isset($tables[$i][Import::COL_NAMES])) {
+                        $tables[$i][] = $rows[$j][Import::COL_NAMES];
+                    }
+
+                    $tables[$i][Import::ROWS][] = $rows[$j][Import::ROWS];
                 }
             }
 

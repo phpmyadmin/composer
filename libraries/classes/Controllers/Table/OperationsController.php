@@ -288,7 +288,7 @@ class OperationsController extends AbstractController
         if ($reread_info) {
             // to avoid showing the old value (for example the AUTO_INCREMENT) after
             // a change, clear the cache
-            $this->dbi->clearTableCache();
+            $this->dbi->getCache()->clearTableCache();
             $this->dbi->selectDb($db);
             $GLOBALS['showtable'] = $pma_table->getStatusInfo(null, true);
             if ($pma_table->isView()) {
@@ -381,18 +381,22 @@ class OperationsController extends AbstractController
                 if ($name == 'PRIMARY') {
                     $hideOrderTable = true;
                     break;
-                } elseif (! $idx->getNonUnique()) {
-                    $notNull = true;
-                    foreach ($idx->getColumns() as $column) {
-                        if ($column->getNull()) {
-                            $notNull = false;
-                            break;
-                        }
-                    }
-                    if ($notNull) {
-                        $hideOrderTable = true;
+                }
+
+                if ($idx->getNonUnique()) {
+                    continue;
+                }
+
+                $notNull = true;
+                foreach ($idx->getColumns() as $column) {
+                    if ($column->getNull()) {
+                        $notNull = false;
                         break;
                     }
+                }
+                if ($notNull) {
+                    $hideOrderTable = true;
+                    break;
                 }
             }
         }

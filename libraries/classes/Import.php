@@ -88,11 +88,15 @@ class Import
         global $timestamp, $maximum_time, $timeout_passed;
         if ($maximum_time == 0) {
             return false;
-        } elseif ($timeout_passed) {
+        }
+
+        if ($timeout_passed) {
             return true;
 
             /* 5 in next row might be too much */
-        } elseif (time() - $timestamp > $maximum_time - 5) {
+        }
+
+        if (time() - $timestamp > $maximum_time - 5) {
             $timeout_passed = true;
 
             return true;
@@ -181,11 +185,13 @@ class Import
 
         $pattern = '@^[\s]*(DROP|CREATE)[\s]+(IF EXISTS[[:space:]]+)'
             . '?(TABLE|DATABASE)[[:space:]]+(.+)@im';
-        if ($result != false
-            && preg_match($pattern, $sql)
+        if ($result == false
+            || ! preg_match($pattern, $sql)
         ) {
-            $reload = true;
+            return;
         }
+
+        $reload = true;
     }
 
     /**
@@ -312,9 +318,11 @@ class Import
         $import_run_buffer = $this->runQueryPost($import_run_buffer, $sql, $full);
 
         // In case of ROLLBACK, notify the user.
-        if (isset($_POST['rollback_query'])) {
-            $msg .= __('[ROLLBACK occurred.]');
+        if (! isset($_POST['rollback_query'])) {
+            return;
         }
+
+        $msg .= __('[ROLLBACK occurred.]');
     }
 
     /**
@@ -416,13 +424,13 @@ class Import
                 $GLOBALS['finished'] = true;
 
                 return $GLOBALS['import_text'];
-            } else {
-                $r = mb_substr($GLOBALS['import_text'], 0, $size);
-                $GLOBALS['offset'] += $size;
-                $GLOBALS['import_text'] = mb_substr($GLOBALS['import_text'], $size);
-
-                return $r;
             }
+
+            $r = mb_substr($GLOBALS['import_text'], 0, $size);
+            $GLOBALS['offset'] += $size;
+            $GLOBALS['import_text'] = mb_substr($GLOBALS['import_text'], $size);
+
+            return $r;
         }
 
         $result = $import_handle->read($size);
@@ -465,7 +473,9 @@ class Import
             return substr($contents, 3);
 
             // UTF-16 BE, LE
-        } elseif (strncmp($contents, "\xFE\xFF", 2) === 0
+        }
+
+        if (strncmp($contents, "\xFE\xFF", 2) === 0
             || strncmp($contents, "\xFF\xFE", 2) === 0
         ) {
             return substr($contents, 2);
@@ -667,7 +677,9 @@ class Import
          */
         if (! strcmp('NULL', $cell)) {
             return $last_cumulative_size;
-        } elseif ($curr_type == self::VARCHAR) {
+        }
+
+        if ($curr_type == self::VARCHAR) {
             /**
              * What to do if the current cell is of type VARCHAR
              */
@@ -680,7 +692,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif ($last_cumulative_type == self::DECIMAL) {
+            }
+
+            if ($last_cumulative_type == self::DECIMAL) {
                 /**
                  * The last cumulative type was DECIMAL
                  */
@@ -691,7 +705,9 @@ class Import
                 }
 
                 return $oldM;
-            } elseif ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
+            }
+
+            if ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
                 /**
                  * The last cumulative type was BIGINT or INT
                  */
@@ -700,7 +716,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
+            }
+
+            if (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
                 /**
                  * This is the first row to be analyzed
                  */
@@ -715,7 +733,9 @@ class Import
              */
 
             return -1;
-        } elseif ($curr_type == self::DECIMAL) {
+        }
+
+        if ($curr_type == self::DECIMAL) {
             /**
              * What to do if the current cell is of type DECIMAL
              */
@@ -731,7 +751,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif ($last_cumulative_type == self::DECIMAL) {
+            }
+
+            if ($last_cumulative_type == self::DECIMAL) {
                 /**
                  * The last cumulative type was DECIMAL
                  */
@@ -748,7 +770,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
+            }
+
+            if ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
                 /**
                  * The last cumulative type was BIGINT or INT
                  */
@@ -760,7 +784,9 @@ class Import
                 }
 
                 return $last_cumulative_size . ',' . $size[self::D];
-            } elseif (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
+            }
+
+            if (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
                 /**
                  * This is the first row to be analyzed
                  */
@@ -778,7 +804,9 @@ class Import
              */
 
             return -1;
-        } elseif ($curr_type == self::BIGINT || $curr_type == self::INT) {
+        }
+
+        if ($curr_type == self::BIGINT || $curr_type == self::INT) {
             /**
              * What to do if the current cell is of type BIGINT or INT
              */
@@ -791,7 +819,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif ($last_cumulative_type == self::DECIMAL) {
+            }
+
+            if ($last_cumulative_type == self::DECIMAL) {
                 /**
                  * The last cumulative type was DECIMAL
                  */
@@ -808,7 +838,9 @@ class Import
 
                 /* Use $newInt + $oldD as new M */
                 return ($newInt + $oldD) . ',' . $oldD;
-            } elseif ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
+            }
+
+            if ($last_cumulative_type == self::BIGINT || $last_cumulative_type == self::INT) {
                 /**
                  * The last cumulative type was BIGINT or INT
                  */
@@ -817,7 +849,9 @@ class Import
                 }
 
                 return $last_cumulative_size;
-            } elseif (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
+            }
+
+            if (! isset($last_cumulative_type) || $last_cumulative_type == self::NONE) {
                 /**
                  * This is the first row to be analyzed
                  */
@@ -957,24 +991,26 @@ class Import
                  * If a type for this column has already been declared,
                  * only alter it if it was a number and a varchar was found
                  */
-                if ($curr_type != self::NONE) {
-                    if ($curr_type == self::VARCHAR) {
-                        $types[$i] = self::VARCHAR;
-                    } elseif ($curr_type == self::DECIMAL) {
-                        if ($types[$i] != self::VARCHAR) {
-                            $types[$i] = self::DECIMAL;
-                        }
-                    } elseif ($curr_type == self::BIGINT) {
-                        if ($types[$i] != self::VARCHAR && $types[$i] != self::DECIMAL) {
-                            $types[$i] = self::BIGINT;
-                        }
-                    } elseif ($curr_type == self::INT) {
-                        if ($types[$i] != self::VARCHAR
-                            && $types[$i] != self::DECIMAL
-                            && $types[$i] != self::BIGINT
-                        ) {
-                            $types[$i] = self::INT;
-                        }
+                if ($curr_type == self::NONE) {
+                    continue;
+                }
+
+                if ($curr_type == self::VARCHAR) {
+                    $types[$i] = self::VARCHAR;
+                } elseif ($curr_type == self::DECIMAL) {
+                    if ($types[$i] != self::VARCHAR) {
+                        $types[$i] = self::DECIMAL;
+                    }
+                } elseif ($curr_type == self::BIGINT) {
+                    if ($types[$i] != self::VARCHAR && $types[$i] != self::DECIMAL) {
+                        $types[$i] = self::BIGINT;
+                    }
+                } elseif ($curr_type == self::INT) {
+                    if ($types[$i] != self::VARCHAR
+                        && $types[$i] != self::DECIMAL
+                        && $types[$i] != self::BIGINT
+                    ) {
+                        $types[$i] = self::INT;
                     }
                 }
             }
@@ -983,10 +1019,12 @@ class Import
         /* Check to ensure that all types are valid */
         $len = count($types);
         for ($n = 0; $n < $len; ++$n) {
-            if (! strcmp((string) self::NONE, (string) $types[$n])) {
-                $types[$n] = self::VARCHAR;
-                $sizes[$n] = '10';
+            if (strcmp((string) self::NONE, (string) $types[$n])) {
+                continue;
             }
+
+            $types[$n] = self::VARCHAR;
+            $sizes[$n] = '10';
         }
 
         return [
@@ -1139,9 +1177,11 @@ class Import
                         $tempSQLStr .= '(' . $size . ')';
                     }
 
-                    if ($j != count($tables[$i][self::COL_NAMES]) - 1) {
-                        $tempSQLStr .= ', ';
+                    if ($j == count($tables[$i][self::COL_NAMES]) - 1) {
+                        continue;
                     }
+
+                    $tempSQLStr .= ', ';
                 }
                 $tempSQLStr .= ') DEFAULT CHARACTER SET ' . $charset
                     . ' COLLATE ' . $collation . ';';
@@ -1173,9 +1213,11 @@ class Import
             for ($m = 0; $m < $num_cols; ++$m) {
                 $tempSQLStr .= Util::backquote($tables[$i][self::COL_NAMES][$m]);
 
-                if ($m != $num_cols - 1) {
-                    $tempSQLStr .= ', ';
+                if ($m == $num_cols - 1) {
+                    continue;
                 }
+
+                $tempSQLStr .= ', ';
             }
 
             $tempSQLStr .= ') VALUES ';
@@ -1464,11 +1506,11 @@ class Import
             $result = $this->getMatchedRows($analyzed_sql_results);
             $error = $GLOBALS['dbi']->getError();
 
-            if (! $error) {
-                $sql_data[] = $result;
-            } else {
+            if ($error) {
                 break;
             }
+
+            $sql_data[] = $result;
         }
 
         if ($error) {
@@ -1658,15 +1700,17 @@ class Import
             }
 
             // Check each query for ROLLBACK support.
-            if (! $this->checkIfRollbackPossible($sql_query)) {
-                $global_error = $GLOBALS['dbi']->getError();
-                if ($global_error) {
-                    $error = $global_error;
-                } else {
-                    $error = $error_msg;
-                }
-                break;
+            if ($this->checkIfRollbackPossible($sql_query)) {
+                continue;
             }
+
+            $global_error = $GLOBALS['dbi']->getError();
+            if ($global_error) {
+                $error = $global_error;
+            } else {
+                $error = $error_msg;
+            }
+            break;
         }
 
         if ($error) {
@@ -1675,10 +1719,10 @@ class Import
             $message = Message::rawError($error);
             $response->addJSON('message', $message);
             exit;
-        } else {
-            // If everything fine, START a transaction.
-            $GLOBALS['dbi']->query('START TRANSACTION');
         }
+
+        // If everything fine, START a transaction.
+        $GLOBALS['dbi']->query('START TRANSACTION');
     }
 
     /**

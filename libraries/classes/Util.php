@@ -930,18 +930,93 @@ class Util
         }
 
         foreach ($params as $param) {
-            if (! isset($array[$param])) {
-                $error_message .= $reported_script_name
-                    . ': ' . __('Missing parameter:') . ' '
-                    . $param
-                    . MySQLDocumentation::showDocumentation('faq', 'faqmissingparameters', true)
-                    . '[br]';
-                $found_error = true;
+            if (isset($array[$param])) {
+                continue;
             }
+
+            $error_message .= $reported_script_name
+                . ': ' . __('Missing parameter:') . ' '
+                . $param
+                . MySQLDocumentation::showDocumentation('faq', 'faqmissingparameters', true)
+                . '[br]';
+            $found_error = true;
         }
-        if ($found_error) {
-            Core::fatalError($error_message);
+        if (! $found_error) {
+            return;
         }
+
+        Core::fatalError($error_message);
+    }
+
+    /**
+     * Build a condition and with a value
+     *
+     * @param string|int|float|null $row          The row value
+     * @param stdClass              $meta         The field metadata
+     * @param string                $fieldFlags   The field flags
+     * @param int                   $fieldsCount  A number of fields
+     * @param string                $conditionKey A key used for BINARY fields functions
+     * @param string                $condition    The condition
+     *
+     * @return array<int,string|null>
+     */
+    private static function getConditionValue(
+        $row,
+        stdClass $meta,
+        string $fieldFlags,
+        int $fieldsCount,
+        string $conditionKey,
+        string $condition
+    ): array {
+        if ($row === null) {
+            return ['IS NULL', $condition];
+        }
+
+        $conditionValue = '';
+        // timestamp is numeric on some MySQL 4.1
+        // for real we use CONCAT above and it should compare to string
+        if ($meta->numeric
+            && ($meta->type !== 'timestamp')
+            && ($meta->type !== 'real')
+        ) {
+            $conditionValue = '= ' . $row;
+        } elseif (($meta->type === 'blob') || ($meta->type === 'string')
+            && stripos($fieldFlags, 'BINARY') !== false
+            && ! empty($row)
+        ) {
+            // hexify only if this is a true not empty BLOB or a BINARY
+
+            // do not waste memory building a too big condition
+            if (mb_strlen((string) $row) < 1000) {
+                // use a CAST if possible, to avoid problems
+                // if the field contains wildcard characters % or _
+                $conditionValue = '= CAST(0x' . bin2hex((string) $row) . ' AS BINARY)';
+            } elseif ($fieldsCount === 1) {
+                // when this blob is the only field present
+                // try settling with length comparison
+                $condition = ' CHAR_LENGTH(' . $conditionKey . ') ';
+                $conditionValue = ' = ' . mb_strlen((string) $row);
+            } else {
+                // this blob won't be part of the final condition
+                $conditionValue = null;
+            }
+        } elseif (in_array($meta->type, self::getGISDatatypes())
+            && ! empty($row)
+        ) {
+            // do not build a too big condition
+            if (mb_strlen((string) $row) < 5000) {
+                $condition .= '=0x' . bin2hex((string) $row) . ' AND';
+            } else {
+                $condition = '';
+            }
+        } elseif ($meta->type === 'bit') {
+            $conditionValue = "= b'"
+                . self::printableBitValue((int) $row, (int) $meta->length) . "'";
+        } else {
+            $conditionValue = '= \''
+                . $GLOBALS['dbi']->escapeString($row) . '\'';
+        }
+        return [$conditionValue, $condition];
     }
 
     /**
@@ -981,8 +1056,6 @@ class Util
         $condition_array = [];
 
         for ($i = 0; $i < $fields_cnt; ++$i) {
-            $con_val     = '';
-            $field_flags = $GLOBALS['dbi']->fieldFlags($handle, $i);
             $meta        = $fields_meta[$i];
 
             // do not use a column alias in a condition
@@ -1040,68 +1113,31 @@ class Util
             } // end if... else...
             $condition = ' ' . $con_key . ' ';
 
-            if (! isset($row[$i]) || $row[$i] === null) {
-                $con_val = 'IS NULL';
-            } else {
-                // timestamp is numeric on some MySQL 4.1
-                // for real we use CONCAT above and it should compare to string
-                if ($meta->numeric
-                    && ($meta->type != 'timestamp')
-                    && ($meta->type != 'real')
-                ) {
-                    $con_val = '= ' . $row[$i];
-                } elseif (($meta->type == 'blob') || ($meta->type == 'string')
-                    && stripos($field_flags, 'BINARY') !== false
-                    && ! empty($row[$i])
-                ) {
-                    // hexify only if this is a true not empty BLOB or a BINARY
+            [$con_val, $condition] = self::getConditionValue(
+                (! isset($row[$i]) || $row[$i] === null) ? null : $row[$i],
+                $meta,
+                $GLOBALS['dbi']->fieldFlags($handle, $i),
+                $fields_cnt,
+                $con_key,
+                $condition
+            );
 
-                    // do not waste memory building a too big condition
-                    if (mb_strlen($row[$i]) < 1000) {
-                        // use a CAST if possible, to avoid problems
-                        // if the field contains wildcard characters % or _
-                        $con_val = '= CAST(0x' . bin2hex($row[$i]) . ' AS BINARY)';
-                    } elseif ($fields_cnt == 1) {
-                        // when this blob is the only field present
-                        // try settling with length comparison
-                        $condition = ' CHAR_LENGTH(' . $con_key . ') ';
-                        $con_val = ' = ' . mb_strlen($row[$i]);
-                    } else {
-                        // this blob won't be part of the final condition
-                        $con_val = null;
-                    }
-                } elseif (in_array($meta->type, self::getGISDatatypes())
-                    && ! empty($row[$i])
-                ) {
-                    // do not build a too big condition
-                    if (mb_strlen($row[$i]) < 5000) {
-                        $condition .= '=0x' . bin2hex($row[$i]) . ' AND';
-                    } else {
-                        $condition = '';
-                    }
-                } elseif ($meta->type == 'bit') {
-                    $con_val = "= b'"
-                        . self::printableBitValue((int) $row[$i], (int) $meta->length) . "'";
-                } else {
-                    $con_val = '= \''
-                        . $GLOBALS['dbi']->escapeString($row[$i]) . '\'';
-                }
+            if ($con_val === null) {
+                continue;
             }
 
-            if ($con_val != null) {
-                $condition .= $con_val . ' AND';
+            $condition .= $con_val . ' AND';
 
-                if ($meta->primary_key > 0) {
-                    $primary_key .= $condition;
-                    $primary_key_array[$con_key] = $con_val;
-                } elseif ($meta->unique_key > 0) {
-                    $unique_key  .= $condition;
-                    $unique_key_array[$con_key] = $con_val;
-                }
-
-                $nonprimary_condition .= $condition;
-                $nonprimary_condition_array[$con_key] = $con_val;
+            if ($meta->primary_key > 0) {
+                $primary_key .= $condition;
+                $primary_key_array[$con_key] = $con_val;
+            } elseif ($meta->unique_key > 0) {
+                $unique_key  .= $condition;
+                $unique_key_array[$con_key] = $con_val;
             }
+
+            $nonprimary_condition .= $condition;
+            $nonprimary_condition_array[$con_key] = $con_val;
         } // end for
 
         // Correction University of Virginia 19991216:
@@ -1230,9 +1266,11 @@ class Util
                     }
                 }
 
-                if ($i > 0 && $i <= $x) {
-                    $pages[] = $i;
+                if ($i <= 0 || $i > $x) {
+                    continue;
                 }
+
+                $pages[] = $i;
             }
 
             /*
@@ -1254,9 +1292,11 @@ class Util
             while ($i < $x) {
                 $dist = 2 * $dist;
                 $i = $pageNow + $dist;
-                if ($i > 0 && $i <= $x) {
-                    $pages[] = $i;
+                if ($i <= 0 || $i > $x) {
+                    continue;
                 }
+
+                $pages[] = $i;
             }
 
             $i = $pageNow;
@@ -1264,9 +1304,11 @@ class Util
             while ($i > 0) {
                 $dist = 2 * $dist;
                 $i = $pageNow - $dist;
-                if ($i > 0 && $i <= $x) {
-                    $pages[] = $i;
+                if ($i <= 0 || $i > $x) {
+                    continue;
                 }
+
+                $pages[] = $i;
             }
 
             // Since because of ellipsing of the current page some numbers may be
@@ -1602,7 +1644,9 @@ class Util
         $engine = strtoupper((string) $engine);
         if (($engine === 'INNODB') || ($engine === 'PBXT')) {
             return true;
-        } elseif ($engine === 'NDBCLUSTER' || $engine === 'NDB') {
+        }
+
+        if ($engine === 'NDBCLUSTER' || $engine === 'NDB') {
             $ndbver = strtolower(
                 $GLOBALS['dbi']->fetchValue('SELECT @@ndb_version_string')
             );
@@ -1623,7 +1667,9 @@ class Util
     {
         if ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'enable') {
             return true;
-        } elseif ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'disable') {
+        }
+
+        if ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'disable') {
             return false;
         }
 
@@ -1934,9 +1980,11 @@ class Util
             foreach ($GLOBALS['dbi']->types->getColumns() as $value) {
                 if (is_array($value)) {
                     foreach ($value as $subvalue) {
-                        if ($subvalue !== '-') {
-                            $retval[] = $subvalue;
+                        if ($subvalue === '-') {
+                            continue;
                         }
+
+                        $retval[] = $subvalue;
                     }
                 } else {
                     if ($value !== '-') {
@@ -2002,7 +2050,9 @@ class Util
             . 'POLYGON|MULTIPOLYGON|GEOMETRYCOLLECTION)';
         if (preg_match("/^'" . $geom_types . "\(.*\)',[0-9]*$/i", $gis_string)) {
             return $geomFromText . '(' . $gis_string . ')';
-        } elseif (preg_match('/^' . $geom_types . '\(.*\)$/i', $gis_string)) {
+        }
+
+        if (preg_match('/^' . $geom_types . '\(.*\)$/i', $gis_string)) {
             return $geomFromText . "('" . $gis_string . "')";
         }
 
@@ -2272,24 +2322,24 @@ class Util
         }
         // If a database name was provided and user does not have the
         // required global privilege, try database-wise permissions.
-        if ($db !== null) {
-            $query .= " AND '%s' LIKE `TABLE_SCHEMA`";
-            $schema_privileges = $GLOBALS['dbi']->fetchValue(
-                sprintf(
-                    $query,
-                    'SCHEMA_PRIVILEGES',
-                    $username,
-                    $priv,
-                    $GLOBALS['dbi']->escapeString($db)
-                )
-            );
-            if ($schema_privileges) {
-                return true;
-            }
-        } else {
+        if ($db === null) {
             // There was no database name provided and the user
             // does not have the correct global privilege.
             return false;
+        }
+
+        $query .= " AND '%s' LIKE `TABLE_SCHEMA`";
+        $schema_privileges = $GLOBALS['dbi']->fetchValue(
+            sprintf(
+                $query,
+                'SCHEMA_PRIVILEGES',
+                $username,
+                $priv,
+                $GLOBALS['dbi']->escapeString($db)
+            )
+        );
+        if ($schema_privileges) {
+            return true;
         }
         // If a table name was also provided and we still didn't
         // find any valid privileges, try table-wise privileges.
@@ -2411,14 +2461,18 @@ class Util
         $regex = null;
 
         foreach ($regex_array as $test_regex) {
-            if (preg_match($test_regex, $query, $matches, PREG_OFFSET_CAPTURE)) {
-                if ($minimum_first_occurence_index === null
-                    || ($matches[0][1] < $minimum_first_occurence_index)
-                ) {
-                    $regex = $test_regex;
-                    $minimum_first_occurence_index = $matches[0][1];
-                }
+            if (! preg_match($test_regex, $query, $matches, PREG_OFFSET_CAPTURE)) {
+                continue;
             }
+
+            if ($minimum_first_occurence_index !== null
+                && ($matches[0][1] >= $minimum_first_occurence_index)
+            ) {
+                continue;
+            }
+
+            $regex = $test_regex;
+            $minimum_first_occurence_index = $matches[0][1];
         }
 
         return $regex;
@@ -2482,7 +2536,9 @@ class Util
 
         if ($level == null) {
             return $tabList;
-        } elseif (array_key_exists($level, $tabList)) {
+        }
+
+        if (array_key_exists($level, $tabList)) {
             return $tabList[$level];
         }
 
@@ -2555,7 +2611,9 @@ class Util
         $names = $GLOBALS['dbi']->getLowerCaseNames();
         if ($names === '0') {
             return 'COLLATE utf8_bin';
-        } elseif ($names === '2') {
+        }
+
+        if ($names === '2') {
             return 'COLLATE utf8_general_ci';
         }
 
@@ -2602,10 +2660,12 @@ class Util
 
             $indexes_data[$row['Key_name']][$row['Seq_in_index']]['Column_name']
                 = $row['Column_name'];
-            if (isset($row['Sub_part'])) {
-                $indexes_data[$row['Key_name']][$row['Seq_in_index']]['Sub_part']
-                    = $row['Sub_part'];
+            if (! isset($row['Sub_part'])) {
+                continue;
             }
+
+            $indexes_data[$row['Key_name']][$row['Seq_in_index']]['Sub_part']
+                = $row['Sub_part'];
         } // end while
 
         return [
@@ -2961,9 +3021,11 @@ class Util
             // to get ASCII only range
             $byte = ord($random_func(1)) & 0x7f;
             // We want only ASCII chars
-            if ($byte > 32) {
-                $result .= chr($byte);
+            if ($byte <= 32) {
+                continue;
             }
+
+            $result .= chr($byte);
         }
 
         return $asHex ? bin2hex($result) : $result;
@@ -2991,9 +3053,11 @@ class Util
     public static function setTimeLimit(): void
     {
         // The function can be disabled in php.ini
-        if (function_exists('set_time_limit')) {
-            @set_time_limit((int) $GLOBALS['cfg']['ExecTimeLimit']);
+        if (! function_exists('set_time_limit')) {
+            return;
         }
+
+        @set_time_limit((int) $GLOBALS['cfg']['ExecTimeLimit']);
     }
 
     /**
@@ -3172,15 +3236,17 @@ class Util
             $parts = explode(';', $hops[0]);
             foreach ($parts as $part) {
                 $keyValueArray = explode('=', $part, 2);
-                if (count($keyValueArray) === 2) {
-                    [
-                        $keyName,
-                        $value,
-                    ] = $keyValueArray;
-                    $value = trim(strtolower($value));
-                    if (strtolower(trim($keyName)) === 'proto' && in_array($value, ['http', 'https'])) {
-                        return $value;
-                    }
+                if (count($keyValueArray) !== 2) {
+                    continue;
+                }
+
+                [
+                    $keyName,
+                    $value,
+                ] = $keyValueArray;
+                $value = trim(strtolower($value));
+                if (strtolower(trim($keyName)) === 'proto' && in_array($value, ['http', 'https'])) {
+                    return $value;
                 }
             }
         }
