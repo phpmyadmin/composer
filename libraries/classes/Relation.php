@@ -24,6 +24,7 @@ use function htmlspecialchars;
 use function implode;
 use function in_array;
 use function is_array;
+use function is_bool;
 use function is_string;
 use function ksort;
 use function mb_check_encoding;
@@ -545,11 +546,15 @@ class Relation
         ];
 
         foreach ($settings as $setingName => $worksKey) {
-            if (isset($cfgRelation[$setingName])) {
-                if ($this->canAccessStorageTable($cfgRelation[$setingName])) {
-                    $cfgRelation[$worksKey] = true;
-                }
+            if (! isset($cfgRelation[$setingName])) {
+                continue;
             }
+
+            if (! $this->canAccessStorageTable($cfgRelation[$setingName])) {
+                continue;
+            }
+
+            $cfgRelation[$worksKey] = true;
         }
 
         return $cfgRelation;
@@ -611,6 +616,7 @@ class Relation
             }
         }
         $this->dbi->freeResult($tableRes);
+
         return $cfgRelation;
     }
 
