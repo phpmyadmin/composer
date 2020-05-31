@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Dbal;
 
+use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\Tests\AbstractTestCase;
 
 /**
@@ -60,7 +61,7 @@ class DbiDummyTest extends AbstractTestCase
      */
     public function testSystemSchema($schema, $expected): void
     {
-        $this->assertEquals($expected, $GLOBALS['dbi']->isSystemSchema($schema));
+        $this->assertEquals($expected, Utilities::isSystemSchema($schema));
     }
 
     /**
@@ -96,7 +97,7 @@ class DbiDummyTest extends AbstractTestCase
         $GLOBALS['server'] = 1;
         $this->assertEquals(
             $expected,
-            $GLOBALS['dbi']->formatError($number, $message)
+            Utilities::formatError($number, $message)
         );
     }
 

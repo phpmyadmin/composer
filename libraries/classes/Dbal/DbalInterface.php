@@ -188,26 +188,6 @@ interface DbalInterface
     ): array;
 
     /**
-     * Returns SQL query for fetching columns for a table
-     *
-     * The 'Key' column is not calculated properly, use $dbi->getColumns()
-     * to get correct values.
-     *
-     * @see getColumns()
-     *
-     * @param string $database name of database
-     * @param string $table    name of table to retrieve columns from
-     * @param string $column   name of column, null to show all columns
-     * @param bool   $full     whether to return full info or only column names
-     */
-    public function getColumnsSql(
-        string $database,
-        string $table,
-        ?string $column = null,
-        bool $full = false
-    ): string;
-
-    /**
      * Returns descriptions of columns in given table (all or given by $column)
      *
      * @param string $database name of database
@@ -543,34 +523,6 @@ interface DbalInterface
      * @return string|bool
      */
     public function getLowerCaseNames();
-
-    /**
-     * Get the list of system schemas
-     *
-     * @return array list of system schemas
-     */
-    public function getSystemSchemas(): array;
-
-    /**
-     * Checks whether given schema is a system schema
-     *
-     * @param string $schema_name        Name of schema (database) to test
-     * @param bool   $testForMysqlSchema Whether 'mysql' schema should
-     *                                   be treated the same as IS and
-     *                                   DD
-     */
-    public function isSystemSchema(string $schema_name, bool $testForMysqlSchema = false): bool;
-
-    /**
-     * Return connection parameters for the database server
-     *
-     * @param int        $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
-     *                           or CONNECT_AUXILIARY.
-     * @param array|null $server Server information like host/port/socket/persistent
-     *
-     * @return array user, host and server settings array
-     */
-    public function getConnectionParams(int $mode, ?array $server = null): array;
 
     /**
      * connects to the database server

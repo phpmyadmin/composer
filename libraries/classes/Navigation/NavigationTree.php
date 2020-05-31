@@ -145,11 +145,11 @@ class NavigationTree
         // Get the active node
         if (isset($_REQUEST['aPath'])) {
             $this->aPath[0] = $this->parsePath($_REQUEST['aPath']);
-            $this->pos2Name[0] = $_REQUEST['pos2_name'];
-            $this->pos2Value[0] = (int) $_REQUEST['pos2_value'];
+            $this->pos2Name[0] = $_REQUEST['pos2_name'] ?? '';
+            $this->pos2Value[0] = (int) $_REQUEST['pos2_value'] ?? 0;
             if (isset($_REQUEST['pos3_name'])) {
-                $this->pos3Name[0] = $_REQUEST['pos3_name'];
-                $this->pos3Value[0] = $_REQUEST['pos3_value'];
+                $this->pos3Name[0] = $_REQUEST['pos3_name'] ?? '';
+                $this->pos3Value[0] = (int) $_REQUEST['pos3_value'] ?? 0;
             }
         } else {
             if (isset($_POST['n0_aPath'])) {
@@ -1026,20 +1026,16 @@ class NavigationTree
         $retval = '';
         $paths = $node->getPaths();
         if (isset($paths['aPath_clean'][2])) {
-            $retval .= "<span class='hide pos2_name'>";
-            $retval .= $paths['aPath_clean'][2];
-            $retval .= '</span>';
-            $retval .= "<span class='hide pos2_value'>";
-            $retval .= htmlspecialchars((string) $node->pos2);
-            $retval .= '</span>';
+            $retval .= '<span class="hide pos2_nav"';
+            $retval .= ' data-name="' . $paths['aPath_clean'][2] . '"';
+            $retval .= ' data-value="' . htmlspecialchars((string) $node->pos2) . '"';
+            $retval .= '"></span>';
         }
         if (isset($paths['aPath_clean'][4])) {
-            $retval .= "<span class='hide pos3_name'>";
-            $retval .= $paths['aPath_clean'][4];
-            $retval .= '</span>';
-            $retval .= "<span class='hide pos3_value'>";
-            $retval .= htmlspecialchars((string) $node->pos3);
-            $retval .= '</span>';
+            $retval .= '<span class="hide pos3_nav"';
+            $retval .= ' data-name="' . $paths['aPath_clean'][4] . '"';
+            $retval .= ' data-value="' . htmlspecialchars((string) $node->pos3) . '"';
+            $retval .= '"></span>';
         }
 
         return $retval;
@@ -1132,15 +1128,12 @@ class NavigationTree
 
                 $retval .= '<a class="' . $node->getCssClasses($match) . '"';
                 $retval .= " href='#'>";
-                $retval .= "<span class='hide aPath'>";
-                $retval .= $paths['aPath'];
-                $retval .= '</span>';
-                $retval .= "<span class='hide vPath'>";
-                $retval .= $paths['vPath'];
-                $retval .= '</span>';
-                $retval .= "<span class='hide pos'>";
-                $retval .= $this->pos;
-                $retval .= '</span>';
+
+                $retval .= '<span class="hide paths_nav"';
+                $retval .= ' data-apath="' . $paths['aPath'] . '"';
+                $retval .= ' data-vpath="' . $paths['vPath'] . '"';
+                $retval .= ' data-pos="' . $this->pos . '"';
+                $retval .= '"></span>';
                 $retval .= $this->getPaginationParamsHtml($node);
                 if ($GLOBALS['cfg']['ShowDatabasesNavigationAsTree']
                     || $parentName != 'root'
@@ -1337,9 +1330,9 @@ class NavigationTree
             $options .= '<option value="'
                 . htmlspecialchars($node->realName) . '"'
                 . ' title="' . htmlspecialchars($title) . '"'
-                . ' apath="' . $paths['aPath'] . '"'
-                . ' vpath="' . $paths['vPath'] . '"'
-                . ' pos="' . $this->pos . '"';
+                . ' data-apath="' . $paths['aPath'] . '"'
+                . ' data-vpath="' . $paths['vPath'] . '"'
+                . ' data-pos="' . $this->pos . '"';
             if ($node->realName == $selected) {
                 $options .= ' selected';
             }

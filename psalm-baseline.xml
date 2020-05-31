@@ -74,6 +74,11 @@
       <code>$pieces === false</code>
     </TypeDoesNotContainType>
   </file>
+  <file src="libraries/classes/Charsets/Collation.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$name</code>
+    </PossiblyNullArgument>
+  </file>
   <file src="libraries/classes/CheckUserPrivileges.php">
     <PossiblyFalseOperand occurrences="6">
       <code>mb_strpos($row, ' ON ')</code>
@@ -1486,6 +1491,10 @@
     <PossiblyNullArgument occurrences="1">
       <code>$title</code>
     </PossiblyNullArgument>
+    <TypeDoesNotContainType occurrences="2">
+      <code>(int) $_REQUEST['pos2_value']</code>
+      <code>(int) $_REQUEST['pos3_value']</code>
+    </TypeDoesNotContainType>
   </file>
   <file src="libraries/classes/Navigation/NodeFactory.php">
     <LessSpecificReturnStatement occurrences="1">
