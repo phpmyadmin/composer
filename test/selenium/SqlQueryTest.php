@@ -74,7 +74,7 @@ class SqlQueryTest extends TestBase
         );
 
         // test inline edit button
-        $this->_testInlineEdit();
+        $this->assertInlineEdit();
     }
 
     /**
@@ -108,7 +108,7 @@ class SqlQueryTest extends TestBase
         );
 
         // test inline edit button
-        $this->_testInlineEdit();
+        $this->assertInlineEdit();
     }
 
     /**
@@ -147,13 +147,10 @@ class SqlQueryTest extends TestBase
         );
 
         // test inline edit button
-        $this->_testInlineEdit();
+        $this->assertInlineEdit();
     }
 
-    /**
-     * @return void
-     */
-    private function _testInlineEdit()
+    private function assertInlineEdit(): void
     {
         $this->waitForElement('cssSelector', 'a.inline_edit_sql')->click();
         // empty current query
