@@ -120,22 +120,19 @@ class Privileges
      *
      * @return string the escaped (if necessary) database.table
      */
-    public function wildcardEscapeForGrant($dbname, $tablename)
+    public function wildcardEscapeForGrant(string $dbname, string $tablename): string
     {
         if (strlen($dbname) === 0) {
-            $db_and_table = '*.*';
-        } else {
-            if (strlen($tablename) > 0) {
-                $db_and_table = Util::backquote(
-                    Util::unescapeMysqlWildcards($dbname)
-                )
-                . '.' . Util::backquote($tablename);
-            } else {
-                $db_and_table = Util::backquote($dbname) . '.*';
-            }
+            return '*.*';
+        }
+        if (strlen($tablename) > 0) {
+            return Util::backquote(
+                Util::unescapeMysqlWildcards($dbname)
+            )
+            . '.' . Util::backquote($tablename);
         }
 
-        return $db_and_table;
+        return Util::backquote($dbname) . '.*';
     }
 
     /**
@@ -1202,8 +1199,8 @@ class Privileges
      * @return array ($message, $sql_query)
      */
     public function getMessageAndSqlQueryForPrivilegesRevoke(
-        $dbname,
-        $tablename,
+        string $dbname,
+        string $tablename,
         $username,
         $hostname,
         $itemType
@@ -1237,7 +1234,7 @@ class Privileges
     }
 
     /**
-     * Get REQUIRE cluase
+     * Get REQUIRE clause
      *
      * @return string REQUIRE clause
      */
@@ -2363,16 +2360,15 @@ class Privileges
     /**
      * Update the privileges and return the success or error message
      *
-     * @param string $username  username
-     * @param string $hostname  host name
-     * @param string $tablename table name
-     * @param string $dbname    database name
-     * @param string $itemType  item type
-     *
      * @return array success message or error message for update
      */
-    public function updatePrivileges($username, $hostname, $tablename, $dbname, $itemType)
-    {
+    public function updatePrivileges(
+        string $username,
+        string $hostname,
+        string $tablename,
+        string $dbname,
+        string $itemType
+    ): array {
         $db_and_table = $this->wildcardEscapeForGrant($dbname, $tablename);
 
         $sql_query0 = 'REVOKE ALL PRIVILEGES ON ' . $itemType . ' ' . $db_and_table
@@ -2387,32 +2383,21 @@ class Privileges
             $sql_query1 = '';
         }
 
-        $sql_query2 = '';
+        $grantBackQuery = null;
+        $alterUserQuery = null;
 
         // Should not do a GRANT USAGE for a table-specific privilege, it
         // causes problems later (cannot revoke it)
         if (! (strlen($tablename) > 0
             && implode('', $this->extractPrivInfo()) == 'USAGE')
         ) {
-            $sql_query2 = 'GRANT ' . implode(', ', $this->extractPrivInfo())
-                . ' ON ' . $itemType . ' ' . $db_and_table
-                . ' TO \'' . $this->dbi->escapeString($username) . '\'@\''
-                . $this->dbi->escapeString($hostname) . '\'';
-
-            if (strlen($dbname) === 0) {
-                // add REQUIRE clause
-                $sql_query2 .= $this->getRequireClause();
-            }
-
-            if ((isset($_POST['Grant_priv']) && $_POST['Grant_priv'] == 'Y')
-                || (strlen($dbname) === 0
-                && (isset($_POST['max_questions']) || isset($_POST['max_connections'])
-                || isset($_POST['max_updates'])
-                || isset($_POST['max_user_connections'])))
-            ) {
-                $sql_query2 .= $this->getWithClauseForAddUserAndUpdatePrivs();
-            }
-            $sql_query2 .= ';';
+            [$grantBackQuery, $alterUserQuery] = $this->generateQueriesForUpdatePrivileges(
+                $itemType,
+                $db_and_table,
+                $username,
+                $hostname,
+                $dbname
+            );
         }
         if (! $this->dbi->tryQuery($sql_query0)) {
             // This might fail when the executing user does not have
@@ -2424,11 +2409,20 @@ class Privileges
             // this one may fail, too...
             $sql_query1 = '';
         }
-        if (! empty($sql_query2)) {
-            $this->dbi->query($sql_query2);
+
+        if ($grantBackQuery !== null) {
+            $this->dbi->query($grantBackQuery);
+        } else {
+            $grantBackQuery = '';
         }
 
-        $sql_query = $sql_query0 . ' ' . $sql_query1 . ' ' . $sql_query2;
+        if ($alterUserQuery !== null) {
+            $this->dbi->query($alterUserQuery);
+        } else {
+            $alterUserQuery = '';
+        }
+
+        $sql_query = $sql_query0 . ' ' . $sql_query1 . ' ' . $grantBackQuery . ' ' . $alterUserQuery;
         $message = Message::success(__('You have updated the privileges for %s.'));
         $message->addParam('\'' . $username . '\'@\'' . $hostname . '\'');
 
@@ -2436,6 +2430,63 @@ class Privileges
             $sql_query,
             $message,
         ];
+    }
+
+    /**
+     * Generate the query for the GRANTS and requirements + limits
+     *
+     * @return array<int,string|null>
+     */
+    private function generateQueriesForUpdatePrivileges(
+        string $itemType,
+        string $db_and_table,
+        string $username,
+        string $hostname,
+        string $dbname
+    ): array {
+        $alterUserQuery = null;
+
+        $grantBackQuery = 'GRANT ' . implode(', ', $this->extractPrivInfo())
+            . ' ON ' . $itemType . ' ' . $db_and_table
+            . ' TO \'' . $this->dbi->escapeString($username) . '\'@\''
+            . $this->dbi->escapeString($hostname) . '\'';
+
+        $isMySqlOrPercona = Util::getServerType() == 'MySQL' || Util::getServerType() == 'Percona Server';
+        $needsToUseAlter = $isMySqlOrPercona && $this->dbi->getVersion() >= 80011;
+
+        if ($needsToUseAlter) {
+            $alterUserQuery = 'ALTER USER \'' . $this->dbi->escapeString($username) . '\'@\''
+            . $this->dbi->escapeString($hostname) . '\' ';
+        }
+
+        if (strlen($dbname) === 0) {
+            // add REQUIRE clause
+            if ($needsToUseAlter) {
+                $alterUserQuery .= $this->getRequireClause();
+            } else {
+                $grantBackQuery .= $this->getRequireClause();
+            }
+        }
+
+        if ((isset($_POST['Grant_priv']) && $_POST['Grant_priv'] == 'Y')
+            || (strlen($dbname) === 0
+            && (isset($_POST['max_questions']) || isset($_POST['max_connections'])
+            || isset($_POST['max_updates'])
+            || isset($_POST['max_user_connections'])))
+        ) {
+            if ($needsToUseAlter) {
+                $alterUserQuery .= $this->getWithClauseForAddUserAndUpdatePrivs();
+            } else {
+                $grantBackQuery .= $this->getWithClauseForAddUserAndUpdatePrivs();
+            }
+        }
+        $grantBackQuery .= ';';
+
+        if ($needsToUseAlter) {
+            $alterUserQuery .= ';';
+        }
+
+        return [$grantBackQuery, $alterUserQuery];
     }
 
     /**
