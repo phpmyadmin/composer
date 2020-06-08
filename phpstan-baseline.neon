@@ -671,6 +671,11 @@ parameters:
 			path: libraries/classes/Core.php
 
 		-
+			message: "#^Comparison operation \"\\<\" between 1 and 43 is always true\\.$#"
+			count: 1
+			path: libraries/classes/Core.php
+
+		-
 			message: "#^Cannot access offset 'query' on array\\(\\?'scheme' \\=\\> string, \\?'host' \\=\\> string, \\?'port' \\=\\> int, \\?'user' \\=\\> string, \\?'pass' \\=\\> string, \\?'path' \\=\\> string, \\?'query' \\=\\> string, \\?'fragment' \\=\\> string\\)\\|false\\.$#"
 			count: 1
 			path: libraries/classes/Core.php
@@ -1262,6 +1267,21 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|false given\\.$#"
+			count: 1
+			path: libraries/classes/Export.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: libraries/classes/Export.php
+
+		-
+			message: "#^Comparison operation \"\\>\\=\" between 1 and 43 is always false\\.$#"
+			count: 1
+			path: libraries/classes/Export.php
+
+		-
+			message: "#^Right side of \\|\\| is always false\\.$#"
 			count: 1
 			path: libraries/classes/Export.php
 
@@ -2568,11 +2588,6 @@ parameters:
 		-
 			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Schema\\\\Dia\\\\RelationStatsDia\\:\\:\\$referenceColor has no typehint specified\\.$#"
 			count: 1
-			path: libraries/classes/Plugins/Schema/Dia/RelationStatsDia.php
-
-		-
-			message: "#^Binary operation \"\\+\" between int\\|string\\|false and 12 results in an error\\.$#"
-			count: 4
 			path: libraries/classes/Plugins/Schema/Dia/RelationStatsDia.php
 
 		-
