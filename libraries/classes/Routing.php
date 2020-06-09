@@ -6,6 +6,7 @@ namespace PhpMyAdmin;
 
 use FastRoute\Dispatcher;
 use function FastRoute\cachedDispatcher;
+use function htmlspecialchars;
 use function mb_strlen;
 use function rawurldecode;
 use function sprintf;
@@ -66,7 +67,7 @@ class Routing
             $response->setHttpResponseCode(404);
             Message::error(sprintf(
                 __('Error 404! The page %s was not found.'),
-                '<code>' . $route . '</code>'
+                '<code>' . htmlspecialchars($route) . '</code>'
             ))->display();
         } elseif ($routeInfo[0] === Dispatcher::METHOD_NOT_ALLOWED) {
             /** @var Response $response */
