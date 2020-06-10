@@ -23,12 +23,13 @@ class StructureTest extends TestBase
     {
         parent::setUp();
         $this->dbQuery(
-            'CREATE TABLE `test_table` ('
+            'USE `' . $this->database_name . '`;'
+            . 'CREATE TABLE `test_table` ('
             . ' `id` int(11) NOT NULL AUTO_INCREMENT,'
             . ' `val` int(11) NOT NULL,'
             . ' `val2` int(11) NOT NULL,'
             . ' PRIMARY KEY (`id`)'
-            . ')'
+            . ');'
         );
 
         $this->login();
@@ -94,7 +95,7 @@ class StructureTest extends TestBase
         )->click();
         $this->waitAjax();
 
-        $this->waitForElement('className', 'append_fields_form');
+        $this->waitUntilElementIsPresent('className', 'append_fields_form', 30);
 
         $this->assertEquals('val', $this->byId('field_0_1')->getAttribute('value'));
         $this->byId('field_0_1')->clear();
@@ -123,8 +124,10 @@ class StructureTest extends TestBase
     {
         $this->waitForElement('cssSelector', 'label[for=checkbox_row_2]')->click();
         $this->waitForElement('cssSelector', 'label[for=checkbox_row_3]')->click();
-        $this->byXPath(
-            "//button[@name='submit_mult' and contains(., 'Drop')]"
+        $this->waitUntilElementIsPresent(
+            'xpath',
+            '//button[contains(., "Drop")]',
+            30
         )->click();
 
         $this->waitForElement(
