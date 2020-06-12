@@ -216,7 +216,10 @@ AJAX.registerOnload('database/structure.js', function () {
  *  Event handler on select of "Make consistent with central list"
  */
     $('select[name=submit_mult]').on('change', function (event) {
-        if ($(this).val() === 'make_consistent_with_central_list') {
+        var url = 'index.php?route=/database/structure';
+        var action = $(this).val();
+
+        if (action === 'make_consistent_with_central_list') {
             event.preventDefault();
             event.stopPropagation();
             jqConfirm(
@@ -225,7 +228,13 @@ AJAX.registerOnload('database/structure.js', function () {
                 }
             );
             return false;
-        } else if ($(this).val() === 'copy_tbl' || $(this).val() === 'add_prefix_tbl' || $(this).val() === 'replace_prefix_tbl' || $(this).val() === 'copy_tbl_change_prefix') {
+        }
+
+        if (action === 'copy_tbl' ||
+            action === 'add_prefix_tbl' ||
+            action === 'replace_prefix_tbl' ||
+            action === 'copy_tbl_change_prefix'
+        ) {
             event.preventDefault();
             event.stopPropagation();
             if ($('input[name="selected_tbl[]"]:checked').length === 0) {
@@ -233,18 +242,19 @@ AJAX.registerOnload('database/structure.js', function () {
             }
             var formData = $('#tablesForm').serialize();
             var modalTitle = '';
-            if ($(this).val() === 'copy_tbl') {
+            if (action === 'copy_tbl') {
+                url = 'index.php?route=/database/structure/copy-form';
                 modalTitle = Messages.strCopyTablesTo;
-            } else if ($(this).val() === 'add_prefix_tbl') {
+            } else if (action === 'add_prefix_tbl') {
                 modalTitle = Messages.strAddPrefix;
-            } else if ($(this).val() === 'replace_prefix_tbl') {
+            } else if (action === 'replace_prefix_tbl') {
                 modalTitle = Messages.strReplacePrefix;
-            } else if ($(this).val() === 'copy_tbl_change_prefix') {
+            } else if (action === 'copy_tbl_change_prefix') {
                 modalTitle = Messages.strCopyPrefix;
             }
             $.ajax({
                 type: 'POST',
-                url: 'index.php?route=/database/structure',
+                url: url,
                 dataType: 'html',
                 data: formData
 
@@ -268,9 +278,30 @@ AJAX.registerOnload('database/structure.js', function () {
                     buttons: buttonOptions
                 });
             });
+
+            return;
+        }
+
+        if (action === 'sync_unique_columns_central_list') {
+            url = 'index.php?route=/database/structure/central-columns-add';
+        } else if (action === 'export') {
+            url = 'index.php?route=/database/structure/export';
+        } else if (action === 'show_create') {
+            url = 'index.php?route=/database/structure/show-create';
         } else {
             $('#tablesForm').trigger('submit');
+
+            return;
         }
+
+        var $form = $(this).parents('form');
+        var argsep = CommonParams.get('arg_separator');
+        var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+
+        Functions.ajaxShowMessage();
+        AJAX.source = $form;
+
+        $.post(url, data, AJAX.responseHandler);
     });
 
     /**

@@ -138,6 +138,9 @@ return static function (RouteCollector $routes) {
         });
         $routes->addGroup('/structure', static function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [StructureController::class, 'index']);
+            $routes->post('/central-columns-add', [StructureController::class, 'centralColumnsAdd']);
+            $routes->post('/copy-form', [StructureController::class, 'copyForm']);
+            $routes->post('/export', [StructureController::class, 'export']);
             $routes->addRoute(['GET', 'POST'], '/favorite-table', [
                 StructureController::class,
                 'addRemoveFavoriteTablesAction',
@@ -146,6 +149,7 @@ return static function (RouteCollector $routes) {
                 StructureController::class,
                 'handleRealRowCountRequestAction',
             ]);
+            $routes->post('/show-create', [StructureController::class, 'showCreate']);
         });
         $routes->addRoute(['GET', 'POST'], '/tracking', [TrackingController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/triggers', [TriggersController::class, 'index']);

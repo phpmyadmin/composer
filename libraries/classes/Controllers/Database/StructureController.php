@@ -364,8 +364,8 @@ class StructureController extends AbstractController
      */
     public function multiSubmitAction(): void
     {
-        global $containerBuilder, $db, $table, $from_prefix, $goto, $message, $err_url;
-        global $mult_btn, $query_type, $reload, $dblist, $selected, $sql_query;
+        global $db, $table, $from_prefix, $goto, $message, $err_url;
+        global $mult_btn, $query_type, $reload, $selected, $sql_query;
         global $submit_mult, $table_type, $to_prefix, $url_query, $pmaThemeImage;
 
         if (isset($_POST['error']) && $_POST['error'] !== false) {
@@ -419,50 +419,6 @@ class StructureController extends AbstractController
                         $query_type = $submit_mult;
                         unset($submit_mult);
                         $mult_btn   = __('Yes');
-                        break;
-                    case 'export':
-                        unset($submit_mult);
-                        /** @var ExportController $controller */
-                        $controller = $containerBuilder->get(ExportController::class);
-                        $controller->index();
-                        exit;
-                    case 'copy_tbl':
-                        $_url_params = [
-                            'query_type' => 'copy_tbl',
-                            'db' => $db,
-                        ];
-                        foreach ($selected as $selectedValue) {
-                            $_url_params['selected'][] = $selectedValue;
-                        }
-
-                        $databasesList = $dblist->databases;
-                        foreach ($databasesList as $key => $databaseName) {
-                            if ($databaseName == $db) {
-                                $databasesList->offsetUnset($key);
-                                break;
-                            }
-                        }
-
-                        $this->response->disable();
-                        $this->render('mult_submits/copy_multiple_tables', [
-                            'action' => $action,
-                            'url_params' => $_url_params,
-                            'options' => $databasesList->getList(),
-                        ]);
-                        exit;
-                    case 'show_create':
-                        $show_create = $this->template->render('database/structure/show_create', [
-                            'db' => $db,
-                            'db_objects' => $selected,
-                            'dbi' => $this->dbi,
-                        ]);
-                        // Send response to client.
-                        $this->response->addJSON('message', $show_create);
-                        exit;
-                    case 'sync_unique_columns_central_list':
-                        $centralColsError = $centralColumns->syncUniqueColumns(
-                            $selected
-                        );
                         break;
                     case 'delete_unique_columns_central_list':
                         $centralColsError = $centralColumns->deleteColumnsFromList(
@@ -829,8 +785,7 @@ class StructureController extends AbstractController
                 Util::handleDisableFKCheckCleanup($default_fk_check_value);
             }
         } elseif (isset($submit_mult)
-            && ($submit_mult == 'sync_unique_columns_central_list'
-                || $submit_mult == 'delete_unique_columns_central_list'
+            && ($submit_mult == 'delete_unique_columns_central_list'
                 || $submit_mult == 'add_to_central_columns'
                 || $submit_mult == 'remove_from_central_columns'
                 || $submit_mult == 'make_consistent_with_central_list')
@@ -1612,5 +1567,119 @@ class StructureController extends AbstractController
             $unit,
             $sum_size,
         ];
+    }
+
+    public function export(): void
+    {
+        global $containerBuilder;
+
+        if (empty($_POST['selected_tbl'])) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        /** @var ExportController $controller */
+        $controller = $containerBuilder->get(ExportController::class);
+        $controller->index();
+    }
+
+    public function showCreate(): void
+    {
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $tables = $this->getShowCreateTables($selected);
+
+        $showCreate = $this->template->render('database/structure/show_create', ['tables' => $tables]);
+
+        $this->response->addJSON('message', $showCreate);
+    }
+
+    /**
+     * @param string[] $selected Selected tables.
+     *
+     * @return array<string, array<int, array<string, string>>>
+     */
+    private function getShowCreateTables(array $selected): array
+    {
+        $tables = ['tables' => [], 'views' => []];
+
+        foreach ($selected as $table) {
+            $object = $this->dbi->getTable($this->db, $table);
+
+            $tables[$object->isView() ? 'views' : 'tables'][] = [
+                'name' => Core::mimeDefaultFunction($table),
+                'show_create' => Core::mimeDefaultFunction($object->showCreate()),
+            ];
+        }
+
+        return $tables;
+    }
+
+    public function copyForm(): void
+    {
+        global $db, $dblist;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $urlParams = [
+            'query_type' => 'copy_tbl',
+            'db' => $db,
+        ];
+        foreach ($selected as $selectedValue) {
+            $urlParams['selected'][] = $selectedValue;
+        }
+
+        $databasesList = $dblist->databases;
+        foreach ($databasesList as $key => $databaseName) {
+            if ($databaseName == $db) {
+                $databasesList->offsetUnset($key);
+                break;
+            }
+        }
+
+        $this->response->disable();
+        $this->render('database/structure/copy_form', [
+            'url_params' => $urlParams,
+            'options' => $databasesList->getList(),
+        ]);
+    }
+
+    public function centralColumnsAdd(): void
+    {
+        global $message;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $centralColumns = new CentralColumns($this->dbi);
+        $error = $centralColumns->syncUniqueColumns($selected);
+
+        $message = $error instanceof Message ? $error : Message::success(__('Success!'));
+
+        unset($_POST['submit_mult']);
+
+        $this->index();
     }
 }
