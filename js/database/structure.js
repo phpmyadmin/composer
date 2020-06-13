@@ -223,8 +223,20 @@ AJAX.registerOnload('database/structure.js', function () {
             event.preventDefault();
             event.stopPropagation();
             jqConfirm(
-                Messages.makeConsistentMessage, function () {
-                    $('#tablesForm').trigger('submit');
+                Messages.makeConsistentMessage,
+                function () {
+                    var $form = $('#tablesForm');
+                    var argsep = CommonParams.get('arg_separator');
+                    var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+
+                    Functions.ajaxShowMessage();
+                    AJAX.source = $form;
+
+                    $.post(
+                        'index.php?route=/database/structure/central-columns-make-consistent',
+                        data,
+                        AJAX.responseHandler
+                    );
                 }
             );
             return false;
@@ -284,6 +296,8 @@ AJAX.registerOnload('database/structure.js', function () {
 
         if (action === 'sync_unique_columns_central_list') {
             url = 'index.php?route=/database/structure/central-columns-add';
+        } else if (action === 'delete_unique_columns_central_list') {
+            url = 'index.php?route=/database/structure/central-columns-remove';
         } else if (action === 'export') {
             url = 'index.php?route=/database/structure/export';
         } else if (action === 'show_create') {
