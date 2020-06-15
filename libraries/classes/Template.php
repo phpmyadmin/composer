@@ -21,15 +21,9 @@ use PhpMyAdmin\Twig\UtilExtension;
 use RuntimeException;
 use Throwable;
 use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TemplateWrapper;
-use Twig_Error_Loader;
-use Twig_Error_Runtime;
-use Twig_Error_Syntax;
 use const DIRECTORY_SEPARATOR;
 use const E_USER_WARNING;
 use function sprintf;
@@ -126,9 +120,9 @@ class Template
      * @param array  $data     Associative array of template variables
      *
      * @throws Throwable
-     * @throws Twig_Error_Loader
-     * @throws Twig_Error_Runtime
-     * @throws Twig_Error_Syntax
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function render(string $template, array $data = []): string
     {
