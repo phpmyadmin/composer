@@ -139,13 +139,18 @@ return static function (RouteCollector $routes) {
         $routes->addGroup('/structure', static function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [StructureController::class, 'index']);
             $routes->post('/add-prefix', [StructureController::class, 'addPrefix']);
+            $routes->post('/analyze-table', [StructureController::class, 'analyzeTable']);
             $routes->post('/central-columns-add', [StructureController::class, 'centralColumnsAdd']);
             $routes->post('/central-columns-make-consistent', [
                 StructureController::class,
                 'centralColumnsMakeConsistent',
             ]);
             $routes->post('/central-columns-remove', [StructureController::class, 'centralColumnsRemove']);
+            $routes->post('/change-prefix-form', [StructureController::class, 'changePrefixForm']);
+            $routes->post('/check-table', [StructureController::class, 'checkTable']);
             $routes->post('/copy-form', [StructureController::class, 'copyForm']);
+            $routes->post('/drop-form', [StructureController::class, 'dropForm']);
+            $routes->post('/empty-form', [StructureController::class, 'emptyForm']);
             $routes->post('/export', [StructureController::class, 'export']);
             $routes->addRoute(['GET', 'POST'], '/favorite-table', [
                 StructureController::class,

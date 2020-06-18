@@ -261,8 +261,10 @@ AJAX.registerOnload('database/structure.js', function () {
                 url = 'index.php?route=/database/structure/add-prefix';
                 modalTitle = Messages.strAddPrefix;
             } else if (action === 'replace_prefix_tbl') {
+                url = 'index.php?route=/database/structure/change-prefix-form';
                 modalTitle = Messages.strReplacePrefix;
             } else if (action === 'copy_tbl_change_prefix') {
+                url = 'index.php?route=/database/structure/change-prefix-form';
                 modalTitle = Messages.strCopyPrefix;
             }
             $.ajax({
@@ -295,10 +297,18 @@ AJAX.registerOnload('database/structure.js', function () {
             return;
         }
 
-        if (action === 'sync_unique_columns_central_list') {
+        if (action === 'analyze_tbl') {
+            url = 'index.php?route=/database/structure/analyze-table';
+        } else if (action === 'sync_unique_columns_central_list') {
             url = 'index.php?route=/database/structure/central-columns-add';
         } else if (action === 'delete_unique_columns_central_list') {
             url = 'index.php?route=/database/structure/central-columns-remove';
+        } else if (action === 'check_tbl') {
+            url = 'index.php?route=/database/structure/check-table';
+        } else if (action === 'drop_tbl') {
+            url = 'index.php?route=/database/structure/drop-form';
+        } else if (action === 'empty_tbl') {
+            url = 'index.php?route=/database/structure/empty-form';
         } else if (action === 'export') {
             url = 'index.php?route=/database/structure/export';
         } else if (action === 'show_create') {

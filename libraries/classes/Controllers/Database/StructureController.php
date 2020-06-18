@@ -372,15 +372,14 @@ class StructureController extends AbstractController
             return;
         }
 
-        $action = Url::getFromRoute('/database/structure');
         $err_url = Url::getFromRoute('/database/structure', ['db' => $this->db]);
 
         $from_prefix = $_POST['from_prefix'] ?? $from_prefix ?? null;
-        $goto = $_POST['goto'] ?? $goto ?? null;
+        $goto = $_POST['goto'] ?? $goto ?? '';
         $mult_btn = $_POST['mult_btn'] ?? $mult_btn ?? null;
         $query_type = $_POST['query_type'] ?? $query_type ?? null;
         $reload = $_POST['reload'] ?? $reload ?? null;
-        $selected = $_POST['selected'] ?? $selected ?? null;
+        $selected = $_POST['selected'] ?? $selected ?? [];
         $sql_query = $_POST['sql_query'] ?? $sql_query ?? null;
         $submit_mult = $_POST['submit_mult'] ?? $submit_mult ?? null;
         $table_type = $_POST['table_type'] ?? $table_type ?? null;
@@ -403,16 +402,8 @@ class StructureController extends AbstractController
                 // selected tables
                 $selected = $_POST['selected_tbl'];
                 switch ($submit_mult) {
-                    case 'replace_prefix_tbl':
-                    case 'copy_tbl_change_prefix':
-                    case 'drop_tbl':
-                    case 'empty_tbl':
-                        $what = $submit_mult;
-                        break;
-                    case 'check_tbl':
                     case 'optimize_tbl':
                     case 'repair_tbl':
-                    case 'analyze_tbl':
                     case 'checksum_tbl':
                         $query_type = $submit_mult;
                         unset($submit_mult);
@@ -430,342 +421,239 @@ class StructureController extends AbstractController
         }
         $views = $this->dbi->getVirtualTables($db);
 
-        /**
-         * Displays the confirmation form if required
-         */
-        if (! empty($submit_mult) && ! empty($what)) {
-            unset($message);
+        if (empty($mult_btn) || $mult_btn !== __('Yes')) {
+            $message = Message::success(__('No change'));
 
-            if (strlen($table) > 0) {
-                Common::table();
-                $url_query .= Url::getCommon([
-                    'goto' => Url::getFromRoute('/table/sql'),
-                    'back' => Url::getFromRoute('/table/sql'),
-                ], '&');
-            } elseif (strlen($db) > 0) {
-                Common::database();
-
-                [
-                    $tables,
-                    $num_tables,
-                    $total_num_tables,
-                    $sub_part,
-                    $is_show_stats,
-                    $db_is_system_schema,
-                    $tooltip_truename,
-                    $tooltip_aliasname,
-                    $pos,
-                ] = Util::getDbInfo($db, $sub_part ?? '');
-            } else {
-                Common::server();
+            if (! empty($_POST['message'])) {
+                return;
             }
 
-            $full_query_views = null;
-            $full_query = '';
+            $_POST['message'] = Message::success();
 
-            if ($what == 'drop_tbl') {
-                $full_query_views = '';
-            }
-
-            foreach ($selected as $selectedValue) {
-                switch ($what) {
-                    case 'drop_tbl':
-                        $current = $selectedValue;
-                        if (! empty($views) && in_array($current, $views)) {
-                            $full_query_views .= (empty($full_query_views) ? 'DROP VIEW ' : ', ')
-                                . Util::backquote(htmlspecialchars($current));
-                        } else {
-                            $full_query .= (empty($full_query) ? 'DROP TABLE ' : ', ')
-                                . Util::backquote(htmlspecialchars($current));
-                        }
-                        break;
-
-                    case 'empty_tbl':
-                        $full_query .= 'TRUNCATE ';
-                        $full_query .= Util::backquote(htmlspecialchars($selectedValue))
-                            . ';<br>';
-                        break;
-                }
-            }
-
-            if ($what == 'drop_tbl') {
-                if (! empty($full_query)) {
-                    $full_query .= ';<br>' . "\n";
-                }
-                if (! empty($full_query_views)) {
-                    $full_query .= $full_query_views . ';<br>' . "\n";
-                }
-                unset($full_query_views);
-            }
-
-            $_url_params = [
-                'query_type' => $what,
-                'db' => $db,
-            ];
-            foreach ($selected as $selectedValue) {
-                $_url_params['selected'][] = $selectedValue;
-            }
-            if ($what == 'drop_tbl' && ! empty($views)) {
-                foreach ($views as $current) {
-                    $_url_params['views'][] = $current;
-                }
-            }
-
-            if ($what == 'replace_prefix_tbl' || $what == 'copy_tbl_change_prefix') {
-                $this->response->disable();
-                $this->render('mult_submits/replace_prefix_table', [
-                    'action' => $action,
-                    'url_params' => $_url_params,
-                ]);
-            } else {
-                $this->render('mult_submits/other_actions', [
-                    'action' => $action,
-                    'url_params' => $_url_params,
-                    'what' => $what,
-                    'full_query' => $full_query,
-                    'is_foreign_key_check' => Util::isForeignKeyCheck(),
-                ]);
-            }
-            exit;
+            return;
         }
 
-        if (! empty($mult_btn) && $mult_btn == __('Yes')) {
-            $default_fk_check_value = false;
-            if ($query_type == 'drop_tbl' || $query_type == 'empty_tbl') {
-                $default_fk_check_value = Util::handleDisableFKCheckInit();
-            }
+        $default_fk_check_value = false;
+        if ($query_type == 'drop_tbl' || $query_type == 'empty_tbl') {
+            $default_fk_check_value = Util::handleDisableFKCheckInit();
+        }
 
-            $aQuery = '';
-            $sql_query = '';
-            $sql_query_views = null;
-            // whether to run query after each pass
-            $run_parts = false;
-            // whether to execute the query at the end (to display results)
-            $execute_query_later = false;
+        $aQuery = '';
+        $sql_query = '';
+        $sql_query_views = null;
+        // whether to run query after each pass
+        $run_parts = false;
+        // whether to execute the query at the end (to display results)
+        $execute_query_later = false;
 
-            if ($query_type == 'drop_tbl') {
-                $sql_query_views = '';
-            }
+        if ($query_type == 'drop_tbl') {
+            $sql_query_views = '';
+        }
 
-            $selectedCount = count($selected);
-            $deletes = false;
-            $copyTable = false;
+        $selectedCount = count($selected);
+        $deletes = false;
+        $copyTable = false;
 
-            for ($i = 0; $i < $selectedCount; $i++) {
-                switch ($query_type) {
-                    case 'drop_tbl':
-                        $this->relationCleanup->table($db, $selected[$i]);
-                        $current = $selected[$i];
-                        if (! empty($views) && in_array($current, $views)) {
-                            $sql_query_views .= (empty($sql_query_views) ? 'DROP VIEW ' : ', ')
-                                . Util::backquote($current);
-                        } else {
-                            $sql_query .= (empty($sql_query) ? 'DROP TABLE ' : ', ')
-                                . Util::backquote($current);
-                        }
-                        $reload    = 1;
-                        break;
+        for ($i = 0; $i < $selectedCount; $i++) {
+            switch ($query_type) {
+                case 'drop_tbl':
+                    $this->relationCleanup->table($db, $selected[$i]);
+                    $current = $selected[$i];
+                    if (! empty($views) && in_array($current, $views)) {
+                        $sql_query_views .= (empty($sql_query_views) ? 'DROP VIEW ' : ', ')
+                            . Util::backquote($current);
+                    } else {
+                        $sql_query .= (empty($sql_query) ? 'DROP TABLE ' : ', ')
+                            . Util::backquote($current);
+                    }
+                    $reload    = 1;
+                    break;
 
-                    case 'check_tbl':
-                        $sql_query .= (empty($sql_query) ? 'CHECK TABLE ' : ', ')
-                            . Util::backquote($selected[$i]);
-                        $execute_query_later = true;
-                        break;
+                case 'optimize_tbl':
+                    $sql_query .= (empty($sql_query) ? 'OPTIMIZE TABLE ' : ', ')
+                        . Util::backquote($selected[$i]);
+                    $execute_query_later = true;
+                    break;
 
-                    case 'optimize_tbl':
-                        $sql_query .= (empty($sql_query) ? 'OPTIMIZE TABLE ' : ', ')
-                            . Util::backquote($selected[$i]);
-                        $execute_query_later = true;
-                        break;
+                case 'checksum_tbl':
+                    $sql_query .= (empty($sql_query) ? 'CHECKSUM TABLE ' : ', ')
+                        . Util::backquote($selected[$i]);
+                    $execute_query_later = true;
+                    break;
 
-                    case 'analyze_tbl':
-                        $sql_query .= (empty($sql_query) ? 'ANALYZE TABLE ' : ', ')
-                            . Util::backquote($selected[$i]);
-                        $execute_query_later = true;
-                        break;
+                case 'repair_tbl':
+                    $sql_query .= (empty($sql_query) ? 'REPAIR TABLE ' : ', ')
+                        . Util::backquote($selected[$i]);
+                    $execute_query_later = true;
+                    break;
 
-                    case 'checksum_tbl':
-                        $sql_query .= (empty($sql_query) ? 'CHECKSUM TABLE ' : ', ')
-                            . Util::backquote($selected[$i]);
-                        $execute_query_later = true;
-                        break;
+                case 'empty_tbl':
+                    $deletes = true;
+                    $aQuery = 'TRUNCATE ';
+                    $aQuery .= Util::backquote($selected[$i]);
+                    $run_parts = true;
+                    break;
 
-                    case 'repair_tbl':
-                        $sql_query .= (empty($sql_query) ? 'REPAIR TABLE ' : ', ')
-                            . Util::backquote($selected[$i]);
-                        $execute_query_later = true;
-                        break;
+                case 'add_prefix_tbl':
+                    $newTableName = $_POST['add_prefix'] . $selected[$i];
+                    // ADD PREFIX TO TABLE NAME
+                    $aQuery = 'ALTER TABLE '
+                        . Util::backquote($selected[$i])
+                        . ' RENAME '
+                        . Util::backquote($newTableName);
+                    $run_parts = true;
+                    break;
 
-                    case 'empty_tbl':
-                        $deletes = true;
-                        $aQuery = 'TRUNCATE ';
-                        $aQuery .= Util::backquote($selected[$i]);
-                        $run_parts = true;
-                        break;
+                case 'replace_prefix_tbl':
+                    $current = $selected[$i];
+                    $subFromPrefix = mb_substr(
+                        $current,
+                        0,
+                        mb_strlen((string) $from_prefix)
+                    );
+                    if ($subFromPrefix == $from_prefix) {
+                        $newTableName = $to_prefix
+                            . mb_substr(
+                                $current,
+                                mb_strlen((string) $from_prefix)
+                            );
+                    } else {
+                        $newTableName = $current;
+                    }
+                    // CHANGE PREFIX PATTERN
+                    $aQuery = 'ALTER TABLE '
+                        . Util::backquote($selected[$i])
+                        . ' RENAME '
+                        . Util::backquote($newTableName);
+                    $run_parts = true;
+                    break;
 
-                    case 'add_prefix_tbl':
-                        $newTableName = $_POST['add_prefix'] . $selected[$i];
-                        // ADD PREFIX TO TABLE NAME
-                        $aQuery = 'ALTER TABLE '
-                            . Util::backquote($selected[$i])
-                            . ' RENAME '
-                            . Util::backquote($newTableName);
-                        $run_parts = true;
-                        break;
+                case 'copy_tbl_change_prefix':
+                    $run_parts = true;
+                    $copyTable = true;
 
-                    case 'replace_prefix_tbl':
-                        $current = $selected[$i];
-                        $subFromPrefix = mb_substr(
-                            $current,
-                            0,
-                            mb_strlen((string) $from_prefix)
-                        );
-                        if ($subFromPrefix == $from_prefix) {
-                            $newTableName = $to_prefix
-                                . mb_substr(
-                                    $current,
-                                    mb_strlen((string) $from_prefix)
-                                );
-                        } else {
-                            $newTableName = $current;
-                        }
-                        // CHANGE PREFIX PATTERN
-                        $aQuery = 'ALTER TABLE '
-                            . Util::backquote($selected[$i])
-                            . ' RENAME '
-                            . Util::backquote($newTableName);
-                        $run_parts = true;
-                        break;
+                    $current = $selected[$i];
+                    $newTableName = $to_prefix .
+                        mb_substr($current, mb_strlen((string) $from_prefix));
 
-                    case 'copy_tbl_change_prefix':
-                        $run_parts = true;
-                        $copyTable = true;
+                    // COPY TABLE AND CHANGE PREFIX PATTERN
+                    Table::moveCopy(
+                        $db,
+                        $current,
+                        $db,
+                        $newTableName,
+                        'data',
+                        false,
+                        'one_table'
+                    );
+                    break;
 
-                        $current = $selected[$i];
-                        $newTableName = $to_prefix .
-                            mb_substr($current, mb_strlen((string) $from_prefix));
-
-                        // COPY TABLE AND CHANGE PREFIX PATTERN
-                        Table::moveCopy(
-                            $db,
-                            $current,
-                            $db,
-                            $newTableName,
-                            'data',
-                            false,
-                            'one_table'
-                        );
-                        break;
-
-                    case 'copy_tbl':
-                        $run_parts = true;
-                        $copyTable = true;
-                        Table::moveCopy(
+                case 'copy_tbl':
+                    $run_parts = true;
+                    $copyTable = true;
+                    Table::moveCopy(
+                        $db,
+                        $selected[$i],
+                        $_POST['target_db'],
+                        $selected[$i],
+                        $_POST['what'],
+                        false,
+                        'one_table'
+                    );
+                    if (isset($_POST['adjust_privileges']) && ! empty($_POST['adjust_privileges'])) {
+                        $this->operations->adjustPrivilegesCopyTable(
                             $db,
                             $selected[$i],
                             $_POST['target_db'],
-                            $selected[$i],
-                            $_POST['what'],
-                            false,
-                            'one_table'
+                            $selected[$i]
                         );
-                        if (isset($_POST['adjust_privileges']) && ! empty($_POST['adjust_privileges'])) {
-                            $this->operations->adjustPrivilegesCopyTable(
-                                $db,
-                                $selected[$i],
-                                $_POST['target_db'],
-                                $selected[$i]
-                            );
-                        }
-                        break;
-                }
-
-                // All "DROP TABLE", "DROP FIELD", "OPTIMIZE TABLE" and "REPAIR TABLE"
-                // statements will be run at once below
-                if (! $run_parts || $copyTable) {
-                    continue;
-                }
-
-                $sql_query .= $aQuery . ';' . "\n";
-                $this->dbi->selectDb($db);
-                $this->dbi->query($aQuery);
-
-                if ($query_type != 'drop_tbl') {
-                    continue;
-                }
-
-                $this->transformations->clear($db, $selected[$i]);
+                    }
+                    break;
             }
 
-            if ($deletes && ! empty($_REQUEST['pos'])) {
-                $sql = new Sql();
-                $_REQUEST['pos'] = $sql->calculatePosForLastPage(
-                    $db,
-                    $table,
-                    $_REQUEST['pos'] ?? null
-                );
+            // All "DROP TABLE", "DROP FIELD", "OPTIMIZE TABLE" and "REPAIR TABLE"
+            // statements will be run at once below
+            if (! $run_parts || $copyTable) {
+                continue;
             }
 
-            if ($query_type == 'drop_tbl') {
-                if (! empty($sql_query)) {
-                    $sql_query .= ';';
-                } elseif (! empty($sql_query_views)) {
-                    $sql_query = $sql_query_views . ';';
-                    unset($sql_query_views);
-                }
+            $sql_query .= $aQuery . ';' . "\n";
+            $this->dbi->selectDb($db);
+            $this->dbi->query($aQuery);
+
+            if ($query_type != 'drop_tbl') {
+                continue;
             }
 
-            // Unset cache values for tables count, issue #14205
-            if ($query_type === 'drop_tbl' && isset($_SESSION['tmpval'])) {
-                if (isset($_SESSION['tmpval']['table_limit_offset'])) {
-                    unset($_SESSION['tmpval']['table_limit_offset']);
-                }
+            $this->transformations->clear($db, $selected[$i]);
+        }
 
-                if (isset($_SESSION['tmpval']['table_limit_offset_db'])) {
-                    unset($_SESSION['tmpval']['table_limit_offset_db']);
-                }
+        if ($deletes && ! empty($_REQUEST['pos'])) {
+            $sql = new Sql();
+            $_REQUEST['pos'] = $sql->calculatePosForLastPage(
+                $db,
+                $table,
+                $_REQUEST['pos'] ?? null
+            );
+        }
+
+        if ($query_type == 'drop_tbl') {
+            if (! empty($sql_query)) {
+                $sql_query .= ';';
+            } elseif (! empty($sql_query_views)) {
+                $sql_query = $sql_query_views . ';';
+                unset($sql_query_views);
+            }
+        }
+
+        // Unset cache values for tables count, issue #14205
+        if ($query_type === 'drop_tbl' && isset($_SESSION['tmpval'])) {
+            if (isset($_SESSION['tmpval']['table_limit_offset'])) {
+                unset($_SESSION['tmpval']['table_limit_offset']);
             }
 
-            if ($execute_query_later) {
-                $sql = new Sql();
-                $sql->executeQueryAndSendQueryResponse(
-                    null, // analyzed_sql_results
-                    false, // is_gotofile
-                    $db, // db
-                    $table, // table
-                    null, // find_real_end
-                    null, // sql_query_for_bookmark
-                    null, // extra_data
-                    null, // message_to_show
-                    null, // message
-                    null, // sql_data
-                    $goto, // goto
-                    $pmaThemeImage, // pmaThemeImage
-                    null, // disp_query
-                    null, // disp_message
-                    $query_type, // query_type
-                    $sql_query, // sql_query
-                    $selected, // selectedTables
-                    null // complete_query
-                );
-            } elseif (! $run_parts) {
-                $this->dbi->selectDb($db);
-                $result = $this->dbi->tryQuery($sql_query);
-                if ($result && ! empty($sql_query_views)) {
-                    $sql_query .= ' ' . $sql_query_views . ';';
-                    $result = $this->dbi->tryQuery($sql_query_views);
-                    unset($sql_query_views);
-                }
+            if (isset($_SESSION['tmpval']['table_limit_offset_db'])) {
+                unset($_SESSION['tmpval']['table_limit_offset_db']);
+            }
+        }
 
-                if (! $result) {
-                    $message = Message::error((string) $this->dbi->getError());
-                }
+        if ($execute_query_later) {
+            $sql = new Sql();
+            $sql->executeQueryAndSendQueryResponse(
+                null, // analyzed_sql_results
+                false, // is_gotofile
+                $db, // db
+                $table, // table
+                null, // find_real_end
+                null, // sql_query_for_bookmark
+                null, // extra_data
+                null, // message_to_show
+                null, // message
+                null, // sql_data
+                $goto, // goto
+                $pmaThemeImage, // pmaThemeImage
+                null, // disp_query
+                null, // disp_message
+                $query_type, // query_type
+                $sql_query, // sql_query
+                $selected, // selectedTables
+                null // complete_query
+            );
+        } elseif (! $run_parts) {
+            $this->dbi->selectDb($db);
+            $result = $this->dbi->tryQuery($sql_query);
+            if ($result && ! empty($sql_query_views)) {
+                $sql_query .= ' ' . $sql_query_views . ';';
+                $result = $this->dbi->tryQuery($sql_query_views);
+                unset($sql_query_views);
             }
-            if ($query_type == 'drop_tbl' || $query_type == 'empty_tbl') {
-                Util::handleDisableFKCheckCleanup($default_fk_check_value);
+
+            if (! $result) {
+                $message = Message::error((string) $this->dbi->getError());
             }
-        } else {
-            $message = Message::success(__('No change'));
+        }
+        if ($query_type == 'drop_tbl' || $query_type == 'empty_tbl') {
+            Util::handleDisableFKCheckCleanup($default_fk_check_value);
         }
 
         if (! empty($_POST['message'])) {
@@ -1721,5 +1609,229 @@ class StructureController extends AbstractController
 
         $this->response->disable();
         $this->render('database/structure/add_prefix', ['url_params' => $params]);
+    }
+
+    public function changePrefixForm(): void
+    {
+        global $db;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+        $submit_mult = $_POST['submit_mult'] ?? '';
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $route = '/database/structure';
+        $queryType = 'replace_prefix_tbl';
+        if ($submit_mult === 'copy_tbl_change_prefix') {
+            $queryType = 'copy_tbl_change_prefix';
+        }
+
+        $urlParams = [
+            'query_type' => $queryType,
+            'db' => $db,
+        ];
+        foreach ($selected as $selectedValue) {
+            $urlParams['selected'][] = $selectedValue;
+        }
+
+        $this->response->disable();
+        $this->render('database/structure/change_prefix_form', [
+            'route' => $route,
+            'url_params' => $urlParams,
+        ]);
+    }
+
+    public function dropForm(): void
+    {
+        global $db;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $views = $this->dbi->getVirtualTables($db);
+
+        $full_query_views = '';
+        $full_query = '';
+
+        foreach ($selected as $selectedValue) {
+            $current = $selectedValue;
+            if (! empty($views) && in_array($current, $views)) {
+                $full_query_views .= (empty($full_query_views) ? 'DROP VIEW ' : ', ')
+                    . Util::backquote(htmlspecialchars($current));
+            } else {
+                $full_query .= (empty($full_query) ? 'DROP TABLE ' : ', ')
+                    . Util::backquote(htmlspecialchars($current));
+            }
+        }
+
+        if (! empty($full_query)) {
+            $full_query .= ';<br>' . "\n";
+        }
+        if (! empty($full_query_views)) {
+            $full_query .= $full_query_views . ';<br>' . "\n";
+        }
+
+        $_url_params = [
+            'query_type' => 'drop_tbl',
+            'db' => $db,
+        ];
+        foreach ($selected as $selectedValue) {
+            $_url_params['selected'][] = $selectedValue;
+        }
+        foreach ($views as $current) {
+            $_url_params['views'][] = $current;
+        }
+
+        $this->render('database/structure/drop_form', [
+            'url_params' => $_url_params,
+            'full_query' => $full_query,
+            'is_foreign_key_check' => Util::isForeignKeyCheck(),
+        ]);
+    }
+
+    public function emptyForm(): void
+    {
+        global $db;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $fullQuery = '';
+        $urlParams = [
+            'query_type' => 'empty_tbl',
+            'db' => $db,
+        ];
+
+        foreach ($selected as $selectedValue) {
+            $fullQuery .= 'TRUNCATE ';
+            $fullQuery .= Util::backquote(htmlspecialchars($selectedValue)) . ';<br>';
+            $urlParams['selected'][] = $selectedValue;
+        }
+
+        $this->render('database/structure/empty_form', [
+            'url_params' => $urlParams,
+            'full_query' => $fullQuery,
+            'is_foreign_key_check' => Util::isForeignKeyCheck(),
+        ]);
+    }
+
+    public function checkTable(): void
+    {
+        global $db, $goto, $pmaThemeImage;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $sql_query = '';
+        $selectedCount = count($selected);
+
+        for ($i = 0; $i < $selectedCount; $i++) {
+            $sql_query .= (empty($sql_query) ? 'CHECK TABLE ' : ', ')
+                . Util::backquote($selected[$i]);
+        }
+
+        $sql = new Sql();
+        $sql->executeQueryAndSendQueryResponse(
+            null,
+            false,
+            $db,
+            '',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            $goto,
+            $pmaThemeImage,
+            null,
+            null,
+            'check_tbl',
+            $sql_query,
+            $selected,
+            null
+        );
+
+        if (empty($_POST['message'])) {
+            $_POST['message'] = Message::success();
+        }
+
+        unset($_POST['submit_mult']);
+
+        $this->index();
+    }
+
+    public function analyzeTable(): void
+    {
+        global $db, $goto, $pmaThemeImage;
+
+        $selected = $_POST['selected_tbl'] ?? [];
+
+        if (empty($selected)) {
+            $this->response->setRequestStatus(false);
+            $this->response->addJSON('message', __('No table selected.'));
+
+            return;
+        }
+
+        $sqlQuery = '';
+        $selectedCount = count($selected);
+
+        for ($i = 0; $i < $selectedCount; $i++) {
+            $sqlQuery .= (empty($sqlQuery) ? 'ANALYZE TABLE ' : ', ') . Util::backquote($selected[$i]);
+        }
+
+        $sql = new Sql();
+        $sql->executeQueryAndSendQueryResponse(
+            null,
+            false,
+            $db,
+            '',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            $goto,
+            $pmaThemeImage,
+            null,
+            null,
+            'analyze_tbl',
+            $sqlQuery,
+            $selected,
+            null
+        );
+
+        if (empty($_POST['message'])) {
+            $_POST['message'] = Message::success();
+        }
+
+        unset($_POST['submit_mult']);
+
+        $this->index();
     }
 }
