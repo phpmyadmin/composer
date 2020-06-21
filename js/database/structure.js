@@ -305,12 +305,18 @@ AJAX.registerOnload('database/structure.js', function () {
             url = 'index.php?route=/database/structure/central-columns-remove';
         } else if (action === 'check_tbl') {
             url = 'index.php?route=/database/structure/check-table';
+        } else if (action === 'checksum_tbl') {
+            url = 'index.php?route=/database/structure/checksum-table';
         } else if (action === 'drop_tbl') {
             url = 'index.php?route=/database/structure/drop-form';
         } else if (action === 'empty_tbl') {
             url = 'index.php?route=/database/structure/empty-form';
         } else if (action === 'export') {
             url = 'index.php?route=/database/structure/export';
+        } else if (action === 'optimize_tbl') {
+            url = 'index.php?route=/database/structure/optimize-table';
+        } else if (action === 'repair_tbl') {
+            url = 'index.php?route=/database/structure/repair-table';
         } else if (action === 'show_create') {
             url = 'index.php?route=/database/structure/show-create';
         } else {

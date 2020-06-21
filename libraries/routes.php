@@ -139,6 +139,7 @@ return static function (RouteCollector $routes) {
         $routes->addGroup('/structure', static function (RouteCollector $routes) {
             $routes->addRoute(['GET', 'POST'], '', [StructureController::class, 'index']);
             $routes->post('/add-prefix', [StructureController::class, 'addPrefix']);
+            $routes->post('/add-prefix-table', [StructureController::class, 'addPrefixTable']);
             $routes->post('/analyze-table', [StructureController::class, 'analyzeTable']);
             $routes->post('/central-columns-add', [StructureController::class, 'centralColumnsAdd']);
             $routes->post('/central-columns-make-consistent', [
@@ -148,18 +149,24 @@ return static function (RouteCollector $routes) {
             $routes->post('/central-columns-remove', [StructureController::class, 'centralColumnsRemove']);
             $routes->post('/change-prefix-form', [StructureController::class, 'changePrefixForm']);
             $routes->post('/check-table', [StructureController::class, 'checkTable']);
+            $routes->post('/checksum-table', [StructureController::class, 'checksumTable']);
             $routes->post('/copy-form', [StructureController::class, 'copyForm']);
             $routes->post('/drop-form', [StructureController::class, 'dropForm']);
+            $routes->post('/drop-table', [StructureController::class, 'dropTable']);
             $routes->post('/empty-form', [StructureController::class, 'emptyForm']);
+            $routes->post('/empty-table', [StructureController::class, 'emptyTable']);
             $routes->post('/export', [StructureController::class, 'export']);
             $routes->addRoute(['GET', 'POST'], '/favorite-table', [
                 StructureController::class,
                 'addRemoveFavoriteTablesAction',
             ]);
+            $routes->post('/optimize-table', [StructureController::class, 'optimizeTable']);
             $routes->addRoute(['GET', 'POST'], '/real-row-count', [
                 StructureController::class,
                 'handleRealRowCountRequestAction',
             ]);
+            $routes->post('/repair-table', [StructureController::class, 'repairTable']);
+            $routes->post('/replace-prefix', [StructureController::class, 'replacePrefix']);
             $routes->post('/show-create', [StructureController::class, 'showCreate']);
         });
         $routes->addRoute(['GET', 'POST'], '/tracking', [TrackingController::class, 'index']);
