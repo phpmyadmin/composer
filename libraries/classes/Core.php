@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
-use PhpMyAdmin\Di\Migration;
 use PhpMyAdmin\Display\Error as DisplayError;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use const DATE_RFC1123;
 use const E_USER_ERROR;
 use const E_USER_WARNING;
@@ -888,30 +888,35 @@ class Core
      */
     public static function setPostAsGlobal(array $post_patterns): void
     {
+        global $containerBuilder;
+
         foreach (array_keys($_POST) as $post_key) {
             foreach ($post_patterns as $one_post_pattern) {
                 if (! preg_match($one_post_pattern, $post_key)) {
                     continue;
                 }
 
-                Migration::getInstance()->setGlobal($post_key, $_POST[$post_key]);
+                $GLOBALS[$post_key] = $_POST[$post_key];
+                $containerBuilder->setParameter($post_key, $GLOBALS[$post_key]);
             }
         }
     }
 
-    /**
-     * Creates some globals from $_REQUEST
-     *
-     * @param string $param db|table
-     */
-    public static function setGlobalDbOrTable(string $param): void
+    public static function setDatabaseAndTableFromRequest(ContainerBuilder $containerBuilder): void
     {
-        $value = '';
-        if (self::isValid($_REQUEST[$param])) {
-            $value = $_REQUEST[$param];
-        }
-        Migration::getInstance()->setGlobal($param, $value);
-        Migration::getInstance()->setGlobal('url_params', [$param => $value] + $GLOBALS['url_params']);
+        global $db, $table, $url_params;
+
+        $databaseFromRequest = $_POST['db'] ?? $_GET['db'] ?? $_REQUEST['db'] ?? null;
+        $tableFromRequest = $_POST['table'] ?? $_GET['table'] ?? $_REQUEST['table'] ?? null;
+
+        $db = self::isValid($databaseFromRequest) ? $databaseFromRequest : '';
+        $table = self::isValid($tableFromRequest) ? $tableFromRequest : '';
+
+        $url_params['db'] = $db;
+        $url_params['table'] = $table;
+        $containerBuilder->setParameter('db', $db);
+        $containerBuilder->setParameter('table', $table);
+        $containerBuilder->setParameter('url_params', $url_params);
     }
 
     /**
