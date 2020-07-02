@@ -758,8 +758,10 @@ class InsertEdit
                 $foreignData,
                 $readOnly
             );
-        } elseif ($GLOBALS['cfg']['LongtextDoubleTextarea']
-            && mb_strstr($column['pma_type'], 'longtext')
+        } elseif ((
+                $GLOBALS['cfg']['LongtextDoubleTextarea']
+                && mb_strstr($column['pma_type'], 'longtext'))
+            || mb_strstr($column['pma_type'], 'json')
         ) {
             $html_output .= $this->getTextarea(
                 $column,
@@ -2483,6 +2485,11 @@ class InsertEdit
         $relation_field
     ) {
         $foreigner = $this->relation->searchColumnInForeigners($map, $relation_field);
+
+        if (! is_array($foreigner)) {
+            return '';
+        }
+
         $display_field = $this->relation->getDisplayField(
             $foreigner['foreign_db'],
             $foreigner['foreign_table']
@@ -2534,6 +2541,11 @@ class InsertEdit
         $relation_field_value
     ) {
         $foreigner = $this->relation->searchColumnInForeigners($map, $relation_field);
+
+        if (! is_array($foreigner)) {
+            return '';
+        }
+
         if ($_SESSION['tmpval']['relational_display'] == 'K') {
             // user chose "relational key" in the display options, so
             // the title contains the display field
