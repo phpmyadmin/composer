@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.12.1@9b860214d58c48b5cbe99bdb17914d0eb723c9cd">
+<files psalm-version="3.12.2@7c7ebd068f8acaba211d4a2c707c4ba90874fa26">
   <file src="libraries/classes/Advisor.php">
     <PossiblyNullArgument occurrences="1">
       <code>Util::formatByteDown($value, $limes, $comma)</code>
@@ -10,16 +10,9 @@
       <code>$db</code>
     </PossiblyInvalidArgument>
   </file>
-  <file src="libraries/classes/BrowseForeigners.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>$pageNow</code>
-      <code>$nbTotalPage</code>
-    </InvalidScalarArgument>
-  </file>
   <file src="libraries/classes/CentralColumns.php">
-    <InvalidScalarArgument occurrences="2">
+    <InvalidScalarArgument occurrences="1">
       <code>$tn_pageNow</code>
-      <code>$tn_nbTotalPage</code>
     </InvalidScalarArgument>
     <PossiblyInvalidArgument occurrences="5">
       <code>$this-&gt;dbi-&gt;getError(DatabaseInterface::CONNECT_CONTROL)</code>
@@ -230,9 +223,6 @@
       <code>$formatted_size</code>
       <code>$formatted_overhead</code>
     </InvalidScalarArgument>
-    <PossiblyNullArgument occurrences="1">
-      <code>$realRowCount</code>
-    </PossiblyNullArgument>
     <PossiblyNullArrayAccess occurrences="6">
       <code>$formatted_size</code>
       <code>$unit</code>
@@ -435,7 +425,9 @@
     <InvalidArgument occurrences="1">
       <code>$insert_errors</code>
     </InvalidArgument>
-    <PossiblyNullArgument occurrences="5">
+    <PossiblyNullArgument occurrences="7">
+      <code>$current_value</code>
+      <code>$current_value</code>
       <code>$multi_edit_columns_null</code>
       <code>$multi_edit_columns_null_prev</code>
       <code>$multi_edit_funcs</code>
@@ -739,22 +731,18 @@
     <InvalidOperand occurrences="1">
       <code>$index</code>
     </InvalidOperand>
-    <InvalidScalarArgument occurrences="3">
-      <code>$pageNow</code>
-      <code>$nbTotalPage</code>
+    <InvalidScalarArgument occurrences="1">
       <code>$original_length</code>
     </InvalidScalarArgument>
     <NullableReturnStatement occurrences="1">
       <code>$this-&gt;__get('sql_query')</code>
     </NullableReturnStatement>
-    <PossiblyInvalidArgument occurrences="5">
+    <PossiblyInvalidArgument occurrences="3">
       <code>$col_visib</code>
       <code>$col_visib</code>
       <code>$sortExpressionNoDirection</code>
-      <code>$transform_options</code>
-      <code>$transform_options</code>
     </PossiblyInvalidArgument>
-    <PossiblyNullArgument occurrences="57">
+    <PossiblyNullArgument occurrences="56">
       <code>$this-&gt;__get('sql_query')</code>
       <code>$db</code>
       <code>$table</code>
@@ -775,7 +763,6 @@
       <code>empty($field-&gt;database) ? $this-&gt;__get('db') : $field-&gt;database</code>
       <code>$this-&gt;__get('table')</code>
       <code>$this-&gt;__get('db')</code>
-      <code>$display_params</code>
       <code>$this-&gt;__get('fields_cnt')</code>
       <code>$this-&gt;__get('fields_meta')</code>
       <code>$this-&gt;__get('table')</code>
@@ -813,7 +800,7 @@
       <code>$this-&gt;__get('fields_cnt')</code>
       <code>$this-&gt;__get('fields_meta')</code>
     </PossiblyNullArgument>
-    <PossiblyNullArrayAccess occurrences="32">
+    <PossiblyNullArrayAccess occurrences="27">
       <code>$fields_meta[$i]</code>
       <code>$fields_meta[$i]</code>
       <code>$fields_meta[$i]</code>
@@ -835,11 +822,6 @@
       <code>$display_params['data']</code>
       <code>$display_params['data']</code>
       <code>$display_params['data']</code>
-      <code>$display_params['data']</code>
-      <code>$display_params['rowdata']</code>
-      <code>$display_params['data']</code>
-      <code>$display_params['data']</code>
-      <code>$display_params['rowdata']</code>
       <code>$fields_meta[$m]</code>
       <code>$fields_meta[0]</code>
       <code>$fields_meta[1]</code>
@@ -847,7 +829,17 @@
       <code>$display_size[0]</code>
       <code>$display_size[1]</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullArrayOffset occurrences="1">
+    <PossiblyNullArrayAssignment occurrences="7">
+      <code>$display_params['desc']</code>
+      <code>$display_params['desc']</code>
+      <code>$whereClauseMap[$row_no]</code>
+      <code>$whereClauseMap[$row_no]</code>
+      <code>$display_params['data']</code>
+      <code>$display_params['data']</code>
+      <code>$display_params['data']</code>
+    </PossiblyNullArrayAssignment>
+    <PossiblyNullArrayOffset occurrences="2">
+      <code>$whereClauseMap[$row_no]</code>
       <code>$map</code>
     </PossiblyNullArrayOffset>
     <PossiblyNullIterator occurrences="2">
@@ -937,9 +929,6 @@
     <InvalidNullableReturnType occurrences="1">
       <code>array</code>
     </InvalidNullableReturnType>
-    <InvalidScalarArgument occurrences="1">
-      <code>$formatted_size</code>
-    </InvalidScalarArgument>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
@@ -1123,9 +1112,6 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="libraries/classes/Git.php">
-    <InvalidArgument occurrences="1">
-      <code>$user</code>
-    </InvalidArgument>
     <ParadoxicalCondition occurrences="1">
       <code>null</code>
     </ParadoxicalCondition>
@@ -1134,9 +1120,8 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Html/Generator.php">
-    <InvalidScalarArgument occurrences="2">
+    <InvalidScalarArgument occurrences="1">
       <code>$server_msg</code>
-      <code>ceil($count / $max_count)</code>
     </InvalidScalarArgument>
   </file>
   <file src="libraries/classes/Import.php">
@@ -1193,9 +1178,6 @@
       <code>$tmp</code>
       <code>$insert_id</code>
     </PossiblyInvalidOperand>
-    <PossiblyNullArgument occurrences="1">
-      <code>$row</code>
-    </PossiblyNullArgument>
     <PossiblyNullArrayAccess occurrences="3">
       <code>$data_size[0]</code>
       <code>$data_size[1]</code>
@@ -1873,7 +1855,8 @@
       <code>$com_rs</code>
       <code>$com_rs</code>
     </InvalidArgument>
-    <InvalidReturnStatement occurrences="2">
+    <InvalidReturnStatement occurrences="3">
+      <code>$cfgRelation</code>
       <code>$this-&gt;queryAsControlUser($upd_query)</code>
       <code>$this-&gt;dbi-&gt;insertId(DatabaseInterface::CONNECT_CONTROL)</code>
     </InvalidReturnStatement>
@@ -2274,17 +2257,16 @@
     <EmptyArrayAccess occurrences="1">
       <code>$group[$group_name]['tab' . $sep . 'count']</code>
     </EmptyArrayAccess>
-    <InvalidArrayOffset occurrences="2">
+    <InvalidArrayOffset occurrences="3">
       <code>$group[$group_name]['is' . $sep . 'group']</code>
       <code>$group[$group_name]['tab' . $sep . 'count']</code>
+      <code>$units[$d]</code>
     </InvalidArrayOffset>
-    <InvalidReturnStatement occurrences="2">
+    <InvalidReturnStatement occurrences="1">
       <code>$return_value</code>
-      <code>$gis_data_types</code>
     </InvalidReturnStatement>
-    <InvalidReturnType occurrences="2">
+    <InvalidReturnType occurrences="1">
       <code>int</code>
-      <code>string[]</code>
     </InvalidReturnType>
     <InvalidScalarArgument occurrences="1">
       <code>$value</code>
