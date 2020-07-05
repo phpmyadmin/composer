@@ -165,62 +165,11 @@ if (! defined('PMA_NO_SESSION')) {
 $url_params = [];
 $containerBuilder->setParameter('url_params', $url_params);
 
-/**
- * holds page that should be displayed
- *
- * @global string $goto
- */
-$goto = '';
-$containerBuilder->setParameter('goto', $goto);
-// Security fix: disallow accessing serious server files via "?goto="
-if (isset($_REQUEST['goto']) && Core::checkPageValidity($_REQUEST['goto'])) {
-    $goto = $_REQUEST['goto'];
-    $url_params['goto'] = $goto;
-    $containerBuilder->setParameter('goto', $goto);
-    $containerBuilder->setParameter('url_params', $url_params);
-} else {
-    $PMA_Config->removeCookie('goto');
-    unset($_REQUEST['goto'], $_GET['goto'], $_POST['goto']);
-}
-
-/**
- * returning page
- *
- * @global string $back
- */
-if (isset($_REQUEST['back']) && Core::checkPageValidity($_REQUEST['back'])) {
-    $back = $_REQUEST['back'];
-    $containerBuilder->setParameter('back', $back);
-} else {
-    $PMA_Config->removeCookie('back');
-    unset($_REQUEST['back'], $_GET['back'], $_POST['back']);
-}
+Core::setGotoAndBackGlobals($containerBuilder, $PMA_Config);
 
 Core::checkTokenRequestParam();
 
 Core::setDatabaseAndTableFromRequest($containerBuilder);
-
-/**
- * Store currently selected recent table.
- * Affect $db and $table globals
- */
-if (isset($_REQUEST['selected_recent_table']) && Core::isValid($_REQUEST['selected_recent_table'])) {
-    $recent_table = json_decode($_REQUEST['selected_recent_table'], true);
-
-    $db = array_key_exists('db', $recent_table) && is_string($recent_table['db'])
-        ? $recent_table['db']
-        : '';
-    $table = array_key_exists('table', $recent_table) && is_string($recent_table['table'])
-        ? $recent_table['table']
-        : '';
-
-    $url_params['db'] = $db;
-    $url_params['table'] = $table;
-
-    $containerBuilder->setParameter('db', $db);
-    $containerBuilder->setParameter('table', $table);
-    $containerBuilder->setParameter('url_params', $url_params);
-}
 
 /**
  * SQL query to be executed
