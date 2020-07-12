@@ -56,11 +56,11 @@ class ExportController extends AbstractController
         global $db, $url_query, $url_params, $table, $export_page_title, $replaces;
         global $sql_query, $where_clause, $num_tables, $unlim_num_rows, $multi_values;
 
-        PageSettings::showGroup('Export');
+        $pageSettings = new PageSettings('Export');
+        $this->response->addHTML($pageSettings->getErrorHTML());
+        $this->response->addHTML($pageSettings->getHTML());
 
-        $header = $this->response->getHeader();
-        $scripts = $header->getScripts();
-        $scripts->addFile('export.js');
+        $this->addScriptFiles(['export.js']);
 
         $cfgRelation = $this->relation->getRelationsParam();
 

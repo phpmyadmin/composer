@@ -62,7 +62,9 @@ class ChangeController extends AbstractController
         global $tabindex_for_null, $tabindex_for_value, $o_rows, $biggest_max_file_size, $has_blob_field;
         global $titles, $jsvkey, $vkey, $current_result, $repopulate, $checked;
 
-        PageSettings::showGroup('Edit');
+        $pageSettings = new PageSettings('Edit');
+        $this->response->addHTML($pageSettings->getErrorHTML());
+        $this->response->addHTML($pageSettings->getHTML());
 
         DbTableExists::check();
 
@@ -114,13 +116,13 @@ class ChangeController extends AbstractController
          * START REGULAR OUTPUT
          */
 
-        $header = $this->response->getHeader();
-        $scripts = $header->getScripts();
-        $scripts->addFile('makegrid.js');
-        $scripts->addFile('sql.js');
-        $scripts->addFile('table/change.js');
-        $scripts->addFile('vendor/jquery/additional-methods.js');
-        $scripts->addFile('gis_data_editor.js');
+        $this->addScriptFiles([
+            'makegrid.js',
+            'sql.js',
+            'table/change.js',
+            'vendor/jquery/additional-methods.js',
+            'gis_data_editor.js',
+        ]);
 
         /**
          * Displays the query submitted and its result
@@ -262,7 +264,9 @@ class ChangeController extends AbstractController
                 $where_clause_array
             );
         } // end foreach on multi-edit
-        $scripts->addFiles($GLOBALS['plugin_scripts']);
+
+        $this->addScriptFiles($GLOBALS['plugin_scripts']);
+
         unset($unsaved_values, $checked, $repopulate, $GLOBALS['plugin_scripts']);
 
         if (! isset($after_insert)) {

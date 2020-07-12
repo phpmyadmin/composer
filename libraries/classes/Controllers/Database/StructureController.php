@@ -140,10 +140,7 @@ class StructureController extends AbstractController
 
         Common::database();
 
-        $this->response->getHeader()->getScripts()->addFiles([
-            'database/structure.js',
-            'table/change.js',
-        ]);
+        $this->addScriptFiles(['database/structure.js', 'table/change.js']);
 
         // Gets the database structure
         $this->getDatabaseInfo('_structure');
@@ -162,7 +159,9 @@ class StructureController extends AbstractController
 
         ReplicationInfo::load();
 
-        PageSettings::showGroup('DbStructure');
+        $pageSettings = new PageSettings('DbStructure');
+        $this->response->addHTML($pageSettings->getErrorHTML());
+        $this->response->addHTML($pageSettings->getHTML());
 
         if ($this->numTables > 0) {
             $urlParams = [
@@ -1458,7 +1457,7 @@ class StructureController extends AbstractController
         }
 
         $sql = new Sql();
-        $sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
             null,
             false,
             $db,
@@ -1477,7 +1476,7 @@ class StructureController extends AbstractController
             $sql_query,
             $selected,
             null
-        );
+        ));
 
         if (empty($_POST['message'])) {
             $_POST['message'] = Message::success();
@@ -1509,7 +1508,7 @@ class StructureController extends AbstractController
         }
 
         $sql = new Sql();
-        $sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
             null,
             false,
             $db,
@@ -1528,7 +1527,7 @@ class StructureController extends AbstractController
             $sqlQuery,
             $selected,
             null
-        );
+        ));
 
         if (empty($_POST['message'])) {
             $_POST['message'] = Message::success();
@@ -1560,7 +1559,7 @@ class StructureController extends AbstractController
         }
 
         $sql = new Sql();
-        $sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
             null,
             false,
             $db,
@@ -1579,7 +1578,7 @@ class StructureController extends AbstractController
             $sql_query,
             $selected,
             null
-        );
+        ));
 
         if (empty($_POST['message'])) {
             $_POST['message'] = Message::success();
@@ -1611,7 +1610,7 @@ class StructureController extends AbstractController
         }
 
         $sql = new Sql();
-        $sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
             null,
             false,
             $db,
@@ -1630,7 +1629,7 @@ class StructureController extends AbstractController
             $sql_query,
             $selected,
             null
-        );
+        ));
 
         if (empty($_POST['message'])) {
             $_POST['message'] = Message::success();
@@ -1662,7 +1661,7 @@ class StructureController extends AbstractController
         }
 
         $sql = new Sql();
-        $sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
             null,
             false,
             $db,
@@ -1681,7 +1680,7 @@ class StructureController extends AbstractController
             $sql_query,
             $selected,
             null
-        );
+        ));
 
         if (empty($_POST['message'])) {
             $_POST['message'] = Message::success();

@@ -37,7 +37,7 @@ class PageSettingsTest extends AbstractTestCase
      */
     public function testShowGroupNonExistent(): void
     {
-        $object = PageSettings::showGroup('NonExistent');
+        $object = new PageSettings('NonExistent');
 
         $this->assertEquals('', $object->getHTML());
     }
@@ -47,7 +47,7 @@ class PageSettingsTest extends AbstractTestCase
      */
     public function testShowGroupBrowse(): void
     {
-        $object = PageSettings::showGroup('Browse');
+        $object = new PageSettings('Browse');
 
         $html = $object->getHTML();
 
@@ -79,7 +79,9 @@ class PageSettingsTest extends AbstractTestCase
      */
     public function testGetNaviSettings(): void
     {
-        $html = PageSettings::getNaviSettings();
+        $pageSettings = new PageSettings('Navi', 'pma_navigation_settings');
+
+        $html = $pageSettings->getHTML();
 
         // Test some sample parts
         $this->assertStringContainsString(

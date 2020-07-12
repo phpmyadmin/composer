@@ -47,9 +47,7 @@ class QueryByExampleController extends AbstractController
         $savedSearch = null;
         $currentSearchId = null;
         if ($cfgRelation['savedsearcheswork']) {
-            $header = $this->response->getHeader();
-            $scripts = $header->getScripts();
-            $scripts->addFile('database/qbe.js');
+            $this->addScriptFiles(['database/qbe.js']);
 
             //Get saved search list.
             $savedSearch = new SavedSearches($GLOBALS, $this->relation);
@@ -105,7 +103,7 @@ class QueryByExampleController extends AbstractController
             } else {
                 $goto = Url::getFromRoute('/database/sql');
                 $sql = new Sql();
-                $sql->executeQueryAndSendQueryResponse(
+                $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
                     null, // analyzed_sql_results
                     false, // is_gotofile
                     $_POST['db'], // db
@@ -124,7 +122,7 @@ class QueryByExampleController extends AbstractController
                     $sql_query, // sql_query
                     null, // selectedTables
                     null // complete_query
-                );
+                ));
             }
         }
 

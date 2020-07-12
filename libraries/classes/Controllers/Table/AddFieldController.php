@@ -67,9 +67,7 @@ class AddFieldController extends AbstractController
         global $err_url, $message, $action, $active_page, $sql_query;
         global $num_fields, $regenerate, $result, $db, $table;
 
-        $header = $this->response->getHeader();
-        $scripts = $header->getScripts();
-        $scripts->addFile('table/structure.js');
+        $this->addScriptFiles(['table/structure.js']);
 
         // Check parameters
         Util::checkParameters(['db', 'table']);
@@ -175,9 +173,9 @@ class AddFieldController extends AbstractController
          */
         $action = Url::getFromRoute('/table/add-field');
 
-        ColumnsDefinition::displayForm(
-            $this->response,
-            $this->template,
+        $this->addScriptFiles(['vendor/jquery/jquery.uitablefilter.js', 'indexes.js']);
+
+        $templateData = ColumnsDefinition::displayForm(
             $this->transformations,
             $this->relation,
             $this->dbi,
@@ -185,5 +183,7 @@ class AddFieldController extends AbstractController
             $num_fields,
             $regenerate
         );
+
+        $this->render('columns_definitions/column_definitions_form', $templateData);
     }
 }

@@ -196,37 +196,4 @@ class PageSettings
     {
         return $this->_errorHTML;
     }
-
-    /**
-     * Group to show for Page-related settings
-     *
-     * @param string $formGroupName The name of config form group to display
-     *
-     * @return PageSettings
-     */
-    public static function showGroup($formGroupName)
-    {
-        $object = new PageSettings($formGroupName);
-
-        $response = Response::getInstance();
-        $response->addHTML($object->getErrorHTML());
-        $response->addHTML($object->getHTML());
-
-        return $object;
-    }
-
-    /**
-     * Get HTML for navigation settings
-     *
-     * @return string
-     */
-    public static function getNaviSettings()
-    {
-        $object = new PageSettings('Navi', 'pma_navigation_settings');
-
-        $response = Response::getInstance();
-        $response->addHTML($object->getErrorHTML());
-
-        return $object->getHTML();
-    }
 }

@@ -36,11 +36,11 @@ final class ExportController extends AbstractController
 
         Common::server();
 
-        PageSettings::showGroup('Export');
+        $pageSettings = new PageSettings('Export');
+        $this->response->addHTML($pageSettings->getErrorHTML());
+        $this->response->addHTML($pageSettings->getHTML());
 
-        $header = $this->response->getHeader();
-        $scripts = $header->getScripts();
-        $scripts->addFile('export.js');
+        $this->addScriptFiles(['export.js']);
 
         $export_page_title = __('View dump (schema) of databases') . "\n";
 

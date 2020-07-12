@@ -57,15 +57,17 @@ class SqlController extends AbstractController
 
         $this->checkUserPrivileges->getPrivileges();
 
-        PageSettings::showGroup('Browse');
+        $pageSettings = new PageSettings('Browse');
+        $this->response->addHTML($pageSettings->getErrorHTML());
+        $this->response->addHTML($pageSettings->getHTML());
 
-        $header = $this->response->getHeader();
-        $scripts = $header->getScripts();
-        $scripts->addFile('vendor/jquery/jquery.uitablefilter.js');
-        $scripts->addFile('table/change.js');
-        $scripts->addFile('indexes.js');
-        $scripts->addFile('gis_data_editor.js');
-        $scripts->addFile('multi_column_sort.js');
+        $this->addScriptFiles([
+            'vendor/jquery/jquery.uitablefilter.js',
+            'table/change.js',
+            'indexes.js',
+            'gis_data_editor.js',
+            'multi_column_sort.js',
+        ]);
 
         /**
          * Set ajax_reload in the response if it was already set
@@ -194,7 +196,7 @@ class SqlController extends AbstractController
             ]);
         }
 
-        $this->sql->executeQueryAndSendQueryResponse(
+        $this->response->addHTML($this->sql->executeQueryAndSendQueryResponse(
             $analyzed_sql_results,
             $is_gotofile,
             $db,
@@ -213,7 +215,7 @@ class SqlController extends AbstractController
             $sql_query,
             $selected ?? null,
             $complete_query ?? null
-        );
+        ));
     }
 
     /**
