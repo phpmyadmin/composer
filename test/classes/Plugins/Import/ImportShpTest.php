@@ -22,10 +22,7 @@ use function extension_loaded;
  */
 class ImportShpTest extends AbstractTestCase
 {
-    /**
-     * @var ImportShp
-     * @access protected
-     */
+    /** @var ImportShp */
     protected $object;
 
     /**
@@ -68,7 +65,7 @@ class ImportShpTest extends AbstractTestCase
      *
      * @param string $filename Name of test file
      */
-    protected function runImport($filename): void
+    protected function runImport(string $filename): void
     {
         $GLOBALS['import_file'] = $filename;
         $GLOBALS['import_handle'] = new File($filename);
@@ -215,7 +212,7 @@ class ImportShpTest extends AbstractTestCase
      *
      * @param string $import_notice Messages to check
      */
-    protected function assertMessages($import_notice): void
+    protected function assertMessages(string $import_notice): void
     {
         $this->assertStringContainsString(
             'The following structures have either been created or altered.',

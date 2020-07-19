@@ -187,24 +187,24 @@ class AuthenticationHttpTest extends AbstractNetworkTestCase
     /**
      * Test for PhpMyAdmin\Plugins\Auth\AuthenticationHttp::readCredentials
      *
-     * @param string $user           test username
-     * @param string $pass           test password
-     * @param string $userIndex      index to test username against
-     * @param string $passIndex      index to test username against
-     * @param string $expectedReturn expected return value from test
-     * @param string $expectedUser   expected username to be set
-     * @param string $expectedPass   expected password to be set
-     * @param string $old_usr        value for $_REQUEST['old_usr']
+     * @param string      $user           test username
+     * @param string      $pass           test password
+     * @param string      $userIndex      index to test username against
+     * @param string      $passIndex      index to test username against
+     * @param string|bool $expectedReturn expected return value from test
+     * @param string      $expectedUser   expected username to be set
+     * @param string|bool $expectedPass   expected password to be set
+     * @param string|bool $old_usr        value for $_REQUEST['old_usr']
      *
      * @dataProvider readCredentialsProvider
      */
     public function testAuthCheck(
-        $user,
-        $pass,
-        $userIndex,
-        $passIndex,
+        string $user,
+        string $pass,
+        string $userIndex,
+        string $passIndex,
         $expectedReturn,
-        $expectedUser,
+        string $expectedUser,
         $expectedPass,
         $old_usr = ''
     ): void {

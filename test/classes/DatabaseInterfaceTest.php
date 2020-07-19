@@ -39,18 +39,19 @@ class DatabaseInterfaceTest extends AbstractTestCase
     /**
      * Tests for DBI::getCurrentUser() method.
      *
-     * @param array  $value    value
-     * @param string $string   string
-     * @param array  $expected expected result
+     * @param array|false $value    value
+     * @param string      $string   string
+     * @param array       $expected expected result
      *
      * @test
      * @dataProvider currentUserData
      */
-    public function testGetCurrentUser($value, $string, $expected): void
+    public function testGetCurrentUser($value, string $string, array $expected): void
     {
         Util::cacheUnset('mysql_cur_user');
 
         $extension = new DbiDummy();
+        /** @var array $value */
         $extension->setResult('SELECT CURRENT_USER();', $value);
 
         $dbi = new DatabaseInterface($extension);
@@ -234,7 +235,7 @@ class DatabaseInterfaceTest extends AbstractTestCase
      *
      * @dataProvider errorData
      */
-    public function testFormatError($error_number, $error_message, $match): void
+    public function testFormatError(int $error_number, string $error_message, string $match): void
     {
         $this->assertStringContainsString(
             $match,
@@ -242,9 +243,6 @@ class DatabaseInterfaceTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @return array
-     */
     public function errorData(): array
     {
         return [
@@ -284,13 +282,13 @@ class DatabaseInterfaceTest extends AbstractTestCase
     /**
      * Tests for DBI::isAmazonRds() method.
      *
-     * @param mixed $value    value
-     * @param mixed $expected expected result
+     * @param array $value    value
+     * @param bool  $expected expected result
      *
      * @test
      * @dataProvider isAmazonRdsData
      */
-    public function atestIsAmazonRdsData($value, $expected): void
+    public function atestIsAmazonRdsData(array $value, bool $expected): void
     {
         Util::cacheUnset('is_amazon_rds');
 
@@ -342,7 +340,7 @@ class DatabaseInterfaceTest extends AbstractTestCase
      *
      * @dataProvider versionData
      */
-    public function testVersion($version, $expected, $major, $upgrade): void
+    public function testVersion(string $version, int $expected, int $major, bool $upgrade): void
     {
         $ver_int = Utilities::versionToInt($version);
         $this->assertEquals($expected, $ver_int);
@@ -350,9 +348,6 @@ class DatabaseInterfaceTest extends AbstractTestCase
         $this->assertEquals($upgrade, $ver_int < $GLOBALS['cfg']['MysqlMinVersion']['internal']);
     }
 
-    /**
-     * @return array
-     */
     public function versionData(): array
     {
         return [

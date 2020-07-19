@@ -24,7 +24,7 @@ class SysInfoTest extends AbstractTestCase
      *
      * @dataProvider sysInfoOsProvider
      */
-    public function testGetSysInfoOs($os, $expected): void
+    public function testGetSysInfoOs(string $os, string $expected): void
     {
         $this->assertEquals(
             $expected,
@@ -34,8 +34,6 @@ class SysInfoTest extends AbstractTestCase
 
     /**
      * Data provider for OS detection tests.
-     *
-     * @return array with test data
      */
     public function sysInfoOsProvider(): array
     {

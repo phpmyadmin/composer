@@ -76,7 +76,7 @@ class VersionInformationTest extends AbstractTestCase
      *
      * @dataProvider dataVersions
      */
-    public function testVersionToInt($version, $numeric): void
+    public function testVersionToInt(string $version, int $numeric): void
     {
         $versionInformation = new VersionInformation();
         $this->assertEquals(
@@ -87,8 +87,6 @@ class VersionInformationTest extends AbstractTestCase
 
     /**
      * Data provider for version parsing
-     *
-     * @return array with test data
      */
     public function dataVersions(): array
     {

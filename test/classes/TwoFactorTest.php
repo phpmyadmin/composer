@@ -40,10 +40,8 @@ class TwoFactorTest extends AbstractTestCase
      *
      * @param string $user   Username
      * @param array  $config Two factor authentication configuration
-     *
-     * @return TwoFactor
      */
-    public function getTwoFactorMock($user, $config)
+    public function getTwoFactorMock(string $user, array $config): TwoFactor
     {
         if (! isset($config['backend'])) {
             $config['backend'] = '';

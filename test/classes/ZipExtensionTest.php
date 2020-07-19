@@ -34,13 +34,13 @@ class ZipExtensionTest extends AbstractTestCase
     /**
      * Test for getContents
      *
-     * @param string $file           path to zip file
-     * @param string $specific_entry regular expression to match a file
-     * @param mixed  $output         expected output
+     * @param string      $file           path to zip file
+     * @param string|null $specific_entry regular expression to match a file
+     * @param mixed       $output         expected output
      *
      * @dataProvider provideTestGetContents
      */
-    public function testGetContents($file, $specific_entry, $output): void
+    public function testGetContents(string $file, ?string $specific_entry, $output): void
     {
         $this->assertEquals(
             $this->zipExtension->getContents($file, $specific_entry),
@@ -84,7 +84,7 @@ class ZipExtensionTest extends AbstractTestCase
      *
      * @dataProvider provideTestFindFile
      */
-    public function testFindFile($file, $file_regexp, $output): void
+    public function testFindFile(string $file, string $file_regexp, $output): void
     {
         $this->assertEquals(
             $this->zipExtension->findFile($file, $file_regexp),

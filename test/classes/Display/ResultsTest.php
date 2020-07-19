@@ -103,10 +103,10 @@ class ResultsTest extends AbstractTestCase
      * @dataProvider providerForTestGetTableNavigationButton
      */
     public function testGetTableNavigationButton(
-        $caption,
-        $title,
-        $pos,
-        $html_sql_query
+        string $caption,
+        string $title,
+        int $pos,
+        string $html_sql_query
     ): void {
         $GLOBALS['cfg']['TableNavigationLinksMode'] = 'icons';
         $_SESSION[' PMA_token '] = 'token';
@@ -212,12 +212,12 @@ class ResultsTest extends AbstractTestCase
      * @dataProvider dataProviderForTestGetClassesForColumn
      */
     public function testGetClassesForColumn(
-        $grid_edit_class,
-        $not_null_class,
-        $relation_class,
-        $hide_class,
-        $field_type_class,
-        $output
+        string $grid_edit_class,
+        string $not_null_class,
+        string $relation_class,
+        string $hide_class,
+        string $field_type_class,
+        string $output
     ): void {
         $GLOBALS['cfg']['BrowsePointerEnable'] = true;
         $GLOBALS['cfg']['BrowseMarkerEnable'] = true;
@@ -386,17 +386,17 @@ class ResultsTest extends AbstractTestCase
      * @param string $column_value column value
      * @param array  $row_info     information about row
      * @param string $field_name   column name
-     * @param bool   $output       output of getSpecialLinkUrl
+     * @param string $output       output of getSpecialLinkUrl
      *
      * @dataProvider dataProviderForTestGetSpecialLinkUrl
      */
     public function testGetSpecialLinkUrl(
-        $db,
-        $table,
-        $column_value,
-        $row_info,
-        $field_name,
-        $output
+        string $db,
+        string $table,
+        string $column_value,
+        array $row_info,
+        string $field_name,
+        string $output
     ): void {
         $specialSchemaLinks = [
             'information_schema' => [
@@ -514,16 +514,16 @@ class ResultsTest extends AbstractTestCase
      * @param int   $fields_count number of fields
      * @param array $row          current row data
      * @param array $col_order    the column order
-     * @param bool  $output       output of getRowInfoForSpecialLinks
+     * @param array $output       output of getRowInfoForSpecialLinks
      *
      * @dataProvider dataProviderForTestGetRowInfoForSpecialLinks
      */
     public function testGetRowInfoForSpecialLinks(
-        $fields_meta,
-        $fields_count,
-        $row,
-        $col_order,
-        $output
+        array $fields_meta,
+        int $fields_count,
+        array $row,
+        array $col_order,
+        array $output
     ): void {
         $this->object->properties['fields_meta'] = $fields_meta;
         $this->object->properties['fields_cnt'] = $fields_count;
@@ -573,7 +573,7 @@ class ResultsTest extends AbstractTestCase
      *
      * @dataProvider dataProviderForTestSetHighlightedColumnGlobalField
      */
-    public function testSetHighlightedColumnGlobalField($analyzed_sql, $output): void
+    public function testSetHighlightedColumnGlobalField(array $analyzed_sql, array $output): void
     {
         $this->callFunction(
             $this->object,
@@ -645,11 +645,11 @@ class ResultsTest extends AbstractTestCase
      * @param string $pftext     Partial or Full text
      * @param int    $limitChars Partial or Full text
      * @param string $str        the string to be tested
-     * @param bool   $output     return value of getPartialText
+     * @param array  $output     return value of getPartialText
      *
      * @dataProvider dataProviderForTestGetPartialText
      */
-    public function testGetPartialText($pftext, $limitChars, $str, $output): void
+    public function testGetPartialText(string $pftext, int $limitChars, string $str, array $output): void
     {
         $_SESSION['tmpval']['pftext'] = $pftext;
         $GLOBALS['cfg']['LimitChars'] = $limitChars;
@@ -777,35 +777,35 @@ class ResultsTest extends AbstractTestCase
     /**
      * Test handleNonPrintableContents
      *
-     * @param bool   $display_binary        show binary contents?
-     * @param bool   $display_blob          show blob contents?
-     * @param string $category              BLOB|BINARY|GEOMETRY
-     * @param string $content               the binary content
-     * @param string $transformation_plugin transformation plugin.
-     *                                      Can also be the default function:
-     *                                      PhpMyAdmin\Core::mimeDefaultFunction
-     * @param array  $transform_options     transformation parameters
-     * @param string $default_function      default transformation function
-     * @param object $meta                  the meta-information about the field
-     * @param array  $url_params            parameters that should go to the
-     *                                      download link
-     * @param bool   $is_truncated          the result is truncated or not
-     * @param string $output                the output of this function
+     * @param bool         $display_binary        show binary contents?
+     * @param bool         $display_blob          show blob contents?
+     * @param string       $category              BLOB|BINARY|GEOMETRY
+     * @param string       $content               the binary content
+     * @param array|object $transformation_plugin transformation plugin.
+     *                                            Can also be the default function:
+     *                                             PhpMyAdmin\Core::mimeDefaultFunction
+     * @param array|object $transform_options     transformation parameters
+     * @param array        $default_function      default transformation function
+     * @param object       $meta                  the meta-information about the field
+     * @param array        $url_params            parameters that should go to the
+     *                                            download link
+     * @param bool|null    $is_truncated          the result is truncated or not
+     * @param string       $output                the output of this function
      *
      * @dataProvider dataProviderForTestHandleNonPrintableContents
      */
     public function testHandleNonPrintableContents(
-        $display_binary,
-        $display_blob,
-        $category,
-        $content,
+        bool $display_binary,
+        bool $display_blob,
+        string $category,
+        ?string $content,
         $transformation_plugin,
-        array $transform_options,
-        $default_function,
+        $transform_options,
+        array $default_function,
         $meta,
-        $url_params,
-        $is_truncated,
-        $output
+        array $url_params,
+        ?bool $is_truncated,
+        string $output
     ): void {
         $_SESSION['tmpval']['display_binary'] = $display_binary;
         $_SESSION['tmpval']['display_blob'] = $display_blob;
@@ -965,42 +965,42 @@ class ResultsTest extends AbstractTestCase
     /**
      * Test getDataCellForNonNumericColumns
      *
-     * @param bool   $protectBinary         all|blob|noblob|no
-     * @param string $column                the relevant column in data row
-     * @param string $class                 the html class for column
-     * @param object $meta                  the meta-information about the field
-     * @param array  $map                   the list of relations
-     * @param array  $_url_params           the parameters for generate url
-     * @param bool   $condition_field       the column should highlighted
-     *                                      or not
-     * @param string $transformation_plugin the name of transformation function
-     * @param string $default_function      the default transformation function
-     * @param array  $transform_options     the transformation parameters
-     * @param bool   $is_field_truncated    is data truncated due to LimitChars
-     * @param array  $analyzed_sql_results  the analyzed query
-     * @param int    $dt_result             the link id associated to the query
-     *                                      which results have to be displayed
-     * @param int    $col_index             the column index
-     * @param string $output                the output of this function
+     * @param string       $protectBinary         all|blob|noblob|no
+     * @param string|null  $column                the relevant column in data row
+     * @param string       $class                 the html class for column
+     * @param object       $meta                  the meta-information about the field
+     * @param array        $map                   the list of relations
+     * @param array        $_url_params           the parameters for generate url
+     * @param bool         $condition_field       the column should highlighted
+     *                                            or not
+     * @param array|object $transformation_plugin the name of transformation function
+     * @param array|object $default_function      the default transformation function
+     * @param array        $transform_options     the transformation parameters
+     * @param bool         $is_field_truncated    is data truncated due to LimitChars
+     * @param array        $analyzed_sql_results  the analyzed query
+     * @param int          $dt_result             the link id associated to the query
+     *                                            which results have to be displayed
+     * @param int|string   $col_index             the column index
+     * @param string       $output                the output of this function
      *
      * @dataProvider dataProviderForTestGetDataCellForNonNumericColumns
      */
     public function testGetDataCellForNonNumericColumns(
-        $protectBinary,
-        $column,
-        $class,
+        string $protectBinary,
+        ?string $column,
+        string $class,
         $meta,
-        $map,
-        $_url_params,
-        $condition_field,
+        array $map,
+        array $_url_params,
+        bool $condition_field,
         $transformation_plugin,
         $default_function,
         array $transform_options,
-        $is_field_truncated,
-        $analyzed_sql_results,
-        $dt_result,
+        bool $is_field_truncated,
+        array $analyzed_sql_results,
+        int $dt_result,
         $col_index,
-        $output
+        string $output
     ): void {
         $_SESSION['tmpval']['display_binary'] = true;
         $_SESSION['tmpval']['display_blob'] = false;

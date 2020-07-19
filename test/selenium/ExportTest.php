@@ -42,7 +42,7 @@ class ExportTest extends TestBase
      * @dataProvider exportDataProvider
      * @group large
      */
-    public function testServerExport($plugin, $expected): void
+    public function testServerExport(string $plugin, array $expected): void
     {
         $text = $this->doExport('server', $plugin);
 
@@ -60,7 +60,7 @@ class ExportTest extends TestBase
      * @dataProvider exportDataProvider
      * @group large
      */
-    public function testDbExport($plugin, $expected): void
+    public function testDbExport(string $plugin, array $expected): void
     {
         $this->navigateDatabase($this->database_name);
 
@@ -80,7 +80,7 @@ class ExportTest extends TestBase
      * @dataProvider exportDataProvider
      * @group large
      */
-    public function testTableExport($plugin, $expected): void
+    public function testTableExport(string $plugin, array $expected): void
     {
         $this->dbQuery('INSERT INTO `' . $this->database_name . '`.`test_table` (val) VALUES (3);');
 
@@ -95,8 +95,6 @@ class ExportTest extends TestBase
 
     /**
      * Data provider for testServerExport
-     *
-     * @return array Test cases data
      */
     public function exportDataProvider(): array
     {
@@ -128,7 +126,7 @@ class ExportTest extends TestBase
      *
      * @return string export string
      */
-    private function doExport($type, $plugin): string
+    private function doExport(string $type, string $plugin): string
     {
         $this->expandMore();
         $this->waitForElement('partialLinkText', 'Export')->click();

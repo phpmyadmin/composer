@@ -34,16 +34,11 @@ class AdvisorTest extends AbstractTestCase
      *
      * @dataProvider escapeStrings
      */
-    public function testEscape($text, $expected): void
+    public function testEscape(string $text, string $expected): void
     {
         $this->assertEquals(Advisor::escapePercent($text), $expected);
     }
 
-    /**
-     * return of escape Strings
-     *
-     * @return array
-     */
     public function escapeStrings(): array
     {
         return [
@@ -84,15 +79,12 @@ class AdvisorTest extends AbstractTestCase
      *
      * @dataProvider advisorTimes
      */
-    public function testAdvisorBytime($time, $expected): void
+    public function testAdvisorBytime(float $time, string $expected): void
     {
         $result = Advisor::byTime($time, 2);
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * @return array
-     */
     public function advisorTimes(): array
     {
         return [
@@ -134,14 +126,14 @@ class AdvisorTest extends AbstractTestCase
     /**
      * Test for adding rule
      *
-     * @param array  $rule     Rule to test
-     * @param array  $expected Expected rendered rule in fired/errors list
-     * @param string $error    Expected error string (null if none error expected)
+     * @param array       $rule     Rule to test
+     * @param array       $expected Expected rendered rule in fired/errors list
+     * @param string|null $error    Expected error string (null if none error expected)
      *
      * @depends testParse
      * @dataProvider rulesProvider
      */
-    public function testAddRule($rule, $expected, $error): void
+    public function testAddRule(array $rule, array $expected, ?string $error): void
     {
         parent::loadDefaultConfig();
         parent::setLanguage();
@@ -161,11 +153,6 @@ class AdvisorTest extends AbstractTestCase
         $this->assertEquals([$expected], $runResult['fired']);
     }
 
-    /**
-     * rules Provider
-     *
-     * @return array
-     */
     public function rulesProvider(): array
     {
         return [

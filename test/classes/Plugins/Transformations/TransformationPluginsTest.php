@@ -65,8 +65,6 @@ class TransformationPluginsTest extends AbstractTestCase
 
     /**
      * Data provider for testGetMulti
-     *
-     * @return array with test data
      */
     public function multiDataProvider(): array
     {
@@ -710,7 +708,7 @@ class TransformationPluginsTest extends AbstractTestCase
      * @dataProvider multiDataProvider
      * @group medium
      */
-    public function testGetMulti($object, $method, $expected, $args = []): void
+    public function testGetMulti($object, string $method, $expected, array $args = []): void
     {
         if (! method_exists($object, $method)) {
             return;
@@ -725,8 +723,6 @@ class TransformationPluginsTest extends AbstractTestCase
 
     /**
      * Data provider for testTransformation
-     *
-     * @return array with test data
      */
     public function transformationDataProvider(): array
     {
@@ -1116,21 +1112,21 @@ class TransformationPluginsTest extends AbstractTestCase
     /**
      * Tests for applyTransformation, isSuccess, getError
      *
-     * @param object $object      instance of the plugin
-     * @param array  $applyArgs   arguments for applyTransformation
-     * @param string $transformed the expected output of applyTransformation
-     * @param bool   $success     the expected output of isSuccess
-     * @param string $error       the expected output of getError
+     * @param object     $object      instance of the plugin
+     * @param array      $applyArgs   arguments for applyTransformation
+     * @param string|int $transformed the expected output of applyTransformation
+     * @param bool       $success     the expected output of isSuccess
+     * @param string     $error       the expected output of getError
      *
      * @dataProvider transformationDataProvider
      * @group medium
      */
     public function testTransformation(
         $object,
-        $applyArgs,
+        array $applyArgs,
         $transformed,
-        $success = true,
-        $error = ''
+        bool $success = true,
+        string $error = ''
     ): void {
         $reflectionMethod = new ReflectionMethod($object, 'applyTransformation');
         $this->assertEquals(

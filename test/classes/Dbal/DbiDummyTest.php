@@ -55,15 +55,13 @@ class DbiDummyTest extends AbstractTestCase
      *
      * @dataProvider schemaData
      */
-    public function testSystemSchema($schema, $expected): void
+    public function testSystemSchema(string $schema, bool $expected): void
     {
         $this->assertEquals($expected, Utilities::isSystemSchema($schema));
     }
 
     /**
      * Data provider for schema test
-     *
-     * @return array with test data
      */
     public function schemaData(): array
     {
@@ -88,7 +86,7 @@ class DbiDummyTest extends AbstractTestCase
      *
      * @dataProvider errorData
      */
-    public function testFormatError($number, $message, $expected): void
+    public function testFormatError(int $number, string $message, string $expected): void
     {
         $GLOBALS['server'] = 1;
         $this->assertEquals(
@@ -99,8 +97,6 @@ class DbiDummyTest extends AbstractTestCase
 
     /**
      * Data provider for error formatting test
-     *
-     * @return array with test data
      */
     public function errorData(): array
     {

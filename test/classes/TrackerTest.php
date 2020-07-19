@@ -114,7 +114,7 @@ class TrackerTest extends AbstractTestCase
      * @test
      * @dataProvider getTableNameData
      */
-    public function testGetTableName($string, $expected): void
+    public function testGetTableName(string $string, string $expected): void
     {
         $this->assertEquals(
             $expected,
@@ -390,20 +390,20 @@ class TrackerTest extends AbstractTestCase
      * Test for Tracker::changeTracking(). This test is also invoked by two
      * other tests: testActivateTracking() and testDeactivateTracking()
      *
-     * @param string $dbname    Database name
-     * @param string $tablename Table name
-     * @param string $version   Version
-     * @param string $new_state State to change to
-     * @param string $type      Type of test
+     * @param string     $dbname    Database name
+     * @param string     $tablename Table name
+     * @param string     $version   Version
+     * @param string|int $new_state State to change to
+     * @param string     $type      Type of test
      *
      * @test
      */
     public function testChangeTracking(
-        $dbname = 'pma_db',
-        $tablename = 'pma_tbl',
-        $version = '0.1',
+        string $dbname = 'pma_db',
+        string $tablename = 'pma_tbl',
+        string $version = '0.1',
         $new_state = '1',
-        $type = null
+        ?string $type = null
     ): void {
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
@@ -567,7 +567,7 @@ class TrackerTest extends AbstractTestCase
      * @test
      * @dataProvider getTrackedDataProvider
      */
-    public function testGetTrackedData($fetchArrayReturn, $expectedArray): void
+    public function testGetTrackedData(array $fetchArrayReturn, array $expectedArray): void
     {
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
@@ -717,12 +717,12 @@ class TrackerTest extends AbstractTestCase
      * @dataProvider parseQueryData
      */
     public function testParseQuery(
-        $query,
-        $type,
-        $identifier,
-        $tablename,
-        $db = null,
-        $tablename_after_rename = null
+        string $query,
+        string $type,
+        string $identifier,
+        string $tablename,
+        ?string $db = null,
+        ?string $tablename_after_rename = null
     ): void {
         $result = Tracker::parseQuery($query);
 

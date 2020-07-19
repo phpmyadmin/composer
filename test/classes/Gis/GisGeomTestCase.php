@@ -20,15 +20,15 @@ abstract class GisGeomTestCase extends AbstractTestCase
     /**
      * test generateParams method
      *
-     * @param string $wkt    point in WKT form
-     * @param int    $index  index
-     * @param array  $params expected output array
+     * @param string   $wkt    point in WKT form
+     * @param int|null $index  index
+     * @param array    $params expected output array
      *
      * @dataProvider providerForTestGenerateParams
      */
-    public function testGenerateParams($wkt, $index, $params): void
+    public function testGenerateParams(string $wkt, ?int $index, array $params): void
     {
-        if ($index == null) {
+        if ($index === null) {
             $this->assertEquals(
                 $params,
                 $this->object->generateParams($wkt)
@@ -49,7 +49,7 @@ abstract class GisGeomTestCase extends AbstractTestCase
      *
      * @dataProvider providerForTestScaleRow
      */
-    public function testScaleRow($spatial, $min_max): void
+    public function testScaleRow(string $spatial, array $min_max): void
     {
         $this->assertEquals(
             $min_max,
