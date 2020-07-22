@@ -687,6 +687,8 @@ class Export
             ]);
         }
 
+        $html .= $this->template->render('display/export/query', ['sql_query' => $sqlQuery]);
+
         $html .= '<form method="post" action="' . Url::getFromRoute('/export')
             . '" name="dump" class="disableAjax">';
 
