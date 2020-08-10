@@ -58,19 +58,19 @@ class AuthenticationCookie extends AuthenticationPlugin
      *
      * @var string|null
      */
-    private $_cookie_iv = null;
+    private $cookie_iv = null;
 
     /**
      * Whether to use OpenSSL directly
      *
      * @var bool
      */
-    private $_use_openssl;
+    private $use_openssl;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_use_openssl = ! class_exists(Random::class);
+        $this->use_openssl = ! class_exists(Random::class);
     }
 
     /**
@@ -82,7 +82,7 @@ class AuthenticationCookie extends AuthenticationPlugin
      */
     public function setUseOpenSSL($use)
     {
-        $this->_use_openssl = $use;
+        $this->use_openssl = $use;
     }
 
     /**
@@ -235,6 +235,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             'lang' => $GLOBALS['lang'],
             'has_captcha' => ! empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
                 && ! empty($GLOBALS['cfg']['CaptchaLoginPublicKey']),
+            'use_captcha_checkbox' => ($GLOBALS['cfg']['CaptchaMethod'] ?? '') === 'checkbox',
             'captcha_key' => $GLOBALS['cfg']['CaptchaLoginPublicKey'],
             'form_params' => $_form_params,
             'errors' => $errors,
@@ -664,7 +665,7 @@ class AuthenticationCookie extends AuthenticationPlugin
     private function getSessionEncryptionSecret()
     {
         if (empty($_SESSION['encryption_key'])) {
-            if ($this->_use_openssl) {
+            if ($this->use_openssl) {
                 $_SESSION['encryption_key'] = openssl_random_pseudo_bytes(32);
             } else {
                 $_SESSION['encryption_key'] = Crypt\Random::string(32);
@@ -773,7 +774,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         $mac_secret = $this->getMACSecret($secret);
         $aes_secret = $this->getAESSecret($secret);
         $iv = $this->createIV();
-        if ($this->_use_openssl) {
+        if ($this->use_openssl) {
             $result = openssl_encrypt(
                 $data,
                 'AES-128-CBC',
@@ -829,7 +830,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             return false;
         }
 
-        if ($this->_use_openssl) {
+        if ($this->use_openssl) {
             $result = openssl_decrypt(
                 $data['payload'],
                 'AES-128-CBC',
@@ -855,7 +856,7 @@ class AuthenticationCookie extends AuthenticationPlugin
      */
     public function getIVSize()
     {
-        if ($this->_use_openssl) {
+        if ($this->use_openssl) {
             return openssl_cipher_iv_length('AES-128-CBC');
         }
 
@@ -873,10 +874,10 @@ class AuthenticationCookie extends AuthenticationPlugin
     public function createIV()
     {
         /* Testsuite shortcut only to allow predictable IV */
-        if ($this->_cookie_iv !== null) {
-            return $this->_cookie_iv;
+        if ($this->cookie_iv !== null) {
+            return $this->cookie_iv;
         }
-        if ($this->_use_openssl) {
+        if ($this->use_openssl) {
             return openssl_random_pseudo_bytes(
                 $this->getIVSize()
             );
@@ -898,7 +899,7 @@ class AuthenticationCookie extends AuthenticationPlugin
      */
     public function setIV($vector)
     {
-        $this->_cookie_iv = $vector;
+        $this->cookie_iv = $vector;
     }
 
     /**

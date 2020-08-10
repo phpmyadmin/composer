@@ -6,21 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 5.1.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2020-07-22 21:45+0200\n"
-"PO-Revision-Date: 2019-06-02 20:04+0000\n"
-"Last-Translator: suhaibsliman <swhaebs@gmail.com>\n"
-"Language-Team: Sorani <https://hosted.weblate.org/projects/phpmyadmin/master/"
-"ckb/>\n"
+"POT-Creation-Date: 2020-08-09 13:04-0300\n"
+"PO-Revision-Date: 2020-08-06 13:11+0000\n"
+"Last-Translator: William Desportes <williamdes@wdes.fr>\n"
+"Language-Team: Central Kurdish <https://hosted.weblate.org/projects/"
+"phpmyadmin/master/ckb/>\n"
 "Language: ckb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7-dev\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: libraries/classes/Advisor.php:319
-#, fuzzy, php-format
-#| msgid "Error text: %s"
+#, php-format
 msgid "Error when evaluating: %s"
 msgstr "هەڵەی نوسین: %s"
 
@@ -112,16 +111,15 @@ msgstr "گەڕان:"
 #: templates/database/operations/index.twig:190
 #: templates/database/operations/index.twig:230
 #: templates/database/search/main.twig:74
-#: templates/display/change_password/file_e.twig:4
-#: templates/display/export/options_format.twig:18
 #: templates/display/import/import.twig:232
-#: templates/display/results/table.twig:175
+#: templates/display/results/table.twig:175 templates/export.twig:422
 #: templates/gis_data_editor_form.twig:211 templates/header_location.twig:18
-#: templates/login/form.twig:83 templates/login/form.twig:85
-#: templates/preferences/manage/main.twig:46
+#: templates/login/form.twig:85 templates/login/form.twig:87
+#: templates/login/form.twig:90 templates/preferences/manage/main.twig:46
 #: templates/preferences/manage/main.twig:108
 #: templates/server/binlog/index.twig:34
 #: templates/server/privileges/add_user.twig:36
+#: templates/server/privileges/change_password.twig:70
 #: templates/server/privileges/edit_routine_privileges.twig:102
 #: templates/server/privileges/privileges_summary.twig:102
 #: templates/server/privileges/privileges_table.twig:833
@@ -169,10 +167,10 @@ msgid "Description"
 msgstr "پێناسە"
 
 #: libraries/classes/BrowseForeigners.php:331
-#: libraries/classes/Html/Generator.php:1283 libraries/classes/Language.php:203
-#: libraries/classes/Pdf.php:89
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:508
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:545
+#: libraries/classes/Html/Generator.php:1283 libraries/classes/Language.php:212
+#: libraries/classes/Pdf.php:92
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:532
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:569
 msgid "Page number:"
 msgstr "ژمارەی پەڕە:"
 
@@ -197,7 +195,7 @@ msgstr ""
 
 #: libraries/classes/CentralColumns.php:407
 msgid "Could not add columns!"
-msgstr "ستونەکان زیادبکە"
+msgstr "نەتوانرا ستوونەکان زیادبکرێت!"
 
 #: libraries/classes/CentralColumns.php:490
 #, php-format
@@ -207,11 +205,11 @@ msgstr ""
 
 #: libraries/classes/CentralColumns.php:503
 msgid "Could not remove columns!"
-msgstr "نەتوانرا خشتە تازەکە پاشەکەوت بکرێت"
+msgstr "نەتوانرا ستوونەکە بسڕێتەوە!"
 
 #: libraries/classes/CentralColumns.php:672
 msgid "YES"
-msgstr ""
+msgstr "بەڵێ"
 
 #: libraries/classes/CentralColumns.php:672
 msgid "NO"
@@ -221,11 +219,11 @@ msgstr ""
 #: libraries/classes/CentralColumns.php:955
 #: libraries/classes/Config/Descriptions.php:889
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:385
-#: libraries/classes/Display/Results.php:3209
+#: libraries/classes/Display/Results.php:3211
 #: libraries/classes/Html/Generator.php:757
 #: libraries/classes/Html/Generator.php:1019
-#: libraries/classes/Server/UserGroups.php:125 libraries/classes/Util.php:3219
-#: libraries/classes/Util.php:3220 templates/console/bookmark_content.twig:7
+#: libraries/classes/Server/UserGroups.php:125 libraries/classes/Util.php:3221
+#: libraries/classes/Util.php:3222 templates/console/bookmark_content.twig:7
 #: templates/console/display.twig:31 templates/console/display.twig:175
 #: templates/database/central_columns/main.twig:281
 #: templates/database/central_columns/main.twig:403
@@ -249,7 +247,7 @@ msgstr "چاکردن"
 #: libraries/classes/CentralColumns.php:960
 #: libraries/classes/CentralColumns.php:961
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:386
-#: libraries/classes/Display/Results.php:3278
+#: libraries/classes/Display/Results.php:3280
 #: libraries/classes/Server/UserGroups.php:134
 #: libraries/classes/Tracking.php:275 templates/console/bookmark_content.twig:7
 #: templates/database/central_columns/main.twig:284
@@ -258,10 +256,9 @@ msgstr "چاکردن"
 #: templates/database/designer/main.twig:390
 #: templates/database/qbe/ins_del_and_or_cell.twig:18
 #: templates/database/search/results.twig:43
-#: templates/display/export/template_loading.twig:22
 #: templates/display/results/table.twig:218
-#: templates/display/results/table.twig:219 templates/setup/home/index.twig:62
-#: templates/sql/query.twig:173
+#: templates/display/results/table.twig:219 templates/export.twig:38
+#: templates/setup/home/index.twig:62 templates/sql/query.twig:173
 msgid "Delete"
 msgstr "سڕینەوە"
 
@@ -282,7 +279,7 @@ msgstr "پاشەکەوتکردن"
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:486
 #: libraries/classes/Plugins/Export/ExportOdt.php:618
 #: libraries/classes/Plugins/Export/ExportTexytext.php:466
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:366
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:406
 #: templates/columns_definitions/table_fields_definitions.twig:9
 #: templates/database/central_columns/main.twig:17
 #: templates/database/central_columns/main.twig:236
@@ -293,7 +290,7 @@ msgstr "پاشەکەوتکردن"
 #: templates/database/triggers/list.twig:17 templates/setup/home/index.twig:43
 #: templates/table/structure/display_structure.twig:22
 msgid "Name"
-msgstr ""
+msgstr "ناو"
 
 #: libraries/classes/CentralColumns.php:1025
 #: libraries/classes/Database/Routines.php:902
@@ -307,9 +304,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportOdt.php:499
 #: libraries/classes/Plugins/Export/ExportTexytext.php:303
 #: libraries/classes/Plugins/Export/ExportTexytext.php:396
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:530
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:687
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:720
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:570
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:711
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:744
 #: templates/columns_definitions/table_fields_definitions.twig:12
 #: templates/database/central_columns/main.twig:21
 #: templates/database/central_columns/main.twig:240
@@ -344,9 +341,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportOdt.php:505
 #: libraries/classes/Plugins/Export/ExportTexytext.php:305
 #: libraries/classes/Plugins/Export/ExportTexytext.php:398
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:534
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:690
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:723
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:574
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:714
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:747
 #: templates/columns_definitions/table_fields_definitions.twig:20
 #: templates/database/central_columns/main.twig:29
 #: templates/database/central_columns/main.twig:248
@@ -383,12 +380,12 @@ msgid "Collation"
 msgstr "ڕێکخستن"
 
 #: libraries/classes/CentralColumns.php:1029
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:688
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:721
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:712
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:745
 #: templates/columns_definitions/table_fields_definitions.twig:27
 #: templates/table/structure/display_structure.twig:25
 msgid "Attributes"
-msgstr ""
+msgstr "تایبەتمەندی"
 
 #: libraries/classes/CentralColumns.php:1030
 #: libraries/classes/InsertEdit.php:2014
@@ -399,9 +396,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportOdt.php:502
 #: libraries/classes/Plugins/Export/ExportTexytext.php:304
 #: libraries/classes/Plugins/Export/ExportTexytext.php:397
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:532
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:689
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:722
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:572
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:713
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:746
 #: templates/columns_definitions/table_fields_definitions.twig:30
 #: templates/database/central_columns/main.twig:41
 #: templates/database/central_columns/main.twig:260
@@ -423,10 +420,8 @@ msgid "A_I"
 msgstr ""
 
 #: libraries/classes/Charsets/Collation.php:168
-#, fuzzy
-#| msgid "unknown"
 msgid "Unknown"
-msgstr "نەناسراوە"
+msgstr "نەناسراو"
 
 #: libraries/classes/Charsets/Collation.php:212
 #: libraries/classes/Charsets/Collation.php:481
@@ -436,8 +431,6 @@ msgstr ""
 
 #: libraries/classes/Charsets/Collation.php:215
 #: libraries/classes/Charsets/Collation.php:478
-#, fuzzy
-#| msgid "Data dictionary"
 msgctxt "Collation"
 msgid "German (dictionary order)"
 msgstr "فەرهەنگی زانیاریەکان"
@@ -485,8 +478,6 @@ msgid "multi-level"
 msgstr ""
 
 #: libraries/classes/Charsets/Collation.php:307
-#, fuzzy
-#| msgid "Binary log"
 msgctxt "Collation variant"
 msgid "binary"
 msgstr "تۆماری دوودانەیی"
@@ -497,11 +488,9 @@ msgid "no-pad"
 msgstr ""
 
 #: libraries/classes/Charsets/Collation.php:326
-#, fuzzy
-#| msgid "Binary log"
 msgctxt "Collation"
 msgid "Binary"
-msgstr "تۆماری دوودانەیی"
+msgstr "دووانەیی"
 
 #: libraries/classes/Charsets/Collation.php:338
 #: libraries/classes/Charsets/Collation.php:580
@@ -516,8 +505,6 @@ msgid "West European"
 msgstr ""
 
 #: libraries/classes/Charsets/Collation.php:355
-#, fuzzy
-#| msgid "Central columns"
 msgctxt "Collation"
 msgid "Central European"
 msgstr "ستونەکان زیادبکە"
@@ -526,7 +513,7 @@ msgstr "ستونەکان زیادبکە"
 #: libraries/classes/Charsets/Collation.php:534
 msgctxt "Collation"
 msgid "Russian"
-msgstr ""
+msgstr "رووسی"
 
 #: libraries/classes/Charsets/Collation.php:365
 msgctxt "Collation"
@@ -548,7 +535,7 @@ msgstr ""
 #: libraries/classes/Charsets/Collation.php:498
 msgctxt "Collation"
 msgid "Japanese"
-msgstr ""
+msgstr "یابانی"
 
 #: libraries/classes/Charsets/Collation.php:384
 msgctxt "Collation"
@@ -568,28 +555,28 @@ msgstr ""
 #: libraries/classes/Charsets/Collation.php:395
 msgctxt "Collation"
 msgid "Arabic"
-msgstr ""
+msgstr "عەرەبی"
 
 #: libraries/classes/Charsets/Collation.php:398
 #: libraries/classes/Charsets/Collation.php:513
 msgctxt "Collation"
 msgid "Korean"
-msgstr ""
+msgstr "کۆری"
 
 #: libraries/classes/Charsets/Collation.php:401
 msgctxt "Collation"
 msgid "Hebrew"
-msgstr ""
+msgstr "عیبری"
 
 #: libraries/classes/Charsets/Collation.php:404
 msgctxt "Collation"
 msgid "Georgian"
-msgstr ""
+msgstr "جۆرجی"
 
 #: libraries/classes/Charsets/Collation.php:407
 msgctxt "Collation"
 msgid "Greek"
-msgstr ""
+msgstr "یۆنانی"
 
 #: libraries/classes/Charsets/Collation.php:410
 msgctxt "Collation"
@@ -600,79 +587,75 @@ msgstr ""
 #: libraries/classes/Charsets/Collation.php:572
 msgctxt "Collation"
 msgid "Ukrainian"
-msgstr ""
+msgstr "ئۆکرانی"
 
 #: libraries/classes/Charsets/Collation.php:416
 #: libraries/classes/Charsets/Collation.php:568
 msgctxt "Collation"
 msgid "Turkish"
-msgstr ""
+msgstr "تورکی"
 
 #: libraries/classes/Charsets/Collation.php:419
 #: libraries/classes/Charsets/Collation.php:560
 msgctxt "Collation"
 msgid "Swedish"
-msgstr ""
+msgstr "سویدی"
 
 #: libraries/classes/Charsets/Collation.php:422
 #: libraries/classes/Charsets/Collation.php:564
 msgctxt "Collation"
 msgid "Thai"
-msgstr ""
+msgstr "تایلەندی"
 
 #: libraries/classes/Charsets/Collation.php:425
-#, fuzzy
-#| msgid "unknown"
 msgctxt "Collation"
 msgid "Unknown"
-msgstr "نەناسراوە"
+msgstr "نەناسراو"
 
 #: libraries/classes/Charsets/Collation.php:444
 msgctxt "Collation"
 msgid "Bulgarian"
-msgstr ""
+msgstr "بولگاری"
 
 #: libraries/classes/Charsets/Collation.php:455
 msgctxt "Collation"
 msgid "Croatian"
-msgstr ""
+msgstr "کرواتی"
 
 #: libraries/classes/Charsets/Collation.php:459
 msgctxt "Collation"
 msgid "Czech"
-msgstr ""
+msgstr "چیکی"
 
 #: libraries/classes/Charsets/Collation.php:463
 msgctxt "Collation"
 msgid "Danish"
-msgstr ""
+msgstr "دانيماركى"
 
 #: libraries/classes/Charsets/Collation.php:467
 msgctxt "Collation"
 msgid "English"
-msgstr ""
+msgstr "ئینگلیزی"
 
 #: libraries/classes/Charsets/Collation.php:471
-#, fuzzy
-#| msgid "Operator"
 msgctxt "Collation"
 msgid "Esperanto"
-msgstr "كرده‌هێما"
+msgstr "ئێسپێرانتۆ"
 
 #: libraries/classes/Charsets/Collation.php:475
 msgctxt "Collation"
 msgid "Estonian"
-msgstr ""
+msgstr "ئەستۆنی"
 
 #: libraries/classes/Charsets/Collation.php:490
 msgctxt "Collation"
 msgid "Hungarian"
-msgstr ""
+msgstr "هەنگاری"
 
 #: libraries/classes/Charsets/Collation.php:494
 msgctxt "Collation"
 msgid "Icelandic"
-msgstr ""
+msgstr "ئێسلەندی"
 
 #: libraries/classes/Charsets/Collation.php:501
 msgctxt "Collation"
@@ -682,34 +665,32 @@ msgstr ""
 #: libraries/classes/Charsets/Collation.php:505
 msgctxt "Collation"
 msgid "Latvian"
-msgstr ""
+msgstr "لاتڤی"
 
 #: libraries/classes/Charsets/Collation.php:509
 msgctxt "Collation"
 msgid "Lithuanian"
-msgstr ""
+msgstr "لیتوانی"
 
 #: libraries/classes/Charsets/Collation.php:517
 msgctxt "Collation"
 msgid "Burmese"
-msgstr ""
+msgstr "بورمیسی"
 
 #: libraries/classes/Charsets/Collation.php:520
-#, fuzzy
-#| msgid "Versions"
 msgctxt "Collation"
 msgid "Persian"
-msgstr "وەشانەکان"
+msgstr "فارسی"
 
 #: libraries/classes/Charsets/Collation.php:524
 msgctxt "Collation"
 msgid "Polish"
-msgstr ""
+msgstr "پۆڵەندی"
 
 #: libraries/classes/Charsets/Collation.php:531
 msgctxt "Collation"
 msgid "Romanian"
-msgstr ""
+msgstr "ڕۆمانی"
 
 #: libraries/classes/Charsets/Collation.php:538
 msgctxt "Collation"
@@ -719,17 +700,17 @@ msgstr ""
 #: libraries/classes/Charsets/Collation.php:542
 msgctxt "Collation"
 msgid "Slovak"
-msgstr ""
+msgstr "سلۆڤاکی"
 
 #: libraries/classes/Charsets/Collation.php:546
 msgctxt "Collation"
 msgid "Slovenian"
-msgstr ""
+msgstr "سلۆڤینی"
 
 #: libraries/classes/Charsets/Collation.php:576
 msgctxt "Collation"
 msgid "Vietnamese"
-msgstr ""
+msgstr "ڤێتنامی"
 
 #: libraries/classes/Common.php:110
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:338
@@ -962,8 +943,6 @@ msgid "Hide table structure actions"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:157
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations for Hex"
 msgstr "زانیاری وەشان"
 
@@ -990,8 +969,6 @@ msgid "Default transformations for Bool2Text"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:172
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations for External"
 msgstr "زانیاری وەشان"
 
@@ -1004,8 +981,6 @@ msgid "Default transformations for DateFormat"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:187
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations for Inline"
 msgstr "زانیاری وەشان"
 
@@ -1014,8 +989,6 @@ msgid "Default transformations for TextImageLink"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:197
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations for TextLink"
 msgstr "زانیاری وەشان"
 
@@ -1047,8 +1020,7 @@ msgstr ""
 msgid "Maximum execution time"
 msgstr ""
 
-#: libraries/classes/Config/Descriptions.php:216
-#: templates/display/export/options_output.twig:17
+#: libraries/classes/Config/Descriptions.php:216 templates/export.twig:293
 #, php-format
 msgid "Use %s statement"
 msgstr ""
@@ -1066,11 +1038,11 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:237 templates/sql/query.twig:41
 #: templates/table/structure/display_table_stats.twig:78
 msgid "Format"
-msgstr ""
+msgstr "فۆرمات"
 
 #: libraries/classes/Config/Descriptions.php:222
 msgid "Compression"
-msgstr ""
+msgstr "پەستاوتن"
 
 #: libraries/classes/Config/Descriptions.php:223
 #: libraries/classes/Config/Descriptions.php:230
@@ -1174,9 +1146,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportLatex.php:558
 #: libraries/classes/Plugins/Export/ExportOdt.php:514
 #: libraries/classes/Plugins/Export/ExportTexytext.php:403
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:550
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:703
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:726
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:590
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:727
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:750
 #: templates/columns_definitions/table_fields_definitions.twig:54
 #: templates/database/data_dictionary/index.twig:23
 #: templates/table/structure/display_structure.twig:29
@@ -1204,7 +1176,7 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:409
 #: libraries/classes/Plugins/Export/ExportOdt.php:520
 #: libraries/classes/Plugins/Export/ExportTexytext.php:407
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:557
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:597
 #: templates/columns_definitions/table_fields_definitions.twig:71
 #: templates/database/data_dictionary/index.twig:25
 #, fuzzy
@@ -1215,8 +1187,6 @@ msgstr "جۆری هەڵە !"
 #: libraries/classes/Config/Descriptions.php:249
 #: libraries/classes/Config/Descriptions.php:261
 #: libraries/classes/Config/Descriptions.php:299
-#, fuzzy
-#| msgid "Relation view"
 msgid "Relationships"
 msgstr "دووپاتکاری"
 
@@ -1230,9 +1200,8 @@ msgid "Save on server"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:264
-#: libraries/classes/Config/Descriptions.php:267
-#: templates/display/export/options_output_save_dir.twig:13
-#: templates/display/export/options_quick_export.twig:16
+#: libraries/classes/Config/Descriptions.php:267 templates/export.twig:150
+#: templates/export.twig:316
 msgid "Overwrite existing file(s)"
 msgstr ""
 
@@ -1312,10 +1281,9 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:292
 #: libraries/classes/Plugins/Export/ExportSql.php:354
-#, fuzzy, php-format
-#| msgid "Use this value"
+#, php-format
 msgid "%s view"
-msgstr "ئەم نرخە هەڵبژێرە"
+msgstr "‫%s بینراو"
 
 #: libraries/classes/Config/Descriptions.php:293
 msgid "Use ignore inserts"
@@ -1422,7 +1390,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:329
 msgid "General"
-msgstr ""
+msgstr "گشتی"
 
 #: libraries/classes/Config/Descriptions.php:330
 msgid "Set some commonly used options."
@@ -1450,7 +1418,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:337
 #: libraries/classes/Config/Descriptions.php:403 libraries/classes/Menu.php:527
-#: libraries/classes/Util.php:2494 libraries/config.values.php:155
+#: libraries/classes/Util.php:2496 libraries/config.values.php:155
 #: templates/navigation/tree/database_select.twig:11
 #: templates/server/databases/index.twig:8
 #: templates/server/privileges/user_properties.twig:20
@@ -1489,12 +1457,12 @@ msgid "Servers display options."
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:345
-#: libraries/classes/Controllers/Database/ExportController.php:96
 #: libraries/classes/Controllers/Server/DatabasesController.php:477
 #: libraries/classes/Navigation/Nodes/NodeTableContainer.php:24
 #: libraries/classes/Navigation/Nodes/NodeTableContainer.php:25
 #: libraries/classes/Plugins/Export/ExportXml.php:130
-#: libraries/classes/Server/Status/Data.php:130
+#: libraries/classes/Server/Status/Data.php:151
+#: templates/database/export/index.twig:23
 #: templates/database/structure/show_create.twig:6
 msgid "Tables"
 msgstr "خشتەکان"
@@ -1511,7 +1479,7 @@ msgstr "شاردنەوەی نیشاندەرەکان"
 
 #: libraries/classes/Config/Descriptions.php:348
 msgid "Microsoft Office"
-msgstr ""
+msgstr "‫Microsoft Office"
 
 #: libraries/classes/Config/Descriptions.php:352
 msgid "Other core settings"
@@ -1533,7 +1501,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:360
 msgid "Security"
-msgstr ""
+msgstr "ئاسایش"
 
 #: libraries/classes/Config/Descriptions.php:362
 msgid ""
@@ -1591,8 +1559,8 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:385 libraries/classes/Menu.php:285
 #: libraries/classes/Menu.php:402 libraries/classes/Menu.php:532
 #: libraries/classes/Navigation/Nodes/NodeTable.php:315
-#: libraries/classes/Util.php:1785 libraries/classes/Util.php:2495
-#: libraries/classes/Util.php:2510 libraries/classes/Util.php:2527
+#: libraries/classes/Util.php:1787 libraries/classes/Util.php:2497
+#: libraries/classes/Util.php:2512 libraries/classes/Util.php:2529
 #: libraries/config.values.php:62 libraries/config.values.php:76
 #: libraries/config.values.php:167 libraries/config.values.php:177
 msgid "SQL"
@@ -1618,7 +1586,7 @@ msgstr "ڕێکخستنەکانی هەنووکە"
 
 #: libraries/classes/Config/Descriptions.php:391
 msgid "Startup"
-msgstr ""
+msgstr "ڕێڕەوی دەستپێکردن"
 
 #: libraries/classes/Config/Descriptions.php:392
 msgid "Customize startup page."
@@ -1645,7 +1613,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:397
 msgid "Tabs"
-msgstr ""
+msgstr "بازدەرەکان"
 
 #: libraries/classes/Config/Descriptions.php:398
 msgid "Choose how you want tabs to work."
@@ -1679,7 +1647,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:408
 msgid "Warnings"
-msgstr ""
+msgstr "ئاگاداری"
 
 #: libraries/classes/Config/Descriptions.php:409
 msgid "Disable some of the warnings shown by phpMyAdmin."
@@ -1945,14 +1913,10 @@ msgid "Show databases navigation as tree"
 msgstr "پێشاندانی نیشاندەرەکان"
 
 #: libraries/classes/Config/Descriptions.php:520
-#, fuzzy
-#| msgid "Navigation panel settings"
 msgid "Navigation panel width"
 msgstr "تێبینیەکانی خشتە"
 
 #: libraries/classes/Config/Descriptions.php:521
-#, fuzzy
-#| msgid "Show logo in navigation panel."
 msgid "Set to 0 to collapse navigation panel."
 msgstr "تێبینیەکانی خشتە"
 
@@ -2110,14 +2074,10 @@ msgid "Whether to show events under database in the navigation tree"
 msgstr "پێشاندانی نیشاندەرەکان"
 
 #: libraries/classes/Config/Descriptions.php:575
-#, fuzzy
-#| msgid "Copying database"
 msgid "Expand single database"
 msgstr "لەبەرگرتنەوەی بنکەی دراو"
 
 #: libraries/classes/Config/Descriptions.php:577
-#, fuzzy
-#| msgid "Whether to show events under database in the navigation tree"
 msgid "Whether to expand single database in the navigation tree automatically."
 msgstr "پێشاندانی نیشاندەرەکان"
 
@@ -2131,7 +2091,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:581
 msgid "Recently used tables"
-msgstr ""
+msgstr "دووا خشتە بەکاربراوەکان"
 
 #: libraries/classes/Config/Descriptions.php:582
 #: libraries/classes/RecentFavoriteTable.php:267
@@ -2318,7 +2278,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:642
 msgid "Leave blank if not used."
-msgstr ""
+msgstr "بە بەتاڵی جێیبهێڵە حەگەر بەکارنایات."
 
 #: libraries/classes/Config/Descriptions.php:643
 msgid "Host authorization order"
@@ -2365,7 +2325,7 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:656
 #: templates/setup/home/index.twig:44
 msgid "Authentication type"
-msgstr ""
+msgstr "جۆری ڕێگەپێدان"
 
 #: libraries/classes/Config/Descriptions.php:658
 msgid ""
@@ -2973,8 +2933,8 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:149
 #: libraries/classes/Plugins/Export/ExportOdt.php:192
 #: libraries/classes/Plugins/Export/ExportTexytext.php:133
-#: libraries/classes/Server/Privileges.php:1939
-#: libraries/classes/Server/Privileges.php:1941
+#: libraries/classes/Server/Privileges.php:1940
+#: libraries/classes/Server/Privileges.php:1942
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:40
 #: templates/console/display.twig:184 templates/server/databases/index.twig:109
 #: templates/server/privileges/edit_routine_privileges.twig:17
@@ -3015,8 +2975,8 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:921
 #: libraries/classes/Database/Triggers.php:397
 #: libraries/classes/Plugins/Export/ExportXml.php:517
-#: libraries/classes/Server/Privileges.php:1945
-#: libraries/classes/Server/Privileges.php:1947
+#: libraries/classes/Server/Privileges.php:1946
+#: libraries/classes/Server/Privileges.php:1948
 #: templates/database/structure/show_create.twig:10
 #: templates/database/structure/table_header.twig:8
 #: templates/database/tracking/tables.twig:13
@@ -3217,8 +3177,6 @@ msgid "Order"
 msgstr "هیتر"
 
 #: libraries/classes/Config/Descriptions.php:989
-#, fuzzy
-#| msgid "Order by:"
 msgid "Order by"
 msgstr "هیتر"
 
@@ -3285,7 +3243,6 @@ msgid "maximum %s"
 msgstr ""
 
 #: libraries/classes/Config/FormDisplayTemplate.php:194
-#: libraries/classes/Display/Export.php:319
 #: libraries/classes/Engines/Pbxt.php:168
 #: libraries/classes/Html/Generator.php:885
 #: libraries/classes/Html/MySQLDocumentation.php:49
@@ -3302,11 +3259,11 @@ msgstr ""
 #: libraries/classes/Relation.php:150 libraries/classes/Relation.php:158
 #: libraries/config.values.php:145 libraries/config.values.php:188
 msgid "Disabled"
-msgstr ""
+msgstr "ناچالاککراوە"
 
 #: libraries/classes/Config/FormDisplayTemplate.php:319
-#: libraries/classes/Controllers/Database/StructureController.php:1704
-#: libraries/classes/Controllers/Database/StructureController.php:1787
+#: libraries/classes/Controllers/Database/StructureController.php:1707
+#: libraries/classes/Controllers/Database/StructureController.php:1790
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:495
 #: libraries/classes/Controllers/Table/DeleteController.php:27
 #: libraries/classes/Controllers/Table/StructureController.php:482
@@ -3317,7 +3274,7 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportLatex.php:636
 #: libraries/classes/Plugins/Export/ExportOdt.php:809
 #: libraries/classes/Plugins/Export/ExportTexytext.php:628
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:774
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:798
 #: templates/database/central_columns/main.twig:370
 #: templates/database/data_dictionary/index.twig:39
 #: templates/database/data_dictionary/index.twig:83
@@ -3354,7 +3311,7 @@ msgstr "بەڵێ"
 #: libraries/classes/Plugins/Export/ExportLatex.php:636
 #: libraries/classes/Plugins/Export/ExportOdt.php:808
 #: libraries/classes/Plugins/Export/ExportTexytext.php:628
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:773
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:797
 #: templates/database/central_columns/main.twig:370
 #: templates/database/data_dictionary/index.twig:39
 #: templates/database/data_dictionary/index.twig:83
@@ -3419,19 +3376,19 @@ msgstr "ڕاسپێراو"
 #: libraries/classes/Config/Forms/User/ExportForm.php:53
 #: libraries/classes/Config/Forms/User/ExportForm.php:98
 #: libraries/classes/Config/Forms/User/ExportForm.php:126
-#: libraries/classes/Controllers/Database/ExportController.php:97
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:719
 #: libraries/classes/Import.php:1385 libraries/classes/Menu.php:277
 #: libraries/classes/Menu.php:397
 #: libraries/classes/Navigation/Nodes/NodeColumn.php:43
 #: libraries/classes/Navigation/Nodes/NodeDatabase.php:57
 #: libraries/classes/Navigation/Nodes/NodeTable.php:306
-#: libraries/classes/Util.php:1784 libraries/classes/Util.php:2509
-#: libraries/classes/Util.php:2526 libraries/classes/Util.php:3214
+#: libraries/classes/Util.php:1786 libraries/classes/Util.php:2511
+#: libraries/classes/Util.php:2528 libraries/classes/Util.php:3216
 #: libraries/config.values.php:60 libraries/config.values.php:74
 #: libraries/config.values.php:165 libraries/config.values.php:175
 #: templates/columns_definitions/table_fields_definitions.twig:4
 #: templates/database/central_columns/edit_table_header.twig:2
+#: templates/database/export/index.twig:24
 #: templates/server/privileges/privileges_table.twig:328
 #: templates/table/tracking/structure_snapshot_columns.twig:1
 msgid "Structure"
@@ -3441,8 +3398,8 @@ msgstr "پێکهاتە"
 #: libraries/classes/Config/Forms/User/ExportForm.php:106
 #: libraries/classes/Config/Forms/User/ExportForm.php:131
 #: libraries/classes/Config/Forms/User/ExportForm.php:137
-#: libraries/classes/Controllers/Database/ExportController.php:98
 #: libraries/classes/Controllers/Server/DatabasesController.php:487
+#: templates/database/export/index.twig:25
 #: templates/server/privileges/privileges_table.twig:254
 #: templates/table/structure/display_table_stats.twig:17
 msgid "Data"
@@ -3459,7 +3416,7 @@ msgstr "Microsoft Word 2000"
 #: libraries/classes/Config/Forms/User/ExportForm.php:120
 #: libraries/classes/Config/Forms/User/ImportForm.php:50
 msgid "OpenDocument Spreadsheet"
-msgstr ""
+msgstr "‫OpenDocument خشتەیی"
 
 #: libraries/classes/Config/Forms/User/ExportForm.php:124
 msgid "OpenDocument Text"
@@ -3468,10 +3425,10 @@ msgstr "به‌ڵگه‌سازی"
 #: libraries/classes/Config/Forms/User/ExportForm.php:151
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:367
 #: libraries/classes/Menu.php:307 libraries/classes/Menu.php:422
-#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1613
-#: libraries/classes/Util.php:2498 libraries/classes/Util.php:2513
-#: libraries/classes/Util.php:2530 libraries/classes/Util.php:3221
-#: libraries/classes/Util.php:3222 templates/database/events/index.twig:55
+#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1614
+#: libraries/classes/Util.php:2500 libraries/classes/Util.php:2515
+#: libraries/classes/Util.php:2532 libraries/classes/Util.php:3223
+#: libraries/classes/Util.php:3224 templates/database/events/index.twig:55
 #: templates/database/events/index.twig:87
 #: templates/database/events/index.twig:88
 #: templates/database/events/row.twig:33
@@ -3486,10 +3443,9 @@ msgstr "به‌ڵگه‌سازی"
 #: templates/database/triggers/list.twig:37
 #: templates/database/triggers/list.twig:38
 #: templates/database/triggers/row.twig:35
-#: templates/display/export/option_header.twig:3
 #: templates/display/results/table.twig:223
 #: templates/display/results/table.twig:224
-#: templates/display/results/table.twig:262
+#: templates/display/results/table.twig:262 templates/export.twig:8
 #: templates/preferences/header.twig:42
 #: templates/preferences/manage/main.twig:68
 #: templates/server/privileges/new_user_ajax.twig:63
@@ -3515,8 +3471,8 @@ msgstr ""
 #: libraries/classes/Config/Forms/User/ImportForm.php:65
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:305
 #: libraries/classes/Menu.php:316 libraries/classes/Menu.php:432
-#: libraries/classes/Menu.php:565 libraries/classes/Util.php:2499
-#: libraries/classes/Util.php:2514 libraries/classes/Util.php:2531
+#: libraries/classes/Menu.php:565 libraries/classes/Util.php:2501
+#: libraries/classes/Util.php:2516 libraries/classes/Util.php:2533
 #: templates/display/import/import.twig:38 templates/preferences/header.twig:48
 #: templates/preferences/manage/main.twig:11
 #: templates/server/status/monitor/index.twig:78
@@ -3524,8 +3480,6 @@ msgid "Import"
 msgstr "هێنان"
 
 #: libraries/classes/Config/Forms/User/MainForm.php:35
-#, fuzzy
-#| msgid "Input transformation"
 msgid "Default transformations"
 msgstr "زانیاری وەشان"
 
@@ -3533,38 +3487,37 @@ msgstr "زانیاری وەشان"
 msgid "Cannot save settings, submitted configuration form contains errors!"
 msgstr ""
 
-#: libraries/classes/Config.php:735
+#: libraries/classes/Config.php:739
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
 msgstr ""
 
-#: libraries/classes/Config.php:773
+#: libraries/classes/Config.php:777
 msgid "Wrong permissions on configuration file, should not be world writable!"
 msgstr ""
 
-#: libraries/classes/Config.php:788
+#: libraries/classes/Config.php:792
 #, php-format
 msgid "Could not load default configuration from: %1$s"
 msgstr ""
 
-#: libraries/classes/Config.php:798
+#: libraries/classes/Config.php:802
 msgid "Failed to read configuration file!"
 msgstr "چاودێری شێوه‌پێدانی ناوخۆیی نەگونجاوە"
 
-#: libraries/classes/Config.php:801
+#: libraries/classes/Config.php:805
 msgid ""
 "This usually means there is a syntax error in it, please check any errors "
 "shown below."
 msgstr ""
 
-#: libraries/classes/Config.php:1362
+#: libraries/classes/Config.php:1366
 #, php-format
 msgid "Invalid server index: %s"
 msgstr ""
 
-#: libraries/classes/Config.php:1375
+#: libraries/classes/Config.php:1379
 #, fuzzy, php-format
-#| msgid "Server"
 msgid "Server %d"
 msgstr "سێرڤەر"
 
@@ -3748,11 +3701,7 @@ msgstr ""
 msgid "Showing rows %1$s - %2$s."
 msgstr "پیشاندانی خانەکان %1$s - %2$s."
 
-#: libraries/classes/Controllers/Database/ExportController.php:75
-msgid "View dump (schema) of database"
-msgstr "نیشاندانى بۆشایى (هێڵکارى) لە بنکەى دراوە"
-
-#: libraries/classes/Controllers/Database/ExportController.php:80
+#: libraries/classes/Controllers/Database/ExportController.php:78
 #: libraries/classes/Controllers/Database/TrackingController.php:125
 #: libraries/classes/Controllers/ExportController.php:457
 #: libraries/classes/Database/Qbe.php:359
@@ -3761,13 +3710,11 @@ msgstr "نیشاندانى بۆشایى (هێڵکارى) لە بنکەى درا�
 msgid "No tables found in database."
 msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو."
 
-#: libraries/classes/Controllers/Database/ExportController.php:101
-#: templates/database/designer/database_tables.twig:31
-#: templates/database/search/main.twig:43
-#: templates/display/export/select_options.twig:4
-#: templates/server/replication/database_multibox.twig:7
-msgid "Select all"
-msgstr "هەڵبژاردنی هەموو"
+#: libraries/classes/Controllers/Database/ExportController.php:156
+#: libraries/classes/Controllers/Server/ExportController.php:72
+#: libraries/classes/Controllers/Table/ExportController.php:128
+msgid "Could not load export plugins, please check your installation!"
+msgstr ""
 
 #: libraries/classes/Controllers/Database/OperationsController.php:97
 #: libraries/classes/Controllers/Table/CreateController.php:76
@@ -3804,31 +3751,31 @@ msgstr "بیرۆکەی ڕێکخستنەکانی PhpMyAdmin ناچالاک کرا
 msgid "Access denied!"
 msgstr "ڕێگەنەدرا بە بینین!"
 
-#: libraries/classes/Controllers/Database/StructureController.php:272
+#: libraries/classes/Controllers/Database/StructureController.php:275
 msgid "Favorite List is full!"
 msgstr "لیستی دڵخوازەکان پڕە!"
 
-#: libraries/classes/Controllers/Database/StructureController.php:547
+#: libraries/classes/Controllers/Database/StructureController.php:550
 #: templates/table/operations/index.twig:356
 #: templates/table/operations/view.twig:27
 #, php-format
 msgid "View %s has been dropped."
 msgstr "%s سڕایەوە"
 
-#: libraries/classes/Controllers/Database/StructureController.php:548
+#: libraries/classes/Controllers/Database/StructureController.php:551
 #: templates/table/operations/index.twig:356
 #, php-format
 msgid "Table %s has been dropped."
 msgstr "خشتەی %s سڕایەوە"
 
-#: libraries/classes/Controllers/Database/StructureController.php:604
+#: libraries/classes/Controllers/Database/StructureController.php:607
 #: templates/table/operations/index.twig:335
 #, php-format
 msgid "Table %s has been emptied."
 msgstr "خشتەی %s خاڵی کرا."
 
-#: libraries/classes/Controllers/Database/StructureController.php:776
-#: libraries/classes/Display/Results.php:4414
+#: libraries/classes/Controllers/Database/StructureController.php:779
+#: libraries/classes/Display/Results.php:4419
 #, php-format
 msgid ""
 "This view has at least this number of rows. Please refer to %sdocumentation"
@@ -3837,41 +3784,41 @@ msgstr ""
 "لەم تێڕوانیینە بەلایەنی کەم ئەم ژمارە دێڕە بوونی هەیە.تکایە سەردانی "
 "%sبەڵگەسازی%s بکە ."
 
-#: libraries/classes/Controllers/Database/StructureController.php:1013
+#: libraries/classes/Controllers/Database/StructureController.php:1016
 msgid "unknown"
 msgstr "نەناسراوە"
 
-#: libraries/classes/Controllers/Database/StructureController.php:1154
-#: libraries/classes/Controllers/Database/StructureController.php:1170
-#: libraries/classes/Controllers/Database/StructureController.php:1211
-#: libraries/classes/Controllers/Database/StructureController.php:1244
-#: libraries/classes/Controllers/Database/StructureController.php:1267
-#: libraries/classes/Controllers/Database/StructureController.php:1290
-#: libraries/classes/Controllers/Database/StructureController.php:1313
-#: libraries/classes/Controllers/Database/StructureController.php:1336
-#: libraries/classes/Controllers/Database/StructureController.php:1366
-#: libraries/classes/Controllers/Database/StructureController.php:1417
-#: libraries/classes/Controllers/Database/StructureController.php:1446
-#: libraries/classes/Controllers/Database/StructureController.php:1498
-#: libraries/classes/Controllers/Database/StructureController.php:1549
-#: libraries/classes/Controllers/Database/StructureController.php:1600
-#: libraries/classes/Controllers/Database/StructureController.php:1651
+#: libraries/classes/Controllers/Database/StructureController.php:1157
+#: libraries/classes/Controllers/Database/StructureController.php:1173
+#: libraries/classes/Controllers/Database/StructureController.php:1214
+#: libraries/classes/Controllers/Database/StructureController.php:1247
+#: libraries/classes/Controllers/Database/StructureController.php:1270
+#: libraries/classes/Controllers/Database/StructureController.php:1293
+#: libraries/classes/Controllers/Database/StructureController.php:1316
+#: libraries/classes/Controllers/Database/StructureController.php:1339
+#: libraries/classes/Controllers/Database/StructureController.php:1369
+#: libraries/classes/Controllers/Database/StructureController.php:1420
+#: libraries/classes/Controllers/Database/StructureController.php:1449
+#: libraries/classes/Controllers/Database/StructureController.php:1501
+#: libraries/classes/Controllers/Database/StructureController.php:1552
+#: libraries/classes/Controllers/Database/StructureController.php:1603
+#: libraries/classes/Controllers/Database/StructureController.php:1654
 #, fuzzy
 #| msgid "No tables selected."
 msgid "No table selected."
 msgstr "هیچ خشتەیەک هەڵنەبژێردراوە."
 
-#: libraries/classes/Controllers/Database/StructureController.php:1252
-#: libraries/classes/Controllers/Database/StructureController.php:1275
-#: libraries/classes/Controllers/Database/StructureController.php:1298
+#: libraries/classes/Controllers/Database/StructureController.php:1255
+#: libraries/classes/Controllers/Database/StructureController.php:1278
+#: libraries/classes/Controllers/Database/StructureController.php:1301
 msgid "Success!"
 msgstr ""
 
-#: libraries/classes/Controllers/Database/StructureController.php:1705
-#: libraries/classes/Controllers/Database/StructureController.php:1788
+#: libraries/classes/Controllers/Database/StructureController.php:1708
+#: libraries/classes/Controllers/Database/StructureController.php:1791
 #: libraries/classes/Controllers/Table/OperationsController.php:325
 #: libraries/classes/Controllers/Table/ReplaceController.php:391
-#: libraries/classes/Core.php:854 templates/preview_sql.twig:3
+#: libraries/classes/Core.php:856 templates/preview_sql.twig:3
 msgid "No change"
 msgstr ""
 
@@ -3891,7 +3838,7 @@ msgstr ""
 msgid "No tables selected."
 msgstr "هیچ خشتەیەک هەڵنەبژێردراوە."
 
-#: libraries/classes/Controllers/Database/TrackingController.php:151
+#: libraries/classes/Controllers/Database/TrackingController.php:154
 msgid "Database Log"
 msgstr "پێشینەی کارکردی بنکەی زانیاری"
 
@@ -3939,8 +3886,8 @@ msgstr ""
 
 #: libraries/classes/Controllers/HomeController.php:115
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:607
-#: libraries/classes/Controllers/UserPasswordController.php:79
-#: templates/display/change_password/file_a.twig:9
+#: libraries/classes/Controllers/UserPasswordController.php:78
+#: templates/server/privileges/change_password.twig:10
 msgid "Change password"
 msgstr "گۆڕینی وشەی نهێنی"
 
@@ -3967,20 +3914,20 @@ msgid ""
 "Or alternately go to 'Operations' tab of any database to set it up there."
 msgstr "یان دەتوانیت لە تابی کرداری هەر بنکەی دراوەیەکدا ڕێکی بخەیت"
 
-#: libraries/classes/Controllers/HomeController.php:363
+#: libraries/classes/Controllers/HomeController.php:368
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
 "split strings correctly and it may result in unexpected results."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:378
+#: libraries/classes/Controllers/HomeController.php:383
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:393
+#: libraries/classes/Controllers/HomeController.php:398
 msgid ""
 "Your PHP parameter [a@https://secure.php.net/manual/en/session.configuration."
 "php#ini.session.gc-maxlifetime@_blank]session.gc_maxlifetime[/a] is lower "
@@ -3988,29 +3935,29 @@ msgid ""
 "might expire sooner than configured in phpMyAdmin."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:412
+#: libraries/classes/Controllers/HomeController.php:417
 msgid ""
 "Login cookie store is lower than cookie validity configured in phpMyAdmin, "
 "because of this, your login will expire sooner than configured in phpMyAdmin."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:430
+#: libraries/classes/Controllers/HomeController.php:435
 msgid ""
 "Your server is running with default values for the controluser and password "
 "(controlpass) and is open to intrusion; you really should fix this security "
 "weakness by changing the password for controluser 'pma'."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:446
+#: libraries/classes/Controllers/HomeController.php:451
 msgid "The configuration file now needs a secret passphrase (blowfish_secret)."
 msgstr ""
 "پەڕگەی ڕێکخستنەکان ئێستا پێویستی بە وشەیەکی نهێنی هەیە (blowfish_secret)."
 
-#: libraries/classes/Controllers/HomeController.php:453
+#: libraries/classes/Controllers/HomeController.php:458
 msgid "The secret passphrase in configuration (blowfish_secret) is too short."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:467
+#: libraries/classes/Controllers/HomeController.php:472
 msgid ""
 "Directory [code]config[/code], which is used by the setup script, still "
 "exists in your phpMyAdmin directory. It is strongly recommended to remove it "
@@ -4023,14 +3970,14 @@ msgstr ""
 "تکایە بوخچەی ناوبراو بسڕنەوە ئەگەر دامەزراندنی PhpMyAdmin بە سەرکەوتوویی "
 "کۆتایی هاتووە."
 
-#: libraries/classes/Controllers/HomeController.php:487
+#: libraries/classes/Controllers/HomeController.php:492
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
 "issues."
 msgstr ""
 
-#: libraries/classes/Controllers/HomeController.php:502
+#: libraries/classes/Controllers/HomeController.php:507
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
@@ -4352,8 +4299,7 @@ msgid "Matched rows:"
 msgstr "ریزە هاوتاکان:"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:115
-#: libraries/classes/Html/Generator.php:991
-#: templates/display/export/query.twig:4
+#: libraries/classes/Html/Generator.php:991 templates/export.twig:49
 msgid "SQL query:"
 msgstr "داواکاری سیكوێڵ"
 
@@ -4363,8 +4309,6 @@ msgid "Y values"
 msgstr "نرخەکانی Y"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:122
-#, fuzzy
-#| msgid "Please enter the same value again"
 msgid "Please enter the SQL query first."
 msgstr "%d ژمارەی ڕیزی نادروستە."
 
@@ -4377,13 +4321,13 @@ msgid "The user name is empty!"
 msgstr "ناوی بەکارهێنانی خانەخوێ بەتاڵە!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:127
-#: libraries/classes/Server/Privileges.php:1015
+#: libraries/classes/Server/Privileges.php:1016
 #: libraries/classes/UserPassword.php:42
 msgid "The password is empty!"
 msgstr "وشەی نهێنی بەتاڵە!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:128
-#: libraries/classes/Server/Privileges.php:1013
+#: libraries/classes/Server/Privileges.php:1014
 #: libraries/classes/UserPassword.php:46
 msgid "The passwords aren't the same!"
 msgstr "تێپەڕە وشەکان وەک یەک نین!"
@@ -4418,19 +4362,19 @@ msgstr "ڕیزەکە سڕایەوە"
 #. l10n: Other, small valued, queries
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:139
 #: libraries/classes/Controllers/Server/Status/QueriesController.php:74
-#: libraries/classes/Server/Status/Data.php:134
+#: libraries/classes/Server/Status/Data.php:155
 msgid "Other"
 msgstr "هیتر"
 
 #. l10n: Thousands separator
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:141
-#: libraries/classes/Util.php:628 libraries/classes/Util.php:660
+#: libraries/classes/Util.php:630 libraries/classes/Util.php:662
 msgid ","
 msgstr ","
 
 #. l10n: Decimal separator
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:143
-#: libraries/classes/Util.php:626 libraries/classes/Util.php:658
+#: libraries/classes/Util.php:628 libraries/classes/Util.php:660
 msgid "."
 msgstr "."
 
@@ -4535,45 +4479,45 @@ msgstr "پڕۆسەکان"
 
 #. l10n: shortcuts for Byte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:182
-#: libraries/classes/Util.php:538
+#: libraries/classes/Util.php:540
 msgid "B"
 msgstr "بایت"
 
 #. l10n: shortcuts for Kilobyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:183
-#: libraries/classes/Util.php:540
+#: libraries/classes/Util.php:542
 #: templates/server/status/monitor/index.twig:179
 msgid "KiB"
 msgstr "کیلۆبایت"
 
 #. l10n: shortcuts for Megabyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:184
-#: libraries/classes/Util.php:542
+#: libraries/classes/Util.php:544
 #: templates/server/status/monitor/index.twig:180
 msgid "MiB"
 msgstr "مێگابایت"
 
 #. l10n: shortcuts for Gigabyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:185
-#: libraries/classes/Util.php:544
+#: libraries/classes/Util.php:546
 msgid "GiB"
 msgstr "گێگابایت"
 
 #. l10n: shortcuts for Terabyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:186
-#: libraries/classes/Util.php:546
+#: libraries/classes/Util.php:548
 msgid "TiB"
 msgstr "تێرابایت"
 
 #. l10n: shortcuts for Petabyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:187
-#: libraries/classes/Util.php:548
+#: libraries/classes/Util.php:550
 msgid "PiB"
 msgstr "پێتابایت"
 
 #. l10n: shortcuts for Exabyte
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:188
-#: libraries/classes/Util.php:550
+#: libraries/classes/Util.php:552
 msgid "EiB"
 msgstr "ئێکسابایت"
 
@@ -4593,7 +4537,7 @@ msgid "Traffic"
 msgstr "هاتووچوو"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:194
-#: libraries/classes/Menu.php:570 libraries/classes/Util.php:2500
+#: libraries/classes/Menu.php:570 libraries/classes/Util.php:2502
 #: templates/server/status/monitor/index.twig:12
 msgid "Settings"
 msgstr "ڕێکخستنەکان"
@@ -4607,13 +4551,12 @@ msgid "Please add at least one variable to the series!"
 msgstr "تکایە لانی کەم یەک گۆڕاو بۆ زنجیرەکە زیاد بکە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:197
-#: libraries/classes/Display/Results.php:1318
+#: libraries/classes/Display/Results.php:1320
 #: libraries/classes/Plugins/Export/ExportSql.php:2309
 #: libraries/classes/Plugins/Schema/SchemaPdf.php:96
 #: libraries/config.values.php:111
 #: templates/columns_definitions/transformation.twig:4
-#: templates/database/designer/main.twig:590
-#: templates/display/export/options_output_compression.twig:7
+#: templates/database/designer/main.twig:590 templates/export.twig:355
 #: templates/server/privileges/privileges_summary.twig:30
 #: templates/server/status/monitor/index.twig:204
 #: templates/server/status/processes/list.twig:54
@@ -4814,7 +4757,7 @@ msgstr "ڕوونکردنەوەی دەرەنجام"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:268
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:151
-#: libraries/classes/Menu.php:537 libraries/classes/Util.php:2496
+#: libraries/classes/Menu.php:537 libraries/classes/Util.php:2498
 #: libraries/config.values.php:157
 #: templates/database/events/editor_form.twig:18
 #: templates/database/events/index.twig:18
@@ -4828,7 +4771,7 @@ msgstr "ڕەوش"
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:487
 #: libraries/classes/Plugins/Export/ExportOdt.php:621
 #: libraries/classes/Plugins/Export/ExportTexytext.php:467
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:368
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:408
 #: templates/database/triggers/list.twig:22
 #: templates/javascript/variables.twig:81 templates/sql/profiling_chart.twig:17
 msgid "Time"
@@ -4852,28 +4795,22 @@ msgid "Chart"
 msgstr "هێلکاری"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:275
-#: libraries/classes/Display/Export.php:554
-#, fuzzy
-#| msgid "Database"
+#: templates/export.twig:171
 msgctxt "Alias"
 msgid "Database"
 msgstr "بنکەی دراو"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:276
-#: libraries/classes/Display/Export.php:566
-#, fuzzy
-#| msgid "Table"
+#: templates/export.twig:185
 msgctxt "Alias"
 msgid "Table"
 msgstr "خشتە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:277
-#: libraries/classes/Display/Export.php:577
-#, fuzzy
-#| msgid "Column"
+#: templates/export.twig:198
 msgctxt "Alias"
 msgid "Column"
-msgstr "ستون"
+msgstr "ستوون"
 
 #. l10n: A collection of available filters
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:280
@@ -4945,14 +4882,10 @@ msgid "Please select the file you want to import."
 msgstr "تکایە ئەو پەڕگەیە دەستنیشان بکە کە ئەتەوێت بکرێتەوە."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:308
-#, fuzzy
-#| msgid "Please enter a valid page name"
 msgid "Please enter a valid table name."
 msgstr "تکایە ناوێکی درووست بۆ پەڕە بنووسە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:309
-#, fuzzy
-#| msgid "Please enter a valid page name"
 msgid "Please enter a valid database name."
 msgstr "تکایە ناوێکی درووست بۆ پەڕە بنووسە"
 
@@ -4992,7 +4925,7 @@ msgstr "گۆڕینی ڕێکخستنەکان"
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:324
 #: templates/config/form_display/fieldset_bottom.twig:8
 msgid "Apply"
-msgstr ""
+msgstr "جێبەجێکردن"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:327
 #: templates/navigation/main.twig:59
@@ -5033,8 +4966,6 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:339
-#, fuzzy
-#| msgid "No column selected."
 msgid "No accounts selected."
 msgstr "هیچ ڕیزێک هەڵنەبژێراوە"
 
@@ -5162,9 +5093,9 @@ msgstr "%d ژمارەی ڕیزی نادروستە."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:388
 #: libraries/classes/Controllers/Table/ChangeController.php:200
-#: libraries/classes/Controllers/Table/SearchController.php:355
-#: libraries/classes/Controllers/Table/ZoomSearchController.php:388
-#: libraries/classes/Controllers/Table/ZoomSearchController.php:430
+#: libraries/classes/Controllers/Table/SearchController.php:356
+#: libraries/classes/Controllers/Table/ZoomSearchController.php:389
+#: libraries/classes/Controllers/Table/ZoomSearchController.php:431
 #: templates/sql/relational_column_dropdown.twig:3
 msgid "Browse foreign values"
 msgstr ""
@@ -5181,7 +5112,6 @@ msgstr ""
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:393
 #, fuzzy, php-format
-#| msgid "Variables"
 msgid "Variable %d:"
 msgstr "گۆڕاوەکان"
 
@@ -5281,7 +5211,7 @@ msgstr "هیچ بنکەیەکی زانیاری هەڵنەبژێراوە."
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:426
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:591
 #: libraries/classes/Export.php:598 libraries/classes/Html/Generator.php:1095
-#: libraries/classes/Plugins/Schema/ExportRelationSchema.php:288
+#: libraries/classes/Plugins/Schema/ExportRelationSchema.php:307
 #: templates/import_status.twig:2 templates/user_password.twig:2
 msgid "Back"
 msgstr "گەڕانەوە"
@@ -5407,13 +5337,13 @@ msgstr "ناوەڕۆکی زانیاری خاڵ"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:482
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:657
-#: libraries/classes/ErrorHandler.php:400 libraries/classes/InsertEdit.php:3140
+#: libraries/classes/ErrorHandler.php:399 libraries/classes/InsertEdit.php:3140
 #: templates/table/index_form.twig:157 templates/table/index_form.twig:193
 msgid "Ignore"
 msgstr "فەرامۆشکردن"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:483
-#: libraries/classes/Display/Results.php:3213
+#: libraries/classes/Display/Results.php:3215
 #: libraries/classes/Html/Generator.php:70
 #: templates/display/results/table.twig:214
 #: templates/display/results/table.twig:215
@@ -5542,14 +5472,12 @@ msgstr ""
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:531
 #: templates/database/designer/main.twig:40
 #: templates/database/designer/main.twig:43
-#, fuzzy
-#| msgid "No tables found in database."
 msgid "Add tables from other databases"
 msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:532
 msgid "Page name"
-msgstr ""
+msgstr "ناوی پەڕە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:533
 #: templates/database/designer/main.twig:63
@@ -5608,8 +5536,6 @@ msgid "%d object(s) created."
 msgstr "%d یەکە درووست کران."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:547
-#, fuzzy
-#| msgid "Copy column name."
 msgid "Column name"
 msgstr "ڕوونووسکردنی ناوی بەستەر."
 
@@ -5709,7 +5635,7 @@ msgstr "بنکەیەکی دراوە هەڵبژێرە لە پێشدا"
 #: templates/display/results/table.twig:245
 #: templates/table/structure/display_structure.twig:339
 msgid "Print"
-msgstr ""
+msgstr "چاپکردن"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:595
 msgid "You can also edit most values<br>by double-clicking directly on them."
@@ -5784,7 +5710,7 @@ msgid "up to date"
 msgstr "نوێترینە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:631
-#: libraries/classes/Display/Results.php:4618
+#: libraries/classes/Display/Results.php:4623
 #: templates/database/structure/show_create.twig:33
 #: templates/display/results/table.twig:284 templates/view_create.twig:11
 msgid "Create view"
@@ -5837,7 +5763,7 @@ msgid "Please look at the bottom of this window."
 msgstr "تکایە چاو لە بەشی خوارەوەی ئەم پەنجەرە بکە."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:660
-#: libraries/classes/ErrorHandler.php:404
+#: libraries/classes/ErrorHandler.php:403
 msgid "Ignore All"
 msgstr "لە بیرکردنی هەموو"
 
@@ -5847,14 +5773,10 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:676
-#, fuzzy
-#| msgid "Successfully deleted the page"
 msgid "Successfully copied!"
 msgstr "پەڕە بە سەرکەوتوویی سڕایەوە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:677
-#, fuzzy
-#| msgid "Copying database"
 msgid "Copying failed!"
 msgstr "لەبەرگرتنەوەی بنکەی دراو"
 
@@ -5928,11 +5850,11 @@ msgstr ""
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:704
 msgid "Weak"
-msgstr ""
+msgstr "لاواز"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:705
 msgid "Good"
-msgstr ""
+msgstr "باش"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:706
 msgid "Strong"
@@ -5958,7 +5880,7 @@ msgstr ""
 #: libraries/classes/InsertEdit.php:337
 #: libraries/classes/Navigation/Nodes/NodeDatabaseChild.php:51
 msgid "Hide"
-msgstr ""
+msgstr "شاردنەوە"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:718
 #: libraries/classes/Controllers/Table/ChangeController.php:205
@@ -5980,7 +5902,7 @@ msgstr "دوو ستون هەڵبژێرە"
 #: libraries/classes/Controllers/NormalizationController.php:44
 #: libraries/classes/Normalization.php:251
 msgid "No such column"
-msgstr ""
+msgstr "هیچ ستوونێک نیە"
 
 #: libraries/classes/Controllers/NormalizationController.php:49
 #: libraries/classes/Normalization.php:255 libraries/classes/Types.php:744
@@ -6001,10 +5923,8 @@ msgid "Could not import configuration"
 msgstr ""
 
 #: libraries/classes/Controllers/Preferences/TwoFactorController.php:57
-#, fuzzy
-#| msgid "Internal relation has been removed."
 msgid "Two-factor authentication has been removed."
-msgstr "ڕیزەکە سڕایەوە"
+msgstr "ڕێگەپێدانی دوو-ڕێگەیی سڕایەوە"
 
 #: libraries/classes/Controllers/Preferences/TwoFactorController.php:68
 msgid "Two-factor authentication has been configured."
@@ -6055,17 +5975,13 @@ msgstr "سەرجەم"
 msgid "Overhead"
 msgstr ""
 
-#: libraries/classes/Controllers/Server/ExportController.php:45
-msgid "View dump (schema) of databases"
-msgstr ""
-
 #: libraries/classes/Controllers/Server/PrivilegesController.php:122
-#: libraries/classes/Server/Privileges.php:254
+#: libraries/classes/Server/Privileges.php:253
 msgid "Includes all privileges except GRANT."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:123
-#: libraries/classes/Server/Privileges.php:388
+#: libraries/classes/Server/Privileges.php:387
 #: templates/server/privileges/privileges_table.twig:161
 #: templates/server/privileges/privileges_table.twig:164
 #: templates/server/privileges/privileges_table.twig:356
@@ -6074,21 +5990,21 @@ msgid "Allows altering the structure of existing tables."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:124
-#: libraries/classes/Server/Privileges.php:476
+#: libraries/classes/Server/Privileges.php:477
 #: templates/server/privileges/privileges_table.twig:443
 #: templates/server/privileges/privileges_table.twig:446
 msgid "Allows altering and dropping stored routines."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:125
-#: libraries/classes/Server/Privileges.php:348
+#: libraries/classes/Server/Privileges.php:347
 #: templates/server/privileges/privileges_table.twig:335
 #: templates/server/privileges/privileges_table.twig:343
 msgid "Allows creating new databases and tables."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:126
-#: libraries/classes/Server/Privileges.php:471
+#: libraries/classes/Server/Privileges.php:472
 #: templates/server/privileges/privileges_table.twig:430
 #: templates/server/privileges/privileges_table.twig:433
 msgid "Allows creating stored routines."
@@ -6103,22 +6019,22 @@ msgid "Allows creating new tables."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:128
-#: libraries/classes/Server/Privileges.php:407
+#: libraries/classes/Server/Privileges.php:406
 #: templates/server/privileges/privileges_table.twig:404
 #: templates/server/privileges/privileges_table.twig:407
 msgid "Allows creating temporary tables."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:129
-#: libraries/classes/Server/Privileges.php:481
+#: libraries/classes/Server/Privileges.php:482
 #: templates/server/privileges/privileges_table.twig:682
 #: templates/server/privileges/privileges_table.twig:685
 msgid "Allows creating, dropping and renaming user accounts."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:130
-#: libraries/classes/Server/Privileges.php:427
-#: libraries/classes/Server/Privileges.php:443
+#: libraries/classes/Server/Privileges.php:426
+#: libraries/classes/Server/Privileges.php:442
 #: templates/server/privileges/privileges_table.twig:173
 #: templates/server/privileges/privileges_table.twig:176
 #: templates/server/privileges/privileges_table.twig:470
@@ -6129,7 +6045,7 @@ msgid "Allows creating new views."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:131
-#: libraries/classes/Server/Privileges.php:343
+#: libraries/classes/Server/Privileges.php:342
 #: templates/server/privileges/privileges_table.twig:100
 #: templates/server/privileges/privileges_table.twig:103
 #: templates/server/privileges/privileges_table.twig:299
@@ -6140,16 +6056,14 @@ msgstr ""
 #. l10n: https://mariadb.com/kb/en/library/grant/#table-privileges "Remove historical rows from a table using the DELETE HISTORY statement"
 #: libraries/classes/Controllers/Server/PrivilegesController.php:132
 #: libraries/classes/Server/Privileges.php:460
-#: libraries/classes/Server/Privileges.php:466
+#: libraries/classes/Server/Privileges.php:467
 #: templates/server/privileges/privileges_table.twig:210
 #: templates/server/privileges/privileges_table.twig:214
-#, fuzzy
-#| msgid "Add/Delete criteria rows"
 msgid "Allows deleting historical rows."
 msgstr "زیادکردن/سڕینەوەی ڕیزەکانی مەرج"
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:133
-#: libraries/classes/Server/Privileges.php:353
+#: libraries/classes/Server/Privileges.php:352
 #: templates/server/privileges/privileges_table.twig:383
 #: templates/server/privileges/privileges_table.twig:391
 msgid "Allows dropping databases and tables."
@@ -6164,21 +6078,21 @@ msgid "Allows dropping tables."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:135
-#: libraries/classes/Server/Privileges.php:432
+#: libraries/classes/Server/Privileges.php:431
 #: templates/server/privileges/privileges_table.twig:500
 #: templates/server/privileges/privileges_table.twig:503
 msgid "Allows to set up events for the event scheduler."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:136
-#: libraries/classes/Server/Privileges.php:486
+#: libraries/classes/Server/Privileges.php:487
 #: templates/server/privileges/privileges_table.twig:456
 #: templates/server/privileges/privileges_table.twig:459
 msgid "Allows executing stored routines."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:137
-#: libraries/classes/Server/Privileges.php:373
+#: libraries/classes/Server/Privileges.php:372
 #: templates/server/privileges/privileges_table.twig:313
 #: templates/server/privileges/privileges_table.twig:316
 msgid "Allows importing data from and exporting data into files."
@@ -6195,7 +6109,7 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:142
-#: libraries/classes/Server/Privileges.php:383
+#: libraries/classes/Server/Privileges.php:382
 #: templates/server/privileges/privileges_table.twig:149
 #: templates/server/privileges/privileges_table.twig:152
 #: templates/server/privileges/privileges_table.twig:369
@@ -6204,7 +6118,7 @@ msgid "Allows creating and dropping indexes."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:143
-#: libraries/classes/Server/Privileges.php:333
+#: libraries/classes/Server/Privileges.php:332
 #: templates/server/privileges/privileges_table.twig:36
 #: templates/server/privileges/privileges_table.twig:273
 #: templates/server/privileges/privileges_table.twig:276
@@ -6212,7 +6126,7 @@ msgid "Allows inserting and replacing data."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:144
-#: libraries/classes/Server/Privileges.php:412
+#: libraries/classes/Server/Privileges.php:411
 #: templates/server/privileges/privileges_table.twig:629
 #: templates/server/privileges/privileges_table.twig:632
 msgid "Allows locking tables for the current thread."
@@ -6245,14 +6159,14 @@ msgid "Limits the number of simultaneous connections the user may have."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:158
-#: libraries/classes/Server/Privileges.php:368
+#: libraries/classes/Server/Privileges.php:367
 #: templates/server/privileges/privileges_table.twig:562
 #: templates/server/privileges/privileges_table.twig:565
 msgid "Allows viewing processes of all users."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:159
-#: libraries/classes/Server/Privileges.php:378
+#: libraries/classes/Server/Privileges.php:377
 #: templates/server/privileges/privileges_table.twig:78
 #: templates/server/privileges/privileges_table.twig:642
 #: templates/server/privileges/privileges_table.twig:645
@@ -6260,28 +6174,28 @@ msgid "Has no effect in this MySQL version."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:161
-#: libraries/classes/Server/Privileges.php:358
+#: libraries/classes/Server/Privileges.php:357
 #: templates/server/privileges/privileges_table.twig:575
 #: templates/server/privileges/privileges_table.twig:578
 msgid "Allows reloading server settings and flushing the server's caches."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:164
-#: libraries/classes/Server/Privileges.php:422
+#: libraries/classes/Server/Privileges.php:421
 #: templates/server/privileges/privileges_table.twig:656
 #: templates/server/privileges/privileges_table.twig:659
 msgid "Allows the user to ask where the slaves / masters are."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:166
-#: libraries/classes/Server/Privileges.php:417
+#: libraries/classes/Server/Privileges.php:416
 #: templates/server/privileges/privileges_table.twig:669
 #: templates/server/privileges/privileges_table.twig:672
 msgid "Needed for the replication slaves."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:167
-#: libraries/classes/Server/Privileges.php:328
+#: libraries/classes/Server/Privileges.php:327
 #: templates/server/privileges/privileges_table.twig:15
 #: templates/server/privileges/privileges_table.twig:260
 #: templates/server/privileges/privileges_table.twig:263
@@ -6289,15 +6203,15 @@ msgid "Allows reading data."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:168
-#: libraries/classes/Server/Privileges.php:393
+#: libraries/classes/Server/Privileges.php:392
 #: templates/server/privileges/privileges_table.twig:601
 #: templates/server/privileges/privileges_table.twig:604
 msgid "Gives access to the complete list of databases."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:169
-#: libraries/classes/Server/Privileges.php:448
-#: libraries/classes/Server/Privileges.php:454
+#: libraries/classes/Server/Privileges.php:447
+#: libraries/classes/Server/Privileges.php:453
 #: templates/server/privileges/privileges_table.twig:185
 #: templates/server/privileges/privileges_table.twig:188
 #: templates/server/privileges/privileges_table.twig:417
@@ -6306,14 +6220,14 @@ msgid "Allows performing SHOW CREATE VIEW queries."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:170
-#: libraries/classes/Server/Privileges.php:363
+#: libraries/classes/Server/Privileges.php:362
 #: templates/server/privileges/privileges_table.twig:588
 #: templates/server/privileges/privileges_table.twig:591
 msgid "Allows shutting down the server."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:172
-#: libraries/classes/Server/Privileges.php:399
+#: libraries/classes/Server/Privileges.php:398
 #: templates/server/privileges/privileges_table.twig:548
 #: templates/server/privileges/privileges_table.twig:552
 msgid ""
@@ -6323,7 +6237,7 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:176
-#: libraries/classes/Server/Privileges.php:437
+#: libraries/classes/Server/Privileges.php:436
 #: templates/server/privileges/privileges_table.twig:197
 #: templates/server/privileges/privileges_table.twig:200
 #: templates/server/privileges/privileges_table.twig:513
@@ -6332,7 +6246,7 @@ msgid "Allows creating and dropping triggers."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:177
-#: libraries/classes/Server/Privileges.php:338
+#: libraries/classes/Server/Privileges.php:337
 #: templates/server/privileges/privileges_table.twig:57
 #: templates/server/privileges/privileges_table.twig:286
 #: templates/server/privileges/privileges_table.twig:289
@@ -6340,14 +6254,14 @@ msgid "Allows changing data."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:178
-#: libraries/classes/Server/Privileges.php:244
+#: libraries/classes/Server/Privileges.php:243
 msgid "No privileges."
 msgstr ""
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:206
 #: libraries/classes/Controllers/Server/UserGroupsController.php:49
 msgid "No Privileges"
-msgstr ""
+msgstr "دەسەڵات نیە"
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:214
 msgid "You do not have the privileges to administrate the users!"
@@ -6376,10 +6290,10 @@ msgstr ""
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:127
 msgid "ID"
-msgstr ""
+msgstr "ناسنامە"
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:131
-#: libraries/classes/Server/Privileges.php:2989
+#: libraries/classes/Server/Privileges.php:2990
 #: templates/server/user_groups/user_listings.twig:9
 msgid "User"
 msgstr "بەکارهێنەر"
@@ -6393,14 +6307,14 @@ msgstr ""
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:143
 msgid "Command"
-msgstr ""
+msgstr "فرمان"
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:155
 msgid "Progress"
-msgstr ""
+msgstr "کار"
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:159
-#: libraries/classes/Server/Status/Data.php:117
+#: libraries/classes/Server/Status/Data.php:138
 #: templates/database/qbe/selection_form.twig:109 templates/sql/query.twig:21
 msgid "SQL query"
 msgstr "داواکاری سیكوێڵ"
@@ -6411,7 +6325,7 @@ msgstr ""
 
 #: libraries/classes/Controllers/Server/Status/StatusController.php:121
 msgid "Sent"
-msgstr ""
+msgstr "نێردرا"
 
 #: libraries/classes/Controllers/Server/Status/StatusController.php:188
 msgid "Max. concurrent connections"
@@ -7041,7 +6955,7 @@ msgstr ""
 
 #: libraries/classes/Controllers/Setup/HomeController.php:157
 msgid "- none -"
-msgstr ""
+msgstr "- نیە -"
 
 #: libraries/classes/Controllers/Setup/HomeController.php:175
 msgid "Default language"
@@ -7069,7 +6983,7 @@ msgstr ""
 
 #: libraries/classes/Controllers/Table/ChangeController.php:312
 #: libraries/classes/Controllers/Table/DeleteController.php:96
-#: libraries/classes/Controllers/Table/ExportController.php:135
+#: libraries/classes/Controllers/Table/ExportController.php:157
 msgid "No row selected."
 msgstr "هیچ ڕیزێک هەڵنەبژێراوە"
 
@@ -7102,14 +7016,10 @@ msgstr ""
 #: libraries/classes/Controllers/Table/RelationController.php:275
 #: libraries/classes/Controllers/ViewOperationsController.php:75
 #: libraries/classes/Database/Routines.php:1534
-#: libraries/classes/Display/Results.php:4081 libraries/classes/Message.php:177
+#: libraries/classes/Display/Results.php:4086 libraries/classes/Message.php:177
 #: templates/sql/query.twig:7
 msgid "Your SQL query has been executed successfully."
 msgstr "سیكوێڵ کیوریەکەت بەسەرکەوتوویی ئەنجامدرا"
-
-#: libraries/classes/Controllers/Table/ExportController.php:69
-msgid "View dump (schema) of table"
-msgstr ""
 
 #: libraries/classes/Controllers/Table/GetFieldController.php:44
 msgid "Invalid table name"
@@ -7142,8 +7052,6 @@ msgid "Display column was successfully updated."
 msgstr ""
 
 #: libraries/classes/Controllers/Table/RelationController.php:306
-#, fuzzy
-#| msgid "Internal relations were successfully updated."
 msgid "Internal relationships were successfully updated."
 msgstr "ڕیزەکە سڕایەوە"
 
@@ -7172,7 +7080,6 @@ msgstr ""
 
 #: libraries/classes/Controllers/Table/StructureController.php:761
 #, fuzzy, php-format
-#| msgid "Failed to get real row count."
 msgid "Failed to get description of column %s!"
 msgstr "نەتوانرا ژمارەی ڕیزەکان بە درووستی بهێنرێت."
 
@@ -7195,8 +7102,8 @@ msgstr "گۆڕین"
 
 #: libraries/classes/Controllers/Table/StructureController.php:1479
 #: libraries/classes/Controllers/Table/StructureController.php:1480
-#: libraries/classes/Operations.php:712 libraries/classes/Util.php:3215
-#: libraries/classes/Util.php:3216 templates/database/events/index.twig:64
+#: libraries/classes/Operations.php:712 libraries/classes/Util.php:3217
+#: libraries/classes/Util.php:3218 templates/database/events/index.twig:64
 #: templates/database/events/index.twig:70
 #: templates/database/events/index.twig:90
 #: templates/database/events/index.twig:91
@@ -7240,7 +7147,7 @@ msgstr "سەرەکی"
 #: templates/table/structure/display_table_stats.twig:24
 #: templates/table/tracking/structure_snapshot_columns.twig:27
 msgid "Index"
-msgstr ""
+msgstr "پێڕست"
 
 #: libraries/classes/Controllers/Table/StructureController.php:1483
 #: libraries/classes/Controllers/Table/StructureController.php:1488
@@ -7298,29 +7205,29 @@ msgstr ""
 #: libraries/classes/Controllers/ThemesController.php:20
 #: templates/themes.twig:1
 msgid "Theme"
-msgstr ""
+msgstr "ڕووکار"
 
-#: libraries/classes/Controllers/UserPasswordController.php:50
+#: libraries/classes/Controllers/UserPasswordController.php:49
 msgid "You don't have sufficient privileges to be here right now!"
 msgstr ""
 
-#: libraries/classes/Controllers/ViewCreateController.php:58
+#: libraries/classes/Controllers/ViewCreateController.php:62
 msgid "View name can not be empty!"
 msgstr ""
 
 #: libraries/classes/Controllers/ViewOperationsController.php:78
-#: libraries/classes/Core.php:293 libraries/classes/Html/Generator.php:967
-#: libraries/classes/Import.php:140 libraries/classes/InsertEdit.php:1583
-#: libraries/classes/Message.php:197 templates/javascript/variables.twig:108
+#: libraries/classes/Html/Generator.php:967 libraries/classes/Import.php:140
+#: libraries/classes/InsertEdit.php:1583 libraries/classes/Message.php:197
+#: templates/error/generic.twig:37 templates/javascript/variables.twig:108
 msgid "Error"
 msgstr "هەڵە"
 
-#: libraries/classes/Core.php:357
+#: libraries/classes/Core.php:359
 #, php-format
 msgid "The %s extension is missing. Please check your PHP configuration."
 msgstr ""
 
-#: libraries/classes/Core.php:1227
+#: libraries/classes/Core.php:1229
 msgid ""
 "You have enabled mbstring.func_overload in your PHP configuration. This "
 "option is incompatible with phpMyAdmin and might cause some data to be "
@@ -7330,31 +7237,27 @@ msgstr ""
 "درووستی لەگەڵ PhpMyAdmin کار ناکات و لەوانەیە ببێتە هۆکاری تێکچوونی هەندێک "
 "داتای بنکەی دراوە!"
 
-#: libraries/classes/Core.php:1244
+#: libraries/classes/Core.php:1246
 msgid ""
 "The ini_get and/or ini_set functions are disabled in php.ini. phpMyAdmin "
 "requires these functions!"
 msgstr ""
 
-#: libraries/classes/Core.php:1256
+#: libraries/classes/Core.php:1258
 msgid "GLOBALS overwrite attempt"
 msgstr ""
 
-#: libraries/classes/Core.php:1266
+#: libraries/classes/Core.php:1268
 msgid "possible exploit"
 msgstr ""
 
-#: libraries/classes/Core.php:1335
+#: libraries/classes/Core.php:1337
 msgid ""
 "Failed to set session cookie. Maybe you are using HTTP instead of HTTPS to "
 "access phpMyAdmin."
 msgstr ""
 
 #: libraries/classes/Database/Designer/Common.php:571
-#, fuzzy
-#| msgid ""
-#| "The phpMyAdmin configuration storage has been deactivated. %sFind out why"
-#| "%s."
 msgctxt ""
 "phpMyAdmin configuration storage is not configured for \"Display Features\" "
 "on designer when user tries to set a display field."
@@ -7373,8 +7276,6 @@ msgid "FOREIGN KEY relationship has been added."
 msgstr "ڕیزەکە سڕایەوە"
 
 #: libraries/classes/Database/Designer/Common.php:677
-#, fuzzy
-#| msgid "Error: FOREIGN KEY relation could not be added!"
 msgid "Error: FOREIGN KEY relationship could not be added!"
 msgstr "ناتوانیت پەڕگە بخوێنیتەوە"
 
@@ -7387,14 +7288,10 @@ msgid "Error: Relational features are disabled!"
 msgstr ""
 
 #: libraries/classes/Database/Designer/Common.php:717
-#, fuzzy
-#| msgid "Internal relation has been added."
 msgid "Internal relationship has been added."
 msgstr "ڕیزەکە سڕایەوە"
 
 #: libraries/classes/Database/Designer/Common.php:725
-#, fuzzy
-#| msgid "Error: Internal relation could not be added!"
 msgid "Error: Internal relationship could not be added!"
 msgstr "ناتوانیت پەڕگە بخوێنیتەوە"
 
@@ -7405,8 +7302,6 @@ msgid "FOREIGN KEY relationship has been removed."
 msgstr "ڕیزەکە سڕایەوە"
 
 #: libraries/classes/Database/Designer/Common.php:773
-#, fuzzy
-#| msgid "Error: FOREIGN KEY relation could not be removed!"
 msgid "Error: FOREIGN KEY relationship could not be removed!"
 msgstr "ناتوانیت پەڕگە بخوێنیتەوە"
 
@@ -7417,8 +7312,6 @@ msgid "Error: Internal relationship could not be removed!"
 msgstr "ناتوانیت پەڕگە بخوێنیتەوە"
 
 #: libraries/classes/Database/Designer/Common.php:807
-#, fuzzy
-#| msgid "Internal relation has been removed."
 msgid "Internal relationship has been removed."
 msgstr "ڕیزەکە سڕایەوە"
 
@@ -7537,7 +7430,6 @@ msgstr "هەڵە لە کردنەوەی داواکاری"
 
 #: libraries/classes/Database/Events.php:568
 #, fuzzy, php-format
-#| msgid "No tables found in database."
 msgid "No event with name %1$s found in database %2$s."
 msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو."
 
@@ -7659,7 +7551,7 @@ msgstr ""
 #: templates/database/events/editor_form.twig:9
 #: templates/database/events/editor_form.twig:12 templates/view_create.twig:8
 msgid "Details"
-msgstr ""
+msgstr "وردەکارییەکان"
 
 #: libraries/classes/Database/Routines.php:897
 msgid "Routine name"
@@ -7673,11 +7565,11 @@ msgstr ""
 
 #: libraries/classes/Database/Routines.php:922
 msgid "Parameters"
-msgstr ""
+msgstr "هێماکان"
 
 #: libraries/classes/Database/Routines.php:930
 msgid "Direction"
-msgstr ""
+msgstr "ئاڕاستە"
 
 #: libraries/classes/Database/Routines.php:934
 #: libraries/classes/Import.php:1352 libraries/classes/Import.php:1386
@@ -7685,7 +7577,7 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportCsv.php:47
 #: libraries/classes/Plugins/Export/ExportExcel.php:34
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:47
-#: libraries/classes/Plugins/Export/ExportJson.php:72
+#: libraries/classes/Plugins/Export/ExportJson.php:73
 #: libraries/classes/Plugins/Export/ExportLatex.php:72
 #: libraries/classes/Plugins/Export/ExportMediawiki.php:46
 #: libraries/classes/Plugins/Export/ExportOds.php:52
@@ -7712,7 +7604,7 @@ msgstr "هەڵبژاردنەکان"
 
 #: libraries/classes/Database/Routines.php:951
 msgid "Add parameter"
-msgstr ""
+msgstr "پارامیتەر زیادبکە"
 
 #: libraries/classes/Database/Routines.php:955
 msgid "Remove last parameter"
@@ -7741,10 +7633,10 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:489
 #: libraries/classes/Plugins/Export/ExportOdt.php:627
 #: libraries/classes/Plugins/Export/ExportTexytext.php:469
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:372
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:412
 #: templates/database/events/editor_form.twig:75
 msgid "Definition"
-msgstr ""
+msgstr "پێناسە"
 
 #: libraries/classes/Database/Routines.php:1011
 msgid "Is deterministic"
@@ -7775,7 +7667,7 @@ msgstr ""
 
 #: libraries/classes/Database/Routines.php:1045
 msgid "Security type"
-msgstr ""
+msgstr "جۆری ئاسایش"
 
 #: libraries/classes/Database/Routines.php:1054
 msgid "SQL data access"
@@ -7825,7 +7717,6 @@ msgstr ""
 #: libraries/classes/Database/Routines.php:1453
 #: libraries/classes/Database/Routines.php:1631
 #, fuzzy, php-format
-#| msgid "No tables found in database."
 msgid "No routine with name %1$s found in database %2$s."
 msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو."
 
@@ -7898,22 +7789,16 @@ msgstr "لانی کەم یەکێک لە وشەکان"
 
 #: libraries/classes/Database/Search.php:110
 #: templates/database/search/main.twig:23
-#, fuzzy
-#| msgid "at least one of the words"
 msgid "all of the words"
 msgstr "لانی کەم یەکێک لە وشەکان"
 
 #: libraries/classes/Database/Search.php:111
 #: templates/database/search/main.twig:27
-#, fuzzy
-#| msgid "the exact phrase"
 msgid "the exact phrase as substring"
 msgstr "دەقاودەقی ڕستە"
 
 #: libraries/classes/Database/Search.php:112
 #: templates/database/search/main.twig:31
-#, fuzzy
-#| msgid "the exact phrase"
 msgid "the exact phrase as whole field"
 msgstr "دەقاودەقی ڕستە"
 
@@ -7949,16 +7834,16 @@ msgstr ""
 #: libraries/classes/Database/Triggers.php:415
 msgctxt "Trigger action time"
 msgid "Time"
-msgstr ""
+msgstr "کات"
 
 #: libraries/classes/Database/Triggers.php:429
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:488
 #: libraries/classes/Plugins/Export/ExportOdt.php:624
 #: libraries/classes/Plugins/Export/ExportTexytext.php:468
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:370
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:410
 #: templates/database/triggers/list.twig:23
 msgid "Event"
-msgstr ""
+msgstr "ڕووداو"
 
 #: libraries/classes/Database/Triggers.php:495
 msgid "You must provide a trigger name!"
@@ -7986,7 +7871,6 @@ msgstr ""
 
 #: libraries/classes/Database/Triggers.php:581
 #, fuzzy, php-format
-#| msgid "No tables found in database."
 msgid "No trigger with name %1$s found in database %2$s."
 msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو."
 
@@ -8007,76 +7891,14 @@ msgstr "هیچ خشتەیەک نەدۆزرایەوە لەناو بنکەدراو
 msgid "SSL connection enforced by server, automatically enabling it."
 msgstr ""
 
-#: libraries/classes/Display/ChangePassword.php:88
-#: libraries/classes/Server/Privileges.php:788
-#: libraries/classes/Server/Privileges.php:862
-msgid "Native MySQL authentication"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:301
-msgid "@SERVER@ will become the server name"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:303
-msgid ", @DATABASE@ will become the database name"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:305
-msgid ", @TABLE@ will become the table name"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:311
-#, php-format
-msgid ""
-"This value is interpreted using %1$sstrftime%2$s, so you can use time "
-"formatting strings. Additionally the following transformations will happen: "
-"%3$s. Other text will be kept as is. See the %4$sFAQ%5$s for details."
-msgstr ""
-
-#: libraries/classes/Display/Export.php:546
-msgid "Defined aliases"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:605
-#: templates/display/export/options_output.twig:7
-msgid "Rename exported databases/tables/columns"
-msgstr ""
-
-#: libraries/classes/Display/Export.php:663
-msgid "Could not load export plugins, please check your installation!"
-msgstr ""
-
-#: libraries/classes/Display/GitRevision.php:94
-#, php-format
-msgid "%1$s from %2$s branch"
-msgstr ""
-
-#: libraries/classes/Display/GitRevision.php:99
-msgid "no branch"
-msgstr ""
-
-#: libraries/classes/Display/GitRevision.php:105
-msgid "Git revision:"
-msgstr ""
-
-#: libraries/classes/Display/GitRevision.php:108
-#, php-format
-msgid "committed on %1$s by %2$s"
-msgstr ""
-
-#: libraries/classes/Display/GitRevision.php:118
-#, php-format
-msgid "authored on %1$s by %2$s"
-msgstr ""
-
-#: libraries/classes/Display/Results.php:909
+#: libraries/classes/Display/Results.php:911
 #: libraries/classes/Html/Generator.php:1295
 #: libraries/classes/Html/Generator.php:1298
 msgctxt "First page"
 msgid "Begin"
 msgstr "دەسپێکردن"
 
-#: libraries/classes/Display/Results.php:916
+#: libraries/classes/Display/Results.php:918
 #: libraries/classes/Html/Generator.php:1296
 #: libraries/classes/Html/Generator.php:1299
 #: templates/server/binlog/index.twig:47 templates/server/binlog/index.twig:52
@@ -8084,7 +7906,7 @@ msgctxt "Previous page"
 msgid "Previous"
 msgstr "پێشتر"
 
-#: libraries/classes/Display/Results.php:944
+#: libraries/classes/Display/Results.php:946
 #: libraries/classes/Html/Generator.php:1328
 #: libraries/classes/Html/Generator.php:1335
 #: templates/server/binlog/index.twig:72 templates/server/binlog/index.twig:77
@@ -8092,26 +7914,26 @@ msgctxt "Next page"
 msgid "Next"
 msgstr "دواتر"
 
-#: libraries/classes/Display/Results.php:974
+#: libraries/classes/Display/Results.php:976
 #: libraries/classes/Html/Generator.php:1329
 #: libraries/classes/Html/Generator.php:1336
 msgctxt "Last page"
 msgid "End"
 msgstr "کۆتایی"
 
-#: libraries/classes/Display/Results.php:1543
+#: libraries/classes/Display/Results.php:1545
 #: templates/display/results/table.twig:114
 msgid "Partial texts"
 msgstr "تێکستە لاوەکیەکان"
 
-#: libraries/classes/Display/Results.php:1547
+#: libraries/classes/Display/Results.php:1549
 #: templates/display/results/table.twig:118
 msgid "Full texts"
 msgstr "تێکستە تەواوەکان"
 
-#: libraries/classes/Display/Results.php:1940
-#: libraries/classes/Display/Results.php:1966 libraries/classes/Util.php:3135
-#: libraries/classes/Util.php:3158 libraries/config.values.php:113
+#: libraries/classes/Display/Results.php:1942
+#: libraries/classes/Display/Results.php:1968 libraries/classes/Util.php:3137
+#: libraries/classes/Util.php:3160 libraries/config.values.php:113
 #: templates/database/multi_table_query/form.twig:61
 #: templates/database/qbe/sort_select_cell.twig:7
 #: templates/server/databases/index.twig:114
@@ -8123,9 +7945,9 @@ msgstr "تێکستە تەواوەکان"
 msgid "Descending"
 msgstr "لە کۆتایی بۆ سەرەتا"
 
-#: libraries/classes/Display/Results.php:1948
-#: libraries/classes/Display/Results.php:1958 libraries/classes/Util.php:3127
-#: libraries/classes/Util.php:3150 libraries/config.values.php:112
+#: libraries/classes/Display/Results.php:1950
+#: libraries/classes/Display/Results.php:1960 libraries/classes/Util.php:3129
+#: libraries/classes/Util.php:3152 libraries/config.values.php:112
 #: templates/database/multi_table_query/form.twig:60
 #: templates/database/qbe/sort_select_cell.twig:5
 #: templates/server/databases/index.twig:112
@@ -8137,48 +7959,46 @@ msgstr "لە کۆتایی بۆ سەرەتا"
 msgid "Ascending"
 msgstr "لە سەرەتاوە بۆ کۆتایی"
 
-#: libraries/classes/Display/Results.php:3254
-#: libraries/classes/Display/Results.php:3269
+#: libraries/classes/Display/Results.php:3256
+#: libraries/classes/Display/Results.php:3271
 msgid "The row has been deleted."
 msgstr "ڕیزەکە سڕایەوە"
 
-#: libraries/classes/Display/Results.php:3301
+#: libraries/classes/Display/Results.php:3303
 #: templates/server/status/processes/list.twig:44
 msgid "Kill"
 msgstr "ڕایگرە"
 
-#: libraries/classes/Display/Results.php:4005
+#: libraries/classes/Display/Results.php:4010
 msgid "May be approximate. See [doc@faq3-11]FAQ 3.11[/doc]."
 msgstr ""
 
-#: libraries/classes/Display/Results.php:4426
+#: libraries/classes/Display/Results.php:4431
 #, fuzzy, php-format
-#| msgid "Showing rows"
 msgid "Showing rows %1s - %2s"
 msgstr "ڕیزە پێشاندراوەکان"
 
-#: libraries/classes/Display/Results.php:4440
+#: libraries/classes/Display/Results.php:4445
 #, php-format
 msgid "%1$d total, %2$d in query"
 msgstr ""
 
-#: libraries/classes/Display/Results.php:4445
+#: libraries/classes/Display/Results.php:4450
 #, fuzzy, php-format
-#| msgid "total"
 msgid "%d total"
 msgstr "سەرجەم"
 
-#: libraries/classes/Display/Results.php:4457 libraries/classes/Sql.php:1203
+#: libraries/classes/Display/Results.php:4462 libraries/classes/Sql.php:1203
 #, php-format
 msgid "Query took %01.4f seconds."
 msgstr "داواکاریەکە %01.4f چرکەی خایاند"
 
-#: libraries/classes/Display/Results.php:4607
+#: libraries/classes/Display/Results.php:4612
 #: templates/display/results/table.twig:242
 msgid "Query results operations"
 msgstr "کردارەکانی ئەنجامی داواکاری"
 
-#: libraries/classes/Display/Results.php:4860
+#: libraries/classes/Display/Results.php:4865
 msgid "Link not found!"
 msgstr "بەستەر نەدۆزرایەوە"
 
@@ -8223,7 +8043,7 @@ msgid "Buffer Pool"
 msgstr ""
 
 #: libraries/classes/Engines/Innodb.php:112
-#: libraries/classes/Server/Status/Data.php:200
+#: libraries/classes/Server/Status/Data.php:221
 msgid "InnoDB Status"
 msgstr ""
 
@@ -8478,15 +8298,15 @@ msgid ""
 "%sPrimeBase XT Home Page%s."
 msgstr ""
 
-#: libraries/classes/ErrorHandler.php:99
+#: libraries/classes/ErrorHandler.php:98
 msgid "Too many error messages, some are not displayed."
 msgstr "هەڵەنامەی زۆر، هەندێکیان پێشان نەدراون."
 
-#: libraries/classes/ErrorHandler.php:389
+#: libraries/classes/ErrorHandler.php:388
 msgid "Report"
 msgstr "هێنان"
 
-#: libraries/classes/ErrorHandler.php:394 templates/error/report_form.twig:25
+#: libraries/classes/ErrorHandler.php:393 templates/error/report_form.twig:25
 msgid "Automatically send report next time"
 msgstr ""
 
@@ -8539,7 +8359,7 @@ msgstr ""
 
 #: libraries/classes/File.php:341
 msgid "Missing a temporary folder."
-msgstr ""
+msgstr "بوخچەی کاتیی وونە"
 
 #: libraries/classes/File.php:344
 msgid "Failed to write file to disk."
@@ -8743,7 +8563,7 @@ msgstr ""
 
 #: libraries/classes/InsertEdit.php:534
 msgid "Binary"
-msgstr ""
+msgstr "دووانەیی"
 
 #: libraries/classes/InsertEdit.php:797
 msgid "Because of its length,<br> this column might not be editable."
@@ -8804,11 +8624,11 @@ msgstr ""
 
 #: libraries/classes/InsertEdit.php:1934
 msgid "Go back to this page"
-msgstr ""
+msgstr "بگەڕێوە بۆ ئەو پەڕەیە"
 
 #: libraries/classes/InsertEdit.php:1957
 msgid "Edit next row"
-msgstr ""
+msgstr "ڕیزی داهاتوو دەستکاریبکە"
 
 #: libraries/classes/InsertEdit.php:1977
 msgid ""
@@ -8824,9 +8644,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportOdt.php:496
 #: libraries/classes/Plugins/Export/ExportTexytext.php:302
 #: libraries/classes/Plugins/Export/ExportTexytext.php:395
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:528
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:686
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:719
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:568
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:710
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:743
 #: templates/columns_definitions/column_name.twig:16
 #: templates/database/data_dictionary/index.twig:16
 #: templates/database/data_dictionary/index.twig:69 templates/indexes.twig:19
@@ -8857,12 +8677,12 @@ msgstr ""
 msgid "Inserted row id: %1$d"
 msgstr ""
 
-#: libraries/classes/LanguageManager.php:952
+#: libraries/classes/LanguageManager.php:970
 msgid "Ignoring unsupported language code."
 msgstr ""
 
-#: libraries/classes/LanguageManager.php:978
-#: libraries/classes/LanguageManager.php:979 templates/setup/home/index.twig:8
+#: libraries/classes/LanguageManager.php:996
+#: libraries/classes/LanguageManager.php:997 templates/setup/home/index.twig:8
 #: templates/setup/home/index.twig:9
 msgid "Language"
 msgstr "زمان"
@@ -8879,8 +8699,8 @@ msgstr ""
 
 #: libraries/classes/Menu.php:270
 #: libraries/classes/Navigation/Nodes/NodeTable.php:318
-#: libraries/classes/Util.php:1788 libraries/classes/Util.php:2525
-#: libraries/classes/Util.php:3208 libraries/classes/Util.php:3209
+#: libraries/classes/Util.php:1790 libraries/classes/Util.php:2527
+#: libraries/classes/Util.php:3210 libraries/classes/Util.php:3211
 #: libraries/config.values.php:68 libraries/config.values.php:82
 #: libraries/config.values.php:183 templates/database/search/results.twig:34
 #: templates/table/structure/display_structure.twig:281
@@ -8889,9 +8709,9 @@ msgstr "گەڕۆک"
 
 #: libraries/classes/Menu.php:289 libraries/classes/Menu.php:406
 #: libraries/classes/Navigation/Nodes/NodeTable.php:309
-#: libraries/classes/Util.php:1786 libraries/classes/Util.php:2511
-#: libraries/classes/Util.php:2528 libraries/classes/Util.php:3210
-#: libraries/classes/Util.php:3211 libraries/config.values.php:64
+#: libraries/classes/Util.php:1788 libraries/classes/Util.php:2513
+#: libraries/classes/Util.php:2530 libraries/classes/Util.php:3212
+#: libraries/classes/Util.php:3213 libraries/config.values.php:64
 #: libraries/config.values.php:78 libraries/config.values.php:169
 #: libraries/config.values.php:179
 msgid "Search"
@@ -8899,8 +8719,8 @@ msgstr "گەڕان"
 
 #: libraries/classes/Menu.php:300
 #: libraries/classes/Navigation/Nodes/NodeTable.php:312
-#: libraries/classes/Util.php:1787 libraries/classes/Util.php:2529
-#: libraries/classes/Util.php:3212 libraries/classes/Util.php:3213
+#: libraries/classes/Util.php:1789 libraries/classes/Util.php:2531
+#: libraries/classes/Util.php:3214 libraries/classes/Util.php:3215
 #: libraries/config.values.php:66 libraries/config.values.php:80
 #: libraries/config.values.php:181
 #: templates/database/qbe/ins_del_and_or_cell.twig:6
@@ -8909,8 +8729,8 @@ msgid "Insert"
 msgstr "تێخستن"
 
 #: libraries/classes/Menu.php:327 libraries/classes/Menu.php:446
-#: libraries/classes/Server/Privileges.php:2963 libraries/classes/Util.php:2516
-#: libraries/classes/Util.php:2532 libraries/config.values.php:161
+#: libraries/classes/Server/Privileges.php:2964 libraries/classes/Util.php:2518
+#: libraries/classes/Util.php:2534 libraries/config.values.php:161
 #: templates/database/privileges/index.twig:20
 #: templates/server/privileges/privileges_summary.twig:15
 #: templates/server/sub_page_header.twig:2
@@ -8919,15 +8739,15 @@ msgid "Privileges"
 msgstr "تایبەتمەندێتیەکان"
 
 #: libraries/classes/Menu.php:337 libraries/classes/Menu.php:346
-#: libraries/classes/Menu.php:437 libraries/classes/Util.php:1789
-#: libraries/classes/Util.php:2515 libraries/classes/Util.php:2533
+#: libraries/classes/Menu.php:437 libraries/classes/Util.php:1791
+#: libraries/classes/Util.php:2517 libraries/classes/Util.php:2535
 #: libraries/config.values.php:171 templates/table/operations/view.twig:8
 msgid "Operations"
 msgstr "کارەکان"
 
 #: libraries/classes/Menu.php:352 libraries/classes/Menu.php:472
-#: libraries/classes/Relation.php:316 libraries/classes/Util.php:2520
-#: libraries/classes/Util.php:2534
+#: libraries/classes/Relation.php:316 libraries/classes/Util.php:2522
+#: libraries/classes/Util.php:2536
 msgid "Tracking"
 msgstr ""
 
@@ -8939,7 +8759,7 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportSql.php:2157
 #: libraries/classes/Plugins/Export/ExportTexytext.php:553
 #: libraries/classes/Plugins/Export/ExportXml.php:135
-#: libraries/classes/Util.php:2519 libraries/classes/Util.php:2535
+#: libraries/classes/Util.php:2521 libraries/classes/Util.php:2537
 #: templates/database/triggers/list.twig:6
 msgid "Triggers"
 msgstr ""
@@ -8949,11 +8769,11 @@ msgstr ""
 msgid "Database seems to be empty!"
 msgstr "پێدەچێت بنکە زانیاریەکە بەتاڵ بێت!"
 
-#: libraries/classes/Menu.php:414 libraries/classes/Util.php:2512
+#: libraries/classes/Menu.php:414 libraries/classes/Util.php:2514
 msgid "Query"
 msgstr "داواکاری"
 
-#: libraries/classes/Menu.php:452 libraries/classes/Util.php:2517
+#: libraries/classes/Menu.php:452 libraries/classes/Util.php:2519
 #: templates/database/routines/list.twig:6
 msgid "Routines"
 msgstr "ڕۆتینەکان"
@@ -8962,15 +8782,15 @@ msgstr "ڕۆتینەکان"
 #: libraries/classes/Navigation/Nodes/NodeEventContainer.php:24
 #: libraries/classes/Plugins/Export/ExportSql.php:1017
 #: libraries/classes/Plugins/Export/ExportXml.php:115
-#: libraries/classes/Util.php:2518 templates/database/events/index.twig:6
+#: libraries/classes/Util.php:2520 templates/database/events/index.twig:6
 msgid "Events"
 msgstr "چالاکیەکان"
 
-#: libraries/classes/Menu.php:479 libraries/classes/Util.php:2521
+#: libraries/classes/Menu.php:479 libraries/classes/Util.php:2523
 msgid "Designer"
 msgstr "شێوەساز"
 
-#: libraries/classes/Menu.php:488 libraries/classes/Util.php:2522
+#: libraries/classes/Menu.php:488 libraries/classes/Util.php:2524
 #: templates/database/structure/check_all_tables.twig:32
 msgid "Central columns"
 msgstr "ستونەکان زیادبکە"
@@ -8979,35 +8799,35 @@ msgstr "ستونەکان زیادبکە"
 msgid "User accounts"
 msgstr "بەکارهێنەرەکان"
 
-#: libraries/classes/Menu.php:585 libraries/classes/Server/Status/Data.php:123
-#: libraries/classes/Util.php:2501 templates/server/binlog/index.twig:3
+#: libraries/classes/Menu.php:585 libraries/classes/Server/Status/Data.php:144
+#: libraries/classes/Util.php:2503 templates/server/binlog/index.twig:3
 msgid "Binary log"
 msgstr "تۆماری دوودانەیی"
 
-#: libraries/classes/Menu.php:592 libraries/classes/Server/Status/Data.php:128
-#: libraries/classes/Util.php:2502
+#: libraries/classes/Menu.php:592 libraries/classes/Server/Status/Data.php:149
+#: libraries/classes/Util.php:2504
 #: templates/database/structure/body_for_table_summary.twig:11
 #: templates/database/structure/table_header.twig:10
 #: templates/server/replication/index.twig:5
 msgid "Replication"
 msgstr "دووپاتکاری"
 
-#: libraries/classes/Menu.php:598 libraries/classes/Server/Status/Data.php:196
-#: libraries/classes/Util.php:2503 libraries/config.values.php:159
+#: libraries/classes/Menu.php:598 libraries/classes/Server/Status/Data.php:217
+#: libraries/classes/Util.php:2505 libraries/config.values.php:159
 #: templates/server/engines/show.twig:18 templates/server/engines/show.twig:21
 #: templates/sql/query.twig:178
 msgid "Variables"
 msgstr "گۆڕاوەکان"
 
-#: libraries/classes/Menu.php:603 libraries/classes/Util.php:2504
+#: libraries/classes/Menu.php:603 libraries/classes/Util.php:2506
 msgid "Charsets"
 msgstr "گورزەپیتەکان"
 
-#: libraries/classes/Menu.php:608 libraries/classes/Util.php:2506
+#: libraries/classes/Menu.php:608 libraries/classes/Util.php:2508
 msgid "Engines"
 msgstr "بزوێنەرەکان"
 
-#: libraries/classes/Menu.php:613 libraries/classes/Util.php:2505
+#: libraries/classes/Menu.php:613 libraries/classes/Util.php:2507
 #: templates/server/plugins/index.twig:4
 msgid "Plugins"
 msgstr "پێوەکراوەکان"
@@ -9050,7 +8870,7 @@ msgid "Procedures:"
 msgstr "پڕۆسەکان"
 
 #: libraries/classes/Navigation/Navigation.php:221
-#: templates/display/export/selection.twig:5
+#: templates/database/export/index.twig:14
 msgid "Tables:"
 msgstr "خشتە"
 
@@ -9065,10 +8885,8 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Navigation/NavigationTree.php:816
-#, fuzzy
-#| msgid "Groups:"
 msgid "Groups"
-msgstr "ناوی بەکارهێنەر"
+msgstr "گرووپەکان"
 
 #: libraries/classes/Navigation/NavigationTree.php:982
 #, php-format
@@ -9089,17 +8907,16 @@ msgstr ""
 
 #: libraries/classes/Navigation/NavigationTree.php:1467
 msgid "Collapse all"
-msgstr ""
+msgstr "هەمووی کۆبکەرەوە"
 
 #. l10n: The word "Node" must not be translated here
-#: libraries/classes/Navigation/NodeFactory.php:38
+#: libraries/classes/Navigation/NodeFactory.php:39
 #, php-format
 msgid "Invalid class name \"%1$s\", using default of \"Node\""
 msgstr ""
 
-#: libraries/classes/Navigation/NodeFactory.php:65
+#: libraries/classes/Navigation/NodeFactory.php:66
 #, fuzzy, php-format
-#| msgid "Add columns"
 msgid "Could not load class \"%1$s\""
 msgstr "ستونەکان زیادبکە"
 
@@ -9107,17 +8924,17 @@ msgstr "ستونەکان زیادبکە"
 #: libraries/classes/Navigation/Nodes/NodeColumnContainer.php:25
 #: templates/sql/query.twig:63
 msgid "Columns"
-msgstr ""
+msgstr "ستوونەکان"
 
 #: libraries/classes/Navigation/Nodes/NodeColumnContainer.php:36
 msgctxt "Create new column"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeDatabaseContainer.php:38
 msgctxt "Create new database"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeDatabase.php:43
 msgid "Database operations"
@@ -9131,24 +8948,24 @@ msgstr "پێشاندانی نیشاندەرەکان"
 #: templates/database/events/index.twig:100
 msgctxt "Create new event"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeFunctionContainer.php:24
 #: libraries/classes/Navigation/Nodes/NodeFunctionContainer.php:25
 #: libraries/classes/Plugins/Export/ExportSql.php:628
 #: libraries/classes/Plugins/Export/ExportXml.php:120
 msgid "Functions"
-msgstr ""
+msgstr "کردارەکان"
 
 #: libraries/classes/Navigation/Nodes/NodeFunctionContainer.php:38
 msgctxt "Create new function"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeIndexContainer.php:36
 msgctxt "Create new index"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/Node.php:800
 msgid "Expand/Collapse"
@@ -9164,7 +8981,7 @@ msgstr ""
 #: libraries/classes/Navigation/Nodes/NodeProcedureContainer.php:38
 msgctxt "Create new procedure"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeProcedure.php:29
 msgid "Procedure"
@@ -9173,13 +8990,13 @@ msgstr "پڕۆسەکان"
 #: libraries/classes/Navigation/Nodes/NodeTableContainer.php:39
 msgctxt "Create new table"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeTriggerContainer.php:36
 #: templates/database/triggers/footer.twig:2
 msgctxt "Create new trigger"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Navigation/Nodes/NodeViewContainer.php:24
 #: libraries/classes/Navigation/Nodes/NodeViewContainer.php:25
@@ -9191,7 +9008,7 @@ msgstr ""
 #: libraries/classes/Navigation/Nodes/NodeViewContainer.php:39
 msgctxt "Create new view"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: libraries/classes/Normalization.php:226
 msgid "Make all columns atomic"
@@ -9506,12 +9323,12 @@ msgstr ""
 #: libraries/classes/Operations.php:698
 #: templates/table/structure/display_structure.twig:521
 msgid "Optimize"
-msgstr ""
+msgstr "باشترکردن"
 
 #: libraries/classes/Operations.php:699
 #: templates/table/structure/display_structure.twig:521
 msgid "Rebuild"
-msgstr ""
+msgstr "درووستکردنەوە"
 
 #: libraries/classes/Operations.php:700
 #: templates/table/structure/display_structure.twig:521
@@ -9559,7 +9376,7 @@ msgstr ""
 msgid "The table name is empty!"
 msgstr ""
 
-#: libraries/classes/Pdf.php:156
+#: libraries/classes/Pdf.php:159
 msgid "Error while creating PDF:"
 msgstr ""
 
@@ -9593,25 +9410,23 @@ msgstr ""
 msgid "Retry to connect"
 msgstr ""
 
-#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:174
+#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:178
 msgid "Your session has expired. Please log in again."
 msgstr ""
 
-#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:284
+#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:289
 msgid "Missing reCAPTCHA verification, maybe it has been blocked by adblock?"
 msgstr ""
 
-#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:319
-#, fuzzy
-#| msgid "Could not connect to the database server!"
+#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:324
 msgid "Failed to connect to the reCAPTCHA service!"
 msgstr "نەتوانرا پەیوەندی بکردرێت بە ڕاژەکاری بنکەی دراوە!"
 
-#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:321
+#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:326
 msgid "Entered captcha is wrong, try again!"
 msgstr ""
 
-#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:348
+#: libraries/classes/Plugins/Auth/AuthenticationCookie.php:359
 msgid "You are not allowed to log in to this MySQL server!"
 msgstr "ڕێگەدان بە چوونەژوورەوە بۆ هەر ڕاژەکارێکی MySQL"
 
@@ -9645,8 +9460,7 @@ msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 
 #: libraries/classes/Plugins/Export/ExportCodegen.php:87
-#: templates/display/export/format_dropdown.twig:2
-#: templates/display/import/import.twig:209
+#: templates/display/import/import.twig:209 templates/export.twig:94
 msgid "Format:"
 msgstr "فۆرمات"
 
@@ -9747,9 +9561,9 @@ msgstr ""
 #: libraries/classes/Plugins/Export/ExportLatex.php:555
 #: libraries/classes/Plugins/Export/ExportOdt.php:509
 #: libraries/classes/Plugins/Export/ExportTexytext.php:400
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:543
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:692
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:725
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:583
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:716
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:749
 #: templates/database/data_dictionary/index.twig:21
 msgid "Links to"
 msgstr "بەستەر بۆ"
@@ -9775,11 +9589,11 @@ msgstr ""
 msgid "Stand-in structure for view"
 msgstr ""
 
-#: libraries/classes/Plugins/Export/ExportJson.php:89
+#: libraries/classes/Plugins/Export/ExportJson.php:90
 msgid "Output pretty-printed JSON (Use human-readable formatting)"
 msgstr ""
 
-#: libraries/classes/Plugins/Export/ExportJson.php:95
+#: libraries/classes/Plugins/Export/ExportJson.php:96
 msgid "Output unicode characters unescaped"
 msgstr ""
 
@@ -9845,7 +9659,7 @@ msgstr ""
 #: templates/server/replication/change_master.twig:22
 #: templates/server/replication/master_add_slave_user.twig:29
 msgid "Host:"
-msgstr ""
+msgstr "خانەخوێ:"
 
 #: libraries/classes/Plugins/Export/ExportLatex.php:221
 #: libraries/classes/Plugins/Export/ExportSql.php:756
@@ -9869,7 +9683,7 @@ msgstr "پێوەکراوەکانی php"
 #: libraries/classes/Plugins/Export/ExportLatex.php:254
 #: libraries/classes/Plugins/Export/ExportSql.php:948
 #: libraries/classes/Plugins/Export/ExportXml.php:428
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:175
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:215
 #: templates/database/structure/copy_form.twig:5
 #: templates/menu/breadcrumbs.twig:16
 msgid "Database:"
@@ -9965,7 +9779,6 @@ msgstr ""
 
 #: libraries/classes/Plugins/Export/ExportSql.php:325
 #, fuzzy, php-format
-#| msgid "Use this value"
 msgid "%s value"
 msgstr "ئەم نرخە هەڵبژێرە"
 
@@ -10064,28 +9877,26 @@ msgstr "زانیاری نەجوڵاو"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1132
 #, fuzzy, php-format
-#| msgid "Delete tracking data for these tables?"
 msgid "Metadata for table %s"
 msgstr "سڕینەوە داتا شوێنکەوتووەکانی ئەم خشانە؟"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1139
 #, fuzzy, php-format
-#| msgid "Remove database"
 msgid "Metadata for database %s"
 msgstr "سڕینەوەی بنکەی دراوە"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1470
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:650
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:674
 msgid "Creation:"
 msgstr "درووستکردن:"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1483
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:661
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:685
 msgid "Last update:"
 msgstr "دواترین نوێکردنەوە:"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1496
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:672
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:696
 msgid "Last check:"
 msgstr "دواین پشکنین:"
 
@@ -10145,7 +9956,6 @@ msgstr ""
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2324
 #, fuzzy, php-format
-#| msgid "Delete tracking data for these tables?"
 msgid "Error reading data for table %s:"
 msgstr "سڕینەوە داتا شوێنکەوتووەکانی ئەم خشانە؟"
 
@@ -10157,12 +9967,12 @@ msgstr ""
 msgid "Export contents"
 msgstr ""
 
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:176
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:216
 #: templates/menu/breadcrumbs.twig:29
 msgid "Table:"
 msgstr "خشتە"
 
-#: libraries/classes/Plugins/Export/Helpers/Pdf.php:177
+#: libraries/classes/Plugins/Export/Helpers/Pdf.php:217
 msgid "Purpose:"
 msgstr ""
 
@@ -10199,8 +10009,6 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:125
-#, fuzzy
-#| msgid "Copy column name."
 msgid "Column names:"
 msgstr "ڕوونووسکردنی ناوی بەستەر."
 
@@ -10298,60 +10106,63 @@ msgstr ""
 msgid "XML"
 msgstr ""
 
-#: libraries/classes/Plugins.php:668
+#: libraries/classes/Plugins.php:671
 msgid "This format has no options"
 msgstr ""
 
-#: libraries/classes/Plugins/Schema/Dia/TableStatsDia.php:75
+#: libraries/classes/Plugins.php:687
+msgid "Invalid authentication method set in configuration:"
+msgstr ""
+
+#: libraries/classes/Plugins/Schema/Dia/TableStatsDia.php:78
 #: libraries/classes/Plugins/Schema/Eps/TableStatsEps.php:94
-#: libraries/classes/Plugins/Schema/Pdf/TableStatsPdf.php:98
+#: libraries/classes/Plugins/Schema/Pdf/TableStatsPdf.php:100
 #: libraries/classes/Plugins/Schema/Svg/TableStatsSvg.php:92
 #, php-format
 msgid "The %s table doesn't exist!"
 msgstr ""
 
-#: libraries/classes/Plugins/Schema/Eps/EpsRelationSchema.php:61
-#: libraries/classes/Plugins/Schema/Svg/SvgRelationSchema.php:64
+#: libraries/classes/Plugins/Schema/Eps/EpsRelationSchema.php:62
+#: libraries/classes/Plugins/Schema/Svg/SvgRelationSchema.php:75
 #, php-format
 msgid "Schema of the %s database - Page %s"
 msgstr ""
 
-#: libraries/classes/Plugins/Schema/ExportRelationSchema.php:275
+#: libraries/classes/Plugins/Schema/ExportRelationSchema.php:294
 msgid "SCHEMA ERROR: "
 msgstr ""
 
-#: libraries/classes/Plugins/Schema/Pdf/Pdf.php:275
+#: libraries/classes/Plugins/Schema/Pdf/Pdf.php:301
 msgid "PDF export page"
 msgstr "هەناردنی ئەم جۆرە ڕێگەپێدراو نییە"
 
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:118
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:142
 #, fuzzy, php-format
-#| msgid "Search in database"
 msgid "Schema of the %s database"
 msgstr "گەڕان لە بنکەی دراو"
 
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:146
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:556
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:170
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:580
 msgid "Relational schema"
 msgstr ""
 
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:497
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:521
 msgid "Table of contents"
-msgstr ""
+msgstr "خشتەی ناوەڕۆک"
 
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:639
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:663
 #: templates/columns_definitions/column_definitions_form.twig:72
 #: templates/database/data_dictionary/index.twig:11
 #: templates/table/structure/display_table_stats.twig:6
 msgid "Table comments:"
 msgstr "تێبینیەکانی خشتە:"
 
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:691
-#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:724
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:715
+#: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php:748
 #: templates/table/structure/display_structure.twig:31
 #: templates/table/tracking/structure_snapshot_columns.twig:11
 msgid "Extra"
-msgstr ""
+msgstr "زیادە"
 
 #: libraries/classes/Plugins/SchemaPlugin.php:66
 msgid "Show color"
@@ -10365,13 +10176,13 @@ msgstr ""
 #: libraries/classes/Plugins/Schema/SchemaEps.php:61
 #: libraries/classes/Plugins/Schema/SchemaPdf.php:61
 msgid "Orientation"
-msgstr ""
+msgstr "ئاڕاستە"
 
 #: libraries/classes/Plugins/Schema/SchemaDia.php:57
 #: libraries/classes/Plugins/Schema/SchemaEps.php:65
 #: libraries/classes/Plugins/Schema/SchemaPdf.php:65
 msgid "Landscape"
-msgstr ""
+msgstr "ئاسۆی"
 
 #: libraries/classes/Plugins/Schema/SchemaDia.php:58
 #: libraries/classes/Plugins/Schema/SchemaEps.php:66
@@ -10426,7 +10237,7 @@ msgstr ""
 
 #. l10n: See https://www.php.net/manual/en/function.strftime.php
 #: libraries/classes/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php:70
-#: libraries/classes/Util.php:812
+#: libraries/classes/Util.php:814
 msgid "%B %d, %Y at %I:%M %p"
 msgstr ""
 
@@ -10583,13 +10394,11 @@ msgstr ""
 msgid "Formats text as XML with syntax highlighting."
 msgstr ""
 
-#: libraries/classes/Plugins/TwoFactor/Application.php:142
-#, fuzzy
-#| msgid "Authentication Plugin"
+#: libraries/classes/Plugins/TwoFactor/Application.php:143
 msgid "Authentication Application (2FA)"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
-#: libraries/classes/Plugins/TwoFactor/Application.php:153
+#: libraries/classes/Plugins/TwoFactor/Application.php:154
 msgid ""
 "Provides authentication using HOTP and TOTP applications such as FreeOTP, "
 "Google Authenticator or Authy."
@@ -10604,28 +10413,24 @@ msgid ""
 "Provides authentication using hardware security tokens supporting FIDO U2F."
 msgstr ""
 
-#: libraries/classes/Plugins/TwoFactorPlugin.php:71
+#: libraries/classes/Plugins/TwoFactorPlugin.php:73
 #, php-format
 msgid "Two-factor authentication failed: %s"
 msgstr ""
 
-#: libraries/classes/Plugins/TwoFactorPlugin.php:76
+#: libraries/classes/Plugins/TwoFactorPlugin.php:78
 msgid "Two-factor authentication failed."
 msgstr ""
 
-#: libraries/classes/Plugins/TwoFactorPlugin.php:130
-#, fuzzy
-#| msgid "SHA256 password authentication"
+#: libraries/classes/Plugins/TwoFactorPlugin.php:132
 msgid "No Two-Factor Authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
-#: libraries/classes/Plugins/TwoFactorPlugin.php:140
+#: libraries/classes/Plugins/TwoFactorPlugin.php:142
 msgid "Login using password only."
 msgstr ""
 
 #: libraries/classes/Plugins/TwoFactor/Simple.php:49
-#, fuzzy
-#| msgid "SHA256 password authentication"
 msgid "Simple two-factor authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
@@ -10653,7 +10458,7 @@ msgstr ""
 
 #: libraries/classes/Query/Utilities.php:119
 msgid "Details…"
-msgstr ""
+msgstr "وردەکارییەکان…"
 
 #: libraries/classes/RecentFavoriteTable.php:152
 msgid "Could not save recent table!"
@@ -10695,11 +10500,11 @@ msgstr ""
 #: libraries/classes/Relation.php:146
 msgctxt "Correctly working"
 msgid "OK"
-msgstr ""
+msgstr "باشە"
 
 #: libraries/classes/Relation.php:149
 msgid "Enabled"
-msgstr ""
+msgstr "چالاككراو"
 
 #: libraries/classes/Relation.php:153
 msgid "Configuration of pmadb…"
@@ -10869,7 +10674,7 @@ msgstr "هەڵە"
 
 #: libraries/classes/ReplicationGui.php:507
 msgid "Unknown error"
-msgstr ""
+msgstr "هەڵەیەکی نەزانراو"
 
 #: libraries/classes/ReplicationGui.php:520
 #, php-format
@@ -10925,27 +10730,33 @@ msgstr ""
 msgid "Error while loading the search."
 msgstr "هەڵەیەک لەکاتی گواستنەوەی فایلی بارکراو."
 
-#: libraries/classes/Server/Privileges.php:790
+#: libraries/classes/Server/Privileges.php:789
+#: libraries/classes/Server/Privileges.php:863
+#: libraries/classes/Server/Privileges.php:3958
+msgid "Native MySQL authentication"
+msgstr ""
+
+#: libraries/classes/Server/Privileges.php:791
 msgid "SHA256 password authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
-#: libraries/classes/Server/Privileges.php:1154
+#: libraries/classes/Server/Privileges.php:1155
 #, php-format
 msgid "The password for %s was changed successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1203
+#: libraries/classes/Server/Privileges.php:1204
 #, php-format
 msgid "You have revoked the privileges for %s."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1540
+#: libraries/classes/Server/Privileges.php:1541
 #: templates/database/privileges/index.twig:124
 #: templates/table/privileges/index.twig:127
 msgid "Not enough privilege to view users."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1607
+#: libraries/classes/Server/Privileges.php:1608
 #: templates/database/privileges/index.twig:80
 #: templates/server/privileges/new_user_ajax.twig:45
 #: templates/server/privileges/users_overview.twig:72
@@ -10953,85 +10764,85 @@ msgstr ""
 msgid "Edit privileges"
 msgstr "تایبەتمەندێتیەکان"
 
-#: libraries/classes/Server/Privileges.php:1610
+#: libraries/classes/Server/Privileges.php:1611
 msgid "Revoke"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1940
+#: libraries/classes/Server/Privileges.php:1941
 #: templates/server/privileges/privileges_table.twig:240
 msgid "Database-specific privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1946
+#: libraries/classes/Server/Privileges.php:1947
 #: templates/server/privileges/privileges_summary.twig:18
 #: templates/server/privileges/privileges_table.twig:7
 #: templates/server/privileges/privileges_table.twig:242
 msgid "Table-specific privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1951
-#: libraries/classes/Server/Privileges.php:1953
+#: libraries/classes/Server/Privileges.php:1952
+#: libraries/classes/Server/Privileges.php:1954
 #: templates/server/privileges/edit_routine_privileges.twig:29
 #: templates/server/privileges/edit_routine_privileges.twig:46
 #: templates/server/privileges/edit_routine_privileges.twig:58
 msgid "Routine"
 msgstr "ڕۆتینەکان"
 
-#: libraries/classes/Server/Privileges.php:1952
+#: libraries/classes/Server/Privileges.php:1953
 #: templates/server/privileges/edit_routine_privileges.twig:47
 msgid "Routine-specific privileges"
 msgstr "تایبەتمەندێتیەکان"
 
-#: libraries/classes/Server/Privileges.php:2300
+#: libraries/classes/Server/Privileges.php:2301
 msgid "No users selected for deleting!"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2303
+#: libraries/classes/Server/Privileges.php:2304
 msgid "Reloading the privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2326
+#: libraries/classes/Server/Privileges.php:2327
 msgid "The selected users have been deleted successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2403
+#: libraries/classes/Server/Privileges.php:2404
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2490
+#: libraries/classes/Server/Privileges.php:2491
 #: templates/database/privileges/index.twig:102
 #: templates/table/privileges/index.twig:106
 msgid "No user found."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2570
+#: libraries/classes/Server/Privileges.php:2571
 #, php-format
 msgid "Deleting %s"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2601
+#: libraries/classes/Server/Privileges.php:2602
 msgid "The privileges were reloaded successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2699
+#: libraries/classes/Server/Privileges.php:2700
 #, php-format
 msgid "The user %s already exists!"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2980
+#: libraries/classes/Server/Privileges.php:2981
 #, php-format
 msgid "Privileges for %s"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3121
+#: libraries/classes/Server/Privileges.php:3122
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
 "allows a connection from any (%) host."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3164
+#: libraries/classes/Server/Privileges.php:3165
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -11040,7 +10851,7 @@ msgid ""
 "%sreload the privileges%s before you continue."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3180
+#: libraries/classes/Server/Privileges.php:3181
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -11049,7 +10860,7 @@ msgid ""
 "privilege."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3520
+#: libraries/classes/Server/Privileges.php:3517
 msgid "You have added a new user."
 msgstr ""
 
@@ -11058,69 +10869,69 @@ msgstr ""
 msgid "Current server:"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
-#: libraries/classes/Server/Status/Data.php:120
+#: libraries/classes/Server/Status/Data.php:141
 msgid "Handler"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:121
+#: libraries/classes/Server/Status/Data.php:142
 msgid "Query cache"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:122
+#: libraries/classes/Server/Status/Data.php:143
 msgid "Threads"
-msgstr ""
+msgstr "دابەشکراوەکان"
 
-#: libraries/classes/Server/Status/Data.php:124
+#: libraries/classes/Server/Status/Data.php:145
 msgid "Temporary data"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:125
+#: libraries/classes/Server/Status/Data.php:146
 msgid "Delayed inserts"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:126
+#: libraries/classes/Server/Status/Data.php:147
 msgid "Key cache"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:127
+#: libraries/classes/Server/Status/Data.php:148
 msgid "Joins"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:129
+#: libraries/classes/Server/Status/Data.php:150
 msgid "Sorting"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:131
+#: libraries/classes/Server/Status/Data.php:152
 msgid "Transaction coordinator"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:132
+#: libraries/classes/Server/Status/Data.php:153
 #: templates/server/binlog/index.twig:27
 msgid "Files"
-msgstr ""
+msgstr "پەڕگەکان"
 
-#: libraries/classes/Server/Status/Data.php:148
+#: libraries/classes/Server/Status/Data.php:169
 msgid "Flush (close) all tables"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:152
+#: libraries/classes/Server/Status/Data.php:173
 msgid "Show open tables"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:161
+#: libraries/classes/Server/Status/Data.php:182
 msgid "Show slave hosts"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:168
+#: libraries/classes/Server/Status/Data.php:189
 #: templates/server/replication/master_replication.twig:8
 msgid "Show master status"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:174
+#: libraries/classes/Server/Status/Data.php:195
 msgid "Show slave status"
 msgstr ""
 
-#: libraries/classes/Server/Status/Data.php:182
+#: libraries/classes/Server/Status/Data.php:203
 msgid "Flush query cache"
 msgstr ""
 
@@ -11305,7 +11116,6 @@ msgstr ""
 
 #: libraries/classes/Template.php:111
 #, fuzzy, php-format
-#| msgid "Error while loading the search."
 msgid "Error while working with template cache: %s"
 msgstr "هەڵەیەک لەکاتی گواستنەوەی فایلی بارکراو."
 
@@ -11720,85 +11530,85 @@ msgstr "وشەی نهێنی"
 msgid "Could not save configuration"
 msgstr ""
 
-#: libraries/classes/Util.php:139
+#: libraries/classes/Util.php:141
 #, php-format
 msgid "Max: %s%s"
 msgstr ""
 
 #. l10n: Short month name
 #. l10n: Short month name for January
-#: libraries/classes/Util.php:769 templates/javascript/variables.twig:34
+#: libraries/classes/Util.php:771 templates/javascript/variables.twig:34
 msgid "Jan"
 msgstr "کانوونی دووەم"
 
 #. l10n: Short month name
 #. l10n: Short month name for February
-#: libraries/classes/Util.php:771 templates/javascript/variables.twig:35
+#: libraries/classes/Util.php:773 templates/javascript/variables.twig:35
 msgid "Feb"
 msgstr "شوبات"
 
 #. l10n: Short month name
 #. l10n: Short month name for March
-#: libraries/classes/Util.php:773 templates/javascript/variables.twig:36
+#: libraries/classes/Util.php:775 templates/javascript/variables.twig:36
 msgid "Mar"
 msgstr "مارت"
 
 #. l10n: Short month name
 #. l10n: Short month name for April
-#: libraries/classes/Util.php:775 templates/javascript/variables.twig:37
+#: libraries/classes/Util.php:777 templates/javascript/variables.twig:37
 msgid "Apr"
 msgstr "نیسان"
 
 #. l10n: Short month name
-#: libraries/classes/Util.php:777
+#: libraries/classes/Util.php:779
 msgctxt "Short month name"
 msgid "May"
 msgstr "مایس"
 
 #. l10n: Short month name
 #. l10n: Short month name for June
-#: libraries/classes/Util.php:779 templates/javascript/variables.twig:39
+#: libraries/classes/Util.php:781 templates/javascript/variables.twig:39
 msgid "Jun"
 msgstr "حوزیران"
 
 #. l10n: Short month name
 #. l10n: Short month name for July
-#: libraries/classes/Util.php:781 templates/javascript/variables.twig:40
+#: libraries/classes/Util.php:783 templates/javascript/variables.twig:40
 msgid "Jul"
 msgstr "تەموز"
 
 #. l10n: Short month name
 #. l10n: Short month name for August
-#: libraries/classes/Util.php:783 templates/javascript/variables.twig:41
+#: libraries/classes/Util.php:785 templates/javascript/variables.twig:41
 msgid "Aug"
 msgstr "ئاب"
 
 #. l10n: Short month name
 #. l10n: Short month name for September
-#: libraries/classes/Util.php:785 templates/javascript/variables.twig:42
+#: libraries/classes/Util.php:787 templates/javascript/variables.twig:42
 msgid "Sep"
 msgstr "ئەیلول"
 
 #. l10n: Short month name
 #. l10n: Short month name for October
-#: libraries/classes/Util.php:787 templates/javascript/variables.twig:43
+#: libraries/classes/Util.php:789 templates/javascript/variables.twig:43
 msgid "Oct"
 msgstr "تشرینی یەکەم"
 
 #. l10n: Short month name
 #. l10n: Short month name for November
-#: libraries/classes/Util.php:789 templates/javascript/variables.twig:44
+#: libraries/classes/Util.php:791 templates/javascript/variables.twig:44
 msgid "Nov"
 msgstr "تشرینی دووەم"
 
 #. l10n: Short month name
 #. l10n: Short month name for December
-#: libraries/classes/Util.php:791 templates/javascript/variables.twig:45
+#: libraries/classes/Util.php:793 templates/javascript/variables.twig:45
 msgid "Dec"
 msgstr "کانوونی یەکەم"
 
 #. l10n: Short week day name for Sunday
-#: libraries/classes/Util.php:795
+#: libraries/classes/Util.php:797
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Short week day name for Sunday"
@@ -11806,69 +11616,69 @@ msgid "Sun"
 msgstr "یەک شەم"
 
 #. l10n: Short week day name for Monday
-#: libraries/classes/Util.php:797 templates/javascript/variables.twig:58
+#: libraries/classes/Util.php:799 templates/javascript/variables.twig:58
 msgid "Mon"
 msgstr "دوو شەم"
 
 #. l10n: Short week day name for Tuesday
-#: libraries/classes/Util.php:799 templates/javascript/variables.twig:59
+#: libraries/classes/Util.php:801 templates/javascript/variables.twig:59
 msgid "Tue"
 msgstr "سێ شەم"
 
 #. l10n: Short week day name for Wednesday
-#: libraries/classes/Util.php:801 templates/javascript/variables.twig:60
+#: libraries/classes/Util.php:803 templates/javascript/variables.twig:60
 msgid "Wed"
 msgstr "چوار شەم"
 
 #. l10n: Short week day name for Thursday
-#: libraries/classes/Util.php:803 templates/javascript/variables.twig:61
+#: libraries/classes/Util.php:805 templates/javascript/variables.twig:61
 msgid "Thu"
 msgstr "پێنج شەم"
 
 #. l10n: Short week day name for Friday
-#: libraries/classes/Util.php:805 templates/javascript/variables.twig:62
+#: libraries/classes/Util.php:807 templates/javascript/variables.twig:62
 msgid "Fri"
 msgstr "هەینی"
 
 #. l10n: Short week day name for Saturday
-#: libraries/classes/Util.php:807 templates/javascript/variables.twig:63
+#: libraries/classes/Util.php:809 templates/javascript/variables.twig:63
 msgid "Sat"
 msgstr "شەممە"
 
-#: libraries/classes/Util.php:833
-msgctxt "AM/PM indication in time"
-msgid "PM"
-msgstr ""
-
 #: libraries/classes/Util.php:835
 msgctxt "AM/PM indication in time"
-msgid "AM"
-msgstr ""
+msgid "PM"
+msgstr "د ن"
 
-#: libraries/classes/Util.php:910
+#: libraries/classes/Util.php:837
+msgctxt "AM/PM indication in time"
+msgid "AM"
+msgstr "پ ن"
+
+#: libraries/classes/Util.php:912
 #, php-format
 msgid "%s days, %s hours, %s minutes and %s seconds"
 msgstr ""
 
-#: libraries/classes/Util.php:946
+#: libraries/classes/Util.php:948
 msgid "Missing parameter:"
 msgstr "ڕادەی لەدەستچوو:"
 
-#: libraries/classes/Util.php:2497
+#: libraries/classes/Util.php:2499
 msgid "Users"
 msgstr "بەکارهێنەرەکان"
 
-#: libraries/classes/Util.php:3119
+#: libraries/classes/Util.php:3121
 #: templates/database/multi_table_query/form.twig:59
 msgid "Sort"
 msgstr "ڕیزکردن"
 
-#: libraries/classes/Util.php:3217 libraries/classes/Util.php:3218
+#: libraries/classes/Util.php:3219 libraries/classes/Util.php:3220
 #: templates/database/structure/check_all_tables.twig:15
 msgid "Empty"
 msgstr "بەتاڵ"
 
-#: libraries/classes/Util.php:3223 libraries/classes/Util.php:3224
+#: libraries/classes/Util.php:3225 libraries/classes/Util.php:3226
 #: templates/database/routines/row.twig:32
 #: templates/database/routines/row.twig:42
 #: templates/database/routines/row.twig:46
@@ -11883,16 +11693,12 @@ msgstr ""
 msgid "No files found inside ZIP archive!"
 msgstr ""
 
-#: libraries/common.inc.php:276
-msgid "Invalid authentication method set in configuration:"
-msgstr ""
-
-#: libraries/common.inc.php:330
+#: libraries/common.inc.php:267
 #, php-format
 msgid "You should upgrade to %s %s or later."
 msgstr ""
 
-#: libraries/common.inc.php:385
+#: libraries/common.inc.php:299
 msgid "Error: Token mismatch"
 msgstr ""
 
@@ -11910,7 +11716,7 @@ msgstr "تاقیکرنەوە"
 #: libraries/config.values.php:90 libraries/config.values.php:108
 #: libraries/config.values.php:128 libraries/config.values.php:140
 msgid "Both"
-msgstr ""
+msgstr "هەردووک"
 
 #: libraries/config.values.php:105
 msgid "Nowhere"
@@ -11918,11 +11724,11 @@ msgstr ""
 
 #: libraries/config.values.php:106
 msgid "Left"
-msgstr ""
+msgstr "چەپ"
 
 #: libraries/config.values.php:107
 msgid "Right"
-msgstr ""
+msgstr "ڕاست"
 
 #: libraries/config.values.php:143
 msgid "Click"
@@ -11930,7 +11736,7 @@ msgstr ""
 
 #: libraries/config.values.php:144
 msgid "Double click"
-msgstr ""
+msgstr "دوو کرتە"
 
 #: libraries/config.values.php:148
 msgid "key"
@@ -11942,11 +11748,11 @@ msgstr "لە نێو خشتەی:"
 
 #: libraries/config.values.php:153
 msgid "Welcome"
-msgstr ""
+msgstr "بەخێرهاتی"
 
 #: libraries/config.values.php:186
 msgid "Open"
-msgstr ""
+msgstr "کردنەوە"
 
 #: libraries/config.values.php:187
 msgid "Closed"
@@ -12054,7 +11860,7 @@ msgstr ""
 #: templates/columns_definitions/column_default.twig:3
 msgctxt "for default"
 msgid "None"
-msgstr ""
+msgstr "نییە"
 
 #: templates/columns_definitions/column_default.twig:5
 msgid "As defined:"
@@ -12062,13 +11868,12 @@ msgstr ""
 
 #: templates/columns_definitions/column_definitions_form.twig:23
 msgid "Table name"
-msgstr ""
+msgstr "ناوی خشتە"
 
 #: templates/columns_definitions/column_definitions_form.twig:32
 #: templates/console/display.twig:99
-#: templates/database/central_columns/main.twig:212
-#: templates/export/alias_add.twig:18 templates/export/alias_add.twig:32
-#: templates/export/alias_add.twig:46
+#: templates/database/central_columns/main.twig:212 templates/export.twig:244
+#: templates/export.twig:258 templates/export.twig:272
 msgid "Add"
 msgstr "و"
 
@@ -12262,7 +12067,7 @@ msgstr ""
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:31
 #: templates/console/display.twig:84 templates/console/display.twig:175
 msgid "Expand"
-msgstr ""
+msgstr "پانکردن"
 
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:31
 #: templates/console/display.twig:175
@@ -12272,11 +12077,11 @@ msgstr "داواکاری"
 #: templates/console/display.twig:7 templates/setup/home/index.twig:106
 #: templates/sql/query.twig:39
 msgid "Clear"
-msgstr ""
+msgstr "پاککردنەوە"
 
 #: templates/console/display.twig:7
 msgid "History"
-msgstr ""
+msgstr "مێژوو"
 
 #: templates/console/display.twig:11 templates/console/display.twig:99
 msgid "Bookmarks"
@@ -12308,7 +12113,7 @@ msgstr "ماوەی جێبەجێکردنی داواکاری"
 
 #: templates/console/display.twig:47
 msgid "During current session"
-msgstr ""
+msgstr "لە کاتی ئەم دانیشتنە"
 
 #: templates/console/display.twig:64
 msgid "ascending"
@@ -12357,7 +12162,7 @@ msgstr "گەڕانی خشتە"
 
 #: templates/console/display.twig:121
 msgid "Label"
-msgstr ""
+msgstr "پێناس"
 
 #: templates/console/display.twig:124
 msgid "Target database"
@@ -12384,7 +12189,6 @@ msgstr ""
 
 #: templates/create_tracking_version.twig:16
 #, fuzzy, php-format
-#| msgid "Current settings"
 msgid "Create version %1$s"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
@@ -12415,8 +12219,6 @@ msgid "Attribute"
 msgstr "بەشداری کردن"
 
 #: templates/database/central_columns/main.twig:145
-#, fuzzy
-#| msgid "The central list of columns for the current database is empty."
 msgid "The central list of columns for the current database is empty"
 msgstr "لیستەی بنەڕەتیی خانەکانی بنکەی دراوە بەتاڵن."
 
@@ -12476,16 +12278,14 @@ msgstr "کردار"
 #: templates/database/operations/index.twig:29
 #: templates/database/structure/show_create.twig:11
 msgid "Create table"
-msgstr ""
+msgstr "خشتە پاکبکەرەوە"
 
 #: templates/database/create_table.twig:15
 #: templates/database/operations/index.twig:37
 msgid "Number of columns"
-msgstr ""
+msgstr "ژمارەی ستوونەکان"
 
 #: templates/database/data_dictionary/index.twig:3
-#, fuzzy
-#| msgid "Database comment"
 msgid "Database comment:"
 msgstr "تێبینی بنکەی دراو"
 
@@ -12509,6 +12309,13 @@ msgstr ""
 msgid "No index defined!"
 msgstr "هیچ نیشاندەرێک پێناسە نەکراوە‌!"
 
+#: templates/database/designer/database_tables.twig:31
+#: templates/database/export/index.twig:29
+#: templates/database/search/main.twig:43 templates/server/export/index.twig:12
+#: templates/server/replication/database_multibox.twig:7
+msgid "Select all"
+msgstr "هەڵبژاردنی هەموو"
+
 #: templates/database/designer/database_tables.twig:37
 msgid "Show/hide columns"
 msgstr "پێشاندانی نیشاندەرەکان"
@@ -12518,10 +12325,9 @@ msgid "See table structure"
 msgstr "پێکهاتە"
 
 #: templates/database/designer/database_tables.twig:91
-#, fuzzy, php-format
-#| msgid "Select all"
+#, php-format
 msgid "Select \"%s\""
-msgstr "هەڵبژاردنی هەموو"
+msgstr "هەڵبژاردنی “%s”"
 
 #: templates/database/designer/database_tables.twig:109
 #, php-format
@@ -12564,8 +12370,6 @@ msgstr "سڕینەوە"
 #: templates/database/designer/main.twig:91
 #: templates/database/designer/main.twig:94
 #: templates/database/designer/main.twig:273
-#, fuzzy
-#| msgid "Internal relations"
 msgid "Create relationship"
 msgstr "ڕیزەکە سڕایەوە"
 
@@ -12577,7 +12381,7 @@ msgstr ""
 #: templates/database/designer/main.twig:114
 #: templates/database/designer/main.twig:117
 msgid "Help"
-msgstr ""
+msgstr "یارمەتی"
 
 #: templates/database/designer/main.twig:122
 #: templates/database/designer/main.twig:125
@@ -12622,7 +12426,7 @@ msgstr ""
 #: templates/database/designer/main.twig:179
 #: templates/database/designer/main.twig:183
 msgid "Move Menu"
-msgstr ""
+msgstr "پێڕست بجوڵێنە"
 
 #: templates/database/designer/main.twig:187
 #: templates/database/designer/main.twig:192
@@ -12634,8 +12438,6 @@ msgid "Hide/Show all"
 msgstr ""
 
 #: templates/database/designer/main.twig:214
-#, fuzzy
-#| msgid "Delete tracking"
 msgid "Hide/Show tables with no relationship"
 msgstr "سڕینەوەی لێکۆڵینەوە"
 
@@ -12644,8 +12446,6 @@ msgid "Number of tables:"
 msgstr "ژمارەی ڕیزەکان"
 
 #: templates/database/designer/main.twig:383
-#, fuzzy
-#| msgid "Delete tracking"
 msgid "Delete relationship"
 msgstr "سڕینەوەی لێکۆڵینەوە"
 
@@ -12671,7 +12471,7 @@ msgstr ""
 #: templates/database/designer/main.twig:497
 #: templates/database/designer/main.twig:713
 msgid "Rename to"
-msgstr ""
+msgstr "ناونانەوە بە"
 
 #: templates/database/designer/main.twig:503
 #: templates/database/designer/main.twig:721
@@ -12734,12 +12534,12 @@ msgstr ""
 #: templates/database/events/editor_form.twig:63
 msgctxt "Start of recurring event"
 msgid "Start"
-msgstr ""
+msgstr "دەستپێکردن"
 
 #: templates/database/events/editor_form.twig:69
 msgctxt "End of recurring event"
 msgid "End"
-msgstr ""
+msgstr "کۆتایی"
 
 #: templates/database/events/editor_form.twig:83
 msgid "On completion preserve"
@@ -12800,6 +12600,22 @@ msgstr "هەڵبژاردنی هەموو"
 msgid "Event scheduler status"
 msgstr ""
 
+#: templates/database/export/index.twig:62
+msgid ""
+"@SERVER@ will become the server name and @DATABASE@ will become the database "
+"name."
+msgstr ""
+
+#. l10n: A query that the user has written freely
+#: templates/database/export/index.twig:5
+msgid "Exporting a raw query"
+msgstr ""
+
+#: templates/database/export/index.twig:7
+#, php-format
+msgid "Exporting tables from \"%s\" database"
+msgstr ""
+
 #: templates/database/multi_table_query/form.twig:4
 #: templates/database/qbe/index.twig:4
 #, fuzzy
@@ -12809,40 +12625,28 @@ msgstr "لە داواکاری"
 
 #: templates/database/multi_table_query/form.twig:10
 #: templates/database/qbe/index.twig:10
-#, fuzzy
-#| msgid "Query failed"
 msgid "Query by example"
 msgstr "بیرگەی داواکاری بەکارهاتوو"
 
 #: templates/database/multi_table_query/form.twig:15
-#, fuzzy
-#| msgid "Query failed"
 msgid "Query window"
 msgstr "بیرگەی داواکاری بەکارهاتوو"
 
 #: templates/database/multi_table_query/form.twig:33
 #: templates/database/multi_table_query/form.twig:119
-#, fuzzy
-#| msgid "Select table"
 msgid "select table"
 msgstr "هەڵبژاردنی هەموو"
 
 #: templates/database/multi_table_query/form.twig:40
 #: templates/database/multi_table_query/form.twig:127
-#, fuzzy
-#| msgid "Select a column."
 msgid "select column"
 msgstr "دوو ستون هەڵبژێرە"
 
 #: templates/database/multi_table_query/form.twig:46
-#, fuzzy
-#| msgid "Tables"
 msgid "Table alias"
-msgstr "خشتەکان"
+msgstr "ناوی خشتەکان"
 
 #: templates/database/multi_table_query/form.twig:47
-#, fuzzy
-#| msgid "Column parser"
 msgid "Column alias"
 msgstr "خانە دەستنیشانکەر"
 
@@ -12851,20 +12655,14 @@ msgid "Use this column in criteria"
 msgstr ""
 
 #: templates/database/multi_table_query/form.twig:53
-#, fuzzy
-#| msgid "Criteria:"
 msgid "criteria"
-msgstr "مەرج"
+msgstr "ناوچە"
 
 #: templates/database/multi_table_query/form.twig:65
-#, fuzzy
-#| msgid "Add %s"
 msgid "Add as"
 msgstr "زیادکردن %s"
 
 #: templates/database/multi_table_query/form.twig:110
-#, fuzzy
-#| msgid "Add new column"
 msgid "Another column"
 msgstr "زیادکردن/سڕینەوەی ستونەکان"
 
@@ -12873,8 +12671,6 @@ msgid "Enter criteria as free text"
 msgstr ""
 
 #: templates/database/multi_table_query/form.twig:145
-#, fuzzy
-#| msgid "Remove redundant columns"
 msgid "Remove this column"
 msgstr "سڕینەوەی هێلکاری"
 
@@ -12886,8 +12682,6 @@ msgstr "زیادکردن/سڕینەوەی ستونەکان"
 #: templates/database/multi_table_query/form.twig:169
 #: templates/database/qbe/selection_form.twig:80
 #: templates/database/qbe/selection_form.twig:96
-#, fuzzy
-#| msgid "Update Query"
 msgid "Update query"
 msgstr "نوێکردنەوەی داواکاری"
 
@@ -12900,8 +12694,7 @@ msgstr "تێبینی بنکەی دراو"
 msgid "Rename database to"
 msgstr "ناوی بنکەی دراوە بگۆڕە بۆ"
 
-#: templates/database/operations/index.twig:64
-#: templates/export/alias_add.twig:15
+#: templates/database/operations/index.twig:64 templates/export.twig:241
 msgid "New database name"
 msgstr "ناوی بنکەی دراو"
 
@@ -12991,12 +12784,12 @@ msgstr ""
 #: templates/server/privileges/users_overview.twig:33
 #: templates/table/privileges/index.twig:38
 msgid "Any"
-msgstr ""
+msgstr "هەریەکێک"
 
 #: templates/database/privileges/index.twig:47
 #: templates/table/privileges/index.twig:49
 msgid "global"
-msgstr ""
+msgstr "جیهانیی"
 
 #: templates/database/privileges/index.twig:50
 #: templates/table/privileges/index.twig:52
@@ -13020,7 +12813,7 @@ msgstr ""
 #: templates/table/privileges/index.twig:134
 msgctxt "Create new user"
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 #: templates/database/privileges/index.twig:136
 #: templates/server/privileges/add_user_fieldset.twig:9
@@ -13118,7 +12911,7 @@ msgstr ""
 
 #: templates/database/routines/list.twig:20
 msgid "Returns"
-msgstr ""
+msgstr "گەڕانەوە"
 
 #: templates/database/search/main.twig:5
 msgid "Search in database"
@@ -13142,8 +12935,7 @@ msgstr "وشەکان بە هێمای بۆشایی جیا دەکرێنەوە (\" 
 msgid "Inside tables:"
 msgstr "لەناو خشتە:"
 
-#: templates/database/search/main.twig:46
-#: templates/display/export/select_options.twig:8
+#: templates/database/search/main.twig:46 templates/server/export/index.twig:16
 #: templates/server/replication/database_multibox.twig:8
 msgid "Unselect all"
 msgstr "هەلنەبژاردنی هەموو"
@@ -13168,7 +12960,7 @@ msgstr[1] ""
 #: templates/database/structure/add_prefix.twig:7
 #: templates/database/structure/add_prefix.twig:9
 msgid "Add prefix"
-msgstr ""
+msgstr "پێشگر زیادبکە"
 
 #: templates/database/structure/body_for_table_summary.twig:6
 #, php-format
@@ -13183,7 +12975,7 @@ msgstr "سەرجەم"
 
 #: templates/database/structure/change_prefix_form.twig:7
 msgid "From"
-msgstr ""
+msgstr "لە"
 
 #: templates/database/structure/change_prefix_form.twig:13
 msgid "To"
@@ -13214,7 +13006,7 @@ msgstr ""
 
 #: templates/database/structure/check_all_tables.twig:25
 msgid "Prefix"
-msgstr ""
+msgstr "پێشگر"
 
 #: templates/database/structure/check_all_tables.twig:26
 msgid "Add prefix to table"
@@ -13256,7 +13048,7 @@ msgstr ""
 
 #: templates/database/structure/favorite_anchor.twig:4
 msgid "Add to Favorites"
-msgstr ""
+msgstr "زیادکردن بۆ دڵخوازەکان"
 
 #: templates/database/structure/show_create.twig:2
 msgid "Showing create queries"
@@ -13355,210 +13147,6 @@ msgstr "شوێنکەوتنی خشتە"
 msgid "There are no triggers to display."
 msgstr ""
 
-#: templates/display/change_password/file_a.twig:14
-msgid "No Password"
-msgstr ""
-
-#: templates/display/change_password/file_a.twig:20
-#: templates/login/form.twig:57
-#: templates/server/privileges/login_information_fields.twig:43
-#: templates/server/replication/change_master.twig:18
-#: templates/server/replication/master_add_slave_user.twig:49
-msgid "Password:"
-msgstr ""
-
-#: templates/display/change_password/file_a.twig:23
-msgid "Enter:"
-msgstr ""
-
-#: templates/display/change_password/file_a.twig:32
-#: templates/server/privileges/login_information_fields.twig:60
-#: templates/server/replication/master_add_slave_user.twig:62
-msgid "Re-type:"
-msgstr ""
-
-#: templates/display/change_password/file_b.twig:3
-#: templates/display/change_password/file_d.twig:3
-msgid "Password Hashing:"
-msgstr "وشەی نهێنی"
-
-#: templates/display/change_password/file_b.twig:17
-msgid ""
-"This method requires using an '<i>SSL connection</i>' or an '<i>unencrypted "
-"connection that encrypts the password using RSA</i>'; while connecting to "
-"the server."
-msgstr ""
-
-#: templates/display/export/method.twig:3
-msgid "Export method:"
-msgstr "هەناردن"
-
-#: templates/display/export/method.twig:9
-msgid "Quick - display only the minimal options"
-msgstr "خێرا پیشاندانی بژارده‌ی كه‌مترین"
-
-#: templates/display/export/method.twig:17
-msgid "Custom - display all possible options"
-msgstr ""
-
-#: templates/display/export/option_header.twig:5
-msgid "Exporting databases from the current server"
-msgstr ""
-
-#: templates/display/export/option_header.twig:7
-#, php-format
-msgid "Exporting tables from \"%s\" database"
-msgstr ""
-
-#. l10n: A query that the user has written freely
-#: templates/display/export/option_header.twig:9
-msgid "Exporting a raw query"
-msgstr ""
-
-#: templates/display/export/option_header.twig:11
-#, php-format
-msgid "Exporting rows from \"%s\" table"
-msgstr ""
-
-#: templates/display/export/options_format.twig:2
-#: templates/display/import/import.twig:215
-msgid "Format-specific options:"
-msgstr ""
-
-#: templates/display/export/options_format.twig:4
-#: templates/display/import/import.twig:217
-msgid ""
-"Scroll down to fill in the options for the selected format and ignore the "
-"options for other formats."
-msgstr ""
-
-#: templates/display/export/options_format.twig:12
-#: templates/display/import/import.twig:226
-msgid "Encoding Conversion:"
-msgstr ""
-
-#: templates/display/export/options_output_charset.twig:3
-#: templates/display/import/import.twig:135
-msgid "Character set of the file:"
-msgstr ""
-
-#: templates/display/export/options_output_compression.twig:4
-msgid "Compression:"
-msgstr ""
-
-#: templates/display/export/options_output_compression.twig:11
-msgid "zipped"
-msgstr ""
-
-#: templates/display/export/options_output_compression.twig:17
-msgid "gzipped"
-msgstr ""
-
-#: templates/display/export/options_output_format.twig:3
-msgid "File name template:"
-msgstr "ناوی تێمپیله‌یته‌كه‌ت"
-
-#: templates/display/export/options_output_format.twig:11
-msgid "use this for future exports"
-msgstr ""
-
-#: templates/display/export/options_output_radio.twig:5
-msgid "View output as text"
-msgstr ""
-
-#: templates/display/export/options_output_save_dir.twig:5
-#: templates/display/export/options_quick_export.twig:8
-#, php-format
-msgid "Save on server in the directory <strong>%s</strong>"
-msgstr ""
-
-#: templates/display/export/options_output_separate_files.twig:7
-msgid "Export databases as separate files"
-msgstr ""
-
-#: templates/display/export/options_output_separate_files.twig:9
-msgid "Export tables as separate files"
-msgstr "هەر نرخێک لە خانەی جیا بنووسە."
-
-#: templates/display/export/options_output.twig:2
-#: templates/display/export/options_quick_export.twig:2
-msgid "Output:"
-msgstr "یه‌كه‌ی ده‌رخسته‌"
-
-#: templates/display/export/options_output.twig:26
-msgid "Save output to a file"
-msgstr ""
-
-#: templates/display/export/options_output.twig:51
-#, php-format
-msgid "Skip tables larger than %s MiB"
-msgstr ""
-
-#: templates/display/export/options_rows.twig:2
-msgid "Rows:"
-msgstr "ڕیز"
-
-#: templates/display/export/options_rows.twig:7
-msgid "Dump some row(s)"
-msgstr ""
-
-#: templates/display/export/options_rows.twig:10
-#: templates/display/results/table.twig:49
-#: templates/start_and_number_of_rows_panel.twig:10
-msgid "Number of rows:"
-msgstr ""
-
-#: templates/display/export/options_rows.twig:22
-msgid "Row to begin at:"
-msgstr "ڕیزكردن به‌پێی"
-
-#: templates/display/export/options_rows.twig:31
-msgid "Dump all rows"
-msgstr ""
-
-#: templates/display/export/query.twig:8
-#, fuzzy
-#| msgid "Show SQL queries"
-msgid "Show SQL query"
-msgstr "نیشاندانی پرسگەی SQL"
-
-#: templates/display/export/selection.twig:3
-msgid "Databases:"
-msgstr "بنكه‌ دراوی زانیاریه‌كان"
-
-#: templates/display/export/template_loading.twig:2
-msgid "Export templates:"
-msgstr "هەناردن"
-
-#: templates/display/export/template_loading.twig:6
-msgid "New template:"
-msgstr "بارکردنەوەى پەڕە"
-
-#: templates/display/export/template_loading.twig:8
-msgid "Template name"
-msgstr "ناوی بنکەی دراو"
-
-#: templates/display/export/template_loading.twig:10
-#: templates/server/databases/index.twig:55
-msgid "Create"
-msgstr "دروستكردن"
-
-#: templates/display/export/template_loading.twig:16
-msgid "Existing templates:"
-msgstr ""
-
-#: templates/display/export/template_loading.twig:17
-msgid "Template:"
-msgstr "داڕێژه‌"
-
-#: templates/display/export/template_loading.twig:21
-msgid "Update"
-msgstr "نوێكردنه‌وه‌"
-
-#: templates/display/export/template_options.twig:1
-msgid "Select a template"
-msgstr "هەڵبژاردنی هەموو"
-
 #: templates/display/import/import.twig:40
 msgid "Importing into the current server"
 msgstr ""
@@ -13624,6 +13212,10 @@ msgstr "هیچ خشتەیەکی تازە نیە"
 msgid "File uploads are not allowed on this server."
 msgstr ""
 
+#: templates/display/import/import.twig:135 templates/export.twig:336
+msgid "Character set of the file:"
+msgstr ""
+
 #: templates/display/import/import.twig:163
 msgid "Partial import:"
 msgstr "تێکستە لاوەکیەکان"
@@ -13648,6 +13240,20 @@ msgstr ""
 #: templates/display/import/import.twig:200
 msgid "Other options:"
 msgstr "هەڵبژاردنەکان"
+
+#: templates/display/import/import.twig:215 templates/export.twig:406
+msgid "Format-specific options:"
+msgstr ""
+
+#: templates/display/import/import.twig:217 templates/export.twig:408
+msgid ""
+"Scroll down to fill in the options for the selected format and ignore the "
+"options for other formats."
+msgstr ""
+
+#: templates/display/import/import.twig:226 templates/export.twig:416
+msgid "Encoding Conversion:"
+msgstr ""
 
 #: templates/display/import/javascript.twig:12
 msgid ""
@@ -13689,8 +13295,6 @@ msgid ""
 msgstr ""
 
 #: templates/display/results/sort_by_key.twig:3
-#, fuzzy
-#| msgid "Sort by key"
 msgid "Sort by key:"
 msgstr "ڕیزکردنی بە پێی کلیل"
 
@@ -13702,17 +13306,20 @@ msgstr "پاشەکەوتکردنی زانیاری گۆڕاو"
 msgid "Restore column order"
 msgstr "گەڕانەوەی ڕێزبەندی ستون"
 
+#: templates/display/results/table.twig:49 templates/export.twig:110
+#: templates/start_and_number_of_rows_panel.twig:10
+msgid "Number of rows:"
+msgstr ""
+
 #: templates/display/results/table.twig:52
 msgid "All"
-msgstr ""
+msgstr "هەمووی"
 
 #: templates/display/results/table.twig:126
 msgid "Relational key"
 msgstr ""
 
 #: templates/display/results/table.twig:130
-#, fuzzy
-#| msgid "Display column for relations"
 msgid "Display column for relationships"
 msgstr "لە نێو خشتەی:"
 
@@ -13738,7 +13345,7 @@ msgstr ""
 
 #: templates/display/results/table.twig:252
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "لەبەرگرتنەوە بۆ لەبەرگر"
 
 #: templates/display/results/table.twig:268
 #: templates/table/chart/tbl_chart.twig:10
@@ -13752,7 +13359,7 @@ msgstr ""
 #: templates/encoding/kanji_encoding_form.twig:6
 msgctxt "None encoding conversion"
 msgid "None"
-msgstr ""
+msgstr "نییە"
 
 #: templates/encoding/kanji_encoding_form.twig:17
 msgid "Convert to Kana"
@@ -13775,44 +13382,171 @@ msgstr ""
 msgid "You may examine the data in the error report:"
 msgstr ""
 
-#: templates/export/alias_add.twig:4
+#: templates/export/template_options.twig:1 templates/export.twig:30
+msgid "Select a template"
+msgstr "هەڵبژاردنی هەموو"
+
+#: templates/export.twig:15
+msgid "Export templates:"
+msgstr "هەناردن"
+
+#: templates/export.twig:19
+msgid "New template:"
+msgstr "بارکردنەوەى پەڕە"
+
+#: templates/export.twig:20
+msgid "Template name"
+msgstr "ناوی بنکەی دراو"
+
+#: templates/export.twig:21 templates/server/databases/index.twig:55
+msgid "Create"
+msgstr "دروستكردن"
+
+#: templates/export.twig:27
+msgid "Existing templates:"
+msgstr ""
+
+#: templates/export.twig:28
+msgid "Template:"
+msgstr "داڕێژه‌"
+
+#: templates/export.twig:37
+msgid "Update"
+msgstr "نوێكردنه‌وه‌"
+
+#: templates/export.twig:53
+#, fuzzy
+#| msgid "Show SQL queries"
+msgid "Show SQL query"
+msgstr "نیشاندانی پرسگەی SQL"
+
+#: templates/export.twig:72
+msgid "Export method:"
+msgstr "هەناردن"
+
+#: templates/export.twig:78
+msgid "Quick - display only the minimal options"
+msgstr "خێرا پیشاندانی بژارده‌ی كه‌مترین"
+
+#: templates/export.twig:86
+msgid "Custom - display all possible options"
+msgstr ""
+
+#: templates/export.twig:102
+msgid "Rows:"
+msgstr "ڕیز"
+
+#: templates/export.twig:107
+msgid "Dump some row(s)"
+msgstr ""
+
+#: templates/export.twig:121
+msgid "Row to begin at:"
+msgstr "ڕیزكردن به‌پێی"
+
+#: templates/export.twig:130
+msgid "Dump all rows"
+msgstr ""
+
+#: templates/export.twig:138 templates/export.twig:279
+msgid "Output:"
+msgstr "یه‌كه‌ی ده‌رخسته‌"
+
+#: templates/export.twig:143 templates/export.twig:309
+#, php-format
+msgid "Save on server in the directory <strong>%s</strong>"
+msgstr ""
+
+#: templates/export.twig:157 templates/export.twig:284
+msgid "Rename exported databases/tables/columns"
+msgstr ""
+
+#: templates/export.twig:162
+msgid "Defined aliases"
+msgstr ""
+
+#: templates/export.twig:177 templates/export.twig:191
+#: templates/export.twig:204 templates/export.twig:221
+msgid "Remove"
+msgstr "سڕینەوە"
+
+#: templates/export.twig:230
 msgid "Define new aliases"
 msgstr ""
 
-#: templates/export/alias_add.twig:9
-#, fuzzy
-#| msgid "Select database"
+#: templates/export.twig:235
 msgid "Select database:"
 msgstr "هەڵبژاردنی هەموو"
 
-#: templates/export/alias_add.twig:23
-#, fuzzy
-#| msgid "Select table"
+#: templates/export.twig:249
 msgid "Select table:"
 msgstr "هەڵبژاردنی هەموو"
 
-#: templates/export/alias_add.twig:29
+#: templates/export.twig:255
 msgid "New table name"
 msgstr "ناوی خشتەی نادروست"
 
-#: templates/export/alias_add.twig:37
-#, fuzzy
-#| msgid "Select a column."
+#: templates/export.twig:263
 msgid "Select column:"
 msgstr "دوو ستون هەڵبژێرە"
 
-#: templates/export/alias_add.twig:43
+#: templates/export.twig:269
 msgid "New column name"
 msgstr "لەبەرگرتنەوەی ناوی ستون"
 
-#: templates/export/alias_item.twig:8
-msgid "Remove"
+#: templates/export.twig:302
+msgid "Save output to a file"
+msgstr ""
+
+#: templates/export.twig:323
+msgid "File name template:"
+msgstr "ناوی تێمپیله‌یته‌كه‌ت"
+
+#: templates/export.twig:324
+#, php-format
+msgid ""
+"This value is interpreted using the 'strftime' function, so you can use time "
+"formatting strings. Additionally the following transformations will happen: "
+"%s Other text will be kept as is. See the FAQ 6.27 for details."
+msgstr ""
+
+#: templates/export.twig:329
+msgid "use this for future exports"
+msgstr ""
+
+#: templates/export.twig:352
+msgid "Compression:"
+msgstr ""
+
+#: templates/export.twig:359
+msgid "zipped"
+msgstr ""
+
+#: templates/export.twig:365
+msgid "gzipped"
+msgstr ""
+
+#: templates/export.twig:380
+msgid "Export databases as separate files"
+msgstr ""
+
+#: templates/export.twig:382
+msgid "Export tables as separate files"
+msgstr "هەر نرخێک لە خانەی جیا بنووسە."
+
+#: templates/export.twig:394
+msgid "View output as text"
+msgstr ""
+
+#: templates/export.twig:400
+#, php-format
+msgid "Skip tables larger than %s MiB"
 msgstr ""
 
 #: templates/filter.twig:4 templates/server/status/processes/index.twig:7
 #: templates/server/status/variables/index.twig:8
 msgid "Filters"
-msgstr ""
+msgstr "پاڵێوەرەکان"
 
 #: templates/filter.twig:6 templates/server/status/variables/index.twig:15
 msgid "Containing the word:"
@@ -13829,8 +13563,6 @@ msgid "Use OpenStreetMaps as Base Layer"
 msgstr "بەکارهێنانی بە ڕێگایەکی کراوەی نەخشەی وەک خەتكی سادە"
 
 #: templates/gis_data_editor_form.twig:38
-#, fuzzy
-#| msgid "SRID:"
 msgctxt "Spatial Reference System Identifier"
 msgid "SRID:"
 msgstr "SRID:"
@@ -13847,8 +13579,7 @@ msgstr "خاڵ:"
 #: templates/gis_data_editor_form.twig:93
 #: templates/gis_data_editor_form.twig:134
 #: templates/gis_data_editor_form.twig:186
-#, fuzzy, php-format
-#| msgid "Point %d"
+#, php-format
 msgid "Point %d:"
 msgstr "خاڵ %d"
 
@@ -13905,6 +13636,29 @@ msgstr ""
 msgid "Click on the bar to scroll to top of page"
 msgstr ""
 
+#: templates/home/git_info.twig:2
+msgid "Git revision:"
+msgstr ""
+
+#: templates/home/git_info.twig:13
+msgid "no branch"
+msgstr ""
+
+#: templates/home/git_info.twig:15 templates/home/git_info.twig:22
+#, php-format
+msgid "from %s branch"
+msgstr ""
+
+#: templates/home/git_info.twig:25
+#, php-format
+msgid "committed on %s by %s"
+msgstr ""
+
+#: templates/home/git_info.twig:32
+#, php-format
+msgid "authored on %s by %s"
+msgstr ""
+
 #: templates/home/index.twig:22 templates/login/form.twig:7
 #, php-format
 msgid ""
@@ -13921,8 +13675,6 @@ msgid "General settings"
 msgstr "ڕێکخستنە گشتیەکان"
 
 #: templates/home/index.twig:50
-#, fuzzy
-#| msgid "Server connection collation"
 msgid "Server connection collation:"
 msgstr "ڕێکخستنی پەیوەندی ڕاژەکار"
 
@@ -14017,25 +13769,16 @@ msgstr "ڕۆژژمێر-مانگ-ساڵ"
 
 #. l10n: Year suffix for calendar, "none" is empty.
 #: templates/javascript/variables.twig:11
-#, fuzzy
-#| msgctxt "Year suffix"
-#| msgid "none"
 msgid "none"
 msgstr "هیچ"
 
 #. l10n: Previous month. Display text for previous month link in calendar
 #: templates/javascript/variables.twig:16
-#, fuzzy
-#| msgctxt "Previous month"
-#| msgid "Prev"
 msgid "Prev"
 msgstr "پێشتر"
 
 #. l10n: Next month. Display text for next month link in calendar
 #: templates/javascript/variables.twig:17
-#, fuzzy
-#| msgctxt "Next month"
-#| msgid "Next"
 msgid "Next"
 msgstr "دواتر"
 
@@ -14235,6 +13978,14 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
+#: templates/login/form.twig:57
+#: templates/server/privileges/change_password.twig:21
+#: templates/server/privileges/login_information_fields.twig:43
+#: templates/server/replication/change_master.twig:18
+#: templates/server/replication/master_add_slave_user.twig:49
+msgid "Password:"
+msgstr "تێپه‌ڕه‌وشه‌:"
+
 #: templates/login/form.twig:67
 #, fuzzy
 #| msgid "Server Choice:"
@@ -14260,8 +14011,6 @@ msgstr ""
 
 #: templates/login/twofactor/application_configure.twig:16
 #: templates/login/twofactor/application.twig:2
-#, fuzzy
-#| msgid "Authentication Plugin"
 msgid "Authentication code:"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
@@ -14311,7 +14060,7 @@ msgstr ""
 
 #: templates/navigation/main.twig:26 templates/navigation/main.twig:27
 msgid "Home"
-msgstr ""
+msgstr "ماڵەوە"
 
 #: templates/navigation/main.twig:31 templates/navigation/main.twig:32
 msgid "Empty session data"
@@ -14319,7 +14068,7 @@ msgstr ""
 
 #: templates/navigation/main.twig:31 templates/navigation/main.twig:32
 msgid "Log out"
-msgstr ""
+msgstr "چوونە دەرەوە"
 
 #: templates/navigation/main.twig:36 templates/navigation/main.twig:37
 msgid "phpMyAdmin documentation"
@@ -14360,8 +14109,6 @@ msgid ""
 msgstr ""
 
 #: templates/preferences/autoload.twig:13
-#, fuzzy
-#| msgid "Delete tracking"
 msgid "Delete settings"
 msgstr "سڕینەوەی لێکۆڵینەوە"
 
@@ -14374,8 +14121,6 @@ msgid "Manage your settings"
 msgstr ""
 
 #: templates/preferences/header.twig:12
-#, fuzzy
-#| msgid "SHA256 password authentication"
 msgid "Two-factor authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
@@ -14467,8 +14212,6 @@ msgid "Configure two-factor authentication"
 msgstr ""
 
 #: templates/preferences/two_factor/configure.twig:12
-#, fuzzy
-#| msgid "SHA256 password authentication"
 msgid "Enable two-factor authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
@@ -14484,14 +14227,10 @@ msgstr ""
 
 #: templates/preferences/two_factor/confirm.twig:13
 #: templates/preferences/two_factor/main.twig:46
-#, fuzzy
-#| msgid "SHA256 password authentication"
 msgid "Disable two-factor authentication"
 msgstr "گۆڕینی وشەی نهێنی"
 
 #: templates/preferences/two_factor/main.twig:5
-#, fuzzy
-#| msgid "Authentication settings."
 msgid "Two-factor authentication status"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
@@ -14535,8 +14274,6 @@ msgstr ""
 
 #: templates/server/binlog/index.twig:63 templates/server/binlog/index.twig:64
 #: templates/server/status/processes/list.twig:26
-#, fuzzy
-#| msgid "Show SQL queries"
 msgid "Show full queries"
 msgstr "نیشاندانی پرسگەی SQL"
 
@@ -14546,7 +14283,7 @@ msgstr ""
 
 #: templates/server/binlog/index.twig:85
 msgid "Position"
-msgstr ""
+msgstr "شوێن"
 
 #: templates/server/binlog/index.twig:87
 #: templates/server/replication/master_replication.twig:23
@@ -14555,16 +14292,14 @@ msgstr ""
 
 #: templates/server/binlog/index.twig:88
 msgid "Original position"
-msgstr ""
+msgstr "شوێنی بنەرەتی"
 
 #: templates/server/binlog/index.twig:89
 #: templates/table/structure/display_table_stats.twig:3
 msgid "Information"
-msgstr ""
+msgstr "زانیاری"
 
 #: templates/server/collations/index.twig:5
-#, fuzzy
-#| msgid "Server connection collation"
 msgid "Character sets and collations"
 msgstr "ڕێکخستنی پەیوەندی ڕاژەکار"
 
@@ -14593,10 +14328,9 @@ msgid "Slave replication"
 msgstr ""
 
 #: templates/server/databases/index.twig:184
-#, fuzzy, php-format
-#| msgid "up to date"
+#, php-format
 msgid "Jump to database '%s'"
-msgstr "نوێترینە"
+msgstr "بڕۆ بۆ بنکەدراوی ‘%s’"
 
 #: templates/server/databases/index.twig:245
 #, php-format
@@ -14634,39 +14368,45 @@ msgstr ""
 msgid "Unknown storage engine."
 msgstr ""
 
+#: templates/server/export/index.twig:32
+msgid "@SERVER@ will become the server name."
+msgstr ""
+
+#: templates/server/export/index.twig:3
+msgid "Exporting databases from the current server"
+msgstr ""
+
+#: templates/server/export/index.twig:7
+msgid "Databases:"
+msgstr "بنكه‌ دراوی زانیاریه‌كان"
+
 #: templates/server/plugins/index.twig:26
 msgid "Plugin"
-msgstr ""
+msgstr "پێوەکراو"
 
 #: templates/server/plugins/index.twig:28 templates/table/tracking/main.twig:28
 msgid "Version"
-msgstr ""
+msgstr "وەشان"
 
 #: templates/server/plugins/index.twig:29
 msgid "Author"
-msgstr ""
+msgstr "نووسەر"
 
 #: templates/server/plugins/index.twig:41
-#, fuzzy
-#| msgid "active"
 msgid "inactive"
-msgstr "چالاک"
+msgstr "ناچالاک"
 
 #: templates/server/plugins/index.twig:43
 msgid "disabled"
 msgstr ""
 
 #: templates/server/plugins/index.twig:45
-#, fuzzy
-#| msgid "Deleting"
 msgid "deleting"
 msgstr "سڕینەوە"
 
 #: templates/server/plugins/index.twig:47
-#, fuzzy
-#| msgid "Delete"
 msgid "deleted"
-msgstr "سڕینەوە"
+msgstr "سڕایەوە"
 
 #: templates/server/privileges/add_user.twig:12
 msgid "Database for user account"
@@ -14683,6 +14423,31 @@ msgstr ""
 #: templates/server/privileges/add_user.twig:24
 #, php-format
 msgid "Grant all privileges on database %s."
+msgstr ""
+
+#: templates/server/privileges/change_password.twig:15
+msgid "No Password"
+msgstr ""
+
+#: templates/server/privileges/change_password.twig:24
+msgid "Enter:"
+msgstr ""
+
+#: templates/server/privileges/change_password.twig:32
+#: templates/server/privileges/login_information_fields.twig:60
+#: templates/server/replication/master_add_slave_user.twig:62
+msgid "Re-type:"
+msgstr ""
+
+#: templates/server/privileges/change_password.twig:40
+msgid "Password Hashing:"
+msgstr "وشەی نهێنی"
+
+#: templates/server/privileges/change_password.twig:58
+msgid ""
+"This method requires using an '<i>SSL connection</i>' or an '<i>unencrypted "
+"connection that encrypts the password using RSA</i>'; while connecting to "
+"the server."
 msgstr ""
 
 #: templates/server/privileges/choose_user_group.twig:4
@@ -14773,12 +14538,12 @@ msgstr "ناوی بەکارهێنەر"
 #: templates/server/privileges/login_information_fields.twig:27
 #: templates/server/replication/master_add_slave_user.twig:34
 msgid "Any host"
-msgstr ""
+msgstr "هەر خانەخوێیەک"
 
 #: templates/server/privileges/login_information_fields.twig:28
 #: templates/server/replication/master_add_slave_user.twig:35
 msgid "Local"
-msgstr ""
+msgstr "ناوخۆیی"
 
 #: templates/server/privileges/login_information_fields.twig:30
 #: templates/server/replication/master_add_slave_user.twig:37
@@ -14787,10 +14552,8 @@ msgstr ""
 
 #: templates/server/privileges/login_information_fields.twig:32
 #: templates/server/replication/master_add_slave_user.twig:39
-#, fuzzy
-#| msgid "Users table"
 msgid "Use host table"
-msgstr "خشتە بەکار ببە"
+msgstr "خشتەی خانەخوێ بەکار ببە"
 
 #: templates/server/privileges/login_information_fields.twig:39
 #: templates/server/replication/master_add_slave_user.twig:44
@@ -14814,8 +14577,6 @@ msgstr ""
 
 #: templates/server/privileges/login_information_fields.twig:49
 #: templates/server/replication/master_add_slave_user.twig:53
-#, fuzzy
-#| msgid "Proxy password"
 msgid "No password"
 msgstr "وشەی نهێنی"
 
@@ -14885,7 +14646,7 @@ msgstr "خشتەکانی خوارەوە درووست بکە"
 #: templates/server/privileges/privileges_table.twig:93
 msgctxt "None privileges"
 msgid "None"
-msgstr ""
+msgstr "نییە"
 
 #: templates/server/privileges/privileges_table.twig:231
 msgid "Global"
@@ -15010,7 +14771,7 @@ msgstr ""
 
 #: templates/server/replication/change_master.twig:26
 msgid "Port:"
-msgstr ""
+msgstr "پۆرت:"
 
 #: templates/server/replication/index.twig:21
 #, php-format
@@ -15020,8 +14781,6 @@ msgid ""
 msgstr ""
 
 #: templates/server/replication/index.twig:43
-#, fuzzy
-#| msgid "Edit privileges"
 msgid "No privileges"
 msgstr "تایبەتمەندێتیەکان"
 
@@ -15173,7 +14932,7 @@ msgstr ""
 #: templates/server/status/variables/index.twig:72
 #: templates/server/variables/index.twig:32
 msgid "Variable"
-msgstr ""
+msgstr "گۆڕاو"
 
 #: templates/server/status/advisor/index.twig:6
 #: templates/server/status/advisor/index.twig:19
@@ -15302,31 +15061,27 @@ msgstr ""
 
 #: templates/server/status/monitor/index.twig:43
 #: templates/server/status/processes/index.twig:36
-#, fuzzy, php-format
-#| msgid "per second"
+#, php-format
 msgid "%d second"
-msgstr "لە چرکەیەک دا"
+msgstr "%d چرکە"
 
 #: templates/server/status/monitor/index.twig:45
 #: templates/server/status/processes/index.twig:38
-#, fuzzy, php-format
-#| msgid "per second"
+#, php-format
 msgid "%d seconds"
-msgstr "لە چرکەیەک دا"
+msgstr "%d چرکە"
 
 #: templates/server/status/monitor/index.twig:49
 #: templates/server/status/processes/index.twig:42
-#, fuzzy, php-format
-#| msgid "per minute"
+#, php-format
 msgid "%d minute"
-msgstr "لە خولەکێک دا"
+msgstr "%d خولەک"
 
 #: templates/server/status/monitor/index.twig:51
 #: templates/server/status/processes/index.twig:44
-#, fuzzy, php-format
-#| msgid "per minute"
+#, php-format
 msgid "%d minutes"
-msgstr "لە خولەکێک دا"
+msgstr "%d خولەك"
 
 #: templates/server/status/monitor/index.twig:61
 msgid "Chart columns"
@@ -15478,10 +15233,8 @@ msgstr ""
 
 #. l10n: Questions is the name of a MySQL Status variable
 #: templates/server/status/queries/index.twig:8
-#, fuzzy
-#| msgid "Questions since last refresh"
 msgid "Questions since startup:"
-msgstr "پرسیارەکان لەدوای کۆتایین تازەکردنەوە"
+msgstr "پرسیارەکان لەکاتی کارپێکردنەوە:"
 
 #: templates/server/status/queries/index.twig:20
 msgid "per hour:"
@@ -15624,19 +15377,19 @@ msgstr ""
 
 #: templates/setup/base.twig:27 templates/setup/home/index.twig:20
 msgid "Overview"
-msgstr ""
+msgstr "پوختە"
 
 #: templates/setup/config/index.twig:4 templates/setup/home/index.twig:93
 msgid "Configuration file"
-msgstr ""
+msgstr "پەڕگەی ڕێکخستن"
 
 #: templates/setup/config/index.twig:22 templates/setup/home/index.twig:105
 msgid "Download"
-msgstr ""
+msgstr "داگرتن"
 
 #: templates/setup/error.twig:2
 msgid "Warning"
-msgstr ""
+msgstr "ئاگاداری"
 
 #: templates/setup/error.twig:3
 msgid "Submitted form contains errors"
@@ -15655,8 +15408,6 @@ msgid "Show form"
 msgstr ""
 
 #: templates/setup/home/index.twig:23
-#, fuzzy
-#| msgid "Show hidden items"
 msgid "Show hidden messages"
 msgstr "پێشاندانی نیشاندەرەکان"
 
@@ -15670,7 +15421,7 @@ msgstr ""
 
 #: templates/setup/home/index.twig:104
 msgid "Display"
-msgstr ""
+msgstr "نیشاندان"
 
 #: templates/setup/home/index.twig:116
 msgid "phpMyAdmin homepage"
@@ -15678,7 +15429,7 @@ msgstr ""
 
 #: templates/setup/home/index.twig:117
 msgid "Donate"
-msgstr ""
+msgstr "بەخشین"
 
 #: templates/setup/home/index.twig:118
 msgid "Check for latest version"
@@ -15698,7 +15449,7 @@ msgstr ""
 
 #: templates/sql/bookmark.twig:15
 msgid "Label:"
-msgstr ""
+msgstr "پێناس:"
 
 #: templates/sql/bookmark.twig:22 templates/sql/query.twig:91
 msgid "Let every user access this bookmark"
@@ -15773,7 +15524,7 @@ msgstr ""
 
 #: templates/sql/query.twig:169
 msgid "View only"
-msgstr ""
+msgstr "تەنها پیشاندان"
 
 #: templates/start_and_number_of_rows_panel.twig:3
 msgid "Start row:"
@@ -15786,17 +15537,17 @@ msgstr "ئەم نرخە هەڵبژێرە"
 #: templates/table/chart/tbl_chart.twig:15
 msgctxt "Chart type"
 msgid "Bar"
-msgstr ""
+msgstr "شریت"
 
 #: templates/table/chart/tbl_chart.twig:19
 msgctxt "Chart type"
 msgid "Column"
-msgstr ""
+msgstr "ستوون"
 
 #: templates/table/chart/tbl_chart.twig:23
 msgctxt "Chart type"
 msgid "Line"
-msgstr ""
+msgstr "هێڵ"
 
 #: templates/table/chart/tbl_chart.twig:27
 msgctxt "Chart type"
@@ -15806,12 +15557,12 @@ msgstr ""
 #: templates/table/chart/tbl_chart.twig:31
 msgctxt "Chart type"
 msgid "Area"
-msgstr ""
+msgstr "ڕووبەر"
 
 #: templates/table/chart/tbl_chart.twig:35
 msgctxt "Chart type"
 msgid "Pie"
-msgstr ""
+msgstr "پای"
 
 #: templates/table/chart/tbl_chart.twig:39
 msgctxt "Chart type"
@@ -15871,6 +15622,17 @@ msgstr "نرخەکانی ستونی %s"
 msgid "Save chart as image"
 msgstr ""
 
+#: templates/table/export/index.twig:8
+msgid ""
+"@SERVER@ will become the server name, @DATABASE@ will become the database "
+"name and @TABLE@ will become the table name."
+msgstr ""
+
+#: templates/table/export/index.twig:5
+#, php-format
+msgid "Exporting rows from \"%s\" table"
+msgstr ""
+
 #: templates/table/find_replace/index.twig:4
 #: templates/table/search/index.twig:4 templates/table/zoom_search/index.twig:4
 msgid "Table search"
@@ -15911,7 +15673,7 @@ msgstr "گۆڕینی پێشگری خشتە"
 
 #: templates/table/find_replace/replace_preview.twig:37
 msgid "Replace"
-msgstr ""
+msgstr "جێگۆڕکێ"
 
 #: templates/table/gis_visualization/gis_visualization.twig:3
 msgid "Display GIS Visualization"
@@ -16085,8 +15847,6 @@ msgstr "زیادکردنی مەرج"
 
 #: templates/table/relation/common_form.twig:104
 #: templates/table/relation/common_form.twig:110
-#, fuzzy
-#| msgid "Internal relations"
 msgid "Internal relationships"
 msgstr "ڕیزەکە سڕایەوە"
 
@@ -16112,7 +15872,6 @@ msgstr ""
 
 #: templates/table/relation/foreign_key_row.twig:15
 #, fuzzy, php-format
-#| msgid "Add constraints"
 msgid "Foreign key constraint %s has been dropped"
 msgstr "زیادکردنی مەرج"
 
@@ -16184,7 +15943,7 @@ msgstr "جۆری ڕاژە:"
 #: templates/table/tracking/structure_snapshot_columns.twig:47
 msgctxt "None for default"
 msgid "None"
-msgstr ""
+msgstr "نییە"
 
 #: templates/table/structure/display_structure.twig:117
 #, php-format
@@ -16316,7 +16075,7 @@ msgstr ""
 
 #: templates/table/tracking/report_table.twig:5
 msgid "Date"
-msgstr ""
+msgstr "بەروار"
 
 #: templates/table/tracking/report_table.twig:6
 msgid "Username"
@@ -16355,8 +16114,6 @@ msgid "No preview available."
 msgstr "هیچ پێشبینینێک ئامادە نیە."
 
 #: templates/theme_preview.twig:13
-#, fuzzy
-#| msgid "take it"
 msgid "Take it"
 msgstr "وەریگرە"
 
@@ -16558,7 +16315,6 @@ msgstr ""
 #: libraries/advisory_rules_generic.txt:112
 #: libraries/advisory_rules_generic.txt:119
 #, fuzzy, php-format
-#| msgid "Current settings"
 msgid "Current version: %s"
 msgstr "ڕێکخستنەکانی هەنووکە"
 
@@ -17468,6 +17224,9 @@ msgstr ""
 #: libraries/advisory_rules_mysql_before80003.txt:57
 msgid "query_cache_limit is set to 1 MiB"
 msgstr ""
+
+#~ msgid "View dump (schema) of database"
+#~ msgstr "نیشاندانى بۆشایى (هێڵکارى) لە بنکەى دراوە"
 
 #, fuzzy
 #~| msgid "Create"
