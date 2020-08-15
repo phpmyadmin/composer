@@ -9,6 +9,7 @@ namespace PhpMyAdmin;
 
 use function array_diff;
 use function array_merge;
+use function array_push;
 use function htmlspecialchars;
 use function in_array;
 use function mb_strtoupper;
@@ -391,6 +392,10 @@ class Types
                     'Stores and enables efficient access to data in JSON'
                     . ' (JavaScript Object Notation) documents'
                 );
+            case 'INET6':
+                return __('Intended for storage of IPv6 addresses, as well as IPv4 '
+                    . 'addresses assuming conventional mapping of IPv4 addresses '
+                    . 'into IPv6 addresses');
         }
 
         return '';
@@ -441,6 +446,7 @@ class Types
             case 'LONGBLOB':
             case 'ENUM':
             case 'SET':
+            case 'INET6':
                 return 'CHAR';
             case 'GEOMETRY':
             case 'POINT':
@@ -776,6 +782,10 @@ class Types
         if (($isMariaDB && $serverVersion > 100207)
             || (! $isMariaDB && $serverVersion >= 50708)) {
             $ret['JSON'] = ['JSON'];
+        }
+
+        if ($isMariaDB && $serverVersion >= 100500) {
+            array_push($ret[_pgettext('string types', 'String')], '-', 'INET6');
         }
 
         return $ret;
