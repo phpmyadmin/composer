@@ -12,7 +12,6 @@ use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
-use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Operations;
 use PhpMyAdmin\RecentFavoriteTable;
@@ -393,6 +392,8 @@ class StructureController extends AbstractController
      */
     protected function displayTableList(): string
     {
+        global $PMA_Theme;
+
         $html = '';
 
         // filtering
@@ -704,7 +705,7 @@ class StructureController extends AbstractController
                 'show_last_check' => $GLOBALS['cfg']['ShowDbStructureLastCheck'],
             ],
             'check_all_tables' => [
-                'pma_theme_image' => $GLOBALS['pmaThemeImage'] ?? null,
+                'theme_image_path' => $PMA_Theme->getImgPath(),
                 'text_dir' => $GLOBALS['text_dir'],
                 'overhead_check' => $overhead_check,
                 'db_is_system_schema' => $this->dbIsSystemSchema,
@@ -1437,247 +1438,6 @@ class StructureController extends AbstractController
             'full_query' => $fullQuery,
             'is_foreign_key_check' => Util::isForeignKeyCheck(),
         ]);
-    }
-
-    public function checkTable(): void
-    {
-        global $db;
-
-        /** @var string[] $selected */
-        $selected = $_POST['selected_tbl'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No table selected.'));
-
-            return;
-        }
-
-        $tables = Util::backquote($selected);
-        $query = 'CHECK TABLE ' . implode(', ', $tables) . ';';
-
-        $this->dbi->selectDb($db);
-        $rows = $this->dbi->fetchResult($query);
-
-        $message = Generator::getMessage(
-            __('Your SQL query has been executed successfully.'),
-            $query,
-            'success'
-        );
-
-        $indexesProblems = '';
-        foreach ($selected as $table) {
-            $check = Index::findDuplicates($table, $db);
-
-            if (empty($check)) {
-                continue;
-            }
-
-            $indexesProblems .= sprintf(__('Problems with indexes of table `%s`'), $table);
-            $indexesProblems .= $check;
-        }
-
-        $this->render('database/structure/check_table', [
-            'message' => $message,
-            'rows' => $rows,
-            'indexes_problems' => $indexesProblems,
-        ]);
-    }
-
-    public function analyzeTable(): void
-    {
-        global $db, $goto, $pmaThemeImage;
-
-        $selected = $_POST['selected_tbl'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No table selected.'));
-
-            return;
-        }
-
-        $sqlQuery = '';
-        $selectedCount = count($selected);
-
-        for ($i = 0; $i < $selectedCount; $i++) {
-            $sqlQuery .= (empty($sqlQuery) ? 'ANALYZE TABLE ' : ', ') . Util::backquote($selected[$i]);
-        }
-
-        $sql = new Sql();
-        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
-            null,
-            false,
-            $db,
-            '',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $goto,
-            $pmaThemeImage,
-            null,
-            null,
-            $sqlQuery,
-            null
-        ));
-
-        if (empty($_POST['message'])) {
-            $_POST['message'] = Message::success();
-        }
-
-        unset($_POST['submit_mult']);
-
-        $this->index();
-    }
-
-    public function checksumTable(): void
-    {
-        global $db, $goto, $pmaThemeImage;
-
-        $selected = $_POST['selected_tbl'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No table selected.'));
-
-            return;
-        }
-
-        $sql_query = '';
-        $selectedCount = count($selected);
-
-        for ($i = 0; $i < $selectedCount; $i++) {
-            $sql_query .= (empty($sql_query) ? 'CHECKSUM TABLE ' : ', ') . Util::backquote($selected[$i]);
-        }
-
-        $sql = new Sql();
-        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
-            null,
-            false,
-            $db,
-            '',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $goto,
-            $pmaThemeImage,
-            null,
-            null,
-            $sql_query,
-            null
-        ));
-
-        if (empty($_POST['message'])) {
-            $_POST['message'] = Message::success();
-        }
-
-        unset($_POST['submit_mult']);
-
-        $this->index();
-    }
-
-    public function optimizeTable(): void
-    {
-        global $db, $goto, $pmaThemeImage;
-
-        $selected = $_POST['selected_tbl'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No table selected.'));
-
-            return;
-        }
-
-        $sql_query = '';
-        $selectedCount = count($selected);
-
-        for ($i = 0; $i < $selectedCount; $i++) {
-            $sql_query .= (empty($sql_query) ? 'OPTIMIZE TABLE ' : ', ') . Util::backquote($selected[$i]);
-        }
-
-        $sql = new Sql();
-        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
-            null,
-            false,
-            $db,
-            '',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $goto,
-            $pmaThemeImage,
-            null,
-            null,
-            $sql_query,
-            null
-        ));
-
-        if (empty($_POST['message'])) {
-            $_POST['message'] = Message::success();
-        }
-
-        unset($_POST['submit_mult']);
-
-        $this->index();
-    }
-
-    public function repairTable(): void
-    {
-        global $db, $goto, $pmaThemeImage;
-
-        $selected = $_POST['selected_tbl'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No table selected.'));
-
-            return;
-        }
-
-        $sql_query = '';
-        $selectedCount = count($selected);
-
-        for ($i = 0; $i < $selectedCount; $i++) {
-            $sql_query .= (empty($sql_query) ? 'REPAIR TABLE ' : ', ') . Util::backquote($selected[$i]);
-        }
-
-        $sql = new Sql();
-        $this->response->addHTML($sql->executeQueryAndSendQueryResponse(
-            null,
-            false,
-            $db,
-            '',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $goto,
-            $pmaThemeImage,
-            null,
-            null,
-            $sql_query,
-            null
-        ));
-
-        if (empty($_POST['message'])) {
-            $_POST['message'] = Message::success();
-        }
-
-        unset($_POST['submit_mult']);
-
-        $this->index();
     }
 
     public function dropTable(): void
