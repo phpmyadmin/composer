@@ -26,6 +26,7 @@
     "jquery-validation": "1.19.2",
     "jquery.event.drag": "2.2.2",
     "js-cookie": "2.2.1",
+    "ol": "6.4.3",
     "popper.js": "^1.16.1",
     "sass": "^1.26.3",
     "stickyfilljs": "2.1.0",
@@ -36,6 +37,9 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
     "eslint": "^7.5.0",
     "eslint-plugin-compat": "^3.8.0",
     "eslint-plugin-no-jquery": "^2.5.0",
@@ -49,9 +53,10 @@
     "lodash": "^4.17.19"
   },
   "scripts": {
-    "postinstall": "yarn run --silent css-compile --quiet --style=compressed",
+    "postinstall": "yarn run --silent css-compile --quiet --style=compressed && yarn run --silent js-compile --quiet",
     "css-compile": "sass themes/pmahomme/scss:themes/pmahomme/css themes/original/scss:themes/original/css themes/metro/scss:themes/metro/css themes/bootstrap/scss:themes/bootstrap/css",
     "css-lint": "stylelint --syntax scss \"themes/**/scss/*.scss\"",
-    "js-lint": "eslint js"
+    "js-lint": "eslint js/src",
+    "js-compile": "babel js/src -d js/dist"
   }
 }
