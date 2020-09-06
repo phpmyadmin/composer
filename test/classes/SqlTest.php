@@ -7,7 +7,13 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
+use PhpMyAdmin\Operations;
+use PhpMyAdmin\ParseAnalyze;
+use PhpMyAdmin\Relation;
+use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Sql;
+use PhpMyAdmin\Template;
+use PhpMyAdmin\Transformations;
 use stdClass;
 
 /**
@@ -45,7 +51,15 @@ class SqlTest extends AbstractTestCase
         $GLOBALS['cfg']['enable_drag_drop_import'] = true;
         $GLOBALS['PMA_PHP_SELF'] = 'index.php';
 
-        $this->sql = new Sql();
+        $relation = new Relation($GLOBALS['dbi']);
+        $this->sql = new Sql(
+            $GLOBALS['dbi'],
+            $relation,
+            new RelationCleanup($GLOBALS['dbi'], $relation),
+            new Operations($GLOBALS['dbi'], $relation),
+            new Transformations(),
+            new Template()
+        );
     }
 
     /**
@@ -57,9 +71,7 @@ class SqlTest extends AbstractTestCase
         $GLOBALS['_SESSION']['tmpval']['pos'] = 1;
         $GLOBALS['_SESSION']['tmpval']['max_rows'] = 2;
 
-        $analyzed_sql_results = $this->sql->parseAndAnalyze(
-            'SELECT * FROM test LIMIT 0, 10'
-        );
+        $analyzed_sql_results = $this->parseAndAnalyze('SELECT * FROM test LIMIT 0, 10');
         $this->assertEquals(
             'SELECT * FROM test LIMIT 1, 2 ',
             $this->callFunction($this->sql, Sql::class, 'getSqlWithLimitClause', [&$analyzed_sql_results])
@@ -76,31 +88,31 @@ class SqlTest extends AbstractTestCase
 
         $this->assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                $this->sql->parseAndAnalyze('SELECT * FROM tbl'),
+                $this->parseAndAnalyze('SELECT * FROM tbl'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                $this->sql->parseAndAnalyze('SELECT col FROM tbl'),
+                $this->parseAndAnalyze('SELECT col FROM tbl'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                $this->sql->parseAndAnalyze('SELECT 1'),
+                $this->parseAndAnalyze('SELECT 1'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                $this->sql->parseAndAnalyze('SELECT col1, col2 FROM tbl'),
+                $this->parseAndAnalyze('SELECT col1, col2 FROM tbl'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                $this->sql->parseAndAnalyze('SELECT COUNT(*) from tbl'),
+                $this->parseAndAnalyze('SELECT COUNT(*) from tbl'),
             ])
         );
     }
@@ -115,13 +127,13 @@ class SqlTest extends AbstractTestCase
 
         $this->assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isAppendLimitClause', [
-                $this->sql->parseAndAnalyze('SELECT * FROM tbl'),
+                $this->parseAndAnalyze('SELECT * FROM tbl'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isAppendLimitClause', [
-                $this->sql->parseAndAnalyze('SELECT * from tbl LIMIT 0, 10'),
+                $this->parseAndAnalyze('SELECT * from tbl LIMIT 0, 10'),
             ])
         );
     }
@@ -132,17 +144,17 @@ class SqlTest extends AbstractTestCase
         $GLOBALS['_SESSION']['tmpval']['max_rows'] = 10;
 
         $this->assertTrue(Sql::isJustBrowsing(
-            $this->sql->parseAndAnalyze('SELECT * FROM db.tbl'),
+            $this->parseAndAnalyze('SELECT * FROM db.tbl'),
             null
         ));
 
         $this->assertTrue(Sql::isJustBrowsing(
-            $this->sql->parseAndAnalyze('SELECT * FROM tbl WHERE 1'),
+            $this->parseAndAnalyze('SELECT * FROM tbl WHERE 1'),
             null
         ));
 
         $this->assertFalse(Sql::isJustBrowsing(
-            $this->sql->parseAndAnalyze('SELECT * from tbl1, tbl2 LIMIT 0, 10'),
+            $this->parseAndAnalyze('SELECT * from tbl1, tbl2 LIMIT 0, 10'),
             null
         ));
     }
@@ -154,19 +166,19 @@ class SqlTest extends AbstractTestCase
     {
         $this->assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                $this->sql->parseAndAnalyze('ALTER TABLE tbl DROP COLUMN col'),
+                $this->parseAndAnalyze('ALTER TABLE tbl DROP COLUMN col'),
             ])
         );
 
         $this->assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                $this->sql->parseAndAnalyze('DROP TABLE tbl'),
+                $this->parseAndAnalyze('DROP TABLE tbl'),
             ])
         );
 
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                $this->sql->parseAndAnalyze('SELECT * from tbl'),
+                $this->parseAndAnalyze('SELECT * from tbl'),
             ])
         );
     }
@@ -178,7 +190,7 @@ class SqlTest extends AbstractTestCase
     {
         $this->assertTrue(
             $this->sql->hasNoRightsToDropDatabase(
-                $this->sql->parseAndAnalyze('DROP DATABASE db'),
+                $this->parseAndAnalyze('DROP DATABASE db'),
                 false,
                 false
             )
@@ -186,7 +198,7 @@ class SqlTest extends AbstractTestCase
 
         $this->assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
-                $this->sql->parseAndAnalyze('DROP TABLE tbl'),
+                $this->parseAndAnalyze('DROP TABLE tbl'),
                 false,
                 false
             )
@@ -194,7 +206,7 @@ class SqlTest extends AbstractTestCase
 
         $this->assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
-                $this->sql->parseAndAnalyze('SELECT * from tbl'),
+                $this->parseAndAnalyze('SELECT * from tbl'),
                 false,
                 false
             )
@@ -327,5 +339,17 @@ class SqlTest extends AbstractTestCase
         $this->assertFalse(
             $this->callFunction($this->sql, Sql::class, 'resultSetHasJustOneTable', [$fields_meta])
         );
+    }
+
+    /**
+     * @return mixed
+     */
+    private function parseAndAnalyze(string $sqlQuery)
+    {
+        global $db;
+
+        [$analyzedSqlResults] = ParseAnalyze::sqlQuery($sqlQuery, $db);
+
+        return $analyzedSqlResults;
     }
 }
