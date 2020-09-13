@@ -85,6 +85,9 @@ class StructureController extends AbstractController
     /** @var Operations */
     private $operations;
 
+    /** @var ReplicationInfo */
+    private $replicationInfo;
+
     /**
      * @param Response          $response        Response instance
      * @param DatabaseInterface $dbi             DatabaseInterface instance
@@ -110,6 +113,7 @@ class StructureController extends AbstractController
         $this->replication = $replication;
         $this->relationCleanup = $relationCleanup;
         $this->operations = $operations;
+        $this->replicationInfo = new ReplicationInfo($this->dbi);
     }
 
     /**
@@ -158,7 +162,8 @@ class StructureController extends AbstractController
             Core::sendHeaderLocation($uri);
         }
 
-        ReplicationInfo::load();
+        $this->replicationInfo->load($_POST['master_connection'] ?? null);
+        $replicaInfo = $this->replicationInfo->getReplicaInfo();
 
         $pageSettings = new PageSettings('DbStructure');
         $this->response->addHTML($pageSettings->getErrorHTML());
@@ -184,7 +189,7 @@ class StructureController extends AbstractController
                 $cfg['MaxTableList']
             );
 
-            $tableList = $this->displayTableList();
+            $tableList = $this->displayTableList($replicaInfo);
         }
 
         $createTable = '';
@@ -244,7 +249,6 @@ class StructureController extends AbstractController
             return;
         }
         $changes = true;
-        $titles = Util::buildActionTitles();
         $favoriteTable = $parameters['favorite_table'] ?? '';
         $alreadyFavorite = $this->checkFavoriteTable($favoriteTable);
 
@@ -295,7 +299,6 @@ class StructureController extends AbstractController
             'db_table_name_hash' => md5($this->db . '.' . $favoriteTable),
             'fav_params' => $favoriteParams,
             'already_favorite' => $alreadyFavorite,
-            'titles' => $titles,
         ]);
 
         $this->response->addJSON($json);
@@ -387,11 +390,9 @@ class StructureController extends AbstractController
     }
 
     /**
-     * Displays the list of tables
-     *
-     * @return string HTML
+     * @param array $replicaInfo
      */
-    protected function displayTableList(): string
+    protected function displayTableList($replicaInfo): string
     {
         global $PMA_Theme;
 
@@ -537,7 +538,6 @@ class StructureController extends AbstractController
              * the code easier to read without this operator.
              */
             $may_have_rows = $current_table['TABLE_ROWS'] > 0 || $table_is_view;
-            $titles = Util::buildActionTitles();
 
             if (! $this->dbIsSystemSchema) {
                 $drop_query = sprintf(
@@ -569,7 +569,7 @@ class StructureController extends AbstractController
                 $html .= $this->template->render('database/structure/table_header', [
                     'db' => $this->db,
                     'db_is_system_schema' => $this->dbIsSystemSchema,
-                    'replication' => $GLOBALS['replication_info']['slave']['status'],
+                    'replication' => $replicaInfo['status'],
                     'properties_num_columns' => $GLOBALS['cfg']['PropertiesNumColumns'],
                     'is_show_stats' => $GLOBALS['is_show_stats'],
                     'show_charset' => $GLOBALS['cfg']['ShowDbStructureCharset'],
@@ -588,7 +588,7 @@ class StructureController extends AbstractController
                 $table_is_view
             );
 
-            [$do, $ignored] = $this->getReplicationStatus($truename);
+            [$do, $ignored] = $this->getReplicationStatus($replicaInfo, $truename);
 
             $structure_table_rows[] = [
                 'table_name_hash' => md5($current_table['TABLE_NAME']),
@@ -598,8 +598,7 @@ class StructureController extends AbstractController
                 'input_class' => implode(' ', $input_class),
                 'table_is_view' => $table_is_view,
                 'current_table' => $current_table,
-                'browse_table_title' => $may_have_rows ? $titles['Browse'] : $titles['NoBrowse'],
-                'search_table_title' => $may_have_rows ? $titles['Search'] : $titles['NoSearch'],
+                'may_have_rows' => $may_have_rows,
                 'browse_table_label_title' => htmlspecialchars($current_table['TABLE_COMMENT']),
                 'browse_table_label_truename' => $truename,
                 'empty_table_sql_query' => 'TRUNCATE ' . Util::backquote(
@@ -613,12 +612,10 @@ class StructureController extends AbstractController
                         )
                     )
                 ),
-                'empty_table_title' => $may_have_rows ? $titles['Empty'] : $titles['NoEmpty'],
                 'tracking_icon' => $this->getTrackingIcon($truename),
-                'server_slave_status' => $GLOBALS['replication_info']['slave']['status'],
+                'server_slave_status' => $replicaInfo['status'],
                 'table_url_params' => $tableUrlParams,
                 'db_is_system_schema' => $this->dbIsSystemSchema,
-                'titles' => $titles,
                 'drop_query' => $drop_query,
                 'drop_message' => $drop_message,
                 'collation' => $collationDefinition,
@@ -671,7 +668,7 @@ class StructureController extends AbstractController
         return $html . $this->template->render('database/structure/table_header', [
             'db' => $this->db,
             'db_is_system_schema' => $this->dbIsSystemSchema,
-            'replication' => $GLOBALS['replication_info']['slave']['status'],
+            'replication' => $replicaInfo['status'],
             'properties_num_columns' => $GLOBALS['cfg']['PropertiesNumColumns'],
             'is_show_stats' => $this->isShowStats,
             'show_charset' => $GLOBALS['cfg']['ShowDbStructureCharset'],
@@ -683,7 +680,7 @@ class StructureController extends AbstractController
             'structure_table_rows' => $structure_table_rows,
             'body_for_table_summary' => [
                 'num_tables' => $this->numTables,
-                'server_slave_status' => $GLOBALS['replication_info']['slave']['status'],
+                'server_slave_status' => $replicaInfo['status'],
                 'db_is_system_schema' => $this->dbIsSystemSchema,
                 'sum_entries' => $sum_entries,
                 'database_collation' => $databaseCollation,
@@ -799,49 +796,50 @@ class StructureController extends AbstractController
     /**
      * Returns the replication status of the table.
      *
-     * @param string $table table name
+     * @param array  $replicaInfo
+     * @param string $table       table name
      *
      * @return array
      */
-    protected function getReplicationStatus(string $table): array
+    protected function getReplicationStatus($replicaInfo, string $table): array
     {
         $do = $ignored = false;
-        if ($GLOBALS['replication_info']['slave']['status']) {
+        if ($replicaInfo['status']) {
             $nbServSlaveDoDb = count(
-                $GLOBALS['replication_info']['slave']['Do_DB']
+                $replicaInfo['Do_DB']
             );
             $nbServSlaveIgnoreDb = count(
-                $GLOBALS['replication_info']['slave']['Ignore_DB']
+                $replicaInfo['Ignore_DB']
             );
             $searchDoDBInTruename = array_search(
                 $table,
-                $GLOBALS['replication_info']['slave']['Do_DB']
+                $replicaInfo['Do_DB']
             );
             $searchDoDBInDB = array_search(
                 $this->db,
-                $GLOBALS['replication_info']['slave']['Do_DB']
+                $replicaInfo['Do_DB']
             );
 
             $do = (is_string($searchDoDBInTruename) && strlen($searchDoDBInTruename) > 0)
                 || (is_string($searchDoDBInDB) && strlen($searchDoDBInDB) > 0)
                 || ($nbServSlaveDoDb == 0 && $nbServSlaveIgnoreDb == 0)
                 || $this->hasTable(
-                    $GLOBALS['replication_info']['slave']['Wild_Do_Table'],
+                    $replicaInfo['Wild_Do_Table'],
                     $table
                 );
 
             $searchDb = array_search(
                 $this->db,
-                $GLOBALS['replication_info']['slave']['Ignore_DB']
+                $replicaInfo['Ignore_DB']
             );
             $searchTable = array_search(
                 $table,
-                $GLOBALS['replication_info']['slave']['Ignore_Table']
+                $replicaInfo['Ignore_Table']
             );
             $ignored = (is_string($searchTable) && strlen($searchTable) > 0)
                 || (is_string($searchDb) && strlen($searchDb) > 0)
                 || $this->hasTable(
-                    $GLOBALS['replication_info']['slave']['Wild_Ignore_Table'],
+                    $replicaInfo['Wild_Ignore_Table'],
                     $table
                 );
         }
