@@ -1,7 +1,4 @@
 <?php
-/**
- * Tests for PhpMyAdmin\Controllers\Table\IndexesController
- */
 
 declare(strict_types=1);
 
@@ -21,9 +18,6 @@ use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
 use PhpMyAdmin\Url;
 use function sprintf;
 
-/**
- * Tests for PhpMyAdmin\Controllers\Table\IndexesController
- */
 class IndexesControllerTest extends AbstractTestCase
 {
     /**
@@ -106,10 +100,10 @@ class IndexesControllerTest extends AbstractTestCase
 
         $ctrl = new IndexesController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $GLOBALS['db'],
-            $GLOBALS['table']
+            $GLOBALS['table'],
+            $GLOBALS['dbi']
         );
 
         // Preview SQL
@@ -158,10 +152,10 @@ class IndexesControllerTest extends AbstractTestCase
 
         $ctrl = new IndexesController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $GLOBALS['db'],
-            $GLOBALS['table']
+            $GLOBALS['table'],
+            $GLOBALS['dbi']
         );
 
         $_POST['create_index'] = true;

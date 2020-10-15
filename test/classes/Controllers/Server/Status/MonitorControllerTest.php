@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds MonitorControllerTest
- */
 
 declare(strict_types=1);
 
@@ -44,10 +41,10 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $this->data,
-            new Monitor($GLOBALS['dbi'])
+            new Monitor($GLOBALS['dbi']),
+            $GLOBALS['dbi']
         );
 
         $controller->index();
@@ -143,10 +140,10 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $this->data,
-            new Monitor($GLOBALS['dbi'])
+            new Monitor($GLOBALS['dbi']),
+            $GLOBALS['dbi']
         );
 
         $_POST['time_start'] = '0';
@@ -203,10 +200,10 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $this->data,
-            new Monitor($GLOBALS['dbi'])
+            new Monitor($GLOBALS['dbi']),
+            $GLOBALS['dbi']
         );
 
         $_POST['time_start'] = '0';
@@ -254,10 +251,10 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $this->data,
-            new Monitor($GLOBALS['dbi'])
+            new Monitor($GLOBALS['dbi']),
+            $GLOBALS['dbi']
         );
 
         $_POST['varName'] = 'varName';
@@ -289,10 +286,10 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            $GLOBALS['dbi'],
             new Template(),
             $this->data,
-            new Monitor($GLOBALS['dbi'])
+            new Monitor($GLOBALS['dbi']),
+            $GLOBALS['dbi']
         );
 
         $_POST['database'] = 'database';

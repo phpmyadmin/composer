@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Common;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
@@ -25,22 +24,18 @@ final class TrackingController extends AbstractController
     private $tracking;
 
     /**
-     * @param Response          $response A Response instance.
-     * @param DatabaseInterface $dbi      A DatabaseInterface instance.
-     * @param Template          $template A Template instance.
-     * @param string            $db       Database name.
-     * @param string            $table    Table name.
-     * @param Tracking          $tracking A Tracking instance.
+     * @param Response $response
+     * @param string   $db       Database name.
+     * @param string   $table    Table name.
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         $db,
         $table,
         Tracking $tracking
     ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->tracking = $tracking;
     }
 
@@ -55,6 +50,7 @@ final class TrackingController extends AbstractController
         define('TABLE_MAY_BE_ABSENT', true);
         Common::table();
 
+        $activeMessage = '';
         if (Tracker::isActive()
             && Tracker::isTracked($GLOBALS['db'], $GLOBALS['table'])
             && ! (isset($_POST['toggle_activation'])
@@ -68,7 +64,7 @@ final class TrackingController extends AbstractController
                     htmlspecialchars($GLOBALS['db'] . '.' . $GLOBALS['table'])
                 )
             );
-            $this->response->addHTML($msg->getDisplay());
+            $activeMessage = $msg->getDisplay();
         }
 
         $url_params['goto'] = Url::getFromRoute('/table/tracking');
@@ -132,81 +128,76 @@ final class TrackingController extends AbstractController
             $this->tracking->exportAsFileDownload($entries);
         }
 
-        $html = '<br>';
-
-        /**
-         * Actions
-         */
+        $actionMessage = '';
         if (isset($_POST['submit_mult'])) {
             if (! empty($_POST['selected_versions'])) {
                 if ($_POST['submit_mult'] === 'delete_version') {
                     foreach ($_POST['selected_versions'] as $version) {
                         $this->tracking->deleteTrackingVersion($version);
                     }
-                    $html .= Message::success(
+                    $actionMessage = Message::success(
                         __('Tracking versions deleted successfully.')
                     )->getDisplay();
                 }
             } else {
-                $html .= Message::notice(
+                $actionMessage = Message::notice(
                     __('No versions selected.')
                 )->getDisplay();
             }
         }
 
+        $deleteVersion = '';
         if (isset($_POST['submit_delete_version'])) {
-            $html .= $this->tracking->deleteTrackingVersion($_POST['version']);
+            $deleteVersion = $this->tracking->deleteTrackingVersion($_POST['version']);
         }
 
-        // Create tracking version
+        $createVersion = '';
         if (isset($_POST['submit_create_version'])) {
-            $html .= $this->tracking->createTrackingVersion();
+            $createVersion = $this->tracking->createTrackingVersion();
         }
 
-        // Deactivate tracking
+        $deactivateTracking = '';
         if (isset($_POST['toggle_activation'])
             && $_POST['toggle_activation'] === 'deactivate_now'
         ) {
-            $html .= $this->tracking->changeTracking('deactivate');
+            $deactivateTracking = $this->tracking->changeTracking('deactivate');
         }
 
-        // Activate tracking
+        $activateTracking = '';
         if (isset($_POST['toggle_activation'])
             && $_POST['toggle_activation'] === 'activate_now'
         ) {
-            $html .= $this->tracking->changeTracking('activate');
+            $activateTracking = $this->tracking->changeTracking('activate');
         }
 
         // Export as SQL execution
+        $message = '';
         if (isset($_POST['report_export']) && $_POST['export_type'] === 'execution') {
             $sql_result = $this->tracking->exportAsSqlExecution($entries);
             $msg = Message::success(__('SQL statements executed.'));
-            $html .= $msg->getDisplay();
+            $message = $msg->getDisplay();
         }
 
-        // Export as SQL dump
+        $sqlDump = '';
         if (isset($_POST['report_export']) && $_POST['export_type'] === 'sqldump') {
-            $html .= $this->tracking->exportAsSqlDump($entries);
+            $sqlDump = $this->tracking->exportAsSqlDump($entries);
         }
 
-        /**
-         * Schema snapshot
-         */
+        $schemaSnapshot = '';
         if (isset($_POST['snapshot'])) {
-            $html .= $this->tracking->getHtmlForSchemaSnapshot($url_params);
+            $schemaSnapshot = $this->tracking->getHtmlForSchemaSnapshot($url_params);
         }
 
-        /**
-         * Tracking report
-         */
+        $trackingReportRows = '';
         if (isset($_POST['report'])
             && (isset($_POST['delete_ddlog']) || isset($_POST['delete_dmlog']))
         ) {
-            $html .= $this->tracking->deleteTrackingReportRows($data);
+            $trackingReportRows = $this->tracking->deleteTrackingReportRows($data);
         }
 
+        $trackingReport = '';
         if (isset($_POST['report']) || isset($_POST['report_export'])) {
-            $html .= $this->tracking->getHtmlForTrackingReport(
+            $trackingReport = $this->tracking->getHtmlForTrackingReport(
                 $data,
                 $url_params,
                 $selection_schema,
@@ -218,17 +209,25 @@ final class TrackingController extends AbstractController
             );
         }
 
-        /**
-         * Main page
-         */
-        $html .= $this->tracking->getHtmlForMainPage(
+        $main = $this->tracking->getHtmlForMainPage(
             $url_params,
             $PMA_Theme->getImgPath(),
             $text_dir
         );
 
-        $html .= '<br class="clearfloat">';
-
-        $this->response->addHTML($html);
+        $this->render('table/tracking/index', [
+            'active_message' => $activeMessage,
+            'action_message' => $actionMessage,
+            'delete_version' => $deleteVersion,
+            'create_version' => $createVersion,
+            'deactivate_tracking' => $deactivateTracking,
+            'activate_tracking' => $activateTracking,
+            'message' => $message,
+            'sql_dump' => $sqlDump,
+            'schema_snapshot' => $schemaSnapshot,
+            'tracking_report_rows' => $trackingReportRows,
+            'tracking_report' => $trackingReport,
+            'main' => $main,
+        ]);
     }
 }

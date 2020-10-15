@@ -1,9 +1,4 @@
 <?php
-/**
- * Test for PhpMyAdmin\Config class
- *
- * @group current
- */
 
 declare(strict_types=1);
 
@@ -35,9 +30,6 @@ use function strip_tags;
 use function stristr;
 use function sys_get_temp_dir;
 
-/**
- * Tests behaviour of PhpMyAdmin\Config class
- */
 class ConfigTest extends AbstractTestCase
 {
     /**
@@ -302,7 +294,7 @@ class ConfigTest extends AbstractTestCase
         /* Get GD version string from phpinfo output */
         ob_start();
         phpinfo(INFO_MODULES); /* Only modules */
-        $a = strip_tags(ob_get_contents());
+        $a = strip_tags((string) ob_get_contents());
         ob_end_clean();
 
         if (! preg_match('@GD Version[[:space:]]*\(.*\)@', $a, $v)) {
@@ -393,28 +385,28 @@ class ConfigTest extends AbstractTestCase
      */
     public function testLoadDefaults(): void
     {
-        $prevDefaultSource = $this->object->default_source;
+        $prevDefaultSource = $this->object->defaultSource;
 
-        $this->object->default_source = 'unexisted.file.php';
+        $this->object->defaultSource = 'unexisted.file.php';
         $this->assertFalse($this->object->loadDefaults());
 
-        $this->object->default_source = $prevDefaultSource;
+        $this->object->defaultSource = $prevDefaultSource;
 
         /** @var array<string,mixed> $cfg */
         $cfg = [];
-        include $this->object->default_source;
+        include $this->object->defaultSource;
         $loadedConf = $cfg;
         unset($cfg);
 
         $this->assertTrue($this->object->loadDefaults());
 
         $this->assertEquals(
-            $this->object->default_source_mtime,
+            $this->object->defaultSourceMtime,
             filemtime($prevDefaultSource)
         );
         $this->assertEquals(
             $loadedConf['Servers'][1],
-            $this->object->default_server
+            $this->object->defaultServer
         );
 
         unset($loadedConf['Servers']);
@@ -432,7 +424,7 @@ class ConfigTest extends AbstractTestCase
             'Settings loaded wrong'
         );
 
-        $this->assertFalse($this->object->error_config_default_file);
+        $this->assertFalse($this->object->errorConfigDefaultFile);
     }
 
     /**
@@ -442,7 +434,7 @@ class ConfigTest extends AbstractTestCase
     {
         $this->object->setSource('unexisted.config.php');
         $this->assertFalse($this->object->checkConfigSource());
-        $this->assertEquals(0, $this->object->source_mtime);
+        $this->assertEquals(0, $this->object->sourceMtime);
 
         $this->object->setSource(ROOT_PATH . 'libraries/config.default.php');
 
@@ -953,14 +945,16 @@ class ConfigTest extends AbstractTestCase
 
     /**
      * Should test getting unique value for theme
+     *
+     * @group 32bit-incompatible
      */
     public function testGetThemeUniqueValue(): void
     {
-        $partial_sum = $this->object->source_mtime +
-            $this->object->default_source_mtime +
+        $partial_sum = $this->object->sourceMtime +
+            $this->object->defaultSourceMtime +
             $this->object->get('user_preferences_mtime') +
-            $GLOBALS['PMA_Theme']->mtime_info +
-            $GLOBALS['PMA_Theme']->filesize_info;
+            $GLOBALS['PMA_Theme']->mtimeInfo +
+            $GLOBALS['PMA_Theme']->filesizeInfo;
 
         $this->assertEquals($partial_sum, $this->object->getThemeUniqueValue());
     }
@@ -1074,9 +1068,9 @@ class ConfigTest extends AbstractTestCase
         $this->object->settings['Servers'] = $settings;
         $this->object->checkServers();
         if ($expected === null) {
-            $expected = $this->object->default_server;
+            $expected = $this->object->defaultServer;
         } else {
-            $expected = array_merge($this->object->default_server, $expected);
+            $expected = array_merge($this->object->defaultServer, $expected);
         }
         $this->assertEquals($expected, $this->object->settings['Servers'][1]);
     }

@@ -81,7 +81,7 @@ class InsertEdit
     public function __construct(DatabaseInterface $dbi)
     {
         $this->dbi = $dbi;
-        $this->relation = new Relation($GLOBALS['dbi']);
+        $this->relation = new Relation($this->dbi);
         $this->transformations = new Transformations();
         $this->fileListing = new FileListing();
         $this->template = new Template();
@@ -2087,7 +2087,7 @@ class InsertEdit
                     : bin2hex(
                         $current_row[$column['Field']]
                     );
-            } // end if
+            }
             $special_chars = htmlspecialchars($current_row[$column['Field']]);
 
             //We need to duplicate the first \n or otherwise we will lose
@@ -2096,7 +2096,7 @@ class InsertEdit
                 = Util::duplicateFirstNewline($special_chars);
 
             $data = $current_row[$column['Field']];
-        } // end if... else...
+        }
 
         //when copying row, it is useful to empty auto-increment column
         // to prevent duplicate key error
@@ -2603,6 +2603,7 @@ class InsertEdit
             $_url_params = [
                 'db'            => $db,
                 'table'         => $table,
+                'where_clause_sign' => Core::signSqlQuery($_POST['where_clause']),
                 'where_clause'  => $_POST['where_clause'],
                 'transform_key' => $column_name,
             ];
@@ -2627,7 +2628,7 @@ class InsertEdit
                                 $curr_cell_edited_values[$column_name],
                                 $transform_options
                             );
-                }   // end of loop for each transformation cell
+                }
             }
         }
 
@@ -2688,6 +2689,8 @@ class InsertEdit
             $current_value = mb_substr($current_value, 1, -1);
             // Remove escaping apostrophes
             $current_value = str_replace("''", "'", $current_value);
+            // Remove backslash-escaped apostrophes
+            $current_value = str_replace("\'", "'", $current_value);
 
             return $multi_edit_funcs[$key] . '(' . $current_value . ')';
         }
@@ -2920,7 +2923,7 @@ class InsertEdit
             ) {
                 $current_value = "''";
             }
-        }  // end else (column value in the form)
+        }
 
         return $current_value;
     }
@@ -3289,11 +3292,7 @@ class InsertEdit
         // in the name attribute (see bug #1746964 )
         $column_name_appendix = $vkey . '[' . $column['Field_md5'] . ']';
 
-        if ($column['Type'] === 'datetime'
-            && ! isset($column['Default'])
-            && $column['Default'] !== null
-            && $insert_mode
-        ) {
+        if ($column['Type'] === 'datetime' && ! isset($column['Default']) && $insert_mode) {
             $column['Default'] = date('Y-m-d H:i:s', time());
         }
 
@@ -3304,7 +3303,7 @@ class InsertEdit
 
         if ($GLOBALS['cfg']['ShowFieldTypesInDataEditView']) {
             $html_output .= $this->getHtmlForInsertEditColumnType($column);
-        } //End if
+        }
 
         // Get a list of GIS data types.
         $gis_data_types = Util::getGISDatatypes();
@@ -3432,6 +3431,7 @@ class InsertEdit
                         'db'            => $db,
                         'table'         => $table,
                         'transform_key' => $column['Field'],
+                        'where_clause_sign' => Core::signSqlQuery($where_clause),
                         'where_clause'  => $where_clause,
                     ];
                     $transformation_options['wrapper_link'] = Url::getCommon($_url_params);
@@ -3611,7 +3611,7 @@ class InsertEdit
                 $column_mime,
                 $where_clause
             );
-        } // end for
+        }
         $o_rows++;
 
         return $html_output . '  </tbody>'

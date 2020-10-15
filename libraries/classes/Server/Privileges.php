@@ -931,6 +931,8 @@ class Privileges
         $username = null,
         $hostname = null
     ) {
+        global $dbi;
+
         /* Fallback (standard) value */
         $authentication_plugin = 'mysql_native_password';
         $serverVersion = $this->dbi->getVersion();
@@ -938,9 +940,9 @@ class Privileges
         if (isset($username, $hostname) && $mode === 'change') {
             $row = $this->dbi->fetchSingleRow(
                 'SELECT `plugin` FROM `mysql`.`user` WHERE `User` = "'
-                . $GLOBALS['dbi']->escapeString($username)
+                . $dbi->escapeString($username)
                 . '" AND `Host` = "'
-                . $GLOBALS['dbi']->escapeString($hostname)
+                . $dbi->escapeString($hostname)
                 . '" LIMIT 1'
             );
             // Table 'mysql'.'user' may not exist for some previous
@@ -953,9 +955,9 @@ class Privileges
 
             $row = $this->dbi->fetchSingleRow(
                 'SELECT `plugin` FROM `mysql`.`user` WHERE `User` = "'
-                . $GLOBALS['dbi']->escapeString($username)
+                . $dbi->escapeString($username)
                 . '" AND `Host` = "'
-                . $GLOBALS['dbi']->escapeString($hostname)
+                . $dbi->escapeString($hostname)
                 . '"'
             );
             if (is_array($row) && isset($row['plugin'])) {
@@ -1006,6 +1008,8 @@ class Privileges
      */
     public function updatePassword($err_url, $username, $hostname)
     {
+        global $dbi;
+
         // similar logic in /user-password
         $message = null;
 
@@ -1091,8 +1095,8 @@ class Privileges
                     . " `authentication_string` = '" . $hashedPassword
                     . "', `Password` = '', "
                     . " `plugin` = '" . $authentication_plugin . "'"
-                    . " WHERE `User` = '" . $GLOBALS['dbi']->escapeString($username)
-                    . "' AND Host = '" . $GLOBALS['dbi']->escapeString($hostname) . "';";
+                    . " WHERE `User` = '" . $dbi->escapeString($username)
+                    . "' AND Host = '" . $dbi->escapeString($hostname) . "';";
             } else {
                 // USE 'SET PASSWORD ...' syntax for rest of the versions
                 // Backup the old value, to be reset later
@@ -1102,8 +1106,8 @@ class Privileges
                 $orig_value = $row['@@old_passwords'];
                 $update_plugin_query = 'UPDATE `mysql`.`user` SET'
                     . " `plugin` = '" . $authentication_plugin . "'"
-                    . " WHERE `User` = '" . $GLOBALS['dbi']->escapeString($username)
-                    . "' AND Host = '" . $GLOBALS['dbi']->escapeString($hostname) . "';";
+                    . " WHERE `User` = '" . $dbi->escapeString($username)
+                    . "' AND Host = '" . $dbi->escapeString($hostname) . "';";
 
                 // Update the plugin for the user
                 if (! $this->dbi->tryQuery($update_plugin_query)) {
@@ -2970,7 +2974,7 @@ class Privileges
                 $export_username = mb_substr(
                     $export_user,
                     0,
-                    mb_strpos($export_user, '&')
+                    (int) mb_strpos($export_user, '&')
                 );
                 $export_hostname = mb_substr(
                     $export_user,
@@ -3507,11 +3511,11 @@ class Privileges
         ) {
             $_POST['createdb-1'] = $_POST['createdb-2']
                 = $_POST['createdb-3'] = null;
-            $message = Message::rawError($this->dbi->getError());
+            $message = Message::rawError((string) $this->dbi->getError());
         } elseif ($alter_real_sql_query !== '' && ! $this->dbi->tryQuery($alter_real_sql_query)) {
             $_POST['createdb-1'] = $_POST['createdb-2']
                 = $_POST['createdb-3'] = null;
-            $message = Message::rawError($this->dbi->getError());
+            $message = Message::rawError((string) $this->dbi->getError());
         } else {
             $sql_query .= $alter_sql_query;
             $message = Message::success(__('You have added a new user.'));
@@ -3525,7 +3529,7 @@ class Privileges
                 ) . ';';
             $sql_query .= $q;
             if (! $this->dbi->tryQuery($q)) {
-                $message = Message::rawError($this->dbi->getError());
+                $message = Message::rawError((string) $this->dbi->getError());
             }
 
             /**
@@ -3544,7 +3548,7 @@ class Privileges
                 . '\'@\'' . $this->dbi->escapeString($hostname) . '\';';
             $sql_query .= $q;
             if (! $this->dbi->tryQuery($q)) {
-                $message = Message::rawError($this->dbi->getError());
+                $message = Message::rawError((string) $this->dbi->getError());
             }
         }
 
@@ -3560,7 +3564,7 @@ class Privileges
                 . '\'@\'' . $this->dbi->escapeString($hostname) . '\';';
             $sql_query .= $q;
             if (! $this->dbi->tryQuery($q)) {
-                $message = Message::rawError($this->dbi->getError());
+                $message = Message::rawError((string) $this->dbi->getError());
             }
         }
 
@@ -3574,7 +3578,7 @@ class Privileges
             . '\'@\'' . $this->dbi->escapeString($hostname) . '\';';
             $sql_query .= $q;
             if (! $this->dbi->tryQuery($q)) {
-                $message = Message::rawError($this->dbi->getError());
+                $message = Message::rawError((string) $this->dbi->getError());
             }
         }
 
@@ -3764,7 +3768,8 @@ class Privileges
                 );
             } else {
                 if (! (($serverType === 'MariaDB' && $isMariaDBPwdPluginActive)
-                    || ($serverType === 'MySQL' || $serverType === 'Percona Server') && $serverVersion >= 80011)) {
+                    || ($serverType === 'MySQL' || $serverType === 'Percona Server') && $serverVersion >= 80011)
+                ) {
                     $hashedPassword = $this->getHashedPassword($_POST['pma_pw']);
                 } else {
                     // MariaDB with validation plugin needs cleartext password

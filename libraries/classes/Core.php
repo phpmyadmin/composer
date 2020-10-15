@@ -238,16 +238,12 @@ class Core
      * like a cookie or form.
      *
      * @param string $path The path to check
-     *
-     * @return string  The secured path
-     *
-     * @access public
      */
     public static function securePath(string $path): string
     {
         // change .. to .
-        return preg_replace('@\.\.*@', '.', $path);
-    } // end function
+        return (string) preg_replace('@\.\.*@', '.', $path);
+    }
 
     /**
      * displays the given error message on phpMyAdmin error page in foreign language,
@@ -262,6 +258,8 @@ class Core
         string $error_message,
         $message_args = null
     ): void {
+        global $dbi;
+
         /* Use format string if applicable */
         if (is_string($message_args)) {
             $error_message = sprintf($error_message, $message_args);
@@ -273,9 +271,10 @@ class Core
          * Avoid using Response class as config does not have to be loaded yet
          * (this can happen on early fatal error)
          */
-        if (isset($GLOBALS['dbi'], $GLOBALS['PMA_Config']) && $GLOBALS['dbi'] !== null
+        if (isset($dbi, $GLOBALS['PMA_Config']) && $dbi !== null
             && $GLOBALS['PMA_Config']->get('is_setup') === false
-            && Response::getInstance()->isAjax()) {
+            && Response::getInstance()->isAjax()
+        ) {
             $response = Response::getInstance();
             $response->setRequestStatus(false);
             $response->addJSON('message', Message::error($error_message));
@@ -394,14 +393,16 @@ class Core
      */
     public static function getTableCount(string $db): int
     {
-        $tables = $GLOBALS['dbi']->tryQuery(
+        global $dbi;
+
+        $tables = $dbi->tryQuery(
             'SHOW TABLES FROM ' . Util::backquote($db) . ';',
             DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_STORE
         );
         if ($tables) {
-            $num_tables = $GLOBALS['dbi']->numRows($tables);
-            $GLOBALS['dbi']->freeResult($tables);
+            $num_tables = $dbi->numRows($tables);
+            $dbi->freeResult($tables);
         } else {
             $num_tables = 0;
         }
@@ -434,12 +435,12 @@ class Core
             'k' =>          1024,
         ];
 
-        if (preg_match('/^([0-9]+)([KMGT])/i', $size, $matches)) {
+        if (preg_match('/^([0-9]+)([KMGT])/i', (string) $size, $matches)) {
             return (int) ($matches[1] * $binaryprefixes[$matches[2]]);
         }
 
         return (int) $size;
-    } // end getRealSize()
+    }
 
     /**
      * Checks given $page against given $allowList and returns true if valid
@@ -470,7 +471,7 @@ class Core
         $_page = mb_substr(
             $page,
             0,
-            mb_strpos($page . '?', '?')
+            (int) mb_strpos($page . '?', '?')
         );
         if (in_array($_page, $allowList)) {
             return true;
@@ -480,7 +481,7 @@ class Core
         $_page = mb_substr(
             $_page,
             0,
-            mb_strpos($_page . '?', '?')
+            (int) mb_strpos($_page . '?', '?')
         );
 
         return in_array($_page, $allowList);
@@ -507,13 +508,13 @@ class Core
         }
 
         if (getenv($var_name)) {
-            return getenv($var_name);
+            return (string) getenv($var_name);
         }
 
         if (function_exists('apache_getenv')
             && apache_getenv($var_name, true)
         ) {
-            return apache_getenv($var_name, true);
+            return (string) apache_getenv($var_name, true);
         }
 
         return '';
@@ -841,7 +842,7 @@ class Core
         $buffer = htmlspecialchars($buffer);
         $buffer = str_replace('  ', ' &nbsp;', $buffer);
 
-        return preg_replace("@((\015\012)|(\015)|(\012))@", '<br>' . "\n", $buffer);
+        return (string) preg_replace("@((\015\012)|(\015)|(\012))@", '<br>' . "\n", $buffer);
     }
 
     /**
@@ -1063,7 +1064,7 @@ class Core
 
         // We could not parse header
         return false;
-    } // end of the 'getIp()' function
+    }
 
     /**
      * Sanitizes MySQL hostname

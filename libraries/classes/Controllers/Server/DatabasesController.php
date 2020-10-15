@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the PhpMyAdmin\Controllers\Server\DatabasesController
- */
 
 declare(strict_types=1);
 
@@ -64,23 +61,24 @@ class DatabasesController extends AbstractController
     /** @var RelationCleanup */
     private $relationCleanup;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response        Response object
-     * @param DatabaseInterface $dbi             DatabaseInterface object
-     * @param Template          $template        Template that should be used (if provided, default one otherwise)
-     * @param Transformations   $transformations Transformations instance.
-     * @param RelationCleanup   $relationCleanup RelationCleanup instance.
+     * @param Response          $response
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         Transformations $transformations,
-        RelationCleanup $relationCleanup
+        RelationCleanup $relationCleanup,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template);
+        parent::__construct($response, $template);
         $this->transformations = $transformations;
         $this->relationCleanup = $relationCleanup;
+        $this->dbi = $dbi;
 
         $checkUserPrivileges = new CheckUserPrivileges($dbi);
         $checkUserPrivileges->getPrivileges();
@@ -235,7 +233,7 @@ class DatabasesController extends AbstractController
             // avoid displaying the not-created db name in header or navi panel
             $db = '';
 
-            $message = Message::rawError($this->dbi->getError());
+            $message = Message::rawError((string) $this->dbi->getError());
             $json = ['message' => $message];
 
             $this->response->setRequestStatus(false);

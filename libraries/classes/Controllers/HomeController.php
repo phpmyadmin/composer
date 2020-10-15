@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the PhpMyAdmin\Controllers\HomeController
- */
 
 declare(strict_types=1);
 
@@ -48,18 +45,20 @@ class HomeController extends AbstractController
     /** @var ThemeManager */
     private $themeManager;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response     Response instance
-     * @param DatabaseInterface $dbi          DatabaseInterface instance
-     * @param Template          $template     Template object
-     * @param Config            $config       Config instance
-     * @param ThemeManager      $themeManager ThemeManager instance
+     * @param Response          $response
+     * @param Config            $config
+     * @param DatabaseInterface $dbi
      */
-    public function __construct($response, $dbi, Template $template, $config, ThemeManager $themeManager)
+    public function __construct($response, Template $template, $config, ThemeManager $themeManager, $dbi)
     {
-        parent::__construct($response, $dbi, $template);
+        parent::__construct($response, $template);
         $this->config = $config;
         $this->themeManager = $themeManager;
+        $this->dbi = $dbi;
     }
 
     public function index(): void

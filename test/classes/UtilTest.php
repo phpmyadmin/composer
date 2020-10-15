@@ -1,13 +1,11 @@
 <?php
-/**
- * Test for PhpMyAdmin\Util class
- */
 
 declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\MoTranslator\Loader;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Token;
@@ -17,6 +15,7 @@ use function date_default_timezone_get;
 use function date_default_timezone_set;
 use function file_exists;
 use function floatval;
+use function hex2bin;
 use function htmlspecialchars;
 use function ini_get;
 use function ini_set;
@@ -25,9 +24,6 @@ use function str_replace;
 use function strlen;
 use function trim;
 
-/**
- * Test for PhpMyAdmin\Util class
- */
 class UtilTest extends AbstractTestCase
 {
     /**
@@ -2155,5 +2151,144 @@ class UtilTest extends AbstractTestCase
                 'https'
             ]*/
         ];
+    }
+
+    /**
+     * Some data to test Util::asWKT for testAsWKT
+     */
+    public function dataProviderAsWKT(): array
+    {
+        return [
+            [
+                'SELECT ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                ['POINT(1 1)'],
+                'POINT(1 1)',
+                false,
+                50300,
+            ],
+            [
+                'SELECT ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
+                . ' SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                '\'POINT(1 1)\',0',
+                true,
+                50300,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                ['POINT(1 1)'],
+                'POINT(1 1)',
+                false,
+                50700,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
+                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                '\'POINT(1 1)\',0',
+                true,
+                50700,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\', \'axis-order=long-lat\'),'
+                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                '\'POINT(1 1)\',0',
+                true,
+                80010,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
+                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                '\'POINT(1 1)\',0',
+                true,
+                50700,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\', \'axis-order=long-lat\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                'POINT(1 1)',
+                false,
+                80010,
+            ],
+            [
+                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
+                [
+                    'POINT(1 1)',
+                    '0',
+                ],
+                'POINT(1 1)',
+                false,
+                50700,
+            ],
+        ];
+    }
+
+    /**
+     * Test to get data asWKT
+     *
+     * @param string $expectedQuery  The query to expect
+     * @param array  $returnData     The data to return for fetchRow
+     * @param string $functionResult Result of the Util::asWKT invocation
+     * @param bool   $SRIDOption     Use the SRID option or not
+     * @param int    $mysqlVersion   The mysql version to return for getVersion
+     *
+     * @dataProvider dataProviderAsWKT
+     */
+    public function testAsWKT(
+        string $expectedQuery,
+        array $returnData,
+        string $functionResult,
+        bool $SRIDOption,
+        int $mysqlVersion
+    ): void {
+        $oldDbi = $GLOBALS['dbi'];
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
+            ->method('getVersion')
+            ->will($this->returnValue($mysqlVersion));
+
+        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
+            ->method('tryQuery')
+            ->with($expectedQuery)
+            ->will($this->returnValue([]));// Omit the real object
+
+        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
+            ->method('fetchRow')
+            ->will($this->returnValue($returnData));
+
+        $GLOBALS['dbi'] = $dbi;
+
+        if (! $SRIDOption) {
+            // Also test default signature
+            $this->assertSame($functionResult, Util::asWKT(
+                (string) hex2bin('000000000101000000000000000000F03F000000000000F03F')
+            ));
+        }
+        $this->assertSame($functionResult, Util::asWKT(
+            (string) hex2bin('000000000101000000000000000000F03F000000000000F03F'),
+            $SRIDOption
+        ));
+
+        $GLOBALS['dbi'] = $oldDbi;
     }
 }

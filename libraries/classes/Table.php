@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the Table class
- */
 
 declare(strict_types=1);
 
@@ -82,7 +79,7 @@ class Table
     protected $name = '';
 
     /** @var string  database name */
-    protected $db_name = '';
+    protected $dbName = '';
 
     /** @var DatabaseInterface */
     protected $dbi;
@@ -102,7 +99,7 @@ class Table
         }
         $this->dbi = $dbi;
         $this->name = $table_name;
-        $this->db_name = $db_name;
+        $this->dbName = $db_name;
         $this->relation = new Relation($this->dbi);
     }
 
@@ -178,10 +175,10 @@ class Table
     public function getDbName($backquoted = false)
     {
         if ($backquoted) {
-            return Util::backquote($this->db_name);
+            return Util::backquote($this->dbName);
         }
 
-        return $this->db_name;
+        return $this->dbName;
     }
 
     /**
@@ -230,7 +227,7 @@ class Table
      */
     public function isView()
     {
-        $db = $this->db_name;
+        $db = $this->dbName;
         $table = $this->name;
         if (empty($db) || empty($table)) {
             return false;
@@ -268,14 +265,14 @@ class Table
      */
     public function isUpdatableView()
     {
-        if (empty($this->db_name) || empty($this->name)) {
+        if (empty($this->dbName) || empty($this->name)) {
             return false;
         }
 
         $result = $this->dbi->fetchResult(
             'SELECT TABLE_NAME'
             . ' FROM information_schema.VIEWS'
-            . ' WHERE TABLE_SCHEMA = \'' . $this->dbi->escapeString($this->db_name) . '\''
+            . ' WHERE TABLE_SCHEMA = \'' . $this->dbi->escapeString($this->dbName) . '\''
             . ' AND TABLE_NAME = \'' . $this->dbi->escapeString($this->name) . '\''
             . ' AND IS_UPDATABLE = \'YES\''
         );
@@ -314,7 +311,7 @@ class Table
         $force_read = false,
         $disable_error = false
     ) {
-        $db = $this->db_name;
+        $db = $this->dbName;
         $table = $this->name;
 
         if (! empty($_SESSION['is_multi_query'])) {
@@ -330,6 +327,7 @@ class Table
             || count($cachedResult) === 1
         ) {
             $this->dbi->getTablesFull($db, $table);
+            $cachedResult = $this->dbi->getCache()->getCachedTableContent([$db, $table]);
         }
 
         if ($cachedResult === null) {
@@ -417,7 +415,7 @@ class Table
     {
         $table_num_row_info = $this->getStatusInfo('TABLE_ROWS', false, true);
         if ($table_num_row_info === false) {
-            $table_num_row_info = $this->dbi->getTable($this->db_name, $GLOBALS['showtable']['Name'])
+            $table_num_row_info = $this->dbi->getTable($this->dbName, $GLOBALS['showtable']['Name'])
             ->countRecords(true);
         }
 
@@ -524,8 +522,8 @@ class Table
         $columns_with_index = null,
         $oldColumnName = null
     ) {
-        /** @var DatabaseInterface $dbi */
-        $dbi = $GLOBALS['dbi'];
+        global $dbi;
+
         $is_timestamp = mb_stripos($type, 'TIMESTAMP') !== false;
 
         $query = Util::backquote($name) . ' ' . $type;
@@ -642,7 +640,7 @@ class Table
 
             if (! empty($extra)) {
                 if ($virtuality) {
-                    $extra = trim(preg_replace('~^\s*AUTO_INCREMENT\s*~is', ' ', $extra));
+                    $extra = trim((string) preg_replace('~^\s*AUTO_INCREMENT\s*~is', ' ', $extra));
                 }
 
                 $query .= ' ' . $extra;
@@ -672,7 +670,7 @@ class Table
         }
 
         return $query;
-    } // end function
+    }
 
     /**
      * Checks if the number of records in a table is at least equal to
@@ -728,7 +726,7 @@ class Table
     public function countRecords($force_exact = false)
     {
         $is_view = $this->isView();
-        $db = $this->db_name;
+        $db = $this->dbName;
         $table = $this->name;
 
         if ($this->dbi->getCache()->getCachedTableContent([$db, $table, 'ExactRows']) != null) {
@@ -812,7 +810,7 @@ class Table
         }
 
         return $row_count;
-    } // end of the 'Table::countRecords()' function
+    }
 
     /**
      * Generates column specification for ALTER syntax
@@ -874,7 +872,7 @@ class Table
             $columns_with_index,
             $oldcol
         );
-    } // end function
+    }
 
     /**
      * Inserts existing entries in a PMA_* table by reading a value from an old
@@ -901,8 +899,8 @@ class Table
         array $where_fields,
         array $new_fields
     ) {
-        /** @var DatabaseInterface $dbi */
-        $dbi = $GLOBALS['dbi'];
+        global $dbi;
+
         $relation = new Relation($dbi);
         $last_id = -1;
 
@@ -964,12 +962,12 @@ class Table
 
             $relation->queryAsControlUser($new_table_query);
             $last_id = $dbi->insertId();
-        } // end while
+        }
 
         $dbi->freeResult($table_copy_rs);
 
         return $last_id;
-    } // end of 'Table::duplicateInfo()' function
+    }
 
     /**
      * Copies or renames table
@@ -993,9 +991,7 @@ class Table
         $move,
         $mode
     ) {
-        global $err_url;
-        /** @var DatabaseInterface $dbi */
-        $dbi = $GLOBALS['dbi'];
+        global $err_url, $dbi;
 
         $relation = new Relation($dbi);
 
@@ -1027,7 +1023,7 @@ class Table
                 $GLOBALS['message'] = Message::rawError(
                     sprintf(
                         __('Target database `%s` was not found!'),
-                        htmlspecialchars($target_db)
+                        htmlspecialchars((string) $target_db)
                     )
                 );
             }
@@ -1355,7 +1351,6 @@ class Table
 
             $GLOBALS['sql_query'] .= "\n\n" . $sql_drop_query . ';';
 
-            // end if ($move)
             return true;
         }
 
@@ -1385,8 +1380,7 @@ class Table
             );
 
             // Write every comment as new copied entry. [MIME]
-            while ($comments_copy_row
-                = $dbi->fetchAssoc($comments_copy_rs)) {
+            while ($comments_copy_row = $dbi->fetchAssoc($comments_copy_rs)) {
                 $new_comment_query = 'REPLACE INTO '
                     . Util::backquote($GLOBALS['cfgRelation']['db'])
                     . '.' . Util::backquote(
@@ -1416,7 +1410,7 @@ class Table
                         : '')
                     . ')';
                 $relation->queryAsControlUser($new_comment_query);
-            } // end while
+            }
             $dbi->freeResult($comments_copy_rs);
             unset($comments_copy_rs);
         }
@@ -1654,7 +1648,7 @@ class Table
         $old_name = $this->getName();
         $old_db = $this->getDbName();
         $this->name = $new_name;
-        $this->db_name = $new_db;
+        $this->dbName = $new_db;
 
         // Renable table in configuration storage
         $this->relation->renameTable(
@@ -1807,7 +1801,7 @@ class Table
     {
         $move_columns_sql_query = sprintf(
             'SELECT * FROM %s.%s LIMIT 1',
-            Util::backquote($this->db_name),
+            Util::backquote($this->dbName),
             Util::backquote($this->name)
         );
         $move_columns_sql_result = $this->dbi->tryQuery($move_columns_sql_query);
@@ -1848,7 +1842,8 @@ class Table
                 if ((
                     strpos($column['Extra'], 'GENERATED') !== false
                     || strpos($column['Extra'], 'VIRTUAL') !== false
-                    ) && strpos($column['Extra'], 'DEFAULT_GENERATED') === false) {
+                    ) && strpos($column['Extra'], 'DEFAULT_GENERATED') === false
+                ) {
                     continue;
                 }
 
@@ -1873,7 +1868,7 @@ class Table
         // Read from phpMyAdmin database
         $sql_query = ' SELECT `prefs` FROM ' . $pma_table
             . " WHERE `username` = '" . $this->dbi->escapeString($GLOBALS['cfg']['Server']['user']) . "'"
-            . " AND `db_name` = '" . $this->dbi->escapeString($this->db_name) . "'"
+            . " AND `db_name` = '" . $this->dbi->escapeString($this->dbName) . "'"
             . " AND `table_name` = '" . $this->dbi->escapeString($this->name) . "'";
 
         $row = $this->dbi->fetchArray($this->relation->queryAsControlUser($sql_query));
@@ -1895,7 +1890,7 @@ class Table
         $pma_table = Util::backquote($cfgRelation['db']) . '.'
             . Util::backquote($cfgRelation['table_uiprefs']);
 
-        $secureDbName = $this->dbi->escapeString($this->db_name);
+        $secureDbName = $this->dbi->escapeString($this->dbName);
 
         $username = $GLOBALS['cfg']['Server']['user'];
         $sql_query = ' REPLACE INTO ' . $pma_table
@@ -1912,7 +1907,7 @@ class Table
             );
             $message->addMessage(
                 Message::rawError(
-                    $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL)
+                    (string) $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL)
                 ),
                 '<br><br>'
             );
@@ -1948,7 +1943,7 @@ class Table
                 );
                 $message->addMessage(
                     Message::rawError(
-                        $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL)
+                        (string) $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL)
                     ),
                     '<br><br>'
                 );
@@ -1973,12 +1968,12 @@ class Table
         $server_id = $GLOBALS['server'];
 
         // set session variable if it's still undefined
-        if (! isset($_SESSION['tmpval']['table_uiprefs'][$server_id][$this->db_name][$this->name])) {
+        if (! isset($_SESSION['tmpval']['table_uiprefs'][$server_id][$this->dbName][$this->name])) {
             // check whether we can get from pmadb
             $uiPrefs = $cfgRelation['uiprefswork'] ? $this->getUiPrefsFromDb() : [];
-            $_SESSION['tmpval']['table_uiprefs'][$server_id][$this->db_name][$this->name] = $uiPrefs;
+            $_SESSION['tmpval']['table_uiprefs'][$server_id][$this->dbName][$this->name] = $uiPrefs;
         }
-        $this->uiprefs =& $_SESSION['tmpval']['table_uiprefs'][$server_id][$this->db_name][$this->name];
+        $this->uiprefs =& $_SESSION['tmpval']['table_uiprefs'][$server_id][$this->dbName][$this->name];
     }
 
     /**
@@ -2172,12 +2167,12 @@ class Table
     {
         $columns = [];
         foreach ($this->dbi->getColumnsFull(
-            $this->db_name,
+            $this->dbName,
             $this->name
         ) as $row) {
             if (preg_match('@^(set|enum)\((.+)\)$@i', $row['Type'], $tmp)) {
                 $tmp[2] = mb_substr(
-                    preg_replace('@([^,])\'\'@', '\\1\\\'', ',' . $tmp[2]),
+                    (string) preg_replace('@([^,])\'\'@', '\\1\\\'', ',' . $tmp[2]),
                     1
                 );
                 $columns[$row['Field']] = $tmp[1] . '('
@@ -2199,7 +2194,7 @@ class Table
      */
     public function getIndex($index)
     {
-        return Index::singleton($this->db_name, $this->name, $index);
+        return Index::singleton($this->dbName, $this->name, $index);
     }
 
     /**
@@ -2215,7 +2210,7 @@ class Table
         // $sql_query is the one displayed in the query box
         $sql_query = sprintf(
             'ALTER TABLE %s.%s',
-            Util::backquote($this->db_name),
+            Util::backquote($this->dbName),
             Util::backquote($this->name)
         );
 
@@ -2229,7 +2224,7 @@ class Table
                     Util::backquote($_POST['old_index'])
                 );
             }
-        } // end if
+        }
 
         // Builds the new one
         switch ($index->getChoice()) {
@@ -2260,7 +2255,7 @@ class Table
                     $sql_query .= Util::backquote($index->getName());
                 }
                 break;
-        } // end switch
+        }
 
         $index_fields = [];
         foreach ($index->getColumns() as $key => $column) {
@@ -2270,7 +2265,7 @@ class Table
             }
 
             $index_fields[$key] .= '(' . $column->getSubPart() . ')';
-        } // end while
+        }
 
         if (empty($index_fields)) {
             $error = Message::error(__('No index parts defined!'));
@@ -2332,7 +2327,7 @@ class Table
                 . Util::backquote($GLOBALS['cfgRelation']['db'])
                 . '.' . Util::backquote($cfgRelation['table_info'])
                 . ' WHERE db_name  = \''
-                . $this->dbi->escapeString($this->db_name) . '\''
+                . $this->dbi->escapeString($this->dbName) . '\''
                 . ' AND table_name = \''
                 . $this->dbi->escapeString($this->name) . '\'';
         } else {
@@ -2340,7 +2335,7 @@ class Table
                 . Util::backquote($GLOBALS['cfgRelation']['db'])
                 . '.' . Util::backquote($cfgRelation['table_info'])
                 . '(db_name, table_name, display_field) VALUES('
-                . '\'' . $this->dbi->escapeString($this->db_name) . '\','
+                . '\'' . $this->dbi->escapeString($this->dbName) . '\','
                 . '\'' . $this->dbi->escapeString($this->name) . '\','
                 . '\'' . $this->dbi->escapeString($display_field) . '\')';
         }
@@ -2397,7 +2392,7 @@ class Table
                         . '(master_db, master_table, master_field, foreign_db,'
                         . ' foreign_table, foreign_field)'
                         . ' values('
-                        . '\'' . $this->dbi->escapeString($this->db_name) . '\', '
+                        . '\'' . $this->dbi->escapeString($this->dbName) . '\', '
                         . '\'' . $this->dbi->escapeString($this->name) . '\', '
                         . '\'' . $this->dbi->escapeString($master_field) . '\', '
                         . '\'' . $this->dbi->escapeString($foreign_db) . '\', '
@@ -2417,23 +2412,23 @@ class Table
                         . ' foreign_field    = \''
                         . $this->dbi->escapeString($foreign_field) . '\' '
                         . ' WHERE master_db  = \''
-                        . $this->dbi->escapeString($this->db_name) . '\''
+                        . $this->dbi->escapeString($this->dbName) . '\''
                         . ' AND master_table = \''
                         . $this->dbi->escapeString($this->name) . '\''
                         . ' AND master_field = \''
                         . $this->dbi->escapeString($master_field) . '\'';
-                } // end if... else....
+                }
             } elseif (isset($existrel[$master_field])) {
                 $upd_query = 'DELETE FROM '
                     . Util::backquote($GLOBALS['cfgRelation']['db'])
                     . '.' . Util::backquote($cfgRelation['relation'])
                     . ' WHERE master_db  = \''
-                    . $this->dbi->escapeString($this->db_name) . '\''
+                    . $this->dbi->escapeString($this->dbName) . '\''
                     . ' AND master_table = \''
                     . $this->dbi->escapeString($this->name) . '\''
                     . ' AND master_field = \''
                     . $this->dbi->escapeString($master_field) . '\'';
-            } // end if... else....
+            }
 
             if (! isset($upd_query)) {
                 continue;
@@ -2539,14 +2534,14 @@ class Table
                         // or an option has been changed for ON DELETE or ON UPDATE
                         $drop = true;
                         $create = true;
-                    } // end if... else....
+                    }
                 } else {
                     // no key defined for this field(s)
                     $create = true;
                 }
             } elseif (isset($existrel_foreign[$master_field_md5])) {
                 $drop = true;
-            } // end if... else....
+            }
 
             $tmp_error_drop = false;
             if ($drop) {
@@ -2596,7 +2591,7 @@ class Table
             if (! isset($_POST['preview_sql'])) {
                 $display_query .= $create_query . "\n";
                 $this->dbi->tryQuery($create_query);
-                $tmp_error_create = $this->dbi->getError();
+                $tmp_error_create = (string) $this->dbi->getError();
                 if (! empty($tmp_error_create)) {
                     $seen_error = true;
 
@@ -2652,7 +2647,7 @@ class Table
             } else {
                 $preview_sql_data .= $sql_query_recreate;
             }
-        } // end foreach
+        }
 
         return [
             $html_output,
@@ -2699,7 +2694,7 @@ class Table
             $foreignField[$key] = Util::backquote($one_field);
         }
         $sql_query .= ' FOREIGN KEY (' . implode(', ', $field) . ') REFERENCES '
-            . ($this->db_name != $foreignDb
+            . ($this->dbName != $foreignDb
                 ? Util::backquote($foreignDb) . '.' : '')
             . Util::backquote($foreignTable)
             . '(' . implode(', ', $foreignField) . ')';
@@ -2737,7 +2732,7 @@ class Table
                 FROM
                 `information_schema`.`COLUMNS`
                 WHERE
-                `TABLE_SCHEMA` = '" . $this->dbi->escapeString($this->db_name) . "'
+                `TABLE_SCHEMA` = '" . $this->dbi->escapeString($this->dbName) . "'
                 AND `TABLE_NAME` = '" . $this->dbi->escapeString($this->name) . "'";
             if ($column != null) {
                 $sql .= " AND  `COLUMN_NAME` = '" . $this->dbi->escapeString($column)
@@ -2785,7 +2780,7 @@ class Table
     public function showCreate()
     {
         return $this->dbi->fetchValue(
-            'SHOW CREATE TABLE ' . Util::backquote($this->db_name) . '.'
+            'SHOW CREATE TABLE ' . Util::backquote($this->dbName) . '.'
             . Util::backquote($this->name),
             0,
             1
@@ -2802,7 +2797,7 @@ class Table
             sprintf(
                 'SELECT COUNT(*) AS %s FROM %s.%s',
                 Util::backquote('row_count'),
-                Util::backquote($this->db_name),
+                Util::backquote($this->dbName),
                 Util::backquote($this->name)
             )
         );
@@ -2826,7 +2821,7 @@ class Table
         $columns_with_index = [];
         foreach (Index::getFromTableByChoice(
             $this->name,
-            $this->db_name,
+            $this->dbName,
             $types
         ) as $index) {
             $columns = $index->getColumns();

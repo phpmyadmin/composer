@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds DatabasesControllerTest class
- */
 
 declare(strict_types=1);
 
@@ -18,9 +15,6 @@ use PhpMyAdmin\Transformations;
 use stdClass;
 use function sprintf;
 
-/**
- * Tests for DatabasesController class
- */
 class DatabasesControllerTest extends AbstractTestCase
 {
     protected function setUp(): void
@@ -59,10 +53,10 @@ class DatabasesControllerTest extends AbstractTestCase
 
         $controller = new DatabasesController(
             $response,
-            $GLOBALS['dbi'],
             $template,
             $transformations,
-            $relationCleanup
+            $relationCleanup,
+            $GLOBALS['dbi']
         );
 
         $controller->index();
@@ -88,10 +82,10 @@ class DatabasesControllerTest extends AbstractTestCase
 
         $controller = new DatabasesController(
             $response,
-            $GLOBALS['dbi'],
             $template,
             $transformations,
-            $relationCleanup
+            $relationCleanup,
+            $GLOBALS['dbi']
         );
 
         $cfg['ShowCreateDb'] = true;
@@ -118,6 +112,7 @@ class DatabasesControllerTest extends AbstractTestCase
 
     public function testCreateDatabaseAction(): void
     {
+        parent::defineVersionConstants();
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -131,10 +126,10 @@ class DatabasesControllerTest extends AbstractTestCase
         $transformations = new Transformations();
         $controller = new DatabasesController(
             $response,
-            $dbi,
             $template,
             $transformations,
-            new RelationCleanup($dbi, new Relation($dbi, $template))
+            new RelationCleanup($dbi, new Relation($dbi, $template)),
+            $dbi
         );
 
         $_POST['new_db'] = 'pma_test';
@@ -154,10 +149,10 @@ class DatabasesControllerTest extends AbstractTestCase
 
         $controller = new DatabasesController(
             $response,
-            $dbi,
             $template,
             $transformations,
-            new RelationCleanup($dbi, new Relation($dbi, $template))
+            new RelationCleanup($dbi, new Relation($dbi, $template)),
+            $dbi
         );
 
         $_POST['db_collation'] = 'utf8_general_ci';
@@ -189,10 +184,10 @@ class DatabasesControllerTest extends AbstractTestCase
         $template = new Template();
         $controller = new DatabasesController(
             $response,
-            $dbi,
             $template,
             new Transformations(),
-            new RelationCleanup($dbi, new Relation($dbi, $template))
+            new RelationCleanup($dbi, new Relation($dbi, $template)),
+            $dbi
         );
 
         $_POST['drop_selected_dbs'] = '1';

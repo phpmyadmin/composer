@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the PhpMyAdmin\Controllers\Server\Status\MonitorController
- */
 
 declare(strict_types=1);
 
@@ -22,17 +19,20 @@ class MonitorController extends AbstractController
     /** @var Monitor */
     private $monitor;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response Response object
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Template          $template Template object
-     * @param Data              $data     Data object
-     * @param Monitor           $monitor  Monitor object
+     * @param Response          $response
+     * @param Data              $data
+     * @param Monitor           $monitor
+     * @param DatabaseInterface $dbi
      */
-    public function __construct($response, $dbi, Template $template, $data, $monitor)
+    public function __construct($response, Template $template, $data, $monitor, $dbi)
     {
-        parent::__construct($response, $dbi, $template, $data);
+        parent::__construct($response, $template, $data);
         $this->monitor = $monitor;
+        $this->dbi = $dbi;
     }
 
     public function index(): void
@@ -61,7 +61,7 @@ class MonitorController extends AbstractController
             'server_time' => (int) (microtime(true) * 1000),
             'server_os' => SysInfo::getOs(),
             'is_superuser' => $this->dbi->isSuperuser(),
-            'server_db_isLocal' => $this->data->db_isLocal,
+            'server_db_isLocal' => $this->data->dbIsLocal,
         ];
 
         $javascriptVariableNames = [];

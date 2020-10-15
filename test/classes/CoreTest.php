@@ -1,7 +1,4 @@
 <?php
-/**
- * Tests for PhpMyAdmin\Core class
- */
 
 declare(strict_types=1);
 
@@ -19,9 +16,6 @@ use function ob_start;
 use function preg_quote;
 use function serialize;
 
-/**
- * Tests for PhpMyAdmin\Core class
- */
 class CoreTest extends AbstractNetworkTestCase
 {
     /**
@@ -477,6 +471,8 @@ class CoreTest extends AbstractNetworkTestCase
      *
      * @param string $size     Size
      * @param int    $expected Expected value
+     *
+     * @group 32bit-incompatible
      *
      * @dataProvider providerTestGetRealSize
      */
@@ -1296,7 +1292,7 @@ class CoreTest extends AbstractNetworkTestCase
         $printed = ob_get_contents();
         ob_end_clean();
 
-        $this->assertGreaterThan(0, mb_strpos($printed, $warn));
+        $this->assertGreaterThan(0, mb_strpos((string) $printed, $warn));
     }
 
     /**

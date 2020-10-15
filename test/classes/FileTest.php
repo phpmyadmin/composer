@@ -1,7 +1,4 @@
 <?php
-/**
- * tests for File class
- */
 
 declare(strict_types=1);
 
@@ -11,9 +8,6 @@ use PhpMyAdmin\File;
 use function bin2hex;
 use function file_get_contents;
 
-/**
- * tests for PhpMyAdmin\File class
- */
 class FileTest extends AbstractTestCase
 {
     /**
@@ -49,7 +43,7 @@ class FileTest extends AbstractTestCase
      */
     public function testBinaryContent(string $file): void
     {
-        $data = '0x' . bin2hex(file_get_contents($file));
+        $data = '0x' . bin2hex((string) file_get_contents($file));
         $file = new File($file);
         $this->assertEquals($data, $file->getContent());
     }

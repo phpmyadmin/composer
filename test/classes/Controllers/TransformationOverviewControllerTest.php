@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds TransformationOverviewControllerTest class
- */
 
 declare(strict_types=1);
 
@@ -13,9 +10,6 @@ use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\Response;
 use PhpMyAdmin\Transformations;
 
-/**
- * Tests for TransformationOverviewController class
- */
 class TransformationOverviewControllerTest extends AbstractTestCase
 {
     /**
@@ -39,12 +33,7 @@ class TransformationOverviewControllerTest extends AbstractTestCase
     {
         $response = new Response();
 
-        $controller = new TransformationOverviewController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template(),
-            new Transformations()
-        );
+        $controller = new TransformationOverviewController($response, new Template(), new Transformations());
 
         $controller->index();
         $actual = $response->getHTMLResult();

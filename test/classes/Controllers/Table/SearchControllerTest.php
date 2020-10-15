@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
 use PhpMyAdmin\Controllers\Table\SearchController;
+use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Table\Search;
@@ -16,6 +17,7 @@ use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\Response as ResponseStub;
 use PhpMyAdmin\Types;
 use stdClass;
+use function hash;
 
 /**
  * Tests for PMA_TableSearch
@@ -117,12 +119,12 @@ class SearchControllerTest extends AbstractTestCase
 
         $ctrl = new SearchController(
             $this->response,
-            $GLOBALS['dbi'],
             $this->template,
             $GLOBALS['db'],
             $GLOBALS['table'],
             new Search($GLOBALS['dbi']),
-            new Relation($GLOBALS['dbi'], $this->template)
+            new Relation($GLOBALS['dbi'], $this->template),
+            $GLOBALS['dbi']
         );
 
         $result = $ctrl->getColumnMinMax('column');
@@ -136,6 +138,7 @@ class SearchControllerTest extends AbstractTestCase
      */
     public function testGetDataRowAction(): void
     {
+        $_SESSION[' HMAC_secret '] = hash('sha1', 'test');
         $meta_one = new stdClass();
         $meta_one->type = 'int';
         $meta_one->length = 11;
@@ -170,17 +173,18 @@ class SearchControllerTest extends AbstractTestCase
 
         $ctrl = new SearchController(
             $this->response,
-            $GLOBALS['dbi'],
             $this->template,
             $GLOBALS['db'],
             $GLOBALS['table'],
             new Search($GLOBALS['dbi']),
-            new Relation($GLOBALS['dbi'], $this->template)
+            new Relation($GLOBALS['dbi'], $this->template),
+            $GLOBALS['dbi']
         );
 
         $_POST['db'] = 'PMA';
         $_POST['table'] = 'PMA_BookMark';
         $_POST['where_clause'] = '`col1` = 1';
+        $_POST['where_clause_sign'] = Core::signSqlQuery($_POST['where_clause']);
         $expected = [
             'col1' => 1,
             'col2' => 2,

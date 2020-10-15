@@ -101,7 +101,7 @@ class UserGroups
 
             foreach ($userGroups as $groupName => $tabs) {
                 $userGroupVal = [];
-                $userGroupVal['name'] = htmlspecialchars($groupName);
+                $userGroupVal['name'] = htmlspecialchars((string) $groupName);
                 $userGroupVal['serverTab'] = self::getAllowedTabNames($tabs, 'server');
                 $userGroupVal['dbTab'] = self::getAllowedTabNames($tabs, 'db');
                 $userGroupVal['tableTab'] = self::getAllowedTabNames($tabs, 'table');
@@ -302,7 +302,7 @@ class UserGroups
             $tabDetail['in_array'] = (in_array($tab, $selected) ? ' checked="checked"' : '');
             $tabDetail['tab'] = $tab;
             $tabDetail['tab_name'] = $tabName;
-            $tabDetails[] =$tabDetail;
+            $tabDetails[] = $tabDetail;
         }
         $template = new Template();
 

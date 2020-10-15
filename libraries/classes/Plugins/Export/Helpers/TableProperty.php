@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the PhpMyAdmin\Plugins\Export\Helpers\TableProperty class
- */
 
 declare(strict_types=1);
 
@@ -83,7 +80,7 @@ class TableProperty
      */
     public function getPureType()
     {
-        $pos = mb_strpos($this->type, '(');
+        $pos = (int) mb_strpos($this->type, '(');
         if ($pos > 0) {
             return mb_substr($this->type, 0, $pos);
         }

@@ -79,7 +79,7 @@ use function trigger_error;
 class DbiMysqli implements DbiExtension
 {
     /** @var array */
-    private static $pma_mysqli_flag_names = [
+    private static $flagNames = [
         MYSQLI_NUM_FLAG => 'num',
         MYSQLI_PART_KEY_FLAG => 'part_key',
         MYSQLI_SET_FLAG => 'set',
@@ -179,17 +179,18 @@ class DbiMysqli implements DbiExtension
              */
             $error_number = $mysqli->connect_errno;
             $error_message = $mysqli->connect_error;
-            if (! $server['ssl'] && ($error_number == 3159 ||
-                (($error_number == 2001 || $error_number == 9002)
-                    && stripos($error_message, 'SSL Connection is required') !== false))
+            if (! $server['ssl']
+                && ($error_number == 3159
+                    || (($error_number == 2001 || $error_number == 9002)
+                        && stripos($error_message, 'SSL Connection is required') !== false))
             ) {
-                    trigger_error(
-                        __('SSL connection enforced by server, automatically enabling it.'),
-                        E_USER_WARNING
-                    );
-                    $server['ssl'] = true;
+                trigger_error(
+                    __('SSL connection enforced by server, automatically enabling it.'),
+                    E_USER_WARNING
+                );
+                $server['ssl'] = true;
 
-                    return self::connect($user, $password, $server);
+                return self::connect($user, $password, $server);
             }
 
             return false;
@@ -620,7 +621,7 @@ class DbiMysqli implements DbiExtension
         $charsetNumber = $fieldDefinition->charsetnr;
         $fieldDefinitionFlags = $fieldDefinition->flags;
         $flags = [];
-        foreach (self::$pma_mysqli_flag_names as $flag => $name) {
+        foreach (self::$flagNames as $flag => $name) {
             if (! ($fieldDefinitionFlags & $flag)) {
                 continue;
             }

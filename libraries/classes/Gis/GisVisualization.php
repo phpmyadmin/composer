@@ -38,7 +38,7 @@ class GisVisualization
     private $data;
 
     /** @var string */
-    private $modified_sql;
+    private $modifiedSql;
 
     /** @var array   Set of default settings values are here. */
     private $settings = [
@@ -171,7 +171,7 @@ class GisVisualization
         if (isset($data)) {
             $this->data = $data;
         } else {
-            $this->modified_sql = $this->modifySqlQuery($sql_query, $row, $pos);
+            $this->modifiedSql = $this->modifySqlQuery($sql_query, $row, $pos);
             $this->data = $this->fetchRawData();
         }
     }
@@ -259,14 +259,16 @@ class GisVisualization
      */
     private function fetchRawData()
     {
-        $modified_result = $GLOBALS['dbi']->tryQuery($this->modified_sql);
+        global $dbi;
+
+        $modified_result = $dbi->tryQuery($this->modifiedSql);
 
         if ($modified_result === false) {
             return [];
         }
 
         $data = [];
-        while ($row = $GLOBALS['dbi']->fetchAssoc($modified_result)) {
+        while ($row = $dbi->fetchAssoc($modified_result)) {
             $data[] = $row;
         }
 
@@ -448,7 +450,7 @@ class GisVisualization
         $output = ob_get_clean();
 
         // base64 encode
-        $encoded = base64_encode($output);
+        $encoded = base64_encode((string) $output);
 
         return '<img src="data:image/png;base64,' . $encoded . '">';
     }

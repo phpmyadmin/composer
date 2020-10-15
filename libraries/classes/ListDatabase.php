@@ -1,7 +1,4 @@
 <?php
-/**
- * holds the ListDatabase class
- */
 
 declare(strict_types=1);
 
@@ -28,9 +25,11 @@ class ListDatabase extends ListAbstract
 {
     public function __construct()
     {
+        global $dbi;
+
         parent::__construct();
 
-        $checkUserPrivileges = new CheckUserPrivileges($GLOBALS['dbi']);
+        $checkUserPrivileges = new CheckUserPrivileges($dbi);
         $checkUserPrivileges->getPrivileges();
 
         $this->build();
@@ -65,6 +64,8 @@ class ListDatabase extends ListAbstract
      */
     protected function retrieve($like_db_name = null)
     {
+        global $dbi;
+
         $database_list = [];
         $command = '';
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
@@ -89,7 +90,7 @@ class ListDatabase extends ListAbstract
         }
 
         if ($command) {
-            $database_list = $GLOBALS['dbi']->fetchResult(
+            $database_list = $dbi->fetchResult(
                 $command,
                 null,
                 null

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Common;
+use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Operations;
 use PhpMyAdmin\Relation;
@@ -90,27 +91,29 @@ class SearchController extends AbstractController
     /** @var Relation */
     private $relation;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response Response object
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Template          $template Template object
+     * @param Response          $response
      * @param string            $db       Database name
      * @param string            $table    Table name
-     * @param Search            $search   A Search instance.
-     * @param Relation          $relation Relation instance
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         $db,
         $table,
         Search $search,
-        Relation $relation
+        Relation $relation,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->search = $search;
         $this->relation = $relation;
+        $this->dbi = $dbi;
+
         $this->columnNames = [];
         $this->columnTypes = [];
         $this->originalColumnTypes = [];
@@ -141,7 +144,7 @@ class SearchController extends AbstractController
             // set column name
             $this->columnNames[] = $row['Field'];
 
-            $type = $row['Type'];
+            $type = (string) $row['Type'];
             // before any replacement
             $this->originalColumnTypes[] = mb_strtolower($type);
             // check whether table contains geometric columns
@@ -172,7 +175,7 @@ class SearchController extends AbstractController
                 = ! empty($row['Collation']) && $row['Collation'] !== 'NULL'
                 ? $row['Collation']
                 : '';
-        } // end for
+        }
 
         // Retrieve foreign keys
         $this->foreigners = $this->relation->getForeigners($this->db, $this->table);
@@ -187,6 +190,7 @@ class SearchController extends AbstractController
 
         $this->addScriptFiles([
             'makegrid.js',
+            'vendor/stickyfill.min.js',
             'sql.js',
             'table/select.js',
             'table/change.js',
@@ -219,6 +223,10 @@ class SearchController extends AbstractController
      */
     public function getDataRowAction()
     {
+        if (! Core::checkSqlQuerySignature($_POST['where_clause'], $_POST['where_clause_sign'])) {
+            return;
+        }
+
         $extra_data = [];
         $row_info_query = 'SELECT * FROM ' . Util::backquote($_POST['db']) . '.'
             . Util::backquote($_POST['table']) . ' WHERE ' . $_POST['where_clause'];

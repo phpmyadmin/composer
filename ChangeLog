@@ -46,8 +46,19 @@ phpMyAdmin - ChangeLog
 - issue #14340 Add a button on Export Page to show the SQL Query
 - issue #16304 Add support for INET6 column type
 - issue #16337 Fix example insert/update query default values
+- issue #12961 Remove indexes from table relation
+- issue #13557 Use a full list of functions instead of a separated one on insert/edit page "Function" selector
+- issue #14795 Include routines in the export in a predictable order
 
-5.0.3 (not yet released)
+5.0.4 (2020-10-15)
+- issue #16245 Fix failed Zoom search clears existing values
+- issue        Fixed a PHP error when reporting a particular JS error
+- issue #16326 Fixed latitude and longitude swap for geometries in edit mode
+- issue #16032 Fix CREATE TABLE not being tracked when auto tracking is enabled
+- issue #16397 Fix compatibility problems with older PHP versions (also issue #16399)
+- issue #16396 Fix broken two-factor authentication
+
+5.0.3 (2020-10-09)
 - issue #15983 Require twig ^2.9
 - issue        Fix option to import files locally appearing as not available
 - issue #16048 Fix to allow NULL as a default bit value
@@ -105,6 +116,13 @@ phpMyAdmin - ChangeLog
 - issue #16319 Fixed a Russian translation mistake on search results total text
 - issue #15634 Only use session_set_cookie_params once on PHP >= 7.3.0 versions for single signon auth
 - issue #14698 Fixed database named as 'New' (language variable) causes PHP fatal error
+- issue #16355 Make textareas both sides resizable
+- issue #16366 Fix column definition form not showing default value
+- issue #16342 Fixed multi-table query (db_multi_table_query.php) alias show the same alias for all columns
+- issue #15109 Fixed using ST_GeomFromText + GUI on insert throws an error
+- issue #16325 Fixed editing Geometry data throws error on using the GUI
+- issue        [security] Fix XSS vulnerability with the transformation feature (PMASA-2020-5)
+- issue        [security] Fix SQL injection vulnerability with search feature (PMASA-2020-6)
 
 5.0.2 (2020-03-20)
 - issue        Fixed deprecation warning "implode(): Passing glue string after array is deprecated." function on export page
@@ -236,6 +254,14 @@ phpMyAdmin - ChangeLog
 - issue #14732 Fixed can't rename primary key with auto increment
 - issue #15677 Fix show process-list triggers a php exception
 - issue #15697 Fix uncaught php error: "Call to a member function get() on null" in db_export.php when exporting a table from the list
+
+4.9.7 (2020-10-15)
+- issue #16397 Fix compatibility problems with older PHP versions (also issue #16399)
+- issue #16396 Fix broken two-factor authentication
+
+4.9.6 (2020-10-09)
+- issue        [security] Fix XSS vulnerability with the transformation feature (PMASA-2020-5)
+- issue        [security] Fix SQL injection vulnerability with search feature (PMASA-2020-6)
 
 4.9.5 (2020-03-20)
 - issue        [security] Fix SQL injection with certain usernames (PMASA-2020-2)

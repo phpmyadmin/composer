@@ -93,10 +93,12 @@ class IpAllowDeny
             $maskl  = 0;
 
             for ($i = 0; $i < 31; $i++) {
-                if ($i < $regs[5] - 1) {
-                    $maskl += pow(2, 30 - $i);
-                } // end if
-            } // end for
+                if ($i >= $regs[5] - 1) {
+                    continue;
+                }
+
+                $maskl += pow(2, 30 - $i);
+            }
 
             return ($maskl & $rangel) == ($maskl & $ipl);
         }
@@ -110,13 +112,13 @@ class IpAllowDeny
             if (preg_match('|\[([0-9]+)\-([0-9]+)\]|', $maskocts[$i], $regs)) {
                 if (($ipocts[$i] > $regs[2]) || ($ipocts[$i] < $regs[1])) {
                     $result = false;
-                } // end if
+                }
             } else {
                 if ($maskocts[$i] <> $ipocts[$i]) {
                     $result = false;
-                } // end if
-            } // end if/else
-        } //end for
+                }
+            }
+        }
 
         return $result;
     }
@@ -157,10 +159,10 @@ class IpAllowDeny
         $is_range = mb_strpos($test_range, '[') > -1;
         $is_single = ! $is_cidr && ! $is_range;
 
-        $ip_hex = bin2hex(inet_pton($ip_to_test));
+        $ip_hex = bin2hex((string) inet_pton($ip_to_test));
 
         if ($is_single) {
-            $range_hex = bin2hex(inet_pton($test_range));
+            $range_hex = bin2hex((string) inet_pton($test_range));
 
             return hash_equals($ip_hex, $range_hex);
         }
@@ -179,9 +181,9 @@ class IpAllowDeny
 
                 // get the first and last allowed IPs
                 $first_ip  = str_replace($range_match[0], $range_start, $test_range);
-                $first_hex = bin2hex(inet_pton($first_ip));
+                $first_hex = bin2hex((string) inet_pton($first_ip));
                 $last_ip   = str_replace($range_match[0], $range_end, $test_range);
-                $last_hex  = bin2hex(inet_pton($last_ip));
+                $last_hex  = bin2hex((string) inet_pton($last_ip));
 
                 // check if the IP to test is within the range
                 $result = ($ip_hex >= $first_hex && $ip_hex <= $last_hex);
@@ -196,7 +198,7 @@ class IpAllowDeny
 
             // Parse the address into a binary string
             $first_bin = inet_pton($first_ip);
-            $first_hex = bin2hex($first_bin);
+            $first_hex = bin2hex((string) $first_bin);
 
             $flexbits = 128 - (int) $subnet;
 
@@ -341,7 +343,7 @@ class IpAllowDeny
             if ($this->ipMaskTest($rule_data[2], $remote_ip)) {
                 return true;
             }
-        } // end while
+        }
 
         return false;
     }

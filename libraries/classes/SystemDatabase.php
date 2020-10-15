@@ -1,7 +1,4 @@
 <?php
-/**
- * hold PhpMyAdmin\SystemDatabase class
- */
 
 declare(strict_types=1);
 
@@ -52,7 +49,7 @@ class SystemDatabase
             "SELECT * FROM %s.%s WHERE `db_name` = '%s'",
             Util::backquote($cfgRelation['db']),
             Util::backquote($cfgRelation['column_info']),
-            $GLOBALS['dbi']->escapeString($db)
+            $this->dbi->escapeString($db)
         );
 
         return $this->dbi->tryQuery($pma_transformation_sql);

@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds VariablesControllerTest
- */
 
 declare(strict_types=1);
 
@@ -41,12 +38,7 @@ class VariablesControllerTest extends AbstractTestCase
     {
         $response = new Response();
 
-        $controller = new VariablesController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template(),
-            $this->data
-        );
+        $controller = new VariablesController($response, new Template(), $this->data, $GLOBALS['dbi']);
 
         $controller->index();
         $html = $response->getHTMLResult();

@@ -44,30 +44,30 @@ final class ReplaceController extends AbstractController
     /** @var Relation */
     private $relation;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response        A Response instance.
-     * @param DatabaseInterface $dbi             A DatabaseInterface instance.
-     * @param Template          $template        A Template instance.
-     * @param string            $db              Database name.
-     * @param string            $table           Table name.
-     * @param InsertEdit        $insertEdit      An InsertEdit instance.
-     * @param Transformations   $transformations A Transformations instance.
-     * @param Relation          $relation        A Relation instance.
+     * @param Response          $response
+     * @param string            $db       Database name.
+     * @param string            $table    Table name.
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         $db,
         $table,
         InsertEdit $insertEdit,
         Transformations $transformations,
-        Relation $relation
+        Relation $relation,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->insertEdit = $insertEdit;
         $this->transformations = $transformations;
         $this->relation = $relation;
+        $this->dbi = $dbi;
     }
 
     public function index(): void
@@ -88,7 +88,13 @@ final class ReplaceController extends AbstractController
          */
         $goto_include = false;
 
-        $this->addScriptFiles(['makegrid.js', 'sql.js', 'indexes.js', 'gis_data_editor.js']);
+        $this->addScriptFiles([
+            'makegrid.js',
+            'vendor/stickyfill.min.js',
+            'sql.js',
+            'indexes.js',
+            'gis_data_editor.js',
+        ]);
 
         // check whether insert row mode, if so include /table/change
         $this->insertEdit->isInsertRow();
@@ -342,7 +348,7 @@ final class ReplaceController extends AbstractController
                 }
 
                 $multi_edit_columns[$key] = null;
-            } //end of foreach
+            }
 
             // temporarily store rows not inserted
             // so that they can be populated again.
@@ -525,7 +531,7 @@ final class ReplaceController extends AbstractController
                             $relation_field_value
                         );
                     }
-                }   // end of loop for each relation cell
+                }
             }
             if (isset($_POST['do_transformations'])
                 && $_POST['do_transformations'] == true
@@ -555,7 +561,7 @@ final class ReplaceController extends AbstractController
                             $type
                         );
                     }
-                }   // end of loop for each $mime_map
+                }
             }
 
             // Need to check the inline edited value can be truncated by MySQL

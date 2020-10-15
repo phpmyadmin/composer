@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Common;
+use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
@@ -61,20 +62,22 @@ class ZoomSearchController extends AbstractController
     /** @var array Foreign keys */
     private $foreigners;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response A Response instance.
-     * @param DatabaseInterface $dbi      A DatabaseInterface instance.
-     * @param Template          $template A Template instance.
+     * @param Response          $response
      * @param string            $db       Database name.
      * @param string            $table    Table name.
-     * @param Search            $search   A Search instance.
-     * @param Relation          $relation A Relation instance.
+     * @param DatabaseInterface $dbi
      */
-    public function __construct($response, $dbi, Template $template, $db, $table, Search $search, Relation $relation)
+    public function __construct($response, Template $template, $db, $table, Search $search, Relation $relation, $dbi)
     {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->search = $search;
         $this->relation = $relation;
+        $this->dbi = $dbi;
+
         $this->columnNames = [];
         $this->columnTypes = [];
         $this->originalColumnTypes = [];
@@ -178,7 +181,7 @@ class ZoomSearchController extends AbstractController
             // set column name
             $this->columnNames[] = $row['Field'];
 
-            $type = $row['Type'];
+            $type = (string) $row['Type'];
             // before any replacement
             $this->originalColumnTypes[] = mb_strtolower($type);
             // check whether table contains geometric columns
@@ -209,7 +212,7 @@ class ZoomSearchController extends AbstractController
                 = ! empty($row['Collation']) && $row['Collation'] !== 'NULL'
                 ? $row['Collation']
                 : '';
-        } // end for
+        }
 
         // Retrieve foreign keys
         $this->foreigners = $this->relation->getForeigners($this->db, $this->table);
@@ -272,6 +275,10 @@ class ZoomSearchController extends AbstractController
      */
     public function getDataRowAction()
     {
+        if (! Core::checkSqlQuerySignature($_POST['where_clause'], $_POST['where_clause_sign'])) {
+            return;
+        }
+
         $extra_data = [];
         $row_info_query = 'SELECT * FROM ' . Util::backquote($_POST['db']) . '.'
             . Util::backquote($_POST['table']) . ' WHERE ' . $_POST['where_clause'];
@@ -368,6 +375,7 @@ class ZoomSearchController extends AbstractController
             );
             //Append it to row array as where_clause
             $row['where_clause'] = $uniqueCondition[0];
+            $row['where_clause_sign'] = Core::signSqlQuery($uniqueCondition[0]);
 
             $tmpData = [
                 $_POST['criteriaColumnNames'][0] =>
@@ -375,6 +383,7 @@ class ZoomSearchController extends AbstractController
                 $_POST['criteriaColumnNames'][1] =>
                     $row[$_POST['criteriaColumnNames'][1]],
                 'where_clause' => $uniqueCondition[0],
+                'where_clause_sign' => Core::signSqlQuery($uniqueCondition[0]),
             ];
             $tmpData[$dataLabel] = $dataLabel ? $row[$dataLabel] : '';
             $data[] = $tmpData;

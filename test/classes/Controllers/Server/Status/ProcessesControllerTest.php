@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds ProcessesControllerTest
- */
 
 declare(strict_types=1);
 
@@ -42,12 +39,7 @@ class ProcessesControllerTest extends AbstractTestCase
     {
         $response = new Response();
 
-        $controller = new ProcessesController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template(),
-            $this->data
-        );
+        $controller = new ProcessesController($response, new Template(), $this->data, $GLOBALS['dbi']);
 
         $controller->index();
         $html = $response->getHTMLResult();
@@ -160,12 +152,7 @@ class ProcessesControllerTest extends AbstractTestCase
         $response = new Response();
         $response->setAjax(true);
 
-        $controller = new ProcessesController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template(),
-            $this->data
-        );
+        $controller = new ProcessesController($response, new Template(), $this->data, $GLOBALS['dbi']);
 
         $_POST['full'] = '1';
         $_POST['order_by_field'] = 'process';

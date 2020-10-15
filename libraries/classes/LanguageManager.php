@@ -1,7 +1,4 @@
 <?php
-/**
- * Hold the PhpMyAdmin\LanguageManager class
- */
 
 declare(strict_types=1);
 
@@ -39,7 +36,7 @@ class LanguageManager
      *
      * @var array
      */
-    private static $language_data = [
+    private static $languageData = [
         'af' => [
             'af',
             'Afrikaans',
@@ -516,6 +513,13 @@ class LanguageManager
             'pt[-_]br|portuguese (brazil)',
             'pt_BR',
         ],
+        'rcf' => [
+            'rcf',
+            'R&eacute;union Creole',
+            'Kr&eacute;ol',
+            'rcf|creole (reunion)',
+            '',
+        ],
         'ro' => [
             'ro',
             'Romanian',
@@ -621,6 +625,13 @@ class LanguageManager
             'tt|tatarish',
             '',
         ],
+        'tzm' => [
+            'tzm',
+            'Central Atlas Tamazight',
+            'Tamaziɣt',
+            'tzm|central atlas tamazight',
+            '',
+        ],
         'ug' => [
             'ug',
             'Uyghur',
@@ -689,19 +700,19 @@ class LanguageManager
     ];
 
     /** @var array */
-    private $available_locales;
+    private $availableLocales;
 
     /** @var array */
-    private $available_languages;
+    private $availableLanguages = [];
 
     /** @var bool */
-    private $lang_failed_cfg = false;
+    private $langFailedConfig = false;
 
     /** @var bool */
-    private $lang_failed_cookie = false;
+    private $langFailedCookie = false;
 
     /** @var bool */
-    private $lang_failed_request = false;
+    private $langFailedRequest = false;
 
     /** @var LanguageManager */
     private static $instance;
@@ -768,18 +779,18 @@ class LanguageManager
      */
     public function availableLocales()
     {
-        if (! $this->available_locales) {
+        if (! $this->availableLocales) {
             if (! isset($GLOBALS['PMA_Config']) || empty($GLOBALS['PMA_Config']->get('FilterLanguages'))) {
-                $this->available_locales = $this->listLocaleDir();
+                $this->availableLocales = $this->listLocaleDir();
             } else {
-                $this->available_locales = preg_grep(
+                $this->availableLocales = preg_grep(
                     '@' . $GLOBALS['PMA_Config']->get('FilterLanguages') . '@',
                     $this->listLocaleDir()
                 );
             }
         }
 
-        return $this->available_locales;
+        return $this->availableLocales;
     }
 
     /**
@@ -799,14 +810,14 @@ class LanguageManager
      */
     public function availableLanguages()
     {
-        if (! $this->available_languages) {
-            $this->available_languages = [];
+        if (! $this->availableLanguages) {
+            $this->availableLanguages = [];
 
             foreach ($this->availableLocales() as $lang) {
                 $lang = strtolower($lang);
-                if (isset(static::$language_data[$lang])) {
-                    $data = static::$language_data[$lang];
-                    $this->available_languages[$lang] = new Language(
+                if (isset(static::$languageData[$lang])) {
+                    $data = static::$languageData[$lang];
+                    $this->availableLanguages[$lang] = new Language(
                         $data[0],
                         $data[1],
                         $data[2],
@@ -814,7 +825,7 @@ class LanguageManager
                         $data[4]
                     );
                 } else {
-                    $this->available_languages[$lang] = new Language(
+                    $this->availableLanguages[$lang] = new Language(
                         $lang,
                         ucfirst($lang),
                         ucfirst($lang),
@@ -825,7 +836,7 @@ class LanguageManager
             }
         }
 
-        return $this->available_languages;
+        return $this->availableLanguages;
     }
 
     /**
@@ -837,11 +848,11 @@ class LanguageManager
     public function sortedLanguages()
     {
         $this->availableLanguages();
-        uasort($this->available_languages, static function (Language $a, Language $b) {
+        uasort($this->availableLanguages, static function (Language $a, Language $b) {
             return $a->cmp($b);
         });
 
-        return $this->available_languages;
+        return $this->availableLanguages;
     }
 
     /**
@@ -869,7 +880,7 @@ class LanguageManager
      */
     public function getCurrentLanguage()
     {
-        return $this->available_languages[strtolower($GLOBALS['lang'])];
+        return $this->availableLanguages[strtolower($GLOBALS['lang'])];
     }
 
     /**
@@ -886,7 +897,7 @@ class LanguageManager
             if ($lang !== false) {
                 return $lang;
             }
-            $this->lang_failed_cfg = true;
+            $this->langFailedConfig = true;
         }
 
         // Don't use REQUEST in following code as it might be confused by cookies
@@ -896,7 +907,7 @@ class LanguageManager
             if ($lang !== false) {
                 return $lang;
             }
-            $this->lang_failed_request = true;
+            $this->langFailedRequest = true;
         }
 
         // check user requested language (GET)
@@ -905,7 +916,7 @@ class LanguageManager
             if ($lang !== false) {
                 return $lang;
             }
-            $this->lang_failed_request = true;
+            $this->langFailedRequest = true;
         }
 
         // check previous set language
@@ -914,7 +925,7 @@ class LanguageManager
             if ($lang !== false) {
                 return $lang;
             }
-            $this->lang_failed_cookie = true;
+            $this->langFailedCookie = true;
         }
 
         $langs = $this->availableLanguages();
@@ -959,9 +970,9 @@ class LanguageManager
     public function showWarnings()
     {
         // now, that we have loaded the language strings we can send the errors
-        if (! $this->lang_failed_cfg
-            && ! $this->lang_failed_cookie
-            && ! $this->lang_failed_request
+        if (! $this->langFailedConfig
+            && ! $this->langFailedCookie
+            && ! $this->langFailedRequest
         ) {
             return;
         }

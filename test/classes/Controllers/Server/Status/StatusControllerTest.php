@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds StatusControllerTest
- */
 
 declare(strict_types=1);
 
@@ -54,10 +51,10 @@ class StatusControllerTest extends AbstractTestCase
 
         $controller = new StatusController(
             $response,
-            $GLOBALS['dbi'],
             $template,
             $data,
-            new ReplicationGui(new Replication(), $template)
+            new ReplicationGui(new Replication(), $template),
+            $GLOBALS['dbi']
         );
 
         $replicationInfo = $data->getReplicationInfo();

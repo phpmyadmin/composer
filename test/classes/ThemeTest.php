@@ -1,7 +1,4 @@
 <?php
-/**
- * Test class for Theme.
- */
 
 declare(strict_types=1);
 
@@ -10,9 +7,6 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Theme;
 use function filemtime;
 
-/**
- * Test class for Theme.
- */
 class ThemeTest extends AbstractTestCase
 {
     /** @var Theme */
@@ -94,11 +88,11 @@ class ThemeTest extends AbstractTestCase
 
         $this->assertEquals(
             filemtime($infofile),
-            $this->object->mtime_info
+            $this->object->mtimeInfo
         );
 
         $this->object->setPath(ROOT_PATH . 'themes/original');
-        $this->object->mtime_info = filemtime($infofile);
+        $this->object->mtimeInfo = filemtime($infofile);
         $this->assertTrue($this->object->loadInfo());
         $this->assertEquals('Original', $this->object->getName());
     }

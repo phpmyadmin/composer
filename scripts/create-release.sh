@@ -221,6 +221,9 @@ rm -rf .github CODE_OF_CONDUCT.md DCO
 # Testsuite setup
 rm -f .travis.yml .scrutinizer.yml .jshintrc .weblate codecov.yml
 
+# Remove Doctum config file
+rm -f test/doctum-config.php
+
 # Remove readme for github
 rm -f README.rst
 
@@ -301,10 +304,12 @@ fi
 # Remove Bootstrap theme
 rm -rf themes/bootstrap
 
-composer update
-# Warm up the routing cache
-./scripts/console cache:warmup --routing
-composer update --no-dev --optimize-autoloader
+if [ -f ./scripts/console ]; then
+    composer update
+    # Warm up the routing cache for 5.1+ releases
+    ./scripts/console cache:warmup --routing
+    composer update --no-dev --optimize-autoloader
+fi
 
 # Remove git metadata
 rm .git

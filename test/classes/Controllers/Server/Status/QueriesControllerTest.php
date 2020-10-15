@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds QueriesControllerTest
- */
 
 declare(strict_types=1);
 
@@ -38,7 +35,7 @@ class QueriesControllerTest extends AbstractTestCase
 
         $this->data = new Data();
         $this->data->status['Uptime'] = 36000;
-        $this->data->used_queries = [
+        $this->data->usedQueries = [
             'Com_change_db' => '15',
             'Com_select' => '12',
             'Com_set_option' => '54',
@@ -52,18 +49,13 @@ class QueriesControllerTest extends AbstractTestCase
     {
         $response = new Response();
 
-        $controller = new QueriesController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template(),
-            $this->data
-        );
+        $controller = new QueriesController($response, new Template(), $this->data);
 
         $controller->index();
         $html = $response->getHTMLResult();
 
         $hourFactor = 3600 / $this->data->status['Uptime'];
-        $usedQueries = $this->data->used_queries;
+        $usedQueries = $this->data->usedQueries;
         $totalQueries = array_sum($usedQueries);
 
         $questionsFromStart = __('Questions since startup:')

@@ -39,23 +39,24 @@ class TransformationWrapperController extends AbstractController
     /** @var Relation */
     private $relation;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response        Response object
-     * @param DatabaseInterface $dbi             DatabaseInterface object
-     * @param Template          $template        Template object
-     * @param Transformations   $transformations Transformations object
-     * @param Relation          $relation        Relation object
+     * @param Response          $response
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         Transformations $transformations,
-        Relation $relation
+        Relation $relation,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template);
+        parent::__construct($response, $template);
         $this->transformations = $transformations;
         $this->relation = $relation;
+        $this->dbi = $dbi;
     }
 
     public function index(): void
@@ -104,6 +105,13 @@ class TransformationWrapperController extends AbstractController
          */
         $this->dbi->selectDb($db);
         if (isset($where_clause)) {
+            if (! Core::checkSqlQuerySignature($where_clause, $_GET['where_clause_sign'] ?? '')) {
+                /* l10n: In case a SQL query did not pass a security check  */
+                Core::fatalError(__('There is an issue with your request.'));
+
+                return;
+            }
+
             $result = $this->dbi->query(
                 'SELECT * FROM ' . Util::backquote($table)
                 . ' WHERE ' . $where_clause . ';',
@@ -172,6 +180,9 @@ class TransformationWrapperController extends AbstractController
             // it sets the resize parameter to jpeg or png
 
             $srcImage = imagecreatefromstring($row[$transform_key]);
+            if ($srcImage === false) {
+                return;
+            }
             $srcWidth = imagesx($srcImage);
             $srcHeight = imagesy($srcImage);
 
@@ -192,6 +203,11 @@ class TransformationWrapperController extends AbstractController
 
             if ($_REQUEST['resize']) {
                 $destImage = imagecreatetruecolor($destWidth, $destHeight);
+                if ($destImage === false) {
+                    imagedestroy($srcImage);
+
+                    return;
+                }
 
                 // ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0,
                 // $destWidth, $destHeight, $srcWidth, $srcHeight);

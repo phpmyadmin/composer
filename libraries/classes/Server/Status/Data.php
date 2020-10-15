@@ -35,7 +35,7 @@ class Data
     public $variables;
 
     /** @var array */
-    public $used_queries;
+    public $usedQueries;
 
     /** @var array */
     public $allocationMap;
@@ -44,7 +44,7 @@ class Data
     public $links;
 
     /** @var bool */
-    public $db_isLocal;
+    public $dbIsLocal;
 
     /** @var mixed */
     public $section;
@@ -349,26 +349,28 @@ class Data
 
     public function __construct()
     {
-        $this->replicationInfo = new ReplicationInfo($GLOBALS['dbi']);
+        global $dbi;
+
+        $this->replicationInfo = new ReplicationInfo($dbi);
         $this->replicationInfo->load($_POST['master_connection'] ?? null);
 
         $this->selfUrl = basename($GLOBALS['PMA_PHP_SELF']);
 
         // get status from server
-        $server_status_result = $GLOBALS['dbi']->tryQuery('SHOW GLOBAL STATUS');
+        $server_status_result = $dbi->tryQuery('SHOW GLOBAL STATUS');
         $server_status = [];
         if ($server_status_result === false) {
             $this->dataLoaded = false;
         } else {
             $this->dataLoaded = true;
-            while ($arr = $GLOBALS['dbi']->fetchRow($server_status_result)) {
+            while ($arr = $dbi->fetchRow($server_status_result)) {
                 $server_status[$arr[0]] = $arr[1];
             }
-            $GLOBALS['dbi']->freeResult($server_status_result);
+            $dbi->freeResult($server_status_result);
         }
 
         // for some calculations we require also some server settings
-        $server_variables = $GLOBALS['dbi']->fetchResult(
+        $server_variables = $dbi->fetchResult(
             'SHOW GLOBAL VARIABLES',
             0,
             1
@@ -419,7 +421,7 @@ class Data
         unset($used_queries['Com_admin_commands']);
 
         // Set all class properties
-        $this->db_isLocal = false;
+        $this->dbIsLocal = false;
         // can be null if $cfg['ServerDefault'] = 0;
         $serverHostToLower = mb_strtolower(
             (string) $GLOBALS['cfg']['Server']['host']
@@ -428,12 +430,12 @@ class Data
             || $GLOBALS['cfg']['Server']['host'] === '127.0.0.1'
             || $GLOBALS['cfg']['Server']['host'] === '::1'
         ) {
-            $this->db_isLocal = true;
+            $this->dbIsLocal = true;
         }
         $this->status = $server_status;
         $this->sections = $sections;
         $this->variables = $server_variables;
-        $this->used_queries = $used_queries;
+        $this->usedQueries = $used_queries;
         $this->allocationMap = $allocationMap;
         $this->links = $links;
         $this->sectionUsed = $sectionUsed;

@@ -96,7 +96,7 @@ class Relation
                 $options,
                 $cache_affected_rows
             );
-        } // end if... else...
+        }
 
         if ($result) {
             return $result;
@@ -789,7 +789,7 @@ class Relation
                     Util::backquote($GLOBALS['cfg']['Server']['pmadb']),
                     Util::backquote($GLOBALS['cfg']['Server']['column_info']),
                 ],
-                $query
+                (string) $query
             );
             $this->dbi->tryMultiQuery($query, DatabaseInterface::CONNECT_CONTROL);
             // skips result sets of query as we are not interested in it
@@ -1369,7 +1369,7 @@ class Relation
                 $reloptions[] = $reloption . '>'
                     . $key . '</option>';
             }
-        } // end foreach
+        }
 
         return $reloptions;
     }
@@ -1409,10 +1409,10 @@ class Relation
                 $value  = $relrow[$foreign_display];
             } else {
                 $value = '';
-            } // end if ($foreign_display)
+            }
 
             $foreign[$key] = $value;
-        } // end foreach
+        }
 
         // put the dropdown sections in correct order
         $top = [];
@@ -2002,7 +2002,7 @@ class Relation
     public function getDefaultPmaTableNames()
     {
         $pma_tables = [];
-        $create_tables_file = file_get_contents(
+        $create_tables_file = (string) file_get_contents(
             SQL_DIR . 'create_tables.sql'
         );
 
@@ -2215,7 +2215,7 @@ class Relation
         } else {
             $have_rel = false;
             $res_rel = [];
-        } // end if
+        }
 
         return [
             $res_rel,

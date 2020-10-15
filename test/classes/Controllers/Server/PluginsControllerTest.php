@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds PluginsControllerTest class
- */
 
 declare(strict_types=1);
 
@@ -14,9 +11,6 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\Response;
 
-/**
- * Tests for PluginsController class
- */
 class PluginsControllerTest extends AbstractTestCase
 {
     /**
@@ -73,12 +67,7 @@ class PluginsControllerTest extends AbstractTestCase
 
         $response = new Response();
 
-        $controller = new PluginsController(
-            $response,
-            $dbi,
-            new Template(),
-            new Plugins($dbi)
-        );
+        $controller = new PluginsController($response, new Template(), new Plugins($dbi));
         $controller->index();
         $actual = $response->getHTMLResult();
 

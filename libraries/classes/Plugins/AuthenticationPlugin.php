@@ -184,6 +184,8 @@ abstract class AuthenticationPlugin
      */
     public function getErrorMessage($failure)
     {
+        global $dbi;
+
         if ($failure === 'empty-denied') {
             return __(
                 'Login without a password is forbidden by configuration'
@@ -203,7 +205,7 @@ abstract class AuthenticationPlugin
             );
         }
 
-        $dbi_error = $GLOBALS['dbi']->getError();
+        $dbi_error = $dbi->getError();
         if (! empty($dbi_error)) {
             return htmlspecialchars($dbi_error);
         }
@@ -313,13 +315,13 @@ abstract class AuthenticationPlugin
                 } else {
                     $allowDeny_forbidden = true;
                 }
-            } // end if ... elseif ... elseif
+            }
 
             // Ejects the user if banished
             if ($allowDeny_forbidden) {
                 $this->showFailure('allow-denied');
             }
-        } // end if
+        }
 
         // is root allowed?
         if (! $cfg['Server']['AllowRoot'] && $cfg['Server']['user'] === 'root') {

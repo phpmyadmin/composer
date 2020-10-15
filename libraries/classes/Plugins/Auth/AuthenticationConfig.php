@@ -72,8 +72,10 @@ class AuthenticationConfig extends AuthenticationPlugin
      */
     public function showFailure($failure)
     {
+        global $dbi;
+
         parent::showFailure($failure);
-        $conn_error = $GLOBALS['dbi']->getError();
+        $conn_error = $dbi->getError();
         if (! $conn_error) {
             $conn_error = __('Cannot connect: invalid settings.');
         }
@@ -102,7 +104,7 @@ class AuthenticationConfig extends AuthenticationPlugin
             trigger_error(__('Access denied!'), E_USER_NOTICE);
         } else {
             // Check whether user has configured something
-            if ($GLOBALS['PMA_Config']->source_mtime == 0) {
+            if ($GLOBALS['PMA_Config']->sourceMtime == 0) {
                 echo '<p>' , sprintf(
                     __(
                         'You probably did not create a configuration file.'

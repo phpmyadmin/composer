@@ -154,7 +154,7 @@ class ExportCsv extends ExportPlugin
                     ],
                     $csv_terminated
                 );
-            } // end if
+            }
             $csv_separator = str_replace('\\t', "\011", $csv_separator);
         }
 
@@ -230,25 +230,25 @@ class ExportCsv extends ExportPlugin
         $sql_query,
         array $aliases = []
     ) {
-        global $what, $csv_terminated, $csv_separator, $csv_enclosed, $csv_escaped;
+        global $what, $csv_terminated, $csv_separator, $csv_enclosed, $csv_escaped, $dbi;
 
         $db_alias = $db;
         $table_alias = $table;
         $this->initAlias($aliases, $db_alias, $table_alias);
 
         // Gets the data from the database
-        $result = $GLOBALS['dbi']->query(
+        $result = $dbi->query(
             $sql_query,
             DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_UNBUFFERED
         );
-        $fields_cnt = $GLOBALS['dbi']->numFields($result);
+        $fields_cnt = $dbi->numFields($result);
 
         // If required, get fields name at the first line
         if (isset($GLOBALS['csv_columns'])) {
             $schema_insert = '';
             for ($i = 0; $i < $fields_cnt; $i++) {
-                $col_as = $GLOBALS['dbi']->fieldName($result, $i);
+                $col_as = $dbi->fieldName($result, $i);
                 if (! empty($aliases[$db]['tables'][$table]['columns'][$col_as])) {
                     $col_as = $aliases[$db]['tables'][$table]['columns'][$col_as];
                 }
@@ -265,15 +265,15 @@ class ExportCsv extends ExportPlugin
                         . $csv_enclosed;
                 }
                 $schema_insert .= $csv_separator;
-            } // end for
+            }
             $schema_insert = trim(mb_substr($schema_insert, 0, -1));
             if (! $this->export->outputHandler($schema_insert . $csv_terminated)) {
                 return false;
             }
-        } // end if
+        }
 
         // Format the data
-        while ($row = $GLOBALS['dbi']->fetchRow($result)) {
+        while ($row = $dbi->fetchRow($result)) {
             $schema_insert = '';
             for ($j = 0; $j < $fields_cnt; $j++) {
                 if (! isset($row[$j]) || $row[$j] === null) {
@@ -331,13 +331,13 @@ class ExportCsv extends ExportPlugin
                 }
 
                 $schema_insert .= $csv_separator;
-            } // end for
+            }
 
             if (! $this->export->outputHandler($schema_insert . $csv_terminated)) {
                 return false;
             }
-        } // end while
-        $GLOBALS['dbi']->freeResult($result);
+        }
+        $dbi->freeResult($result);
 
         return true;
     }

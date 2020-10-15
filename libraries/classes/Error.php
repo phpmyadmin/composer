@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds class PhpMyAdmin\Error
- */
 
 declare(strict_types=1);
 
@@ -126,7 +123,7 @@ class Error extends Message
      *
      * @var bool
      */
-    protected $hide_location = false;
+    protected $hideLocation = false;
 
     /**
      * @param int    $errno   error number
@@ -211,7 +208,7 @@ class Error extends Message
      */
     public function setHideLocation(bool $hide): void
     {
-        $this->hide_location = $hide;
+        $this->hideLocation = $hide;
     }
 
     /**
@@ -501,7 +498,7 @@ class Error extends Message
      */
     public function isUserError(): bool
     {
-        return $this->hide_location ||
+        return $this->hideLocation ||
             ($this->getNumber() & (E_USER_WARNING | E_USER_ERROR | E_USER_NOTICE | E_USER_DEPRECATED));
     }
 
@@ -526,7 +523,7 @@ class Error extends Message
 
         $Ahere = explode(
             DIRECTORY_SEPARATOR,
-            realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..')
+            (string) realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..')
         );
         $Adest = explode(DIRECTORY_SEPARATOR, $dest);
 

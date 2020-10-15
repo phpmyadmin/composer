@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds CollationsControllerTest class
- */
 
 declare(strict_types=1);
 
@@ -12,9 +9,6 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\Response;
 
-/**
- * Tests for CollationsController class
- */
 class CollationsControllerTest extends AbstractTestCase
 {
     /**
@@ -39,11 +33,7 @@ class CollationsControllerTest extends AbstractTestCase
     {
         $response = new Response();
 
-        $controller = new CollationsController(
-            $response,
-            $GLOBALS['dbi'],
-            new Template()
-        );
+        $controller = new CollationsController($response, new Template(), $GLOBALS['dbi']);
 
         $controller->index();
         $actual = $response->getHTMLResult();

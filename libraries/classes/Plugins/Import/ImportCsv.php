@@ -144,7 +144,7 @@ class ImportCsv extends AbstractImportCsv
      */
     public function doImport(?File $importHandle = null, array &$sql_data = [])
     {
-        global $error, $message;
+        global $error, $message, $dbi;
         global $db, $table, $csv_terminated, $csv_enclosed, $csv_escaped,
                $csv_new_line, $csv_columns, $err_url;
         // $csv_replace and $csv_ignore should have been here,
@@ -189,7 +189,7 @@ class ImportCsv extends AbstractImportCsv
         if (isset($_REQUEST['csv_partial_import']) && $_REQUEST['csv_partial_import'] > 0) {
             $max_lines = $_REQUEST['csv_partial_import'];
         }
-        $max_lines_constraint = $max_lines+1;
+        $max_lines_constraint = $max_lines + 1;
         // if the first row has to be counted as column names, include one more row in the max lines
         if (isset($_REQUEST['csv_col_names'])) {
             $max_lines_constraint++;
@@ -517,7 +517,7 @@ class ImportCsv extends AbstractImportCsv
                             $sql .= 'NULL';
                         } else {
                             $sql .= '\''
-                                . $GLOBALS['dbi']->escapeString($val)
+                                . $dbi->escapeString($val)
                                 . '\'';
                         }
 
@@ -555,12 +555,12 @@ class ImportCsv extends AbstractImportCsv
                     $finished = 1;
                     break;
                 }
-            } // End of parser loop
+            }
             if ($max_lines > 0 && $line == $max_lines_constraint) {
                 $finished = 1;
                 break;
             }
-        } // End of import loop
+        }
 
         if ($this->getAnalyze()) {
             /* Fill out all rows */
@@ -607,7 +607,7 @@ class ImportCsv extends AbstractImportCsv
             ) {
                 $newDb = $_REQUEST['csv_new_db_name'];
             } else {
-                $result = $GLOBALS['dbi']->fetchResult('SHOW DATABASES');
+                $result = $dbi->fetchResult('SHOW DATABASES');
                 if (! is_array($result)) {
                     $result = [];
                 }
@@ -708,7 +708,7 @@ class ImportCsv extends AbstractImportCsv
 
     private function getTableNameFromImport(string $databaseName): string
     {
-        global $import_file_name;
+        global $import_file_name, $dbi;
 
         $importFileName = basename($import_file_name, '.csv');
         $importFileName = mb_strtolower($importFileName);
@@ -721,7 +721,7 @@ class ImportCsv extends AbstractImportCsv
             return $_REQUEST['csv_new_tbl_name'];
         }
         if (mb_strlen($databaseName)) {
-            $result = $GLOBALS['dbi']->fetchResult('SHOW TABLES');
+            $result = $dbi->fetchResult('SHOW TABLES');
 
             // logic to get table name from filename
             // if no table then use filename as table name
@@ -771,6 +771,8 @@ class ImportCsv extends AbstractImportCsv
         ?string $table,
         ?string $csvColumns
     ): array {
+        global $dbi;
+
         $requiredFields = 0;
         $sqlTemplate = '';
         $fields = [];
@@ -781,7 +783,7 @@ class ImportCsv extends AbstractImportCsv
             }
             $sqlTemplate .= ' INTO ' . Util::backquote($table);
 
-            $tmp_fields = $GLOBALS['dbi']->getColumns($db, $table);
+            $tmp_fields = $dbi->getColumns($db, $table);
 
             if (empty($csvColumns)) {
                 $fields = $tmp_fields;

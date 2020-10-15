@@ -821,7 +821,7 @@ class Sql
                 $this->dbi->tryQuery($count_query);
 
                 $unlim_num_rows = $this->dbi->fetchValue('SELECT FOUND_ROWS()');
-            } // end else "just browsing"
+            }
         } else {// not $is_select
             $unlim_num_rows = 0;
         }
@@ -888,7 +888,7 @@ class Sql
                     $_POST['bkm_label'],
                     isset($_POST['bkm_replace'])
                 );
-            } // end store bookmarks
+            }
 
             // Gets the number of rows affected/returned
             // (This must be done immediately after the query because
@@ -1167,6 +1167,7 @@ class Sql
         if ($profiling_results !== null) {
             $header = $response->getHeader();
             $scripts = $header->getScripts();
+            $scripts->addFile('vendor/stickyfill.min.js');
             $scripts->addFile('sql.js');
 
             $profiling = $this->getDetailedProfilingStats($profiling_results);
@@ -1575,6 +1576,7 @@ class Sql
 
         if (! isset($_POST['printview']) || $_POST['printview'] != '1') {
             $scripts->addFile('makegrid.js');
+            $scripts->addFile('vendor/stickyfill.min.js');
             $scripts->addFile('sql.js');
             unset($GLOBALS['message']);
             //we don't need to buffer the output in getMessage here.

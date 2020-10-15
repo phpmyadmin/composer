@@ -24,12 +24,14 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Williamdes\MariaDBMySQLKBS\KBException;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
+use const ENT_COMPAT;
 use function addslashes;
 use function array_key_exists;
 use function ceil;
 use function count;
 use function explode;
 use function floor;
+use function htmlentities;
 use function htmlspecialchars;
 use function implode;
 use function in_array;
@@ -177,8 +179,10 @@ class Generator
         $minimum_version,
         $bugref
     ): string {
+        global $dbi;
+
         $ext_but_html = '';
-        if (($component === 'mysql') && ($GLOBALS['dbi']->getVersion() < $minimum_version)) {
+        if (($component === 'mysql') && ($dbi->getVersion() < $minimum_version)) {
             $ext_but_html .= self::showHint(
                 sprintf(
                     __('The %s functionality is affected by a known bug, see %s'),
@@ -331,16 +335,12 @@ class Generator
      */
     public static function getDefaultFunctionForField(array $field, $insert_mode): string
     {
-        /*
-         * @todo Except for $cfg, no longer use globals but pass as parameters
-         *       from higher levels
-         */
-        global $cfg, $data;
+        global $cfg, $data, $dbi;
 
         $default_function = '';
 
         // Can we get field class based values?
-        $current_class = $GLOBALS['dbi']->types->getTypeClass($field['True_Type']);
+        $current_class = $dbi->types->getTypeClass($field['True_Type']);
         if (! empty($current_class) && isset($cfg['DefaultFunctions']['FUNC_' . $current_class])) {
             $default_function = $cfg['DefaultFunctions']['FUNC_' . $current_class];
         }
@@ -387,6 +387,8 @@ class Generator
      */
     public static function getFunctionsForField(array $field, $insert_mode, array $foreignData): string
     {
+        global $dbi;
+
         $default_function = self::getDefaultFunctionForField($field, $insert_mode);
         $dropdown_built = [];
 
@@ -394,42 +396,20 @@ class Generator
         $retval = '<option></option>' . "\n";
         // loop on the dropdown array and print all available options for that
         // field.
-        $functions = $GLOBALS['dbi']->types->getFunctions($field['True_Type']);
+        $functions = $dbi->types->getAllFunctions();
         foreach ($functions as $function) {
             $retval .= '<option';
             if (isset($foreignData['foreign_link']) && $foreignData['foreign_link'] !== false
-                && $default_function
-                === $function) {
+                && $default_function === $function
+            ) {
                 $retval .= ' selected="selected"';
             }
             $retval .= '>' . $function . '</option>' . "\n";
             $dropdown_built[$function] = true;
         }
 
-        // Create separator before all functions list
-        if (count($functions) > 0) {
-            $retval .= '<option value="" disabled="disabled">--------</option>'
-                . "\n";
-        }
-
-        // For compatibility's sake, do not let out all other functions. Instead
-        // print a separator (blank) and then show ALL functions which weren't
-        // shown yet.
-        $functions = $GLOBALS['dbi']->types->getAllFunctions();
-        foreach ($functions as $function) {
-            // Skip already included functions
-            if (isset($dropdown_built[$function])) {
-                continue;
-            }
-            $retval .= '<option';
-            if ($default_function === $function) {
-                $retval .= ' selected="selected"';
-            }
-            $retval .= '>' . $function . '</option>' . "\n";
-        } // end for
-
         $retval .= '<option value="PHP_PASSWORD_HASH" title="';
-        $retval .= __('The PHP function password_hash() with default options.');
+        $retval .= htmlentities(__('The PHP function password_hash() with default options.'), ENT_COMPAT);
         $retval .= '">' . __('password_hash() PHP function') . '</option>' . "\n";
 
         return $retval;
@@ -551,12 +531,14 @@ class Generator
      */
     private static function generateRowQueryOutput($sqlQuery): string
     {
+        global $dbi;
+
         $ret = '';
-        $result = $GLOBALS['dbi']->query($sqlQuery);
+        $result = $dbi->query($sqlQuery);
         if ($result) {
             $devider = '+';
             $columnNames = '|';
-            $fieldsMeta = $GLOBALS['dbi']->getFieldsMeta($result);
+            $fieldsMeta = $dbi->getFieldsMeta($result);
             foreach ($fieldsMeta as $meta) {
                 $devider .= '---+';
                 $columnNames .= ' ' . $meta->name . ' |';
@@ -564,7 +546,7 @@ class Generator
             $devider .= "\n";
 
             $ret .= $devider . $columnNames . "\n" . $devider;
-            while ($row = $GLOBALS['dbi']->fetchRow($result)) {
+            while ($row = $dbi->fetchRow($result)) {
                 $values = '|';
                 foreach ($row as $value) {
                     if ($value === null) {
@@ -600,7 +582,8 @@ class Generator
         $sql_query = null,
         $type = 'notice'
     ): string {
-        global $cfg;
+        global $cfg, $dbi;
+
         $retval = '';
 
         if ($sql_query === null) {
@@ -745,7 +728,7 @@ class Generator
                             '_blank'
                         ) . '&nbsp;]';
                 }
-            } //show explain
+            }
 
             $url_params['sql_query'] = $sql_query;
             $url_params['show_query'] = 1;
@@ -792,7 +775,7 @@ class Generator
                 }
             } else {
                 $php_link = '';
-            } //show as php
+            }
 
             // Refresh query
             if (! empty($cfg['SQLQuery']['Refresh'])
@@ -804,7 +787,7 @@ class Generator
                     . self::linkOrButton($refresh_link, __('Refresh')) . '&nbsp;]';
             } else {
                 $refresh_link = '';
-            } //refresh
+            }
 
             $retval .= '<div class="sqlOuter">';
             $retval .= $query_base;
@@ -818,7 +801,7 @@ class Generator
 
             // avoid displaying a Profiling checkbox that could
             // be checked, which would reexecute an INSERT, for example
-            if (! empty($refresh_link) && Profiling::isSupported($GLOBALS['dbi'])) {
+            if (! empty($refresh_link) && Profiling::isSupported($dbi)) {
                 $retval .= '<input type="hidden" name="profiling_form" value="1">';
                 $retval .= '<input type="checkbox" name="profiling" id="profilingCheckbox" class="autosubmit"';
                 $retval .= isset($_SESSION['profiling']) ? ' checked' : '';
@@ -913,7 +896,7 @@ class Generator
         $back_url = '',
         $exit = true
     ): ?string {
-        global $table, $db;
+        global $table, $db, $dbi;
 
         /**
          * Error message to be built.
@@ -924,7 +907,7 @@ class Generator
 
         // Checking for any server errors.
         if (empty($server_msg)) {
-            $server_msg = $GLOBALS['dbi']->getError();
+            $server_msg = (string) $dbi->getError();
         }
 
         // Finding the query that failed, if not specified.
@@ -1031,10 +1014,10 @@ class Generator
 
         // Display server's error.
         if (! empty($server_msg)) {
-            $server_msg = preg_replace(
+            $server_msg = (string) preg_replace(
                 "@((\015\012)|(\015)|(\012)){3,}@",
                 "\n\n",
-                $server_msg
+                (string) $server_msg
             );
 
             // Adds a link to MySQL documentation.
@@ -1398,17 +1381,19 @@ class Generator
      */
     public static function getSupportedDatatypes($selected): string
     {
+        global $dbi;
+
         // NOTE: the SELECT tag is not included in this snippet.
         $retval = '';
 
-        foreach ($GLOBALS['dbi']->types->getColumns() as $key => $value) {
+        foreach ($dbi->types->getColumns() as $key => $value) {
             if (is_array($value)) {
                 $retval .= '<optgroup label="' . htmlspecialchars($key) . '">';
                 foreach ($value as $subvalue) {
                     if ($subvalue == $selected) {
                         $retval .= sprintf(
                             '<option selected="selected" title="%s">%s</option>',
-                            $GLOBALS['dbi']->types->getTypeDescription($subvalue),
+                            $dbi->types->getTypeDescription($subvalue),
                             $subvalue
                         );
                     } elseif ($subvalue === '-') {
@@ -1418,7 +1403,7 @@ class Generator
                     } else {
                         $retval .= sprintf(
                             '<option title="%s">%s</option>',
-                            $GLOBALS['dbi']->types->getTypeDescription($subvalue),
+                            $dbi->types->getTypeDescription($subvalue),
                             $subvalue
                         );
                     }
@@ -1427,13 +1412,13 @@ class Generator
             } elseif ($selected == $value) {
                 $retval .= sprintf(
                     '<option selected="selected" title="%s">%s</option>',
-                    $GLOBALS['dbi']->types->getTypeDescription($value),
+                    $dbi->types->getTypeDescription($value),
                     $value
                 );
             } else {
                 $retval .= sprintf(
                     '<option title="%s">%s</option>',
-                    $GLOBALS['dbi']->types->getTypeDescription($value),
+                    $dbi->types->getTypeDescription($value),
                     $value
                 );
             }

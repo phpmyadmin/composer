@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds the PhpMyAdmin\Controllers\Server\VariablesController
- */
 
 declare(strict_types=1);
 
@@ -9,7 +6,10 @@ namespace PhpMyAdmin\Controllers\Server;
 
 use PhpMyAdmin\Common;
 use PhpMyAdmin\Controllers\AbstractController;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Response;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
 use Williamdes\MariaDBMySQLKBS\KBException;
 use Williamdes\MariaDBMySQLKBS\Search as KBSearch;
@@ -30,6 +30,19 @@ use function trim;
  */
 class VariablesController extends AbstractController
 {
+    /** @var DatabaseInterface */
+    private $dbi;
+
+    /**
+     * @param Response          $response
+     * @param DatabaseInterface $dbi
+     */
+    public function __construct($response, Template $template, $dbi)
+    {
+        parent::__construct($response, $template);
+        $this->dbi = $dbi;
+    }
+
     public function index(): void
     {
         $params = ['filter' => $_GET['filter'] ?? null];

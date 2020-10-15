@@ -1,7 +1,4 @@
 <?php
-/**
- * Holds BinlogControllerTest
- */
 
 declare(strict_types=1);
 
@@ -15,9 +12,6 @@ use PhpMyAdmin\Tests\Stubs\Response;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
-/**
- * Tests for BinlogController class
- */
 class BinlogControllerTest extends AbstractTestCase
 {
     /**
@@ -98,11 +92,7 @@ class BinlogControllerTest extends AbstractTestCase
 
         $response = new Response();
 
-        $controller = new BinlogController(
-            $response,
-            $dbi,
-            new Template()
-        );
+        $controller = new BinlogController($response, new Template(), $dbi);
 
         $_POST['log'] = 'index1';
         $_POST['pos'] = '3';

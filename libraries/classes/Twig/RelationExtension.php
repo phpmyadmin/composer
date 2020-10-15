@@ -1,7 +1,4 @@
 <?php
-/**
- * hold PhpMyAdmin\Twig\RelationExtension class
- */
 
 declare(strict_types=1);
 
@@ -20,7 +17,9 @@ class RelationExtension extends AbstractExtension
      */
     public function getFunctions()
     {
-        $relation = new Relation($GLOBALS['dbi']);
+        global $dbi;
+
+        $relation = new Relation($dbi);
 
         return [
             new TwigFunction(

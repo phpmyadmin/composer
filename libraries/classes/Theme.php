@@ -1,7 +1,4 @@
 <?php
-/**
- * hold Theme class
- */
 
 declare(strict_types=1);
 
@@ -62,13 +59,13 @@ class Theme
      * @var string image path
      * @access protected
      */
-    public $img_path = '';
+    public $imgPath = '';
 
     /**
      * @var int last modification time for info file
      * @access protected
      */
-    public $mtime_info = 0;
+    public $mtimeInfo = 0;
 
     /**
      * needed because sometimes, the mtime for different themes
@@ -77,7 +74,7 @@ class Theme
      * @var int filesize for info file
      * @access protected
      */
-    public $filesize_info = 0;
+    public $filesizeInfo = 0;
 
     /**
      * @var array List of css files to load
@@ -118,7 +115,7 @@ class Theme
             return false;
         }
 
-        if ($this->mtime_info === filemtime($infofile)) {
+        if ($this->mtimeInfo === filemtime($infofile)) {
             return true;
         }
         $content = @file_get_contents($infofile);
@@ -151,8 +148,8 @@ class Theme
             return false;
         }
 
-        $this->mtime_info = filemtime($infofile);
-        $this->filesize_info = filesize($infofile);
+        $this->mtimeInfo = filemtime($infofile);
+        $this->filesizeInfo = filesize($infofile);
 
         $this->setVersion($data['version']);
         $this->setName($data['name']);
@@ -374,7 +371,7 @@ class Theme
      */
     public function setImgPath($path)
     {
-        $this->img_path = $path;
+        $this->imgPath = $path;
     }
 
     /**
@@ -392,11 +389,11 @@ class Theme
     public function getImgPath($file = null, $fallback = null)
     {
         if ($file === null) {
-            return $this->img_path;
+            return $this->imgPath;
         }
 
-        if (is_readable($this->img_path . $file)) {
-            return $this->img_path . $file;
+        if (is_readable($this->imgPath . $file)) {
+            return $this->imgPath . $file;
         }
 
         if ($fallback !== null) {

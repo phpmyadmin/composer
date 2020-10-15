@@ -33,24 +33,26 @@ final class RelationController extends AbstractController
     /** @var Relation */
     private $relation;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response Response object
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Template          $template Template object
+     * @param Response          $response
      * @param string            $db       Database name
      * @param string            $table    Table name
-     * @param Relation          $relation Relation instance
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         $db,
         $table,
-        Relation $relation
+        Relation $relation,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->relation = $relation;
+        $this->dbi = $dbi;
     }
 
     /**
@@ -172,7 +174,6 @@ final class RelationController extends AbstractController
 
         // common form
         $engine = $this->dbi->getTable($this->db, $this->table)->getStorageEngine();
-        $foreignKeySupported = Util::isForeignKeySupported($storageEngine);
         $this->render('table/relation/common_form', [
             'is_foreign_key_supported' => Util::isForeignKeySupported($engine),
             'db' => $this->db,
@@ -191,9 +192,6 @@ final class RelationController extends AbstractController
             'databases' => $GLOBALS['dblist']->databases,
             'dbi' => $this->dbi,
             'default_sliders_state' => $GLOBALS['cfg']['InitialSlidersState'],
-            'foreignKeySupported' => $foreignKeySupported,
-            'indexes' => $foreignKeySupported ? Index::getFromTable($this->table, $this->db) : null,
-            'indexes_duplicates' => $foreignKeySupported ? Index::findDuplicates($this->table, $this->db) : null,
             'route' => $route,
         ]);
     }

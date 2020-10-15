@@ -1,7 +1,4 @@
 <?php
-/**
- * Hold the PhpMyAdmin\Display\Results class
- */
 
 declare(strict_types=1);
 
@@ -225,7 +222,7 @@ class Results
      *
      * @var array
      */
-    public $transformation_info;
+    public $transformationInfo;
 
     /** @var Relation */
     private $relation;
@@ -247,7 +244,9 @@ class Results
      */
     public function __construct($db, $table, $server, $goto, $sql_query)
     {
-        $this->relation = new Relation($GLOBALS['dbi']);
+        global $dbi;
+
+        $this->relation = new Relation($dbi);
         $this->transformations = new Transformations();
         $this->template = new Template();
 
@@ -288,7 +287,7 @@ class Results
             Text_Plain_Link::class,
             'Text_Plain',
         ];
-        $this->transformation_info = [
+        $this->transformationInfo = [
             'information_schema' => [
                 'events' => ['event_definition' => $sql_highlighting_data],
                 'processlist' => ['info' => $sql_highlighting_data],
@@ -322,8 +321,8 @@ class Results
             return;
         }
 
-        $this->transformation_info[$cfgRelation['db']] = [];
-        $relDb = &$this->transformation_info[$cfgRelation['db']];
+        $this->transformationInfo[$cfgRelation['db']] = [];
+        $relDb = &$this->transformationInfo[$cfgRelation['db']];
         if (! empty($cfgRelation['history'])) {
             $relDb[$cfgRelation['history']] = ['sqlquery' => $sql_highlighting_data];
         }
@@ -570,7 +569,7 @@ class Results
                 if ($displayParts['text_btn'] == '1') {
                     break;
                 }
-            } // end if
+            }
 
             // Always display print view link
             $displayParts['pview_lnk'] = (string) '1';
@@ -579,7 +578,7 @@ class Results
             }
 
             $prev_table = $fields_meta[$i]->table;
-        } // end for
+        }
 
         if ($prev_table == '') { // no table for any of the columns
             // don't display links
@@ -610,6 +609,8 @@ class Results
      */
     private function setDisplayPartsAndTotal(array $displayParts)
     {
+        global $dbi;
+
         $the_total = 0;
 
         // 1. Following variables are needed for use in isset/empty or
@@ -631,7 +632,7 @@ class Results
             $displayParts = $this->setDisplayPartsForShow($displayParts);
         } else {
             $displayParts = $this->setDisplayPartsForSelect($displayParts);
-        } // end if..elseif...else
+        }
 
         // 3. Gets the total number of rows if it is unknown
         if (isset($unlim_num_rows) && $unlim_num_rows != '') {
@@ -640,7 +641,7 @@ class Results
             || ($displayParts['sort_lnk'] == '1')
             && (strlen($db) > 0 && strlen($table) > 0)
         ) {
-            $the_total = $GLOBALS['dbi']->getTable($db, $table)->countRecords();
+            $the_total = $dbi->getTable($db, $table)->countRecords();
         }
 
         // if for COUNT query, number of rows returned more than 1
@@ -664,7 +665,7 @@ class Results
             ) {
                 $displayParts['sort_lnk'] = (string) '0';
             }
-        } // end if (3)
+        }
 
         return [
             $displayParts,
@@ -1090,10 +1091,10 @@ class Results
                     . '">        '
                     . htmlspecialchars((string) $fields_meta[$i]->name)
                     . $comments . '    </th>';
-            } // end else
+            }
 
             $this->properties['display_params'] = $display_params;
-        } // end for
+        }
 
         return $html;
     }
@@ -1461,6 +1462,8 @@ class Results
      */
     private function getDataForResettingColumnOrder(array $analyzedSqlResults): array
     {
+        global $dbi;
+
         if (! $this->isSelect($analyzedSqlResults)) {
             return [];
         }
@@ -1472,7 +1475,7 @@ class Results
         $tableCreateTime = '';
         $table = new Table($this->properties['table'], $this->properties['db']);
         if (! $table->isView()) {
-            $tableCreateTime = $GLOBALS['dbi']->getTable(
+            $tableCreateTime = $dbi->getTable(
                 $this->properties['db'],
                 $this->properties['table']
             )->getStatusInfo('Create_time');
@@ -2363,8 +2366,10 @@ class Results
         array $analyzed_sql_results,
         $is_limited_display = false
     ) {
-        global $row; // mostly because of browser transformations,
-                     // to make the row-data accessible in a plugin
+        global $dbi;
+
+        // Mostly because of browser transformations, to make the row-data accessible in a plugin.
+        global $row;
 
         $table_body_html = '';
 
@@ -2425,7 +2430,7 @@ class Results
         // delete/edit options correctly for tables without keys.
 
         $whereClauseMap = $this->properties['whereClauseMap'];
-        while ($row = $GLOBALS['dbi']->fetchRow($dt_result)) {
+        while ($row = $dbi->fetchRow($dt_result)) {
             // add repeating headers
             if (($row_no != 0) && ($_SESSION['tmpval']['repeat_cells'] != 0)
                 && ! $row_no % $_SESSION['tmpval']['repeat_cells']
@@ -2503,7 +2508,7 @@ class Results
                                 $clause_is_unique,
                                 $url_sql_query
                             );
-                } // end if (1.2.1)
+                }
 
                 // 1.2.2 Delete/Kill link(s)
                 [$del_url, $del_str, $js_conf]
@@ -2544,8 +2549,8 @@ class Results
                         'is_ajax' => Response::getInstance()->isAjax(),
                         'js_conf' => $js_conf ?? '',
                     ]);
-                } // end if (1.3)
-            } // end if (1)
+                }
+            }
 
             // 2. Displays the rows' values
             if ($this->properties['mime_map'] === null) {
@@ -2587,12 +2592,12 @@ class Results
                         'js_conf' => $js_conf ?? '',
                     ]);
                 }
-            } // end if (3)
+            }
 
             $table_body_html .= '</tr>';
             $table_body_html .= "\n";
             $row_no++;
-        } // end while
+        }
 
         return $table_body_html;
     }
@@ -2787,22 +2792,22 @@ class Results
                                 $mime_map[$orgFullColName]['mimetype']
                             );
                         }
-                    } // end if file_exists
-                } // end if transformation is set
-            } // end if mime/transformation works.
+                    }
+                }
+            }
 
             // Check whether the field needs to display with syntax highlighting
 
             $dbLower = mb_strtolower($this->properties['db']);
             $tblLower = mb_strtolower($meta->orgtable);
             $nameLower = mb_strtolower($meta->orgname);
-            if (! empty($this->transformation_info[$dbLower][$tblLower][$nameLower])
+            if (! empty($this->transformationInfo[$dbLower][$tblLower][$nameLower])
                 && isset($row[$i])
                 && (trim($row[$i]) != '')
                 && ! $_SESSION['tmpval']['hide_transformation']
             ) {
-                include_once $this->transformation_info[$dbLower][$tblLower][$nameLower][0];
-                $transformation_plugin = new $this->transformation_info[$dbLower][$tblLower][$nameLower][1](null);
+                include_once $this->transformationInfo[$dbLower][$tblLower][$nameLower][0];
+                $transformation_plugin = new $this->transformationInfo[$dbLower][$tblLower][$nameLower][1](null);
 
                 $transform_options = $this->transformations->getOptions(
                     $mime_map[$orgFullColName]['transformation_options'] ?? ''
@@ -2814,7 +2819,7 @@ class Results
                 $meta->mimetype = str_replace(
                     '_',
                     '/',
-                    $this->transformation_info[$dbLower][$orgTable][$orgName][2]
+                    $this->transformationInfo[$dbLower][$orgTable][$orgName][2]
                 );
             }
 
@@ -2873,6 +2878,7 @@ class Results
             $_url_params = [
                 'db'            => $this->properties['db'],
                 'table'         => $meta->orgtable,
+                'where_clause_sign' => Core::signSqlQuery($whereClauseMap[$row_no][$meta->orgtable]),
                 'where_clause'  => $whereClauseMap[$row_no][$meta->orgtable],
                 'transform_key' => $meta->orgname,
             ];
@@ -2959,7 +2965,7 @@ class Results
             }
 
             $this->properties['display_params'] = $display_params;
-        } // end for
+        }
 
         return $row_values_html;
     }
@@ -3242,6 +3248,8 @@ class Results
         $del_lnk,
         array $row
     ) {
+        global $dbi;
+
         $goto = $this->properties['goto'];
 
         if ($del_lnk === self::DELETE_ROW) { // delete row case
@@ -3284,7 +3292,7 @@ class Results
 
             $lnk_goto = Url::getFromRoute('/sql', $_url_params);
 
-            $kill = $GLOBALS['dbi']->getKillQuery((int) $row[0]);
+            $kill = $dbi->getKillQuery((int) $row[0]);
 
             $_url_params = [
                 'db'        => 'mysql',
@@ -3665,10 +3673,12 @@ class Results
         &$dt_result,
         $col_index
     ) {
+        global $dbi;
+
         $original_length = 0;
 
         $is_analyse = $this->properties['is_analyse'];
-        $field_flags = $GLOBALS['dbi']->fieldFlags($dt_result, $col_index);
+        $field_flags = $dbi->fieldFlags($dt_result, $col_index);
 
         $bIsText = is_object($transformation_plugin)
             && strpos($transformation_plugin->getMIMEType(), 'Text')
@@ -3779,7 +3789,7 @@ class Results
             || $bool_nowrap ? ' nowrap' : '';
 
         $where_comparison = ' = \''
-            . $GLOBALS['dbi']->escapeString($column)
+            . $dbi->escapeString($column)
             . '\'';
 
         return $this->getRowData(
@@ -4026,7 +4036,7 @@ class Results
         $pos_prev = 0;
         if ($displayParts['nav_bar'] == '1') {
             [$pos_next, $pos_prev] = $this->getOffsets();
-        } // end if
+        }
 
         // 1.3 Extract sorting expressions.
         //     we need $sort_expression and $sort_expression_nodirection
@@ -4139,7 +4149,7 @@ class Results
                     $this->properties['db'],
                 ];
             }
-        } // end if
+        }
         // end 2b
 
         // 3. ----- Prepare the results table -----
@@ -4251,6 +4261,8 @@ class Results
         &$dt_result,
         $sort_expression_nodirection
     ) {
+        global $dbi;
+
         $fields_meta = $this->properties['fields_meta']; // To use array indexes
 
         if (empty($sort_expression_nodirection)) {
@@ -4284,7 +4296,7 @@ class Results
         }
 
         // fetch first row of the result set
-        $row = $GLOBALS['dbi']->fetchRow($dt_result);
+        $row = $dbi->fetchRow($dt_result);
 
         // initializing default arguments
         $default_function = [
@@ -4321,8 +4333,8 @@ class Results
         );
 
         // fetch last row of the result set
-        $GLOBALS['dbi']->dataSeek($dt_result, $this->properties['num_rows'] - 1);
-        $row = $GLOBALS['dbi']->fetchRow($dt_result);
+        $dbi->dataSeek($dt_result, $this->properties['num_rows'] - 1);
+        $row = $dbi->fetchRow($dt_result);
 
         // check for non printable sorted row data
         $meta = $fields_meta[$sorted_column_index];
@@ -4350,7 +4362,7 @@ class Results
         );
 
         // reset to first row for the loop in getTableBody()
-        $GLOBALS['dbi']->dataSeek($dt_result, 0);
+        $dbi->dataSeek($dt_result, 0);
 
         // we could also use here $sort_expression_nodirection
         return ' [' . htmlspecialchars($sort_column)
@@ -4604,7 +4616,7 @@ class Results
         array $displayParts,
         array $analyzed_sql_results
     ): array {
-        global $printview;
+        global $printview, $dbi;
 
         $_url_params = [
             'db'        => $this->properties['db'],
@@ -4646,7 +4658,7 @@ class Results
              * the script it calls do not fail
              */
             if (empty($_url_params['table']) && ! empty($_url_params['db'])) {
-                $_url_params['table'] = $GLOBALS['dbi']->fetchValue('SHOW TABLES');
+                $_url_params['table'] = $dbi->fetchValue('SHOW TABLES');
                 /* No result (probably no database selected) */
                 if ($_url_params['table'] === false) {
                     unset($_url_params['table']);
@@ -4801,6 +4813,8 @@ class Results
      */
     private function getFromForeign(array $map, $meta, $where_comparison)
     {
+        global $dbi;
+
         $dispsql = 'SELECT '
             . Util::backquote($map[$meta->name][2])
             . ' FROM '
@@ -4811,19 +4825,19 @@ class Results
             . Util::backquote($map[$meta->name][1])
             . $where_comparison;
 
-        $dispresult = $GLOBALS['dbi']->tryQuery(
+        $dispresult = $dbi->tryQuery(
             $dispsql,
             DatabaseInterface::CONNECT_USER,
             DatabaseInterface::QUERY_STORE
         );
 
-        if ($dispresult && $GLOBALS['dbi']->numRows($dispresult) > 0) {
-            [$dispval] = $GLOBALS['dbi']->fetchRow($dispresult, 0);
+        if ($dispresult && $dbi->numRows($dispresult) > 0) {
+            [$dispval] = $dbi->fetchRow($dispresult, 0);
         } else {
             $dispval = __('Link not found!');
         }
 
-        $GLOBALS['dbi']->freeResult($dispresult);
+        $dbi->freeResult($dispresult);
 
         return $dispval;
     }
@@ -4923,7 +4937,7 @@ class Results
                 );
             } else {
                 $dispval = '';
-            } // end if... else...
+            }
 
             if (isset($printview) && ($printview == '1')) {
                 $result .= ($transformation_plugin != $default_function

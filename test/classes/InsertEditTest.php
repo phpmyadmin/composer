@@ -1,7 +1,4 @@
 <?php
-/**
- * Tests for PhpMyAdmin\InsertEdit
- */
 
 declare(strict_types=1);
 
@@ -18,12 +15,11 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Url;
 use ReflectionProperty;
 use stdClass;
+use function hash;
 use function md5;
 use function sprintf;
 
 /**
- * Tests for PhpMyAdmin\InsertEdit
- *
  * @group medium
  */
 class InsertEditTest extends AbstractTestCase
@@ -3245,6 +3241,7 @@ class InsertEditTest extends AbstractTestCase
      */
     public function testTransformEditedValues(): void
     {
+        $_SESSION[' HMAC_secret '] = hash('sha1', 'test');
         $edited_values = [
             ['c' => 'cname'],
         ];
@@ -3253,7 +3250,8 @@ class InsertEditTest extends AbstractTestCase
             '',
         ];
         $GLOBALS['cfg']['ServerDefault'] = 1;
-        $_POST['where_clause'] = 1;
+        $_POST['where_clause'] = '1';
+        $_POST['where_clause_sign'] = Core::signSqlQuery($_POST['where_clause']);
         $transformation = ['transformation_options' => "'','option ,, quoted',abd"];
         $result = $this->insertEdit->transformEditedValues(
             'db',
@@ -4038,6 +4036,7 @@ class InsertEditTest extends AbstractTestCase
      */
     public function testGetHtmlForInsertEditFormColumn(): void
     {
+        $_SESSION[' HMAC_secret '] = hash('sha1', 'test');
         $o_rows = 0;
         $tabindex = 0;
         $GLOBALS['plugin_scripts'] = [];

@@ -51,6 +51,24 @@ class StructureControllerTest extends AbstractTestCase
         $GLOBALS['cfg']['Server']['user'] = 'pma_user';
         $GLOBALS['PMA_PHP_SELF'] = 'index.php';
 
+        $indexes = [
+            [
+                'Schema' => 'Schema1',
+                'Key_name' => 'Key_name1',
+                'Column_name' => 'Column_name1',
+            ],
+            [
+                'Schema' => 'Schema2',
+                'Key_name' => 'Key_name2',
+                'Column_name' => 'Column_name2',
+            ],
+            [
+                'Schema' => 'Schema3',
+                'Key_name' => 'Key_name3',
+                'Column_name' => 'Column_name3',
+            ],
+        ];
+
         $table = $this->getMockBuilder(Table::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -60,6 +78,8 @@ class StructureControllerTest extends AbstractTestCase
             ->getMock();
         $dbi->expects($this->any())->method('getTable')
             ->will($this->returnValue($table));
+        $dbi->expects($this->any())->method('getTableIndexes')
+            ->will($this->returnValue($indexes));
 
         $GLOBALS['dbi'] = $dbi;
 
@@ -86,14 +106,14 @@ class StructureControllerTest extends AbstractTestCase
         $relation = new Relation($GLOBALS['dbi'], $this->template);
         $ctrl = new StructureController(
             $this->response,
-            $GLOBALS['dbi'],
             $this->template,
             $GLOBALS['db'],
             $GLOBALS['table'],
             $relation,
             new Transformations(),
             new CreateAddField($GLOBALS['dbi']),
-            new RelationCleanup($GLOBALS['dbi'], $relation)
+            new RelationCleanup($GLOBALS['dbi'], $relation),
+            $GLOBALS['dbi']
         );
 
         // No primary key in db.table2
@@ -139,14 +159,14 @@ class StructureControllerTest extends AbstractTestCase
         $relation = new Relation($GLOBALS['dbi'], $this->template);
         $ctrl = new StructureController(
             $this->response,
-            $GLOBALS['dbi'],
             $this->template,
             $GLOBALS['db'],
             $GLOBALS['table'],
             $relation,
             new Transformations(),
             new CreateAddField($GLOBALS['dbi']),
-            new RelationCleanup($GLOBALS['dbi'], $relation)
+            new RelationCleanup($GLOBALS['dbi'], $relation),
+            $GLOBALS['dbi']
         );
 
         // With db.table, it has a primary key `column`
@@ -170,14 +190,14 @@ class StructureControllerTest extends AbstractTestCase
         $relation = new Relation($GLOBALS['dbi'], $this->template);
         $ctrl = new StructureController(
             $this->response,
-            $GLOBALS['dbi'],
             $this->template,
             $GLOBALS['db'],
             $GLOBALS['table'],
             $relation,
             new Transformations(),
             new CreateAddField($GLOBALS['dbi']),
-            new RelationCleanup($GLOBALS['dbi'], $relation)
+            new RelationCleanup($GLOBALS['dbi'], $relation),
+            $GLOBALS['dbi']
         );
 
         $this->assertFalse(

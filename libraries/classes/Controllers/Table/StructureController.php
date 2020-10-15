@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
-use PhpMyAdmin\CentralColumns;
 use PhpMyAdmin\Charsets;
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Common;
@@ -12,6 +11,7 @@ use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Controllers\SqlController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\CreateAddField;
+use PhpMyAdmin\Database\CentralColumns;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Engines\Innodb;
 use PhpMyAdmin\Html\Generator;
@@ -61,7 +61,7 @@ use function trim;
 class StructureController extends AbstractController
 {
     /** @var Table  The table object */
-    protected $table_obj;
+    protected $tableObj;
 
     /** @var CreateAddField */
     private $createAddField;
@@ -75,35 +75,34 @@ class StructureController extends AbstractController
     /** @var RelationCleanup */
     private $relationCleanup;
 
+    /** @var DatabaseInterface */
+    private $dbi;
+
     /**
-     * @param Response          $response        Response object
-     * @param DatabaseInterface $dbi             DatabaseInterface object
-     * @param Template          $template        Template object
-     * @param string            $db              Database name
-     * @param string            $table           Table name
-     * @param Relation          $relation        Relation instance
-     * @param Transformations   $transformations Transformations instance
-     * @param CreateAddField    $createAddField  CreateAddField instance
-     * @param RelationCleanup   $relationCleanup RelationCleanup instance.
+     * @param Response          $response
+     * @param string            $db       Database name
+     * @param string            $table    Table name
+     * @param DatabaseInterface $dbi
      */
     public function __construct(
         $response,
-        $dbi,
         Template $template,
         $db,
         $table,
         Relation $relation,
         Transformations $transformations,
         CreateAddField $createAddField,
-        RelationCleanup $relationCleanup
+        RelationCleanup $relationCleanup,
+        $dbi
     ) {
-        parent::__construct($response, $dbi, $template, $db, $table);
+        parent::__construct($response, $template, $db, $table);
         $this->createAddField = $createAddField;
         $this->relation = $relation;
         $this->transformations = $transformations;
         $this->relationCleanup = $relationCleanup;
+        $this->dbi = $dbi;
 
-        $this->table_obj = $this->dbi->getTable($this->db, $this->table);
+        $this->tableObj = $this->dbi->getTable($this->db, $this->table);
     }
 
     public function index(): void
@@ -112,22 +111,22 @@ class StructureController extends AbstractController
         global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
 
         $this->dbi->selectDb($this->db);
-        $reread_info = $this->table_obj->getStatusInfo(null, true);
-        $showtable = $this->table_obj->getStatusInfo(
+        $reread_info = $this->tableObj->getStatusInfo(null, true);
+        $showtable = $this->tableObj->getStatusInfo(
             null,
             (isset($reread_info) && $reread_info)
         );
 
-        if ($this->table_obj->isView()) {
+        if ($this->tableObj->isView()) {
             $tbl_is_view = true;
             $tbl_storage_engine = __('View');
         } else {
             $tbl_is_view = false;
-            $tbl_storage_engine = $this->table_obj->getStorageEngine();
+            $tbl_storage_engine = $this->tableObj->getStorageEngine();
         }
 
-        $tbl_collation = $this->table_obj->getCollation();
-        $table_info_num_rows = $this->table_obj->getNumRows();
+        $tbl_collation = $this->tableObj->getCollation();
+        $table_info_num_rows = $this->tableObj->getNumRows();
 
         $pageSettings = new PageSettings('TableStructure');
         $this->response->addHTML($pageSettings->getErrorHTML());
@@ -652,7 +651,7 @@ class StructureController extends AbstractController
             $data['Expression'] = '';
             if (isset($data['Extra']) && in_array($data['Extra'], $virtual)) {
                 $data['Virtuality'] = str_replace(' GENERATED', '', $data['Extra']);
-                $expressions = $this->table_obj->getColumnGenerationExpression($column);
+                $expressions = $this->tableObj->getColumnGenerationExpression($column);
                 $data['Expression'] = is_array($expressions) ? $expressions[$column] : null;
             }
 
@@ -705,7 +704,7 @@ class StructureController extends AbstractController
         } else { // move column
             $this->dbi->tryQuery($sql_query);
             $tmp_error = $this->dbi->getError();
-            if ($tmp_error) {
+            if (is_string($tmp_error)) {
                 $this->response->setRequestStatus(false);
                 $this->response->addJSON('message', Message::error($tmp_error));
             } else {
@@ -1122,7 +1121,7 @@ class StructureController extends AbstractController
             );
 
             // find the remembered sort expression
-            $sorted_col = $this->table_obj->getUiProp(
+            $sorted_col = $this->tableObj->getUiProp(
                 Table::PROP_SORTED_COLUMN
             );
             // if the old column name is part of the remembered sort expression
@@ -1131,7 +1130,7 @@ class StructureController extends AbstractController
                 Util::backquote($_POST['field_orig'][$i])
             ) !== false) {
                 // delete the whole remembered sort expression
-                $this->table_obj->removeUiProp(Table::PROP_SORTED_COLUMN);
+                $this->tableObj->removeUiProp(Table::PROP_SORTED_COLUMN);
             }
 
             if (! isset($_POST['field_adjust_privileges'][$i])
@@ -1143,7 +1142,7 @@ class StructureController extends AbstractController
 
             $adjust_privileges[$_POST['field_orig'][$i]]
                 = $_POST['field_name'][$i];
-        } // end for
+        }
 
         if (count($changes) > 0 || isset($_POST['preview_sql'])) {
             // Builds the primary keys statements and updates the table
@@ -1538,7 +1537,7 @@ class StructureController extends AbstractController
             ];
         }
 
-        $engine = $this->table_obj->getStorageEngine();
+        $engine = $this->tableObj->getStorageEngine();
 
         return $this->template->render('table/structure/display_structure', [
             'collations' => $collations,
@@ -1615,7 +1614,7 @@ class StructureController extends AbstractController
         $is_innodb = (isset($showtable['Type'])
             && $showtable['Type'] === 'InnoDB');
 
-        $mergetable = $this->table_obj->isMerge();
+        $mergetable = $this->tableObj->isMerge();
 
         // this is to display for example 261.2 MiB instead of 268k KiB
         $max_digits = 3;
