@@ -3,13 +3,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: phpMyAdmin 4.9.5\n"
+"Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2020-08-16 18:21-0300\n"
-"PO-Revision-Date: 2020-09-04 20:36+0000\n"
+"POT-Creation-Date: 2020-10-10 13:32-0300\n"
+"PO-Revision-Date: 2020-10-10 15:54+0000\n"
 "Last-Translator: Petr Duda <petrduda@seznam.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/4-9/cs/>"
-"\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/4-9/cs/"
+">\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgid "Table comments:"
 msgstr "Komentář k tabulce:"
 
 #: db_datadict.php:117 libraries/classes/Index.php:723
-#: libraries/classes/InsertEdit.php:1912
+#: libraries/classes/InsertEdit.php:1913
 #: libraries/classes/Navigation/Nodes/NodeColumn.php:30
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:291
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:387
@@ -79,11 +79,11 @@ msgstr "Komentář k tabulce:"
 #: templates/table/relation/common_form.twig:34
 #: templates/table/relation/common_form.twig:109
 msgid "Column"
-msgstr "Pole"
+msgstr "Sloupec"
 
 #: db_datadict.php:118 libraries/classes/CentralColumns.php:744
 #: libraries/classes/CentralColumns.php:1428 libraries/classes/Index.php:720
-#: libraries/classes/InsertEdit.php:306
+#: libraries/classes/InsertEdit.php:307
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:294
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:390
 #: libraries/classes/Plugins/Export/ExportLatex.php:527
@@ -110,7 +110,7 @@ msgstr "Typ"
 
 #: db_datadict.php:119 libraries/classes/CentralColumns.php:755
 #: libraries/classes/CentralColumns.php:1429 libraries/classes/Index.php:726
-#: libraries/classes/InsertEdit.php:1921
+#: libraries/classes/InsertEdit.php:1922
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:297
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:393
 #: libraries/classes/Plugins/Export/ExportLatex.php:528
@@ -307,7 +307,7 @@ msgstr "Vybrat vše"
 
 #: db_operations.php:58 tbl_create.php:27
 msgid "The database name is empty!"
-msgstr "Jméno databáze je prázdné!"
+msgstr "Název databáze je prázdný!"
 
 #: db_operations.php:69
 msgid "Cannot copy database to the same name. Change the name and try again."
@@ -334,7 +334,7 @@ msgstr ""
 
 #: db_qbe.php:133
 msgid "You have to choose at least one column to display!"
-msgstr "Musíte zvolit alespoň jedno pole, které si přejete zobrazit!"
+msgstr "Musíte zvolit alespoň jeden sloupec, který si přejete zobrazit!"
 
 #: db_qbe.php:145 templates/database/multi_table_query/form.twig:3
 msgid "Multi-table query"
@@ -488,8 +488,8 @@ msgstr "Přidat geometrii"
 #: gis_data_editor.php:417 js/messages.php:354
 #: libraries/classes/BrowseForeigners.php:199
 #: libraries/classes/Display/ChangePassword.php:160
-#: libraries/classes/Index.php:664 libraries/classes/InsertEdit.php:1890
-#: libraries/classes/InsertEdit.php:1928
+#: libraries/classes/Index.php:664 libraries/classes/InsertEdit.php:1891
+#: libraries/classes/InsertEdit.php:1929
 #: libraries/classes/Normalization.php:216
 #: libraries/classes/Normalization.php:898 libraries/classes/Operations.php:67
 #: libraries/classes/Operations.php:133 libraries/classes/Operations.php:275
@@ -809,7 +809,7 @@ msgstr ""
 #: index.php:577
 msgid "The configuration file now needs a secret passphrase (blowfish_secret)."
 msgstr ""
-"Nastavte klíč pro šifrování cookies (blowfish_secret) v konfiguračním "
+"Nastavte klíč pro šifrování souborů cookie (blowfish_secret) v konfiguračním "
 "souboru (config.inc.php)."
 
 #: index.php:584
@@ -878,7 +878,7 @@ msgstr "Chystáte se ZRUŠIT celou databázi!"
 #: js/messages.php:47
 msgid "Cannot rename database to the same name. Change the name and try again"
 msgstr ""
-"Nemohu přejmenovat databázi na to samé jméno. Změňte jméno a zkuste to znovu"
+"Databázi nelze přejmenovat na stejný název. Změňte název a zkuste to znovu"
 
 #: js/messages.php:49
 msgid "You are about to DESTROY a complete table!"
@@ -1026,7 +1026,7 @@ msgstr "Opravdu chcete změnit řazení ve všech sloupcích a převést data?"
 msgid "Save & close"
 msgstr "Uložit a zavřít"
 
-#: js/messages.php:113 libraries/classes/InsertEdit.php:1894
+#: js/messages.php:113 libraries/classes/InsertEdit.php:1895
 #: prefs_manage.php:357 prefs_manage.php:368
 #: templates/config/form_display/fieldset_bottom.twig:9
 msgid "Reset"
@@ -1081,7 +1081,7 @@ msgstr "Složit s:"
 msgid "Please select column(s) for the index."
 msgstr "Prosím zvolte které pole chcete přidat do klíče."
 
-#: js/messages.php:130 libraries/classes/InsertEdit.php:1892
+#: js/messages.php:130 libraries/classes/InsertEdit.php:1893
 #: templates/columns_definitions/column_definitions_form.twig:146
 #: templates/table/index_form.twig:216
 #: templates/table/relation/common_form.twig:188
@@ -1111,7 +1111,7 @@ msgstr "Nejprve zadejte dotaz SQL."
 
 #: js/messages.php:145
 msgid "The host name is empty!"
-msgstr "Jméno počítače je prázdné!"
+msgstr "Název počítače je prázdný!"
 
 #: js/messages.php:146
 msgid "The user name is empty!"
@@ -1480,7 +1480,7 @@ msgstr "Z obecného záznamu dotazů"
 
 #: js/messages.php:266
 msgid "The database name is not known for this query in the server's logs."
-msgstr "V záznamu server není pro tento dotaz známo jméno databáze."
+msgstr "V záznamech serveru není pro tento dotaz známý název databáze."
 
 #: js/messages.php:268
 msgid "Analysing logs"
@@ -1634,8 +1634,8 @@ msgid ""
 "reentering your credentials should help."
 msgstr ""
 "Při načítání nových dat server vrátil chybnou odpověď. Pravděpodobně to bylo "
-"způsobeno vypršeným sezením. Problém můžete vyřešit novým načtením stránky a "
-"přihlášením."
+"způsobeno vypršením platnosti relace. Problém můžete vyřešit novým načtením "
+"stránky a přihlášením."
 
 #: js/messages.php:320
 msgid "Reload page"
@@ -1863,8 +1863,8 @@ msgid "The definition of a stored function must contain a RETURN statement!"
 msgstr "Definice uložené funkce musí obsahovat příkaz RETURN!"
 
 #: js/messages.php:403 libraries/classes/Config/Forms/User/ExportForm.php:140
-#: libraries/classes/Display/Results.php:4715
-#: libraries/classes/Display/Results.php:4996 libraries/classes/Menu.php:383
+#: libraries/classes/Display/Results.php:4716
+#: libraries/classes/Display/Results.php:4997 libraries/classes/Menu.php:383
 #: libraries/classes/Menu.php:491 libraries/classes/Menu.php:617
 #: libraries/classes/Rte/RteList.php:168
 #: libraries/classes/Server/Privileges.php:2418
@@ -1922,8 +1922,8 @@ msgstr "Zobrazit pole pro dotaz"
 #: js/messages.php:422 libraries/classes/CentralColumns.php:879
 #: libraries/classes/CentralColumns.php:1234
 #: libraries/classes/Config/Descriptions.php:1329
-#: libraries/classes/Display/Results.php:3340
-#: libraries/classes/Display/Results.php:4699 libraries/classes/Index.php:745
+#: libraries/classes/Display/Results.php:3341
+#: libraries/classes/Display/Results.php:4700 libraries/classes/Index.php:745
 #: libraries/classes/Server/UserGroups.php:132 libraries/classes/Util.php:595
 #: libraries/classes/Util.php:1079 libraries/classes/Util.php:3351
 #: libraries/classes/Util.php:3352 setup/frames/index.inc.php:157
@@ -1936,8 +1936,8 @@ msgstr "Upravit"
 
 #: js/messages.php:423 libraries/classes/CentralColumns.php:881
 #: libraries/classes/CentralColumns.php:1238
-#: libraries/classes/Display/Results.php:3409
-#: libraries/classes/Display/Results.php:4683
+#: libraries/classes/Display/Results.php:3410
+#: libraries/classes/Display/Results.php:4684
 #: libraries/classes/Server/UserGroups.php:143
 #: libraries/classes/SqlQueryForm.php:427 libraries/classes/Tracking.php:354
 #: setup/frames/index.inc.php:161
@@ -1955,8 +1955,8 @@ msgid "%d is not valid row number."
 msgstr "%d není platné číslo řádku."
 
 #: js/messages.php:425
-#: libraries/classes/Controllers/Table/TableSearchController.php:365
-#: libraries/classes/Controllers/Table/TableSearchController.php:861
+#: libraries/classes/Controllers/Table/TableSearchController.php:368
+#: libraries/classes/Controllers/Table/TableSearchController.php:868
 #: libraries/classes/Sql.php:232 tbl_change.php:142
 msgid "Browse foreign values"
 msgstr "Projít hodnoty cizích klíčů"
@@ -1988,8 +1988,9 @@ msgid ""
 "No columns in the central list. Make sure the Central columns list for "
 "database %s has columns that are not present in the current table."
 msgstr ""
-"Žádné sloupce v centrálním seznamu. Ujistěte se, že centrální sloupcový "
-"seznam pro databázi %s má sloupce, které se nenacházejí v aktuální tabulce."
+"V centrálním seznamu nejsou žádné sloupce. Ujistěte se, že centrální seznam "
+"sloupců pro databázi %s obsahuje sloupce, které se nenacházejí v aktuální "
+"tabulce."
 
 #: js/messages.php:437
 msgid "See more"
@@ -2115,7 +2116,7 @@ msgid "No dependencies selected!"
 msgstr "Nebyly vybrány žádné závislosti!"
 
 #: js/messages.php:482 libraries/classes/CentralColumns.php:1254
-#: libraries/classes/InsertEdit.php:1804
+#: libraries/classes/InsertEdit.php:1805
 #: templates/columns_definitions/column_definitions_form.twig:149
 #: templates/server/variables/link_template.twig:2
 #: templates/table/gis_visualization/gis_visualization.twig:48
@@ -2197,13 +2198,13 @@ msgid "Data point content"
 msgstr "Obsah datového bodu"
 
 #: js/messages.php:519 js/messages.php:687 js/messages.php:704
-#: libraries/classes/ErrorHandler.php:382 libraries/classes/InsertEdit.php:2977
+#: libraries/classes/ErrorHandler.php:382 libraries/classes/InsertEdit.php:2979
 #: templates/table/index_form.twig:141 templates/table/index_form.twig:177
 msgid "Ignore"
 msgstr "Ignorovat"
 
-#: js/messages.php:520 libraries/classes/Display/Results.php:3343
-#: libraries/classes/Display/Results.php:4704
+#: js/messages.php:520 libraries/classes/Display/Results.php:3344
+#: libraries/classes/Display/Results.php:4705
 msgid "Copy"
 msgstr "Kopírovat"
 
@@ -2278,7 +2279,7 @@ msgstr "Prosím zvolte primární nebo unikátní klíč!"
 #: js/messages.php:559 templates/database/designer/side_menu.twig:92
 #: templates/database/designer/side_menu.twig:95
 msgid "Choose column to display"
-msgstr "Zvolte která pole zobrazit"
+msgstr "Vyberte sloupec, který se má zobrazit"
 
 #: js/messages.php:561
 msgid ""
@@ -2299,7 +2300,7 @@ msgstr "Přidat tabulky z jiných databází"
 
 #: js/messages.php:566
 msgid "Page name"
-msgstr "Jméno stránky"
+msgstr "Název stránky"
 
 #: js/messages.php:567 templates/database/designer/side_menu.twig:57
 #: templates/database/designer/side_menu.twig:60
@@ -2322,7 +2323,7 @@ msgstr "Odstranit stránku"
 
 #: js/messages.php:571 templates/database/designer/side_menu.twig:4
 msgid "Untitled"
-msgstr "Beze jména"
+msgstr "Bez názvu"
 
 #: js/messages.php:572
 msgid "Please select a page to continue"
@@ -2395,7 +2396,7 @@ msgstr "Klikněte pro označení."
 
 #: js/messages.php:599
 msgid "Double-click to copy column name."
-msgstr "Poklepejte pro zkopírování jména pole."
+msgstr "Poklepejte pro zkopírování názvu sloupce."
 
 #: js/messages.php:601
 msgid "Click the drop-down arrow<br />to toggle column's visibility."
@@ -2458,7 +2459,7 @@ msgstr "Přetáhněte sem soubory"
 msgid "Select database first"
 msgstr "Nejdříve zvolte databázi"
 
-#: js/messages.php:626 libraries/classes/Display/Results.php:4890
+#: js/messages.php:626 libraries/classes/Display/Results.php:4891
 #: libraries/classes/Util.php:3886
 #: templates/table/structure/optional_action_links.twig:1
 #: templates/database/structure/print_view_data_dictionary_link.twig:3
@@ -2479,11 +2480,12 @@ msgstr "Přejít na odkaz:"
 
 #: js/messages.php:645
 msgid "Copy column name."
-msgstr "Zkopírovat název pole."
+msgstr "Zkopírovat název sloupce."
 
 #: js/messages.php:647
 msgid "Right-click the column name to copy it to your clipboard."
-msgstr "Klikněte pravým tlačítkem myši pro zkopírování názvu pole do schránky."
+msgstr ""
+"Klikněte pravým tlačítkem myši pro zkopírování názvu sloupce do schránky."
 
 #: js/messages.php:650
 msgid "Generate password"
@@ -2543,7 +2545,7 @@ msgstr ", nejnovější stabilní verze:"
 msgid "up to date"
 msgstr "aktuální"
 
-#: js/messages.php:677 libraries/classes/Display/Results.php:4824
+#: js/messages.php:677 libraries/classes/Display/Results.php:4825
 #: templates/view_create.twig:11
 msgid "Create view"
 msgstr "Vytvořit pohled"
@@ -2704,7 +2706,7 @@ msgctxt ""
 msgid "Table %s already exists!"
 msgstr "Tabulka %s již existuje!"
 
-#: js/messages.php:756 libraries/classes/InsertEdit.php:288
+#: js/messages.php:756 libraries/classes/InsertEdit.php:289
 #: libraries/classes/Navigation/Nodes/NodeDatabaseChild.php:54
 msgid "Hide"
 msgstr "Skrýt"
@@ -3034,7 +3036,7 @@ msgid "Please enter a valid HEX input"
 msgstr "Prosím zadejte platné hexadecimální číslo"
 
 #: js/messages.php:989 libraries/classes/Core.php:297
-#: libraries/classes/Import.php:112 libraries/classes/InsertEdit.php:1495
+#: libraries/classes/Import.php:112 libraries/classes/InsertEdit.php:1496
 #: libraries/classes/Message.php:191 libraries/classes/Util.php:542
 #: view_operations.php:72
 msgid "Error"
@@ -3146,12 +3148,12 @@ msgid ""
 "The configuration storage is not ready for the central list of columns "
 "feature."
 msgstr ""
-"Nastavení úložiště není připraveno pro centrální list sloupcových vlastností."
+"Nastavení úložiště není připraveno pro funkci centrálního seznamu sloupců."
 
 #: libraries/classes/CentralColumns.php:362
 #, php-format
 msgid "Could not add %1$s as they already exist in central list!"
-msgstr "Nemohu přidat %1$s protože se již v centrálním listu nacházejí!"
+msgstr "Nelze přidat %1$s, protože se již v centrálním seznamu nacházejí!"
 
 #: libraries/classes/CentralColumns.php:377
 msgid "Could not add columns!"
@@ -3162,7 +3164,7 @@ msgstr "Nepodařilo se přidat sloupce!"
 msgid ""
 "Couldn't remove Column(s) %1$s as they don't exist in central columns list!"
 msgstr ""
-"Nemohu odstranit sloupec(ce) %1$s ,protože se v centrálním listu nenacházejí!"
+"Nelze odstranit sloupec %1$s, protože se v centrálním seznamu nenachází!"
 
 #: libraries/classes/CentralColumns.php:466
 msgid "Could not remove columns!"
@@ -3954,21 +3956,21 @@ msgstr "Komprese"
 #: libraries/classes/Plugins/Export/ExportOdt.php:129
 #: libraries/classes/Plugins/Export/ExportTexytext.php:86
 msgid "Put columns names in the first row"
-msgstr "Přidat jména polí na první řádek"
+msgstr "Přidat názvy sloupců na první řádek"
 
 #: libraries/classes/Config/Descriptions.php:264
 #: libraries/classes/Config/Descriptions.php:633
 #: libraries/classes/Config/Descriptions.php:652
 #: libraries/classes/Plugins/Import/ImportCsv.php:137
 msgid "Columns enclosed with"
-msgstr "Pole uzavřené do"
+msgstr "Sloupce uzavřené do"
 
 #: libraries/classes/Config/Descriptions.php:266
 #: libraries/classes/Config/Descriptions.php:635
 #: libraries/classes/Config/Descriptions.php:654
 #: libraries/classes/Plugins/Import/ImportCsv.php:148
 msgid "Columns escaped with"
-msgstr "Pole escapována"
+msgstr "Sloupce escapované"
 
 #: libraries/classes/Config/Descriptions.php:268
 #: libraries/classes/Config/Descriptions.php:280
@@ -3983,14 +3985,14 @@ msgstr "Nahradit NULL hodnoty"
 #: libraries/classes/Config/Descriptions.php:270
 #: libraries/classes/Config/Descriptions.php:282
 msgid "Remove CRLF characters within columns"
-msgstr "Odstranit znaky konců řádek z polí"
+msgstr "Odstranit ze sloupců znaky konce řádku"
 
 #: libraries/classes/Config/Descriptions.php:272
 #: libraries/classes/Config/Descriptions.php:643
 #: libraries/classes/Config/Descriptions.php:664
 #: libraries/classes/Plugins/Import/ImportCsv.php:122
 msgid "Columns terminated with"
-msgstr "Pole oddělené"
+msgstr "Sloupce ukončené"
 
 #: libraries/classes/Config/Descriptions.php:274
 #: libraries/classes/Config/Descriptions.php:631
@@ -4004,15 +4006,15 @@ msgstr "Verze Excelu"
 
 #: libraries/classes/Config/Descriptions.php:284
 msgid "Database name template"
-msgstr "Vzor pro jméno databáze"
+msgstr "Vzor pro název databáze"
 
 #: libraries/classes/Config/Descriptions.php:286
 msgid "Server name template"
-msgstr "Vzor pro jméno serveru"
+msgstr "Vzor pro název serveru"
 
 #: libraries/classes/Config/Descriptions.php:288
 msgid "Table name template"
-msgstr "Vzor pro jméno tabulky"
+msgstr "Vzor pro název tabulky"
 
 #: libraries/classes/Config/Descriptions.php:296
 #: libraries/classes/Config/Descriptions.php:322
@@ -4086,7 +4088,7 @@ msgstr "Exportovat jako samostatné soubory"
 
 #: libraries/classes/Config/Descriptions.php:352
 msgid "Remember file name template"
-msgstr "Pamatovat si vzor pro jména souborů"
+msgstr "Pamatovat si vzor pro názvy souborů"
 
 #: libraries/classes/Config/Descriptions.php:354
 #: libraries/classes/Operations.php:243 libraries/classes/Operations.php:866
@@ -4096,7 +4098,7 @@ msgstr "Přidat hodnotu AUTO_INCREMENT"
 
 #: libraries/classes/Config/Descriptions.php:356
 msgid "Enclose table and column names with backquotes"
-msgstr "Použít zpětné uvozovky u jmen tabulek a polí"
+msgstr "Používat zpětné uvozovky u názvů tabulek a sloupců"
 
 #: libraries/classes/Config/Descriptions.php:358
 #: libraries/classes/Config/Descriptions.php:678
@@ -4340,7 +4342,7 @@ msgstr "Nastavení, která nelze zařadit jinam."
 
 #: libraries/classes/Config/Descriptions.php:508
 msgid "Page titles"
-msgstr "Jména stránek"
+msgstr "Titulky stránek"
 
 #: libraries/classes/Config/Descriptions.php:511
 msgid ""
@@ -4471,7 +4473,7 @@ msgstr "Struktura tabulky"
 #: libraries/classes/Config/Descriptions.php:575
 msgid "Settings for the table structure (list of columns)."
 msgstr ""
-"Zvolte co se má zobrazit při zobrazení struktury tabulky (seznam polí)."
+"Zvolte, co se má zobrazit při zobrazení struktury tabulky (seznam sloupců)."
 
 #: libraries/classes/Config/Descriptions.php:577
 msgid "Tabs"
@@ -4594,7 +4596,7 @@ msgstr "Použít klíčové slovo LOCAL"
 
 #: libraries/classes/Config/Descriptions.php:666
 msgid "Column names in first row"
-msgstr "Jména polí na prvním řádku"
+msgstr "Názvy sloupců na prvním řádku"
 
 #: libraries/classes/Config/Descriptions.php:668
 #: libraries/classes/Plugins/Import/ImportOds.php:72
@@ -4640,11 +4642,12 @@ msgstr "Počet vkládaných řádků"
 #: libraries/classes/Config/Descriptions.php:690
 msgid ""
 "Maximum number of characters shown in any non-numeric column on browse view."
-msgstr "Nejvyšší počet znaků zobrazeních v nečíselných polích při procházení."
+msgstr ""
+"Maximální počet znaků zobrazených v nečíselných sloupcích při procházení."
 
 #: libraries/classes/Config/Descriptions.php:692
 msgid "Limit column characters"
-msgstr "Omezení počtu znaků"
+msgstr "Omezení počtu znaků ve sloupci"
 
 #: libraries/classes/Config/Descriptions.php:695
 msgid ""
@@ -4652,21 +4655,21 @@ msgid ""
 "only occurs for the current server. Setting this to FALSE makes it easy to "
 "forget to log out from other servers when connected to multiple servers."
 msgstr ""
-"Pokud je povoleno, dochází při odhlášení ke smazání cookies na všech "
-"serverech, pokud je zakázáno, maže se cookie pouze pro současný server. "
+"Pokud je povoleno, dochází při odhlášení ke smazání souborů cookie na všech "
+"serverech, pokud je zakázáno, smaže se cookie pouze pro aktuální server. "
 "Zakázání může způsobit, že se zapomenete odhlásit od ostatních serverů, "
 "pokud jich používáte více."
 
 #: libraries/classes/Config/Descriptions.php:700
 msgid "Delete all cookies on logout"
-msgstr "Smazat všechny cookies při odhlášení"
+msgstr "Smazat všechny soubory cookie při odhlášení"
 
 #: libraries/classes/Config/Descriptions.php:703
 msgid ""
 "Define whether the previous login should be recalled or not in [kbd]cookie[/"
 "kbd] authentication mode."
 msgstr ""
-"Určuje, zda se má pamatovat předchozí přihlášení, při použití přihlašování "
+"Určuje, zda se má pamatovat předchozí přihlášení při použití přihlašování "
 "pomocí [kbd]cookie[/kbd]."
 
 #: libraries/classes/Config/Descriptions.php:707
@@ -4681,9 +4684,9 @@ msgid ""
 "recommended for non-trusted environments."
 msgstr ""
 "Určuje, jak dlouho (v sekundách) si má prohlížeč pamatovat přihlašovací "
-"cookie. Výchozí hodnota 0 znamená, že cookie bude držena jen pro existující "
-"sezení, čili, že bude smazána v okamžiku, kdy zavřete okno prohlížeče. Tato "
-"volba je doporučena pro nedůvěryhodná prostředí."
+"cookie. Výchozí hodnota 0 znamená, že bude cookie uchována jen pro stávající "
+"relaci, tj. bude smazána v okamžiku, kdy zavřete okno prohlížeče. Tato volba "
+"je doporučena pro nedůvěryhodná prostředí."
 
 #: libraries/classes/Config/Descriptions.php:716
 msgid "Login cookie store"
@@ -4995,7 +4998,7 @@ msgstr "Zakázat klávesové zkratky"
 
 #: libraries/classes/Config/Descriptions.php:877
 msgid "Use natural order for sorting table and database names."
-msgstr "Použít přirozené řazení pro jména tabulek a databází."
+msgstr "Použít přirozené řazení pro názvy tabulek a databází."
 
 #: libraries/classes/Config/Descriptions.php:879
 msgid "Natural order"
@@ -5024,8 +5027,8 @@ msgid ""
 "[kbd]SMART[/kbd] - i.e. descending order for columns of type TIME, DATE, "
 "DATETIME and TIMESTAMP, ascending order otherwise."
 msgstr ""
-"[kbd]SMART[/kbd] - tj. řazení sestupně pro pole typu TIME, DATE, DATETIME a "
-"TIMESTAMP, v ostatních případech se použije vzestupné řazení."
+"[kbd]SMART[/kbd] - tj. řazení sestupně pro sloupce typu TIME, DATE, DATETIME "
+"a TIMESTAMP, v ostatních případech se použije vzestupné řazení."
 
 #: libraries/classes/Config/Descriptions.php:894
 msgid "Default sorting order"
@@ -5074,11 +5077,11 @@ msgstr "Jak zobrazit akční odkazy"
 
 #: libraries/classes/Config/Descriptions.php:923
 msgid "Disallow BLOB and BINARY columns from editing."
-msgstr "Zakáže úpravu polí BLOB a BINARY."
+msgstr "Zakáže úpravu sloupců typu BLOB a BINARY."
 
 #: libraries/classes/Config/Descriptions.php:925
 msgid "Protect binary columns"
-msgstr "Chránit binární pole"
+msgstr "Chránit binární sloupce"
 
 #: libraries/classes/Config/Descriptions.php:928
 msgid ""
@@ -5234,7 +5237,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:1008
 msgid "Column information table"
-msgstr "Tabulka informací o polích"
+msgstr "Tabulka informací o sloupcích"
 
 #: libraries/classes/Config/Descriptions.php:1010
 msgid "Compress connection to MySQL server."
@@ -5320,11 +5323,11 @@ msgstr "Tabulka pro historii SQL dotazů"
 
 #: libraries/classes/Config/Descriptions.php:1056
 msgid "Hostname where MySQL server is running."
-msgstr "Jméno počítače, kde běží MySQL server."
+msgstr "Název počítače, na kterém běží MySQL server."
 
 #: libraries/classes/Config/Descriptions.php:1058
 msgid "Server hostname"
-msgstr "Jméno serveru"
+msgstr "Název serveru"
 
 #: libraries/classes/Config/Descriptions.php:1060
 msgid "Logout URL"
@@ -5368,7 +5371,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:1083
 msgid "Central columns table"
-msgstr "Centrální sloupcová tabulka"
+msgstr "Tabulka centrálních sloupců"
 
 #: libraries/classes/Config/Descriptions.php:1086
 msgid ""
@@ -5424,7 +5427,7 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:1112
 #: templates/server/databases/create.twig:21
 msgid "Database name"
-msgstr "Jméno databáze"
+msgstr "Název databáze"
 
 #: libraries/classes/Config/Descriptions.php:1114
 msgid "Port on which MySQL server is listening, leave empty for default."
@@ -5480,7 +5483,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:1145
 msgid "Signon session name"
-msgstr "Jméno signon session"
+msgstr "Název signon relace"
 
 #: libraries/classes/Config/Descriptions.php:1147
 msgid "Signon URL"
@@ -5489,7 +5492,7 @@ msgstr "URL pro přihlášení"
 #: libraries/classes/Config/Descriptions.php:1149
 msgid "Socket on which MySQL server is listening, leave empty for default."
 msgstr ""
-"Socket na kterém poslouchá MySQL server, ponechte prázdné pro výchozí "
+"Socket, na kterém poslouchá MySQL server. Ponechte prázdné pro výchozí "
 "hodnotu."
 
 #: libraries/classes/Config/Descriptions.php:1151
@@ -5521,12 +5524,12 @@ msgid ""
 "Table to describe the display columns, leave blank for no support; "
 "suggested: [kbd]pma__table_info[/kbd]."
 msgstr ""
-"Tabulka obsahující popisy polí, nechte prázdnou pro vypnutí této funkce, "
+"Tabulka obsahující popisy sloupců, nechte prázdné pro vypnutí této funkce, "
 "doporučené nastavení: [kbd]pma__table_info[/kbd]."
 
 #: libraries/classes/Config/Descriptions.php:1166
 msgid "Display columns table"
-msgstr "Tabulka s popisem polí"
+msgstr "Tabulka s popisem sloupců"
 
 #: libraries/classes/Config/Descriptions.php:1169
 msgid ""
@@ -5669,11 +5672,12 @@ msgid ""
 "A user-friendly description of this server. Leave blank to display the "
 "hostname instead."
 msgstr ""
-"Přívětivý popis tohoto serveru. Pokud necháte prázdné, zobrazí se jeho jméno."
+"Uživatelsky přívětivý popis tohoto serveru. Pokud necháte prázdné, zobrazí "
+"se jeho název."
 
 #: libraries/classes/Config/Descriptions.php:1253
 msgid "Verbose name of this server"
-msgstr "Dlouhé jméno tohoto serveru"
+msgstr "Dlouhý název tohoto serveru"
 
 #: libraries/classes/Config/Descriptions.php:1255
 msgid "Whether a user should be displayed a \"show all (rows)\" button."
@@ -6042,8 +6046,7 @@ msgid ""
 msgstr ""
 "Uživatelské jméno pro přihlášení k serveru proxy. Ve výchozím nastavení není "
 "prováděno žádné ověřování. Pokud je zadáno uživatelské jméno, bude provedeno "
-"základní ověřování. V současné době nejsou podporovány žádné další typy "
-"ověřování."
+"základní ověřování. Aktuálně nejsou podporovány žádné další typy ověřování."
 
 #: libraries/classes/Config/Descriptions.php:1426
 msgid "Proxy username"
@@ -6380,9 +6383,10 @@ msgid ""
 "authentication, so a key was automatically generated for you. It is used to "
 "encrypt cookies; you don't need to remember it."
 msgstr ""
-"Neměl jste nastavený tajný klíč pro šifru blowfish (blowfish_secret) a "
-"povolené přihlašování pomocí [kbd]cookie[/kbd], takže byl Váš tajný klíč "
-"vygenerován. Klíč bude použit pro zašifrování cookies."
+"Je povoleno přihlašování pomocí [kbd]cookie[/kbd] a nebyl nastaven tajný "
+"klíč pro šifru blowfish (blowfish_secret), proto byl vygenerován "
+"automaticky. Tento klíč se používá k šifrování souborů cookie, nemusíte si "
+"ho pamatovat."
 
 #: libraries/classes/Config/ServerConfigChecks.php:372
 msgid "Key is too short, it should have at least 32 characters."
@@ -6462,7 +6466,7 @@ msgid ""
 "Empty signon session name while using [kbd]signon[/kbd] authentication "
 "method!"
 msgstr ""
-"Prázdné jméno signon sezení při použití přihlašování [kbd]signon[/kbd]!"
+"Prázdný název signon relace při použití přihlašování [kbd]signon[/kbd]!"
 
 #: libraries/classes/Config/Validator.php:277
 msgid "Empty signon URL while using [kbd]signon[/kbd] authentication method!"
@@ -6531,7 +6535,7 @@ msgid "Table %s has been dropped."
 msgstr "Tabulka %s byla odstraněna."
 
 #: libraries/classes/Controllers/Database/DatabaseStructureController.php:797
-#: libraries/classes/Display/Results.php:4544
+#: libraries/classes/Display/Results.php:4545
 #, php-format
 msgid ""
 "This view has at least this number of rows. Please refer to %sdocumentation"
@@ -6545,7 +6549,7 @@ msgstr "neznámý"
 
 #: libraries/classes/Controllers/Server/ServerBinlogController.php:156
 msgid "Log name"
-msgstr "Jméno logu"
+msgstr "Název logu"
 
 #: libraries/classes/Controllers/Server/ServerBinlogController.php:157
 msgid "Position"
@@ -6667,7 +6671,8 @@ msgstr "Nebyl zadán SQL dotaz pro načtení dat."
 
 #: libraries/classes/Controllers/Table/TableChartController.php:160
 msgid "No numeric columns present in the table to plot."
-msgstr "Ve zvolené tabulce nejsou žádná číselná pole pro vykreslení do grafu."
+msgstr ""
+"Ve zvolené tabulce nejsou žádné číselné sloupce pro vykreslení do grafu."
 
 #: libraries/classes/Controllers/Table/TableChartController.php:228
 msgid "No data to display"
@@ -6686,8 +6691,8 @@ msgid "Display column was successfully updated."
 msgstr "Zobrazený sloupec byl aktualizován."
 
 #: libraries/classes/Controllers/Table/TableRelationController.php:275
-#: libraries/classes/Controllers/Table/TableSearchController.php:585
-#: libraries/classes/Display/Results.php:4200 libraries/classes/Message.php:172
+#: libraries/classes/Controllers/Table/TableSearchController.php:592
+#: libraries/classes/Display/Results.php:4201 libraries/classes/Message.php:172
 #: libraries/classes/Rte/Routines.php:1465
 #: libraries/classes/SqlQueryForm.php:93 tbl_row_action.php:142
 #: view_operations.php:69
@@ -6698,15 +6703,15 @@ msgstr "Váš SQL-dotaz byl úspěšně vykonán."
 msgid "Internal relationships were successfully updated."
 msgstr "Interní vztahy byly úspěšně aktualizovány."
 
-#: libraries/classes/Controllers/Table/TableSearchController.php:785
+#: libraries/classes/Controllers/Table/TableSearchController.php:792
 msgid "Table search"
 msgstr "Vyhledávání v tabulce"
 
-#: libraries/classes/Controllers/Table/TableSearchController.php:792
+#: libraries/classes/Controllers/Table/TableSearchController.php:799
 msgid "Zoom search"
 msgstr "Zoom vyhledávání"
 
-#: libraries/classes/Controllers/Table/TableSearchController.php:797
+#: libraries/classes/Controllers/Table/TableSearchController.php:804
 #: templates/table/search/selection_form.twig:75
 msgid "Find and replace"
 msgstr "Vyhledat a nahradit"
@@ -6725,7 +6730,7 @@ msgstr "Nebyl vybrán žádný sloupec."
 
 #: libraries/classes/Controllers/Table/TableStructureController.php:499
 msgid "The columns have been moved successfully."
-msgstr "Vybraná pole byla úspěšně přesunuta."
+msgstr "Vybrané sloupce byly úspěšně přesunuty."
 
 #: libraries/classes/Controllers/Table/TableStructureController.php:535
 #, php-format
@@ -6897,7 +6902,7 @@ msgstr "Interní vztah byl odstraněn."
 #: libraries/classes/Database/Qbe.php:456
 #: templates/table/search/search_and_replace.twig:6
 msgid "Column:"
-msgstr "Pole:"
+msgstr "Sloupec:"
 
 #: libraries/classes/Database/Qbe.php:502
 msgid "Alias:"
@@ -7021,7 +7026,7 @@ msgid ""
 msgstr ""
 "Pro server %2$d nelze použít časové pásmo \"%1$s\". Zkontrolujte prosím "
 "nastavení konfigurace [em]$cfg['Servers'][%3$d]['SessionTimeZone'][/em]. "
-"phpMyAdmin momentálně používá výchozí časové pásmo databázového serveru."
+"phpMyAdmin aktuálně používá výchozí časové pásmo databázového serveru."
 
 #: libraries/classes/DatabaseInterface.php:1550
 msgid "Failed to set configured collation connection!"
@@ -7257,51 +7262,51 @@ msgstr "Sestupně"
 msgid "Ascending"
 msgstr "Vzestupně"
 
-#: libraries/classes/Display/Results.php:3385
-#: libraries/classes/Display/Results.php:3400
+#: libraries/classes/Display/Results.php:3386
+#: libraries/classes/Display/Results.php:3401
 msgid "The row has been deleted."
 msgstr "Řádek byl smazán."
 
-#: libraries/classes/Display/Results.php:3433
-#: libraries/classes/Display/Results.php:4683
+#: libraries/classes/Display/Results.php:3434
+#: libraries/classes/Display/Results.php:4684
 #: libraries/classes/Server/Status/Processes.php:279
 msgid "Kill"
 msgstr "Ukončit"
 
-#: libraries/classes/Display/Results.php:4127
+#: libraries/classes/Display/Results.php:4128
 msgid "May be approximate. See [doc@faq3-11]FAQ 3.11[/doc]."
 msgstr "Počet nemusí být přesný, viz [doc@faq3-11]FAQ 3.11[/doc]."
 
-#: libraries/classes/Display/Results.php:4557
+#: libraries/classes/Display/Results.php:4558
 #, php-format
 msgid "Showing rows %1s - %2s"
 msgstr "Zobrazeny záznamy %1s - %2s"
 
-#: libraries/classes/Display/Results.php:4572
+#: libraries/classes/Display/Results.php:4573
 #, php-format
 msgid "%1$d total, %2$d in query"
 msgstr "%1$d celkem, %2$d v dotazu"
 
-#: libraries/classes/Display/Results.php:4577
+#: libraries/classes/Display/Results.php:4578
 #, php-format
 msgid "%d total"
 msgstr "%d celkem"
 
-#: libraries/classes/Display/Results.php:4589 libraries/classes/Sql.php:1435
+#: libraries/classes/Display/Results.php:4590 libraries/classes/Sql.php:1435
 #, php-format
 msgid "Query took %01.4f seconds."
 msgstr "Dotaz trval %01.4f sekund."
 
-#: libraries/classes/Display/Results.php:4688
-#: libraries/classes/Display/Results.php:4695 libraries/mult_submits.inc.php:57
+#: libraries/classes/Display/Results.php:4689
+#: libraries/classes/Display/Results.php:4696 libraries/mult_submits.inc.php:57
 #: templates/database/structure/check_all_tables.twig:2
 #: templates/database/structure/check_all_tables.twig:9
 #: templates/select_all.twig:2 templates/select_all.twig:6
 msgid "With selected:"
 msgstr "Zaškrtnuté:"
 
-#: libraries/classes/Display/Results.php:4692
-#: libraries/classes/Display/Results.php:4694
+#: libraries/classes/Display/Results.php:4693
+#: libraries/classes/Display/Results.php:4695
 #: libraries/classes/Server/Privileges.php:1188
 #: libraries/classes/Server/Privileges.php:1189
 #: libraries/classes/Server/UserGroups.php:248
@@ -7312,24 +7317,24 @@ msgstr "Zaškrtnuté:"
 msgid "Check all"
 msgstr "Zaškrtnout vše"
 
-#: libraries/classes/Display/Results.php:4870
+#: libraries/classes/Display/Results.php:4871
 msgid "Copy to clipboard"
 msgstr "Zkopírovat do schránky"
 
-#: libraries/classes/Display/Results.php:4921
+#: libraries/classes/Display/Results.php:4922
 msgid "Query results operations"
 msgstr "Operace s výsledky dotazu"
 
-#: libraries/classes/Display/Results.php:5005
+#: libraries/classes/Display/Results.php:5006
 #: templates/table/chart/tbl_chart.twig:10
 msgid "Display chart"
 msgstr "Zobrazit graf"
 
-#: libraries/classes/Display/Results.php:5027
+#: libraries/classes/Display/Results.php:5028
 msgid "Visualize GIS data"
 msgstr "Zobrazit data GIS"
 
-#: libraries/classes/Display/Results.php:5212
+#: libraries/classes/Display/Results.php:5213
 msgid "Link not found!"
 msgstr "Odkaz nebyl nalezen!"
 
@@ -7598,10 +7603,10 @@ msgid ""
 "value of this variable can be increased to increase the total amount of data "
 "that can be stored in the database."
 msgstr ""
-"Nejvyšší velikost datového logu. Výchozí hodnota je 64MB. PBXT může vytvořit "
-"až 32000 datových logů, které jsou používany všemi tabulkami. Hodnota této "
-"proměnné tedy může být zvýšena, aby se zvýšilo celkové množství dat, které "
-"může být uloženo v databázi."
+"Maximální velikost datového logu. Výchozí hodnota je 64MB. PBXT může "
+"vytvořit až 32000 datových logů, které jsou používány všemi tabulkami. "
+"Hodnota této proměnné tedy může být zvýšena, aby se zvýšilo celkové množství "
+"dat, které může být uloženo v databázi."
 
 #: libraries/classes/Engines/Pbxt.php:95
 msgid "Garbage threshold"
@@ -7692,8 +7697,8 @@ msgstr "Nedostatek místa pro uložení souboru %s."
 msgid ""
 "File %s already exists on server, change filename or check overwrite option."
 msgstr ""
-"Soubor %s již na serveru existuje, změňte jméno souboru, nebo zvolte "
-"přepsání souboru."
+"Soubor %s již na serveru existuje, změňte název souboru nebo zvolte přepsání "
+"souboru."
 
 #: libraries/classes/Export.php:363 libraries/classes/Export.php:371
 #, php-format
@@ -7798,7 +7803,7 @@ msgstr "Klikněte na pruh pro posunutí stránky nahoru"
 msgid "Javascript must be enabled past this point!"
 msgstr "Pro použití phpMyAdmina musíte mít zapnutý Javascript!"
 
-#: libraries/classes/Import.php:130 libraries/classes/InsertEdit.php:178
+#: libraries/classes/Import.php:130 libraries/classes/InsertEdit.php:179
 #: libraries/classes/Rte/Routines.php:1486 libraries/classes/Sql.php:1429
 #: tbl_get_field.php:59
 msgid "MySQL returned an empty result set (i.e. zero rows)."
@@ -7815,7 +7820,7 @@ msgstr "Následující tabulky byly vytvořeny nebo změněny. Teď můžete:"
 
 #: libraries/classes/Import.php:1216
 msgid "View a structure's contents by clicking on its name."
-msgstr "Obsah struktury se zobrazí po kliknutí na její jméno."
+msgstr "Obsah struktury se zobrazí po kliknutí na její název."
 
 #: libraries/classes/Import.php:1219
 msgid ""
@@ -7942,83 +7947,83 @@ msgstr ""
 "Klíče %1$s a %2$s vypadají stejné a jeden z nich by pravděpodobně mohl být "
 "odstraněn."
 
-#: libraries/classes/InsertEdit.php:304
+#: libraries/classes/InsertEdit.php:305
 #: libraries/classes/Navigation/Nodes/NodeFunction.php:30
 #: libraries/classes/Rte/Routines.php:1626
 #: templates/table/search/table_header.twig:4
 msgid "Function"
 msgstr "Funkce"
 
-#: libraries/classes/InsertEdit.php:468
+#: libraries/classes/InsertEdit.php:469
 msgid "Binary"
 msgstr "Binární"
 
-#: libraries/classes/InsertEdit.php:728
+#: libraries/classes/InsertEdit.php:729
 msgid "Because of its length,<br /> this column might not be editable."
 msgstr "Toto pole možná nepůjde <br />kvůli délce upravit."
 
-#: libraries/classes/InsertEdit.php:1336
+#: libraries/classes/InsertEdit.php:1337
 msgid "Binary - do not edit"
 msgstr "Binární - neupravujte"
 
-#: libraries/classes/InsertEdit.php:1496 libraries/classes/Util.php:3313
+#: libraries/classes/InsertEdit.php:1497 libraries/classes/Util.php:3313
 msgid "The directory you set for upload work cannot be reached."
 msgstr "Adresář určený pro upload souborů nemohl být otevřen."
 
-#: libraries/classes/InsertEdit.php:1499 templates/table/search/options.twig:25
+#: libraries/classes/InsertEdit.php:1500 templates/table/search/options.twig:25
 #: templates/privileges/column_privileges.twig:17
 msgid "Or"
 msgstr "Nebo"
 
-#: libraries/classes/InsertEdit.php:1500
+#: libraries/classes/InsertEdit.php:1501
 msgid "web server upload directory:"
 msgstr "soubor z adresáře pro upload:"
 
-#: libraries/classes/InsertEdit.php:1702
+#: libraries/classes/InsertEdit.php:1703
 #: templates/table/search/input_box.twig:38
 msgid "Edit/Insert"
 msgstr "Upravit/Vložit"
 
-#: libraries/classes/InsertEdit.php:1769
+#: libraries/classes/InsertEdit.php:1770
 msgid "and then"
 msgstr "a poté"
 
-#: libraries/classes/InsertEdit.php:1807
+#: libraries/classes/InsertEdit.php:1808
 msgid "Insert as new row"
 msgstr "Vložit jako nový řádek"
 
-#: libraries/classes/InsertEdit.php:1810
+#: libraries/classes/InsertEdit.php:1811
 msgid "Insert as new row and ignore errors"
 msgstr "Vložit jako nový řádek a ignorovat chyby"
 
-#: libraries/classes/InsertEdit.php:1813
+#: libraries/classes/InsertEdit.php:1814
 msgid "Show insert query"
 msgstr "Zobrazit dotaz pro vložení"
 
-#: libraries/classes/InsertEdit.php:1833
+#: libraries/classes/InsertEdit.php:1834
 msgid "Go back to previous page"
 msgstr "Návrat na předchozí stránku"
 
-#: libraries/classes/InsertEdit.php:1836
+#: libraries/classes/InsertEdit.php:1837
 msgid "Insert another new row"
 msgstr "Vložit další řádek"
 
-#: libraries/classes/InsertEdit.php:1841
+#: libraries/classes/InsertEdit.php:1842
 msgid "Go back to this page"
 msgstr "Návrat na tuto stránku"
 
-#: libraries/classes/InsertEdit.php:1864
+#: libraries/classes/InsertEdit.php:1865
 msgid "Edit next row"
 msgstr "Upravit následující řádek"
 
-#: libraries/classes/InsertEdit.php:1884
+#: libraries/classes/InsertEdit.php:1885
 msgid ""
 "Use TAB key to move from value to value, or CTRL+arrows to move anywhere."
 msgstr ""
 "Použijte klávesu TAB pro pohyb mezi hodnotami nebo CTRL+šipky po pohyb všemi "
 "směry."
 
-#: libraries/classes/InsertEdit.php:1922
+#: libraries/classes/InsertEdit.php:1923
 #: libraries/classes/ReplicationGui.php:552
 #: libraries/classes/Rte/Routines.php:1628
 #: libraries/classes/Server/Status/Variables.php:229
@@ -8032,11 +8037,11 @@ msgstr ""
 msgid "Value"
 msgstr "Hodnota"
 
-#: libraries/classes/InsertEdit.php:2295 libraries/classes/Sql.php:1426
+#: libraries/classes/InsertEdit.php:2296 libraries/classes/Sql.php:1426
 msgid "Showing SQL query"
 msgstr "Zobrazuji SQL dotaz"
 
-#: libraries/classes/InsertEdit.php:2320 libraries/classes/Sql.php:1404
+#: libraries/classes/InsertEdit.php:2321 libraries/classes/Sql.php:1404
 #, php-format
 msgid "Inserted row id: %1$d"
 msgstr "ID vloženého řádku: %1$d"
@@ -8393,7 +8398,7 @@ msgstr "Rozbalit/sbalit"
 #: libraries/classes/Navigation/Nodes/NodeColumnContainer.php:26
 #: libraries/classes/SqlQueryForm.php:269
 msgid "Columns"
-msgstr "Pole"
+msgstr "Sloupce"
 
 #: libraries/classes/Navigation/Nodes/NodeColumnContainer.php:35
 msgctxt "Create new column"
@@ -8495,12 +8500,12 @@ msgid ""
 "Do you have any column which can be split into more than one column? For "
 "example: address can be split into street, city, country and zip."
 msgstr ""
-"Máte nějaké sloupce, které mohu být rozděleny do více než jednoho sloupce? "
-"Například: adresa může být rozdělena na ulici, stát a PSČ."
+"Máte nějaké sloupce, které lze rozdělit na více sloupců? Například: adresa "
+"lze rozdělit na ulici, stát a PSČ."
 
 #: libraries/classes/Normalization.php:196
 msgid "Show me the central list of columns that are not already in this table"
-msgstr "Ukaž mi centrální list sloupců, které ještě nejsou v této tabulce"
+msgstr "Zobrazit centrální seznam sloupců, které ještě nejsou v této tabulce"
 
 #: libraries/classes/Normalization.php:199
 msgid ""
@@ -8570,9 +8575,9 @@ msgid ""
 "first_name and last_name gives full_name which is redundant."
 msgstr ""
 "Nemáte skupinu sloupců, které při zkombinování tvoří další existující "
-"sloupec? Například, když máte sloupce jmeno, prijmeni a cele_jmeno, tak "
-"zkombinováním jmena a prijmeni dostaneme cele_jmeno, takže sloupec "
-"cele_jmeno je nepotřebný."
+"sloupec? Pokud máte například sloupce jmeno, prijmeni a cele_jmeno, tak "
+"zkombinováním sloupců jmeno a prijmeni získáte cele_jmeno, takže sloupec "
+"cele_jmeno je nadbytečný."
 
 #: libraries/classes/Normalization.php:295
 msgid ""
@@ -8604,7 +8609,7 @@ msgid ""
 "should be created."
 msgstr ""
 "Nemáte skupinu dvou nebo více sloupců, které jsou si významově blízké a "
-"opakují stejný atribut? Například, tabulka, která obsahuje data o knihách, "
+"opakují stejný atribut? Například tabulka, která obsahuje data o knihách, "
 "může obsahovat sloupce jako id_knihy, autor1, autor2, autor3 a další, které "
 "vytvářejí opakující se skupinu atributů (autoři). Pokud ano, měli byste "
 "vytvořit novou tabulku (id_knihy, autor)."
@@ -9022,7 +9027,7 @@ msgstr "Tabulka %s byla zkopírována do %s."
 
 #: libraries/classes/Operations.php:2143
 msgid "The table name is empty!"
-msgstr "Jméno tabulky je prázdné!"
+msgstr "Název tabulky je prázdný!"
 
 #: libraries/classes/Pdf.php:131
 msgid "Error while creating PDF:"
@@ -9060,7 +9065,7 @@ msgid ""
 "the administrator of the MySQL server."
 msgstr ""
 "phpMyAdmin se pokusil připojit k MySQL serveru, a ten odmítl připojení. "
-"Zkontrolujte jméno serveru, uživatelské jméno a heslo v souboru config.inc."
+"Zkontrolujte název serveru, uživatelské jméno a heslo v souboru config.inc."
 "php a ujistěte se, že jsou totožné s těmi, které máte od administrátora "
 "MySQL serveru."
 
@@ -9070,7 +9075,7 @@ msgstr "Zkusit se připojit znovu"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:134
 msgid "Your session has expired. Please log in again."
-msgstr "Vaše sezení vypršelo, prosím přihlaste se znovu."
+msgstr "Platnost vaší relace vypršela, přihlaste se prosím znovu."
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:154
 msgid "Log in"
@@ -9079,7 +9084,7 @@ msgstr "Přihlášení"
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:162
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:172
 msgid "You can enter hostname/IP address and port separated by space."
-msgstr "Můžete zadat jméno počítače nebo IP adresu a port oddělené mezerou."
+msgstr "Můžete zadat název počítače nebo IP adresu a port oddělené mezerou."
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:177
 msgid "Username:"
@@ -9107,7 +9112,7 @@ msgstr "Nemáte povolení se přihlásit k tomuto MySQL serveru!"
 
 #: libraries/classes/Plugins/Auth/AuthenticationHttp.php:88
 msgid "Wrong username/password. Access denied."
-msgstr "Špatné uživatelské jméno nebo heslo. Přístup odepřen."
+msgstr "Chybné uživatelské jméno nebo heslo. Přístup odepřen."
 
 #: libraries/classes/Plugins/Auth/AuthenticationSignon.php:135
 msgid "Can not find signon authentication script:"
@@ -9145,17 +9150,17 @@ msgstr "Formát:"
 #: libraries/classes/Plugins/Export/ExportCsv.php:63
 #: libraries/classes/Plugins/Import/AbstractImportCsv.php:58
 msgid "Columns separated with:"
-msgstr "Pole oddělené:"
+msgstr "Sloupce oddělené:"
 
 #: libraries/classes/Plugins/Export/ExportCsv.php:68
 #: libraries/classes/Plugins/Import/AbstractImportCsv.php:64
 msgid "Columns enclosed with:"
-msgstr "Pole uzavřené do:"
+msgstr "Sloupce uzavřené do:"
 
 #: libraries/classes/Plugins/Export/ExportCsv.php:73
 #: libraries/classes/Plugins/Import/AbstractImportCsv.php:71
 msgid "Columns escaped with:"
-msgstr "Pole escapována:"
+msgstr "Sloupce escapované:"
 
 #: libraries/classes/Plugins/Export/ExportCsv.php:78
 #: libraries/classes/Plugins/Import/AbstractImportCsv.php:78
@@ -9175,7 +9180,7 @@ msgstr "Nahradit NULL hodnoty:"
 #: libraries/classes/Plugins/Export/ExportCsv.php:88
 #: libraries/classes/Plugins/Export/ExportExcel.php:57
 msgid "Remove carriage return/line feed characters within columns"
-msgstr "Odstranit znaky konců řádek z polí"
+msgstr "Odstranit ze sloupců znaky konce řádku"
 
 #: libraries/classes/Plugins/Export/ExportExcel.php:67
 msgid "Excel edition:"
@@ -9327,7 +9332,7 @@ msgstr "Zobrazit MIME typy"
 
 #: libraries/classes/Plugins/Export/ExportLatex.php:168
 msgid "Put columns names in the first row:"
-msgstr "Přidat jména polí na první řádek:"
+msgstr "Přidat názvy sloupců na první řádek:"
 
 #: libraries/classes/Plugins/Export/ExportLatex.php:216
 #: libraries/classes/Plugins/Export/ExportSql.php:695
@@ -9367,7 +9372,7 @@ msgstr "Struktura:"
 
 #: libraries/classes/Plugins/Export/ExportMediawiki.php:81
 msgid "Export table names"
-msgstr "Exportovat jména tabulek"
+msgstr "Exportovat názvy tabulek"
 
 #: libraries/classes/Plugins/Export/ExportMediawiki.php:88
 msgid "Export table headers"
@@ -9449,8 +9454,8 @@ msgid ""
 "Enclose table and column names with backquotes <i>(Protects column and table "
 "names formed with special characters or keywords)</i>"
 msgstr ""
-"Uzavřít název tabulky a polí do zpětných uvozovek <i>(Zabrání interpretaci "
-"názvů obsahujících speciální znaky nebo klíčová slova)</i>"
+"Uzavřít názvy tabulek a sloupců do zpětných uvozovek <i>(Zabrání "
+"interpretaci názvů obsahujících speciální znaky nebo klíčová slova)</i>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:346
 msgid "Data creation options"
@@ -9523,7 +9528,7 @@ msgid ""
 "Dump binary columns in hexadecimal notation <i>(for example, \"abc\" becomes "
 "0x616263)</i>"
 msgstr ""
-"Vypisovat binární pole šestnáctkově <i>(například vypíše 0x616263 místo "
+"Vypisovat binární sloupce šestnáctkově <i>(například vypíše 0x616263 místo "
 "„abc“)</i>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:459
@@ -9531,7 +9536,7 @@ msgid ""
 "Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and "
 "reloaded between servers in different time zones)</i>"
 msgstr ""
-"Vypisovat pole TIMESTAMP v UTC <i>(usnadní přenost polí TIMESTAMP mezi "
+"Vypisovat sloupce TIMESTAMP v UTC <i>(usnadní přenos sloupců TIMESTAMP mezi "
 "servery v různých časových pásmech)</i>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:520
@@ -9665,8 +9670,8 @@ msgid ""
 "The first line of the file contains the table column names <i>(if this is "
 "unchecked, the first line will become part of the data)</i>"
 msgstr ""
-"První řádka souboru obsahuje jména polí <i>(pokud toto nezaškrtnete, první "
-"řádka bude součástí dat)</i>"
+"První řádek souboru obsahuje názvy sloupců <i>(pokud tuto volbu "
+"nezaškrtnete, první řádek bude součástí dat)</i>"
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:72
 msgid ""
@@ -9674,14 +9679,14 @@ msgid ""
 "database, list the corresponding column names here. Column names must be "
 "separated by commas and not enclosed in quotations."
 msgstr ""
-"Pokud pořadí polí v souboru není stejné jako pořadí v databázi, zadejte zde "
-"odpovídající jména polí. Jména musí být oddělena čárkami a nesmí být "
-"uzavřena do uvozovek."
+"Pokud není pořadí sloupců v souboru stejné jako pořadí v databázi, zadejte "
+"zde odpovídající názvy sloupců. Názvy sloupců musí být odděleny čárkami a "
+"nesmí být uzavřeny do uvozovek."
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:80
 #: libraries/classes/Plugins/Import/ImportLdi.php:75
 msgid "Column names: "
-msgstr "Názvy polí: "
+msgstr "Názvy sloupců: "
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:120
 #: libraries/classes/Plugins/Import/ImportCsv.php:135
@@ -9689,7 +9694,7 @@ msgstr "Názvy polí: "
 #: libraries/classes/Plugins/Import/ImportCsv.php:155
 #, php-format
 msgid "Invalid parameter for CSV import: %s"
-msgstr "Neznámý parametr pro import CSV: %s"
+msgstr "Chybný parametr pro import CSV: %s"
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:207
 #, php-format
@@ -9697,8 +9702,8 @@ msgid ""
 "Invalid column (%s) specified! Ensure that columns names are spelled "
 "correctly, separated by commas, and not enclosed in quotes."
 msgstr ""
-"Zadán chybný název pole (%s)! Ujistěte se, že jsou jména polí zapsána "
-"správně, oddělena čárkami a nejsou uzavřena v uvozovkách."
+"Zadán chybný název sloupce (%s)! Zkontrolujte, zda jsou názvy sloupců "
+"zapsány správně, odděleny čárkami a nejsou uzavřeny v uvozovkách."
 
 #: libraries/classes/Plugins/Import/ImportCsv.php:302
 #: libraries/classes/Plugins/Import/ImportCsv.php:663
@@ -9709,7 +9714,7 @@ msgstr "Chybný formát CSV dat na řádku %d."
 #: libraries/classes/Plugins/Import/ImportCsv.php:533
 #, php-format
 msgid "Invalid column count in CSV input on line %d."
-msgstr "Chybný počet polí v CSV datech na řádku %d."
+msgstr "Chybný počet sloupců v CSV datech na řádku %d."
 
 #: libraries/classes/Plugins/Import/ImportLdi.php:113
 msgid "This plugin does not support compressed imports!"
@@ -9914,9 +9919,9 @@ msgid ""
 "of a column which contains the filename. If you use the second option, you "
 "need to set the first option to the empty string."
 msgstr ""
-"Zobrazí odkaz na stáhnutí dat. První parametr je jméno souboru, druhý jméno "
-"pole v tabulce obsahující jméno souboru. Pokud zadáte druhý parametr, první "
-"musí být prázdný."
+"Zobrazí odkaz na stažení binárních dat sloupce. První parametr je název "
+"souboru, druhý název sloupce v tabulce, který obsahuje název souboru. Pokud "
+"zadáte druhý parametr, první musí být prázdný."
 
 #: libraries/classes/Plugins/Transformations/Abs/ExternalTransformationsPlugin.php:28
 msgid ""
@@ -9933,7 +9938,7 @@ msgid ""
 msgstr ""
 "JEN PRO LINUX: Spustí externí program, na jeho standardní vstup pošle obsah "
 "pole a zobrazí výstup programu. Výchozí je program Tidy, který zformátuje "
-"kód HTML. Z bezpečnostních důvodů musíte jména povolených programů zapsat do "
+"kód HTML. Z bezpečnostních důvodů musíte názvy povolených programů zapsat do "
 "souboru libraries/classes/Plugins/Transformations/Abs/"
 "ExternalTransformationsPlugin.php. První parametr je číslo programu, který "
 "má být spuštěn. Druhý parametr ponechte z historických důvodů prázdný. Třetí "
@@ -9958,8 +9963,8 @@ msgid ""
 "Displays the contents of the column as-is, without running it through "
 "htmlspecialchars(). That is, the column is assumed to contain valid HTML."
 msgstr ""
-"Zachová původní formátování pole, tak jak je uloženo v databázi, bez použití "
-"htmlspecialchars(). Předpokládá se, že pole obsahuje platné HTML."
+"Zobrazí původní obsah sloupce tak, jak je uložen v databázi, bez použití "
+"funkce htmlspecialchars(). Předpokládá se, že sloupec obsahuje platné HTML."
 
 #: libraries/classes/Plugins/Transformations/Abs/HexTransformationsPlugin.php:28
 msgid ""
@@ -10008,7 +10013,7 @@ msgid ""
 "string)."
 msgstr ""
 "Přidá k hodnotě text. První parametr bude přidaný na začátek, druhý na konec "
-"(v jednoduchých uvozovkách, výchozí je prázdný řetezec)."
+"(v jednoduchých uvozovkách, výchozí je prázdný řetězec)."
 
 #: libraries/classes/Plugins/Transformations/Abs/RegexValidationTransformationsPlugin.php:30
 msgid ""
@@ -10054,8 +10059,8 @@ msgid ""
 "option is a URL prefix like \"https://www.example.com/\". The second and "
 "third options are the width and the height in pixels."
 msgstr ""
-"Zobrazí obrázek a odkaz z pole obsahujícího odkaz na obrázek. První parametr "
-"je prefix URL (například „https://www.example.com/“), druhý a třetí určuje "
+"Zobrazí obrázek a odkaz, sloupec obsahuje název souboru. První parametr je "
+"prefix URL (například „https://www.example.com/“), druhý a třetí určuje "
 "šířku a výšku obrázku."
 
 #: libraries/classes/Plugins/Transformations/Abs/TextLinkTransformationsPlugin.php:33
@@ -10064,7 +10069,7 @@ msgid ""
 "prefix like \"https://www.example.com/\". The second option is a title for "
 "the link."
 msgstr ""
-"Zobrazí odkaz z pole obsahujícího odkaz. První parametr je prefix URL "
+"Zobrazí odkaz, sloupec obsahuje název souboru. První parametr je prefix URL "
 "(například „https://www.example.com/“), druhý text odkazu."
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_Iptobinary.php:30
@@ -10218,7 +10223,7 @@ msgstr "Návrh a vytváření PDF"
 
 #: libraries/classes/Relation.php:195
 msgid "Displaying Column Comments"
-msgstr "Zobrazuji komentáře polí"
+msgstr "Zobrazuji komentáře ke sloupcům"
 
 #: libraries/classes/Relation.php:201
 msgid "Browser transformation"
@@ -10227,7 +10232,7 @@ msgstr "Transformace při prohlížení"
 #: libraries/classes/Relation.php:208
 msgid "Please see the documentation on how to update your column_info table."
 msgstr ""
-"Podívejte se prosím do dokumentace, jak aktualizovat informace o polích v "
+"Podívejte se prosím do dokumentace, jak aktualizovat informace o sloupcích v "
 "tabulce column_info."
 
 #: libraries/classes/Relation.php:224 libraries/classes/SqlQueryForm.php:401
@@ -10303,7 +10308,7 @@ msgstr ""
 #: libraries/classes/Relation.php:389
 msgid "Re-login to phpMyAdmin to load the updated configuration file."
 msgstr ""
-"Prosím přihlašte se znovu , aby se projevily změny v konfiguračním souboru."
+"Prosím přihlašte se znovu, aby se projevily změny v konfiguračním souboru."
 
 #: libraries/classes/Relation.php:1750
 msgid "no description"
@@ -10493,7 +10498,7 @@ msgstr ""
 
 #: libraries/classes/ReplicationGui.php:323
 msgid "Skip current error"
-msgstr "Přeskočit současnou chybu"
+msgstr "Přeskočit aktuální chybu"
 
 #: libraries/classes/ReplicationGui.php:328
 #, php-format
@@ -10794,7 +10799,7 @@ msgstr "Zadavatel musí být ve tvaru \"uživatel@počítač\"!"
 
 #: libraries/classes/Rte/Events.php:562
 msgid "You must provide an event name!"
-msgstr "Musíte zadat jméno události!"
+msgstr "Musíte zadat název události!"
 
 #: libraries/classes/Rte/Events.php:577
 msgid "You must provide a valid interval value for the event."
@@ -10878,7 +10883,7 @@ msgstr "Byla změněna rutina %1$s."
 
 #: libraries/classes/Rte/Routines.php:909
 msgid "Routine name"
-msgstr "Jméno rutiny"
+msgstr "Název rutiny"
 
 #: libraries/classes/Rte/Routines.php:935
 msgid "Parameters"
@@ -10930,7 +10935,7 @@ msgstr "Přístup k SQL datům"
 
 #: libraries/classes/Rte/Routines.php:1143
 msgid "You must provide a routine name!"
-msgstr "Musíte zadat jméno rutiny!"
+msgstr "Musíte zadat název rutiny!"
 
 #: libraries/classes/Rte/Routines.php:1177
 #, php-format
@@ -10948,7 +10953,7 @@ msgstr ""
 
 #: libraries/classes/Rte/Routines.php:1227
 msgid "You must provide a name and a type for each routine parameter."
-msgstr "Pro každý parametr musíte zadat jeho jméno a typ."
+msgstr "Pro každý parametr rutiny musíte zadat jeho název a typ."
 
 #: libraries/classes/Rte/Routines.php:1246
 msgid "You must provide a valid return type for the routine."
@@ -11014,7 +11019,7 @@ msgstr "Spouštění"
 
 #: libraries/classes/Rte/Triggers.php:445
 msgid "You must provide a trigger name!"
-msgstr "Musíte zadat jméno spouště!"
+msgstr "Musíte zadat název spouště!"
 
 #: libraries/classes/Rte/Triggers.php:452
 msgid "You must provide a valid timing for the trigger!"
@@ -11026,7 +11031,7 @@ msgstr "Musíte zadat platnou událost pro spoušť!"
 
 #: libraries/classes/Rte/Triggers.php:467
 msgid "You must provide a valid table name!"
-msgstr "Musíte zadat platné jméno tabulky!"
+msgstr "Musíte zadat platný název tabulky!"
 
 #: libraries/classes/Rte/Triggers.php:473
 msgid "You must provide a trigger definition."
@@ -11509,7 +11514,7 @@ msgstr "Databáze pro uživatele"
 
 #: libraries/classes/Server/Privileges.php:2190
 msgid "Create database with same name and grant all privileges."
-msgstr "Vytvořit databázi stejného jména a přidělit všechna oprávnění."
+msgstr "Vytvořit databázi se stejným názvem a přidělit všechna oprávnění."
 
 #: libraries/classes/Server/Privileges.php:2201
 msgid "Grant all privileges on wildcard name (username\\_%)."
@@ -11720,7 +11725,7 @@ msgstr ""
 "Poznámka: phpMyAdmin získává oprávnění uživatele přímo z tabulek MySQL. "
 "Pokud došlo k ruční úpravě těchto tabulek, může se jejich obsah lišit od "
 "oprávnění, která server právě používá. V tom případě je třeba znovu načíst "
-"oprávnění, k tomu však nemáte dostatečné oprávnění."
+"oprávnění, k tomu však aktuálně nemáte dostatečné oprávnění."
 
 #: libraries/classes/Server/Privileges.php:5060
 msgid "You have added a new user."
@@ -12041,7 +12046,7 @@ msgstr "Obvykle monitorované"
 
 #: libraries/classes/Server/Status/Monitor.php:210
 msgid "or type variable name:"
-msgstr "nebo zadejte jméno proměnné:"
+msgstr "nebo zadejte název proměnné:"
 
 #: libraries/classes/Server/Status/Monitor.php:217
 msgid "Display as differential value"
@@ -12438,15 +12443,15 @@ msgstr "Počet provedených synchronizací fsync()."
 
 #: libraries/classes/Server/Status/Variables.php:502
 msgid "The current number of pending fsync() operations."
-msgstr "Počet nevyřízených synchronizací fsync()."
+msgstr "Aktuální počet nevyřízených synchronizací fsync()."
 
 #: libraries/classes/Server/Status/Variables.php:505
 msgid "The current number of pending reads."
-msgstr "Počet nevyřízených čtení."
+msgstr "Aktuální počet nevyřízených čtení."
 
 #: libraries/classes/Server/Status/Variables.php:508
 msgid "The current number of pending writes."
-msgstr "Počet nevyřízených zápisů."
+msgstr "Aktuální počet nevyřízených zápisů."
 
 #: libraries/classes/Server/Status/Variables.php:511
 msgid "The amount of data read so far, in bytes."
@@ -12530,7 +12535,7 @@ msgstr "Počet zapsaných stránek."
 
 #: libraries/classes/Server/Status/Variables.php:566
 msgid "The number of row locks currently being waited for."
-msgstr "Počet zámků řádku, na které se v současné době čeká."
+msgstr "Počet zámků řádku, na které se aktuálně čeká."
 
 #: libraries/classes/Server/Status/Variables.php:569
 msgid "The average time to acquire a row lock, in milliseconds."
@@ -12758,8 +12763,7 @@ msgstr "Počet spojení, které prováděly kompletní procházení první tabul
 
 #: libraries/classes/Server/Status/Variables.php:712
 msgid "The number of temporary tables currently open by the slave SQL thread."
-msgstr ""
-"Počet dočasných tabulek v současné době otevřených podřízeným serverem."
+msgstr "Počet dočasných tabulek aktuálně otevřených podřízeným serverem."
 
 #: libraries/classes/Server/Status/Variables.php:716
 msgid ""
@@ -13027,7 +13031,7 @@ msgstr "Přidat tento SQL dotaz do oblíbených:"
 
 #: libraries/classes/SqlQueryForm.php:322
 msgid "Replace existing bookmark of same name"
-msgstr "Přepsat existující oblíbený dotaz stejného jména"
+msgstr "Přepsat existující oblíbený dotaz se stejným názvem"
 
 #: libraries/classes/SqlQueryForm.php:336
 msgid "Delimiter"
@@ -13091,11 +13095,11 @@ msgstr "Cílová databáze „%s“ nebyla nalezena!"
 
 #: libraries/classes/Table.php:1462
 msgid "Invalid database:"
-msgstr "Chybné jméno databáze:"
+msgstr "Chybný název databáze:"
 
 #: libraries/classes/Table.php:1479
 msgid "Invalid table name:"
-msgstr "Chybné jméno tabulky:"
+msgstr "Chybný název tabulky:"
 
 #: libraries/classes/Table.php:1514
 #, php-format
@@ -13132,7 +13136,7 @@ msgstr ""
 
 #: libraries/classes/Table.php:2086
 msgid "The name of the primary key must be \"PRIMARY\"!"
-msgstr "Jméno primárního klíče musí být „PRIMARY“!"
+msgstr "Název primárního klíče musí být „PRIMARY“!"
 
 #: libraries/classes/Table.php:2097
 msgid "Can't rename index to PRIMARY!"
@@ -13474,7 +13478,7 @@ msgid ""
 "stored with a three-byte prefix indicating the length of the value in bytes"
 msgstr ""
 "Textový sloupec s maximální délkou 16777215 (2²⁴ - 1) znaků, uložen s "
-"tříbajtovým číslem určující jeho délku"
+"tříbajtovým číslem určujícím jeho délku"
 
 #: libraries/classes/Types.php:321
 msgid ""
@@ -13483,7 +13487,7 @@ msgid ""
 "value in bytes"
 msgstr ""
 "Textový sloupec s maximální délkou 4294967295 nebo 4GiB (2³² - 1) znaků, "
-"uložen s čtyřbajtovým číslem určující jeho délku"
+"uložen s čtyřbajtovým číslem určujícím jeho délku"
 
 #: libraries/classes/Types.php:327
 msgid ""
@@ -13511,7 +13515,7 @@ msgid ""
 "with a three-byte prefix indicating the length of the value"
 msgstr ""
 "Datový sloupec s maximální délkou 16777215 (2²⁴ - 1) znaků, uložen s "
-"tříbajtovým číslem určující jeho délku"
+"tříbajtovým číslem určujícím jeho délku"
 
 #: libraries/classes/Types.php:348
 msgid ""
@@ -13527,7 +13531,7 @@ msgid ""
 "bytes, stored with a four-byte prefix indicating the length of the value"
 msgstr ""
 "Datový sloupec s maximální délkou 4294967295 nebo 4GiB (2³² - 1) znaků, "
-"uložen s čtyřbajtovým číslem určující jeho délku"
+"uložen s čtyřbajtovým číslem určujícím jeho délku"
 
 #: libraries/classes/Types.php:359
 msgid ""
@@ -13745,7 +13749,7 @@ msgstr ""
 
 #: libraries/common.inc.php:344
 msgid "Invalid authentication method set in configuration:"
-msgstr "V nastavení máte špatnou přihlašovací metodu:"
+msgstr "V konfiguraci je nastavena neplatná metoda přihlášení:"
 
 #: libraries/common.inc.php:397
 #, php-format
@@ -13890,7 +13894,7 @@ msgid ""
 "Your preferences will be saved for current session only. Storing them "
 "permanently requires %sphpMyAdmin configuration storage%s."
 msgstr ""
-"Vaše nastavení bude uchováno jen pro toto sezení. Pro trvalá nastavení "
+"Vaše nastavení bude uchováno jen pro aktuální relaci. Pro trvalá nastavení "
 "musíte nastavit %súložiště nastavení phpMyAdmina%s."
 
 #: navigation.php:24
@@ -14246,10 +14250,10 @@ msgstr "Export tabulky"
 
 #: tbl_get_field.php:38
 msgid "Invalid table name"
-msgstr "Chybné jméno tabulky"
+msgstr "Chybný název tabulky"
 
 #. l10n: In case a SQL query did not pass a security check
-#: tbl_get_field.php:46
+#: tbl_get_field.php:46 transformation_wrapper.php:69
 msgid "There is an issue with your request."
 msgstr "Na vašem požadavku došlo k problému."
 
@@ -14603,12 +14607,12 @@ msgstr "Odebrat uživatelům veškerá oprávnění a poté je odstranit z tabu
 #: templates/privileges/delete_user_fieldset.twig:10
 #: templates/privileges/delete_user_fieldset.twig:11
 msgid "Drop the databases that have the same names as the users."
-msgstr "Odstranit databáze se stejnými jmény jako uživatelé."
+msgstr "Odstranit databáze se stejnými názvy jako jména uživatelů."
 
 #: templates/table/structure/add_column.twig:9
 #, php-format
 msgid "Add %s column(s)"
-msgstr "Přidat %s polí"
+msgstr "Přidat %s sloupců"
 
 #: templates/table/structure/add_column.twig:14
 msgid "at beginning of table"
@@ -14790,7 +14794,7 @@ msgstr "Přejmenovat na"
 #: templates/database/designer/rename_to_panel.twig:30
 #: templates/database/designer/options_panel.twig:90
 msgid "New name"
-msgstr "Nové jméno"
+msgstr "Nový název"
 
 #: templates/display/export/option_header.twig:5
 msgid "Exporting databases from the current server"
@@ -14864,11 +14868,11 @@ msgstr ""
 
 #: templates/view_create.twig:65
 msgid "VIEW name"
-msgstr "Jméno pohledu"
+msgstr "Název pohledu"
 
 #: templates/view_create.twig:79
 msgid "Column names"
-msgstr "Názvy polí"
+msgstr "Názvy sloupců"
 
 #: templates/table/secondary_tabs.twig:9
 msgid "Relation view"
@@ -14997,7 +15001,7 @@ msgstr "Vytvořit tabulku"
 
 #: templates/database/create_table.twig:15
 msgid "Number of columns"
-msgstr "Počet polí"
+msgstr "Počet sloupců"
 
 #: templates/privileges/add_privileges_table.twig:3
 msgid "Add privileges on the following table:"
@@ -15083,7 +15087,7 @@ msgstr "Exportovat tabulky jako samostatné soubory"
 
 #: templates/table/search/options.twig:6
 msgid "Select columns (at least one):"
-msgstr "Zvolte pole (alespoň jedno):"
+msgstr "Zvolte sloupce (alespoň jeden):"
 
 #: templates/table/search/options.twig:26
 msgid "Add search conditions (body of the \"where\" clause):"
@@ -15119,15 +15123,15 @@ msgstr "Zvolte typ výstupu relací"
 
 #: templates/server/variables/session_variable_row.twig:3
 msgid "Session value"
-msgstr "Hodnota sezení"
+msgstr "Hodnota relace"
 
 #: templates/columns_definitions/column_definitions_form.twig:23
 msgid "Table name"
-msgstr "Jméno tabulky"
+msgstr "Název tabulky"
 
 #: templates/columns_definitions/column_definitions_form.twig:40
 msgid "column(s)"
-msgstr "pole"
+msgstr "sloupce"
 
 #: templates/columns_definitions/column_definitions_form.twig:74
 msgid "Collation:"
@@ -15241,7 +15245,7 @@ msgstr "Vlastní - zobrazí všechna nastavení"
 
 #: templates/display/export/options_output_format.twig:3
 msgid "File name template:"
-msgstr "Šablona pro jméno souboru:"
+msgstr "Šablona pro název souboru:"
 
 #: templates/display/export/options_output_format.twig:11
 msgid "use this for future exports"
@@ -15343,7 +15347,7 @@ msgstr "Navrhnout strukturu tabulky"
 #: templates/table/structure/optional_action_links.twig:22
 #: templates/table/structure/move_columns_dialog.twig:1
 msgid "Move columns"
-msgstr "Přesunout pole"
+msgstr "Přesunout sloupce"
 
 #: templates/table/structure/optional_action_links.twig:25
 msgid "Normalize"
@@ -15393,7 +15397,7 @@ msgstr "Omezení cizího klíče %s bylo odstraněno"
 
 #: templates/table/relation/foreign_key_row.twig:38
 msgid "Constraint name"
-msgstr "Jméno omezení"
+msgstr "Název omezení"
 
 #: templates/table/relation/foreign_key_row.twig:90
 #: templates/database/multi_table_query/form.twig:158
@@ -15472,7 +15476,7 @@ msgstr "Částečný import:"
 msgid ""
 "Previous import timed out, after resubmitting will continue from position %d."
 msgstr ""
-"Předchozí ímport vyčerpal veškerý čas, po dalším odeslání bude import "
+"Předchozí import vyčerpal veškerý čas, po dalším odeslání bude import "
 "pokračovat od pozice %d."
 
 #: templates/display/import/import.twig:137
@@ -15546,7 +15550,7 @@ msgstr "Nová šablona:"
 
 #: templates/display/export/template_loading.twig:8
 msgid "Template name"
-msgstr "Jméno šablony"
+msgstr "Název šablony"
 
 #: templates/display/export/template_loading.twig:10
 #: templates/server/databases/create.twig:30
@@ -15620,7 +15624,7 @@ msgstr "Virtualita"
 
 #: templates/columns_definitions/table_fields_definitions.twig:65
 msgid "Move column"
-msgstr "Přesunout pole"
+msgstr "Přesunout sloupec"
 
 #: templates/columns_definitions/table_fields_definitions.twig:76
 #: templates/columns_definitions/table_fields_definitions.twig:87
@@ -15787,7 +15791,7 @@ msgstr "V tabulkách:"
 
 #: templates/database/search/selection_form.twig:51
 msgid "Inside column:"
-msgstr "Uvnitř pole:"
+msgstr "Uvnitř sloupce:"
 
 #: templates/privileges/add_privileges_routine.twig:3
 msgid "Add privileges on the following routine:"
@@ -15944,7 +15948,7 @@ msgstr "Přidat do centrálních sloupců"
 
 #: templates/privileges/privileges_summary.twig:20
 msgid "Column-specific privileges"
-msgstr "Oprávnění pro jednotlivá pole"
+msgstr "Oprávnění pro jednotlivé sloupce"
 
 #: templates/server/databases/create.twig:8
 #: templates/server/databases/create.twig:36
@@ -15958,7 +15962,7 @@ msgstr "Zapnuté parametry"
 #: templates/table/structure/table_structure_row.twig:55
 #, php-format
 msgid "Column %s has been dropped."
-msgstr "Pole %s bylo odstraněno."
+msgstr "Sloupec %s byl odstraněn."
 
 #: templates/table/search/replace_preview.twig:13
 msgid "Find and replace - preview"
@@ -16088,7 +16092,7 @@ msgstr "Vyberte databázi:"
 
 #: templates/export/alias_add.twig:15
 msgid "New database name"
-msgstr "Nové jméno databáze"
+msgstr "Nový název databáze"
 
 #: templates/export/alias_add.twig:23
 msgid "Select table:"
@@ -16096,7 +16100,7 @@ msgstr "Vyberte tabulku:"
 
 #: templates/export/alias_add.twig:29
 msgid "New table name"
-msgstr "Nové jméno tabulky"
+msgstr "Nový název tabulky"
 
 #: templates/export/alias_add.twig:37
 msgid "Select column:"
@@ -16120,7 +16124,7 @@ msgid ""
 "import it for current session?"
 msgstr ""
 "Ve vašem prohlížeči je uloženo nastavení phpMyAdmina pro tuto doménu. "
-"Přejete si ho importovat do tohoto sezení?"
+"Přejete si ho importovat do aktuální relace?"
 
 #: templates/prefs_autoload.twig:13
 msgid "Delete settings"
@@ -16128,12 +16132,12 @@ msgstr "Smazat nastavení"
 
 #: templates/table/index_form.twig:15
 msgid "Index name:"
-msgstr "Jméno klíče:"
+msgstr "Název indexu:"
 
 #: templates/table/index_form.twig:16
 msgid ""
 "\"PRIMARY\" <b>must</b> be the name of and <b>only of</b> a primary key!"
-msgstr "„PRIMARY“ <b>musí</b> být jméno <b>pouze</b> primárního klíče!"
+msgstr "„PRIMARY“ <b>musí</b> být název <b>pouze</b> primárního klíče!"
 
 #: templates/table/index_form.twig:34
 msgid "Index choice:"
@@ -16226,7 +16230,7 @@ msgstr ""
 
 #: templates/table/relation/common_form.twig:172
 msgid "Choose column to display:"
-msgstr "Zvolte která pole zobrazit:"
+msgstr "Zvolte sloupec, který chcete zobrazit:"
 
 #: url.php:41
 msgid "Taking you to the target site."
@@ -16718,7 +16722,7 @@ msgstr ""
 #: libraries/advisory_rules_generic.txt:210
 #, php-format
 msgid "Current values are tmp_table_size: %s, max_heap_table_size: %s"
-msgstr "Současné hodnoty jsou tmp_table_size: %s, max_heap_table_size: %s"
+msgstr "Aktuální hodnoty jsou tmp_table_size: %s, max_heap_table_size: %s"
 
 #: libraries/advisory_rules_generic.txt:212
 msgid "Percentage of temp tables on disk"
@@ -17284,10 +17288,10 @@ msgid ""
 "perfectly adequate for your system if you don't have much InnoDB tables or "
 "other services running on the same machine."
 msgstr ""
-"V současné době používáte %s%% vaší paměti pro vyrovnávací paměť InnoDB. "
-"Tato kontrola je aktivní pokud je to méně než 60%%, ale vaše nastavení může "
-"být přesto správné, pokud nemáte mnoho InnoDB tabulek nebo na tomto počítači "
-"běží i další služby."
+"Aktuálně používáte pro vyrovnávací paměť InnoDB %s%% paměti. Toto pravidlo "
+"je aktivní když nastavíte méně než 60%%, nicméně pokud nemáte příliš mnoho "
+"InnoDB tabulek nebo na tomto počítači běží i další služby, může být takové "
+"nastavení zcela přiměřené."
 
 #: libraries/advisory_rules_generic.txt:391
 msgid "MyISAM concurrent inserts"
@@ -17353,7 +17357,7 @@ msgstr "Zvažte zvýšení {query_cache_limit}."
 #: libraries/advisory_rules_mysql_before80003.txt:22
 #, php-format
 msgid "The current query cache hit rate of %s%% is below 20%%"
-msgstr "Současná úspěšnost mezipaměti %s%% je pod 20%%"
+msgstr "Aktuální úspěšnost mezipaměti %s%% je pod 20%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:24
 msgid "Query Cache usage"
@@ -17378,8 +17382,7 @@ msgid ""
 "The current ratio of free query cache memory to total query cache size is %s"
 "%%. It should be above 80%%"
 msgstr ""
-"V současné době je volno %s%% mezipaměti. Tato hodnota by se měla držet nad "
-"80%%"
+"Aktuálně je volných %s%% mezipaměti. Tato hodnota by se měla držet nad 80%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:31
 msgid "Query cache fragmentation"
@@ -17470,7 +17473,7 @@ msgstr "Zmenšení vyrovnávací paměti může přinést zvýšení výkonu."
 #: libraries/advisory_rules_mysql_before80003.txt:50
 #, php-format
 msgid "Current query cache size: %s"
-msgstr "Velikost mezipaměti dotazů: %s"
+msgstr "Aktuální velikost mezipaměti dotazů: %s"
 
 #: libraries/advisory_rules_mysql_before80003.txt:52
 msgid "Query cache min result size"
