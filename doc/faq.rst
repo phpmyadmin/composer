@@ -18,7 +18,7 @@ Server
 1.1 My server is crashing each time a specific action is required or phpMyAdmin sends a blank page or a page full of cryptic characters to my browser, what can I do?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Try to set the :config:option:`$cfg['OBGzip']`  directive to ``false`` in your
+Try to set the :config:option:`$cfg['OBGzip']` directive to ``false`` in your
 :file:`config.inc.php` file and the ``zlib.output_compression`` directive to
 ``Off`` in your php configuration file.
 
@@ -853,19 +853,14 @@ Here are a few points to check:
 ---------------------------------
 
 To be able to see a progress bar during your uploads, your server must
-have the `APC <https://www.php.net/manual/en/book.apc.php>`_ extension, the
-`uploadprogress <https://pecl.php.net/package/uploadprogress>`_ one, or
+have the `uploadprogress <https://pecl.php.net/package/uploadprogress>`_ extension, and
 you must be running PHP 5.4.0 or higher. Moreover, the JSON extension
 has to be enabled in your PHP.
-
-If using APC, you must set ``apc.rfc1867`` to ``on`` in your :file:`php.ini`.
 
 If using PHP 5.4.0 or higher, you must set
 ``session.upload_progress.enabled`` to ``1`` in your :file:`php.ini`. However,
 starting from phpMyAdmin version 4.0.4, session-based upload progress has
 been temporarily deactivated due to its problematic behavior.
-
-.. seealso:: :rfc:`1867`
 
 .. _faqlimitations:
 

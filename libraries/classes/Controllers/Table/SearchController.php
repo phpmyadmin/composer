@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
+use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
@@ -228,6 +229,7 @@ class SearchController extends AbstractController
                 ->addFiles(
                     [
                         'makegrid.js',
+                        'vendor/stickyfill.min.js',
                         'sql.js',
                         'table/select.js',
                         'table/change.js',
@@ -260,6 +262,7 @@ class SearchController extends AbstractController
                 ->addFiles(
                     [
                         'makegrid.js',
+                        'vendor/stickyfill.min.js',
                         'sql.js',
                         'vendor/jqplot/jquery.jqplot.js',
                         'vendor/jqplot/plugins/jqplot.canvasTextRenderer.js',
@@ -370,6 +373,7 @@ class SearchController extends AbstractController
             );
             //Append it to row array as where_clause
             $row['where_clause'] = $uniqueCondition[0];
+            $row['where_clause_sign'] = Core::signSqlQuery($uniqueCondition[0]);
 
             $tmpData = [
                 $_POST['criteriaColumnNames'][0] =>
@@ -377,8 +381,9 @@ class SearchController extends AbstractController
                 $_POST['criteriaColumnNames'][1] =>
                     $row[$_POST['criteriaColumnNames'][1]],
                 'where_clause' => $uniqueCondition[0],
+                'where_clause_sign' => Core::signSqlQuery($uniqueCondition[0])
             ];
-            $tmpData[$dataLabel] = $dataLabel ? $row[$dataLabel] : '';
+            $tmpData[$dataLabel] = ($dataLabel) ? $row[$dataLabel] : '';
             $data[] = $tmpData;
         }
         unset($tmpData);
@@ -452,6 +457,10 @@ class SearchController extends AbstractController
      */
     public function getDataRowAction()
     {
+        if (! Core::checkSqlQuerySignature($_POST['where_clause'], $_POST['where_clause_sign'])) {
+            return;
+        }
+
         $extra_data = [];
         $row_info_query = 'SELECT * FROM ' . Util::backquote($_POST['db']) . '.'
             . Util::backquote($_POST['table']) . ' WHERE ' . $_POST['where_clause'];

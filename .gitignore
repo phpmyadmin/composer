@@ -60,3 +60,4 @@ composer.lock
 /node_modules/
 phpstan.neon
 libraries/cache/
+js/dist/

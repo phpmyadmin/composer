@@ -509,6 +509,13 @@ class LanguageManager
             'pt[-_]br|portuguese (brazil)',
             'pt_BR',
         ],
+        'rcf' => [
+            'rcf',
+            'R&eacute;union Creole',
+            'Kr&eacute;ol',
+            'rcf|creole (reunion)',
+            '',
+        ],
         'ro' => [
             'ro',
             'Romanian',
@@ -612,6 +619,13 @@ class LanguageManager
             'Tatarish',
             'Tatar&ccedil;a',
             'tt|tatarish',
+            '',
+        ],
+        'tzm' => [
+            'tzm',
+            'Central Atlas Tamazight',
+            'Tamaziɣt',
+            'tzm|central atlas tamazight',
             '',
         ],
         'ug' => [
