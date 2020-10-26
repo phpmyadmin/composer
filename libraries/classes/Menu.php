@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Query\Utilities;
+use PhpMyAdmin\Utils\SessionCache;
 use function array_key_exists;
 use function count;
 use function in_array;
@@ -139,8 +140,8 @@ class Menu
         global $dbi;
 
         $cache_key = 'menu-levels-' . $level;
-        if (Util::cacheExists($cache_key)) {
-            return Util::cacheGet($cache_key);
+        if (SessionCache::has($cache_key)) {
+            return SessionCache::get($cache_key);
         }
         $allowedTabs = Util::getMenuTabList($level);
         $cfgRelation = $this->relation->getRelationsParam();
@@ -169,7 +170,7 @@ class Menu
                 }
             }
         }
-        Util::cacheSet($cache_key, $allowedTabs);
+        SessionCache::set($cache_key, $allowedTabs);
 
         return $allowedTabs;
     }
@@ -262,9 +263,8 @@ class Menu
             $updatable_view = $dbi->getTable($this->db, $this->table)
                 ->isUpdatableView();
         }
-        $is_superuser = $dbi->isSuperuser();
-        $isCreateOrGrantUser = $dbi->isUserType('grant')
-            || $dbi->isUserType('create');
+        $is_superuser = $dbi->isSuperUser();
+        $isCreateOrGrantUser = $dbi->isGrantUser() || $dbi->isCreateUser();
 
         $tabs = [];
 
@@ -384,9 +384,8 @@ class Menu
 
         $db_is_system_schema = Utilities::isSystemSchema($this->db);
         $num_tables = count($dbi->getTables($this->db));
-        $is_superuser = $dbi->isSuperuser();
-        $isCreateOrGrantUser = $dbi->isUserType('grant')
-            || $dbi->isUserType('create');
+        $is_superuser = $dbi->isSuperUser();
+        $isCreateOrGrantUser = $dbi->isGrantUser() || $dbi->isCreateUser();
 
         /**
          * Gets the relation settings
@@ -506,11 +505,10 @@ class Menu
         /** @var DatabaseInterface $dbi */
         global $route, $dbi;
 
-        $is_superuser = $dbi->isSuperuser();
-        $isCreateOrGrantUser = $dbi->isUserType('grant')
-            || $dbi->isUserType('create');
-        if (Util::cacheExists('binary_logs')) {
-            $binary_logs = Util::cacheGet('binary_logs');
+        $is_superuser = $dbi->isSuperUser();
+        $isCreateOrGrantUser = $dbi->isGrantUser() || $dbi->isCreateUser();
+        if (SessionCache::has('binary_logs')) {
+            $binary_logs = SessionCache::get('binary_logs');
         } else {
             $binary_logs = $dbi->fetchResult(
                 'SHOW MASTER LOGS',
@@ -519,7 +517,7 @@ class Menu
                 DatabaseInterface::CONNECT_USER,
                 DatabaseInterface::QUERY_STORE
             );
-            Util::cacheSet('binary_logs', $binary_logs);
+            SessionCache::set('binary_logs', $binary_logs);
         }
 
         $tabs = [];

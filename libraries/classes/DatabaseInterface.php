@@ -18,6 +18,7 @@ use PhpMyAdmin\Query\Compatibility;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
 use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\SqlParser\Context;
+use PhpMyAdmin\Utils\SessionCache;
 use const E_USER_WARNING;
 use const LOG_INFO;
 use const LOG_NDELAY;
@@ -1735,12 +1736,12 @@ class DatabaseInterface implements DbalInterface
      */
     public function getCurrentUser(): string
     {
-        if (Util::cacheExists('mysql_cur_user')) {
-            return Util::cacheGet('mysql_cur_user');
+        if (SessionCache::has('mysql_cur_user')) {
+            return SessionCache::get('mysql_cur_user');
         }
         $user = $this->fetchValue('SELECT CURRENT_USER();');
         if ($user !== false) {
-            Util::cacheSet('mysql_cur_user', $user);
+            SessionCache::set('mysql_cur_user', $user);
 
             return $user;
         }
@@ -1748,96 +1749,135 @@ class DatabaseInterface implements DbalInterface
         return '@';
     }
 
-    /**
-     * Checks if current user is superuser
-     *
-     * @return bool Whether user is a superuser
-     */
-    public function isSuperuser(): bool
+    public function isSuperUser(): bool
     {
-        return $this->isUserType('super');
-    }
-
-    /**
-     * Checks if current user has global create user/grant privilege
-     * or is a superuser (i.e. SELECT on mysql.users)
-     * while caching the result in session.
-     *
-     * @param string $type type of user to check for
-     *                     i.e. 'create', 'grant', 'super'
-     *
-     * @return bool Whether user is a given type of user
-     */
-    public function isUserType(string $type): bool
-    {
-        if (Util::cacheExists('is_' . $type . 'user')) {
-            return Util::cacheGet('is_' . $type . 'user');
+        if (SessionCache::has('is_superuser')) {
+            return SessionCache::get('is_superuser');
         }
 
-        // when connection failed we don't have a $userlink
-        if (! isset($this->links[self::CONNECT_USER])) {
+        if (! $this->isConnected()) {
             return false;
         }
 
-        // checking if user is logged in
-        if ($type === 'logged') {
-            return true;
+        $result = $this->tryQuery(
+            'SELECT 1 FROM mysql.user LIMIT 1',
+            self::CONNECT_USER,
+            self::QUERY_STORE
+        );
+        $isSuperUser = false;
+
+        if ($result) {
+            $isSuperUser = (bool) $this->numRows($result);
         }
 
-        if (! $GLOBALS['cfg']['Server']['DisableIS'] || $type === 'super') {
-            // Prepare query for each user type check
-            $query = '';
-            if ($type === 'super') {
-                $query = 'SELECT 1 FROM mysql.user LIMIT 1';
-            } elseif ($type === 'create') {
-                [$user, $host] = $this->getCurrentUserAndHost();
-                $query = QueryGenerator::getInformationSchemaDataForCreateRequest($user, $host);
-            } elseif ($type === 'grant') {
-                [$user, $host] = $this->getCurrentUserAndHost();
-                $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($user, $host);
-            }
+        $this->freeResult($result);
+        SessionCache::set('is_superuser', $isSuperUser);
 
-            $is = false;
-            $result = $this->tryQuery(
-                $query,
-                self::CONNECT_USER,
-                self::QUERY_STORE
-            );
-            if ($result) {
-                $is = (bool) $this->numRows($result);
-            }
-            $this->freeResult($result);
-        } else {
-            $is = false;
-            $grants = $this->fetchResult(
-                'SHOW GRANTS FOR CURRENT_USER();',
-                null,
-                null,
-                self::CONNECT_USER,
-                self::QUERY_STORE
-            );
-            if ($grants) {
-                foreach ($grants as $grant) {
-                    if ($type === 'create') {
-                        if (strpos($grant, 'ALL PRIVILEGES ON *.*') !== false
-                            || strpos($grant, 'CREATE USER') !== false
-                        ) {
-                            $is = true;
-                            break;
-                        }
-                    } elseif ($type === 'grant') {
-                        if (strpos($grant, 'WITH GRANT OPTION') !== false) {
-                            $is = true;
-                            break;
-                        }
-                    }
+        return $isSuperUser;
+    }
+
+    public function isGrantUser(): bool
+    {
+        global $cfg;
+
+        if (SessionCache::has('is_grantuser')) {
+            return SessionCache::get('is_grantuser');
+        }
+
+        if (! $this->isConnected()) {
+            return false;
+        }
+
+        $hasGrantPrivilege = false;
+
+        if ($cfg['Server']['DisableIS']) {
+            $grants = $this->getCurrentUserGrants();
+
+            foreach ($grants as $grant) {
+                if (strpos($grant, 'WITH GRANT OPTION') !== false) {
+                    $hasGrantPrivilege = true;
+                    break;
                 }
             }
+
+            SessionCache::set('is_grantuser', $hasGrantPrivilege);
+
+            return $hasGrantPrivilege;
         }
 
-        Util::cacheSet('is_' . $type . 'user', $is);
+        [$user, $host] = $this->getCurrentUserAndHost();
+        $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($user, $host);
+        $result = $this->tryQuery($query, self::CONNECT_USER, self::QUERY_STORE);
 
-        return $is;
+        if ($result) {
+            $hasGrantPrivilege = (bool) $this->numRows($result);
+        }
+
+        $this->freeResult($result);
+        SessionCache::set('is_grantuser', $hasGrantPrivilege);
+
+        return $hasGrantPrivilege;
+    }
+
+    public function isCreateUser(): bool
+    {
+        global $cfg;
+
+        if (SessionCache::has('is_createuser')) {
+            return SessionCache::get('is_createuser');
+        }
+
+        if (! $this->isConnected()) {
+            return false;
+        }
+
+        $hasCreatePrivilege = false;
+
+        if ($cfg['Server']['DisableIS']) {
+            $grants = $this->getCurrentUserGrants();
+
+            foreach ($grants as $grant) {
+                if (strpos($grant, 'ALL PRIVILEGES ON *.*') !== false
+                    || strpos($grant, 'CREATE USER') !== false
+                ) {
+                    $hasCreatePrivilege = true;
+                    break;
+                }
+            }
+
+            SessionCache::set('is_createuser', $hasCreatePrivilege);
+
+            return $hasCreatePrivilege;
+        }
+
+        [$user, $host] = $this->getCurrentUserAndHost();
+        $query = QueryGenerator::getInformationSchemaDataForCreateRequest($user, $host);
+        $result = $this->tryQuery($query, self::CONNECT_USER, self::QUERY_STORE);
+
+        if ($result) {
+            $hasCreatePrivilege = (bool) $this->numRows($result);
+        }
+
+        $this->freeResult($result);
+        SessionCache::set('is_createuser', $hasCreatePrivilege);
+
+        return $hasCreatePrivilege;
+    }
+
+    public function isConnected(): bool
+    {
+        return isset($this->links[self::CONNECT_USER]);
+    }
+
+    private function getCurrentUserGrants(): array
+    {
+        return $this->fetchResult(
+            'SHOW GRANTS FOR CURRENT_USER();',
+            null,
+            null,
+            self::CONNECT_USER,
+            self::QUERY_STORE
+        );
     }
 
     /**
@@ -2280,13 +2320,13 @@ class DatabaseInterface implements DbalInterface
      */
     public function isAmazonRds(): bool
     {
-        if (Util::cacheExists('is_amazon_rds')) {
-            return Util::cacheGet('is_amazon_rds');
+        if (SessionCache::has('is_amazon_rds')) {
+            return SessionCache::get('is_amazon_rds');
         }
         $sql = 'SELECT @@basedir';
         $result = $this->fetchValue($sql);
         $rds = (substr($result, 0, 10) === '/rdsdbbin/');
-        Util::cacheSet('is_amazon_rds', $rds);
+        SessionCache::set('is_amazon_rds', $rds);
 
         return $rds;
     }
