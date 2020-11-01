@@ -777,6 +777,13 @@ $cfg['AllowUserDropDatabase'] = false;
 $cfg['Confirm'] = true;
 
 /**
+ * sets SameSite attribute of the Set-Cookie HTTP response header
+ *
+ * @global boolean $cfg['CookieSameSite']
+ */
+ $cfg['CookieSameSite'] = 'Strict';
+
+/**
  * recall previous login in cookie authentication mode or not
  *
  * @global boolean $cfg['LoginCookieRecall']
@@ -2748,7 +2755,7 @@ $cfg['SaveDir'] = '';
 if (defined('TEMP_DIR')) {
     $cfg['TempDir'] = TEMP_DIR;
 } else {
-    $cfg['TempDir'] = ROOT_PATH . 'tmp/';
+    $cfg['TempDir'] = ROOT_PATH . 'tmp' . DIRECTORY_SEPARATOR;
 }
 
 
