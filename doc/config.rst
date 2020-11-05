@@ -1900,6 +1900,43 @@ Cookie authentication options
 
     .. versionadded:: 5.0.3
 
+.. config:option:: $cfg['CaptchaApi']
+
+    :type: string
+    :default: ``'https://www.google.com/recaptcha/api.js'``
+
+    .. versionadded:: 5.1.0
+
+    The URL for the reCaptcha v2 service's API, either Google's or a compatible one.
+
+.. config:option:: $cfg['CaptchaCsp']
+
+    :type: string
+    :default: ``'https://apis.google.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ssl.gstatic.com/'``
+
+    .. versionadded:: 5.1.0
+
+    The Content-Security-Policy snippet (URLs from which to allow embedded content)
+    for the reCaptcha v2 service, either Google's or a compatible one.
+
+.. config:option:: $cfg['CaptchaRequestParam']
+
+    :type: string
+    :default: ``'g-recaptcha'``
+
+    .. versionadded:: 5.1.0
+
+    The request parameter used for the reCaptcha v2 service.
+
+.. config:option:: $cfg['CaptchaResponseParam']
+
+    :type: string
+    :default: ``'g-recaptcha-response'``
+
+    .. versionadded:: 5.1.0
+
+    The response parameter used for the reCaptcha v2 service.
+
 .. config:option:: $cfg['CaptchaLoginPublicKey']
 
     :type: string
@@ -3669,3 +3706,21 @@ server certificates and tell phpMyAdmin to use them:
     :config:option:`$cfg['Servers'][$i]['ssl_ca']`,
     :config:option:`$cfg['Servers'][$i]['ssl_verify']`,
     <https://bugs.php.net/bug.php?id=72048>
+
+reCaptcha using hCaptcha
+++++++++++++++++++++++++
+
+.. code-block:: php
+
+    $cfg['CaptchaApi'] = 'https://www.hcaptcha.com/1/api.js';
+    $cfg['CaptchaCsp'] = 'https://hcaptcha.com https://*.hcaptcha.com';
+    $cfg['CaptchaRequestParam'] = 'h-captcha';
+    $cfg['CaptchaResponseParam'] = 'h-captcha-response';
+    $cfg['CaptchaSiteVerifyURL'] = 'https://hcaptcha.com/siteverify';
+    // This is the secret key from hCaptcha dashboard
+    $cfg['CaptchaLoginPrivateKey'] = '0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    // This is the site key from hCaptcha dashboard
+    $cfg['CaptchaLoginPublicKey'] = 'xxx-xxx-xxx-xxx-xxxx';
+
+.. seealso:: `hCaptcha website <https://www.hcaptcha.com/>`_
+.. seealso:: `hCaptcha Developer Guide <https://docs.hcaptcha.com/>`_

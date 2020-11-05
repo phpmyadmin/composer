@@ -626,6 +626,14 @@ div.container.modal_form {
   text-align: $left;
 }
 
+#login_form fieldset.tblFooters {
+  text-align: #{$right};
+}
+
+#login_form select#select_server {
+  width: 100%;
+}
+
 div#modalOverlay {
   position: fixed;
   top: 0;
@@ -3487,4 +3495,16 @@ body {
   margin-left: 20px;
   margin-top: 4px;
   height: 0.75rem;
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@include media-breakpoint-up(xl) {
+  div.tools {
+    text-align: #{$left};
+  }
+
+  fieldset.tblFooters,
+  .tblFooters {
+    text-align: #{$left};
+  }
 }

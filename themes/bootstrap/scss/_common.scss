@@ -821,6 +821,10 @@ body#loginform {
   text-align: $left;
 }
 
+#login_form fieldset.tblFooters {
+  text-align: #{$right};
+}
+
 div.container.modal_form {
   margin: 0 auto;
   width: 30em;
@@ -3800,4 +3804,16 @@ body .ui-dialog {
 
 .ui-timepicker-div dl .ui_tpicker_timezone select {
   margin-left: 50px;
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@include media-breakpoint-up(xl) {
+  div.tools {
+    text-align: #{$left};
+  }
+
+  fieldset.tblFooters,
+  .tblFooters {
+    text-align: #{$left};
+  }
 }
