@@ -29,15 +29,6 @@ your site specific code to be included on start and end of each page.
     Some distributions (eg. Debian or Ubuntu) store :file:`config.inc.php` in
     ``/etc/phpmyadmin`` instead of within phpMyAdmin sources.
 
-.. warning::
-
-    :term:`Mac` users should note that if you are on a version before
-    :term:`macOS`, PHP does not seem to
-    like :term:`Mac` end of lines character (``\r``). So
-    ensure you choose the option that allows to use the \*nix end of line
-    character (``\n``) in your text editor before saving a script you have
-    modified.
-
 Basic settings
 --------------
 
@@ -1615,6 +1606,27 @@ Generic settings
         In some setups (like separate SSL proxy or load balancer) you might
         have to set :config:option:`$cfg['PmaAbsoluteUri']` for correct
         redirection.
+
+.. config:option:: $cfg['MysqlSslWarningSafeHosts']
+
+    :type: array
+    :default: ``['127.0.0.1', 'localhost']``
+
+    This search is case-sensitive and will match the exact string only.
+    If your setup does not use SSL but is safe because you are using a
+    local connection or private network, you can add your hostname or :term:`IP` to the list.
+    You can also remove the default entries to only include yours.
+
+    This check uses the value of :config:option:`$cfg['Servers'][$i]['host']`.
+
+    .. versionadded:: 5.1.0
+
+    Example configuration
+
+    .. code-block:: php
+
+        $cfg['MysqlSslWarningSafeHosts'] = ['127.0.0.1', 'localhost', 'mariadb.local'];
+
 
 .. config:option:: $cfg['ExecTimeLimit']
 
