@@ -37,6 +37,8 @@ jobs:
     - php: nightly
     - os: osx
     - name: "PHPUnit tests in random order"
+    # https://github.com/phpmyadmin/phpmyadmin/issues/16479
+    - name: "Run selenium tests on Google Chrome"
 
   include:
     - stage: "Lint and analyse code"
@@ -177,7 +179,7 @@ jobs:
       after_script: skip
       after_success: skip
       install: composer global require "code-lts/doctum:^5.0"
-      script: $HOME/.composer/vendor/bin/doctum.php --no-interaction update ./test/doctum-config.php
+      script: $(composer global config bin-dir --absolute --quiet)/doctum.php --no-interaction update ./test/doctum-config.php
 
     - stage: "Other tests"
       name: "Build release"

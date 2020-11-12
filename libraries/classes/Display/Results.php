@@ -39,7 +39,6 @@ use function count;
 use function explode;
 use function file_exists;
 use function floor;
-use function function_exists;
 use function htmlspecialchars;
 use function implode;
 use function intval;
@@ -53,6 +52,7 @@ use function mb_strtolower;
 use function mb_strtoupper;
 use function mb_substr;
 use function md5;
+use function method_exists;
 use function mt_rand;
 use function pack;
 use function preg_match;
@@ -3780,13 +3780,14 @@ class Results
         $function_nowrap = 'applyTransformationNoWrap';
 
         $bool_nowrap = ($default_function != $transformation_plugin)
-            && function_exists((string) $transformation_plugin->$function_nowrap())
+            && method_exists($transformation_plugin, $function_nowrap)
             ? $transformation_plugin->$function_nowrap($transform_options)
             : false;
 
-        // do not wrap if date field type
+        // do not wrap if date field type or if no-wrapping enabled by transform functions
+        // otherwise, preserve whitespaces and wrap
         $nowrap = preg_match('@DATE|TIME@i', $meta->type)
-            || $bool_nowrap ? ' nowrap' : '';
+            || $bool_nowrap ? 'nowrap' : 'pre_wrap';
 
         $where_comparison = ' = \''
             . $dbi->escapeString($column)
