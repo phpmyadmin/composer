@@ -182,6 +182,7 @@ return static function (RouteCollector $routes): void {
     $routes->addRoute(['GET', 'POST'], '/error-report', [ErrorReportController::class, 'index']);
     $routes->addGroup('/export', static function (RouteCollector $routes): void {
         $routes->addRoute(['GET', 'POST'], '', [ExportController::class, 'index']);
+        $routes->get('/check-time-out', [ExportController::class, 'checkTimeOut']);
         $routes->addGroup('/template', static function (RouteCollector $routes): void {
             $routes->post('/create', [ExportTemplateController::class, 'create']);
             $routes->post('/delete', [ExportTemplateController::class, 'delete']);
@@ -282,6 +283,7 @@ return static function (RouteCollector $routes): void {
         $routes->addRoute(['GET', 'POST'], '/gis-visualization', [GisVisualizationController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/import', [TableImportController::class, 'index']);
         $routes->addRoute(['GET', 'POST'], '/indexes', [IndexesController::class, 'index']);
+        $routes->addRoute(['GET', 'POST'], '/indexes/rename', [IndexesController::class, 'indexRename']);
         $routes->addGroup('/maintenance', static function (RouteCollector $routes): void {
             $routes->post('/analyze', [MaintenanceController::class, 'analyze']);
             $routes->post('/check', [MaintenanceController::class, 'check']);
