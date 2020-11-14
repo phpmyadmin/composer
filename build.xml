@@ -89,6 +89,13 @@
   </exec>
  </target>
 
+ <target name="phpstan" description="Run phpstan static code analysis">
+  <exec executable="${basedir}/vendor/bin/phpstan" failonerror="true">
+      <redirector error="/dev/stdout" output="${basedir}/build/logs/phpstan.xml"/>
+      <arg line="analyse --error-format=checkstyle"/>
+  </exec>
+ </target>
+
  <target name="phpdoc" description="Generate API documentation using Doctum">
  <!-- ant phpdoc -Denv.DOCTUM_BIN_PATH="/usr/bin/doctum" -->
  <property name="env.DOCTUM_BIN_PATH" value="/bin/doctum"/>
@@ -106,24 +113,11 @@
   </exec>
  </target>
 
-<target name="jshint" description="Javascript checks">
-  <apply executable="jshint" output="${basedir}/build/logs/jshint-jslint.xml"  parallel="true">
-   <arg line="--config ./.jshintrc --reporter=jslint" />
+<target name="eslint" description="Javascript checks">
+  <apply executable="${basedir}/node_modules/.bin/eslint" output="${basedir}/build/logs/eslint.xml" parallel="true">
+   <arg line="--format=checkstyle js/src" />
    <fileset dir="${basedir}">
-    <include name="js/designer/*.js" />
-    <include name="js/*.js" />
-    <include name="setup/*.js" />
-   </fileset>
-  </apply>
- </target>
-
- <target name="jshint-checkstyle" description="Javascript checks">
-  <apply executable="jshint" output="${basedir}/build/logs/jshint-checkstyle.xml"  parallel="true">
-   <arg line="--config ./.jshintrc --reporter=checkstyle" />
-   <fileset dir="${basedir}">
-    <include name="js/designer/*.js" />
-    <include name="js/*.js" />
-    <include name="setup/*.js" />
+    <include name="js/src/**/*.js" />
    </fileset>
   </apply>
  </target>
@@ -140,7 +134,6 @@
 
    <fileset dir="${basedir}">
     <include name="libraries/**/*.php" />
-    <include name="templates/**/*.phtml" />
     <include name="setup/**/*.php" />
     <include name="test/**/*.php" />
     <include name="*.php" />
@@ -149,5 +142,5 @@
   </apply>
  </target>
 
- <target name="build" depends="clean,phpunit,pdepend,phpmd,phpcpd,phpcs,phpdoc,phploc,phpcb,lint,jshint,locales"/>
+ <target name="build" depends="clean,phpunit,pdepend,phpmd,phpcpd,phpcs,phpdoc,phploc,phpcb,lint,eslint,locales"/>
 </project>
