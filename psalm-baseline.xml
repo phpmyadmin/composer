@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
+<files psalm-version="4.2.1@ea9cb72143b77e7520c52fa37290bd8d8bc88fd9">
   <file src="libraries/classes/Charsets.php">
     <TypeDoesNotContainType occurrences="1">
       <code>$pieces === false</code>
     </TypeDoesNotContainType>
   </file>
   <file src="libraries/classes/Charsets/Collation.php">
-    <ImpureByReferenceAssignment occurrences="64">
+    <ImpureByReferenceAssignment occurrences="75">
+      <code>$found</code>
       <code>$found</code>
       <code>$level</code>
       <code>$level</code>
+      <code>$level</code>
+      <code>$level</code>
+      <code>$level</code>
+      <code>$level</code>
+      <code>$level</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$name</code>
       <code>$name</code>
       <code>$name</code>
       <code>$name</code>
@@ -71,6 +81,7 @@
       <code>$unicode</code>
       <code>$unknown</code>
       <code>$variant</code>
+      <code>$variant</code>
     </ImpureByReferenceAssignment>
     <PossiblyNullArgument occurrences="1">
       <code>$name</code>
@@ -99,7 +110,9 @@
       <code>$default_value</code>
       <code>$request</code>
     </PossiblyInvalidArgument>
-    <PossiblyNullArgument occurrences="1">
+    <PossiblyNullArgument occurrences="3">
+      <code>$oldErrorReporting</code>
+      <code>$oldErrorReporting</code>
       <code>$this-&gt;get('PMA_VERSION')</code>
     </PossiblyNullArgument>
   </file>
@@ -513,9 +526,8 @@
       <code>$tot_size</code>
       <code>$tot_unit</code>
     </PossiblyNullArrayAccess>
-    <TypeDoesNotContainType occurrences="2">
+    <TypeDoesNotContainType occurrences="1">
       <code>! is_array($row)</code>
-      <code>is_array($row)</code>
     </TypeDoesNotContainType>
   </file>
   <file src="libraries/classes/Controllers/Table/ZoomSearchController.php">
@@ -524,14 +536,6 @@
       <code>$dataLabel</code>
       <code>$key</code>
     </PossiblyFalseArgument>
-    <PossiblyNullArrayAccess occurrences="3">
-      <code>$criteria_column_names[$i]</code>
-      <code>$criteria_column_names[$i]</code>
-      <code>$criteria_column_names[$i]</code>
-    </PossiblyNullArrayAccess>
-    <PossiblyNullArrayOffset occurrences="1">
-      <code>$keys</code>
-    </PossiblyNullArrayOffset>
   </file>
   <file src="libraries/classes/Core.php">
     <InvalidOperand occurrences="1">
@@ -602,8 +606,7 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="libraries/classes/Database/Routines.php">
-    <PossiblyInvalidArgument occurrences="3">
-      <code>$affected</code>
+    <PossiblyInvalidArgument occurrences="2">
       <code>$routine['item_returntype']</code>
       <code>$routine['item_type_toggle']</code>
     </PossiblyInvalidArgument>
@@ -718,13 +721,15 @@
     <ImplicitToStringCast occurrences="1">
       <code>$message</code>
     </ImplicitToStringCast>
-    <InvalidArgument occurrences="14">
+    <InvalidArgument occurrences="16">
       <code>$added[$orgFullTableName]</code>
       <code>$default_function</code>
       <code>$default_function</code>
       <code>$default_function</code>
       <code>$default_function</code>
       <code>$default_function</code>
+      <code>$transform_options</code>
+      <code>$transform_options</code>
       <code>$transform_options</code>
       <code>$transform_options</code>
       <code>$transform_options</code>
@@ -846,6 +851,9 @@
     </UndefinedConstant>
   </file>
   <file src="libraries/classes/ErrorHandler.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$errorNumber</code>
+    </ArgumentTypeCoercion>
     <InvalidArgument occurrences="1">
       <code>[$this, 'handleError']</code>
     </InvalidArgument>
@@ -1057,9 +1065,8 @@
     <PossiblyNullArrayAccess occurrences="1">
       <code>$additional_sql[$i]</code>
     </PossiblyNullArrayAccess>
-    <TypeDoesNotContainType occurrences="2">
+    <TypeDoesNotContainType occurrences="1">
       <code>! is_array($table)</code>
-      <code>is_array($table)</code>
     </TypeDoesNotContainType>
   </file>
   <file src="libraries/classes/Index.php">
@@ -1699,6 +1706,16 @@
       <code>$this-&gt;withDoc</code>
       <code>$this-&gt;withDoc</code>
     </PossiblyNullArgument>
+    <PossiblyNullArrayAccess occurrences="3">
+      <code>$this-&gt;diagram-&gt;customLinks['RT']</code>
+      <code>$this-&gt;diagram-&gt;customLinks['RT']</code>
+      <code>$this-&gt;diagram-&gt;customLinks['doc']</code>
+    </PossiblyNullArrayAccess>
+    <PossiblyNullArrayAssignment occurrences="3">
+      <code>$this-&gt;diagram-&gt;customLinks['RT']</code>
+      <code>$this-&gt;diagram-&gt;customLinks['RT']</code>
+      <code>$this-&gt;diagram-&gt;customLinks['doc']</code>
+    </PossiblyNullArrayAssignment>
     <PossiblyNullPropertyAssignment occurrences="5">
       <code>$this-&gt;diagram</code>
       <code>$this-&gt;diagram</code>
@@ -1949,6 +1966,9 @@
       <code>setXScale</code>
       <code>setXyScale</code>
     </PossiblyUndefinedMethod>
+    <ReferenceConstraintViolation occurrences="1">
+      <code>$sameWideWidth</code>
+    </ReferenceConstraintViolation>
     <UndefinedPropertyAssignment occurrences="2">
       <code>$this-&gt;diagram-&gt;customLinks</code>
       <code>$this-&gt;diagram-&gt;customLinks</code>
@@ -2331,9 +2351,7 @@
       <code>null</code>
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
-    <PossiblyNullReference occurrences="7">
-      <code>$existrel_foreign[$master_field_md5]</code>
-      <code>$existrel_foreign[$master_field_md5]</code>
+    <PossiblyNullReference occurrences="5">
       <code>$existrel_foreign[$master_field_md5]</code>
       <code>$existrel_foreign[$master_field_md5]</code>
       <code>$existrel_foreign[$master_field_md5]</code>
@@ -2466,9 +2484,6 @@
     <InvalidReturnType occurrences="1">
       <code>int</code>
     </InvalidReturnType>
-    <InvalidScalarArgument occurrences="1">
-      <code>$value</code>
-    </InvalidScalarArgument>
     <NullableReturnStatement occurrences="1">
       <code>$wktval</code>
     </NullableReturnStatement>
@@ -2492,11 +2507,6 @@
       <code>$table['Name']</code>
       <code>$table['disp_name']</code>
     </PossiblyInvalidArrayOffset>
-    <PossiblyInvalidOperand occurrences="3">
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-    </PossiblyInvalidOperand>
     <PossiblyNullArgument occurrences="2">
       <code>$max_size</code>
       <code>$max_unit</code>
