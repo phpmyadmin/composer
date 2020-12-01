@@ -12,10 +12,10 @@
         {%- else -%}
             "table"
         {%- endif %}>
-    <div class="responsivetable">
-    <table id="tablestructure" class="pma-table data topmargin">
+    <div class="table-responsive-md">
+    <table id="tablestructure" class="table table-light table-striped table-hover">
         {# Table header #}
-        <thead>
+        <thead class="thead-light">
             <tr>
                 <th class="print_ignore"></th>
                 <th>#</th>
@@ -406,9 +406,9 @@
       {% if indexes is not empty %}
         {{ indexes_duplicates|raw }}
 
-        <div class="responsivetable jsresponsive">
-          <table class="pma-table" id="table_index">
-            <thead>
+        <div class="table-responsive jsresponsive">
+          <table class="table table-light table-striped table-hover table-sm" id="table_index">
+            <thead class="thead-light">
               <tr>
                 <th colspan="3" class="print_ignore">{% trans 'Action' %}</th>
                 <th>{% trans 'Keyname' %}</th>
@@ -528,18 +528,6 @@
             {% set first_sub_partition = sub_partitions[0] %}
         {% endif %}
 
-        {% set action_icons = {
-            'ANALYZE': get_icon('b_search', 'Analyze'|trans),
-            'CHECK': get_icon('eye', 'Check'|trans),
-            'OPTIMIZE': get_icon('normalize', 'Optimize'|trans),
-            'REBUILD': get_icon('s_tbl', 'Rebuild'|trans),
-            'REPAIR': get_icon('b_tblops', 'Repair'|trans),
-            'TRUNCATE': get_icon('b_empty', 'Truncate'|trans),
-        } %}
-        {% if range_or_list %}
-            {% set action_icons = action_icons|merge({'DROP': get_icon('b_drop', 'Drop'|trans)}) %}
-        {% endif %}
-
         <div id="partitions-2"{% if default_sliders_state != 'disabled' -%}
             {{- default_sliders_state == 'closed' ? ' style="display: none; overflow:auto;"' }} class="pma_auto_slider" title="{% trans 'Partitions' %}"
         {%- endif %}>
@@ -554,7 +542,6 @@
             'has_sub_partitions': has_sub_partitions,
             'sub_partition_method': has_sub_partitions ? first_sub_partition.getMethod(),
             'sub_partition_expression': has_sub_partitions ? first_sub_partition.getExpression(),
-            'action_icons': action_icons,
             'range_or_list': range_or_list
         } only %}
     {% else %}

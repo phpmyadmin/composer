@@ -805,19 +805,6 @@ class StructureController extends AbstractController
 
     public function partitioning(): void
     {
-        global $containerBuilder, $reload;
-
-        if (isset($_POST['partition_maintenance'])) {
-            /** @var SqlController $controller */
-            $controller = $containerBuilder->get(SqlController::class);
-            $controller->index();
-
-            $reload = true;
-            $this->index();
-
-            return;
-        }
-
         if (isset($_POST['save_partitioning'])) {
             $this->dbi->selectDb($this->db);
             $this->updatePartitioning();
@@ -991,9 +978,9 @@ class StructureController extends AbstractController
                     $partition['subpartitions'][$j] = [
                         'name' => $sp->name,
                         'engine' => $sp->options->has('ENGINE', true),
-                        'comment' => trim($sp->options->has('COMMENT', true), "'"),
-                        'data_directory' => trim($sp->options->has('DATA DIRECTORY', true), "'"),
-                        'index_directory' => trim($sp->options->has('INDEX_DIRECTORY', true), "'"),
+                        'comment' => trim((string) $sp->options->has('COMMENT', true), "'"),
+                        'data_directory' => trim((string) $sp->options->has('DATA DIRECTORY', true), "'"),
+                        'index_directory' => trim((string) $sp->options->has('INDEX_DIRECTORY', true), "'"),
                         'max_rows' => $sp->options->has('MAX_ROWS', true),
                         'min_rows' => $sp->options->has('MIN_ROWS', true),
                         'tablespace' => $sp->options->has('TABLESPACE', true),
