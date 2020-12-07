@@ -1106,9 +1106,6 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="libraries/classes/Git.php">
-    <ParadoxicalCondition occurrences="1">
-      <code>null</code>
-    </ParadoxicalCondition>
     <PossiblyNullArgument occurrences="1">
       <code>$gitFolder</code>
     </PossiblyNullArgument>
@@ -1254,10 +1251,9 @@
     <PossiblyFalseReference occurrences="1">
       <code>getPresence</code>
     </PossiblyFalseReference>
-    <PossiblyNullArgument occurrences="3">
+    <PossiblyNullArgument occurrences="2">
       <code>$container-&gt;realName</code>
       <code>$table</code>
-      <code>$title</code>
     </PossiblyNullArgument>
     <PossiblyNullPropertyFetch occurrences="2">
       <code>$container-&gt;parent</code>
@@ -2582,12 +2578,6 @@
     </PossiblyNullArrayOffset>
   </file>
   <file src="libraries/classes/ThemeManager.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>$cookie_theme</code>
-    </InvalidScalarArgument>
-    <PossiblyNullArgument occurrences="1">
-      <code>$theme</code>
-    </PossiblyNullArgument>
     <PossiblyNullArrayOffset occurrences="1">
       <code>$this-&gt;themes</code>
     </PossiblyNullArrayOffset>
@@ -2595,8 +2585,9 @@
       <code>$theme</code>
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
-    <RedundantCastGivenDocblockType occurrences="1">
+    <RedundantCastGivenDocblockType occurrences="2">
       <code>(bool) $per_server</code>
+      <code>(string) $this-&gt;theme-&gt;id</code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="libraries/classes/Tracker.php">

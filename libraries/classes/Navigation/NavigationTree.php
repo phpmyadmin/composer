@@ -190,7 +190,7 @@ class NavigationTree
         if (isset($_REQUEST['searchClause2'])) {
             $this->searchClause2 = $_REQUEST['searchClause2'];
         }
-        // Initialise the tree by creating a root node
+        // Initialize the tree by creating a root node
         $node = NodeFactory::getInstance('NodeDatabaseContainer', 'root');
         $this->tree = $node;
         if (! $GLOBALS['cfg']['NavigationTreeEnableGrouping']
@@ -1306,7 +1306,7 @@ class NavigationTree
 
         $children = $this->tree->children;
         $selected = $GLOBALS['db'];
-        $options = '';
+        $options = [];
         foreach ($children as $node) {
             if ($node->isNew) {
                 continue;
@@ -1317,17 +1317,16 @@ class NavigationTree
             }
 
             $title = isset($node->links['title']) ? '' : $node->links['title'];
-            $options .= '<option value="'
-                . htmlspecialchars($node->realName) . '"'
-                . ' title="' . htmlspecialchars($title) . '"'
-                . ' data-apath="' . $paths['aPath'] . '"'
-                . ' data-vpath="' . $paths['vPath'] . '"'
-                . ' data-pos="' . $this->pos . '"';
-            if ($node->realName == $selected) {
-                $options .= ' selected';
-            }
-            $options .= '>' . htmlspecialchars($node->realName);
-            $options .= '</option>';
+            $options[] = [
+                'title' => $title,
+                'name' => $node->realName,
+                'data' => [
+                    'apath' => $paths['aPath'],
+                    'vpath' => $paths['vPath'],
+                    'pos' => $this->pos,
+                ],
+                'isSelected' => $node->realName === $selected,
+            ];
         }
 
         $children = $this->tree->children;

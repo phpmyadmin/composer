@@ -133,7 +133,7 @@ class ThemeManager
      *
      * @access public
      */
-    public function setThemesPath($path)
+    public function setThemesPath($path): bool
     {
         if (! $this->checkThemeFolder($path)) {
             return false;
@@ -149,25 +149,23 @@ class ThemeManager
      *
      * @param bool $per_server Whether to enable per server flag
      *
-     * @return void
-     *
      * @access public
      */
-    public function setThemePerServer($per_server)
+    public function setThemePerServer($per_server): void
     {
-        $this->perServer  = (bool) $per_server;
+        $this->perServer = (bool) $per_server;
     }
 
     /**
      * Sets active theme
      *
-     * @param string $theme theme name
+     * @param string|null $theme theme name
      *
      * @return bool true on success
      *
      * @access public
      */
-    public function setActiveTheme($theme = null)
+    public function setActiveTheme(?string $theme): bool
     {
         if (! $this->checkTheme($theme)) {
             trigger_error(
@@ -210,7 +208,7 @@ class ThemeManager
     /**
      * returns name of theme stored in the cookie
      *
-     * @return string|bool theme name from cookie or false
+     * @return string|false theme name from cookie or false
      *
      * @access public
      */
@@ -229,20 +227,21 @@ class ThemeManager
     /**
      * save theme in cookie
      *
-     * @return bool true
+     * @return true
      *
      * @access public
      */
-    public function setThemeCookie()
+    public function setThemeCookie(): bool
     {
+        $themeId = $this->theme !== null ? (string) $this->theme->id : '';
         $GLOBALS['PMA_Config']->setCookie(
             $this->getThemeCookieName(),
-            $this->theme->id,
+            $themeId,
             $this->themeDefault
         );
         // force a change of a dummy session variable to avoid problems
         // with the caching of phpmyadmin.css.php
-        $GLOBALS['PMA_Config']->set('theme-update', $this->theme->id);
+        $GLOBALS['PMA_Config']->set('theme-update', $themeId);
 
         return true;
     }
@@ -252,11 +251,9 @@ class ThemeManager
      *
      * @param string $folder Folder name to test
      *
-     * @return bool
-     *
      * @access private
      */
-    private function checkThemeFolder($folder)
+    private function checkThemeFolder($folder): bool
     {
         if (! is_dir($folder)) {
             trigger_error(
@@ -276,11 +273,9 @@ class ThemeManager
     /**
      * read all themes
      *
-     * @return bool true
-     *
      * @access public
      */
-    public function loadThemes()
+    public function loadThemes(): bool
     {
         $this->themes = [];
         $handleThemes = opendir($this->themesPath);
@@ -328,35 +323,27 @@ class ThemeManager
     /**
      * checks if given theme name is a known theme
      *
-     * @param string $theme name fo theme to check for
-     *
-     * @return bool
+     * @param string|null $theme name fo theme to check for
      *
      * @access public
      */
-    public function checkTheme($theme)
+    public function checkTheme(?string $theme): bool
     {
-        return array_key_exists($theme, $this->themes);
+        return array_key_exists($theme ?? '', $this->themes);
     }
 
     /**
-     * returns HTML selectbox, with or without form enclosed
-     *
-     * @param bool $form whether enclosed by from tags or not
-     *
-     * @return string
+     * returns HTML selectbox
      *
      * @access public
      */
-    public function getHtmlSelectBox($form = true)
+    public function getHtmlSelectBox(): string
     {
         $select_box = '';
 
-        if ($form) {
-            $select_box .= '<form name="setTheme" method="post"';
-            $select_box .= ' action="index.php?route=/set-theme" class="disableAjax">';
-            $select_box .= Url::getHiddenInputs();
-        }
+        $select_box .= '<form name="setTheme" method="post"';
+        $select_box .= ' action="index.php?route=/set-theme" class="disableAjax">';
+        $select_box .= Url::getHiddenInputs();
 
         $theme_preview_href = '<a href="'
             . Url::getFromRoute('/themes') . '" target="themes" class="themeselect">';
@@ -372,11 +359,8 @@ class ThemeManager
             $select_box .=  '>' . htmlspecialchars($each_theme->getName())
                 . '</option>';
         }
-        $select_box .=  '</select>';
-
-        if ($form) {
-            $select_box .=  '</form>';
-        }
+        $select_box .= '</select>';
+        $select_box .= '</form>';
 
         return $select_box;
     }
@@ -384,11 +368,9 @@ class ThemeManager
     /**
      * Renders the previews for all themes
      *
-     * @return string
-     *
      * @access public
      */
-    public function getPrintPreviews()
+    public function getPrintPreviews(): string
     {
         $retval = '';
         foreach ($this->themes as $each_theme) {
