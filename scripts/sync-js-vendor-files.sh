@@ -13,15 +13,11 @@ cd ${ROOT_DIR}
 
 # Remove each '-not -path' when a new package can be used from npm
 echo 'Delete vendor files we can replace from source dists'
-# jquery.sortableTable.js is an internal lib
 find ./js/vendor/ \
     -not -path './js/vendor/openlayers/*' \
     -not -path './js/vendor/sprintf.js' \
     -not -path './js/vendor/jqplot/jquery.jqplot.js' \
     -not -path './js/vendor/jqplot/plugins/jqplot.*.js' \
-    -not -path './js/vendor/jquery/jquery-ui.min.js' \
-    -not -path './js/vendor/jquery/jquery.sortableTable.js' \
-    -not -path './js/vendor/jquery/jquery.svg.js' \
     -type f -delete -print
 
 echo 'Updating codemirror'
@@ -45,8 +41,8 @@ echo 'Updating jquery-migrate'
 cp ./node_modules/jquery-migrate/dist/jquery-migrate.js ./js/vendor/jquery/jquery-migrate.js
 echo 'Updating jquery-mousewheel'
 cp ./node_modules/jquery-mousewheel/jquery.mousewheel.js ./js/vendor/jquery/jquery.mousewheel.js
-# echo 'Updating jquery-ui'
-# Impossible to do, they do not distribute dist files in the package...
+echo 'Updating jquery-ui'
+cp ./node_modules/jquery-ui-dist/jquery-ui.min.js ./js/vendor/jquery/jquery-ui.min.js
 echo 'Updating jquery.event.drag'
 cp ./node_modules/jquery.event.drag/jquery.event.drag.js ./js/vendor/jquery/jquery.event.drag-2.2.js
 # https://github.com/devongovett/jquery.event.drag/commit/2db3b7865f31eee6a8145532554f8b02210180bf#diff-ab8497cedd384270de86ee2e9f06530e
@@ -88,8 +84,8 @@ echo 'Updating stickyfill'
 cp ./node_modules/stickyfilljs/dist/stickyfill.min.js js/vendor/stickyfill.min.js
 echo 'Updating blueimp-md5'
 cp ./node_modules/blueimp-md5/js/md5.js ./js/vendor/jquery/jquery.md5.js
-#echo 'Updating jquery.svg.js'
-#see: https://github.com/kbwood/svg/blob/master/jquery.svg.js
+echo 'Updating jquery.svg.js'
+cp ./node_modules/kbwood-jquery-svg/jquery.svg.js ./js/vendor/jquery/jquery.svg.js
 echo 'Updating jquery-hashchange'
 cp ./node_modules/jquery-hashchange/jquery.ba-hashchange.js ./js/vendor/jquery/jquery.ba-hashchange-2.0.js
 echo 'Updating jquery-uitablefilter'
