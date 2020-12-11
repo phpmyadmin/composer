@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # vim: expandtab sw=4 ts=4 sts=4:
 #
@@ -15,8 +15,6 @@ cd ${ROOT_DIR}
 echo 'Delete vendor files we can replace from source dists'
 find ./js/vendor/ \
     -not -path './js/vendor/openlayers/*' \
-    -not -path './js/vendor/sprintf.js' \
-    -not -path './js/vendor/jqplot/jquery.jqplot.js' \
     -type f -delete -print
 
 echo 'Updating codemirror'
@@ -97,8 +95,24 @@ echo 'Updating jquery-debounce'
 cp ./node_modules/jquery-debounce-throttle/index.js ./js/vendor/jquery/jquery.debounce-1.0.6.js
 echo 'Updating jquery-Timepicker-Addon'
 cp ./node_modules/jquery-ui-timepicker-addon/dist/jquery-ui-timepicker-addon.js ./js/vendor/jquery/jquery-ui-timepicker-addon.js
+echo 'Updating sprintf'
+cp ./node_modules/locutus.sprintf/src/php/strings/sprintf.browser.js ./js/vendor/sprintf.js
 echo 'Update jqplot'
-#see: https://github.com/jqPlot/jqPlot/blob/master/src/jquery.jqplot.js
+
+echo 'Build jquery.jqplot.js'
+
+JQPLOT_SOURCE_FILES=(
+'jqplot.core.js' 'jqplot.axisLabelRenderer.js' 'jqplot.axisTickRenderer.js' 'jqplot.canvasGridRenderer.js'
+'jqplot.divTitleRenderer.js' 'jqplot.linePattern.js' 'jqplot.lineRenderer.js' 'jqplot.linearAxisRenderer.js'
+'jqplot.linearTickGenerator.js' 'jqplot.markerRenderer.js' 'jqplot.shadowRenderer.js' 'jqplot.shapeRenderer.js'
+'jqplot.tableLegendRenderer.js' 'jqplot.themeEngine.js' 'jqplot.toImage.js' 'jsdate.js' 'jqplot.sprintf.js'
+'jqplot.effects.core.js' 'jqplot.effects.blind.js'
+)
+for jqPlotFile in ${JQPLOT_SOURCE_FILES[@]}; do
+    cat "./node_modules/updated-jqplot/build/$jqPlotFile" >> ./js/vendor/jqplot/jquery.jqplot.js
+done
+echo 'Successfully built jquery.jqplot.js'
+
 cp ./node_modules/updated-jqplot/build/plugins/jqplot.pieRenderer.js ./js/vendor/jqplot/plugins/jqplot.pieRenderer.js
 cp ./node_modules/updated-jqplot/build/plugins/jqplot.barRenderer.js ./js/vendor/jqplot/plugins/jqplot.barRenderer.js
 cp ./node_modules/updated-jqplot/build/plugins/jqplot.pointLabels.js ./js/vendor/jqplot/plugins/jqplot.pointLabels.js
@@ -108,8 +122,8 @@ cp ./node_modules/updated-jqplot/build/plugins/jqplot.categoryAxisRenderer.js ./
 cp ./node_modules/updated-jqplot/build/plugins/jqplot.canvasTextRenderer.js ./js/vendor/jqplot/plugins/jqplot.canvasTextRenderer.js
 cp ./node_modules/updated-jqplot/build/plugins/jqplot.canvasAxisLabelRenderer.js ./js/vendor/jqplot/plugins/jqplot.canvasAxisLabelRenderer.js
 
-cp ./node_modules/jqplot/jqplot.cursor.js ./js/vendor/jqplot/plugins/jqplot.cursor.js
-cp ./node_modules/jqplot/jqplot.highlighter.js ./js/vendor/jqplot/plugins/jqplot.highlighter.js
+cp ./node_modules/updated-jqplot/build/plugins/jqplot.cursor.js ./js/vendor/jqplot/plugins/jqplot.cursor.js
+cp ./node_modules/updated-jqplot/build/plugins/jqplot.highlighter.js ./js/vendor/jqplot/plugins/jqplot.highlighter.js
 
 # There's no available bundle file distribution for openlayers. See: https://github.com/phpmyadmin/phpmyadmin/pull/16303#issuecomment-679205088
 
