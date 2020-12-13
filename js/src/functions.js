@@ -3332,8 +3332,8 @@ AJAX.registerOnload('functions.js', function () {
  */
 Functions.hideShowConnection = function ($engineSelector) {
     var $connection = $('.create_table_form input[name=connection]');
-    var index = $connection.parent('td').index() + 1;
-    var $labelTh = $connection.parents('tr').prev('tr').children(document.querySelectorAll('th:nth-child(' + index + ')'));
+    var index = $connection.parent('td').index();
+    var $labelTh = $connection.parents('tr').prev('tr').children('th').eq(index);
     if ($engineSelector.val() !== 'FEDERATED') {
         $connection
             .prop('disabled', true)
@@ -4049,7 +4049,7 @@ Functions.toggleButton = function ($obj) {
     var w = parseInt(($('img', $obj).height() / 16) * 22, 10);
     // Resize the central part of the switch on the top
     // layer to match the background
-    $(document.querySelectorAll('table td:nth-child(2) > div'), $obj).width(w);
+    $($obj).find('table td').eq(1).children('div').width(w);
     /**
      *  var  imgw    Width of the background image
      *  var  tblw    Width of the foreground layer
@@ -4066,7 +4066,7 @@ Functions.toggleButton = function ($obj) {
      *  var  btnw    Outer width of the central part of the switch
      */
     var offw = $('td.toggleOff', $obj).outerWidth();
-    var btnw = $(document.querySelectorAll('table td:nth-child(2)'), $obj).outerWidth();
+    var btnw = $($obj).find('table td').eq(1).outerWidth();
     // Resize the main div so that exactly one side of
     // the switch plus the central part fit into it.
     $obj.width(offw + btnw + 2);
