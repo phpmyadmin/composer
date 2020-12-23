@@ -138,16 +138,16 @@ class Relation
         $retval = '<br>';
 
         $messages = [];
-        $messages['error'] = '<span class="caution"><strong>'
+        $messages['error'] = '<span class="text-danger"><strong>'
             . __('not OK')
             . '</strong></span>';
 
-        $messages['ok'] = '<span class="success"><strong>'
+        $messages['ok'] = '<span class="text-success"><strong>'
             . _pgettext('Correctly working', 'OK')
             . '</strong></span>';
 
-        $messages['enabled']  = '<span class="success">' . __('Enabled') . '</span>';
-        $messages['disabled'] = '<span class="caution">' . __('Disabled') . '</span>';
+        $messages['enabled']  = '<span class="text-success">' . __('Enabled') . '</span>';
+        $messages['disabled'] = '<span class="text-danger">' . __('Disabled') . '</span>';
 
         if (strlen((string) $cfgRelation['db']) == 0) {
             $retval .= __('Configuration of pmadb…') . ' '
@@ -240,7 +240,7 @@ class Relation
                 $messages
             );
             if ($cfgRelation['commwork'] && ! $cfgRelation['mimework']) {
-                $retval .= '<tr><td colspan=2 class="left error">';
+                $retval .= '<tr><td colspan=2 class="text-start error">';
                 $retval .=  __(
                     'Please see the documentation on how to'
                     . ' update your column_info table.'
@@ -426,7 +426,7 @@ class Relation
         array $messages,
         $skip_line = true
     ) {
-        $retval = '    <tr><td colspan=2 class="right">' . $feature_name . ': ';
+        $retval = '    <tr><td colspan=2 class="text-end">' . $feature_name . ': ';
         if (isset($GLOBALS['cfgRelation'][$relation_parameter])
             && $GLOBALS['cfgRelation'][$relation_parameter]
         ) {
@@ -458,9 +458,9 @@ class Relation
         array $messages,
         $docAnchor
     ) {
-        $retval = '<tr><th class="left">';
+        $retval = '<tr><th class="text-start">';
         $retval .= '$cfg[\'Servers\'][$i][\'' . $parameter . '\']  ... ';
-        $retval .= '</th><td class="right">';
+        $retval .= '</th><td class="text-end">';
         if ($relationParameterSet) {
             $retval .= $messages['ok'];
         } else {

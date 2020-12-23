@@ -104,35 +104,35 @@ class RelationTest extends AbstractTestCase
         );
 
         //$cfg['Servers'][$i]['relation']
-        $result = "\$cfg['Servers'][\$i]['pmadb']  ... </th><td class=\"right\">"
-            . '<span class="success"><strong>OK</strong></span>';
+        $result = "\$cfg['Servers'][\$i]['pmadb']  ... </th><td class=\"text-end\">"
+            . '<span class="text-success"><strong>OK</strong></span>';
         $this->assertStringContainsString(
             $result,
             $retval
         );
         // $cfg['Servers'][$i]['relation']
-        $result = "\$cfg['Servers'][\$i]['relation']  ... </th><td class=\"right\">"
-            . '<span class="caution"><strong>not OK</strong></span>';
+        $result = "\$cfg['Servers'][\$i]['relation']  ... </th><td class=\"text-end\">"
+            . '<span class="text-danger"><strong>not OK</strong></span>';
         $this->assertStringContainsString(
             $result,
             $retval
         );
         // General relation features
-        $result = 'General relation features: <span class="caution">Disabled</span>';
+        $result = 'General relation features: <span class="text-danger">Disabled</span>';
         $this->assertStringContainsString(
             $result,
             $retval
         );
         // $cfg['Servers'][$i]['table_info']
         $result = "\$cfg['Servers'][\$i]['table_info']  ... </th>"
-            . '<td class="right">'
-            . '<span class="caution"><strong>not OK</strong></span>';
+            . '<td class="text-end">'
+            . '<span class="text-danger"><strong>not OK</strong></span>';
         $this->assertStringContainsString(
             $result,
             $retval
         );
         // Display Features:
-        $result = 'Display Features: <span class="caution">Disabled</span>';
+        $result = 'Display Features: <span class="text-danger">Disabled</span>';
         $this->assertStringContainsString(
             $result,
             $retval

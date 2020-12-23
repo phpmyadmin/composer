@@ -173,17 +173,6 @@ button {
   }
 }
 
-.pma-table th.left,
-.pma-table td.left {
-  text-align: left;
-}
-
-.pma-table th.right,
-.pma-table td.right {
-  text-align: right;
-  padding-right: 1em;
-}
-
 .paddingtop {
   padding-top: 1em;
 }
@@ -666,10 +655,6 @@ form.login label {
   max-height: 400px;
 }
 
-.color_red {
-  color: red;
-}
-
 .pma_sliding_message {
   display: inline-block;
 }
@@ -685,25 +670,6 @@ ul.tabs {
   list-style-type: none;
   margin: 0;
   padding: 0;
-}
-
-span {
-  &.caution {
-    color: #f00;
-  }
-
-  &.success {
-    color: green;
-  }
-}
-
-fieldset.caution a {
-  color: #f00;
-
-  &:hover {
-    color: #fff;
-    background-color: #f00;
-  }
 }
 
 /* zoom search */
@@ -1899,14 +1865,6 @@ input#auto_increment_opt {
     width: 48%;
     float: left;
     padding: 0;
-
-    &.left {
-      margin-right: 1%;
-    }
-
-    &.right {
-      margin-left: 1%;
-    }
   }
 
   legend {

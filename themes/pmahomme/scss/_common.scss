@@ -421,17 +421,6 @@ select {
   }
 }
 
-.pma-table th.left,
-.pma-table td.left {
-  text-align: left;
-}
-
-.pma-table th.right,
-.pma-table td.right {
-  text-align: right;
-  padding-right: 1em;
-}
-
 .paddingtop {
   padding-top: 1em;
 }
@@ -894,10 +883,6 @@ label.col-3.d-flex.align-items-center {
   max-height: 400px;
 }
 
-.color_red {
-  color: red;
-}
-
 .pma_sliding_message {
   display: inline-block;
 }
@@ -918,25 +903,6 @@ ul.tabs {
 // default tab styles
 .tabactive {
   background: #fff !important;
-}
-
-span {
-  &.caution {
-    color: #f00;
-  }
-
-  &.success {
-    color: green;
-  }
-}
-
-fieldset.caution a {
-  color: #f00;
-
-  &:hover {
-    color: #fff;
-    background-color: #f00;
-  }
 }
 
 // zoom search
@@ -2258,14 +2224,6 @@ input#auto_increment_opt {
     width: 48%;
     float: left;
     padding: 0;
-
-    &.left {
-      margin-right: 1%;
-    }
-
-    &.right {
-      margin-left: 1%;
-    }
   }
 
   legend {
@@ -2397,10 +2355,6 @@ input#auto_increment_opt {
   }
 
   th.draggable {
-    &.right span {
-      margin-right: 0;
-    }
-
     span {
       margin-right: 10px;
     }
