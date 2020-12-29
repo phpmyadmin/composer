@@ -6,19 +6,7 @@
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 140%;
-  font-weight: bold;
-}
-
 h2 {
-  font-size: 2em;
-  font-weight: normal;
-  text-shadow: 0 1px 0 #fff;
-  padding: 10px 0 10px;
-  padding-left: 3px;
-  color: #777;
-
   // Hiding icons in the page titles
   img {
     display: none;
@@ -33,38 +21,12 @@ h2 {
   margin: 0 0 12px;
 }
 
-h3 {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: #235a81;
-  cursor: pointer;
-  outline: none;
-
-  &:link,
-  &:visited,
-  &:active {
-    text-decoration: none;
-    color: #235a81;
-    cursor: pointer;
-    outline: none;
-  }
-}
-
 button.mult_submit,
 .checkall_box + label {
   text-decoration: none;
   color: #235a81;
   cursor: pointer;
   outline: none;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #235a81;
 }
 
 button.mult_submit {
@@ -78,31 +40,6 @@ button.mult_submit {
 .checkall_box + label:hover {
   text-decoration: underline;
   color: #235a81;
-}
-
-#initials_table {
-  background: #f3f3f3;
-  border: 1px solid #aaa;
-  margin-bottom: 10px;
-  border-radius: 5px;
-
-  td {
-    padding: 8px !important;
-  }
-
-  a {
-    border: 1px solid #aaa;
-    background-color: #fff;
-    padding: 4px 8px;
-    border-radius: 5px;
-    background-image: linear-gradient(#fff, #e0e0e0);
-
-    &.active {
-      border: 1px solid #666;
-      box-shadow: 0 0 2px #999;
-      background: linear-gradient(#bbb, #fff);
-    }
-  }
 }
 
 dfn {

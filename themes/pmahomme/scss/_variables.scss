@@ -55,12 +55,23 @@ $bg-two: #d5d5d5;
 
 $body-color: $main-color;
 
+// Links
+
+$link-color: #235a81;
+$link-decoration: none;
+$link-hover-color: #235a81;
+$link-hover-decoration: underline;
+
 // Typography
 
 $font-family-base: sans-serif;
 $font-family-monospace: monospace;
 
 $font-size-base: 0.82rem;
+
+$h1-font-size: 140%;
+$h2-font-size: 2em;
+$h3-font-size: 1rem;
 
 // Tables
 
@@ -105,6 +116,14 @@ $navbar-light-color: #235a81;
 $navbar-light-hover-color: #235a81;
 $navbar-light-active-color: #235a81;
 $navbar-light-disabled-color: #235a81;
+
+// Pagination
+
+$pagination-active-color: #235a81;
+$pagination-border-color: #aaa;
+$pagination-hover-border-color: #aaa;
+$pagination-active-border-color: #aaa;
+$pagination-disabled-border-color: #aaa;
 
 // Card
 

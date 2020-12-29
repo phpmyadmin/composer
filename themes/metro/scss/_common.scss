@@ -148,26 +148,7 @@ body#loginform {
   margin: 20px !important;
 }
 
-h1 {
-  font-family: $font-family-light;
-  font-weight: normal;
-  font-size: 3em;
-  color: $navi-background;
-  margin: 0;
-  letter-spacing: -1px;
-  line-height: 1;
-}
-
 h2 {
-  font-size: 3.6em;
-  font-weight: normal;
-  color: $navi-background;
-  font-family: $font-family-light;
-  margin-top: 10px;
-  margin-bottom: 0;
-  line-height: 1;
-  letter-spacing: -1px;
-
   // Hiding icons in the page titles
   img {
     display: none;
@@ -182,40 +163,12 @@ h2 {
   margin: 10px 0;
 }
 
-h3 {
-  font-family: $font-family-extra-bold;
-  text-transform: uppercase;
-  font-weight: normal;
-  font-size: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: #235a81;
-  cursor: pointer;
-  outline: none;
-
-  &:link,
-  &:visited,
-  &:active {
-    text-decoration: none;
-    color: #235a81;
-    cursor: pointer;
-    outline: none;
-  }
-}
-
 button.mult_submit,
 .checkall_box + label {
   text-decoration: none;
   color: #235a81;
   cursor: pointer;
   outline: none;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #235a81;
 }
 
 button.mult_submit {
@@ -229,22 +182,6 @@ button.mult_submit {
 .checkall_box + label:hover {
   text-decoration: underline;
   color: #235a81;
-}
-
-#initials_table {
-  background: $th-background;
-  border: 1px solid $border-color;
-  margin-bottom: 10px;
-
-  td {
-    padding: 8px !important;
-  }
-
-  a {
-    border: 1px solid $border-color;
-    background: $body-bg;
-    padding: 4px 8px;
-  }
 }
 
 dfn:hover {

@@ -152,6 +152,17 @@ $blue-header: #3a7ead;
 
 $body-color: $main-color;
 
+// Links
+
+$link-color: $browse-pointer-color;
+$link-decoration: none;
+$link-hover-color: $browse-pointer-color;
+$link-hover-decoration: underline;
+
+// Components
+
+$border-radius: 0;
+
 // Typography
 
 $font-family-base: "Open Sans", "Segoe UI", sans-serif;
@@ -163,6 +174,12 @@ $font-family-extra-bold: "Open Sans Extrabold", "Segoe Black", sans-serif;
 
 $font-size-base: 0.6875rem; // 11px
 $line-height-base: 1;
+
+$h1-font-size: 3em;
+$h2-font-size: 3.6em;
+$h3-font-size: 1rem;
+
+$headings-font-weight: normal;
 
 // Tables
 
@@ -207,6 +224,15 @@ $navbar-light-color: #666;
 $navbar-light-hover-color: #333;
 $navbar-light-active-color: #666;
 $navbar-light-disabled-color: #666;
+
+// Pagination
+
+$pagination-bg: $th-background;
+$pagination-hover-bg: $browse-marker-background;
+$pagination-border-color: $border-color;
+$pagination-hover-border-color: $border-color;
+$pagination-active-border-color: $border-color;
+$pagination-disabled-border-color: $border-color;
 
 // Card
 
