@@ -119,7 +119,8 @@
   margin-left: 0.75em;
 
   select {
-    background: url("../../pmahomme/img/select_bg.png") repeat scroll 0 0;
+    background: linear-gradient(#fff, #f1f1f1, #fff);
+    -webkit-border-radius: 2px;
     border-radius: 2px;
     border: 1px solid #bbb;
     border-top: 1px solid #bbb;
@@ -328,26 +329,6 @@ li.fast_filter {
     cursor: pointer;
     font-weight: bold;
     color: #800;
-  }
-}
-
-html.ie {
-  li.fast_filter span {
-    display: none;
-  }
-
-  &.ie9 li.fast_filter span,
-  &.ie8 li.fast_filter span {
-    display: auto;
-  }
-
-  li.fast_filter input {
-    padding-right: 0.2em;
-  }
-
-  &.ie9 li.fast_filter input,
-  &.ie8 li.fast_filter input {
-    padding-right: 1.7em;
   }
 }
 
