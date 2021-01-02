@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-12-21 16:13+0100\n"
-"PO-Revision-Date: 2020-12-29 12:29+0000\n"
-"Last-Translator: Masahiro Fujimoto <mfujimot@gmail.com>\n"
+"PO-Revision-Date: 2021-01-02 20:29+0000\n"
+"Last-Translator: Kyotaro Iijima <kyotaro.eyes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/ja/>\n"
 "Language: ja\n"
@@ -4266,21 +4266,14 @@ msgid "Version check"
 msgstr "バージョンの確認"
 
 #: libraries/classes/Config/Descriptions.php:941
-#, fuzzy
-#| msgid ""
-#| "The url of the proxy to be used when retrieving the information about the "
-#| "latest version of phpMyAdmin or when submitting error reports. You need "
-#| "this if the server where phpMyAdmin is installed does not have direct "
-#| "access to the internet. The format is: \"hostname:portnumber\"."
 msgid ""
 "The URL of the proxy to be used when retrieving the information about the "
 "latest version of phpMyAdmin, or when submitting error reports. You need "
 "this if the server where phpMyAdmin is installed does not have direct access "
 "to the Internet. The format is: \"hostname:portnumber\"."
 msgstr ""
-"エラー報告を送信する時・phpMyAdminの最新バージョン情報通信時のプロキシサーバ"
-"設定です。phpMyAdminが直接にインターネットへ接続が出来ない場合、必要となりま"
-"す。URL形式：「ホスト名:ポート番号」。"
+"エラー報告を送信する時・phpMyAdminの最新バージョン情報通信時のプロキシサーバ設定です。phpMyAdminが直接にインターネットへ接続が出来ない"
+"場合、必要となります。URL形式：「ホスト名:ポート番号」。"
 
 #: libraries/classes/Config/Descriptions.php:946
 msgid "Proxy URL"
@@ -17362,10 +17355,8 @@ msgstr "クエリ数"
 #: templates/server/status/queries/index.twig:39
 #: templates/server/status/status/index.twig:18
 #: templates/server/status/status/index.twig:38
-#, fuzzy
-#| msgid "per hour"
 msgid "ø per hour"
-msgstr "/ 時"
+msgstr "0 / 時"
 
 #: templates/server/status/queries/index.twig:59
 msgid "Not enough privilege to view query statistics."
@@ -17946,46 +17937,32 @@ msgid "Relation view"
 msgstr "リレーションビュー"
 
 #: templates/table/partition/analyze.twig:2
-#, fuzzy
-#| msgid "partitioned"
 msgid "Analyze partition"
-msgstr "パーティション有り"
+msgstr "パーティションの分析"
 
 #: templates/table/partition/check.twig:2
-#, fuzzy
-#| msgid "partitioned"
 msgid "Check partition"
-msgstr "パーティション有り"
+msgstr "パーティションのチェック"
 
 #: templates/table/partition/drop.twig:2
-#, fuzzy
-#| msgid "partitioned"
 msgid "Drop partition"
-msgstr "パーティション有り"
+msgstr "パーティションの削除"
 
 #: templates/table/partition/optimize.twig:2
-#, fuzzy
-#| msgid "Remove partitioning"
 msgid "Optimize partition"
-msgstr "パーティションを削除"
+msgstr "パーティションの最適化"
 
 #: templates/table/partition/rebuild.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Rebuild partition"
-msgstr "サブパーティション"
+msgstr "パーティションの再構築"
 
 #: templates/table/partition/repair.twig:2
-#, fuzzy
-#| msgid "Remove partitioning"
 msgid "Repair partition"
-msgstr "パーティションを削除"
+msgstr "パーティションの修復"
 
 #: templates/table/partition/truncate.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Truncate partition"
-msgstr "サブパーティション"
+msgstr "パーティションの切捨て"
 
 #: templates/table/privileges/index.twig:57
 msgid "table-specific"
@@ -17997,7 +17974,7 @@ msgstr "外部キー制約"
 
 #: templates/table/relation/common_form.twig:14
 msgid "Actions"
-msgstr "アクション"
+msgstr "操作"
 
 #: templates/table/relation/common_form.twig:15
 msgid "Constraint properties"
@@ -18194,10 +18171,8 @@ msgid "at beginning of table"
 msgstr "テーブルの先頭"
 
 #: templates/table/structure/display_structure.twig:445
-#, fuzzy
-#| msgid "Rename to"
 msgid "Rename"
-msgstr "変更後の名称"
+msgstr "名前の変更"
 
 #: templates/table/structure/display_structure.twig:507
 #, php-format
