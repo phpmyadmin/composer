@@ -3,17 +3,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 5.1.0-rc1\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2020-12-18 22:27+0100\n"
-"PO-Revision-Date: 2020-10-11 17:09+0000\n"
-"Last-Translator: Istiak Ferdous <hello@istiak.com>\n"
-"Language-Team: Bengali <https://hosted.weblate.org/projects/phpmyadmin/"
-"master/bn/>\n"
+"POT-Creation-Date: 2021-01-22 02:59+0100\n"
+"PO-Revision-Date: 2021-01-22 17:26+0000\n"
+"Last-Translator: William Desportes <williamdes@wdes.fr>\n"
+"Language-Team: Bengali <https://hosted.weblate.org/projects/phpmyadmin/5-1/"
+"bn/>\n"
 "Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.3-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -288,10 +288,10 @@ msgid ""
 "refman/5.6/en/ha-memcached.html\">memcached</a> instead of the MySQL Query "
 "cache, especially if you have multiple slaves."
 msgstr ""
-"আপনি অনেক ব্যবহৃত একটি ডাটাবেইজে MySQL অনুসন্ধান ক্যাশ ব্যবহার করছেন। এটি অনেক "
-"মুল্যবান হতে পারে, MySQL অনুসন্ধান ক্যাশের পরিবর্তে <a href=\"https://dev.mysql."
-"com/doc/refman/5.5/en/ha-memcached.html\">memcached</a> ব্যবহার করতে পারেন, "
-"বিশেষত আপনার যদি অনেকগুলো slave থাকে।"
+"আপনি অনেক ব্যবহৃত একটি ডাটাবেইজে MySQL অনুসন্ধান ক্যাশ ব্যবহার করছেন। এটি অনে"
+"ক মুল্যবান হতে পারে, MySQL অনুসন্ধান ক্যাশের পরিবর্তে <a href=\"https://dev."
+"mysql.com/doc/refman/5.6/en/ha-memcached.html\">memcached</a> ব্যবহার করতে "
+"পারেন, বিশেষত আপনার যদি অনেকগুলো slave থাকে।"
 
 #: libraries/advisory_rules_generic.php:198
 #, php-format
@@ -1365,7 +1365,7 @@ msgstr "খুঁজ:"
 #: templates/server/privileges/change_password.twig:70
 #: templates/server/privileges/edit_routine_privileges.twig:102
 #: templates/server/privileges/privileges_summary.twig:102
-#: templates/server/privileges/privileges_table.twig:833
+#: templates/server/privileges/privileges_table.twig:834
 #: templates/server/privileges/user_properties.twig:149
 #: templates/server/privileges/users_overview.twig:143
 #: templates/server/replication/change_master.twig:33
@@ -3161,16 +3161,12 @@ msgid "Logo link URL"
 msgstr "লোগো সংযোগের URL"
 
 #: libraries/classes/Config/Descriptions.php:531
-#, fuzzy
-#| msgid ""
-#| "Open the linked page in the main window ([kbd]main[/kbd]) or in a new one "
-#| "([kbd]new[/kbd])."
 msgid ""
 "Open the linked page in the main window ([code]main[/code]) or in a new one "
 "([code]new[/code])."
 msgstr ""
-"সংযুক্ত পাতাটি একটি নতুন উইন্ডোতে ([kbd]new[/kbd]) খোল বা প্রধান উইন্ডোটিতে "
-"([kbd]main[/kbd]) খোল।"
+"সংযুক্ত পাতাটি একটি নতুন উইন্ডোতে ([code]new[/code]) খোল বা প্রধান উইন্ডোটিতে"
+" ([code]main[/code]) খোল।"
 
 #: libraries/classes/Config/Descriptions.php:534
 msgid "Logo link target"
@@ -4399,8 +4395,8 @@ msgstr "একটি ডাটাবেইজ নিবার্চন করা
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:149
 #: libraries/classes/Plugins/Export/ExportOdt.php:192
 #: libraries/classes/Plugins/Export/ExportTexytext.php:133
-#: libraries/classes/Server/Privileges.php:1942
-#: libraries/classes/Server/Privileges.php:1944
+#: libraries/classes/Server/Privileges.php:1945
+#: libraries/classes/Server/Privileges.php:1947
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:40
 #: templates/console/display.twig:184 templates/server/databases/index.twig:109
 #: templates/server/privileges/edit_routine_privileges.twig:17
@@ -4441,8 +4437,8 @@ msgstr "একটি টেবল নির্বাচন করা হবে �
 #: libraries/classes/Config/Descriptions.php:921
 #: libraries/classes/Database/Triggers.php:397
 #: libraries/classes/Plugins/Export/ExportXml.php:521
-#: libraries/classes/Server/Privileges.php:1948
-#: libraries/classes/Server/Privileges.php:1950
+#: libraries/classes/Server/Privileges.php:1951
+#: libraries/classes/Server/Privileges.php:1953
 #: templates/database/structure/show_create.twig:10
 #: templates/database/structure/table_header.twig:8
 #: templates/database/tracking/tables.twig:13
@@ -4457,7 +4453,7 @@ msgstr "একটি টেবল নির্বাচন করা হবে �
 #: templates/table/operations/index.twig:244
 #: templates/table/relation/common_form.twig:37
 #: templates/table/relation/common_form.twig:179
-#: templates/table/relation/foreign_key_row.twig:106
+#: templates/table/relation/foreign_key_row.twig:107
 msgid "Table"
 msgstr "টেবল"
 
@@ -4960,7 +4956,7 @@ msgstr "ওপেন অফিস টেক্সট"
 #: libraries/classes/Config/Forms/User/ExportForm.php:151
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:371
 #: libraries/classes/Menu.php:309 libraries/classes/Menu.php:423
-#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1618
+#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1621
 #: libraries/classes/Util.php:2435 libraries/classes/Util.php:2450
 #: libraries/classes/Util.php:2467 templates/database/events/index.twig:58
 #: templates/database/events/index.twig:91
@@ -5340,13 +5336,13 @@ msgstr "রো দেখাচ্ছে %1$s - %2$s."
 msgid "No tables found in database."
 msgstr "ডাটাবেইজে কোন টেবিল নাই।"
 
-#: libraries/classes/Controllers/Database/ExportController.php:152
+#: libraries/classes/Controllers/Database/ExportController.php:149
 #: libraries/classes/Controllers/Server/ExportController.php:73
 #: libraries/classes/Controllers/Table/ExportController.php:116
 msgid "Could not load export plugins, please check your installation!"
 msgstr "রফতানী সহায়কটি লোড করা যাচ্ছে না, ইনস্টলেশন পরীক্ষা করুন!"
 
-#: libraries/classes/Controllers/Database/ExportController.php:180
+#: libraries/classes/Controllers/Database/ExportController.php:177
 #: libraries/classes/Controllers/Database/StructureController.php:1174
 #: libraries/classes/Controllers/Database/StructureController.php:1215
 #: libraries/classes/Controllers/Database/StructureController.php:1248
@@ -6020,13 +6016,13 @@ msgid "The user name is empty!"
 msgstr "ব্যাবহারকারী নামটি শুন্য!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:131
-#: libraries/classes/Server/Privileges.php:1021
+#: libraries/classes/Server/Privileges.php:1024
 #: libraries/classes/UserPassword.php:39
 msgid "The password is empty!"
 msgstr "পাসওয়ার্ডটি শুন্য!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:132
-#: libraries/classes/Server/Privileges.php:1019
+#: libraries/classes/Server/Privileges.php:1022
 #: libraries/classes/UserPassword.php:43
 msgid "The passwords aren't the same!"
 msgstr "পাসওর্য়াডগুলো এক নয়!"
@@ -7952,7 +7948,7 @@ msgid "ID"
 msgstr "আইডি"
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:151
-#: libraries/classes/Server/Privileges.php:2995
+#: libraries/classes/Server/Privileges.php:2998
 #: templates/server/user_groups/user_listings.twig:9
 msgid "User"
 msgstr "ব্যবহারকারী"
@@ -9265,7 +9261,7 @@ msgstr "parameter নাই:"
 msgid "Connection for controluser as defined in your configuration failed."
 msgstr "নিয়ন্ত্রক ব্যবহারকারীর জন্য নির্ধারিত কনফিগারেশন সংযোগে ব্যার্থ হয়েছে।"
 
-#: libraries/classes/DatabaseInterface.php:2461
+#: libraries/classes/DatabaseInterface.php:2463
 #, php-format
 msgid "See %sour documentation%s for more information."
 msgstr ""
@@ -9359,8 +9355,7 @@ msgstr "রুটিন %1$s পরিবর্তীত হয়েছে।"
 
 #: libraries/classes/Database/Routines.php:841
 #: libraries/classes/Database/Triggers.php:389
-#: templates/database/events/editor_form.twig:9
-#: templates/database/events/editor_form.twig:12 templates/view_create.twig:8
+#: templates/database/events/editor_form.twig:9 templates/view_create.twig:8
 msgid "Details"
 msgstr "বিশদ"
 
@@ -10606,8 +10601,8 @@ msgstr ""
 #: templates/table/relation/common_form.twig:38
 #: templates/table/relation/common_form.twig:117
 #: templates/table/relation/common_form.twig:186
-#: templates/table/relation/foreign_key_row.twig:118
-#: templates/table/relation/foreign_key_row.twig:128
+#: templates/table/relation/foreign_key_row.twig:119
+#: templates/table/relation/foreign_key_row.twig:129
 #: templates/table/search/index.twig:38
 #: templates/table/structure/display_structure.twig:418
 #: templates/table/tracking/structure_snapshot_columns.twig:6
@@ -10703,7 +10698,7 @@ msgid "Insert"
 msgstr "ইনর্সাট"
 
 #: libraries/classes/Menu.php:329 libraries/classes/Menu.php:447
-#: libraries/classes/Server/Privileges.php:2969 libraries/classes/Util.php:2453
+#: libraries/classes/Server/Privileges.php:2972 libraries/classes/Util.php:2453
 #: libraries/classes/Util.php:2469 libraries/config.values.php:161
 #: templates/database/privileges/index.twig:20
 #: templates/server/privileges/privileges_summary.twig:15
@@ -11897,28 +11892,20 @@ msgstr ""
 "উদাহরণ: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6),(7,8,9)</code>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:475
-#, fuzzy
-#| msgid ""
-#| "both of the above<br /> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
-#| "tbl_name (col_A,col_B) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
 msgid ""
 "both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
 msgstr ""
-"উপরের উভয়টি <br /> &nbsp; &nbsp; &nbsp; উদাহরণ: <code>INSERT INTO tbl_name "
-"(col_A,col_B) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
+"উপরের উভয়টি <br> &nbsp; &nbsp; &nbsp; উদাহরণ: <code>INSERT INTO tbl_name "
+"(col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:480
-#, fuzzy
-#| msgid ""
-#| "neither of the above<br /> &nbsp; &nbsp; &nbsp; Example: <code>INSERT "
-#| "INTO tbl_name VALUES (1,2,3)</code>"
 msgid ""
 "neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name VALUES (1,2,3)</code>"
 msgstr ""
-"উপরের কোনটি নয় <br /> &nbsp; &nbsp; &nbsp; উদাহরণ: <code>INSERT INTO "
-"tbl_name VALUES (1,2,3)</code>"
+"উপরের কোনটি নয় <br> &nbsp; &nbsp; &nbsp; উদাহরণ: <code>INSERT INTO tbl_name "
+"VALUES (1,2,3)</code>"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:499
 msgid ""
@@ -12939,16 +12926,16 @@ msgstr ""
 msgid "Error while loading the search."
 msgstr "আপলোডকৃত ফাইলটি সরানোর সময় সমস্যা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:243
+#: libraries/classes/Server/Privileges.php:244
 msgid "No privileges."
 msgstr "কোন অধিকার নাই।"
 
-#: libraries/classes/Server/Privileges.php:253
+#: libraries/classes/Server/Privileges.php:254
 msgid "Includes all privileges except GRANT."
 msgstr "GRANT ব্যাতিত সবগুলো অধিকার।"
 
-#: libraries/classes/Server/Privileges.php:275
-#: libraries/classes/Server/Privileges.php:342
+#: libraries/classes/Server/Privileges.php:276
+#: libraries/classes/Server/Privileges.php:343
 #: templates/server/privileges/privileges_table.twig:100
 #: templates/server/privileges/privileges_table.twig:103
 #: templates/server/privileges/privileges_table.twig:299
@@ -12956,7 +12943,7 @@ msgstr "GRANT ব্যাতিত সবগুলো অধিকার।"
 msgid "Allows deleting data."
 msgstr "তথ্য মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:280
+#: libraries/classes/Server/Privileges.php:281
 #: templates/server/privileges/privileges_table.twig:112
 #: templates/server/privileges/privileges_table.twig:115
 #: templates/server/privileges/privileges_table.twig:337
@@ -12964,7 +12951,7 @@ msgstr "তথ্য মুছার অনুমোদন।"
 msgid "Allows creating new tables."
 msgstr "নতুন টেবল তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:285
+#: libraries/classes/Server/Privileges.php:286
 #: templates/server/privileges/privileges_table.twig:124
 #: templates/server/privileges/privileges_table.twig:127
 #: templates/server/privileges/privileges_table.twig:385
@@ -12972,8 +12959,8 @@ msgstr "নতুন টেবল তৈরীর অনুমোদন।"
 msgid "Allows dropping tables."
 msgstr "টেবিল মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:290
-#: libraries/classes/Server/Privileges.php:382
+#: libraries/classes/Server/Privileges.php:291
+#: libraries/classes/Server/Privileges.php:383
 #: templates/server/privileges/privileges_table.twig:149
 #: templates/server/privileges/privileges_table.twig:152
 #: templates/server/privileges/privileges_table.twig:369
@@ -12981,8 +12968,8 @@ msgstr "টেবিল মুছার অনুমোদন।"
 msgid "Allows creating and dropping indexes."
 msgstr "ইনডেক্স তৈরী এবং মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:295
-#: libraries/classes/Server/Privileges.php:387
+#: libraries/classes/Server/Privileges.php:296
+#: libraries/classes/Server/Privileges.php:388
 #: templates/server/privileges/privileges_table.twig:161
 #: templates/server/privileges/privileges_table.twig:164
 #: templates/server/privileges/privileges_table.twig:356
@@ -12990,9 +12977,9 @@ msgstr "ইনডেক্স তৈরী এবং মুছার অনু�
 msgid "Allows altering the structure of existing tables."
 msgstr "তৈরীকৃত টেবিলের গঠন পরিবর্তনের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:300
-#: libraries/classes/Server/Privileges.php:426
-#: libraries/classes/Server/Privileges.php:442
+#: libraries/classes/Server/Privileges.php:301
+#: libraries/classes/Server/Privileges.php:427
+#: libraries/classes/Server/Privileges.php:443
 #: templates/server/privileges/privileges_table.twig:173
 #: templates/server/privileges/privileges_table.twig:176
 #: templates/server/privileges/privileges_table.twig:470
@@ -13002,9 +12989,9 @@ msgstr "তৈরীকৃত টেবিলের গঠন পরিবর্
 msgid "Allows creating new views."
 msgstr "নতুন ভিউ তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:305
-#: libraries/classes/Server/Privileges.php:447
-#: libraries/classes/Server/Privileges.php:453
+#: libraries/classes/Server/Privileges.php:306
+#: libraries/classes/Server/Privileges.php:448
+#: libraries/classes/Server/Privileges.php:454
 #: templates/server/privileges/privileges_table.twig:185
 #: templates/server/privileges/privileges_table.twig:188
 #: templates/server/privileges/privileges_table.twig:417
@@ -13012,8 +12999,8 @@ msgstr "নতুন ভিউ তৈরীর অনুমোদন।"
 msgid "Allows performing SHOW CREATE VIEW queries."
 msgstr "SHOW CREATE VIEW কোয়ারীজ তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:310
-#: libraries/classes/Server/Privileges.php:436
+#: libraries/classes/Server/Privileges.php:311
+#: libraries/classes/Server/Privileges.php:437
 #: templates/server/privileges/privileges_table.twig:197
 #: templates/server/privileges/privileges_table.twig:200
 #: templates/server/privileges/privileges_table.twig:513
@@ -13023,52 +13010,52 @@ msgstr "SHOW CREATE VIEW কোয়ারীজ তৈরীর অনুমো�
 msgid "Allows creating and dropping triggers."
 msgstr "ট্রিগার তৈরী এবং মুছার অনুমোদন"
 
-#: libraries/classes/Server/Privileges.php:327
+#: libraries/classes/Server/Privileges.php:328
 #: templates/server/privileges/privileges_table.twig:15
 #: templates/server/privileges/privileges_table.twig:260
 #: templates/server/privileges/privileges_table.twig:263
 msgid "Allows reading data."
 msgstr "তথ্য পড়ার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:332
+#: libraries/classes/Server/Privileges.php:333
 #: templates/server/privileges/privileges_table.twig:36
 #: templates/server/privileges/privileges_table.twig:273
 #: templates/server/privileges/privileges_table.twig:276
 msgid "Allows inserting and replacing data."
 msgstr "তথ্য যোগকরা এবং প্রতিস্থাপনের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:337
+#: libraries/classes/Server/Privileges.php:338
 #: templates/server/privileges/privileges_table.twig:57
 #: templates/server/privileges/privileges_table.twig:286
 #: templates/server/privileges/privileges_table.twig:289
 msgid "Allows changing data."
 msgstr "তথ্য পরিবর্তনের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:347
+#: libraries/classes/Server/Privileges.php:348
 #: templates/server/privileges/privileges_table.twig:335
 #: templates/server/privileges/privileges_table.twig:343
 msgid "Allows creating new databases and tables."
 msgstr "নতুন ডাটাবেজ এবং টেবল তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:352
+#: libraries/classes/Server/Privileges.php:353
 #: templates/server/privileges/privileges_table.twig:383
 #: templates/server/privileges/privileges_table.twig:391
 msgid "Allows dropping databases and tables."
 msgstr "ডাটাবেজ এবং টেবল মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:357
+#: libraries/classes/Server/Privileges.php:358
 #: templates/server/privileges/privileges_table.twig:575
 #: templates/server/privileges/privileges_table.twig:578
 msgid "Allows reloading server settings and flushing the server's caches."
 msgstr "সার্ভার সেটিংস এবং সার্ভারের সঞ্চয়কৃত তথ্যাবলী পরিবর্তনের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:362
+#: libraries/classes/Server/Privileges.php:363
 #: templates/server/privileges/privileges_table.twig:588
 #: templates/server/privileges/privileges_table.twig:591
 msgid "Allows shutting down the server."
 msgstr "সার্ভার বন্ধ করার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:367
+#: libraries/classes/Server/Privileges.php:368
 #: templates/server/privileges/privileges_table.twig:562
 #: templates/server/privileges/privileges_table.twig:565
 #, fuzzy
@@ -13076,26 +13063,25 @@ msgstr "সার্ভার বন্ধ করার অনুমোদন।
 msgid "Allows viewing processes of all users."
 msgstr "সব ব্যবহারকারীর প্রসেস দেখার অনুমোদন"
 
-#: libraries/classes/Server/Privileges.php:372
+#: libraries/classes/Server/Privileges.php:373
 #: templates/server/privileges/privileges_table.twig:313
 #: templates/server/privileges/privileges_table.twig:316
 msgid "Allows importing data from and exporting data into files."
 msgstr "ফাইলে তথ্য আমদানি এবং রফতানীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:377
+#: libraries/classes/Server/Privileges.php:378
 #: templates/server/privileges/privileges_table.twig:78
 #: templates/server/privileges/privileges_table.twig:642
-#: templates/server/privileges/privileges_table.twig:645
 msgid "Has no effect in this MySQL version."
 msgstr "মাইএসকিউএলের এই ভার্সনে কোন প্রভাব নাই।"
 
-#: libraries/classes/Server/Privileges.php:392
+#: libraries/classes/Server/Privileges.php:393
 #: templates/server/privileges/privileges_table.twig:601
 #: templates/server/privileges/privileges_table.twig:604
 msgid "Gives access to the complete list of databases."
 msgstr "ডাটা বেইজের তালিকা সম্পুর্ন করার অনুমোদন দেওয়া।"
 
-#: libraries/classes/Server/Privileges.php:398
+#: libraries/classes/Server/Privileges.php:399
 #: templates/server/privileges/privileges_table.twig:548
 #: templates/server/privileges/privileges_table.twig:552
 msgid ""
@@ -13106,31 +13092,31 @@ msgstr ""
 "সর্বোচ্চ সংখ্যক সংযোগ ব্যবহারের পরেও সংযোগের অনুমোদন; প্রশাসনিক কাজের যেমন সর্বময় "
 "চলক নির্ধারন বা অন্য ব্যবহারকারীরর থ্রেড হত্যার জন্য প্রয়োজন।"
 
-#: libraries/classes/Server/Privileges.php:406
+#: libraries/classes/Server/Privileges.php:407
 #: templates/server/privileges/privileges_table.twig:404
 #: templates/server/privileges/privileges_table.twig:407
 msgid "Allows creating temporary tables."
 msgstr "অস্থায়ী টেবিল তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:411
+#: libraries/classes/Server/Privileges.php:412
 #: templates/server/privileges/privileges_table.twig:629
 #: templates/server/privileges/privileges_table.twig:632
 msgid "Allows locking tables for the current thread."
 msgstr "বর্তমান থ্রেড এর জন্য টেবল লক করার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:416
-#: templates/server/privileges/privileges_table.twig:669
-#: templates/server/privileges/privileges_table.twig:672
+#: libraries/classes/Server/Privileges.php:417
+#: templates/server/privileges/privileges_table.twig:670
+#: templates/server/privileges/privileges_table.twig:673
 msgid "Needed for the replication slaves."
 msgstr "সহায়তাকরী প্রতিলিপির জন্য প্রয়োজন।"
 
-#: libraries/classes/Server/Privileges.php:421
-#: templates/server/privileges/privileges_table.twig:656
-#: templates/server/privileges/privileges_table.twig:659
+#: libraries/classes/Server/Privileges.php:422
+#: templates/server/privileges/privileges_table.twig:657
+#: templates/server/privileges/privileges_table.twig:660
 msgid "Allows the user to ask where the slaves / masters are."
 msgstr "সহায়তাকারী এবং প্রধানদের সম্পর্কে জিজ্ঞাসার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:431
+#: libraries/classes/Server/Privileges.php:432
 #: templates/server/privileges/privileges_table.twig:500
 #: templates/server/privileges/privileges_table.twig:503
 #, fuzzy
@@ -13139,8 +13125,8 @@ msgid "Allows to set up events for the event scheduler."
 msgstr "ইভেন্ট সিডিউলারের জন্য ইভেন্ট নিধার্রন করার অনুমোদন"
 
 #. l10n: https://mariadb.com/kb/en/library/grant/#table-privileges "Remove historical rows from a table using the DELETE HISTORY statement"
-#: libraries/classes/Server/Privileges.php:460
-#: libraries/classes/Server/Privileges.php:467
+#: libraries/classes/Server/Privileges.php:461
+#: libraries/classes/Server/Privileges.php:468
 #: templates/server/privileges/privileges_table.twig:210
 #: templates/server/privileges/privileges_table.twig:214
 #, fuzzy
@@ -13148,61 +13134,61 @@ msgstr "ইভেন্ট সিডিউলারের জন্য ইভে
 msgid "Allows deleting historical rows."
 msgstr "তথ্য মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:472
+#: libraries/classes/Server/Privileges.php:473
 #: templates/server/privileges/privileges_table.twig:430
 #: templates/server/privileges/privileges_table.twig:433
 msgid "Allows creating stored routines."
 msgstr "মজুদ করার জন্য রুটিন তৈরীর অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:477
+#: libraries/classes/Server/Privileges.php:478
 #: templates/server/privileges/privileges_table.twig:443
 #: templates/server/privileges/privileges_table.twig:446
 msgid "Allows altering and dropping stored routines."
 msgstr "মজুদকৃত রুটিনসমূহ পরিবর্তন এবং মুছার অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:482
-#: templates/server/privileges/privileges_table.twig:682
-#: templates/server/privileges/privileges_table.twig:685
+#: libraries/classes/Server/Privileges.php:483
+#: templates/server/privileges/privileges_table.twig:683
+#: templates/server/privileges/privileges_table.twig:686
 msgid "Allows creating, dropping and renaming user accounts."
 msgstr "ব্যবহারকারীর একাউন্ট তৈরী, মুছা এবং নাম পরিবর্তনের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:487
+#: libraries/classes/Server/Privileges.php:488
 #: templates/server/privileges/privileges_table.twig:456
 #: templates/server/privileges/privileges_table.twig:459
 msgid "Allows executing stored routines."
 msgstr "মজুদকৃত রুটিন ব্যবহারের অনুমোদন।"
 
-#: libraries/classes/Server/Privileges.php:790
-#: libraries/classes/Server/Privileges.php:864
-#: libraries/classes/Server/Privileges.php:3962
+#: libraries/classes/Server/Privileges.php:793
+#: libraries/classes/Server/Privileges.php:867
+#: libraries/classes/Server/Privileges.php:3965
 #, fuzzy
 #| msgid "Cookie authentication"
 msgid "Native MySQL authentication"
 msgstr "কুকি প্রমাণীকরণ"
 
-#: libraries/classes/Server/Privileges.php:792
+#: libraries/classes/Server/Privileges.php:795
 #, fuzzy
 #| msgid "Signon authentication"
 msgid "SHA256 password authentication"
 msgstr "সাইনঅন প্রমাণীকরণ"
 
-#: libraries/classes/Server/Privileges.php:1160
+#: libraries/classes/Server/Privileges.php:1163
 #, php-format
 msgid "The password for %s was changed successfully."
 msgstr "%s এর পাসওর্য়াডটি সফলভাবে পরিবর্তন করা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:1209
+#: libraries/classes/Server/Privileges.php:1212
 #, php-format
 msgid "You have revoked the privileges for %s."
 msgstr "%s অধিকার সমূহ বাতিল করা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:1545
+#: libraries/classes/Server/Privileges.php:1548
 #: templates/database/privileges/index.twig:124
 #: templates/table/privileges/index.twig:127
 msgid "Not enough privilege to view users."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1612
+#: libraries/classes/Server/Privileges.php:1615
 #: templates/database/privileges/index.twig:80
 #: templates/server/privileges/new_user_ajax.twig:45
 #: templates/server/privileges/users_overview.twig:72
@@ -13212,24 +13198,24 @@ msgstr ""
 msgid "Edit privileges"
 msgstr "সুবিধাসমূহ সম্পাদনা:"
 
-#: libraries/classes/Server/Privileges.php:1615
+#: libraries/classes/Server/Privileges.php:1618
 msgid "Revoke"
 msgstr "বাতিল"
 
-#: libraries/classes/Server/Privileges.php:1943
+#: libraries/classes/Server/Privileges.php:1946
 #: templates/server/privileges/privileges_table.twig:240
 msgid "Database-specific privileges"
 msgstr "ডাটাবেইজ নির্ধারিত অধিকারসমূহ"
 
-#: libraries/classes/Server/Privileges.php:1949
+#: libraries/classes/Server/Privileges.php:1952
 #: templates/server/privileges/privileges_summary.twig:18
 #: templates/server/privileges/privileges_table.twig:7
 #: templates/server/privileges/privileges_table.twig:242
 msgid "Table-specific privileges"
 msgstr "টেবিলের নির্দিষ্ট অধিকার"
 
-#: libraries/classes/Server/Privileges.php:1954
-#: libraries/classes/Server/Privileges.php:1956
+#: libraries/classes/Server/Privileges.php:1957
+#: libraries/classes/Server/Privileges.php:1959
 #: templates/server/privileges/edit_routine_privileges.twig:29
 #: templates/server/privileges/edit_routine_privileges.twig:46
 #: templates/server/privileges/edit_routine_privileges.twig:58
@@ -13238,63 +13224,63 @@ msgstr "টেবিলের নির্দিষ্ট অধিকার"
 msgid "Routine"
 msgstr "রুটিনসমূহ"
 
-#: libraries/classes/Server/Privileges.php:1955
+#: libraries/classes/Server/Privileges.php:1958
 #: templates/server/privileges/edit_routine_privileges.twig:47
 #, fuzzy
 #| msgid "Column-specific privileges"
 msgid "Routine-specific privileges"
 msgstr "স্বম্ভ সম্পকির্ত অধিকার"
 
-#: libraries/classes/Server/Privileges.php:2303
+#: libraries/classes/Server/Privileges.php:2306
 msgid "No users selected for deleting!"
 msgstr "মুছার জন্য কোন ব্যবহারকারী নির্বাচন করা হয়নি!"
 
-#: libraries/classes/Server/Privileges.php:2306
+#: libraries/classes/Server/Privileges.php:2309
 msgid "Reloading the privileges"
 msgstr "অধিকারসমূহ পুনরায় পূর্ণ করা হয়েছে"
 
-#: libraries/classes/Server/Privileges.php:2329
+#: libraries/classes/Server/Privileges.php:2332
 msgid "The selected users have been deleted successfully."
 msgstr "নির্বাচিত ব্যবহরকারীগনকে সফলভাবে মুছা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:2406
+#: libraries/classes/Server/Privileges.php:2409
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "%s এর অধীকার সমূহ আধুনিকায়ন করা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:2493
+#: libraries/classes/Server/Privileges.php:2496
 #: templates/database/privileges/index.twig:102
 #: templates/table/privileges/index.twig:106
 msgid "No user found."
 msgstr "ব্যবহারকারী নাই।"
 
-#: libraries/classes/Server/Privileges.php:2573
+#: libraries/classes/Server/Privileges.php:2576
 #, php-format
 msgid "Deleting %s"
 msgstr "%s মুছছি"
 
-#: libraries/classes/Server/Privileges.php:2604
+#: libraries/classes/Server/Privileges.php:2607
 msgid "The privileges were reloaded successfully."
 msgstr "অধিকারসমূহ সফলভাবে পুনরায় পূর্ণকরা হয়েছে।"
 
-#: libraries/classes/Server/Privileges.php:2702
+#: libraries/classes/Server/Privileges.php:2705
 #, php-format
 msgid "The user %s already exists!"
 msgstr "ব্যবহারকারী %s পূর্ব থেকেই আছে!"
 
-#: libraries/classes/Server/Privileges.php:2986
+#: libraries/classes/Server/Privileges.php:2989
 #, php-format
 msgid "Privileges for %s"
 msgstr "%s এর অধিকারসমূহ"
 
-#: libraries/classes/Server/Privileges.php:3125
+#: libraries/classes/Server/Privileges.php:3128
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
 "allows a connection from any (%) host."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3168
+#: libraries/classes/Server/Privileges.php:3171
 #, fuzzy, php-format
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -13312,7 +13298,7 @@ msgstr ""
 "হতে পারে যদি তা পরিবর্তীত হয়ে থাকে। এরুপ ক্ষেত্রে %sreload the privileges%s করতে "
 "হবে।"
 
-#: libraries/classes/Server/Privileges.php:3184
+#: libraries/classes/Server/Privileges.php:3187
 #, fuzzy
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -13331,7 +13317,7 @@ msgstr ""
 "হতে পারে যদি তা পরিবর্তীত হয়ে থাকে। এরুপ ক্ষেত্রে %sreload the privileges%s করতে "
 "হবে।"
 
-#: libraries/classes/Server/Privileges.php:3520
+#: libraries/classes/Server/Privileges.php:3523
 msgid "You have added a new user."
 msgstr "একজন নতুন ব্যবহারকারী যোগ করেছেন।"
 
@@ -14618,21 +14604,15 @@ msgid "Node group"
 msgstr "ব্যাবহারকারীর দল"
 
 #: templates/columns_definitions/table_fields_definitions.twig:17
-#, fuzzy
-#| msgid ""
-#| "If column type is \"enum\" or \"set\", please enter the values using this "
-#| "format: 'a','b','c'…<br />If you ever need to put a backslash (\"\\\") or "
-#| "a single quote (\"'\") amongst those values, precede it with a backslash "
-#| "(for example '\\\\xyz' or 'a\\'b')."
 msgid ""
 "If column type is \"enum\" or \"set\", please enter the values using this "
-"format: 'a','b','c'…<br>If you ever need to put a backslash (\"\") or a "
+"format: 'a','b','c'…<br>If you ever need to put a backslash (\"\\\") or a "
 "single quote (\"'\") amongst those values, precede it with a backslash (for "
 "example '\\\\xyz' or 'a\\'b')."
 msgstr ""
 "যদি স্তম্ভের ধরন \"enum\" বা \"set\" হয়, মানগুলো এই গঠন অনুযায়ী দিন, গঠন: "
-"'অ','আ','ই'…<br /> যদি backslash (\"\\\") বা single quote (\"'\") দেয়ার "
-"প্রয়োজন হয়, তবে মানগুলোর পূর্বে backslash দিন (যেমন '\\\\কখগ' বা 'অ\\'আ')।"
+"'অ','আ','ই'…<br> যদি backslash (\"\\\") বা single quote (\"'\") দেয়ার প্রয়ো"
+"জন হয়, তবে মানগুলোর পূর্বে backslash দিন (যেমন '\\\\কখগ' বা 'অ\\'আ')।"
 
 #: templates/columns_definitions/table_fields_definitions.twig:21
 msgid ""
@@ -15284,6 +15264,10 @@ msgstr "পাতা নির্বাচন"
 #: templates/database/designer/schema_export.twig:4
 msgid "Select Export Relational Type"
 msgstr "রফতানীর সম্পর্কের ধরন নিধার্রান"
+
+#: templates/database/events/editor_form.twig:12
+msgid "Event name"
+msgstr "ইভেন্টের নাম"
 
 #: templates/database/events/editor_form.twig:28
 #: templates/server/binlog/index.twig:86
@@ -17849,21 +17833,37 @@ msgid ""
 "Allows adding users and privileges without reloading the privilege tables."
 msgstr "অধিকার টেবল রিলোড না করে ব্যবহারকারী এবং তাদের অধিকার যোগ করার অনুমোদন।"
 
-#: templates/server/privileges/privileges_table.twig:696
+#: templates/server/privileges/privileges_table.twig:646
+#, fuzzy
+#| msgid "Allows creating stored routines."
+msgid "Allows creating foreign key relations."
+msgstr "মজুদ করার জন্য রুটিন তৈরীর অনুমোদন।"
+
+#: templates/server/privileges/privileges_table.twig:646
+msgid "Not used on MariaDB."
+msgstr ""
+
+#: templates/server/privileges/privileges_table.twig:646
+#, fuzzy
+#| msgid "Has no effect in this MySQL version."
+msgid "Not used for this MySQL version."
+msgstr "মাইএসকিউএলের এই ভার্সনে কোন প্রভাব নাই।"
+
+#: templates/server/privileges/privileges_table.twig:697
 msgid "Resource limits"
 msgstr "সম্পদের সীমাবদ্ধতা"
 
-#: templates/server/privileges/privileges_table.twig:698
+#: templates/server/privileges/privileges_table.twig:699
 msgid "Note: Setting these options to 0 (zero) removes the limit."
 msgstr "টিকা: এটা ০ (শূন্য) দেওয়া থাকলে কোন সীমাবদ্ধতা থাকবে না।"
 
-#: templates/server/privileges/privileges_table.twig:704
-#: templates/server/privileges/privileges_table.twig:711
+#: templates/server/privileges/privileges_table.twig:705
+#: templates/server/privileges/privileges_table.twig:712
 msgid "Limits the number of queries the user may send to the server per hour."
 msgstr "এই ব্যবহারকারীর প্রতি ঘন্টায় ব্যবহৃত অনুসন্ধান নির্ধারন করন।"
 
-#: templates/server/privileges/privileges_table.twig:717
-#: templates/server/privileges/privileges_table.twig:724
+#: templates/server/privileges/privileges_table.twig:718
+#: templates/server/privileges/privileges_table.twig:725
 msgid ""
 "Limits the number of commands that change any table or database the user may "
 "execute per hour."
@@ -17871,42 +17871,42 @@ msgstr ""
 "এই ব্যবহারকারীর ডাটাবেইজ বা টেবিল এর পরিবর্তন করতে পারে এমন কমান্ড ব্যবহারের "
 "পরিমান নির্ধারন করন।"
 
-#: templates/server/privileges/privileges_table.twig:730
-#: templates/server/privileges/privileges_table.twig:737
+#: templates/server/privileges/privileges_table.twig:731
+#: templates/server/privileges/privileges_table.twig:738
 msgid "Limits the number of new connections the user may open per hour."
 msgstr "এই ব্যবহারকারীর প্রতি ঘন্টায় ব্যবহার যোগ্য সংযোগ নির্ধারন করন।"
 
-#: templates/server/privileges/privileges_table.twig:743
-#: templates/server/privileges/privileges_table.twig:750
+#: templates/server/privileges/privileges_table.twig:744
+#: templates/server/privileges/privileges_table.twig:751
 msgid "Limits the number of simultaneous connections the user may have."
 msgstr ""
 "এই ব্যবহারকারী একই সংগে কতগুলো সংযোগ ব্যবহার করতে পারবে তার পরিমান নির্ধারন করন।"
 
-#: templates/server/privileges/privileges_table.twig:759
+#: templates/server/privileges/privileges_table.twig:760
 #, fuzzy
 #| msgid "Persistent connections"
 msgid "Does not require SSL-encrypted connections."
 msgstr "স্থীর সংযোগ"
 
-#: templates/server/privileges/privileges_table.twig:768
+#: templates/server/privileges/privileges_table.twig:769
 #, fuzzy
 #| msgid "Persistent connections"
 msgid "Requires SSL-encrypted connections."
 msgstr "স্থীর সংযোগ"
 
-#: templates/server/privileges/privileges_table.twig:777
+#: templates/server/privileges/privileges_table.twig:778
 msgid "Requires a valid X509 certificate."
 msgstr ""
 
-#: templates/server/privileges/privileges_table.twig:798
+#: templates/server/privileges/privileges_table.twig:799
 msgid "Requires that a specific cipher method be used for a connection."
 msgstr ""
 
-#: templates/server/privileges/privileges_table.twig:807
+#: templates/server/privileges/privileges_table.twig:808
 msgid "Requires that a valid X509 certificate issued by this CA be presented."
 msgstr ""
 
-#: templates/server/privileges/privileges_table.twig:816
+#: templates/server/privileges/privileges_table.twig:817
 msgid "Requires that a valid X509 certificate with this subject be presented."
 msgstr ""
 
@@ -19657,9 +19657,6 @@ msgstr "ট্রেকিং প্রতিবেদন"
 
 #~ msgid "No activity within %s seconds; please log in again."
 #~ msgstr "%s সেকেন্ডের মধ্য কার্যক্রম নাই; অনুগ্রহ করে আবার লগইন করুন।"
-
-#~ msgid "Event name"
-#~ msgstr "ইভেন্টের নাম"
 
 #, fuzzy
 #~| msgid "You do not have the necessary privileges to create a routine"
