@@ -135,6 +135,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
         var pos2Name = $expandElem.find('span.pos2_nav');
         var pathsNav = $expandElem.find('span.paths_nav');
         params = {
+            'server': CommonParams.get('server'),
             'aPath': pathsNav.attr('data-apath'),
             'vPath': pathsNav.attr('data-vpath'),
             'pos': pathsNav.attr('data-pos'),
@@ -150,6 +151,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
     } else {
         $destination = $('#pma_navigation_tree_content');
         params = {
+            'server': CommonParams.get('server'),
             'aPath': $expandElem.attr('data-apath'),
             'vPath': $expandElem.attr('data-vpath'),
             'pos': $expandElem.attr('data-pos'),
@@ -1220,7 +1222,7 @@ Navigation.ResizeHandler = function () {
     /**
      * Event handler for terminating a resize of the panel
      *
-     * @param object e Event data (contains a reference to Navigation.ResizeHandler)
+     * @param {Object} event Event data (contains a reference to Navigation.ResizeHandler)
      *
      * @return void
      */
@@ -1235,7 +1237,7 @@ Navigation.ResizeHandler = function () {
     /**
      * Event handler for updating the panel during a resize operation
      *
-     * @param object e Event data (contains a reference to Navigation.ResizeHandler)
+     * @param {Object} event Event data (contains a reference to Navigation.ResizeHandler)
      *
      * @return void
      */
@@ -1252,7 +1254,7 @@ Navigation.ResizeHandler = function () {
     /**
      * Event handler for collapsing the panel
      *
-     * @param object e Event data (contains a reference to Navigation.ResizeHandler)
+     * @param {Object} event Event data (contains a reference to Navigation.ResizeHandler)
      *
      * @return void
      */
@@ -1289,7 +1291,7 @@ Navigation.ResizeHandler = function () {
                 'overflow-y': 'auto'
             });
         }
-        // Set content bottom space beacuse of console
+        // Set content bottom space because of console
         $('body').css('margin-bottom', $('#pma_console').height() + 'px');
     };
     // Hide the pma_navigation initially when loaded on mobile
