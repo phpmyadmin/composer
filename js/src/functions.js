@@ -563,114 +563,6 @@ Functions.suggestPassword = function (passwordForm) {
 };
 
 /**
- * Version string to integer conversion.
- */
-Functions.parseVersionString = function (str) {
-    if (typeof(str) !== 'string') {
-        return false;
-    }
-    var add = 0;
-    // Parse possible alpha/beta/rc/
-    var state = str.split('-');
-    if (state.length >= 2) {
-        if (state[1].substr(0, 2) === 'rc') {
-            add = - 20 - parseInt(state[1].substr(2), 10);
-        } else if (state[1].substr(0, 4) === 'beta') {
-            add =  - 40 - parseInt(state[1].substr(4), 10);
-        } else if (state[1].substr(0, 5) === 'alpha') {
-            add =  - 60 - parseInt(state[1].substr(5), 10);
-        } else if (state[1].substr(0, 3) === 'dev') {
-            /* We don't handle dev, it's git snapshot */
-            add = 0;
-        }
-    }
-    // Parse version
-    var x = str.split('.');
-    // Use 0 for non existing parts
-    var maj = parseInt(x[0], 10) || 0;
-    var min = parseInt(x[1], 10) || 0;
-    var pat = parseInt(x[2], 10) || 0;
-    var hotfix = parseInt(x[3], 10) || 0;
-    return maj * 100000000 + min * 1000000 + pat * 10000 + hotfix * 100 + add;
-};
-
-/**
- * Indicates current available version on main page.
- */
-Functions.currentVersion = function (data) {
-    if (data && data.version && data.date) {
-        var current = Functions.parseVersionString($('span.version').text());
-        var latest = Functions.parseVersionString(data.version);
-        var url = 'https://www.phpmyadmin.net/files/' + Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
-        var versionInformationMessage = document.createElement('span');
-        versionInformationMessage.className = 'latest';
-        var versionInformationMessageLink = document.createElement('a');
-        versionInformationMessageLink.href = url;
-        versionInformationMessageLink.className = 'disableAjax';
-        var versionInformationMessageLinkText = document.createTextNode(data.version);
-        versionInformationMessageLink.appendChild(versionInformationMessageLinkText);
-        var prefixMessage = document.createTextNode(Messages.strLatestAvailable + ' ');
-        versionInformationMessage.appendChild(prefixMessage);
-        versionInformationMessage.appendChild(versionInformationMessageLink);
-        if (latest > current) {
-            var message = Functions.sprintf(
-                Messages.strNewerVersion,
-                Functions.escapeHtml(data.version),
-                Functions.escapeHtml(data.date)
-            );
-            var htmlClass = 'alert alert-primary';
-            if (Math.floor(latest / 10000) === Math.floor(current / 10000)) {
-                /* Security update */
-                htmlClass = 'alert alert-danger';
-            }
-            $('#newer_version_notice').remove();
-            var mainContainerDiv = document.createElement('div');
-            mainContainerDiv.id = 'newer_version_notice';
-            mainContainerDiv.className = htmlClass;
-            var mainContainerDivLink = document.createElement('a');
-            mainContainerDivLink.href = url;
-            mainContainerDivLink.className = 'disableAjax';
-            var mainContainerDivLinkText = document.createTextNode(message);
-            mainContainerDivLink.appendChild(mainContainerDivLinkText);
-            mainContainerDiv.appendChild(mainContainerDivLink);
-            $('#maincontainer').append($(mainContainerDiv));
-        }
-        if (latest === current) {
-            versionInformationMessage = document.createTextNode(' (' + Messages.strUpToDate + ')');
-        }
-        /* Remove extra whitespace */
-        var versionInfo = $('#li_pma_version').contents().get(2);
-        if (typeof versionInfo !== 'undefined') {
-            versionInfo.textContent = versionInfo.textContent.trim();
-        }
-        var $liPmaVersion = $('#li_pma_version');
-        $liPmaVersion.find('span.latest').remove();
-        $liPmaVersion.append($(versionInformationMessage));
-    }
-};
-
-/**
- * Loads Git revision data from ajax for index.php
- */
-Functions.displayGitRevision = function () {
-    $('#is_git_revision').remove();
-    $('#li_pma_version_git').remove();
-    $.get(
-        'index.php?route=/git-revision',
-        {
-            'server': CommonParams.get('server'),
-            'ajax_request': true,
-            'no_debug': true
-        },
-        function (data) {
-            if (typeof data !== 'undefined' && data.success === true) {
-                $(data.message).insertAfter('#li_pma_version');
-            }
-        }
-    );
-};
-
-/**
  * for PhpMyAdmin\Display\ChangePassword and /user-password
  */
 Functions.displayPasswordGenerateButton = function () {
@@ -4189,25 +4081,6 @@ AJAX.registerOnload('functions.js', function () {
     });
 
     /**
-     * Load version information asynchronously.
-     */
-    if ($('li.jsversioncheck').length > 0) {
-        $.ajax({
-            dataType: 'json',
-            url: 'index.php?route=/version-check',
-            method: 'POST',
-            data: {
-                'server': CommonParams.get('server')
-            },
-            success: Functions.currentVersion
-        });
-    }
-
-    if ($('#is_git_revision').length > 0) {
-        setTimeout(Functions.displayGitRevision, 10);
-    }
-
-    /**
      * Slider effect.
      */
     Functions.initSlider();
@@ -4479,45 +4352,15 @@ $(window).on('popstate', function () {
  * Unbind all event handlers before tearing down a page
  */
 AJAX.registerTeardown('functions.js', function () {
-    $(document).off('click', 'a.themeselect');
     $(document).off('change', '.autosubmit');
-    $('a.take_theme').off('click');
 });
 
 AJAX.registerOnload('functions.js', function () {
-    /**
-     * Theme selector.
-     */
-    $(document).on('click', 'a.themeselect', function (e) {
-        window.open(
-            e.target,
-            'themes',
-            'left=10,top=20,width=510,height=350,scrollbars=yes,status=yes,resizable=yes'
-        );
-        return false;
-    });
-
     /**
      * Automatic form submission on change.
      */
     $(document).on('change', '.autosubmit', function () {
         $(this).closest('form').trigger('submit');
-    });
-
-    /**
-     * Theme changer.
-     */
-    $('a.take_theme').on('click', function () {
-        var what = this.name;
-        /* eslint-disable compat/compat */
-        if (window.opener && window.opener.document.forms.setTheme.elements.set_theme) {
-            window.opener.document.forms.setTheme.elements.set_theme.value = what;
-            window.opener.document.forms.setTheme.submit();
-            window.close();
-            return false;
-        }
-        /* eslint-enable compat/compat */
-        return true;
     });
 });
 
