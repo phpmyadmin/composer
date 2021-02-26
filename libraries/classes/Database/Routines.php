@@ -305,6 +305,7 @@ class Routines
         $this->response->addJSON('new_row', $this->getRow($routine));
         $this->response->addJSON('insert', ! empty($routine));
         $this->response->addJSON('message', $output);
+        $this->response->addJSON('tableType', 'routines');
         exit;
     }
 
@@ -1226,7 +1227,8 @@ class Routines
 
                 if (($result !== false) && ($num_rows > 0)) {
                     $output .= '<table class="pma-table"><tr>';
-                    foreach ($this->dbi->getFieldsMeta($result) as $field) {
+                    $fieldsMeta = $this->dbi->getFieldsMeta($result) ?? [];
+                    foreach ($fieldsMeta as $field) {
                         $output .= '<th>';
                         $output .= htmlspecialchars($field->name);
                         $output .= '</th>';
