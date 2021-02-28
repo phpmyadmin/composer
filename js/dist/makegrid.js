@@ -1676,7 +1676,7 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         }
       }).on('mouseleave', function () {
         g.showReorderHint = false;
-        $(this).tooltip('option', {
+        $(this).uiTooltip('option', {
           content: g.updateHint()
         });
       }).on('dblclick', function (e) {
@@ -2243,13 +2243,13 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
   $(t).find('th.draggable a').on('mouseenter', function () {
     g.showSortHint = true;
     g.showMultiSortHint = true;
-    $(t).find('th.draggable').tooltip('option', {
+    $(t).find('th.draggable').uiTooltip('option', {
       content: g.updateHint()
     });
   }).on('mouseleave', function () {
     g.showSortHint = false;
     g.showMultiSortHint = false;
-    $(t).find('th.draggable').tooltip('option', {
+    $(t).find('th.draggable').uiTooltip('option', {
       content: g.updateHint()
     });
   }); // register events for dragging-related feature
