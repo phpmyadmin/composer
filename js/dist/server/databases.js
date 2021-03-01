@@ -46,7 +46,7 @@ AJAX.registerOnload('server/databases.js', function () {
     });
 
     if (!selectedDbs.length) {
-      Functions.ajaxShowMessage($('<div class="alert alert-primary" role="alert"></div>').text(Messages.strNoDatabasesSelected), 2000);
+      Functions.ajaxShowMessage($('<div class="alert alert-warning" role="alert"></div>').text(Messages.strNoDatabasesSelected), 2000);
       return;
     }
     /**
@@ -55,8 +55,11 @@ AJAX.registerOnload('server/databases.js', function () {
 
 
     var question = Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(Messages.strDoYouReally, selectedDbs.join('<br>'));
-    var argsep = CommonParams.get('arg_separator');
-    $(this).confirm(question, 'index.php?route=/server/databases/destroy&' + $(this).serialize() + argsep + 'drop_selected_dbs=1', function (url) {
+    var modal = $('#dropDatabaseModal');
+    modal.find('.modal-body').html(question);
+    modal.modal('show');
+    var url = 'index.php?route=/server/databases/destroy&' + $(this).serialize() + CommonParams.get('arg_separator') + 'drop_selected_dbs=1';
+    $('#dropDatabaseModalDropButton').on('click', function () {
       Functions.ajaxShowMessage(Messages.strProcessingRequest, false);
       var parts = url.split('?');
       var params = Functions.getJsConfirmCommonParam(this, parts[1]);
@@ -80,10 +83,11 @@ AJAX.registerOnload('server/databases.js', function () {
           $form.find('tr.removeMe').removeClass('removeMe');
           Functions.ajaxShowMessage(data.error, false);
         }
-      }); // end $.post()
+      });
+      modal.modal('hide');
+      $('#dropDatabaseModalDropButton').off('click');
     });
-  }); // end of Drop Database action
-
+  });
   /**
    * Attach Ajax event handlers for 'Create Database'.
    */
