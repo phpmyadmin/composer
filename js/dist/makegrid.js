@@ -1795,10 +1795,11 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
       $(g.t).find('td, th.draggable').on('mouseenter', function () {
         g.hideColList();
-      }); // attach to global div
+      }); // attach to first row first col of the grid
 
-      $(g.gDiv).append(g.cDrop);
-      $(g.gDiv).append(g.cList); // some adjustment
+      var thFirst = $(g.t).find('th.print_ignore');
+      $(thFirst).append(g.cDrop);
+      $(thFirst).append(g.cList); // some adjustment
 
       g.reposDrop();
     },
