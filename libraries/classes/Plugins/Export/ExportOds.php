@@ -17,6 +17,7 @@ use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+
 use function bin2hex;
 use function date;
 use function htmlspecialchars;
@@ -242,6 +243,7 @@ class ExportOds extends ExportPlugin
                 if (! empty($aliases[$db]['tables'][$table]['columns'][$col_as])) {
                     $col_as = $aliases[$db]['tables'][$table]['columns'][$col_as];
                 }
+
                 $GLOBALS['ods_buffer']
                     .= '<table:table-cell office:value-type="string">'
                     . '<text:p>'
@@ -251,6 +253,7 @@ class ExportOds extends ExportPlugin
                     . '</text:p>'
                     . '</table:table-cell>';
             }
+
             $GLOBALS['ods_buffer'] .= '</table:table-row>';
         }
 
@@ -262,6 +265,7 @@ class ExportOds extends ExportPlugin
                     // export GIS types as hex
                     $row[$j] = '0x' . bin2hex($row[$j]);
                 }
+
                 if (! isset($row[$j]) || $row[$j] === null) {
                     $GLOBALS['ods_buffer']
                         .= '<table:table-cell office:value-type="string">'
@@ -269,7 +273,8 @@ class ExportOds extends ExportPlugin
                         . htmlspecialchars($GLOBALS[$what . '_null'])
                         . '</text:p>'
                         . '</table:table-cell>';
-                } elseif ($fields_meta[$j]->isBinary
+                } elseif (
+                    $fields_meta[$j]->isBinary
                     && $fields_meta[$j]->isBlob
                 ) {
                     // ignore BLOB
@@ -307,7 +312,8 @@ class ExportOds extends ExportPlugin
                         . htmlspecialchars($row[$j])
                         . '</text:p>'
                         . '</table:table-cell>';
-                } elseif (($fields_meta[$j]->isNumeric
+                } elseif (
+                    ($fields_meta[$j]->isNumeric
                     && ! $fields_meta[$j]->isMappedTypeTimestamp
                     && ! $fields_meta[$j]->isBlob)
                     || $fields_meta[$j]->isType(FieldMetadata::TYPE_REAL)
@@ -328,8 +334,10 @@ class ExportOds extends ExportPlugin
                         . '</table:table-cell>';
                 }
             }
+
             $GLOBALS['ods_buffer'] .= '</table:table-row>';
         }
+
         $dbi->freeResult($result);
 
         $GLOBALS['ods_buffer'] .= '</table:table>';

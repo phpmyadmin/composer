@@ -19,6 +19,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function count;
 use function mb_strtolower;
 use function strlen;
@@ -82,7 +83,8 @@ class OperationsController extends AbstractController
         /**
          * Rename/move or copy database
          */
-        if (strlen($db) > 0
+        if (
+            strlen($db) > 0
             && (! empty($_POST['db_rename']) || ! empty($_POST['db_copy']))
         ) {
             if (! empty($_POST['db_rename'])) {
@@ -154,12 +156,14 @@ class OperationsController extends AbstractController
                     if (! $_error) {
                         $this->operations->handleTheViews($views, $move, $db);
                     }
+
                     unset($views);
 
                     // now that all tables exist, create all the accumulated constraints
                     if (! $_error && count($sqlConstratints) > 0) {
                         $this->operations->createAllAccumulatedConstraints($sqlConstratints);
                     }
+
                     unset($sqlConstratints);
 
                     if ($this->dbi->getVersion() >= 50100) {
@@ -176,7 +180,8 @@ class OperationsController extends AbstractController
                     $this->operations->duplicateBookmarks($_error, $db);
 
                     if (! $_error && $move) {
-                        if (isset($_POST['adjust_privileges'])
+                        if (
+                            isset($_POST['adjust_privileges'])
                             && ! empty($_POST['adjust_privileges'])
                         ) {
                             $this->operations->adjustPrivilegesMoveDb($db, $_POST['newname']);
@@ -199,7 +204,8 @@ class OperationsController extends AbstractController
                         $message->addParam($db);
                         $message->addParam($_POST['newname']);
                     } elseif (! $_error) {
-                        if (isset($_POST['adjust_privileges'])
+                        if (
+                            isset($_POST['adjust_privileges'])
                             && ! empty($_POST['adjust_privileges'])
                         ) {
                             $this->operations->adjustPrivilegesCopyDb($db, $_POST['newname']);
@@ -213,13 +219,15 @@ class OperationsController extends AbstractController
                     } else {
                         $message = Message::error();
                     }
+
                     $reload = true;
 
                     /* Change database to be used */
                     if (! $_error && $move) {
                         $db = $_POST['newname'];
                     } elseif (! $_error) {
-                        if (isset($_POST['switch_to_new'])
+                        if (
+                            isset($_POST['switch_to_new'])
                             && $_POST['switch_to_new'] === 'true'
                         ) {
                             $_SESSION['pma_switch_to_new'] = true;
@@ -316,7 +324,8 @@ class OperationsController extends AbstractController
         $charsets = Charsets::getCharsets($this->dbi, $GLOBALS['cfg']['Server']['DisableIS']);
         $collations = Charsets::getCollations($this->dbi, $GLOBALS['cfg']['Server']['DisableIS']);
 
-        if (! $cfgRelation['allworks']
+        if (
+            ! $cfgRelation['allworks']
             && $cfg['PmaNoRelation_DisableWarning'] == false
         ) {
             $message = Message::notice(
@@ -382,7 +391,8 @@ class OperationsController extends AbstractController
         /**
          * Changes tables charset if requested by the user
          */
-        if (isset($_POST['change_all_tables_collations']) &&
+        if (
+            isset($_POST['change_all_tables_collations']) &&
             $_POST['change_all_tables_collations'] === 'on'
         ) {
             [$tables] = Util::getDbInfo($db, null);
@@ -392,6 +402,7 @@ class OperationsController extends AbstractController
                     // issue #15283
                     continue;
                 }
+
                 $sql_query = 'ALTER TABLE '
                     . Util::backquote($db)
                     . '.'
@@ -403,7 +414,8 @@ class OperationsController extends AbstractController
                 /**
                  * Changes columns charset if requested by the user
                  */
-                if (! isset($_POST['change_all_tables_columns_collations']) ||
+                if (
+                    ! isset($_POST['change_all_tables_columns_collations']) ||
                     $_POST['change_all_tables_columns_collations'] !== 'on'
                 ) {
                     continue;

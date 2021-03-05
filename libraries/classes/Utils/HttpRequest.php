@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Utils;
 
+use function base64_encode;
+use function curl_exec;
+use function curl_getinfo;
+use function curl_init;
+use function curl_setopt;
+use function file_get_contents;
+use function function_exists;
+use function ini_get;
+use function intval;
+use function preg_match;
+use function stream_context_create;
+use function strlen;
+
 use const CURL_IPRESOLVE_V4;
 use const CURLINFO_HTTP_CODE;
 use const CURLINFO_SSL_VERIFYRESULT;
@@ -22,18 +35,6 @@ use const CURLOPT_SSL_VERIFYHOST;
 use const CURLOPT_SSL_VERIFYPEER;
 use const CURLOPT_TIMEOUT;
 use const CURLOPT_USERAGENT;
-use function base64_encode;
-use function curl_exec;
-use function curl_getinfo;
-use function curl_init;
-use function curl_setopt;
-use function file_get_contents;
-use function function_exists;
-use function ini_get;
-use function intval;
-use function preg_match;
-use function stream_context_create;
-use function strlen;
 
 /**
  * Handles HTTP requests
@@ -102,9 +103,11 @@ class HttpRequest
         if ($httpStatus == 404) {
             return false;
         }
+
         if ($httpStatus != 200) {
             return null;
         }
+
         if ($returnOnlyStatus) {
             return true;
         }
@@ -136,6 +139,7 @@ class HttpRequest
         if ($curlHandle === false) {
             return null;
         }
+
         $curlStatus = true;
         if (strlen($this->proxyUrl) > 0) {
             $curlStatus &= curl_setopt($curlHandle, CURLOPT_PROXY, $this->proxyUrl);
@@ -147,11 +151,13 @@ class HttpRequest
                 );
             }
         }
+
         $curlStatus &= curl_setopt($curlHandle, CURLOPT_USERAGENT, 'phpMyAdmin');
 
         if ($method !== 'GET') {
             $curlStatus &= curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, $method);
         }
+
         if ($header) {
             $curlStatus &= curl_setopt($curlHandle, CURLOPT_HTTPHEADER, [$header]);
         }
@@ -186,6 +192,7 @@ class HttpRequest
         if (! $curlStatus) {
             return null;
         }
+
         $response = @curl_exec($curlHandle);
         if ($response === false) {
             /*
@@ -212,6 +219,7 @@ class HttpRequest
 
             return null;
         }
+
         $httpStatus = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
 
         return $this->response($response, $httpStatus, $returnOnlyStatus);
@@ -247,9 +255,11 @@ class HttpRequest
         if ($header) {
             $context['http']['header'] .= "\n" . $header;
         }
+
         if ($method === 'POST') {
             $context['http']['content'] = $content;
         }
+
         $context = $this->handleContext($context);
         $response = @file_get_contents(
             $url,

@@ -9,14 +9,16 @@ use PhpMyAdmin\ErrorReport;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Utils\HttpRequest;
+
+use function define;
+use function defined;
 use function htmlspecialchars;
+use function json_encode;
+use function phpversion;
+
 use const ENT_QUOTES;
 use const JSON_PRETTY_PRINT;
 use const JSON_UNESCAPED_SLASHES;
-use function define;
-use function defined;
-use function json_encode;
-use function phpversion;
 
 /**
  * PhpMyAdmin\Tests\ErrorReportTest class
@@ -45,9 +47,11 @@ class ErrorReportTest extends AbstractTestCase
         if (! defined('PMA_USR_BROWSER_AGENT')) {
             define('PMA_USR_BROWSER_AGENT', 'Other');
         }
+
         if (! defined('PMA_USR_BROWSER_VER')) {
             define('PMA_USR_BROWSER_VER', 1);
         }
+
         if (! defined('PMA_USR_OS')) {
             define('PMA_USR_OS', 'os');
         }

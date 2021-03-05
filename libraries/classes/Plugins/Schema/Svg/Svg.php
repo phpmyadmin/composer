@@ -10,6 +10,7 @@ namespace PhpMyAdmin\Plugins\Schema\Svg;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Response;
 use XMLWriter;
+
 use function intval;
 use function is_int;
 use function sprintf;
@@ -167,6 +168,7 @@ class Svg extends XMLWriter
         if ($x != 0 || $y != 0) {
             $this->writeAttribute('viewBox', sprintf('%d %d %d %d', $x, $y, $width, $height));
         }
+
         $this->writeAttribute('width', ($width - $x) . 'px');
         $this->writeAttribute('height', ($height - $y) . 'px');
         $this->writeAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -261,6 +263,7 @@ class Svg extends XMLWriter
             $this->writeAttribute('font-size', $this->fontSize . 'px');
             $this->text($text);
         }
+
         $this->endElement();
     }
 

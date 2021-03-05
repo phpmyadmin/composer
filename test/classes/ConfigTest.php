@@ -7,9 +7,7 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\DatabaseInterface;
 use PHPUnit\Framework\Exception;
-use const DIRECTORY_SEPARATOR;
-use const INFO_MODULES;
-use const PHP_OS;
+
 use function array_merge;
 use function array_replace_recursive;
 use function constant;
@@ -29,6 +27,10 @@ use function realpath;
 use function strip_tags;
 use function stristr;
 use function sys_get_temp_dir;
+
+use const DIRECTORY_SEPARATOR;
+use const INFO_MODULES;
+use const PHP_OS;
 
 class ConfigTest extends AbstractTestCase
 {
@@ -87,7 +89,6 @@ class ConfigTest extends AbstractTestCase
         $this->object->checkSystem();
 
         $this->assertNotEmpty($this->object->get('PMA_VERSION'));
-        $this->assertNotEmpty($this->object->get('PMA_MAJOR_VERSION'));
     }
 
     /**
@@ -130,6 +131,7 @@ class ConfigTest extends AbstractTestCase
                 $this->object->get('PMA_USR_BROWSER_AGENT')
             );
         }
+
         if ($version == null) {
             return;
         }
@@ -750,7 +752,6 @@ class ConfigTest extends AbstractTestCase
 
         $defines = [
             'PMA_VERSION',
-            'PMA_MAJOR_VERSION',
             'PMA_IS_WINDOWS',
             'PMA_IS_GD2',
             'PMA_USR_OS',
@@ -1072,6 +1073,7 @@ class ConfigTest extends AbstractTestCase
         } else {
             $expected = array_merge($this->object->defaultServer, $expected);
         }
+
         $this->assertEquals($expected, $this->object->settings['Servers'][1]);
     }
 

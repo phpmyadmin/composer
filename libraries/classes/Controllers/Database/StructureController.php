@@ -27,6 +27,7 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function array_search;
 use function ceil;
 use function count;
@@ -185,9 +186,11 @@ class StructureController extends AbstractController
             if (isset($parameters['sort'])) {
                 $urlParams['sort'] = $parameters['sort'];
             }
+
             if (isset($parameters['sort_order'])) {
                 $urlParams['sort_order'] = $parameters['sort_order'];
             }
+
             $listNavigator = Generator::getListNavigator(
                 $this->totalNumTables,
                 $this->position,
@@ -243,6 +246,7 @@ class StructureController extends AbstractController
         } else {
             $favoriteTables = [];
         }
+
         // Required to keep each user's preferences separate.
         $user = sha1($cfg['Server']['user']);
 
@@ -259,6 +263,7 @@ class StructureController extends AbstractController
 
             return;
         }
+
         $changes = true;
         $favoriteTable = $parameters['favorite_table'] ?? '';
         $alreadyFavorite = $this->checkFavoriteTable($favoriteTable);
@@ -294,6 +299,7 @@ class StructureController extends AbstractController
 
             return;
         }
+
         // Check if current table is already in favorite list.
         $favoriteParams = [
             'db' => $this->db,
@@ -503,7 +509,8 @@ class StructureController extends AbstractController
 
             if ($GLOBALS['cfg']['ShowDbStructureCreation']) {
                 $create_time = $current_table['Create_time'] ?? '';
-                if ($create_time
+                if (
+                    $create_time
                     && (! $create_time_all
                     || $create_time < $create_time_all)
                 ) {
@@ -513,7 +520,8 @@ class StructureController extends AbstractController
 
             if ($GLOBALS['cfg']['ShowDbStructureLastUpdate']) {
                 $update_time = $current_table['Update_time'] ?? '';
-                if ($update_time
+                if (
+                    $update_time
                     && (! $update_time_all
                     || $update_time < $update_time_all)
                 ) {
@@ -523,7 +531,8 @@ class StructureController extends AbstractController
 
             if ($GLOBALS['cfg']['ShowDbStructureLastCheck']) {
                 $check_time = $current_table['Check_time'] ?? '';
-                if ($check_time
+                if (
+                    $check_time
                     && (! $check_time_all
                     || $check_time < $check_time_all)
                 ) {
@@ -574,7 +583,8 @@ class StructureController extends AbstractController
                 );
             }
 
-            if ($num_columns > 0
+            if (
+                $num_columns > 0
                 && $this->numTables > $num_columns
                 && ($row_count % $num_columns) == 0
             ) {
@@ -739,7 +749,8 @@ class StructureController extends AbstractController
         $tracking_icon = '';
         if (Tracker::isActive()) {
             $is_tracked = Tracker::isTracked($this->db, $table);
-            if ($is_tracked
+            if (
+                $is_tracked
                 || Tracker::getVersion($this->db, $table) > 0
             ) {
                 $tracking_icon = $this->template->render('database/structure/tracking_icon', [
@@ -773,7 +784,8 @@ class StructureController extends AbstractController
         // - when it's a view
         //  so ensure that we'll display "in use" below for a table
         //  that needs to be repaired
-        if (isset($current_table['TABLE_ROWS'])
+        if (
+            isset($current_table['TABLE_ROWS'])
             && ($current_table['ENGINE'] != null || $table_is_view)
         ) {
             // InnoDB/TokuDB table: we did not get an accurate row count
@@ -781,7 +793,8 @@ class StructureController extends AbstractController
                 && in_array($current_table['ENGINE'], ['InnoDB', 'TokuDB'])
                 && ! $current_table['COUNTED'];
 
-            if ($table_is_view
+            if (
+                $table_is_view
                 && $current_table['TABLE_ROWS'] >= $GLOBALS['cfg']['MaxExactCountViews']
             ) {
                 $approx_rows = true;
@@ -879,13 +892,15 @@ class StructureController extends AbstractController
     ): array {
         $favoriteInstanceTables = $favoriteInstance->getTables();
 
-        if (empty($favoriteInstanceTables)
+        if (
+            empty($favoriteInstanceTables)
             && isset($favoriteTables[$user])
         ) {
             foreach ($favoriteTables[$user] as $key => $value) {
                 $favoriteInstance->add($value['db'], $value['table']);
             }
         }
+
         $favoriteTables[$user] = $favoriteInstance->getTables();
 
         $json = [
@@ -929,7 +944,8 @@ class StructureController extends AbstractController
     protected function hasTable(array $db, $truename)
     {
         foreach ($db as $db_table) {
-            if ($this->db == $this->replication->extractDbOrTable($db_table)
+            if (
+                $this->db == $this->replication->extractDbOrTable($db_table)
                 && preg_match(
                     '@^' .
                     preg_quote(mb_substr($this->replication->extractDbOrTable($db_table, 'table'), 0, -1), '@') . '@',
@@ -1017,6 +1033,7 @@ class StructureController extends AbstractController
                     $formatted_size =  ' - ';
                     $unit          =  '';
                 }
+
                 break;
         // for a view, the ENGINE is sometimes reported as null,
         // or on some servers it's reported as "SYSTEM VIEW"
@@ -1032,7 +1049,8 @@ class StructureController extends AbstractController
                 }
         }
 
-        if ($current_table['TABLE_TYPE'] === 'VIEW'
+        if (
+            $current_table['TABLE_TYPE'] === 'VIEW'
             || $current_table['TABLE_TYPE'] === 'SYSTEM VIEW'
         ) {
             // countRecords() takes care of $cfg['MaxExactCountViews']
@@ -1092,7 +1110,8 @@ class StructureController extends AbstractController
                 3,
                 $tblsize > 0 ? 1 : 0
             );
-            if (isset($current_table['Data_free'])
+            if (
+                isset($current_table['Data_free'])
                 && $current_table['Data_free'] > 0
             ) {
                 [$formatted_overhead, $overhead_unit]
@@ -1130,7 +1149,8 @@ class StructureController extends AbstractController
     ) {
         $formatted_size = $unit = '';
 
-        if ((in_array($current_table['ENGINE'], ['InnoDB', 'TokuDB'])
+        if (
+            (in_array($current_table['ENGINE'], ['InnoDB', 'TokuDB'])
             && $current_table['TABLE_ROWS'] < $GLOBALS['cfg']['MaxExactCount'])
             || ! isset($current_table['TABLE_ROWS'])
         ) {
@@ -1388,6 +1408,7 @@ class StructureController extends AbstractController
         if (! empty($full_query)) {
             $full_query .= ';<br>' . "\n";
         }
+
         if (! empty($full_query_views)) {
             $full_query .= $full_query_views . ';<br>' . "\n";
         }
@@ -1396,6 +1417,7 @@ class StructureController extends AbstractController
         foreach ($selected as $selectedValue) {
             $_url_params['selected'][] = $selectedValue;
         }
+
         foreach ($views as $current) {
             $_url_params['views'][] = $current;
         }

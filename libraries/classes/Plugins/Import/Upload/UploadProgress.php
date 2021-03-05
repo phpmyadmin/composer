@@ -9,6 +9,7 @@ namespace PhpMyAdmin\Plugins\Import\Upload;
 
 use PhpMyAdmin\Import\Ajax;
 use PhpMyAdmin\Plugins\UploadInterface;
+
 use function array_key_exists;
 use function function_exists;
 use function trim;
@@ -55,6 +56,7 @@ class UploadProgress implements UploadInterface
                 'plugin'   => self::getIdKey(),
             ];
         }
+
         $ret = $_SESSION[$SESSION_KEY][$id];
 
         if (! Ajax::progressCheck() || $ret['finished']) {
@@ -73,6 +75,7 @@ class UploadProgress implements UploadInterface
             } else {
                 $ret['finished'] = false;
             }
+
             $ret['total'] = $status['bytes_total'];
             $ret['complete'] = $status['bytes_uploaded'];
 

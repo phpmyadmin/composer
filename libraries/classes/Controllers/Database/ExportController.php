@@ -13,6 +13,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function array_merge;
 use function is_array;
 
@@ -101,6 +102,7 @@ final class ExportController extends AbstractController
             } else {
                 $is_checked = true;
             }
+
             if (isset($_POST['table_structure']) && is_array($_POST['table_structure'])) {
                 $structure_checked = $this->export->getCheckedClause(
                     $each_table['Name'],
@@ -109,6 +111,7 @@ final class ExportController extends AbstractController
             } else {
                 $structure_checked = $is_checked;
             }
+
             if (isset($_POST['table_data']) && is_array($_POST['table_data'])) {
                 $data_checked = $this->export->getCheckedClause(
                     $each_table['Name'],
@@ -129,6 +132,7 @@ final class ExportController extends AbstractController
         if (! isset($sql_query)) {
             $sql_query = '';
         }
+
         if (! isset($unlim_num_rows)) {
             $unlim_num_rows = 0;
         }

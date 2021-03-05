@@ -12,6 +12,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function header;
 use function htmlspecialchars;
 use function implode;
@@ -64,6 +65,7 @@ class VariablesController extends AbstractController
             while ($arr = $this->dbi->fetchRow($serverVarsResult)) {
                 $serverVarsSession[$arr[0]] = $arr[1];
             }
+
             $this->dbi->freeResult($serverVarsResult);
 
             $serverVars = $this->dbi->fetchResult('SHOW GLOBAL VARIABLES;', 0, 1);
@@ -166,11 +168,13 @@ class VariablesController extends AbstractController
         $matches = [];
         $variableType = ServerVariablesProvider::getImplementation()->getVariableType($variableName);
 
-        if ($variableType === 'byte' && preg_match(
-            '/^\s*(\d+(\.\d+)?)\s*(mb|kb|mib|kib|gb|gib)\s*$/i',
-            $value,
-            $matches
-        )) {
+        if (
+            $variableType === 'byte' && preg_match(
+                '/^\s*(\d+(\.\d+)?)\s*(mb|kb|mib|kib|gb|gib)\s*$/i',
+                $value,
+                $matches
+            )
+        ) {
             $exp = [
                 'kb' => 1,
                 'kib' => 1,
@@ -192,7 +196,8 @@ class VariablesController extends AbstractController
         }
 
         $json = [];
-        if (! preg_match('/[^a-zA-Z0-9_]+/', $params['varName'])
+        if (
+            ! preg_match('/[^a-zA-Z0-9_]+/', $params['varName'])
             && $this->dbi->query(
                 'SET GLOBAL ' . $params['varName'] . ' = ' . $value
             )

@@ -10,6 +10,7 @@ namespace PhpMyAdmin;
 use Exception;
 use TCPDF;
 use TCPDF_FONTS;
+
 use function count;
 use function strlen;
 use function strtr;
@@ -141,6 +142,7 @@ class Pdf extends TCPDF
                 $this->pages[$n] = strtr($this->pages[$n], $this->alias);
             }
         }
+
         parent::_putpages();
         // phpcs:enable
     }

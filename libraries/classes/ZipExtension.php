@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use ZipArchive;
+
 use function array_combine;
 use function count;
 use function crc32;
@@ -237,6 +238,7 @@ class ZipExtension
                 );
                 $newData[$newName] = $value;
             }
+
             $data = $newData;
         } elseif (is_array($data) && is_array($name) && count($data) === count($name)) {
             $data = array_combine($name, $data);

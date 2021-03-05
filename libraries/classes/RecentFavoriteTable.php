@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Html\Generator;
-use const SORT_REGULAR;
+
 use function array_key_exists;
 use function array_merge;
 use function array_pop;
@@ -21,6 +21,8 @@ use function json_encode;
 use function max;
 use function md5;
 use function ucfirst;
+
+use const SORT_REGULAR;
 
 /**
  * Handles the recently used and favorite tables.
@@ -71,11 +73,13 @@ class RecentFavoriteTable
         $this->relation = new Relation($dbi);
         $this->tableType = $type;
         $server_id = $GLOBALS['server'];
-        if (! isset($_SESSION['tmpval'][$this->tableType . 'Tables'][$server_id])
+        if (
+            ! isset($_SESSION['tmpval'][$this->tableType . 'Tables'][$server_id])
         ) {
             $_SESSION['tmpval'][$this->tableType . 'Tables'][$server_id]
                 = $this->getPmaTable() ? $this->getFromDb() : [];
         }
+
         $this->tables
             =& $_SESSION['tmpval'][$this->tableType . 'Tables'][$server_id];
     }
@@ -162,6 +166,7 @@ class RecentFavoriteTable
                     $error_msg = __('Could not save favorite table!');
                     break;
             }
+
             $message = Message::error($error_msg);
             $message->addMessage(
                 Message::rawError(
@@ -274,6 +279,7 @@ class RecentFavoriteTable
                 . '" class="drop_button btn">'
                 . __('Favorites') . '</button><ul id="pma_favorite_list">';
         }
+
         $html .= $this->getHtmlList();
         $html .= '</ul></div>';
 
@@ -358,6 +364,7 @@ class RecentFavoriteTable
 
             unset($this->tables[$key]);
         }
+
         if ($this->getPmaTable()) {
             return $this->saveToDb();
         }
@@ -377,6 +384,7 @@ class RecentFavoriteTable
         if ($server_id == 0) {
             return '';
         }
+
         $cfgRelation = $this->relation->getRelationsParam();
         // Not to show this once list is synchronized.
         if ($cfgRelation['favoritework'] && ! isset($_SESSION['tmpval']['favorites_synced'][$server_id])) {
@@ -421,7 +429,8 @@ class RecentFavoriteTable
             return null;
         }
 
-        if (! empty($cfgRelation['db'])
+        if (
+            ! empty($cfgRelation['db'])
             && ! empty($cfgRelation[$this->tableType])
         ) {
             return Util::backquote($cfgRelation['db']) . '.'

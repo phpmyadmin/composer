@@ -8,11 +8,13 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\FieldMetadata;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+
 use function is_numeric;
 use function str_replace;
 use function stripslashes;
@@ -159,12 +161,15 @@ class ExportYaml extends ExportPlugin
         );
 
         $columns_cnt = $dbi->numFields($result);
+        $fieldsMeta = $dbi->getFieldsMeta($result) ?? [];
+
         $columns = [];
         for ($i = 0; $i < $columns_cnt; $i++) {
             $col_as = $dbi->fieldName($result, $i);
             if (! empty($aliases[$db]['tables'][$table]['columns'][$col_as])) {
                 $col_as = $aliases[$db]['tables'][$table]['columns'][$col_as];
             }
+
             $columns[$i] = stripslashes($col_as);
         }
 
@@ -191,7 +196,8 @@ class ExportYaml extends ExportPlugin
                     continue;
                 }
 
-                if (is_numeric($record[$i])) {
+                $isNotString = isset($fieldsMeta[$i]) && $fieldsMeta[$i]->isNotType(FieldMetadata::TYPE_STRING);
+                if (is_numeric($record[$i]) && $isNotString) {
                     $buffer .= '  ' . $columns[$i] . ': ' . $record[$i] . $crlf;
                     continue;
                 }
@@ -218,6 +224,7 @@ class ExportYaml extends ExportPlugin
                 return false;
             }
         }
+
         $dbi->freeResult($result);
 
         return true;

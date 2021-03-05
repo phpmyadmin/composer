@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Gis;
 
 use TCPDF;
+
 use function hexdec;
 use function imagearc;
 use function imagecolorallocate;
@@ -239,6 +240,7 @@ class GisPoint extends GisGeometry
             foreach ($point_options as $option => $val) {
                 $row .= ' ' . $option . '="' . trim((string) $val) . '"';
             }
+
             $row .= '/>';
         }
 
@@ -295,6 +297,7 @@ class GisPoint extends GisGeometry
         if ($srid == 0) {
             $srid = 4326;
         }
+
         $result .= $this->getBoundsForOl($srid, $scale_data);
 
         // Trim to remove leading 'POINT(' and trailing ')'

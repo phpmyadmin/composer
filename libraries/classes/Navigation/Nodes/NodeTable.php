@@ -10,6 +10,7 @@ namespace PhpMyAdmin\Navigation\Nodes;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function in_array;
 use function intval;
 use function strpos;
@@ -117,6 +118,7 @@ class NodeTable extends NodeDatabaseChild
                         $dbi->tryQuery($query)
                     );
                 }
+
                 break;
             case 'indexes':
                 $db = Util::backquote($db);
@@ -145,6 +147,7 @@ class NodeTable extends NodeDatabaseChild
                         $dbi->tryQuery($query)
                     );
                 }
+
                 break;
             default:
                 break;
@@ -217,6 +220,7 @@ class NodeTable extends NodeDatabaseChild
                         $count++;
                     }
                 }
+
                 break;
             case 'indexes':
                 $db = Util::backquote($db);
@@ -232,12 +236,15 @@ class NodeTable extends NodeDatabaseChild
                     if (in_array($arr['Key_name'], $retval)) {
                         continue;
                     }
+
                     if ($pos <= 0 && $count < $maxItems) {
                         $retval[] = $arr['Key_name'];
                         $count++;
                     }
+
                     $pos--;
                 }
+
                 break;
             case 'triggers':
                 if (! $GLOBALS['cfg']['Server']['DisableIS']) {
@@ -274,6 +281,7 @@ class NodeTable extends NodeDatabaseChild
                         $count++;
                     }
                 }
+
                 break;
             default:
                 break;

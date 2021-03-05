@@ -9,6 +9,7 @@ namespace PhpMyAdmin\Setup;
 
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\VersionInformation;
+
 use function htmlspecialchars;
 use function is_array;
 use function sprintf;
@@ -81,6 +82,7 @@ class Index
 
                 $remove_ids[] = $id;
             }
+
             foreach ($remove_ids as $id) {
                 unset($messages[$id]);
             }

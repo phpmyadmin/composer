@@ -5,23 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use Throwable;
-use const DIRECTORY_SEPARATOR;
-use const E_COMPILE_ERROR;
-use const E_COMPILE_WARNING;
-use const E_CORE_ERROR;
-use const E_CORE_WARNING;
-use const E_DEPRECATED;
-use const E_ERROR;
-use const E_NOTICE;
-use const E_PARSE;
-use const E_RECOVERABLE_ERROR;
-use const E_STRICT;
-use const E_USER_DEPRECATED;
-use const E_USER_ERROR;
-use const E_USER_NOTICE;
-use const E_USER_WARNING;
-use const E_WARNING;
-use const PATH_SEPARATOR;
+
 use function array_pop;
 use function array_slice;
 use function basename;
@@ -43,6 +27,24 @@ use function realpath;
 use function serialize;
 use function str_replace;
 use function var_export;
+
+use const DIRECTORY_SEPARATOR;
+use const E_COMPILE_ERROR;
+use const E_COMPILE_WARNING;
+use const E_CORE_ERROR;
+use const E_CORE_WARNING;
+use const E_DEPRECATED;
+use const E_ERROR;
+use const E_NOTICE;
+use const E_PARSE;
+use const E_RECOVERABLE_ERROR;
+use const E_STRICT;
+use const E_USER_DEPRECATED;
+use const E_USER_ERROR;
+use const E_USER_NOTICE;
+use const E_USER_WARNING;
+use const E_WARNING;
+use const PATH_SEPARATOR;
 
 /**
  * a single error
@@ -255,6 +257,7 @@ class Error extends Message
         } catch (Throwable $e) {
             $backtrace = '';
         }
+
         if ($this->hash === null) {
             $this->hash = md5(
                 $this->getNumber() .
@@ -379,9 +382,11 @@ class Error extends Message
                 $retval .= self::relPath($step['file'])
                     . '#' . $step['line'] . ': ';
             }
+
             if (isset($step['class'])) {
                 $retval .= $step['class'] . $step['type'];
             }
+
             $retval .= self::getFunctionCall($step, $separator);
             $retval .= $lines;
         }
@@ -445,7 +450,8 @@ class Error extends Message
 
         if (in_array($function, $include_functions)) {
             $retval .= self::relPath($arg);
-        } elseif (in_array($function, $connect_functions)
+        } elseif (
+            in_array($function, $connect_functions)
             && is_string($arg)
         ) {
             $retval .= gettype($arg) . ' ********';
@@ -480,6 +486,7 @@ class Error extends Message
             $retval .= ' in ' . $this->getFile() . '#' . $this->getLine();
             $retval .= "<br>\n";
         }
+
         $retval .= $this->getMessage();
         if (! $this->isUserError()) {
             $retval .= "<br>\n";
@@ -488,6 +495,7 @@ class Error extends Message
             $retval .= "<br>\n";
             $retval .= $this->getBacktraceDisplay();
         }
+
         $retval .= '</div>';
 
         return $retval;
@@ -537,6 +545,7 @@ class Error extends Message
                 array_pop($Adest);
             }
         }
+
         $path = $result . str_replace(implode(DIRECTORY_SEPARATOR, $Adest), '', $dest);
 
         return str_replace(

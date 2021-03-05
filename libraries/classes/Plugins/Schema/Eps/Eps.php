@@ -9,6 +9,7 @@ namespace PhpMyAdmin\Plugins\Schema\Eps;
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Response;
+
 use function strlen;
 
 /**
@@ -96,6 +97,7 @@ class Eps
             $orientation = 'Portrait';
             $this->stringCommands .= '%%Orientation: ' . $orientation . "\n";
         }
+
         $this->stringCommands .= "%%EndComments \n";
         $this->stringCommands .= "%%Pages 1 \n";
         $this->stringCommands .= "%%BoundingBox: 72 150 144 170 \n";

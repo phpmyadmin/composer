@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Query\Utilities;
+
 use function htmlspecialchars;
 use function in_array;
 use function is_array;
@@ -151,7 +152,8 @@ class ReplicationGui
             $urlParams['sr_slave_control_parm'] = 'SQL_THREAD';
             $slaveControlSqlLink = Url::getCommon($urlParams, '');
 
-            if ($serverSlaveReplication[0]['Slave_IO_Running'] === 'No'
+            if (
+                $serverSlaveReplication[0]['Slave_IO_Running'] === 'No'
                 || $serverSlaveReplication[0]['Slave_SQL_Running'] === 'No'
             ) {
                 $urlParams['sr_slave_action'] = 'start';
@@ -290,11 +292,13 @@ class ReplicationGui
                 'value' => $serverReplicationVariable,
             ];
 
-            if (isset($variablesAlerts[$variable])
+            if (
+                isset($variablesAlerts[$variable])
                 && $variablesAlerts[$variable] === $serverReplicationVariable
             ) {
                 $variables[$variable]['status'] = 'attention';
-            } elseif (isset($variablesOks[$variable])
+            } elseif (
+                isset($variablesOks[$variable])
                 && $variablesOks[$variable] === $serverReplicationVariable
             ) {
                 $variables[$variable]['status'] = 'allfine';
@@ -494,6 +498,7 @@ class ReplicationGui
                 );
             }
         }
+
         unset($refresh);
     }
 
@@ -550,15 +555,16 @@ class ReplicationGui
             } else {
                 $_SESSION['replication']['m_correct']  = true;
 
-                if (! $this->replication->slaveChangeMaster(
-                    $sr['username'],
-                    $sr['pma_pw'],
-                    $sr['hostname'],
-                    $sr['port'],
-                    $position,
-                    true,
-                    false
-                )
+                if (
+                    ! $this->replication->slaveChangeMaster(
+                        $sr['username'],
+                        $sr['pma_pw'],
+                        $sr['hostname'],
+                        $sr['port'],
+                        $position,
+                        true,
+                        false
+                    )
                 ) {
                     $_SESSION['replication']['sr_action_status'] = 'error';
                     $_SESSION['replication']['sr_action_info']
@@ -588,6 +594,7 @@ class ReplicationGui
         if (empty($_POST['sr_slave_control_parm'])) {
             $_POST['sr_slave_control_parm'] = null;
         }
+
         if ($_POST['sr_slave_action'] === 'reset') {
             $qStop = $this->replication->slaveControl('STOP', null, DatabaseInterface::CONNECT_USER);
             $qReset = $dbi->tryQuery('RESET SLAVE;');

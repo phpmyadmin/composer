@@ -9,6 +9,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+
 use function strlen;
 
 abstract class AbstractController
@@ -82,6 +83,7 @@ abstract class AbstractController
             if (isset($message)) {
                 $params['message'] = $message;
             }
+
             $uri = './index.php?route=/' . Url::getCommonRaw($params, '&');
             Core::sendHeaderLocation($uri);
 

@@ -10,6 +10,7 @@ namespace PhpMyAdmin\Plugins\Transformations\Abs;
 use PhpMyAdmin\FieldMetadata;
 use PhpMyAdmin\Plugins\TransformationsPlugin;
 use PhpMyAdmin\Url;
+
 use function array_merge;
 use function htmlspecialchars;
 
@@ -57,10 +58,12 @@ abstract class DownloadTransformationsPlugin extends TransformationsPlugin
                         break;
                     }
                 }
+
                 if (isset($pos)) {
                     $cn = $row[$pos];
                 }
             }
+
             if (empty($cn)) {
                 $cn = 'binary_file.dat';
             }

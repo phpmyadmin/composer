@@ -14,6 +14,7 @@ use PhpMyAdmin\ReplicationInfo;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+
 use function is_array;
 
 /**
@@ -85,6 +86,7 @@ class ReplicationController extends AbstractController
                     $replicationInfo->getReplicaStatus()
                 );
             }
+
             if (isset($params['sl_configure'])) {
                 $changeMasterHtml = $this->replicationGui->getHtmlForReplicationChangeMaster('slave_changemaster');
             }

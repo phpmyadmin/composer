@@ -15,6 +15,7 @@ use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+
 use function implode;
 use function preg_match;
 use function preg_replace;
@@ -204,6 +205,7 @@ class ExportCodegen extends ExportPlugin
         if (! preg_match('/^\pL/u', $str)) {
             $str = '_' . $str;
         }
+
         if ($ucfirst) {
             $str = ucfirst($str);
         }
@@ -245,8 +247,10 @@ class ExportCodegen extends ExportPlugin
                 if (! empty($col_as)) {
                     $row[0] = $col_as;
                 }
+
                 $tableProperties[] = new TableProperty($row);
             }
+
             $dbi->freeResult($result);
             $lines[] = 'using System;';
             $lines[] = 'using System.Collections;';
@@ -265,6 +269,7 @@ class ExportCodegen extends ExportPlugin
                     '        protected #dotNetPrimitiveType# _#name#;'
                 );
             }
+
             $lines[] = '        #endregion';
             $lines[] = '        #region Constructors';
             $lines[] = '        public '
@@ -279,6 +284,7 @@ class ExportCodegen extends ExportPlugin
                     '#dotNetPrimitiveType# #name#'
                 );
             }
+
             $lines[] = '        public '
                 . self::cgMakeIdentifier($table_alias)
                 . '('
@@ -294,6 +300,7 @@ class ExportCodegen extends ExportPlugin
                     '            this._#name#=#name#;'
                 );
             }
+
             $lines[] = '        }';
             $lines[] = '        #endregion';
             $lines[] = '        #region Public Properties';
@@ -307,6 +314,7 @@ class ExportCodegen extends ExportPlugin
                     . '        }'
                 );
             }
+
             $lines[] = '        #endregion';
             $lines[] = '    }';
             $lines[] = '    #endregion';
@@ -358,6 +366,7 @@ class ExportCodegen extends ExportPlugin
                 if (! empty($col_as)) {
                     $row[0] = $col_as;
                 }
+
                 $tableProperty = new TableProperty($row);
                 if ($tableProperty->isPK()) {
                     $lines[] = $tableProperty->formatXml(
@@ -379,8 +388,10 @@ class ExportCodegen extends ExportPlugin
                     );
                 }
             }
+
             $dbi->freeResult($result);
         }
+
         $lines[] = '    </class>';
         $lines[] = '</hibernate-mapping>';
 

@@ -12,6 +12,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function array_merge;
 
 /**
@@ -96,7 +97,8 @@ final class GisVisualizationController extends AbstractController
         $visualizationSettings['mysqlVersion'] = $this->dbi->getVersion();
         $visualizationSettings['isMariaDB'] = $this->dbi->isMariaDB();
 
-        if (! isset($visualizationSettings['labelColumn'])
+        if (
+            ! isset($visualizationSettings['labelColumn'])
             && isset($labelCandidates[0])
         ) {
             $visualizationSettings['labelColumn'] = '';
@@ -118,6 +120,7 @@ final class GisVisualizationController extends AbstractController
                 $rows = $GLOBALS['cfg']['MaxRows'];
             }
         }
+
         $this->visualization = GisVisualization::get(
             $sqlQuery,
             $visualizationSettings,

@@ -13,6 +13,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+
 use function in_array;
 use function is_numeric;
 use function mb_strpos;
@@ -72,7 +73,8 @@ class VariablesController extends AbstractController
                     'name' => $sectionName,
                     'is_selected' => false,
                 ];
-                if (empty($params['filterCategory'])
+                if (
+                    empty($params['filterCategory'])
                     || $params['filterCategory'] !== $sectionId
                 ) {
                     continue;

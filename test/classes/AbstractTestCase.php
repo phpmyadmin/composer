@@ -13,13 +13,15 @@ use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Theme;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use const PHP_SAPI;
+
 use function define;
 use function defined;
 use function getenv;
 use function in_array;
 use function is_array;
 use function parse_url;
+
+use const PHP_SAPI;
 
 /**
  * Abstract class to hold some usefull methods used in tests
@@ -51,8 +53,10 @@ abstract class AbstractTestCase extends TestCase
             if (in_array($key, $this->globalsAllowList)) {
                 continue;
             }
+
             unset($GLOBALS[$key]);
         }
+
         $_GET = [];
         $_POST = [];
         $_SERVER = [
@@ -124,14 +128,6 @@ abstract class AbstractTestCase extends TestCase
             $GLOBALS['cfg']['ProxyUser'] = $proxyUser;
             $GLOBALS['cfg']['ProxyPass'] = $proxyPass;
         }
-
-        // phpcs:disable PSR1.Files.SideEffects
-        if (! defined('PROXY_URL')) {
-            define('PROXY_URL', $proxyUrl ?? '');
-            define('PROXY_USER', $proxyUser ?? '');
-            define('PROXY_PASS', $proxyPass ?? '');
-        }
-        // phpcs:enable
     }
 
     protected function defineVersionConstants(): void
@@ -141,7 +137,6 @@ abstract class AbstractTestCase extends TestCase
         // phpcs:disable PSR1.Files.SideEffects
         if (! defined('PMA_VERSION')) {
             define('PMA_VERSION', $PMA_Config->get('PMA_VERSION'));
-            define('PMA_MAJOR_VERSION', $PMA_Config->get('PMA_MAJOR_VERSION'));
         }
         // phpcs:enable
     }
@@ -156,6 +151,7 @@ abstract class AbstractTestCase extends TestCase
             if (in_array($key, $this->globalsAllowList)) {
                 continue;
             }
+
             unset($GLOBALS[$key]);
         }
     }

@@ -11,6 +11,7 @@ use PhpMyAdmin\Server\Status\Data;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function implode;
 
 /**
@@ -72,6 +73,7 @@ class StatusController extends AbstractController
             if ($primaryInfo['status']) {
                 $replication .= $this->replicationGui->getHtmlForReplicationStatusTable('master');
             }
+
             if ($replicaInfo['status']) {
                 $replication .= $this->replicationGui->getHtmlForReplicationStatusTable('slave');
             }

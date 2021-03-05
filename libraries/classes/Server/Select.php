@@ -9,6 +9,7 @@ namespace PhpMyAdmin\Server;
 
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function count;
 use function htmlspecialchars;
 use function implode;
@@ -73,6 +74,7 @@ class Select
             } else {
                 $selected = 0;
             }
+
             if (! empty($server['verbose'])) {
                 $label = $server['verbose'];
             } else {
@@ -81,6 +83,7 @@ class Select
                     $label .= ':' . $server['port'];
                 }
             }
+
             if (! empty($server['only_db'])) {
                 if (! is_array($server['only_db'])) {
                     $label .= ' - ' . $server['only_db'];
@@ -89,6 +92,7 @@ class Select
                     $label .= ' - ' . implode(', ', $server['only_db']);
                 }
             }
+
             if (! empty($server['user']) && $server['auth_type'] === 'config') {
                 $label .= '  (' . $server['user'] . ')';
             }
@@ -107,6 +111,7 @@ class Select
                         . Url::getCommon(['server' => $key], strpos($scriptName, '?') === false ? '?' : '&')
                         . '" >' . htmlspecialchars($label) . '</a>';
                 }
+
                 $retval .= '</li>';
             } else {
                 $retval .= '<option value="' . $key . '" '
@@ -120,6 +125,7 @@ class Select
             if (! $omit_fieldset) {
                 $retval .= '</fieldset>';
             }
+
             $retval .= '</form>';
         } elseif ($list) {
             $retval .= '</ul>';

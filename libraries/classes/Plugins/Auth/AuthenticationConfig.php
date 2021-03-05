@@ -12,12 +12,14 @@ use PhpMyAdmin\Plugins\AuthenticationPlugin;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Util;
-use const E_USER_NOTICE;
-use const E_USER_WARNING;
+
 use function count;
 use function defined;
 use function sprintf;
 use function trigger_error;
+
+use const E_USER_NOTICE;
+use const E_USER_WARNING;
 
 /**
  * Handles the config authentication method
@@ -98,7 +100,8 @@ class AuthenticationConfig extends AuthenticationPlugin
     <table cellpadding="0" cellspacing="3" class= "pma-table auth_config_tbl" width="80%">
         <tr>
             <td>';
-        if (isset($GLOBALS['allowDeny_forbidden'])
+        if (
+            isset($GLOBALS['allowDeny_forbidden'])
             && $GLOBALS['allowDeny_forbidden']
         ) {
             trigger_error(__('Access denied!'), E_USER_NOTICE);
@@ -114,7 +117,8 @@ class AuthenticationConfig extends AuthenticationPlugin
                     '<a href="setup/">',
                     '</a>'
                 ) , '</p>' , "\n";
-            } elseif (! isset($GLOBALS['errno'])
+            } elseif (
+                ! isset($GLOBALS['errno'])
                 || (isset($GLOBALS['errno']) && $GLOBALS['errno'] != 2002)
                 && $GLOBALS['errno'] != 2003
             ) {
@@ -136,6 +140,7 @@ class AuthenticationConfig extends AuthenticationPlugin
                     E_USER_WARNING
                 );
             }
+
             echo Generator::mysqlDie(
                 $conn_error,
                 '',
@@ -144,6 +149,7 @@ class AuthenticationConfig extends AuthenticationPlugin
                 false
             );
         }
+
         $GLOBALS['error_handler']->dispUserErrors();
         echo '</td>
         </tr>
@@ -167,6 +173,7 @@ class AuthenticationConfig extends AuthenticationPlugin
             echo ' </td>' , "\n";
             echo '</tr>' , "\n";
         }
+
         echo '</table>' , "\n";
         if (! defined('TESTSUITE')) {
             exit;

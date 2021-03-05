@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\FileListing;
+
 use function array_values;
 use function extension_loaded;
 use function is_bool;
@@ -30,6 +31,7 @@ class FileListingTest extends AbstractTestCase
         if (is_bool($dirContent)) {
             $dirContent = [];
         }
+
         $this->assertSame(
             array_values([
                 'one.txt',
@@ -110,6 +112,7 @@ class FileListingTest extends AbstractTestCase
         if (extension_loaded('bz2')) {
             $extensionString .= '|bz2';
         }
+
         $extensionString .= '|zip';
         $this->assertEquals($extensionString, $this->fileListing->supportedDecompressions());
     }

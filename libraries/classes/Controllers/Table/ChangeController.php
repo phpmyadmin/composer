@@ -12,6 +12,7 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+
 use function array_fill;
 use function count;
 use function is_array;
@@ -172,15 +173,17 @@ class ChangeController extends AbstractController
 
         $has_blob_field = false;
         foreach ($table_columns as $column) {
-            if ($this->insertEdit->isColumn(
-                $column,
-                [
-                    'blob',
-                    'tinyblob',
-                    'mediumblob',
-                    'longblob',
-                ]
-            )) {
+            if (
+                $this->insertEdit->isColumn(
+                    $column,
+                    [
+                        'blob',
+                        'tinyblob',
+                        'mediumblob',
+                        'longblob',
+                    ]
+                )
+            ) {
                 $has_blob_field = true;
                 break;
             }
@@ -224,6 +227,7 @@ class ChangeController extends AbstractController
                 $repopulate = $unsaved_values[$row_id];
                 $checked = false;
             }
+
             if ($insert_mode && $row_id > 0) {
                 $html_output .= $this->insertEdit->getHtmlForIgnoreOption($row_id, $checked);
             }
@@ -277,6 +281,7 @@ class ChangeController extends AbstractController
         if ($biggest_max_file_size > 0) {
             $html_output .= '<input type="hidden" name="MAX_FILE_SIZE" value="' . $biggest_max_file_size . '">' . "\n";
         }
+
         $html_output .= '</form>';
 
         $html_output .= $this->insertEdit->getHtmlForGisEditor();

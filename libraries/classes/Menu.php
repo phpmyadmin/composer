@@ -9,6 +9,7 @@ namespace PhpMyAdmin;
 
 use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\Utils\SessionCache;
+
 use function array_key_exists;
 use function count;
 use function in_array;
@@ -146,6 +147,7 @@ class Menu
         if (SessionCache::has($cache_key)) {
             return SessionCache::get($cache_key);
         }
+
         $allowedTabs = Util::getMenuTabList($level);
         $cfgRelation = $this->relation->getRelationsParam();
         if ($cfgRelation['menuswork']) {
@@ -173,6 +175,7 @@ class Menu
                 }
             }
         }
+
         SessionCache::set($cache_key, $allowedTabs);
 
         return $allowedTabs;
@@ -194,6 +197,7 @@ class Menu
         if (empty($cfg['Server']['host'])) {
             $cfg['Server']['host'] = '';
         }
+
         $server['name'] = ! empty($cfg['Server']['verbose'])
             ? $cfg['Server']['verbose'] : $cfg['Server']['host'];
         $server['name'] .= empty($cfg['Server']['port'])
@@ -201,20 +205,20 @@ class Menu
         $server['url'] = Util::getUrlForOption(
             $cfg['DefaultTabServer'],
             'server'
-        );
+        ) ?? '/';
 
         if (strlen($this->db) > 0) {
             $database['name'] = $this->db;
             $database['url'] = Util::getUrlForOption(
                 $cfg['DefaultTabDatabase'],
                 'database'
-            );
+            ) ?? '/';
             if (strlen((string) $this->table) > 0) {
                 $table['name'] = $this->table;
                 $table['url'] = Util::getUrlForOption(
                     $cfg['DefaultTabTable'],
                     'table'
-                );
+                ) ?? '/';
                 /** @var Table $tableObj */
                 $tableObj = $dbi->getTable($this->db, $this->table);
                 $table['is_view'] = $tableObj->isView();
@@ -222,6 +226,7 @@ class Menu
                 if (! $table['is_view']) {
                     $table['comment'] = $tableObj->getComment();
                 }
+
                 if (mb_strstr($table['comment'], '; InnoDB free')) {
                     $table['comment'] = preg_replace(
                         '@; InnoDB free:.*?$@',
@@ -266,6 +271,7 @@ class Menu
             $updatable_view = $dbi->getTable($this->db, $this->table)
                 ->isUpdatableView();
         }
+
         $is_superuser = $dbi->isSuperUser();
         $isCreateOrGrantUser = $dbi->isGrantUser() || $dbi->isCreateUser();
 
@@ -321,7 +327,9 @@ class Menu
             $tabs['import']['text'] = __('Import');
             $tabs['import']['active'] = $route === '/table/import';
         }
-        if (($is_superuser || $isCreateOrGrantUser)
+
+        if (
+            ($is_superuser || $isCreateOrGrantUser)
             && ! $isSystemSchema
         ) {
             $tabs['privileges']['route'] = '/server/privileges';
@@ -333,6 +341,7 @@ class Menu
             $tabs['privileges']['icon'] = 's_rights';
             $tabs['privileges']['active'] = $route === '/server/privileges';
         }
+
         /**
          * Don't display "Operations" for views and information_schema
          */
@@ -342,6 +351,7 @@ class Menu
             $tabs['operation']['text'] = __('Operations');
             $tabs['operation']['active'] = $route === '/table/operations';
         }
+
         /**
          * Views support a limited number of operations
          */
@@ -358,7 +368,9 @@ class Menu
             $tabs['tracking']['route'] = '/table/tracking';
             $tabs['tracking']['active'] = $route === '/table/tracking';
         }
-        if (! $isSystemSchema
+
+        if (
+            ! $isSystemSchema
             && Util::currentUserHasPrivilege(
                 'TRIGGER',
                 $this->db,
@@ -486,7 +498,8 @@ class Menu
             $tabs['designer']['active'] = $route === '/database/designer';
         }
 
-        if (! $isSystemSchema
+        if (
+            ! $isSystemSchema
             && $cfgRelation['centralcolumnswork']
         ) {
             $tabs['central_columns']['text'] = __('Central columns');

@@ -11,6 +11,7 @@ use PhpMyAdmin\Plugins\Schema\Dia\TableStatsDia;
 use PhpMyAdmin\Plugins\Schema\ExportRelationSchema;
 use PhpMyAdmin\Plugins\Schema\Pdf\TableStatsPdf;
 use PhpMyAdmin\Plugins\Schema\Svg\TableStatsSvg;
+
 use function date;
 use function in_array;
 use function sprintf;
@@ -120,6 +121,7 @@ class EpsRelationSchema extends ExportRelationSchema
                             $this->tableDimension
                         );
                     }
+
                     continue;
                 }
 
@@ -142,6 +144,7 @@ class EpsRelationSchema extends ExportRelationSchema
                 }
             }
         }
+
         if ($seen_a_relation) {
             $this->drawRelations();
         }
@@ -199,6 +202,7 @@ class EpsRelationSchema extends ExportRelationSchema
                 $tableDimension
             );
         }
+
         if (! isset($this->tables[$foreignTable])) {
             $this->tables[$foreignTable] = new TableStatsEps(
                 $this->diagram,
@@ -212,6 +216,7 @@ class EpsRelationSchema extends ExportRelationSchema
                 $tableDimension
             );
         }
+
         $this->relations[] = new RelationStatsEps(
             $this->diagram,
             $this->tables[$masterTable],

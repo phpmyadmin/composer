@@ -29,14 +29,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Twig\Cache\CacheInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+
 use function fclose;
 use function fopen;
 use function fwrite;
+use function is_file;
 use function json_encode;
+use function sprintf;
 use function str_replace;
 use function strpos;
-use function is_file;
-use function sprintf;
 
 final class CacheWarmupCommand extends Command
 {
@@ -74,12 +75,14 @@ final class CacheWarmupCommand extends Command
 
             return $twigCode;
         }
+
         $routingCode = $this->warmUpTwigCache($output);
         if ($routingCode !== 0) {
             $output->writeln('Routing cache generation had an error.');
 
             return $twigCode;
         }
+
         $output->writeln('Warm up of all caches done.', OutputInterface::VERBOSITY_VERBOSE);
 
         return Command::SUCCESS;
@@ -95,6 +98,7 @@ final class CacheWarmupCommand extends Command
 
             return Command::SUCCESS;
         }
+
         $output->writeln(
             sprintf(
                 'Warm up did not work, the folder "%s" is probably not writable.',
@@ -159,6 +163,7 @@ final class CacheWarmupCommand extends Command
             if (strpos($file->getPathname(), '/test/') !== false) {
                 continue;
             }
+
             // force compilation
             if (! $file->isFile() || $file->getExtension() !== 'twig') {
                 continue;

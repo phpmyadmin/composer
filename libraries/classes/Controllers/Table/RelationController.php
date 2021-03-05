@@ -13,6 +13,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
+
 use function array_key_exists;
 use function array_keys;
 use function array_values;
@@ -96,7 +97,8 @@ final class RelationController extends AbstractController
 
         // Send table of column names to populate corresponding dropdowns depending
         // on the current selection
-        if (isset($_POST['getDropdownValues'])
+        if (
+            isset($_POST['getDropdownValues'])
             && $_POST['getDropdownValues'] === 'true'
         ) {
             // if both db and table are selected
@@ -136,7 +138,9 @@ final class RelationController extends AbstractController
                 'internal'
             );
         }
-        if (isset($_POST['destination_foreign_db'])
+
+        if (
+            isset($_POST['destination_foreign_db'])
             && Util::isForeignKeySupported($storageEngine)
         ) {
             $relationsForeign = $this->relation->getForeigners(
@@ -159,7 +163,8 @@ final class RelationController extends AbstractController
         $column_hash_array = [];
         $column_array[''] = '';
         foreach ($columns as $column) {
-            if (strtoupper($storageEngine) !== 'INNODB'
+            if (
+                strtoupper($storageEngine) !== 'INNODB'
                 && empty($column['Key'])
             ) {
                 continue;
@@ -168,6 +173,7 @@ final class RelationController extends AbstractController
             $column_array[$column['Field']] = $column['Field'];
             $column_hash_array[$column['Field']] = md5($column['Field']);
         }
+
         if ($GLOBALS['cfg']['NaturalOrder']) {
             uksort($column_array, 'strnatcasecmp');
         }
@@ -204,10 +210,12 @@ final class RelationController extends AbstractController
      */
     private function updateForDisplayField(Table $table, array $cfgRelation): void
     {
-        if (! $table->updateDisplayField(
-            $_POST['display_field'],
-            $cfgRelation
-        )) {
+        if (
+            ! $table->updateDisplayField(
+                $_POST['display_field'],
+                $cfgRelation
+            )
+        ) {
             return;
         }
 
@@ -235,8 +243,10 @@ final class RelationController extends AbstractController
 
         // (for now, one index name only; we keep the definitions if the
         // foreign db is not the same)
-        if (isset($_POST['destination_foreign_db'], $_POST['destination_foreign_table'])
-            && isset($_POST['destination_foreign_column'])) {
+        if (
+            isset($_POST['destination_foreign_db'], $_POST['destination_foreign_table'])
+            && isset($_POST['destination_foreign_column'])
+        ) {
             [
                 $html,
                 $preview_sql_data,
@@ -288,14 +298,16 @@ final class RelationController extends AbstractController
     {
         $multi_edit_columns_name = $_POST['fields_name'] ?? null;
 
-        if (! $table->updateInternalRelations(
-            $multi_edit_columns_name,
-            $_POST['destination_db'],
-            $_POST['destination_table'],
-            $_POST['destination_column'],
-            $cfgRelation,
-            $relations
-        )) {
+        if (
+            ! $table->updateInternalRelations(
+                $multi_edit_columns_name,
+                $_POST['destination_db'],
+                $_POST['destination_table'],
+                $_POST['destination_column'],
+                $cfgRelation,
+                $relations
+            )
+        ) {
             return;
         }
 
@@ -322,13 +334,16 @@ final class RelationController extends AbstractController
         } else {
             $columnList = $table_obj->getIndexedColumns(false, false);
         }
+
         $columns = [];
         foreach ($columnList as $column) {
             $columns[] = htmlspecialchars($column);
         }
+
         if ($GLOBALS['cfg']['NaturalOrder']) {
             usort($columns, 'strnatcasecmp');
         }
+
         $this->response->addJSON('columns', $columns);
 
         // @todo should be: $server->db($db)->table($table)->primary()
@@ -360,7 +375,8 @@ final class RelationController extends AbstractController
             );
 
             while ($row = $this->dbi->fetchArray($tables_rs)) {
-                if (! isset($row['Engine'])
+                if (
+                    ! isset($row['Engine'])
                     || mb_strtoupper($row['Engine']) != $storageEngine
                 ) {
                     continue;
@@ -380,9 +396,11 @@ final class RelationController extends AbstractController
                 $tables[] = htmlspecialchars($row[0]);
             }
         }
+
         if ($GLOBALS['cfg']['NaturalOrder']) {
             usort($tables, 'strnatcasecmp');
         }
+
         $this->response->addJSON('tables', $tables);
     }
 }

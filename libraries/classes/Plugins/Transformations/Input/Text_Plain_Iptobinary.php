@@ -10,6 +10,7 @@ namespace PhpMyAdmin\Plugins\Transformations\Input;
 use PhpMyAdmin\FieldMetadata;
 use PhpMyAdmin\Plugins\IOTransformationsPlugin;
 use PhpMyAdmin\Utils\FormatConverter;
+
 use function htmlspecialchars;
 use function inet_ntop;
 use function pack;
@@ -86,9 +87,11 @@ class Text_Plain_Iptobinary extends IOTransformationsPlugin
                     $val = $ip;
                 }
             }
+
             $html = '<input type="hidden" name="fields_prev' . $column_name_appendix
                 . '" value="' . htmlspecialchars($val) . '">';
         }
+
         $class = 'transform_IPToBin';
 
         return $html . '<input type="text" name="fields' . $column_name_appendix . '"'

@@ -16,6 +16,7 @@ use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
+
 use function array_values;
 use function count;
 use function htmlspecialchars;
@@ -225,11 +226,13 @@ class ExportMediawiki extends ExportPlugin
                     . $this->exportCRLF();
                     for ($i = 0; $i < $row_cnt; ++$i) {
                         $col_as = $columns[$i]['Field'];
-                        if (! empty($aliases[$db]['tables'][$table]['columns'][$col_as])
+                        if (
+                            ! empty($aliases[$db]['tables'][$table]['columns'][$col_as])
                         ) {
                             $col_as
                                 = $aliases[$db]['tables'][$table]['columns'][$col_as];
                         }
+
                         $output .= ' | ' . $col_as . $this->exportCRLF();
                     }
                 }
@@ -322,11 +325,13 @@ class ExportMediawiki extends ExportPlugin
 
                 // Use '!' for separating table headers
                 foreach ($column_names as $column) {
-                    if (! empty($aliases[$db]['tables'][$table]['columns'][$column])
+                    if (
+                        ! empty($aliases[$db]['tables'][$table]['columns'][$column])
                     ) {
                         $column
                             = $aliases[$db]['tables'][$table]['columns'][$column];
                     }
+
                     $output .= ' ! ' . $column . '' . $this->exportCRLF();
                 }
             }

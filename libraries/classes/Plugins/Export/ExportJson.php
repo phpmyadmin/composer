@@ -15,12 +15,14 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
-use const JSON_PRETTY_PRINT;
-use const JSON_UNESCAPED_UNICODE;
+
 use function bin2hex;
 use function explode;
 use function json_encode;
 use function stripslashes;
+
+use const JSON_PRETTY_PRINT;
+use const JSON_UNESCAPED_UNICODE;
 
 /**
  * Handles the export for the JSON format
@@ -46,12 +48,15 @@ class ExportJson extends ExportPlugin
     public function encode($data)
     {
         $options = 0;
-        if (isset($GLOBALS['json_pretty_print'])
+        if (
+            isset($GLOBALS['json_pretty_print'])
             && $GLOBALS['json_pretty_print']
         ) {
             $options |= JSON_PRETTY_PRINT;
         }
-        if (isset($GLOBALS['json_unicode'])
+
+        if (
+            isset($GLOBALS['json_unicode'])
             && $GLOBALS['json_unicode']
         ) {
             $options |= JSON_UNESCAPED_UNICODE;
@@ -253,6 +258,7 @@ class ExportJson extends ExportPlugin
             if (! empty($aliases[$db]['tables'][$table]['columns'][$col_as])) {
                 $col_as = $aliases[$db]['tables'][$table]['columns'][$col_as];
             }
+
             $columns[$i] = stripslashes($col_as);
         }
 
@@ -270,11 +276,14 @@ class ExportJson extends ExportPlugin
             $data = [];
 
             for ($i = 0; $i < $columns_cnt; $i++) {
-                if ($fieldsMeta[$i]->isMappedTypeGeometry
-                    || $fieldsMeta[$i]->isType(FieldMetadata::TYPE_BLOB)) {
+                if (
+                    isset($fieldsMeta[$i]) && ($fieldsMeta[$i]->isMappedTypeGeometry
+                    || $fieldsMeta[$i]->isType(FieldMetadata::TYPE_BLOB))
+                ) {
                     // export GIS and blob types as hex
                     $record[$i] = '0x' . bin2hex($record[$i]);
                 }
+
                 $data[$columns[$i]] = $record[$i];
             }
 
@@ -282,6 +291,7 @@ class ExportJson extends ExportPlugin
             if (! $encodedData) {
                 return false;
             }
+
             if (! $this->export->outputHandler($encodedData)) {
                 return false;
             }
@@ -354,6 +364,7 @@ class ExportJson extends ExportPlugin
             if (! $encodedData) {
                 return false;
             }
+
             if (! $this->export->outputHandler($encodedData)) {
                 return false;
             }

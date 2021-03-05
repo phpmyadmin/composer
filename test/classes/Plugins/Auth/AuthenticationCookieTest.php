@@ -12,6 +12,7 @@ use PhpMyAdmin\Plugins\Auth\AuthenticationCookie;
 use PhpMyAdmin\Tests\AbstractNetworkTestCase;
 use ReflectionException;
 use ReflectionMethod;
+
 use function base64_encode;
 use function function_exists;
 use function is_readable;
@@ -1035,6 +1036,7 @@ class AuthenticationCookieTest extends AbstractNetworkTestCase
         if (! function_exists('openssl_encrypt')) {
             $this->markTestSkipped('openssl not available');
         }
+
         $this->object->setUseOpenSSL(true);
         $this->testCookieEncrypt();
     }
@@ -1078,6 +1080,7 @@ class AuthenticationCookieTest extends AbstractNetworkTestCase
         if (! function_exists('openssl_encrypt')) {
             $this->markTestSkipped('openssl not available');
         }
+
         $this->object->setUseOpenSSL(true);
         $this->testCookieDecrypt();
     }

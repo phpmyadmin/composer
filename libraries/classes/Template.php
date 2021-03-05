@@ -25,10 +25,12 @@ use Twig\Error\SyntaxError;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TemplateWrapper;
-use const DIRECTORY_SEPARATOR;
-use const E_USER_WARNING;
+
 use function sprintf;
 use function trigger_error;
+
+use const DIRECTORY_SEPARATOR;
+use const E_USER_WARNING;
 
 /**
  * Handle front end templating
@@ -60,6 +62,7 @@ class Template
         if ($cache_dir === null) {
             $cache_dir = false;
         }
+
         $twig = new Environment($loader, [
             'auto_reload' => true,
             'cache' => $cache_dir,
@@ -68,6 +71,7 @@ class Template
             $twig->enableDebug();
             $twig->addExtension(new DebugExtension());
         }
+
         $twig->addExtension(new AssetExtension());
         $twig->addExtension(new CoreExtension());
         $twig->addExtension(new I18nExtension());

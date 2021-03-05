@@ -16,6 +16,7 @@ use PhpMyAdmin\SqlParser\TokensList;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function array_merge;
 use function explode;
 use function htmlspecialchars;
@@ -78,7 +79,8 @@ class ViewCreateController extends AbstractController
         ];
 
         // View name is a compulsory field
-        if (isset($_POST['view']['name'])
+        if (
+            isset($_POST['view']['name'])
             && empty($_POST['view']['name'])
         ) {
             $message = Message::error(__('View name can not be empty!'));
@@ -121,7 +123,8 @@ class ViewCreateController extends AbstractController
                 }
             }
 
-            if (isset($_POST['view']['sql_security'])
+            if (
+                isset($_POST['view']['sql_security'])
                 && in_array($_POST['view']['sql_security'], $view_security_options)
             ) {
                 $sql_query .= $sep . ' SQL SECURITY '
@@ -193,6 +196,7 @@ class ViewCreateController extends AbstractController
                     $this->dbi->tryQuery($new_transformations_sql);
                 }
             }
+
             unset($pma_transformation_data);
 
             if (! isset($_POST['ajax_dialog'])) {

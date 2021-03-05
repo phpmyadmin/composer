@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Utils\HttpRequest;
-use const E_USER_WARNING;
-use const PHP_VERSION;
+
 use function count;
 use function http_build_query;
 use function is_array;
@@ -17,6 +16,9 @@ use function parse_str;
 use function parse_url;
 use function preg_match;
 use function str_replace;
+
+use const E_USER_WARNING;
+use const PHP_VERSION;
 
 /**
  * Error reporting functions used to generate and submit error reports
@@ -92,6 +94,7 @@ class ErrorReport
             if (empty($_POST['exception'])) {
                 return [];
             }
+
             $exception = $_POST['exception'];
 
             if (isset($exception['stack'])) {
@@ -125,14 +128,17 @@ class ErrorReport
             $errors = [];
             // create php error report
             $i = 0;
-            if (! isset($_SESSION['prev_errors'])
+            if (
+                ! isset($_SESSION['prev_errors'])
                 || $_SESSION['prev_errors'] == ''
             ) {
                 return [];
             }
+
             foreach ($_SESSION['prev_errors'] as $errorObj) {
                 /** @var Error $errorObj */
-                if (! $errorObj->getLine()
+                if (
+                    ! $errorObj->getLine()
                     || ! $errorObj->getType()
                     || $errorObj->getNumber() == E_USER_WARNING
                 ) {
@@ -153,6 +159,7 @@ class ErrorReport
             if ($i == 0) {
                 return []; // then return empty array
             }
+
             $report['exception_type'] = 'php';
             $report['errors'] = $errors;
         } else {
@@ -182,7 +189,8 @@ class ErrorReport
             $components = [];
         }
 
-        if (isset($components['fragment'])
+        if (
+            isset($components['fragment'])
             && preg_match('<PMAURL-\d+:>', $components['fragment'], $matches)
         ) {
             $uri = str_replace($matches[0], '', $components['fragment']);
@@ -255,11 +263,13 @@ class ErrorReport
 
                 $line = mb_substr($line, 0, 75) . '//...';
             }
+
             [$uri, $scriptName] = $this->sanitizeUrl($level['url']);
             $level['uri'] = $uri;
             $level['scriptname'] = $scriptName;
             unset($level['url']);
         }
+
         unset($level);
 
         return $stack;

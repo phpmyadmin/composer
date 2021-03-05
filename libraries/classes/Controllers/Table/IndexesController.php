@@ -15,6 +15,7 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function count;
 use function is_array;
 use function json_decode;
@@ -52,6 +53,7 @@ class IndexesController extends AbstractController
 
             DbTableExists::check();
         }
+
         if (isset($_POST['index'])) {
             if (is_array($_POST['index'])) {
                 // coming already from form
@@ -85,6 +87,7 @@ class IndexesController extends AbstractController
 
             DbTableExists::check();
         }
+
         if (isset($_POST['index'])) {
             if (is_array($_POST['index'])) {
                 // coming already from form
@@ -148,6 +151,7 @@ class IndexesController extends AbstractController
                 $add_fields = count($_POST['index']['columns']['names'])
                     - $index->getColumnCount();
             }
+
             if (isset($_POST['add_fields'])) {
                 $add_fields += $_POST['added_fields'];
             }

@@ -19,6 +19,7 @@ use PhpMyAdmin\Server\Privileges;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function header;
 use function implode;
 use function is_array;
@@ -84,7 +85,8 @@ class PrivilegesController extends AbstractController
             $this->dbi
         );
 
-        if ((isset($_GET['viewing_mode'])
+        if (
+            (isset($_GET['viewing_mode'])
                 && $_GET['viewing_mode'] === 'server')
             && $GLOBALS['cfgRelation']['menuswork']
         ) {
@@ -144,6 +146,7 @@ class PrivilegesController extends AbstractController
 
             return;
         }
+
         if (! $isGrantUser && ! $isCreateUser) {
             $this->response->addHTML(Message::notice(
                 __('You do not have the privileges to administrate the users!')
@@ -154,7 +157,8 @@ class PrivilegesController extends AbstractController
          * Checks if the user is using "Change Login Information / Copy User" dialog
          * only to update the password
          */
-        if (isset($_POST['change_copy']) && $username == $_POST['old_username']
+        if (
+            isset($_POST['change_copy']) && $username == $_POST['old_username']
             && $hostname == $_POST['old_hostname']
         ) {
             $this->response->addHTML(
@@ -198,6 +202,7 @@ class PrivilegesController extends AbstractController
             $queries = $ret_queries;
             unset($ret_queries);
         }
+
         if (isset($ret_message)) {
             $message = $ret_message;
             unset($ret_message);
@@ -249,7 +254,8 @@ class PrivilegesController extends AbstractController
         /**
          * Assign users to user groups
          */
-        if (! empty($_POST['changeUserGroup']) && $cfgRelation['menuswork']
+        if (
+            ! empty($_POST['changeUserGroup']) && $cfgRelation['menuswork']
             && $this->dbi->isSuperUser() && $this->dbi->isCreateUser()
         ) {
             $serverPrivileges->setUserGroup($username, $_POST['userGroup']);
@@ -284,7 +290,8 @@ class PrivilegesController extends AbstractController
          * Deletes users
          *   (Changes / copies a user, part IV)
          */
-        if (isset($_POST['delete'])
+        if (
+            isset($_POST['delete'])
             || (isset($_POST['change_copy']) && $_POST['mode'] < 4)
         ) {
             $queries = $serverPrivileges->getDataForDeleteUsers($queries);
@@ -315,7 +322,8 @@ class PrivilegesController extends AbstractController
          * If we are in an Ajax request for Create User/Edit User/Revoke User/
          * Flush Privileges, show $message and return.
          */
-        if ($this->response->isAjax()
+        if (
+            $this->response->isAjax()
             && empty($_REQUEST['ajax_page_request'])
             && ! isset($_GET['export'])
             && (! isset($_POST['submit_mult']) || $_POST['submit_mult'] !== 'export')
@@ -381,7 +389,8 @@ class PrivilegesController extends AbstractController
         }
 
         // export user definition
-        if (isset($_GET['export'])
+        if (
+            isset($_GET['export'])
             || (isset($_POST['submit_mult']) && $_POST['submit_mult'] === 'export')
         ) {
             [$title, $export] = $serverPrivileges->getListForExportUserDefinition(
@@ -474,7 +483,8 @@ class PrivilegesController extends AbstractController
             }
         }
 
-        if ((! isset($_GET['viewing_mode']) || $_GET['viewing_mode'] !== 'server')
+        if (
+            (! isset($_GET['viewing_mode']) || $_GET['viewing_mode'] !== 'server')
             || ! $cfgRelation['menuswork']
         ) {
             return;

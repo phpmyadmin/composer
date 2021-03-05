@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\LanguageManager;
+
 use function count;
 use function is_readable;
 use function strtolower;
@@ -24,6 +25,7 @@ class LanguageTest extends AbstractTestCase
         if (! is_readable($loc)) {
             $this->markTestSkipped('Missing compiled locales.');
         }
+
         $this->manager = new LanguageManager();
     }
 

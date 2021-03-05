@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Gis;
 
 use TCPDF;
+
 use function count;
 use function hexdec;
 use function imagearc;
@@ -117,8 +118,10 @@ class GisMultiPoint extends GisGeometry
 
             imagearc($image, $point[0], $point[1], 7, 7, 0, 360, $color);
         }
+
         // print label for each point
-        if ((isset($label) && trim($label) != '')
+        if (
+            (isset($label) && trim($label) != '')
             && ($points_arr[0][0] != '' && $points_arr[0][1] != '')
         ) {
             imagestring(
@@ -184,8 +187,10 @@ class GisMultiPoint extends GisGeometry
 
             $pdf->Circle($point[0], $point[1], 2, 0, 360, 'D', $line);
         }
+
         // print label for each point
-        if ((isset($label) && trim($label) != '')
+        if (
+            (isset($label) && trim($label) != '')
             && ($points_arr[0][0] != '' && $points_arr[0][1] != '')
         ) {
             $pdf->SetXY($points_arr[0][0], $points_arr[0][1]);
@@ -239,6 +244,7 @@ class GisMultiPoint extends GisGeometry
             foreach ($point_options as $option => $val) {
                 $row .= ' ' . $option . '="' . trim((string) $val) . '"';
             }
+
             $row .= '/>';
         }
 
@@ -295,6 +301,7 @@ class GisMultiPoint extends GisGeometry
         if ($srid == 0) {
             $srid = 4326;
         }
+
         $result .= $this->getBoundsForOl($srid, $scale_data);
 
         // Trim to remove leading 'MULTIPOINT(' and trailing ')'
@@ -330,6 +337,7 @@ class GisMultiPoint extends GisGeometry
         if ($no_of_points < 1) {
             $no_of_points = 1;
         }
+
         $wkt = 'MULTIPOINT(';
         for ($i = 0; $i < $no_of_points; $i++) {
             $wkt .= (isset($gis_data[$index]['MULTIPOINT'][$i]['x'])

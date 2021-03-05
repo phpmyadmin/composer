@@ -13,6 +13,7 @@ use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+
 use function array_merge;
 
 final class ExportController extends AbstractController
@@ -57,9 +58,11 @@ final class ExportController extends AbstractController
         if (! isset($sql_query)) {
             $sql_query = '';
         }
+
         if (! isset($num_tables)) {
             $num_tables = 0;
         }
+
         if (! isset($unlim_num_rows)) {
             $unlim_num_rows = 0;
         }

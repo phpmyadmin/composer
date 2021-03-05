@@ -14,6 +14,7 @@ use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
+
 use function class_exists;
 
 // phpcs:disable PSR1.Files.SideEffects
@@ -25,6 +26,7 @@ if (! class_exists('TCPDF')) {
 
     return;
 }
+
 // phpcs:enable
 
 /**
@@ -66,6 +68,7 @@ class ExportPdf extends ExportPlugin
         if (! empty($_POST['pdf_report_title'])) {
             $this->pdfReportTitle = $_POST['pdf_report_title'];
         }
+
         $this->setPdf(new Pdf('L', 'pt', 'A3'));
     }
 

@@ -14,6 +14,7 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Tracking;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function count;
 use function htmlspecialchars;
 use function sprintf;
@@ -97,6 +98,7 @@ class TrackingController extends AbstractController
                     foreach ($_POST['selected_tbl'] as $table) {
                         Tracker::deleteTracking($db, $table);
                     }
+
                     echo Message::success(
                         __('Tracking data deleted successfully.')
                     )->getDisplay();
@@ -153,6 +155,7 @@ class TrackingController extends AbstractController
             $log .= '# ' . $entry['date'] . ' ' . $entry['username'] . "\n"
                 . $entry['statement'] . "\n";
         }
+
         echo Generator::getMessage(__('Database Log'), $log);
     }
 }

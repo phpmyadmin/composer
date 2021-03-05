@@ -16,7 +16,7 @@ use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Properties\Plugins\ImportPluginProperties;
 use PhpMyAdmin\Util;
 use SimpleXMLElement;
-use const LIBXML_COMPACT;
+
 use function count;
 use function in_array;
 use function libxml_disable_entity_loader;
@@ -24,6 +24,8 @@ use function simplexml_load_string;
 use function str_replace;
 use function strcmp;
 use function strlen;
+
+use const LIBXML_COMPACT;
 use const PHP_VERSION_ID;
 
 /**
@@ -266,6 +268,7 @@ class ImportXml extends ImportPlugin
                     if (! in_array((string) $row_attr['name'], $tempRow)) {
                         $tempRow[] = (string) $row_attr['name'];
                     }
+
                     $tempCells[] = (string) $v2;
                 }
 

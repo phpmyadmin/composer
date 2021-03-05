@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Gis;
 
 use TCPDF;
+
 use function array_merge;
 use function array_push;
 use function array_slice;
@@ -88,6 +89,7 @@ class GisMultiPolygon extends GisGeometry
                 $parts = explode('),(', $polygon);
                 $ring = $parts[0];
             }
+
             $min_max = $this->setMinMax($ring, $min_max);
         }
 
@@ -152,6 +154,7 @@ class GisMultiPolygon extends GisGeometry
                     );
                 }
             }
+
             // draw polygon
             imagefilledpolygon($image, $points_arr, count($points_arr) / 2, $color);
             // mark label point if applicable
@@ -161,8 +164,10 @@ class GisMultiPolygon extends GisGeometry
                     $points_arr[3],
                 ];
             }
+
             $first_poly = false;
         }
+
         // print label if applicable
         if (isset($label_point)) {
             imagestring(
@@ -233,6 +238,7 @@ class GisMultiPolygon extends GisGeometry
                     );
                 }
             }
+
             // draw polygon
             $pdf->Polygon($points_arr, 'F*', [], $color, true);
             // mark label point if applicable
@@ -242,6 +248,7 @@ class GisMultiPolygon extends GisGeometry
                     $points_arr[3],
                 ];
             }
+
             $first_poly = false;
         }
 
@@ -309,11 +316,13 @@ class GisMultiPolygon extends GisGeometry
                     $row .= $this->drawPath($inner_poly, $scale_data);
                 }
             }
+
             $polygon_options['id'] = $label . $this->getRandomId();
             $row .= '"';
             foreach ($polygon_options as $option => $val) {
                 $row .= ' ' . $option . '="' . trim((string) $val) . '"';
             }
+
             $row .= '/>';
         }
 
@@ -357,6 +366,7 @@ class GisMultiPolygon extends GisGeometry
         if ($srid == 0) {
             $srid = 4326;
         }
+
         $row .= $this->getBoundsForOl($srid, $scale_data);
 
         // Trim to remove leading 'MULTIPOLYGON(((' and trailing ')))'
@@ -395,6 +405,7 @@ class GisMultiPolygon extends GisGeometry
         foreach ($other_points as $point) {
             $row .= ' L ' . $point[0] . ', ' . $point[1];
         }
+
         $row .= ' Z ';
 
         return $row;
@@ -426,12 +437,14 @@ class GisMultiPolygon extends GisGeometry
             if ($no_of_lines < 1) {
                 $no_of_lines = 1;
             }
+
             $wkt .= '(';
             for ($i = 0; $i < $no_of_lines; $i++) {
                 $no_of_points = $data_row[$k][$i]['no_of_points'] ?? 4;
                 if ($no_of_points < 4) {
                     $no_of_points = 4;
                 }
+
                 $wkt .= '(';
                 for ($j = 0; $j < $no_of_points; $j++) {
                     $wkt .= (isset($data_row[$k][$i][$j]['x'])
@@ -441,6 +454,7 @@ class GisMultiPolygon extends GisGeometry
                             && trim((string) $data_row[$k][$i][$j]['y']) != ''
                             ? $data_row[$k][$i][$j]['y'] : $empty) . ',';
                 }
+
                 $wkt
                     = mb_substr(
                         $wkt,
@@ -449,6 +463,7 @@ class GisMultiPolygon extends GisGeometry
                     );
                 $wkt .= '),';
             }
+
             $wkt
                 = mb_substr(
                     $wkt,
@@ -457,6 +472,7 @@ class GisMultiPolygon extends GisGeometry
                 );
             $wkt .= '),';
         }
+
         $wkt
             = mb_substr(
                 $wkt,
@@ -501,6 +517,7 @@ class GisMultiPolygon extends GisGeometry
             if ($ring1['isOuter']) {
                 continue;
             }
+
             foreach ($row_data['parts'] as $k => $ring2) {
                 if (! $ring2['isOuter']) {
                     continue;
@@ -508,10 +525,11 @@ class GisMultiPolygon extends GisGeometry
 
                 // If the pointOnSurface of the inner ring
                 // is also inside the outer ring
-                if (! GisPolygon::isPointInsidePolygon(
-                    $ring1['pointOnSurface'],
-                    $ring2['points']
-                )
+                if (
+                    ! GisPolygon::isPointInsidePolygon(
+                        $ring1['pointOnSurface'],
+                        $ring2['points']
+                    )
                 ) {
                     continue;
                 }
@@ -519,6 +537,7 @@ class GisMultiPolygon extends GisGeometry
                 if (! isset($ring2['inner'])) {
                     $row_data['parts'][$k]['inner'] = [];
                 }
+
                 $row_data['parts'][$k]['inner'][] = $j;
             }
         }
@@ -536,6 +555,7 @@ class GisMultiPolygon extends GisGeometry
             foreach ($ring['points'] as $point) {
                 $wkt .= $point['x'] . ' ' . $point['y'] . ',';
             }
+
             $wkt
                 = mb_substr(
                     $wkt,
@@ -551,6 +571,7 @@ class GisMultiPolygon extends GisGeometry
                     foreach ($row_data['parts'][$j]['points'] as $innerPoint) {
                         $wkt .= $innerPoint['x'] . ' ' . $innerPoint['y'] . ',';
                     }
+
                     $wkt
                         = mb_substr(
                             $wkt,
@@ -563,6 +584,7 @@ class GisMultiPolygon extends GisGeometry
 
             $wkt .= '),'; // end of polygon
         }
+
         $wkt
             = mb_substr(
                 $wkt,
@@ -634,9 +656,11 @@ class GisMultiPolygon extends GisGeometry
                         $param_row[$k][$j][$i]['x'] = $points_arr[$i][0];
                         $param_row[$k][$j][$i]['y'] = $points_arr[$i][1];
                     }
+
                     $j++;
                 }
             }
+
             $k++;
         }
 

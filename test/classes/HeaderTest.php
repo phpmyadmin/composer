@@ -7,6 +7,7 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Header;
 use ReflectionProperty;
+
 use function define;
 use function defined;
 
@@ -27,6 +28,7 @@ class HeaderTest extends AbstractTestCase
         if (! defined('PMA_IS_WINDOWS')) {
             define('PMA_IS_WINDOWS', false);
         }
+
         $GLOBALS['server'] = 0;
         $GLOBALS['message'] = 'phpmyadminmessage';
         $GLOBALS['PMA_PHP_SELF'] = Core::getenv('PHP_SELF');

@@ -20,6 +20,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function array_key_exists;
 use function array_keys;
 use function array_search;
@@ -153,6 +154,7 @@ class DatabasesController extends AbstractController
                         'is_selected' => $serverCollation === $collation->getName(),
                     ];
                 }
+
                 $charsetsList[] = [
                     'name' => $charset->getName(),
                     'description' => $charset->getDescription(),
@@ -219,13 +221,15 @@ class DatabasesController extends AbstractController
                 $this->dbi,
                 $cfg['Server']['DisableIS']
             );
-            if (array_key_exists($databaseCharset, $charsets)
+            if (
+                array_key_exists($databaseCharset, $charsets)
                 && array_key_exists($params['db_collation'], $collations[$databaseCharset])
             ) {
                 $sqlQuery .= ' DEFAULT'
                     . Util::getCharsetQueryPart($params['db_collation']);
             }
         }
+
         $sqlQuery .= ';';
 
         $result = $this->dbi->tryQuery($sqlQuery);
@@ -276,7 +280,8 @@ class DatabasesController extends AbstractController
         /** @var Message|int $message */
         $message = -1;
 
-        if (! isset($params['drop_selected_dbs'])
+        if (
+            ! isset($params['drop_selected_dbs'])
             || ! $this->response->isAjax()
             || (! $this->dbi->isSuperUser() && ! $cfg['AllowUserDropDatabase'])
         ) {
@@ -366,7 +371,8 @@ class DatabasesController extends AbstractController
         }
 
         $this->sortOrder = 'asc';
-        if (! isset($sortOrder)
+        if (
+            ! isset($sortOrder)
             || mb_strtolower($sortOrder) !== 'desc'
         ) {
             return;

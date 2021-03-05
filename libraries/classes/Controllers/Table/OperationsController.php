@@ -20,6 +20,7 @@ use PhpMyAdmin\StorageEngine;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+
 use function count;
 use function implode;
 use function mb_strstr;
@@ -117,6 +118,7 @@ class OperationsController extends AbstractController
             $tbl_storage_engine = $pma_table->getStorageEngine();
             $show_comment = $pma_table->getComment();
         }
+
         $tbl_collation = $pma_table->getCollation();
         $table_info_num_rows = $pma_table->getNumRows();
         $row_format = $pma_table->getRowFormat();
@@ -180,12 +182,14 @@ class OperationsController extends AbstractController
                         $_POST['new_name']
                     );
                 }
+
                 // Get original names before rename operation
                 $oldTable = $pma_table->getName();
                 $oldDb = $pma_table->getDbName();
 
                 if ($pma_table->rename($_POST['new_name'])) {
-                    if (isset($_POST['adjust_privileges'])
+                    if (
+                        isset($_POST['adjust_privileges'])
                         && ! empty($_POST['adjust_privileges'])
                     ) {
                         $this->operations->adjustPrivilegesRenameOrMoveTable(
@@ -210,7 +214,8 @@ class OperationsController extends AbstractController
                 }
             }
 
-            if (! empty($_POST['new_tbl_storage_engine'])
+            if (
+                ! empty($_POST['new_tbl_storage_engine'])
                 && mb_strtoupper($_POST['new_tbl_storage_engine']) !== $tbl_storage_engine
             ) {
                 $new_tbl_storage_engine = mb_strtoupper($_POST['new_tbl_storage_engine']);
@@ -250,7 +255,8 @@ class OperationsController extends AbstractController
                 $warning_messages = $this->operations->getWarningMessagesArray();
             }
 
-            if (isset($_POST['tbl_collation'], $_POST['change_all_collations'])
+            if (
+                isset($_POST['tbl_collation'], $_POST['change_all_collations'])
                 && ! empty($_POST['tbl_collation'])
                 && ! empty($_POST['change_all_collations'])
             ) {
@@ -273,6 +279,7 @@ class OperationsController extends AbstractController
                 }
             }
         }
+
         /**
          * Reordering the table has been requested by the user
          */
@@ -283,7 +290,8 @@ class OperationsController extends AbstractController
         /**
          * A partition operation has been requested by the user
          */
-        if (isset($_POST['submit_partition'])
+        if (
+            isset($_POST['submit_partition'])
             && ! empty($_POST['partition_operation'])
         ) {
             [$sql_query, $result] = $this->operations->getQueryAndResultForPartition();
@@ -304,12 +312,14 @@ class OperationsController extends AbstractController
                 $tbl_storage_engine = $pma_table->getStorageEngine();
                 $show_comment = $pma_table->getComment();
             }
+
             $tbl_collation = $pma_table->getCollation();
             $table_info_num_rows = $pma_table->getNumRows();
             $row_format = $pma_table->getRowFormat();
             $auto_increment = $pma_table->getAutoIncrement();
             $create_options = $pma_table->getCreateOptions();
         }
+
         unset($reread_info);
 
         if (isset($result) && empty($message_to_show)) {
@@ -356,6 +366,7 @@ class OperationsController extends AbstractController
 
                     return;
                 }
+
                 unset($warning_messages);
             }
 
@@ -368,6 +379,7 @@ class OperationsController extends AbstractController
                     Generator::getMessage($_message, $sql_query)
                 );
             }
+
             unset($_message);
         }
 
@@ -398,6 +410,7 @@ class OperationsController extends AbstractController
                         break;
                     }
                 }
+
                 if ($notNull) {
                     $hideOrderTable = true;
                     break;
