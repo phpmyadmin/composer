@@ -9,6 +9,7 @@ use PhpMyAdmin\ErrorReport;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Utils\HttpRequest;
+use PhpMyAdmin\Version;
 
 use function define;
 use function defined;
@@ -33,7 +34,6 @@ class ErrorReportTest extends AbstractTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        parent::defineVersionConstants();
         $GLOBALS['server'] = 1;
         $GLOBALS['cfg']['ServerDefault'] = 1;
         $GLOBALS['cfg']['ProxyUrl'] = '';
@@ -57,7 +57,12 @@ class ErrorReportTest extends AbstractTestCase
         }
 
         $template = new Template();
-        $this->errorReport = new ErrorReport(new HttpRequest(), new Relation(null, $template), $template);
+        $this->errorReport = new ErrorReport(
+            new HttpRequest(),
+            new Relation(null, $template),
+            $template,
+            $GLOBALS['config']
+        );
         $this->errorReport->setSubmissionUrl('http://localhost');
     }
 
@@ -80,7 +85,7 @@ class ErrorReportTest extends AbstractTestCase
         ];
 
         $report = [
-            'pma_version' => PMA_VERSION,
+            'pma_version' => Version::VERSION,
             'browser_name' => PMA_USR_BROWSER_AGENT,
             'browser_version' => PMA_USR_BROWSER_VER,
             'user_os' => PMA_USR_OS,
@@ -135,7 +140,12 @@ class ErrorReportTest extends AbstractTestCase
             ->willReturn($return);
 
         $template = new Template();
-        $this->errorReport = new ErrorReport($httpRequest, new Relation(null, $template), $template);
+        $this->errorReport = new ErrorReport(
+            $httpRequest,
+            new Relation(null, $template),
+            $template,
+            $GLOBALS['config']
+        );
         $this->errorReport->setSubmissionUrl($submissionUrl);
 
         $this->assertEquals($return, $this->errorReport->send($report));
@@ -180,7 +190,7 @@ class ErrorReportTest extends AbstractTestCase
         $_POST['description'] = 'description';
 
         $report = [
-            'pma_version' => PMA_VERSION,
+            'pma_version' => Version::VERSION,
             'browser_name' => PMA_USR_BROWSER_AGENT,
             'browser_version' => PMA_USR_BROWSER_VER,
             'user_os' => PMA_USR_OS,
