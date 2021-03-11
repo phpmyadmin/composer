@@ -35,7 +35,7 @@ AJAX.registerOnload('designer/move.js', function () {
     'margin-left': '3px'
   });
   $(document).on('fullscreenchange', function () {
-    if (!$.fn.fullScreen() || !$content.fullScreen()) {
+    if (!document.fullscreenElement) {
       $content.removeClass('content_fullscreen').css({
         'width': 'auto',
         'height': 'auto'
@@ -547,8 +547,9 @@ DesignerMove.toggleFullscreen = function () {
   var $img = $('#toggleFullscreen').find('img');
   var $span = $img.siblings('span');
   var $content = $('#page_content');
+  var pageContent = document.getElementById('page_content');
 
-  if (!$content.fullScreen()) {
+  if (!document.fullscreenElement) {
     $img.attr('src', $img.data('exit')).attr('title', $span.data('exit'));
     $span.text($span.data('exit'));
     $content.addClass('content_fullscreen').css({
@@ -560,7 +561,7 @@ DesignerMove.toggleFullscreen = function () {
       'height': screen.height
     });
     valueSent = 'on';
-    $content.fullScreen(true);
+    pageContent.requestFullscreen();
   } else {
     $img.attr('src', $img.data('enter')).attr('title', $span.data('enter'));
     $span.text($span.data('enter'));
@@ -572,7 +573,7 @@ DesignerMove.toggleFullscreen = function () {
       'width': 'auto',
       'height': 'auto'
     });
-    $content.fullScreen(false);
+    document.exitFullscreen();
     valueSent = 'off';
   }
 

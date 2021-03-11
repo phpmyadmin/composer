@@ -3,9 +3,6 @@
 /* global ErrorReport */
 // js/error_report.js
 
-/* global MicroHistory */
-// js/microhistory.js
-
 /**
  * This object handles ajax requests for pages. It also
  * handles the reloading of the main menu and scripts.
@@ -332,11 +329,6 @@ var AJAX = {
       isLink = false;
     }
 
-    if (!(history && history.pushState)) {
-      // Add a list of menu hashes that we have in the cache to the request
-      params += MicroHistory.menus.getRequestParam();
-    }
-
     if (AJAX.debug) {
       // eslint-disable-next-line no-console
       console.log('Loading: ' + url); // no need to translate
@@ -347,19 +339,16 @@ var AJAX = {
       AJAX.$msgbox = Functions.ajaxShowMessage(); // Save reference for the new link request
 
       AJAX.xhr = $.get(url, params, AJAX.responseHandler);
+      var state = {
+        url: href
+      };
 
-      if (history && history.pushState) {
-        var state = {
-          url: href
-        };
-
-        if (previousLinkAborted) {
-          // hack: there is already an aborted entry on stack
-          // so just modify the aborted one
-          history.replaceState(state, null, href);
-        } else {
-          history.pushState(state, null, href);
-        }
+      if (previousLinkAborted) {
+        // hack: there is already an aborted entry on stack
+        // so just modify the aborted one
+        history.replaceState(state, null, href);
+      } else {
+        history.pushState(state, null, href);
       }
     } else {
       /**
@@ -535,21 +524,12 @@ var AJAX = {
         }
 
         if (data.menu) {
-          if (history && history.pushState) {
-            var state = {
-              url: data.selflink,
-              menu: data.menu
-            };
-            history.replaceState(state, null);
-            AJAX.handleMenu.replace(data.menu);
-          } else {
-            MicroHistory.menus.replace(data.menu);
-            MicroHistory.menus.add(data.menuHash, data.menu);
-          }
-        } else if (data.menuHash) {
-          if (!(history && history.pushState)) {
-            MicroHistory.menus.replace(MicroHistory.menus.get(data.menuHash));
-          }
+          var state = {
+            url: data.selflink,
+            menu: data.menu
+          };
+          history.replaceState(state, null);
+          AJAX.handleMenu.replace(data.menu);
         }
 
         if (data.disableNaviSettings) {
@@ -591,12 +571,6 @@ var AJAX = {
 
         if (data.scripts) {
           AJAX.scriptHandler.load(data.scripts);
-        }
-
-        if (data.selflink && data.scripts && data.menuHash && data.params) {
-          if (!(history && history.pushState)) {
-            MicroHistory.add(data.selflink, data.scripts, data.menuHash, data.params, AJAX.source.attr('rel'));
-          }
         }
 
         if (data.displayMessage) {
@@ -861,11 +835,6 @@ var AJAX = {
 
       $(document).off('click', 'a').on('click', 'a', AJAX.requestHandler);
       $(document).off('submit', 'form').on('submit', 'form', AJAX.requestHandler);
-
-      if (!(history && history.pushState)) {
-        MicroHistory.update();
-      }
-
       callback();
     }
   }
@@ -932,58 +901,36 @@ AJAX.registerOnload('functions.js', function () {
  */
 
 $(function () {
-  var menuContent = $('<div></div>').append($('#server-breadcrumb').clone()).append($('#topmenucontainer').clone()).html();
+  var menuContent = $('<div></div>').append($('#server-breadcrumb').clone()).append($('#topmenucontainer').clone()).html(); // set initial state reload
 
-  if (history && history.pushState) {
-    // set initial state reload
-    var initState = 'state' in window.history && window.history.state !== null;
-    var initURL = $('#selflink').find('> a').attr('href') || location.href;
-    var state = {
-      url: initURL,
-      menu: menuContent
-    };
-    history.replaceState(state, null);
-    $(window).on('popstate', function (event) {
-      var initPop = !initState && location.href === initURL;
-      initState = true; // check if popstate fired on first page itself
+  var initState = 'state' in window.history && window.history.state !== null;
+  var initURL = $('#selflink').find('> a').attr('href') || location.href;
+  var state = {
+    url: initURL,
+    menu: menuContent
+  };
+  history.replaceState(state, null);
+  $(window).on('popstate', function (event) {
+    var initPop = !initState && location.href === initURL;
+    initState = true; // check if popstate fired on first page itself
 
-      if (initPop) {
-        return;
-      }
+    if (initPop) {
+      return;
+    }
 
-      var state = event.originalEvent.state;
+    var state = event.originalEvent.state;
 
-      if (state && state.menu) {
-        AJAX.$msgbox = Functions.ajaxShowMessage();
-        var params = 'ajax_request=true' + CommonParams.get('arg_separator') + 'ajax_page_request=true';
-        var url = state.url || location.href;
-        $.get(url, params, AJAX.responseHandler); // TODO: Check if sometimes menu is not retrieved from server,
-        // Not sure but it seems menu was missing only for printview which
-        // been removed lately, so if it's right some dead menu checks/fallbacks
-        // may need to be removed from this file and Header.php
-        // AJAX.handleMenu.replace(event.originalEvent.state.menu);
-      }
-    });
-  } else {
-    // Fallback to microhistory mechanism
-    AJAX.scriptHandler.load([{
-      'name': 'microhistory.js',
-      'fire': 1
-    }], function () {
-      // The cache primer is set by the footer class
-      if (MicroHistory.primer.url) {
-        MicroHistory.menus.add(MicroHistory.primer.menuHash, menuContent);
-      }
-
-      $(function () {
-        // Queue up this event twice to make sure that we get a copy
-        // of the page after all other onload events have been fired
-        if (MicroHistory.primer.url) {
-          MicroHistory.add(MicroHistory.primer.url, MicroHistory.primer.scripts, MicroHistory.primer.menuHash);
-        }
-      });
-    });
-  }
+    if (state && state.menu) {
+      AJAX.$msgbox = Functions.ajaxShowMessage();
+      var params = 'ajax_request=true' + CommonParams.get('arg_separator') + 'ajax_page_request=true';
+      var url = state.url || location.href;
+      $.get(url, params, AJAX.responseHandler); // TODO: Check if sometimes menu is not retrieved from server,
+      // Not sure but it seems menu was missing only for printview which
+      // been removed lately, so if it's right some dead menu checks/fallbacks
+      // may need to be removed from this file and Header.php
+      // AJAX.handleMenu.replace(event.originalEvent.state.menu);
+    }
+  });
 });
 /**
  * Attach a generic event handler to clicks
