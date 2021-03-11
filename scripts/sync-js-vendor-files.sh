@@ -83,14 +83,10 @@ echo 'Updating blueimp-md5'
 cp ./node_modules/blueimp-md5/js/md5.js ./js/vendor/jquery/jquery.md5.js
 echo 'Updating jquery.svg.js'
 cp ./node_modules/kbwood-jquery-svg/jquery.svg.js ./js/vendor/jquery/jquery.svg.js
-echo 'Updating jquery-hashchange'
-cp ./node_modules/jquery-hashchange/jquery.ba-hashchange.js ./js/vendor/jquery/jquery.ba-hashchange-2.0.js
 echo 'Updating jquery-uitablefilter'
 cp ./node_modules/jquery-uitablefilter/jquery.uitablefilter.js js/vendor/jquery/jquery.uitablefilter.js
 echo 'Updating jquery-tablesorter'
 cp ./node_modules/tablesorter/dist/js/jquery.tablesorter.js ./js/vendor/jquery/jquery.tablesorter.js
-echo 'Updating jquery-fullscreen-plugin'
-cp ./node_modules/jquery-fullscreen-plugin/jquery.fullscreen.js ./js/vendor/jquery/jquery.fullscreen.js
 echo 'Updating jquery-debounce'
 cp ./node_modules/jquery-debounce-throttle/index.js ./js/vendor/jquery/jquery.debounce-1.0.6.js
 echo 'Updating jquery-Timepicker-Addon'
