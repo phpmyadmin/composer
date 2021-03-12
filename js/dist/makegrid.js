@@ -554,14 +554,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
     showColList: function showColList(obj) {
       // only show when not resizing or reordering
       if (!g.colRsz && !g.colReorder) {
-        var pos = $(obj).position(); // check if the list position is too right
-
-        if (pos.left + $(g.cList).outerWidth(true) > $(document).width()) {
-          pos.left = $(document).width() - $(g.cList).outerWidth(true);
-        }
-
+        var pos = $(obj).position();
         $(g.cList).css({
-          left: pos.left,
           top: pos.top + $(obj).outerHeight(true)
         }).show();
         $(obj).addClass('coldrop-hover');
