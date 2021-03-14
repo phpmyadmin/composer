@@ -231,7 +231,7 @@ AJAX.registerTeardown('sql.js', function () {
   $('body').off('click', '#simulate_dml');
   $('body').off('keyup', '#sqlqueryform');
   $('body').off('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]');
-  $(document).off('submit', '#maxRowsForm');
+  $(document).off('submit', '.maxRowsForm');
   $(document).off('click', '#view_as');
 });
 /**
@@ -841,7 +841,7 @@ AJAX.registerOnload('sql.js', function () {
 
     $.post(url, submitData, AJAX.responseHandler);
   });
-  $(document).on('submit', '#maxRowsForm', function () {
+  $(document).on('submit', '.maxRowsForm', function () {
     var unlimNumRows = $(this).find('input[name="unlim_num_rows"]').val();
     var maxRowsCheck = Functions.checkFormElementInRange(this, 'session_max_rows', Messages.strNotValidRowNumber, 1);
     var posCheck = Functions.checkFormElementInRange(this, 'pos', Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
