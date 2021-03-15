@@ -1,6 +1,3 @@
-
-/* global ErrorReport */ // js/error_report.js
-
 /**
  * This object handles ajax requests for pages. It also
  * handles the reloading of the main menu and scripts.
@@ -27,7 +24,7 @@ var AJAX = {
     // eslint-disable-next-line valid-jsdoc
     /**
      * @var {Function} callback Callback to execute after a successful request
-     *                          Used by PMA_commonFunctions from common.js
+     *                          Used by CommonActions from common.js
      */
     callback: function () {},
     /**
@@ -711,9 +708,6 @@ var AJAX = {
          * @return {void}
          */
         done: function (script, callback) {
-            if (typeof ErrorReport !== 'undefined') {
-                ErrorReport.wrapGlobalFunctions();
-            }
             if ($.inArray(script, this.scriptsToBeFired)) {
                 AJAX.fireOnload(script);
             }
