@@ -47,7 +47,7 @@ use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\ThemeManager;
 use PhpMyAdmin\Tracker;
 
-global $containerBuilder, $error_handler, $config, $server, $dbi;
+global $containerBuilder, $errorHandler, $config, $server, $dbi;
 global $lang, $cfg, $isConfigLoading, $auth_plugin, $route, $theme;
 global $url_params, $goto, $back, $db, $table, $sql_query, $token_mismatch;
 
@@ -123,8 +123,8 @@ $containerBuilder = Core::getContainerBuilder();
  */
 Loader::loadFunctions();
 
-/** @var ErrorHandler $error_handler */
-$error_handler = $containerBuilder->get('error_handler');
+/** @var ErrorHandler $errorHandler */
+$errorHandler = $containerBuilder->get('error_handler');
 
 /**
  * Warning about missing PHP extensions.
@@ -159,7 +159,7 @@ register_shutdown_function([Config::class, 'fatalErrorHandler']);
  * include session handling after the globals, to prevent overwriting
  */
 if (! defined('PMA_NO_SESSION')) {
-    Session::setUp($config, $error_handler);
+    Session::setUp($config, $errorHandler);
 }
 
 /**
@@ -244,76 +244,82 @@ $theme = ThemeManager::initializeTheme();
 /** @var DatabaseInterface $dbi */
 $dbi = null;
 
-if (! defined('PMA_MINIMUM_COMMON')) {
-    /**
-     * save some settings in cookies
-     *
-     * @todo should be done in PhpMyAdmin\Config
-     */
-    $config->setCookie('pma_lang', (string) $lang);
+if (defined('PMA_MINIMUM_COMMON')) {
+    $config->loadUserPreferences();
+    $containerBuilder->set('theme_manager', ThemeManager::getInstance());
+    Tracker::enable();
 
-    ThemeManager::getInstance()->setThemeCookie();
-
-    $dbi = DatabaseInterface::load();
-    $containerBuilder->set(DatabaseInterface::class, $dbi);
-    $containerBuilder->setAlias('dbi', DatabaseInterface::class);
-
-    if (! empty($cfg['Server'])) {
-        $config->getLoginCookieValidityFromCache($server);
-
-        $auth_plugin = Plugins::getAuthPlugin();
-        $auth_plugin->authenticate();
-
-        Core::connectToDatabaseServer($dbi, $auth_plugin);
-
-        $auth_plugin->rememberCredentials();
-
-        $auth_plugin->checkTwoFactor();
-
-        /* Log success */
-        Logging::logUser($cfg['Server']['user']);
-
-        if ($dbi->getVersion() < $cfg['MysqlMinVersion']['internal']) {
-            Core::fatalError(
-                __('You should upgrade to %s %s or later.'),
-                [
-                    'MySQL',
-                    $cfg['MysqlMinVersion']['human'],
-                ]
-            );
-        }
-
-        // Sets the default delimiter (if specified).
-        if (! empty($_REQUEST['sql_delimiter'])) {
-            Lexer::$DEFAULT_DELIMITER = $_REQUEST['sql_delimiter'];
-        }
-
-        // TODO: Set SQL modes too.
-    } else { // end server connecting
-        $response = Response::getInstance();
-        $response->getHeader()->disableMenuAndConsole();
-        $response->getFooter()->setMinimal();
-    }
-
-    $response = Response::getInstance();
-
-    Profiling::check($dbi, $response);
-
-    /*
-     * There is no point in even attempting to process
-     * an ajax request if there is a token mismatch
-     */
-    if ($response->isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST' && $token_mismatch) {
-        $response->setRequestStatus(false);
-        $response->addJSON(
-            'message',
-            Message::error(__('Error: Token mismatch'))
-        );
-        exit;
-    }
-
-    $containerBuilder->set('response', Response::getInstance());
+    return;
 }
+
+/**
+ * save some settings in cookies
+ *
+ * @todo should be done in PhpMyAdmin\Config
+ */
+$config->setCookie('pma_lang', (string) $lang);
+
+ThemeManager::getInstance()->setThemeCookie();
+
+$dbi = DatabaseInterface::load();
+$containerBuilder->set(DatabaseInterface::class, $dbi);
+$containerBuilder->setAlias('dbi', DatabaseInterface::class);
+
+if (! empty($cfg['Server'])) {
+    $config->getLoginCookieValidityFromCache($server);
+
+    $auth_plugin = Plugins::getAuthPlugin();
+    $auth_plugin->authenticate();
+
+    Core::connectToDatabaseServer($dbi, $auth_plugin);
+
+    $auth_plugin->rememberCredentials();
+
+    $auth_plugin->checkTwoFactor();
+
+    /* Log success */
+    Logging::logUser($cfg['Server']['user']);
+
+    if ($dbi->getVersion() < $cfg['MysqlMinVersion']['internal']) {
+        Core::fatalError(
+            __('You should upgrade to %s %s or later.'),
+            [
+                'MySQL',
+                $cfg['MysqlMinVersion']['human'],
+            ]
+        );
+    }
+
+    // Sets the default delimiter (if specified).
+    if (! empty($_REQUEST['sql_delimiter'])) {
+        Lexer::$DEFAULT_DELIMITER = $_REQUEST['sql_delimiter'];
+    }
+
+    // TODO: Set SQL modes too.
+} else { // end server connecting
+    $response = Response::getInstance();
+    $response->getHeader()->disableMenuAndConsole();
+    $response->getFooter()->setMinimal();
+}
+
+$response = Response::getInstance();
+
+Profiling::check($dbi, $response);
+
+/*
+ * There is no point in even attempting to process
+ * an ajax request if there is a token mismatch
+ */
+if ($response->isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST' && $token_mismatch) {
+    $response->setRequestStatus(false);
+    $response->addJSON(
+        'message',
+        Message::error(__('Error: Token mismatch'))
+    );
+    exit;
+}
+
+$containerBuilder->set('response', Response::getInstance());
 
 // load user preferences
 $config->loadUserPreferences();
@@ -323,11 +329,6 @@ $containerBuilder->set('theme_manager', ThemeManager::getInstance());
 /* Tell tracker that it can actually work */
 Tracker::enable();
 
-if (
-    ! defined('PMA_MINIMUM_COMMON')
-    && ! empty($server)
-    && isset($cfg['ZeroConf'])
-    && $cfg['ZeroConf'] == true
-) {
+if (! empty($server) && isset($cfg['ZeroConf']) && $cfg['ZeroConf'] === true) {
     $dbi->postConnectControl();
 }

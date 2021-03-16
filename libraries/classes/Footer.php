@@ -250,14 +250,14 @@ class Footer
     public function getErrorMessages(): string
     {
         $retval = '';
-        if ($GLOBALS['error_handler']->hasDisplayErrors()) {
-            $retval .= $GLOBALS['error_handler']->getDispErrors();
+        if ($GLOBALS['errorHandler']->hasDisplayErrors()) {
+            $retval .= $GLOBALS['errorHandler']->getDispErrors();
         }
 
         /**
          * Report php errors
          */
-        $GLOBALS['error_handler']->reportErrors();
+        $GLOBALS['errorHandler']->reportErrors();
 
         return $retval;
     }
@@ -363,7 +363,6 @@ class Footer
                 'is_demo' => $GLOBALS['cfg']['DBG']['demo'],
                 'demo_message' => $demoMessage ?? '',
                 'footer' => $footer ?? '',
-                'has_error_report_modal' => $GLOBALS['cfg']['SendErrorReports'] !== 'never',
             ]);
         }
 
