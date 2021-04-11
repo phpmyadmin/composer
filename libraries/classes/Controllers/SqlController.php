@@ -17,6 +17,7 @@ use PhpMyAdmin\Sql;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Utils\ForeignKey;
 
 use function htmlentities;
 use function mb_strpos;
@@ -57,7 +58,7 @@ class SqlController extends AbstractController
     public function index(): void
     {
         global $cfg, $db, $display_query, $sql_query, $table;
-        global $ajax_reload, $goto, $err_url, $find_real_end, $unlim_num_rows, $import_text, $disp_query;
+        global $ajax_reload, $goto, $errorUrl, $find_real_end, $unlim_num_rows, $import_text, $disp_query;
         global $extra_data, $message_to_show, $sql_data, $disp_message, $complete_query;
         global $is_gotofile, $back, $table_from_sql;
 
@@ -101,17 +102,17 @@ class SqlController extends AbstractController
             }
         }
 
-        if (! isset($err_url)) {
-            $err_url = ! empty($back) ? $back : $goto;
-            $err_url .= Url::getCommon(
+        if (! isset($errorUrl)) {
+            $errorUrl = ! empty($back) ? $back : $goto;
+            $errorUrl .= Url::getCommon(
                 ['db' => $GLOBALS['db']],
-                strpos($err_url, '?') === false ? '?' : '&'
+                strpos($errorUrl, '?') === false ? '?' : '&'
             );
             if (
-                (mb_strpos(' ' . $err_url, 'db_') !== 1 || mb_strpos($err_url, '?route=/database/') === false)
+                (mb_strpos(' ' . $errorUrl, 'db_') !== 1 || mb_strpos($errorUrl, '?route=/database/') === false)
                 && strlen($table) > 0
             ) {
-                $err_url .= '&amp;table=' . urlencode($table);
+                $errorUrl .= '&amp;table=' . urlencode($table);
             }
         }
 
@@ -174,7 +175,7 @@ class SqlController extends AbstractController
                 __('"DROP DATABASE" statements are disabled.'),
                 '',
                 false,
-                $err_url
+                $errorUrl
             );
         }
 
@@ -318,7 +319,7 @@ class SqlController extends AbstractController
 
         $this->response->addJSON(
             'default_fk_check_value',
-            Util::isForeignKeyCheck()
+            ForeignKey::isCheckEnabled()
         );
     }
 

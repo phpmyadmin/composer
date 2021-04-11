@@ -49,15 +49,27 @@ use const PHP_EOL;
 class Git
 {
     /**
-     * Build a Git class
+     * Enable Git information search and process
      *
-     * @var Config
+     * @var bool
      */
-    private $config;
+    private $showGitRevision;
 
-    public function __construct(Config $config)
+    /**
+     * Git has been found and the data fetched
+     *
+     * @var bool
+     */
+    private $hasGit = false;
+
+    public function __construct(bool $showGitRevision)
     {
-        $this->config = $config;
+        $this->showGitRevision = $showGitRevision;
+    }
+
+    public function hasGitInformation(): bool
+    {
+        return $this->hasGit;
     }
 
     /**
@@ -67,8 +79,7 @@ class Git
      */
     public function isGitRevision(&$git_location = null): bool
     {
-        // PMA config check
-        if (! $this->config->get('ShowGitRevision')) {
+        if (! $this->showGitRevision) {
             return false;
         }
 
@@ -275,7 +286,7 @@ class Git
             $commit = @file_get_contents($gitFileName);
 
             if ($commit === false) {
-                $this->config->set('PMA_VERSION_GIT', 0);
+                $this->hasGit = false;
 
                 return null;
             }
@@ -478,7 +489,7 @@ class Git
         if (@file_exists($refFile)) {
             $hash = @file_get_contents($refFile);
             if ($hash === false) {
-                $this->config->set('PMA_VERSION_GIT', 0);
+                $this->hasGit = false;
 
                 return [null, null];
             }
@@ -489,7 +500,7 @@ class Git
         // deal with packed refs
         $packedRefs = @file_get_contents($gitFolder . '/packed-refs');
         if ($packedRefs === false) {
-            $this->config->set('PMA_VERSION_GIT', 0);
+            $this->hasGit = false;
 
             return [null, null];
         }
@@ -517,13 +528,26 @@ class Git
         }
 
         if (! isset($hash)) {
-            $this->config->set('PMA_VERSION_GIT', 0);
+            $this->hasGit = false;
 
             // Could not find ref
             return [null, null];
         }
 
         return [$hash, $branch];
+    }
+
+    private function getCommonDirContents(string $gitFolder): ?string
+    {
+        if (! is_file($gitFolder . '/commondir')) {
+            return null;
+        }
+        $commonDirContents = @file_get_contents($gitFolder . '/commondir');
+        if ($commonDirContents === false) {
+            return null;
+        }
+
+        return trim($commonDirContents);
     }
 
     /**
@@ -534,7 +558,7 @@ class Git
         // find out if there is a .git folder
         $gitFolder = '';
         if (! $this->isGitRevision($gitFolder)) {
-            $this->config->set('PMA_VERSION_GIT', 0);
+            $this->hasGit = false;
 
             return null;
         }
@@ -542,15 +566,14 @@ class Git
         $ref_head = @file_get_contents($gitFolder . '/HEAD');
 
         if (! $ref_head) {
-            $this->config->set('PMA_VERSION_GIT', 0);
+            $this->hasGit = false;
 
             return null;
         }
 
-        $common_dir_contents = @file_get_contents($gitFolder . '/commondir');
-
-        if ($common_dir_contents !== false) {
-            $gitFolder .= DIRECTORY_SEPARATOR . trim($common_dir_contents);
+        $commonDirContents = $this->getCommonDirContents($gitFolder);
+        if ($commonDirContents !== null) {
+            $gitFolder .= DIRECTORY_SEPARATOR . $commonDirContents;
         }
 
         [$hash, $branch] = $this->getHashFromHeadRef($gitFolder, $ref_head);
@@ -613,12 +636,12 @@ class Git
             ];
             $message = trim($commit_json->message);
         } else {
-            $this->config->set('PMA_VERSION_GIT', 0);
+            $this->hasGit = false;
 
             return null;
         }
 
-        $this->config->set('PMA_VERSION_GIT', 1);
+        $this->hasGit = true;
 
         return [
             'hash' => $hash,

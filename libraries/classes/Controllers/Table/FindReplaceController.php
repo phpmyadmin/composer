@@ -63,13 +63,13 @@ class FindReplaceController extends AbstractController
 
     public function index(): void
     {
-        global $db, $table, $url_params, $cfg, $err_url;
+        global $db, $table, $urlParams, $cfg, $errorUrl;
 
         Util::checkParameters(['db', 'table']);
 
-        $url_params = ['db' => $db, 'table' => $table];
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
-        $err_url .= Url::getCommon($url_params, '&');
+        $urlParams = ['db' => $db, 'table' => $table];
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
+        $errorUrl .= Url::getCommon($urlParams, '&');
 
         DbTableExists::check();
 

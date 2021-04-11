@@ -38,9 +38,9 @@ final class ExportController extends AbstractController
     public function index(): void
     {
         global $db, $table, $sql_query, $num_tables, $unlim_num_rows;
-        global $tmp_select, $select_item, $err_url;
+        global $tmp_select, $select_item, $errorUrl;
 
-        $err_url = Url::getFromRoute('/');
+        $errorUrl = Url::getFromRoute('/');
 
         if ($this->dbi->isSuperUser()) {
             $this->dbi->selectDb('mysql');
@@ -67,7 +67,7 @@ final class ExportController extends AbstractController
             $unlim_num_rows = 0;
         }
 
-        $GLOBALS['single_table'] = $_POST['single_table'] ?? $_GET['single_table'] ?? null;
+        $GLOBALS['single_table'] = $_POST['single_table'] ?? $_GET['single_table'] ?? $GLOBALS['single_table'] ?? null;
 
         $exportList = Plugins::getExport('server', isset($GLOBALS['single_table']));
 

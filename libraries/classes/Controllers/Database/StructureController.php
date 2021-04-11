@@ -10,6 +10,7 @@ use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Database\CentralColumns;
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\FlashMessages;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Operations;
@@ -27,6 +28,7 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Utils\ForeignKey;
 
 use function array_search;
 use function ceil;
@@ -91,6 +93,9 @@ class StructureController extends AbstractController
     /** @var DatabaseInterface */
     private $dbi;
 
+    /** @var FlashMessages */
+    private $flash;
+
     /**
      * @param Response          $response
      * @param string            $db          Database name
@@ -106,7 +111,8 @@ class StructureController extends AbstractController
         $replication,
         RelationCleanup $relationCleanup,
         Operations $operations,
-        $dbi
+        $dbi,
+        FlashMessages $flash
     ) {
         parent::__construct($response, $template, $db);
         $this->relation = $relation;
@@ -114,6 +120,7 @@ class StructureController extends AbstractController
         $this->relationCleanup = $relationCleanup;
         $this->operations = $operations;
         $this->dbi = $dbi;
+        $this->flash = $flash;
 
         $this->replicationInfo = new ReplicationInfo($this->dbi);
     }
@@ -138,7 +145,7 @@ class StructureController extends AbstractController
 
     public function index(): void
     {
-        global $cfg, $db, $err_url;
+        global $cfg, $db, $errorUrl;
 
         $parameters = [
             'sort' => $_REQUEST['sort'] ?? null,
@@ -147,8 +154,8 @@ class StructureController extends AbstractController
 
         Util::checkParameters(['db']);
 
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
-        $err_url .= Url::getCommon(['db' => $db], '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+        $errorUrl .= Url::getCommon(['db' => $db], '&');
 
         if (! $this->hasDatabase()) {
             return;
@@ -223,7 +230,7 @@ class StructureController extends AbstractController
 
     public function addRemoveFavoriteTablesAction(): void
     {
-        global $cfg, $db, $err_url;
+        global $cfg, $db, $errorUrl;
 
         $parameters = [
             'favorite_table' => $_REQUEST['favorite_table'] ?? null,
@@ -233,8 +240,8 @@ class StructureController extends AbstractController
 
         Util::checkParameters(['db']);
 
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
-        $err_url .= Url::getCommon(['db' => $db], '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+        $errorUrl .= Url::getCommon(['db' => $db], '&');
 
         if (! $this->hasDatabase() || ! $this->response->isAjax()) {
             return;
@@ -326,7 +333,7 @@ class StructureController extends AbstractController
      */
     public function handleRealRowCountRequestAction(): void
     {
-        global $cfg, $db, $err_url;
+        global $cfg, $db, $errorUrl;
 
         $parameters = [
             'real_row_count_all' => $_REQUEST['real_row_count_all'] ?? null,
@@ -335,8 +342,8 @@ class StructureController extends AbstractController
 
         Util::checkParameters(['db']);
 
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
-        $err_url .= Url::getCommon(['db' => $db], '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+        $errorUrl .= Url::getCommon(['db' => $db], '&');
 
         if (! $this->hasDatabase() || ! $this->response->isAjax()) {
             return;
@@ -377,13 +384,14 @@ class StructureController extends AbstractController
         global $db, $message;
 
         $selected = $_POST['selected'] ?? [];
+        $targetDb = $_POST['target_db'] ?? null;
         $selectedCount = count($selected);
 
         for ($i = 0; $i < $selectedCount; $i++) {
             Table::moveCopy(
                 $db,
                 $selected[$i],
-                $_POST['target_db'],
+                $targetDb,
                 $selected[$i],
                 $_POST['what'],
                 false,
@@ -397,7 +405,7 @@ class StructureController extends AbstractController
             $this->operations->adjustPrivilegesCopyTable(
                 $db,
                 $selected[$i],
-                $_POST['target_db'],
+                $targetDb,
                 $selected[$i]
             );
         }
@@ -1425,7 +1433,7 @@ class StructureController extends AbstractController
         $this->render('database/structure/drop_form', [
             'url_params' => $_url_params,
             'full_query' => $full_query,
-            'is_foreign_key_check' => Util::isForeignKeyCheck(),
+            'is_foreign_key_check' => ForeignKey::isCheckEnabled(),
         ]);
     }
 
@@ -1454,7 +1462,7 @@ class StructureController extends AbstractController
         $this->render('database/structure/empty_form', [
             'url_params' => $urlParams,
             'full_query' => $fullQuery,
-            'is_foreign_key_check' => Util::isForeignKeyCheck(),
+            'is_foreign_key_check' => ForeignKey::isCheckEnabled(),
         ]);
     }
 
@@ -1482,7 +1490,7 @@ class StructureController extends AbstractController
             return;
         }
 
-        $default_fk_check_value = Util::handleDisableFKCheckInit();
+        $default_fk_check_value = ForeignKey::handleDisableCheckInit();
         $sql_query = '';
         $sql_query_views = '';
         $selectedCount = count($selected);
@@ -1531,7 +1539,7 @@ class StructureController extends AbstractController
             $message = Message::error((string) $this->dbi->getError());
         }
 
-        Util::handleDisableFKCheckCleanup($default_fk_check_value);
+        ForeignKey::handleDisableCheckCleanup($default_fk_check_value);
 
         $message = Message::success();
 
@@ -1552,20 +1560,14 @@ class StructureController extends AbstractController
         $selected = $_POST['selected'] ?? [];
 
         if ($mult_btn !== __('Yes')) {
-            $message = Message::success(__('No change'));
+            $this->flash->addMessage('success', __('No change'));
 
-            if (empty($_POST['message'])) {
-                $_POST['message'] = Message::success();
-            }
-
-            unset($_POST['mult_btn']);
-
-            $this->index();
+            Core::sendHeaderLocation('./index.php?route=/database/structure' . Url::getCommonRaw(['db' => $db], '&'));
 
             return;
         }
 
-        $default_fk_check_value = Util::handleDisableFKCheckInit();
+        $default_fk_check_value = ForeignKey::handleDisableCheckInit();
 
         $sql_query = '';
         $selectedCount = count($selected);
@@ -1592,7 +1594,7 @@ class StructureController extends AbstractController
             $_REQUEST['pos'] = $sql->calculatePosForLastPage($db, $table, $_REQUEST['pos']);
         }
 
-        Util::handleDisableFKCheckCleanup($default_fk_check_value);
+        ForeignKey::handleDisableCheckCleanup($default_fk_check_value);
 
         $message = Message::success();
 

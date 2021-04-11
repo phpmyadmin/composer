@@ -17,6 +17,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Utils\Gis;
 
 use function in_array;
 use function intval;
@@ -140,7 +141,7 @@ class SearchController extends AbstractController
             true
         );
         // Get details about the geometry functions
-        $geom_types = Util::getGISDatatypes();
+        $geom_types = Gis::getDataTypes();
 
         foreach ($columns as $row) {
             // set column name
@@ -193,13 +194,13 @@ class SearchController extends AbstractController
      */
     public function index(): void
     {
-        global $db, $table, $url_params, $cfg, $err_url;
+        global $db, $table, $urlParams, $cfg, $errorUrl;
 
         Util::checkParameters(['db', 'table']);
 
-        $url_params = ['db' => $db, 'table' => $table];
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
-        $err_url .= Url::getCommon($url_params, '&');
+        $urlParams = ['db' => $db, 'table' => $table];
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
+        $errorUrl .= Url::getCommon($urlParams, '&');
 
         DbTableExists::check();
 

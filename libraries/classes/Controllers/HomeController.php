@@ -64,7 +64,7 @@ class HomeController extends AbstractController
 
     public function index(): void
     {
-        global $cfg, $server, $collation_connection, $message, $show_query, $db, $table, $err_url;
+        global $cfg, $server, $collation_connection, $message, $show_query, $db, $table, $errorUrl;
 
         if ($this->response->isAjax() && ! empty($_REQUEST['access_time'])) {
             return;
@@ -78,7 +78,7 @@ class HomeController extends AbstractController
         $db = $_POST['db'] ?? '';
         $table = '';
         $show_query = '1';
-        $err_url = Url::getFromRoute('/');
+        $errorUrl = Url::getFromRoute('/');
 
         if ($server > 0 && $this->dbi->isSuperUser()) {
             $this->dbi->selectDb('mysql');
@@ -228,7 +228,7 @@ class HomeController extends AbstractController
 
         $this->checkRequirements();
 
-        $git = new Git($this->config);
+        $git = new Git($this->config->get('ShowGitRevision') ?? true);
 
         $this->render('home/index', [
             'message' => $displayMessage ?? '',
@@ -284,7 +284,7 @@ class HomeController extends AbstractController
             return;
         }
 
-        $git = new Git($this->config);
+        $git = new Git($this->config->get('ShowGitRevision') ?? true);
 
         if (! $git->isGitRevision()) {
             return;
@@ -292,7 +292,7 @@ class HomeController extends AbstractController
 
         $commit = $git->checkGitRevision();
 
-        if (! $this->config->get('PMA_VERSION_GIT') || $commit === null) {
+        if (! $git->hasGitInformation() || $commit === null) {
             $this->response->setRequestStatus(false);
 
             return;

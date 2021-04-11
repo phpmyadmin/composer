@@ -40,12 +40,12 @@ final class GisVisualizationController extends AbstractController
 
     public function index(): void
     {
-        global $cfg, $url_params, $db, $err_url;
+        global $cfg, $urlParams, $db, $errorUrl;
 
         Util::checkParameters(['db']);
 
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
-        $err_url .= Url::getCommon(['db' => $db], '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+        $errorUrl .= Url::getCommon(['db' => $db], '&');
 
         if (! $this->hasDatabase()) {
             return;
@@ -163,14 +163,14 @@ final class GisVisualizationController extends AbstractController
         /**
          * Displays the page
          */
-        $url_params['goto'] = Util::getScriptNameForOption(
+        $urlParams['goto'] = Util::getScriptNameForOption(
             $cfg['DefaultTabDatabase'],
             'database'
         );
-        $url_params['back'] = Url::getFromRoute('/sql');
-        $url_params['sql_query'] = $sqlQuery;
+        $urlParams['back'] = Url::getFromRoute('/sql');
+        $urlParams['sql_query'] = $sqlQuery;
         $downloadUrl = Url::getFromRoute('/table/gis-visualization', array_merge(
-            $url_params,
+            $urlParams,
             [
                 'saveToFile' => true,
                 'session_max_rows' => $rows,
@@ -178,7 +178,7 @@ final class GisVisualizationController extends AbstractController
             ]
         ));
         $html = $this->template->render('table/gis_visualization/gis_visualization', [
-            'url_params' => $url_params,
+            'url_params' => $urlParams,
             'download_url' => $downloadUrl,
             'label_candidates' => $labelCandidates,
             'spatial_candidates' => $spatialCandidates,

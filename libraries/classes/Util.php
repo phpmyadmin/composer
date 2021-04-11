@@ -76,13 +76,11 @@ use function strlen;
 use function strpos;
 use function strrev;
 use function strtolower;
-use function strtoupper;
 use function strtr;
 use function substr;
 use function time;
 use function trim;
 use function uksort;
-use function version_compare;
 
 use const ENT_COMPAT;
 use const ENT_QUOTES;
@@ -977,7 +975,8 @@ class Util
             // hexify only if this is a true not empty BLOB or a BINARY
 
             // do not waste memory building a too big condition
-            if (mb_strlen((string) $row) < 1000) {
+            $rowLength = mb_strlen((string) $row);
+            if ($rowLength > 0 && $rowLength < 1000) {
                 // use a CAST if possible, to avoid problems
                 // if the field contains wildcard characters % or _
                 $conditionValue = '= CAST(0x' . bin2hex((string) $row) . ' AS BINARY)';
@@ -985,7 +984,7 @@ class Util
                 // when this blob is the only field present
                 // try settling with length comparison
                 $condition = ' CHAR_LENGTH(' . $conditionKey . ') ';
-                $conditionValue = ' = ' . mb_strlen((string) $row);
+                $conditionValue = ' = ' . $rowLength;
             } else {
                 // this blob won't be part of the final condition
                 $conditionValue = null;
@@ -1542,7 +1541,7 @@ class Util
         }
 
         // for the case ENUM('&#8211;','&ldquo;')
-        $displayedType = htmlspecialchars($printType);
+        $displayedType = htmlspecialchars($printType, ENT_COMPAT);
         if (mb_strlen($printType) > $GLOBALS['cfg']['LimitChars']) {
             $displayedType  = '<abbr title="' . htmlspecialchars($printType) . '">';
             $displayedType .= htmlspecialchars(
@@ -1550,7 +1549,8 @@ class Util
                     $printType,
                     0,
                     (int) $GLOBALS['cfg']['LimitChars']
-                ) . '...'
+                ) . '...',
+                ENT_COMPAT
             );
             $displayedType .= '</abbr>';
         }
@@ -1567,140 +1567,6 @@ class Util
             'can_contain_collation' => $canContainCollation,
             'displayed_type' => $displayedType,
         ];
-    }
-
-    /**
-     * Verifies if this table's engine supports foreign keys
-     *
-     * @param string $engine engine
-     */
-    public static function isForeignKeySupported($engine): bool
-    {
-        global $dbi;
-
-        $engine = strtoupper((string) $engine);
-        if (($engine === 'INNODB') || ($engine === 'PBXT')) {
-            return true;
-        }
-
-        if ($engine === 'NDBCLUSTER' || $engine === 'NDB') {
-            $ndbver = strtolower(
-                $dbi->fetchValue('SELECT @@ndb_version_string')
-            );
-            if (substr($ndbver, 0, 4) === 'ndb-') {
-                $ndbver = substr($ndbver, 4);
-            }
-
-            return version_compare($ndbver, '7.3', '>=');
-        }
-
-        return false;
-    }
-
-    /**
-     * Is Foreign key check enabled?
-     */
-    public static function isForeignKeyCheck(): bool
-    {
-        global $dbi;
-
-        if ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'enable') {
-            return true;
-        }
-
-        if ($GLOBALS['cfg']['DefaultForeignKeyChecks'] === 'disable') {
-            return false;
-        }
-
-        return $dbi->getVariable('FOREIGN_KEY_CHECKS') === 'ON';
-    }
-
-    /**
-     * Handle foreign key check request
-     *
-     * @return bool Default foreign key checks value
-     */
-    public static function handleDisableFKCheckInit(): bool
-    {
-        /** @var DatabaseInterface $dbi */
-        global $dbi;
-
-        $defaultFkCheckValue = $dbi->getVariable('FOREIGN_KEY_CHECKS') === 'ON';
-        if (isset($_REQUEST['fk_checks'])) {
-            if (empty($_REQUEST['fk_checks'])) {
-                // Disable foreign key checks
-                $dbi->setVariable('FOREIGN_KEY_CHECKS', 'OFF');
-            } else {
-                // Enable foreign key checks
-                $dbi->setVariable('FOREIGN_KEY_CHECKS', 'ON');
-            }
-        }
-
-        return $defaultFkCheckValue;
-    }
-
-    /**
-     * Cleanup changes done for foreign key check
-     *
-     * @param bool $defaultFkCheckValue original value for 'FOREIGN_KEY_CHECKS'
-     */
-    public static function handleDisableFKCheckCleanup(bool $defaultFkCheckValue): void
-    {
-        /** @var DatabaseInterface $dbi */
-        global $dbi;
-
-        $dbi->setVariable(
-            'FOREIGN_KEY_CHECKS',
-            $defaultFkCheckValue ? 'ON' : 'OFF'
-        );
-    }
-
-    /**
-     * Converts GIS data to Well Known Text format
-     *
-     * @param string $data        GIS data
-     * @param bool   $includeSRID Add SRID to the WKT
-     *
-     * @return string GIS data in Well Know Text format
-     */
-    public static function asWKT($data, $includeSRID = false)
-    {
-        global $dbi;
-
-        // Convert to WKT format
-        $hex = bin2hex($data);
-        $spatialAsText = 'ASTEXT';
-        $spatialSrid = 'SRID';
-        $axisOrder = '';
-        $mysqlVersionInt = $dbi->getVersion();
-        if ($mysqlVersionInt >= 50600) {
-            $spatialAsText = 'ST_ASTEXT';
-            $spatialSrid = 'ST_SRID';
-        }
-
-        if ($mysqlVersionInt >= 80010 && ! $dbi->isMariaDb()) {
-            $axisOrder = ', \'axis-order=long-lat\'';
-        }
-
-        $wktsql     = 'SELECT ' . $spatialAsText . "(x'" . $hex . "'" . $axisOrder . ')';
-        if ($includeSRID) {
-            $wktsql .= ', ' . $spatialSrid . "(x'" . $hex . "')";
-        }
-
-        $wktresult  = $dbi->tryQuery(
-            $wktsql
-        );
-        $wktarr     = $dbi->fetchRow($wktresult, 0);
-        $wktval     = $wktarr[0] ?? null;
-
-        if ($includeSRID) {
-            $srid = $wktarr[1] ?? null;
-            $wktval = "'" . $wktval . "'," . $srid;
-        }
-
-        @$dbi->freeResult($wktresult);
-
-        return $wktval;
     }
 
     /**
@@ -2017,270 +1883,6 @@ class Util
     }
 
     /**
-     * Return GIS data types
-     *
-     * @param bool $upperCase whether to return values in upper case
-     *
-     * @return string[] GIS data types
-     */
-    public static function getGISDatatypes($upperCase = false): array
-    {
-        $gisDataTypes = [
-            'geometry',
-            'point',
-            'linestring',
-            'polygon',
-            'multipoint',
-            'multilinestring',
-            'multipolygon',
-            'geometrycollection',
-        ];
-        if ($upperCase) {
-            $gisDataTypes = array_map('mb_strtoupper', $gisDataTypes);
-        }
-
-        return $gisDataTypes;
-    }
-
-    /**
-     * Generates GIS data based on the string passed.
-     *
-     * @param string $gisString    GIS string
-     * @param int    $mysqlVersion The mysql version as int
-     *
-     * @return string GIS data enclosed in 'ST_GeomFromText' or 'GeomFromText' function
-     */
-    public static function createGISData($gisString, $mysqlVersion)
-    {
-        $geomFromText = $mysqlVersion >= 50600 ? 'ST_GeomFromText' : 'GeomFromText';
-        $gisString = trim($gisString);
-        $geomTypes = '(POINT|MULTIPOINT|LINESTRING|MULTILINESTRING|'
-            . 'POLYGON|MULTIPOLYGON|GEOMETRYCOLLECTION)';
-        if (preg_match("/^'" . $geomTypes . "\(.*\)',[0-9]*$/i", $gisString)) {
-            return $geomFromText . '(' . $gisString . ')';
-        }
-
-        if (preg_match('/^' . $geomTypes . '\(.*\)$/i', $gisString)) {
-            return $geomFromText . "('" . $gisString . "')";
-        }
-
-        return $gisString;
-    }
-
-    /**
-     * Returns the names and details of the functions
-     * that can be applied on geometry data types.
-     *
-     * @param string $geomType if provided the output is limited to the functions
-     *                          that are applicable to the provided geometry type.
-     * @param bool   $binary   if set to false functions that take two geometries
-     *                         as arguments will not be included.
-     * @param bool   $display  if set to true separators will be added to the
-     *                         output array.
-     *
-     * @return array<int|string,array<string,int|string>> names and details of the functions that can be applied on
-     *                                                    geometry data types.
-     */
-    public static function getGISFunctions(
-        $geomType = null,
-        $binary = true,
-        $display = false
-    ): array {
-        global $dbi;
-
-        $funcs = [];
-        if ($display) {
-            $funcs[] = ['display' => ' '];
-        }
-
-        // Unary functions common to all geometry types
-        $funcs['Dimension']    = [
-            'params' => 1,
-            'type' => 'int',
-        ];
-        $funcs['Envelope']     = [
-            'params' => 1,
-            'type' => 'Polygon',
-        ];
-        $funcs['GeometryType'] = [
-            'params' => 1,
-            'type' => 'text',
-        ];
-        $funcs['SRID']         = [
-            'params' => 1,
-            'type' => 'int',
-        ];
-        $funcs['IsEmpty']      = [
-            'params' => 1,
-            'type' => 'int',
-        ];
-        $funcs['IsSimple']     = [
-            'params' => 1,
-            'type' => 'int',
-        ];
-
-        $geomType = mb_strtolower(trim((string) $geomType));
-        if ($display && $geomType !== 'geometry' && $geomType !== 'multipoint') {
-            $funcs[] = ['display' => '--------'];
-        }
-
-        // Unary functions that are specific to each geometry type
-        if ($geomType === 'point') {
-            $funcs['X'] = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-            $funcs['Y'] = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-        } elseif ($geomType === 'linestring') {
-            $funcs['EndPoint']   = [
-                'params' => 1,
-                'type' => 'point',
-            ];
-            $funcs['GLength']    = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-            $funcs['NumPoints']  = [
-                'params' => 1,
-                'type' => 'int',
-            ];
-            $funcs['StartPoint'] = [
-                'params' => 1,
-                'type' => 'point',
-            ];
-            $funcs['IsRing']     = [
-                'params' => 1,
-                'type' => 'int',
-            ];
-        } elseif ($geomType === 'multilinestring') {
-            $funcs['GLength']  = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-            $funcs['IsClosed'] = [
-                'params' => 1,
-                'type' => 'int',
-            ];
-        } elseif ($geomType === 'polygon') {
-            $funcs['Area']         = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-            $funcs['ExteriorRing'] = [
-                'params' => 1,
-                'type' => 'linestring',
-            ];
-            $funcs['NumInteriorRings'] = [
-                'params' => 1,
-                'type' => 'int',
-            ];
-        } elseif ($geomType === 'multipolygon') {
-            $funcs['Area']     = [
-                'params' => 1,
-                'type' => 'float',
-            ];
-            $funcs['Centroid'] = [
-                'params' => 1,
-                'type' => 'point',
-            ];
-            // Not yet implemented in MySQL
-            //$funcs['PointOnSurface'] = array('params' => 1, 'type' => 'point');
-        } elseif ($geomType === 'geometrycollection') {
-            $funcs['NumGeometries'] = [
-                'params' => 1,
-                'type' => 'int',
-            ];
-        }
-
-        // If we are asked for binary functions as well
-        if ($binary) {
-            // section separator
-            if ($display) {
-                $funcs[] = ['display' => '--------'];
-            }
-
-            $spatialPrefix = '';
-            if ($dbi->getVersion() >= 50601) {
-                // If MySQL version is greater than or equal 5.6.1,
-                // use the ST_ prefix.
-                $spatialPrefix = 'ST_';
-            }
-
-            $funcs[$spatialPrefix . 'Crosses']    = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Contains']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Disjoint']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Equals']     = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Intersects'] = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Overlaps']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Touches']    = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs[$spatialPrefix . 'Within']     = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-
-            if ($display) {
-                $funcs[] = ['display' => '--------'];
-            }
-
-            // Minimum bounding rectangle functions
-            $funcs['MBRContains']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBRDisjoint']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBREquals']     = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBRIntersects'] = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBROverlaps']   = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBRTouches']    = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-            $funcs['MBRWithin']     = [
-                'params' => 2,
-                'type' => 'int',
-            ];
-        }
-
-        return $funcs;
-    }
-
-    /**
      * Checks if the current user has a specific privilege and returns true if the
      * user indeed has that privilege or false if they don't. This function must
      * only be used for features that are available since MySQL 5, because it
@@ -2360,8 +1962,6 @@ class Util
         // If a table name was also provided and we still didn't
         // find any valid privileges, try table-wise privileges.
         if ($tbl !== null) {
-            // need to escape wildcards in db and table names, see bug #3518484
-            $tbl = str_replace(['%', '_'], ['\%', '\_'], $tbl);
             $query .= " AND TABLE_NAME='%s'";
             $tablePrivileges = $dbi->fetchValue(
                 sprintf(

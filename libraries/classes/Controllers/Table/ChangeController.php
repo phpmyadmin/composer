@@ -50,11 +50,11 @@ class ChangeController extends AbstractController
 
     public function index(): void
     {
-        global $cfg, $is_upload, $db, $table, $text_dir, $disp_message, $url_params;
-        global $err_url, $where_clause, $unsaved_values, $insert_mode, $where_clause_array, $where_clauses;
+        global $cfg, $is_upload, $db, $table, $text_dir, $disp_message, $urlParams;
+        global $errorUrl, $where_clause, $unsaved_values, $insert_mode, $where_clause_array, $where_clauses;
         global $result, $rows, $found_unique_key, $after_insert, $comments_map, $table_columns;
-        global $chg_evt_handler, $timestamp_seen, $columns_cnt, $tabindex, $tabindex_for_function;
-        global $tabindex_for_null, $tabindex_for_value, $o_rows, $biggest_max_file_size, $has_blob_field;
+        global $chg_evt_handler, $timestamp_seen, $columns_cnt, $tabindex;
+        global $tabindex_for_value, $o_rows, $biggest_max_file_size, $has_blob_field;
         global $jsvkey, $vkey, $current_result, $repopulate, $checked;
 
         $pageSettings = new PageSettings('Edit');
@@ -99,7 +99,7 @@ class ChangeController extends AbstractController
         }
 
         $_url_params = $this->insertEdit->getUrlParameters($db, $table);
-        $err_url = $GLOBALS['goto'] . Url::getCommon(
+        $errorUrl = $GLOBALS['goto'] . Url::getCommon(
             $_url_params,
             mb_strpos($GLOBALS['goto'], '?') === false ? '?' : '&'
         );
@@ -140,7 +140,7 @@ class ChangeController extends AbstractController
             $table,
             $where_clauses,
             $where_clause_array,
-            $err_url
+            $errorUrl
         );
 
         /**
@@ -158,16 +158,14 @@ class ChangeController extends AbstractController
         $columns_cnt     = count($table_columns);
 
         $tabindex              = 0;
-        $tabindex_for_function = +3000;
-        $tabindex_for_null     = +6000;
         $tabindex_for_value    = 0;
         $o_rows                = 0;
         $biggest_max_file_size = 0;
 
-        $url_params['db'] = $db;
-        $url_params['table'] = $table;
-        $url_params = $this->insertEdit->urlParamsInEditMode(
-            $url_params,
+        $urlParams['db'] = $db;
+        $urlParams['table'] = $table;
+        $urlParams = $this->insertEdit->urlParamsInEditMode(
+            $urlParams,
             $where_clause_array
         );
 
@@ -202,11 +200,11 @@ class ChangeController extends AbstractController
         }
 
         if (! $cfg['ShowFunctionFields']) {
-            $html_output .= $this->insertEdit->showTypeOrFunction('function', $url_params, false);
+            $html_output .= $this->insertEdit->showTypeOrFunction('function', $urlParams, false);
         }
 
         if (! $cfg['ShowFieldTypesInDataEditView']) {
-            $html_output .= $this->insertEdit->showTypeOrFunction('type', $url_params, false);
+            $html_output .= $this->insertEdit->showTypeOrFunction('type', $urlParams, false);
         }
 
         $GLOBALS['plugin_scripts'] = [];
@@ -233,7 +231,7 @@ class ChangeController extends AbstractController
             }
 
             $html_output .= $this->insertEdit->getHtmlForInsertEditRow(
-                $url_params,
+                $urlParams,
                 $table_columns,
                 $comments_map,
                 $timestamp_seen,
@@ -247,9 +245,7 @@ class ChangeController extends AbstractController
                 $tabindex,
                 $columns_cnt,
                 $is_upload,
-                $tabindex_for_function,
                 $foreigners,
-                $tabindex_for_null,
                 $tabindex_for_value,
                 $table,
                 $db,
@@ -293,7 +289,7 @@ class ChangeController extends AbstractController
                 $table,
                 $db,
                 $where_clause_array,
-                $err_url
+                $errorUrl
             );
         }
 

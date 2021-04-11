@@ -687,14 +687,16 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
                         var newHtml = Functions.escapeHtml(value);
                         newHtml = newHtml.replace(/\n/g, '<br>\n');
 
+                        var decimals = parseInt($thisField.attr('data-decimals'));
+
                         // remove decimal places if column type not supported
-                        if (($thisField.attr('data-decimals') === 0) && ($thisField.attr('data-type').indexOf('time') !== -1)) {
+                        if ((decimals === 0) && ($thisField.attr('data-type').indexOf('time') !== -1)) {
                             newHtml = newHtml.substring(0, newHtml.indexOf('.'));
                         }
 
-                        // remove addtional decimal places
-                        if (($thisField.attr('data-decimals') > 0) && ($thisField.attr('data-type').indexOf('time') !== -1)) {
-                            newHtml = newHtml.substring(0, newHtml.length - (6 - $thisField.attr('data-decimals')));
+                        // remove additional decimal places
+                        if ((decimals > 0) && ($thisField.attr('data-type').indexOf('time') !== -1)) {
+                            newHtml = newHtml.substring(0, newHtml.length - (6 - decimals));
                         }
 
                         var selector = 'span';
@@ -802,7 +804,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
                 g.wasEditedCellNull = false;
                 if ($td.is(':not(.not_null)')) {
                     // append a null checkbox
-                    $editArea.append('<div class="null_div"><label>Null:<input type="checkbox"></label></div>');
+                    $editArea.append('<div class="null_div"><label>NULL:<input type="checkbox"></label></div>');
 
                     var $checkbox = $editArea.find('.null_div input');
                     // check if current <td> is NULL
@@ -1242,11 +1244,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
                             fieldsType.push('hex');
                         }
                         fieldsNull.push('');
-                        // Convert \n to \r\n to be consistent with form submitted value.
-                        // The internal browser representation has to be just \n
-                        // while form submitted value \r\n, see specification:
-                        // https://www.w3.org/TR/html5/forms.html#the-textarea-element
-                        fields.push($thisField.data('value').replace(/\n/g, '\r\n'));
+                        fields.push($thisField.data('value'));
 
                         var cellIndex = $thisField.index('.to_be_saved');
                         if ($thisField.is(':not(.relation, .enum, .set, .bit)')) {

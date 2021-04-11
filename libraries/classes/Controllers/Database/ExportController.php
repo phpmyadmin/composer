@@ -38,9 +38,9 @@ final class ExportController extends AbstractController
 
     public function index(): void
     {
-        global $db, $table, $sub_part, $url_params, $sql_query;
+        global $db, $table, $sub_part, $urlParams, $sql_query;
         global $tables, $num_tables, $total_num_tables, $tooltip_truename;
-        global $tooltip_aliasname, $pos, $table_select, $unlim_num_rows, $cfg, $err_url;
+        global $tooltip_aliasname, $pos, $table_select, $unlim_num_rows, $cfg, $errorUrl;
 
         $pageSettings = new PageSettings('Export');
         $pageSettingsErrorHtml = $pageSettings->getErrorHTML();
@@ -54,14 +54,14 @@ final class ExportController extends AbstractController
 
         Util::checkParameters(['db']);
 
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
-        $err_url .= Url::getCommon(['db' => $db], '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabDatabase'], 'database');
+        $errorUrl .= Url::getCommon(['db' => $db], '&');
 
         if (! $this->hasDatabase()) {
             return;
         }
 
-        $url_params['goto'] = Url::getFromRoute('/database/export');
+        $urlParams['goto'] = Url::getFromRoute('/database/export');
 
         [
             $tables,
@@ -144,7 +144,7 @@ final class ExportController extends AbstractController
             $export_type = 'database';
         }
 
-        $GLOBALS['single_table'] = $_POST['single_table'] ?? $_GET['single_table'] ?? null;
+        $GLOBALS['single_table'] = $_POST['single_table'] ?? $_GET['single_table'] ?? $GLOBALS['single_table'] ?? null;
 
         $exportList = Plugins::getExport($export_type, isset($GLOBALS['single_table']));
 

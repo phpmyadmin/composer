@@ -17,7 +17,6 @@ use function is_array;
 use function is_object;
 use function json_encode;
 use function json_last_error;
-use function sprintf;
 use function strlen;
 
 /**
@@ -76,32 +75,20 @@ class Footer
     }
 
     /**
-     * Returns the message for demo server to error messages
+     * @return array<string, string>
+     *
+     * @psalm-return array{revision: string, revisionUrl: string, branch: string, branchUrl: string}|[]
      */
-    private function getDemoMessage(): string
+    private function getGitRevisionInfo(): array
     {
-        $message = '<a href="/">' . __('phpMyAdmin Demo Server') . '</a>: ';
+        $info = [];
+
         if (@file_exists(ROOT_PATH . 'revision-info.php')) {
-            $revision = '';
-            $fullrevision = '';
-            $repobase = '';
-            $repobranchbase = '';
-            $branch = '';
-            include ROOT_PATH . 'revision-info.php';
-            $message .= sprintf(
-                __('Currently running Git revision %1$s from the %2$s branch.'),
-                '<a target="_blank" rel="noopener noreferrer" href="'
-                . htmlspecialchars($repobase . $fullrevision) . '">'
-                . htmlspecialchars($revision) . '</a>',
-                '<a target="_blank" rel="noopener noreferrer" href="'
-                . htmlspecialchars($repobranchbase . $branch) . '">'
-                . htmlspecialchars($branch) . '</a>'
-            );
-        } else {
-            $message .= __('Git information missing!');
+            /** @psalm-suppress MissingFile */
+            $info = include ROOT_PATH . 'revision-info.php';
         }
 
-        return Message::notice($message)->getDisplay();
+        return is_array($info) ? $info : [];
     }
 
     /**
@@ -332,23 +319,17 @@ class Footer
         $this->setHistory();
         if ($this->isEnabled) {
             if (! $this->isAjax && ! $this->isMinimal) {
-                if (
-                    Core::getenv('SCRIPT_NAME')
-                    && ! $this->isAjax
-                ) {
+                if (Core::getenv('SCRIPT_NAME')) {
                     $url = $this->getSelfUrl();
                     $selfLink = $this->getSelfLink($url);
                 }
 
-                $this->scripts->addCode(
-                    'var debugSQLInfo = ' . $this->getDebugMessage() . ';'
-                );
-
+                $this->scripts->addCode('var debugSQLInfo = ' . $this->getDebugMessage() . ';');
                 $errorMessages = $this->getErrorMessages();
                 $scripts = $this->scripts->getDisplay();
 
                 if ($GLOBALS['cfg']['DBG']['demo']) {
-                    $demoMessage = $this->getDemoMessage();
+                    $gitRevisionInfo = $this->getGitRevisionInfo();
                 }
 
                 $footer = Config::renderFooter();
@@ -361,7 +342,7 @@ class Footer
                 'error_messages' => $errorMessages ?? '',
                 'scripts' => $scripts ?? '',
                 'is_demo' => $GLOBALS['cfg']['DBG']['demo'],
-                'demo_message' => $demoMessage ?? '',
+                'git_revision_info' => $gitRevisionInfo ?? [],
                 'footer' => $footer ?? '',
             ]);
         }

@@ -21,6 +21,7 @@ use PhpMyAdmin\Sql;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Utils\ForeignKey;
 use Throwable;
 
 use function define;
@@ -69,7 +70,7 @@ final class ImportController extends AbstractController
     public function index(): void
     {
         global $cfg, $collation_connection, $db, $import_type, $table, $goto, $display_query;
-        global $format, $local_import_file, $ajax_reload, $import_text, $sql_query, $message, $err_url, $url_params;
+        global $format, $local_import_file, $ajax_reload, $import_text, $sql_query, $message, $errorUrl, $urlParams;
         global $memory_limit, $read_limit, $finished, $offset, $charset_conversion, $charset_of_file;
         global $timestamp, $maximum_time, $timeout_passed, $import_file, $go_sql, $sql_file, $error, $max_sql_len, $msg;
         global $sql_query_disabled, $executed_queries, $run_query, $reset_charset, $bookmark_created;
@@ -309,14 +310,14 @@ final class ImportController extends AbstractController
         $format = Core::securePath($format);
 
         if (strlen($table) > 0 && strlen($db) > 0) {
-            $url_params = [
+            $urlParams = [
                 'db' => $db,
                 'table' => $table,
             ];
         } elseif (strlen($db) > 0) {
-            $url_params = ['db' => $db];
+            $urlParams = ['db' => $db];
         } else {
-            $url_params = [];
+            $urlParams = [];
         }
 
         // Create error and goto url
@@ -336,8 +337,8 @@ final class ImportController extends AbstractController
             }
         }
 
-        $err_url = $goto . Url::getCommon($url_params, '&');
-        $_SESSION['Import_message']['go_back_url'] = $err_url;
+        $errorUrl = $goto . Url::getCommon($urlParams, '&');
+        $_SESSION['Import_message']['go_back_url'] = $errorUrl;
 
         if (strlen($db) > 0) {
             $this->dbi->selectDb($db);
@@ -650,12 +651,12 @@ final class ImportController extends AbstractController
             }
 
             // Do the real import
-            $default_fk_check = Util::handleDisableFKCheckInit();
+            $default_fk_check = ForeignKey::handleDisableCheckInit();
             try {
                 $import_plugin->doImport($importHandle ?? null, $sql_data);
-                Util::handleDisableFKCheckCleanup($default_fk_check);
+                ForeignKey::handleDisableCheckCleanup($default_fk_check);
             } catch (Throwable $e) {
-                Util::handleDisableFKCheckCleanup($default_fk_check);
+                ForeignKey::handleDisableCheckCleanup($default_fk_check);
 
                 throw $e;
             }
@@ -712,13 +713,13 @@ final class ImportController extends AbstractController
 
         // Did we hit timeout? Tell it user.
         if ($timeout_passed) {
-            $url_params['timeout_passed'] = '1';
-            $url_params['offset'] = $offset;
+            $urlParams['timeout_passed'] = '1';
+            $urlParams['offset'] = $offset;
             if (isset($local_import_file)) {
-                $url_params['local_import_file'] = $local_import_file;
+                $urlParams['local_import_file'] = $local_import_file;
             }
 
-            $importUrl = $err_url = $goto . Url::getCommon($url_params, '&');
+            $importUrl = $errorUrl = $goto . Url::getCommon($urlParams, '&');
 
             $message = Message::error(
                 __(
@@ -773,7 +774,7 @@ final class ImportController extends AbstractController
                     $die['error'],
                     $die['sql'],
                     false,
-                    $err_url,
+                    $errorUrl,
                     $error
                 );
             }

@@ -37,6 +37,7 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Utils\ForeignKey;
 use stdClass;
 
 use function array_keys;
@@ -109,7 +110,7 @@ class StructureController extends AbstractController
 
     public function index(): void
     {
-        global $reread_info, $showtable, $db, $table, $cfg, $err_url;
+        global $reread_info, $showtable, $db, $table, $cfg, $errorUrl;
         global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
 
         $this->dbi->selectDb($this->db);
@@ -145,8 +146,8 @@ class StructureController extends AbstractController
 
         $isSystemSchema = Utilities::isSystemSchema($db);
         $url_params = ['db' => $db, 'table' => $table];
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
-        $err_url .= Url::getCommon($url_params, '&');
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
+        $errorUrl .= Url::getCommon($url_params, '&');
 
         DbTableExists::check();
 
@@ -465,7 +466,7 @@ class StructureController extends AbstractController
 
     public function primary(): void
     {
-        global $db, $table, $message, $sql_query, $url_params, $err_url, $cfg;
+        global $db, $table, $message, $sql_query, $urlParams, $errorUrl, $cfg;
 
         $selected = $_POST['selected'] ?? [];
         $selected_fld = $_POST['selected_fld'] ?? [];
@@ -489,9 +490,9 @@ class StructureController extends AbstractController
         if (! empty($selected_fld) && ! empty($primary)) {
             Util::checkParameters(['db', 'table']);
 
-            $url_params = ['db' => $db, 'table' => $table];
-            $err_url = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
-            $err_url .= Url::getCommon($url_params, '&');
+            $urlParams = ['db' => $db, 'table' => $table];
+            $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
+            $errorUrl .= Url::getCommon($urlParams, '&');
 
             DbTableExists::check();
 
@@ -585,7 +586,7 @@ class StructureController extends AbstractController
 
     public function dropConfirm(): void
     {
-        global $db, $table, $url_params, $err_url, $cfg;
+        global $db, $table, $urlParams, $errorUrl, $cfg;
 
         $selected = $_POST['selected_fld'] ?? null;
 
@@ -598,9 +599,9 @@ class StructureController extends AbstractController
 
         Util::checkParameters(['db', 'table']);
 
-        $url_params = ['db' => $db, 'table' => $table];
-        $err_url = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
-        $err_url .= Url::getCommon($url_params, '&');
+        $urlParams = ['db' => $db, 'table' => $table];
+        $errorUrl = Util::getScriptNameForOption($cfg['DefaultTabTable'], 'table');
+        $errorUrl .= Url::getCommon($urlParams, '&');
 
         DbTableExists::check();
 
@@ -1574,7 +1575,7 @@ class StructureController extends AbstractController
 
         return $this->template->render('table/structure/display_structure', [
             'collations' => $collations,
-            'is_foreign_key_supported' => Util::isForeignKeySupported($engine),
+            'is_foreign_key_supported' => ForeignKey::isSupported($engine),
             'indexes' => Index::getFromTable($this->table, $this->db),
             'indexes_duplicates' => Index::findDuplicates($this->table, $this->db),
             'cfg_relation' => $this->relation->getRelationsParam(),
@@ -1726,7 +1727,7 @@ class StructureController extends AbstractController
         return $this->template->render('table/structure/display_table_stats', [
             'db' => $GLOBALS['db'],
             'table' => $GLOBALS['table'],
-            'is_foreign_key_supported' => Util::isForeignKeySupported($engine),
+            'is_foreign_key_supported' => ForeignKey::isSupported($engine),
             'cfg_relation' => $this->relation->getRelationsParam(),
             'showtable' => $showtable,
             'table_info_num_rows' => $table_info_num_rows,

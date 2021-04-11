@@ -56,7 +56,7 @@ final class ExportController extends AbstractController
 
     public function index(): void
     {
-        global $containerBuilder, $db, $export_type, $filename_template, $sql_query, $err_url, $message;
+        global $containerBuilder, $db, $export_type, $filename_template, $sql_query, $errorUrl, $message;
         global $compression, $crlf, $asfile, $buffer_needed, $save_on_server, $file_handle, $separate_files;
         global $output_charset_conversion, $output_kanji_conversion, $table, $what, $export_plugin, $single_table;
         global $compression_methods, $onserver, $back_button, $refreshButton, $save_filename, $filename;
@@ -250,7 +250,7 @@ final class ExportController extends AbstractController
         $refreshButton = '';
         $save_filename = '';
         $file_handle = '';
-        $err_url = '';
+        $errorUrl = '';
         $filename = '';
         $separate_files = '';
 
@@ -268,21 +268,21 @@ final class ExportController extends AbstractController
             $asfile = false;
         } else {
             $asfile = true;
+            $selectedCompression = $_POST['compression'] ?? '';
             if (
                 isset($_POST['as_separate_files'])
                 && ! empty($_POST['as_separate_files'])
             ) {
                 if (
-                    isset($_POST['compression'])
-                    && ! empty($_POST['compression'])
-                    && $_POST['compression'] === 'zip'
+                    ! empty($selectedCompression)
+                    && $selectedCompression === 'zip'
                 ) {
                     $separate_files = $_POST['as_separate_files'];
                 }
             }
 
-            if (in_array($_POST['compression'], $compression_methods)) {
-                $compression = $_POST['compression'];
+            if (in_array($selectedCompression, $compression_methods)) {
+                $compression = $selectedCompression;
                 $buffer_needed = true;
             }
 
@@ -320,9 +320,9 @@ final class ExportController extends AbstractController
         $tables = [];
         // Generate error url and check for needed variables
         if ($export_type === 'server') {
-            $err_url = Url::getFromRoute('/server/export');
+            $errorUrl = Url::getFromRoute('/server/export');
         } elseif ($export_type === 'database' && strlen($db) > 0) {
-            $err_url = Url::getFromRoute('/database/export', ['db' => $db]);
+            $errorUrl = Url::getFromRoute('/database/export', ['db' => $db]);
             // Check if we have something to export
             if (isset($table_select)) {
                 $tables = $table_select;
@@ -330,12 +330,12 @@ final class ExportController extends AbstractController
                 $tables = [];
             }
         } elseif ($export_type === 'table' && strlen($db) > 0 && strlen($table) > 0) {
-            $err_url = Url::getFromRoute('/table/export', [
+            $errorUrl = Url::getFromRoute('/table/export', [
                 'db' => $db,
                 'table' => $table,
             ]);
         } elseif ($export_type === 'raw') {
-            $err_url = Url::getFromRoute('/server/export', ['sql_query' => $sql_query]);
+            $errorUrl = Url::getFromRoute('/server/export', ['sql_query' => $sql_query]);
         } else {
             Core::fatalError(__('Bad parameters!'));
         }
@@ -517,7 +517,7 @@ final class ExportController extends AbstractController
                     $whatStrucOrData,
                     $export_plugin,
                     $crlf,
-                    $err_url,
+                    $errorUrl,
                     $export_type,
                     $do_relation,
                     $do_comments,
@@ -551,7 +551,7 @@ final class ExportController extends AbstractController
                             $table_data,
                             $export_plugin,
                             $crlf,
-                            $err_url,
+                            $errorUrl,
                             $export_type,
                             $do_relation,
                             $do_comments,
@@ -572,7 +572,7 @@ final class ExportController extends AbstractController
                         $table_data,
                         $export_plugin,
                         $crlf,
-                        $err_url,
+                        $errorUrl,
                         $export_type,
                         $do_relation,
                         $do_comments,
@@ -587,7 +587,7 @@ final class ExportController extends AbstractController
                     $whatStrucOrData,
                     $export_plugin,
                     $crlf,
-                    $err_url,
+                    $errorUrl,
                     $sql_query,
                     $export_type
                 );
@@ -615,7 +615,7 @@ final class ExportController extends AbstractController
                             $whatStrucOrData,
                             $export_plugin,
                             $crlf,
-                            $err_url,
+                            $errorUrl,
                             $export_type,
                             $do_relation,
                             $do_comments,
@@ -637,7 +637,7 @@ final class ExportController extends AbstractController
                         $whatStrucOrData,
                         $export_plugin,
                         $crlf,
-                        $err_url,
+                        $errorUrl,
                         $export_type,
                         $do_relation,
                         $do_comments,

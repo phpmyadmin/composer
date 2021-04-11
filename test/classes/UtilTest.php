@@ -18,7 +18,6 @@ use function date_default_timezone_get;
 use function date_default_timezone_set;
 use function file_exists;
 use function floatval;
-use function hex2bin;
 use function htmlspecialchars;
 use function ini_get;
 use function ini_set;
@@ -46,36 +45,6 @@ class UtilTest extends AbstractTestCase
         parent::setLanguage();
         parent::setTheme();
         parent::loadDefaultConfig();
-    }
-
-    /**
-     * Test for createGISData
-     */
-    public function testCreateGISDataOldMysql(): void
-    {
-        $this->assertEquals(
-            'abc',
-            Util::createGISData('abc', 50500)
-        );
-        $this->assertEquals(
-            "GeomFromText('POINT()',10)",
-            Util::createGISData("'POINT()',10", 50500)
-        );
-    }
-
-    /**
-     * Test for createGISData
-     */
-    public function testCreateGISDataNewMysql(): void
-    {
-        $this->assertEquals(
-            'abc',
-            Util::createGISData('abc', 50600)
-        );
-        $this->assertEquals(
-            "ST_GeomFromText('POINT()',10)",
-            Util::createGISData("'POINT()',10", 50600)
-        );
     }
 
     /**
@@ -302,26 +271,6 @@ class UtilTest extends AbstractTestCase
     }
 
     /**
-     * Test for getGISFunctions
-     */
-    public function testGetGISFunctions(): void
-    {
-        $funcs = Util::getGISFunctions();
-        $this->assertArrayHasKey(
-            'Dimension',
-            $funcs
-        );
-        $this->assertArrayHasKey(
-            'GeometryType',
-            $funcs
-        );
-        $this->assertArrayHasKey(
-            'MBRDisjoint',
-            $funcs
-        );
-    }
-
-    /**
      * Test for Page Selector
      */
     public function testPageSelector(): void
@@ -335,29 +284,6 @@ class UtilTest extends AbstractTestCase
         $this->assertStringContainsString(
             '<option selected="selected" style="font-weight: bold" value="297">100</option>',
             Util::pageselector('pma', 3, 100, 50)
-        );
-    }
-
-    /**
-     * Test for isForeignKeyCheck
-     */
-    public function testIsForeignKeyCheck(): void
-    {
-        $GLOBALS['server'] = 1;
-
-        $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'enable';
-        $this->assertTrue(
-            Util::isForeignKeyCheck()
-        );
-
-        $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'disable';
-        $this->assertFalse(
-            Util::isForeignKeyCheck()
-        );
-
-        $GLOBALS['cfg']['DefaultForeignKeyChecks'] = 'default';
-        $this->assertTrue(
-            Util::isForeignKeyCheck()
         );
     }
 
@@ -880,52 +806,6 @@ class UtilTest extends AbstractTestCase
             [
                 '256K',
                 262144,
-            ],
-        ];
-    }
-
-    /**
-     * foreign key supported test
-     *
-     * @param string $a Engine
-     * @param bool   $e Expected Value
-     *
-     * @covers \PhpMyAdmin\Util::isForeignKeySupported
-     * @dataProvider providerIsForeignKeySupported
-     */
-    public function testIsForeignKeySupported(string $a, bool $e): void
-    {
-        $GLOBALS['server'] = 1;
-
-        $this->assertEquals(
-            $e,
-            Util::isForeignKeySupported($a)
-        );
-    }
-
-    /**
-     * data provider for foreign key supported test
-     *
-     * @return array
-     */
-    public function providerIsForeignKeySupported(): array
-    {
-        return [
-            [
-                'MyISAM',
-                false,
-            ],
-            [
-                'innodb',
-                true,
-            ],
-            [
-                'pBxT',
-                true,
-            ],
-            [
-                'ndb',
-                true,
             ],
         ];
     }
@@ -2098,259 +1978,6 @@ class UtilTest extends AbstractTestCase
         ];
     }
 
-    /**
-     * Some data to test Util::asWKT for testAsWKT
-     */
-    public function dataProviderAsWKT(): array
-    {
-        return [
-            [
-                'SELECT ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                ['POINT(1 1)'],
-                'POINT(1 1)',
-                false,
-                50300,
-            ],
-            [
-                'SELECT ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
-                . ' SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                '\'POINT(1 1)\',0',
-                true,
-                50300,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                ['POINT(1 1)'],
-                'POINT(1 1)',
-                false,
-                50700,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
-                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                '\'POINT(1 1)\',0',
-                true,
-                50700,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\', \'axis-order=long-lat\'),'
-                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                '\'POINT(1 1)\',0',
-                true,
-                80010,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\'),'
-                . ' ST_SRID(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                '\'POINT(1 1)\',0',
-                true,
-                50700,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\', \'axis-order=long-lat\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                'POINT(1 1)',
-                false,
-                80010,
-            ],
-            [
-                'SELECT ST_ASTEXT(x\'000000000101000000000000000000f03f000000000000f03f\')',
-                [
-                    'POINT(1 1)',
-                    '0',
-                ],
-                'POINT(1 1)',
-                false,
-                50700,
-            ],
-        ];
-    }
-
-    /**
-     * Test to get data asWKT
-     *
-     * @param string $expectedQuery  The query to expect
-     * @param array  $returnData     The data to return for fetchRow
-     * @param string $functionResult Result of the Util::asWKT invocation
-     * @param bool   $SRIDOption     Use the SRID option or not
-     * @param int    $mysqlVersion   The mysql version to return for getVersion
-     *
-     * @dataProvider dataProviderAsWKT
-     */
-    public function testAsWKT(
-        string $expectedQuery,
-        array $returnData,
-        string $functionResult,
-        bool $SRIDOption,
-        int $mysqlVersion
-    ): void {
-        $oldDbi = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
-            ->method('getVersion')
-            ->will($this->returnValue($mysqlVersion));
-
-        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
-            ->method('tryQuery')
-            ->with($expectedQuery)
-            ->will($this->returnValue([]));// Omit the real object
-
-        $dbi->expects($SRIDOption ? $this->once() : $this->exactly(2))
-            ->method('fetchRow')
-            ->will($this->returnValue($returnData));
-
-        $GLOBALS['dbi'] = $dbi;
-
-        if (! $SRIDOption) {
-            // Also test default signature
-            $this->assertSame($functionResult, Util::asWKT(
-                (string) hex2bin('000000000101000000000000000000F03F000000000000F03F')
-            ));
-        }
-
-        $this->assertSame($functionResult, Util::asWKT(
-            (string) hex2bin('000000000101000000000000000000F03F000000000000F03F'),
-            $SRIDOption
-        ));
-
-        $GLOBALS['dbi'] = $oldDbi;
-    }
-
-    /**
-     * @return array[]
-     */
-    public function providerFkChecks(): array
-    {
-        return [
-            [
-                '',
-                'OFF',
-            ],
-            [
-                '0',
-                'OFF',
-            ],
-            [
-                '1',
-                'ON',
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider providerFkChecks
-     */
-    public function testHandleDisableFKCheckInit(string $fkChecksValue, string $setVariableParam): void
-    {
-        $oldDbi = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $GLOBALS['dbi'] = $dbi;
-
-        $_REQUEST['fk_checks'] = $fkChecksValue;
-
-        $dbi->expects($this->once())
-            ->method('getVariable')
-            ->will($this->returnValue('ON'));
-
-        $dbi->expects($this->once())
-            ->method('setVariable')
-            ->with('FOREIGN_KEY_CHECKS', $setVariableParam)
-            ->will($this->returnValue(true));
-
-        $this->assertTrue(Util::handleDisableFKCheckInit());
-
-        $GLOBALS['dbi'] = $oldDbi;
-    }
-
-    /**
-     * @dataProvider providerFkChecks
-     */
-    public function testHandleDisableFKCheckInitVarFalse(string $fkChecksValue, string $setVariableParam): void
-    {
-        $oldDbi = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $GLOBALS['dbi'] = $dbi;
-
-        $_REQUEST['fk_checks'] = $fkChecksValue;
-
-        $dbi->expects($this->once())
-            ->method('getVariable')
-            ->will($this->returnValue('OFF'));
-
-        $dbi->expects($this->once())
-            ->method('setVariable')
-            ->with('FOREIGN_KEY_CHECKS', $setVariableParam)
-            ->will($this->returnValue(true));
-
-        $this->assertFalse(Util::handleDisableFKCheckInit());
-
-        $GLOBALS['dbi'] = $oldDbi;
-    }
-
-    /**
-     * @return array[]
-     */
-    public function providerFkCheckCleanup(): array
-    {
-        return [
-            [
-                true,
-                'ON',
-            ],
-            [
-                false,
-                'OFF',
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider providerFkCheckCleanup
-     */
-    public function testHandleDisableFKCheckCleanup(bool $fkChecksValue, string $setVariableParam): void
-    {
-        $oldDbi = $GLOBALS['dbi'];
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $GLOBALS['dbi'] = $dbi;
-
-        $dbi->expects($this->once())
-            ->method('setVariable')
-            ->with('FOREIGN_KEY_CHECKS', $setVariableParam)
-            ->will($this->returnValue(true));
-
-        Util::handleDisableFKCheckCleanup($fkChecksValue);
-
-        $GLOBALS['dbi'] = $oldDbi;
-    }
-
     public function testCurrentUserHasPrivilegeSkipGrantTables(): void
     {
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
@@ -2503,7 +2130,7 @@ class UtilTest extends AbstractTestCase
                 [
                     'SELECT `PRIVILEGE_TYPE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES`'
                 . " WHERE GRANTEE='''groot_%''@''%''' AND PRIVILEGE_TYPE='EVENT'"
-                . " AND 'my_data_base' LIKE `TABLE_SCHEMA` AND TABLE_NAME='my\_data\_table'",
+                . " AND 'my_data_base' LIKE `TABLE_SCHEMA` AND TABLE_NAME='my_data_table'",
                 ]
             )
             ->willReturnOnConsecutiveCalls(
@@ -2543,7 +2170,7 @@ class UtilTest extends AbstractTestCase
                 [
                     'SELECT `PRIVILEGE_TYPE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES`'
                 . " WHERE GRANTEE='''groot_%''@''%''' AND PRIVILEGE_TYPE='EVENT'"
-                . " AND 'my_data_base' LIKE `TABLE_SCHEMA` AND TABLE_NAME='my\_data\_table'",
+                . " AND 'my_data_base' LIKE `TABLE_SCHEMA` AND TABLE_NAME='my_data_table'",
                 ]
             )
             ->willReturnOnConsecutiveCalls(

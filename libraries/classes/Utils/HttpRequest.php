@@ -11,8 +11,11 @@ use function curl_init;
 use function curl_setopt;
 use function file_get_contents;
 use function function_exists;
+use function getenv;
 use function ini_get;
 use function intval;
+use function is_array;
+use function parse_url;
 use function preg_match;
 use function stream_context_create;
 use function strlen;
@@ -35,6 +38,7 @@ use const CURLOPT_SSL_VERIFYHOST;
 use const CURLOPT_SSL_VERIFYPEER;
 use const CURLOPT_TIMEOUT;
 use const CURLOPT_USERAGENT;
+use const PHP_SAPI;
 
 /**
  * Handles HTTP requests
@@ -57,6 +61,26 @@ class HttpRequest
         $this->proxyUrl = $cfg['ProxyUrl'];
         $this->proxyUser = $cfg['ProxyUser'];
         $this->proxyPass = $cfg['ProxyPass'];
+    }
+
+    public static function setProxySettingsFromEnv(): void
+    {
+        global $cfg;
+
+        $httpProxy = getenv('http_proxy');
+        $urlInfo = parse_url((string) $httpProxy);
+        if (PHP_SAPI !== 'cli' || ! is_array($urlInfo)) {
+            return;
+        }
+
+        $proxyUrl = ($urlInfo['host'] ?? '')
+            . (isset($urlInfo['port']) ? ':' . $urlInfo['port'] : '');
+        $proxyUser = $urlInfo['user'] ?? '';
+        $proxyPass = $urlInfo['pass'] ?? '';
+
+        $cfg['ProxyUrl'] = $proxyUrl;
+        $cfg['ProxyUser'] = $proxyUser;
+        $cfg['ProxyPass'] = $proxyPass;
     }
 
     /**
