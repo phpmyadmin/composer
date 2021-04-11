@@ -498,14 +498,14 @@ AJAX.registerOnload('table/change.js', function () {
         return isDate(dtValue.substring(0, dv), tmstmp) && isTime(dtValue.substring(dv + 1));
       }
     });
-    /*
-     * message extending script must be run
-     * after initiation of functions
-     */
-
-    extendingValidatorMessages();
   }
+  /*
+   * message extending script must be run
+   * after initiation of functions
+   */
 
+
+  extendingValidatorMessages();
   $.datepicker.initialized = false;
   $(document).on('click', 'span.open_gis_editor', function (event) {
     event.preventDefault();

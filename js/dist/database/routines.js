@@ -296,7 +296,7 @@ var DatabaseRoutines = {
                 var rowclass = '';
                 $(tableId + '.data').find('tr').has('td').each(function () {
                   rowclass = ct % 2 === 0 ? 'odd' : 'even';
-                  $(this).removeClass().addClass(rowclass);
+                  $(this).removeClass('odd even').addClass(rowclass);
                   ct++;
                 }); // If this is the first item being added, remove
                 // the "No items" message and show the list.
@@ -437,7 +437,7 @@ var DatabaseRoutines = {
               var rowclass = '';
               $table.find('tr').has('td').each(function () {
                 rowclass = ct % 2 === 1 ? 'odd' : 'even';
-                $(this).removeClass().addClass(rowclass);
+                $(this).removeClass('odd even').addClass(rowclass);
                 ct++;
               });
             });
@@ -513,7 +513,7 @@ var DatabaseRoutines = {
                 var rowclass = '';
                 $table.find('tr').has('td').each(function () {
                   rowclass = ct % 2 === 1 ? 'odd' : 'even';
-                  $(this).removeClass().addClass(rowclass);
+                  $(this).removeClass('odd even').addClass(rowclass);
                   ct++;
                 });
               });

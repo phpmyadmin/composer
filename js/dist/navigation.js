@@ -1274,31 +1274,56 @@ Navigation.ResizeHandler = function () {
 
 
     $('body').css('margin-bottom', $('#pma_console').height() + 'px');
-  }; // Hide the pma_navigation initially when loaded on mobile
+  };
+  /**
+   * Init handlers for the tree resizers
+   *
+   * @return {void}
+   */
 
 
-  if ($(window).width() < 768) {
-    this.setWidth(0);
-  } else {
-    this.setWidth(Functions.configGet('NavigationWidth', false));
-    $('#topmenu').menuResizer('resize');
-  } // Register the events for the resizer and the collapser
+  this.treeInit = function () {
+    var _this = this;
+
+    var isLoadedOnMobile = $(window).width() < 768; // Hide the pma_navigation initially when loaded on mobile
+
+    if (isLoadedOnMobile) {
+      this.setWidth(0);
+    } // Register the events for the resizer and the collapser
 
 
-  $(document).on('mousedown', '#pma_navigation_resizer', {
-    'resize_handler': this
-  }, this.mousedown);
-  $(document).on('click', '#pma_navigation_collapser', {
-    'resize_handler': this
-  }, this.collapse); // Add the correct arrow symbol to the collapser
+    $(document).on('mousedown', '#pma_navigation_resizer', {
+      'resize_handler': this
+    }, this.mousedown);
+    $(document).on('click', '#pma_navigation_collapser', {
+      'resize_handler': this
+    }, this.collapse); // Add the correct arrow symbol to the collapser
 
-  $('#pma_navigation_collapser').html(this.getSymbol($('#pma_navigation').width())); // Fix navigation tree height
+    $('#pma_navigation_collapser').html(this.getSymbol($('#pma_navigation').width())); // Fix navigation tree height
 
-  $(window).on('resize', this.treeResize); // need to call this now and then, browser might decide
-  // to show/hide horizontal scrollbars depending on page content width
+    $(window).on('resize', this.treeResize); // need to call this now and then, browser might decide
+    // to show/hide horizontal scrollbars depending on page content width
 
-  setInterval(this.treeResize, 2000);
-  this.treeResize();
+    setInterval(this.treeResize, 2000);
+    this.treeResize();
+
+    var callbackSuccessGetConfigValue = function callbackSuccessGetConfigValue(data) {
+      _this.setWidth(data);
+
+      $('#topmenu').menuResizer('resize');
+    }; // Skip mobile
+
+
+    if (isLoadedOnMobile === false) {
+      // Make an init using the default found value
+      var initialResizeValue = $('#pma_navigation').data('config-navigation-width');
+      callbackSuccessGetConfigValue(initialResizeValue);
+    }
+
+    Functions.configGet('NavigationWidth', false, callbackSuccessGetConfigValue);
+  };
+
+  this.treeInit();
 };
 /**
  * @var {object} FastFilter Handles the functionality that allows filtering
@@ -1574,7 +1599,7 @@ Navigation.FastFilter.Filter.prototype.request = function () {
   }
 
   self.xhr = $.ajax({
-    url: 'index.php?route=/navigation&ajax_request=1',
+    url: 'index.php?route=/navigation&ajax_request=1&server=' + CommonParams.get('server'),
     type: 'post',
     dataType: 'json',
     data: params,
