@@ -365,7 +365,7 @@ AJAX.registerOnload('sql.js', function () {
     textArea.style.background = 'transparent';
     textArea.value = '';
     $('#server-breadcrumb a').each(function () {
-      textArea.value += $(this).text().split(':')[1].trim() + '/';
+      textArea.value += $(this).data('raw-text') + '/';
     });
     textArea.value += '\t\t' + window.location.href;
     textArea.value += '\n';
