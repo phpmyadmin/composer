@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2021-04-13 17:52+0200\n"
-"PO-Revision-Date: 2021-01-22 01:10+0000\n"
-"Last-Translator: William Desportes <williamdes@wdes.fr>\n"
+"POT-Creation-Date: 2021-04-14 19:40-0300\n"
+"PO-Revision-Date: 2021-04-14 22:38+0000\n"
+"Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/ia/>\n"
 "Language: ia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -938,10 +938,9 @@ msgid "query_cache_size is set to 0 or query_cache_type is set to 'OFF'"
 msgstr ""
 
 #: libraries/advisory_rules_mysql_before80003.php:23
-#, fuzzy, no-php-format
-#| msgid "Query cache efficiency"
+#, no-php-format
 msgid "Query cache efficiency (%)"
-msgstr "Efficientia del cache de query"
+msgstr "Efficientia del cache de query (%)"
 
 #: libraries/advisory_rules_mysql_before80003.php:27
 msgid "Query cache not running efficiently, it has a low hit rate."
@@ -1123,7 +1122,7 @@ msgstr "Cerca:"
 
 #: libraries/classes/BrowseForeigners.php:204
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:325
-#: libraries/classes/Controllers/Server/PrivilegesController.php:332
+#: libraries/classes/Controllers/Server/PrivilegesController.php:339
 #: libraries/classes/Database/Triggers.php:486
 #: libraries/classes/InsertEdit.php:1154 libraries/classes/InsertEdit.php:1189
 #: libraries/classes/Normalization.php:267
@@ -1548,48 +1547,39 @@ msgid "Enable bzip2 compression for import operations."
 msgstr "Il habilita le compression bzip2 per operationes de importation."
 
 #: libraries/classes/Config/Descriptions.php:89
-#, fuzzy
-#| msgid "Enter your siteverify URL for your reCaptcha service."
 msgid "Enter the URL for your reCAPTCHA v2 compatible API."
-msgstr "Inserta tu verifica de sito pro tu servicio de reCaptcha."
+msgstr "Inserta le URL per tu API de reCAPTCHA v2 comptibile."
 
 #: libraries/classes/Config/Descriptions.php:90
-#, fuzzy
-#| msgid "Enter your siteverify URL for your reCaptcha service."
 msgid ""
 "Enter the Content-Security-Policy snippet for your reCAPTCHA v2 compatible "
 "API."
-msgstr "Inserta tu verifica de sito pro tu servicio de reCaptcha."
+msgstr ""
+"Inserta le fragmento de Politica-de-Securitte-de-Conteto per tu API de "
+"reCaptcha v2 compatibile."
 
 #: libraries/classes/Config/Descriptions.php:91
-#, fuzzy
-#| msgid "Enter your siteverify URL for your reCaptcha service."
 msgid "Enter the request parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Inserta tu verifica de sito pro tu servicio de reCaptcha."
+msgstr ""
+"Inserta le parametro de requesta usate per tu API de reCaptcha v2 "
+"compatibile."
 
 #: libraries/classes/Config/Descriptions.php:92
-#, fuzzy
-#| msgid "Enter your siteverify URL for your reCaptcha service."
 msgid "Enter the response parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Inserta tu verifica de sito pro tu servicio de reCaptcha."
+msgstr ""
+"Inserta tu parametro de responsa uste per tu API de reCaptcha v2 compatibile."
 
 #: libraries/classes/Config/Descriptions.php:93
-#, fuzzy
-#| msgid "Enter your public key for your domain reCaptcha service."
 msgid "Enter your public key for the reCAPTCHA service on your domain."
-msgstr "Inserta tu clave public pro le dominio servicio de reCaptcha."
+msgstr "Inserta tu clave public pro le servicio de reCaptcha sur tu dominio."
 
 #: libraries/classes/Config/Descriptions.php:94
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter your private key for your domain reCAPTCHA service."
-msgstr "Inserta tu clave private pro tu servicio de dominio reCaptcha."
+msgstr "Inserta tu clave private pro tu servicio de dominio reCAPTCHA."
 
 #: libraries/classes/Config/Descriptions.php:95
-#, fuzzy
-#| msgid "Enter your siteverify URL for your reCaptcha service."
 msgid "Enter your siteverify URL for your reCAPTCHA service."
-msgstr "Inserta tu verifica de sito pro tu servicio de reCaptcha."
+msgstr "Inserta tu verifica de sito pro tu servicio de reCAPTCHA."
 
 #: libraries/classes/Config/Descriptions.php:97
 msgid ""
@@ -2566,19 +2556,13 @@ msgstr ""
 "basso, sin reguardo del quadrato de selection a dextera."
 
 #: libraries/classes/Config/Descriptions.php:549
-#, fuzzy
-#| msgid ""
-#| "The url of the proxy to be used when retrieving the information about the "
-#| "latest version of phpMyAdmin or when submitting error reports. You need "
-#| "this if the server where phpMyAdmin is installed does not have direct "
-#| "access to the internet. The format is: \"hostname:portnumber\"."
 msgid ""
 "The URL of the proxy to be used when retrieving the information about the "
 "latest version of phpMyAdmin, or when submitting error reports. You need "
 "this if the server where phpMyAdmin is installed does not have direct access "
 "to the Internet. The format is: \"hostname:portnumber\"."
 msgstr ""
-"Le url del proxy debe esser usate quando on recupera le information sur le "
+"Le URLdel proxy debe esser usate quando on recupera le information sur le "
 "ultime version de phpMyAdmin o quando on submitte reportos de errores. Tu "
 "necessita illos si le servitor ubi phpMyAdmin es installate non ha accesso "
 "directe a internet. Le formato es: \"nomine_de_hospite:numero_de_porto\"."
@@ -2603,16 +2587,13 @@ msgstr ""
 "essera insertate con Shift+Enter."
 
 #: libraries/classes/Config/Descriptions.php:565
-#, fuzzy
-#| msgid ""
-#| "Enable Zero Configuration mode which lets you setup phpMyAdmin "
-#| "configuration storage tables automatically."
 msgid ""
 "Enable Zero Configuration mode which lets you set up phpMyAdmin "
 "configuration storage tables automatically."
 msgstr ""
-"Habilita modo de Configuration Zero que te permitte configurar le "
-"configuration de tabellas de immagazinage de phpMyAdmin automaticamente."
+"Habilita modo de Configuration Zero que te permitte configurar le set-up i."
+"e. le configuration de tabellas de immagazinage de phpMyAdmin "
+"automaticamente."
 
 #: libraries/classes/Config/Descriptions.php:568
 msgid "Highlight selected rows."
@@ -3181,8 +3162,6 @@ msgid "Export as separate files"
 msgstr "Exporta como files separate"
 
 #: libraries/classes/Config/Descriptions.php:715
-#, fuzzy
-#| msgid "Remember file name template"
 msgid "Remember filename template"
 msgstr "Memora patrono de nomine de file"
 
@@ -4133,8 +4112,8 @@ msgstr "Rangos de area de texto"
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:150
 #: libraries/classes/Plugins/Export/ExportOdt.php:197
 #: libraries/classes/Plugins/Export/ExportTexytext.php:134
-#: libraries/classes/Server/Privileges.php:1988
-#: libraries/classes/Server/Privileges.php:1990
+#: libraries/classes/Server/Privileges.php:1965
+#: libraries/classes/Server/Privileges.php:1967
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:40
 #: templates/console/display.twig:184 templates/server/databases/index.twig:106
 #: templates/server/privileges/edit_routine_privileges.twig:17
@@ -4163,8 +4142,8 @@ msgstr "Servitor"
 #: libraries/classes/Config/Descriptions.php:967
 #: libraries/classes/Database/Triggers.php:413
 #: libraries/classes/Plugins/Export/ExportXml.php:535
-#: libraries/classes/Server/Privileges.php:1994
-#: libraries/classes/Server/Privileges.php:1996
+#: libraries/classes/Server/Privileges.php:1971
+#: libraries/classes/Server/Privileges.php:1973
 #: templates/database/structure/show_create.twig:10
 #: templates/database/structure/table_header.twig:8
 #: templates/database/tracking/tables.twig:13
@@ -4207,10 +4186,8 @@ msgid "Version check"
 msgstr "Verifica de version"
 
 #: libraries/classes/Config/Descriptions.php:973
-#, fuzzy
-#| msgid "Proxy url"
 msgid "Proxy URL"
-msgstr "Url de proxy"
+msgstr "URL de proxy"
 
 #: libraries/classes/Config/Descriptions.php:974
 msgid "Proxy username"
@@ -4241,16 +4218,12 @@ msgid "Response parameter for reCAPTCHA v2 API"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:981
-#, fuzzy
-#| msgid "Public key for reCaptcha"
 msgid "Public key for reCAPTCHA"
-msgstr "Clave public pro reCaptcha"
+msgstr "Clave public pro reCAPTCHA"
 
 #: libraries/classes/Config/Descriptions.php:982
-#, fuzzy
-#| msgid "Public key for reCaptcha"
 msgid "Private key for reCAPTCHA"
-msgstr "Clave public pro reCaptcha"
+msgstr "Clave private pro reCAPTCHA"
 
 #: libraries/classes/Config/Descriptions.php:983
 msgid "URL for reCAPTCHA siteverify"
@@ -4284,8 +4257,6 @@ msgid "Show current browsing query"
 msgstr "Monstra query currente de cerca"
 
 #: libraries/classes/Config/Descriptions.php:990
-#, fuzzy
-#| msgid "Execute queries on Enter and insert new line with Shift + Enter"
 msgid "Execute queries on Enter and insert new line with Shift+Enter"
 msgstr ""
 "Executa queries si on pressa Enter e on inserta nove rango con Shift+Enter"
@@ -4434,7 +4405,7 @@ msgstr "Texto OpenDocument"
 #: libraries/classes/Config/Forms/User/ExportForm.php:151
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:373
 #: libraries/classes/Menu.php:302 libraries/classes/Menu.php:422
-#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1659
+#: libraries/classes/Menu.php:560 libraries/classes/Server/Privileges.php:1636
 #: libraries/classes/Util.php:2116 libraries/classes/Util.php:2131
 #: libraries/classes/Util.php:2148 templates/database/events/index.twig:16
 #: templates/database/events/index.twig:17
@@ -4566,12 +4537,7 @@ msgstr ""
 "Tu deberea usar connexiones SSL si tu servitor de base de datos supporta los."
 
 #: libraries/classes/Config/ServerConfigChecks.php:177
-#, fuzzy, php-format
-#| msgid ""
-#| "If you feel this is necessary, use additional protection settings - "
-#| "%1$shost authentication%2$s settings and %3$strusted proxies list%4$s. "
-#| "However, IP-based protection may not be reliable if your IP belongs to an "
-#| "ISP where thousands of users, including you, are connected to."
+#, php-format
 msgid ""
 "If you feel this is necessary, use additional protection settings - %1$shost "
 "authentication%2$s settings and %3$strusted proxies list%4$s. However, IP-"
@@ -4579,7 +4545,7 @@ msgid ""
 "thousands of users, including you, are connected to."
 msgstr ""
 "Si tu crede que isto es necessari, usa preferentias additional de protection "
-"- preferentias de %1$sauthentication de ospite%2$s e %%3$slista de proxy "
+"- preferentias de %1$sauthentication de ospite%2$s e %3$slista de proxy "
 "digne de fide%4$s. Totevia, le protection basate sur IP poterea non esser "
 "digne de fide, si tu IP pertine a un ISP ubi milles de usatores, includente "
 "te, es connectite."
@@ -5142,8 +5108,8 @@ msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
 "issues."
 msgstr ""
-"Sur le servitor es executante Suhosin. Controla le documentation: "
-"%sdocumentation%s pro possibile problemas."
+"Servitor executante con Suhosin. Tu refere al %sdocumentation%s pro "
+"possibile problemas."
 
 #: libraries/classes/Controllers/HomeController.php:460
 #, php-format
@@ -5444,10 +5410,8 @@ msgstr "Modifica indice"
 
 #. l10n: Rename a table Index
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:108
-#, fuzzy
-#| msgid "Rename to"
 msgid "Rename index"
-msgstr "Renomina in"
+msgstr "Renomina indice"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:109
 #: templates/table/index_form.twig:227
@@ -5511,13 +5475,13 @@ msgid "The user name is empty!"
 msgstr "Le nomine de usator es vacue!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:133
-#: libraries/classes/Server/Privileges.php:1042
+#: libraries/classes/Server/Privileges.php:1019
 #: libraries/classes/UserPassword.php:40
 msgid "The password is empty!"
 msgstr "Le contrassigno es vacue!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:134
-#: libraries/classes/Server/Privileges.php:1040
+#: libraries/classes/Server/Privileges.php:1017
 #: libraries/classes/UserPassword.php:44
 msgid "The passwords aren't the same!"
 msgstr "Le contrasignos non es le mesme!"
@@ -6848,10 +6812,10 @@ msgid "Submit"
 msgstr "Invia"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:552
-#, fuzzy
-#| msgid "Press escape to cancel editing."
 msgid "Press escape to cancel editing.<br>- Shift+Enter for a newline."
-msgstr "Pressa le clave de escape pro cancellar le modification."
+msgstr ""
+"Pressa le clave de escape pro cancellar le modification.<br>- Shift+Enter "
+"per un nove rango."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:556
 msgid ""
@@ -7311,22 +7275,22 @@ msgstr "Total"
 msgid "Overhead"
 msgstr "Overhead"
 
-#: libraries/classes/Controllers/Server/PrivilegesController.php:143
+#: libraries/classes/Controllers/Server/PrivilegesController.php:150
 #: libraries/classes/Controllers/Server/UserGroupsController.php:51
 msgid "No Privileges"
 msgstr "Necun privilegios"
 
-#: libraries/classes/Controllers/Server/PrivilegesController.php:152
+#: libraries/classes/Controllers/Server/PrivilegesController.php:159
 msgid "You do not have the privileges to administrate the users!"
 msgstr ""
 
-#: libraries/classes/Controllers/Server/PrivilegesController.php:167
+#: libraries/classes/Controllers/Server/PrivilegesController.php:174
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
 msgstr ""
 
-#: libraries/classes/Controllers/Server/PrivilegesController.php:425
+#: libraries/classes/Controllers/Server/PrivilegesController.php:432
 msgid "User has been added."
 msgstr ""
 
@@ -7348,7 +7312,7 @@ msgid "ID"
 msgstr "ID"
 
 #: libraries/classes/Controllers/Server/Status/ProcessesController.php:153
-#: libraries/classes/Server/Privileges.php:3080
+#: libraries/classes/Server/Privileges.php:3057
 #: templates/server/user_groups/user_listings.twig:9
 msgid "User"
 msgstr "Usator"
@@ -9354,10 +9318,8 @@ msgstr ""
 "esser actuate o esser dishabilitate in tu configuration."
 
 #: libraries/classes/FlashMessages.php:22
-#, fuzzy
-#| msgid "SOAP extension not found"
 msgid "Session not found."
-msgstr "Il no ha trovate le extension SOAP"
+msgstr "Session non trovate."
 
 #: libraries/classes/Footer.php:218 libraries/classes/Footer.php:222
 #: libraries/classes/Footer.php:225
@@ -9782,7 +9744,7 @@ msgid "Insert"
 msgstr "Inserta"
 
 #: libraries/classes/Menu.php:324 libraries/classes/Menu.php:446
-#: libraries/classes/Server/Privileges.php:3054 libraries/classes/Util.php:2134
+#: libraries/classes/Server/Privileges.php:3031 libraries/classes/Util.php:2134
 #: libraries/classes/Util.php:2150 libraries/config.values.php:161
 #: templates/database/privileges/index.twig:20
 #: templates/server/privileges/privileges_summary.twig:15
@@ -10182,7 +10144,7 @@ msgid ""
 msgstr ""
 "Tu ha un gruppo de duo o plus columnas que es connectite strictemente e que "
 "omnes es repetente le mesme attributo? Per exemplo un tabella que mantene "
-"datos super libros poterea haber columnas tal como libro_id,autor2,autor2, "
+"datos super libros poterea haber columnas tal como libro_id, autor1, autor2, "
 "autor3 et cetera que forma un gruppo de repetition. In iste caso un nove "
 "tabella (libro_id,autor) deberea esser create."
 
@@ -11559,12 +11521,11 @@ msgid "Converts an Internet network address in (IPv4/IPv6) format to binary"
 msgstr "Converte un adresse de rete Internet ab formato (IPv4/IPv6) a binari"
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_Iptolong.php:30
-#, fuzzy
-#| msgid "Converts an Internet network address in (IPv4/IPv6) format to long."
 msgid ""
 "Converts an Internet network address in (IPv4/IPv6) format into a long "
 "integer."
-msgstr "Converte un adresse de rete Internet ab formato (IPv4/IPv6) a longe."
+msgstr ""
+"Converte un adresse de rete Internet in formato (IPv4/IPv6) a long integer."
 
 #: libraries/classes/Plugins/Transformations/Input/Text_Plain_JsonEditor.php:26
 msgid "Syntax highlighted CodeMirror editor for JSON."
@@ -11928,16 +11889,44 @@ msgstr "Information mancante pro cargar le cerca."
 msgid "Error while loading the search."
 msgstr "Error quando on cargava le cerca."
 
-#: libraries/classes/Server/Privileges.php:251
+#: libraries/classes/Server/Plugins.php:68
+#: libraries/classes/Server/Privileges.php:862
+#: libraries/classes/Server/Privileges.php:4053
+msgid "Native MySQL authentication"
+msgstr "Authentication de MySQL native"
+
+#: libraries/classes/Server/Plugins.php:73
+msgid "SHA256 password authentication"
+msgstr "Authentication de contrasigno SHA256"
+
+#: libraries/classes/Server/Plugins.php:78
+#, fuzzy
+#| msgid "Config authentication"
+msgid "Caching sha2 authentication"
+msgstr "Authentication via Config"
+
+#: libraries/classes/Server/Plugins.php:83
+#, fuzzy
+#| msgid "Cookie authentication"
+msgid "Unix Socket based authentication"
+msgstr "Authentication via Cookie"
+
+#: libraries/classes/Server/Plugins.php:88
+#, fuzzy
+#| msgid "Native MySQL authentication"
+msgid "Old MySQL-4.0 authentication"
+msgstr "Authentication de MySQL native"
+
+#: libraries/classes/Server/Privileges.php:256
 msgid "No privileges."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:262
+#: libraries/classes/Server/Privileges.php:267
 msgid "Includes all privileges except GRANT."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:284
-#: libraries/classes/Server/Privileges.php:351
+#: libraries/classes/Server/Privileges.php:289
+#: libraries/classes/Server/Privileges.php:356
 #: templates/server/privileges/privileges_table.twig:100
 #: templates/server/privileges/privileges_table.twig:103
 #: templates/server/privileges/privileges_table.twig:299
@@ -11945,7 +11934,7 @@ msgstr ""
 msgid "Allows deleting data."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:289
+#: libraries/classes/Server/Privileges.php:294
 #: templates/server/privileges/privileges_table.twig:112
 #: templates/server/privileges/privileges_table.twig:115
 #: templates/server/privileges/privileges_table.twig:337
@@ -11953,7 +11942,7 @@ msgstr ""
 msgid "Allows creating new tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:294
+#: libraries/classes/Server/Privileges.php:299
 #: templates/server/privileges/privileges_table.twig:124
 #: templates/server/privileges/privileges_table.twig:127
 #: templates/server/privileges/privileges_table.twig:385
@@ -11961,8 +11950,8 @@ msgstr ""
 msgid "Allows dropping tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:299
-#: libraries/classes/Server/Privileges.php:391
+#: libraries/classes/Server/Privileges.php:304
+#: libraries/classes/Server/Privileges.php:396
 #: templates/server/privileges/privileges_table.twig:149
 #: templates/server/privileges/privileges_table.twig:152
 #: templates/server/privileges/privileges_table.twig:369
@@ -11970,8 +11959,8 @@ msgstr ""
 msgid "Allows creating and dropping indexes."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:304
-#: libraries/classes/Server/Privileges.php:396
+#: libraries/classes/Server/Privileges.php:309
+#: libraries/classes/Server/Privileges.php:401
 #: templates/server/privileges/privileges_table.twig:161
 #: templates/server/privileges/privileges_table.twig:164
 #: templates/server/privileges/privileges_table.twig:356
@@ -11979,9 +11968,9 @@ msgstr ""
 msgid "Allows altering the structure of existing tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:309
-#: libraries/classes/Server/Privileges.php:435
-#: libraries/classes/Server/Privileges.php:451
+#: libraries/classes/Server/Privileges.php:314
+#: libraries/classes/Server/Privileges.php:440
+#: libraries/classes/Server/Privileges.php:456
 #: templates/server/privileges/privileges_table.twig:173
 #: templates/server/privileges/privileges_table.twig:176
 #: templates/server/privileges/privileges_table.twig:470
@@ -11991,9 +11980,9 @@ msgstr ""
 msgid "Allows creating new views."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:314
-#: libraries/classes/Server/Privileges.php:456
-#: libraries/classes/Server/Privileges.php:462
+#: libraries/classes/Server/Privileges.php:319
+#: libraries/classes/Server/Privileges.php:461
+#: libraries/classes/Server/Privileges.php:467
 #: templates/server/privileges/privileges_table.twig:185
 #: templates/server/privileges/privileges_table.twig:188
 #: templates/server/privileges/privileges_table.twig:417
@@ -12001,8 +11990,8 @@ msgstr ""
 msgid "Allows performing SHOW CREATE VIEW queries."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:319
-#: libraries/classes/Server/Privileges.php:445
+#: libraries/classes/Server/Privileges.php:324
+#: libraries/classes/Server/Privileges.php:450
 #: templates/server/privileges/privileges_table.twig:197
 #: templates/server/privileges/privileges_table.twig:200
 #: templates/server/privileges/privileges_table.twig:513
@@ -12010,76 +11999,76 @@ msgstr ""
 msgid "Allows creating and dropping triggers."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:336
+#: libraries/classes/Server/Privileges.php:341
 #: templates/server/privileges/privileges_table.twig:15
 #: templates/server/privileges/privileges_table.twig:260
 #: templates/server/privileges/privileges_table.twig:263
 msgid "Allows reading data."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:341
+#: libraries/classes/Server/Privileges.php:346
 #: templates/server/privileges/privileges_table.twig:36
 #: templates/server/privileges/privileges_table.twig:273
 #: templates/server/privileges/privileges_table.twig:276
 msgid "Allows inserting and replacing data."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:346
+#: libraries/classes/Server/Privileges.php:351
 #: templates/server/privileges/privileges_table.twig:57
 #: templates/server/privileges/privileges_table.twig:286
 #: templates/server/privileges/privileges_table.twig:289
 msgid "Allows changing data."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:356
+#: libraries/classes/Server/Privileges.php:361
 #: templates/server/privileges/privileges_table.twig:335
 #: templates/server/privileges/privileges_table.twig:343
 msgid "Allows creating new databases and tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:361
+#: libraries/classes/Server/Privileges.php:366
 #: templates/server/privileges/privileges_table.twig:383
 #: templates/server/privileges/privileges_table.twig:391
 msgid "Allows dropping databases and tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:366
+#: libraries/classes/Server/Privileges.php:371
 #: templates/server/privileges/privileges_table.twig:575
 #: templates/server/privileges/privileges_table.twig:578
 msgid "Allows reloading server settings and flushing the server's caches."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:371
+#: libraries/classes/Server/Privileges.php:376
 #: templates/server/privileges/privileges_table.twig:588
 #: templates/server/privileges/privileges_table.twig:591
 msgid "Allows shutting down the server."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:376
+#: libraries/classes/Server/Privileges.php:381
 #: templates/server/privileges/privileges_table.twig:562
 #: templates/server/privileges/privileges_table.twig:565
 msgid "Allows viewing processes of all users."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:381
+#: libraries/classes/Server/Privileges.php:386
 #: templates/server/privileges/privileges_table.twig:313
 #: templates/server/privileges/privileges_table.twig:316
 msgid "Allows importing data from and exporting data into files."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:386
+#: libraries/classes/Server/Privileges.php:391
 #: templates/server/privileges/privileges_table.twig:78
 #: templates/server/privileges/privileges_table.twig:642
 msgid "Has no effect in this MySQL version."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:401
+#: libraries/classes/Server/Privileges.php:406
 #: templates/server/privileges/privileges_table.twig:601
 #: templates/server/privileges/privileges_table.twig:604
 msgid "Gives access to the complete list of databases."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:407
+#: libraries/classes/Server/Privileges.php:412
 #: templates/server/privileges/privileges_table.twig:548
 #: templates/server/privileges/privileges_table.twig:552
 msgid ""
@@ -12088,95 +12077,85 @@ msgid ""
 "killing threads of other users."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:415
+#: libraries/classes/Server/Privileges.php:420
 #: templates/server/privileges/privileges_table.twig:404
 #: templates/server/privileges/privileges_table.twig:407
 msgid "Allows creating temporary tables."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:420
+#: libraries/classes/Server/Privileges.php:425
 #: templates/server/privileges/privileges_table.twig:629
 #: templates/server/privileges/privileges_table.twig:632
 msgid "Allows locking tables for the current thread."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:425
+#: libraries/classes/Server/Privileges.php:430
 #: templates/server/privileges/privileges_table.twig:670
 #: templates/server/privileges/privileges_table.twig:673
 msgid "Needed for the replication slaves."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:430
+#: libraries/classes/Server/Privileges.php:435
 #: templates/server/privileges/privileges_table.twig:657
 #: templates/server/privileges/privileges_table.twig:660
 msgid "Allows the user to ask where the slaves / masters are."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:440
+#: libraries/classes/Server/Privileges.php:445
 #: templates/server/privileges/privileges_table.twig:500
 #: templates/server/privileges/privileges_table.twig:503
 msgid "Allows to set up events for the event scheduler."
 msgstr ""
 
 #. l10n: https://mariadb.com/kb/en/library/grant/#table-privileges "Remove historical rows from a table using the DELETE HISTORY statement"
-#: libraries/classes/Server/Privileges.php:469
-#: libraries/classes/Server/Privileges.php:476
+#: libraries/classes/Server/Privileges.php:474
+#: libraries/classes/Server/Privileges.php:481
 #: templates/server/privileges/privileges_table.twig:210
 #: templates/server/privileges/privileges_table.twig:214
 msgid "Allows deleting historical rows."
 msgstr "Permitte deler rangos historic."
 
-#: libraries/classes/Server/Privileges.php:481
+#: libraries/classes/Server/Privileges.php:486
 #: templates/server/privileges/privileges_table.twig:430
 #: templates/server/privileges/privileges_table.twig:433
 msgid "Allows creating stored routines."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:486
+#: libraries/classes/Server/Privileges.php:491
 #: templates/server/privileges/privileges_table.twig:443
 #: templates/server/privileges/privileges_table.twig:446
 msgid "Allows altering and dropping stored routines."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:491
+#: libraries/classes/Server/Privileges.php:496
 #: templates/server/privileges/privileges_table.twig:683
 #: templates/server/privileges/privileges_table.twig:686
 msgid "Allows creating, dropping and renaming user accounts."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:496
+#: libraries/classes/Server/Privileges.php:501
 #: templates/server/privileges/privileges_table.twig:456
 #: templates/server/privileges/privileges_table.twig:459
 msgid "Allows executing stored routines."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:811
-#: libraries/classes/Server/Privileges.php:885
-#: libraries/classes/Server/Privileges.php:4076
-msgid "Native MySQL authentication"
-msgstr "Authentication de MySQL native"
-
-#: libraries/classes/Server/Privileges.php:813
-msgid "SHA256 password authentication"
-msgstr "Authentication de contrasigno SHA256"
-
-#: libraries/classes/Server/Privileges.php:1186
+#: libraries/classes/Server/Privileges.php:1163
 #, php-format
 msgid "The password for %s was changed successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1236
+#: libraries/classes/Server/Privileges.php:1213
 #, php-format
 msgid "You have revoked the privileges for %s."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1584
+#: libraries/classes/Server/Privileges.php:1561
 #: templates/database/privileges/index.twig:124
 #: templates/table/privileges/index.twig:127
 msgid "Not enough privilege to view users."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1653
+#: libraries/classes/Server/Privileges.php:1630
 #: templates/database/privileges/index.twig:80
 #: templates/server/privileges/new_user_ajax.twig:45
 #: templates/server/privileges/users_overview.twig:72
@@ -12184,85 +12163,85 @@ msgstr ""
 msgid "Edit privileges"
 msgstr "Modifica privilegios"
 
-#: libraries/classes/Server/Privileges.php:1656
+#: libraries/classes/Server/Privileges.php:1633
 msgid "Revoke"
 msgstr "Revoca"
 
-#: libraries/classes/Server/Privileges.php:1989
+#: libraries/classes/Server/Privileges.php:1966
 #: templates/server/privileges/privileges_table.twig:240
 msgid "Database-specific privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:1995
+#: libraries/classes/Server/Privileges.php:1972
 #: templates/server/privileges/privileges_summary.twig:18
 #: templates/server/privileges/privileges_table.twig:7
 #: templates/server/privileges/privileges_table.twig:242
 msgid "Table-specific privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2000
-#: libraries/classes/Server/Privileges.php:2002
+#: libraries/classes/Server/Privileges.php:1977
+#: libraries/classes/Server/Privileges.php:1979
 #: templates/server/privileges/edit_routine_privileges.twig:29
 #: templates/server/privileges/edit_routine_privileges.twig:46
 #: templates/server/privileges/edit_routine_privileges.twig:58
 msgid "Routine"
 msgstr "Routine"
 
-#: libraries/classes/Server/Privileges.php:2001
+#: libraries/classes/Server/Privileges.php:1978
 #: templates/server/privileges/edit_routine_privileges.twig:47
 msgid "Routine-specific privileges"
 msgstr "Privilegios specific pro le routine"
 
-#: libraries/classes/Server/Privileges.php:2359
+#: libraries/classes/Server/Privileges.php:2336
 msgid "No users selected for deleting!"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2362
+#: libraries/classes/Server/Privileges.php:2339
 msgid "Reloading the privileges"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2387
+#: libraries/classes/Server/Privileges.php:2364
 msgid "The selected users have been deleted successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2467
+#: libraries/classes/Server/Privileges.php:2444
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2556
+#: libraries/classes/Server/Privileges.php:2533
 #: templates/database/privileges/index.twig:102
 #: templates/table/privileges/index.twig:106
 msgid "No user found."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2643
+#: libraries/classes/Server/Privileges.php:2620
 #, php-format
 msgid "Deleting %s"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2674
+#: libraries/classes/Server/Privileges.php:2651
 msgid "The privileges were reloaded successfully."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:2779
+#: libraries/classes/Server/Privileges.php:2756
 #, php-format
 msgid "The user %s already exists!"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3071
+#: libraries/classes/Server/Privileges.php:3048
 #, php-format
 msgid "Privileges for %s"
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3215
+#: libraries/classes/Server/Privileges.php:3192
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
 "allows a connection from any (%) host."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3259
+#: libraries/classes/Server/Privileges.php:3236
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -12271,7 +12250,7 @@ msgid ""
 "%sreload the privileges%s before you continue."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3275
+#: libraries/classes/Server/Privileges.php:3252
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -12280,7 +12259,7 @@ msgid ""
 "privilege."
 msgstr ""
 
-#: libraries/classes/Server/Privileges.php:3623
+#: libraries/classes/Server/Privileges.php:3600
 msgid "You have added a new user."
 msgstr ""
 
@@ -13750,10 +13729,6 @@ msgid "Set default"
 msgstr "Fixa le valores predefinite"
 
 #: templates/console/display.twig:162
-#, fuzzy
-#| msgid ""
-#| "Execute queries on Enter and insert new line with Shift + Enter. To make "
-#| "this permanent, view settings."
 msgid ""
 "Execute queries on Enter and insert new line with Shift+Enter. To make this "
 "permanent, view settings."
@@ -13784,8 +13759,6 @@ msgid "Create version"
 msgstr ""
 
 #: templates/database/central_columns/edit.twig:13
-#, fuzzy
-#| msgid "A_I"
 msgctxt "Auto Increment"
 msgid "A_I"
 msgstr "A_I"
@@ -14164,10 +14137,8 @@ msgid "Check all"
 msgstr "Marca omnes"
 
 #: templates/database/events/index.twig:27
-#, fuzzy
-#| msgid "Create single-column index"
 msgid "Create new event"
-msgstr "Crea indice de columna singule"
+msgstr "Crea nove evento"
 
 #: templates/database/events/index.twig:36
 msgid "There are no events to display."
@@ -14546,10 +14517,6 @@ msgid "Is deterministic"
 msgstr ""
 
 #: templates/database/routines/editor_form.twig:130
-#, fuzzy
-#| msgid ""
-#| "You don't have sufficient privileges to perform this operation; Please "
-#| "refer to the documentation for more details."
 msgid ""
 "You do not have sufficient privileges to perform this operation; Please "
 "refer to the documentation for more details."
@@ -14571,10 +14538,8 @@ msgid "Routine parameters"
 msgstr ""
 
 #: templates/database/routines/index.twig:33
-#, fuzzy
-#| msgid "Create single-column index"
 msgid "Create new routine"
-msgstr "Crea indice de columna singule"
+msgstr "Crea nove routine"
 
 #: templates/database/routines/index.twig:42
 msgid "There are no routines to display."
@@ -14884,10 +14849,8 @@ msgid "Track table"
 msgstr "Tracia tabula"
 
 #: templates/database/triggers/list.twig:27
-#, fuzzy
-#| msgid "Create single-column index"
 msgid "Create new trigger"
-msgstr "Crea indice de columna singule"
+msgstr "Crea nove trigger"
 
 #: templates/database/triggers/list.twig:36
 msgid "There are no triggers to display."
@@ -15419,20 +15382,17 @@ msgid "License"
 msgstr "Licentia"
 
 #: templates/home/index.twig:247
-#, fuzzy
-#| msgid "phpMyAdmin homepage"
 msgid "phpMyAdmin Themes"
-msgstr "Pagina domo o principal de phpMyAdmin"
+msgstr "Themas de phpMyAdmin"
 
 #: templates/home/index.twig:258
 msgid "Get more themes!"
 msgstr "Obtene altere themas!"
 
 #: templates/home/themes.twig:7
-#, fuzzy, php-format
-#| msgid "Schema of the %s database"
+#, php-format
 msgid "Screenshot of the %s theme."
-msgstr "Schema de le base de datos %s"
+msgstr "Captura del schermo del thema %s."
 
 #. l10n: Choose the theme button in the themes list modal
 #: templates/home/themes.twig:12
@@ -15563,10 +15523,8 @@ msgstr "Altere optiones:"
 
 #: templates/indexes.twig:38
 #: templates/table/structure/display_structure.twig:444
-#, fuzzy
-#| msgid "Rename to"
 msgid "Rename"
-msgstr "Renomina in"
+msgstr "Renomina"
 
 #: templates/indexes.twig:44
 #: templates/table/structure/display_structure.twig:450
@@ -16155,10 +16113,8 @@ msgid "Character sets and collations"
 msgstr "Insimules de character e collationes"
 
 #: templates/server/collations/index.twig:32
-#, fuzzy
-#| msgid "Default"
 msgid "(default)"
-msgstr "Predefinite"
+msgstr "(predefinite)"
 
 #: templates/server/databases/index.twig:3
 msgid "Databases statistics"
@@ -16373,10 +16329,8 @@ msgid "Allows executing this routine."
 msgstr ""
 
 #: templates/server/privileges/initials_row.twig:1
-#, fuzzy
-#| msgid "Database for user account"
 msgid "Pagination of user accounts"
-msgstr "Base de datos pro conto de usator"
+msgstr "Pagination de contos de usator"
 
 #: templates/server/privileges/login_information_fields.twig:2
 #: templates/server/privileges/user_properties.twig:106
@@ -16546,20 +16500,16 @@ msgid ""
 msgstr ""
 
 #: templates/server/privileges/privileges_table.twig:646
-#, fuzzy
-#| msgid "Display foreign key relationships"
 msgid "Allows creating foreign key relations."
-msgstr "Monstra relationes de clave externe"
+msgstr "Monstra relationes de clave externe."
 
 #: templates/server/privileges/privileges_table.twig:646
 msgid "Not used on MariaDB."
 msgstr ""
 
 #: templates/server/privileges/privileges_table.twig:646
-#, fuzzy
-#| msgid "%s has been disabled for this MySQL server."
 msgid "Not used for this MySQL version."
-msgstr "%s ha essite dishabilitate sur iste servitor MySQL."
+msgstr "Non usate per iste version de MySQL."
 
 #: templates/server/privileges/privileges_table.twig:697
 msgid "Resource limits"
@@ -17161,10 +17111,8 @@ msgstr ""
 #: templates/server/status/queries/index.twig:39
 #: templates/server/status/status/index.twig:18
 #: templates/server/status/status/index.twig:38
-#, fuzzy
-#| msgid "per hour"
 msgid "ø per hour"
-msgstr "per hora"
+msgstr "ø per hora"
 
 #: templates/server/status/queries/index.twig:59
 msgid "Not enough privilege to view query statistics."
@@ -17259,10 +17207,8 @@ msgid "Table level tabs"
 msgstr "Schedas de nivello de tabula"
 
 #: templates/server/user_groups/user_groups.twig:50
-#, fuzzy
-#| msgid "Add user group"
 msgid "Delete user group"
-msgstr "Adde gruppo de usator"
+msgstr "Dele gruppo de usator"
 
 #: templates/server/user_groups/user_listings.twig:1
 #, php-format
@@ -17301,10 +17247,8 @@ msgid "Configuration file"
 msgstr "File de configuration"
 
 #: templates/setup/config/index.twig:16
-#, fuzzy
-#| msgid "Failed to read configuration file!"
 msgid "Generated configuration file"
-msgstr "Il falleva leger le file de configuration!"
+msgstr "File de configuration generate"
 
 #: templates/setup/config/index.twig:22 templates/setup/home/index.twig:165
 msgid "Download"
@@ -17681,10 +17625,8 @@ msgid "Binary"
 msgstr "Binari"
 
 #: templates/table/insert/column_row.twig:30
-#, fuzzy
-#| msgid "Value for the column \"%s\""
 msgid "Use the NULL value for this column."
-msgstr "Valor pro le columna \"%s\""
+msgstr "Usa le valor de NULL per iste columna."
 
 #: templates/table/insert/column_row.twig:65
 msgid "Because of its length,<br> this column might not be editable."
@@ -17705,10 +17647,8 @@ msgid "Continue insertion with %s rows"
 msgstr "Continua insertion con %s rangos"
 
 #: templates/table/maintenance/checksum.twig:13
-#, fuzzy
-#| msgid "Check"
 msgid "Checksum"
-msgstr "Verifica"
+msgstr "Checksum"
 
 #: templates/table/operations/index.twig:9
 msgid "Alter table order by"
@@ -17794,46 +17734,32 @@ msgid "Relation view"
 msgstr "Vista relational"
 
 #: templates/table/partition/analyze.twig:2
-#, fuzzy
-#| msgid "Analyze Explain at %s"
 msgid "Analyze partition"
-msgstr "Explication de Analysis a %s"
+msgstr "Analysisa partition"
 
 #: templates/table/partition/check.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Check partition"
-msgstr "Subpartition"
+msgstr "Verifica partition"
 
 #: templates/table/partition/drop.twig:2
-#, fuzzy
-#| msgid "Partition"
 msgid "Drop partition"
-msgstr "Partition"
+msgstr "Abandona Partition"
 
 #: templates/table/partition/optimize.twig:2
-#, fuzzy
-#| msgid "Remove partitioning"
 msgid "Optimize partition"
-msgstr "Remove partitionemento"
+msgstr "Optimisa partition"
 
 #: templates/table/partition/rebuild.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Rebuild partition"
-msgstr "Subpartition"
+msgstr "Reconstrue partition"
 
 #: templates/table/partition/repair.twig:2
-#, fuzzy
-#| msgid "Remove partitioning"
 msgid "Repair partition"
-msgstr "Remove partitionemento"
+msgstr "Repara partition"
 
 #: templates/table/partition/truncate.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Truncate partition"
-msgstr "Subpartition"
+msgstr "Trunca partition"
 
 #: templates/table/privileges/index.twig:57
 msgid "table-specific"
@@ -18622,9 +18548,6 @@ msgstr "Ducente te al sito de destination."
 
 #~ msgid "SweKey config file"
 #~ msgstr "File de configuration de SweKey"
-
-#~ msgid "Cookie authentication"
-#~ msgstr "Authentication via Cookie"
 
 #~ msgid "File %s does not contain any key id"
 #~ msgstr "File %s 1 non contine alcun clave  id"
