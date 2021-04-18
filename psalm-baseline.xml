@@ -276,14 +276,14 @@
   </file>
   <file src="libraries/classes/Controllers/Database/StructureController.php">
     <InvalidScalarArgument occurrences="2">
-      <code>$formatted_overhead</code>
-      <code>$formatted_size</code>
+      <code>$formattedOverhead</code>
+      <code>$formattedSize</code>
     </InvalidScalarArgument>
     <PossiblyNullArrayAccess occurrences="6">
-      <code>$formatted_overhead</code>
-      <code>$formatted_size</code>
-      <code>$formatted_size</code>
-      <code>$overhead_unit</code>
+      <code>$formattedOverhead</code>
+      <code>$formattedSize</code>
+      <code>$formattedSize</code>
+      <code>$overheadUnit</code>
       <code>$unit</code>
       <code>$unit</code>
     </PossiblyNullArrayAccess>
@@ -611,7 +611,7 @@
       <code>(string) $master</code>
     </RedundantCastGivenDocblockType>
     <RedundantPropertyInitializationCheck occurrences="2">
-      <code>isset($last_where, $this-&gt;formAndOrCols)</code>
+      <code>isset($lastWhere, $this-&gt;formAndOrCols)</code>
       <code>isset($this-&gt;formAndOrRows)</code>
     </RedundantPropertyInitializationCheck>
   </file>
@@ -1092,7 +1092,7 @@
   </file>
   <file src="libraries/classes/Import.php">
     <InvalidReturnStatement occurrences="1">
-      <code>$column_number</code>
+      <code>$columnNumber</code>
     </InvalidReturnStatement>
     <InvalidReturnType occurrences="1">
       <code>int</code>
@@ -1102,18 +1102,18 @@
     </ParadoxicalCondition>
     <PossiblyFalseOperand occurrences="3">
       <code>$decPos</code>
-      <code>strpos($last_cumulative_size, ',')</code>
-      <code>strpos($last_cumulative_size, ',')</code>
+      <code>strpos($lastCumulativeSize, ',')</code>
+      <code>strpos($lastCumulativeSize, ',')</code>
     </PossiblyFalseOperand>
     <PossiblyInvalidArgument occurrences="5">
-      <code>$last_cumulative_size</code>
-      <code>$last_cumulative_size</code>
-      <code>$last_cumulative_size</code>
-      <code>$last_cumulative_size</code>
-      <code>$last_cumulative_size</code>
+      <code>$lastCumulativeSize</code>
+      <code>$lastCumulativeSize</code>
+      <code>$lastCumulativeSize</code>
+      <code>$lastCumulativeSize</code>
+      <code>$lastCumulativeSize</code>
     </PossiblyInvalidArgument>
     <PossiblyNullArrayAccess occurrences="1">
-      <code>$additional_sql[$i]</code>
+      <code>$additionalSql[$i]</code>
     </PossiblyNullArrayAccess>
     <RedundantCast occurrences="4">
       <code>(string) $cell</code>
@@ -1223,6 +1223,12 @@
     <PossiblyFalseReference occurrences="1">
       <code>getPresence</code>
     </PossiblyFalseReference>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$icons</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidIterator occurrences="1">
+      <code>$icons</code>
+    </PossiblyInvalidIterator>
     <PossiblyNullArgument occurrences="2">
       <code>$container-&gt;realName</code>
       <code>$table</code>
