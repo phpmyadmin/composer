@@ -177,6 +177,13 @@ class Compatibility
         return $serverType === 'MariaDB';
     }
 
+    public static function isMySql(): bool
+    {
+        $serverType = Util::getServerType();
+
+        return $serverType === 'MySQL';
+    }
+
     public static function isCompatibleRenameIndex(int $serverVersion): bool
     {
         if (self::isMySqlOrPerconaDb()) {
@@ -205,5 +212,35 @@ class Compatibility
         // requires at least one of the SELECT, INSERT, UPDATE, DELETE,
         // or REFERENCES privileges for the parent table.
         return $dbi->getVersion() >= 50622;
+    }
+
+    /**
+     * Returns whether the database server supports virtual columns
+     */
+    public static function isVirtualColumnsSupported(int $serverVersion): bool
+    {
+        if (self::isMySqlOrPerconaDb()) {
+            return $serverVersion >= 50705;
+        }
+
+        // @see https://daniel-bartholomew.com/2010/09/30/road-to-mariadb-5-2-virtual-columns/
+        if (self::isMariaDb()) {
+            return $serverVersion >= 50200;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns whether the database server supports virtual columns
+     */
+    public static function supportsStoredKeywordForVirtualColumns(int $serverVersion): bool
+    {
+        // @see https://mariadb.com/kb/en/generated-columns/#mysql-compatibility-support
+        if (self::isMariaDb()) {
+            return $serverVersion >= 100201;
+        }
+
+        return false;
     }
 }

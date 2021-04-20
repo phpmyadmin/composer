@@ -1987,11 +1987,11 @@ class Util
     /**
      * Returns server type for current connection
      *
-     * Known types are: MariaDB, PerconaDB and MySQL (default)
+     * Known types are: MariaDB, Percona Server and MySQL (default)
      *
-     * @return string
+     * @phpstan-return 'MariaDB'|'Percona Server'|'MySQL'
      */
-    public static function getServerType()
+    public static function getServerType(): string
     {
         global $dbi;
 
@@ -2309,22 +2309,6 @@ class Util
             $indexesInfo,
             $indexesData,
         ];
-    }
-
-    /**
-     * Returns whether the database server supports virtual columns
-     *
-     * @return bool
-     */
-    public static function isVirtualColumnsSupported()
-    {
-        global $dbi;
-
-        $serverType = self::getServerType();
-        $serverVersion = $dbi->getVersion();
-
-        return in_array($serverType, ['MySQL', 'Percona Server']) && $serverVersion >= 50705
-             || ($serverType === 'MariaDB' && $serverVersion >= 50200);
     }
 
     /**

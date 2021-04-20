@@ -7,6 +7,7 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\Charsets\Charset;
 use PhpMyAdmin\Charsets\Collation;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Query\Compatibility;
 
 use function array_merge;
 use function array_pop;
@@ -204,9 +205,11 @@ class Normalization
             'mimework' => $cfgRelation['mimework'],
             'content_cells' => $contentCells,
             'change_column' => $_POST['change_column'] ?? $_GET['change_column'] ?? null,
-            'is_virtual_columns_supported' => Util::isVirtualColumnsSupported(),
+            'is_virtual_columns_supported' => Compatibility::isVirtualColumnsSupported($this->dbi->getVersion()),
             'browse_mime' => $GLOBALS['cfg']['BrowseMIME'],
-            'server_type' => Util::getServerType(),
+            'supports_stored_keyword' => Compatibility::supportsStoredKeywordForVirtualColumns(
+                $this->dbi->getVersion()
+            ),
             'server_version' => $this->dbi->getVersion(),
             'max_rows' => intval($GLOBALS['cfg']['MaxRows']),
             'char_editing' => $GLOBALS['cfg']['CharEditing'],

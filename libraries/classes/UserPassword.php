@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Query\Compatibility;
 use PhpMyAdmin\Server\Privileges;
 
 use function strlen;
@@ -69,7 +70,6 @@ class UserPassword
 
         [$username, $hostname] = $dbi->getCurrentUserAndHost();
 
-        $serverType = Util::getServerType();
         $serverVersion = $dbi->getVersion();
 
         if (
@@ -88,21 +88,19 @@ class UserPassword
         $sql_query = 'SET password = '
             . ($password == '' ? '\'\'' : $hashing_function . '(\'***\')');
 
+        $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb();
         if (
-            $serverType === 'MySQL'
-            && $serverVersion >= 50706
+            $isPerconaOrMySql && $serverVersion >= 50706
         ) {
             $sql_query = 'ALTER USER \'' . $dbi->escapeString($username)
                 . '\'@\'' . $dbi->escapeString($hostname)
                 . '\' IDENTIFIED WITH ' . $orig_auth_plugin . ' BY '
                 . ($password == '' ? '\'\'' : '\'***\'');
         } elseif (
-            ($serverType === 'MySQL'
-            && $serverVersion >= 50507)
-            || ($serverType === 'MariaDB'
-            && $serverVersion >= 50200)
+            ($isPerconaOrMySql && $serverVersion >= 50507)
+            || (Compatibility::isMariaDb() && $serverVersion >= 50200)
         ) {
-            // For MySQL versions 5.5.7+ and MariaDB versions 5.2+,
+            // For MySQL and Percona versions 5.5.7+ and MariaDB versions 5.2+,
             // explicitly set value of `old_passwords` so that
             // it does not give an error while using
             // the PASSWORD() function
@@ -175,10 +173,12 @@ class UserPassword
 
         $err_url = Url::getFromRoute('/user-password');
 
-        $serverType = Util::getServerType();
         $serverVersion = $dbi->getVersion();
 
-        if ($serverType === 'MySQL' && $serverVersion >= 50706) {
+        if (
+            Compatibility::isMySqlOrPerconaDb()
+            && $serverVersion >= 50706
+        ) {
             $local_query = 'ALTER USER \'' . $dbi->escapeString($username)
                 . '\'@\'' . $dbi->escapeString($hostname) . '\''
                 . ' IDENTIFIED with ' . $orig_auth_plugin . ' BY '
@@ -186,7 +186,7 @@ class UserPassword
                 ? '\'\''
                 : '\'' . $dbi->escapeString($password) . '\'');
         } elseif (
-            $serverType === 'MariaDB'
+            Compatibility::isMariaDb()
             && $serverVersion >= 50200
             && $serverVersion < 100100
             && $orig_auth_plugin !== ''
