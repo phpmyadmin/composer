@@ -22,6 +22,7 @@ use function preg_replace;
 use function str_replace;
 use function trim;
 
+use const MYSQLI_TYPE_BLOB;
 use const MYSQLI_TYPE_DATETIME;
 use const MYSQLI_TYPE_DECIMAL;
 use const MYSQLI_TYPE_STRING;
@@ -2405,6 +2406,21 @@ class DbiDummy implements DbiExtension
                 ],
             ],
             [
+                'query' => 'SELECT * FROM `test_db`.`test_table_complex`;',
+                'columns' => ['f1', 'f2', 'f3', 'f4'],
+                'result' => [
+                    ['"\'"><iframe onload=alert(1)>шеллы', '0x12346857fefe', "My awesome\nText", '0xaf1234f68c57fefe'],
+                    [null, null, null, null],
+                    ['', '0x1', 'шеллы', '0x2'],
+                ],
+                'metadata' => [
+                    new FieldMetadata(MYSQLI_TYPE_STRING, 0, (object) ['charsetnr' => 33]),
+                    new FieldMetadata(MYSQLI_TYPE_STRING, 0, (object) ['charsetnr' => 63]),
+                    new FieldMetadata(MYSQLI_TYPE_BLOB, 0, (object) ['charsetnr' => 23]),
+                    new FieldMetadata(MYSQLI_TYPE_BLOB, 0, (object) ['charsetnr' => 63]),
+                ],
+            ],
+            [
                 'query' => 'SHOW PROCEDURE STATUS;',
                 'columns' => ['Db', 'Name', 'Type'],
                 'result' => [
@@ -2524,9 +2540,6 @@ class DbiDummy implements DbiExtension
             [
                 'query' => 'SELECT `test_tbl`.`vc` FROM `my_db`.`test_tbl` WHERE `test`.`ser` = 2',
                 'result' => [],
-                'metadata' => [
-                    (object) ['type' => 'string'],
-                ],
             ],
             [
                 'query' => 'SELECT * FROM `pmadb`.`usergroups` ORDER BY `usergroup` ASC',
