@@ -217,6 +217,12 @@ AJAX.registerOnload('database/search.js', function () {
 
   $(document).on('submit', '#db_search_form.ajax', function (event) {
     event.preventDefault();
+
+    if ($('#criteriaTables :selected').length === 0) {
+      Functions.ajaxShowMessage(Messages.strNoTableSelected);
+      return;
+    }
+
     var $msgbox = Functions.ajaxShowMessage(Messages.strSearching, false); // jQuery object to reuse
 
     var $form = $(this);
