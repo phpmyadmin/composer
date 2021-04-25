@@ -46,12 +46,14 @@ var GitInfo = {
     if (data && data.version && data.date) {
       var current = GitInfo.parseVersionString($('span.version').text());
       var latest = GitInfo.parseVersionString(data.version);
-      var url = 'https://www.phpmyadmin.net/files/' + Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
+      var url = './url.php?url=https://www.phpmyadmin.net/files/' + Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
       var versionInformationMessage = document.createElement('span');
       versionInformationMessage.className = 'latest';
       var versionInformationMessageLink = document.createElement('a');
       versionInformationMessageLink.href = url;
       versionInformationMessageLink.className = 'disableAjax';
+      versionInformationMessageLink.target = '_blank';
+      versionInformationMessageLink.rel = 'noopener noreferrer';
       var versionInformationMessageLinkText = document.createTextNode(data.version);
       versionInformationMessageLink.appendChild(versionInformationMessageLinkText);
       var prefixMessage = document.createTextNode(Messages.strLatestAvailable + ' ');
@@ -74,6 +76,8 @@ var GitInfo = {
         var mainContainerDivLink = document.createElement('a');
         mainContainerDivLink.href = url;
         mainContainerDivLink.className = 'disableAjax';
+        mainContainerDivLink.target = '_blank';
+        mainContainerDivLink.rel = 'noopener noreferrer';
         var mainContainerDivLinkText = document.createTextNode(message);
         mainContainerDivLink.appendChild(mainContainerDivLinkText);
         mainContainerDiv.appendChild(mainContainerDivLink);
