@@ -12,6 +12,7 @@
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
+// eslint-disable-next-line no-unused-vars
 var gisEditorLoaded = false;
 /**
  * Closes the GIS data editor and perform necessary clean up work.
@@ -117,8 +118,7 @@ function loadJSAndGISEditor(value, field, type, inputName) {
   };
 
   script.src = 'js/vendor/openlayers/OpenLayers.js';
-  head.appendChild(script); // eslint-disable-next-line no-unused-vars
-
+  head.appendChild(script);
   gisEditorLoaded = true;
 }
 /**
