@@ -251,8 +251,7 @@
     </TypeDoesNotContainNull>
   </file>
   <file src="libraries/classes/Controllers/Database/MultiTableQueryController.php">
-    <PossiblyNullArgument occurrences="2">
-      <code>$params['db']</code>
+    <PossiblyNullArgument occurrences="1">
       <code>$params['db']</code>
     </PossiblyNullArgument>
   </file>
@@ -2262,11 +2261,6 @@
     <PossiblyFalseOperand occurrences="1">
       <code>mb_strrpos($currentUser, '@')</code>
     </PossiblyFalseOperand>
-  </file>
-  <file src="libraries/classes/Routing.php">
-    <UnresolvableInclude occurrences="1">
-      <code>require self::ROUTES_CACHE_FILE</code>
-    </UnresolvableInclude>
   </file>
   <file src="libraries/classes/Sanitize.php">
     <RedundantCast occurrences="4">
