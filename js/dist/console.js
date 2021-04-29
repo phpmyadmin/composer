@@ -1585,7 +1585,7 @@ var ConsoleDebug = {
     ConsoleDebug.showLog(last.debugInfo, last.url);
   }
 };
-/** s
+/**
  * Executed on page load
  */
 
