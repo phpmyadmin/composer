@@ -14,6 +14,7 @@ use PhpMyAdmin\Database\CentralColumns;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\DbTableExists;
 use PhpMyAdmin\Engines\Innodb;
+use PhpMyAdmin\FlashMessages;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Message;
@@ -81,6 +82,9 @@ class StructureController extends AbstractController
     /** @var DatabaseInterface */
     private $dbi;
 
+    /** @var FlashMessages */
+    private $flash;
+
     /**
      * @param Response          $response
      * @param string            $db       Database name
@@ -96,7 +100,8 @@ class StructureController extends AbstractController
         Transformations $transformations,
         CreateAddField $createAddField,
         RelationCleanup $relationCleanup,
-        $dbi
+        $dbi,
+        FlashMessages $flash
     ) {
         parent::__construct($response, $template, $db, $table);
         $this->createAddField = $createAddField;
@@ -104,6 +109,7 @@ class StructureController extends AbstractController
         $this->transformations = $transformations;
         $this->relationCleanup = $relationCleanup;
         $this->dbi = $dbi;
+        $this->flash = $flash;
 
         $this->tableObj = $this->dbi->getTable($this->db, $this->table);
     }
@@ -494,47 +500,6 @@ class StructureController extends AbstractController
             foreach ($selected as $field) {
                 $sql_query .= Util::backquote($field);
                 $sql_query .= $i++ === $selectedCount ? ');' : ', ';
-            }
-
-            $this->dbi->selectDb($db);
-            $result = $this->dbi->tryQuery($sql_query);
-
-            if (! $result) {
-                $message = Message::error((string) $this->dbi->getError());
-            }
-        }
-
-        if (empty($message)) {
-            $message = Message::success();
-        }
-
-        $this->index();
-    }
-
-    public function drop(): void
-    {
-        global $db, $table, $message, $sql_query;
-
-        $selected = $_POST['selected'] ?? [];
-
-        if (empty($selected)) {
-            $this->response->setRequestStatus(false);
-            $this->response->addJSON('message', __('No column selected.'));
-
-            return;
-        }
-
-        $sql_query = '';
-
-        if (($_POST['mult_btn'] ?? '') === __('Yes')) {
-            $i = 1;
-            $selectedCount = count($selected);
-            $sql_query = 'ALTER TABLE ' . Util::backquote($table);
-
-            foreach ($selected as $field) {
-                $this->relationCleanup->column($db, $table, $field);
-                $sql_query .= ' DROP ' . Util::backquote($field);
-                $sql_query .= $i++ === $selectedCount ? ';' : ',';
             }
 
             $this->dbi->selectDb($db);
