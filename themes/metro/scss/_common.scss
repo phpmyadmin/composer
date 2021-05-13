@@ -305,10 +305,6 @@ legend {
   font-size: 1em;
 }
 
-.some-margin {
-  margin: 20px;
-}
-
 /* buttons in some browsers (eg. Konqueror) are block elements,
    this breaks design */
 button {
@@ -570,15 +566,6 @@ button.mult_submit {
 
 .value {
   font-family: $font-family-monospace;
-}
-
-.attention {
-  color: red;
-  font-weight: bold;
-}
-
-.allfine {
-  color: green;
 }
 
 img.lightbulb {
