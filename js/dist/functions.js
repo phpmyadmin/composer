@@ -3666,7 +3666,7 @@ AJAX.registerOnload('functions.js', function () {
      */
 
 
-    var dialog = '<div id=\'enum_editor\'>' + '<fieldset class="pma-fieldset">' + '<legend>' + title + '</legend>' + '<p>' + Functions.getImage('s_notice') + Messages.enum_hint + '</p>' + '<table class=\'pma-table values\'>' + fields + '</table>' + '</fieldset><fieldset class="pma-fieldset tblFooters">' + '<table class=\'pma-table add\'><tr><td>' + '<div class=\'slider\'></div>' + '</td><td>' + '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' + Functions.sprintf(Messages.enum_addValue, 1) + '\'></div></form>' + '</td></tr></table>' + '<input type=\'hidden\' value=\'' + // So we know which column's data is being edited
+    var dialog = '<div id=\'enum_editor\'>' + '<fieldset class="pma-fieldset">' + '<legend>' + title + '</legend>' + '<p>' + Functions.getImage('s_notice') + Messages.enum_hint + '</p>' + '<table class="table table-borderless values">' + fields + '</table>' + '</fieldset><fieldset class="pma-fieldset tblFooters">' + '<table class="table table-borderless add"><tr><td>' + '<div class=\'slider\'></div>' + '</td><td>' + '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' + Functions.sprintf(Messages.enum_addValue, 1) + '\'></div></form>' + '</td></tr></table>' + '<input type=\'hidden\' value=\'' + // So we know which column's data is being edited
     $(this).closest('td').find('input').attr('id') + '\'>' + '</fieldset>' + '</div>';
     /**
      * @var {object} buttonOptions Defines functions to be called when the buttons in
@@ -3801,7 +3801,7 @@ AJAX.registerOnload('functions.js', function () {
       seeMore = '<fieldset class="pma-fieldset tblFooters text-center fw-bold">' + '<a href=\'#\' id=\'seeMore\'>' + Messages.seeMore + '</a></fieldset>';
     }
 
-    var centralColumnsDialog = '<div class=\'max_height_400\'>' + '<fieldset class="pma-fieldset">' + searchIn + '<table id=\'col_list\' class=\'pma-table values w-100\'>' + fields + '</table>' + '</fieldset>' + seeMore + '</div>';
+    var centralColumnsDialog = '<div class=\'max_height_400\'>' + '<fieldset class="pma-fieldset">' + searchIn + '<table id="col_list" class="table table-borderless values">' + fields + '</table>' + '</fieldset>' + seeMore + '</div>';
     var width = parseInt(parseInt($('html').css('font-size'), 10) / 13 * 500, 10);
 
     if (!width) {
