@@ -294,7 +294,7 @@ class DbiDummy implements DbiExtension
      */
     public function getClientInfo($link)
     {
-        return '';
+        return 'libmysql - mysqlnd x.x.x-dev (phpMyAdmin tests)';
     }
 
     /**
@@ -945,6 +945,16 @@ class DbiDummy implements DbiExtension
             [
                 'query'  => 'SELECT TABLE_NAME FROM information_schema.VIEWS'
                     . ' WHERE TABLE_SCHEMA = \'pma_test\' AND TABLE_NAME = \'table1\'',
+                'result' => [],
+            ],
+            [
+                'query'  => 'SELECT TABLE_NAME FROM information_schema.VIEWS'
+                    . ' WHERE TABLE_SCHEMA = \'ODS_DB\' AND TABLE_NAME = \'Shop\'',
+                'result' => [],
+            ],
+            [
+                'query'  => 'SELECT TABLE_NAME FROM information_schema.VIEWS'
+                    . ' WHERE TABLE_SCHEMA = \'ODS_DB\' AND TABLE_NAME = \'pma_bookmark\'',
                 'result' => [],
             ],
             [

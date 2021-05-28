@@ -538,6 +538,7 @@ final class JavaScriptMessagesController
             'strSavePageAs' => __('Save page as'),
             'strOpenPage' => __('Open page'),
             'strDeletePage' => __('Delete page'),
+            'strSavedPageTableMissing' => __('Some tables saved in this page might have been renamed or deleted.'),
             'strUntitled' => __('Untitled'),
             'strSelectPage' => __('Please select a page to continue'),
             'strEnterValidPageName' => __('Please enter a valid page name'),
@@ -711,7 +712,11 @@ final class JavaScriptMessagesController
 
             /* U2F errors */
             'strU2FTimeout' => __('Timed out waiting for security key activation.'),
-            'strU2FError' => __('Failed security key activation (%s).'),
+            'strU2FBadRequest' => __('Invalid request sent to security key.'),
+            'strU2FUnknown' => __('Unknown security key error.'),
+            'strU2FInvalidClient' => __('Client does not support security key.'),
+            'strU2FErrorRegister' => __('Failed security key activation.'),
+            'strU2FErrorAuthenticate' => __('Invalid security key.'),
 
             /* Designer */
             'strTableAlreadyExists' => _pgettext(

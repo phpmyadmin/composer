@@ -753,6 +753,9 @@
       <code>$mysqli-&gt;connect_errno</code>
       <code>$mysqli-&gt;connect_error</code>
     </PossiblyNullPropertyFetch>
+    <TooFewArguments occurrences="1">
+      <code>mysqli_get_client_info()</code>
+    </TooFewArguments>
     <TypeDoesNotContainNull occurrences="2">
       <code>$return_value === false || $return_value === null</code>
       <code>$return_value === null</code>
@@ -2707,12 +2710,6 @@
       <code>$table['disp_name']</code>
       <code>$units[$d]</code>
     </InvalidArrayOffset>
-    <InvalidReturnStatement occurrences="1">
-      <code>$return_value</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>int</code>
-    </InvalidReturnType>
     <NullableReturnStatement occurrences="1">
       <code>$wktval</code>
     </NullableReturnStatement>
