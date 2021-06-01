@@ -762,15 +762,6 @@ h3#serverstatusqueries span {
   display: inline;
 }
 
-/* Also used for the variables page */
-.pma-fieldset#tableFilter {
-  padding: 0.1em 1em;
-
-  input[type="submit"] {
-    margin-top: 9px;
-  }
-}
-
 div#serverStatusTabs {
   margin-top: 1em;
 }
@@ -1005,10 +996,6 @@ li {
   a:hover img {
     border: 0.1em solid red;
   }
-}
-
-#fieldset_select_fields {
-  float: left;
 }
 
 #selflink {
@@ -1340,10 +1327,6 @@ input#input_import_file {
   margin: 5px 0 5px 0;
 }
 
-#filterText {
-  vertical-align: baseline;
-}
-
 #popup_background {
   display: none;
   position: fixed;
@@ -1628,20 +1611,6 @@ form {
 
 #create_table_form_minimal {
   display: block;
-}
-
-#fieldset_zoom_search table {
-  th,
-  td {
-    line-height: 35px;
-  }
-}
-
-#fieldset_table_qbe table {
-  th,
-  td {
-    line-height: 35px;
-  }
 }
 
 #db_or_table_specific_priv .tblFooters {
@@ -3011,7 +2980,6 @@ body {
 /* templates/database/multi_table_query */
 
 .multi_table_query_form {
-  .query-form__div--hide,
   .query-form__tr--hide {
     display: none;
   }
@@ -3027,11 +2995,6 @@ body {
 
   .query-form__input--wide {
     width: 91%;
-  }
-
-  .query-form__remove-column {
-    float: right;
-    color: red;
   }
 
   .query-form__multi-sql-query {
