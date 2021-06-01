@@ -400,7 +400,6 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
           open: function open() {
             Functions.checkIndexName('index_frm');
             Functions.showHints($div);
-            Functions.initSlider();
             $('#index_columns').find('td').each(function () {
               $(this).css('width', $(this).width() + 'px');
             });

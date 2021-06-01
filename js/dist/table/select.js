@@ -150,9 +150,7 @@ AJAX.registerOnload('table/select.js', function () {
         $('#togglesearchformlink') // always start with the Show message
         .text(Messages.strShowSearchCriteria);
         $('#togglesearchformdiv') // now it's time to show the div containing the link
-        .show(); // needed for the display options slider in the results
-
-        Functions.initSlider();
+        .show();
         $('html, body').animate({
           scrollTop: 0
         }, 'fast');

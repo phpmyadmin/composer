@@ -98,7 +98,6 @@ AJAX.registerOnload('table/structure.js', function () {
           reloadFieldForm();
           $form.remove();
           Functions.ajaxRemoveMessage($msg);
-          Functions.initSlider();
           Navigation.reload();
           CommonActions.refreshMain('index.php?route=/table/structure');
         } else {

@@ -639,7 +639,6 @@ AJAX.registerOnload('sql.js', function () {
 
         $('.sqlqueryresults').trigger('makegrid');
         $('#togglequerybox').show();
-        Functions.initSlider();
 
         if (typeof data.action_bookmark === 'undefined') {
           if ($('#sqlqueryform input[name="retain_query_box"]').is(':checked') !== true) {
@@ -675,7 +674,6 @@ AJAX.registerOnload('sql.js', function () {
       Functions.ajaxRemoveMessage($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
       $sqlqueryresults.html(data.message).trigger('makegrid');
-      Functions.initSlider();
       Functions.highlightSql($sqlqueryresults);
     }); // end $.post()
   }); // end displayOptionsForm handler
