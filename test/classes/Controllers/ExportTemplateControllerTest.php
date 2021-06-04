@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\ExportTemplateController;
 use PhpMyAdmin\Export\Template as ExportTemplate;
 use PhpMyAdmin\Export\TemplateModel;
@@ -27,15 +26,13 @@ class ExportTemplateControllerTest extends AbstractTestCase
 
     protected function setUp(): void
     {
-        global $dbi, $config;
-
-        $this->setGlobalDbi();
+        parent::setUp();
         parent::setTheme();
 
-        $config = new Config();
+        global $dbi, $config;
+
         $config->enableBc();
 
-        $_SESSION = [' PMA_token ' => 'token'];
         $GLOBALS['server'] = 1;
         $GLOBALS['text_dir'] = 'ltr';
         $GLOBALS['PMA_PHP_SELF'] = '';
@@ -43,6 +40,7 @@ class ExportTemplateControllerTest extends AbstractTestCase
         $_SESSION['relation'][$GLOBALS['server']] = [
             'version' => Version::VERSION,
             'exporttemplateswork' => true,
+            'trackingwork' => false,
             'db' => 'db',
             'export_templates' => 'table',
         ];

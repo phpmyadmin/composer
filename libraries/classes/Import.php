@@ -11,6 +11,7 @@ use PhpMyAdmin\SqlParser\Statements\ReplaceStatement;
 use PhpMyAdmin\SqlParser\Statements\UpdateStatement;
 use PhpMyAdmin\SqlParser\Utils\Query;
 
+use function __;
 use function abs;
 use function count;
 use function explode;
@@ -1065,7 +1066,7 @@ class Import
         ?array &$analyses = null,
         ?array &$additionalSql = null,
         ?array $options = null,
-        array &$sqlData
+        array &$sqlData = []
     ): void {
         global $import_notice, $dbi;
 

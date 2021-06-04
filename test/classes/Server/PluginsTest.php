@@ -8,6 +8,8 @@ use PhpMyAdmin\Server\Plugin;
 use PhpMyAdmin\Server\Plugins;
 use PhpMyAdmin\Tests\AbstractTestCase;
 
+use function __;
+
 class PluginsTest extends AbstractTestCase
 {
     /** @var Plugins */
@@ -81,6 +83,7 @@ class PluginsTest extends AbstractTestCase
 
     public function testGetAuthentication(): void
     {
+        $GLOBALS['server'] = 0;
         $this->plugins = new Plugins($GLOBALS['dbi']);
         $plugins = $this->plugins->getAuthentication();
         $this->assertIsArray($plugins);
