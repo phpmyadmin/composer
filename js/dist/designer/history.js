@@ -2,11 +2,10 @@
 
 /**
  * @fileoverview    function used in this file builds history tab and generates query.
-  *
-  * @requires    jQuery
-  * @requires    move.js
-  * @version $Id$
-  */
+ *
+ * @requires    jQuery
+ * @requires    move.js
+ */
 
 /* global contr */
 // js/designer/init.js
@@ -26,9 +25,9 @@ var vqbEditor = null;
 /**
  * To display details of objects(where,rename,Having,aggregate,groupby,orderby,having)
  *
- * @param index index of historyArray where change is to be made
- *
-**/
+ * @param {number} index index of historyArray where change is to be made
+ * @return {string}
+ */
 
 DesignerHistory.detail = function (index) {
   var type = historyArray[index].getType();
@@ -36,25 +35,15 @@ DesignerHistory.detail = function (index) {
 
   if (type === 'Where') {
     str = 'Where ' + historyArray[index].getColumnName() + historyArray[index].getObj().getRelationOperator() + historyArray[index].getObj().getQuery();
-  }
-
-  if (type === 'Rename') {
+  } else if (type === 'Rename') {
     str = 'Rename ' + historyArray[index].getColumnName() + ' To ' + historyArray[index].getObj().getRenameTo();
-  }
-
-  if (type === 'Aggregate') {
+  } else if (type === 'Aggregate') {
     str = 'Select ' + historyArray[index].getObj().getOperator() + '( ' + historyArray[index].getColumnName() + ' )';
-  }
-
-  if (type === 'GroupBy') {
+  } else if (type === 'GroupBy') {
     str = 'GroupBy ' + historyArray[index].getColumnName();
-  }
-
-  if (type === 'OrderBy') {
+  } else if (type === 'OrderBy') {
     str = 'OrderBy ' + historyArray[index].getColumnName() + ' ' + historyArray[index].getObj().getOrder();
-  }
-
-  if (type === 'Having') {
+  } else if (type === 'Having') {
     str = 'Having ';
 
     if (historyArray[index].getObj().getOperator() !== 'None') {
@@ -75,8 +64,8 @@ DesignerHistory.detail = function (index) {
  *
  * @param {number} init starting index of unsorted array
  * @param {number} finit last index of unsorted array
- *
-**/
+ * @return {string}
+ */
 
 
 DesignerHistory.display = function (init, finit) {
@@ -157,8 +146,8 @@ DesignerHistory.display = function (init, finit) {
  *
  *
  * @param {number} index index of historyArray where change is to be made
- *
-**/
+ * @return {void}
+ */
 
 
 DesignerHistory.andOr = function (index) {
@@ -175,9 +164,9 @@ DesignerHistory.andOr = function (index) {
 /**
  * Deletes entry in historyArray
  *
- * @param index index of historyArray[] which is to be deleted
- *
-**/
+ * @param {number} index of historyArray[] which is to be deleted
+ * @return {void}
+ */
 
 
 DesignerHistory.historyDelete = function (index) {
@@ -196,11 +185,26 @@ DesignerHistory.historyDelete = function (index) {
   $('#ab').accordion('refresh');
 };
 /**
+ * @param {string} elementId
+ * @return {void}
+ */
+
+
+DesignerHistory.changeStyle = function (elementId) {
+  var element = document.getElementById(elementId);
+  element.style.left = '530px';
+  element.style.top = '130px';
+  element.style.position = 'absolute';
+  element.style.zIndex = '103';
+  element.style.visibility = 'visible';
+  element.style.display = 'block';
+};
+/**
  * To show where,rename,aggregate,having forms to edit a object
  *
  * @param {number} index index of historyArray where change is to be made
- *
-**/
+ * @return {void}
+ */
 
 
 DesignerHistory.historyEdit = function (index) {
@@ -210,52 +214,27 @@ DesignerHistory.historyEdit = function (index) {
   if (type === 'Where') {
     document.getElementById('eQuery').value = historyArray[index].getObj().getQuery();
     document.getElementById('erel_opt').value = historyArray[index].getObj().getRelationOperator();
-    document.getElementById('query_where').style.left = '530px';
-    document.getElementById('query_where').style.top = '130px';
-    document.getElementById('query_where').style.position = 'absolute';
-    document.getElementById('query_where').style.zIndex = '103';
-    document.getElementById('query_where').style.visibility = 'visible';
-    document.getElementById('query_where').style.display = 'block';
-  }
-
-  if (type === 'Having') {
+    DesignerHistory.changeStyle('query_where');
+  } else if (type === 'Having') {
     document.getElementById('hQuery').value = historyArray[index].getObj().getQuery();
     document.getElementById('hrel_opt').value = historyArray[index].getObj().getRelationOperator();
     document.getElementById('hoperator').value = historyArray[index].getObj().getOperator();
-    document.getElementById('query_having').style.left = '530px';
-    document.getElementById('query_having').style.top = '130px';
-    document.getElementById('query_having').style.position = 'absolute';
-    document.getElementById('query_having').style.zIndex = '103';
-    document.getElementById('query_having').style.visibility = 'visible';
-    document.getElementById('query_having').style.display = 'block';
-  }
-
-  if (type === 'Rename') {
+    DesignerHistory.changeStyle('query_having');
+  } else if (type === 'Rename') {
     document.getElementById('e_rename').value = historyArray[index].getObj().getRenameTo();
-    document.getElementById('query_rename_to').style.left = '530px';
-    document.getElementById('query_rename_to').style.top = '130px';
-    document.getElementById('query_rename_to').style.position = 'absolute';
-    document.getElementById('query_rename_to').style.zIndex = '103';
-    document.getElementById('query_rename_to').style.visibility = 'visible';
-    document.getElementById('query_rename_to').style.display = 'block';
-  }
-
-  if (type === 'Aggregate') {
+    DesignerHistory.changeStyle('query_rename_to');
+  } else if (type === 'Aggregate') {
     document.getElementById('e_operator').value = historyArray[index].getObj().getOperator();
-    document.getElementById('query_Aggregate').style.left = '530px';
-    document.getElementById('query_Aggregate').style.top = '130px';
-    document.getElementById('query_Aggregate').style.position = 'absolute';
-    document.getElementById('query_Aggregate').style.zIndex = '103';
-    document.getElementById('query_Aggregate').style.visibility = 'visible';
-    document.getElementById('query_Aggregate').style.display = 'block';
+    DesignerHistory.changeStyle('query_Aggregate');
   }
 };
 /**
  * Make changes in historyArray when Edit button is clicked
  * checks for the type of object and then sets the new value
  *
- * @param index index of historyArray where change is to be made
-**/
+ * @param {string} type of historyArray where change is to be made
+ * @return {void}
+ */
 
 
 DesignerHistory.edit = function (type) {
@@ -266,27 +245,21 @@ DesignerHistory.edit = function (type) {
     }
 
     document.getElementById('query_rename_to').style.visibility = 'hidden';
-  }
-
-  if (type === 'Aggregate') {
+  } else if (type === 'Aggregate') {
     if (document.getElementById('e_operator').value !== '---') {
       historyArray[gIndex].getObj().setOperator(document.getElementById('e_operator').value);
       document.getElementById('e_operator').value = '---';
     }
 
     document.getElementById('query_Aggregate').style.visibility = 'hidden';
-  }
-
-  if (type === 'Where') {
+  } else if (type === 'Where') {
     if (document.getElementById('erel_opt').value !== '--' && document.getElementById('eQuery').value !== '') {
       historyArray[gIndex].getObj().setQuery(document.getElementById('eQuery').value);
       historyArray[gIndex].getObj().setRelationOperator(document.getElementById('erel_opt').value);
     }
 
     document.getElementById('query_where').style.visibility = 'hidden';
-  }
-
-  if (type === 'Having') {
+  } else if (type === 'Having') {
     if (document.getElementById('hrel_opt').value !== '--' && document.getElementById('hQuery').value !== '') {
       historyArray[gIndex].getObj().setQuery(document.getElementById('hQuery').value);
       historyArray[gIndex].getObj().setRelationOperator(document.getElementById('hrel_opt').value);
@@ -309,7 +282,7 @@ DesignerHistory.edit = function (type) {
  * @param nObjNo       object no used for inner join
  * @param nType         type of object
  *
-**/
+ */
 
 
 DesignerHistory.HistoryObj = function (nColumnName, nObj, nTab, nObjNo, nType) {
@@ -385,7 +358,7 @@ DesignerHistory.HistoryObj = function (nColumnName, nObj, nTab, nObjNo, nType) {
  * @param nRelationOperator type of relation operator to be applied
  * @param nQuery             stores value of value/sub-query
  *
-**/
+ */
 
 
 DesignerHistory.Where = function (nRelationOperator, nQuery) {
@@ -437,7 +410,7 @@ DesignerHistory.OrderBy = function (nOrder) {
  * @param nRelationOperator type of relation operator to be applied
  * @param nQuery             stores value of value/sub-query
  * @param nOperator          operator
-**/
+ */
 
 
 DesignerHistory.Having = function (nRelationOperator, nQuery, nOperator) {
@@ -478,7 +451,7 @@ DesignerHistory.Having = function (nRelationOperator, nQuery, nOperator) {
  *
  * @param nRenameTo new name information
  *
-**/
+ */
 
 
 DesignerHistory.Rename = function (nRenameTo) {
@@ -497,9 +470,9 @@ DesignerHistory.Rename = function (nRenameTo) {
 /**
  * aggregate object closure
  *
- * @param nOperator aggregte operator
+ * @param nOperator aggregate operator
  *
-**/
+ */
 
 
 DesignerHistory.Aggregate = function (nOperator) {
@@ -607,7 +580,7 @@ DesignerHistory.removeArray = function (rem, arr) {
 };
 /**
  * This function builds the groupby clause from history object
- *
+ * @return {string}
  */
 
 
@@ -627,7 +600,7 @@ DesignerHistory.queryGroupBy = function () {
 };
 /**
  * This function builds the Having clause from the history object.
- *
+ * @return {string}
  */
 
 
@@ -657,7 +630,7 @@ DesignerHistory.queryHaving = function () {
 };
 /**
  * This function builds the orderby clause from the history object.
- *
+ * @return {string}
  */
 
 
@@ -677,7 +650,7 @@ DesignerHistory.queryOrderBy = function () {
 };
 /**
  * This function builds the Where clause from the history object.
- *
+ * @return {string}
  */
 
 
