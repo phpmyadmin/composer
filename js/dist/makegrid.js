@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* global firstDayOfCalendar */
 // templates/javascript/variables.twig
 
@@ -969,6 +971,12 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
           };
           g.lastXHR = $.post('index.php?route=/sql/get-enum-values', postParams, function (data) {
             g.lastXHR = null;
+
+            if (_typeof(data) === 'object' && data.success === false) {
+              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              return;
+            }
+
             $editArea.removeClass('edit_area_loading');
             $editArea.append(data.dropdown);
             $editArea.append('<div class="cell_edit_hint">' + g.cellEditHint + '</div>');
@@ -1006,6 +1014,12 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
           g.lastXHR = $.post('index.php?route=/sql/get-set-values', postParams, function (data) {
             g.lastXHR = null;
+
+            if (_typeof(data) === 'object' && data.success === false) {
+              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              return;
+            }
+
             $editArea.removeClass('edit_area_loading');
             $editArea.append(data.select);
             $td.data('original_data', $(data.select).val().join());
