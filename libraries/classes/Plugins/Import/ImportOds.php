@@ -246,7 +246,8 @@ class ImportOds extends ImportPlugin
      */
     protected function getValue($cell_attrs, $text)
     {
-        if ($_REQUEST['ods_recognize_percentages']
+        if (isset($_REQUEST['ods_recognize_percentages'])
+            && $_REQUEST['ods_recognize_percentages']
             && ! strcmp(
                 'percentage',
                 (string) $cell_attrs['value-type']
@@ -255,7 +256,8 @@ class ImportOds extends ImportPlugin
             return (float) $cell_attrs['value'];
         }
 
-        if ($_REQUEST['ods_recognize_currency']
+        if (isset($_REQUEST['ods_recognize_currency'])
+            && $_REQUEST['ods_recognize_currency']
             && ! strcmp('currency', (string) $cell_attrs['value-type'])
         ) {
             return (float) $cell_attrs['value'];
