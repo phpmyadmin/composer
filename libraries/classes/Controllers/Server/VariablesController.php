@@ -7,6 +7,7 @@ namespace PhpMyAdmin\Controllers\Server;
 use PhpMyAdmin\Controllers\AbstractController;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Providers\ServerVariables\ServerVariablesProvider;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
@@ -116,7 +117,7 @@ class VariablesController extends AbstractController
      *
      * @param array $params Request parameters
      */
-    public function getValue(array $params): void
+    public function getValue(ServerRequest $request, array $params): void
     {
         if (! $this->response->isAjax()) {
             return;
@@ -153,19 +154,14 @@ class VariablesController extends AbstractController
      *
      * @param array $vars Request parameters
      */
-    public function setValue(array $vars): void
+    public function setValue(ServerRequest $request, array $vars): void
     {
-        $params = [
-            'varName' => $vars['name'],
-            'varValue' => $_POST['varValue'] ?? null,
-        ];
-
         if (! $this->response->isAjax()) {
             return;
         }
 
-        $value = (string) $params['varValue'];
-        $variableName = (string) $params['varName'];
+        $value = (string) $request->getParam('varValue');
+        $variableName = (string) $vars['name'];
         $matches = [];
         $variableType = ServerVariablesProvider::getImplementation()->getVariableType($variableName);
 
@@ -198,20 +194,20 @@ class VariablesController extends AbstractController
 
         $json = [];
         if (
-            ! preg_match('/[^a-zA-Z0-9_]+/', $params['varName'])
+            ! preg_match('/[^a-zA-Z0-9_]+/', $variableName)
             && $this->dbi->query(
-                'SET GLOBAL ' . $params['varName'] . ' = ' . $value
+                'SET GLOBAL ' . $variableName . ' = ' . $value
             )
         ) {
             // Some values are rounded down etc.
             $varValue = $this->dbi->fetchSingleRow(
                 'SHOW GLOBAL VARIABLES WHERE Variable_name="'
-                . $this->dbi->escapeString($params['varName'])
+                . $this->dbi->escapeString($variableName)
                 . '";',
                 'NUM'
             );
             [$formattedValue, $isHtmlFormatted] = $this->formatVariable(
-                $params['varName'],
+                $variableName,
                 $varValue[1]
             );
 
