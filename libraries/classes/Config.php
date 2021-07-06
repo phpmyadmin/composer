@@ -469,6 +469,7 @@ class Config
 
         ob_start();
         $isConfigLoading = true;
+        /** @psalm-suppress UnresolvableInclude */
         $eval_result = include $this->getSource();
         $isConfigLoading = false;
         ob_end_clean();
@@ -596,7 +597,6 @@ class Config
                 || isset($config_data['ThemeDefault'])
                 && $config_data['ThemeDefault'] != $tmanager->theme->getId()
             ) {
-                // new theme was set in common.inc.php
                 $this->setUserValue(
                     null,
                     'ThemeDefault',

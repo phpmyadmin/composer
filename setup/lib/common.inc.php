@@ -1,22 +1,40 @@
 <?php
-/**
- * Loads libraries/common.inc.php and preforms some additional actions
- */
 
 declare(strict_types=1);
 
+use PhpMyAdmin\Common;
 use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\DatabaseInterface;
 
-chdir('..');
-
-if (! file_exists(ROOT_PATH . 'libraries/common.inc.php')) {
-    die('Bad invocation!');
+if (PHP_VERSION_ID < 70205) {
+    die('<p>PHP 7.2.5+ is required.</p><p>Currently installed version is: ' . PHP_VERSION . '</p>');
 }
+
+if (! defined('PHPMYADMIN')) {
+    exit;
+}
+
+require_once ROOT_PATH . 'libraries/vendor_config.php';
+
+/**
+ * Activate autoloader
+ */
+if (! @is_readable(AUTOLOAD_FILE)) {
+    die(
+        '<p>File <samp>' . AUTOLOAD_FILE . '</samp> missing or not readable.</p>'
+        . '<p>Most likely you did not run Composer to '
+        . '<a href="https://docs.phpmyadmin.net/en/latest/setup.html#installing-from-git">'
+        . 'install library files</a>.</p>'
+    );
+}
+
+require AUTOLOAD_FILE;
+
+chdir('..');
 
 $isMinimumCommon = true;
 
-require_once ROOT_PATH . 'libraries/common.inc.php';
+Common::run();
 
 // use default error handler
 restore_error_handler();
