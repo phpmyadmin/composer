@@ -4494,7 +4494,8 @@ Functions.initSlider = function () {
     $wrapper.toggle($this.is(':visible'));
     $('<a>', {
       href: '#' + this.id,
-      'class': 'ajax'
+      'class': 'ajax',
+      id: 'slide-handle'
     }).text($this.attr('title')).prepend($('<span>')).insertBefore($this).on('click', function () {
       var $wrapper = $this.closest('.slide-wrapper');
       var visible = $this.is(':visible');
