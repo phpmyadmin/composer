@@ -13,7 +13,6 @@ use function array_merge;
 use function array_replace_recursive;
 use function array_slice;
 use function count;
-use function define;
 use function defined;
 use function error_get_last;
 use function error_reporting;
@@ -904,7 +903,7 @@ class Config
      * Maximum upload size as limited by PHP
      * Used with permission from Moodle (https://moodle.org/) by Martin Dougiamas
      *
-     * this section generates $max_upload_size in bytes
+     * this section generates max_upload_size in bytes
      */
     public function checkUploadSize(): void
     {
@@ -1014,35 +1013,6 @@ class Config
         $parts[] = '';
 
         return implode('/', $parts);
-    }
-
-    /**
-     * enables backward compatibility
-     */
-    public function enableBc(): void
-    {
-        $GLOBALS['cfg']             = $this->settings;
-        $GLOBALS['default_server']  = $this->defaultServer;
-        unset($this->defaultServer);
-        $GLOBALS['is_upload']       = $this->get('enable_upload');
-        $GLOBALS['max_upload_size'] = $this->get('max_upload_size');
-        $GLOBALS['is_https']        = $this->get('is_https');
-
-        $defines = [
-            'PMA_IS_WINDOWS',
-            'PMA_IS_GD2',
-            'PMA_USR_OS',
-            'PMA_USR_BROWSER_VER',
-            'PMA_USR_BROWSER_AGENT',
-        ];
-
-        foreach ($defines as $define) {
-            if (defined($define)) {
-                continue;
-            }
-
-            define($define, $this->get($define));
-        }
     }
 
     /**
