@@ -70,12 +70,12 @@ use function rtrim;
 use function set_time_limit;
 use function sort;
 use function sprintf;
+use function str_contains;
 use function str_pad;
 use function str_replace;
 use function strcasecmp;
 use function strftime;
 use function strlen;
-use function strpos;
 use function strrev;
 use function strtolower;
 use function strtr;
@@ -673,7 +673,7 @@ class Util
             $thousandsSep
         );
         // If we don't want any zeros, remove them now
-        if ($noTrailingZero && strpos($formattedValue, $decimalSep) !== false) {
+        if ($noTrailingZero && str_contains($formattedValue, $decimalSep)) {
             $formattedValue = preg_replace('/' . preg_quote($decimalSep, '/') . '?0+$/', '', $formattedValue);
         }
 
@@ -1487,7 +1487,7 @@ class Util
             // by the way, a BLOB should not show the BINARY attribute
             // because this is not accepted in MySQL syntax.
             if (
-                strpos($printType, 'binary') !== false
+                str_contains($printType, 'binary')
                 && ! preg_match('@binary[\(]@', $printType)
             ) {
                 $printType = str_replace('binary', '', $printType);
@@ -1794,12 +1794,12 @@ class Util
         }
 
         /* Backward compatibility in 3.5.x */
-        if (mb_strpos($string, '@FIELDS@') !== false) {
+        if (str_contains($string, '@FIELDS@')) {
             $string = strtr($string, ['@FIELDS@' => '@COLUMNS@']);
         }
 
         /* Fetch columns list if required */
-        if (mb_strpos($string, '@COLUMNS@') !== false) {
+        if (str_contains($string, '@COLUMNS@')) {
             $columnsList = $dbi->getColumns(
                 $GLOBALS['db'],
                 $GLOBALS['table']
@@ -2177,7 +2177,7 @@ class Util
             return $value;
         }
 
-        if (mb_strpos($value, '.') === false) {
+        if (! str_contains($value, '.')) {
             return $value . '.000000';
         }
 
@@ -2833,7 +2833,7 @@ class Util
      */
     public static function getProtoFromForwardedHeader(string $headerContents): string
     {
-        if (strpos($headerContents, '=') !== false) {// does not contain any equal sign
+        if (str_contains($headerContents, '=')) {// does not contain any equal sign
             $hops = explode(',', $headerContents);
             $parts = explode(';', $hops[0]);
             foreach ($parts as $part) {

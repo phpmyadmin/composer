@@ -33,7 +33,6 @@ use function is_string;
 use function max;
 use function mb_stripos;
 use function mb_strlen;
-use function mb_strpos;
 use function mb_strstr;
 use function mb_substr;
 use function md5;
@@ -42,6 +41,7 @@ use function min;
 use function password_hash;
 use function preg_match;
 use function preg_replace;
+use function str_contains;
 use function str_replace;
 use function stripcslashes;
 use function stripslashes;
@@ -867,7 +867,7 @@ class InsertEdit
         if (
             $column['is_char']
             && ($GLOBALS['cfg']['CharEditing'] === 'textarea'
-            || mb_strpos($data, "\n") !== false)
+            || str_contains($data, "\n"))
         ) {
             $htmlOutput .= "\n";
             $GLOBALS['cfg']['CharEditing'] = $defaultCharEditing;
@@ -900,7 +900,7 @@ class InsertEdit
 
             if (
                 preg_match('/(VIRTUAL|PERSISTENT|GENERATED)/', $column['Extra'])
-                && strpos($column['Extra'], 'DEFAULT_GENERATED') === false
+                && ! str_contains($column['Extra'], 'DEFAULT_GENERATED')
             ) {
                 $htmlOutput .= '<input type="hidden" name="virtual'
                     . $columnNameAppendix . '" value="1">';
@@ -1107,7 +1107,7 @@ class InsertEdit
             (substr($column['True_Type'], 0, 9) === 'timestamp'
             || $column['True_Type'] === 'datetime'
             || $column['True_Type'] === 'time')
-            && (mb_strpos($currentRow[$column['Field']], '.') !== false)
+            && (str_contains($currentRow[$column['Field']], '.'))
         ) {
             $currentRow[$column['Field']] = $asIs
                 ? $currentRow[$column['Field']]
@@ -1154,7 +1154,7 @@ class InsertEdit
         ) {
             if (
                 $column['Key'] === 'PRI'
-                && mb_strpos($column['Extra'], 'auto_increment') !== false
+                && str_contains($column['Extra'], 'auto_increment')
             ) {
                 $data = $specialCharsEncoded = $specialChars = null;
             }

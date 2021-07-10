@@ -33,9 +33,10 @@ use function pow;
 use function preg_match;
 use function preg_replace;
 use function sprintf;
+use function str_contains;
+use function str_starts_with;
 use function strcmp;
 use function strlen;
-use function strncmp;
 use function strpos;
 use function strtoupper;
 use function substr;
@@ -478,16 +479,13 @@ class Import
         // Do not use mb_ functions they are sensible to mb_internal_encoding()
 
         // UTF-8
-        if (strncmp($contents, "\xEF\xBB\xBF", 3) === 0) {
+        if (str_starts_with($contents, "\xEF\xBB\xBF")) {
             return substr($contents, 3);
 
             // UTF-16 BE, LE
         }
 
-        if (
-            strncmp($contents, "\xFE\xFF", 2) === 0
-            || strncmp($contents, "\xFF\xFE", 2) === 0
-        ) {
+        if (str_starts_with($contents, "\xFE\xFF") || str_starts_with($contents, "\xFF\xFE")) {
             return substr($contents, 2);
         }
 
@@ -920,7 +918,7 @@ class Import
 
         if (
             $cell == (string) (float) $cell
-            && mb_strpos((string) $cell, '.') !== false
+            && str_contains((string) $cell, '.')
             && mb_substr_count((string) $cell, '.') === 1
         ) {
             return self::DECIMAL;

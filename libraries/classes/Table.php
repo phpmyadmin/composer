@@ -17,6 +17,7 @@ use PhpMyAdmin\SqlParser\Statements\AlterStatement;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
 use PhpMyAdmin\SqlParser\Statements\DropStatement;
 use PhpMyAdmin\SqlParser\Utils\Table as TableUtils;
+use Stringable;
 
 use function __;
 use function array_key_exists;
@@ -37,10 +38,10 @@ use function preg_match;
 use function preg_replace;
 use function rtrim;
 use function sprintf;
+use function str_contains;
 use function str_replace;
 use function stripos;
 use function strlen;
-use function strpos;
 use function strtolower;
 use function strtoupper;
 use function substr;
@@ -55,7 +56,7 @@ use const E_USER_WARNING;
  *
  * @todo make use of Message and Error
  */
-class Table
+class Table implements Stringable
 {
     /**
      * UI preferences properties
@@ -112,10 +113,8 @@ class Table
      * returns table name
      *
      * @see Table::getName()
-     *
-     * @return string  table name
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -1876,9 +1875,9 @@ class Table
                 // If contains GENERATED or VIRTUAL and does not contain DEFAULT_GENERATED
                 if (
                     (
-                    strpos($column['Extra'], 'GENERATED') !== false
-                    || strpos($column['Extra'], 'VIRTUAL') !== false
-                    ) && strpos($column['Extra'], 'DEFAULT_GENERATED') === false
+                    str_contains($column['Extra'], 'GENERATED')
+                    || str_contains($column['Extra'], 'VIRTUAL')
+                    ) && ! str_contains($column['Extra'], 'DEFAULT_GENERATED')
                 ) {
                     continue;
                 }

@@ -62,6 +62,7 @@ use function mt_rand;
 use function pack;
 use function preg_match;
 use function preg_replace;
+use function str_contains;
 use function str_replace;
 use function strcasecmp;
 use function strip_tags;
@@ -1785,7 +1786,7 @@ class Results
             $sortTableNew = $sortTable;
             // Test to detect if the column name is a standard name
             // Standard name has the table name prefixed to the column name
-            if (mb_strpos($nameToUseInSort, '.') !== false) {
+            if (str_contains($nameToUseInSort, '.')) {
                 $matches = explode('.', $nameToUseInSort);
                 // Matches[0] has the table name
                 // Matches[1] has the column name
@@ -1803,7 +1804,7 @@ class Results
             // order by clause to the  column name
             $queryHead = $isFirstClause ? "\nORDER BY " : '';
             // Again a check to see if the given column is a aggregate column
-            if (mb_strpos($nameToUseInSort, '(') !== false) {
+            if (str_contains($nameToUseInSort, '(')) {
                 $sortOrder .=  $queryHead . $nameToUseInSort . ' ';
             } else {
                 if (strlen($sortTableNew) > 0) {
@@ -1821,7 +1822,7 @@ class Results
             $sortOrder = preg_replace('/\.\./', '.', $sortOrder);
             // Incase this is the current column save $single_sort_order
             if ($currentName == $nameToUseInSort) {
-                if (mb_strpos($currentName, '(') !== false) {
+                if (str_contains($currentName, '(')) {
                     $singleSortOrder = "\n" . 'ORDER BY ' . Util::backquote($currentName) . ' ';
                 } else {
                     $singleSortOrder = "\n" . 'ORDER BY ' . $sortTable
@@ -1898,7 +1899,7 @@ class Results
         $indexInExpression = 0;
 
         foreach ($sortExpressionNoDirection as $index => $clause) {
-            if (mb_strpos($clause, '.') !== false) {
+            if (str_contains($clause, '.')) {
                 $fragments = explode('.', $clause);
                 $clause2 = $fragments[0] . '.' . str_replace('`', '', $fragments[1]);
             } else {
@@ -3678,7 +3679,7 @@ class Results
         $isAnalyse = $this->properties['is_analyse'];
 
         $bIsText = is_object($transformationPlugin)
-            && strpos($transformationPlugin->getMIMEType(), 'Text') === false;
+            && ! str_contains($transformationPlugin->getMIMEType(), 'Text');
 
         // disable inline grid editing
         // if binary fields are protected
@@ -3712,7 +3713,7 @@ class Results
         $displayedColumn = $column;
         if (
             ! (is_object($transformationPlugin)
-            && strpos($transformationPlugin->getName(), 'Link') !== false)
+            && str_contains($transformationPlugin->getName(), 'Link'))
             && ! $meta->isBinary()
         ) {
             [
@@ -4260,7 +4261,7 @@ class Results
             return null;
         }
 
-        if (mb_strpos($sortExpressionNoDirection, '.') === false) {
+        if (! str_contains($sortExpressionNoDirection, '.')) {
             $sortTable = $this->properties['table'];
             $sortColumn = $sortExpressionNoDirection;
         } else {
@@ -5001,7 +5002,7 @@ class Results
                 }
 
                 $tagParams = ['title' => $title];
-                if (strpos($class, 'grid_edit') !== false) {
+                if (str_contains($class, 'grid_edit')) {
                     $tagParams['class'] = 'ajax';
                 }
 
