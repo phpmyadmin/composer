@@ -14,7 +14,7 @@ $(function () {
 
 var CommonParams = function () {
   /**
-   * @var hash params An associative array of key value pairs
+   * @var {Object} params An associative array of key value pairs
    * @access private
    */
   var params = {}; // The returned object is the public part of the module

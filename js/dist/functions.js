@@ -23,8 +23,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* global sprintf */
 // js/vendor/sprintf.js
 
-/* global zxcvbn */
-// js/vendor/zxcvbn.js
+/* global zxcvbnts */
+// js/vendor/zxcvbn-ts.js
 
 /**
  * general function, usually for data manipulation pages
@@ -551,7 +551,12 @@ Functions.checkPasswordStrength = function (value, meterObject, meterObjectLabel
     customDict.push(username);
   }
 
-  var zxcvbnObject = zxcvbn(value, customDict);
+  zxcvbnts.core.ZxcvbnOptions.setOptions({
+    dictionary: {
+      userInputs: customDict
+    }
+  });
+  var zxcvbnObject = zxcvbnts.core.zxcvbn(value);
   var strength = zxcvbnObject.score;
   strength = parseInt(strength);
   meterObject.val(strength);
