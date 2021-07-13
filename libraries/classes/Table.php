@@ -515,8 +515,8 @@ class Table implements Stringable
      */
     public static function generateFieldSpec(
         $name,
-        $type,
-        $length = '',
+        string $type,
+        string $length = '',
         $attribute = '',
         $collation = '',
         $null = false,
@@ -532,6 +532,7 @@ class Table implements Stringable
     ) {
         global $dbi;
 
+        $strLength = strlen($length);
         $isTimestamp = mb_stripos($type, 'TIMESTAMP') !== false;
 
         $query = Util::backquote($name) . ' ' . $type;
@@ -543,7 +544,11 @@ class Table implements Stringable
         // see https://dev.mysql.com/doc/refman/5.5/en/floating-point-types.html
         $pattern = '@^(DATE|TINYBLOB|TINYTEXT|BLOB|TEXT|'
             . 'MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|SERIAL|BOOLEAN|UUID|JSON)$@i';
-        if (strlen($length) !== 0 && ! preg_match($pattern, $type)) {
+        if (
+            $strLength !== 0
+            && ! preg_match($pattern, $type)
+            && Compatibility::isIntegersSupportLength($type, $length, $dbi)
+        ) {
             // Note: The variable $length here can contain several other things
             // besides length - ENUM/SET value or length of DECIMAL (eg. 12,3)
             // so we can't just convert it to integer
@@ -556,8 +561,7 @@ class Table implements Stringable
             if (
                 $isTimestamp
                 && stripos($attribute, 'TIMESTAMP') !== false
-                && strlen($length) !== 0
-                && $length !== 0
+                && $strLength !== 0
             ) {
                 $query .= '(' . $length . ')';
             }
@@ -644,8 +648,7 @@ class Table implements Stringable
                         $query .= ' DEFAULT ' . $defaultType;
 
                         if (
-                            strlen($length) !== 0
-                            && $length !== 0
+                            $strLength !== 0
                             && $isTimestamp
                             && $defaultType !== 'NULL' // Not to be added in case of NULL
                         ) {
