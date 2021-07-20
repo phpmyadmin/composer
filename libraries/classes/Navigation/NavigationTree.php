@@ -80,7 +80,7 @@ class NavigationTree
      * @var int Position in the list of databases,
      *          used for pagination
      */
-    private $pos = 0;
+    private $pos;
     /**
      * @var string[] The names of the type of items that are being paginated on
      *               the second level of the navigation tree. These may be
@@ -166,13 +166,14 @@ class NavigationTree
                     $this->aPath[$count] = $this->parsePath(
                         $_POST['n' . $count . '_aPath']
                     );
-                    $index = 'n' . $count . '_pos2_';
-                    $this->pos2Name[$count] = $_POST[$index . 'name'];
-                    $this->pos2Value[$count] = (int) $_POST[$index . 'value'];
-                    $index = 'n' . $count . '_pos3_';
-                    if (isset($_POST[$index])) {
-                        $this->pos3Name[$count] = $_POST[$index . 'name'];
-                        $this->pos3Value[$count] = (int) $_POST[$index . 'value'];
+                    if (isset($_POST['n' . $count . '_pos2_name'])) {
+                        $this->pos2Name[$count] = $_POST['n' . $count . '_pos2_name'];
+                        $this->pos2Value[$count] = (int) $_POST['n' . $count . '_pos2_value'];
+                    }
+
+                    if (isset($_POST['n' . $count . '_pos3_name'])) {
+                        $this->pos3Name[$count] = $_POST['n' . $count . '_pos3_name'];
+                        $this->pos3Value[$count] = (int) $_POST['n' . $count . '_pos3_value'];
                     }
 
                     $count++;
@@ -223,7 +224,7 @@ class NavigationTree
     {
         $retval = 0;
 
-        if (strlen($GLOBALS['db']) == 0) {
+        if (strlen($GLOBALS['db'] ?? '') === 0) {
             return $retval;
         }
 

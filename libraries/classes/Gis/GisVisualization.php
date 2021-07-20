@@ -213,8 +213,8 @@ class GisVisualization
             $spatialSrid = 'ST_SRID';
         }
 
-        // If MYSQL version >= 8.1 override default axis order
-        if ($this->userSpecifiedSettings['mysqlVersion'] >= 80010 && ! $isMariaDb) {
+        // If MYSQL version >= 8.0.1 override default axis order
+        if ($this->userSpecifiedSettings['mysqlVersion'] >= 80001 && ! $isMariaDb) {
             $axisOrder = ', \'axis-order=long-lat\'';
         }
 
@@ -315,13 +315,9 @@ class GisVisualization
 
         // Check if the user already added extension;
         // get the substring where the extension would be if it was included
-        $extension_start_pos = mb_strlen($file_name) - mb_strlen($ext) - 1;
-        $user_extension = mb_substr(
-            $file_name,
-            $extension_start_pos,
-            mb_strlen($file_name)
-        );
         $required_extension = '.' . $ext;
+        $extension_length = mb_strlen($required_extension);
+        $user_extension = mb_substr($file_name, -$extension_length);
         if (mb_strtolower($user_extension) != $required_extension) {
             $file_name .= $required_extension;
         }

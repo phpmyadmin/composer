@@ -101,13 +101,8 @@ abstract class AbstractTestCase extends TestCase
 
     protected function assertAllQueriesConsumed(): void
     {
-        if ($this->dummyDbi->hasUnUsedQueries() === false) {
-            $this->assertTrue(true);// increment the assertion count
-
-            return;
-        }
-
-        $this->fail('Some queries where no used !');
+        $unUsedQueries = $this->dummyDbi->getUnUsedQueries();
+        $this->assertSame([], $unUsedQueries, 'Some queries where not used !');
     }
 
     protected function loadContainerBuilder(): void
@@ -132,6 +127,16 @@ abstract class AbstractTestCase extends TestCase
         $response = new ResponseRenderer();
         $containerBuilder->set(ResponseRenderer::class, $response);
         $containerBuilder->setAlias('response', ResponseRenderer::class);
+    }
+
+    protected function setResponseIsAjax(): void
+    {
+        global $containerBuilder;
+
+        /** @var ResponseRenderer $response */
+        $response = $containerBuilder->get(ResponseRenderer::class);
+
+        $response->setAjax(true);
     }
 
     protected function getResponseHtmlResult(): string

@@ -91,7 +91,7 @@
         "php-webdriver/webdriver": "^1.11",
         "phpmyadmin/coding-standard": "^3.0.0",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "^0.12.92",
+        "phpstan/phpstan": "^0.12.93",
         "phpstan/phpstan-phpunit": "^0.12.17",
         "phpstan/phpstan-webmozart-assert": "^0.12.12",
         "phpunit/phpunit": "^8.5 || ^9.5",
@@ -100,7 +100,7 @@
         "roave/security-advisories": "dev-latest",
         "samyoul/u2f-php-server": "^1.1",
         "symfony/console": "^5.2.3",
-        "tecnickcom/tcpdf": "^6.4.1",
+        "tecnickcom/tcpdf": "^6.4.2",
         "vimeo/psalm": "^4.8.1"
     },
     "extra": {
