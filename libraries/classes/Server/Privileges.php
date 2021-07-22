@@ -862,7 +862,7 @@ class Privileges
             $host
         );
 
-        $isNew = ($serverType === 'MySQL' && $serverVersion >= 50507)
+        $isNew = (($serverType === 'MySQL' || $serverType === 'Percona Server') && $serverVersion >= 50507)
             || ($serverType === 'MariaDB' && $serverVersion >= 50200);
 
         $activeAuthPlugins = ['mysql_native_password' => __('Native MySQL authentication')];
@@ -2509,7 +2509,7 @@ class Privileges
                 if (! isset($row['password']) && isset($row['Password'])) {
                     $row['password'] = $row['Password'];
                 }
-                if (Util::getServerType() === 'MySQL'
+                if ((Util::getServerType() === 'MySQL' || Util::getServerType() === 'Percona Server')
                     && $serverVersion >= 50606
                     && $serverVersion < 50706
                     && ((isset($row['authentication_string'])
@@ -3871,7 +3871,7 @@ class Privileges
 
         // Use 'SET PASSWORD' for pre-5.7.6 MySQL versions
         // and pre-5.2.0 MariaDB
-        if (($serverType === 'MySQL'
+        if ((($serverType === 'MySQL' || $serverType === 'Percona Server')
             && $serverVersion >= 50706)
             || ($serverType === 'MariaDB'
             && $serverVersion >= 50200)
@@ -3961,9 +3961,11 @@ class Privileges
             $hostname
         );
 
-        $isNew = ($serverType === 'MySQL' && $serverVersion >= 50507)
+        $isMySqlOrPerconaDb = ($serverType === 'MySQL' || $serverType === 'Percona Server');
+
+        $isNew = ($isMySqlOrPerconaDb && $serverVersion >= 50507)
             || ($serverType === 'MariaDB' && $serverVersion >= 50200);
-        $hasMoreAuthPlugins = ($serverType === 'MySQL' && $serverVersion >= 50706)
+        $hasMoreAuthPlugins = ($isMySqlOrPerconaDb && $serverVersion >= 50706)
             || ($this->dbi->isSuperUser() && $editOthers);
 
         $activeAuthPlugins = ['mysql_native_password' => __('Native MySQL authentication')];
