@@ -2274,7 +2274,8 @@ Functions.documentationAdd = function ($elm, params) {
   var url = Functions.sprintf(decodeURIComponent(mysqlDocTemplate), params[0]);
 
   if (params.length > 1) {
-    url += '#' + params[1];
+    // The # needs to be escaped to be part of the destination URL
+    url += encodeURIComponent('#') + params[1];
   }
 
   var content = $elm.text();
