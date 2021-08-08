@@ -7,7 +7,7 @@ AJAX.registerTeardown('database/triggers.js', function () {
   $(document).off('click', 'a.ajax.drop_anchor');
   $(document).off('click', '#bulkActionDropButton');
 });
-var DatabaseTriggers = {
+const DatabaseTriggers = {
   /**
    * @var $ajaxDialog Query object containing the reference to the
    *                  dialog that contains the editor
@@ -30,7 +30,7 @@ var DatabaseTriggers = {
    *
    * @return {bool}
    */
-  validate: function validate() {
+  validate: function () {
     /**
      * @var $elm a jQuery object containing the reference
      *           to an element that is being validated
@@ -72,11 +72,11 @@ var DatabaseTriggers = {
    *
    * @return {bool}
    */
-  validateCustom: function validateCustom() {
+  validateCustom: function () {
     return true;
   },
   // end validateCustom()
-  exportDialog: function exportDialog($this) {
+  exportDialog: function ($this) {
     var $msg = Functions.ajaxShowMessage();
 
     if ($this.attr('id') === 'bulkActionExportButton') {
@@ -164,7 +164,7 @@ var DatabaseTriggers = {
 
   },
   // end exportDialog()
-  editorDialog: function editorDialog(isNew, $this) {
+  editorDialog: function (isNew, $this) {
     var that = this;
     /**
      * @var $edit_row jQuery object containing the reference to
@@ -328,7 +328,7 @@ var DatabaseTriggers = {
           // Respect the order: title on href tag, href content, title sent in response
           title: $this.attr('title') || $this.text() || $(data.title).text(),
           modal: true,
-          open: function open() {
+          open: function () {
             $('#rteDialog').dialog('option', 'max-height', $(window).height());
 
             if ($('#rteDialog').parents('.ui-dialog').height() > $(window).height()) {
@@ -344,7 +344,7 @@ var DatabaseTriggers = {
             });
             $.datepicker.initialized = false;
           },
-          close: function close() {
+          close: function () {
             $(this).remove();
           }
         });
@@ -374,7 +374,7 @@ var DatabaseTriggers = {
       }
     }); // end $.get()
   },
-  dropDialog: function dropDialog($this) {
+  dropDialog: function ($this) {
     /**
      * @var $curr_row Object containing reference to the current row
      */
@@ -447,7 +447,7 @@ var DatabaseTriggers = {
       }); // end $.post()
     });
   },
-  dropMultipleDialog: function dropMultipleDialog($this) {
+  dropMultipleDialog: function ($this) {
     // We ask for confirmation here
     $this.confirm(Messages.strDropRTEitems, '', function () {
       /**

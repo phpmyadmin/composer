@@ -14,7 +14,7 @@ AJAX.registerTeardown('database/routines.js', function () {
   $(document).off('click', 'input[name=routine_addparameter]');
   $(document).off('click', 'a.routine_param_remove_anchor');
 });
-var DatabaseRoutines = {
+const DatabaseRoutines = {
   /**
    * @var {string} paramTemplate Template for a row in the routine editor
    */
@@ -42,7 +42,7 @@ var DatabaseRoutines = {
    *
    * @return {bool}
    */
-  validate: function validate() {
+  validate: function () {
     /**
      * @var $elm a jQuery object containing the reference
      *           to an element that is being validated
@@ -75,7 +75,7 @@ var DatabaseRoutines = {
 
     return this.validateCustom();
   },
-  exportDialog: function exportDialog($this) {
+  exportDialog: function ($this) {
     var $msg = Functions.ajaxShowMessage();
 
     if ($this.attr('id') === 'bulkActionExportButton') {
@@ -168,7 +168,7 @@ var DatabaseRoutines = {
 
   },
   // end exportDialog()
-  editorDialog: function editorDialog(isNew, $this) {
+  editorDialog: function (isNew, $this) {
     var that = this;
     /**
      * @var $edit_row jQuery object containing the reference to
@@ -333,7 +333,7 @@ var DatabaseRoutines = {
           // Respect the order: title on href tag, href content, title sent in response
           title: $this.attr('title') || $this.text() || $(data.title).text(),
           modal: true,
-          open: function open() {
+          open: function () {
             $('#rteDialog').dialog('option', 'max-height', $(window).height());
 
             if ($('#rteDialog').parents('.ui-dialog').height() > $(window).height()) {
@@ -349,7 +349,7 @@ var DatabaseRoutines = {
             });
             $.datepicker.initialized = false;
           },
-          close: function close() {
+          close: function () {
             $(this).remove();
           }
         });
@@ -381,7 +381,7 @@ var DatabaseRoutines = {
       }
     }); // end $.get()
   },
-  dropDialog: function dropDialog($this) {
+  dropDialog: function ($this) {
     /**
      * @var $curr_row Object containing reference to the current row
      */
@@ -454,7 +454,7 @@ var DatabaseRoutines = {
       }); // end $.post()
     });
   },
-  dropMultipleDialog: function dropMultipleDialog($this) {
+  dropMultipleDialog: function ($this) {
     // We ask for confirmation here
     $this.confirm(Messages.strDropRTEitems, '', function () {
       /**
@@ -550,7 +550,7 @@ var DatabaseRoutines = {
    *
    * @param data JSON-encoded data from the ajax request
    */
-  postDialogShow: function postDialogShow(data) {
+  postDialogShow: function (data) {
     // Cache the template for a parameter table row
     DatabaseRoutines.paramTemplate = data.paramTemplate;
     var that = this; // Make adjustments in the dialog to make it AJAX compatible
@@ -570,7 +570,7 @@ var DatabaseRoutines = {
     $('.routine_params_table tbody').sortable({
       containment: '.routine_params_table tbody',
       handle: '.dragHandle',
-      stop: function stop() {
+      stop: function () {
         that.reindexParameters();
       }
     });
@@ -579,7 +579,7 @@ var DatabaseRoutines = {
   /**
    * Reindexes the parameters after dropping a parameter or reordering parameters
    */
-  reindexParameters: function reindexParameters() {
+  reindexParameters: function () {
     /**
      * @var index Counter used for reindexing the input
      *            fields in the routine parameters table
@@ -617,7 +617,7 @@ var DatabaseRoutines = {
    *
    * @return {bool}
    */
-  validateCustom: function validateCustom() {
+  validateCustom: function () {
     /**
      * @var isSuccess Stores the outcome of the validation
      */
@@ -713,7 +713,7 @@ var DatabaseRoutines = {
    *              to the dropdown box with options for
    *              parameters of numeric type
    */
-  setOptionsForParameter: function setOptionsForParameter($type, $len, $text, $num) {
+  setOptionsForParameter: function ($type, $len, $text, $num) {
     /**
      * @var no_opts a jQuery object containing the reference
      *              to an element to be displayed when no
@@ -791,7 +791,7 @@ var DatabaseRoutines = {
         break;
     }
   },
-  executeDialog: function executeDialog($this) {
+  executeDialog: function ($this) {
     var that = this;
     /**
      * @var msg jQuery object containing the reference to
@@ -840,7 +840,7 @@ var DatabaseRoutines = {
             buttons: that.buttonOptions,
             title: data.title,
             modal: true,
-            close: function close() {
+            close: function () {
               $(this).remove();
             }
           });
@@ -923,11 +923,11 @@ AJAX.registerOnload('database/routines.js', function () {
     $(this).closest('table').find('tr.routine_return_row, .routine_direction_cell').toggle();
   });
   $(document).on('change', 'select[name^=item_param_type]', function () {
-    var $row = $(this).parents('tr').first();
+    const $row = $(this).parents('tr').first();
     DatabaseRoutines.setOptionsForParameter($row.find('select[name^=item_param_type]'), $row.find('input[name^=item_param_length]'), $row.find('select[name^=item_param_opts_text]'), $row.find('select[name^=item_param_opts_num]'));
   });
   $(document).on('change', 'select[name=item_returntype]', function () {
-    var $table = $(this).closest('table.rte_table');
+    const $table = $(this).closest('table.rte_table');
     DatabaseRoutines.setOptionsForParameter($table.find('select[name=item_returntype]'), $table.find('input[name=item_returnlength]'), $table.find('select[name=item_returnopts_text]'), $table.find('select[name=item_returnopts_num]'));
   });
   $(document).on('click', 'input[name=routine_addparameter]', function (event) {
@@ -937,13 +937,13 @@ AJAX.registerOnload('database/routines.js', function () {
      *                           to the routine parameters table
      */
 
-    var $routineParamsTable = $(this).closest('div.ui-dialog').find('.routine_params_table');
+    const $routineParamsTable = $(this).closest('div.ui-dialog').find('.routine_params_table');
     /**
      * @var new_param_row A string containing the HTML code for the
      *                    new row for the routine parameters table
      */
 
-    var newParamRow = DatabaseRoutines.paramTemplate.replace(/%s/g, $routineParamsTable.find('tr').length - 1); // Append the new row to the parameters table
+    const newParamRow = DatabaseRoutines.paramTemplate.replace(/%s/g, $routineParamsTable.find('tr').length - 1); // Append the new row to the parameters table
 
     $routineParamsTable.append(newParamRow); // Make sure that the row is correctly shown according to the type of routine
 
@@ -957,7 +957,7 @@ AJAX.registerOnload('database/routines.js', function () {
      */
 
 
-    var $newrow = $(this).closest('div.ui-dialog').find('table.routine_params_table').find('tr').has('td').last(); // Enable/disable the 'options' dropdowns for parameters as necessary
+    const $newrow = $(this).closest('div.ui-dialog').find('table.routine_params_table').find('tr').has('td').last(); // Enable/disable the 'options' dropdowns for parameters as necessary
 
     DatabaseRoutines.setOptionsForParameter($newrow.find('select[name^=item_param_type]'), $newrow.find('input[name^=item_param_length]'), $newrow.find('select[name^=item_param_opts_text]'), $newrow.find('select[name^=item_param_opts_num]'));
   });

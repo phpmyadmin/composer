@@ -23,7 +23,7 @@ AJAX.registerTeardown('table/operations.js', function () {
  * @return {void}
  */
 
-var confirmAndPost = function confirmAndPost(linkObject, action) {
+var confirmAndPost = function (linkObject, action) {
   /**
    * @var {String} question String containing the question to be asked for confirmation
    */

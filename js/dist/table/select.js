@@ -245,7 +245,7 @@ AJAX.registerOnload('table/select.js', function () {
           'column': columnName,
           'range_search': 1
         },
-        success: function success(response) {
+        success: function (response) {
           Functions.ajaxRemoveMessage($msgbox);
 
           if (response.success) {
@@ -301,12 +301,12 @@ AJAX.registerOnload('table/select.js', function () {
               modal: true,
               buttons: buttonOptions,
               title: Messages.strRangeSearch,
-              open: function open() {
+              open: function () {
                 // Add datepicker wherever required.
                 Functions.addDatepicker($('#min_value'), dataType);
                 Functions.addDatepicker($('#max_value'), dataType);
               },
-              close: function close() {
+              close: function () {
                 $(this).remove();
               }
             });
@@ -314,7 +314,7 @@ AJAX.registerOnload('table/select.js', function () {
             Functions.ajaxShowMessage(response.error);
           }
         },
-        error: function error() {
+        error: function () {
           Functions.ajaxShowMessage(Messages.strErrorProcessingRequest);
         }
       });

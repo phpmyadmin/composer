@@ -1,7 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* global isStorageSupported */
 // js/config.js
 
@@ -117,7 +115,7 @@ $.ajaxPrefilter(function (options, originalOptions) {
 
   if (typeof options.data === 'string') {
     options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(CommonParams.get('token'));
-  } else if (_typeof(options.data) === 'object') {
+  } else if (typeof options.data === 'object') {
     options.data = $.extend(originalOptions.data, {
       '_nocache': nocache,
       'token': CommonParams.get('token')
@@ -167,7 +165,7 @@ Functions.addDatepicker = function ($thisElement, type, options) {
     constrainInput: false,
     altFieldTimeOnly: false,
     showAnim: '',
-    beforeShow: function beforeShow(input, inst) {
+    beforeShow: function (input, inst) {
       // Remember that we came from the datepicker; this is used
       // in table/change.js by verificationsAfterFieldChange()
       $thisElement.data('comes_from', 'datepicker');
@@ -196,10 +194,10 @@ Functions.addDatepicker = function ($thisElement, type, options) {
         }
       }, 0);
     },
-    onSelect: function onSelect() {
+    onSelect: function () {
       $thisElement.data('datepicker').inline = true;
     },
-    onClose: function onClose() {
+    onClose: function () {
       // The value is no more from the date picker
       $thisElement.data('comes_from', '');
 
@@ -359,7 +357,7 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
 
     $(codemirrorEditor.getWrapperElement()).css('resize', resizeType).resizable({
       handles: handles,
-      resize: function resize() {
+      resize: function () {
         codemirrorEditor.setSize($(this).width(), $(this).height());
       }
     }); // enable autocomplete
@@ -1016,7 +1014,7 @@ AJAX.registerOnload('functions.js', function () {
       type: 'POST',
       url: href,
       data: params,
-      success: function success(data) {
+      success: function (data) {
         if (data.success) {
           if (CommonParams.get('LoginCookieValidity') - idleSecondsCounter < 0) {
             /* There is other active window, let's reset counter */
@@ -1245,7 +1243,7 @@ Functions.insertQuery = function (queryType) {
         type: 'POST',
         url: 'index.php?route=/database/sql/format',
         data: params,
-        success: function success(data) {
+        success: function (data) {
           if (data.success) {
             codeMirrorEditor.setValue(data.sql);
           }
@@ -1608,7 +1606,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
         'no_debug': true
       };
 
-      var columnHintRender = function columnHintRender(elem, self, data) {
+      var columnHintRender = function (elem, self, data) {
         $('<div class="autocomplete-column-name">').text(data.columnName).appendTo(elem);
         $('<div class="autocomplete-column-hint">').text(data.columnHint).appendTo(elem);
       };
@@ -1617,7 +1615,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
         type: 'POST',
         url: 'index.php?route=/database/sql/autocomplete',
         data: params,
-        success: function success(data) {
+        success: function (data) {
           if (data.success) {
             var tables = JSON.parse(data.tables);
             sqlAutoCompleteDefaultTable = CommonParams.get('table');
@@ -1659,7 +1657,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
             instance.options.hintOptions.defaultTable = sqlAutoCompleteDefaultTable;
           }
         },
-        complete: function complete() {
+        complete: function () {
           sqlAutoCompleteInProgress = false;
         }
       });
@@ -2056,7 +2054,7 @@ Functions.previewSql = function ($form) {
     type: 'POST',
     url: formUrl,
     data: formData,
-    success: function success(response) {
+    success: function (response) {
       Functions.ajaxRemoveMessage($messageBox);
 
       if (response.success) {
@@ -2073,10 +2071,10 @@ Functions.previewSql = function ($form) {
           modal: true,
           buttons: buttonOptions,
           title: Messages.strPreviewSQL,
-          close: function close() {
+          close: function () {
             $(this).remove();
           },
-          open: function open() {
+          open: function () {
             // Pretty SQL printing.
             Functions.highlightSql($(this));
           }
@@ -2085,7 +2083,7 @@ Functions.previewSql = function ($form) {
         Functions.ajaxShowMessage(response.message);
       }
     },
-    error: function error() {
+    error: function () {
       Functions.ajaxShowMessage(Messages.strErrorProcessingRequest);
     }
   });
@@ -2112,13 +2110,13 @@ Functions.confirmPreviewSql = function (sqlData, url, callback) {
   var buttonOptions = [{
     text: Messages.strOK,
     class: 'submitOK',
-    click: function click() {
+    click: function () {
       callback(url);
     }
   }, {
     text: Messages.strCancel,
     class: 'submitCancel',
-    click: function click() {
+    click: function () {
       $(this).dialog('close');
     }
   }];
@@ -2128,10 +2126,10 @@ Functions.confirmPreviewSql = function (sqlData, url, callback) {
     modal: true,
     buttons: buttonOptions,
     title: Messages.strPreviewSQL,
-    close: function close() {
+    close: function () {
       $(this).remove();
     },
-    open: function open() {
+    open: function () {
       // Pretty SQL printing.
       Functions.highlightSql($(this));
     }
@@ -2152,7 +2150,7 @@ Functions.checkReservedWordColumns = function ($form) {
     type: 'POST',
     url: 'index.php?route=/table/structure/reserved-word-check',
     data: $form.serialize(),
-    success: function success(data) {
+    success: function (data) {
       if (typeof data.success !== 'undefined' && data.success === true) {
         isConfirmed = confirm(data.message);
       }
@@ -2269,9 +2267,7 @@ Functions.showWarningForIntTypes = function () {
     var lengthRestrictions = $('select.column_type option').map(function () {
       return $(this).filter(':selected').attr('data-length-restricted');
     }).get();
-    var restricationFound = lengthRestrictions.some(function (restriction) {
-      return Number(restriction) === 1;
-    });
+    var restricationFound = lengthRestrictions.some(restriction => Number(restriction) === 1);
 
     if (restricationFound) {
       $('div#length_not_allowed').show();
@@ -2382,7 +2378,7 @@ Functions.sqlPrettyPrint = function (string) {
   var tokens = [];
   var output = '';
 
-  var tabs = function tabs(cnt) {
+  var tabs = function (cnt) {
     var ret = '';
 
     for (var i = 0; i < 4 * cnt; i++) {
@@ -2552,7 +2548,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
   var buttonOptions = [{
     text: Messages.strOK,
     'class': 'submitOK',
-    click: function click() {
+    click: function () {
       $(this).dialog('close');
 
       if (typeof callbackFn === 'function') {
@@ -2562,7 +2558,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
   }, {
     text: Messages.strCancel,
     'class': 'submitCancel',
-    click: function click() {
+    click: function () {
       $(this).dialog('close');
     }
   }];
@@ -2571,7 +2567,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
     'title': Messages.strConfirm
   }).prepend(question).dialog({
     buttons: buttonOptions,
-    close: function close() {
+    close: function () {
       $(this).remove();
     },
     open: openCallback,
@@ -2991,7 +2987,7 @@ AJAX.registerOnload('functions.js', function () {
       $('<div id="change_password_dialog"></div>').dialog({
         title: Messages.strChangePassword,
         width: 600,
-        close: function close() {
+        close: function () {
           $(this).remove();
         },
         buttons: buttonOptions,
@@ -3269,11 +3265,11 @@ AJAX.registerOnload('functions.js', function () {
       modal: true,
       title: Messages.enum_editor,
       buttons: buttonOptions,
-      open: function open() {
+      open: function () {
         // Focus the "Go" button after opening the dialog
         $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
       },
-      close: function close() {
+      close: function () {
         $(this).remove();
       }
     }); // slider for choosing how many fields to add
@@ -3284,7 +3280,7 @@ AJAX.registerOnload('functions.js', function () {
       value: 1,
       min: 1,
       max: 9,
-      slide: function slide(event, ui) {
+      slide: function (event, ui) {
         $(this).closest('table').find('input[type=submit]').val(Functions.sprintf(Messages.enum_addValue, ui.value));
       }
     }); // Focus the slider, otherwise it looks nearly transparent
@@ -3319,7 +3315,7 @@ AJAX.registerOnload('functions.js', function () {
         type: 'POST',
         url: href,
         data: params,
-        success: function success(data) {
+        success: function (data) {
           centralColumnList[db + '_' + table] = data.message;
         },
         async: false
@@ -3378,7 +3374,7 @@ AJAX.registerOnload('functions.js', function () {
       modal: true,
       title: Messages.pickColumnTitle,
       buttons: buttonOptions,
-      open: function open() {
+      open: function () {
         $('#col_list').on('click', '.pick', function () {
           $centralColumnsDialog.remove();
         });
@@ -3420,7 +3416,7 @@ AJAX.registerOnload('functions.js', function () {
         });
         $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
       },
-      close: function close() {
+      close: function () {
         $('#col_list').off('click', '.pick');
         $('.filter_rows').off('keyup');
         $(this).remove();
@@ -3491,11 +3487,11 @@ AJAX.registerOnload('functions.js', function () {
     if (hadAddButtonHidden === false) {
       var rowsToAdd = $(this).closest('fieldset').find('.slider').slider('value');
 
-      var tempEmptyVal = function tempEmptyVal() {
+      var tempEmptyVal = function () {
         $(this).val('');
       };
 
-      var tempSetFocus = function tempSetFocus() {
+      var tempSetFocus = function () {
         if ($(this).find('option:selected').val() === '') {
           return true;
         }
@@ -3609,7 +3605,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         open: Functions.verifyColumnsProperties,
         modal: true,
         buttons: buttonOptions,
-        close: function close() {
+        close: function () {
           $(this).remove();
         }
       });
@@ -3646,7 +3642,7 @@ Functions.showIndexEditDialog = function ($outer) {
     value: 1,
     min: 1,
     max: 16,
-    slide: function slide(event, ui) {
+    slide: function (event, ui) {
       $(this).closest('fieldset').find('input[type=submit]').val(Functions.sprintf(Messages.strAddToIndex, ui.value));
     }
   });
@@ -3926,7 +3922,7 @@ AJAX.registerOnload('functions.js', function () {
         'server': CommonParams.get('server'),
         'no_debug': true
       },
-      success: function success(data) {
+      success: function (data) {
         // Update localStorage.
         if (isStorageSupported('localStorage')) {
           window.localStorage.favoriteTables = data.favoriteTables;
@@ -4242,7 +4238,7 @@ Functions.createViewDialog = function ($this) {
         modal: true,
         buttons: buttonOptions,
         title: Messages.strCreateView,
-        close: function close() {
+        close: function () {
           $(this).remove();
         }
       }); // Attach syntax highlighted editor
@@ -4578,7 +4574,7 @@ Functions.toggleDatepickerIfInvalid = function ($td, $inputField) {
 // eslint-disable-next-line no-unused-vars, camelcase
 
 
-var Functions_recaptchaCallback = function Functions_recaptchaCallback() {
+var Functions_recaptchaCallback = function () {
   $('#login_form').trigger('submit');
 };
 /**
@@ -4662,7 +4658,7 @@ Functions.getImage = function (image, alternate, attributes) {
       title: '',
       src: 'themes/dot.gif'
     },
-    attr: function attr(name, value) {
+    attr: function (name, value) {
       if (value === undefined) {
         if (this.data[name] === undefined) {
           return '';
@@ -4673,7 +4669,7 @@ Functions.getImage = function (image, alternate, attributes) {
         this.data[name] = value;
       }
     },
-    toString: function toString() {
+    toString: function () {
       var retval = '<' + 'img';
 
       for (var i in this.data) {
@@ -4748,7 +4744,7 @@ Functions.configSet = function (key, value) {
       server: CommonParams.get('server'),
       value: serialized
     },
-    success: function success(data) {
+    success: function (data) {
       // Updating value in local storage.
       if (!data.success) {
         if (data.error) {
@@ -4796,7 +4792,7 @@ Functions.configGet = function (key, cached, successCallback) {
       server: CommonParams.get('server'),
       key: key
     },
-    success: function success(data) {
+    success: function (data) {
       // Updating value in local storage.
       if (data.success) {
         localStorage.setItem(key, JSON.stringify(data.value));

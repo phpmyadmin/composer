@@ -688,14 +688,14 @@ Export.toggleQuickOrCustom = function () {
   if ($('input[name=\'quick_or_custom\']').length === 0 // custom_no_form option
   || $('#radio_custom_export').prop('checked') // custom
   ) {
-      $('#databases_and_tables').show();
-      $('#rows').show();
-      $('#output').show();
-      $('#format_specific_opts').show();
-      $('#output_quick_export').hide();
-      var selectedPluginName = $('#plugins').find('option:selected').val();
-      $('#' + selectedPluginName + '_options').show();
-    } else {
+    $('#databases_and_tables').show();
+    $('#rows').show();
+    $('#output').show();
+    $('#format_specific_opts').show();
+    $('#output_quick_export').hide();
+    var selectedPluginName = $('#plugins').find('option:selected').val();
+    $('#' + selectedPluginName + '_options').show();
+  } else {
     // quick
     $('#databases_and_tables').hide();
     $('#rows').hide();
@@ -938,7 +938,7 @@ AJAX.registerOnload('export.js', function () {
     $('#column_alias_name').val('');
   });
 
-  var setSelectOptions = function setSelectOptions(doCheck) {
+  var setSelectOptions = function (doCheck) {
     Functions.setSelectOptions('dump', 'db_select[]', doCheck);
   };
 

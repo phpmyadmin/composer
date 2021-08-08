@@ -389,12 +389,12 @@ AJAX.registerOnload('table/structure.js', function () {
     $('#move_columns_dialog').dialog({
       modal: true,
       buttons: buttonOptions,
-      open: function open() {
+      open: function () {
         if ($('#move_columns_dialog').parents('.ui-dialog').height() > $(window).height()) {
           $('#move_columns_dialog').dialog('option', 'height', $(window).height());
         }
       },
-      beforeClose: function beforeClose() {
+      beforeClose: function () {
         $('#move_columns_anchor').removeClass('move-active');
       }
     });

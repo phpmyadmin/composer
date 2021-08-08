@@ -230,7 +230,7 @@ AJAX.registerOnload('table/gis_visualization.js', function () {
   var dragX = 0;
   var dragY = 0;
   $('svg').draggable({
-    helper: function helper() {
+    helper: function () {
       return $('<div>'); // Give a fake element to be used for dragging display
     }
   });

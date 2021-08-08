@@ -32,7 +32,7 @@ var AJAX = {
    * @var {Function} callback Callback to execute after a successful request
    *                          Used by CommonActions from common.js
    */
-  callback: function callback() {},
+  callback: function () {},
 
   /**
    * @var {boolean} debug Makes noise in your Firebug console
@@ -53,7 +53,7 @@ var AJAX = {
    *
    * @return {number}
    */
-  hash: function hash(key) {
+  hash: function (key) {
     var newKey = key;
     /* https://burtleburtle.net/bob/hash/doobs.html#one */
 
@@ -82,7 +82,7 @@ var AJAX = {
    *
    * @return {self} For chaining
    */
-  registerOnload: function registerOnload(file, func) {
+  registerOnload: function (file, func) {
     var eventName = 'onload_' + AJAX.hash(file);
     $(document).on(eventName, func);
 
@@ -105,7 +105,7 @@ var AJAX = {
    *
    * @return {self} For chaining
    */
-  registerTeardown: function registerTeardown(file, func) {
+  registerTeardown: function (file, func) {
     var eventName = 'teardown_' + AJAX.hash(file);
     $(document).on(eventName, func);
 
@@ -126,7 +126,7 @@ var AJAX = {
    *
    * @return {void}
    */
-  fireOnload: function fireOnload(file) {
+  fireOnload: function (file) {
     var eventName = 'onload_' + AJAX.hash(file);
     $(document).trigger(eventName);
 
@@ -145,7 +145,7 @@ var AJAX = {
    *
    * @return {void}
    */
-  fireTeardown: function fireTeardown(file) {
+  fireTeardown: function (file) {
     var eventName = 'teardown_' + AJAX.hash(file);
     $(document).triggerHandler(eventName);
 
@@ -163,7 +163,7 @@ var AJAX = {
    *
    * @return {void}
    */
-  lockPageHandler: function lockPageHandler(event) {
+  lockPageHandler: function (event) {
     // don't consider checkbox event
     if (typeof event.target !== 'undefined') {
       if (event.target.type === 'checkbox') {
@@ -227,12 +227,12 @@ var AJAX = {
    *
    * @return {void}
    */
-  resetLock: function resetLock() {
+  resetLock: function () {
     AJAX.lockedTargets = {};
     $('#lock_page_icon').html('');
   },
   handleMenu: {
-    replace: function replace(content) {
+    replace: function (content) {
       $('#floating_menubar').html(content) // Remove duplicate wrapper
       // TODO: don't send it in the response
       .children().first().remove();
@@ -247,7 +247,7 @@ var AJAX = {
    *
    * @return {boolean | void}
    */
-  requestHandler: function requestHandler(event) {
+  requestHandler: function (event) {
     // In some cases we don't want to handle the request here and either
     // leave the browser deal with it natively (e.g: file download)
     // or leave an existing ajax event handler present elsewhere deal with it
@@ -379,7 +379,7 @@ var AJAX = {
    *
    * @return {void}
    */
-  loginResponseHandler: function loginResponseHandler(data) {
+  loginResponseHandler: function (data) {
     if (typeof data === 'undefined' || data === null) {
       return;
     }
@@ -493,7 +493,7 @@ var AJAX = {
    *
    * @return {void}
    */
-  responseHandler: function responseHandler(data) {
+  responseHandler: function (data) {
     if (typeof data === 'undefined' || data === null) {
       return;
     }
@@ -691,7 +691,7 @@ var AJAX = {
      *
      * @return {self} For chaining
      */
-    add: function add(file, fire) {
+    add: function (file, fire) {
       this.scripts.push(file);
 
       if (fire) {
@@ -711,7 +711,7 @@ var AJAX = {
      *
      * @return {void}
      */
-    load: function load(files, callback) {
+    load: function (files, callback) {
       var self = this;
       var i; // Clear loaded scripts if they are from another version of phpMyAdmin.
       // Depends on common params being set before loading scripts in responseHandler
@@ -760,7 +760,7 @@ var AJAX = {
      *
      * @return {void}
      */
-    done: function done(script, callback) {
+    done: function (script, callback) {
       if ($.inArray(script, this.scriptsToBeFired)) {
         AJAX.fireOnload(script);
       }
@@ -791,7 +791,7 @@ var AJAX = {
      *
      * @return {void}
      */
-    appendScript: function appendScript(name, callback) {
+    appendScript: function (name, callback) {
       var head = document.head || document.getElementsByTagName('head')[0];
       var script = document.createElement('script');
       var self = this;
@@ -815,7 +815,7 @@ var AJAX = {
      *
      * @return {void}
      */
-    reset: function reset(callback) {
+    reset: function (callback) {
       for (var i in this.scriptsToBeFired) {
         AJAX.fireTeardown(this.scriptsToBeFired[i]);
       }

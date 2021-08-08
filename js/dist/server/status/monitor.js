@@ -599,7 +599,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     var numColumns;
     var $tr = $('#chartGrid').find('tr').first();
 
-    var tempManageCols = function tempManageCols() {
+    var tempManageCols = function () {
       if (numColumns > monitorSettings.columns) {
         if ($tr.next().length === 0) {
           $tr.after('<tr></tr>');
@@ -611,7 +611,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       numColumns++;
     };
 
-    var tempAddCol = function tempAddCol() {
+    var tempAddCol = function () {
       if ($(this).next().length !== 0) {
         $(this).append($(this).next().find('td').first());
       }
@@ -871,7 +871,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       buttons: dlgBtns
     }).find('img.ajaxIcon').show();
 
-    var loadLogVars = function loadLogVars(getvars) {
+    var loadLogVars = function (getvars) {
       var vars = {
         'ajax_request': true,
         'server': CommonParams.get('server')
@@ -1298,7 +1298,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       };
     } else if (settings.title === Messages.strQuestions || settings.title === Messages.strConnections) {
       settings.axes.yaxis.tickOptions = {
-        formatter: function formatter(format, val) {
+        formatter: function (format, val) {
           if (Math.abs(val) >= 1000000) {
             return $.jqplot.sprintf('%.3g M', val / 1000000);
           } else if (Math.abs(val) >= 1000) {
@@ -1334,7 +1334,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       series.push([[0, 0]]);
     }
 
-    var tempTooltipContentEditor = function tempTooltipContentEditor(str, seriesIndex, pointIndex, plot) {
+    var tempTooltipContentEditor = function (str, seriesIndex, pointIndex, plot) {
       var j; // TODO: move style to theme CSS
 
       var tooltipHtml = '<div id="tooltip_editor">'; // x value i.e. time
@@ -1570,8 +1570,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
 
           if (elem.nodes[j].transformFn) {
-            value = chartValueTransform(elem.nodes[j].transformFn, chartData[key][j], // Check if first iteration (oldChartData==null), or if newly added chart oldChartData[key]==null
-            oldChartData === null || oldChartData[key] === null || oldChartData[key] === undefined ? null : oldChartData[key][j]); // Otherwise use original value and apply differential and divisor if given,
+            value = chartValueTransform(elem.nodes[j].transformFn, chartData[key][j], oldChartData === null || oldChartData[key] === null || oldChartData[key] === undefined ? null : oldChartData[key][j]); // Otherwise use original value and apply differential and divisor if given,
             // in this case we have only one data point per series - located at chartData[key][j][0]
           } else {
             value = parseFloat(chartData[key][j][0].value);
@@ -1868,7 +1867,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       var isSlowLog = opts.src === 'slow';
       var columnSums = {}; // For the slow log we have to count many columns (query_time, lock_time, rows_examined, rows_sent, etc.)
 
-      var countRow = function countRow(query, row) {
+      var countRow = function (query, row) {
         var cells = row.match(/<td>(.*?)<\/td>/gi);
 
         if (!columnSums[query]) {
@@ -2021,11 +2020,11 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     var $tCell;
     $('#logTable').html($table);
 
-    var tempPushKey = function tempPushKey(key) {
+    var tempPushKey = function (key) {
       cols.push(key);
     };
 
-    var formatValue = function formatValue(name, value) {
+    var formatValue = function (name, value) {
       if (name === 'user_host') {
         return value.replace(/(\[.*?\])+/g, '');
       }
@@ -2113,7 +2112,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       height: 'auto',
       resizable: false,
       buttons: dlgBtns,
-      close: function close() {
+      close: function () {
         if (profilingChart !== null) {
           profilingChart.destroy();
         }
@@ -2179,7 +2178,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
       explain += '<p></p>';
 
-      var tempExplain = function tempExplain(key, value) {
+      var tempExplain = function (key, value) {
         var newValue = value === null ? 'null' : Functions.escapeHtml(value);
 
         if (key === 'type' && newValue.toLowerCase() === 'all') {

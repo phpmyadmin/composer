@@ -8,7 +8,7 @@ AJAX.registerTeardown('database/events.js', function () {
   $(document).off('click', '#bulkActionDropButton');
   $(document).off('change', 'select[name=item_type]');
 });
-var DatabaseEvents = {
+const DatabaseEvents = {
   /**
    * @var $ajaxDialog Query object containing the reference to the
    *                  dialog that contains the editor
@@ -31,7 +31,7 @@ var DatabaseEvents = {
    *
    * @return {bool}
    */
-  validate: function validate() {
+  validate: function () {
     /**
      * @var $elm a jQuery object containing the reference
      *           to an element that is being validated
@@ -64,7 +64,7 @@ var DatabaseEvents = {
 
     return this.validateCustom();
   },
-  exportDialog: function exportDialog($this) {
+  exportDialog: function ($this) {
     var $msg = Functions.ajaxShowMessage();
 
     if ($this.attr('id') === 'bulkActionExportButton') {
@@ -152,7 +152,7 @@ var DatabaseEvents = {
 
   },
   // end exportDialog()
-  editorDialog: function editorDialog(isNew, $this) {
+  editorDialog: function (isNew, $this) {
     var that = this;
     /**
      * @var $edit_row jQuery object containing the reference to
@@ -316,7 +316,7 @@ var DatabaseEvents = {
           // Respect the order: title on href tag, href content, title sent in response
           title: $this.attr('title') || $this.text() || $(data.title).text(),
           modal: true,
-          open: function open() {
+          open: function () {
             $('#rteDialog').dialog('option', 'max-height', $(window).height());
 
             if ($('#rteDialog').parents('.ui-dialog').height() > $(window).height()) {
@@ -332,7 +332,7 @@ var DatabaseEvents = {
             });
             $.datepicker.initialized = false;
           },
-          close: function close() {
+          close: function () {
             $(this).remove();
           }
         });
@@ -362,7 +362,7 @@ var DatabaseEvents = {
       }
     }); // end $.get()
   },
-  dropDialog: function dropDialog($this) {
+  dropDialog: function ($this) {
     /**
      * @var $curr_row Object containing reference to the current row
      */
@@ -435,7 +435,7 @@ var DatabaseEvents = {
       }); // end $.post()
     });
   },
-  dropMultipleDialog: function dropMultipleDialog($this) {
+  dropMultipleDialog: function ($this) {
     // We ask for confirmation here
     $this.confirm(Messages.strDropRTEitems, '', function () {
       /**
@@ -531,7 +531,7 @@ var DatabaseEvents = {
    *
    * @return {bool}
    */
-  validateCustom: function validateCustom() {
+  validateCustom: function () {
     /**
      * @var elm a jQuery object containing the reference
      *          to an element that is being validated

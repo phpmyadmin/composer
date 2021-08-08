@@ -458,7 +458,7 @@ $(function () {
       type: 'POST',
       data: params,
       url: $(this).attr('href'),
-      success: function success(data) {
+      success: function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           Navigation.reload();
         } else {
@@ -490,7 +490,7 @@ $(function () {
           modal: true,
           buttons: buttonOptions,
           title: Messages.strUnhideNavItem,
-          close: function close() {
+          close: function () {
             $(this).remove();
           }
         });
@@ -514,7 +514,7 @@ $(function () {
       type: 'POST',
       data: params,
       url: $(this).attr('href'),
-      success: function success(data) {
+      success: function (data) {
         Functions.ajaxRemoveMessage($msg);
 
         if (typeof data !== 'undefined' && data.success === true) {
@@ -555,7 +555,7 @@ $(function () {
         'favoriteTables': hasLocalStorage ? window.localStorage.favoriteTables : '',
         'server': CommonParams.get('server')
       },
-      success: function success(data) {
+      success: function (data) {
         if (data.changes) {
           $('#pma_favorite_list').html(data.list);
           $('#' + anchorId).parent().html(data.anchor);
@@ -1283,9 +1283,7 @@ Navigation.ResizeHandler = function () {
 
 
   this.treeInit = function () {
-    var _this = this;
-
-    var isLoadedOnMobile = $(window).width() < 768; // Hide the pma_navigation initially when loaded on mobile
+    const isLoadedOnMobile = $(window).width() < 768; // Hide the pma_navigation initially when loaded on mobile
 
     if (isLoadedOnMobile) {
       this.setWidth(0);
@@ -1307,16 +1305,15 @@ Navigation.ResizeHandler = function () {
     setInterval(this.treeResize, 2000);
     this.treeResize();
 
-    var callbackSuccessGetConfigValue = function callbackSuccessGetConfigValue(data) {
-      _this.setWidth(data);
-
+    const callbackSuccessGetConfigValue = data => {
+      this.setWidth(data);
       $('#topmenu').menuResizer('resize');
     }; // Skip mobile
 
 
     if (isLoadedOnMobile === false) {
       // Make an init using the default found value
-      var initialResizeValue = $('#pma_navigation').data('config-navigation-width');
+      const initialResizeValue = $('#pma_navigation').data('config-navigation-width');
       callbackSuccessGetConfigValue(initialResizeValue);
     }
 
@@ -1341,7 +1338,7 @@ Navigation.FastFilter = {
    *
    * @return {void}
    */
-  Filter: function Filter($this, searchClause) {
+  Filter: function ($this, searchClause) {
     /**
      * @var {object} $this A jQuery object pointing to the list container
      *                     which is the nearest parent of the fast filter
@@ -1382,7 +1379,7 @@ Navigation.FastFilter = {
    *
    * @return {string}
    */
-  getSearchClause: function getSearchClause() {
+  getSearchClause: function () {
     var retval = '';
     var $input = $('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
 
@@ -1401,7 +1398,7 @@ Navigation.FastFilter = {
    *
    * @return {string}
    */
-  getSearchClause2: function getSearchClause2($this) {
+  getSearchClause2: function ($this) {
     var $filterContainer = $this.closest('div.list_container');
     var $filterInput = $([]);
 
@@ -1423,7 +1420,7 @@ Navigation.FastFilter = {
    *                  at the top of this file
    */
   events: {
-    focus: function focus() {
+    focus: function () {
       var $obj = $(this).closest('div.list_container');
 
       if (!$obj.data('fastFilter')) {
@@ -1436,7 +1433,7 @@ Navigation.FastFilter = {
         $(this).trigger('select');
       }
     },
-    blur: function blur() {
+    blur: function () {
       if ($(this).val() === '') {
         $(this).val(this.defaultValue);
       }
@@ -1447,7 +1444,7 @@ Navigation.FastFilter = {
         $obj.data('fastFilter').restore();
       }
     },
-    keyup: function keyup(event) {
+    keyup: function (event) {
       var $obj = $(this).closest('div.list_container');
       var str = '';
 
@@ -1482,7 +1479,7 @@ Navigation.FastFilter = {
       // not filter tables)
 
 
-      var itemFilter = function itemFilter($curr) {
+      var itemFilter = function ($curr) {
         $curr.children('ul').children('li.navGroup').each(function () {
           $(this).children('div.list_container').each(function () {
             itemFilter($(this)); // recursive
@@ -1499,7 +1496,7 @@ Navigation.FastFilter = {
 
       itemFilter(outerContainer); // hides containers that does not have any visible children
 
-      var containerFilter = function containerFilter($curr) {
+      var containerFilter = function ($curr) {
         $curr.children('ul').children('li.navGroup').each(function () {
           var $group = $(this);
           $group.children('div.list_container').each(function () {
@@ -1538,7 +1535,7 @@ Navigation.FastFilter = {
 
       Navigation.filterStateUpdate(filterName, $(this).val());
     },
-    clear: function clear(event) {
+    clear: function (event) {
       event.stopPropagation(); // Clear the input and apply the fast filter with empty input
 
       var filter = $(this).closest('div.list_container').data('fastFilter');
@@ -1603,7 +1600,7 @@ Navigation.FastFilter.Filter.prototype.request = function () {
     type: 'post',
     dataType: 'json',
     data: params,
-    complete: function complete(jqXHR, status) {
+    complete: function (jqXHR, status) {
       if (status !== 'abort') {
         var data = JSON.parse(jqXHR.responseText);
         self.$this.find('li.fast_filter').find('div.throbber').remove();

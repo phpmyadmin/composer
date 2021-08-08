@@ -161,7 +161,7 @@
 
 
   var methods = {
-    init: function init(widthCalculator) {
+    init: function (widthCalculator) {
       return this.each(function () {
         var $this = $(this);
 
@@ -170,7 +170,7 @@
         }
       });
     },
-    resize: function resize() {
+    resize: function () {
       return this.each(function () {
         var self = $(this).data('menuResizer');
 
@@ -179,7 +179,7 @@
         }
       });
     },
-    destroy: function destroy() {
+    destroy: function () {
       return this.each(function () {
         var self = $(this).data('menuResizer');
 

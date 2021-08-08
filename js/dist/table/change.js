@@ -193,7 +193,7 @@ function verifyAfterSearchFieldChange(index, searchFormId) {
     if (hasMultiple) {
       $(searchFormId).validate({
         // update errors as we write
-        onkeyup: function onkeyup(element) {
+        onkeyup: function (element) {
           $(element).valid();
         }
       }); // validator method for IN(...), NOT IN(...)
@@ -206,7 +206,7 @@ function verifyAfterSearchFieldChange(index, searchFormId) {
     } else {
       $(searchFormId).validate({
         // update errors as we write
-        onkeyup: function onkeyup(element) {
+        onkeyup: function (element) {
           $(element).valid();
         }
       });
@@ -231,7 +231,7 @@ function validateMultipleIntField(jqueryInput, returnValueIfFine) {
   jqueryInput.rules('add', {
     validationFunctionForMultipleInt: {
       param: jqueryInput.value,
-      depends: function depends() {
+      depends: function () {
         return returnValueIfFine;
       }
     }
@@ -253,13 +253,13 @@ function validateIntField(jqueryInput, returnValueIfIsNumber) {
   jqueryInput.rules('add', {
     number: {
       param: true,
-      depends: function depends() {
+      depends: function () {
         return returnValueIfIsNumber;
       }
     },
     min: {
       param: mini,
-      depends: function depends() {
+      depends: function () {
         if (isNaN(jqueryInput.val())) {
           return false;
         } else {
@@ -269,7 +269,7 @@ function validateIntField(jqueryInput, returnValueIfIsNumber) {
     },
     max: {
       param: maxi,
-      depends: function depends() {
+      depends: function () {
         if (isNaN(jqueryInput.val())) {
           return false;
         } else {
@@ -313,7 +313,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     $('#' + target.id).rules('add', {
       validationFunctionForMd5: {
         param: $thisInput,
-        depends: function depends() {
+        depends: function () {
           return checkForCheckbox(multiEdit);
         }
       }
@@ -324,7 +324,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     $('#' + target.id).rules('add', {
       validationFunctionForAesDesEncrypt: {
         param: $thisInput,
-        depends: function depends() {
+        depends: function () {
           return checkForCheckbox(multiEdit);
         }
       }
@@ -368,7 +368,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
       $thisInput.rules('add', {
         validationFunctionForDateTime: {
           param: theType,
-          depends: function depends() {
+          depends: function () {
             return checkForCheckbox(multiEdit);
           }
         }
@@ -389,7 +389,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
         $thisInput.rules('add', {
           maxlength: {
             param: maxlen,
-            depends: function depends() {
+            depends: function () {
               return checkForCheckbox(multiEdit);
             }
           }
@@ -400,7 +400,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
       $thisInput.rules('add', {
         validationFunctionForHex: {
           param: true,
-          depends: function depends() {
+          depends: function () {
             return checkForCheckbox(multiEdit);
           }
         }
@@ -621,7 +621,7 @@ function addNewContinueInsertionFields(event) {
   });
 
   if (currRows < targetRows) {
-    var tempIncrementIndex = function tempIncrementIndex() {
+    var tempIncrementIndex = function () {
       var $thisElement = $(this);
       /**
        * Extract the index from the name attribute for all input/select fields and increment it
@@ -701,7 +701,7 @@ function addNewContinueInsertionFields(event) {
       }
     };
 
-    var tempReplaceAnchor = function tempReplaceAnchor() {
+    var tempReplaceAnchor = function () {
       var $anchor = $(this);
       var newValue = 'rownumber=' + newRowIndex; // needs improvement in case something else inside
       // the href contains this pattern
@@ -710,7 +710,7 @@ function addNewContinueInsertionFields(event) {
       $anchor.attr('href', newHref);
     };
 
-    var restoreValue = function restoreValue() {
+    var restoreValue = function () {
       if ($(this).closest('tr').find('span.column_type').html() === 'enum') {
         if ($(this).val() === $checkedValue) {
           $(this).prop('checked', true);

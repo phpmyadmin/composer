@@ -138,7 +138,7 @@ AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
   } // adding event listener on select after AJAX request
 
 
-  var comparisonOperatorOnChange = function comparisonOperatorOnChange() {
+  var comparisonOperatorOnChange = function () {
     var tableRows = $('#inputSection select.column-operator');
     $.each(tableRows, function (index, item) {
       $(item).on('change', function () {
@@ -277,7 +277,7 @@ AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
    * Handle saving of a row in the editor
    */
 
-  var dataPointSave = function dataPointSave() {
+  var dataPointSave = function () {
     // Find changed values by comparing form values with selectedRow Object
     var newValues = {}; // Stores the values changed from original
 
@@ -287,7 +287,7 @@ AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     var yChange = false;
     var key;
 
-    var tempGetVal = function tempGetVal() {
+    var tempGetVal = function () {
       return $(this).val();
     };
 

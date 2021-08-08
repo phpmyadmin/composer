@@ -388,7 +388,7 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
           title: Messages.strAddIndex,
           width: 450,
           minHeight: 250,
-          create: function create() {
+          create: function () {
             $(this).on('keypress', function (e) {
               if (e.which === 13 || e.keyCode === 13 || window.event.keyCode === 13) {
                 e.preventDefault();
@@ -397,7 +397,7 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
               }
             });
           },
-          open: function open() {
+          open: function () {
             Functions.checkIndexName('index_frm');
             Functions.showHints($div);
             $('#index_columns').find('td').each(function () {
@@ -411,7 +411,7 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
           },
           modal: true,
           buttons: buttonOptions,
-          close: function close() {
+          close: function () {
             $(this).remove();
           }
         });
@@ -513,7 +513,7 @@ Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex)
     title: Messages.strAddIndex,
     resizable: false,
     buttons: buttonOptions,
-    open: function open() {
+    open: function () {
       $('#composite_index').on('change', function () {
         if ($(this).is(':checked')) {
           $dialogContent.append(Indexes.getCompositeIndexList(sourceArray, colIndex));
@@ -527,7 +527,7 @@ Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex)
         }
       });
     },
-    close: function close() {
+    close: function () {
       $('#composite_index').off('change');
       $('#single_column').off('change');
       $(this).remove();

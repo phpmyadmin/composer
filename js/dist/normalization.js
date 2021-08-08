@@ -220,7 +220,7 @@ function goTo2NFFinish(pd) {
     url: 'index.php?route=/normalization',
     data: datastring,
     async: false,
-    success: function success(data) {
+    success: function (data) {
       if (data.success === true) {
         if (data.queryError === false) {
           if (normalizeto === '3nf') {
@@ -270,7 +270,7 @@ function goTo3NFFinish(newTables) {
     url: 'index.php?route=/normalization',
     data: datastring,
     async: false,
-    success: function success(data) {
+    success: function (data) {
       if (data.success === true) {
         if (data.queryError === false) {
           $('#mainContent legend').html(data.legendText);
@@ -325,7 +325,7 @@ function goTo2NFStep2(pd, primaryKey) {
       url: 'index.php?route=/normalization',
       data: datastring,
       async: false,
-      success: function success(data) {
+      success: function (data) {
         if (data.success === true) {
           extra += data.message;
         } else {
@@ -379,7 +379,7 @@ function goTo3NFStep2(pd, tablesTds) {
       url: 'index.php?route=/normalization',
       data: datastring,
       async: false,
-      success: function success(data) {
+      success: function (data) {
         dataParsed = data;
 
         if (data.success === true) {
@@ -492,7 +492,7 @@ function moveRepeatingGroup(repeatingCols) {
     url: 'index.php?route=/normalization',
     data: datastring,
     async: false,
-    success: function success(data) {
+    success: function (data) {
       if (data.success === true) {
         if (data.queryError === false) {
           goToStep3();

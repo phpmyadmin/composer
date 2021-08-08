@@ -52,10 +52,10 @@ AJAX.registerOnload('server/databases.js', function () {
 
 
     var question = Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(Messages.strDoYouReally, selectedDbs.join('<br>'));
-    var modal = $('#dropDatabaseModal');
+    const modal = $('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
     modal.modal('show');
-    var url = 'index.php?route=/server/databases/destroy&' + $(this).serialize() + CommonParams.get('arg_separator') + 'drop_selected_dbs=1';
+    const url = 'index.php?route=/server/databases/destroy&' + $(this).serialize() + CommonParams.get('arg_separator') + 'drop_selected_dbs=1';
     $('#dropDatabaseModalDropButton').on('click', function () {
       Functions.ajaxShowMessage(Messages.strProcessingRequest, false);
       var parts = url.split('?');
