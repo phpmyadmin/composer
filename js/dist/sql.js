@@ -233,6 +233,7 @@ AJAX.registerTeardown('sql.js', function () {
   $('body').off('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]');
   $(document).off('submit', '.maxRowsForm');
   $(document).off('click', '#view_as');
+  $(document).off('click', '#sqlquery');
 });
 /**
  * @description <p>Ajax scripts for sql and browse pages</p>
@@ -850,6 +851,11 @@ AJAX.registerOnload('sql.js', function () {
   });
   $('#view_as').on('click', function () {
     Functions.selectContent(this, sqlBoxLocked, true);
+  });
+  $('#sqlquery').on('click', function () {
+    if ($(this).data('textarea-auto-select') === true) {
+      Functions.selectContent(this, sqlBoxLocked, true);
+    }
   });
 }); // end $()
 
