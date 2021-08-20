@@ -935,7 +935,9 @@ Sql.browseForeignDialog = function ($thisA) {
       } // Set selected value as input value
 
 
-      $input.val($(this).data('key'));
+      $input.val($(this).data('key')); // Unchecks the Ignore checkbox for the current row
+
+      $input.trigger('change');
       $dialog.dialog('close');
     });
     $(formId).on('click', showAllId, function () {
