@@ -229,6 +229,8 @@ for filePath in ${FILE_LIST}; do
         foundFile;;
         */phpbench.json.dist)
         foundFile;;
+        */.php-cs-fixer.dist.php)
+        foundFile;;
         */.php_cs)
         foundFile;;
         */.php_cs.dist)
@@ -278,6 +280,14 @@ for filePath in ${FILE_LIST}; do
         */vendor/*/Tests/*)
         foundFile;;
         */vendor/*/test/*)
+        foundFile;;
+        */twig/twig/lib/Twig/Node/Expression/Test/*)
+        ;;
+        */twig/twig/lib/Twig/Test/*)
+        ;;
+        *twig/twig/src/Node/Expression/Test/*)
+        ;;
+        */vendor/*/Test/*)
         foundFile;;
         */.dependabot/*)
         foundFile;;
