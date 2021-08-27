@@ -80,6 +80,14 @@ class ExportSql extends ExportPlugin
     }
 
     /**
+     * @psalm-return non-empty-lowercase-string
+     */
+    public function getName(): string
+    {
+        return 'sql';
+    }
+
+    /**
      * Sets the export SQL properties
      *
      * @return void
@@ -2957,6 +2965,11 @@ class ExportSql extends ExportPlugin
                 // Key's columns.
                 if (! empty($field->key)) {
                     foreach ($field->key->columns as $key => $column) {
+                        if (! isset($column['name'])) {
+                            // In case the column has no name field
+                            continue;
+                        }
+
                         if (empty($aliases[$oldDatabase]['tables'][$oldTable]['columns'][$column['name']])) {
                             continue;
                         }
