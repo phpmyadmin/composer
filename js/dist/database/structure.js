@@ -205,7 +205,7 @@ AJAX.registerOnload('database/structure.js', function () {
           const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
           Functions.ajaxShowMessage();
           AJAX.source = $form;
-          $.post('index.php?route=/database/structure/central-columns-make-consistent', data, AJAX.responseHandler);
+          $.post('index.php?route=/database/structure/central-columns/make-consistent', data, AJAX.responseHandler);
           $('#makeConsistentWithCentralListModal').modal('hide');
         });
       });
@@ -261,9 +261,9 @@ AJAX.registerOnload('database/structure.js', function () {
     if (action === 'analyze_tbl') {
       url = 'index.php?route=/table/maintenance/analyze';
     } else if (action === 'sync_unique_columns_central_list') {
-      url = 'index.php?route=/database/structure/central-columns-add';
+      url = 'index.php?route=/database/structure/central-columns/add';
     } else if (action === 'delete_unique_columns_central_list') {
-      url = 'index.php?route=/database/structure/central-columns-remove';
+      url = 'index.php?route=/database/structure/central-columns/remove';
     } else if (action === 'check_tbl') {
       url = 'index.php?route=/table/maintenance/check';
     } else if (action === 'checksum_tbl') {
