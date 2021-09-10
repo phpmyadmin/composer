@@ -2776,36 +2776,22 @@
       <code>$replicaInfo['status']</code>
     </MixedArgument>
   </file>
-  <file src="libraries/classes/Controllers/Server/Status/MonitorController.php">
-    <MixedArgument occurrences="5">
-      <code>$params['database'] ?? ''</code>
-      <code>$params['query'] ?? ''</code>
+  <file src="libraries/classes/Controllers/Server/Status/Monitor/ChartingDataController.php">
+    <MixedArgument occurrences="1">
       <code>$params['requiredData'] ?? ''</code>
+    </MixedArgument>
+  </file>
+  <file src="libraries/classes/Controllers/Server/Status/Monitor/LogVarsController.php">
+    <MixedArgument occurrences="2">
       <code>$params['varName']</code>
       <code>$params['varValue']</code>
     </MixedArgument>
   </file>
-  <file src="libraries/classes/Controllers/Server/Status/ProcessesController.php">
-    <MixedArgument occurrences="4">
-      <code>$params['order_by_field']</code>
-      <code>$process['Info']</code>
-      <code>$process['db']</code>
-      <code>$result</code>
+  <file src="libraries/classes/Controllers/Server/Status/Monitor/QueryAnalyzerController.php">
+    <MixedArgument occurrences="2">
+      <code>$params['database'] ?? ''</code>
+      <code>$params['query'] ?? ''</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="5">
-      <code>$process[$newKey]</code>
-      <code>$result</code>
-      <code>$urlParams['order_by_field']</code>
-      <code>$urlParams['showExecuting']</code>
-      <code>$urlParams['sort_order']</code>
-    </MixedAssignment>
-    <MixedOperand occurrences="2">
-      <code>$params['sort_order']</code>
-      <code>Util::backquote($params['order_by_field'])</code>
-    </MixedOperand>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/QueriesController.php">
     <MixedArgumentTypeCoercion occurrences="1">
@@ -2899,12 +2885,16 @@
     </UnusedVariable>
   </file>
   <file src="libraries/classes/Controllers/Server/UserGroupsController.php">
-    <MixedArgument occurrences="12">
+    <MixedArgument occurrences="5">
       <code>$_POST['userGroup']</code>
       <code>$_POST['userGroup']</code>
       <code>$_POST['userGroup']</code>
       <code>$_POST['userGroup']</code>
       <code>$_POST['userGroup']</code>
+    </MixedArgument>
+  </file>
+  <file src="libraries/classes/Controllers/Server/UserGroupsFormController.php">
+    <MixedArgument occurrences="7">
       <code>$cfgRelation['db']</code>
       <code>$cfgRelation['db']</code>
       <code>$cfgRelation['usergroups']</code>
@@ -2932,17 +2922,37 @@
       <code>Util::backquote($cfgRelation['users'])</code>
     </MixedOperand>
   </file>
-  <file src="libraries/classes/Controllers/Server/VariablesController.php">
-    <MixedArgument occurrences="9">
+  <file src="libraries/classes/Controllers/Server/Variables/GetVariableController.php">
+    <MixedArgument occurrences="3">
+      <code>$params['name']</code>
+      <code>$params['name']</code>
+      <code>$varValue[1]</code>
+    </MixedArgument>
+    <PossiblyNullArrayAccess occurrences="1">
+      <code>$varValue[1]</code>
+    </PossiblyNullArrayAccess>
+  </file>
+  <file src="libraries/classes/Controllers/Server/Variables/SetVariableController.php">
+    <MixedArgument occurrences="2">
       <code>$formattedValue</code>
-      <code>$params['name']</code>
-      <code>$params['name']</code>
+      <code>$varValue[1]</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$json['variable']</code>
+    </MixedAssignment>
+    <PossiblyNullArgument occurrences="1">
+      <code>$varValue[1]</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayAccess occurrences="1">
+      <code>$varValue[1]</code>
+    </PossiblyNullArrayAccess>
+  </file>
+  <file src="libraries/classes/Controllers/Server/VariablesController.php">
+    <MixedArgument occurrences="4">
       <code>$serverVarsResult</code>
       <code>$serverVarsResult</code>
       <code>$serverVarsSession[$name]</code>
       <code>$value</code>
-      <code>$varValue[1]</code>
-      <code>$varValue[1]</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="5">
       <code>$name</code>
@@ -2954,20 +2964,12 @@
     <MixedArrayOffset occurrences="1">
       <code>$serverVarsSession[$arr[0]]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment occurrences="4">
       <code>$filterValue</code>
-      <code>$json['variable']</code>
       <code>$serverVarsResult</code>
       <code>$serverVarsSession[$arr[0]]</code>
       <code>$value</code>
     </MixedAssignment>
-    <PossiblyNullArgument occurrences="1">
-      <code>$varValue[1]</code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess occurrences="2">
-      <code>$varValue[1]</code>
-      <code>$varValue[1]</code>
-    </PossiblyNullArrayAccess>
   </file>
   <file src="libraries/classes/Controllers/Setup/FormController.php">
     <UndefinedClass occurrences="1">
@@ -4448,7 +4450,7 @@
       <code>$_POST['db']</code>
     </MixedArgument>
   </file>
-  <file src="libraries/classes/Controllers/ThemesController.php">
+  <file src="libraries/classes/Controllers/ThemeSetController.php">
     <MixedArgument occurrences="2">
       <code>$_POST['set_theme']</code>
       <code>$preferences['config_data']</code>
@@ -15083,6 +15085,28 @@
       <code>$row['#']</code>
     </MixedOperand>
   </file>
+  <file src="libraries/classes/Server/Status/Processes.php">
+    <MixedArgument occurrences="4">
+      <code>$params['order_by_field']</code>
+      <code>$process['Info']</code>
+      <code>$process['db']</code>
+      <code>$result</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="5">
+      <code>$process[$newKey]</code>
+      <code>$result</code>
+      <code>$urlParams['order_by_field']</code>
+      <code>$urlParams['showExecuting']</code>
+      <code>$urlParams['sort_order']</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="2">
+      <code>$params['sort_order']</code>
+      <code>Util::backquote($params['order_by_field'])</code>
+    </MixedOperand>
+  </file>
   <file src="libraries/classes/Server/SysInfo/WindowsNt.php">
     <MixedArrayAccess occurrences="6">
       <code>$buffer[0]['FreePhysicalMemory']</code>
@@ -17571,16 +17595,24 @@
       <code>$actual['message']</code>
     </MixedArgument>
   </file>
-  <file src="test/classes/Controllers/Server/Status/MonitorControllerTest.php">
-    <MixedArrayAccess occurrences="9">
-      <code>$ret['message']['affectedRows']</code>
-      <code>$ret['message']['explain']</code>
+  <file src="test/classes/Controllers/Server/Status/Monitor/GeneralLogControllerTest.php">
+    <MixedArrayAccess occurrences="3">
       <code>$ret['message']['numRows']</code>
-      <code>$ret['message']['numRows']</code>
-      <code>$ret['message']['profiling']</code>
-      <code>$ret['message']['rows']</code>
       <code>$ret['message']['rows']</code>
       <code>$ret['message']['sum']</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="test/classes/Controllers/Server/Status/Monitor/QueryAnalyzerControllerTest.php">
+    <MixedArrayAccess occurrences="3">
+      <code>$ret['message']['affectedRows']</code>
+      <code>$ret['message']['explain']</code>
+      <code>$ret['message']['profiling']</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="test/classes/Controllers/Server/Status/Monitor/SlowLogControllerTest.php">
+    <MixedArrayAccess occurrences="3">
+      <code>$ret['message']['numRows']</code>
+      <code>$ret['message']['rows']</code>
       <code>$ret['message']['sum']</code>
     </MixedArrayAccess>
   </file>
