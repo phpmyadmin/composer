@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table\Structure;
 
-use PhpMyAdmin\Controllers\SqlController;
+use PhpMyAdmin\Controllers\Sql\SqlController;
 use PhpMyAdmin\Controllers\Table\AbstractController;
 use PhpMyAdmin\Controllers\Table\StructureController;
 use PhpMyAdmin\ResponseRenderer;
@@ -18,16 +18,11 @@ final class AddKeyController extends AbstractController
     /** @var StructureController */
     private $structureController;
 
-    /**
-     * @param ResponseRenderer $response
-     * @param string           $db       Database name
-     * @param string           $table    Table name
-     */
     public function __construct(
-        $response,
+        ResponseRenderer $response,
         Template $template,
-        $db,
-        $table,
+        string $db,
+        string $table,
         SqlController $sqlController,
         StructureController $structureController
     ) {
@@ -40,7 +35,7 @@ final class AddKeyController extends AbstractController
     {
         global $reload;
 
-        $this->sqlController->index();
+        ($this->sqlController)();
 
         $reload = true;
 

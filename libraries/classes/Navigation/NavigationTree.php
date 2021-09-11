@@ -835,11 +835,13 @@ class NavigationTree
             unset($prefixes[$key]);
         }
 
+        $numChildren = count($node->children);
+
         // rfe #1634 Don't group if there's only one group and no other items
         if (count($prefixes) === 1) {
             $keys = array_keys($prefixes);
             $key = $keys[0];
-            if ($prefixes[$key] == count($node->children) - 1) {
+            if ($prefixes[$key] == $numChildren - 1) {
                 unset($prefixes[$key]);
             }
         }
@@ -864,33 +866,7 @@ class NavigationTree
                 $this->largeGroupWarning = true;
             }
 
-            $groups[$key] = new Node(
-                htmlspecialchars((string) $key),
-                Node::CONTAINER,
-                true
-            );
-            $groups[$key]->separator = $node->separator;
-            $groups[$key]->separatorDepth = $node->separatorDepth - 1;
-            $groups[$key]->icon = ['image' => 'b_group', 'title' => __('Groups')];
-            $groups[$key]->pos2 = $node->pos2;
-            $groups[$key]->pos3 = $node->pos3;
-            if (
-                $node instanceof NodeTableContainer
-                || $node instanceof NodeViewContainer
-            ) {
-                $groups[$key]->links = [
-                    'text' => [
-                        'route' => $node->links['text']['route'],
-                        'params' => array_merge($node->links['text']['params'], ['tbl_group' => $key]),
-                    ],
-                    'icon' => [
-                        'route' => $node->links['icon']['route'],
-                        'params' => array_merge($node->links['icon']['params'], ['tbl_group' => $key]),
-                    ],
-                ];
-            }
-
-            $node->addChild($groups[$key]);
+            $newChildren = [];
             foreach ($separators as $separator) {
                 $separatorLength = strlen($separator);
                 // FIXME: this could be more efficient
@@ -932,19 +908,77 @@ class NavigationTree
                     $newChild->links = $child->links;
                     $newChild->pos2 = $child->pos2;
                     $newChild->pos3 = $child->pos3;
-                    $groups[$key]->addChild($newChild);
                     foreach ($child->children as $elm) {
                         $newChild->addChild($elm);
                     }
 
-                    $node->removeChild($child->name);
+                    $newChildren[] = [
+                        'node' => $newChild,
+                        'replaces_name' => $child->name,
+                    ];
+                }
+            }
+
+            if (count($newChildren) === 0) {
+                continue;
+            }
+
+            // If the current node is a standard group (not NodeTableContainer, etc.)
+            // and the new group contains all of the current node's children, combine them
+            $class = get_class($node);
+            if (
+                count($newChildren) === $numChildren
+                && substr($class, strrpos($class, '\\') + 1) === 'Node'
+            ) {
+                $node->name .= $separators[0] . htmlspecialchars((string) $key);
+                $node->realName .= $separators[0] . htmlspecialchars((string) $key);
+                $node->separatorDepth--;
+                foreach ($newChildren as $newChild) {
+                    $node->removeChild($newChild['replaces_name']);
+                    $node->addChild($newChild['node']);
+                }
+            } else {
+                $groups[$key] = new Node(
+                    htmlspecialchars((string) $key),
+                    Node::CONTAINER,
+                    true
+                );
+                $groups[$key]->separator = $node->separator;
+                $groups[$key]->separatorDepth = $node->separatorDepth - 1;
+                $groups[$key]->icon = ['image' => 'b_group', 'title' => __('Groups')];
+                $groups[$key]->pos2 = $node->pos2;
+                $groups[$key]->pos3 = $node->pos3;
+                if (
+                    $node instanceof NodeTableContainer
+                    || $node instanceof NodeViewContainer
+                ) {
+                    $groups[$key]->links = [
+                        'text' => [
+                            'route' => $node->links['text']['route'],
+                            'params' => array_merge($node->links['text']['params'], ['tbl_group' => $key]),
+                        ],
+                        'icon' => [
+                            'route' => $node->links['icon']['route'],
+                            'params' => array_merge($node->links['icon']['params'], ['tbl_group' => $key]),
+                        ],
+                    ];
+                }
+
+                foreach ($newChildren as $newChild) {
+                    $node->removeChild($newChild['replaces_name']);
+                    $groups[$key]->addChild($newChild['node']);
                 }
             }
         }
 
-        foreach ($prefixes as $key => $value) {
-            $this->groupNode($groups[$key]);
-            $groups[$key]->classes = 'navGroup';
+        foreach ($groups as $group) {
+            if (count($group->children) === 0) {
+                continue;
+            }
+
+            $node->addChild($group);
+            $this->groupNode($group);
+            $group->classes = 'navGroup';
         }
     }
 
@@ -1143,10 +1177,18 @@ class NavigationTree
         $controlButtons = '';
         $paths = $node->getPaths();
         $nodeIsContainer = $node->type === Node::CONTAINER;
-        $hasSiblingsOrIsNotRoot = $node->hasSiblings() || $node->realParent() === false;
         $liClasses = '';
 
-        if ($hasSiblingsOrIsNotRoot) {
+        // Whether to show the node in the tree (true for all nodes but root)
+        // If false, the node's children will still be shown, but as children of the node's parent
+        $showNode = $node->hasSiblings() || count($node->parents(false, true)) > 0;
+
+        // Don't show the 'Tables' node under each database unless it has 'Views', etc. as a sibling
+        if ($node instanceof NodeTableContainer && ! $node->hasSiblings()) {
+            $showNode = false;
+        }
+
+        if ($showNode) {
             $response = ResponseRenderer::getInstance();
             if ($nodeIsContainer && count($node->children) === 0 && ! $response->isAjax()) {
                 return '';
@@ -1262,7 +1304,7 @@ class NavigationTree
         return $this->template->render('navigation/tree/node', [
             'node' => $node,
             'class' => $class,
-            'has_siblings_or_is_not_root' => $hasSiblingsOrIsNotRoot,
+            'show_node' => $showNode,
             'has_siblings' => $node->hasSiblings(),
             'li_classes' => $liClasses,
             'control_buttons' => $controlButtons,

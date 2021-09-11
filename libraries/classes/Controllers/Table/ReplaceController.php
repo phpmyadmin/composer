@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Controllers\Database\SqlController as DatabaseSqlController;
-use PhpMyAdmin\Controllers\SqlController;
+use PhpMyAdmin\Controllers\Sql\SqlController;
 use PhpMyAdmin\Controllers\Table\SqlController as TableSqlController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
@@ -50,21 +50,15 @@ final class ReplaceController extends AbstractController
     /** @var DatabaseInterface */
     private $dbi;
 
-    /**
-     * @param ResponseRenderer  $response
-     * @param string            $db       Database name.
-     * @param string            $table    Table name.
-     * @param DatabaseInterface $dbi
-     */
     public function __construct(
-        $response,
+        ResponseRenderer $response,
         Template $template,
-        $db,
-        $table,
+        string $db,
+        string $table,
         InsertEdit $insertEdit,
         Transformations $transformations,
         Relation $relation,
-        $dbi
+        DatabaseInterface $dbi
     ) {
         parent::__construct($response, $template, $db, $table);
         $this->insertEdit = $insertEdit;
@@ -109,7 +103,7 @@ final class ReplaceController extends AbstractController
             $GLOBALS['cfg']['InsertRows'] = $_POST['insert_rows'];
             /** @var ChangeController $controller */
             $controller = $containerBuilder->get(ChangeController::class);
-            $controller->index();
+            $controller();
 
             return;
         }
@@ -438,7 +432,7 @@ final class ReplaceController extends AbstractController
             if ($goto_include === '/sql') {
                 /** @var SqlController $controller */
                 $controller = $containerBuilder->get(SqlController::class);
-                $controller->index();
+                $controller();
 
                 return;
             }
@@ -454,7 +448,7 @@ final class ReplaceController extends AbstractController
             if ($goto_include === '/table/change') {
                 /** @var ChangeController $controller */
                 $controller = $containerBuilder->get(ChangeController::class);
-                $controller->index();
+                $controller();
 
                 return;
             }
@@ -656,7 +650,7 @@ final class ReplaceController extends AbstractController
         if ($goto_include === '/sql') {
             /** @var SqlController $controller */
             $controller = $containerBuilder->get(SqlController::class);
-            $controller->index();
+            $controller();
 
             return;
         }
@@ -672,7 +666,7 @@ final class ReplaceController extends AbstractController
         if ($goto_include === '/table/change') {
             /** @var ChangeController $controller */
             $controller = $containerBuilder->get(ChangeController::class);
-            $controller->index();
+            $controller();
 
             return;
         }
