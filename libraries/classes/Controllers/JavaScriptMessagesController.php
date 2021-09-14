@@ -455,11 +455,8 @@ final class JavaScriptMessagesController
             /* For table/select.js */
             'strHideSearchCriteria' => __('Hide search criteria'),
             'strShowSearchCriteria' => __('Show search criteria'),
-            'strRangeSearch' => __('Range search'),
             'strColumnMax' => __('Column maximum:'),
             'strColumnMin' => __('Column minimum:'),
-            'strMinValue' => __('Minimum value:'),
-            'strMaxValue' => __('Maximum value:'),
 
             /* For table/find_replace.js */
             'strHideFindNReplaceCriteria' => __('Hide find and replace criteria'),
@@ -623,7 +620,6 @@ final class JavaScriptMessagesController
             /* navigation panel */
             'strShowPanel' => __('Show panel'),
             'strHidePanel' => __('Hide panel'),
-            'strUnhideNavItem' => __('Show hidden navigation tree items.'),
             'linkWithMain' => __('Link with main panel'),
             'unlinkWithMain' => __('Unlink from main panel'),
 
