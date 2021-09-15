@@ -47,9 +47,7 @@ class ExportTexytext extends ExportPlugin
         // create the root group that will be the options field for
         // $exportPluginProperties
         // this will be shown as "Format specific options"
-        $exportSpecificOptions = new OptionsPropertyRootGroup(
-            'Format Specific Options'
-        );
+        $exportSpecificOptions = new OptionsPropertyRootGroup('Format Specific Options');
 
         // what to dump (structure/data/both) main group
         $dumpWhat = new OptionsPropertyMainGroup(
@@ -60,8 +58,8 @@ class ExportTexytext extends ExportPlugin
         $leaf = new RadioPropertyItem('structure_or_data');
         $leaf->setValues(
             [
-                'structure'          => __('structure'),
-                'data'               => __('data'),
+                'structure' => __('structure'),
+                'data' => __('data'),
                 'structure_and_data' => __('structure and data'),
             ]
         );
@@ -97,20 +95,16 @@ class ExportTexytext extends ExportPlugin
 
     /**
      * Outputs export header
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportHeader()
+    public function exportHeader(): bool
     {
         return true;
     }
 
     /**
      * Outputs export footer
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportFooter()
+    public function exportFooter(): bool
     {
         return true;
     }
@@ -120,10 +114,8 @@ class ExportTexytext extends ExportPlugin
      *
      * @param string $db      Database name
      * @param string $dbAlias Alias of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBHeader($db, $dbAlias = '')
+    public function exportDBHeader($db, $dbAlias = ''): bool
     {
         if (empty($dbAlias)) {
             $dbAlias = $db;
@@ -138,10 +130,8 @@ class ExportTexytext extends ExportPlugin
      * Outputs database footer
      *
      * @param string $db Database name
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBFooter($db)
+    public function exportDBFooter($db): bool
     {
         return true;
     }
@@ -152,10 +142,8 @@ class ExportTexytext extends ExportPlugin
      * @param string $db         Database name
      * @param string $exportType 'server', 'database', 'table'
      * @param string $dbAlias    Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBCreate($db, $exportType, $dbAlias = '')
+    public function exportDBCreate($db, $exportType, $dbAlias = ''): bool
     {
         return true;
     }
@@ -169,8 +157,6 @@ class ExportTexytext extends ExportPlugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery SQL query for obtaining data
      * @param array  $aliases  Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     public function exportData(
         $db,
@@ -179,7 +165,7 @@ class ExportTexytext extends ExportPlugin
         $errorUrl,
         $sqlQuery,
         array $aliases = []
-    ) {
+    ): bool {
         global $what, $dbi;
 
         $db_alias = $db;
@@ -197,11 +183,7 @@ class ExportTexytext extends ExportPlugin
         }
 
         // Gets the data from the database
-        $result = $dbi->query(
-            $sqlQuery,
-            DatabaseInterface::CONNECT_USER,
-            DatabaseInterface::QUERY_UNBUFFERED
-        );
+        $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $dbi->numFields($result);
 
         // If required, get fields name at the first line
@@ -260,8 +242,6 @@ class ExportTexytext extends ExportPlugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery the rawquery to output
      * @param string $crlf     the end of line sequence
-     *
-     * @return bool if succeeded
      */
     public function exportRawQuery(string $errorUrl, string $sqlQuery, string $crlf): bool
     {
@@ -320,11 +300,7 @@ class ExportTexytext extends ExportPlugin
                 $col_as = $aliases[$db]['tables'][$view]['columns'][$col_as];
             }
 
-            $text_output .= $this->formatOneColumnDefinition(
-                $column,
-                $unique_keys,
-                $col_as
-            );
+            $text_output .= $this->formatOneColumnDefinition($column, $unique_keys, $col_as);
             $text_output .= "\n";
         }
 
@@ -428,11 +404,7 @@ class ExportTexytext extends ExportPlugin
                 $col_as = $aliases[$db]['tables'][$table]['columns'][$col_as];
             }
 
-            $text_output .= $this->formatOneColumnDefinition(
-                $column,
-                $unique_keys,
-                $col_as
-            );
+            $text_output .= $this->formatOneColumnDefinition($column, $unique_keys, $col_as);
             $field_name = $column['Field'];
             if ($do_relation && $have_rel) {
                 $text_output .= '|' . htmlspecialchars(
@@ -524,8 +496,6 @@ class ExportTexytext extends ExportPlugin
      * @param bool   $do_mime     whether to include mime comments
      * @param bool   $dates       whether to include creation/update/check dates
      * @param array  $aliases     Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     public function exportStructure(
         $db,
@@ -539,7 +509,7 @@ class ExportTexytext extends ExportPlugin
         $do_mime = false,
         $dates = false,
         array $aliases = []
-    ) {
+    ): bool {
         global $dbi;
 
         $db_alias = $db;
@@ -649,9 +619,7 @@ class ExportTexytext extends ExportPlugin
             . ($column['Null'] == '' || $column['Null'] === 'NO'
                 ? __('No') : __('Yes'));
         $definition .= '|'
-            . htmlspecialchars(
-                $column['Default'] ?? ''
-            );
+            . htmlspecialchars($column['Default'] ?? '');
 
         return $definition;
     }

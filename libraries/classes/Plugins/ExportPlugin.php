@@ -52,36 +52,28 @@ abstract class ExportPlugin implements Plugin
 
     /**
      * Outputs export header
-     *
-     * @return bool Whether it succeeded
      */
-    abstract public function exportHeader();
+    abstract public function exportHeader(): bool;
 
     /**
      * Outputs export footer
-     *
-     * @return bool Whether it succeeded
      */
-    abstract public function exportFooter();
+    abstract public function exportFooter(): bool;
 
     /**
      * Outputs database header
      *
      * @param string $db      Database name
      * @param string $dbAlias Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    abstract public function exportDBHeader($db, $dbAlias = '');
+    abstract public function exportDBHeader($db, $dbAlias = ''): bool;
 
     /**
      * Outputs database footer
      *
      * @param string $db Database name
-     *
-     * @return bool Whether it succeeded
      */
-    abstract public function exportDBFooter($db);
+    abstract public function exportDBFooter($db): bool;
 
     /**
      * Outputs CREATE DATABASE statement
@@ -89,10 +81,8 @@ abstract class ExportPlugin implements Plugin
      * @param string $db         Database name
      * @param string $exportType 'server', 'database', 'table'
      * @param string $dbAlias    Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    abstract public function exportDBCreate($db, $exportType, $dbAlias = '');
+    abstract public function exportDBCreate($db, $exportType, $dbAlias = ''): bool;
 
     /**
      * Outputs the content of a table
@@ -103,8 +93,6 @@ abstract class ExportPlugin implements Plugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery SQL query for obtaining data
      * @param array  $aliases  Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     abstract public function exportData(
         $db,
@@ -113,7 +101,7 @@ abstract class ExportPlugin implements Plugin
         $errorUrl,
         $sqlQuery,
         array $aliases = []
-    );
+    ): bool;
 
     /**
      * The following methods are used in /export or in /database/operations,
@@ -125,10 +113,8 @@ abstract class ExportPlugin implements Plugin
      *
      * @param string $db      Database
      * @param array  $aliases Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportRoutines($db, array $aliases = [])
+    public function exportRoutines($db, array $aliases = []): bool
     {
         return true;
     }
@@ -137,10 +123,8 @@ abstract class ExportPlugin implements Plugin
      * Exports events
      *
      * @param string $db Database
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportEvents($db)
+    public function exportEvents($db): bool
     {
         return true;
     }
@@ -151,8 +135,6 @@ abstract class ExportPlugin implements Plugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery the rawquery to output
      * @param string $crlf     the seperator for a file
-     *
-     * @return bool if succeeded
      */
     public function exportRawQuery(
         string $errorUrl,
@@ -181,8 +163,6 @@ abstract class ExportPlugin implements Plugin
      * @param bool   $mime       whether to include mime comments
      * @param bool   $dates      whether to include creation/update/check dates
      * @param array  $aliases    Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     public function exportStructure(
         $db,
@@ -196,7 +176,7 @@ abstract class ExportPlugin implements Plugin
         $mime = false,
         $dates = false,
         array $aliases = []
-    ) {
+    ): bool {
         return true;
     }
 
@@ -206,14 +186,12 @@ abstract class ExportPlugin implements Plugin
      * @param string       $db            database being exported
      * @param string|array $tables        table(s) being exported
      * @param array        $metadataTypes types of metadata to export
-     *
-     * @return bool Whether it succeeded
      */
     public function exportMetadata(
         $db,
         $tables,
         array $metadataTypes
-    ) {
+    ): bool {
         return true;
     }
 
@@ -317,11 +295,7 @@ abstract class ExportPlugin implements Plugin
         // search each database
         foreach ($aliases as $db_key => $db) {
             // check if id is database and has alias
-            if (
-                stripos($type, 'db') !== false
-                && $db_key === $id
-                && ! empty($db['alias'])
-            ) {
+            if (stripos($type, 'db') !== false && $db_key === $id && ! empty($db['alias'])) {
                 return $db['alias'];
             }
 
@@ -338,11 +312,7 @@ abstract class ExportPlugin implements Plugin
             // search each of its tables
             foreach ($db['tables'] as $table_key => $table) {
                 // check if id is table and has alias
-                if (
-                    stripos($type, 'tbl') !== false
-                    && $table_key === $id
-                    && ! empty($table['alias'])
-                ) {
+                if (stripos($type, 'tbl') !== false && $table_key === $id && ! empty($table['alias'])) {
                     return $table['alias'];
                 }
 
@@ -353,11 +323,7 @@ abstract class ExportPlugin implements Plugin
                 // search each of its columns
                 foreach ($table['columns'] as $col_key => $col) {
                     // check if id is column
-                    if (
-                        stripos($type, 'col') !== false
-                        && $col_key === $id
-                        && ! empty($col)
-                    ) {
+                    if (stripos($type, 'col') !== false && $col_key === $id && ! empty($col)) {
                         return $col;
                     }
                 }

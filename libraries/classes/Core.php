@@ -198,16 +198,11 @@ class Core
 
         /* Gettext does not have to be loaded yet here */
         if (function_exists('__')) {
-            $message = __(
-                'The %s extension is missing. Please check your PHP configuration.'
-            );
+            $message = __('The %s extension is missing. Please check your PHP configuration.');
         }
 
         $doclink = self::getPHPDocLink('book.' . $extension . '.php');
-        $message = sprintf(
-            $message,
-            '[a@' . $doclink . '@Documentation][em]' . $extension . '[/em][/a]'
-        );
+        $message = sprintf($message, '[a@' . $doclink . '@Documentation][em]' . $extension . '[/em][/a]');
         if ($extra != '') {
             $message .= ' ' . $extra;
         }
@@ -218,13 +213,7 @@ class Core
             return;
         }
 
-        $errorHandler->addError(
-            $message,
-            E_USER_WARNING,
-            '',
-            0,
-            false
-        );
+        $errorHandler->addError($message, E_USER_WARNING, '', 0, false);
     }
 
     /**
@@ -271,12 +260,12 @@ class Core
         $binaryprefixes = [
             'T' => 1099511627776,
             't' => 1099511627776,
-            'G' =>    1073741824,
-            'g' =>    1073741824,
-            'M' =>       1048576,
-            'm' =>       1048576,
-            'K' =>          1024,
-            'k' =>          1024,
+            'G' => 1073741824,
+            'g' => 1073741824,
+            'M' => 1048576,
+            'm' => 1048576,
+            'K' => 1024,
+            'k' => 1024,
         ];
 
         if (preg_match('/^([0-9]+)([KMGT])/i', (string) $size, $matches)) {
@@ -293,8 +282,6 @@ class Core
      * @param string $page      page to check
      * @param array  $allowList allow list to check page against
      * @param bool   $include   whether the page is going to be included
-     *
-     * @return bool whether $page is valid or not (in $allowList or not)
      */
     public static function checkPageValidity(&$page, array $allowList = [], $include = false): bool
     {
@@ -357,10 +344,7 @@ class Core
             return (string) getenv($var_name);
         }
 
-        if (
-            function_exists('apache_getenv')
-            && apache_getenv($var_name, true)
-        ) {
+        if (function_exists('apache_getenv') && apache_getenv($var_name, true)) {
             return (string) apache_getenv($var_name, true);
         }
 
@@ -396,10 +380,7 @@ class Core
 
         session_write_close();
         if ($response->headersSent()) {
-            trigger_error(
-                'Core::sendHeaderLocation called when headers are already sent!',
-                E_USER_ERROR
-            );
+            trigger_error('Core::sendHeaderLocation called when headers are already sent!', E_USER_ERROR);
         }
 
         // bug #1523784: IE6 does not like 'Refresh: 0', it
@@ -661,9 +642,6 @@ class Core
      * Use only for URLs of external sites.
      *
      * @param string $url URL of external site.
-     *
-     * @return bool True: if domain of $url is allowed domain,
-     * False: otherwise.
      */
     public static function isAllowedDomain(string $url): bool
     {
@@ -763,8 +741,6 @@ class Core
      * recursively check if variable is empty
      *
      * @param mixed $value the variable
-     *
-     * @return bool true if empty
      */
     public static function emptyRecursive($value): bool
     {
@@ -997,10 +973,8 @@ class Core
      *
      * @param string $sqlQuery  The sql query
      * @param string $signature The Signature to check
-     *
-     * @return bool
      */
-    public static function checkSqlQuerySignature($sqlQuery, $signature)
+    public static function checkSqlQuerySignature($sqlQuery, $signature): bool
     {
         global $cfg;
 

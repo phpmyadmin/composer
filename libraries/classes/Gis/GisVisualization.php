@@ -85,7 +85,7 @@ class GisVisualization
         ],
 
         // The width of the GIS visualization.
-        'width'  => 600,
+        'width' => 600,
         // The height of the GIS visualization.
         'height' => 450,
     ];
@@ -138,10 +138,8 @@ class GisVisualization
 
     /**
      * Check if data has SRID
-     *
-     * @return bool
      */
-    public function hasSrid()
+    public function hasSrid(): bool
     {
         foreach ($this->data as $row) {
             if ($row['srid'] != 0) {
@@ -214,18 +212,14 @@ class GisVisualization
 
         // If label column is chosen add it to the query
         if (! empty($this->userSpecifiedSettings['labelColumn'])) {
-            $modified_query .= Util::backquote(
-                $this->userSpecifiedSettings['labelColumn']
-            )
+            $modified_query .= Util::backquote($this->userSpecifiedSettings['labelColumn'])
             . ', ';
         }
 
         // Wrap the spatial column with 'ST_ASTEXT()' function and add it
         $modified_query .= $spatialAsText . '('
             . Util::backquote($this->userSpecifiedSettings['spatialColumn'])
-            . $axisOrder . ') AS ' . Util::backquote(
-                $this->userSpecifiedSettings['spatialColumn']
-            )
+            . $axisOrder . ') AS ' . Util::backquote($this->userSpecifiedSettings['spatialColumn'])
             . ', ';
 
         // Get the SRID
@@ -285,10 +279,7 @@ class GisVisualization
             return;
         }
 
-        $this->settings = array_merge(
-            $this->settings,
-            $this->userSpecifiedSettings
-        );
+        $this->settings = array_merge($this->settings, $this->userSpecifiedSettings);
     }
 
     /**
@@ -513,14 +504,7 @@ class GisVisualization
         $this->init();
 
         // create pdf
-        $pdf = new TCPDF(
-            '',
-            'pt',
-            $GLOBALS['cfg']['PDFDefaultPageSize'],
-            true,
-            'UTF-8',
-            false
-        );
+        $pdf = new TCPDF('', 'pt', $GLOBALS['cfg']['PDFDefaultPageSize'], true, 'UTF-8', false);
 
         // disable header and footer
         $pdf->setPrintHeader(false);
@@ -622,9 +606,7 @@ class GisVisualization
                 continue;
             }
 
-            $scale_data = $gis_obj->scaleRow(
-                $row[$this->settings['spatialColumn']]
-            );
+            $scale_data = $gis_obj->scaleRow($row[$this->settings['spatialColumn']]);
 
             // Update minimum/maximum values for x and y coordinates.
             $c_maxX = (float) $scale_data['maxX'];
@@ -670,13 +652,13 @@ class GisVisualization
         }
 
         return [
-            'scale'  => $scale,
-            'x'      => $x,
-            'y'      => $y,
-            'minX'   => $min_max['minX'],
-            'maxX'   => $min_max['maxX'],
-            'minY'   => $min_max['minY'],
-            'maxY'   => $min_max['maxY'],
+            'scale' => $scale,
+            'x' => $x,
+            'y' => $y,
+            'minX' => $min_max['minX'],
+            'maxX' => $min_max['maxX'],
+            'minY' => $min_max['minY'],
+            'maxY' => $min_max['maxY'],
             'height' => $this->settings['height'],
         ];
     }

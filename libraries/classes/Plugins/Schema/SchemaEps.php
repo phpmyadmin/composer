@@ -43,9 +43,7 @@ class SchemaEps extends SchemaPlugin
         // create the root group that will be the options field for
         // $schemaPluginProperties
         // this will be shown as "Format specific options"
-        $exportSpecificOptions = new OptionsPropertyRootGroup(
-            'Format Specific Options'
-        );
+        $exportSpecificOptions = new OptionsPropertyRootGroup('Format Specific Options');
 
         // specific options main group
         $specificOptions = new OptionsPropertyMainGroup('general_opts');
@@ -84,10 +82,8 @@ class SchemaEps extends SchemaPlugin
      * Exports the schema into EPS format.
      *
      * @param string $db database name
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportSchema($db)
+    public function exportSchema($db): bool
     {
         $export = new EpsRelationSchema($db);
         $export->showOutput();

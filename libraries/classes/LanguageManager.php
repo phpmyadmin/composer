@@ -758,11 +758,7 @@ class LanguageManager
             $path = LOCALE_PATH
                 . '/' . $file
                 . '/LC_MESSAGES/phpmyadmin.mo';
-            if (
-                $file === '.'
-                || $file === '..'
-                || ! @file_exists($path)
-            ) {
+            if ($file === '.' || $file === '..' || ! @file_exists($path)) {
                 continue;
             }
 
@@ -798,10 +794,8 @@ class LanguageManager
 
     /**
      * Checks whether there are some languages available
-     *
-     * @return bool
      */
-    public function hasChoice()
+    public function hasChoice(): bool
     {
         return count($this->availableLanguages()) > 1;
     }
@@ -820,13 +814,7 @@ class LanguageManager
                 $lang = strtolower($lang);
                 if (isset(static::$languageData[$lang])) {
                     $data = static::$languageData[$lang];
-                    $this->availableLanguages[$lang] = new Language(
-                        $data[0],
-                        $data[1],
-                        $data[2],
-                        $data[3],
-                        $data[4]
-                    );
+                    $this->availableLanguages[$lang] = new Language($data[0], $data[1], $data[2], $data[3], $data[4]);
                 } else {
                     $this->availableLanguages[$lang] = new Language(
                         $lang,
@@ -975,11 +963,7 @@ class LanguageManager
     public function showWarnings(): void
     {
         // now, that we have loaded the language strings we can send the errors
-        if (
-            ! $this->langFailedConfig
-            && ! $this->langFailedCookie
-            && ! $this->langFailedRequest
-        ) {
+        if (! $this->langFailedConfig && ! $this->langFailedCookie && ! $this->langFailedRequest) {
             return;
         }
 

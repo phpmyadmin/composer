@@ -204,95 +204,43 @@ class Config
         // 2. browser and version
         // (must check everything else before Mozilla)
 
-        $is_mozilla = preg_match(
-            '@Mozilla/([0-9]\.[0-9]{1,2})@',
-            $HTTP_USER_AGENT,
-            $mozilla_version
-        );
+        $is_mozilla = preg_match('@Mozilla/([0-9]\.[0-9]{1,2})@', $HTTP_USER_AGENT, $mozilla_version);
 
-        if (
-            preg_match(
-                '@Opera(/| )([0-9]\.[0-9]{1,2})@',
-                $HTTP_USER_AGENT,
-                $log_version
-            )
-        ) {
+        if (preg_match('@Opera(/| )([0-9]\.[0-9]{1,2})@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[2]);
             $this->set('PMA_USR_BROWSER_AGENT', 'OPERA');
-        } elseif (
-            preg_match(
-                '@(MS)?IE ([0-9]{1,2}\.[0-9]{1,2})@',
-                $HTTP_USER_AGENT,
-                $log_version
-            )
-        ) {
+        } elseif (preg_match('@(MS)?IE ([0-9]{1,2}\.[0-9]{1,2})@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[2]);
             $this->set('PMA_USR_BROWSER_AGENT', 'IE');
-        } elseif (
-            preg_match(
-                '@Trident/(7)\.0@',
-                $HTTP_USER_AGENT,
-                $log_version
-            )
-        ) {
+        } elseif (preg_match('@Trident/(7)\.0@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', intval($log_version[1]) + 4);
             $this->set('PMA_USR_BROWSER_AGENT', 'IE');
-        } elseif (
-            preg_match(
-                '@OmniWeb/([0-9]{1,3})@',
-                $HTTP_USER_AGENT,
-                $log_version
-            )
-        ) {
+        } elseif (preg_match('@OmniWeb/([0-9]{1,3})@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'OMNIWEB');
             // Konqueror 2.2.2 says Konqueror/2.2.2
             // Konqueror 3.0.3 says Konqueror/3
-        } elseif (
-            preg_match(
-                '@(Konqueror/)(.*)(;)@',
-                $HTTP_USER_AGENT,
-                $log_version
-            )
-        ) {
+        } elseif (preg_match('@(Konqueror/)(.*)(;)@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[2]);
             $this->set('PMA_USR_BROWSER_AGENT', 'KONQUEROR');
             // must check Chrome before Safari
-        } elseif (
-            $is_mozilla
-            && preg_match('@Chrome/([0-9.]*)@', $HTTP_USER_AGENT, $log_version)
-        ) {
+        } elseif ($is_mozilla && preg_match('@Chrome/([0-9.]*)@', $HTTP_USER_AGENT, $log_version)) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'CHROME');
             // newer Safari
-        } elseif (
-            $is_mozilla
-            && preg_match('@Version/(.*) Safari@', $HTTP_USER_AGENT, $log_version)
-        ) {
-            $this->set(
-                'PMA_USR_BROWSER_VER',
-                $log_version[1]
-            );
+        } elseif ($is_mozilla && preg_match('@Version/(.*) Safari@', $HTTP_USER_AGENT, $log_version)) {
+            $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'SAFARI');
             // older Safari
-        } elseif (
-            $is_mozilla
-            && preg_match('@Safari/([0-9]*)@', $HTTP_USER_AGENT, $log_version)
-        ) {
-            $this->set(
-                'PMA_USR_BROWSER_VER',
-                $mozilla_version[1] . '.' . $log_version[1]
-            );
+        } elseif ($is_mozilla && preg_match('@Safari/([0-9]*)@', $HTTP_USER_AGENT, $log_version)) {
+            $this->set('PMA_USR_BROWSER_VER', $mozilla_version[1] . '.' . $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'SAFARI');
             // Firefox
         } elseif (
             ! mb_strstr($HTTP_USER_AGENT, 'compatible')
             && preg_match('@Firefox/([\w.]+)@', $HTTP_USER_AGENT, $log_version)
         ) {
-            $this->set(
-                'PMA_USR_BROWSER_VER',
-                $log_version[1]
-            );
+            $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'FIREFOX');
         } elseif (preg_match('@rv:1\.9(.*)Gecko@', $HTTP_USER_AGENT)) {
             $this->set('PMA_USR_BROWSER_VER', '1.9');
@@ -384,8 +332,6 @@ class Config
 
     /**
      * loads default values from default source
-     *
-     * @return bool success
      */
     public function loadDefaults(): bool
     {
@@ -516,10 +462,7 @@ class Config
         global $dbi;
 
         $collation_connection = $this->get('DefaultConnectionCollation');
-        if (
-            empty($collation_connection)
-            || $collation_connection == $GLOBALS['collation_connection']
-        ) {
+        if (empty($collation_connection) || $collation_connection == $GLOBALS['collation_connection']) {
             return;
         }
 
@@ -554,10 +497,7 @@ class Config
                 $_SESSION['cache'][$cache_key]['userprefs_type'] = $prefs['type'];
                 $_SESSION['cache'][$cache_key]['config_mtime'] = $config_mtime;
             }
-        } elseif (
-            $server == 0
-            || ! isset($_SESSION['cache'][$cache_key]['userprefs'])
-        ) {
+        } elseif ($server == 0 || ! isset($_SESSION['cache'][$cache_key]['userprefs'])) {
             $this->set('user_preferences', false);
 
             return;
@@ -565,14 +505,8 @@ class Config
 
         $config_data = $_SESSION['cache'][$cache_key]['userprefs'];
         // type is 'db' or 'session'
-        $this->set(
-            'user_preferences',
-            $_SESSION['cache'][$cache_key]['userprefs_type']
-        );
-        $this->set(
-            'user_preferences_mtime',
-            $_SESSION['cache'][$cache_key]['userprefs_mtime']
-        );
+        $this->set('user_preferences', $_SESSION['cache'][$cache_key]['userprefs_type']);
+        $this->set('user_preferences_mtime', $_SESSION['cache'][$cache_key]['userprefs_mtime']);
 
         // load config array
         $this->settings = array_replace_recursive($this->settings, $config_data);
@@ -628,9 +562,7 @@ class Config
         } else {
             // read language from settings
             if (isset($config_data['lang'])) {
-                $language = LanguageManager::getInstance()->getLanguage(
-                    $config_data['lang']
-                );
+                $language = LanguageManager::getInstance()->getLanguage($config_data['lang']);
                 if ($language !== false) {
                     $language->activate();
                     $this->setCookie('pma_lang', $language->getCode());
@@ -727,8 +659,6 @@ class Config
 
     /**
      * check config source
-     *
-     * @return bool whether source is valid or not
      */
     public function checkConfigSource(): bool
     {
@@ -857,10 +787,7 @@ class Config
      */
     public function set(string $setting, $value): void
     {
-        if (
-            isset($this->settings[$setting])
-            && $this->settings[$setting] === $value
-        ) {
+        if (isset($this->settings[$setting]) && $this->settings[$setting] === $value) {
             return;
         }
 
@@ -931,7 +858,7 @@ class Config
     public function isHttps(): bool
     {
         if ($this->get('is_https') !== null) {
-            return $this->get('is_https');
+            return (bool) $this->get('is_https');
         }
 
         $url = $this->get('PmaAbsoluteUri');
@@ -1019,8 +946,6 @@ class Config
      * removes cookie
      *
      * @param string $cookieName name of cookie to remove
-     *
-     * @return bool result of setcookie()
      */
     public function removeCookie(string $cookieName): bool
     {
@@ -1053,8 +978,6 @@ class Config
      * @param string $default  default value
      * @param int    $validity validity of cookie in seconds (default is one month)
      * @param bool   $httponly whether cookie is only for HTTP (and not for scripts)
-     *
-     * @return bool result of setcookie()
      */
     public function setCookie(
         string $cookie,
@@ -1065,9 +988,7 @@ class Config
     ): bool {
         global $cfg;
 
-        if (
-            strlen($value) > 0 && $default !== null && $value === $default
-        ) {
+        if (strlen($value) > 0 && $default !== null && $value === $default) {
             // default value is used
             if ($this->issetCookie($cookie)) {
                 // remove cookie
@@ -1124,11 +1045,7 @@ class Config
                 'samesite' => $cfg['CookieSameSite'],
             ];
 
-            return setcookie(
-                $httpCookieName,
-                $value,
-                $optionalParams
-            );
+            return setcookie($httpCookieName, $value, $optionalParams);
         }
 
         // cookie has already $value as value
@@ -1165,8 +1082,6 @@ class Config
      * isset cookie
      *
      * @param string $cookieName The name of the cookie to check
-     *
-     * @return bool result of issetCookie()
      */
     public function issetCookie(string $cookieName): bool
     {

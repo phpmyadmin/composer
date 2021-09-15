@@ -76,11 +76,7 @@ class Transformations
 
         while (($option = array_shift($transformOptions)) !== null) {
             $trimmed = trim($option);
-            if (
-                strlen($trimmed) > 1
-                && $trimmed[0] == "'"
-                && $trimmed[strlen($trimmed) - 1] == "'"
-            ) {
+            if (strlen($trimmed) > 1 && $trimmed[0] == "'" && $trimmed[strlen($trimmed) - 1] == "'") {
                 // '...'
                 $option = mb_substr($trimmed, 1, -1);
             } elseif (isset($trimmed[0]) && $trimmed[0] == "'") {
@@ -303,7 +299,7 @@ class Transformations
                 . "`db_name`, '.', `table_name`, '.', `column_name`"
                 . ') AS column_name, ';
         } else {
-            $com_qry  = 'SELECT `column_name`, ';
+            $com_qry = 'SELECT `column_name`, ';
         }
 
         $com_qry .= '`mimetype`, '
@@ -320,12 +316,7 @@ class Transformations
                 . ' OR `transformation_options` != \'\''
                 . ' OR `input_transformation` != \'\''
                 . ' OR `input_transformation_options` != \'\'' : '') . ')';
-        $result = $dbi->fetchResult(
-            $com_qry,
-            'column_name',
-            null,
-            DatabaseInterface::CONNECT_CONTROL
-        );
+        $result = $dbi->fetchResult($com_qry, 'column_name', null, DatabaseInterface::CONNECT_CONTROL);
 
         foreach ($result as $column => $values) {
             // convert mimetype to new format (f.e. Text_Plain, etc)
@@ -363,8 +354,6 @@ class Transformations
      * @param bool   $forcedelete        force delete, will erase any existing
      *                                   comments for this column
      *
-     * @return bool true, if comment-query was made.
-     *
      * @access public
      */
     public function setMime(
@@ -377,7 +366,7 @@ class Transformations
         $inputTransform,
         $inputTransformOpts,
         $forcedelete = false
-    ) {
+    ): bool {
         global $dbi;
 
         $relation = new Relation($dbi);
@@ -409,11 +398,7 @@ class Transformations
                 AND `table_name`  = \'' . $dbi->escapeString($table) . '\'
                 AND `column_name` = \'' . $dbi->escapeString($key) . '\'';
 
-        $test_rs = $relation->queryAsControlUser(
-            $test_qry,
-            true,
-            DatabaseInterface::QUERY_STORE
-        );
+        $test_rs = $relation->queryAsControlUser($test_qry, true, DatabaseInterface::QUERY_STORE);
 
         if ($test_rs && $dbi->numRows($test_rs) > 0) {
             $row = @$dbi->fetchAssoc($test_rs);
@@ -465,7 +450,7 @@ class Transformations
         }
 
         if (isset($upd_query)) {
-            return $relation->queryAsControlUser($upd_query);
+            return (bool) $relation->queryAsControlUser($upd_query);
         }
 
         return false;
@@ -482,10 +467,8 @@ class Transformations
      * @param string $db     Database name
      * @param string $table  Table name
      * @param string $column Column name
-     *
-     * @return bool State of the query execution
      */
-    public function clear($db, $table = '', $column = '')
+    public function clear($db, $table = '', $column = ''): bool
     {
         global $dbi;
 
@@ -512,6 +495,6 @@ class Transformations
             $delete_sql .= '`db_name` = \'' . $db . '\' ';
         }
 
-        return $dbi->tryQuery($delete_sql);
+        return (bool) $dbi->tryQuery($delete_sql);
     }
 }

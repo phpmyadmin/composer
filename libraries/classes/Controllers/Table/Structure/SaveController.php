@@ -80,7 +80,7 @@ final class SaveController extends AbstractController
      *
      * @return bool true if error occurred
      */
-    private function updateColumns()
+    private function updateColumns(): bool
     {
         $err_url = Url::getFromRoute('/table/structure', [
             'db' => $this->db,
@@ -92,9 +92,7 @@ final class SaveController extends AbstractController
         $adjust_privileges = [];
         $columns_with_index = $this->dbi
             ->getTable($this->db, $this->table)
-            ->getColumnsWithIndex(
-                Index::PRIMARY | Index::UNIQUE
-            );
+            ->getColumnsWithIndex(Index::PRIMARY | Index::UNIQUE);
         for ($i = 0; $i < $field_cnt; $i++) {
             if (! $this->columnNeedsAlterTable($i)) {
                 continue;
@@ -119,16 +117,9 @@ final class SaveController extends AbstractController
             );
 
             // find the remembered sort expression
-            $sorted_col = $this->tableObj->getUiProp(
-                Table::PROP_SORTED_COLUMN
-            );
+            $sorted_col = $this->tableObj->getUiProp(Table::PROP_SORTED_COLUMN);
             // if the old column name is part of the remembered sort expression
-            if (
-                mb_strpos(
-                    (string) $sorted_col,
-                    Util::backquote($_POST['field_orig'][$i])
-                ) !== false
-            ) {
+            if (mb_strpos((string) $sorted_col, Util::backquote($_POST['field_orig'][$i])) !== false) {
                 // delete the whole remembered sort expression
                 $this->tableObj->removeUiProp(Table::PROP_SORTED_COLUMN);
             }
@@ -183,10 +174,7 @@ final class SaveController extends AbstractController
 
             $columns_with_index = $this->dbi
                 ->getTable($this->db, $this->table)
-                ->getColumnsWithIndex(
-                    Index::PRIMARY | Index::UNIQUE | Index::INDEX
-                    | Index::SPATIAL | Index::FULLTEXT
-                );
+                ->getColumnsWithIndex(Index::PRIMARY | Index::UNIQUE | Index::INDEX | Index::SPATIAL | Index::FULLTEXT);
 
             $changedToBlob = [];
             // While changing the Column Collation
@@ -197,12 +185,8 @@ final class SaveController extends AbstractController
                     && $_POST['field_collation'][$i] !== $_POST['field_collation_orig'][$i]
                     && ! in_array($_POST['field_orig'][$i], $columns_with_index)
                 ) {
-                    $secondary_query = 'ALTER TABLE ' . Util::backquote(
-                        $this->table
-                    )
-                        . ' CHANGE ' . Util::backquote(
-                            $_POST['field_orig'][$i]
-                        )
+                    $secondary_query = 'ALTER TABLE ' . Util::backquote($this->table)
+                        . ' CHANGE ' . Util::backquote($_POST['field_orig'][$i])
                         . ' ' . Util::backquote($_POST['field_orig'][$i])
                         . ' BLOB';
 
@@ -226,9 +210,7 @@ final class SaveController extends AbstractController
             $result = $this->dbi->tryQuery($sql_query);
 
             if ($result !== false) {
-                $changed_privileges = $this->adjustColumnPrivileges(
-                    $adjust_privileges
-                );
+                $changed_privileges = $this->adjustColumnPrivileges($adjust_privileges);
 
                 if ($changed_privileges) {
                     $message = Message::success(
@@ -305,26 +287,14 @@ final class SaveController extends AbstractController
                     continue;
                 }
 
-                $this->relation->renameField(
-                    $this->db,
-                    $this->table,
-                    $fieldcontent,
-                    $_POST['field_name'][$fieldindex]
-                );
+                $this->relation->renameField($this->db, $this->table, $fieldcontent, $_POST['field_name'][$fieldindex]);
             }
         }
 
         // update mime types
-        if (
-            isset($_POST['field_mimetype'])
-            && is_array($_POST['field_mimetype'])
-            && $GLOBALS['cfg']['BrowseMIME']
-        ) {
+        if (isset($_POST['field_mimetype']) && is_array($_POST['field_mimetype']) && $GLOBALS['cfg']['BrowseMIME']) {
             foreach ($_POST['field_mimetype'] as $fieldindex => $mimetype) {
-                if (
-                    ! isset($_POST['field_name'][$fieldindex])
-                    || strlen($_POST['field_name'][$fieldindex]) <= 0
-                ) {
+                if (! isset($_POST['field_name'][$fieldindex]) || strlen($_POST['field_name'][$fieldindex]) <= 0) {
                     continue;
                 }
 
@@ -348,10 +318,8 @@ final class SaveController extends AbstractController
      * Verifies if some elements of a column have changed
      *
      * @param int $i column index in the request
-     *
-     * @return bool true if we need to generate ALTER TABLE
      */
-    private function columnNeedsAlterTable($i)
+    private function columnNeedsAlterTable($i): bool
     {
         // these two fields are checkboxes so might not be part of the
         // request; therefore we define them to avoid notices below
@@ -393,11 +361,8 @@ final class SaveController extends AbstractController
      *
      * @param array $adjust_privileges assoc array of old col names mapped to new
      *                                 cols
-     *
-     * @return bool boolean whether at least one column privileges
-     * adjusted
      */
-    private function adjustColumnPrivileges(array $adjust_privileges)
+    private function adjustColumnPrivileges(array $adjust_privileges): bool
     {
         $changed = false;
 

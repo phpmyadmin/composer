@@ -101,8 +101,6 @@ class Export
     /**
      * Detect whether gzencode is needed; it might not be needed if
      * the server is already compressing by itself
-     *
-     * @return bool Whether gzencode is needed
      */
     public function gzencodeNeeded(): bool
     {
@@ -128,8 +126,6 @@ class Export
      * $this->dumpBuffer, otherwise it prints them out.
      *
      * @param string $line the insert statement
-     *
-     * @return bool Whether output succeeded
      */
     public function outputHandler(?string $line): bool
     {
@@ -137,11 +133,7 @@ class Export
 
         // Kanji encoding convert feature
         if ($GLOBALS['output_kanji_conversion']) {
-            $line = Encoding::kanjiStrConv(
-                $line,
-                $GLOBALS['knjenc'],
-                $GLOBALS['xkana'] ?? ''
-            );
+            $line = Encoding::kanjiStrConv($line, $GLOBALS['knjenc'], $GLOBALS['xkana'] ?? '');
         }
 
         // If we have to buffer data, we will perform everything at once at the end
@@ -152,17 +144,10 @@ class Export
 
                 if ($this->dumpBufferLength > $GLOBALS['memory_limit']) {
                     if ($GLOBALS['output_charset_conversion']) {
-                        $this->dumpBuffer = Encoding::convertString(
-                            'utf-8',
-                            $GLOBALS['charset'],
-                            $this->dumpBuffer
-                        );
+                        $this->dumpBuffer = Encoding::convertString('utf-8', $GLOBALS['charset'], $this->dumpBuffer);
                     }
 
-                    if (
-                        $GLOBALS['compression'] === 'gzip'
-                        && $this->gzencodeNeeded()
-                    ) {
+                    if ($GLOBALS['compression'] === 'gzip' && $this->gzencodeNeeded()) {
                         // as a gzipped file
                         // without the optional parameter level because it bugs
                         $this->dumpBuffer = gzencode($this->dumpBuffer);
@@ -196,11 +181,7 @@ class Export
             }
         } elseif ($GLOBALS['asfile']) {
             if ($GLOBALS['output_charset_conversion']) {
-                $line = Encoding::convertString(
-                    'utf-8',
-                    $GLOBALS['charset'],
-                    $line
-                );
+                $line = Encoding::convertString('utf-8', $GLOBALS['charset'], $line);
             }
 
             if ($GLOBALS['save_on_server'] && mb_strlen((string) $line) > 0) {
@@ -212,10 +193,7 @@ class Export
 
                 // Here, use strlen rather than mb_strlen to get the length
                 // in bytes to compare against the number of bytes written.
-                if (
-                    ! $writeResult
-                    || $writeResult != strlen((string) $line)
-                ) {
+                if (! $writeResult || $writeResult != strlen((string) $line)) {
                     $GLOBALS['message'] = Message::error(
                         __('Insufficient space to save the file %s.')
                     );
@@ -330,18 +308,18 @@ class Export
         $extensionLength = mb_strlen($requiredExtension);
         $userExtension = mb_substr($filename, -$extensionLength);
         if (mb_strtolower($userExtension) != $requiredExtension) {
-            $filename  .= $requiredExtension;
+            $filename .= $requiredExtension;
         }
 
-        $mediaType  = $exportPlugin->getProperties()->getMimeType();
+        $mediaType = $exportPlugin->getProperties()->getMimeType();
 
         // If dump is going to be compressed, set correct mime_type and add
         // compression to extension
         if ($compression === 'gzip') {
-            $filename  .= '.gz';
+            $filename .= '.gz';
             $mediaType = 'application/x-gzip';
         } elseif ($compression === 'zip') {
-            $filename  .= '.zip';
+            $filename .= '.zip';
             $mediaType = 'application/zip';
         }
 
@@ -408,11 +386,7 @@ class Export
         // part of the filename) to avoid a remote code execution vulnerability
         $filename = Sanitize::sanitizeFilename($filename, true);
 
-        return $this->getFinalFilenameAndMimetypeForFilename(
-            $exportPlugin,
-            $compression,
-            $filename
-        );
+        return $this->getFinalFilenameAndMimetypeForFilename($exportPlugin, $compression, $filename);
     }
 
     /**
@@ -496,10 +470,7 @@ class Export
         fclose($fileHandle);
         // Here, use strlen rather than mb_strlen to get the length
         // in bytes to compare against the number of bytes written.
-        if (
-            strlen($dumpBuffer) > 0
-            && (! $writeResult || $writeResult != strlen($dumpBuffer))
-        ) {
+        if (strlen($dumpBuffer) > 0 && (! $writeResult || $writeResult != strlen($dumpBuffer))) {
             $message = new Message(
                 __('Insufficient space to save the file %s.'),
                 Message::ERROR,
@@ -687,10 +658,7 @@ class Export
 
         // Walk over databases
         foreach ($GLOBALS['dblist']->databases as $currentDb) {
-            if (
-                ! isset($tmpSelect)
-                || ! mb_strpos(' ' . $tmpSelect, '|' . $currentDb . '|')
-            ) {
+            if (! isset($tmpSelect) || ! mb_strpos(' ' . $tmpSelect, '|' . $currentDb . '|')) {
                 continue;
             }
 
@@ -869,20 +837,11 @@ class Export
                 $tableObj = new Table($table, $db);
                 $nonGeneratedCols = $tableObj->getNonGeneratedColumns(true);
 
-                $localQuery  = 'SELECT ' . implode(', ', $nonGeneratedCols)
+                $localQuery = 'SELECT ' . implode(', ', $nonGeneratedCols)
                     . ' FROM ' . Util::backquote($db)
                     . '.' . Util::backquote($table);
 
-                if (
-                    ! $exportPlugin->exportData(
-                        $db,
-                        $table,
-                        $crlf,
-                        $errorUrl,
-                        $localQuery,
-                        $aliases
-                    )
-                ) {
+                if (! $exportPlugin->exportData($db, $table, $crlf, $errorUrl, $localQuery, $aliases)) {
                     break;
                 }
             }
@@ -930,10 +889,7 @@ class Export
         if (isset($GLOBALS['sql_create_view'])) {
             foreach ($views as $view) {
                 // no data export for a view
-                if (
-                    $whatStrucOrData !== 'structure'
-                    && $whatStrucOrData !== 'structure_and_data'
-                ) {
+                if ($whatStrucOrData !== 'structure' && $whatStrucOrData !== 'structure_and_data') {
                     continue;
                 }
 
@@ -1023,13 +979,7 @@ class Export
             return;
         }
 
-        if (
-            ! $exportPlugin->exportRawQuery(
-                $errorUrl,
-                $sqlQuery,
-                $crlf
-            )
-        ) {
+        if (! $exportPlugin->exportRawQuery($errorUrl, $sqlQuery, $crlf)) {
             $GLOBALS['message'] = Message::error(
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 /* l10n: A query written by the user is a "raw query" that could be using no tables or databases in particular */
@@ -1084,25 +1034,17 @@ class Export
             return;
         }
 
-        if (
-            isset($allrows)
-            && $allrows == '0'
-            && $limitTo > 0
-            && $limitFrom >= 0
-        ) {
-            $addQuery  = ' LIMIT '
+        if (isset($allrows) && $allrows == '0' && $limitTo > 0 && $limitFrom >= 0) {
+            $addQuery = ' LIMIT '
                         . ($limitFrom > 0 ? $limitFrom . ', ' : '')
                         . $limitTo;
         } else {
-            $addQuery  = '';
+            $addQuery = '';
         }
 
         $tableObject = new Table($table, $db);
         $isView = $tableObject->isView();
-        if (
-            $whatStrucOrData === 'structure'
-            || $whatStrucOrData === 'structure_and_data'
-        ) {
+        if ($whatStrucOrData === 'structure' || $whatStrucOrData === 'structure_and_data') {
             if ($isView) {
                 if (isset($GLOBALS['sql_create_view'])) {
                     if (
@@ -1147,10 +1089,7 @@ class Export
         // If this is an export of a single view, we have to export data;
         // for example, a PDF report
         // if it is a merge table, no data is exported
-        if (
-            $whatStrucOrData === 'data'
-            || $whatStrucOrData === 'structure_and_data'
-        ) {
+        if ($whatStrucOrData === 'data' || $whatStrucOrData === 'structure_and_data') {
             if (! empty($sqlQuery)) {
                 // only preg_replace if needed
                 if (! empty($addQuery)) {
@@ -1165,21 +1104,12 @@ class Export
                 $tableObj = new Table($table, $db);
                 $nonGeneratedCols = $tableObj->getNonGeneratedColumns(true);
 
-                $localQuery  = 'SELECT ' . implode(', ', $nonGeneratedCols)
+                $localQuery = 'SELECT ' . implode(', ', $nonGeneratedCols)
                     . ' FROM ' . Util::backquote($db)
                     . '.' . Util::backquote($table) . $addQuery;
             }
 
-            if (
-                ! $exportPlugin->exportData(
-                    $db,
-                    $table,
-                    $crlf,
-                    $errorUrl,
-                    $localQuery,
-                    $aliases
-                )
-            ) {
+            if (! $exportPlugin->exportData($db, $table, $crlf, $errorUrl, $localQuery, $aliases)) {
                 return;
             }
         }

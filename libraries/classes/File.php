@@ -132,8 +132,6 @@ class File
     /**
      * deletes file if it is temporary, usually from a moved upload file
      *
-     * @return bool success
-     *
      * @access public
      */
     public function cleanUp(): bool
@@ -148,8 +146,6 @@ class File
     /**
      * deletes the file
      *
-     * @return bool success
-     *
      * @access public
      */
     public function delete(): bool
@@ -162,8 +158,6 @@ class File
      * file objects with temp flags are deleted with object destruction
      *
      * @param bool $is_temp sets the temp flag
-     *
-     * @return bool File::$_is_temp
      *
      * @access public
      */
@@ -263,8 +257,6 @@ class File
      *
      * @param string $name name of file uploaded
      *
-     * @return bool success
-     *
      * @access public
      */
     public function setUploadedFile(string $name): bool
@@ -287,8 +279,6 @@ class File
      * @param string $key       the md5 hash of the column name
      * @param string $rownumber number of row to process
      *
-     * @return bool success
-     *
      * @access public
      */
     public function setUploadedFromTblChangeRequest(
@@ -302,11 +292,7 @@ class File
             return false;
         }
 
-        $file = $this->fetchUploadedFromTblChangeRequestMultiple(
-            $_FILES['fields_upload'],
-            $rownumber,
-            $key
-        );
+        $file = $this->fetchUploadedFromTblChangeRequestMultiple($_FILES['fields_upload'], $rownumber, $key);
 
         switch ($file['error']) {
             case UPLOAD_ERR_OK:
@@ -395,8 +381,6 @@ class File
      * @param string $key       the md5 hash of the column name
      * @param string $rownumber number of row to process
      *
-     * @return bool success
-     *
      * @access public
      */
     public function setSelectedFromTblChangeRequest(
@@ -408,9 +392,7 @@ class File
             && is_string($_REQUEST['fields_uploadlocal']['multi_edit'][$rownumber][$key])
         ) {
             // ... whether with multiple rows ...
-            return $this->setLocalSelectedFile(
-                $_REQUEST['fields_uploadlocal']['multi_edit'][$rownumber][$key]
-            );
+            return $this->setLocalSelectedFile($_REQUEST['fields_uploadlocal']['multi_edit'][$rownumber][$key]);
         }
 
         return false;
@@ -431,8 +413,6 @@ class File
     /**
      * Checks whether there was any error.
      *
-     * @return bool whether an error occurred or not
-     *
      * @access public
      */
     public function isError(): bool
@@ -446,8 +426,6 @@ class File
      *
      * @param string $key       the md5 hash of the column name
      * @param string $rownumber number of row to process
-     *
-     * @return bool success
      *
      * @access public
      */
@@ -476,8 +454,6 @@ class File
      * Sets named file to be read from UploadDir.
      *
      * @param string $name file name
-     *
-     * @return bool success
      *
      * @access public
      */
@@ -514,8 +490,6 @@ class File
     /**
      * Checks whether file can be read.
      *
-     * @return bool whether the file is readable or not
-     *
      * @access public
      */
     public function isReadable(): bool
@@ -529,8 +503,6 @@ class File
      * If we are on a server with open_basedir, we must move the file
      * before opening it. The FAQ 1.11 explains how to create the "./tmp"
      * directory - if needed
-     *
-     * @return bool whether uploaded file is fine or not
      *
      * @todo move check of $cfg['TempDir'] into Config?
      * @access public

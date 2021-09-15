@@ -115,8 +115,6 @@ class Bookmark
     /**
      * Adds a bookmark
      *
-     * @return bool whether the INSERT succeeds or not
-     *
      * @access public
      */
     public function save(): bool
@@ -134,13 +132,11 @@ class Bookmark
             . "'" . $this->dbi->escapeString($this->query) . "', "
             . "'" . $this->dbi->escapeString($this->label) . "')";
 
-        return $this->dbi->query($query, DatabaseInterface::CONNECT_CONTROL);
+        return (bool) $this->dbi->query($query, DatabaseInterface::CONNECT_CONTROL);
     }
 
     /**
      * Deletes a bookmark
-     *
-     * @return bool true if successful
      *
      * @access public
      */
@@ -151,11 +147,11 @@ class Bookmark
             return false;
         }
 
-        $query  = 'DELETE FROM ' . Util::backquote($cfgBookmark['db'])
+        $query = 'DELETE FROM ' . Util::backquote($cfgBookmark['db'])
             . '.' . Util::backquote($cfgBookmark['table'])
             . ' WHERE id = ' . $this->id;
 
-        return $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL);
+        return (bool) $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL);
     }
 
     /**
@@ -181,11 +177,7 @@ class Bookmark
     public function applyVariables(array $variables): string
     {
         // remove comments that encloses a variable placeholder
-        $query = (string) preg_replace(
-            '|/\*(.*\[VARIABLE[0-9]*\].*)\*/|imsU',
-            '${1}',
-            $this->query
-        );
+        $query = (string) preg_replace('|/\*(.*\[VARIABLE[0-9]*\].*)\*/|imsU', '${1}', $this->query);
         // replace variable placeholders with values
         $number_of_variables = $this->getVariableCount();
         for ($i = 1; $i <= $number_of_variables; $i++) {
@@ -228,8 +220,8 @@ class Bookmark
         $cfgRelation = $relation->getRelationsParam();
         if ($cfgRelation['bookmarkwork']) {
             $cfgBookmark = [
-                'user'  => $user,
-                'db'    => $cfgRelation['db'],
+                'user' => $user,
+                'db' => $cfgRelation['db'],
                 'table' => $cfgRelation['bookmark'],
             ];
             Cache::set($cacheKey, $cfgBookmark);

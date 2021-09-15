@@ -152,9 +152,7 @@ class ImportMediawiki extends ImportPlugin
 
                 if ($inside_comment) {
                     // Check end of comment
-                    if (
-                        ! strcmp(mb_substr($cur_buffer_line, 0, 4), '-->')
-                    ) {
+                    if (! strcmp(mb_substr($cur_buffer_line, 0, 4), '-->')) {
                         // Only data comments are closed. The structure comments
                         // will be closed when a data comment begins (in order to
                         // skip structure tables)
@@ -169,26 +167,12 @@ class ImportMediawiki extends ImportPlugin
                     } else {
                         // Check table name
                         $match_table_name = [];
-                        if (
-                            preg_match(
-                                '/^Table data for `(.*)`$/',
-                                $cur_buffer_line,
-                                $match_table_name
-                            )
-                        ) {
+                        if (preg_match('/^Table data for `(.*)`$/', $cur_buffer_line, $match_table_name)) {
                             $cur_table_name = $match_table_name[1];
                             $inside_data_comment = true;
 
-                            $inside_structure_comment = $this->mngInsideStructComm(
-                                $inside_structure_comment
-                            );
-                        } elseif (
-                            preg_match(
-                                '/^Table structure for `(.*)`$/',
-                                $cur_buffer_line,
-                                $match_table_name
-                            )
-                        ) {
+                            $inside_structure_comment = $this->mngInsideStructComm($inside_structure_comment);
+                        } elseif (preg_match('/^Table structure for `(.*)`$/', $cur_buffer_line, $match_table_name)) {
                             // The structure comments will be ignored
                             $inside_structure_comment = true;
                         }
@@ -532,10 +516,8 @@ class ImportMediawiki extends ImportPlugin
 
     /**
      * Returns true if the table should be analyzed, false otherwise
-     *
-     * @return bool
      */
-    private function getAnalyze()
+    private function getAnalyze(): bool
     {
         return $this->analyze;
     }
@@ -579,10 +561,8 @@ class ImportMediawiki extends ImportPlugin
      * Manage $inside_structure_comment
      *
      * @param bool $inside_structure_comment Value to test
-     *
-     * @return bool
      */
-    private function mngInsideStructComm($inside_structure_comment)
+    private function mngInsideStructComm($inside_structure_comment): bool
     {
         // End ignoring structure rows
         if ($inside_structure_comment) {

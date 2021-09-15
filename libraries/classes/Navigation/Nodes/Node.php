@@ -220,20 +220,13 @@ class Node
     public function parents($self = false, $containers = false, $groups = false): array
     {
         $parents = [];
-        if (
-            $self
-            && ($this->type != self::CONTAINER || $containers)
-            && (! $this->isGroup || $groups)
-        ) {
+        if ($self && ($this->type != self::CONTAINER || $containers) && (! $this->isGroup || $groups)) {
             $parents[] = $this;
         }
 
         $parent = $this->parent;
         while ($parent !== null) {
-            if (
-                ($parent->type != self::CONTAINER || $containers)
-                && (! $parent->isGroup || $groups)
-            ) {
+            if (($parent->type != self::CONTAINER || $containers) && (! $parent->isGroup || $groups)) {
                 $parents[] = $parent;
             }
 
@@ -265,8 +258,6 @@ class Node
      *
      * @param bool $countEmptyContainers Whether to count empty child
      *                                   containers as valid children
-     *
-     * @return bool Whether the node has child nodes
      */
     public function hasChildren($countEmptyContainers = true): bool
     {
@@ -304,10 +295,7 @@ class Node
         }
 
         foreach ($this->parent->children as $child) {
-            if (
-                $child !== $this
-                && ($child->type == self::OBJECT || $child->hasChildren(false))
-            ) {
+            if ($child !== $this && ($child->type == self::OBJECT || $child->hasChildren(false))) {
                 $retval = true;
                 break;
             }
@@ -364,9 +352,9 @@ class Node
         $vPathClean = array_reverse($vPathClean);
 
         return [
-            'aPath'       => $aPath,
+            'aPath' => $aPath,
             'aPath_clean' => $aPathClean,
-            'vPath'       => $vPath,
+            'vPath' => $vPath,
             'vPath_clean' => $vPathClean,
         ];
     }
@@ -411,14 +399,8 @@ class Node
     {
         global $dbi;
 
-        if (
-            ! $GLOBALS['cfg']['NavigationTreeEnableGrouping']
-            || ! $GLOBALS['cfg']['ShowDatabasesNavigationAsTree']
-        ) {
-            if (
-                isset($GLOBALS['cfg']['Server']['DisableIS'])
-                && ! $GLOBALS['cfg']['Server']['DisableIS']
-            ) {
+        if (! $GLOBALS['cfg']['NavigationTreeEnableGrouping'] || ! $GLOBALS['cfg']['ShowDatabasesNavigationAsTree']) {
+            if (isset($GLOBALS['cfg']['Server']['DisableIS']) && ! $GLOBALS['cfg']['Server']['DisableIS']) {
                 $query = 'SELECT COUNT(*) ';
                 $query .= 'FROM INFORMATION_SCHEMA.SCHEMATA ';
                 $query .= $this->getWhereClause('SCHEMA_NAME', $searchClause);
@@ -508,10 +490,8 @@ class Node
      * Detemines whether a given database should be hidden according to 'hide_db'
      *
      * @param string $db database name
-     *
-     * @return bool whether to hide
      */
-    private function isHideDb($db)
+    private function isHideDb($db): bool
     {
         return ! empty($GLOBALS['cfg']['Server']['hide_db'])
             && preg_match('/' . $GLOBALS['cfg']['Server']['hide_db'] . '/', $db);
@@ -615,9 +595,7 @@ class Node
      */
     public function getCssClasses($match): string
     {
-        if (
-            ! $GLOBALS['cfg']['NavigationTreeEnableExpansion']
-        ) {
+        if (! $GLOBALS['cfg']['NavigationTreeEnableExpansion']) {
             return '';
         }
 
@@ -643,9 +621,7 @@ class Node
      */
     public function getIcon($match): string
     {
-        if (
-            ! $GLOBALS['cfg']['NavigationTreeEnableExpansion']
-        ) {
+        if (! $GLOBALS['cfg']['NavigationTreeEnableExpansion']) {
             return '';
         }
 
@@ -670,22 +646,13 @@ class Node
         $cfgRelation = $this->relation->getRelationsParam();
         if ($cfgRelation['navwork']) {
             $navTable = Util::backquote($cfgRelation['db'])
-                . '.' . Util::backquote(
-                    $cfgRelation['navigationhiding']
-                );
+                . '.' . Util::backquote($cfgRelation['navigationhiding']);
             $sqlQuery = 'SELECT `db_name`, COUNT(*) AS `count` FROM ' . $navTable
                 . " WHERE `username`='"
-                . $dbi->escapeString(
-                    $GLOBALS['cfg']['Server']['user']
-                ) . "'"
+                . $dbi->escapeString($GLOBALS['cfg']['Server']['user']) . "'"
                 . ' GROUP BY `db_name`';
 
-            return $dbi->fetchResult(
-                $sqlQuery,
-                'db_name',
-                'count',
-                DatabaseInterface::CONNECT_CONTROL
-            );
+            return $dbi->fetchResult($sqlQuery, 'db_name', 'count', DatabaseInterface::CONNECT_CONTROL);
         }
 
         return null;
@@ -899,10 +866,7 @@ class Node
                 }
 
                 foreach ($prefixes as $prefix) {
-                    $startsWith = strpos(
-                        $arr[0] . $dbSeparator,
-                        $prefix . $dbSeparator
-                    ) === 0;
+                    $startsWith = strpos($arr[0] . $dbSeparator, $prefix . $dbSeparator) === 0;
                     if ($startsWith) {
                         $retval[] = $arr[0];
                         break;

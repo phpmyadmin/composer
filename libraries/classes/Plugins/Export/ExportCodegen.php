@@ -68,9 +68,7 @@ class ExportCodegen extends ExportPlugin
         // create the root group that will be the options field for
         // $exportPluginProperties
         // this will be shown as "Format specific options"
-        $exportSpecificOptions = new OptionsPropertyRootGroup(
-            'Format Specific Options'
-        );
+        $exportSpecificOptions = new OptionsPropertyRootGroup('Format Specific Options');
 
         // general options main group
         $generalOptions = new OptionsPropertyMainGroup('general_opts');
@@ -94,20 +92,16 @@ class ExportCodegen extends ExportPlugin
 
     /**
      * Outputs export header
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportHeader()
+    public function exportHeader(): bool
     {
         return true;
     }
 
     /**
      * Outputs export footer
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportFooter()
+    public function exportFooter(): bool
     {
         return true;
     }
@@ -117,10 +111,8 @@ class ExportCodegen extends ExportPlugin
      *
      * @param string $db      Database name
      * @param string $dbAlias Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBHeader($db, $dbAlias = '')
+    public function exportDBHeader($db, $dbAlias = ''): bool
     {
         return true;
     }
@@ -129,10 +121,8 @@ class ExportCodegen extends ExportPlugin
      * Outputs database footer
      *
      * @param string $db Database name
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBFooter($db)
+    public function exportDBFooter($db): bool
     {
         return true;
     }
@@ -143,10 +133,8 @@ class ExportCodegen extends ExportPlugin
      * @param string $db         Database name
      * @param string $exportType 'server', 'database', 'table'
      * @param string $dbAlias    Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBCreate($db, $exportType, $dbAlias = '')
+    public function exportDBCreate($db, $exportType, $dbAlias = ''): bool
     {
         return true;
     }
@@ -160,8 +148,6 @@ class ExportCodegen extends ExportPlugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery SQL query for obtaining data
      * @param array  $aliases  Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     public function exportData(
         $db,
@@ -170,7 +156,7 @@ class ExportCodegen extends ExportPlugin
         $errorUrl,
         $sqlQuery,
         array $aliases = []
-    ) {
+    ): bool {
         $format = (int) $GLOBALS['codegen_format'];
 
         if ($format === self::HANDLER_NHIBERNATE_CS) {
@@ -260,9 +246,7 @@ class ExportCodegen extends ExportPlugin
             $lines[] = '    {';
             $lines[] = '        #region Member Variables';
             foreach ($tableProperties as $tableProperty) {
-                $lines[] = $tableProperty->formatCs(
-                    '        protected #dotNetPrimitiveType# _#name#;'
-                );
+                $lines[] = $tableProperty->formatCs('        protected #dotNetPrimitiveType# _#name#;');
             }
 
             $lines[] = '        #endregion';
@@ -275,9 +259,7 @@ class ExportCodegen extends ExportPlugin
                     continue;
                 }
 
-                $temp[] = $tableProperty->formatCs(
-                    '#dotNetPrimitiveType# #name#'
-                );
+                $temp[] = $tableProperty->formatCs('#dotNetPrimitiveType# #name#');
             }
 
             $lines[] = '        public '
@@ -291,9 +273,7 @@ class ExportCodegen extends ExportPlugin
                     continue;
                 }
 
-                $lines[] = $tableProperty->formatCs(
-                    '            this._#name#=#name#;'
-                );
+                $lines[] = $tableProperty->formatCs('            this._#name#=#name#;');
             }
 
             $lines[] = '        }';

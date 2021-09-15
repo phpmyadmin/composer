@@ -40,10 +40,8 @@ class Sanitize
      * @param string $url   URL to check
      * @param bool   $http  Whether to allow http links
      * @param bool   $other Whether to allow ftp and mailto links
-     *
-     * @return bool True if string can be used as link
      */
-    public static function checkLink($url, $http = false, $other = false)
+    public static function checkLink($url, $http = false, $other = false): bool
     {
         $url = strtolower($url);
         $valid_starts = [
@@ -186,19 +184,19 @@ class Sanitize
 
         /* Interpret bb code */
         $replace_pairs = [
-            '[em]'      => '<em>',
-            '[/em]'     => '</em>',
-            '[strong]'  => '<strong>',
+            '[em]' => '<em>',
+            '[/em]' => '</em>',
+            '[strong]' => '<strong>',
             '[/strong]' => '</strong>',
-            '[code]'    => '<code>',
-            '[/code]'   => '</code>',
-            '[kbd]'     => '<kbd>',
-            '[/kbd]'    => '</kbd>',
-            '[br]'      => '<br>',
-            '[/a]'      => '</a>',
-            '[/doc]'      => '</a>',
-            '[sup]'     => '<sup>',
-            '[/sup]'    => '</sup>',
+            '[code]' => '<code>',
+            '[/code]' => '</code>',
+            '[kbd]' => '<kbd>',
+            '[/kbd]' => '</kbd>',
+            '[br]' => '<br>',
+            '[/a]' => '</a>',
+            '[/doc]' => '</a>',
+            '[sup]' => '<sup>',
+            '[/sup]' => '</sup>',
             '[conferr]' => '<iframe src="show_config_errors.php"><a href='
                 . '"show_config_errors.php">show_config_errors.php</a></iframe>',
             // used in libraries/Util.php

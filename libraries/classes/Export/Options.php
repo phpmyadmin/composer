@@ -40,10 +40,8 @@ final class Options
      * Outputs appropriate checked statement for checkbox.
      *
      * @param string $str option name
-     *
-     * @return bool
      */
-    private function checkboxCheck($str)
+    private function checkboxCheck($str): bool
     {
         return isset($GLOBALS['cfg']['Export'][$str])
             && $GLOBALS['cfg']['Export'][$str];
@@ -80,12 +78,7 @@ final class Options
                     $isSelected = true;
                 }
             } elseif (! empty($tmpSelect)) {
-                if (
-                    mb_strpos(
-                        ' ' . $tmpSelect,
-                        '|' . $currentDb . '|'
-                    )
-                ) {
+                if (mb_strpos(' ' . $tmpSelect, '|' . $currentDb . '|')) {
                     $isSelected = true;
                 }
             } else {
@@ -231,22 +224,13 @@ final class Options
         }
 
         if ($exportType === 'database') {
-            return (string) $config->getUserValue(
-                'pma_db_filename_template',
-                $cfg['Export']['file_template_database']
-            );
+            return (string) $config->getUserValue('pma_db_filename_template', $cfg['Export']['file_template_database']);
         }
 
         if ($exportType === 'table') {
-            return (string) $config->getUserValue(
-                'pma_table_filename_template',
-                $cfg['Export']['file_template_table']
-            );
+            return (string) $config->getUserValue('pma_table_filename_template', $cfg['Export']['file_template_table']);
         }
 
-        return (string) $config->getUserValue(
-            'pma_server_filename_template',
-            $cfg['Export']['file_template_server']
-        );
+        return (string) $config->getUserValue('pma_server_filename_template', $cfg['Export']['file_template_server']);
     }
 }

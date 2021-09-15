@@ -48,10 +48,10 @@ class StorageEngine
     protected const DETAILS_TYPE_BOOLEAN = 3; // 'ON' or 'OFF'
 
     /** @var string engine name */
-    public $engine  = 'dummy';
+    public $engine = 'dummy';
 
     /** @var string engine title/description */
-    public $title   = 'PMA Dummy Engine Class';
+    public $title = 'PMA Dummy Engine Class';
 
     /** @var string engine lang description */
     public $comment = 'If you read this text inside phpMyAdmin, something went wrong...';
@@ -74,8 +74,8 @@ class StorageEngine
             return;
         }
 
-        $this->engine  = $engine;
-        $this->title   = $storage_engines[$engine]['Engine'];
+        $this->engine = $engine;
+        $this->title = $storage_engines[$engine]['Engine'];
         $this->comment = ($storage_engines[$engine]['Comment'] ?? '');
         switch ($storage_engines[$engine]['Support']) {
             case 'DEFAULT':
@@ -139,8 +139,6 @@ class StorageEngine
      * This is public to be used in the StructureComtroller, the first release
      * of this function was looking Mroonga in the engines list but this second
      *  method checks too that mroonga is installed successfully
-     *
-     * @return bool true when the mroonga_command is found
      */
     public static function hasMroongaEngine(): bool
     {
@@ -148,7 +146,7 @@ class StorageEngine
         $cacheKey = 'storage-engine.mroonga.has.mroonga_command';
 
         if (Cache::has($cacheKey)) {
-            return Cache::get($cacheKey, false);
+            return (bool) Cache::get($cacheKey, false);
         }
 
         $supportsMroonga = $dbi->tryQuery('SELECT mroonga_command(\'object_list\');') !== false;
@@ -307,11 +305,9 @@ class StorageEngine
      *
      * @param string $engine name of engine
      *
-     * @return bool whether $engine is valid or not
-     *
      * @static
      */
-    public static function isValid($engine)
+    public static function isValid($engine): bool
     {
         if ($engine === 'PBMS') {
             return true;
@@ -330,7 +326,7 @@ class StorageEngine
      */
     public function getHtmlVariables()
     {
-        $ret        = '';
+        $ret = '';
 
         foreach ($this->getVariablesStatus() as $details) {
             $ret .= '<tr>' . "\n"
@@ -423,10 +419,7 @@ class StorageEngine
         while ($row = $dbi->fetchAssoc($res)) {
             if (isset($variables[$row['Variable_name']])) {
                 $mysql_vars[$row['Variable_name']] = $variables[$row['Variable_name']];
-            } elseif (
-                ! $like
-                && mb_stripos($row['Variable_name'], $this->engine) !== 0
-            ) {
+            } elseif (! $like && mb_stripos($row['Variable_name'], $this->engine) !== 0) {
                 continue;
             }
 
@@ -487,9 +480,7 @@ class StorageEngine
                 break;
             case self::SUPPORT_NO:
             default:
-                $message = __(
-                    'This MySQL server does not support the %s storage engine.'
-                );
+                $message = __('This MySQL server does not support the %s storage engine.');
         }
 
         return sprintf($message, htmlspecialchars($this->title));

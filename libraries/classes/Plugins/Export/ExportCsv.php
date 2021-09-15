@@ -48,9 +48,7 @@ class ExportCsv extends ExportPlugin
         // create the root group that will be the options field for
         // $exportPluginProperties
         // this will be shown as "Format specific options"
-        $exportSpecificOptions = new OptionsPropertyRootGroup(
-            'Format Specific Options'
-        );
+        $exportSpecificOptions = new OptionsPropertyRootGroup('Format Specific Options');
 
         // general options main group
         $generalOptions = new OptionsPropertyMainGroup('general_opts');
@@ -90,9 +88,7 @@ class ExportCsv extends ExportPlugin
             __('Put columns names in the first row')
         );
         $generalOptions->addProperty($leaf);
-        $leaf = new HiddenPropertyItem(
-            'structure_or_data'
-        );
+        $leaf = new HiddenPropertyItem('structure_or_data');
         $generalOptions->addProperty($leaf);
         // add the main group to the root group
         $exportSpecificOptions->addProperty($generalOptions);
@@ -105,10 +101,8 @@ class ExportCsv extends ExportPlugin
 
     /**
      * Outputs export header
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportHeader()
+    public function exportHeader(): bool
     {
         global $what, $csv_terminated, $csv_separator, $csv_enclosed, $csv_escaped;
         //Enable columns names by default for CSV
@@ -138,10 +132,7 @@ class ExportCsv extends ExportPlugin
                 $GLOBALS['csv_columns'] = 'yes';
             }
         } else {
-            if (
-                empty($csv_terminated)
-                || mb_strtolower($csv_terminated) === 'auto'
-            ) {
+            if (empty($csv_terminated) || mb_strtolower($csv_terminated) === 'auto') {
                 $csv_terminated = $GLOBALS['crlf'];
             } else {
                 $csv_terminated = str_replace(
@@ -167,10 +158,8 @@ class ExportCsv extends ExportPlugin
 
     /**
      * Outputs export footer
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportFooter()
+    public function exportFooter(): bool
     {
         return true;
     }
@@ -180,10 +169,8 @@ class ExportCsv extends ExportPlugin
      *
      * @param string $db      Database name
      * @param string $dbAlias Alias of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBHeader($db, $dbAlias = '')
+    public function exportDBHeader($db, $dbAlias = ''): bool
     {
         return true;
     }
@@ -192,10 +179,8 @@ class ExportCsv extends ExportPlugin
      * Outputs database footer
      *
      * @param string $db Database name
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBFooter($db)
+    public function exportDBFooter($db): bool
     {
         return true;
     }
@@ -206,10 +191,8 @@ class ExportCsv extends ExportPlugin
      * @param string $db         Database name
      * @param string $exportType 'server', 'database', 'table'
      * @param string $dbAlias    Aliases of db
-     *
-     * @return bool Whether it succeeded
      */
-    public function exportDBCreate($db, $exportType, $dbAlias = '')
+    public function exportDBCreate($db, $exportType, $dbAlias = ''): bool
     {
         return true;
     }
@@ -223,8 +206,6 @@ class ExportCsv extends ExportPlugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery SQL query for obtaining data
      * @param array  $aliases  Aliases of db/table/columns
-     *
-     * @return bool Whether it succeeded
      */
     public function exportData(
         $db,
@@ -233,7 +214,7 @@ class ExportCsv extends ExportPlugin
         $errorUrl,
         $sqlQuery,
         array $aliases = []
-    ) {
+    ): bool {
         global $what, $csv_terminated, $csv_separator, $csv_enclosed, $csv_escaped, $dbi;
 
         $db_alias = $db;
@@ -241,11 +222,7 @@ class ExportCsv extends ExportPlugin
         $this->initAlias($aliases, $db_alias, $table_alias);
 
         // Gets the data from the database
-        $result = $dbi->query(
-            $sqlQuery,
-            DatabaseInterface::CONNECT_USER,
-            DatabaseInterface::QUERY_UNBUFFERED
-        );
+        $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $dbi->numFields($result);
 
         // If required, get fields name at the first line
@@ -262,11 +239,7 @@ class ExportCsv extends ExportPlugin
                     $schema_insert .= $col_as;
                 } else {
                     $schema_insert .= $csv_enclosed
-                        . str_replace(
-                            $csv_enclosed,
-                            $csv_escaped . $csv_enclosed,
-                            $col_as
-                        )
+                        . str_replace($csv_enclosed, $csv_escaped . $csv_enclosed, $col_as)
                         . $csv_enclosed;
                 }
 
@@ -292,10 +265,7 @@ class ExportCsv extends ExportPlugin
                     }
 
                     // remove CRLF characters within field
-                    if (
-                        isset($GLOBALS[$what . '_removeCRLF'])
-                        && $GLOBALS[$what . '_removeCRLF']
-                    ) {
+                    if (isset($GLOBALS[$what . '_removeCRLF']) && $GLOBALS[$what . '_removeCRLF']) {
                         $row[$j] = str_replace(
                             [
                                 "\r",
@@ -325,11 +295,7 @@ class ExportCsv extends ExportPlugin
                         } else {
                             // avoid a problem when escape string equals enclose
                             $schema_insert .= $csv_enclosed
-                                . str_replace(
-                                    $csv_enclosed,
-                                    $csv_escaped . $csv_enclosed,
-                                    $row[$j]
-                                )
+                                . str_replace($csv_enclosed, $csv_escaped . $csv_enclosed, $row[$j])
                                 . $csv_enclosed;
                         }
                     }
@@ -360,8 +326,6 @@ class ExportCsv extends ExportPlugin
      * @param string $errorUrl the url to go back in case of error
      * @param string $sqlQuery the rawquery to output
      * @param string $crlf     the end of line sequence
-     *
-     * @return bool if succeeded
      */
     public function exportRawQuery(string $errorUrl, string $sqlQuery, string $crlf): bool
     {

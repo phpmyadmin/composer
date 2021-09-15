@@ -136,10 +136,7 @@ abstract class TestBase extends TestCase
         $this->addCapabilities($capabilities);
         $url = $this->getHubUrl();
 
-        $this->webDriver = RemoteWebDriver::create(
-            $url,
-            $capabilities
-        );
+        $this->webDriver = RemoteWebDriver::create($url, $capabilities);
 
         // The session Id is only used by BrowserStack
         if ($this->hasBrowserstackConfig()) {
@@ -348,10 +345,7 @@ abstract class TestBase extends TestCase
                 $capabilities = DesiredCapabilities::chrome();
                 $chromeOptions = new ChromeOptions();
                 $chromeOptions->addArguments(['--lang=en']);
-                $capabilities->setCapability(
-                    ChromeOptions::CAPABILITY_W3C,
-                    $chromeOptions
-                );
+                $capabilities->setCapability(ChromeOptions::CAPABILITY_W3C, $chromeOptions);
                 $capabilities->setCapability(
                     'loggingPrefs',
                     ['browser' => 'ALL']
@@ -370,10 +364,7 @@ abstract class TestBase extends TestCase
                         'browser_version',
                         '80.0' // Force chrome 80.0
                     );
-                    $capabilities->setCapability(
-                        'resolution',
-                        '1920x1080'
-                    );
+                    $capabilities->setCapability('resolution', '1920x1080');
                 }
 
                 return $capabilities;
@@ -463,19 +454,12 @@ abstract class TestBase extends TestCase
     {
         $this->navigateTo('index.php?route=/check-relations');
         $pageContent = $this->waitForElement('id', 'page_content');
-        if (
-            ! preg_match(
-                '/Configuration of pmadb… not OK/i',
-                $pageContent->getText()
-            )
-        ) {
+        if (! preg_match('/Configuration of pmadb… not OK/i', $pageContent->getText())) {
             return;
         }
 
         if (! $this->fixUpPhpMyAdminStorage()) {
-            $this->markTestSkipped(
-                'The phpMyAdmin configuration storage is not working.'
-            );
+            $this->markTestSkipped('The phpMyAdmin configuration storage is not working.');
         }
 
         // If it failed the code already has exited with markTestSkipped
@@ -501,11 +485,7 @@ abstract class TestBase extends TestCase
 
         $this->navigateTo('');
         /* Wait while page */
-        while (
-            $this->webDriver->executeScript(
-                'return document.readyState !== "complete";'
-            )
-        ) {
+        while ($this->webDriver->executeScript('return document.readyState !== "complete";')) {
             usleep(5000);
         }
 
@@ -730,15 +710,10 @@ abstract class TestBase extends TestCase
 
     /**
      * Check if user is logged in to phpmyadmin
-     *
-     * @return bool Where or not user is logged in
      */
     public function isLoggedIn(): bool
     {
-        return $this->isElementPresent(
-            'xpath',
-            '//*[@class="navigationbar"]'
-        );
+        return $this->isElementPresent('xpath', '//*[@class="navigationbar"]');
     }
 
     /**
@@ -816,8 +791,6 @@ abstract class TestBase extends TestCase
      *
      * @param string $func Locate using - cssSelector, xpath, tagName, partialLinkText, linkText, name, id, className
      * @param string $arg  Selector
-     *
-     * @return bool Whether or not the element is present
      */
     public function isElementPresent(string $func, string $arg): bool
     {
@@ -849,15 +822,8 @@ abstract class TestBase extends TestCase
      */
     public function getCellByTableId(string $tableID, int $row, int $column): string
     {
-        $sel = sprintf(
-            'table#%s tbody tr:nth-child(%d) td:nth-child(%d)',
-            $tableID,
-            $row,
-            $column
-        );
-        $element = $this->byCssSelector(
-            $sel
-        );
+        $sel = sprintf('table#%s tbody tr:nth-child(%d) td:nth-child(%d)', $tableID, $row, $column);
+        $element = $this->byCssSelector($sel);
         $text = $element->getText();
 
         return $text && is_string($text) ? trim($text) : '';
@@ -874,15 +840,8 @@ abstract class TestBase extends TestCase
      */
     public function getCellByTableClass(string $tableClass, int $row, int $column): string
     {
-        $sel = sprintf(
-            'table.%s tbody tr:nth-child(%d) td:nth-child(%d)',
-            $tableClass,
-            $row,
-            $column
-        );
-        $element = $this->byCssSelector(
-            $sel
-        );
+        $sel = sprintf('table.%s tbody tr:nth-child(%d) td:nth-child(%d)', $tableClass, $row, $column);
+        $element = $this->byCssSelector($sel);
         $text = $element->getText();
 
         return $text && is_string($text) ? trim($text) : '';
@@ -984,11 +943,7 @@ abstract class TestBase extends TestCase
             $ele->click();
             $this->waitForElement('cssSelector', 'li.dropdown.show > a');
 
-            $this->waitUntilElementIsPresent(
-                'cssSelector',
-                'li.nav-item.dropdown.show > ul',
-                5000
-            );
+            $this->waitUntilElementIsPresent('cssSelector', 'li.nav-item.dropdown.show > ul', 5000);
         } catch (WebDriverException $e) {
             return;
         }
@@ -1005,16 +960,10 @@ abstract class TestBase extends TestCase
         $this->navigateDatabase($this->databaseName, $gotoHomepageRequired);
 
         // go to table page
-        $this->waitForElement(
-            'xpath',
-            "//th//a[contains(., '" . $table . "')]"
-        )->click();
+        $this->waitForElement('xpath', "//th//a[contains(., '" . $table . "')]")->click();
         $this->waitAjax();
 
-        $this->waitForElement(
-            'xpath',
-            "//a[@class='nav-link text-nowrap' and contains(., 'Browse')]"
-        );
+        $this->waitForElement('xpath', "//a[@class='nav-link text-nowrap' and contains(., 'Browse')]");
     }
 
     /**
@@ -1041,10 +990,7 @@ abstract class TestBase extends TestCase
         $this->waitAjax();
 
         // Wait for it to load
-        $this->waitForElement(
-            'xpath',
-            "//a[@class='nav-link text-nowrap' and contains(., 'Structure')]"
-        );
+        $this->waitForElement('xpath', "//a[@class='nav-link text-nowrap' and contains(., 'Structure')]");
     }
 
     /**
@@ -1107,9 +1053,7 @@ abstract class TestBase extends TestCase
      */
     public function scrollToBottom(): void
     {
-        $this->webDriver->executeScript(
-            'window.scrollTo(0,document.body.scrollHeight);'
-        );
+        $this->webDriver->executeScript('window.scrollTo(0,document.body.scrollHeight);');
     }
 
     /**
@@ -1117,9 +1061,7 @@ abstract class TestBase extends TestCase
      */
     public function reloadPage(): void
     {
-        $this->webDriver->executeScript(
-            'window.location.reload();'
-        );
+        $this->webDriver->executeScript('window.location.reload();');
     }
 
     /**
@@ -1147,14 +1089,9 @@ abstract class TestBase extends TestCase
     public function waitAjaxMessage(): void
     {
         /* Get current message count */
-        $ajax_message_count = $this->webDriver->executeScript(
-            'return ajaxMessageCount;'
-        );
+        $ajax_message_count = $this->webDriver->executeScript('return ajaxMessageCount;');
         /* Ensure the popup is gone */
-        $this->waitForElementNotPresent(
-            'id',
-            'ajax_message_num_' . $ajax_message_count
-        );
+        $this->waitForElementNotPresent('id', 'ajax_message_num_' . $ajax_message_count);
     }
 
     /**
@@ -1199,11 +1136,7 @@ abstract class TestBase extends TestCase
             ]
         );
         $ch = curl_init();
-        curl_setopt(
-            $ch,
-            CURLOPT_URL,
-            self::SESSION_REST_URL . $this->sessionId . '.json'
-        );
+        curl_setopt($ch, CURLOPT_URL, self::SESSION_REST_URL . $this->sessionId . '.json');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
@@ -1232,11 +1165,7 @@ abstract class TestBase extends TestCase
         }
 
         $ch = curl_init();
-        curl_setopt(
-            $ch,
-            CURLOPT_URL,
-            self::SESSION_REST_URL . $this->sessionId . '.json'
-        );
+        curl_setopt($ch, CURLOPT_URL, self::SESSION_REST_URL . $this->sessionId . '.json');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt(
             $ch,

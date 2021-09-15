@@ -140,8 +140,6 @@ class ThemeManager
      *
      * @param string|null $theme theme name
      *
-     * @return bool true on success
-     *
      * @access public
      */
     public function setActiveTheme(?string $theme): bool
@@ -245,11 +243,7 @@ class ThemeManager
                 continue;
             }
 
-            $newTheme = Theme::load(
-                $this->themesPathUrl . $dir,
-                $this->themesPath . $dir . DIRECTORY_SEPARATOR,
-                $dir
-            );
+            $newTheme = Theme::load($this->themesPathUrl . $dir, $this->themesPath . $dir . DIRECTORY_SEPARATOR, $dir);
             if (! $newTheme instanceof Theme) {
                 continue;
             }

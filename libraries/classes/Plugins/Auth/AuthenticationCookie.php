@@ -90,11 +90,9 @@ class AuthenticationCookie extends AuthenticationPlugin
      *
      * this function MUST exit/quit the application
      *
-     * @return bool|void
-     *
      * @global string $conn_error the last connection error
      */
-    public function showLoginForm()
+    public function showLoginForm(): bool
     {
         global $conn_error, $route;
 
@@ -121,10 +119,7 @@ class AuthenticationCookie extends AuthenticationPlugin
          */
         if ($session_expired) {
             $response->setRequestStatus(false);
-            $response->addJSON(
-                'new_token',
-                $_SESSION[' PMA_token ']
-            );
+            $response->addJSON('new_token', $_SESSION[' PMA_token ']);
         }
 
         /**
@@ -132,23 +127,17 @@ class AuthenticationCookie extends AuthenticationPlugin
          * using the modal was successful after session expiration.
          */
         if (isset($_REQUEST['session_timedout'])) {
-            $response->addJSON(
-                'logged_in',
-                0
-            );
+            $response->addJSON('logged_in', 0);
         }
 
         // No recall if blowfish secret is not configured as it would produce
         // garbage
-        if (
-            $GLOBALS['cfg']['LoginCookieRecall']
-            && ! empty($GLOBALS['cfg']['blowfish_secret'])
-        ) {
-            $default_user   = $this->user;
+        if ($GLOBALS['cfg']['LoginCookieRecall'] && ! empty($GLOBALS['cfg']['blowfish_secret'])) {
+            $default_user = $this->user;
             $default_server = $GLOBALS['pma_auth_server'];
             $hasAutocomplete = true;
         } else {
-            $default_user   = '';
+            $default_user = '';
             $default_server = '';
             $hasAutocomplete = false;
         }
@@ -170,10 +159,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         // Show error message
         if (! empty($conn_error)) {
             $errorMessages = Message::rawError((string) $conn_error)->getDisplay();
-        } elseif (
-            isset($_GET['session_expired'])
-            && intval($_GET['session_expired']) == 1
-        ) {
+        } elseif (isset($_GET['session_expired']) && intval($_GET['session_expired']) == 1) {
             $errorMessages = Message::rawError(
                 __('Your session has expired. Please log in again.')
             )->getDisplay();
@@ -269,10 +255,8 @@ class AuthenticationCookie extends AuthenticationPlugin
      * it returns true if all seems ok which usually leads to auth_set_user()
      *
      * it directly switches to showFailure() if user inactivity timeout is reached
-     *
-     * @return bool whether we get authentication settings or not
      */
-    public function readCredentials()
+    public function readCredentials(): bool
     {
         global $conn_error;
 
@@ -353,10 +337,7 @@ class AuthenticationCookie extends AuthenticationPlugin
 
             $this->password = $password;
 
-            if (
-                $GLOBALS['cfg']['AllowArbitraryServer']
-                && isset($_REQUEST['pma_servername'])
-            ) {
+            if ($GLOBALS['cfg']['AllowArbitraryServer'] && isset($_REQUEST['pma_servername'])) {
                 if ($GLOBALS['cfg']['ArbitraryServerRegexp']) {
                     $parts = explode(' ', $_REQUEST['pma_servername']);
                     if (count($parts) === 2) {
@@ -365,14 +346,9 @@ class AuthenticationCookie extends AuthenticationPlugin
                         $tmp_host = $_REQUEST['pma_servername'];
                     }
 
-                    $match = preg_match(
-                        $GLOBALS['cfg']['ArbitraryServerRegexp'],
-                        $tmp_host
-                    );
+                    $match = preg_match($GLOBALS['cfg']['ArbitraryServerRegexp'], $tmp_host);
                     if (! $match) {
-                        $conn_error = __(
-                            'You are not allowed to log in to this MySQL server!'
-                        );
+                        $conn_error = __('You are not allowed to log in to this MySQL server!');
 
                         return false;
                     }
@@ -477,14 +453,11 @@ class AuthenticationCookie extends AuthenticationPlugin
      *
      * @return bool always true
      */
-    public function storeCredentials()
+    public function storeCredentials(): bool
     {
         global $cfg;
 
-        if (
-            $GLOBALS['cfg']['AllowArbitraryServer']
-            && ! empty($GLOBALS['pma_auth_server'])
-        ) {
+        if ($GLOBALS['cfg']['AllowArbitraryServer'] && ! empty($GLOBALS['pma_auth_server'])) {
             /* Allow to specify 'host port' */
             $parts = explode(' ', $GLOBALS['pma_auth_server']);
             if (count($parts) === 2) {
@@ -510,10 +483,8 @@ class AuthenticationCookie extends AuthenticationPlugin
 
     /**
      * Stores user credentials after successful login.
-     *
-     * @return void|bool
      */
-    public function rememberCredentials()
+    public function rememberCredentials(): void
     {
         global $route;
 
@@ -545,50 +516,38 @@ class AuthenticationCookie extends AuthenticationPlugin
         // user logged in successfully after session expiration
         if (isset($_REQUEST['session_timedout'])) {
             $response = ResponseRenderer::getInstance();
-            $response->addJSON(
-                'logged_in',
-                1
-            );
-            $response->addJSON(
-                'success',
-                1
-            );
-            $response->addJSON(
-                'new_token',
-                $_SESSION[' PMA_token ']
-            );
+            $response->addJSON('logged_in', 1);
+            $response->addJSON('success', 1);
+            $response->addJSON('new_token', $_SESSION[' PMA_token ']);
 
             if (! defined('TESTSUITE')) {
                 exit;
             }
 
-            return false;
+            return;
         }
 
         // Set server cookies if required (once per session) and, in this case,
         // force reload to ensure the client accepts cookies
-        if (! $GLOBALS['from_cookie']) {
-
-            /**
-             * Clear user cache.
-             */
-            Util::clearUserCache();
-
-            ResponseRenderer::getInstance()
-                ->disable();
-
-            Core::sendHeaderLocation(
-                './index.php?route=/' . Url::getCommonRaw($url_params, '&'),
-                true
-            );
-            if (! defined('TESTSUITE')) {
-                exit;
-            }
-
-            return false;
+        if ($GLOBALS['from_cookie']) {
+            return;
         }
 
-        return true;
+        /**
+         * Clear user cache.
+         */
+        Util::clearUserCache();
+
+        ResponseRenderer::getInstance()->disable();
+
+        Core::sendHeaderLocation(
+            './index.php?route=/' . Url::getCommonRaw($url_params, '&'),
+            true
+        );
+
+        if (! defined('TESTSUITE')) {
+            exit;
+        }
     }
 
     /**
@@ -794,13 +753,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         $aes_secret = $this->getAESSecret($secret);
         $iv = $this->createIV();
         if ($this->useOpenSsl) {
-            $result = openssl_encrypt(
-                $data,
-                'AES-128-CBC',
-                $aes_secret,
-                0,
-                $iv
-            );
+            $result = openssl_encrypt($data, 'AES-128-CBC', $aes_secret, 0, $iv);
         } else {
             $cipher = new AES('cbc');
             $cipher->setIV($iv);
