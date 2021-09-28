@@ -142,7 +142,7 @@ class ImportOds extends ImportPlugin
          * result in increased performance without the need to
          * alter the code in any way. It's basically a freebee.
          */
-        $xml = @simplexml_load_string($buffer, 'SimpleXMLElement', LIBXML_COMPACT);
+        $xml = @simplexml_load_string($buffer, SimpleXMLElement::class, LIBXML_COMPACT);
 
         unset($buffer);
 
@@ -150,8 +150,7 @@ class ImportOds extends ImportPlugin
             $sheets = [];
             $GLOBALS['message'] = Message::error(
                 __(
-                    'The XML file specified was either malformed or incomplete.'
-                    . ' Please correct the issue and try again.'
+                    'The XML file specified was either malformed or incomplete. Please correct the issue and try again.'
                 )
             );
             $GLOBALS['error'] = true;

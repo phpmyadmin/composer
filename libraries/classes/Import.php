@@ -29,7 +29,6 @@ use function mb_strpos;
 use function mb_strtoupper;
 use function mb_substr;
 use function mb_substr_count;
-use function pow;
 use function preg_match;
 use function preg_replace;
 use function sprintf;
@@ -152,10 +151,7 @@ class Import
                 $message = Message::getMessageForAffectedRows($aAffectedRows);
                 $msg .= $message->getMessage();
             } else {
-                $msg .= __(
-                    'MySQL returned an empty result set (i.e. zero '
-                    . 'rows).'
-                );
+                $msg .= __('MySQL returned an empty result set (i.e. zero rows).');
             }
 
             if (($aNumRows > 0) || $isUseQuery) {
@@ -178,8 +174,7 @@ class Import
             [$db, $reload] = $this->lookForUse($sql, $db, $reload);
         }
 
-        $pattern = '@^[\s]*(DROP|CREATE)[\s]+(IF EXISTS[[:space:]]+)'
-            . '?(TABLE|DATABASE)[[:space:]]+(.+)@im';
+        $pattern = '@^[\s]*(DROP|CREATE)[\s]+(IF EXISTS[[:space:]]+)?(TABLE|DATABASE)[[:space:]]+(.+)@im';
         if ($result == false || ! preg_match($pattern, $sql)) {
             return;
         }
@@ -554,10 +549,10 @@ class Import
             // base26 to base10 conversion : multiply each number
             // with corresponding value of the position, in this case
             // $i=0 : 1; $i=1 : 26; $i=2 : 676; ...
-            $columnNumber += $number * pow(26, $i);
+            $columnNumber += $number * 26 ** $i;
         }
 
-        return $columnNumber;
+        return (int) $columnNumber;
     }
 
     /**

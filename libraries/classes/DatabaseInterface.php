@@ -553,16 +553,16 @@ class DatabaseInterface implements DbalInterface
                         }
                     }
 
-                    if (! empty($$sort_by)) {
+                    if (! empty(${$sort_by})) {
                         if ($sort_order === 'DESC') {
-                            array_multisort($$sort_by, SORT_DESC, $each_tables);
+                            array_multisort(${$sort_by}, SORT_DESC, $each_tables);
                         } else {
-                            array_multisort($$sort_by, SORT_ASC, $each_tables);
+                            array_multisort(${$sort_by}, SORT_ASC, $each_tables);
                         }
                     }
 
                     // cleanup the temporary sort array
-                    unset($$sort_by);
+                    unset(${$sort_by});
                 }
 
                 if ($limit_count) {
@@ -1921,8 +1921,7 @@ class DatabaseInterface implements DbalInterface
         if ($mode == self::CONNECT_CONTROL) {
             trigger_error(
                 __(
-                    'Connection for controluser as defined in your '
-                    . 'configuration failed.'
+                    'Connection for controluser as defined in your configuration failed.'
                 ),
                 E_USER_WARNING
             );

@@ -58,10 +58,11 @@ use function mb_strtolower;
 use function mb_strtoupper;
 use function mb_substr;
 use function md5;
-use function mt_rand;
+use function mt_getrandmax;
 use function pack;
 use function preg_match;
 use function preg_replace;
+use function random_int;
 use function str_contains;
 use function str_replace;
 use function strcasecmp;
@@ -266,7 +267,7 @@ class Results
         $this->properties['server'] = $server;
         $this->properties['goto'] = $goto;
         $this->properties['sql_query'] = $sqlQuery;
-        $this->properties['unique_id'] = mt_rand();
+        $this->properties['unique_id'] = random_int(0, mt_getrandmax());
     }
 
     /**
@@ -956,8 +957,7 @@ class Results
 
         // prepare some options for the End button
         if ($isInnodb && $this->properties['unlim_num_rows'] > $GLOBALS['cfg']['MaxExactCount']) {
-            $inputForRealEnd = '<input id="real_end_input" type="hidden" '
-                . 'name="find_real_end" value="1">';
+            $inputForRealEnd = '<input id="real_end_input" type="hidden" name="find_real_end" value="1">';
             // no backquote around this message
             $onclick = '';
         } else {
@@ -1283,8 +1283,7 @@ class Results
             $unsortedSqlQuerySecondPart = '';
             if (
                 preg_match(
-                    '@(.*)([[:space:]](LIMIT (.*)|PROCEDURE (.*)|'
-                    . 'FOR UPDATE|LOCK IN SHARE MODE))@is',
+                    '@(.*)([[:space:]](LIMIT (.*)|PROCEDURE (.*)|FOR UPDATE|LOCK IN SHARE MODE))@is',
                     $unsortedSqlQuery,
                     $myReg
                 )
@@ -1629,8 +1628,7 @@ class Results
 
         if (
             preg_match(
-                '@(.*)([[:space:]](LIMIT (.*)|PROCEDURE (.*)|FOR UPDATE|'
-                . 'LOCK IN SHARE MODE))@is',
+                '@(.*)([[:space:]](LIMIT (.*)|PROCEDURE (.*)|FOR UPDATE|LOCK IN SHARE MODE))@is',
                 $unsortedSqlQuery,
                 $regs3
             )
@@ -4178,8 +4176,7 @@ class Results
         if ($table->isView() && ($total == $GLOBALS['cfg']['MaxExactCountViews'])) {
             $message = Message::notice(
                 __(
-                    'This view has at least this number of rows. '
-                    . 'Please refer to %sdocumentation%s.'
+                    'This view has at least this number of rows. Please refer to %sdocumentation%s.'
                 )
             );
 
