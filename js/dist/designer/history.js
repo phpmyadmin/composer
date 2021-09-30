@@ -901,54 +901,39 @@ DesignerHistory.buildQuery = function () {
   if (qOrderBy !== '') {
     qSelect += '\nORDER BY ' + qOrderBy;
   }
-  /**
-   * @var button_options Object containing options
-   *                     for jQueryUI dialog buttons
-   */
 
-
-  var buttonOptions = {};
-
-  buttonOptions[Messages.strClose] = function () {
-    $(this).dialog('close');
-  };
-
-  buttonOptions[Messages.strSubmit] = function () {
+  $('#buildQuerySubmitButton').on('click', function () {
     if (vqbEditor) {
-      var $elm = $ajaxDialog.find('textarea');
+      var $elm = $('#buildQueryModal').find('textarea');
       vqbEditor.save();
       $elm.val(vqbEditor.getValue());
     }
 
     $('#vqb_form').trigger('submit');
-  };
+  });
+  $('#buildQueryModal').modal('show');
+  $('#buildQueryModalLabel').first().text('SELECT');
+  $('#buildQueryModal').on('shown.bs.modal', function () {
+    // Attach syntax highlighted editor to query dialog
 
-  var $ajaxDialog = $('#box').dialog({
-    appendTo: '#page_content',
-    width: 500,
-    buttons: buttonOptions,
-    modal: true,
-    title: 'SELECT'
-  }); // Attach syntax highlighted editor to query dialog
+    /**
+     * @var $elm jQuery object containing the reference
+     *           to the query textarea.
+     */
+    var $elm = $('#buildQueryModal').find('textarea');
 
-  /**
-   * @var $elm jQuery object containing the reference
-   *           to the query textarea.
-   */
+    if (!vqbEditor) {
+      vqbEditor = Functions.getSqlEditor($elm);
+    }
 
-  var $elm = $ajaxDialog.find('textarea');
-
-  if (!vqbEditor) {
-    vqbEditor = Functions.getSqlEditor($elm);
-  }
-
-  if (vqbEditor) {
-    vqbEditor.setValue(qSelect);
-    vqbEditor.focus();
-  } else {
-    $elm.val(qSelect);
-    $elm.trigger('focus');
-  }
+    if (vqbEditor) {
+      vqbEditor.setValue(qSelect);
+      vqbEditor.focus();
+    } else {
+      $elm.val(qSelect);
+      $elm.trigger('focus');
+    }
+  });
 };
 
 AJAX.registerTeardown('designer/history.js', function () {
