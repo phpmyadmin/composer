@@ -74,7 +74,6 @@ use function is_bool;
 use function mysqli_init;
 use function stripos;
 use function trigger_error;
-use const PHP_VERSION_ID;
 use function mysqli_get_client_info;
 
 /**
@@ -393,17 +392,10 @@ class DbiMysqli implements DbiExtension
     /**
      * returns a string that represents the client library version
      *
-     * @param mysqli $mysqli mysql link
-     *
      * @return string MySQL client library version
      */
-    public function getClientInfo($mysqli)
+    public function getClientInfo()
     {
-        // See: https://github.com/phpmyadmin/phpmyadmin/issues/16911
-        if (PHP_VERSION_ID < 80100) {
-            return $mysqli->get_client_info();
-        }
-
         return mysqli_get_client_info();
     }
 
