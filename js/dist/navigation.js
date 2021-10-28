@@ -445,7 +445,7 @@ $(function () {
 
   $(document).on('click', 'li.new_view a.ajax', function (event) {
     event.preventDefault();
-    Functions.createViewDialog($(this));
+    Functions.createViewModal($(this));
   });
   /** Hide navigation tree item */
 
