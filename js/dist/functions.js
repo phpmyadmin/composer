@@ -2592,7 +2592,6 @@ jQuery.fn.sortTable = Functions.sortTable;
  */
 
 AJAX.registerTeardown('functions.js', function () {
-  $(document).off('submit', '#create_table_form_minimal.ajax');
   $(document).off('submit', 'form.create_table_form.ajax');
   $(document).off('click', 'form.create_table_form.ajax input[name=submit_num_fields]');
   $(document).off('keyup', 'form.create_table_form.ajax input');
