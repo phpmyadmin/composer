@@ -218,7 +218,6 @@ AJAX.registerTeardown('sql.js', function () {
   $(document).off('click', 'th.column_heading.marker');
   $(document).off('scroll', window);
   $(document).off('keyup', '.filter_rows');
-  $(document).off('click', '#printView');
 
   if (codeMirrorEditor) {
     codeMirrorEditor.off('change');
@@ -401,16 +400,6 @@ AJAX.registerOnload('sql.js', function () {
 
     document.body.removeChild(textArea);
   }); // end of Copy to Clipboard action
-
-  /**
-   * Attach Event Handler for 'Print' link
-   */
-
-  $(document).on('click', '#printView', function (event) {
-    event.preventDefault(); // Take to preview mode
-
-    Functions.printPreview();
-  }); // end of 'Print' action
 
   /**
    * Attach the {@link makegrid} function to a custom event, which will be

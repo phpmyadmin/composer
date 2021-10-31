@@ -403,7 +403,7 @@ var AJAX = {
     if (data.errors) {
       $('<div></div>', {
         id: 'pma_errors',
-        class: 'clearfloat'
+        class: 'clearfloat d-print-none'
       }).insertAfter('#selflink').append(data.errors); // bind for php error reporting forms (bottom)
 
       $('#pma_ignore_errors_bottom').on('click', function (e) {
@@ -585,7 +585,7 @@ var AJAX = {
         if (data.errors) {
           $('<div></div>', {
             id: 'pma_errors',
-            class: 'clearfloat'
+            class: 'clearfloat d-print-none'
           }).insertAfter('#selflink').append(data.errors); // bind for php error reporting forms (bottom)
 
           $('#pma_ignore_errors_bottom').on('click', function (e) {

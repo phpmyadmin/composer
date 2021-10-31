@@ -3991,14 +3991,10 @@ Functions.getCellValue = function (td) {
     return $td.text();
   }
 };
-
-$(window).on('popstate', function () {
-  $('#printcss').attr('media', 'print');
-  return true;
-});
 /**
  * Unbind all event handlers before tearing down a page
  */
+
 
 AJAX.registerTeardown('functions.js', function () {
   $(document).off('change', '.autosubmit');
@@ -4012,53 +4008,11 @@ AJAX.registerOnload('functions.js', function () {
   });
 });
 /**
- * Produce print preview
+ * @implements EventListener
  */
 
-Functions.printPreview = function () {
-  $('#printcss').attr('media', 'all');
-  Functions.createPrintAndBackButtons();
-};
-/**
- * Create print and back buttons in preview page
- */
-
-
-Functions.createPrintAndBackButtons = function () {
-  var backButton = $('<input>', {
-    type: 'button',
-    value: Messages.back,
-    class: 'btn btn-secondary',
-    id: 'back_button_print_view'
-  });
-  backButton.on('click', Functions.removePrintAndBackButton);
-  backButton.appendTo('#page_content');
-  var printButton = $('<input>', {
-    type: 'button',
-    value: Messages.print,
-    class: 'btn btn-primary',
-    id: 'print_button_print_view'
-  });
-  printButton.on('click', Functions.printPage);
-  printButton.appendTo('#page_content');
-};
-/**
- * Remove print and back buttons and revert to normal view
- */
-
-
-Functions.removePrintAndBackButton = function () {
-  $('#printcss').attr('media', 'print');
-  $('#back_button_print_view').remove();
-  $('#print_button_print_view').remove();
-};
-/**
- * Print page
- */
-
-
-Functions.printPage = function () {
-  if (typeof window.print !== 'undefined') {
+const PrintPage = {
+  handleEvent: () => {
     window.print();
   }
 };
@@ -4066,15 +4020,18 @@ Functions.printPage = function () {
  * Unbind all event handlers before tearing down a page
  */
 
-
 AJAX.registerTeardown('functions.js', function () {
-  $('input#print').off('click');
+  document.querySelectorAll('.jsPrintButton').forEach(item => {
+    item.removeEventListener('click', PrintPage);
+  });
   $(document).off('click', 'a.create_view.ajax');
   $(document).off('keydown', '#createViewModal input, #createViewModal select');
   $(document).off('change', '#fkc_checkbox');
 });
 AJAX.registerOnload('functions.js', function () {
-  $('input#print').on('click', Functions.printPage);
+  document.querySelectorAll('.jsPrintButton').forEach(item => {
+    item.addEventListener('click', PrintPage);
+  });
   $('.logout').on('click', function () {
     var form = $('<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + Functions.escapeHtml(CommonParams.get('token')) + '">' + '</form>');
     $('body').append(form);
