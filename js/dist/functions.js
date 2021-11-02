@@ -3608,6 +3608,7 @@ AJAX.registerOnload('functions.js', function () {
 
 Functions.mainMenuResizerCallback = function () {
   // 5 px margin for jumping menu in Chrome
+  // eslint-disable-next-line compat/compat
   return $(document.body).width() - 5;
 }; // This must be fired only once after the initial page load
 

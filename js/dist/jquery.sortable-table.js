@@ -64,7 +64,8 @@
       $.error('Method ' + method + ' does not exist on jQuery.sortableTable');
     }
 
-    function SortableTableInstance(table, options = {}) {
+    function SortableTableInstance(table) {
+      let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var down = false;
       var $draggedEl;
       var oldCell;
@@ -272,7 +273,9 @@
         previewMove = null;
       }
 
-      function moveTo(elem, opts = {}) {
+      function moveTo(elem) {
+        let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
         if (!opts.pos) {
           opts.pos = {
             left: 0,

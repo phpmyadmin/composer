@@ -1414,7 +1414,8 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         $('#selection_box').remove();
       }
 
-      var selectionBox = $('<div id="selection_box" >');
+      var selectionBox = $('<div id="selection_box" >'); // eslint-disable-next-line compat/compat
+
       $(document.body).append(selectionBox);
       selectionStartX = ev.pageX;
       selectionStartY = ev.pageY;
@@ -1457,7 +1458,8 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     });
     $('#gridchart' + runtime.chartAI).on('jqplotMouseLeave', function () {
       drawTimeSpan = false;
-    });
+    }); // eslint-disable-next-line compat/compat
+
     $(document.body).on('mouseup', function () {
       if ($('#selection_box').length) {
         $('#selection_box').remove();
@@ -1570,7 +1572,8 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
 
           if (elem.nodes[j].transformFn) {
-            value = chartValueTransform(elem.nodes[j].transformFn, chartData[key][j], oldChartData === null || oldChartData[key] === null || oldChartData[key] === undefined ? null : oldChartData[key][j]); // Otherwise use original value and apply differential and divisor if given,
+            value = chartValueTransform(elem.nodes[j].transformFn, chartData[key][j], // Check if first iteration (oldChartData==null), or if newly added chart oldChartData[key]==null
+            oldChartData === null || oldChartData[key] === null || oldChartData[key] === undefined ? null : oldChartData[key][j]); // Otherwise use original value and apply differential and divisor if given,
             // in this case we have only one data point per series - located at chartData[key][j][0]
           } else {
             value = parseFloat(chartData[key][j][0].value);

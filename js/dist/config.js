@@ -16,7 +16,9 @@ var configScriptLoaded;
  * @return {boolean}
  */
 
-function isStorageSupported(type, warn = false) {
+function isStorageSupported(type) {
+  let warn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
   try {
     window[type].setItem('PMATest', 'test'); // Check whether key-value pair was set successfully
 

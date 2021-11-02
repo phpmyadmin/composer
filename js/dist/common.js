@@ -152,7 +152,8 @@ var CommonActions = {
    *
    * @return {void}
    */
-  refreshMain: function (url, callback = undefined) {
+  refreshMain: function (url) {
+    let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
     var newUrl = url;
 
     if (!newUrl) {
