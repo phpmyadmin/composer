@@ -114,7 +114,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         obj: obj,
         objLeft: $(obj).position().left,
         objWidth: $(g.t).find('th.draggable:visible').eq(n).find('span').outerWidth()
-      };
+      }; // eslint-disable-next-line compat/compat
+
       $(document.body).css('cursor', 'col-resize').noSelect();
 
       if (g.isCellEditActive) {
@@ -151,7 +152,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         obj: obj,
         objTop: objPos.top,
         objLeft: objPos.left
-      };
+      }; // eslint-disable-next-line compat/compat
+
       $(document.body).css('cursor', 'move').noSelect();
 
       if (g.isCellEditActive) {
@@ -245,7 +247,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
         }, 'fast').fadeOut();
         $(g.cPointer).css('visibility', 'hidden');
         g.colReorder = false;
-      }
+      } // eslint-disable-next-line compat/compat
+
 
       $(document.body).css('cursor', 'inherit').noSelect(false);
     },

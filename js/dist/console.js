@@ -296,7 +296,8 @@ var Console = {
    */
   show: function show(inputFocus) {
     Console.setConfig('Mode', 'show');
-    var pmaConsoleHeight = Math.max(92, Console.config.Height);
+    var pmaConsoleHeight = Math.max(92, Console.config.Height); // eslint-disable-next-line compat/compat
+
     pmaConsoleHeight = Math.min(Console.config.Height, (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 25);
     Console.$consoleContent.css({
       display: 'block'

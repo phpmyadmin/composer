@@ -385,7 +385,8 @@ AJAX.registerOnload('sql.js', function () {
         textArea.value += $(this).text() + '\t';
       });
       textArea.value += '\n';
-    });
+    }); // eslint-disable-next-line compat/compat
+
     document.body.appendChild(textArea);
     textArea.select();
 
@@ -393,7 +394,8 @@ AJAX.registerOnload('sql.js', function () {
       document.execCommand('copy');
     } catch (err) {
       alert('Sorry! Unable to copy');
-    }
+    } // eslint-disable-next-line compat/compat
+
 
     document.body.removeChild(textArea);
   }); // end of Copy to Clipboard action
