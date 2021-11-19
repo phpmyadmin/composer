@@ -49,15 +49,18 @@
                   {% endif %}
 
                   <li id="li_select_mysql_collation" class="list-group-item">
-                    <form class="disableAjax" method="post" action="{{ url('/collation-connection') }}">
+                    <form method="post" action="{{ url('/collation-connection') }}" class="row row-cols-lg-auto g-3 align-items-center disableAjax">
                       {{ get_hidden_inputs(null, null, 4, 'collation_connection') }}
-                      <label for="select_collation_connection">
-                        {{ get_image('s_asci') }}
-                        {% trans 'Server connection collation:' %}
-                        {{ show_mysql_docu('charset-connection') }}
-                      </label>
+                      <div class="col-12">
+                        <label for="collationConnectionSelect" class="col-form-label">
+                          {{ get_image('s_asci') }}
+                          {% trans 'Server connection collation:' %}
+                          {{ show_mysql_docu('charset-connection') }}
+                        </label>
+                      </div>
                       {% if charsets is not empty %}
-                        <select lang="en" dir="ltr" name="collation_connection" id="select_collation_connection" class="autosubmit">
+                      <div class="col-12">
+                        <select lang="en" dir="ltr" name="collation_connection" id="collationConnectionSelect" class="form-select autosubmit">
                           <option value="">{% trans 'Collation' %}</option>
                           <option value=""></option>
                           {% for charset in charsets %}
@@ -70,6 +73,7 @@
                             </optgroup>
                           {% endfor %}
                         </select>
+                      </div>
                       {% endif %}
                     </form>
                   </li>
@@ -120,20 +124,24 @@
 
                 {% if has_theme_manager %}
                   <li id="li_select_theme" class="list-group-item">
-                    <form method="post" action="{{ url('/themes/set') }}" class="disableAjax">
+                    <form method="post" action="{{ url('/themes/set') }}" class="row row-cols-lg-auto g-3 align-items-center disableAjax">
                       {{ get_hidden_inputs() }}
                       <div class="col-12">
-                        <label for="themeSelect" class="col-form-label text-nowrap">
-                          {{ get_image('s_theme') }}
-                          {% trans 'Theme' %}
+                        <label for="themeSelect" class="col-form-label">
+                          {{ get_icon('s_theme', 'Theme'|trans) }}
                         </label>
                       </div>
                       <div class="col-12">
-                        <select name="set_theme" class="form-select autosubmit w-auto" lang="en" dir="ltr" id="themeSelect">
-                          {% for theme in themes %}
-                            <option value="{{ theme.id }}"{{ theme.is_active ? ' selected' }}>{{ theme.name }}</option>
-                          {% endfor %}
-                        </select>
+                        <div class="input-group">
+                          <select name="set_theme" class="form-select autosubmit" lang="en" dir="ltr" id="themeSelect">
+                            {% for theme in themes %}
+                              <option value="{{ theme.id }}"{{ theme.is_active ? ' selected' }}>{{ theme.name }}</option>
+                            {% endfor %}
+                          </select>
+                          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#themesModal">
+                            {% trans %}View all{% context %}View all themes{% endtrans %}
+                          </button>
+                        </div>
                       </div>
                     </form>
                   </li>
