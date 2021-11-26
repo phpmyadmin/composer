@@ -285,9 +285,9 @@ AJAX.registerOnload('export.js', function () {
    */
 
   $('#plugins').on('change', function () {
-    $('#format_specific_opts').find('div.format_specific_options').hide();
+    $('#format_specific_opts').find('div.format_specific_options').addClass('d-none');
     var selectedPluginName = $('#plugins').find('option:selected').val();
-    $('#' + selectedPluginName + '_options').show();
+    $('#' + selectedPluginName + '_options').removeClass('d-none');
   });
   /**
    * Toggles the enabling and disabling of the SQL plugin's comment options that apply only when exporting structure
@@ -684,16 +684,16 @@ Export.toggleQuickOrCustom = function () {
     $('#rows').show();
     $('#output').show();
     $('#format_specific_opts').show();
-    $('#output_quick_export').hide();
+    $('#output_quick_export').addClass('d-none');
     var selectedPluginName = $('#plugins').find('option:selected').val();
-    $('#' + selectedPluginName + '_options').show();
+    $('#' + selectedPluginName + '_options').removeClass('d-none');
   } else {
     // quick
     $('#databases_and_tables').hide();
     $('#rows').hide();
     $('#output').hide();
     $('#format_specific_opts').hide();
-    $('#output_quick_export').show();
+    $('#output_quick_export').removeClass('d-none');
   }
 };
 
@@ -818,12 +818,7 @@ Export.addAlias = function (type, name, field, value) {
 
 AJAX.registerOnload('export.js', function () {
   $('input[type=\'radio\'][name=\'quick_or_custom\']').on('change', Export.toggleQuickOrCustom);
-  $('#scroll_to_options_msg').hide();
-  $('#format_specific_opts').find('div.format_specific_options').hide().css({
-    'border': 0,
-    'margin': 0,
-    'padding': 0
-  }).find('h3').remove();
+  $('#format_specific_opts').find('div.format_specific_options').addClass('d-none').find('h3').remove();
   Export.toggleQuickOrCustom();
   Export.toggleStructureDataOpts();
   Export.toggleSqlIncludeComments();
@@ -839,7 +834,7 @@ AJAX.registerOnload('export.js', function () {
    */
 
   $('input[type=\'radio\'][name=\'allrows\']').on('change', function () {
-    if ($('input[type=\'radio\'][name=\'allrows\']').prop('checked')) {
+    if ($('#radio_allrows_0').prop('checked')) {
       Export.enableDumpSomeRowsSubOptions();
     } else {
       Export.disableDumpSomeRowsSubOptions();
