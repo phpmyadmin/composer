@@ -95,7 +95,7 @@ class Normalization
         }
 
         $this->dbi->selectDb($db);
-        $columns = $this->dbi->getColumns($db, $table, null, true);
+        $columns = $this->dbi->getColumns($db, $table, true);
         $type = '';
         $selectColHtml = '';
         foreach ($columns as $column => $def) {
@@ -1072,7 +1072,7 @@ class Normalization
         }
 
         if (empty($dependencyList)) {
-            $html .= '<p class="d-block desc">'
+            $html .= '<p class="d-block m-1">'
                 . __('No partial dependencies found!') . '</p>';
         }
 
