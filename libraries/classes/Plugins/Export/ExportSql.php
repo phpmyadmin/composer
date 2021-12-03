@@ -1419,7 +1419,6 @@ class ExportSql extends ExportPlugin
         $this->initAlias($aliases, $dbAlias, $tableAlias);
 
         $schemaCreate = '';
-        $autoIncrement = '';
         $newCrlf = $crlf;
 
         if (isset($GLOBALS['sql_compatibility'])) {
@@ -1439,14 +1438,6 @@ class ExportSql extends ExportPlugin
         if ($result != false) {
             if ($dbi->numRows($result) > 0) {
                 $tmpres = $dbi->fetchAssoc($result);
-
-                // Here we optionally add the AUTO_INCREMENT next value,
-                // but starting with MySQL 5.0.24, the clause is already included
-                // in SHOW CREATE TABLE so we'll remove it below
-                if (isset($GLOBALS['sql_auto_increment']) && ! empty($tmpres['Auto_increment'])) {
-                    $autoIncrement .= ' AUTO_INCREMENT='
-                        . $tmpres['Auto_increment'] . ' ';
-                }
 
                 if ($showDates && isset($tmpres['Create_time']) && ! empty($tmpres['Create_time'])) {
                     $schemaCreate .= $this->exportComment(
@@ -1815,7 +1806,7 @@ class ExportSql extends ExportPlugin
                 }
 
                 // Generating auto-increment-related query.
-                if (! empty($autoIncrement) && $updateIndexesIncrements) {
+                if ($autoIncrement !== [] && $updateIndexesIncrements) {
                     $sqlAutoIncrementsQuery = $alterHeader . $crlf . '  MODIFY '
                         . implode(',' . $crlf . '  MODIFY ', $autoIncrement);
                     if (
@@ -1874,7 +1865,6 @@ class ExportSql extends ExportPlugin
      *
      * @param string $db         database name
      * @param string $table      table name
-     * @param string $crlf       end of line sequence
      * @param bool   $doRelation whether to include relation comments
      * @param bool   $doMime     whether to include mime comments
      * @param array  $aliases    Aliases of db/table/columns
@@ -1884,7 +1874,6 @@ class ExportSql extends ExportPlugin
     private function getTableComments(
         $db,
         $table,
-        $crlf,
         $doRelation = false,
         $doMime = false,
         array $aliases = []
@@ -2085,7 +2074,7 @@ class ExportSql extends ExportPlugin
                 );
                 $dump .= $this->exportComment();
                 $dump .= $this->getTableDef($db, $table, $crlf, $errorUrl, $dates, true, false, true, $aliases);
-                $dump .= $this->getTableComments($db, $table, $crlf, $relation, $mime, $aliases);
+                $dump .= $this->getTableComments($db, $table, $relation, $mime, $aliases);
                 break;
             case 'triggers':
                 $dump = '';
