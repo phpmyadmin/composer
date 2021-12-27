@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Export;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\DatabaseName;
+use PhpMyAdmin\Dbal\TableName;
 use PhpMyAdmin\Util;
 
 use function sprintf;
@@ -20,8 +21,7 @@ final class TemplateModel
         $this->dbi = $dbi;
     }
 
-    /** @return bool|string */
-    public function create(DatabaseName $db, string $table, Template $template)
+    public function create(DatabaseName $db, TableName $table, Template $template): string
     {
         $query = sprintf(
             'INSERT INTO %s.%s (`username`, `export_type`, `template_name`, `template_data`)'
@@ -34,16 +34,14 @@ final class TemplateModel
             $this->dbi->escapeString($template->getData())
         );
         $result = $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL, 0, false);
-
-        if ($result === false) {
-            return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+        if ($result !== false) {
+            return '';
         }
 
-        return true;
+        return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
     }
 
-    /** @return bool|string */
-    public function delete(DatabaseName $db, string $table, string $user, int $id)
+    public function delete(DatabaseName $db, TableName $table, string $user, int $id): string
     {
         $query = sprintf(
             'DELETE FROM %s.%s WHERE `id` = %s AND `username` = \'%s\';',
@@ -53,16 +51,17 @@ final class TemplateModel
             $this->dbi->escapeString($user)
         );
         $result = $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL, 0, false);
-
-        if ($result === false) {
-            return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+        if ($result !== false) {
+            return '';
         }
 
-        return true;
+        return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
     }
 
-    /** @return Template|string|bool */
-    public function load(DatabaseName $db, string $table, string $user, int $id)
+    /**
+     * @return Template|string
+     */
+    public function load(DatabaseName $db, TableName $table, string $user, int $id)
     {
         $query = sprintf(
             'SELECT * FROM %s.%s WHERE `id` = %s AND `username` = \'%s\';',
@@ -72,7 +71,6 @@ final class TemplateModel
             $this->dbi->escapeString($user)
         );
         $result = $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL, 0, false);
-
         if ($result === false) {
             return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
         }
@@ -93,8 +91,7 @@ final class TemplateModel
         ]);
     }
 
-    /** @return bool|string */
-    public function update(DatabaseName $db, string $table, Template $template)
+    public function update(DatabaseName $db, TableName $table, Template $template): string
     {
         $query = sprintf(
             'UPDATE %s.%s SET `template_data` = \'%s\' WHERE `id` = %s AND `username` = \'%s\';',
@@ -105,16 +102,17 @@ final class TemplateModel
             $this->dbi->escapeString($template->getUsername())
         );
         $result = $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL, 0, false);
-
-        if ($result === false) {
-            return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
+        if ($result !== false) {
+            return '';
         }
 
-        return true;
+        return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
     }
 
-    /** @return Template[]|string|bool */
-    public function getAll(DatabaseName $db, string $table, string $user, string $exportType)
+    /**
+     * @return Template[]|string
+     */
+    public function getAll(DatabaseName $db, TableName $table, string $user, string $exportType)
     {
         $query = sprintf(
             'SELECT * FROM %s.%s WHERE `username` = \'%s\' AND `export_type` = \'%s\' ORDER BY `template_name`;',
@@ -124,7 +122,6 @@ final class TemplateModel
             $this->dbi->escapeString($exportType)
         );
         $result = $this->dbi->tryQuery($query, DatabaseInterface::CONNECT_CONTROL, 0, false);
-
         if ($result === false) {
             return $this->dbi->getError(DatabaseInterface::CONNECT_CONTROL);
         }

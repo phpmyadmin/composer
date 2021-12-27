@@ -12,8 +12,6 @@ use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 
-use function is_string;
-
 final class UpdateController extends AbstractController
 {
     /** @var TemplateModel */
@@ -40,13 +38,9 @@ final class UpdateController extends AbstractController
         $templateId = (int) $request->getParsedBodyParam('templateId');
         /** @var string $templateData */
         $templateData = $request->getParsedBodyParam('templateData', '');
-        $relationParameters = $this->relation->getRelationParameters();
 
-        if (
-            ! $relationParameters->hasExportTemplatesFeature()
-            || $relationParameters->db === null
-            || $relationParameters->exportTemplates === null
-        ) {
+        $exportTemplatesFeature = $this->relation->getRelationParameters()->exportTemplatesFeature;
+        if ($exportTemplatesFeature === null) {
             return;
         }
 
@@ -55,9 +49,13 @@ final class UpdateController extends AbstractController
             'username' => $cfg['Server']['user'],
             'data' => $templateData,
         ]);
-        $result = $this->model->update($relationParameters->db, $relationParameters->exportTemplates, $template);
+        $result = $this->model->update(
+            $exportTemplatesFeature->database,
+            $exportTemplatesFeature->exportTemplates,
+            $template
+        );
 
-        if (is_string($result)) {
+        if ($result !== '') {
             $this->response->setRequestStatus(false);
             $this->response->addJSON('message', $result);
 

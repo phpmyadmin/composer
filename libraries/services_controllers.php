@@ -15,8 +15,7 @@ use PhpMyAdmin\Controllers\Export;
 use PhpMyAdmin\Controllers\GisDataEditorController;
 use PhpMyAdmin\Controllers\GitInfoController;
 use PhpMyAdmin\Controllers\HomeController;
-use PhpMyAdmin\Controllers\ImportController;
-use PhpMyAdmin\Controllers\ImportStatusController;
+use PhpMyAdmin\Controllers\Import;
 use PhpMyAdmin\Controllers\JavaScriptMessagesController;
 use PhpMyAdmin\Controllers\LicenseController;
 use PhpMyAdmin\Controllers\LintController;
@@ -571,8 +570,8 @@ return [
                 '$dbi' => '@dbi',
             ],
         ],
-        ImportController::class => [
-            'class' => ImportController::class,
+        Import\ImportController::class => [
+            'class' => Import\ImportController::class,
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
@@ -581,8 +580,16 @@ return [
                 '$dbi' => '@dbi',
             ],
         ],
-        ImportStatusController::class => [
-            'class' => ImportStatusController::class,
+        Import\SimulateDmlController::class => [
+            'class' => Import\SimulateDmlController::class,
+            'arguments' => [
+                '$response' => '@response',
+                '$template' => '@template',
+                '$simulateDml' => '@import_simulate_dml',
+            ],
+        ],
+        Import\StatusController::class => [
+            'class' => Import\StatusController::class,
             'arguments' => ['$template' => '@template'],
         ],
         JavaScriptMessagesController::class => [

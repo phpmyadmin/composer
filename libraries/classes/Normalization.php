@@ -143,7 +143,7 @@ class Normalization
         $contentCells = [];
         $availableMime = [];
         $mimeMap = [];
-        if ($relationParameters->hasBrowserTransformationFeature() && $GLOBALS['cfg']['BrowseMIME']) {
+        if ($relationParameters->browserTransformationFeature !== null && $GLOBALS['cfg']['BrowseMIME']) {
             $mimeMap = $this->transformations->getMime($db, $table);
             $availableMime = $this->transformations->getAvailableMimeTypes();
         }
@@ -590,9 +590,7 @@ class Normalization
             if (! $this->dbi->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
-                    Message::rawError(
-                        (string) $this->dbi->getError()
-                    ),
+                    Message::rawError($this->dbi->getError()),
                     '<br><br>'
                 );
                 $error = true;
@@ -765,9 +763,7 @@ class Normalization
             if (! $this->dbi->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
-                    Message::rawError(
-                        (string) $this->dbi->getError()
-                    ),
+                    Message::rawError($this->dbi->getError()),
                     '<br><br>'
                 );
                 $error = true;
@@ -845,9 +841,7 @@ class Normalization
             if (! $this->dbi->tryQuery($query)) {
                 $message = Message::error(__('Error in processing!'));
                 $message->addMessage(
-                    Message::rawError(
-                        (string) $this->dbi->getError()
-                    ),
+                    Message::rawError($this->dbi->getError()),
                     '<br><br>'
                 );
                 $error = true;

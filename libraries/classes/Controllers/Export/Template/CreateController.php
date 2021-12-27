@@ -13,7 +13,6 @@ use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 
 use function is_array;
-use function is_string;
 
 final class CreateController extends AbstractController
 {
@@ -47,13 +46,8 @@ final class CreateController extends AbstractController
         /** @var string|null $templateId */
         $templateId = $request->getParsedBodyParam('template_id');
 
-        $relationParameters = $this->relation->getRelationParameters();
-
-        if (
-            ! $relationParameters->hasExportTemplatesFeature()
-            || $relationParameters->db === null
-            || $relationParameters->exportTemplates === null
-        ) {
+        $exportTemplatesFeature = $this->relation->getRelationParameters()->exportTemplatesFeature;
+        if ($exportTemplatesFeature === null) {
             return;
         }
 
@@ -63,9 +57,13 @@ final class CreateController extends AbstractController
             'name' => $templateName,
             'data' => $templateData,
         ]);
-        $result = $this->model->create($relationParameters->db, $relationParameters->exportTemplates, $template);
+        $result = $this->model->create(
+            $exportTemplatesFeature->database,
+            $exportTemplatesFeature->exportTemplates,
+            $template
+        );
 
-        if (is_string($result)) {
+        if ($result !== '') {
             $this->response->setRequestStatus(false);
             $this->response->addJSON('message', $result);
 
@@ -73,8 +71,8 @@ final class CreateController extends AbstractController
         }
 
         $templates = $this->model->getAll(
-            $relationParameters->db,
-            $relationParameters->exportTemplates,
+            $exportTemplatesFeature->database,
+            $exportTemplatesFeature->exportTemplates,
             $template->getUsername(),
             $template->getExportType()
         );
