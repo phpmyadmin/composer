@@ -77,9 +77,9 @@ class DatabaseInterface implements DbalInterface
     /**
      * Force STORE_RESULT method, ignored by classic MySQL.
      */
-    public const QUERY_STORE = 1;
+    public const QUERY_BUFFERED = 0;
     /**
-     * Do not read whole query.
+     * Do not read all rows immediately.
      */
     public const QUERY_UNBUFFERED = 2;
     /**
@@ -167,7 +167,7 @@ class DatabaseInterface implements DbalInterface
     public function query(
         string $query,
         $link = self::CONNECT_USER,
-        int $options = 0,
+        int $options = self::QUERY_BUFFERED,
         bool $cache_affected_rows = true
     ): ResultInterface {
         $result = $this->tryQuery($query, $link, $options, $cache_affected_rows);
@@ -192,7 +192,9 @@ class DatabaseInterface implements DbalInterface
      *
      * @param string $query               query to run
      * @param mixed  $link                link type
-     * @param int    $options             query options
+     * @param int    $options             if DatabaseInterface::QUERY_UNBUFFERED
+     *                                    is provided, it will instruct the extension
+     *                                    to use unbuffered mode
      * @param bool   $cache_affected_rows whether to cache affected row
      *
      * @return ResultInterface|false
@@ -200,10 +202,10 @@ class DatabaseInterface implements DbalInterface
     public function tryQuery(
         string $query,
         $link = self::CONNECT_USER,
-        int $options = 0,
+        int $options = self::QUERY_BUFFERED,
         bool $cache_affected_rows = true
     ) {
-        $debug = isset($GLOBALS['cfg']['DBG']) ? $GLOBALS['cfg']['DBG']['sql'] : false;
+        $debug = isset($GLOBALS['cfg']['DBG']) && $GLOBALS['cfg']['DBG']['sql'];
         if (! isset($this->links[$link])) {
             return false;
         }
@@ -229,11 +231,9 @@ class DatabaseInterface implements DbalInterface
                 $time
             );
             if ($GLOBALS['cfg']['DBG']['sqllog']) {
-                $warningsCount = '';
-                if (($options & self::QUERY_STORE) == self::QUERY_STORE) {
-                    if (isset($this->links[$link]->warning_count)) {
-                        $warningsCount = $this->links[$link]->warning_count;
-                    }
+                $warningsCount = 0;
+                if (isset($this->links[$link]->warning_count)) {
+                    $warningsCount = $this->links[$link]->warning_count;
                 }
 
                 openlog('phpMyAdmin', LOG_NDELAY | LOG_PID, LOG_USER);
@@ -241,7 +241,7 @@ class DatabaseInterface implements DbalInterface
                 syslog(
                     LOG_INFO,
                     sprintf(
-                        'SQL[%s?route=%s]: %0.3f(W:%s,C:%s,L:0x%02X) > %s',
+                        'SQL[%s?route=%s]: %0.3f(W:%d,C:%s,L:0x%02X) > %s',
                         basename($_SERVER['SCRIPT_NAME']),
                         Routing::getCurrentRoute(),
                         $time,
@@ -293,8 +293,7 @@ class DatabaseInterface implements DbalInterface
             'SHOW TABLES FROM ' . Util::backquote($database) . ';',
             null,
             0,
-            $link,
-            self::QUERY_STORE
+            $link
         );
         if ($GLOBALS['cfg']['NaturalOrder']) {
             usort($tables, 'strnatcasecmp');
@@ -324,7 +323,7 @@ class DatabaseInterface implements DbalInterface
      * @param bool|int     $limit_count  number of tables to return
      * @param string       $sort_by      table attribute to sort by
      * @param string       $sort_order   direction to sort (ASC or DESC)
-     * @param string       $table_type   whether table or view
+     * @param string|null  $table_type   whether table or view
      * @param mixed        $link         link type
      *
      * @return array           list of tables in given db(s)
@@ -447,11 +446,10 @@ class DatabaseInterface implements DbalInterface
         // If permissions are wrong on even one database directory,
         // information_schema does not return any table info for any database
         // this is why we fall back to SHOW TABLE STATUS even for MySQL >= 50002
-        if (empty($tables)) {
+        if ($tables === []) {
+            $sql = 'SHOW TABLE STATUS FROM ' . Util::backquote($database);
             if ($table || ($tbl_is_group === true) || $table_type) {
-                $sql = 'SHOW TABLE STATUS FROM '
-                    . Util::backquote($database)
-                    . ' WHERE';
+                $sql .= ' WHERE';
                 $needAnd = false;
                 if ($table || ($tbl_is_group === true)) {
                     if (is_array($table)) {
@@ -489,9 +487,6 @@ class DatabaseInterface implements DbalInterface
                         $sql .= " `Comment` != 'VIEW'";
                     }
                 }
-            } else {
-                $sql = 'SHOW TABLE STATUS FROM '
-                    . Util::backquote($database);
             }
 
             $each_tables = $this->fetchResult($sql, 'Name', null, $link);
@@ -606,14 +601,14 @@ class DatabaseInterface implements DbalInterface
     /**
      * returns array with databases containing extended infos about them
      *
-     * @param string   $database     database
-     * @param bool     $force_stats  retrieve stats also for MySQL < 5
-     * @param int      $link         link type
-     * @param string   $sort_by      column to order by
-     * @param string   $sort_order   ASC or DESC
-     * @param int      $limit_offset starting offset for LIMIT
-     * @param bool|int $limit_count  row count for LIMIT or true
-     *                               for $GLOBALS['cfg']['MaxDbList']
+     * @param string|null $database     database
+     * @param bool        $force_stats  retrieve stats also for MySQL < 5
+     * @param int         $link         link type
+     * @param string      $sort_by      column to order by
+     * @param string      $sort_order   ASC or DESC
+     * @param int         $limit_offset starting offset for LIMIT
+     * @param bool|int    $limit_count  row count for LIMIT or true
+     *                                  for $GLOBALS['cfg']['MaxDbList']
      *
      * @return array
      *
@@ -793,10 +788,10 @@ class DatabaseInterface implements DbalInterface
      * returns detailed array with all columns for given table in database,
      * or all tables/databases
      *
-     * @param string $database name of database
-     * @param string $table    name of table to retrieve columns from
-     * @param string $column   name of specific column
-     * @param mixed  $link     mysql link resource
+     * @param string|null $database name of database
+     * @param string|null $table    name of table to retrieve columns from
+     * @param string|null $column   name of specific column
+     * @param mixed       $link     mysql link resource
      *
      * @return array
      */
@@ -1052,11 +1047,7 @@ class DatabaseInterface implements DbalInterface
      */
     public function postConnect(): void
     {
-        $version = $this->fetchSingleRow(
-            'SELECT @@version, @@version_comment',
-            DbalInterface::FETCH_ASSOC,
-            self::CONNECT_USER
-        );
+        $version = $this->fetchSingleRow('SELECT @@version, @@version_comment');
 
         if (is_array($version)) {
             $this->versionString = $version['@@version'] ?? '';
@@ -1081,16 +1072,12 @@ class DatabaseInterface implements DbalInterface
 
         $GLOBALS['collation_connection'] = $default_collation;
         $GLOBALS['charset_connection'] = $default_charset;
-        $this->query(
-            sprintf('SET NAMES \'%s\' COLLATE \'%s\';', $default_charset, $default_collation),
-            self::CONNECT_USER,
-            self::QUERY_STORE
-        );
+        $this->query(sprintf('SET NAMES \'%s\' COLLATE \'%s\';', $default_charset, $default_collation));
 
         /* Locale for messages */
         $locale = LanguageManager::getInstance()->getCurrentLanguage()->getMySQLLocale();
         if ($locale) {
-            $this->query("SET lc_messages = '" . $locale . "';", self::CONNECT_USER, self::QUERY_STORE);
+            $this->query("SET lc_messages = '" . $locale . "';");
         }
 
         // Set timezone for the session, if required.
@@ -1142,10 +1129,8 @@ class DatabaseInterface implements DbalInterface
 
         $result = $this->tryQuery(
             "SET collation_connection = '"
-            . $this->escapeString($collation, self::CONNECT_USER)
-            . "';",
-            self::CONNECT_USER,
-            self::QUERY_STORE
+            . $this->escapeString($collation)
+            . "';"
         );
 
         if ($result === false) {
@@ -1204,7 +1189,7 @@ class DatabaseInterface implements DbalInterface
         $field = 0,
         $link = self::CONNECT_USER
     ) {
-        $result = $this->tryQuery($query, $link, self::QUERY_STORE, false);
+        $result = $this->tryQuery($query, $link, self::QUERY_BUFFERED, false);
         if ($result === false) {
             return false;
         }
@@ -1233,7 +1218,7 @@ class DatabaseInterface implements DbalInterface
         string $type = DbalInterface::FETCH_ASSOC,
         $link = self::CONNECT_USER
     ): ?array {
-        $result = $this->tryQuery($query, $link, self::QUERY_STORE, false);
+        $result = $this->tryQuery($query, $link, self::QUERY_BUFFERED, false);
         if ($result === false) {
             return null;
         }
@@ -1312,14 +1297,13 @@ class DatabaseInterface implements DbalInterface
      * // $users['admin']['John Doe'] = '123'
      * </code>
      *
-     * @param string                $query   query to execute
-     * @param string|int|array|null $key     field-name or offset
-     *                                       used as key for array
-     *                                       or array of those
-     * @param string|int|null       $value   value-name or offset
-     *                                       used as value for array
-     * @param int                   $link    link type
-     * @param int                   $options query options
+     * @param string                $query query to execute
+     * @param string|int|array|null $key   field-name or offset
+     *                                     used as key for array
+     *                                     or array of those
+     * @param string|int|null       $value value-name or offset
+     *                                     used as value for array
+     * @param int                   $link  link type
      *
      * @return array resultrows or values indexed by $key
      */
@@ -1327,12 +1311,11 @@ class DatabaseInterface implements DbalInterface
         string $query,
         $key = null,
         $value = null,
-        $link = self::CONNECT_USER,
-        int $options = 0
+        $link = self::CONNECT_USER
     ): array {
         $resultrows = [];
 
-        $result = $this->tryQuery($query, $link, $options, false);
+        $result = $this->tryQuery($query, $link, self::QUERY_BUFFERED, false);
 
         // return empty array if result is empty or false
         if ($result === false) {
@@ -1489,9 +1472,9 @@ class DatabaseInterface implements DbalInterface
      * returns details about the PROCEDUREs or FUNCTIONs for a specific database
      * or details about a specific routine
      *
-     * @param string $db    db name
-     * @param string $which PROCEDURE | FUNCTION or null for both
-     * @param string $name  name of the routine (to fetch a specific routine)
+     * @param string      $db    db name
+     * @param string|null $which PROCEDURE | FUNCTION or null for both
+     * @param string      $name  name of the routine (to fetch a specific routine)
      *
      * @return array information about PROCEDUREs or FUNCTIONs
      */
@@ -1601,7 +1584,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @return array information about triggers (may be empty)
      */
-    public function getTriggers(string $db, string $table = '', $delimiter = '//')
+    public function getTriggers(string $db, string $table = '', string $delimiter = '//'): array
     {
         $result = [];
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
@@ -1690,7 +1673,7 @@ class DatabaseInterface implements DbalInterface
             return false;
         }
 
-        $result = $this->tryQuery('SELECT 1 FROM mysql.user LIMIT 1', self::CONNECT_USER, self::QUERY_STORE);
+        $result = $this->tryQuery('SELECT 1 FROM mysql.user LIMIT 1');
         $isSuperUser = false;
 
         if ($result) {
@@ -1733,7 +1716,7 @@ class DatabaseInterface implements DbalInterface
 
         [$user, $host] = $this->getCurrentUserAndHost();
         $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($user, $host);
-        $result = $this->tryQuery($query, self::CONNECT_USER, self::QUERY_STORE);
+        $result = $this->tryQuery($query);
 
         if ($result) {
             $hasGrantPrivilege = (bool) $result->numRows();
@@ -1775,7 +1758,7 @@ class DatabaseInterface implements DbalInterface
 
         [$user, $host] = $this->getCurrentUserAndHost();
         $query = QueryGenerator::getInformationSchemaDataForCreateRequest($user, $host);
-        $result = $this->tryQuery($query, self::CONNECT_USER, self::QUERY_STORE);
+        $result = $this->tryQuery($query);
 
         if ($result) {
             $hasCreatePrivilege = (bool) $result->numRows();
@@ -1793,7 +1776,7 @@ class DatabaseInterface implements DbalInterface
 
     private function getCurrentUserGrants(): array
     {
-        return $this->fetchResult('SHOW GRANTS FOR CURRENT_USER();', null, null, self::CONNECT_USER, self::QUERY_STORE);
+        return $this->fetchResult('SHOW GRANTS FOR CURRENT_USER();');
     }
 
     /**
@@ -1831,7 +1814,7 @@ class DatabaseInterface implements DbalInterface
      * @param int        $mode   Connection mode on of CONNECT_USER, CONNECT_CONTROL
      *                           or CONNECT_AUXILIARY.
      * @param array|null $server Server information like host/port/socket/persistent
-     * @param int        $target How to store connection link, defaults to $mode
+     * @param int|null   $target How to store connection link, defaults to $mode
      *
      * @return mixed false on error or a connection object on success
      */
