@@ -139,6 +139,9 @@ class DatabaseInterface implements DbalInterface
     /** @var Cache */
     private $cache;
 
+    /** @var float */
+    public $lastQueryExecutionTime = 0;
+
     /**
      * @param DbiExtension $ext Object to be used for database queries
      */
@@ -210,10 +213,7 @@ class DatabaseInterface implements DbalInterface
             return false;
         }
 
-        $time = 0;
-        if ($debug) {
-            $time = microtime(true);
-        }
+        $time = microtime(true);
 
         $result = $this->extension->realQuery($query, $this->links[$link], $options);
 
@@ -221,14 +221,14 @@ class DatabaseInterface implements DbalInterface
             $GLOBALS['cached_affected_rows'] = $this->affectedRows($link, false);
         }
 
+        $this->lastQueryExecutionTime = microtime(true) - $time;
         if ($debug) {
-            $time = microtime(true) - $time;
             $errorMessage = $this->getError($link);
             Utilities::debugLogQueryIntoSession(
                 $query,
                 $errorMessage !== '' ? $errorMessage : null,
                 $result,
-                $time
+                $this->lastQueryExecutionTime
             );
             if ($GLOBALS['cfg']['DBG']['sqllog']) {
                 $warningsCount = 0;
@@ -244,7 +244,7 @@ class DatabaseInterface implements DbalInterface
                         'SQL[%s?route=%s]: %0.3f(W:%d,C:%s,L:0x%02X) > %s',
                         basename($_SERVER['SCRIPT_NAME']),
                         Routing::getCurrentRoute(),
-                        $time,
+                        $this->lastQueryExecutionTime,
                         $warningsCount,
                         $cache_affected_rows ? 'y' : 'n',
                         $link,
@@ -1031,9 +1031,9 @@ class DatabaseInterface implements DbalInterface
      * @param string $var  mysql server variable name
      * @param int    $type DatabaseInterface::GETVAR_SESSION |
      *                     DatabaseInterface::GETVAR_GLOBAL
-     * @param mixed  $link mysql link resource|object
+     * @param int    $link mysql link resource|object
      *
-     * @return mixed   value for mysql server variable
+     * @return false|string|null value for mysql server variable
      */
     public function getVariable(
         string $var,
@@ -1059,7 +1059,7 @@ class DatabaseInterface implements DbalInterface
      *
      * @param string $var   variable name
      * @param string $value value to set
-     * @param mixed  $link  mysql link resource|object
+     * @param int    $link  mysql link resource|object
      */
     public function setVariable(
         string $var,
@@ -1920,37 +1920,6 @@ class DatabaseInterface implements DbalInterface
     }
 
     /**
-     * returns array of rows with associative keys from $result
-     *
-     * @param ResultInterface $result result set identifier
-     */
-    public function fetchAssoc(ResultInterface $result): array
-    {
-        return $result->fetchAssoc();
-    }
-
-    /**
-     * returns array of rows with numeric keys from $result
-     *
-     * @param ResultInterface $result result set identifier
-     */
-    public function fetchRow(ResultInterface $result): array
-    {
-        return $result->fetchRow();
-    }
-
-    /**
-     * Adjusts the result pointer to an arbitrary row in the result
-     *
-     * @param ResultInterface $result database result
-     * @param int             $offset offset to seek
-     */
-    public function dataSeek(ResultInterface $result, int $offset): bool
-    {
-        return $result->seek($offset);
-    }
-
-    /**
      * Check if there are any more query results from a multi query
      *
      * @param int $link link type
@@ -2145,18 +2114,6 @@ class DatabaseInterface implements DbalInterface
         }
 
         return $fields;
-    }
-
-    /**
-     * return number of fields in given $result
-     *
-     * @param ResultInterface $result result set identifier
-     *
-     * @return int field count
-     */
-    public function numFields(ResultInterface $result): int
-    {
-        return $result->numFields();
     }
 
     /**
