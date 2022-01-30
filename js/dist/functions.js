@@ -2870,13 +2870,7 @@ AJAX.registerOnload('functions.js', function () {
   $(document).on('click', '#change_password_anchor.ajax', function (event) {
     event.preventDefault();
     var $msgbox = Functions.ajaxShowMessage();
-    /**
-     * @var button_options  Object containing options to be passed to jQueryUI's dialog
-     */
-
-    var buttonOptions = {};
-
-    buttonOptions[Messages.strGo] = function () {
+    $('#changePasswordGoButton').on('click', function () {
       event.preventDefault();
       /**
        * @var $the_form    Object referring to the change password form
@@ -2910,12 +2904,9 @@ AJAX.registerOnload('functions.js', function () {
         $('#edit_user_dialog').dialog('close').remove();
         Functions.ajaxRemoveMessage($msgbox);
       }); // end $.post()
-    };
 
-    buttonOptions[Messages.strCancel] = function () {
-      $(this).dialog('close');
-    };
-
+      $('#changePasswordModal').modal('hide');
+    });
     $.get($(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -2926,18 +2917,11 @@ AJAX.registerOnload('functions.js', function () {
 
       if (data.scripts) {
         AJAX.scriptHandler.load(data.scripts);
-      }
+      } // for this dialog, we remove the fieldset wrapping due to double headings
 
-      $('<div id="change_password_dialog"></div>').dialog({
-        title: Messages.strChangePassword,
-        width: 600,
-        close: function () {
-          $(this).remove();
-        },
-        buttons: buttonOptions,
-        modal: true
-      }).append(data.message); // for this dialog, we remove the fieldset wrapping due to double headings
 
+      $('#changePasswordModal').modal('show');
+      $('#changePasswordModal').find('.modal-body').first().html(data.message);
       $('fieldset#fieldset_change_password').find('legend').remove().end().find('table.table').unwrap().addClass('m-3').find('input#text_pma_pw').trigger('focus');
       $('#fieldset_change_password_footer').hide();
       Functions.ajaxRemoveMessage($msgbox);
