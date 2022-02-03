@@ -787,7 +787,7 @@ Navigation.showCurrent = function () {
   function loadAndHighlightTableOrView($dbItem, itemName) {
     var $container = $dbItem.children('div.list_container');
     var $expander;
-    var $whichItem = isItemInContainer($container, itemName, 'li.table, li.view'); // If item already there in some container
+    var $whichItem = isItemInContainer($container, itemName, 'li.nav_node_table, li.view'); // If item already there in some container
 
     if ($whichItem) {
       // get the relevant container while may also be a subcontainer
