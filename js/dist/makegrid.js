@@ -1743,7 +1743,7 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
 
       if ($firstRowCols.length > 1) {
-        var $colVisibTh = $(g.t).find('th:not(.draggable)');
+        var $colVisibTh = $(g.t).find('th:not(.draggable)').slice(0, 1);
         Functions.tooltip($colVisibTh, 'th', Messages.strColVisibHint); // create column visibility drop-down arrow(s)
 
         $colVisibTh.each(function () {

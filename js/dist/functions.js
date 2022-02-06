@@ -1330,6 +1330,9 @@ Functions.insertQuery = function (queryType) {
           }
 
           $('#querymessage').html('');
+        },
+        error: function error() {
+          $('#querymessage').html('');
         }
       });
     }
