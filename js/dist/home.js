@@ -6,7 +6,7 @@ const GitInfo = {
    * @param {string} str
    * @return {number | false}
    */
-  parseVersionString: function (str) {
+  parseVersionString: str => {
     if (typeof str !== 'string') {
       return false;
     }
@@ -42,7 +42,7 @@ const GitInfo = {
    * Indicates current available version on main page.
    * @param {object} data
    */
-  currentVersion: function (data) {
+  currentVersion: data => {
     if (data && data.version && data.date) {
       const current = GitInfo.parseVersionString($('span.version').text());
       const latest = GitInfo.parseVersionString(data.version);
@@ -105,34 +105,28 @@ const GitInfo = {
   /**
    * Loads Git revision data from ajax for index.php
    */
-  displayGitRevision: function () {
+  displayGitRevision: () => {
     $('#is_git_revision').remove();
     $('#li_pma_version_git').remove();
     $.get('index.php?route=/git-revision', {
       'server': CommonParams.get('server'),
       'ajax_request': true,
       'no_debug': true
-    }, function (data) {
+    }, data => {
       if (typeof data !== 'undefined' && data.success === true) {
         $(data.message).insertAfter('#li_pma_version');
       }
     });
-  }
-};
-AJAX.registerTeardown('home.js', function () {
-  $('#themesModal').off('show.bs.modal');
-});
-AJAX.registerOnload('home.js', function () {
-  $('#themesModal').on('show.bs.modal', function () {
-    $.get('index.php?route=/themes', function (data) {
-      $('#themesModal .modal-body').html(data.themes);
-    });
-  });
+  },
+
   /**
    * Load version information asynchronously.
    */
+  loadVersion: () => {
+    if ($('li.jsversioncheck').length === 0) {
+      return;
+    }
 
-  if ($('li.jsversioncheck').length > 0) {
     $.ajax({
       dataType: 'json',
       url: 'index.php?route=/version-check',
@@ -142,9 +136,32 @@ AJAX.registerOnload('home.js', function () {
       },
       success: GitInfo.currentVersion
     });
-  }
+  },
+  showVersion: () => {
+    GitInfo.loadVersion();
 
-  if ($('#is_git_revision').length > 0) {
+    if ($('#is_git_revision').length === 0) {
+      return;
+    }
+
     setTimeout(GitInfo.displayGitRevision, 10);
   }
+};
+/**
+ * @implements EventListener
+ */
+
+const ThemesManager = {
+  handleEvent: () => {
+    $.get('index.php?route=/themes', data => {
+      $('#themesModal .modal-body').html(data.themes);
+    });
+  }
+};
+AJAX.registerTeardown('home.js', () => {
+  $('#themesModal').off('show.bs.modal');
+});
+AJAX.registerOnload('home.js', () => {
+  $('#themesModal').on('show.bs.modal', ThemesManager.handleEvent);
+  GitInfo.showVersion();
 });

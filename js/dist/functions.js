@@ -1249,6 +1249,9 @@ Functions.insertQuery = function (queryType) {
           }
 
           $('#querymessage').html('');
+        },
+        error: function () {
+          $('#querymessage').html('');
         }
       });
     }
