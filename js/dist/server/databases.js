@@ -1,34 +1,13 @@
 "use strict";
 
 /**
- * @fileoverview    functions used on the server databases list page
- * @name            Server Databases
- *
- * @requires    jQuery
- * @requires    jQueryUI
- * @required    js/functions.js
+ * @implements EventListener
  */
-
-/**
- * Unbind all event handlers before tearing down a page
- */
-AJAX.registerTeardown('server/databases.js', function () {
-  $(document).off('submit', '#dbStatsForm');
-  $(document).off('submit', '#create_database_form.ajax');
-});
-/**
- * AJAX scripts for /server/databases
- *
- * Actions ajaxified here:
- * Drop Databases
- *
- */
-
-AJAX.registerOnload('server/databases.js', function () {
+const DropDatabases = {
   /**
-   * Attach Event Handler for 'Drop Databases'
+   * @param {Event} event
    */
-  $(document).on('submit', '#dbStatsForm', function (event) {
+  handleEvent: function (event) {
     event.preventDefault();
     var $form = $(this);
     /**
@@ -84,12 +63,17 @@ AJAX.registerOnload('server/databases.js', function () {
       modal.modal('hide');
       $('#dropDatabaseModalDropButton').off('click');
     });
-  });
-  /**
-   * Attach Ajax event handlers for 'Create Database'.
-   */
+  }
+};
+/**
+ * @implements EventListener
+ */
 
-  $(document).on('submit', '#create_database_form.ajax', function (event) {
+const CreateDatabase = {
+  /**
+   * @param {Event} event
+   */
+  handleEvent: function (event) {
     event.preventDefault();
     var $form = $(this); // TODO Remove this section when all browsers support HTML5 "required" property
 
@@ -119,13 +103,25 @@ AJAX.registerOnload('server/databases.js', function () {
       } else {
         Functions.ajaxShowMessage(data.error, false);
       }
-    }); // end $.post()
-  }); // end $(document).on()
+    });
+  }
+};
 
+function checkPrivilegesForDatabase() {
   var tableRows = $('.server_databases');
   $.each(tableRows, function () {
     $(this).on('click', function () {
       CommonActions.setDb($(this).attr('data'));
     });
   });
-}); // end $()
+}
+
+AJAX.registerTeardown('server/databases.js', function () {
+  $(document).off('submit', '#dbStatsForm');
+  $(document).off('submit', '#create_database_form.ajax');
+});
+AJAX.registerOnload('server/databases.js', function () {
+  $(document).on('submit', '#dbStatsForm', DropDatabases.handleEvent);
+  $(document).on('submit', '#create_database_form.ajax', CreateDatabase.handleEvent);
+  checkPrivilegesForDatabase();
+});
