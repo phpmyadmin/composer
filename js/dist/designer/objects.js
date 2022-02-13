@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 // eslint-disable-next-line no-unused-vars
 var DesignerObjects = {
   PdfPage: function (dbName, pageDescr, tblCords) {
@@ -17,3 +16,5 @@ var DesignerObjects = {
     this.y = y;
   }
 };
+
+//# sourceMappingURL=objects.js.map

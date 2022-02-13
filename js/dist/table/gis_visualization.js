@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    functions used for visualizing GIS data
  *
@@ -345,3 +344,5 @@ AJAX.registerOnload('table/gis_visualization.js', function () {
     $('#tooltip').remove();
   });
 });
+
+//# sourceMappingURL=gis_visualization.js.map

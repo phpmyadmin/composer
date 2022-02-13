@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 var designerTables = [{
   name: 'pdf_pages',
   key: 'pgNr',
@@ -217,3 +216,5 @@ var DesignerOfflineDB = function () {
 
   return designerDB;
 }();
+
+//# sourceMappingURL=database.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview JavaScript functions used on /table/search
  *
@@ -310,3 +309,5 @@ AJAX.registerOnload('table/select.js', function () {
   var windowWidth = $(window).width();
   $('.jsresponsive').css('max-width', windowWidth - 69 + 'px');
 });
+
+//# sourceMappingURL=select.js.map

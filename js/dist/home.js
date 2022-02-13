@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 const GitInfo = {
   /**
    * Version string to integer conversion.
@@ -16,13 +15,13 @@ const GitInfo = {
     const state = str.split('-');
 
     if (state.length >= 2) {
-      if (state[1].substr(0, 2) === 'rc') {
-        add = -20 - parseInt(state[1].substr(2), 10);
-      } else if (state[1].substr(0, 4) === 'beta') {
-        add = -40 - parseInt(state[1].substr(4), 10);
-      } else if (state[1].substr(0, 5) === 'alpha') {
-        add = -60 - parseInt(state[1].substr(5), 10);
-      } else if (state[1].substr(0, 3) === 'dev') {
+      if (state[1].startsWith('rc')) {
+        add = -20 - parseInt(state[1].substring(2), 10);
+      } else if (state[1].startsWith('beta')) {
+        add = -40 - parseInt(state[1].substring(4), 10);
+      } else if (state[1].startsWith('alpha')) {
+        add = -60 - parseInt(state[1].substring(5), 10);
+      } else if (state[1].startsWith('dev')) {
         /* We don't handle dev, it's git snapshot */
         add = 0;
       }
@@ -165,3 +164,5 @@ AJAX.registerOnload('home.js', () => {
   $('#themesModal').on('show.bs.modal', ThemesManager.handleEvent);
   GitInfo.showVersion();
 });
+
+//# sourceMappingURL=home.js.map

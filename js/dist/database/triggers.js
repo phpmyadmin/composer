@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 AJAX.registerTeardown('database/triggers.js', function () {
   $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
   $(document).off('click', 'a.ajax.export_anchor');
@@ -576,3 +575,5 @@ AJAX.registerOnload('database/triggers.js', function () {
     DatabaseTriggers.dropMultipleDialog($(this));
   });
 });
+
+//# sourceMappingURL=triggers.js.map

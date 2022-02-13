@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * function used in or for navigation panel
  *
@@ -429,7 +428,7 @@ $(function () {
 
   $(document).on('click', '#pma_navigation_tree li.new_index a.ajax', function (event) {
     event.preventDefault();
-    var url = $(this).attr('href').substr($(this).attr('href').indexOf('?') + 1) + CommonParams.get('arg_separator') + 'ajax_request=true';
+    var url = $(this).attr('href').substring($(this).attr('href').indexOf('?') + 1) + CommonParams.get('arg_separator') + 'ajax_request=true';
     var title = Messages.strAddIndex;
     Functions.indexEditorDialog(url, title);
   });
@@ -437,7 +436,7 @@ $(function () {
 
   $(document).on('click', 'li.index a.ajax', function (event) {
     event.preventDefault();
-    var url = $(this).attr('href').substr($(this).attr('href').indexOf('?') + 1) + CommonParams.get('arg_separator') + 'ajax_request=true';
+    var url = $(this).attr('href').substring($(this).attr('href').indexOf('?') + 1) + CommonParams.get('arg_separator') + 'ajax_request=true';
     var title = Messages.strEditIndex;
     Functions.indexEditorDialog(url, title);
   });
@@ -1682,3 +1681,5 @@ Navigation.showFullName = function ($containerELem) {
     }
   });
 };
+
+//# sourceMappingURL=navigation.js.map

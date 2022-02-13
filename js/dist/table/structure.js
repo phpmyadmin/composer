@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    functions used on the table structure page
  * @name            Table Structure
@@ -446,3 +445,5 @@ AJAX.registerOnload('table/structure.js', function () {
     checkFirst();
   });
 });
+
+//# sourceMappingURL=structure.js.map

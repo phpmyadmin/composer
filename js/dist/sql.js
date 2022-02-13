@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    functions used wherever an sql query form is used
  *
@@ -1079,3 +1078,5 @@ AJAX.registerOnload('sql.js', function () {
 
 var elements = $('.sticky');
 Stickyfill.add(elements);
+
+//# sourceMappingURL=sql.js.map

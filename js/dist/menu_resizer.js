@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Handles the resizing of a menu according to the available screen width
  *
@@ -208,3 +207,5 @@
     }
   };
 })(jQuery);
+
+//# sourceMappingURL=menu_resizer.js.map

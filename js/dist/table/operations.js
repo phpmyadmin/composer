@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -332,3 +331,5 @@ AJAX.registerOnload('table/operations.js', function () {
     confirmAndPost($(this), 'DELETE');
   });
 }); // end $(document).ready for 'Table operations'
+
+//# sourceMappingURL=operations.js.map

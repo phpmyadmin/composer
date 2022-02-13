@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* global ColumnType, DataTable, JQPlotChartFactory */
 // js/chart.js
 
@@ -21,13 +20,13 @@ function extractDate(dateString) {
 
   if (matches !== null && matches.length > 0) {
     match = matches[0];
-    return new Date(match.substr(0, 4), parseInt(match.substr(5, 2), 10) - 1, match.substr(8, 2), match.substr(11, 2), match.substr(14, 2), match.substr(17, 2));
+    return new Date(match.substring(0, 4), parseInt(match.substring(5, 7), 10) - 1, match.substring(8, 10), match.substring(11, 13), match.substring(14, 16), match.substring(17, 19));
   } else {
     matches = dateRegExp.exec(dateString);
 
     if (matches !== null && matches.length > 0) {
       match = matches[0];
-      return new Date(match.substr(0, 4), parseInt(match.substr(5, 2), 10) - 1, match.substr(8, 2));
+      return new Date(match.substring(0, 4), parseInt(match.substring(5, 7), 10) - 1, match.substring(8, 10));
     }
   }
 
@@ -435,3 +434,5 @@ AJAX.registerOnload('table/chart.js', function () {
   onDataSeriesChange();
   $('#tblchartform').trigger('submit');
 });
+
+//# sourceMappingURL=chart.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* global TraceKit */
 // js/vendor/tracekit.js
 
@@ -320,3 +319,5 @@ AJAX.registerOnload('error_report.js', function () {
   TraceKit.report.subscribe(ErrorReport.errorHandler);
   ErrorReport.setUpErrorReporting();
 });
+
+//# sourceMappingURL=error_report.js.map

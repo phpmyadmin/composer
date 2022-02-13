@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * This file is internal to phpMyAdmin.
  * @license see the main phpMyAdmin license.
@@ -303,3 +302,5 @@
     }
   };
 })(jQuery);
+
+//# sourceMappingURL=jquery.sortable-table.js.map

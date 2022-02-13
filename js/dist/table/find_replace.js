@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -43,3 +42,5 @@ AJAX.registerOnload('table/find_replace.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=find_replace.js.map

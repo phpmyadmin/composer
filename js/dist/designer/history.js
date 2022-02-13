@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in this file builds history tab and generates query.
  *
@@ -595,7 +594,7 @@ DesignerHistory.queryGroupBy = function () {
     }
   }
 
-  str = str.substr(0, str.length - 2);
+  str = str.substring(0, str.length - 2);
   return str;
 };
 /**
@@ -623,7 +622,7 @@ DesignerHistory.queryHaving = function () {
   if (and === '(') {
     and = '';
   } else {
-    and = and.substr(0, and.length - 2) + ')';
+    and = and.substring(0, and.length - 2) + ')';
   }
 
   return and;
@@ -645,7 +644,7 @@ DesignerHistory.queryOrderBy = function () {
     }
   }
 
-  str = str.substr(0, str.length - 2);
+  str = str.substring(0, str.length - 2);
   return str;
 };
 /**
@@ -963,3 +962,5 @@ AJAX.registerOnload('designer/history.js', function () {
     active: 'none'
   });
 });
+
+//# sourceMappingURL=history.js.map

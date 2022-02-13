@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Used in or for console
  *
@@ -643,7 +642,7 @@ var ConsoleInput = {
       } else {
         // Get cursor position from textarea
         var text = ConsoleInput.getText();
-        cursorLine = text.substr(0, editor.prop('selectionStart')).split('\n').length - 1;
+        cursorLine = text.substring(0, editor.prop('selectionStart')).split('\n').length - 1;
         totalLine = text.split(/\r*\n/).length;
       }
 
@@ -1591,3 +1590,5 @@ var ConsoleDebug = {
 $(function () {
   Console.initialize();
 });
+
+//# sourceMappingURL=console.js.map

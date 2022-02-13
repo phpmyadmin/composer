@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * This object handles ajax requests for pages. It also
  * handles the reloading of the main menu and scripts.
@@ -963,3 +962,5 @@ $(document).on('ajaxError', function (event, request) {
     AJAX.xhr = null;
   }
 });
+
+//# sourceMappingURL=ajax.js.map

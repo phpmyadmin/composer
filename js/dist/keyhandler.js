@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 // global var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
 var ctrlKeyHistory = 0;
 /**
@@ -150,3 +149,5 @@ AJAX.registerOnload('keyhandler.js', function () {
     onKeyDownArrowsHandler(event.originalEvent);
   });
 });
+
+//# sourceMappingURL=keyhandler.js.map

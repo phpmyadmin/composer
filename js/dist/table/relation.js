@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * for table relation
  */
@@ -211,3 +210,5 @@ AJAX.registerOnload('table/relation.js', function () {
   var windowWidth = $(window).width();
   $('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 });
+
+//# sourceMappingURL=relation.js.map

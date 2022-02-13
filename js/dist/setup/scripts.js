@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Functions used in Setup configuration forms
  */
@@ -247,3 +246,5 @@ $(function () {
     });
   });
 });
+
+//# sourceMappingURL=scripts.js.map

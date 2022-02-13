@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication
@@ -102,3 +101,5 @@ AJAX.registerOnload('server/variables.js', function () {
     });
   }
 });
+
+//# sourceMappingURL=variables.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -84,3 +83,5 @@ AJAX.registerOnload('database/qbe.js', function () {
   var windowwidth = $(window).width();
   $('.jsresponsive').css('max-width', windowwidth - 35 + 'px');
 });
+
+//# sourceMappingURL=qbe.js.map

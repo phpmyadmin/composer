@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Functions used in the import tab
  *
@@ -155,3 +154,5 @@ AJAX.registerOnload('import.js', function () {
     return true;
   });
 });
+
+//# sourceMappingURL=import.js.map

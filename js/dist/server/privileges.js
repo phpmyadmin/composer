@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Export privileges modal handler
  *
@@ -503,3 +502,5 @@ AJAX.registerOnload('server/privileges.js', function () {
   $('#addUsersForm').on('submit', CheckAddUser.handleEvent);
   $('#copyUserForm').on('submit', CheckAddUser.handleEvent);
 });
+
+//# sourceMappingURL=privileges.js.map

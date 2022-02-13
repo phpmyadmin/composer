@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* global firstDayOfCalendar */
 // templates/javascript/variables.twig
 
@@ -2327,3 +2326,5 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
   }; // end noSelect
 
 })(jQuery);
+
+//# sourceMappingURL=makegrid.js.map

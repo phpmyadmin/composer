@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * SQL syntax highlighting transformation plugin js
  *
@@ -10,3 +9,5 @@ AJAX.registerOnload('transformations/sql_editor.js', function () {
     Functions.getSqlEditor($(this), {}, 'both');
   });
 });
+
+//# sourceMappingURL=sql_editor.js.map

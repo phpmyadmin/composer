@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * XML syntax highlighting transformation plugin
  */
@@ -18,3 +17,5 @@ AJAX.registerOnload('transformations/xml.js', function () {
     }
   });
 });
+
+//# sourceMappingURL=xml.js.map

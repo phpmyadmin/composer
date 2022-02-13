@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -223,3 +222,5 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
     });
   }
 });
+
+//# sourceMappingURL=multi_table_query.js.map

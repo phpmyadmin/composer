@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    functions used in GIS data editor
  *
@@ -286,7 +285,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
     var $a = $(this);
     var name = $a.attr('name'); // Eg. name = gis_data[0][MULTIPOINT][add_point] => prefix = gis_data[0][MULTIPOINT]
 
-    var prefix = name.substr(0, name.length - 11); // Find the number of points
+    var prefix = name.substring(0, name.length - 11); // Find the number of points
 
     var $noOfPointsInput = $('input[name=\'' + prefix + '[no_of_points]' + '\']');
     var noOfPoints = parseInt($noOfPointsInput.val(), 10); // Add the new data point
@@ -303,7 +302,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
     var $a = $(this);
     var name = $a.attr('name'); // Eg. name = gis_data[0][MULTILINESTRING][add_line] => prefix = gis_data[0][MULTILINESTRING]
 
-    var prefix = name.substr(0, name.length - 10);
+    var prefix = name.substring(0, name.length - 10);
     var type = prefix.slice(prefix.lastIndexOf('[') + 1, prefix.lastIndexOf(']')); // Find the number of lines
 
     var $noOfLinesInput = $('input[name=\'' + prefix + '[no_of_lines]' + '\']');
@@ -338,7 +337,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
     var $a = $(this);
     var name = $a.attr('name'); // Eg. name = gis_data[0][MULTIPOLYGON][add_polygon] => prefix = gis_data[0][MULTIPOLYGON]
 
-    var prefix = name.substr(0, name.length - 13); // Find the number of polygons
+    var prefix = name.substring(0, name.length - 13); // Find the number of polygons
 
     var $noOfPolygonsInput = $('input[name=\'' + prefix + '[no_of_polygons]' + '\']');
     var noOfPolygons = parseInt($noOfPolygonsInput.val(), 10); // Add the new polygon
@@ -374,3 +373,5 @@ AJAX.registerOnload('gis_data_editor.js', function () {
     $noOfGeomsInput.val(noOfGeoms + 1);
   });
 });
+
+//# sourceMappingURL=gis_data_editor.js.map

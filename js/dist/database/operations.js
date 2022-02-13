@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in server privilege pages
  * @name            Database Operations
@@ -170,3 +169,5 @@ AJAX.registerOnload('database/operations.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=operations.js.map

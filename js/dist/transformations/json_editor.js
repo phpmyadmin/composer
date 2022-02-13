@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * JSON syntax highlighting transformation plugin
  *
@@ -16,3 +15,5 @@ AJAX.registerOnload('transformations/json_editor.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=json_editor.js.map

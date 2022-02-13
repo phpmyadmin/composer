@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Javascript functions used in server user groups page
  * @name            Server User Groups
@@ -35,3 +34,5 @@ AJAX.registerOnload('server/user_groups.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=user_groups.js.map

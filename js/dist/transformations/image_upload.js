@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Image upload transformations plugin js
  *
@@ -28,3 +27,5 @@ AJAX.registerOnload('transformations/image_upload.js', function () {
 AJAX.registerTeardown('transformations/image_upload.js', function () {
   $('input.image-upload').off('change');
 });
+
+//# sourceMappingURL=image_upload.js.map

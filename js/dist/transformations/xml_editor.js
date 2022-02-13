@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * XML editor plugin
  *
@@ -15,3 +14,5 @@ AJAX.registerOnload('transformations/xml_editor.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=xml_editor.js.map

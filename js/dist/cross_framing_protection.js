@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Conditionally included if framing is not allowed
  */
@@ -13,3 +12,5 @@ if (self === top) {
 } else {
   top.location = self.location;
 }
+
+//# sourceMappingURL=cross_framing_protection.js.map

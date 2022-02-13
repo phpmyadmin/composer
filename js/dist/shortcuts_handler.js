@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Handle shortcuts in various pages
  * @name            Shortcuts handler
@@ -123,3 +122,5 @@ $(function () {
     }
   });
 });
+
+//# sourceMappingURL=shortcuts_handler.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* This script handles PMA Drag Drop Import, loaded only when configuration is enabled.*/
 
 /**
@@ -371,3 +370,5 @@ $(document).on('click', '.pma_sql_import_status h2 .close', function () {
 $(document).on('click', '.pma_drop_result h2 .close', function () {
   $(this).parent('h2').parent('div').remove();
 });
+
+//# sourceMappingURL=drag_drop_import.js.map

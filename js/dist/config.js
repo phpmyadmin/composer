@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Functions used in configuration forms and on user preferences pages
  */
@@ -729,7 +728,7 @@ function setupRestoreField() {
 
     if ($(this).hasClass('restore-default')) {
       fieldSel = href;
-      restoreField(fieldSel.substr(1));
+      restoreField(fieldSel.substring(1));
     } else {
       fieldSel = href.match(/^[^=]+/)[0];
       var value = href.match(/=(.+)$/)[1];
@@ -922,3 +921,5 @@ var PASSIVE_EVENT_LISTENERS = function () {
 
   return passive;
 }();
+
+//# sourceMappingURL=config.js.map

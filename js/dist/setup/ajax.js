@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* eslint-disable no-unused-vars */
 
 /**
@@ -11,3 +10,5 @@ var AJAX = {
   },
   registerTeardown: function (idx, func) {}
 };
+
+//# sourceMappingURL=ajax.js.map

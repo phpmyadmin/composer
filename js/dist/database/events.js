@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 AJAX.registerTeardown('database/events.js', function () {
   $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
   $(document).off('click', 'a.ajax.export_anchor');
@@ -611,3 +610,5 @@ AJAX.registerOnload('database/events.js', function () {
     $(this).closest('table').find('tr.recurring_event_row, tr.onetime_event_row').toggle();
   });
 });
+
+//# sourceMappingURL=events.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Implements the shiftkey + click remove column
  *                  from order by clause functionality
@@ -31,3 +30,5 @@ AJAX.registerOnload('keyhandler.js', function () {
 AJAX.registerTeardown('keyhandler.js', function () {
   $(document).off('click', 'th.draggable.column_heading.pointer.marker a');
 });
+
+//# sourceMappingURL=multi_column_sort.js.map

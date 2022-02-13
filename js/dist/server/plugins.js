@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Make columns sortable, but only for tables with more than 1 data row.
  */
@@ -19,3 +18,5 @@ function makeColumnsSortable() {
 AJAX.registerOnload('server/plugins.js', function () {
   makeColumnsSortable();
 });
+
+//# sourceMappingURL=plugins.js.map

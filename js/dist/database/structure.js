@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    functions used on the database structure page
  * @name            Database Structure
@@ -418,3 +417,5 @@ AJAX.registerOnload('database/structure.js', function () {
     DatabaseStructure.fetchRealRowCount($(this));
   });
 });
+
+//# sourceMappingURL=structure.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used for page-related settings
  * @name            Page-related settings
@@ -44,3 +43,5 @@ AJAX.registerOnload('page_settings.js', function () {
 
   $('#pma_navigation_settings_icon').on('click', showNaviSettings);
 });
+
+//# sourceMappingURL=page_settings.js.map

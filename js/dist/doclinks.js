@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Definition of links to MySQL documentation.
  */
@@ -365,3 +364,5 @@ var mysqlDocBuiltin = {
   'ENUM': ['string-types'],
   'SET': ['string-types']
 };
+
+//# sourceMappingURL=doclinks.js.map

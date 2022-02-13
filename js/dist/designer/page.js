@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* global DesignerOfflineDB */
 // js/designer/database.js
 // eslint-disable-next-line no-unused-vars
@@ -208,3 +207,5 @@ DesignerPage.getRandom = function (max, min) {
   var val = Math.random() * (max - min) + min;
   return Math.floor(val);
 };
+
+//# sourceMappingURL=page.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 // TODO: change the axis
 
 /**
@@ -619,3 +618,5 @@ AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     displayHelp();
   });
 });
+
+//# sourceMappingURL=zoom_plot_jqplot.js.map

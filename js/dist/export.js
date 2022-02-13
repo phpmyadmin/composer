@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Functions used in the export tab
  *
@@ -946,3 +945,5 @@ AJAX.registerOnload('export.js', function () {
     }
   });
 });
+
+//# sourceMappingURL=export.js.map

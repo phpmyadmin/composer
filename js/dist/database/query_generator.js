@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -147,3 +146,5 @@ function generateFromBlock(tableAliases, foreignKeys) {
 
   return query;
 }
+
+//# sourceMappingURL=query_generator.js.map

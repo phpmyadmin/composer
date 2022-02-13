@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview   events handling from central columns page
  * @name            Central columns
@@ -243,3 +242,5 @@ AJAX.registerOnload('database/central_columns.js', function () {
     }
   });
 });
+
+//# sourceMappingURL=central_columns.js.map

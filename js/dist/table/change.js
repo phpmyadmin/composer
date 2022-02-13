@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used in table data manipulation pages
  *
@@ -331,7 +330,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     });
   }
 
-  if (target.value === 'HEX' && theType.substring(0, 3) === 'int') {
+  if (target.value === 'HEX' && theType.startsWith('int')) {
     // Add note when HEX function is selected on a int
     var newHexInfo = '<br><p id="note' + target.id + '">' + Messages.HexConversionInfo + '</p>';
 
@@ -349,9 +348,9 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
   $('input[name=\'insert_ignore_' + multiEdit + '\']').prop('checked', false);
   var charExceptionHandling;
 
-  if (theType.substring(0, 4) === 'char') {
+  if (theType.startsWith('char')) {
     charExceptionHandling = theType.substring(5, 6);
-  } else if (theType.substring(0, 7) === 'varchar') {
+  } else if (theType.startsWith('varchar')) {
     charExceptionHandling = theType.substring(8, 9);
   }
 
@@ -447,7 +446,7 @@ AJAX.registerOnload('table/change.js', function () {
       return value.match(/^[a-f0-9]*$/i) !== null;
     });
     jQuery.validator.addMethod('validationFunctionForMd5', function (value, element, options) {
-      return !(value.substring(0, 3) === 'MD5' && typeof options.data('maxlength') !== 'undefined' && options.data('maxlength') < 32);
+      return !(value.startsWith('MD5') && typeof options.data('maxlength') !== 'undefined' && options.data('maxlength') < 32);
     });
     jQuery.validator.addMethod('validationFunctionForAesDesEncrypt', function (value, element, options) {
       var funType = value.substring(0, 3);
@@ -836,3 +835,5 @@ function changeValueFieldType(elem, searchIndex) {
     $('#fieldID_' + searchIndex).prop('multiple', false);
   }
 }
+
+//# sourceMappingURL=change.js.map

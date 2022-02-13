@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * JavaScript functions used on Database Search page
  *
@@ -260,3 +259,5 @@ AJAX.registerOnload('database/search.js', function () {
     return false;
   });
 }); // end $()
+
+//# sourceMappingURL=search.js.map

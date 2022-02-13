@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Chart type enumerations
  */
@@ -764,3 +763,5 @@ JQPlotChartFactory.prototype.createChart = function (type, elementId) {
 
   return chart;
 };
+
+//# sourceMappingURL=chart.js.map

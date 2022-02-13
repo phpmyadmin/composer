@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Javascript functions used in server replication page
  * @name            Server Replication
@@ -104,3 +103,5 @@ AJAX.registerOnload('replication.js', function () {
     document.getElementById('text_pma_change_pw').focus();
   });
 });
+
+//# sourceMappingURL=replication.js.map

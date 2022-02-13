@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview   events handling from normalization page
  * @name            normalization
@@ -777,3 +776,5 @@ AJAX.registerOnload('normalization.js', function () {
     }
   });
 });
+
+//# sourceMappingURL=normalization.js.map

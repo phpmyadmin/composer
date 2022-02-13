@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * jqplot formatter for byte values
  *
@@ -50,3 +49,5 @@
     };
   };
 })(jQuery);
+
+//# sourceMappingURL=jqplot.byteFormatter.js.map

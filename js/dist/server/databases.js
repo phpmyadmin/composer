@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @implements EventListener
  */
@@ -125,3 +124,5 @@ AJAX.registerOnload('server/databases.js', function () {
   $(document).on('submit', '#create_database_form.ajax', CreateDatabase.handleEvent);
   checkPrivilegesForDatabase();
 });
+
+//# sourceMappingURL=databases.js.map

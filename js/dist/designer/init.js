@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Initializes the data required to run Designer, then fires it up.
  */
@@ -74,3 +73,5 @@ AJAX.registerOnload('designer/init.js', function () {
     $('#query_where').css('display', 'none');
   });
 });
+
+//# sourceMappingURL=init.js.map

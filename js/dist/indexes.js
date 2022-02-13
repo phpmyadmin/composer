@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    function used for index manipulation pages
  * @name            Table Structure
@@ -782,3 +781,5 @@ AJAX.registerOnload('indexes.js', function () {
     }
   });
 });
+
+//# sourceMappingURL=indexes.js.map

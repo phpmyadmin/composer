@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /* global u2f */
 // js/vendor/u2f-api-polyfill.js
 AJAX.registerOnload('u2f.js', function () {
@@ -90,3 +89,5 @@ AJAX.registerOnload('u2f.js', function () {
     }, 1000);
   }
 });
+
+//# sourceMappingURL=u2f.js.map

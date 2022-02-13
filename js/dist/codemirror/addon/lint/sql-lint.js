@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
   // Skipping check if text box is empty.
   if (text.trim() === '') {
@@ -37,3 +36,5 @@ CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
     success: handleResponse
   });
 };
+
+//# sourceMappingURL=sql-lint.js.map

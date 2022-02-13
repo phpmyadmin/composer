@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down the page
  */
@@ -105,3 +104,5 @@ AJAX.registerOnload('database/tracking.js', function () {
     });
   });
 });
+
+//# sourceMappingURL=tracking.js.map

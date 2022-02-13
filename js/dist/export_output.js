@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 AJAX.registerOnload('export_output.js', function () {
   $(document).on('keydown', function (e) {
     if ((e.which || e.keyCode) === 116) {
@@ -12,3 +11,5 @@ AJAX.registerOnload('export_output.js', function () {
     $('#export_refresh_form').trigger('submit');
   });
 });
+
+//# sourceMappingURL=export_output.js.map
