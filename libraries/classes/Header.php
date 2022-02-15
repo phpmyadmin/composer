@@ -400,6 +400,9 @@ class Header
         $console = $this->console->getDisplay();
         $messages = $this->getMessage();
 
+        $this->scripts->addFile('datetimepicker.js');
+        $this->scripts->addFile('validator-messages.js');
+
         return $this->template->render('header', [
             'lang' => $GLOBALS['lang'],
             'allow_third_party_framing' => $GLOBALS['cfg']['AllowThirdPartyFraming'],
@@ -667,14 +670,10 @@ class Header
 
         $maxInputVars = ini_get('max_input_vars');
         $maxInputVarsValue = $maxInputVars === false || $maxInputVars === '' ? 'false' : (int) $maxInputVars;
-        $gridEditing = $cfg['GridEditing'] === 'click' || $cfg['GridEditing'] === 'disabled'
-            ? $cfg['GridEditing']
-            : 'double-click';
 
         return $this->template->render('javascript/variables', [
             'first_day_of_calendar' => $cfg['FirstDayOfCalendar'] ?? 0,
             'max_input_vars' => $maxInputVarsValue,
-            'grid_editing' => $gridEditing,
         ]);
     }
 }
