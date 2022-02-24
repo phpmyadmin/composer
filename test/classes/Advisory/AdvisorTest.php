@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpMyAdmin\Tests;
+namespace PhpMyAdmin\Tests\Advisory;
 
-use PhpMyAdmin\Advisor;
+use PhpMyAdmin\Advisory\Advisor;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
- * @covers \PhpMyAdmin\Advisor
+ * @covers \PhpMyAdmin\Advisory\Advisor
  */
 class AdvisorTest extends AbstractTestCase
 {
@@ -72,10 +73,6 @@ class AdvisorTest extends AbstractTestCase
     {
         parent::setLanguage();
         $advisor = new Advisor($GLOBALS['dbi'], new ExpressionLanguage());
-        $parseResult = include ROOT_PATH . 'libraries/advisory_rules_generic.php';
-        $this->assertIsArray($parseResult);
-        $this->assertArrayHasKey(0, $parseResult);
-        $this->assertIsArray($parseResult[0]);
         $advisor->setVariable('value', 0);
         $advisor->addRule('fired', $rule);
         $runResult = $advisor->getRunResult();
