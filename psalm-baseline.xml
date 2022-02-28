@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.21.0@d8bec4c7aaee111a532daec32fb09de5687053d1">
+<files psalm-version="4.22.0@fc2c6ab4d5fa5d644d8617089f012f3bb84b8703">
   <file src="index.php">
     <InvalidGlobal occurrences="1">
       <code>global $containerBuilder;</code>
@@ -250,7 +250,7 @@
     </NonInvariantDocblockPropertyType>
   </file>
   <file src="libraries/classes/Common.php">
-    <MixedArgument occurrences="9">
+    <MixedArgument occurrences="8">
       <code>$_REQUEST['back']</code>
       <code>$_REQUEST['goto']</code>
       <code>$_SESSION[' PMA_token ']</code>
@@ -258,7 +258,6 @@
       <code>$cfg['Server']['user']</code>
       <code>$goto</code>
       <code>$sqlDelimiter</code>
-      <code>$sql_query</code>
       <code>$urlParams</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="3">
@@ -7654,7 +7653,7 @@
     </MixedAssignment>
   </file>
   <file src="libraries/classes/InsertEdit.php">
-    <MixedArgument occurrences="85">
+    <MixedArgument occurrences="86">
       <code>$_POST['fields']['multi_edit']</code>
       <code>$_POST['fields']['multi_edit'][$rownumber][$key]</code>
       <code>$backupField</code>
@@ -7668,6 +7667,7 @@
       <code>$column['Extra']</code>
       <code>$column['Extra']</code>
       <code>$column['Extra']</code>
+      <code>$column['Field']</code>
       <code>$column['Field']</code>
       <code>$column['Field']</code>
       <code>$column['Field']</code>
@@ -7835,18 +7835,16 @@
       <code>$whereClause</code>
       <code>$whereClause</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="3">
+    <MixedInferredReturnType occurrences="2">
       <code>int</code>
-      <code>string</code>
       <code>string</code>
     </MixedInferredReturnType>
     <MixedMethodCall occurrences="2">
       <code>new $className()</code>
       <code>new $className()</code>
     </MixedMethodCall>
-    <MixedOperand occurrences="10">
+    <MixedOperand occurrences="9">
       <code>$_POST['where_clause'][0]</code>
-      <code>$column['Field_html']</code>
       <code>$column['pma_type']</code>
       <code>$file</code>
       <code>$maxlength</code>
@@ -7856,9 +7854,8 @@
       <code>$multiEditFuncs[$key]</code>
       <code>$whereClause</code>
     </MixedOperand>
-    <MixedReturnStatement occurrences="3">
+    <MixedReturnStatement occurrences="2">
       <code>$_POST['err_url']</code>
-      <code>$column['Field_html']</code>
     </MixedReturnStatement>
     <PossiblyNullArgument occurrences="2">
       <code>$newValue</code>
@@ -15068,9 +15065,8 @@
       <code>$result</code>
       <code>$result</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="11">
+    <MixedArrayAccess occurrences="10">
       <code>$result['Field']</code>
-      <code>$result['Field_html']</code>
       <code>$result['Field_md5']</code>
       <code>$result['Field_title']</code>
       <code>$result['True_Type']</code>
