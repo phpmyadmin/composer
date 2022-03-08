@@ -68,13 +68,6 @@ final class ColumnsDefinition
         ?array $selected = null,
         $fields_meta = null
     ): array {
-        Util::checkParameters([
-            'server',
-            'db',
-            'table',
-            'num_fields',
-        ]);
-
         $length_values_input_size = 8;
         $content_cells = [];
         $form_params = ['db' => $GLOBALS['db']];
@@ -83,12 +76,7 @@ final class ColumnsDefinition
             $form_params['reload'] = 1;
         } else {
             if ($action === '/table/add-field') {
-                $form_params = array_merge(
-                    $form_params,
-                    [
-                        'field_where' => Util::getValueByKey($_POST, 'field_where'),
-                    ]
-                );
+                $form_params = array_merge($form_params, ['field_where' => $_POST['field_where'] ?? null]);
                 if (isset($_POST['field_where'])) {
                     $form_params['after_field'] = $_POST['after_field'];
                 }
@@ -102,8 +90,8 @@ final class ColumnsDefinition
         $form_params = array_merge(
             $form_params,
             [
-                'orig_field_where' => Util::getValueByKey($_POST, 'field_where'),
-                'orig_after_field' => Util::getValueByKey($_POST, 'after_field'),
+                'orig_field_where' => $_POST['field_where'] ?? null,
+                'orig_after_field' => $_POST['after_field'] ?? null,
             ]
         );
 
@@ -388,49 +376,15 @@ final class ColumnsDefinition
                 $form_params = array_merge(
                     $form_params,
                     [
-                        "field_default_value_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Default',
-                            ''
-                        ),
-                        "field_default_type_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'DefaultType',
-                            ''
-                        ),
-                        "field_collation_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Collation',
-                            ''
-                        ),
-                        "field_attribute_orig[${columnNumber}]" => trim(
-                            Util::getValueByKey($extracted_columnspec, 'attribute', '')
-                        ),
-                        "field_null_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Null',
-                            ''
-                        ),
-                        "field_extra_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Extra',
-                            ''
-                        ),
-                        "field_comments_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Comment',
-                            ''
-                        ),
-                        "field_virtuality_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Virtuality',
-                            ''
-                        ),
-                        "field_expression_orig[${columnNumber}]" => Util::getValueByKey(
-                            $columnMeta,
-                            'Expression',
-                            ''
-                        ),
+                        "field_default_value_orig[${columnNumber}]" => $columnMeta['Default'] ?? '',
+                        "field_default_type_orig[${columnNumber}]" => $columnMeta['DefaultType'] ?? '',
+                        "field_collation_orig[${columnNumber}]" => $columnMeta['Collation'] ?? '',
+                        "field_attribute_orig[${columnNumber}]" => trim($extracted_columnspec['attribute'] ?? ''),
+                        "field_null_orig[${columnNumber}]" => $columnMeta['Null'] ?? '',
+                        "field_extra_orig[${columnNumber}]" => $columnMeta['Extra'] ?? '',
+                        "field_comments_orig[${columnNumber}]" => $columnMeta['Comment'] ?? '',
+                        "field_virtuality_orig[${columnNumber}]" => $columnMeta['Virtuality'] ?? '',
+                        "field_expression_orig[${columnNumber}]" => $columnMeta['Expression'] ?? '',
                     ]
                 );
             }
