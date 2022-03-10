@@ -16,7 +16,6 @@ use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Util;
 
 use function __;
-use function define;
 use function htmlspecialchars;
 use function in_array;
 use function intval;
@@ -54,11 +53,31 @@ class WrapperController extends AbstractController
 
     public function __invoke(): void
     {
-        define('IS_TRANSFORMATION_WRAPPER', true);
+        $this->response->getHeader()->setIsTransformationWrapper(true);
+        $GLOBALS['cn'] = $GLOBALS['cn'] ?? null;
+        $GLOBALS['transform_key'] = $GLOBALS['transform_key'] ?? null;
+        $GLOBALS['request_params'] = $GLOBALS['request_params'] ?? null;
+        $GLOBALS['size_params'] = $GLOBALS['size_params'] ?? null;
+        $GLOBALS['where_clause'] = $GLOBALS['where_clause'] ?? null;
+        $GLOBALS['row'] = $GLOBALS['row'] ?? null;
+
+        $GLOBALS['default_ct'] = $GLOBALS['default_ct'] ?? null;
+        $GLOBALS['mime_map'] = $GLOBALS['mime_map'] ?? null;
+        $GLOBALS['mime_options'] = $GLOBALS['mime_options'] ?? null;
+        $GLOBALS['ct'] = $GLOBALS['ct'] ?? null;
+        $GLOBALS['mime_type'] = $GLOBALS['mime_type'] ?? null;
+        $GLOBALS['srcImage'] = $GLOBALS['srcImage'] ?? null;
+        $GLOBALS['srcWidth'] = $GLOBALS['srcWidth'] ?? null;
+        $GLOBALS['srcHeight'] = $GLOBALS['srcHeight'] ?? null;
+        $GLOBALS['ratioWidth'] = $GLOBALS['ratioWidth'] ?? null;
+        $GLOBALS['ratioHeight'] = $GLOBALS['ratioHeight'] ?? null;
+        $GLOBALS['destWidth'] = $GLOBALS['destWidth'] ?? null;
+        $GLOBALS['destHeight'] = $GLOBALS['destHeight'] ?? null;
+        $GLOBALS['destImage'] = $GLOBALS['destImage'] ?? null;
 
         $relationParameters = $this->relation->getRelationParameters();
 
-        DbTableExists::check($GLOBALS['db'], $GLOBALS['table']);
+        DbTableExists::check($GLOBALS['db'], $GLOBALS['table'], true);
 
         /**
          * Sets globals from $_REQUEST
