@@ -2591,6 +2591,11 @@ parameters:
 			path: libraries/classes/DatabaseInterface.php
 
 		-
+			message: "#^Parameter \\#2 \\$link of method PhpMyAdmin\\\\DatabaseInterface\\:\\:escapeMysqlLikeString\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/DatabaseInterface.php
+
+		-
 			message: "#^Parameter \\#2 \\$table of method PhpMyAdmin\\\\Query\\\\Cache\\:\\:cacheTableData\\(\\) expects bool\\|string, array\\|string given\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
@@ -8507,16 +8512,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Transformations\\:\\:getAvailableMimeTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Transformations.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Transformations\\:\\:getMime\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Transformations.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Transformations\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Transformations.php
 
