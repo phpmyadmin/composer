@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * Server Status Processes
  *
@@ -195,3 +194,5 @@ AJAX.registerTeardown('server/status/processes.js', function () {
 
   processList.abortRefresh();
 });
+
+//# sourceMappingURL=processes.js.map

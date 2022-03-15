@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  *
  *
@@ -96,3 +95,5 @@ AJAX.registerOnload('server/status/variables.js', function () {
     });
   }
 });
+
+//# sourceMappingURL=variables.js.map

@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Javascript functions used in server status query page
  * @name            Server Status Query
@@ -40,3 +39,5 @@ AJAX.registerOnload('server/status/queries.js', function () {
 
   initTableSorter('statustabs_queries');
 });
+
+//# sourceMappingURL=queries.js.map

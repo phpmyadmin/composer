@@ -2175,8 +2175,10 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
       $(g.gDiv).append(g.cEditStd);
       $(g.gDiv).append(g.cEditTextarea); // add hint for grid editing feature when hovering "Edit" link in each table row
 
-      if (Messages.strGridEditFeatureHint !== undefined) {
-        Functions.tooltip($(g.t).find('.edit_row_anchor a'), 'a', Messages.strGridEditFeatureHint);
+      const editRowAnchor = $(g.t).find('.edit_row_anchor');
+
+      if (editRowAnchor.attr('data-grid-edit-config') !== 'disabled') {
+        editRowAnchor.find('a').tooltip();
       }
     }
   };

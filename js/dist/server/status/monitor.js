@@ -1,5 +1,4 @@
-"use strict";
-
+var __webpack_exports__ = {};
 /**
  * @fileoverview    Javascript functions used in server status monitor page
  * @name            Server Status Monitor
@@ -98,7 +97,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
   $('<div></div>').attr('id', 'emptyDialog').appendTo('#page_content');
   $('a.popupLink').on('click', function () {
     var $link = $(this);
-    $('div.' + $link.attr('href').substr(1)).show().offset({
+    $('div.' + $link.attr('href').substring(1)).show().offset({
       top: $link.offset().top + $link.height() + 5,
       left: $link.offset().left
     }).addClass('openedPopup');
@@ -990,7 +989,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         $dialog.find('a.set').on('click', function () {
           var nameValue = $(this).attr('href').split('-');
           loadLogVars({
-            varName: nameValue[0].substr(1),
+            varName: nameValue[0].substring(1),
             varValue: nameValue[1]
           });
           $dialog.find('img.ajaxIcon').show();
@@ -2281,3 +2280,5 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 AJAX.registerOnload('server/status/monitor.js', function () {
   $('a[href="#pauseCharts"]').trigger('click');
 });
+
+//# sourceMappingURL=monitor.js.map
