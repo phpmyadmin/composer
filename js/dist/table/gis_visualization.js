@@ -7,7 +7,7 @@ var __webpack_exports__ = {};
  * @requires    vendor/jquery/jquery.mousewheel.js
  */
 
-/* global drawOpenLayers PASSIVE_EVENT_LISTENERS */
+/* global drawOpenLayers */
 // templates/table/gis_visualization/gis_visualization.twig
 // Constants
 var zoomFactor = 1.5;
@@ -196,9 +196,9 @@ AJAX.registerTeardown('table/gis_visualization.js', function () {
   $(document).off('click', '#up_arrow');
   $(document).off('click', '#down_arrow');
   $('.vector').off('mousemove').off('mouseout');
-  $('#placeholder').get(0).removeEventListener('wheel', onGisMouseWheel, PASSIVE_EVENT_LISTENERS ? {
+  $('#placeholder').get(0).removeEventListener('wheel', onGisMouseWheel, {
     passive: false
-  } : undefined);
+  });
 
   if (map) {
     // Removes ol.Map's resize listener from window
@@ -228,9 +228,9 @@ AJAX.registerOnload('table/gis_visualization.js', function () {
       drawOpenLayerMap();
     }
   });
-  $('#placeholder').get(0).addEventListener('wheel', onGisMouseWheel, PASSIVE_EVENT_LISTENERS ? {
+  $('#placeholder').get(0).addEventListener('wheel', onGisMouseWheel, {
     passive: false
-  } : undefined);
+  });
   var dragX = 0;
   var dragY = 0;
   $('svg').draggable({
