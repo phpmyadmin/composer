@@ -5,9 +5,6 @@ var __webpack_exports__ = {};
  * @package phpMyAdmin-Console
  */
 
-/* global debugSQLInfo */
-// libraries/classes/Footer.php
-
 /**
  * Console object
  */
@@ -1225,6 +1222,10 @@ var ConsoleBookmarks = {
   }
 };
 var ConsoleDebug = {
+  /**
+   * @type {Object|string|null}
+   */
+  debugSqlInfo: null,
   config: {
     groupQueries: false,
     orderBy: 'exec',
@@ -1308,13 +1309,12 @@ var ConsoleDebug = {
       ConsoleDebug.refresh();
     }); // Show SQL debug info for first page load
 
-    if (typeof debugSQLInfo !== 'undefined' && debugSQLInfo !== 'null') {
-      $('#pma_console').find('.button.debug').removeClass('hide');
-    } else {
+    if (ConsoleDebug.debugSqlInfo === null) {
       return;
     }
 
-    ConsoleDebug.showLog(debugSQLInfo);
+    $('#pma_console').find('.button.debug').removeClass('hide');
+    ConsoleDebug.showLog(ConsoleDebug.debugSqlInfo);
   },
   formatFunctionCall: function (dbgStep) {
     var functionName = '';
