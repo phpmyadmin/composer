@@ -116,23 +116,23 @@ var Console = {
     if (Console.isInitialized === false) {
       // Load config first
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.AlwaysExpand) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options input[name=always_expand]').prop('checked', true);
+        document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked = true;
       }
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.StartHistory) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=start_history]').prop('checked', true);
+        document.getElementById('consoleOptionsStartHistoryCheckbox').checked = true;
       }
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.CurrentQuery) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=current_query]').prop('checked', true);
+        document.getElementById('consoleOptionsCurrentQueryCheckbox').checked = true;
       }
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=enter_executes]').prop('checked', true);
+        document.getElementById('consoleOptionsEnterExecutesCheckbox').checked = true;
       }
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.DarkTheme) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=dark_theme]').prop('checked', true);
+        document.getElementById('consoleOptionsDarkThemeCheckbox').checked = true;
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.content').addClass('console_dark_theme');
       }
 
@@ -179,14 +179,14 @@ var Console = {
         _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
       });
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('.button.default').on('click', function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options input[name=always_expand]').prop('checked', false);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=start_history]').prop('checked', false);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=current_query]').prop('checked', true);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=enter_executes]').prop('checked', false);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=dark_theme]').prop('checked', false);
+        document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked = false;
+        document.getElementById('consoleOptionsStartHistoryCheckbox').checked = false;
+        document.getElementById('consoleOptionsCurrentQueryCheckbox').checked = true;
+        document.getElementById('consoleOptionsEnterExecutesCheckbox').checked = false;
+        document.getElementById('consoleOptionsDarkThemeCheckbox').checked = false;
         _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[name=enter_executes]').on('change', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#consoleOptionsEnterExecutesCheckbox').on('change', function () {
         ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes);
       });
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxComplete', function (event, xhr, ajaxOptions) {
@@ -1673,12 +1673,11 @@ const Config = {
    * @return {void}
    */
   update: function () {
-    const consoleOptions = document.getElementById('pma_console_options');
-    this.set('AlwaysExpand', !!consoleOptions.querySelector('input[name=always_expand]').checked);
-    this.set('StartHistory', !!consoleOptions.querySelector('input[name=start_history]').checked);
-    this.set('CurrentQuery', !!consoleOptions.querySelector('input[name=current_query]').checked);
-    this.set('EnterExecutes', !!consoleOptions.querySelector('input[name=enter_executes]').checked);
-    this.set('DarkTheme', !!consoleOptions.querySelector('input[name=dark_theme]').checked);
+    this.set('AlwaysExpand', !!document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked);
+    this.set('StartHistory', !!document.getElementById('consoleOptionsStartHistoryCheckbox').checked);
+    this.set('CurrentQuery', !!document.getElementById('consoleOptionsCurrentQueryCheckbox').checked);
+    this.set('EnterExecutes', !!document.getElementById('consoleOptionsEnterExecutesCheckbox').checked);
+    this.set('DarkTheme', !!document.getElementById('consoleOptionsDarkThemeCheckbox').checked);
     /* Setting the dark theme of the console*/
 
     const consoleContent = document.getElementById('pma_console').querySelector('.content');
