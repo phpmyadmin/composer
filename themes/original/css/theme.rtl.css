@@ -1897,7 +1897,7 @@ progress {
   }
 }
 .table {
-  --bs-table-bg: #f5f5f5;
+  --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
   --bs-table-striped-color: #000;
   --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
@@ -14595,10 +14595,25 @@ textarea {
 }
 .table thead th {
   border-bottom: 0;
+  background: #d3dce3;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #e5e5e5;
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #d5d5d5;
+}
+
+.table-light {
+  --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: #000;
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+  --bs-table-active-color: #000;
+  --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-table-hover-color: #000;
+  --bs-table-hover-bg: #cfc;
 }
 
 select#fieldsSelect,
