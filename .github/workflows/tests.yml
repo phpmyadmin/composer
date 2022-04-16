@@ -11,7 +11,6 @@ on:
 jobs:
     multi-arch-tests-php:
         name: Test on php ${{ matrix.php-version }} (${{ matrix.arch }})
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
         runs-on: ubuntu-latest
         continue-on-error: ${{ matrix.experimental }}
         strategy:
@@ -26,7 +25,7 @@ jobs:
               - { php-version: '7', experimental: true, arch: 'ppc64le', exclude-phpunit-groups: 'selenium,extension-iconv' }
               - { php-version: '7', experimental: false, arch: 's390x', exclude-phpunit-groups: 'selenium,extension-iconv,32bit-incompatible' }
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Write script
               # tcpdf allowed memory exhausted needs the memory_limit workaround
               # musl-locales and musl-locales-lang are needed to run some locale specific tests
@@ -60,7 +59,6 @@ jobs:
                 name: phpunit-${{ matrix.php-version }}-${{ matrix.arch }}
     test-php:
         name: Test on php ${{ matrix.php-version }} and ${{ matrix.os }}
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
         runs-on: ${{ matrix.os }}
         continue-on-error: ${{ matrix.experimental }}
         strategy:
@@ -71,7 +69,7 @@ jobs:
                 include:
                     - { php-version: 'nightly', composer-options: '--ignore-platform-req=php+', experimental: true, os: ubuntu-latest }
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
               with:
                   # Fetch some commits for Scrutinizer coverage upload
                   fetch-depth: 15
@@ -89,7 +87,7 @@ jobs:
               id: composer-cache
               run: |
                 echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                 path: ${{ steps.composer-cache.outputs.dir }}
                 key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -123,14 +121,13 @@ jobs:
     test-php-optional-extensions:
         name: Test on php (+ ext-${{ matrix.extension }}) ${{ matrix.php-version }} and ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
         strategy:
             matrix:
                 php-version: ["7.1"]
                 os: [ubuntu-latest]
                 extension: ["dbase", "recode"]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
               with:
                   # Fetch some commits for Scrutinizer coverage upload
                   fetch-depth: 15
@@ -148,7 +145,7 @@ jobs:
               id: composer-cache
               run: |
                 echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                 path: ${{ steps.composer-cache.outputs.dir }}
                 key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -182,13 +179,12 @@ jobs:
     test-php-random:
         name: Test (random) on php ${{ matrix.php-version }} and ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
         strategy:
             matrix:
                 php-version: ["7.4"]
                 os: [ubuntu-latest]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Install gettext
               run: sudo apt-get install -y gettext
             - name: Generate mo files
@@ -202,7 +198,7 @@ jobs:
               id: composer-cache
               run: |
                 echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                 path: ${{ steps.composer-cache.outputs.dir }}
                 key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -218,9 +214,8 @@ jobs:
     test-js:
         name: Test javascript files
         runs-on: ubuntu-latest
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: actions/setup-node@v1
               with:
                   node-version: 12
@@ -228,7 +223,7 @@ jobs:
               id: yarn-cache-dir-path
               run: echo "::set-output name=dir::$(yarn cache dir)"
             - name: yarn cache
-              uses: actions/cache@v2
+              uses: actions/cache@v3
               with:
                   path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
