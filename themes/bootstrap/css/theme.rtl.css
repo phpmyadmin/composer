@@ -10630,6 +10630,17 @@ div.null_div {
   font-style: normal;
   min-width: 50px;
 }
+div.null_div label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+div.null_div label input {
+  cursor: pointer;
+}
 
 .pma-fieldset .formelement {
   float: right;
@@ -14847,4 +14858,12 @@ td {
   .column_attribute {
     font-size: 100%;
   }
+}
+.card-img-container {
+  height: 16vh;
+  overflow: hidden;
+}
+.card-img-container img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
