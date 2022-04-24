@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    Implements the shiftkey + click remove column
  *                  from order by clause functionality

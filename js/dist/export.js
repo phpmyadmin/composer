@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Functions used in the export tab
  *

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Initializes the data required to run Designer, then fires it up.
  */

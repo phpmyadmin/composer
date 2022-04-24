@@ -1,5 +1,3 @@
-"use strict";
-
 // eslint-disable-next-line no-unused-vars
 var DesignerObjects = {
   PdfPage: function PdfPage(dbName, pageDescr, tblCords) {

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    function used in table data manipulation pages
  *

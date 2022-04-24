@@ -1,5 +1,3 @@
-"use strict";
-
 /* global TraceKit */
 // js/vendor/tracekit.js
 

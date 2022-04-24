@@ -1,5 +1,3 @@
-"use strict";
-
 var designerTables = [{
   name: 'pdf_pages',
   key: 'pgNr',

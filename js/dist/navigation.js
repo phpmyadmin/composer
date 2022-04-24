@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * function used in or for navigation panel
  *

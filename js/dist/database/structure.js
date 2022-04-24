@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    functions used on the database structure page
  * @name            Database Structure

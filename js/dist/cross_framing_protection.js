@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Conditionally included if framing is not allowed
  */

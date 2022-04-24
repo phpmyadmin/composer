@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations

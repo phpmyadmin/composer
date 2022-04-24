@@ -1,5 +1,3 @@
-"use strict";
-
 CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
   // Skipping check if text box is empty.
   if (text.trim() === '') {

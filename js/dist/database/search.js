@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * JavaScript functions used on Database Search page
  *

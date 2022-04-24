@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    function used in server privilege pages
  * @name            Database Operations

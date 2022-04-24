@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * SQL syntax highlighting transformation plugin js
  *

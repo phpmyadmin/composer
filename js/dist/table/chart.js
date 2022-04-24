@@ -1,5 +1,3 @@
-"use strict";
-
 /* global ColumnType, DataTable, JQPlotChartFactory */
 // js/chart.js
 

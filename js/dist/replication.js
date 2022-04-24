@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    Javascript functions used in server replication page
  * @name            Server Replication

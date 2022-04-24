@@ -1,5 +1,3 @@
-"use strict";
-
 /* This script handles PMA Drag Drop Import, loaded only when configuration is enabled.*/
 
 /**

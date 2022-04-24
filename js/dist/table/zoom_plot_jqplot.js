@@ -1,5 +1,3 @@
-"use strict";
-
 // TODO: change the axis
 
 /**

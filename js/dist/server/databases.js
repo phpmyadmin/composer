@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    functions used on the server databases list page
  * @name            Server Databases

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Image upload transformations plugin js
  *

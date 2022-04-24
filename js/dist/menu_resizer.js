@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Handles the resizing of a menu according to the available screen width
  *

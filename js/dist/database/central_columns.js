@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview   events handling from central columns page
  * @name            Central columns

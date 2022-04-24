@@ -1,5 +1,3 @@
-"use strict";
-
 /* global u2f */
 // js/vendor/u2f-api-polyfill.js
 AJAX.registerOnload('u2f.js', function () {

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Functions used in configuration forms and on user preferences pages
  */

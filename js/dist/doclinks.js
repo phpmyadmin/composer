@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Definition of links to MySQL documentation.
  */

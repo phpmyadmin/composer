@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * An implementation of a client-side page cache.
  * This object also uses the cache to provide a simple microhistory,

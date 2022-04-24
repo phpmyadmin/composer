@@ -1,5 +1,3 @@
-"use strict";
-
 /* global DesignerOfflineDB */
 // js/designer/database.js
 // eslint-disable-next-line no-unused-vars

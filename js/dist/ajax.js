@@ -1,5 +1,3 @@
-"use strict";
-
 /* global ErrorReport */
 // js/error_report.js
 

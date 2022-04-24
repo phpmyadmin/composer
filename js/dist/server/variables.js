@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication

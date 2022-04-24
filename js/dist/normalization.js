@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview   events handling from normalization page
  * @name            normalization

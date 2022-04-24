@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Unbind all event handlers before tearing down the page
  */

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    Javascript functions used in server status query page
  * @name            Server Status Query

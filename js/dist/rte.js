@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * JavaScript functionality for Routines, Triggers and Events.
  *

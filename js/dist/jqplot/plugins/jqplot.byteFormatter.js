@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * jqplot formatter for byte values
  *

@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * XML editor plugin
  *

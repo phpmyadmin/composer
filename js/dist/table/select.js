@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview JavaScript functions used on /table/search
  *

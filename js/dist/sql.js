@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @fileoverview    functions used wherever an sql query form is used
  *

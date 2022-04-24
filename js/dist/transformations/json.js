@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * JSON syntax highlighting transformation plugin
  */
