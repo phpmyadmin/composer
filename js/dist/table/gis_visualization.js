@@ -4,7 +4,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
  * @fileoverview    functions used for visualizing GIS data
  *
  * @requires    jquery
- * @requires    vendor/jquery/jquery.svg.js
  * @requires    vendor/jquery/jquery.mousewheel.js
  */
 
