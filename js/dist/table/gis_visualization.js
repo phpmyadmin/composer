@@ -3,7 +3,6 @@ var __webpack_exports__ = {};
  * @fileoverview    functions used for visualizing GIS data
  *
  * @requires    jquery
- * @requires    vendor/jquery/jquery.mousewheel.js
  */
 
 /* global drawOpenLayers */
@@ -147,6 +146,10 @@ function getRelativeCoords(e) {
     y: e.pageY - position.top
   };
 }
+/**
+ * @param {WheelEvent} event
+ */
+
 
 function onGisMouseWheel(event) {
   if (event.deltaY === 0) {
@@ -168,7 +171,7 @@ function onGisMouseWheel(event) {
  *
  * Actions Ajaxified here:
  *
- * Zooming in and zooming out on mousewheel movement.
+ * Zooming in and zooming out on mouse wheel movement.
  * Panning the visualization on dragging.
  * Zooming in on double clicking.
  * Zooming out on clicking the zoom out button.

@@ -8,8 +8,6 @@ var __webpack_exports__ = {};
  * @test-module Sql
  */
 
-/* global Stickyfill */
-
 /* global isStorageSupported */
 // js/config.js
 
@@ -1072,11 +1070,5 @@ AJAX.registerOnload('sql.js', function () {
   Sql.makeProfilingChart();
   Sql.initProfilingTables();
 });
-/**
- * Polyfill to make table headers sticky.
- */
-
-var elements = $('.sticky');
-Stickyfill.add(elements);
 
 //# sourceMappingURL=sql.js.map
