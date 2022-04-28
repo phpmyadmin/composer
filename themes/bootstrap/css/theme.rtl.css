@@ -11790,12 +11790,6 @@ input#auto_increment_opt {
   overflow: hidden;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 60px;
-}
-
 .pma_table td {
   position: static;
 }
@@ -12697,10 +12691,6 @@ body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button:hover {
 @media only screen and (max-width: 768px) {
   .responsivetable {
     overflow-x: auto;
-  }
-
-  .sticky {
-    top: 0;
   }
 
   body#loginform div.container {
@@ -14754,6 +14744,11 @@ body {
   text-align: right;
 }
 
+@media only screen and (min-width: 768px) {
+  .table th.position-sticky {
+    top: 96px;
+  }
+}
 select#fieldsSelect,
 textarea#sqlquery {
   height: 20rem;

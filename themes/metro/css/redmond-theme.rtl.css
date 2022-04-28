@@ -11822,12 +11822,6 @@ form.append_fields_form .tblFooters {
   overflow: hidden;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 60px;
-}
-
 .pma_table td {
   position: static;
 }
@@ -12745,11 +12739,6 @@ body .ui-dialog .ui-dialog-buttonpane button.ui-state-active {
   .pma-fieldset.tblFooters,
 .tblFooters {
     text-align: right;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .sticky {
-    top: 0;
   }
 }
 .resize-vertical {
@@ -14774,6 +14763,11 @@ textarea {
   color: #666;
 }
 
+@media only screen and (min-width: 768px) {
+  .table th.position-sticky {
+    top: 87px;
+  }
+}
 select#fieldsSelect,
 textarea#sqlquery {
   margin: 0;
