@@ -549,7 +549,7 @@ Functions.checkPasswordStrength = function (value, meterObject, meterObjectLabel
     customDict.push(username);
   }
 
-  zxcvbnts.core.ZxcvbnOptions.setOptions({
+  zxcvbnts.core.zxcvbnOptions.setOptions({
     dictionary: {
       userInputs: customDict
     }
