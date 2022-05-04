@@ -223,7 +223,7 @@ kbd,
 samp {
   font-family: var(--bs-font-monospace);
   font-size: 1em;
-  direction: rtl /* rtl:ignore */;
+  direction: ltr ;
   unicode-bidi: bidi-override;
 }
 
@@ -4642,7 +4642,7 @@ textarea.form-control-lg {
   float: right;
   padding-left: 0.5rem;
   color: #fff;
-  content: var(--bs-breadcrumb-divider, "»") /* rtl: var(--bs-breadcrumb-divider, "»") */;
+  content:  var(--bs-breadcrumb-divider, "»") ;
 }
 .breadcrumb-item.active {
   color: #6c757d;
@@ -5510,12 +5510,12 @@ textarea.form-control-lg {
 }
 @-webkit-keyframes spinner-border {
   to {
-    transform: rotate(-360deg) /* rtl:ignore */;
+    transform: rotate(360deg) ;
   }
 }
 @keyframes spinner-border {
   to {
-    transform: rotate(-360deg) /* rtl:ignore */;
+    transform: rotate(360deg) ;
   }
 }
 .spinner-border {
@@ -15029,7 +15029,7 @@ textarea#sqlquery {
 .alert {
   text-align: right;
   box-shadow: 0 1px 1px #fff inset;
-  background-position: 10px 50% /* rtl:99% 50% */;
+  background-position: 99% 50% ;
   padding: 10px 10px 10px 10px;
 }
 .alert a {
