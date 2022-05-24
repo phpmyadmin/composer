@@ -21,21 +21,8 @@ class RelationExtension extends AbstractExtension
 
         return [
             new TwigFunction(
-                'get_display_field',
-                [$relation, 'getDisplayField'],
-                ['is_safe' => ['html']]
-            ),
-            new TwigFunction(
-                'get_foreign_data',
-                [$relation, 'getForeignData']
-            ),
-            new TwigFunction(
                 'get_tables',
                 [$relation, 'getTables']
-            ),
-            new TwigFunction(
-                'search_column_in_foreigners',
-                [$relation, 'searchColumnInForeigners']
             ),
         ];
     }
