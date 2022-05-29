@@ -277,23 +277,23 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         'memory': {
           title: Messages.strSystemMemory,
           series: [{
-            label: Messages.strTotalMemory,
-            fill: true
-          }, {
             dataType: 'memory',
             label: Messages.strUsedMemory,
+            fill: true
+          }, {
+            label: Messages.strFreeMemory,
             fill: true
           }],
           nodes: [{
             dataPoints: [{
               type: 'memory',
-              name: 'MemTotal'
+              name: 'MemUsed'
             }],
             valueDivisor: 1024
           }, {
             dataPoints: [{
               type: 'memory',
-              name: 'MemUsed'
+              name: 'MemFree'
             }],
             valueDivisor: 1024
           }],
@@ -302,22 +302,24 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         'swap': {
           title: Messages.strSystemSwap,
           series: [{
-            label: Messages.strTotalSwap,
+            label: Messages.strUsedSwap,
             fill: true
           }, {
-            label: Messages.strUsedSwap,
+            label: Messages.strFreeSwap,
             fill: true
           }],
           nodes: [{
             dataPoints: [{
               type: 'memory',
-              name: 'SwapTotal'
-            }]
+              name: 'SwapUsed'
+            }],
+            valueDivisor: 1024
           }, {
             dataPoints: [{
               type: 'memory',
-              name: 'SwapUsed'
-            }]
+              name: 'SwapFree'
+            }],
+            valueDivisor: 1024
           }],
           maxYLabel: 0
         }
