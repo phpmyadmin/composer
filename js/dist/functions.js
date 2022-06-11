@@ -1917,12 +1917,12 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
  * This will show a message that will not disappear automatically, but it
  * can be dismissed by the user after they have finished reading it.
  *
- * @param {string} message      string containing the message to be shown.
+ * @param {string|null} message string containing the message to be shown.
  *                              optional, defaults to 'Loading...'
  * @param {any} timeout         number of milliseconds for the message to be visible
  *                              optional, defaults to 5000. If set to 'false', the
  *                              notification will never disappear
- * @param {string} type         string to dictate the type of message shown.
+ * @param {string|null} type    string to dictate the type of message shown.
  *                              optional, defaults to normal notification.
  *                              If set to 'error', the notification will show message
  *                              with red background.
@@ -1934,7 +1934,10 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
  */
 
 
-Functions.ajaxShowMessage = function (message, timeout, type) {
+Functions.ajaxShowMessage = function () {
+  let message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  let timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  let type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var msg = message;
   var newTimeOut = timeout;
   /**
