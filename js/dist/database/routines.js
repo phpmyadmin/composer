@@ -324,6 +324,7 @@ const DatabaseRoutines = {
 
 
         that.$ajaxDialog = $('<div id="rteDialog">' + data.message + '</div>').dialog({
+          height: 400,
           width: 700,
           minWidth: 500,
           buttons: that.buttonOptions,
