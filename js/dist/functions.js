@@ -3479,7 +3479,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         var $editIndexDialog = $('#indexDialogModal');
 
         if ($editIndexDialog.length > 0) {
-          $editIndexDialog.dialog('close');
+          $editIndexDialog.modal('hide');
         }
 
         $('div.no_indexes_defined').hide();
