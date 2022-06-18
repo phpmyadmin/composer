@@ -1567,7 +1567,6 @@ var ConsoleDebug = {
     ConsoleDebug.showLog(last.debugInfo, last.url);
   }
 };
-window.Console = Console;
 
 
 /***/ }),
@@ -1763,6 +1762,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 !function() {
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
+/* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
@@ -1771,6 +1773,8 @@ __webpack_require__.r(__webpack_exports__);
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
   _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console.initialize();
 });
+
 }();
+window.Console = __webpack_exports__.Console;
 
 //# sourceMappingURL=console.js.map
