@@ -17,8 +17,8 @@ var __webpack_exports__ = {};
 /* global makeGrid */
 // js/makegrid.js
 
-/* global sqlBoxLocked */
-// js/functions.js
+/* global themeImagePath */
+// templates/javascript/variables.twig
 var Sql = {};
 /**
  * decode a string URL_encoded
@@ -204,6 +204,239 @@ Sql.getFieldName = function ($tableResults, $thisField) {
   return fieldName;
 };
 /**
+ * @type {boolean} lock for the sqlbox textarea in the querybox
+ */
+
+
+let sqlBoxLocked = false;
+/**
+ * @type {boolean[]} holds elements which content should only selected once
+ */
+
+const onlyOnceElements = [];
+/**
+ * Handles 'Simulate query' button on SQL query box.
+ *
+ * @return {void}
+ */
+
+const handleSimulateQueryButton = function () {
+  const updateRegExp = new RegExp('^\\s*UPDATE\\s+((`[^`]+`)|([A-Za-z0-9_$]+))\\s+SET\\s', 'i');
+  const deleteRegExp = new RegExp('^\\s*DELETE\\s+FROM\\s', 'i');
+  let query = '';
+
+  if (codeMirrorEditor) {
+    query = codeMirrorEditor.getValue();
+  } else {
+    query = $('#sqlquery').val();
+  }
+
+  const $simulateDml = $('#simulate_dml');
+
+  if (updateRegExp.test(query) || deleteRegExp.test(query)) {
+    if (!$simulateDml.length) {
+      $('#button_submit_query').before('<input type="button" id="simulate_dml"' + 'tabindex="199" class="btn btn-primary" value="' + Messages.strSimulateDML + '">');
+    }
+  } else {
+    if ($simulateDml.length) {
+      $simulateDml.remove();
+    }
+  }
+};
+/**
+ * selects the content of a given object, f.e. a textarea
+ *
+ * @param {HTMLTextAreaElement} element Element of which the content will be selected
+ */
+
+
+const selectContent = function (element) {
+  if (onlyOnceElements[element.name]) {
+    return;
+  }
+
+  onlyOnceElements[element.name] = true;
+
+  if (sqlBoxLocked) {
+    return;
+  }
+
+  element.select();
+};
+/**
+ * Sets current value for query box.
+ * @param {string} query
+ * @return {void}
+ */
+
+
+const setQuery = function (query) {
+  if (codeMirrorEditor) {
+    codeMirrorEditor.setValue(query);
+    codeMirrorEditor.focus();
+  } else if (document.sqlform) {
+    document.sqlform.sql_query.value = query;
+    document.sqlform.sql_query.focus();
+  }
+};
+/**
+ * Create quick sql statements.
+ *
+ * @param {'clear'|'format'|'saved'|'selectall'|'select'|'insert'|'update'|'delete'} queryType
+ *
+ */
+
+
+const insertQuery = function (queryType) {
+  var table;
+
+  if (queryType === 'clear') {
+    setQuery('');
+    return;
+  } else if (queryType === 'format') {
+    if (codeMirrorEditor) {
+      $('#querymessage').html(Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
+      var params = {
+        'ajax_request': true,
+        'sql': codeMirrorEditor.getValue(),
+        'server': CommonParams.get('server')
+      };
+      $.ajax({
+        type: 'POST',
+        url: 'index.php?route=/database/sql/format',
+        data: params,
+        success: function (data) {
+          if (data.success) {
+            codeMirrorEditor.setValue(data.sql);
+          }
+
+          $('#querymessage').html('');
+        },
+        error: function () {
+          $('#querymessage').html('');
+        }
+      });
+    }
+
+    return;
+  } else if (queryType === 'saved') {
+    var db = $('input[name="db"]').val();
+    table = $('input[name="table"]').val();
+    var key = db;
+
+    if (table !== undefined) {
+      key += '.' + table;
+    }
+
+    key = 'autoSavedSql_' + key;
+
+    if (isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+      setQuery(window.localStorage.getItem(key));
+    } else if (Cookies.get(key, {
+      path: CommonParams.get('rootPath')
+    })) {
+      setQuery(Cookies.get(key, {
+        path: CommonParams.get('rootPath')
+      }));
+    } else {
+      Functions.ajaxShowMessage(Messages.strNoAutoSavedQuery);
+    }
+
+    return;
+  }
+
+  var query = '';
+  var myListBox = document.sqlform.dummy;
+  table = document.sqlform.table.value;
+
+  if (myListBox.options.length > 0) {
+    sqlBoxLocked = true;
+    var columnsList = '';
+    var valDis = '';
+    var editDis = '';
+    var NbSelect = 0;
+
+    for (var i = 0; i < myListBox.options.length; i++) {
+      NbSelect++;
+
+      if (NbSelect > 1) {
+        columnsList += ', ';
+        valDis += ',';
+        editDis += ',';
+      }
+
+      columnsList += myListBox.options[i].value;
+      valDis += '\'[value-' + NbSelect + ']\'';
+      editDis += myListBox.options[i].value + '=\'[value-' + NbSelect + ']\'';
+    }
+
+    if (queryType === 'selectall') {
+      query = 'SELECT * FROM `' + table + '` WHERE 1';
+    } else if (queryType === 'select') {
+      query = 'SELECT ' + columnsList + ' FROM `' + table + '` WHERE 1';
+    } else if (queryType === 'insert') {
+      query = 'INSERT INTO `' + table + '`(' + columnsList + ') VALUES (' + valDis + ')';
+    } else if (queryType === 'update') {
+      query = 'UPDATE `' + table + '` SET ' + editDis + ' WHERE 1';
+    } else if (queryType === 'delete') {
+      query = 'DELETE FROM `' + table + '` WHERE 0';
+    }
+
+    setQuery(query);
+    sqlBoxLocked = false;
+  }
+};
+/**
+ * Inserts multiple fields.
+ *
+ */
+
+
+const insertValueQuery = function () {
+  var myQuery = document.sqlform.sql_query;
+  var myListBox = document.sqlform.dummy;
+
+  if (myListBox.options.length > 0) {
+    sqlBoxLocked = true;
+    var columnsList = '';
+    var NbSelect = 0;
+
+    for (var i = 0; i < myListBox.options.length; i++) {
+      if (myListBox.options[i].selected) {
+        NbSelect++;
+
+        if (NbSelect > 1) {
+          columnsList += ', ';
+        }
+
+        columnsList += myListBox.options[i].value;
+      }
+    }
+    /* CodeMirror support */
+
+
+    if (codeMirrorEditor) {
+      codeMirrorEditor.replaceSelection(columnsList);
+      codeMirrorEditor.focus(); // IE support
+    } else if (document.selection) {
+      myQuery.focus();
+      var sel = document.selection.createRange();
+      sel.text = columnsList; // MOZILLA/NETSCAPE support
+    } else if (document.sqlform.sql_query.selectionStart || document.sqlform.sql_query.selectionStart === '0') {
+      var startPos = document.sqlform.sql_query.selectionStart;
+      var endPos = document.sqlform.sql_query.selectionEnd;
+      var SqlString = document.sqlform.sql_query.value;
+      myQuery.value = SqlString.substring(0, startPos) + columnsList + SqlString.substring(endPos, SqlString.length);
+      myQuery.focus();
+    } else {
+      myQuery.value += columnsList;
+    } // eslint-disable-next-line no-unused-vars
+
+
+    sqlBoxLocked = false;
+  }
+};
+/**
  * Unbind all event handlers before tearing down a page
  */
 
@@ -240,6 +473,8 @@ AJAX.registerTeardown('sql.js', function () {
   $(document).off('submit', '.maxRowsForm');
   $(document).off('click', '#view_as');
   $(document).off('click', '#sqlquery');
+  $(document).off('click', 'input.sqlbutton');
+  $('#fieldsSelect').off('dblclick');
 });
 /**
  * @description <p>Ajax scripts for sql and browse pages</p>
@@ -581,7 +816,7 @@ AJAX.registerOnload('sql.js', function () {
           if ('1' === data.action_bookmark) {
             $('#sqlquery').text(data.sql_query); // send to codemirror if possible
 
-            Functions.setQuery(data.sql_query);
+            setQuery(data.sql_query);
           } // delete
 
 
@@ -725,7 +960,7 @@ AJAX.registerOnload('sql.js', function () {
     }
   });
   $('body').on('keyup', '#sqlqueryform', function () {
-    Functions.handleSimulateQueryButton();
+    handleSimulateQueryButton();
   });
   /**
    * Ajax event handler for 'Simulate DML'.
@@ -835,18 +1070,25 @@ AJAX.registerOnload('sql.js', function () {
     return maxRowsCheck && posCheck;
   });
   $('#insertBtn').on('click', function () {
-    Functions.insertValueQuery();
+    insertValueQuery();
   });
   $('#view_as').on('click', function () {
-    Functions.selectContent(this, sqlBoxLocked, true);
+    selectContent(this);
   });
   $('#sqlquery').on('click', function () {
     if ($(this).data('textarea-auto-select') === true) {
-      Functions.selectContent(this, sqlBoxLocked, true);
+      selectContent(this);
     }
   });
-}); // end $()
-
+  $(document).on('click', 'input.sqlbutton', function (evt) {
+    insertQuery(evt.target.id);
+    handleSimulateQueryButton();
+    return false;
+  });
+  $('#fieldsSelect').on('dblclick', () => {
+    insertValueQuery();
+  });
+});
 /**
  * Starting from some th, change the class of all td under it.
  * If isAddClass is specified, it will be used to determine whether to add or remove the class.
