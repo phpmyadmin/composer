@@ -18,7 +18,7 @@
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('database/multi_table_query.js', function () {
+window.AJAX.registerTeardown('database/multi_table_query.js', function () {
     $('.tableNameSelect').each(function () {
         $(this).off('change');
     });
@@ -26,7 +26,7 @@ AJAX.registerTeardown('database/multi_table_query.js', function () {
     $('#add_column_button').off('click');
 });
 
-AJAX.registerOnload('database/multi_table_query.js', function () {
+window.AJAX.registerOnload('database/multi_table_query.js', function () {
     var editor = Functions.getSqlEditor($('#MultiSqlquery'), {}, 'both');
     $('.CodeMirror-line').css('text-align', 'left');
     editor.setSize(-1, 50);
@@ -75,7 +75,7 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
                 'db': $('#db_name').val(),
                 'tables': Object.keys(tableAliases),
                 'ajax_request': '1',
-                'token': CommonParams.get('token')
+                'token': window.CommonParams.get('token')
             },
             success: function (response) {
                 foreignKeys = response.foreignKeyConstrains;
@@ -127,8 +127,8 @@ AJAX.registerOnload('database/multi_table_query.js', function () {
             'db': $('#db_name').val(),
             'sql_query': query,
             'ajax_request': '1',
-            'server': CommonParams.get('server'),
-            'token': CommonParams.get('token')
+            'server': window.CommonParams.get('server'),
+            'token': window.CommonParams.get('token')
         };
         $.ajax({
             type: 'POST',

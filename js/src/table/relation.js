@@ -79,7 +79,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     var $form = $dropdown.parents('form');
     var $db = $form.find('input[name="db"]').val();
     var $table = $form.find('input[name="table"]').val();
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' +
         argsep + 'db=' + encodeURIComponent($db) +
         argsep + 'table=' + encodeURIComponent($table) +
@@ -126,7 +126,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('table/relation.js', function () {
+window.AJAX.registerTeardown('table/relation.js', function () {
     $('body').off('change',
         'select[name^="destination_db"], ' +
         'select[name^="destination_table"], ' +
@@ -138,7 +138,7 @@ AJAX.registerTeardown('table/relation.js', function () {
     $('a.drop_foreign_key_anchor.ajax').off('click');
 });
 
-AJAX.registerOnload('table/relation.js', function () {
+window.AJAX.registerOnload('table/relation.js', function () {
     /**
      * Ajax event handler to fetch table/column dropdown values.
      */
@@ -240,7 +240,7 @@ AJAX.registerOnload('table/relation.js', function () {
             $.post(url, params, function (data) {
                 if (data.success === true) {
                     Functions.ajaxRemoveMessage($msg);
-                    CommonActions.refreshMain(false, function () {
+                    window.CommonActions.refreshMain(false, function () {
                         // Do nothing
                     });
                 } else {

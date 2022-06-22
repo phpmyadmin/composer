@@ -346,7 +346,7 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
     var $table = $('input[name="table"]');
     var table = $table.length > 0 ? $table.val() : '';
     var postData = {
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'db': $('input[name="db"]').val(),
         'table': table,
         'ajax_request': 1,
@@ -551,7 +551,7 @@ Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex)
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('indexes.js', function () {
+window.AJAX.registerTeardown('indexes.js', function () {
     $(document).off('click', '#save_index_frm');
     $(document).off('click', '#preview_index_frm');
     $(document).off('change', '#select_index_choice');
@@ -572,7 +572,7 @@ AJAX.registerTeardown('indexes.js', function () {
  * <li>create/edit/drop indexes</li>
  * </ul>
  */
-AJAX.registerOnload('indexes.js', function () {
+window.AJAX.registerOnload('indexes.js', function () {
     // Re-initialize variables.
     primaryIndexes = [];
     uniqueIndexes = [];
@@ -594,11 +594,11 @@ AJAX.registerOnload('indexes.js', function () {
     $(document).on('click', '#save_index_frm', function (event) {
         event.preventDefault();
         var $form = $('#index_frm');
-        var argsep = CommonParams.get('arg_separator');
+        var argsep = window.CommonParams.get('arg_separator');
         var submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
         Functions.ajaxShowMessage(Messages.strProcessingRequest);
-        AJAX.source = $form;
-        $.post($form.attr('action'), submitData, AJAX.responseHandler);
+        window.AJAX.source = $form;
+        $.post($form.attr('action'), submitData, window.AJAX.responseHandler);
     });
 
     $(document).on('click', '#preview_index_frm', function (event) {
@@ -664,7 +664,7 @@ AJAX.registerOnload('indexes.js', function () {
                         Functions.highlightSql($('#page_content'));
                     }
                     Navigation.reload();
-                    CommonActions.refreshMain('index.php?route=/table/structure');
+                    window.CommonActions.refreshMain('index.php?route=/table/structure');
                 } else {
                     Functions.ajaxShowMessage(Messages.strErrorProcessingRequest + ' : ' + data.error, false);
                 }
@@ -696,11 +696,11 @@ AJAX.registerOnload('indexes.js', function () {
             url = $(this).find('a').getPostData();
             title = Messages.strEditIndex;
         }
-        url += CommonParams.get('arg_separator') + 'ajax_request=true';
+        url += window.CommonParams.get('arg_separator') + 'ajax_request=true';
         Functions.indexEditorDialog(url, title, function (data) {
-            CommonParams.set('db', data.params.db);
-            CommonParams.set('table', data.params.table);
-            CommonActions.refreshMain('index.php?route=/table/structure');
+            window.CommonParams.set('db', data.params.db);
+            window.CommonParams.set('table', data.params.table);
+            window.CommonActions.refreshMain('index.php?route=/table/structure');
         });
     });
 
@@ -711,11 +711,11 @@ AJAX.registerOnload('indexes.js', function () {
         event.preventDefault();
         var url = $(this).find('a').getPostData();
         var title = Messages.strRenameIndex;
-        url += CommonParams.get('arg_separator') + 'ajax_request=true';
+        url += window.CommonParams.get('arg_separator') + 'ajax_request=true';
         Functions.indexRenameDialog(url, title, function (data) {
-            CommonParams.set('db', data.params.db);
-            CommonParams.set('table', data.params.table);
-            CommonActions.refreshMain('index.php?route=/table/structure');
+            window.CommonParams.set('db', data.params.db);
+            window.CommonParams.set('table', data.params.table);
+            window.CommonActions.refreshMain('index.php?route=/table/structure');
         });
     });
 

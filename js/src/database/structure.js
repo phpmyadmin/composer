@@ -22,7 +22,7 @@ var DatabaseStructure = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('database/structure.js', function () {
+window.AJAX.registerTeardown('database/structure.js', function () {
     $(document).off('click', 'a.truncate_table_anchor.ajax');
     $(document).off('click', 'a.drop_table_anchor.ajax');
     $(document).off('click', '#real_end_input');
@@ -183,7 +183,7 @@ DatabaseStructure.fetchRealRowCount = function ($target) {
     });
 };
 
-AJAX.registerOnload('database/structure.js', function () {
+window.AJAX.registerOnload('database/structure.js', function () {
     /**
      * Event handler on select of "Make consistent with central list"
      */
@@ -198,16 +198,16 @@ AJAX.registerOnload('database/structure.js', function () {
             $('#makeConsistentWithCentralListModal').modal('show').on('shown.bs.modal', function () {
                 $('#makeConsistentWithCentralListContinue').on('click', function () {
                     const $form = $('#tablesForm');
-                    const argSep = CommonParams.get('arg_separator');
+                    const argSep = window.CommonParams.get('arg_separator');
                     const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
 
                     Functions.ajaxShowMessage();
-                    AJAX.source = $form;
+                    window.AJAX.source = $form;
 
                     $.post(
                         'index.php?route=/database/structure/central-columns/make-consistent',
                         data,
-                        AJAX.responseHandler
+                        window.AJAX.responseHandler
                     );
 
                     $('#makeConsistentWithCentralListModal').modal('hide');
@@ -293,13 +293,13 @@ AJAX.registerOnload('database/structure.js', function () {
         }
 
         var $form = $(this).parents('form');
-        var argsep = CommonParams.get('arg_separator');
+        var argsep = window.CommonParams.get('arg_separator');
         var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
 
         Functions.ajaxShowMessage();
-        AJAX.source = $form;
+        window.AJAX.source = $form;
 
-        $.post(url, data, AJAX.responseHandler);
+        $.post(url, data, window.AJAX.responseHandler);
     });
 
     /**

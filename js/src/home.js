@@ -102,7 +102,7 @@ const GitInfo = {
         $.get(
             'index.php?route=/git-revision',
             {
-                'server': CommonParams.get('server'),
+                'server': window.CommonParams.get('server'),
                 'ajax_request': true,
                 'no_debug': true
             },
@@ -127,7 +127,7 @@ const GitInfo = {
             url: 'index.php?route=/version-check',
             method: 'POST',
             data: {
-                'server': CommonParams.get('server')
+                'server': window.CommonParams.get('server')
             },
             success: GitInfo.currentVersion
         });
@@ -154,11 +154,11 @@ const ThemesManager = {
     }
 };
 
-AJAX.registerTeardown('home.js', () => {
+window.AJAX.registerTeardown('home.js', () => {
     $('#themesModal').off('show.bs.modal');
 });
 
-AJAX.registerOnload('home.js', () => {
+window.AJAX.registerOnload('home.js', () => {
     $('#themesModal').on('show.bs.modal', ThemesManager.handleEvent);
 
     GitInfo.showVersion();
