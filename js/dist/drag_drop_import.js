@@ -157,7 +157,7 @@ var DragDropImport = {
       return;
     }
 
-    if (CommonParams.get('db') === '') {
+    if (window.CommonParams.get('db') === '') {
       $('.pma_drop_handler').html(Messages.dropImportSelectDB);
     } else {
       $('.pma_drop_handler').html(Messages.dropImportDropFiles);
@@ -273,8 +273,8 @@ var DragDropImport = {
       return;
     }
 
-    var dbname = CommonParams.get('db');
-    var server = CommonParams.get('server'); // if no database is selected -- no
+    var dbname = window.CommonParams.get('db');
+    var server = window.CommonParams.get('server'); // if no database is selected -- no
 
     if (dbname !== '') {
       var files = event.originalEvent.dataTransfer.files;
@@ -291,7 +291,7 @@ var DragDropImport = {
 
       for (var i = 0; i < files.length; i++) {
         var ext = DragDropImport.getExtension(files[i].name);
-        var hash = AJAX.hash(++DragDropImport.uploadCount);
+        var hash = window.AJAX.hash(++DragDropImport.uploadCount);
         var $sqlImportStatusDiv = $('.pma_sql_import_status div');
         $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + Functions.escapeHtml(files[i].name) + '<span class="filesize" data-filename="' + Functions.escapeHtml(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>'); // scroll the UI to bottom
 
@@ -308,7 +308,7 @@ var DragDropImport = {
           fd.append('noplugin', Math.random().toString(36).substring(2, 12));
           fd.append('db', dbname);
           fd.append('server', server);
-          fd.append('token', CommonParams.get('token'));
+          fd.append('token', window.CommonParams.get('token'));
           fd.append('import_type', 'database'); // todo: method to find the value below
 
           fd.append('MAX_FILE_SIZE', '4194304'); // todo: method to find the value below

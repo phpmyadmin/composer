@@ -2,7 +2,7 @@ var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('table/find_replace.js', function () {
+window.AJAX.registerTeardown('table/find_replace.js', function () {
   $('#find_replace_form').off('submit');
   $('#toggle_find').off('click');
 });
@@ -10,7 +10,7 @@ AJAX.registerTeardown('table/find_replace.js', function () {
  * Bind events
  */
 
-AJAX.registerOnload('table/find_replace.js', function () {
+window.AJAX.registerOnload('table/find_replace.js', function () {
   $('<div id="toggle_find_div"><a id="toggle_find"></a></div>').insertAfter('#find_replace_form').hide();
   $('#toggle_find').html(Messages.strHideFindNReplaceCriteria).on('click', function () {
     var $link = $(this);

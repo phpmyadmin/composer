@@ -1,5 +1,5 @@
 var __webpack_exports__ = {};
-AJAX.registerTeardown('database/triggers.js', function () {
+window.AJAX.registerTeardown('database/triggers.js', function () {
   $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
   $(document).off('click', 'a.ajax.export_anchor');
   $(document).off('click', '#bulkActionExportButton');
@@ -537,7 +537,7 @@ const DatabaseTriggers = {
     });
   }
 };
-AJAX.registerOnload('database/triggers.js', function () {
+window.AJAX.registerOnload('database/triggers.js', function () {
   /**
    * Attach Ajax event handlers for the Add/Edit functionality.
    */

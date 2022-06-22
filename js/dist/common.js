@@ -11,7 +11,7 @@ $(function () {
  * @test-module CommonParams
  */
 
-var CommonParams = function () {
+window.CommonParams = function () {
   /**
    * @var {Object} params An associative array of key value pairs
    * @access private
@@ -91,7 +91,7 @@ var CommonParams = function () {
     getUrlQuery: function (separator) {
       var sep = typeof separator !== 'undefined' ? separator : '?';
       var common = this.get('common_query');
-      var argsep = CommonParams.get('arg_separator');
+      var argsep = window.CommonParams.get('arg_separator');
 
       if (typeof common === 'string' && common.length > 0) {
         // If the last char is the separator, do not add it
@@ -109,10 +109,9 @@ var CommonParams = function () {
  * The content for this is normally loaded from Header.php or
  * Response.php and executed by ajax.js
  */
-// eslint-disable-next-line no-unused-vars
 
 
-var CommonActions = {
+window.CommonActions = {
   /**
    * Saves the database name when it's changed
    * and reloads the query window, if necessary
@@ -122,8 +121,8 @@ var CommonActions = {
    * @return {void}
    */
   setDb: function (newDb) {
-    if (newDb !== CommonParams.get('db')) {
-      CommonParams.setAll({
+    if (newDb !== window.CommonParams.get('db')) {
+      window.CommonParams.setAll({
         'db': newDb,
         'table': ''
       });
@@ -138,8 +137,8 @@ var CommonActions = {
    * @return {void}
    */
   openDb: function (newDb) {
-    CommonParams.set('db', newDb).set('table', '');
-    this.refreshMain(CommonParams.get('opendb_url'));
+    window.CommonParams.set('db', newDb).set('table', '');
+    this.refreshMain(window.CommonParams.get('opendb_url'));
   },
 
   /**
@@ -161,9 +160,9 @@ var CommonActions = {
     }
 
     if (newUrl.indexOf('?') !== -1) {
-      newUrl += CommonParams.getUrlQuery(CommonParams.get('arg_separator'));
+      newUrl += window.CommonParams.getUrlQuery(window.CommonParams.get('arg_separator'));
     } else {
-      newUrl += CommonParams.getUrlQuery('?');
+      newUrl += window.CommonParams.getUrlQuery('?');
     }
 
     $('<a></a>', {
@@ -171,7 +170,7 @@ var CommonActions = {
     }).appendTo('body').trigger('click').remove();
 
     if (typeof callback !== 'undefined') {
-      AJAX.callback = callback;
+      window.AJAX.callback = callback;
     }
   }
 };

@@ -22,11 +22,11 @@ var change = 0; // variable to track any change in designer layout.
 
 var showRelationLines = true;
 var alwaysShowText = false;
-AJAX.registerTeardown('designer/move.js', function () {
+window.AJAX.registerTeardown('designer/move.js', function () {
   $(document).off('fullscreenchange');
   $('#selflink').show();
 });
-AJAX.registerOnload('designer/move.js', function () {
+window.AJAX.registerOnload('designer/move.js', function () {
   var $content = $('#page_content');
   var $img = $('#toggleFullscreen').find('img');
   var $span = $img.siblings('span');
@@ -652,7 +652,7 @@ DesignerMove.addOtherDbTables = function () {
   $.post('index.php?route=/sql', {
     'ajax_request': true,
     'sql_query': 'SHOW databases;',
-    'server': CommonParams.get('server')
+    'server': window.CommonParams.get('server')
   }, function (data) {
     $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
       var val = $(this)[0].innerText;
@@ -677,7 +677,7 @@ DesignerMove.addOtherDbTables = function () {
       'dialog': 'add_table',
       'db': db,
       'table': table,
-      'server': CommonParams.get('server')
+      'server': window.CommonParams.get('server')
     }, function (data) {
       var $newTableDom = $(data.message);
       $newTableDom.find('a').first().remove();
@@ -703,7 +703,7 @@ DesignerMove.addOtherDbTables = function () {
         'ajax_request': true,
         'sql_query': sqlQuery,
         'db': dbName,
-        'server': CommonParams.get('server')
+        'server': window.CommonParams.get('server')
       }, function (data) {
         $selectTable.html('');
         var rows = $(data.message).find('table.table_results.data.ajax').find('td.data');
@@ -747,7 +747,7 @@ DesignerMove.getUrlPos = function (forceString) {
 
   if (designerTablesEnabled || forceString) {
     var poststr = '';
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     var i = 1;
 
     for (key in jTabs) {
@@ -779,7 +779,7 @@ DesignerMove.getUrlPos = function (forceString) {
 
 DesignerMove.save2 = function (callback) {
   if (designerTablesEnabled) {
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     var poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
     poststr += argsep + 'server=' + server + argsep + 'db=' + encodeURIComponent(db) + argsep + 'selected_page=' + selectedPage;
     poststr += DesignerMove.getUrlPos();
@@ -1103,7 +1103,7 @@ DesignerMove.promptToSaveCurrentPage = function (callback) {
 
 DesignerMove.exportPages = function () {
   var $msgbox = Functions.ajaxShowMessage();
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
   $.post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': server,
@@ -1146,7 +1146,7 @@ DesignerMove.exportPages = function () {
 DesignerMove.loadPage = function (page) {
   if (designerTablesEnabled) {
     var paramPage = '';
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
 
     if (page !== null) {
       paramPage = argsep + 'page=' + page;
@@ -1237,7 +1237,7 @@ DesignerMove.startRelation = function () {
 
 DesignerMove.clickField = function (db, T, f, pk) {
   var pkLocal = parseInt(pk);
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
 
   if (onRelation) {
     if (!clickField) {
@@ -1335,7 +1335,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
 
 DesignerMove.newRelation = function () {
   document.getElementById('layer_new_relation').style.display = 'none';
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
   linkRelation += argsep + 'server=' + server + argsep + 'db=' + db + argsep + 'db2=p';
   linkRelation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
   linkRelation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
@@ -1353,14 +1353,14 @@ DesignerMove.newRelation = function () {
 
 
 DesignerMove.startTableNew = function () {
-  CommonParams.set('table', '');
-  CommonActions.refreshMain('index.php?route=/table/create');
+  window.CommonParams.set('table', '');
+  window.CommonActions.refreshMain('index.php?route=/table/create');
 };
 
 DesignerMove.startTabUpd = function (db, table) {
-  CommonParams.set('db', db);
-  CommonParams.set('table', table);
-  CommonActions.refreshMain('index.php?route=/table/structure');
+  window.CommonParams.set('db', db);
+  window.CommonParams.set('table', table);
+  window.CommonActions.refreshMain('index.php?route=/table/structure');
 }; // --------------------------- hide tables --------------------------------------
 // max/min all tables
 
@@ -1561,14 +1561,14 @@ DesignerMove.canvasClick = function (id, event) {
     var top = globY - document.getElementById('layer_upd_relation').offsetHeight - 10;
     document.getElementById('layer_upd_relation').style.top = top + 'px';
     document.getElementById('layer_upd_relation').style.display = 'block';
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     linkRelation = 'T1=' + Key0 + argsep + 'F1=' + Key1 + argsep + 'T2=' + Key2 + argsep + 'F2=' + Key3 + argsep + 'K=' + Key;
   }
 };
 
 DesignerMove.updRelation = function () {
   document.getElementById('layer_upd_relation').style.display = 'none';
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
   linkRelation += argsep + 'server=' + server + argsep + 'db=' + db;
   linkRelation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
   var $msgbox = Functions.ajaxShowMessage(Messages.strProcessingRequest);
@@ -2055,7 +2055,7 @@ DesignerMove.enableTableEvents = function (index, element) {
   DesignerMove.enablePageContentEvents();
 };
 
-AJAX.registerTeardown('designer/move.js', function () {
+window.AJAX.registerTeardown('designer/move.js', function () {
   $('#side_menu').off('mouseenter mouseleave');
   $('#key_Show_left_menu').off('click');
   $('#toggleFullscreen').off('click');
@@ -2104,7 +2104,7 @@ AJAX.registerTeardown('designer/move.js', function () {
   $('#page_content').off('mousedown');
   $('#page_content').off('mousemove');
 });
-AJAX.registerOnload('designer/move.js', function () {
+window.AJAX.registerOnload('designer/move.js', function () {
   $('#key_Show_left_menu').on('click', function () {
     DesignerMove.showLeftMenu(this);
     return false;

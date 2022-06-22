@@ -15,7 +15,7 @@ function makeColumnsSortable() {
   $tables.find('thead th').append('<div class="sorticon"></div>');
 }
 
-AJAX.registerOnload('server/plugins.js', function () {
+window.AJAX.registerOnload('server/plugins.js', function () {
   makeColumnsSortable();
 });
 

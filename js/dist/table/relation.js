@@ -84,7 +84,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
   var $form = $dropdown.parents('form');
   var $db = $form.find('input[name="db"]').val();
   var $table = $form.find('input[name="table"]').val();
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
   var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
   var $server = $form.find('input[name="server"]');
 
@@ -129,13 +129,13 @@ TableRelation.getDropdownValues = function ($dropdown) {
  */
 
 
-AJAX.registerTeardown('table/relation.js', function () {
+window.AJAX.registerTeardown('table/relation.js', function () {
   $('body').off('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]');
   $('body').off('click', 'a.add_foreign_key_field');
   $('body').off('click', 'a.add_foreign_key');
   $('a.drop_foreign_key_anchor.ajax').off('click');
 });
-AJAX.registerOnload('table/relation.js', function () {
+window.AJAX.registerOnload('table/relation.js', function () {
   /**
    * Ajax event handler to fetch table/column dropdown values.
    */
@@ -198,7 +198,7 @@ AJAX.registerOnload('table/relation.js', function () {
       $.post(url, params, function (data) {
         if (data.success === true) {
           Functions.ajaxRemoveMessage($msg);
-          CommonActions.refreshMain(false, function () {// Do nothing
+          window.CommonActions.refreshMain(false, function () {// Do nothing
           });
         } else {
           Functions.ajaxShowMessage(Messages.strErrorProcessingRequest + ' : ' + data.error, false);

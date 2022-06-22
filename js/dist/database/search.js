@@ -21,7 +21,7 @@ var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('database/search.js', function () {
+window.AJAX.registerTeardown('database/search.js', function () {
   $('a.browse_results').off('click');
   $('a.delete_results').off('click');
   $('#buttonGo').off('click');
@@ -32,7 +32,7 @@ AJAX.registerTeardown('database/search.js', function () {
   $('#unselect_all').off('click');
   $(document).off('submit', '#db_search_form.ajax');
 });
-AJAX.registerOnload('database/search.js', function () {
+window.AJAX.registerOnload('database/search.js', function () {
   /** Hide the table link in the initial search result */
   var icon = Functions.getImage('s_tbl', '', {
     'id': 'table-image'
@@ -226,7 +226,7 @@ AJAX.registerOnload('database/search.js', function () {
 
     var $form = $(this);
     Functions.prepareForAjaxRequest($form);
-    var url = $form.serialize() + CommonParams.get('arg_separator') + 'submit_search=' + $('#buttonGo').val();
+    var url = $form.serialize() + window.CommonParams.get('arg_separator') + 'submit_search=' + $('#buttonGo').val();
     $.post($form.attr('action'), url, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         // found results

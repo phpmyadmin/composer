@@ -76,9 +76,9 @@ Export.createTemplate = function (name) {
   var templateData = Export.getTemplateData();
   var params = {
     'ajax_request': true,
-    'server': CommonParams.get('server'),
-    'db': CommonParams.get('db'),
-    'table': CommonParams.get('table'),
+    'server': window.CommonParams.get('server'),
+    'db': window.CommonParams.get('db'),
+    'table': window.CommonParams.get('table'),
     'exportType': $('input[name="export_type"]').val(),
     'templateName': name,
     'templateData': JSON.stringify(templateData)
@@ -109,9 +109,9 @@ Export.createTemplate = function (name) {
 Export.loadTemplate = function (id) {
   var params = {
     'ajax_request': true,
-    'server': CommonParams.get('server'),
-    'db': CommonParams.get('db'),
-    'table': CommonParams.get('table'),
+    'server': window.CommonParams.get('server'),
+    'db': window.CommonParams.get('db'),
+    'table': window.CommonParams.get('table'),
     'exportType': $('input[name="export_type"]').val(),
     'templateId': id
   };
@@ -158,9 +158,9 @@ Export.updateTemplate = function (id) {
   var templateData = Export.getTemplateData();
   var params = {
     'ajax_request': true,
-    'server': CommonParams.get('server'),
-    'db': CommonParams.get('db'),
-    'table': CommonParams.get('table'),
+    'server': window.CommonParams.get('server'),
+    'db': window.CommonParams.get('db'),
+    'table': window.CommonParams.get('table'),
     'exportType': $('input[name="export_type"]').val(),
     'templateId': id,
     'templateData': JSON.stringify(templateData)
@@ -184,9 +184,9 @@ Export.updateTemplate = function (id) {
 Export.deleteTemplate = function (id) {
   var params = {
     'ajax_request': true,
-    'server': CommonParams.get('server'),
-    'db': CommonParams.get('db'),
-    'table': CommonParams.get('table'),
+    'server': window.CommonParams.get('server'),
+    'db': window.CommonParams.get('db'),
+    'table': window.CommonParams.get('table'),
     'exportType': $('input[name="export_type"]').val(),
     'templateId': id
   };
@@ -205,7 +205,7 @@ Export.deleteTemplate = function (id) {
  */
 
 
-AJAX.registerTeardown('export.js', function () {
+window.AJAX.registerTeardown('export.js', function () {
   $('#plugins').off('change');
   $('input[type=\'radio\'][name=\'sql_structure_or_data\']').off('change');
   $('input[type=\'radio\'][name$=\'_structure_or_data\']').off('change');
@@ -228,7 +228,7 @@ AJAX.registerTeardown('export.js', function () {
   $('input[name="updateTemplate"]').off('click');
   $('input[name="deleteTemplate"]').off('click');
 });
-AJAX.registerOnload('export.js', function () {
+window.AJAX.registerOnload('export.js', function () {
   $('#showsqlquery').on('click', function () {
     // Creating a dialog box similar to preview sql container to show sql query
     var modal = $('#showSqlQueryModal');
@@ -432,7 +432,7 @@ Export.toggleSaveToFile = function () {
   }
 };
 
-AJAX.registerOnload('export.js', function () {
+window.AJAX.registerOnload('export.js', function () {
   Export.toggleSaveToFile();
   $('input[type=\'radio\'][name=\'output_format\']').on('change', Export.toggleSaveToFile);
 });
@@ -574,7 +574,7 @@ Export.handleAddProcCheckbox = function () {
   }
 };
 
-AJAX.registerOnload('export.js', function () {
+window.AJAX.registerOnload('export.js', function () {
   /**
    * For SQL plugin, if "CREATE TABLE options" is checked/unchecked, check/uncheck each of its sub-options
    */
@@ -733,7 +733,7 @@ Export.createAliasModal = function (event) {
   modal.modal('show');
   modal.on('shown.bs.modal', function () {
     modal.closest('.ui-dialog').find('.ui-button').addClass('btn btn-secondary');
-    var db = CommonParams.get('db');
+    var db = window.CommonParams.get('db');
 
     if (db) {
       var option = $('<option></option>');
@@ -743,7 +743,7 @@ Export.createAliasModal = function (event) {
     } else {
       var params = {
         'ajax_request': true,
-        'server': CommonParams.get('server')
+        'server': window.CommonParams.get('server')
       };
       $.post('index.php?route=/databases', params, function (response) {
         if (response.success === true) {
@@ -815,7 +815,7 @@ Export.addAlias = function (type, name, field, value) {
   $('#alias_data tbody').append(row);
 };
 
-AJAX.registerOnload('export.js', function () {
+window.AJAX.registerOnload('export.js', function () {
   $('input[type=\'radio\'][name=\'quick_or_custom\']').on('change', Export.toggleQuickOrCustom);
   $('#format_specific_opts').find('div.format_specific_options').addClass('d-none').find('h3').remove();
   Export.toggleQuickOrCustom();
@@ -846,7 +846,7 @@ AJAX.registerOnload('export.js', function () {
   });
   $('#db_alias_select').on('change', function () {
     Export.aliasToggleRow($(this));
-    var table = CommonParams.get('table');
+    var table = window.CommonParams.get('table');
 
     if (table) {
       var option = $('<option></option>');
@@ -857,7 +857,7 @@ AJAX.registerOnload('export.js', function () {
       var database = $(this).val();
       var params = {
         'ajax_request': true,
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'db': database
       };
       var url = 'index.php?route=/tables';
@@ -881,7 +881,7 @@ AJAX.registerOnload('export.js', function () {
     var table = $(this).val();
     var params = {
       'ajax_request': true,
-      'server': CommonParams.get('server'),
+      'server': window.CommonParams.get('server'),
       'db': database,
       'table': table
     };

@@ -1,5 +1,5 @@
 var __webpack_exports__ = {};
-AJAX.registerTeardown('database/events.js', function () {
+window.AJAX.registerTeardown('database/events.js', function () {
   $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
   $(document).off('click', 'a.ajax.export_anchor');
   $(document).off('click', '#bulkActionExportButton');
@@ -560,7 +560,7 @@ const DatabaseEvents = {
     return true;
   }
 };
-AJAX.registerOnload('database/events.js', function () {
+window.AJAX.registerOnload('database/events.js', function () {
   /**
    * Attach Ajax event handlers for the Add/Edit functionality.
    */

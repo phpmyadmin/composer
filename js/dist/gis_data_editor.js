@@ -132,7 +132,7 @@ function loadGISEditor(value, field, type, inputName) {
     'input_name': inputName,
     'get_gis_editor': true,
     'ajax_request': true,
-    'server': CommonParams.get('server')
+    'server': window.CommonParams.get('server')
   }, function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
       $gisEditor.html(data.gis_editor);
@@ -182,7 +182,7 @@ function openGISEditor() {
 function insertDataAndClose() {
   var $form = $('form#gis_data_editor_form');
   var inputName = $form.find('input[name=\'input_name\']').val();
-  var argsep = CommonParams.get('arg_separator');
+  var argsep = window.CommonParams.get('arg_separator');
   $.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'generate=true' + argsep + 'ajax_request=true', function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
       $('input[name=\'' + inputName + '\']').val(data.result);
@@ -197,7 +197,7 @@ function insertDataAndClose() {
  */
 
 
-AJAX.registerTeardown('gis_data_editor.js', function () {
+window.AJAX.registerTeardown('gis_data_editor.js', function () {
   $(document).off('click', '#gis_editor input[name=\'gis_data[save]\']');
   $(document).off('submit', '#gis_editor');
   $(document).off('change', '#gis_editor input[type=\'text\']');
@@ -208,7 +208,7 @@ AJAX.registerTeardown('gis_data_editor.js', function () {
   $(document).off('click', '#gis_editor a.addJs.addPolygon');
   $(document).off('click', '#gis_editor a.addJs.addGeom');
 });
-AJAX.registerOnload('gis_data_editor.js', function () {
+window.AJAX.registerOnload('gis_data_editor.js', function () {
   /**
    * Prepares and insert the GIS data to the input field on clicking 'copy'.
    */
@@ -230,7 +230,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
 
   $(document).on('change', '#gis_editor input[type=\'text\']', function () {
     var $form = $('form#gis_data_editor_form');
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     $.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'generate=true' + argsep + 'ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         $('#gis_data_textarea').val(data.result);
@@ -253,7 +253,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
   $(document).on('change', '#gis_editor select.gis_type', function () {
     var $gisEditor = $('#gis_editor');
     var $form = $('form#gis_data_editor_form');
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     $.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'get_gis_editor=true' + argsep + 'ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         $gisEditor.html(data.gis_editor);

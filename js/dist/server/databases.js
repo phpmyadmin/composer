@@ -50,7 +50,7 @@ const DropDatabases = {
 
           if ($form.find('tbody').find('tr').length === 0) {
             // user just dropped the last db on this page
-            CommonActions.refreshMain();
+            window.CommonActions.refreshMain();
           }
 
           Navigation.reload();
@@ -97,8 +97,8 @@ const CreateDatabase = {
 
         var dbStructUrl = data.url;
         dbStructUrl = dbStructUrl.replace(/amp;/ig, '');
-        var params = 'ajax_request=true' + CommonParams.get('arg_separator') + 'ajax_page_request=true';
-        $.get(dbStructUrl, params, AJAX.responseHandler);
+        var params = 'ajax_request=true' + window.CommonParams.get('arg_separator') + 'ajax_page_request=true';
+        $.get(dbStructUrl, params, window.AJAX.responseHandler);
       } else {
         Functions.ajaxShowMessage(data.error, false);
       }
@@ -110,16 +110,16 @@ function checkPrivilegesForDatabase() {
   var tableRows = $('.server_databases');
   $.each(tableRows, function () {
     $(this).on('click', function () {
-      CommonActions.setDb($(this).attr('data'));
+      window.CommonActions.setDb($(this).attr('data'));
     });
   });
 }
 
-AJAX.registerTeardown('server/databases.js', function () {
+window.AJAX.registerTeardown('server/databases.js', function () {
   $(document).off('submit', '#dbStatsForm');
   $(document).off('submit', '#create_database_form.ajax');
 });
-AJAX.registerOnload('server/databases.js', function () {
+window.AJAX.registerOnload('server/databases.js', function () {
   $(document).on('submit', '#dbStatsForm', DropDatabases.handleEvent);
   $(document).on('submit', '#create_database_form.ajax', CreateDatabase.handleEvent);
   checkPrivilegesForDatabase();

@@ -14,7 +14,7 @@ var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('server/status/queries.js', function () {
+window.AJAX.registerTeardown('server/status/queries.js', function () {
   if (document.getElementById('serverstatusquerieschart') !== null) {
     var queryPieChart = $('#serverstatusquerieschart').data('queryPieChart');
 
@@ -23,7 +23,7 @@ AJAX.registerTeardown('server/status/queries.js', function () {
     }
   }
 });
-AJAX.registerOnload('server/status/queries.js', function () {
+window.AJAX.registerOnload('server/status/queries.js', function () {
   // Build query statistics chart
   var cdata = [];
 

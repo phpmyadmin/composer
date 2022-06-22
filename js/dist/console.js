@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* global AJAX, CommonParams, Functions, Messages, Navigation */
+/* global Functions, Messages, Navigation */
 
 /**
  * Console object
@@ -110,8 +110,8 @@ var Console = {
     Console.$consoleTemplates = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.templates'); // Generate a form for post
 
     Console.$requestForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form method="post" action="index.php?route=/import">' + '<input name="is_js_confirmed" value="0">' + '<textarea name="sql_query"></textarea>' + '<input name="console_message_id" value="0">' + '<input name="server" value="">' + '<input name="db" value="">' + '<input name="table" value="">' + '<input name="token" value="">' + '</form>');
-    Console.$requestForm.children('[name=token]').val(CommonParams.get('token'));
-    Console.$requestForm.on('submit', AJAX.requestHandler); // Event binds shouldn't run again
+    Console.$requestForm.children('[name=token]').val(window.CommonParams.get('token'));
+    Console.$requestForm.on('submit', window.AJAX.requestHandler); // Event binds shouldn't run again
 
     if (Console.isInitialized === false) {
       // Load config first
@@ -246,7 +246,7 @@ var Console = {
     }
 
     Console.$requestForm.children('textarea').val(queryString);
-    Console.$requestForm.children('[name=server]').attr('value', CommonParams.get('server'));
+    Console.$requestForm.children('[name=server]').attr('value', window.CommonParams.get('server'));
 
     if (options && options.db) {
       Console.$requestForm.children('[name=db]').val(options.db);
@@ -257,7 +257,7 @@ var Console = {
         Console.$requestForm.children('[name=table]').val('');
       }
     } else {
-      Console.$requestForm.children('[name=db]').val(CommonParams.get('db').length > 0 ? CommonParams.get('db') : '');
+      Console.$requestForm.children('[name=db]').val(window.CommonParams.get('db').length > 0 ? window.CommonParams.get('db') : '');
     }
 
     Console.$requestForm.find('[name=profiling]').remove();
@@ -1014,7 +1014,7 @@ var ConsoleMessages = {
 
       if (confirm(Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
-          'server': CommonParams.get('server'),
+          'server': window.CommonParams.get('server'),
           'action_bookmark': 2,
           'ajax_request': true,
           'id_bookmark': $message.attr('bookmarkid')
@@ -1163,7 +1163,7 @@ var ConsoleBookmarks = {
   refresh: function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/import', {
       'ajax_request': true,
-      'server': CommonParams.get('server'),
+      'server': window.CommonParams.get('server'),
       'console_bookmark_refresh': 'refresh'
     }, function (data) {
       if (data.console_message_bookmark) {
@@ -1201,7 +1201,7 @@ var ConsoleBookmarks = {
         'ajax_request': true,
         'console_bookmark_add': 'true',
         'label': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=label]').val(),
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
         'bookmark_query': ConsoleInput.getText('bookmark'),
         'shared': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=shared]').prop('checked')

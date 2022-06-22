@@ -41,14 +41,14 @@ TableSelect.checkIfDataTypeNumericOrDate = function (dataType) {
  */
 
 
-AJAX.registerTeardown('table/select.js', function () {
+window.AJAX.registerTeardown('table/select.js', function () {
   $('#togglesearchformlink').off('click');
   $(document).off('submit', '#tbl_search_form.ajax');
   $('select.geom_func').off('change');
   $(document).off('click', 'span.open_search_gis_editor');
   $('body').off('change', 'select[name*="criteriaColumnOperators"]'); // Fix for bug #13778, changed 'click' to 'change'
 });
-AJAX.registerOnload('table/select.js', function () {
+window.AJAX.registerOnload('table/select.js', function () {
   /**
    * Prepare a div containing a link, otherwise it's incorrectly displayed
    * after a couple of clicks
@@ -237,7 +237,7 @@ AJAX.registerOnload('table/select.js', function () {
         url: 'index.php?route=/table/search',
         type: 'POST',
         data: {
-          'server': CommonParams.get('server'),
+          'server': window.CommonParams.get('server'),
           'ajax_request': 1,
           'db': $('input[name="db"]').val(),
           'table': $('input[name="table"]').val(),

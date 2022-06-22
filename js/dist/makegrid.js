@@ -715,7 +715,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
 
             $thisField.removeClass('truncated');
 
-            if (CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
+            if (window.CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
               $thisField.addClass('truncated');
               value = value.substring(0, g.maxTruncatedLen) + '...';
             } // Add <br> before carriage return.
@@ -2066,7 +2066,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
       g.gotoLinkText = Messages.strGoToLink; // initialize cell editing configuration
 
       g.saveCellsAtOnce = $(g.o).find('.save_cells_at_once').val();
-      g.maxTruncatedLen = CommonParams.get('LimitChars'); // register events
+      g.maxTruncatedLen = window.CommonParams.get('LimitChars'); // register events
 
       $(g.t).find('td.data.click1').on('click', function (e) {
         startGridEditing(e, this); // prevent default action when clicking on "link" in a table
@@ -2094,7 +2094,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
               // temporarily remove ajax class so the page loader will not handle it,
               // submit and then add it back
               $link.removeClass('ajax');
-              AJAX.requestHandler.call($link[0]);
+              window.AJAX.requestHandler.call($link[0]);
               $link.addClass('ajax');
               $cell.data('clicks', 0);
             }, 700);

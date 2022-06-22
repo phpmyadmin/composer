@@ -38,7 +38,7 @@ function isStorageSupported(type) {
  */
 
 
-AJAX.registerTeardown('config.js', function () {
+window.AJAX.registerTeardown('config.js', function () {
   $('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
   $('.optbox input[type=button][name=submit_reset]').off('click');
   $('div.tab-content').off();
@@ -47,7 +47,7 @@ AJAX.registerTeardown('config.js', function () {
   $(document).off('click', 'div.click-hide-message');
   $('#prefs_autoload').find('a').off('click');
 });
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   var $topmenuUpt = $('#user_prefs_tabs');
   $topmenuUpt.find('a.active').attr('rel', 'samepage');
   $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
@@ -657,7 +657,7 @@ function setupValidation() {
   }
 }
 
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   setupValidation();
 }); //
 // END: Form validation and field operations
@@ -673,13 +673,13 @@ function adjustPrefsNotification() {
   }
 }
 
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   adjustPrefsNotification();
 }); // ------------------------------------------------------------------
 // Form reset buttons
 //
 
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   $('.optbox input[type=button][name=submit_reset]').on('click', function () {
     var fields = $(this).closest('fieldset').find('input, select, textarea');
 
@@ -741,7 +741,7 @@ function setupRestoreField() {
   });
 }
 
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   setupRestoreField();
 }); //
 // END: "Restore default" and "set value" buttons
@@ -750,7 +750,7 @@ AJAX.registerOnload('config.js', function () {
 // User preferences import/export
 //
 
-AJAX.registerOnload('config.js', function () {
+window.AJAX.registerOnload('config.js', function () {
   offerPrefsAutoimport();
   var $radios = $('#import_local_storage, #export_local_storage');
 
@@ -825,7 +825,7 @@ function savePrefsToLocalStorage(form) {
     type: 'POST',
     data: {
       'ajax_request': true,
-      'server': CommonParams.get('server'),
+      'server': window.CommonParams.get('server'),
       'submit_get_json': true
     },
     success: function (data) {
@@ -879,7 +879,7 @@ function offerPrefsAutoimport() {
     if ($a.attr('href') === '#no') {
       $cnt.remove();
       $.post('index.php', {
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'prefs_autoload': 'hide'
       }, null, 'html');
       return;
@@ -887,7 +887,7 @@ function offerPrefsAutoimport() {
       $cnt.remove();
       localStorage.clear();
       $.post('index.php', {
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'prefs_autoload': 'hide'
       }, null, 'html');
       return;

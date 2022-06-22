@@ -73,7 +73,7 @@ function destroyGrid() {
   monitorSettings = null;
 }
 
-AJAX.registerOnload('server/status/monitor.js', function () {
+window.AJAX.registerOnload('server/status/monitor.js', function () {
   var $jsDataForm = $('#js_data');
   serverTimeDiff = new Date().getTime() - $jsDataForm.find('input[name=server_time]').val();
   serverOs = $jsDataForm.find('input[name=server_os]').val();
@@ -84,7 +84,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('server/status/monitor.js', function () {
+window.AJAX.registerTeardown('server/status/monitor.js', function () {
   $('#emptyDialog').remove();
   $('a.popupLink').off('click');
   $('body').off('click');
@@ -93,7 +93,7 @@ AJAX.registerTeardown('server/status/monitor.js', function () {
  * Popup behaviour
  */
 
-AJAX.registerOnload('server/status/monitor.js', function () {
+window.AJAX.registerOnload('server/status/monitor.js', function () {
   $('<div></div>').attr('id', 'emptyDialog').appendTo('#page_content');
   $('a.popupLink').on('click', function () {
     var $link = $(this);
@@ -114,7 +114,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     });
   });
 });
-AJAX.registerTeardown('server/status/monitor.js', function () {
+window.AJAX.registerTeardown('server/status/monitor.js', function () {
   $('a[href="#rearrangeCharts"], a[href="#endChartEditMode"]').off('click');
   $('div.popupContent select[name="chartColumns"]').off('change');
   $('div.popupContent select[name="gridChartRefresh"]').off('change');
@@ -137,7 +137,7 @@ AJAX.registerTeardown('server/status/monitor.js', function () {
   $('#chartStatusVar').off('click');
   destroyGrid();
 });
-AJAX.registerOnload('server/status/monitor.js', function () {
+window.AJAX.registerOnload('server/status/monitor.js', function () {
   // Show tab links
   $('div.tabLinks').show();
   $('#loadingMonitorIcon').remove(); // Codemirror is loaded on demand so we might need to initialize it
@@ -875,7 +875,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     var loadLogVars = function (getvars) {
       var vars = {
         'ajax_request': true,
-        'server': CommonParams.get('server')
+        'server': window.CommonParams.get('server')
       };
 
       if (getvars) {
@@ -1529,7 +1529,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     runtime.refreshRequest = $.post('index.php?route=/server/status/monitor/chart', {
       'ajax_request': true,
       'requiredData': JSON.stringify(runtime.dataList),
-      'server': CommonParams.get('server')
+      'server': window.CommonParams.get('server')
     }, function (data) {
       var chartData;
 
@@ -1765,7 +1765,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       'time_end': Math.round(opts.end / 1000),
       'removeVariables': opts.removeVariables,
       'limitTypes': opts.limitTypes,
-      'server': CommonParams.get('server')
+      'server': window.CommonParams.get('server')
     }, function (data) {
       var logData;
       var dlgBtns = {};
@@ -2142,7 +2142,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       'ajax_request': true,
       'query': codeMirrorEditor ? codeMirrorEditor.getValue() : $('#sqlquery').val(),
       'database': db,
-      'server': CommonParams.get('server')
+      'server': window.CommonParams.get('server')
     }, function (responseData) {
       var data = responseData;
       var i;
@@ -2279,7 +2279,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
   }
 }); // Run the monitor once loaded
 
-AJAX.registerOnload('server/status/monitor.js', function () {
+window.AJAX.registerOnload('server/status/monitor.js', function () {
   $('a[href="#pauseCharts"]').trigger('click');
 });
 

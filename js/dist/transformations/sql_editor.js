@@ -4,7 +4,7 @@ var __webpack_exports__ = {};
  *
  * @package PhpMyAdmin
  */
-AJAX.registerOnload('transformations/sql_editor.js', function () {
+window.AJAX.registerOnload('transformations/sql_editor.js', function () {
   $('textarea.transform_sql_editor').each(function () {
     Functions.getSqlEditor($(this), {}, 'both');
   });

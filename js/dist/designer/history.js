@@ -935,7 +935,7 @@ DesignerHistory.buildQuery = function () {
   });
 };
 
-AJAX.registerTeardown('designer/history.js', function () {
+window.AJAX.registerTeardown('designer/history.js', function () {
   vqbEditor = null;
   historyArray = [];
   selectField = [];
@@ -944,7 +944,7 @@ AJAX.registerTeardown('designer/history.js', function () {
   $('#ok_edit_Aggr').off('click');
   $('#ok_edit_where').off('click');
 });
-AJAX.registerOnload('designer/history.js', function () {
+window.AJAX.registerOnload('designer/history.js', function () {
   $('#ok_edit_rename').on('click', function () {
     DesignerHistory.edit('Rename');
   });

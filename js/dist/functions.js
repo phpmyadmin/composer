@@ -114,11 +114,11 @@ $.ajaxPrefilter(function (options, originalOptions) {
   var nocache = new Date().getTime() + '' + Math.floor(Math.random() * 1000000);
 
   if (typeof options.data === 'string') {
-    options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(CommonParams.get('token'));
+    options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(window.CommonParams.get('token'));
   } else if (typeof options.data === 'object') {
     options.data = $.extend(originalOptions.data, {
       '_nocache': nocache,
-      'token': CommonParams.get('token')
+      'token': window.CommonParams.get('token')
     });
   }
 });
@@ -290,7 +290,7 @@ Functions.handleRedirectAndReload = function (data) {
     if (window.location.href.indexOf('?') === -1) {
       window.location.href += '?session_expired=1';
     } else {
-      window.location.href += CommonParams.get('arg_separator') + 'session_expired=1';
+      window.location.href += window.CommonParams.get('arg_separator') + 'session_expired=1';
     }
 
     window.location.reload();
@@ -377,7 +377,7 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
         value: 3,
         content: codemirrorEditor.isClean()
       };
-      AJAX.lockPageHandler(e);
+      window.AJAX.lockPageHandler(e);
     });
     return codemirrorEditor;
   }
@@ -700,7 +700,7 @@ Functions.confirmLink = function (theLink, theSqlQuery) {
 
   if (isConfirmed) {
     if (typeof theLink.href !== 'undefined') {
-      theLink.href += CommonParams.get('arg_separator') + 'is_js_confirmed=1';
+      theLink.href += window.CommonParams.get('arg_separator') + 'is_js_confirmed=1';
     } else if (typeof theLink.form !== 'undefined') {
       theLink.form.action += '?is_js_confirmed=1';
     }
@@ -960,12 +960,12 @@ let incInterval;
 /** @type {number} */
 
 let updateTimeout;
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   clearTimeout(updateTimeout);
   clearInterval(incInterval);
   $(document).off('mousemove');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   document.onclick = function () {
     idleSecondsCounter = 0;
   };
@@ -1000,8 +1000,8 @@ AJAX.registerOnload('functions.js', function () {
 
     var params = {
       'ajax_request': true,
-      'server': CommonParams.get('server'),
-      'db': CommonParams.get('db'),
+      'server': window.CommonParams.get('server'),
+      'db': window.CommonParams.get('db'),
       'guid': guid,
       'access_time': idleSecondsCounter,
       'check_timeout': 1
@@ -1012,16 +1012,16 @@ AJAX.registerOnload('functions.js', function () {
       data: params,
       success: function (data) {
         if (data.success) {
-          if (CommonParams.get('LoginCookieValidity') - idleSecondsCounter < 0) {
+          if (window.CommonParams.get('LoginCookieValidity') - idleSecondsCounter < 0) {
             /* There is other active window, let's reset counter */
             idleSecondsCounter = 0;
           }
 
           var remaining = Math.min(
           /* Remaining login validity */
-          CommonParams.get('LoginCookieValidity') - idleSecondsCounter,
+          window.CommonParams.get('LoginCookieValidity') - idleSecondsCounter,
           /* Remaining time till session GC */
-          CommonParams.get('session_gc_maxlifetime'));
+          window.CommonParams.get('session_gc_maxlifetime'));
           var interval = 1000;
 
           if (remaining > 5) {
@@ -1047,7 +1047,7 @@ AJAX.registerOnload('functions.js', function () {
             });
             $('#input_username').trigger('focus');
           } else {
-            CommonParams.set('token', data.new_token);
+            window.CommonParams.set('token', data.new_token);
             $('input[name=token]').val(data.new_token);
           }
 
@@ -1058,9 +1058,9 @@ AJAX.registerOnload('functions.js', function () {
     });
   }
 
-  if (CommonParams.get('logged_in')) {
+  if (window.CommonParams.get('logged_in')) {
     incInterval = window.setInterval(SetIdleTime, 1000);
-    var sessionTimeout = Math.min(CommonParams.get('LoginCookieValidity'), CommonParams.get('session_gc_maxlifetime'));
+    var sessionTimeout = Math.min(window.CommonParams.get('LoginCookieValidity'), window.CommonParams.get('session_gc_maxlifetime'));
 
     if (isStorageSupported('sessionStorage')) {
       window.sessionStorage.setItem('guid', guid());
@@ -1080,10 +1080,10 @@ AJAX.registerOnload('functions.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('click', 'input:checkbox.checkall');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Row marking in horizontal mode (use "on" so that it works also for
    * next pages reached via AJAX); a tr may have the class noclick to remove
@@ -1229,7 +1229,7 @@ Functions.loadForeignKeyCheckbox = function () {
   // Load default foreign key check value
   var params = {
     'ajax_request': true,
-    'server': CommonParams.get('server')
+    'server': window.CommonParams.get('server')
   };
   $.get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
     var html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked="checked"' : '') + '>' + '<label for="fk_checks">' + Messages.strForeignKeyCheck + '</label>';
@@ -1240,7 +1240,7 @@ Functions.loadForeignKeyCheckbox = function () {
 Functions.getJsConfirmCommonParam = function (elem, parameters) {
   var $elem = $(elem);
   var params = parameters;
-  var sep = CommonParams.get('arg_separator');
+  var sep = window.CommonParams.get('arg_separator');
 
   if (params) {
     // Strip possible leading ?
@@ -1261,7 +1261,7 @@ Functions.getJsConfirmCommonParam = function (elem, parameters) {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('click', 'a.inline_edit_sql');
   $(document).off('click', 'input#sql_query_edit_save');
   $(document).off('click', 'input#sql_query_edit_discard');
@@ -1292,7 +1292,7 @@ AJAX.registerTeardown('functions.js', function () {
  * Jquery Coding for inline editing SQL_QUERY
  */
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   // If we are coming back to the page by clicking forward button
   // of the browser, bind the code mirror to inline query editor.
   Functions.bindCodeMirrorToInlineEditor();
@@ -1394,8 +1394,8 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
       sqlAutoCompleteInProgress = true;
       var params = {
         'ajax_request': true,
-        'server': CommonParams.get('server'),
-        'db': CommonParams.get('db'),
+        'server': window.CommonParams.get('server'),
+        'db': window.CommonParams.get('db'),
         'no_debug': true
       };
 
@@ -1411,7 +1411,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
         success: function (data) {
           if (data.success) {
             var tables = JSON.parse(data.tables);
-            sqlAutoCompleteDefaultTable = CommonParams.get('table');
+            sqlAutoCompleteDefaultTable = window.CommonParams.get('table');
             sqlAutoComplete = [];
 
             for (var table in tables) {
@@ -1481,7 +1481,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   sqlAutoComplete = false;
   sqlAutoCompleteDefaultTable = '';
 });
@@ -1843,7 +1843,7 @@ Functions.ajaxRemoveMessage = function ($thisMessageBox) {
 
 Functions.previewSql = function ($form) {
   var formUrl = $form.attr('action');
-  var sep = CommonParams.get('arg_separator');
+  var sep = window.CommonParams.get('arg_separator');
   var formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
   var $messageBox = Functions.ajaxShowMessage();
   $.ajax({
@@ -2289,7 +2289,7 @@ Functions.sqlPrettyPrint = function (string) {
 
 
 Functions.confirm = function (question, url, callbackFn, openCallback) {
-  var confirmState = CommonParams.get('confirm');
+  var confirmState = window.CommonParams.get('confirm');
 
   if (!confirmState) {
     // user does not want to confirm
@@ -2365,7 +2365,7 @@ jQuery.fn.sortTable = Functions.sortTable;
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('submit', 'form.create_table_form.ajax');
   $(document).off('click', 'form.create_table_form.ajax input[name=submit_num_fields]');
   $(document).off('keyup', 'form.create_table_form.ajax input');
@@ -2379,7 +2379,7 @@ AJAX.registerTeardown('functions.js', function () {
  * Attach Ajax Event handlers for Create Table
  */
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Attach event handler for submission of create table form (save)
    */
@@ -2404,7 +2404,7 @@ AJAX.registerOnload('functions.js', function () {
       if (Functions.checkReservedWordColumns($form)) {
         Functions.ajaxShowMessage(Messages.strProcessingRequest); // User wants to submit the form
 
-        $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+        $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
           if (typeof data !== 'undefined' && data.success === true) {
             $('#properties_message').removeClass('alert-danger').html('');
             Functions.ajaxShowMessage(data.message); // Only if the create table dialog (distinct panel) exists
@@ -2423,7 +2423,7 @@ AJAX.registerOnload('functions.js', function () {
             var tablesTable = $('#tablesForm').find('tbody').not('#tbl_summary_row'); // this is the first table created in this db
 
             if (tablesTable.length === 0) {
-              CommonActions.refreshMain(CommonParams.get('opendb_url'));
+              window.CommonActions.refreshMain(window.CommonParams.get('opendb_url'));
             } else {
               /**
                * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
@@ -2461,10 +2461,10 @@ AJAX.registerOnload('functions.js', function () {
 
             Navigation.reload(); // Redirect to table structure page on creation of new table
 
-            var argsep = CommonParams.get('arg_separator');
+            var argsep = window.CommonParams.get('arg_separator');
             var params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
             var tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
-            $.get(tableStructureUrl, params12, AJAX.responseHandler);
+            $.get(tableStructureUrl, params12, window.AJAX.responseHandler);
           } else {
             Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + data.error + '</div>', false);
           }
@@ -2594,7 +2594,7 @@ Functions.checkPassword = function ($theForm) {
  */
 
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /* Handler for hostname type */
   $(document).on('change', '#select_pred_hostname', function () {
     var hostname = $('#pma_hostname');
@@ -2687,7 +2687,7 @@ AJAX.registerOnload('functions.js', function () {
       var thisValue = $(this).val();
       var $msgbox = Functions.ajaxShowMessage(Messages.strProcessingRequest);
       $theForm.append('<input type="hidden" name="ajax_request" value="true">');
-      $.post($theForm.attr('action'), $theForm.serialize() + CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
+      $.post($theForm.attr('action'), $theForm.serialize() + window.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
         if (typeof data === 'undefined' || data.success !== true) {
           Functions.ajaxShowMessage(data.error, false);
           return;
@@ -2712,7 +2712,7 @@ AJAX.registerOnload('functions.js', function () {
       }
 
       if (data.scripts) {
-        AJAX.scriptHandler.load(data.scripts);
+        window.AJAX.scriptHandler.load(data.scripts);
       } // for this dialog, we remove the fieldset wrapping due to double headings
 
 
@@ -2734,7 +2734,7 @@ AJAX.registerOnload('functions.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('change', 'select.column_type');
   $(document).off('change', 'select.default_type');
   $(document).off('change', 'select.virtuality');
@@ -2746,7 +2746,7 @@ AJAX.registerTeardown('functions.js', function () {
  * the page loads and when the selected data type changes
  */
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   // is called here for normal page loads and also when opening
   // the Create table dialog
   Functions.verifyColumnsProperties(); //
@@ -2812,8 +2812,8 @@ Functions.validateDefaultValue = function ($nullCheckbox) {
 
 
 Functions.autoPopulate = function (inputId, offset) {
-  var db = CommonParams.get('db');
-  var table = CommonParams.get('table');
+  var db = window.CommonParams.get('db');
+  var table = window.CommonParams.get('table');
   var newInputId = inputId.substring(0, inputId.length - 1);
   $('#' + newInputId + '1').val(centralColumnList[db + '_' + table][offset].col_name);
   var colType = centralColumnList[db + '_' + table][offset].col_type.toUpperCase();
@@ -2864,7 +2864,7 @@ Functions.autoPopulate = function (inputId, offset) {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('click', 'a.open_enum_editor');
   $(document).off('click', 'input.add_value');
   $(document).off('click', '#enum_editor td.drop');
@@ -2874,7 +2874,7 @@ AJAX.registerTeardown('functions.js', function () {
  * Opens the ENUM/SET editor and controls its functions
  */
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   $(document).on('click', 'a.open_enum_editor', function () {
     // Get the name of the column that is being edited
     var colname = $(this).closest('tr').find('input').first().val();
@@ -2983,8 +2983,8 @@ AJAX.registerOnload('functions.js', function () {
   });
   $(document).on('click', 'a.central_columns_dialog', function () {
     var href = 'index.php?route=/database/central-columns';
-    var db = CommonParams.get('db');
-    var table = CommonParams.get('table');
+    var db = window.CommonParams.get('db');
+    var table = window.CommonParams.get('table');
     var maxRows = $(this).data('maxrows');
     var pick = $(this).data('pick');
 
@@ -2994,9 +2994,9 @@ AJAX.registerOnload('functions.js', function () {
 
     var params = {
       'ajax_request': true,
-      'server': CommonParams.get('server'),
-      'db': CommonParams.get('db'),
-      'cur_table': CommonParams.get('table'),
+      'server': window.CommonParams.get('server'),
+      'db': window.CommonParams.get('db'),
+      'cur_table': window.CommonParams.get('table'),
       'getColumnList': true
     };
     var colid = $(this).closest('td').find('input').attr('id');
@@ -3166,10 +3166,10 @@ Functions.checkIndexName = function (formId) {
   return true;
 };
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('click', '#index_frm input[type=submit]');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Handler for adding more columns to an index in the editor
    */
@@ -3211,7 +3211,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
     const modalBody = indexDialogPreviewModal.querySelector('.modal-body');
     const $form = $('#index_frm');
     const formUrl = $form.attr('action');
-    const sep = CommonParams.get('arg_separator');
+    const sep = window.CommonParams.get('arg_separator');
     const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
     $.post({
       url: formUrl,
@@ -3246,7 +3246,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
     Functions.ajaxShowMessage(Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form); // User wants to submit the form
 
-    $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+    $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
       var $sqlqueryresults = $('.sqlqueryresults');
 
       if ($sqlqueryresults.length !== 0) {
@@ -3382,7 +3382,7 @@ Functions.showHints = function ($div) {
   });
 };
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   Functions.showHints();
 });
 
@@ -3550,14 +3550,14 @@ Functions.toggleButton = function ($obj) {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $('div.toggle-container').off('click');
 });
 /**
  * Initialise all toggle buttons
  */
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   $('div.toggleAjax').each(function () {
     var $button = $(this).show();
     $button.find('img').each(function () {
@@ -3575,12 +3575,12 @@ AJAX.registerOnload('functions.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('change', 'select.pageselector');
   $('#update_recent_tables').off('ready');
   $('#sync_favorite_tables').off('ready');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Autosubmit page selector
    */
@@ -3615,7 +3615,7 @@ AJAX.registerOnload('functions.js', function () {
       type: 'POST',
       data: {
         'favoriteTables': isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined' ? window.localStorage.favoriteTables : '',
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'no_debug': true
       },
       success: function (data) {
@@ -3697,7 +3697,7 @@ Functions.slidingMessage = function (msg, $object) {
  */
 
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   var $elm = $('#sqlquery');
 
   if ($elm.siblings().filter('.CodeMirror').length > 0) {
@@ -3717,14 +3717,14 @@ AJAX.registerOnload('functions.js', function () {
 
   Functions.highlightSql($('body'));
 });
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   if (codeMirrorEditor) {
     $('#sqlquery').text(codeMirrorEditor.getValue());
     codeMirrorEditor.toTextArea();
     codeMirrorEditor = false;
   }
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   // initializes all lock-page elements lock-id and
   // val-hash data property
   $('#page_content form.lock-page textarea, ' + '#page_content form.lock-page input[type="text"], ' + '#page_content form.lock-page input[type="number"], ' + '#page_content form.lock-page select').each(function (i) {
@@ -3732,13 +3732,13 @@ AJAX.registerOnload('functions.js', function () {
     // so that it can be compared with new value hash
     // to check whether field was modified or not.
 
-    $(this).data('val-hash', AJAX.hash($(this).val()));
+    $(this).data('val-hash', window.AJAX.hash($(this).val()));
   }); // initializes lock-page elements (input types checkbox and radio buttons)
   // lock-id and val-hash data property
 
   $('#page_content form.lock-page input[type="checkbox"], ' + '#page_content form.lock-page input[type="radio"]').each(function (i) {
     $(this).data('lock-id', i);
-    $(this).data('val-hash', AJAX.hash($(this).is(':checked')));
+    $(this).data('val-hash', window.AJAX.hash($(this).is(':checked')));
   });
 });
 /**
@@ -3777,10 +3777,10 @@ Functions.getCellValue = function (td) {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('change', '.autosubmit');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Automatic form submission on change.
    */
@@ -3801,7 +3801,7 @@ const PrintPage = {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   document.querySelectorAll('.jsPrintButton').forEach(item => {
     item.removeEventListener('click', PrintPage);
   });
@@ -3809,12 +3809,12 @@ AJAX.registerTeardown('functions.js', function () {
   $(document).off('keydown', '#createViewModal input, #createViewModal select');
   $(document).off('change', '#fkc_checkbox');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   document.querySelectorAll('.jsPrintButton').forEach(item => {
     item.addEventListener('click', PrintPage);
   });
   $('.logout').on('click', function () {
-    var form = $('<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + Functions.escapeHtml(CommonParams.get('token')) + '">' + '</form>');
+    var form = $('<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + Functions.escapeHtml(window.CommonParams.get('token')) + '">' + '</form>');
     $('body').append(form);
     form.submit();
     sessionStorage.clear();
@@ -3853,7 +3853,7 @@ AJAX.registerOnload('functions.js', function () {
 
 Functions.createViewModal = function ($this) {
   var $msg = Functions.ajaxShowMessage();
-  var sep = CommonParams.get('arg_separator');
+  var sep = window.CommonParams.get('arg_separator');
   var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
   params += sep + 'ajax_dialog=1';
   $.post($this.attr('href'), params, function (data) {
@@ -4035,7 +4035,7 @@ $(document).on('keyup', '#filterText', function () {
   }, 300);
   $('#filter-rows-count').html(count);
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /* Trigger filtering of the list based on incoming database name */
   var $filter = $('#filterText');
 
@@ -4078,7 +4078,7 @@ Functions.formatBytes = function (bytesToFormat, subDecimals, pointChar) {
   return bytes + ' ' + units[i];
 };
 
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Reveal the login form to users with JS enabled
    * and focus the appropriate input field
@@ -4098,7 +4098,7 @@ AJAX.registerOnload('functions.js', function () {
   var $httpsWarning = $('#js-https-mismatch');
 
   if ($httpsWarning.length) {
-    if (window.location.protocol === 'https:' !== CommonParams.get('is_https')) {
+    if (window.location.protocol === 'https:' !== window.CommonParams.get('is_https')) {
       $httpsWarning.show();
     }
   }
@@ -4222,10 +4222,10 @@ var recaptchaCallback = function () {
  */
 
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('keydown', 'form input, form textarea, form select');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /**
    * Handle 'Ctrl/Alt + Enter' form submits
    */
@@ -4244,12 +4244,12 @@ AJAX.registerOnload('functions.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-AJAX.registerTeardown('functions.js', function () {
+window.AJAX.registerTeardown('functions.js', function () {
   $(document).off('change', 'input[type=radio][name="pw_hash"]');
   $(document).off('mouseover', '.sortlink');
   $(document).off('mouseout', '.sortlink');
 });
-AJAX.registerOnload('functions.js', function () {
+window.AJAX.registerOnload('functions.js', function () {
   /*
    * Display warning regarding SSL when sha256_password
    * method is selected
@@ -4380,7 +4380,7 @@ Functions.configSet = function (key, value) {
     data: {
       'ajax_request': true,
       key: key,
-      server: CommonParams.get('server'),
+      server: window.CommonParams.get('server'),
       value: serialized
     },
     success: function (data) {
@@ -4428,7 +4428,7 @@ Functions.configGet = function (key, cached, successCallback) {
     dataType: 'json',
     data: {
       'ajax_request': true,
-      server: CommonParams.get('server'),
+      server: window.CommonParams.get('server'),
       key: key
     },
     success: function (data) {

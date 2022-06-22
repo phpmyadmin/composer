@@ -422,7 +422,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
  */
 
 
-AJAX.registerTeardown('table/change.js', function () {
+window.AJAX.registerTeardown('table/change.js', function () {
   $(document).off('click', 'span.open_gis_editor');
   $(document).off('click', 'input[name^=\'insert_ignore_\']');
   $(document).off('click', 'input[name=\'gis_data[save]\']');
@@ -438,7 +438,7 @@ AJAX.registerTeardown('table/change.js', function () {
  * Restart insertion with 'N' rows.
  */
 
-AJAX.registerOnload('table/change.js', function () {
+window.AJAX.registerOnload('table/change.js', function () {
   if ($('#insertForm').length) {
     // validate the comment form when it is submitted
     $('#insertForm').validate();
@@ -796,7 +796,7 @@ function addNewContinueInsertionFields(event) {
      * Displays alert if data loss possible on decrease
      * of rows.
      */
-    var checkLock = jQuery.isEmptyObject(AJAX.lockedTargets);
+    var checkLock = jQuery.isEmptyObject(window.AJAX.lockedTargets);
 
     if (checkLock || confirm(Messages.strConfirmRowChange) === true) {
       while (currRows > targetRows) {

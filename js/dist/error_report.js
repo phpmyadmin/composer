@@ -68,7 +68,7 @@ var ErrorReport = {
     if (ErrorReport.errorReportData === null) {
       $.post('index.php?route=/error-report', {
         'ajax_request': true,
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'get_settings': true,
         'exception_type': 'js'
       }, function (data) {
@@ -142,7 +142,7 @@ var ErrorReport = {
     var buttonHtml = '<button class="btn btn-primary" id="show_error_report_' + key + '">';
     buttonHtml += Messages.strShowReportDetails;
     buttonHtml += '</button>';
-    var settingsUrl = 'index.php?route=/preferences/features&server=' + CommonParams.get('server');
+    var settingsUrl = 'index.php?route=/preferences/features&server=' + window.CommonParams.get('server');
     buttonHtml += '<a class="ajax" href="' + settingsUrl + '">';
     buttonHtml += Functions.getImage('s_cog', Messages.strChangeReportSettings);
     buttonHtml += '</a>';
@@ -228,15 +228,15 @@ var ErrorReport = {
     }
 
     var reportData = {
-      'server': CommonParams.get('server'),
+      'server': window.CommonParams.get('server'),
       'ajax_request': true,
       'exception': exception,
       'url': window.location.href,
       'exception_type': 'js'
     };
 
-    if (AJAX.scriptHandler.scripts.length > 0) {
-      reportData.scripts = AJAX.scriptHandler.scripts.map(function (script) {
+    if (window.AJAX.scriptHandler.scripts.length > 0) {
+      reportData.scripts = window.AJAX.scriptHandler.scripts.map(function (script) {
         return script;
       });
     }
@@ -272,14 +272,14 @@ var ErrorReport = {
   },
 
   /**
-   * Automatically wraps the callback in AJAX.registerOnload
+   * Automatically wraps the callback in window.AJAX.registerOnload
    *
    * @return {void}
    */
   wrapAjaxOnloadCallback: function () {
-    var oldOnload = AJAX.registerOnload;
+    var oldOnload = window.AJAX.registerOnload;
 
-    AJAX.registerOnload = function (file, func) {
+    window.AJAX.registerOnload = function (file, func) {
       var wrappedFunction = ErrorReport.wrapFunction(func);
       oldOnload.call(this, file, wrappedFunction);
     };
@@ -306,7 +306,7 @@ var ErrorReport = {
   },
 
   /**
-   * Wraps the callback in AJAX.registerOnload automatically
+   * Wraps the callback in window.AJAX.registerOnload automatically
    *
    * @return {void}
    */
@@ -315,7 +315,7 @@ var ErrorReport = {
     ErrorReport.wrapJqueryOnCallback();
   }
 };
-AJAX.registerOnload('error_report.js', function () {
+window.AJAX.registerOnload('error_report.js', function () {
   TraceKit.report.subscribe(ErrorReport.errorHandler);
   ErrorReport.setUpErrorReporting();
 });

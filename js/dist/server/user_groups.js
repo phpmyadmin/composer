@@ -9,14 +9,14 @@ var __webpack_exports__ = {};
 /**
  * Unbind all event handlers before tearing down a page
  */
-AJAX.registerTeardown('server/user_groups.js', function () {
+window.AJAX.registerTeardown('server/user_groups.js', function () {
   $('#deleteUserGroupModal').off('show.bs.modal');
 });
 /**
  * Bind event handlers
  */
 
-AJAX.registerOnload('server/user_groups.js', function () {
+window.AJAX.registerOnload('server/user_groups.js', function () {
   const deleteUserGroupModal = $('#deleteUserGroupModal');
   deleteUserGroupModal.on('show.bs.modal', function (event) {
     const userGroupName = $(event.relatedTarget).data('user-group');
@@ -29,7 +29,7 @@ AJAX.registerOnload('server/user_groups.js', function () {
         'deleteUserGroup': true,
         'userGroup': userGroupName,
         'ajax_request': true
-      }, AJAX.responseHandler);
+      }, window.AJAX.responseHandler);
       $('#deleteUserGroupModal').modal('hide');
     });
   });

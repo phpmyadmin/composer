@@ -61,7 +61,7 @@ Sql.autoSave = function (query) {
       window.localStorage.setItem(key, query);
     } else {
       Cookies.set(key, query, {
-        path: CommonParams.get('rootPath')
+        path: window.CommonParams.get('rootPath')
       });
     }
   }
@@ -88,10 +88,10 @@ Sql.showThisQuery = function (db, table, query) {
     window.localStorage.showThisQueryObject = JSON.stringify(showThisQueryObject);
   } else {
     Cookies.set('showThisQuery', 1, {
-      path: CommonParams.get('rootPath')
+      path: window.CommonParams.get('rootPath')
     });
     Cookies.set('showThisQueryObject', JSON.stringify(showThisQueryObject), {
-      path: CommonParams.get('rootPath')
+      path: window.CommonParams.get('rootPath')
     });
   }
 };
@@ -141,7 +141,7 @@ Sql.autoSaveWithSort = function (query) {
       window.localStorage.setItem('autoSavedSqlSort', query);
     } else {
       Cookies.set('autoSavedSqlSort', query, {
-        path: CommonParams.get('rootPath')
+        path: window.CommonParams.get('rootPath')
       });
     }
   }
@@ -158,7 +158,7 @@ Sql.clearAutoSavedSort = function () {
     window.localStorage.removeItem('autoSavedSqlSort');
   } else {
     Cookies.set('autoSavedSqlSort', '', {
-      path: CommonParams.get('rootPath')
+      path: window.CommonParams.get('rootPath')
     });
   }
 };
@@ -299,7 +299,7 @@ const insertQuery = function (queryType) {
       var params = {
         'ajax_request': true,
         'sql': codeMirrorEditor.getValue(),
-        'server': CommonParams.get('server')
+        'server': window.CommonParams.get('server')
       };
       $.ajax({
         type: 'POST',
@@ -333,10 +333,10 @@ const insertQuery = function (queryType) {
     if (isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
       setQuery(window.localStorage.getItem(key));
     } else if (Cookies.get(key, {
-      path: CommonParams.get('rootPath')
+      path: window.CommonParams.get('rootPath')
     })) {
       setQuery(Cookies.get(key, {
-        path: CommonParams.get('rootPath')
+        path: window.CommonParams.get('rootPath')
       }));
     } else {
       Functions.ajaxShowMessage(Messages.strNoAutoSavedQuery);
@@ -441,7 +441,7 @@ const insertValueQuery = function () {
  */
 
 
-AJAX.registerTeardown('sql.js', function () {
+window.AJAX.registerTeardown('sql.js', function () {
   $(document).off('click', 'a.delete_row.ajax');
   $(document).off('submit', '.bookmarkQueryForm');
   $('input#bkm_label').off('input');
@@ -493,7 +493,7 @@ AJAX.registerTeardown('sql.js', function () {
  * @memberOf    jQuery
  */
 
-AJAX.registerOnload('sql.js', function () {
+window.AJAX.registerOnload('sql.js', function () {
   if (codeMirrorEditor || document.sqlform) {
     Sql.setShowThisQuery();
   }
@@ -522,7 +522,7 @@ AJAX.registerOnload('sql.js', function () {
 
 
       var sortStoredQuery = useLocalStorageValue ? window.localStorage.autoSavedSqlSort : Cookies.get('autoSavedSqlSort', {
-        path: CommonParams.get('rootPath')
+        path: window.CommonParams.get('rootPath')
       });
 
       if (typeof sortStoredQuery !== 'undefined' && sortStoredQuery !== $('select[name="sql_query"]').val() && $('select[name="sql_query"] option[value="' + sortStoredQuery + '"]').length !== 0) {
@@ -537,7 +537,7 @@ AJAX.registerOnload('sql.js', function () {
     var $link = $(this);
     $link.confirm(question, $link.attr('href'), function (url) {
       Functions.ajaxShowMessage();
-      var argsep = CommonParams.get('arg_separator');
+      var argsep = window.CommonParams.get('arg_separator');
       var params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
       var postData = $link.getPostData();
 
@@ -559,7 +559,7 @@ AJAX.registerOnload('sql.js', function () {
   $(document).on('submit', '.bookmarkQueryForm', function (e) {
     e.preventDefault();
     Functions.ajaxShowMessage();
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     $.post($(this).attr('action'), 'ajax_request=1' + argsep + $(this).serialize(), function (data) {
       if (data.success) {
         Functions.ajaxShowMessage(data.message);
@@ -806,7 +806,7 @@ AJAX.registerOnload('sql.js', function () {
     var $msgbox = Functions.ajaxShowMessage();
     var $sqlqueryresultsouter = $('#sqlqueryresultsouter');
     Functions.prepareForAjaxRequest($form);
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         // success happens if the query returns rows or not
@@ -838,25 +838,25 @@ AJAX.registerOnload('sql.js', function () {
           history.replaceState({
             menu: data.menu
           }, null);
-          AJAX.handleMenu.replace(data.menu);
+          window.AJAX.handleMenu.replace(data.menu);
         }
 
         if (data.params) {
-          CommonParams.setAll(data.params);
+          window.CommonParams.setAll(data.params);
         }
 
         if (typeof data.ajax_reload !== 'undefined') {
           if (data.ajax_reload.reload) {
             if (data.ajax_reload.table_name) {
-              CommonParams.set('table', data.ajax_reload.table_name);
-              CommonActions.refreshMain();
+              window.CommonParams.set('table', data.ajax_reload.table_name);
+              window.CommonActions.refreshMain();
             } else {
               Navigation.reload();
             }
           }
         } else if (typeof data.reload !== 'undefined') {
           // this happens if a USE or DROP command was typed
-          CommonActions.setDb(data.db);
+          window.CommonActions.setDb(data.db);
           var url;
 
           if (data.db) {
@@ -869,7 +869,7 @@ AJAX.registerOnload('sql.js', function () {
             url = 'index.php?route=/server/sql';
           }
 
-          CommonActions.refreshMain(url, function () {
+          window.CommonActions.refreshMain(url, function () {
             $('#sqlqueryresultsouter').show().html(data.message);
             Functions.highlightSql($('#sqlqueryresultsouter'));
           });
@@ -907,7 +907,7 @@ AJAX.registerOnload('sql.js', function () {
     event.preventDefault();
     var $form = $(this);
     var $msgbox = Functions.ajaxShowMessage();
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
       Functions.ajaxRemoveMessage($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
@@ -943,11 +943,11 @@ AJAX.registerOnload('sql.js', function () {
     var $form = $(this).parents('form');
 
     Sql.submitShowAllForm = function () {
-      var argsep = CommonParams.get('arg_separator');
+      var argsep = window.CommonParams.get('arg_separator');
       var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
       Functions.ajaxShowMessage();
-      AJAX.source = $form;
-      $.post($form.attr('action'), submitData, AJAX.responseHandler);
+      window.AJAX.source = $form;
+      $.post($form.attr('action'), submitData, window.AJAX.responseHandler);
     };
 
     if (!$(this).is(':checked')) {
@@ -989,7 +989,7 @@ AJAX.registerOnload('sql.js', function () {
       type: 'POST',
       url: 'index.php?route=/import/simulate-dml',
       data: {
-        'server': CommonParams.get('server'),
+        'server': window.CommonParams.get('server'),
         'db': dbName,
         'ajax_request': '1',
         'sql_query': query,
@@ -1041,10 +1041,10 @@ AJAX.registerOnload('sql.js', function () {
     var $button = $(this);
     var action = $button.val();
     var $form = $button.closest('form');
-    var argsep = CommonParams.get('arg_separator');
+    var argsep = window.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep;
     Functions.ajaxShowMessage();
-    AJAX.source = $form;
+    window.AJAX.source = $form;
     var url;
 
     if (action === 'edit') {
@@ -1061,7 +1061,7 @@ AJAX.registerOnload('sql.js', function () {
       return;
     }
 
-    $.post(url, submitData, AJAX.responseHandler);
+    $.post(url, submitData, window.AJAX.responseHandler);
   });
   $(document).on('submit', '.maxRowsForm', function () {
     var unlimNumRows = $(this).find('input[name="unlim_num_rows"]').val();
@@ -1134,7 +1134,7 @@ Sql.browseForeignDialog = function ($thisA) {
   var tableId = '#browse_foreign_table';
   var filterId = '#input_foreign_filter';
   var $dialog = null;
-  var argSep = CommonParams.get('arg_separator');
+  var argSep = window.CommonParams.get('arg_separator');
   var params = $thisA.getPostData();
   params += argSep + 'ajax_request=true';
   $.post($thisA.attr('href'), params, function (data) {
@@ -1225,13 +1225,13 @@ Sql.checkSavedQuery = function () {
   if (isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
     Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
   } else if (Cookies.get(key, {
-    path: CommonParams.get('rootPath')
+    path: window.CommonParams.get('rootPath')
   })) {
     Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
   }
 };
 
-AJAX.registerOnload('sql.js', function () {
+window.AJAX.registerOnload('sql.js', function () {
   $('body').on('click', 'a.browse_foreign', function (e) {
     e.preventDefault();
     Sql.browseForeignDialog($(this));
@@ -1322,7 +1322,7 @@ Sql.initProfilingTables = function () {
   });
 };
 
-AJAX.registerOnload('sql.js', function () {
+window.AJAX.registerOnload('sql.js', function () {
   Sql.makeProfilingChart();
   Sql.initProfilingTables();
 });
