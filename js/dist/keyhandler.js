@@ -1,13 +1,13 @@
 var __webpack_exports__ = {};
-// global var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
-var ctrlKeyHistory = 0;
+// var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
+let ctrlKeyHistory = 0;
 /**
   * Allows moving around inputs/select by Ctrl+arrows
   *
   * @param {object} event data
   */
 
-function onKeyDownArrowsHandler(event) {
+const onKeyDownArrowsHandler = function (event) {
   var e = event || window.event;
   var o = e.srcElement || e.target;
 
@@ -135,19 +135,35 @@ function onKeyDownArrowsHandler(event) {
   }
 
   e.returnValue = false;
-}
+};
 
-window.AJAX.registerTeardown('keyhandler.js', function () {
-  $(document).off('keydown keyup', '#table_columns');
-  $(document).off('keydown keyup', 'table.insertRowTable');
-});
-window.AJAX.registerOnload('keyhandler.js', function () {
-  $(document).on('keydown keyup', '#table_columns', function (event) {
-    onKeyDownArrowsHandler(event.originalEvent);
-  });
-  $(document).on('keydown keyup', 'table.insertRowTable', function (event) {
-    onKeyDownArrowsHandler(event.originalEvent);
-  });
-});
+const KeyHandlerEvents = {
+  /**
+   * @return {function}
+   */
+  off: function () {
+    return function () {
+      $(document).off('keydown keyup', '#table_columns');
+      $(document).off('keydown keyup', 'table.insertRowTable');
+    };
+  },
+
+  /**
+   * @return {function}
+   */
+  on: function () {
+    return function () {
+      $(document).on('keydown keyup', '#table_columns', function (event) {
+        onKeyDownArrowsHandler(event.originalEvent);
+      });
+      $(document).on('keydown keyup', 'table.insertRowTable', function (event) {
+        onKeyDownArrowsHandler(event.originalEvent);
+      });
+    };
+  }
+};
+window.KeyHandlerEvents = KeyHandlerEvents;
+window.AJAX.registerTeardown('keyhandler.js', window.KeyHandlerEvents.off());
+window.AJAX.registerOnload('keyhandler.js', window.KeyHandlerEvents.on());
 
 //# sourceMappingURL=keyhandler.js.map
