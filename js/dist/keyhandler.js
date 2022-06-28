@@ -163,7 +163,5 @@ const KeyHandlerEvents = {
   }
 };
 window.KeyHandlerEvents = KeyHandlerEvents;
-window.AJAX.registerTeardown('keyhandler.js', window.KeyHandlerEvents.off());
-window.AJAX.registerOnload('keyhandler.js', window.KeyHandlerEvents.on());
 
 //# sourceMappingURL=keyhandler.js.map
