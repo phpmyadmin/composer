@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Navigation */
+
 /**
  * @fileoverview    function used in server privilege pages
  * @name            Database Operations

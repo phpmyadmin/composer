@@ -6,7 +6,7 @@ var __webpack_exports__ = {};
  */
 window.AJAX.registerOnload('transformations/xml_editor.js', function () {
   $('textarea.transform_xml_editor').each(function () {
-    CodeMirror.fromTextArea(this, {
+    window.CodeMirror.fromTextArea(this, {
       lineNumbers: true,
       indentUnit: 4,
       mode: 'application/xml',

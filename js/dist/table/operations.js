@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Navigation */
+
 /**
  * Unbind all event handlers before tearing down a page
  */

@@ -4,9 +4,6 @@ var __webpack_exports__ = {};
  *
  * @package phpMyAdmin-Navigation
  */
-
-/* global isStorageSupported, setupRestoreField, setupValidation */
-// js/config.js
 var Navigation = {};
 /**
  * updates the tree state in sessionStorage
@@ -16,7 +13,7 @@ var Navigation = {};
 
 Navigation.treeStateUpdate = function () {
   // update if session storage is supported
-  if (isStorageSupported('sessionStorage')) {
+  if (window.Config.isStorageSupported('sessionStorage')) {
     var storage = window.sessionStorage; // try catch necessary here to detect whether
     // content to be stored exceeds storage capacity
 
@@ -44,7 +41,7 @@ Navigation.treeStateUpdate = function () {
 
 
 Navigation.filterStateUpdate = function (filterName, filterValue) {
-  if (isStorageSupported('sessionStorage')) {
+  if (window.Config.isStorageSupported('sessionStorage')) {
     var storage = window.sessionStorage;
 
     try {
@@ -66,7 +63,7 @@ Navigation.filterStateUpdate = function (filterName, filterValue) {
 
 
 Navigation.filterStateRestore = function () {
-  if (isStorageSupported('sessionStorage') && typeof window.sessionStorage.navTreeSearchFilters !== 'undefined') {
+  if (window.Config.isStorageSupported('sessionStorage') && typeof window.sessionStorage.navTreeSearchFilters !== 'undefined') {
     var searchClauses = JSON.parse(window.sessionStorage.navTreeSearchFilters);
 
     if (Object.keys(searchClauses).length < 1) {
@@ -270,11 +267,11 @@ Navigation.traverseForPaths = function () {
   return params;
 };
 /**
- * Executed on page load
+ * @return {function}
  */
 
 
-$(function () {
+Navigation.onload = () => function () {
   if (!$('#pma_navigation').length) {
     // Don't bother running any code if the navigation is not even on the page
     return;
@@ -515,7 +512,7 @@ $(function () {
       }
     }
 
-    var hasLocalStorage = isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined';
+    var hasLocalStorage = window.Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined';
     $.ajax({
       url: $self.attr('href'),
       cache: false,
@@ -530,7 +527,7 @@ $(function () {
           $('#' + anchorId).parent().html(data.anchor);
           Functions.tooltip($('#' + anchorId), 'a', $('#' + anchorId).attr('title')); // Update localStorage.
 
-          if (isStorageSupported('localStorage')) {
+          if (window.Config.isStorageSupported('localStorage')) {
             window.localStorage.favoriteTables = data.favoriteTables;
           }
         } else {
@@ -540,7 +537,7 @@ $(function () {
     });
   }); // Check if session storage is supported
 
-  if (isStorageSupported('sessionStorage')) {
+  if (window.Config.isStorageSupported('sessionStorage')) {
     var storage = window.sessionStorage; // remove tree from storage if Navi_panel config form is submitted
 
     $(document).on('submit', 'form.config-form', function () {
@@ -558,7 +555,7 @@ $(function () {
       Navigation.reload();
     }
   }
-});
+};
 /**
  * Expands a node in navigation tree.
  *
@@ -567,6 +564,7 @@ $(function () {
  *
  * @return {void}
  */
+
 
 Navigation.expandTreeNode = function ($expandElem, callback) {
   var $children = $expandElem.closest('li').children('div.list_container');
@@ -863,8 +861,8 @@ Navigation.ensureSettings = function (selflink) {
     $.post('index.php?route=/navigation&ajax_request=1', params, function (data) {
       if (typeof data !== 'undefined' && data.success) {
         $('#pma_navi_settings_container').html(data.message);
-        setupRestoreField();
-        setupValidation();
+        window.Config.setupRestoreField();
+        window.Config.setupValidation();
         $('#pma_navigation_settings').find('form').attr('action', selflink);
       } else {
         Functions.ajaxShowMessage(data.error);

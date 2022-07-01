@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Sql */
+
 /* global firstDayOfCalendar */
 // templates/javascript/variables.twig
 

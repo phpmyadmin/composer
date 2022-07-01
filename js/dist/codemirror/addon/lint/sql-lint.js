@@ -1,5 +1,5 @@
 var __webpack_exports__ = {};
-CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
+window.CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
   // Skipping check if text box is empty.
   if (text.trim() === '') {
     updateLinting(cm, []);
@@ -12,9 +12,9 @@ CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
     for (var idx in response) {
       found.push({
         // eslint-disable-next-line new-cap
-        from: CodeMirror.Pos(response[idx].fromLine, response[idx].fromColumn),
+        from: window.CodeMirror.Pos(response[idx].fromLine, response[idx].fromColumn),
         // eslint-disable-next-line new-cap
-        to: CodeMirror.Pos(response[idx].toLine, response[idx].toColumn),
+        to: window.CodeMirror.Pos(response[idx].toLine, response[idx].toColumn),
         messageHTML: response[idx].message,
         severity: response[idx].severity
       });

@@ -8,6 +8,8 @@ var __webpack_exports__ = {};
  * @requires    js/functions.js
  **/
 
+/* global Sql */
+
 /* global changeValueFieldType, verifyAfterSearchFieldChange */
 // js/table/change.js
 

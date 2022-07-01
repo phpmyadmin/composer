@@ -8,11 +8,7 @@ var __webpack_exports__ = {};
  * @test-module Sql
  */
 
-/* global isStorageSupported */
-// js/config.js
-
-/* global codeMirrorEditor */
-// js/functions.js
+/* global Navigation */
 
 /* global makeGrid */
 // js/makegrid.js
@@ -57,10 +53,10 @@ Sql.autoSave = function (query) {
   if (query) {
     var key = Sql.getAutoSavedKey();
 
-    if (isStorageSupported('localStorage')) {
+    if (window.Config.isStorageSupported('localStorage')) {
       window.localStorage.setItem(key, query);
     } else {
-      Cookies.set(key, query, {
+      window.Cookies.set(key, query, {
         path: window.CommonParams.get('rootPath')
       });
     }
@@ -83,14 +79,14 @@ Sql.showThisQuery = function (db, table, query) {
     'query': query
   };
 
-  if (isStorageSupported('localStorage')) {
+  if (window.Config.isStorageSupported('localStorage')) {
     window.localStorage.showThisQuery = 1;
     window.localStorage.showThisQueryObject = JSON.stringify(showThisQueryObject);
   } else {
-    Cookies.set('showThisQuery', 1, {
+    window.Cookies.set('showThisQuery', 1, {
       path: window.CommonParams.get('rootPath')
     });
-    Cookies.set('showThisQueryObject', JSON.stringify(showThisQueryObject), {
+    window.Cookies.set('showThisQueryObject', JSON.stringify(showThisQueryObject), {
       path: window.CommonParams.get('rootPath')
     });
   }
@@ -105,7 +101,7 @@ Sql.setShowThisQuery = function () {
   var db = $('input[name="db"]').val();
   var table = $('input[name="table"]').val();
 
-  if (isStorageSupported('localStorage')) {
+  if (window.Config.isStorageSupported('localStorage')) {
     if (window.localStorage.showThisQueryObject !== undefined) {
       var storedDb = JSON.parse(window.localStorage.showThisQueryObject).db;
       var storedTable = JSON.parse(window.localStorage.showThisQueryObject).table;
@@ -116,8 +112,8 @@ Sql.setShowThisQuery = function () {
       $('input[name="show_query"]').prop('checked', true);
 
       if (db === storedDb && table === storedTable) {
-        if (codeMirrorEditor) {
-          codeMirrorEditor.setValue(storedQuery);
+        if (window.codeMirrorEditor) {
+          window.codeMirrorEditor.setValue(storedQuery);
         } else if (document.sqlform) {
           document.sqlform.sql_query.value = storedQuery;
         }
@@ -137,10 +133,10 @@ Sql.setShowThisQuery = function () {
 
 Sql.autoSaveWithSort = function (query) {
   if (query) {
-    if (isStorageSupported('localStorage')) {
+    if (window.Config.isStorageSupported('localStorage')) {
       window.localStorage.setItem('autoSavedSqlSort', query);
     } else {
-      Cookies.set('autoSavedSqlSort', query, {
+      window.Cookies.set('autoSavedSqlSort', query, {
         path: window.CommonParams.get('rootPath')
       });
     }
@@ -154,10 +150,10 @@ Sql.autoSaveWithSort = function (query) {
 
 
 Sql.clearAutoSavedSort = function () {
-  if (isStorageSupported('localStorage')) {
+  if (window.Config.isStorageSupported('localStorage')) {
     window.localStorage.removeItem('autoSavedSqlSort');
   } else {
-    Cookies.set('autoSavedSqlSort', '', {
+    window.Cookies.set('autoSavedSqlSort', '', {
       path: window.CommonParams.get('rootPath')
     });
   }
@@ -225,8 +221,8 @@ const handleSimulateQueryButton = function () {
   const deleteRegExp = new RegExp('^\\s*DELETE\\s+FROM\\s', 'i');
   let query = '';
 
-  if (codeMirrorEditor) {
-    query = codeMirrorEditor.getValue();
+  if (window.codeMirrorEditor) {
+    query = window.codeMirrorEditor.getValue();
   } else {
     query = $('#sqlquery').val();
   }
@@ -271,9 +267,9 @@ const selectContent = function (element) {
 
 
 const setQuery = function (query) {
-  if (codeMirrorEditor) {
-    codeMirrorEditor.setValue(query);
-    codeMirrorEditor.focus();
+  if (window.codeMirrorEditor) {
+    window.codeMirrorEditor.setValue(query);
+    window.codeMirrorEditor.focus();
   } else if (document.sqlform) {
     document.sqlform.sql_query.value = query;
     document.sqlform.sql_query.focus();
@@ -294,11 +290,11 @@ const insertQuery = function (queryType) {
     setQuery('');
     return;
   } else if (queryType === 'format') {
-    if (codeMirrorEditor) {
+    if (window.codeMirrorEditor) {
       $('#querymessage').html(Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
       var params = {
         'ajax_request': true,
-        'sql': codeMirrorEditor.getValue(),
+        'sql': window.codeMirrorEditor.getValue(),
         'server': window.CommonParams.get('server')
       };
       $.ajax({
@@ -307,7 +303,7 @@ const insertQuery = function (queryType) {
         data: params,
         success: function (data) {
           if (data.success) {
-            codeMirrorEditor.setValue(data.sql);
+            window.codeMirrorEditor.setValue(data.sql);
           }
 
           $('#querymessage').html('');
@@ -330,12 +326,12 @@ const insertQuery = function (queryType) {
 
     key = 'autoSavedSql_' + key;
 
-    if (isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+    if (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
       setQuery(window.localStorage.getItem(key));
-    } else if (Cookies.get(key, {
+    } else if (window.Cookies.get(key, {
       path: window.CommonParams.get('rootPath')
     })) {
-      setQuery(Cookies.get(key, {
+      setQuery(window.Cookies.get(key, {
         path: window.CommonParams.get('rootPath')
       }));
     } else {
@@ -415,9 +411,9 @@ const insertValueQuery = function () {
     /* CodeMirror support */
 
 
-    if (codeMirrorEditor) {
-      codeMirrorEditor.replaceSelection(columnsList);
-      codeMirrorEditor.focus(); // IE support
+    if (window.codeMirrorEditor) {
+      window.codeMirrorEditor.replaceSelection(columnsList);
+      window.codeMirrorEditor.focus(); // IE support
     } else if (document.selection) {
       myQuery.focus();
       var sel = document.selection.createRange();
@@ -459,8 +455,8 @@ window.AJAX.registerTeardown('sql.js', function () {
   $(document).off('scroll', window);
   $(document).off('keyup', '.filter_rows');
 
-  if (codeMirrorEditor) {
-    codeMirrorEditor.off('change');
+  if (window.codeMirrorEditor) {
+    window.codeMirrorEditor.off('change');
   } else {
     $('#sqlquery').off('input propertychange');
   }
@@ -494,20 +490,20 @@ window.AJAX.registerTeardown('sql.js', function () {
  */
 
 window.AJAX.registerOnload('sql.js', function () {
-  if (codeMirrorEditor || document.sqlform) {
+  if (window.codeMirrorEditor || document.sqlform) {
     Sql.setShowThisQuery();
   }
 
   $(function () {
-    if (codeMirrorEditor) {
-      codeMirrorEditor.on('change', function () {
-        Sql.autoSave(codeMirrorEditor.getValue());
+    if (window.codeMirrorEditor) {
+      window.codeMirrorEditor.on('change', function () {
+        Sql.autoSave(window.codeMirrorEditor.getValue());
       });
     } else {
       $('#sqlquery').on('input propertychange', function () {
         Sql.autoSave($('#sqlquery').val());
       });
-      var useLocalStorageValue = isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined'; // Save sql query with sort
+      var useLocalStorageValue = window.Config.isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined'; // Save sql query with sort
 
       if ($('#RememberSorting') !== undefined && $('#RememberSorting').is(':checked')) {
         $('select[name="sql_query"]').on('change', function () {
@@ -521,7 +517,7 @@ window.AJAX.registerOnload('sql.js', function () {
       } // If sql query with sort for current table is stored, change sort by key select value
 
 
-      var sortStoredQuery = useLocalStorageValue ? window.localStorage.autoSavedSqlSort : Cookies.get('autoSavedSqlSort', {
+      var sortStoredQuery = useLocalStorageValue ? window.localStorage.autoSavedSqlSort : window.Cookies.get('autoSavedSqlSort', {
         path: window.CommonParams.get('rootPath')
       });
 
@@ -715,8 +711,8 @@ window.AJAX.registerOnload('sql.js', function () {
       var table = $('input[name="table"]').val();
       var query;
 
-      if (codeMirrorEditor) {
-        query = codeMirrorEditor.getValue();
+      if (window.codeMirrorEditor) {
+        query = window.codeMirrorEditor.getValue();
       } else {
         query = $('#sqlquery').val();
       }
@@ -793,8 +789,8 @@ window.AJAX.registerOnload('sql.js', function () {
     event.preventDefault();
     var $form = $(this);
 
-    if (codeMirrorEditor) {
-      $form[0].elements.sql_query.value = codeMirrorEditor.getValue();
+    if (window.codeMirrorEditor) {
+      $form[0].elements.sql_query.value = window.codeMirrorEditor.getValue();
     }
 
     if (!Functions.checkSqlQuery($form[0])) {
@@ -972,8 +968,8 @@ window.AJAX.registerOnload('sql.js', function () {
     var delimiter = $('#id_sql_delimiter').val();
     var dbName = $form.find('input[name="db"]').val();
 
-    if (codeMirrorEditor) {
-      query = codeMirrorEditor.getValue();
+    if (window.codeMirrorEditor) {
+      query = window.codeMirrorEditor.getValue();
     } else {
       query = $('#sqlquery').val();
     }
@@ -1222,9 +1218,9 @@ Sql.getAutoSavedKey = function () {
 Sql.checkSavedQuery = function () {
   var key = Sql.getAutoSavedKey();
 
-  if (isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+  if (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
     Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
-  } else if (Cookies.get(key, {
+  } else if (window.Cookies.get(key, {
     path: window.CommonParams.get('rootPath')
   })) {
     Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
@@ -1262,7 +1258,7 @@ window.AJAX.registerOnload('sql.js', function () {
    * Check if there is any saved query
    */
 
-  if (codeMirrorEditor || document.sqlform) {
+  if (window.codeMirrorEditor || document.sqlform) {
     Sql.checkSavedQuery();
   }
 });

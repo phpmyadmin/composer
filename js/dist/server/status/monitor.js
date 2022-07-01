@@ -8,12 +8,6 @@ var __webpack_exports__ = {};
  * @requires    js/functions.js
  */
 
-/* global isStorageSupported */
-// js/config.js
-
-/* global codeMirrorEditor:writable */
-// js/functions.js
-
 /* global firstDayOfCalendar, themeImagePath */
 // templates/javascript/variables.twig
 
@@ -142,11 +136,11 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
   $('div.tabLinks').show();
   $('#loadingMonitorIcon').remove(); // Codemirror is loaded on demand so we might need to initialize it
 
-  if (!codeMirrorEditor) {
+  if (!window.codeMirrorEditor) {
     var $elm = $('#sqlquery');
 
-    if ($elm.length > 0 && typeof CodeMirror !== 'undefined') {
-      codeMirrorEditor = CodeMirror.fromTextArea($elm[0], {
+    if ($elm.length > 0 && typeof window.CodeMirror !== 'undefined') {
+      window.codeMirrorEditor = window.CodeMirror.fromTextArea($elm[0], {
         lineNumbers: true,
         matchBrackets: true,
         indentUnit: 4,
@@ -795,7 +789,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
 
         try {
-          if (isStorageSupported('localStorage')) {
+          if (window.Config.isStorageSupported('localStorage')) {
             window.localStorage.monitorCharts = JSON.stringify(json.monitorCharts);
             window.localStorage.monitorSettings = JSON.stringify(json.monitorSettings);
           }
@@ -804,7 +798,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         } catch (err) {
           alert(Messages.strFailedBuildingGrid); // If an exception is thrown, load default again
 
-          if (isStorageSupported('localStorage')) {
+          if (window.Config.isStorageSupported('localStorage')) {
             window.localStorage.removeItem('monitorCharts');
             window.localStorage.removeItem('monitorSettings');
           }
@@ -831,7 +825,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
   $('a[href="#clearMonitorConfig"]').on('click', function (event) {
     event.preventDefault();
 
-    if (isStorageSupported('localStorage')) {
+    if (window.Config.isStorageSupported('localStorage')) {
       window.localStorage.removeItem('monitorCharts');
       window.localStorage.removeItem('monitorSettings');
       window.localStorage.removeItem('monitorVersion');
@@ -1108,7 +1102,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     var i;
     /* Apply default values & config */
 
-    if (isStorageSupported('localStorage')) {
+    if (window.Config.isStorageSupported('localStorage')) {
       if (typeof window.localStorage.monitorCharts !== 'undefined') {
         runtime.charts = JSON.parse(window.localStorage.monitorCharts);
       }
@@ -2087,14 +2081,14 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     var rowData = $(this).parent().data('query');
     var query = rowData.argument || rowData.sql_text;
 
-    if (codeMirrorEditor) {
+    if (window.codeMirrorEditor) {
       // TODO: somehow Functions.sqlPrettyPrint messes up the query, needs be fixed
       // query = Functions.sqlPrettyPrint(query);
-      codeMirrorEditor.setValue(query); // Codemirror is bugged, it doesn't refresh properly sometimes.
+      window.codeMirrorEditor.setValue(query); // Codemirror is bugged, it doesn't refresh properly sometimes.
       // Following lines seem to fix that
 
       setTimeout(function () {
-        codeMirrorEditor.refresh();
+        window.codeMirrorEditor.refresh();
       }, 50);
     } else {
       $('#sqlquery').val(query);
@@ -2123,8 +2117,8 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
         $('#queryAnalyzerDialog').find('div.placeHolder').html('');
 
-        if (codeMirrorEditor) {
-          codeMirrorEditor.setValue('');
+        if (window.codeMirrorEditor) {
+          window.codeMirrorEditor.setValue('');
         } else {
           $('#sqlquery').val('');
         }
@@ -2140,7 +2134,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     $('#queryAnalyzerDialog').find('div.placeHolder').html(Messages.strAnalyzing + ' <img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
     $.post('index.php?route=/server/status/monitor/query', {
       'ajax_request': true,
-      'query': codeMirrorEditor ? codeMirrorEditor.getValue() : $('#sqlquery').val(),
+      'query': window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : $('#sqlquery').val(),
       'database': db,
       'server': window.CommonParams.get('server')
     }, function (responseData) {
@@ -2269,7 +2263,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       gridCopy[key].maxYLabel = elem.maxYLabel;
     });
 
-    if (isStorageSupported('localStorage')) {
+    if (window.Config.isStorageSupported('localStorage')) {
       window.localStorage.monitorCharts = JSON.stringify(gridCopy);
       window.localStorage.monitorSettings = JSON.stringify(monitorSettings);
       window.localStorage.monitorVersion = monitorProtocolVersion;

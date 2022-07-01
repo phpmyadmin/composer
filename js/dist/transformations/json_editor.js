@@ -6,7 +6,7 @@ var __webpack_exports__ = {};
  */
 window.AJAX.registerOnload('transformations/json_editor.js', function () {
   $('textarea.transform_json_editor').each(function () {
-    CodeMirror.fromTextArea(this, {
+    window.CodeMirror.fromTextArea(this, {
       lineNumbers: true,
       matchBrackets: true,
       indentUnit: 4,

@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Navigation */
+
 /**
  * This object handles ajax requests for pages. It also
  * handles the reloading of the main menu and scripts.

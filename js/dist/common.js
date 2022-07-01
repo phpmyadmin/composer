@@ -1,7 +1,6 @@
 var __webpack_exports__ = {};
-$(function () {
-  Functions.checkNumberOfFields();
-});
+/* global Navigation */
+
 /**
  * Holds common parameters such as server, db, table, etc
  *
@@ -10,7 +9,6 @@ $(function () {
  *
  * @test-module CommonParams
  */
-
 window.CommonParams = function () {
   /**
    * @var {Object} params An associative array of key value pairs

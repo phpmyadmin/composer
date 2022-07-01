@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Navigation */
+
 /**
  * Export privileges modal handler
  *
@@ -48,7 +50,7 @@ const EditUserGroup = {
         return;
       }
 
-      const modal = bootstrap.Modal.getInstance(editUserGroupModal);
+      const modal = window.bootstrap.Modal.getInstance(editUserGroupModal);
       const modalBody = editUserGroupModal.querySelector('.modal-body');
       const saveButton = editUserGroupModal.querySelector('#editUserGroupModalSaveButton');
       modalBody.innerHTML = data.message;

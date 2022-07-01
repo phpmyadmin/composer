@@ -2,9 +2,6 @@ var __webpack_exports__ = {};
 /**
  * Functions used in Setup configuration forms
  */
-
-/* global displayErrors, getAllValues, getIdPrefix, validators */
-// js/config.js
 // show this window in top frame
 if (top !== self) {
   window.top.location.href = location;
@@ -107,7 +104,7 @@ function ajaxValidate(parent, id, values) {
         }
       }
 
-      displayErrors(error);
+      window.Config.displayErrors(error);
     },
     complete: function () {
       $parent.removeData('ajax');
@@ -123,7 +120,7 @@ function ajaxValidate(parent, id, values) {
 $(document).on('change', '.autosubmit', function (e) {
   e.target.form.submit();
 });
-$.extend(true, validators, {
+$.extend(true, window.validators, {
   // field validators
   field: {
     /**
@@ -172,7 +169,7 @@ $.extend(true, validators, {
      */
     Server: function (isKeyUp) {
       if (!isKeyUp) {
-        ajaxValidate(this, 'Server', getAllValues());
+        ajaxValidate(this, 'Server', window.Config.getAllValues());
       }
 
       return true;
@@ -187,7 +184,7 @@ $.extend(true, validators, {
      */
     Server_login_options: function (isKeyUp) {
       // eslint-disable-line camelcase
-      return validators.fieldset.Server.apply(this, [isKeyUp]);
+      return window.validators.fieldset.Server.apply(this, [isKeyUp]);
     },
 
     /**
@@ -203,10 +200,10 @@ $.extend(true, validators, {
         return true;
       }
 
-      var prefix = getIdPrefix($(this).find('input'));
+      var prefix = window.Config.getIdPrefix($(this).find('input'));
 
       if ($('#' + prefix + 'pmadb').val() !== '') {
-        ajaxValidate(this, 'Server_pmadb', getAllValues());
+        ajaxValidate(this, 'Server_pmadb', window.Config.getAllValues());
       }
 
       return true;

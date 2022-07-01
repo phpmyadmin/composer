@@ -1,4 +1,6 @@
 var __webpack_exports__ = {};
+/* global Navigation */
+
 /**
  * @fileoverview    function used for index manipulation pages
  * @name            Table Structure
@@ -7,9 +9,6 @@ var __webpack_exports__ = {};
  * @requires    jQueryUI
  * @required    js/functions.js
  */
-
-/* global fulltextIndexes:writable, indexes:writable, primaryIndexes:writable, spatialIndexes:writable, uniqueIndexes:writable */
-// js/functions.js
 var Indexes = {};
 /**
  * Returns the array of indexes based on the index choice
@@ -24,23 +23,23 @@ Indexes.getIndexArray = function (indexChoice) {
 
   switch (indexChoice.toLowerCase()) {
     case 'primary':
-      sourceArray = primaryIndexes;
+      sourceArray = window.primaryIndexes;
       break;
 
     case 'unique':
-      sourceArray = uniqueIndexes;
+      sourceArray = window.uniqueIndexes;
       break;
 
     case 'index':
-      sourceArray = indexes;
+      sourceArray = window.indexes;
       break;
 
     case 'fulltext':
-      sourceArray = fulltextIndexes;
+      sourceArray = window.fulltextIndexes;
       break;
 
     case 'spatial':
-      sourceArray = spatialIndexes;
+      sourceArray = window.spatialIndexes;
       break;
 
     default:
@@ -521,11 +520,11 @@ Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex)
   });
 };
 /**
- * Unbind all event handlers before tearing down a page
+ * @return {function}
  */
 
 
-window.AJAX.registerTeardown('indexes.js', function () {
+Indexes.off = () => function () {
   $(document).off('click', '#save_index_frm');
   $(document).off('click', '#preview_index_frm');
   $(document).off('change', '#select_index_choice');
@@ -535,24 +534,19 @@ window.AJAX.registerTeardown('indexes.js', function () {
   $(document).off('click', '#index_frm input[type=submit]');
   $('body').off('change', 'select[name*="field_key"]');
   $(document).off('click', '.show_index_dialog');
-});
+};
 /**
- * @description <p>Ajax scripts for table index page</p>
- *
- * Actions ajaxified here:
- * <ul>
- * <li>Showing/hiding inputs depending on the index type chosen</li>
- * <li>create/edit/drop indexes</li>
- * </ul>
+ * @return {function}
  */
 
-window.AJAX.registerOnload('indexes.js', function () {
+
+Indexes.on = () => function () {
   // Re-initialize variables.
-  primaryIndexes = [];
-  uniqueIndexes = [];
-  indexes = [];
-  fulltextIndexes = [];
-  spatialIndexes = []; // for table creation form
+  window.primaryIndexes = [];
+  window.uniqueIndexes = [];
+  window.indexes = [];
+  window.fulltextIndexes = [];
+  window.spatialIndexes = []; // for table creation form
 
   var $engineSelector = $('.create_table_form select[name=tbl_storage_engine]');
 
@@ -780,6 +774,6 @@ window.AJAX.registerOnload('indexes.js', function () {
       this.elements['index[Key_name]'].disabled = false;
     }
   });
-});
+};
 
 //# sourceMappingURL=indexes.js.map
