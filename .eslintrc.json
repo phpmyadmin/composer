@@ -15,14 +15,8 @@
         "jquery": true
     },
     "globals": {
-        "bootstrap": "readonly",
-        "CodeMirror": "readonly",
-        "Cookies": "readonly",
         "Functions": "readonly",
-        "Messages": "readonly",
-        "Navigation": "readonly",
-        "OpenLayers": "readonly",
-        "Sql": "readonly"
+        "Messages": "readonly"
     },
     "rules": {
         "valid-jsdoc": ["error", {

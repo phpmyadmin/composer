@@ -1,7 +1,4 @@
-
-$(function () {
-    Functions.checkNumberOfFields();
-});
+/* global Navigation */
 
 /**
  * Holds common parameters such as server, db, table, etc

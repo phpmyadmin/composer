@@ -7,9 +7,7 @@
  * @required    js/functions.js
  */
 
-// eslint-disable-next-line no-unused-vars
-/* global primaryIndexes:writable, indexes:writable, fulltextIndexes:writable, spatialIndexes:writable */ // js/functions.js
-/* global sprintf */ // js/vendor/sprintf.js
+/* global Navigation */
 
 /**
  * AJAX scripts for /table/structure
@@ -57,10 +55,10 @@ window.AJAX.registerTeardown('table/structure.js', function () {
 
 window.AJAX.registerOnload('table/structure.js', function () {
     // Re-initialize variables.
-    primaryIndexes = [];
-    indexes = [];
-    fulltextIndexes = [];
-    spatialIndexes = [];
+    window.primaryIndexes = [];
+    window.indexes = [];
+    window.fulltextIndexes = [];
+    window.spatialIndexes = [];
 
     /**
      *Ajax action for submitting the "Column Change" and "Add Column" form
@@ -155,7 +153,7 @@ window.AJAX.registerOnload('table/structure.js', function () {
 
                 // If Collation is changed, Warn and Confirm
                 if (checkIfConfirmRequired($form)) {
-                    var question = sprintf(
+                    var question = window.sprintf(
                         Messages.strChangeColumnCollation, 'https://wiki.phpmyadmin.net/pma/Garbled_data'
                     );
                     $form.confirm(question, $form.attr('action'), function () {

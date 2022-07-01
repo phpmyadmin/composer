@@ -1,3 +1,5 @@
+/* global Navigation */
+
 window.AJAX.registerTeardown('database/events.js', function () {
     $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
     $(document).off('click', 'a.ajax.export_anchor');
@@ -156,7 +158,7 @@ const DatabaseEvents = {
                 that.buttonOptions[Messages.strGo] = function () {
                     // Move the data from the codemirror editor back to the
                     // textarea, where it can be used in the form submission.
-                    if (typeof CodeMirror !== 'undefined') {
+                    if (typeof window.CodeMirror !== 'undefined') {
                         that.syntaxHiglighter.save();
                     }
                     // Validate editor and submit request, if passed.
