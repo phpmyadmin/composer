@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[31],{
+
+/***/ 35:
+/***/ (function() {
+
 /**
  * @fileoverview    functions used in GIS data editor
  *
@@ -11,8 +15,7 @@ var __webpack_exports__ = {};
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
-// eslint-disable-next-line no-unused-vars
-var gisEditorLoaded = false;
+window.gisEditorLoaded = false;
 /**
  * Closes the GIS data editor and perform necessary clean up work.
  */
@@ -30,10 +33,10 @@ function closeGISEditor() {
 
 function prepareJSVersion() {
   // Change the text on the submit button
-  $('#gis_editor').find('input[name=\'gis_data[save]\']').val(Messages.strCopy).insertAfter($('#gis_data_textarea')).before('<br><br>'); // Add close and cancel links
+  $('#gis_editor').find('input[name=\'gis_data[save]\']').val(window.Messages.strCopy).insertAfter($('#gis_data_textarea')).before('<br><br>'); // Add close and cancel links
 
-  $('#gis_data_editor').prepend('<a class="close_gis_editor" href="#">' + Messages.strClose + '</a>');
-  $('<a class="cancel_gis_editor" href="#"> ' + Messages.strCancel + '</a>').insertAfter($('input[name=\'gis_data[save]\']')); // Remove the unnecessary text
+  $('#gis_data_editor').prepend('<a class="close_gis_editor" href="#">' + window.Messages.strClose + '</a>');
+  $('<a class="cancel_gis_editor" href="#"> ' + window.Messages.strCancel + '</a>').insertAfter($('input[name=\'gis_data[save]\']')); // Remove the unnecessary text
 
   $('div#gis_data_output p').remove(); // Remove 'add' buttons and add links
 
@@ -54,7 +57,7 @@ function prepareJSVersion() {
 
 
 function addDataPoint(pointNumber, prefix) {
-  return '<br>' + Functions.sprintf(Messages.strPointN, pointNumber + 1) + ': ' + '<label for="x">' + Messages.strX + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][x]" value="">' + '<label for="y">' + Messages.strY + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][y]" value="">';
+  return '<br>' + Functions.sprintf(window.Messages.strPointN, pointNumber + 1) + ': ' + '<label for="x">' + window.Messages.strX + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][x]" value="">' + '<label for="y">' + window.Messages.strY + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][y]" value="">';
 }
 /**
  * Initialize the visualization in the GIS data editor.
@@ -80,7 +83,6 @@ function initGISEditorVisualization() {
  * @param inputName name of the input field
  * @param token      token
  */
-// eslint-disable-next-line no-unused-vars
 
 
 function loadJSAndGISEditor(value, field, type, inputName) {
@@ -111,8 +113,10 @@ function loadJSAndGISEditor(value, field, type, inputName) {
 
   script.src = 'js/vendor/openlayers/OpenLayers.js';
   head.appendChild(script);
-  gisEditorLoaded = true;
+  window.gisEditorLoaded = true;
 }
+
+window.loadJSAndGISEditor = loadJSAndGISEditor;
 /**
  * Loads the GIS editor via AJAX
  *
@@ -121,7 +125,6 @@ function loadJSAndGISEditor(value, field, type, inputName) {
  * @param type       geometry type
  * @param inputName name of the input field
  */
-
 
 function loadGISEditor(value, field, type, inputName) {
   var $gisEditor = $('#gis_editor');
@@ -143,11 +146,11 @@ function loadGISEditor(value, field, type, inputName) {
     }
   }, 'json');
 }
+
+window.loadGISEditor = loadGISEditor;
 /**
  * Opens up the dialog for the GIS data editor.
  */
-// eslint-disable-next-line no-unused-vars
-
 
 function openGISEditor() {
   // Center the popup
@@ -173,11 +176,12 @@ function openGISEditor() {
   $background.fadeIn('fast');
   $gisEditor.fadeIn('fast');
 }
+
+window.openGISEditor = openGISEditor;
 /**
  * Prepare and insert the GIS data in Well Known Text format
  * to the input field.
  */
-
 
 function insertDataAndClose() {
   var $form = $('form#gis_data_editor_form');
@@ -306,10 +310,10 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
     var noOfPoints;
 
     if (type === 'MULTILINESTRING') {
-      html += Messages.strLineString + ' ' + (noOfLines + 1) + ':';
+      html += window.Messages.strLineString + ' ' + (noOfLines + 1) + ':';
       noOfPoints = 2;
     } else {
-      html += Messages.strInnerRing + ' ' + noOfLines + ':';
+      html += window.Messages.strInnerRing + ' ' + noOfLines + ':';
       noOfPoints = 4;
     }
 
@@ -319,7 +323,7 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
       html += addDataPoint(i, prefix + '[' + noOfLines + ']');
     }
 
-    html += '<a class="addPoint addJs" name="' + prefix + '[' + noOfLines + '][add_point]" href="#">+ ' + Messages.strAddPoint + '</a><br>';
+    html += '<a class="addPoint addJs" name="' + prefix + '[' + noOfLines + '][add_point]" href="#">+ ' + window.Messages.strAddPoint + '</a><br>';
     $a.before(html);
     $noOfLinesInput.val(noOfLines + 1);
   });
@@ -336,14 +340,14 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
     var $noOfPolygonsInput = $('input[name=\'' + prefix + '[no_of_polygons]' + '\']');
     var noOfPolygons = parseInt($noOfPolygonsInput.val(), 10); // Add the new polygon
 
-    var html = Messages.strPolygon + ' ' + (noOfPolygons + 1) + ':<br>';
-    html += '<input type="hidden" name="' + prefix + '[' + noOfPolygons + '][no_of_lines]" value="1">' + '<br>' + Messages.strOuterRing + ':' + '<input type="hidden" name="' + prefix + '[' + noOfPolygons + '][0][no_of_points]" value="4">';
+    var html = window.Messages.strPolygon + ' ' + (noOfPolygons + 1) + ':<br>';
+    html += '<input type="hidden" name="' + prefix + '[' + noOfPolygons + '][no_of_lines]" value="1">' + '<br>' + window.Messages.strOuterRing + ':' + '<input type="hidden" name="' + prefix + '[' + noOfPolygons + '][0][no_of_points]" value="4">';
 
     for (var i = 0; i < 4; i++) {
       html += addDataPoint(i, prefix + '[' + noOfPolygons + '][0]');
     }
 
-    html += '<a class="addPoint addJs" name="' + prefix + '[' + noOfPolygons + '][0][add_point]" href="#">+ ' + Messages.strAddPoint + '</a><br>' + '<a class="addLine addJs" name="' + prefix + '[' + noOfPolygons + '][add_line]" href="#">+ ' + Messages.strAddInnerRing + '</a><br><br>';
+    html += '<a class="addPoint addJs" name="' + prefix + '[' + noOfPolygons + '][0][add_point]" href="#">+ ' + window.Messages.strAddPoint + '</a><br>' + '<a class="addLine addJs" name="' + prefix + '[' + noOfPolygons + '][add_line]" href="#">+ ' + window.Messages.strAddInnerRing + '</a><br><br>';
     $a.before(html);
     $noOfPolygonsInput.val(noOfPolygons + 1);
   });
@@ -357,10 +361,10 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
 
     var $noOfGeomsInput = $('input[name=\'' + prefix + '[geom_count]' + '\']');
     var noOfGeoms = parseInt($noOfGeomsInput.val(), 10);
-    var html1 = Messages.strGeometry + ' ' + (noOfGeoms + 1) + ':<br>';
+    var html1 = window.Messages.strGeometry + ' ' + (noOfGeoms + 1) + ':<br>';
     var $geomType = $('select[name=\'gis_data[' + (noOfGeoms - 1) + '][gis_type]\']').clone();
     $geomType.attr('name', 'gis_data[' + noOfGeoms + '][gis_type]').val('POINT');
-    var html2 = '<br>' + Messages.strPoint + ' :' + '<label for="x"> ' + Messages.strX + ' </label>' + '<input type="text" name="gis_data[' + noOfGeoms + '][POINT][x]" value="">' + '<label for="y"> ' + Messages.strY + ' </label>' + '<input type="text" name="gis_data[' + noOfGeoms + '][POINT][y]" value="">' + '<br><br>';
+    var html2 = '<br>' + window.Messages.strPoint + ' :' + '<label for="x"> ' + window.Messages.strX + ' </label>' + '<input type="text" name="gis_data[' + noOfGeoms + '][POINT][x]" value="">' + '<label for="y"> ' + window.Messages.strY + ' </label>' + '<input type="text" name="gis_data[' + noOfGeoms + '][POINT][y]" value="">' + '<br><br>';
     $a.before(html1);
     $geomType.insertBefore($a);
     $a.before(html2);
@@ -368,4 +372,12 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(35));
+/******/ }
+]);
 //# sourceMappingURL=gis_data_editor.js.map

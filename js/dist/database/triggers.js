@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[17],{
+
+/***/ 22:
+/***/ (function() {
+
 /* global Navigation */
 window.AJAX.registerTeardown('database/triggers.js', function () {
   $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
@@ -42,7 +46,7 @@ const DatabaseTriggers = {
 
     if ($elm.val() === '') {
       $elm.trigger('focus');
-      alert(Messages.strFormEmpty);
+      alert(window.Messages.strFormEmpty);
       return false;
     }
 
@@ -55,7 +59,7 @@ const DatabaseTriggers = {
         $('textarea[name=item_definition]').last().trigger('focus');
       }
 
-      alert(Messages.strFormEmpty);
+      alert(window.Messages.strFormEmpty);
       return false;
     } // The validation has so far passed, so now
     // we can validate item-specific fields.
@@ -82,7 +86,7 @@ const DatabaseTriggers = {
     if ($this.attr('id') === 'bulkActionExportButton') {
       var combined = {
         success: true,
-        title: Messages.strExport,
+        title: window.Messages.strExport,
         message: '',
         error: ''
       }; // export anchors of all selected rows
@@ -135,7 +139,7 @@ const DatabaseTriggers = {
 
         var buttonOptions = {};
 
-        buttonOptions[Messages.strClose] = function () {
+        buttonOptions[window.Messages.strClose] = function () {
           $(this).dialog('close').remove();
         };
         /**
@@ -195,7 +199,7 @@ const DatabaseTriggers = {
         Functions.ajaxRemoveMessage($msg); // Now define the function that is called when
         // the user presses the "Go" button
 
-        that.buttonOptions[Messages.strGo] = function () {
+        that.buttonOptions[window.Messages.strGo] = function () {
           // Move the data from the codemirror editor back to the
           // textarea, where it can be used in the form submission.
           if (typeof window.CodeMirror !== 'undefined') {
@@ -208,7 +212,7 @@ const DatabaseTriggers = {
              * @var data Form data to be sent in the AJAX request
              */
             var data = $('form.rte_form').last().serialize();
-            $msg = Functions.ajaxShowMessage(Messages.strProcessingRequest);
+            $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
             var url = $('form.rte_form').last().attr('action');
             $.post(url, data, function (data) {
               if (data.success === true) {
@@ -312,7 +316,7 @@ const DatabaseTriggers = {
         }; // end of function that handles the submission of the Editor
 
 
-        that.buttonOptions[Messages.strClose] = function () {
+        that.buttonOptions[window.Messages.strClose] = function () {
           $(this).dialog('close');
         };
         /**
@@ -390,7 +394,7 @@ const DatabaseTriggers = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = Functions.ajaxShowMessage(Messages.strProcessingRequest);
+      var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
       var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
       $.post(url, params, function (data) {
         if (data.success === true) {
@@ -449,12 +453,12 @@ const DatabaseTriggers = {
   },
   dropMultipleDialog: function ($this) {
     // We ask for confirmation here
-    $this.confirm(Messages.strDropRTEitems, '', function () {
+    $this.confirm(window.Messages.strDropRTEitems, '', function () {
       /**
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = Functions.ajaxShowMessage(Messages.strProcessingRequest); // drop anchors of all selected rows
+      var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest); // drop anchors of all selected rows
 
       var dropAnchors = $('input.checkall:checked').parents('tr').find('.drop_anchor');
       var success = true;
@@ -577,4 +581,12 @@ window.AJAX.registerOnload('database/triggers.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(22));
+/******/ }
+]);
 //# sourceMappingURL=triggers.js.map

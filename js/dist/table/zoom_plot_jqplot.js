@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[71],{
+
+/***/ 74:
+/***/ (function() {
+
 // TODO: change the axis
 
 /**
@@ -20,8 +24,8 @@ var __webpack_exports__ = {};
 function displayHelp() {
   var modal = $('#helpModal');
   modal.modal('show');
-  modal.find('.modal-body').first().html(Messages.strDisplayHelp);
-  $('#helpModalLabel').first().html(Messages.strHelpTitle);
+  modal.find('.modal-body').first().html(window.Messages.strDisplayHelp);
+  $('#helpModalLabel').first().html(window.Messages.strHelpTitle);
   return false;
 }
 /**
@@ -249,9 +253,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 
   $('#inputFormSubmitId').on('click', function () {
     if ($('#tableid_0').get(0).selectedIndex === 0 || $('#tableid_1').get(0).selectedIndex === 0) {
-      Functions.ajaxShowMessage(Messages.strInputNull);
+      Functions.ajaxShowMessage(window.Messages.strInputNull);
     } else if (xLabel === yLabel) {
-      Functions.ajaxShowMessage(Messages.strSameInputs);
+      Functions.ajaxShowMessage(window.Messages.strSameInputs);
     }
   });
   /**
@@ -261,14 +265,14 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 
   $('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#zoom_search_form') // don't show it until we have results on-screen
   .hide();
-  $('#togglesearchformlink').html(Messages.strShowSearchCriteria).on('click', function () {
+  $('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
     var $link = $(this);
     $('#zoom_search_form').slideToggle();
 
-    if ($link.text() === Messages.strHideSearchCriteria) {
-      $link.text(Messages.strShowSearchCriteria);
+    if ($link.text() === window.Messages.strHideSearchCriteria) {
+      $link.text(window.Messages.strShowSearchCriteria);
     } else {
-      $link.text(Messages.strHideSearchCriteria);
+      $link.text(window.Messages.strHideSearchCriteria);
     } // avoid default click action
 
 
@@ -417,7 +421,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
   $('#dataPointSaveButton').on('click', function () {
     dataPointSave();
   });
-  $('#dataPointModalLabel').first().html(Messages.strDataPointContent);
+  $('#dataPointModalLabel').first().html(window.Messages.strDataPointContent);
   /**
    * Attach Ajax event handlers for input fields
    * in the dialog. Used to submit the Ajax
@@ -440,7 +444,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 
   if (searchedData !== null) {
     $('#zoom_search_form').slideToggle().hide();
-    $('#togglesearchformlink').text(Messages.strShowSearchCriteria);
+    $('#togglesearchformlink').text(window.Messages.strShowSearchCriteria);
     $('#togglesearchformdiv').show();
     var selectedRow;
     var series = [];
@@ -621,4 +625,12 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(74));
+/******/ }
+]);
 //# sourceMappingURL=zoom_plot_jqplot.js.map

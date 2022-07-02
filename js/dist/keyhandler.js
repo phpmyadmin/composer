@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[37],{
+
+/***/ 41:
+/***/ (function() {
+
 // var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
 let ctrlKeyHistory = 0;
 /**
@@ -164,4 +168,12 @@ const KeyHandlerEvents = {
 };
 window.KeyHandlerEvents = KeyHandlerEvents;
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(41));
+/******/ }
+]);
 //# sourceMappingURL=keyhandler.js.map

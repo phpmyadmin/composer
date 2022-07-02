@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[28],{
+
+/***/ 32:
+/***/ (function() {
+
 /**
  * Functions used in the export tab
  *
@@ -93,7 +97,7 @@ Export.createTemplate = function (name) {
           $(this).prop('selected', true);
         }
       });
-      Functions.ajaxShowMessage(Messages.strTemplateCreated);
+      Functions.ajaxShowMessage(window.Messages.strTemplateCreated);
     } else {
       Functions.ajaxShowMessage(response.error, false);
     }
@@ -141,7 +145,7 @@ Export.loadTemplate = function (id) {
         }
       });
       $('input[name="template_id"]').val(id);
-      Functions.ajaxShowMessage(Messages.strTemplateLoaded);
+      Functions.ajaxShowMessage(window.Messages.strTemplateLoaded);
     } else {
       Functions.ajaxShowMessage(response.error, false);
     }
@@ -168,7 +172,7 @@ Export.updateTemplate = function (id) {
   Functions.ajaxShowMessage();
   $.post('index.php?route=/export/template/update', params, function (response) {
     if (response.success === true) {
-      Functions.ajaxShowMessage(Messages.strTemplateUpdated);
+      Functions.ajaxShowMessage(window.Messages.strTemplateUpdated);
     } else {
       Functions.ajaxShowMessage(response.error, false);
     }
@@ -194,7 +198,7 @@ Export.deleteTemplate = function (id) {
   $.post('index.php?route=/export/template/delete', params, function (response) {
     if (response.success === true) {
       $('#template').find('option[value="' + id + '"]').remove();
-      Functions.ajaxShowMessage(Messages.strTemplateDeleted);
+      Functions.ajaxShowMessage(window.Messages.strTemplateDeleted);
     } else {
       Functions.ajaxShowMessage(response.error, false);
     }
@@ -234,7 +238,7 @@ window.AJAX.registerOnload('export.js', function () {
     var modal = $('#showSqlQueryModal');
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
-      $('#showSqlQueryModalLabel').first().html(Messages.strQuery);
+      $('#showSqlQueryModalLabel').first().html(window.Messages.strQuery);
       Functions.highlightSql(modal);
     });
   });
@@ -713,7 +717,7 @@ Export.checkTimeOut = function (timeLimit) {
       'ajax_request': true
     }, function (data) {
       if (data.message === 'timeout') {
-        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + Messages.strTimeOutError + '</div>', false);
+        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
       }
     });
   }, limit * 1000);
@@ -905,14 +909,14 @@ window.AJAX.registerOnload('export.js', function () {
   $('#db_alias_button').on('click', function (e) {
     e.preventDefault();
     var db = $('#db_alias_select').val();
-    Export.addAlias(Messages.strAliasDatabase, db, 'aliases[' + db + '][alias]', $('#db_alias_name').val());
+    Export.addAlias(window.Messages.strAliasDatabase, db, 'aliases[' + db + '][alias]', $('#db_alias_name').val());
     $('#db_alias_name').val('');
   });
   $('#table_alias_button').on('click', function (e) {
     e.preventDefault();
     var db = $('#db_alias_select').val();
     var table = $('#table_alias_select').val();
-    Export.addAlias(Messages.strAliasTable, db + '.' + table, 'aliases[' + db + '][tables][' + table + '][alias]', $('#table_alias_name').val());
+    Export.addAlias(window.Messages.strAliasTable, db + '.' + table, 'aliases[' + db + '][tables][' + table + '][alias]', $('#table_alias_name').val());
     $('#table_alias_name').val('');
   });
   $('#column_alias_button').on('click', function (e) {
@@ -920,7 +924,7 @@ window.AJAX.registerOnload('export.js', function () {
     var db = $('#db_alias_select').val();
     var table = $('#table_alias_select').val();
     var column = $('#column_alias_select').val();
-    Export.addAlias(Messages.strAliasColumn, db + '.' + table + '.' + column, 'aliases[' + db + '][tables][' + table + '][colums][' + column + ']', $('#column_alias_name').val());
+    Export.addAlias(window.Messages.strAliasColumn, db + '.' + table + '.' + column, 'aliases[' + db + '][tables][' + table + '][colums][' + column + ']', $('#column_alias_name').val());
     $('#column_alias_name').val('');
   });
 
@@ -946,4 +950,12 @@ window.AJAX.registerOnload('export.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(32));
+/******/ }
+]);
 //# sourceMappingURL=export.js.map

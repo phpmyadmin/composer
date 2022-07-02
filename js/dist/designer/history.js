@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[20],{
+
+/***/ 24:
+/***/ (function() {
+
 /**
  * @fileoverview    function used in this file builds history tab and generates query.
  *
@@ -6,15 +10,10 @@ var __webpack_exports__ = {};
  * @requires    move.js
  */
 
-/* global contr */
-// js/designer/init.js
-
-/* global fromArray:writable */
-// js/designer/move.js
-
 /* global themeImagePath */
 // templates/javascript/variables.twig
 var DesignerHistory = {};
+window.DesignerHistory = DesignerHistory;
 var historyArray = []; // Global array to store history objects
 
 var selectField = []; // Global array to store information for columns which are used in select clause
@@ -114,14 +113,14 @@ DesignerHistory.display = function (init, finit) {
         str += '<img src="' + themeImagePath + 'designer/and_icon.png" onclick="DesignerHistory.andOr(' + i + ')" title="AND"></td>';
       }
 
-      str += '<td style="padding-left: 5px;" class="text-end">' + Functions.getImage('b_sbrowse', Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + $('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
+      str += '<td style="padding-left: 5px;" class="text-end">' + Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + $('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
 
       if (historyArray[i].getType() === 'GroupBy' || historyArray[i].getType() === 'OrderBy') {
         var detailDescGroupBy = $('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       } else {
         var detailDesc = $('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + Functions.getImage('b_edit', Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + Functions.getImage('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       }
 
       str += '</tr></thead>';
@@ -169,11 +168,11 @@ DesignerHistory.andOr = function (index) {
 
 
 DesignerHistory.historyDelete = function (index) {
-  var fromArrayLength = fromArray.length;
+  var fromArrayLength = window.fromArray.length;
 
   for (var k = 0; k < fromArrayLength; k++) {
-    if (fromArray[k] === historyArray[index].getTab()) {
-      fromArray.splice(k, 1);
+    if (window.fromArray[k] === historyArray[index].getTab()) {
+      window.fromArray.splice(k, 1);
       break;
     }
   }
@@ -737,7 +736,7 @@ DesignerHistory.queryFrom = function () {
   var quer = '';
   var parts = [];
   var tArray = [];
-  tArray = fromArray;
+  tArray = window.fromArray;
   var K = 0;
   var k;
   var key;
@@ -749,36 +748,36 @@ DesignerHistory.queryFrom = function () {
   var historyArrayLength = historyArray.length;
 
   for (i = 0; i < historyArrayLength; i++) {
-    fromArray.push(historyArray[i].getTab());
+    window.fromArray.push(historyArray[i].getTab());
   }
 
-  fromArray = DesignerHistory.unique(fromArray);
-  tabLeft = fromArray;
+  window.fromArray = DesignerHistory.unique(window.fromArray);
+  tabLeft = window.fromArray;
   temp = tabLeft.shift();
   quer = '`' + temp + '`';
   tabUsed.push(temp); // if master table (key2) matches with tab used get all keys and check if tab_left matches
   // after this check if master table (key2) matches with tab left then check if any foreign matches with master .
 
   for (i = 0; i < 2; i++) {
-    for (K in contr) {
-      for (key in contr[K]) {
+    for (K in window.contr) {
+      for (key in window.contr[K]) {
         // contr name
-        for (key2 in contr[K][key]) {
+        for (key2 in window.contr[K][key]) {
           // table name
           parts = key2.split('.');
 
           if (DesignerHistory.found(tabUsed, parts[1]) > 0) {
-            for (key3 in contr[K][key][key2]) {
-              parts1 = contr[K][key][key2][key3][0].split('.');
+            for (key3 in window.contr[K][key][key2]) {
+              parts1 = window.contr[K][key][key2][key3][0].split('.');
 
               if (DesignerHistory.found(tabLeft, parts1[1]) > 0) {
                 if (DesignerHistory.found(constraintsAdded, key) > 0) {
                   query += ' AND ' + '`' + parts[1] + '`.`' + key3 + '` = ';
-                  query += '`' + parts1[1] + '`.`' + contr[K][key][key2][key3][1] + '` ';
+                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` ';
                 } else {
                   query += '\n' + 'LEFT JOIN ';
                   query += '`' + parts[1] + '` ON ';
-                  query += '`' + parts1[1] + '`.`' + contr[K][key][key2][key3][1] + '` = ';
+                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` = ';
                   query += '`' + parts[1] + '`.`' + key3 + '` ';
                   constraintsAdded.push(key);
                 }
@@ -797,24 +796,24 @@ DesignerHistory.queryFrom = function () {
     tabLeft = DesignerHistory.removeArray(tTabLeft, tabLeft);
     tTabLeft = [];
 
-    for (K in contr) {
-      for (key in contr[K]) {
-        for (key2 in contr[K][key]) {
+    for (K in window.contr) {
+      for (key in window.contr[K]) {
+        for (key2 in window.contr[K][key]) {
           // table name
           parts = key2.split('.');
 
           if (DesignerHistory.found(tabLeft, parts[1]) > 0) {
-            for (key3 in contr[K][key][key2]) {
-              parts1 = contr[K][key][key2][key3][0].split('.');
+            for (key3 in window.contr[K][key][key2]) {
+              parts1 = window.contr[K][key][key2][key3][0].split('.');
 
               if (DesignerHistory.found(tabUsed, parts1[1]) > 0) {
                 if (DesignerHistory.found(constraintsAdded, key) > 0) {
                   query += ' AND ' + '`' + parts[1] + '`.`' + key3 + '` = ';
-                  query += '`' + parts1[1] + '`.`' + contr[K][key][key2][key3][1] + '` ';
+                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` ';
                 } else {
                   query += '\n' + 'LEFT JOIN ';
                   query += '`' + parts[1] + '` ON ';
-                  query += '`' + parts1[1] + '`.`' + contr[K][key][key2][key3][1] + '` = ';
+                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` = ';
                   query += '`' + parts[1] + '`.`' + key3 + '` ';
                   constraintsAdded.push(key);
                 }
@@ -838,7 +837,7 @@ DesignerHistory.queryFrom = function () {
   }
 
   query = quer + query;
-  fromArray = tArray;
+  window.fromArray = tArray;
   return query;
 };
 /**
@@ -963,4 +962,12 @@ window.AJAX.registerOnload('designer/history.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(24));
+/******/ }
+]);
 //# sourceMappingURL=history.js.map

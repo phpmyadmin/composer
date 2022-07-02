@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[61],{
+
+/***/ 64:
+/***/ (function() {
+
 /**
  * @fileoverview    functions used wherever an sql query form is used
  *
@@ -10,12 +14,10 @@ var __webpack_exports__ = {};
 
 /* global Navigation */
 
-/* global makeGrid */
-// js/makegrid.js
-
 /* global themeImagePath */
 // templates/javascript/variables.twig
 var Sql = {};
+window.Sql = Sql;
 /**
  * decode a string URL_encoded
  *
@@ -231,7 +233,7 @@ const handleSimulateQueryButton = function () {
 
   if (updateRegExp.test(query) || deleteRegExp.test(query)) {
     if (!$simulateDml.length) {
-      $('#button_submit_query').before('<input type="button" id="simulate_dml"' + 'tabindex="199" class="btn btn-primary" value="' + Messages.strSimulateDML + '">');
+      $('#button_submit_query').before('<input type="button" id="simulate_dml"' + 'tabindex="199" class="btn btn-primary" value="' + window.Messages.strSimulateDML + '">');
     }
   } else {
     if ($simulateDml.length) {
@@ -291,7 +293,7 @@ const insertQuery = function (queryType) {
     return;
   } else if (queryType === 'format') {
     if (window.codeMirrorEditor) {
-      $('#querymessage').html(Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
+      $('#querymessage').html(window.Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
       var params = {
         'ajax_request': true,
         'sql': window.codeMirrorEditor.getValue(),
@@ -335,7 +337,7 @@ const insertQuery = function (queryType) {
         path: window.CommonParams.get('rootPath')
       }));
     } else {
-      Functions.ajaxShowMessage(Messages.strNoAutoSavedQuery);
+      Functions.ajaxShowMessage(window.Messages.strNoAutoSavedQuery);
     }
 
     return;
@@ -529,7 +531,7 @@ window.AJAX.registerOnload('sql.js', function () {
 
   $(document).on('click', 'a.delete_row.ajax', function (e) {
     e.preventDefault();
-    var question = Functions.sprintf(Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
+    var question = Functions.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
     var $link = $(this);
     $link.confirm(question, $link.attr('href'), function (url) {
       Functions.ajaxShowMessage();
@@ -653,7 +655,7 @@ window.AJAX.registerOnload('sql.js', function () {
 
   $(document).on('makegrid', '.sqlqueryresults', function () {
     $('.table_results').each(function () {
-      makeGrid(this);
+      window.makeGrid(this);
     });
   });
   /**
@@ -665,7 +667,7 @@ window.AJAX.registerOnload('sql.js', function () {
   // do not add this link more than once
 
   if (!$('#sqlqueryform').find('button').is('#togglequerybox')) {
-    $('<button class="btn btn-secondary" id="togglequerybox"></button>').html(Messages.strHideQueryBox).appendTo('#sqlqueryform') // initially hidden because at this point, nothing else
+    $('<button class="btn btn-secondary" id="togglequerybox"></button>').html(window.Messages.strHideQueryBox).appendTo('#sqlqueryform') // initially hidden because at this point, nothing else
     // appears under the link
     .hide(); // Attach the toggling of the query box visibility to a click
 
@@ -673,14 +675,14 @@ window.AJAX.registerOnload('sql.js', function () {
       var $link = $(this);
       $link.siblings().slideToggle('fast');
 
-      if ($link.text() === Messages.strHideQueryBox) {
-        $link.text(Messages.strShowQueryBox); // cheap trick to add a spacer between the menu tabs
+      if ($link.text() === window.Messages.strHideQueryBox) {
+        $link.text(window.Messages.strShowQueryBox); // cheap trick to add a spacer between the menu tabs
         // and "Show query box"; feel free to improve!
 
         $('#togglequerybox_spacer').remove();
         $link.before('<br id="togglequerybox_spacer">');
       } else {
-        $link.text(Messages.strHideQueryBox);
+        $link.text(window.Messages.strHideQueryBox);
       } // avoid default click action
 
 
@@ -739,7 +741,7 @@ window.AJAX.registerOnload('sql.js', function () {
 
     for (var i = 1; i <= varCount; i++) {
       $varDiv.append($('<div class="mb-3">'));
-      $varDiv.append($('<label for="bookmarkVariable' + i + '">' + Functions.sprintf(Messages.strBookmarkVariable, i) + '</label>'));
+      $varDiv.append($('<label for="bookmarkVariable' + i + '">' + Functions.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
       $varDiv.append($('<input class="form-control" type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmarkVariable' + i + '">'));
       $varDiv.append($('</div>'));
     }
@@ -950,7 +952,7 @@ window.AJAX.registerOnload('sql.js', function () {
       // already showing all rows
       Sql.submitShowAllForm();
     } else {
-      $form.confirm(Messages.strShowAllRowsWarning, $form.attr('action'), function () {
+      $form.confirm(window.Messages.strShowAllRowsWarning, $form.attr('action'), function () {
         Sql.submitShowAllForm();
       });
     }
@@ -975,7 +977,7 @@ window.AJAX.registerOnload('sql.js', function () {
     }
 
     if (query.length === 0) {
-      alert(Messages.strFormEmpty);
+      alert(window.Messages.strFormEmpty);
       $('#sqlquery').trigger('focus');
       return false;
     }
@@ -1001,7 +1003,7 @@ window.AJAX.registerOnload('sql.js', function () {
             var len = response.sql_data.length;
 
             for (var i = 0; i < len; i++) {
-              dialogContent += '<strong>' + Messages.strSQLQuery + '</strong>' + response.sql_data[i].sql_query + Messages.strMatchedRows + ' <a href="' + response.sql_data[i].matched_rows_url + '">' + response.sql_data[i].matched_rows + '</a><br>';
+              dialogContent += '<strong>' + window.Messages.strSQLQuery + '</strong>' + response.sql_data[i].sql_query + window.Messages.strMatchedRows + ' <a href="' + response.sql_data[i].matched_rows_url + '">' + response.sql_data[i].matched_rows + '</a><br>';
 
               if (i < len - 1) {
                 dialogContent += '<hr>';
@@ -1024,7 +1026,7 @@ window.AJAX.registerOnload('sql.js', function () {
         }
       },
       error: function () {
-        Functions.ajaxShowMessage(Messages.strErrorProcessingRequest);
+        Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
       }
     });
   });
@@ -1061,8 +1063,8 @@ window.AJAX.registerOnload('sql.js', function () {
   });
   $(document).on('submit', '.maxRowsForm', function () {
     var unlimNumRows = $(this).find('input[name="unlim_num_rows"]').val();
-    var maxRowsCheck = Functions.checkFormElementInRange(this, 'session_max_rows', Messages.strNotValidRowNumber, 1);
-    var posCheck = Functions.checkFormElementInRange(this, 'pos', Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
+    var maxRowsCheck = Functions.checkFormElementInRange(this, 'session_max_rows', window.Messages.strNotValidRowNumber, 1);
+    var posCheck = Functions.checkFormElementInRange(this, 'pos', window.Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
     return maxRowsCheck && posCheck;
   });
   $('#insertBtn').on('click', function () {
@@ -1136,7 +1138,7 @@ Sql.browseForeignDialog = function ($thisA) {
   $.post($thisA.attr('href'), params, function (data) {
     // Creates browse foreign value dialog
     $dialog = $('<div>').append(data.message).dialog({
-      title: Messages.strBrowseForeignValues,
+      title: window.Messages.strBrowseForeignValues,
       width: Math.min($(window).width() - 100, 700),
       maxHeight: $(window).height() - 100,
       dialogClass: 'browse_foreign_modal',
@@ -1219,11 +1221,11 @@ Sql.checkSavedQuery = function () {
   var key = Sql.getAutoSavedKey();
 
   if (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
-    Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
+    Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
   } else if (window.Cookies.get(key, {
     path: window.CommonParams.get('rootPath')
   })) {
-    Functions.ajaxShowMessage(Messages.strPreviousSaveQuery);
+    Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
   }
 };
 
@@ -1323,4 +1325,12 @@ window.AJAX.registerOnload('sql.js', function () {
   Sql.initProfilingTables();
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(64));
+/******/ }
+]);
 //# sourceMappingURL=sql.js.map

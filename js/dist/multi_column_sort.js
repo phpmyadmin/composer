@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[41],{
+
+/***/ 45:
+/***/ (function() {
+
 /**
  * @fileoverview    Implements the shiftkey + click remove column
  *                  from order by clause functionality
@@ -31,4 +35,12 @@ window.AJAX.registerTeardown('keyhandler.js', function () {
   $(document).off('click', 'th.draggable.column_heading.pointer.marker a');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(45));
+/******/ }
+]);
 //# sourceMappingURL=multi_column_sort.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[40],{
+
+/***/ 44:
+/***/ (function() {
+
 /**
  * Handles the resizing of a menu according to the available screen width
  *
@@ -41,7 +45,7 @@ var __webpack_exports__ = {};
       'data-bs-toggle': 'dropdown',
       'aria-haspopup': 'true',
       'aria-expanded': 'false'
-    }).text(Messages.strMore);
+    }).text(window.Messages.strMore);
     var img = $container.find('li img');
 
     if (img.length) {
@@ -208,4 +212,12 @@ var __webpack_exports__ = {};
   };
 })(jQuery);
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(44));
+/******/ }
+]);
 //# sourceMappingURL=menu_resizer.js.map

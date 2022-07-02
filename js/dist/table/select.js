@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[68],{
+
+/***/ 71:
+/***/ (function() {
+
 /**
  * @fileoverview JavaScript functions used on /table/search
  *
@@ -9,7 +13,7 @@ var __webpack_exports__ = {};
 /* global changeValueFieldType, verifyAfterSearchFieldChange */
 // js/table/change.js
 
-/* global openGISEditor, gisEditorLoaded, loadJSAndGISEditor, loadGISEditor */
+/* global openGISEditor, loadJSAndGISEditor, loadGISEditor */
 // js/gis_data_editor.js
 var TableSelect = {};
 /**
@@ -55,14 +59,14 @@ window.AJAX.registerOnload('table/select.js', function () {
    */
   $('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#tbl_search_form') // don't show it until we have results on-screen
   .hide();
-  $('#togglesearchformlink').html(Messages.strShowSearchCriteria).on('click', function () {
+  $('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
     var $link = $(this);
     $('#tbl_search_form').slideToggle();
 
-    if ($link.text() === Messages.strHideSearchCriteria) {
-      $link.text(Messages.strShowSearchCriteria);
+    if ($link.text() === window.Messages.strHideSearchCriteria) {
+      $link.text(window.Messages.strShowSearchCriteria);
     } else {
-      $link.text(Messages.strHideSearchCriteria);
+      $link.text(window.Messages.strHideSearchCriteria);
     } // avoid default click action
 
 
@@ -87,7 +91,7 @@ window.AJAX.registerOnload('table/select.js', function () {
     event.preventDefault(); // empty previous search results while we are waiting for new results
 
     $('#sqlqueryresultsouter').empty();
-    var $msgbox = Functions.ajaxShowMessage(Messages.strSearching, false);
+    var $msgbox = Functions.ajaxShowMessage(window.Messages.strSearching, false);
     Functions.prepareForAjaxRequest($searchForm);
     var values = {};
     $searchForm.find(':input').each(function () {
@@ -147,7 +151,7 @@ window.AJAX.registerOnload('table/select.js', function () {
         $('#tbl_search_form') // workaround for bug #3168569 - Issue on toggling the "Hide search criteria" in chrome.
         .slideToggle().hide();
         $('#togglesearchformlink') // always start with the Show message
-        .text(Messages.strShowSearchCriteria);
+        .text(window.Messages.strShowSearchCriteria);
         $('#togglesearchformdiv') // now it's time to show the div containing the link
         .show();
         $('html, body').animate({
@@ -210,7 +214,7 @@ window.AJAX.registerOnload('table/select.js', function () {
 
     openGISEditor();
 
-    if (!gisEditorLoaded) {
+    if (!window.gisEditorLoaded) {
       loadJSAndGISEditor(value, field, type, inputName);
     } else {
       loadGISEditor(value, field, type, inputName);
@@ -249,9 +253,9 @@ window.AJAX.registerOnload('table/select.js', function () {
 
           if (response.success) {
             // Get the column min value.
-            var min = response.column_data.min ? '(' + Messages.strColumnMin + ' ' + response.column_data.min + ')' : ''; // Get the column max value.
+            var min = response.column_data.min ? '(' + window.Messages.strColumnMin + ' ' + response.column_data.min + ')' : ''; // Get the column max value.
 
-            var max = response.column_data.max ? '(' + Messages.strColumnMax + ' ' + response.column_data.max + ')' : '';
+            var max = response.column_data.max ? '(' + window.Messages.strColumnMax + ' ' + response.column_data.max + ')' : '';
             $('#rangeSearchModal').modal('show');
             $('#rangeSearchLegend').first().html(operator);
             $('#rangeSearchMin').first().text(min);
@@ -301,7 +305,7 @@ window.AJAX.registerOnload('table/select.js', function () {
           }
         },
         error: function () {
-          Functions.ajaxShowMessage(Messages.strErrorProcessingRequest);
+          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
         }
       });
     }
@@ -310,4 +314,12 @@ window.AJAX.registerOnload('table/select.js', function () {
   $('.jsresponsive').css('max-width', windowWidth - 69 + 'px');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(71));
+/******/ }
+]);
 //# sourceMappingURL=select.js.map

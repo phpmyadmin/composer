@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[38],{
+
+/***/ 42:
+/***/ (function() {
+
 /* global Indexes */
 
 /* global Navigation */
@@ -30,4 +34,12 @@ $(() => Functions.checkNumberOfFields());
 window.AJAX.registerTeardown('page_settings.js', window.PageSettings.off());
 window.AJAX.registerOnload('page_settings.js', window.PageSettings.on());
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(42));
+/******/ }
+]);
 //# sourceMappingURL=main.js.map

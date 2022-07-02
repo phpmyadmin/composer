@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[9],{
+
+/***/ 14:
+/***/ (function() {
+
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -9,9 +13,6 @@ var __webpack_exports__ = {};
  * @requires    js/database/query_generator.js
  *
  */
-
-/* global generateFromBlock, generateWhereBlock */
-// js/database/query_generator.js
 
 /**
  * js file for handling AJAX and other events in /database/multi-table-query
@@ -109,12 +110,12 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
     }
 
     query += '\nFROM ';
-    query += generateFromBlock(tableAliases, foreignKeys);
+    query += window.generateFromBlock(tableAliases, foreignKeys);
     var $criteriaColCount = $('.criteria_col:checked').length;
 
     if ($criteriaColCount > 0) {
       query += '\nWHERE ';
-      query += generateWhereBlock();
+      query += window.generateWhereBlock();
     }
 
     query += ';';
@@ -124,7 +125,7 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
     var query = editor.getDoc().getValue(); // Verifying that the query is not empty
 
     if (query === '') {
-      Functions.ajaxShowMessage(Messages.strEmptyQuery, false, 'error');
+      Functions.ajaxShowMessage(window.Messages.strEmptyQuery, false, 'error');
       return;
     }
 
@@ -223,4 +224,12 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
   }
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(14));
+/******/ }
+]);
 //# sourceMappingURL=multi_table_query.js.map

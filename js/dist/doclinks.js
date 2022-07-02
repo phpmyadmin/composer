@@ -1,8 +1,11 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[25],{
+
+/***/ 29:
+/***/ (function() {
+
 /**
  * Definition of links to MySQL documentation.
  */
-// eslint-disable-next-line no-unused-vars
 var mysqlDocKeyword = {
   /* Multi word */
   'CHARACTER SET': ['charset'],
@@ -329,8 +332,8 @@ var mysqlDocKeyword = {
   'NOT_REGEXP': ['regexp', 'operator_not-regexp'],
   'COUNT_DISTINCT': ['aggregate-functions', 'function_count-distinct'],
   'NOT_IN': ['comparison-operators', 'function_not-in']
-}; // eslint-disable-next-line no-unused-vars
-
+};
+window.mysqlDocKeyword = mysqlDocKeyword;
 var mysqlDocBuiltin = {
   'TINYINT': ['numeric-types'],
   'SMALLINT': ['numeric-types'],
@@ -364,5 +367,14 @@ var mysqlDocBuiltin = {
   'ENUM': ['string-types'],
   'SET': ['string-types']
 };
+window.mysqlDocBuiltin = mysqlDocBuiltin;
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(29));
+/******/ }
+]);
 //# sourceMappingURL=doclinks.js.map

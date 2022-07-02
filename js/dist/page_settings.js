@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[45],{
+
+/***/ 49:
+/***/ (function() {
+
 /**
  * @fileoverview    function used for page-related settings
  * @name            Page-related settings
@@ -47,4 +51,12 @@ window.PageSettings.on = () => function () {
   $('#pma_navigation_settings_icon').on('click', showNaviSettings);
 };
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(49));
+/******/ }
+]);
 //# sourceMappingURL=page_settings.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[1],[
+/* 0 */,
+/* 1 */
+/***/ (function() {
+
 /**
  * Chart type enumerations
  */
@@ -12,6 +16,7 @@ var ChartType = {
   TIMELINE: 'timeline',
   SCATTER: 'scatter'
 };
+window.ChartType = ChartType;
 /**
  * Column type enumeration
  */
@@ -22,6 +27,7 @@ var ColumnType = {
   BOOLEAN: 'boolean',
   DATE: 'date'
 };
+window.ColumnType = ColumnType;
 /**
  * Abstract chart factory which defines the contract for chart factories
  */
@@ -176,7 +182,6 @@ ScatterChart.prototype.validateColumns = function (dataTable) {
 /**
  * The data table contains column information and data for the chart.
  */
-// eslint-disable-next-line no-unused-vars
 
 
 var DataTable = function () {
@@ -223,6 +228,8 @@ var DataTable = function () {
     }
   };
 };
+
+window.DataTable = DataTable;
 /** *****************************************************************************
  * JQPlot specific code
  ******************************************************************************/
@@ -233,7 +240,6 @@ var DataTable = function () {
  * @param elementId
  *            id of the div element the chart is drawn in
  */
-
 
 var JQPlotChart = function (elementId) {
   Chart.call(this, elementId);
@@ -764,4 +770,13 @@ JQPlotChartFactory.prototype.createChart = function (type, elementId) {
   return chart;
 };
 
+window.JQPlotChartFactory = JQPlotChartFactory;
+
+/***/ })
+],
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(1));
+/******/ }
+]);
 //# sourceMappingURL=chart.js.map

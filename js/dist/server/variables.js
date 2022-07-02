@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[57],{
+
+/***/ 60:
+/***/ (function() {
+
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication
@@ -41,7 +45,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
     $myEditLink.remove(); // remove edit link
 
     $mySaveLink.on('click', function () {
-      var $msgbox = Functions.ajaxShowMessage(Messages.strProcessingRequest);
+      var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
       $.post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
         'ajax_request': true,
         'server': window.CommonParams.get('server'),
@@ -52,7 +56,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
           Functions.ajaxRemoveMessage($msgbox);
         } else {
           if (data.error === '') {
-            Functions.ajaxShowMessage(Messages.strRequestFailed, false);
+            Functions.ajaxShowMessage(window.Messages.strRequestFailed, false);
           } else {
             Functions.ajaxShowMessage(data.error, false);
           }
@@ -102,4 +106,12 @@ window.AJAX.registerOnload('server/variables.js', function () {
   }
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(60));
+/******/ }
+]);
 //# sourceMappingURL=variables.js.map

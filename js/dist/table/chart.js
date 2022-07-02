@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[63],{
+
+/***/ 66:
+/***/ (function() {
+
 /* global ColumnType, DataTable, JQPlotChartFactory */
 // js/chart.js
 var chartData = {};
@@ -245,7 +249,7 @@ function onDataSeriesChange() {
       currentSettings.type = 'line';
     }
 
-    yAxisTitle = Messages.strYValues;
+    yAxisTitle = window.Messages.strYValues;
   }
 
   $('#yAxisLabelInput').val(yAxisTitle);
@@ -432,4 +436,12 @@ window.AJAX.registerOnload('table/chart.js', function () {
   $('#tblchartform').trigger('submit');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(66));
+/******/ }
+]);
 //# sourceMappingURL=chart.js.map

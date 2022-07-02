@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[59],{
+
+/***/ 62:
+/***/ (function() {
+
 /**
  * Functions used in Setup configuration forms
  */
@@ -244,4 +248,12 @@ $(function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(62));
+/******/ }
+]);
 //# sourceMappingURL=scripts.js.map

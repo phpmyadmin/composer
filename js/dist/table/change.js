@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[62],{
+
+/***/ 65:
+/***/ (function() {
+
 /**
  * @fileoverview    function used in table data manipulation pages
  *
@@ -11,7 +15,7 @@ var __webpack_exports__ = {};
 /* global extendingValidatorMessages */
 // templates/javascript/variables.twig
 
-/* global openGISEditor, gisEditorLoaded, loadJSAndGISEditor, loadGISEditor */
+/* global openGISEditor, loadJSAndGISEditor, loadGISEditor */
 // js/gis_data_editor.js
 
 /**
@@ -200,7 +204,7 @@ function verifyAfterSearchFieldChange(index, searchFormId) {
 
       jQuery.validator.addMethod('validationFunctionForMultipleInt', function (value) {
         return value.match(/^(?:(?:\d\s*)|\s*)+(?:,\s*\d+)*$/i) !== null;
-      }, Messages.strEnterValidNumber);
+      }, window.Messages.strEnterValidNumber);
       validateMultipleIntField($thisInput, true);
     } else {
       $(searchFormId).validate({
@@ -216,13 +220,14 @@ function verifyAfterSearchFieldChange(index, searchFormId) {
     $thisInput.valid();
   }
 }
+
+window.verifyAfterSearchFieldChange = verifyAfterSearchFieldChange;
 /**
  * Validate the an input contains multiple int values
  * @param {jQuery} jqueryInput the Jquery object
  * @param {boolean} returnValueIfFine the value to return if the validator passes
  * @return {void}
  */
-
 
 function validateMultipleIntField(jqueryInput, returnValueIfFine) {
   // removing previous rules
@@ -292,7 +297,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
   } // To generate the textbox that can take the salt
 
 
-  var newSaltBox = '<br><input type=text name=salt[multi_edit][' + multiEdit + '][' + urlField + ']' + ' id=salt_' + target.id + ' placeholder=\'' + Messages.strEncryptionKey + '\'>'; // If encrypting or decrypting functions that take salt as input is selected append the new textbox for salt
+  var newSaltBox = '<br><input type=text name=salt[multi_edit][' + multiEdit + '][' + urlField + ']' + ' id=salt_' + target.id + ' placeholder=\'' + window.Messages.strEncryptionKey + '\'>'; // If encrypting or decrypting functions that take salt as input is selected append the new textbox for salt
 
   if (target.value === 'AES_ENCRYPT' || target.value === 'AES_DECRYPT' || target.value === 'DES_ENCRYPT' || target.value === 'DES_DECRYPT' || target.value === 'ENCRYPT') {
     if (!$('#salt_' + target.id).length) {
@@ -332,7 +337,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
 
   if (target.value === 'HEX' && theType.startsWith('int')) {
     // Add note when HEX function is selected on a int
-    var newHexInfo = '<br><p id="note' + target.id + '">' + Messages.HexConversionInfo + '</p>';
+    var newHexInfo = '<br><p id="note' + target.id + '">' + window.Messages.HexConversionInfo + '</p>';
 
     if (!$('#note' + target.id).length) {
       $thisInput.after(newHexInfo);
@@ -415,12 +420,13 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     $thisInput.data('rulesadded', null);
   }
 }
+
+window.verificationsAfterFieldChange = verificationsAfterFieldChange;
 /* End of fields validation*/
 
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 
 window.AJAX.registerTeardown('table/change.js', function () {
   $(document).off('click', 'span.open_gis_editor');
@@ -519,7 +525,7 @@ window.AJAX.registerOnload('table/change.js', function () {
     var inputName = $span.parent('td').children('input[type=\'text\']').attr('name');
     openGISEditor();
 
-    if (!gisEditorLoaded) {
+    if (!window.gisEditorLoaded) {
       loadJSAndGISEditor(value, field, type, inputName);
     } else {
       loadGISEditor(value, field, type, inputName);
@@ -750,7 +756,7 @@ function addNewContinueInsertionFields(event) {
       }); // Insert/Clone the ignore checkboxes
 
       if (currRows === 1) {
-        $('<input id="insert_ignore_1" type="checkbox" name="insert_ignore_1" checked="checked">').insertBefore($('table.insertRowTable').last()).after('<label for="insert_ignore_1">' + Messages.strIgnore + '</label>');
+        $('<input id="insert_ignore_1" type="checkbox" name="insert_ignore_1" checked="checked">').insertBefore($('table.insertRowTable').last()).after('<label for="insert_ignore_1">' + window.Messages.strIgnore + '</label>');
       } else {
         /**
          * @var $last_checkbox   Object reference to the last checkbox in #insertForm
@@ -798,7 +804,7 @@ function addNewContinueInsertionFields(event) {
      */
     var checkLock = jQuery.isEmptyObject(window.AJAX.lockedTargets);
 
-    if (checkLock || confirm(Messages.strConfirmRowChange) === true) {
+    if (checkLock || confirm(window.Messages.strConfirmRowChange) === true) {
       while (currRows > targetRows) {
         $('input[id^=insert_ignore]').last().nextUntil('fieldset').addBack().remove();
         currRows--;
@@ -810,8 +816,7 @@ function addNewContinueInsertionFields(event) {
 
 
   Functions.addDateTimePicker();
-} // eslint-disable-next-line no-unused-vars
-
+}
 
 function changeValueFieldType(elem, searchIndex) {
   var fieldsValue = $('input#fieldID_' + searchIndex);
@@ -836,4 +841,14 @@ function changeValueFieldType(elem, searchIndex) {
   }
 }
 
+window.changeValueFieldType = changeValueFieldType;
+
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(65));
+/******/ }
+]);
 //# sourceMappingURL=change.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[36],{
+
+/***/ 40:
+/***/ (function() {
+
 /**
  * This file is internal to phpMyAdmin.
  * @license see the main phpMyAdmin license.
@@ -303,4 +307,12 @@ var __webpack_exports__ = {};
   };
 })(jQuery);
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(40));
+/******/ }
+]);
 //# sourceMappingURL=jquery.sortable-table.js.map

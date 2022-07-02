@@ -1,10 +1,10 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[24],{
+
+/***/ 28:
+/***/ (function() {
+
 /* global DesignerOfflineDB */
 // js/designer/database.js
-// eslint-disable-next-line no-unused-vars
-
-/* global db, selectedPage:writable */
-// js/designer/init.js
 
 /* global DesignerMove */
 // js/designer/move.js
@@ -12,12 +12,13 @@ var __webpack_exports__ = {};
 /* global DesignerObjects */
 // js/designer/objects.js
 var DesignerPage = {};
+window.DesignerPage = DesignerPage;
 
 DesignerPage.showTablesInLandingPage = function (db) {
   DesignerPage.loadFirstPage(db, function (page) {
     if (page) {
       DesignerPage.loadHtmlForPage(page.pgNr);
-      selectedPage = page.pgNr;
+      window.selectedPage = page.pgNr;
     } else {
       DesignerPage.showNewPageTables(true);
     }
@@ -57,7 +58,7 @@ DesignerPage.saveToSelectedPage = function (db, pageId, pageName, tablePositions
       callback(page);
     }
 
-    selectedPage = page.pgNr;
+    window.selectedPage = page.pgNr;
   });
 };
 
@@ -146,8 +147,8 @@ DesignerPage.showNewPageTables = function (check) {
     }
   }
 
-  selectedPage = -1;
-  $('#page_name').text(Messages.strUntitled);
+  window.selectedPage = -1;
+  $('#page_name').text(window.Messages.strUntitled);
   DesignerMove.markUnsaved();
 };
 
@@ -158,7 +159,7 @@ DesignerPage.loadHtmlForPage = function (pageId) {
     var tableMissing = false;
 
     for (var t = 0; t < tblCords.length; t++) {
-      var tbId = db + '.' + tblCords[t].tableName;
+      var tbId = window.db + '.' + tblCords[t].tableName;
       var table = document.getElementById(tbId);
 
       if (table === null) {
@@ -177,10 +178,10 @@ DesignerPage.loadHtmlForPage = function (pageId) {
 
     if (tableMissing === true) {
       DesignerMove.markUnsaved();
-      Functions.ajaxShowMessage(Messages.strSavedPageTableMissing);
+      Functions.ajaxShowMessage(window.Messages.strSavedPageTableMissing);
     }
 
-    selectedPage = page.pgNr;
+    window.selectedPage = page.pgNr;
   });
 };
 
@@ -208,4 +209,12 @@ DesignerPage.getRandom = function (max, min) {
   return Math.floor(val);
 };
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(28));
+/******/ }
+]);
 //# sourceMappingURL=page.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[64],{
+
+/***/ 67:
+/***/ (function() {
+
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -12,14 +16,14 @@ window.AJAX.registerTeardown('table/find_replace.js', function () {
 
 window.AJAX.registerOnload('table/find_replace.js', function () {
   $('<div id="toggle_find_div"><a id="toggle_find"></a></div>').insertAfter('#find_replace_form').hide();
-  $('#toggle_find').html(Messages.strHideFindNReplaceCriteria).on('click', function () {
+  $('#toggle_find').html(window.Messages.strHideFindNReplaceCriteria).on('click', function () {
     var $link = $(this);
     $('#find_replace_form').slideToggle();
 
-    if ($link.text() === Messages.strHideFindNReplaceCriteria) {
-      $link.text(Messages.strShowFindNReplaceCriteria);
+    if ($link.text() === window.Messages.strHideFindNReplaceCriteria) {
+      $link.text(window.Messages.strShowFindNReplaceCriteria);
     } else {
-      $link.text(Messages.strHideFindNReplaceCriteria);
+      $link.text(window.Messages.strHideFindNReplaceCriteria);
     }
 
     return false;
@@ -43,4 +47,12 @@ window.AJAX.registerOnload('table/find_replace.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(67));
+/******/ }
+]);
 //# sourceMappingURL=find_replace.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[6],{
+
+/***/ 10:
+/***/ (function() {
+
 /**
  * Conditionally included if framing is not allowed.
  * @return {void}
@@ -22,4 +26,12 @@ window.crossFramingProtection = () => {
   styleElement.parentNode.removeChild(styleElement);
 };
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(10));
+/******/ }
+]);
 //# sourceMappingURL=cross_framing_protection.js.map

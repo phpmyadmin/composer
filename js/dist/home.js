@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[32],{
+
+/***/ 36:
+/***/ (function() {
+
 const GitInfo = {
   /**
    * Version string to integer conversion.
@@ -55,12 +59,12 @@ const GitInfo = {
       versionInformationMessageLink.rel = 'noopener noreferrer';
       const versionInformationMessageLinkText = document.createTextNode(data.version);
       versionInformationMessageLink.appendChild(versionInformationMessageLinkText);
-      const prefixMessage = document.createTextNode(Messages.strLatestAvailable + ' ');
+      const prefixMessage = document.createTextNode(window.Messages.strLatestAvailable + ' ');
       versionInformationMessage.appendChild(prefixMessage);
       versionInformationMessage.appendChild(versionInformationMessageLink);
 
       if (latest > current) {
-        const message = Functions.sprintf(Messages.strNewerVersion, Functions.escapeHtml(data.version), Functions.escapeHtml(data.date));
+        const message = Functions.sprintf(window.Messages.strNewerVersion, Functions.escapeHtml(data.version), Functions.escapeHtml(data.date));
         let htmlClass = 'alert alert-primary';
 
         if (Math.floor(latest / 10000) === Math.floor(current / 10000)) {
@@ -84,7 +88,7 @@ const GitInfo = {
       }
 
       if (latest === current) {
-        versionInformationMessage = document.createTextNode(' (' + Messages.strUpToDate + ')');
+        versionInformationMessage = document.createTextNode(' (' + window.Messages.strUpToDate + ')');
       }
       /* Remove extra whitespace */
 
@@ -165,4 +169,12 @@ window.AJAX.registerOnload('home.js', () => {
   GitInfo.showVersion();
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(36));
+/******/ }
+]);
 //# sourceMappingURL=home.js.map

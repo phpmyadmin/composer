@@ -1,4 +1,7 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[0],[
+/* 0 */
+/***/ (function() {
+
 /* global Navigation */
 
 /**
@@ -217,7 +220,7 @@ window.AJAX = {
 
 
     if (!jQuery.isEmptyObject(window.AJAX.lockedTargets)) {
-      $('#lock_page_icon').html(Functions.getImage('s_lock', Messages.strLockToolTip).toString());
+      $('#lock_page_icon').html(Functions.getImage('s_lock', window.Messages.strLockToolTip).toString());
     } else {
       $('#lock_page_icon').html('');
     }
@@ -279,7 +282,7 @@ window.AJAX = {
     // the click event is not triggered by script
 
 
-    if (typeof event !== 'undefined' && event.type === 'click' && event.isTrigger !== true && !jQuery.isEmptyObject(window.AJAX.lockedTargets) && confirm(Messages.strConfirmNavigation) === false) {
+    if (typeof event !== 'undefined' && event.type === 'click' && event.isTrigger !== true && !jQuery.isEmptyObject(window.AJAX.lockedTargets) && confirm(window.Messages.strConfirmNavigation) === false) {
       return false;
     }
 
@@ -297,7 +300,7 @@ window.AJAX = {
 
         if (window.AJAX.xhr.status === 0 && window.AJAX.xhr.statusText === 'abort') {
           // If aborted
-          window.AJAX.$msgbox = Functions.ajaxShowMessage(Messages.strAbortedRequest);
+          window.AJAX.$msgbox = Functions.ajaxShowMessage(window.Messages.strAbortedRequest);
           window.AJAX.active = false;
           window.AJAX.xhr = null;
           previousLinkAborted = true;
@@ -419,13 +422,13 @@ window.AJAX = {
 
       if (data.sendErrorAlways === '1' && data.stopErrorReportLoop !== '1') {
         $('#pma_report_errors_form').trigger('submit');
-        Functions.ajaxShowMessage(Messages.phpErrorsBeingSubmitted, false);
+        Functions.ajaxShowMessage(window.Messages.phpErrorsBeingSubmitted, false);
         $('html, body').animate({
           scrollTop: $(document).height()
         }, 'slow');
       } else if (data.promptPhpErrors) {
         // otherwise just prompt user if it is set so.
-        msg = msg + Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
+        msg = msg + window.Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
 
         $('html, body').animate({
           scrollTop: $(document).height()
@@ -446,7 +449,7 @@ window.AJAX = {
       // reload page if user trying to login has changed
       if (window.CommonParams.get('user') !== data.params.user) {
         window.location = 'index.php';
-        Functions.ajaxShowMessage(Messages.strLoading, false);
+        Functions.ajaxShowMessage(window.Messages.strLoading, false);
         window.AJAX.active = false;
         window.AJAX.xhr = null;
         return;
@@ -610,13 +613,13 @@ window.AJAX = {
 
           if (data.sendErrorAlways === '1' && data.stopErrorReportLoop !== '1') {
             $('#pma_report_errors_form').trigger('submit');
-            Functions.ajaxShowMessage(Messages.phpErrorsBeingSubmitted, false);
+            Functions.ajaxShowMessage(window.Messages.phpErrorsBeingSubmitted, false);
             $('html, body').animate({
               scrollTop: $(document).height()
             }, 'slow');
           } else if (data.promptPhpErrors) {
             // otherwise just prompt user if it is set so.
-            msg = msg + Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
+            msg = msg + window.Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
 
             $('html, body').animate({
               scrollTop: $(document).height()
@@ -962,16 +965,16 @@ window.AJAX = {
         }
 
         if (request.status !== 0) {
-          details += '<div>' + Functions.escapeHtml(Functions.sprintf(Messages.strErrorCode, request.status)) + '</div>';
+          details += '<div>' + Functions.escapeHtml(Functions.sprintf(window.Messages.strErrorCode, request.status)) + '</div>';
         }
 
-        details += '<div>' + Functions.escapeHtml(Functions.sprintf(Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
+        details += '<div>' + Functions.escapeHtml(Functions.sprintf(window.Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
 
         if (state === 'rejected' || state === 'timeout') {
-          details += '<div>' + Functions.escapeHtml(Messages.strErrorConnection) + '</div>';
+          details += '<div>' + Functions.escapeHtml(window.Messages.strErrorConnection) + '</div>';
         }
 
-        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + Messages.strErrorProcessingRequest + details + '</div>', false);
+        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + details + '</div>', false);
         window.AJAX.active = false;
         window.AJAX.xhr = null;
       }
@@ -979,4 +982,11 @@ window.AJAX = {
   }
 };
 
+/***/ })
+],
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(0));
+/******/ }
+]);
 //# sourceMappingURL=ajax.js.map

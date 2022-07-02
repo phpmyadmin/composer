@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[11],{
+
+/***/ 16:
+/***/ (function() {
+
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -72,7 +76,7 @@ window.AJAX.registerOnload('database/qbe.js', function () {
    */
 
   $(document).on('click', '#deleteSearch', function () {
-    var question = Functions.sprintf(Messages.strConfirmDeleteQBESearch, $('#searchId').find('option:selected').text());
+    var question = Functions.sprintf(window.Messages.strConfirmDeleteQBESearch, $('#searchId').find('option:selected').text());
 
     if (!confirm(question)) {
       return false;
@@ -84,4 +88,12 @@ window.AJAX.registerOnload('database/qbe.js', function () {
   $('.jsresponsive').css('max-width', windowwidth - 35 + 'px');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(16));
+/******/ }
+]);
 //# sourceMappingURL=qbe.js.map

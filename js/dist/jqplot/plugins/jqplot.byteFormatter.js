@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[35],{
+
+/***/ 39:
+/***/ (function() {
+
 /**
  * jqplot formatter for byte values
  *
@@ -10,7 +14,7 @@ var __webpack_exports__ = {};
   var formatByte = function (value, index) {
     var val = value;
     var i = index;
-    var units = [Messages.strB, Messages.strKiB, Messages.strMiB, Messages.strGiB, Messages.strTiB, Messages.strPiB, Messages.strEiB];
+    var units = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
 
     while (val >= 1024 && i <= 6) {
       val /= 1024;
@@ -50,4 +54,12 @@ var __webpack_exports__ = {};
   };
 })(jQuery);
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(39));
+/******/ }
+]);
 //# sourceMappingURL=jqplot.byteFormatter.js.map

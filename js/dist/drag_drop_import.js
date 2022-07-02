@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[26],{
+
+/***/ 30:
+/***/ (function() {
+
 /* This script handles PMA Drag Drop Import, loaded only when configuration is enabled.*/
 
 /**
@@ -114,21 +118,21 @@ var DragDropImport = {
       }
     }); // -- provide link to cancel the upload
 
-    $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize').html('<span hash="' + hash + '" class="pma_drop_file_status" task="cancel">' + Messages.dropImportMessageCancel + '</span>'); // -- add event listener to this link to abort upload operation
+    $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize').html('<span hash="' + hash + '" class="pma_drop_file_status" task="cancel">' + window.Messages.dropImportMessageCancel + '</span>'); // -- add event listener to this link to abort upload operation
 
     $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').on('click', function () {
       if ($(this).attr('task') === 'cancel') {
         jqXHR.abort();
-        $(this).html('<span>' + Messages.dropImportMessageAborted + '</span>');
+        $(this).html('<span>' + window.Messages.dropImportMessageAborted + '</span>');
         DragDropImport.importFinished(hash, true, false);
-      } else if ($(this).children('span').html() === Messages.dropImportMessageFailed) {
+      } else if ($(this).children('span').html() === window.Messages.dropImportMessageFailed) {
         // -- view information
         var $this = $(this);
         $.each(DragDropImport.importStatus, function (key, value) {
           if (value.hash === hash) {
             $('.pma_drop_result:visible').remove();
             var filename = $this.parent('span').attr('data-filename');
-            $('body').append('<div class="pma_drop_result"><h2>' + Messages.dropImportImportResultHeader + ' - ' + filename + '<span class="close">x</span></h2>' + value.message + '</div>');
+            $('body').append('<div class="pma_drop_result"><h2>' + window.Messages.dropImportImportResultHeader + ' - ' + filename + '<span class="close">x</span></h2>' + value.message + '</div>');
             $('.pma_drop_result').draggable(); // to make this dialog draggable
           }
         });
@@ -158,9 +162,9 @@ var DragDropImport = {
     }
 
     if (window.CommonParams.get('db') === '') {
-      $('.pma_drop_handler').html(Messages.dropImportSelectDB);
+      $('.pma_drop_handler').html(window.Messages.dropImportSelectDB);
     } else {
-      $('.pma_drop_handler').html(Messages.dropImportDropFiles);
+      $('.pma_drop_handler').html(window.Messages.dropImportDropFiles);
     }
 
     $('.pma_drop_handler').fadeIn();
@@ -220,7 +224,7 @@ var DragDropImport = {
     var $dropHandler = $('.pma_drop_handler');
     $dropHandler.clearQueue().stop();
     $dropHandler.fadeOut();
-    $dropHandler.html(Messages.dropImportDropFiles);
+    $dropHandler.html(window.Messages.dropImportDropFiles);
   },
 
   /**
@@ -238,9 +242,9 @@ var DragDropImport = {
 
     if (!aborted) {
       if (status) {
-        $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').html('<span>' + Messages.dropImportMessageSuccess + '</a>');
+        $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').html('<span>' + window.Messages.dropImportMessageSuccess + '</a>');
       } else {
-        $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').html('<span class="underline">' + Messages.dropImportMessageFailed + '</a>');
+        $('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').html('<span class="underline">' + window.Messages.dropImportMessageFailed + '</a>');
         icon = 'icon ic_s_error';
       }
     } else {
@@ -371,4 +375,12 @@ $(document).on('click', '.pma_drop_result h2 .close', function () {
   $(this).parent('h2').parent('div').remove();
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(30));
+/******/ }
+]);
 //# sourceMappingURL=drag_drop_import.js.map

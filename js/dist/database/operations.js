@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[10],{
+
+/***/ 15:
+/***/ (function() {
+
 /* global Navigation */
 
 /**
@@ -38,7 +42,7 @@ window.AJAX.registerOnload('database/operations.js', function () {
     event.preventDefault();
 
     if (Functions.emptyCheckTheField(this, 'newname')) {
-      Functions.ajaxShowMessage(Messages.strFormEmpty, false, 'error');
+      Functions.ajaxShowMessage(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
 
@@ -46,7 +50,7 @@ window.AJAX.registerOnload('database/operations.js', function () {
     var newDbName = $('#new_db_name').val();
 
     if (newDbName === oldDbName) {
-      Functions.ajaxShowMessage(Messages.strDatabaseRenameToSameName, false, 'error');
+      Functions.ajaxShowMessage(window.Messages.strDatabaseRenameToSameName, false, 'error');
       return false;
     }
 
@@ -54,7 +58,7 @@ window.AJAX.registerOnload('database/operations.js', function () {
     var question = Functions.escapeHtml('CREATE DATABASE ' + newDbName + ' / DROP DATABASE ' + oldDbName);
     Functions.prepareForAjaxRequest($form);
     $form.confirm(question, $form.attr('action'), function (url) {
-      Functions.ajaxShowMessage(Messages.strRenamingDatabases, false);
+      Functions.ajaxShowMessage(window.Messages.strRenamingDatabases, false);
       $.post(url, $('#rename_db_form').serialize() + window.CommonParams.get('arg_separator') + 'is_js_confirmed=1', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           Functions.ajaxShowMessage(data.message);
@@ -85,11 +89,11 @@ window.AJAX.registerOnload('database/operations.js', function () {
     event.preventDefault();
 
     if (Functions.emptyCheckTheField(this, 'newname')) {
-      Functions.ajaxShowMessage(Messages.strFormEmpty, false, 'error');
+      Functions.ajaxShowMessage(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
 
-    Functions.ajaxShowMessage(Messages.strCopyingDatabase, false);
+    Functions.ajaxShowMessage(window.Messages.strCopyingDatabase, false);
     var $form = $(this);
     Functions.prepareForAjaxRequest($form);
     $.post($form.attr('action'), $form.serialize(), function (data) {
@@ -130,7 +134,7 @@ window.AJAX.registerOnload('database/operations.js', function () {
     event.preventDefault();
     var $form = $(this);
     Functions.prepareForAjaxRequest($form);
-    Functions.ajaxShowMessage(Messages.strChangingCharset);
+    Functions.ajaxShowMessage(window.Messages.strChangingCharset);
     $.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         Functions.ajaxShowMessage(data.message);
@@ -151,11 +155,11 @@ window.AJAX.registerOnload('database/operations.js', function () {
      * @var {String} question String containing the question to be asked for confirmation
      */
 
-    var question = Messages.strDropDatabaseStrongWarning + ' ';
-    question += Functions.sprintf(Messages.strDoYouReally, 'DROP DATABASE `' + Functions.escapeHtml(window.CommonParams.get('db') + '`'));
+    var question = window.Messages.strDropDatabaseStrongWarning + ' ';
+    question += Functions.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE `' + Functions.escapeHtml(window.CommonParams.get('db') + '`'));
     var params = Functions.getJsConfirmCommonParam(this, $link.getPostData());
     $(this).confirm(question, $(this).attr('href'), function (url) {
-      Functions.ajaxShowMessage(Messages.strProcessingRequest);
+      Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
       $.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success) {
           // Database deleted successfully, refresh both the frames
@@ -172,4 +176,12 @@ window.AJAX.registerOnload('database/operations.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(15));
+/******/ }
+]);
 //# sourceMappingURL=operations.js.map

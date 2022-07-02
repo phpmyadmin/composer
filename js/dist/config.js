@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[4],{
+
+/***/ 4:
+/***/ (function() {
+
 /**
  * Functions used in configuration forms and on user preferences pages
  */
@@ -28,7 +32,7 @@ window.Config.isStorageSupported = function (type) {
   } catch (error) {
     // Not supported
     if (warn) {
-      Functions.ajaxShowMessage(Messages.strNoLocalStorage, false);
+      Functions.ajaxShowMessage(window.Messages.strNoLocalStorage, false);
     }
   }
 
@@ -281,7 +285,7 @@ window.validators = {
     }
 
     var result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
-    return result ? true : Messages.error_nan_p;
+    return result ? true : window.Messages.error_nan_p;
   },
 
   /**
@@ -297,7 +301,7 @@ window.validators = {
     }
 
     var result = window.validators.regExpNumeric.test(this.value);
-    return result ? true : Messages.error_nan_nneg;
+    return result ? true : window.Messages.error_nan_nneg;
   },
 
   /**
@@ -311,7 +315,7 @@ window.validators = {
     }
 
     var result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
-    return result && this.value <= 65535 ? true : Messages.error_incorrect_port;
+    return result && this.value <= 65535 ? true : window.Messages.error_incorrect_port;
   },
 
   /**
@@ -330,7 +334,7 @@ window.validators = {
 
     var parts = regexp.match(window.validators.regExpPcreExtract);
     var valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
-    return valid ? true : Messages.error_invalid_value;
+    return valid ? true : window.Messages.error_invalid_value;
   },
 
   /**
@@ -348,7 +352,7 @@ window.validators = {
       return true;
     }
 
-    return val <= maxValue ? true : Functions.sprintf(Messages.error_value_lte, maxValue);
+    return val <= maxValue ? true : Functions.sprintf(window.Messages.error_value_lte, maxValue);
   },
   // field validators
   field: {},
@@ -748,7 +752,7 @@ function savePrefsToLocalStorage(form) {
 
 function updatePrefsDate() {
   var d = new Date(window.localStorage.configMtimeLocal);
-  var msg = Messages.strSavedOn.replace('@DATE@', Functions.formatDateTime(d));
+  var msg = window.Messages.strSavedOn.replace('@DATE@', Functions.formatDateTime(d));
   $('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
 }
 /**
@@ -888,4 +892,12 @@ window.Config.on = function () {
   };
 };
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(4));
+/******/ }
+]);
 //# sourceMappingURL=config.js.map

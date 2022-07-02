@@ -1,10 +1,15 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[43],{
+
+/***/ 47:
+/***/ (function() {
+
 /**
  * function used in or for navigation panel
  *
  * @package phpMyAdmin-Navigation
  */
 var Navigation = {};
+window.Navigation = Navigation;
 /**
  * updates the tree state in sessionStorage
  *
@@ -385,10 +390,10 @@ Navigation.onload = () => function () {
     var $img = $('#pma_navigation_sync').children('img');
 
     if (synced) {
-      $img.removeClass('ic_s_unlink').addClass('ic_s_link').attr('alt', Messages.linkWithMain).attr('title', Messages.linkWithMain);
+      $img.removeClass('ic_s_unlink').addClass('ic_s_link').attr('alt', window.Messages.linkWithMain).attr('title', window.Messages.linkWithMain);
       $('#pma_navigation_tree').removeClass('synced').find('li.selected').removeClass('selected');
     } else {
-      $img.removeClass('ic_s_link').addClass('ic_s_unlink').attr('alt', Messages.unlinkWithMain).attr('title', Messages.unlinkWithMain);
+      $img.removeClass('ic_s_link').addClass('ic_s_unlink').attr('alt', window.Messages.unlinkWithMain).attr('title', window.Messages.unlinkWithMain);
       $('#pma_navigation_tree').addClass('synced');
       Navigation.showCurrent();
     }
@@ -1066,14 +1071,14 @@ Navigation.ResizeHandler = function () {
     $resizer.css(this.left, pos + 'px');
 
     if (pos === 0) {
-      $collapser.css(this.left, pos + resizerWidth).html(this.getSymbol(pos)).prop('title', Messages.strShowPanel);
+      $collapser.css(this.left, pos + resizerWidth).html(this.getSymbol(pos)).prop('title', window.Messages.strShowPanel);
     } else if (windowWidth > 768) {
-      $collapser.css(this.left, pos).html(this.getSymbol(pos)).prop('title', Messages.strHidePanel);
+      $collapser.css(this.left, pos).html(this.getSymbol(pos)).prop('title', window.Messages.strHidePanel);
       $('#pma_navigation_resizer').css({
         'width': '3px'
       });
     } else {
-      $collapser.css(this.left, windowWidth - 22).html(this.getSymbol(100)).prop('title', Messages.strHidePanel);
+      $collapser.css(this.left, windowWidth - 22).html(this.getSymbol(100)).prop('title', window.Messages.strHidePanel);
       $('#pma_navigation').width(windowWidth);
       $('body').css('margin-' + this.left, '0px');
       $('#pma_navigation_resizer').css({
@@ -1664,4 +1669,12 @@ Navigation.showFullName = function ($containerELem) {
   });
 };
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(47));
+/******/ }
+]);
 //# sourceMappingURL=navigation.js.map

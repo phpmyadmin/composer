@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[12],{
+
+/***/ 17:
+/***/ (function() {
+
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -44,10 +48,9 @@ function generateCondition(criteriaDiv, table) {
   }
 
   return query;
-} // eslint-disable-next-line no-unused-vars
+}
 
-
-function generateWhereBlock() {
+window.generateWhereBlock = function () {
   var count = 0;
   var query = '';
   $('.tableNameSelect').each(function () {
@@ -68,7 +71,7 @@ function generateWhereBlock() {
     }
   });
   return query;
-}
+};
 
 function generateJoin(newTable, tableAliases, fk) {
   var query = '';
@@ -128,10 +131,9 @@ function appendTable(table, tableAliases, usedTables, foreignKeys) {
 
   usedTables.push(table);
   return query;
-} // eslint-disable-next-line no-unused-vars
+}
 
-
-function generateFromBlock(tableAliases, foreignKeys) {
+window.generateFromBlock = (tableAliases, foreignKeys) => {
   var usedTables = [];
   var query = '';
 
@@ -142,6 +144,14 @@ function generateFromBlock(tableAliases, foreignKeys) {
   }
 
   return query;
-}
+};
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(17));
+/******/ }
+]);
 //# sourceMappingURL=query_generator.js.map

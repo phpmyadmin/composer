@@ -1,11 +1,28 @@
-/******/ "use strict";
-/******/ var __webpack_modules__ = ([
+"use strict";
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[5],[
 /* 0 */,
 /* 1 */,
 /* 2 */,
 /* 3 */,
 /* 4 */,
-/* 5 */,
+/* 5 */
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
+  _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console.initialize();
+});
+
+
+/***/ }),
 /* 6 */
 /***/ (function(module) {
 
@@ -27,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* global Functions, Messages, Navigation */
+/* global Functions, Navigation */
 
 /**
  * Console object
@@ -988,7 +1005,7 @@ var ConsoleMessages = {
       var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
       var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
 
-      if (confirm(Messages.strConsoleRequeryConfirm + '\n' + (query.length < 100 ? query : query.slice(0, 100) + '...'))) {
+      if (confirm(window.Messages.strConsoleRequeryConfirm + '\n' + (query.length < 100 ? query : query.slice(0, 100) + '...'))) {
         Console.execute(query, {
           db: $message.attr('targetdb'),
           table: $message.attr('targettable')
@@ -1012,7 +1029,7 @@ var ConsoleMessages = {
     $targetMessage.find('.action.delete_bookmark').on('click', function () {
       var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
 
-      if (confirm(Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
+      if (confirm(window.Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
           'server': window.CommonParams.get('server'),
           'action_bookmark': 2,
@@ -1192,7 +1209,7 @@ var ConsoleBookmarks = {
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=submit]').on('click', function () {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=label]').val().length === 0 || ConsoleInput.getText('bookmark').length === 0) {
-        alert(Messages.strFormEmpty);
+        alert(window.Messages.strFormEmpty);
         return;
       }
 
@@ -1322,7 +1339,7 @@ var ConsoleDebug = {
     var $args = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>');
 
     if (dbgStep.args.length) {
-      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text(Functions.sprintf(Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
+      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text(Functions.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
 
       for (var i = 0; i < dbgStep.args.length; i++) {
         $args.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message">').html('<pre>' + Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
@@ -1361,7 +1378,7 @@ var ConsoleDebug = {
           $stepElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message traceStep collapsed hide_args">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="function">').text(this.formatFunctionCall(step))).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="file">').text(this.formatFileName(step)));
 
           if (step.args && step.args.length) {
-            $stepElem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="args">').html(this.formatFunctionArgs(step))).prepend(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="action_content">').append('<span class="action dbg_show_args">' + Messages.strConsoleDebugShowArgs + '</span> ').append('<span class="action dbg_hide_args">' + Messages.strConsoleDebugHideArgs + '</span> '));
+            $stepElem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="args">').html(this.formatFunctionArgs(step))).prepend(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="action_content">').append('<span class="action dbg_show_args">' + window.Messages.strConsoleDebugShowArgs + '</span> ').append('<span class="action dbg_hide_args">' + window.Messages.strConsoleDebugHideArgs + '</span> '));
           }
         }
 
@@ -1416,7 +1433,7 @@ var ConsoleDebug = {
       var $singleQuery;
 
       for (var i in queryInfo) {
-        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="time">').text(Messages.strConsoleDebugTimeTaken + ' ' + queryInfo[i].time + 's' + ' (' + (queryInfo[i].time * 100 / totalTime).toFixed(3) + '%)'));
+        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + queryInfo[i].time + 's' + ' (' + (queryInfo[i].time * 100 / totalTime).toFixed(3) + '%)'));
         this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
         $query.append('<div class="message welcome trace">').append($singleQuery);
       }
@@ -1458,7 +1475,7 @@ var ConsoleDebug = {
     }
 
     if (debugJson === false) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').text(Messages.strConsoleDebugError);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').text(window.Messages.strConsoleDebugError);
       return;
     }
 
@@ -1491,7 +1508,7 @@ var ConsoleDebug = {
 
     uniqueQueries = uniqueArray; // Show summary
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text(Functions.sprintf(Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text(Functions.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
 
     if (url) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="script_name">').text(url.split('?')[0]));
@@ -1690,91 +1707,11 @@ const Config = {
 };
 
 /***/ })
-/******/ ]);
-/************************************************************************/
-/******/ // The module cache
-/******/ var __webpack_module_cache__ = {};
-/******/ 
-/******/ // The require function
-/******/ function __webpack_require__(moduleId) {
-/******/ 	// Check if module is in cache
-/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 	if (cachedModule !== undefined) {
-/******/ 		return cachedModule.exports;
-/******/ 	}
-/******/ 	// Create a new module (and put it into the cache)
-/******/ 	var module = __webpack_module_cache__[moduleId] = {
-/******/ 		// no module.id needed
-/******/ 		// no module.loaded needed
-/******/ 		exports: {}
-/******/ 	};
-/******/ 
-/******/ 	// Execute the module function
-/******/ 	__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 
-/******/ 	// Return the exports of the module
-/******/ 	return module.exports;
+],
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(5));
+/******/ window.Console = __webpack_exports__.Console;
 /******/ }
-/******/ 
-/************************************************************************/
-/******/ /* webpack/runtime/compat get default export */
-/******/ !function() {
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function() { return module['default']; } :
-/******/ 			function() { return module; };
-/******/ 		__webpack_require__.d(getter, { a: getter });
-/******/ 		return getter;
-/******/ 	};
-/******/ }();
-/******/ 
-/******/ /* webpack/runtime/define property getters */
-/******/ !function() {
-/******/ 	// define getter functions for harmony exports
-/******/ 	__webpack_require__.d = function(exports, definition) {
-/******/ 		for(var key in definition) {
-/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 			}
-/******/ 		}
-/******/ 	};
-/******/ }();
-/******/ 
-/******/ /* webpack/runtime/hasOwnProperty shorthand */
-/******/ !function() {
-/******/ 	__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ }();
-/******/ 
-/******/ /* webpack/runtime/make namespace object */
-/******/ !function() {
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/ }();
-/******/ 
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-!function() {
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-
-
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
-  _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console.initialize();
-});
-
-}();
-window.Console = __webpack_exports__.Console;
-
+]);
 //# sourceMappingURL=console.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[50],{
+
+/***/ 53:
+/***/ (function() {
+
 /* global Navigation */
 
 /**
@@ -94,14 +98,14 @@ const AccountLocking = {
       }
 
       if (isLocked) {
-        const lockIcon = Functions.getImage('s_lock', Messages.strLock, {}).toString();
-        button.innerHTML = '<span class="text-nowrap">' + lockIcon + ' ' + Messages.strLock + '</span>';
-        button.title = Messages.strLockAccount;
+        const lockIcon = Functions.getImage('s_lock', window.Messages.strLock, {}).toString();
+        button.innerHTML = '<span class="text-nowrap">' + lockIcon + ' ' + window.Messages.strLock + '</span>';
+        button.title = window.Messages.strLockAccount;
         button.dataset.isLocked = 'false';
       } else {
-        const unlockIcon = Functions.getImage('s_unlock', Messages.strUnlock, {}).toString();
-        button.innerHTML = '<span class="text-nowrap">' + unlockIcon + ' ' + Messages.strUnlock + '</span>';
-        button.title = Messages.strUnlockAccount;
+        const unlockIcon = Functions.getImage('s_unlock', window.Messages.strUnlock, {}).toString();
+        button.innerHTML = '<span class="text-nowrap">' + unlockIcon + ' ' + window.Messages.strUnlock + '</span>';
+        button.title = window.Messages.strUnlockAccount;
         button.dataset.isLocked = 'true';
       }
 
@@ -208,11 +212,11 @@ const RevokeUser = {
     event.preventDefault();
     var $thisButton = $(this);
     var $form = $('#usersForm');
-    $thisButton.confirm(Messages.strDropUserWarning, $form.attr('action'), function (url) {
+    $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
       var $dropUsersDbCheckbox = $('#dropUsersDbCheckbox');
 
       if ($dropUsersDbCheckbox.is(':checked')) {
-        var isConfirmed = confirm(Messages.strDropDatabaseStrongWarning + '\n' + Functions.sprintf(Messages.strDoYouReally, 'DROP DATABASE'));
+        var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + Functions.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
 
         if (!isConfirmed) {
           // Uncheck the drop users database checkbox
@@ -220,7 +224,7 @@ const RevokeUser = {
         }
       }
 
-      Functions.ajaxShowMessage(Messages.strRemovingSelectedUsers);
+      Functions.ajaxShowMessage(window.Messages.strRemovingSelectedUsers);
       var argsep = window.CommonParams.get('arg_separator');
       $.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
@@ -270,7 +274,7 @@ const ExportPrivileges = {
     event.preventDefault(); // can't export if no users checked
 
     if ($(this.form).find('input:checked').length === 0) {
-      Functions.ajaxShowMessage(Messages.strNoAccountSelected, 2000, 'success');
+      Functions.ajaxShowMessage(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
 
@@ -420,13 +424,13 @@ const CheckAddUser = {
     const theForm = this;
 
     if (theForm.elements.hostname.value === '') {
-      alert(Messages.strHostEmpty);
+      alert(window.Messages.strHostEmpty);
       theForm.elements.hostname.focus();
       return false;
     }
 
     if (theForm.elements.pred_username && theForm.elements.pred_username.value === 'userdefined' && theForm.elements.username.value === '') {
-      alert(Messages.strUserEmpty);
+      alert(window.Messages.strUserEmpty);
       theForm.elements.username.focus();
       return false;
     }
@@ -505,4 +509,12 @@ window.AJAX.registerOnload('server/privileges.js', function () {
   $('#copyUserForm').on('submit', CheckAddUser.handleEvent);
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(53));
+/******/ }
+]);
 //# sourceMappingURL=privileges.js.map

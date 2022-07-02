@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[65],{
+
+/***/ 68:
+/***/ (function() {
+
 /**
  * @fileoverview    functions used for visualizing GIS data
  *
@@ -39,10 +43,11 @@ function zoomAndPan() {
   $('polyline.vector', gisSvg).attr('stroke-width', 2 / scale);
   $('path.vector', gisSvg).attr('stroke-width', 0.5 / scale);
 }
+
+window.zoomAndPan = zoomAndPan;
 /**
  * Initially loads either SVG or OSM visualization based on the choice.
  */
-
 
 function selectVisualization() {
   if ($('#choice').prop('checked') !== true) {
@@ -51,10 +56,11 @@ function selectVisualization() {
     $('#placeholder').hide();
   }
 }
+
+window.selectVisualization = selectVisualization;
 /**
  * Adds necessary styles to the div that contains the openStreetMap.
  */
-
 
 function styleOSM() {
   var $placeholder = $('#placeholder');
@@ -66,18 +72,20 @@ function styleOSM() {
   };
   $('#openlayersmap').css(cssObj);
 }
+
+window.styleOSM = styleOSM;
 /**
  * Store a reference to the gis svg element.
  */
 
-
 function storeGisSvgRef() {
   gisSvg = $('#placeholder').find('svg').get(0);
 }
+
+window.storeGisSvgRef = storeGisSvgRef;
 /**
  * Adds controls for zooming and panning.
  */
-
 
 function addZoomPanControllers() {
   if (!gisSvg) {
@@ -89,10 +97,11 @@ function addZoomPanControllers() {
   '<img class="button" id="left_arrow" src="' + themeImagePath + 'west-mini.png">', '<img class="button" id="right_arrow" src="' + themeImagePath + 'east-mini.png">', '<img class="button" id="up_arrow" src="' + themeImagePath + 'north-mini.png">', '<img class="button" id="down_arrow" src="' + themeImagePath + 'south-mini.png">', // zoom controls
   '<img class="button" id="zoom_in" src="' + themeImagePath + 'zoom-plus-mini.png">', '<img class="button" id="zoom_world" src="' + themeImagePath + 'zoom-world-mini.png">', '<img class="button" id="zoom_out" src="' + themeImagePath + 'zoom-minus-mini.png">');
 }
+
+window.addZoomPanControllers = addZoomPanControllers;
 /**
  * Resizes the GIS visualization to fit into the space available.
  */
-
 
 function resizeGISVisualization() {
   var $placeholder = $('#placeholder');
@@ -347,4 +356,12 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(68));
+/******/ }
+]);
 //# sourceMappingURL=gis_visualization.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[73],{
+
+/***/ 76:
+/***/ (function() {
+
 /**
  * JSON syntax highlighting transformation plugin
  */
@@ -18,4 +22,12 @@ window.AJAX.registerOnload('transformations/json.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(76));
+/******/ }
+]);
 //# sourceMappingURL=json.js.map

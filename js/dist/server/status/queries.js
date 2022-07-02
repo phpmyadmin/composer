@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[53],{
+
+/***/ 56:
+/***/ (function() {
+
 /**
  * @fileoverview    Javascript functions used in server status query page
  * @name            Server Status Query
@@ -40,4 +44,12 @@ window.AJAX.registerOnload('server/status/queries.js', function () {
   initTableSorter('statustabs_queries');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(56));
+/******/ }
+]);
 //# sourceMappingURL=queries.js.map

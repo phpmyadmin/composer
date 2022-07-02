@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[52],{
+
+/***/ 55:
+/***/ (function() {
+
 /**
  * Server Status Processes
  *
@@ -125,11 +129,11 @@ var processList = {
    */
   setRefreshLabel: function () {
     var img = 'play';
-    var label = Messages.strStartRefresh;
+    var label = window.Messages.strStartRefresh;
 
     if (processList.autoRefresh) {
       img = 'pause';
-      label = Messages.strStopRefresh;
+      label = window.Messages.strStopRefresh;
       processList.refresh();
     }
 
@@ -195,4 +199,12 @@ window.AJAX.registerTeardown('server/status/processes.js', function () {
   processList.abortRefresh();
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(55));
+/******/ }
+]);
 //# sourceMappingURL=processes.js.map

@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[21],{
+
+/***/ 25:
+/***/ (function() {
+
 /**
  * Initializes the data required to run Designer, then fires it up.
  */
@@ -17,18 +21,6 @@ var __webpack_exports__ = {};
 
 /* global designerConfig */
 // templates/database/designer/main.twig
-
-/* eslint-disable no-unused-vars */
-var jTabs;
-var hTabs;
-var contr;
-var displayField;
-var server;
-var selectedPage;
-/* eslint-enable no-unused-vars */
-
-var db;
-var designerTablesEnabled;
 window.AJAX.registerTeardown('designer/init.js', function () {
   $('.trigger').off('click');
 });
@@ -39,20 +31,20 @@ window.AJAX.registerOnload('designer/init.js', function () {
     $('#ab').accordion('refresh');
     return false;
   });
-  jTabs = designerConfig.scriptTables.j_tabs;
-  hTabs = designerConfig.scriptTables.h_tabs;
-  contr = designerConfig.scriptContr;
-  displayField = designerConfig.scriptDisplayField;
-  server = designerConfig.server;
-  selectedPage = designerConfig.displayPage;
-  db = designerConfig.db;
-  designerTablesEnabled = designerConfig.tablesEnabled;
+  window.jTabs = designerConfig.scriptTables.j_tabs;
+  window.hTabs = designerConfig.scriptTables.h_tabs;
+  window.contr = designerConfig.scriptContr;
+  window.displayField = designerConfig.scriptDisplayField;
+  window.server = designerConfig.server;
+  window.selectedPage = designerConfig.displayPage;
+  window.db = designerConfig.db;
+  window.designerTablesEnabled = designerConfig.tablesEnabled;
   DesignerMove.main();
 
-  if (!designerTablesEnabled) {
+  if (!window.designerTablesEnabled) {
     DesignerOfflineDB.open(function (success) {
       if (success) {
-        DesignerPage.showTablesInLandingPage(db);
+        DesignerPage.showTablesInLandingPage(window.db);
       }
     });
   }
@@ -74,4 +66,12 @@ window.AJAX.registerOnload('designer/init.js', function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(25));
+/******/ }
+]);
 //# sourceMappingURL=init.js.map

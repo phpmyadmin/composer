@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[18],{
+
+/***/ 11:
+/***/ (function() {
+
 function registerDatePickerTranslations() {
   'use strict';
 
@@ -6,18 +10,18 @@ function registerDatePickerTranslations() {
     return;
   }
 
-  $.datepicker.regional[''].closeText = Messages.strCalendarClose;
-  $.datepicker.regional[''].prevText = Messages.strCalendarPrevious;
-  $.datepicker.regional[''].nextText = Messages.strCalendarNext;
-  $.datepicker.regional[''].currentText = Messages.strCalendarCurrent;
-  $.datepicker.regional[''].monthNames = [Messages.strMonthNameJan, Messages.strMonthNameFeb, Messages.strMonthNameMar, Messages.strMonthNameApr, Messages.strMonthNameMay, Messages.strMonthNameJun, Messages.strMonthNameJul, Messages.strMonthNameAug, Messages.strMonthNameSep, Messages.strMonthNameOct, Messages.strMonthNameNov, Messages.strMonthNameDec];
-  $.datepicker.regional[''].monthNamesShort = [Messages.strMonthNameJanShort, Messages.strMonthNameFebShort, Messages.strMonthNameMarShort, Messages.strMonthNameAprShort, Messages.strMonthNameMayShort, Messages.strMonthNameJunShort, Messages.strMonthNameJulShort, Messages.strMonthNameAugShort, Messages.strMonthNameSepShort, Messages.strMonthNameOctShort, Messages.strMonthNameNovShort, Messages.strMonthNameDecShort];
-  $.datepicker.regional[''].dayNames = [Messages.strDayNameSun, Messages.strDayNameMon, Messages.strDayNameTue, Messages.strDayNameWed, Messages.strDayNameThu, Messages.strDayNameFri, Messages.strDayNameSat];
-  $.datepicker.regional[''].dayNamesShort = [Messages.strDayNameSunShort, Messages.strDayNameMonShort, Messages.strDayNameTueShort, Messages.strDayNameWedShort, Messages.strDayNameThuShort, Messages.strDayNameFriShort, Messages.strDayNameSatShort];
-  $.datepicker.regional[''].dayNamesMin = [Messages.strDayNameSunMin, Messages.strDayNameMonMin, Messages.strDayNameTueMin, Messages.strDayNameWedMin, Messages.strDayNameThuMin, Messages.strDayNameFriMin, Messages.strDayNameSatMin];
-  $.datepicker.regional[''].weekHeader = Messages.strWeekHeader;
-  $.datepicker.regional[''].showMonthAfterYear = Messages.strMonthAfterYear === 'calendar-year-month';
-  $.datepicker.regional[''].yearSuffix = Messages.strYearSuffix !== 'none' ? Messages.strYearSuffix : ''; // eslint-disable-next-line no-underscore-dangle
+  $.datepicker.regional[''].closeText = window.Messages.strCalendarClose;
+  $.datepicker.regional[''].prevText = window.Messages.strCalendarPrevious;
+  $.datepicker.regional[''].nextText = window.Messages.strCalendarNext;
+  $.datepicker.regional[''].currentText = window.Messages.strCalendarCurrent;
+  $.datepicker.regional[''].monthNames = [window.Messages.strMonthNameJan, window.Messages.strMonthNameFeb, window.Messages.strMonthNameMar, window.Messages.strMonthNameApr, window.Messages.strMonthNameMay, window.Messages.strMonthNameJun, window.Messages.strMonthNameJul, window.Messages.strMonthNameAug, window.Messages.strMonthNameSep, window.Messages.strMonthNameOct, window.Messages.strMonthNameNov, window.Messages.strMonthNameDec];
+  $.datepicker.regional[''].monthNamesShort = [window.Messages.strMonthNameJanShort, window.Messages.strMonthNameFebShort, window.Messages.strMonthNameMarShort, window.Messages.strMonthNameAprShort, window.Messages.strMonthNameMayShort, window.Messages.strMonthNameJunShort, window.Messages.strMonthNameJulShort, window.Messages.strMonthNameAugShort, window.Messages.strMonthNameSepShort, window.Messages.strMonthNameOctShort, window.Messages.strMonthNameNovShort, window.Messages.strMonthNameDecShort];
+  $.datepicker.regional[''].dayNames = [window.Messages.strDayNameSun, window.Messages.strDayNameMon, window.Messages.strDayNameTue, window.Messages.strDayNameWed, window.Messages.strDayNameThu, window.Messages.strDayNameFri, window.Messages.strDayNameSat];
+  $.datepicker.regional[''].dayNamesShort = [window.Messages.strDayNameSunShort, window.Messages.strDayNameMonShort, window.Messages.strDayNameTueShort, window.Messages.strDayNameWedShort, window.Messages.strDayNameThuShort, window.Messages.strDayNameFriShort, window.Messages.strDayNameSatShort];
+  $.datepicker.regional[''].dayNamesMin = [window.Messages.strDayNameSunMin, window.Messages.strDayNameMonMin, window.Messages.strDayNameTueMin, window.Messages.strDayNameWedMin, window.Messages.strDayNameThuMin, window.Messages.strDayNameFriMin, window.Messages.strDayNameSatMin];
+  $.datepicker.regional[''].weekHeader = window.Messages.strWeekHeader;
+  $.datepicker.regional[''].showMonthAfterYear = window.Messages.strMonthAfterYear === 'calendar-year-month';
+  $.datepicker.regional[''].yearSuffix = window.Messages.strYearSuffix !== 'none' ? window.Messages.strYearSuffix : ''; // eslint-disable-next-line no-underscore-dangle
 
   $.extend($.datepicker._defaults, $.datepicker.regional['']);
 }
@@ -29,10 +33,10 @@ function registerTimePickerTranslations() {
     return;
   }
 
-  $.timepicker.regional[''].timeText = Messages.strCalendarTime;
-  $.timepicker.regional[''].hourText = Messages.strCalendarHour;
-  $.timepicker.regional[''].minuteText = Messages.strCalendarMinute;
-  $.timepicker.regional[''].secondText = Messages.strCalendarSecond; // eslint-disable-next-line no-underscore-dangle
+  $.timepicker.regional[''].timeText = window.Messages.strCalendarTime;
+  $.timepicker.regional[''].hourText = window.Messages.strCalendarHour;
+  $.timepicker.regional[''].minuteText = window.Messages.strCalendarMinute;
+  $.timepicker.regional[''].secondText = window.Messages.strCalendarSecond; // eslint-disable-next-line no-underscore-dangle
 
   $.extend($.timepicker._defaults, $.timepicker.regional['']);
 }
@@ -40,4 +44,12 @@ function registerTimePickerTranslations() {
 registerDatePickerTranslations();
 registerTimePickerTranslations();
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(11));
+/******/ }
+]);
 //# sourceMappingURL=datetimepicker.js.map

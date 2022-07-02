@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[72],{
+
+/***/ 75:
+/***/ (function() {
+
 /**
  * Image upload transformations plugin js
  *
@@ -28,4 +32,12 @@ window.AJAX.registerTeardown('transformations/image_upload.js', function () {
   $('input.image-upload').off('change');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(75));
+/******/ }
+]);
 //# sourceMappingURL=image_upload.js.map

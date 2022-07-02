@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[54],{
+
+/***/ 57:
+/***/ (function() {
+
 // TODO: tablesorter shouldn't sort already sorted columns
 // eslint-disable-next-line no-unused-vars
 function initTableSorter(tabid) {
@@ -26,6 +30,7 @@ function initTableSorter(tabid) {
   $table.find('tr').first().find('th').append('<div class="sorticon"></div>');
 }
 
+window.initTableSorter = initTableSorter;
 $(function () {
   $.tablesorter.addParser({
     id: 'fancyNumber',
@@ -33,7 +38,7 @@ $(function () {
       return /^[0-9]?[0-9,\\.]*\s?(k|M|G|T|%)?$/.test(s);
     },
     format: function (s) {
-      var num = jQuery.tablesorter.formatFloat(s.replace(Messages.strThousandsSeparator, '').replace(Messages.strDecimalSeparator, '.'));
+      var num = jQuery.tablesorter.formatFloat(s.replace(window.Messages.strThousandsSeparator, '').replace(window.Messages.strDecimalSeparator, '.'));
       var factor = 1;
 
       switch (s.charAt(s.length - 1)) {
@@ -76,4 +81,12 @@ $(function () {
   });
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(57));
+/******/ }
+]);
 //# sourceMappingURL=sorter.js.map

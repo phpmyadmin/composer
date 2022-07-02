@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[67],{
+
+/***/ 70:
+/***/ (function() {
+
 /**
  * for table relation
  */
@@ -191,9 +195,9 @@ window.AJAX.registerOnload('table/relation.js', function () {
 
     var $currRow = $anchor.parents('tr');
     var dropQuery = Functions.escapeHtml($currRow.children('td').children('.drop_foreign_key_msg').val());
-    var question = Functions.sprintf(Messages.strDoYouReally, dropQuery);
+    var question = Functions.sprintf(window.Messages.strDoYouReally, dropQuery);
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      var $msg = Functions.ajaxShowMessage(Messages.strDroppingForeignKey, false);
+      var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
       var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
       $.post(url, params, function (data) {
         if (data.success === true) {
@@ -201,7 +205,7 @@ window.AJAX.registerOnload('table/relation.js', function () {
           window.CommonActions.refreshMain(false, function () {// Do nothing
           });
         } else {
-          Functions.ajaxShowMessage(Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     });
@@ -211,4 +215,12 @@ window.AJAX.registerOnload('table/relation.js', function () {
   $('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(70));
+/******/ }
+]);
 //# sourceMappingURL=relation.js.map

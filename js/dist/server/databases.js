@@ -1,4 +1,8 @@
-var __webpack_exports__ = {};
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[48],{
+
+/***/ 51:
+/***/ (function() {
+
 /* global Navigation */
 
 /**
@@ -23,7 +27,7 @@ const DropDatabases = {
     });
 
     if (!selectedDbs.length) {
-      Functions.ajaxShowMessage($('<div class="alert alert-warning" role="alert"></div>').text(Messages.strNoDatabasesSelected), 2000);
+      Functions.ajaxShowMessage($('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
       return;
     }
     /**
@@ -31,13 +35,13 @@ const DropDatabases = {
      */
 
 
-    var question = Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(Messages.strDoYouReally, selectedDbs.join('<br>'));
+    var question = window.Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
     const modal = $('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
     modal.modal('show');
     const url = 'index.php?route=/server/databases/destroy&' + $(this).serialize();
     $('#dropDatabaseModalDropButton').on('click', function () {
-      Functions.ajaxShowMessage(Messages.strProcessingRequest, false);
+      Functions.ajaxShowMessage(window.Messages.strProcessingRequest, false);
       var parts = url.split('?');
       var params = Functions.getJsConfirmCommonParam(this, parts[1]);
       $.post(parts[0], params, function (data) {
@@ -82,12 +86,12 @@ const CreateDatabase = {
 
     if (newDbNameInput.val() === '') {
       newDbNameInput.trigger('focus');
-      alert(Messages.strFormEmpty);
+      alert(window.Messages.strFormEmpty);
       return;
     } // end remove
 
 
-    Functions.ajaxShowMessage(Messages.strProcessingRequest);
+    Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form);
     $.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
@@ -127,4 +131,12 @@ window.AJAX.registerOnload('server/databases.js', function () {
   checkPrivilegesForDatabase();
 });
 
+/***/ })
+
+},
+/******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exports__ = (__webpack_exec__(51));
+/******/ }
+]);
 //# sourceMappingURL=databases.js.map
