@@ -5,6 +5,7 @@
  */
 
 var Navigation = {};
+window.Navigation = Navigation;
 
 /**
  * updates the tree state in sessionStorage
@@ -389,8 +390,8 @@ Navigation.onload = () => function () {
             $img
                 .removeClass('ic_s_unlink')
                 .addClass('ic_s_link')
-                .attr('alt', Messages.linkWithMain)
-                .attr('title', Messages.linkWithMain);
+                .attr('alt', window.Messages.linkWithMain)
+                .attr('title', window.Messages.linkWithMain);
             $('#pma_navigation_tree')
                 .removeClass('synced')
                 .find('li.selected')
@@ -399,8 +400,8 @@ Navigation.onload = () => function () {
             $img
                 .removeClass('ic_s_link')
                 .addClass('ic_s_unlink')
-                .attr('alt', Messages.unlinkWithMain)
-                .attr('title', Messages.unlinkWithMain);
+                .attr('alt', window.Messages.unlinkWithMain)
+                .attr('title', window.Messages.unlinkWithMain);
             $('#pma_navigation_tree').addClass('synced');
             Navigation.showCurrent();
         }
@@ -1102,18 +1103,18 @@ Navigation.ResizeHandler = function () {
             $collapser
                 .css(this.left, pos + resizerWidth)
                 .html(this.getSymbol(pos))
-                .prop('title', Messages.strShowPanel);
+                .prop('title', window.Messages.strShowPanel);
         } else if (windowWidth > 768) {
             $collapser
                 .css(this.left, pos)
                 .html(this.getSymbol(pos))
-                .prop('title', Messages.strHidePanel);
+                .prop('title', window.Messages.strHidePanel);
             $('#pma_navigation_resizer').css({ 'width': '3px' });
         } else {
             $collapser
                 .css(this.left, windowWidth - 22)
                 .html(this.getSymbol(100))
-                .prop('title', Messages.strHidePanel);
+                .prop('title', window.Messages.strHidePanel);
             $('#pma_navigation').width(windowWidth);
             $('body').css('margin-' + this.left, '0px');
             $('#pma_navigation_resizer').css({ 'width': '0px' });

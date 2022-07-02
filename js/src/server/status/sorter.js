@@ -19,6 +19,7 @@ function initTableSorter (tabid) {
     $table.find('tr').first().find('th')
         .append('<div class="sorticon"></div>');
 }
+window.initTableSorter = initTableSorter;
 
 $(function () {
     $.tablesorter.addParser({
@@ -28,8 +29,8 @@ $(function () {
         },
         format: function (s) {
             var num = jQuery.tablesorter.formatFloat(
-                s.replace(Messages.strThousandsSeparator, '')
-                    .replace(Messages.strDecimalSeparator, '.')
+                s.replace(window.Messages.strThousandsSeparator, '')
+                    .replace(window.Messages.strDecimalSeparator, '.')
             );
 
             var factor = 1;
