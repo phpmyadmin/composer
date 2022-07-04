@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[57],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 60:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    Javascript functions used in server variables page
@@ -15,24 +26,25 @@
 /**
  * Unbind all event handlers before tearing down a page
  */
+
 window.AJAX.registerTeardown('server/variables.js', function () {
-  $(document).off('click', 'a.editLink');
-  $('#serverVariables').find('.var-name').find('a img').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.editLink');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a img').remove();
 });
 window.AJAX.registerOnload('server/variables.js', function () {
-  var $saveLink = $('a.saveLink');
-  var $cancelLink = $('a.cancelLink');
-  $('#serverVariables').find('.var-name').find('a').append($('#docImage').clone().css('display', 'inline-block'));
+  var $saveLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.saveLink');
+  var $cancelLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.cancelLink');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#docImage').clone().css('display', 'inline-block'));
   /* Launches the variable editor */
 
-  $(document).on('click', 'a.editLink', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.editLink', function (event) {
     event.preventDefault();
     editVariable(this);
   });
   /* Allows the user to edit a server variable */
 
   function editVariable(link) {
-    var $link = $(link);
+    var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(link);
     var $cell = $link.parent();
     var $valueCell = $link.parents('.var-row').find('.var-value');
     var varName = $link.data('variable');
@@ -46,7 +58,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
 
     $mySaveLink.on('click', function () {
       var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      $.post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
         'ajax_request': true,
         'server': window.CommonParams.get('server'),
         'varValue': $valueCell.find('input').val()
@@ -73,15 +85,15 @@ window.AJAX.registerOnload('server/variables.js', function () {
       $cell.removeClass('edit').html($myEditLink);
       return false;
     });
-    $.get('index.php?route=/server/variables/get/' + encodeURIComponent(varName), {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/server/variables/get/' + encodeURIComponent(varName), {
       'ajax_request': true,
       'server': window.CommonParams.get('server')
     }, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        var $links = $('<div></div>').append($myCancelLink).append('&nbsp;&nbsp;&nbsp;').append($mySaveLink);
-        var $editor = $('<div></div>', {
+        var $links = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').append($myCancelLink).append('&nbsp;&nbsp;&nbsp;').append($mySaveLink);
+        var $editor = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>', {
           'class': 'serverVariableEditor'
-        }).append($('<div></div>').append($('<input>', {
+        }).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
           type: 'text',
           'class': 'form-control form-control-sm'
         }).val(data.message))); // Save and replace content

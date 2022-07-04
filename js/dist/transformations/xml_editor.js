@@ -1,15 +1,27 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[77],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 80:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * XML editor plugin
  *
  * @package PhpMyAdmin
  */
+
 window.AJAX.registerOnload('transformations/xml_editor.js', function () {
-  $('textarea.transform_xml_editor').each(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_xml_editor').each(function () {
     window.CodeMirror.fromTextArea(this, {
       lineNumbers: true,
       indentUnit: 4,

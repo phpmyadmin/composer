@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[20],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 24:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    function used in this file builds history tab and generates query.
@@ -12,6 +23,7 @@
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
+
 var DesignerHistory = {};
 window.DesignerHistory = DesignerHistory;
 var historyArray = []; // Global array to store history objects
@@ -113,13 +125,13 @@ DesignerHistory.display = function (init, finit) {
         str += '<img src="' + themeImagePath + 'designer/and_icon.png" onclick="DesignerHistory.andOr(' + i + ')" title="AND"></td>';
       }
 
-      str += '<td style="padding-left: 5px;" class="text-end">' + Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + $('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
+      str += '<td style="padding-left: 5px;" class="text-end">' + Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
 
       if (historyArray[i].getType() === 'GroupBy' || historyArray[i].getType() === 'OrderBy') {
-        var detailDescGroupBy = $('<div/>').text(DesignerHistory.detail(i)).html();
+        var detailDescGroupBy = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
         str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       } else {
-        var detailDesc = $('<div/>').text(DesignerHistory.detail(i)).html();
+        var detailDesc = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
         str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + Functions.getImage('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       }
 
@@ -157,7 +169,7 @@ DesignerHistory.andOr = function (index) {
 
   var existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
-  $('#ab').accordion('refresh');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
 };
 /**
  * Deletes entry in historyArray
@@ -180,7 +192,7 @@ DesignerHistory.historyDelete = function (index) {
   historyArray.splice(index, 1);
   var existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
-  $('#ab').accordion('refresh');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
 };
 /**
  * @param {string} elementId
@@ -269,7 +281,7 @@ DesignerHistory.edit = function (type) {
 
   var existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
-  $('#ab').accordion('refresh');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
 };
 /**
  * history object closure
@@ -900,25 +912,25 @@ DesignerHistory.buildQuery = function () {
     qSelect += '\nORDER BY ' + qOrderBy;
   }
 
-  $('#buildQuerySubmitButton').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQuerySubmitButton').on('click', function () {
     if (vqbEditor) {
-      var $elm = $('#buildQueryModal').find('textarea');
+      var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModal').find('textarea');
       vqbEditor.save();
       $elm.val(vqbEditor.getValue());
     }
 
-    $('#vqb_form').trigger('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#vqb_form').trigger('submit');
   });
-  $('#buildQueryModal').modal('show');
-  $('#buildQueryModalLabel').first().text('SELECT');
-  $('#buildQueryModal').on('shown.bs.modal', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModal').modal('show');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModalLabel').first().text('SELECT');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModal').on('shown.bs.modal', function () {
     // Attach syntax highlighted editor to query dialog
 
     /**
      * @var $elm jQuery object containing the reference
      *           to the query textarea.
      */
-    var $elm = $('#buildQueryModal').find('textarea');
+    var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModal').find('textarea');
 
     if (!vqbEditor) {
       vqbEditor = Functions.getSqlEditor($elm);
@@ -938,25 +950,25 @@ window.AJAX.registerTeardown('designer/history.js', function () {
   vqbEditor = null;
   historyArray = [];
   selectField = [];
-  $('#ok_edit_rename').off('click');
-  $('#ok_edit_having').off('click');
-  $('#ok_edit_Aggr').off('click');
-  $('#ok_edit_where').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_rename').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_having').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_Aggr').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_where').off('click');
 });
 window.AJAX.registerOnload('designer/history.js', function () {
-  $('#ok_edit_rename').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_rename').on('click', function () {
     DesignerHistory.edit('Rename');
   });
-  $('#ok_edit_having').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_having').on('click', function () {
     DesignerHistory.edit('Having');
   });
-  $('#ok_edit_Aggr').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_Aggr').on('click', function () {
     DesignerHistory.edit('Aggregate');
   });
-  $('#ok_edit_where').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_where').on('click', function () {
     DesignerHistory.edit('Where');
   });
-  $('#ab').accordion({
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion({
     collapsible: true,
     active: 'none'
   });

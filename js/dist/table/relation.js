@@ -1,11 +1,23 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[67],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 70:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * for table relation
  */
+
 var TableRelation = {};
 
 TableRelation.showHideClauses = function ($thisDropdown) {
@@ -31,10 +43,10 @@ TableRelation.setDropdownValues = function ($dropdown, values, selectedValue) {
   var optionsAsString = ''; // add an empty string to the beginning for empty selection
 
   values.unshift('');
-  $.each(values, function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.each(values, function () {
     optionsAsString += '<option value=\'' + Functions.escapeHtml(this) + '\'' + (selectedValue === Functions.escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + Functions.escapeHtml(this) + '</option>';
   });
-  $dropdown.append($(optionsAsString));
+  $dropdown.append(jquery__WEBPACK_IMPORTED_MODULE_0__(optionsAsString));
 };
 /**
  * Retrieves and populates dropdowns to the left based on the selected value
@@ -96,7 +108,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     params += argsep + 'server=' + $form.find('input[name="server"]').val();
   }
 
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     type: 'POST',
     url: 'index.php?route=/table/relation',
     data: params,
@@ -134,39 +146,39 @@ TableRelation.getDropdownValues = function ($dropdown) {
 
 
 window.AJAX.registerTeardown('table/relation.js', function () {
-  $('body').off('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]');
-  $('body').off('click', 'a.add_foreign_key_field');
-  $('body').off('click', 'a.add_foreign_key');
-  $('a.drop_foreign_key_anchor.ajax').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.add_foreign_key_field');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.add_foreign_key');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('a.drop_foreign_key_anchor.ajax').off('click');
 });
 window.AJAX.registerOnload('table/relation.js', function () {
   /**
    * Ajax event handler to fetch table/column dropdown values.
    */
-  $('body').on('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]', function () {
-    TableRelation.getDropdownValues($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]', function () {
+    TableRelation.getDropdownValues(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
   /**
    * Ajax event handler to add a column to a foreign key constraint.
    */
 
-  $('body').on('click', 'a.add_foreign_key_field', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.add_foreign_key_field', function (event) {
     event.preventDefault();
     event.stopPropagation(); // Add field.
 
-    $(this).prev('span').clone(true, true).insertBefore($(this)).find('select').val(''); // Add foreign field.
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).prev('span').clone(true, true).insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0__(this)).find('select').val(''); // Add foreign field.
 
-    var $sourceElem = $('select[name^="destination_foreign_column[' + $(this).attr('data-index') + ']"]').last().parent();
+    var $sourceElem = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name^="destination_foreign_column[' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data-index') + ']"]').last().parent();
     $sourceElem.clone(true, true).insertAfter($sourceElem).find('select').val('');
   });
   /**
    * Ajax event handler to add a foreign key constraint.
    */
 
-  $('body').on('click', 'a.add_foreign_key', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.add_foreign_key', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var $prevRow = $(this).closest('tr').prev('tr');
+    var $prevRow = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').prev('tr');
     var $newRow = $prevRow.clone(true, true); // Update serial number.
 
     var currIndex = $newRow.find('a.add_foreign_key_field').attr('data-index');
@@ -174,13 +186,13 @@ window.AJAX.registerOnload('table/relation.js', function () {
     $newRow.find('a.add_foreign_key_field').attr('data-index', newIndex); // Update form parameter names.
 
     $newRow.find('select[name^="foreign_key_fields_name"]').not($newRow.find('select[name^="foreign_key_fields_name"]').first()).find('select[name^="destination_foreign_column"]').not($newRow.find('select[name^="foreign_key_fields_name"]').not($newRow.find('select[name^="foreign_key_fields_name"]').first()).find('select[name^="destination_foreign_column"]').first()).each(function () {
-      $(this).parent().remove();
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().remove();
     });
     $newRow.find('input, select').each(function () {
-      $(this).attr('name', $(this).attr('name').replace(/\d/, newIndex));
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name', jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name').replace(/\d/, newIndex));
     });
     $newRow.find('input[type="text"]').each(function () {
-      $(this).val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).val('');
     }); // Finally add the row.
 
     $newRow.insertAfter($prevRow);
@@ -189,9 +201,9 @@ window.AJAX.registerOnload('table/relation.js', function () {
    * Ajax Event handler for 'Drop Foreign key'
    */
 
-  $('a.drop_foreign_key_anchor.ajax').on('click', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('a.drop_foreign_key_anchor.ajax').on('click', function (event) {
     event.preventDefault();
-    var $anchor = $(this); // Object containing reference to the current field's row
+    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this); // Object containing reference to the current field's row
 
     var $currRow = $anchor.parents('tr');
     var dropQuery = Functions.escapeHtml($currRow.children('td').children('.drop_foreign_key_msg').val());
@@ -199,7 +211,7 @@ window.AJAX.registerOnload('table/relation.js', function () {
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
       var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
       var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
-      $.post(url, params, function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success === true) {
           Functions.ajaxRemoveMessage($msg);
           window.CommonActions.refreshMain(false, function () {// Do nothing
@@ -211,8 +223,8 @@ window.AJAX.registerOnload('table/relation.js', function () {
     });
   }); // end Drop Foreign key
 
-  var windowWidth = $(window).width();
-  $('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
+  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 });
 
 /***/ })

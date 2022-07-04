@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[50],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 53:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* global Navigation */
 
@@ -13,16 +24,17 @@
  * @param {JQuery} msgbox
  *
  */
+
 function exportPrivilegesModalHandler(data, msgbox) {
   if (typeof data !== 'undefined' && data.success === true) {
-    var modal = $('#exportPrivilegesModal'); // Remove any previous privilege modal data, if any
+    var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModal'); // Remove any previous privilege modal data, if any
 
     modal.find('.modal-body').first().html('');
-    $('#exportPrivilegesModalLabel').first().html('Loading');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html('Loading');
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       modal.find('.modal-body').first().html(data.message);
-      $('#exportPrivilegesModalLabel').first().html(data.title);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html(data.title);
       Functions.ajaxRemoveMessage(msgbox); // Attach syntax highlighted editor to export dialog
 
       Functions.getSqlEditor(modal.find('textarea'));
@@ -45,7 +57,7 @@ const EditUserGroup = {
     const editUserGroupModal = document.getElementById('editUserGroupModal');
     const button = event.relatedTarget;
     const username = button.getAttribute('data-username');
-    $.get('index.php?route=/server/user-groups/edit-form', {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/server/user-groups/edit-form', {
       'username': username,
       'server': window.CommonParams.get('server')
     }, data => {
@@ -59,8 +71,8 @@ const EditUserGroup = {
       const saveButton = editUserGroupModal.querySelector('#editUserGroupModalSaveButton');
       modalBody.innerHTML = data.message;
       saveButton.addEventListener('click', () => {
-        const form = $(editUserGroupModal.querySelector('#changeUserGroupForm'));
-        $.post('index.php?route=/server/privileges', form.serialize() + window.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
+        const form = jquery__WEBPACK_IMPORTED_MODULE_0__(editUserGroupModal.querySelector('#changeUserGroupForm'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/privileges', form.serialize() + window.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
           if (typeof data === 'undefined' || data.success !== true) {
             Functions.ajaxShowMessage(data.error, false, 'error');
             return;
@@ -91,7 +103,7 @@ const AccountLocking = {
       'ajax_request': true,
       'server': window.CommonParams.get('server')
     };
-    $.post(url, params, data => {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, data => {
       if (data.success === false) {
         Functions.ajaxShowMessage(data.error);
         return;
@@ -121,18 +133,18 @@ const AccountLocking = {
 
 const AddUserLoginCheckUsername = {
   handleEvent: function () {
-    var username = $(this).val();
-    var $warning = $('#user_exists_warning');
+    var username = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
+    var $warning = jquery__WEBPACK_IMPORTED_MODULE_0__('#user_exists_warning');
 
-    if ($('#select_pred_username').val() === 'userdefined' && username !== '') {
-      var href = $('form[name=\'usersForm\']').attr('action');
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_username').val() === 'userdefined' && username !== '') {
+      var href = jquery__WEBPACK_IMPORTED_MODULE_0__('form[name=\'usersForm\']').attr('action');
       var params = {
         'ajax_request': true,
         'server': window.CommonParams.get('server'),
         'validate_username': true,
         'username': username
       };
-      $.get(href, params, function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.get(href, params, function (data) {
         if (data.user_exists) {
           $warning.show();
         } else {
@@ -152,11 +164,11 @@ const AddUserLoginCheckUsername = {
 
 const PasswordStrength = {
   handleEvent: function () {
-    var meterObj = $('#password_strength_meter');
-    var meterObjLabel = $('#password_strength');
-    var username = $('input[name="username"]');
+    var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0__('#password_strength_meter');
+    var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#password_strength');
+    var username = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="username"]');
     username = username.val();
-    Functions.checkPasswordStrength($(this).val(), meterObj, meterObjLabel, username);
+    Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, username);
   }
 };
 /**
@@ -167,8 +179,8 @@ const PasswordStrength = {
 
 const SwitchToUseTextField = {
   handleEvent: function () {
-    if ($('#text_pma_pw').val() !== '') {
-      $('#select_pred_password').val('userdefined');
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').val() !== '') {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_password').val('userdefined');
     }
   }
 };
@@ -178,9 +190,9 @@ const SwitchToUseTextField = {
 
 const ChangePasswordStrength = {
   handleEvent: function () {
-    var meterObj = $('#change_password_strength_meter');
-    var meterObjLabel = $('#change_password_strength');
-    Functions.checkPasswordStrength($(this).val(), meterObj, meterObjLabel, window.CommonParams.get('user'));
+    var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_strength_meter');
+    var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_strength');
+    Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, window.CommonParams.get('user'));
   }
 };
 /**
@@ -191,12 +203,12 @@ const ChangePasswordStrength = {
 
 const ShowSha256PasswordNotice = {
   handleEvent: function () {
-    var selectedPlugin = $(this).val();
+    var selectedPlugin = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
 
     if (selectedPlugin === 'sha256_password') {
-      $('#ssl_reqd_warning').show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_reqd_warning').show();
     } else {
-      $('#ssl_reqd_warning').hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_reqd_warning').hide();
     }
   }
 };
@@ -210,10 +222,10 @@ const RevokeUser = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var $thisButton = $(this);
-    var $form = $('#usersForm');
+    var $thisButton = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#usersForm');
     $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
-      var $dropUsersDbCheckbox = $('#dropUsersDbCheckbox');
+      var $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox');
 
       if ($dropUsersDbCheckbox.is(':checked')) {
         var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + Functions.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
@@ -226,34 +238,34 @@ const RevokeUser = {
 
       Functions.ajaxShowMessage(window.Messages.strRemovingSelectedUsers);
       var argsep = window.CommonParams.get('arg_separator');
-      $.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           Functions.ajaxShowMessage(data.message); // Refresh navigation, if we dropped some databases with the name
           // that is the same as the username of the deleted user
 
-          if ($('#dropUsersDbCheckbox:checked').length) {
+          if (jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox:checked').length) {
             Navigation.reload();
           } // Remove the revoked user from the users list
 
 
           $form.find('input:checkbox:checked').parents('tr').slideUp('medium', function () {
-            var thisUserInitial = $(this).find('input:checkbox').val().charAt(0).toUpperCase();
-            $(this).remove(); // If this is the last user with thisUserInitial, remove the link from #userAccountsPagination
+            var thisUserInitial = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input:checkbox').val().charAt(0).toUpperCase();
+            jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove(); // If this is the last user with thisUserInitial, remove the link from #userAccountsPagination
 
-            if ($('#userRightsTable').find('input:checkbox[value^="' + thisUserInitial + '"], input:checkbox[value^="' + thisUserInitial.toLowerCase() + '"]').length === 0) {
-              $('#userAccountsPagination').find('.page-item > .page-link:contains(' + thisUserInitial + ')').parent('.page-item').addClass('disabled').html('<a class="page-link" href="#" tabindex="-1" aria-disabled="true">' + thisUserInitial + '</a>');
+            if (jquery__WEBPACK_IMPORTED_MODULE_0__('#userRightsTable').find('input:checkbox[value^="' + thisUserInitial + '"], input:checkbox[value^="' + thisUserInitial.toLowerCase() + '"]').length === 0) {
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#userAccountsPagination').find('.page-item > .page-link:contains(' + thisUserInitial + ')').parent('.page-item').addClass('disabled').html('<a class="page-link" href="#" tabindex="-1" aria-disabled="true">' + thisUserInitial + '</a>');
             } // Re-check the classes of each row
 
 
             $form.find('tbody').find('tr').each(function (index) {
               if (index >= 0 && index % 2 === 0) {
-                $(this).removeClass('odd').addClass('even');
+                jquery__WEBPACK_IMPORTED_MODULE_0__(this).removeClass('odd').addClass('even');
               } else if (index >= 0 && index % 2 !== 0) {
-                $(this).removeClass('even').addClass('odd');
+                jquery__WEBPACK_IMPORTED_MODULE_0__(this).removeClass('even').addClass('odd');
               }
             }); // update the checkall checkbox
 
-            $(Functions.checkboxesSel).trigger('change');
+            jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.checkboxesSel).trigger('change');
           });
         } else {
           Functions.ajaxShowMessage(data.error, false);
@@ -273,7 +285,7 @@ const ExportPrivileges = {
   handleEvent: function (event) {
     event.preventDefault(); // can't export if no users checked
 
-    if ($(this.form).find('input:checked').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).find('input:checked').length === 0) {
       Functions.ajaxShowMessage(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
@@ -281,9 +293,9 @@ const ExportPrivileges = {
     var msgbox = Functions.ajaxShowMessage();
     var argsep = window.CommonParams.get('arg_separator');
     var serverId = window.CommonParams.get('server');
-    var selectedUsers = $('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
+    var selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0__('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
     var postStr = selectedUsers + '&submit_mult=export' + argsep + 'ajax_request=true&server=' + serverId;
-    $.post($(this.form).prop('action'), postStr, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).prop('action'), postStr, function (data) {
       exportPrivilegesModalHandler(data, msgbox);
     }); // end $.post
   }
@@ -299,7 +311,7 @@ const ExportUser = {
   handleEvent: function (event) {
     event.preventDefault();
     var msgbox = Functions.ajaxShowMessage();
-    $.get($(this).attr('href'), {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
       exportPrivilegesModalHandler(data, msgbox);
@@ -312,9 +324,9 @@ const ExportUser = {
 
 const SslTypeToggle = {
   handleEvent: function () {
-    var $div = $('#specified_div');
+    var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('#specified_div');
 
-    if ($('#ssl_type_SPECIFIED').is(':checked')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_type_SPECIFIED').is(':checked')) {
       $div.find('input').prop('disabled', false);
     } else {
       $div.find('input').prop('disabled', true);
@@ -327,11 +339,11 @@ const SslTypeToggle = {
 
 const SslPrivilegeToggle = {
   handleEvent: function () {
-    var $div = $('#require_ssl_div');
+    var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('#require_ssl_div');
 
-    if ($(this).is(':checked')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
       $div.find('input').prop('disabled', false);
-      $('#ssl_type_SPECIFIED').trigger('change');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_type_SPECIFIED').trigger('change');
     } else {
       $div.find('input').prop('disabled', true);
     }
@@ -342,13 +354,13 @@ const SslPrivilegeToggle = {
  */
 
 function addOrUpdateSubmenu() {
-  var $editUserDialog = $('#edit_user_dialog');
+  var $editUserDialog = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog');
 
   if ($editUserDialog.length === 0) {
     return;
   }
 
-  var $subNav = $('.nav-pills');
+  var $subNav = jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-pills');
   var submenuLabel;
   var submenuLink;
   var linkNumber; // if submenu exists yet, remove it first
@@ -358,35 +370,35 @@ function addOrUpdateSubmenu() {
   } // construct a submenu from the existing fieldsets
 
 
-  $subNav = $('<ul></ul>').prop('class', 'nav nav-pills m-2');
-  $('#edit_user_dialog .submenu-item').each(function () {
-    submenuLabel = $(this).find('.js-submenu-label[data-submenu-label]').data('submenu-label');
-    submenuLink = $('<a></a>').prop('class', 'nav-link').prop('href', '#').html(submenuLabel);
-    $('<li></li>').prop('class', 'nav-item').append(submenuLink).appendTo($subNav);
+  $subNav = jquery__WEBPACK_IMPORTED_MODULE_0__('<ul></ul>').prop('class', 'nav nav-pills m-2');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').each(function () {
+    submenuLabel = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.js-submenu-label[data-submenu-label]').data('submenu-label');
+    submenuLink = jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>').prop('class', 'nav-link').prop('href', '#').html(submenuLabel);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<li></li>').prop('class', 'nav-item').append(submenuLink).appendTo($subNav);
   }); // click handlers for submenu
 
   $subNav.find('a').on('click', function (e) {
     e.preventDefault(); // if already active, ignore click
 
-    if ($(this).hasClass('active')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('active')) {
       return;
     }
 
     $subNav.find('a').removeClass('active');
-    $(this).addClass('active'); // which section to show now?
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('active'); // which section to show now?
 
-    linkNumber = $subNav.find('a').index($(this)); // hide all sections but the one to show
+    linkNumber = $subNav.find('a').index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)); // hide all sections but the one to show
 
-    $('#edit_user_dialog .submenu-item').hide().eq(linkNumber).show();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').hide().eq(linkNumber).show();
   }); // make first menu item active
   // TODO: support URL hash history
 
   $subNav.find('> :first-child a').addClass('active');
   $editUserDialog.prepend($subNav); // hide all sections but the first
 
-  $('#edit_user_dialog .submenu-item').hide().eq(0).show(); // scroll to the top
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').hide().eq(0).show(); // scroll to the top
 
-  $('html, body').animate({
+  jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
     scrollTop: 0
   }, 'fast');
 }
@@ -401,7 +413,7 @@ const SelectAllPrivileges = {
    */
   handleEvent: function (event) {
     const method = event.target.getAttribute('data-select-target');
-    var options = $(method).first().children();
+    var options = jquery__WEBPACK_IMPORTED_MODULE_0__(method).first().children();
     options.each(function (_, obj) {
       obj.selected = true;
     });
@@ -409,8 +421,8 @@ const SelectAllPrivileges = {
 };
 
 function setMaxWidth() {
-  var windowWidth = $(window).width();
-  $('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
+  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 }
 /**
  * Validates the "add a user" form
@@ -435,7 +447,7 @@ const CheckAddUser = {
       return false;
     }
 
-    return Functions.checkPassword($(theForm));
+    return Functions.checkPassword(jquery__WEBPACK_IMPORTED_MODULE_0__(theForm));
   }
 };
 /**
@@ -458,55 +470,55 @@ const CheckAddUser = {
  */
 
 window.AJAX.registerTeardown('server/privileges.js', function () {
-  $('#fieldset_add_user_login').off('change', 'input[name=\'username\']');
-  $(document).off('click', '#deleteUserCard .btn.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_add_user_login').off('change', 'input[name=\'username\']');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#deleteUserCard .btn.ajax');
   const editUserGroupModal = document.getElementById('editUserGroupModal');
 
   if (editUserGroupModal) {
     editUserGroupModal.removeEventListener('show.bs.modal', EditUserGroup);
   }
 
-  $(document).off('click', 'button.mult_submit[value=export]');
-  $(document).off('click', 'a.export_user_anchor.ajax');
-  $('button.jsAccountLocking').off('click');
-  $('#dropUsersDbCheckbox').off('click');
-  $(document).off('click', '.checkall_box');
-  $(document).off('change', '#checkbox_SSL_priv');
-  $(document).off('change', 'input[name="ssl_type"]');
-  $(document).off('change', '#select_authentication_plugin');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'button.mult_submit[value=export]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.export_user_anchor.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('button.jsAccountLocking').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '.checkall_box');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#checkbox_SSL_priv');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'input[name="ssl_type"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#select_authentication_plugin');
 });
 window.AJAX.registerOnload('server/privileges.js', function () {
-  $('#fieldset_add_user_login').on('change', 'input[name=\'username\']', AddUserLoginCheckUsername.handleEvent);
-  $('#text_pma_pw').on('keyup', PasswordStrength.handleEvent);
-  $('#text_pma_pw').on('input', SwitchToUseTextField.handleEvent);
-  $('#text_pma_change_pw').on('keyup', ChangePasswordStrength.handleEvent);
-  $(document).on('change', '#select_authentication_plugin', ShowSha256PasswordNotice.handleEvent);
-  $(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_add_user_login').on('change', 'input[name=\'username\']', AddUserLoginCheckUsername.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').on('keyup', PasswordStrength.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').on('input', SwitchToUseTextField.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').on('keyup', ChangePasswordStrength.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_authentication_plugin', ShowSha256PasswordNotice.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
   const editUserGroupModal = document.getElementById('editUserGroupModal');
 
   if (editUserGroupModal) {
     editUserGroupModal.addEventListener('show.bs.modal', EditUserGroup);
   }
 
-  $(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent); // if exporting non-ajax, highlight anyways
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent); // if exporting non-ajax, highlight anyways
 
-  Functions.getSqlEditor($('textarea.export'));
-  $(document).on('click', 'a.export_user_anchor.ajax', ExportUser.handleEvent);
-  $('button.jsAccountLocking').on('click', AccountLocking.handleEvent);
-  $(document).on('change', 'input[name="ssl_type"]', SslTypeToggle.handleEvent);
-  $(document).on('change', '#checkbox_SSL_priv', SslPrivilegeToggle.handleEvent);
-  $('#checkbox_SSL_priv').trigger('change');
-  $('input.autofocus').trigger('focus');
-  $(Functions.checkboxesSel).trigger('change');
+  Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.export'));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.export_user_anchor.ajax', ExportUser.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('button.jsAccountLocking').on('click', AccountLocking.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input[name="ssl_type"]', SslTypeToggle.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#checkbox_SSL_priv', SslPrivilegeToggle.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#checkbox_SSL_priv').trigger('change');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input.autofocus').trigger('focus');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.checkboxesSel).trigger('change');
   Functions.displayPasswordGenerateButton();
   addOrUpdateSubmenu();
-  $('#select_priv_all').on('click', SelectAllPrivileges.handleEvent);
-  $('#insert_priv_all').on('click', SelectAllPrivileges.handleEvent);
-  $('#update_priv_all').on('click', SelectAllPrivileges.handleEvent);
-  $('#references_priv_all').on('click', SelectAllPrivileges.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#select_priv_all').on('click', SelectAllPrivileges.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#insert_priv_all').on('click', SelectAllPrivileges.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#update_priv_all').on('click', SelectAllPrivileges.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#references_priv_all').on('click', SelectAllPrivileges.handleEvent);
   setMaxWidth();
-  $('#addUsersForm').on('submit', CheckAddUser.handleEvent);
-  $('#copyUserForm').on('submit', CheckAddUser.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addUsersForm').on('submit', CheckAddUser.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#copyUserForm').on('submit', CheckAddUser.handleEvent);
 });
 
 /***/ })

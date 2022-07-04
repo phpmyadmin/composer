@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[36],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 40:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * This file is internal to phpMyAdmin.
@@ -43,8 +54,9 @@
  * Each cell (<td>) has to contain one and only one element (preferably div or span)
  * which is the actually draggable element.
  */
+
 (function ($) {
-  jQuery.fn.sortableTable = function (method) {
+  $.fn.sortableTable = function (method) {
     var methods = {
       init: function (options) {
         var tb = new SortableTableInstance(this, options);
@@ -305,7 +317,7 @@
       }
     }
   };
-})(jQuery);
+})(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 /***/ })
 

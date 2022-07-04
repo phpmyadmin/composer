@@ -1,23 +1,35 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[16],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 21:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Unbind all event handlers before tearing down the page
  */
+
 window.AJAX.registerTeardown('database/tracking.js', function () {
-  $('body').off('click', '#trackedForm.ajax button[name="submit_mult"], #trackedForm.ajax input[name="submit_mult"]');
-  $('body').off('click', '#untrackedForm.ajax button[name="submit_mult"], #untrackedForm.ajax input[name="submit_mult"]');
-  $('body').off('click', 'a.delete_tracking_anchor.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '#trackedForm.ajax button[name="submit_mult"], #trackedForm.ajax input[name="submit_mult"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '#untrackedForm.ajax button[name="submit_mult"], #untrackedForm.ajax input[name="submit_mult"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.delete_tracking_anchor.ajax');
 });
 /**
  * Bind event handlers
  */
 
 window.AJAX.registerOnload('database/tracking.js', function () {
-  var $versions = $('#versions');
-  $versions.find('tr').first().find('th').append($('<div class="sorticon"></div>'));
+  var $versions = jquery__WEBPACK_IMPORTED_MODULE_0__('#versions');
+  $versions.find('tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
   $versions.tablesorter({
     sortList: [[1, 0]],
     headers: {
@@ -38,8 +50,8 @@ window.AJAX.registerOnload('database/tracking.js', function () {
       }
     }
   });
-  var $noVersions = $('#noversions');
-  $noVersions.find('tr').first().find('th').append($('<div class="sorticon"></div>'));
+  var $noVersions = jquery__WEBPACK_IMPORTED_MODULE_0__('#noversions');
+  $noVersions.find('tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
   $noVersions.tablesorter({
     sortList: [[1, 0]],
     headers: {
@@ -51,14 +63,14 @@ window.AJAX.registerOnload('database/tracking.js', function () {
       }
     }
   });
-  var $body = $('body');
+  var $body = jquery__WEBPACK_IMPORTED_MODULE_0__('body');
   /**
    * Handles multi submit for tracked tables
    */
 
   $body.on('click', '#trackedForm.ajax button[name="submit_mult"], #trackedForm.ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
-    var $button = $(this);
+    var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $form = $button.parent('form');
     var argsep = window.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
@@ -68,12 +80,12 @@ window.AJAX.registerOnload('database/tracking.js', function () {
       $button.confirm(question, $form.attr('action'), function (url) {
         Functions.ajaxShowMessage(window.Messages.strDeletingTrackingData);
         window.AJAX.source = $form;
-        $.post(url, submitData, window.AJAX.responseHandler);
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, window.AJAX.responseHandler);
       });
     } else {
       Functions.ajaxShowMessage();
       window.AJAX.source = $form;
-      $.post($form.attr('action'), submitData, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, window.AJAX.responseHandler);
     }
   });
   /**
@@ -82,13 +94,13 @@ window.AJAX.registerOnload('database/tracking.js', function () {
 
   $body.on('click', '#untrackedForm.ajax button[name="submit_mult"], #untrackedForm.ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
-    var $button = $(this);
+    var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $form = $button.parent('form');
     var argsep = window.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     Functions.ajaxShowMessage();
     window.AJAX.source = $form;
-    $.post($form.attr('action'), submitData, window.AJAX.responseHandler);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, window.AJAX.responseHandler);
   });
   /**
    * Ajax Event handler for 'Delete tracking'
@@ -96,7 +108,7 @@ window.AJAX.registerOnload('database/tracking.js', function () {
 
   $body.on('click', 'a.delete_tracking_anchor.ajax', function (e) {
     e.preventDefault();
-    var $anchor = $(this);
+    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = window.Messages.strDeleteTrackingData;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
       Functions.ajaxShowMessage(window.Messages.strDeletingTrackingData);
@@ -104,7 +116,7 @@ window.AJAX.registerOnload('database/tracking.js', function () {
       var argSep = window.CommonParams.get('arg_separator');
       var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
       params += argSep + 'ajax_page_request=1';
-      $.post(url, params, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.responseHandler);
     });
   });
 });

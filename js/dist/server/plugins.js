@@ -1,13 +1,25 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 52:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Make columns sortable, but only for tables with more than 1 data row.
  */
+
 function makeColumnsSortable() {
-  var $tables = $('#plugins_plugins table:has(tbody tr + tr)');
+  var $tables = jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins_plugins table:has(tbody tr + tr)');
   $tables.tablesorter({
     sortList: [[0, 0]],
     headers: {

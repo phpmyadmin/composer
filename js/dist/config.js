@@ -1,11 +1,23 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[4],{
 
-/***/ 4:
-/***/ (function() {
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Functions used in configuration forms and on user preferences pages
  */
+
 window.Config = {};
 window.configInlineParams;
 window.configScriptLoaded;
@@ -50,7 +62,7 @@ window.defaultValues = {};
  */
 
 function getFieldType(field) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
   var tagName = $field.prop('tagName');
 
   if (tagName === 'INPUT') {
@@ -74,7 +86,7 @@ function getFieldType(field) {
 
 
 function setRestoreDefaultBtn(field, display) {
-  var $el = $(field).closest('td').find('.restore-default img');
+  var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(field).closest('td').find('.restore-default img');
   $el[display ? 'show' : 'hide']();
 }
 /**
@@ -87,7 +99,7 @@ function setRestoreDefaultBtn(field, display) {
 
 
 function markField(field) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
   var type = getFieldType($field);
   var isDefault = checkFieldDefault($field, type); // checkboxes uses parent <span> for marking
 
@@ -111,7 +123,7 @@ function markField(field) {
 
 
 function setFieldValue(field, fieldType, value) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
 
   switch (fieldType) {
     case 'text':
@@ -153,7 +165,7 @@ function setFieldValue(field, fieldType, value) {
 
 
 function getFieldValue(field, fieldType) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
 
   switch (fieldType) {
     case 'text':
@@ -188,7 +200,7 @@ function getFieldValue(field, fieldType) {
 
 
 window.Config.getAllValues = () => {
-  var $elements = $('fieldset input, fieldset select, fieldset textarea');
+  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset input, fieldset select, fieldset textarea');
   var values = {};
   var type;
   var value;
@@ -220,7 +232,7 @@ window.Config.getAllValues = () => {
 
 
 function checkFieldDefault(field, type) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
   var fieldId = $field.attr('id');
 
   if (typeof window.defaultValues[fieldId] === 'undefined') {
@@ -257,7 +269,7 @@ function checkFieldDefault(field, type) {
 
 
 window.Config.getIdPrefix = function (element) {
-  return $(element).attr('id').replace(/[^-]+$/, '');
+  return jquery__WEBPACK_IMPORTED_MODULE_0__(element).attr('id').replace(/[^-]+$/, '');
 }; // ------------------------------------------------------------------
 // Form validation and field operations
 //
@@ -432,7 +444,7 @@ window.Config.displayErrors = function (errorList) {
 
   for (var fieldId in errorList) {
     var errors = errorList[fieldId];
-    var $field = $('#' + fieldId);
+    var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
     var isFieldset = $field.attr('tagName') === 'FIELDSET';
     var $errorCnt;
 
@@ -443,7 +455,7 @@ window.Config.displayErrors = function (errorList) {
     } // remove empty errors (used to clear error list)
 
 
-    errors = $.grep(errors, tempIsEmpty); // CSS error class
+    errors = jquery__WEBPACK_IMPORTED_MODULE_0__.grep(errors, tempIsEmpty); // CSS error class
 
     if (!isFieldset) {
       // checkboxes uses parent <span> for marking
@@ -455,10 +467,10 @@ window.Config.displayErrors = function (errorList) {
       // if error container doesn't exist, create it
       if ($errorCnt.length === 0) {
         if (isFieldset) {
-          $errorCnt = $('<dl class="errors"></dl>');
+          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="errors"></dl>');
           $field.find('table').before($errorCnt);
         } else {
-          $errorCnt = $('<dl class="inline_errors"></dl>');
+          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="inline_errors"></dl>');
           $field.closest('td').append($errorCnt);
         }
       }
@@ -482,7 +494,7 @@ window.Config.displayErrors = function (errorList) {
 
 
 function setDisplayError() {
-  var elements = $('.optbox input[id], .optbox select[id], .optbox textarea[id]'); // run all field validators
+  var elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]'); // run all field validators
 
   var errors = {};
 
@@ -491,7 +503,7 @@ function setDisplayError() {
   } // run all fieldset validators
 
 
-  $('fieldset.optbox').each(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
     validateFieldset(this, false, errors);
   });
   window.Config.displayErrors(errors);
@@ -506,7 +518,7 @@ function setDisplayError() {
 
 
 function validateFieldset(fieldset, isKeyUp, errors) {
-  var $fieldset = $(fieldset);
+  var $fieldset = jquery__WEBPACK_IMPORTED_MODULE_0__(fieldset);
 
   if ($fieldset.length && typeof window.validators.fieldset[$fieldset.attr('id')] !== 'undefined') {
     var fieldsetErrors = window.validators.fieldset[$fieldset.attr('id')].apply($fieldset[0], [isKeyUp]);
@@ -520,7 +532,7 @@ function validateFieldset(fieldset, isKeyUp, errors) {
         fieldsetErrors[fieldId] = [fieldsetErrors[fieldId]];
       }
 
-      $.merge(errors[fieldId], fieldsetErrors[fieldId]);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], fieldsetErrors[fieldId]);
     }
   }
 }
@@ -536,7 +548,7 @@ function validateFieldset(fieldset, isKeyUp, errors) {
 function validateField(field, isKeyUp, errors) {
   var args;
   var result;
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
   var fieldId = $field.attr('id');
   errors[fieldId] = [];
   var functions = getFieldValidators(fieldId, isKeyUp);
@@ -556,7 +568,7 @@ function validateField(field, isKeyUp, errors) {
         result = [result];
       }
 
-      $.merge(errors[fieldId], result);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], result);
     }
   }
 }
@@ -569,7 +581,7 @@ function validateField(field, isKeyUp, errors) {
 
 
 function validateFieldAndFieldset(field, isKeyUp) {
-  var $field = $(field);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
   var errors = {};
   validateField($field, isKeyUp, errors);
   validateFieldset($field.closest('fieldset.optbox'), isKeyUp, errors);
@@ -597,10 +609,10 @@ window.Config.setupValidation = function () {
   } // register validators and mark custom values
 
 
-  var $elements = $('.optbox input[id], .optbox select[id], .optbox textarea[id]');
+  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]');
   $elements.each(function () {
     markField(this);
-    var $el = $(this);
+    var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     $el.on('change', function () {
       validateFieldAndFieldset(this, false);
       markField(this);
@@ -621,7 +633,7 @@ window.Config.setupValidation = function () {
   }); // check whether we've refreshed a page and browser remembered modified
   // form values
 
-  var $checkPageRefresh = $('#check_page_refresh');
+  var $checkPageRefresh = jquery__WEBPACK_IMPORTED_MODULE_0__('#check_page_refresh');
 
   if ($checkPageRefresh.length === 0 || $checkPageRefresh.val() === '1') {
     // run all field validators
@@ -632,7 +644,7 @@ window.Config.setupValidation = function () {
     } // run all fieldset validators
 
 
-    $('fieldset.optbox').each(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
       validateFieldset(this, false, errors);
     });
     window.Config.displayErrors(errors);
@@ -645,8 +657,8 @@ window.Config.setupValidation = function () {
 
 
 function adjustPrefsNotification() {
-  var $prefsAutoLoad = $('#prefs_autoload');
-  var $tableNameControl = $('#table_name_col_no');
+  var $prefsAutoLoad = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
+  var $tableNameControl = jquery__WEBPACK_IMPORTED_MODULE_0__('#table_name_col_no');
   var $prefsAutoShowing = $prefsAutoLoad.css('display') !== 'none';
 
   if ($prefsAutoShowing && $tableNameControl.length) {
@@ -666,7 +678,7 @@ function adjustPrefsNotification() {
 
 
 function restoreField(fieldId) {
-  var $field = $('#' + fieldId);
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
 
   if ($field.length === 0 || window.defaultValues[fieldId] === undefined) {
     return;
@@ -676,25 +688,25 @@ function restoreField(fieldId) {
 }
 
 window.Config.setupRestoreField = function () {
-  $('div.tab-content').on('mouseenter', '.restore-default, .set-value', function () {
-    $(this).css('opacity', 1);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').on('mouseenter', '.restore-default, .set-value', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 1);
   }).on('mouseleave', '.restore-default, .set-value', function () {
-    $(this).css('opacity', 0.25);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 0.25);
   }).on('click', '.restore-default, .set-value', function (e) {
     e.preventDefault();
-    var href = $(this).attr('href');
+    var href = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href');
     var fieldSel;
 
-    if ($(this).hasClass('restore-default')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('restore-default')) {
       fieldSel = href;
       restoreField(fieldSel.substring(1));
     } else {
       fieldSel = href.match(/^[^=]+/)[0];
       var value = href.match(/=(.+)$/)[1];
-      setFieldValue($(fieldSel), 'text', value);
+      setFieldValue(jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel), 'text', value);
     }
 
-    $(fieldSel).trigger('change');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel).trigger('change');
   }).find('.restore-default, .set-value') // inline-block for IE so opacity inheritance works
   .css({
     display: 'inline-block',
@@ -712,10 +724,10 @@ window.Config.setupRestoreField = function () {
 
 
 function savePrefsToLocalStorage(form) {
-  var $form = $(form);
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(form);
   var submit = $form.find('input[type=submit]');
   submit.prop('disabled', true);
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     url: 'index.php?route=/preferences/manage',
     cache: false,
     type: 'POST',
@@ -730,8 +742,8 @@ function savePrefsToLocalStorage(form) {
         window.localStorage.configMtime = data.mtime;
         window.localStorage.configMtimeLocal = new Date().toUTCString();
         updatePrefsDate();
-        $('div.localStorage-empty').hide();
-        $('div.localStorage-exists').show();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-empty').hide();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-exists').show();
         var group = $form.parent('.card-body');
         group.css('height', group.height() + 'px');
         $form.hide('fast');
@@ -753,7 +765,7 @@ function savePrefsToLocalStorage(form) {
 function updatePrefsDate() {
   var d = new Date(window.localStorage.configMtimeLocal);
   var msg = window.Messages.strSavedOn.replace('@DATE@', Functions.formatDateTime(d));
-  $('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
 }
 /**
  * Prepares message which informs that localStorage preferences are available and can be imported or deleted
@@ -762,7 +774,7 @@ function updatePrefsDate() {
 
 function offerPrefsAutoimport() {
   var hasConfig = window.Config.isStorageSupported('localStorage') && (window.localStorage.config || false);
-  var $cnt = $('#prefs_autoload');
+  var $cnt = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
 
   if (!$cnt.length || !hasConfig) {
     return;
@@ -770,11 +782,11 @@ function offerPrefsAutoimport() {
 
   $cnt.find('a').on('click', function (e) {
     e.preventDefault();
-    var $a = $(this);
+    var $a = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
 
     if ($a.attr('href') === '#no') {
       $cnt.remove();
-      $.post('index.php', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
         'server': window.CommonParams.get('server'),
         'prefs_autoload': 'hide'
       }, null, 'html');
@@ -782,7 +794,7 @@ function offerPrefsAutoimport() {
     } else if ($a.attr('href') === '#delete') {
       $cnt.remove();
       localStorage.clear();
-      $.post('index.php', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
         'server': window.CommonParams.get('server'),
         'prefs_autoload': 'hide'
       }, null, 'html');
@@ -801,13 +813,13 @@ function offerPrefsAutoimport() {
 
 window.Config.off = function () {
   return function () {
-    $('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
-    $('.optbox input[type=button][name=submit_reset]').off('click');
-    $('div.tab-content').off();
-    $('#import_local_storage, #export_local_storage').off('click');
-    $('form.prefs-form').off('change').off('submit');
-    $(document).off('click', 'div.click-hide-message');
-    $('#prefs_autoload').find('a').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').off();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').off('change').off('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'div.click-hide-message');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload').find('a').off('click');
   };
 };
 /**
@@ -817,13 +829,13 @@ window.Config.off = function () {
 
 window.Config.on = function () {
   return function () {
-    var $topmenuUpt = $('#user_prefs_tabs');
+    var $topmenuUpt = jquery__WEBPACK_IMPORTED_MODULE_0__('#user_prefs_tabs');
     $topmenuUpt.find('a.active').attr('rel', 'samepage');
     $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
     window.Config.setupValidation();
     adjustPrefsNotification();
-    $('.optbox input[type=button][name=submit_reset]').on('click', function () {
-      var fields = $(this).closest('fieldset').find('input, select, textarea');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').on('click', function () {
+      var fields = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('input, select, textarea');
 
       for (var i = 0, imax = fields.length; i < imax; i++) {
         setFieldValue(fields[i], getFieldType(fields[i]), window.defaultValues[fields[i].id]);
@@ -833,7 +845,7 @@ window.Config.on = function () {
     });
     window.Config.setupRestoreField();
     offerPrefsAutoimport();
-    var $radios = $('#import_local_storage, #export_local_storage');
+    var $radios = jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage');
 
     if (!$radios.length) {
       return;
@@ -841,7 +853,7 @@ window.Config.on = function () {
 
 
     $radios.prop('disabled', false).add('#export_text_file, #import_text_file').on('click', function () {
-      var enableId = $(this).attr('id');
+      var enableId = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('id');
       var disableId;
 
       if (enableId.match(/local_storage$/)) {
@@ -850,44 +862,44 @@ window.Config.on = function () {
         disableId = enableId.replace(/text_file$/, 'local_storage');
       }
 
-      $('#opts_' + disableId).addClass('disabled').find('input').prop('disabled', true);
-      $('#opts_' + enableId).removeClass('disabled').find('input').prop('disabled', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + disableId).addClass('disabled').find('input').prop('disabled', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + enableId).removeClass('disabled').find('input').prop('disabled', false);
     }); // detect localStorage state
 
     var lsSupported = window.Config.isStorageSupported('localStorage', true);
     var lsExists = lsSupported ? window.localStorage.config || false : false;
-    $('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
-    $('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
 
     if (lsExists) {
       updatePrefsDate();
     }
 
-    $('form.prefs-form').on('change', function () {
-      var $form = $(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').on('change', function () {
+      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
       var disabled = false;
 
       if (!lsSupported) {
         disabled = $form.find('input[type=radio][value$=local_storage]').prop('checked');
-      } else if (!lsExists && $form.attr('name') === 'prefs_import' && $('#import_local_storage')[0].checked) {
+      } else if (!lsExists && $form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
         disabled = true;
       }
 
       $form.find('input[type=submit]').prop('disabled', disabled);
     }).on('submit', function (e) {
-      var $form = $(this);
+      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
 
-      if ($form.attr('name') === 'prefs_export' && $('#export_local_storage')[0].checked) {
+      if ($form.attr('name') === 'prefs_export' && jquery__WEBPACK_IMPORTED_MODULE_0__('#export_local_storage')[0].checked) {
         e.preventDefault(); // use AJAX to read JSON settings and save them
 
         savePrefsToLocalStorage($form);
-      } else if ($form.attr('name') === 'prefs_import' && $('#import_local_storage')[0].checked) {
+      } else if ($form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
         // set 'json' input and submit form
         $form.find('input[name=json]').val(window.localStorage.config);
       }
     });
-    $(document).on('click', 'div.click-hide-message', function () {
-      $(this).hide().parent('.card-body').css('height', '').next('form').show();
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'div.click-hide-message', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide().parent('.card-body').css('height', '').next('form').show();
     });
   };
 };
@@ -897,7 +909,7 @@ window.Config.on = function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(4));
+/******/ var __webpack_exports__ = (__webpack_exec__(5));
 /******/ }
 ]);
 //# sourceMappingURL=config.js.map

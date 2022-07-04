@@ -1,8 +1,10 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[19],{
 
 /***/ 23:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+__webpack_require__.r(__webpack_exports__);
 var designerTables = [{
   name: 'pdf_pages',
   key: 'pgNr',

@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[30],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 34:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* global Navigation */
 
@@ -24,6 +35,7 @@
  * General functions, usually for data manipulation pages.
  * @type {object}
  */
+
 const Functions = {};
 window.Functions = Functions;
 /**
@@ -109,7 +121,7 @@ Functions.addNoCacheToAjaxRequests = () => function (options, originalOptions) {
   if (typeof options.data === 'string') {
     options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(window.CommonParams.get('token'));
   } else if (typeof options.data === 'object') {
-    options.data = $.extend(originalOptions.data, {
+    options.data = jquery__WEBPACK_IMPORTED_MODULE_0__.extend(originalOptions.data, {
       '_nocache': nocache,
       'token': window.CommonParams.get('token')
     });
@@ -172,7 +184,7 @@ Functions.addDatepicker = function ($thisElement, type, options) {
       // in table/change.js by verificationsAfterFieldChange()
       $thisElement.data('comes_from', 'datepicker');
 
-      if ($(input).closest('.cEdit').length > 0) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(input).closest('.cEdit').length > 0) {
         setTimeout(function () {
           inst.dpDiv.css({
             top: 0,
@@ -184,15 +196,15 @@ Functions.addDatepicker = function ($thisElement, type, options) {
 
       setTimeout(function () {
         // Fix wrong timepicker z-index, doesn't work without timeout
-        $('#ui-timepicker-div').css('z-index', $('#ui-datepicker-div').css('z-index')); // Integrate tooltip text into dialog
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#ui-timepicker-div').css('z-index', jquery__WEBPACK_IMPORTED_MODULE_0__('#ui-datepicker-div').css('z-index')); // Integrate tooltip text into dialog
 
         var tooltip = $thisElement.uiTooltip('instance');
 
         if (typeof tooltip !== 'undefined') {
           tooltip.disable();
-          var $note = $('<p class="note"></div>');
+          var $note = jquery__WEBPACK_IMPORTED_MODULE_0__('<p class="note"></div>');
           $note.text(tooltip.option('content'));
-          $('div.ui-datepicker').append($note);
+          jquery__WEBPACK_IMPORTED_MODULE_0__('div.ui-datepicker').append($note);
         }
       }, 0);
     },
@@ -216,11 +228,11 @@ Functions.addDatepicker = function ($thisElement, type, options) {
   };
 
   if (type === 'time') {
-    $thisElement.timepicker($.extend(defaultOptions, options)); // Add a tip regarding entering MySQL allowed-values for TIME data-type
+    $thisElement.timepicker(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(defaultOptions, options)); // Add a tip regarding entering MySQL allowed-values for TIME data-type
 
     Functions.tooltip($thisElement, 'input', window.Messages.strMysqlAllowedValuesTipTime);
   } else {
-    $thisElement.datetimepicker($.extend(defaultOptions, options));
+    $thisElement.datetimepicker(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(defaultOptions, options));
   }
 };
 /**
@@ -230,10 +242,10 @@ Functions.addDatepicker = function ($thisElement, type, options) {
 
 
 Functions.addDateTimePicker = function () {
-  if ($.timepicker !== undefined) {
-    $('input.timefield, input.datefield, input.datetimefield').each(function () {
-      var decimals = $(this).parent().attr('data-decimals');
-      var type = $(this).parent().attr('data-type');
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker !== undefined) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('input.timefield, input.datefield, input.datetimefield').each(function () {
+      var decimals = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().attr('data-decimals');
+      var type = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().attr('data-type');
       var showMillisec = false;
       var showMicrosec = false;
       var timeFormat = 'HH:mm:ss';
@@ -254,7 +266,7 @@ Functions.addDateTimePicker = function () {
         hourMax = 99;
       }
 
-      Functions.addDatepicker($(this), type, {
+      Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this), type, {
         showMillisec: showMillisec,
         showMicrosec: showMicrosec,
         timeFormat: timeFormat,
@@ -263,10 +275,10 @@ Functions.addDateTimePicker = function () {
       }); // Add a tip regarding entering MySQL allowed-values
       // for TIME and DATE data-type
 
-      if ($(this).hasClass('timefield')) {
-        Functions.tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
-      } else if ($(this).hasClass('datefield')) {
-        Functions.tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('timefield')) {
+        Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
+      } else if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('datefield')) {
+        Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
       }
     });
   }
@@ -325,7 +337,7 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
     };
 
     if (window.CodeMirror.sqlLint) {
-      $.extend(defaults, {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.extend(defaults, {
         gutters: ['CodeMirror-lint-markers'],
         lint: {
           'getAnnotations': window.CodeMirror.sqlLint,
@@ -335,7 +347,7 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
       });
     }
 
-    $.extend(true, defaults, options); // create CodeMirror editor
+    jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, defaults, options); // create CodeMirror editor
 
     var codemirrorEditor = window.CodeMirror.fromTextArea($textarea[0], defaults); // allow resizing
 
@@ -357,10 +369,10 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
       handles = 'e, w';
     }
 
-    $(codemirrorEditor.getWrapperElement()).css('resize', resizeType).resizable({
+    jquery__WEBPACK_IMPORTED_MODULE_0__(codemirrorEditor.getWrapperElement()).css('resize', resizeType).resizable({
       handles: handles,
       resize: function () {
-        codemirrorEditor.setSize($(this).width(), $(this).height());
+        codemirrorEditor.setSize(jquery__WEBPACK_IMPORTED_MODULE_0__(this).width(), jquery__WEBPACK_IMPORTED_MODULE_0__(this).height());
       }
     }); // enable autocomplete
 
@@ -411,7 +423,7 @@ Functions.clearSelection = function () {
 
 
 Functions.tooltip = function ($elements, item, myContent, additionalOptions) {
-  if ($('#no_hint').length > 0) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#no_hint').length > 0) {
     return;
   }
 
@@ -423,7 +435,7 @@ Functions.tooltip = function ($elements, item, myContent, additionalOptions) {
     show: false,
     hide: false
   };
-  $elements.uiTooltip($.extend(true, defaultOptions, additionalOptions));
+  $elements.uiTooltip(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, defaultOptions, additionalOptions));
 };
 /**
  * HTML escaping
@@ -519,15 +531,15 @@ Functions.hideShowExpression = function ($virtuality) {
 
 
 Functions.verifyColumnsProperties = function () {
-  $('select.column_type').each(function () {
-    Functions.showNoticeForEnum($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('select.column_type').each(function () {
+    Functions.showNoticeForEnum(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
     Functions.showWarningForIntTypes();
   });
-  $('select.default_type').each(function () {
-    Functions.hideShowDefaultValue($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('select.default_type').each(function () {
+    Functions.hideShowDefaultValue(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
-  $('select.virtuality').each(function () {
-    Functions.hideShowExpression($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('select.virtuality').each(function () {
+    Functions.hideShowExpression(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
 };
 /**
@@ -623,7 +635,7 @@ Functions.suggestPassword = function (passwordForm) {
     passwd.value += pwchars.charAt(Math.abs(randomWords[i]) % pwchars.length);
   }
 
-  var $jQueryPasswordForm = $(passwordForm);
+  var $jQueryPasswordForm = jquery__WEBPACK_IMPORTED_MODULE_0__(passwordForm);
   passwordForm.elements.pma_pw.value = passwd.value;
   passwordForm.elements.pma_pw2.value = passwd.value;
   var meterObj = $jQueryPasswordForm.find('meter[name="pw_meter"]').first();
@@ -637,18 +649,18 @@ Functions.suggestPassword = function (passwordForm) {
 
 
 Functions.displayPasswordGenerateButton = function () {
-  var generatePwdRow = $('<tr></tr>').addClass('align-middle');
-  $('<td></td>').html(window.Messages.strGeneratePassword).appendTo(generatePwdRow);
-  var pwdCell = $('<td colspan="2"></td>').addClass('row').appendTo(generatePwdRow);
+  var generatePwdRow = jquery__WEBPACK_IMPORTED_MODULE_0__('<tr></tr>').addClass('align-middle');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('<td></td>').html(window.Messages.strGeneratePassword).appendTo(generatePwdRow);
+  var pwdCell = jquery__WEBPACK_IMPORTED_MODULE_0__('<td colspan="2"></td>').addClass('row').appendTo(generatePwdRow);
   pwdCell.append('<div class="d-flex align-items-center col-4"></div>');
-  var pwdButton = $('<input>').attr({
+  var pwdButton = jquery__WEBPACK_IMPORTED_MODULE_0__('<input>').attr({
     type: 'button',
     id: 'button_generate_password',
     value: window.Messages.strGenerate
   }).addClass('btn btn-secondary button').on('click', function () {
     Functions.suggestPassword(this.form);
   });
-  var pwdTextbox = $('<input>').attr({
+  var pwdTextbox = jquery__WEBPACK_IMPORTED_MODULE_0__('<input>').attr({
     type: 'text',
     name: 'generated_pw',
     id: 'generated_pw'
@@ -657,19 +669,19 @@ Functions.displayPasswordGenerateButton = function () {
   pwdCell.append(pwdTextbox);
 
   if (document.getElementById('button_generate_password') === null) {
-    $('#tr_element_before_generate_password').parent().append(generatePwdRow);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#tr_element_before_generate_password').parent().append(generatePwdRow);
   }
 
-  var generatePwdDiv = $('<div></div>').addClass('item');
-  $('<label></label>').attr({
+  var generatePwdDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').addClass('item');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('<label></label>').attr({
     for: 'button_generate_password'
   }).html(window.Messages.strGeneratePassword + ':').appendTo(generatePwdDiv);
-  var optionsSpan = $('<span></span>').addClass('options').appendTo(generatePwdDiv);
+  var optionsSpan = jquery__WEBPACK_IMPORTED_MODULE_0__('<span></span>').addClass('options').appendTo(generatePwdDiv);
   pwdButton.clone(true).appendTo(optionsSpan);
   pwdTextbox.clone(true).appendTo(generatePwdDiv);
 
   if (document.getElementById('button_generate_password') === null) {
-    $('#div_element_before_generate_password').parent().append(generatePwdDiv);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#div_element_before_generate_password').parent().append(generatePwdDiv);
   }
 };
 /**
@@ -883,13 +895,13 @@ Functions.checkTableEditForm = function (theForm, fieldsCnt) {
 
   for (i = 0; i < fieldsCnt; i++) {
     id = '#field_' + i + '_2';
-    elm = $(id);
+    elm = jquery__WEBPACK_IMPORTED_MODULE_0__(id);
     val = elm.val();
 
     if (val === 'VARCHAR' || val === 'CHAR' || val === 'BIT' || val === 'VARBINARY' || val === 'BINARY') {
-      elm2 = $('#field_' + i + '_3');
+      elm2 = jquery__WEBPACK_IMPORTED_MODULE_0__('#field_' + i + '_3');
       val = parseInt(elm2.val(), 10);
-      elm3 = $('#field_' + i + '_1');
+      elm3 = jquery__WEBPACK_IMPORTED_MODULE_0__('#field_' + i + '_1');
 
       if (isNaN(val) && elm3.val() !== '') {
         elm2.select();
@@ -916,7 +928,7 @@ Functions.checkTableEditForm = function (theForm, fieldsCnt) {
   } // at least this section is under jQuery
 
 
-  var $input = $('input.textfield[name=\'table\']');
+  var $input = jquery__WEBPACK_IMPORTED_MODULE_0__('input.textfield[name=\'table\']');
 
   if ($input.val() === '') {
     alert(window.Messages.strFormEmpty);
@@ -958,7 +970,7 @@ let updateTimeout;
 Functions.teardownIdleEvent = function () {
   clearTimeout(updateTimeout);
   clearInterval(incInterval);
-  $(document).off('mousemove');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mousemove');
 };
 
 Functions.onloadIdleEvent = function () {
@@ -966,7 +978,7 @@ Functions.onloadIdleEvent = function () {
     idleSecondsCounter = 0;
   };
 
-  $(document).on('mousemove', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function () {
     idleSecondsCounter = 0;
   });
 
@@ -1002,7 +1014,7 @@ Functions.onloadIdleEvent = function () {
       'access_time': idleSecondsCounter,
       'check_timeout': 1
     };
-    $.ajax({
+    jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
       url: href,
       data: params,
@@ -1035,16 +1047,16 @@ Functions.onloadIdleEvent = function () {
           } // append the login form on the page, disable all the forms which were not disabled already, close all the open jqueryui modal boxes
 
 
-          if (!$('#modalOverlay').length) {
-            $('fieldset').not(':disabled').attr('disabled', 'disabled').addClass('disabled_for_expiration');
-            $('body').append(data.error);
-            $('.ui-dialog').each(function () {
-              $('#' + $(this).attr('aria-describedby')).dialog('close');
+          if (!jquery__WEBPACK_IMPORTED_MODULE_0__('#modalOverlay').length) {
+            jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset').not(':disabled').attr('disabled', 'disabled').addClass('disabled_for_expiration');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('body').append(data.error);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.ui-dialog').each(function () {
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('aria-describedby')).dialog('close');
             });
-            $('#input_username').trigger('focus');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#input_username').trigger('focus');
           } else {
             window.CommonParams.set('token', data.new_token);
-            $('input[name=token]').val(data.new_token);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=token]').val(data.new_token);
           }
 
           idleSecondsCounter = 0;
@@ -1079,7 +1091,7 @@ Functions.onloadIdleEvent = function () {
 
 Functions.getCheckAllCheckboxEventHandler = function () {
   return function (e) {
-    var $this = $(this);
+    var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $tr = $this.closest('tr');
     var $table = $this.closest('table');
 
@@ -1146,7 +1158,7 @@ Functions.getCheckAllCheckboxEventHandler = function () {
 
 
 Functions.setSelectOptions = function (theForm, theSelect, doCheck) {
-  $('form[name=\'' + theForm + '\'] select[name=\'' + theSelect + '\']').find('option').prop('selected', doCheck);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('form[name=\'' + theForm + '\'] select[name=\'' + theSelect + '\']').find('option').prop('selected', doCheck);
   return true;
 };
 /**
@@ -1155,39 +1167,39 @@ Functions.setSelectOptions = function (theForm, theSelect, doCheck) {
 
 
 Functions.updateQueryParameters = function () {
-  if ($('#parameterized').is(':checked')) {
-    var query = window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : $('#sqlquery').val();
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#parameterized').is(':checked')) {
+    var query = window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val();
     var allParameters = query.match(/:[a-zA-Z0-9_]+/g);
     var parameters = []; // get unique parameters
 
     if (allParameters) {
-      $.each(allParameters, function (i, parameter) {
-        if ($.inArray(parameter, parameters) === -1) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.each(allParameters, function (i, parameter) {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(parameter, parameters) === -1) {
           parameters.push(parameter);
         }
       });
     } else {
-      $('#parametersDiv').text(window.Messages.strNoParam);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#parametersDiv').text(window.Messages.strNoParam);
       return;
     }
 
-    var $temp = $('<div></div>');
-    $temp.append($('#parametersDiv').children());
-    $('#parametersDiv').empty();
-    $.each(parameters, function (i, parameter) {
+    var $temp = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>');
+    $temp.append(jquery__WEBPACK_IMPORTED_MODULE_0__('#parametersDiv').children());
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#parametersDiv').empty();
+    jquery__WEBPACK_IMPORTED_MODULE_0__.each(parameters, function (i, parameter) {
       var paramName = parameter.substring(1);
       var $param = $temp.find('#paramSpan_' + paramName);
 
       if (!$param.length) {
-        $param = $('<span class="parameter" id="paramSpan_' + paramName + '"></span>');
-        $('<label for="param_' + paramName + '"></label>').text(parameter).appendTo($param);
-        $('<input type="text" name="parameters[' + parameter + ']" id="param_' + paramName + '">').appendTo($param);
+        $param = jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="parameter" id="paramSpan_' + paramName + '"></span>');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('<label for="param_' + paramName + '"></label>').text(parameter).appendTo($param);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="text" name="parameters[' + parameter + ']" id="param_' + paramName + '">').appendTo($param);
       }
 
-      $('#parametersDiv').append($param);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#parametersDiv').append($param);
     });
   } else {
-    $('#parametersDiv').empty();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#parametersDiv').empty();
   }
 };
 /**
@@ -1213,14 +1225,14 @@ Functions.loadForeignKeyCheckbox = function () {
     'ajax_request': true,
     'server': window.CommonParams.get('server')
   };
-  $.get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
     var html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked="checked"' : '') + '>' + '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
-    $('.load-default-fk-check-value').replaceWith(html);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.load-default-fk-check-value').replaceWith(html);
   });
 };
 
 Functions.getJsConfirmCommonParam = function (elem, parameters) {
-  var $elem = $(elem);
+  var $elem = jquery__WEBPACK_IMPORTED_MODULE_0__(elem);
   var params = parameters;
   var sep = window.CommonParams.get('arg_separator');
 
@@ -1240,30 +1252,30 @@ Functions.getJsConfirmCommonParam = function (elem, parameters) {
 };
 
 Functions.teardownSqlQueryEditEvents = () => {
-  $(document).off('click', 'a.inline_edit_sql');
-  $(document).off('click', 'input#sql_query_edit_save');
-  $(document).off('click', 'input#sql_query_edit_discard');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.inline_edit_sql');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input#sql_query_edit_save');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input#sql_query_edit_discard');
 
   if (window.codeMirrorEditor) {
     window.codeMirrorEditor.off('blur');
   } else {
-    $(document).off('blur', '#sqlquery');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('blur', '#sqlquery');
   }
 
-  $(document).off('change', '#parameterized');
-  $('#sqlquery').off('keydown');
-  $('#sql_query_edit').off('keydown');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#parameterized');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').off('keydown');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#sql_query_edit').off('keydown');
 
   if (codeMirrorInlineEditor) {
     // Copy the sql query to the text area to preserve it.
-    $('#sql_query_edit').text(codeMirrorInlineEditor.getValue());
-    $(codeMirrorInlineEditor.getWrapperElement()).off('keydown');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#sql_query_edit').text(codeMirrorInlineEditor.getValue());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(codeMirrorInlineEditor.getWrapperElement()).off('keydown');
     codeMirrorInlineEditor.toTextArea();
     codeMirrorInlineEditor = false;
   }
 
   if (window.codeMirrorEditor) {
-    $(window.codeMirrorEditor.getWrapperElement()).off('keydown');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(window.codeMirrorEditor.getWrapperElement()).off('keydown');
   }
 };
 
@@ -1271,24 +1283,24 @@ Functions.onloadSqlQueryEditEvents = function () {
   // If we are coming back to the page by clicking forward button
   // of the browser, bind the code mirror to inline query editor.
   Functions.bindCodeMirrorToInlineEditor();
-  $(document).on('click', 'a.inline_edit_sql', function () {
-    if ($('#sql_query_edit').length) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.inline_edit_sql', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#sql_query_edit').length) {
       // An inline query editor is already open,
       // we don't want another copy of it
       return false;
     }
 
-    var $form = $(this).prev('form');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).prev('form');
     var sqlQuery = $form.find('input[name=\'sql_query\']').val().trim();
-    var $innerSql = $(this).parent().prev().find('code.sql');
+    var $innerSql = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().prev().find('code.sql');
     var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + Functions.escapeHtml(sqlQuery) + '</textarea>\n';
     newContent += Functions.getForeignKeyCheckboxLoader();
     newContent += '<input type="submit" id="sql_query_edit_save" class="btn btn-secondary button btnSave" value="' + window.Messages.strGo + '">\n';
     newContent += '<input type="button" id="sql_query_edit_discard" class="btn btn-secondary button btnDiscard" value="' + window.Messages.strCancel + '">\n';
-    var $editorArea = $('div#inline_editor');
+    var $editorArea = jquery__WEBPACK_IMPORTED_MODULE_0__('div#inline_editor');
 
     if ($editorArea.length === 0) {
-      $editorArea = $('<div id="inline_editor_outer"></div>');
+      $editorArea = jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="inline_editor_outer"></div>');
       $editorArea.insertBefore($innerSql);
     }
 
@@ -1298,7 +1310,7 @@ Functions.onloadSqlQueryEditEvents = function () {
     Functions.bindCodeMirrorToInlineEditor();
     return false;
   });
-  $(document).on('click', 'input#sql_query_edit_save', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input#sql_query_edit_save', function () {
     // hide already existing success message
     var sqlQuery;
 
@@ -1306,27 +1318,27 @@ Functions.onloadSqlQueryEditEvents = function () {
       codeMirrorInlineEditor.save();
       sqlQuery = codeMirrorInlineEditor.getValue();
     } else {
-      sqlQuery = $(this).parent().find('#sql_query_edit').val();
+      sqlQuery = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('#sql_query_edit').val();
     }
 
-    var fkCheck = $(this).parent().find('#fk_checks').is(':checked');
-    var $form = $('a.inline_edit_sql').prev('form');
-    var $fakeForm = $('<form>', {
+    var fkCheck = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('#fk_checks').is(':checked');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('a.inline_edit_sql').prev('form');
+    var $fakeForm = jquery__WEBPACK_IMPORTED_MODULE_0__('<form>', {
       action: 'index.php?route=/import',
       method: 'post'
-    }).append($form.find('input[name=server], input[name=db], input[name=table], input[name=token]').clone()).append($('<input>', {
+    }).append($form.find('input[name=server], input[name=db], input[name=table], input[name=token]').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
       type: 'hidden',
       name: 'show_query',
       value: 1
-    })).append($('<input>', {
+    })).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
       type: 'hidden',
       name: 'is_js_confirmed',
       value: 0
-    })).append($('<input>', {
+    })).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
       type: 'hidden',
       name: 'sql_query',
       value: sqlQuery
-    })).append($('<input>', {
+    })).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
       type: 'hidden',
       name: 'fk_checks',
       value: fkCheck ? 1 : 0
@@ -1336,22 +1348,22 @@ Functions.onloadSqlQueryEditEvents = function () {
       return false;
     }
 
-    $('.alert-success').hide();
-    $fakeForm.appendTo($('body')).trigger('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-success').hide();
+    $fakeForm.appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('body')).trigger('submit');
   });
-  $(document).on('click', 'input#sql_query_edit_discard', function () {
-    var $divEditor = $('div#inline_editor_outer');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input#sql_query_edit_discard', function () {
+    var $divEditor = jquery__WEBPACK_IMPORTED_MODULE_0__('div#inline_editor_outer');
     $divEditor.siblings('code.sql').show();
     $divEditor.remove();
   });
-  $(document).on('change', '#parameterized', Functions.updateQueryParameters);
-  var $inputUsername = $('#input_username');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#parameterized', Functions.updateQueryParameters);
+  var $inputUsername = jquery__WEBPACK_IMPORTED_MODULE_0__('#input_username');
 
   if ($inputUsername) {
     if ($inputUsername.val() === '') {
       $inputUsername.trigger('focus');
     } else {
-      $('#input_password').trigger('focus');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#input_password').trigger('focus');
     }
   }
 };
@@ -1376,11 +1388,11 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
       };
 
       var columnHintRender = function (elem, self, data) {
-        $('<div class="autocomplete-column-name">').text(data.columnName).appendTo(elem);
-        $('<div class="autocomplete-column-hint">').text(data.columnHint).appendTo(elem);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="autocomplete-column-name">').text(data.columnName).appendTo(elem);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="autocomplete-column-hint">').text(data.columnHint).appendTo(elem);
       };
 
-      $.ajax({
+      jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         type: 'POST',
         url: 'index.php?route=/database/sql/autocomplete',
         data: params,
@@ -1463,7 +1475,7 @@ Functions.removeAutocompleteInfo = () => {
 
 
 Functions.bindCodeMirrorToInlineEditor = function () {
-  var $inlineEditor = $('#sql_query_edit');
+  var $inlineEditor = jquery__WEBPACK_IMPORTED_MODULE_0__('#sql_query_edit');
 
   if ($inlineEditor.length > 0) {
     if (typeof window.CodeMirror !== 'undefined') {
@@ -1472,7 +1484,7 @@ Functions.bindCodeMirrorToInlineEditor = function () {
       codeMirrorInlineEditor.getWrapperElement().style.height = height;
       codeMirrorInlineEditor.refresh();
       codeMirrorInlineEditor.focus();
-      $(codeMirrorInlineEditor.getWrapperElement()).on('keydown', Functions.catchKeypressesFromSqlInlineEdit);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(codeMirrorInlineEditor.getWrapperElement()).on('keydown', Functions.catchKeypressesFromSqlInlineEdit);
     } else {
       $inlineEditor.trigger('focus').on('keydown', Functions.catchKeypressesFromSqlInlineEdit);
     }
@@ -1482,7 +1494,7 @@ Functions.bindCodeMirrorToInlineEditor = function () {
 Functions.catchKeypressesFromSqlInlineEdit = function (event) {
   // ctrl-enter is 10 in chrome and ie, but 13 in ff
   if ((event.ctrlKey || event.metaKey) && (event.keyCode === 13 || event.keyCode === 10)) {
-    $('#sql_query_edit_save').trigger('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#sql_query_edit_save').trigger('click');
   }
 };
 /**
@@ -1518,7 +1530,7 @@ Functions.documentationAdd = function ($elm, params) {
 
 
 Functions.documentationKeyword = function (idx, elm) {
-  var $elm = $(elm);
+  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__(elm);
   /* Skip already processed ones */
 
   if ($elm.find('a').length > 0) {
@@ -1565,7 +1577,7 @@ Functions.documentationKeyword = function (idx, elm) {
 
 
 Functions.documentationBuiltin = function (idx, elm) {
-  var $elm = $(elm);
+  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__(elm);
   var builtin = $elm.text().toUpperCase();
 
   if (builtin in mysqlDocBuiltin) {
@@ -1582,12 +1594,12 @@ Functions.documentationBuiltin = function (idx, elm) {
 Functions.highlightSql = function ($base) {
   var $elm = $base.find('code.sql');
   $elm.each(function () {
-    var $sql = $(this);
+    var $sql = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $pre = $sql.find('pre');
     /* We only care about visible elements to avoid double processing */
 
     if ($pre.is(':visible')) {
-      var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
+      var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sql-highlight cm-s-default"></div>');
       $sql.append($highlight);
 
       if (typeof window.CodeMirror !== 'undefined') {
@@ -1639,10 +1651,10 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
   } // Element used to display unhighlighted code.
 
 
-  var $notHighlighted = $('<pre>' + htmlValue + '</pre>'); // Tries to highlight code using CodeMirror.
+  var $notHighlighted = jquery__WEBPACK_IMPORTED_MODULE_0__('<pre>' + htmlValue + '</pre>'); // Tries to highlight code using CodeMirror.
 
   if (typeof window.CodeMirror !== 'undefined') {
-    var $highlighted = $('<div class="' + type + '-highlight cm-s-default"></div>');
+    var $highlighted = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="' + type + '-highlight cm-s-default"></div>');
     window.CodeMirror.runMode(rawValue, mode, $highlighted[0]);
     $notHighlighted.hide();
     $code.html('').append($notHighlighted, $highlighted[0]);
@@ -1739,29 +1751,29 @@ Functions.ajaxShowMessage = function () {
   } // Create a parent element for the AJAX messages, if necessary
 
 
-  if ($('#loading_parent').length === 0) {
-    $('<div id="loading_parent"></div>').prependTo('#page_content');
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#loading_parent').length === 0) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="loading_parent"></div>').prependTo('#page_content');
   } // Update message count to create distinct message elements every time
 
 
   ajaxMessageCount++; // Remove all old messages, if any
 
-  $('span.ajax_notification[id^=ajax_message_num]').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('span.ajax_notification[id^=ajax_message_num]').remove();
   /**
    * @var $retval    a jQuery object containing the reference
    *                 to the created AJAX message
    */
 
-  var $retval = $('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show(); // If the notification is self-closing we should create a callback to remove it
+  var $retval = jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show(); // If the notification is self-closing we should create a callback to remove it
 
   if (selfClosing) {
     $retval.delay(newTimeOut).fadeOut('medium', function () {
-      if ($(this).is(':data(tooltip)')) {
-        $(this).uiTooltip('destroy');
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':data(tooltip)')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).uiTooltip('destroy');
       } // Remove the notification
 
 
-      $(this).remove();
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
     });
   } // If the notification is dismissable we need to add the relevant class to it
   // and add a tooltip so that the users know that it can be removed
@@ -1795,7 +1807,7 @@ Functions.ajaxShowMessage = function () {
 
 
 Functions.ajaxRemoveMessage = function ($thisMessageBox) {
-  if ($thisMessageBox !== undefined && $thisMessageBox instanceof jQuery) {
+  if ($thisMessageBox !== undefined && $thisMessageBox instanceof jquery__WEBPACK_IMPORTED_MODULE_0__) {
     $thisMessageBox.stop(true, true).fadeOut('medium');
 
     if ($thisMessageBox.is(':data(tooltip)')) {
@@ -1819,7 +1831,7 @@ Functions.previewSql = function ($form) {
   var sep = window.CommonParams.get('arg_separator');
   var formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
   var $messageBox = Functions.ajaxShowMessage();
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     type: 'POST',
     url: formUrl,
     data: formData,
@@ -1827,11 +1839,11 @@ Functions.previewSql = function ($form) {
       Functions.ajaxRemoveMessage($messageBox);
 
       if (response.success) {
-        $('#previewSqlModal').modal('show');
-        $('#previewSqlModal').find('.modal-body').first().html(response.sql_data);
-        $('#previewSqlModalLabel').first().html(window.Messages.strPreviewSQL);
-        $('#previewSqlModal').on('shown.bs.modal', function () {
-          Functions.highlightSql($('#previewSqlModal'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').modal('show');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').find('.modal-body').first().html(response.sql_data);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModalLabel').first().html(window.Messages.strPreviewSQL);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').on('shown.bs.modal', function () {
+          Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal'));
         });
       } else {
         Functions.ajaxShowMessage(response.message);
@@ -1860,15 +1872,15 @@ Functions.previewSql = function ($form) {
 
 
 Functions.confirmPreviewSql = function (sqlData, url, callback) {
-  $('#previewSqlConfirmModal').modal('show');
-  $('#previewSqlConfirmModalLabel').first().html(window.Messages.strPreviewSQL);
-  $('#previewSqlConfirmCode').first().text(sqlData);
-  $('#previewSqlConfirmModal').on('shown.bs.modal', function () {
-    Functions.highlightSql($('#previewSqlConfirmModal'));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal').modal('show');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModalLabel').first().html(window.Messages.strPreviewSQL);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmCode').first().text(sqlData);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal').on('shown.bs.modal', function () {
+    Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal'));
   });
-  $('#previewSQLConfirmOkButton').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSQLConfirmOkButton').on('click', function () {
     callback(url);
-    $('#previewSqlConfirmModal').modal('hide');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal').modal('hide');
   });
 };
 /**
@@ -1882,7 +1894,7 @@ Functions.confirmPreviewSql = function (sqlData, url, callback) {
 
 Functions.checkReservedWordColumns = function ($form) {
   var isConfirmed = true;
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     type: 'POST',
     url: 'index.php?route=/table/structure/reserved-word-check',
     data: $form.serialize(),
@@ -1906,15 +1918,15 @@ Functions.dismissNotifications = () => function () {
    * created with Functions.ajaxShowMessage()
    */
   var holdStarter = null;
-  $(document).on('mousedown', 'span.ajax_notification.dismissable', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousedown', 'span.ajax_notification.dismissable', function () {
     holdStarter = setTimeout(function () {
       holdStarter = null;
     }, 250);
   });
-  $(document).on('mouseup', 'span.ajax_notification.dismissable', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseup', 'span.ajax_notification.dismissable', function (event) {
     if (holdStarter && event.which === 1) {
       clearTimeout(holdStarter);
-      Functions.ajaxRemoveMessage($(this));
+      Functions.ajaxRemoveMessage(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
     }
   });
   /**
@@ -1922,14 +1934,14 @@ Functions.dismissNotifications = () => function () {
    * is hovering a link or button that is inside an ajax message
    */
 
-  $(document).on('mouseover', 'span.ajax_notification a, span.ajax_notification button, span.ajax_notification input', function () {
-    if ($(this).parents('span.ajax_notification').is(':data(tooltip)')) {
-      $(this).parents('span.ajax_notification').uiTooltip('disable');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseover', 'span.ajax_notification a, span.ajax_notification button, span.ajax_notification input', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('span.ajax_notification').is(':data(tooltip)')) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('span.ajax_notification').uiTooltip('disable');
     }
   });
-  $(document).on('mouseout', 'span.ajax_notification a, span.ajax_notification button, span.ajax_notification input', function () {
-    if ($(this).parents('span.ajax_notification').is(':data(tooltip)')) {
-      $(this).parents('span.ajax_notification').uiTooltip('enable');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseout', 'span.ajax_notification a, span.ajax_notification button, span.ajax_notification input', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('span.ajax_notification').is(':data(tooltip)')) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('span.ajax_notification').uiTooltip('enable');
     }
   });
   /**
@@ -1941,7 +1953,7 @@ Functions.dismissNotifications = () => function () {
    */
 
   Functions.copyToClipboard = function (text) {
-    var $temp = $('<input>');
+    var $temp = jquery__WEBPACK_IMPORTED_MODULE_0__('<input>');
     $temp.css({
       'position': 'fixed',
       'width': '2em',
@@ -1951,7 +1963,7 @@ Functions.dismissNotifications = () => function () {
       'padding': 0,
       'background': 'transparent'
     });
-    $('body').append($temp);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('body').append($temp);
     $temp.val(text).trigger('select');
 
     try {
@@ -1964,18 +1976,18 @@ Functions.dismissNotifications = () => function () {
     }
   };
 
-  $(document).on('click', 'a.copyQueryBtn', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.copyQueryBtn', function (event) {
     event.preventDefault();
-    var res = Functions.copyToClipboard($(this).attr('data-text'));
+    var res = Functions.copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data-text'));
 
     if (res) {
-      $(this).after('<span id=\'copyStatus\'> (' + window.Messages.strCopyQueryButtonSuccess + ')</span>');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).after('<span id=\'copyStatus\'> (' + window.Messages.strCopyQueryButtonSuccess + ')</span>');
     } else {
-      $(this).after('<span id=\'copyStatus\'> (' + window.Messages.strCopyQueryButtonFailure + ')</span>');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).after('<span id=\'copyStatus\'> (' + window.Messages.strCopyQueryButtonFailure + ')</span>');
     }
 
     setTimeout(function () {
-      $('#copyStatus').remove();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#copyStatus').remove();
     }, 2000);
   });
 };
@@ -1992,9 +2004,9 @@ Functions.showNoticeForEnum = function (selectElement) {
   var selectedType = selectElement.val();
 
   if (selectedType === 'ENUM' || selectedType === 'SET') {
-    $('p#enum_notice_' + enumNoticeId).show();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('p#enum_notice_' + enumNoticeId).show();
   } else {
-    $('p#enum_notice_' + enumNoticeId).hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('p#enum_notice_' + enumNoticeId).hide();
   }
 };
 /**
@@ -2003,16 +2015,16 @@ Functions.showNoticeForEnum = function (selectElement) {
 
 
 Functions.showWarningForIntTypes = function () {
-  if ($('div#length_not_allowed').length) {
-    var lengthRestrictions = $('select.column_type option').map(function () {
-      return $(this).filter(':selected').attr('data-length-restricted');
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('div#length_not_allowed').length) {
+    var lengthRestrictions = jquery__WEBPACK_IMPORTED_MODULE_0__('select.column_type option').map(function () {
+      return jquery__WEBPACK_IMPORTED_MODULE_0__(this).filter(':selected').attr('data-length-restricted');
     }).get();
     var restricationFound = lengthRestrictions.some(restriction => Number(restriction) === 1);
 
     if (restricationFound) {
-      $('div#length_not_allowed').show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('div#length_not_allowed').show();
     } else {
-      $('div#length_not_allowed').hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('div#length_not_allowed').hide();
     }
   }
 };
@@ -2036,7 +2048,7 @@ Functions.createProfilingChart = function (target, data) {
   dataTable.addColumn(ColumnType.STRING, '');
   dataTable.addColumn(ColumnType.NUMBER, '');
   dataTable.setData(data);
-  var windowWidth = $(window).width();
+  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
   var location = 's';
 
   if (windowWidth > 768) {
@@ -2280,9 +2292,9 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
     return true;
   }
 
-  $('#functionConfirmModal').modal('show');
-  $('#functionConfirmModal').find('.modal-body').first().html(question);
-  $('#functionConfirmOkButton').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#functionConfirmModal').modal('show');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#functionConfirmModal').find('.modal-body').first().html(question);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#functionConfirmOkButton').on('click', function () {
     if (typeof callbackFn === 'function') {
       callbackFn.call(this, url);
     }
@@ -2293,7 +2305,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
   }
 };
 
-jQuery.fn.confirm = Functions.confirm;
+jquery__WEBPACK_IMPORTED_MODULE_0__.fn.confirm = Functions.confirm;
 /**
  * jQuery function to sort a table's body after a new row has been appended to it.
  *
@@ -2307,15 +2319,15 @@ Functions.sortTable = function (textSelector) {
     /**
      * @var table_body  Object referring to the table's <tbody> element
      */
-    var tableBody = $(this);
+    var tableBody = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     /**
      * @var rows    Object referring to the collection of rows in {@link tableBody}
      */
 
-    var rows = $(this).find('tr').get(); // get the text of the field that we will sort by
+    var rows = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('tr').get(); // get the text of the field that we will sort by
 
-    $.each(rows, function (index, row) {
-      row.sortKey = $(row).find(textSelector).text().toLowerCase().trim();
+    jquery__WEBPACK_IMPORTED_MODULE_0__.each(rows, function (index, row) {
+      row.sortKey = jquery__WEBPACK_IMPORTED_MODULE_0__(row).find(textSelector).text().toLowerCase().trim();
     }); // get the sorted order
 
     rows.sort(function (a, b) {
@@ -2330,23 +2342,23 @@ Functions.sortTable = function (textSelector) {
       return 0;
     }); // pull out each row from the table and then append it according to it's order
 
-    $.each(rows, function (index, row) {
-      $(tableBody).append(row);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.each(rows, function (index, row) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(tableBody).append(row);
       row.sortKey = null;
     });
   });
 };
 
-jQuery.fn.sortTable = Functions.sortTable;
+jquery__WEBPACK_IMPORTED_MODULE_0__.fn.sortTable = Functions.sortTable;
 /**
  * @return {void}
  */
 
 Functions.teardownCreateTableEvents = () => {
-  $(document).off('submit', 'form.create_table_form.ajax');
-  $(document).off('click', 'form.create_table_form.ajax input[name=submit_num_fields]');
-  $(document).off('keyup', 'form.create_table_form.ajax input');
-  $(document).off('change', 'input[name=partition_count],input[name=subpartition_count],select[name=partition_by]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', 'form.create_table_form.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'form.create_table_form.ajax input[name=submit_num_fields]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keyup', 'form.create_table_form.ajax input');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'input[name=partition_count],input[name=subpartition_count],select[name=partition_by]');
 };
 /**
  * Used on /database/operations, /database/structure and /database/tracking
@@ -2358,13 +2370,13 @@ Functions.onloadCreateTableEvents = function () {
   /**
    * Attach event handler for submission of create table form (save)
    */
-  $(document).on('submit', 'form.create_table_form.ajax', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', 'form.create_table_form.ajax', function (event) {
     event.preventDefault();
     /**
      * @var    the_form    object referring to the create table form
      */
 
-    var $form = $(this);
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     /*
      * First validate the form; if there is a problem, avoid submitting it
      *
@@ -2379,23 +2391,23 @@ Functions.onloadCreateTableEvents = function () {
       if (Functions.checkReservedWordColumns($form)) {
         Functions.ajaxShowMessage(window.Messages.strProcessingRequest); // User wants to submit the form
 
-        $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
           if (typeof data !== 'undefined' && data.success === true) {
-            $('#properties_message').removeClass('alert-danger').html('');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#properties_message').removeClass('alert-danger').html('');
             Functions.ajaxShowMessage(data.message); // Only if the create table dialog (distinct panel) exists
 
-            var $createTableDialog = $('#create_table_dialog');
+            var $createTableDialog = jquery__WEBPACK_IMPORTED_MODULE_0__('#create_table_dialog');
 
             if ($createTableDialog.length > 0) {
               $createTableDialog.dialog('close').remove();
             }
 
-            $('#tableslistcontainer').before(data.formatted_sql);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').before(data.formatted_sql);
             /**
              * @var tables_table    Object referring to the <tbody> element that holds the list of tables
              */
 
-            var tablesTable = $('#tablesForm').find('tbody').not('#tbl_summary_row'); // this is the first table created in this db
+            var tablesTable = jquery__WEBPACK_IMPORTED_MODULE_0__('#tablesForm').find('tbody').not('#tbl_summary_row'); // this is the first table created in this db
 
             if (tablesTable.length === 0) {
               window.CommonActions.refreshMain(window.CommonParams.get('opendb_url'));
@@ -2403,12 +2415,12 @@ Functions.onloadCreateTableEvents = function () {
               /**
                * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
                */
-              var currLastRow = $(tablesTable).find('tr').last();
+              var currLastRow = jquery__WEBPACK_IMPORTED_MODULE_0__(tablesTable).find('tr').last();
               /**
                * @var curr_last_row_index_string   String containing the index of {@link currLastRow}
                */
 
-              var currLastRowIndexString = $(currLastRow).find('input:checkbox').attr('id').match(/\d+/)[0];
+              var currLastRowIndexString = jquery__WEBPACK_IMPORTED_MODULE_0__(currLastRow).find('input:checkbox').attr('id').match(/\d+/)[0];
               /**
                * @var curr_last_row_index Index of {@link currLastRow}
                */
@@ -2426,9 +2438,9 @@ Functions.onloadCreateTableEvents = function () {
               var newLastRowId = 'checkbox_tbl_' + newLastRowIndex;
               data.newTableString = data.newTableString.replace(/checkbox_tbl_/, newLastRowId); // append to table
 
-              $(data.newTableString).appendTo(tablesTable); // Sort the table
+              jquery__WEBPACK_IMPORTED_MODULE_0__(data.newTableString).appendTo(tablesTable); // Sort the table
 
-              $(tablesTable).sortTable('th'); // Adjust summary row
+              jquery__WEBPACK_IMPORTED_MODULE_0__(tablesTable).sortTable('th'); // Adjust summary row
 
               DatabaseStructure.adjustTotals();
             } // Refresh navigation as a new table has been added
@@ -2439,7 +2451,7 @@ Functions.onloadCreateTableEvents = function () {
             var argsep = window.CommonParams.get('arg_separator');
             var params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
             var tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
-            $.get(tableStructureUrl, params12, window.AJAX.responseHandler);
+            jquery__WEBPACK_IMPORTED_MODULE_0__.get(tableStructureUrl, params12, window.AJAX.responseHandler);
           } else {
             Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + data.error + '</div>', false);
           }
@@ -2459,17 +2471,17 @@ Functions.onloadCreateTableEvents = function () {
     /**
      * @var    the_form    object referring to the create table form
      */
-    var $form = $('form.create_table_form.ajax');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form.create_table_form.ajax');
     var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form); // User wants to add more fields to the table
 
-    $.post($form.attr('action'), $form.serialize() + '&' + actionParam, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + '&' + actionParam, function (data) {
       if (typeof data !== 'undefined' && data.success) {
-        var $pageContent = $('#page_content');
+        var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
         $pageContent.html(data.message);
         Functions.highlightSql($pageContent);
         Functions.verifyColumnsProperties();
-        Functions.hideShowConnection($('.create_table_form select[name=tbl_storage_engine]'));
+        Functions.hideShowConnection(jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form select[name=tbl_storage_engine]'));
         Functions.ajaxRemoveMessage($msgbox);
       } else {
         Functions.ajaxShowMessage(data.error);
@@ -2481,24 +2493,24 @@ Functions.onloadCreateTableEvents = function () {
    */
 
 
-  $(document).on('click', 'form.create_table_form.ajax input[name=submit_num_fields]', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'form.create_table_form.ajax input[name=submit_num_fields]', function (event) {
     event.preventDefault();
     submitChangesInCreateTableForm('submit_num_fields=1');
   }); // end create table form (add fields)
 
-  $(document).on('keydown', 'form.create_table_form.ajax input[name=added_fields]', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown', 'form.create_table_form.ajax input[name=added_fields]', function (event) {
     if (event.keyCode === 13) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      $(this).closest('form').find('input[name=submit_num_fields]').trigger('click');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').find('input[name=submit_num_fields]').trigger('click');
     }
   });
   /**
    * Attach event handler to manage changes in number of partitions and subpartitions
    */
 
-  $(document).on('change', 'input[name=partition_count],input[name=subpartition_count],select[name=partition_by]', function () {
-    var $this = $(this);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input[name=partition_count],input[name=subpartition_count],select[name=partition_by]', function () {
+    var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $form = $this.parents('form');
 
     if ($form.is('.create_table_form.ajax')) {
@@ -2507,19 +2519,19 @@ Functions.onloadCreateTableEvents = function () {
       $form.trigger('submit');
     }
   });
-  $(document).on('change', 'input[value=AUTO_INCREMENT]', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input[value=AUTO_INCREMENT]', function () {
     if (this.checked) {
-      var col = /\d/.exec($(this).attr('name'));
+      var col = /\d/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name'));
       col = col[0];
-      var $selectFieldKey = $('select[name="field_key[' + col + ']"]');
+      var $selectFieldKey = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + col + ']"]');
 
       if ($selectFieldKey.val() === 'none_' + col) {
         $selectFieldKey.val('primary_' + col).trigger('change', [false]);
       }
     }
   });
-  $('body').off('click', 'input.preview_sql').on('click', 'input.preview_sql', function () {
-    var $form = $(this).closest('form');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'input.preview_sql').on('click', 'input.preview_sql', function () {
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form');
     Functions.previewSql($form);
   });
 };
@@ -2572,15 +2584,15 @@ Functions.checkPassword = function ($theForm) {
 
 Functions.onloadChangePasswordEvents = function () {
   /* Handler for hostname type */
-  $(document).on('change', '#select_pred_hostname', function () {
-    var hostname = $('#pma_hostname');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_pred_hostname', function () {
+    var hostname = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_hostname');
 
     if (this.value === 'any') {
       hostname.val('%');
     } else if (this.value === 'localhost') {
       hostname.val('localhost');
-    } else if (this.value === 'thishost' && $(this).data('thishost')) {
-      hostname.val($(this).data('thishost'));
+    } else if (this.value === 'thishost' && jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('thishost')) {
+      hostname.val(jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('thishost'));
     } else if (this.value === 'hosttable') {
       hostname.val('').prop('required', false);
     } else if (this.value === 'userdefined') {
@@ -2589,66 +2601,66 @@ Functions.onloadChangePasswordEvents = function () {
   });
   /* Handler for editing hostname */
 
-  $(document).on('change', '#pma_hostname', function () {
-    $('#select_pred_hostname').val('userdefined');
-    $('#pma_hostname').prop('required', true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#pma_hostname', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_hostname').val('userdefined');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_hostname').prop('required', true);
   });
   /* Handler for username type */
 
-  $(document).on('change', '#select_pred_username', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_pred_username', function () {
     if (this.value === 'any') {
-      $('#pma_username').val('').prop('required', false);
-      $('#user_exists_warning').css('display', 'none');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_username').val('').prop('required', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#user_exists_warning').css('display', 'none');
     } else if (this.value === 'userdefined') {
-      $('#pma_username').trigger('focus').trigger('select').prop('required', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_username').trigger('focus').trigger('select').prop('required', true);
     }
   });
   /* Handler for editing username */
 
-  $(document).on('change', '#pma_username', function () {
-    $('#select_pred_username').val('userdefined');
-    $('#pma_username').prop('required', true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#pma_username', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_username').val('userdefined');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_username').prop('required', true);
   });
   /* Handler for password type */
 
-  $(document).on('change', '#select_pred_password', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_pred_password', function () {
     if (this.value === 'none') {
-      $('#text_pma_pw2').prop('required', false).val('');
-      $('#text_pma_pw').prop('required', false).val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw2').prop('required', false).val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').prop('required', false).val('');
     } else if (this.value === 'userdefined') {
-      $('#text_pma_pw2').prop('required', true);
-      $('#text_pma_pw').prop('required', true).trigger('focus').trigger('select');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw2').prop('required', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').prop('required', true).trigger('focus').trigger('select');
     } else {
-      $('#text_pma_pw2').prop('required', false);
-      $('#text_pma_pw').prop('required', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw2').prop('required', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').prop('required', false);
     }
   });
   /* Handler for editing password */
 
-  $(document).on('change', '#text_pma_pw,#text_pma_pw2', function () {
-    $('#select_pred_password').val('userdefined');
-    $('#text_pma_pw2').prop('required', true);
-    $('#text_pma_pw').prop('required', true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#text_pma_pw,#text_pma_pw2', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_password').val('userdefined');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw2').prop('required', true);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').prop('required', true);
   });
   /**
    * Unbind all event handlers before tearing down a page
    */
 
-  $(document).off('click', '#change_password_anchor.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#change_password_anchor.ajax');
   /**
    * Attach Ajax event handler on the change password anchor
    */
 
-  $(document).on('click', '#change_password_anchor.ajax', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#change_password_anchor.ajax', function (event) {
     event.preventDefault();
     var $msgbox = Functions.ajaxShowMessage();
-    $('#changePasswordGoButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordGoButton').on('click', function () {
       event.preventDefault();
       /**
        * @var $the_form    Object referring to the change password form
        */
 
-      var $theForm = $('#change_password_form');
+      var $theForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_form');
 
       if (!Functions.checkPassword($theForm)) {
         return false;
@@ -2660,26 +2672,26 @@ Functions.onloadChangePasswordEvents = function () {
        */
 
 
-      var thisValue = $(this).val();
+      var thisValue = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
       var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
       $theForm.append('<input type="hidden" name="ajax_request" value="true">');
-      $.post($theForm.attr('action'), $theForm.serialize() + window.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post($theForm.attr('action'), $theForm.serialize() + window.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
         if (typeof data === 'undefined' || data.success !== true) {
           Functions.ajaxShowMessage(data.error, false);
           return;
         }
 
-        var $pageContent = $('#page_content');
+        var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
         $pageContent.prepend(data.message);
         Functions.highlightSql($pageContent);
-        $('#change_password_dialog').hide().remove();
-        $('#edit_user_dialog').dialog('close').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_dialog').hide().remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog').dialog('close').remove();
         Functions.ajaxRemoveMessage($msgbox);
       }); // end $.post()
 
-      $('#changePasswordModal').modal('hide');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordModal').modal('hide');
     });
-    $.get($(this).attr('href'), {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
       if (typeof data === 'undefined' || !data.success) {
@@ -2692,15 +2704,15 @@ Functions.onloadChangePasswordEvents = function () {
       } // for this dialog, we remove the fieldset wrapping due to double headings
 
 
-      $('#changePasswordModal').modal('show');
-      $('#changePasswordModal').find('.modal-body').first().html(data.message);
-      $('fieldset#fieldset_change_password').find('legend').remove().end().find('table.table').unwrap().addClass('m-3').find('input#text_pma_pw').trigger('focus');
-      $('#fieldset_change_password_footer').hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordModal').modal('show');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordModal').find('.modal-body').first().html(data.message);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset#fieldset_change_password').find('legend').remove().end().find('table.table').unwrap().addClass('m-3').find('input#text_pma_pw').trigger('focus');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_change_password_footer').hide();
       Functions.ajaxRemoveMessage($msgbox);
       Functions.displayPasswordGenerateButton();
-      $('#change_password_form').on('submit', function (e) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_form').on('submit', function (e) {
         e.preventDefault();
-        $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button').first().trigger('click');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button').first().trigger('click');
       });
     }); // end $.get()
   });
@@ -2711,11 +2723,11 @@ Functions.onloadChangePasswordEvents = function () {
 
 
 Functions.teardownEnumSetEditorMessage = () => {
-  $(document).off('change', 'select.column_type');
-  $(document).off('change', 'select.default_type');
-  $(document).off('change', 'select.virtuality');
-  $(document).off('change', 'input.allow_null');
-  $(document).off('change', '.create_table_form select[name=tbl_storage_engine]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select.column_type');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select.default_type');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select.virtuality');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'input.allow_null');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '.create_table_form select[name=tbl_storage_engine]');
 };
 /**
  * Toggle the hiding/showing of the "Open in ENUM/SET editor" message when
@@ -2730,21 +2742,21 @@ Functions.onloadEnumSetEditorMessage = function () {
   Functions.verifyColumnsProperties(); //
   // needs on() to work also in the Create Table dialog
 
-  $(document).on('change', 'select.column_type', function () {
-    Functions.showNoticeForEnum($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select.column_type', function () {
+    Functions.showNoticeForEnum(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
     Functions.showWarningForIntTypes();
   });
-  $(document).on('change', 'select.default_type', function () {
-    Functions.hideShowDefaultValue($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select.default_type', function () {
+    Functions.hideShowDefaultValue(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
-  $(document).on('change', 'select.virtuality', function () {
-    Functions.hideShowExpression($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select.virtuality', function () {
+    Functions.hideShowExpression(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
-  $(document).on('change', 'input.allow_null', function () {
-    Functions.validateDefaultValue($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input.allow_null', function () {
+    Functions.validateDefaultValue(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
-  $(document).on('change', '.create_table_form select[name=tbl_storage_engine]', function () {
-    Functions.hideShowConnection($(this));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '.create_table_form select[name=tbl_storage_engine]', function () {
+    Functions.hideShowConnection(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
 };
 /**
@@ -2755,8 +2767,8 @@ Functions.onloadEnumSetEditorMessage = function () {
 
 
 Functions.hideShowConnection = function ($engineSelector) {
-  var $connection = $('.create_table_form input[name=connection]');
-  var $labelTh = $('.create_table_form #storage-engine-connection');
+  var $connection = jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form input[name=connection]');
+  var $labelTh = jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form #storage-engine-connection');
 
   if ($engineSelector.val() !== 'FEDERATED') {
     $connection.prop('disabled', true).parent('td').hide();
@@ -2794,10 +2806,10 @@ Functions.autoPopulate = function (inputId, offset) {
   var db = window.CommonParams.get('db');
   var table = window.CommonParams.get('table');
   var newInputId = inputId.substring(0, inputId.length - 1);
-  $('#' + newInputId + '1').val(window.centralColumnList[db + '_' + table][offset].col_name);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '1').val(window.centralColumnList[db + '_' + table][offset].col_name);
   var colType = window.centralColumnList[db + '_' + table][offset].col_type.toUpperCase();
-  $('#' + newInputId + '2').val(colType);
-  var $input3 = $('#' + newInputId + '3');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '2').val(colType);
+  var $input3 = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '3');
   $input3.val(window.centralColumnList[db + '_' + table][offset].col_length);
 
   if (colType === 'ENUM' || colType === 'SET') {
@@ -2807,7 +2819,7 @@ Functions.autoPopulate = function (inputId, offset) {
   }
 
   var colDefault = window.centralColumnList[db + '_' + table][offset].col_default.toUpperCase();
-  var $input4 = $('#' + newInputId + '4');
+  var $input4 = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '4');
 
   if (colDefault !== '' && colDefault !== 'NULL' && colDefault !== 'CURRENT_TIMESTAMP' && colDefault !== 'CURRENT_TIMESTAMP()') {
     $input4.val('USER_DEFINED');
@@ -2818,8 +2830,8 @@ Functions.autoPopulate = function (inputId, offset) {
     $input4.next().next().hide();
   }
 
-  $('#' + newInputId + '5').val(window.centralColumnList[db + '_' + table][offset].col_collation);
-  var $input6 = $('#' + newInputId + '6');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '5').val(window.centralColumnList[db + '_' + table][offset].col_collation);
+  var $input6 = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '6');
   $input6.val(window.centralColumnList[db + '_' + table][offset].col_attribute);
 
   if (window.centralColumnList[db + '_' + table][offset].col_extra === 'on update CURRENT_TIMESTAMP') {
@@ -2827,15 +2839,15 @@ Functions.autoPopulate = function (inputId, offset) {
   }
 
   if (window.centralColumnList[db + '_' + table][offset].col_extra.toUpperCase() === 'AUTO_INCREMENT') {
-    $('#' + newInputId + '9').prop('checked', true).trigger('change');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '9').prop('checked', true).trigger('change');
   } else {
-    $('#' + newInputId + '9').prop('checked', false);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '9').prop('checked', false);
   }
 
   if (window.centralColumnList[db + '_' + table][offset].col_isNull !== '0') {
-    $('#' + newInputId + '7').prop('checked', true);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '7').prop('checked', true);
   } else {
-    $('#' + newInputId + '7').prop('checked', false);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#' + newInputId + '7').prop('checked', false);
   }
 };
 /**
@@ -2844,10 +2856,10 @@ Functions.autoPopulate = function (inputId, offset) {
 
 
 Functions.teardownEnumSetEditor = () => {
-  $(document).off('click', 'a.open_enum_editor');
-  $(document).off('click', 'input.add_value');
-  $(document).off('click', '#enum_editor td.drop');
-  $(document).off('click', 'a.central_columns_dialog');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.open_enum_editor');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input.add_value');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#enum_editor td.drop');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.central_columns_dialog');
 };
 /**
  * Opens the ENUM/SET editor and controls its functions
@@ -2856,9 +2868,9 @@ Functions.teardownEnumSetEditor = () => {
 
 
 Functions.onloadEnumSetEditor = function () {
-  $(document).on('click', 'a.open_enum_editor', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.open_enum_editor', function () {
     // Get the name of the column that is being edited
-    var colname = $(this).closest('tr').find('input').first().val();
+    var colname = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').find('input').first().val();
     var title;
     var i; // And use it to make up a title for the page
 
@@ -2869,9 +2881,9 @@ Functions.onloadEnumSetEditor = function () {
     } // Get the values as a string
 
 
-    var inputstring = $(this).closest('td').find('input').val(); // Escape html entities
+    var inputstring = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('input').val(); // Escape html entities
 
-    inputstring = $('<div></div>').text(inputstring).html(); // Parse the values, escaping quotes and
+    inputstring = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').text(inputstring).html(); // Parse the values, escaping quotes and
     // slashes on the fly, into an array
 
     var values = [];
@@ -2925,49 +2937,49 @@ Functions.onloadEnumSetEditor = function () {
 
 
     var dialog = '<div id=\'enum_editor\'>' + '<fieldset class="pma-fieldset">' + '<legend>' + title + '</legend>' + '<p>' + Functions.getImage('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values">' + fields + '</table>' + '</fieldset><fieldset class="pma-fieldset tblFooters">' + '<table class="table table-borderless add"><tr><td>' + '<div class=\'slider\'></div>' + '</td><td>' + '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' + Functions.sprintf(window.Messages.enum_addValue, 1) + '\'></div></form>' + '</td></tr></table>' + '<input type=\'hidden\' value=\'' + // So we know which column's data is being edited
-    $(this).closest('td').find('input').attr('id') + '\'>' + '</fieldset>' + '</div>';
-    $('#enumEditorGoButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('input').attr('id') + '\'>' + '</fieldset>' + '</div>';
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorGoButton').on('click', function () {
       // When the submit button is clicked,
       // put the data back into the original form
       var valueArray = [];
-      $('#enumEditorModal').find('.values input').each(function (index, elm) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.values input').each(function (index, elm) {
         var val = elm.value.replace(/\\/g, '\\\\').replace(/'/g, '\'\'');
         valueArray.push('\'' + val + '\'');
       }); // get the Length/Values text field where this value belongs
 
-      var valuesId = $('#enumEditorModal').find('input[type=\'hidden\']').val();
-      $('input#' + valuesId).val(valueArray.join(','));
+      var valuesId = jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('input[type=\'hidden\']').val();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('input#' + valuesId).val(valueArray.join(','));
     }); // Show the dialog
 
-    var width = parseInt(parseInt($('html').css('font-size'), 10) / 13 * 340, 10);
+    var width = parseInt(parseInt(jquery__WEBPACK_IMPORTED_MODULE_0__('html').css('font-size'), 10) / 13 * 340, 10);
 
     if (!width) {
       width = 340;
     }
 
-    $('#enumEditorModal').modal('show');
-    $('#enumEditorModal').find('.modal-body').first().html(dialog); // slider for choosing how many fields to add
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').modal('show');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.modal-body').first().html(dialog); // slider for choosing how many fields to add
 
-    $('#enumEditorModal').find('.slider').slider({
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.slider').slider({
       animate: true,
       range: 'min',
       value: 1,
       min: 1,
       max: 9,
       slide: function (event, ui) {
-        $(this).closest('table').find('input[type=submit]').val(Functions.sprintf(window.Messages.enum_addValue, ui.value));
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table').find('input[type=submit]').val(Functions.sprintf(window.Messages.enum_addValue, ui.value));
       }
     }); // Focus the slider, otherwise it looks nearly transparent
 
-    $('a.ui-slider-handle').addClass('ui-state-focus');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('a.ui-slider-handle').addClass('ui-state-focus');
     return false;
   });
-  $(document).on('click', 'a.central_columns_dialog', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.central_columns_dialog', function () {
     var href = 'index.php?route=/database/central-columns';
     var db = window.CommonParams.get('db');
     var table = window.CommonParams.get('table');
-    var maxRows = $(this).data('maxrows');
-    var pick = $(this).data('pick');
+    var maxRows = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('maxrows');
+    var pick = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('pick');
 
     if (pick !== false) {
       pick = true;
@@ -2980,12 +2992,12 @@ Functions.onloadEnumSetEditor = function () {
       'cur_table': window.CommonParams.get('table'),
       'getColumnList': true
     };
-    var colid = $(this).closest('td').find('input').attr('id');
+    var colid = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('input').attr('id');
     var fields = '';
 
     if (!(db + '_' + table in window.centralColumnList)) {
       window.centralColumnList.push(db + '_' + table);
-      $.ajax({
+      jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         type: 'POST',
         url: href,
         data: params,
@@ -3035,27 +3047,27 @@ Functions.onloadEnumSetEditor = function () {
     }
 
     var centralColumnsDialog = '<div class=\'max_height_400\'>' + '<fieldset class="pma-fieldset">' + searchIn + '<table id="col_list" class="table table-borderless values">' + fields + '</table>' + '</fieldset>' + seeMore + '</div>';
-    var width = parseInt(parseInt($('html').css('font-size'), 10) / 13 * 500, 10);
+    var width = parseInt(parseInt(jquery__WEBPACK_IMPORTED_MODULE_0__('html').css('font-size'), 10) / 13 * 500, 10);
 
     if (!width) {
       width = 500;
     }
 
     var buttonOptions = {};
-    var $centralColumnsDialog = $(centralColumnsDialog).dialog({
+    var $centralColumnsDialog = jquery__WEBPACK_IMPORTED_MODULE_0__(centralColumnsDialog).dialog({
       minWidth: width,
       maxHeight: 450,
       modal: true,
       title: window.Messages.pickColumnTitle,
       buttons: buttonOptions,
       open: function () {
-        $('#col_list').on('click', '.pick', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#col_list').on('click', '.pick', function () {
           $centralColumnsDialog.remove();
         });
-        $('.filter_rows').on('keyup', function () {
-          $.uiTableFilter($('#col_list'), $(this).val());
+        jquery__WEBPACK_IMPORTED_MODULE_0__('.filter_rows').on('keyup', function () {
+          jquery__WEBPACK_IMPORTED_MODULE_0__.uiTableFilter(jquery__WEBPACK_IMPORTED_MODULE_0__('#col_list'), jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
         });
-        $('#seeMore').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#seeMore').on('click', function () {
           fields = '';
           min = listSize <= maxRows + resultPointer ? listSize : maxRows + resultPointer;
 
@@ -3079,38 +3091,38 @@ Functions.onloadEnumSetEditor = function () {
             fields += '</tr>';
           }
 
-          $('#col_list').append(fields);
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#col_list').append(fields);
           resultPointer = i;
 
           if (resultPointer === listSize) {
-            $('#seeMore').hide();
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#seeMore').hide();
           }
 
           return false;
         });
-        $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
       },
       close: function () {
-        $('#col_list').off('click', '.pick');
-        $('.filter_rows').off('keyup');
-        $(this).remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#col_list').off('click', '.pick');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('.filter_rows').off('keyup');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
       }
     });
     return false;
   }); // When "add a new value" is clicked, append an empty text field
 
-  $(document).on('click', 'input.add_value', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input.add_value', function (e) {
     e.preventDefault();
-    var numNewRows = $('#enumEditorModal').find('div.slider').slider('value');
+    var numNewRows = jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('div.slider').slider('value');
 
     while (numNewRows--) {
-      $('#enumEditorModal').find('.values').append('<tr class=\'hide\'><td>' + '<input type=\'text\'>' + '</td><td class=\'drop\'>' + Functions.getImage('b_drop') + '</td></tr>').find('tr').last().show('fast');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.values').append('<tr class=\'hide\'><td>' + '<input type=\'text\'>' + '</td><td class=\'drop\'>' + Functions.getImage('b_drop') + '</td></tr>').find('tr').last().show('fast');
     }
   }); // Removes the specified row from the enum editor
 
-  $(document).on('click', '#enum_editor td.drop', function () {
-    $(this).closest('tr').hide('fast', function () {
-      $(this).remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#enum_editor td.drop', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').hide('fast', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
     });
   });
 };
@@ -3124,13 +3136,13 @@ Functions.onloadEnumSetEditor = function () {
 
 
 Functions.checkIndexName = function (formId) {
-  if ($('#' + formId).length === 0) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#' + formId).length === 0) {
     return false;
   } // Gets the elements pointers
 
 
-  var $theIdxName = $('#input_index_name');
-  var $theIdxChoice = $('#select_index_choice'); // Index is a primary key
+  var $theIdxName = jquery__WEBPACK_IMPORTED_MODULE_0__('#input_index_name');
+  var $theIdxChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice'); // Index is a primary key
 
   if ($theIdxChoice.find('option:selected').val() === 'PRIMARY') {
     $theIdxName.val('PRIMARY');
@@ -3154,25 +3166,25 @@ Functions.checkIndexName = function (formId) {
 Functions.getAddIndexEventHandler = function () {
   return function (event) {
     event.preventDefault();
-    var hadAddButtonHidden = $(this).closest('fieldset').find('.add_fields').hasClass('hide');
+    var hadAddButtonHidden = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('.add_fields').hasClass('hide');
 
     if (hadAddButtonHidden === false) {
-      var rowsToAdd = $(this).closest('fieldset').find('.slider').slider('value');
+      var rowsToAdd = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('.slider').slider('value');
 
       var tempEmptyVal = function () {
-        $(this).val('');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).val('');
       };
 
       var tempSetFocus = function () {
-        if ($(this).find('option:selected').val() === '') {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('option:selected').val() === '') {
           return true;
         }
 
-        $(this).closest('tr').find('input').trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').find('input').trigger('focus');
       };
 
       while (rowsToAdd--) {
-        var $indexColumns = $('#index_columns');
+        var $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns');
         var $newrow = $indexColumns.find('tbody > tr').first().clone().appendTo($indexColumns.find('tbody'));
         $newrow.find(':input').each(tempEmptyVal); // focus index size input on column picked
 
@@ -3184,15 +3196,15 @@ Functions.getAddIndexEventHandler = function () {
 
 Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, callbackFailure) {
   /* Remove the hidden dialogs if there are*/
-  var modal = $('#indexDialogModal');
+  var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogModal');
   const indexDialogPreviewModal = document.getElementById('indexDialogPreviewModal');
   indexDialogPreviewModal.addEventListener('shown.bs.modal', () => {
     const modalBody = indexDialogPreviewModal.querySelector('.modal-body');
-    const $form = $('#index_frm');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
     const formUrl = $form.attr('action');
     const sep = window.CommonParams.get('arg_separator');
     const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
-    $.post({
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post({
       url: formUrl,
       data: formData,
       success: response => {
@@ -3202,7 +3214,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         }
 
         modalBody.innerHTML = response.sql_data;
-        Functions.highlightSql($('#indexDialogPreviewModal'));
+        Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogPreviewModal'));
       },
       error: () => {
         modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
@@ -3217,16 +3229,16 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
    *                     passed to jQueryUI dialog
    */
 
-  $('#indexDialogModalGoButton').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogModalGoButton').on('click', function () {
     /**
      * @var the_form object referring to the export form
      */
-    var $form = $('#index_frm');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
     Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form); // User wants to submit the form
 
-    $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
-      var $sqlqueryresults = $('.sqlqueryresults');
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+      var $sqlqueryresults = jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults');
 
       if ($sqlqueryresults.length !== 0) {
         $sqlqueryresults.remove();
@@ -3234,19 +3246,19 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
 
       if (typeof data !== 'undefined' && data.success === true) {
         Functions.ajaxShowMessage(data.message);
-        Functions.highlightSql($('.result_query'));
-        $('.result_query .alert').remove();
+        Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query .alert').remove();
         /* Reload the field form*/
 
-        $('#table_index').remove();
-        $('<div id=\'temp_div\'><div>').append(data.index_table).find('#table_index').insertAfter('#index_header');
-        var $editIndexDialog = $('#indexDialogModal');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#table_index').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('<div id=\'temp_div\'><div>').append(data.index_table).find('#table_index').insertAfter('#index_header');
+        var $editIndexDialog = jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogModal');
 
         if ($editIndexDialog.length > 0) {
           $editIndexDialog.modal('hide');
         }
 
-        $('div.no_indexes_defined').hide();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('div.no_indexes_defined').hide();
 
         if (callbackSuccess) {
           callbackSuccess(data);
@@ -3254,7 +3266,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
 
         Navigation.reload();
       } else {
-        var $tempDiv = $('<div id=\'temp_div\'><div>').append(data.error);
+        var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('<div id=\'temp_div\'><div>').append(data.error);
         var $error;
 
         if ($tempDiv.find('.error code').length !== 0) {
@@ -3272,7 +3284,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
     }); // end $.post()
   });
   var $msgbox = Functions.ajaxShowMessage();
-  $.post(routeUrl, url, function (data) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.post(routeUrl, url, function (data) {
     if (typeof data !== 'undefined' && data.success === false) {
       // in the case of an error, show the error message returned.
       Functions.ajaxShowMessage(data.error, false);
@@ -3281,7 +3293,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
 
       modal.modal('show');
       modal.find('.modal-body').first().html(data.message);
-      $('#indexDialogModalLabel').first().text(title);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogModalLabel').first().text(title);
       Functions.verifyColumnsProperties();
       modal.find('.tblFooters').remove();
       Functions.showIndexEditDialog(modal);
@@ -3300,9 +3312,9 @@ Functions.indexRenameDialog = function (url, title, callbackSuccess, callbackFai
 Functions.showIndexEditDialog = function ($outer) {
   Indexes.checkIndexType();
   Functions.checkIndexName('index_frm');
-  var $indexColumns = $('#index_columns');
+  var $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns');
   $indexColumns.find('td').each(function () {
-    $(this).css('width', $(this).width() + 'px');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', jquery__WEBPACK_IMPORTED_MODULE_0__(this).width() + 'px');
   });
   $indexColumns.find('tbody').sortable({
     axis: 'y',
@@ -3317,20 +3329,20 @@ Functions.showIndexEditDialog = function ($outer) {
     min: 1,
     max: 16,
     slide: function (event, ui) {
-      $(this).closest('fieldset').find('input[type=submit]').val(Functions.sprintf(window.Messages.strAddToIndex, ui.value));
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('input[type=submit]').val(Functions.sprintf(window.Messages.strAddToIndex, ui.value));
     }
   });
-  $('div.add_fields').removeClass('hide'); // focus index size input on column picked
+  jquery__WEBPACK_IMPORTED_MODULE_0__('div.add_fields').removeClass('hide'); // focus index size input on column picked
 
   $outer.find('table#index_columns select').on('change', function () {
-    if ($(this).find('option:selected').val() === '') {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('option:selected').val() === '') {
       return true;
     }
 
-    $(this).closest('tr').find('input').trigger('focus');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').find('input').trigger('focus');
   }); // Focus the slider, otherwise it looks nearly transparent
 
-  $('a.ui-slider-handle').addClass('ui-state-focus'); // set focus on index name input, if empty
+  jquery__WEBPACK_IMPORTED_MODULE_0__('a.ui-slider-handle').addClass('ui-state-focus'); // set focus on index name input, if empty
 
   var input = $outer.find('input#input_index_name');
 
@@ -3352,19 +3364,19 @@ Functions.showIndexEditDialog = function ($outer) {
 Functions.showHints = function ($div) {
   var $newDiv = $div;
 
-  if ($newDiv === undefined || !($newDiv instanceof jQuery) || $newDiv.length === 0) {
-    $newDiv = $('body');
+  if ($newDiv === undefined || !($newDiv instanceof jquery__WEBPACK_IMPORTED_MODULE_0__) || $newDiv.length === 0) {
+    $newDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('body');
   }
 
   $newDiv.find('.pma_hint').each(function () {
-    Functions.tooltip($(this).children('img'), 'img', $(this).children('span').html());
+    Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('img'), 'img', jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('span').html());
   });
 };
 
 Functions.mainMenuResizerCallback = function () {
   // 5 px margin for jumping menu in Chrome
   // eslint-disable-next-line compat/compat
-  return $(document.body).width() - 5;
+  return jquery__WEBPACK_IMPORTED_MODULE_0__(document.body).width() - 5;
 };
 /**
  * @return {function}
@@ -3373,10 +3385,10 @@ Functions.mainMenuResizerCallback = function () {
 
 Functions.initializeMenuResizer = () => function () {
   // Initialise the menu resize plugin
-  $('#topmenu').menuResizer(Functions.mainMenuResizerCallback); // register resize event
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenu').menuResizer(Functions.mainMenuResizerCallback); // register resize event
 
-  $(window).on('resize', function () {
-    $('#topmenu').menuResizer('resize');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(window).on('resize', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenu').menuResizer('resize');
   });
 };
 /**
@@ -3393,7 +3405,7 @@ Functions.toggleButton = function ($obj) {
   // so we need to take that into account
   var right;
 
-  if ($('span.text_direction', $obj).text() === 'ltr') {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('span.text_direction', $obj).text() === 'ltr') {
     right = 'right';
   } else {
     right = 'left';
@@ -3405,27 +3417,27 @@ Functions.toggleButton = function ($obj) {
 
 
   var h = $obj.height();
-  $('img', $obj).height(h);
-  $('table', $obj).css('bottom', h - 1);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('img', $obj).height(h);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('table', $obj).css('bottom', h - 1);
   /**
    * @var  on   Width of the "ON" part of the toggle switch
    * @var  off  Width of the "OFF" part of the toggle switch
    */
 
-  var on = $('td.toggleOn', $obj).width();
-  var off = $('td.toggleOff', $obj).width(); // Make the "ON" and "OFF" parts of the switch the same size
+  var on = jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOn', $obj).width();
+  var off = jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOff', $obj).width(); // Make the "ON" and "OFF" parts of the switch the same size
   // + 2 pixels to avoid overflowed
 
-  $('td.toggleOn > div', $obj).width(Math.max(on, off) + 2);
-  $('td.toggleOff > div', $obj).width(Math.max(on, off) + 2);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOn > div', $obj).width(Math.max(on, off) + 2);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOff > div', $obj).width(Math.max(on, off) + 2);
   /**
    *  @var  w  Width of the central part of the switch
    */
 
-  var w = parseInt($('img', $obj).height() / 16 * 22, 10); // Resize the central part of the switch on the top
+  var w = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0__('img', $obj).height() / 16 * 22, 10); // Resize the central part of the switch on the top
   // layer to match the background
 
-  $($obj).find('table td').eq(1).children('div').width(w);
+  jquery__WEBPACK_IMPORTED_MODULE_0__($obj).find('table td').eq(1).children('div').width(w);
   /**
    * @var  imgw    Width of the background image
    * @var  tblw    Width of the foreground layer
@@ -3433,8 +3445,8 @@ Functions.toggleButton = function ($obj) {
    *               image, so that it matches the top layer
    */
 
-  var imgw = $('img', $obj).width();
-  var tblw = $('table', $obj).width();
+  var imgw = jquery__WEBPACK_IMPORTED_MODULE_0__('img', $obj).width();
+  var tblw = jquery__WEBPACK_IMPORTED_MODULE_0__('table', $obj).width();
   var offset = parseInt((imgw - tblw) / 2, 10); // Move the background to match the layout of the top layer
 
   $obj.find('img').css(right, offset);
@@ -3443,8 +3455,8 @@ Functions.toggleButton = function ($obj) {
    * @var  btnw    Outer width of the central part of the switch
    */
 
-  var offw = $('td.toggleOff', $obj).outerWidth();
-  var btnw = $($obj).find('table td').eq(1).outerWidth(); // Resize the main div so that exactly one side of
+  var offw = jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOff', $obj).outerWidth();
+  var btnw = jquery__WEBPACK_IMPORTED_MODULE_0__($obj).find('table td').eq(1).outerWidth(); // Resize the main div so that exactly one side of
   // the switch plus the central part fit into it.
 
   $obj.width(offw + btnw + 2);
@@ -3453,45 +3465,45 @@ Functions.toggleButton = function ($obj) {
    *             switch by when toggling
    */
 
-  var move = $('td.toggleOff', $obj).outerWidth(); // If the switch is initialized to the
+  var move = jquery__WEBPACK_IMPORTED_MODULE_0__('td.toggleOff', $obj).outerWidth(); // If the switch is initialized to the
   // OFF state we need to move it now.
 
-  if ($('div.toggle-container', $obj).hasClass('off')) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggle-container', $obj).hasClass('off')) {
     if (right === 'right') {
-      $('div.toggle-container', $obj).animate({
+      jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggle-container', $obj).animate({
         'left': '-=' + move + 'px'
       }, 0);
     } else {
-      $('div.toggle-container', $obj).animate({
+      jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggle-container', $obj).animate({
         'left': '+=' + move + 'px'
       }, 0);
     }
   } // Attach an 'onclick' event to the switch
 
 
-  $('div.toggle-container', $obj).on('click', function () {
-    if ($(this).hasClass('isActive')) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggle-container', $obj).on('click', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('isActive')) {
       return false;
     } else {
-      $(this).addClass('isActive');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('isActive');
     }
 
     var $msg = Functions.ajaxShowMessage();
-    var $container = $(this);
-    var callback = $('span.callback', this).text();
+    var $container = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    var callback = jquery__WEBPACK_IMPORTED_MODULE_0__('span.callback', this).text();
     var operator;
     var url;
     var removeClass;
     var addClass; // Perform the actual toggle
 
-    if ($(this).hasClass('on')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('on')) {
       if (right === 'right') {
         operator = '-=';
       } else {
         operator = '+=';
       }
 
-      url = $(this).find('td.toggleOff > span').text();
+      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td.toggleOff > span').text();
       removeClass = 'on';
       addClass = 'off';
     } else {
@@ -3501,13 +3513,13 @@ Functions.toggleButton = function ($obj) {
         operator = '-=';
       }
 
-      url = $(this).find('td.toggleOn > span').text();
+      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td.toggleOn > span').text();
       removeClass = 'off';
       addClass = 'on';
     }
 
     var parts = url.split('?');
-    $.post(parts[0], parts[1] + '&ajax_request=true', function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(parts[0], parts[1] + '&ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         Functions.ajaxRemoveMessage($msg);
         $container.removeClass(removeClass).addClass(addClass).animate({
@@ -3530,13 +3542,13 @@ Functions.toggleButton = function ($obj) {
 
 
 Functions.initializeToggleButtons = function () {
-  $('div.toggleAjax').each(function () {
-    var $button = $(this).show();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggleAjax').each(function () {
+    var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this).show();
     $button.find('img').each(function () {
       if (this.complete) {
         Functions.toggleButton($button);
       } else {
-        $(this).on('load', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('load', function () {
           Functions.toggleButton($button);
         });
       }
@@ -3553,12 +3565,12 @@ Functions.getPageSelectorEventHandler = function () {
   return function (event) {
     event.stopPropagation(); // Check where to load the new content
 
-    if ($(this).closest('#pma_navigation').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('#pma_navigation').length === 0) {
       // For the main page we don't need to do anything,
-      $(this).closest('form').trigger('submit');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').trigger('submit');
     } else {
       // but for the navigation we need to manually replace the content
-      Navigation.treePagination($(this));
+      Navigation.treePagination(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
     }
   };
 };
@@ -3568,8 +3580,8 @@ Functions.getPageSelectorEventHandler = function () {
 
 
 Functions.teardownRecentFavoriteTables = () => {
-  $('#update_recent_tables').off('ready');
-  $('#sync_favorite_tables').off('ready');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#update_recent_tables').off('ready');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#sync_favorite_tables').off('ready');
 };
 /**
  * @return {void}
@@ -3577,22 +3589,22 @@ Functions.teardownRecentFavoriteTables = () => {
 
 
 Functions.onloadRecentFavoriteTables = () => {
-  var $updateRecentTables = $('#update_recent_tables');
+  var $updateRecentTables = jquery__WEBPACK_IMPORTED_MODULE_0__('#update_recent_tables');
 
   if ($updateRecentTables.length) {
-    $.get($updateRecentTables.attr('href'), {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get($updateRecentTables.attr('href'), {
       'no_debug': true
     }, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        $('#pma_recent_list').html(data.list);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_recent_list').html(data.list);
       }
     });
   } // Sync favorite tables from localStorage to pmadb.
 
 
-  if ($('#sync_favorite_tables').length) {
-    $.ajax({
-      url: $('#sync_favorite_tables').attr('href'),
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#sync_favorite_tables').length) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
+      url: jquery__WEBPACK_IMPORTED_MODULE_0__('#sync_favorite_tables').attr('href'),
       cache: false,
       type: 'POST',
       data: {
@@ -3606,7 +3618,7 @@ Functions.onloadRecentFavoriteTables = () => {
           window.localStorage.favoriteTables = data.favoriteTables;
         }
 
-        $('#pma_favorite_list').html(data.list);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_favorite_list').html(data.list);
       }
     });
   }
@@ -3633,14 +3645,14 @@ Functions.slidingMessage = function (msg, $object) {
     return false;
   }
 
-  if ($obj === undefined || !($obj instanceof jQuery) || $obj.length === 0) {
+  if ($obj === undefined || !($obj instanceof jquery__WEBPACK_IMPORTED_MODULE_0__) || $obj.length === 0) {
     // If the second argument was not supplied,
     // we might have to create a new DOM node.
-    if ($('#PMA_slidingMessage').length === 0) {
-      $('#page_content').prepend('<span id="PMA_slidingMessage" ' + 'class="d-inline-block"></span>');
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#PMA_slidingMessage').length === 0) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').prepend('<span id="PMA_slidingMessage" ' + 'class="d-inline-block"></span>');
     }
 
-    $obj = $('#PMA_slidingMessage');
+    $obj = jquery__WEBPACK_IMPORTED_MODULE_0__('#PMA_slidingMessage');
   }
 
   if ($obj.has('div').length > 0) {
@@ -3681,7 +3693,7 @@ Functions.slidingMessage = function (msg, $object) {
 
 
 Functions.onloadCodeMirrorEditor = () => {
-  var $elm = $('#sqlquery');
+  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery');
 
   if ($elm.siblings().filter('.CodeMirror').length > 0) {
     return;
@@ -3698,7 +3710,7 @@ Functions.onloadCodeMirrorEditor = () => {
     }
   }
 
-  Functions.highlightSql($('body'));
+  Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('body'));
 };
 /**
  * @return {void}
@@ -3707,7 +3719,7 @@ Functions.onloadCodeMirrorEditor = () => {
 
 Functions.teardownCodeMirrorEditor = () => {
   if (window.codeMirrorEditor) {
-    $('#sqlquery').text(window.codeMirrorEditor.getValue());
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').text(window.codeMirrorEditor.getValue());
     window.codeMirrorEditor.toTextArea();
     window.codeMirrorEditor = false;
   }
@@ -3720,18 +3732,18 @@ Functions.teardownCodeMirrorEditor = () => {
 Functions.onloadLockPage = function () {
   // initializes all lock-page elements lock-id and
   // val-hash data property
-  $('#page_content form.lock-page textarea, ' + '#page_content form.lock-page input[type="text"], ' + '#page_content form.lock-page input[type="number"], ' + '#page_content form.lock-page select').each(function (i) {
-    $(this).data('lock-id', i); // val-hash is the hash of default value of the field
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content form.lock-page textarea, ' + '#page_content form.lock-page input[type="text"], ' + '#page_content form.lock-page input[type="number"], ' + '#page_content form.lock-page select').each(function (i) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('lock-id', i); // val-hash is the hash of default value of the field
     // so that it can be compared with new value hash
     // to check whether field was modified or not.
 
-    $(this).data('val-hash', window.AJAX.hash($(this).val()));
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('val-hash', window.AJAX.hash(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()));
   }); // initializes lock-page elements (input types checkbox and radio buttons)
   // lock-id and val-hash data property
 
-  $('#page_content form.lock-page input[type="checkbox"], ' + '#page_content form.lock-page input[type="radio"]').each(function (i) {
-    $(this).data('lock-id', i);
-    $(this).data('val-hash', window.AJAX.hash($(this).is(':checked')));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content form.lock-page input[type="checkbox"], ' + '#page_content form.lock-page input[type="radio"]').each(function (i) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('lock-id', i);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('val-hash', window.AJAX.hash(jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')));
   });
 };
 /**
@@ -3746,7 +3758,7 @@ Functions.onloadLockPage = function () {
       return $(this).val() === value;
     });
   };
-})(jQuery);
+})(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * Return value of a cell in a table.
  *
@@ -3756,7 +3768,7 @@ Functions.onloadLockPage = function () {
 
 
 Functions.getCellValue = function (td) {
-  var $td = $(td);
+  var $td = jquery__WEBPACK_IMPORTED_MODULE_0__(td);
 
   if ($td.is('.null')) {
     return '';
@@ -3774,7 +3786,7 @@ Functions.getCellValue = function (td) {
 
 Functions.getAutoSubmitEventHandler = function () {
   return function () {
-    $(this).closest('form').trigger('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').trigger('submit');
   };
 };
 /**
@@ -3789,15 +3801,15 @@ const PrintPage = {
 };
 
 Functions.teardownCreateView = () => {
-  $(document).off('click', 'a.create_view.ajax');
-  $(document).off('keydown', '#createViewModal input, #createViewModal select');
-  $(document).off('change', '#fkc_checkbox');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.create_view.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keydown', '#createViewModal input, #createViewModal select');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#fkc_checkbox');
 };
 
 Functions.onloadCreateView = function () {
-  $('.logout').on('click', function () {
-    var form = $('<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + Functions.escapeHtml(window.CommonParams.get('token')) + '">' + '</form>');
-    $('body').append(form);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.logout').on('click', function () {
+    var form = jquery__WEBPACK_IMPORTED_MODULE_0__('<form method="POST" action="' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + Functions.escapeHtml(window.CommonParams.get('token')) + '">' + '</form>');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('body').append(form);
     form.submit();
     sessionStorage.clear();
     return false;
@@ -3806,30 +3818,30 @@ Functions.onloadCreateView = function () {
    * Ajaxification for the "Create View" action
    */
 
-  $(document).on('click', 'a.create_view.ajax', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.create_view.ajax', function (e) {
     e.preventDefault();
-    Functions.createViewModal($(this));
+    Functions.createViewModal(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
   /**
    * Attach Ajax event handlers for input fields in the editor
    * and used to submit the Ajax request when the ENTER key is pressed.
    */
 
-  if ($('#createViewModal').length !== 0) {
-    $(document).on('keydown', '#createViewModal input, #createViewModal select', function (e) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').length !== 0) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown', '#createViewModal input, #createViewModal select', function (e) {
       if (e.which === 13) {
         // 13 is the ENTER key
         e.preventDefault(); // with preventing default, selection by <select> tag
         // was also prevented in IE
 
-        $(this).trigger('blur');
-        $(this).closest('.ui-dialog').find('.ui-button').first().trigger('click');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).trigger('blur');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.ui-dialog').find('.ui-button').first().trigger('click');
       }
     }); // end $(document).on()
   }
 
-  if ($('textarea[name="view[as]"]').length !== 0) {
-    window.codeMirrorEditor = Functions.getSqlEditor($('textarea[name="view[as]"]'));
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('textarea[name="view[as]"]').length !== 0) {
+    window.codeMirrorEditor = Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('textarea[name="view[as]"]'));
   }
 };
 
@@ -3838,35 +3850,35 @@ Functions.createViewModal = function ($this) {
   var sep = window.CommonParams.get('arg_separator');
   var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
   params += sep + 'ajax_dialog=1';
-  $.post($this.attr('href'), params, function (data) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.post($this.attr('href'), params, function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
       Functions.ajaxRemoveMessage($msg);
-      $('#createViewModalGoButton').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModalGoButton').on('click', function () {
         if (typeof window.CodeMirror !== 'undefined') {
           window.codeMirrorEditor.save();
         }
 
         $msg = Functions.ajaxShowMessage();
-        $.post('index.php?route=/view/create', $('#createViewModal').find('form').serialize(), function (data) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/view/create', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('form').serialize(), function (data) {
           Functions.ajaxRemoveMessage($msg);
 
           if (typeof data !== 'undefined' && data.success === true) {
-            $('#createViewModal').modal('hide');
-            $('.result_query').html(data.message);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('hide');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').html(data.message);
             Navigation.reload();
           } else {
             Functions.ajaxShowMessage(data.error);
           }
         });
       });
-      $('#createViewModal').find('.modal-body').first().html(data.message); // Attach syntax highlighted editor
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('.modal-body').first().html(data.message); // Attach syntax highlighted editor
 
-      $('#createViewModal').on('shown.bs.modal', function () {
-        window.codeMirrorEditor = Functions.getSqlEditor($('#createViewModal').find('textarea'));
-        $('input:visible[type=text]', $('#createViewModal')).first().trigger('focus');
-        $('#createViewModal').off('shown.bs.modal');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').on('shown.bs.modal', function () {
+        window.codeMirrorEditor = Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('textarea'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('input:visible[type=text]', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal')).first().trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').off('shown.bs.modal');
       });
-      $('#createViewModal').modal('show');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('show');
     } else {
       Functions.ajaxShowMessage(data.error);
     }
@@ -3879,18 +3891,18 @@ Functions.createViewModal = function ($this) {
 
 
 Functions.floatingMenuBar = () => function () {
-  if ($('#floating_menubar').length && $('#PMA_disable_floating_menubar').length === 0) {
-    var left = $('html').attr('dir') === 'ltr' ? 'left' : 'right';
-    $('#floating_menubar').css('margin-' + left, $('#pma_navigation').width() + $('#pma_navigation_resizer').width()).css(left, 0).css({
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#floating_menubar').length && jquery__WEBPACK_IMPORTED_MODULE_0__('#PMA_disable_floating_menubar').length === 0) {
+    var left = jquery__WEBPACK_IMPORTED_MODULE_0__('html').attr('dir') === 'ltr' ? 'left' : 'right';
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#floating_menubar').css('margin-' + left, jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation').width() + jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_resizer').width()).css(left, 0).css({
       'position': 'fixed',
       'top': 0,
       'width': '100%',
       'z-index': 99
-    }).append($('#server-breadcrumb')).append($('#topmenucontainer')); // Allow the DOM to render, then adjust the padding on the body
+    }).append(jquery__WEBPACK_IMPORTED_MODULE_0__('#server-breadcrumb')).append(jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenucontainer')); // Allow the DOM to render, then adjust the padding on the body
 
     setTimeout(function () {
-      $('body').css('padding-top', $('#floating_menubar').outerHeight(true));
-      $('#topmenu').menuResizer('resize');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0__('#floating_menubar').outerHeight(true));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenu').menuResizer('resize');
     }, 4);
   }
 };
@@ -3901,9 +3913,9 @@ Functions.floatingMenuBar = () => function () {
 
 
 Functions.breadcrumbScrollToTop = () => function () {
-  $(document).on('click', '#server-breadcrumb, #goto_pagetop', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#server-breadcrumb, #goto_pagetop', function (event) {
     event.preventDefault();
-    $('html, body').animate({
+    jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
       scrollTop: 0
     }, 'fast');
   });
@@ -3916,7 +3928,7 @@ Functions.checkboxesSel = checkboxesSel;
  */
 
 Functions.checkboxesChanged = function () {
-  var $form = $(this.form); // total number of checkboxes in current form
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this.form); // total number of checkboxes in current form
 
   var totalBoxes = $form.find(checkboxesSel).length; // number of checkboxes checked in current form
 
@@ -3946,8 +3958,8 @@ Functions.checkboxesChanged = function () {
 
 
 Functions.getCheckAllBoxEventHandler = () => function () {
-  var isChecked = $(this).is(':checked');
-  $(this.form).find(checkboxesSel).not('.row-hidden').prop('checked', isChecked).parents('tr').toggleClass('marked table-active', isChecked);
+  var isChecked = jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).find(checkboxesSel).not('.row-hidden').prop('checked', isChecked).parents('tr').toggleClass('marked table-active', isChecked);
 };
 /**
  * @return {function}
@@ -3955,9 +3967,9 @@ Functions.getCheckAllBoxEventHandler = () => function () {
 
 
 Functions.getCheckAllFilterEventHandler = () => function () {
-  var $this = $(this);
+  var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
   var selector = $this.data('checkall-selector');
-  $('input.checkall_box').prop('checked', false);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input.checkall_box').prop('checked', false);
   $this.parents('form').find(checkboxesSel).filter(selector).prop('checked', true).trigger('change').parents('tr').toggleClass('marked', true);
   return false;
 };
@@ -3967,7 +3979,7 @@ Functions.getCheckAllFilterEventHandler = () => function () {
 
 
 Functions.subCheckboxesChanged = function () {
-  var $form = $(this).parent().parent(); // total number of checkboxes in current sub form
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().parent(); // total number of checkboxes in current sub form
 
   var totalBoxes = $form.find(checkboxesSel).length; // number of checkboxes checked in current sub form
 
@@ -3997,8 +4009,8 @@ Functions.subCheckboxesChanged = function () {
 
 
 Functions.getSubCheckAllBoxEventHandler = () => function () {
-  var isChecked = $(this).is(':checked');
-  var $form = $(this).parent().parent();
+  var isChecked = jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked');
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().parent();
   $form.find(checkboxesSel).prop('checked', isChecked).parents('tr').toggleClass('marked', isChecked);
 };
 /**
@@ -4014,10 +4026,10 @@ Functions.getSubCheckAllBoxEventHandler = () => function () {
 
 
 Functions.getFilterTextEventHandler = () => function () {
-  var filterInput = $(this).val().toUpperCase().replace(/ /g, '_');
+  var filterInput = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().toUpperCase().replace(/ /g, '_');
   var count = 0;
-  $('[data-filter-row]').each(function () {
-    var $row = $(this);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('[data-filter-row]').each(function () {
+    var $row = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     /* Can not use data() here as it does magic conversion to int for numeric values */
 
     if ($row.attr('data-filter-row').indexOf(filterInput) > -1) {
@@ -4031,14 +4043,14 @@ Functions.getFilterTextEventHandler = () => function () {
     }
   });
   setTimeout(function () {
-    $(checkboxesSel).trigger('change');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(checkboxesSel).trigger('change');
   }, 300);
-  $('#filter-rows-count').html(count);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count').html(count);
 };
 
 Functions.onloadFilterText = () => {
   /* Trigger filtering of the list based on incoming database name */
-  var $filter = $('#filterText');
+  var $filter = jquery__WEBPACK_IMPORTED_MODULE_0__('#filterText');
 
   if ($filter.val()) {
     $filter.trigger('keyup').trigger('select');
@@ -4085,19 +4097,19 @@ Functions.onloadLoginForm = () => {
    * Reveal the login form to users with JS enabled
    * and focus the appropriate input field
    */
-  var $loginform = $('#loginform');
+  var $loginform = jquery__WEBPACK_IMPORTED_MODULE_0__('#loginform');
 
   if ($loginform.length) {
     $loginform.find('.js-show').show();
 
-    if ($('#input_username').val()) {
-      $('#input_password').trigger('focus');
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#input_username').val()) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#input_password').trigger('focus');
     } else {
-      $('#input_username').trigger('focus');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#input_username').trigger('focus');
     }
   }
 
-  var $httpsWarning = $('#js-https-mismatch');
+  var $httpsWarning = jquery__WEBPACK_IMPORTED_MODULE_0__('#js-https-mismatch');
 
   if ($httpsWarning.length) {
     if (window.location.protocol === 'https:' !== window.CommonParams.get('is_https')) {
@@ -4115,14 +4127,14 @@ Functions.onloadLoginForm = () => {
 
 
 Functions.formatDateTime = function (date, seconds) {
-  var result = $.datepicker.formatDate('yy-mm-dd', date);
+  var result = jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.formatDate('yy-mm-dd', date);
   var timefmt = 'HH:mm';
 
   if (seconds) {
     timefmt = 'HH:mm:ss';
   }
 
-  return result + ' ' + $.datepicker.formatTime(timefmt, {
+  return result + ' ' + jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.formatTime(timefmt, {
     hour: date.getHours(),
     minute: date.getMinutes(),
     second: date.getSeconds()
@@ -4143,8 +4155,8 @@ Functions.checkNumberOfFields = function () {
     return false;
   }
 
-  $('form').each(function () {
-    var nbInputs = $(this).find(':input').length;
+  jquery__WEBPACK_IMPORTED_MODULE_0__('form').each(function () {
+    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input').length;
 
     if (nbInputs > maxInputVars) {
       var warning = Functions.sprintf(window.Messages.strTooManyInputs, maxInputVars);
@@ -4176,14 +4188,14 @@ Functions.ignorePhpErrors = function (clearPrevErrors) {
 
 
   if (clearPrevious) {
-    var $pmaReportErrorsForm = $('#pma_report_errors_form');
+    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form');
     $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
 
     $pmaReportErrorsForm.trigger('submit');
   } // remove displayed errors
 
 
-  var $pmaErrors = $('#pma_errors');
+  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors');
   $pmaErrors.fadeOut('slow');
   $pmaErrors.remove();
 };
@@ -4217,7 +4229,7 @@ Functions.toggleDatepickerIfInvalid = function ($td, $inputField) {
 
 
 window.recaptchaCallback = function () {
-  $('#login_form').trigger('submit');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#login_form').trigger('submit');
 };
 /**
  * Handle 'Ctrl/Alt + Enter' form submits
@@ -4228,7 +4240,7 @@ window.recaptchaCallback = function () {
 Functions.getKeyboardFormSubmitEventHandler = function () {
   return function (e) {
     if (e.ctrlKey && e.which === 13 || e.altKey && e.which === 13) {
-      var $form = $(this).closest('form'); // There could be multiple submit buttons on the same form,
+      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form'); // There could be multiple submit buttons on the same form,
       // we assume all of them behave identical and just click one.
 
       if (!$form.find('input[type="submit"]').first() || !$form.find('input[type="submit"]').first().trigger('click')) {
@@ -4247,25 +4259,25 @@ Functions.getKeyboardFormSubmitEventHandler = function () {
 Functions.getSslPasswordEventHandler = function () {
   return function () {
     if (this.value === 'sha256_password') {
-      $('#ssl_reqd_warning_cp').show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_reqd_warning_cp').show();
     } else {
-      $('#ssl_reqd_warning_cp').hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_reqd_warning_cp').hide();
     }
   };
 };
 
 Functions.teardownSortLinkMouseEvent = () => {
-  $(document).off('mouseover', '.sortlink');
-  $(document).off('mouseout', '.sortlink');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseover', '.sortlink');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseout', '.sortlink');
 };
 
 Functions.onloadSortLinkMouseEvent = function () {
   // Bind event handlers for toggling sort icons
-  $(document).on('mouseover', '.sortlink', function () {
-    $(this).find('.soimg').toggle();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseover', '.sortlink', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.soimg').toggle();
   });
-  $(document).on('mouseout', '.sortlink', function () {
-    $(this).find('.soimg').toggle();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseout', '.sortlink', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.soimg').toggle();
   });
 };
 /**
@@ -4372,7 +4384,7 @@ Functions.getImage = function (image, alternate, attributes) {
 Functions.configSet = function (key, value) {
   var serialized = JSON.stringify(value);
   localStorage.setItem(key, serialized);
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     url: 'index.php?route=/config/set',
     type: 'POST',
     dataType: 'json',
@@ -4421,7 +4433,7 @@ Functions.configGet = function (key, cached, successCallback) {
   // Hitting the server.
 
 
-  $.ajax({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     url: 'index.php?route=/config/get',
     type: 'POST',
     dataType: 'json',
@@ -4463,7 +4475,7 @@ Functions.getPostData = function () {
   return dataPost;
 };
 
-jQuery.fn.getPostData = Functions.getPostData;
+jquery__WEBPACK_IMPORTED_MODULE_0__.fn.getPostData = Functions.getPostData;
 /**
  * @return {function}
  */
@@ -4471,24 +4483,24 @@ jQuery.fn.getPostData = Functions.getPostData;
 Functions.off = function () {
   return function () {
     Functions.teardownIdleEvent();
-    $(document).off('click', 'input:checkbox.checkall');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input:checkbox.checkall');
     Functions.teardownSqlQueryEditEvents();
     Functions.removeAutocompleteInfo();
     Functions.teardownCreateTableEvents();
     Functions.teardownEnumSetEditorMessage();
     Functions.teardownEnumSetEditor();
-    $(document).off('click', '#index_frm input[type=submit]');
-    $('div.toggle-container').off('click');
-    $(document).off('change', 'select.pageselector');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#index_frm input[type=submit]');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.toggle-container').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select.pageselector');
     Functions.teardownRecentFavoriteTables();
     Functions.teardownCodeMirrorEditor();
-    $(document).off('change', '.autosubmit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '.autosubmit');
     document.querySelectorAll('.jsPrintButton').forEach(item => {
       item.removeEventListener('click', PrintPage);
     });
     Functions.teardownCreateView();
-    $(document).off('keydown', 'form input, form textarea, form select');
-    $(document).off('change', 'input[type=radio][name="pw_hash"]');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keydown', 'form input, form textarea, form select');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'input[type=radio][name="pw_hash"]');
     Functions.teardownSortLinkMouseEvent();
   };
 };
@@ -4500,14 +4512,14 @@ Functions.off = function () {
 Functions.on = function () {
   return function () {
     Functions.onloadIdleEvent();
-    $(document).on('click', 'input:checkbox.checkall', Functions.getCheckAllCheckboxEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input:checkbox.checkall', Functions.getCheckAllCheckboxEventHandler());
     Functions.addDateTimePicker();
     /**
      * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
      */
 
     if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
-      $('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
     }
 
     Functions.onloadSqlQueryEditEvents();
@@ -4515,28 +4527,28 @@ Functions.on = function () {
     Functions.onloadChangePasswordEvents();
     Functions.onloadEnumSetEditorMessage();
     Functions.onloadEnumSetEditor();
-    $(document).on('click', '#index_frm input[type=submit]', Functions.getAddIndexEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#index_frm input[type=submit]', Functions.getAddIndexEventHandler());
     Functions.showHints();
     Functions.initializeToggleButtons();
-    $(document).on('change', 'select.pageselector', Functions.getPageSelectorEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select.pageselector', Functions.getPageSelectorEventHandler());
     Functions.onloadRecentFavoriteTables();
     Functions.onloadCodeMirrorEditor();
     Functions.onloadLockPage();
-    $(document).on('change', '.autosubmit', Functions.getAutoSubmitEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '.autosubmit', Functions.getAutoSubmitEventHandler());
     document.querySelectorAll('.jsPrintButton').forEach(item => {
       item.addEventListener('click', PrintPage);
     });
     Functions.onloadCreateView();
-    $(document).on('change', checkboxesSel, Functions.checkboxesChanged);
-    $(document).on('change', 'input.checkall_box', Functions.getCheckAllBoxEventHandler());
-    $(document).on('click', '.checkall-filter', Functions.getCheckAllFilterEventHandler());
-    $(document).on('change', checkboxesSel + ', input.checkall_box:checkbox:enabled', Functions.subCheckboxesChanged);
-    $(document).on('change', 'input.sub_checkall_box', Functions.getSubCheckAllBoxEventHandler());
-    $(document).on('keyup', '#filterText', Functions.getFilterTextEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', checkboxesSel, Functions.checkboxesChanged);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input.checkall_box', Functions.getCheckAllBoxEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.checkall-filter', Functions.getCheckAllFilterEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', checkboxesSel + ', input.checkall_box:checkbox:enabled', Functions.subCheckboxesChanged);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input.sub_checkall_box', Functions.getSubCheckAllBoxEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keyup', '#filterText', Functions.getFilterTextEventHandler());
     Functions.onloadFilterText();
     Functions.onloadLoginForm();
-    $('form input, form textarea, form select').on('keydown', Functions.getKeyboardFormSubmitEventHandler());
-    $(document).on('change', 'select#select_authentication_plugin_cp', Functions.getSslPasswordEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form input, form textarea, form select').on('keydown', Functions.getKeyboardFormSubmitEventHandler());
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select#select_authentication_plugin_cp', Functions.getSslPasswordEventHandler());
     Functions.onloadSortLinkMouseEvent();
   };
 };

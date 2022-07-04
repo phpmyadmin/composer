@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[12],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 17:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    function used in QBE for DB
@@ -12,6 +23,7 @@
  * @requires    js/functions.js
  *
  */
+
 function getFormatsText() {
   return {
     '=': ' = \'%s\'',
@@ -53,20 +65,20 @@ function generateCondition(criteriaDiv, table) {
 window.generateWhereBlock = function () {
   var count = 0;
   var query = '';
-  $('.tableNameSelect').each(function () {
-    var criteriaDiv = $(this).siblings('.jsCriteriaOptions').first();
-    var useCriteria = $(this).siblings('.criteria_col').first();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.tableNameSelect').each(function () {
+    var criteriaDiv = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.jsCriteriaOptions').first();
+    var useCriteria = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.criteria_col').first();
 
-    if ($(this).val() !== '' && useCriteria.prop('checked')) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() !== '' && useCriteria.prop('checked')) {
       if (count > 0) {
         criteriaDiv.find('input.logical_op').each(function () {
-          if ($(this).prop('checked')) {
-            query += ' ' + $(this).val() + ' ';
+          if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('checked')) {
+            query += ' ' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() + ' ';
           }
         });
       }
 
-      query += generateCondition(criteriaDiv, $(this));
+      query += generateCondition(criteriaDiv, jquery__WEBPACK_IMPORTED_MODULE_0__(this));
       count++;
     }
   });

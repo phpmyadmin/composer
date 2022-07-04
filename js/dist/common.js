@@ -1,7 +1,19 @@
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[3],{
+"use strict";
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[3],[
+/* 0 */,
+/* 1 */
+/***/ (function(module) {
 
-/***/ 3:
-/***/ (function() {
+module.exports = jQuery;
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* global Navigation */
 
@@ -13,6 +25,7 @@
  *
  * @test-module CommonParams
  */
+
 window.CommonParams = function () {
   /**
    * @var {Object} params An associative array of key value pairs
@@ -42,7 +55,7 @@ window.CommonParams = function () {
         params[i] = obj[i];
       }
 
-      if (updateNavigation && $('#pma_navigation_tree').hasClass('synced')) {
+      if (updateNavigation && jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').hasClass('synced')) {
         Navigation.showCurrent();
       }
     },
@@ -76,7 +89,7 @@ window.CommonParams = function () {
 
       params[name] = value;
 
-      if (updateNavigation && $('#pma_navigation_tree').hasClass('synced')) {
+      if (updateNavigation && jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').hasClass('synced')) {
         Navigation.showCurrent();
       }
 
@@ -157,7 +170,7 @@ window.CommonActions = {
     var newUrl = url;
 
     if (!newUrl) {
-      newUrl = $('#selflink').find('a').attr('href') || window.location.pathname;
+      newUrl = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('a').attr('href') || window.location.pathname;
       newUrl = newUrl.substring(0, newUrl.indexOf('?'));
     }
 
@@ -167,7 +180,7 @@ window.CommonActions = {
       newUrl += window.CommonParams.getUrlQuery('?');
     }
 
-    $('<a></a>', {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>', {
       href: newUrl
     }).appendTo('body').trigger('click').remove();
 
@@ -178,11 +191,10 @@ window.CommonActions = {
 };
 
 /***/ })
-
-},
+],
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(3));
+/******/ var __webpack_exports__ = (__webpack_exec__(4));
 /******/ }
 ]);
 //# sourceMappingURL=common.js.map

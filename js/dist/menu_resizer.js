@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[40],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 44:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Handles the resizing of a menu according to the available screen width
@@ -23,6 +34,7 @@
  *
  * @package PhpMyAdmin
  */
+
 (function ($) {
   function MenuResizer($container, widthCalculator) {
     var self = this;
@@ -210,7 +222,7 @@
       $.error('Method ' + method + ' does not exist on jQuery.menuResizer');
     }
   };
-})(jQuery);
+})(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 /***/ })
 

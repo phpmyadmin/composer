@@ -1,16 +1,28 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[58],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 61:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* eslint-disable no-unused-vars */
 
 /**
  * Dummy implementation of the ajax page loader
  */
+
 window.AJAX = {
   registerOnload: function (idx, func) {
-    $(func);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(func);
   },
   registerTeardown: function (idx, func) {}
 };

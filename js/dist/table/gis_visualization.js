@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[65],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 68:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    functions used for visualizing GIS data
@@ -12,6 +23,7 @@
 /* global drawOpenLayers */
 // templates/table/gis_visualization/gis_visualization.twig
 // Constants
+
 var zoomFactor = 1.5;
 var defaultX = 0;
 var defaultY = 0;
@@ -37,11 +49,11 @@ function zoomAndPan() {
     return;
   }
 
-  $('#groupPanel', gisSvg).attr('transform', 'translate(' + x + ', ' + y + ') scale(' + scale + ')');
-  $('circle.vector', gisSvg).attr('r', 3 / scale);
-  $('circle.vector', gisSvg).attr('stroke-width', 2 / scale);
-  $('polyline.vector', gisSvg).attr('stroke-width', 2 / scale);
-  $('path.vector', gisSvg).attr('stroke-width', 0.5 / scale);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#groupPanel', gisSvg).attr('transform', 'translate(' + x + ', ' + y + ') scale(' + scale + ')');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('circle.vector', gisSvg).attr('r', 3 / scale);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('circle.vector', gisSvg).attr('stroke-width', 2 / scale);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('polyline.vector', gisSvg).attr('stroke-width', 2 / scale);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('path.vector', gisSvg).attr('stroke-width', 0.5 / scale);
 }
 
 window.zoomAndPan = zoomAndPan;
@@ -50,10 +62,10 @@ window.zoomAndPan = zoomAndPan;
  */
 
 function selectVisualization() {
-  if ($('#choice').prop('checked') !== true) {
-    $('#openlayersmap').hide();
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#choice').prop('checked') !== true) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#openlayersmap').hide();
   } else {
-    $('#placeholder').hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').hide();
   }
 }
 
@@ -63,14 +75,14 @@ window.selectVisualization = selectVisualization;
  */
 
 function styleOSM() {
-  var $placeholder = $('#placeholder');
+  var $placeholder = jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder');
   var cssObj = {
     'border': '1px solid #aaa',
     'width': $placeholder.width(),
     'height': $placeholder.height(),
     'float': 'right'
   };
-  $('#openlayersmap').css(cssObj);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#openlayersmap').css(cssObj);
 }
 
 window.styleOSM = styleOSM;
@@ -79,7 +91,7 @@ window.styleOSM = styleOSM;
  */
 
 function storeGisSvgRef() {
-  gisSvg = $('#placeholder').find('svg').get(0);
+  gisSvg = jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').find('svg').get(0);
 }
 
 window.storeGisSvgRef = storeGisSvgRef;
@@ -92,8 +104,8 @@ function addZoomPanControllers() {
     return;
   }
 
-  var themeImagePath = $('#themeImagePath').val();
-  $('#placeholder').append( // pan arrows
+  var themeImagePath = jquery__WEBPACK_IMPORTED_MODULE_0__('#themeImagePath').val();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').append( // pan arrows
   '<img class="button" id="left_arrow" src="' + themeImagePath + 'west-mini.png">', '<img class="button" id="right_arrow" src="' + themeImagePath + 'east-mini.png">', '<img class="button" id="up_arrow" src="' + themeImagePath + 'north-mini.png">', '<img class="button" id="down_arrow" src="' + themeImagePath + 'south-mini.png">', // zoom controls
   '<img class="button" id="zoom_in" src="' + themeImagePath + 'zoom-plus-mini.png">', '<img class="button" id="zoom_world" src="' + themeImagePath + 'zoom-world-mini.png">', '<img class="button" id="zoom_out" src="' + themeImagePath + 'zoom-minus-mini.png">');
 }
@@ -104,12 +116,12 @@ window.addZoomPanControllers = addZoomPanControllers;
  */
 
 function resizeGISVisualization() {
-  var $placeholder = $('#placeholder');
+  var $placeholder = jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder');
   var oldWidth = $placeholder.width();
-  var visWidth = $('#div_view_options').width() - 48; // Assign new value for width
+  var visWidth = jquery__WEBPACK_IMPORTED_MODULE_0__('#div_view_options').width() - 48; // Assign new value for width
 
   $placeholder.width(visWidth);
-  $(gisSvg).attr('width', visWidth); // Assign the offset created due to resizing to defaultX and center the svg.
+  jquery__WEBPACK_IMPORTED_MODULE_0__(gisSvg).attr('width', visWidth); // Assign the offset created due to resizing to defaultX and center the svg.
 
   defaultX = (visWidth - oldWidth) / 2;
   x = defaultX;
@@ -139,8 +151,8 @@ function initGISVisualization() {
 }
 
 function drawOpenLayerMap() {
-  $('#placeholder').hide();
-  $('#openlayersmap').show(); // Function doesn't work properly if #openlayersmap is hidden
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').hide();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#openlayersmap').show(); // Function doesn't work properly if #openlayersmap is hidden
 
   if (typeof map !== 'object') {
     // Draws openStreetMap with openLayers
@@ -149,7 +161,7 @@ function drawOpenLayerMap() {
 }
 
 function getRelativeCoords(e) {
-  var position = $('#placeholder').offset();
+  var position = jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').offset();
   return {
     x: e.pageX - position.left,
     y: e.pageY - position.top
@@ -194,20 +206,20 @@ function onGisMouseWheel(event) {
 
 
 window.AJAX.registerTeardown('table/gis_visualization.js', function () {
-  $(document).off('click', '#choice');
-  $(document).off('dragstart', 'svg');
-  $(document).off('mouseup', 'svg');
-  $(document).off('drag', 'svg');
-  $(document).off('dblclick', '#placeholder');
-  $(document).off('click', '#zoom_in');
-  $(document).off('click', '#zoom_world');
-  $(document).off('click', '#zoom_out');
-  $(document).off('click', '#left_arrow');
-  $(document).off('click', '#right_arrow');
-  $(document).off('click', '#up_arrow');
-  $(document).off('click', '#down_arrow');
-  $('.vector').off('mousemove').off('mouseout');
-  $('#placeholder').get(0).removeEventListener('wheel', onGisMouseWheel, {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#choice');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('dragstart', 'svg');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseup', 'svg');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('drag', 'svg');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('dblclick', '#placeholder');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#zoom_in');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#zoom_world');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#zoom_out');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#left_arrow');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#right_arrow');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#up_arrow');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#down_arrow');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.vector').off('mousemove').off('mouseout');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').get(0).removeEventListener('wheel', onGisMouseWheel, {
     passive: false
   });
 
@@ -219,45 +231,45 @@ window.AJAX.registerTeardown('table/gis_visualization.js', function () {
 });
 window.AJAX.registerOnload('table/gis_visualization.js', function () {
   // If we are in GIS visualization, initialize it
-  if ($('#gis_div').length > 0) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#gis_div').length > 0) {
     initGISVisualization();
   }
 
-  if ($('#choice').prop('checked') === true) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#choice').prop('checked') === true) {
     drawOpenLayerMap();
   }
 
   if (typeof ol === 'undefined') {
-    $('#choice, #labelChoice').hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#choice, #labelChoice').hide();
   }
 
-  $(document).on('click', '#choice', function () {
-    if ($(this).prop('checked') === false) {
-      $('#placeholder').show();
-      $('#openlayersmap').hide();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#choice', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('checked') === false) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#openlayersmap').hide();
     } else {
       drawOpenLayerMap();
     }
   });
-  $('#placeholder').get(0).addEventListener('wheel', onGisMouseWheel, {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').get(0).addEventListener('wheel', onGisMouseWheel, {
     passive: false
   });
   var dragX = 0;
   var dragY = 0;
-  $('svg').draggable({
+  jquery__WEBPACK_IMPORTED_MODULE_0__('svg').draggable({
     helper: function () {
-      return $('<div>'); // Give a fake element to be used for dragging display
+      return jquery__WEBPACK_IMPORTED_MODULE_0__('<div>'); // Give a fake element to be used for dragging display
     }
   });
-  $(document).on('dragstart', 'svg', function (event, dd) {
-    $('#placeholder').addClass('placeholderDrag');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dragstart', 'svg', function (event, dd) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').addClass('placeholderDrag');
     dragX = Math.round(dd.offset.left);
     dragY = Math.round(dd.offset.top);
   });
-  $(document).on('mouseup', 'svg', function () {
-    $('#placeholder').removeClass('placeholderDrag');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseup', 'svg', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#placeholder').removeClass('placeholderDrag');
   });
-  $(document).on('drag', 'svg', function (event, dd) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('drag', 'svg', function (event, dd) {
     var newX = Math.round(dd.offset.left);
     x += newX - dragX;
     dragX = newX;
@@ -266,7 +278,7 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
     dragY = newY;
     zoomAndPan();
   });
-  $(document).on('dblclick', '#placeholder', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dblclick', '#placeholder', function (event) {
     if (event.target.classList.contains('button')) {
       return;
     }
@@ -278,51 +290,51 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
     y = relCoords.y - (relCoords.y - y) * zoomFactor;
     zoomAndPan();
   });
-  $(document).on('click', '#zoom_in', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#zoom_in', function (e) {
     e.preventDefault(); // zoom in
 
     scale *= zoomFactor;
-    var width = $(gisSvg).attr('width');
-    var height = $(gisSvg).attr('height'); // zooming in keeping the center unmoved.
+    var width = jquery__WEBPACK_IMPORTED_MODULE_0__(gisSvg).attr('width');
+    var height = jquery__WEBPACK_IMPORTED_MODULE_0__(gisSvg).attr('height'); // zooming in keeping the center unmoved.
 
     x = width / 2 - (width / 2 - x) * zoomFactor;
     y = height / 2 - (height / 2 - y) * zoomFactor;
     zoomAndPan();
   });
-  $(document).on('click', '#zoom_world', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#zoom_world', function (e) {
     e.preventDefault();
     scale = 1;
     x = defaultX;
     y = defaultY;
     zoomAndPan();
   });
-  $(document).on('click', '#zoom_out', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#zoom_out', function (e) {
     e.preventDefault(); // zoom out
 
     scale /= zoomFactor;
-    var width = $(gisSvg).attr('width');
-    var height = $(gisSvg).attr('height'); // zooming out keeping the center unmoved.
+    var width = jquery__WEBPACK_IMPORTED_MODULE_0__(gisSvg).attr('width');
+    var height = jquery__WEBPACK_IMPORTED_MODULE_0__(gisSvg).attr('height'); // zooming out keeping the center unmoved.
 
     x = width / 2 - (width / 2 - x) / zoomFactor;
     y = height / 2 - (height / 2 - y) / zoomFactor;
     zoomAndPan();
   });
-  $(document).on('click', '#left_arrow', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#left_arrow', function (e) {
     e.preventDefault();
     x += 100;
     zoomAndPan();
   });
-  $(document).on('click', '#right_arrow', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#right_arrow', function (e) {
     e.preventDefault();
     x -= 100;
     zoomAndPan();
   });
-  $(document).on('click', '#up_arrow', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#up_arrow', function (e) {
     e.preventDefault();
     y += 100;
     zoomAndPan();
   });
-  $(document).on('click', '#down_arrow', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#down_arrow', function (e) {
     e.preventDefault();
     y -= 100;
     zoomAndPan();
@@ -331,12 +343,12 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
    * Detect the mousemove event and show tooltips.
    */
 
-  $('.vector').on('mousemove', function (event) {
-    var contents = Functions.escapeHtml($(this).attr('name')).trim();
-    $('#tooltip').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.vector').on('mousemove', function (event) {
+    var contents = Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name')).trim();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#tooltip').remove();
 
     if (contents !== '') {
-      $('<div id="tooltip">' + contents + '</div>').css({
+      jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="tooltip">' + contents + '</div>').css({
         position: 'absolute',
         top: event.pageY + 10,
         left: event.pageX + 10,
@@ -351,8 +363,8 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
    * Detect the mouseout event and hide tooltips.
    */
 
-  $('.vector').on('mouseout', function () {
-    $('#tooltip').remove();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.vector').on('mouseout', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#tooltip').remove();
   });
 });
 

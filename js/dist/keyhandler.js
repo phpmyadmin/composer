@@ -1,9 +1,20 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[37],{
 
-/***/ 41:
-/***/ (function() {
+/***/ 1:
+/***/ (function(module) {
 
-// var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
+module.exports = jQuery;
+
+/***/ }),
+
+/***/ 41:
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+ // var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
+
 let ctrlKeyHistory = 0;
 /**
   * Allows moving around inputs/select by Ctrl+arrows
@@ -147,8 +158,8 @@ const KeyHandlerEvents = {
    */
   off: function () {
     return function () {
-      $(document).off('keydown keyup', '#table_columns');
-      $(document).off('keydown keyup', 'table.insertRowTable');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keydown keyup', '#table_columns');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keydown keyup', 'table.insertRowTable');
     };
   },
 
@@ -157,10 +168,10 @@ const KeyHandlerEvents = {
    */
   on: function () {
     return function () {
-      $(document).on('keydown keyup', '#table_columns', function (event) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown keyup', '#table_columns', function (event) {
         onKeyDownArrowsHandler(event.originalEvent);
       });
-      $(document).on('keydown keyup', 'table.insertRowTable', function (event) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown keyup', 'table.insertRowTable', function (event) {
         onKeyDownArrowsHandler(event.originalEvent);
       });
     };

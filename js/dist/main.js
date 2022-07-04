@@ -1,36 +1,48 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[38],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 42:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* global Indexes */
 
 /* global Navigation */
+
 window.AJAX.registerOnload('functions.js', () => window.AJAX.removeSubmitEvents());
-$(window.AJAX.loadEventHandler());
+jquery__WEBPACK_IMPORTED_MODULE_0__(window.AJAX.loadEventHandler());
 /**
  * Attach a generic event handler to clicks on pages and submissions of forms.
  */
 
-$(document).on('click', 'a', window.AJAX.requestHandler);
-$(document).on('submit', 'form', window.AJAX.requestHandler);
-$(document).on('ajaxError', window.AJAX.getFatalErrorHandler());
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a', window.AJAX.requestHandler);
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', 'form', window.AJAX.requestHandler);
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('ajaxError', window.AJAX.getFatalErrorHandler());
 window.AJAX.registerTeardown('keyhandler.js', window.KeyHandlerEvents.off());
 window.AJAX.registerOnload('keyhandler.js', window.KeyHandlerEvents.on());
 window.crossFramingProtection();
 window.AJAX.registerTeardown('config.js', window.Config.off());
 window.AJAX.registerOnload('config.js', window.Config.on());
-$.ajaxPrefilter(Functions.addNoCacheToAjaxRequests());
+jquery__WEBPACK_IMPORTED_MODULE_0__.ajaxPrefilter(Functions.addNoCacheToAjaxRequests());
 window.AJAX.registerTeardown('functions.js', Functions.off());
 window.AJAX.registerOnload('functions.js', Functions.on());
-$(Functions.dismissNotifications());
-$(Functions.initializeMenuResizer());
-$(Functions.floatingMenuBar());
-$(Functions.breadcrumbScrollToTop());
-$(Navigation.onload());
+jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.dismissNotifications());
+jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.initializeMenuResizer());
+jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.floatingMenuBar());
+jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.breadcrumbScrollToTop());
+jquery__WEBPACK_IMPORTED_MODULE_0__(Navigation.onload());
 window.AJAX.registerTeardown('indexes.js', Indexes.off());
 window.AJAX.registerOnload('indexes.js', Indexes.on());
-$(() => Functions.checkNumberOfFields());
+jquery__WEBPACK_IMPORTED_MODULE_0__(() => Functions.checkNumberOfFields());
 window.AJAX.registerTeardown('page_settings.js', window.PageSettings.off());
 window.AJAX.registerOnload('page_settings.js', window.PageSettings.on());
 

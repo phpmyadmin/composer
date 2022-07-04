@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[53],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 56:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    Javascript functions used in server status query page
@@ -18,9 +29,10 @@
 /**
  * Unbind all event handlers before tearing down a page
  */
+
 window.AJAX.registerTeardown('server/status/queries.js', function () {
   if (document.getElementById('serverstatusquerieschart') !== null) {
-    var queryPieChart = $('#serverstatusquerieschart').data('queryPieChart');
+    var queryPieChart = jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('queryPieChart');
 
     if (queryPieChart) {
       queryPieChart.destroy();
@@ -33,10 +45,10 @@ window.AJAX.registerOnload('server/status/queries.js', function () {
 
   try {
     if (document.getElementById('serverstatusquerieschart') !== null) {
-      $.each($('#serverstatusquerieschart').data('chart'), function (key, value) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.each(jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('chart'), function (key, value) {
         cdata.push([key, parseInt(value, 10)]);
       });
-      $('#serverstatusquerieschart').data('queryPieChart', Functions.createProfilingChart('serverstatusquerieschart', cdata));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('queryPieChart', Functions.createProfilingChart('serverstatusquerieschart', cdata));
     }
   } catch (exception) {// Could not load chart, no big deal...
   }

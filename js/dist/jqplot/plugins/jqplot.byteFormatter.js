@@ -1,13 +1,25 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[35],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 39:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * jqplot formatter for byte values
  *
  * @package phpMyAdmin
  */
+
 (function ($) {
   'use strict';
 
@@ -52,7 +64,7 @@
       }
     };
   };
-})(jQuery);
+})(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 /***/ })
 

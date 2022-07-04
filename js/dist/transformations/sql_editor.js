@@ -1,16 +1,28 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[75],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 78:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * SQL syntax highlighting transformation plugin js
  *
  * @package PhpMyAdmin
  */
+
 window.AJAX.registerOnload('transformations/sql_editor.js', function () {
-  $('textarea.transform_sql_editor').each(function () {
-    Functions.getSqlEditor($(this), {}, 'both');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_sql_editor').each(function () {
+    Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__(this), {}, 'both');
   });
 });
 

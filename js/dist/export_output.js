@@ -1,18 +1,29 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[29],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 33:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 window.AJAX.registerOnload('export_output.js', function () {
-  $(document).on('keydown', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown', function (e) {
     if ((e.which || e.keyCode) === 116) {
       e.preventDefault();
-      $('#export_refresh_form').trigger('submit');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#export_refresh_form').trigger('submit');
     }
   });
-  $('.export_refresh_btn').on('click', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.export_refresh_btn').on('click', function (e) {
     e.preventDefault();
-    $('#export_refresh_form').trigger('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#export_refresh_form').trigger('submit');
   });
 });
 

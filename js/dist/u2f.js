@@ -1,10 +1,21 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[78],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 81:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 window.AJAX.registerOnload('u2f.js', function () {
-  var $inputReg = $('#u2f_registration_response');
+  var $inputReg = jquery__WEBPACK_IMPORTED_MODULE_0__('#u2f_registration_response');
 
   if ($inputReg.length > 0) {
     var $formReg = $inputReg.parents('form');
@@ -47,7 +58,7 @@ window.AJAX.registerOnload('u2f.js', function () {
     }, 1000);
   }
 
-  var $inputAuth = $('#u2f_authentication_response');
+  var $inputAuth = jquery__WEBPACK_IMPORTED_MODULE_0__('#u2f_authentication_response');
 
   if ($inputAuth.length > 0) {
     var $formAuth = $inputAuth.parents('form');

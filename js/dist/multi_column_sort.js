@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[41],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 45:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    Implements the shiftkey + click remove column
@@ -10,29 +21,30 @@
  *
  * @requires    jQuery
  */
+
 window.AJAX.registerOnload('keyhandler.js', function () {
-  $('th.draggable.column_heading.pointer.marker a').on('click', function (event) {
-    var orderUrlRemove = $(this).parent().find('input[name="url-remove-order"]').val();
-    var orderUrlAdd = $(this).parent().find('input[name="url-add-order"]').val();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('th.draggable.column_heading.pointer.marker a').on('click', function (event) {
+    var orderUrlRemove = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('input[name="url-remove-order"]').val();
+    var orderUrlAdd = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('input[name="url-add-order"]').val();
     var argsep = window.CommonParams.get('arg_separator');
 
     if (event.ctrlKey || event.altKey) {
       event.preventDefault();
-      window.AJAX.source = $(this);
+      window.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
       Functions.ajaxShowMessage();
       orderUrlRemove += argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-      $.post('index.php?route=/sql', orderUrlRemove, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/sql', orderUrlRemove, window.AJAX.responseHandler);
     } else if (event.shiftKey) {
       event.preventDefault();
-      window.AJAX.source = $(this);
+      window.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
       Functions.ajaxShowMessage();
       orderUrlAdd += argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-      $.post('index.php?route=/sql', orderUrlAdd, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/sql', orderUrlAdd, window.AJAX.responseHandler);
     }
   });
 });
 window.AJAX.registerTeardown('keyhandler.js', function () {
-  $(document).off('click', 'th.draggable.column_heading.pointer.marker a');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'th.draggable.column_heading.pointer.marker a');
 });
 
 /***/ })

@@ -1,20 +1,32 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[72],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 75:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Image upload transformations plugin js
  *
  * @package PhpMyAdmin
  */
+
 window.AJAX.registerOnload('transformations/image_upload.js', function () {
   // Change thumbnail when image file is selected
   // through file upload dialog
-  $('input.image-upload').on('change', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input.image-upload').on('change', function () {
     if (this.files && this.files[0]) {
       var reader = new FileReader();
-      var $input = $(this);
+      var $input = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
 
       reader.onload = function (e) {
         $input.prevAll('img').attr('src', e.target.result);
@@ -29,7 +41,7 @@ window.AJAX.registerOnload('transformations/image_upload.js', function () {
  */
 
 window.AJAX.registerTeardown('transformations/image_upload.js', function () {
-  $('input.image-upload').off('change');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input.image-upload').off('change');
 });
 
 /***/ })

@@ -1,45 +1,42 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[5],[
 /* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-
-
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
-  _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console.initialize();
-});
-
-
-/***/ }),
-/* 6 */
+/* 1 */
 /***/ (function(module) {
 
 module.exports = jQuery;
 
 /***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
+  _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console.initialize();
+});
+
+
+/***/ }),
 /* 7 */
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Console": function() { return /* binding */ Console; }
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(codemirror__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _console_config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 
 
@@ -105,7 +102,7 @@ var Console = {
    * @return {void}
    */
   initialize: function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').length === 0) {
       return;
     }
 
@@ -121,12 +118,12 @@ var Console = {
   setupAfterInit: function () {
     Console.isEnabled = true; // Vars init
 
-    Console.$consoleToolbar = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.toolbar');
-    Console.$consoleContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.content');
-    Console.$consoleAllContents = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content');
-    Console.$consoleTemplates = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.templates'); // Generate a form for post
+    Console.$consoleToolbar = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.toolbar');
+    Console.$consoleContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.content');
+    Console.$consoleAllContents = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content');
+    Console.$consoleTemplates = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.templates'); // Generate a form for post
 
-    Console.$requestForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form method="post" action="index.php?route=/import">' + '<input name="is_js_confirmed" value="0">' + '<textarea name="sql_query"></textarea>' + '<input name="console_message_id" value="0">' + '<input name="server" value="">' + '<input name="db" value="">' + '<input name="table" value="">' + '<input name="token" value="">' + '</form>');
+    Console.$requestForm = jquery__WEBPACK_IMPORTED_MODULE_0__('<form method="post" action="index.php?route=/import">' + '<input name="is_js_confirmed" value="0">' + '<textarea name="sql_query"></textarea>' + '<input name="console_message_id" value="0">' + '<input name="server" value="">' + '<input name="db" value="">' + '<input name="table" value="">' + '<input name="token" value="">' + '</form>');
     Console.$requestForm.children('[name=token]').val(window.CommonParams.get('token'));
     Console.$requestForm.on('submit', window.AJAX.requestHandler); // Event binds shouldn't run again
 
@@ -150,7 +147,7 @@ var Console = {
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.DarkTheme) {
         document.getElementById('consoleOptionsDarkThemeCheckbox').checked = true;
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('>.content').addClass('console_dark_theme');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.content').addClass('console_dark_theme');
       }
 
       ConsoleResizer.initialize();
@@ -159,20 +156,20 @@ var Console = {
       ConsoleBookmarks.initialize();
       ConsoleDebug.initialize();
       Console.$consoleToolbar.children('.console_switch').on('click', Console.toggle);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.toolbar').children().on('mousedown', function (event) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.toolbar').children().on('mousedown', function (event) {
         event.preventDefault();
         event.stopImmediatePropagation();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.clear').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.clear').on('click', function () {
         ConsoleMessages.clear();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.history').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.history').on('click', function () {
         ConsoleMessages.showHistory();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.options').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.options').on('click', function () {
         Console.showCard('#pma_console_options');
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.debug').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.debug').on('click', function () {
         Console.showCard('#debug_console');
       });
       Console.$consoleContent.on('click', function (event) {
@@ -180,22 +177,22 @@ var Console = {
           ConsoleInput.focus();
         }
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.mid_layer').on('click', function () {
-        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().children('.card'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.mid_layer').on('click', function () {
+        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().children('.card'));
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.switch_button').on('click', function () {
-        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.switch_button').on('click', function () {
+        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.card'));
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.switch_button').on('click', function () {
-        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.switch_button').on('click', function () {
+        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.card'));
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('.switch_button').on('click', function () {
-        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console_options').find('.switch_button').on('click', function () {
+        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.card'));
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('input[type=checkbox]').on('change', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console_options').find('input[type=checkbox]').on('change', function () {
         _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console_options').find('.button.default').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console_options').find('.button.default').on('click', function () {
         document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked = false;
         document.getElementById('consoleOptionsStartHistoryCheckbox').checked = false;
         document.getElementById('consoleOptionsCurrentQueryCheckbox').checked = true;
@@ -203,10 +200,10 @@ var Console = {
         document.getElementById('consoleOptionsDarkThemeCheckbox').checked = false;
         _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#consoleOptionsEnterExecutesCheckbox').on('change', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#consoleOptionsEnterExecutesCheckbox').on('change', function () {
         ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes);
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxComplete', function (event, xhr, ajaxOptions) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('ajaxComplete', function (event, xhr, ajaxOptions) {
         if (ajaxOptions.dataType && ajaxOptions.dataType.indexOf('json') !== -1) {
           return;
         }
@@ -321,7 +318,7 @@ var Console = {
       Console.$consoleContent.css({
         display: 'none'
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).trigger('resize');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(window).trigger('resize');
     });
     Console.hideCard();
   },
@@ -350,7 +347,7 @@ var Console = {
     Console.$consoleContent.animate({
       'margin-bottom': 0
     }, 'fast', 'easeOutQuart', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).trigger('resize');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(window).trigger('resize');
 
       if (inputFocus) {
         ConsoleInput.focus();
@@ -411,7 +408,7 @@ var Console = {
         return;
       }
     } else {
-      $card = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console ' + cardSelector);
+      $card = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console ' + cardSelector);
     }
 
     if ($card.length === 0) {
@@ -435,8 +432,8 @@ var Console = {
    */
   hideCard: function ($targetCard) {
     if (!$targetCard) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.mid_layer').fadeOut(140);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.card').removeClass('show');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.mid_layer').fadeOut(140);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.card').removeClass('show');
     } else if ($targetCard.length > 0) {
       $targetCard.parent().find('.mid_layer').fadeOut(140);
       $targetCard.find('.card').removeClass('show');
@@ -473,10 +470,10 @@ var ConsoleResizer = {
 
     ConsoleResizer.posY = event.pageY;
     ConsoleResizer.height = Console.$consoleContent.height();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mousemove', ConsoleResizer.mouseMove);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseup', ConsoleResizer.mouseUp); // Disable text selection while resizing
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', ConsoleResizer.mouseMove);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseup', ConsoleResizer.mouseUp); // Disable text selection while resizing
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('selectstart', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('selectstart', function () {
       return false;
     });
   },
@@ -517,9 +514,9 @@ var ConsoleResizer = {
   mouseUp: function () {
     _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Height', ConsoleResizer.resultHeight);
     Console.show();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousemove');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mouseup');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('selectstart');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mousemove');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseup');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('selectstart');
   },
 
   /**
@@ -528,8 +525,8 @@ var ConsoleResizer = {
    * @return {void}
    */
   initialize: function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.toolbar').off('mousedown');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.toolbar').on('mousedown', ConsoleResizer.mouseDown);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.toolbar').off('mousedown');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.toolbar').on('mousedown', ConsoleResizer.mouseDown);
   }
 };
 /**
@@ -572,7 +569,7 @@ var ConsoleInput = {
       return;
     }
 
-    if (typeof (codemirror__WEBPACK_IMPORTED_MODULE_1___default()) !== 'undefined') {
+    if (typeof codemirror__WEBPACK_IMPORTED_MODULE_1__ !== 'undefined') {
       ConsoleInput.codeMirror = true;
     }
 
@@ -580,7 +577,7 @@ var ConsoleInput = {
 
     if (ConsoleInput.codeMirror) {
       // eslint-disable-next-line new-cap
-      ConsoleInput.inputs.console = codemirror__WEBPACK_IMPORTED_MODULE_1___default()(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.console_query_input')[0], {
+      ConsoleInput.inputs.console = codemirror__WEBPACK_IMPORTED_MODULE_1__(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.console_query_input')[0], {
         theme: 'pma',
         mode: 'text/x-sql',
         lineWrapping: true,
@@ -593,7 +590,7 @@ var ConsoleInput = {
         },
         gutters: ['CodeMirror-lint-markers'],
         lint: {
-          'getAnnotations': (codemirror__WEBPACK_IMPORTED_MODULE_1___default().sqlLint),
+          'getAnnotations': codemirror__WEBPACK_IMPORTED_MODULE_1__.sqlLint,
           'async': true
         }
       });
@@ -602,9 +599,9 @@ var ConsoleInput = {
         ConsoleInput.historyNavigate(event);
       });
 
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').length !== 0) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').length !== 0) {
         // eslint-disable-next-line new-cap
-        ConsoleInput.inputs.bookmark = codemirror__WEBPACK_IMPORTED_MODULE_1___default()(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.bookmark_add_input')[0], {
+        ConsoleInput.inputs.bookmark = codemirror__WEBPACK_IMPORTED_MODULE_1__(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.bookmark_add_input')[0], {
           theme: 'pma',
           mode: 'text/x-sql',
           lineWrapping: true,
@@ -617,21 +614,21 @@ var ConsoleInput = {
           },
           gutters: ['CodeMirror-lint-markers'],
           lint: {
-            'getAnnotations': (codemirror__WEBPACK_IMPORTED_MODULE_1___default().sqlLint),
+            'getAnnotations': codemirror__WEBPACK_IMPORTED_MODULE_1__.sqlLint,
             'async': true
           }
         });
         ConsoleInput.inputs.bookmark.on('inputRead', Functions.codeMirrorAutoCompleteOnInputRead);
       }
     } else {
-      ConsoleInput.inputs.console = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<textarea>').appendTo('#pma_console .console_query_input').on('keydown', ConsoleInput.historyNavigate);
+      ConsoleInput.inputs.console = jquery__WEBPACK_IMPORTED_MODULE_0__('<textarea>').appendTo('#pma_console .console_query_input').on('keydown', ConsoleInput.historyNavigate);
 
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').length !== 0) {
-        ConsoleInput.inputs.bookmark = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<textarea>').appendTo('#pma_console .bookmark_add_input');
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').length !== 0) {
+        ConsoleInput.inputs.bookmark = jquery__WEBPACK_IMPORTED_MODULE_0__('<textarea>').appendTo('#pma_console .bookmark_add_input');
       }
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.console_query_input').on('keydown', ConsoleInput.keyDown);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.console_query_input').on('keydown', ConsoleInput.keyDown);
   },
 
   /**
@@ -849,9 +846,9 @@ var ConsoleMessages = {
    * @return {void}
    */
   clear: function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message:not(.welcome)').addClass('hide');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.failed').remove();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.expanded').find('.action.collapse').trigger('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message:not(.welcome)').addClass('hide');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message.failed').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message.expanded').find('.action.collapse').trigger('click');
   },
 
   /**
@@ -860,7 +857,7 @@ var ConsoleMessages = {
    * @return {void}
    */
   showHistory: function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.hide').removeClass('hide');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message.hide').removeClass('hide');
   },
 
   /**
@@ -870,7 +867,7 @@ var ConsoleMessages = {
    * @return {string | false} message
    */
   getHistory: function (nthLast) {
-    var $queries = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .query');
+    var $queries = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .query');
     var length = $queries.length;
     var $query = $queries.eq(length - nthLast);
 
@@ -891,7 +888,7 @@ var ConsoleMessages = {
   showInstructions: function (enterExecutes) {
     var enter = +enterExecutes || 0; // conversion to int
 
-    var $welcomeMsg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.welcome span');
+    var $welcomeMsg = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message.welcome span');
     $welcomeMsg.children('[id^=instructions]').hide();
     $welcomeMsg.children('#instructions-' + enter).show();
   },
@@ -911,14 +908,14 @@ var ConsoleMessages = {
 
     var msgId = Math.round(Math.random() * 899999999999 + 100000000000);
     var now = new Date();
-    var $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message ' + (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.AlwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
+    var $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message ' + (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.AlwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
 
     switch (msgType) {
       case 'query':
         $newMessage.append('<div class="query highlighted"></div>');
 
         if (ConsoleInput.codeMirror) {
-          codemirror__WEBPACK_IMPORTED_MODULE_1___default().runMode(msgString, 'text/x-sql', $newMessage.children('.query')[0]);
+          codemirror__WEBPACK_IMPORTED_MODULE_1__.runMode(msgString, 'text/x-sql', $newMessage.children('.query')[0]);
         } else {
           $newMessage.children('.query').text(msgString);
         }
@@ -990,20 +987,20 @@ var ConsoleMessages = {
 
     $targetMessage.addClass('binded');
     $targetMessage.find('.action.expand').on('click', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message').removeClass('collapsed');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message').addClass('expanded');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message').removeClass('collapsed');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message').addClass('expanded');
     });
     $targetMessage.find('.action.collapse').on('click', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message').addClass('collapsed');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message').removeClass('expanded');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message').addClass('collapsed');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message').removeClass('expanded');
     });
     $targetMessage.find('.action.edit').on('click', function () {
-      ConsoleInput.setText(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text());
+      ConsoleInput.setText(jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text());
       ConsoleInput.focus();
     });
     $targetMessage.find('.action.requery').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var query = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text();
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
 
       if (confirm(window.Messages.strConsoleRequeryConfirm + '\n' + (query.length < 100 ? query : query.slice(0, 100) + '...'))) {
         Console.execute(query, {
@@ -1013,24 +1010,24 @@ var ConsoleMessages = {
       }
     });
     $targetMessage.find('.action.bookmark').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var query = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text();
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
       ConsoleBookmarks.addBookmark(query, $message.attr('targetdb'));
       Console.showCard('#pma_bookmarks .card.add');
     });
     $targetMessage.find('.action.edit_bookmark').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var query = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text();
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
       var isShared = $message.find('span.bookmark_label').hasClass('shared');
       var label = $message.find('span.bookmark_label').text();
       ConsoleBookmarks.addBookmark(query, $message.attr('targetdb'), label, isShared);
       Console.showCard('#pma_bookmarks .card.add');
     });
     $targetMessage.find('.action.delete_bookmark').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
 
       if (confirm(window.Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/import', {
           'server': window.CommonParams.get('server'),
           'action_bookmark': 2,
           'ajax_request': true,
@@ -1041,22 +1038,22 @@ var ConsoleMessages = {
       }
     });
     $targetMessage.find('.action.profiling').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
-      Console.execute(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text(), {
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
+      Console.execute(jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text(), {
         db: $message.attr('targetdb'),
         table: $message.attr('targettable'),
         profiling: true
       });
     });
     $targetMessage.find('.action.explain').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
-      Console.execute('EXPLAIN ' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text(), {
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
+      Console.execute('EXPLAIN ' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().siblings('.query').text(), {
         db: $message.attr('targetdb'),
         table: $message.attr('targettable')
       });
     });
     $targetMessage.find('.action.dbg_show_trace').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
 
       if (!$message.find('.trace').length) {
         ConsoleDebug.getQueryDetails($message.data('queryInfo'), $message.data('totalTime'), $message);
@@ -1067,30 +1064,30 @@ var ConsoleMessages = {
       $message.removeClass('hide_trace');
     });
     $targetMessage.find('.action.dbg_hide_trace').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
       $message.addClass('hide_trace');
       $message.removeClass('show_trace');
     });
     $targetMessage.find('.action.dbg_show_args').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
       $message.addClass('show_args expanded');
       $message.removeClass('hide_args collapsed');
     });
     $targetMessage.find('.action.dbg_hide_args').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      var $message = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.message');
       $message.addClass('hide_args collapsed');
       $message.removeClass('show_args expanded');
     });
 
     if (ConsoleInput.codeMirror) {
       $targetMessage.find('.query:not(.highlighted)').each(function (index, elem) {
-        codemirror__WEBPACK_IMPORTED_MODULE_1___default().runMode(jquery__WEBPACK_IMPORTED_MODULE_0___default()(elem).text(), 'text/x-sql', elem);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('highlighted');
+        codemirror__WEBPACK_IMPORTED_MODULE_1__.runMode(jquery__WEBPACK_IMPORTED_MODULE_0__(elem).text(), 'text/x-sql', elem);
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('highlighted');
       });
     }
   },
   msgAppend: function (msgId, msgString) {
-    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message[msgid=' + msgId + ']');
+    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.content .console_message_container .message[msgid=' + msgId + ']');
 
     if ($targetMessage.length === 0 || isNaN(parseInt(msgId)) || typeof msgString !== 'string') {
       return false;
@@ -1099,7 +1096,7 @@ var ConsoleMessages = {
     $targetMessage.append('<div>' + msgString + '</div>');
   },
   updateQuery: function (msgId, isSuccessed, queryData) {
-    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.console_message_container .message[msgid=' + parseInt(msgId) + ']');
+    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.console_message_container .message[msgid=' + parseInt(msgId) + ']');
 
     if ($targetMessage.length === 0 || isNaN(parseInt(msgId))) {
       return false;
@@ -1119,7 +1116,7 @@ var ConsoleMessages = {
         }
 
         if (ConsoleInput.codeMirror) {
-          codemirror__WEBPACK_IMPORTED_MODULE_1___default().runMode(queryData.sql_query, 'text/x-sql', $targetMessage.children('.query')[0]);
+          codemirror__WEBPACK_IMPORTED_MODULE_1__.runMode(queryData.sql_query, 'text/x-sql', $targetMessage.children('.query')[0]);
         } else {
           $targetMessage.children('.query').text(queryData.sql_query);
         }
@@ -1139,7 +1136,7 @@ var ConsoleMessages = {
    * @return {void}
    */
   initialize: function () {
-    ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.message:not(.binded)'));
+    ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.message:not(.binded)'));
 
     if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.StartHistory) {
       ConsoleMessages.showHistory();
@@ -1155,10 +1152,10 @@ var ConsoleMessages = {
 var ConsoleBookmarks = {
   bookmarks: [],
   addBookmark: function (queryString, targetDb, label, isShared) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=shared]').prop('checked', false);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=label]').val('');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=targetdb]').val('');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=id_bookmark]').val('');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=shared]').prop('checked', false);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=label]').val('');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=targetdb]').val('');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=id_bookmark]').val('');
     ConsoleInput.setText('', 'bookmark');
 
     if (typeof queryString !== 'undefined') {
@@ -1166,26 +1163,26 @@ var ConsoleBookmarks = {
     }
 
     if (typeof targetDb !== 'undefined') {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=targetdb]').val(targetDb);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=targetdb]').val(targetDb);
     }
 
     if (typeof label !== 'undefined') {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=label]').val(label);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=label]').val(label);
     }
 
     if (typeof isShared !== 'undefined') {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.add [name=shared]').prop('checked', isShared);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.add [name=shared]').prop('checked', isShared);
     }
   },
   refresh: function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/import', {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/import', {
       'ajax_request': true,
       'server': window.CommonParams.get('server'),
       'console_bookmark_refresh': 'refresh'
     }, function (data) {
       if (data.console_message_bookmark) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.content.bookmark').html(data.console_message_bookmark);
-        ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.message:not(.binded)'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.content.bookmark').html(data.console_message_bookmark);
+        ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.message:not(.binded)'));
       }
     });
   },
@@ -1197,38 +1194,38 @@ var ConsoleBookmarks = {
    * @return {void}
    */
   initialize: function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').length === 0) {
       return;
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.bookmarks').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.bookmarks').on('click', function () {
       Console.showCard('#pma_bookmarks');
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.button.add').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.button.add').on('click', function () {
       Console.showCard('#pma_bookmarks .card.add');
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=submit]').on('click', function () {
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=label]').val().length === 0 || ConsoleInput.getText('bookmark').length === 0) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=submit]').on('click', function () {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=label]').val().length === 0 || ConsoleInput.getText('bookmark').length === 0) {
         alert(window.Messages.strFormEmpty);
         return;
       }
 
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('disabled', true);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/import', {
         'ajax_request': true,
         'console_bookmark_add': 'true',
-        'label': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=label]').val(),
+        'label': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=label]').val(),
         'server': window.CommonParams.get('server'),
-        'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
+        'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
         'bookmark_query': ConsoleInput.getText('bookmark'),
-        'shared': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=shared]').prop('checked')
+        'shared': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=shared]').prop('checked')
       }, function () {
         ConsoleBookmarks.refresh();
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=submit]').prop('disabled', false);
-        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=submit]').prop('disabled', false);
+        Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add'));
       });
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.refresh').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.refresh').on('click', function () {
       ConsoleBookmarks.refresh();
     });
   }
@@ -1240,50 +1237,50 @@ var ConsoleDebug = {
   },
   initialize: function () {
     // Try to get debug info after every AJAX request
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxSuccess', function (event, xhr, settings, data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('ajaxSuccess', function (event, xhr, settings, data) {
       if (data.debug) {
         ConsoleDebug.showLog(data.debug, settings.url);
       }
     });
 
     if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.GroupQueries) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').addClass('grouped');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('grouped');
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').addClass('ungrouped');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('ungrouped');
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_exec').addClass('active');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').addClass('active');
       }
     }
 
     var orderBy = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy;
     var order = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Order;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_' + orderBy).addClass('active');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order.order_' + order).addClass('active'); // Initialize actions in toolbar
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_' + orderBy).addClass('active');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order.order_' + order).addClass('active'); // Initialize actions in toolbar
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.group_queries').on('click', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').addClass('grouped');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').removeClass('ungrouped');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.group_queries').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('grouped');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').removeClass('ungrouped');
       _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('GroupQueries', true);
       ConsoleDebug.refresh();
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_exec').removeClass('active');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').removeClass('active');
       }
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.ungroup_queries').on('click', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').addClass('ungrouped');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').removeClass('grouped');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.ungroup_queries').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('ungrouped');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').removeClass('grouped');
       _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('GroupQueries', false);
       ConsoleDebug.refresh();
 
       if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_exec').addClass('active');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').addClass('active');
       }
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by').on('click', function () {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by').removeClass('active');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by').on('click', function () {
+      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by').removeClass('active');
       $this.addClass('active');
 
       if ($this.hasClass('sort_time')) {
@@ -1296,9 +1293,9 @@ var ConsoleDebug = {
 
       ConsoleDebug.refresh();
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order').on('click', function () {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order').removeClass('active');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order').on('click', function () {
+      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order').removeClass('active');
       $this.addClass('active');
 
       if ($this.hasClass('order_asc')) {
@@ -1314,7 +1311,7 @@ var ConsoleDebug = {
       return;
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.button.debug').removeClass('hide');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.button.debug').removeClass('hide');
     ConsoleDebug.showLog(Console.debugSqlInfo);
   },
   formatFunctionCall: function (dbgStep) {
@@ -1336,13 +1333,13 @@ var ConsoleDebug = {
     return functionName;
   },
   formatFunctionArgs: function (dbgStep) {
-    var $args = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>');
+    var $args = jquery__WEBPACK_IMPORTED_MODULE_0__('<div>');
 
     if (dbgStep.args.length) {
-      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text(Functions.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
+      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome">').text(Functions.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
 
       for (var i = 0; i < dbgStep.args.length; i++) {
-        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message">').html('<pre>' + Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
+        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message">').html('<pre>' + Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
       }
     }
 
@@ -1359,8 +1356,8 @@ var ConsoleDebug = {
     return fileName;
   },
   formatBackTrace: function (dbgTrace) {
-    var $traceElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="trace">');
-    $traceElem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">'));
+    var $traceElem = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="trace">');
+    $traceElem.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome">'));
     var step;
     var $stepElem;
 
@@ -1369,16 +1366,16 @@ var ConsoleDebug = {
         step = dbgTrace[stepId];
 
         if (!Array.isArray(step) && typeof step !== 'object') {
-          $stepElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message traceStep collapsed hide_args">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span>').text(step));
+          $stepElem = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message traceStep collapsed hide_args">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span>').text(step));
         } else {
           if (typeof step.args === 'string' && step.args) {
             step.args = [step.args];
           }
 
-          $stepElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message traceStep collapsed hide_args">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="function">').text(this.formatFunctionCall(step))).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="file">').text(this.formatFileName(step)));
+          $stepElem = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message traceStep collapsed hide_args">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="function">').text(this.formatFunctionCall(step))).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="file">').text(this.formatFileName(step)));
 
           if (step.args && step.args.length) {
-            $stepElem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="args">').html(this.formatFunctionArgs(step))).prepend(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="action_content">').append('<span class="action dbg_show_args">' + window.Messages.strConsoleDebugShowArgs + '</span> ').append('<span class="action dbg_hide_args">' + window.Messages.strConsoleDebugHideArgs + '</span> '));
+            $stepElem.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="args">').html(this.formatFunctionArgs(step))).prepend(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="action_content">').append('<span class="action dbg_show_args">' + window.Messages.strConsoleDebugShowArgs + '</span> ').append('<span class="action dbg_hide_args">' + window.Messages.strConsoleDebugHideArgs + '</span> '));
           }
         }
 
@@ -1411,7 +1408,7 @@ var ConsoleDebug = {
       queryTime = queryInfo.time;
     }
 
-    var $query = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message collapsed hide_trace">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.templates .debug_query').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="query">').text(queryText)).data('queryInfo', queryInfo).data('totalTime', totalTime);
+    var $query = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message collapsed hide_trace">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.templates .debug_query').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="query">').text(queryText)).data('queryInfo', queryInfo).data('totalTime', totalTime);
 
     if (grouped) {
       $query.find('.text.count').removeClass('hide');
@@ -1423,7 +1420,7 @@ var ConsoleDebug = {
   },
   appendQueryExtraInfo: function (query, $elem) {
     if ('error' in query) {
-      $elem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>').html(query.error));
+      $elem.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').html(query.error));
     }
 
     $elem.append(this.formatBackTrace(query.trace));
@@ -1433,7 +1430,7 @@ var ConsoleDebug = {
       var $singleQuery;
 
       for (var i in queryInfo) {
-        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + queryInfo[i].time + 's' + ' (' + (queryInfo[i].time * 100 / totalTime).toFixed(3) + '%)'));
+        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + queryInfo[i].time + 's' + ' (' + (queryInfo[i].time * 100 / totalTime).toFixed(3) + '%)'));
         this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
         $query.append('<div class="message welcome trace">').append($singleQuery);
       }
@@ -1444,8 +1441,8 @@ var ConsoleDebug = {
   showLog: function (debugInfo, url) {
     this.lastDebugInfo.debugInfo = debugInfo;
     this.lastDebugInfo.url = url;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debugLog').empty();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').empty();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debugLog').empty();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').empty();
     var debugJson = false;
     var i;
 
@@ -1475,7 +1472,7 @@ var ConsoleDebug = {
     }
 
     if (debugJson === false) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').text(window.Messages.strConsoleDebugError);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').text(window.Messages.strConsoleDebugError);
       return;
     }
 
@@ -1508,10 +1505,10 @@ var ConsoleDebug = {
 
     uniqueQueries = uniqueArray; // Show summary
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text(Functions.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="debug_summary">').text(Functions.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
 
     if (url) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="script_name">').text(url.split('?')[0]));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="script_name">').text(url.split('?')[0]));
     } // For sorting queries
 
 
@@ -1563,7 +1560,7 @@ var ConsoleDebug = {
           uniqueQueries[i].reverse();
         }
 
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debugLog').append(this.formatQueryOrGroup(uniqueQueries[i], totalTime));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debugLog').append(this.formatQueryOrGroup(uniqueQueries[i], totalTime));
       }
     } else {
       if (orderBy === 'time') {
@@ -1573,11 +1570,11 @@ var ConsoleDebug = {
       }
 
       for (i = 0; i < totalExec; ++i) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debugLog').append(this.formatQueryOrGroup(allQueries[i], totalTime));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debugLog').append(this.formatQueryOrGroup(allQueries[i], totalTime));
       }
     }
 
-    ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.message:not(.binded)'));
+    ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.message:not(.binded)'));
   },
   refresh: function () {
     var last = this.lastDebugInfo;
@@ -1594,7 +1591,7 @@ module.exports = CodeMirror;
 
 /***/ }),
 /* 9 */
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -1710,7 +1707,7 @@ const Config = {
 ],
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(5));
+/******/ var __webpack_exports__ = (__webpack_exec__(6));
 /******/ window.Console = __webpack_exports__.Console;
 /******/ }
 ]);

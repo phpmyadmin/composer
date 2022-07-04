@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[61],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 64:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    functions used wherever an sql query form is used
@@ -16,6 +27,7 @@
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
+
 var Sql = {};
 window.Sql = Sql;
 /**
@@ -100,8 +112,8 @@ Sql.showThisQuery = function (db, table, query) {
 
 
 Sql.setShowThisQuery = function () {
-  var db = $('input[name="db"]').val();
-  var table = $('input[name="table"]').val();
+  var db = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val();
+  var table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val();
 
   if (window.Config.isStorageSupported('localStorage')) {
     if (window.localStorage.showThisQueryObject !== undefined) {
@@ -111,7 +123,7 @@ Sql.setShowThisQuery = function () {
     }
 
     if (window.localStorage.showThisQuery !== undefined && window.localStorage.showThisQuery === '1') {
-      $('input[name="show_query"]').prop('checked', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="show_query"]').prop('checked', true);
 
       if (db === storedDb && table === storedTable) {
         if (window.codeMirrorEditor) {
@@ -121,7 +133,7 @@ Sql.setShowThisQuery = function () {
         }
       }
     } else {
-      $('input[name="show_query"]').prop('checked', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="show_query"]').prop('checked', false);
     }
   }
 };
@@ -226,14 +238,14 @@ const handleSimulateQueryButton = function () {
   if (window.codeMirrorEditor) {
     query = window.codeMirrorEditor.getValue();
   } else {
-    query = $('#sqlquery').val();
+    query = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val();
   }
 
-  const $simulateDml = $('#simulate_dml');
+  const $simulateDml = jquery__WEBPACK_IMPORTED_MODULE_0__('#simulate_dml');
 
   if (updateRegExp.test(query) || deleteRegExp.test(query)) {
     if (!$simulateDml.length) {
-      $('#button_submit_query').before('<input type="button" id="simulate_dml"' + 'tabindex="199" class="btn btn-primary" value="' + window.Messages.strSimulateDML + '">');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#button_submit_query').before('<input type="button" id="simulate_dml"' + 'tabindex="199" class="btn btn-primary" value="' + window.Messages.strSimulateDML + '">');
     }
   } else {
     if ($simulateDml.length) {
@@ -293,13 +305,13 @@ const insertQuery = function (queryType) {
     return;
   } else if (queryType === 'format') {
     if (window.codeMirrorEditor) {
-      $('#querymessage').html(window.Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#querymessage').html(window.Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
       var params = {
         'ajax_request': true,
         'sql': window.codeMirrorEditor.getValue(),
         'server': window.CommonParams.get('server')
       };
-      $.ajax({
+      jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         type: 'POST',
         url: 'index.php?route=/database/sql/format',
         data: params,
@@ -308,18 +320,18 @@ const insertQuery = function (queryType) {
             window.codeMirrorEditor.setValue(data.sql);
           }
 
-          $('#querymessage').html('');
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#querymessage').html('');
         },
         error: function () {
-          $('#querymessage').html('');
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#querymessage').html('');
         }
       });
     }
 
     return;
   } else if (queryType === 'saved') {
-    var db = $('input[name="db"]').val();
-    table = $('input[name="table"]').val();
+    var db = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val();
+    table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val();
     var key = db;
 
     if (table !== undefined) {
@@ -440,39 +452,39 @@ const insertValueQuery = function () {
 
 
 window.AJAX.registerTeardown('sql.js', function () {
-  $(document).off('click', 'a.delete_row.ajax');
-  $(document).off('submit', '.bookmarkQueryForm');
-  $('input#bkm_label').off('input');
-  $(document).off('makegrid', '.sqlqueryresults');
-  $('#togglequerybox').off('click');
-  $(document).off('click', '#button_submit_query');
-  $(document).off('change', '#id_bookmark');
-  $('input[name=\'bookmark_variable\']').off('keypress');
-  $(document).off('submit', '#sqlqueryform.ajax');
-  $(document).off('click', 'input[name=navig].ajax');
-  $(document).off('submit', 'form[name=\'displayOptionsForm\'].ajax');
-  $(document).off('mouseenter', 'th.column_heading.pointer');
-  $(document).off('mouseleave', 'th.column_heading.pointer');
-  $(document).off('click', 'th.column_heading.marker');
-  $(document).off('scroll', window);
-  $(document).off('keyup', '.filter_rows');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.delete_row.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '.bookmarkQueryForm');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input#bkm_label').off('input');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('makegrid', '.sqlqueryresults');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#button_submit_query');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#id_bookmark');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=\'bookmark_variable\']').off('keypress');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#sqlqueryform.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input[name=navig].ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', 'form[name=\'displayOptionsForm\'].ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseenter', 'th.column_heading.pointer');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseleave', 'th.column_heading.pointer');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'th.column_heading.marker');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('scroll', window);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keyup', '.filter_rows');
 
   if (window.codeMirrorEditor) {
     window.codeMirrorEditor.off('change');
   } else {
-    $('#sqlquery').off('input propertychange');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').off('input propertychange');
   }
 
-  $('body').off('click', '.navigation .showAllRows');
-  $('body').off('click', 'a.browse_foreign');
-  $('body').off('click', '#simulate_dml');
-  $('body').off('keyup', '#sqlqueryform');
-  $('body').off('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]');
-  $(document).off('submit', '.maxRowsForm');
-  $(document).off('click', '#view_as');
-  $(document).off('click', '#sqlquery');
-  $(document).off('click', 'input.sqlbutton');
-  $('#fieldsSelect').off('dblclick');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '.navigation .showAllRows');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.browse_foreign');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '#simulate_dml');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('keyup', '#sqlqueryform');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '.maxRowsForm');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#view_as');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#sqlquery');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input.sqlbutton');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldsSelect').off('dblclick');
 });
 /**
  * @description <p>Ajax scripts for sql and browse pages</p>
@@ -496,22 +508,22 @@ window.AJAX.registerOnload('sql.js', function () {
     Sql.setShowThisQuery();
   }
 
-  $(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     if (window.codeMirrorEditor) {
       window.codeMirrorEditor.on('change', function () {
         Sql.autoSave(window.codeMirrorEditor.getValue());
       });
     } else {
-      $('#sqlquery').on('input propertychange', function () {
-        Sql.autoSave($('#sqlquery').val());
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').on('input propertychange', function () {
+        Sql.autoSave(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val());
       });
       var useLocalStorageValue = window.Config.isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined'; // Save sql query with sort
 
-      if ($('#RememberSorting') !== undefined && $('#RememberSorting').is(':checked')) {
-        $('select[name="sql_query"]').on('change', function () {
-          Sql.autoSaveWithSort($(this).val());
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#RememberSorting') !== undefined && jquery__WEBPACK_IMPORTED_MODULE_0__('#RememberSorting').is(':checked')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"]').on('change', function () {
+          Sql.autoSaveWithSort(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
         });
-        $('.sortlink').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('.sortlink').on('click', function () {
           Sql.clearAutoSavedSort();
         });
       } else {
@@ -523,16 +535,16 @@ window.AJAX.registerOnload('sql.js', function () {
         path: window.CommonParams.get('rootPath')
       });
 
-      if (typeof sortStoredQuery !== 'undefined' && sortStoredQuery !== $('select[name="sql_query"]').val() && $('select[name="sql_query"] option[value="' + sortStoredQuery + '"]').length !== 0) {
-        $('select[name="sql_query"]').val(sortStoredQuery).trigger('change');
+      if (typeof sortStoredQuery !== 'undefined' && sortStoredQuery !== jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"]').val() && jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"] option[value="' + sortStoredQuery + '"]').length !== 0) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"]').val(sortStoredQuery).trigger('change');
       }
     }
   }); // Delete row from SQL results
 
-  $(document).on('click', 'a.delete_row.ajax', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.delete_row.ajax', function (e) {
     e.preventDefault();
-    var question = Functions.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
-    var $link = $(this);
+    var question = Functions.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('div').text()));
+    var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     $link.confirm(question, $link.attr('href'), function (url) {
       Functions.ajaxShowMessage();
       var argsep = window.CommonParams.get('arg_separator');
@@ -543,7 +555,7 @@ window.AJAX.registerOnload('sql.js', function () {
         params += argsep + postData;
       }
 
-      $.post(url, params, function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success) {
           Functions.ajaxShowMessage(data.message);
           $link.closest('tr').remove();
@@ -554,11 +566,11 @@ window.AJAX.registerOnload('sql.js', function () {
     });
   }); // Ajaxification for 'Bookmark this SQL query'
 
-  $(document).on('submit', '.bookmarkQueryForm', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '.bookmarkQueryForm', function (e) {
     e.preventDefault();
     Functions.ajaxShowMessage();
     var argsep = window.CommonParams.get('arg_separator');
-    $.post($(this).attr('action'), 'ajax_request=1' + argsep + $(this).serialize(), function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize(), function (data) {
       if (data.success) {
         Functions.ajaxShowMessage(data.message);
       } else {
@@ -568,14 +580,14 @@ window.AJAX.registerOnload('sql.js', function () {
   });
   /* Hides the bookmarkoptions checkboxes when the bookmark label is empty */
 
-  $('input#bkm_label').on('input', function () {
-    $('input#id_bkm_all_users, input#id_bkm_replace').parent().toggle($(this).val().length > 0);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input#bkm_label').on('input', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('input#id_bkm_all_users, input#id_bkm_replace').parent().toggle(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().length > 0);
   }).trigger('input');
   /**
    * Attach Event Handler for 'Copy to clipboard'
    */
 
-  $(document).on('click', '#copyToClipBoard', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#copyToClipBoard', function (event) {
     event.preventDefault();
     var textArea = document.createElement('textarea'); //
     // *** This styling is an extra step which is likely not required. ***
@@ -609,27 +621,27 @@ window.AJAX.registerOnload('sql.js', function () {
 
     textArea.style.background = 'transparent';
     textArea.value = '';
-    $('#server-breadcrumb a').each(function () {
-      textArea.value += $(this).data('raw-text') + '/';
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#server-breadcrumb a').each(function () {
+      textArea.value += jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('raw-text') + '/';
     });
     textArea.value += '\t\t' + window.location.href;
     textArea.value += '\n';
-    $('.alert-success').each(function () {
-      textArea.value += $(this).text() + '\n\n';
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-success').each(function () {
+      textArea.value += jquery__WEBPACK_IMPORTED_MODULE_0__(this).text() + '\n\n';
     });
-    $('.sql pre').each(function () {
-      textArea.value += $(this).text() + '\n\n';
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.sql pre').each(function () {
+      textArea.value += jquery__WEBPACK_IMPORTED_MODULE_0__(this).text() + '\n\n';
     });
-    $('.table_results .column_heading a').each(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.table_results .column_heading a').each(function () {
       // Don't copy ordering number text within <small> tag
-      textArea.value += $(this).clone().find('small').remove().end().text() + '\t';
+      textArea.value += jquery__WEBPACK_IMPORTED_MODULE_0__(this).clone().find('small').remove().end().text() + '\t';
     });
     textArea.value += '\n';
-    $('.table_results tbody tr').each(function () {
-      $(this).find('.data span').each(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.table_results tbody tr').each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.data span').each(function () {
         // Extract <em> tag for NULL values before converting to string to not mess up formatting
-        var data = $(this).find('em').length !== 0 ? $(this).find('em')[0] : this;
-        textArea.value += $(data).text() + '\t';
+        var data = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('em').length !== 0 ? jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('em')[0] : this;
+        textArea.value += jquery__WEBPACK_IMPORTED_MODULE_0__(data).text() + '\t';
       });
       textArea.value += '\n';
     }); // eslint-disable-next-line compat/compat
@@ -653,8 +665,8 @@ window.AJAX.registerOnload('sql.js', function () {
    * @memberOf    jQuery
    */
 
-  $(document).on('makegrid', '.sqlqueryresults', function () {
-    $('.table_results').each(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('makegrid', '.sqlqueryresults', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.table_results').each(function () {
       window.makeGrid(this);
     });
   });
@@ -666,20 +678,20 @@ window.AJAX.registerOnload('sql.js', function () {
    */
   // do not add this link more than once
 
-  if (!$('#sqlqueryform').find('button').is('#togglequerybox')) {
-    $('<button class="btn btn-secondary" id="togglequerybox"></button>').html(window.Messages.strHideQueryBox).appendTo('#sqlqueryform') // initially hidden because at this point, nothing else
+  if (!jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryform').find('button').is('#togglequerybox')) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<button class="btn btn-secondary" id="togglequerybox"></button>').html(window.Messages.strHideQueryBox).appendTo('#sqlqueryform') // initially hidden because at this point, nothing else
     // appears under the link
     .hide(); // Attach the toggling of the query box visibility to a click
 
-    $('#togglequerybox').on('click', function () {
-      var $link = $(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').on('click', function () {
+      var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
       $link.siblings().slideToggle('fast');
 
       if ($link.text() === window.Messages.strHideQueryBox) {
         $link.text(window.Messages.strShowQueryBox); // cheap trick to add a spacer between the menu tabs
         // and "Show query box"; feel free to improve!
 
-        $('#togglequerybox_spacer').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox_spacer').remove();
         $link.before('<br id="togglequerybox_spacer">');
       } else {
         $link.text(window.Messages.strHideQueryBox);
@@ -696,27 +708,27 @@ window.AJAX.registerOnload('sql.js', function () {
    */
 
 
-  $(document).on('click', '#button_submit_query', function () {
-    $('.alert-success,.alert-danger').hide(); // hide already existing error or success message
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#button_submit_query', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-success,.alert-danger').hide(); // hide already existing error or success message
 
-    var $form = $(this).closest('form'); // the Go button related to query submission was clicked,
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form'); // the Go button related to query submission was clicked,
     // instead of the one related to Bookmarks, so empty the
     // id_bookmark selector to avoid misinterpretation in
     // /import about what needs to be done
 
     $form.find('select[name=id_bookmark]').val('');
-    var isShowQuery = $('input[name="show_query"]').is(':checked');
+    var isShowQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="show_query"]').is(':checked');
 
     if (isShowQuery) {
       window.localStorage.showThisQuery = '1';
-      var db = $('input[name="db"]').val();
-      var table = $('input[name="table"]').val();
+      var db = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val();
+      var table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val();
       var query;
 
       if (window.codeMirrorEditor) {
         query = window.codeMirrorEditor.getValue();
       } else {
-        query = $('#sqlquery').val();
+        query = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val();
       }
 
       Sql.showThisQuery(db, table, query);
@@ -729,21 +741,21 @@ window.AJAX.registerOnload('sql.js', function () {
    * based on the bookmarked query
    */
 
-  $(document).on('change', '#id_bookmark', function () {
-    var varCount = $(this).find('option:selected').data('varcount');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#id_bookmark', function () {
+    var varCount = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('option:selected').data('varcount');
 
     if (typeof varCount === 'undefined') {
       varCount = 0;
     }
 
-    var $varDiv = $('#bookmarkVariables');
+    var $varDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('#bookmarkVariables');
     $varDiv.empty();
 
     for (var i = 1; i <= varCount; i++) {
-      $varDiv.append($('<div class="mb-3">'));
-      $varDiv.append($('<label for="bookmarkVariable' + i + '">' + Functions.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
-      $varDiv.append($('<input class="form-control" type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmarkVariable' + i + '">'));
-      $varDiv.append($('</div>'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="mb-3">'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<label for="bookmarkVariable' + i + '">' + Functions.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input class="form-control" type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmarkVariable' + i + '">'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('</div>'));
     }
 
     if (varCount === 0) {
@@ -759,7 +771,7 @@ window.AJAX.registerOnload('sql.js', function () {
    * @memberOf    jQuery
    */
 
-  $('input[name=bookmark_variable]').on('keypress', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=bookmark_variable]').on('keypress', function (event) {
     // force the 'Enter Key' to implicitly click the #button_submit_bookmark
     var keycode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
 
@@ -773,7 +785,7 @@ window.AJAX.registerOnload('sql.js', function () {
       // because when you are in the Bookmarked SQL query
       // section and hit enter, you expect it to do the
       // same action as the Go button in that section.
-      $('#button_submit_bookmark').trigger('click');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#button_submit_bookmark').trigger('click');
       return false;
     } else {
       return true;
@@ -787,9 +799,9 @@ window.AJAX.registerOnload('sql.js', function () {
    * @name        sqlqueryform_submit
    */
 
-  $(document).on('submit', '#sqlqueryform.ajax', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#sqlqueryform.ajax', function (event) {
     event.preventDefault();
-    var $form = $(this);
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
 
     if (window.codeMirrorEditor) {
       $form[0].elements.sql_query.value = window.codeMirrorEditor.getValue();
@@ -800,31 +812,31 @@ window.AJAX.registerOnload('sql.js', function () {
     } // remove any div containing a previous error message
 
 
-    $('.alert-danger').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-danger').remove();
     var $msgbox = Functions.ajaxShowMessage();
-    var $sqlqueryresultsouter = $('#sqlqueryresultsouter');
+    var $sqlqueryresultsouter = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter');
     Functions.prepareForAjaxRequest($form);
     var argsep = window.CommonParams.get('arg_separator');
-    $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         // success happens if the query returns rows or not
         // show a message that stays on screen
         if (typeof data.action_bookmark !== 'undefined') {
           // view only
           if ('1' === data.action_bookmark) {
-            $('#sqlquery').text(data.sql_query); // send to codemirror if possible
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').text(data.sql_query); // send to codemirror if possible
 
             setQuery(data.sql_query);
           } // delete
 
 
           if ('2' === data.action_bookmark) {
-            $('#id_bookmark option[value=\'' + data.id_bookmark + '\']').remove(); // if there are no bookmarked queries now (only the empty option),
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#id_bookmark option[value=\'' + data.id_bookmark + '\']').remove(); // if there are no bookmarked queries now (only the empty option),
             // remove the bookmark section
 
-            if ($('#id_bookmark option').length === 1) {
-              $('#fieldsetBookmarkOptions').hide();
-              $('#fieldsetBookmarkOptionsFooter').hide();
+            if (jquery__WEBPACK_IMPORTED_MODULE_0__('#id_bookmark option').length === 1) {
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldsetBookmarkOptions').hide();
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldsetBookmarkOptionsFooter').hide();
             }
           }
         }
@@ -868,26 +880,26 @@ window.AJAX.registerOnload('sql.js', function () {
           }
 
           window.CommonActions.refreshMain(url, function () {
-            $('#sqlqueryresultsouter').show().html(data.message);
-            Functions.highlightSql($('#sqlqueryresultsouter'));
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').show().html(data.message);
+            Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
           });
         }
 
-        $('.sqlqueryresults').trigger('makegrid');
-        $('#togglequerybox').show();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').trigger('makegrid');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').show();
 
         if (typeof data.action_bookmark === 'undefined') {
-          if ($('#sqlqueryform input[name="retain_query_box"]').is(':checked') !== true) {
-            if ($('#togglequerybox').siblings(':visible').length > 0) {
-              $('#togglequerybox').trigger('click');
+          if (jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryform input[name="retain_query_box"]').is(':checked') !== true) {
+            if (jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').siblings(':visible').length > 0) {
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').trigger('click');
             }
           }
         }
       } else if (typeof data !== 'undefined' && data.success === false) {
         // show an error message that stays on screen
         $sqlqueryresultsouter.show().html(data.error);
-        $('html, body').animate({
-          scrollTop: $(document).height()
+        jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+          scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
         }, 200);
       }
 
@@ -901,12 +913,12 @@ window.AJAX.registerOnload('sql.js', function () {
    * @name        displayOptionsForm_submit
    */
 
-  $(document).on('submit', 'form[name=\'displayOptionsForm\'].ajax', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', 'form[name=\'displayOptionsForm\'].ajax', function (event) {
     event.preventDefault();
-    var $form = $(this);
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $msgbox = Functions.ajaxShowMessage();
     var argsep = window.CommonParams.get('arg_separator');
-    $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
       Functions.ajaxRemoveMessage($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
       $sqlqueryresults.html(data.message).trigger('makegrid');
@@ -915,40 +927,40 @@ window.AJAX.registerOnload('sql.js', function () {
   }); // end displayOptionsForm handler
   // Filter row handling. --STARTS--
 
-  $(document).on('keyup', '.filter_rows', function () {
-    var uniqueId = $(this).data('for');
-    var $targetTable = $('.table_results[data-uniqueId=\'' + uniqueId + '\']');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keyup', '.filter_rows', function () {
+    var uniqueId = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('for');
+    var $targetTable = jquery__WEBPACK_IMPORTED_MODULE_0__('.table_results[data-uniqueId=\'' + uniqueId + '\']');
     var $headerCells = $targetTable.find('th[data-column]');
     var targetColumns = []; // To handle colspan=4, in case of edit,copy etc options.
 
-    var dummyTh = $('.edit_row_anchor').length !== 0 ? '<th class="hide dummy_th"></th><th class="hide dummy_th"></th><th class="hide dummy_th"></th>' : ''; // Selecting columns that will be considered for filtering and searching.
+    var dummyTh = jquery__WEBPACK_IMPORTED_MODULE_0__('.edit_row_anchor').length !== 0 ? '<th class="hide dummy_th"></th><th class="hide dummy_th"></th><th class="hide dummy_th"></th>' : ''; // Selecting columns that will be considered for filtering and searching.
 
     $headerCells.each(function () {
-      targetColumns.push($(this).text().trim());
+      targetColumns.push(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text().trim());
     });
-    var phrase = $(this).val(); // Set same value to both Filter rows fields.
+    var phrase = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(); // Set same value to both Filter rows fields.
 
-    $('.filter_rows[data-for=\'' + uniqueId + '\']').not(this).val(phrase); // Handle colspan.
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.filter_rows[data-for=\'' + uniqueId + '\']').not(this).val(phrase); // Handle colspan.
 
     $targetTable.find('thead > tr').prepend(dummyTh);
-    $.uiTableFilter($targetTable, phrase, targetColumns);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.uiTableFilter($targetTable, phrase, targetColumns);
     $targetTable.find('th.dummy_th').remove();
   }); // Filter row handling. --ENDS--
   // Prompt to confirm on Show All
 
-  $('body').on('click', '.navigation .showAllRows', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', '.navigation .showAllRows', function (e) {
     e.preventDefault();
-    var $form = $(this).parents('form');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('form');
 
     Sql.submitShowAllForm = function () {
       var argsep = window.CommonParams.get('arg_separator');
       var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
       Functions.ajaxShowMessage();
       window.AJAX.source = $form;
-      $.post($form.attr('action'), submitData, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, window.AJAX.responseHandler);
     };
 
-    if (!$(this).is(':checked')) {
+    if (!jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
       // already showing all rows
       Sql.submitShowAllForm();
     } else {
@@ -957,33 +969,33 @@ window.AJAX.registerOnload('sql.js', function () {
       });
     }
   });
-  $('body').on('keyup', '#sqlqueryform', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('keyup', '#sqlqueryform', function () {
     handleSimulateQueryButton();
   });
   /**
    * Ajax event handler for 'Simulate DML'.
    */
 
-  $('body').on('click', '#simulate_dml', function () {
-    var $form = $('#sqlqueryform');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', '#simulate_dml', function () {
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryform');
     var query = '';
-    var delimiter = $('#id_sql_delimiter').val();
+    var delimiter = jquery__WEBPACK_IMPORTED_MODULE_0__('#id_sql_delimiter').val();
     var dbName = $form.find('input[name="db"]').val();
 
     if (window.codeMirrorEditor) {
       query = window.codeMirrorEditor.getValue();
     } else {
-      query = $('#sqlquery').val();
+      query = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val();
     }
 
     if (query.length === 0) {
       alert(window.Messages.strFormEmpty);
-      $('#sqlquery').trigger('focus');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').trigger('focus');
       return false;
     }
 
     var $msgbox = Functions.ajaxShowMessage();
-    $.ajax({
+    jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
       url: 'index.php?route=/import/simulate-dml',
       data: {
@@ -1014,8 +1026,8 @@ window.AJAX.registerOnload('sql.js', function () {
           }
 
           dialogContent += '</div>';
-          var $dialogContent = $(dialogContent);
-          var modal = $('#simulateDmlModal');
+          var $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0__(dialogContent);
+          var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#simulateDmlModal');
           modal.modal('show');
           modal.find('.modal-body').first().html($dialogContent);
           modal.on('shown.bs.modal', function () {
@@ -1034,9 +1046,9 @@ window.AJAX.registerOnload('sql.js', function () {
    * Handles multi submits of results browsing page such as edit, delete and export
    */
 
-  $('body').on('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'form[name="resultsForm"].ajax button[name="submit_mult"], form[name="resultsForm"].ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
-    var $button = $(this);
+    var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var action = $button.val();
     var $form = $button.closest('form');
     var argsep = window.CommonParams.get('arg_separator');
@@ -1059,31 +1071,31 @@ window.AJAX.registerOnload('sql.js', function () {
       return;
     }
 
-    $.post(url, submitData, window.AJAX.responseHandler);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, window.AJAX.responseHandler);
   });
-  $(document).on('submit', '.maxRowsForm', function () {
-    var unlimNumRows = $(this).find('input[name="unlim_num_rows"]').val();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '.maxRowsForm', function () {
+    var unlimNumRows = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input[name="unlim_num_rows"]').val();
     var maxRowsCheck = Functions.checkFormElementInRange(this, 'session_max_rows', window.Messages.strNotValidRowNumber, 1);
     var posCheck = Functions.checkFormElementInRange(this, 'pos', window.Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
     return maxRowsCheck && posCheck;
   });
-  $('#insertBtn').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#insertBtn').on('click', function () {
     insertValueQuery();
   });
-  $('#view_as').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#view_as').on('click', function () {
     selectContent(this);
   });
-  $('#sqlquery').on('click', function () {
-    if ($(this).data('textarea-auto-select') === true) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').on('click', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('textarea-auto-select') === true) {
       selectContent(this);
     }
   });
-  $(document).on('click', 'input.sqlbutton', function (evt) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input.sqlbutton', function (evt) {
     insertQuery(evt.target.id);
     handleSimulateQueryButton();
     return false;
   });
-  $('#fieldsSelect').on('dblclick', () => {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldsSelect').on('dblclick', () => {
     insertValueQuery();
   });
 });
@@ -1135,26 +1147,26 @@ Sql.browseForeignDialog = function ($thisA) {
   var argSep = window.CommonParams.get('arg_separator');
   var params = $thisA.getPostData();
   params += argSep + 'ajax_request=true';
-  $.post($thisA.attr('href'), params, function (data) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.post($thisA.attr('href'), params, function (data) {
     // Creates browse foreign value dialog
-    $dialog = $('<div>').append(data.message).dialog({
+    $dialog = jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').append(data.message).dialog({
       title: window.Messages.strBrowseForeignValues,
-      width: Math.min($(window).width() - 100, 700),
-      maxHeight: $(window).height() - 100,
+      width: Math.min(jquery__WEBPACK_IMPORTED_MODULE_0__(window).width() - 100, 700),
+      maxHeight: jquery__WEBPACK_IMPORTED_MODULE_0__(window).height() - 100,
       dialogClass: 'browse_foreign_modal',
       close: function () {
         // remove event handlers attached to elements related to dialog
-        $(tableId).off('click', 'td a.foreign_value');
-        $(formId).off('click', showAllId);
-        $(formId).off('submit'); // remove dialog itself
+        jquery__WEBPACK_IMPORTED_MODULE_0__(tableId).off('click', 'td a.foreign_value');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(formId).off('click', showAllId);
+        jquery__WEBPACK_IMPORTED_MODULE_0__(formId).off('submit'); // remove dialog itself
 
-        $(this).remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
       },
       modal: true
     });
   }).done(function () {
     var showAll = false;
-    $(tableId).on('click', 'td a.foreign_value', function (e) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(tableId).on('click', 'td a.foreign_value', function (e) {
       e.preventDefault();
       var $input = $thisA.prev('input[type=text]'); // Check if input exists or get CEdit edit_box
 
@@ -1163,37 +1175,37 @@ Sql.browseForeignDialog = function ($thisA) {
       } // Set selected value as input value
 
 
-      $input.val($(this).data('key')); // Unchecks the Ignore checkbox for the current row
+      $input.val(jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('key')); // Unchecks the Ignore checkbox for the current row
 
       $input.trigger('change');
       $dialog.dialog('close');
     });
-    $(formId).on('click', showAllId, function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(formId).on('click', showAllId, function () {
       showAll = true;
     });
-    $(formId).on('submit', function (e) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(formId).on('submit', function (e) {
       e.preventDefault(); // if filter value is not equal to old value
       // then reset page number to 1
 
-      if ($(filterId).val() !== $(filterId).data('old')) {
-        $(formId).find('select[name=pos]').val('0');
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(filterId).val() !== jquery__WEBPACK_IMPORTED_MODULE_0__(filterId).data('old')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__(formId).find('select[name=pos]').val('0');
       }
 
-      var postParams = $(this).serializeArray(); // if showAll button was clicked to submit form then
+      var postParams = jquery__WEBPACK_IMPORTED_MODULE_0__(this).serializeArray(); // if showAll button was clicked to submit form then
       // add showAll button parameter to form
 
       if (showAll) {
         postParams.push({
-          name: $(showAllId).attr('name'),
-          value: $(showAllId).val()
+          name: jquery__WEBPACK_IMPORTED_MODULE_0__(showAllId).attr('name'),
+          value: jquery__WEBPACK_IMPORTED_MODULE_0__(showAllId).val()
         });
       } // updates values in dialog
 
 
-      $.post($(this).attr('action') + '&ajax_request=1', postParams, function (data) {
-        var $obj = $('<div>').html(data.message);
-        $(formId).html($obj.find(formId).html());
-        $(tableId).html($obj.find(tableId).html());
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('action') + '&ajax_request=1', postParams, function (data) {
+        var $obj = jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').html(data.message);
+        jquery__WEBPACK_IMPORTED_MODULE_0__(formId).html($obj.find(formId).html());
+        jquery__WEBPACK_IMPORTED_MODULE_0__(tableId).html($obj.find(tableId).html());
       });
       showAll = false;
     });
@@ -1206,8 +1218,8 @@ Sql.browseForeignDialog = function ($thisA) {
 
 
 Sql.getAutoSavedKey = function () {
-  var db = $('input[name="db"]').val();
-  var table = $('input[name="table"]').val();
+  var db = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val();
+  var table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val();
   var key = db;
 
   if (table !== undefined) {
@@ -1230,32 +1242,32 @@ Sql.checkSavedQuery = function () {
 };
 
 window.AJAX.registerOnload('sql.js', function () {
-  $('body').on('click', 'a.browse_foreign', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.browse_foreign', function (e) {
     e.preventDefault();
-    Sql.browseForeignDialog($(this));
+    Sql.browseForeignDialog(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
   /**
    * vertical column highlighting in horizontal mode when hovering over the column header
    */
 
-  $(document).on('mouseenter', 'th.column_heading.pointer', function () {
-    Sql.changeClassForColumn($(this), 'hover', true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseenter', 'th.column_heading.pointer', function () {
+    Sql.changeClassForColumn(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'hover', true);
   });
-  $(document).on('mouseleave', 'th.column_heading.pointer', function () {
-    Sql.changeClassForColumn($(this), 'hover', false);
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseleave', 'th.column_heading.pointer', function () {
+    Sql.changeClassForColumn(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'hover', false);
   });
   /**
    * vertical column marking in horizontal mode when clicking the column header
    */
 
-  $(document).on('click', 'th.column_heading.marker', function () {
-    Sql.changeClassForColumn($(this), 'marked');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'th.column_heading.marker', function () {
+    Sql.changeClassForColumn(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'marked');
   });
   /**
    * create resizable table
    */
 
-  $('.sqlqueryresults').trigger('makegrid');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').trigger('makegrid');
   /**
    * Check if there is any saved query
    */
@@ -1269,17 +1281,17 @@ window.AJAX.registerOnload('sql.js', function () {
  */
 
 Sql.makeProfilingChart = function () {
-  if ($('#profilingchart').length === 0 || $('#profilingchart').html().length !== 0 || !$.jqplot || !$.jqplot.Highlighter || !$.jqplot.PieRenderer) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingchart').length === 0 || jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingchart').html().length !== 0 || !jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot || !jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot.Highlighter || !jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot.PieRenderer) {
     return;
   }
 
   var data = [];
-  $.each(JSON.parse($('#profilingChartData').html()), function (key, value) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.each(JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingChartData').html()), function (key, value) {
     data.push([key, parseFloat(value)]);
   }); // Remove chart and data divs contents
 
-  $('#profilingchart').html('').show();
-  $('#profilingChartData').html('');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingchart').html('').show();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingChartData').html('');
   Functions.createProfilingChart('profilingchart', data);
 };
 /**
@@ -1288,13 +1300,13 @@ Sql.makeProfilingChart = function () {
 
 
 Sql.initProfilingTables = function () {
-  if (!$.tablesorter) {
+  if (!jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter) {
     return;
   } // Added to allow two direction sorting
 
 
-  $('#profiletable').find('thead th').off('click mousedown');
-  $('#profiletable').tablesorter({
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profiletable').find('thead th').off('click mousedown');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profiletable').tablesorter({
     widgets: ['zebra'],
     sortList: [[0, 0]],
     textExtraction: function (node) {
@@ -1306,8 +1318,8 @@ Sql.initProfilingTables = function () {
     }
   }); // Added to allow two direction sorting
 
-  $('#profilesummarytable').find('thead th').off('click mousedown');
-  $('#profilesummarytable').tablesorter({
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profilesummarytable').find('thead th').off('click mousedown');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#profilesummarytable').tablesorter({
     widgets: ['zebra'],
     sortList: [[1, 1]],
     textExtraction: function (node) {

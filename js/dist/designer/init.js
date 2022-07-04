@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[21],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 25:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * Initializes the data required to run Designer, then fires it up.
@@ -21,14 +32,15 @@
 
 /* global designerConfig */
 // templates/database/designer/main.twig
+
 window.AJAX.registerTeardown('designer/init.js', function () {
-  $('.trigger').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.trigger').off('click');
 });
 window.AJAX.registerOnload('designer/init.js', function () {
-  $('.trigger').on('click', function () {
-    $('.panel').toggle('fast');
-    $(this).toggleClass('active');
-    $('#ab').accordion('refresh');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.trigger').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.panel').toggle('fast');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).toggleClass('active');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
     return false;
   });
   window.jTabs = designerConfig.scriptTables.j_tabs;
@@ -49,20 +61,20 @@ window.AJAX.registerOnload('designer/init.js', function () {
     });
   }
 
-  $('#query_Aggregate_Button').on('click', function () {
-    $('#query_Aggregate').css('display', 'none');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#query_Aggregate_Button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#query_Aggregate').css('display', 'none');
   });
-  $('#query_having_button').on('click', function () {
-    $('#query_having').css('display', 'none');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#query_having_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#query_having').css('display', 'none');
   });
-  $('#query_rename_to_button').on('click', function () {
-    $('#query_rename_to').css('display', 'none');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#query_rename_to_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#query_rename_to').css('display', 'none');
   });
-  $('#build_query_button').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#build_query_button').on('click', function () {
     DesignerHistory.buildQuery('SQL Query on Database', 0);
   });
-  $('#query_where_button').on('click', function () {
-    $('#query_where').css('display', 'none');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#query_where_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#query_where').css('display', 'none');
   });
 });
 

@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[32],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 36:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 const GitInfo = {
   /**
@@ -47,7 +58,7 @@ const GitInfo = {
    */
   currentVersion: data => {
     if (data && data.version && data.date) {
-      const current = GitInfo.parseVersionString($('span.version').text());
+      const current = GitInfo.parseVersionString(jquery__WEBPACK_IMPORTED_MODULE_0__('span.version').text());
       const latest = GitInfo.parseVersionString(data.version);
       const url = './url.php?url=https://www.phpmyadmin.net/files/' + Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
       let versionInformationMessage = document.createElement('span');
@@ -72,7 +83,7 @@ const GitInfo = {
           htmlClass = 'alert alert-danger';
         }
 
-        $('#newer_version_notice').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#newer_version_notice').remove();
         const mainContainerDiv = document.createElement('div');
         mainContainerDiv.id = 'newer_version_notice';
         mainContainerDiv.className = htmlClass;
@@ -84,7 +95,7 @@ const GitInfo = {
         const mainContainerDivLinkText = document.createTextNode(message);
         mainContainerDivLink.appendChild(mainContainerDivLinkText);
         mainContainerDiv.appendChild(mainContainerDivLink);
-        $('#maincontainer').append($(mainContainerDiv));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#maincontainer').append(jquery__WEBPACK_IMPORTED_MODULE_0__(mainContainerDiv));
       }
 
       if (latest === current) {
@@ -93,15 +104,15 @@ const GitInfo = {
       /* Remove extra whitespace */
 
 
-      const versionInfo = $('#li_pma_version').contents().get(2);
+      const versionInfo = jquery__WEBPACK_IMPORTED_MODULE_0__('#li_pma_version').contents().get(2);
 
       if (typeof versionInfo !== 'undefined') {
         versionInfo.textContent = versionInfo.textContent.trim();
       }
 
-      const $liPmaVersion = $('#li_pma_version');
+      const $liPmaVersion = jquery__WEBPACK_IMPORTED_MODULE_0__('#li_pma_version');
       $liPmaVersion.find('span.latest').remove();
-      $liPmaVersion.append($(versionInformationMessage));
+      $liPmaVersion.append(jquery__WEBPACK_IMPORTED_MODULE_0__(versionInformationMessage));
     }
   },
 
@@ -109,15 +120,15 @@ const GitInfo = {
    * Loads Git revision data from ajax for index.php
    */
   displayGitRevision: () => {
-    $('#is_git_revision').remove();
-    $('#li_pma_version_git').remove();
-    $.get('index.php?route=/git-revision', {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#is_git_revision').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#li_pma_version_git').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/git-revision', {
       'server': window.CommonParams.get('server'),
       'ajax_request': true,
       'no_debug': true
     }, data => {
       if (typeof data !== 'undefined' && data.success === true) {
-        $(data.message).insertAfter('#li_pma_version');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(data.message).insertAfter('#li_pma_version');
       }
     });
   },
@@ -126,11 +137,11 @@ const GitInfo = {
    * Load version information asynchronously.
    */
   loadVersion: () => {
-    if ($('li.jsversioncheck').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('li.jsversioncheck').length === 0) {
       return;
     }
 
-    $.ajax({
+    jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       dataType: 'json',
       url: 'index.php?route=/version-check',
       method: 'POST',
@@ -143,7 +154,7 @@ const GitInfo = {
   showVersion: () => {
     GitInfo.loadVersion();
 
-    if ($('#is_git_revision').length === 0) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#is_git_revision').length === 0) {
       return;
     }
 
@@ -156,16 +167,16 @@ const GitInfo = {
 
 const ThemesManager = {
   handleEvent: () => {
-    $.get('index.php?route=/themes', data => {
-      $('#themesModal .modal-body').html(data.themes);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/themes', data => {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#themesModal .modal-body').html(data.themes);
     });
   }
 };
 window.AJAX.registerTeardown('home.js', () => {
-  $('#themesModal').off('show.bs.modal');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#themesModal').off('show.bs.modal');
 });
 window.AJAX.registerOnload('home.js', () => {
-  $('#themesModal').on('show.bs.modal', ThemesManager.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#themesModal').on('show.bs.modal', ThemesManager.handleEvent);
   GitInfo.showVersion();
 });
 

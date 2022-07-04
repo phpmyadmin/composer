@@ -1,9 +1,20 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[42],{
 
-/***/ 46:
-/***/ (function() {
+/***/ 1:
+/***/ (function(module) {
 
-$.widget.bridge('uiTooltip', $.ui.tooltip);
+module.exports = jQuery;
+
+/***/ }),
+
+/***/ 46:
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+jquery__WEBPACK_IMPORTED_MODULE_0__.widget.bridge('uiTooltip', jquery__WEBPACK_IMPORTED_MODULE_0__.ui.tooltip);
 
 /***/ })
 

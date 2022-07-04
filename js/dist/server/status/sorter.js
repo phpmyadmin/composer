@@ -1,17 +1,28 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[54],{
 
-/***/ 57:
-/***/ (function() {
+/***/ 1:
+/***/ (function(module) {
 
-// TODO: tablesorter shouldn't sort already sorted columns
+module.exports = jQuery;
+
+/***/ }),
+
+/***/ 57:
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+ // TODO: tablesorter shouldn't sort already sorted columns
 // eslint-disable-next-line no-unused-vars
+
 function initTableSorter(tabid) {
   var $table;
   var opts;
 
   switch (tabid) {
     case 'statustabs_queries':
-      $table = $('#serverStatusQueriesDetails');
+      $table = jquery__WEBPACK_IMPORTED_MODULE_0__('#serverStatusQueriesDetails');
       opts = {
         sortList: [[3, 1]],
         headers: {
@@ -31,14 +42,14 @@ function initTableSorter(tabid) {
 }
 
 window.initTableSorter = initTableSorter;
-$(function () {
-  $.tablesorter.addParser({
+jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter.addParser({
     id: 'fancyNumber',
     is: function (s) {
       return /^[0-9]?[0-9,\\.]*\s?(k|M|G|T|%)?$/.test(s);
     },
     format: function (s) {
-      var num = jQuery.tablesorter.formatFloat(s.replace(window.Messages.strThousandsSeparator, '').replace(window.Messages.strDecimalSeparator, '.'));
+      var num = jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter.formatFloat(s.replace(window.Messages.strThousandsSeparator, '').replace(window.Messages.strDecimalSeparator, '.'));
       var factor = 1;
 
       switch (s.charAt(s.length - 1)) {
@@ -68,7 +79,7 @@ $(function () {
     },
     type: 'numeric'
   });
-  $.tablesorter.addParser({
+  jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter.addParser({
     id: 'withinSpanNumber',
     is: function (s) {
       return /<span class="original"/.test(s);

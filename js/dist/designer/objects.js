@@ -1,8 +1,10 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[23],{
 
 /***/ 27:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+__webpack_require__.r(__webpack_exports__);
 var DesignerObjects = {
   PdfPage: function (dbName, pageDescr, tblCords) {
     // eslint-disable-next-line no-unused-vars

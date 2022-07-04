@@ -1,6 +1,10 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[0],[
 /* 0 */
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /* global Navigation */
 
@@ -10,6 +14,7 @@
  *
  * @test-module AJAX
  */
+
 window.AJAX = {
   /**
    * @var {boolean} active Whether we are busy
@@ -88,7 +93,7 @@ window.AJAX = {
    */
   registerOnload: function (file, func) {
     var eventName = 'onload_' + window.AJAX.hash(file);
-    $(document).on(eventName, func);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on(eventName, func);
 
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -111,7 +116,7 @@ window.AJAX = {
    */
   registerTeardown: function (file, func) {
     var eventName = 'teardown_' + window.AJAX.hash(file);
-    $(document).on(eventName, func);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on(eventName, func);
 
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -132,7 +137,7 @@ window.AJAX = {
    */
   fireOnload: function (file) {
     var eventName = 'onload_' + window.AJAX.hash(file);
-    $(document).trigger(eventName);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).trigger(eventName);
 
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -151,7 +156,7 @@ window.AJAX = {
    */
   fireTeardown: function (file) {
     var eventName = 'teardown_' + window.AJAX.hash(file);
-    $(document).triggerHandler(eventName);
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).triggerHandler(eventName);
 
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -189,7 +194,7 @@ window.AJAX = {
         return;
       }
 
-      lockId = $(this).data('lock-id');
+      lockId = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('lock-id');
 
       if (typeof lockId === 'undefined') {
         return;
@@ -201,12 +206,12 @@ window.AJAX = {
 
 
       if (event.data.value === 1) {
-        newHash = window.AJAX.hash($(this).val());
+        newHash = window.AJAX.hash(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
       } else {
-        newHash = window.AJAX.hash($(this).is(':checked'));
+        newHash = window.AJAX.hash(jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked'));
       }
 
-      oldHash = $(this).data('val-hash');
+      oldHash = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('val-hash');
     } // Set lock if old value !== new value
     // otherwise release lock
 
@@ -219,10 +224,10 @@ window.AJAX = {
     // otherwise remove lock icon
 
 
-    if (!jQuery.isEmptyObject(window.AJAX.lockedTargets)) {
-      $('#lock_page_icon').html(Functions.getImage('s_lock', window.Messages.strLockToolTip).toString());
+    if (!jquery__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject(window.AJAX.lockedTargets)) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#lock_page_icon').html(Functions.getImage('s_lock', window.Messages.strLockToolTip).toString());
     } else {
-      $('#lock_page_icon').html('');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#lock_page_icon').html('');
     }
   },
 
@@ -233,14 +238,14 @@ window.AJAX = {
    */
   resetLock: function () {
     window.AJAX.lockedTargets = {};
-    $('#lock_page_icon').html('');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#lock_page_icon').html('');
   },
   handleMenu: {
     replace: function (content) {
-      $('#floating_menubar').html(content) // Remove duplicate wrapper
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#floating_menubar').html(content) // Remove duplicate wrapper
       // TODO: don't send it in the response
       .children().first().remove();
-      $('#topmenu').menuResizer(Functions.mainMenuResizerCallback);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenu').menuResizer(Functions.mainMenuResizerCallback);
     }
   },
 
@@ -255,13 +260,13 @@ window.AJAX = {
     // In some cases we don't want to handle the request here and either
     // leave the browser deal with it natively (e.g: file download)
     // or leave an existing ajax event handler present elsewhere deal with it
-    var href = $(this).attr('href');
+    var href = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href');
 
     if (typeof event !== 'undefined' && (event.shiftKey || event.ctrlKey || event.metaKey)) {
       return true;
-    } else if ($(this).attr('target')) {
+    } else if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('target')) {
       return true;
-    } else if ($(this).hasClass('ajax') || $(this).hasClass('disableAjax')) {
+    } else if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('ajax') || jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('disableAjax')) {
       // reset the lockedTargets object, as specified AJAX operation has finished
       window.AJAX.resetLock();
       return true;
@@ -269,7 +274,7 @@ window.AJAX = {
       return true;
     } else if (href && href.match(/^mailto/)) {
       return true;
-    } else if ($(this).hasClass('ui-datepicker-next') || $(this).hasClass('ui-datepicker-prev')) {
+    } else if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('ui-datepicker-next') || jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('ui-datepicker-prev')) {
       return true;
     }
 
@@ -282,7 +287,7 @@ window.AJAX = {
     // the click event is not triggered by script
 
 
-    if (typeof event !== 'undefined' && event.type === 'click' && event.isTrigger !== true && !jQuery.isEmptyObject(window.AJAX.lockedTargets) && confirm(window.Messages.strConfirmNavigation) === false) {
+    if (typeof event !== 'undefined' && event.type === 'click' && event.isTrigger !== true && !jquery__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject(window.AJAX.lockedTargets) && confirm(window.Messages.strConfirmNavigation) === false) {
       return false;
     }
 
@@ -314,17 +319,17 @@ window.AJAX = {
       }
     }
 
-    window.AJAX.source = $(this);
-    $('html, body').animate({
+    window.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
       scrollTop: 0
     }, 'fast');
-    var url = isLink ? href : $(this).attr('action');
+    var url = isLink ? href : jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('action');
     var argsep = window.CommonParams.get('arg_separator');
     var params = 'ajax_request=true' + argsep + 'ajax_page_request=true';
     var dataPost = window.AJAX.source.getPostData();
 
     if (!isLink) {
-      params += argsep + $(this).serialize();
+      params += argsep + jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize();
     } else if (dataPost) {
       params += argsep + dataPost;
       isLink = false;
@@ -339,7 +344,7 @@ window.AJAX = {
       window.AJAX.active = true;
       window.AJAX.$msgbox = Functions.ajaxShowMessage(); // Save reference for the new link request
 
-      window.AJAX.xhr = $.get(url, params, window.AJAX.responseHandler);
+      window.AJAX.xhr = jquery__WEBPACK_IMPORTED_MODULE_0__.get(url, params, window.AJAX.responseHandler);
       var state = {
         url: href
       };
@@ -357,17 +362,17 @@ window.AJAX = {
        * The event was saved in the jQuery data object by an onload
        * handler defined below. Workaround for bug #3583316
        */
-      var onsubmit = $(this).data('onsubmit'); // Submit the request if there is no onsubmit handler
+      var onsubmit = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('onsubmit'); // Submit the request if there is no onsubmit handler
       // or if it returns a value that evaluates to true
 
       if (typeof onsubmit !== 'function' || onsubmit.apply(this, [event])) {
         window.AJAX.active = true;
         window.AJAX.$msgbox = Functions.ajaxShowMessage();
 
-        if ($(this).attr('id') === 'login_form') {
-          $.post(url, params, window.AJAX.loginResponseHandler);
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('id') === 'login_form') {
+          jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.loginResponseHandler);
         } else {
-          $.post(url, params, window.AJAX.responseHandler);
+          jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.responseHandler);
         }
       }
     }
@@ -393,11 +398,11 @@ window.AJAX = {
     window.AJAX.scriptHandler.load([]);
 
     if (data.displayMessage) {
-      $('#page_content').prepend(data.displayMessage);
-      Functions.highlightSql($('#page_content'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').prepend(data.displayMessage);
+      Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
     }
 
-    $('#pma_errors').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors').remove();
     var msg = '';
 
     if (data.errSubmitMsg) {
@@ -405,43 +410,43 @@ window.AJAX = {
     }
 
     if (data.errors) {
-      $('<div></div>', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>', {
         id: 'pma_errors',
         class: 'clearfloat d-print-none'
       }).insertAfter('#selflink').append(data.errors); // bind for php error reporting forms (bottom)
 
-      $('#pma_ignore_errors_bottom').on('click', function (e) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_errors_bottom').on('click', function (e) {
         e.preventDefault();
         Functions.ignorePhpErrors();
       });
-      $('#pma_ignore_all_errors_bottom').on('click', function (e) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_all_errors_bottom').on('click', function (e) {
         e.preventDefault();
         Functions.ignorePhpErrors(false);
       }); // In case of 'sendErrorReport'='always'
       // submit the hidden error reporting form.
 
       if (data.sendErrorAlways === '1' && data.stopErrorReportLoop !== '1') {
-        $('#pma_report_errors_form').trigger('submit');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form').trigger('submit');
         Functions.ajaxShowMessage(window.Messages.phpErrorsBeingSubmitted, false);
-        $('html, body').animate({
-          scrollTop: $(document).height()
+        jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+          scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
         }, 'slow');
       } else if (data.promptPhpErrors) {
         // otherwise just prompt user if it is set so.
         msg = msg + window.Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
 
-        $('html, body').animate({
-          scrollTop: $(document).height()
+        jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+          scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
         }, 'slow');
       }
     }
 
     Functions.ajaxShowMessage(msg, false); // bind for php error reporting forms (popup)
 
-    $('#pma_ignore_errors_popup').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_errors_popup').on('click', function () {
       Functions.ignorePhpErrors();
     });
-    $('#pma_ignore_all_errors_popup').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_all_errors_popup').on('click', function () {
       Functions.ignorePhpErrors(false);
     });
 
@@ -457,20 +462,20 @@ window.AJAX = {
 
 
       if (typeof data.logged_in !== 'undefined' && data.logged_in === 1) {
-        if ($('#modalOverlay').length) {
-          $('#modalOverlay').remove();
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__('#modalOverlay').length) {
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#modalOverlay').remove();
         }
 
-        $('fieldset.disabled_for_expiration').removeAttr('disabled').removeClass('disabled_for_expiration');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.disabled_for_expiration').removeAttr('disabled').removeClass('disabled_for_expiration');
         window.AJAX.fireTeardown('functions.js');
         window.AJAX.fireOnload('functions.js');
       }
 
       if (typeof data.new_token !== 'undefined') {
-        $('input[name=token]').val(data.new_token);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=token]').val(data.new_token);
       }
     } else if (typeof data.logged_in !== 'undefined' && data.logged_in === 0) {
-      $('#modalOverlay').replaceWith(data.error);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#modalOverlay').replaceWith(data.error);
     } else {
       Functions.ajaxShowMessage(data.error, false);
       window.AJAX.active = false;
@@ -478,8 +483,8 @@ window.AJAX = {
       Functions.handleRedirectAndReload(data);
 
       if (data.fieldWithError) {
-        $(':input.error').removeClass('error');
-        $('#' + data.fieldWithError).addClass('error');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(':input.error').removeClass('error');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#' + data.fieldWithError).addClass('error');
       }
     }
   },
@@ -505,14 +510,14 @@ window.AJAX = {
 
     if (typeof data === 'string') {
       Functions.ajaxRemoveMessage(window.AJAX.$msgbox);
-      Functions.ajaxShowMessage($(data).text(), false, 'error');
+      Functions.ajaxShowMessage(jquery__WEBPACK_IMPORTED_MODULE_0__(data).text(), false, 'error');
       window.AJAX.active = false;
       window.AJAX.xhr = null;
       return;
     }
 
     if (typeof data.success !== 'undefined' && data.success) {
-      $('html, body').animate({
+      jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
         scrollTop: 0
       }, 'fast');
       Functions.ajaxRemoveMessage(window.AJAX.$msgbox);
@@ -530,7 +535,7 @@ window.AJAX = {
         }
 
         if (data.title) {
-          $('title').replaceWith(data.title);
+          jquery__WEBPACK_IMPORTED_MODULE_0__('title').replaceWith(data.title);
         }
 
         if (data.menu) {
@@ -550,11 +555,11 @@ window.AJAX = {
         // been added outside of #page_content
 
 
-        $('body').children().not('#pma_navigation').not('#floating_menubar').not('#page_nav_icons').not('#page_content').not('#selflink').not('#pma_header').not('#pma_footer').not('#pma_demo').not('#pma_console_container').not('#prefs_autoload').remove(); // Replace #page_content with new content
+        jquery__WEBPACK_IMPORTED_MODULE_0__('body').children().not('#pma_navigation').not('#floating_menubar').not('#page_nav_icons').not('#page_content').not('#selflink').not('#pma_header').not('#pma_footer').not('#pma_demo').not('#pma_console_container').not('#prefs_autoload').remove(); // Replace #page_content with new content
 
         if (data.message && data.message.length > 0) {
-          $('#page_content').replaceWith('<div id=\'page_content\'>' + data.message + '</div>');
-          Functions.highlightSql($('#page_content'));
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').replaceWith('<div id=\'page_content\'>' + data.message + '</div>');
+          Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
           Functions.checkNumberOfFields();
         }
 
@@ -572,7 +577,7 @@ window.AJAX = {
             data.selflink = data.selflink.replace(source, replacement);
           }
 
-          $('#selflink').find('> a').attr('href', data.selflink);
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('> a').attr('href', data.selflink);
         }
 
         if (data.params) {
@@ -584,11 +589,11 @@ window.AJAX = {
         }
 
         if (data.displayMessage) {
-          $('#page_content').prepend(data.displayMessage);
-          Functions.highlightSql($('#page_content'));
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').prepend(data.displayMessage);
+          Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
         }
 
-        $('#pma_errors').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors').remove();
         var msg = '';
 
         if (data.errSubmitMsg) {
@@ -596,43 +601,43 @@ window.AJAX = {
         }
 
         if (data.errors) {
-          $('<div></div>', {
+          jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>', {
             id: 'pma_errors',
             class: 'clearfloat d-print-none'
           }).insertAfter('#selflink').append(data.errors); // bind for php error reporting forms (bottom)
 
-          $('#pma_ignore_errors_bottom').on('click', function (e) {
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_errors_bottom').on('click', function (e) {
             e.preventDefault();
             Functions.ignorePhpErrors();
           });
-          $('#pma_ignore_all_errors_bottom').on('click', function (e) {
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_all_errors_bottom').on('click', function (e) {
             e.preventDefault();
             Functions.ignorePhpErrors(false);
           }); // In case of 'sendErrorReport'='always'
           // submit the hidden error reporting form.
 
           if (data.sendErrorAlways === '1' && data.stopErrorReportLoop !== '1') {
-            $('#pma_report_errors_form').trigger('submit');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form').trigger('submit');
             Functions.ajaxShowMessage(window.Messages.phpErrorsBeingSubmitted, false);
-            $('html, body').animate({
-              scrollTop: $(document).height()
+            jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+              scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
             }, 'slow');
           } else if (data.promptPhpErrors) {
             // otherwise just prompt user if it is set so.
             msg = msg + window.Messages.phpErrorsFound; // scroll to bottom where all the errors are displayed.
 
-            $('html, body').animate({
-              scrollTop: $(document).height()
+            jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+              scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
             }, 'slow');
           }
         }
 
         Functions.ajaxShowMessage(msg, false); // bind for php error reporting forms (popup)
 
-        $('#pma_ignore_errors_popup').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_errors_popup').on('click', function () {
           Functions.ignorePhpErrors();
         });
-        $('#pma_ignore_all_errors_popup').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_ignore_all_errors_popup').on('click', function () {
           Functions.ignorePhpErrors(false);
         });
 
@@ -645,22 +650,22 @@ window.AJAX = {
     } else {
       Functions.ajaxShowMessage(data.error, false);
       Functions.ajaxRemoveMessage(window.AJAX.$msgbox);
-      var $ajaxError = $('<div></div>');
+      var $ajaxError = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>');
       $ajaxError.attr({
         'id': 'ajaxError'
       });
-      $('#page_content').append($ajaxError);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').append($ajaxError);
       $ajaxError.html(data.error);
-      $('html, body').animate({
-        scrollTop: $(document).height()
+      jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
+        scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0__(document).height()
       }, 200);
       window.AJAX.active = false;
       window.AJAX.xhr = null;
       Functions.handleRedirectAndReload(data);
 
       if (data.fieldWithError) {
-        $(':input.error').removeClass('error');
-        $('#' + data.fieldWithError).addClass('error');
+        jquery__WEBPACK_IMPORTED_MODULE_0__(':input.error').removeClass('error');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#' + data.fieldWithError).addClass('error');
       }
     }
   },
@@ -753,7 +758,7 @@ window.AJAX = {
       for (i in files) {
         var script = files[i].name; // Only for scripts that we don't already have
 
-        if ($.inArray(script, self.scripts) === -1) {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(script, self.scripts) === -1) {
           this.add(script);
           this.appendScript(script, callback);
         } else {
@@ -774,12 +779,12 @@ window.AJAX = {
      * @return {void}
      */
     done: function (script, callback) {
-      if ($.inArray(script, this.scriptsToBeFired)) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(script, this.scriptsToBeFired)) {
         window.AJAX.fireOnload(script);
       }
 
-      if ($.inArray(script, this.scriptsToBeLoaded)) {
-        this.scriptsToBeLoaded.splice($.inArray(script, this.scriptsToBeLoaded), 1);
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(script, this.scriptsToBeLoaded)) {
+        this.scriptsToBeLoaded.splice(jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(script, this.scriptsToBeLoaded), 1);
       }
 
       if (script === null) {
@@ -839,8 +844,8 @@ window.AJAX = {
        * on pages and submissions of forms
        */
 
-      $(document).off('click', 'a').on('click', 'a', window.AJAX.requestHandler);
-      $(document).off('submit', 'form').on('submit', 'form', window.AJAX.requestHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a').on('click', 'a', window.AJAX.requestHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', 'form').on('submit', 'form', window.AJAX.requestHandler);
       callback();
     }
   },
@@ -856,28 +861,28 @@ window.AJAX = {
   removeSubmitEvents: function () {
     // Registering the onload event for functions.js
     // ensures that it will be fired for all pages
-    $('form').not('.ajax').not('.disableAjax').each(function () {
-      if ($(this).attr('onsubmit')) {
-        $(this).data('onsubmit', this.onsubmit).attr('onsubmit', '');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form').not('.ajax').not('.disableAjax').each(function () {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('onsubmit')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('onsubmit', this.onsubmit).attr('onsubmit', '');
       }
     });
-    var $pageContent = $('#page_content');
+    var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
     /**
      * Workaround for passing submit button name,value on ajax form submit
      * by appending hidden element with submit button name and value.
      */
 
     $pageContent.on('click', 'form input[type=submit]', function () {
-      var buttonName = $(this).attr('name');
+      var buttonName = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name');
 
       if (typeof buttonName === 'undefined') {
         return;
       }
 
-      $(this).closest('form').append($('<input>', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
         'type': 'hidden',
         'name': buttonName,
-        'value': $(this).val()
+        'value': jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()
       }));
     });
     /**
@@ -897,7 +902,7 @@ window.AJAX = {
      * form directly.
      */
 
-    $('form.lock-page').on('reset', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form.lock-page').on('reset', function () {
       window.AJAX.resetLock();
     });
   },
@@ -908,16 +913,16 @@ window.AJAX = {
    */
   loadEventHandler: function () {
     return function () {
-      var menuContent = $('<div></div>').append($('#server-breadcrumb').clone()).append($('#topmenucontainer').clone()).html(); // set initial state reload
+      var menuContent = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#server-breadcrumb').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0__('#topmenucontainer').clone()).html(); // set initial state reload
 
       var initState = 'state' in window.history && window.history.state !== null;
-      var initURL = $('#selflink').find('> a').attr('href') || location.href;
+      var initURL = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('> a').attr('href') || location.href;
       var state = {
         url: initURL,
         menu: menuContent
       };
       history.replaceState(state, null);
-      $(window).on('popstate', function (event) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(window).on('popstate', function (event) {
         var initPop = !initState && location.href === initURL;
         initState = true; // check if popstate fired on first page itself
 
@@ -931,7 +936,7 @@ window.AJAX = {
           window.AJAX.$msgbox = Functions.ajaxShowMessage();
           var params = 'ajax_request=true' + window.CommonParams.get('arg_separator') + 'ajax_page_request=true';
           var url = state.url || location.href;
-          $.get(url, params, window.AJAX.responseHandler); // TODO: Check if sometimes menu is not retrieved from server,
+          jquery__WEBPACK_IMPORTED_MODULE_0__.get(url, params, window.AJAX.responseHandler); // TODO: Check if sometimes menu is not retrieved from server,
           // Not sure but it seems menu was missing only for printview which
           // been removed lately, so if it's right some dead menu checks/fallbacks
           // may need to be removed from this file and Header.php
@@ -981,6 +986,12 @@ window.AJAX = {
     };
   }
 };
+
+/***/ }),
+/* 1 */
+/***/ (function(module) {
+
+module.exports = jQuery;
 
 /***/ })
 ],

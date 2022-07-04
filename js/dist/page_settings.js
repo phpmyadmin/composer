@@ -1,7 +1,18 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[45],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 49:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
  * @fileoverview    function used for page-related settings
@@ -11,19 +22,20 @@
  * @requires    jQueryUI
  * @required    js/functions.js
  */
+
 function showSettings(selector) {
   // Keeping a clone to restore in case the user cancels the operation
-  var $clone = $(selector + ' .page_settings').clone(true);
-  $('#pageSettingsModalApplyButton').on('click', function () {
-    $('.config-form').trigger('submit');
+  var $clone = jquery__WEBPACK_IMPORTED_MODULE_0__(selector + ' .page_settings').clone(true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModalApplyButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.config-form').trigger('submit');
   });
-  $('#pageSettingsModalCloseButton,#pageSettingsModalCancelButton').on('click', function () {
-    $(selector + ' .page_settings').replaceWith($clone);
-    $('#pageSettingsModal').modal('hide');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModalCloseButton,#pageSettingsModalCancelButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(selector + ' .page_settings').replaceWith($clone);
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModal').modal('hide');
   });
-  $('#pageSettingsModal').modal('show');
-  $('#pageSettingsModal').find('.modal-body').first().html($(selector));
-  $(selector).css('display', 'block');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModal').modal('show');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModal').find('.modal-body').first().html(jquery__WEBPACK_IMPORTED_MODULE_0__(selector));
+  jquery__WEBPACK_IMPORTED_MODULE_0__(selector).css('display', 'block');
 }
 
 function showPageSettings() {
@@ -37,18 +49,18 @@ function showNaviSettings() {
 window.PageSettings = {};
 
 window.PageSettings.off = () => function () {
-  $('#page_settings_icon').css('display', 'none');
-  $('#page_settings_icon').off('click');
-  $('#pma_navigation_settings_icon').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').css('display', 'none');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_settings_icon').off('click');
 };
 
 window.PageSettings.on = () => function () {
-  if ($('#page_settings_modal').length) {
-    $('#page_settings_icon').css('display', 'inline');
-    $('#page_settings_icon').on('click', showPageSettings);
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_modal').length) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').css('display', 'inline');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').on('click', showPageSettings);
   }
 
-  $('#pma_navigation_settings_icon').on('click', showNaviSettings);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_settings_icon').on('click', showNaviSettings);
 };
 
 /***/ })

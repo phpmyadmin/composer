@@ -1,10 +1,22 @@
+"use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[79],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 82:
-/***/ (function() {
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
 
 function extendingValidatorMessages() {
-  $.extend($.validator.messages, {
+  jquery__WEBPACK_IMPORTED_MODULE_0__.extend(jquery__WEBPACK_IMPORTED_MODULE_0__.validator.messages, {
     required: window.Messages.strValidatorRequired,
     remote: window.Messages.strValidatorRemote,
     email: window.Messages.strValidatorEmail,
@@ -15,16 +27,16 @@ function extendingValidatorMessages() {
     creditcard: window.Messages.strValidatorCreditCard,
     digits: window.Messages.strValidatorDigits,
     equalTo: window.Messages.strValidatorEqualTo,
-    maxlength: $.validator.format(window.Messages.strValidatorMaxLength),
-    minlength: $.validator.format(window.Messages.strValidatorMinLength),
-    rangelength: $.validator.format(window.Messages.strValidatorRangeLength),
-    range: $.validator.format(window.Messages.strValidatorRange),
-    max: $.validator.format(window.Messages.strValidatorMax),
-    min: $.validator.format(window.Messages.strValidatorMin),
-    validationFunctionForDateTime: $.validator.format(window.Messages.strValidationFunctionForDateTime),
-    validationFunctionForHex: $.validator.format(window.Messages.strValidationFunctionForHex),
-    validationFunctionForMd5: $.validator.format(window.Messages.strValidationFunctionForMd5),
-    validationFunctionForAesDesEncrypt: $.validator.format(window.Messages.strValidationFunctionForAesDesEncrypt)
+    maxlength: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorMaxLength),
+    minlength: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorMinLength),
+    rangelength: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorRangeLength),
+    range: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorRange),
+    max: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorMax),
+    min: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidatorMin),
+    validationFunctionForDateTime: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidationFunctionForDateTime),
+    validationFunctionForHex: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidationFunctionForHex),
+    validationFunctionForMd5: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidationFunctionForMd5),
+    validationFunctionForAesDesEncrypt: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidationFunctionForAesDesEncrypt)
   });
 }
 
