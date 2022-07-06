@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 80:
+/***/ 82:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -36,7 +36,7 @@ window.AJAX.registerOnload('transformations/xml_editor.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(80));
+/******/ var __webpack_exports__ = (__webpack_exec__(82));
 /******/ }
 ]);
 //# sourceMappingURL=xml_editor.js.map

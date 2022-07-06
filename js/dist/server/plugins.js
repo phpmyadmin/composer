@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 52:
+/***/ 54:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -40,7 +40,7 @@ window.AJAX.registerOnload('server/plugins.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(52));
+/******/ var __webpack_exports__ = (__webpack_exec__(54));
 /******/ }
 ]);
 //# sourceMappingURL=plugins.js.map

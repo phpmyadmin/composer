@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 75:
+/***/ 77:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -49,7 +49,7 @@ window.AJAX.registerTeardown('transformations/image_upload.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(75));
+/******/ var __webpack_exports__ = (__webpack_exec__(77));
 /******/ }
 ]);
 //# sourceMappingURL=image_upload.js.map

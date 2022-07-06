@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 49:
+/***/ 51:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -68,7 +68,7 @@ window.PageSettings.on = () => function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(49));
+/******/ var __webpack_exports__ = (__webpack_exec__(51));
 /******/ }
 ]);
 //# sourceMappingURL=page_settings.js.map
