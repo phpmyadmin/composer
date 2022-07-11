@@ -98,25 +98,8 @@ abstract class AbstractTestCase extends TestCase
         $this->setGlobalConfig();
         $this->loadContainerBuilder();
         $this->setGlobalDbi();
-        $this->loadDbiIntoContainerBuilder();
         $this->setTheme();
         Cache::purge();
-    }
-
-    protected function assertAllQueriesConsumed(): void
-    {
-        $unUsedQueries = $this->dummyDbi->getUnUsedQueries();
-        $this->assertSame([], $unUsedQueries, 'Some queries where not used !');
-    }
-
-    protected function assertAllSelectsConsumed(): void
-    {
-        $unUsedSelects = $this->dummyDbi->getUnUsedDatabaseSelects();
-        $this->assertSame(
-            [],
-            $unUsedSelects,
-            'Some database selects where not used !'
-        );
     }
 
     protected function loadContainerBuilder(): void

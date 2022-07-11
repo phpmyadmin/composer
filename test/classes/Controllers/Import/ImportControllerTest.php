@@ -58,7 +58,7 @@ class ImportControllerTest extends AbstractTestCase
         $this->dummyDbi->addSelectDb('pma_test');
         $this->dummyDbi->addSelectDb('pma_test');
         $importController();
-        $this->assertAllSelectsConsumed();
+        $this->dummyDbi->assertAllSelectsConsumed();
         $this->assertResponseWasSuccessfull();
 
         $this->assertStringContainsString(
@@ -72,6 +72,6 @@ class ImportControllerTest extends AbstractTestCase
             $this->getResponseHtmlResult()
         );
 
-        $this->assertAllQueriesConsumed();
+        $this->dummyDbi->assertAllQueriesConsumed();
     }
 }
