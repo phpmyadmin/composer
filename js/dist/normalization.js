@@ -130,8 +130,7 @@ function goToFinish1NF() {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #extra').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #newCols').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0__('.tblFooters').html('');
-} // eslint-disable-next-line no-unused-vars
-
+}
 
 function goToStep4() {
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/normalization', {
@@ -153,6 +152,8 @@ function goToStep4() {
     }
   });
 }
+
+window.goToStep4 = goToStep4;
 
 function goToStep3() {
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/normalization', {
