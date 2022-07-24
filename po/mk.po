@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 5.3.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2022-07-17 00:20+0000\n"
-"PO-Revision-Date: 2022-07-23 07:18+0000\n"
+"POT-Creation-Date: 2022-07-24 00:23+0000\n"
+"PO-Revision-Date: 2022-07-24 20:22+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/mk/>\n"
@@ -1170,9 +1170,8 @@ msgid "query_cache_limit is set to 1 MiB"
 msgstr ""
 
 #: libraries/classes/BrowseForeigners.php:198
-#, fuzzy
 msgid "Search:"
-msgstr "Пребарување"
+msgstr "Пребарај:"
 
 #: libraries/classes/BrowseForeigners.php:204
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:328
@@ -3417,7 +3416,7 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:786
 #: templates/console/display.twig:6
 msgid "Console"
-msgstr ""
+msgstr "Конзола"
 
 #: libraries/classes/Config/Descriptions.php:787
 msgid "GZip"
@@ -3566,6 +3565,7 @@ msgstr "Опции за извоз на бази на податоци"
 
 #: libraries/classes/Config/Descriptions.php:831
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:597
+#: libraries/classes/Navigation/NavigationTree.php:1352
 #: libraries/classes/Navigation/NavigationTree.php:1354
 #, fuzzy
 msgid "Link with main panel"
@@ -6182,7 +6182,8 @@ msgid "Cancel"
 msgstr "Откажи"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:332
-#: templates/header.twig:43 templates/modals/page_settings.twig:5
+#: templates/header.twig:45 templates/modals/page_settings.twig:5
+#: templates/header.twig:43
 #, fuzzy
 msgid "Page-related settings"
 msgstr "Општи особини на релациите"
@@ -6198,9 +6199,8 @@ msgstr ""
 #: templates/navigation/main.twig:58
 #: templates/server/privileges/users_overview.twig:173
 #: templates/server/status/monitor/index.twig:95
-#, fuzzy
 msgid "Loading…"
-msgstr "Локален"
+msgstr "Вчитување…"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:337
 msgid "Request aborted!!"
@@ -6717,7 +6717,7 @@ msgstr "Линиите се завршуваат со"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:486
 msgid "Polygon"
-msgstr ""
+msgstr "Полигон"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:487
 #: templates/display/results/table.twig:249
@@ -6854,7 +6854,7 @@ msgstr ""
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:536
 #: templates/database/designer/main.twig:10
 msgid "Untitled"
-msgstr ""
+msgstr "Без наслов"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:537
 #, fuzzy
@@ -6967,7 +6967,7 @@ msgstr "Прекинато"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:580
 msgid "Success"
-msgstr ""
+msgstr "Успех"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:581
 #, fuzzy
@@ -7016,6 +7016,7 @@ msgid "Hide panel"
 msgstr "Додади ново поле"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:598
+#: libraries/classes/Navigation/NavigationTree.php:1355
 #: libraries/classes/Navigation/NavigationTree.php:1357
 #, fuzzy
 msgid "Unlink from main panel"
@@ -7265,7 +7266,7 @@ msgstr "Бинарен"
 #. l10n: Month name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:706
 msgid "February"
-msgstr ""
+msgstr "Февруари"
 
 #. l10n: Month name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:708
@@ -7307,7 +7308,7 @@ msgstr "авг"
 #. l10n: Month name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:720
 msgid "September"
-msgstr ""
+msgstr "Септември"
 
 #. l10n: Month name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:722
@@ -7427,13 +7428,13 @@ msgstr "Вто"
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:758
 #: libraries/config.values.php:193
 msgid "Wednesday"
-msgstr ""
+msgstr "Среда"
 
 #. l10n: Week day name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:760
 #: libraries/config.values.php:194
 msgid "Thursday"
-msgstr ""
+msgstr "Четврток"
 
 #. l10n: Week day name
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:762
@@ -7446,7 +7447,7 @@ msgstr "Пет"
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:764
 #: libraries/config.values.php:196
 msgid "Saturday"
-msgstr ""
+msgstr "Сабота"
 
 #. l10n: Short week day name for Sunday
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:766
@@ -7539,7 +7540,6 @@ msgstr ""
 
 #. l10n: The month-year order in a calendar. Do not translate! Use either "calendar-month-year" or "calendar-year-month".
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:797
-#, fuzzy
 msgid "calendar-month-year"
 msgstr "calendar-month-year"
 
@@ -8898,14 +8898,13 @@ msgstr ""
 
 #: libraries/classes/Database/Qbe.php:756
 #: templates/database/qbe/ins_del_and_or_cell.twig:21
-#, fuzzy
 msgid "Or:"
-msgstr "или"
+msgstr "Или:"
 
 #: libraries/classes/Database/Qbe.php:760
 #: templates/database/qbe/ins_del_and_or_cell.twig:9
 msgid "And:"
-msgstr ""
+msgstr "И:"
 
 #: libraries/classes/Database/Qbe.php:766
 msgid "Ins"
@@ -10123,42 +10122,40 @@ msgid "Groups:"
 msgstr "Имиња на колони"
 
 #: libraries/classes/Navigation/Navigation.php:230
-#, fuzzy
 msgid "Events:"
-msgstr "Пратено"
+msgstr "Настани:"
 
 #: libraries/classes/Navigation/Navigation.php:231
-#, fuzzy
 msgid "Functions:"
-msgstr "Функција"
+msgstr "Функции:"
 
 #: libraries/classes/Navigation/Navigation.php:232
-#, fuzzy
 msgid "Procedures:"
-msgstr "Листа на процеси"
+msgstr "Процедури:"
 
 #: libraries/classes/Navigation/Navigation.php:233
 #: templates/database/export/index.twig:14
-#, fuzzy
 msgid "Tables:"
-msgstr "Табели"
+msgstr "Табели:"
 
 #: libraries/classes/Navigation/Navigation.php:234
-#, fuzzy
 msgid "Views:"
-msgstr "Поглед"
+msgstr "Прегледи:"
 
+#: libraries/classes/Navigation/NavigationTree.php:758
 #: libraries/classes/Navigation/NavigationTree.php:759
 msgid ""
 "There are large item groups in navigation panel which may affect the "
 "performance. Consider disabling item grouping in the navigation panel."
 msgstr ""
 
+#: libraries/classes/Navigation/NavigationTree.php:832
 #: libraries/classes/Navigation/NavigationTree.php:833
 #, fuzzy
 msgid "Groups"
 msgstr "Имиња на колони"
 
+#: libraries/classes/Navigation/NavigationTree.php:945
 #: libraries/classes/Navigation/NavigationTree.php:946
 #, php-format
 msgid "%s result found"
@@ -10166,6 +10163,7 @@ msgid_plural "%s results found"
 msgstr[0] ""
 msgstr[1] ""
 
+#: libraries/classes/Navigation/NavigationTree.php:1346
 #: libraries/classes/Navigation/NavigationTree.php:1348
 msgid "Collapse all"
 msgstr ""
@@ -10785,9 +10783,8 @@ msgstr ""
 
 #: libraries/classes/Plugins/Export/ExportCodegen.php:80
 #: templates/export.twig:119
-#, fuzzy
 msgid "Format:"
-msgstr "Формат"
+msgstr "Формат:"
 
 #: libraries/classes/Plugins/Export/ExportCsv.php:57
 #: libraries/classes/Plugins/Import/AbstractImportCsv.php:36
@@ -11076,9 +11073,8 @@ msgstr "Стави ги имињата на полињата во првата �
 #: libraries/classes/Plugins/Export/ExportXml.php:231
 #: templates/server/replication/change_primary.twig:22
 #: templates/server/replication/primary_add_replica_user.twig:29
-#, fuzzy
 msgid "Host:"
-msgstr "Host"
+msgstr "Хост:"
 
 #: libraries/classes/Plugins/Export/ExportLatex.php:216
 #: libraries/classes/Plugins/Export/ExportSql.php:761
@@ -14751,23 +14747,20 @@ msgstr ""
 
 #: templates/database/qbe/selection_form.twig:12
 #: templates/table/find_replace/index.twig:41
-#, fuzzy
 msgid "Column:"
-msgstr "Имиња на колони"
+msgstr "Колона:"
 
 #: templates/database/qbe/selection_form.twig:17
 msgid "Alias:"
 msgstr ""
 
 #: templates/database/qbe/selection_form.twig:22
-#, fuzzy
 msgid "Show:"
-msgstr "Прикажи"
+msgstr "Прикажи:"
 
 #: templates/database/qbe/selection_form.twig:27
-#, fuzzy
 msgid "Sort:"
-msgstr "Подредуваање"
+msgstr "Подредување:"
 
 #: templates/database/qbe/selection_form.twig:32
 #, fuzzy
@@ -14775,14 +14768,12 @@ msgid "Sort order:"
 msgstr "Подредуваање"
 
 #: templates/database/qbe/selection_form.twig:37
-#, fuzzy
 msgid "Criteria:"
-msgstr "Критериум"
+msgstr "Критериуми:"
 
 #: templates/database/qbe/selection_form.twig:44
-#, fuzzy
 msgid "Modify:"
-msgstr "Промени"
+msgstr "Измени:"
 
 #: templates/database/qbe/selection_form.twig:54
 #, fuzzy
@@ -15468,9 +15459,8 @@ msgid "File format to export"
 msgstr "Дел на текстот"
 
 #: templates/export.twig:137
-#, fuzzy
 msgid "Rows:"
-msgstr "Записи"
+msgstr "Редови:"
 
 #: templates/export.twig:141
 msgid "Dump all rows"
@@ -15572,9 +15562,8 @@ msgid "Character set of the file:"
 msgstr "Кодна страна на податотеката:"
 
 #: templates/export.twig:429
-#, fuzzy
 msgid "Compression:"
-msgstr "Компресија"
+msgstr "Компресија:"
 
 #: templates/export.twig:437
 #, fuzzy
@@ -15718,12 +15707,13 @@ msgid ""
 "below into the \"Value\" field."
 msgstr ""
 
-#: templates/header.twig:34 templates/login/header.twig:13
+#: templates/header.twig:36 templates/login/header.twig:13
+#: templates/header.twig:34
 #, fuzzy
 msgid "Javascript must be enabled past this point!"
 msgstr "вашиот веб прелистувач треба да допушти cookies"
 
-#: templates/header.twig:45
+#: templates/header.twig:47 templates/header.twig:45
 msgid "Click on the bar to scroll to top of page"
 msgstr ""
 
@@ -16802,9 +16792,8 @@ msgstr ""
 #: templates/server/privileges/change_password.twig:31
 #: templates/server/privileges/login_information_fields.twig:61
 #: templates/server/replication/primary_add_replica_user.twig:62
-#, fuzzy
 msgid "Re-type:"
-msgstr "Повтори внес"
+msgstr "Повторно напишете:"
 
 #: templates/server/privileges/change_password.twig:37
 #: templates/server/privileges/login_information_fields.twig:55
