@@ -109,6 +109,11 @@ var Console = {
     Functions.configGet('Console', false, data => {
       _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.init(data);
       Console.setupAfterInit();
+    }, () => {
+      _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.init({}); // Avoid null pointers in setupAfterInit()
+      // Fetching data failed, still perform the console init
+
+      Console.setupAfterInit();
     });
   },
 
@@ -1411,26 +1416,29 @@ var ConsoleDebug = {
     var $query = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message collapsed hide_trace">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.templates .debug_query').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="query">').text(queryText)).data('queryInfo', queryInfo).data('totalTime', totalTime);
 
     if (grouped) {
-      $query.find('.text.count').removeClass('hide');
-      $query.find('.text.count span').text(count);
+      $query.find('span.text.count').removeClass('hide');
+      $query.find('span.text.count span').text(count);
     }
 
-    $query.find('.text.time span').text(queryTime + 's (' + (queryTime * 100 / totalTime).toFixed(3) + '%)');
+    $query.find('span.text.time span').text(ConsoleDebug.getQueryTimeTaken(queryTime, totalTime));
     return $query;
   },
   appendQueryExtraInfo: function (query, $elem) {
     if ('error' in query) {
-      $elem.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').html(query.error));
+      $elem.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="text-danger">').text(query.error)));
     }
 
     $elem.append(this.formatBackTrace(query.trace));
+  },
+  getQueryTimeTaken: function (queryTime, totalTime) {
+    return queryTime + 's (' + (queryTime * 100 / totalTime).toFixed(3) + '%)';
   },
   getQueryDetails: function (queryInfo, totalTime, $query) {
     if (Array.isArray(queryInfo)) {
       var $singleQuery;
 
       for (var i in queryInfo) {
-        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + queryInfo[i].time + 's' + ' (' + (queryInfo[i].time * 100 / totalTime).toFixed(3) + '%)'));
+        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="time">').text(Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)));
         this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
         $query.append('<div class="message welcome trace">').append($singleQuery);
       }
