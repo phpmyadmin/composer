@@ -1348,7 +1348,7 @@ var ConsoleDebug = {
                     .text((parseInt(i) + 1) + '.')
                     .append(
                         $('<span class="time">').text(
-                            Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)
+                            window.Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)
                         )
                     );
                 this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
