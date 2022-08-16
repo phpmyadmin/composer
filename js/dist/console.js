@@ -1438,7 +1438,7 @@ var ConsoleDebug = {
       var $singleQuery;
 
       for (var i in queryInfo) {
-        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="time">').text(Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)));
+        $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)));
         this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
         $query.append('<div class="message welcome trace">').append($singleQuery);
       }
