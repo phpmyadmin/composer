@@ -3283,9 +3283,7 @@
       <code>$_POST['field_transformation'][$fieldindex]</code>
       <code>$_POST['field_transformation_options'][$fieldindex]</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="3">
-      <code>$GLOBALS['num_fields']</code>
-      <code>$GLOBALS['result']</code>
+    <MixedAssignment occurrences="1">
       <code>$mimetype</code>
     </MixedAssignment>
   </file>
@@ -3771,15 +3769,7 @@
     <PossiblyNullArrayAccess occurrences="1">
       <code>$multi_edit_salt[$key]</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullReference occurrences="9">
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
+    <PossiblyNullReference occurrences="1">
       <code>get</code>
     </PossiblyNullReference>
     <PossiblyUndefinedVariable occurrences="1">
