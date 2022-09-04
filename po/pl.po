@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 5.3.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2022-08-28 00:24+0000\n"
-"PO-Revision-Date: 2022-04-11 08:12+0000\n"
-"Last-Translator: darek525 <duda.dariusz.dd@gmail.com>\n"
+"POT-Creation-Date: 2022-09-04 00:22+0000\n"
+"PO-Revision-Date: 2022-09-04 10:11+0000\n"
+"Last-Translator: William Desportes <williamdes@wdes.fr>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "pl/>\n"
 "Language: pl\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: libraries/classes/Advisory/Advisor.php:240
 #, php-format
@@ -1833,26 +1833,27 @@ msgid "Enter the URL for your reCAPTCHA v2 compatible API."
 msgstr "Wpisz swój klucz prywatny do domeny usługi reCAPTCHA."
 
 #: libraries/classes/Config/Descriptions.php:106
-#, fuzzy
 msgid ""
 "Enter the Content-Security-Policy snippet for your reCAPTCHA v2 compatible "
 "API."
-msgstr "Wpisz swój klucz prywatny do domeny usługi reCAPTCHA."
+msgstr ""
+"Wpisz fragment kodu Content-Security-Policy dla interfejsu API zgodnego z "
+"reCAPTCHA v2."
 
 #: libraries/classes/Config/Descriptions.php:107
-#, fuzzy
 msgid "Enter the request parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Wpisz swój klucz prywatny do domeny usługi reCAPTCHA."
+msgstr ""
+"Wprowadź parametr żądania używany przez interfejs API zgodny z reCAPTCHA v2."
 
 #: libraries/classes/Config/Descriptions.php:108
-#, fuzzy
 msgid "Enter the response parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Wpisz swój klucz prywatny do domeny usługi reCAPTCHA."
+msgstr ""
+"Wprowadź parametr odpowiedzi używany przez interfejs API zgodny z reCAPTCHA "
+"v2."
 
 #: libraries/classes/Config/Descriptions.php:109
-#, fuzzy
 msgid "Enter your public key for the reCAPTCHA service on your domain."
-msgstr "Wpisz swój klucz publiczny do domeny usługi reCAPTCHA."
+msgstr "Wpisz swój klucz publiczny usługi reCAPTCHA w swojej domenie."
 
 #: libraries/classes/Config/Descriptions.php:110
 #, fuzzy
@@ -3229,7 +3230,7 @@ msgstr "Maksymalny czas wykonania"
 
 #: libraries/classes/Config/Descriptions.php:655
 msgid "Use [code]LOCK TABLES[/code] statement"
-msgstr ""
+msgstr "Użyj instrukcji [code]LOCK TABLES[/code]"
 
 #: libraries/classes/Config/Descriptions.php:656
 msgid "Save as file"
@@ -4469,15 +4470,15 @@ msgstr "URL do reCAPTCHA v2 API"
 
 #: libraries/classes/Config/Descriptions.php:968
 msgid "Content-Security-Policy snippet for reCAPTCHA v2 API"
-msgstr ""
+msgstr "Fragment kodu Content-Security-Policy dla interfejsu API reCAPTCHA v2"
 
 #: libraries/classes/Config/Descriptions.php:969
 msgid "Request parameter for reCAPTCHA v2 API"
-msgstr ""
+msgstr "Parametr żądania dla interfejsu API reCAPTCHA v2"
 
 #: libraries/classes/Config/Descriptions.php:970
 msgid "Response parameter for reCAPTCHA v2 API"
-msgstr ""
+msgstr "Parametr odpowiedzi dla API reCAPTCHA v2"
 
 #: libraries/classes/Config/Descriptions.php:971
 #, fuzzy
@@ -4491,7 +4492,7 @@ msgstr "Klucz publiczny dla reCaptcha"
 
 #: libraries/classes/Config/Descriptions.php:973
 msgid "URL for reCAPTCHA siteverify"
-msgstr ""
+msgstr "URL do weryfikacji witryny reCAPTCHA"
 
 #: libraries/classes/Config/Descriptions.php:974
 msgid "Send error reports"
@@ -4789,7 +4790,7 @@ msgid "You should use SSL connections if your database server supports it."
 msgstr "Należy używać połączeń SSL, jeśli serwer bazy danych je obsługuje."
 
 #: libraries/classes/Config/ServerConfigChecks.php:169
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "If you feel this is necessary, use additional protection settings - %1$shost "
 "authentication%2$s settings and %3$strusted proxies list%4$s. However, IP-"
@@ -4797,10 +4798,10 @@ msgid ""
 "thousands of users, including you, are connected to."
 msgstr ""
 "Jeśli uważasz, że jest to konieczne, użyj dodatkowych ustawień ochrony — "
-"ustawień %1$shost uwierzytelniania%2$s i listy zaufanych serwerów proxy %3$"
-"%4$s. Jednak ochrona oparta na IP może nie być niezawodna, jeśli Twój adres "
-"IP należy do dostawcy usług internetowych, z którym połączone są tysiące "
-"użytkowników, w tym Ty."
+"ustawień %1$shost uwierzytelniania%2$s i listy %3$szaufanych serwerów "
+"proxy%4$s. Jednak ochrona oparta na IP może nie być niezawodna, jeśli Twój "
+"adres IP należy do dostawcy usług internetowych, z którym połączone są "
+"tysiące użytkowników, w tym Ty."
 
 #: libraries/classes/Config/ServerConfigChecks.php:195
 #, php-format
@@ -5057,7 +5058,7 @@ msgstr "Pokazano wiersze %1$s - %2$s."
 #, php-format
 msgid ""
 "There already exists a page named \"%s\" please rename it to something else."
-msgstr ""
+msgstr "Strona o nazwie \"%s\" już istnieje, zmień jej nazwę na inną."
 
 #: libraries/classes/Controllers/Database/ExportController.php:90
 #: libraries/classes/Controllers/Database/TrackingController.php:139
@@ -5378,8 +5379,8 @@ msgid ""
 "The secret passphrase in configuration (blowfish_secret) is not the correct "
 "length. It should be %d bytes long."
 msgstr ""
-"Tajne wyrażenie hasłowe (ang. secret passphrase), podane w konfiguracji "
-"(blowfish_secret), jest zbyt krótkie."
+"Tajne hasło w konfiguracji (blowfish_secret) nie ma prawidłowej długości. "
+"Powinna mieć długość %d bajtów."
 
 #: libraries/classes/Controllers/HomeController.php:349
 msgid ""
@@ -7463,7 +7464,7 @@ msgstr "Dodaj prefiks tabeli"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:665
 msgid "Replace table with prefix"
-msgstr "Zastąp tabelę przedrostkiem"
+msgstr "Zamień tabelę na prefiks"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:666
 #: templates/database/structure/check_all_tables.twig:28
@@ -8034,12 +8035,12 @@ msgstr[2] "%1$d baz danych zostało pomyślnie usuniętych."
 #: libraries/classes/Controllers/Server/Privileges/AccountLockController.php:47
 #, fuzzy, php-format
 msgid "The account %s@%s has been successfully locked."
-msgstr "Kolumny przeniesiono pomyślnie."
+msgstr "Konto %s@%s zostało pomyślnie zablokowane."
 
 #: libraries/classes/Controllers/Server/Privileges/AccountUnlockController.php:47
 #, fuzzy, php-format
 msgid "The account %s@%s has been successfully unlocked."
-msgstr "Kolumny przeniesiono pomyślnie."
+msgstr "Konto %s@%s zostało pomyślnie odblokowane."
 
 #: libraries/classes/Controllers/Server/PrivilegesController.php:177
 msgid ""
@@ -9269,7 +9270,7 @@ msgstr ""
 "Błąd w przetwarzaniu żądania: Nie znaleziono zdarzenia o nazwie %1$s w bazie "
 "danych %2$s."
 
-#: libraries/classes/DatabaseInterface.php:1131
+#: libraries/classes/DatabaseInterface.php:1132
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -9280,21 +9281,21 @@ msgstr ""
 "konfiguracji dla [em]$cfg['Servers'][%3$d]['SessionTimeZone'][/em]. "
 "phpMyAdmin używa obecnie domyślnej strefy czasowej serwera bazy danych."
 
-#: libraries/classes/DatabaseInterface.php:1176
+#: libraries/classes/DatabaseInterface.php:1177
 msgid "Failed to set configured collation connection!"
 msgstr "Nie można ustawić skonfigurowanego połączenia sortowania!"
 
-#: libraries/classes/DatabaseInterface.php:1865
+#: libraries/classes/DatabaseInterface.php:1866
 msgid "Missing connection parameters!"
 msgstr "Brakujące parametry połączenia!"
 
-#: libraries/classes/DatabaseInterface.php:1890
+#: libraries/classes/DatabaseInterface.php:1893
 msgid "Connection for controluser as defined in your configuration failed."
 msgstr ""
 "Połączenie dla użytkownika kontrolnego zdefiniowanego w pliku "
 "konfiguracyjnym nie powiodło się."
 
-#: libraries/classes/DatabaseInterface.php:2304
+#: libraries/classes/DatabaseInterface.php:2307
 #, php-format
 msgid "See %sour documentation%s for more information."
 msgstr "Zobacz naszą %sdokumentację%s, aby uzyskać więcej informacji."
@@ -9536,11 +9537,11 @@ msgstr ""
 "Błąd w przetwarzaniu żądania: Nie znaleziono wyzwalacza o nazwie %1$s w "
 "bazie danych %2$s."
 
-#: libraries/classes/Dbal/DbiMysqli.php:143
+#: libraries/classes/Dbal/DbiMysqli.php:134
 msgid "SSL connection enforced by server, automatically enabling it."
 msgstr "Połączenie SSL wymuszane przez serwer, automatycznie włączające go."
 
-#: libraries/classes/Dbal/DbiMysqli.php:155
+#: libraries/classes/Dbal/DbiMysqli.php:145
 #, php-format
 msgid ""
 "Error 1045: Access denied for user. Additional error information may be "
@@ -9559,7 +9560,7 @@ msgstr "Nazwa bazy danych jest pusta!"
 #, fuzzy, php-format
 #| msgid "Please enter no more than {0} characters"
 msgid "The database name cannot be longer than %d characters."
-msgstr "Wprowadź nie więcej niż {0} znaków"
+msgstr "Nazwa bazy danych nie może być dłuższa niż %d znaków."
 
 #: libraries/classes/Dbal/InvalidDatabaseName.php:27
 #, fuzzy
@@ -9577,7 +9578,7 @@ msgstr "Nazwa tabeli jest pusta!"
 #, fuzzy, php-format
 #| msgid "Please enter no more than {0} characters"
 msgid "The table name cannot be longer than %d characters."
-msgstr "Wprowadź nie więcej niż {0} znaków"
+msgstr "Nazwa tabeli nie może być dłuższa niż %d znaków."
 
 #: libraries/classes/Dbal/InvalidTableName.php:27
 #, fuzzy
@@ -10527,7 +10528,7 @@ msgstr "Wtyczki"
 #, php-format
 msgid "%1$d row affected."
 msgid_plural "%1$d rows affected."
-msgstr[0] "Zmodyfikowanych rekordów: %1$d."
+msgstr[0] "Zmodyfikowano rekord: %1$d."
 msgstr[1] "Zmodyfikowanych rekordów: %1$d."
 msgstr[2] "Zmodyfikowanych rekordów: %1$d."
 
@@ -11052,6 +11053,7 @@ msgstr "Napraw"
 
 #: libraries/classes/Operations.php:558
 #: templates/table/structure/display_partitions.twig:135
+#, fuzzy
 msgid "Truncate"
 msgstr "Truncate"
 
@@ -14010,9 +14012,8 @@ msgstr ""
 #: templates/table/relation/common_form.twig:183
 #: templates/table/zoom_search/result_form.twig:26
 #: templates/table/zoom_search/result_form.twig:96
-#, fuzzy
 msgid "Loading"
-msgstr "Wczytywanie…"
+msgstr "Ładowanie"
 
 #: templates/columns_definitions/column_name.twig:4
 #, php-format
@@ -15289,8 +15290,8 @@ msgstr[2] "%1$s dopasowań w <strong>%2$s</strong>"
 #: templates/database/search/results.twig:56
 msgid "<strong>Total:</strong> <em>%count%</em> match"
 msgid_plural "<strong>Total:</strong> <em>%count%</em> matches"
-msgstr[0] "<strong>Ogółem:</strong> <em>%s</em> dopasowania"
-msgstr[1] "<strong>Ogółem:</strong> <em>%s</em> dopasowania"
+msgstr[0] "<strong>Ogółem:</strong> <em>%s</em> dopasowanie"
+msgstr[1] "<strong>Ogółem:</strong> <em>%s</em> dopasowań"
 msgstr[2] "<strong>Ogółem:</strong> <em>%s</em> dopasowania"
 
 #: templates/database/structure/add_prefix.twig:7
@@ -16174,7 +16175,7 @@ msgstr "Ostrzeżenie"
 
 #: templates/home/index.twig:282
 msgid "Notice"
-msgstr ""
+msgstr "Uwaga"
 
 #: templates/home/index.twig:295
 #, fuzzy
@@ -16456,7 +16457,7 @@ msgstr "Ok"
 
 #: templates/modals/index_dialog_modal.twig:30
 msgid "Go back"
-msgstr ""
+msgstr "Wróć"
 
 #: templates/modals/unhide_nav_item.twig:5
 msgid "Show hidden navigation tree items."
