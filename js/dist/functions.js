@@ -1397,7 +1397,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
         data: params,
         success: function (data) {
           if (data.success) {
-            var tables = JSON.parse(data.tables);
+            var tables = data.tables;
             sqlAutoCompleteDefaultTable = window.CommonParams.get('table');
             sqlAutoComplete = [];
 
