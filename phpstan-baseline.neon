@@ -1026,6 +1026,16 @@ parameters:
 			path: libraries/classes/Controllers/Database/OperationsController.php
 
 		-
+			message: "#^Parameter \\#1 \\$database of method PhpMyAdmin\\\\DatabaseInterface\\:\\:getColumns\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/SqlAutoCompleteController.php
+
+		-
+			message: "#^Parameter \\#1 \\$database of method PhpMyAdmin\\\\DatabaseInterface\\:\\:getTables\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/SqlAutoCompleteController.php
+
+		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/Structure/FavoriteTableController.php
@@ -2541,11 +2551,6 @@ parameters:
 			path: libraries/classes/DatabaseInterface.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getTableIndexes\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getTables\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
@@ -2687,11 +2692,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getRoutines\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getTableIndexes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/DbalInterface.php
 
@@ -4206,11 +4206,6 @@ parameters:
 			path: libraries/classes/Index.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Index\\:\\:addColumn\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Index.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Index\\:\\:addColumns\\(\\) has parameter \\$columns with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Index.php
@@ -4226,12 +4221,7 @@ parameters:
 			path: libraries/classes/Index.php
 
 		-
-			message: "#^Property PhpMyAdmin\\\\Index\\:\\:\\$columns type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Index.php
-
-		-
-			message: "#^Property PhpMyAdmin\\\\Index\\:\\:\\$registry type has no value type specified in iterable type array\\.$#"
+			message: "#^Static property PhpMyAdmin\\\\Index\\:\\:\\$registry \\(array\\<string, array\\<string, array\\<string, PhpMyAdmin\\\\Index\\>\\>\\>\\) does not accept array\\<string, array\\<string, array\\<int\\|string, PhpMyAdmin\\\\Index\\>\\>\\>\\.$#"
 			count: 1
 			path: libraries/classes/Index.php
 
@@ -5841,6 +5831,11 @@ parameters:
 			path: libraries/classes/Plugins/Import/ImportSql.php
 
 		-
+			message: "#^Cannot assign new offset to array\\<int, array\\<int, string\\>\\|string\\>\\|string\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Import/ImportXml.php
+
+		-
 			message: "#^Offset 'charset' does not exist on SimpleXMLElement\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Import/ImportXml.php
@@ -5853,6 +5848,16 @@ parameters:
 		-
 			message: "#^Offset 'name' does not exist on SimpleXMLElement\\|null\\.$#"
 			count: 8
+			path: libraries/classes/Plugins/Import/ImportXml.php
+
+		-
+			message: "#^Parameter \\#1 \\$str1 of function strcmp expects string, array\\<int, array\\<int, string\\>\\|string\\>\\|string given\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Import/ImportXml.php
+
+		-
+			message: "#^array\\<int, array\\<int, string\\>\\|string\\>\\|string does not accept array\\<int, string\\>\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Import/ImportXml.php
 
 		-
