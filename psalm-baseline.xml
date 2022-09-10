@@ -4908,7 +4908,10 @@
       <code>$event['name']</code>
       <code>$itemName</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="1">
+    <MixedArrayAccess occurrences="4">
+      <code>$event['Name']</code>
+      <code>$event['Status']</code>
+      <code>$event['Type']</code>
       <code>$event['name']</code>
     </MixedArrayAccess>
     <MixedArrayAssignment occurrences="9">
@@ -4922,9 +4925,10 @@
       <code>$GLOBALS['errors'][]</code>
       <code>$GLOBALS['errors'][]</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="18">
+    <MixedAssignment occurrences="19">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
+      <code>$event</code>
       <code>$event</code>
       <code>$itemName</code>
       <code>$item['item_original_name']</code>
@@ -5251,7 +5255,7 @@
       <code>$stmt-&gt;return-&gt;parameters</code>
       <code>$value</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="35">
+    <MixedArrayAccess occurrences="40">
       <code>$_POST['funcs'][$routine['item_param_name'][$i]]</code>
       <code>$_POST['funcs'][$routine['item_param_name'][$i]]</code>
       <code>$_POST['params'][$routine['item_param_name'][$i]]</code>
@@ -5263,6 +5267,11 @@
       <code>$priv[5]</code>
       <code>$priv[6]</code>
       <code>$priv[7]</code>
+      <code>$routine['DTD_IDENTIFIER']</code>
+      <code>$routine['Db']</code>
+      <code>$routine['Definer']</code>
+      <code>$routine['Name']</code>
+      <code>$routine['Type']</code>
       <code>$routine['item_param_dir'][$i]</code>
       <code>$routine['item_param_dir'][$i]</code>
       <code>$routine['item_param_dir'][$routine['item_num_params'] - 1]</code>
@@ -5330,7 +5339,7 @@
       <code>$routine['item_param_type'][$i]</code>
       <code>$routine['item_param_type'][$routine['item_num_params'] - 1]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="47">
+    <MixedAssignment occurrences="48">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
@@ -5367,6 +5376,7 @@
       <code>$retval['item_returntype']</code>
       <code>$retval['item_sqldataaccess']</code>
       <code>$retval['item_type']</code>
+      <code>$routine</code>
       <code>$routine</code>
       <code>$routine['item_num_params']</code>
       <code>$routine['item_num_params']</code>
@@ -5457,7 +5467,7 @@
     </RedundantPropertyInitializationCheck>
   </file>
   <file src="libraries/classes/Database/Triggers.php">
-    <MixedArgument occurrences="18">
+    <MixedArgument occurrences="20">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
@@ -5476,8 +5486,10 @@
       <code>$exportData</code>
       <code>$itemName</code>
       <code>$itemName</code>
+      <code>$trigger['EVENT_OBJECT_TABLE']</code>
+      <code>$trigger['TRIGGER_NAME']</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="13">
+    <MixedArrayAccess occurrences="30">
       <code>$temp['action_timing']</code>
       <code>$temp['create']</code>
       <code>$temp['definer']</code>
@@ -5486,13 +5498,30 @@
       <code>$temp['event_manipulation']</code>
       <code>$temp['name']</code>
       <code>$temp['table']</code>
+      <code>$trigger['ACTION_STATEMENT']</code>
+      <code>$trigger['ACTION_STATEMENT']</code>
+      <code>$trigger['ACTION_TIMING']</code>
+      <code>$trigger['ACTION_TIMING']</code>
+      <code>$trigger['DEFINER']</code>
+      <code>$trigger['Definer']</code>
+      <code>$trigger['EVENT_MANIPULATION']</code>
+      <code>$trigger['EVENT_MANIPULATION']</code>
+      <code>$trigger['EVENT_OBJECT_TABLE']</code>
+      <code>$trigger['EVENT_OBJECT_TABLE']</code>
+      <code>$trigger['Event']</code>
+      <code>$trigger['Statement']</code>
+      <code>$trigger['TRIGGER_NAME']</code>
+      <code>$trigger['TRIGGER_NAME']</code>
+      <code>$trigger['Table']</code>
+      <code>$trigger['Timing']</code>
+      <code>$trigger['Trigger']</code>
       <code>$trigger['create']</code>
       <code>$trigger['name']</code>
       <code>$trigger['table']</code>
       <code>$value['name']</code>
       <code>$value['name']</code>
     </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="9">
+    <MixedArrayAssignment occurrences="15">
       <code>$GLOBALS['errors'][]</code>
       <code>$GLOBALS['errors'][]</code>
       <code>$GLOBALS['errors'][]</code>
@@ -5502,8 +5531,14 @@
       <code>$GLOBALS['errors'][]</code>
       <code>$GLOBALS['errors'][]</code>
       <code>$GLOBALS['errors'][]</code>
+      <code>$trigger['ACTION_STATEMENT']</code>
+      <code>$trigger['ACTION_TIMING']</code>
+      <code>$trigger['DEFINER']</code>
+      <code>$trigger['EVENT_MANIPULATION']</code>
+      <code>$trigger['EVENT_OBJECT_TABLE']</code>
+      <code>$trigger['TRIGGER_NAME']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="22">
+    <MixedAssignment occurrences="35">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
       <code>$create_item</code>
@@ -5511,6 +5546,12 @@
       <code>$item</code>
       <code>$itemName</code>
       <code>$item['item_original_name']</code>
+      <code>$oneResult['action_timing']</code>
+      <code>$oneResult['definer']</code>
+      <code>$oneResult['definition']</code>
+      <code>$oneResult['event_manipulation']</code>
+      <code>$oneResult['name']</code>
+      <code>$oneResult['table']</code>
       <code>$retval[$index]</code>
       <code>$retval['create']</code>
       <code>$retval['drop']</code>
@@ -5524,14 +5565,24 @@
       <code>$temp</code>
       <code>$trigger</code>
       <code>$trigger</code>
+      <code>$trigger</code>
+      <code>$trigger['ACTION_STATEMENT']</code>
+      <code>$trigger['ACTION_TIMING']</code>
+      <code>$trigger['DEFINER']</code>
+      <code>$trigger['EVENT_MANIPULATION']</code>
+      <code>$trigger['EVENT_OBJECT_TABLE']</code>
+      <code>$trigger['TRIGGER_NAME']</code>
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedOperand occurrences="5">
+    <MixedOperand occurrences="8">
       <code>$_POST['item_definition']</code>
       <code>$_POST['item_event']</code>
       <code>$_POST['item_timing']</code>
       <code>$string</code>
+      <code>$trigger['ACTION_STATEMENT']</code>
+      <code>$trigger['ACTION_TIMING']</code>
+      <code>$trigger['EVENT_MANIPULATION']</code>
       <code>$trigger['drop']</code>
     </MixedOperand>
     <PossiblyNullArgument occurrences="5">
@@ -5570,7 +5621,7 @@
     <InvalidReturnType occurrences="1">
       <code>int|bool</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="47">
+    <MixedArgument occurrences="45">
       <code>$_SERVER['SCRIPT_NAME']</code>
       <code>$a</code>
       <code>$arrayKeys</code>
@@ -5612,8 +5663,6 @@
       <code>$this-&gt;links[$link]</code>
       <code>$this-&gt;versionComment</code>
       <code>$this-&gt;versionString</code>
-      <code>$trigger['EVENT_OBJECT_TABLE']</code>
-      <code>$trigger['TRIGGER_NAME']</code>
       <code>$user</code>
       <code>$user</code>
       <code>$user</code>
@@ -5624,49 +5673,16 @@
       <code>uksort($eachTables, 'strnatcasecmp')</code>
       <code>usort($tables, 'strnatcasecmp')</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="33">
-      <code>$event['Name']</code>
-      <code>$event['Status']</code>
-      <code>$event['Type']</code>
+    <MixedArrayAccess occurrences="8">
       <code>$link</code>
       <code>$oneShow['Db']</code>
       <code>$oneShow['Name']</code>
       <code>$oneShow['Type']</code>
-      <code>$routine['DTD_IDENTIFIER']</code>
-      <code>$routine['Db']</code>
-      <code>$routine['Definer']</code>
-      <code>$routine['Name']</code>
-      <code>$routine['Type']</code>
       <code>$tableData[$sortBy]</code>
       <code>$tableData['Data_length']</code>
       <code>$tableData['Engine']</code>
       <code>$tableData['Index_length']</code>
-      <code>$trigger['ACTION_STATEMENT']</code>
-      <code>$trigger['ACTION_STATEMENT']</code>
-      <code>$trigger['ACTION_TIMING']</code>
-      <code>$trigger['ACTION_TIMING']</code>
-      <code>$trigger['DEFINER']</code>
-      <code>$trigger['Definer']</code>
-      <code>$trigger['EVENT_MANIPULATION']</code>
-      <code>$trigger['EVENT_MANIPULATION']</code>
-      <code>$trigger['EVENT_OBJECT_TABLE']</code>
-      <code>$trigger['EVENT_OBJECT_TABLE']</code>
-      <code>$trigger['Event']</code>
-      <code>$trigger['Statement']</code>
-      <code>$trigger['TRIGGER_NAME']</code>
-      <code>$trigger['TRIGGER_NAME']</code>
-      <code>$trigger['Table']</code>
-      <code>$trigger['Timing']</code>
-      <code>$trigger['Trigger']</code>
     </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="6">
-      <code>$trigger['ACTION_STATEMENT']</code>
-      <code>$trigger['ACTION_TIMING']</code>
-      <code>$trigger['DEFINER']</code>
-      <code>$trigger['EVENT_MANIPULATION']</code>
-      <code>$trigger['EVENT_OBJECT_TABLE']</code>
-      <code>$trigger['TRIGGER_NAME']</code>
-    </MixedArrayAssignment>
     <MixedArrayOffset occurrences="10">
       <code>$databases[$databaseName]</code>
       <code>$resultRows[$row[$key]]</code>
@@ -5679,55 +5695,37 @@
       <code>$this-&gt;links[$link]</code>
       <code>$this-&gt;links[$link]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="36">
+    <MixedAssignment occurrences="21">
       <code>$aLength</code>
       <code>$bLength</code>
       <code>$database</code>
       <code>$databaseName</code>
       <code>$databases[$databaseName]['SCHEMA_NAME']</code>
-      <code>$event</code>
       <code>$grant</code>
       <code>$grant</code>
       <code>$keyIndex</code>
       <code>$map['real_column']</code>
-      <code>$oneResult['action_timing']</code>
-      <code>$oneResult['definer']</code>
-      <code>$oneResult['definition']</code>
-      <code>$oneResult['event_manipulation']</code>
-      <code>$oneResult['name']</code>
-      <code>$oneResult['table']</code>
       <code>$oneShow</code>
       <code>$resultRows[$row[$key]]</code>
       <code>$resultRows[]</code>
       <code>$resultTarget</code>
       <code>$result[]</code>
-      <code>$routine</code>
       <code>$table</code>
       <code>$tableData</code>
       <code>$tableData</code>
       <code>$tableData</code>
       <code>$this-&gt;versionComment</code>
       <code>$this-&gt;versionString</code>
-      <code>$trigger</code>
-      <code>$trigger['ACTION_STATEMENT']</code>
-      <code>$trigger['ACTION_TIMING']</code>
-      <code>$trigger['DEFINER']</code>
-      <code>$trigger['EVENT_MANIPULATION']</code>
-      <code>$trigger['EVENT_OBJECT_TABLE']</code>
-      <code>$trigger['TRIGGER_NAME']</code>
       <code>$warningsCount</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="2">
       <code>array</code>
       <code>string</code>
     </MixedInferredReturnType>
-    <MixedOperand occurrences="6">
+    <MixedOperand occurrences="3">
       <code>$a['Data_length']</code>
       <code>$b['Data_length']</code>
       <code>$tableData['Data_length']</code>
-      <code>$trigger['ACTION_STATEMENT']</code>
-      <code>$trigger['ACTION_TIMING']</code>
-      <code>$trigger['EVENT_MANIPULATION']</code>
     </MixedOperand>
     <MixedPropertyFetch occurrences="1">
       <code>$this-&gt;links[$link]-&gt;warning_count</code>

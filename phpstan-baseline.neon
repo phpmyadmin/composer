@@ -1966,6 +1966,11 @@ parameters:
 			path: libraries/classes/Database/Events.php
 
 		-
+			message: "#^Method PhpMyAdmin\\\\Database\\\\Events\\:\\:getDetails\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Database/Events.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Events\\:\\:getEditorForm\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Database/Events.php
@@ -2286,6 +2291,11 @@ parameters:
 			path: libraries/classes/Database/Routines.php
 
 		-
+			message: "#^Method PhpMyAdmin\\\\Database\\\\Routines\\:\\:getDetails\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Database/Routines.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Routines\\:\\:getEditorForm\\(\\) has parameter \\$routine with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Database/Routines.php
@@ -2416,6 +2426,11 @@ parameters:
 			path: libraries/classes/Database/Triggers.php
 
 		-
+			message: "#^Method PhpMyAdmin\\\\Database\\\\Triggers\\:\\:getDetails\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Database/Triggers.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Triggers\\:\\:getEditorForm\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Database/Triggers.php
@@ -2531,22 +2546,12 @@ parameters:
 			path: libraries/classes/DatabaseInterface.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getProceduresOrFunctions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getProtoInfo\\(\\) should return bool\\|int but returns int\\|string\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getRoutines\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
 
@@ -2562,11 +2567,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getTablesFull\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getTriggers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
 
@@ -2681,17 +2681,7 @@ parameters:
 			path: libraries/classes/Dbal/DbalInterface.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getProceduresOrFunctions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getRoutines\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/DbalInterface.php
 
@@ -2707,11 +2697,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getTablesFull\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getTriggers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/DbalInterface.php
 

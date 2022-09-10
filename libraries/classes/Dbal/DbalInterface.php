@@ -462,39 +462,6 @@ interface DbalInterface
     ): ?string;
 
     /**
-     * returns details about the PROCEDUREs or FUNCTIONs for a specific database
-     * or details about a specific routine
-     *
-     * @param string      $db    db name
-     * @param string|null $which PROCEDURE | FUNCTION or null for both
-     * @param string      $name  name of the routine (to fetch a specific routine)
-     *
-     * @return array information about ROCEDUREs or FUNCTIONs
-     */
-    public function getRoutines(string $db, ?string $which = null, string $name = ''): array;
-
-    /**
-     * returns details about the EVENTs for a specific database
-     *
-     * @param string $db   db name
-     * @param string $name event name
-     *
-     * @return array information about EVENTs
-     */
-    public function getEvents(string $db, string $name = ''): array;
-
-    /**
-     * returns details about the TRIGGERs for a specific table or database
-     *
-     * @param string $db        db name
-     * @param string $table     table name
-     * @param string $delimiter the delimiter to use (may be empty)
-     *
-     * @return array information about triggers (may be empty)
-     */
-    public function getTriggers(string $db, string $table = '', string $delimiter = '//'): array;
-
-    /**
      * gets the current user with host
      *
      * @return string the current user i.e. user@host

@@ -26,11 +26,9 @@ use PhpMyAdmin\Utils\SessionCache;
 use RuntimeException;
 
 use function __;
-use function array_column;
 use function array_diff;
 use function array_keys;
 use function array_map;
-use function array_merge;
 use function array_multisort;
 use function array_reverse;
 use function array_shift;
@@ -41,7 +39,6 @@ use function count;
 use function defined;
 use function explode;
 use function implode;
-use function in_array;
 use function is_array;
 use function is_int;
 use function is_string;
@@ -1523,180 +1520,6 @@ class DatabaseInterface implements DbalInterface
         $result = $this->fetchValue($query, $returnedField[$which], $link);
 
         return is_string($result) ? $result : null;
-    }
-
-    /**
-     * returns details about the PROCEDUREs or FUNCTIONs for a specific database
-     * or details about a specific routine
-     *
-     * @param string      $db    db name
-     * @param string|null $which PROCEDURE | FUNCTION or null for both
-     * @param string      $name  name of the routine (to fetch a specific routine)
-     *
-     * @return array information about PROCEDUREs or FUNCTIONs
-     */
-    public function getRoutines(
-        string $db,
-        ?string $which = null,
-        string $name = ''
-    ): array {
-        if (! $GLOBALS['cfg']['Server']['DisableIS']) {
-            $query = QueryGenerator::getInformationSchemaRoutinesRequest(
-                $this->escapeString($db),
-                isset($which) && in_array($which, ['FUNCTION', 'PROCEDURE']) ? $which : null,
-                empty($name) ? null : $this->escapeString($name)
-            );
-            $routines = $this->fetchResult($query);
-        } else {
-            $routines = [];
-
-            if ($which === 'FUNCTION' || $which == null) {
-                $query = 'SHOW FUNCTION STATUS'
-                    . " WHERE `Db` = '" . $this->escapeString($db) . "'";
-                if ($name) {
-                    $query .= " AND `Name` = '"
-                        . $this->escapeString($name) . "'";
-                }
-
-                $routines = $this->fetchResult($query);
-            }
-
-            if ($which === 'PROCEDURE' || $which == null) {
-                $query = 'SHOW PROCEDURE STATUS'
-                    . " WHERE `Db` = '" . $this->escapeString($db) . "'";
-                if ($name) {
-                    $query .= " AND `Name` = '"
-                        . $this->escapeString($name) . "'";
-                }
-
-                $routines = array_merge($routines, $this->fetchResult($query));
-            }
-        }
-
-        $ret = [];
-        foreach ($routines as $routine) {
-            $ret[] = [
-                'db' => $routine['Db'],
-                'name' => $routine['Name'],
-                'type' => $routine['Type'],
-                'definer' => $routine['Definer'],
-                'returns' => $routine['DTD_IDENTIFIER'] ?? '',
-            ];
-        }
-
-        // Sort results by name
-        $name = array_column($ret, 'name');
-        array_multisort($name, SORT_ASC, $ret);
-
-        return $ret;
-    }
-
-    /**
-     * returns details about the EVENTs for a specific database
-     *
-     * @param string $db   db name
-     * @param string $name event name
-     *
-     * @return array information about EVENTs
-     */
-    public function getEvents(string $db, string $name = ''): array
-    {
-        if (! $GLOBALS['cfg']['Server']['DisableIS']) {
-            $query = QueryGenerator::getInformationSchemaEventsRequest(
-                $this->escapeString($db),
-                empty($name) ? null : $this->escapeString($name)
-            );
-        } else {
-            $query = 'SHOW EVENTS FROM ' . Util::backquote($db);
-            if ($name) {
-                $query .= " WHERE `Name` = '"
-                    . $this->escapeString($name) . "'";
-            }
-        }
-
-        $result = [];
-        $events = $this->fetchResult($query);
-
-        foreach ($events as $event) {
-            $result[] = [
-                'name' => $event['Name'],
-                'type' => $event['Type'],
-                'status' => $event['Status'],
-            ];
-        }
-
-        // Sort results by name
-        $name = array_column($result, 'name');
-        array_multisort($name, SORT_ASC, $result);
-
-        return $result;
-    }
-
-    /**
-     * returns details about the TRIGGERs for a specific table or database
-     *
-     * @param string $db        db name
-     * @param string $table     table name
-     * @param string $delimiter the delimiter to use (may be empty)
-     *
-     * @return array information about triggers (may be empty)
-     */
-    public function getTriggers(string $db, string $table = '', string $delimiter = '//'): array
-    {
-        $result = [];
-        if (! $GLOBALS['cfg']['Server']['DisableIS']) {
-            $query = QueryGenerator::getInformationSchemaTriggersRequest(
-                $this->escapeString($db),
-                empty($table) ? null : $this->escapeString($table)
-            );
-        } else {
-            $query = 'SHOW TRIGGERS FROM ' . Util::backquote($db);
-            if ($table) {
-                $query .= " LIKE '" . $this->escapeString($table) . "';";
-            }
-        }
-
-        $triggers = $this->fetchResult($query);
-
-        foreach ($triggers as $trigger) {
-            if ($GLOBALS['cfg']['Server']['DisableIS']) {
-                $trigger['TRIGGER_NAME'] = $trigger['Trigger'];
-                $trigger['ACTION_TIMING'] = $trigger['Timing'];
-                $trigger['EVENT_MANIPULATION'] = $trigger['Event'];
-                $trigger['EVENT_OBJECT_TABLE'] = $trigger['Table'];
-                $trigger['ACTION_STATEMENT'] = $trigger['Statement'];
-                $trigger['DEFINER'] = $trigger['Definer'];
-            }
-
-            $oneResult = [];
-            $oneResult['name'] = $trigger['TRIGGER_NAME'];
-            $oneResult['table'] = $trigger['EVENT_OBJECT_TABLE'];
-            $oneResult['action_timing'] = $trigger['ACTION_TIMING'];
-            $oneResult['event_manipulation'] = $trigger['EVENT_MANIPULATION'];
-            $oneResult['definition'] = $trigger['ACTION_STATEMENT'];
-            $oneResult['definer'] = $trigger['DEFINER'];
-
-            // do not prepend the schema name; this way, importing the
-            // definition into another schema will work
-            $oneResult['full_trigger_name'] = Util::backquote($trigger['TRIGGER_NAME']);
-            $oneResult['drop'] = 'DROP TRIGGER IF EXISTS '
-                . $oneResult['full_trigger_name'];
-            $oneResult['create'] = 'CREATE TRIGGER '
-                . $oneResult['full_trigger_name'] . ' '
-                . $trigger['ACTION_TIMING'] . ' '
-                . $trigger['EVENT_MANIPULATION']
-                . ' ON ' . Util::backquote($trigger['EVENT_OBJECT_TABLE'])
-                . "\n" . ' FOR EACH ROW '
-                . $trigger['ACTION_STATEMENT'] . "\n" . $delimiter . "\n";
-
-            $result[] = $oneResult;
-        }
-
-        // Sort results by name
-        $name = array_column($result, 'name');
-        array_multisort($name, SORT_ASC, $result);
-
-        return $result;
     }
 
     /**
