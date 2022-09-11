@@ -5175,8 +5175,9 @@
     </RedundantPropertyInitializationCheck>
   </file>
   <file src="libraries/classes/Database/Routines.php">
-    <MixedArgument occurrences="70">
+    <MixedArgument occurrences="71">
       <code>$GLOBALS['errors']</code>
+      <code>$_GET['item_name']</code>
       <code>$_GET['item_name']</code>
       <code>$_GET['item_name']</code>
       <code>$_GET['item_name']</code>
@@ -5195,7 +5196,7 @@
       <code>$_POST['item_name']</code>
       <code>$_POST['item_original_name']</code>
       <code>$_POST['item_original_name']</code>
-      <code>$_POST['item_original_type']</code>
+      <code>$_POST['item_original_name']</code>
       <code>$_POST['item_original_type']</code>
       <code>$_POST['item_returnopts_num']</code>
       <code>$_POST['item_returnopts_text']</code>
@@ -5217,7 +5218,7 @@
       <code>$itemType</code>
       <code>$newErrors</code>
       <code>$routine</code>
-      <code>$routine['ROUTINE_TYPE']</code>
+      <code>$routine['SPECIFIC_NAME']</code>
       <code>$routine['SPECIFIC_NAME']</code>
       <code>$routine['item_name']</code>
       <code>$routine['item_name']</code>
@@ -5237,7 +5238,7 @@
       <code>$routine['name']</code>
       <code>$routine['name']</code>
       <code>$routine['name']</code>
-      <code>$routine['type']</code>
+      <code>$routine['name']</code>
       <code>$routine['type']</code>
       <code>$routine['type']</code>
       <code>$value</code>
@@ -5389,11 +5390,10 @@
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedOperand occurrences="28">
+    <MixedOperand occurrences="27">
       <code>$_POST['funcs'][$routine['item_param_name'][$i]]</code>
       <code>$_POST['item_name']</code>
       <code>$_POST['item_original_name']</code>
-      <code>$_POST['item_original_type']</code>
       <code>$_POST['item_original_type']</code>
       <code>$_POST['item_returnlength']</code>
       <code>$_POST['item_type']</code>
@@ -5673,11 +5673,8 @@
       <code>uksort($eachTables, 'strnatcasecmp')</code>
       <code>usort($tables, 'strnatcasecmp')</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="8">
+    <MixedArrayAccess occurrences="5">
       <code>$link</code>
-      <code>$oneShow['Db']</code>
-      <code>$oneShow['Name']</code>
-      <code>$oneShow['Type']</code>
       <code>$tableData[$sortBy]</code>
       <code>$tableData['Data_length']</code>
       <code>$tableData['Engine']</code>
@@ -5695,7 +5692,7 @@
       <code>$this-&gt;links[$link]</code>
       <code>$this-&gt;links[$link]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="21">
+    <MixedAssignment occurrences="19">
       <code>$aLength</code>
       <code>$bLength</code>
       <code>$database</code>
@@ -5705,11 +5702,9 @@
       <code>$grant</code>
       <code>$keyIndex</code>
       <code>$map['real_column']</code>
-      <code>$oneShow</code>
       <code>$resultRows[$row[$key]]</code>
       <code>$resultRows[]</code>
       <code>$resultTarget</code>
-      <code>$result[]</code>
       <code>$table</code>
       <code>$tableData</code>
       <code>$tableData</code>
@@ -8663,7 +8658,7 @@
     </InvalidReturnType>
   </file>
   <file src="libraries/classes/Operations.php">
-    <MixedArgument occurrences="35">
+    <MixedArgument occurrences="33">
       <code>$_POST['comment']</code>
       <code>$_POST['db_collation'] ?? ''</code>
       <code>$_POST['new_auto_increment']</code>
@@ -8689,12 +8684,10 @@
       <code>$event_name</code>
       <code>$foreignTable</code>
       <code>$foreignTable</code>
-      <code>$function_name</code>
       <code>$newRowFormat</code>
       <code>$newRowFormat</code>
       <code>$old_priv</code>
       <code>$one_query</code>
-      <code>$procedure_name</code>
       <code>$this_what ?? 'data'</code>
       <code>$trigger['create']</code>
       <code>$view</code>
@@ -8756,12 +8749,11 @@
       <code>$trigger['create']</code>
       <code>$trigger['create']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="17">
+    <MixedAssignment occurrences="15">
       <code>$GLOBALS['auto_increment']</code>
       <code>$arr</code>
       <code>$event_name</code>
       <code>$foreignTable</code>
-      <code>$function_name</code>
       <code>$newRowFormat</code>
       <code>$old_priv</code>
       <code>$old_priv</code>
@@ -8770,7 +8762,6 @@
       <code>$old_priv</code>
       <code>$old_priv</code>
       <code>$one_query</code>
-      <code>$procedure_name</code>
       <code>$this_what</code>
       <code>$trigger</code>
       <code>$view</code>
@@ -9561,7 +9552,7 @@
       <code>$GLOBALS['cfg']['Export']</code>
       <code>$GLOBALS['cfg']['Export']</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="50">
+    <MixedArgument occurrences="51">
       <code>$GLOBALS['sql_auto_increments']</code>
       <code>$GLOBALS['sql_auto_increments']</code>
       <code>$GLOBALS['sql_backquotes']</code>
@@ -9607,6 +9598,7 @@
       <code>$relFieldAlias</code>
       <code>$rel['foreign_field']</code>
       <code>$rel['foreign_table']</code>
+      <code>$routine</code>
       <code>$routine</code>
       <code>$routine</code>
       <code>$table</code>
@@ -9704,8 +9696,8 @@
       <code>Context::escape($alias)</code>
     </PossiblyInvalidPropertyAssignmentValue>
     <PossiblyNullArgument occurrences="5">
-      <code>$GLOBALS['dbi']-&gt;getDefinition($db, $type, $routine)</code>
       <code>$createQuery</code>
+      <code>$definition</code>
       <code>$tableAlias</code>
       <code>$tableAlias</code>
       <code>$tableAlias</code>
@@ -9837,16 +9829,18 @@
     </PossiblyUndefinedVariable>
   </file>
   <file src="libraries/classes/Plugins/Export/ExportXml.php">
-    <MixedArgument occurrences="8">
+    <MixedArgument occurrences="7">
       <code>$code</code>
       <code>$col_as</code>
       <code>$db_charset</code>
       <code>$db_collation</code>
-      <code>$name</code>
       <code>$table</code>
       <code>$table</code>
       <code>$trigger['name']</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$events</code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="5">
       <code>$result[$table][1]</code>
       <code>$result[0]['DEFAULT_CHARACTER_SET_NAME']</code>
@@ -9860,18 +9854,16 @@
     <MixedArrayTypeCoercion occurrences="1">
       <code>$result[$table]</code>
     </MixedArrayTypeCoercion>
-    <MixedAssignment occurrences="8">
+    <MixedAssignment occurrences="7">
       <code>$GLOBALS['tables']</code>
       <code>$code</code>
       <code>$col_as</code>
       <code>$db_charset</code>
       <code>$db_collation</code>
-      <code>$name</code>
       <code>$table</code>
       <code>$trigger</code>
     </MixedAssignment>
-    <PossiblyNullArgument occurrences="2">
-      <code>$sql</code>
+    <PossiblyNullArgument occurrences="1">
       <code>$table_alias</code>
     </PossiblyNullArgument>
     <PossiblyNullOperand occurrences="35">

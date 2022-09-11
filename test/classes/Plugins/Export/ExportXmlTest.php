@@ -215,20 +215,15 @@ class ExportXmlTest extends AbstractTestCase
                 'DEFINER' => 'test_user@localhost',
             ],
         ];
+        $functions = [['Db' => 'd<"b', 'Name' => 'fn', 'Type' => 'FUNCTION']];
+        $procedures = [['Db' => 'd<"b', 'Name' => 'pr', 'Type' => 'PROCEDURE']];
 
-        $dbi->expects($this->exactly(4))
+        $dbi->expects($this->exactly(6))
             ->method('fetchResult')
-            ->willReturnOnConsecutiveCalls($result, $result, [], $triggers);
+            ->willReturnOnConsecutiveCalls($result, $result, [], $triggers, $functions, $procedures);
 
         $dbi->expects($this->exactly(2))
-            ->method('getProceduresOrFunctions')
-            ->willReturnOnConsecutiveCalls(
-                ['fn'],
-                ['pr']
-            );
-
-        $dbi->expects($this->exactly(2))
-            ->method('getDefinition')
+            ->method('fetchValue')
             ->willReturnOnConsecutiveCalls('fndef', 'prdef');
 
         $dbi->expects($this->once())

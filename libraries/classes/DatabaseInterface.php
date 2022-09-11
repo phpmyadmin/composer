@@ -1466,63 +1466,6 @@ class DatabaseInterface implements DbalInterface
     }
 
     /**
-     * returns an array of PROCEDURE or FUNCTION names for a db
-     *
-     * @param string $db    db name
-     * @param string $which PROCEDURE | FUNCTION
-     * @param int    $link  link type
-     *
-     * @return array the procedure names or function names
-     */
-    public function getProceduresOrFunctions(
-        string $db,
-        string $which,
-        $link = self::CONNECT_USER
-    ): array {
-        $shows = $this->fetchResult('SHOW ' . $which . ' STATUS;', null, null, $link);
-        $result = [];
-        foreach ($shows as $oneShow) {
-            if ($oneShow['Db'] != $db || $oneShow['Type'] != $which) {
-                continue;
-            }
-
-            $result[] = $oneShow['Name'];
-        }
-
-        return $result;
-    }
-
-    /**
-     * returns the definition of a specific PROCEDURE, FUNCTION, EVENT or VIEW
-     *
-     * @param string $db    db name
-     * @param string $which PROCEDURE | FUNCTION | EVENT | VIEW
-     * @param string $name  the procedure|function|event|view name
-     * @param int    $link  link type
-     *
-     * @return string|null the definition
-     */
-    public function getDefinition(
-        string $db,
-        string $which,
-        string $name,
-        $link = self::CONNECT_USER
-    ): ?string {
-        $returnedField = [
-            'PROCEDURE' => 'Create Procedure',
-            'FUNCTION' => 'Create Function',
-            'EVENT' => 'Create Event',
-            'VIEW' => 'Create View',
-        ];
-        $query = 'SHOW CREATE ' . $which . ' '
-            . Util::backquote($db) . '.'
-            . Util::backquote($name);
-        $result = $this->fetchValue($query, $returnedField[$which], $link);
-
-        return is_string($result) ? $result : null;
-    }
-
-    /**
      * gets the current user with host
      *
      * @return string the current user i.e. user@host

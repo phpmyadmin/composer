@@ -8,6 +8,8 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Charsets;
+use PhpMyAdmin\Database\Events;
+use PhpMyAdmin\Database\Routines;
 use PhpMyAdmin\Database\Triggers;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\FieldMetadata;
@@ -524,17 +526,17 @@ class ExportSql extends ExportPlugin
      *
      * @param string $db        Database
      * @param array  $aliases   Aliases of db/table/columns
-     * @param string $type      Type of exported routine
      * @param string $name      Verbose name of exported routine
      * @param array  $routines  List of routines to export
      * @param string $delimiter Delimiter to use in SQL
+     * @psalm-param 'FUNCTION'|'PROCEDURE' $type
      *
      * @return string SQL query
      */
     protected function exportRoutineSQL(
         $db,
         array $aliases,
-        $type,
+        string $type,
         $name,
         array $routines,
         $delimiter
@@ -555,13 +557,13 @@ class ExportSql extends ExportPlugin
                     . $delimiter . $GLOBALS['crlf'];
             }
 
-            $createQuery = $this->replaceWithAliases(
-                $GLOBALS['dbi']->getDefinition($db, $type, $routine),
-                $aliases,
-                $db,
-                '',
-                $flag
-            );
+            if ($type === 'FUNCTION') {
+                $definition = Routines::getFunctionDefinition($GLOBALS['dbi'], $db, $routine);
+            } else {
+                $definition = Routines::getProcedureDefinition($GLOBALS['dbi'], $db, $routine);
+            }
+
+            $createQuery = $this->replaceWithAliases($definition, $aliases, $db, '', $flag);
             if (! empty($createQuery) && $GLOBALS['cfg']['Export']['remove_definer_from_definitions']) {
                 // Remove definer clause from routine definitions
                 $parser = new Parser($createQuery);
@@ -609,8 +611,8 @@ class ExportSql extends ExportPlugin
         $text = '';
         $delimiter = '$$';
 
-        $procedureNames = $GLOBALS['dbi']->getProceduresOrFunctions($db, 'PROCEDURE');
-        $functionNames = $GLOBALS['dbi']->getProceduresOrFunctions($db, 'FUNCTION');
+        $procedureNames = Routines::getProcedureNames($GLOBALS['dbi'], $db);
+        $functionNames = Routines::getFunctionNames($GLOBALS['dbi'], $db);
 
         if ($procedureNames || $functionNames) {
             $text .= $GLOBALS['crlf']
@@ -1012,7 +1014,7 @@ class ExportSql extends ExportPlugin
                         . $delimiter . $GLOBALS['crlf'];
                 }
 
-                $eventDef = $GLOBALS['dbi']->getDefinition($db, 'EVENT', $eventName);
+                $eventDef = Events::getDefinition($GLOBALS['dbi'], $db, $eventName);
                 if (! empty($eventDef) && $GLOBALS['cfg']['Export']['remove_definer_from_definitions']) {
                     // remove definer clause from the event definition
                     $parser = new Parser($eventDef);
