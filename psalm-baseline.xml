@@ -1254,25 +1254,10 @@
       <code>$GLOBALS['cfg']['AllowUserDropDatabase']</code>
       <code>$GLOBALS['cfg']['PmaNoRelation_DisableWarning']</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="10">
-      <code>$GLOBALS['db']</code>
-      <code>$GLOBALS['db']</code>
-      <code>$GLOBALS['db']</code>
-      <code>$GLOBALS['db']</code>
-      <code>$GLOBALS['db']</code>
+    <MixedArgument occurrences="1">
       <code>$_POST['comment']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>['db' =&gt; $GLOBALS['db']]</code>
-      <code>['db' =&gt; $GLOBALS['db']]</code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="20">
-      <code>$GLOBALS['db']</code>
-      <code>$GLOBALS['db']</code>
+    <MixedAssignment occurrences="18">
       <code>$GLOBALS['db_collation']</code>
       <code>$GLOBALS['errorUrl']</code>
       <code>$GLOBALS['export_sql_plugin']</code>
@@ -8658,20 +8643,10 @@
     </InvalidReturnType>
   </file>
   <file src="libraries/classes/Operations.php">
-    <MixedArgument occurrences="33">
+    <MixedArgument occurrences="23">
       <code>$_POST['comment']</code>
       <code>$_POST['db_collation'] ?? ''</code>
       <code>$_POST['new_auto_increment']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
-      <code>$_POST['newname']</code>
       <code>$_POST['prev_comment']</code>
       <code>$_POST['tbl_collation'] ?? ''</code>
       <code>$_POST['what']</code>
@@ -9308,12 +9283,6 @@
       <code>$col_as</code>
       <code>$columns[$i]</code>
     </MixedAssignment>
-    <PossiblyNullOperand occurrences="4">
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-    </PossiblyNullOperand>
   </file>
   <file src="libraries/classes/Plugins/Export/ExportLatex.php">
     <MixedArgument occurrences="4">
@@ -9361,18 +9330,7 @@
       <code>$GLOBALS['plugin_param']['export_type']</code>
       <code>$GLOBALS['plugin_param']['single_table']</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullOperand occurrences="13">
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
+    <PossiblyNullOperand occurrences="2">
       <code>$table_alias</code>
       <code>$table_alias</code>
     </PossiblyNullOperand>
@@ -9707,39 +9665,7 @@
       <code>$GLOBALS['plugin_param']['export_type']</code>
       <code>$GLOBALS['plugin_param']['single_table']</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullOperand occurrences="33">
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
+    <PossiblyNullOperand occurrences="1">
       <code>$eventDef</code>
     </PossiblyNullOperand>
     <PropertyTypeCoercion occurrences="1">
@@ -9866,43 +9792,6 @@
     <PossiblyNullArgument occurrences="1">
       <code>$table_alias</code>
     </PossiblyNullArgument>
-    <PossiblyNullOperand occurrences="35">
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-      <code>$GLOBALS['crlf']</code>
-    </PossiblyNullOperand>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$table</code>
     </PropertyNotSetInConstructor>
@@ -12645,7 +12534,7 @@
       <code>$v</code>
     </MixedAssignment>
     <PossiblyNullOperand occurrences="1">
-      <code>self::getServerPart($cf, $crlf, $conf['Servers'])</code>
+      <code>self::getServerPart($cf, $eol, $conf['Servers'])</code>
     </PossiblyNullOperand>
   </file>
   <file src="libraries/classes/Setup/Index.php">
