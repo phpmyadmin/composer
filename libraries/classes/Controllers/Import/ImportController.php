@@ -6,7 +6,6 @@ namespace PhpMyAdmin\Controllers\Import;
 
 use PhpMyAdmin\Bookmark;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Console;
 use PhpMyAdmin\Controllers\AbstractController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
@@ -118,43 +117,6 @@ final class ImportController extends AbstractController
         $GLOBALS['skip_queries'] = $_POST['skip_queries'] ?? null;
         $GLOBALS['local_import_file'] = $_POST['local_import_file'] ?? null;
         $GLOBALS['show_as_php'] = $_POST['show_as_php'] ?? null;
-
-        // If it's a refresh console bookmarks request
-        if (isset($_GET['console_bookmark_refresh'])) {
-            $this->response->addJSON(
-                'console_message_bookmark',
-                Console::getBookmarkContent()
-            );
-
-            return;
-        }
-
-        // If it's a console bookmark add request
-        if (isset($_POST['console_bookmark_add'])) {
-            if (! isset($_POST['label'], $_POST['db'], $_POST['bookmark_query'], $_POST['shared'])) {
-                $this->response->addJSON('message', __('Incomplete params'));
-
-                return;
-            }
-
-            $bookmarkFields = [
-                'bkm_database' => $_POST['db'],
-                'bkm_user' => $GLOBALS['cfg']['Server']['user'],
-                'bkm_sql_query' => $_POST['bookmark_query'],
-                'bkm_label' => $_POST['label'],
-            ];
-            $isShared = ($_POST['shared'] === 'true');
-            $bookmark = Bookmark::createBookmark($this->dbi, $bookmarkFields, $isShared);
-            if ($bookmark !== false && $bookmark->save()) {
-                $this->response->addJSON('message', __('Succeeded'));
-                $this->response->addJSON('data', $bookmarkFields);
-                $this->response->addJSON('isShared', $isShared);
-            } else {
-                $this->response->addJSON('message', __('Failed'));
-            }
-
-            return;
-        }
 
         // reset import messages for ajax request
         $_SESSION['Import_message']['message'] = null;
