@@ -1180,10 +1180,9 @@ var ConsoleBookmarks = {
     }
   },
   refresh: function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/import', {
+    jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/console/bookmark/refresh', {
       'ajax_request': true,
-      'server': window.CommonParams.get('server'),
-      'console_bookmark_refresh': 'refresh'
+      'server': window.CommonParams.get('server')
     }, function (data) {
       if (data.console_message_bookmark) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.content.bookmark').html(data.console_message_bookmark);
@@ -1216,9 +1215,8 @@ var ConsoleBookmarks = {
       }
 
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true);
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/import', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/console/bookmark/add', {
         'ajax_request': true,
-        'console_bookmark_add': 'true',
         'label': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=label]').val(),
         'server': window.CommonParams.get('server'),
         'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
