@@ -82,8 +82,6 @@ abstract class AbstractTestCase extends TestCase
 
         // Config before DBI
         $this->setGlobalConfig();
-        $this->loadContainerBuilder();
-        $this->setTheme();
         Cache::purge();
     }
 
