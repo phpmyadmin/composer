@@ -10,6 +10,8 @@ namespace PhpMyAdmin\Controllers\Database;
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Controllers\AbstractController;
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseName;
+use PhpMyAdmin\Dbal\InvalidDatabaseName;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
@@ -46,7 +48,16 @@ class PrivilegesController extends AbstractController
 
     public function __invoke(ServerRequest $request): void
     {
-        $GLOBALS['text_dir'] = $GLOBALS['text_dir'] ?? null;
+        try {
+            $db = DatabaseName::fromValue($request->getParam('db'));
+            if ($this->dbi->getLowerCaseNames() === '1') {
+                $db = DatabaseName::fromValue(mb_strtolower($db->getName()));
+            }
+        } catch (InvalidDatabaseName $exception) {
+            $this->response->addHTML(Message::error($exception->getMessage())->getDisplay());
+
+            return;
+        }
 
         $checkUserPrivileges = new CheckUserPrivileges($this->dbi);
         $checkUserPrivileges->getPrivileges();
@@ -90,17 +101,12 @@ class PrivilegesController extends AbstractController
             $GLOBALS['tooltip_truename'],
             $GLOBALS['tooltip_aliasname'],
             $GLOBALS['pos'],
-        ] = Util::getDbInfo($GLOBALS['db'], $GLOBALS['sub_part']);
+        ] = Util::getDbInfo($db->getName(), $GLOBALS['sub_part']);
 
         $content = ob_get_clean();
         $this->response->addHTML($content . "\n");
 
         $scriptName = Util::getScriptNameForOption($GLOBALS['cfg']['DefaultTabDatabase'], 'database');
-
-        $db = $GLOBALS['db'];
-        if ($this->dbi->getLowerCaseNames() === '1') {
-            $db = mb_strtolower($GLOBALS['db']);
-        }
 
         $privileges = [];
         if ($this->dbi->isSuperUser()) {
@@ -109,7 +115,7 @@ class PrivilegesController extends AbstractController
 
         $this->render('database/privileges/index', [
             'is_superuser' => $this->dbi->isSuperUser(),
-            'db' => $db,
+            'db' => $db->getName(),
             'database_url' => $scriptName,
             'text_dir' => $GLOBALS['text_dir'],
             'is_createuser' => $this->dbi->isCreateUser(),
