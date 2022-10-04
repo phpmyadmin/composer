@@ -143,5 +143,6 @@
             "phpstan/extension-installer": true,
             "composer/package-versions-deprecated": true
         }
-    }
+    },
+    "version": "5.3.0-dev"
 }
