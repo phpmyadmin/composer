@@ -9925,6 +9925,10 @@ img.lightbulb {
   padding: 20px;
 }
 
+#pma_demo {
+  z-index: -1;
+}
+
 #pma_errors #pma_errors {
   padding: 0;
 }
@@ -11044,6 +11048,7 @@ form.append_fields_form .tblFooters {
 .cList .lDiv div {
   padding: 0.2em 0.5em 0.2em;
   padding-right: 0.2em;
+  white-space: nowrap;
 }
 .cList .lDiv div:hover {
   background: #780505;
