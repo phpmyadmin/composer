@@ -9935,10 +9935,6 @@ img.lightbulb {
   padding: 20px;
 }
 
-#pma_demo {
-  z-index: -1;
-}
-
 #pma_errors #pma_errors {
   padding: 0;
 }
@@ -11890,6 +11886,10 @@ body .ui-dialog .ui-dialog-buttonpane button.ui-state-active {
 }
 .resize-vertical {
   resize: vertical;
+}
+
+.table-responsive-md .data {
+  z-index: 9;
 }
 
 p.enum_notice {

@@ -9862,10 +9862,6 @@ img.lightbulb {
   padding: 0 0.5em;
 }
 
-#pma_demo {
-  z-index: -1;
-}
-
 .confirmation {
   color: #000;
   background-color: pink;
@@ -11878,6 +11874,10 @@ body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 #previewSqlModal {
   z-index: 1056;
   top: 100px;
+}
+
+.table-responsive-md .data {
+  z-index: 9;
 }
 
 /**

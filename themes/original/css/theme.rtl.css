@@ -9686,10 +9686,6 @@ img.lightbulb {
   padding: 0 0.5em;
 }
 
-#pma_demo {
-  z-index: -1;
-}
-
 .confirmation {
   background-color: #ffc;
 }
@@ -11752,6 +11748,10 @@ body .ui-dialog .ui-button-text-only .ui-button-text {
 }
 .resize-vertical {
   resize: vertical;
+}
+
+.table-responsive-md .data {
+  z-index: 9;
 }
 
 /**
