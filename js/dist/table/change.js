@@ -343,7 +343,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
 
   var newSaltBox = '<br><input type=text name=salt[multi_edit][' + multiEdit + '][' + urlField + ']' + ' id=salt_' + target.id + ' placeholder=\'' + window.Messages.strEncryptionKey + '\'>'; // If encrypting or decrypting functions that take salt as input is selected append the new textbox for salt
 
-  if (target.value === 'AES_ENCRYPT' || target.value === 'AES_DECRYPT' || target.value === 'DES_ENCRYPT' || target.value === 'DES_DECRYPT' || target.value === 'ENCRYPT') {
+  if (target.value === 'AES_ENCRYPT' || target.value === 'AES_DECRYPT' || target.value === 'DES_ENCRYPT' || target.value === 'DES_DECRYPT' || target.value === 'ENCRYPT' || target.value === 'SHA2') {
     if (!jquery__WEBPACK_IMPORTED_MODULE_0__('#salt_' + target.id).length) {
       $thisInput.after(newSaltBox);
     }
