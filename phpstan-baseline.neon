@@ -401,6 +401,11 @@ parameters:
 			path: libraries/classes/Config/FormDisplay.php
 
 		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: libraries/classes/Config/FormDisplay.php
+
+		-
 			message: "#^Call to function function_exists\\(\\) with 'bzcompress'\\|'gzcompress'\\|'gzencode' will always evaluate to true\\.$#"
 			count: 1
 			path: libraries/classes/Config/FormDisplay.php
@@ -453,11 +458,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$path of method PhpMyAdmin\\\\Config\\\\ConfigFile\\:\\:set\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
-			path: libraries/classes/Config/FormDisplay.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of static method PhpMyAdmin\\\\Sanitize\\:\\:escapeJsString\\(\\) expects string, mixed given\\.$#"
-			count: 2
 			path: libraries/classes/Config/FormDisplay.php
 
 		-
@@ -619,26 +619,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Config\\\\Forms\\\\User\\\\SqlForm\\:\\:getForms\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Config/Forms/User/SqlForm.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Config\\\\ServerConfigChecks\\:\\:performConfigChecksServers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
-
-		-
-			message: "#^Parameter \\#1 \\$blowfishSecret of method PhpMyAdmin\\\\Config\\\\ServerConfigChecks\\:\\:performConfigChecksServersSetBlowfishSecret\\(\\) expects string\\|null, bool\\|string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
-
-		-
-			message: "#^Parameter \\#2 \\$blowfishSecret of method PhpMyAdmin\\\\Config\\\\ServerConfigChecks\\:\\:performConfigChecksServers\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
-
-		-
-			message: "#^Parameter \\#3 \\$blowfishSecretSet of method PhpMyAdmin\\\\Config\\\\ServerConfigChecks\\:\\:performConfigChecksServersSetBlowfishSecret\\(\\) expects bool, bool\\|string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Config/ServerConfigChecks.php
 
 		-
 			message: "#^Cannot access offset int\\|string on mixed\\.$#"
@@ -1221,23 +1201,8 @@ parameters:
 			path: libraries/classes/Controllers/Export/ExportController.php
 
 		-
-			message: "#^Parameter \\#1 \\$dumpBuffer of method PhpMyAdmin\\\\Export\\:\\:compress\\(\\) expects array\\|string, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Export/ExportController.php
-
-		-
-			message: "#^Parameter \\#1 \\(mixed\\) of echo cannot be converted to string\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Export/ExportController.php
-
-		-
-			message: "#^Parameter \\#2 \\$dumpBuffer of method PhpMyAdmin\\\\Export\\:\\:closeFile\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Export/ExportController.php
-
-		-
-			message: "#^Parameter \\#3 \\$what of static method PhpMyAdmin\\\\Encoding\\:\\:convertString\\(\\) expects string, mixed given\\.$#"
-			count: 1
+			message: "#^Property PhpMyAdmin\\\\Export\\:\\:\\$dumpBuffer \\(string\\) does not accept array\\|bool\\|string\\.$#"
+			count: 2
 			path: libraries/classes/Controllers/Export/ExportController.php
 
 		-
@@ -1531,11 +1496,6 @@ parameters:
 			path: libraries/classes/Controllers/Table/ReplaceController.php
 
 		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/SearchController.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Table\\\\SearchController\\:\\:getColumnMinMax\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/SearchController.php
@@ -1701,11 +1661,6 @@ parameters:
 			path: libraries/classes/Controllers/Table/ZoomSearchController.php
 
 		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/ZoomSearchController.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Table\\\\ZoomSearchController\\:\\:getColumnProperties\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/ZoomSearchController.php
@@ -1831,11 +1786,6 @@ parameters:
 			path: libraries/classes/CreateAddField.php
 
 		-
-			message: "#^Casting to array something that's already array\\.$#"
-			count: 1
-			path: libraries/classes/Database/CentralColumns.php
-
-		-
 			message: "#^Foreach overwrites \\$table with its value variable\\.$#"
 			count: 2
 			path: libraries/classes/Database/CentralColumns.php
@@ -1909,16 +1859,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Database\\\\CentralColumns\\:\\:updateMultipleColumn\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Database/CentralColumns.php
-
-		-
-			message: "#^Right side of \\|\\| is always false\\.$#"
-			count: 1
-			path: libraries/classes/Database/CentralColumns.php
-
-		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 2
-			path: libraries/classes/Database/Designer.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Designer\\:\\:getDatabaseTables\\(\\) has parameter \\$tab_column with no value type specified in iterable type array\\.$#"
@@ -2906,16 +2846,6 @@ parameters:
 			path: libraries/classes/Display/Results.php
 
 		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
-			path: libraries/classes/Display/Results.php
-
-		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 2
-			path: libraries/classes/Display/Results.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Display\\\\Results\\:\\:getCommentForRow\\(\\) has parameter \\$commentsMap with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Display/Results.php
@@ -3281,11 +3211,6 @@ parameters:
 			path: libraries/classes/Error.php
 
 		-
-			message: "#^Instanceof between PhpMyAdmin\\\\Error and PhpMyAdmin\\\\Error will always evaluate to true\\.$#"
-			count: 1
-			path: libraries/classes/ErrorHandler.php
-
-		-
 			message: "#^Parameter \\#1 \\$callback of function set_error_handler expects \\(callable\\(int, string, string, int, array\\)\\: bool\\)\\|null, array\\{\\$this\\(PhpMyAdmin\\\\ErrorHandler\\), 'handleError'\\} given\\.$#"
 			count: 1
 			path: libraries/classes/ErrorHandler.php
@@ -3392,16 +3317,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Export\\:\\:openFile\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Export.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of static method PhpMyAdmin\\\\Encoding\\:\\:kanjiStrConv\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Export.php
-
-		-
-			message: "#^Parameter \\#3 \\$what of static method PhpMyAdmin\\\\Encoding\\:\\:convertString\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Export.php
 
@@ -3517,11 +3432,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Font\\:\\:getStringWidth\\(\\) has parameter \\$charLists with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Font.php
-
-		-
-			message: "#^Variable \\$charLists in empty\\(\\) always exists and is not falsy\\.$#"
 			count: 1
 			path: libraries/classes/Font.php
 
@@ -5036,22 +4946,17 @@ parameters:
 			path: libraries/classes/Navigation/Navigation.php
 
 		-
+			message: "#^Cannot access property \\$pos2 on PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\|null\\.$#"
+			count: 1
+			path: libraries/classes/Navigation/NavigationTree.php
+
+		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 6
 			path: libraries/classes/Navigation/NavigationTree.php
 
 		-
 			message: "#^Foreach overwrites \\$parent with its value variable\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/NavigationTree.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Navigation\\\\NavigationTree\\:\\:addDbContainers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/NavigationTree.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Navigation\\\\NavigationTree\\:\\:addTableContainers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/NavigationTree.php
 
@@ -5101,6 +5006,11 @@ parameters:
 			path: libraries/classes/Navigation/NavigationTree.php
 
 		-
+			message: "#^Parameter \\#1 \\$table of method PhpMyAdmin\\\\Navigation\\\\NavigationTree\\:\\:addTableContainers\\(\\) expects PhpMyAdmin\\\\Navigation\\\\Nodes\\\\NodeTable, PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node given\\.$#"
+			count: 1
+			path: libraries/classes/Navigation/NavigationTree.php
+
+		-
 			message: "#^Property PhpMyAdmin\\\\Navigation\\\\NavigationTree\\:\\:\\$aPath type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/NavigationTree.php
@@ -5131,12 +5041,12 @@ parameters:
 			path: libraries/classes/Navigation/NodeFactory.php
 
 		-
-			message: "#^Casting to bool something that's already bool\\.$#"
+			message: "#^Cannot access property \\$children on PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/Nodes/Node.php
 
 		-
-			message: "#^Casting to int something that's already int\\.$#"
+			message: "#^Casting to bool something that's already bool\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/Nodes/Node.php
 
@@ -5181,16 +5091,6 @@ parameters:
 			path: libraries/classes/Navigation/Nodes/Node.php
 
 		-
-			message: "#^Strict comparison using \\!\\=\\= between PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node and null will always evaluate to true\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/Nodes/Node.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/Nodes/Node.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Navigation\\\\Nodes\\\\NodeColumn\\:\\:__construct\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/Nodes/NodeColumn.php
@@ -5199,11 +5099,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$value of method PhpMyAdmin\\\\Navigation\\\\Nodes\\\\NodeColumn\\:\\:getTruncateValue\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/Nodes/NodeColumn.php
-
-		-
-			message: "#^Casting to int something that's already int\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/Nodes/NodeDatabase.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Navigation\\\\Nodes\\\\NodeDatabase\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -5266,17 +5161,17 @@ parameters:
 			path: libraries/classes/Navigation/Nodes/NodeTable.php
 
 		-
-			message: "#^Casting to array something that's already array\\.$#"
-			count: 1
-			path: libraries/classes/Normalization.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor2NF\\(\\) has parameter \\$partialDependencies with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Normalization.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor2NF\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor2NF\\(\\) should return array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} but returns array\\{legendText\\: string, headText\\: non\\-falsy\\-string, queryError\\: bool, extra\\: ''\\|PhpMyAdmin\\\\Message\\}\\.$#"
+			count: 1
+			path: libraries/classes/Normalization.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor2NF\\(\\) should return array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} but returns array\\{legendText\\: string, headText\\: non\\-falsy\\-string, queryError\\: false\\}\\.$#"
 			count: 1
 			path: libraries/classes/Normalization.php
 
@@ -5286,7 +5181,7 @@ parameters:
 			path: libraries/classes/Normalization.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor3NF\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor3NF\\(\\) should return array\\{legendText\\: string, headText\\: string, queryError\\: string\\|false, extra\\?\\: string\\} but returns array\\{legendText\\: string, headText\\: non\\-falsy\\-string, queryError\\: bool, extra\\: ''\\|PhpMyAdmin\\\\Message\\}\\.$#"
 			count: 1
 			path: libraries/classes/Normalization.php
 
@@ -5307,11 +5202,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:getAllCombinationPartialKeys\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Normalization.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:getHtmlContentsFor1NFStep3\\(\\) should return array\\<string\\> but returns array\\<string, string\\|false\\>\\.$#"
 			count: 1
 			path: libraries/classes/Normalization.php
 
@@ -5337,11 +5227,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:getHtmlForNewTables3NF\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Normalization.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Normalization\\:\\:moveRepeatingGroup\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Normalization.php
 
@@ -7011,27 +6896,12 @@ parameters:
 			path: libraries/classes/Sanitize.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 2
-			path: libraries/classes/Sanitize.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Sanitize\\:\\:escapeJsString\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: libraries/classes/Sanitize.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Sanitize\\:\\:replaceBBLink\\(\\) has parameter \\$found with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Sanitize.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Sanitize\\:\\:sanitizeFilename\\(\\) should return string but returns string\\|null\\.$#"
-			count: 1
-			path: libraries/classes/Sanitize.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method PhpMyAdmin\\\\Sanitize\\:\\:formatJsVal\\(\\) expects bool\\|int\\|string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Sanitize.php
 
@@ -10696,13 +10566,188 @@ parameters:
 			path: test/classes/Navigation/Nodes/NodeViewTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array will always evaluate to true\\.$#"
-			count: 4
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'extra' and array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
 			path: test/classes/NormalizationTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\<string\\> will always evaluate to true\\.$#"
-			count: 5
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'extra' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'extra' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'extra' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'extra' and array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'hasPrimaryKey' and array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, queryError\\: string\\|false, extra\\?\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'headText' and array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, queryError\\: string\\|false, extra\\?\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'legendText' and array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'message' and array\\{queryError\\: bool, message\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'primary_key' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'primary_key' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'queryError' and array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'queryError' and array\\{legendText\\: string, headText\\: string, queryError\\: string\\|false, extra\\?\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'queryError' and array\\{queryError\\: bool, message\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'subText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'subText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'subText' and array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'subText' and array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'PhpMyAdmin\\\\\\\\Message' and PhpMyAdmin\\\\Message will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, queryError\\: bool, extra\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, queryError\\: string\\|false, extra\\?\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\|false\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string, primary_key\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, subText\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 2
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{legendText\\: string, headText\\: string, subText\\: string, hasPrimaryKey\\: string, extra\\: string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/NormalizationTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{queryError\\: bool, message\\: PhpMyAdmin\\\\Message\\} will always evaluate to true\\.$#"
+			count: 1
 			path: test/classes/NormalizationTest.php
 
 		-
@@ -10872,11 +10917,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\SanitizeTest\\:\\:docLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: test/classes/SanitizeTest.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\SanitizeTest\\:\\:escapeDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/SanitizeTest.php
 
