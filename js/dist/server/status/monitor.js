@@ -27,17 +27,26 @@ var chartSize;
 var monitorSettings;
 
 function serverResponseError() {
-  var btns = {};
-
-  btns[Messages.strReloadPage] = function () {
-    window.location.reload();
+  var btns = {
+    [Messages.strReloadPage]: {
+      text: Messages.strReloadPage,
+      class: 'btn btn-primary',
+      click: function () {
+        window.location.reload();
+      }
+    }
   };
-
   $('#emptyDialog').dialog({
+    classes: {
+      'ui-dialog-titlebar-close': 'btn-close'
+    },
     title: Messages.strRefreshFailed
   });
   $('#emptyDialog').html(Functions.getImage('s_attention') + Messages.strInvalidResponseExplanation);
   $('#emptyDialog').dialog({
+    classes: {
+      'ui-dialog-titlebar-close': 'btn-close'
+    },
     buttons: btns
   });
 }
@@ -760,12 +769,24 @@ AJAX.registerOnload('server/status/monitor.js', function () {
   $('a[href="#importMonitorConfig"]').on('click', function (event) {
     event.preventDefault();
     $('#emptyDialog').dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       title: Messages.strImportDialogTitle
     });
     $('#emptyDialog').html(Messages.strImportDialogMessage + ':<br><form>' + '<input type="file" name="file" id="import_file"> </form>');
-    var dlgBtns = {};
+    var dlgBtns = {
+      [Messages.strImport]: {
+        text: Messages.strImport,
+        class: 'btn btn-primary'
+      },
+      [Messages.strCancel]: {
+        text: Messages.strCancel,
+        class: 'btn btn-secondary'
+      }
+    };
 
-    dlgBtns[Messages.strImport] = function () {
+    dlgBtns[Messages.strImport].click = function () {
       var input = $('#emptyDialog').find('#import_file')[0];
       var reader = new FileReader();
 
@@ -817,11 +838,14 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       reader.readAsText(input.files[0]);
     };
 
-    dlgBtns[Messages.strCancel] = function () {
+    dlgBtns[Messages.strCancel].click = function () {
       $(this).dialog('close');
     };
 
     $('#emptyDialog').dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       width: 'auto',
       height: 'auto',
       buttons: dlgBtns
@@ -859,13 +883,19 @@ AJAX.registerOnload('server/status/monitor.js', function () {
   $('a[href="#monitorInstructionsDialog"]').on('click', function (event) {
     event.preventDefault();
     var $dialog = $('#monitorInstructionsDialog');
-    var dlgBtns = {};
-
-    dlgBtns[Messages.strClose] = function () {
-      $(this).dialog('close');
+    var dlgBtns = {
+      [Messages.strClose]: {
+        text: Messages.strClose,
+        class: 'btn btn-primary',
+        click: function () {
+          $(this).dialog('close');
+        }
+      }
     };
-
     $dialog.dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       width: '60%',
       height: 'auto',
       buttons: dlgBtns
@@ -1120,16 +1150,25 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
       if (runtime.charts !== null && typeof window.localStorage.monitorVersion !== 'undefined' && monitorProtocolVersion !== window.localStorage.monitorVersion) {
         $('#emptyDialog').dialog({
+          classes: {
+            'ui-dialog-titlebar-close': 'btn-close'
+          },
           title: Messages.strIncompatibleMonitorConfig
         });
         $('#emptyDialog').html(Messages.strIncompatibleMonitorConfigDescription);
-        var dlgBtns = {};
-
-        dlgBtns[Messages.strClose] = function () {
-          $(this).dialog('close');
+        var dlgBtns = {
+          [Messages.strClose]: {
+            text: Messages.strClose,
+            class: 'btn btn-primary',
+            click: function () {
+              $(this).dialog('close');
+            }
+          }
         };
-
         $('#emptyDialog').dialog({
+          classes: {
+            'ui-dialog-titlebar-close': 'btn-close'
+          },
           width: 400,
           buttons: dlgBtns
         });
@@ -1476,19 +1515,31 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     var $dateEnd = $logAnalyseDialog.find('input[name="dateEnd"]');
     $dateStart.prop('readonly', true);
     $dateEnd.prop('readonly', true);
-    var dlgBtns = {};
+    var dlgBtns = {
+      [Messages.strFromSlowLog]: {
+        text: Messages.strFromSlowLog,
+        class: 'btn btn-secondary'
+      },
+      [Messages.strFromGeneralLog]: {
+        text: Messages.strFromGeneralLog,
+        class: 'btn btn-secondary'
+      }
+    };
 
-    dlgBtns[Messages.strFromSlowLog] = function () {
+    dlgBtns[Messages.strFromSlowLog].click = function () {
       loadLog('slow', min, max);
       $(this).dialog('close');
     };
 
-    dlgBtns[Messages.strFromGeneralLog] = function () {
+    dlgBtns[Messages.strFromGeneralLog].click = function () {
       loadLog('general', min, max);
       $(this).dialog('close');
     };
 
     $logAnalyseDialog.dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       width: 'auto',
       height: 'auto',
       buttons: dlgBtns
@@ -1734,12 +1785,20 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     }
 
     $('#emptyDialog').dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       title: Messages.strAnalysingLogsTitle
     });
     $('#emptyDialog').html(Messages.strAnalysingLogs + ' <img class="ajaxIcon" src="' + themeImagePath + 'ajax_clock_small.gif" alt="">');
-    var dlgBtns = {};
+    var dlgBtns = {
+      [Messages.strCancelRequest]: {
+        text: Messages.strCancelRequest,
+        class: 'btn btn-primary'
+      }
+    };
 
-    dlgBtns[Messages.strCancelRequest] = function () {
+    dlgBtns[Messages.strCancelRequest].click = function () {
       if (logRequest !== null) {
         logRequest.abort();
       }
@@ -1748,6 +1807,9 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     };
 
     $('#emptyDialog').dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       width: 'auto',
       height: 'auto',
       buttons: dlgBtns
@@ -1767,7 +1829,12 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       'server': CommonParams.get('server')
     }, function (data) {
       var logData;
-      var dlgBtns = {};
+      var dlgBtns = {
+        [Messages.strClose]: {
+          text: Messages.strClose,
+          class: 'btn btn-primary'
+        }
+      };
 
       if (typeof data !== 'undefined' && data.success === true) {
         logData = data.message;
@@ -1777,11 +1844,14 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
       if (logData.rows.length === 0) {
         $('#emptyDialog').dialog({
+          classes: {
+            'ui-dialog-titlebar-close': 'btn-close'
+          },
           title: Messages.strNoDataFoundTitle
         });
         $('#emptyDialog').html('<p>' + Messages.strNoDataFound + '</p>');
 
-        dlgBtns[Messages.strClose] = function () {
+        dlgBtns[Messages.strClose].click = function () {
           $(this).dialog('close');
         };
 
@@ -1793,6 +1863,9 @@ AJAX.registerOnload('server/status/monitor.js', function () {
       /* Show some stats in the dialog */
 
       $('#emptyDialog').dialog({
+        classes: {
+          'ui-dialog-titlebar-close': 'btn-close'
+        },
         title: Messages.strLoadingLogs
       });
       $('#emptyDialog').html('<p>' + Messages.strLogDataLoaded + '</p>');
@@ -1820,11 +1893,14 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         }
       }
 
-      dlgBtns[Messages.strJumpToTable] = function () {
-        $(this).dialog('close');
-        $(document).scrollTop($('#logTable').offset().top);
+      dlgBtns[Messages.strJumpToTable] = {
+        text: Messages.strJumpToTable,
+        class: 'btn btn-secondary',
+        click: function () {
+          $(this).dialog('close');
+          $(document).scrollTop($('#logTable').offset().top);
+        }
       };
-
       $('#emptyDialog').dialog('option', 'buttons', dlgBtns);
     });
     /**
@@ -2100,17 +2176,29 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     }
 
     var profilingChart = null;
-    var dlgBtns = {};
+    var dlgBtns = {
+      [Messages.strAnalyzeQuery]: {
+        text: Messages.strAnalyzeQuery,
+        class: 'btn btn-primary'
+      },
+      [Messages.strClose]: {
+        text: Messages.strClose,
+        class: 'btn btn-secondary'
+      }
+    };
 
-    dlgBtns[Messages.strAnalyzeQuery] = function () {
+    dlgBtns[Messages.strAnalyzeQuery].click = function () {
       profilingChart = loadQueryAnalysis(rowData);
     };
 
-    dlgBtns[Messages.strClose] = function () {
+    dlgBtns[Messages.strClose].click = function () {
       $(this).dialog('close');
     };
 
     $('#queryAnalyzerDialog').dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       width: 'auto',
       height: 'auto',
       resizable: false,

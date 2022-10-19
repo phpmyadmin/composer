@@ -2515,7 +2515,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
 
   var buttonOptions = [{
     text: Messages.strOK,
-    'class': 'submitOK',
+    'class': 'btn btn-primary submitOK',
     click: function () {
       $(this).dialog('close');
 
@@ -2525,7 +2525,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
     }
   }, {
     text: Messages.strCancel,
-    'class': 'submitCancel',
+    'class': 'btn btn-secondary submitCancel',
     click: function () {
       $(this).dialog('close');
     }
@@ -2534,6 +2534,9 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
     'id': 'confirm_dialog',
     'title': Messages.strConfirm
   }).prepend(question).dialog({
+    classes: {
+      'ui-dialog-titlebar-close': 'btn-close'
+    },
     buttons: buttonOptions,
     close: function () {
       $(this).remove();
@@ -2894,12 +2897,21 @@ AJAX.registerOnload('functions.js', function () {
     event.preventDefault();
     var $msgbox = Functions.ajaxShowMessage();
     /**
-     * @var button_options  Object containing options to be passed to jQueryUI's dialog
+     * @var buttonOptions Object containing options to be passed to jQueryUI's dialog
      */
 
-    var buttonOptions = {};
+    var buttonOptions = {
+      [Messages.strGo]: {
+        text: Messages.strGo,
+        'class': 'btn btn-primary'
+      },
+      [Messages.strCancel]: {
+        text: Messages.strCancel,
+        'class': 'btn btn-secondary'
+      }
+    };
 
-    buttonOptions[Messages.strGo] = function () {
+    buttonOptions[Messages.strGo].click = function () {
       event.preventDefault();
       /**
        * @var $the_form    Object referring to the change password form
@@ -2935,7 +2947,7 @@ AJAX.registerOnload('functions.js', function () {
       }); // end $.post()
     };
 
-    buttonOptions[Messages.strCancel] = function () {
+    buttonOptions[Messages.strCancel].click = function () {
       $(this).dialog('close');
     };
 
@@ -2952,6 +2964,9 @@ AJAX.registerOnload('functions.js', function () {
       }
 
       $('<div id="change_password_dialog"></div>').dialog({
+        classes: {
+          'ui-dialog-titlebar-close': 'btn-close'
+        },
         title: Messages.strChangePassword,
         width: 600,
         close: function () {
@@ -3073,13 +3088,22 @@ Functions.autoPopulate = function (inputId, offset) {
   var colDefault = centralColumnList[db + '_' + table][offset].col_default.toUpperCase();
   var $input4 = $('#' + newInputId + '4');
 
-  if (colDefault !== '' && colDefault !== 'NULL' && colDefault !== 'CURRENT_TIMESTAMP' && colDefault !== 'CURRENT_TIMESTAMP()') {
-    $input4.val('USER_DEFINED');
-    $input4.next().next().show();
-    $input4.next().next().val(centralColumnList[db + '_' + table][offset].col_default);
+  if (colDefault === 'NULL' || colDefault === 'CURRENT_TIMESTAMP' || colDefault === 'CURRENT_TIMESTAMP()') {
+    if (colDefault === 'CURRENT_TIMESTAMP()') {
+      colDefault = 'CURRENT_TIMESTAMP';
+    }
+
+    $input4.val(colDefault);
+    $input4.siblings('.default_value').hide();
+  }
+
+  if (colDefault === '') {
+    $input4.val('NONE');
+    $input4.siblings('.default_value').hide();
   } else {
-    $input4.val(centralColumnList[db + '_' + table][offset].col_default);
-    $input4.next().next().hide();
+    $input4.val('USER_DEFINED');
+    $input4.siblings('.default_value').show();
+    $input4.siblings('.default_value').val(centralColumnList[db + '_' + table][offset].col_default);
   }
 
   $('#' + newInputId + '5').val(centralColumnList[db + '_' + table][offset].col_collation);
