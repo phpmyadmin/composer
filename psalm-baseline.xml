@@ -229,11 +229,13 @@
       <code>$sqlDelimiter</code>
       <code>$userLink</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
+    <PossiblyInvalidArgument occurrences="3">
+      <code>$_GET['url'] ?? ''</code>
       <code>$_REQUEST['back']</code>
       <code>$_REQUEST['goto']</code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
+    <PossiblyInvalidCast occurrences="3">
+      <code>$_GET['url'] ?? ''</code>
       <code>$_REQUEST['back']</code>
       <code>$_REQUEST['goto']</code>
     </PossiblyInvalidCast>
@@ -941,12 +943,9 @@
     </MixedArgument>
   </file>
   <file src="libraries/classes/Controllers/Database/CentralColumns/PopulateColumnsController.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$_POST['selectedTable']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$_POST['selectedTable']</code>
-    </PossiblyInvalidCast>
+    <MixedArgument occurrences="1">
+      <code>$request-&gt;getParsedBodyParam('selectedTable')</code>
+    </MixedArgument>
   </file>
   <file src="libraries/classes/Controllers/Database/CentralColumnsController.php">
     <MixedArgument occurrences="22">
@@ -1225,21 +1224,13 @@
     </MixedArgument>
   </file>
   <file src="libraries/classes/Controllers/Database/MultiTableQuery/TablesController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
+      <code>$params['db']</code>
       <code>$table</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$table</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$params['db']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$params['db']</code>
-    </PossiblyInvalidCast>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$params['tables']</code>
-    </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Database/Operations/CollationController.php">
     <MixedArgument occurrences="1">
@@ -1395,22 +1386,21 @@
     </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Database/SqlController.php">
+    <MixedArgument occurrences="1">
+      <code>$request-&gt;getParsedBodyParam('delimiter')</code>
+    </MixedArgument>
     <MixedAssignment occurrences="2">
       <code>$GLOBALS['back']</code>
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$_POST['delimiter']</code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="libraries/classes/Controllers/Database/SqlFormatController.php">
-    <PossiblyInvalidArgument occurrences="1">
+    <MixedArgument occurrences="1">
       <code>$query</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$params['sql']</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
       <code>$query</code>
-    </PossiblyInvalidCast>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Database/Structure/AddPrefixController.php">
     <MixedAssignment occurrences="2">
@@ -1668,7 +1658,7 @@
       <code>$formattedOverhead</code>
       <code>$formattedSize</code>
     </InvalidScalarArgument>
-    <MixedArgument occurrences="36">
+    <MixedArgument occurrences="37">
       <code>$checkTime</code>
       <code>$checkTimeAll</code>
       <code>$createTime</code>
@@ -1700,6 +1690,7 @@
       <code>$replicaInfo['Ignore_Table']</code>
       <code>$replicaInfo['Wild_Do_Table']</code>
       <code>$replicaInfo['Wild_Ignore_Table']</code>
+      <code>$request-&gt;getParsedBodyParam('primary_connection')</code>
       <code>$sumSize</code>
       <code>$tableIsView</code>
       <code>$truename</code>
@@ -1771,9 +1762,6 @@
       <code>$currentTable['TABLE_NAME']</code>
       <code>$currentTable['TABLE_ROWS']</code>
     </MixedOperand>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$_POST['primary_connection'] ?? null</code>
-    </PossiblyInvalidArgument>
     <PossiblyNullArrayAccess occurrences="8">
       <code>$formattedOverhead</code>
       <code>$formattedSize</code>
@@ -1933,10 +1921,8 @@
     <MixedArrayAssignment occurrences="1">
       <code>$_SESSION['tmpval']['aliases']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="150">
+    <MixedAssignment occurrences="148">
       <code>$GLOBALS['active_page']</code>
-      <code>$GLOBALS['aliases']</code>
-      <code>$GLOBALS['aliases']</code>
       <code>$GLOBALS['allrows']</code>
       <code>$GLOBALS['allrows']</code>
       <code>$GLOBALS['as_separate_files']</code>
@@ -2194,7 +2180,8 @@
     <MixedArrayAccess occurrences="1">
       <code>$GLOBALS['language_stats'][$GLOBALS['lang']]</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment occurrences="3">
+      <code>$GLOBALS['db']</code>
       <code>$GLOBALS['errorUrl']</code>
       <code>$GLOBALS['show_query']</code>
     </MixedAssignment>
@@ -2335,6 +2322,11 @@
     <PossiblyInvalidCast occurrences="1">
       <code>$_GET['id']</code>
     </PossiblyInvalidCast>
+  </file>
+  <file src="libraries/classes/Controllers/LintController.php">
+    <MixedAssignment occurrences="1">
+      <code>$options</code>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/LogoutController.php">
     <MixedAssignment occurrences="1">
@@ -2835,13 +2827,29 @@
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="5">
+    <PossiblyInvalidArgument occurrences="12">
+      <code>$_POST['hostname']</code>
+      <code>$_POST['hostname'] ?? null</code>
+      <code>$_POST['pma_pw']</code>
       <code>$_POST['primary_add_user'] ?? null</code>
       <code>$_POST['primary_connection'] ?? null</code>
       <code>$_POST['primary_connection'] ?? null</code>
       <code>$_POST['primary_connection'] ?? null</code>
       <code>$_POST['sr_replica_action'] ?? null</code>
+      <code>$_POST['sr_replica_control_param'] ?? null</code>
+      <code>$_POST['text_port']</code>
+      <code>$_POST['username']</code>
+      <code>$_POST['username'] ?? null</code>
     </PossiblyInvalidArgument>
+    <PossiblyInvalidCast occurrences="4">
+      <code>$_POST['hostname']</code>
+      <code>$_POST['pma_pw']</code>
+      <code>$_POST['text_port']</code>
+      <code>$_POST['username']</code>
+    </PossiblyInvalidCast>
+    <RiskyCast occurrences="1">
+      <code>$_POST['sr_skip_errors_count']</code>
+    </RiskyCast>
   </file>
   <file src="libraries/classes/Controllers/Server/SqlController.php">
     <MixedAssignment occurrences="1">
@@ -3905,18 +3913,14 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/AddIndexController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/AddKeyController.php">
     <MixedAssignment occurrences="1">
@@ -3938,24 +3942,31 @@
     </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/CentralColumnsAddController.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="libraries/classes/Controllers/Table/Structure/CentralColumnsRemoveController.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="libraries/classes/Controllers/Table/Structure/ChangeController.php">
     <MixedArgument occurrences="1">
-      <code>$selected[$i]</code>
+      <code>$selected</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
-      <code>$GLOBALS['num_fields']</code>
-    </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
       <code>$selected</code>
+    </MixedAssignment>
+  </file>
+  <file src="libraries/classes/Controllers/Table/Structure/CentralColumnsRemoveController.php">
+    <MixedArgument occurrences="1">
+      <code>$selected</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$selected</code>
+    </MixedAssignment>
+  </file>
+  <file src="libraries/classes/Controllers/Table/Structure/ChangeController.php">
+    <MixedArgument occurrences="2">
+      <code>$selected</code>
+      <code>$selected[$i]</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$GLOBALS['num_fields']</code>
+      <code>$selected</code>
+    </MixedAssignment>
+    <PossiblyInvalidArgument occurrences="1">
       <code>$selected[$i]</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast occurrences="1">
@@ -3963,21 +3974,21 @@
     </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/FulltextController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/MoveColumnsController.php">
-    <MixedArgument occurrences="12">
+    <MixedArgument occurrences="16">
+      <code>$column</code>
+      <code>$column</code>
+      <code>$column</code>
+      <code>$column</code>
       <code>$current_timestamp ? '' : $data['Default']</code>
       <code>$data['Collation'] ?? ''</code>
       <code>$data['Expression']</code>
@@ -4004,24 +4015,16 @@
       <code>$data['Expression']</code>
       <code>$data['Virtuality']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="2">
+    <MixedArrayOffset occurrences="2">
+      <code>$columns[$column]</code>
+      <code>$expressions[$column]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="3">
+      <code>$column</code>
       <code>$data</code>
       <code>$data['Expression']</code>
     </MixedAssignment>
     <PossiblyFalseArgument occurrences="2"/>
-    <PossiblyInvalidArgument occurrences="3">
-      <code>$column</code>
-      <code>$column</code>
-      <code>$column</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidArrayOffset occurrences="2">
-      <code>$columns[$column]</code>
-      <code>$expressions[$column]</code>
-    </PossiblyInvalidArrayOffset>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$column</code>
-      <code>$column</code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument occurrences="4">
       <code>$current_timestamp ? '' : $data['Default']</code>
       <code>$data['Collation'] ?? ''</code>
@@ -4046,39 +4049,30 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/PrimaryController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedArgument>
-    <MixedAssignment occurrences="3">
+    <MixedAssignment occurrences="6">
       <code>$GLOBALS['errorUrl']</code>
       <code>$field</code>
       <code>$mult_btn</code>
+      <code>$selected</code>
+      <code>$selected</code>
+      <code>$selected_fld</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidIterator>
     <PossiblyNullOperand occurrences="1">
       <code>$row['Column_name']</code>
     </PossiblyNullOperand>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/ReservedWordCheckController.php">
-    <MixedArgument occurrences="2">
-      <code>$column</code>
+    <MixedArgument occurrences="1">
       <code>$column</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
       <code>$column</code>
-    </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$column</code>
-      <code>$column</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
       <code>$columns_names</code>
-    </PossiblyInvalidIterator>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/SaveController.php">
     <InvalidArgument occurrences="1">
@@ -4164,32 +4158,24 @@
     </PossiblyInvalidOperand>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/SpatialController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/UniqueController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
       <code>$field</code>
+      <code>$selected</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidIterator occurrences="1">
-      <code>$selected</code>
-    </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Table/StructureController.php">
     <MixedArgument occurrences="12">
@@ -4270,13 +4256,14 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="libraries/classes/Controllers/Table/TrackingController.php">
-    <MixedArgument occurrences="15">
+    <MixedArgument occurrences="16">
       <code>$GLOBALS['data']</code>
       <code>$GLOBALS['data']</code>
       <code>$GLOBALS['data']</code>
       <code>$_POST['date_from']</code>
       <code>$_POST['date_to']</code>
       <code>$_POST['db']</code>
+      <code>$_POST['table']</code>
       <code>$_POST['table']</code>
       <code>$_POST['users']</code>
       <code>$_POST['version']</code>
@@ -4307,9 +4294,10 @@
       <code>$_POST['date_to']</code>
       <code>$version</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="10">
+    <PossiblyInvalidArgument occurrences="11">
       <code>$_POST['date_from']</code>
       <code>$_POST['db']</code>
+      <code>$_POST['table']</code>
       <code>$_POST['table']</code>
       <code>$_POST['version']</code>
       <code>$_POST['version']</code>
@@ -4319,9 +4307,10 @@
       <code>$_POST['version']</code>
       <code>$_POST['version']</code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="10">
+    <PossiblyInvalidCast occurrences="11">
       <code>$_POST['date_from']</code>
       <code>$_POST['db']</code>
+      <code>$_POST['table']</code>
       <code>$_POST['table']</code>
       <code>$_POST['version']</code>
       <code>$_POST['version']</code>
@@ -12189,10 +12178,20 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/ReplicationGui.php">
-    <MixedArgument occurrences="6">
+    <MixedArgument occurrences="16">
       <code>$database</code>
       <code>$errorMessage</code>
       <code>$serverReplicationVariable</code>
+      <code>$sr['hostname']</code>
+      <code>$sr['hostname']</code>
+      <code>$sr['hostname']</code>
+      <code>$sr['hostname']</code>
+      <code>$sr['pma_pw']</code>
+      <code>$sr['pma_pw']</code>
+      <code>$sr['port']</code>
+      <code>$sr['port']</code>
+      <code>$sr['username']</code>
+      <code>$sr['username']</code>
       <code>$successMessage</code>
       <code>$val['Type']</code>
       <code>$val['Type']</code>
@@ -12231,7 +12230,11 @@
       <code>$_SESSION['replication']['sr_action_status']</code>
       <code>$_SESSION['replication']['sr_action_status']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="6">
+    <MixedAssignment occurrences="10">
+      <code>$_SESSION['replication']['m_hostname']</code>
+      <code>$_SESSION['replication']['m_password']</code>
+      <code>$_SESSION['replication']['m_port']</code>
+      <code>$_SESSION['replication']['m_username']</code>
       <code>$database</code>
       <code>$errorMessage</code>
       <code>$linkToPrimary</code>
@@ -12242,25 +12245,6 @@
     <PossiblyFalseOperand occurrences="1">
       <code>mb_strrpos($currentUser, '@')</code>
     </PossiblyFalseOperand>
-    <PossiblyInvalidArgument occurrences="6">
-      <code>$_POST['hostname']</code>
-      <code>$_POST['hostname']</code>
-      <code>$_POST['pma_pw']</code>
-      <code>$_POST['text_port']</code>
-      <code>$_POST['username']</code>
-      <code>$_POST['username']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="5">
-      <code>$_POST['hostname']</code>
-      <code>$_POST['hostname']</code>
-      <code>$_POST['pma_pw']</code>
-      <code>$_POST['text_port']</code>
-      <code>$_POST['username']</code>
-    </PossiblyInvalidCast>
-    <PossiblyInvalidOperand occurrences="2">
-      <code>$_POST['sr_skip_errors_count']</code>
-      <code>1</code>
-    </PossiblyInvalidOperand>
     <PossiblyNullArgument occurrences="1">
       <code>$srReplicaAction</code>
     </PossiblyNullArgument>
@@ -13932,10 +13916,9 @@
       <code>$sep</code>
       <code>$sep</code>
     </PossiblyFalseOperand>
-    <PossiblyInvalidArgument occurrences="4">
+    <PossiblyInvalidArgument occurrences="3">
       <code>$_POST['date_from']</code>
       <code>$_POST['date_to']</code>
-      <code>$_POST['table']</code>
       <code>$_POST['users']</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidOperand occurrences="2">
@@ -14051,14 +14034,6 @@
       <code>(string) $db</code>
       <code>(string) $table</code>
     </RedundantCastGivenDocblockType>
-  </file>
-  <file src="libraries/classes/UrlRedirector.php">
-    <RedundantCast occurrences="4">
-      <code>(string) $_GET['url']</code>
-      <code>(string) $_GET['url']</code>
-      <code>(string) $_GET['url']</code>
-      <code>(string) $_GET['url']</code>
-    </RedundantCast>
   </file>
   <file src="libraries/classes/UserPassword.php">
     <MixedArgument occurrences="6">
@@ -14999,6 +14974,12 @@
   <file src="test/classes/Database/QbeTest.php">
     <MixedArgument occurrences="7">
       <code>$actual</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortRow', [])</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortRow', [])</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortRow', [])</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortSelectCell', [1, 'ASC'])</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortSelectCell', [1])</code>
+      <code>$this-&gt;callFunction($object, Qbe::class, 'getSortSelectCell', [1])</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$actual</code>
