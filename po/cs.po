@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.1-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2022-09-29 00:17-0300\n"
-"PO-Revision-Date: 2022-05-27 05:56+0000\n"
-"Last-Translator: David Kindl <mtwango@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/5-2/cs/"
-">\n"
+"PO-Revision-Date: 2022-10-21 08:39+0000\n"
+"Last-Translator: mixeros <mixer@mixercz.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/5-2/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -1510,7 +1510,7 @@ msgstr "Středoevropské jazyky"
 #: libraries/classes/Charsets/Collation.php:555
 msgctxt "Collation"
 msgid "Russian"
-msgstr "Ruština"
+msgstr "Rusky"
 
 #: libraries/classes/Charsets/Collation.php:379
 msgctxt "Collation"
@@ -1532,7 +1532,7 @@ msgstr "Čínština"
 #: libraries/classes/Charsets/Collation.php:519
 msgctxt "Collation"
 msgid "Japanese"
-msgstr "Japonština"
+msgstr "Japonsky"
 
 #: libraries/classes/Charsets/Collation.php:398
 msgctxt "Collation"
@@ -1723,7 +1723,7 @@ msgid ""
 "Failed to set session cookie. Maybe you are using HTTP instead of HTTPS to "
 "access phpMyAdmin."
 msgstr ""
-"Nepodařilo se nastavit session cookie. Možná pro přístup do phpMyAdmina "
+"Nepodařilo se nastavit relační cookie. Možná pro přístup do phpMyAdmina "
 "používáte protokol HTTP místo HTTPS."
 
 #: libraries/classes/Common.php:552
@@ -5271,6 +5271,9 @@ msgid ""
 "key was automatically generated for you. Please refer to the "
 "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgstr ""
+"Konfigurační soubor potřebuje správný klíč pro zabezpečení souborů cookie. "
+"Byl pro Vás automaticky vygenerován dočasný klíč. Prosím, upravte si ho v "
+"[doc@cfg_blowfish_secret]dokumentaci[/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:328
 #, php-format
@@ -5279,6 +5282,9 @@ msgid ""
 "necessary. It should only be %d bytes long. Please refer to the "
 "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgstr ""
+"Šifrovací klíč souboru cookie je v konfiguračním souboru je delší než je "
+"potřeba. Měl by být dlouhý pouze %d bytů. Prosím, opravte si ho v "
+"[doc@cfg_blowfish_secret]dokumentaci[/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:346
 msgid ""
@@ -5675,7 +5681,7 @@ msgstr "Hodnoty Y"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:129
 msgid "Please enter the SQL query first."
-msgstr "Nejprve zadejte dotaz SQL."
+msgstr "Prosím, zadejte nejdříve SQL dotaz."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:132
 msgid "The host name is empty!"
@@ -6326,11 +6332,11 @@ msgstr "Prosím zvolte soubor, který chcete nahrát."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:313
 msgid "Please enter a valid table name."
-msgstr "Zadejte platný název tabulky."
+msgstr "Prosím, zadejte platný název tabulky."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:314
 msgid "Please enter a valid database name."
-msgstr "Zadejte platný název databáze."
+msgstr "Prosím, zadejte platný název databáze."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:315
 msgid "No files available on server for import!"
@@ -7333,11 +7339,11 @@ msgid ""
 "Safari, such problem is commonly caused by \"Private Mode Browsing\"."
 msgstr ""
 "Při přístupu do úložiště webového prohlížeče došlo k potížím, některé funkce "
-"vám proto nemusí pracovat správně. Je to pravděpodobně způsobeno tím, že "
+"Vám proto nemusí pracovat správně. Je to pravděpodobně způsobeno tím, že "
 "prohlížeč nemá úložiště nebo bylo dosaženo limitu velikosti dat v tomto "
-"úložišti. V prohlížeči Mozilla Firefox může být tento problém způsoben také "
-"poškozením úložiště, které lze opravit vymazáním offline webových dat v "
-"nastavení. V prohlížeči Safari bývá problém způsoben Anonymním prohlížením."
+"úložišti. V prohlížeči Mozilla Firefox tento problém může způsobit poškození "
+"tohoto úložiště, které je možno opravit vymazáním offline webových dat v "
+"nastavení. V Safari to bývá způsobeno Anonymním prohlížením."
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:669
 msgid "Copy tables to"
@@ -8585,7 +8591,7 @@ msgstr "Chyba: Nelze přidat vztah cizího klíče!"
 
 #: libraries/classes/Database/Designer/Common.php:640
 msgid "Error: Missing index on column(s)."
-msgstr "Chyba: Chybí index na sloupcích."
+msgstr "Chyba: Ve sloupci(ích) chybí index."
 
 #: libraries/classes/Database/Designer/Common.php:648
 #: libraries/classes/Database/Designer/Common.php:727
@@ -10804,7 +10810,7 @@ msgstr "Vypisuji data pro tabulku"
 #: templates/table/tracking/structure_snapshot_indexes.twig:12
 #: templates/table/zoom_search/result_form.twig:36
 msgid "Null"
-msgstr "Nulový"
+msgstr "Prázdný"
 
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:281
 #: libraries/classes/Plugins/Export/ExportHtmlword.php:376
@@ -11223,7 +11229,7 @@ msgstr "Chyba při čtení struktury tabulky %s:"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1611
 msgid "It appears your database uses views;"
-msgstr "Vaše databáze zřejmě využívá pohledy;"
+msgstr "Zdá se, že Vaše databáze používá pohledy;"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:1778
 msgid "Constraints for dumped tables"
@@ -11259,7 +11265,7 @@ msgstr "VZTAHY TABULKY"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2119
 msgid "It appears your table uses triggers;"
-msgstr "Vaše tabulka zřejmě využívá triggery;"
+msgstr "Zdá se, že Vaše tabulka používá triggery;"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2149
 #, php-format
@@ -11831,7 +11837,7 @@ msgstr "Jednoduché dvoustupňové ověřování"
 
 #: libraries/classes/Plugins/TwoFactor/Simple.php:59
 msgid "For testing purposes only!"
-msgstr "Pouze pro účely testování!"
+msgstr "Pouze pro testovací účely!"
 
 #: libraries/classes/Query/Utilities.php:97
 msgid ""
@@ -15649,7 +15655,7 @@ msgstr "Varování"
 
 #: templates/home/index.twig:282
 msgid "Notice"
-msgstr ""
+msgstr "Poznámka"
 
 #: templates/home/index.twig:295
 msgid "phpMyAdmin Themes"
@@ -16133,7 +16139,7 @@ msgstr "Pohled:"
 
 #: templates/modals/index_dialog_modal.twig:30
 msgid "Go back"
-msgstr ""
+msgstr "Jít zpět"
 
 #: templates/modals/unhide_nav_item.twig:5
 msgid "Show hidden navigation tree items."
@@ -17061,7 +17067,7 @@ msgstr "Požaduje zabezpečené připojení."
 
 #: templates/server/privileges/privileges_table.twig:802
 msgid "Requires a valid X509 certificate."
-msgstr "Vyžaduje platný certifikát X509."
+msgstr "Je vyžadován platný X509 certifikát."
 
 #: templates/server/privileges/privileges_table.twig:823
 msgid "Requires that a specific cipher method be used for a connection."
