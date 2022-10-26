@@ -3231,6 +3231,11 @@ parameters:
 			path: libraries/classes/Display/Results.php
 
 		-
+			message: "#^Strict comparison using \\!\\=\\= between non\\-empty\\-string and false will always evaluate to true\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
+
+		-
 			message: "#^Foreach overwrites \\$engine with its value variable\\.$#"
 			count: 1
 			path: libraries/classes/Encoding.php
@@ -10568,11 +10573,6 @@ parameters:
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\InsertEditTest\\:\\:testLoadFirstRow\\(\\) has parameter \\$rowsValue with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: test/classes/InsertEditTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
-			count: 26
 			path: test/classes/InsertEditTest.php
 
 		-
