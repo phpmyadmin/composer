@@ -1152,6 +1152,9 @@ Sql.browseForeignDialog = function ($thisA) {
   jquery__WEBPACK_IMPORTED_MODULE_0__.post($thisA.attr('href'), params, function (data) {
     // Creates browse foreign value dialog
     $dialog = jquery__WEBPACK_IMPORTED_MODULE_0__('<div>').append(data.message).dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       title: window.Messages.strBrowseForeignValues,
       width: Math.min(jquery__WEBPACK_IMPORTED_MODULE_0__(window).width() - 100, 700),
       maxHeight: jquery__WEBPACK_IMPORTED_MODULE_0__(window).height() - 100,

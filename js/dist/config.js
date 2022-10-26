@@ -899,7 +899,9 @@ window.Config.on = function () {
       }
     });
     jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'div.click-hide-message', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide().parent('.card-body').css('height', '').next('form').show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').css('height', '');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').find('.prefs-form').show();
     });
   };
 };
