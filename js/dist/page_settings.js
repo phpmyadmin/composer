@@ -7,13 +7,22 @@
  * @required    js/functions.js
  */
 function showSettings(selector) {
-  var buttons = {};
+  var buttons = {
+    [Messages.strApply]: {
+      text: Messages.strApply,
+      class: 'btn btn-primary'
+    },
+    [Messages.strCancel]: {
+      text: Messages.strCancel,
+      class: 'btn btn-secondary'
+    }
+  };
 
-  buttons[Messages.strApply] = function () {
+  buttons[Messages.strApply].click = function () {
     $('.config-form').trigger('submit');
   };
 
-  buttons[Messages.strCancel] = function () {
+  buttons[Messages.strCancel].click = function () {
     $(this).dialog('close');
   }; // Keeping a clone to restore in case the user cancels the operation
 
