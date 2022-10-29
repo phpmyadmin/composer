@@ -213,6 +213,13 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.criteria_col').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('change', function () {
         var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.jsCriteriaButton').first();
+
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked') && !$anchor.hasClass('collapsed')) {
+          // Do not collapse on checkbox tick as it does not make sense
+          // The user has it open and wants to tick the box
+          return;
+        }
+
         $anchor.trigger('click', ['Trigger']);
       });
     });

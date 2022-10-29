@@ -785,7 +785,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       },
       title: window.Messages.strImportDialogTitle
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html(window.Messages.strImportDialogMessage + ':<br><form>' + '<input type="file" name="file" id="import_file"> </form>');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html(window.Messages.strImportDialogMessage + '<br><form>' + '<input type="file" name="file" id="import_file"> </form>');
     var dlgBtns = {
       [window.Messages.strImport]: {
         text: window.Messages.strImport,
