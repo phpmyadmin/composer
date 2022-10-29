@@ -707,10 +707,16 @@ class Tracking
      *
      * @return string HTML for the message
      */
-    public function deleteTrackingReportRows(string $db, string $table, string $version, array &$data)
-    {
+    public function deleteTrackingReportRows(
+        string $db,
+        string $table,
+        string $version,
+        array &$data,
+        bool $delete_ddlog,
+        bool $delete_dmlog
+    ) {
         $html = '';
-        if (isset($_POST['delete_ddlog'])) {
+        if ($delete_ddlog) {
             // Delete ddlog row data
             $html .= $this->deleteFromTrackingReportLog(
                 $db,
@@ -723,7 +729,7 @@ class Tracking
             );
         }
 
-        if (isset($_POST['delete_dmlog'])) {
+        if ($delete_dmlog) {
             // Delete dmlog row data
             $html .= $this->deleteFromTrackingReportLog(
                 $db,
@@ -1047,14 +1053,15 @@ class Tracking
      * @param int   $filter_ts_from filter time stamp from
      * @param int   $filter_ts_to   filter time stamp to
      * @param array $filter_users   filter users
+     * @phpstan-param 'schema'|'data'|'schema_and_data' $logtype
      *
      * @return array
      */
-    public function getEntries(array $data, $filter_ts_from, $filter_ts_to, array $filter_users)
+    public function getEntries(array $data, $filter_ts_from, $filter_ts_to, array $filter_users, string $logtype)
     {
         $entries = [];
         // Filtering data definition statements
-        if ($_POST['logtype'] === 'schema' || $_POST['logtype'] === 'schema_and_data') {
+        if ($logtype === 'schema' || $logtype === 'schema_and_data') {
             $entries = array_merge(
                 $entries,
                 $this->filter(
@@ -1067,7 +1074,7 @@ class Tracking
         }
 
         // Filtering data manipulation statements
-        if ($_POST['logtype'] === 'data' || $_POST['logtype'] === 'schema_and_data') {
+        if ($logtype === 'data' || $logtype === 'schema_and_data') {
             $entries = array_merge(
                 $entries,
                 $this->filter(

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin-docs 4.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2022-10-23 00:30+0000\n"
-"PO-Revision-Date: 2022-10-03 13:18+0000\n"
+"PO-Revision-Date: 2022-10-29 18:19+0000\n"
 "Last-Translator: William Desportes <williamdes@wdes.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "fr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 
 #: libraries/classes/Advisory/Advisor.php:240
 #, php-format
@@ -6491,8 +6491,8 @@ msgid "Import monitor configuration"
 msgstr "Importer la configuration de surveillance"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:316
-msgid "Please select the file you want to import."
-msgstr "Merci de choisir le fichier à importer."
+msgid "Please select the file you want to import:"
+msgstr "Merci de choisir le fichier à importer :"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:317
 msgid "Please enter a valid table name."
@@ -13779,9 +13779,8 @@ msgstr ""
 "supposant un mappage conventionnel des adresses IPv4 en adresses IPv6"
 
 #: libraries/classes/Types.php:445
-#, fuzzy
 msgid "128-bit UUID (Universally Unique Identifier)"
-msgstr "Contient un identificateur universellement unique (UUID)"
+msgstr "UUID 128-bits (identificateur universellement unique)"
 
 #: libraries/classes/Types.php:801
 msgctxt "numeric types"
