@@ -871,7 +871,7 @@ class Routines
             }
 
             if (! empty($itemParamOpsText[$i])) {
-                if ($GLOBALS['dbi']->types->getTypeClass($itemParamType[$i]) === 'CHAR') {
+                if ($this->dbi->types->getTypeClass($itemParamType[$i]) === 'CHAR') {
                     if (! in_array($itemParamType[$i], ['VARBINARY', 'BINARY'])) {
                         $params .= ' CHARSET '
                             . mb_strtolower($itemParamOpsText[$i]);
@@ -880,7 +880,7 @@ class Routines
             }
 
             if (! empty($itemParamOpsNum[$i])) {
-                if ($GLOBALS['dbi']->types->getTypeClass($itemParamType[$i]) === 'NUMBER') {
+                if ($this->dbi->types->getTypeClass($itemParamType[$i]) === 'NUMBER') {
                     $params .= ' '
                         . mb_strtoupper($itemParamOpsNum[$i]);
                 }
@@ -937,14 +937,14 @@ class Routines
         }
 
         if (! empty($_POST['item_returnopts_text'])) {
-            if ($GLOBALS['dbi']->types->getTypeClass($itemReturnType) === 'CHAR') {
+            if ($this->dbi->types->getTypeClass($itemReturnType) === 'CHAR') {
                 $query .= ' CHARSET '
                     . mb_strtolower($_POST['item_returnopts_text']);
             }
         }
 
         if (! empty($_POST['item_returnopts_num'])) {
-            if ($GLOBALS['dbi']->types->getTypeClass($itemReturnType) === 'NUMBER') {
+            if ($this->dbi->types->getTypeClass($itemReturnType) === 'NUMBER') {
                 $query .= ' '
                     . mb_strtoupper($_POST['item_returnopts_num']);
             }
@@ -1625,8 +1625,8 @@ class Routines
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
             $query = QueryGenerator::getInformationSchemaRoutinesRequest(
                 $dbi->escapeString($db),
-                isset($which) && in_array($which, ['FUNCTION', 'PROCEDURE']) ? $which : null,
-                empty($name) ? null : $dbi->escapeString($name)
+                in_array($which, ['FUNCTION', 'PROCEDURE'], true) ? $which : null,
+                $name === '' ? null : $dbi->escapeString($name)
             );
             $routines = $dbi->fetchResult($query);
         } else {
@@ -1635,9 +1635,8 @@ class Routines
             if ($which === 'FUNCTION' || $which == null) {
                 $query = 'SHOW FUNCTION STATUS'
                     . " WHERE `Db` = '" . $dbi->escapeString($db) . "'";
-                if ($name) {
-                    $query .= " AND `Name` = '"
-                        . $dbi->escapeString($name) . "'";
+                if ($name !== '') {
+                    $query .= " AND `Name` = '" . $dbi->escapeString($name) . "'";
                 }
 
                 $routines = $dbi->fetchResult($query);
@@ -1646,9 +1645,8 @@ class Routines
             if ($which === 'PROCEDURE' || $which == null) {
                 $query = 'SHOW PROCEDURE STATUS'
                     . " WHERE `Db` = '" . $dbi->escapeString($db) . "'";
-                if ($name) {
-                    $query .= " AND `Name` = '"
-                        . $dbi->escapeString($name) . "'";
+                if ($name !== '') {
+                    $query .= " AND `Name` = '" . $dbi->escapeString($name) . "'";
                 }
 
                 $routines = array_merge($routines, $dbi->fetchResult($query));

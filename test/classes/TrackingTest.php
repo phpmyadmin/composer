@@ -51,7 +51,7 @@ class TrackingTest extends AbstractTestCase
 
         $template = new Template();
         $this->tracking = new Tracking(
-            new SqlQueryForm($template),
+            new SqlQueryForm($template, $GLOBALS['dbi']),
             $template,
             new Relation($GLOBALS['dbi']),
             $GLOBALS['dbi']
@@ -268,20 +268,12 @@ class TrackingTest extends AbstractTestCase
      */
     public function testGetHtmlForTrackingReportr(): void
     {
-        $_POST['version'] = 10;
-        $_POST['date_from'] = 'date_from';
-        $_POST['date_to'] = 'date_to';
-        $_POST['users'] = 'users';
-        $_POST['logtype'] = 'logtype';
         $data = [
             'tracking' => 'tracking',
-            'ddlog' => ['ddlog'],
-            'dmlog' => ['dmlog'],
+            'ddlog' => [['date' => '2022-11-02 22:15:24']],
+            'dmlog' => [['date' => '2022-11-02 22:15:24']],
         ];
         $url_params = [];
-        $selection_schema = false;
-        $selection_data = false;
-        $selection_both = false;
         $filter_ts_to = 0;
         $filter_ts_from = 0;
         $filter_users = [];
@@ -289,12 +281,14 @@ class TrackingTest extends AbstractTestCase
         $html = $this->tracking->getHtmlForTrackingReport(
             $data,
             $url_params,
-            $selection_schema,
-            $selection_data,
-            $selection_both,
+            'schema_and_data',
             $filter_ts_to,
             $filter_ts_from,
-            $filter_users
+            $filter_users,
+            '10',
+            '2022-11-03 22:15:24',
+            '2022-11-04 22:15:24',
+            'users'
         );
 
         $this->assertStringContainsString(
@@ -311,7 +305,7 @@ class TrackingTest extends AbstractTestCase
 
         $version = Url::getHiddenInputs($url_params + [
             'report' => 'true',
-            'version' => $_POST['version'],
+            'version' => '10',
         ]);
 
         $this->assertStringContainsString($version, $html);
@@ -333,20 +327,9 @@ class TrackingTest extends AbstractTestCase
             $html
         );
 
-        $this->assertStringContainsString(
-            htmlspecialchars($_POST['date_from']),
-            $html
-        );
-
-        $this->assertStringContainsString(
-            htmlspecialchars($_POST['date_to']),
-            $html
-        );
-
-        $this->assertStringContainsString(
-            htmlspecialchars($_POST['users']),
-            $html
-        );
+        $this->assertStringContainsString('2022-11-03 22:15:24', $html);
+        $this->assertStringContainsString('2022-11-04 22:15:24', $html);
+        $this->assertStringContainsString('users', $html);
     }
 
     /**
@@ -354,7 +337,6 @@ class TrackingTest extends AbstractTestCase
      */
     public function testGetHtmlForDataManipulationStatements(): void
     {
-        $_POST['version'] = '10';
         $data = [
             'tracking' => 'tracking',
             'dmlog' => [
@@ -380,7 +362,8 @@ class TrackingTest extends AbstractTestCase
             $filter_ts_to,
             $url_params,
             $ddlog_count,
-            $drop_image_or_text
+            $drop_image_or_text,
+            '10'
         );
 
         $this->assertStringContainsString(
@@ -408,8 +391,6 @@ class TrackingTest extends AbstractTestCase
      */
     public function testGetHtmlForDataDefinitionStatements(): void
     {
-        $_POST['version'] = '10';
-
         $data = [
             'tracking' => 'tracking',
             'ddlog' => [
@@ -433,7 +414,8 @@ class TrackingTest extends AbstractTestCase
             $filter_ts_from,
             $filter_ts_to,
             $url_params,
-            $drop_image_or_text
+            $drop_image_or_text,
+            '10'
         );
 
         $this->assertStringContainsString(
@@ -577,7 +559,6 @@ class TrackingTest extends AbstractTestCase
      */
     public function testGetEntries(): void
     {
-        $_POST['logtype'] = 'schema';
         $data = [
             'tracking' => 'tracking',
             'ddlog' => [

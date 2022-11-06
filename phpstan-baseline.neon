@@ -837,7 +837,7 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
-			count: 3
+			count: 4
 			path: libraries/classes/ConfigStorage/Relation.php
 
 		-
@@ -1026,6 +1026,11 @@ parameters:
 			path: libraries/classes/Controllers/Database/CentralColumnsController.php
 
 		-
+			message: "#^Parameter \\#2 \\$field_select of method PhpMyAdmin\\\\Database\\\\CentralColumns\\:\\:deleteColumnsFromList\\(\\) expects array, array\\<int, string\\>\\|string given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/CentralColumnsController.php
+
+		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/DataDictionaryController.php
@@ -1039,16 +1044,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$db of static method PhpMyAdmin\\\\Database\\\\MultiTableQuery\\:\\:displayResults\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/MultiTableQuery/QueryController.php
-
-		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Database/MultiTableQuery/TablesController.php
-
-		-
-			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:escapeString\\(\\) expects string, mixed given\\.$#"
-			count: 2
-			path: libraries/classes/Controllers/Database/MultiTableQuery/TablesController.php
 
 		-
 			message: "#^Parameter \\#1 \\$collation of static method PhpMyAdmin\\\\Util\\:\\:getCharsetQueryPart\\(\\) expects string, mixed given\\.$#"
@@ -1086,14 +1081,49 @@ parameters:
 			path: libraries/classes/Controllers/Database/SqlController.php
 
 		-
-			message: "#^Cannot cast mixed to string\\.$#"
+			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
 			count: 1
-			path: libraries/classes/Controllers/Database/SqlFormatController.php
+			path: libraries/classes/Controllers/Database/Structure/CopyTableWithPrefixController.php
 
 		-
-			message: "#^Parameter \\#1 \\$query of static method PhpMyAdmin\\\\SqlParser\\\\Utils\\\\Formatter\\:\\:format\\(\\) expects string, mixed given\\.$#"
+			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
-			path: libraries/classes/Controllers/Database/SqlFormatController.php
+			path: libraries/classes/Controllers/Database/Structure/CopyTableWithPrefixController.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function mb_substr expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/CopyTableWithPrefixController.php
+
+		-
+			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/CopyTableWithPrefixController.php
+
+		-
+			message: "#^Parameter \\#2 \\$sourceTable of static method PhpMyAdmin\\\\Table\\:\\:moveCopy\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/CopyTableWithPrefixController.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/Structure/DropFormController.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/Structure/DropFormController.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/EmptyFormController.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/EmptyFormController.php
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
@@ -1116,12 +1146,42 @@ parameters:
 			path: libraries/classes/Controllers/Database/Structure/FavoriteTableController.php
 
 		-
+			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
+
+		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
 
 		-
+			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function mb_substr expects string, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
+
+		-
+			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/ReplacePrefixController.php
+
+		-
 			message: "#^Parameter \\#1 \\$buffer of static method PhpMyAdmin\\\\Core\\:\\:mimeDefaultFunction\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/Structure/ShowCreateController.php
+
+		-
+			message: "#^Parameter \\#1 \\$selected of method PhpMyAdmin\\\\Controllers\\\\Database\\\\Structure\\\\ShowCreateController\\:\\:getShowCreateTables\\(\\) expects array\\<string\\>, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/Structure/ShowCreateController.php
 
@@ -1236,6 +1296,16 @@ parameters:
 			path: libraries/classes/Controllers/Database/StructureController.php
 
 		-
+			message: "#^Argument of an invalid type array\\<int, array\\<string, string\\>\\>\\|string\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Database/TrackingController.php
+
+		-
+			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, array\\<int, array\\<string, string\\>\\>\\|string\\|null given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Database/TrackingController.php
+
+		-
 			message: "#^Cannot access offset 'success' on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/ErrorReportController.php
@@ -1284,21 +1354,6 @@ parameters:
 			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/HomeController.php
-
-		-
-			message: "#^Cannot access offset 'eventEditor' on mixed\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/LintController.php
-
-		-
-			message: "#^Cannot access offset 'routineEditor' on mixed\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/LintController.php
-
-		-
-			message: "#^Cannot access offset 'triggerEditor' on mixed\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/LintController.php
 
 		-
 			message: "#^Parameter \\#1 \\$partialDependencies of method PhpMyAdmin\\\\Normalization\\:\\:createNewTablesFor2NF\\(\\) expects array, mixed given\\.$#"
@@ -1381,9 +1436,39 @@ parameters:
 			path: libraries/classes/Controllers/Server/DatabasesController.php
 
 		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/ReplicationController.php
+
+		-
+			message: "#^Parameter \\#10 \\$hostname of method PhpMyAdmin\\\\ReplicationGui\\:\\:handleControlRequest\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/ReplicationController.php
+
+		-
+			message: "#^Parameter \\#8 \\$username of method PhpMyAdmin\\\\ReplicationGui\\:\\:handleControlRequest\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/ReplicationController.php
+
+		-
+			message: "#^Parameter \\#9 \\$pmaPassword of method PhpMyAdmin\\\\ReplicationGui\\:\\:handleControlRequest\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/ReplicationController.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Server\\\\Status\\\\Processes\\\\KillController\\:\\:__invoke\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Server/Status/Processes/KillController.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Server/Status/Processes/RefreshController.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Server/Status/ProcessesController.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Server\\\\Status\\\\StatusController\\:\\:getConnectionsInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -1476,6 +1561,11 @@ parameters:
 			path: libraries/classes/Controllers/Setup/ServersController.php
 
 		-
+			message: "#^Constructor of class PhpMyAdmin\\\\Controllers\\\\Sql\\\\ColumnPreferencesController has an unused parameter \\$sql\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Sql/ColumnPreferencesController.php
+
+		-
 			message: "#^Parameter \\#1 \\$string of function htmlentities expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Sql/SetValuesController.php
@@ -1551,6 +1641,11 @@ parameters:
 			path: libraries/classes/Controllers/Table/RelationController.php
 
 		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|string supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Table/ReplaceController.php
+
+		-
 			message: "#^Call to function method_exists\\(\\) with PhpMyAdmin\\\\Plugins\\\\IOTransformationsPlugin and 'isSuccess' will always evaluate to true\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/ReplaceController.php
@@ -1606,54 +1701,9 @@ parameters:
 			path: libraries/classes/Controllers/Table/SearchController.php
 
 		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/AddIndexController.php
-
-		-
-			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/AddIndexController.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/AddIndexController.php
-
-		-
-			message: "#^Parameter \\#1 \\$field_select of method PhpMyAdmin\\\\Database\\\\CentralColumns\\:\\:syncUniqueColumns\\(\\) expects array, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/CentralColumnsAddController.php
-
-		-
-			message: "#^Parameter \\#2 \\$field_select of method PhpMyAdmin\\\\Database\\\\CentralColumns\\:\\:deleteColumnsFromList\\(\\) expects array, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/CentralColumnsRemoveController.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Table\\\\Structure\\\\ChangeController\\:\\:displayHtmlForColumnChange\\(\\) has parameter \\$selected with no value type specified in iterable type array\\.$#"
+			message: "#^Parameter \\#1 \\$selected of method PhpMyAdmin\\\\Controllers\\\\Table\\\\Structure\\\\ChangeController\\:\\:displayHtmlForColumnChange\\(\\) expects array\\<string\\>, array\\<int, mixed\\> given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/Structure/ChangeController.php
-
-		-
-			message: "#^Parameter \\#1 \\$selected of method PhpMyAdmin\\\\Controllers\\\\Table\\\\Structure\\\\ChangeController\\:\\:displayHtmlForColumnChange\\(\\) expects array\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/ChangeController.php
-
-		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/FulltextController.php
-
-		-
-			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/FulltextController.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/FulltextController.php
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
@@ -1754,36 +1804,6 @@ parameters:
 			message: "#^Parameter \\#7 \\$null of static method PhpMyAdmin\\\\Table\\:\\:generateAlter\\(\\) expects bool\\|string, mixed given\\.$#"
 			count: 2
 			path: libraries/classes/Controllers/Table/Structure/SaveController.php
-
-		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/SpatialController.php
-
-		-
-			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/SpatialController.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/SpatialController.php
-
-		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/UniqueController.php
-
-		-
-			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/UniqueController.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/UniqueController.php
 
 		-
 			message: "#^Cannot use array destructuring on array\\|null\\.$#"
@@ -1896,6 +1916,11 @@ parameters:
 			path: libraries/classes/Controllers/View/CreateController.php
 
 		-
+			message: "#^Binary operation \"\\*\" between string and 1024\\|1048576\\|1073741824\\|1099511627776 results in an error\\.$#"
+			count: 1
+			path: libraries/classes/Core.php
+
+		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 3
 			path: libraries/classes/Core.php
@@ -1917,11 +1942,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Core\\:\\:checkPageValidity\\(\\) has parameter \\$allowList with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Core.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Core\\:\\:fatalError\\(\\) has parameter \\$message_args with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Core.php
 
@@ -3052,11 +3072,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Display\\\\Results\\:\\:getDataForResettingColumnOrder\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Display/Results.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Display\\\\Results\\:\\:getOffsets\\(\\) should return array\\<int\\> but returns array\\<int, \\(array\\|float\\|int\\)\\>\\.$#"
 			count: 1
 			path: libraries/classes/Display/Results.php
 
@@ -4836,6 +4851,11 @@ parameters:
 			path: libraries/classes/InsertEdit.php
 
 		-
+			message: "#^Method PhpMyAdmin\\\\InsertEdit\\:\\:loadFirstRow\\(\\) should return array\\{PhpMyAdmin\\\\Dbal\\\\ResultInterface, array\\<false\\>\\} but returns array\\{PhpMyAdmin\\\\Dbal\\\\ResultInterface, array\\<int, false\\>\\|false\\}\\.$#"
+			count: 1
+			path: libraries/classes/InsertEdit.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\InsertEdit\\:\\:showEmptyResultMessageOrSetUniqueCondition\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/InsertEdit.php
@@ -4901,7 +4921,7 @@ parameters:
 			path: libraries/classes/InsertEdit.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:escapeString\\(\\) expects string, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:quoteString\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: libraries/classes/InsertEdit.php
 
@@ -4944,6 +4964,11 @@ parameters:
 			message: "#^Property PhpMyAdmin\\\\InternalRelations\\:\\:\\$mysql type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/InternalRelations.php
+
+		-
+			message: "#^Binary operation \"\\-\" between string and 1 results in an error\\.$#"
+			count: 1
+			path: libraries/classes/IpAllowDeny.php
 
 		-
 			message: "#^Parameter \\#2 \\$ipToTest of method PhpMyAdmin\\\\IpAllowDeny\\:\\:ipMaskTest\\(\\) expects string, string\\|true given\\.$#"
@@ -6916,11 +6941,6 @@ parameters:
 			path: libraries/classes/Query/Compatibility.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Query\\\\Generator\\:\\:getInformationSchemaColumnsFullRequest\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Query/Generator.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Query\\\\Generator\\:\\:getTableCondition\\(\\) has parameter \\$escapedTableOrTables with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Query/Generator.php
@@ -6967,16 +6987,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\ReplicationGui\\:\\:getHtmlForReplicaConfiguration\\(\\) has parameter \\$serverReplicaReplication with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/ReplicationGui.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\ReplicationGui\\:\\:handleControlRequest\\(\\) has parameter \\$sr with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/ReplicationGui.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\ReplicationGui\\:\\:handleRequestForReplicaChangePrimary\\(\\) has parameter \\$sr with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/ReplicationGui.php
 
@@ -7666,17 +7676,7 @@ parameters:
 			path: libraries/classes/Server/Status/Monitor.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Server\\\\Status\\\\Processes\\:\\:getList\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Server/Status/Processes.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Server\\\\Status\\\\Processes\\:\\:getList\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Server/Status/Processes.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Server\\\\Status\\\\Processes\\:\\:getSortableColumnsForProcessList\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Server/Status/Processes.php
 
@@ -7782,6 +7782,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Sql\\:\\:getDetailedProfilingStats\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Sql.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Sql\\:\\:getDetailedProfilingStats\\(\\) should return array\\<string, array\\|int\\> but returns array\\<string, array\\<int\\|string, mixed\\>\\|float\\|int\\>\\.$#"
 			count: 1
 			path: libraries/classes/Sql.php
 
@@ -7933,6 +7938,11 @@ parameters:
 		-
 			message: "#^Method PhpMyAdmin\\\\SystemDatabase\\:\\:getNewTransformationDataSql\\(\\) has parameter \\$columnMap with no value type specified in iterable type array\\.$#"
 			count: 1
+			path: libraries/classes/SystemDatabase.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:quoteString\\(\\) expects string, string\\|null given\\.$#"
+			count: 4
 			path: libraries/classes/SystemDatabase.php
 
 		-
@@ -8341,31 +8351,6 @@ parameters:
 			path: libraries/classes/Tracking.php
 
 		-
-			message: "#^Cannot access offset 'ddlog' on mixed\\.$#"
-			count: 4
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Cannot access offset 'schema_snapshot' on mixed\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Cannot access offset 'statement' on mixed\\.$#"
-			count: 4
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Cannot access offset 0 on mixed\\.$#"
-			count: 3
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Cannot access offset 1 on mixed\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tracking\\:\\:createTrackingForMultipleTables\\(\\) has parameter \\$selected with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
@@ -8501,11 +8486,6 @@ parameters:
 			path: libraries/classes/Tracking.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Tracking\\:\\:getHtmlForElementsOfTrackingReport\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tracking\\:\\:getHtmlForIndexes\\(\\) has parameter \\$indexes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
@@ -8561,23 +8541,33 @@ parameters:
 			path: libraries/classes/Tracking.php
 
 		-
+			message: "#^Offset 'statement' does not exist on array\\{date\\: string, username\\: string, statement\\: string\\}\\|string\\.$#"
+			count: 4
+			path: libraries/classes/Tracking.php
+
+		-
+			message: "#^Offset 0 does not exist on array\\<int, array\\{date\\: string, username\\: string, statement\\: string\\}\\>\\|string\\|null\\.$#"
+			count: 3
+			path: libraries/classes/Tracking.php
+
+		-
+			message: "#^Offset 1 does not exist on array\\<int, array\\{date\\: string, username\\: string, statement\\: string\\}\\>\\|string\\|null\\.$#"
+			count: 1
+			path: libraries/classes/Tracking.php
+
+		-
 			message: "#^Parameter \\#1 \\$columns of method PhpMyAdmin\\\\Tracking\\:\\:getHtmlForColumns\\(\\) expects array, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of static method PhpMyAdmin\\\\Core\\:\\:safeUnserialize\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$data of static method PhpMyAdmin\\\\Core\\:\\:safeUnserialize\\(\\) expects string, array\\<int, array\\<string, string\\>\\>\\|string\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
 
 		-
 			message: "#^Parameter \\#1 \\$dbName of static method PhpMyAdmin\\\\Tracker\\:\\:isTracked\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Parameter \\#1 \\$haystack of function mb_strstr expects string, mixed given\\.$#"
-			count: 2
 			path: libraries/classes/Tracking.php
 
 		-
@@ -8597,11 +8587,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Parameter \\#2 \\$sqlQuery of static method PhpMyAdmin\\\\Html\\\\Generator\\:\\:getMessage\\(\\) expects string\\|null, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
 
@@ -9076,7 +9061,7 @@ parameters:
 			path: test/classes/Command/SetVersionCommandTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$array_arg of function sort expects array, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$array_arg of function sort expects TArray of array\\<T\\>, mixed given\\.$#"
 			count: 2
 			path: test/classes/Command/TwigLintCommandTest.php
 
@@ -9277,6 +9262,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\ConfigTest\\:\\:userAgentProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/classes/ConfigTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$haystack of function mb_strstr expects string, array\\<string\\> given\\.$#"
 			count: 1
 			path: test/classes/ConfigTest.php
 
@@ -9829,6 +9819,11 @@ parameters:
 			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
 			count: 4
 			path: test/classes/Display/ResultsTest.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between 4 and 4 will always evaluate to true\\.$#"
+			count: 1
+			path: test/classes/EncodingTest.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Engines\\\\PbxtTest\\:\\:providerFortTestResolveTypeSize\\(\\) return type has no value type specified in iterable type array\\.$#"

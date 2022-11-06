@@ -386,13 +386,7 @@ class DatabaseInterface implements DbalInterface
 
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
             $sqlWhereTable = QueryGenerator::getTableCondition(
-                is_array($table) ? array_map(
-                    [
-                        $this,
-                        'escapeString',
-                    ],
-                    $table
-                ) : $this->escapeString($table),
+                is_array($table) ? array_map([$this, 'escapeString'], $table) : $this->escapeString($table),
                 $tableIsGroup,
                 $tableType
             );
@@ -491,18 +485,18 @@ class DatabaseInterface implements DbalInterface
                 $needAnd = false;
                 if ($table || ($tableIsGroup === true)) {
                     if (is_array($table)) {
-                        $sql .= ' `Name` IN (\''
+                        $sql .= ' `Name` IN ('
                             . implode(
-                                '\', \'',
+                                ', ',
                                 array_map(
                                     [
                                         $this,
-                                        'escapeString',
+                                        'quoteString',
                                     ],
                                     $table,
                                     $link
                                 )
-                            ) . '\')';
+                            ) . ')';
                     } else {
                         $sql .= " `Name` LIKE '"
                             . $this->escapeMysqlLikeString($table, $link)
@@ -837,11 +831,12 @@ class DatabaseInterface implements DbalInterface
         $link = self::CONNECT_USER
     ): array {
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
-            [$sql, $arrayKeys] = QueryGenerator::getInformationSchemaColumnsFullRequest(
-                $database !== null ? $this->escapeString($database, $link) : null,
-                $table !== null ? $this->escapeString($table, $link) : null,
-                $column !== null ? $this->escapeString($column, $link) : null
+            $sql = QueryGenerator::getInformationSchemaColumnsFullRequest(
+                $database !== null ? $this->quoteString($database, $link) : null,
+                $table !== null ? $this->quoteString($table, $link) : null,
+                $column !== null ? $this->quoteString($column, $link) : null
             );
+            $arrayKeys = QueryGenerator::getInformationSchemaColumns($database, $table, $column);
 
             return $this->fetchResult($sql, $arrayKeys, null, $link);
         }
@@ -1127,9 +1122,7 @@ class DatabaseInterface implements DbalInterface
         // Set timezone for the session, if required.
         if ($GLOBALS['cfg']['Server']['SessionTimeZone'] != '') {
             $sqlQueryTz = 'SET ' . Util::backquote('time_zone') . ' = '
-                . '\''
-                . $this->escapeString($GLOBALS['cfg']['Server']['SessionTimeZone'])
-                . '\'';
+                . $this->quoteString($GLOBALS['cfg']['Server']['SessionTimeZone']);
 
             if (! $this->tryQuery($sqlQueryTz)) {
                 $errorMessageTz = sprintf(
@@ -1172,9 +1165,9 @@ class DatabaseInterface implements DbalInterface
         }
 
         $result = $this->tryQuery(
-            "SET collation_connection = '"
-            . $this->escapeString($collation)
-            . "';"
+            'SET collation_connection = '
+            . $this->quoteString($collation)
+            . ';'
         );
 
         if ($result === false) {
@@ -1894,7 +1887,24 @@ class DatabaseInterface implements DbalInterface
     }
 
     /**
+     * Returns properly quoted string for use in MySQL queries.
+     *
+     * @param string $str  string to be quoted
+     * @param mixed  $link optional database link to use
+     *
+     * @psalm-return non-empty-string
+     *
+     * @psalm-taint-escape sql
+     */
+    public function quoteString(string $str, $link = self::CONNECT_USER): string
+    {
+        return "'" . $this->extension->escapeString($this->links[$link], $str) . "'";
+    }
+
+    /**
      * returns properly escaped string for use in MySQL queries
+     *
+     * @deprecated Use {@see quoteString()} instead.
      *
      * @param string $str  string to be escaped
      * @param mixed  $link optional database link to use
@@ -1991,8 +2001,8 @@ class DatabaseInterface implements DbalInterface
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
             // this is slow with thousands of databases
             $sql = 'SELECT DEFAULT_COLLATION_NAME FROM information_schema.SCHEMATA'
-                . ' WHERE SCHEMA_NAME = \'' . $this->escapeString($db)
-                . '\' LIMIT 1';
+                . ' WHERE SCHEMA_NAME = ' . $this->quoteString($db)
+                . ' LIMIT 1';
 
             return (string) $this->fetchValue($sql);
         }
@@ -2081,15 +2091,6 @@ class DatabaseInterface implements DbalInterface
     {
         if ($extension !== null) {
             return new self($extension);
-        }
-
-        if (! Util::checkDbExtension('mysqli')) {
-            $docLink = sprintf(
-                __('See %sour documentation%s for more information.'),
-                '[doc@faqmysql]',
-                '[/doc]'
-            );
-            Core::warnMissingExtension('mysqli', true, $docLink);
         }
 
         return new self(new DbiMysqli());

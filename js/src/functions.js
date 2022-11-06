@@ -1145,7 +1145,7 @@ Functions.updateQueryParameters = function () {
  */
 Functions.getForeignKeyCheckboxLoader = function () {
     var html = '';
-    html += '<div>';
+    html += '<div class="mt-1 mb-2">';
     html += '<div class="load-default-fk-check-value">';
     html += Functions.getImage('ajax_clock_small');
     html += '</div>';
@@ -2978,6 +2978,9 @@ Functions.onloadEnumSetEditor = function () {
         }
         var buttonOptions = {};
         var $centralColumnsDialog = $(centralColumnsDialog).dialog({
+            classes: {
+                'ui-dialog-titlebar-close': 'btn-close'
+            },
             minWidth: width,
             maxHeight: 450,
             modal: true,

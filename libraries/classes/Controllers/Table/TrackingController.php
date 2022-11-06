@@ -20,6 +20,7 @@ use function array_map;
 use function define;
 use function explode;
 use function htmlspecialchars;
+use function in_array;
 use function is_array;
 use function sprintf;
 use function strtotime;
@@ -44,14 +45,10 @@ final class TrackingController extends AbstractController
         $GLOBALS['urlParams'] = $GLOBALS['urlParams'] ?? null;
         $GLOBALS['msg'] = $GLOBALS['msg'] ?? null;
         $GLOBALS['errorUrl'] = $GLOBALS['errorUrl'] ?? null;
-        $GLOBALS['data'] = $GLOBALS['data'] ?? null;
         $GLOBALS['entries'] = $GLOBALS['entries'] ?? null;
         $GLOBALS['filter_ts_from'] = $GLOBALS['filter_ts_from'] ?? null;
         $GLOBALS['filter_ts_to'] = $GLOBALS['filter_ts_to'] ?? null;
         $GLOBALS['filter_users'] = $GLOBALS['filter_users'] ?? null;
-        $GLOBALS['selection_schema'] = $GLOBALS['selection_schema'] ?? null;
-        $GLOBALS['selection_data'] = $GLOBALS['selection_data'] ?? null;
-        $GLOBALS['selection_both'] = $GLOBALS['selection_both'] ?? null;
 
         $this->addScriptFiles(['vendor/jquery/jquery.tablesorter.js', 'table/tracking.js']);
 
@@ -87,43 +84,36 @@ final class TrackingController extends AbstractController
         $GLOBALS['urlParams']['goto'] = Url::getFromRoute('/table/tracking');
         $GLOBALS['urlParams']['back'] = Url::getFromRoute('/table/tracking');
 
-        $GLOBALS['data'] = [];
+        $trackedData = [];
         $GLOBALS['entries'] = [];
         $GLOBALS['filter_ts_from'] = null;
         $GLOBALS['filter_ts_to'] = null;
         $GLOBALS['filter_users'] = [];
-        $GLOBALS['selection_schema'] = false;
-        $GLOBALS['selection_data'] = false;
-        $GLOBALS['selection_both'] = false;
 
-        $report = $request->getParsedBodyParam('report');
+        $report = $request->hasBodyParam('report');
         /** @var string $versionParam */
         $versionParam = $request->getParsedBodyParam('version');
         /** @var string $tableParam */
         $tableParam = $request->getParsedBodyParam('table');
 
+        $logType = $this->validateLogTypeParam($request->getParsedBodyParam('log_type'));
+
+        $dateFrom = '';
+        $dateTo = '';
+        $users = '';
+
         // Init vars for tracking report
-        if ($report !== null || $reportExport !== null) {
-            $GLOBALS['data'] = Tracker::getTrackedData(
+        if ($report || $reportExport !== null) {
+            $trackedData = Tracker::getTrackedData(
                 $GLOBALS['db'],
                 $GLOBALS['table'],
                 $versionParam
             );
 
-            $logType = $request->getParsedBodyParam('logtype', 'schema_and_data');
-
-            if ($logType === 'schema') {
-                $GLOBALS['selection_schema'] = true;
-            } elseif ($logType === 'data') {
-                $GLOBALS['selection_data'] = true;
-            } else {
-                $GLOBALS['selection_both'] = true;
-            }
-
             /** @var string $dateFrom */
-            $dateFrom = $request->getParsedBodyParam('date_from', $GLOBALS['data']['date_from']);
+            $dateFrom = $request->getParsedBodyParam('date_from', $trackedData['date_from']);
             /** @var string $dateTo */
-            $dateTo = $request->getParsedBodyParam('date_to', $GLOBALS['data']['date_to']);
+            $dateTo = $request->getParsedBodyParam('date_to', $trackedData['date_to']);
             /** @var string $users */
             $users = $request->getParsedBodyParam('users', '*');
 
@@ -135,11 +125,11 @@ final class TrackingController extends AbstractController
         // Prepare export
         if ($reportExport !== null) {
             $GLOBALS['entries'] = $this->tracking->getEntries(
-                $GLOBALS['data'],
+                $trackedData,
                 (int) $GLOBALS['filter_ts_from'],
                 (int) $GLOBALS['filter_ts_to'],
                 $GLOBALS['filter_users'],
-                $_POST['logtype']
+                $logType
             );
         }
 
@@ -170,7 +160,7 @@ final class TrackingController extends AbstractController
         }
 
         $deleteVersion = '';
-        if ($request->getParsedBodyParam('submit_delete_version') !== null) {
+        if ($request->hasBodyParam('submit_delete_version')) {
             $deleteVersion = $this->tracking->deleteTrackingVersion(
                 $GLOBALS['db'],
                 $GLOBALS['table'],
@@ -179,7 +169,7 @@ final class TrackingController extends AbstractController
         }
 
         $createVersion = '';
-        if ($request->getParsedBodyParam('submit_create_version') !== null) {
+        if ($request->hasBodyParam('submit_create_version')) {
             $createVersion = $this->tracking->createTrackingVersion(
                 $GLOBALS['db'],
                 $GLOBALS['table'],
@@ -220,7 +210,7 @@ final class TrackingController extends AbstractController
         }
 
         $schemaSnapshot = '';
-        if ($request->getParsedBodyParam('snapshot') !== null) {
+        if ($request->hasBodyParam('snapshot')) {
             /** @var string $db */
             $db = $request->getParsedBodyParam('db');
             $schemaSnapshot = $this->tracking->getHtmlForSchemaSnapshot(
@@ -232,32 +222,30 @@ final class TrackingController extends AbstractController
         }
 
         $trackingReportRows = '';
-        if (
-            $report !== null
-            && ($request->getParsedBodyParam('delete_ddlog') !== null
-                || $request->getParsedBodyParam('delete_dmlog') !== null)
-        ) {
+        if ($report && ($request->hasBodyParam('delete_ddlog') || $request->hasBodyParam('delete_dmlog'))) {
             $trackingReportRows = $this->tracking->deleteTrackingReportRows(
                 $GLOBALS['db'],
                 $GLOBALS['table'],
                 $versionParam,
-                $GLOBALS['data'],
-                isset($_POST['delete_ddlog']),
-                isset($_POST['delete_dmlog'])
+                $trackedData,
+                $request->hasBodyParam('delete_ddlog'),
+                $request->hasBodyParam('delete_dmlog')
             );
         }
 
         $trackingReport = '';
-        if ($report !== null || $reportExport !== null) {
+        if ($report || $reportExport !== null) {
             $trackingReport = $this->tracking->getHtmlForTrackingReport(
-                $GLOBALS['data'],
+                $trackedData,
                 $GLOBALS['urlParams'],
-                $GLOBALS['selection_schema'],
-                $GLOBALS['selection_data'],
-                $GLOBALS['selection_both'],
+                $logType,
                 (int) $GLOBALS['filter_ts_to'],
                 (int) $GLOBALS['filter_ts_from'],
-                $GLOBALS['filter_users']
+                $GLOBALS['filter_users'],
+                $versionParam,
+                $dateFrom,
+                $dateTo,
+                $users
             );
         }
 
@@ -282,5 +270,15 @@ final class TrackingController extends AbstractController
             'tracking_report' => $trackingReport,
             'main' => $main,
         ]);
+    }
+
+    /**
+     * @param mixed $param
+     *
+     * @psalm-return 'schema'|'data'|'schema_and_data'
+     */
+    private function validateLogTypeParam($param): string
+    {
+        return in_array($param, ['schema', 'data'], true) ? $param : 'schema_and_data';
     }
 }

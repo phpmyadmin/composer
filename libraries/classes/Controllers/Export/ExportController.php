@@ -109,8 +109,7 @@ final class ExportController extends AbstractController
         $onServerParam = $request->getParsedBodyParam('onserver');
         /** @var array|null $aliasesParam */
         $aliasesParam = $request->getParsedBodyParam('aliases');
-        /** @var string|null $structureOrDataForced */
-        $structureOrDataForced = $request->getParsedBodyParam('structure_or_data_forced');
+        $structureOrDataForced = $request->hasBodyParam('structure_or_data_forced');
 
         $this->addScriptFiles(['export_output.js']);
 
@@ -129,7 +128,10 @@ final class ExportController extends AbstractController
 
         // Check export type
         if (empty($GLOBALS['export_plugin'])) {
-            Core::fatalError(__('Bad type!'));
+            $this->response->setRequestStatus(false);
+            $this->response->addHTML(Message::error(__('Bad type!'))->getDisplay());
+
+            return;
         }
 
         /**
@@ -221,7 +223,10 @@ final class ExportController extends AbstractController
         } elseif ($GLOBALS['export_type'] === 'raw') {
             $GLOBALS['errorUrl'] = Url::getFromRoute('/server/export', ['sql_query' => $GLOBALS['sql_query']]);
         } else {
-            Core::fatalError(__('Bad parameters!'));
+            $this->response->setRequestStatus(false);
+            $this->response->addHTML(Message::error(__('Bad parameters!'))->getDisplay());
+
+            return;
         }
 
         // Merge SQL Query aliases with Export aliases from

@@ -13,6 +13,7 @@ use PhpMyAdmin\Controllers\Table\ExportController as TableExportController;
 use PhpMyAdmin\Dbal\DatabaseName;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\SchemaPlugin;
+use RuntimeException;
 
 use function __;
 use function array_filter;
@@ -729,8 +730,8 @@ class Export
                         // This obtains the current table's size
                         $query = 'SELECT data_length + index_length
                               from information_schema.TABLES
-                              WHERE table_schema = "' . $this->dbi->escapeString($db->getName()) . '"
-                              AND table_name = "' . $this->dbi->escapeString($table) . '"';
+                              WHERE table_schema = ' . $this->dbi->quoteString($db->getName()) . '
+                              AND table_name = ' . $this->dbi->quoteString($table);
 
                         $size = (int) $this->dbi->fetchValue($query);
                         //Converting the size to MB
@@ -1259,7 +1260,7 @@ class Export
 
         // Check schema export type
         if ($exportPlugin === null) {
-            Core::fatalError(__('Bad type!'));
+            throw new RuntimeException(__('Bad type!'));
         }
 
         $this->dbi->selectDb($_POST['db']);

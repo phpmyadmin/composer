@@ -813,7 +813,7 @@ return [
         ],
         SchemaExportController::class => [
             'class' => SchemaExportController::class,
-            'arguments' => ['$export' => '@export'],
+            'arguments' => ['$export' => '@export', '$response' => '@response'],
         ],
         Server\BinlogController::class => [
             'class' => Server\BinlogController::class,
@@ -1115,7 +1115,6 @@ return [
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
-                '$sql' => '@sql',
                 '$checkUserPrivileges' => '@check_user_privileges',
                 '$dbi' => '@dbi',
             ],

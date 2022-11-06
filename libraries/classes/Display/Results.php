@@ -50,6 +50,7 @@ use function implode;
 use function in_array;
 use function intval;
 use function is_array;
+use function is_int;
 use function is_numeric;
 use function json_encode;
 use function max;
@@ -738,9 +739,12 @@ class Results
                 : 'false') . ';"';
 
         $hasRealEndInput = $isInnodb && $this->properties['unlim_num_rows'] > $GLOBALS['cfg']['MaxExactCount'];
-        $posLast = @((int) ceil(
-            (int) $this->properties['unlim_num_rows'] / $_SESSION['tmpval']['max_rows']
-        ) - 1) * intval($_SESSION['tmpval']['max_rows']);
+        $posLast = 0;
+        if (is_numeric($_SESSION['tmpval']['max_rows'])) {
+            $posLast = @((int) ceil(
+                (int) $this->properties['unlim_num_rows'] / $_SESSION['tmpval']['max_rows']
+            ) - 1) * intval($_SESSION['tmpval']['max_rows']);
+        }
 
         $hiddenFields = [
             'db' => $this->properties['db'],
@@ -3572,22 +3576,22 @@ class Results
     }
 
     /**
-     * Get offsets for next page and previous page
+     * Gets offsets for next page and previous page.
      *
-     * @see    getTable()
-     *
-     * @return int[] array with two elements - $pos_next, $pos_prev
+     * @return array<int, int>
+     * @psalm-return array{int, int}
      */
-    private function getOffsets()
+    private function getOffsets(): array
     {
-        if ($_SESSION['tmpval']['max_rows'] === self::ALL_ROWS) {
+        $tempVal = isset($_SESSION['tmpval']) && is_array($_SESSION['tmpval']) ? $_SESSION['tmpval'] : [];
+        if (isset($tempVal['max_rows']) && $tempVal['max_rows'] === self::ALL_ROWS) {
             return [0, 0];
         }
 
-        return [
-            $_SESSION['tmpval']['pos'] + $_SESSION['tmpval']['max_rows'],
-            max(0, $_SESSION['tmpval']['pos'] - $_SESSION['tmpval']['max_rows']),
-        ];
+        $pos = isset($tempVal['pos']) && is_int($tempVal['pos']) ? $tempVal['pos'] : 0;
+        $maxRows = isset($tempVal['max_rows']) && is_int($tempVal['max_rows']) ? $tempVal['max_rows'] : 25;
+
+        return [$pos + $maxRows, max(0, $pos - $maxRows)];
     }
 
     /**
