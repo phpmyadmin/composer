@@ -205,24 +205,15 @@ class Table implements Stringable
     /**
      * Checks the storage engine used to create table
      *
-     * @param array|string $engine Checks the table engine against an
+     * @param string[]|string $engine Checks the table engine against an
      *                             array of engine strings or a single string, should be uppercase
      */
     public function isEngine($engine): bool
     {
+        $engine = (array) $engine;
         $tableStorageEngine = $this->getStorageEngine();
 
-        if (is_array($engine)) {
-            foreach ($engine as $e) {
-                if ($e == $tableStorageEngine) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        return $tableStorageEngine == $engine;
+        return in_array($tableStorageEngine, $engine, true);
     }
 
     /**
@@ -362,9 +353,6 @@ class Table implements Stringable
     public function getStorageEngine(): string
     {
         $tableStorageEngine = $this->getStatusInfo('ENGINE', false, true);
-        if ($tableStorageEngine === false) {
-            return '';
-        }
 
         return strtoupper((string) $tableStorageEngine);
     }
@@ -2110,11 +2098,11 @@ class Table implements Stringable
                 }
 
                 $sqlQuery .= sprintf(
-                    ' ADD %s ',
+                    ' ADD %s',
                     $index->getChoice()
                 );
                 if ($index->getName()) {
-                    $sqlQuery .= Util::backquote($index->getName());
+                    $sqlQuery .= ' ' . Util::backquote($index->getName());
                 }
 
                 break;
@@ -2130,18 +2118,15 @@ class Table implements Stringable
             $indexFields[$key] .= '(' . $column->getSubPart() . ')';
         }
 
-        if (empty($indexFields)) {
+        if ($indexFields === []) {
             $error = Message::error(__('No index parts defined!'));
         } else {
             $sqlQuery .= ' (' . implode(', ', $indexFields) . ')';
         }
 
         $keyBlockSizes = $index->getKeyBlockSize();
-        if (! empty($keyBlockSizes)) {
-            $sqlQuery .= sprintf(
-                ' KEY_BLOCK_SIZE = %s',
-                $this->dbi->escapeString((string) $keyBlockSizes)
-            );
+        if ($keyBlockSizes !== 0) {
+            $sqlQuery .= ' KEY_BLOCK_SIZE = ' . $keyBlockSizes;
         }
 
         // specifying index type is allowed only for primary, unique and index only
@@ -2152,21 +2137,21 @@ class Table implements Stringable
             $index->getChoice() !== 'SPATIAL'
             && $index->getChoice() !== 'FULLTEXT'
             && in_array($type, Index::getIndexTypes())
-            && ! $this->isEngine(['TOKUDB'])
+            && ! $this->isEngine('TOKUDB')
         ) {
             $sqlQuery .= ' USING ' . $type;
         }
 
         $parser = $index->getParser();
-        if ($index->getChoice() === 'FULLTEXT' && ! empty($parser)) {
-            $sqlQuery .= ' WITH PARSER ' . $this->dbi->escapeString($parser);
+        if ($index->getChoice() === 'FULLTEXT' && $parser !== '') {
+            $sqlQuery .= ' WITH PARSER ' . $parser;
         }
 
         $comment = $index->getComment();
-        if (! empty($comment)) {
+        if ($comment !== '') {
             $sqlQuery .= sprintf(
-                " COMMENT '%s'",
-                $this->dbi->escapeString($comment)
+                ' COMMENT %s',
+                $this->dbi->quoteString($comment)
             );
         }
 
@@ -2548,17 +2533,16 @@ class Table implements Stringable
             && $this->dbi->getVersion() > 50705
             && ! $GLOBALS['cfg']['Server']['DisableIS']
         ) {
-            $sql = "SELECT
+            $sql = 'SELECT
                 `COLUMN_NAME` AS `Field`,
                 `GENERATION_EXPRESSION` AS `Expression`
                 FROM
                 `information_schema`.`COLUMNS`
                 WHERE
-                `TABLE_SCHEMA` = '" . $this->dbi->escapeString($this->dbName) . "'
-                AND `TABLE_NAME` = '" . $this->dbi->escapeString($this->name) . "'";
+                `TABLE_SCHEMA` = ' . $this->dbi->quoteString($this->dbName) . '
+                AND `TABLE_NAME` = ' . $this->dbi->quoteString($this->name);
             if ($column != null) {
-                $sql .= " AND  `COLUMN_NAME` = '" . $this->dbi->escapeString($column)
-                    . "'";
+                $sql .= ' AND  `COLUMN_NAME` = ' . $this->dbi->quoteString($column);
             }
 
             return $this->dbi->fetchResult($sql, 'Field', 'Expression');

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Table;
 
+use DateTimeImmutable;
 use PhpMyAdmin\Controllers\AbstractController;
+use PhpMyAdmin\Core;
 use PhpMyAdmin\DbTableExists;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Message;
@@ -14,6 +16,8 @@ use PhpMyAdmin\Tracker;
 use PhpMyAdmin\Tracking;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use Throwable;
+use Webmozart\Assert\Assert;
 
 use function __;
 use function array_map;
@@ -22,8 +26,8 @@ use function explode;
 use function htmlspecialchars;
 use function in_array;
 use function is_array;
+use function mb_strlen;
 use function sprintf;
-use function strtotime;
 
 final class TrackingController extends AbstractController
 {
@@ -46,8 +50,6 @@ final class TrackingController extends AbstractController
         $GLOBALS['msg'] = $GLOBALS['msg'] ?? null;
         $GLOBALS['errorUrl'] = $GLOBALS['errorUrl'] ?? null;
         $GLOBALS['entries'] = $GLOBALS['entries'] ?? null;
-        $GLOBALS['filter_ts_from'] = $GLOBALS['filter_ts_from'] ?? null;
-        $GLOBALS['filter_ts_to'] = $GLOBALS['filter_ts_to'] ?? null;
         $GLOBALS['filter_users'] = $GLOBALS['filter_users'] ?? null;
 
         $this->addScriptFiles(['vendor/jquery/jquery.tablesorter.js', 'table/tracking.js']);
@@ -86,8 +88,6 @@ final class TrackingController extends AbstractController
 
         $trackedData = [];
         $GLOBALS['entries'] = [];
-        $GLOBALS['filter_ts_from'] = null;
-        $GLOBALS['filter_ts_to'] = null;
         $GLOBALS['filter_users'] = [];
 
         $report = $request->hasBodyParam('report');
@@ -98,8 +98,8 @@ final class TrackingController extends AbstractController
 
         $logType = $this->validateLogTypeParam($request->getParsedBodyParam('log_type'));
 
-        $dateFrom = '';
-        $dateTo = '';
+        $dateFrom = null;
+        $dateTo = null;
         $users = '';
 
         // Init vars for tracking report
@@ -110,32 +110,39 @@ final class TrackingController extends AbstractController
                 $versionParam
             );
 
-            /** @var string $dateFrom */
-            $dateFrom = $request->getParsedBodyParam('date_from', $trackedData['date_from']);
-            /** @var string $dateTo */
-            $dateTo = $request->getParsedBodyParam('date_to', $trackedData['date_to']);
+            $dateFrom = $this->validateDateTimeParam(
+                $request->getParsedBodyParam('date_from', $trackedData['date_from'])
+            );
+            $dateTo = $this->validateDateTimeParam($request->getParsedBodyParam('date_to', $trackedData['date_to']));
+
             /** @var string $users */
             $users = $request->getParsedBodyParam('users', '*');
 
-            $GLOBALS['filter_ts_from'] = strtotime($dateFrom);
-            $GLOBALS['filter_ts_to'] = strtotime($dateTo);
             $GLOBALS['filter_users'] = array_map('trim', explode(',', $users));
         }
+
+        $dateFrom = $dateFrom ?? new DateTimeImmutable();
+        $dateTo = $dateTo ?? new DateTimeImmutable();
 
         // Prepare export
         if ($reportExport !== null) {
             $GLOBALS['entries'] = $this->tracking->getEntries(
                 $trackedData,
-                (int) $GLOBALS['filter_ts_from'],
-                (int) $GLOBALS['filter_ts_to'],
                 $GLOBALS['filter_users'],
-                $logType
+                $logType,
+                $dateFrom,
+                $dateTo
             );
         }
 
         // Export as file download
         if ($reportExport !== null && $request->getParsedBodyParam('export_type') === 'sqldumpfile') {
-            $this->tracking->exportAsFileDownload($tableParam, $GLOBALS['entries']);
+            $downloadInfo = $this->tracking->getDownloadInfoForExport($tableParam, $GLOBALS['entries']);
+            $this->response->disable();
+            Core::downloadHeader($downloadInfo['filename'], 'text/x-sql', mb_strlen($downloadInfo['dump']));
+            echo $downloadInfo['dump'];
+
+            return;
         }
 
         $actionMessage = '';
@@ -239,8 +246,6 @@ final class TrackingController extends AbstractController
                 $trackedData,
                 $GLOBALS['urlParams'],
                 $logType,
-                (int) $GLOBALS['filter_ts_to'],
-                (int) $GLOBALS['filter_ts_from'],
                 $GLOBALS['filter_users'],
                 $versionParam,
                 $dateFrom,
@@ -280,5 +285,19 @@ final class TrackingController extends AbstractController
     private function validateLogTypeParam($param): string
     {
         return in_array($param, ['schema', 'data'], true) ? $param : 'schema_and_data';
+    }
+
+    /**
+     * @param mixed $param
+     */
+    private function validateDateTimeParam($param): DateTimeImmutable
+    {
+        try {
+            Assert::stringNotEmpty($param);
+
+            return new DateTimeImmutable($param);
+        } catch (Throwable $exception) {
+            return new DateTimeImmutable();
+        }
     }
 }

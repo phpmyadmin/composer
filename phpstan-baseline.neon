@@ -1391,9 +1391,19 @@ parameters:
 			path: libraries/classes/Controllers/Preferences/ManageController.php
 
 		-
-			message: "#^Parameter \\#1 \\$exportType of method PhpMyAdmin\\\\Export\\:\\:processExportSchema\\(\\) expects string\\|null, mixed given\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
-			path: libraries/classes/Controllers/SchemaExportController.php
+			path: libraries/classes/Controllers/Server/BinlogController.php
+
+		-
+			message: "#^Parameter \\#1 \\$key of function array_key_exists expects int\\|string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/BinlogController.php
+
+		-
+			message: "#^Parameter \\#1 \\$log of method PhpMyAdmin\\\\Controllers\\\\Server\\\\BinlogController\\:\\:getSqlQuery\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Server/BinlogController.php
 
 		-
 			message: "#^Property PhpMyAdmin\\\\Controllers\\\\Server\\\\BinlogController\\:\\:\\$binaryLogs type has no value type specified in iterable type array\\.$#"
@@ -1729,21 +1739,6 @@ parameters:
 			message: "#^Property PhpMyAdmin\\\\SqlParser\\\\Statements\\\\CreateStatement\\:\\:\\$subpartitionsNum \\(int\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/Structure/PartitioningController.php
-
-		-
-			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/PrimaryController.php
-
-		-
-			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/PrimaryController.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Table/Structure/PrimaryController.php
 
 		-
 			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
@@ -3512,11 +3507,6 @@ parameters:
 
 		-
 			message: "#^Property PhpMyAdmin\\\\Export\\:\\:\\$dumpBufferObjects type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Export.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between PhpMyAdmin\\\\Plugins\\\\SchemaPlugin and null will always evaluate to false\\.$#"
 			count: 1
 			path: libraries/classes/Export.php
 
@@ -8081,11 +8071,6 @@ parameters:
 			path: libraries/classes/Table.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:isEngine\\(\\) has parameter \\$engine with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:updateForeignKeys\\(\\) has parameter \\$destinationForeignColumn with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
@@ -8366,11 +8351,6 @@ parameters:
 			path: libraries/classes/Tracking.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Tracking\\:\\:exportAsFileDownload\\(\\) has parameter \\$entries with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tracking\\:\\:exportAsSqlDump\\(\\) has parameter \\$entries with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
@@ -8577,11 +8557,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:escapeString\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: libraries/classes/Tracking.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, string\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Tracking.php
 

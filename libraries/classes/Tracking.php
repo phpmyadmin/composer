@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use DateTimeImmutable;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Html\Generator;
@@ -26,7 +27,6 @@ use function mb_strstr;
 use function preg_replace;
 use function rtrim;
 use function sprintf;
-use function strlen;
 use function strtotime;
 
 use const SORT_ASC;
@@ -63,18 +63,16 @@ class Tracking
     /**
      * Filters tracking entries
      *
-     * @param array $data           the entries to filter
-     * @param int   $filter_ts_from "from" date
-     * @param int   $filter_ts_to   "to" date
-     * @param array $filter_users   users
+     * @param array $data         the entries to filter
+     * @param array $filter_users users
      *
      * @return array filtered entries
      */
     public function filter(
         array $data,
-        $filter_ts_from,
-        $filter_ts_to,
-        array $filter_users
+        array $filter_users,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
     ): array {
         $tmp_entries = [];
         $id = 0;
@@ -82,8 +80,8 @@ class Tracking
             $timestamp = strtotime($entry['date']);
             $filtered_user = in_array($entry['username'], $filter_users);
             if (
-                $timestamp >= $filter_ts_from
-                && $timestamp <= $filter_ts_to
+                $timestamp >= $dateFrom->getTimestamp()
+                && $timestamp <= $dateTo->getTimestamp()
                 && (in_array('*', $filter_users) || $filtered_user)
             ) {
                 $tmp_entries[] = [
@@ -209,11 +207,9 @@ class Tracking
     /**
      * Function to get html for tracking report and tracking report export
      *
-     * @param array $data           data
-     * @param array $url_params     url params
-     * @param int   $filter_ts_to   filter time stamp from
-     * @param int   $filter_ts_from filter time stamp tp
-     * @param array $filter_users   filter users
+     * @param array $data         data
+     * @param array $url_params   url params
+     * @param array $filter_users filter users
      * @psalm-param 'schema'|'data'|'schema_and_data' $logType
      *
      * @return string
@@ -222,12 +218,10 @@ class Tracking
         array $data,
         array $url_params,
         string $logType,
-        $filter_ts_to,
-        $filter_ts_from,
         array $filter_users,
         string $version,
-        string $dateFrom,
-        string $dateTo,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo,
         string $users
     ) {
         $html = '<h3>' . __('Tracking report')
@@ -268,8 +262,6 @@ class Tracking
             $data,
             $url_params,
             $logType,
-            $filter_ts_to,
-            $filter_ts_from,
             $filter_users,
             $str1,
             $str2,
@@ -277,7 +269,9 @@ class Tracking
             $str4,
             $str5,
             $drop_image_or_text,
-            $version
+            $version,
+            $dateFrom,
+            $dateTo
         );
 
         $html .= $this->getHtmlForTrackingReportExportForm2(
@@ -308,8 +302,8 @@ class Tracking
      */
     public function getHtmlForElementsOfTrackingReport(
         string $logType,
-        string $dateFrom,
-        string $dateTo,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo,
         string $users
     ): array {
         $str1 = '<select name="log_type">'
@@ -324,9 +318,9 @@ class Tracking
             . __('Structure and data') . '</option>'
             . '</select>';
         $str2 = '<input type="text" name="date_from" value="'
-            . htmlspecialchars($dateFrom) . '" size="19">';
+            . htmlspecialchars($dateFrom->format('Y-m-d H:i:s')) . '" size="19">';
         $str3 = '<input type="text" name="date_to" value="'
-            . htmlspecialchars($dateTo) . '" size="19">';
+            . htmlspecialchars($dateTo->format('Y-m-d H:i:s')) . '" size="19">';
         $str4 = '<input type="text" name="users" value="'
             . htmlspecialchars($users) . '">';
         $str5 = '<input type="hidden" name="list_report" value="1">'
@@ -346,8 +340,6 @@ class Tracking
      *
      * @param array  $data               data
      * @param array  $url_params         url params
-     * @param int    $filter_ts_to       filter time stamp from
-     * @param int    $filter_ts_from     filter time stamp tp
      * @param array  $filter_users       filter users
      * @param string $str1               HTML for log_type select
      * @param string $str2               HTML for "from date"
@@ -363,8 +355,6 @@ class Tracking
         array $data,
         array $url_params,
         string $logType,
-        $filter_ts_to,
-        $filter_ts_from,
         array $filter_users,
         $str1,
         $str2,
@@ -372,7 +362,9 @@ class Tracking
         $str4,
         $str5,
         $drop_image_or_text,
-        string $version
+        string $version,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
     ) {
         $ddlog_count = 0;
 
@@ -395,11 +387,11 @@ class Tracking
             [$temp, $ddlog_count] = $this->getHtmlForDataDefinitionStatements(
                 $data,
                 $filter_users,
-                $filter_ts_from,
-                $filter_ts_to,
                 $url_params,
                 $drop_image_or_text,
-                $version
+                $version,
+                $dateFrom,
+                $dateTo
             );
             $html .= $temp;
             unset($temp);
@@ -410,12 +402,12 @@ class Tracking
             $html .= $this->getHtmlForDataManipulationStatements(
                 $data,
                 $filter_users,
-                $filter_ts_from,
-                $filter_ts_to,
                 $url_params,
                 $ddlog_count,
                 $drop_image_or_text,
-                $version
+                $version,
+                $dateFrom,
+                $dateTo
             );
         }
 
@@ -446,8 +438,8 @@ class Tracking
         $str5,
         string $logType,
         string $version,
-        string $dateFrom,
-        string $dateTo,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo,
         string $users
     ) {
         $html = '<form method="post" action="' . Url::getFromRoute('/table/tracking') . '">';
@@ -471,8 +463,8 @@ class Tracking
             'report' => 'true',
             'version' => $version,
             'log_type' => $logType,
-            'date_from' => $dateFrom,
-            'date_to' => $dateTo,
+            'date_from' => $dateFrom->format('Y-m-d H:i:s'),
+            'date_to' => $dateTo->format('Y-m-d H:i:s'),
             'users' => $users,
             'report_export' => 'true',
         ]);
@@ -501,8 +493,6 @@ class Tracking
      *
      * @param array  $data               data
      * @param array  $filter_users       filter users
-     * @param int    $filter_ts_from     filter time staml from
-     * @param int    $filter_ts_to       filter time stamp to
      * @param array  $url_params         url parameters
      * @param int    $ddlog_count        data definition log count
      * @param string $drop_image_or_text drop image or text
@@ -512,26 +502,26 @@ class Tracking
     public function getHtmlForDataManipulationStatements(
         array $data,
         array $filter_users,
-        $filter_ts_from,
-        $filter_ts_to,
         array $url_params,
         $ddlog_count,
         $drop_image_or_text,
-        string $version
+        string $version,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
     ) {
         // no need for the second returned parameter
         [$html] = $this->getHtmlForDataStatements(
             $data,
             $filter_users,
-            $filter_ts_from,
-            $filter_ts_to,
             $url_params,
             $drop_image_or_text,
             'dmlog',
             __('Data manipulation statement'),
             $ddlog_count,
             'dml_versions',
-            $version
+            $version,
+            $dateFrom,
+            $dateTo
         );
 
         return $html;
@@ -542,8 +532,6 @@ class Tracking
      *
      * @param array  $data               data
      * @param array  $filter_users       filter users
-     * @param int    $filter_ts_from     filter time stamp from
-     * @param int    $filter_ts_to       filter time stamp to
      * @param array  $url_params         url parameters
      * @param string $drop_image_or_text drop image or text
      *
@@ -552,24 +540,24 @@ class Tracking
     public function getHtmlForDataDefinitionStatements(
         array $data,
         array $filter_users,
-        $filter_ts_from,
-        $filter_ts_to,
         array $url_params,
         $drop_image_or_text,
-        string $version
+        string $version,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
     ) {
         [$html, $line_number] = $this->getHtmlForDataStatements(
             $data,
             $filter_users,
-            $filter_ts_from,
-            $filter_ts_to,
             $url_params,
             $drop_image_or_text,
             'ddlog',
             __('Data definition statement'),
             1,
             'ddl_versions',
-            $version
+            $version,
+            $dateFrom,
+            $dateTo
         );
 
         return [
@@ -583,8 +571,6 @@ class Tracking
      *
      * @param array  $data            data
      * @param array  $filterUsers     filter users
-     * @param int    $filterTsFrom    filter time stamp from
-     * @param int    $filterTsTo      filter time stamp to
      * @param array  $urlParams       url parameters
      * @param string $dropImageOrText drop image or text
      * @param string $whichLog        dmlog|ddlog
@@ -597,23 +583,23 @@ class Tracking
     private function getHtmlForDataStatements(
         array $data,
         array $filterUsers,
-        $filterTsFrom,
-        $filterTsTo,
         array $urlParams,
         $dropImageOrText,
         $whichLog,
         $headerMessage,
         $lineNumber,
         $tableId,
-        string $version
+        string $version,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
     ) {
         $offset = $lineNumber;
         $entries = [];
         foreach ($data[$whichLog] as $entry) {
             $timestamp = strtotime($entry['date']);
             if (
-                $timestamp >= $filterTsFrom
-                && $timestamp <= $filterTsTo
+                $timestamp >= $dateFrom->getTimestamp()
+                && $timestamp <= $dateTo->getTimestamp()
                 && (in_array('*', $filterUsers)
                 || in_array($entry['username'], $filterUsers))
             ) {
@@ -860,35 +846,25 @@ class Tracking
     }
 
     /**
-     * Function to export as entries
+     * @param array<int, array<string, int|string>> $entries
      *
-     * @param array $entries entries
+     * @return array<string, string>
+     * @psalm-return array{filename: non-empty-string, dump: non-empty-string}
      */
-    public function exportAsFileDownload(string $table, array $entries): void
+    public function getDownloadInfoForExport(string $table, array $entries): array
     {
         ini_set('url_rewriter.tags', '');
 
         // Replace all multiple whitespaces by a single space
-        $table = htmlspecialchars(preg_replace('/\s+/', ' ', $table));
-        $dump = '# ' . sprintf(
-            __('Tracking report for table `%s`'),
-            $table
-        )
-        . "\n" . '# ' . date('Y-m-d H:i:s') . "\n";
+        $table = htmlspecialchars((string) preg_replace('/\s+/', ' ', $table));
+        $dump = '# ' . sprintf(__('Tracking report for table `%s`'), $table) . "\n" . '# ' . date('Y-m-d H:i:s') . "\n";
         foreach ($entries as $entry) {
             $dump .= $entry['statement'];
         }
 
         $filename = 'log_' . $table . '.sql';
-        ResponseRenderer::getInstance()->disable();
-        Core::downloadHeader(
-            $filename,
-            'text/x-sql',
-            strlen($dump)
-        );
-        echo $dump;
 
-        exit;
+        return ['filename' => $filename, 'dump' => $dump];
     }
 
     /**
@@ -1070,27 +1046,25 @@ class Tracking
     /**
      * Function to get the entries
      *
-     * @param array $data           data
-     * @param int   $filter_ts_from filter time stamp from
-     * @param int   $filter_ts_to   filter time stamp to
-     * @param array $filter_users   filter users
+     * @param array $data         data
+     * @param array $filter_users filter users
      * @phpstan-param 'schema'|'data'|'schema_and_data' $logType
      *
      * @return array
      */
-    public function getEntries(array $data, $filter_ts_from, $filter_ts_to, array $filter_users, string $logType)
-    {
+    public function getEntries(
+        array $data,
+        array $filter_users,
+        string $logType,
+        DateTimeImmutable $dateFrom,
+        DateTimeImmutable $dateTo
+    ) {
         $entries = [];
         // Filtering data definition statements
         if ($logType === 'schema' || $logType === 'schema_and_data') {
             $entries = array_merge(
                 $entries,
-                $this->filter(
-                    $data['ddlog'],
-                    $filter_ts_from,
-                    $filter_ts_to,
-                    $filter_users
-                )
+                $this->filter($data['ddlog'], $filter_users, $dateFrom, $dateTo)
             );
         }
 
@@ -1098,12 +1072,7 @@ class Tracking
         if ($logType === 'data' || $logType === 'schema_and_data') {
             $entries = array_merge(
                 $entries,
-                $this->filter(
-                    $data['dmlog'],
-                    $filter_ts_from,
-                    $filter_ts_to,
-                    $filter_users
-                )
+                $this->filter($data['dmlog'], $filter_users, $dateFrom, $dateTo)
             );
         }
 

@@ -7,8 +7,9 @@ namespace PhpMyAdmin\Controllers\Database;
 use PhpMyAdmin\Controllers\AbstractController;
 use PhpMyAdmin\Database\Search;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Http\ServerRequest;
+use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
@@ -34,7 +35,6 @@ class SearchController extends AbstractController
         $GLOBALS['tables'] = $GLOBALS['tables'] ?? null;
         $GLOBALS['num_tables'] = $GLOBALS['num_tables'] ?? null;
         $GLOBALS['total_num_tables'] = $GLOBALS['total_num_tables'] ?? null;
-        $GLOBALS['sub_part'] = $GLOBALS['sub_part'] ?? null;
         $GLOBALS['tooltip_truename'] = $GLOBALS['tooltip_truename'] ?? null;
         $GLOBALS['tooltip_aliasname'] = $GLOBALS['tooltip_aliasname'] ?? null;
         $GLOBALS['pos'] = $GLOBALS['pos'] ?? null;
@@ -50,14 +50,21 @@ class SearchController extends AbstractController
             return;
         }
 
-        // If config variable $cfg['UseDbSearch'] is on false : exit.
         if (! $GLOBALS['cfg']['UseDbSearch']) {
-            Generator::mysqlDie(
-                __('Access denied!'),
-                '',
-                false,
-                $GLOBALS['errorUrl']
+            $errorMessage = __(
+                'Searching inside the database is disabled by the [code]$cfg[\'UseDbSearch\'][/code] configuration.'
             );
+            $errorMessage .= MySQLDocumentation::showDocumentation('config', 'cfg_UseDbSearch');
+            $this->response->setRequestStatus(false);
+            if ($this->response->isAjax()) {
+                $this->response->addJSON('message', Message::error($errorMessage)->getDisplay());
+
+                return;
+            }
+
+            $this->render('error/simple', ['error_message' => $errorMessage, 'back_url' => $GLOBALS['errorUrl']]);
+
+            return;
         }
 
         $GLOBALS['urlParams']['goto'] = Url::getFromRoute('/database/search');
@@ -70,12 +77,11 @@ class SearchController extends AbstractController
             [
                 $GLOBALS['tables'],
                 $GLOBALS['num_tables'],
-                $GLOBALS['total_num_tables'],
-                $GLOBALS['sub_part'],,,
+                $GLOBALS['total_num_tables'],,,
                 $GLOBALS['tooltip_truename'],
                 $GLOBALS['tooltip_aliasname'],
                 $GLOBALS['pos'],
-            ] = Util::getDbInfo($GLOBALS['db'], $GLOBALS['sub_part'] ?? '');
+            ] = Util::getDbInfo($request, $GLOBALS['db']);
         }
 
         // Main search form has been submitted, get results

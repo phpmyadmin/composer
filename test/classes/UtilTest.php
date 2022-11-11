@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\FieldMetadata;
+use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\MoTranslator\Loader;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Token;
@@ -2545,8 +2546,8 @@ class UtilTest extends AbstractTestCase
             'TABLE_COMMENT' => '',
             'TABLE_TYPE' => 'BASE TABLE',
         ];
-        $expected = [['test_table' => $tableInfo], 1, 1, '_structure', true, false, [], [], 0];
-        $actual = Util::getDbInfo('test_db', '');
+        $expected = [['test_table' => $tableInfo], 1, 1, true, false, [], [], 0];
+        $actual = Util::getDbInfo($this->createStub(ServerRequest::class), 'test_db');
         $this->assertSame($expected, $actual);
     }
 
