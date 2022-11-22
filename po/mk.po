@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2022-11-14 11:47+0000\n"
+"PO-Revision-Date: 2022-11-21 20:47+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/"
 "4-9/mk/>\n"
@@ -875,22 +875,16 @@ msgid "You are about to TRUNCATE a complete table!"
 msgstr "Со ова ја БРИШЕТЕ комплетната база на податоци!"
 
 #: js/messages.php:52
-#, fuzzy
-#| msgid "Delete tracking data for this table"
 msgid "Delete tracking data for this table?"
-msgstr "Избришете го податоците за тракирање од табелава"
+msgstr "Избришете ги податоците за тракирање од оваа табела?"
 
 #: js/messages.php:54
-#, fuzzy
-#| msgid "Delete tracking data for this table"
 msgid "Delete tracking data for these tables?"
-msgstr "Избришете го податоците за тракирање од табелава"
+msgstr "Избришете ги податоците за тракирање од овие табели?"
 
 #: js/messages.php:56
-#, fuzzy
-#| msgid "Delete tracking data for this table"
 msgid "Delete tracking data for this version?"
-msgstr "Избришете го податоците за тракирање од табелава"
+msgstr "Избришете ги податоците за тракирање за оваа верзија?"
 
 #: js/messages.php:58
 #, fuzzy
@@ -1032,10 +1026,8 @@ msgid "Missing value in the form!"
 msgstr "Недостасува вредност во образецот!"
 
 #: js/messages.php:118
-#, fuzzy
-#| msgid "at least one of the words"
 msgid "Select at least one of the options!"
-msgstr "барем еден од зборовите"
+msgstr "Изберете барем една од опциите!"
 
 #: js/messages.php:119
 msgid "Please enter a valid number!"
@@ -1767,10 +1759,8 @@ msgid "Formatting SQL…"
 msgstr ""
 
 #: js/messages.php:351
-#, fuzzy
-#| msgid "Add new field"
 msgid "No parameters found!"
-msgstr "Додади ново поле"
+msgstr "Не беа најдени параметрите!"
 
 #: js/messages.php:355 templates/database/designer/having_query_panel.twig:118
 #: templates/database/designer/rename_to_panel.twig:45
@@ -1808,9 +1798,8 @@ msgid "Processing request"
 msgstr "Листа на процеси"
 
 #: js/messages.php:365
-#, fuzzy
 msgid "Request failed!!"
-msgstr "Вид на упит"
+msgstr "Барањето не успеа!!"
 
 #: js/messages.php:366
 #, fuzzy
@@ -2134,10 +2123,8 @@ msgid ""
 msgstr ""
 
 #: js/messages.php:460
-#, fuzzy
-#| msgid "No databases selected."
 msgid "No partial dependencies selected!"
-msgstr "Не е избрана ни една база на податоци."
+msgstr "Не беа избрани деловни зависности!"
 
 #: js/messages.php:463
 msgid "Show me the possible partial dependencies based on data in the table"
@@ -2185,10 +2172,8 @@ msgid "Selected dependencies are as follows:"
 msgstr ""
 
 #: js/messages.php:479
-#, fuzzy
-#| msgid "No databases selected."
 msgid "No dependencies selected!"
-msgstr "Не е избрана ни една база на податоци."
+msgstr "Не беа избрани зависностите!"
 
 #: js/messages.php:482 libraries/classes/CentralColumns.php:1254
 #: libraries/classes/InsertEdit.php:1805
@@ -4067,10 +4052,8 @@ msgid "Default table tab"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:183
-#, fuzzy
-#| msgid "Enclose table and field names with backquotes"
 msgid "Autocomplete of the table and column names in the SQL queries."
-msgstr "Името на полето стави го во '"
+msgstr "Автоматското дополнување на табели и имиња на колони во SQL барања."
 
 #: libraries/classes/Config/Descriptions.php:185
 #, fuzzy
@@ -4254,10 +4237,8 @@ msgstr "Полињата се раздвоени со"
 #: libraries/classes/Config/Descriptions.php:635
 #: libraries/classes/Config/Descriptions.php:654
 #: libraries/classes/Plugins/Import/ImportCsv.php:148
-#, fuzzy
-#| msgid "Fields escaped by"
 msgid "Columns escaped with"
-msgstr "Escape карактер &nbsp; &nbsp; &nbsp;"
+msgstr "Колоните се избегнати со"
 
 #: libraries/classes/Config/Descriptions.php:268
 #: libraries/classes/Config/Descriptions.php:280
@@ -4517,10 +4498,8 @@ msgid "Browse mode"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:436
-#, fuzzy
-#| msgid "Automatic recovery mode"
 msgid "Customize browse mode."
-msgstr "Режим на автоматско опоравување"
+msgstr "Подеси мод на прегледување."
 
 #: libraries/classes/Config/Descriptions.php:440
 #: libraries/classes/Config/Descriptions.php:444
@@ -4528,9 +4507,8 @@ msgstr "Режим на автоматско опоравување"
 #: libraries/classes/Config/Descriptions.php:498
 #: libraries/classes/Config/Descriptions.php:502
 #: libraries/classes/Config/Descriptions.php:559
-#, fuzzy
 msgid "Customize default options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подеси стандардни опции."
 
 #: libraries/classes/Config/Descriptions.php:442
 #: libraries/classes/Config/Forms/User/ExportForm.php:75
@@ -4551,18 +4529,16 @@ msgid "Edit mode"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:452
-#, fuzzy
 msgid "Customize edit mode."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесувања на модови за уредување."
 
 #: libraries/classes/Config/Descriptions.php:454
 msgid "Export defaults"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:456
-#, fuzzy
 msgid "Customize default export options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесување на стандардни опции за извоз."
 
 #: libraries/classes/Config/Descriptions.php:458
 #, fuzzy
@@ -4580,9 +4556,8 @@ msgid "Import defaults"
 msgstr "Увоз на податотека"
 
 #: libraries/classes/Config/Descriptions.php:464
-#, fuzzy
 msgid "Customize default common import options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесување на стандардни опции за увоз."
 
 #: libraries/classes/Config/Descriptions.php:466
 msgid "Import / export"
@@ -4605,9 +4580,8 @@ msgid "Databases"
 msgstr "База на податоци"
 
 #: libraries/classes/Config/Descriptions.php:476
-#, fuzzy
 msgid "Databases display options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Опции за приказ на бази на податоци."
 
 #: libraries/classes/Config/Descriptions.php:478
 #: libraries/classes/Config/Forms/User/NaviForm.php:59
@@ -4615,9 +4589,8 @@ msgid "Navigation panel"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:480
-#, fuzzy
 msgid "Customize appearance of the navigation panel."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесување на изгледот на панелот за навигација."
 
 #: libraries/classes/Config/Descriptions.php:482
 #, fuzzy
@@ -4625,9 +4598,8 @@ msgid "Navigation tree"
 msgstr "Опции за извоз на бази на податоци"
 
 #: libraries/classes/Config/Descriptions.php:484
-#, fuzzy
 msgid "Customize the navigation tree."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесување на дрво за навигација."
 
 #: libraries/classes/Config/Descriptions.php:486
 #: libraries/classes/Server/Select.php:56 setup/frames/index.inc.php:123
@@ -4636,14 +4608,12 @@ msgid "Servers"
 msgstr "Сервер"
 
 #: libraries/classes/Config/Descriptions.php:488
-#, fuzzy
 msgid "Servers display options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Опции за приказ на сервери."
 
 #: libraries/classes/Config/Descriptions.php:492
-#, fuzzy
 msgid "Tables display options."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Опции за приказ на табели."
 
 #: libraries/classes/Config/Descriptions.php:494
 #: libraries/classes/Config/Forms/User/MainForm.php:84
@@ -4697,10 +4667,8 @@ msgid "Authentication"
 msgstr "Документација"
 
 #: libraries/classes/Config/Descriptions.php:527
-#, fuzzy
-#| msgid "Documentation"
 msgid "Authentication settings."
-msgstr "Документација"
+msgstr "Подесувања за автентикација."
 
 #: libraries/classes/Config/Descriptions.php:529
 msgid "Server configuration"
@@ -4713,10 +4681,8 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:536
-#, fuzzy
-#| msgid "MySQL connection collation"
 msgid "Enter server connection parameters."
-msgstr "Колација за MySQL врска"
+msgstr "Наведете параметри за конектирање на сервер."
 
 #: libraries/classes/Config/Descriptions.php:538
 msgid "Configuration storage"
@@ -4766,9 +4732,8 @@ msgid "SQL queries"
 msgstr "SQL упит"
 
 #: libraries/classes/Config/Descriptions.php:563
-#, fuzzy
 msgid "SQL queries settings."
-msgstr "SQL упит"
+msgstr "Подесувања за SQL барања."
 
 #: libraries/classes/Config/Descriptions.php:565
 #, fuzzy
@@ -4776,9 +4741,8 @@ msgid "Startup"
 msgstr "Статус"
 
 #: libraries/classes/Config/Descriptions.php:567
-#, fuzzy
 msgid "Customize startup page."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесување на стартна страница."
 
 #: libraries/classes/Config/Descriptions.php:569
 #, fuzzy
@@ -6719,9 +6683,8 @@ msgid "Could not connect to the database server!"
 msgstr ""
 
 #: libraries/classes/Config/Validator.php:253
-#, fuzzy
 msgid "Invalid authentication type!"
-msgstr "Тип на извоз"
+msgstr "Невалиден тип на автентикација!"
 
 #: libraries/classes/Config/Validator.php:260
 msgid "Empty username while using [kbd]config[/kbd] authentication method!"
@@ -12255,31 +12218,19 @@ msgid ""
 msgstr ""
 
 #: libraries/classes/Server/Privileges.php:4758
-#, fuzzy, php-format
-#| msgid ""
-#| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
-#| "privilege tables. The content of these tables may differ from the "
-#| "privileges the server uses, if they have been changed manually. In this "
-#| "case, you should %sreload the privileges%s before you continue."
+#, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
 "server uses, if they have been changed manually. In this case, you should "
 "%sreload the privileges%s before you continue."
 msgstr ""
-"Напомена: phpMyAdmin ги зема привилегиите на корисникот директно од MySQL "
-"табелата на привилегии. Содржината на оваа табела табела може да се "
-"разликува од привилегиите кои серверот ги користи ако се вршени мануелни "
-"измени. Во тој случај %sповторно вчитајте ги привилегиите%s пред да "
-"продолжите со работа."
+"Белешка: phpMyAdmin ги зема привилегиите на корисникот директно од табелата "
+"на привилегии на MySQL. Содржината на оваа табела може да се разликува од "
+"привилегиите кои серверот ги користи ако се рачно изменети. Во тој случај "
+"%sповторно вчитајте ги привилегиите%s пред да продолжите."
 
 #: libraries/classes/Server/Privileges.php:4775
-#, fuzzy
-#| msgid ""
-#| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
-#| "privilege tables. The content of these tables may differ from the "
-#| "privileges the server uses, if they have been changed manually. In this "
-#| "case, you should %sreload the privileges%s before you continue."
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -12287,11 +12238,11 @@ msgid ""
 "privileges have to be reloaded but currently, you don't have the RELOAD "
 "privilege."
 msgstr ""
-"Напомена: phpMyAdmin ги зема привилегиите на корисникот директно од MySQL "
-"табелата на привилегии. Содржината на оваа табела табела може да се "
-"разликува од привилегиите кои серверот ги користи ако се вршени мануелни "
-"измени. Во тој случај %sповторно вчитајте ги привилегиите%s пред да "
-"продолжите со работа."
+"Белешка: phpMyAdmin ги зема привилегиите на корисникот директно од табелата "
+"на привилегии на MySQL. Содржината на оваа табела може да се разликува од "
+"привилегиите кои серверот ги користи ако се рачно изменети. Во тој случај, "
+"привилегиите треба да се вчитаат повторно, но вие ja немате RELOAD "
+"привилегијата."
 
 #: libraries/classes/Server/Privileges.php:5060
 msgid "You have added a new user."
