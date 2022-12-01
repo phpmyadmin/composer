@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Table\CreateController;
 use PhpMyAdmin\Http\ServerRequest;
@@ -234,7 +233,7 @@ class CreateControllerTest extends AbstractTestCase
             'is_virtual_columns_supported' => true,
             'is_integers_length_restricted' => false,
             'browse_mime' => true,
-            'supports_stored_keyword' => false,
+            'supports_stored_keyword' => true,
             'server_version' => $dbi->getVersion(),
             'max_rows' => 25,
             'char_editing' => 'input',
@@ -251,7 +250,7 @@ class CreateControllerTest extends AbstractTestCase
             $response,
             $template,
             $transformations,
-            new Config(),
+            $this->createConfig(),
             $dbi,
             new ColumnsDefinition($dbi, $relation, $transformations)
         ))($this->createStub(ServerRequest::class));

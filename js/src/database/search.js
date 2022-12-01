@@ -1,10 +1,10 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * JavaScript functions used on Database Search page
- *
- * @requires    jQuery
- * @requires    js/functions.js
  *
  * @package PhpMyAdmin
  */
@@ -19,7 +19,7 @@ import $ from 'jquery';
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('database/search.js', function () {
+AJAX.registerTeardown('database/search.js', function () {
     $('a.browse_results').off('click');
     $('a.delete_results').off('click');
     $('#buttonGo').off('click');
@@ -31,7 +31,7 @@ window.AJAX.registerTeardown('database/search.js', function () {
     $(document).off('submit', '#db_search_form.ajax');
 });
 
-window.AJAX.registerOnload('database/search.js', function () {
+AJAX.registerOnload('database/search.js', function () {
     /** Hide the table link in the initial search result */
     var icon = Functions.getImage('s_tbl', '', { 'id': 'table-image' }).toString();
     $('#table-info').prepend(icon).hide();
@@ -163,7 +163,7 @@ window.AJAX.registerOnload('database/search.js', function () {
         $('#sqlqueryform').hide();
         $('#togglequerybox').hide();
         /** Conformation message for deletion */
-        var msg = Functions.sprintf(
+        var msg = window.sprintf(
             window.Messages.strConfirmDeleteResults,
             $(this).data('table-name')
         );
@@ -216,7 +216,7 @@ window.AJAX.registerOnload('database/search.js', function () {
 
         Functions.prepareForAjaxRequest($form);
 
-        var url = $form.serialize() + window.CommonParams.get('arg_separator') + 'submit_search=' + $('#buttonGo').val();
+        var url = $form.serialize() + CommonParams.get('arg_separator') + 'submit_search=' + $('#buttonGo').val();
         $.post($form.attr('action'), url, function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
                 // found results

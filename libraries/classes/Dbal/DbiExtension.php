@@ -17,7 +17,7 @@ interface DbiExtension
     /**
      * Connects to the database server.
      *
-     * @return object|bool A connection object on success or false on failure.
+     * @return object|false A connection object on success or false on failure.
      */
     public function connect(string $user, string $password, Server $server);
 
@@ -118,7 +118,7 @@ interface DbiExtension
     /**
      * returns properly escaped string for use in MySQL queries
      *
-     * @param mixed  $link   database link
+     * @param object $link   database link
      * @param string $string string to be escaped
      *
      * @return string a MySQL escaped string
@@ -128,7 +128,7 @@ interface DbiExtension
     /**
      * Prepare an SQL statement for execution.
      *
-     * @param mixed  $link  database link
+     * @param object $link  database link
      * @param string $query The query, as a string.
      *
      * @return object|false A statement object or false.

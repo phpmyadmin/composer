@@ -1,14 +1,14 @@
 import $ from 'jquery';
-
-/* global Navigation */
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { Navigation } from '../modules/navigation.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview    functions used on the database structure page
  * @name            Database Structure
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @required    js/functions.js
  */
 
 var DatabaseStructure = {};
@@ -27,7 +27,7 @@ window.DatabaseStructure = DatabaseStructure;
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('database/structure.js', function () {
+AJAX.registerTeardown('database/structure.js', function () {
     $(document).off('click', 'a.truncate_table_anchor.ajax');
     $(document).off('click', 'a.drop_table_anchor.ajax');
     $(document).off('click', '#real_end_input');
@@ -133,7 +133,7 @@ DatabaseStructure.adjustTotals = function () {
 
     // Update summary with new data
     var $summary = $('#tbl_summary_row');
-    $summary.find('.tbl_num').text(Functions.sprintf(window.Messages.strNTables, tableSum));
+    $summary.find('.tbl_num').text(window.sprintf(window.Messages.strNTables, tableSum));
     if (rowSumApproximated) {
         $summary.find('.row_count_sum').text(strRowSum);
     } else {
@@ -188,7 +188,7 @@ DatabaseStructure.fetchRealRowCount = function ($target) {
     });
 };
 
-window.AJAX.registerOnload('database/structure.js', function () {
+AJAX.registerOnload('database/structure.js', function () {
     /**
      * Event handler on select of "Make consistent with central list"
      */
@@ -203,16 +203,16 @@ window.AJAX.registerOnload('database/structure.js', function () {
             $('#makeConsistentWithCentralListModal').modal('show').on('shown.bs.modal', function () {
                 $('#makeConsistentWithCentralListContinue').on('click', function () {
                     const $form = $('#tablesForm');
-                    const argSep = window.CommonParams.get('arg_separator');
+                    const argSep = CommonParams.get('arg_separator');
                     const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
 
                     Functions.ajaxShowMessage();
-                    window.AJAX.source = $form;
+                    AJAX.source = $form;
 
                     $.post(
                         'index.php?route=/database/structure/central-columns/make-consistent',
                         data,
-                        window.AJAX.responseHandler
+                        AJAX.responseHandler
                     );
 
                     $('#makeConsistentWithCentralListModal').modal('hide');
@@ -298,13 +298,13 @@ window.AJAX.registerOnload('database/structure.js', function () {
         }
 
         var $form = $(this).parents('form');
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
 
         Functions.ajaxShowMessage();
-        window.AJAX.source = $form;
+        AJAX.source = $form;
 
-        $.post(url, data, window.AJAX.responseHandler);
+        $.post(url, data, AJAX.responseHandler);
     });
 
     /**
@@ -327,7 +327,7 @@ window.AJAX.registerOnload('database/structure.js', function () {
          * @var question    String containing the question to be asked for confirmation
          */
         var question = window.Messages.strTruncateTableStrongWarning + ' ' +
-            Functions.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + Functions.escapeHtml(currTableName) + '`') +
+            window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + Functions.escapeHtml(currTableName) + '`') +
             Functions.getForeignKeyCheckboxLoader();
 
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
@@ -377,10 +377,10 @@ window.AJAX.registerOnload('database/structure.js', function () {
         var question;
         if (! isView) {
             question = window.Messages.strDropTableStrongWarning + ' ' +
-                Functions.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + Functions.escapeHtml(currTableName) + '`');
+                window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + Functions.escapeHtml(currTableName) + '`');
         } else {
             question =
-                Functions.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + Functions.escapeHtml(currTableName) + '`');
+                window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + Functions.escapeHtml(currTableName) + '`');
         }
         question += Functions.getForeignKeyCheckboxLoader();
 

@@ -37,10 +37,6 @@ final class LogVarsController extends AbstractController
     {
         $GLOBALS['errorUrl'] = $GLOBALS['errorUrl'] ?? null;
 
-        $params = [
-            'varName' => $_POST['varName'] ?? null,
-            'varValue' => $_POST['varValue'] ?? null,
-        ];
         $GLOBALS['errorUrl'] = Url::getFromRoute('/');
 
         if ($this->dbi->isSuperUser()) {
@@ -53,8 +49,8 @@ final class LogVarsController extends AbstractController
 
         $this->response->addJSON([
             'message' => $this->monitor->getJsonForLoggingVars(
-                $params['varName'],
-                $params['varValue']
+                $request->getParsedBodyParam('varName'),
+                $request->getParsedBodyParam('varValue')
             ),
         ]);
     }

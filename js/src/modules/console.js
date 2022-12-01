@@ -1,8 +1,10 @@
 import $ from 'jquery';
 import CodeMirror from 'codemirror';
+import { AJAX } from './ajax.js';
+import { Functions } from './functions.js';
+import { CommonParams } from './common.js';
+import { Navigation } from './navigation.js';
 import { Config } from './console/config.js';
-
-/* global Functions, Navigation */
 
 /**
  * Console object
@@ -93,8 +95,8 @@ var Console = {
             '<input name="token" value="">' +
             '</form>'
         );
-        Console.$requestForm.children('[name=token]').val(window.CommonParams.get('token'));
-        Console.$requestForm.on('submit', window.AJAX.requestHandler);
+        Console.$requestForm.children('[name=token]').val(CommonParams.get('token'));
+        Console.$requestForm.on('submit', AJAX.requestHandler);
 
         // Event binds shouldn't run again
         if (Console.isInitialized === false) {
@@ -233,7 +235,7 @@ var Console = {
             return;
         }
         Console.$requestForm.children('textarea').val(queryString);
-        Console.$requestForm.children('[name=server]').attr('value', window.CommonParams.get('server'));
+        Console.$requestForm.children('[name=server]').attr('value', CommonParams.get('server'));
         if (options && options.db) {
             Console.$requestForm.children('[name=db]').val(options.db);
             if (options.table) {
@@ -243,7 +245,7 @@ var Console = {
             }
         } else {
             Console.$requestForm.children('[name=db]').val(
-                (window.CommonParams.get('db').length > 0 ? window.CommonParams.get('db') : ''));
+                (CommonParams.get('db').length > 0 ? CommonParams.get('db') : ''));
         }
         Console.$requestForm.find('[name=profiling]').remove();
         if (options && options.profiling === true) {
@@ -517,6 +519,7 @@ var ConsoleInput = {
         if (ConsoleInput.codeMirror) {
             // eslint-disable-next-line new-cap
             ConsoleInput.inputs.console = CodeMirror($('#pma_console').find('.console_query_input')[0], {
+                // style: cm-s-pma
                 theme: 'pma',
                 mode: 'text/x-sql',
                 lineWrapping: true,
@@ -535,6 +538,7 @@ var ConsoleInput = {
             if ($('#pma_bookmarks').length !== 0) {
                 // eslint-disable-next-line new-cap
                 ConsoleInput.inputs.bookmark = CodeMirror($('#pma_console').find('.bookmark_add_input')[0], {
+                    // style: cm-s-pma
                     theme: 'pma',
                     mode: 'text/x-sql',
                     lineWrapping: true,
@@ -918,7 +922,7 @@ var ConsoleMessages = {
             if (confirm(window.Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
                 $.post('index.php?route=/import',
                     {
-                        'server': window.CommonParams.get('server'),
+                        'server': CommonParams.get('server'),
                         'action_bookmark': 2,
                         'ajax_request': true,
                         'id_bookmark': $message.attr('bookmarkid')
@@ -1054,7 +1058,7 @@ var ConsoleBookmarks = {
         $.get('index.php?route=/console/bookmark/refresh',
             {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
             },
             function (data) {
                 if (data.console_message_bookmark) {
@@ -1090,7 +1094,7 @@ var ConsoleBookmarks = {
                 {
                     'ajax_request': true,
                     'label': $('#pma_bookmarks').find('.card.add [name=label]').val(),
-                    'server': window.CommonParams.get('server'),
+                    'server': CommonParams.get('server'),
                     'db': $('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
                     'bookmark_query': ConsoleInput.getText('bookmark'),
                     'shared': $('#pma_bookmarks').find('.card.add [name=shared]').prop('checked')
@@ -1206,7 +1210,7 @@ var ConsoleDebug = {
                 .append(
                     $('<div class="message welcome">')
                         .text(
-                            Functions.sprintf(
+                            window.sprintf(
                                 window.Messages.strConsoleDebugArgsSummary,
                                 dbgStep.args.length
                             )
@@ -1420,7 +1424,7 @@ var ConsoleDebug = {
         // Show summary
         $('#debug_console').find('.debug>.welcome').append(
             $('<span class="debug_summary">').text(
-                Functions.sprintf(
+                window.sprintf(
                     window.Messages.strConsoleDebugSummary,
                     totalUnique,
                     totalExec,

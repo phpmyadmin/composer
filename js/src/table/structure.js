@@ -1,15 +1,15 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { Navigation } from '../modules/navigation.js';
+import { CommonActions, CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview    functions used on the table structure page
  * @name            Table Structure
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @required    js/functions.js
  */
-
-/* global Navigation */
 
 /**
  * AJAX scripts for /table/structure
@@ -25,12 +25,11 @@ import $ from 'jquery';
  * Reload fields table
  */
 function reloadFieldForm () {
-    $.post($('#fieldsForm').attr('action'), $('#fieldsForm').serialize() + window.CommonParams.get('arg_separator') + 'ajax_request=true', function (formData) {
+    $.post($('#fieldsForm').attr('action'), $('#fieldsForm').serialize() + CommonParams.get('arg_separator') + 'ajax_request=true', function (formData) {
         var $tempDiv = $('<div id=\'temp_div\'><div>').append(formData.message);
         $('#fieldsForm').replaceWith($tempDiv.find('#fieldsForm'));
         $('#addColumns').replaceWith($tempDiv.find('#addColumns'));
         $('#move_columns_dialog').find('ul').replaceWith($tempDiv.find('#move_columns_dialog ul'));
-        $('#moveColumns').removeClass('move-active');
     });
     $('#page_content').show();
 }
@@ -45,7 +44,7 @@ function checkFirst () {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('table/structure.js', function () {
+AJAX.registerTeardown('table/structure.js', function () {
     $(document).off('click', 'a.drop_column_anchor.ajax');
     $(document).off('click', 'a.add_key.ajax');
     $(document).off('click', '#move_columns_anchor');
@@ -55,7 +54,7 @@ window.AJAX.registerTeardown('table/structure.js', function () {
     $(document).off('click', '#remove_partitioning.ajax');
 });
 
-window.AJAX.registerOnload('table/structure.js', function () {
+AJAX.registerOnload('table/structure.js', function () {
     // Re-initialize variables.
     window.primaryIndexes = [];
     window.indexes = [];
@@ -77,7 +76,7 @@ window.AJAX.registerOnload('table/structure.js', function () {
 
         function submitForm () {
             var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-            $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+            $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
                 if ($('.sqlqueryresults').length !== 0) {
                     $('.sqlqueryresults').remove();
                 } else if ($('.error:not(.tab)').length !== 0) {
@@ -105,7 +104,7 @@ window.AJAX.registerOnload('table/structure.js', function () {
                             }
                         });
                     } else {
-                        window.CommonActions.refreshMain('index.php?route=/table/structure');
+                        CommonActions.refreshMain('index.php?route=/table/structure');
                     }
                 } else {
                     Functions.ajaxShowMessage(data.error, false);
@@ -193,12 +192,12 @@ window.AJAX.registerOnload('table/structure.js', function () {
         /**
          * @var question String containing the question to be asked for confirmation
          */
-        var question = Functions.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
+        var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
         var $thisAnchor = $(this);
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
             var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingColumn, false);
             var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
-            params += window.CommonParams.get('arg_separator') + 'ajax_page_request=1';
+            params += CommonParams.get('arg_separator') + 'ajax_page_request=1';
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
                     Functions.ajaxRemoveMessage($msg);
@@ -264,18 +263,18 @@ window.AJAX.registerOnload('table/structure.js', function () {
         } else if ($this.is('.add_fulltext_anchor')) {
             addClause = 'ADD FULLTEXT';
         }
-        var question = Functions.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' +
+        var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' +
                 Functions.escapeHtml(currTableName) + '` ' + addClause + '(`' + Functions.escapeHtml(currColumnName) + '`);');
 
         var $thisAnchor = $(this);
 
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
             Functions.ajaxShowMessage();
-            window.AJAX.source = $this;
+            AJAX.source = $this;
 
             var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
-            params += window.CommonParams.get('arg_separator') + 'ajax_page_request=1';
-            $.post(url, params, window.AJAX.responseHandler);
+            params += CommonParams.get('arg_separator') + 'ajax_page_request=1';
+            $.post(url, params, AJAX.responseHandler);
         });
     }); // end Add key
 
@@ -284,10 +283,6 @@ window.AJAX.registerOnload('table/structure.js', function () {
     **/
     $(document).on('click', '#move_columns_anchor', function (e) {
         e.preventDefault();
-
-        if ($(this).hasClass('move-active')) {
-            return;
-        }
 
         var buttonOptionsError = {};
         buttonOptionsError[window.Messages.strOK] = function () {
@@ -323,10 +318,40 @@ window.AJAX.registerOnload('table/structure.js', function () {
         var $form = $('#move_columns_dialog').find('form');
         $form.data('serialized-unmoved', $form.serialize());
 
+        const designerModalPreviewModal = document.getElementById('designerModalPreviewModal');
+        designerModalPreviewModal.addEventListener('shown.bs.modal', () => {
+            const modalBody = designerModalPreviewModal.querySelector('.modal-body');
+            const $form = $('#move_column_form');
+            const formUrl = $form.attr('action');
+            const sep = CommonParams.get('arg_separator');
+            const formData = $form.serialize() +
+                sep + 'preview_sql=1' +
+                sep + 'ajax_request=1';
+            $.post({
+                url: formUrl,
+                data: formData,
+                success: response => {
+                    if (! response.success) {
+                        modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
+                        return;
+                    }
+
+                    modalBody.innerHTML = response.sql_data;
+                    Functions.highlightSql($('#designerModalPreviewModal'));
+                },
+                error: () => {
+                    modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
+                }
+            });
+        });
+        designerModalPreviewModal.addEventListener('hidden.bs.modal', () => {
+            designerModalPreviewModal.querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' +
+                '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
+        });
+
         $('#moveColumnsModal').modal('show');
+        $('#designerModalGoButton').off('click');// Unregister previous modals
         $('#designerModalGoButton').on('click', function () {
-            // Off event necessary, else the function fires multiple times
-            $('#designerModalGoButton').off('click');
             event.preventDefault();
             var $msgbox = Functions.ajaxShowMessage();
             var $this = $('#moveColumnsModal');
@@ -338,7 +363,7 @@ window.AJAX.registerOnload('table/structure.js', function () {
                 Functions.ajaxRemoveMessage($msgbox);
                 return;
             }
-            $.post($form.prop('action'), serialized + window.CommonParams.get('arg_separator') + 'ajax_request=true', function (data) {
+            $.post($form.prop('action'), serialized + CommonParams.get('arg_separator') + 'ajax_request=true', function (data) {
                 if (data.success === false) {
                     Functions.ajaxRemoveMessage($msgbox);
                     var errorModal = $('#moveColumnsErrorModal');
@@ -372,21 +397,6 @@ window.AJAX.registerOnload('table/structure.js', function () {
                 }
             });
         });
-
-        $('#designerModalPreviewButton').on('click', function () {
-            // Function for Previewing SQL
-            $('#moveColumnsModal').modal('hide');
-            var $form = $('#move_column_form');
-            Functions.previewSql($form);
-        });
-
-        $('#previewSQLCloseButton').on('click', function () {
-            $('#moveColumnsModal').modal('show');
-        });
-
-        $('#designerModalCloseButton').on('click', function () {
-            $('#move_columns_anchor').removeClass('move-active');
-        });
     });
 
     /**
@@ -395,13 +405,13 @@ window.AJAX.registerOnload('table/structure.js', function () {
     $('body').on('click', '#fieldsForm button.mult_submit', function (e) {
         e.preventDefault();
         var $form = $(this).parents('form');
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
 
         Functions.ajaxShowMessage();
-        window.AJAX.source = $form;
+        AJAX.source = $form;
 
-        $.post(this.formAction, submitData, window.AJAX.responseHandler);
+        $.post(this.formAction, submitData, AJAX.responseHandler);
     });
 
     /**
@@ -414,8 +424,8 @@ window.AJAX.registerOnload('table/structure.js', function () {
         function submitPartitionAction (url) {
             var params = 'ajax_request=true&ajax_page_request=true&' + $link.getPostData();
             Functions.ajaxShowMessage();
-            window.AJAX.source = $link;
-            $.post(url, params, window.AJAX.responseHandler);
+            AJAX.source = $link;
+            $.post(url, params, AJAX.responseHandler);
         }
 
         if ($link.is('#partition_action_DROP')) {
@@ -444,8 +454,8 @@ window.AJAX.registerOnload('table/structure.js', function () {
                 'ajax_page_request' : true
             }, $link.getPostData());
             Functions.ajaxShowMessage();
-            window.AJAX.source = $link;
-            $.post(url, params, window.AJAX.responseHandler);
+            AJAX.source = $link;
+            $.post(url, params, AJAX.responseHandler);
         });
     });
 

@@ -1,14 +1,14 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  * @requires    js/database/query_generator.js
- *
  */
 
 /**
@@ -18,7 +18,7 @@ import $ from 'jquery';
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('database/multi_table_query.js', function () {
+AJAX.registerTeardown('database/multi_table_query.js', function () {
     $('.tableNameSelect').each(function () {
         $(this).off('change');
     });
@@ -26,7 +26,7 @@ window.AJAX.registerTeardown('database/multi_table_query.js', function () {
     $('#add_column_button').off('click');
 });
 
-window.AJAX.registerOnload('database/multi_table_query.js', function () {
+AJAX.registerOnload('database/multi_table_query.js', function () {
     var editor = Functions.getSqlEditor($('#MultiSqlquery'), {}, 'both');
     $('.CodeMirror-line').css('text-align', 'left');
     editor.setSize(-1, 50);
@@ -75,7 +75,7 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
                 'db': $('#db_name').val(),
                 'tables': Object.keys(tableAliases),
                 'ajax_request': '1',
-                'token': window.CommonParams.get('token')
+                'token': CommonParams.get('token')
             },
             success: function (response) {
                 foreignKeys = response.foreignKeyConstrains;
@@ -127,8 +127,8 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
             'db': $('#db_name').val(),
             'sql_query': query,
             'ajax_request': '1',
-            'server': window.CommonParams.get('server'),
-            'token': window.CommonParams.get('token')
+            'server': CommonParams.get('server'),
+            'token': CommonParams.get('token')
         };
         $.ajax({
             type: 'POST',

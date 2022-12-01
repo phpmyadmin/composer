@@ -132,33 +132,6 @@ class Util
     }
 
     /**
-     * Add slashes before "_" and "%" characters for using them in MySQL
-     * database, table and field names.
-     * Note: This function does not escape backslashes!
-     *
-     * @param string $name the string to escape
-     *
-     * @return string the escaped string
-     */
-    public static function escapeMysqlWildcards($name): string
-    {
-        return strtr($name, ['_' => '\\_', '%' => '\\%']);
-    }
-
-    /**
-     * removes slashes before "_" and "%" characters
-     * Note: This function does not unescape backslashes!
-     *
-     * @param string $name the string to escape
-     *
-     * @return string the escaped string
-     */
-    public static function unescapeMysqlWildcards($name): string
-    {
-        return strtr($name, ['\\_' => '_', '\\%' => '%']);
-    }
-
-    /**
      * removes quotes (',",`) from a quoted string
      *
      * checks if the string is quoted and removes this quotes
@@ -2001,11 +1974,11 @@ class Util
     public static function getCollateForIS()
     {
         $names = $GLOBALS['dbi']->getLowerCaseNames();
-        if ($names === '0') {
+        if ($names === 0) {
             return 'COLLATE utf8_bin';
         }
 
-        if ($names === '2') {
+        if ($names === 2) {
             return 'COLLATE utf8_general_ci';
         }
 
@@ -2265,17 +2238,16 @@ class Util
                 && is_scalar($_REQUEST['tbl_group'])
                 && strlen((string) $_REQUEST['tbl_group']) > 0
             ) {
-                $group = $GLOBALS['dbi']->escapeMysqlLikeString((string) $_REQUEST['tbl_group']);
-                $groupWithSeparator = $GLOBALS['dbi']->escapeMysqlLikeString(
-                    $_REQUEST['tbl_group']
-                    . $GLOBALS['cfg']['NavigationTreeTableSeparator']
+                $group = $GLOBALS['dbi']->escapeMysqlWildcards((string) $_REQUEST['tbl_group']);
+                $groupWithSeparator = $GLOBALS['dbi']->escapeMysqlWildcards(
+                    $_REQUEST['tbl_group'] . $GLOBALS['cfg']['NavigationTreeTableSeparator']
                 );
                 $tblGroupSql .= ' WHERE ('
                     . self::backquote('Tables_in_' . $db)
-                    . " LIKE '" . $groupWithSeparator . "%'"
+                    . ' LIKE ' . $GLOBALS['dbi']->quoteString($groupWithSeparator . '%')
                     . ' OR '
                     . self::backquote('Tables_in_' . $db)
-                    . " LIKE '" . $group . "')";
+                    . ' LIKE ' . $GLOBALS['dbi']->quoteString($group) . ')';
                 $whereAdded = true;
             }
 
@@ -2343,6 +2315,10 @@ class Util
 
         if (extension_loaded('mbstring')) {
             $result[] = 'mbstring';
+        }
+
+        if (extension_loaded('sodium')) {
+            $result[] = 'sodium';
         }
 
         return $result;

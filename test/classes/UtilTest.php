@@ -54,6 +54,7 @@ class UtilTest extends AbstractTestCase
      * @requires extension mysqli
      * @requires extension curl
      * @requires extension mbstring
+     * @requires extension sodium
      */
     public function testListPHPExtensions(): void
     {
@@ -62,6 +63,7 @@ class UtilTest extends AbstractTestCase
                 'mysqli',
                 'curl',
                 'mbstring',
+                'sodium',
             ],
             Util::listPHPExtensions()
         );
@@ -531,81 +533,6 @@ class UtilTest extends AbstractTestCase
                 "b'ens datab'ase'",
             ],
         ];
-    }
-
-    /**
-     * data provider for testEscapeMysqlWildcards and testUnescapeMysqlWildcards
-     *
-     * @return array
-     */
-    public function providerUnEscapeMysqlWildcards(): array
-    {
-        return [
-            [
-                '\_test',
-                '_test',
-            ],
-            [
-                '\_\\',
-                '_\\',
-            ],
-            [
-                '\\_\%',
-                '_%',
-            ],
-            [
-                '\\\_',
-                '\_',
-            ],
-            [
-                '\\\_\\\%',
-                '\_\%',
-            ],
-            [
-                '\_\\%\_\_\%',
-                '_%__%',
-            ],
-            [
-                '\%\_',
-                '%_',
-            ],
-            [
-                '\\\%\\\_',
-                '\%\_',
-            ],
-        ];
-    }
-
-    /**
-     * PhpMyAdmin\Util::escapeMysqlWildcards tests
-     *
-     * @param string $a Expected value
-     * @param string $b String to escape
-     *
-     * @dataProvider providerUnEscapeMysqlWildcards
-     */
-    public function testEscapeMysqlWildcards(string $a, string $b): void
-    {
-        $this->assertEquals(
-            $a,
-            Util::escapeMysqlWildcards($b)
-        );
-    }
-
-    /**
-     * PhpMyAdmin\Util::unescapeMysqlWildcards tests
-     *
-     * @param string $a String to unescape
-     * @param string $b Expected value
-     *
-     * @dataProvider providerUnEscapeMysqlWildcards
-     */
-    public function testUnescapeMysqlWildcards(string $a, string $b): void
-    {
-        $this->assertEquals(
-            $b,
-            Util::unescapeMysqlWildcards($a)
-        );
     }
 
     /**
@@ -2609,5 +2536,27 @@ class UtilTest extends AbstractTestCase
                 true,
             ],
         ];
+    }
+
+    /**
+     * @dataProvider providerForTestGetLowerCaseNames
+     */
+    public function testGetCollateForIS(string $lowerCaseTableNames, string $expected): void
+    {
+        $dbiDummy = $this->createDbiDummy();
+        $dbiDummy->addResult('SELECT @@lower_case_table_names', [[$lowerCaseTableNames]], ['@@lower_case_table_names']);
+        $GLOBALS['dbi'] = $this->createDatabaseInterface($dbiDummy);
+        $this->assertSame($expected, Util::getCollateForIS());
+        $dbiDummy->assertAllQueriesConsumed();
+    }
+
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public function providerForTestGetLowerCaseNames(): iterable
+    {
+        yield 'lower_case_table_names=0' => ['0', 'COLLATE utf8_bin'];
+        yield 'lower_case_table_names=1' => ['1', ''];
+        yield 'lower_case_table_names=2' => ['2', 'COLLATE utf8_general_ci'];
     }
 }

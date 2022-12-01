@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonActions, CommonParams } from '../modules/common.js';
 
 /**
  * @package PhpMyAdmin-Designer
@@ -16,12 +19,12 @@ var change = 0; // variable to track any change in designer layout.
 var showRelationLines = true;
 var alwaysShowText = false;
 
-window.AJAX.registerTeardown('designer/move.js', function () {
+AJAX.registerTeardown('designer/move.js', function () {
     $(document).off('fullscreenchange');
     $('#selflink').show();
 });
 
-window.AJAX.registerOnload('designer/move.js', function () {
+AJAX.registerOnload('designer/move.js', function () {
     var $content = $('#page_content');
     var $img = $('#toggleFullscreen').find('img');
     var $span = $img.siblings('span');
@@ -654,7 +657,7 @@ DesignerMove.addOtherDbTables = function () {
     $.post('index.php?route=/sql', {
         'ajax_request' : true,
         'sql_query' : 'SHOW databases;',
-        'server': window.CommonParams.get('server')
+        'server': CommonParams.get('server')
     }, function (data) {
         $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
             var val = $(this)[0].innerText;
@@ -673,7 +676,7 @@ DesignerMove.addOtherDbTables = function () {
         var $table = $('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
         if ($table.length !== 0) {
             Functions.ajaxShowMessage(
-                Functions.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table),
+                window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table),
                 undefined,
                 'error'
             );
@@ -685,7 +688,7 @@ DesignerMove.addOtherDbTables = function () {
             'dialog' : 'add_table',
             'db' : db,
             'table' : table,
-            'server': window.CommonParams.get('server')
+            'server': CommonParams.get('server')
         }, function (data) {
             var $newTableDom = $(data.message);
             $newTableDom.find('a').first().remove();
@@ -713,7 +716,7 @@ DesignerMove.addOtherDbTables = function () {
                 'ajax_request' : true,
                 'sql_query': sqlQuery,
                 'db' : dbName,
-                'server': window.CommonParams.get('server')
+                'server': CommonParams.get('server')
             }, function (data) {
                 $selectTable.html('');
                 var rows = $(data.message).find('table.table_results.data.ajax').find('td.data');
@@ -753,7 +756,7 @@ DesignerMove.getUrlPos = function (forceString) {
     var key;
     if (window.designerTablesEnabled || forceString) {
         var poststr = '';
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var i = 1;
         for (key in window.jTabs) {
             poststr += argsep + 't_x[' + i + ']=' + parseInt(document.getElementById(key).style.left, 10);
@@ -784,7 +787,7 @@ DesignerMove.getUrlPos = function (forceString) {
 
 DesignerMove.save2 = function (callback) {
     if (window.designerTablesEnabled) {
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         var poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
         poststr += argsep + 'server=' + window.server + argsep + 'db=' + encodeURIComponent(window.db) + argsep + 'selected_page=' + window.selectedPage;
         poststr += DesignerMove.getUrlPos();
@@ -1097,7 +1100,7 @@ DesignerMove.promptToSaveCurrentPage = function (callback) {
 // ------------------------------ EXPORT PAGES ---------------------------------------
 DesignerMove.exportPages = function () {
     var $msgbox = Functions.ajaxShowMessage();
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
 
     $.post('index.php?route=/database/designer', {
         'ajax_request': true,
@@ -1142,7 +1145,7 @@ DesignerMove.exportPages = function () {
 DesignerMove.loadPage = function (page) {
     if (window.designerTablesEnabled) {
         var paramPage = '';
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         if (page !== null) {
             paramPage = argsep + 'page=' + page;
         }
@@ -1230,7 +1233,7 @@ DesignerMove.startRelation = function () {
 // table field
 DesignerMove.clickField = function (db, T, f, pk) {
     var pkLocal = parseInt(pk);
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     if (onRelation) {
         if (!clickField) {
             // .style.display=='none'        .style.display = 'none'
@@ -1316,7 +1319,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
 
 DesignerMove.newRelation = function () {
     document.getElementById('layer_new_relation').style.display = 'none';
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db + argsep + 'db2=p';
     linkRelation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
     linkRelation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
@@ -1335,14 +1338,14 @@ DesignerMove.newRelation = function () {
 
 // -------------------------- create tables -------------------------------------
 DesignerMove.startTableNew = function () {
-    window.CommonParams.set('table', '');
-    window.CommonActions.refreshMain('index.php?route=/table/create');
+    CommonParams.set('table', '');
+    CommonActions.refreshMain('index.php?route=/table/create');
 };
 
 DesignerMove.startTabUpd = function (db, table) {
-    window.CommonParams.set('db', db);
-    window.CommonParams.set('table', table);
-    window.CommonActions.refreshMain('index.php?route=/table/structure');
+    CommonParams.set('db', db);
+    CommonParams.set('table', table);
+    CommonActions.refreshMain('index.php?route=/table/structure');
 };
 
 // --------------------------- hide tables --------------------------------------
@@ -1536,14 +1539,14 @@ DesignerMove.canvasClick = function (id, event) {
         var top = globY - document.getElementById('layer_upd_relation').offsetHeight - 10;
         document.getElementById('layer_upd_relation').style.top = top + 'px';
         document.getElementById('layer_upd_relation').style.display = 'block';
-        var argsep = window.CommonParams.get('arg_separator');
+        var argsep = CommonParams.get('arg_separator');
         linkRelation = 'T1=' + Key0 + argsep + 'F1=' + Key1 + argsep + 'T2=' + Key2 + argsep + 'F2=' + Key3 + argsep + 'K=' + Key;
     }
 };
 
 DesignerMove.updRelation = function () {
     document.getElementById('layer_upd_relation').style.display = 'none';
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db;
     linkRelation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
 
@@ -1910,7 +1913,7 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     var init = historyArray.length;
     if (rel.value !== '--') {
         if (document.getElementById('Query').value === '') {
-            Functions.ajaxShowMessage(Functions.sprintf(window.Messages.strQueryEmpty));
+            Functions.ajaxShowMessage(window.sprintf(window.Messages.strQueryEmpty));
             return;
         }
         p = document.getElementById('Query');
@@ -1953,7 +1956,7 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
         sum = sum + 1;
         // make orderby
     }
-    Functions.ajaxShowMessage(Functions.sprintf(window.Messages.strObjectsCreated, sum));
+    Functions.ajaxShowMessage(window.sprintf(window.Messages.strObjectsCreated, sum));
     // output sum new objects created
     var existingDiv = document.getElementById('ab');
     existingDiv.innerHTML = DesignerHistory.display(init, historyArray.length);
@@ -2025,7 +2028,7 @@ DesignerMove.enableTableEvents = function (index, element) {
     DesignerMove.enablePageContentEvents();
 };
 
-window.AJAX.registerTeardown('designer/move.js', function () {
+AJAX.registerTeardown('designer/move.js', function () {
     $('#side_menu').off('mouseenter mouseleave');
     $('#key_Show_left_menu').off('click');
     $('#toggleFullscreen').off('click');
@@ -2075,7 +2078,7 @@ window.AJAX.registerTeardown('designer/move.js', function () {
     $('#page_content').off('mousemove');
 });
 
-window.AJAX.registerOnload('designer/move.js', function () {
+AJAX.registerOnload('designer/move.js', function () {
     $('#key_Show_left_menu').on('click', function () {
         DesignerMove.showLeftMenu(this);
         return false;

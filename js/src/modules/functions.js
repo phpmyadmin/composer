@@ -1,10 +1,13 @@
 import $ from 'jquery';
-import { mysqlDocKeyword, mysqlDocBuiltin } from './modules/doc-links.js';
+import { AJAX } from './ajax.js';
+import { Navigation } from './navigation.js';
+import { CommonActions, CommonParams } from './common.js';
+import { mysqlDocKeyword, mysqlDocBuiltin } from './doc-links.js';
+import { Indexes } from './indexes.js';
+import { Config } from './config.js';
 
-/* global Navigation */
 /* global ChartType, ColumnType, DataTable, JQPlotChartFactory */ // js/chart.js
 /* global DatabaseStructure */ // js/database/structure.js
-/* global Indexes */ // js/indexes.js
 /* global firstDayOfCalendar, maxInputVars, mysqlDocTemplate, themeImagePath */ // templates/javascript/variables.twig
 
 /**
@@ -93,11 +96,11 @@ window.spatialIndexes = [];
 Functions.addNoCacheToAjaxRequests = () => function (options, originalOptions) {
     var nocache = new Date().getTime() + '' + Math.floor(Math.random() * 1000000);
     if (typeof options.data === 'string') {
-        options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(window.CommonParams.get('token'));
+        options.data += '&_nocache=' + nocache + '&token=' + encodeURIComponent(CommonParams.get('token'));
     } else if (typeof options.data === 'object') {
         options.data = $.extend(originalOptions.data, {
             '_nocache': nocache,
-            'token': window.CommonParams.get('token')
+            'token': CommonParams.get('token')
         });
     }
 };
@@ -257,7 +260,7 @@ Functions.handleRedirectAndReload = function (data) {
         if (window.location.href.indexOf('?') === -1) {
             window.location.href += '?session_expired=1';
         } else {
-            window.location.href += window.CommonParams.get('arg_separator') + 'session_expired=1';
+            window.location.href += CommonParams.get('arg_separator') + 'session_expired=1';
         }
         window.location.reload();
     } else if (parseInt(data.reload_flag) === 1) {
@@ -335,7 +338,7 @@ Functions.getSqlEditor = function ($textarea, options, resize, lintOptions) {
                 value: 3,
                 content: codemirrorEditor.isClean(),
             };
-            window.AJAX.lockPageHandler(e);
+            AJAX.lockPageHandler(e);
         });
 
         return codemirrorEditor;
@@ -388,24 +391,16 @@ Functions.tooltip = function ($elements, item, myContent, additionalOptions) {
 };
 
 /**
- * HTML escaping
- *
- * @param {any} unsafe
- * @return {string | false}
+ * @param {string} value
+ * @return {string}
  */
-Functions.escapeHtml = function (unsafe) {
-    if (typeof (unsafe) !== 'undefined') {
-        return unsafe
-            .toString()
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    } else {
-        return false;
-    }
+const escapeHtml = (value = '') => {
+    const element = document.createElement('span');
+    element.appendChild(document.createTextNode(value));
+    return element.innerHTML;
 };
+
+Functions.escapeHtml = escapeHtml;
 
 /**
  * JavaScript escaping
@@ -445,10 +440,6 @@ Functions.escapeBacktick = function (s) {
  */
 Functions.escapeSingleQuote = function (s) {
     return s.replace('\\', '\\\\').replace('\'', '\\\'');
-};
-
-Functions.sprintf = function () {
-    return window.sprintf.apply(this, arguments);
 };
 
 /**
@@ -656,10 +647,10 @@ Functions.confirmLink = function (theLink, theSqlQuery) {
         return true;
     }
 
-    var isConfirmed = confirm(Functions.sprintf(window.Messages.strDoYouReally, theSqlQuery));
+    var isConfirmed = confirm(window.sprintf(window.Messages.strDoYouReally, theSqlQuery));
     if (isConfirmed) {
         if (typeof (theLink.href) !== 'undefined') {
-            theLink.href += window.CommonParams.get('arg_separator') + 'is_js_confirmed=1';
+            theLink.href += CommonParams.get('arg_separator') + 'is_js_confirmed=1';
         } else if (typeof (theLink.form) !== 'undefined') {
             theLink.form.action += '?is_js_confirmed=1';
         }
@@ -710,7 +701,7 @@ Functions.confirmQuery = function (theForm1, sqlQuery1) {
         } else {
             message = sqlQuery1;
         }
-        var isConfirmed = confirm(Functions.sprintf(window.Messages.strDoYouReally, message));
+        var isConfirmed = confirm(window.sprintf(window.Messages.strDoYouReally, message));
         // statement is confirmed -> update the
         // "is_js_confirmed" form field so the confirm test won't be
         // run on the server side and allows to submit the form
@@ -818,7 +809,7 @@ Functions.checkFormElementInRange = function (theForm, theFieldName, message, mi
         return false;
     } else if (val < min || val > max) {
         theField.select();
-        alert(Functions.sprintf(message, val));
+        alert(window.sprintf(message, val));
         theField.focus();
         return false;
     } else {
@@ -940,13 +931,13 @@ Functions.onloadIdleEvent = function () {
     function UpdateIdleTime () {
         var href = 'index.php?route=/';
         var guid = 'default';
-        if (window.Config.isStorageSupported('sessionStorage')) {
+        if (Config.isStorageSupported('sessionStorage')) {
             guid = window.sessionStorage.guid;
         }
         var params = {
             'ajax_request': true,
-            'server': window.CommonParams.get('server'),
-            'db': window.CommonParams.get('db'),
+            'server': CommonParams.get('server'),
+            'db': CommonParams.get('db'),
             'guid': guid,
             'access_time': idleSecondsCounter,
             'check_timeout': 1
@@ -957,15 +948,15 @@ Functions.onloadIdleEvent = function () {
             data: params,
             success: function (data) {
                 if (data.success) {
-                    if (window.CommonParams.get('LoginCookieValidity') - idleSecondsCounter < 0) {
+                    if (CommonParams.get('LoginCookieValidity') - idleSecondsCounter < 0) {
                         /* There is other active window, let's reset counter */
                         idleSecondsCounter = 0;
                     }
                     var remaining = Math.min(
                         /* Remaining login validity */
-                        window.CommonParams.get('LoginCookieValidity') - idleSecondsCounter,
+                        CommonParams.get('LoginCookieValidity') - idleSecondsCounter,
                         /* Remaining time till session GC */
-                        window.CommonParams.get('session_gc_maxlifetime')
+                        CommonParams.get('session_gc_maxlifetime')
                     );
                     var interval = 1000;
                     if (remaining > 5) {
@@ -975,7 +966,7 @@ Functions.onloadIdleEvent = function () {
                     updateTimeout = window.setTimeout(UpdateIdleTime, interval);
                 } else { // timeout occurred
                     clearInterval(incInterval);
-                    if (window.Config.isStorageSupported('sessionStorage')) {
+                    if (Config.isStorageSupported('sessionStorage')) {
                         window.sessionStorage.clear();
                     }
                     // append the login form on the page, disable all the forms which were not disabled already, close all the open jqueryui modal boxes
@@ -987,7 +978,7 @@ Functions.onloadIdleEvent = function () {
                         });
                         $('#input_username').trigger('focus');
                     } else {
-                        window.CommonParams.set('token', data.new_token);
+                        CommonParams.set('token', data.new_token);
                         $('input[name=token]').val(data.new_token);
                     }
                     idleSecondsCounter = 0;
@@ -997,13 +988,13 @@ Functions.onloadIdleEvent = function () {
         });
     }
 
-    if (window.CommonParams.get('logged_in')) {
+    if (CommonParams.get('logged_in')) {
         incInterval = window.setInterval(SetIdleTime, 1000);
         var sessionTimeout = Math.min(
-            window.CommonParams.get('LoginCookieValidity'),
-            window.CommonParams.get('session_gc_maxlifetime')
+            CommonParams.get('LoginCookieValidity'),
+            CommonParams.get('session_gc_maxlifetime')
         );
-        if (window.Config.isStorageSupported('sessionStorage')) {
+        if (Config.isStorageSupported('sessionStorage')) {
             window.sessionStorage.setItem('guid', guid());
         }
         var interval = (sessionTimeout - 5) * 1000;
@@ -1157,7 +1148,7 @@ Functions.loadForeignKeyCheckbox = function () {
     // Load default foreign key check value
     var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
+        'server': CommonParams.get('server'),
     };
     $.get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
         var html = '<input type="hidden" name="fk_checks" value="0">' +
@@ -1171,7 +1162,7 @@ Functions.loadForeignKeyCheckbox = function () {
 Functions.getJsConfirmCommonParam = function (elem, parameters) {
     var $elem = $(elem);
     var params = parameters;
-    var sep = window.CommonParams.get('arg_separator');
+    var sep = CommonParams.get('arg_separator');
     if (params) {
         // Strip possible leading ?
         if (params.startsWith('?')) {
@@ -1301,8 +1292,8 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
 
             var params = {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server'),
-                'db': window.CommonParams.get('db'),
+                'server': CommonParams.get('server'),
+                'db': CommonParams.get('db'),
                 'no_debug': true
             };
 
@@ -1322,7 +1313,7 @@ Functions.codeMirrorAutoCompleteOnInputRead = function (instance) {
                 success: function (data) {
                     if (data.success) {
                         var tables = data.tables;
-                        sqlAutoCompleteDefaultTable = window.CommonParams.get('table');
+                        sqlAutoCompleteDefaultTable = CommonParams.get('table');
                         sqlAutoComplete = [];
                         for (var table in tables) {
                             if (tables.hasOwnProperty(table)) {
@@ -1423,7 +1414,7 @@ Functions.documentationAdd = function ($elm, params) {
         return;
     }
 
-    var url = Functions.sprintf(
+    var url = window.sprintf(
         decodeURIComponent(mysqlDocTemplate),
         params[0]
     );
@@ -1727,7 +1718,7 @@ Functions.ajaxRemoveMessage = function ($thisMessageBox) {
  */
 Functions.previewSql = function ($form) {
     var formUrl = $form.attr('action');
-    var sep = window.CommonParams.get('arg_separator');
+    var sep = CommonParams.get('arg_separator');
     var formData = $form.serialize() +
         sep + 'do_save_data=1' +
         sep + 'preview_sql=1' +
@@ -2175,7 +2166,7 @@ Functions.sqlPrettyPrint = function (string) {
  * @return {bool}
  */
 Functions.confirm = function (question, url, callbackFn, openCallback) {
-    var confirmState = window.CommonParams.get('confirm');
+    var confirmState = CommonParams.get('confirm');
     if (! confirmState) {
         // user does not want to confirm
         if (typeof callbackFn === 'function') {
@@ -2189,6 +2180,7 @@ Functions.confirm = function (question, url, callbackFn, openCallback) {
 
     $('#functionConfirmModal').modal('show');
     $('#functionConfirmModal').find('.modal-body').first().html(question);
+    $('#functionConfirmOkButton').off('click');// Un-register previous modals
     $('#functionConfirmOkButton').on('click', function () {
         if (typeof callbackFn === 'function') {
             callbackFn.call(this, url);
@@ -2282,7 +2274,7 @@ Functions.onloadCreateTableEvents = function () {
             if (Functions.checkReservedWordColumns($form)) {
                 Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
                 // User wants to submit the form
-                $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+                $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
                     if (typeof data !== 'undefined' && data.success === true) {
                         $('#properties_message')
                             .removeClass('alert-danger')
@@ -2301,8 +2293,8 @@ Functions.onloadCreateTableEvents = function () {
                         var tablesTable = $('#tablesForm').find('tbody').not('#tbl_summary_row');
                         // this is the first table created in this db
                         if (tablesTable.length === 0) {
-                            window.CommonActions.refreshMain(
-                                window.CommonParams.get('opendb_url')
+                            CommonActions.refreshMain(
+                                CommonParams.get('opendb_url')
                             );
                         } else {
                             /**
@@ -2341,12 +2333,12 @@ Functions.onloadCreateTableEvents = function () {
                         // Refresh navigation as a new table has been added
                         Navigation.reload();
                         // Redirect to table structure page on creation of new table
-                        var argsep = window.CommonParams.get('arg_separator');
+                        var argsep = CommonParams.get('arg_separator');
                         var params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
                         var tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server +
                             argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token +
                             argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
-                        $.get(tableStructureUrl, params12, window.AJAX.responseHandler);
+                        $.get(tableStructureUrl, params12, AJAX.responseHandler);
                     } else {
                         Functions.ajaxShowMessage(
                             '<div class="alert alert-danger" role="alert">' + data.error + '</div>',
@@ -2576,7 +2568,7 @@ Functions.onloadChangePasswordEvents = function () {
             var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
             $theForm.append('<input type="hidden" name="ajax_request" value="true">');
 
-            $.post($theForm.attr('action'), $theForm.serialize() + window.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
+            $.post($theForm.attr('action'), $theForm.serialize() + CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
                 if (typeof data === 'undefined' || data.success !== true) {
                     Functions.ajaxShowMessage(data.error, false);
                     return;
@@ -2599,7 +2591,7 @@ Functions.onloadChangePasswordEvents = function () {
             }
 
             if (data.scripts) {
-                window.AJAX.scriptHandler.load(data.scripts);
+                AJAX.scriptHandler.load(data.scripts);
             }
 
             // for this dialog, we remove the fieldset wrapping due to double headings
@@ -2706,8 +2698,8 @@ Functions.validateDefaultValue = function ($nullCheckbox) {
  * @param {number} offset of the selected column in central list of columns
  */
 Functions.autoPopulate = function (inputId, offset) {
-    var db = window.CommonParams.get('db');
-    var table = window.CommonParams.get('table');
+    var db = CommonParams.get('db');
+    var table = CommonParams.get('table');
     var newInputId = inputId.substring(0, inputId.length - 1);
     $('#' + newInputId + '1').val(window.centralColumnList[db + '_' + table][offset].col_name);
     var colType = window.centralColumnList[db + '_' + table][offset].col_type.toUpperCase();
@@ -2850,7 +2842,7 @@ Functions.onloadEnumSetEditor = function () {
             '<div class=\'slider\'></div>' +
             '</td><td>' +
             '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' +
-            Functions.sprintf(window.Messages.enum_addValue, 1) +
+            window.sprintf(window.Messages.enum_addValue, 1) +
             '\'></div></form>' +
             '</td></tr></table>' +
             '<input type=\'hidden\' value=\'' + // So we know which column's data is being edited
@@ -2889,7 +2881,7 @@ Functions.onloadEnumSetEditor = function () {
             max: 9,
             slide: function (event, ui) {
                 $(this).closest('table').find('input[type=submit]').val(
-                    Functions.sprintf(window.Messages.enum_addValue, ui.value)
+                    window.sprintf(window.Messages.enum_addValue, ui.value)
                 );
             }
         });
@@ -2900,8 +2892,8 @@ Functions.onloadEnumSetEditor = function () {
 
     $(document).on('click', 'a.central_columns_dialog', function () {
         var href = 'index.php?route=/database/central-columns';
-        var db = window.CommonParams.get('db');
-        var table = window.CommonParams.get('table');
+        var db = CommonParams.get('db');
+        var table = CommonParams.get('table');
         var maxRows = $(this).data('maxrows');
         var pick = $(this).data('pick');
         if (pick !== false) {
@@ -2909,9 +2901,9 @@ Functions.onloadEnumSetEditor = function () {
         }
         var params = {
             'ajax_request': true,
-            'server': window.CommonParams.get('server'),
-            'db': window.CommonParams.get('db'),
-            'cur_table': window.CommonParams.get('table'),
+            'server': CommonParams.get('server'),
+            'db': CommonParams.get('db'),
+            'cur_table': CommonParams.get('table'),
             'getColumnList': true
         };
         var colid = $(this).closest('td').find('input').attr('id');
@@ -2953,7 +2945,7 @@ Functions.onloadEnumSetEditor = function () {
         var resultPointer = i;
         var searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
         if (fields === '') {
-            fields = Functions.sprintf(window.Messages.strEmptyCentralList, '\'' + Functions.escapeHtml(db) + '\'');
+            fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + Functions.escapeHtml(db) + '\'');
             searchIn = '';
         }
         var seeMore = '';
@@ -3140,7 +3132,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         const modalBody = indexDialogPreviewModal.querySelector('.modal-body');
         const $form = $('#index_frm');
         const formUrl = $form.attr('action');
-        const sep = window.CommonParams.get('arg_separator');
+        const sep = CommonParams.get('arg_separator');
         const formData = $form.serialize() +
             sep + 'do_save_data=1' +
             sep + 'preview_sql=1' +
@@ -3167,10 +3159,8 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
             '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
     });
 
-    /**
-     * @var button_options Object that stores the options
-     *                     passed to jQueryUI dialog
-     */
+    // Remove previous click listeners from other modal openings (issue: #17892)
+    $('#indexDialogModalGoButton').off('click');
     $('#indexDialogModalGoButton').on('click', function () {
         /**
          * @var the_form object referring to the export form
@@ -3179,7 +3169,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
         Functions.prepareForAjaxRequest($form);
         // User wants to submit the form
-        $.post($form.attr('action'), $form.serialize() + window.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
+        $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
             var $sqlqueryresults = $('.sqlqueryresults');
             if ($sqlqueryresults.length !== 0) {
                 $sqlqueryresults.remove();
@@ -3266,7 +3256,7 @@ Functions.showIndexEditDialog = function ($outer) {
         max: 16,
         slide: function (event, ui) {
             $(this).closest('fieldset').find('input[type=submit]').val(
-                Functions.sprintf(window.Messages.strAddToIndex, ui.value)
+                window.sprintf(window.Messages.strAddToIndex, ui.value)
             );
         }
     });
@@ -3525,15 +3515,15 @@ Functions.onloadRecentFavoriteTables = () => {
             cache: false,
             type: 'POST',
             data: {
-                'favoriteTables': (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined')
+                'favoriteTables': (Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined')
                     ? window.localStorage.favoriteTables
                     : '',
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
                 'no_debug': true
             },
             success: function (data) {
                 // Update localStorage.
-                if (window.Config.isStorageSupported('localStorage')) {
+                if (Config.isStorageSupported('localStorage')) {
                     window.localStorage.favoriteTables = data.favoriteTables;
                 }
                 $('#pma_favorite_list').html(data.list);
@@ -3677,7 +3667,7 @@ Functions.onloadLockPage = function () {
         // val-hash is the hash of default value of the field
         // so that it can be compared with new value hash
         // to check whether field was modified or not.
-        $(this).data('val-hash', window.AJAX.hash($(this).val()));
+        $(this).data('val-hash', AJAX.hash($(this).val()));
     });
 
     // initializes lock-page elements (input types checkbox and radio buttons)
@@ -3685,7 +3675,7 @@ Functions.onloadLockPage = function () {
     $('#page_content form.lock-page input[type="checkbox"], ' +
         '#page_content form.lock-page input[type="radio"]').each(function (i) {
         $(this).data('lock-id', i);
-        $(this).data('val-hash', window.AJAX.hash($(this).is(':checked')));
+        $(this).data('val-hash', AJAX.hash($(this).is(':checked')));
     });
 };
 
@@ -3732,7 +3722,7 @@ Functions.getAutoSubmitEventHandler = function () {
 };
 
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 const PrintPage = {
     handleEvent: () => {
@@ -3750,7 +3740,7 @@ Functions.onloadCreateView = function () {
     $('.logout').on('click', function () {
         var form = $(
             '<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' +
-            '<input type="hidden" name="token" value="' + Functions.escapeHtml(window.CommonParams.get('token')) + '">' +
+            '<input type="hidden" name="token" value="' + Functions.escapeHtml(CommonParams.get('token')) + '">' +
             '</form>'
         );
         $('body').append(form);
@@ -3790,7 +3780,7 @@ Functions.onloadCreateView = function () {
 
 Functions.createViewModal = function ($this) {
     var $msg = Functions.ajaxShowMessage();
-    var sep = window.CommonParams.get('arg_separator');
+    var sep = CommonParams.get('arg_separator');
     var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
     params += sep + 'ajax_dialog=1';
     $.post($this.attr('href'), params, function (data) {
@@ -4023,7 +4013,7 @@ Functions.onloadLoginForm = () => {
     }
     var $httpsWarning = $('#js-https-mismatch');
     if ($httpsWarning.length) {
-        if ((window.location.protocol === 'https:') !== window.CommonParams.get('is_https')) {
+        if ((window.location.protocol === 'https:') !== CommonParams.get('is_https')) {
             $httpsWarning.show();
         }
     }
@@ -4065,7 +4055,7 @@ Functions.checkNumberOfFields = function () {
     $('form').each(function () {
         var nbInputs = $(this).find(':input').length;
         if (nbInputs > maxInputVars) {
-            var warning = Functions.sprintf(window.Messages.strTooManyInputs, maxInputVars);
+            var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
             Functions.ajaxShowMessage(warning);
             return false;
         }
@@ -4293,7 +4283,7 @@ Functions.configSet = function (key, value) {
         data: {
             'ajax_request': true,
             key: key,
-            server: window.CommonParams.get('server'),
+            server: CommonParams.get('server'),
             value: serialized,
         },
         success: function (data) {
@@ -4337,7 +4327,7 @@ Functions.configGet = function (key, cached, successCallback, failureCallback) {
         dataType: 'json',
         data: {
             'ajax_request': true,
-            server: window.CommonParams.get('server'),
+            server: CommonParams.get('server'),
             key: key
         },
         success: function (data) {
@@ -4456,3 +4446,5 @@ Functions.on = function () {
         Functions.onloadSortLinkMouseEvent();
     };
 };
+
+export { Functions };

@@ -1,13 +1,14 @@
 import $ from 'jquery';
+import { Functions } from './functions.js';
+import { CommonParams } from './common.js';
+import { Config } from './config.js';
 
 /**
  * function used in or for navigation panel
  *
  * @package phpMyAdmin-Navigation
  */
-
-var Navigation = {};
-window.Navigation = Navigation;
+const Navigation = {};
 
 /**
  * updates the tree state in sessionStorage
@@ -16,14 +17,14 @@ window.Navigation = Navigation;
  */
 Navigation.treeStateUpdate = function () {
     // update if session storage is supported
-    if (window.Config.isStorageSupported('sessionStorage')) {
+    if (Config.isStorageSupported('sessionStorage')) {
         var storage = window.sessionStorage;
         // try catch necessary here to detect whether
         // content to be stored exceeds storage capacity
         try {
             storage.setItem('navTreePaths', JSON.stringify(Navigation.traverseForPaths()));
-            storage.setItem('server', window.CommonParams.get('server'));
-            storage.setItem('token', window.CommonParams.get('token'));
+            storage.setItem('server', CommonParams.get('server'));
+            storage.setItem('token', CommonParams.get('token'));
         } catch (error) {
             // storage capacity exceeded & old navigation tree
             // state is no more valid, so remove it
@@ -43,7 +44,7 @@ Navigation.treeStateUpdate = function () {
  * @return {void}
  */
 Navigation.filterStateUpdate = function (filterName, filterValue) {
-    if (window.Config.isStorageSupported('sessionStorage')) {
+    if (Config.isStorageSupported('sessionStorage')) {
         var storage = window.sessionStorage;
         try {
             var currentFilter = $.extend({}, JSON.parse(storage.getItem('navTreeSearchFilters')));
@@ -63,7 +64,7 @@ Navigation.filterStateUpdate = function (filterName, filterValue) {
  * @return {void}
  */
 Navigation.filterStateRestore = function () {
-    if (window.Config.isStorageSupported('sessionStorage')
+    if (Config.isStorageSupported('sessionStorage')
         && typeof window.sessionStorage.navTreeSearchFilters !== 'undefined'
     ) {
         var searchClauses = JSON.parse(window.sessionStorage.navTreeSearchFilters);
@@ -139,7 +140,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
         var pos2Name = $expandElem.find('span.pos2_nav');
         var pathsNav = $expandElem.find('span.paths_nav');
         params = {
-            'server': window.CommonParams.get('server'),
+            'server': CommonParams.get('server'),
             'aPath': pathsNav.attr('data-apath'),
             'vPath': pathsNav.attr('data-vpath'),
             'pos': pathsNav.attr('data-pos'),
@@ -155,7 +156,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
     } else {
         $destination = $('#pma_navigation_tree_content');
         params = {
-            'server': window.CommonParams.get('server'),
+            'server': CommonParams.get('server'),
             'aPath': $expandElem.attr('data-apath'),
             'vPath': $expandElem.attr('data-vpath'),
             'pos': $expandElem.attr('data-pos'),
@@ -196,7 +197,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
             if (window.location.href.indexOf('?') === -1) {
                 window.location.href += '?session_expired=1';
             } else {
-                window.location.href += window.CommonParams.get('arg_separator') + 'session_expired=1';
+                window.location.href += CommonParams.get('arg_separator') + 'session_expired=1';
             }
             window.location.reload();
         } else {
@@ -330,7 +331,7 @@ Navigation.onload = () => function () {
 
     $(document).on('change', '#navi_db_select', function () {
         if (! $(this).val()) {
-            window.CommonParams.set('db', '');
+            CommonParams.set('db', '');
             Navigation.reload();
         }
         $(this).closest('form').trigger('submit');
@@ -412,15 +413,15 @@ Navigation.onload = () => function () {
     /**
      * Bind all "fast filter" events
      */
-    $(document).on('click', '#pma_navigation_tree li.fast_filter button.searchClauseClear', Navigation.FastFilter.events.clear);
-    $(document).on('focus', '#pma_navigation_tree li.fast_filter input.searchClause', Navigation.FastFilter.events.focus);
-    $(document).on('blur', '#pma_navigation_tree li.fast_filter input.searchClause', Navigation.FastFilter.events.blur);
-    $(document).on('keyup', '#pma_navigation_tree li.fast_filter input.searchClause', Navigation.FastFilter.events.keyup);
+    $('#pma_navigation_tree').on('click', 'li.fast_filter button.searchClauseClear', Navigation.FastFilter.events.clear);
+    $('#pma_navigation_tree').on('focus', 'li.fast_filter input.searchClause', Navigation.FastFilter.events.focus);
+    $('#pma_navigation_tree').on('blur', 'li.fast_filter input.searchClause', Navigation.FastFilter.events.blur);
+    $('#pma_navigation_tree').on('keyup', 'li.fast_filter input.searchClause', Navigation.FastFilter.events.keyup);
 
     /**
      * Ajax handler for pagination
      */
-    $(document).on('click', '#pma_navigation_tree div.pageselector a.ajax', function (event) {
+    $('#pma_navigation_tree').on('click', 'div.pageselector a.ajax', function (event) {
         event.preventDefault();
         Navigation.treePagination($(this));
     });
@@ -428,18 +429,18 @@ Navigation.onload = () => function () {
     /**
      * Node highlighting
      */
-    $(document).on(
+    $('#pma_navigation_tree.highlight').on(
         'mouseover',
-        '#pma_navigation_tree.highlight li:not(.fast_filter)',
+        'li:not(.fast_filter)',
         function () {
             if ($('li:visible', this).length === 0) {
                 $(this).addClass('activePointer');
             }
         }
     );
-    $(document).on(
+    $('#pma_navigation_tree.highlight').on(
         'mouseout',
-        '#pma_navigation_tree.highlight li:not(.fast_filter)',
+        'li:not(.fast_filter)',
         function () {
             $(this).removeClass('activePointer');
         }
@@ -454,9 +455,9 @@ Navigation.onload = () => function () {
     /** Hide navigation tree item */
     $(document).on('click', 'a.hideNavItem.ajax', function (event) {
         event.preventDefault();
-        var argSep = window.CommonParams.get('arg_separator');
+        var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
-        params += argSep + 'ajax_request=true' + argSep + 'server=' + window.CommonParams.get('server');
+        params += argSep + 'ajax_request=true' + argSep + 'server=' + CommonParams.get('server');
         $.ajax({
             type: 'POST',
             data: params,
@@ -475,7 +476,7 @@ Navigation.onload = () => function () {
     $(document).on('click', 'a.showUnhide.ajax', function (event) {
         event.preventDefault();
         var $msg = Functions.ajaxShowMessage();
-        var argSep = window.CommonParams.get('arg_separator');
+        var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
         params += argSep + 'ajax_request=true';
         $.post($(this).attr('href'), params, function (data) {
@@ -496,9 +497,9 @@ Navigation.onload = () => function () {
         var $hiddenTableCount = $tr.parents('tbody').children().length;
         var $hideDialogBox = $tr.closest('div.ui-dialog');
         var $msg = Functions.ajaxShowMessage();
-        var argSep = window.CommonParams.get('arg_separator');
+        var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
-        params += argSep + 'ajax_request=true' + argSep + 'server=' + window.CommonParams.get('server');
+        params += argSep + 'ajax_request=true' + argSep + 'server=' + CommonParams.get('server');
         $.ajax({
             type: 'POST',
             data: params,
@@ -531,7 +532,7 @@ Navigation.onload = () => function () {
             }
         }
 
-        var hasLocalStorage = window.Config.isStorageSupported('localStorage') &&
+        var hasLocalStorage = Config.isStorageSupported('localStorage') &&
             typeof window.localStorage.favoriteTables !== 'undefined';
         $.ajax({
             url: $self.attr('href'),
@@ -539,7 +540,7 @@ Navigation.onload = () => function () {
             type: 'POST',
             data: {
                 'favoriteTables': hasLocalStorage ? window.localStorage.favoriteTables : '',
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
             },
             success: function (data) {
                 if (data.changes) {
@@ -551,7 +552,7 @@ Navigation.onload = () => function () {
                         $('#' + anchorId).attr('title')
                     );
                     // Update localStorage.
-                    if (window.Config.isStorageSupported('localStorage')) {
+                    if (Config.isStorageSupported('localStorage')) {
                         window.localStorage.favoriteTables = data.favoriteTables;
                     }
                 } else {
@@ -561,7 +562,7 @@ Navigation.onload = () => function () {
         });
     });
     // Check if session storage is supported
-    if (window.Config.isStorageSupported('sessionStorage')) {
+    if (Config.isStorageSupported('sessionStorage')) {
         var storage = window.sessionStorage;
         // remove tree from storage if Navi_panel config form is submitted
         $(document).on('submit', 'form.config-form', function () {
@@ -572,8 +573,8 @@ Navigation.onload = () => function () {
             typeof storage.navTreePaths === 'undefined'
         ) {
             Navigation.reload();
-        } else if (window.CommonParams.get('server') === storage.server &&
-            window.CommonParams.get('token') === storage.token
+        } else if (CommonParams.get('server') === storage.server &&
+            CommonParams.get('token') === storage.token
         ) {
             // Reload the tree to the state before page refresh
             Navigation.reload(Navigation.filterStateRestore, JSON.parse(storage.navTreePaths));
@@ -670,8 +671,8 @@ Navigation.scrollToView = function ($element, $forceToTop) {
  * @return {void}
  */
 Navigation.showCurrent = function () {
-    var db = window.CommonParams.get('db');
-    var table = window.CommonParams.get('table');
+    var db = CommonParams.get('db');
+    var table = CommonParams.get('table');
 
     var autoexpand = $('#pma_navigation_tree').hasClass('autoexpand');
 
@@ -898,13 +899,13 @@ Navigation.ensureSettings = function (selflink) {
     if (!$('#pma_navigation_settings').length) {
         var params = {
             getNaviSettings: true,
-            server: window.CommonParams.get('server'),
+            server: CommonParams.get('server'),
         };
         $.post('index.php?route=/navigation&ajax_request=1', params, function (data) {
             if (typeof data !== 'undefined' && data.success) {
                 $('#pma_navi_settings_container').html(data.message);
-                window.Config.setupRestoreField();
-                window.Config.setupValidation();
+                Config.setupRestoreField();
+                Config.setupValidation();
                 $('#pma_navigation_settings').find('form').attr('action', selflink);
             } else {
                 Functions.ajaxShowMessage(data.error);
@@ -927,12 +928,12 @@ Navigation.reload = function (callback, paths) {
     var params = {
         'reload': true,
         'no_debug': true,
-        'server': window.CommonParams.get('server'),
+        'server': CommonParams.get('server'),
     };
     var pathsLocal = paths || Navigation.traverseForPaths();
     $.extend(params, pathsLocal);
     if ($('#navi_db_select').length) {
-        params.db = window.CommonParams.get('db');
+        params.db = CommonParams.get('db');
         requestNaviReload(params);
         return;
     }
@@ -965,12 +966,12 @@ Navigation.selectCurrentDatabase = function () {
         return false;
     }
 
-    if (window.CommonParams.get('db')) { // db selected
+    if (CommonParams.get('db')) { // db selected
         $naviDbSelect.show();
     }
 
-    $naviDbSelect.val(window.CommonParams.get('db'));
-    return $naviDbSelect.val() === window.CommonParams.get('db');
+    $naviDbSelect.val(CommonParams.get('db'));
+    return $naviDbSelect.val() === CommonParams.get('db');
 };
 
 /**
@@ -989,20 +990,20 @@ Navigation.treePagination = function ($this) {
     var url = 'index.php?route=/navigation';
     var params = 'ajax_request=true';
     if ($this[0].tagName === 'A') {
-        params += window.CommonParams.get('arg_separator') + $this.getPostData();
+        params += CommonParams.get('arg_separator') + $this.getPostData();
     } else { // tagName === 'SELECT'
-        params += window.CommonParams.get('arg_separator') + $this.closest('form').serialize();
+        params += CommonParams.get('arg_separator') + $this.closest('form').serialize();
     }
     var searchClause = Navigation.FastFilter.getSearchClause();
     if (searchClause) {
-        params += window.CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent(searchClause);
+        params += CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent(searchClause);
     }
     if (isDbSelector) {
-        params += window.CommonParams.get('arg_separator') + 'full=true';
+        params += CommonParams.get('arg_separator') + 'full=true';
     } else {
         var searchClause2 = Navigation.FastFilter.getSearchClause2($this);
         if (searchClause2) {
-            params += window.CommonParams.get('arg_separator') + 'searchClause2=' + encodeURIComponent(searchClause2);
+            params += CommonParams.get('arg_separator') + 'searchClause2=' + encodeURIComponent(searchClause2);
         }
     }
     $.post(url, params, function (data) {
@@ -1549,11 +1550,11 @@ Navigation.FastFilter.Filter.prototype.request = function () {
     if (self.$this.find('> ul > li > form.fast_filter').first().find('input[name=searchClause]').length === 0) {
         var $input = $('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
         if ($input.length && $input.val() !== $input[0].defaultValue) {
-            params += window.CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent($input.val());
+            params += CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent($input.val());
         }
     }
     self.xhr = $.ajax({
-        url: 'index.php?route=/navigation&ajax_request=1&server=' + window.CommonParams.get('server'),
+        url: 'index.php?route=/navigation&ajax_request=1&server=' + CommonParams.get('server'),
         type: 'post',
         dataType: 'json',
         data: params,
@@ -1647,3 +1648,5 @@ Navigation.showFullName = function ($containerELem) {
         }
     });
 };
+
+export { Navigation };

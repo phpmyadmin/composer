@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from './modules/ajax.js';
+import { Functions } from './modules/functions.js';
+import { CommonParams } from './modules/common.js';
 
 /**
  * Functions used in the export tab
@@ -76,9 +79,9 @@ Export.createTemplate = function (name) {
 
     var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
-        'table': window.CommonParams.get('table'),
+        'server': CommonParams.get('server'),
+        'db': CommonParams.get('db'),
+        'table': CommonParams.get('table'),
         'exportType': $('input[name="export_type"]').val(),
         'templateName': name,
         'templateData': JSON.stringify(templateData)
@@ -109,9 +112,9 @@ Export.createTemplate = function (name) {
 Export.loadTemplate = function (id) {
     var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
-        'table': window.CommonParams.get('table'),
+        'server': CommonParams.get('server'),
+        'db': CommonParams.get('db'),
+        'table': CommonParams.get('table'),
         'exportType': $('input[name="export_type"]').val(),
         'templateId': id,
     };
@@ -158,9 +161,9 @@ Export.updateTemplate = function (id) {
 
     var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
-        'table': window.CommonParams.get('table'),
+        'server': CommonParams.get('server'),
+        'db': CommonParams.get('db'),
+        'table': CommonParams.get('table'),
         'exportType': $('input[name="export_type"]').val(),
         'templateId': id,
         'templateData': JSON.stringify(templateData)
@@ -184,9 +187,9 @@ Export.updateTemplate = function (id) {
 Export.deleteTemplate = function (id) {
     var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
-        'table': window.CommonParams.get('table'),
+        'server': CommonParams.get('server'),
+        'db': CommonParams.get('db'),
+        'table': CommonParams.get('table'),
         'exportType': $('input[name="export_type"]').val(),
         'templateId': id,
     };
@@ -205,7 +208,7 @@ Export.deleteTemplate = function (id) {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('export.js', function () {
+AJAX.registerTeardown('export.js', function () {
     $('#plugins').off('change');
     $('input[type=\'radio\'][name=\'sql_structure_or_data\']').off('change');
     $('input[type=\'radio\'][name$=\'_structure_or_data\']').off('change');
@@ -229,7 +232,7 @@ window.AJAX.registerTeardown('export.js', function () {
     $('input[name="deleteTemplate"]').off('click');
 });
 
-window.AJAX.registerOnload('export.js', function () {
+AJAX.registerOnload('export.js', function () {
     $('#showsqlquery').on('click', function () {
         // Creating a dialog box similar to preview sql container to show sql query
         var modal = $('#showSqlQueryModal');
@@ -434,7 +437,7 @@ Export.toggleSaveToFile = function () {
     }
 };
 
-window.AJAX.registerOnload('export.js', function () {
+AJAX.registerOnload('export.js', function () {
     Export.toggleSaveToFile();
     $('input[type=\'radio\'][name=\'output_format\']').on('change', Export.toggleSaveToFile);
 });
@@ -580,7 +583,7 @@ Export.handleAddProcCheckbox = function () {
     }
 };
 
-window.AJAX.registerOnload('export.js', function () {
+AJAX.registerOnload('export.js', function () {
     /**
      * For SQL plugin, if "CREATE TABLE options" is checked/unchecked, check/uncheck each of its sub-options
      */
@@ -599,9 +602,9 @@ window.AJAX.registerOnload('export.js', function () {
      * Disables the view output as text option if the output must be saved as a file
      */
     $('#plugins').on('change', function () {
-        var activePlugin = $('#plugins').find('option:selected').val();
-        var forceFile = $('#force_file_' + activePlugin).val();
-        if (forceFile === 'true') {
+        const isBinary = $('#plugins').find('option:selected')
+            .attr('data-is-binary') === 'true';
+        if (isBinary) {
             if ($('#radio_dump_asfile').prop('checked') !== true) {
                 $('#radio_dump_asfile').prop('checked', true);
                 Export.toggleSaveToFile();
@@ -785,7 +788,7 @@ Export.createAliasModal = function (event) {
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
         modal.closest('.ui-dialog').find('.ui-button').addClass('btn btn-secondary');
-        var db = window.CommonParams.get('db');
+        var db = CommonParams.get('db');
         if (db) {
             var option = $('<option></option>');
             option.text(db);
@@ -794,7 +797,7 @@ Export.createAliasModal = function (event) {
         } else {
             var params = {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server')
+                'server': CommonParams.get('server')
             };
             $.post('index.php?route=/databases', params, function (response) {
                 if (response.success === true) {
@@ -864,7 +867,7 @@ Export.addAlias = function (type, name, field, value) {
     $('#alias_data tbody').append(row);
 };
 
-window.AJAX.registerOnload('export.js', function () {
+AJAX.registerOnload('export.js', function () {
     $('input[type=\'radio\'][name=\'quick_or_custom\']').on('change', toggleQuickOrCustom);
     $('#format_specific_opts').find('div.format_specific_options')
         .addClass('d-none')
@@ -900,7 +903,7 @@ window.AJAX.registerOnload('export.js', function () {
     });
     $('#db_alias_select').on('change', function () {
         Export.aliasToggleRow($(this));
-        var table = window.CommonParams.get('table');
+        var table = CommonParams.get('table');
         if (table) {
             var option = $('<option></option>');
             option.text(table);
@@ -910,7 +913,7 @@ window.AJAX.registerOnload('export.js', function () {
             var database = $(this).val();
             var params = {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
                 'db': database,
             };
             var url = 'index.php?route=/tables';
@@ -934,7 +937,7 @@ window.AJAX.registerOnload('export.js', function () {
         var table = $(this).val();
         var params = {
             'ajax_request': true,
-            'server': window.CommonParams.get('server'),
+            'server': CommonParams.get('server'),
             'db': database,
             'table': table,
         };

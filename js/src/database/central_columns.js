@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview   events handling from central columns page
@@ -17,7 +20,7 @@ import $ from 'jquery';
  *
  */
 
-window.AJAX.registerTeardown('database/central_columns.js', function () {
+AJAX.registerTeardown('database/central_columns.js', function () {
     $('.edit').off('click');
     $('.edit_save_form').off('click');
     $('.edit_cancel_form').off('click');
@@ -34,7 +37,7 @@ window.AJAX.registerTeardown('database/central_columns.js', function () {
     $('button[name=\'edit_central_columns\']').off('click');
 });
 
-window.AJAX.registerOnload('database/central_columns.js', function () {
+AJAX.registerOnload('database/central_columns.js', function () {
     $('#tableslistcontainer input,#tableslistcontainer select,#tableslistcontainer .default_value,#tableslistcontainer .open_enum_editor').hide();
     $('#tableslistcontainer').find('.checkall').show();
     $('#tableslistcontainer').find('.checkall_box').show();
@@ -65,20 +68,20 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
             Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
             return false;
         }
-        var argsep = window.CommonParams.get('arg_separator');
-        var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(window.CommonParams.get('db')) + argsep + 'server=' + window.CommonParams.get('server');
+        var argsep = CommonParams.get('arg_separator');
+        var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(CommonParams.get('db')) + argsep + 'server=' + CommonParams.get('server');
         Functions.ajaxShowMessage();
-        window.AJAX.source = $(this);
-        $.post('index.php?route=/database/central-columns', editColumnData, window.AJAX.responseHandler);
+        AJAX.source = $(this);
+        $.post('index.php?route=/database/central-columns', editColumnData, AJAX.responseHandler);
     });
     $('#multi_edit_central_columns').on('submit', function (event) {
         event.preventDefault();
         event.stopPropagation();
-        var argsep = window.CommonParams.get('arg_separator');
-        var multiColumnEditData = $('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(window.CommonParams.get('db')) + argsep + 'server=' + window.CommonParams.get('server');
+        var argsep = CommonParams.get('arg_separator');
+        var multiColumnEditData = $('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(CommonParams.get('db')) + argsep + 'server=' + CommonParams.get('server');
         Functions.ajaxShowMessage();
-        window.AJAX.source = $(this);
-        $.post('index.php?route=/database/central-columns', multiColumnEditData, window.AJAX.responseHandler);
+        AJAX.source = $(this);
+        $.post('index.php?route=/database/central-columns', multiColumnEditData, AJAX.responseHandler);
     });
     $('#add_new').find('td').each(function () {
         if ($(this).attr('name') !== 'undefined') {
@@ -155,7 +158,7 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
         $.ajax({
             type: 'POST',
             url: 'index.php?route=/database/central-columns',
-            data: datastring + window.CommonParams.get('arg_separator') + 'ajax_request=true',
+            data: datastring + CommonParams.get('arg_separator') + 'ajax_request=true',
             dataType: 'json',
             success: function (data) {
                 if (data.message !== '1') {
@@ -198,8 +201,8 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
         var href = 'index.php?route=/database/central-columns/populate';
         var params = {
             'ajax_request' : true,
-            'server' : window.CommonParams.get('server'),
-            'db' : window.CommonParams.get('db'),
+            'server' : CommonParams.get('server'),
+            'db' : CommonParams.get('db'),
             'selectedTable' : selectValue
         };
         $('#column-select').html('<option value="">' + window.Messages.strLoading + '</option>');

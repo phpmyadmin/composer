@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Config\Settings;
+use PhpMyAdmin\Exceptions\ConfigException;
+use Throwable;
 
 use function __;
 use function array_filter;
@@ -13,7 +15,6 @@ use function array_replace_recursive;
 use function array_slice;
 use function count;
 use function defined;
-use function error_get_last;
 use function error_reporting;
 use function explode;
 use function fclose;
@@ -104,17 +105,18 @@ class Config
     public $done = false;
 
     /**
-     * @param string $source source to read config from
+     * @param string|null $source source to read config from
+     *
+     * @throws ConfigException
      */
-    public function __construct(?string $source = null)
+    public function loadAndCheck(?string $source = null): void
     {
         $this->settings = ['is_setup' => false];
 
-        // functions need to refresh in case of config file changed goes in
-        // PhpMyAdmin\Config::load()
+        // functions need to refresh in case of config file changed goes in PhpMyAdmin\Config::load()
         $this->load($source);
 
-        // other settings, independent from config file, comes in
+        // other settings, independent of config file, comes in
         $this->checkSystem();
 
         $this->baseSettings = $this->settings;
@@ -340,12 +342,12 @@ class Config
      * loads configuration from $source, usually the config file
      * should be called on object creation
      *
-     * @param string $source config file
+     * @param string|null $source config file
+     *
+     * @throws ConfigException
      */
     public function load(?string $source = null): bool
     {
-        $GLOBALS['isConfigLoading'] = $GLOBALS['isConfigLoading'] ?? null;
-
         $this->loadDefaults();
 
         if ($source !== null) {
@@ -369,10 +371,13 @@ class Config
         }
 
         ob_start();
-        $GLOBALS['isConfigLoading'] = true;
-        /** @psalm-suppress UnresolvableInclude */
-        $eval_result = include $this->getSource();
-        $GLOBALS['isConfigLoading'] = false;
+        try {
+            /** @psalm-suppress UnresolvableInclude */
+            $eval_result = include $this->getSource();
+        } catch (Throwable $exception) {
+            throw new ConfigException('Failed to load phpMyAdmin configuration.');
+        }
+
         ob_end_clean();
 
         if ($canUseErrorReporting) {
@@ -608,7 +613,7 @@ class Config
     }
 
     /**
-     * check config source
+     * @throws ConfigException
      */
     public function checkConfigSource(): bool
     {
@@ -636,20 +641,13 @@ class Config
 
             if ($contents === false) {
                 $this->sourceMtime = 0;
-                echo (new Template())->render('error/generic', [
-                    'lang' => $GLOBALS['lang'] ?? 'en',
-                    'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-                    'error_message' => sprintf(
-                        function_exists('__')
-                            ? __('Existing configuration file (%s) is not readable.')
-                            : 'Existing configuration file (%s) is not readable.',
-                        $this->getSource()
-                    ),
-                ]);
 
-                if (! defined('TESTSUITE')) {
-                    exit;
-                }
+                throw new ConfigException(sprintf(
+                    function_exists('__')
+                        ? __('Existing configuration file (%s) is not readable.')
+                        : 'Existing configuration file (%s) is not readable.',
+                    $this->getSource()
+                ));
             }
         }
 
@@ -659,6 +657,8 @@ class Config
     /**
      * verifies the permissions on config file (if asked by configuration)
      * (must be called after config.inc.php has been merged)
+     *
+     * @throws ConfigException
      */
     public function checkPermissions(): void
     {
@@ -679,18 +679,14 @@ class Config
         }
 
         $this->sourceMtime = 0;
-        echo (new Template())->render('error/generic', [
-            'lang' => $GLOBALS['lang'] ?? 'en',
-            'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-            'error_message' => __('Wrong permissions on configuration file, should not be world writable!'),
-        ]);
 
-        exit;
+        throw new ConfigException(__('Wrong permissions on configuration file, should not be world writable!'));
     }
 
     /**
-     * Checks for errors
-     * (must be called after config.inc.php has been merged)
+     * Checks for errors (must be called after config.inc.php has been merged)
+     *
+     * @throws ConfigException
      */
     public function checkErrors(): void
     {
@@ -703,7 +699,8 @@ class Config
             . __('This usually means there is a syntax error in it, please check any errors shown below.')
             . '[br][br]'
             . '[conferr]';
-        trigger_error($error, E_USER_ERROR);
+
+        throw new ConfigException(Sanitize::sanitizeMessage($error));
     }
 
     /**
@@ -1030,35 +1027,6 @@ class Config
     public function issetCookie(string $cookieName): bool
     {
         return isset($_COOKIE[$this->getCookieName($cookieName)]);
-    }
-
-    /**
-     * Error handler to catch fatal errors when loading configuration
-     * file
-     */
-    public static function fatalErrorHandler(): void
-    {
-        if (! isset($GLOBALS['isConfigLoading']) || ! $GLOBALS['isConfigLoading']) {
-            return;
-        }
-
-        $error = error_get_last();
-        if ($error === null) {
-            return;
-        }
-
-        echo (new Template())->render('error/generic', [
-            'lang' => $GLOBALS['lang'] ?? 'en',
-            'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-            'error_message' => sprintf(
-                'Failed to load phpMyAdmin configuration (%s:%s): %s',
-                Error::relPath($error['file']),
-                $error['line'],
-                $error['message']
-            ),
-        ]);
-
-        exit;
     }
 
     /**

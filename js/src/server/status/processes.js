@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from '../../modules/ajax.js';
+import { Functions } from '../../modules/functions.js';
+import { CommonParams } from '../../modules/common.js';
 
 /**
  * Server Status Processes
@@ -47,9 +50,9 @@ var processList = {
      */
     killProcessHandler: function (event) {
         event.preventDefault();
-        var argSep = window.CommonParams.get('arg_separator');
+        var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
-        params += argSep + 'ajax_request=1' + argSep + 'server=' + window.CommonParams.get('server');
+        params += argSep + 'ajax_request=1' + argSep + 'server=' + CommonParams.get('server');
         // Get row element of the process to be killed.
         var $tr = $(this).closest('tr');
         $.post($(this).attr('href'), params, function (data) {
@@ -147,7 +150,7 @@ var processList = {
      */
     getUrlParams: function () {
         var urlParams = {
-            'server': window.CommonParams.get('server'),
+            'server': CommonParams.get('server'),
             'ajax_request': true,
             'refresh': true,
             'full': $('input[name="full"]').val(),
@@ -163,7 +166,7 @@ var processList = {
     }
 };
 
-window.AJAX.registerOnload('server/status/processes.js', function () {
+AJAX.registerOnload('server/status/processes.js', function () {
     processList.init();
     // Bind event handler for kill_process
     $('#tableprocesslist').on(
@@ -191,7 +194,7 @@ window.AJAX.registerOnload('server/status/processes.js', function () {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('server/status/processes.js', function () {
+AJAX.registerTeardown('server/status/processes.js', function () {
     $('#tableprocesslist').off('click', 'a.kill_process');
     $('a#toggleRefresh').off('click');
     $('#id_refreshRate').off('change');

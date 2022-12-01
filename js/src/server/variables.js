@@ -1,22 +1,23 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  */
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('server/variables.js', function () {
+AJAX.registerTeardown('server/variables.js', function () {
     $(document).off('click', 'a.editLink');
     $('#serverVariables').find('.var-name').find('a img').remove();
 });
 
-window.AJAX.registerOnload('server/variables.js', function () {
+AJAX.registerOnload('server/variables.js', function () {
     var $saveLink = $('a.saveLink');
     var $cancelLink = $('a.cancelLink');
 
@@ -48,7 +49,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
             var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
             $.post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
                 'varValue': $valueCell.find('input').val()
             }, function (data) {
                 if (data.success) {
@@ -77,7 +78,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
 
         $.get('index.php?route=/server/variables/get/' + encodeURIComponent(varName), {
             'ajax_request': true,
-            'server': window.CommonParams.get('server')
+            'server': CommonParams.get('server')
         }, function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
                 var $links = $('<div></div>')

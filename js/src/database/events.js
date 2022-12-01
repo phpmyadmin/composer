@@ -1,8 +1,9 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { Navigation } from '../modules/navigation.js';
 
-/* global Navigation */
-
-window.AJAX.registerTeardown('database/events.js', function () {
+AJAX.registerTeardown('database/events.js', function () {
     $(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
     $(document).off('click', 'a.ajax.export_anchor');
     $(document).off('click', '#bulkActionExportButton');
@@ -533,7 +534,7 @@ const DatabaseEvents = {
     }
 };
 
-window.AJAX.registerOnload('database/events.js', function () {
+AJAX.registerOnload('database/events.js', function () {
     /**
      * Attach Ajax event handlers for the Add/Edit functionality.
      */

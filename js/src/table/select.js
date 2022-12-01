@@ -1,10 +1,10 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonParams } from '../modules/common.js';
 
 /**
  * @fileoverview JavaScript functions used on /table/search
- *
- * @requires    jQuery
- * @requires    js/functions.js
  */
 
 /* global changeValueFieldType, verifyAfterSearchFieldChange */ // js/table/change.js
@@ -47,7 +47,7 @@ TableSelect.checkIfDataTypeNumericOrDate = function (dataType) {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('table/select.js', function () {
+AJAX.registerTeardown('table/select.js', function () {
     $('#togglesearchformlink').off('click');
     $(document).off('submit', '#tbl_search_form.ajax');
     $('select.geom_func').off('change');
@@ -55,7 +55,7 @@ window.AJAX.registerTeardown('table/select.js', function () {
     $('body').off('change', 'select[name*="criteriaColumnOperators"]'); // Fix for bug #13778, changed 'click' to 'change'
 });
 
-window.AJAX.registerOnload('table/select.js', function () {
+AJAX.registerOnload('table/select.js', function () {
     /**
      * Prepare a div containing a link, otherwise it's incorrectly displayed
      * after a couple of clicks
@@ -301,7 +301,7 @@ window.AJAX.registerOnload('table/select.js', function () {
                 url: 'index.php?route=/table/search',
                 type: 'POST',
                 data: {
-                    'server': window.CommonParams.get('server'),
+                    'server': CommonParams.get('server'),
                     'ajax_request': 1,
                     'db': $('input[name="db"]').val(),
                     'table': $('input[name="table"]').val(),

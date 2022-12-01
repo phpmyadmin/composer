@@ -1,9 +1,11 @@
 import $ from 'jquery';
+import { Functions } from './functions.js';
+import { CommonParams } from './common.js';
 
 /**
  * Functions used in configuration forms and on user preferences pages
  */
-window.Config = {};
+const Config = {};
 
 window.configInlineParams;
 window.configScriptLoaded;
@@ -16,7 +18,7 @@ window.configScriptLoaded;
  *
  * @return {boolean}
  */
-window.Config.isStorageSupported = (type, warn = false) => {
+Config.isStorageSupported = (type, warn = false) => {
     try {
         window[type].setItem('PMATest', 'test');
         // Check whether key-value pair was set successfully
@@ -164,7 +166,7 @@ function getFieldValue (field, fieldType) {
  *
  * @return {object}
  */
-window.Config.getAllValues = () => {
+Config.getAllValues = () => {
     var $elements = $('fieldset input, fieldset select, fieldset textarea');
     var values = {};
     var type;
@@ -223,7 +225,7 @@ function checkFieldDefault (field, type) {
  *
  * @return {string}
  */
-window.Config.getIdPrefix = function (element) {
+Config.getIdPrefix = function (element) {
     return $(element).attr('id').replace(/[^-]+$/, '');
 };
 
@@ -252,7 +254,7 @@ window.validators = {
             return true;
         }
         var result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
-        return result ? true : window.Messages.error_nan_p;
+        return result ? true : window.Messages.configErrorInvalidPositiveNumber;
     },
     /**
      * Validates non-negative number
@@ -266,7 +268,7 @@ window.validators = {
             return true;
         }
         var result = window.validators.regExpNumeric.test(this.value);
-        return result ? true : window.Messages.error_nan_nneg;
+        return result ? true : window.Messages.configErrorInvalidNonNegativeNumber;
     },
     /**
      * Validates port number
@@ -278,7 +280,7 @@ window.validators = {
             return true;
         }
         var result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
-        return result && this.value <= 65535 ? true : window.Messages.error_incorrect_port;
+        return result && this.value <= 65535 ? true : window.Messages.configErrorInvalidPortNumber;
     },
     /**
      * Validates value according to given regular expression
@@ -295,7 +297,7 @@ window.validators = {
         // convert PCRE regexp
         var parts = regexp.match(window.validators.regExpPcreExtract);
         var valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
-        return valid ? true : window.Messages.error_invalid_value;
+        return valid ? true : window.Messages.configErrorInvalidValue;
     },
     /**
      * Validates upper bound for numeric inputs
@@ -310,7 +312,7 @@ window.validators = {
         if (isNaN(val)) {
             return true;
         }
-        return val <= maxValue ? true : Functions.sprintf(window.Messages.error_value_lte, maxValue);
+        return val <= maxValue ? true : window.sprintf(window.Messages.configErrorInvalidUpperBound, maxValue);
     },
     // field validators
     field: {},
@@ -326,7 +328,7 @@ window.validators = {
  * @param {boolean} onKeyUp  whether fire on key up
  * @param {Array}   params   validation function parameters
  */
-window.Config.registerFieldValidator = (id, type, onKeyUp, params) => {
+Config.registerFieldValidator = (id, type, onKeyUp, params) => {
     if (typeof window.validators[type] === 'undefined') {
         return;
     }
@@ -376,7 +378,7 @@ function getFieldValidators (fieldId, onKeyUpOnly) {
  *
  * @param {object} errorList list of errors in the form {field id: error array}
  */
-window.Config.displayErrors = function (errorList) {
+Config.displayErrors = function (errorList) {
     var tempIsEmpty = function (item) {
         return item !== '';
     };
@@ -440,7 +442,7 @@ function setDisplayError () {
     $('fieldset.optbox').each(function () {
         validateFieldset(this, false, errors);
     });
-    window.Config.displayErrors(errors);
+    Config.displayErrors(errors);
 }
 
 /**
@@ -508,10 +510,10 @@ function validateFieldAndFieldset (field, isKeyUp) {
     var errors = {};
     validateField($field, isKeyUp, errors);
     validateFieldset($field.closest('fieldset.optbox'), isKeyUp, errors);
-    window.Config.displayErrors(errors);
+    Config.displayErrors(errors);
 }
 
-window.Config.loadInlineConfig = () => {
+Config.loadInlineConfig = () => {
     if (! Array.isArray(window.configInlineParams)) {
         return;
     }
@@ -522,11 +524,11 @@ window.Config.loadInlineConfig = () => {
     }
 };
 
-window.Config.setupValidation = function () {
+Config.setupValidation = function () {
     validate = {};
     window.configScriptLoaded = true;
     if (window.configScriptLoaded && typeof window.configInlineParams !== 'undefined') {
-        window.Config.loadInlineConfig();
+        Config.loadInlineConfig();
     }
     // register validators and mark custom values
     var $elements = $('.optbox input[id], .optbox select[id], .optbox textarea[id]');
@@ -565,7 +567,7 @@ window.Config.setupValidation = function () {
             validateFieldset(this, false, errors);
         });
 
-        window.Config.displayErrors(errors);
+        Config.displayErrors(errors);
     } else if ($checkPageRefresh) {
         $checkPageRefresh.val('1');
     }
@@ -604,7 +606,7 @@ function restoreField (fieldId) {
     setFieldValue($field, getFieldType($field), window.defaultValues[fieldId]);
 }
 
-window.Config.setupRestoreField = function () {
+Config.setupRestoreField = function () {
     $('div.tab-content')
         .on('mouseenter', '.restore-default, .set-value', function () {
             $(this).css('opacity', 1);
@@ -650,7 +652,7 @@ function savePrefsToLocalStorage (form) {
         type: 'POST',
         data: {
             'ajax_request': true,
-            'server': window.CommonParams.get('server'),
+            'server': CommonParams.get('server'),
             'submit_get_json': true
         },
         success: function (data) {
@@ -691,7 +693,7 @@ function updatePrefsDate () {
  * Prepares message which informs that localStorage preferences are available and can be imported or deleted
  */
 function offerPrefsAutoimport () {
-    var hasConfig = (window.Config.isStorageSupported('localStorage')) && (window.localStorage.config || false);
+    var hasConfig = (Config.isStorageSupported('localStorage')) && (window.localStorage.config || false);
     var $cnt = $('#prefs_autoload');
     if (! $cnt.length || ! hasConfig) {
         return;
@@ -702,7 +704,7 @@ function offerPrefsAutoimport () {
         if ($a.attr('href') === '#no') {
             $cnt.remove();
             $.post('index.php', {
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
                 'prefs_autoload': 'hide'
             }, null, 'html');
             return;
@@ -710,7 +712,7 @@ function offerPrefsAutoimport () {
             $cnt.remove();
             localStorage.clear();
             $.post('index.php', {
-                'server': window.CommonParams.get('server'),
+                'server': CommonParams.get('server'),
                 'prefs_autoload': 'hide'
             }, null, 'html');
             return;
@@ -724,7 +726,7 @@ function offerPrefsAutoimport () {
 /**
  * @return {function}
  */
-window.Config.off = function () {
+Config.off = function () {
     return function () {
         $('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
         $('.optbox input[type=button][name=submit_reset]').off('click');
@@ -739,13 +741,13 @@ window.Config.off = function () {
 /**
  * @return {function}
  */
-window.Config.on = function () {
+Config.on = function () {
     return function () {
         var $topmenuUpt = $('#user_prefs_tabs');
         $topmenuUpt.find('a.active').attr('rel', 'samepage');
         $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
 
-        window.Config.setupValidation();
+        Config.setupValidation();
         adjustPrefsNotification();
 
         $('.optbox input[type=button][name=submit_reset]').on('click', function () {
@@ -756,7 +758,7 @@ window.Config.on = function () {
             setDisplayError();
         });
 
-        window.Config.setupRestoreField();
+        Config.setupRestoreField();
 
         offerPrefsAutoimport();
         var $radios = $('#import_local_storage, #export_local_storage');
@@ -781,7 +783,7 @@ window.Config.on = function () {
             });
 
         // detect localStorage state
-        var lsSupported = window.Config.isStorageSupported('localStorage', true);
+        var lsSupported = Config.isStorageSupported('localStorage', true);
         var lsExists = lsSupported ? (window.localStorage.config || false) : false;
         $('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
         $('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
@@ -818,3 +820,7 @@ window.Config.on = function () {
         });
     };
 };
+
+window.Config = Config;
+
+export { Config };

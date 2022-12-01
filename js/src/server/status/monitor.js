@@ -1,12 +1,14 @@
 import $ from 'jquery';
+import { AJAX } from '../../modules/ajax.js';
+import { Functions } from '../../modules/functions.js';
+import { CommonParams } from '../../modules/common.js';
+import { Config } from '../../modules/config.js';
 
 /**
  * @fileoverview    Javascript functions used in server status monitor page
  * @name            Server Status Monitor
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  */
 
 /* global firstDayOfCalendar, themeImagePath */ // templates/javascript/variables.twig
@@ -78,7 +80,7 @@ function destroyGrid () {
     monitorSettings = null;
 }
 
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+AJAX.registerOnload('server/status/monitor.js', function () {
     var $jsDataForm = $('#js_data');
     serverTimeDiff = new Date().getTime() - $jsDataForm.find('input[name=server_time]').val();
     serverOs = $jsDataForm.find('input[name=server_os]').val();
@@ -89,7 +91,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('server/status/monitor.js', function () {
+AJAX.registerTeardown('server/status/monitor.js', function () {
     $('#emptyDialog').remove();
     $('a.popupLink').off('click');
     $('body').off('click');
@@ -97,7 +99,7 @@ window.AJAX.registerTeardown('server/status/monitor.js', function () {
 /**
  * Popup behaviour
  */
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+AJAX.registerOnload('server/status/monitor.js', function () {
     $('<div></div>')
         .attr('id', 'emptyDialog')
         .appendTo('#page_content');
@@ -125,7 +127,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     });
 });
 
-window.AJAX.registerTeardown('server/status/monitor.js', function () {
+AJAX.registerTeardown('server/status/monitor.js', function () {
     $('a[href="#rearrangeCharts"], a[href="#endChartEditMode"]').off('click');
     $('div.popupContent select[name="chartColumns"]').off('change');
     $('div.popupContent select[name="gridChartRefresh"]').off('change');
@@ -149,7 +151,7 @@ window.AJAX.registerTeardown('server/status/monitor.js', function () {
     destroyGrid();
 });
 
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+AJAX.registerOnload('server/status/monitor.js', function () {
     // Show tab links
     $('div.tabLinks').show();
     $('#loadingMonitorIcon').remove();
@@ -699,7 +701,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
                 // If json ok, try applying config
                 try {
-                    if (window.Config.isStorageSupported('localStorage')) {
+                    if (Config.isStorageSupported('localStorage')) {
                         window.localStorage.monitorCharts = JSON.stringify(json.monitorCharts);
                         window.localStorage.monitorSettings = JSON.stringify(json.monitorSettings);
                     }
@@ -707,7 +709,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                 } catch (err) {
                     alert(window.Messages.strFailedBuildingGrid);
                     // If an exception is thrown, load default again
-                    if (window.Config.isStorageSupported('localStorage')) {
+                    if (Config.isStorageSupported('localStorage')) {
                         window.localStorage.removeItem('monitorCharts');
                         window.localStorage.removeItem('monitorSettings');
                     }
@@ -735,7 +737,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
     $('a[href="#clearMonitorConfig"]').on('click', function (event) {
         event.preventDefault();
-        if (window.Config.isStorageSupported('localStorage')) {
+        if (Config.isStorageSupported('localStorage')) {
             window.localStorage.removeItem('monitorCharts');
             window.localStorage.removeItem('monitorSettings');
             window.localStorage.removeItem('monitorVersion');
@@ -784,7 +786,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         var loadLogVars = function (getvars) {
             var vars = {
                 'ajax_request': true,
-                'server': window.CommonParams.get('server')
+                'server': CommonParams.get('server')
             };
             if (getvars) {
                 $.extend(vars, getvars);
@@ -831,13 +833,13 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                     if (logVars.slow_query_log === 'ON') {
                         if (logVars.long_query_time > 2) {
                             str += Functions.getImage('s_attention') + ' ';
-                            str += Functions.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
+                            str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
                             str += '<br>';
                         }
 
                         if (logVars.long_query_time < 2) {
                             str += Functions.getImage('s_success') + ' ';
-                            str += Functions.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
+                            str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
                             str += '<br>';
                         }
                     }
@@ -855,26 +857,26 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                         }
 
                         str += '- <a class="set" href="#log_output-' + varValue + '">';
-                        str += Functions.sprintf(window.Messages.strSetLogOutput, varValue);
+                        str += window.sprintf(window.Messages.strSetLogOutput, varValue);
                         str += ' </a><br>';
 
                         if (logVars.general_log !== 'ON') {
                             str += '- <a class="set" href="#general_log-ON">';
-                            str += Functions.sprintf(window.Messages.strEnableVar, 'general_log');
+                            str += window.sprintf(window.Messages.strEnableVar, 'general_log');
                             str += ' </a><br>';
                         } else {
                             str += '- <a class="set" href="#general_log-OFF">';
-                            str += Functions.sprintf(window.Messages.strDisableVar, 'general_log');
+                            str += window.sprintf(window.Messages.strDisableVar, 'general_log');
                             str += ' </a><br>';
                         }
 
                         if (logVars.slow_query_log !== 'ON') {
                             str += '- <a class="set" href="#slow_query_log-ON">';
-                            str +=  Functions.sprintf(window.Messages.strEnableVar, 'slow_query_log');
+                            str +=  window.sprintf(window.Messages.strEnableVar, 'slow_query_log');
                             str += ' </a><br>';
                         } else {
                             str += '- <a class="set" href="#slow_query_log-OFF">';
-                            str +=  Functions.sprintf(window.Messages.strDisableVar, 'slow_query_log');
+                            str +=  window.sprintf(window.Messages.strDisableVar, 'slow_query_log');
                             str += ' </a><br>';
                         }
 
@@ -884,7 +886,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                         }
 
                         str += '- <a class="set" href="#long_query_time-' + varValue + '">';
-                        str += Functions.sprintf(window.Messages.setSetLongQueryTime, varValue);
+                        str += window.sprintf(window.Messages.setSetLongQueryTime, varValue);
                         str += ' </a><br>';
                     } else {
                         str += window.Messages.strNoSuperUser + '<br>';
@@ -999,7 +1001,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         }
 
         var str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
-        str += serie.valueDivisor ? (', ' + Functions.sprintf(window.Messages.strDividedBy, serie.valueDivisor)) : '';
+        str += serie.valueDivisor ? (', ' + window.sprintf(window.Messages.strDividedBy, serie.valueDivisor)) : '';
         str += serie.unit ? (', ' + window.Messages.strUnit + ': ' + serie.unit) : '';
 
         var newSeries = {
@@ -1030,7 +1032,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         var i;
 
         /* Apply default values & config */
-        if (window.Config.isStorageSupported('localStorage')) {
+        if (Config.isStorageSupported('localStorage')) {
             if (typeof window.localStorage.monitorCharts !== 'undefined') {
                 runtime.charts = JSON.parse(window.localStorage.monitorCharts);
             }
@@ -1297,7 +1299,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                 } else if (plot.series[0]._yaxis.tickOptions.formatString) { // eslint-disable-line no-underscore-dangle
                     // using format string
                     // eslint-disable-next-line no-underscore-dangle
-                    seriesValue = Functions.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
+                    seriesValue = window.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
                 }
                 tooltipHtml += '<br><span style="color:' + seriesColor + '">' +
                     seriesLabel + ': ' + seriesValue + '</span>';
@@ -1489,7 +1491,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         runtime.refreshRequest = $.post('index.php?route=/server/status/monitor/chart', {
             'ajax_request': true,
             'requiredData': JSON.stringify(runtime.dataList),
-            'server': window.CommonParams.get('server')
+            'server': CommonParams.get('server')
         }, function (data) {
             var chartData;
             if (typeof data !== 'undefined' && data.success === true) {
@@ -1748,7 +1750,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
                 'time_end': Math.round(opts.end / 1000),
                 'removeVariables': opts.removeVariables,
                 'limitTypes': opts.limitTypes,
-                'server': window.CommonParams.get('server')
+                'server': CommonParams.get('server')
             },
             function (data) {
                 var logData;
@@ -2177,7 +2179,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
             'ajax_request': true,
             'query': window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : $('#sqlquery').val(),
             'database': db,
-            'server': window.CommonParams.get('server')
+            'server': CommonParams.get('server')
         }, function (responseData) {
             var data = responseData;
             var i;
@@ -2309,7 +2311,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
             gridCopy[key].maxYLabel = elem.maxYLabel;
         });
 
-        if (window.Config.isStorageSupported('localStorage')) {
+        if (Config.isStorageSupported('localStorage')) {
             window.localStorage.monitorCharts = JSON.stringify(gridCopy);
             window.localStorage.monitorSettings = JSON.stringify(monitorSettings);
             window.localStorage.monitorVersion = monitorProtocolVersion;
@@ -2320,6 +2322,6 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 });
 
 // Run the monitor once loaded
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+AJAX.registerOnload('server/status/monitor.js', function () {
     $('a[href="#pauseCharts"]').trigger('click');
 });

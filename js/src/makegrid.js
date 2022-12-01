@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from './modules/ajax.js';
+import { Functions } from './modules/functions.js';
+import { CommonParams } from './modules/common.js';
 
 /* global Sql */
 /* global firstDayOfCalendar */ // templates/javascript/variables.twig
@@ -597,6 +600,12 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
          * @param cell <td> element to be edited
          */
         showEditCell: function (cell) {
+            // destroy the date picker instance left if any, see: #17703
+            var $datePickerInstance = $(g.cEdit).find('.hasDatepicker');
+            if ($datePickerInstance.length > 0) {
+                $datePickerInstance.datepicker('destroy');
+            }
+
             if ($(cell).is('.grid_edit') &&
                 !g.colRsz && !g.colReorder) {
                 if (!g.isCellEditActive) {
@@ -695,7 +704,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
                         // Truncates the text.
                         $thisField.removeClass('truncated');
-                        if (window.CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
+                        if (CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
                             $thisField.addClass('truncated');
                             value = value.substring(0, g.maxTruncatedLen) + '...';
                         }
@@ -2031,7 +2040,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
             // initialize cell editing configuration
             g.saveCellsAtOnce = $(g.o).find('.save_cells_at_once').val();
-            g.maxTruncatedLen = window.CommonParams.get('LimitChars');
+            g.maxTruncatedLen = CommonParams.get('LimitChars');
 
             // register events
             $(g.t).find('td.data.click1')
@@ -2062,7 +2071,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
                                 // temporarily remove ajax class so the page loader will not handle it,
                                 // submit and then add it back
                                 $link.removeClass('ajax');
-                                window.AJAX.requestHandler.call($link[0]);
+                                AJAX.requestHandler.call($link[0]);
                                 $link.addClass('ajax');
                                 $cell.data('clicks', 0);
                             }, 700);

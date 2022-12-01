@@ -3,6 +3,7 @@ phpMyAdmin - ChangeLog
 
 5.3.0 (not yet released)
 - issue #17842 Change js.cookie.js to js.cookie.min.js
+- issue #17632 Improve tab keypress to text fields on the login form
 
 5.2.1 (not yet released)
 - issue #17522 Fix case where the routes cache file is invalid
@@ -60,6 +61,20 @@ phpMyAdmin - ChangeLog
 - issue #16042 Exported gzip file of database has first ~73 kB uncompressed and rest is gzip compressed in Firefox
 - issue #17705 Fix inline SQL query edit FK checkbox preventing submit buttons from working
 - issue #17777 Fix Uncaught TypeError: Cannot read properties of null (reading 'inline') on datepickers when re-opened
+- issue        Fix Original theme buttons style and login form width
+- issue #17892 Fix closing index edit modal and reopening causes it to fire twice
+- issue #17606 Fix preview SQL modal not working inside "Add Index" modal
+- issue        Fix PHP error on adding new column on create table form
+- issue #17482 Default to "Full texts" when running explain statements
+- issue        Fixed Chrome scrolling performance issue on a textarea of an "export as text" page
+- issue #17703 Fix datepicker appears on all fields, not just date
+- issue        Fix space in the tree line when a DB is expanded
+- issue #17340 Fix "New Table" page -> "VIRTUAL" attribute is lost when adding a new column
+- issue #17446 Fix missing option for STORED virtual column on MySQL and PERSISTENT is not supported on MySQL
+- issue #17446 Lower the check for virtual columns to MySQL>=5.7.6 nothing is supported on 5.7.5
+- issue        Fix column names option for CSV Export
+- issue #17177 Fix preview SQL when reordering columns doesn't work on move columns
+- issue #15887 Fixed DROP TABLE errors ignored on multi table select for DROP
 
 5.2.0 (2022-05-10)
 - issue #16521 Upgrade Bootstrap to version 5

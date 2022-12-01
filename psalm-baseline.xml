@@ -222,14 +222,10 @@
       <code>$GLOBALS['cfg']['MysqlMinVersion']['internal']</code>
       <code>$GLOBALS['cfg']['Server']['user']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="7">
-      <code>$GLOBALS['auth_plugin']</code>
+    <MixedAssignment occurrences="3">
       <code>$GLOBALS['back']</code>
-      <code>$GLOBALS['isConfigLoading']</code>
       <code>$GLOBALS['theme']</code>
-      <code>$controlLink</code>
       <code>$sqlDelimiter</code>
-      <code>$userLink</code>
     </MixedAssignment>
     <PossiblyInvalidArgument occurrences="3">
       <code>$_GET['url'] ?? ''</code>
@@ -296,9 +292,8 @@
       <code>$this-&gt;settings['Servers'][$server]</code>
       <code>$this-&gt;settings['Servers'][$this-&gt;settings['ServerDefault']]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="28">
+    <MixedAssignment occurrences="27">
       <code>$GLOBALS['cfg']['LoginCookieValidity']</code>
-      <code>$GLOBALS['isConfigLoading']</code>
       <code>$collation_connection</code>
       <code>$config_data</code>
       <code>$default_value</code>
@@ -1480,30 +1475,13 @@
     </PossiblyInvalidIterator>
   </file>
   <file src="libraries/classes/Controllers/Database/Structure/CopyFormController.php">
-    <MixedAssignment occurrences="5">
-      <code>$databaseName</code>
-      <code>$databasesList</code>
-      <code>$key</code>
+    <MixedAssignment occurrences="2">
       <code>$selectedValue</code>
       <code>$urlParams['selected'][]</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="2">
-      <code>getList</code>
-      <code>offsetUnset</code>
-    </MixedMethodCall>
     <PossiblyInvalidIterator occurrences="1">
       <code>$selected</code>
     </PossiblyInvalidIterator>
-    <PossiblyNullIterator occurrences="1">
-      <code>$databasesList</code>
-    </PossiblyNullIterator>
-    <PossiblyNullPropertyFetch occurrences="1">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference occurrences="2">
-      <code>getList</code>
-      <code>offsetUnset</code>
-    </PossiblyNullReference>
   </file>
   <file src="libraries/classes/Controllers/Database/Structure/CopyTableController.php">
     <PossiblyInvalidArgument occurrences="8">
@@ -1876,11 +1854,6 @@
       <code>$GLOBALS['total_num_tables']</code>
     </MixedAssignment>
   </file>
-  <file src="libraries/classes/Controllers/DatabaseController.php">
-    <PossiblyNullPropertyFetch occurrences="1">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
-    </PossiblyNullPropertyFetch>
-  </file>
   <file src="libraries/classes/Controllers/ErrorReportController.php">
     <MixedArrayAccess occurrences="1">
       <code>$decoded_response['success']</code>
@@ -2207,9 +2180,6 @@
     </UnusedVariable>
   </file>
   <file src="libraries/classes/Controllers/Import/ImportController.php">
-    <DeprecatedMethod occurrences="1">
-      <code>escapeString</code>
-    </DeprecatedMethod>
     <DocblockTypeContradiction occurrences="1">
       <code>$import_plugin == null</code>
     </DocblockTypeContradiction>
@@ -2272,7 +2242,7 @@
     <MixedMethodCall occurrences="1">
       <code>close</code>
     </MixedMethodCall>
-    <PossiblyInvalidArgument occurrences="10">
+    <PossiblyInvalidArgument occurrences="8">
       <code>$GLOBALS['format']</code>
       <code>$GLOBALS['local_import_file']</code>
       <code>$_POST['bkm_label']</code>
@@ -2280,18 +2250,15 @@
       <code>$_POST['bookmark_variable']</code>
       <code>$_POST['sql_query']</code>
       <code>$_POST['sql_query']</code>
-      <code>$parameter</code>
-      <code>$replacement</code>
       <code>$skip &lt; $GLOBALS['read_limit'] ? $skip : $GLOBALS['read_limit']</code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="7">
+    <PossiblyInvalidCast occurrences="6">
       <code>$GLOBALS['format']</code>
       <code>$GLOBALS['local_import_file']</code>
       <code>$_POST['bkm_label']</code>
       <code>$_POST['bkm_label']</code>
       <code>$_POST['sql_query']</code>
       <code>$_POST['sql_query']</code>
-      <code>$replacement</code>
     </PossiblyInvalidCast>
     <PossiblyInvalidOperand occurrences="3">
       <code>$GLOBALS['charset_of_file']</code>
@@ -2342,129 +2309,98 @@
       <code>$options</code>
     </MixedAssignment>
   </file>
-  <file src="libraries/classes/Controllers/LogoutController.php">
-    <MixedAssignment occurrences="1">
-      <code>$GLOBALS['auth_plugin']</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>logOut</code>
-    </MixedMethodCall>
-    <PossiblyNullReference occurrences="1">
-      <code>logOut</code>
-    </PossiblyNullReference>
-  </file>
   <file src="libraries/classes/Controllers/NavigationController.php">
-    <PossiblyInvalidArgument occurrences="9">
-      <code>! empty($_POST['tableName']) ? $_POST['tableName'] : null</code>
-      <code>! empty($_POST['tableName']) ? $_POST['tableName'] : null</code>
-      <code>$_POST['dbName']</code>
-      <code>$_POST['dbName']</code>
-      <code>$_POST['dbName']</code>
-      <code>$_POST['itemName']</code>
-      <code>$_POST['itemName']</code>
-      <code>$_POST['itemType']</code>
-      <code>$_POST['itemType']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="7">
-      <code>$_POST['dbName']</code>
-      <code>$_POST['dbName']</code>
-      <code>$_POST['dbName']</code>
-      <code>$_POST['itemName']</code>
-      <code>$_POST['itemName']</code>
-      <code>$_POST['itemType']</code>
-      <code>$_POST['itemType']</code>
-    </PossiblyInvalidCast>
+    <MixedArgument occurrences="9">
+      <code>! empty($tableName) ? $tableName : null</code>
+      <code>! empty($tableName) ? $tableName : null</code>
+      <code>$dbName</code>
+      <code>$dbName</code>
+      <code>$dbName</code>
+      <code>$itemName</code>
+      <code>$itemName</code>
+      <code>$itemType</code>
+      <code>$itemType</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="5">
+      <code>$dbName</code>
+      <code>$getNaviSettings</code>
+      <code>$itemName</code>
+      <code>$itemType</code>
+      <code>$tableName</code>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Normalization/FirstNormalForm/FirstStepController.php">
-    <PossiblyInvalidArgument occurrences="1">
+    <MixedArgument occurrences="1">
       <code>$normalForm</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
       <code>$normalForm</code>
-    </PossiblyInvalidCast>
+      <code>$normalizeTo</code>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Normalization/MoveRepeatingGroup.php">
-    <PossiblyInvalidArgument occurrences="4">
+    <MixedArgument occurrences="4">
       <code>$newColumn</code>
       <code>$newTable</code>
       <code>$primary_columns</code>
       <code>$repeatingColumns</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="4">
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
       <code>$newColumn</code>
       <code>$newTable</code>
       <code>$primary_columns</code>
       <code>$repeatingColumns</code>
-    </PossiblyInvalidCast>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Normalization/SecondNormalForm/CreateNewTablesController.php">
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="4">
       <code>$partialDependencies</code>
+      <code>$request-&gt;getParsedBodyParam('newTablesName')</code>
+      <code>$request-&gt;getParsedBodyParam('pd')</code>
       <code>$tablesName</code>
     </MixedArgument>
     <MixedAssignment occurrences="2">
       <code>$partialDependencies</code>
       <code>$tablesName</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$_POST['newTablesName']</code>
-      <code>$_POST['pd']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$_POST['newTablesName']</code>
-      <code>$_POST['pd']</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Normalization/SecondNormalForm/NewTablesController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$partialDependencies</code>
+      <code>$request-&gt;getParsedBodyParam('pd')</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$partialDependencies</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$_POST['pd']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$_POST['pd']</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Normalization/ThirdNormalForm/CreateNewTablesController.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
       <code>$newtables</code>
+      <code>$request-&gt;getParsedBodyParam('newTables')</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$newtables</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$_POST['newTables']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$_POST['newTables']</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Normalization/ThirdNormalForm/FirstStepController.php">
-    <PossiblyInvalidArgument occurrences="1">
+    <MixedArgument occurrences="1">
       <code>$tables</code>
-    </PossiblyInvalidArgument>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$tables</code>
+    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Normalization/ThirdNormalForm/NewTablesController.php">
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="4">
       <code>$dependencies</code>
+      <code>$request-&gt;getParsedBodyParam('pd')</code>
+      <code>$request-&gt;getParsedBodyParam('tables')</code>
       <code>$tables</code>
     </MixedArgument>
     <MixedAssignment occurrences="2">
       <code>$dependencies</code>
       <code>$tables</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$_POST['pd']</code>
-      <code>$_POST['tables']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$_POST['pd']</code>
-      <code>$_POST['tables']</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/PhpInfoController.php">
     <InvalidArrayOffset occurrences="1">
@@ -2604,9 +2540,6 @@
       <code>$GLOBALS['reload']</code>
       <code>$GLOBALS['selected']</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>build</code>
-    </MixedMethodCall>
     <PossiblyInvalidArgument occurrences="3">
       <code>$database</code>
       <code>$database</code>
@@ -2616,12 +2549,6 @@
       <code>$database</code>
       <code>$database</code>
     </PossiblyInvalidCast>
-    <PossiblyNullPropertyFetch occurrences="1">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference occurrences="1">
-      <code>build</code>
-    </PossiblyNullReference>
     <TypeDoesNotContainType occurrences="1">
       <code>$selected_dbs === []</code>
     </TypeDoesNotContainType>
@@ -2630,8 +2557,7 @@
     <InvalidArrayOffset occurrences="1">
       <code>$GLOBALS['cfg']['AllowUserDropDatabase']</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="9">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
+    <MixedArgument occurrences="8">
       <code>$database['DEFAULT_COLLATION_NAME']</code>
       <code>$database['SCHEMA_NAME']</code>
       <code>$primaryInfo['Do_DB']</code>
@@ -2686,12 +2612,6 @@
       <code>$params['sort_by']</code>
       <code>$params['sort_order']</code>
     </PossiblyInvalidArgument>
-    <PossiblyNullArgument occurrences="1">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
-    </PossiblyNullArgument>
-    <PossiblyNullPropertyFetch occurrences="1">
-      <code>$GLOBALS['dblist']-&gt;databases</code>
-    </PossiblyNullPropertyFetch>
     <PropertyNotSetInConstructor occurrences="4">
       <code>$hasStatistics</code>
       <code>$position</code>
@@ -2826,55 +2746,41 @@
     </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/Monitor/ChartingDataController.php">
-    <MixedAssignment occurrences="1">
+    <MixedArgument occurrences="1">
+      <code>$requiredData</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
       <code>$GLOBALS['errorUrl']</code>
+      <code>$requiredData</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$params['requiredData'] ?? ''</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$params['requiredData'] ?? ''</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/Monitor/GeneralLogController.php">
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <RiskyCast occurrences="2">
-      <code>$params['time_end']</code>
-      <code>$params['time_start']</code>
-    </RiskyCast>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/Monitor/LogVarsController.php">
+    <MixedArgument occurrences="2">
+      <code>$request-&gt;getParsedBodyParam('varName')</code>
+      <code>$request-&gt;getParsedBodyParam('varValue')</code>
+    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$params['varName']</code>
-      <code>$params['varValue']</code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/Monitor/QueryAnalyzerController.php">
+    <MixedArgument occurrences="2">
+      <code>$request-&gt;getParsedBodyParam('database', '')</code>
+      <code>$request-&gt;getParsedBodyParam('query', '')</code>
+    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$params['database'] ?? ''</code>
-      <code>$params['query'] ?? ''</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$params['database'] ?? ''</code>
-      <code>$params['query'] ?? ''</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/Monitor/SlowLogController.php">
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['errorUrl']</code>
     </MixedAssignment>
-    <RiskyCast occurrences="2">
-      <code>$params['time_end']</code>
-      <code>$params['time_start']</code>
-    </RiskyCast>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/QueriesController.php">
     <MixedArgumentTypeCoercion occurrences="1">
@@ -2898,7 +2804,9 @@
     </MixedOperand>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/StatusController.php">
-    <MixedArgument occurrences="17">
+    <MixedArgument occurrences="19">
+      <code>$primaryConnection</code>
+      <code>$primaryConnection</code>
       <code>$this-&gt;data-&gt;status['Aborted_clients']</code>
       <code>$this-&gt;data-&gt;status['Aborted_clients'] * $hourFactor</code>
       <code>$this-&gt;data-&gt;status['Aborted_clients'] * 100 / $this-&gt;data-&gt;status['Connections']</code>
@@ -2917,9 +2825,10 @@
       <code>$this-&gt;data-&gt;status['Uptime']</code>
       <code>($this-&gt;data-&gt;status['Bytes_received'] + $this-&gt;data-&gt;status['Bytes_sent']) * $hourFactor</code>
     </MixedArgument>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment occurrences="3">
       <code>$hourFactor</code>
       <code>$hourFactor</code>
+      <code>$primaryConnection</code>
     </MixedAssignment>
     <MixedOperand occurrences="13">
       <code>$this-&gt;data-&gt;status['Aborted_clients']</code>
@@ -2936,18 +2845,22 @@
       <code>$this-&gt;data-&gt;status['Uptime']</code>
       <code>$this-&gt;data-&gt;status['Uptime']</code>
     </MixedOperand>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$_POST['primary_connection'] ?? null</code>
-      <code>$_POST['primary_connection'] ?? null</code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="libraries/classes/Controllers/Server/Status/VariablesController.php">
+    <MixedArgument occurrences="1">
+      <code>$flush</code>
+    </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="2">
       <code>$name</code>
       <code>$name</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="6">
+    <MixedAssignment occurrences="11">
       <code>$GLOBALS['errorUrl']</code>
+      <code>$dontFormat</code>
+      <code>$filterAlert</code>
+      <code>$filterCategory</code>
+      <code>$filterText</code>
+      <code>$flush</code>
       <code>$linkName</code>
       <code>$linkUrl</code>
       <code>$sectionLinks</code>
@@ -2960,12 +2873,6 @@
       <code>$this-&gt;data-&gt;status['Qcache_total_blocks']</code>
       <code>$this-&gt;data-&gt;variables['thread_cache_size']</code>
     </MixedOperand>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$params['flush']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
-      <code>$params['flush']</code>
-    </PossiblyInvalidCast>
     <UnusedForeachValue occurrences="3">
       <code>$linkUrl</code>
       <code>$sectionLinks</code>
@@ -3254,9 +3161,6 @@
     </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Table/ChartController.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>empty($statement-&gt;limit)</code>
-    </DocblockTypeContradiction>
     <InvalidArgument occurrences="2">
       <code>$rows</code>
       <code>$start</code>
@@ -3384,6 +3288,9 @@
       <code>$GLOBALS['unlim_num_rows']</code>
       <code>$GLOBALS['where_clause']</code>
     </MixedAssignment>
+    <PossiblyNullArgument occurrences="1">
+      <code>$parser-&gt;list</code>
+    </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Controllers/Table/ExportRowsController.php">
     <MixedAssignment occurrences="3">
@@ -3566,10 +3473,9 @@
     </PossiblyInvalidOperand>
   </file>
   <file src="libraries/classes/Controllers/Table/OperationsController.php">
-    <MixedArgument occurrences="7">
+    <MixedArgument occurrences="6">
       <code>$GLOBALS['create_options']['pack_keys']</code>
       <code>$GLOBALS['create_options']['page_checksum'] ?? ''</code>
-      <code>$GLOBALS['dblist']-&gt;databases</code>
       <code>$GLOBALS['row_format']</code>
       <code>$GLOBALS['warning_messages']</code>
       <code>$_message</code>
@@ -3582,7 +3488,7 @@
     <MixedArrayAccess occurrences="1">
       <code>$GLOBALS['showtable']['Row_format']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="28">
+    <MixedAssignment occurrences="26">
       <code>$GLOBALS['auto_increment']</code>
       <code>$GLOBALS['columns']</code>
       <code>$GLOBALS['comment']</code>
@@ -3592,7 +3498,6 @@
       <code>$GLOBALS['errorUrl']</code>
       <code>$GLOBALS['hideOrderTable']</code>
       <code>$GLOBALS['indexes']</code>
-      <code>$GLOBALS['lowerCaseNames']</code>
       <code>$GLOBALS['message_to_show']</code>
       <code>$GLOBALS['new_tbl_storage_engine']</code>
       <code>$GLOBALS['notNull']</code>
@@ -3610,11 +3515,7 @@
       <code>$GLOBALS['tbl_collation']</code>
       <code>$GLOBALS['tbl_is_view']</code>
       <code>$GLOBALS['warning_messages']</code>
-      <code>$databaseList</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>getList</code>
-    </MixedMethodCall>
   </file>
   <file src="libraries/classes/Controllers/Table/Partition/AnalyzeController.php">
     <MixedArgument occurrences="1">
@@ -3858,13 +3759,10 @@
       <code>$_POST['delimiter']</code>
     </PossiblyInvalidArgument>
   </file>
-  <file src="libraries/classes/Controllers/Table/Structure/AddIndexController.php">
-    <MixedArgument occurrences="1">
-      <code>$field</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$field</code>
-    </MixedAssignment>
+  <file src="libraries/classes/Controllers/Table/Structure/AbstractIndexController.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$selected</code>
+    </MixedArgumentTypeCoercion>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/AddKeyController.php">
     <MixedAssignment occurrences="1">
@@ -3892,14 +3790,6 @@
     </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="1">
       <code>$GLOBALS['num_fields']</code>
-    </MixedAssignment>
-  </file>
-  <file src="libraries/classes/Controllers/Table/Structure/FulltextController.php">
-    <MixedArgument occurrences="1">
-      <code>$field</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$field</code>
     </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/MoveColumnsController.php">
@@ -3952,20 +3842,22 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/PartitioningController.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>count($stmt-&gt;partitions)</code>
-      <code>count($stmt-&gt;partitions[0]-&gt;subpartitions)</code>
-    </DocblockTypeContradiction>
     <MixedArgument occurrences="1">
       <code>$createTable</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$createTable</code>
     </MixedAssignment>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>$stmt-&gt;partitionsNum</code>
-      <code>$stmt-&gt;subpartitionsNum</code>
-    </RedundantConditionGivenDocblockType>
+    <PossiblyNullArgument occurrences="2">
+      <code>$stmt-&gt;partitions</code>
+      <code>$stmt-&gt;partitions[0]-&gt;subpartitions</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayAccess occurrences="1">
+      <code>$stmt-&gt;partitions[0]</code>
+    </PossiblyNullArrayAccess>
+    <PossiblyNullPropertyFetch occurrences="1">
+      <code>$stmt-&gt;partitions[0]-&gt;subpartitions</code>
+    </PossiblyNullPropertyFetch>
   </file>
   <file src="libraries/classes/Controllers/Table/Structure/PrimaryController.php">
     <MixedAssignment occurrences="1">
@@ -4063,22 +3955,6 @@
       <code>$_POST['field_expression'][$i]</code>
       <code>$_POST['field_virtuality'][$i]</code>
     </PossiblyInvalidOperand>
-  </file>
-  <file src="libraries/classes/Controllers/Table/Structure/SpatialController.php">
-    <MixedArgument occurrences="1">
-      <code>$field</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$field</code>
-    </MixedAssignment>
-  </file>
-  <file src="libraries/classes/Controllers/Table/Structure/UniqueController.php">
-    <MixedArgument occurrences="1">
-      <code>$field</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$field</code>
-    </MixedAssignment>
   </file>
   <file src="libraries/classes/Controllers/Table/StructureController.php">
     <MixedArgument occurrences="12">
@@ -4281,13 +4157,16 @@
     <InvalidArrayOffset occurrences="1">
       <code>$GLOBALS['cfg']['ShowChgPassword']</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="4">
+    <MixedArgument occurrences="7">
       <code>$GLOBALS['change_password_message']['msg']</code>
       <code>$GLOBALS['msg']</code>
       <code>$GLOBALS['msg']-&gt;getDisplay()</code>
       <code>$GLOBALS['password']</code>
+      <code>$pmaPw</code>
+      <code>$pmaPw2</code>
+      <code>$request-&gt;getParsedBodyParam('authentication_plugin')</code>
     </MixedArgument>
-    <MixedAssignment occurrences="7">
+    <MixedAssignment occurrences="8">
       <code>$GLOBALS['change_password_message']</code>
       <code>$GLOBALS['msg']</code>
       <code>$GLOBALS['msg']</code>
@@ -4295,19 +4174,11 @@
       <code>$GLOBALS['password']</code>
       <code>$noPass</code>
       <code>$pmaPw</code>
+      <code>$pmaPw2</code>
     </MixedAssignment>
     <MixedMethodCall occurrences="1">
       <code>getDisplay</code>
     </MixedMethodCall>
-    <PossiblyInvalidArgument occurrences="3">
-      <code>$_POST['authentication_plugin'] ?? null</code>
-      <code>$_POST['pma_pw']</code>
-      <code>$_POST['pma_pw2']</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$_POST['pma_pw']</code>
-      <code>$_POST['pma_pw2']</code>
-    </PossiblyInvalidCast>
   </file>
   <file src="libraries/classes/Controllers/VersionCheckController.php">
     <MixedArgument occurrences="1">
@@ -4843,14 +4714,6 @@
       <code>(bool) $GLOBALS['cfg']['Server']['DisableIS']</code>
       <code>(int) $GLOBALS['cfg']['MaxRows']</code>
     </RedundantCast>
-  </file>
-  <file src="libraries/classes/Database/DatabaseList.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$this-&gt;databases === null</code>
-    </DocblockTypeContradiction>
-    <PossiblyNullPropertyAssignmentValue occurrences="1">
-      <code>null</code>
-    </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="libraries/classes/Database/Designer.php">
     <DeprecatedMethod occurrences="2">
@@ -5430,15 +5293,13 @@
       <code>Util::getSupportedDatatypes()</code>
       <code>Util::getSupportedDatatypes()</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="4">
+    <MixedArgumentTypeCoercion occurrences="3">
       <code>$options</code>
       <code>$options</code>
-      <code>$stmt-&gt;return-&gt;parameters</code>
       <code>$value</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="37">
+    <MixedArrayAccess occurrences="36">
       <code>$opt['value']</code>
-      <code>$params['dir'][$i]</code>
       <code>$priv[0]</code>
       <code>$priv[1]</code>
       <code>$priv[2]</code>
@@ -5515,7 +5376,7 @@
       <code>$routine['item_param_type'][$i]</code>
       <code>$routine['item_param_type'][$routine['item_num_params'] - 1]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="33">
+    <MixedAssignment occurrences="25">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['errors']</code>
@@ -5528,14 +5389,6 @@
       <code>$retval['item_comment']</code>
       <code>$retval['item_definer']</code>
       <code>$retval['item_name']</code>
-      <code>$retval['item_num_params']</code>
-      <code>$retval['item_param_dir']</code>
-      <code>$retval['item_param_length']</code>
-      <code>$retval['item_param_length_arr']</code>
-      <code>$retval['item_param_name']</code>
-      <code>$retval['item_param_opts_num']</code>
-      <code>$retval['item_param_opts_text']</code>
-      <code>$retval['item_param_type']</code>
       <code>$retval['item_sqldataaccess']</code>
       <code>$retval['item_type']</code>
       <code>$routine</code>
@@ -5608,6 +5461,9 @@
       <code>$itemType</code>
       <code>$itemType</code>
     </PossiblyInvalidArgument>
+    <PossiblyInvalidArrayAccess occurrences="1">
+      <code>$params['dir'][$i]</code>
+    </PossiblyInvalidArrayAccess>
     <PossiblyInvalidCast occurrences="23">
       <code>$_GET['item_name']</code>
       <code>$_GET['item_name']</code>
@@ -5646,23 +5502,33 @@
       <code>$itemReturnType</code>
       <code>$itemSqlDataAccess</code>
     </PossiblyInvalidOperand>
-    <PossiblyNullArgument occurrences="5">
+    <PossiblyNullArgument occurrences="6">
       <code>$GLOBALS['errors']</code>
       <code>$GLOBALS['message']</code>
       <code>$create_routine</code>
       <code>$mode</code>
       <code>$routine['item_name']</code>
+      <code>$stmt-&gt;return-&gt;parameters</code>
     </PossiblyNullArgument>
     <PossiblyNullArrayAccess occurrences="2">
       <code>$routine['item_name']</code>
       <code>$routine['item_type']</code>
     </PossiblyNullArrayAccess>
+    <PossiblyNullIterator occurrences="1">
+      <code>$stmt-&gt;return-&gt;options-&gt;options</code>
+    </PossiblyNullIterator>
     <PossiblyNullOperand occurrences="3">
       <code>$output</code>
       <code>$this-&gt;browseRow($row)</code>
       <code>$title</code>
     </PossiblyNullOperand>
-    <PossiblyNullReference occurrences="1">
+    <PossiblyNullPropertyFetch occurrences="3">
+      <code>$stmt-&gt;return-&gt;name</code>
+      <code>$stmt-&gt;return-&gt;options</code>
+      <code>$stmt-&gt;return-&gt;parameters</code>
+    </PossiblyNullPropertyFetch>
+    <PossiblyNullReference occurrences="2">
+      <code>has</code>
       <code>isSuccess</code>
     </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset occurrences="1">
@@ -5848,10 +5714,7 @@
     </PossiblyNullReference>
   </file>
   <file src="libraries/classes/DatabaseInterface.php">
-    <DeprecatedMethod occurrences="6">
-      <code>[$this, 'escapeString']</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
+    <DeprecatedMethod occurrences="3">
       <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
@@ -5859,6 +5722,12 @@
     <EmptyArrayAccess occurrences="1">
       <code>$resultTarget[]</code>
     </EmptyArrayAccess>
+    <InvalidArgument occurrences="1">
+      <code>$link</code>
+    </InvalidArgument>
+    <InvalidArrayAccess occurrences="1">
+      <code>$link</code>
+    </InvalidArrayAccess>
     <InvalidOperand occurrences="6">
       <code>$row['Data_free']</code>
       <code>$row['Data_length']</code>
@@ -5873,47 +5742,17 @@
     <InvalidReturnType occurrences="1">
       <code>int|bool</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="42">
+    <MixedArgument occurrences="12">
       <code>$a</code>
       <code>$b</code>
-      <code>$database</code>
-      <code>$databaseName</code>
-      <code>$grant</code>
-      <code>$grant</code>
-      <code>$host</code>
-      <code>$host</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
-      <code>$link</code>
       <code>$link</code>
       <code>$password</code>
       <code>$table</code>
       <code>$table</code>
       <code>$table</code>
       <code>$tableData[$sortBy] ?? ''</code>
-      <code>$this-&gt;links[$linkIndex]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
       <code>$this-&gt;versionComment</code>
       <code>$this-&gt;versionString</code>
-      <code>$user</code>
-      <code>$user</code>
       <code>$user</code>
       <code>$warningsCount</code>
     </MixedArgument>
@@ -5922,15 +5761,13 @@
       <code>uksort($eachTables, 'strnatcasecmp')</code>
       <code>usort($tables, 'strnatcasecmp')</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="5">
-      <code>$link</code>
+    <MixedArrayAccess occurrences="4">
       <code>$tableData[$sortBy]</code>
       <code>$tableData['Data_length']</code>
       <code>$tableData['Engine']</code>
       <code>$tableData['Index_length']</code>
     </MixedArrayAccess>
-    <MixedArrayOffset occurrences="11">
-      <code>$databases[$databaseName]</code>
+    <MixedArrayOffset occurrences="7">
       <code>$resultRows[$row[$key]]</code>
       <code>$resultTarget[$row[$keyIndex]]</code>
       <code>$resultTarget[$row[$keyIndex]]</code>
@@ -5938,18 +5775,10 @@
       <code>$row[$keyIndex]</code>
       <code>$row[$keyIndex]</code>
       <code>$row[$keyIndex]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
-      <code>$this-&gt;links[$link]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="19">
+    <MixedAssignment occurrences="14">
       <code>$aLength</code>
       <code>$bLength</code>
-      <code>$database</code>
-      <code>$databaseName</code>
-      <code>$databases[$databaseName]['SCHEMA_NAME']</code>
-      <code>$grant</code>
-      <code>$grant</code>
       <code>$keyIndex</code>
       <code>$map['real_column']</code>
       <code>$resultRows[$row[$key]]</code>
@@ -5972,9 +5801,6 @@
       <code>$b['Data_length']</code>
       <code>$tableData['Data_length']</code>
     </MixedOperand>
-    <MixedPropertyFetch occurrences="1">
-      <code>$this-&gt;links[$link]-&gt;warning_count</code>
-    </MixedPropertyFetch>
     <MixedReturnStatement occurrences="2">
       <code>SessionCache::get('mysql_cur_user')</code>
       <code>reset($columns)</code>
@@ -6080,13 +5906,10 @@
     <DeprecatedMethod occurrences="1">
       <code>escapeString</code>
     </DeprecatedMethod>
-    <DocblockTypeContradiction occurrences="2">
-      <code>$displayParts-&gt;hasNavigationBar &amp;&amp; $statement !== null &amp;&amp; empty($statement-&gt;limit)</code>
-      <code>[]</code>
-    </DocblockTypeContradiction>
-    <InvalidArgument occurrences="2">
+    <InvalidArgument occurrences="3">
       <code>$added[$orgFullTableName]</code>
       <code>$multiOrderUrlParams</code>
+      <code>$sortExpressionNoDirection</code>
     </InvalidArgument>
     <InvalidArrayOffset occurrences="1">
       <code>$delUrlParams</code>
@@ -6208,7 +6031,7 @@
       <code>$rel['foreign_table']</code>
       <code>$whereClauseMap[$rowNumber][$meta-&gt;orgtable]</code>
     </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="36">
+    <MixedArrayAssignment occurrences="37">
       <code>$_SESSION['tmpval']['display_binary']</code>
       <code>$_SESSION['tmpval']['display_blob']</code>
       <code>$_SESSION['tmpval']['geoOption']</code>
@@ -6235,6 +6058,7 @@
       <code>$query['max_rows']</code>
       <code>$query['max_rows']</code>
       <code>$query['max_rows']</code>
+      <code>$query['pftext']</code>
       <code>$query['pftext']</code>
       <code>$query['pftext']</code>
       <code>$query['pos']</code>
@@ -6373,14 +6197,18 @@
       <code>$editCopyUrlParams</code>
       <code>$editCopyUrlParams</code>
     </PossiblyInvalidOperand>
-    <PossiblyNullArgument occurrences="1">
+    <PossiblyNullArgument occurrences="4">
       <code>$colVisibCurrent</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
     </PossiblyNullArgument>
     <PossiblyNullArrayAccess occurrences="1">
       <code>$firstStatement-&gt;order[$key]</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullOperand occurrences="1">
+    <PossiblyNullOperand occurrences="2">
       <code>$dispval</code>
+      <code>$o-&gt;expr-&gt;expr</code>
     </PossiblyNullOperand>
     <RedundantCast occurrences="3">
       <code>(int) $GLOBALS['cfg']['LimitChars']</code>
@@ -6391,8 +6219,7 @@
       <code>empty($statementInfo-&gt;statement-&gt;from)</code>
       <code>isset($sessionMaxRows)</code>
     </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>$firstStatement-&gt;order</code>
+    <RedundantConditionGivenDocblockType occurrences="1">
       <code>isset($meta-&gt;internalMediaType)</code>
     </RedundantConditionGivenDocblockType>
     <UnusedParam occurrences="5">
@@ -6599,9 +6426,8 @@
     <InvalidReturnType occurrences="1">
       <code>int</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="15">
+    <MixedArgument occurrences="14">
       <code>$GLOBALS['xkana'] ?? ''</code>
-      <code>$currentDb</code>
       <code>$dbAlias</code>
       <code>$dbAlias</code>
       <code>$dbAlias</code>
@@ -6633,7 +6459,7 @@
       <code>$aliases[$dbName]['tables'][$tableName]</code>
       <code>$aliases[$dbName]['tables'][$tableName]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="25">
+    <MixedAssignment occurrences="24">
       <code>$GLOBALS['active_page']</code>
       <code>$GLOBALS['save_filename']</code>
       <code>$GLOBALS['time_start']</code>
@@ -6642,7 +6468,6 @@
       <code>$aliases[$dbName]['tables'][$tableName]['columns'][$col]</code>
       <code>$col</code>
       <code>$colAs</code>
-      <code>$currentDb</code>
       <code>$dbAlias</code>
       <code>$dbAlias</code>
       <code>$table</code>
@@ -6660,8 +6485,7 @@
       <code>$view</code>
       <code>$views[]</code>
     </MixedAssignment>
-    <MixedOperand occurrences="6">
-      <code>$currentDb</code>
+    <MixedOperand occurrences="5">
       <code>$table</code>
       <code>$table</code>
       <code>$this-&gt;dumpBufferObjects[$objectName]</code>
@@ -6682,9 +6506,6 @@
       <code>$GLOBALS['cfg']['Export']</code>
       <code>$GLOBALS['cfg']['Export']</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="1">
-      <code>$currentDb</code>
-    </MixedArgument>
     <MixedArrayAccess occurrences="5">
       <code>$GLOBALS['cfg']['Export']['compression']</code>
       <code>$GLOBALS['cfg']['Export']['file_template_database']</code>
@@ -6692,9 +6513,8 @@
       <code>$GLOBALS['cfg']['Export']['file_template_table']</code>
       <code>$_SESSION['tmpval']['aliases']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="3">
+    <MixedAssignment occurrences="2">
       <code>$aliases</code>
-      <code>$currentDb</code>
       <code>$selectedCompression</code>
     </MixedAssignment>
     <PossiblyInvalidArgument occurrences="1">
@@ -6980,15 +6800,9 @@
       <code>$point[0]</code>
       <code>$point[1]</code>
     </MixedOperand>
-    <ParamNameMismatch occurrences="4">
-      <code>$line_color</code>
-      <code>$line_color</code>
-      <code>$line_color</code>
-      <code>$line_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$line_color</code>
     </PossiblyFalseArgument>
     <RedundantPropertyInitializationCheck occurrences="1">
       <code>isset(self::$instance)</code>
@@ -7061,15 +6875,9 @@
       <code>$point[0]</code>
       <code>$point[1]</code>
     </MixedOperand>
-    <ParamNameMismatch occurrences="4">
-      <code>$line_color</code>
-      <code>$line_color</code>
-      <code>$line_color</code>
-      <code>$line_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$line_color</code>
     </PossiblyFalseArgument>
     <RedundantPropertyInitializationCheck occurrences="1">
       <code>isset(self::$instance)</code>
@@ -7135,15 +6943,9 @@
       <code>$row_data['points'][$i]['x']</code>
       <code>$row_data['points'][$i]['y']</code>
     </MixedOperand>
-    <ParamNameMismatch occurrences="4">
-      <code>$point_color</code>
-      <code>$point_color</code>
-      <code>$point_color</code>
-      <code>$point_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$point_color</code>
     </PossiblyFalseArgument>
     <RedundantPropertyInitializationCheck occurrences="1">
       <code>isset(self::$instance)</code>
@@ -7260,15 +7062,9 @@
       <code>$points_arr[0][0]</code>
       <code>$points_arr[0][1]</code>
     </MixedOperand>
-    <ParamNameMismatch occurrences="4">
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$fill_color</code>
     </PossiblyFalseArgument>
     <RedundantPropertyInitializationCheck occurrences="1">
       <code>isset(self::$instance)</code>
@@ -7321,15 +7117,9 @@
       <code>$row_data['x'] ?? ''</code>
       <code>$row_data['y'] ?? ''</code>
     </MixedOperand>
-    <ParamNameMismatch occurrences="4">
-      <code>$point_color</code>
-      <code>$point_color</code>
-      <code>$point_color</code>
-      <code>$point_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$point_color</code>
     </PossiblyFalseArgument>
     <RedundantPropertyInitializationCheck occurrences="1">
       <code>isset(self::$instance)</code>
@@ -7463,15 +7253,9 @@
     <MixedReturnStatement occurrences="1">
       <code>$area</code>
     </MixedReturnStatement>
-    <ParamNameMismatch occurrences="4">
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-      <code>$fill_color</code>
-    </ParamNameMismatch>
     <PossiblyFalseArgument occurrences="2">
       <code>$black</code>
-      <code>$color</code>
+      <code>$fill_color</code>
     </PossiblyFalseArgument>
     <PossiblyNullOperand occurrences="16">
       <code>$x1</code>
@@ -7499,7 +7283,7 @@
     <DocblockTypeContradiction occurrences="1">
       <code>$this-&gt;userSpecifiedSettings === null</code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="20">
+    <MixedArgument occurrences="15">
       <code>$label</code>
       <code>$label</code>
       <code>$label</code>
@@ -7509,11 +7293,6 @@
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
-      <code>$this-&gt;settings['colors']</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors_hex'][$index]</code>
       <code>$this-&gt;settings['height']</code>
       <code>$this-&gt;settings['width']</code>
       <code>$this-&gt;userSpecifiedSettings['labelColumn']</code>
@@ -7521,7 +7300,7 @@
       <code>$this-&gt;userSpecifiedSettings['spatialColumn']</code>
       <code>$this-&gt;userSpecifiedSettings['spatialColumn']</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="14">
+    <MixedArrayAccess occurrences="10">
       <code>$row[$this-&gt;settings['labelColumn']]</code>
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
@@ -7532,10 +7311,6 @@
       <code>$row[$this-&gt;settings['spatialColumn']]</code>
       <code>$row['srid']</code>
       <code>$row['srid']</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors'][$index]</code>
-      <code>$this-&gt;settings['colors_hex'][$index]</code>
     </MixedArrayAccess>
     <MixedArrayOffset occurrences="9">
       <code>$row[$this-&gt;settings['labelColumn']]</code>
@@ -7792,7 +7567,7 @@
     </TooFewArguments>
   </file>
   <file src="libraries/classes/Import.php">
-    <MixedArgument occurrences="25">
+    <MixedArgument occurrences="24">
       <code>$GLOBALS['charset_of_file']</code>
       <code>$GLOBALS['reload']</code>
       <code>$active</code>
@@ -7800,7 +7575,6 @@
       <code>$size</code>
       <code>$size</code>
       <code>$size</code>
-      <code>$table</code>
       <code>$table[self::COL_NAMES]</code>
       <code>$table[self::ROWS]</code>
       <code>$table[self::TBL_NAME]</code>
@@ -7850,7 +7624,7 @@
     <MixedArrayOffset occurrences="1">
       <code>$typeArray[$analyses[$i][self::TYPES][$j]]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="33">
+    <MixedAssignment occurrences="32">
       <code>$GLOBALS['charset_conversion']</code>
       <code>$GLOBALS['charset_of_file']</code>
       <code>$GLOBALS['executed_queries']</code>
@@ -7882,7 +7656,6 @@
       <code>$importPlugin</code>
       <code>$size</code>
       <code>$size</code>
-      <code>$table</code>
       <code>$table</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">
@@ -7959,10 +7732,37 @@
     </PossiblyInvalidArrayOffset>
   </file>
   <file src="libraries/classes/Import/SimulateDml.php">
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>$tableReferences</code>
-      <code>$tableReferences</code>
+    <MixedArgument occurrences="1">
+      <code>$set-&gt;value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$columns</code>
     </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$columns[]</code>
+      <code>$set</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>$set-&gt;column</code>
+    </MixedOperand>
+    <MixedPropertyFetch occurrences="2">
+      <code>$set-&gt;column</code>
+      <code>$set-&gt;value</code>
+    </MixedPropertyFetch>
+    <PossiblyNullArgument occurrences="6">
+      <code>$parser-&gt;list</code>
+      <code>$parser-&gt;list</code>
+      <code>$parser-&gt;list</code>
+      <code>$parser-&gt;list</code>
+      <code>$parser-&gt;list</code>
+      <code>$parser-&gt;list</code>
+    </PossiblyNullArgument>
+    <PossiblyNullIterator occurrences="1">
+      <code>$statement-&gt;set</code>
+    </PossiblyNullIterator>
+    <RedundantCondition occurrences="1">
+      <code>empty($diff)</code>
+    </RedundantCondition>
   </file>
   <file src="libraries/classes/Index.php">
     <DocblockTypeContradiction occurrences="1">
@@ -8285,25 +8085,21 @@
     </PossiblyNullArrayOffset>
   </file>
   <file src="libraries/classes/Linter.php">
-    <MixedArgument occurrences="2">
+    <InvalidScalarArgument occurrences="1">
       <code>$error[3]</code>
-      <code>$error[3] + mb_strlen((string) $error[2])</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="5">
-      <code>$error[0]</code>
-      <code>$error[2]</code>
-      <code>$error[2]</code>
-      <code>$error[3]</code>
-      <code>$error[3]</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="2">
-      <code>$error</code>
+    </InvalidScalarArgument>
+    <MixedAssignment occurrences="1">
       <code>$lineStart</code>
     </MixedAssignment>
-    <MixedOperand occurrences="2">
-      <code>$error[3]</code>
+    <MixedOperand occurrences="1">
       <code>$lines[$line]</code>
     </MixedOperand>
+    <PossiblyInvalidOperand occurrences="1">
+      <code>$error[3]</code>
+    </PossiblyInvalidOperand>
+    <PossiblyNullOperand occurrences="1">
+      <code>$error[3]</code>
+    </PossiblyNullOperand>
   </file>
   <file src="libraries/classes/ListAbstract.php">
     <MixedInferredReturnType occurrences="1">
@@ -9060,9 +8856,6 @@
       <code>$trigger</code>
       <code>$view</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>build</code>
-    </MixedMethodCall>
     <MixedOperand occurrences="34">
       <code>$old_priv[$i]</code>
       <code>$old_priv[0]</code>
@@ -9273,8 +9066,7 @@
     </PossiblyInvalidArrayOffset>
   </file>
   <file src="libraries/classes/Pdf.php">
-    <MixedArgument occurrences="4">
-      <code>$pdfData</code>
+    <MixedArgument occurrences="3">
       <code>$this-&gt;CurrentFont</code>
       <code>$this-&gt;pages</code>
       <code>$this-&gt;pages[$n]</code>
@@ -9289,9 +9081,6 @@
       <code>$this-&gt;footerset[$this-&gt;page]</code>
       <code>$this-&gt;footerset[$this-&gt;page]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="1">
-      <code>$pdfData</code>
-    </MixedAssignment>
     <ParamNameMismatch occurrences="1">
       <code>$error_message</code>
     </ParamNameMismatch>
@@ -9335,9 +9124,8 @@
       <code>$val</code>
       <code>$val</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="3">
+    <MixedMethodCall occurrences="2">
       <code>getProperties</code>
-      <code>new $class()</code>
       <code>new $class()</code>
     </MixedMethodCall>
     <PossiblyInvalidArgument occurrences="4">
@@ -9379,9 +9167,6 @@
     <RedundantConditionGivenDocblockType occurrences="1">
       <code>$properties != null</code>
     </RedundantConditionGivenDocblockType>
-    <RedundantFunctionCall occurrences="1">
-      <code>strtolower</code>
-    </RedundantFunctionCall>
     <UnnecessaryVarAnnotation occurrences="3">
       <code>RadioPropertyItem</code>
       <code>SelectPropertyItem</code>
@@ -9517,6 +9302,14 @@
     <PossiblyNullReference occurrences="1">
       <code>issetCookie</code>
     </PossiblyNullReference>
+  </file>
+  <file src="libraries/classes/Plugins/AuthenticationPluginFactory.php">
+    <RedundantFunctionCall occurrences="1">
+      <code>strtolower</code>
+    </RedundantFunctionCall>
+    <UnsafeInstantiation occurrences="1">
+      <code>new $class()</code>
+    </UnsafeInstantiation>
   </file>
   <file src="libraries/classes/Plugins/Export/ExportCodegen.php">
     <PossiblyNullArgument occurrences="4">
@@ -9867,8 +9660,7 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Plugins/Export/ExportSql.php">
-    <DeprecatedMethod occurrences="10">
-      <code>escapeString</code>
+    <DeprecatedMethod occurrences="9">
       <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
@@ -9879,10 +9671,6 @@
       <code>escapeString</code>
       <code>escapeString</code>
     </DeprecatedMethod>
-    <DocblockTypeContradiction occurrences="2">
-      <code>empty($field-&gt;options)</code>
-      <code>empty($field-&gt;references)</code>
-    </DocblockTypeContradiction>
     <InvalidArgument occurrences="2">
       <code>$GLOBALS['asfile']</code>
       <code>$GLOBALS['sql_if_not_exists']</code>
@@ -9968,17 +9756,16 @@
       <code>$trigger['create']</code>
       <code>$trigger['drop']</code>
     </MixedArrayAccess>
-    <MixedArrayOffset occurrences="5">
+    <MixedArrayOffset occurrences="4">
       <code>$aliases[$db]['tables'][$table]['columns'][$field]</code>
       <code>$aliases[$db]['tables'][$view]['columns'][$colAlias]</code>
-      <code>$aliases[$oldDatabase]['tables'][$refTable]['columns'][$column]</code>
       <code>$oneKey['ref_index_list'][$index]</code>
       <code>$values[$val]</code>
     </MixedArrayOffset>
     <MixedArrayTypeCoercion occurrences="1">
       <code>$row[$j]</code>
     </MixedArrayTypeCoercion>
-    <MixedAssignment occurrences="36">
+    <MixedAssignment occurrences="35">
       <code>$GLOBALS['sql_auto_increments']</code>
       <code>$GLOBALS['sql_backquotes']</code>
       <code>$GLOBALS['sql_backquotes']</code>
@@ -9990,7 +9777,6 @@
       <code>$colAlias</code>
       <code>$colAlias</code>
       <code>$colAs</code>
-      <code>$column</code>
       <code>$columnAliases</code>
       <code>$definition</code>
       <code>$engine</code>
@@ -10024,6 +9810,9 @@
       <code>$tmpUniqueCondition</code>
       <code>$trigger['drop']</code>
     </MixedOperand>
+    <MixedPropertyTypeCoercion occurrences="1">
+      <code>$field-&gt;references-&gt;columns</code>
+    </MixedPropertyTypeCoercion>
     <PossiblyInvalidArrayOffset occurrences="3">
       <code>$GLOBALS['plugin_param']['export_type']</code>
       <code>$GLOBALS['plugin_param']['export_type']</code>
@@ -10035,9 +9824,10 @@
     <PossiblyInvalidPropertyAssignmentValue occurrences="1">
       <code>Context::escape($alias)</code>
     </PossiblyInvalidPropertyAssignmentValue>
-    <PossiblyNullArgument occurrences="5">
+    <PossiblyNullArgument occurrences="6">
       <code>$createQuery</code>
       <code>$definition</code>
+      <code>$field-&gt;name</code>
       <code>$tableAlias</code>
       <code>$tableAlias</code>
       <code>$tableAlias</code>
@@ -10047,9 +9837,31 @@
       <code>$GLOBALS['plugin_param']['export_type']</code>
       <code>$GLOBALS['plugin_param']['single_table']</code>
     </PossiblyNullArrayAccess>
+    <PossiblyNullArrayOffset occurrences="1">
+      <code>$aliases[$oldDatabase]['tables']</code>
+    </PossiblyNullArrayOffset>
     <PossiblyNullOperand occurrences="1">
       <code>$eventDef</code>
     </PossiblyNullOperand>
+    <PossiblyNullPropertyAssignment occurrences="5">
+      <code>$statement-&gt;name</code>
+      <code>$statement-&gt;name</code>
+      <code>$statement-&gt;name</code>
+      <code>$statement-&gt;table</code>
+      <code>$statement-&gt;table</code>
+    </PossiblyNullPropertyAssignment>
+    <PossiblyNullPropertyFetch occurrences="2">
+      <code>$statement-&gt;name-&gt;table</code>
+      <code>$statement-&gt;table-&gt;table</code>
+    </PossiblyNullPropertyFetch>
+    <PossiblyNullReference occurrences="6">
+      <code>has</code>
+      <code>has</code>
+      <code>remove</code>
+      <code>remove</code>
+      <code>remove</code>
+      <code>remove</code>
+    </PossiblyNullReference>
     <PropertyTypeCoercion occurrences="1">
       <code>$field-&gt;key-&gt;columns</code>
     </PropertyTypeCoercion>
@@ -10997,11 +10809,6 @@
       <code>(string) $currentDb</code>
     </RedundantCastGivenDocblockType>
   </file>
-  <file src="libraries/classes/Plugins/Schema/Dia/Dia.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$output</code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="libraries/classes/Plugins/Schema/Dia/DiaRelationSchema.php">
     <MixedArgument occurrences="5">
       <code>$one_field</code>
@@ -11622,9 +11429,6 @@
       <code>is_int($height)</code>
       <code>is_int($width)</code>
     </DocblockTypeContradiction>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$output</code>
-    </PossiblyInvalidArgument>
     <RedundantCastGivenDocblockType occurrences="3">
       <code>(string) $styles</code>
       <code>(string) $styles</code>
@@ -12156,11 +11960,6 @@
       <code>$eachTables[$table_name]['VERSION']</code>
     </MixedAssignment>
   </file>
-  <file src="libraries/classes/Query/Generator.php">
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$escapedTableOrTables</code>
-    </MixedArgumentTypeCoercion>
-  </file>
   <file src="libraries/classes/Query/Utilities.php">
     <MixedArrayAssignment occurrences="1">
       <code>$_SESSION['debug']['queries']</code>
@@ -12243,8 +12042,7 @@
     </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/ReplicationGui.php">
-    <MixedArgument occurrences="6">
-      <code>$database</code>
+    <MixedArgument occurrences="5">
       <code>$errorMessage</code>
       <code>$serverReplicationVariable</code>
       <code>$successMessage</code>
@@ -12285,8 +12083,7 @@
       <code>$_SESSION['replication']['sr_action_status']</code>
       <code>$_SESSION['replication']['sr_action_status']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="6">
-      <code>$database</code>
+    <MixedAssignment occurrences="5">
       <code>$errorMessage</code>
       <code>$linkToPrimary</code>
       <code>$serverReplicationVariable</code>
@@ -12526,17 +12323,15 @@
     <InvalidReturnType occurrences="1">
       <code>array</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="40">
+    <MixedArgument occurrences="37">
       <code>$GLOBALS['dbname']</code>
       <code>$alterRealSqlQuery</code>
       <code>$alterSqlQuery</code>
       <code>$createUserReal</code>
-      <code>$currentDb</code>
       <code>$exportUser</code>
       <code>$exportUser</code>
       <code>$exportUser</code>
       <code>$exportUser</code>
-      <code>$hostname</code>
       <code>$paramDbName</code>
       <code>$paramDbName</code>
       <code>$paramRoutineName</code>
@@ -12566,7 +12361,6 @@
       <code>$sqlQuery</code>
       <code>$updQuery</code>
       <code>$user</code>
-      <code>$username</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="12">
       <code>$queries</code>
@@ -12651,7 +12445,7 @@
       <code>$specificPrivileges[$grant[0]]</code>
       <code>$specificPrivileges[$grant[0]]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="57">
+    <MixedAssignment occurrences="54">
       <code>$GLOBALS[$key]</code>
       <code>$GLOBALS['new_username']</code>
       <code>$GLOBALS['pred_hostname']</code>
@@ -12660,9 +12454,7 @@
       <code>$authenticationPlugin</code>
       <code>$authenticationPlugin</code>
       <code>$authenticationPlugin</code>
-      <code>$currentDb</code>
       <code>$currentGrant</code>
-      <code>$databases[]</code>
       <code>$exportUser</code>
       <code>$extraData['db_wildcard_privs']</code>
       <code>$foundRows[]</code>
@@ -12679,7 +12471,6 @@
       <code>$paramRoutineName</code>
       <code>$paramTableName</code>
       <code>$password</code>
-      <code>$predDbArray</code>
       <code>$privilege</code>
       <code>$privilege['routine']</code>
       <code>$privilege['table']</code>
@@ -13267,10 +13058,17 @@
     <PossiblyInvalidOperand occurrences="1">
       <code>$numRows</code>
     </PossiblyInvalidOperand>
-    <PossiblyNullArgument occurrences="3">
+    <PossiblyInvalidPropertyFetch occurrences="1">
+      <code>$statement-&gt;altered[0]-&gt;field-&gt;column</code>
+    </PossiblyInvalidPropertyFetch>
+    <PossiblyNullArgument occurrences="7">
       <code>$result</code>
       <code>$row[0]</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
+      <code>$statementInfo-&gt;parser-&gt;list</code>
       <code>$table</code>
+      <code>$tokenList</code>
     </PossiblyNullArgument>
     <RedundantCast occurrences="1">
       <code>(bool) $GLOBALS['cfg']['ShowSQL']</code>
@@ -13424,6 +13222,13 @@
       <code>escapeString</code>
       <code>escapeString</code>
     </DeprecatedMethod>
+    <InvalidArgument occurrences="5">
+      <code>$newDb</code>
+      <code>$sourceDb</code>
+      <code>$sourceDb</code>
+      <code>$targetDb</code>
+      <code>$targetDb</code>
+    </InvalidArgument>
     <InvalidReturnStatement occurrences="1">
       <code>$tableAutoIncrement ?? ''</code>
     </InvalidReturnStatement>
@@ -13490,7 +13295,7 @@
       <code>$where</code>
       <code>$where</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="33">
+    <MixedArrayAccess occurrences="32">
       <code>$_SESSION['tmpval']['table_uiprefs'][$serverId][$this-&gt;dbName][$this-&gt;name]</code>
       <code>$column['Extra']</code>
       <code>$column['Extra']</code>
@@ -13516,7 +13321,6 @@
       <code>$index[0]</code>
       <code>$index[0]</code>
       <code>$masterField[$key]</code>
-      <code>$options['expr']</code>
       <code>$row['Field']</code>
       <code>$row['Field']</code>
       <code>$row['Type']</code>
@@ -13548,8 +13352,10 @@
       <code>$optionsArray[$existrelForeign[$masterFieldMd5]['on_delete'] ?? '']</code>
       <code>$optionsArray[$existrelForeign[$masterFieldMd5]['on_update'] ?? '']</code>
     </MixedArrayTypeCoercion>
-    <MixedAssignment occurrences="47">
+    <MixedAssignment occurrences="48">
       <code>$GLOBALS['errorUrl']</code>
+      <code>$altered</code>
+      <code>$altered</code>
       <code>$cachedResult</code>
       <code>$cachedResult</code>
       <code>$column</code>
@@ -13576,7 +13382,6 @@
       <code>$oneField</code>
       <code>$oneField</code>
       <code>$oneField</code>
-      <code>$options</code>
       <code>$refDbName</code>
       <code>$ret[]</code>
       <code>$row</code>
@@ -13607,16 +13412,22 @@
       <code>string</code>
       <code>string</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="4">
-      <code>exists</code>
-      <code>exists</code>
-      <code>exists</code>
-      <code>exists</code>
+    <MixedMethodCall occurrences="2">
+      <code>has</code>
+      <code>has</code>
     </MixedMethodCall>
     <MixedOperand occurrences="2">
       <code>$backquoted ? Util::backquote($column) : $column</code>
       <code>$index[0]</code>
     </MixedOperand>
+    <MixedPropertyAssignment occurrences="2">
+      <code>$altered</code>
+      <code>$altered</code>
+    </MixedPropertyAssignment>
+    <MixedPropertyFetch occurrences="2">
+      <code>$altered-&gt;options</code>
+      <code>$altered-&gt;options</code>
+    </MixedPropertyFetch>
     <MixedReturnStatement occurrences="8">
       <code>$tableAutoIncrement ?? ''</code>
       <code>$tableCollation</code>
@@ -13627,9 +13438,11 @@
       <code>end($this-&gt;messages)</code>
       <code>json_decode($value, true)</code>
     </MixedReturnStatement>
-    <PossiblyInvalidArgument occurrences="2">
+    <PossiblyInvalidArgument occurrences="4">
       <code>$_POST['constraint_name'][$masterFieldMd5]</code>
+      <code>$fields[$column]['expr']</code>
       <code>$oldIndex</code>
+      <code>$options['expr']</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidArrayOffset occurrences="6">
       <code>$_POST['constraint_name'][$masterFieldMd5]</code>
@@ -13665,15 +13478,15 @@
       <code>$optionsArray</code>
       <code>$optionsArray</code>
     </PossiblyNullArrayOffset>
+    <PossiblyNullIterator occurrences="2">
+      <code>$statement-&gt;altered</code>
+      <code>$statement-&gt;altered</code>
+    </PossiblyNullIterator>
     <PossiblyNullOperand occurrences="3">
       <code>$column-&gt;getSubPart()</code>
       <code>Generator::mysqlDie($tmpErrorCreate, $createQuery, false, '', false)</code>
       <code>Generator::mysqlDie($tmpErrorDrop, $dropQuery, false, '', false)</code>
     </PossiblyNullOperand>
-    <PossiblyNullPropertyAssignmentValue occurrences="2">
-      <code>null</code>
-      <code>null</code>
-    </PossiblyNullPropertyAssignmentValue>
     <PossiblyNullReference occurrences="7">
       <code>$existrelForeign[$masterFieldMd5]</code>
       <code>$existrelForeign[$masterFieldMd5]</code>
@@ -13956,11 +13769,6 @@
       <code>escapeString</code>
       <code>escapeString</code>
     </DeprecatedMethod>
-    <DocblockTypeContradiction occurrences="3">
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
-    </DocblockTypeContradiction>
     <InvalidScalarArgument occurrences="1">
       <code>(int) $version - 1</code>
     </InvalidScalarArgument>
@@ -13997,10 +13805,6 @@
       <code>$data['username']</code>
       <code>$result['identifier']</code>
     </MixedOperand>
-    <MixedPropertyFetch occurrences="2">
-      <code>$tokens[0]-&gt;value</code>
-      <code>$tokens[2]-&gt;value</code>
-    </MixedPropertyFetch>
     <MixedReturnStatement occurrences="1">
       <code>self::$trackingCache[$dbName][$tableName]</code>
     </MixedReturnStatement>
@@ -14014,17 +13818,37 @@
       <code>$statement-&gt;body[4]-&gt;value</code>
       <code>$statement-&gt;into-&gt;dest-&gt;table</code>
     </PossiblyInvalidPropertyFetch>
+    <PossiblyNullArrayAccess occurrences="7">
+      <code>$statement-&gt;fields[0]</code>
+      <code>$statement-&gt;fields[0]</code>
+      <code>$statement-&gt;from[0]</code>
+      <code>$statement-&gt;renames[0]</code>
+      <code>$statement-&gt;tables[0]</code>
+      <code>$tokens[0]</code>
+      <code>$tokens[2]</code>
+    </PossiblyNullArrayAccess>
     <PossiblyNullOperand occurrences="1">
       <code>$statement</code>
     </PossiblyNullOperand>
+    <PossiblyNullPropertyFetch occurrences="14">
+      <code>$parser-&gt;list-&gt;tokens</code>
+      <code>$statement-&gt;fields[0]-&gt;table</code>
+      <code>$statement-&gt;fields[0]-&gt;table</code>
+      <code>$statement-&gt;from[0]-&gt;table</code>
+      <code>$statement-&gt;into-&gt;dest</code>
+      <code>$statement-&gt;renames[0]-&gt;new</code>
+      <code>$statement-&gt;renames[0]-&gt;old</code>
+      <code>$statement-&gt;table-&gt;table</code>
+      <code>$statement-&gt;table-&gt;table</code>
+      <code>$statement-&gt;table-&gt;table</code>
+      <code>$statement-&gt;table-&gt;table</code>
+      <code>$statement-&gt;tables[0]-&gt;table</code>
+      <code>$tokens[0]-&gt;value</code>
+      <code>$tokens[2]-&gt;value</code>
+    </PossiblyNullPropertyFetch>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(string) $version</code>
     </RedundantCastGivenDocblockType>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>$statement-&gt;name !== null</code>
-      <code>$statement-&gt;name !== null</code>
-      <code>isset($statement-&gt;options)</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="libraries/classes/Tracking.php">
     <DeprecatedMethod occurrences="6">
@@ -14281,33 +14105,15 @@
       <code>escapeString</code>
       <code>escapeString</code>
     </DeprecatedMethod>
-    <MixedArgument occurrences="6">
-      <code>$hostname</code>
-      <code>$hostname</code>
-      <code>$hostname</code>
-      <code>$username</code>
-      <code>$username</code>
-      <code>$username</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$GLOBALS['auth_plugin']</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>handlePasswordChange</code>
-    </MixedMethodCall>
     <PossiblyInvalidArgument occurrences="1">
       <code>$_POST['pma_pw']</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast occurrences="1">
       <code>$_POST['pma_pw']</code>
     </PossiblyInvalidCast>
-    <PossiblyNullReference occurrences="1">
-      <code>handlePasswordChange</code>
-    </PossiblyNullReference>
   </file>
   <file src="libraries/classes/UserPreferences.php">
-    <DeprecatedMethod occurrences="7">
-      <code>escapeString</code>
+    <DeprecatedMethod occurrences="6">
       <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
@@ -14352,15 +14158,13 @@
       <code>$table['disp_name']</code>
       <code>$units[$d]</code>
     </InvalidArrayOffset>
-    <MixedArgument occurrences="8">
-      <code>$host</code>
+    <MixedArgument occurrences="6">
       <code>$limitOffset</code>
       <code>$maxSize</code>
       <code>$maxUnit</code>
       <code>$row[$i] ?? null</code>
       <code>$table</code>
       <code>$table['Name']</code>
-      <code>$user</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="5">
       <code>$columnNames</code>
@@ -15287,10 +15091,16 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/classes/Display/ResultsTest.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>assertSame</code>
+    </DocblockTypeContradiction>
     <MixedArgument occurrences="4">
       <code>$output</code>
       <code>$output</code>
     </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$_SESSION['tmpval']['pftext']</code>
+    </MixedArrayAccess>
     <MixedArrayAssignment occurrences="10">
       <code>$_SESSION['tmpval']['display_binary']</code>
       <code>$_SESSION['tmpval']['display_binary']</code>
@@ -16495,21 +16305,13 @@
       <code>$_SESSION['cache']['server_server']</code>
       <code>$result[0]</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>$keyword</code>
-      <code>$keyword</code>
-    </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="4">
       <code>$_SESSION['cache']['server_server']</code>
       <code>$_SESSION['cache']['server_server']</code>
       <code>$_SESSION['cache']['server_server']</code>
       <code>$_SESSION['cache']['server_server']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="1">
-      <code>$type</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="18">
-      <code>array</code>
+    <MixedInferredReturnType occurrences="17">
       <code>array</code>
       <code>array</code>
       <code>array</code>
@@ -16528,9 +16330,6 @@
       <code>array</code>
       <code>array</code>
     </MixedInferredReturnType>
-    <MixedOperand occurrences="1">
-      <code>$type</code>
-    </MixedOperand>
     <PossiblyInvalidArgument occurrences="2">
       <code>testBackquote</code>
       <code>testGetScriptNameForOption</code>

@@ -37,6 +37,7 @@ use PhpMyAdmin\Controllers\Transformation;
 use PhpMyAdmin\Controllers\UserPasswordController;
 use PhpMyAdmin\Controllers\VersionCheckController;
 use PhpMyAdmin\Controllers\View;
+use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
 
 return [
     'services' => [
@@ -585,6 +586,7 @@ return [
         ],
         LogoutController::class => [
             'class' => LogoutController::class,
+            'arguments' => ['@' . AuthenticationPluginFactory::class],
         ],
         NavigationController::class => [
             'class' => NavigationController::class,
@@ -1480,8 +1482,8 @@ return [
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
-                '$dbi' => '@dbi',
                 '$structureController' => '@' . Table\StructureController::class,
+                '$indexes' => '@table_indexes',
             ],
         ],
         Table\Structure\AddKeyController::class => [
@@ -1533,8 +1535,8 @@ return [
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
-                '$dbi' => '@dbi',
                 '$structureController' => '@' . Table\StructureController::class,
+                '$indexes' => '@table_indexes',
             ],
         ],
         Table\Structure\MoveColumnsController::class => [
@@ -1587,8 +1589,8 @@ return [
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
-                '$dbi' => '@dbi',
                 '$structureController' => '@' . Table\StructureController::class,
+                '$indexes' => '@table_indexes',
             ],
         ],
         Table\Structure\UniqueController::class => [
@@ -1596,8 +1598,8 @@ return [
             'arguments' => [
                 '$response' => '@response',
                 '$template' => '@template',
-                '$dbi' => '@dbi',
                 '$structureController' => '@' . Table\StructureController::class,
+                '$indexes' => '@table_indexes',
             ],
         ],
         Table\StructureController::class => [

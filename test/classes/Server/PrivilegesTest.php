@@ -21,7 +21,6 @@ use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use ReflectionMethod;
-use stdClass;
 
 use function __;
 use function _pgettext;
@@ -244,7 +243,7 @@ class PrivilegesTest extends AbstractTestCase
             . ' FROM `mysql`.`tables_priv`'
             . " WHERE `User` = '" . $dbi->escapeString($username) . "'"
             . " AND `Host` = '" . $dbi->escapeString($hostname) . "'"
-            . " AND `Db` = '" . Util::unescapeMysqlWildcards($db) . "'"
+            . " AND `Db` = '" . $serverPrivileges->unescapeGrantWildcards($db) . "'"
             . " AND `Table_name` = '" . $dbi->escapeString($table) . "';";
         $this->assertEquals($sql, $ret);
 
@@ -1684,7 +1683,9 @@ class PrivilegesTest extends AbstractTestCase
         );
         // phpcs:enable
 
-        $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface($dummyDbi));
+        $dbi = $this->createDatabaseInterface($dummyDbi);
+        $GLOBALS['dbi'] = $dbi;
+        $serverPrivileges = $this->getPrivileges($dbi);
 
         // Test case 1
         $actual = $serverPrivileges->getHtmlForAllTableSpecificRights('pma', 'host', 'table', 'pmadb');
@@ -1697,12 +1698,13 @@ class PrivilegesTest extends AbstractTestCase
         $this->assertStringContainsString('Table-specific privileges', $actual);
 
         // Test case 2
-        $GLOBALS['dblist'] = new stdClass();
-        $GLOBALS['dblist']->databases = [
-            'x',
-            'y',
-            'z',
-        ];
+        $GLOBALS['cfg']['Server']['DisableIS'] = false;
+        $GLOBALS['cfg']['Server']['only_db'] = '';
+        $dummyDbi->addResult(
+            'SELECT `SCHEMA_NAME` FROM `INFORMATION_SCHEMA`.`SCHEMATA`',
+            [['x'], ['y'], ['z']],
+            ['SCHEMA_NAME']
+        );
         $actual = $serverPrivileges->getHtmlForAllTableSpecificRights('pma2', 'host2', 'database', '');
         $this->assertStringContainsString(
             '<div class="card-header js-submenu-label" data-submenu-label="Database">',
@@ -1950,5 +1952,80 @@ class PrivilegesTest extends AbstractTestCase
         $relation = new Relation($dbi);
 
         return new Privileges(new Template(), $dbi, $relation, new RelationCleanup($dbi, $relation), new Plugins($dbi));
+    }
+
+    /**
+     * data provider for testEscapeMysqlWildcards and testUnescapeMysqlWildcards
+     *
+     * @psalm-return list<array{string, string}>
+     */
+    public function providerUnEscapeMysqlWildcards(): array
+    {
+        return [
+            [
+                '\_test',
+                '_test',
+            ],
+            [
+                '\_\\',
+                '_\\',
+            ],
+            [
+                '\\_\%',
+                '_%',
+            ],
+            [
+                '\\\_',
+                '\_',
+            ],
+            [
+                '\\\_\\\%',
+                '\_\%',
+            ],
+            [
+                '\_\\%\_\_\%',
+                '_%__%',
+            ],
+            [
+                '\%\_',
+                '%_',
+            ],
+            [
+                '\\\%\\\_',
+                '\%\_',
+            ],
+        ];
+    }
+
+    /**
+     * @param string $a Expected value
+     * @param string $b String to escape
+     *
+     * @dataProvider providerUnEscapeMysqlWildcards
+     */
+    public function testEscapeMysqlWildcards(string $a, string $b): void
+    {
+        $dbi = $this->createDatabaseInterface();
+        $serverPrivileges = $this->getPrivileges($dbi);
+        $this->assertEquals(
+            $a,
+            $serverPrivileges->escapeGrantWildcards($b)
+        );
+    }
+
+    /**
+     * @param string $a String to unescape
+     * @param string $b Expected value
+     *
+     * @dataProvider providerUnEscapeMysqlWildcards
+     */
+    public function testUnescapeMysqlWildcards(string $a, string $b): void
+    {
+        $dbi = $this->createDatabaseInterface();
+        $serverPrivileges = $this->getPrivileges($dbi);
+        $this->assertEquals(
+            $b,
+            $serverPrivileges->unescapeGrantWildcards($a)
+        );
     }
 }

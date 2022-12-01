@@ -12,38 +12,6 @@ permissions:
   contents: read
 
 jobs:
-  lint-node:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-
-      - name: Get Yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install modules
-        run: yarn install --non-interactive
-
-      - name: Lint JavaScript files
-        run: yarn run js-lint --quiet
-
-      - name: Lint CSS files
-        run: yarn run css-lint
-
   lint-php-files:
     runs-on: ubuntu-latest
     strategy:
@@ -59,7 +27,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: composer validate
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1

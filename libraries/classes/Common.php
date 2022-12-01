@@ -8,10 +8,14 @@ use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\DatabaseName;
 use PhpMyAdmin\Dbal\TableName;
+use PhpMyAdmin\Exceptions\AuthenticationPluginException;
+use PhpMyAdmin\Exceptions\ConfigException;
 use PhpMyAdmin\Exceptions\MissingExtensionException;
+use PhpMyAdmin\Exceptions\SessionHandlerException;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
+use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
 use PhpMyAdmin\SqlParser\Lexer;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -39,7 +43,6 @@ use function mb_strpos;
 use function mb_strrpos;
 use function mb_substr;
 use function ob_start;
-use function register_shutdown_function;
 use function restore_error_handler;
 use function session_id;
 use function sprintf;
@@ -47,6 +50,7 @@ use function strlen;
 use function trigger_error;
 use function urldecode;
 
+use const CONFIG_FILE;
 use const E_USER_ERROR;
 
 final class Common
@@ -85,8 +89,6 @@ final class Common
     public static function run(bool $isSetupPage = false): void
     {
         $GLOBALS['lang'] = $GLOBALS['lang'] ?? null;
-        $GLOBALS['isConfigLoading'] = $GLOBALS['isConfigLoading'] ?? null;
-        $GLOBALS['auth_plugin'] = $GLOBALS['auth_plugin'] ?? null;
         $GLOBALS['theme'] = $GLOBALS['theme'] ?? null;
         $GLOBALS['urlParams'] = $GLOBALS['urlParams'] ?? null;
         $GLOBALS['token_mismatch'] = $GLOBALS['token_mismatch'] ?? null;
@@ -96,20 +98,16 @@ final class Common
 
         $isMinimumCommon = $isSetupPage || $route === '/import-status' || $route === '/url' || $route === '/messages';
 
-        $GLOBALS['containerBuilder'] = Core::getContainerBuilder();
+        $container = Core::getContainerBuilder();
 
         /** @var ErrorHandler $errorHandler */
-        $errorHandler = $GLOBALS['containerBuilder']->get('error_handler');
+        $errorHandler = $container->get('error_handler');
         $GLOBALS['errorHandler'] = $errorHandler;
 
         try {
             self::checkRequiredPhpExtensions();
         } catch (MissingExtensionException $exception) {
-            echo (new Template())->render('error/generic', [
-                'lang' => $GLOBALS['lang'] ?? 'en',
-                'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-                'error_message' => $exception->getMessage(),
-            ]);
+            echo self::getGenericError($exception->getMessage());
 
             return;
         }
@@ -117,20 +115,27 @@ final class Common
         self::configurePhpSettings();
         self::cleanupPathInfo();
 
-        /* parsing configuration file                  LABEL_parsing_config_file      */
-
-        /** Indication for the error handler */
-        $GLOBALS['isConfigLoading'] = false;
-
-        register_shutdown_function([Config::class, 'fatalErrorHandler']);
-
         /** @var Config $config */
-        $config = $GLOBALS['containerBuilder']->get('config');
+        $config = $container->get('config');
         $GLOBALS['config'] = $config;
 
+        try {
+            $config->loadAndCheck(CONFIG_FILE);
+        } catch (ConfigException $exception) {
+            echo self::getGenericError($exception->getMessage());
+
+            return;
+        }
+
         if ($route !== '/messages') {
-            // Include session handling after the globals, to prevent overwriting.
-            Session::setUp($config, $errorHandler);
+            try {
+                // Include session handling after the globals, to prevent overwriting.
+                Session::setUp($config, $errorHandler);
+            } catch (SessionHandlerException $exception) {
+                echo self::getGenericError($exception->getMessage());
+
+                return;
+            }
         }
 
         $request = Core::populateRequestWithEncryptedQueryParams($request);
@@ -145,12 +150,12 @@ final class Common
          * @global array $urlParams
          */
         $GLOBALS['urlParams'] = [];
-        $GLOBALS['containerBuilder']->setParameter('url_params', $GLOBALS['urlParams']);
+        $container->setParameter('url_params', $GLOBALS['urlParams']);
 
-        self::setGotoAndBackGlobals($GLOBALS['containerBuilder'], $config);
+        self::setGotoAndBackGlobals($container, $config);
         self::checkTokenRequestParam();
-        self::setDatabaseAndTableFromRequest($GLOBALS['containerBuilder'], $request);
-        self::setSQLQueryGlobalFromRequest($request);
+        self::setDatabaseAndTableFromRequest($container, $request);
+        self::setSQLQueryGlobalFromRequest($container, $request);
 
         //$_REQUEST['set_theme'] // checked later in this file LABEL_theme_setup
         //$_REQUEST['server']; // checked later in this file
@@ -164,27 +169,29 @@ final class Common
         $language = LanguageManager::getInstance()->selectLanguage();
         $language->activate();
 
-        /**
-         * check for errors occurred while loading configuration
-         * this check is done here after loading language files to present errors in locale
-         */
-        $config->checkPermissions();
-        $config->checkErrors();
+        try {
+            /**
+             * check for errors occurred while loading configuration
+             * this check is done here after loading language files to present errors in locale
+             */
+            $config->checkPermissions();
+            $config->checkErrors();
+        } catch (ConfigException $exception) {
+            echo self::getGenericError($exception->getMessage());
+
+            return;
+        }
 
         try {
             self::checkServerConfiguration();
             self::checkRequest();
         } catch (RuntimeException $exception) {
-            echo (new Template())->render('error/generic', [
-                'lang' => $GLOBALS['lang'] ?? 'en',
-                'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-                'error_message' => $exception->getMessage(),
-            ]);
+            echo self::getGenericError($exception->getMessage());
 
             return;
         }
 
-        self::setCurrentServerGlobal($config);
+        self::setCurrentServerGlobal($container, $config);
 
         $GLOBALS['cfg'] = $config->settings;
 
@@ -196,7 +203,7 @@ final class Common
 
         if ($isMinimumCommon) {
             $config->loadUserPreferences(true);
-            $GLOBALS['containerBuilder']->set('theme_manager', ThemeManager::getInstance());
+            $container->set('theme_manager', ThemeManager::getInstance());
             Tracker::enable();
 
             if ($route === '/url') {
@@ -210,7 +217,7 @@ final class Common
                 return;
             }
 
-            Routing::callControllerForRoute($request, Routing::getDispatcher(), $GLOBALS['containerBuilder']);
+            Routing::callControllerForRoute($request, Routing::getDispatcher(), $container);
 
             return;
         }
@@ -223,14 +230,23 @@ final class Common
         ThemeManager::getInstance()->setThemeCookie();
 
         $GLOBALS['dbi'] = DatabaseInterface::load();
-        $GLOBALS['containerBuilder']->set(DatabaseInterface::class, $GLOBALS['dbi']);
-        $GLOBALS['containerBuilder']->setAlias('dbi', DatabaseInterface::class);
+        $container->set(DatabaseInterface::class, $GLOBALS['dbi']);
+        $container->setAlias('dbi', DatabaseInterface::class);
 
         if (! empty($GLOBALS['cfg']['Server'])) {
             $config->getLoginCookieValidityFromCache($GLOBALS['server']);
 
-            $GLOBALS['auth_plugin'] = Plugins::getAuthPlugin();
-            $GLOBALS['auth_plugin']->authenticate();
+            /** @var AuthenticationPluginFactory $authPluginFactory */
+            $authPluginFactory = $container->get(AuthenticationPluginFactory::class);
+            try {
+                $authPlugin = $authPluginFactory->create();
+            } catch (AuthenticationPluginException $exception) {
+                echo self::getGenericError($exception->getMessage());
+
+                return;
+            }
+
+            $authPlugin->authenticate();
 
             /* Enable LOAD DATA LOCAL INFILE for LDI plugin */
             if ($route === '/import' && ($_POST['format'] ?? '') === 'ldi') {
@@ -240,25 +256,19 @@ final class Common
                 // phpcs:enable
             }
 
-            self::connectToDatabaseServer($GLOBALS['dbi'], $GLOBALS['auth_plugin']);
-
-            $GLOBALS['auth_plugin']->rememberCredentials();
-
-            $GLOBALS['auth_plugin']->checkTwoFactor();
+            self::connectToDatabaseServer($GLOBALS['dbi'], $authPlugin);
+            $authPlugin->rememberCredentials();
+            $authPlugin->checkTwoFactor();
 
             /* Log success */
             Logging::logUser($GLOBALS['cfg']['Server']['user']);
 
             if ($GLOBALS['dbi']->getVersion() < $GLOBALS['cfg']['MysqlMinVersion']['internal']) {
-                echo (new Template())->render('error/generic', [
-                    'lang' => $GLOBALS['lang'] ?? 'en',
-                    'dir' => $GLOBALS['text_dir'] ?? 'ltr',
-                    'error_message' => sprintf(
-                        __('You should upgrade to %s %s or later.'),
-                        'MySQL',
-                        (string) $GLOBALS['cfg']['MysqlMinVersion']['human']
-                    ),
-                ]);
+                echo self::getGenericError(sprintf(
+                    __('You should upgrade to %s %s or later.'),
+                    'MySQL',
+                    (string) $GLOBALS['cfg']['MysqlMinVersion']['human']
+                ));
 
                 return;
             }
@@ -295,23 +305,23 @@ final class Common
 
         Profiling::check($GLOBALS['dbi'], $response);
 
-        $GLOBALS['containerBuilder']->set('response', ResponseRenderer::getInstance());
+        $container->set('response', ResponseRenderer::getInstance());
 
         // load user preferences
         $config->loadUserPreferences();
 
-        $GLOBALS['containerBuilder']->set('theme_manager', ThemeManager::getInstance());
+        $container->set('theme_manager', ThemeManager::getInstance());
 
         /* Tell tracker that it can actually work */
         Tracker::enable();
 
         if (! empty($GLOBALS['server']) && isset($GLOBALS['cfg']['ZeroConf']) && $GLOBALS['cfg']['ZeroConf']) {
             /** @var Relation $relation */
-            $relation = $GLOBALS['containerBuilder']->get('relation');
+            $relation = $container->get('relation');
             $GLOBALS['dbi']->postConnectControl($relation);
         }
 
-        Routing::callControllerForRoute($request, Routing::getDispatcher(), $GLOBALS['containerBuilder']);
+        Routing::callControllerForRoute($request, Routing::getDispatcher(), $container);
     }
 
     /**
@@ -522,10 +532,8 @@ final class Common
         Sanitize::removeRequestVars($allowList);
     }
 
-    private static function setDatabaseAndTableFromRequest(
-        ContainerInterface $containerBuilder,
-        ServerRequest $request
-    ): void {
+    private static function setDatabaseAndTableFromRequest(ContainerInterface $container, ServerRequest $request): void
+    {
         $GLOBALS['urlParams'] = $GLOBALS['urlParams'] ?? null;
 
         $db = DatabaseName::tryFromValue($request->getParam('db'));
@@ -540,7 +548,7 @@ final class Common
 
         $GLOBALS['urlParams']['db'] = $GLOBALS['db'];
         $GLOBALS['urlParams']['table'] = $GLOBALS['table'];
-        $containerBuilder->setParameter('url_params', $GLOBALS['urlParams']);
+        $container->setParameter('url_params', $GLOBALS['urlParams']);
     }
 
     /**
@@ -663,7 +671,7 @@ final class Common
         ob_start();
     }
 
-    private static function setSQLQueryGlobalFromRequest(ServerRequest $request): void
+    private static function setSQLQueryGlobalFromRequest(ContainerInterface $container, ServerRequest $request): void
     {
         $sqlQuery = '';
         if ($request->isPost()) {
@@ -675,16 +683,25 @@ final class Common
         }
 
         $GLOBALS['sql_query'] = $sqlQuery;
-        $GLOBALS['containerBuilder']->setParameter('sql_query', $sqlQuery);
+        $container->setParameter('sql_query', $sqlQuery);
     }
 
-    private static function setCurrentServerGlobal(Config $config): void
+    private static function setCurrentServerGlobal(ContainerInterface $container, Config $config): void
     {
         $config->checkServers();
         $server = $config->selectServer();
         $GLOBALS['server'] = $server;
         $GLOBALS['urlParams']['server'] = $server;
-        $GLOBALS['containerBuilder']->setParameter('server', $server);
-        $GLOBALS['containerBuilder']->setParameter('url_params', $GLOBALS['urlParams']);
+        $container->setParameter('server', $server);
+        $container->setParameter('url_params', $GLOBALS['urlParams']);
+    }
+
+    private static function getGenericError(string $message): string
+    {
+        return (new Template())->render('error/generic', [
+            'lang' => $GLOBALS['lang'] ?? 'en',
+            'dir' => $GLOBALS['text_dir'] ?? 'ltr',
+            'error_message' => $message,
+        ]);
     }
 }

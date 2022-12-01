@@ -4,9 +4,7 @@ import $ from 'jquery';
  * @fileoverview    function used for page-related settings
  * @name            Page-related settings
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @required    js/functions.js
  */
 
 function showSettings (selector) {
@@ -35,18 +33,26 @@ function showNaviSettings () {
     showSettings('#pma_navigation_settings');
 }
 
-window.PageSettings = {};
+const PageSettings = {
+    /**
+     * @return {void}
+     */
+    off: () => {
+        $('#page_settings_icon').css('display', 'none');
+        $('#page_settings_icon').off('click');
+        $('#pma_navigation_settings_icon').off('click');
+    },
 
-window.PageSettings.off = () => function () {
-    $('#page_settings_icon').css('display', 'none');
-    $('#page_settings_icon').off('click');
-    $('#pma_navigation_settings_icon').off('click');
+    /**
+     * @return {void}
+     */
+    on: () => {
+        if ($('#page_settings_modal').length) {
+            $('#page_settings_icon').css('display', 'inline');
+            $('#page_settings_icon').on('click', showPageSettings);
+        }
+        $('#pma_navigation_settings_icon').on('click', showNaviSettings);
+    },
 };
 
-window.PageSettings.on = () => function () {
-    if ($('#page_settings_modal').length) {
-        $('#page_settings_icon').css('display', 'inline');
-        $('#page_settings_icon').on('click', showPageSettings);
-    }
-    $('#pma_navigation_settings_icon').on('click', showNaviSettings);
-};
+export { PageSettings };

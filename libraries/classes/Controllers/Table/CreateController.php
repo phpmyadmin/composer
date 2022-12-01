@@ -102,8 +102,7 @@ class CreateController extends AbstractController
          * The form used to define the structure of the table has been submitted
          */
         if (isset($_POST['do_save_data'])) {
-            // lower_case_table_names=1 `DB` becomes `db`
-            if ($this->dbi->getLowerCaseNames() === '1') {
+            if ($this->dbi->getLowerCaseNames() === 1) {
                 $GLOBALS['db'] = mb_strtolower($GLOBALS['db']);
                 $GLOBALS['table'] = mb_strtolower($GLOBALS['table']);
             }
@@ -154,7 +153,7 @@ class CreateController extends AbstractController
         // Do not display the table in the header since it hasn't been created yet
         $this->response->getHeader()->getMenu()->setTable('');
 
-        $this->addScriptFiles(['vendor/jquery/jquery.uitablefilter.js', 'indexes.js']);
+        $this->addScriptFiles(['vendor/jquery/jquery.uitablefilter.js']);
 
         $this->checkParameters(['server', 'db']);
 

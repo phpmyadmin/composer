@@ -139,11 +139,11 @@ final class ImportController extends AbstractController
         if (! empty($GLOBALS['sql_query'])) {
             // apply values for parameters
             if (! empty($_POST['parameterized']) && ! empty($_POST['parameters']) && is_array($_POST['parameters'])) {
+                /** @var array<string, string> $parameters */
                 $parameters = $_POST['parameters'];
-                foreach ($parameters as $parameter => $replacement) {
-                    $replacementValue = $this->dbi->escapeString($replacement);
+                foreach ($parameters as $parameter => $replacementValue) {
                     if (! is_numeric($replacementValue)) {
-                        $replacementValue = '\'' . $replacementValue . '\'';
+                        $replacementValue = $this->dbi->quoteString($replacementValue);
                     }
 
                     $quoted = preg_quote($parameter, '/');
@@ -251,10 +251,7 @@ final class ImportController extends AbstractController
             return;
         }
 
-        $post_patterns = [
-            '/^force_file_/',
-            '/^' . $GLOBALS['format'] . '_/',
-        ];
+        $post_patterns = ['/^' . $GLOBALS['format'] . '_/'];
 
         Core::setPostAsGlobal($post_patterns);
 

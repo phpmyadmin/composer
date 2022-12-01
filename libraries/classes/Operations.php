@@ -122,7 +122,7 @@ class Operations
 
         // rebuild the database list because Table::moveCopy
         // checks in this list if the target db exists
-        $GLOBALS['dblist']->databases->build();
+        $this->dbi->getDatabaseList()->build();
     }
 
     /**
@@ -978,7 +978,7 @@ class Operations
                 $message->addParam($old);
 
                 $new_name = (string) $_POST['new_name'];
-                if ($this->dbi->getLowerCaseNames() === '1') {
+                if ($this->dbi->getLowerCaseNames() === 1) {
                     $new_name = strtolower($new_name);
                 }
 

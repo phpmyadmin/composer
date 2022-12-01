@@ -853,6 +853,25 @@ final class JavaScriptMessagesController
                 'These functions are meant to return a binary result; to avoid inconsistent results you should store'
                 . ' it in a BINARY, VARBINARY, or BLOB column.'
             ),
+
+            'uploadProgressMaximumAllowedSize' => __(
+                'The file being uploaded is probably larger than the maximum allowed size.'
+            ),
+            'uploadProgressStatusText' => __('%s of %s'),
+            'uploadProgressPerSecond' => __('%s/sec.'),
+            'uploadProgressRemainingMin' => __('About %MIN min. %SEC sec. remaining.'),
+            'uploadProgressRemainingSec' => __('About %SEC sec. remaining.'),
+            'uploadProgressBeingProcessed' => __('The file is being processed, please be patient.'),
+            'uploadProgressUploading' => __('Uploading your import file…'),
+            'uploadProgressNoDetails' => __(
+                'Please be patient, the file is being uploaded. Details about the upload are not available.'
+            ),
+
+            'configErrorInvalidPositiveNumber' => __('Not a positive number!'),
+            'configErrorInvalidNonNegativeNumber' => __('Not a non-negative number!'),
+            'configErrorInvalidPortNumber' => __('Not a valid port number!'),
+            'configErrorInvalidValue' => __('Incorrect value!'),
+            'configErrorInvalidUpperBound' => __('Value must be less than or equal to %s!'),
         ];
     }
 }

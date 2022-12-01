@@ -37,10 +37,6 @@ final class SlowLogController extends AbstractController
     {
         $GLOBALS['errorUrl'] = $GLOBALS['errorUrl'] ?? null;
 
-        $params = [
-            'time_start' => $_POST['time_start'] ?? null,
-            'time_end' => $_POST['time_end'] ?? null,
-        ];
         $GLOBALS['errorUrl'] = Url::getFromRoute('/');
 
         if ($this->dbi->isSuperUser()) {
@@ -53,8 +49,8 @@ final class SlowLogController extends AbstractController
 
         $this->response->addJSON([
             'message' => $this->monitor->getJsonForLogDataTypeSlow(
-                (int) $params['time_start'],
-                (int) $params['time_end']
+                (int) $request->getParsedBodyParam('time_start'),
+                (int) $request->getParsedBodyParam('time_end')
             ),
         ]);
     }

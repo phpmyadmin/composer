@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { AJAX } from '../modules/ajax.js';
+import { Functions } from '../modules/functions.js';
+import { CommonActions, CommonParams } from '../modules/common.js';
 
 /**
  * for table relation
@@ -81,7 +84,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     var $form = $dropdown.parents('form');
     var $db = $form.find('input[name="db"]').val();
     var $table = $form.find('input[name="table"]').val();
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = CommonParams.get('arg_separator');
     var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' +
         argsep + 'db=' + encodeURIComponent($db) +
         argsep + 'table=' + encodeURIComponent($table) +
@@ -128,7 +131,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
 /**
  * Unbind all event handlers before tearing down a page
  */
-window.AJAX.registerTeardown('table/relation.js', function () {
+AJAX.registerTeardown('table/relation.js', function () {
     $('body').off('change',
         'select[name^="destination_db"], ' +
         'select[name^="destination_table"], ' +
@@ -140,7 +143,7 @@ window.AJAX.registerTeardown('table/relation.js', function () {
     $('a.drop_foreign_key_anchor.ajax').off('click');
 });
 
-window.AJAX.registerOnload('table/relation.js', function () {
+AJAX.registerOnload('table/relation.js', function () {
     /**
      * Ajax event handler to fetch table/column dropdown values.
      */
@@ -234,7 +237,7 @@ window.AJAX.registerOnload('table/relation.js', function () {
                 .val()
         );
 
-        var question = Functions.sprintf(window.Messages.strDoYouReally, dropQuery);
+        var question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
 
         $anchor.confirm(question, $anchor.attr('href'), function (url) {
             var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
@@ -242,7 +245,7 @@ window.AJAX.registerOnload('table/relation.js', function () {
             $.post(url, params, function (data) {
                 if (data.success === true) {
                     Functions.ajaxRemoveMessage($msg);
-                    window.CommonActions.refreshMain(false, function () {
+                    CommonActions.refreshMain(false, function () {
                         // Do nothing
                     });
                 } else {
