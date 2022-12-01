@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[21],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[17],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 25:
+/***/ 28:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+
 
 /**
  * Initializes the data required to run Designer, then fires it up.
@@ -33,10 +35,10 @@ __webpack_require__.r(__webpack_exports__);
 /* global designerConfig */
 // templates/database/designer/main.twig
 
-window.AJAX.registerTeardown('designer/init.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.trigger').off('click');
 });
-window.AJAX.registerOnload('designer/init.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.trigger').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.panel').toggle('fast');
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).toggleClass('active');
@@ -83,7 +85,8 @@ window.AJAX.registerOnload('designer/init.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(25));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(28); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=init.js.map

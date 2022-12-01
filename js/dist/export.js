@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[27],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[23],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 31:
+/***/ 34:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * Functions used in the export tab
@@ -92,14 +98,14 @@ Export.createTemplate = function (name) {
   var templateData = Export.getTemplateData();
   var params = {
     'ajax_request': true,
-    'server': window.CommonParams.get('server'),
-    'db': window.CommonParams.get('db'),
-    'table': window.CommonParams.get('table'),
+    'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+    'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+    'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateName': name,
     'templateData': JSON.stringify(templateData)
   };
-  Functions.ajaxShowMessage();
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/create', params, function (response) {
     if (response.success === true) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#templateName').val('');
@@ -109,9 +115,9 @@ Export.createTemplate = function (name) {
           jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('selected', true);
         }
       });
-      Functions.ajaxShowMessage(window.Messages.strTemplateCreated);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateCreated);
     } else {
-      Functions.ajaxShowMessage(response.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
     }
   });
 };
@@ -125,13 +131,13 @@ Export.createTemplate = function (name) {
 Export.loadTemplate = function (id) {
   var params = {
     'ajax_request': true,
-    'server': window.CommonParams.get('server'),
-    'db': window.CommonParams.get('db'),
-    'table': window.CommonParams.get('table'),
+    'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+    'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+    'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateId': id
   };
-  Functions.ajaxShowMessage();
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/load', params, function (response) {
     if (response.success === true) {
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form[name="dump"]');
@@ -157,9 +163,9 @@ Export.loadTemplate = function (id) {
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="template_id"]').val(id);
-      Functions.ajaxShowMessage(window.Messages.strTemplateLoaded);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateLoaded);
     } else {
-      Functions.ajaxShowMessage(response.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
     }
   });
 };
@@ -174,19 +180,19 @@ Export.updateTemplate = function (id) {
   var templateData = Export.getTemplateData();
   var params = {
     'ajax_request': true,
-    'server': window.CommonParams.get('server'),
-    'db': window.CommonParams.get('db'),
-    'table': window.CommonParams.get('table'),
+    'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+    'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+    'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateId': id,
     'templateData': JSON.stringify(templateData)
   };
-  Functions.ajaxShowMessage();
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/update', params, function (response) {
     if (response.success === true) {
-      Functions.ajaxShowMessage(window.Messages.strTemplateUpdated);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateUpdated);
     } else {
-      Functions.ajaxShowMessage(response.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
     }
   });
 };
@@ -200,19 +206,19 @@ Export.updateTemplate = function (id) {
 Export.deleteTemplate = function (id) {
   var params = {
     'ajax_request': true,
-    'server': window.CommonParams.get('server'),
-    'db': window.CommonParams.get('db'),
-    'table': window.CommonParams.get('table'),
+    'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+    'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+    'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateId': id
   };
-  Functions.ajaxShowMessage();
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/delete', params, function (response) {
     if (response.success === true) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#template').find('option[value="' + id + '"]').remove();
-      Functions.ajaxShowMessage(window.Messages.strTemplateDeleted);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateDeleted);
     } else {
-      Functions.ajaxShowMessage(response.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
     }
   });
 };
@@ -221,7 +227,7 @@ Export.deleteTemplate = function (id) {
  */
 
 
-window.AJAX.registerTeardown('export.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('export.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[type=\'radio\'][name=\'sql_structure_or_data\']').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[type=\'radio\'][name$=\'_structure_or_data\']').off('change');
@@ -244,14 +250,14 @@ window.AJAX.registerTeardown('export.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="updateTemplate"]').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="deleteTemplate"]').off('click');
 });
-window.AJAX.registerOnload('export.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#showsqlquery').on('click', function () {
     // Creating a dialog box similar to preview sql container to show sql query
     var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#showSqlQueryModal');
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#showSqlQueryModalLabel').first().html(window.Messages.strQuery);
-      Functions.highlightSql(modal);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(modal);
     });
   });
   /**
@@ -448,7 +454,7 @@ Export.toggleSaveToFile = function () {
   }
 };
 
-window.AJAX.registerOnload('export.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', function () {
   Export.toggleSaveToFile();
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[type=\'radio\'][name=\'output_format\']').on('change', Export.toggleSaveToFile);
 });
@@ -590,7 +596,7 @@ Export.handleAddProcCheckbox = function () {
   }
 };
 
-window.AJAX.registerOnload('export.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', function () {
   /**
    * For SQL plugin, if "CREATE TABLE options" is checked/unchecked, check/uncheck each of its sub-options
    */
@@ -609,10 +615,9 @@ window.AJAX.registerOnload('export.js', function () {
    */
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').on('change', function () {
-    var activePlugin = jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').find('option:selected').val();
-    var forceFile = jquery__WEBPACK_IMPORTED_MODULE_0__('#force_file_' + activePlugin).val();
+    const isBinary = jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').find('option:selected').attr('data-is-binary') === 'true';
 
-    if (forceFile === 'true') {
+    if (isBinary) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#radio_dump_asfile').prop('checked') !== true) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#radio_dump_asfile').prop('checked', true);
         Export.toggleSaveToFile();
@@ -762,7 +767,7 @@ Export.checkTimeOut = function (timeLimit) {
       'ajax_request': true
     }, function (data) {
       if (data.message === 'timeout') {
-        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
       }
     });
   }, limit * 1000);
@@ -782,7 +787,7 @@ Export.createAliasModal = function (event) {
   modal.modal('show');
   modal.on('shown.bs.modal', function () {
     modal.closest('.ui-dialog').find('.ui-button').addClass('btn btn-secondary');
-    var db = window.CommonParams.get('db');
+    var db = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db');
 
     if (db) {
       var option = jquery__WEBPACK_IMPORTED_MODULE_0__('<option></option>');
@@ -792,7 +797,7 @@ Export.createAliasModal = function (event) {
     } else {
       var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server')
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
       };
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/databases', params, function (response) {
         if (response.success === true) {
@@ -803,7 +808,7 @@ Export.createAliasModal = function (event) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#db_alias_select').append(option);
           });
         } else {
-          Functions.ajaxShowMessage(response.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
         }
       });
     }
@@ -864,7 +869,7 @@ Export.addAlias = function (type, name, field, value) {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#alias_data tbody').append(row);
 };
 
-window.AJAX.registerOnload('export.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[type=\'radio\'][name=\'quick_or_custom\']').on('change', toggleQuickOrCustom);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#format_specific_opts').find('div.format_specific_options').addClass('d-none').find('h3').remove();
   toggleQuickOrCustom();
@@ -895,7 +900,7 @@ window.AJAX.registerOnload('export.js', function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_alias_select').on('change', function () {
     Export.aliasToggleRow(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
-    var table = window.CommonParams.get('table');
+    var table = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table');
 
     if (table) {
       var option = jquery__WEBPACK_IMPORTED_MODULE_0__('<option></option>');
@@ -906,7 +911,7 @@ window.AJAX.registerOnload('export.js', function () {
       var database = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
       var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'db': database
       };
       var url = 'index.php?route=/tables';
@@ -919,7 +924,7 @@ window.AJAX.registerOnload('export.js', function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#table_alias_select').append(option);
           });
         } else {
-          Functions.ajaxShowMessage(response.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
         }
       });
     }
@@ -930,7 +935,7 @@ window.AJAX.registerOnload('export.js', function () {
     var table = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
     var params = {
       'ajax_request': true,
-      'server': window.CommonParams.get('server'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': database,
       'table': table
     };
@@ -944,7 +949,7 @@ window.AJAX.registerOnload('export.js', function () {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#column_alias_select').append(option);
         });
       } else {
-        Functions.ajaxShowMessage(response.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
       }
     });
   });
@@ -974,7 +979,7 @@ window.AJAX.registerOnload('export.js', function () {
   });
 
   var setSelectOptions = function (doCheck) {
-    Functions.setSelectOptions('dump', 'db_select[]', doCheck);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.setSelectOptions('dump', 'db_select[]', doCheck);
   };
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select_all').on('click', function (e) {
@@ -1000,7 +1005,8 @@ window.AJAX.registerOnload('export.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(31));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(34); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=export.js.map

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[55],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[46],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,6 +13,10 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    Javascript functions used in server user groups page
@@ -25,18 +29,18 @@ __webpack_require__.r(__webpack_exports__);
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/user_groups.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/user_groups.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#deleteUserGroupModal').off('show.bs.modal');
 });
 /**
  * Bind event handlers
  */
 
-window.AJAX.registerOnload('server/user_groups.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/user_groups.js', function () {
   const deleteUserGroupModal = jquery__WEBPACK_IMPORTED_MODULE_0__('#deleteUserGroupModal');
   deleteUserGroupModal.on('show.bs.modal', function (event) {
     const userGroupName = jquery__WEBPACK_IMPORTED_MODULE_0__(event.relatedTarget).data('user-group');
-    this.querySelector('.modal-body').innerText = Functions.sprintf(window.Messages.strDropUserGroupWarning, Functions.escapeHtml(userGroupName));
+    this.querySelector('.modal-body').innerText = window.sprintf(window.Messages.strDropUserGroupWarning, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(userGroupName));
   });
   deleteUserGroupModal.on('shown.bs.modal', function (event) {
     const userGroupName = jquery__WEBPACK_IMPORTED_MODULE_0__(event.relatedTarget).data('user-group');
@@ -45,7 +49,7 @@ window.AJAX.registerOnload('server/user_groups.js', function () {
         'deleteUserGroup': true,
         'userGroup': userGroupName,
         'ajax_request': true
-      }, window.AJAX.responseHandler);
+      }, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#deleteUserGroupModal').modal('hide');
     });
   });
@@ -56,7 +60,8 @@ window.AJAX.registerOnload('server/user_groups.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(61));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(61); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=user_groups.js.map

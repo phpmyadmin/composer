@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[5],[
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[2],[
 /* 0 */,
 /* 1 */
 /***/ (function(module) {
@@ -11,7 +11,11 @@ module.exports = jQuery;
 /* 3 */,
 /* 4 */,
 /* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -19,7 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
@@ -28,7 +32,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
 
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -36,12 +40,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Console": function() { return /* binding */ Console; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _console_config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
+/* harmony import */ var _console_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
 
 
 
-/* global Functions, Navigation */
+
+
+
 
 /**
  * Console object
@@ -106,11 +116,11 @@ var Console = {
       return;
     }
 
-    Functions.configGet('Console', false, data => {
-      _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.init(data);
+    _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.configGet('Console', false, data => {
+      _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.init(data);
       Console.setupAfterInit();
     }, () => {
-      _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.init({}); // Avoid null pointers in setupAfterInit()
+      _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.init({}); // Avoid null pointers in setupAfterInit()
       // Fetching data failed, still perform the console init
 
       Console.setupAfterInit();
@@ -129,28 +139,28 @@ var Console = {
     Console.$consoleTemplates = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.templates'); // Generate a form for post
 
     Console.$requestForm = jquery__WEBPACK_IMPORTED_MODULE_0__('<form method="post" action="index.php?route=/import">' + '<input name="is_js_confirmed" value="0">' + '<textarea name="sql_query"></textarea>' + '<input name="console_message_id" value="0">' + '<input name="server" value="">' + '<input name="db" value="">' + '<input name="table" value="">' + '<input name="token" value="">' + '</form>');
-    Console.$requestForm.children('[name=token]').val(window.CommonParams.get('token'));
-    Console.$requestForm.on('submit', window.AJAX.requestHandler); // Event binds shouldn't run again
+    Console.$requestForm.children('[name=token]').val(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('token'));
+    Console.$requestForm.on('submit', _ajax_js__WEBPACK_IMPORTED_MODULE_2__.AJAX.requestHandler); // Event binds shouldn't run again
 
     if (Console.isInitialized === false) {
       // Load config first
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.AlwaysExpand) {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.AlwaysExpand) {
         document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked = true;
       }
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.StartHistory) {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.StartHistory) {
         document.getElementById('consoleOptionsStartHistoryCheckbox').checked = true;
       }
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.CurrentQuery) {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.CurrentQuery) {
         document.getElementById('consoleOptionsCurrentQueryCheckbox').checked = true;
       }
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes) {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.EnterExecutes) {
         document.getElementById('consoleOptionsEnterExecutesCheckbox').checked = true;
       }
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.DarkTheme) {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.DarkTheme) {
         document.getElementById('consoleOptionsDarkThemeCheckbox').checked = true;
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('>.content').addClass('console_dark_theme');
       }
@@ -195,7 +205,7 @@ var Console = {
         Console.hideCard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('.card'));
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console_options').find('input[type=checkbox]').on('change', function () {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.update();
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console_options').find('.button.default').on('click', function () {
         document.getElementById('consoleOptionsAlwaysExpandCheckbox').checked = false;
@@ -203,10 +213,10 @@ var Console = {
         document.getElementById('consoleOptionsCurrentQueryCheckbox').checked = true;
         document.getElementById('consoleOptionsEnterExecutesCheckbox').checked = false;
         document.getElementById('consoleOptionsDarkThemeCheckbox').checked = false;
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.update();
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.update();
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#consoleOptionsEnterExecutesCheckbox').on('change', function () {
-        ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes);
+        ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.EnterExecutes);
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('ajaxComplete', function (event, xhr, ajaxOptions) {
         if (ajaxOptions.dataType && ajaxOptions.dataType.indexOf('json') !== -1) {
@@ -231,7 +241,7 @@ var Console = {
     } // Change console mode from cookie
 
 
-    switch (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Mode) {
+    switch (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Mode) {
       case 'collapse':
         Console.collapse();
         break;
@@ -246,7 +256,7 @@ var Console = {
         break;
 
       default:
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Mode', 'info');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Mode', 'info');
         Console.info();
     }
   },
@@ -265,7 +275,7 @@ var Console = {
     }
 
     Console.$requestForm.children('textarea').val(queryString);
-    Console.$requestForm.children('[name=server]').attr('value', window.CommonParams.get('server'));
+    Console.$requestForm.children('[name=server]').attr('value', _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'));
 
     if (options && options.db) {
       Console.$requestForm.children('[name=db]').val(options.db);
@@ -276,7 +286,7 @@ var Console = {
         Console.$requestForm.children('[name=table]').val('');
       }
     } else {
-      Console.$requestForm.children('[name=db]').val(window.CommonParams.get('db').length > 0 ? window.CommonParams.get('db') : '');
+      Console.$requestForm.children('[name=db]').val(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db').length > 0 ? _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db') : '');
     }
 
     Console.$requestForm.find('[name=profiling]').remove();
@@ -285,7 +295,7 @@ var Console = {
       Console.$requestForm.append('<input name="profiling" value="on">');
     }
 
-    if (!Functions.confirmQuery(Console.$requestForm[0], Console.$requestForm.children('textarea')[0].value)) {
+    if (!_functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.confirmQuery(Console.$requestForm[0], Console.$requestForm.children('textarea')[0].value)) {
       return;
     }
 
@@ -294,14 +304,14 @@ var Console = {
     }).message_id);
     Console.$requestForm.trigger('submit');
     ConsoleInput.clear();
-    Navigation.reload();
+    _navigation_js__WEBPACK_IMPORTED_MODULE_5__.Navigation.reload();
   },
   ajaxCallback: function (data) {
     if (data && data.console_message_id) {
       ConsoleMessages.updateQuery(data.console_message_id, data.success, data.reloadQuerywindow ? data.reloadQuerywindow : false);
     } else if (data && data.reloadQuerywindow) {
       if (data.reloadQuerywindow.sql_query.length > 0) {
-        ConsoleMessages.appendQuery(data.reloadQuerywindow, 'successed').$message.addClass(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.CurrentQuery ? '' : 'hide');
+        ConsoleMessages.appendQuery(data.reloadQuerywindow, 'successed').$message.addClass(_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.CurrentQuery ? '' : 'hide');
       }
     }
   },
@@ -312,8 +322,8 @@ var Console = {
    * @return {void}
    */
   collapse: function () {
-    _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Mode', 'collapse');
-    var pmaConsoleHeight = Math.max(92, _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Height);
+    _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Mode', 'collapse');
+    var pmaConsoleHeight = Math.max(92, _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Height);
     Console.$consoleToolbar.addClass('collapsed');
     Console.$consoleAllContents.height(pmaConsoleHeight);
     Console.$consoleContent.stop();
@@ -335,10 +345,10 @@ var Console = {
    * @return {void}
    */
   show: function (inputFocus) {
-    _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Mode', 'show');
-    var pmaConsoleHeight = Math.max(92, _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Height); // eslint-disable-next-line compat/compat
+    _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Mode', 'show');
+    var pmaConsoleHeight = Math.max(92, _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Height); // eslint-disable-next-line compat/compat
 
-    pmaConsoleHeight = Math.min(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Height, (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 25);
+    pmaConsoleHeight = Math.min(_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Height, (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 25);
     Console.$consoleContent.css({
       display: 'block'
     });
@@ -379,7 +389,7 @@ var Console = {
    * @return {void}
    */
   toggle: function () {
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Mode === 'show') {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Mode === 'show') {
       Console.collapse();
     } else {
       Console.show(true);
@@ -469,7 +479,7 @@ var ConsoleResizer = {
    * @return {void}
    */
   mouseDown: function (event) {
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Mode !== 'show') {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Mode !== 'show') {
       return;
     }
 
@@ -517,7 +527,7 @@ var ConsoleResizer = {
    * @return {void}
    */
   mouseUp: function () {
-    _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Height', ConsoleResizer.resultHeight);
+    _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Height', ConsoleResizer.resultHeight);
     Console.show();
     jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mousemove');
     jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseup');
@@ -583,6 +593,7 @@ var ConsoleInput = {
     if (ConsoleInput.codeMirror) {
       // eslint-disable-next-line new-cap
       ConsoleInput.inputs.console = codemirror__WEBPACK_IMPORTED_MODULE_1__(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.console_query_input')[0], {
+        // style: cm-s-pma
         theme: 'pma',
         mode: 'text/x-sql',
         lineWrapping: true,
@@ -599,7 +610,7 @@ var ConsoleInput = {
           'async': true
         }
       });
-      ConsoleInput.inputs.console.on('inputRead', Functions.codeMirrorAutoCompleteOnInputRead);
+      ConsoleInput.inputs.console.on('inputRead', _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.codeMirrorAutoCompleteOnInputRead);
       ConsoleInput.inputs.console.on('keydown', function (instance, event) {
         ConsoleInput.historyNavigate(event);
       });
@@ -607,6 +618,7 @@ var ConsoleInput = {
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').length !== 0) {
         // eslint-disable-next-line new-cap
         ConsoleInput.inputs.bookmark = codemirror__WEBPACK_IMPORTED_MODULE_1__(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.bookmark_add_input')[0], {
+          // style: cm-s-pma
           theme: 'pma',
           mode: 'text/x-sql',
           lineWrapping: true,
@@ -623,7 +635,7 @@ var ConsoleInput = {
             'async': true
           }
         });
-        ConsoleInput.inputs.bookmark.on('inputRead', Functions.codeMirrorAutoCompleteOnInputRead);
+        ConsoleInput.inputs.bookmark.on('inputRead', _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.codeMirrorAutoCompleteOnInputRead);
       }
     } else {
       ConsoleInput.inputs.console = jquery__WEBPACK_IMPORTED_MODULE_0__('<textarea>').appendTo('#pma_console .console_query_input').on('keydown', ConsoleInput.historyNavigate);
@@ -715,7 +727,7 @@ var ConsoleInput = {
    */
   keyDown: function (event) {
     // Execute command
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes) {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.EnterExecutes) {
       // Enter, but not in combination with Shift (which writes a new line).
       if (!event.shiftKey && event.keyCode === 13) {
         ConsoleInput.execute();
@@ -913,7 +925,7 @@ var ConsoleMessages = {
 
     var msgId = Math.round(Math.random() * 899999999999 + 100000000000);
     var now = new Date();
-    var $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message ' + (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.AlwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
+    var $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message ' + (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.AlwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
 
     switch (msgType) {
       case 'query':
@@ -1033,7 +1045,7 @@ var ConsoleMessages = {
 
       if (confirm(window.Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
         jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/import', {
-          'server': window.CommonParams.get('server'),
+          'server': _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
           'action_bookmark': 2,
           'ajax_request': true,
           'id_bookmark': $message.attr('bookmarkid')
@@ -1143,11 +1155,11 @@ var ConsoleMessages = {
   initialize: function () {
     ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_console').find('.message:not(.binded)'));
 
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.StartHistory) {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.StartHistory) {
       ConsoleMessages.showHistory();
     }
 
-    ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.EnterExecutes);
+    ConsoleMessages.showInstructions(_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.EnterExecutes);
   }
 };
 /**
@@ -1182,7 +1194,7 @@ var ConsoleBookmarks = {
   refresh: function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/console/bookmark/refresh', {
       'ajax_request': true,
-      'server': window.CommonParams.get('server')
+      'server': _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (data) {
       if (data.console_message_bookmark) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.content.bookmark').html(data.console_message_bookmark);
@@ -1218,7 +1230,7 @@ var ConsoleBookmarks = {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/console/bookmark/add', {
         'ajax_request': true,
         'label': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=label]').val(),
-        'server': window.CommonParams.get('server'),
+        'server': _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
         'bookmark_query': ConsoleInput.getText('bookmark'),
         'shared': jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_bookmarks').find('.card.add [name=shared]').prop('checked')
@@ -1246,38 +1258,38 @@ var ConsoleDebug = {
       }
     });
 
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.GroupQueries) {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.GroupQueries) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('grouped');
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('ungrouped');
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.OrderBy === 'count') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').addClass('active');
       }
     }
 
-    var orderBy = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy;
-    var order = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Order;
+    var orderBy = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.OrderBy;
+    var order = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Order;
     jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_' + orderBy).addClass('active');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order.order_' + order).addClass('active'); // Initialize actions in toolbar
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.group_queries').on('click', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('grouped');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').removeClass('ungrouped');
-      _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('GroupQueries', true);
+      _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('GroupQueries', true);
       ConsoleDebug.refresh();
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.OrderBy === 'count') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').removeClass('active');
       }
     });
     jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.ungroup_queries').on('click', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').addClass('ungrouped');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').removeClass('grouped');
-      _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('GroupQueries', false);
+      _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('GroupQueries', false);
       ConsoleDebug.refresh();
 
-      if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy === 'count') {
+      if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.OrderBy === 'count') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.button.order_by.sort_exec').addClass('active');
       }
     });
@@ -1287,11 +1299,11 @@ var ConsoleDebug = {
       $this.addClass('active');
 
       if ($this.hasClass('sort_time')) {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('OrderBy', 'time');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('OrderBy', 'time');
       } else if ($this.hasClass('sort_exec')) {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('OrderBy', 'exec');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('OrderBy', 'exec');
       } else if ($this.hasClass('sort_count')) {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('OrderBy', 'count');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('OrderBy', 'count');
       }
 
       ConsoleDebug.refresh();
@@ -1302,9 +1314,9 @@ var ConsoleDebug = {
       $this.addClass('active');
 
       if ($this.hasClass('order_asc')) {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Order', 'asc');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Order', 'asc');
       } else if ($this.hasClass('order_desc')) {
-        _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.set('Order', 'desc');
+        _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.set('Order', 'desc');
       }
 
       ConsoleDebug.refresh();
@@ -1339,10 +1351,10 @@ var ConsoleDebug = {
     var $args = jquery__WEBPACK_IMPORTED_MODULE_0__('<div>');
 
     if (dbgStep.args.length) {
-      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome">').text(Functions.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
+      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome">').text(window.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
 
       for (var i = 0; i < dbgStep.args.length; i++) {
-        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message">').html('<pre>' + Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
+        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message">').html('<pre>' + _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
       }
     }
 
@@ -1511,7 +1523,7 @@ var ConsoleDebug = {
 
     uniqueQueries = uniqueArray; // Show summary
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="debug_summary">').text(Functions.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="debug_summary">').text(window.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
 
     if (url) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="script_name">').text(url.split('?')[0]));
@@ -1519,7 +1531,7 @@ var ConsoleDebug = {
 
 
     function sortByTime(a, b) {
-      var order = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Order === 'asc' ? 1 : -1;
+      var order = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Order === 'asc' ? 1 : -1;
 
       if (Array.isArray(a) && Array.isArray(b)) {
         // It is grouped
@@ -1542,14 +1554,14 @@ var ConsoleDebug = {
     }
 
     function sortByCount(a, b) {
-      var order = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Order === 'asc' ? 1 : -1;
+      var order = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Order === 'asc' ? 1 : -1;
       return (a.length - b.length) * order;
     }
 
-    var orderBy = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.OrderBy;
-    var order = _console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.Order;
+    var orderBy = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.OrderBy;
+    var order = _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.Order;
 
-    if (_console_config_js__WEBPACK_IMPORTED_MODULE_2__.Config.GroupQueries) {
+    if (_console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.GroupQueries) {
       // Sort queries
       if (orderBy === 'time') {
         uniqueQueries.sort(sortByTime);
@@ -1590,24 +1602,25 @@ var ConsoleDebug = {
 
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module) {
 
 module.exports = CodeMirror;
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Config": function() { return /* binding */ Config; }
 /* harmony export */ });
-/* global Functions */
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
 
 /**
  * @link https://docs.phpmyadmin.net/en/latest/config.html#console-settings
  */
+
 const Config = {
   /**
    * @type {boolean}
@@ -1683,7 +1696,7 @@ const Config = {
    */
   set: function (key, value) {
     this[key] = value;
-    Functions.configSet('Console/' + key, value);
+    _functions_js__WEBPACK_IMPORTED_MODULE_0__.Functions.configSet('Console/' + key, value);
   },
 
   /**
@@ -1713,7 +1726,8 @@ const Config = {
 ],
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(6));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(10); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ window.Console = __webpack_exports__.Console;
 /******/ }
 ]);

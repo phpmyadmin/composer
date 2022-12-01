@@ -1,13 +1,6 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[1],[
-/* 0 */,
-/* 1 */
-/***/ (function(module) {
-
-module.exports = jQuery;
-
-/***/ }),
-/* 2 */
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[0],[
+/* 0 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -783,11 +776,18 @@ JQPlotChartFactory.prototype.createChart = function (type, elementId) {
 
 window.JQPlotChartFactory = JQPlotChartFactory;
 
+/***/ }),
+/* 1 */
+/***/ (function(module) {
+
+module.exports = jQuery;
+
 /***/ })
 ],
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(2));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(0); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=chart.js.map

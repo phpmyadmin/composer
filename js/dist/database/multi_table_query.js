@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[9],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[5],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,21 +8,24 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 14:
+/***/ 17:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  * @requires    js/database/query_generator.js
- *
  */
 
 /**
@@ -33,15 +36,15 @@ __webpack_require__.r(__webpack_exports__);
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('database/multi_table_query.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/multi_table_query.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.tableNameSelect').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).off('change');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#update_query_button').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_column_button').off('click');
 });
-window.AJAX.registerOnload('database/multi_table_query.js', function () {
-  var editor = Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#MultiSqlquery'), {}, 'both');
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/multi_table_query.js', function () {
+  var editor = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#MultiSqlquery'), {}, 'both');
   jquery__WEBPACK_IMPORTED_MODULE_0__('.CodeMirror-line').css('text-align', 'left');
   editor.setSize(-1, 50);
   var columnCount = 3;
@@ -75,7 +78,7 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
     });
 
     if (Object.keys(tableAliases).length === 0) {
-      Functions.ajaxShowMessage('Nothing selected', false, 'error');
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('Nothing selected', false, 'error');
       return;
     }
 
@@ -89,35 +92,35 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
         'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#db_name').val(),
         'tables': Object.keys(tableAliases),
         'ajax_request': '1',
-        'token': window.CommonParams.get('token')
+        'token': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')
       },
       success: function (response) {
         foreignKeys = response.foreignKeyConstrains;
       }
     });
-    var query = 'SELECT ' + '`' + Functions.escapeBacktick(columns[0][0]) + '`.';
+    var query = 'SELECT ' + '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][0]) + '`.';
 
     if (columns[0][1] === '*') {
       query += '*';
     } else {
-      query += '`' + Functions.escapeBacktick(columns[0][1]) + '`';
+      query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][1]) + '`';
     }
 
     if (columns[0][2] !== '') {
-      query += ' AS `' + Functions.escapeBacktick(columns[0][2]) + '`';
+      query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][2]) + '`';
     }
 
     for (var i = 1; i < columns.length; i++) {
-      query += ', `' + Functions.escapeBacktick(columns[i][0]) + '`.';
+      query += ', `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][0]) + '`.';
 
       if (columns[i][1] === '*') {
         query += '*';
       } else {
-        query += '`' + Functions.escapeBacktick(columns[i][1]) + '`';
+        query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][1]) + '`';
       }
 
       if (columns[i][2] !== '') {
-        query += ' AS `' + Functions.escapeBacktick(columns[i][2]) + '`';
+        query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][2]) + '`';
       }
     }
 
@@ -137,7 +140,7 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
     var query = editor.getDoc().getValue(); // Verifying that the query is not empty
 
     if (query === '') {
-      Functions.ajaxShowMessage(window.Messages.strEmptyQuery, false, 'error');
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strEmptyQuery, false, 'error');
       return;
     }
 
@@ -145,8 +148,8 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
       'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#db_name').val(),
       'sql_query': query,
       'ajax_request': '1',
-      'server': window.CommonParams.get('server'),
-      'token': window.CommonParams.get('token')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'token': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
@@ -248,7 +251,8 @@ window.AJAX.registerOnload('database/multi_table_query.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(14));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(17); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=multi_table_query.js.map

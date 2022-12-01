@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[20],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[16],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 24:
+/***/ 27:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    function used in this file builds history tab and generates query.
@@ -125,14 +129,14 @@ DesignerHistory.display = function (init, finit) {
         str += '<img src="' + themeImagePath + 'designer/and_icon.png" onclick="DesignerHistory.andOr(' + i + ')" title="AND"></td>';
       }
 
-      str += '<td style="padding-left: 5px;" class="text-end">' + Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
+      str += '<td style="padding-left: 5px;" class="text-end">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
 
       if (historyArray[i].getType() === 'GroupBy' || historyArray[i].getType() === 'OrderBy') {
         var detailDescGroupBy = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       } else {
         var detailDesc = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + Functions.getImage('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
       }
 
       str += '</tr></thead>';
@@ -933,7 +937,7 @@ DesignerHistory.buildQuery = function () {
     var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#buildQueryModal').find('textarea');
 
     if (!vqbEditor) {
-      vqbEditor = Functions.getSqlEditor($elm);
+      vqbEditor = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor($elm);
     }
 
     if (vqbEditor) {
@@ -946,7 +950,7 @@ DesignerHistory.buildQuery = function () {
   });
 };
 
-window.AJAX.registerTeardown('designer/history.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/history.js', function () {
   vqbEditor = null;
   historyArray = [];
   selectField = [];
@@ -955,7 +959,7 @@ window.AJAX.registerTeardown('designer/history.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_Aggr').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_where').off('click');
 });
-window.AJAX.registerOnload('designer/history.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/history.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#ok_edit_rename').on('click', function () {
     DesignerHistory.edit('Rename');
   });
@@ -979,7 +983,8 @@ window.AJAX.registerOnload('designer/history.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(24));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(27); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=history.js.map

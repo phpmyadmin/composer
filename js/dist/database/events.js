@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[8],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[4],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,15 +8,19 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 13:
+/***/ 16:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
 
-/* global Navigation */
 
-window.AJAX.registerTeardown('database/events.js', function () {
+
+
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/events.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.ajax.add_anchor, a.ajax.edit_anchor');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.ajax.export_anchor');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#bulkActionExportButton');
@@ -75,7 +79,7 @@ const DatabaseEvents = {
     return this.validateCustom();
   },
   exportDialog: function ($this) {
-    var $msg = Functions.ajaxShowMessage();
+    var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
 
     if ($this.attr('id') === 'bulkActionExportButton') {
       var combined = {
@@ -121,11 +125,11 @@ const DatabaseEvents = {
       }, showExport);
     }
 
-    Functions.ajaxRemoveMessage($msg);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
 
     function showExport(data) {
       if (data.success === true) {
-        Functions.ajaxRemoveMessage($msg);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
         /**
          * @var buttonOptions Object containing options
          *                     for jQueryUI dialog buttons
@@ -160,9 +164,9 @@ const DatabaseEvents = {
          */
 
         var $elm = $ajaxDialog.find('textarea');
-        Functions.getSqlEditor($elm);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor($elm);
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     } // end showExport()
 
@@ -190,13 +194,13 @@ const DatabaseEvents = {
      */
 
 
-    var $msg = Functions.ajaxShowMessage();
+    var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get($this.attr('href'), {
       'ajax_request': true
     }, function (data) {
       if (data.success === true) {
         // We have successfully fetched the editor form
-        Functions.ajaxRemoveMessage($msg);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
         /**
          * @var buttonOptions Object containing options
          *                     for jQueryUI dialog buttons
@@ -227,13 +231,13 @@ const DatabaseEvents = {
              * @var data Form data to be sent in the AJAX request
              */
             var data = jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').last().serialize();
-            $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
             var url = jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').last().attr('action');
             jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, data, function (data) {
               if (data.success === true) {
                 // Item created successfully
-                Functions.ajaxRemoveMessage($msg);
-                Functions.slidingMessage(data.message);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.message);
                 that.$ajaxDialog.dialog('close'); // If we are in 'edit' mode, we must
                 // remove the reference to the old row.
 
@@ -321,9 +325,9 @@ const DatabaseEvents = {
                   });
                 }
 
-                Navigation.reload();
+                _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
               } else {
-                Functions.ajaxShowMessage(data.error, false);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
               }
             }); // end $.post()
           } // end "if (that.validate())"
@@ -359,10 +363,10 @@ const DatabaseEvents = {
 
             jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input[name=item_name]').trigger('focus');
             jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input.datefield').each(function () {
-              Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', '95%'), 'date');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', '95%'), 'date');
             });
             jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input.datetimefield').each(function () {
-              Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', '95%'), 'datetime');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', '95%'), 'datetime');
             });
             jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.initialized = false;
           },
@@ -390,9 +394,9 @@ const DatabaseEvents = {
         var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('textarea[name=item_definition]').last();
         var linterOptions = {};
         linterOptions.eventEditor = true;
-        that.syntaxHiglighter = Functions.getSqlEditor($elm, {}, 'both', linterOptions);
+        that.syntaxHiglighter = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor($elm, {}, 'both', linterOptions);
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }); // end $.get()
   },
@@ -412,8 +416,8 @@ const DatabaseEvents = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
+      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $this.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success === true) {
           /**
@@ -459,12 +463,12 @@ const DatabaseEvents = {
           } // Get rid of the "Loading" message
 
 
-          Functions.ajaxRemoveMessage($msg); // Show the query that we just executed
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg); // Show the query that we just executed
 
-          Functions.slidingMessage(data.sql_query);
-          Navigation.reload();
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.sql_query);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
-          Functions.ajaxShowMessage(data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
         }
       }); // end $.post()
     });
@@ -476,7 +480,7 @@ const DatabaseEvents = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest); // drop anchors of all selected rows
+      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest); // drop anchors of all selected rows
 
       var dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0__('input.checkall:checked').parents('tr').find('.drop_anchor');
       var success = true;
@@ -489,7 +493,7 @@ const DatabaseEvents = {
          */
 
         var $currRow = $anchor.parents('tr');
-        var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+        var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
         jquery__WEBPACK_IMPORTED_MODULE_0__.post($anchor.attr('href'), params, function (data) {
           returnCount++;
 
@@ -538,21 +542,21 @@ const DatabaseEvents = {
             if (returnCount === count) {
               if (success) {
                 // Get rid of the "Loading" message
-                Functions.ajaxRemoveMessage($msg);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
                 jquery__WEBPACK_IMPORTED_MODULE_0__('#rteListForm_checkall').prop({
                   checked: false,
                   indeterminate: false
                 });
               }
 
-              Navigation.reload();
+              _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
             }
           } else {
-            Functions.ajaxShowMessage(data.error, false);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
             success = false;
 
             if (returnCount === count) {
-              Navigation.reload();
+              _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
             }
           }
         }); // end $.post()
@@ -595,7 +599,7 @@ const DatabaseEvents = {
     return true;
   }
 };
-window.AJAX.registerOnload('database/events.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/events.js', function () {
   /**
    * Attach Ajax event handlers for the Add/Edit functionality.
    */
@@ -651,7 +655,8 @@ window.AJAX.registerOnload('database/events.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(13));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(16); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=events.js.map

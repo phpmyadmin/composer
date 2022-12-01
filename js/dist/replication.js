@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[45],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[36],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,14 +13,16 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    Javascript functions used in server replication page
  * @name            Server Replication
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  */
 
 var randomServerId = Math.floor(Math.random() * 10000000);
@@ -50,7 +52,7 @@ function updateConfig() {
  */
 
 
-window.AJAX.registerTeardown('replication.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('replication.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_type').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#primary_status_href').off('click');
@@ -63,7 +65,7 @@ window.AJAX.registerTeardown('replication.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select_href').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#reset_replica').off('click');
 });
-window.AJAX.registerOnload('replication.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('replication.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#rep').text(confPrefix);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_type').on('change', updateConfig);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select').on('change', updateConfig);
@@ -98,17 +100,17 @@ window.AJAX.registerOnload('replication.js', function () {
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = window.Messages.strResetReplicaWarning;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      Functions.ajaxShowMessage();
-      window.AJAX.source = $anchor;
-      var params = Functions.getJsConfirmCommonParam({
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $anchor;
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam({
         'ajax_page_request': true,
         'ajax_request': true
       }, $anchor.getPostData());
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#button_generate_password').on('click', function () {
-    Functions.suggestPassword(this.form);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.suggestPassword(this.form);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#nopass_1').on('click', function () {
     this.form.pma_pw.value = '';
@@ -125,7 +127,8 @@ window.AJAX.registerOnload('replication.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(52));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(52); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=replication.js.map

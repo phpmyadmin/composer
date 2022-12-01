@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[71],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[62],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 77:
+/***/ 76:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+
 
 /**
  * Image upload transformations plugin js
@@ -20,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
  * @package PhpMyAdmin
  */
 
-window.AJAX.registerOnload('transformations/image_upload.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/image_upload.js', function () {
   // Change thumbnail when image file is selected
   // through file upload dialog
   jquery__WEBPACK_IMPORTED_MODULE_0__('input.image-upload').on('change', function () {
@@ -40,7 +42,7 @@ window.AJAX.registerOnload('transformations/image_upload.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('transformations/image_upload.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('transformations/image_upload.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('input.image-upload').off('change');
 });
 
@@ -49,7 +51,8 @@ window.AJAX.registerTeardown('transformations/image_upload.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(77));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(76); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=image_upload.js.map

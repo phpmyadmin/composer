@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[61],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[52],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,19 +8,20 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 67:
+/***/ 66:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    function used in table data manipulation pages
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
- *
  */
 
 /* global extendingValidatorMessages */
@@ -472,7 +473,7 @@ window.verificationsAfterFieldChange = verificationsAfterFieldChange;
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('table/change.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/change.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'span.open_gis_editor');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input[name^=\'insert_ignore_\']');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input[name=\'gis_data[save]\']');
@@ -488,7 +489,7 @@ window.AJAX.registerTeardown('table/change.js', function () {
  * Restart insertion with 'N' rows.
  */
 
-window.AJAX.registerOnload('table/change.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.js', function () {
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#insertForm').length) {
     // validate the comment form when it is submitted
     jquery__WEBPACK_IMPORTED_MODULE_0__('#insertForm').validate();
@@ -846,7 +847,7 @@ function addNewContinueInsertionFields(event) {
      * Displays alert if data loss possible on decrease
      * of rows.
      */
-    var checkLock = jquery__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject(window.AJAX.lockedTargets);
+    var checkLock = jquery__WEBPACK_IMPORTED_MODULE_0__.isEmptyObject(_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.lockedTargets);
 
     if (checkLock || confirm(window.Messages.strConfirmRowChange) === true) {
       while (currRows > targetRows) {
@@ -859,7 +860,7 @@ function addNewContinueInsertionFields(event) {
   } // Add all the required datepickers back
 
 
-  Functions.addDateTimePicker();
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
 }
 
 function changeValueFieldType(elem, searchIndex) {
@@ -892,7 +893,8 @@ window.changeValueFieldType = changeValueFieldType;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(67));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(66); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=change.js.map

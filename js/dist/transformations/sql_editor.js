@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[74],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[65],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 80:
+/***/ 79:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * SQL syntax highlighting transformation plugin js
@@ -20,9 +24,9 @@ __webpack_require__.r(__webpack_exports__);
  * @package PhpMyAdmin
  */
 
-window.AJAX.registerOnload('transformations/sql_editor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/sql_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_sql_editor').each(function () {
-    Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__(this), {}, 'both');
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__(this), {}, 'both');
   });
 });
 
@@ -31,7 +35,8 @@ window.AJAX.registerOnload('transformations/sql_editor.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(80));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(79); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=sql_editor.js.map

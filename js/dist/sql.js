@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[60],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[51],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,22 +8,27 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 66:
+/***/ 65:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
+
+
+
+
+
 
 /**
  * @fileoverview    functions used wherever an sql query form is used
  *
- * @requires    jQuery
- * @requires    js/functions.js
- *
  * @test-module Sql
  */
-
-/* global Navigation */
 
 /* global themeImagePath */
 // templates/javascript/variables.twig
@@ -67,11 +72,11 @@ Sql.autoSave = function (query) {
   if (query) {
     var key = Sql.getAutoSavedKey();
 
-    if (window.Config.isStorageSupported('localStorage')) {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
       window.localStorage.setItem(key, query);
     } else {
       window.Cookies.set(key, query, {
-        path: window.CommonParams.get('rootPath')
+        path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
       });
     }
   }
@@ -93,15 +98,15 @@ Sql.showThisQuery = function (db, table, query) {
     'query': query
   };
 
-  if (window.Config.isStorageSupported('localStorage')) {
+  if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
     window.localStorage.showThisQuery = 1;
     window.localStorage.showThisQueryObject = JSON.stringify(showThisQueryObject);
   } else {
     window.Cookies.set('showThisQuery', 1, {
-      path: window.CommonParams.get('rootPath')
+      path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
     });
     window.Cookies.set('showThisQueryObject', JSON.stringify(showThisQueryObject), {
-      path: window.CommonParams.get('rootPath')
+      path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
     });
   }
 };
@@ -115,7 +120,7 @@ Sql.setShowThisQuery = function () {
   var db = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val();
   var table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val();
 
-  if (window.Config.isStorageSupported('localStorage')) {
+  if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
     if (window.localStorage.showThisQueryObject !== undefined) {
       var storedDb = JSON.parse(window.localStorage.showThisQueryObject).db;
       var storedTable = JSON.parse(window.localStorage.showThisQueryObject).table;
@@ -147,11 +152,11 @@ Sql.setShowThisQuery = function () {
 
 Sql.autoSaveWithSort = function (query) {
   if (query) {
-    if (window.Config.isStorageSupported('localStorage')) {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
       window.localStorage.setItem('autoSavedSqlSort', query);
     } else {
       window.Cookies.set('autoSavedSqlSort', query, {
-        path: window.CommonParams.get('rootPath')
+        path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
       });
     }
   }
@@ -164,11 +169,11 @@ Sql.autoSaveWithSort = function (query) {
 
 
 Sql.clearAutoSavedSort = function () {
-  if (window.Config.isStorageSupported('localStorage')) {
+  if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
     window.localStorage.removeItem('autoSavedSqlSort');
   } else {
     window.Cookies.set('autoSavedSqlSort', '', {
-      path: window.CommonParams.get('rootPath')
+      path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
     });
   }
 };
@@ -309,7 +314,7 @@ const insertQuery = function (queryType) {
       var params = {
         'ajax_request': true,
         'sql': window.codeMirrorEditor.getValue(),
-        'server': window.CommonParams.get('server')
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
       };
       jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         type: 'POST',
@@ -340,16 +345,16 @@ const insertQuery = function (queryType) {
 
     key = 'autoSavedSql_' + key;
 
-    if (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
       setQuery(window.localStorage.getItem(key));
     } else if (window.Cookies.get(key, {
-      path: window.CommonParams.get('rootPath')
+      path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
     })) {
       setQuery(window.Cookies.get(key, {
-        path: window.CommonParams.get('rootPath')
+        path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
       }));
     } else {
-      Functions.ajaxShowMessage(window.Messages.strNoAutoSavedQuery);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strNoAutoSavedQuery);
     }
 
     return;
@@ -451,7 +456,7 @@ const insertValueQuery = function () {
  */
 
 
-window.AJAX.registerTeardown('sql.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('sql.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.delete_row.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '.bookmarkQueryForm');
   jquery__WEBPACK_IMPORTED_MODULE_0__('input#bkm_label').off('input');
@@ -503,7 +508,7 @@ window.AJAX.registerTeardown('sql.js', function () {
  * @memberOf    jQuery
  */
 
-window.AJAX.registerOnload('sql.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', function () {
   if (window.codeMirrorEditor || document.sqlform) {
     Sql.setShowThisQuery();
   }
@@ -517,7 +522,7 @@ window.AJAX.registerOnload('sql.js', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').on('input propertychange', function () {
         Sql.autoSave(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val());
       });
-      var useLocalStorageValue = window.Config.isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined'; // Save sql query with sort
+      var useLocalStorageValue = _modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined'; // Save sql query with sort
 
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#RememberSorting') !== undefined && jquery__WEBPACK_IMPORTED_MODULE_0__('#RememberSorting').is(':checked')) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"]').on('change', function () {
@@ -532,7 +537,7 @@ window.AJAX.registerOnload('sql.js', function () {
 
 
       var sortStoredQuery = useLocalStorageValue ? window.localStorage.autoSavedSqlSort : window.Cookies.get('autoSavedSqlSort', {
-        path: window.CommonParams.get('rootPath')
+        path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
       });
 
       if (typeof sortStoredQuery !== 'undefined' && sortStoredQuery !== jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"]').val() && jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="sql_query"] option[value="' + sortStoredQuery + '"]').length !== 0) {
@@ -543,11 +548,11 @@ window.AJAX.registerOnload('sql.js', function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.delete_row.ajax', function (e) {
     e.preventDefault();
-    var question = Functions.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('div').text()));
+    var question = window.sprintf(window.Messages.strDoYouReally, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('div').text()));
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     $link.confirm(question, $link.attr('href'), function (url) {
-      Functions.ajaxShowMessage();
-      var argsep = window.CommonParams.get('arg_separator');
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
       var params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
       var postData = $link.getPostData();
 
@@ -557,10 +562,10 @@ window.AJAX.registerOnload('sql.js', function () {
 
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success) {
-          Functions.ajaxShowMessage(data.message);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
           $link.closest('tr').remove();
         } else {
-          Functions.ajaxShowMessage(data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
         }
       });
     });
@@ -568,13 +573,13 @@ window.AJAX.registerOnload('sql.js', function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '.bookmarkQueryForm', function (e) {
     e.preventDefault();
-    Functions.ajaxShowMessage();
-    var argsep = window.CommonParams.get('arg_separator');
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize(), function (data) {
       if (data.success) {
-        Functions.ajaxShowMessage(data.message);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     });
   });
@@ -753,7 +758,7 @@ window.AJAX.registerOnload('sql.js', function () {
 
     for (var i = 1; i <= varCount; i++) {
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="mb-3">'));
-      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<label for="bookmarkVariable' + i + '">' + Functions.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<label for="bookmarkVariable' + i + '">' + window.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input class="form-control" type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmarkVariable' + i + '">'));
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0__('</div>'));
     }
@@ -807,16 +812,16 @@ window.AJAX.registerOnload('sql.js', function () {
       $form[0].elements.sql_query.value = window.codeMirrorEditor.getValue();
     }
 
-    if (!Functions.checkSqlQuery($form[0])) {
+    if (!_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkSqlQuery($form[0])) {
       return false;
     } // remove any div containing a previous error message
 
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-danger').remove();
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     var $sqlqueryresultsouter = jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter');
-    Functions.prepareForAjaxRequest($form);
-    var argsep = window.CommonParams.get('arg_separator');
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         // success happens if the query returns rows or not
@@ -842,31 +847,31 @@ window.AJAX.registerOnload('sql.js', function () {
         }
 
         $sqlqueryresultsouter.show().html(data.message);
-        Functions.highlightSql($sqlqueryresultsouter);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql($sqlqueryresultsouter);
 
         if (data.menu) {
           history.replaceState({
             menu: data.menu
           }, null);
-          window.AJAX.handleMenu.replace(data.menu);
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.handleMenu.replace(data.menu);
         }
 
         if (data.params) {
-          window.CommonParams.setAll(data.params);
+          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll(data.params);
         }
 
         if (typeof data.ajax_reload !== 'undefined') {
           if (data.ajax_reload.reload) {
             if (data.ajax_reload.table_name) {
-              window.CommonParams.set('table', data.ajax_reload.table_name);
-              window.CommonActions.refreshMain();
+              _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.ajax_reload.table_name);
+              _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain();
             } else {
-              Navigation.reload();
+              _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
             }
           }
         } else if (typeof data.reload !== 'undefined') {
           // this happens if a USE or DROP command was typed
-          window.CommonActions.setDb(data.db);
+          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.setDb(data.db);
           var url;
 
           if (data.db) {
@@ -879,9 +884,9 @@ window.AJAX.registerOnload('sql.js', function () {
             url = 'index.php?route=/server/sql';
           }
 
-          window.CommonActions.refreshMain(url, function () {
+          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain(url, function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').show().html(data.message);
-            Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
           });
         }
 
@@ -903,7 +908,7 @@ window.AJAX.registerOnload('sql.js', function () {
         }, 200);
       }
 
-      Functions.ajaxRemoveMessage($msgbox);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
     }); // end $.post()
   }); // end SQL Query submit
 
@@ -916,13 +921,13 @@ window.AJAX.registerOnload('sql.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', 'form[name=\'displayOptionsForm\'].ajax', function (event) {
     event.preventDefault();
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-    var $msgbox = Functions.ajaxShowMessage();
-    var argsep = window.CommonParams.get('arg_separator');
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
-      Functions.ajaxRemoveMessage($msgbox);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
       $sqlqueryresults.html(data.message).trigger('makegrid');
-      Functions.highlightSql($sqlqueryresults);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql($sqlqueryresults);
     }); // end $.post()
   }); // end displayOptionsForm handler
   // Filter row handling. --STARTS--
@@ -955,11 +960,11 @@ window.AJAX.registerOnload('sql.js', function () {
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('form');
 
     Sql.submitShowAllForm = function () {
-      var argsep = window.CommonParams.get('arg_separator');
+      var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
       var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-      Functions.ajaxShowMessage();
-      window.AJAX.source = $form;
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, window.AJAX.responseHandler);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     };
 
     if (!jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
@@ -996,19 +1001,19 @@ window.AJAX.registerOnload('sql.js', function () {
       return false;
     }
 
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
       url: 'index.php?route=/import/simulate-dml',
       data: {
-        'server': window.CommonParams.get('server'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'db': dbName,
         'ajax_request': '1',
         'sql_query': query,
         'sql_delimiter': delimiter
       },
       success: function (response) {
-        Functions.ajaxRemoveMessage($msgbox);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
 
         if (response.success) {
           var dialogContent = '<div class="preview_sql">';
@@ -1033,14 +1038,14 @@ window.AJAX.registerOnload('sql.js', function () {
           modal.modal('show');
           modal.find('.modal-body').first().html($dialogContent);
           modal.on('shown.bs.modal', function () {
-            Functions.highlightSql(modal);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(modal);
           });
         } else {
-          Functions.ajaxShowMessage(response.error);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error);
         }
       },
       error: function () {
-        Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
       }
     });
   });
@@ -1053,10 +1058,10 @@ window.AJAX.registerOnload('sql.js', function () {
     var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var action = $button.val();
     var $form = $button.closest('form');
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep;
-    Functions.ajaxShowMessage();
-    window.AJAX.source = $form;
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     var url;
 
     if (action === 'edit') {
@@ -1073,12 +1078,12 @@ window.AJAX.registerOnload('sql.js', function () {
       return;
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, window.AJAX.responseHandler);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '.maxRowsForm', function () {
     var unlimNumRows = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input[name="unlim_num_rows"]').val();
-    var maxRowsCheck = Functions.checkFormElementInRange(this, 'session_max_rows', window.Messages.strNotValidRowNumber, 1);
-    var posCheck = Functions.checkFormElementInRange(this, 'pos', window.Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
+    var maxRowsCheck = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkFormElementInRange(this, 'session_max_rows', window.Messages.strNotValidRowNumber, 1);
+    var posCheck = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkFormElementInRange(this, 'pos', window.Messages.strNotValidRowNumber, 0, unlimNumRows > 0 ? unlimNumRows - 1 : null);
     return maxRowsCheck && posCheck;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#insertBtn').on('click', function () {
@@ -1146,7 +1151,7 @@ Sql.browseForeignDialog = function ($thisA) {
   var tableId = '#browse_foreign_table';
   var filterId = '#input_foreign_filter';
   var $dialog = null;
-  var argSep = window.CommonParams.get('arg_separator');
+  var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
   var params = $thisA.getPostData();
   params += argSep + 'ajax_request=true';
   jquery__WEBPACK_IMPORTED_MODULE_0__.post($thisA.attr('href'), params, function (data) {
@@ -1237,16 +1242,16 @@ Sql.getAutoSavedKey = function () {
 Sql.checkSavedQuery = function () {
   var key = Sql.getAutoSavedKey();
 
-  if (window.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
-    Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
+  if (_modules_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
   } else if (window.Cookies.get(key, {
-    path: window.CommonParams.get('rootPath')
+    path: _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('rootPath')
   })) {
-    Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
   }
 };
 
-window.AJAX.registerOnload('sql.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.browse_foreign', function (e) {
     e.preventDefault();
     Sql.browseForeignDialog(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
@@ -1297,7 +1302,7 @@ Sql.makeProfilingChart = function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingchart').html('').show();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#profilingChartData').html('');
-  Functions.createProfilingChart('profilingchart', data);
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.createProfilingChart('profilingchart', data);
 };
 /**
  * initialize profiling data tables
@@ -1337,7 +1342,7 @@ Sql.initProfilingTables = function () {
   });
 };
 
-window.AJAX.registerOnload('sql.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', function () {
   Sql.makeProfilingChart();
   Sql.initProfilingTables();
 });
@@ -1347,7 +1352,8 @@ window.AJAX.registerOnload('sql.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(66));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(65); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=sql.js.map

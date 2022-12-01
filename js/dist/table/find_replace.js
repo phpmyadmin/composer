@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[63],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[54],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,17 +8,21 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 69:
+/***/ 68:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('table/find_replace.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/find_replace.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#find_replace_form').off('submit');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#toggle_find').off('click');
 });
@@ -26,7 +30,7 @@ window.AJAX.registerTeardown('table/find_replace.js', function () {
  * Bind events
  */
 
-window.AJAX.registerOnload('table/find_replace.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/find_replace.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="toggle_find_div"><a id="toggle_find"></a></div>').insertAfter('#find_replace_form').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#toggle_find').html(window.Messages.strHideFindNReplaceCriteria).on('click', function () {
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -43,10 +47,10 @@ window.AJAX.registerOnload('table/find_replace.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#find_replace_form').on('submit', function (e) {
     e.preventDefault();
     var findReplaceForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#find_replace_form');
-    Functions.prepareForAjaxRequest(findReplaceForm);
-    var $msgbox = Functions.ajaxShowMessage();
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest(findReplaceForm);
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(findReplaceForm.attr('action'), findReplaceForm.serialize(), function (data) {
-      Functions.ajaxRemoveMessage($msgbox);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
 
       if (data.success === true) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#toggle_find_div').show();
@@ -64,7 +68,8 @@ window.AJAX.registerOnload('table/find_replace.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(69));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(68); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=find_replace.js.map

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[28],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[24],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,13 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 32:
+/***/ 35:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
 
-window.AJAX.registerOnload('export_output.js', function () {
+
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export_output.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown', function (e) {
     if ((e.which || e.keyCode) === 116) {
       e.preventDefault();
@@ -32,7 +34,8 @@ window.AJAX.registerOnload('export_output.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(32));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(35); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=export_output.js.map

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[47],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[38],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,11 +13,17 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 
-/* global Navigation */
+
+
+
 
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const DropDatabases = {
@@ -35,11 +41,11 @@ const DropDatabases = {
 
     $form.find('input:checkbox:checked:not(.checkall_box)').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').addClass('removeMe');
-      selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) + '`;';
+      selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) + '`;';
     });
 
     if (!selectedDbs.length) {
-      Functions.ajaxShowMessage(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
       return;
     }
     /**
@@ -47,18 +53,18 @@ const DropDatabases = {
      */
 
 
-    var question = window.Messages.strDropDatabaseStrongWarning + ' ' + Functions.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
+    var question = window.Messages.strDropDatabaseStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
     const modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
     modal.modal('show');
     const url = 'index.php?route=/server/databases/destroy&' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#dropDatabaseModalDropButton').on('click', function () {
-      Functions.ajaxShowMessage(window.Messages.strProcessingRequest, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest, false);
       var parts = url.split('?');
-      var params = Functions.getJsConfirmCommonParam(this, parts[1]);
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, parts[1]);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(parts[0], params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          Functions.ajaxShowMessage(data.message);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
           var $rowsToRemove = $form.find('tr.removeMe');
           var $databasesCount = jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count');
           var newCount = parseInt($databasesCount.text(), 10) - $rowsToRemove.length;
@@ -68,13 +74,13 @@ const DropDatabases = {
 
           if ($form.find('tbody').find('tr').length === 0) {
             // user just dropped the last db on this page
-            window.CommonActions.refreshMain();
+            _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain();
           }
 
-          Navigation.reload();
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
           $form.find('tr.removeMe').removeClass('removeMe');
-          Functions.ajaxShowMessage(data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
         }
       });
       modal.modal('hide');
@@ -83,7 +89,7 @@ const DropDatabases = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const CreateDatabase = {
@@ -103,22 +109,22 @@ const CreateDatabase = {
     } // end remove
 
 
-    Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-    Functions.prepareForAjaxRequest($form);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        Functions.ajaxShowMessage(data.message);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
         var $databasesCountObject = jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count');
         var databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
         $databasesCountObject.text(databasesCount);
-        Navigation.reload(); // make ajax request to load db structure page - taken from ajax.js
+        _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(); // make ajax request to load db structure page - taken from ajax.js
 
         var dbStructUrl = data.url;
         dbStructUrl = dbStructUrl.replace(/amp;/ig, '');
-        var params = 'ajax_request=true' + window.CommonParams.get('arg_separator') + 'ajax_page_request=true';
-        jquery__WEBPACK_IMPORTED_MODULE_0__.get(dbStructUrl, params, window.AJAX.responseHandler);
+        var params = 'ajax_request=true' + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
+        jquery__WEBPACK_IMPORTED_MODULE_0__.get(dbStructUrl, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     });
   }
@@ -128,16 +134,16 @@ function checkPrivilegesForDatabase() {
   var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0__('.server_databases');
   jquery__WEBPACK_IMPORTED_MODULE_0__.each(tableRows, function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('click', function () {
-      window.CommonActions.setDb(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data'));
+      _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.setDb(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data'));
     });
   });
 }
 
-window.AJAX.registerTeardown('server/databases.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/databases.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#dbStatsForm');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#create_database_form.ajax');
 });
-window.AJAX.registerOnload('server/databases.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/databases.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#dbStatsForm', DropDatabases.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#create_database_form.ajax', CreateDatabase.handleEvent);
   checkPrivilegesForDatabase();
@@ -148,7 +154,8 @@ window.AJAX.registerOnload('server/databases.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(53));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(53); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=databases.js.map

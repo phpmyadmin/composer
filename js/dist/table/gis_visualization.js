@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[64],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[55],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 70:
+/***/ 69:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    functions used for visualizing GIS data
@@ -205,7 +209,7 @@ function onGisMouseWheel(event) {
  */
 
 
-window.AJAX.registerTeardown('table/gis_visualization.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/gis_visualization.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#choice');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('dragstart', 'svg');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('mouseup', 'svg');
@@ -229,7 +233,7 @@ window.AJAX.registerTeardown('table/gis_visualization.js', function () {
     map = undefined;
   }
 });
-window.AJAX.registerOnload('table/gis_visualization.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/gis_visualization.js', function () {
   // If we are in GIS visualization, initialize it
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#gis_div').length > 0) {
     initGISVisualization();
@@ -344,7 +348,7 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
    */
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('.vector').on('mousemove', function (event) {
-    var contents = Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name')).trim();
+    var contents = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name')).trim();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#tooltip').remove();
 
     if (contents !== '') {
@@ -373,7 +377,8 @@ window.AJAX.registerOnload('table/gis_visualization.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(70));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(69); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=gis_visualization.js.map

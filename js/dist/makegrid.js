@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[38],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[31],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 45:
+/***/ 47:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /* global Sql */
 
@@ -445,7 +451,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0__(document.createElement('div'));
             $tempDiv.html(data.error);
             $tempDiv.addClass('alert alert-danger');
-            Functions.ajaxShowMessage($tempDiv, false);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage($tempDiv, false);
           }
         });
       }
@@ -640,6 +646,13 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
      * @param cell <td> element to be edited
      */
     showEditCell: function (cell) {
+      // destroy the date picker instance left if any, see: #17703
+      var $datePickerInstance = jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.hasDatepicker');
+
+      if ($datePickerInstance.length > 0) {
+        $datePickerInstance.datepicker('destroy');
+      }
+
       if (jquery__WEBPACK_IMPORTED_MODULE_0__(cell).is('.grid_edit') && !g.colRsz && !g.colReorder) {
         if (!g.isCellEditActive) {
           var $cell = jquery__WEBPACK_IMPORTED_MODULE_0__(cell);
@@ -661,7 +674,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             height: $cell.outerHeight()
           }); // fill the cell edit with text from <td>
 
-          var value = Functions.getCellValue(cell);
+          var value = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(cell);
 
           if ($cell.attr('data-type') === 'json' && $cell.is('.truncated') === false) {
             try {
@@ -732,13 +745,13 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
             $thisField.removeClass('truncated');
 
-            if (window.CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
+            if (_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
               $thisField.addClass('truncated');
               value = value.substring(0, g.maxTruncatedLen) + '...';
             } // Add <br> before carriage return.
 
 
-            var newHtml = Functions.escapeHtml(value);
+            var newHtml = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
             newHtml = newHtml.replace(/\n/g, '<br>\n');
             var decimals = parseInt($thisField.attr('data-decimals')); // remove decimal places if column type not supported
 
@@ -760,7 +773,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
             var $target = $thisField.find(selector);
 
-            if (!Functions.updateCode($target, newHtml, value)) {
+            if (!_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.updateCode($target, newHtml, value)) {
               $target.html(newHtml);
             }
           }
@@ -800,7 +813,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
       if ($dp.length > 0) {
         // eslint-disable-next-line no-underscore-dangle
         jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousedown', jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker._checkExternalClick);
-        $dp.datepicker('destroy'); // change the cursor in edit box back to normal
+        $dp.datepicker('refresh'); // change the cursor in edit box back to normal
         // (the cursor become a hand pointer when we add datepicker)
 
         jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').css('cursor', 'inherit');
@@ -1005,7 +1018,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             g.lastXHR = null;
 
             if (typeof data === 'object' && data.success === false) {
-              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, undefined, 'error');
               return;
             }
 
@@ -1048,7 +1061,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             g.lastXHR = null;
 
             if (typeof data === 'object' && data.success === false) {
-              Functions.ajaxShowMessage(data.error, undefined, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, undefined, 'error');
               return;
             }
 
@@ -1108,7 +1121,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
                 $td.data('original_data', data.value);
                 jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val(data.value);
               } else {
-                Functions.ajaxShowMessage(data.error, false);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
               }
             }); // end $.post()
           }
@@ -1150,7 +1163,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
           } // add datetime picker
 
 
-          Functions.addDatepicker($inputField, $td.attr('data-type'), {
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker($inputField, $td.attr('data-type'), {
             showMillisec: showMillisec,
             showMicrosec: showMicrosec,
             timeFormat: timeFormat,
@@ -1163,11 +1176,11 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
               e.stopPropagation();
               g.saveOrPostEditedCell();
             } else if (e.which !== 27) {
-              Functions.toggleDatepickerIfInvalid($td, $inputField);
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.toggleDatepickerIfInvalid($td, $inputField);
             }
           });
           $inputField.datepicker('show');
-          Functions.toggleDatepickerIfInvalid($td, $inputField); // unbind the mousedown event to prevent the problem of
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.toggleDatepickerIfInvalid($td, $inputField); // unbind the mousedown event to prevent the problem of
           // datepicker getting closed, needs to be checked for any
           // change in names when updating
           // eslint-disable-next-line no-underscore-dangle
@@ -1426,7 +1439,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
           if (typeof data !== 'undefined' && data.success === true) {
             if (typeof options === 'undefined' || !options.move) {
-              Functions.ajaxShowMessage(data.message);
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
             } // update where_clause related data in each edited row
 
 
@@ -1443,7 +1456,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
                 if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href').indexOf('DELETE') > -1) {
                   jquery__WEBPACK_IMPORTED_MODULE_0__(this).removeAttr('onclick').off('click').on('click', function () {
-                    return Functions.confirmLink(this, 'DELETE FROM `' + g.db + '`.`' + g.table + '` WHERE ' + decodedNewClause + (isUnique ? '' : ' LIMIT 1'));
+                    return _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.confirmLink(this, 'DELETE FROM `' + g.db + '`.`' + g.table + '` WHERE ' + decodedNewClause + (isUnique ? '' : ' LIMIT 1'));
                   });
                 }
               }); // update the multi edit checkboxes
@@ -1475,7 +1488,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
                   $existingQuery.append(sqlOuter + tools);
                 }
 
-                Functions.highlightSql($existingQuery);
+                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql($existingQuery);
               }
             } // hide and/or update the successfully saved cells
 
@@ -1487,7 +1500,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('.to_be_saved').removeClass('to_be_saved').data('value', null).data('original_data', null);
             g.isCellEdited = false;
           } else {
-            Functions.ajaxShowMessage(data.error, false);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
 
             if (!g.saveCellsAtOnce) {
               jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('.to_be_saved').removeClass('to_be_saved');
@@ -1557,14 +1570,14 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val();
           } else {
             var hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
-            Functions.ajaxShowMessage(hexError, false);
-            thisFieldParams[fieldName] = Functions.getCellValue(g.currentEditCell);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(hexError, false);
+            thisFieldParams[fieldName] = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell);
           }
         } else {
           thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val();
         }
 
-        if (g.wasEditedCellNull || thisFieldParams[fieldName] !== Functions.getCellValue(g.currentEditCell)) {
+        if (g.wasEditedCellNull || thisFieldParams[fieldName] !== _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell)) {
           needToPost = true;
         }
       }
@@ -1714,12 +1727,12 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
         });
       }).on('dblclick', function (e) {
         e.preventDefault();
-        var res = Functions.copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('column'));
+        var res = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('column'));
 
         if (res) {
-          Functions.ajaxShowMessage(window.Messages.strCopyColumnSuccess, false, 'success');
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strCopyColumnSuccess, false, 'success');
         } else {
-          Functions.ajaxShowMessage(window.Messages.strCopyColumnFailure, false, 'error');
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strCopyColumnFailure, false, 'error');
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('th.draggable a').on('dblclick', function (e) {
@@ -1778,7 +1791,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
       if ($firstRowCols.length > 1) {
         var $colVisibTh = jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('th:not(.draggable)').slice(0, 1);
-        Functions.tooltip($colVisibTh, 'th', window.Messages.strColVisibHint); // create column visibility drop-down arrow(s)
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip($colVisibTh, 'th', window.Messages.strColVisibHint); // create column visibility drop-down arrow(s)
 
         $colVisibTh.each(function () {
           var cd = document.createElement('div'); // column drop-down arrow
@@ -2083,7 +2096,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
       g.gotoLinkText = window.Messages.strGoToLink; // initialize cell editing configuration
 
       g.saveCellsAtOnce = jquery__WEBPACK_IMPORTED_MODULE_0__(g.o).find('.save_cells_at_once').val();
-      g.maxTruncatedLen = window.CommonParams.get('LimitChars'); // register events
+      g.maxTruncatedLen = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('LimitChars'); // register events
 
       jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('td.data.click1').on('click', function (e) {
         startGridEditing(e, this); // prevent default action when clicking on "link" in a table
@@ -2111,7 +2124,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
               // temporarily remove ajax class so the page loader will not handle it,
               // submit and then add it back
               $link.removeClass('ajax');
-              window.AJAX.requestHandler.call($link[0]);
+              _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.requestHandler.call($link[0]);
               $link.addClass('ajax');
               $cell.data('clicks', 0);
             }, 700);
@@ -2269,7 +2282,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
   } // create tooltip for each <th> with draggable class
 
 
-  Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable'), 'th', g.updateHint()); // register events for hint tooltip (anchors inside draggable th)
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable'), 'th', g.updateHint()); // register events for hint tooltip (anchors inside draggable th)
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable a').on('mouseenter', function () {
     g.showSortHint = true;
@@ -2351,7 +2364,8 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(45));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(47); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=makegrid.js.map

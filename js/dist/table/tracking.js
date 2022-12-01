@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[69],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[60],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,17 +8,23 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 75:
+/***/ 74:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * Unbind all event handlers before tearing down the page
  */
 
-window.AJAX.registerTeardown('table/tracking.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/tracking.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '#versionsForm.ajax button[name="submit_mult"], #versionsForm.ajax input[name="submit_mult"]');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.delete_version_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.delete_entry_anchor.ajax');
@@ -27,7 +33,7 @@ window.AJAX.registerTeardown('table/tracking.js', function () {
  * Bind event handlers
  */
 
-window.AJAX.registerOnload('table/tracking.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/tracking.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#versions tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
   jquery__WEBPACK_IMPORTED_MODULE_0__('#versions').tablesorter({
     sortList: [[1, 0]],
@@ -91,20 +97,20 @@ window.AJAX.registerOnload('table/tracking.js', function () {
     e.preventDefault();
     var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $form = $button.parent('form');
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
 
     if ($button.val() === 'delete_version') {
       var question = window.Messages.strDeleteTrackingVersionMultiple;
       $button.confirm(question, $form.attr('action'), function (url) {
-        Functions.ajaxShowMessage();
-        window.AJAX.source = $form;
-        jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, window.AJAX.responseHandler);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+        _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       });
     } else {
-      Functions.ajaxShowMessage();
-      window.AJAX.source = $form;
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, window.AJAX.responseHandler);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     }
   });
   /**
@@ -116,12 +122,12 @@ window.AJAX.registerOnload('table/tracking.js', function () {
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = window.Messages.strDeleteTrackingVersion;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      Functions.ajaxShowMessage();
-      window.AJAX.source = $anchor;
-      var argSep = window.CommonParams.get('arg_separator');
-      var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $anchor;
+      var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
       params += argSep + 'ajax_page_request=1';
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
   });
   /**
@@ -133,12 +139,12 @@ window.AJAX.registerOnload('table/tracking.js', function () {
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = window.Messages.strDeletingTrackingEntry;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      Functions.ajaxShowMessage();
-      window.AJAX.source = $anchor;
-      var argSep = window.CommonParams.get('arg_separator');
-      var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $anchor;
+      var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
       params += argSep + 'ajax_page_request=1';
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, window.AJAX.responseHandler);
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
   });
 });
@@ -148,7 +154,8 @@ window.AJAX.registerOnload('table/tracking.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(75));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(74); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=tracking.js.map

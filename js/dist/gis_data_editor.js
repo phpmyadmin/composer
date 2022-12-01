@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[30],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[25],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * @fileoverview    functions used in GIS data editor
@@ -69,7 +75,7 @@ function prepareJSVersion() {
 
 
 function addDataPoint(pointNumber, prefix) {
-  return '<br>' + Functions.sprintf(window.Messages.strPointN, pointNumber + 1) + ': ' + '<label for="x">' + window.Messages.strX + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][x]" value="">' + '<label for="y">' + window.Messages.strY + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][y]" value="">';
+  return '<br>' + window.sprintf(window.Messages.strPointN, pointNumber + 1) + ': ' + '<label for="x">' + window.Messages.strX + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][x]" value="">' + '<label for="y">' + window.Messages.strY + '</label>' + '<input type="text" name="' + prefix + '[' + pointNumber + '][y]" value="">';
 }
 /**
  * Initialize the visualization in the GIS data editor.
@@ -147,14 +153,14 @@ function loadGISEditor(value, field, type, inputName) {
     'input_name': inputName,
     'get_gis_editor': true,
     'ajax_request': true,
-    'server': window.CommonParams.get('server')
+    'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
   }, function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
       $gisEditor.html(data.gis_editor);
       initGISEditorVisualization();
       prepareJSVersion();
     } else {
-      Functions.ajaxShowMessage(data.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
     }
   }, 'json');
 }
@@ -198,12 +204,12 @@ window.openGISEditor = openGISEditor;
 function insertDataAndClose() {
   var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form#gis_data_editor_form');
   var inputName = $form.find('input[name=\'input_name\']').val();
-  var argsep = window.CommonParams.get('arg_separator');
+  var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'generate=true' + argsep + 'ajax_request=true', function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=\'' + inputName + '\']').val(data.result);
     } else {
-      Functions.ajaxShowMessage(data.error, false);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
     }
   }, 'json');
   closeGISEditor();
@@ -213,7 +219,7 @@ function insertDataAndClose() {
  */
 
 
-window.AJAX.registerTeardown('gis_data_editor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('gis_data_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#gis_editor input[name=\'gis_data[save]\']');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#gis_editor');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#gis_editor input[type=\'text\']');
@@ -224,7 +230,7 @@ window.AJAX.registerTeardown('gis_data_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#gis_editor a.addJs.addPolygon');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#gis_editor a.addJs.addGeom');
 });
-window.AJAX.registerOnload('gis_data_editor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('gis_data_editor.js', function () {
   /**
    * Prepares and insert the GIS data to the input field on clicking 'copy'.
    */
@@ -246,7 +252,7 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#gis_editor input[type=\'text\']', function () {
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form#gis_data_editor_form');
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'generate=true' + argsep + 'ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#gis_data_textarea').val(data.result);
@@ -258,7 +264,7 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
         eval(data.openLayers);
         initGISEditorVisualization();
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }, 'json');
   });
@@ -269,14 +275,14 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#gis_editor select.gis_type', function () {
     var $gisEditor = jquery__WEBPACK_IMPORTED_MODULE_0__('#gis_editor');
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form#gis_data_editor_form');
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/gis-data-editor', $form.serialize() + argsep + 'get_gis_editor=true' + argsep + 'ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         $gisEditor.html(data.gis_editor);
         initGISEditorVisualization();
         prepareJSVersion();
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }, 'json');
   });
@@ -389,7 +395,8 @@ window.AJAX.registerOnload('gis_data_editor.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(35));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(36); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=gis_data_editor.js.map

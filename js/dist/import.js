@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[32],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[27],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,22 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+
+
+
+
+
+/* global themeImagePath */
+// templates/javascript/variables.twig
 
 /**
  * Functions used in the import tab
@@ -68,15 +79,16 @@ function matchFile(fname) {
  */
 
 
-window.AJAX.registerTeardown('import.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('import.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').off('change').off('focus');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').off('focus');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_enclosed').add('#text_csv_escaped').off('keyup');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain #buttonGo').off('click');
 });
-window.AJAX.registerOnload('import.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', function () {
   // import_file_form validation.
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#import_file_form', function () {
     var radioLocalImport = jquery__WEBPACK_IMPORTED_MODULE_0__('#localFileTab');
@@ -89,19 +101,19 @@ window.AJAX.registerOnload('import.js', function () {
       // remote upload.
       if (radioImport.hasClass('active') && jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').trigger('focus');
-        Functions.ajaxShowMessage(fileMsg, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
         return false;
       }
 
       if (radioLocalImport.hasClass('active')) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').length === 0) {
-          Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
           return false;
         }
 
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').val() === '') {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').trigger('focus');
-          Functions.ajaxShowMessage(fileMsg, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
           return false;
         }
       }
@@ -109,7 +121,7 @@ window.AJAX.registerOnload('import.js', function () {
       // local upload.
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').trigger('focus');
-        Functions.ajaxShowMessage(fileMsg, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
         return false;
       }
 
@@ -117,7 +129,7 @@ window.AJAX.registerOnload('import.js', function () {
         var newTblName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_tbl_name').val();
 
         if (newTblName.length > 0 && newTblName.trim().length === 0) {
-          Functions.ajaxShowMessage(wrongTblNameMsg, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(wrongTblNameMsg, false);
           return false;
         }
       }
@@ -126,7 +138,7 @@ window.AJAX.registerOnload('import.js', function () {
         var newDBName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_db_name').val();
 
         if (newDBName.length > 0 && newDBName.trim().length === 0) {
-          Functions.ajaxShowMessage(wrongDBNameMsg, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(wrongDBNameMsg, false);
           return false;
         }
       }
@@ -169,6 +181,104 @@ window.AJAX.registerOnload('import.js', function () {
 
     return true;
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain #buttonGo').on('click', function () {
+    const uploadProgressInfo = document.getElementById('upload_progress_info');
+    const uploadId = uploadProgressInfo.dataset.uploadId;
+    const handler = uploadProgressInfo.dataset.handler;
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_form').css('display', 'none');
+    const clockImage = '<img src="' + themeImagePath + 'ajax_clock_small.gif" width="16" height="16" alt="ajax clock">';
+
+    if (handler !== 'PhpMyAdmin\\Plugins\\Import\\Upload\\UploadNoplugin') {
+      var finished = false;
+      var percent = 0.0;
+      var total = 0;
+      var complete = 0;
+      var originalTitle = parent && parent.document ? parent.document.title : false;
+      var importStart;
+
+      var performUpload = function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0__.getJSON('index.php?route=/import-status', {
+          'id': uploadId,
+          'import_status': 1,
+          'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
+        }, function (response) {
+          finished = response.finished;
+          percent = response.percent;
+          total = response.total;
+          complete = response.complete;
+
+          if (total === 0 && complete === 0 && percent === 0) {
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status_info').html(clockImage + ' ' + window.Messages.uploadProgressMaximumAllowedSize);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status').css('display', 'none');
+          } else {
+            var now = new Date();
+            now = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()) + now.getMilliseconds() - 1000;
+            var statusText = window.sprintf(window.Messages.uploadProgressStatusText, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.formatBytes(complete, 1, window.Messages.strDecimalSeparator), _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.formatBytes(total, 1, window.Messages.strDecimalSeparator));
+
+            if (jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').is(':visible')) {
+              // Show progress UI
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').hide();
+              const uploadProgressDiv = '<div class="upload_progress">' + '<div class="upload_progress_bar_outer">' + '<div class="percentage"></div>' + '<div id="status" class="upload_progress_bar_inner">' + '<div class="percentage"></div></div></div>' + '<div>' + clockImage + ' ' + window.Messages.uploadProgressUploading + '</div>' + '<div id="statustext"></div></div>';
+              jquery__WEBPACK_IMPORTED_MODULE_0__('#import_form_status').html(uploadProgressDiv).show();
+              importStart = now;
+            } else if (percent > 9 || complete > 2000000) {
+              // Calculate estimated time
+              var usedTime = now - importStart;
+              var seconds = parseInt((total - complete) / complete * usedTime / 1000);
+              var speed = window.sprintf(window.Messages.uploadProgressPerSecond, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.formatBytes(complete / usedTime * 1000, 1, window.Messages.strDecimalSeparator));
+              var minutes = parseInt(seconds / 60);
+              seconds %= 60;
+              var estimatedTime;
+
+              if (minutes > 0) {
+                estimatedTime = window.Messages.uploadProgressRemainingMin.replace('%MIN', minutes).replace('%SEC', seconds);
+              } else {
+                estimatedTime = window.Messages.uploadProgressRemainingSec.replace('%SEC', seconds);
+              }
+
+              statusText += '<br>' + speed + '<br><br>' + estimatedTime;
+            }
+
+            var percentString = Math.round(percent) + '%';
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#status').animate({
+              width: percentString
+            }, 150);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.percentage').text(percentString); // Show percent in window title
+
+            if (originalTitle !== false) {
+              parent.document.title = percentString + ' - ' + originalTitle;
+            } else {
+              document.title = percentString + ' - ' + originalTitle;
+            }
+
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#statustext').html(statusText);
+          }
+
+          if (finished) {
+            if (originalTitle !== false) {
+              parent.document.title = originalTitle;
+            } else {
+              document.title = originalTitle;
+            }
+
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').hide(); // Loads the message, either success or mysql error
+
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#import_form_status').html(clockImage + ' ' + window.Messages.uploadProgressBeingProcessed).show();
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#import_form_status').load('index.php?route=/import-status&message=1&import_status=1&server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'));
+            _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
+          } else {
+            setTimeout(performUpload, 1000);
+          }
+        });
+      };
+
+      setTimeout(performUpload, 1000);
+    } else {
+      // No plugin available
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status_info').html(clockImage + ' ' + window.Messages.uploadProgressNoDetails);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status').css('display', 'none');
+    }
+  });
 });
 
 /***/ })
@@ -176,7 +286,8 @@ window.AJAX.registerOnload('import.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(39));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(40); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=import.js.map

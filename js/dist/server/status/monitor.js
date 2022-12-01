@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[50],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[41],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,14 +13,20 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+
+
+
+
 
 /**
  * @fileoverview    Javascript functions used in server status monitor page
  * @name            Server Status Monitor
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  */
 
 /* global firstDayOfCalendar, themeImagePath */
@@ -53,7 +59,7 @@ function serverResponseError() {
     },
     title: window.Messages.strRefreshFailed
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html(Functions.getImage('s_attention') + window.Messages.strInvalidResponseExplanation);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_attention') + window.Messages.strInvalidResponseExplanation);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').dialog({
     classes: {
       'ui-dialog-titlebar-close': 'btn-close'
@@ -92,7 +98,7 @@ function destroyGrid() {
   monitorSettings = null;
 }
 
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/monitor.js', function () {
   var $jsDataForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#js_data');
   serverTimeDiff = new Date().getTime() - $jsDataForm.find('input[name=server_time]').val();
   serverOs = $jsDataForm.find('input[name=server_os]').val();
@@ -103,7 +109,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').remove();
   jquery__WEBPACK_IMPORTED_MODULE_0__('a.popupLink').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click');
@@ -112,7 +118,7 @@ window.AJAX.registerTeardown('server/status/monitor.js', function () {
  * Popup behaviour
  */
 
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').attr('id', 'emptyDialog').appendTo('#page_content');
   jquery__WEBPACK_IMPORTED_MODULE_0__('a.popupLink').on('click', function () {
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -133,7 +139,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     });
   });
 });
-window.AJAX.registerTeardown('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('a[href="#rearrangeCharts"], a[href="#endChartEditMode"]').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('div.popupContent select[name="chartColumns"]').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('div.popupContent select[name="gridChartRefresh"]').off('change');
@@ -156,7 +162,7 @@ window.AJAX.registerTeardown('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#chartStatusVar').off('click');
   destroyGrid();
 });
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/monitor.js', function () {
   // Show tab links
   jquery__WEBPACK_IMPORTED_MODULE_0__('div.tabLinks').show();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#loadingMonitorIcon').remove(); // Codemirror is loaded on demand so we might need to initialize it
@@ -178,7 +184,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#logAnalyseDialog').find('.datetimefield').each(function () {
-    Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
   /** ** Monitor charting implementation ****/
 
@@ -826,7 +832,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 
 
         try {
-          if (window.Config.isStorageSupported('localStorage')) {
+          if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
             window.localStorage.monitorCharts = JSON.stringify(json.monitorCharts);
             window.localStorage.monitorSettings = JSON.stringify(json.monitorSettings);
           }
@@ -835,7 +841,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         } catch (err) {
           alert(window.Messages.strFailedBuildingGrid); // If an exception is thrown, load default again
 
-          if (window.Config.isStorageSupported('localStorage')) {
+          if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
             window.localStorage.removeItem('monitorCharts');
             window.localStorage.removeItem('monitorSettings');
           }
@@ -865,7 +871,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('a[href="#clearMonitorConfig"]').on('click', function (event) {
     event.preventDefault();
 
-    if (window.Config.isStorageSupported('localStorage')) {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
       window.localStorage.removeItem('monitorCharts');
       window.localStorage.removeItem('monitorSettings');
       window.localStorage.removeItem('monitorVersion');
@@ -879,9 +885,9 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     runtime.redrawCharts = !runtime.redrawCharts;
 
     if (!runtime.redrawCharts) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(Functions.getImage('play') + window.Messages.strResumeMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('play') + window.Messages.strResumeMonitor);
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(Functions.getImage('pause') + window.Messages.strPauseMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('pause') + window.Messages.strPauseMonitor);
 
       if (!runtime.charts) {
         initGrid();
@@ -915,7 +921,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     var loadLogVars = function (getvars) {
       var vars = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server')
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
       };
 
       if (getvars) {
@@ -931,7 +937,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           return serverResponseError();
         }
 
-        var icon = Functions.getImage('s_success');
+        var icon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success');
         var msg = '';
         var str = '';
 
@@ -948,7 +954,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         }
 
         if (msg.length === 0) {
-          icon = Functions.getImage('s_error');
+          icon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_error');
           msg = window.Messages.strBothLogOff;
         }
 
@@ -956,21 +962,21 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         str += icon + msg + '<br>';
 
         if (logVars.log_output !== 'TABLE') {
-          str += Functions.getImage('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
+          str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
         } else {
-          str += Functions.getImage('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
+          str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
         }
 
         if (logVars.slow_query_log === 'ON') {
           if (logVars.long_query_time > 2) {
-            str += Functions.getImage('s_attention') + ' ';
-            str += Functions.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
+            str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_attention') + ' ';
+            str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
             str += '<br>';
           }
 
           if (logVars.long_query_time < 2) {
-            str += Functions.getImage('s_success') + ' ';
-            str += Functions.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
+            str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success') + ' ';
+            str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
             str += '<br>';
           }
         }
@@ -988,26 +994,26 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           }
 
           str += '- <a class="set" href="#log_output-' + varValue + '">';
-          str += Functions.sprintf(window.Messages.strSetLogOutput, varValue);
+          str += window.sprintf(window.Messages.strSetLogOutput, varValue);
           str += ' </a><br>';
 
           if (logVars.general_log !== 'ON') {
             str += '- <a class="set" href="#general_log-ON">';
-            str += Functions.sprintf(window.Messages.strEnableVar, 'general_log');
+            str += window.sprintf(window.Messages.strEnableVar, 'general_log');
             str += ' </a><br>';
           } else {
             str += '- <a class="set" href="#general_log-OFF">';
-            str += Functions.sprintf(window.Messages.strDisableVar, 'general_log');
+            str += window.sprintf(window.Messages.strDisableVar, 'general_log');
             str += ' </a><br>';
           }
 
           if (logVars.slow_query_log !== 'ON') {
             str += '- <a class="set" href="#slow_query_log-ON">';
-            str += Functions.sprintf(window.Messages.strEnableVar, 'slow_query_log');
+            str += window.sprintf(window.Messages.strEnableVar, 'slow_query_log');
             str += ' </a><br>';
           } else {
             str += '- <a class="set" href="#slow_query_log-OFF">';
-            str += Functions.sprintf(window.Messages.strDisableVar, 'slow_query_log');
+            str += window.sprintf(window.Messages.strDisableVar, 'slow_query_log');
             str += ' </a><br>';
           }
 
@@ -1018,7 +1024,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           }
 
           str += '- <a class="set" href="#long_query_time-' + varValue + '">';
-          str += Functions.sprintf(window.Messages.setSetLongQueryTime, varValue);
+          str += window.sprintf(window.Messages.setSetLongQueryTime, varValue);
           str += ' </a><br>';
         } else {
           str += window.Messages.strNoSuperUser + '<br>';
@@ -1121,13 +1127,13 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     }
 
     var str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
-    str += serie.valueDivisor ? ', ' + Functions.sprintf(window.Messages.strDividedBy, serie.valueDivisor) : '';
+    str += serie.valueDivisor ? ', ' + window.sprintf(window.Messages.strDividedBy, serie.valueDivisor) : '';
     str += serie.unit ? ', ' + window.Messages.strUnit + ': ' + serie.unit : '';
     var newSeries = {
       label: jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val().replace(/_/g, ' ')
     };
     newChart.series.push(newSeries);
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + Functions.escapeHtml(newSeries.label + str) + '<br>');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(newSeries.label + str) + '<br>');
     newChart.nodes.push(serie);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val('');
     jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="differentialValue"]').prop('checked', true);
@@ -1148,7 +1154,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     var i;
     /* Apply default values & config */
 
-    if (window.Config.isStorageSupported('localStorage')) {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
       if (typeof window.localStorage.monitorCharts !== 'undefined') {
         runtime.charts = JSON.parse(window.localStorage.monitorCharts);
       }
@@ -1294,7 +1300,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
   function addChart(chartObj, initialize) {
     var i;
     var settings = {
-      title: Functions.escapeHtml(chartObj.title),
+      title: _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(chartObj.title),
       grid: {
         drawBorder: false,
         shadow: false,
@@ -1414,7 +1420,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           // eslint-disable-line no-underscore-dangle
           // using format string
           // eslint-disable-next-line no-underscore-dangle
-          seriesValue = Functions.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
+          seriesValue = window.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
         }
 
         tooltipHtml += '<br><span style="color:' + seriesColor + '">' + seriesLabel + ': ' + seriesValue + '</span>';
@@ -1555,13 +1561,13 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       height: 'auto',
       buttons: dlgBtns
     });
-    Functions.addDatepicker($dateStart, 'datetime', {
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker($dateStart, 'datetime', {
       showMillisec: false,
       showMicrosec: false,
       timeFormat: 'HH:mm:ss',
       firstDay: firstDayOfCalendar
     });
-    Functions.addDatepicker($dateEnd, 'datetime', {
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker($dateEnd, 'datetime', {
       showMillisec: false,
       showMicrosec: false,
       timeFormat: 'HH:mm:ss',
@@ -1590,7 +1596,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     runtime.refreshRequest = jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/status/monitor/chart', {
       'ajax_request': true,
       'requiredData': JSON.stringify(runtime.dataList),
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (data) {
       var chartData;
 
@@ -1837,7 +1843,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       'time_end': Math.round(opts.end / 1000),
       'removeVariables': opts.removeVariables,
       'limitTypes': opts.limitTypes,
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (data) {
       var logData;
       var dlgBtns = {
@@ -2119,7 +2125,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         return value.replace(/(\[.*?\])+/g, '');
       }
 
-      return Functions.escapeHtml(value);
+      return _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
     };
 
     for (var i = 0, l = rows.length; i < l; i++) {
@@ -2147,7 +2153,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
     $table.append('<tfoot>' + '<tr><th colspan="' + (cols.length - 1) + '">' + window.Messages.strSumRows + ' ' + data.numRows + '<span class="float-end">' + window.Messages.strTotal + '</span></th><th class="text-end">' + data.sum.TOTAL + '</th></tr></tfoot>'); // Append a tooltip to the count column, if there exist one
 
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().text().indexOf('#') > -1) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + Functions.getImage('b_help', '', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_help', '', {
         'class': 'qroupedQueryInfoIcon'
       }));
       var tooltipContent = window.Messages.strCountColumnExplanation;
@@ -2156,7 +2162,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         tooltipContent += '<p>' + window.Messages.strMoreCountColumnExplanation + '</p>';
       }
 
-      Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
     }
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('table').tablesorter({
@@ -2240,7 +2246,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       'ajax_request': true,
       'query': window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlquery').val(),
       'database': db,
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (responseData) {
       var data = responseData;
       var i;
@@ -2281,7 +2287,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       explain += '<p></p>';
 
       var tempExplain = function (key, value) {
-        var newValue = value === null ? 'null' : Functions.escapeHtml(value);
+        var newValue = value === null ? 'null' : _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
 
         if (key === 'type' && newValue.toLowerCase() === 'all') {
           newValue = '<span class="text-danger">' + newValue + '</span>';
@@ -2317,7 +2323,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
         for (i = 0, l = data.profiling.length; i < l; i++) {
           duration = parseFloat(data.profiling[i].duration);
           totalTime += duration;
-          numberTable += '<tr><td>' + data.profiling[i].state + ' </td><td> ' + Functions.prettyProfilingNum(duration, 2) + '</td></tr>';
+          numberTable += '<tr><td>' + data.profiling[i].state + ' </td><td> ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prettyProfilingNum(duration, 2) + '</td></tr>';
         } // Only put those values in the pie which are > 2%
 
 
@@ -2325,17 +2331,17 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           duration = parseFloat(data.profiling[i].duration);
 
           if (duration / totalTime > 0.02) {
-            chartData.push([Functions.prettyProfilingNum(duration, 2) + ' ' + data.profiling[i].state, duration]);
+            chartData.push([_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prettyProfilingNum(duration, 2) + ' ' + data.profiling[i].state, duration]);
           } else {
             otherTime += duration;
           }
         }
 
         if (otherTime > 0) {
-          chartData.push([Functions.prettyProfilingNum(otherTime, 2) + ' ' + window.Messages.strOther, otherTime]);
+          chartData.push([_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prettyProfilingNum(otherTime, 2) + ' ' + window.Messages.strOther, otherTime]);
         }
 
-        numberTable += '<tr><td><b>' + window.Messages.strTotalTime + '</b></td><td>' + Functions.prettyProfilingNum(totalTime, 2) + '</td></tr>';
+        numberTable += '<tr><td><b>' + window.Messages.strTotalTime + '</b></td><td>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prettyProfilingNum(totalTime, 2) + '</td></tr>';
         numberTable += '</tbody></table>';
         jquery__WEBPACK_IMPORTED_MODULE_0__('#queryAnalyzerDialog').find('div.placeHolder td.chart').append('<b>' + window.Messages.strProfilingResults + ' ' + jquery__WEBPACK_IMPORTED_MODULE_0__('#profiling_docu').html() + '</b> ' + '(<a href="#showNums">' + window.Messages.strTable + '</a>, <a href="#showChart">' + window.Messages.strChart + '</a>)<br>' + numberTable + ' <div id="queryProfiling"></div>');
         jquery__WEBPACK_IMPORTED_MODULE_0__('#queryAnalyzerDialog').find('div.placeHolder a[href="#showNums"]').on('click', function () {
@@ -2348,7 +2354,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#queryAnalyzerDialog').find('table.queryNums').hide();
           return false;
         });
-        profilingChart = Functions.createProfilingChart('queryProfiling', chartData);
+        profilingChart = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.createProfilingChart('queryProfiling', chartData);
       }
     });
     return profilingChart;
@@ -2367,7 +2373,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
       gridCopy[key].maxYLabel = elem.maxYLabel;
     });
 
-    if (window.Config.isStorageSupported('localStorage')) {
+    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
       window.localStorage.monitorCharts = JSON.stringify(gridCopy);
       window.localStorage.monitorSettings = JSON.stringify(monitorSettings);
       window.localStorage.monitorVersion = monitorProtocolVersion;
@@ -2377,7 +2383,7 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
   }
 }); // Run the monitor once loaded
 
-window.AJAX.registerOnload('server/status/monitor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/monitor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('a[href="#pauseCharts"]').trigger('click');
 });
 
@@ -2386,7 +2392,8 @@ window.AJAX.registerOnload('server/status/monitor.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(56));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(56); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=monitor.js.map

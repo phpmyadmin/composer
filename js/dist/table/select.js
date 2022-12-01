@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[67],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[58],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,17 +8,20 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 73:
+/***/ 72:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * @fileoverview JavaScript functions used on /table/search
- *
- * @requires    jQuery
- * @requires    js/functions.js
  */
 
 /* global changeValueFieldType, verifyAfterSearchFieldChange */
@@ -57,14 +60,14 @@ TableSelect.checkIfDataTypeNumericOrDate = function (dataType) {
  */
 
 
-window.AJAX.registerTeardown('table/select.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/select.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#togglesearchformlink').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#tbl_search_form.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__('select.geom_func').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'span.open_search_gis_editor');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('change', 'select[name*="criteriaColumnOperators"]'); // Fix for bug #13778, changed 'click' to 'change'
 });
-window.AJAX.registerOnload('table/select.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.js', function () {
   /**
    * Prepare a div containing a link, otherwise it's incorrectly displayed
    * after a couple of clicks
@@ -103,8 +106,8 @@ window.AJAX.registerOnload('table/select.js', function () {
     event.preventDefault(); // empty previous search results while we are waiting for new results
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').empty();
-    var $msgbox = Functions.ajaxShowMessage(window.Messages.strSearching, false);
-    Functions.prepareForAjaxRequest($searchForm);
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSearching, false);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($searchForm);
     var values = {};
     $searchForm.find(':input').each(function () {
       var $input = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -148,7 +151,7 @@ window.AJAX.registerOnload('table/select.js', function () {
     }
 
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($searchForm.attr('action'), values, function (data) {
-      Functions.ajaxRemoveMessage($msgbox);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
 
       if (typeof data !== 'undefined' && data.success === true) {
         if (typeof data.sql_query !== 'undefined') {
@@ -173,7 +176,7 @@ window.AJAX.registerOnload('table/select.js', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').html(data.error);
       }
 
-      Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
     }); // end $.post()
   }); // Following section is related to the 'function based search' for geometry data types.
   // Initially hide all the open_gis_editor spans
@@ -248,12 +251,12 @@ window.AJAX.registerOnload('table/select.js', function () {
     var operator = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
 
     if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
-      var $msgbox = Functions.ajaxShowMessage();
+      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
       jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         url: 'index.php?route=/table/search',
         type: 'POST',
         data: {
-          'server': window.CommonParams.get('server'),
+          'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
           'ajax_request': 1,
           'db': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val(),
           'table': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]').val(),
@@ -261,7 +264,7 @@ window.AJAX.registerOnload('table/select.js', function () {
           'range_search': 1
         },
         success: function (response) {
-          Functions.ajaxRemoveMessage($msgbox);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
 
           if (response.success) {
             // Get the column min value.
@@ -276,8 +279,8 @@ window.AJAX.registerOnload('table/select.js', function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#min_value').first().val('');
             jquery__WEBPACK_IMPORTED_MODULE_0__('#max_value').first().val(''); // Add datepicker wherever required.
 
-            Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__('#min_value'), dataType);
-            Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__('#max_value'), dataType);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__('#min_value'), dataType);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDatepicker(jquery__WEBPACK_IMPORTED_MODULE_0__('#max_value'), dataType);
             jquery__WEBPACK_IMPORTED_MODULE_0__('#rangeSearchModalGo').on('click', function () {
               var minValue = jquery__WEBPACK_IMPORTED_MODULE_0__('#min_value').val();
               var maxValue = jquery__WEBPACK_IMPORTED_MODULE_0__('#max_value').val();
@@ -313,11 +316,11 @@ window.AJAX.registerOnload('table/select.js', function () {
               jquery__WEBPACK_IMPORTED_MODULE_0__('#rangeSearchModal').modal('hide');
             });
           } else {
-            Functions.ajaxShowMessage(response.error);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error);
           }
         },
         error: function () {
-          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
         }
       });
     }
@@ -331,7 +334,8 @@ window.AJAX.registerOnload('table/select.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(73));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(72); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=select.js.map

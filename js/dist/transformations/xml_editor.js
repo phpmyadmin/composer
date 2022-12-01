@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[76],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[67],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 82:
+/***/ 81:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+
 
 /**
  * XML editor plugin
@@ -20,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
  * @package PhpMyAdmin
  */
 
-window.AJAX.registerOnload('transformations/xml_editor.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/xml_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_xml_editor').each(function () {
     window.CodeMirror.fromTextArea(this, {
       lineNumbers: true,
@@ -36,7 +38,8 @@ window.AJAX.registerOnload('transformations/xml_editor.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(82));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(81); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=xml_editor.js.map

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[24],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[20],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 28:
+/***/ 31:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+
 
 /* global DesignerOfflineDB */
 // js/designer/database.js
@@ -98,7 +100,7 @@ DesignerPage.createPageList = function (db, callback) {
 
       if (page.dbName === db) {
         html += '<option value="' + page.pgNr + '">';
-        html += Functions.escapeHtml(page.pageDescr) + '</option>';
+        html += _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(page.pageDescr) + '</option>';
       }
     }
 
@@ -190,7 +192,7 @@ DesignerPage.loadHtmlForPage = function (pageId) {
 
     if (tableMissing === true) {
       DesignerMove.markUnsaved();
-      Functions.ajaxShowMessage(window.Messages.strSavedPageTableMissing);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.ajaxShowMessage(window.Messages.strSavedPageTableMissing);
     }
 
     window.selectedPage = page.pgNr;
@@ -226,7 +228,8 @@ DesignerPage.getRandom = function (max, min) {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(28));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(31); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=page.js.map

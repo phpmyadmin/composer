@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[77],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[68],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,13 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 83:
+/***/ 82:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
 
-window.AJAX.registerOnload('u2f.js', function () {
+
+
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', function () {
   var $inputReg = jquery__WEBPACK_IMPORTED_MODULE_0__('#u2f_registration_response');
 
   if ($inputReg.length > 0) {
@@ -28,23 +32,23 @@ window.AJAX.registerOnload('u2f.js', function () {
         if (data.errorCode && data.errorCode !== 0) {
           switch (data.errorCode) {
             case 5:
-              Functions.ajaxShowMessage(window.Messages.strU2FTimeout, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FTimeout, false, 'error');
               break;
 
             case 4:
-              Functions.ajaxShowMessage(window.Messages.strU2FErrorRegister, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FErrorRegister, false, 'error');
               break;
 
             case 3:
-              Functions.ajaxShowMessage(window.Messages.strU2FInvalidClient, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FInvalidClient, false, 'error');
               break;
 
             case 2:
-              Functions.ajaxShowMessage(window.Messages.strU2FBadRequest, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FBadRequest, false, 'error');
               break;
 
             default:
-              Functions.ajaxShowMessage(window.Messages.strU2FUnknown, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FUnknown, false, 'error');
               break;
           }
 
@@ -72,23 +76,23 @@ window.AJAX.registerOnload('u2f.js', function () {
         if (data.errorCode && data.errorCode !== 0) {
           switch (data.errorCode) {
             case 5:
-              Functions.ajaxShowMessage(window.Messages.strU2FTimeout, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FTimeout, false, 'error');
               break;
 
             case 4:
-              Functions.ajaxShowMessage(window.Messages.strU2FErrorAuthenticate, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FErrorAuthenticate, false, 'error');
               break;
 
             case 3:
-              Functions.ajaxShowMessage(window.Messages.strU2FInvalidClient, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FInvalidClient, false, 'error');
               break;
 
             case 2:
-              Functions.ajaxShowMessage(window.Messages.strU2FBadRequest, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FBadRequest, false, 'error');
               break;
 
             default:
-              Functions.ajaxShowMessage(window.Messages.strU2FUnknown, false, 'error');
+              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strU2FUnknown, false, 'error');
               break;
           }
 
@@ -108,7 +112,8 @@ window.AJAX.registerOnload('u2f.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(83));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(82); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=u2f.js.map

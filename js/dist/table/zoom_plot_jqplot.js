@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[70],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[61],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,18 +8,21 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 76:
+/***/ 75:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
  // TODO: change the axis
 
 /**
  * @fileoverview JavaScript functions used on /table/search
- *
- * @requires    jQuery
- * @requires    js/functions.js
  **/
 
 /* global Sql */
@@ -123,7 +126,7 @@ function getType(field) {
  */
 
 
-window.AJAX.registerTeardown('table/zoom_plot_jqplot.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/zoom_plot_jqplot.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_2').off('change');
@@ -135,7 +138,7 @@ window.AJAX.registerTeardown('table/zoom_plot_jqplot.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('div#resizer').off('resizestop');
   jquery__WEBPACK_IMPORTED_MODULE_0__('div#querychart').off('jqplotDataClick');
 });
-window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
   var currentChart = null;
   var searchedDataKey = null;
   var xLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').val();
@@ -174,9 +177,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
       'ajax_request': true,
       'change_tbl_info': true,
-      'server': window.CommonParams.get('server'),
-      'db': window.CommonParams.get('db'),
-      'table': window.CommonParams.get('table'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+      'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'field': jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').val(),
       'it': 0
     }, function (data) {
@@ -189,7 +192,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       xType = data.field_type;
       jquery__WEBPACK_IMPORTED_MODULE_0__('#collations_0').val(data.field_collations);
       comparisonOperatorOnChange();
-      Functions.addDateTimePicker();
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
   }); // second column choice corresponds to the Y axis
 
@@ -198,9 +201,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
       'ajax_request': true,
       'change_tbl_info': true,
-      'server': window.CommonParams.get('server'),
-      'db': window.CommonParams.get('db'),
-      'table': window.CommonParams.get('table'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+      'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'field': jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').val(),
       'it': 1
     }, function (data) {
@@ -213,7 +216,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       yType = data.field_type;
       jquery__WEBPACK_IMPORTED_MODULE_0__('#collations_1').val(data.field_collations);
       comparisonOperatorOnChange();
-      Functions.addDateTimePicker();
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_2').on('change', function () {
@@ -221,9 +224,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
       'ajax_request': true,
       'change_tbl_info': true,
-      'server': window.CommonParams.get('server'),
-      'db': window.CommonParams.get('db'),
-      'table': window.CommonParams.get('table'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+      'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'field': jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_2').val(),
       'it': 2
     }, function (data) {
@@ -234,7 +237,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#types_2').val(data.field_type);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#collations_2').val(data.field_collations);
       comparisonOperatorOnChange();
-      Functions.addDateTimePicker();
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_3').on('change', function () {
@@ -242,9 +245,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
       'ajax_request': true,
       'change_tbl_info': true,
-      'server': window.CommonParams.get('server'),
-      'db': window.CommonParams.get('db'),
-      'table': window.CommonParams.get('table'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+      'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'field': jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_3').val(),
       'it': 3
     }, function (data) {
@@ -255,7 +258,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#types_3').val(data.field_type);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#collations_3').val(data.field_collations);
       comparisonOperatorOnChange();
-      Functions.addDateTimePicker();
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
   });
   /**
@@ -264,9 +267,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#inputFormSubmitId').on('click', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').get(0).selectedIndex === 0 || jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').get(0).selectedIndex === 0) {
-      Functions.ajaxShowMessage(window.Messages.strInputNull);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strInputNull);
     } else if (xLabel === yLabel) {
-      Functions.ajaxShowMessage(window.Messages.strSameInputs);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSameInputs);
     }
   });
   /**
@@ -381,7 +384,7 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 
 
     if (!isEmpty(newValues)) {
-      var sqlQuery = 'UPDATE `' + window.CommonParams.get('table') + '` SET ';
+      var sqlQuery = 'UPDATE `' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` SET ';
 
       for (key in newValues) {
         sqlQuery += '`' + key + '`=';
@@ -412,17 +415,17 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       sqlQuery = sqlQuery.substring(0, sqlQuery.length - 2);
       sqlQuery += ' WHERE ' + Sql.urlDecode(searchedData[searchedDataKey].where_clause);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/sql', {
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+        'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
         'ajax_request': true,
         'sql_query': sqlQuery,
         'inline_edit': false
       }, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').html(data.sql_query);
-          Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
         } else {
-          Functions.ajaxShowMessage(data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
         }
       }); // End $.post
     } // End database update
@@ -593,9 +596,9 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
       var postParams = {
         'ajax_request': true,
         'get_data_row': true,
-        'server': window.CommonParams.get('server'),
-        'db': window.CommonParams.get('db'),
-        'table': window.CommonParams.get('table'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+        'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+        'table': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
         'where_clause': data[3],
         'where_clause_sign': data[5]
       };
@@ -641,7 +644,8 @@ window.AJAX.registerOnload('table/zoom_plot_jqplot.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(76));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(75); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=zoom_plot_jqplot.js.map

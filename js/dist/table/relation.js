@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[66],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[57],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 72:
+/***/ 71:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * for table relation
@@ -44,7 +50,7 @@ TableRelation.setDropdownValues = function ($dropdown, values, selectedValue) {
 
   values.unshift('');
   jquery__WEBPACK_IMPORTED_MODULE_0__.each(values, function () {
-    optionsAsString += '<option value=\'' + Functions.escapeHtml(this) + '\'' + (selectedValue === Functions.escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + Functions.escapeHtml(this) + '</option>';
+    optionsAsString += '<option value=\'' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) + '\'' + (selectedValue === _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) + '</option>';
   });
   $dropdown.append(jquery__WEBPACK_IMPORTED_MODULE_0__(optionsAsString));
 };
@@ -96,11 +102,11 @@ TableRelation.getDropdownValues = function ($dropdown) {
     }
   }
 
-  var $msgbox = Functions.ajaxShowMessage();
+  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
   var $form = $dropdown.parents('form');
   var $db = $form.find('input[name="db"]').val();
   var $table = $form.find('input[name="table"]').val();
-  var argsep = window.CommonParams.get('arg_separator');
+  var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
   var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
   var $server = $form.find('input[name="server"]');
 
@@ -114,7 +120,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     data: params,
     dataType: 'json',
     success: function (data) {
-      Functions.ajaxRemoveMessage($msgbox);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
 
       if (typeof data !== 'undefined' && data.success) {
         // if the changed dropdown is a database selector
@@ -135,7 +141,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
           TableRelation.setDropdownValues($columnDd.slice(1), data.columns);
         }
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }
   });
@@ -145,13 +151,13 @@ TableRelation.getDropdownValues = function ($dropdown) {
  */
 
 
-window.AJAX.registerTeardown('table/relation.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/relation.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('change', 'select[name^="destination_db"], ' + 'select[name^="destination_table"], ' + 'select[name^="destination_foreign_db"], ' + 'select[name^="destination_foreign_table"]');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.add_foreign_key_field');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.add_foreign_key');
   jquery__WEBPACK_IMPORTED_MODULE_0__('a.drop_foreign_key_anchor.ajax').off('click');
 });
-window.AJAX.registerOnload('table/relation.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relation.js', function () {
   /**
    * Ajax event handler to fetch table/column dropdown values.
    */
@@ -206,18 +212,18 @@ window.AJAX.registerOnload('table/relation.js', function () {
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this); // Object containing reference to the current field's row
 
     var $currRow = $anchor.parents('tr');
-    var dropQuery = Functions.escapeHtml($currRow.children('td').children('.drop_foreign_key_msg').val());
-    var question = Functions.sprintf(window.Messages.strDoYouReally, dropQuery);
+    var dropQuery = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml($currRow.children('td').children('.drop_foreign_key_msg').val());
+    var question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
-      var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success === true) {
-          Functions.ajaxRemoveMessage($msg);
-          window.CommonActions.refreshMain(false, function () {// Do nothing
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+          _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonActions.refreshMain(false, function () {// Do nothing
           });
         } else {
-          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     });
@@ -232,7 +238,8 @@ window.AJAX.registerOnload('table/relation.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(72));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(71); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=relation.js.map

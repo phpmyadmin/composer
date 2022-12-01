@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[11],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[7],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,20 +8,21 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 16:
+/***/ 19:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
- *
  */
 
 /**
@@ -35,15 +36,15 @@ __webpack_require__.r(__webpack_exports__);
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('database/qbe.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/qbe.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select[name^=criteriaColumn]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#searchId');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#saveSearch');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#updateSearch');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#deleteSearch');
 });
-window.AJAX.registerOnload('database/qbe.js', function () {
-  Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#textSqlquery'), {}, 'none');
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/qbe.js', function () {
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#textSqlquery'), {}, 'none');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbe').width(jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbe').parent().width());
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbeFooters').width(jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbeFooters').parent().width());
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbe').on('resize', function () {
@@ -88,7 +89,7 @@ window.AJAX.registerOnload('database/qbe.js', function () {
    */
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#deleteSearch', function () {
-    var question = Functions.sprintf(window.Messages.strConfirmDeleteQBESearch, jquery__WEBPACK_IMPORTED_MODULE_0__('#searchId').find('option:selected').text());
+    var question = window.sprintf(window.Messages.strConfirmDeleteQBESearch, jquery__WEBPACK_IMPORTED_MODULE_0__('#searchId').find('option:selected').text());
 
     if (!confirm(question)) {
       return false;
@@ -105,7 +106,8 @@ window.AJAX.registerOnload('database/qbe.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(16));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(19); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=qbe.js.map

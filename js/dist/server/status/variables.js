@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[54],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[45],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,6 +13,8 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+
 
 /**
  *
@@ -24,13 +26,13 @@ __webpack_require__.r(__webpack_exports__);
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/status/variables.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/status/variables.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterAlert').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterText').off('keyup');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterCategory').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#dontFormat').off('change');
 });
-window.AJAX.registerOnload('server/status/variables.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/variables.js', function () {
   // Filters for status variables
   var textFilter = null;
   var alertFilter = jquery__WEBPACK_IMPORTED_MODULE_0__('#filterAlert').prop('checked');
@@ -117,7 +119,8 @@ window.AJAX.registerOnload('server/status/variables.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(60));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(60); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=variables.js.map

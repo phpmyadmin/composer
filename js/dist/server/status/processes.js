@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[51],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[42],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,6 +13,12 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * Server Status Processes
@@ -62,9 +68,9 @@ var processList = {
    */
   killProcessHandler: function (event) {
     event.preventDefault();
-    var argSep = window.CommonParams.get('arg_separator');
+    var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     var params = jquery__WEBPACK_IMPORTED_MODULE_0__(this).getPostData();
-    params += argSep + 'ajax_request=1' + argSep + 'server=' + window.CommonParams.get('server'); // Get row element of the process to be killed.
+    params += argSep + 'ajax_request=1' + argSep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'); // Get row element of the process to be killed.
 
     var $tr = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), params, function (data) {
@@ -83,10 +89,10 @@ var processList = {
           }
         }); // Show process killed message
 
-        Functions.ajaxShowMessage(data.message, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message, false);
       } else {
         // Show process error message
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }, 'json');
   },
@@ -111,7 +117,7 @@ var processList = {
         if (data.hasOwnProperty('success') && data.success) {
           var $newTable = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message);
           jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist').html($newTable.html());
-          Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist'));
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist'));
         }
 
         processList.refreshTimeout = setTimeout(processList.refresh, interval);
@@ -149,7 +155,7 @@ var processList = {
       processList.refresh();
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('a#toggleRefresh').html(Functions.getImage(img) + Functions.escapeHtml(label));
+    jquery__WEBPACK_IMPORTED_MODULE_0__('a#toggleRefresh').html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage(img) + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(label));
   },
 
   /**
@@ -161,7 +167,7 @@ var processList = {
    */
   getUrlParams: function () {
     var urlParams = {
-      'server': window.CommonParams.get('server'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'ajax_request': true,
       'refresh': true,
       'full': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="full"]').val(),
@@ -178,7 +184,7 @@ var processList = {
     return urlParams;
   }
 };
-window.AJAX.registerOnload('server/status/processes.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/processes.js', function () {
   processList.init(); // Bind event handler for kill_process
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist').on('click', 'a.kill_process', processList.killProcessHandler); // Bind event handler for toggling refresh of process list
@@ -202,7 +208,7 @@ window.AJAX.registerOnload('server/status/processes.js', function () {
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/status/processes.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/status/processes.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist').off('click', 'a.kill_process');
   jquery__WEBPACK_IMPORTED_MODULE_0__('a#toggleRefresh').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#id_refreshRate').off('change');
@@ -216,7 +222,8 @@ window.AJAX.registerTeardown('server/status/processes.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(57));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(57); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=processes.js.map

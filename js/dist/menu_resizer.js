@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[39],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[32],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 46:
+/***/ 48:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+
 
 /**
  * Handles the resizing of a menu according to the available screen width
@@ -61,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
     var img = $container.find('li img');
 
     if (img.length) {
-      $(Functions.getImage('b_more').toString()).prependTo(link);
+      $(_modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.getImage('b_more').toString()).prependTo(link);
     }
 
     var $submenu = $('<li></li>', {
@@ -229,7 +231,8 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(46));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(48); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=menu_resizer.js.map

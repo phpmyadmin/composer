@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[62],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[53],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 68:
+/***/ 67:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+
+
 
 /* global ColumnType, DataTable, JQPlotChartFactory */
 // js/chart.js
@@ -71,7 +75,7 @@ function queryChart(data, columnNames, settings) {
     },
     axes: {
       xaxis: {
-        label: Functions.escapeHtml(settings.xaxisLabel)
+        label: _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(settings.xaxisLabel)
       },
       yaxis: {
         label: settings.yaxisLabel
@@ -191,7 +195,7 @@ function drawChart() {
 
   var columnNames = [];
   jquery__WEBPACK_IMPORTED_MODULE_0__('#chartXAxisSelect option').each(function () {
-    columnNames.push(Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text()));
+    columnNames.push(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text()));
   });
 
   try {
@@ -201,7 +205,7 @@ function drawChart() {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#saveChart').attr('href', currentChart.toImageString());
     }
   } catch (err) {
-    Functions.ajaxShowMessage(err.message, false);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(err.message, false);
   }
 }
 
@@ -272,7 +276,7 @@ function onDataSeriesChange() {
  */
 
 
-window.AJAX.registerTeardown('table/chart.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/chart.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="chartType"]').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#barStackedCheckbox').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesColumnCheckbox').off('click');
@@ -286,7 +290,7 @@ window.AJAX.registerTeardown('table/chart.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#resizer').off('resizestop');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tblchartform').off('submit');
 });
-window.AJAX.registerOnload('table/chart.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/chart.js', function () {
   // handle manual resize
   jquery__WEBPACK_IMPORTED_MODULE_0__('#resizer').on('resizestop', function () {
     // make room so that the handle will still appear
@@ -400,19 +404,19 @@ window.AJAX.registerOnload('table/chart.js', function () {
       $form[0].elements.sql_query.value = window.codeMirrorEditor.getValue();
     }
 
-    if (!Functions.checkSqlQuery($form[0])) {
+    if (!_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkSqlQuery($form[0])) {
       return false;
     }
 
-    var $msgbox = Functions.ajaxShowMessage();
-    Functions.prepareForAjaxRequest($form);
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true && typeof data.chartData !== 'undefined') {
         chartData = JSON.parse(data.chartData);
         drawChart();
-        Functions.ajaxRemoveMessage($msgbox);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
       } else {
-        Functions.ajaxShowMessage(data.error, false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
       }
     }, 'json'); // end $.post()
 
@@ -453,7 +457,8 @@ window.AJAX.registerOnload('table/chart.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(68));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(67); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=chart.js.map

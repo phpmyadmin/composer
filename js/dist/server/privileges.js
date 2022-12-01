@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[40],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,8 +13,14 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
 
-/* global Navigation */
+
+
+
 
 /**
  * Export privileges modal handler
@@ -35,17 +41,17 @@ function exportPrivilegesModalHandler(data, msgbox) {
     modal.on('shown.bs.modal', function () {
       modal.find('.modal-body').first().html(data.message);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html(data.title);
-      Functions.ajaxRemoveMessage(msgbox); // Attach syntax highlighted editor to export dialog
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage(msgbox); // Attach syntax highlighted editor to export dialog
 
-      Functions.getSqlEditor(modal.find('textarea'));
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(modal.find('textarea'));
     });
     return;
   }
 
-  Functions.ajaxShowMessage(data.error, false);
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
 }
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 
@@ -59,10 +65,10 @@ const EditUserGroup = {
     const username = button.getAttribute('data-username');
     jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/server/user-groups/edit-form', {
       'username': username,
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, data => {
       if (typeof data === 'undefined' || data.success !== true) {
-        Functions.ajaxShowMessage(data.error, false, 'error');
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false, 'error');
         return;
       }
 
@@ -72,9 +78,9 @@ const EditUserGroup = {
       modalBody.innerHTML = data.message;
       saveButton.addEventListener('click', () => {
         const form = jquery__WEBPACK_IMPORTED_MODULE_0__(editUserGroupModal.querySelector('#changeUserGroupForm'));
-        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/privileges', form.serialize() + window.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/privileges', form.serialize() + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
           if (typeof data === 'undefined' || data.success !== true) {
-            Functions.ajaxShowMessage(data.error, false, 'error');
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false, 'error');
             return;
           }
 
@@ -89,7 +95,7 @@ const EditUserGroup = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const AccountLocking = {
@@ -101,34 +107,34 @@ const AccountLocking = {
       'username': button.dataset.userName,
       'hostname': button.dataset.hostName,
       'ajax_request': true,
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, data => {
       if (data.success === false) {
-        Functions.ajaxShowMessage(data.error);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error);
         return;
       }
 
       if (isLocked) {
-        const lockIcon = Functions.getImage('s_lock', window.Messages.strLock, {}).toString();
+        const lockIcon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_lock', window.Messages.strLock, {}).toString();
         button.innerHTML = '<span class="text-nowrap">' + lockIcon + ' ' + window.Messages.strLock + '</span>';
         button.title = window.Messages.strLockAccount;
         button.dataset.isLocked = 'false';
       } else {
-        const unlockIcon = Functions.getImage('s_unlock', window.Messages.strUnlock, {}).toString();
+        const unlockIcon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_unlock', window.Messages.strUnlock, {}).toString();
         button.innerHTML = '<span class="text-nowrap">' + unlockIcon + ' ' + window.Messages.strUnlock + '</span>';
         button.title = window.Messages.strUnlockAccount;
         button.dataset.isLocked = 'true';
       }
 
-      Functions.ajaxShowMessage(data.message);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
     });
   }
 };
 /**
  * Display a warning if there is already a user by the name entered as the username.
  *
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const AddUserLoginCheckUsername = {
@@ -140,7 +146,7 @@ const AddUserLoginCheckUsername = {
       var href = jquery__WEBPACK_IMPORTED_MODULE_0__('form[name=\'usersForm\']').attr('action');
       var params = {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'validate_username': true,
         'username': username
       };
@@ -159,7 +165,7 @@ const AddUserLoginCheckUsername = {
 /**
  * Indicating password strength
  *
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const PasswordStrength = {
@@ -168,13 +174,13 @@ const PasswordStrength = {
     var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#password_strength');
     var username = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="username"]');
     username = username.val();
-    Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, username);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, username);
   }
 };
 /**
  * Automatically switching to 'Use Text field' from 'No password' once start writing in text area
  *
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const SwitchToUseTextField = {
@@ -185,20 +191,20 @@ const SwitchToUseTextField = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const ChangePasswordStrength = {
   handleEvent: function () {
     var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_strength_meter');
     var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_strength');
-    Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, window.CommonParams.get('user'));
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('user'));
   }
 };
 /**
  * Display a notice if sha256_password is selected
  *
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const ShowSha256PasswordNotice = {
@@ -213,7 +219,7 @@ const ShowSha256PasswordNotice = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const RevokeUser = {
@@ -228,7 +234,7 @@ const RevokeUser = {
       var $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox');
 
       if ($dropUsersDbCheckbox.is(':checked')) {
-        var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + Functions.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
+        var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
 
         if (!isConfirmed) {
           // Uncheck the drop users database checkbox
@@ -236,15 +242,15 @@ const RevokeUser = {
         }
       }
 
-      Functions.ajaxShowMessage(window.Messages.strRemovingSelectedUsers);
-      var argsep = window.CommonParams.get('arg_separator');
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRemovingSelectedUsers);
+      var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          Functions.ajaxShowMessage(data.message); // Refresh navigation, if we dropped some databases with the name
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message); // Refresh navigation, if we dropped some databases with the name
           // that is the same as the username of the deleted user
 
           if (jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox:checked').length) {
-            Navigation.reload();
+            _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
           } // Remove the revoked user from the users list
 
 
@@ -265,17 +271,17 @@ const RevokeUser = {
               }
             }); // update the checkall checkbox
 
-            jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.checkboxesSel).trigger('change');
+            jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkboxesSel).trigger('change');
           });
         } else {
-          Functions.ajaxShowMessage(data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
         }
       }); // end $.post()
     });
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const ExportPrivileges = {
@@ -286,13 +292,13 @@ const ExportPrivileges = {
     event.preventDefault(); // can't export if no users checked
 
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).find('input:checked').length === 0) {
-      Functions.ajaxShowMessage(window.Messages.strNoAccountSelected, 2000, 'success');
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
 
-    var msgbox = Functions.ajaxShowMessage();
-    var argsep = window.CommonParams.get('arg_separator');
-    var serverId = window.CommonParams.get('server');
+    var msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    var serverId = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
     var selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0__('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
     var postStr = selectedUsers + '&submit_mult=export' + argsep + 'ajax_request=true&server=' + serverId;
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).prop('action'), postStr, function (data) {
@@ -301,7 +307,7 @@ const ExportPrivileges = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const ExportUser = {
@@ -310,7 +316,7 @@ const ExportUser = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var msgbox = Functions.ajaxShowMessage();
+    var msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -319,7 +325,7 @@ const ExportUser = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const SslTypeToggle = {
@@ -334,7 +340,7 @@ const SslTypeToggle = {
   }
 };
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const SslPrivilegeToggle = {
@@ -403,7 +409,7 @@ function addOrUpdateSubmenu() {
   }, 'fast');
 }
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 
@@ -427,7 +433,7 @@ function setMaxWidth() {
 /**
  * Validates the "add a user" form
  *
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 
@@ -447,8 +453,12 @@ const CheckAddUser = {
       return false;
     }
 
-    return Functions.checkPassword(jquery__WEBPACK_IMPORTED_MODULE_0__(theForm));
+    return _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPassword(jquery__WEBPACK_IMPORTED_MODULE_0__(theForm));
   }
+};
+
+const selectPasswordRadioWhenChangingPassword = () => {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#nopass_0').prop('checked', true);
 };
 /**
  * AJAX scripts for /server/privileges page.
@@ -469,9 +479,13 @@ const CheckAddUser = {
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/privileges.js', function () {
+
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/privileges.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_add_user_login').off('change', 'input[name=\'username\']');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#deleteUserCard .btn.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').off('keyup');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').off('change');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw2').off('change');
   const editUserGroupModal = document.getElementById('editUserGroupModal');
 
   if (editUserGroupModal) {
@@ -487,11 +501,13 @@ window.AJAX.registerTeardown('server/privileges.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'input[name="ssl_type"]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#select_authentication_plugin');
 });
-window.AJAX.registerOnload('server/privileges.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/privileges.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_add_user_login').on('change', 'input[name=\'username\']', AddUserLoginCheckUsername.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').on('keyup', PasswordStrength.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').on('input', SwitchToUseTextField.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').on('keyup', ChangePasswordStrength.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').on('change', selectPasswordRadioWhenChangingPassword);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw2').on('change', selectPasswordRadioWhenChangingPassword);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_authentication_plugin', ShowSha256PasswordNotice.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
   const editUserGroupModal = document.getElementById('editUserGroupModal');
@@ -502,15 +518,15 @@ window.AJAX.registerOnload('server/privileges.js', function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent); // if exporting non-ajax, highlight anyways
 
-  Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.export'));
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.export'));
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.export_user_anchor.ajax', ExportUser.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('button.jsAccountLocking').on('click', AccountLocking.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'input[name="ssl_type"]', SslTypeToggle.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#checkbox_SSL_priv', SslPrivilegeToggle.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#checkbox_SSL_priv').trigger('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('input.autofocus').trigger('focus');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(Functions.checkboxesSel).trigger('change');
-  Functions.displayPasswordGenerateButton();
+  jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkboxesSel).trigger('change');
+  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.displayPasswordGenerateButton();
   addOrUpdateSubmenu();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#select_priv_all').on('click', SelectAllPrivileges.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#insert_priv_all').on('click', SelectAllPrivileges.handleEvent);
@@ -526,7 +542,8 @@ window.AJAX.registerOnload('server/privileges.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(55));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(55); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=privileges.js.map

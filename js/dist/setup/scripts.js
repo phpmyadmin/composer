@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[58],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[48],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 64:
+/***/ 63:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+
 
 /**
  * Functions used in Setup configuration forms
@@ -120,7 +122,7 @@ function ajaxValidate(parent, id, values) {
         }
       }
 
-      window.Config.displayErrors(error);
+      _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.displayErrors(error);
     },
     complete: function () {
       $parent.removeData('ajax');
@@ -185,7 +187,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
      */
     Server: function (isKeyUp) {
       if (!isKeyUp) {
-        ajaxValidate(this, 'Server', window.Config.getAllValues());
+        ajaxValidate(this, 'Server', _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getAllValues());
       }
 
       return true;
@@ -216,10 +218,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
         return true;
       }
 
-      var prefix = window.Config.getIdPrefix(jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input'));
+      var prefix = _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getIdPrefix(jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input'));
 
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#' + prefix + 'pmadb').val() !== '') {
-        ajaxValidate(this, 'Server_pmadb', window.Config.getAllValues());
+        ajaxValidate(this, 'Server_pmadb', _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getAllValues());
       }
 
       return true;
@@ -265,7 +267,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(64));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(63); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=scripts.js.map

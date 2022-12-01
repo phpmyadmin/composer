@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[72],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[63],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,17 +8,19 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 78:
+/***/ 77:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+
 
 /**
  * JSON syntax highlighting transformation plugin
  */
 
-window.AJAX.registerOnload('transformations/json.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/json.js', function () {
   var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').find('code.json');
   $elm.each(function () {
     var $json = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -39,7 +41,8 @@ window.AJAX.registerOnload('transformations/json.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(78));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(77); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=json.js.map

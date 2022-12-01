@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[7],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[3],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,11 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 12:
+/***/ 15:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * @fileoverview   events handling from central columns page
@@ -31,7 +37,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  */
 
-window.AJAX.registerTeardown('database/central_columns.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/central_columns.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.edit').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('.edit_save_form').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('.edit_cancel_form').off('click');
@@ -47,7 +53,7 @@ window.AJAX.registerTeardown('database/central_columns.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('button[name=\'delete_central_columns\']').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('button[name=\'edit_central_columns\']').off('click');
 });
-window.AJAX.registerOnload('database/central_columns.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/central_columns.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer input,#tableslistcontainer select,#tableslistcontainer .default_value,#tableslistcontainer .open_enum_editor').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall').show();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall_box').show();
@@ -74,11 +80,11 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
     var multiDeleteColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
 
     if (multiDeleteColumns === '') {
-      Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
       return false;
     }
 
-    Functions.ajaxShowMessage();
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_col_name').val(multiDeleteColumns);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_form').trigger('submit');
   });
@@ -87,24 +93,24 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
     var editColumnList = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
 
     if (editColumnList === '') {
-      Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
       return false;
     }
 
-    var argsep = window.CommonParams.get('arg_separator');
-    var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(window.CommonParams.get('db')) + argsep + 'server=' + window.CommonParams.get('server');
-    Functions.ajaxShowMessage();
-    window.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', editColumnData, window.AJAX.responseHandler);
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', editColumnData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var argsep = window.CommonParams.get('arg_separator');
-    var multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(window.CommonParams.get('db')) + argsep + 'server=' + window.CommonParams.get('server');
-    Functions.ajaxShowMessage();
-    window.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', multiColumnEditData, window.AJAX.responseHandler);
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    var multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', multiColumnEditData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_new').find('td').each(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name') !== 'undefined') {
@@ -180,11 +186,11 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
       url: 'index.php?route=/database/central-columns',
-      data: datastring + window.CommonParams.get('arg_separator') + 'ajax_request=true',
+      data: datastring + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'ajax_request=true',
       dataType: 'json',
       success: function (data) {
         if (data.message !== '1') {
-          Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + data.message + '</div>', false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + data.message + '</div>', false);
         } else {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td input[id=checkbox_row_' + rownum + ']').val(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input[name=col_name]').val()).html();
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td[name=col_name] span').text(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input[name=col_name]').val()).html();
@@ -204,7 +210,7 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall').show();
       },
       error: function () {
-        Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>', false);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>', false);
       }
     });
   });
@@ -214,8 +220,8 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
     var href = 'index.php?route=/database/central-columns/populate';
     var params = {
       'ajax_request': true,
-      'server': window.CommonParams.get('server'),
-      'db': window.CommonParams.get('db'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'selectedTable': selectValue
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__('#column-select').html('<option value="">' + window.Messages.strLoading + '</option>');
@@ -264,7 +270,8 @@ window.AJAX.registerOnload('database/central_columns.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(12));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(15); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=central_columns.js.map

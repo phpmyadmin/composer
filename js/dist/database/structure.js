@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[15],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[11],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,21 +8,25 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 20:
+/***/ 23:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 
-/* global Navigation */
+
+
+
 
 /**
  * @fileoverview    functions used on the database structure page
  * @name            Database Structure
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @required    js/functions.js
  */
 
 var DatabaseStructure = {};
@@ -41,7 +45,7 @@ window.DatabaseStructure = DatabaseStructure;
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('database/structure.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/structure.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.truncate_table_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.drop_table_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#real_end_input');
@@ -148,7 +152,7 @@ DatabaseStructure.adjustTotals = function () {
   overheadSum = Math.round(overheadSum * 10) / 10; // Update summary with new data
 
   var $summary = jquery__WEBPACK_IMPORTED_MODULE_0__('#tbl_summary_row');
-  $summary.find('.tbl_num').text(Functions.sprintf(window.Messages.strNTables, tableSum));
+  $summary.find('.tbl_num').text(window.sprintf(window.Messages.strNTables, tableSum));
 
   if (rowSumApproximated) {
     $summary.find('.row_count_sum').text(strRowSum);
@@ -195,16 +199,16 @@ DatabaseStructure.fetchRealRowCount = function ($target) {
 
         DatabaseStructure.adjustTotals();
       } else {
-        Functions.ajaxShowMessage(window.Messages.strErrorRealRowCount);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorRealRowCount);
       }
     },
     error: function () {
-      Functions.ajaxShowMessage(window.Messages.strErrorRealRowCount);
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorRealRowCount);
     }
   });
 };
 
-window.AJAX.registerOnload('database/structure.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/structure.js', function () {
   /**
    * Event handler on select of "Make consistent with central list"
    */
@@ -218,11 +222,11 @@ window.AJAX.registerOnload('database/structure.js', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#makeConsistentWithCentralListModal').modal('show').on('shown.bs.modal', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#makeConsistentWithCentralListContinue').on('click', function () {
           const $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#tablesForm');
-          const argSep = window.CommonParams.get('arg_separator');
+          const argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
           const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
-          Functions.ajaxShowMessage();
-          window.AJAX.source = $form;
-          jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/structure/central-columns/make-consistent', data, window.AJAX.responseHandler);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+          jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/structure/central-columns/make-consistent', data, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
           jquery__WEBPACK_IMPORTED_MODULE_0__('#makeConsistentWithCentralListModal').modal('hide');
         });
       });
@@ -303,11 +307,11 @@ window.AJAX.registerOnload('database/structure.js', function () {
     }
 
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('form');
-    var argsep = window.CommonParams.get('arg_separator');
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-    Functions.ajaxShowMessage();
-    window.AJAX.source = $form;
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, data, window.AJAX.responseHandler);
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, data, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
   /**
    * Ajax Event handler for 'Truncate Table'
@@ -330,23 +334,23 @@ window.AJAX.registerOnload('database/structure.js', function () {
      * @var question    String containing the question to be asked for confirmation
      */
 
-    var question = window.Messages.strTruncateTableStrongWarning + ' ' + Functions.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + Functions.escapeHtml(currTableName) + '`') + Functions.getForeignKeyCheckboxLoader();
+    var question = window.Messages.strTruncateTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currTableName) + '`') + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getForeignKeyCheckboxLoader();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          Functions.ajaxShowMessage(data.message); // Adjust table statistics
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message); // Adjust table statistics
 
           var $tr = $thisAnchor.closest('tr');
           $tr.find('.tbl_rows').text('0');
           $tr.find('.tbl_size, .tbl_overhead').text('-');
           DatabaseStructure.adjustTotals();
         } else {
-          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
-    }, Functions.loadForeignKeyCheckbox);
+    }, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.loadForeignKeyCheckbox);
   }); // end of Truncate Table Ajax action
 
   /**
@@ -379,27 +383,27 @@ window.AJAX.registerOnload('database/structure.js', function () {
     var question;
 
     if (!isView) {
-      question = window.Messages.strDropTableStrongWarning + ' ' + Functions.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + Functions.escapeHtml(currTableName) + '`');
+      question = window.Messages.strDropTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currTableName) + '`');
     } else {
-      question = Functions.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + Functions.escapeHtml(currTableName) + '`');
+      question = window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currTableName) + '`');
     }
 
-    question += Functions.getForeignKeyCheckboxLoader();
+    question += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getForeignKeyCheckboxLoader();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          Functions.ajaxShowMessage(data.message);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
           $currRow.hide('medium').remove();
           DatabaseStructure.adjustTotals();
-          Navigation.reload();
-          Functions.ajaxRemoveMessage($msg);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
         } else {
-          Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
-    }, Functions.loadForeignKeyCheckbox);
+    }, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.loadForeignKeyCheckbox);
   }); // end of Drop Table Ajax action
   // Calculate Real End for InnoDB
 
@@ -423,7 +427,7 @@ window.AJAX.registerOnload('database/structure.js', function () {
   // Add tooltip to favorite icons.
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('.favorite_table_anchor').each(function () {
-    Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'a', jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('title'));
+    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'a', jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('title'));
   }); // Get real row count via Ajax.
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('a.real_row_count').on('click', function (event) {
@@ -442,7 +446,8 @@ window.AJAX.registerOnload('database/structure.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(20));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(23); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=structure.js.map

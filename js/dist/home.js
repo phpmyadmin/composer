@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[31],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[26],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -8,34 +8,36 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(37);
-/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38);
+/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39);
 
 
-window.AJAX.registerTeardown('home.js', () => {
+
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerTeardown('home.js', () => {
   const themesModal = document.getElementById('themesModal');
 
   if (themesModal) {
-    themesModal.removeEventListener('show.bs.modal', _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_1__.ThemesManager.handleEvent);
+    themesModal.removeEventListener('show.bs.modal', _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
   }
 });
-window.AJAX.registerOnload('home.js', () => {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerOnload('home.js', () => {
   const themesModal = document.getElementById('themesModal');
 
   if (themesModal) {
-    themesModal.addEventListener('show.bs.modal', _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_1__.ThemesManager.handleEvent);
+    themesModal.addEventListener('show.bs.modal', _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
   }
 
-  (0,_modules_git_info_js__WEBPACK_IMPORTED_MODULE_0__.showGitVersion)();
+  (0,_modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__.showGitVersion)();
 });
 
 /***/ }),
 
-/***/ 37:
+/***/ 38:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -43,6 +45,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "showGitVersion": function() { return /* binding */ showGitVersion; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+
+
 
 const GitInfo = {
   /**
@@ -90,7 +96,7 @@ const GitInfo = {
     if (data && data.version && data.date) {
       const current = GitInfo.parseVersionString(jquery__WEBPACK_IMPORTED_MODULE_0__('span.version').text());
       const latest = GitInfo.parseVersionString(data.version);
-      const url = 'index.php?route=/url&url=https://www.phpmyadmin.net/files/' + Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
+      const url = 'index.php?route=/url&url=https://www.phpmyadmin.net/files/' + _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
       let versionInformationMessage = document.createElement('span');
       versionInformationMessage.className = 'latest';
       const versionInformationMessageLink = document.createElement('a');
@@ -105,7 +111,7 @@ const GitInfo = {
       versionInformationMessage.appendChild(versionInformationMessageLink);
 
       if (latest > current) {
-        const message = Functions.sprintf(window.Messages.strNewerVersion, Functions.escapeHtml(data.version), Functions.escapeHtml(data.date));
+        const message = window.sprintf(window.Messages.strNewerVersion, _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(data.version), _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(data.date));
         let htmlClass = 'alert alert-primary';
 
         if (Math.floor(latest / 10000) === Math.floor(current / 10000)) {
@@ -153,7 +159,7 @@ const GitInfo = {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#is_git_revision').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#li_pma_version_git').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/git-revision', {
-      'server': window.CommonParams.get('server'),
+      'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
       'no_debug': true
     }, data => {
@@ -176,7 +182,7 @@ const GitInfo = {
       url: 'index.php?route=/version-check',
       method: 'POST',
       data: {
-        'server': window.CommonParams.get('server')
+        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
       },
       success: GitInfo.currentVersion
     });
@@ -194,7 +200,7 @@ function showGitVersion() {
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -204,7 +210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 /**
- * @implements EventListener
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
 
 const ThemesManager = {
@@ -220,7 +226,8 @@ const ThemesManager = {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(36));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(37); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=home.js.map

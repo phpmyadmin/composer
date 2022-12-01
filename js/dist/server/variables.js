@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[56],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[47],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -13,25 +13,29 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+
+
+
 
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication
  *
- * @requires    jQuery
  * @requires    jQueryUI
- * @requires    js/functions.js
  */
 
 /**
  * Unbind all event handlers before tearing down a page
  */
 
-window.AJAX.registerTeardown('server/variables.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/variables.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.editLink');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a img').remove();
 });
-window.AJAX.registerOnload('server/variables.js', function () {
+_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variables.js', function () {
   var $saveLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.saveLink');
   var $cancelLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.cancelLink');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#docImage').clone().css('display', 'inline-block'));
@@ -50,27 +54,27 @@ window.AJAX.registerOnload('server/variables.js', function () {
     var varName = $link.data('variable');
     var $mySaveLink = $saveLink.clone().css('display', 'inline-block');
     var $myCancelLink = $cancelLink.clone().css('display', 'inline-block');
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
     var $myEditLink = $cell.find('a.editLink');
     $cell.addClass('edit'); // variable is being edited
 
     $myEditLink.remove(); // remove edit link
 
     $mySaveLink.on('click', function () {
-      var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
         'ajax_request': true,
-        'server': window.CommonParams.get('server'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'varValue': $valueCell.find('input').val()
       }, function (data) {
         if (data.success) {
           $valueCell.html(data.variable).data('content', data.variable);
-          Functions.ajaxRemoveMessage($msgbox);
+          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
         } else {
           if (data.error === '') {
-            Functions.ajaxShowMessage(window.Messages.strRequestFailed, false);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRequestFailed, false);
           } else {
-            Functions.ajaxShowMessage(data.error, false);
+            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
           }
 
           $valueCell.html($valueCell.data('content'));
@@ -87,7 +91,7 @@ window.AJAX.registerOnload('server/variables.js', function () {
     });
     jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/server/variables/get/' + encodeURIComponent(varName), {
       'ajax_request': true,
-      'server': window.CommonParams.get('server')
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         var $links = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').append($myCancelLink).append('&nbsp;&nbsp;&nbsp;').append($mySaveLink);
@@ -109,10 +113,10 @@ window.AJAX.registerOnload('server/variables.js', function () {
             $myCancelLink.trigger('click');
           }
         });
-        Functions.ajaxRemoveMessage($msgbox);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
       } else {
         $cell.removeClass('edit').html($myEditLink);
-        Functions.ajaxShowMessage(data.error);
+        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error);
       }
     });
   }
@@ -123,7 +127,8 @@ window.AJAX.registerOnload('server/variables.js', function () {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ var __webpack_exports__ = (__webpack_exec__(62));
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(62); });
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
 //# sourceMappingURL=variables.js.map
