@@ -11271,6 +11271,7 @@ table.show_create td {
   bottom: 0;
   left: 0;
   z-index: 100;
+  pointer-events: none;
 }
 
 #pma_console {
@@ -11288,6 +11289,7 @@ table.show_create td {
   background: #ccc;
   border-top: solid 1px #aaa;
   cursor: n-resize;
+  pointer-events: auto;
 }
 #pma_console .toolbar span {
   vertical-align: middle;
@@ -11347,6 +11349,7 @@ table.show_create td {
   border-top: solid 1px #aaa;
   background: #fff;
   padding-top: 0.4em;
+  pointer-events: auto;
 }
 #pma_console .content.console_dark_theme {
   background: #000;
@@ -12247,7 +12250,7 @@ a.close_gis_editor {
 #pma_navigation_tree div.block b {
   display: block;
   height: 0.75em;
-  bottom: 0;
+  bottom: -0.5rem;
   left: 0.75em;
   border-left: 1px solid #666;
 }
@@ -12882,6 +12885,11 @@ a.active.trigger:hover {
   direction: ltr;
   border: 1px solid var(--bs-border-color-translucent);
   border-radius: 0.375rem;
+}
+
+.CodeMirror.cm-s-default div.CodeMirror-scroll {
+  margin-right: 0;
+  padding-bottom: 0;
 }
 
 #inline_editor_outer .CodeMirror {

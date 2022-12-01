@@ -11326,6 +11326,7 @@ table.show_create td {
   bottom: 0;
   left: 0;
   z-index: 100;
+  pointer-events: none;
 }
 
 textarea {
@@ -11347,6 +11348,7 @@ textarea {
   background: #f7f7f7;
   border-top: solid 1px #ccc;
   cursor: n-resize;
+  pointer-events: auto;
 }
 #pma_console .toolbar span {
   vertical-align: middle;
@@ -11394,6 +11396,7 @@ textarea {
   border-top: solid 1px #ccc;
   background: #fff;
   padding-top: 0.4em;
+  pointer-events: auto;
 }
 #pma_console .content.console_dark_theme {
   background: #000;
@@ -12270,7 +12273,7 @@ img.ic_b_home, img.ic_s_loggoff, img.ic_b_docs, img.ic_b_sqlhelp, img.ic_s_reloa
 #pma_navigation_tree div.block b {
   display: block;
   height: 0.75em;
-  bottom: 0;
+  bottom: -0.5rem;
   left: 0.75em;
   border-left: 1px solid #616161;
 }
@@ -12885,6 +12888,11 @@ a.active.trigger:hover {
   height: 20rem;
   border: 1px solid #ccc;
   direction: ltr;
+}
+
+.CodeMirror.cm-s-default div.CodeMirror-scroll {
+  margin-right: 0;
+  padding-bottom: 0;
 }
 
 #pma_console .CodeMirror {
