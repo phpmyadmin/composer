@@ -3,6 +3,8 @@ import { AJAX } from '../modules/ajax.js';
 import { Functions } from '../modules/functions.js';
 import { Navigation } from '../modules/navigation.js';
 import { CommonActions, CommonParams } from '../modules/common.js';
+import highlightSql from '../modules/sql-highlight.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
 
 /**
  * Unbind all event handlers before tearing down a page
@@ -40,7 +42,7 @@ var confirmAndPost = function (linkObject, action) {
     question += window.sprintf(window.Messages.strDoYouReally, linkObject.data('query'));
     question += Functions.getForeignKeyCheckboxLoader();
     linkObject.confirm(question, linkObject.attr('href'), function (url) {
-        Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+        ajaxShowMessage(window.Messages.strProcessingRequest);
 
         var params = Functions.getJsConfirmCommonParam(this, linkObject.getPostData());
 
@@ -52,12 +54,12 @@ var confirmAndPost = function (linkObject, action) {
                 $('.result_query').remove();
             }
             if (typeof data !== 'undefined' && data.success === true) {
-                Functions.ajaxShowMessage(data.message);
+                ajaxShowMessage(data.message);
                 $('<div class="sqlqueryresults ajax"></div>').prependTo('#page_content');
                 $('.sqlqueryresults').html(data.sql_query);
-                Functions.highlightSql($('#page_content'));
+                highlightSql($('#page_content'));
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         });
     }, Functions.loadForeignKeyCheckbox);
@@ -88,15 +90,15 @@ AJAX.registerOnload('table/operations.js', function () {
                         $form.find('input[name=\'new_name\']').val()
                     );
                     CommonActions.refreshMain(false, function () {
-                        Functions.ajaxShowMessage(data.message);
+                        ajaxShowMessage(data.message);
                     });
                 } else {
-                    Functions.ajaxShowMessage(data.message);
+                    ajaxShowMessage(data.message);
                 }
                 // Refresh navigation when the table is copied
                 Navigation.reload();
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         }); // end $.post()
     });// end of copyTable ajax submit
@@ -114,12 +116,12 @@ AJAX.registerOnload('table/operations.js', function () {
                 CommonParams.set('db', data.params.db);
                 CommonParams.set('table', data.params.table);
                 CommonActions.refreshMain('index.php?route=/table/sql', function () {
-                    Functions.ajaxShowMessage(data.message);
+                    ajaxShowMessage(data.message);
                 });
                 // Refresh navigation when the table is copied
                 Navigation.reload();
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         });
     });
@@ -164,12 +166,12 @@ AJAX.registerOnload('table/operations.js', function () {
                     CommonParams.set('table', data.params.table);
                     CommonActions.refreshMain(false, function () {
                         $('#page_content').html(data.message);
-                        Functions.highlightSql($('#page_content'));
+                        highlightSql($('#page_content'));
                     });
                     // Refresh navigation when the table is renamed
                     Navigation.reload();
                 } else {
-                    Functions.ajaxShowMessage(data.error, false);
+                    ajaxShowMessage(data.error, false);
                 }
             });
         }
@@ -202,21 +204,22 @@ AJAX.registerOnload('table/operations.js', function () {
             function scrollToTop () {
                 $('html, body').animate({ scrollTop: 0 });
             }
+
             var $tempDiv;
             if (typeof data !== 'undefined' && data.success === true && data.sql_query !== undefined) {
-                Functions.ajaxShowMessage(data.message);
+                ajaxShowMessage(data.message);
                 $('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
                 $('.sqlqueryresults').html(data.sql_query);
-                Functions.highlightSql($('#page_content'));
+                highlightSql($('#page_content'));
                 scrollToTop();
             } else if (typeof data !== 'undefined' && data.success === true) {
                 $tempDiv = $('<div id=\'temp_div\'></div>');
                 $tempDiv.html(data.message);
                 var $success = $tempDiv.find('.result_query .alert-success');
-                Functions.ajaxShowMessage($success);
+                ajaxShowMessage($success);
                 $('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
                 $('.sqlqueryresults').html(data.message);
-                Functions.highlightSql($('#page_content'));
+                highlightSql($('#page_content'));
                 $('.sqlqueryresults').children('fieldset,br').remove();
                 scrollToTop();
             } else {
@@ -230,7 +233,7 @@ AJAX.registerOnload('table/operations.js', function () {
                     $error = $tempDiv;
                 }
 
-                Functions.ajaxShowMessage($error, false);
+                ajaxShowMessage($error, false);
             }
         }); // end $.post()
     });// end of table maintenance ajax click
@@ -246,7 +249,7 @@ AJAX.registerOnload('table/operations.js', function () {
         function submitPartitionMaintenance () {
             var argsep = CommonParams.get('arg_separator');
             var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-            Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            ajaxShowMessage(window.Messages.strProcessingRequest);
             AJAX.source = $form;
             $.post($form.attr('action'), submitData, AJAX.responseHandler);
         }
@@ -275,24 +278,24 @@ AJAX.registerOnload('table/operations.js', function () {
         question += Functions.getForeignKeyCheckboxLoader();
 
         $(this).confirm(question, $(this).attr('href'), function (url) {
-            var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            var $msgbox = ajaxShowMessage(window.Messages.strProcessingRequest);
 
             var params = Functions.getJsConfirmCommonParam(this, $link.getPostData());
 
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
-                    Functions.ajaxRemoveMessage($msgbox);
+                    ajaxRemoveMessage($msgbox);
                     // Table deleted successfully, refresh both the frames
                     Navigation.reload();
                     CommonParams.set('table', '');
                     CommonActions.refreshMain(
                         CommonParams.get('opendb_url'),
                         function () {
-                            Functions.ajaxShowMessage(data.message);
+                            ajaxShowMessage(data.message);
                         }
                     );
                 } else {
-                    Functions.ajaxShowMessage(data.error, false);
+                    ajaxShowMessage(data.error, false);
                 }
             });
         }, Functions.loadForeignKeyCheckbox);
@@ -311,22 +314,22 @@ AJAX.registerOnload('table/operations.js', function () {
         );
 
         $(this).confirm(question, $(this).attr('href'), function (url) {
-            var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            var $msgbox = ajaxShowMessage(window.Messages.strProcessingRequest);
             var params = Functions.getJsConfirmCommonParam(this, $link.getPostData());
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
-                    Functions.ajaxRemoveMessage($msgbox);
+                    ajaxRemoveMessage($msgbox);
                     // Table deleted successfully, refresh both the frames
                     Navigation.reload();
                     CommonParams.set('table', '');
                     CommonActions.refreshMain(
                         CommonParams.get('opendb_url'),
                         function () {
-                            Functions.ajaxShowMessage(data.message);
+                            ajaxShowMessage(data.message);
                         }
                     );
                 } else {
-                    Functions.ajaxShowMessage(data.error, false);
+                    ajaxShowMessage(data.error, false);
                 }
             });
         });

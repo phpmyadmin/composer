@@ -58,6 +58,7 @@ import { Functions } from './modules/functions.js';
             self.resize();
         }, 4);
     }
+
     MenuResizer.prototype.resize = function () {
         var wmax = this.widthCalculator.call(this.$container);
         var windowWidth = $(window).width();
@@ -174,7 +175,7 @@ import { Functions } from './modules/functions.js';
     /**
      * Extend jQuery
      *
-     * @param {string} method
+     * @param {string|Function} method
      *
      * @return {any}
      */
@@ -184,7 +185,7 @@ import { Functions } from './modules/functions.js';
         } else if (typeof method === 'function') {
             return methods.init.apply(this, [method]);
         } else {
-            $.error('Method ' +  method + ' does not exist on jQuery.menuResizer');
+            $.error('Method ' + method + ' does not exist on jQuery.menuResizer');
         }
     };
 }($));

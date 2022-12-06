@@ -2,6 +2,7 @@ import $ from 'jquery';
 import { AJAX } from '../modules/ajax.js';
 import { Functions } from '../modules/functions.js';
 import { CommonActions, CommonParams } from '../modules/common.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
 
 /**
  * for table relation
@@ -53,13 +54,13 @@ TableRelation.getDropdownValues = function ($dropdown) {
     // if the changed dropdown is for foreign key constraints
     if ($dropdown.is('select[name^="destination_foreign"]')) {
         $databaseDd = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_db"]');
-        $tableDd    = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_table"]');
-        $columnDd   = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_column"]');
+        $tableDd = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_table"]');
+        $columnDd = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_column"]');
         foreign = '_foreign';
     } else { // internal relations
         $databaseDd = $dropdown.parent().find('select[name^="destination_db"]');
-        $tableDd    = $dropdown.parent().find('select[name^="destination_table"]');
-        $columnDd   = $dropdown.parent().find('select[name^="destination_column"]');
+        $tableDd = $dropdown.parent().find('select[name^="destination_table"]');
+        $columnDd = $dropdown.parent().find('select[name^="destination_column"]');
     }
 
     // if the changed dropdown is a database selector
@@ -80,7 +81,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
             return;
         }
     }
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = ajaxShowMessage();
     var $form = $dropdown.parents('form');
     var $db = $form.find('input[name="db"]').val();
     var $table = $form.find('input[name="table"]').val();
@@ -103,7 +104,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
         data: params,
         dataType: 'json',
         success: function (data) {
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             if (typeof data !== 'undefined' && data.success) {
                 // if the changed dropdown is a database selector
                 if (foreignTable === null) {
@@ -122,7 +123,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
                     TableRelation.setDropdownValues($columnDd.slice(1), data.columns);
                 }
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         }
     });
@@ -240,16 +241,16 @@ AJAX.registerOnload('table/relation.js', function () {
         var question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
 
         $anchor.confirm(question, $anchor.attr('href'), function (url) {
-            var $msg = Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
+            var $msg = ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
             var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
             $.post(url, params, function (data) {
                 if (data.success === true) {
-                    Functions.ajaxRemoveMessage($msg);
+                    ajaxRemoveMessage($msg);
                     CommonActions.refreshMain(false, function () {
                         // Do nothing
                     });
                 } else {
-                    Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+                    ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
                 }
             }); // end $.post()
         });

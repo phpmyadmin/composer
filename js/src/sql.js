@@ -4,6 +4,8 @@ import { Functions } from './modules/functions.js';
 import { Navigation } from './modules/navigation.js';
 import { CommonActions, CommonParams } from './modules/common.js';
 import { Config } from './modules/config.js';
+import highlightSql from './modules/sql-highlight.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from './modules/ajax-message.js';
 
 /**
  * @fileoverview    functions used wherever an sql query form is used
@@ -151,7 +153,7 @@ Sql.getFieldName = function ($tableResults, $thisField) {
     var thisFieldIndex = $thisField.index();
     // ltr or rtl direction does not impact how the DOM was generated
     // check if the action column in the left exist
-    var leftActionExist = !$tableResults.find('th').first().hasClass('draggable');
+    var leftActionExist = ! $tableResults.find('th').first().hasClass('draggable');
     // number of column span for checkbox and Actions
     var leftActionSkip = leftActionExist ? $tableResults.find('th').first().attr('colspan') - 1 : 0;
 
@@ -310,7 +312,7 @@ const insertQuery = function (queryType) {
         } else if (window.Cookies.get(key, { path: CommonParams.get('rootPath') })) {
             setQuery(window.Cookies.get(key, { path: CommonParams.get('rootPath') }));
         } else {
-            Functions.ajaxShowMessage(window.Messages.strNoAutoSavedQuery);
+            ajaxShowMessage(window.Messages.strNoAutoSavedQuery);
         }
         return;
     }
@@ -489,10 +491,10 @@ AJAX.registerOnload('sql.js', function () {
     // Delete row from SQL results
     $(document).on('click', 'a.delete_row.ajax', function (e) {
         e.preventDefault();
-        var question =  window.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
+        var question = window.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
         var $link = $(this);
         $link.confirm(question, $link.attr('href'), function (url) {
-            Functions.ajaxShowMessage();
+            ajaxShowMessage();
             var argsep = CommonParams.get('arg_separator');
             var params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
             var postData = $link.getPostData();
@@ -501,10 +503,10 @@ AJAX.registerOnload('sql.js', function () {
             }
             $.post(url, params, function (data) {
                 if (data.success) {
-                    Functions.ajaxShowMessage(data.message);
+                    ajaxShowMessage(data.message);
                     $link.closest('tr').remove();
                 } else {
-                    Functions.ajaxShowMessage(data.error, false);
+                    ajaxShowMessage(data.error, false);
                 }
             });
         });
@@ -513,13 +515,13 @@ AJAX.registerOnload('sql.js', function () {
     // Ajaxification for 'Bookmark this SQL query'
     $(document).on('submit', '.bookmarkQueryForm', function (e) {
         e.preventDefault();
-        Functions.ajaxShowMessage();
+        ajaxShowMessage();
         var argsep = CommonParams.get('arg_separator');
         $.post($(this).attr('action'), 'ajax_request=1' + argsep + $(this).serialize(), function (data) {
             if (data.success) {
-                Functions.ajaxShowMessage(data.message);
+                ajaxShowMessage(data.message);
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         });
     });
@@ -642,8 +644,8 @@ AJAX.registerOnload('sql.js', function () {
         $('<button class="btn btn-secondary" id="togglequerybox"></button>')
             .html(window.Messages.strHideQueryBox)
             .appendTo('#sqlqueryform')
-        // initially hidden because at this point, nothing else
-        // appears under the link
+            // initially hidden because at this point, nothing else
+            // appears under the link
             .hide();
 
         // Attach the toggling of the query box visibility to a click
@@ -679,7 +681,7 @@ AJAX.registerOnload('sql.js', function () {
         // id_bookmark selector to avoid misinterpretation in
         // /import about what needs to be done
         $form.find('select[name=id_bookmark]').val('');
-        var isShowQuery =  $('input[name="show_query"]').is(':checked');
+        var isShowQuery = $('input[name="show_query"]').is(':checked');
         if (isShowQuery) {
             window.localStorage.showThisQuery = '1';
             var db = $('input[name="db"]').val();
@@ -742,7 +744,7 @@ AJAX.registerOnload('sql.js', function () {
             // same action as the Go button in that section.
             $('#button_submit_bookmark').trigger('click');
             return false;
-        } else  {
+        } else {
             return true;
         }
     });
@@ -750,7 +752,7 @@ AJAX.registerOnload('sql.js', function () {
     /**
      * Ajax Event handler for 'SQL Query Submit'
      *
-     * @see         Functions.ajaxShowMessage()
+     * @see         ajaxShowMessage()
      * @memberOf    jQuery
      * @name        sqlqueryform_submit
      */
@@ -768,7 +770,7 @@ AJAX.registerOnload('sql.js', function () {
         // remove any div containing a previous error message
         $('.alert-danger').remove();
 
-        var $msgbox = Functions.ajaxShowMessage();
+        var $msgbox = ajaxShowMessage();
         var $sqlqueryresultsouter = $('#sqlqueryresultsouter');
 
         Functions.prepareForAjaxRequest($form);
@@ -800,11 +802,11 @@ AJAX.registerOnload('sql.js', function () {
                 $sqlqueryresultsouter
                     .show()
                     .html(data.message);
-                Functions.highlightSql($sqlqueryresultsouter);
+                highlightSql($sqlqueryresultsouter);
 
                 if (data.menu) {
                     history.replaceState({
-                        menu : data.menu
+                        menu: data.menu
                     },
                     null
                     );
@@ -841,7 +843,7 @@ AJAX.registerOnload('sql.js', function () {
                         $('#sqlqueryresultsouter')
                             .show()
                             .html(data.message);
-                        Functions.highlightSql($('#sqlqueryresultsouter'));
+                        highlightSql($('#sqlqueryresultsouter'));
                     });
                 }
 
@@ -862,7 +864,7 @@ AJAX.registerOnload('sql.js', function () {
                     .html(data.error);
                 $('html, body').animate({ scrollTop: $(document).height() }, 200);
             }
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
         }); // end $.post()
     }); // end SQL Query submit
 
@@ -876,15 +878,15 @@ AJAX.registerOnload('sql.js', function () {
 
         var $form = $(this);
 
-        var $msgbox = Functions.ajaxShowMessage();
+        var $msgbox = ajaxShowMessage();
         var argsep = CommonParams.get('arg_separator');
         $.post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             var $sqlqueryresults = $form.parents('.sqlqueryresults');
             $sqlqueryresults
                 .html(data.message)
                 .trigger('makegrid');
-            Functions.highlightSql($sqlqueryresults);
+            highlightSql($sqlqueryresults);
         }); // end $.post()
     }); // end displayOptionsForm handler
 
@@ -922,7 +924,7 @@ AJAX.registerOnload('sql.js', function () {
         Sql.submitShowAllForm = function () {
             var argsep = CommonParams.get('arg_separator');
             var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-            Functions.ajaxShowMessage();
+            ajaxShowMessage();
             AJAX.source = $form;
             $.post($form.attr('action'), submitData, AJAX.responseHandler);
         };
@@ -961,7 +963,7 @@ AJAX.registerOnload('sql.js', function () {
             return false;
         }
 
-        var $msgbox = Functions.ajaxShowMessage();
+        var $msgbox = ajaxShowMessage();
         $.ajax({
             type: 'POST',
             url: 'index.php?route=/import/simulate-dml',
@@ -973,7 +975,7 @@ AJAX.registerOnload('sql.js', function () {
                 'sql_delimiter': delimiter
             },
             success: function (response) {
-                Functions.ajaxRemoveMessage($msgbox);
+                ajaxRemoveMessage($msgbox);
                 if (response.success) {
                     var dialogContent = '<div class="preview_sql">';
                     if (response.sql_data) {
@@ -997,14 +999,14 @@ AJAX.registerOnload('sql.js', function () {
                     modal.modal('show');
                     modal.find('.modal-body').first().html($dialogContent);
                     modal.on('shown.bs.modal', function () {
-                        Functions.highlightSql(modal);
+                        highlightSql(modal);
                     });
                 } else {
-                    Functions.ajaxShowMessage(response.error);
+                    ajaxShowMessage(response.error);
                 }
             },
             error: function () {
-                Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+                ajaxShowMessage(window.Messages.strErrorProcessingRequest);
             }
         });
     });
@@ -1019,7 +1021,7 @@ AJAX.registerOnload('sql.js', function () {
         var $form = $button.closest('form');
         var argsep = CommonParams.get('arg_separator');
         var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep;
-        Functions.ajaxShowMessage();
+        ajaxShowMessage();
         AJAX.source = $form;
 
         var url;
@@ -1212,9 +1214,9 @@ Sql.checkSavedQuery = function () {
 
     if (Config.isStorageSupported('localStorage') &&
         typeof window.localStorage.getItem(key) === 'string') {
-        Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
+        ajaxShowMessage(window.Messages.strPreviousSaveQuery);
     } else if (window.Cookies.get(key, { path: CommonParams.get('rootPath') })) {
-        Functions.ajaxShowMessage(window.Messages.strPreviousSaveQuery);
+        ajaxShowMessage(window.Messages.strPreviousSaveQuery);
     }
 };
 
@@ -1260,7 +1262,7 @@ AJAX.registerOnload('sql.js', function () {
 Sql.makeProfilingChart = function () {
     if ($('#profilingchart').length === 0 ||
         $('#profilingchart').html().length !== 0 ||
-        !$.jqplot || !$.jqplot.Highlighter || !$.jqplot.PieRenderer
+        ! $.jqplot || ! $.jqplot.Highlighter || ! $.jqplot.PieRenderer
     ) {
         return;
     }
@@ -1281,7 +1283,7 @@ Sql.makeProfilingChart = function () {
  * initialize profiling data tables
  */
 Sql.initProfilingTables = function () {
-    if (!$.tablesorter) {
+    if (! $.tablesorter) {
         return;
     }
     // Added to allow two direction sorting

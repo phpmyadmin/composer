@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { AJAX } from './modules/ajax.js';
-import { Functions } from './modules/functions.js';
 import { CommonParams } from './modules/common.js';
+import { ajaxShowMessage } from './modules/ajax-message.js';
 
 /**
  * @fileoverview    functions used in GIS data editor
@@ -126,6 +126,7 @@ function loadJSAndGISEditor (value, field, type, inputName) {
 
     window.gisEditorLoaded = true;
 }
+
 window.loadJSAndGISEditor = loadJSAndGISEditor;
 
 /**
@@ -139,11 +140,11 @@ window.loadJSAndGISEditor = loadJSAndGISEditor;
 function loadGISEditor (value, field, type, inputName) {
     var $gisEditor = $('#gis_editor');
     $.post('index.php?route=/gis-data-editor', {
-        'field' : field,
-        'value' : value,
-        'type' : type,
-        'input_name' : inputName,
-        'get_gis_editor' : true,
+        'field': field,
+        'value': value,
+        'type': type,
+        'input_name': inputName,
+        'get_gis_editor': true,
         'ajax_request': true,
         'server': CommonParams.get('server')
     }, function (data) {
@@ -152,10 +153,11 @@ function loadGISEditor (value, field, type, inputName) {
             initGISEditorVisualization();
             prepareJSVersion();
         } else {
-            Functions.ajaxShowMessage(data.error, false);
+            ajaxShowMessage(data.error, false);
         }
     }, 'json');
 }
+
 window.loadGISEditor = loadGISEditor;
 
 /**
@@ -174,7 +176,7 @@ function openGISEditor () {
     var $background = $('#popup_background');
 
     $gisEditor.css({ 'top': popupOffsetTop, 'left': popupOffsetLeft, 'width': popupWidth, 'height': popupHeight });
-    $background.css({ 'opacity' : '0.7' });
+    $background.css({ 'opacity': '0.7' });
 
     $gisEditor.append(
         '<div id="gis_data_editor">' +
@@ -187,6 +189,7 @@ function openGISEditor () {
     $background.fadeIn('fast');
     $gisEditor.fadeIn('fast');
 }
+
 window.openGISEditor = openGISEditor;
 
 /**
@@ -202,7 +205,7 @@ function insertDataAndClose () {
         if (typeof data !== 'undefined' && data.success === true) {
             $('input[name=\'' + inputName + '\']').val(data.result);
         } else {
-            Functions.ajaxShowMessage(data.error, false);
+            ajaxShowMessage(data.error, false);
         }
     }, 'json');
     closeGISEditor();
@@ -256,7 +259,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
                 eval(data.openLayers);
                 initGISEditorVisualization();
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         }, 'json');
     });
@@ -275,7 +278,7 @@ AJAX.registerOnload('gis_data_editor.js', function () {
                 initGISEditorVisualization();
                 prepareJSVersion();
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         }, 'json');
     });

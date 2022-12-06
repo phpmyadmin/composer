@@ -2,13 +2,15 @@ import $ from 'jquery';
 import { AJAX } from './ajax.js';
 import { Navigation } from './navigation.js';
 import { CommonActions, CommonParams } from './common.js';
-import { mysqlDocKeyword, mysqlDocBuiltin } from './doc-links.js';
 import { Indexes } from './indexes.js';
 import { Config } from './config.js';
+import tooltip from './tooltip.js';
+import highlightSql from './sql-highlight.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
 
 /* global ChartType, ColumnType, DataTable, JQPlotChartFactory */ // js/chart.js
 /* global DatabaseStructure */ // js/database/structure.js
-/* global firstDayOfCalendar, maxInputVars, mysqlDocTemplate, themeImagePath */ // templates/javascript/variables.twig
+/* global firstDayOfCalendar, maxInputVars, themeImagePath */ // templates/javascript/variables.twig
 
 /**
  * General functions, usually for data manipulation pages.
@@ -16,12 +18,6 @@ import { Config } from './config.js';
  */
 const Functions = {};
 window.Functions = Functions;
-
-/**
- * Number of AJAX messages shown since page load.
- * @type {number}
- */
-let ajaxMessageCount = 0;
 
 /**
  * Object containing CodeMirror editor of the query editor in SQL tab.
@@ -103,13 +99,6 @@ Functions.addNoCacheToAjaxRequests = () => function (options, originalOptions) {
             'token': CommonParams.get('token')
         });
     }
-};
-
-/**
- * @return {number}
- */
-Functions.getAjaxMessageCount = function () {
-    return ajaxMessageCount;
 };
 
 /**
@@ -197,7 +186,7 @@ Functions.addDatepicker = function ($thisElement, type, options) {
     if (type === 'time') {
         $thisElement.timepicker($.extend(defaultOptions, options));
         // Add a tip regarding entering MySQL allowed-values for TIME data-type
-        Functions.tooltip($thisElement, 'input', window.Messages.strMysqlAllowedValuesTipTime);
+        tooltip($thisElement, 'input', window.Messages.strMysqlAllowedValuesTipTime);
     } else {
         $thisElement.datetimepicker($.extend(defaultOptions, options));
     }
@@ -241,9 +230,9 @@ Functions.addDateTimePicker = function () {
             // Add a tip regarding entering MySQL allowed-values
             // for TIME and DATE data-type
             if ($(this).hasClass('timefield')) {
-                Functions.tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
+                tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
             } else if ($(this).hasClass('datefield')) {
-                Functions.tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
+                tooltip($(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
             }
         });
     }
@@ -361,33 +350,6 @@ Functions.clearSelection = function () {
             sel.removeAllRanges();
         }
     }
-};
-
-/**
- * Create a jQuery UI tooltip
- *
- * @param $elements     jQuery object representing the elements
- * @param item          the item
- *                      (see https://api.jqueryui.com/tooltip/#option-items)
- * @param myContent     content of the tooltip
- * @param additionalOptions to override the default options
- *
- */
-Functions.tooltip = function ($elements, item, myContent, additionalOptions) {
-    if ($('#no_hint').length > 0) {
-        return;
-    }
-
-    var defaultOptions = {
-        content: myContent,
-        items: item,
-        tooltipClass: 'tooltip',
-        track: true,
-        show: false,
-        hide: false
-    };
-
-    $elements.uiTooltip($.extend(true, defaultOptions, additionalOptions));
 };
 
 /**
@@ -1404,108 +1366,6 @@ Functions.catchKeypressesFromSqlInlineEdit = function (event) {
 };
 
 /**
- * Adds doc link to single highlighted SQL element
- *
- * @param $elm
- * @param params
- */
-Functions.documentationAdd = function ($elm, params) {
-    if (typeof mysqlDocTemplate === 'undefined') {
-        return;
-    }
-
-    var url = window.sprintf(
-        decodeURIComponent(mysqlDocTemplate),
-        params[0]
-    );
-    if (params.length > 1) {
-        // The # needs to be escaped to be part of the destination URL
-        url += encodeURIComponent('#') + params[1];
-    }
-    var content = $elm.text();
-    $elm.text('');
-    $elm.append('<a target="mysql_doc" class="cm-sql-doc" href="' + url + '">' + content + '</a>');
-};
-
-/**
- * Generates doc links for keywords inside highlighted SQL
- *
- * @param idx
- * @param elm
- */
-Functions.documentationKeyword = function (idx, elm) {
-    var $elm = $(elm);
-    /* Skip already processed ones */
-    if ($elm.find('a').length > 0) {
-        return;
-    }
-    var keyword = $elm.text().toUpperCase();
-    var $next = $elm.next('.cm-keyword');
-    if ($next) {
-        var nextKeyword = $next.text().toUpperCase();
-        var full = keyword + ' ' + nextKeyword;
-
-        var $next2 = $next.next('.cm-keyword');
-        if ($next2) {
-            var next2Keyword = $next2.text().toUpperCase();
-            var full2 = full + ' ' + next2Keyword;
-            if (full2 in mysqlDocKeyword) {
-                Functions.documentationAdd($elm, mysqlDocKeyword[full2]);
-                Functions.documentationAdd($next, mysqlDocKeyword[full2]);
-                Functions.documentationAdd($next2, mysqlDocKeyword[full2]);
-                return;
-            }
-        }
-        if (full in mysqlDocKeyword) {
-            Functions.documentationAdd($elm, mysqlDocKeyword[full]);
-            Functions.documentationAdd($next, mysqlDocKeyword[full]);
-            return;
-        }
-    }
-    if (keyword in mysqlDocKeyword) {
-        Functions.documentationAdd($elm, mysqlDocKeyword[keyword]);
-    }
-};
-
-/**
- * Generates doc links for builtins inside highlighted SQL
- *
- * @param idx
- * @param elm
- */
-Functions.documentationBuiltin = function (idx, elm) {
-    var $elm = $(elm);
-    var builtin = $elm.text().toUpperCase();
-    if (builtin in mysqlDocBuiltin) {
-        Functions.documentationAdd($elm, mysqlDocBuiltin[builtin]);
-    }
-};
-
-/**
- * Higlights SQL using CodeMirror.
- *
- * @param $base
- */
-Functions.highlightSql = function ($base) {
-    var $elm = $base.find('code.sql');
-    $elm.each(function () {
-        var $sql = $(this);
-        var $pre = $sql.find('pre');
-        /* We only care about visible elements to avoid double processing */
-        if ($pre.is(':visible')) {
-            var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
-            $sql.append($highlight);
-            if (typeof window.CodeMirror !== 'undefined') {
-                window.CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
-                $pre.hide();
-                $highlight.find('.cm-keyword').each(Functions.documentationKeyword);
-                $highlight.find('.cm-builtin').each(Functions.documentationBuiltin);
-            }
-        }
-    });
-};
-
-/**
  * Updates an element containing code.
  *
  * @param {JQuery} $base     base element which contains the raw and the
@@ -1557,159 +1417,6 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
 };
 
 /**
- * Show a message on the top of the page for an Ajax request
- *
- * Sample usage:
- *
- * 1) var $msg = Functions.ajaxShowMessage();
- * This will show a message that reads "Loading...". Such a message will not
- * disappear automatically and cannot be dismissed by the user. To remove this
- * message either the Functions.ajaxRemoveMessage($msg) function must be called or
- * another message must be show with Functions.ajaxShowMessage() function.
- *
- * 2) var $msg = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
- * This is a special case. The behaviour is same as above,
- * just with a different message
- *
- * 3) var $msg = Functions.ajaxShowMessage('The operation was successful');
- * This will show a message that will disappear automatically and it can also
- * be dismissed by the user.
- *
- * 4) var $msg = Functions.ajaxShowMessage('Some error', false);
- * This will show a message that will not disappear automatically, but it
- * can be dismissed by the user after they have finished reading it.
- *
- * @param {string|null} message string containing the message to be shown.
- *                              optional, defaults to 'Loading...'
- * @param {any} timeout         number of milliseconds for the message to be visible
- *                              optional, defaults to 5000. If set to 'false', the
- *                              notification will never disappear
- * @param {string|null} type    string to dictate the type of message shown.
- *                              optional, defaults to normal notification.
- *                              If set to 'error', the notification will show message
- *                              with red background.
- *                              If set to 'success', the notification will show with
- *                              a green background.
- * @return {JQuery<Element>}   jQuery Element that holds the message div
- *                              this object can be passed to Functions.ajaxRemoveMessage()
- *                              to remove the notification
- */
-Functions.ajaxShowMessage = function (message = null, timeout = null, type = null) {
-    var msg = message;
-    var newTimeOut = timeout;
-    /**
-     * @var self_closing Whether the notification will automatically disappear
-     */
-    var selfClosing = true;
-    /**
-     * @var dismissable Whether the user will be able to remove
-     *                  the notification by clicking on it
-     */
-    var dismissable = true;
-    // Handle the case when a empty data.message is passed.
-    // We don't want the empty message
-    if (msg === '') {
-        return true;
-    } else if (! msg) {
-        // If the message is undefined, show the default
-        msg = window.Messages.strLoading;
-        dismissable = false;
-        selfClosing = false;
-    } else if (msg === window.Messages.strProcessingRequest) {
-        // This is another case where the message should not disappear
-        dismissable = false;
-        selfClosing = false;
-    }
-    // Figure out whether (or after how long) to remove the notification
-    if (newTimeOut === undefined || newTimeOut === null) {
-        newTimeOut = 5000;
-    } else if (newTimeOut === false) {
-        selfClosing = false;
-    }
-    // Determine type of message, add styling as required
-    if (type === 'error') {
-        msg = '<div class="alert alert-danger" role="alert">' + msg + '</div>';
-    } else if (type === 'success') {
-        msg = '<div class="alert alert-success" role="alert">' + msg + '</div>';
-    }
-    // Create a parent element for the AJAX messages, if necessary
-    if ($('#loading_parent').length === 0) {
-        $('<div id="loading_parent"></div>')
-            .prependTo('#page_content');
-    }
-    // Update message count to create distinct message elements every time
-    ajaxMessageCount++;
-    // Remove all old messages, if any
-    $('span.ajax_notification[id^=ajax_message_num]').remove();
-    /**
-     * @var $retval    a jQuery object containing the reference
-     *                 to the created AJAX message
-     */
-    var $retval = $(
-        '<span class="ajax_notification" id="ajax_message_num_' +
-        ajaxMessageCount +
-        '"></span>'
-    )
-        .hide()
-        .appendTo('#loading_parent')
-        .html(msg)
-        .show();
-    // If the notification is self-closing we should create a callback to remove it
-    if (selfClosing) {
-        $retval
-            .delay(newTimeOut)
-            .fadeOut('medium', function () {
-                if ($(this).is(':data(tooltip)')) {
-                    $(this).uiTooltip('destroy');
-                }
-                // Remove the notification
-                $(this).remove();
-            });
-    }
-    // If the notification is dismissable we need to add the relevant class to it
-    // and add a tooltip so that the users know that it can be removed
-    if (dismissable) {
-        $retval.addClass('dismissable').css('cursor', 'pointer');
-        /**
-         * Add a tooltip to the notification to let the user know that they
-         * can dismiss the ajax notification by clicking on it.
-         */
-        Functions.tooltip(
-            $retval,
-            'span',
-            window.Messages.strDismiss
-        );
-    }
-    // Hide spinner if this is not a loading message
-    if (msg !== window.Messages.strLoading) {
-        $retval.css('background-image', 'none');
-    }
-    Functions.highlightSql($retval);
-
-    return $retval;
-};
-
-/**
- * Removes the message shown for an Ajax operation when it's completed
- *
- * @param {JQuery} $thisMessageBox Element that holds the notification
- *
- * @return {void}
- */
-Functions.ajaxRemoveMessage = function ($thisMessageBox) {
-    if ($thisMessageBox !== undefined && $thisMessageBox instanceof $) {
-        $thisMessageBox
-            .stop(true, true)
-            .fadeOut('medium');
-        if ($thisMessageBox.is(':data(tooltip)')) {
-            $thisMessageBox.uiTooltip('destroy');
-        } else {
-            $thisMessageBox.remove();
-        }
-    }
-};
-
-/**
  * Requests SQL for previewing before executing.
  *
  * @param {JQuery<HTMLElement>} $form Form containing query data
@@ -1723,26 +1430,26 @@ Functions.previewSql = function ($form) {
         sep + 'do_save_data=1' +
         sep + 'preview_sql=1' +
         sep + 'ajax_request=1';
-    var $messageBox = Functions.ajaxShowMessage();
+    var $messageBox = ajaxShowMessage();
     $.ajax({
         type: 'POST',
         url: formUrl,
         data: formData,
         success: function (response) {
-            Functions.ajaxRemoveMessage($messageBox);
+            ajaxRemoveMessage($messageBox);
             if (response.success) {
                 $('#previewSqlModal').modal('show');
                 $('#previewSqlModal').find('.modal-body').first().html(response.sql_data);
                 $('#previewSqlModalLabel').first().html(window.Messages.strPreviewSQL);
                 $('#previewSqlModal').on('shown.bs.modal', function () {
-                    Functions.highlightSql($('#previewSqlModal'));
+                    highlightSql($('#previewSqlModal'));
                 });
             } else {
-                Functions.ajaxShowMessage(response.message);
+                ajaxShowMessage(response.message);
             }
         },
         error: function () {
-            Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+            ajaxShowMessage(window.Messages.strErrorProcessingRequest);
         }
     });
 };
@@ -1767,7 +1474,7 @@ Functions.confirmPreviewSql = function (sqlData, url, callback) {
     $('#previewSqlConfirmModalLabel').first().html(window.Messages.strPreviewSQL);
     $('#previewSqlConfirmCode').first().text(sqlData);
     $('#previewSqlConfirmModal').on('shown.bs.modal', function () {
-        Functions.highlightSql($('#previewSqlConfirmModal'));
+        highlightSql($('#previewSqlConfirmModal'));
     });
     $('#previewSQLConfirmOkButton').on('click', function () {
         callback(url);
@@ -1804,7 +1511,7 @@ Functions.checkReservedWordColumns = function ($form) {
 Functions.dismissNotifications = () => function () {
     /**
      * Allows the user to dismiss a notification
-     * created with Functions.ajaxShowMessage()
+     * created with ajaxShowMessage()
      */
     var holdStarter = null;
     $(document).on('mousedown', 'span.ajax_notification.dismissable', function () {
@@ -1816,7 +1523,7 @@ Functions.dismissNotifications = () => function () {
     $(document).on('mouseup', 'span.ajax_notification.dismissable', function (event) {
         if (holdStarter && event.which === 1) {
             clearTimeout(holdStarter);
-            Functions.ajaxRemoveMessage($(this));
+            ajaxRemoveMessage($(this));
         }
     });
     /**
@@ -2272,14 +1979,14 @@ Functions.onloadCreateTableEvents = function () {
         if (Functions.checkTableEditForm($form[0], $form.find('input[name=orig_num_fields]').val())) {
             Functions.prepareForAjaxRequest($form);
             if (Functions.checkReservedWordColumns($form)) {
-                Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+                ajaxShowMessage(window.Messages.strProcessingRequest);
                 // User wants to submit the form
                 $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
                     if (typeof data !== 'undefined' && data.success === true) {
                         $('#properties_message')
                             .removeClass('alert-danger')
                             .html('');
-                        Functions.ajaxShowMessage(data.message);
+                        ajaxShowMessage(data.message);
                         // Only if the create table dialog (distinct panel) exists
                         var $createTableDialog = $('#create_table_dialog');
                         if ($createTableDialog.length > 0) {
@@ -2340,7 +2047,7 @@ Functions.onloadCreateTableEvents = function () {
                             argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
                         $.get(tableStructureUrl, params12, AJAX.responseHandler);
                     } else {
-                        Functions.ajaxShowMessage(
+                        ajaxShowMessage(
                             '<div class="alert alert-danger" role="alert">' + data.error + '</div>',
                             false
                         );
@@ -2362,7 +2069,7 @@ Functions.onloadCreateTableEvents = function () {
          */
         var $form = $('form.create_table_form.ajax');
 
-        var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+        var $msgbox = ajaxShowMessage(window.Messages.strProcessingRequest);
         Functions.prepareForAjaxRequest($form);
 
         // User wants to add more fields to the table
@@ -2370,12 +2077,12 @@ Functions.onloadCreateTableEvents = function () {
             if (typeof data !== 'undefined' && data.success) {
                 var $pageContent = $('#page_content');
                 $pageContent.html(data.message);
-                Functions.highlightSql($pageContent);
+                highlightSql($pageContent);
                 Functions.verifyColumnsProperties();
                 Functions.hideShowConnection($('.create_table_form select[name=tbl_storage_engine]'));
-                Functions.ajaxRemoveMessage($msgbox);
+                ajaxRemoveMessage($msgbox);
             } else {
-                Functions.ajaxShowMessage(data.error);
+                ajaxShowMessage(data.error);
             }
         }); // end $.post()
     }
@@ -2544,7 +2251,7 @@ Functions.onloadChangePasswordEvents = function () {
     $(document).on('click', '#change_password_anchor.ajax', function (event) {
         event.preventDefault();
 
-        var $msgbox = Functions.ajaxShowMessage();
+        var $msgbox = ajaxShowMessage();
 
         $('#changePasswordGoButton').on('click', function () {
             event.preventDefault();
@@ -2565,28 +2272,28 @@ Functions.onloadChangePasswordEvents = function () {
              */
             var thisValue = $(this).val();
 
-            var $msgbox = Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            var $msgbox = ajaxShowMessage(window.Messages.strProcessingRequest);
             $theForm.append('<input type="hidden" name="ajax_request" value="true">');
 
             $.post($theForm.attr('action'), $theForm.serialize() + CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
                 if (typeof data === 'undefined' || data.success !== true) {
-                    Functions.ajaxShowMessage(data.error, false);
+                    ajaxShowMessage(data.error, false);
                     return;
                 }
 
                 var $pageContent = $('#page_content');
                 $pageContent.prepend(data.message);
-                Functions.highlightSql($pageContent);
+                highlightSql($pageContent);
                 $('#change_password_dialog').hide().remove();
                 $('#edit_user_dialog').dialog('close').remove();
-                Functions.ajaxRemoveMessage($msgbox);
+                ajaxRemoveMessage($msgbox);
             }); // end $.post()
             $('#changePasswordModal').modal('hide');
         });
 
         $.get($(this).attr('href'), { 'ajax_request': true }, function (data) {
             if (typeof data === 'undefined' || ! data.success) {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
                 return;
             }
 
@@ -2602,7 +2309,7 @@ Functions.onloadChangePasswordEvents = function () {
                 .find('table.table').unwrap().addClass('m-3')
                 .find('input#text_pma_pw').trigger('focus');
             $('#fieldset_change_password_footer').hide();
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             Functions.displayPasswordGenerateButton();
             $('#change_password_form').on('submit', function (e) {
                 e.preventDefault();
@@ -2719,7 +2426,8 @@ Functions.autoPopulate = function (inputId, offset) {
         }
         $input4.val(colDefault);
         $input4.siblings('.default_value').hide();
-    } if (colDefault === '') {
+    }
+    if (colDefault === '') {
         $input4.val('NONE');
         $input4.siblings('.default_value').hide();
     } else {
@@ -3147,7 +2855,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
                 }
 
                 modalBody.innerHTML = response.sql_data;
-                Functions.highlightSql($('#indexDialogPreviewModal'));
+                highlightSql($('#indexDialogPreviewModal'));
             },
             error: () => {
                 modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
@@ -3166,7 +2874,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
          * @var the_form object referring to the export form
          */
         var $form = $('#index_frm');
-        Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+        ajaxShowMessage(window.Messages.strProcessingRequest);
         Functions.prepareForAjaxRequest($form);
         // User wants to submit the form
         $.post($form.attr('action'), $form.serialize() + CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
@@ -3175,8 +2883,8 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
                 $sqlqueryresults.remove();
             }
             if (typeof data !== 'undefined' && data.success === true) {
-                Functions.ajaxShowMessage(data.message);
-                Functions.highlightSql($('.result_query'));
+                ajaxShowMessage(data.message);
+                highlightSql($('.result_query'));
                 $('.result_query .alert').remove();
                 /* Reload the field form*/
                 $('#table_index').remove();
@@ -3204,18 +2912,18 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
                 if (callbackFailure) {
                     callbackFailure();
                 }
-                Functions.ajaxShowMessage($error, false);
+                ajaxShowMessage($error, false);
             }
         }); // end $.post()
     });
 
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = ajaxShowMessage();
     $.post(routeUrl, url, function (data) {
         if (typeof data !== 'undefined' && data.success === false) {
             // in the case of an error, show the error message returned.
-            Functions.ajaxShowMessage(data.error, false);
+            ajaxShowMessage(data.error, false);
         } else {
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             // Show dialog if the request was successful
             modal.modal('show');
             modal.find('.modal-body').first().html(data.message);
@@ -3292,11 +3000,7 @@ Functions.showHints = function ($div) {
         $newDiv = $('body');
     }
     $newDiv.find('.pma_hint').each(function () {
-        Functions.tooltip(
-            $(this).children('img'),
-            'img',
-            $(this).children('span').html()
-        );
+        tooltip($(this).children('img'), 'img', $(this).children('span').html());
     });
 };
 
@@ -3399,7 +3103,7 @@ Functions.toggleButton = function ($obj) {
         } else {
             $(this).addClass('isActive');
         }
-        var $msg = Functions.ajaxShowMessage();
+        var $msg = ajaxShowMessage();
         var $container = $(this);
         var callback = $('span.callback', this).text();
         var operator;
@@ -3430,7 +3134,7 @@ Functions.toggleButton = function ($obj) {
         var parts = url.split('?');
         $.post(parts[0], parts[1] + '&ajax_request=true', function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
-                Functions.ajaxRemoveMessage($msg);
+                ajaxRemoveMessage($msg);
                 $container
                     .removeClass(removeClass)
                     .addClass(addClass)
@@ -3440,7 +3144,7 @@ Functions.toggleButton = function ($obj) {
                 // eslint-disable-next-line no-eval
                 eval(callback);
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
                 $container.removeClass('isActive');
             }
         });
@@ -3574,7 +3278,7 @@ Functions.slidingMessage = function (msg, $object) {
                 $obj
                     .append('<div>' + msg + '</div>');
                 // highlight any sql before taking height;
-                Functions.highlightSql($obj);
+                highlightSql($obj);
                 $obj.find('div')
                     .first()
                     .hide();
@@ -3592,7 +3296,7 @@ Functions.slidingMessage = function (msg, $object) {
         $obj.width('100%')
             .html('<div>' + msg + '</div>');
         // highlight any sql before taking height;
-        Functions.highlightSql($obj);
+        highlightSql($obj);
         var h = $obj
             .find('div')
             .first()
@@ -3639,7 +3343,7 @@ Functions.onloadCodeMirrorEditor = () => {
             $elm.trigger('focus').on('blur', Functions.updateQueryParameters);
         }
     }
-    Functions.highlightSql($('body'));
+    highlightSql($('body'));
 };
 
 /**
@@ -3779,26 +3483,26 @@ Functions.onloadCreateView = function () {
 };
 
 Functions.createViewModal = function ($this) {
-    var $msg = Functions.ajaxShowMessage();
+    var $msg = ajaxShowMessage();
     var sep = CommonParams.get('arg_separator');
     var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
     params += sep + 'ajax_dialog=1';
     $.post($this.attr('href'), params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-            Functions.ajaxRemoveMessage($msg);
+            ajaxRemoveMessage($msg);
             $('#createViewModalGoButton').on('click', function () {
                 if (typeof window.CodeMirror !== 'undefined') {
                     window.codeMirrorEditor.save();
                 }
-                $msg = Functions.ajaxShowMessage();
+                $msg = ajaxShowMessage();
                 $.post('index.php?route=/view/create', $('#createViewModal').find('form').serialize(), function (data) {
-                    Functions.ajaxRemoveMessage($msg);
+                    ajaxRemoveMessage($msg);
                     if (typeof data !== 'undefined' && data.success === true) {
                         $('#createViewModal').modal('hide');
                         $('.result_query').html(data.message);
                         Navigation.reload();
                     } else {
-                        Functions.ajaxShowMessage(data.error);
+                        ajaxShowMessage(data.error);
                     }
                 });
             });
@@ -3811,7 +3515,7 @@ Functions.createViewModal = function ($this) {
             });
             $('#createViewModal').modal('show');
         } else {
-            Functions.ajaxShowMessage(data.error);
+            ajaxShowMessage(data.error);
         }
     });
 };
@@ -4056,7 +3760,7 @@ Functions.checkNumberOfFields = function () {
         var nbInputs = $(this).find(':input').length;
         if (nbInputs > maxInputVars) {
             var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
-            Functions.ajaxShowMessage(warning);
+            ajaxShowMessage(warning);
             return false;
         }
         return true;
@@ -4290,7 +3994,7 @@ Functions.configSet = function (key, value) {
             if (data.success !== true) {
                 // Try to find a message to display
                 if (data.error || data.message || false) {
-                    Functions.ajaxShowMessage(data.error || data.message);
+                    ajaxShowMessage(data.error || data.message);
                 }
             }
         }
@@ -4334,7 +4038,7 @@ Functions.configGet = function (key, cached, successCallback, failureCallback) {
             if (data.success !== true) {
                 // Try to find a message to display
                 if (data.error || data.message || false) {
-                    Functions.ajaxShowMessage(data.error || data.message);
+                    ajaxShowMessage(data.error || data.message);
                 }
 
                 // Call the callback if it is defined

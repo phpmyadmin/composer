@@ -2,6 +2,8 @@ import $ from 'jquery';
 import { AJAX } from '../../modules/ajax.js';
 import { Functions } from '../../modules/functions.js';
 import { CommonParams } from '../../modules/common.js';
+import highlightSql from '../../modules/sql-highlight.js';
+import { ajaxShowMessage } from '../../modules/ajax-message.js';
 
 /**
  * Server Status Processes
@@ -71,10 +73,10 @@ var processList = {
                     }
                 });
                 // Show process killed message
-                Functions.ajaxShowMessage(data.message, false);
+                ajaxShowMessage(data.message, false);
             } else {
                 // Show process error message
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
         }, 'json');
     },
@@ -101,7 +103,7 @@ var processList = {
                     if (data.hasOwnProperty('success') && data.success) {
                         var $newTable = $(data.message);
                         $('#tableprocesslist').html($newTable.html());
-                        Functions.highlightSql($('#tableprocesslist'));
+                        highlightSql($('#tableprocesslist'));
                     }
                     processList.refreshTimeout = setTimeout(
                         processList.refresh,
@@ -177,7 +179,7 @@ AJAX.registerOnload('server/status/processes.js', function () {
     // Bind event handler for toggling refresh of process list
     $('a#toggleRefresh').on('click', function (event) {
         event.preventDefault();
-        processList.autoRefresh = !processList.autoRefresh;
+        processList.autoRefresh = ! processList.autoRefresh;
         processList.setRefreshLabel();
     });
     // Bind event handler for change in refresh rate

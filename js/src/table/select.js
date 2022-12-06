@@ -2,6 +2,8 @@ import $ from 'jquery';
 import { AJAX } from '../modules/ajax.js';
 import { Functions } from '../modules/functions.js';
 import { CommonParams } from '../modules/common.js';
+import highlightSql from '../modules/sql-highlight.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
 
 /**
  * @fileoverview JavaScript functions used on /table/search
@@ -111,7 +113,7 @@ AJAX.registerOnload('table/select.js', function () {
 
         // empty previous search results while we are waiting for new results
         $('#sqlqueryresultsouter').empty();
-        var $msgbox = Functions.ajaxShowMessage(window.Messages.strSearching, false);
+        var $msgbox = ajaxShowMessage(window.Messages.strSearching, false);
 
         Functions.prepareForAjaxRequest($searchForm);
 
@@ -157,7 +159,7 @@ AJAX.registerOnload('table/select.js', function () {
         }
 
         $.post($searchForm.attr('action'), values, function (data) {
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             if (typeof data !== 'undefined' && data.success === true) {
                 if (typeof data.sql_query !== 'undefined') { // zero rows
                     $('#sqlqueryresultsouter').html(data.sql_query);
@@ -179,7 +181,7 @@ AJAX.registerOnload('table/select.js', function () {
             } else {
                 $('#sqlqueryresultsouter').html(data.error);
             }
-            Functions.highlightSql($('#sqlqueryresultsouter'));
+            highlightSql($('#sqlqueryresultsouter'));
         }); // end $.post()
     });
 
@@ -296,7 +298,7 @@ AJAX.registerOnload('table/select.js', function () {
         var operator = $(this).val();
 
         if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
-            var $msgbox = Functions.ajaxShowMessage();
+            var $msgbox = ajaxShowMessage();
             $.ajax({
                 url: 'index.php?route=/table/search',
                 type: 'POST',
@@ -309,17 +311,17 @@ AJAX.registerOnload('table/select.js', function () {
                     'range_search': 1
                 },
                 success: function (response) {
-                    Functions.ajaxRemoveMessage($msgbox);
+                    ajaxRemoveMessage($msgbox);
                     if (response.success) {
                         // Get the column min value.
                         var min = response.column_data.min
                             ? '(' + window.Messages.strColumnMin +
-                                ' ' + response.column_data.min + ')'
+                            ' ' + response.column_data.min + ')'
                             : '';
                         // Get the column max value.
                         var max = response.column_data.max
                             ? '(' + window.Messages.strColumnMax +
-                                ' ' + response.column_data.max + ')'
+                            ' ' + response.column_data.max + ')'
                             : '';
                         $('#rangeSearchModal').modal('show');
                         $('#rangeSearchLegend').first().html(operator);
@@ -331,7 +333,7 @@ AJAX.registerOnload('table/select.js', function () {
                         // Add datepicker wherever required.
                         Functions.addDatepicker($('#min_value'), dataType);
                         Functions.addDatepicker($('#max_value'), dataType);
-                        $('#rangeSearchModalGo').on('click',  function () {
+                        $('#rangeSearchModalGo').on('click', function () {
                             var minValue = $('#min_value').val();
                             var maxValue = $('#max_value').val();
                             var finalValue = '';
@@ -373,11 +375,11 @@ AJAX.registerOnload('table/select.js', function () {
                             $('#rangeSearchModal').modal('hide');
                         });
                     } else {
-                        Functions.ajaxShowMessage(response.error);
+                        ajaxShowMessage(response.error);
                     }
                 },
                 error: function () {
-                    Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+                    ajaxShowMessage(window.Messages.strErrorProcessingRequest);
                 }
             });
         }

@@ -2,6 +2,8 @@ import $ from 'jquery';
 import { Functions } from './functions.js';
 import { CommonParams } from './common.js';
 import { Config } from './config.js';
+import tooltip from './tooltip.js';
+import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
 
 /**
  * function used in or for navigation panel
@@ -133,7 +135,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
     var params = null;
 
     if (isNode) {
-        if (!$expandElem.hasClass('expander')) {
+        if (! $expandElem.hasClass('expander')) {
             return;
         }
         $destination = $expandElem.closest('li');
@@ -180,7 +182,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
                     .css({
                         border: '0px',
                         margin: '0em',
-                        padding : '0em'
+                        padding: '0em'
                     })
                     .slideDown('slow');
             }
@@ -205,7 +207,7 @@ Navigation.loadChildNodes = function (isNode, $expandElem, callback) {
             $throbber.hide();
             var $icon = $expandElem.find('img.ic_b_plus');
             $icon.show();
-            Functions.ajaxShowMessage(data.error, false);
+            ajaxShowMessage(data.error, false);
         }
     });
 };
@@ -466,7 +468,7 @@ Navigation.onload = () => function () {
                 if (typeof data !== 'undefined' && data.success === true) {
                     Navigation.reload();
                 } else {
-                    Functions.ajaxShowMessage(data.error);
+                    ajaxShowMessage(data.error);
                 }
             }
         });
@@ -475,17 +477,17 @@ Navigation.onload = () => function () {
     /** Display a dialog to choose hidden navigation items to show */
     $(document).on('click', 'a.showUnhide.ajax', function (event) {
         event.preventDefault();
-        var $msg = Functions.ajaxShowMessage();
+        var $msg = ajaxShowMessage();
         var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
         params += argSep + 'ajax_request=true';
         $.post($(this).attr('href'), params, function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
-                Functions.ajaxRemoveMessage($msg);
+                ajaxRemoveMessage($msg);
                 $('#unhideNavItemModal').modal('show');
                 $('#unhideNavItemModal').find('.modal-body').first().html(data.message);
             } else {
-                Functions.ajaxShowMessage(data.error);
+                ajaxShowMessage(data.error);
             }
         });
     });
@@ -496,7 +498,7 @@ Navigation.onload = () => function () {
         var $tr = $(this).parents('tr');
         var $hiddenTableCount = $tr.parents('tbody').children().length;
         var $hideDialogBox = $tr.closest('div.ui-dialog');
-        var $msg = Functions.ajaxShowMessage();
+        var $msg = ajaxShowMessage();
         var argSep = CommonParams.get('arg_separator');
         var params = $(this).getPostData();
         params += argSep + 'ajax_request=true' + argSep + 'server=' + CommonParams.get('server');
@@ -505,7 +507,7 @@ Navigation.onload = () => function () {
             data: params,
             url: $(this).attr('href'),
             success: function (data) {
-                Functions.ajaxRemoveMessage($msg);
+                ajaxRemoveMessage($msg);
                 if (typeof data !== 'undefined' && data.success === true) {
                     $tr.remove();
                     if ($hiddenTableCount === 1) {
@@ -513,7 +515,7 @@ Navigation.onload = () => function () {
                     }
                     Navigation.reload();
                 } else {
-                    Functions.ajaxShowMessage(data.error);
+                    ajaxShowMessage(data.error);
                 }
             }
         });
@@ -546,17 +548,13 @@ Navigation.onload = () => function () {
                 if (data.changes) {
                     $('#pma_favorite_list').html(data.list);
                     $('#' + anchorId).parent().html(data.anchor);
-                    Functions.tooltip(
-                        $('#' + anchorId),
-                        'a',
-                        $('#' + anchorId).attr('title')
-                    );
+                    tooltip($('#' + anchorId), 'a', $('#' + anchorId).attr('title'));
                     // Update localStorage.
                     if (Config.isStorageSupported('localStorage')) {
                         window.localStorage.favoriteTables = data.favoriteTables;
                     }
                 } else {
-                    Functions.ajaxShowMessage(data.message);
+                    ajaxShowMessage(data.message);
                 }
             }
         });
@@ -631,7 +629,7 @@ Navigation.expandTreeNode = function ($expandElem, callback) {
                 }
                 Navigation.showFullName($destination);
             } else {
-                Functions.ajaxShowMessage(data.error, false);
+                ajaxShowMessage(data.error, false);
             }
             $icon.show();
             $throbber.remove();
@@ -682,7 +680,7 @@ Navigation.showCurrent = function () {
     var $dbItem;
     if (db) {
         $dbItem = findLoadedItem(
-            $('#pma_navigation_tree').find('> div'), db, 'database', !table
+            $('#pma_navigation_tree').find('> div'), db, 'database', ! table
         );
         if ($('#navi_db_select').length &&
             $('option:selected', $('#navi_db_select')).length
@@ -715,13 +713,13 @@ Navigation.showCurrent = function () {
 
         $('#pma_navigation_tree_content > ul > li.database').children('a').each(function () {
             var name = $(this).text();
-            if (!dbItemName && name.trim()) { // if the name is not empty, it is the desired element
+            if (! dbItemName && name.trim()) { // if the name is not empty, it is the desired element
                 dbItemName = name;
             }
         });
 
         $dbItem = findLoadedItem(
-            $('#pma_navigation_tree').find('> div'), dbItemName, 'database', !table
+            $('#pma_navigation_tree').find('> div'), dbItemName, 'database', ! table
         );
 
         fullExpand(table, $dbItem);
@@ -777,7 +775,7 @@ Navigation.showCurrent = function () {
             } else { // this is a real navigation item
                 // name and class matches
                 if (((clazz && $li.is('.' + clazz)) || ! clazz) &&
-                        $li.children('a').text() === name) {
+                    $li.children('a').text() === name) {
                     if (doSelect) {
                         $li.addClass('selected');
                     }
@@ -815,7 +813,7 @@ Navigation.showCurrent = function () {
             );
             // Show directly
             showTableOrView($whichItem, $relatedContainer.children('div').first().children('a.expander'));
-        // else if item not there, try loading once
+            // else if item not there, try loading once
         } else {
             var $subContainers = $dbItem.find('.subContainer');
             // If there are subContainers i.e. tableContainer or viewContainer
@@ -830,7 +828,7 @@ Navigation.showCurrent = function () {
                         loadAndShowTableOrView($expander, $containers[index], itemName);
                     }
                 });
-            // else if no subContainers
+                // else if no subContainers
             } else {
                 $expander = $dbItem
                     .children('div').first()
@@ -896,7 +894,7 @@ Navigation.disableSettings = function () {
 Navigation.ensureSettings = function (selflink) {
     $('#pma_navigation_settings_icon').removeClass('hide');
 
-    if (!$('#pma_navigation_settings').length) {
+    if (! $('#pma_navigation_settings').length) {
         var params = {
             getNaviSettings: true,
             server: CommonParams.get('server'),
@@ -908,7 +906,7 @@ Navigation.ensureSettings = function (selflink) {
                 Config.setupValidation();
                 $('#pma_navigation_settings').find('form').attr('action', selflink);
             } else {
-                Functions.ajaxShowMessage(data.error);
+                ajaxShowMessage(data.error);
             }
         });
     } else {
@@ -953,7 +951,7 @@ Navigation.reload = function (callback, paths) {
                 }
                 Navigation.treeStateUpdate();
             } else {
-                Functions.ajaxShowMessage(data.error);
+                ajaxShowMessage(data.error);
             }
         });
     }
@@ -962,7 +960,7 @@ Navigation.reload = function (callback, paths) {
 Navigation.selectCurrentDatabase = function () {
     var $naviDbSelect = $('#navi_db_select');
 
-    if (!$naviDbSelect.length) {
+    if (! $naviDbSelect.length) {
         return false;
     }
 
@@ -985,7 +983,7 @@ Navigation.selectCurrentDatabase = function () {
  * @return {void}
  */
 Navigation.treePagination = function ($this) {
-    var $msgbox = Functions.ajaxShowMessage();
+    var $msgbox = ajaxShowMessage();
     var isDbSelector = $this.closest('div.pageselector').is('.dbselector');
     var url = 'index.php?route=/navigation';
     var params = 'ajax_request=true';
@@ -1008,7 +1006,7 @@ Navigation.treePagination = function ($this) {
     }
     $.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success) {
-            Functions.ajaxRemoveMessage($msgbox);
+            ajaxRemoveMessage($msgbox);
             var val;
             if (isDbSelector) {
                 val = Navigation.FastFilter.getSearchClause();
@@ -1038,7 +1036,7 @@ Navigation.treePagination = function ($this) {
                 );
             }
         } else {
-            Functions.ajaxShowMessage(data.error);
+            ajaxShowMessage(data.error);
             Functions.handleRedirectAndReload(data);
         }
         Navigation.treeStateUpdate();
@@ -1623,7 +1621,7 @@ Navigation.showFullName = function ($containerELem) {
         }
         var $parent = $this.parent();
         if (($parent.offset().left + $parent.outerWidth())
-           < (thisOffset.left + $this.outerWidth())) {
+            < (thisOffset.left + $this.outerWidth())) {
             var $fullNameLayer = $('#full_name_layer');
             if ($fullNameLayer.length === 0) {
                 $('body').append('<div id="full_name_layer" class="hide"></div>');
