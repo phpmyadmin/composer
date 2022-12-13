@@ -1418,7 +1418,7 @@ Functions.updateQueryParameters = function () {
 
 Functions.getForeignKeyCheckboxLoader = function () {
   var html = '';
-  html += '<div>';
+  html += '<div class="mt-1 mb-2">';
   html += '<div class="load-default-fk-check-value">';
   html += Functions.getImage('ajax_clock_small');
   html += '</div>';
@@ -3329,6 +3329,9 @@ AJAX.registerOnload('functions.js', function () {
 
     var buttonOptions = {};
     var $centralColumnsDialog = $(centralColumnsDialog).dialog({
+      classes: {
+        'ui-dialog-titlebar-close': 'btn-close'
+      },
       minWidth: width,
       maxHeight: 450,
       modal: true,
@@ -3499,12 +3502,9 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
   });
   indexDialogPreviewModal.addEventListener('hidden.bs.modal', () => {
     indexDialogPreviewModal.querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + Messages.strLoading + '</span></div>';
-  });
-  /**
-   * @var button_options Object that stores the options
-   *                     passed to jQueryUI dialog
-   */
+  }); // Remove previous click listeners from other modal openings (issue: #17892)
 
+  $('#indexDialogModalGoButton').off('click');
   $('#indexDialogModalGoButton').on('click', function () {
     /**
      * @var the_form object referring to the export form

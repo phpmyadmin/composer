@@ -622,6 +622,13 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
      * @param cell <td> element to be edited
      */
     showEditCell: function (cell) {
+      // destroy the date picker instance left if any, see: #17703
+      var $datePickerInstance = $(g.cEdit).find('.hasDatepicker');
+
+      if ($datePickerInstance.length > 0) {
+        $datePickerInstance.datepicker('destroy');
+      }
+
       if ($(cell).is('.grid_edit') && !g.colRsz && !g.colReorder) {
         if (!g.isCellEditActive) {
           var $cell = $(cell);
@@ -782,7 +789,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
       if ($dp.length > 0) {
         // eslint-disable-next-line no-underscore-dangle
         $(document).on('mousedown', $.datepicker._checkExternalClick);
-        $dp.datepicker('destroy'); // change the cursor in edit box back to normal
+        $dp.datepicker('refresh'); // change the cursor in edit box back to normal
         // (the cursor become a hand pointer when we add datepicker)
 
         $(g.cEdit).find('.edit_box').css('cursor', 'inherit');

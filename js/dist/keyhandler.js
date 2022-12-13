@@ -75,10 +75,8 @@ function onKeyDownArrowsHandler(event) {
 
     default:
       return;
-  } // eslint-disable-next-line compat/compat
+  }
 
-
-  var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox/') > -1;
   var id = 'field_' + y + '_' + x;
   var nO = document.getElementById(id);
 
@@ -90,44 +88,9 @@ function onKeyDownArrowsHandler(event) {
 
   if (!nO) {
     return;
-  } // for firefox select tag
-
-
-  var lvalue = o.selectedIndex;
-  var nOvalue = nO.selectedIndex;
-  nO.focus();
-
-  if (isFirefox) {
-    var ffcheck = 0;
-    var ffversion;
-
-    for (ffversion = 3; ffversion < 25; ffversion++) {
-      var isFirefoxV24 = navigator.userAgent.toLowerCase().indexOf('firefox/' + ffversion) > -1;
-
-      if (isFirefoxV24) {
-        ffcheck = 1;
-        break;
-      }
-    }
-
-    if (ffcheck === 1) {
-      if (e.which === 38 || e.which === 37) {
-        nOvalue++;
-      } else if (e.which === 40 || e.which === 39) {
-        nOvalue--;
-      }
-
-      nO.selectedIndex = nOvalue;
-    } else {
-      if (e.which === 38 || e.which === 37) {
-        lvalue++;
-      } else if (e.which === 40 || e.which === 39) {
-        lvalue--;
-      }
-
-      o.selectedIndex = lvalue;
-    }
   }
+
+  nO.focus();
 
   if (nO.tagName !== 'SELECT') {
     nO.select();
