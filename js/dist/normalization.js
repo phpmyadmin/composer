@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 51:
+/***/ 62:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+
+
 
 
 
@@ -128,7 +132,7 @@ function goToFinish1NF() {
   }
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent legend').html(window.Messages.strEndStep);
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent h4').html('<h3>' + window.sprintf(window.Messages.strFinishMsg, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'))) + '</h3>');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent h4').html('<h3>' + window.sprintf(window.Messages.strFinishMsg, (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'))) + '</h3>');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent p').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #extra').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #newCols').html('');
@@ -150,7 +154,7 @@ function goToStep4() {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.tblFooters').html('');
 
     for (var pk in primaryKey) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#extra input[value=\'' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeJsString(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#extra input[value=\'' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeJsString)(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
     }
   });
 }
@@ -173,7 +177,7 @@ function goToStep3() {
     primaryKey = JSON.parse(data.primary_key);
 
     for (var pk in primaryKey) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#extra input[value=\'' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeJsString(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#extra input[value=\'' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeJsString)(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
     }
   });
 }
@@ -246,12 +250,12 @@ function goTo2NFFinish(pd) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #extra').html('');
           jquery__WEBPACK_IMPORTED_MODULE_0__('.tblFooters').html('');
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.extra, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.extra, false);
         }
 
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_reload').trigger('click');
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }
   });
@@ -289,12 +293,12 @@ function goTo3NFFinish(newTables) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#mainContent #extra').html('');
           jquery__WEBPACK_IMPORTED_MODULE_0__('.tblFooters').html('');
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.extra, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.extra, false);
         }
 
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_reload').trigger('click');
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }
   });
@@ -313,7 +317,7 @@ function goTo2NFStep2(pd, primaryKey) {
   for (var dependson in pd) {
     if (dependson !== primaryKey) {
       pdFound = true;
-      extra += '<p class="d-block m-1">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(dependson) + ' -> ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(pd[dependson].toString()) + '</p>';
+      extra += '<p class="d-block m-1">' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(dependson) + ' -> ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(pd[dependson].toString()) + '</p>';
     }
   }
 
@@ -338,7 +342,7 @@ function goTo2NFStep2(pd, primaryKey) {
         if (data.success === true) {
           extra += data.message;
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
         }
       }
     });
@@ -365,7 +369,7 @@ function goTo3NFStep2(pd, tablesTds) {
 
       if (dependson !== '' && dependson !== table) {
         pdFound = true;
-        extra += '<p class="d-block m-1">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(dependson) + ' -> ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(pd[dependson].toString()) + '</p>';
+        extra += '<p class="d-block m-1">' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(dependson) + ' -> ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(pd[dependson].toString()) + '</p>';
       }
     }
   }
@@ -393,7 +397,7 @@ function goTo3NFStep2(pd, tablesTds) {
         if (data.success === true) {
           extra += dataParsed.html;
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
         }
       }
     });
@@ -506,10 +510,10 @@ function moveRepeatingGroup(repeatingCols) {
           goToStep3();
         }
 
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.message, false);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_reload').trigger('click');
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }
   });
@@ -601,13 +605,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
             jquery__WEBPACK_IMPORTED_MODULE_0__('#newCols').html('');
             jquery__WEBPACK_IMPORTED_MODULE_0__('.tblFooters').html('');
           } else {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
           }
 
           selectedCol = '';
         });
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     });
   });
@@ -638,7 +642,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
           jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().html('');
         }).appendTo('.tblFooters');
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     });
     return false;
@@ -658,7 +662,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
           goToStep3();
         }, 2000);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     });
   });
@@ -679,7 +683,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
       if (data.success === true) {
         goToStep2('goToFinish1NF');
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     });
   });
@@ -692,8 +696,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     if (repeatingCols !== '') {
       var newColName = jquery__WEBPACK_IMPORTED_MODULE_0__('#extra input[type=checkbox]:checked').first().val();
       repeatingCols = repeatingCols.slice(0, -2);
-      var confirmStr = window.sprintf(window.Messages.strMoveRepeatingGroup, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(repeatingCols), _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
-      confirmStr += '<input type="text" name="repeatGroupTable" placeholder="' + window.Messages.strNewTablePlaceholder + '">' + '( ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(primaryKey.toString()) + ', <input type="text" name="repeatGroupColumn" placeholder="' + window.Messages.strNewColumnPlaceholder + '" value="' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(newColName) + '">)' + '</ol>';
+      var confirmStr = window.sprintf(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
+      confirmStr += '<input type="text" name="repeatGroupTable" placeholder="' + window.Messages.strNewTablePlaceholder + '">' + '( ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(primaryKey.toString()) + ', <input type="text" name="repeatGroupColumn" placeholder="' + window.Messages.strNewColumnPlaceholder + '" value="' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(newColName) + '">)' + '</ol>';
       jquery__WEBPACK_IMPORTED_MODULE_0__('#newCols').html(confirmStr);
       jquery__WEBPACK_IMPORTED_MODULE_0__('<input>').attr({
         type: 'submit',
@@ -788,7 +792,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(51); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(62); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

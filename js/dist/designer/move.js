@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 29:
+/***/ 40:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+
+
 
 
 
@@ -688,7 +692,7 @@ DesignerMove.addOtherDbTables = function () {
     var $table = jquery__WEBPACK_IMPORTED_MODULE_0__('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
 
     if ($table.length !== 0) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
       return;
     }
 
@@ -805,13 +809,13 @@ DesignerMove.save2 = function (callback) {
     var poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
     poststr += argsep + 'server=' + window.server + argsep + 'db=' + encodeURIComponent(window.db) + argsep + 'selected_page=' + window.selectedPage;
     poststr += DesignerMove.getUrlPos();
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', poststr, function (data) {
       if (data.success === false) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strModificationSaved);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strModificationSaved);
         DesignerMove.markSaved();
 
         if (typeof callback !== 'undefined') {
@@ -836,20 +840,20 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
   var name = $form.find('input[name="selected_value"]').val().trim();
 
   if (name === '') {
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strEnterValidPageName, false);
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEnterValidPageName, false);
     return;
   }
 
   modal.modal('hide');
 
   if (window.designerTablesEnabled) {
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
       if (data.success === false) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
         DesignerMove.markSaved();
 
         if (data.id) {
@@ -903,7 +907,7 @@ DesignerMove.save3 = function (callback) {
 
 DesignerMove.editPages = function () {
   DesignerMove.promptToSaveCurrentPage(function () {
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
       'ajax_request': true,
       'server': window.server,
@@ -911,9 +915,9 @@ DesignerMove.editPages = function () {
       'dialog': 'edit'
     }, function (data) {
       if (data.success === false) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
 
         if (!window.designerTablesEnabled) {
           DesignerPage.createPageList(window.db, function (options) {
@@ -927,7 +931,7 @@ DesignerMove.editPages = function () {
           var selected = $form.find('select[name="selected_page"]').val();
 
           if (selected === '0') {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSelectPage, 2000);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
           }
 
@@ -943,7 +947,7 @@ DesignerMove.editPages = function () {
 
 
 DesignerMove.deletePages = function () {
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': window.server,
@@ -951,9 +955,9 @@ DesignerMove.deletePages = function () {
     'dialog': 'delete'
   }, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
 
       if (!window.designerTablesEnabled) {
         DesignerPage.createPageList(window.db, function (options) {
@@ -967,39 +971,39 @@ DesignerMove.deletePages = function () {
         var selected = $form.find('select[name="selected_page"]').val();
 
         if (selected === '0') {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSelectPage, 2000);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
           return;
         }
 
-        var $messageBox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+        var $messageBox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         var deletingCurrentPage = parseInt(selected) === window.selectedPage;
         _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
 
         if (window.designerTablesEnabled) {
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
             if (data.success === false) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
             } else {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($messageBox);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($messageBox);
 
               if (deletingCurrentPage) {
                 DesignerMove.loadPage(null);
               } else {
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSuccessfulPageDelete);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSuccessfulPageDelete);
               }
             }
           }); // end $.post()
         } else {
           DesignerPage.deletePage(selected, function (success) {
             if (!success) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('Error', false);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Error', false);
             } else {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($messageBox);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($messageBox);
 
               if (deletingCurrentPage) {
                 DesignerMove.loadPage(null);
               } else {
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSuccessfulPageDelete);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSuccessfulPageDelete);
               }
             }
           });
@@ -1015,7 +1019,7 @@ DesignerMove.deletePages = function () {
 
 
 DesignerMove.saveAs = function () {
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': window.server,
@@ -1023,9 +1027,9 @@ DesignerMove.saveAs = function () {
     'dialog': 'save_as'
   }, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
 
       if (!window.designerTablesEnabled) {
         DesignerPage.createPageList(window.db, function (options) {
@@ -1043,29 +1047,29 @@ DesignerMove.saveAs = function () {
 
         if (choice === 'same') {
           if ($selectedPage.val() === '0') {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSelectPage, 2000);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
           }
 
           name = $selectedPage.find('option:selected').text();
         } else if (choice === 'new') {
           if (selectedValue === '') {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strEnterValidPageName, 2000);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEnterValidPageName, 2000);
             return;
           }
 
           name = selectedValue;
         }
 
-        var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+        var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
 
         if (window.designerTablesEnabled) {
           _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
             if (data.success === false) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
             } else {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
 
               if (data.id) {
@@ -1079,7 +1083,7 @@ DesignerMove.saveAs = function () {
           if (choice === 'same') {
             var selectedPageId = $selectedPage.find('option:selected').val();
             DesignerPage.saveToSelectedPage(window.db, selectedPageId, name, DesignerMove.getUrlPos(), function (page) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
 
               if (page.pgNr) {
@@ -1090,7 +1094,7 @@ DesignerMove.saveAs = function () {
             });
           } else if (choice === 'new') {
             DesignerPage.saveToNewPage(window.db, name, DesignerMove.getUrlPos(), function (page) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
 
               if (page.pgNr) {
@@ -1132,7 +1136,7 @@ DesignerMove.promptToSaveCurrentPage = function (callback) {
 
 
 DesignerMove.exportPages = function () {
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
@@ -1142,9 +1146,9 @@ DesignerMove.exportPages = function () {
     'selected_page': window.selectedPage
   }, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message);
 
       if (!window.designerTablesEnabled) {
@@ -1240,7 +1244,7 @@ DesignerMove.saveValueInConfig = function (indexSent, valueSent) {
     'value': valueSent
   }, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     }
   });
 }; // ++++++++++++++++++++++++++++++ RELATION ++++++++++++++++++++++++++++++++++++++
@@ -1346,7 +1350,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
     document.getElementById('designer_hint').innerHTML = '';
     document.getElementById('designer_hint').style.display = 'none';
     document.getElementById('display_field_button').className = 'M_butt';
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
       'operation': 'setDisplayField',
       'ajax_request': true,
@@ -1356,10 +1360,10 @@ DesignerMove.clickField = function (db, T, f, pk) {
       'field': fieldNameToSend
     }, function (data) {
       if (data.success === false) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strModificationSaved);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strModificationSaved);
       }
     });
   }
@@ -1371,13 +1375,13 @@ DesignerMove.newRelation = function () {
   linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db + argsep + 'db2=p';
   linkRelation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
   linkRelation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', linkRelation, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.message);
       DesignerMove.loadPage(window.selectedPage);
     }
   }); // end $.post()
@@ -1386,13 +1390,13 @@ DesignerMove.newRelation = function () {
 
 DesignerMove.startTableNew = function () {
   _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', '');
-  _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonActions.refreshMain('index.php?route=/table/create');
+  (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/create');
 };
 
 DesignerMove.startTabUpd = function (db, table) {
   _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('db', db);
   _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', table);
-  _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonActions.refreshMain('index.php?route=/table/structure');
+  (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/structure');
 }; // --------------------------- hide tables --------------------------------------
 // max/min all tables
 
@@ -1603,13 +1607,13 @@ DesignerMove.updRelation = function () {
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
   linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db;
   linkRelation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', linkRelation, function (data) {
     if (data.success === false) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.message);
       DesignerMove.loadPage(window.selectedPage);
     }
   }); // end $.post()
@@ -1976,7 +1980,7 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
 
   if (rel.value !== '--') {
     if (document.getElementById('Query').value === '') {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.sprintf(window.Messages.strQueryEmpty));
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strQueryEmpty));
       return;
     }
 
@@ -2022,7 +2026,7 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     sum = sum + 1; // make orderby
   }
 
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.sprintf(window.Messages.strObjectsCreated, sum)); // output sum new objects created
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strObjectsCreated, sum)); // output sum new objects created
 
   var existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(init, historyArray.length);
@@ -2272,7 +2276,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/move
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(29); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(40); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

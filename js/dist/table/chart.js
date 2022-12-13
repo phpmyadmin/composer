@@ -8,13 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 67:
+/***/ 79:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+
+
 
 
 
@@ -75,7 +79,7 @@ function queryChart(data, columnNames, settings) {
     },
     axes: {
       xaxis: {
-        label: _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(settings.xaxisLabel)
+        label: (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_4__.escapeHtml)(settings.xaxisLabel)
       },
       yaxis: {
         label: settings.yaxisLabel
@@ -195,7 +199,7 @@ function drawChart() {
 
   var columnNames = [];
   jquery__WEBPACK_IMPORTED_MODULE_0__('#chartXAxisSelect option').each(function () {
-    columnNames.push(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text()));
+    columnNames.push((0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_4__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text()));
   });
 
   try {
@@ -205,7 +209,7 @@ function drawChart() {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#saveChart').attr('href', currentChart.toImageString());
     }
   } catch (err) {
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(err.message, false);
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(err.message, false);
   }
 }
 
@@ -408,15 +412,15 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/chart.j
       return false;
     }
 
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true && typeof data.chartData !== 'undefined') {
         chartData = JSON.parse(data.chartData);
         drawChart();
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
       }
     }, 'json'); // end $.post()
 
@@ -457,7 +461,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/chart.j
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(67); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(79); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

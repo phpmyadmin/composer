@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 72:
+/***/ 84:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+
+
 
 
 
@@ -106,7 +110,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
     event.preventDefault(); // empty previous search results while we are waiting for new results
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').empty();
-    var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSearching, false);
+    var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSearching, false);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($searchForm);
     var values = {};
     $searchForm.find(':input').each(function () {
@@ -151,7 +155,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
     }
 
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($searchForm.attr('action'), values, function (data) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
 
       if (typeof data !== 'undefined' && data.success === true) {
         if (typeof data.sql_query !== 'undefined') {
@@ -176,7 +180,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
         jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').html(data.error);
       }
 
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
+      (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
     }); // end $.post()
   }); // Following section is related to the 'function based search' for geometry data types.
   // Initially hide all the open_gis_editor spans
@@ -251,7 +255,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
     var operator = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
 
     if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
-      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
       jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         url: 'index.php?route=/table/search',
         type: 'POST',
@@ -264,7 +268,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
           'range_search': 1
         },
         success: function (response) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
 
           if (response.success) {
             // Get the column min value.
@@ -316,11 +320,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
               jquery__WEBPACK_IMPORTED_MODULE_0__('#rangeSearchModal').modal('hide');
             });
           } else {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error);
           }
         },
         error: function () {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
         }
       });
     }
@@ -334,7 +338,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(72); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(84); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

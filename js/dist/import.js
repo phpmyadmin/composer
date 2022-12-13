@@ -8,15 +8,17 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 40:
+/***/ 51:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+
 
 
 
@@ -101,19 +103,19 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
       // remote upload.
       if (radioImport.hasClass('active') && jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').trigger('focus');
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
         return false;
       }
 
       if (radioLocalImport.hasClass('active')) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').length === 0) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
           return false;
         }
 
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').val() === '') {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').trigger('focus');
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
           return false;
         }
       }
@@ -121,7 +123,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
       // local upload.
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').trigger('focus');
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(fileMsg, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
         return false;
       }
 
@@ -129,7 +131,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
         var newTblName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_tbl_name').val();
 
         if (newTblName.length > 0 && newTblName.trim().length === 0) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(wrongTblNameMsg, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongTblNameMsg, false);
           return false;
         }
       }
@@ -138,7 +140,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
         var newDBName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_db_name').val();
 
         if (newDBName.length > 0 && newDBName.trim().length === 0) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(wrongDBNameMsg, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongDBNameMsg, false);
           return false;
         }
       }
@@ -286,7 +288,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(40); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(51); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

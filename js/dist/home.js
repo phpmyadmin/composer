@@ -8,13 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 37:
+/***/ 48:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38);
-/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49);
+/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(50);
 
 
 
@@ -37,7 +37,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerOnload('home.js', () 
 
 /***/ }),
 
-/***/ 38:
+/***/ 49:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -45,8 +45,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "showGitVersion": function() { return /* binding */ showGitVersion; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
 
 
 
@@ -96,7 +96,7 @@ const GitInfo = {
     if (data && data.version && data.date) {
       const current = GitInfo.parseVersionString(jquery__WEBPACK_IMPORTED_MODULE_0__('span.version').text());
       const latest = GitInfo.parseVersionString(data.version);
-      const url = 'index.php?route=/url&url=https://www.phpmyadmin.net/files/' + _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(encodeURIComponent(data.version)) + '/';
+      const url = 'index.php?route=/url&url=https://www.phpmyadmin.net/files/' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(encodeURIComponent(data.version)) + '/';
       let versionInformationMessage = document.createElement('span');
       versionInformationMessage.className = 'latest';
       const versionInformationMessageLink = document.createElement('a');
@@ -111,7 +111,7 @@ const GitInfo = {
       versionInformationMessage.appendChild(versionInformationMessageLink);
 
       if (latest > current) {
-        const message = window.sprintf(window.Messages.strNewerVersion, _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(data.version), _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeHtml(data.date));
+        const message = window.sprintf(window.Messages.strNewerVersion, (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.version), (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.date));
         let htmlClass = 'alert alert-primary';
 
         if (Math.floor(latest / 10000) === Math.floor(current / 10000)) {
@@ -159,7 +159,7 @@ const GitInfo = {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#is_git_revision').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#li_pma_version_git').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get('index.php?route=/git-revision', {
-      'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+      'server': _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
       'ajax_request': true,
       'no_debug': true
     }, data => {
@@ -182,7 +182,7 @@ const GitInfo = {
       url: 'index.php?route=/version-check',
       method: 'POST',
       data: {
-        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
+        'server': _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server')
       },
       success: GitInfo.currentVersion
     });
@@ -200,7 +200,7 @@ function showGitVersion() {
 
 /***/ }),
 
-/***/ 39:
+/***/ 50:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -226,7 +226,7 @@ const ThemesManager = {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(37); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(48); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

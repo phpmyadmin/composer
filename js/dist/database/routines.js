@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 21:
+/***/ 32:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
+
+
 
 
 
@@ -90,7 +94,7 @@ const DatabaseRoutines = {
     return this.validateCustom();
   },
   exportDialog: function ($this) {
-    var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
 
     if ($this.attr('id') === 'bulkActionExportButton') {
       var combined = {
@@ -105,7 +109,7 @@ const DatabaseRoutines = {
       var returnCount = 0; // No routine is exportable (due to privilege issues)
 
       if (count === 0) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.NoExportable);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.NoExportable);
       }
 
       var p = jquery__WEBPACK_IMPORTED_MODULE_0__.when();
@@ -141,11 +145,11 @@ const DatabaseRoutines = {
       }, showExport);
     }
 
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
 
     function showExport(data) {
       if (data.success === true) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
         /**
          * @var buttonOptions Object containing options
          *                     for jQueryUI dialog buttons
@@ -182,7 +186,7 @@ const DatabaseRoutines = {
         var $elm = $ajaxDialog.find('textarea');
         _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor($elm);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     } // end showExport()
 
@@ -210,7 +214,7 @@ const DatabaseRoutines = {
      */
 
 
-    var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get($this.attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -226,7 +230,7 @@ const DatabaseRoutines = {
           }
         }; // We have successfully fetched the editor form
 
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg); // Now define the function that is called when
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg); // Now define the function that is called when
         // the user presses the "Go" button
 
         buttonOptions[window.Messages.strGo].click = function () {
@@ -242,12 +246,12 @@ const DatabaseRoutines = {
              * @var data Form data to be sent in the AJAX request
              */
             var data = jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').last().serialize();
-            $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
             var url = jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').last().attr('action');
             jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, data, function (data) {
               if (data.success === true) {
                 // Item created successfully
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
                 _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.message);
                 that.$ajaxDialog.dialog('close');
                 var tableId = '#' + data.tableType + 'Table'; // If we are in 'edit' mode, we must
@@ -339,7 +343,7 @@ const DatabaseRoutines = {
 
                 _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
               } else {
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
               }
             }); // end $.post()
           } // end "if (that.validate())"
@@ -411,7 +415,7 @@ const DatabaseRoutines = {
 
         that.postDialogShow(data);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }); // end $.get()
   },
@@ -431,8 +435,8 @@ const DatabaseRoutines = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $this.getPostData());
+      var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success === true) {
           /**
@@ -478,12 +482,12 @@ const DatabaseRoutines = {
           } // Get rid of the "Loading" message
 
 
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg); // Show the query that we just executed
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg); // Show the query that we just executed
 
           _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.sql_query);
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
         }
       }); // end $.post()
     });
@@ -495,7 +499,7 @@ const DatabaseRoutines = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest); // drop anchors of all selected rows
+      var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest); // drop anchors of all selected rows
 
       var dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0__('input.checkall:checked').parents('tr').find('.drop_anchor');
       var success = true;
@@ -508,7 +512,7 @@ const DatabaseRoutines = {
          */
 
         var $currRow = $anchor.parents('tr');
-        var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+        var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $anchor.getPostData());
         jquery__WEBPACK_IMPORTED_MODULE_0__.post($anchor.attr('href'), params, function (data) {
           returnCount++;
 
@@ -557,7 +561,7 @@ const DatabaseRoutines = {
             if (returnCount === count) {
               if (success) {
                 // Get rid of the "Loading" message
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
                 jquery__WEBPACK_IMPORTED_MODULE_0__('#rteListForm_checkall').prop({
                   checked: false,
                   indeterminate: false
@@ -567,7 +571,7 @@ const DatabaseRoutines = {
               _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
             }
           } else {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
             success = false;
 
             if (returnCount === count) {
@@ -830,11 +834,11 @@ const DatabaseRoutines = {
      * @var msg jQuery object containing the reference to
      *          the AJAX message shown to the user
      */
-    var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
-    var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam($this[0], $this.getPostData());
+    var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
+    var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__["default"])($this[0], $this.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($this.attr('href'), params, function (data) {
       if (data.success === true) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg); // If 'data.dialog' is true we show a dialog with a form
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg); // If 'data.dialog' is true we show a dialog with a form
         // to get the input parameters for routine, otherwise
         // we just show the results of the query
 
@@ -856,15 +860,15 @@ const DatabaseRoutines = {
              * @var data Form data to be sent in the AJAX request
              */
             var data = jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').last().serialize();
-            $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+            $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
             jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/routines', data, function (data) {
               if (data.success === true) {
                 // Routine executed successfully
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
                 _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.message);
                 $ajaxDialog.dialog('close');
               } else {
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
               }
             });
           };
@@ -909,17 +913,17 @@ const DatabaseRoutines = {
                * @var data Form data to be sent in the AJAX request
                */
               var data = jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize();
-              $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+              $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
               var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('action');
               jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, data, function (data) {
                 if (data.success === true) {
                   // Routine executed successfully
-                  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+                  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
                   _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.message);
                   jquery__WEBPACK_IMPORTED_MODULE_0__('form.rte_form').off('keyup');
                   $ajaxDialog.remove();
                 } else {
-                  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+                  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
                 }
               });
             }
@@ -929,7 +933,7 @@ const DatabaseRoutines = {
           _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.slidingMessage(data.message);
         }
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }); // end $.post()
   }
@@ -1020,7 +1024,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/rout
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(21); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(32); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

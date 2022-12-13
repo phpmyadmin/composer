@@ -8,14 +8,20 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 71:
+/***/ 83:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(17);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
+
+
+
 
 
 
@@ -50,7 +56,7 @@ TableRelation.setDropdownValues = function ($dropdown, values, selectedValue) {
 
   values.unshift('');
   jquery__WEBPACK_IMPORTED_MODULE_0__.each(values, function () {
-    optionsAsString += '<option value=\'' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) + '\'' + (selectedValue === _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(this) + '</option>';
+    optionsAsString += '<option value=\'' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(this) + '\'' + (selectedValue === (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(this) ? ' selected=\'selected\'' : '') + '>' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(this) + '</option>';
   });
   $dropdown.append(jquery__WEBPACK_IMPORTED_MODULE_0__(optionsAsString));
 };
@@ -102,11 +108,11 @@ TableRelation.getDropdownValues = function ($dropdown) {
     }
   }
 
-  var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   var $form = $dropdown.parents('form');
   var $db = $form.find('input[name="db"]').val();
   var $table = $form.find('input[name="table"]').val();
-  var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+  var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
   var $server = $form.find('input[name="server"]');
 
@@ -120,7 +126,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
     data: params,
     dataType: 'json',
     success: function (data) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
 
       if (typeof data !== 'undefined' && data.success) {
         // if the changed dropdown is a database selector
@@ -141,7 +147,7 @@ TableRelation.getDropdownValues = function ($dropdown) {
           TableRelation.setDropdownValues($columnDd.slice(1), data.columns);
         }
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
       }
     }
   });
@@ -212,18 +218,20 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this); // Object containing reference to the current field's row
 
     var $currRow = $anchor.parents('tr');
-    var dropQuery = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml($currRow.children('td').children('.drop_foreign_key_msg').val());
+    var dropQuery = (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)($currRow.children('td').children('.drop_foreign_key_msg').val());
     var question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+      var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDroppingForeignKey, false);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonActions.refreshMain(false, function () {// Do nothing
-          });
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msg);
+          (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_6__["default"])(false);
+
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {// Do nothing
+          };
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     });
@@ -238,7 +246,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(71); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(83); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

@@ -8,14 +8,22 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 47:
+/***/ 58:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
+
+
+
+
 
 
 
@@ -451,7 +459,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0__(document.createElement('div'));
             $tempDiv.html(data.error);
             $tempDiv.addClass('alert alert-danger');
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage($tempDiv, false);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($tempDiv, false);
           }
         });
       }
@@ -751,7 +759,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             } // Add <br> before carriage return.
 
 
-            var newHtml = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
+            var newHtml = (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
             newHtml = newHtml.replace(/\n/g, '<br>\n');
             var decimals = parseInt($thisField.attr('data-decimals')); // remove decimal places if column type not supported
 
@@ -1018,7 +1026,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             g.lastXHR = null;
 
             if (typeof data === 'object' && data.success === false) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, undefined, 'error');
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, undefined, 'error');
               return;
             }
 
@@ -1061,7 +1069,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             g.lastXHR = null;
 
             if (typeof data === 'object' && data.success === false) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, undefined, 'error');
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, undefined, 'error');
               return;
             }
 
@@ -1121,7 +1129,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
                 $td.data('original_data', data.value);
                 jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val(data.value);
               } else {
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+                (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
               }
             }); // end $.post()
           }
@@ -1439,7 +1447,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
           if (typeof data !== 'undefined' && data.success === true) {
             if (typeof options === 'undefined' || !options.move) {
-              _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+              (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
             } // update where_clause related data in each edited row
 
 
@@ -1488,7 +1496,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
                   $existingQuery.append(sqlOuter + tools);
                 }
 
-                _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql($existingQuery);
+                (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])($existingQuery);
               }
             } // hide and/or update the successfully saved cells
 
@@ -1500,7 +1508,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('.to_be_saved').removeClass('to_be_saved').data('value', null).data('original_data', null);
             g.isCellEdited = false;
           } else {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
 
             if (!g.saveCellsAtOnce) {
               jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('.to_be_saved').removeClass('to_be_saved');
@@ -1570,7 +1578,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
             thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val();
           } else {
             var hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(hexError, false);
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(hexError, false);
             thisFieldParams[fieldName] = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell);
           }
         } else {
@@ -1730,9 +1738,9 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
         var res = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('column'));
 
         if (res) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strCopyColumnSuccess, false, 'success');
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strCopyColumnSuccess, false, 'success');
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strCopyColumnFailure, false, 'error');
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strCopyColumnFailure, false, 'error');
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('th.draggable a').on('dblclick', function (e) {
@@ -1791,7 +1799,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 
       if ($firstRowCols.length > 1) {
         var $colVisibTh = jquery__WEBPACK_IMPORTED_MODULE_0__(g.t).find('th:not(.draggable)').slice(0, 1);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip($colVisibTh, 'th', window.Messages.strColVisibHint); // create column visibility drop-down arrow(s)
+        (0,_modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__["default"])($colVisibTh, 'th', window.Messages.strColVisibHint); // create column visibility drop-down arrow(s)
 
         $colVisibTh.each(function () {
           var cd = document.createElement('div'); // column drop-down arrow
@@ -2282,7 +2290,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
   } // create tooltip for each <th> with draggable class
 
 
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable'), 'th', g.updateHint()); // register events for hint tooltip (anchors inside draggable th)
+  (0,_modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable'), 'th', g.updateHint()); // register events for hint tooltip (anchors inside draggable th)
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(t).find('th.draggable a').on('mouseenter', function () {
     g.showSortHint = true;
@@ -2364,7 +2372,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(47); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(58); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

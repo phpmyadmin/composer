@@ -8,15 +8,25 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 70:
+/***/ 82:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(18);
+
+
+
+
+
 
 
 
@@ -61,8 +71,8 @@ var confirmAndPost = function (linkObject, action) {
   question += window.sprintf(window.Messages.strDoYouReally, linkObject.data('query'));
   question += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getForeignKeyCheckboxLoader();
   linkObject.confirm(question, linkObject.attr('href'), function (url) {
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-    var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, linkObject.getPostData());
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__["default"])(this, linkObject.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').length !== 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').remove();
@@ -73,12 +83,12 @@ var confirmAndPost = function (linkObject, action) {
       }
 
       if (typeof data !== 'undefined' && data.success === true) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sqlqueryresults ajax"></div>').prependTo('#page_content');
         jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').html(data.sql_query);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+        (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
       }
     });
   }, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.loadForeignKeyCheckbox);
@@ -103,17 +113,19 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
         if ($form.find('input[name=\'switch_to_new\']').prop('checked')) {
           _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', $form.find('select[name=\'target_db\'],input[name=\'target_db\']').val());
           _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', $form.find('input[name=\'new_name\']').val());
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain(false, function () {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
-          });
+          (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(false);
+
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          };
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         } // Refresh navigation when the table is copied
 
 
         _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
       }
     }); // end $.post()
   }); // end of copyTable ajax submit
@@ -131,13 +143,16 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       if (typeof data !== 'undefined' && data.success === true) {
         _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db);
         _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
-        _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain('index.php?route=/table/sql', function () {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
-        }); // Refresh navigation when the table is copied
+        (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])('index.php?route=/table/sql');
+
+        _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+        }; // Refresh navigation when the table is copied
+
 
         _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
       }
     });
   });
@@ -180,14 +195,17 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain(false, function () {
+          (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(false);
+
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').html(data.message);
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
-          }); // Refresh navigation when the table is renamed
+            (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+          }; // Refresh navigation when the table is renamed
+
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
         }
       });
     }
@@ -229,19 +247,19 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       var $tempDiv;
 
       if (typeof data !== 'undefined' && data.success === true && data.sql_query !== undefined) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         jquery__WEBPACK_IMPORTED_MODULE_0__('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
         jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').html(data.sql_query);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+        (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
         scrollToTop();
       } else if (typeof data !== 'undefined' && data.success === true) {
         $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('<div id=\'temp_div\'></div>');
         $tempDiv.html(data.message);
         var $success = $tempDiv.find('.result_query .alert-success');
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage($success);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($success);
         jquery__WEBPACK_IMPORTED_MODULE_0__('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
         jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').html(data.message);
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+        (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
         jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').children('fieldset,br').remove();
         scrollToTop();
       } else {
@@ -255,7 +273,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
           $error = $tempDiv;
         }
 
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage($error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($error, false);
       }
     }); // end $.post()
   }); // end of table maintenance ajax click
@@ -272,7 +290,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     function submitPartitionMaintenance() {
       var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
       var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     }
@@ -300,19 +318,21 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     question += window.sprintf(window.Messages.strDoYouReally, $link[0].getAttribute('data-query'));
     question += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getForeignKeyCheckboxLoader();
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), function (url) {
-      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $link.getPostData());
+      var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox); // Table deleted successfully, refresh both the frames
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox); // Table deleted successfully, refresh both the frames
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
           _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', '');
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'), function () {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
-          });
+          (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'));
+
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          };
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
         }
       });
     }, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.loadForeignKeyCheckbox);
@@ -326,21 +346,23 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
      */
 
     var question = window.Messages.strDropTableStrongWarning + ' ';
-    question += window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table') + '`'));
+    question += window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table') + '`'));
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), function (url) {
-      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $link.getPostData());
+      var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox); // Table deleted successfully, refresh both the frames
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox); // Table deleted successfully, refresh both the frames
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
           _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', '');
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'), function () {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
-          });
+          (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'));
+
+          _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          };
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
         }
       });
     });
@@ -361,7 +383,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(70); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(82); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

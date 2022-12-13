@@ -8,14 +8,14 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 32:
+/***/ 43:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
 
 
 
@@ -179,7 +179,7 @@ var DragDropImport = {
       return;
     }
 
-    if (_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db') === '') {
+    if (_modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db') === '') {
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').html(window.Messages.dropImportSelectDB);
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').html(window.Messages.dropImportDropFiles);
@@ -295,8 +295,8 @@ var DragDropImport = {
       return;
     }
 
-    var dbname = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db');
-    var server = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'); // if no database is selected -- no
+    var dbname = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db');
+    var server = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'); // if no database is selected -- no
 
     if (dbname !== '') {
       var files = event.originalEvent.dataTransfer.files;
@@ -315,7 +315,7 @@ var DragDropImport = {
         var ext = DragDropImport.getExtension(files[i].name);
         var hash = _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.hash(++DragDropImport.uploadCount);
         var $sqlImportStatusDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div');
-        $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(files[i].name) + '<span class="filesize" data-filename="' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>'); // scroll the UI to bottom
+        $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '<span class="filesize" data-filename="' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>'); // scroll the UI to bottom
 
         $sqlImportStatusDiv.scrollTop($sqlImportStatusDiv.scrollTop() + 50); // 50 hardcoded for now
 
@@ -330,7 +330,7 @@ var DragDropImport = {
           fd.append('noplugin', Math.random().toString(36).substring(2, 12));
           fd.append('db', dbname);
           fd.append('server', server);
-          fd.append('token', _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token'));
+          fd.append('token', _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('token'));
           fd.append('import_type', 'database'); // todo: method to find the value below
 
           fd.append('MAX_FILE_SIZE', '4194304'); // todo: method to find the value below
@@ -398,7 +398,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.pma_drop_result h2 .
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(32); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(43); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

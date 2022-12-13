@@ -8,12 +8,12 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 48:
+/***/ 59:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 
 
 /**
@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
     var img = $container.find('li img');
 
     if (img.length) {
-      $(_modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.getImage('b_more').toString()).prependTo(link);
+      $((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_1__["default"])('b_more').toString()).prependTo(link);
     }
 
     var $submenu = $('<li></li>', {
@@ -210,7 +210,7 @@ __webpack_require__.r(__webpack_exports__);
   /**
    * Extend jQuery
    *
-   * @param {string} method
+   * @param {string|Function} method
    *
    * @return {any}
    */
@@ -231,7 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(48); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(59); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

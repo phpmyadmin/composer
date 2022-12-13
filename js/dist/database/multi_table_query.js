@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 17:
+/***/ 28:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+
+
 
 
 
@@ -78,7 +82,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     });
 
     if (Object.keys(tableAliases).length === 0) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('Nothing selected', false, 'error');
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Nothing selected', false, 'error');
       return;
     }
 
@@ -98,29 +102,29 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         foreignKeys = response.foreignKeyConstrains;
       }
     });
-    var query = 'SELECT ' + '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][0]) + '`.';
+    var query = 'SELECT ' + '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][0]) + '`.';
 
     if (columns[0][1] === '*') {
       query += '*';
     } else {
-      query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][1]) + '`';
+      query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][1]) + '`';
     }
 
     if (columns[0][2] !== '') {
-      query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[0][2]) + '`';
+      query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][2]) + '`';
     }
 
     for (var i = 1; i < columns.length; i++) {
-      query += ', `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][0]) + '`.';
+      query += ', `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][0]) + '`.';
 
       if (columns[i][1] === '*') {
         query += '*';
       } else {
-        query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][1]) + '`';
+        query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][1]) + '`';
       }
 
       if (columns[i][2] !== '') {
-        query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeBacktick(columns[i][2]) + '`';
+        query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][2]) + '`';
       }
     }
 
@@ -140,7 +144,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     var query = editor.getDoc().getValue(); // Verifying that the query is not empty
 
     if (query === '') {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strEmptyQuery, false, 'error');
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEmptyQuery, false, 'error');
       return;
     }
 
@@ -251,7 +255,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(17); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(28); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

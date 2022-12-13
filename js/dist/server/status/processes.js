@@ -8,14 +8,20 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 57:
+/***/ 69:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+
+
+
 
 
 
@@ -68,9 +74,9 @@ var processList = {
    */
   killProcessHandler: function (event) {
     event.preventDefault();
-    var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    var argSep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     var params = jquery__WEBPACK_IMPORTED_MODULE_0__(this).getPostData();
-    params += argSep + 'ajax_request=1' + argSep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'); // Get row element of the process to be killed.
+    params += argSep + 'ajax_request=1' + argSep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'); // Get row element of the process to be killed.
 
     var $tr = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), params, function (data) {
@@ -89,10 +95,10 @@ var processList = {
           }
         }); // Show process killed message
 
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.message, false);
       } else {
         // Show process error message
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       }
     }, 'json');
   },
@@ -117,7 +123,7 @@ var processList = {
         if (data.hasOwnProperty('success') && data.success) {
           var $newTable = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message);
           jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist').html($newTable.html());
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist'));
+          (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#tableprocesslist'));
         }
 
         processList.refreshTimeout = setTimeout(processList.refresh, interval);
@@ -155,7 +161,7 @@ var processList = {
       processList.refresh();
     }
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('a#toggleRefresh').html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage(img) + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(label));
+    jquery__WEBPACK_IMPORTED_MODULE_0__('a#toggleRefresh').html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__["default"])(img) + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(label));
   },
 
   /**
@@ -167,7 +173,7 @@ var processList = {
    */
   getUrlParams: function () {
     var urlParams = {
-      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
       'refresh': true,
       'full': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="full"]').val(),
@@ -222,7 +228,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/stat
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(57); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(69); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

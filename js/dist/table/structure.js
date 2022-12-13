@@ -8,15 +8,27 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 73:
+/***/ 85:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
+/* harmony import */ var _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(16);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(18);
+
+
+
+
+
+
 
 
 
@@ -75,11 +87,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/struc
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#remove_partitioning.ajax');
 });
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structure.js', function () {
-  // Re-initialize variables.
-  window.primaryIndexes = [];
-  window.indexes = [];
-  window.fulltextIndexes = [];
-  window.spatialIndexes = [];
+  _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__.Indexes.resetColumnLists();
   /**
    *Ajax action for submitting the "Column Change" and "Add Column" form
    */
@@ -95,7 +103,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     var fieldCnt = $form.find('input[name=orig_num_fields]').val();
 
     function submitForm() {
-      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+      var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').length !== 0) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.sqlqueryresults').remove();
@@ -105,7 +113,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 
         if (typeof data.success !== 'undefined' && data.success === true) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').empty().append(data.message).show();
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+          (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
           jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query .alert-primary').remove();
 
           if (typeof data.structure_refresh_route !== 'string') {
@@ -114,7 +122,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
           }
 
           $form.remove();
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
 
           if (typeof data.structure_refresh_route === 'string') {
@@ -125,10 +133,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
               }
             });
           } else {
-            _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain('index.php?route=/table/structure');
+            (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_10__["default"])('index.php?route=/table/structure');
           }
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
         }
       }); // end $.post()
     }
@@ -208,7 +216,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
      */
 
     var currColumnName = $currRow.children('th').children('label').text().trim();
-    currColumnName = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currColumnName);
+    currColumnName = (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName);
     /**
      * @var $afterFieldItem    Corresponding entry in the 'After' field.
      */
@@ -221,12 +229,12 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
     var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      var $msg = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strDroppingColumn, false);
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+      var $msg = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingColumn, false);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
       params += _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=1';
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msg);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
 
           if (jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').length) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').remove();
@@ -234,7 +242,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 
           if (data.sql_query) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="result_query"></div>').html(data.sql_query).prependTo('#structure_content');
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+            (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
           } // Adjust the row numbers
 
 
@@ -259,7 +267,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
           jquery__WEBPACK_IMPORTED_MODULE_0__('.index_info').replaceWith(data.indexes_list);
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     });
@@ -288,12 +296,12 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       addClause = 'ADD FULLTEXT';
     }
 
-    var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currTableName) + '` ' + addClause + '(`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(currColumnName) + '`);');
+    var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currTableName) + '` ' + addClause + '(`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName) + '`);');
     var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $this;
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
       params += _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=1';
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
@@ -301,7 +309,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 
   /**
    * Inline move columns
-  **/
+   **/
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#move_columns_anchor', function (e) {
     e.preventDefault();
@@ -350,7 +358,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
           }
 
           modalBody.innerHTML = response.sql_data;
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalPreviewModal'));
+          (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalPreviewModal'));
         },
         error: () => {
           modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
@@ -365,7 +373,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
       event.preventDefault();
-      var $msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       var $this = jquery__WEBPACK_IMPORTED_MODULE_0__('#moveColumnsModal');
       var $form = $this.find('form');
       var serialized = $form.serialize(); // check if any columns were moved at all
@@ -373,13 +381,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       jquery__WEBPACK_IMPORTED_MODULE_0__('#moveColumnsModal').modal('hide');
 
       if (serialized === $form.data('serialized-unmoved')) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
         return;
       }
 
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.prop('action'), serialized + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true', function (data) {
         if (data.success === false) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage($msgbox);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
           var errorModal = jquery__WEBPACK_IMPORTED_MODULE_0__('#moveColumnsErrorModal');
           errorModal.modal('show');
           errorModal.find('.modal-body').first().html(data.error);
@@ -402,7 +410,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
             $row.find('td').eq(1).text($row.index() + 1).end().removeClass('odd even').addClass($row.index() % 2 === 0 ? 'odd' : 'even');
           }
 
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         }
       });
     });
@@ -416,7 +424,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parents('form');
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(this.formAction, submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
@@ -430,7 +438,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 
     function submitPartitionAction(url) {
       var params = 'ajax_request=true&ajax_page_request=true&' + $link.getPostData();
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $link;
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     }
@@ -456,11 +464,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = window.Messages.strRemovePartitioningWarning;
     $link.confirm(question, $link.attr('href'), function (url) {
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam({
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_8__["default"])({
         'ajax_request': true,
         'ajax_page_request': true
       }, $link.getPostData());
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $link;
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
@@ -475,7 +483,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(73); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(85); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

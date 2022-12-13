@@ -8,15 +8,19 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 55:
+/***/ 66:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+
+
 
 
 
@@ -41,14 +45,14 @@ function exportPrivilegesModalHandler(data, msgbox) {
     modal.on('shown.bs.modal', function () {
       modal.find('.modal-body').first().html(data.message);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html(data.title);
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxRemoveMessage(msgbox); // Attach syntax highlighted editor to export dialog
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)(msgbox); // Attach syntax highlighted editor to export dialog
 
       _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(modal.find('textarea'));
     });
     return;
   }
 
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
 }
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
@@ -68,7 +72,7 @@ const EditUserGroup = {
       'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, data => {
       if (typeof data === 'undefined' || data.success !== true) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false, 'error');
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false, 'error');
         return;
       }
 
@@ -80,7 +84,7 @@ const EditUserGroup = {
         const form = jquery__WEBPACK_IMPORTED_MODULE_0__(editUserGroupModal.querySelector('#changeUserGroupForm'));
         jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/server/privileges', form.serialize() + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
           if (typeof data === 'undefined' || data.success !== true) {
-            _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false, 'error');
+            (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false, 'error');
             return;
           }
 
@@ -111,23 +115,23 @@ const AccountLocking = {
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, data => {
       if (data.success === false) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error);
         return;
       }
 
       if (isLocked) {
-        const lockIcon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_lock', window.Messages.strLock, {}).toString();
+        const lockIcon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__["default"])('s_lock', window.Messages.strLock, {}).toString();
         button.innerHTML = '<span class="text-nowrap">' + lockIcon + ' ' + window.Messages.strLock + '</span>';
         button.title = window.Messages.strLockAccount;
         button.dataset.isLocked = 'false';
       } else {
-        const unlockIcon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_unlock', window.Messages.strUnlock, {}).toString();
+        const unlockIcon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__["default"])('s_unlock', window.Messages.strUnlock, {}).toString();
         button.innerHTML = '<span class="text-nowrap">' + unlockIcon + ' ' + window.Messages.strUnlock + '</span>';
         button.title = window.Messages.strUnlockAccount;
         button.dataset.isLocked = 'true';
       }
 
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
     });
   }
 };
@@ -242,11 +246,11 @@ const RevokeUser = {
         }
       }
 
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRemovingSelectedUsers);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
       var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message); // Refresh navigation, if we dropped some databases with the name
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message); // Refresh navigation, if we dropped some databases with the name
           // that is the same as the username of the deleted user
 
           if (jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox:checked').length) {
@@ -274,7 +278,7 @@ const RevokeUser = {
             jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkboxesSel).trigger('change');
           });
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         }
       }); // end $.post()
     });
@@ -292,11 +296,11 @@ const ExportPrivileges = {
     event.preventDefault(); // can't export if no users checked
 
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).find('input:checked').length === 0) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strNoAccountSelected, 2000, 'success');
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
 
-    var msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     var serverId = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
     var selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0__('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
@@ -316,7 +320,7 @@ const ExportUser = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var msgbox = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__.get(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -542,7 +546,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/privil
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(55); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(66); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

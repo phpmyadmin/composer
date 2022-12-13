@@ -8,15 +8,23 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 53:
+/***/ 64:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
+
+
+
+
 
 
 
@@ -41,11 +49,11 @@ const DropDatabases = {
 
     $form.find('input:checkbox:checked:not(.checkall_box)').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').addClass('removeMe');
-      selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) + '`;';
+      selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) + '`;';
     });
 
     if (!selectedDbs.length) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
       return;
     }
     /**
@@ -59,12 +67,12 @@ const DropDatabases = {
     modal.modal('show');
     const url = 'index.php?route=/server/databases/destroy&' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).serialize();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#dropDatabaseModalDropButton').on('click', function () {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest, false);
       var parts = url.split('?');
-      var params = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getJsConfirmCommonParam(this, parts[1]);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_6__["default"])(this, parts[1]);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(parts[0], params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           var $rowsToRemove = $form.find('tr.removeMe');
           var $databasesCount = jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count');
           var newCount = parseInt($databasesCount.text(), 10) - $rowsToRemove.length;
@@ -74,13 +82,13 @@ const DropDatabases = {
 
           if ($form.find('tbody').find('tr').length === 0) {
             // user just dropped the last db on this page
-            _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.refreshMain();
+            (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
           }
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
           $form.find('tr.removeMe').removeClass('removeMe');
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         }
       });
       modal.modal('hide');
@@ -109,11 +117,11 @@ const CreateDatabase = {
     } // end remove
 
 
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strProcessingRequest);
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
         var $databasesCountObject = jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count');
         var databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
         $databasesCountObject.text(databasesCount);
@@ -124,7 +132,7 @@ const CreateDatabase = {
         var params = 'ajax_request=true' + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
         jquery__WEBPACK_IMPORTED_MODULE_0__.get(dbStructUrl, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
       }
     });
   }
@@ -134,7 +142,14 @@ function checkPrivilegesForDatabase() {
   var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0__('.server_databases');
   jquery__WEBPACK_IMPORTED_MODULE_0__.each(tableRows, function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('click', function () {
-      _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonActions.setDb(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data'));
+      const db = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data');
+
+      if (db !== _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db')) {
+        _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll({
+          'db': db,
+          'table': ''
+        });
+      }
     });
   });
 }
@@ -154,7 +169,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/databa
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(53); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(64); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

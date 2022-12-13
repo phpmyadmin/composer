@@ -8,15 +8,23 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 56:
+/***/ 67:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+/* harmony import */ var _modules_tooltip_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
+/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(68);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(12);
+
+
+
+
 
 
 
@@ -59,7 +67,7 @@ function serverResponseError() {
     },
     title: window.Messages.strRefreshFailed
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_attention') + window.Messages.strInvalidResponseExplanation);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_attention') + window.Messages.strInvalidResponseExplanation);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').dialog({
     classes: {
       'ui-dialog-titlebar-close': 'btn-close'
@@ -885,9 +893,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     runtime.redrawCharts = !runtime.redrawCharts;
 
     if (!runtime.redrawCharts) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('play') + window.Messages.strResumeMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('play') + window.Messages.strResumeMonitor);
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('pause') + window.Messages.strPauseMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('pause') + window.Messages.strPauseMonitor);
 
       if (!runtime.charts) {
         initGrid();
@@ -937,7 +945,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
           return serverResponseError();
         }
 
-        var icon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success');
+        var icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success');
         var msg = '';
         var str = '';
 
@@ -954,7 +962,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         }
 
         if (msg.length === 0) {
-          icon = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_error');
+          icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_error');
           msg = window.Messages.strBothLogOff;
         }
 
@@ -962,20 +970,20 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         str += icon + msg + '<br>';
 
         if (logVars.log_output !== 'TABLE') {
-          str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
+          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
         } else {
-          str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
+          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
         }
 
         if (logVars.slow_query_log === 'ON') {
           if (logVars.long_query_time > 2) {
-            str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_attention') + ' ';
+            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_attention') + ' ';
             str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
             str += '<br>';
           }
 
           if (logVars.long_query_time < 2) {
-            str += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_success') + ' ';
+            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success') + ' ';
             str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
             str += '<br>';
           }
@@ -1133,7 +1141,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       label: jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val().replace(/_/g, ' ')
     };
     newChart.series.push(newSeries);
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(newSeries.label + str) + '<br>');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(newSeries.label + str) + '<br>');
     newChart.nodes.push(serie);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val('');
     jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="differentialValue"]').prop('checked', true);
@@ -1300,7 +1308,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   function addChart(chartObj, initialize) {
     var i;
     var settings = {
-      title: _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(chartObj.title),
+      title: (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(chartObj.title),
       grid: {
         drawBorder: false,
         shadow: false,
@@ -2125,7 +2133,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         return value.replace(/(\[.*?\])+/g, '');
       }
 
-      return _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
+      return (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
     };
 
     for (var i = 0, l = rows.length; i < l; i++) {
@@ -2153,7 +2161,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     $table.append('<tfoot>' + '<tr><th colspan="' + (cols.length - 1) + '">' + window.Messages.strSumRows + ' ' + data.numRows + '<span class="float-end">' + window.Messages.strTotal + '</span></th><th class="text-end">' + data.sum.TOTAL + '</th></tr></tfoot>'); // Append a tooltip to the count column, if there exist one
 
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().text().indexOf('#') > -1) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_help', '', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('b_help', '', {
         'class': 'qroupedQueryInfoIcon'
       }));
       var tooltipContent = window.Messages.strCountColumnExplanation;
@@ -2162,7 +2170,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         tooltipContent += '<p>' + window.Messages.strMoreCountColumnExplanation + '</p>';
       }
 
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.tooltip(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
+      (0,_modules_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
     }
 
     jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('table').tablesorter({
@@ -2287,7 +2295,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       explain += '<p></p>';
 
       var tempExplain = function (key, value) {
-        var newValue = value === null ? 'null' : _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(value);
+        var newValue = value === null ? 'null' : (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
 
         if (key === 'type' && newValue.toLowerCase() === 'all') {
           newValue = '<span class="text-danger">' + newValue + '</span>';
@@ -2354,7 +2362,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
           jquery__WEBPACK_IMPORTED_MODULE_0__('#queryAnalyzerDialog').find('table.queryNums').hide();
           return false;
         });
-        profilingChart = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.createProfilingChart('queryProfiling', chartData);
+        profilingChart = (0,_modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_6__["default"])('queryProfiling', chartData);
       }
     });
     return profilingChart;
@@ -2392,7 +2400,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(56); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(67); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

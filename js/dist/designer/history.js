@@ -8,13 +8,15 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 27:
+/***/ 38:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+
 
 
 
@@ -129,14 +131,14 @@ DesignerHistory.display = function (init, finit) {
         str += '<img src="' + themeImagePath + 'designer/and_icon.png" onclick="DesignerHistory.andOr(' + i + ')" title="AND"></td>';
       }
 
-      str += '<td style="padding-left: 5px;" class="text-end">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
+      str += '<td style="padding-left: 5px;" class="text-end">' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(historyArray[i].getColumnName()).html() + '<td>';
 
       if (historyArray[i].getType() === 'GroupBy' || historyArray[i].getType() === 'OrderBy') {
         var detailDescGroupBy = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('b_drop', window.Messages.strDelete) + '</td>';
       } else {
         var detailDesc = jquery__WEBPACK_IMPORTED_MODULE_0__('<div/>').text(DesignerHistory.detail(i)).html();
-        str += '<td class="text-center">' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_drop', window.Messages.strDelete) + '</td>';
+        str += '<td class="text-center">' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_3__["default"])('b_drop', window.Messages.strDelete) + '</td>';
       }
 
       str += '</tr></thead>';
@@ -735,11 +737,11 @@ DesignerHistory.checkRename = function (idThis) {
   return '';
 };
 /**
-  * This function builds from clause of query
-  * makes automatic joins.
-  *
-  * @return {string}
-  */
+ * This function builds from clause of query
+ * makes automatic joins.
+ *
+ * @return {string}
+ */
 
 
 DesignerHistory.queryFrom = function () {
@@ -983,7 +985,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/hist
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(27); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(38); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

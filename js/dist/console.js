@@ -1,21 +1,21 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[2],[
-/* 0 */,
-/* 1 */
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[2],{
+
+/***/ 23:
+/***/ (function(module) {
+
+module.exports = CodeMirror;
+
+/***/ }),
+
+/***/ 1:
 /***/ (function(module) {
 
 module.exports = jQuery;
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+
+/***/ 21:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -23,7 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Console": function() { return /* reexport safe */ _modules_console_js__WEBPACK_IMPORTED_MODULE_1__.Console; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _modules_console_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
@@ -32,7 +32,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
 
 
 /***/ }),
-/* 11 */
+
+/***/ 22:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -40,12 +41,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Console": function() { return /* binding */ Console; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
-/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony import */ var codemirror__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
-/* harmony import */ var _console_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4);
+/* harmony import */ var _console_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(24);
+/* harmony import */ var _functions_config_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
+
+
 
 
 
@@ -116,7 +121,7 @@ var Console = {
       return;
     }
 
-    _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.configGet('Console', false, data => {
+    (0,_functions_config_js__WEBPACK_IMPORTED_MODULE_7__.getConfigValue)('Console', false, data => {
       _console_config_js__WEBPACK_IMPORTED_MODULE_6__.Config.init(data);
       Console.setupAfterInit();
     }, () => {
@@ -1354,7 +1359,7 @@ var ConsoleDebug = {
       $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message welcome">').text(window.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
 
       for (var i = 0; i < dbgStep.args.length; i++) {
-        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message">').html('<pre>' + _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
+        $args.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="message">').html('<pre>' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
       }
     }
 
@@ -1602,20 +1607,15 @@ var ConsoleDebug = {
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module) {
 
-module.exports = CodeMirror;
-
-/***/ }),
-/* 13 */
+/***/ 24:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Config": function() { return /* binding */ Config; }
 /* harmony export */ });
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _functions_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 
 /**
  * @link https://docs.phpmyadmin.net/en/latest/config.html#console-settings
@@ -1696,7 +1696,7 @@ const Config = {
    */
   set: function (key, value) {
     this[key] = value;
-    _functions_js__WEBPACK_IMPORTED_MODULE_0__.Functions.configSet('Console/' + key, value);
+    (0,_functions_config_js__WEBPACK_IMPORTED_MODULE_0__.setConfigValue)('Console/' + key, value);
   },
 
   /**
@@ -1723,10 +1723,11 @@ const Config = {
 };
 
 /***/ })
-],
+
+},
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(10); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(21); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ window.Console = __webpack_exports__.Console;
 /******/ }

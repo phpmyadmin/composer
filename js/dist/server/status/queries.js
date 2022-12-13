@@ -8,13 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 58:
+/***/ 70:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(68);
 
 
 
@@ -50,7 +50,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       jquery__WEBPACK_IMPORTED_MODULE_0__.each(jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('chart'), function (key, value) {
         cdata.push([key, parseInt(value, 10)]);
       });
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('queryPieChart', _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.createProfilingChart('serverstatusquerieschart', cdata));
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#serverstatusquerieschart').data('queryPieChart', (0,_modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_2__["default"])('serverstatusquerieschart', cdata));
     }
   } catch (exception) {// Could not load chart, no big deal...
   }
@@ -63,7 +63,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(58); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(70); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

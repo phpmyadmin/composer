@@ -8,14 +8,16 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 33:
+/***/ 44:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+
 
 
 
@@ -50,7 +52,7 @@ var ErrorReport = {
    */
   errorDataHandler: function (data, exception) {
     if (data.success !== true) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
       return;
     }
 
@@ -65,9 +67,9 @@ var ErrorReport = {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/error-report', postData, function (data) {
         if (data.success === false) {
           // in the case of an error, show the error message returned.
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.message, false);
         }
       });
     }
@@ -87,7 +89,7 @@ var ErrorReport = {
     if (ErrorReport.errorReportData === null) {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/error-report', {
         'ajax_request': true,
-        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+        'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
         'get_settings': true,
         'exception_type': 'js'
       }, function (data) {
@@ -117,9 +119,9 @@ var ErrorReport = {
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/error-report', postData, function (data) {
         if (data.success === false) {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.message, 3000);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.message, 3000);
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#errorReportModal').modal('hide');
@@ -156,17 +158,17 @@ var ErrorReport = {
     }
 
     ErrorReport.keyDict[key] = 1;
-    var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-danger" role="alert" id="error_notification_' + key + '"></div>').append(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_error') + window.Messages.strErrorOccurred);
+    var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-danger" role="alert" id="error_notification_' + key + '"></div>').append((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__["default"])('s_error') + window.Messages.strErrorOccurred);
     var $buttons = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="float-end"></div>');
     var buttonHtml = '<button class="btn btn-primary" id="show_error_report_' + key + '">';
     buttonHtml += window.Messages.strShowReportDetails;
     buttonHtml += '</button>';
-    var settingsUrl = 'index.php?route=/preferences/features&server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
+    var settingsUrl = 'index.php?route=/preferences/features&server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     buttonHtml += '<a class="ajax" href="' + settingsUrl + '">';
-    buttonHtml += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('s_cog', window.Messages.strChangeReportSettings);
+    buttonHtml += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__["default"])('s_cog', window.Messages.strChangeReportSettings);
     buttonHtml += '</a>';
     buttonHtml += '<a href="#" id="ignore_error_' + key + '" data-notification-id="' + key + '">';
-    buttonHtml += _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getImage('b_close', window.Messages.strIgnore);
+    buttonHtml += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__["default"])('b_close', window.Messages.strIgnore);
     buttonHtml += '</a>';
     $buttons.html(buttonHtml);
     $div.append($buttons); // eslint-disable-next-line compat/compat
@@ -247,7 +249,7 @@ var ErrorReport = {
     }
 
     var reportData = {
-      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
       'exception': exception,
       'url': window.location.href,
@@ -344,7 +346,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('error_report.
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(33); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(44); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

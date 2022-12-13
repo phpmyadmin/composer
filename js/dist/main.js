@@ -8,19 +8,21 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 43:
+/***/ 54:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_keyhandler_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony import */ var _modules_page_settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45);
-/* harmony import */ var _modules_cross_framing_protection_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(46);
-/* harmony import */ var _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
-/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_keyhandler_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(55);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4);
+/* harmony import */ var _modules_page_settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(56);
+/* harmony import */ var _modules_cross_framing_protection_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57);
+/* harmony import */ var _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(16);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5);
+/* harmony import */ var _modules_functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15);
+
 
 
 
@@ -54,7 +56,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_functions_js__WEBPACK_IMPORTED_MODU
 jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__.Navigation.onload());
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('main.js', _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__.Indexes.off());
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__.Indexes.on());
-jquery__WEBPACK_IMPORTED_MODULE_0__(() => _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkNumberOfFields());
+jquery__WEBPACK_IMPORTED_MODULE_0__(() => (0,_modules_functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_9__["default"])());
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('main.js', () => {
   _modules_page_settings_js__WEBPACK_IMPORTED_MODULE_5__.PageSettings.off();
 });
@@ -64,7 +66,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', () 
 
 /***/ }),
 
-/***/ 46:
+/***/ 57:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -98,7 +100,7 @@ const crossFramingProtection = () => {
 
 /***/ }),
 
-/***/ 44:
+/***/ 55:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -110,10 +112,10 @@ __webpack_require__.r(__webpack_exports__);
 
 let ctrlKeyHistory = 0;
 /**
-  * Allows moving around inputs/select by Ctrl+arrows
-  *
-  * @param {object} event data
-  */
+ * Allows moving around inputs/select by Ctrl+arrows
+ *
+ * @param {object} event data
+ */
 
 const onKeyDownArrowsHandler = function (event) {
   var e = event || window.event;
@@ -237,7 +239,7 @@ const KeyHandlerEvents = {
 
 /***/ }),
 
-/***/ 45:
+/***/ 56:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -305,7 +307,7 @@ const PageSettings = {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(43); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(54); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

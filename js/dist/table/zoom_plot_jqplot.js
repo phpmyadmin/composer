@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 75:
+/***/ 87:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+
+
 
 
 
@@ -267,15 +271,15 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#inputFormSubmitId').on('click', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').get(0).selectedIndex === 0 || jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').get(0).selectedIndex === 0) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strInputNull);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strInputNull);
     } else if (xLabel === yLabel) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strSameInputs);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSameInputs);
     }
   });
   /**
-    ** Prepare a div containing a link, otherwise it's incorrectly displayed
-    ** after a couple of clicks
-    **/
+   ** Prepare a div containing a link, otherwise it's incorrectly displayed
+   ** after a couple of clicks
+   **/
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#zoom_search_form') // don't show it until we have results on-screen
   .hide();
@@ -423,9 +427,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
       }, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter').html(data.sql_query);
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
+          (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#sqlqueryresultsouter'));
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(data.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         }
       }); // End $.post
     } // End database update
@@ -644,7 +648,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(75); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(87); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

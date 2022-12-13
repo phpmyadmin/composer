@@ -8,12 +8,12 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 20:
+/***/ 31:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
 
 /**
@@ -46,16 +46,16 @@ function getFormatsText() {
 }
 
 function generateCondition(criteriaDiv, table) {
-  var query = '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(table.val()) + '`.';
-  query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(table.siblings('.columnNameSelect').first().val()) + '`';
+  var query = '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(table.val()) + '`.';
+  query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(table.siblings('.columnNameSelect').first().val()) + '`';
 
   if (criteriaDiv.find('.criteria_rhs').first().val() === 'text') {
     var formatsText = getFormatsText();
-    query += window.sprintf(formatsText[criteriaDiv.find('.criteria_op').first().val()], _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeSingleQuote(criteriaDiv.find('.rhs_text_val').first().val()));
+    query += window.sprintf(formatsText[criteriaDiv.find('.criteria_op').first().val()], (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeSingleQuote)(criteriaDiv.find('.rhs_text_val').first().val()));
   } else {
     query += ' ' + criteriaDiv.find('.criteria_op').first().val();
-    query += ' `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(criteriaDiv.find('.tableNameSelect').first().val()) + '`.';
-    query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(criteriaDiv.find('.columnNameSelect').first().val()) + '`';
+    query += ' `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(criteriaDiv.find('.tableNameSelect').first().val()) + '`.';
+    query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(criteriaDiv.find('.columnNameSelect').first().val()) + '`';
   }
 
   return query;
@@ -86,21 +86,21 @@ window.generateWhereBlock = function () {
 
 function generateJoin(newTable, tableAliases, fk) {
   var query = '';
-  query += ' \n\tLEFT JOIN ' + '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(newTable) + '`';
+  query += ' \n\tLEFT JOIN ' + '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(newTable) + '`';
 
   if (tableAliases[fk.TABLE_NAME][0] !== '') {
-    query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(tableAliases[newTable][0]) + '`';
-    query += ' ON `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(tableAliases[fk.TABLE_NAME][0]) + '`';
+    query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(tableAliases[newTable][0]) + '`';
+    query += ' ON `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(tableAliases[fk.TABLE_NAME][0]) + '`';
   } else {
-    query += ' ON `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(fk.TABLE_NAME) + '`';
+    query += ' ON `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(fk.TABLE_NAME) + '`';
   }
 
   query += '.`' + fk.COLUMN_NAME + '`';
 
   if (tableAliases[fk.REFERENCED_TABLE_NAME][0] !== '') {
-    query += ' = `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(tableAliases[fk.REFERENCED_TABLE_NAME][0]) + '`';
+    query += ' = `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(tableAliases[fk.REFERENCED_TABLE_NAME][0]) + '`';
   } else {
-    query += ' = `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(fk.REFERENCED_TABLE_NAME) + '`';
+    query += ' = `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(fk.REFERENCED_TABLE_NAME) + '`';
   }
 
   query += '.`' + fk.REFERENCED_COLUMN_NAME + '`';
@@ -133,10 +133,10 @@ function appendTable(table, tableAliases, usedTables, foreignKeys) {
       query += '\n\t, ';
     }
 
-    query += '`' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(table) + '`';
+    query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(table) + '`';
 
     if (tableAliases[table][0] !== '') {
-      query += ' AS `' + _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.escapeBacktick(tableAliases[table][0]) + '`';
+      query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(tableAliases[table][0]) + '`';
     }
   }
 
@@ -162,7 +162,7 @@ window.generateFromBlock = (tableAliases, foreignKeys) => {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(20); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(31); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

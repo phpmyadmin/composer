@@ -8,14 +8,18 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 34:
+/***/ 45:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+
+
 
 
 
@@ -105,7 +109,7 @@ Export.createTemplate = function (name) {
     'templateName': name,
     'templateData': JSON.stringify(templateData)
   };
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/create', params, function (response) {
     if (response.success === true) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#templateName').val('');
@@ -115,9 +119,9 @@ Export.createTemplate = function (name) {
           jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('selected', true);
         }
       });
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateCreated);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strTemplateCreated);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
     }
   });
 };
@@ -137,7 +141,7 @@ Export.loadTemplate = function (id) {
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateId': id
   };
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/load', params, function (response) {
     if (response.success === true) {
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form[name="dump"]');
@@ -163,9 +167,9 @@ Export.loadTemplate = function (id) {
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="template_id"]').val(id);
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateLoaded);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strTemplateLoaded);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
     }
   });
 };
@@ -187,12 +191,12 @@ Export.updateTemplate = function (id) {
     'templateId': id,
     'templateData': JSON.stringify(templateData)
   };
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/update', params, function (response) {
     if (response.success === true) {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateUpdated);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strTemplateUpdated);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
     }
   });
 };
@@ -212,13 +216,13 @@ Export.deleteTemplate = function (id) {
     'exportType': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="export_type"]').val(),
     'templateId': id
   };
-  _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/export/template/delete', params, function (response) {
     if (response.success === true) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#template').find('option[value="' + id + '"]').remove();
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strTemplateDeleted);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strTemplateDeleted);
     } else {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
     }
   });
 };
@@ -257,7 +261,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#showSqlQueryModalLabel').first().html(window.Messages.strQuery);
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.highlightSql(modal);
+      (0,_modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__["default"])(modal);
     });
   });
   /**
@@ -767,7 +771,7 @@ Export.checkTimeOut = function (timeLimit) {
       'ajax_request': true
     }, function (data) {
       if (data.message === 'timeout') {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
       }
     });
   }, limit * 1000);
@@ -808,7 +812,7 @@ Export.createAliasModal = function (event) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#db_alias_select').append(option);
           });
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
         }
       });
     }
@@ -924,7 +928,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
             jquery__WEBPACK_IMPORTED_MODULE_0__('#table_alias_select').append(option);
           });
         } else {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
         }
       });
     }
@@ -949,7 +953,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
           jquery__WEBPACK_IMPORTED_MODULE_0__('#column_alias_select').append(option);
         });
       } else {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(response.error, false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error, false);
       }
     });
   });
@@ -1005,7 +1009,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(34); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(45); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

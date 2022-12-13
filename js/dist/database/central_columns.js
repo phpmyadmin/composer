@@ -8,14 +8,14 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 15:
+/***/ 26:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 
 
 
@@ -80,11 +80,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     var multiDeleteColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
 
     if (multiDeleteColumns === '') {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strRadioUnchecked);
       return false;
     }
 
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_col_name').val(multiDeleteColumns);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_form').trigger('submit');
   });
@@ -93,22 +93,22 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     var editColumnList = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
 
     if (editColumnList === '') {
-      _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage(window.Messages.strRadioUnchecked);
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strRadioUnchecked);
       return false;
     }
 
-    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-    var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', editColumnData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-    var multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
-    _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage();
+    var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    var multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0__('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/central-columns', multiColumnEditData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
@@ -186,11 +186,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
       url: 'index.php?route=/database/central-columns',
-      data: datastring + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'ajax_request=true',
+      data: datastring + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator') + 'ajax_request=true',
       dataType: 'json',
       success: function (data) {
         if (data.message !== '1') {
-          _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + data.message + '</div>', false);
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + data.message + '</div>', false);
         } else {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td input[id=checkbox_row_' + rownum + ']').val(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input[name=col_name]').val()).html();
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td[name=col_name] span').text(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input[name=col_name]').val()).html();
@@ -210,7 +210,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
         jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall').show();
       },
       error: function () {
-        _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.ajaxShowMessage('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>', false);
+        (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>', false);
       }
     });
   });
@@ -220,8 +220,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     var href = 'index.php?route=/database/central-columns/populate';
     var params = {
       'ajax_request': true,
-      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
-      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
+      'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+      'db': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db'),
       'selectedTable': selectValue
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__('#column-select').html('<option value="">' + window.Messages.strLoading + '</option>');
@@ -270,7 +270,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(15); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(26); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

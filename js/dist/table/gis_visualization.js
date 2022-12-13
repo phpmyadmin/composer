@@ -8,13 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 69:
+/***/ 81:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
 
 
 
@@ -348,7 +348,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/gis_vis
    */
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('.vector').on('mousemove', function (event) {
-    var contents = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.escapeHtml(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name')).trim();
+    var contents = (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name')).trim();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#tooltip').remove();
 
     if (contents !== '') {
@@ -377,7 +377,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/gis_vis
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(69); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(81); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
