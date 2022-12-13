@@ -5,6 +5,8 @@ import { Navigation } from '../modules/navigation.js';
 import { CommonParams } from '../modules/common.js';
 import tooltip from '../modules/tooltip.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
+import getJsConfirmCommonParam from '../modules/functions/getJsConfirmCommonParam.js';
+import { escapeHtml } from '../modules/functions/escape.js';
 
 /**
  * @fileoverview    functions used on the database structure page
@@ -329,13 +331,13 @@ AJAX.registerOnload('database/structure.js', function () {
          * @var question    String containing the question to be asked for confirmation
          */
         var question = window.Messages.strTruncateTableStrongWarning + ' ' +
-            window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + Functions.escapeHtml(currTableName) + '`') +
+            window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + escapeHtml(currTableName) + '`') +
             Functions.getForeignKeyCheckboxLoader();
 
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
             ajaxShowMessage(window.Messages.strProcessingRequest);
 
-            var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $thisAnchor.getPostData());
 
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
@@ -379,17 +381,17 @@ AJAX.registerOnload('database/structure.js', function () {
         var question;
         if (! isView) {
             question = window.Messages.strDropTableStrongWarning + ' ' +
-                window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + Functions.escapeHtml(currTableName) + '`');
+                window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + escapeHtml(currTableName) + '`');
         } else {
             question =
-                window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + Functions.escapeHtml(currTableName) + '`');
+                window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + escapeHtml(currTableName) + '`');
         }
         question += Functions.getForeignKeyCheckboxLoader();
 
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
             var $msg = ajaxShowMessage(window.Messages.strProcessingRequest);
 
-            var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $thisAnchor.getPostData());
 
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {

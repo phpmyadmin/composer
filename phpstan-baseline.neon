@@ -1051,7 +1051,7 @@ parameters:
 			path: libraries/classes/Controllers/Database/Operations/CollationController.php
 
 		-
-			message: "#^Parameter \\#3 \\$tbl_collation of method PhpMyAdmin\\\\Operations\\:\\:changeAllColumnsCollation\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\#3 \\$tableCollation of method PhpMyAdmin\\\\Operations\\:\\:changeAllColumnsCollation\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/Operations/CollationController.php
 
@@ -1061,7 +1061,7 @@ parameters:
 			path: libraries/classes/Controllers/Database/OperationsController.php
 
 		-
-			message: "#^Parameter \\#2 \\$export_sql_plugin of method PhpMyAdmin\\\\Operations\\:\\:getViewsAndCreateSqlViewStandIn\\(\\) expects PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportSql, object\\|null given\\.$#"
+			message: "#^Parameter \\#2 \\$exportSqlPlugin of method PhpMyAdmin\\\\Operations\\:\\:getViewsAndCreateSqlViewStandIn\\(\\) expects PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportSql, object\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/OperationsController.php
 
@@ -1311,8 +1311,78 @@ parameters:
 			path: libraries/classes/Controllers/ErrorReportController.php
 
 		-
+			message: "#^Call to an undefined method object\\:\\:exportFooter\\(\\)\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:exportHeader\\(\\)\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$aliasesParam has no value type specified in iterable type array\\.$#"
 			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#1 \\$dbSelect of method PhpMyAdmin\\\\Export\\:\\:exportServer\\(\\) expects array\\|string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#1 \\$exportPlugin of method PhpMyAdmin\\\\Export\\:\\:getFinalFilenameAndMimetypeForFilename\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#11 \\$allrows of method PhpMyAdmin\\\\Export\\:\\:exportTable\\(\\) expects string\\|null, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#12 \\$limitTo of method PhpMyAdmin\\\\Export\\:\\:exportTable\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#13 \\$limitFrom of method PhpMyAdmin\\\\Export\\:\\:exportTable\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#2 \\$exportPlugin of static method PhpMyAdmin\\\\Export\\:\\:exportRaw\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#2 \\$rememberTemplate of method PhpMyAdmin\\\\Export\\:\\:getFilenameAndMimetype\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#3 \\$exportPlugin of method PhpMyAdmin\\\\Export\\:\\:exportServer\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#3 \\$exportPlugin of method PhpMyAdmin\\\\Export\\:\\:getFilenameAndMimetype\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#4 \\$exportPlugin of method PhpMyAdmin\\\\Export\\:\\:exportTable\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#5 \\$filenameTemplate of method PhpMyAdmin\\\\Export\\:\\:getFilenameAndMimetype\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/Export/ExportController.php
+
+		-
+			message: "#^Parameter \\#6 \\$exportPlugin of method PhpMyAdmin\\\\Export\\:\\:exportDatabase\\(\\) expects PhpMyAdmin\\\\Plugins\\\\ExportPlugin, object given\\.$#"
+			count: 2
 			path: libraries/classes/Controllers/Export/ExportController.php
 
 		-
@@ -5541,7 +5611,7 @@ parameters:
 			path: libraries/classes/Operations.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:copyTables\\(\\) has parameter \\$tables_full with no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:copyTables\\(\\) has parameter \\$tablesFull with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Operations.php
 
@@ -5551,7 +5621,7 @@ parameters:
 			path: libraries/classes/Operations.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:createAllAccumulatedConstraints\\(\\) has parameter \\$sqlConstratints with no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:createAllAccumulatedConstraints\\(\\) has parameter \\$sqlConstraints with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Operations.php
 
@@ -5576,7 +5646,7 @@ parameters:
 			path: libraries/classes/Operations.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:getViewsAndCreateSqlViewStandIn\\(\\) has parameter \\$tables_full with no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Operations\\:\\:getViewsAndCreateSqlViewStandIn\\(\\) has parameter \\$tablesFull with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Operations.php
 
@@ -8047,7 +8117,7 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
-			count: 9
+			count: 5
 			path: libraries/classes/Table.php
 
 		-
@@ -9991,21 +10061,6 @@ parameters:
 			path: test/classes/Gis/GisGeomTestCase.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisGeometryCollectionTest.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForGenerateParams\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: test/classes/Gis/GisGeometryCollectionTest.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForGenerateWkt\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: test/classes/Gis/GisGeometryCollectionTest.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForPrepareRowAsOl\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisGeometryCollectionTest.php
@@ -10021,12 +10076,17 @@ parameters:
 			path: test/classes/Gis/GisGeometryCollectionTest.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForScaleRow\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForTestGenerateParams\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisGeometryCollectionTest.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:testGenerateParams\\(\\) has parameter \\$output with no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForTestGenerateWkt\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/classes/Gis/GisGeometryCollectionTest.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:providerForTestScaleRow\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisGeometryCollectionTest.php
 
@@ -10051,7 +10111,7 @@ parameters:
 			path: test/classes/Gis/GisGeometryCollectionTest.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:testScaleRow\\(\\) has parameter \\$output with no value type specified in iterable type array\\.$#"
+			message: "#^PHPDoc type PhpMyAdmin\\\\Gis\\\\GisGeometryCollection of property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeometryCollectionTest\\:\\:\\$object is not the same as PHPDoc type PhpMyAdmin\\\\Gis\\\\GisGeometry of overridden property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeomTestCase\\:\\:\\$object\\.$#"
 			count: 1
 			path: test/classes/Gis/GisGeometryCollectionTest.php
 
@@ -10116,11 +10176,6 @@ parameters:
 			path: test/classes/Gis/GisGeometryTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisLineStringTest.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisLineStringTest\\:\\:providerForPrepareRowAsOl\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisLineStringTest.php
@@ -10169,11 +10224,6 @@ parameters:
 			message: "#^PHPDoc type PhpMyAdmin\\\\Gis\\\\GisLineString of property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisLineStringTest\\:\\:\\$object is not the same as PHPDoc type PhpMyAdmin\\\\Gis\\\\GisGeometry of overridden property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeomTestCase\\:\\:\\$object\\.$#"
 			count: 1
 			path: test/classes/Gis/GisLineStringTest.php
-
-		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisMultiLineStringTest.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisMultiLineStringTest\\:\\:providerForPrepareRowAsOl\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -10226,11 +10276,6 @@ parameters:
 			path: test/classes/Gis/GisMultiLineStringTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisMultiPointTest.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisMultiPointTest\\:\\:providerForPrepareRowAsOl\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisMultiPointTest.php
@@ -10279,11 +10324,6 @@ parameters:
 			message: "#^PHPDoc type PhpMyAdmin\\\\Gis\\\\GisMultiPoint of property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisMultiPointTest\\:\\:\\$object is not the same as PHPDoc type PhpMyAdmin\\\\Gis\\\\GisGeometry of overridden property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeomTestCase\\:\\:\\$object\\.$#"
 			count: 1
 			path: test/classes/Gis/GisMultiPointTest.php
-
-		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisMultiPolygonTest.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisMultiPolygonTest\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -10351,11 +10391,6 @@ parameters:
 			path: test/classes/Gis/GisMultiPolygonTest.php
 
 		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisPointTest.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisPointTest\\:\\:providerForPrepareRowAsOl\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Gis/GisPointTest.php
@@ -10414,11 +10449,6 @@ parameters:
 			message: "#^PHPDoc type PhpMyAdmin\\\\Gis\\\\GisPoint of property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisPointTest\\:\\:\\$object is not the same as PHPDoc type PhpMyAdmin\\\\Gis\\\\GisGeometry of overridden property PhpMyAdmin\\\\Tests\\\\Gis\\\\GisGeomTestCase\\:\\:\\$object\\.$#"
 			count: 1
 			path: test/classes/Gis/GisPointTest.php
-
-		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'TCPDF' and TCPDF will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/Gis/GisPolygonTest.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Gis\\\\GisPolygonTest\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"

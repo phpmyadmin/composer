@@ -4,6 +4,9 @@ import { Functions } from '../../modules/functions.js';
 import { CommonParams } from '../../modules/common.js';
 import { Config } from '../../modules/config.js';
 import tooltip from '../../modules/tooltip.js';
+import createProfilingChart from '../../modules/functions/createProfilingChart.js';
+import { escapeHtml } from '../../modules/functions/escape.js';
+import getImageTag from '../../modules/functions/getImageTag.js';
 
 /**
  * @fileoverview    Javascript functions used in server status monitor page
@@ -40,7 +43,7 @@ function serverResponseError () {
         title: window.Messages.strRefreshFailed
     });
     $('#emptyDialog').html(
-        Functions.getImage('s_attention') +
+        getImageTag('s_attention') +
         window.Messages.strInvalidResponseExplanation
     );
     $('#emptyDialog').dialog({
@@ -762,9 +765,9 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         event.preventDefault();
         runtime.redrawCharts = ! runtime.redrawCharts;
         if (! runtime.redrawCharts) {
-            $(this).html(Functions.getImage('play') + window.Messages.strResumeMonitor);
+            $(this).html(getImageTag('play') + window.Messages.strResumeMonitor);
         } else {
-            $(this).html(Functions.getImage('pause') + window.Messages.strPauseMonitor);
+            $(this).html(getImageTag('pause') + window.Messages.strPauseMonitor);
             if (! runtime.charts) {
                 initGrid();
                 $('a[href="#settingsPopup"]').show();
@@ -812,7 +815,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     } else {
                         return serverResponseError();
                     }
-                    var icon = Functions.getImage('s_success');
+                    var icon = getImageTag('s_success');
                     var msg = '';
                     var str = '';
 
@@ -829,7 +832,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     }
 
                     if (msg.length === 0) {
-                        icon = Functions.getImage('s_error');
+                        icon = getImageTag('s_error');
                         msg = window.Messages.strBothLogOff;
                     }
 
@@ -837,20 +840,20 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     str += icon + msg + '<br>';
 
                     if (logVars.log_output !== 'TABLE') {
-                        str += Functions.getImage('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
+                        str += getImageTag('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
                     } else {
-                        str += Functions.getImage('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
+                        str += getImageTag('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
                     }
 
                     if (logVars.slow_query_log === 'ON') {
                         if (logVars.long_query_time > 2) {
-                            str += Functions.getImage('s_attention') + ' ';
+                            str += getImageTag('s_attention') + ' ';
                             str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
                             str += '<br>';
                         }
 
                         if (logVars.long_query_time < 2) {
-                            str += Functions.getImage('s_success') + ' ';
+                            str += getImageTag('s_success') + ' ';
                             str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
                             str += '<br>';
                         }
@@ -1020,7 +1023,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
             label: $('#variableInput').val().replace(/_/g, ' ')
         };
         newChart.series.push(newSeries);
-        $('#seriesPreview').append('- ' + Functions.escapeHtml(newSeries.label + str) + '<br>');
+        $('#seriesPreview').append('- ' + escapeHtml(newSeries.label + str) + '<br>');
         newChart.nodes.push(serie);
         $('#variableInput').val('');
         $('input[name="differentialValue"]').prop('checked', true);
@@ -1186,7 +1189,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
     function addChart (chartObj, initialize) {
         var i;
         var settings = {
-            title: Functions.escapeHtml(chartObj.title),
+            title: escapeHtml(chartObj.title),
             grid: {
                 drawBorder: false,
                 shadow: false,
@@ -2059,7 +2062,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
             if (name === 'user_host') {
                 return value.replace(/(\[.*?\])+/g, '');
             }
-            return Functions.escapeHtml(value);
+            return escapeHtml(value);
         };
 
         for (var i = 0, l = rows.length; i < l; i++) {
@@ -2094,7 +2097,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
 
         // Append a tooltip to the count column, if there exist one
         if ($('#logTable').find('tr').first().find('th').last().text().indexOf('#') > -1) {
-            $('#logTable').find('tr').first().find('th').last().append('&nbsp;' + Functions.getImage('b_help', '', { 'class': 'qroupedQueryInfoIcon' }));
+            $('#logTable').find('tr').first().find('th').last().append('&nbsp;' + getImageTag('b_help', '', { 'class': 'qroupedQueryInfoIcon' }));
 
             var tooltipContent = window.Messages.strCountColumnExplanation;
             if (groupInserts) {
@@ -2221,7 +2224,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
             explain += '<p></p>';
 
             var tempExplain = function (key, value) {
-                var newValue = (value === null) ? 'null' : Functions.escapeHtml(value);
+                var newValue = (value === null) ? 'null' : escapeHtml(value);
 
                 if (key === 'type' && newValue.toLowerCase() === 'all') {
                     newValue = '<span class="text-danger">' + newValue + '</span>';
@@ -2297,10 +2300,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     return false;
                 });
 
-                profilingChart = Functions.createProfilingChart(
-                    'queryProfiling',
-                    chartData
-                );
+                profilingChart = createProfilingChart('queryProfiling', chartData);
             }
         });
         return profilingChart;

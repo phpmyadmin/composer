@@ -1,16 +1,20 @@
 import $ from 'jquery';
 import { AJAX } from './ajax.js';
 import { Navigation } from './navigation.js';
-import { CommonActions, CommonParams } from './common.js';
+import { CommonParams } from './common.js';
 import { Indexes } from './indexes.js';
 import { Config } from './config.js';
 import tooltip from './tooltip.js';
 import highlightSql from './sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
+import handleCreateViewModal from './functions/handleCreateViewModal.js';
+import { escapeHtml } from './functions/escape.js';
+import getImageTag from './functions/getImageTag.js';
+import handleRedirectAndReload from './functions/handleRedirectAndReload.js';
+import refreshMainContent from './functions/refreshMainContent.js';
 
-/* global ChartType, ColumnType, DataTable, JQPlotChartFactory */ // js/chart.js
 /* global DatabaseStructure */ // js/database/structure.js
-/* global firstDayOfCalendar, maxInputVars, themeImagePath */ // templates/javascript/variables.twig
+/* global firstDayOfCalendar, themeImagePath */ // templates/javascript/variables.twig
 
 /**
  * General functions, usually for data manipulation pages.
@@ -54,36 +58,6 @@ let sqlAutoCompleteDefaultTable = '';
  * @type {array}
  */
 window.centralColumnList = [];
-
-/**
- * Array to hold 'Primary' index columns.
- * @type {array}
- */
-window.primaryIndexes = [];
-
-/**
- * Array to hold 'Unique' index columns.
- * @type {array}
- */
-window.uniqueIndexes = [];
-
-/**
- * Array to hold 'Index' columns.
- * @type {array}
- */
-window.indexes = [];
-
-/**
- * Array to hold 'Fulltext' columns.
- * @type {array}
- */
-window.fulltextIndexes = [];
-
-/**
- * Array to hold 'Spatial' columns.
- * @type {array}
- */
-window.spatialIndexes = [];
 
 /**
  * Make sure that ajax requests will not be cached by appending a random variable to their parameters.
@@ -239,25 +213,6 @@ Functions.addDateTimePicker = function () {
 };
 
 /**
- * Handle redirect and reload flags sent as part of AJAX requests
- *
- * @param data ajax response data
- */
-Functions.handleRedirectAndReload = function (data) {
-    if (parseInt(data.redirect_flag) === 1) {
-        // add one more GET param to display session expiry msg
-        if (window.location.href.indexOf('?') === -1) {
-            window.location.href += '?session_expired=1';
-        } else {
-            window.location.href += CommonParams.get('arg_separator') + 'session_expired=1';
-        }
-        window.location.reload();
-    } else if (parseInt(data.reload_flag) === 1) {
-        window.location.reload();
-    }
-};
-
-/**
  * Creates an SQL editor which supports auto completing etc.
  *
  * @param $textarea   jQuery object wrapping the textarea to be made the editor
@@ -350,58 +305,6 @@ Functions.clearSelection = function () {
             sel.removeAllRanges();
         }
     }
-};
-
-/**
- * @param {string} value
- * @return {string}
- */
-const escapeHtml = (value = '') => {
-    const element = document.createElement('span');
-    element.appendChild(document.createTextNode(value));
-    return element.innerHTML;
-};
-
-Functions.escapeHtml = escapeHtml;
-
-/**
- * JavaScript escaping
- *
- * @param {any} unsafe
- * @return {string | false}
- */
-Functions.escapeJsString = function (unsafe) {
-    if (typeof (unsafe) !== 'undefined') {
-        return unsafe
-            .toString()
-            .replace('\x00', '')
-            .replace('\\', '\\\\')
-            .replace('\'', '\\\'')
-            .replace('&#039;', '\\&#039;')
-            .replace('"', '\\"')
-            .replace('&quot;', '\\&quot;')
-            .replace('\n', '\n')
-            .replace('\r', '\r')
-            .replace(/<\/script/gi, '</\' + \'script');
-    } else {
-        return false;
-    }
-};
-
-/**
- * @param {string} s
- * @return {string}
- */
-Functions.escapeBacktick = function (s) {
-    return s.replace('`', '``');
-};
-
-/**
- * @param {string} s
- * @return {string}
- */
-Functions.escapeSingleQuote = function (s) {
-    return s.replace('\\', '\\\\').replace('\'', '\\\'');
 };
 
 /**
@@ -944,7 +847,7 @@ Functions.onloadIdleEvent = function () {
                         $('input[name=token]').val(data.new_token);
                     }
                     idleSecondsCounter = 0;
-                    Functions.handleRedirectAndReload(data);
+                    handleRedirectAndReload(data);
                 }
             }
         });
@@ -1100,7 +1003,7 @@ Functions.getForeignKeyCheckboxLoader = function () {
     var html = '';
     html += '<div class="mt-1 mb-2">';
     html += '<div class="load-default-fk-check-value">';
-    html += Functions.getImage('ajax_clock_small');
+    html += getImageTag('ajax_clock_small');
     html += '</div>';
     html += '</div>';
     return html;
@@ -1119,23 +1022,6 @@ Functions.loadForeignKeyCheckbox = function () {
             '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
         $('.load-default-fk-check-value').replaceWith(html);
     });
-};
-
-Functions.getJsConfirmCommonParam = function (elem, parameters) {
-    var $elem = $(elem);
-    var params = parameters;
-    var sep = CommonParams.get('arg_separator');
-    if (params) {
-        // Strip possible leading ?
-        if (params.startsWith('?')) {
-            params = params.substring(1);
-        }
-        params += sep;
-    } else {
-        params = '';
-    }
-    params += 'is_js_confirmed=1' + sep + 'ajax_request=true' + sep + 'fk_checks=' + ($elem.find('#fk_checks').is(':checked') ? 1 : 0);
-    return params;
 };
 
 Functions.teardownSqlQueryEditEvents = () => {
@@ -1178,7 +1064,7 @@ Functions.onloadSqlQueryEditEvents = function () {
         var sqlQuery = $form.find('input[name=\'sql_query\']').val().trim();
         var $innerSql = $(this).parent().prev().find('code.sql');
 
-        var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + Functions.escapeHtml(sqlQuery) + '</textarea>\n';
+        var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + escapeHtml(sqlQuery) + '</textarea>\n';
         newContent += Functions.getForeignKeyCheckboxLoader();
         newContent += '<input type="submit" id="sql_query_edit_save" class="btn btn-secondary button btnSave" value="' + window.Messages.strGo + '">\n';
         newContent += '<input type="button" id="sql_query_edit_discard" class="btn btn-secondary button btnDiscard" value="' + window.Messages.strCancel + '">\n';
@@ -1621,76 +1507,6 @@ Functions.showWarningForIntTypes = function () {
 };
 
 /**
- * Creates a Profiling Chart. Used in sql.js
- * and in server/status/monitor.js
- *
- * @param target
- * @param data
- *
- * @return {object}
- */
-Functions.createProfilingChart = function (target, data) {
-    // create the chart
-    var factory = new JQPlotChartFactory();
-    var chart = factory.createChart(ChartType.PIE, target);
-
-    // create the data table and add columns
-    var dataTable = new DataTable();
-    dataTable.addColumn(ColumnType.STRING, '');
-    dataTable.addColumn(ColumnType.NUMBER, '');
-    dataTable.setData(data);
-
-    var windowWidth = $(window).width();
-    var location = 's';
-    if (windowWidth > 768) {
-        location = 'se';
-    }
-
-    // draw the chart and return the chart object
-    chart.draw(dataTable, {
-        seriesDefaults: {
-            rendererOptions: {
-                showDataLabels: true
-            }
-        },
-        highlighter: {
-            tooltipLocation: 'se',
-            sizeAdjust: 0,
-            tooltipAxes: 'pieref',
-            formatString: '%s, %.9Ps'
-        },
-        legend: {
-            show: true,
-            location: location,
-            rendererOptions: {
-                numberColumns: 2
-            }
-        },
-        // from https://web.archive.org/web/20190321233412/http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
-        seriesColors: [
-            '#fce94f',
-            '#fcaf3e',
-            '#e9b96e',
-            '#8ae234',
-            '#729fcf',
-            '#ad7fa8',
-            '#ef2929',
-            '#888a85',
-            '#c4a000',
-            '#ce5c00',
-            '#8f5902',
-            '#4e9a06',
-            '#204a87',
-            '#5c3566',
-            '#a40000',
-            '#babdb6',
-            '#2e3436'
-        ]
-    });
-    return chart;
-};
-
-/**
  * Formats a profiling duration nicely (in us and ms time).
  * Used in server/status/monitor.js
  *
@@ -2000,9 +1816,7 @@ Functions.onloadCreateTableEvents = function () {
                         var tablesTable = $('#tablesForm').find('tbody').not('#tbl_summary_row');
                         // this is the first table created in this db
                         if (tablesTable.length === 0) {
-                            CommonActions.refreshMain(
-                                CommonParams.get('opendb_url')
-                            );
+                            refreshMainContent(CommonParams.get('opendb_url'));
                         } else {
                             /**
                              * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
@@ -2479,7 +2293,7 @@ Functions.onloadEnumSetEditor = function () {
         } else {
             title = window.Messages.enum_columnVals.replace(
                 /%s/,
-                '"' + Functions.escapeHtml(decodeURIComponent(colname)) + '"'
+                '"' + escapeHtml(decodeURIComponent(colname)) + '"'
             );
         }
         // Get the values as a string
@@ -2528,7 +2342,7 @@ Functions.onloadEnumSetEditor = function () {
             values.push('', '', '', '');
         }
         // Add the parsed values to the editor
-        var dropIcon = Functions.getImage('b_drop');
+        var dropIcon = getImageTag('b_drop');
         for (i = 0; i < values.length; i++) {
             fields += '<tr><td>' +
                 '<input type=\'text\' value=\'' + values[i] + '\'>' +
@@ -2542,7 +2356,7 @@ Functions.onloadEnumSetEditor = function () {
         var dialog = '<div id=\'enum_editor\'>' +
             '<fieldset class="pma-fieldset">' +
             '<legend>' + title + '</legend>' +
-            '<p>' + Functions.getImage('s_notice') +
+            '<p>' + getImageTag('s_notice') +
             window.Messages.enum_hint + '</p>' +
             '<table class="table table-borderless values">' + fields + '</table>' +
             '</fieldset><fieldset class="pma-fieldset tblFooters">' +
@@ -2633,16 +2447,16 @@ Functions.onloadEnumSetEditor = function () {
         var min = (listSize <= maxRows) ? listSize : maxRows;
         for (i = 0; i < min; i++) {
             fields += '<tr><td><div><span class="fw-bold">' +
-                Functions.escapeHtml(window.centralColumnList[db + '_' + table][i].col_name) +
+                escapeHtml(window.centralColumnList[db + '_' + table][i].col_name) +
                 '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
 
             if (window.centralColumnList[db + '_' + table][i].col_attribute !== '') {
-                fields += '(' + Functions.escapeHtml(window.centralColumnList[db + '_' + table][i].col_attribute) + ') ';
+                fields += '(' + escapeHtml(window.centralColumnList[db + '_' + table][i].col_attribute) + ') ';
             }
             if (window.centralColumnList[db + '_' + table][i].col_length !== '') {
-                fields += '(' + Functions.escapeHtml(window.centralColumnList[db + '_' + table][i].col_length) + ') ';
+                fields += '(' + escapeHtml(window.centralColumnList[db + '_' + table][i].col_length) + ') ';
             }
-            fields += Functions.escapeHtml(window.centralColumnList[db + '_' + table][i].col_extra) + '</span>' +
+            fields += escapeHtml(window.centralColumnList[db + '_' + table][i].col_extra) + '</span>' +
                 '</div></td>';
             if (pick) {
                 fields += '<td><input class="btn btn-secondary pick w-100" type="submit" value="' +
@@ -2653,7 +2467,7 @@ Functions.onloadEnumSetEditor = function () {
         var resultPointer = i;
         var searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
         if (fields === '') {
-            fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + Functions.escapeHtml(db) + '\'');
+            fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + escapeHtml(db) + '\'');
             searchIn = '';
         }
         var seeMore = '';
@@ -2744,7 +2558,7 @@ Functions.onloadEnumSetEditor = function () {
                     '<tr class=\'hide\'><td>' +
                     '<input type=\'text\'>' +
                     '</td><td class=\'drop\'>' +
-                    Functions.getImage('b_drop') +
+                    getImageTag('b_drop') +
                     '</td></tr>'
                 )
                 .find('tr').last()
@@ -3444,7 +3258,7 @@ Functions.onloadCreateView = function () {
     $('.logout').on('click', function () {
         var form = $(
             '<form method="POST" action="' + $(this).attr('href') + '" class="disableAjax">' +
-            '<input type="hidden" name="token" value="' + Functions.escapeHtml(CommonParams.get('token')) + '">' +
+            '<input type="hidden" name="token" value="' + escapeHtml(CommonParams.get('token')) + '">' +
             '</form>'
         );
         $('body').append(form);
@@ -3457,7 +3271,7 @@ Functions.onloadCreateView = function () {
      */
     $(document).on('click', 'a.create_view.ajax', function (e) {
         e.preventDefault();
-        Functions.createViewModal($(this));
+        handleCreateViewModal($(this));
     });
     /**
      * Attach Ajax event handlers for input fields in the editor
@@ -3480,44 +3294,6 @@ Functions.onloadCreateView = function () {
     if ($('textarea[name="view[as]"]').length !== 0) {
         window.codeMirrorEditor = Functions.getSqlEditor($('textarea[name="view[as]"]'));
     }
-};
-
-Functions.createViewModal = function ($this) {
-    var $msg = ajaxShowMessage();
-    var sep = CommonParams.get('arg_separator');
-    var params = Functions.getJsConfirmCommonParam(this, $this.getPostData());
-    params += sep + 'ajax_dialog=1';
-    $.post($this.attr('href'), params, function (data) {
-        if (typeof data !== 'undefined' && data.success === true) {
-            ajaxRemoveMessage($msg);
-            $('#createViewModalGoButton').on('click', function () {
-                if (typeof window.CodeMirror !== 'undefined') {
-                    window.codeMirrorEditor.save();
-                }
-                $msg = ajaxShowMessage();
-                $.post('index.php?route=/view/create', $('#createViewModal').find('form').serialize(), function (data) {
-                    ajaxRemoveMessage($msg);
-                    if (typeof data !== 'undefined' && data.success === true) {
-                        $('#createViewModal').modal('hide');
-                        $('.result_query').html(data.message);
-                        Navigation.reload();
-                    } else {
-                        ajaxShowMessage(data.error);
-                    }
-                });
-            });
-            $('#createViewModal').find('.modal-body').first().html(data.message);
-            // Attach syntax highlighted editor
-            $('#createViewModal').on('shown.bs.modal', function () {
-                window.codeMirrorEditor = Functions.getSqlEditor($('#createViewModal').find('textarea'));
-                $('input:visible[type=text]', $('#createViewModal')).first().trigger('focus');
-                $('#createViewModal').off('shown.bs.modal');
-            });
-            $('#createViewModal').modal('show');
-        } else {
-            ajaxShowMessage(data.error);
-        }
-    });
 };
 
 /**
@@ -3746,59 +3522,6 @@ Functions.formatDateTime = function (date, seconds) {
 };
 
 /**
- * Check than forms have less fields than max allowed by PHP.
- * @return {boolean}
- */
-Functions.checkNumberOfFields = function () {
-    if (typeof maxInputVars === 'undefined') {
-        return false;
-    }
-    if (false === maxInputVars) {
-        return false;
-    }
-    $('form').each(function () {
-        var nbInputs = $(this).find(':input').length;
-        if (nbInputs > maxInputVars) {
-            var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
-            ajaxShowMessage(warning);
-            return false;
-        }
-        return true;
-    });
-
-    return true;
-};
-
-/**
- * Ignore the displayed php errors.
- * Simply removes the displayed errors.
- *
- * @param clearPrevErrors whether to clear errors stored
- *             in $_SESSION['prev_errors'] at server
- *
- */
-Functions.ignorePhpErrors = function (clearPrevErrors) {
-    var clearPrevious = clearPrevErrors;
-    if (typeof (clearPrevious) === 'undefined' ||
-        clearPrevious === null
-    ) {
-        clearPrevious = false;
-    }
-    // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
-    // It clears the prev_errors stored in session.
-    if (clearPrevious) {
-        var $pmaReportErrorsForm = $('#pma_report_errors_form');
-        $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
-        $pmaReportErrorsForm.trigger('submit');
-    }
-
-    // remove displayed errors
-    var $pmaErrors = $('#pma_errors');
-    $pmaErrors.fadeOut('slow');
-    $pmaErrors.remove();
-};
-
-/**
  * Toggle the Datetimepicker UI if the date value entered
  * by the user in the 'text box' is not going to be accepted
  * by the Datetimepicker plugin (but is accepted by MySQL)
@@ -3880,184 +3603,6 @@ Functions.onloadSortLinkMouseEvent = function () {
     });
     $(document).on('mouseout', '.sortlink', function () {
         $(this).find('.soimg').toggle();
-    });
-};
-
-/**
- * Returns an HTML IMG tag for a particular image from a theme,
- * which may be an actual file or an icon from a sprite
- *
- * @param {string} image      The name of the file to get
- * @param {string} alternate  Used to set 'alt' and 'title' attributes of the image
- * @param {object} attributes An associative array of other attributes
- *
- * @return {object} The requested image, this object has two methods:
- *                  .toString()        - Returns the IMG tag for the requested image
- *                  .attr(name)        - Returns a particular attribute of the IMG
- *                                       tag given it's name
- *                  .attr(name, value) - Sets a particular attribute of the IMG
- *                                       tag to the given value
- */
-Functions.getImage = function (image, alternate, attributes) {
-    var alt = alternate;
-    var attr = attributes;
-    // custom image object, it will eventually be returned by this functions
-    var retval = {
-        data: {
-            // this is private
-            alt: '',
-            title: '',
-            src: 'themes/dot.gif',
-        },
-        attr: function (name, value) {
-            if (value === undefined) {
-                if (this.data[name] === undefined) {
-                    return '';
-                } else {
-                    return this.data[name];
-                }
-            } else {
-                this.data[name] = value;
-            }
-        },
-        toString: function () {
-            var retval = '<' + 'img';
-            for (var i in this.data) {
-                retval += ' ' + i + '="' + this.data[i] + '"';
-            }
-            retval += ' /' + '>';
-            return retval;
-        }
-    };
-    // initialise missing parameters
-    if (attr === undefined) {
-        attr = {};
-    }
-    if (alt === undefined) {
-        alt = '';
-    }
-    // set alt
-    if (attr.alt !== undefined) {
-        retval.attr('alt', Functions.escapeHtml(attr.alt));
-    } else {
-        retval.attr('alt', Functions.escapeHtml(alt));
-    }
-    // set title
-    if (attr.title !== undefined) {
-        retval.attr('title', Functions.escapeHtml(attr.title));
-    } else {
-        retval.attr('title', Functions.escapeHtml(alt));
-    }
-    // set css classes
-    retval.attr('class', 'icon ic_' + image);
-    // set all other attributes
-    for (var i in attr) {
-        if (i === 'src') {
-            // do not allow to override the 'src' attribute
-            continue;
-        }
-
-        retval.attr(i, attr[i]);
-    }
-
-    return retval;
-};
-
-/**
- * Sets a configuration value.
- *
- * A configuration value may be set in both browser's local storage and
- * remotely in server's configuration table.
- *
- * NOTE: Depending on server's configuration, the configuration table may be or
- * not persistent.
- *
- * @param {string}     key         Configuration key.
- * @param {object}     value       Configuration value.
- */
-Functions.configSet = function (key, value) {
-    // Updating value in local storage.
-    var serialized = JSON.stringify(value);
-    localStorage.setItem(key, serialized);
-
-    $.ajax({
-        url: 'index.php?route=/config/set',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            'ajax_request': true,
-            key: key,
-            server: CommonParams.get('server'),
-            value: serialized,
-        },
-        success: function (data) {
-            if (data.success !== true) {
-                // Try to find a message to display
-                if (data.error || data.message || false) {
-                    ajaxShowMessage(data.error || data.message);
-                }
-            }
-        }
-    });
-};
-
-/**
- * Gets a configuration value. A configuration value will be searched in
- * browser's local storage first and if not found, a call to the server will be
- * made.
- *
- * If value should not be cached and the up-to-date configuration value from
- * right from the server is required, the third parameter should be `false`.
- *
- * @param {string}     key             Configuration key.
- * @param {boolean}    cached          Configuration type.
- * @param {Function}   successCallback The callback to call after the value is successfully received
- * @param {Function}   failureCallback The callback to call when the value can not be received
- *
- * @return {void}
- */
-Functions.configGet = function (key, cached, successCallback, failureCallback) {
-    var isCached = (typeof cached !== 'undefined') ? cached : true;
-    var value = localStorage.getItem(key);
-    if (isCached && value !== undefined && value !== null) {
-        return JSON.parse(value);
-    }
-
-    // Result not found in local storage or ignored.
-    // Hitting the server.
-    $.ajax({
-        url: 'index.php?route=/config/get',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            'ajax_request': true,
-            server: CommonParams.get('server'),
-            key: key
-        },
-        success: function (data) {
-            if (data.success !== true) {
-                // Try to find a message to display
-                if (data.error || data.message || false) {
-                    ajaxShowMessage(data.error || data.message);
-                }
-
-                // Call the callback if it is defined
-                if (typeof failureCallback === 'function') {
-                    failureCallback();
-                }
-
-                // return here, exit non success mode
-                return;
-            }
-
-            // Updating value in local storage.
-            localStorage.setItem(key, JSON.stringify(data.value));
-            // Call the callback if it is defined
-            if (typeof successCallback === 'function') {
-                // Feed it the value previously saved like on async mode
-                successCallback(JSON.parse(localStorage.getItem(key)));
-            }
-        }
     });
 };
 

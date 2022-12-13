@@ -1,8 +1,10 @@
 import $ from 'jquery';
 import { AJAX } from '../modules/ajax.js';
-import { Functions } from '../modules/functions.js';
-import { CommonActions, CommonParams } from '../modules/common.js';
+import { CommonParams } from '../modules/common.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
+import getJsConfirmCommonParam from '../modules/functions/getJsConfirmCommonParam.js';
+import { escapeHtml } from '../modules/functions/escape.js';
+import refreshMainContent from '../modules/functions/refreshMainContent.js';
 
 /**
  * for table relation
@@ -33,7 +35,7 @@ TableRelation.setDropdownValues = function ($dropdown, values, selectedValue) {
     // add an empty string to the beginning for empty selection
     values.unshift('');
     $.each(values, function () {
-        optionsAsString += '<option value=\'' + Functions.escapeHtml(this) + '\'' + (selectedValue === Functions.escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + Functions.escapeHtml(this) + '</option>';
+        optionsAsString += '<option value=\'' + escapeHtml(this) + '\'' + (selectedValue === escapeHtml(this) ? ' selected=\'selected\'' : '') + '>' + escapeHtml(this) + '</option>';
     });
     $dropdown.append($(optionsAsString));
 };
@@ -232,7 +234,7 @@ AJAX.registerOnload('table/relation.js', function () {
         // Object containing reference to the current field's row
         var $currRow = $anchor.parents('tr');
 
-        var dropQuery = Functions.escapeHtml(
+        var dropQuery = escapeHtml(
             $currRow.children('td')
                 .children('.drop_foreign_key_msg')
                 .val()
@@ -242,13 +244,14 @@ AJAX.registerOnload('table/relation.js', function () {
 
         $anchor.confirm(question, $anchor.attr('href'), function (url) {
             var $msg = ajaxShowMessage(window.Messages.strDroppingForeignKey, false);
-            var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $anchor.getPostData());
             $.post(url, params, function (data) {
                 if (data.success === true) {
                     ajaxRemoveMessage($msg);
-                    CommonActions.refreshMain(false, function () {
+                    refreshMainContent(false);
+                    AJAX.callback = () => {
                         // Do nothing
-                    });
+                    };
                 } else {
                     ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
                 }

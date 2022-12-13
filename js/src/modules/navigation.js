@@ -1,9 +1,11 @@
 import $ from 'jquery';
-import { Functions } from './functions.js';
 import { CommonParams } from './common.js';
 import { Config } from './config.js';
 import tooltip from './tooltip.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
+import handleCreateViewModal from './functions/handleCreateViewModal.js';
+import { getConfigValue, setConfigValue } from './functions/config.js';
+import handleRedirectAndReload from './functions/handleRedirectAndReload.js';
 
 /**
  * function used in or for navigation panel
@@ -451,7 +453,7 @@ Navigation.onload = () => function () {
     /** New view */
     $(document).on('click', 'li.new_view a.ajax', function (event) {
         event.preventDefault();
-        Functions.createViewModal($(this));
+        handleCreateViewModal($(this));
     });
 
     /** Hide navigation tree item */
@@ -1037,7 +1039,7 @@ Navigation.treePagination = function ($this) {
             }
         } else {
             ajaxShowMessage(data.error);
-            Functions.handleRedirectAndReload(data);
+            handleRedirectAndReload(data);
         }
         Navigation.treeStateUpdate();
     });
@@ -1194,7 +1196,7 @@ Navigation.ResizeHandler = function () {
      */
     this.mouseup = function (event) {
         $('body').css('cursor', '');
-        Functions.configSet('NavigationWidth', event.data.resize_handler.getPos(event));
+        setConfigValue('NavigationWidth', event.data.resize_handler.getPos(event));
         $('#topmenu').menuResizer('resize');
         $(document)
             .off('mousemove')
@@ -1228,7 +1230,7 @@ Navigation.ResizeHandler = function () {
         if (width === 0 && panelWidth === 0) {
             panelWidth = 240;
         }
-        Functions.configSet('NavigationWidth', panelWidth);
+        setConfigValue('NavigationWidth', panelWidth);
         event.data.resize_handler.setWidth(panelWidth);
         event.data.resize_handler.panelWidth = width;
     };
@@ -1290,7 +1292,7 @@ Navigation.ResizeHandler = function () {
             const initialResizeValue = $('#pma_navigation').data('config-navigation-width');
             callbackSuccessGetConfigValue(initialResizeValue);
         }
-        Functions.configGet('NavigationWidth', false, callbackSuccessGetConfigValue);
+        getConfigValue('NavigationWidth', false, callbackSuccessGetConfigValue);
     };
     this.treeInit();
 };

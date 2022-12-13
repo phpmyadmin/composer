@@ -4,6 +4,11 @@ import { Navigation } from './navigation.js';
 import { CommonParams } from './common.js';
 import highlightSql from './sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
+import { escapeHtml } from './functions/escape.js';
+import getImageTag from './functions/getImageTag.js';
+import { ignorePhpErrors } from './functions/ignorePhpErrors.js';
+import handleRedirectAndReload from './functions/handleRedirectAndReload.js';
+import checkNumberOfFields from './functions/checkNumberOfFields.js';
 
 /**
  * This object handles ajax requests for pages. It also
@@ -31,7 +36,6 @@ const AJAX = {
     // eslint-disable-next-line valid-jsdoc
     /**
      * @var {Function} callback Callback to execute after a successful request
-     *                          Used by CommonActions from common.js
      */
     callback: function () {
     },
@@ -203,7 +207,7 @@ const AJAX = {
         // Show lock icon if locked targets is not empty.
         // otherwise remove lock icon
         if (! $.isEmptyObject(AJAX.lockedTargets)) {
-            $('#lock_page_icon').html(Functions.getImage('s_lock', window.Messages.strLockToolTip).toString());
+            $('#lock_page_icon').html(getImageTag('s_lock', window.Messages.strLockToolTip).toString());
         } else {
             $('#lock_page_icon').html('');
         }
@@ -392,11 +396,11 @@ const AJAX = {
             // bind for php error reporting forms (bottom)
             $('#pma_ignore_errors_bottom').on('click', function (e) {
                 e.preventDefault();
-                Functions.ignorePhpErrors();
+                ignorePhpErrors();
             });
             $('#pma_ignore_all_errors_bottom').on('click', function (e) {
                 e.preventDefault();
-                Functions.ignorePhpErrors(false);
+                ignorePhpErrors(false);
             });
             // In case of 'sendErrorReport'='always'
             // submit the hidden error reporting form.
@@ -417,10 +421,10 @@ const AJAX = {
         ajaxShowMessage(msg, false);
         // bind for php error reporting forms (popup)
         $('#pma_ignore_errors_popup').on('click', function () {
-            Functions.ignorePhpErrors();
+            ignorePhpErrors();
         });
         $('#pma_ignore_all_errors_popup').on('click', function () {
-            Functions.ignorePhpErrors(false);
+            ignorePhpErrors(false);
         });
 
         if (typeof data.success !== 'undefined' && data.success) {
@@ -450,7 +454,7 @@ const AJAX = {
             ajaxShowMessage(data.error, false);
             AJAX.active = false;
             AJAX.xhr = null;
-            Functions.handleRedirectAndReload(data);
+            handleRedirectAndReload(data);
             if (data.fieldWithError) {
                 $(':input.error').removeClass('error');
                 $('#' + data.fieldWithError).addClass('error');
@@ -534,7 +538,7 @@ const AJAX = {
                         '<div id=\'page_content\'>' + data.message + '</div>'
                     );
                     highlightSql($('#page_content'));
-                    Functions.checkNumberOfFields();
+                    checkNumberOfFields();
                 }
 
                 if (data.selflink) {
@@ -575,11 +579,11 @@ const AJAX = {
                     // bind for php error reporting forms (bottom)
                     $('#pma_ignore_errors_bottom').on('click', function (e) {
                         e.preventDefault();
-                        Functions.ignorePhpErrors();
+                        ignorePhpErrors();
                     });
                     $('#pma_ignore_all_errors_bottom').on('click', function (e) {
                         e.preventDefault();
-                        Functions.ignorePhpErrors(false);
+                        ignorePhpErrors(false);
                     });
                     // In case of 'sendErrorReport'='always'
                     // submit the hidden error reporting form.
@@ -599,10 +603,10 @@ const AJAX = {
                 ajaxShowMessage(msg, false);
                 // bind for php error reporting forms (popup)
                 $('#pma_ignore_errors_popup').on('click', function () {
-                    Functions.ignorePhpErrors();
+                    ignorePhpErrors();
                 });
                 $('#pma_ignore_all_errors_popup').on('click', function () {
-                    Functions.ignorePhpErrors(false);
+                    ignorePhpErrors(false);
                 });
 
                 if (typeof AJAX.callback === 'function') {
@@ -621,7 +625,7 @@ const AJAX = {
             $('html, body').animate({ scrollTop: $(document).height() }, 200);
             AJAX.active = false;
             AJAX.xhr = null;
-            Functions.handleRedirectAndReload(data);
+            handleRedirectAndReload(data);
             if (data.fieldWithError) {
                 $(':input.error').removeClass('error');
                 $('#' + data.fieldWithError).addClass('error');
@@ -915,7 +919,7 @@ const AJAX = {
                 ) {
                     ajaxShowMessage(
                         '<div class="alert alert-danger" role="alert">' +
-                        Functions.escapeHtml(request.responseJSON.error) +
+                        escapeHtml(request.responseJSON.error) +
                         '</div>',
                         false
                     );
@@ -926,11 +930,11 @@ const AJAX = {
                 }
 
                 if (request.status !== 0) {
-                    details += '<div>' + Functions.escapeHtml(window.sprintf(window.Messages.strErrorCode, request.status)) + '</div>';
+                    details += '<div>' + escapeHtml(window.sprintf(window.Messages.strErrorCode, request.status)) + '</div>';
                 }
-                details += '<div>' + Functions.escapeHtml(window.sprintf(window.Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
+                details += '<div>' + escapeHtml(window.sprintf(window.Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
                 if (state === 'rejected' || state === 'timeout') {
-                    details += '<div>' + Functions.escapeHtml(window.Messages.strErrorConnection) + '</div>';
+                    details += '<div>' + escapeHtml(window.Messages.strErrorConnection) + '</div>';
                 }
                 ajaxShowMessage(
                     '<div class="alert alert-danger" role="alert">' +

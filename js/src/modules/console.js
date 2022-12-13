@@ -5,6 +5,8 @@ import { Functions } from './functions.js';
 import { CommonParams } from './common.js';
 import { Navigation } from './navigation.js';
 import { Config } from './console/config.js';
+import { getConfigValue } from './functions/config.js';
+import { escapeHtml } from './functions/escape.js';
 
 /**
  * Console object
@@ -62,7 +64,7 @@ var Console = {
             return;
         }
 
-        Functions.configGet('Console', false, (data) => {
+        getConfigValue('Console', false, (data) => {
             Config.init(data);
             Console.setupAfterInit();
         }, () => {
@@ -1225,7 +1227,7 @@ var ConsoleDebug = {
                     $('<div class="message">')
                         .html(
                             '<pre>' +
-                            Functions.escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) +
+                            escapeHtml(JSON.stringify(dbgStep.args[i], null, '  ')) +
                             '</pre>'
                         )
                 );

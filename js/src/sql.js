@@ -2,10 +2,13 @@ import $ from 'jquery';
 import { AJAX } from './modules/ajax.js';
 import { Functions } from './modules/functions.js';
 import { Navigation } from './modules/navigation.js';
-import { CommonActions, CommonParams } from './modules/common.js';
+import { CommonParams } from './modules/common.js';
 import { Config } from './modules/config.js';
 import highlightSql from './modules/sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './modules/ajax-message.js';
+import createProfilingChart from './modules/functions/createProfilingChart.js';
+import { escapeHtml } from './modules/functions/escape.js';
+import refreshMainContent from './modules/functions/refreshMainContent.js';
 
 /**
  * @fileoverview    functions used wherever an sql query form is used
@@ -491,7 +494,7 @@ AJAX.registerOnload('sql.js', function () {
     // Delete row from SQL results
     $(document).on('click', 'a.delete_row.ajax', function (e) {
         e.preventDefault();
-        var question = window.sprintf(window.Messages.strDoYouReally, Functions.escapeHtml($(this).closest('td').find('div').text()));
+        var question = window.sprintf(window.Messages.strDoYouReally, escapeHtml($(this).closest('td').find('div').text()));
         var $link = $(this);
         $link.confirm(question, $link.attr('href'), function (url) {
             ajaxShowMessage();
@@ -821,14 +824,17 @@ AJAX.registerOnload('sql.js', function () {
                     if (data.ajax_reload.reload) {
                         if (data.ajax_reload.table_name) {
                             CommonParams.set('table', data.ajax_reload.table_name);
-                            CommonActions.refreshMain();
+                            refreshMainContent();
                         } else {
                             Navigation.reload();
                         }
                     }
                 } else if (typeof data.reload !== 'undefined') {
                     // this happens if a USE or DROP command was typed
-                    CommonActions.setDb(data.db);
+                    if (data.db !== CommonParams.get('db')) {
+                        CommonParams.setAll({ 'db': data.db, 'table': '' });
+                    }
+
                     var url;
                     if (data.db) {
                         if (data.table) {
@@ -839,12 +845,13 @@ AJAX.registerOnload('sql.js', function () {
                     } else {
                         url = 'index.php?route=/server/sql';
                     }
-                    CommonActions.refreshMain(url, function () {
+                    refreshMainContent(url);
+                    AJAX.callback = () => {
                         $('#sqlqueryresultsouter')
                             .show()
                             .html(data.message);
                         highlightSql($('#sqlqueryresultsouter'));
-                    });
+                    };
                 }
 
                 $('.sqlqueryresults').trigger('makegrid');
@@ -1276,7 +1283,7 @@ Sql.makeProfilingChart = function () {
     $('#profilingchart').html('').show();
     $('#profilingChartData').html('');
 
-    Functions.createProfilingChart('profilingchart', data);
+    createProfilingChart('profilingchart', data);
 };
 
 /**

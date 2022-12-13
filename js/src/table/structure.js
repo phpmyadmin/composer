@@ -2,9 +2,13 @@ import $ from 'jquery';
 import { AJAX } from '../modules/ajax.js';
 import { Functions } from '../modules/functions.js';
 import { Navigation } from '../modules/navigation.js';
-import { CommonActions, CommonParams } from '../modules/common.js';
+import { CommonParams } from '../modules/common.js';
 import highlightSql from '../modules/sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.js';
+import { Indexes } from '../modules/indexes.js';
+import getJsConfirmCommonParam from '../modules/functions/getJsConfirmCommonParam.js';
+import { escapeHtml } from '../modules/functions/escape.js';
+import refreshMainContent from '../modules/functions/refreshMainContent.js';
 
 /**
  * @fileoverview    functions used on the table structure page
@@ -58,11 +62,7 @@ AJAX.registerTeardown('table/structure.js', function () {
 });
 
 AJAX.registerOnload('table/structure.js', function () {
-    // Re-initialize variables.
-    window.primaryIndexes = [];
-    window.indexes = [];
-    window.fulltextIndexes = [];
-    window.spatialIndexes = [];
+    Indexes.resetColumnLists();
 
     /**
      *Ajax action for submitting the "Column Change" and "Add Column" form
@@ -107,7 +107,7 @@ AJAX.registerOnload('table/structure.js', function () {
                             }
                         });
                     } else {
-                        CommonActions.refreshMain('index.php?route=/table/structure');
+                        refreshMainContent('index.php?route=/table/structure');
                     }
                 } else {
                     ajaxShowMessage(data.error, false);
@@ -187,7 +187,7 @@ AJAX.registerOnload('table/structure.js', function () {
          * @var currColumnName    String containing name of the field referred to by {@link curr_row}
          */
         var currColumnName = $currRow.children('th').children('label').text().trim();
-        currColumnName = Functions.escapeHtml(currColumnName);
+        currColumnName = escapeHtml(currColumnName);
         /**
          * @var $afterFieldItem    Corresponding entry in the 'After' field.
          */
@@ -199,7 +199,7 @@ AJAX.registerOnload('table/structure.js', function () {
         var $thisAnchor = $(this);
         $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
             var $msg = ajaxShowMessage(window.Messages.strDroppingColumn, false);
-            var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $thisAnchor.getPostData());
             params += CommonParams.get('arg_separator') + 'ajax_page_request=1';
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
@@ -267,7 +267,7 @@ AJAX.registerOnload('table/structure.js', function () {
             addClause = 'ADD FULLTEXT';
         }
         var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' +
-            Functions.escapeHtml(currTableName) + '` ' + addClause + '(`' + Functions.escapeHtml(currColumnName) + '`);');
+            escapeHtml(currTableName) + '` ' + addClause + '(`' + escapeHtml(currColumnName) + '`);');
 
         var $thisAnchor = $(this);
 
@@ -275,7 +275,7 @@ AJAX.registerOnload('table/structure.js', function () {
             ajaxShowMessage();
             AJAX.source = $this;
 
-            var params = Functions.getJsConfirmCommonParam(this, $thisAnchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $thisAnchor.getPostData());
             params += CommonParams.get('arg_separator') + 'ajax_page_request=1';
             $.post(url, params, AJAX.responseHandler);
         });
@@ -452,7 +452,7 @@ AJAX.registerOnload('table/structure.js', function () {
         var $link = $(this);
         var question = window.Messages.strRemovePartitioningWarning;
         $link.confirm(question, $link.attr('href'), function (url) {
-            var params = Functions.getJsConfirmCommonParam({
+            var params = getJsConfirmCommonParam({
                 'ajax_request': true,
                 'ajax_page_request': true
             }, $link.getPostData());

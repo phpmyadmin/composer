@@ -2,9 +2,11 @@ import $ from 'jquery';
 import { AJAX } from './ajax.js';
 import { Functions } from './functions.js';
 import { Navigation } from './navigation.js';
-import { CommonActions, CommonParams } from './common.js';
+import { CommonParams } from './common.js';
 import highlightSql from './sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
+import getJsConfirmCommonParam from './functions/getJsConfirmCommonParam.js';
+import refreshMainContent from './functions/refreshMainContent.js';
 
 /**
  * @fileoverview    function used for index manipulation pages
@@ -15,6 +17,47 @@ import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
 const Indexes = {};
 
 /**
+ * Array to hold 'Primary' index columns.
+ * @type {array}
+ */
+let primaryColumns = [];
+
+/**
+ * Array to hold 'Unique' index columns.
+ * @type {array}
+ */
+let uniqueColumns = [];
+
+/**
+ * Array to hold 'Index' columns.
+ * @type {array}
+ */
+let indexColumns = [];
+
+/**
+ * Array to hold 'Fulltext' columns.
+ * @type {array}
+ */
+let fulltextColumns = [];
+
+/**
+ * Array to hold 'Spatial' columns.
+ * @type {array}
+ */
+let spatialColumns = [];
+
+/**
+ * @return {void}
+ */
+Indexes.resetColumnLists = () => {
+    primaryColumns = [];
+    uniqueColumns = [];
+    indexColumns = [];
+    fulltextColumns = [];
+    spatialColumns = [];
+};
+
+/**
  * Returns the array of indexes based on the index choice
  *
  * @param {string} indexChoice index choice
@@ -22,23 +65,23 @@ const Indexes = {};
  * @return {null|object}
  */
 Indexes.getIndexArray = function (indexChoice) {
-    var sourceArray = null;
+    let sourceArray = null;
 
     switch (indexChoice.toLowerCase()) {
     case 'primary':
-        sourceArray = window.primaryIndexes;
+        sourceArray = primaryColumns;
         break;
     case 'unique':
-        sourceArray = window.uniqueIndexes;
+        sourceArray = uniqueColumns;
         break;
     case 'index':
-        sourceArray = window.indexes;
+        sourceArray = indexColumns;
         break;
     case 'fulltext':
-        sourceArray = window.fulltextIndexes;
+        sourceArray = fulltextColumns;
         break;
     case 'spatial':
-        sourceArray = window.spatialIndexes;
+        sourceArray = spatialColumns;
         break;
     default:
         return null;
@@ -570,12 +613,7 @@ Indexes.off = () => function () {
  * @return {function}
  */
 Indexes.on = () => function () {
-    // Re-initialize variables.
-    window.primaryIndexes = [];
-    window.uniqueIndexes = [];
-    window.indexes = [];
-    window.fulltextIndexes = [];
-    window.spatialIndexes = [];
+    Indexes.resetColumnLists();
 
     // for table creation form
     var $engineSelector = $('.create_table_form select[name=tbl_storage_engine]');
@@ -633,7 +671,7 @@ Indexes.on = () => function () {
 
         Functions.confirmPreviewSql(question, $anchor.attr('href'), function (url) {
             var $msg = ajaxShowMessage(window.Messages.strDroppingPrimaryKeyIndex, false);
-            var params = Functions.getJsConfirmCommonParam(this, $anchor.getPostData());
+            var params = getJsConfirmCommonParam(this, $anchor.getPostData());
             $.post(url, params, function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
                     ajaxRemoveMessage($msg);
@@ -661,7 +699,7 @@ Indexes.on = () => function () {
                         highlightSql($('#page_content'));
                     }
                     Navigation.reload();
-                    CommonActions.refreshMain('index.php?route=/table/structure');
+                    refreshMainContent('index.php?route=/table/structure');
                 } else {
                     ajaxShowMessage(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
                 }
@@ -697,7 +735,7 @@ Indexes.on = () => function () {
         Functions.indexEditorDialog(url, title, function (data) {
             CommonParams.set('db', data.params.db);
             CommonParams.set('table', data.params.table);
-            CommonActions.refreshMain('index.php?route=/table/structure');
+            refreshMainContent('index.php?route=/table/structure');
         });
     });
 
@@ -712,7 +750,7 @@ Indexes.on = () => function () {
         Functions.indexRenameDialog(url, title, function (data) {
             CommonParams.set('db', data.params.db);
             CommonParams.set('table', data.params.table);
-            CommonActions.refreshMain('index.php?route=/table/structure');
+            refreshMainContent('index.php?route=/table/structure');
         });
     });
 
