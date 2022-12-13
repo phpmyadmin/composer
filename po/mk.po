@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2022-12-03 19:53+0000\n"
+"PO-Revision-Date: 2022-12-12 08:47+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/"
 "4-9/mk/>\n"
@@ -4783,9 +4783,8 @@ msgid "Text fields"
 msgstr "Користи текст поле"
 
 #: libraries/classes/Config/Descriptions.php:593
-#, fuzzy
 msgid "Customize text input fields."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подесувања на текст полиња."
 
 #: libraries/classes/Config/Descriptions.php:595
 msgid "Texy! text"
@@ -5076,18 +5075,16 @@ msgid "Navigation panel width"
 msgstr "Опции за извоз на бази на податоци"
 
 #: libraries/classes/Config/Descriptions.php:774
-#, fuzzy
 msgid "Set to 0 to collapse navigation panel."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Подеси на 0 за да се собере панелот за навигација."
 
 #: libraries/classes/Config/Descriptions.php:776
 msgid "Link with main panel by highlighting the current database or table."
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:780
-#, fuzzy
 msgid "Show logo in navigation panel."
-msgstr "Опции за извоз на бази на податоци"
+msgstr "Покажи лого на панелот за навигација."
 
 #: libraries/classes/Config/Descriptions.php:782
 msgid "Display logo"
@@ -5502,10 +5499,8 @@ msgid "HTTP Realm"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:992
-#, fuzzy
-#| msgid "Documentation"
 msgid "Authentication method to use."
-msgstr "Документација"
+msgstr "Употребливи методи за автентикација."
 
 #: libraries/classes/Config/Descriptions.php:994 setup/frames/index.inc.php:142
 msgid "Authentication type"
@@ -5532,10 +5527,8 @@ msgid "Column information table"
 msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:1010
-#, fuzzy
-#| msgid "Cannot log in to the MySQL server"
 msgid "Compress connection to MySQL server."
-msgstr "Не можам да се пријавам на MySQL серверот"
+msgstr "Компресија при конекција на MySQL сервер."
 
 #: libraries/classes/Config/Descriptions.php:1012
 msgid "Compress connection"
@@ -7568,10 +7561,9 @@ msgstr ""
 "[doc@faq3-11]FAQ 3.11[/doc]"
 
 #: libraries/classes/Display/Results.php:4558
-#, fuzzy, php-format
-#| msgid "Showing rows"
+#, php-format
 msgid "Showing rows %1s - %2s"
-msgstr "Приказ на записи од"
+msgstr "Приказ на редови %1s - %2s"
 
 #: libraries/classes/Display/Results.php:4573
 #, php-format
@@ -7579,10 +7571,9 @@ msgid "%1$d total, %2$d in query"
 msgstr ""
 
 #: libraries/classes/Display/Results.php:4578
-#, fuzzy, php-format
-#| msgid "total"
+#, php-format
 msgid "%d total"
-msgstr "вкупно"
+msgstr "%d вкупно"
 
 #: libraries/classes/Display/Results.php:4590 libraries/classes/Sql.php:1435
 #, fuzzy, php-format
@@ -11404,15 +11395,14 @@ msgid "Sorry, we failed to restore the dropped trigger."
 msgstr ""
 
 #: libraries/classes/Rte/Triggers.php:125
-#, fuzzy, php-format
-#| msgid "Table %s has been dropped."
+#, php-format
 msgid "Trigger %1$s has been modified."
-msgstr "Табелата %s е избришана"
+msgstr "Прекинувачот %1$s беше променет."
 
 #: libraries/classes/Rte/Triggers.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "Trigger %1$s has been created."
-msgstr "Табелата %s е избришана"
+msgstr "Прекинувачот %1$s беше создаден."
 
 #: libraries/classes/Rte/Triggers.php:221
 #, fuzzy
@@ -11520,10 +11510,9 @@ msgid "You do not have the necessary privileges to create a trigger."
 msgstr "Немате право на пристап овде!"
 
 #: libraries/classes/Rte/Words.php:61
-#, fuzzy, php-format
-#| msgid "No tables found in database."
+#, php-format
 msgid "No trigger with name %1$s found in database %2$s."
-msgstr "Табелите не се пронајдени во базата на податоци."
+msgstr "Немаше прекинувач со име %1$s во датабазата %2$s."
 
 #: libraries/classes/Rte/Words.php:62
 msgid "There are no triggers to display."
@@ -16582,10 +16571,8 @@ msgid "Convert to Kana"
 msgstr ""
 
 #: templates/columns_definitions/partitions.twig:17
-#, fuzzy
-#| msgid "Position"
 msgid "Partition by:"
-msgstr "Позиција"
+msgstr "Подели партиции по:"
 
 #: templates/columns_definitions/partitions.twig:32
 #: templates/columns_definitions/partitions.twig:60
@@ -16595,22 +16582,16 @@ msgid "Expression or column list"
 msgstr "Број на записи на страница"
 
 #: templates/columns_definitions/partitions.twig:37
-#, fuzzy
-#| msgid "Position"
 msgid "Partitions:"
-msgstr "Позиција"
+msgstr "Партиции:"
 
 #: templates/columns_definitions/partitions.twig:45
-#, fuzzy
-#| msgid "Position"
 msgid "Subpartition by:"
-msgstr "Позиција"
+msgstr "Подпартицирај по:"
 
 #: templates/columns_definitions/partitions.twig:65
-#, fuzzy
-#| msgid "Position"
 msgid "Subpartitions:"
-msgstr "Позиција"
+msgstr "Подпартиции:"
 
 #: templates/columns_definitions/partitions.twig:78
 #, fuzzy
@@ -17146,6 +17127,8 @@ msgid ""
 "You have a slow query rate of %s per hour, you should have less than 1%% per "
 "hour."
 msgstr ""
+"Вие имате рана на спори барања од %s на саат, би требало да биде помалку од "
+"1%% на саат."
 
 #: libraries/advisory_rules_generic.txt:77
 msgid "Long query time"
