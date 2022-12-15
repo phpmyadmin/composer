@@ -1056,11 +1056,6 @@ parameters:
 			path: libraries/classes/Controllers/Database/Operations/CollationController.php
 
 		-
-			message: "#^Negated boolean expression is always true\\.$#"
-			count: 6
-			path: libraries/classes/Controllers/Database/OperationsController.php
-
-		-
 			message: "#^Parameter \\#2 \\$exportSqlPlugin of method PhpMyAdmin\\\\Operations\\:\\:getViewsAndCreateSqlViewStandIn\\(\\) expects PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportSql, object\\|null given\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Database/OperationsController.php
@@ -2136,11 +2131,6 @@ parameters:
 			path: libraries/classes/Controllers/UserPasswordController.php
 
 		-
-			message: "#^Call to function is_array\\(\\) with array will always evaluate to true\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/View/CreateController.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$view has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/View/CreateController.php
@@ -2884,26 +2874,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, mixed given\\.$#"
 			count: 3
 			path: libraries/classes/Database/Routines.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Database\\\\Search\\:\\:getSearchSqls\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Database/Search.php
-
-		-
-			message: "#^Property PhpMyAdmin\\\\Database\\\\Search\\:\\:\\$criteriaColumnName \\(string\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: libraries/classes/Database/Search.php
-
-		-
-			message: "#^Property PhpMyAdmin\\\\Database\\\\Search\\:\\:\\$criteriaColumnName \\(string\\) on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: libraries/classes/Database/Search.php
-
-		-
-			message: "#^Property PhpMyAdmin\\\\Database\\\\Search\\:\\:\\$criteriaTables type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Database/Search.php
 
 		-
 			message: "#^Property PhpMyAdmin\\\\Database\\\\Search\\:\\:\\$searchTypes type has no value type specified in iterable type array\\.$#"
@@ -5766,18 +5736,33 @@ parameters:
 			path: libraries/classes/Plugins.php
 
 		-
-			message: "#^Left side of \\|\\| is always false\\.$#"
-			count: 1
-			path: libraries/classes/Plugins.php
-
-		-
 			message: "#^Parameter \\#2 \\$str2 of function strcmp expects string, class\\-string\\|false given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins.php
 
 		-
-			message: "#^Right side of \\|\\| is always false\\.$#"
+			message: "#^Result of \\|\\| is always false\\.$#"
 			count: 3
+			path: libraries/classes/Plugins.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<PhpMyAdmin\\\\Properties\\\\Options\\\\Groups\\\\OptionsPropertySubgroup\\>\\|null and 'PhpMyAdmin\\\\\\\\Properties\\\\\\\\Options\\\\\\\\Items\\\\\\\\BoolPropertyItem' will always evaluate to false\\.$#"
+			count: 1
+			path: libraries/classes/Plugins.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<PhpMyAdmin\\\\Properties\\\\Options\\\\Groups\\\\OptionsPropertySubgroup\\>\\|null and 'PhpMyAdmin\\\\\\\\Properties\\\\\\\\Options\\\\\\\\Items\\\\\\\\MessageOnlyPropertyItem' will always evaluate to false\\.$#"
+			count: 1
+			path: libraries/classes/Plugins.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<PhpMyAdmin\\\\Properties\\\\Options\\\\Groups\\\\OptionsPropertySubgroup\\>\\|null and 'PhpMyAdmin\\\\\\\\Properties\\\\\\\\Options\\\\\\\\Items\\\\\\\\SelectPropertyItem' will always evaluate to false\\.$#"
+			count: 1
+			path: libraries/classes/Plugins.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<PhpMyAdmin\\\\Properties\\\\Options\\\\Groups\\\\OptionsPropertySubgroup\\>\\|null and 'PhpMyAdmin\\\\\\\\Properties\\\\\\\\Options\\\\\\\\Items\\\\\\\\TextPropertyItem' will always evaluate to false\\.$#"
+			count: 1
 			path: libraries/classes/Plugins.php
 
 		-
