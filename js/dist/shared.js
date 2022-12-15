@@ -1,191 +1,117 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],{
-
-/***/ 9:
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],[
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ajaxRemoveMessage": function() { return /* binding */ ajaxRemoveMessage; },
-/* harmony export */   "ajaxShowMessage": function() { return /* binding */ ajaxShowMessage; }
+/* harmony export */   "CommonParams": function() { return /* binding */ CommonParams; }
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
-
-
-
 /**
- * Number of AJAX messages shown since page load.
- * @type {number}
+ * Holds common parameters such as server, db, table, etc
+ *
+ * The content for this is normally loaded from Header.php or
+ * Response.php and executed by ajax.js
+ *
+ * @test-module CommonParams
  */
-
-let ajaxMessageCount = 0;
-/**
- * Show a message on the top of the page for an Ajax request
- *
- * Sample usage:
- *
- * 1) var $msg = ajaxShowMessage();
- * This will show a message that reads "Loading...". Such a message will not
- * disappear automatically and cannot be dismissed by the user. To remove this
- * message either the ajaxRemoveMessage($msg) function must be called or
- * another message must be show with ajaxShowMessage() function.
- *
- * 2) var $msg = ajaxShowMessage(window.Messages.strProcessingRequest);
- * This is a special case. The behaviour is same as above,
- * just with a different message
- *
- * 3) var $msg = ajaxShowMessage('The operation was successful');
- * This will show a message that will disappear automatically and it can also
- * be dismissed by the user.
- *
- * 4) var $msg = ajaxShowMessage('Some error', false);
- * This will show a message that will not disappear automatically, but it
- * can be dismissed by the user after they have finished reading it.
- *
- * @param {string|null} message string containing the message to be shown.
- *                              optional, defaults to 'Loading...'
- * @param {any} timeout         number of milliseconds for the message to be visible
- *                              optional, defaults to 5000. If set to 'false', the
- *                              notification will never disappear
- * @param {string|null} type    string to dictate the type of message shown.
- *                              optional, defaults to normal notification.
- *                              If set to 'error', the notification will show message
- *                              with red background.
- *                              If set to 'success', the notification will show with
- *                              a green background.
- * @return {JQuery<Element>}   jQuery Element that holds the message div
- *                              this object can be passed to ajaxRemoveMessage()
- *                              to remove the notification
- */
-
-const ajaxShowMessage = function () {
-  let message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  let timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  let type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var msg = message;
-  var newTimeOut = timeout;
+const CommonParams = function () {
   /**
-   * @var self_closing Whether the notification will automatically disappear
+   * @var {Object} params An associative array of key value pairs
+   * @access private
    */
+  var params = {}; // The returned object is the public part of the module
 
-  var selfClosing = true;
-  /**
-   * @var dismissable Whether the user will be able to remove
-   *                  the notification by clicking on it
-   */
-
-  var dismissable = true; // Handle the case when a empty data.message is passed.
-  // We don't want the empty message
-
-  if (msg === '') {
-    return true;
-  } else if (!msg) {
-    // If the message is undefined, show the default
-    msg = window.Messages.strLoading;
-    dismissable = false;
-    selfClosing = false;
-  } else if (msg === window.Messages.strProcessingRequest) {
-    // This is another case where the message should not disappear
-    dismissable = false;
-    selfClosing = false;
-  } // Figure out whether (or after how long) to remove the notification
-
-
-  if (newTimeOut === undefined || newTimeOut === null) {
-    newTimeOut = 5000;
-  } else if (newTimeOut === false) {
-    selfClosing = false;
-  } // Determine type of message, add styling as required
-
-
-  if (type === 'error') {
-    msg = '<div class="alert alert-danger" role="alert">' + msg + '</div>';
-  } else if (type === 'success') {
-    msg = '<div class="alert alert-success" role="alert">' + msg + '</div>';
-  } // Create a parent element for the AJAX messages, if necessary
-
-
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#loading_parent').length === 0) {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="loading_parent"></div>').prependTo('#page_content');
-  } // Update message count to create distinct message elements every time
-
-
-  ajaxMessageCount++; // Remove all old messages, if any
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('span.ajax_notification[id^=ajax_message_num]').remove();
-  /**
-   * @var $retval    a jQuery object containing the reference
-   *                 to the created AJAX message
-   */
-
-  var $retval = jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show(); // If the notification is self-closing we should create a callback to remove it
-
-  if (selfClosing) {
-    $retval.delay(newTimeOut).fadeOut('medium', function () {
-      if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':data(tooltip)')) {
-        jquery__WEBPACK_IMPORTED_MODULE_0__(this).uiTooltip('destroy');
-      } // Remove the notification
-
-
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
-    });
-  } // If the notification is dismissable we need to add the relevant class to it
-  // and add a tooltip so that the users know that it can be removed
-
-
-  if (dismissable) {
-    $retval.addClass('dismissable').css('cursor', 'pointer');
+  return {
     /**
-     * Add a tooltip to the notification to let the user know that they
-     * can dismiss the ajax notification by clicking on it.
+     * Saves all the key value pair that
+     * are provided in the input array
+     *
+     * @param obj hash The input array
+     *
+     * @return {boolean}
      */
+    setAll: function (obj) {
+      let updateNavigation = false;
 
-    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_1__["default"])($retval, 'span', window.Messages.strDismiss);
-  } // Hide spinner if this is not a loading message
+      for (var i in obj) {
+        if (params[i] !== undefined && params[i] !== obj[i]) {
+          if (i === 'db' || i === 'table') {
+            updateNavigation = true;
+          }
+        }
 
+        params[i] = obj[i];
+      }
 
-  if (msg !== window.Messages.strLoading) {
-    $retval.css('background-image', 'none');
-  }
+      return updateNavigation;
+    },
 
-  (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_2__["default"])($retval);
-  return $retval;
-};
-/**
- * Removes the message shown for an Ajax operation when it's completed
- *
- * @param {JQuery} $thisMessageBox Element that holds the notification
- *
- * @return {void}
- */
+    /**
+     * Retrieves a value given its key
+     * Returns empty string for undefined values
+     *
+     * @param {string} name The key
+     *
+     * @return {string}
+     */
+    get: function (name) {
+      return params[name];
+    },
 
+    /**
+     * Saves a single key value pair
+     *
+     * @param {string} name  The key
+     * @param {string} value The value
+     *
+     * @return {boolean}
+     */
+    set: function (name, value) {
+      let updateNavigation = false;
 
-const ajaxRemoveMessage = function ($thisMessageBox) {
-  if ($thisMessageBox !== undefined && $thisMessageBox instanceof jquery__WEBPACK_IMPORTED_MODULE_0__) {
-    $thisMessageBox.stop(true, true).fadeOut('medium');
+      if (name === 'db' || name === 'table' && params[name] !== value) {
+        updateNavigation = true;
+      }
 
-    if ($thisMessageBox.is(':data(tooltip)')) {
-      $thisMessageBox.uiTooltip('destroy');
-    } else {
-      $thisMessageBox.remove();
+      params[name] = value;
+      return updateNavigation;
+    },
+
+    /**
+     * Returns the url query string using the saved parameters
+     *
+     * @param {string} separator New separator
+     *
+     * @return {string}
+     */
+    getUrlQuery: function (separator) {
+      var sep = typeof separator !== 'undefined' ? separator : '?';
+      var common = this.get('common_query');
+      var argsep = CommonParams.get('arg_separator');
+
+      if (typeof common === 'string' && common.length > 0) {
+        // If the last char is the separator, do not add it
+        // Else add it
+        common = common.endsWith(argsep) ? common : common + argsep;
+      }
+
+      return window.sprintf('%s%sserver=%s' + argsep + 'db=%s' + argsep + 'table=%s', sep, common, encodeURIComponent(this.get('server')), encodeURIComponent(this.get('db')), encodeURIComponent(this.get('table')));
     }
-  }
-};
-/**
- * @return {number}
- */
+  };
+}();
 
-
-window.getAjaxMessageCount = () => ajaxMessageCount;
-
-window.ajaxShowMessage = ajaxShowMessage;
+window.CommonParams = CommonParams;
 
 
 /***/ }),
-
-/***/ 7:
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -193,16 +119,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AJAX": function() { return /* binding */ AJAX; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
-/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
-/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
-/* harmony import */ var _functions_ignorePhpErrors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13);
-/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(14);
-/* harmony import */ var _functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(15);
+/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(20);
+/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(21);
+/* harmony import */ var _functions_ignorePhpErrors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(22);
+/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(17);
+/* harmony import */ var _functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(23);
 
 
 
@@ -599,7 +525,7 @@ const AJAX = {
     }
 
     (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)(AJAX.$msgbox);
-    _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('token', data.new_token);
+    _navigation_js__WEBPACK_IMPORTED_MODULE_2__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('token', data.new_token));
     AJAX.scriptHandler.load([]);
 
     if (data.displayMessage) {
@@ -786,7 +712,7 @@ const AJAX = {
         }
 
         if (data.params) {
-          _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.setAll(data.params);
+          _navigation_js__WEBPACK_IMPORTED_MODULE_2__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.setAll(data.params));
         }
 
         if (data.scripts) {
@@ -1195,1038 +1121,7 @@ window.AJAX = AJAX;
 
 
 /***/ }),
-
-/***/ 3:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CommonParams": function() { return /* binding */ CommonParams; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-
-
-/**
- * Holds common parameters such as server, db, table, etc
- *
- * The content for this is normally loaded from Header.php or
- * Response.php and executed by ajax.js
- *
- * @test-module CommonParams
- */
-
-const CommonParams = function () {
-  /**
-   * @var {Object} params An associative array of key value pairs
-   * @access private
-   */
-  var params = {}; // The returned object is the public part of the module
-
-  return {
-    /**
-     * Saves all the key value pair that
-     * are provided in the input array
-     *
-     * @param obj hash The input array
-     *
-     * @return {void}
-     */
-    setAll: function (obj) {
-      var updateNavigation = false;
-
-      for (var i in obj) {
-        if (params[i] !== undefined && params[i] !== obj[i]) {
-          if (i === 'db' || i === 'table') {
-            updateNavigation = true;
-          }
-        }
-
-        params[i] = obj[i];
-      }
-
-      if (updateNavigation && jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').hasClass('synced')) {
-        _navigation_js__WEBPACK_IMPORTED_MODULE_1__.Navigation.showCurrent();
-      }
-    },
-
-    /**
-     * Retrieves a value given its key
-     * Returns empty string for undefined values
-     *
-     * @param {string} name The key
-     *
-     * @return {string}
-     */
-    get: function (name) {
-      return params[name];
-    },
-
-    /**
-     * Saves a single key value pair
-     *
-     * @param {string} name  The key
-     * @param {string} value The value
-     *
-     * @return {CommonParams} For chainability
-     */
-    set: function (name, value) {
-      var updateNavigation = false;
-
-      if (name === 'db' || name === 'table' && params[name] !== value) {
-        updateNavigation = true;
-      }
-
-      params[name] = value;
-
-      if (updateNavigation && jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').hasClass('synced')) {
-        _navigation_js__WEBPACK_IMPORTED_MODULE_1__.Navigation.showCurrent();
-      }
-
-      return this;
-    },
-
-    /**
-     * Returns the url query string using the saved parameters
-     *
-     * @param {string} separator New separator
-     *
-     * @return {string}
-     */
-    getUrlQuery: function (separator) {
-      var sep = typeof separator !== 'undefined' ? separator : '?';
-      var common = this.get('common_query');
-      var argsep = CommonParams.get('arg_separator');
-
-      if (typeof common === 'string' && common.length > 0) {
-        // If the last char is the separator, do not add it
-        // Else add it
-        common = common.endsWith(argsep) ? common : common + argsep;
-      }
-
-      return window.sprintf('%s%sserver=%s' + argsep + 'db=%s' + argsep + 'table=%s', sep, common, encodeURIComponent(this.get('server')), encodeURIComponent(this.get('db')), encodeURIComponent(this.get('table')));
-    }
-  };
-}();
-
-window.CommonParams = CommonParams;
-
-
-/***/ }),
-
-/***/ 5:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Config": function() { return /* binding */ Config; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-
-
-
-
-/**
- * Functions used in configuration forms and on user preferences pages
- */
-
-const Config = {};
-window.configInlineParams;
-window.configScriptLoaded;
-/**
- * checks whether browser supports web storage
- *
- * @param {'localStorage' | 'sessionStorage'} type the type of storage i.e. localStorage or sessionStorage
- * @param {boolean} warn Wether to show a warning on error
- *
- * @return {boolean}
- */
-
-Config.isStorageSupported = function (type) {
-  let warn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  try {
-    window[type].setItem('PMATest', 'test'); // Check whether key-value pair was set successfully
-
-    if (window[type].getItem('PMATest') === 'test') {
-      // Supported, remove test variable from storage
-      window[type].removeItem('PMATest');
-      return true;
-    }
-  } catch (error) {
-    // Not supported
-    if (warn) {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strNoLocalStorage, false);
-    }
-  }
-
-  return false;
-}; // default values for fields
-
-
-window.defaultValues = {};
-/**
- * Returns field type
- *
- * @param {Element} field
- *
- * @return {string}
- */
-
-function getFieldType(field) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-  var tagName = $field.prop('tagName');
-
-  if (tagName === 'INPUT') {
-    return $field.attr('type');
-  } else if (tagName === 'SELECT') {
-    return 'select';
-  } else if (tagName === 'TEXTAREA') {
-    return 'text';
-  }
-
-  return '';
-}
-/**
- * Enables or disables the "restore default value" button
- *
- * @param {Element} field
- * @param {boolean} display
- *
- * @return {void}
- */
-
-
-function setRestoreDefaultBtn(field, display) {
-  var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(field).closest('td').find('.restore-default img');
-  $el[display ? 'show' : 'hide']();
-}
-/**
- * Marks field depending on its value (system default or custom)
- *
- * @param {Element | JQuery<Element>} field
- *
- * @return {void}
- */
-
-
-function markField(field) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-  var type = getFieldType($field);
-  var isDefault = checkFieldDefault($field, type); // checkboxes uses parent <span> for marking
-
-  var $fieldMarker = type === 'checkbox' ? $field.parent() : $field;
-  setRestoreDefaultBtn($field, !isDefault);
-  $fieldMarker[isDefault ? 'removeClass' : 'addClass']('custom');
-}
-/**
- * Sets field value
- *
- * value must be of type:
- * o undefined (omitted) - restore default value (form default, not PMA default)
- * o String - if field_type is 'text'
- * o boolean - if field_type is 'checkbox'
- * o Array of values - if field_type is 'select'
- *
- * @param {Element} field
- * @param {string}  fieldType see {@link #getFieldType}
- * @param {string | boolean}  value
- */
-
-
-function setFieldValue(field, fieldType, value) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-
-  switch (fieldType) {
-    case 'text':
-    case 'number':
-      $field.val(value);
-      break;
-
-    case 'checkbox':
-      $field.prop('checked', value);
-      break;
-
-    case 'select':
-      var options = $field.prop('options');
-      var i;
-      var imax = options.length;
-
-      for (i = 0; i < imax; i++) {
-        options[i].selected = value.indexOf(options[i].value) !== -1;
-      }
-
-      break;
-  }
-
-  markField($field);
-}
-/**
- * Gets field value
- *
- * Will return one of:
- * o String - if type is 'text'
- * o boolean - if type is 'checkbox'
- * o Array of values - if type is 'select'
- *
- * @param {Element} field
- * @param {string}  fieldType returned by {@link #getFieldType}
- *
- * @return {boolean | string | string[] | null}
- */
-
-
-function getFieldValue(field, fieldType) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-
-  switch (fieldType) {
-    case 'text':
-    case 'number':
-      return $field.prop('value');
-
-    case 'checkbox':
-      return $field.prop('checked');
-
-    case 'select':
-      var options = $field.prop('options');
-      var i;
-      var imax = options.length;
-      var items = [];
-
-      for (i = 0; i < imax; i++) {
-        if (options[i].selected) {
-          items.push(options[i].value);
-        }
-      }
-
-      return items;
-  }
-
-  return null;
-}
-/**
- * Returns values for all fields in fieldsets
- *
- * @return {object}
- */
-
-
-Config.getAllValues = () => {
-  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset input, fieldset select, fieldset textarea');
-  var values = {};
-  var type;
-  var value;
-
-  for (var i = 0; i < $elements.length; i++) {
-    type = getFieldType($elements[i]);
-    value = getFieldValue($elements[i], type);
-
-    if (typeof value !== 'undefined') {
-      // we only have single selects, fatten array
-      if (type === 'select') {
-        value = value[0];
-      }
-
-      values[$elements[i].name] = value;
-    }
-  }
-
-  return values;
-};
-/**
- * Checks whether field has its default value
- *
- * @param {Element} field
- * @param {string}  type
- *
- * @return {boolean}
- */
-
-
-function checkFieldDefault(field, type) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-  var fieldId = $field.attr('id');
-
-  if (typeof window.defaultValues[fieldId] === 'undefined') {
-    return true;
-  }
-
-  var isDefault = true;
-  var currentValue = getFieldValue($field, type);
-
-  if (type !== 'select') {
-    isDefault = currentValue === window.defaultValues[fieldId];
-  } else {
-    // compare arrays, will work for our representation of select values
-    if (currentValue.length !== window.defaultValues[fieldId].length) {
-      isDefault = false;
-    } else {
-      for (var i = 0; i < currentValue.length; i++) {
-        if (currentValue[i] !== window.defaultValues[fieldId][i]) {
-          isDefault = false;
-          break;
-        }
-      }
-    }
-  }
-
-  return isDefault;
-}
-/**
- * Returns element's id prefix
- * @param {Element} element
- *
- * @return {string}
- */
-
-
-Config.getIdPrefix = function (element) {
-  return jquery__WEBPACK_IMPORTED_MODULE_0__(element).attr('id').replace(/[^-]+$/, '');
-}; // ------------------------------------------------------------------
-// Form validation and field operations
-//
-// form validator assignments
-
-
-let validate = {}; // form validator list
-
-window.validators = {
-  // regexp: numeric value
-  regExpNumeric: /^[0-9]+$/,
-  // regexp: extract parts from PCRE expression
-  regExpPcreExtract: /(.)(.*)\1(.*)?/,
-
-  /**
-   * Validates positive number
-   *
-   * @param {boolean} isKeyUp
-   *
-   * @return {boolean}
-   */
-  validatePositiveNumber: function (isKeyUp) {
-    if (isKeyUp && this.value === '') {
-      return true;
-    }
-
-    var result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
-    return result ? true : window.Messages.configErrorInvalidPositiveNumber;
-  },
-
-  /**
-   * Validates non-negative number
-   *
-   * @param {boolean} isKeyUp
-   *
-   * @return {boolean}
-   */
-  validateNonNegativeNumber: function (isKeyUp) {
-    if (isKeyUp && this.value === '') {
-      return true;
-    }
-
-    var result = window.validators.regExpNumeric.test(this.value);
-    return result ? true : window.Messages.configErrorInvalidNonNegativeNumber;
-  },
-
-  /**
-   * Validates port number
-   *
-   * @return {true|string}
-   */
-  validatePortNumber: function () {
-    if (this.value === '') {
-      return true;
-    }
-
-    var result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
-    return result && this.value <= 65535 ? true : window.Messages.configErrorInvalidPortNumber;
-  },
-
-  /**
-   * Validates value according to given regular expression
-   *
-   * @param {boolean} isKeyUp
-   * @param {string}  regexp
-   *
-   * @return {true|string}
-   */
-  validateByRegex: function (isKeyUp, regexp) {
-    if (isKeyUp && this.value === '') {
-      return true;
-    } // convert PCRE regexp
-
-
-    var parts = regexp.match(window.validators.regExpPcreExtract);
-    var valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
-    return valid ? true : window.Messages.configErrorInvalidValue;
-  },
-
-  /**
-   * Validates upper bound for numeric inputs
-   *
-   * @param {boolean} isKeyUp
-   * @param {number} maxValue
-   *
-   * @return {true|string}
-   */
-  validateUpperBound: function (isKeyUp, maxValue) {
-    var val = parseInt(this.value, 10);
-
-    if (isNaN(val)) {
-      return true;
-    }
-
-    return val <= maxValue ? true : window.sprintf(window.Messages.configErrorInvalidUpperBound, maxValue);
-  },
-  // field validators
-  field: {},
-  // fieldset validators
-  fieldset: {}
-};
-/**
- * Registers validator for given field
- *
- * @param {string}  id       field id
- * @param {string}  type     validator (key in validators object)
- * @param {boolean} onKeyUp  whether fire on key up
- * @param {Array}   params   validation function parameters
- */
-
-Config.registerFieldValidator = (id, type, onKeyUp, params) => {
-  if (typeof window.validators[type] === 'undefined') {
-    return;
-  }
-
-  if (typeof validate[id] === 'undefined') {
-    validate[id] = [];
-  }
-
-  if (validate[id].length === 0) {
-    validate[id].push([type, params, onKeyUp]);
-  }
-};
-/**
- * Returns validation functions associated with form field
- *
- * @param {String}  fieldId     form field id
- * @param {boolean} onKeyUpOnly see registerFieldValidator
- *
- * @return {any[]} of [function, parameters to be passed to function]
- */
-
-
-function getFieldValidators(fieldId, onKeyUpOnly) {
-  // look for field bound validator
-  var name = fieldId && fieldId.match(/[^-]+$/)[0];
-
-  if (typeof window.validators.field[name] !== 'undefined') {
-    return [[window.validators.field[name], null]];
-  } // look for registered validators
-
-
-  var functions = [];
-
-  if (typeof validate[fieldId] !== 'undefined') {
-    // validate[field_id]: array of [type, params, onKeyUp]
-    for (var i = 0, imax = validate[fieldId].length; i < imax; i++) {
-      if (onKeyUpOnly && !validate[fieldId][i][2]) {
-        continue;
-      }
-
-      functions.push([window.validators[validate[fieldId][i][0]], validate[fieldId][i][1]]);
-    }
-  }
-
-  return functions;
-}
-/**
- * Displays errors for given form fields
- *
- * WARNING: created DOM elements must be identical with the ones made by
- * PhpMyAdmin\Config\FormDisplayTemplate::displayInput()!
- *
- * @param {object} errorList list of errors in the form {field id: error array}
- */
-
-
-Config.displayErrors = function (errorList) {
-  var tempIsEmpty = function (item) {
-    return item !== '';
-  };
-
-  for (var fieldId in errorList) {
-    var errors = errorList[fieldId];
-    var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
-    var isFieldset = $field.attr('tagName') === 'FIELDSET';
-    var $errorCnt;
-
-    if (isFieldset) {
-      $errorCnt = $field.find('dl.errors');
-    } else {
-      $errorCnt = $field.siblings('.inline_errors');
-    } // remove empty errors (used to clear error list)
-
-
-    errors = jquery__WEBPACK_IMPORTED_MODULE_0__.grep(errors, tempIsEmpty); // CSS error class
-
-    if (!isFieldset) {
-      // checkboxes uses parent <span> for marking
-      var $fieldMarker = $field.attr('type') === 'checkbox' ? $field.parent() : $field;
-      $fieldMarker[errors.length ? 'addClass' : 'removeClass']('field-error');
-    }
-
-    if (errors.length) {
-      // if error container doesn't exist, create it
-      if ($errorCnt.length === 0) {
-        if (isFieldset) {
-          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="errors"></dl>');
-          $field.find('table').before($errorCnt);
-        } else {
-          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="inline_errors"></dl>');
-          $field.closest('td').append($errorCnt);
-        }
-      }
-
-      var html = '';
-
-      for (var i = 0, imax = errors.length; i < imax; i++) {
-        html += '<dd>' + errors[i] + '</dd>';
-      }
-
-      $errorCnt.html(html);
-    } else if ($errorCnt !== null) {
-      // remove useless error container
-      $errorCnt.remove();
-    }
-  }
-};
-/**
- * Validates fields and fieldsets and call displayError function as required
- */
-
-
-function setDisplayError() {
-  var elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]'); // run all field validators
-
-  var errors = {};
-
-  for (var i = 0; i < elements.length; i++) {
-    validateField(elements[i], false, errors);
-  } // run all fieldset validators
-
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
-    validateFieldset(this, false, errors);
-  });
-  Config.displayErrors(errors);
-}
-/**
- * Validates fieldset and puts errors in 'errors' object
- *
- * @param {Element} fieldset
- * @param {boolean} isKeyUp
- * @param {object}  errors
- */
-
-
-function validateFieldset(fieldset, isKeyUp, errors) {
-  var $fieldset = jquery__WEBPACK_IMPORTED_MODULE_0__(fieldset);
-
-  if ($fieldset.length && typeof window.validators.fieldset[$fieldset.attr('id')] !== 'undefined') {
-    var fieldsetErrors = window.validators.fieldset[$fieldset.attr('id')].apply($fieldset[0], [isKeyUp]);
-
-    for (var fieldId in fieldsetErrors) {
-      if (typeof errors[fieldId] === 'undefined') {
-        errors[fieldId] = [];
-      }
-
-      if (typeof fieldsetErrors[fieldId] === 'string') {
-        fieldsetErrors[fieldId] = [fieldsetErrors[fieldId]];
-      }
-
-      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], fieldsetErrors[fieldId]);
-    }
-  }
-}
-/**
- * Validates form field and puts errors in 'errors' object
- *
- * @param {Element} field
- * @param {boolean} isKeyUp
- * @param {object}  errors
- */
-
-
-function validateField(field, isKeyUp, errors) {
-  var args;
-  var result;
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-  var fieldId = $field.attr('id');
-  errors[fieldId] = [];
-  var functions = getFieldValidators(fieldId, isKeyUp);
-
-  for (var i = 0; i < functions.length; i++) {
-    if (typeof functions[i][1] !== 'undefined' && functions[i][1] !== null) {
-      args = functions[i][1].slice(0);
-    } else {
-      args = [];
-    }
-
-    args.unshift(isKeyUp);
-    result = functions[i][0].apply($field[0], args);
-
-    if (result !== true) {
-      if (typeof result === 'string') {
-        result = [result];
-      }
-
-      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], result);
-    }
-  }
-}
-/**
- * Validates form field and parent fieldset
- *
- * @param {Element} field
- * @param {boolean} isKeyUp
- */
-
-
-function validateFieldAndFieldset(field, isKeyUp) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
-  var errors = {};
-  validateField($field, isKeyUp, errors);
-  validateFieldset($field.closest('fieldset.optbox'), isKeyUp, errors);
-  Config.displayErrors(errors);
-}
-
-Config.loadInlineConfig = () => {
-  if (!Array.isArray(window.configInlineParams)) {
-    return;
-  }
-
-  for (var i = 0; i < window.configInlineParams.length; ++i) {
-    if (typeof window.configInlineParams[i] === 'function') {
-      window.configInlineParams[i]();
-    }
-  }
-};
-
-Config.setupValidation = function () {
-  validate = {};
-  window.configScriptLoaded = true;
-
-  if (window.configScriptLoaded && typeof window.configInlineParams !== 'undefined') {
-    Config.loadInlineConfig();
-  } // register validators and mark custom values
-
-
-  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]');
-  $elements.each(function () {
-    markField(this);
-    var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-    $el.on('change', function () {
-      validateFieldAndFieldset(this, false);
-      markField(this);
-    });
-    var tagName = $el.attr('tagName'); // text fields can be validated after each change
-
-    if (tagName === 'INPUT' && $el.attr('type') === 'text') {
-      $el.on('keyup', function () {
-        validateFieldAndFieldset($el, true);
-        markField($el);
-      });
-    } // disable textarea spellcheck
-
-
-    if (tagName === 'TEXTAREA') {
-      $el.attr('spellcheck', false);
-    }
-  }); // check whether we've refreshed a page and browser remembered modified
-  // form values
-
-  var $checkPageRefresh = jquery__WEBPACK_IMPORTED_MODULE_0__('#check_page_refresh');
-
-  if ($checkPageRefresh.length === 0 || $checkPageRefresh.val() === '1') {
-    // run all field validators
-    var errors = {};
-
-    for (var i = 0; i < $elements.length; i++) {
-      validateField($elements[i], false, errors);
-    } // run all fieldset validators
-
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
-      validateFieldset(this, false, errors);
-    });
-    Config.displayErrors(errors);
-  } else if ($checkPageRefresh) {
-    $checkPageRefresh.val('1');
-  }
-}; //
-// END: Form validation and field operations
-// ------------------------------------------------------------------
-
-
-function adjustPrefsNotification() {
-  var $prefsAutoLoad = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
-  var $tableNameControl = jquery__WEBPACK_IMPORTED_MODULE_0__('#table_name_col_no');
-  var $prefsAutoShowing = $prefsAutoLoad.css('display') !== 'none';
-
-  if ($prefsAutoShowing && $tableNameControl.length) {
-    $tableNameControl.css('top', '55px');
-  }
-} // ------------------------------------------------------------------
-// "Restore default" and "set value" buttons
-//
-
-/**
- * Restores field's default value
- *
- * @param {string} fieldId
- *
- * @return {void}
- */
-
-
-function restoreField(fieldId) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
-
-  if ($field.length === 0 || window.defaultValues[fieldId] === undefined) {
-    return;
-  }
-
-  setFieldValue($field, getFieldType($field), window.defaultValues[fieldId]);
-}
-
-Config.setupRestoreField = function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').on('mouseenter', '.restore-default, .set-value', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 1);
-  }).on('mouseleave', '.restore-default, .set-value', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 0.25);
-  }).on('click', '.restore-default, .set-value', function (e) {
-    e.preventDefault();
-    var href = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href');
-    var fieldSel;
-
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('restore-default')) {
-      fieldSel = href;
-      restoreField(fieldSel.substring(1));
-    } else {
-      fieldSel = href.match(/^[^=]+/)[0];
-      var value = href.match(/=(.+)$/)[1];
-      setFieldValue(jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel), 'text', value);
-    }
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel).trigger('change');
-  }).find('.restore-default, .set-value') // inline-block for IE so opacity inheritance works
-  .css({
-    display: 'inline-block',
-    opacity: 0.25
-  });
-}; //
-// END: "Restore default" and "set value" buttons
-// ------------------------------------------------------------------
-
-/**
- * Saves user preferences to localStorage
- *
- * @param {Element} form
- */
-
-
-function savePrefsToLocalStorage(form) {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(form);
-  var submit = $form.find('input[type=submit]');
-  submit.prop('disabled', true);
-  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
-    url: 'index.php?route=/preferences/manage',
-    cache: false,
-    type: 'POST',
-    data: {
-      'ajax_request': true,
-      'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-      'submit_get_json': true
-    },
-    success: function (data) {
-      if (typeof data !== 'undefined' && data.success === true) {
-        window.localStorage.config = data.prefs;
-        window.localStorage.configMtime = data.mtime;
-        window.localStorage.configMtimeLocal = new Date().toUTCString();
-        updatePrefsDate();
-        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-empty').hide();
-        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-exists').show();
-        var group = $form.parent('.card-body');
-        group.css('height', group.height() + 'px');
-        $form.hide('fast');
-        $form.prev('.click-hide-message').show('fast');
-      } else {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error);
-      }
-    },
-    complete: function () {
-      submit.prop('disabled', false);
-    }
-  });
-}
-/**
- * Updates preferences timestamp in Import form
- */
-
-
-function updatePrefsDate() {
-  var d = new Date(window.localStorage.configMtimeLocal);
-  var msg = window.Messages.strSavedOn.replace('@DATE@', _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.formatDateTime(d));
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
-}
-/**
- * Prepares message which informs that localStorage preferences are available and can be imported or deleted
- */
-
-
-function offerPrefsAutoimport() {
-  var hasConfig = Config.isStorageSupported('localStorage') && (window.localStorage.config || false);
-  var $cnt = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
-
-  if (!$cnt.length || !hasConfig) {
-    return;
-  }
-
-  $cnt.find('a').on('click', function (e) {
-    e.preventDefault();
-    var $a = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-
-    if ($a.attr('href') === '#no') {
-      $cnt.remove();
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
-        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-        'prefs_autoload': 'hide'
-      }, null, 'html');
-      return;
-    } else if ($a.attr('href') === '#delete') {
-      $cnt.remove();
-      localStorage.clear();
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
-        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-        'prefs_autoload': 'hide'
-      }, null, 'html');
-      return;
-    }
-
-    $cnt.find('input[name=json]').val(window.localStorage.config);
-    $cnt.find('form').trigger('submit');
-  });
-  $cnt.show();
-}
-/**
- * @return {function}
- */
-
-
-Config.off = function () {
-  return function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').off('click');
-    jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').off();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage').off('click');
-    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').off('change').off('submit');
-    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'div.click-hide-message');
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload').find('a').off('click');
-  };
-};
-/**
- * @return {function}
- */
-
-
-Config.on = function () {
-  return function () {
-    var $topmenuUpt = jquery__WEBPACK_IMPORTED_MODULE_0__('#user_prefs_tabs');
-    $topmenuUpt.find('a.active').attr('rel', 'samepage');
-    $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
-    Config.setupValidation();
-    adjustPrefsNotification();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').on('click', function () {
-      var fields = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('input, select, textarea');
-
-      for (var i = 0, imax = fields.length; i < imax; i++) {
-        setFieldValue(fields[i], getFieldType(fields[i]), window.defaultValues[fields[i].id]);
-      }
-
-      setDisplayError();
-    });
-    Config.setupRestoreField();
-    offerPrefsAutoimport();
-    var $radios = jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage');
-
-    if (!$radios.length) {
-      return;
-    } // enable JavaScript dependent fields
-
-
-    $radios.prop('disabled', false).add('#export_text_file, #import_text_file').on('click', function () {
-      var enableId = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('id');
-      var disableId;
-
-      if (enableId.match(/local_storage$/)) {
-        disableId = enableId.replace(/local_storage$/, 'text_file');
-      } else {
-        disableId = enableId.replace(/text_file$/, 'local_storage');
-      }
-
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + disableId).addClass('disabled').find('input').prop('disabled', true);
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + enableId).removeClass('disabled').find('input').prop('disabled', false);
-    }); // detect localStorage state
-
-    var lsSupported = Config.isStorageSupported('localStorage', true);
-    var lsExists = lsSupported ? window.localStorage.config || false : false;
-    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
-
-    if (lsExists) {
-      updatePrefsDate();
-    }
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').on('change', function () {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-      var disabled = false;
-
-      if (!lsSupported) {
-        disabled = $form.find('input[type=radio][value$=local_storage]').prop('checked');
-      } else if (!lsExists && $form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
-        disabled = true;
-      }
-
-      $form.find('input[type=submit]').prop('disabled', disabled);
-    }).on('submit', function (e) {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-
-      if ($form.attr('name') === 'prefs_export' && jquery__WEBPACK_IMPORTED_MODULE_0__('#export_local_storage')[0].checked) {
-        e.preventDefault(); // use AJAX to read JSON settings and save them
-
-        savePrefsToLocalStorage($form);
-      } else if ($form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
-        // set 'json' input and submit form
-        $form.find('input[name=json]').val(window.localStorage.config);
-      }
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'div.click-hide-message', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide();
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').css('height', '');
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').find('.prefs-form').show();
-    });
-  };
-};
-
-window.Config = Config;
-
-
-/***/ }),
-
-/***/ 6:
+/* 8 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2235,18 +1130,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _indexes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
-/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
-/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(10);
-/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9);
-/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(19);
-/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(11);
-/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(12);
-/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(14);
-/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(18);
+/* harmony import */ var _indexes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
+/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(13);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
+/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(14);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(20);
+/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(21);
+/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(17);
+/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(19);
 
 
 
@@ -3147,7 +2042,7 @@ Functions.onloadIdleEvent = function () {
             });
             jquery__WEBPACK_IMPORTED_MODULE_0__('#input_username').trigger('focus');
           } else {
-            _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('token', data.new_token);
+            _navigation_js__WEBPACK_IMPORTED_MODULE_2__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('token', data.new_token));
             jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=token]').val(data.new_token);
           }
 
@@ -6043,1450 +4938,7 @@ Functions.on = function () {
 
 
 /***/ }),
-
-/***/ 15:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ checkNumberOfFields; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-
-
-/* global maxInputVars */
-// templates/javascript/variables.twig
-
-/**
- * Check than forms have less fields than max allowed by PHP.
- * @return {boolean}
- */
-
-function checkNumberOfFields() {
-  if (typeof maxInputVars === 'undefined') {
-    return false;
-  }
-
-  if (false === maxInputVars) {
-    return false;
-  }
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('form').each(function () {
-    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input').length;
-
-    if (nbInputs > maxInputVars) {
-      var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
-      return false;
-    }
-
-    return true;
-  });
-  return true;
-}
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getConfigValue": function() { return /* binding */ getConfigValue; },
-/* harmony export */   "setConfigValue": function() { return /* binding */ setConfigValue; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-
-
-
-/**
- * Sets a configuration value.
- *
- * A configuration value may be set in both browser's local storage and
- * remotely in server's configuration table.
- *
- * NOTE: Depending on server's configuration, the configuration table may be or
- * not persistent.
- *
- * @param {string} key   Configuration key.
- * @param {object} value Configuration value.
- *
- * @return {void}
- */
-
-function setConfigValue(key, value) {
-  // Updating value in local storage.
-  var serialized = JSON.stringify(value);
-  localStorage.setItem(key, serialized);
-  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
-    url: 'index.php?route=/config/set',
-    type: 'POST',
-    dataType: 'json',
-    data: {
-      'ajax_request': true,
-      key: key,
-      server: _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-      value: serialized
-    },
-    success: function (data) {
-      if (data.success !== true) {
-        // Try to find a message to display
-        if (data.error || data.message || false) {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error || data.message);
-        }
-      }
-    }
-  });
-}
-/**
- * Gets a configuration value. A configuration value will be searched in
- * browser's local storage first and if not found, a call to the server will be
- * made.
- *
- * If value should not be cached and the up-to-date configuration value from
- * right from the server is required, the third parameter should be `false`.
- *
- * @param {string}   key             Configuration key.
- * @param {boolean}  cached          Configuration type.
- * @param {Function} successCallback The callback to call after the value is successfully received
- * @param {Function} failureCallback The callback to call when the value can not be received
- *
- * @return {void}
- */
-
-function getConfigValue(key, cached, successCallback, failureCallback) {
-  var isCached = typeof cached !== 'undefined' ? cached : true;
-  var value = localStorage.getItem(key);
-
-  if (isCached && value !== undefined && value !== null) {
-    return JSON.parse(value);
-  } // Result not found in local storage or ignored.
-  // Hitting the server.
-
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
-    url: 'index.php?route=/config/get',
-    type: 'POST',
-    dataType: 'json',
-    data: {
-      'ajax_request': true,
-      server: _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-      key: key
-    },
-    success: function (data) {
-      if (data.success !== true) {
-        // Try to find a message to display
-        if (data.error || data.message || false) {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error || data.message);
-        } // Call the callback if it is defined
-
-
-        if (typeof failureCallback === 'function') {
-          failureCallback();
-        } // return here, exit non success mode
-
-
-        return;
-      } // Updating value in local storage.
-
-
-      localStorage.setItem(key, JSON.stringify(data.value)); // Call the callback if it is defined
-
-      if (typeof successCallback === 'function') {
-        // Feed it the value previously saved like on async mode
-        successCallback(JSON.parse(localStorage.getItem(key)));
-      }
-    }
-  });
-}
-
-/***/ }),
-
-/***/ 68:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ createProfilingChart; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-/* global ChartType, ColumnType, DataTable, JQPlotChartFactory */
-// js/chart.js
-
-/**
- * Creates a Profiling Chart. Used in sql.js
- * and in server/status/monitor.js
- *
- * @param {string} target
- * @param {any[]} data
- *
- * @return {object}
- */
-
-function createProfilingChart(target, data) {
-  // create the chart
-  var factory = new JQPlotChartFactory();
-  var chart = factory.createChart(ChartType.PIE, target); // create the data table and add columns
-
-  var dataTable = new DataTable();
-  dataTable.addColumn(ColumnType.STRING, '');
-  dataTable.addColumn(ColumnType.NUMBER, '');
-  dataTable.setData(data);
-  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
-  var location = 's';
-
-  if (windowWidth > 768) {
-    location = 'se';
-  } // draw the chart and return the chart object
-
-
-  chart.draw(dataTable, {
-    seriesDefaults: {
-      rendererOptions: {
-        showDataLabels: true
-      }
-    },
-    highlighter: {
-      tooltipLocation: 'se',
-      sizeAdjust: 0,
-      tooltipAxes: 'pieref',
-      formatString: '%s, %.9Ps'
-    },
-    legend: {
-      show: true,
-      location: location,
-      rendererOptions: {
-        numberColumns: 2
-      }
-    },
-    // from https://web.archive.org/web/20190321233412/http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
-    seriesColors: ['#fce94f', '#fcaf3e', '#e9b96e', '#8ae234', '#729fcf', '#ad7fa8', '#ef2929', '#888a85', '#c4a000', '#ce5c00', '#8f5902', '#4e9a06', '#204a87', '#5c3566', '#a40000', '#babdb6', '#2e3436']
-  });
-  return chart;
-}
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "escapeBacktick": function() { return /* binding */ escapeBacktick; },
-/* harmony export */   "escapeHtml": function() { return /* binding */ escapeHtml; },
-/* harmony export */   "escapeJsString": function() { return /* binding */ escapeJsString; },
-/* harmony export */   "escapeSingleQuote": function() { return /* binding */ escapeSingleQuote; }
-/* harmony export */ });
-/**
- * @param {string} value
- * @return {string}
- */
-function escapeHtml() {
-  let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  const element = document.createElement('span');
-  element.appendChild(document.createTextNode(value));
-  return element.innerHTML;
-}
-/**
- * JavaScript escaping
- *
- * @param {any} unsafe
- * @return {string | false}
- */
-
-function escapeJsString(unsafe) {
-  if (typeof unsafe !== 'undefined') {
-    return unsafe.toString().replace('\x00', '').replace('\\', '\\\\').replace('\'', '\\\'').replace('&#039;', '\\&#039;').replace('"', '\\"').replace('&quot;', '\\&quot;').replace('\n', '\n').replace('\r', '\r').replace(/<\/script/gi, '</\' + \'script');
-  } else {
-    return false;
-  }
-}
-/**
- * @param {string} s
- * @return {string}
- */
-
-function escapeBacktick(s) {
-  return s.replace('`', '``');
-}
-/**
- * @param {string} s
- * @return {string}
- */
-
-function escapeSingleQuote(s) {
-  return s.replace('\\', '\\\\').replace('\'', '\\\'');
-}
-
-/***/ }),
-
-/***/ 12:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ getImageTag; }
-/* harmony export */ });
-/* harmony import */ var _escape_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-
-/**
- * Returns an HTML IMG tag for a particular image from a theme,
- * which may be an actual file or an icon from a sprite
- *
- * @param {string} image      The name of the file to get
- * @param {string} alternate  Used to set 'alt' and 'title' attributes of the image
- * @param {object} attributes An associative array of other attributes
- *
- * @return {object} The requested image, this object has two methods:
- *                  .toString()        - Returns the IMG tag for the requested image
- *                  .attr(name)        - Returns a particular attribute of the IMG
- *                                       tag given it's name
- *                  .attr(name, value) - Sets a particular attribute of the IMG
- *                                       tag to the given value
- */
-
-function getImageTag(image, alternate, attributes) {
-  var alt = alternate;
-  var attr = attributes; // custom image object, it will eventually be returned by this functions
-
-  var retval = {
-    data: {
-      // this is private
-      alt: '',
-      title: '',
-      src: 'themes/dot.gif'
-    },
-    attr: function (name, value) {
-      if (value === undefined) {
-        if (this.data[name] === undefined) {
-          return '';
-        } else {
-          return this.data[name];
-        }
-      } else {
-        this.data[name] = value;
-      }
-    },
-    toString: function () {
-      var retval = '<' + 'img';
-
-      for (var i in this.data) {
-        retval += ' ' + i + '="' + this.data[i] + '"';
-      }
-
-      retval += ' /' + '>';
-      return retval;
-    }
-  }; // initialise missing parameters
-
-  if (attr === undefined) {
-    attr = {};
-  }
-
-  if (alt === undefined) {
-    alt = '';
-  } // set alt
-
-
-  if (attr.alt !== undefined) {
-    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.alt));
-  } else {
-    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
-  } // set title
-
-
-  if (attr.title !== undefined) {
-    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.title));
-  } else {
-    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
-  } // set css classes
-
-
-  retval.attr('class', 'icon ic_' + image); // set all other attributes
-
-  for (var i in attr) {
-    if (i === 'src') {
-      // do not allow to override the 'src' attribute
-      continue;
-    }
-
-    retval.attr(i, attr[i]);
-  }
-
-  return retval;
-}
-
-/***/ }),
-
-/***/ 17:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ getJsConfirmCommonParam; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-
-
-/**
- * @param {HTMLElement} elem
- * @param {string} parameters
- * @return {string}
- */
-
-function getJsConfirmCommonParam(elem, parameters) {
-  var $elem = jquery__WEBPACK_IMPORTED_MODULE_0__(elem);
-  var params = parameters;
-  var sep = _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator');
-
-  if (params) {
-    // Strip possible leading ?
-    if (params.startsWith('?')) {
-      params = params.substring(1);
-    }
-
-    params += sep;
-  } else {
-    params = '';
-  }
-
-  params += 'is_js_confirmed=1' + sep + 'ajax_request=true' + sep + 'fk_checks=' + ($elem.find('#fk_checks').is(':checked') ? 1 : 0);
-  return params;
-}
-
-/***/ }),
-
-/***/ 19:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ handleCreateViewModal; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4);
-/* harmony import */ var _getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17);
-
-
-
-
-
-
-/**
- * @param {JQuery<HTMLElement>} $this
- *
- * @return {void}
- */
-
-function handleCreateViewModal($this) {
-  var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
-  var sep = _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  var params = (0,_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
-  params += sep + 'ajax_dialog=1';
-  jquery__WEBPACK_IMPORTED_MODULE_0__.post($this.attr('href'), params, function (data) {
-    if (typeof data !== 'undefined' && data.success === true) {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModalGoButton').on('click', function () {
-        if (typeof window.CodeMirror !== 'undefined') {
-          window.codeMirrorEditor.save();
-        }
-
-        $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
-        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/view/create', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('form').serialize(), function (data) {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
-
-          if (typeof data !== 'undefined' && data.success === true) {
-            jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('hide');
-            jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').html(data.message);
-            _navigation_js__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
-          } else {
-            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
-          }
-        });
-      });
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('.modal-body').first().html(data.message); // Attach syntax highlighted editor
-
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').on('shown.bs.modal', function () {
-        window.codeMirrorEditor = _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('textarea'));
-        jquery__WEBPACK_IMPORTED_MODULE_0__('input:visible[type=text]', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal')).first().trigger('focus');
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').off('shown.bs.modal');
-      });
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('show');
-    } else {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
-    }
-  });
-}
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ handleRedirectAndReload; }
-/* harmony export */ });
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-
-/**
- * Handle redirect and reload flags sent as part of AJAX requests
- *
- * @param {Object} data ajax response data
- */
-
-function handleRedirectAndReload(data) {
-  if (parseInt(data.redirect_flag) === 1) {
-    // add one more GET param to display session expiry msg
-    if (window.location.href.indexOf('?') === -1) {
-      window.location.href += '?session_expired=1';
-    } else {
-      window.location.href += _common_js__WEBPACK_IMPORTED_MODULE_0__.CommonParams.get('arg_separator') + 'session_expired=1';
-    }
-
-    window.location.reload();
-  } else if (parseInt(data.reload_flag) === 1) {
-    window.location.reload();
-  }
-}
-
-/***/ }),
-
-/***/ 13:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ignorePhpErrors": function() { return /* binding */ ignorePhpErrors; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-/**
- * Ignore the displayed php errors.
- * Simply removes the displayed errors.
- *
- * @param {boolean} clearPrevErrors whether to clear errors stored
- *             in $_SESSION['prev_errors'] at server
- *
- */
-
-function ignorePhpErrors(clearPrevErrors) {
-  var clearPrevious = clearPrevErrors;
-
-  if (typeof clearPrevious === 'undefined' || clearPrevious === null) {
-    clearPrevious = false;
-  } // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
-  // It clears the prev_errors stored in session.
-
-
-  if (clearPrevious) {
-    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form');
-    $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
-
-    $pmaReportErrorsForm.trigger('submit');
-  } // remove displayed errors
-
-
-  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors');
-  $pmaErrors.fadeOut('slow');
-  $pmaErrors.remove();
-}
-
-window.ignorePhpErrors = ignorePhpErrors;
-
-
-/***/ }),
-
-/***/ 18:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ refreshMainContent; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-
-
-/**
- * Refreshes the main frame
- *
- * @param {any} url Undefined to refresh to the same page
- *                  String to go to a different page, e.g: 'index.php'
- *
- * @return {void}
- */
-
-function refreshMainContent(url) {
-  var newUrl = url;
-
-  if (!newUrl) {
-    newUrl = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('a').attr('href') || window.location.pathname;
-    newUrl = newUrl.substring(0, newUrl.indexOf('?'));
-  }
-
-  if (newUrl.indexOf('?') !== -1) {
-    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery(_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator'));
-  } else {
-    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery('?');
-  }
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>', {
-    href: newUrl
-  }).appendTo('body').trigger('click').remove();
-}
-
-/***/ }),
-
-/***/ 16:
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Indexes": function() { return /* binding */ Indexes; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
-/* harmony import */ var _functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
-/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
-
-
-
-
-
-
-
-
-
-/**
- * @fileoverview    function used for index manipulation pages
- * @name            Table Structure
- *
- * @requires    jQueryUI
- */
-
-const Indexes = {};
-/**
- * Array to hold 'Primary' index columns.
- * @type {array}
- */
-
-let primaryColumns = [];
-/**
- * Array to hold 'Unique' index columns.
- * @type {array}
- */
-
-let uniqueColumns = [];
-/**
- * Array to hold 'Index' columns.
- * @type {array}
- */
-
-let indexColumns = [];
-/**
- * Array to hold 'Fulltext' columns.
- * @type {array}
- */
-
-let fulltextColumns = [];
-/**
- * Array to hold 'Spatial' columns.
- * @type {array}
- */
-
-let spatialColumns = [];
-/**
- * @return {void}
- */
-
-Indexes.resetColumnLists = () => {
-  primaryColumns = [];
-  uniqueColumns = [];
-  indexColumns = [];
-  fulltextColumns = [];
-  spatialColumns = [];
-};
-/**
- * Returns the array of indexes based on the index choice
- *
- * @param {string} indexChoice index choice
- *
- * @return {null|object}
- */
-
-
-Indexes.getIndexArray = function (indexChoice) {
-  let sourceArray = null;
-
-  switch (indexChoice.toLowerCase()) {
-    case 'primary':
-      sourceArray = primaryColumns;
-      break;
-
-    case 'unique':
-      sourceArray = uniqueColumns;
-      break;
-
-    case 'index':
-      sourceArray = indexColumns;
-      break;
-
-    case 'fulltext':
-      sourceArray = fulltextColumns;
-      break;
-
-    case 'spatial':
-      sourceArray = spatialColumns;
-      break;
-
-    default:
-      return null;
-  }
-
-  return sourceArray;
-};
-/**
- * Hides/shows the inputs and submits appropriately depending
- * on whether the index type chosen is 'SPATIAL' or not.
- */
-
-
-Indexes.checkIndexType = function () {
-  /**
-   * @var {JQuery<HTMLElement}, Dropdown to select the index choice.
-   */
-  var $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
-  /**
-   * @var {JQuery<HTMLElement}, Dropdown to select the index type.
-   */
-
-  var $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_type');
-  /**
-   * @var {JQuery<HTMLElement}, Table header for the size column.
-   */
-
-  var $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('thead tr').children('th').eq(1);
-  /**
-   * @var {JQuery<HTMLElement}, Inputs to specify the columns for the index.
-   */
-
-  var $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]');
-  /**
-   * @var {JQuery<HTMLElement}, Inputs to specify sizes for columns of the index.
-   */
-
-  var $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[columns][sub_parts][]"]');
-  /**
-   * @var {JQuery<HTMLElement}, Footer containing the controllers to add more columns
-   */
-
-  var $addMore = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').find('.add_more');
-
-  if ($selectIndexChoice.val() === 'SPATIAL') {
-    // Disable and hide the size column
-    $sizeHeader.hide();
-    $sizeInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true).parent('td').hide();
-    }); // Disable and hide the columns of the index other than the first one
-
-    var initial = true;
-    $columnInputs.each(function () {
-      var $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-
-      if (!initial) {
-        $columnInput.prop('disabled', true).parent('td').hide();
-      } else {
-        initial = false;
-      }
-    }); // Hide controllers to add more columns
-
-    $addMore.hide();
-  } else {
-    // Enable and show the size column
-    $sizeHeader.show();
-    $sizeInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
-    }); // Enable and show the columns of the index
-
-    $columnInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
-    }); // Show controllers to add more columns
-
-    $addMore.show();
-  }
-
-  if ($selectIndexChoice.val() === 'SPATIAL' || $selectIndexChoice.val() === 'FULLTEXT') {
-    $selectIndexType.val('').prop('disabled', true);
-  } else {
-    $selectIndexType.prop('disabled', false);
-  }
-};
-/**
- * Sets current index information into form parameters.
- *
- * @param {any[]}  sourceArray Array containing index columns
- * @param {string} indexChoice Choice of index
- *
- * @return {void}
- */
-
-
-Indexes.setIndexFormParameters = function (sourceArray, indexChoice) {
-  if (indexChoice === 'index') {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="indexes"]').val(JSON.stringify(sourceArray));
-  } else {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="' + indexChoice + '_indexes"]').val(JSON.stringify(sourceArray));
-  }
-};
-/**
- * Removes a column from an Index.
- *
- * @param {string} colIndex Index of column in form
- *
- * @return {void}
- */
-
-
-Indexes.removeColumnFromIndex = function (colIndex) {
-  // Get previous index details.
-  var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index');
-
-  if (previousIndex.length) {
-    previousIndex = previousIndex.split(',');
-    var sourceArray = Indexes.getIndexArray(previousIndex[0]);
-
-    if (sourceArray === null) {
-      return;
-    } // Remove column from index array.
-
-
-    var sourceLength = sourceArray[previousIndex[1]].columns.length;
-
-    for (var i = 0; i < sourceLength; i++) {
-      if (sourceArray[previousIndex[1]].columns[i].col_index === colIndex) {
-        sourceArray[previousIndex[1]].columns.splice(i, 1);
-      }
-    } // Remove index completely if no columns left.
-
-
-    if (sourceArray[previousIndex[1]].columns.length === 0) {
-      sourceArray.splice(previousIndex[1], 1);
-    } // Update current index details.
-
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index', ''); // Update form index parameters.
-
-    Indexes.setIndexFormParameters(sourceArray, previousIndex[0].toLowerCase());
-  }
-};
-/**
- * Adds a column to an Index.
- *
- * @param {any[]}  sourceArray Array holding corresponding indexes
- * @param {string} arrayIndex  Index of an INDEX in array
- * @param {string} indexChoice Choice of Index
- * @param {string} colIndex    Index of column on form
- *
- * @return {void}
- */
-
-
-Indexes.addColumnToIndex = function (sourceArray, arrayIndex, indexChoice, colIndex) {
-  if (colIndex >= 0) {
-    // Remove column from other indexes (if any).
-    Indexes.removeColumnFromIndex(colIndex);
-  }
-
-  var indexName = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Key_name]"]').val();
-  var indexComment = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Index_comment]"]').val();
-  var keyBlockSize = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Key_block_size]"]').val();
-  var parser = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Parser]"]').val();
-  var indexType = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[Index_type]"]').val();
-  var columns = [];
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody').find('tr').each(function () {
-    // Get columns in particular order.
-    var colIndex = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('select[name="index[columns][names][]"]').val();
-    var size = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input[name="index[columns][sub_parts][]"]').val();
-    columns.push({
-      'col_index': colIndex,
-      'size': size
-    });
-  }); // Update or create an index.
-
-  sourceArray[arrayIndex] = {
-    'Key_name': indexName,
-    'Index_comment': indexComment,
-    'Index_choice': indexChoice.toUpperCase(),
-    'Key_block_size': keyBlockSize,
-    'Parser': parser,
-    'Index_type': indexType,
-    'columns': columns
-  }; // Display index name (or column list)
-
-  var displayName = indexName;
-
-  if (displayName === '') {
-    var columnNames = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0__.each(columns, function () {
-      columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + this.col_index + ']"]').val());
-    });
-    displayName = '[' + columnNames.join(', ') + ']';
-  }
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__.each(columns, function () {
-    var id = 'index_name_' + this.col_index + '_8';
-    var $name = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + id);
-
-    if ($name.length === 0) {
-      $name = jquery__WEBPACK_IMPORTED_MODULE_0__('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
-      $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + this.col_index + ']"]'));
-    }
-
-    var $text = jquery__WEBPACK_IMPORTED_MODULE_0__('<small>').text(displayName);
-    $name.html($text);
-  });
-
-  if (colIndex >= 0) {
-    // Update index details on form.
-    jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index', indexChoice + ',' + arrayIndex);
-  }
-
-  Indexes.setIndexFormParameters(sourceArray, indexChoice.toLowerCase());
-};
-/**
- * Get choices list for a column to create a composite index with.
- *
- * @param {any[]} sourceArray Array hodling columns for particular index
- * @param {string} colIndex Choice of index
- *
- * @return {JQuery} jQuery Object
- */
-
-
-Indexes.getCompositeIndexList = function (sourceArray, colIndex) {
-  // Remove any previous list.
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').length) {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').remove();
-  } // Html list.
-
-
-  var $compositeIndexList = jquery__WEBPACK_IMPORTED_MODULE_0__('<ul id="composite_index_list">' + '<div>' + window.Messages.strCompositeWith + '</div>' + '</ul>'); // Add each column to list available for composite index.
-
-  var sourceLength = sourceArray.length;
-  var alreadyPresent = false;
-
-  for (var i = 0; i < sourceLength; i++) {
-    var subArrayLen = sourceArray[i].columns.length;
-    var columnNames = [];
-
-    for (var j = 0; j < subArrayLen; j++) {
-      columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + sourceArray[i].columns[j].col_index + ']"]').val());
-
-      if (colIndex === sourceArray[i].columns[j].col_index) {
-        alreadyPresent = true;
-      }
-    }
-
-    $compositeIndexList.append('<li>' + '<input type="radio" name="composite_with" ' + (alreadyPresent ? 'checked="checked"' : '') + ' id="composite_index_' + i + '" value="' + i + '">' + '<label for="composite_index_' + i + '">' + columnNames.join(', ') + '</label>' + '</li>');
-  }
-
-  return $compositeIndexList;
-};
-
-var addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
-  var isMissingValue = false;
-  jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]').each(function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() === '') {
-      isMissingValue = true;
-    }
-  });
-
-  if (!isMissingValue) {
-    Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
-  } else {
-    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
-    return false;
-  }
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-};
-/**
- * Shows 'Add Index' dialog.
- *
- * @param {any[]}  sourceArray   Array holding particular index
- * @param {string} arrayIndex    Index of an INDEX in array
- * @param {any[]}  targetColumns Columns for an INDEX
- * @param {string} colIndex      Index of column on form
- * @param {object} index         Index detail object
- * @param {boolean} showDialog   Whether to show index creation dialog or not
- *
- * @return {void}
- */
-
-
-Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, colIndex, index, showDialog) {
-  var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true; // Prepare post-data.
-
-  var $table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]');
-  var table = $table.length > 0 ? $table.val() : '';
-  var postData = {
-    'server': _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
-    'db': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val(),
-    'table': table,
-    'ajax_request': 1,
-    'create_edit_table': 1,
-    'index': index
-  };
-  var columns = {};
-
-  for (var i = 0; i < targetColumns.length; i++) {
-    var columnName = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + targetColumns[i] + ']"]').val();
-    var columnType = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_type[' + targetColumns[i] + ']"]').val().toLowerCase();
-    columns[columnName] = [columnType, targetColumns[i]];
-  }
-
-  postData.columns = JSON.stringify(columns);
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalGoButton').on('click', function () {
-    addIndexGo(sourceArray, arrayIndex, index, colIndex);
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCancelButton').on('click', function () {
-    if (colIndex >= 0) {
-      // Handle state on 'Cancel'.
-      var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]');
-
-      if (!$selectList.attr('data-index').length) {
-        $selectList.find('option[value*="none"]').attr('selected', 'selected');
-      } else {
-        var previousIndex = $selectList.attr('data-index').split(',');
-        $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
-      }
-    }
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCloseButton').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-  });
-  var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
-  jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/indexes', postData, function (data) {
-    if (data.success === false) {
-      // in the case of an error, show the error message returned.
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
-    } else {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
-      var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>');
-
-      if (showDialogLocal) {
-        // Show dialog if the request was successful
-        if (jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndex').length > 0) {
-          jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndex').remove();
-        }
-
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').on('keypress', function (e) {
-          if (e.which === 13 || e.keyCode === 13 || window.event.keyCode === 13) {
-            e.preventDefault();
-            console.log('BOOM');
-            addIndexGo(sourceArray, arrayIndex, index, colIndex);
-            jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-          }
-        });
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('show');
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalLabel').first().text(window.Messages.strAddIndex);
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').find('.modal-body').first().html(data.message);
-        _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
-        _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.showHints($div);
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('td').each(function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', jquery__WEBPACK_IMPORTED_MODULE_0__(this).width() + 'px');
-        });
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody').sortable({
-          axis: 'y',
-          containment: jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody'),
-          tolerance: 'pointer'
-        });
-      } else {
-        $div.append(data.message);
-        $div.css({
-          'display': 'none'
-        });
-        $div.appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('body'));
-        $div.attr({
-          'id': 'addIndex'
-        });
-        var isMissingValue = false;
-        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]').each(function () {
-          if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() === '') {
-            isMissingValue = true;
-          }
-        });
-
-        if (!isMissingValue) {
-          Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
-        } else {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
-          return false;
-        }
-      }
-    }
-  });
-};
-
-var removeIndexOnChangeEvent = function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').off('change');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').off('change');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-};
-/**
- * Creates a advanced index type selection dialog.
- *
- * @param {any[]}  sourceArray Array holding a particular type of indexes
- * @param {string} indexChoice Choice of index
- * @param {string} colIndex    Index of new column on form
- *
- * @return {void}
- */
-
-
-Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex) {
-  var $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="radio" id="single_column" name="index_choice"' + ' checked="checked">' + '<label for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label>');
-  var $compositeIndexRadio = jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="radio" id="composite_index"' + ' name="index_choice">' + '<label for="composite_index">' + window.Messages.strCreateCompositeIndex + '</label>');
-  var $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0__('<fieldset class="pma-fieldset" id="advance_index_creator"></fieldset>');
-  $dialogContent.append('<legend>' + indexChoice.toUpperCase() + '</legend>'); // For UNIQUE/INDEX type, show choice for single-column and composite index.
-
-  $dialogContent.append($singleColumnRadio);
-  $dialogContent.append($compositeIndexRadio); // 'OK' operation.
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalGoButton').on('click', function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').is(':checked')) {
-      var index = {
-        'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
-        'Index_choice': indexChoice.toUpperCase()
-      };
-      Indexes.showAddIndexDialog(sourceArray, sourceArray.length, [colIndex], colIndex, index);
-    }
-
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').is(':checked')) {
-      if (jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]').length !== 0 && jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]:checked').length === 0) {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title=""' + ' alt="" class="icon ic_s_error"> ' + window.Messages.strFormEmpty + ' </div>', false);
-        return false;
-      }
-
-      var arrayIndex = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]:checked').val();
-      var sourceLength = sourceArray[arrayIndex].columns.length;
-      var targetColumns = [];
-
-      for (var i = 0; i < sourceLength; i++) {
-        targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
-      }
-
-      targetColumns.push(colIndex);
-      Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, sourceArray[arrayIndex]);
-    }
-
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCancelButton').on('click', function () {
-    // Handle state on 'Cancel'.
-    var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]');
-
-    if (!$selectList.attr('data-index').length) {
-      $selectList.find('option[value*="none"]').attr('selected', 'selected');
-    } else {
-      var previousIndex = $selectList.attr('data-index').split(',');
-      $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
-    }
-
-    removeIndexOnChangeEvent();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCloseButton').on('click', function () {
-    removeIndexOnChangeEvent();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('show');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalLabel').first().text(window.Messages.strAddIndex);
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').find('.modal-body').first().html($dialogContent);
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').on('change', function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
-      $dialogContent.append(Indexes.getCompositeIndexList(sourceArray, colIndex));
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').on('change', function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
-      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').length) {
-        jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').remove();
-      }
-    }
-  });
-};
-/**
- * @return {function}
- */
-
-
-Indexes.off = () => function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#save_index_frm');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#preview_index_frm');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#select_index_choice');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.drop_primary_key_index_anchor.ajax');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#table_index tbody tr td.edit_index.ajax, #index_div .add_index.ajax');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#table_index tbody tr td.rename_index.ajax');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#index_frm input[type=submit]');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('change', 'select[name*="field_key"]');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '.show_index_dialog');
-};
-/**
- * @return {function}
- */
-
-
-Indexes.on = () => function () {
-  Indexes.resetColumnLists(); // for table creation form
-
-  var $engineSelector = jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form select[name=tbl_storage_engine]');
-
-  if ($engineSelector.length) {
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.hideShowConnection($engineSelector);
-  }
-
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
-
-  if ($form.length > 0) {
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.showIndexEditDialog($form);
-  }
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#save_index_frm', function (event) {
-    event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
-    var argsep = _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-    var submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-    _ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#preview_index_frm', function (event) {
-    event.preventDefault();
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.previewSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm'));
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_index_choice', function (event) {
-    event.preventDefault();
-    Indexes.checkIndexType();
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
-  });
-  /**
-   * Ajax Event handler for 'Drop Index'
-   */
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.drop_primary_key_index_anchor.ajax', function (event) {
-    event.preventDefault();
-    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-    /**
-     * @var $currRow Object containing reference to the current field's row
-     */
-
-    var $currRow = $anchor.parents('tr');
-    /** @var {number} rows Number of columns in the key */
-
-    var rows = $anchor.parents('td').attr('rowspan') || 1;
-    /** @var {number} $rowsToHide Rows that should be hidden */
-
-    var $rowsToHide = $currRow;
-
-    for (var i = 1, $lastRow = $currRow.next(); i < rows; i++, $lastRow = $lastRow.next()) {
-      $rowsToHide = $rowsToHide.add($lastRow);
-    }
-
-    var question = $currRow.children('td').children('.drop_primary_key_index_msg').val();
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.confirmPreviewSql(question, $anchor.attr('href'), function (url) {
-      var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingPrimaryKeyIndex, false);
-      var params = (0,_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $anchor.getPostData());
-      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
-        if (typeof data !== 'undefined' && data.success === true) {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
-          var $tableRef = $rowsToHide.closest('table');
-
-          if ($rowsToHide.length === $tableRef.find('tbody > tr').length) {
-            // We are about to remove all rows from the table
-            $tableRef.hide('medium', function () {
-              jquery__WEBPACK_IMPORTED_MODULE_0__('div.no_indexes_defined').show('medium');
-              $rowsToHide.remove();
-            });
-            $tableRef.siblings('.alert-primary').hide('medium');
-          } else {
-            // We are removing some of the rows only
-            $rowsToHide.hide('medium', function () {
-              jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
-            });
-          }
-
-          if (jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').length) {
-            jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').remove();
-          }
-
-          if (data.sql_query) {
-            jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="result_query"></div>').html(data.sql_query).prependTo('#structure_content');
-            (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
-          }
-
-          _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
-        } else {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
-        }
-      }); // end $.post()
-    });
-  }); // end Drop Primary Key/Index
-
-  /**
-   * Ajax event handler for index edit
-   **/
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#table_index tbody tr td.edit_index.ajax, #index_div .add_index.ajax', function (event) {
-    event.preventDefault();
-    var url;
-    var title;
-
-    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').length === 0) {
-      // Add index
-      var valid = _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkFormElementInRange(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form')[0], 'added_fields', 'Column count has to be larger than zero.');
-
-      if (!valid) {
-        return;
-      }
-
-      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').serialize();
-      title = window.Messages.strAddIndex;
-    } else {
-      // Edit index
-      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').getPostData();
-      title = window.Messages.strEditIndex;
-    }
-
-    url += _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.indexEditorDialog(url, title, function (data) {
-      _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db);
-      _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
-      (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
-    });
-  });
-  /**
-   * Ajax event handler for index rename
-   **/
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#table_index tbody tr td.rename_index.ajax', function (event) {
-    event.preventDefault();
-    var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').getPostData();
-    var title = window.Messages.strRenameIndex;
-    url += _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.indexRenameDialog(url, title, function (data) {
-      _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db);
-      _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
-      (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
-    });
-  });
-  /**
-   * Ajax event handler for advanced index creation during table creation
-   * and column addition.
-   */
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('change', 'select[name*="field_key"]', function (e, showDialog) {
-    var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true; // Index of column on Table edit and create page.
-
-    var colIndex = /\d+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name'));
-    colIndex = colIndex[0]; // Choice of selected index.
-
-    var indexChoice = /[a-z]+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
-    indexChoice = indexChoice[0]; // Array containing corresponding indexes.
-
-    var sourceArray = null;
-
-    if (indexChoice === 'none') {
-      Indexes.removeColumnFromIndex(colIndex);
-      var id = 'index_name_' + '0' + '_8';
-      var $name = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + id);
-
-      if ($name.length === 0) {
-        $name = jquery__WEBPACK_IMPORTED_MODULE_0__('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
-        $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + '0' + ']"]'));
-      }
-
-      $name.html('');
-      return false;
-    } // Select a source array.
-
-
-    sourceArray = Indexes.getIndexArray(indexChoice);
-
-    if (sourceArray === null) {
-      return;
-    }
-
-    if (sourceArray.length === 0) {
-      var index = {
-        'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
-        'Index_choice': indexChoice.toUpperCase()
-      };
-      Indexes.showAddIndexDialog(sourceArray, 0, [colIndex], colIndex, index, showDialogLocal);
-    } else {
-      if (indexChoice === 'primary') {
-        var arrayIndex = 0;
-        var sourceLength = sourceArray[arrayIndex].columns.length;
-        var targetColumns = [];
-
-        for (var i = 0; i < sourceLength; i++) {
-          targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
-        }
-
-        targetColumns.push(colIndex);
-        Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, sourceArray[arrayIndex], showDialogLocal);
-      } else {
-        // If there are multiple columns selected for an index, show advanced dialog.
-        Indexes.indexTypeSelectionDialog(sourceArray, indexChoice, colIndex);
-      }
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.show_index_dialog', function (e) {
-    e.preventDefault(); // Get index details.
-
-    var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0__(this).prev('select').attr('data-index').split(',');
-    var indexChoice = previousIndex[0];
-    var arrayIndex = previousIndex[1];
-    var sourceArray = Indexes.getIndexArray(indexChoice);
-
-    if (sourceArray !== null) {
-      var sourceLength = sourceArray[arrayIndex].columns.length;
-      var targetColumns = [];
-
-      for (var i = 0; i < sourceLength; i++) {
-        targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
-      }
-
-      Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, -1, sourceArray[arrayIndex]);
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').on('submit', function () {
-    if (typeof this.elements['index[Key_name]'].disabled !== 'undefined') {
-      this.elements['index[Key_name]'].disabled = false;
-    }
-  });
-};
-
-
-
-/***/ }),
-
-/***/ 4:
+/* 9 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7495,12 +4947,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(19);
-/* harmony import */ var _functions_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(20);
-/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(14);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
+/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(14);
+/* harmony import */ var _functions_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
+/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
 
 
 
@@ -7832,7 +5284,7 @@ Navigation.onload = () => function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#navi_db_select', function () {
     if (!jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) {
-      _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.set('db', '');
+      Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.set('db', ''));
       Navigation.reload();
     }
 
@@ -9174,12 +6626,1156 @@ Navigation.showFullName = function ($containerELem) {
     }
   });
 };
+/**
+ * @param {boolean} update
+ * @return {void}
+ */
 
+
+Navigation.update = update => {
+  if (update && jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').hasClass('synced')) {
+    Navigation.showCurrent();
+  }
+};
+
+window.Navigation = Navigation;
 
 
 /***/ }),
+/* 10 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
-/***/ 8:
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Config": function() { return /* binding */ Config; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
+
+
+
+
+/**
+ * Functions used in configuration forms and on user preferences pages
+ */
+
+const Config = {};
+window.configInlineParams;
+window.configScriptLoaded;
+/**
+ * checks whether browser supports web storage
+ *
+ * @param {'localStorage' | 'sessionStorage'} type the type of storage i.e. localStorage or sessionStorage
+ * @param {boolean} warn Wether to show a warning on error
+ *
+ * @return {boolean}
+ */
+
+Config.isStorageSupported = function (type) {
+  let warn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  try {
+    window[type].setItem('PMATest', 'test'); // Check whether key-value pair was set successfully
+
+    if (window[type].getItem('PMATest') === 'test') {
+      // Supported, remove test variable from storage
+      window[type].removeItem('PMATest');
+      return true;
+    }
+  } catch (error) {
+    // Not supported
+    if (warn) {
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strNoLocalStorage, false);
+    }
+  }
+
+  return false;
+}; // default values for fields
+
+
+window.defaultValues = {};
+/**
+ * Returns field type
+ *
+ * @param {Element} field
+ *
+ * @return {string}
+ */
+
+function getFieldType(field) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+  var tagName = $field.prop('tagName');
+
+  if (tagName === 'INPUT') {
+    return $field.attr('type');
+  } else if (tagName === 'SELECT') {
+    return 'select';
+  } else if (tagName === 'TEXTAREA') {
+    return 'text';
+  }
+
+  return '';
+}
+/**
+ * Enables or disables the "restore default value" button
+ *
+ * @param {Element} field
+ * @param {boolean} display
+ *
+ * @return {void}
+ */
+
+
+function setRestoreDefaultBtn(field, display) {
+  var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(field).closest('td').find('.restore-default img');
+  $el[display ? 'show' : 'hide']();
+}
+/**
+ * Marks field depending on its value (system default or custom)
+ *
+ * @param {Element | JQuery<Element>} field
+ *
+ * @return {void}
+ */
+
+
+function markField(field) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+  var type = getFieldType($field);
+  var isDefault = checkFieldDefault($field, type); // checkboxes uses parent <span> for marking
+
+  var $fieldMarker = type === 'checkbox' ? $field.parent() : $field;
+  setRestoreDefaultBtn($field, !isDefault);
+  $fieldMarker[isDefault ? 'removeClass' : 'addClass']('custom');
+}
+/**
+ * Sets field value
+ *
+ * value must be of type:
+ * o undefined (omitted) - restore default value (form default, not PMA default)
+ * o String - if field_type is 'text'
+ * o boolean - if field_type is 'checkbox'
+ * o Array of values - if field_type is 'select'
+ *
+ * @param {Element} field
+ * @param {string}  fieldType see {@link #getFieldType}
+ * @param {string | boolean}  value
+ */
+
+
+function setFieldValue(field, fieldType, value) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+
+  switch (fieldType) {
+    case 'text':
+    case 'number':
+      $field.val(value);
+      break;
+
+    case 'checkbox':
+      $field.prop('checked', value);
+      break;
+
+    case 'select':
+      var options = $field.prop('options');
+      var i;
+      var imax = options.length;
+
+      for (i = 0; i < imax; i++) {
+        options[i].selected = value.indexOf(options[i].value) !== -1;
+      }
+
+      break;
+  }
+
+  markField($field);
+}
+/**
+ * Gets field value
+ *
+ * Will return one of:
+ * o String - if type is 'text'
+ * o boolean - if type is 'checkbox'
+ * o Array of values - if type is 'select'
+ *
+ * @param {Element} field
+ * @param {string}  fieldType returned by {@link #getFieldType}
+ *
+ * @return {boolean | string | string[] | null}
+ */
+
+
+function getFieldValue(field, fieldType) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+
+  switch (fieldType) {
+    case 'text':
+    case 'number':
+      return $field.prop('value');
+
+    case 'checkbox':
+      return $field.prop('checked');
+
+    case 'select':
+      var options = $field.prop('options');
+      var i;
+      var imax = options.length;
+      var items = [];
+
+      for (i = 0; i < imax; i++) {
+        if (options[i].selected) {
+          items.push(options[i].value);
+        }
+      }
+
+      return items;
+  }
+
+  return null;
+}
+/**
+ * Returns values for all fields in fieldsets
+ *
+ * @return {object}
+ */
+
+
+Config.getAllValues = () => {
+  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset input, fieldset select, fieldset textarea');
+  var values = {};
+  var type;
+  var value;
+
+  for (var i = 0; i < $elements.length; i++) {
+    type = getFieldType($elements[i]);
+    value = getFieldValue($elements[i], type);
+
+    if (typeof value !== 'undefined') {
+      // we only have single selects, fatten array
+      if (type === 'select') {
+        value = value[0];
+      }
+
+      values[$elements[i].name] = value;
+    }
+  }
+
+  return values;
+};
+/**
+ * Checks whether field has its default value
+ *
+ * @param {Element} field
+ * @param {string}  type
+ *
+ * @return {boolean}
+ */
+
+
+function checkFieldDefault(field, type) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+  var fieldId = $field.attr('id');
+
+  if (typeof window.defaultValues[fieldId] === 'undefined') {
+    return true;
+  }
+
+  var isDefault = true;
+  var currentValue = getFieldValue($field, type);
+
+  if (type !== 'select') {
+    isDefault = currentValue === window.defaultValues[fieldId];
+  } else {
+    // compare arrays, will work for our representation of select values
+    if (currentValue.length !== window.defaultValues[fieldId].length) {
+      isDefault = false;
+    } else {
+      for (var i = 0; i < currentValue.length; i++) {
+        if (currentValue[i] !== window.defaultValues[fieldId][i]) {
+          isDefault = false;
+          break;
+        }
+      }
+    }
+  }
+
+  return isDefault;
+}
+/**
+ * Returns element's id prefix
+ * @param {Element} element
+ *
+ * @return {string}
+ */
+
+
+Config.getIdPrefix = function (element) {
+  return jquery__WEBPACK_IMPORTED_MODULE_0__(element).attr('id').replace(/[^-]+$/, '');
+}; // ------------------------------------------------------------------
+// Form validation and field operations
+//
+// form validator assignments
+
+
+let validate = {}; // form validator list
+
+window.validators = {
+  // regexp: numeric value
+  regExpNumeric: /^[0-9]+$/,
+  // regexp: extract parts from PCRE expression
+  regExpPcreExtract: /(.)(.*)\1(.*)?/,
+
+  /**
+   * Validates positive number
+   *
+   * @param {boolean} isKeyUp
+   *
+   * @return {boolean}
+   */
+  validatePositiveNumber: function (isKeyUp) {
+    if (isKeyUp && this.value === '') {
+      return true;
+    }
+
+    var result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
+    return result ? true : window.Messages.configErrorInvalidPositiveNumber;
+  },
+
+  /**
+   * Validates non-negative number
+   *
+   * @param {boolean} isKeyUp
+   *
+   * @return {boolean}
+   */
+  validateNonNegativeNumber: function (isKeyUp) {
+    if (isKeyUp && this.value === '') {
+      return true;
+    }
+
+    var result = window.validators.regExpNumeric.test(this.value);
+    return result ? true : window.Messages.configErrorInvalidNonNegativeNumber;
+  },
+
+  /**
+   * Validates port number
+   *
+   * @return {true|string}
+   */
+  validatePortNumber: function () {
+    if (this.value === '') {
+      return true;
+    }
+
+    var result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
+    return result && this.value <= 65535 ? true : window.Messages.configErrorInvalidPortNumber;
+  },
+
+  /**
+   * Validates value according to given regular expression
+   *
+   * @param {boolean} isKeyUp
+   * @param {string}  regexp
+   *
+   * @return {true|string}
+   */
+  validateByRegex: function (isKeyUp, regexp) {
+    if (isKeyUp && this.value === '') {
+      return true;
+    } // convert PCRE regexp
+
+
+    var parts = regexp.match(window.validators.regExpPcreExtract);
+    var valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
+    return valid ? true : window.Messages.configErrorInvalidValue;
+  },
+
+  /**
+   * Validates upper bound for numeric inputs
+   *
+   * @param {boolean} isKeyUp
+   * @param {number} maxValue
+   *
+   * @return {true|string}
+   */
+  validateUpperBound: function (isKeyUp, maxValue) {
+    var val = parseInt(this.value, 10);
+
+    if (isNaN(val)) {
+      return true;
+    }
+
+    return val <= maxValue ? true : window.sprintf(window.Messages.configErrorInvalidUpperBound, maxValue);
+  },
+  // field validators
+  field: {},
+  // fieldset validators
+  fieldset: {}
+};
+/**
+ * Registers validator for given field
+ *
+ * @param {string}  id       field id
+ * @param {string}  type     validator (key in validators object)
+ * @param {boolean} onKeyUp  whether fire on key up
+ * @param {Array}   params   validation function parameters
+ */
+
+Config.registerFieldValidator = (id, type, onKeyUp, params) => {
+  if (typeof window.validators[type] === 'undefined') {
+    return;
+  }
+
+  if (typeof validate[id] === 'undefined') {
+    validate[id] = [];
+  }
+
+  if (validate[id].length === 0) {
+    validate[id].push([type, params, onKeyUp]);
+  }
+};
+/**
+ * Returns validation functions associated with form field
+ *
+ * @param {String}  fieldId     form field id
+ * @param {boolean} onKeyUpOnly see registerFieldValidator
+ *
+ * @return {any[]} of [function, parameters to be passed to function]
+ */
+
+
+function getFieldValidators(fieldId, onKeyUpOnly) {
+  // look for field bound validator
+  var name = fieldId && fieldId.match(/[^-]+$/)[0];
+
+  if (typeof window.validators.field[name] !== 'undefined') {
+    return [[window.validators.field[name], null]];
+  } // look for registered validators
+
+
+  var functions = [];
+
+  if (typeof validate[fieldId] !== 'undefined') {
+    // validate[field_id]: array of [type, params, onKeyUp]
+    for (var i = 0, imax = validate[fieldId].length; i < imax; i++) {
+      if (onKeyUpOnly && !validate[fieldId][i][2]) {
+        continue;
+      }
+
+      functions.push([window.validators[validate[fieldId][i][0]], validate[fieldId][i][1]]);
+    }
+  }
+
+  return functions;
+}
+/**
+ * Displays errors for given form fields
+ *
+ * WARNING: created DOM elements must be identical with the ones made by
+ * PhpMyAdmin\Config\FormDisplayTemplate::displayInput()!
+ *
+ * @param {object} errorList list of errors in the form {field id: error array}
+ */
+
+
+Config.displayErrors = function (errorList) {
+  var tempIsEmpty = function (item) {
+    return item !== '';
+  };
+
+  for (var fieldId in errorList) {
+    var errors = errorList[fieldId];
+    var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
+    var isFieldset = $field.attr('tagName') === 'FIELDSET';
+    var $errorCnt;
+
+    if (isFieldset) {
+      $errorCnt = $field.find('dl.errors');
+    } else {
+      $errorCnt = $field.siblings('.inline_errors');
+    } // remove empty errors (used to clear error list)
+
+
+    errors = jquery__WEBPACK_IMPORTED_MODULE_0__.grep(errors, tempIsEmpty); // CSS error class
+
+    if (!isFieldset) {
+      // checkboxes uses parent <span> for marking
+      var $fieldMarker = $field.attr('type') === 'checkbox' ? $field.parent() : $field;
+      $fieldMarker[errors.length ? 'addClass' : 'removeClass']('field-error');
+    }
+
+    if (errors.length) {
+      // if error container doesn't exist, create it
+      if ($errorCnt.length === 0) {
+        if (isFieldset) {
+          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="errors"></dl>');
+          $field.find('table').before($errorCnt);
+        } else {
+          $errorCnt = jquery__WEBPACK_IMPORTED_MODULE_0__('<dl class="inline_errors"></dl>');
+          $field.closest('td').append($errorCnt);
+        }
+      }
+
+      var html = '';
+
+      for (var i = 0, imax = errors.length; i < imax; i++) {
+        html += '<dd>' + errors[i] + '</dd>';
+      }
+
+      $errorCnt.html(html);
+    } else if ($errorCnt !== null) {
+      // remove useless error container
+      $errorCnt.remove();
+    }
+  }
+};
+/**
+ * Validates fields and fieldsets and call displayError function as required
+ */
+
+
+function setDisplayError() {
+  var elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]'); // run all field validators
+
+  var errors = {};
+
+  for (var i = 0; i < elements.length; i++) {
+    validateField(elements[i], false, errors);
+  } // run all fieldset validators
+
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
+    validateFieldset(this, false, errors);
+  });
+  Config.displayErrors(errors);
+}
+/**
+ * Validates fieldset and puts errors in 'errors' object
+ *
+ * @param {Element} fieldset
+ * @param {boolean} isKeyUp
+ * @param {object}  errors
+ */
+
+
+function validateFieldset(fieldset, isKeyUp, errors) {
+  var $fieldset = jquery__WEBPACK_IMPORTED_MODULE_0__(fieldset);
+
+  if ($fieldset.length && typeof window.validators.fieldset[$fieldset.attr('id')] !== 'undefined') {
+    var fieldsetErrors = window.validators.fieldset[$fieldset.attr('id')].apply($fieldset[0], [isKeyUp]);
+
+    for (var fieldId in fieldsetErrors) {
+      if (typeof errors[fieldId] === 'undefined') {
+        errors[fieldId] = [];
+      }
+
+      if (typeof fieldsetErrors[fieldId] === 'string') {
+        fieldsetErrors[fieldId] = [fieldsetErrors[fieldId]];
+      }
+
+      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], fieldsetErrors[fieldId]);
+    }
+  }
+}
+/**
+ * Validates form field and puts errors in 'errors' object
+ *
+ * @param {Element} field
+ * @param {boolean} isKeyUp
+ * @param {object}  errors
+ */
+
+
+function validateField(field, isKeyUp, errors) {
+  var args;
+  var result;
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+  var fieldId = $field.attr('id');
+  errors[fieldId] = [];
+  var functions = getFieldValidators(fieldId, isKeyUp);
+
+  for (var i = 0; i < functions.length; i++) {
+    if (typeof functions[i][1] !== 'undefined' && functions[i][1] !== null) {
+      args = functions[i][1].slice(0);
+    } else {
+      args = [];
+    }
+
+    args.unshift(isKeyUp);
+    result = functions[i][0].apply($field[0], args);
+
+    if (result !== true) {
+      if (typeof result === 'string') {
+        result = [result];
+      }
+
+      jquery__WEBPACK_IMPORTED_MODULE_0__.merge(errors[fieldId], result);
+    }
+  }
+}
+/**
+ * Validates form field and parent fieldset
+ *
+ * @param {Element} field
+ * @param {boolean} isKeyUp
+ */
+
+
+function validateFieldAndFieldset(field, isKeyUp) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__(field);
+  var errors = {};
+  validateField($field, isKeyUp, errors);
+  validateFieldset($field.closest('fieldset.optbox'), isKeyUp, errors);
+  Config.displayErrors(errors);
+}
+
+Config.loadInlineConfig = () => {
+  if (!Array.isArray(window.configInlineParams)) {
+    return;
+  }
+
+  for (var i = 0; i < window.configInlineParams.length; ++i) {
+    if (typeof window.configInlineParams[i] === 'function') {
+      window.configInlineParams[i]();
+    }
+  }
+};
+
+Config.setupValidation = function () {
+  validate = {};
+  window.configScriptLoaded = true;
+
+  if (window.configScriptLoaded && typeof window.configInlineParams !== 'undefined') {
+    Config.loadInlineConfig();
+  } // register validators and mark custom values
+
+
+  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]');
+  $elements.each(function () {
+    markField(this);
+    var $el = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    $el.on('change', function () {
+      validateFieldAndFieldset(this, false);
+      markField(this);
+    });
+    var tagName = $el.attr('tagName'); // text fields can be validated after each change
+
+    if (tagName === 'INPUT' && $el.attr('type') === 'text') {
+      $el.on('keyup', function () {
+        validateFieldAndFieldset($el, true);
+        markField($el);
+      });
+    } // disable textarea spellcheck
+
+
+    if (tagName === 'TEXTAREA') {
+      $el.attr('spellcheck', false);
+    }
+  }); // check whether we've refreshed a page and browser remembered modified
+  // form values
+
+  var $checkPageRefresh = jquery__WEBPACK_IMPORTED_MODULE_0__('#check_page_refresh');
+
+  if ($checkPageRefresh.length === 0 || $checkPageRefresh.val() === '1') {
+    // run all field validators
+    var errors = {};
+
+    for (var i = 0; i < $elements.length; i++) {
+      validateField($elements[i], false, errors);
+    } // run all fieldset validators
+
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset.optbox').each(function () {
+      validateFieldset(this, false, errors);
+    });
+    Config.displayErrors(errors);
+  } else if ($checkPageRefresh) {
+    $checkPageRefresh.val('1');
+  }
+}; //
+// END: Form validation and field operations
+// ------------------------------------------------------------------
+
+
+function adjustPrefsNotification() {
+  var $prefsAutoLoad = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
+  var $tableNameControl = jquery__WEBPACK_IMPORTED_MODULE_0__('#table_name_col_no');
+  var $prefsAutoShowing = $prefsAutoLoad.css('display') !== 'none';
+
+  if ($prefsAutoShowing && $tableNameControl.length) {
+    $tableNameControl.css('top', '55px');
+  }
+} // ------------------------------------------------------------------
+// "Restore default" and "set value" buttons
+//
+
+/**
+ * Restores field's default value
+ *
+ * @param {string} fieldId
+ *
+ * @return {void}
+ */
+
+
+function restoreField(fieldId) {
+  var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + fieldId);
+
+  if ($field.length === 0 || window.defaultValues[fieldId] === undefined) {
+    return;
+  }
+
+  setFieldValue($field, getFieldType($field), window.defaultValues[fieldId]);
+}
+
+Config.setupRestoreField = function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').on('mouseenter', '.restore-default, .set-value', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 1);
+  }).on('mouseleave', '.restore-default, .set-value', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('opacity', 0.25);
+  }).on('click', '.restore-default, .set-value', function (e) {
+    e.preventDefault();
+    var href = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href');
+    var fieldSel;
+
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('restore-default')) {
+      fieldSel = href;
+      restoreField(fieldSel.substring(1));
+    } else {
+      fieldSel = href.match(/^[^=]+/)[0];
+      var value = href.match(/=(.+)$/)[1];
+      setFieldValue(jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel), 'text', value);
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__(fieldSel).trigger('change');
+  }).find('.restore-default, .set-value') // inline-block for IE so opacity inheritance works
+  .css({
+    display: 'inline-block',
+    opacity: 0.25
+  });
+}; //
+// END: "Restore default" and "set value" buttons
+// ------------------------------------------------------------------
+
+/**
+ * Saves user preferences to localStorage
+ *
+ * @param {Element} form
+ */
+
+
+function savePrefsToLocalStorage(form) {
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(form);
+  var submit = $form.find('input[type=submit]');
+  submit.prop('disabled', true);
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
+    url: 'index.php?route=/preferences/manage',
+    cache: false,
+    type: 'POST',
+    data: {
+      'ajax_request': true,
+      'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+      'submit_get_json': true
+    },
+    success: function (data) {
+      if (typeof data !== 'undefined' && data.success === true) {
+        window.localStorage.config = data.prefs;
+        window.localStorage.configMtime = data.mtime;
+        window.localStorage.configMtimeLocal = new Date().toUTCString();
+        updatePrefsDate();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-empty').hide();
+        jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-exists').show();
+        var group = $form.parent('.card-body');
+        group.css('height', group.height() + 'px');
+        $form.hide('fast');
+        $form.prev('.click-hide-message').show('fast');
+      } else {
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error);
+      }
+    },
+    complete: function () {
+      submit.prop('disabled', false);
+    }
+  });
+}
+/**
+ * Updates preferences timestamp in Import form
+ */
+
+
+function updatePrefsDate() {
+  var d = new Date(window.localStorage.configMtimeLocal);
+  var msg = window.Messages.strSavedOn.replace('@DATE@', _functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.formatDateTime(d));
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
+}
+/**
+ * Prepares message which informs that localStorage preferences are available and can be imported or deleted
+ */
+
+
+function offerPrefsAutoimport() {
+  var hasConfig = Config.isStorageSupported('localStorage') && (window.localStorage.config || false);
+  var $cnt = jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload');
+
+  if (!$cnt.length || !hasConfig) {
+    return;
+  }
+
+  $cnt.find('a').on('click', function (e) {
+    e.preventDefault();
+    var $a = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+
+    if ($a.attr('href') === '#no') {
+      $cnt.remove();
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
+        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+        'prefs_autoload': 'hide'
+      }, null, 'html');
+      return;
+    } else if ($a.attr('href') === '#delete') {
+      $cnt.remove();
+      localStorage.clear();
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php', {
+        'server': _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+        'prefs_autoload': 'hide'
+      }, null, 'html');
+      return;
+    }
+
+    $cnt.find('input[name=json]').val(window.localStorage.config);
+    $cnt.find('form').trigger('submit');
+  });
+  $cnt.show();
+}
+/**
+ * @return {function}
+ */
+
+
+Config.off = function () {
+  return function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[id], .optbox select[id], .optbox textarea[id]').off('change').off('keyup');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.tab-content').off();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').off('change').off('submit');
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'div.click-hide-message');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#prefs_autoload').find('a').off('click');
+  };
+};
+/**
+ * @return {function}
+ */
+
+
+Config.on = function () {
+  return function () {
+    var $topmenuUpt = jquery__WEBPACK_IMPORTED_MODULE_0__('#user_prefs_tabs');
+    $topmenuUpt.find('a.active').attr('rel', 'samepage');
+    $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
+    Config.setupValidation();
+    adjustPrefsNotification();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.optbox input[type=button][name=submit_reset]').on('click', function () {
+      var fields = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('fieldset').find('input, select, textarea');
+
+      for (var i = 0, imax = fields.length; i < imax; i++) {
+        setFieldValue(fields[i], getFieldType(fields[i]), window.defaultValues[fields[i].id]);
+      }
+
+      setDisplayError();
+    });
+    Config.setupRestoreField();
+    offerPrefsAutoimport();
+    var $radios = jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage, #export_local_storage');
+
+    if (!$radios.length) {
+      return;
+    } // enable JavaScript dependent fields
+
+
+    $radios.prop('disabled', false).add('#export_text_file, #import_text_file').on('click', function () {
+      var enableId = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('id');
+      var disableId;
+
+      if (enableId.match(/local_storage$/)) {
+        disableId = enableId.replace(/local_storage$/, 'text_file');
+      } else {
+        disableId = enableId.replace(/text_file$/, 'local_storage');
+      }
+
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + disableId).addClass('disabled').find('input').prop('disabled', true);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#opts_' + enableId).removeClass('disabled').find('input').prop('disabled', false);
+    }); // detect localStorage state
+
+    var lsSupported = Config.isStorageSupported('localStorage', true);
+    var lsExists = lsSupported ? window.localStorage.config || false : false;
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
+
+    if (lsExists) {
+      updatePrefsDate();
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__('form.prefs-form').on('change', function () {
+      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      var disabled = false;
+
+      if (!lsSupported) {
+        disabled = $form.find('input[type=radio][value$=local_storage]').prop('checked');
+      } else if (!lsExists && $form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
+        disabled = true;
+      }
+
+      $form.find('input[type=submit]').prop('disabled', disabled);
+    }).on('submit', function (e) {
+      var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+
+      if ($form.attr('name') === 'prefs_export' && jquery__WEBPACK_IMPORTED_MODULE_0__('#export_local_storage')[0].checked) {
+        e.preventDefault(); // use AJAX to read JSON settings and save them
+
+        savePrefsToLocalStorage($form);
+      } else if ($form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0__('#import_local_storage')[0].checked) {
+        // set 'json' input and submit form
+        $form.find('input[name=json]').val(window.localStorage.config);
+      }
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'div.click-hide-message', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').css('height', '');
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('.card-body').find('.prefs-form').show();
+    });
+  };
+};
+
+window.Config = Config;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ajaxRemoveMessage": function() { return /* binding */ ajaxRemoveMessage; },
+/* harmony export */   "ajaxShowMessage": function() { return /* binding */ ajaxShowMessage; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
+
+
+
+/**
+ * Number of AJAX messages shown since page load.
+ * @type {number}
+ */
+
+let ajaxMessageCount = 0;
+/**
+ * Show a message on the top of the page for an Ajax request
+ *
+ * Sample usage:
+ *
+ * 1) var $msg = ajaxShowMessage();
+ * This will show a message that reads "Loading...". Such a message will not
+ * disappear automatically and cannot be dismissed by the user. To remove this
+ * message either the ajaxRemoveMessage($msg) function must be called or
+ * another message must be show with ajaxShowMessage() function.
+ *
+ * 2) var $msg = ajaxShowMessage(window.Messages.strProcessingRequest);
+ * This is a special case. The behaviour is same as above,
+ * just with a different message
+ *
+ * 3) var $msg = ajaxShowMessage('The operation was successful');
+ * This will show a message that will disappear automatically and it can also
+ * be dismissed by the user.
+ *
+ * 4) var $msg = ajaxShowMessage('Some error', false);
+ * This will show a message that will not disappear automatically, but it
+ * can be dismissed by the user after they have finished reading it.
+ *
+ * @param {string|null} message string containing the message to be shown.
+ *                              optional, defaults to 'Loading...'
+ * @param {any} timeout         number of milliseconds for the message to be visible
+ *                              optional, defaults to 5000. If set to 'false', the
+ *                              notification will never disappear
+ * @param {string|null} type    string to dictate the type of message shown.
+ *                              optional, defaults to normal notification.
+ *                              If set to 'error', the notification will show message
+ *                              with red background.
+ *                              If set to 'success', the notification will show with
+ *                              a green background.
+ * @return {JQuery<Element>}   jQuery Element that holds the message div
+ *                              this object can be passed to ajaxRemoveMessage()
+ *                              to remove the notification
+ */
+
+const ajaxShowMessage = function () {
+  let message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  let timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  let type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var msg = message;
+  var newTimeOut = timeout;
+  /**
+   * @var self_closing Whether the notification will automatically disappear
+   */
+
+  var selfClosing = true;
+  /**
+   * @var dismissable Whether the user will be able to remove
+   *                  the notification by clicking on it
+   */
+
+  var dismissable = true; // Handle the case when a empty data.message is passed.
+  // We don't want the empty message
+
+  if (msg === '') {
+    return true;
+  } else if (!msg) {
+    // If the message is undefined, show the default
+    msg = window.Messages.strLoading;
+    dismissable = false;
+    selfClosing = false;
+  } else if (msg === window.Messages.strProcessingRequest) {
+    // This is another case where the message should not disappear
+    dismissable = false;
+    selfClosing = false;
+  } // Figure out whether (or after how long) to remove the notification
+
+
+  if (newTimeOut === undefined || newTimeOut === null) {
+    newTimeOut = 5000;
+  } else if (newTimeOut === false) {
+    selfClosing = false;
+  } // Determine type of message, add styling as required
+
+
+  if (type === 'error') {
+    msg = '<div class="alert alert-danger" role="alert">' + msg + '</div>';
+  } else if (type === 'success') {
+    msg = '<div class="alert alert-success" role="alert">' + msg + '</div>';
+  } // Create a parent element for the AJAX messages, if necessary
+
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#loading_parent').length === 0) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="loading_parent"></div>').prependTo('#page_content');
+  } // Update message count to create distinct message elements every time
+
+
+  ajaxMessageCount++; // Remove all old messages, if any
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('span.ajax_notification[id^=ajax_message_num]').remove();
+  /**
+   * @var $retval    a jQuery object containing the reference
+   *                 to the created AJAX message
+   */
+
+  var $retval = jquery__WEBPACK_IMPORTED_MODULE_0__('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show(); // If the notification is self-closing we should create a callback to remove it
+
+  if (selfClosing) {
+    $retval.delay(newTimeOut).fadeOut('medium', function () {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':data(tooltip)')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__(this).uiTooltip('destroy');
+      } // Remove the notification
+
+
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
+    });
+  } // If the notification is dismissable we need to add the relevant class to it
+  // and add a tooltip so that the users know that it can be removed
+
+
+  if (dismissable) {
+    $retval.addClass('dismissable').css('cursor', 'pointer');
+    /**
+     * Add a tooltip to the notification to let the user know that they
+     * can dismiss the ajax notification by clicking on it.
+     */
+
+    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_1__["default"])($retval, 'span', window.Messages.strDismiss);
+  } // Hide spinner if this is not a loading message
+
+
+  if (msg !== window.Messages.strLoading) {
+    $retval.css('background-image', 'none');
+  }
+
+  (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_2__["default"])($retval);
+  return $retval;
+};
+/**
+ * Removes the message shown for an Ajax operation when it's completed
+ *
+ * @param {JQuery} $thisMessageBox Element that holds the notification
+ *
+ * @return {void}
+ */
+
+
+const ajaxRemoveMessage = function ($thisMessageBox) {
+  if ($thisMessageBox !== undefined && $thisMessageBox instanceof jquery__WEBPACK_IMPORTED_MODULE_0__) {
+    $thisMessageBox.stop(true, true).fadeOut('medium');
+
+    if ($thisMessageBox.is(':data(tooltip)')) {
+      $thisMessageBox.uiTooltip('destroy');
+    } else {
+      $thisMessageBox.remove();
+    }
+  }
+};
+/**
+ * @return {number}
+ */
+
+
+window.getAjaxMessageCount = () => ajaxMessageCount;
+
+window.ajaxShowMessage = ajaxShowMessage;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ tooltip; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+/**
+ * Create a jQuery UI tooltip
+ *
+ * @param $elements jQuery object representing the elements
+ * @param {string} item the item (see https://api.jqueryui.com/tooltip/#option-items)
+ * @param myContent content of the tooltip
+ * @param {Object} additionalOptions to override the default options
+ *
+ * @return {void}
+ */
+
+function tooltip($elements, item, myContent) {
+  let additionalOptions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#no_hint').length > 0) {
+    return;
+  }
+
+  const defaultOptions = {
+    content: myContent,
+    items: item,
+    tooltipClass: 'tooltip',
+    track: true,
+    show: false,
+    hide: false
+  };
+  $elements.uiTooltip(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, defaultOptions, additionalOptions));
+}
+
+/***/ }),
+/* 13 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -9671,46 +8267,1480 @@ function highlightSql($base) {
 }
 
 /***/ }),
-
-/***/ 10:
+/* 14 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ tooltip; }
+/* harmony export */   "default": function() { return /* binding */ handleCreateViewModal; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony import */ var _getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(15);
+
+
+
+
+
 
 /**
- * Create a jQuery UI tooltip
- *
- * @param $elements jQuery object representing the elements
- * @param {string} item the item (see https://api.jqueryui.com/tooltip/#option-items)
- * @param myContent content of the tooltip
- * @param {Object} additionalOptions to override the default options
+ * @param {JQuery<HTMLElement>} $this
  *
  * @return {void}
  */
 
-function tooltip($elements, item, myContent) {
-  let additionalOptions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+function handleCreateViewModal($this) {
+  var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
+  var sep = _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  var params = (0,_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
+  params += sep + 'ajax_dialog=1';
+  jquery__WEBPACK_IMPORTED_MODULE_0__.post($this.attr('href'), params, function (data) {
+    if (typeof data !== 'undefined' && data.success === true) {
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModalGoButton').on('click', function () {
+        if (typeof window.CodeMirror !== 'undefined') {
+          window.codeMirrorEditor.save();
+        }
 
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#no_hint').length > 0) {
-    return;
+        $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
+        jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/view/create', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('form').serialize(), function (data) {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
+
+          if (typeof data !== 'undefined' && data.success === true) {
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('hide');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').html(data.message);
+            _navigation_js__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
+          } else {
+            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
+          }
+        });
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('.modal-body').first().html(data.message); // Attach syntax highlighted editor
+
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').on('shown.bs.modal', function () {
+        window.codeMirrorEditor = _functions_js__WEBPACK_IMPORTED_MODULE_3__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').find('textarea'));
+        jquery__WEBPACK_IMPORTED_MODULE_0__('input:visible[type=text]', jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal')).first().trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').off('shown.bs.modal');
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#createViewModal').modal('show');
+    } else {
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
+    }
+  });
+}
+
+/***/ }),
+/* 15 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ getJsConfirmCommonParam; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+
+
+/**
+ * @param {HTMLElement} elem
+ * @param {string} parameters
+ * @return {string}
+ */
+
+function getJsConfirmCommonParam(elem, parameters) {
+  var $elem = jquery__WEBPACK_IMPORTED_MODULE_0__(elem);
+  var params = parameters;
+  var sep = _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator');
+
+  if (params) {
+    // Strip possible leading ?
+    if (params.startsWith('?')) {
+      params = params.substring(1);
+    }
+
+    params += sep;
+  } else {
+    params = '';
   }
 
-  const defaultOptions = {
-    content: myContent,
-    items: item,
-    tooltipClass: 'tooltip',
-    track: true,
-    show: false,
-    hide: false
+  params += 'is_js_confirmed=1' + sep + 'ajax_request=true' + sep + 'fk_checks=' + ($elem.find('#fk_checks').is(':checked') ? 1 : 0);
+  return params;
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getConfigValue": function() { return /* binding */ getConfigValue; },
+/* harmony export */   "setConfigValue": function() { return /* binding */ setConfigValue; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+
+
+
+/**
+ * Sets a configuration value.
+ *
+ * A configuration value may be set in both browser's local storage and
+ * remotely in server's configuration table.
+ *
+ * NOTE: Depending on server's configuration, the configuration table may be or
+ * not persistent.
+ *
+ * @param {string} key   Configuration key.
+ * @param {object} value Configuration value.
+ *
+ * @return {void}
+ */
+
+function setConfigValue(key, value) {
+  // Updating value in local storage.
+  var serialized = JSON.stringify(value);
+  localStorage.setItem(key, serialized);
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
+    url: 'index.php?route=/config/set',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      'ajax_request': true,
+      key: key,
+      server: _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+      value: serialized
+    },
+    success: function (data) {
+      if (data.success !== true) {
+        // Try to find a message to display
+        if (data.error || data.message || false) {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error || data.message);
+        }
+      }
+    }
+  });
+}
+/**
+ * Gets a configuration value. A configuration value will be searched in
+ * browser's local storage first and if not found, a call to the server will be
+ * made.
+ *
+ * If value should not be cached and the up-to-date configuration value from
+ * right from the server is required, the third parameter should be `false`.
+ *
+ * @param {string}   key             Configuration key.
+ * @param {boolean}  cached          Configuration type.
+ * @param {Function} successCallback The callback to call after the value is successfully received
+ * @param {Function} failureCallback The callback to call when the value can not be received
+ *
+ * @return {void}
+ */
+
+function getConfigValue(key, cached, successCallback, failureCallback) {
+  var isCached = typeof cached !== 'undefined' ? cached : true;
+  var value = localStorage.getItem(key);
+
+  if (isCached && value !== undefined && value !== null) {
+    return JSON.parse(value);
+  } // Result not found in local storage or ignored.
+  // Hitting the server.
+
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
+    url: 'index.php?route=/config/get',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      'ajax_request': true,
+      server: _common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
+      key: key
+    },
+    success: function (data) {
+      if (data.success !== true) {
+        // Try to find a message to display
+        if (data.error || data.message || false) {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error || data.message);
+        } // Call the callback if it is defined
+
+
+        if (typeof failureCallback === 'function') {
+          failureCallback();
+        } // return here, exit non success mode
+
+
+        return;
+      } // Updating value in local storage.
+
+
+      localStorage.setItem(key, JSON.stringify(data.value)); // Call the callback if it is defined
+
+      if (typeof successCallback === 'function') {
+        // Feed it the value previously saved like on async mode
+        successCallback(JSON.parse(localStorage.getItem(key)));
+      }
+    }
+  });
+}
+
+/***/ }),
+/* 17 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ handleRedirectAndReload; }
+/* harmony export */ });
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+
+/**
+ * Handle redirect and reload flags sent as part of AJAX requests
+ *
+ * @param {Object} data ajax response data
+ */
+
+function handleRedirectAndReload(data) {
+  if (parseInt(data.redirect_flag) === 1) {
+    // add one more GET param to display session expiry msg
+    if (window.location.href.indexOf('?') === -1) {
+      window.location.href += '?session_expired=1';
+    } else {
+      window.location.href += _common_js__WEBPACK_IMPORTED_MODULE_0__.CommonParams.get('arg_separator') + 'session_expired=1';
+    }
+
+    window.location.reload();
+  } else if (parseInt(data.reload_flag) === 1) {
+    window.location.reload();
+  }
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Indexes": function() { return /* binding */ Indexes; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
+/* harmony import */ var _functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15);
+/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
+
+
+
+
+
+
+
+
+
+/**
+ * @fileoverview    function used for index manipulation pages
+ * @name            Table Structure
+ *
+ * @requires    jQueryUI
+ */
+
+const Indexes = {};
+/**
+ * Array to hold 'Primary' index columns.
+ * @type {array}
+ */
+
+let primaryColumns = [];
+/**
+ * Array to hold 'Unique' index columns.
+ * @type {array}
+ */
+
+let uniqueColumns = [];
+/**
+ * Array to hold 'Index' columns.
+ * @type {array}
+ */
+
+let indexColumns = [];
+/**
+ * Array to hold 'Fulltext' columns.
+ * @type {array}
+ */
+
+let fulltextColumns = [];
+/**
+ * Array to hold 'Spatial' columns.
+ * @type {array}
+ */
+
+let spatialColumns = [];
+/**
+ * @return {void}
+ */
+
+Indexes.resetColumnLists = () => {
+  primaryColumns = [];
+  uniqueColumns = [];
+  indexColumns = [];
+  fulltextColumns = [];
+  spatialColumns = [];
+};
+/**
+ * Returns the array of indexes based on the index choice
+ *
+ * @param {string} indexChoice index choice
+ *
+ * @return {null|object}
+ */
+
+
+Indexes.getIndexArray = function (indexChoice) {
+  let sourceArray = null;
+
+  switch (indexChoice.toLowerCase()) {
+    case 'primary':
+      sourceArray = primaryColumns;
+      break;
+
+    case 'unique':
+      sourceArray = uniqueColumns;
+      break;
+
+    case 'index':
+      sourceArray = indexColumns;
+      break;
+
+    case 'fulltext':
+      sourceArray = fulltextColumns;
+      break;
+
+    case 'spatial':
+      sourceArray = spatialColumns;
+      break;
+
+    default:
+      return null;
+  }
+
+  return sourceArray;
+};
+/**
+ * Hides/shows the inputs and submits appropriately depending
+ * on whether the index type chosen is 'SPATIAL' or not.
+ */
+
+
+Indexes.checkIndexType = function () {
+  /**
+   * @var {JQuery<HTMLElement}, Dropdown to select the index choice.
+   */
+  var $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
+  /**
+   * @var {JQuery<HTMLElement}, Dropdown to select the index type.
+   */
+
+  var $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_type');
+  /**
+   * @var {JQuery<HTMLElement}, Table header for the size column.
+   */
+
+  var $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('thead tr').children('th').eq(1);
+  /**
+   * @var {JQuery<HTMLElement}, Inputs to specify the columns for the index.
+   */
+
+  var $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]');
+  /**
+   * @var {JQuery<HTMLElement}, Inputs to specify sizes for columns of the index.
+   */
+
+  var $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[columns][sub_parts][]"]');
+  /**
+   * @var {JQuery<HTMLElement}, Footer containing the controllers to add more columns
+   */
+
+  var $addMore = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').find('.add_more');
+
+  if ($selectIndexChoice.val() === 'SPATIAL') {
+    // Disable and hide the size column
+    $sizeHeader.hide();
+    $sizeInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true).parent('td').hide();
+    }); // Disable and hide the columns of the index other than the first one
+
+    var initial = true;
+    $columnInputs.each(function () {
+      var $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+
+      if (!initial) {
+        $columnInput.prop('disabled', true).parent('td').hide();
+      } else {
+        initial = false;
+      }
+    }); // Hide controllers to add more columns
+
+    $addMore.hide();
+  } else {
+    // Enable and show the size column
+    $sizeHeader.show();
+    $sizeInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
+    }); // Enable and show the columns of the index
+
+    $columnInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
+    }); // Show controllers to add more columns
+
+    $addMore.show();
+  }
+
+  if ($selectIndexChoice.val() === 'SPATIAL' || $selectIndexChoice.val() === 'FULLTEXT') {
+    $selectIndexType.val('').prop('disabled', true);
+  } else {
+    $selectIndexType.prop('disabled', false);
+  }
+};
+/**
+ * Sets current index information into form parameters.
+ *
+ * @param {any[]}  sourceArray Array containing index columns
+ * @param {string} indexChoice Choice of index
+ *
+ * @return {void}
+ */
+
+
+Indexes.setIndexFormParameters = function (sourceArray, indexChoice) {
+  if (indexChoice === 'index') {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="indexes"]').val(JSON.stringify(sourceArray));
+  } else {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="' + indexChoice + '_indexes"]').val(JSON.stringify(sourceArray));
+  }
+};
+/**
+ * Removes a column from an Index.
+ *
+ * @param {string} colIndex Index of column in form
+ *
+ * @return {void}
+ */
+
+
+Indexes.removeColumnFromIndex = function (colIndex) {
+  // Get previous index details.
+  var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index');
+
+  if (previousIndex.length) {
+    previousIndex = previousIndex.split(',');
+    var sourceArray = Indexes.getIndexArray(previousIndex[0]);
+
+    if (sourceArray === null) {
+      return;
+    } // Remove column from index array.
+
+
+    var sourceLength = sourceArray[previousIndex[1]].columns.length;
+
+    for (var i = 0; i < sourceLength; i++) {
+      if (sourceArray[previousIndex[1]].columns[i].col_index === colIndex) {
+        sourceArray[previousIndex[1]].columns.splice(i, 1);
+      }
+    } // Remove index completely if no columns left.
+
+
+    if (sourceArray[previousIndex[1]].columns.length === 0) {
+      sourceArray.splice(previousIndex[1], 1);
+    } // Update current index details.
+
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index', ''); // Update form index parameters.
+
+    Indexes.setIndexFormParameters(sourceArray, previousIndex[0].toLowerCase());
+  }
+};
+/**
+ * Adds a column to an Index.
+ *
+ * @param {any[]}  sourceArray Array holding corresponding indexes
+ * @param {string} arrayIndex  Index of an INDEX in array
+ * @param {string} indexChoice Choice of Index
+ * @param {string} colIndex    Index of column on form
+ *
+ * @return {void}
+ */
+
+
+Indexes.addColumnToIndex = function (sourceArray, arrayIndex, indexChoice, colIndex) {
+  if (colIndex >= 0) {
+    // Remove column from other indexes (if any).
+    Indexes.removeColumnFromIndex(colIndex);
+  }
+
+  var indexName = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Key_name]"]').val();
+  var indexComment = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Index_comment]"]').val();
+  var keyBlockSize = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Key_block_size]"]').val();
+  var parser = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[Parser]"]').val();
+  var indexType = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[Index_type]"]').val();
+  var columns = [];
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody').find('tr').each(function () {
+    // Get columns in particular order.
+    var colIndex = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('select[name="index[columns][names][]"]').val();
+    var size = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input[name="index[columns][sub_parts][]"]').val();
+    columns.push({
+      'col_index': colIndex,
+      'size': size
+    });
+  }); // Update or create an index.
+
+  sourceArray[arrayIndex] = {
+    'Key_name': indexName,
+    'Index_comment': indexComment,
+    'Index_choice': indexChoice.toUpperCase(),
+    'Key_block_size': keyBlockSize,
+    'Parser': parser,
+    'Index_type': indexType,
+    'columns': columns
+  }; // Display index name (or column list)
+
+  var displayName = indexName;
+
+  if (displayName === '') {
+    var columnNames = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0__.each(columns, function () {
+      columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + this.col_index + ']"]').val());
+    });
+    displayName = '[' + columnNames.join(', ') + ']';
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__.each(columns, function () {
+    var id = 'index_name_' + this.col_index + '_8';
+    var $name = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + id);
+
+    if ($name.length === 0) {
+      $name = jquery__WEBPACK_IMPORTED_MODULE_0__('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
+      $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + this.col_index + ']"]'));
+    }
+
+    var $text = jquery__WEBPACK_IMPORTED_MODULE_0__('<small>').text(displayName);
+    $name.html($text);
+  });
+
+  if (colIndex >= 0) {
+    // Update index details on form.
+    jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]').attr('data-index', indexChoice + ',' + arrayIndex);
+  }
+
+  Indexes.setIndexFormParameters(sourceArray, indexChoice.toLowerCase());
+};
+/**
+ * Get choices list for a column to create a composite index with.
+ *
+ * @param {any[]} sourceArray Array hodling columns for particular index
+ * @param {string} colIndex Choice of index
+ *
+ * @return {JQuery} jQuery Object
+ */
+
+
+Indexes.getCompositeIndexList = function (sourceArray, colIndex) {
+  // Remove any previous list.
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').length) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').remove();
+  } // Html list.
+
+
+  var $compositeIndexList = jquery__WEBPACK_IMPORTED_MODULE_0__('<ul id="composite_index_list">' + '<div>' + window.Messages.strCompositeWith + '</div>' + '</ul>'); // Add each column to list available for composite index.
+
+  var sourceLength = sourceArray.length;
+  var alreadyPresent = false;
+
+  for (var i = 0; i < sourceLength; i++) {
+    var subArrayLen = sourceArray[i].columns.length;
+    var columnNames = [];
+
+    for (var j = 0; j < subArrayLen; j++) {
+      columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + sourceArray[i].columns[j].col_index + ']"]').val());
+
+      if (colIndex === sourceArray[i].columns[j].col_index) {
+        alreadyPresent = true;
+      }
+    }
+
+    $compositeIndexList.append('<li>' + '<input type="radio" name="composite_with" ' + (alreadyPresent ? 'checked="checked"' : '') + ' id="composite_index_' + i + '" value="' + i + '">' + '<label for="composite_index_' + i + '">' + columnNames.join(', ') + '</label>' + '</li>');
+  }
+
+  return $compositeIndexList;
+};
+
+var addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
+  var isMissingValue = false;
+  jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]').each(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() === '') {
+      isMissingValue = true;
+    }
+  });
+
+  if (!isMissingValue) {
+    Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
+  } else {
+    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
+    return false;
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+};
+/**
+ * Shows 'Add Index' dialog.
+ *
+ * @param {any[]}  sourceArray   Array holding particular index
+ * @param {string} arrayIndex    Index of an INDEX in array
+ * @param {any[]}  targetColumns Columns for an INDEX
+ * @param {string} colIndex      Index of column on form
+ * @param {object} index         Index detail object
+ * @param {boolean} showDialog   Whether to show index creation dialog or not
+ *
+ * @return {void}
+ */
+
+
+Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, colIndex, index, showDialog) {
+  var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true; // Prepare post-data.
+
+  var $table = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="table"]');
+  var table = $table.length > 0 ? $table.val() : '';
+  var postData = {
+    'server': _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
+    'db': jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="db"]').val(),
+    'table': table,
+    'ajax_request': 1,
+    'create_edit_table': 1,
+    'index': index
   };
-  $elements.uiTooltip(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, defaultOptions, additionalOptions));
+  var columns = {};
+
+  for (var i = 0; i < targetColumns.length; i++) {
+    var columnName = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="field_name[' + targetColumns[i] + ']"]').val();
+    var columnType = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_type[' + targetColumns[i] + ']"]').val().toLowerCase();
+    columns[columnName] = [columnType, targetColumns[i]];
+  }
+
+  postData.columns = JSON.stringify(columns);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalGoButton').on('click', function () {
+    addIndexGo(sourceArray, arrayIndex, index, colIndex);
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCancelButton').on('click', function () {
+    if (colIndex >= 0) {
+      // Handle state on 'Cancel'.
+      var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]');
+
+      if (!$selectList.attr('data-index').length) {
+        $selectList.find('option[value*="none"]').attr('selected', 'selected');
+      } else {
+        var previousIndex = $selectList.attr('data-index').split(',');
+        $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
+      }
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCloseButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+  });
+  var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+  jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/indexes', postData, function (data) {
+    if (data.success === false) {
+      // in the case of an error, show the error message returned.
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
+    } else {
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
+      var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>');
+
+      if (showDialogLocal) {
+        // Show dialog if the request was successful
+        if (jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndex').length > 0) {
+          jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndex').remove();
+        }
+
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').on('keypress', function (e) {
+          if (e.which === 13 || e.keyCode === 13 || window.event.keyCode === 13) {
+            e.preventDefault();
+            console.log('BOOM');
+            addIndexGo(sourceArray, arrayIndex, index, colIndex);
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+          }
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('show');
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalLabel').first().text(window.Messages.strAddIndex);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').find('.modal-body').first().html(data.message);
+        _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
+        _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.showHints($div);
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('td').each(function () {
+          jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', jquery__WEBPACK_IMPORTED_MODULE_0__(this).width() + 'px');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody').sortable({
+          axis: 'y',
+          containment: jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('tbody'),
+          tolerance: 'pointer'
+        });
+      } else {
+        $div.append(data.message);
+        $div.css({
+          'display': 'none'
+        });
+        $div.appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('body'));
+        $div.attr({
+          'id': 'addIndex'
+        });
+        var isMissingValue = false;
+        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]').each(function () {
+          if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() === '') {
+            isMissingValue = true;
+          }
+        });
+
+        if (!isMissingValue) {
+          Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
+        } else {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
+          return false;
+        }
+      }
+    }
+  });
+};
+
+var removeIndexOnChangeEvent = function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').off('change');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').off('change');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+};
+/**
+ * Creates a advanced index type selection dialog.
+ *
+ * @param {any[]}  sourceArray Array holding a particular type of indexes
+ * @param {string} indexChoice Choice of index
+ * @param {string} colIndex    Index of new column on form
+ *
+ * @return {void}
+ */
+
+
+Indexes.indexTypeSelectionDialog = function (sourceArray, indexChoice, colIndex) {
+  var $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="radio" id="single_column" name="index_choice"' + ' checked="checked">' + '<label for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label>');
+  var $compositeIndexRadio = jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="radio" id="composite_index"' + ' name="index_choice">' + '<label for="composite_index">' + window.Messages.strCreateCompositeIndex + '</label>');
+  var $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0__('<fieldset class="pma-fieldset" id="advance_index_creator"></fieldset>');
+  $dialogContent.append('<legend>' + indexChoice.toUpperCase() + '</legend>'); // For UNIQUE/INDEX type, show choice for single-column and composite index.
+
+  $dialogContent.append($singleColumnRadio);
+  $dialogContent.append($compositeIndexRadio); // 'OK' operation.
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalGoButton').on('click', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').is(':checked')) {
+      var index = {
+        'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
+        'Index_choice': indexChoice.toUpperCase()
+      };
+      Indexes.showAddIndexDialog(sourceArray, sourceArray.length, [colIndex], colIndex, index);
+    }
+
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').is(':checked')) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]').length !== 0 && jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]:checked').length === 0) {
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title=""' + ' alt="" class="icon ic_s_error"> ' + window.Messages.strFormEmpty + ' </div>', false);
+        return false;
+      }
+
+      var arrayIndex = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="composite_with"]:checked').val();
+      var sourceLength = sourceArray[arrayIndex].columns.length;
+      var targetColumns = [];
+
+      for (var i = 0; i < sourceLength; i++) {
+        targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
+      }
+
+      targetColumns.push(colIndex);
+      Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, sourceArray[arrayIndex]);
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('hide');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCancelButton').on('click', function () {
+    // Handle state on 'Cancel'.
+    var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + colIndex + ']"]');
+
+    if (!$selectList.attr('data-index').length) {
+      $selectList.find('option[value*="none"]').attr('selected', 'selected');
+    } else {
+      var previousIndex = $selectList.attr('data-index').split(',');
+      $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
+    }
+
+    removeIndexOnChangeEvent();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalCloseButton').on('click', function () {
+    removeIndexOnChangeEvent();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('show');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalLabel').first().text(window.Messages.strAddIndex);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').find('.modal-body').first().html($dialogContent);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index').on('change', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
+      $dialogContent.append(Indexes.getCompositeIndexList(sourceArray, colIndex));
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#single_column').on('change', function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').length) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('#composite_index_list').remove();
+      }
+    }
+  });
+};
+/**
+ * @return {function}
+ */
+
+
+Indexes.off = () => function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#save_index_frm');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#preview_index_frm');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#select_index_choice');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.drop_primary_key_index_anchor.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#table_index tbody tr td.edit_index.ajax, #index_div .add_index.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#table_index tbody tr td.rename_index.ajax');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#index_frm input[type=submit]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('change', 'select[name*="field_key"]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '.show_index_dialog');
+};
+/**
+ * @return {function}
+ */
+
+
+Indexes.on = () => function () {
+  Indexes.resetColumnLists(); // for table creation form
+
+  var $engineSelector = jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form select[name=tbl_storage_engine]');
+
+  if ($engineSelector.length) {
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.hideShowConnection($engineSelector);
+  }
+
+  var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
+
+  if ($form.length > 0) {
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.showIndexEditDialog($form);
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#save_index_frm', function (event) {
+    event.preventDefault();
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
+    var argsep = _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+    var submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    _ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#preview_index_frm', function (event) {
+    event.preventDefault();
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.previewSql(jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm'));
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_index_choice', function (event) {
+    event.preventDefault();
+    Indexes.checkIndexType();
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
+  });
+  /**
+   * Ajax Event handler for 'Drop Index'
+   */
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.drop_primary_key_index_anchor.ajax', function (event) {
+    event.preventDefault();
+    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+    /**
+     * @var $currRow Object containing reference to the current field's row
+     */
+
+    var $currRow = $anchor.parents('tr');
+    /** @var {number} rows Number of columns in the key */
+
+    var rows = $anchor.parents('td').attr('rowspan') || 1;
+    /** @var {number} $rowsToHide Rows that should be hidden */
+
+    var $rowsToHide = $currRow;
+
+    for (var i = 1, $lastRow = $currRow.next(); i < rows; i++, $lastRow = $lastRow.next()) {
+      $rowsToHide = $rowsToHide.add($lastRow);
+    }
+
+    var question = $currRow.children('td').children('.drop_primary_key_index_msg').val();
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.confirmPreviewSql(question, $anchor.attr('href'), function (url) {
+      var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingPrimaryKeyIndex, false);
+      var params = (0,_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $anchor.getPostData());
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
+        if (typeof data !== 'undefined' && data.success === true) {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
+          var $tableRef = $rowsToHide.closest('table');
+
+          if ($rowsToHide.length === $tableRef.find('tbody > tr').length) {
+            // We are about to remove all rows from the table
+            $tableRef.hide('medium', function () {
+              jquery__WEBPACK_IMPORTED_MODULE_0__('div.no_indexes_defined').show('medium');
+              $rowsToHide.remove();
+            });
+            $tableRef.siblings('.alert-primary').hide('medium');
+          } else {
+            // We are removing some of the rows only
+            $rowsToHide.hide('medium', function () {
+              jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
+            });
+          }
+
+          if (jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').length) {
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query').remove();
+          }
+
+          if (data.sql_query) {
+            jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="result_query"></div>').html(data.sql_query).prependTo('#structure_content');
+            (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content'));
+          }
+
+          _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
+          (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
+        } else {
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+        }
+      }); // end $.post()
+    });
+  }); // end Drop Primary Key/Index
+
+  /**
+   * Ajax event handler for index edit
+   **/
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#table_index tbody tr td.edit_index.ajax, #index_div .add_index.ajax', function (event) {
+    event.preventDefault();
+    var url;
+    var title;
+
+    if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').length === 0) {
+      // Add index
+      var valid = _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkFormElementInRange(jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form')[0], 'added_fields', 'Column count has to be larger than zero.');
+
+      if (!valid) {
+        return;
+      }
+
+      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('form').serialize();
+      title = window.Messages.strAddIndex;
+    } else {
+      // Edit index
+      url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').getPostData();
+      title = window.Messages.strEditIndex;
+    }
+
+    url += _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.indexEditorDialog(url, title, function (data) {
+      _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
+      _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
+      (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
+    });
+  });
+  /**
+   * Ajax event handler for index rename
+   **/
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#table_index tbody tr td.rename_index.ajax', function (event) {
+    event.preventDefault();
+    var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('a').getPostData();
+    var title = window.Messages.strRenameIndex;
+    url += _common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
+    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.indexRenameDialog(url, title, function (data) {
+      _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
+      _navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
+      (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
+    });
+  });
+  /**
+   * Ajax event handler for advanced index creation during table creation
+   * and column addition.
+   */
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('change', 'select[name*="field_key"]', function (e, showDialog) {
+    var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true; // Index of column on Table edit and create page.
+
+    var colIndex = /\d+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name'));
+    colIndex = colIndex[0]; // Choice of selected index.
+
+    var indexChoice = /[a-z]+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
+    indexChoice = indexChoice[0]; // Array containing corresponding indexes.
+
+    var sourceArray = null;
+
+    if (indexChoice === 'none') {
+      Indexes.removeColumnFromIndex(colIndex);
+      var id = 'index_name_' + '0' + '_8';
+      var $name = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + id);
+
+      if ($name.length === 0) {
+        $name = jquery__WEBPACK_IMPORTED_MODULE_0__('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
+        $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="field_key[' + '0' + ']"]'));
+      }
+
+      $name.html('');
+      return false;
+    } // Select a source array.
+
+
+    sourceArray = Indexes.getIndexArray(indexChoice);
+
+    if (sourceArray === null) {
+      return;
+    }
+
+    if (sourceArray.length === 0) {
+      var index = {
+        'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
+        'Index_choice': indexChoice.toUpperCase()
+      };
+      Indexes.showAddIndexDialog(sourceArray, 0, [colIndex], colIndex, index, showDialogLocal);
+    } else {
+      if (indexChoice === 'primary') {
+        var arrayIndex = 0;
+        var sourceLength = sourceArray[arrayIndex].columns.length;
+        var targetColumns = [];
+
+        for (var i = 0; i < sourceLength; i++) {
+          targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
+        }
+
+        targetColumns.push(colIndex);
+        Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, sourceArray[arrayIndex], showDialogLocal);
+      } else {
+        // If there are multiple columns selected for an index, show advanced dialog.
+        Indexes.indexTypeSelectionDialog(sourceArray, indexChoice, colIndex);
+      }
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.show_index_dialog', function (e) {
+    e.preventDefault(); // Get index details.
+
+    var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0__(this).prev('select').attr('data-index').split(',');
+    var indexChoice = previousIndex[0];
+    var arrayIndex = previousIndex[1];
+    var sourceArray = Indexes.getIndexArray(indexChoice);
+
+    if (sourceArray !== null) {
+      var sourceLength = sourceArray[arrayIndex].columns.length;
+      var targetColumns = [];
+
+      for (var i = 0; i < sourceLength; i++) {
+        targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
+      }
+
+      Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, -1, sourceArray[arrayIndex]);
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').on('submit', function () {
+    if (typeof this.elements['index[Key_name]'].disabled !== 'undefined') {
+      this.elements['index[Key_name]'].disabled = false;
+    }
+  });
+};
+
+
+
+/***/ }),
+/* 19 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ refreshMainContent; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+
+
+/**
+ * Refreshes the main frame
+ *
+ * @param {any} url Undefined to refresh to the same page
+ *                  String to go to a different page, e.g: 'index.php'
+ *
+ * @return {void}
+ */
+
+function refreshMainContent(url) {
+  var newUrl = url;
+
+  if (!newUrl) {
+    newUrl = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('a').attr('href') || window.location.pathname;
+    newUrl = newUrl.substring(0, newUrl.indexOf('?'));
+  }
+
+  if (newUrl.indexOf('?') !== -1) {
+    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery(_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator'));
+  } else {
+    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery('?');
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>', {
+    href: newUrl
+  }).appendTo('body').trigger('click').remove();
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "escapeBacktick": function() { return /* binding */ escapeBacktick; },
+/* harmony export */   "escapeHtml": function() { return /* binding */ escapeHtml; },
+/* harmony export */   "escapeJsString": function() { return /* binding */ escapeJsString; },
+/* harmony export */   "escapeSingleQuote": function() { return /* binding */ escapeSingleQuote; }
+/* harmony export */ });
+/**
+ * @param {string} value
+ * @return {string}
+ */
+function escapeHtml() {
+  let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  const element = document.createElement('span');
+  element.appendChild(document.createTextNode(value));
+  return element.innerHTML;
+}
+/**
+ * JavaScript escaping
+ *
+ * @param {any} unsafe
+ * @return {string | false}
+ */
+
+function escapeJsString(unsafe) {
+  if (typeof unsafe !== 'undefined') {
+    return unsafe.toString().replace('\x00', '').replace('\\', '\\\\').replace('\'', '\\\'').replace('&#039;', '\\&#039;').replace('"', '\\"').replace('&quot;', '\\&quot;').replace('\n', '\n').replace('\r', '\r').replace(/<\/script/gi, '</\' + \'script');
+  } else {
+    return false;
+  }
+}
+/**
+ * @param {string} s
+ * @return {string}
+ */
+
+function escapeBacktick(s) {
+  return s.replace('`', '``');
+}
+/**
+ * @param {string} s
+ * @return {string}
+ */
+
+function escapeSingleQuote(s) {
+  return s.replace('\\', '\\\\').replace('\'', '\\\'');
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ getImageTag; }
+/* harmony export */ });
+/* harmony import */ var _escape_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+
+/**
+ * Returns an HTML IMG tag for a particular image from a theme,
+ * which may be an actual file or an icon from a sprite
+ *
+ * @param {string} image      The name of the file to get
+ * @param {string} alternate  Used to set 'alt' and 'title' attributes of the image
+ * @param {object} attributes An associative array of other attributes
+ *
+ * @return {object} The requested image, this object has two methods:
+ *                  .toString()        - Returns the IMG tag for the requested image
+ *                  .attr(name)        - Returns a particular attribute of the IMG
+ *                                       tag given it's name
+ *                  .attr(name, value) - Sets a particular attribute of the IMG
+ *                                       tag to the given value
+ */
+
+function getImageTag(image, alternate, attributes) {
+  var alt = alternate;
+  var attr = attributes; // custom image object, it will eventually be returned by this functions
+
+  var retval = {
+    data: {
+      // this is private
+      alt: '',
+      title: '',
+      src: 'themes/dot.gif'
+    },
+    attr: function (name, value) {
+      if (value === undefined) {
+        if (this.data[name] === undefined) {
+          return '';
+        } else {
+          return this.data[name];
+        }
+      } else {
+        this.data[name] = value;
+      }
+    },
+    toString: function () {
+      var retval = '<' + 'img';
+
+      for (var i in this.data) {
+        retval += ' ' + i + '="' + this.data[i] + '"';
+      }
+
+      retval += ' /' + '>';
+      return retval;
+    }
+  }; // initialise missing parameters
+
+  if (attr === undefined) {
+    attr = {};
+  }
+
+  if (alt === undefined) {
+    alt = '';
+  } // set alt
+
+
+  if (attr.alt !== undefined) {
+    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.alt));
+  } else {
+    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
+  } // set title
+
+
+  if (attr.title !== undefined) {
+    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.title));
+  } else {
+    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
+  } // set css classes
+
+
+  retval.attr('class', 'icon ic_' + image); // set all other attributes
+
+  for (var i in attr) {
+    if (i === 'src') {
+      // do not allow to override the 'src' attribute
+      continue;
+    }
+
+    retval.attr(i, attr[i]);
+  }
+
+  return retval;
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ignorePhpErrors": function() { return /* binding */ ignorePhpErrors; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+/**
+ * Ignore the displayed php errors.
+ * Simply removes the displayed errors.
+ *
+ * @param {boolean} clearPrevErrors whether to clear errors stored
+ *             in $_SESSION['prev_errors'] at server
+ *
+ */
+
+function ignorePhpErrors(clearPrevErrors) {
+  var clearPrevious = clearPrevErrors;
+
+  if (typeof clearPrevious === 'undefined' || clearPrevious === null) {
+    clearPrevious = false;
+  } // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
+  // It clears the prev_errors stored in session.
+
+
+  if (clearPrevious) {
+    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form');
+    $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
+
+    $pmaReportErrorsForm.trigger('submit');
+  } // remove displayed errors
+
+
+  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors');
+  $pmaErrors.fadeOut('slow');
+  $pmaErrors.remove();
+}
+
+window.ignorePhpErrors = ignorePhpErrors;
+
+
+/***/ }),
+/* 23 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ checkNumberOfFields; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+
+
+/* global maxInputVars */
+// templates/javascript/variables.twig
+
+/**
+ * Check than forms have less fields than max allowed by PHP.
+ * @return {boolean}
+ */
+
+function checkNumberOfFields() {
+  if (typeof maxInputVars === 'undefined') {
+    return false;
+  }
+
+  if (false === maxInputVars) {
+    return false;
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_0__('form').each(function () {
+    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input').length;
+
+    if (nbInputs > maxInputVars) {
+      var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
+      return false;
+    }
+
+    return true;
+  });
+  return true;
+}
+
+/***/ }),
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ createProfilingChart; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+/* global ChartType, ColumnType, DataTable, JQPlotChartFactory */
+// js/chart.js
+
+/**
+ * Creates a Profiling Chart. Used in sql.js
+ * and in server/status/monitor.js
+ *
+ * @param {string} target
+ * @param {any[]} data
+ *
+ * @return {object}
+ */
+
+function createProfilingChart(target, data) {
+  // create the chart
+  var factory = new JQPlotChartFactory();
+  var chart = factory.createChart(ChartType.PIE, target); // create the data table and add columns
+
+  var dataTable = new DataTable();
+  dataTable.addColumn(ColumnType.STRING, '');
+  dataTable.addColumn(ColumnType.NUMBER, '');
+  dataTable.setData(data);
+  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
+  var location = 's';
+
+  if (windowWidth > 768) {
+    location = 'se';
+  } // draw the chart and return the chart object
+
+
+  chart.draw(dataTable, {
+    seriesDefaults: {
+      rendererOptions: {
+        showDataLabels: true
+      }
+    },
+    highlighter: {
+      tooltipLocation: 'se',
+      sizeAdjust: 0,
+      tooltipAxes: 'pieref',
+      formatString: '%s, %.9Ps'
+    },
+    legend: {
+      show: true,
+      location: location,
+      rendererOptions: {
+        numberColumns: 2
+      }
+    },
+    // from https://web.archive.org/web/20190321233412/http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
+    seriesColors: ['#fce94f', '#fcaf3e', '#e9b96e', '#8ae234', '#729fcf', '#ad7fa8', '#ef2929', '#888a85', '#c4a000', '#ce5c00', '#8f5902', '#4e9a06', '#204a87', '#5c3566', '#a40000', '#babdb6', '#2e3436']
+  });
+  return chart;
 }
 
 /***/ })
-
-}]);
+]]);
 //# sourceMappingURL=shared.js.map

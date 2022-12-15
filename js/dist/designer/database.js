@@ -12,7 +12,7 @@ module.exports = jQuery;
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
 
 var designerTables = [{
   name: 'pdf_pages',

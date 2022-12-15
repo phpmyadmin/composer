@@ -14,14 +14,14 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
-/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(18);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(19);
 
 
 
@@ -111,8 +111,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'submit_copy=Go', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         if ($form.find('input[name=\'switch_to_new\']').prop('checked')) {
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', $form.find('select[name=\'target_db\'],input[name=\'target_db\']').val());
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', $form.find('input[name=\'new_name\']').val());
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', $form.find('select[name=\'target_db\'],input[name=\'target_db\']').val()));
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', $form.find('input[name=\'new_name\']').val()));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(false);
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
@@ -141,8 +141,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + argsep + 'submit_move=1', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db);
-        _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
+        _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
+        _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
         (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])('index.php?route=/table/sql');
 
         _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
@@ -194,7 +194,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     function submitOptionsForm() {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(false);
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
@@ -325,7 +325,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox); // Table deleted successfully, refresh both the frames
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', '');
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', ''));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'));
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
@@ -355,7 +355,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox); // Table deleted successfully, refresh both the frames
 
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', '');
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', ''));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'));
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {

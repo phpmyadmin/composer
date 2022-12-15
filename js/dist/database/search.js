@@ -14,11 +14,11 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(21);
 
 
 
@@ -44,8 +44,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/search.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('a.browse_results').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('a.delete_results').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.browse_results').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('.delete_results').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#buttonGo').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#togglesearchresultlink').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#togglequerybox').off('click');
@@ -145,7 +145,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
    * Ajax Event handler for retrieving the results from a table
    */
 
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.browse_results', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.browse_results', function (e) {
     e.preventDefault();
     /**   Hides the results shown by the delete criteria */
 
@@ -157,9 +157,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
     jquery__WEBPACK_IMPORTED_MODULE_0__('#table-info').show();
     var tableName = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('table-name');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#table-link').attr({
-      'href': jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href')
+      'href': jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('href')
     }).text(tableName);
-    var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href') + '#searchresults';
+    var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('href') + '#searchresults';
     var browseSql = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('browse-sql');
     var params = {
       'ajax_request': true,
@@ -187,7 +187,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
    * Ajax Event handler for deleting the results from a table
    */
 
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.delete_results', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.delete_results', function (e) {
     e.preventDefault();
     /**  Hides the results shown by the browse criteria */
 
@@ -208,7 +208,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
         'is_js_confirmed': true,
         'sql_query': jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('delete-sql')
       };
-      var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href');
+      var url = jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('href');
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, function (data) {
         if (typeof data === 'undefined' || !data.success) {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);

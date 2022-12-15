@@ -14,13 +14,13 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
-/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
-/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(15);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
 
 
 
@@ -85,7 +85,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_db_form').serialize() + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'is_js_confirmed=1', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname));
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').find('a:not(\'.expander\')').each(function () {
               var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -125,14 +125,14 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
 
       if (typeof data !== 'undefined' && data.success === true) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#checkbox_switch').is(':checked')) {
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])(false);
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           };
         } else {
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.db);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.db));
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
         }
 
@@ -189,7 +189,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
         if (typeof data !== 'undefined' && data.success) {
           // Database deleted successfully, refresh both the frames
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', '');
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', ''));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/server/databases');
 
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {

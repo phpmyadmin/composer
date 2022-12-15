@@ -14,14 +14,14 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
 /* harmony import */ var _modules_keyhandler_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(55);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
 /* harmony import */ var _modules_page_settings_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(56);
 /* harmony import */ var _modules_cross_framing_protection_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57);
-/* harmony import */ var _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(16);
-/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5);
-/* harmony import */ var _modules_functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15);
+/* harmony import */ var _modules_indexes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(10);
+/* harmony import */ var _modules_functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(23);
 
 
 

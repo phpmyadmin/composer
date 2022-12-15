@@ -14,10 +14,12 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(19);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
+
 
 
 
@@ -1389,13 +1391,13 @@ DesignerMove.newRelation = function () {
 
 
 DesignerMove.startTableNew = function () {
-  _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', '');
+  _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', ''));
   (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/create');
 };
 
 DesignerMove.startTabUpd = function (db, table) {
-  _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('db', db);
-  _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', table);
+  _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('db', db));
+  _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', table));
   (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/structure');
 }; // --------------------------- hide tables --------------------------------------
 // max/min all tables

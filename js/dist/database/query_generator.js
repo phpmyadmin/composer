@@ -13,7 +13,7 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 
 
 /**

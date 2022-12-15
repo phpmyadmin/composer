@@ -14,15 +14,15 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
-/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
-/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
+/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
+/* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
+/* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
 /* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(68);
-/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(11);
-/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(18);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(20);
+/* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(19);
 
 
 
@@ -867,13 +867,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
         }
 
         if (data.params) {
-          _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll(data.params);
+          _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll(data.params));
         }
 
         if (typeof data.ajax_reload !== 'undefined') {
           if (data.ajax_reload.reload) {
             if (data.ajax_reload.table_name) {
-              _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.ajax_reload.table_name);
+              _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.ajax_reload.table_name));
               (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_10__["default"])();
             } else {
               _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
@@ -882,10 +882,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
         } else if (typeof data.reload !== 'undefined') {
           // this happens if a USE or DROP command was typed
           if (data.db !== _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db')) {
-            _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll({
+            _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll({
               'db': data.db,
               'table': ''
-            });
+            }));
           }
 
           var url;
