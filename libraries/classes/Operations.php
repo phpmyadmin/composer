@@ -58,28 +58,20 @@ class Operations
      */
     public function runProcedureAndFunctionDefinitions($db, DatabaseName $newDatabaseName): void
     {
-        $procedureNames = Routines::getProcedureNames($this->dbi, $db);
-        if ($procedureNames) {
-            foreach ($procedureNames as $procedureName) {
-                $this->dbi->selectDb($db);
-                $query = Routines::getProcedureDefinition($this->dbi, $db, $procedureName);
-                if ($query === null) {
-                    continue;
-                }
-
-                // collect for later display
-                $GLOBALS['sql_query'] .= "\n" . $query;
-                $this->dbi->selectDb($newDatabaseName);
-                $this->dbi->query($query);
+        foreach (Routines::getProcedureNames($this->dbi, $db) as $procedureName) {
+            $this->dbi->selectDb($db);
+            $query = Routines::getProcedureDefinition($this->dbi, $db, $procedureName);
+            if ($query === null) {
+                continue;
             }
+
+            // collect for later display
+            $GLOBALS['sql_query'] .= "\n" . $query;
+            $this->dbi->selectDb($newDatabaseName);
+            $this->dbi->query($query);
         }
 
-        $functionNames = Routines::getFunctionNames($this->dbi, $db);
-        if (! $functionNames) {
-            return;
-        }
-
-        foreach ($functionNames as $functionName) {
+        foreach (Routines::getFunctionNames($this->dbi, $db) as $functionName) {
             $this->dbi->selectDb($db);
             $query = Routines::getFunctionDefinition($this->dbi, $db, $functionName);
             if ($query === null) {
@@ -260,6 +252,7 @@ class Operations
      */
     public function runEventDefinitionsForDb($db, DatabaseName $newDatabaseName): void
     {
+        /** @var string[] $eventNames */
         $eventNames = $this->dbi->fetchResult(
             'SELECT EVENT_NAME FROM information_schema.EVENTS WHERE EVENT_SCHEMA= '
             . $this->dbi->quoteString($db) . ';'

@@ -241,14 +241,12 @@ class Table implements Stringable
         }
 
         // query information_schema
-        $result = $this->dbi->fetchResult(
-            'SELECT TABLE_NAME'
+        return (bool) $this->dbi->fetchValue(
+            'SELECT 1'
             . ' FROM information_schema.VIEWS'
             . ' WHERE TABLE_SCHEMA = ' . $this->dbi->quoteString($this->dbName)
             . ' AND TABLE_NAME = ' . $this->dbi->quoteString($this->name)
         );
-
-        return (bool) $result;
     }
 
     /**
@@ -260,15 +258,13 @@ class Table implements Stringable
             return false;
         }
 
-        $result = $this->dbi->fetchResult(
-            'SELECT TABLE_NAME'
+        return (bool) $this->dbi->fetchValue(
+            'SELECT 1'
             . ' FROM information_schema.VIEWS'
             . ' WHERE TABLE_SCHEMA = ' . $this->dbi->quoteString($this->dbName)
             . ' AND TABLE_NAME = ' . $this->dbi->quoteString($this->name)
             . ' AND IS_UPDATABLE = \'YES\''
         );
-
-        return (bool) $result;
     }
 
     /**
@@ -2003,10 +1999,8 @@ class Table implements Stringable
      * Get index with index name
      *
      * @param string $index Index name
-     *
-     * @return Index
      */
-    public function getIndex($index)
+    public function getIndex(string $index): Index
     {
         return Index::singleton($this->dbi, $this->dbName, $this->name, $index);
     }

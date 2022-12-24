@@ -1646,7 +1646,8 @@ class InsertEdit
                 'SELECT ' . Util::backquote($editField->columnName)
                 . ' FROM ' . Util::backquote($GLOBALS['table'])
                 . ' WHERE ' . $whereClause
-            ) ?: '';
+            );
+            $protectedValue = is_string($protectedValue) ? $protectedValue : '';
         }
 
         return $this->getValueFormattedAsSql($editField, $protectedValue);
@@ -2028,7 +2029,7 @@ class InsertEdit
         $asIs = false;
         /** @var string $fieldHashMd5 */
         $fieldHashMd5 = $column['Field_md5'];
-        if ($repopulate && array_key_exists($fieldHashMd5, $currentRow)) {
+        if ($repopulate !== [] && array_key_exists($fieldHashMd5, $currentRow)) {
             $currentRow[$column['Field']] = $repopulate[$fieldHashMd5];
             $asIs = true;
         }
