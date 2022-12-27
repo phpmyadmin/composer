@@ -20,17 +20,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    Javascript functions used in server variables page
  * @name            Server Replication
  *
  * @requires    jQueryUI
  */
-
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/variables.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.editLink');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a img').remove();
@@ -39,14 +38,14 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
   var $saveLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.saveLink');
   var $cancelLink = jquery__WEBPACK_IMPORTED_MODULE_0__('a.cancelLink');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#serverVariables').find('.var-name').find('a').append(jquery__WEBPACK_IMPORTED_MODULE_0__('#docImage').clone().css('display', 'inline-block'));
-  /* Launches the variable editor */
 
+  /* Launches the variable editor */
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.editLink', function (event) {
     event.preventDefault();
     editVariable(this);
   });
-  /* Allows the user to edit a server variable */
 
+  /* Allows the user to edit a server variable */
   function editVariable(link) {
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(link);
     var $cell = $link.parent();
@@ -57,7 +56,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     var $myEditLink = $cell.find('a.editLink');
     $cell.addClass('edit'); // variable is being edited
-
     $myEditLink.remove(); // remove edit link
 
     $mySaveLink.on('click', function () {
@@ -76,10 +74,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
           } else {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
           }
-
           $valueCell.html($valueCell.data('content'));
         }
-
         $cell.removeClass('edit').html($myEditLink);
       });
       return false;
@@ -100,8 +96,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
         }).append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input>', {
           type: 'text',
           'class': 'form-control form-control-sm'
-        }).val(data.message))); // Save and replace content
-
+        }).val(data.message)));
+        // Save and replace content
         $cell.html($links).children().css('display', 'flex');
         $valueCell.data('content', $valueCell.html()).html($editor).find('input').trigger('focus').on('keydown', function (event) {
           // Keyboard shortcuts

@@ -26,26 +26,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @package PhpMyAdmin-Designer
  */
 
-/* global DesignerObjects */
-// js/designer/objects.js
-
-/* global DesignerHistory, historyArray, selectField */
-// js/designer/history.js
-
-/* global DesignerPage */
-// js/designer/page.js
-
-/* global themeImagePath */
-// templates/javascript/variables.twig
+/* global DesignerObjects */ // js/designer/objects.js
+/* global DesignerHistory, historyArray, selectField */ // js/designer/history.js
+/* global DesignerPage */ // js/designer/page.js
+/* global themeImagePath */ // templates/javascript/variables.twig
 
 var DesignerMove = {};
 window.DesignerMove = DesignerMove;
 var change = 0; // variable to track any change in designer layout.
-
 var showRelationLines = true;
 var alwaysShowText = false;
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/move.js', function () {
@@ -70,7 +63,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/move
         'height': 'auto'
       });
       $img.attr('src', $img.data('enter')).attr('title', $span.data('enter'));
-      $span.text($span.data('enter')); // Saving the fullscreen state in config when
+      $span.text($span.data('enter'));
+
+      // Saving the fullscreen state in config when
       // designer exists fullscreen mode via ESC key
 
       var valueSent = 'off';
@@ -79,19 +74,16 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/move
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').hide();
 });
-
 DesignerMove.markSaved = function () {
   change = 0;
   jquery__WEBPACK_IMPORTED_MODULE_0__('#saved_state').text('');
 };
-
 DesignerMove.markUnsaved = function () {
   change = 1;
   jquery__WEBPACK_IMPORTED_MODULE_0__('#saved_state').text('*');
 };
-
-var mainDirection = jquery__WEBPACK_IMPORTED_MODULE_0__('html').attr('dir') === 'rtl' ? 'right' : 'left'; // Will be used to multiply the offsetLeft by -1 if the direction is rtl.
-
+var mainDirection = jquery__WEBPACK_IMPORTED_MODULE_0__('html').attr('dir') === 'rtl' ? 'right' : 'left';
+// Will be used to multiply the offsetLeft by -1 if the direction is rtl.
 var directionEffect = mainDirection === 'right' ? -1 : 1;
 var curClick = null;
 var smS = 0;
@@ -100,8 +92,8 @@ var sLeft = 0;
 var sRight = 0;
 var onRelation = 0;
 var onGrid = 0;
-var onDisplayField = 0; // relation_style: 0 - angular 1 - direct
-
+var onDisplayField = 0;
+// relation_style: 0 - angular 1 - direct
 var onAngularDirect = 1;
 var clickField = 0;
 var linkRelation = '';
@@ -116,24 +108,22 @@ var timeoutId;
 var layerMenuCurClick = 0;
 window.fromArray = [];
 var menuMoved = false;
-var gridSize = 10; // ------------------------------------------------------------------------------
+var gridSize = 10;
+
+// ------------------------------------------------------------------------------
 
 var isIe = document.all && !window.opera;
-
 if (isIe) {
   window.onscroll = DesignerMove.generalScroll;
-
   document.onselectstart = function () {
     return false;
   };
 }
-
 DesignerMove.mouseDown = function (e) {
   // eslint-disable-next-line compat/compat
-  globX = isIe ? e.clientX + document.body.scrollLeft : e.pageX; // eslint-disable-next-line compat/compat
-
+  globX = isIe ? e.clientX + document.body.scrollLeft : e.pageX;
+  // eslint-disable-next-line compat/compat
   globY = isIe ? e.clientY + document.body.scrollTop : e.pageY;
-
   if (e.target.tagName === 'SPAN') {
     curClick = e.target.parentNode.parentNode.parentNode.parentNode;
   } else if (e.target.className === 'tab_zag_2') {
@@ -143,27 +133,24 @@ DesignerMove.mouseDown = function (e) {
   } else if (e.target.className === 'M_butt') {
     return false;
   }
-
   if (curClick !== null) {
     document.getElementById('canvas').style.display = 'none';
     curClick.style.zIndex = 2;
   }
 };
-
 DesignerMove.mouseMove = function (e) {
   if (e.preventDefault) {
     e.preventDefault();
-  } // eslint-disable-next-line compat/compat
+  }
 
-
-  var newDx = isIe ? e.clientX + document.body.scrollLeft : e.pageX; // eslint-disable-next-line compat/compat
-
+  // eslint-disable-next-line compat/compat
+  var newDx = isIe ? e.clientX + document.body.scrollLeft : e.pageX;
+  // eslint-disable-next-line compat/compat
   var newDy = isIe ? e.clientY + document.body.scrollTop : e.pageY;
   var deltaX = globX - newDx;
   var deltaY = globY - newDy;
   globX = newDx;
   globY = newDy;
-
   if (curClick !== null) {
     DesignerMove.markUnsaved();
     var $curClick = jquery__WEBPACK_IMPORTED_MODULE_0__(curClick);
@@ -173,41 +160,33 @@ DesignerMove.mouseMove = function (e) {
     var newY = curY - deltaY;
     $curClick.attr('data-' + mainDirection, newX);
     $curClick.attr('data-top', newY);
-
     if (onGrid) {
       newX = parseInt(newX / gridSize) * gridSize;
       newY = parseInt(newY / gridSize) * gridSize;
     }
-
     if (newX < 0) {
       newX = 0;
     } else if (newY < 0) {
       newY = 0;
     }
-
     $curClick.css(mainDirection, newX + 'px');
     $curClick.css('top', newY + 'px');
   } else if (layerMenuCurClick) {
     if (menuMoved) {
       deltaX = -deltaX;
     }
-
     var $layerMenu = jquery__WEBPACK_IMPORTED_MODULE_0__('#layer_menu');
     var newWidth = $layerMenu.width() + directionEffect * deltaX;
-
     if (newWidth < 150) {
       newWidth = 150;
     }
-
     $layerMenu.width(newWidth);
   }
-
   if (onRelation || onDisplayField) {
     document.getElementById('designer_hint').style.left = globX + 20 + 'px';
     document.getElementById('designer_hint').style.top = globY + 20 + 'px';
   }
 };
-
 DesignerMove.mouseUp = function () {
   if (curClick !== null) {
     document.getElementById('canvas').style.display = 'inline-block';
@@ -215,44 +194,37 @@ DesignerMove.mouseUp = function () {
     curClick.style.zIndex = 1;
     curClick = null;
   }
-
   layerMenuCurClick = 0;
-}; // ------------------------------------------------------------------------------
+};
 
+// ------------------------------------------------------------------------------
 
 DesignerMove.canvasPos = function () {
   canvasWidth = document.getElementById('canvas').width = osnTabWidth - 3;
   canvasHeight = document.getElementById('canvas').height = osnTabHeight - 3;
-
   if (isIe) {
     document.getElementById('canvas').style.width = (osnTabWidth - 3 ? osnTabWidth - 3 : 0) + 'px';
     document.getElementById('canvas').style.height = (osnTabHeight - 3 ? osnTabHeight - 3 : 0) + 'px';
   }
 };
-
 DesignerMove.osnTabPos = function () {
   osnTabWidth = parseInt(document.getElementById('osn_tab').style.width, 10);
   osnTabHeight = parseInt(document.getElementById('osn_tab').style.height, 10);
 };
-
 DesignerMove.setDefaultValuesFromSavedState = function () {
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#angular_direct_button').attr('class') === 'M_butt') {
     onAngularDirect = 0;
   } else {
     onAngularDirect = 1;
   }
-
   DesignerMove.angularDirect();
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#grid_button').attr('class') === 'M_butt') {
     onGrid = 1;
   } else {
     onGrid = 0;
   }
-
   DesignerMove.grid();
   var $relLineInvert = jquery__WEBPACK_IMPORTED_MODULE_0__('#relLineInvert');
-
   if ($relLineInvert.attr('class') === 'M_butt') {
     showRelationLines = false;
     $relLineInvert.attr('class', 'M_butt');
@@ -260,61 +232,51 @@ DesignerMove.setDefaultValuesFromSavedState = function () {
     showRelationLines = true;
     $relLineInvert.attr('class', 'M_butt_Selected_down');
   }
-
   DesignerMove.relationLinesInvert();
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#pin_Text').attr('class') === 'M_butt_Selected_down') {
     alwaysShowText = true;
     DesignerMove.showText();
   } else {
     alwaysShowText = false;
   }
-
   var $keySbAll = jquery__WEBPACK_IMPORTED_MODULE_0__('#key_SB_all');
-
   if ($keySbAll.attr('class') === 'M_butt_Selected_down') {
     $keySbAll.trigger('click');
     $keySbAll.toggleClass('M_butt_Selected_down');
     $keySbAll.toggleClass('M_butt');
   }
-
   var $keyLeftRight = jquery__WEBPACK_IMPORTED_MODULE_0__('#key_Left_Right');
-
   if ($keyLeftRight.attr('class') === 'M_butt_Selected_down') {
     $keyLeftRight.trigger('click');
   }
 };
-
 DesignerMove.main = function () {
   // ---CROSS
-  document.getElementById('layer_menu').style.top = -1000 + 'px'; // fast scroll
 
+  document.getElementById('layer_menu').style.top = -1000 + 'px'; // fast scroll
   DesignerMove.osnTabPos();
   DesignerMove.canvasPos();
   DesignerMove.smallTabRefresh();
   DesignerMove.reload();
   DesignerMove.setDefaultValuesFromSavedState();
-
   if (isIe) {
     DesignerMove.generalScroll();
   }
 };
-
 DesignerMove.resizeOsnTab = function () {
   var maxX = 0;
   var maxY = 0;
-
   for (var key in window.jTabs) {
     var kX = parseInt(document.getElementById(key).style[mainDirection], 10) + document.getElementById(key).offsetWidth;
     var kY = parseInt(document.getElementById(key).style.top, 10) + document.getElementById(key).offsetHeight;
     maxX = maxX < kX ? kX : maxX;
     maxY = maxY < kY ? kY : maxY;
   }
-
   osnTabWidth = maxX + 50;
   osnTabHeight = maxY + 50;
   DesignerMove.canvasPos();
 };
+
 /**
  * Draw a colored line
  *
@@ -326,16 +288,13 @@ DesignerMove.resizeOsnTab = function () {
  * @param {string} colorTarget
  * @return {void}
  */
-
-
 DesignerMove.drawLine0 = function (x1, x2, y1, y2, osnTab, colorTarget) {
   DesignerMove.line0(x1 + directionEffect * osnTab.offsetLeft, y1 - osnTab.offsetTop, x2 + directionEffect * osnTab.offsetLeft, y2 - osnTab.offsetTop, DesignerMove.getColorByTarget(colorTarget));
 };
+
 /**
  * refreshes display, must be called after state changes
  */
-
-
 DesignerMove.reload = function () {
   DesignerMove.resizeOsnTab();
   var n;
@@ -348,7 +307,6 @@ DesignerMove.reload = function () {
   var key3;
   DesignerMove.clear();
   var osnTab = document.getElementById('osn_tab');
-
   for (K in window.contr) {
     for (key in window.contr[K]) {
       // contr name
@@ -360,7 +318,6 @@ DesignerMove.reload = function () {
             // if hide
             continue;
           }
-
           var x1Left = document.getElementById(key2).offsetLeft + 1;
           var x1Right = x1Left + document.getElementById(key2).offsetWidth;
           var x2Left = document.getElementById(window.contr[K][key][key2][key3][0]).offsetLeft;
@@ -370,70 +327,56 @@ DesignerMove.reload = function () {
           a[2] = Math.abs(x1Right - x2Left);
           a[3] = Math.abs(x1Right - x2Right);
           n = sLeft = sRight = 0;
-
           for (var i = 1; i < 4; i++) {
             if (a[n] > a[i]) {
               n = i;
             }
           }
-
           if (n === 1) {
             x1 = x1Left - smS;
             x2 = x2Right + smS;
-
             if (x1 < x2) {
               n = 0;
             }
           }
-
           if (n === 2) {
             x1 = x1Right + smS;
             x2 = x2Left - smS;
-
             if (x1 > x2) {
               n = 0;
             }
           }
-
           if (n === 3) {
             x1 = x1Right + smS;
             x2 = x2Right + smS;
             sRight = 1;
           }
-
           if (n === 0) {
             x1 = x1Left - smS;
             x2 = x2Left - smS;
             sLeft = 1;
           }
-
           var rowOffsetTop = 0;
           var tabHideButton = document.getElementById('id_hide_tbody_' + key2);
-
           if (tabHideButton.innerHTML === 'v') {
             var fromColumn = document.getElementById(key2 + '.' + key3);
-
             if (fromColumn) {
               rowOffsetTop = fromColumn.offsetTop;
             } else {
               continue;
             }
           }
-
           var y1 = document.getElementById(key2).offsetTop + rowOffsetTop + heightField;
           rowOffsetTop = 0;
           tabHideButton = document.getElementById('id_hide_tbody_' + window.contr[K][key][key2][key3][0]);
-
           if (tabHideButton.innerHTML === 'v') {
             var toColumn = document.getElementById(window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]);
-
             if (toColumn) {
               rowOffsetTop = toColumn.offsetTop;
             } else {
               continue;
             }
           }
-
           var y2 = document.getElementById(window.contr[K][key][key2][key3][0]).offsetTop + rowOffsetTop + heightField;
           DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]);
         }
@@ -441,6 +384,7 @@ DesignerMove.reload = function () {
     }
   }
 };
+
 /**
  * draws a line from x1:y1 to x2:y2 with color
  * @param x1
@@ -449,8 +393,6 @@ DesignerMove.reload = function () {
  * @param y2
  * @param colorLine
  */
-
-
 DesignerMove.line = function (x1, y1, x2, y2, colorLine) {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -461,6 +403,7 @@ DesignerMove.line = function (x1, y1, x2, y2, colorLine) {
   ctx.lineTo(x2, y2);
   ctx.stroke();
 };
+
 /**
  * draws a relation/constraint line, whether angular or not
  * @param x1
@@ -469,22 +412,19 @@ DesignerMove.line = function (x1, y1, x2, y2, colorLine) {
  * @param y2
  * @param colorLine
  */
-
-
 DesignerMove.line0 = function (x1, y1, x2, y2, colorLine) {
   if (!showRelationLines) {
     return;
   }
-
   DesignerMove.circle(x1, y1, 3, 3, colorLine);
   DesignerMove.rect(x2 - 1, y2 - 2, 4, 4, colorLine);
-
   if (onAngularDirect) {
     DesignerMove.line2(x1, y1, x2, y2, colorLine);
   } else {
     DesignerMove.line3(x1, y1, x2, y2, colorLine);
   }
 };
+
 /**
  * draws a angular relation/constraint line
  * @param x1
@@ -493,12 +433,9 @@ DesignerMove.line0 = function (x1, y1, x2, y2, colorLine) {
  * @param y2
  * @param colorLine
  */
-
-
 DesignerMove.line2 = function (x1, y1, x2, y2, colorLine) {
   var x1Local = x1;
   var x2Local = x2;
-
   if (sRight) {
     x1Local += smAdd;
     x2Local += smAdd;
@@ -512,11 +449,11 @@ DesignerMove.line2 = function (x1, y1, x2, y2, colorLine) {
     x1Local -= smAdd;
     x2Local += smAdd;
   }
-
   DesignerMove.line(x1, y1, x1Local, y1, colorLine);
   DesignerMove.line(x2, y2, x2Local, y2, colorLine);
   DesignerMove.line(x1Local, y1, x2Local, y2, colorLine);
 };
+
 /**
  * draws a relation/constraint line
  * @param x1
@@ -525,12 +462,9 @@ DesignerMove.line2 = function (x1, y1, x2, y2, colorLine) {
  * @param y2
  * @param colorLine
  */
-
-
 DesignerMove.line3 = function (x1, y1, x2, y2, colorLine) {
   var x1Local = x1;
   var x2Local = x2;
-
   if (sRight) {
     if (x1 < x2) {
       x1Local += x2 - x1 + smAdd;
@@ -539,13 +473,11 @@ DesignerMove.line3 = function (x1, y1, x2, y2, colorLine) {
       x2Local += x1 - x2 + smAdd;
       x1Local += smAdd;
     }
-
     DesignerMove.line(x1, y1, x1Local, y1, colorLine);
     DesignerMove.line(x2, y2, x2Local, y2, colorLine);
     DesignerMove.line(x1Local, y1, x2Local, y2, colorLine);
     return;
   }
-
   if (sLeft) {
     if (x1 < x2) {
       x2Local -= x2 - x1 + smAdd;
@@ -554,19 +486,16 @@ DesignerMove.line3 = function (x1, y1, x2, y2, colorLine) {
       x1Local -= x1 - x2 + smAdd;
       x2Local -= smAdd;
     }
-
     DesignerMove.line(x1, y1, x1Local, y1, colorLine);
     DesignerMove.line(x2, y2, x2Local, y2, colorLine);
     DesignerMove.line(x1Local, y1, x2Local, y2, colorLine);
     return;
   }
-
   var xS = (x1 + x2) / 2;
   DesignerMove.line(x1, y1, xS, y1, colorLine);
   DesignerMove.line(xS, y2, x2, y2, colorLine);
   DesignerMove.line(xS, y1, xS, y2, colorLine);
 };
-
 DesignerMove.circle = function (x, y, r, w, color) {
   var ctx = document.getElementById('canvas').getContext('2d');
   ctx.beginPath();
@@ -576,27 +505,24 @@ DesignerMove.circle = function (x, y, r, w, color) {
   ctx.arc(x, y, r, 0, 2 * Math.PI, true);
   ctx.stroke();
 };
-
 DesignerMove.clear = function () {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 };
-
 DesignerMove.rect = function (x1, y1, w, h, color) {
   var ctx = document.getElementById('canvas').getContext('2d');
   ctx.fillStyle = color;
   ctx.fillRect(x1, y1, w, h);
-}; // --------------------------- FULLSCREEN -------------------------------------
+};
 
-
+// --------------------------- FULLSCREEN -------------------------------------
 DesignerMove.toggleFullscreen = function () {
   var valueSent = '';
   var $img = jquery__WEBPACK_IMPORTED_MODULE_0__('#toggleFullscreen').find('img');
   var $span = $img.siblings('span');
   var $content = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
   const pageContent = document.getElementById('page_content');
-
   if (!document.fullscreenElement) {
     $img.attr('src', $img.data('exit')).attr('title', $span.data('exit'));
     $span.text($span.data('exit'));
@@ -624,10 +550,8 @@ DesignerMove.toggleFullscreen = function () {
     document.exitFullscreen();
     valueSent = 'off';
   }
-
   DesignerMove.saveValueInConfig('full_screen', valueSent);
 };
-
 DesignerMove.addTableToTablesList = function (index, tableDom) {
   var db = jquery__WEBPACK_IMPORTED_MODULE_0__(tableDom).find('.small_tab_pref').attr('db');
   var table = jquery__WEBPACK_IMPORTED_MODULE_0__(tableDom).find('.small_tab_pref').attr('table_name');
@@ -652,6 +576,7 @@ DesignerMove.addTableToTablesList = function (index, tableDom) {
   var $tablesCounter = jquery__WEBPACK_IMPORTED_MODULE_0__('#tables_counter');
   $tablesCounter.text(parseInt($tablesCounter.text(), 10) + 1);
 };
+
 /**
  * This function shows modal with Go buttons where required in designer
  * @param {object} form
@@ -660,8 +585,6 @@ DesignerMove.addTableToTablesList = function (index, tableDom) {
  *
  * @return {object} modal;
  */
-
-
 DesignerMove.displayModal = function (form, heading, type) {
   var modal = jquery__WEBPACK_IMPORTED_MODULE_0__(type);
   modal.modal('show');
@@ -669,7 +592,6 @@ DesignerMove.displayModal = function (form, heading, type) {
   jquery__WEBPACK_IMPORTED_MODULE_0__(type + 'Label').first().html(heading);
   return modal;
 };
-
 DesignerMove.addOtherDbTables = function () {
   var $selectDb = jquery__WEBPACK_IMPORTED_MODULE_0__('<select id="add_table_from"></select>');
   $selectDb.append('<option value="">' + window.Messages.strNone + '</option>');
@@ -689,15 +611,14 @@ DesignerMove.addOtherDbTables = function () {
   var modal = DesignerMove.displayModal($form, window.Messages.strAddTables, '#designerGoModal');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
     var db = jquery__WEBPACK_IMPORTED_MODULE_0__('#add_table_from').val();
-    var table = jquery__WEBPACK_IMPORTED_MODULE_0__('#add_table').val(); // Check if table already imported or not.
+    var table = jquery__WEBPACK_IMPORTED_MODULE_0__('#add_table').val();
 
+    // Check if table already imported or not.
     var $table = jquery__WEBPACK_IMPORTED_MODULE_0__('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
-
     if ($table.length !== 0) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
       return;
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
       'ajax_request': true,
       'dialog': 'add_table',
@@ -709,7 +630,6 @@ DesignerMove.addOtherDbTables = function () {
       $newTableDom.find('a').first().remove();
       var dbEncoded = jquery__WEBPACK_IMPORTED_MODULE_0__($newTableDom).find('.small_tab_pref').attr('db_url');
       var tableEncoded = jquery__WEBPACK_IMPORTED_MODULE_0__($newTableDom).find('.small_tab_pref').attr('table_name_url');
-
       if (typeof dbEncoded === 'string' && typeof tableEncoded === 'string') {
         // Do not try to add if attr not found !
         jquery__WEBPACK_IMPORTED_MODULE_0__('#container-form').append($newTableDom);
@@ -720,7 +640,6 @@ DesignerMove.addOtherDbTables = function () {
       }
     });
     jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
     modal.modal('hide');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_table_from').on('change', function () {
@@ -735,11 +654,9 @@ DesignerMove.addOtherDbTables = function () {
       }, function (data) {
         $selectTable.html('');
         var rows = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message).find('table.table_results.data.ajax').find('td.data');
-
         if (rows.length === 0) {
           $selectTable.append('<option value="">' + window.Messages.strNone + '</option>');
         }
-
         rows.each(function () {
           var val = jquery__WEBPACK_IMPORTED_MODULE_0__(this)[0].innerText;
           $selectTable.append(jquery__WEBPACK_IMPORTED_MODULE_0__('<option></option>').val(val).text(val));
@@ -747,17 +664,17 @@ DesignerMove.addOtherDbTables = function () {
       });
     }
   });
-}; // ------------------------------ NEW ------------------------------------------
+};
 
-
+// ------------------------------ NEW ------------------------------------------
 DesignerMove.new = function () {
   DesignerMove.promptToSaveCurrentPage(function () {
     DesignerMove.loadPage(-1);
   });
-}; // ------------------------------ SAVE ------------------------------------------
+};
+
+// ------------------------------ SAVE ------------------------------------------
 // (del?) no for pdf
-
-
 DesignerMove.save = function (url) {
   for (var key in window.jTabs) {
     document.getElementById('t_x_' + key + '_').value = parseInt(document.getElementById(key).style.left, 10);
@@ -765,19 +682,15 @@ DesignerMove.save = function (url) {
     document.getElementById('t_v_' + key + '_').value = document.getElementById('id_tbody_' + key).style.display === 'none' ? 0 : 1;
     document.getElementById('t_h_' + key + '_').value = document.getElementById('check_vis_' + key).checked ? 1 : 0;
   }
-
   document.getElementById('container-form').action = url;
   jquery__WEBPACK_IMPORTED_MODULE_0__('#container-form').trigger('submit');
 };
-
 DesignerMove.getUrlPos = function (forceString) {
   var key;
-
   if (window.designerTablesEnabled || forceString) {
     var poststr = '';
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     var i = 1;
-
     for (key in window.jTabs) {
       poststr += argsep + 't_x[' + i + ']=' + parseInt(document.getElementById(key).style.left, 10);
       poststr += argsep + 't_y[' + i + ']=' + parseInt(document.getElementById(key).style.top, 10);
@@ -787,11 +700,9 @@ DesignerMove.getUrlPos = function (forceString) {
       poststr += argsep + 't_tbl[' + i + ']=' + jquery__WEBPACK_IMPORTED_MODULE_0__(document.getElementById(key)).attr('table_name_url');
       i++;
     }
-
     return poststr;
   } else {
     var coords = [];
-
     for (key in window.jTabs) {
       if (document.getElementById('check_vis_' + key).checked) {
         var x = parseInt(document.getElementById(key).style.left, 10);
@@ -800,11 +711,9 @@ DesignerMove.getUrlPos = function (forceString) {
         coords.push(tbCoords);
       }
     }
-
     return coords;
   }
 };
-
 DesignerMove.save2 = function (callback) {
   if (window.designerTablesEnabled) {
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
@@ -819,7 +728,6 @@ DesignerMove.save2 = function (callback) {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strModificationSaved);
         DesignerMove.markSaved();
-
         if (typeof callback !== 'undefined') {
           callback();
         }
@@ -829,25 +737,20 @@ DesignerMove.save2 = function (callback) {
     var name = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').html().trim();
     DesignerPage.saveToSelectedPage(window.db, window.selectedPage, name, DesignerMove.getUrlPos(), function () {
       DesignerMove.markSaved();
-
       if (typeof callback !== 'undefined') {
         callback();
       }
     });
   }
 };
-
 DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
   var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#save_page');
   var name = $form.find('input[name="selected_value"]').val().trim();
-
   if (name === '') {
     (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEnterValidPageName, false);
     return;
   }
-
   modal.modal('hide');
-
   if (window.designerTablesEnabled) {
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
@@ -857,13 +760,10 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
       } else {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
         DesignerMove.markSaved();
-
         if (data.id) {
           window.selectedPage = data.id;
         }
-
         jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').text(name);
-
         if (typeof callback !== 'undefined') {
           callback();
         }
@@ -872,20 +772,16 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
   } else {
     DesignerPage.saveToNewPage(window.db, name, DesignerMove.getUrlPos(), function (page) {
       DesignerMove.markSaved();
-
       if (page.pgNr) {
         window.selectedPage = page.pgNr;
       }
-
       jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').text(page.pageDescr);
-
       if (typeof callback !== 'undefined') {
         callback();
       }
     });
   }
 };
-
 DesignerMove.save3 = function (callback) {
   if (window.selectedPage !== -1) {
     DesignerMove.save2(callback);
@@ -900,13 +796,12 @@ DesignerMove.save3 = function (callback) {
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#save_page');
       $form.trigger('submit');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
       modal.modal('hide');
     });
   }
-}; // ------------------------------ EDIT PAGES ------------------------------------------
+};
 
-
+// ------------------------------ EDIT PAGES ------------------------------------------
 DesignerMove.editPages = function () {
   DesignerMove.promptToSaveCurrentPage(function () {
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
@@ -920,34 +815,29 @@ DesignerMove.editPages = function () {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       } else {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
-
         if (!window.designerTablesEnabled) {
           DesignerPage.createPageList(window.db, function (options) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
           });
         }
-
         var modal = DesignerMove.displayModal(data.message, window.Messages.strOpenPage, '#designerGoModal');
         jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
           var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_delete_pages');
           var selected = $form.find('select[name="selected_page"]').val();
-
           if (selected === '0') {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
           }
-
           jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
           modal.modal('hide');
           DesignerMove.loadPage(selected);
         });
       }
     }); // end $.post()
   });
-}; // -----------------------------  DELETE PAGES ---------------------------------------
+};
 
-
+// -----------------------------  DELETE PAGES ---------------------------------------
 DesignerMove.deletePages = function () {
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
@@ -960,34 +850,28 @@ DesignerMove.deletePages = function () {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
-
       if (!window.designerTablesEnabled) {
         DesignerPage.createPageList(window.db, function (options) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
         });
       }
-
       var modal = DesignerMove.displayModal(data.message, window.Messages.strDeletePage, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
         var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_delete_pages');
         var selected = $form.find('select[name="selected_page"]').val();
-
         if (selected === '0') {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
           return;
         }
-
         var $messageBox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         var deletingCurrentPage = parseInt(selected) === window.selectedPage;
         _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
-
         if (window.designerTablesEnabled) {
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
             if (data.success === false) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
             } else {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($messageBox);
-
               if (deletingCurrentPage) {
                 DesignerMove.loadPage(null);
               } else {
@@ -1001,7 +885,6 @@ DesignerMove.deletePages = function () {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Error', false);
             } else {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($messageBox);
-
               if (deletingCurrentPage) {
                 DesignerMove.loadPage(null);
               } else {
@@ -1010,16 +893,14 @@ DesignerMove.deletePages = function () {
             }
           });
         }
-
         jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
         modal.modal('hide');
       });
     }
   }); // end $.post()
-}; // ------------------------------ SAVE AS PAGES ---------------------------------------
+};
 
-
+// ------------------------------ SAVE AS PAGES ---------------------------------------
 DesignerMove.saveAs = function () {
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
@@ -1032,13 +913,11 @@ DesignerMove.saveAs = function () {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
-
       if (!window.designerTablesEnabled) {
         DesignerPage.createPageList(window.db, function (options) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
         });
       }
-
       var modal = DesignerMove.displayModal(data.message, window.Messages.strSavePageAs, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
         var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#save_as_pages');
@@ -1046,25 +925,20 @@ DesignerMove.saveAs = function () {
         var $selectedPage = $form.find('select[name="selected_page"]');
         var choice = $form.find('input[name="save_page"]:checked').val();
         var name = '';
-
         if (choice === 'same') {
           if ($selectedPage.val() === '0') {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
           }
-
           name = $selectedPage.find('option:selected').text();
         } else if (choice === 'new') {
           if (selectedValue === '') {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEnterValidPageName, 2000);
             return;
           }
-
           name = selectedValue;
         }
-
         var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-
         if (window.designerTablesEnabled) {
           _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
@@ -1073,11 +947,9 @@ DesignerMove.saveAs = function () {
             } else {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
-
               if (data.id) {
                 window.selectedPage = data.id;
               }
-
               DesignerMove.loadPage(window.selectedPage);
             }
           }); // end $.post()
@@ -1087,32 +959,26 @@ DesignerMove.saveAs = function () {
             DesignerPage.saveToSelectedPage(window.db, selectedPageId, name, DesignerMove.getUrlPos(), function (page) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
-
               if (page.pgNr) {
                 window.selectedPage = page.pgNr;
               }
-
               DesignerMove.loadPage(window.selectedPage);
             });
           } else if (choice === 'new') {
             DesignerPage.saveToNewPage(window.db, name, DesignerMove.getUrlPos(), function (page) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
-
               if (page.pgNr) {
                 window.selectedPage = page.pgNr;
               }
-
               DesignerMove.loadPage(window.selectedPage);
             });
           }
         }
-
         jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
         modal.modal('hide');
-      }); // select current page by default
-
+      });
+      // select current page by default
       if (window.selectedPage !== -1) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="selected_page"]').val(window.selectedPage);
       }
@@ -1134,9 +1000,9 @@ DesignerMove.promptToSaveCurrentPage = function (callback) {
   } else {
     callback();
   }
-}; // ------------------------------ EXPORT PAGES ---------------------------------------
+};
 
-
+// ------------------------------ EXPORT PAGES ---------------------------------------
 DesignerMove.exportPages = function () {
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
@@ -1152,11 +1018,9 @@ DesignerMove.exportPages = function () {
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msgbox);
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message);
-
       if (!window.designerTablesEnabled) {
         $form.append('<input type="hidden" name="offline_export" value="true">');
       }
-
       jquery__WEBPACK_IMPORTED_MODULE_0__.each(DesignerMove.getUrlPos(true).substring(1).split(argsep), function () {
         var pair = this.split('=');
         var input = jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="hidden">');
@@ -1174,7 +1038,6 @@ DesignerMove.exportPages = function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').on('click', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#id_export_pages').trigger('submit');
         jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
-
         modal.modal('hide');
       });
     }
@@ -1185,11 +1048,9 @@ DesignerMove.loadPage = function (page) {
   if (window.designerTablesEnabled) {
     var paramPage = '';
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-
     if (page !== null) {
       paramPage = argsep + 'page=' + page;
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('<a href="index.php?route=/database/designer&server=' + window.server + argsep + 'db=' + encodeURIComponent(window.db) + paramPage + '"></a>').appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content')).trigger('click');
   } else {
     if (page === null) {
@@ -1200,13 +1061,10 @@ DesignerMove.loadPage = function (page) {
       DesignerPage.showNewPageTables(true);
     }
   }
-
   DesignerMove.markSaved();
 };
-
 DesignerMove.grid = function () {
   var valueSent = '';
-
   if (!onGrid) {
     onGrid = 1;
     valueSent = 'on';
@@ -1216,13 +1074,10 @@ DesignerMove.grid = function () {
     onGrid = 0;
     valueSent = 'off';
   }
-
   DesignerMove.saveValueInConfig('snap_to_grid', valueSent);
 };
-
 DesignerMove.angularDirect = function () {
   var valueSent = '';
-
   if (onAngularDirect) {
     onAngularDirect = 0;
     valueSent = 'angular';
@@ -1232,11 +1087,9 @@ DesignerMove.angularDirect = function () {
     valueSent = 'direct';
     document.getElementById('angular_direct_button').className = 'M_butt';
   }
-
   DesignerMove.saveValueInConfig('angular_direct', valueSent);
   DesignerMove.reload();
 };
-
 DesignerMove.saveValueInConfig = function (indexSent, valueSent) {
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'operation': 'save_setting_value',
@@ -1249,14 +1102,13 @@ DesignerMove.saveValueInConfig = function (indexSent, valueSent) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
     }
   });
-}; // ++++++++++++++++++++++++++++++ RELATION ++++++++++++++++++++++++++++++++++++++
+};
 
-
+// ++++++++++++++++++++++++++++++ RELATION ++++++++++++++++++++++++++++++++++++++
 DesignerMove.startRelation = function () {
   if (onDisplayField) {
     return;
   }
-
   if (!onRelation) {
     document.getElementById('foreign_relation').style.display = '';
     onRelation = 1;
@@ -1270,13 +1122,12 @@ DesignerMove.startRelation = function () {
     clickField = 0;
     onRelation = 0;
   }
-}; // table field
+};
 
-
+// table field
 DesignerMove.clickField = function (db, T, f, pk) {
   var pkLocal = parseInt(pk);
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-
   if (onRelation) {
     if (!clickField) {
       // .style.display=='none'        .style.display = 'none'
@@ -1284,22 +1135,17 @@ DesignerMove.clickField = function (db, T, f, pk) {
         alert(window.Messages.strPleaseSelectPrimaryOrUniqueKey);
         return; // 0;
       } // PK
-
-
       if (window.jTabs[db + '.' + T] !== 1) {
         document.getElementById('foreign_relation').style.display = 'none';
       }
-
       clickField = 1;
       linkRelation = 'DB1=' + db + argsep + 'T1=' + T + argsep + 'F1=' + f;
       document.getElementById('designer_hint').innerHTML = window.Messages.strSelectForeignKey;
     } else {
       DesignerMove.startRelation(); // hidden hint...
-
       if (window.jTabs[db + '.' + T] !== 1 || !pkLocal) {
         document.getElementById('foreign_relation').style.display = 'none';
       }
-
       var left = globX - (document.getElementById('layer_new_relation').offsetWidth >> 1);
       document.getElementById('layer_new_relation').style.left = left + 'px';
       var top = globY - document.getElementById('layer_new_relation').offsetHeight;
@@ -1308,46 +1154,38 @@ DesignerMove.clickField = function (db, T, f, pk) {
       linkRelation += argsep + 'DB2=' + db + argsep + 'T2=' + T + argsep + 'F2=' + f;
     }
   }
-
   if (onDisplayField) {
     var fieldNameToSend = decodeURIComponent(f);
     var newDisplayFieldClass = 'tab_field';
-    var oldTabField = document.getElementById('id_tr_' + T + '.' + window.displayField[T]); // if is display field
-
+    var oldTabField = document.getElementById('id_tr_' + T + '.' + window.displayField[T]);
+    // if is display field
     if (window.displayField[T] === f) {
       // The display field is already the one defined, user wants to remove it
       newDisplayFieldClass = 'tab_field';
       delete window.displayField[T];
-
       if (oldTabField) {
         // Clear the style
         // Set display field class on old item
         oldTabField.className = 'tab_field';
       }
-
       fieldNameToSend = '';
     } else {
       newDisplayFieldClass = 'tab_field_3';
-
       if (window.displayField[T]) {
         // Had a previous one, clear it
         if (oldTabField) {
           // Set display field class on old item
           oldTabField.className = 'tab_field';
         }
-
         delete window.displayField[T];
       }
-
       window.displayField[T] = f;
       var tabField = document.getElementById('id_tr_' + T + '.' + window.displayField[T]);
-
       if (tabField) {
         // Set new display field class
         tabField.className = newDisplayFieldClass;
       }
     }
-
     onDisplayField = 0;
     document.getElementById('designer_hint').innerHTML = '';
     document.getElementById('designer_hint').style.display = 'none';
@@ -1370,7 +1208,6 @@ DesignerMove.clickField = function (db, T, f, pk) {
     });
   }
 };
-
 DesignerMove.newRelation = function () {
   document.getElementById('layer_new_relation').style.display = 'none';
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
@@ -1387,26 +1224,24 @@ DesignerMove.newRelation = function () {
       DesignerMove.loadPage(window.selectedPage);
     }
   }); // end $.post()
-}; // -------------------------- create tables -------------------------------------
+};
 
-
+// -------------------------- create tables -------------------------------------
 DesignerMove.startTableNew = function () {
   _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', ''));
   (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/create');
 };
-
 DesignerMove.startTabUpd = function (db, table) {
   _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('db', db));
   _modules_navigation_js__WEBPACK_IMPORTED_MODULE_6__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('table', table));
   (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_5__["default"])('index.php?route=/table/structure');
-}; // --------------------------- hide tables --------------------------------------
+};
+
+// --------------------------- hide tables --------------------------------------
 // max/min all tables
-
-
 DesignerMove.smallTabAll = function (idThis) {
   var icon = idThis.children[0];
   var valueSent = '';
-
   if (icon.alt === 'v') {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.designer_tab .small_tab,.small_tab2').each(function (index, element) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0__(element).text() === 'v') {
@@ -1426,22 +1261,19 @@ DesignerMove.smallTabAll = function (idThis) {
     icon.src = icon.dataset.down;
     valueSent = '>';
   }
-
   DesignerMove.saveValueInConfig('small_big_all', valueSent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_SB_all').toggleClass('M_butt_Selected_down');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_SB_all').toggleClass('M_butt');
   DesignerMove.reload();
-}; // invert max/min all tables
+};
 
-
+// invert max/min all tables
 DesignerMove.smallTabInvert = function () {
   for (var key in window.jTabs) {
     DesignerMove.smallTab(key, 0);
   }
-
   DesignerMove.reload();
 };
-
 DesignerMove.relationLinesInvert = function () {
   showRelationLines = !showRelationLines;
   DesignerMove.saveValueInConfig('relation_lines', showRelationLines);
@@ -1449,7 +1281,6 @@ DesignerMove.relationLinesInvert = function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#relLineInvert').toggleClass('M_butt');
   DesignerMove.reload();
 };
-
 DesignerMove.smallTabRefresh = function () {
   for (var key in window.jTabs) {
     if (document.getElementById('id_hide_tbody_' + key).innerHTML !== 'v') {
@@ -1457,11 +1288,9 @@ DesignerMove.smallTabRefresh = function () {
     }
   }
 };
-
 DesignerMove.smallTab = function (t, reload) {
   var id = document.getElementById('id_tbody_' + t);
   var idThis = document.getElementById('id_hide_tbody_' + t);
-
   if (idThis.innerHTML === 'v') {
     // ---CROSS
     id.style.display = 'none';
@@ -1470,29 +1299,24 @@ DesignerMove.smallTab = function (t, reload) {
     id.style.display = '';
     idThis.innerHTML = 'v';
   }
-
   if (reload) {
     DesignerMove.reload();
   }
 };
-
 DesignerMove.selectTab = function (t) {
   var idZag = document.getElementById('id_zag_' + t);
-
   if (idZag.className !== 'tab_zag_3') {
     document.getElementById('id_zag_' + t).className = 'tab_zag_2';
   } else {
     document.getElementById('id_zag_' + t).className = 'tab_zag';
-  } // ----------
-
-
+  }
+  // ----------
   var idT = document.getElementById(t);
   window.scrollTo(parseInt(idT.style.left, 10) - 300, parseInt(idT.style.top, 10) - 300);
   setTimeout(function () {
     document.getElementById('id_zag_' + t).className = 'tab_zag';
   }, 800);
 };
-
 DesignerMove.canvasClick = function (id, event) {
   var n = 0;
   var selected = 0;
@@ -1507,16 +1331,15 @@ DesignerMove.canvasClick = function (id, event) {
   var K;
   var key;
   var key2;
-  var key3; // eslint-disable-next-line compat/compat
-
-  var localX = isIe ? event.clientX + document.body.scrollLeft : event.pageX; // eslint-disable-next-line compat/compat
-
+  var key3;
+  // eslint-disable-next-line compat/compat
+  var localX = isIe ? event.clientX + document.body.scrollLeft : event.pageX;
+  // eslint-disable-next-line compat/compat
   var localY = isIe ? event.clientY + document.body.scrollTop : event.pageY;
   localX -= jquery__WEBPACK_IMPORTED_MODULE_0__('#osn_tab').offset().left;
   localY -= jquery__WEBPACK_IMPORTED_MODULE_0__('#osn_tab').offset().top;
   DesignerMove.clear();
   var osnTab = document.getElementById('osn_tab');
-
   for (K in window.contr) {
     for (key in window.contr[K]) {
       for (key2 in window.contr[K][key]) {
@@ -1526,56 +1349,45 @@ DesignerMove.canvasClick = function (id, event) {
           }
 
           var x1Left = document.getElementById(key2).offsetLeft + 1; // document.getElementById(key2+"."+key3).offsetLeft;
-
           var x1Right = x1Left + document.getElementById(key2).offsetWidth;
           var x2Left = document.getElementById(window.contr[K][key][key2][key3][0]).offsetLeft; // +document.getElementById(contr[K][key2][key3][0]+"."+contr[K][key2][key3][1]).offsetLeft
-
           var x2Right = x2Left + document.getElementById(window.contr[K][key][key2][key3][0]).offsetWidth;
           a[0] = Math.abs(x1Left - x2Left);
           a[1] = Math.abs(x1Left - x2Right);
           a[2] = Math.abs(x1Right - x2Left);
           a[3] = Math.abs(x1Right - x2Right);
           n = sLeft = sRight = 0;
-
           for (var i = 1; i < 4; i++) {
             if (a[n] > a[i]) {
               n = i;
             }
           }
-
           if (n === 1) {
             x1 = x1Left - smS;
             x2 = x2Right + smS;
-
             if (x1 < x2) {
               n = 0;
             }
           }
-
           if (n === 2) {
             x1 = x1Right + smS;
             x2 = x2Left - smS;
-
             if (x1 > x2) {
               n = 0;
             }
           }
-
           if (n === 3) {
             x1 = x1Right + smS;
             x2 = x2Right + smS;
             sRight = 1;
           }
-
           if (n === 0) {
             x1 = x1Left - smS;
             x2 = x2Left - smS;
             sLeft = 1;
           }
-
           var y1 = document.getElementById(key2).offsetTop + document.getElementById(key2 + '.' + key3).offsetTop + heightField;
           var y2 = document.getElementById(window.contr[K][key][key2][key3][0]).offsetTop + document.getElementById(window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]).offsetTop + heightField;
-
           if (!selected && localX > x1 - 10 && localX < x1 + 10 && localY > y1 - 7 && localY < y1 + 7) {
             DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, 'rgba(255,0,0,1)');
             selected = 1;
@@ -1591,7 +1403,6 @@ DesignerMove.canvasClick = function (id, event) {
       }
     }
   }
-
   if (selected) {
     // select relations
     var left = globX - (document.getElementById('layer_upd_relation').offsetWidth >> 1);
@@ -1603,7 +1414,6 @@ DesignerMove.canvasClick = function (id, event) {
     linkRelation = 'T1=' + Key0 + argsep + 'F1=' + Key1 + argsep + 'T2=' + Key2 + argsep + 'F2=' + Key3 + argsep + 'K=' + Key;
   }
 };
-
 DesignerMove.updRelation = function () {
   document.getElementById('layer_upd_relation').style.display = 'none';
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
@@ -1627,12 +1437,11 @@ DesignerMove.visibleTab = function (id, tN) {
   } else {
     document.getElementById(tN).style.display = 'none';
   }
-
   DesignerMove.reload();
   DesignerMove.markUnsaved();
-}; // max/min all tables
+};
 
-
+// max/min all tables
 DesignerMove.hideTabAll = function (idThis) {
   if (idThis.alt === 'v') {
     idThis.alt = '>';
@@ -1641,10 +1450,8 @@ DesignerMove.hideTabAll = function (idThis) {
     idThis.alt = 'v';
     idThis.src = idThis.dataset.down;
   }
-
   var E = document.getElementById('container-form');
   var EelementsLength = E.elements.length;
-
   for (var i = 0; i < EelementsLength; i++) {
     if (E.elements[i].type === 'checkbox' && E.elements[i].id.startsWith('check_vis_')) {
       if (idThis.alt === 'v') {
@@ -1656,30 +1463,24 @@ DesignerMove.hideTabAll = function (idThis) {
       }
     }
   }
-
   DesignerMove.reload();
 };
-
 DesignerMove.inArrayK = function (x, m) {
   var b = 0;
-
   for (var u in m) {
     if (x === u) {
       b = 1;
       break;
     }
   }
-
   return b;
 };
-
 DesignerMove.noHaveConstr = function (idThis) {
   var a = [];
   var K;
   var key;
   var key2;
   var key3;
-
   for (K in window.contr) {
     for (key in window.contr[K]) {
       // contr name
@@ -1700,10 +1501,8 @@ DesignerMove.noHaveConstr = function (idThis) {
     idThis.alt = 'v';
     idThis.src = idThis.dataset.down;
   }
-
   var E = document.getElementById('container-form');
   var EelementsLength = E.elements.length;
-
   for (var i = 0; i < EelementsLength; i++) {
     if (E.elements[i].type === 'checkbox' && E.elements[i].id.startsWith('check_vis_')) {
       if (!DesignerMove.inArrayK(E.elements[i].value, a)) {
@@ -1718,41 +1517,36 @@ DesignerMove.noHaveConstr = function (idThis) {
     }
   }
 };
-
 DesignerMove.generalScroll = function () {
   // if (timeoutId)
   clearTimeout(timeoutId);
   timeoutId = setTimeout(function () {
     // eslint-disable-next-line compat/compat
-    document.getElementById('top_menu').style.left = document.body.scrollLeft + 'px'; // eslint-disable-next-line compat/compat
-
+    document.getElementById('top_menu').style.left = document.body.scrollLeft + 'px';
+    // eslint-disable-next-line compat/compat
     document.getElementById('top_menu').style.top = document.body.scrollTop + 'px';
   }, 200);
-}; // max/min all tables
+};
 
-
+// max/min all tables
 DesignerMove.showLeftMenu = function (idThis) {
   var icon = idThis.children[0];
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_Show_left_menu').toggleClass('M_butt_Selected_down');
-
   if (icon.alt === 'v') {
     document.getElementById('layer_menu').style.top = '0px';
     document.getElementById('layer_menu').style.display = 'block';
     icon.alt = '>';
     icon.src = icon.dataset.up;
-
     if (isIe) {
       DesignerMove.generalScroll();
     }
   } else {
     document.getElementById('layer_menu').style.top = -1000 + 'px'; // fast scroll
-
     document.getElementById('layer_menu').style.display = 'none';
     icon.alt = 'v';
     icon.src = icon.dataset.down;
   }
 };
-
 DesignerMove.sideMenuRight = function (idThis) {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#side_menu').toggleClass('right');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#layer_menu').toggleClass('float-start');
@@ -1769,29 +1563,24 @@ DesignerMove.sideMenuRight = function (idThis) {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_Left_Right').toggleClass('M_butt_Selected_down');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_Left_Right').toggleClass('M_butt');
 };
-
 DesignerMove.showText = function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#side_menu').find('.hidable').show();
 };
-
 DesignerMove.hideText = function () {
   if (!alwaysShowText) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#side_menu').find('.hidable').hide();
   }
 };
-
 DesignerMove.pinText = function () {
   alwaysShowText = !alwaysShowText;
   jquery__WEBPACK_IMPORTED_MODULE_0__('#pin_Text').toggleClass('M_butt_Selected_down');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#pin_Text').toggleClass('M_butt');
   DesignerMove.saveValueInConfig('pin_text', alwaysShowText);
 };
-
 DesignerMove.startDisplayField = function () {
   if (onRelation) {
     return;
   }
-
   if (!onDisplayField) {
     onDisplayField = 1;
     document.getElementById('designer_hint').innerHTML = window.Messages.strChangeDisplay;
@@ -1809,9 +1598,7 @@ DesignerMove.startDisplayField = function () {
     onDisplayField = 0;
   }
 };
-
 var TargetColors = [];
-
 DesignerMove.getColorByTarget = function (target) {
   var color = ''; // "rgba(0,100,150,1)";
 
@@ -1821,7 +1608,6 @@ DesignerMove.getColorByTarget = function (target) {
       break;
     }
   }
-
   if (color.length === 0) {
     var i = TargetColors.length + 1;
     var d = i % 6;
@@ -1839,15 +1625,13 @@ DesignerMove.getColorByTarget = function (target) {
     color = 'rgba(' + r + ',' + g + ',' + b + ',1)';
     TargetColors.push([target, color]);
   }
-
   return color;
 };
-
 DesignerMove.clickOption = function (dbName, tableName, columnName, tableDbNameUrl, optionColNameString) {
   var designerOptions = document.getElementById('designer_optionse');
   var left = globX - (designerOptions.offsetWidth >> 1);
-  designerOptions.style.left = left + 'px'; // var top = Glob_Y - designerOptions.offsetHeight - 10;
-
+  designerOptions.style.left = left + 'px';
+  // var top = Glob_Y - designerOptions.offsetHeight - 10;
   designerOptions.style.top = screen.height / 4 + 'px';
   designerOptions.style.display = 'block';
   document.getElementById('ok_add_object_db_and_table_name_url').value = tableDbNameUrl;
@@ -1856,7 +1640,6 @@ DesignerMove.clickOption = function (dbName, tableName, columnName, tableDbNameU
   document.getElementById('ok_add_object_col_name').value = columnName;
   document.getElementById('option_col_name').innerHTML = optionColNameString;
 };
-
 DesignerMove.closeOption = function () {
   document.getElementById('designer_optionse').style.display = 'none';
   document.getElementById('rel_opt').value = '--';
@@ -1869,7 +1652,6 @@ DesignerMove.closeOption = function () {
   document.getElementById('having').value = '';
   document.getElementById('orderby').value = '---';
 };
-
 DesignerMove.selectAll = function (tableName, dbName, idSelectAll) {
   var parentIsChecked = jquery__WEBPACK_IMPORTED_MODULE_0__('#' + idSelectAll).is(':checked');
   var checkboxAll = jquery__WEBPACK_IMPORTED_MODULE_0__('#container-form input[id_check_all=\'' + idSelectAll + '\']:checkbox');
@@ -1880,25 +1662,20 @@ DesignerMove.selectAll = function (tableName, dbName, idSelectAll) {
       // trigger unchecked event
       this.click();
     }
-
     this.checked = parentIsChecked;
     this.disabled = parentIsChecked;
   });
-
   if (parentIsChecked) {
     selectField.push('`' + tableName + '`.*');
     window.fromArray.push(tableName);
   } else {
     var i;
-
     for (i = 0; i < selectField.length; i++) {
       if (selectField[i] === '`' + tableName + '`.*') {
         selectField.splice(i, 1);
       }
     }
-
     var k;
-
     for (k = 0; k < window.fromArray.length; k++) {
       if (window.fromArray[k] === tableName) {
         window.fromArray.splice(k, 1);
@@ -1906,27 +1683,23 @@ DesignerMove.selectAll = function (tableName, dbName, idSelectAll) {
       }
     }
   }
-
   DesignerMove.reload();
 };
-
 DesignerMove.tableOnOver = function (idThis, val, buil) {
   var builLocal = parseInt(buil);
-
   if (!val) {
     document.getElementById('id_zag_' + idThis).className = 'tab_zag_2';
-
     if (builLocal) {
       document.getElementById('id_zag_' + idThis + '_2').className = 'tab_zag_2';
     }
   } else {
     document.getElementById('id_zag_' + idThis).className = 'tab_zag';
-
     if (builLocal) {
       document.getElementById('id_zag_' + idThis + '_2').className = 'tab_zag';
     }
   }
 };
+
 /**
  * This function stores selected column information in selectField[]
  * In case column is checked it add else it deletes
@@ -1935,13 +1708,10 @@ DesignerMove.tableOnOver = function (idThis, val, buil) {
  * @param {string} colName
  * @param {string} checkboxId
  */
-
-
 DesignerMove.storeColumn = function (tableName, colName, checkboxId) {
   var i;
   var k;
   var selectKeyField = '`' + tableName + '`.`' + colName + '`';
-
   if (document.getElementById(checkboxId).checked === true) {
     selectField.push(selectKeyField);
     window.fromArray.push(tableName);
@@ -1952,7 +1722,6 @@ DesignerMove.storeColumn = function (tableName, colName, checkboxId) {
         break;
       }
     }
-
     for (k = 0; k < window.fromArray.length; k++) {
       if (window.fromArray[k] === tableName) {
         window.fromArray.splice(k, 1);
@@ -1961,6 +1730,7 @@ DesignerMove.storeColumn = function (tableName, colName, checkboxId) {
     }
   }
 };
+
 /**
  * This function builds object and adds them to historyArray
  * first it does a few checks on each object, then makes an object(where,rename,groupby,aggregate,orderby)
@@ -1971,71 +1741,64 @@ DesignerMove.storeColumn = function (tableName, colName, checkboxId) {
  * @param {string} colName
  * @param {string} dbTableNameUrl
  */
-
-
 DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
   var p;
   var whereObj;
   var rel = document.getElementById('rel_opt');
   var sum = 0;
   var init = historyArray.length;
-
   if (rel.value !== '--') {
     if (document.getElementById('Query').value === '') {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strQueryEmpty));
       return;
     }
-
     p = document.getElementById('Query');
     whereObj = new DesignerHistory.Where(rel.value, p.value); // make where object
-
     historyArray.push(new DesignerHistory.HistoryObj(colName, whereObj, tableName, window.hTabs[dbTableNameUrl], 'Where'));
     sum = sum + 1;
   }
-
   if (document.getElementById('new_name').value !== '') {
     var renameObj = new DesignerHistory.Rename(document.getElementById('new_name').value); // make Rename object
-
     historyArray.push(new DesignerHistory.HistoryObj(colName, renameObj, tableName, window.hTabs[dbTableNameUrl], 'Rename'));
     sum = sum + 1;
   }
-
   if (document.getElementById('operator').value !== '---') {
     var aggregateObj = new DesignerHistory.Aggregate(document.getElementById('operator').value);
     historyArray.push(new DesignerHistory.HistoryObj(colName, aggregateObj, tableName, window.hTabs[dbTableNameUrl], 'Aggregate'));
-    sum = sum + 1; // make aggregate operator
+    sum = sum + 1;
+    // make aggregate operator
   }
 
   if (document.getElementById('groupby').checked === true) {
     historyArray.push(new DesignerHistory.HistoryObj(colName, 'GroupBy', tableName, window.hTabs[dbTableNameUrl], 'GroupBy'));
-    sum = sum + 1; // make groupby
+    sum = sum + 1;
+    // make groupby
   }
 
   if (document.getElementById('h_rel_opt').value !== '--') {
     if (document.getElementById('having').value === '') {
       return;
     }
-
     whereObj = new DesignerHistory.Having(document.getElementById('h_rel_opt').value, document.getElementById('having').value, document.getElementById('h_operator').value); // make where object
-
     historyArray.push(new DesignerHistory.HistoryObj(colName, whereObj, tableName, window.hTabs[dbTableNameUrl], 'Having'));
-    sum = sum + 1; // make having
+    sum = sum + 1;
+    // make having
   }
 
   if (document.getElementById('orderby').value !== '---') {
     var orderByObj = new DesignerHistory.OrderBy(document.getElementById('orderby').value);
     historyArray.push(new DesignerHistory.HistoryObj(colName, orderByObj, tableName, window.hTabs[dbTableNameUrl], 'OrderBy'));
-    sum = sum + 1; // make orderby
+    sum = sum + 1;
+    // make orderby
   }
 
-  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strObjectsCreated, sum)); // output sum new objects created
-
+  (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.sprintf(window.Messages.strObjectsCreated, sum));
+  // output sum new objects created
   var existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(init, historyArray.length);
   DesignerMove.closeOption();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
 };
-
 DesignerMove.enablePageContentEvents = function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').off('mousedown');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').off('mouseup');
@@ -2050,14 +1813,13 @@ DesignerMove.enablePageContentEvents = function () {
     DesignerMove.mouseMove(e);
   });
 };
+
 /**
  * This function enables the events on table items.
  * It helps to enable them on page loading and when a table is added on the fly.
  * @param {number} index
  * @param {object} element
  */
-
-
 DesignerMove.enableTableEvents = function (index, element) {
   jquery__WEBPACK_IMPORTED_MODULE_0__(element).on('click', '.select_all_1', function () {
     DesignerMove.selectAll(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('table_name'), jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('db_name'), jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('id'));
@@ -2092,7 +1854,6 @@ DesignerMove.enableTableEvents = function (index, element) {
   });
   DesignerMove.enablePageContentEvents();
 };
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/move.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#side_menu').off('mouseenter mouseleave');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#key_Show_left_menu').off('click');

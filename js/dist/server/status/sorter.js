@@ -13,13 +13,13 @@ module.exports = jQuery;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
- // TODO: tablesorter shouldn't sort already sorted columns
-// eslint-disable-next-line no-unused-vars
 
+
+// TODO: tablesorter shouldn't sort already sorted columns
+// eslint-disable-next-line no-unused-vars
 function initTableSorter(tabid) {
   var $table;
   var opts;
-
   switch (tabid) {
     case 'statustabs_queries':
       $table = jquery__WEBPACK_IMPORTED_MODULE_0__('#serverStatusQueriesDetails');
@@ -36,11 +36,9 @@ function initTableSorter(tabid) {
       };
       break;
   }
-
   $table.tablesorter(opts);
   $table.find('tr').first().find('th').append('<div class="sorticon"></div>');
 }
-
 window.initTableSorter = initTableSorter;
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter.addParser({
@@ -51,30 +49,24 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     format: function (s) {
       var num = jquery__WEBPACK_IMPORTED_MODULE_0__.tablesorter.formatFloat(s.replace(window.Messages.strThousandsSeparator, '').replace(window.Messages.strDecimalSeparator, '.'));
       var factor = 1;
-
       switch (s.charAt(s.length - 1)) {
         case '%':
           factor = -2;
           break;
         // Todo: Complete this list (as well as in the regexp a few lines up)
-
         case 'k':
           factor = 3;
           break;
-
         case 'M':
           factor = 6;
           break;
-
         case 'G':
           factor = 9;
           break;
-
         case 'T':
           factor = 12;
           break;
       }
-
       return num * Math.pow(10, factor);
     },
     type: 'numeric'

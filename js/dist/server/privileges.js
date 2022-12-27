@@ -26,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Export privileges modal handler
  *
@@ -34,31 +35,28 @@ __webpack_require__.r(__webpack_exports__);
  * @param {JQuery} msgbox
  *
  */
-
 function exportPrivilegesModalHandler(data, msgbox) {
   if (typeof data !== 'undefined' && data.success === true) {
-    var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModal'); // Remove any previous privilege modal data, if any
-
+    var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModal');
+    // Remove any previous privilege modal data, if any
     modal.find('.modal-body').first().html('');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html('Loading');
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       modal.find('.modal-body').first().html(data.message);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#exportPrivilegesModalLabel').first().html(data.title);
-      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)(msgbox); // Attach syntax highlighted editor to export dialog
-
+      (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)(msgbox);
+      // Attach syntax highlighted editor to export dialog
       _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(modal.find('textarea'));
     });
     return;
   }
-
   (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
 }
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
-
 const EditUserGroup = {
   /**
    * @param {MouseEvent} event
@@ -75,7 +73,6 @@ const EditUserGroup = {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false, 'error');
         return;
       }
-
       const modal = window.bootstrap.Modal.getInstance(editUserGroupModal);
       const modalBody = editUserGroupModal.querySelector('.modal-body');
       const saveButton = editUserGroupModal.querySelector('#editUserGroupModalSaveButton');
@@ -87,9 +84,8 @@ const EditUserGroup = {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false, 'error');
             return;
           }
-
-          const userGroup = form.serializeArray().find(el => el.name === 'userGroup').value; // button -> td -> tr -> td.usrGroup
-
+          const userGroup = form.serializeArray().find(el => el.name === 'userGroup').value;
+          // button -> td -> tr -> td.usrGroup
           const userGroupTableCell = button.parentElement.parentElement.querySelector('.usrGroup');
           userGroupTableCell.textContent = userGroup;
         });
@@ -98,10 +94,10 @@ const EditUserGroup = {
     });
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const AccountLocking = {
   handleEvent: function () {
     const button = this;
@@ -118,7 +114,6 @@ const AccountLocking = {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error);
         return;
       }
-
       if (isLocked) {
         const lockIcon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_6__["default"])('s_lock', window.Messages.strLock, {}).toString();
         button.innerHTML = '<span class="text-nowrap">' + lockIcon + ' ' + window.Messages.strLock + '</span>';
@@ -130,22 +125,20 @@ const AccountLocking = {
         button.title = window.Messages.strUnlockAccount;
         button.dataset.isLocked = 'true';
       }
-
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
     });
   }
 };
+
 /**
  * Display a warning if there is already a user by the name entered as the username.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const AddUserLoginCheckUsername = {
   handleEvent: function () {
     var username = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
     var $warning = jquery__WEBPACK_IMPORTED_MODULE_0__('#user_exists_warning');
-
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_pred_username').val() === 'userdefined' && username !== '') {
       var href = jquery__WEBPACK_IMPORTED_MODULE_0__('form[name=\'usersForm\']').attr('action');
       var params = {
@@ -166,12 +159,12 @@ const AddUserLoginCheckUsername = {
     }
   }
 };
+
 /**
  * Indicating password strength
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const PasswordStrength = {
   handleEvent: function () {
     var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0__('#password_strength_meter');
@@ -181,12 +174,12 @@ const PasswordStrength = {
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, username);
   }
 };
+
 /**
  * Automatically switching to 'Use Text field' from 'No password' once start writing in text area
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const SwitchToUseTextField = {
   handleEvent: function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_pw').val() !== '') {
@@ -194,10 +187,10 @@ const SwitchToUseTextField = {
     }
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const ChangePasswordStrength = {
   handleEvent: function () {
     var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_strength_meter');
@@ -205,16 +198,15 @@ const ChangePasswordStrength = {
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPasswordStrength(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), meterObj, meterObjLabel, _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('user'));
   }
 };
+
 /**
  * Display a notice if sha256_password is selected
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const ShowSha256PasswordNotice = {
   handleEvent: function () {
     var selectedPlugin = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
-
     if (selectedPlugin === 'sha256_password') {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_reqd_warning').show();
     } else {
@@ -222,10 +214,10 @@ const ShowSha256PasswordNotice = {
     }
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const RevokeUser = {
   /**
    * @param {Event} event
@@ -236,45 +228,42 @@ const RevokeUser = {
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#usersForm');
     $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
       var $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox');
-
       if ($dropUsersDbCheckbox.is(':checked')) {
         var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
-
         if (!isConfirmed) {
           // Uncheck the drop users database checkbox
           $dropUsersDbCheckbox.prop('checked', false);
         }
       }
-
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
       var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message); // Refresh navigation, if we dropped some databases with the name
+          (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
+          // Refresh navigation, if we dropped some databases with the name
           // that is the same as the username of the deleted user
-
           if (jquery__WEBPACK_IMPORTED_MODULE_0__('#dropUsersDbCheckbox:checked').length) {
             _modules_navigation_js__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
-          } // Remove the revoked user from the users list
-
-
+          }
+          // Remove the revoked user from the users list
           $form.find('input:checkbox:checked').parents('tr').slideUp('medium', function () {
             var thisUserInitial = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input:checkbox').val().charAt(0).toUpperCase();
-            jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove(); // If this is the last user with thisUserInitial, remove the link from #userAccountsPagination
+            jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
 
+            // If this is the last user with thisUserInitial, remove the link from #userAccountsPagination
             if (jquery__WEBPACK_IMPORTED_MODULE_0__('#userRightsTable').find('input:checkbox[value^="' + thisUserInitial + '"], input:checkbox[value^="' + thisUserInitial.toLowerCase() + '"]').length === 0) {
               jquery__WEBPACK_IMPORTED_MODULE_0__('#userAccountsPagination').find('.page-item > .page-link:contains(' + thisUserInitial + ')').parent('.page-item').addClass('disabled').html('<a class="page-link" href="#" tabindex="-1" aria-disabled="true">' + thisUserInitial + '</a>');
-            } // Re-check the classes of each row
+            }
 
-
+            // Re-check the classes of each row
             $form.find('tbody').find('tr').each(function (index) {
               if (index >= 0 && index % 2 === 0) {
                 jquery__WEBPACK_IMPORTED_MODULE_0__(this).removeClass('odd').addClass('even');
               } else if (index >= 0 && index % 2 !== 0) {
                 jquery__WEBPACK_IMPORTED_MODULE_0__(this).removeClass('even').addClass('odd');
               }
-            }); // update the checkall checkbox
-
+            });
+            // update the checkall checkbox
             jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkboxesSel).trigger('change');
           });
         } else {
@@ -284,22 +273,21 @@ const RevokeUser = {
     });
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const ExportPrivileges = {
   /**
    * @param {Event} event
    */
   handleEvent: function (event) {
-    event.preventDefault(); // can't export if no users checked
-
+    event.preventDefault();
+    // can't export if no users checked
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this.form).find('input:checked').length === 0) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
-
     var msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     var serverId = _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server');
@@ -310,10 +298,10 @@ const ExportPrivileges = {
     }); // end $.post
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const ExportUser = {
   /**
    * @param {Event} event
@@ -328,14 +316,13 @@ const ExportUser = {
     });
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const SslTypeToggle = {
   handleEvent: function () {
     var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('#specified_div');
-
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_type_SPECIFIED').is(':checked')) {
       $div.find('input').prop('disabled', false);
     } else {
@@ -343,14 +330,13 @@ const SslTypeToggle = {
     }
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const SslPrivilegeToggle = {
   handleEvent: function () {
     var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('#require_ssl_div');
-
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked')) {
       $div.find('input').prop('disabled', false);
       jquery__WEBPACK_IMPORTED_MODULE_0__('#ssl_type_SPECIFIED').trigger('change');
@@ -359,64 +345,66 @@ const SslPrivilegeToggle = {
     }
   }
 };
+
 /**
  * Create submenu for simpler interface
  */
-
 function addOrUpdateSubmenu() {
   var $editUserDialog = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog');
-
   if ($editUserDialog.length === 0) {
     return;
   }
-
   var $subNav = jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-pills');
   var submenuLabel;
   var submenuLink;
-  var linkNumber; // if submenu exists yet, remove it first
+  var linkNumber;
 
+  // if submenu exists yet, remove it first
   if ($subNav.length > 0) {
     $subNav.remove();
-  } // construct a submenu from the existing fieldsets
+  }
 
-
+  // construct a submenu from the existing fieldsets
   $subNav = jquery__WEBPACK_IMPORTED_MODULE_0__('<ul></ul>').prop('class', 'nav nav-pills m-2');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').each(function () {
     submenuLabel = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.js-submenu-label[data-submenu-label]').data('submenu-label');
     submenuLink = jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>').prop('class', 'nav-link').prop('href', '#').html(submenuLabel);
     jquery__WEBPACK_IMPORTED_MODULE_0__('<li></li>').prop('class', 'nav-item').append(submenuLink).appendTo($subNav);
-  }); // click handlers for submenu
+  });
 
+  // click handlers for submenu
   $subNav.find('a').on('click', function (e) {
-    e.preventDefault(); // if already active, ignore click
-
+    e.preventDefault();
+    // if already active, ignore click
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('active')) {
       return;
     }
-
     $subNav.find('a').removeClass('active');
-    jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('active'); // which section to show now?
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('active');
 
-    linkNumber = $subNav.find('a').index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)); // hide all sections but the one to show
-
+    // which section to show now?
+    linkNumber = $subNav.find('a').index(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
+    // hide all sections but the one to show
     jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').hide().eq(linkNumber).show();
-  }); // make first menu item active
+  });
+
+  // make first menu item active
   // TODO: support URL hash history
-
   $subNav.find('> :first-child a').addClass('active');
-  $editUserDialog.prepend($subNav); // hide all sections but the first
+  $editUserDialog.prepend($subNav);
 
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').hide().eq(0).show(); // scroll to the top
+  // hide all sections but the first
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog .submenu-item').hide().eq(0).show();
 
+  // scroll to the top
   jquery__WEBPACK_IMPORTED_MODULE_0__('html, body').animate({
     scrollTop: 0
   }, 'fast');
 }
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
-
 const SelectAllPrivileges = {
   /**
    * @param {Event} event
@@ -429,41 +417,36 @@ const SelectAllPrivileges = {
     });
   }
 };
-
 function setMaxWidth() {
   var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();
   jquery__WEBPACK_IMPORTED_MODULE_0__('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 }
+
 /**
  * Validates the "add a user" form
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
-
 const CheckAddUser = {
   handleEvent: function () {
     const theForm = this;
-
     if (theForm.elements.hostname.value === '') {
       alert(window.Messages.strHostEmpty);
       theForm.elements.hostname.focus();
       return false;
     }
-
     if (theForm.elements.pred_username && theForm.elements.pred_username.value === 'userdefined' && theForm.elements.username.value === '') {
       alert(window.Messages.strUserEmpty);
       theForm.elements.username.focus();
       return false;
     }
-
     return _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkPassword(jquery__WEBPACK_IMPORTED_MODULE_0__(theForm));
   }
 };
-
 const selectPasswordRadioWhenChangingPassword = () => {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#nopass_0').prop('checked', true);
 };
+
 /**
  * AJAX scripts for /server/privileges page.
  *
@@ -482,8 +465,6 @@ const selectPasswordRadioWhenChangingPassword = () => {
 /**
  * Unbind all event handlers before tearing down a page
  */
-
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/privileges.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_add_user_login').off('change', 'input[name=\'username\']');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#deleteUserCard .btn.ajax');
@@ -491,11 +472,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/priv
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_pma_change_pw2').off('change');
   const editUserGroupModal = document.getElementById('editUserGroupModal');
-
   if (editUserGroupModal) {
     editUserGroupModal.removeEventListener('show.bs.modal', EditUserGroup);
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'button.mult_submit[value=export]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.export_user_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__('button.jsAccountLocking').off('click');
@@ -515,13 +494,12 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/privil
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_authentication_plugin', ShowSha256PasswordNotice.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
   const editUserGroupModal = document.getElementById('editUserGroupModal');
-
   if (editUserGroupModal) {
     editUserGroupModal.addEventListener('show.bs.modal', EditUserGroup);
   }
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent);
 
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent); // if exporting non-ajax, highlight anyways
-
+  // if exporting non-ajax, highlight anyways
   _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.export'));
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.export_user_anchor.ajax', ExportUser.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0__('button.jsAccountLocking').on('click', AccountLocking.handleEvent);

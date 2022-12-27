@@ -20,6 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    Implements the shiftkey + click remove column
  *                  from order by clause functionality
@@ -33,7 +34,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('multi_column_
     var orderUrlRemove = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('input[name="url-remove-order"]').val();
     var orderUrlAdd = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().find('input[name="url-add-order"]').val();
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-
     if (event.ctrlKey || event.altKey) {
       event.preventDefault();
       _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0__(this);

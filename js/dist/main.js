@@ -34,10 +34,10 @@ __webpack_require__.r(__webpack_exports__);
 
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', () => _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.removeSubmitEvents());
 jquery__WEBPACK_IMPORTED_MODULE_0__(_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.loadEventHandler());
+
 /**
  * Attach a generic event handler to clicks on pages and submissions of forms.
  */
-
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a', _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.requestHandler);
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', 'form', _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.requestHandler);
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('ajaxError', _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.getFatalErrorHandler());
@@ -81,21 +81,17 @@ const crossFramingProtection = () => {
   if (window.allowThirdPartyFraming) {
     return;
   }
-
   if (window.self !== window.top) {
     window.top.location = window.self.location;
     return;
   }
-
-  const styleElement = document.getElementById('cfs-style'); // check if styleElement has already been removed to avoid frequently reported js error
-
+  const styleElement = document.getElementById('cfs-style');
+  // check if styleElement has already been removed to avoid frequently reported js error
   if (typeof styleElement === 'undefined' || styleElement === null) {
     return;
   }
-
   styleElement.parentNode.removeChild(styleElement);
 };
-
 
 
 /***/ }),
@@ -108,108 +104,88 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "KeyHandlerEvents": function() { return /* binding */ KeyHandlerEvents; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
- // var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
 
+
+// var that holds: 0- if ctrl key is not pressed 1- if ctrl key is pressed
 let ctrlKeyHistory = 0;
+
 /**
  * Allows moving around inputs/select by Ctrl+arrows
  *
  * @param {object} event data
  */
-
 const onKeyDownArrowsHandler = function (event) {
   var e = event || window.event;
   var o = e.srcElement || e.target;
-
   if (!o) {
     return;
   }
-
   if (o.tagName !== 'TEXTAREA' && o.tagName !== 'INPUT' && o.tagName !== 'SELECT') {
     return;
   }
-
   if (e.which !== 17 && e.which !== 37 && e.which !== 38 && e.which !== 39 && e.which !== 40) {
     return;
   }
-
   if (!o.id) {
     return;
   }
-
   if (e.type === 'keyup') {
     if (e.which === 17) {
       ctrlKeyHistory = 0;
     }
-
     return;
   } else if (e.type === 'keydown') {
     if (e.which === 17) {
       ctrlKeyHistory = 1;
     }
   }
-
   if (ctrlKeyHistory !== 1) {
     return;
   }
-
   e.preventDefault();
   var pos = o.id.split('_');
-
   if (pos[0] !== 'field' || typeof pos[2] === 'undefined') {
     return;
   }
-
   var x = pos[2];
   var y = pos[1];
-
   switch (e.keyCode) {
     case 38:
       // up
       y--;
       break;
-
     case 40:
       // down
       y++;
       break;
-
     case 37:
       // left
       x--;
       break;
-
     case 39:
       // right
       x++;
       break;
-
     default:
       return;
   }
-
   var id = 'field_' + y + '_' + x;
   var nO = document.getElementById(id);
-
   if (!nO) {
     id = 'field_' + y + '_' + x + '_0';
     nO = document.getElementById(id);
-  } // skip non existent fields
+  }
 
-
+  // skip non existent fields
   if (!nO) {
     return;
   }
-
   nO.focus();
-
   if (nO.tagName !== 'SELECT') {
     nO.select();
   }
-
   e.returnValue = false;
 };
-
 const KeyHandlerEvents = {
   /**
    * @return {function}
@@ -220,7 +196,6 @@ const KeyHandlerEvents = {
       jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('keydown keyup', 'table.insertRowTable');
     };
   },
-
   /**
    * @return {function}
    */
@@ -248,6 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
+
 /**
  * @fileoverview    function used for page-related settings
  * @name            Page-related settings
@@ -269,15 +245,12 @@ function showSettings(selector) {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#pageSettingsModal').find('.modal-body').first().html(jquery__WEBPACK_IMPORTED_MODULE_0__(selector));
   jquery__WEBPACK_IMPORTED_MODULE_0__(selector).css('display', 'block');
 }
-
 function showPageSettings() {
   showSettings('#page_settings_modal');
 }
-
 function showNaviSettings() {
   showSettings('#pma_navigation_settings');
 }
-
 const PageSettings = {
   /**
    * @return {void}
@@ -287,7 +260,6 @@ const PageSettings = {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').off('click');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_settings_icon').off('click');
   },
-
   /**
    * @return {void}
    */
@@ -296,7 +268,6 @@ const PageSettings = {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').css('display', 'inline');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#page_settings_icon').on('click', showPageSettings);
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_settings_icon').on('click', showNaviSettings);
   }
 };

@@ -15,17 +15,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 
 
-
 window.CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
   // Skipping check if text box is empty.
   if (text.trim() === '') {
     updateLinting(cm, []);
     return;
   }
-
   function handleResponse(response) {
     var found = [];
-
     for (var idx in response) {
       found.push({
         // eslint-disable-next-line new-cap
@@ -36,10 +33,8 @@ window.CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
         severity: response[idx].severity
       });
     }
-
     updateLinting(cm, found);
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     method: 'POST',
     url: 'index.php?route=/lint',

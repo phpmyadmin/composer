@@ -16,6 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 
 
+
 /**
  * @fileoverview    Handle shortcuts in various pages
  * @name            Shortcuts handler
@@ -27,7 +28,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Register key events on load
  */
-
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
   var databaseOp = false;
   var tableOp = false;
@@ -45,11 +45,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(e.target).prop('contenteditable') === 'true' || jquery__WEBPACK_IMPORTED_MODULE_0__(e.target).prop('contenteditable') === true) {
       return;
     }
-
     if (e.target.nodeName === 'INPUT' || e.target.nodeName === 'TEXTAREA' || e.target.nodeName === 'SELECT') {
       return;
     }
-
     if (e.keyCode === keyD) {
       setTimeout(function () {
         databaseOp = false;
@@ -64,29 +62,24 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     // is a string but is also a boolean according to https://api.jquery.com/prop/
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(e.target).prop('contenteditable') === 'true' || jquery__WEBPACK_IMPORTED_MODULE_0__(e.target).prop('contenteditable') === true) {
       return;
-    } // disable the shortcuts when session has timed out.
+    }
 
-
+    // disable the shortcuts when session has timed out.
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#modalOverlay').length > 0) {
       return;
     }
-
     if (e.ctrlKey && e.altKey && e.keyCode === keyC) {
       window.Console.toggle();
     }
-
     if (e.ctrlKey && e.keyCode === keyK) {
       e.preventDefault();
       window.Console.toggle();
     }
-
     if (e.target.nodeName === 'INPUT' || e.target.nodeName === 'TEXTAREA' || e.target.nodeName === 'SELECT') {
       return;
     }
-
     var isTable;
     var isDb;
-
     if (e.keyCode === keyD) {
       databaseOp = true;
     } else if (e.keyCode === keyK) {
@@ -96,14 +89,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
       if (databaseOp === true) {
         isTable = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
         isDb = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
-
         if (isDb && !isTable) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-link .ic_b_props').first().trigger('click');
         }
       } else if (tableOp === true) {
         isTable = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
         isDb = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
-
         if (isDb && isTable) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-link .ic_b_props').first().trigger('click');
         }
@@ -114,14 +105,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
       if (databaseOp === true) {
         isTable = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
         isDb = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
-
         if (isDb && !isTable) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-link .ic_b_search').first().trigger('click');
         }
       } else if (tableOp === true) {
         isTable = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
         isDb = _modules_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
-
         if (isDb && isTable) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.nav-link .ic_b_search').first().trigger('click');
         }

@@ -24,6 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -39,7 +40,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/multi_table_query.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.tableNameSelect').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).off('change');
@@ -58,19 +58,15 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     var tableAliases = {};
     jquery__WEBPACK_IMPORTED_MODULE_0__('.tableNameSelect').each(function () {
       var $show = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.show_col').first();
-
       if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() !== '' && $show.prop('checked')) {
         var tableAlias = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.table_alias').first().val();
         var columnAlias = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.col_alias').first().val();
-
         if (tableAlias !== '') {
           columns.push([tableAlias, jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.columnNameSelect').first().val()]);
         } else {
           columns.push([jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(), jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.columnNameSelect').first().val()]);
         }
-
         columns[columns.length - 1].push(columnAlias);
-
         if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() in tableAliases) {
           if (!tableAliases[jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()].includes(tableAlias)) {
             tableAliases[jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()].push(tableAlias);
@@ -80,12 +76,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         }
       }
     });
-
     if (Object.keys(tableAliases).length === 0) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Nothing selected', false, 'error');
       return;
     }
-
     var foreignKeys;
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'GET',
@@ -103,51 +97,42 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       }
     });
     var query = 'SELECT ' + '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][0]) + '`.';
-
     if (columns[0][1] === '*') {
       query += '*';
     } else {
       query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][1]) + '`';
     }
-
     if (columns[0][2] !== '') {
       query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][2]) + '`';
     }
-
     for (var i = 1; i < columns.length; i++) {
       query += ', `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][0]) + '`.';
-
       if (columns[i][1] === '*') {
         query += '*';
       } else {
         query += '`' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][1]) + '`';
       }
-
       if (columns[i][2] !== '') {
         query += ' AS `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][2]) + '`';
       }
     }
-
     query += '\nFROM ';
     query += window.generateFromBlock(tableAliases, foreignKeys);
     var $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0__('.criteria_col:checked').length;
-
     if ($criteriaColCount > 0) {
       query += '\nWHERE ';
       query += window.generateWhereBlock();
     }
-
     query += ';';
     editor.getDoc().setValue(query);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#submit_query').on('click', function () {
-    var query = editor.getDoc().getValue(); // Verifying that the query is not empty
-
+    var query = editor.getDoc().getValue();
+    // Verifying that the query is not empty
     if (query === '') {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEmptyQuery, false, 'error');
       return;
     }
-
     var data = {
       'db': jquery__WEBPACK_IMPORTED_MODULE_0__('#db_name').val(),
       'sql_query': query,
@@ -176,6 +161,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       }
     });
   });
+
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_column_button').on('click', function () {
     columnCount++;
     var $newColumnDom = jquery__WEBPACK_IMPORTED_MODULE_0__(jquery__WEBPACK_IMPORTED_MODULE_0__('#new_column_layout').html()).clone();
@@ -185,16 +171,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     jquery__WEBPACK_IMPORTED_MODULE_0__('#add_column_button').parent().before($newColumnDom);
     addNewColumnCallbacks();
   });
-
   function addNewColumnCallbacks() {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.tableNameSelect').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('change', function () {
         var $sibs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.columnNameSelect');
-
         if ($sibs.length === 0) {
           $sibs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().parent().find('.columnNameSelect');
         }
-
         $sibs.first().html(jquery__WEBPACK_IMPORTED_MODULE_0__('#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':selected').data('hash')).html());
       });
     });
@@ -209,9 +192,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
           var $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.criteria_col').first();
           $checkbox.prop('checked', !$checkbox.prop('checked'));
         }
-
         var $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0__('.criteria_col:checked').length;
-
         if ($criteriaColCount > 1) {
           jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.jsCriteriaOptions').first().find('.logical_operator').first().css('display', 'table-row');
         }
@@ -220,13 +201,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     jquery__WEBPACK_IMPORTED_MODULE_0__('.criteria_col').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('change', function () {
         var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this).siblings('.jsCriteriaButton').first();
-
         if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).is(':checked') && !$anchor.hasClass('collapsed')) {
           // Do not collapse on checkbox tick as it does not make sense
           // The user has it open and wants to tick the box
           return;
         }
-
         $anchor.trigger('click', ['Trigger']);
       });
     });
@@ -234,7 +213,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('change', function () {
         var $rhsCol = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().parent().siblings('.rhs_table').first();
         var $rhsText = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().parent().siblings('.rhs_text').first();
-
         if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val() === 'text') {
           $rhsCol.css('display', 'none');
           $rhsText.css('display', 'table-row');

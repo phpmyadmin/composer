@@ -16,10 +16,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  * Make columns sortable, but only for tables with more than 1 data row.
  */
-
 function makeColumnsSortable() {
   var $tables = jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins_plugins table:has(tbody tr + tr)');
   $tables.tablesorter({
@@ -32,7 +32,6 @@ function makeColumnsSortable() {
   });
   $tables.find('thead th').append('<div class="sorticon"></div>');
 }
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/plugins.js', function () {
   makeColumnsSortable();
 });

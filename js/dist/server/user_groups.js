@@ -18,6 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    Javascript functions used in server user groups page
  * @name            Server User Groups
@@ -28,14 +29,13 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/user_groups.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#deleteUserGroupModal').off('show.bs.modal');
 });
+
 /**
  * Bind event handlers
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/user_groups.js', function () {
   const deleteUserGroupModal = jquery__WEBPACK_IMPORTED_MODULE_0__('#deleteUserGroupModal');
   deleteUserGroupModal.on('show.bs.modal', function (event) {

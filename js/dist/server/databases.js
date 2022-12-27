@@ -30,10 +30,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const DropDatabases = {
   /**
    * @param {Event} event
@@ -41,17 +41,16 @@ const DropDatabases = {
   handleEvent: function (event) {
     event.preventDefault();
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+
     /**
      * @var selected_dbs Array containing the names of the checked databases
      */
-
-    var selectedDbs = []; // loop over all checked checkboxes, except the .checkall_box checkbox
-
+    var selectedDbs = [];
+    // loop over all checked checkboxes, except the .checkall_box checkbox
     $form.find('input:checkbox:checked:not(.checkall_box)').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').addClass('removeMe');
       selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) + '`;';
     });
-
     if (!selectedDbs.length) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
       return;
@@ -59,8 +58,6 @@ const DropDatabases = {
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-
-
     var question = window.Messages.strDropDatabaseStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
     const modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
@@ -79,12 +76,10 @@ const DropDatabases = {
           $databasesCount.text(newCount);
           $rowsToRemove.remove();
           $form.find('tbody').sortTable('.name');
-
           if ($form.find('tbody').find('tr').length === 0) {
             // user just dropped the last db on this page
             (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
           }
-
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         } else {
           $form.find('tr.removeMe').removeClass('removeMe');
@@ -96,26 +91,26 @@ const DropDatabases = {
     });
   }
 };
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
  */
-
 const CreateDatabase = {
   /**
    * @param {Event} event
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this); // TODO Remove this section when all browsers support HTML5 "required" property
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
 
+    // TODO Remove this section when all browsers support HTML5 "required" property
     var newDbNameInput = $form.find('input[name=new_db]');
-
     if (newDbNameInput.val() === '') {
       newDbNameInput.trigger('focus');
       alert(window.Messages.strFormEmpty);
       return;
-    } // end remove
-
+    }
+    // end remove
 
     (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
@@ -125,8 +120,9 @@ const CreateDatabase = {
         var $databasesCountObject = jquery__WEBPACK_IMPORTED_MODULE_0__('#filter-rows-count');
         var databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
         $databasesCountObject.text(databasesCount);
-        _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(); // make ajax request to load db structure page - taken from ajax.js
+        _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
 
+        // make ajax request to load db structure page - taken from ajax.js
         var dbStructUrl = data.url;
         dbStructUrl = dbStructUrl.replace(/amp;/ig, '');
         var params = 'ajax_request=true' + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
@@ -137,13 +133,11 @@ const CreateDatabase = {
     });
   }
 };
-
 function checkPrivilegesForDatabase() {
   var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0__('.server_databases');
   jquery__WEBPACK_IMPORTED_MODULE_0__.each(tableRows, function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).on('click', function () {
       const db = jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('data');
-
       if (db !== _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db')) {
         _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.setAll({
           'db': db,
@@ -153,7 +147,6 @@ function checkPrivilegesForDatabase() {
     });
   });
 }
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/databases.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#dbStatsForm');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#create_database_form.ajax');

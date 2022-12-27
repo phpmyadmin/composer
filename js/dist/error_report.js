@@ -22,27 +22,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * general function, usually for data manipulation pages
  *
  */
-
 var ErrorReport = {
   /**
    * @var {object}, stores the last exception info
    */
   lastException: null,
-
   /**
    * @var object stores the Error Report Data to prevent unnecessary data fetching
    */
   errorReportData: null,
-
   /**
    * @var object maintains unique keys already used
    */
   keyDict: {},
-
   /**
    * handles thrown error exceptions based on user preferences
    *
@@ -55,7 +52,6 @@ var ErrorReport = {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
       return;
     }
-
     if (data.report_setting === 'ask') {
       ErrorReport.showErrorNotification();
     } else if (data.report_setting === 'always') {
@@ -79,13 +75,10 @@ var ErrorReport = {
     if (JSON.stringify(ErrorReport.lastException) === JSON.stringify(exception)) {
       return;
     }
-
     if (exception.name === null || typeof exception.name === 'undefined') {
       exception.name = ErrorReport.extractExceptionName(exception);
     }
-
     ErrorReport.lastException = exception;
-
     if (ErrorReport.errorReportData === null) {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/error-report', {
         'ajax_request': true,
@@ -100,7 +93,6 @@ var ErrorReport = {
       ErrorReport.errorDataHandler(ErrorReport.errorReportData, exception);
     }
   },
-
   /**
    * Shows the modal dialog previewing the report
    *
@@ -110,7 +102,6 @@ var ErrorReport = {
    */
   showReportDialog: function (exception) {
     const reportData = ErrorReport.getReportData(exception);
-
     const sendErrorReport = function () {
       const postData = jquery__WEBPACK_IMPORTED_MODULE_0__.extend(reportData, {
         'send_error_report': true,
@@ -126,13 +117,11 @@ var ErrorReport = {
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#errorReportModal').modal('hide');
     };
-
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/error-report', reportData).done(function (data) {
       // Delete the modal to refresh it in case the user changed SendErrorReports value
       if (document.getElementById('errorReportModal') !== null) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#errorReportModal').remove();
       }
-
       jquery__WEBPACK_IMPORTED_MODULE_0__('body').append(jquery__WEBPACK_IMPORTED_MODULE_0__(data.report_modal));
       const $errorReportModal = jquery__WEBPACK_IMPORTED_MODULE_0__('#errorReportModal');
       $errorReportModal.on('show.bs.modal', function () {
@@ -144,7 +133,6 @@ var ErrorReport = {
       $errorReportModal.modal('show');
     });
   },
-
   /**
    * Shows the small notification that asks for user permission
    *
@@ -152,11 +140,9 @@ var ErrorReport = {
    */
   showErrorNotification: function () {
     var key = Math.random().toString(36).substring(2, 12);
-
     while (key in ErrorReport.keyDict) {
       key = Math.random().toString(36).substring(2, 12);
     }
-
     ErrorReport.keyDict[key] = 1;
     var $div = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="alert alert-danger" role="alert" id="error_notification_' + key + '"></div>').append((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__["default"])('s_error') + window.Messages.strErrorOccurred);
     var $buttons = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="float-end"></div>');
@@ -171,13 +157,12 @@ var ErrorReport = {
     buttonHtml += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_4__["default"])('b_close', window.Messages.strIgnore);
     buttonHtml += '</a>';
     $buttons.html(buttonHtml);
-    $div.append($buttons); // eslint-disable-next-line compat/compat
-
+    $div.append($buttons);
+    // eslint-disable-next-line compat/compat
     $div.appendTo(document.body);
     jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#show_error_report_' + key, ErrorReport.createReportDialog);
     jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#ignore_error_' + key, ErrorReport.removeErrorNotification);
   },
-
   /**
    * Removes the notification if it was displayed before
    *
@@ -189,12 +174,10 @@ var ErrorReport = {
       // don't remove the hash fragment by navigating to #
       e.preventDefault();
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('#error_notification_' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).data('notification-id')).fadeOut(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
     });
   },
-
   /**
    * Extracts Exception name from message if it exists
    *
@@ -205,17 +188,13 @@ var ErrorReport = {
     if (exception.message === null || typeof exception.message === 'undefined') {
       return '';
     }
-
     var reg = /([a-zA-Z]+):/;
     var regexResult = reg.exec(exception.message);
-
     if (regexResult && regexResult.length === 2) {
       return regexResult[1];
     }
-
     return '';
   },
-
   /**
    * Shows the modal dialog previewing the report
    *
@@ -225,7 +204,6 @@ var ErrorReport = {
     ErrorReport.removeErrorNotification();
     ErrorReport.showReportDialog(ErrorReport.lastException);
   },
-
   /**
    * Returns the report data to send to the server
    *
@@ -237,7 +215,6 @@ var ErrorReport = {
     if (exception && exception.stack && exception.stack.length) {
       for (var i = 0; i < exception.stack.length; i++) {
         var stack = exception.stack[i];
-
         if (stack.context && stack.context.length) {
           for (var j = 0; j < stack.context.length; j++) {
             if (stack.context[j].length > 80) {
@@ -247,7 +224,6 @@ var ErrorReport = {
         }
       }
     }
-
     var reportData = {
       'server': _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
@@ -255,16 +231,13 @@ var ErrorReport = {
       'url': window.location.href,
       'exception_type': 'js'
     };
-
     if (_modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.scriptHandler.scripts.length > 0) {
       reportData.scripts = _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.scriptHandler.scripts.map(function (script) {
         return script;
       });
     }
-
     return reportData;
   },
-
   /**
    * Wraps given function in error reporting code and returns wrapped function
    *
@@ -281,17 +254,15 @@ var ErrorReport = {
           window.TraceKit.report(x);
         }
       };
-
-      newFunc.wrapped = true; // Set guid of wrapped function same as original function, so it can be removed
+      newFunc.wrapped = true;
+      // Set guid of wrapped function same as original function, so it can be removed
       // See bug#4146 (problem with jquery draggable and sortable)
-
       newFunc.guid = func.guid = func.guid || newFunc.guid || jquery__WEBPACK_IMPORTED_MODULE_0__.guid++;
       return newFunc;
     } else {
       return func;
     }
   },
-
   /**
    * Automatically wraps the callback in AJAX.registerOnload
    *
@@ -299,13 +270,11 @@ var ErrorReport = {
    */
   wrapAjaxOnloadCallback: function () {
     var oldOnload = _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload;
-
     _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload = function (file, func) {
       var wrappedFunction = ErrorReport.wrapFunction(func);
       oldOnload.call(this, file, wrappedFunction);
     };
   },
-
   /**
    * Automatically wraps the callback in $.fn.on
    *
@@ -313,7 +282,6 @@ var ErrorReport = {
    */
   wrapJqueryOnCallback: function () {
     var oldOn = jquery__WEBPACK_IMPORTED_MODULE_0__.fn.on;
-
     jquery__WEBPACK_IMPORTED_MODULE_0__.fn.on = function () {
       for (var i = 1; i <= 3; i++) {
         if (typeof arguments[i] === 'function') {
@@ -321,11 +289,9 @@ var ErrorReport = {
           break;
         }
       }
-
       return oldOn.apply(this, arguments);
     };
   },
-
   /**
    * Wraps the callback in AJAX.registerOnload automatically
    *

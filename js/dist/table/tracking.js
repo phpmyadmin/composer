@@ -22,19 +22,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Unbind all event handlers before tearing down the page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/tracking.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', '#versionsForm.ajax button[name="submit_mult"], #versionsForm.ajax input[name="submit_mult"]');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.delete_version_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').off('click', 'a.delete_entry_anchor.ajax');
 });
+
 /**
  * Bind event handlers
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/tracking.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#versions tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
   jquery__WEBPACK_IMPORTED_MODULE_0__('#versions').tablesorter({
@@ -54,7 +54,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
       }
     }
   });
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#ddl_versions tbody tr').length > 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#ddl_versions tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
     jquery__WEBPACK_IMPORTED_MODULE_0__('#ddl_versions').tablesorter({
@@ -72,7 +71,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
       }
     });
   }
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#dml_versions tbody tr').length > 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#dml_versions tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="sorticon"></div>'));
     jquery__WEBPACK_IMPORTED_MODULE_0__('#dml_versions').tablesorter({
@@ -90,18 +88,16 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
       }
     });
   }
+
   /**
    * Handles multi submit for tracking versions
    */
-
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', '#versionsForm.ajax button[name="submit_mult"], #versionsForm.ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
     var $button = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $form = $button.parent('form');
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
-
     if ($button.val() === 'delete_version') {
       var question = window.Messages.strDeleteTrackingVersionMultiple;
       $button.confirm(question, $form.attr('action'), function (url) {
@@ -115,10 +111,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), submitData, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     }
   });
+
   /**
    * Ajax Event handler for 'Delete version'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.delete_version_anchor.ajax', function (e) {
     e.preventDefault();
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -132,10 +128,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(url, params, _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
   });
+
   /**
    * Ajax Event handler for 'Delete tracking report entry'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').on('click', 'a.delete_entry_anchor.ajax', function (e) {
     e.preventDefault();
     var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);

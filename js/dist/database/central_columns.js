@@ -20,6 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview   events handling from central columns page
  * @name            Central columns
@@ -57,7 +58,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer input,#tableslistcontainer select,#tableslistcontainer .default_value,#tableslistcontainer .open_enum_editor').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall').show();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('.checkall_box').show();
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#table_columns').find('tbody tr').length > 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#table_columns').tablesorter({
       headers: {
@@ -74,16 +74,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
       }
     });
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('button[name="delete_central_columns"]').on('click', function (event) {
     event.preventDefault();
     var multiDeleteColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
-
     if (multiDeleteColumns === '') {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strRadioUnchecked);
       return false;
     }
-
     (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_col_name').val(multiDeleteColumns);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#del_form').trigger('submit');
@@ -91,12 +88,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableslistcontainer').find('button[name="edit_central_columns"]').on('click', function (event) {
     event.preventDefault();
     var editColumnList = jquery__WEBPACK_IMPORTED_MODULE_0__('.checkall:checkbox:checked').serialize();
-
     if (editColumnList === '') {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strRadioUnchecked);
       return false;
     }
-
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     var editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
@@ -138,7 +133,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input, #f_' + rownum + ' select, #f_' + rownum + ' .open_enum_editor').show();
     var attributeVal = jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td[name=col_attribute] span').html();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' select[name=field_attribute\\[' + rownum + '\\] ] option[value="' + attributeVal + '"]').attr('selected', 'selected');
-
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' .default_type').val() === 'USER_DEFINED') {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' .default_type').siblings('.default_value').show();
     } else {
@@ -175,13 +169,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
         jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input[type!="hidden"],select').first().attr('name', jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name'));
       }
     });
-
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' .default_type').val() === 'USER_DEFINED') {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' .default_type').attr('name', 'col_default_sel');
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' .default_value').attr('name', 'col_default_val');
     }
-
     var datastring = jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' :input').serialize();
     jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       type: 'POST',
@@ -202,7 +194,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td[name=col_extra] span').text(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' input[name=col_extra]').is(':checked') ? 'auto_increment' : '').html();
           jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td[name=col_default] span').text(jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' :input[name=col_default]').val()).html();
         }
-
         jquery__WEBPACK_IMPORTED_MODULE_0__('#save_' + rownum).hide();
         jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_' + rownum).show();
         jquery__WEBPACK_IMPORTED_MODULE_0__('#f_' + rownum + ' td span').show();
@@ -225,7 +216,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
       'selectedTable': selectValue
     };
     jquery__WEBPACK_IMPORTED_MODULE_0__('#column-select').html('<option value="">' + window.Messages.strLoading + '</option>');
-
     if (selectValue !== '') {
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(href, params, function (data) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#column-select').empty().append(defaultColumnSelect);
@@ -235,7 +225,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_column').on('submit', function (e) {
     var selectvalue = jquery__WEBPACK_IMPORTED_MODULE_0__('#column-select').val();
-
     if (selectvalue === '') {
       e.preventDefault();
       e.stopPropagation();
@@ -244,7 +233,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
   jquery__WEBPACK_IMPORTED_MODULE_0__('#add_col_div').find('>a').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#add_new').slideToggle('slow');
     var $addColDivLinkSpan = jquery__WEBPACK_IMPORTED_MODULE_0__('#add_col_div').find('>a span');
-
     if ($addColDivLinkSpan.html() === '+') {
       $addColDivLinkSpan.html('-');
     } else {

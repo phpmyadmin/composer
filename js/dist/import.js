@@ -24,8 +24,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* global themeImagePath */
-// templates/javascript/variables.twig
+
+/* global themeImagePath */ // templates/javascript/variables.twig
 
 /**
  * Functions used in the import tab
@@ -36,7 +36,6 @@ __webpack_require__.r(__webpack_exports__);
  * Toggles the hiding and showing of each plugin's options
  * according to the currently selected plugin from the dropdown list
  */
-
 function changePluginOpts() {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#format_specific_opts').find('div.format_specific_options').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).hide();
@@ -45,42 +44,36 @@ function changePluginOpts() {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#' + selectedPluginName + '_options').fadeIn('slow');
   const importNotification = document.getElementById('import_notification');
   importNotification.innerText = '';
-
   if (selectedPluginName === 'csv') {
     importNotification.innerHTML = '<div class="alert alert-info mb-0 mt-3" role="alert">' + window.Messages.strImportCSV + '</div>';
   }
 }
+
 /**
  * Toggles the hiding and showing of each plugin's options and sets the selected value
  * in the plugin dropdown list according to the format of the selected file
  *
  * @param {string} fname
  */
-
-
 function matchFile(fname) {
   var fnameArray = fname.toLowerCase().split('.');
   var len = fnameArray.length;
-
   if (len !== 0) {
     var extension = fnameArray[len - 1];
-
     if (extension === 'gz' || extension === 'bz2' || extension === 'zip') {
       len--;
-    } // Only toggle if the format of the file can be imported
-
-
+    }
+    // Only toggle if the format of the file can be imported
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('select[name=\'format\'] option').filterByValue(fnameArray[len - 1]).length === 1) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('select[name=\'format\'] option').filterByValue(fnameArray[len - 1]).prop('selected', true);
       changePluginOpts();
     }
   }
 }
+
 /**
  * Unbind all event handlers before tearing down a page
  */
-
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('import.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').off('change');
@@ -98,21 +91,19 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
     var fileMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strImportDialogMessage + '</div>';
     var wrongTblNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strTableNameDialogMessage + '</div>';
     var wrongDBNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strDBNameDialogMessage + '</div>';
-
     if (radioLocalImport.length !== 0) {
       // remote upload.
+
       if (radioImport.hasClass('active') && jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#input_import_file').trigger('focus');
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
         return false;
       }
-
       if (radioLocalImport.hasClass('active')) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').length === 0) {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
           return false;
         }
-
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').val() === '') {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').trigger('focus');
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
@@ -126,33 +117,31 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
         return false;
       }
-
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_tbl_name').length > 0) {
         var newTblName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_tbl_name').val();
-
         if (newTblName.length > 0 && newTblName.trim().length === 0) {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongTblNameMsg, false);
           return false;
         }
       }
-
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_db_name').length > 0) {
         var newDBName = jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_new_db_name').val();
-
         if (newDBName.length > 0 && newDBName.trim().length === 0) {
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongDBNameMsg, false);
           return false;
         }
       }
-    } // show progress bar.
+    }
 
-
+    // show progress bar.
     jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status').css('display', 'inline');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status_info').css('display', 'inline');
-  }); // Initially display the options for the selected plugin
+  });
 
-  changePluginOpts(); // Whenever the selected plugin changes, change the options displayed
+  // Initially display the options for the selected plugin
+  changePluginOpts();
 
+  // Whenever the selected plugin changes, change the options displayed
   jquery__WEBPACK_IMPORTED_MODULE_0__('#plugins').on('change', function () {
     changePluginOpts();
   });
@@ -162,25 +151,24 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
   jquery__WEBPACK_IMPORTED_MODULE_0__('#select_local_import_file').on('change', function () {
     matchFile(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val());
   });
+
   /**
    * Set up the interface for Javascript-enabled browsers since the default is for
    *  Javascript-disabled browsers
    */
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#format_specific_opts').find('div.format_specific_options').find('h3').remove(); // $("form[name=import] *").unwrap();
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#format_specific_opts').find('div.format_specific_options').find('h3').remove();
+  // $("form[name=import] *").unwrap();
 
   /**
    * for input element text_csv_enclosed and text_csv_escaped allow just one character to enter.
    * as mysql allows just one character for these fields,
    * if first character is escape then allow two including escape character.
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#text_csv_enclosed').add('#text_csv_escaped').on('keyup', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().length === 2 && jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().charAt(0) !== '\\') {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).val(jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().substring(0, 1));
       return false;
     }
-
     return true;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain #buttonGo').on('click', function () {
@@ -189,7 +177,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
     const handler = uploadProgressInfo.dataset.handler;
     jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_form').css('display', 'none');
     const clockImage = '<img src="' + themeImagePath + 'ajax_clock_small.gif" width="16" height="16" alt="ajax clock">';
-
     if (handler !== 'PhpMyAdmin\\Plugins\\Import\\Upload\\UploadNoplugin') {
       var finished = false;
       var percent = 0.0;
@@ -197,7 +184,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
       var complete = 0;
       var originalTitle = parent && parent.document ? parent.document.title : false;
       var importStart;
-
       var performUpload = function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__.getJSON('index.php?route=/import-status', {
           'id': uploadId,
@@ -208,7 +194,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
           percent = response.percent;
           total = response.total;
           complete = response.complete;
-
           if (total === 0 && complete === 0 && percent === 0) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status_info').html(clockImage + ' ' + window.Messages.uploadProgressMaximumAllowedSize);
             jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_form_status').css('display', 'none');
@@ -216,7 +201,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
             var now = new Date();
             now = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()) + now.getMilliseconds() - 1000;
             var statusText = window.sprintf(window.Messages.uploadProgressStatusText, _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.formatBytes(complete, 1, window.Messages.strDecimalSeparator), _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.formatBytes(total, 1, window.Messages.strDecimalSeparator));
-
             if (jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').is(':visible')) {
               // Show progress UI
               jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').hide();
@@ -231,40 +215,35 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
               var minutes = parseInt(seconds / 60);
               seconds %= 60;
               var estimatedTime;
-
               if (minutes > 0) {
                 estimatedTime = window.Messages.uploadProgressRemainingMin.replace('%MIN', minutes).replace('%SEC', seconds);
               } else {
                 estimatedTime = window.Messages.uploadProgressRemainingSec.replace('%SEC', seconds);
               }
-
               statusText += '<br>' + speed + '<br><br>' + estimatedTime;
             }
-
             var percentString = Math.round(percent) + '%';
             jquery__WEBPACK_IMPORTED_MODULE_0__('#status').animate({
               width: percentString
             }, 150);
-            jquery__WEBPACK_IMPORTED_MODULE_0__('.percentage').text(percentString); // Show percent in window title
+            jquery__WEBPACK_IMPORTED_MODULE_0__('.percentage').text(percentString);
 
+            // Show percent in window title
             if (originalTitle !== false) {
               parent.document.title = percentString + ' - ' + originalTitle;
             } else {
               document.title = percentString + ' - ' + originalTitle;
             }
-
             jquery__WEBPACK_IMPORTED_MODULE_0__('#statustext').html(statusText);
           }
-
           if (finished) {
             if (originalTitle !== false) {
               parent.document.title = originalTitle;
             } else {
               document.title = originalTitle;
             }
-
-            jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').hide(); // Loads the message, either success or mysql error
-
+            jquery__WEBPACK_IMPORTED_MODULE_0__('#importmain').hide();
+            // Loads the message, either success or mysql error
             jquery__WEBPACK_IMPORTED_MODULE_0__('#import_form_status').html(clockImage + ' ' + window.Messages.uploadProgressBeingProcessed).show();
             jquery__WEBPACK_IMPORTED_MODULE_0__('#import_form_status').load('index.php?route=/import-status&message=1&import_status=1&server=' + _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'));
             _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
@@ -273,7 +252,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
           }
         });
       };
-
       setTimeout(performUpload, 1000);
     } else {
       // No plugin available

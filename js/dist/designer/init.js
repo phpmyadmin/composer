@@ -16,24 +16,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  * Initializes the data required to run Designer, then fires it up.
  */
 
-/* global DesignerOfflineDB */
-// js/designer/database.js
-
-/* global DesignerHistory */
-// js/designer/history.js
-
-/* global DesignerMove */
-// js/designer/move.js
-
-/* global DesignerPage */
-// js/designer/page.js
-
-/* global designerConfig */
-// templates/database/designer/main.twig
+/* global DesignerOfflineDB */ // js/designer/database.js
+/* global DesignerHistory */ // js/designer/history.js
+/* global DesignerMove */ // js/designer/move.js
+/* global DesignerPage */ // js/designer/page.js
+/* global designerConfig */ // templates/database/designer/main.twig
 
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.trigger').off('click');
@@ -54,7 +46,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
   window.db = designerConfig.db;
   window.designerTablesEnabled = designerConfig.tablesEnabled;
   DesignerMove.main();
-
   if (!window.designerTablesEnabled) {
     DesignerOfflineDB.open(function (success) {
       if (success) {
@@ -62,7 +53,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
       }
     });
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#query_Aggregate_Button').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#query_Aggregate').css('display', 'none');
   });

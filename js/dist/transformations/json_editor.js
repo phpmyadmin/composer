@@ -16,12 +16,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  * JSON syntax highlighting transformation plugin
  *
  * @package PhpMyAdmin
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/json_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_json_editor').each(function () {
     window.CodeMirror.fromTextArea(this, {

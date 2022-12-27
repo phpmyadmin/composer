@@ -16,17 +16,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
 
 
+
 /**
  * Functions used in Setup configuration forms
  */
-// show this window in top frame
 
+// show this window in top frame
 if (top !== self) {
   window.top.location.href = location;
-} // ------------------------------------------------------------------
+}
+
+// ------------------------------------------------------------------
 // Messages
 //
-
 
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
   if (window.location.protocol === 'https:') {
@@ -38,9 +40,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
       return false;
     });
   }
-
   var hiddenMessages = jquery__WEBPACK_IMPORTED_MODULE_0__('.hiddenmessage');
-
   if (hiddenMessages.length > 0) {
     hiddenMessages.hide();
     var link = jquery__WEBPACK_IMPORTED_MODULE_0__('#show_hidden_messages');
@@ -52,8 +52,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     link.html(link.html().replace('#MSG_COUNT', hiddenMessages.length));
     link.show();
   }
-}); // set document width
+});
 
+// set document width
 jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
   var width = 0;
   jquery__WEBPACK_IMPORTED_MODULE_0__('ul.tabs li').each(function () {
@@ -63,9 +64,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
   width += 250;
   jquery__WEBPACK_IMPORTED_MODULE_0__('body').css('min-width', width);
   jquery__WEBPACK_IMPORTED_MODULE_0__('.tabs_contents').css('min-width', contentWidth);
-}); //
+});
+
+//
 // END: Messages
 // ------------------------------------------------------------------
+
 // ------------------------------------------------------------------
 // Form validation and field operations
 //
@@ -79,22 +83,18 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
  *
  * @return {bool|void}
  */
-
 function ajaxValidate(parent, id, values) {
-  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0__(parent); // ensure that parent is a fieldset
-
+  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0__(parent);
+  // ensure that parent is a fieldset
   if ($parent.attr('tagName') !== 'FIELDSET') {
     $parent = $parent.closest('fieldset');
-
     if ($parent.length === 0) {
       return false;
     }
   }
-
   if ($parent.data('ajax') !== null) {
     $parent.data('ajax').abort();
   }
-
   $parent.data('ajax', jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     url: '../setup/index.php?route=/setup/validate',
     cache: false,
@@ -108,9 +108,7 @@ function ajaxValidate(parent, id, values) {
       if (response === null) {
         return;
       }
-
       var error = {};
-
       if (typeof response !== 'object') {
         error[$parent.id] = [response];
       } else if (typeof response.error !== 'undefined') {
@@ -121,7 +119,6 @@ function ajaxValidate(parent, id, values) {
           error[key] = Array.isArray(value) ? value : [value];
         }
       }
-
       _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.displayErrors(error);
     },
     complete: function () {
@@ -130,11 +127,10 @@ function ajaxValidate(parent, id, values) {
   }));
   return true;
 }
+
 /**
  * Automatic form submission on change.
  */
-
-
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '.autosubmit', function (e) {
   e.target.form.submit();
 });
@@ -155,10 +151,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
         data[this.id] = this.value;
         ajaxValidate(this, 'Servers/1/hide_db', data);
       }
-
       return true;
     },
-
     /**
      * TrustedProxies field
      *
@@ -172,7 +166,6 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
         data[this.id] = this.value;
         ajaxValidate(this, 'TrustedProxies', data);
       }
-
       return true;
     }
   },
@@ -189,10 +182,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
       if (!isKeyUp) {
         ajaxValidate(this, 'Server', _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getAllValues());
       }
-
       return true;
     },
-
     /**
      * Validates Server_login_options fieldset
      *
@@ -204,7 +195,6 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
       // eslint-disable-line camelcase
       return window.validators.fieldset.Server.apply(this, [isKeyUp]);
     },
-
     /**
      * Validates Server_pmadb fieldset
      *
@@ -217,19 +207,19 @@ jquery__WEBPACK_IMPORTED_MODULE_0__.extend(true, window.validators, {
       if (isKeyUp) {
         return true;
       }
-
       var prefix = _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getIdPrefix(jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input'));
-
       if (jquery__WEBPACK_IMPORTED_MODULE_0__('#' + prefix + 'pmadb').val() !== '') {
         ajaxValidate(this, 'Server_pmadb', _modules_config_js__WEBPACK_IMPORTED_MODULE_1__.Config.getAllValues());
       }
-
       return true;
     }
   }
-}); //
+});
+
+//
 // END: Form validation and field operations
 // ------------------------------------------------------------------
+
 // ------------------------------------------------------------------
 // User preferences allow/disallow UI
 //
@@ -239,16 +229,15 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(function () {
     if (this !== e.target) {
       return;
     }
-
     var el = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('input');
-
     if (el.prop('disabled')) {
       return;
     }
-
     el.prop('checked', !el.prop('checked'));
   });
-}); //
+});
+
+//
 // END: User preferences allow/disallow UI
 // ------------------------------------------------------------------
 

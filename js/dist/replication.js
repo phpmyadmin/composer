@@ -22,6 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    Javascript functions used in server replication page
  * @name            Server Replication
@@ -31,12 +32,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var randomServerId = Math.floor(Math.random() * 10000000);
 var confPrefix = 'server-id=' + randomServerId + '\nlog_bin=mysql-bin\nlog_error=mysql-bin.err\n';
-
 function updateConfig() {
   var confIgnore = 'binlog_ignore_db=';
   var confDo = 'binlog_do_db=';
   var databaseList = '';
-
   if (jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select option:selected').length === 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#rep').text(confPrefix);
   } else if (jquery__WEBPACK_IMPORTED_MODULE_0__('#db_type option:selected').val() === 'all') {
@@ -51,11 +50,10 @@ function updateConfig() {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#rep').text(confPrefix + databaseList);
   }
 }
+
 /**
  * Unbind all event handlers before tearing down a page
  */
-
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('replication.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_type').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#db_select').off('change');

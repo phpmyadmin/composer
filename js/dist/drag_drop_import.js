@@ -20,39 +20,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* This script handles PMA Drag Drop Import, loaded only when configuration is enabled.*/
 
 /**
  * Class to handle PMA Drag and Drop Import
  *      feature
  */
-
 var DragDropImport = {
   /**
    * @var {number}, count of total uploads in this view
    */
   uploadCount: 0,
-
   /**
    * @var {number}, count of live uploads
    */
   liveUploadCount: 0,
-
   /**
    * @var {string[]} array, allowed extensions
    */
   allowedExtensions: ['sql', 'xml', 'ldi', 'mediawiki', 'shp'],
-
   /**
    * @var {string[]} array, allowed extensions for compressed files
    */
   allowedCompressedExtensions: ['gz', 'bz2', 'zip'],
-
   /**
    * @var {object[]}, array to store message returned by /import-status
    */
   importStatus: [],
-
   /**
    * Checks if any dropped file has valid extension or not
    *
@@ -62,20 +57,19 @@ var DragDropImport = {
    */
   getExtension: function (file) {
     var arr = file.split('.');
-    var ext = arr[arr.length - 1]; // check if compressed
+    var ext = arr[arr.length - 1];
 
+    // check if compressed
     if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(ext.toLowerCase(), DragDropImport.allowedCompressedExtensions) !== -1) {
       ext = arr[arr.length - 2];
-    } // Now check for extension
+    }
 
-
+    // Now check for extension
     if (jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(ext.toLowerCase(), DragDropImport.allowedExtensions) !== -1) {
       return ext;
     }
-
     return '';
   },
-
   /**
    * Shows upload progress for different sql uploads
    *
@@ -87,7 +81,6 @@ var DragDropImport = {
   setProgress: function (hash, percent) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').children('progress').val(percent);
   },
-
   /**
    * Function to upload the file asynchronously
    *
@@ -100,22 +93,18 @@ var DragDropImport = {
     var jqXHR = jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
       xhr: function () {
         var xhrobj = jquery__WEBPACK_IMPORTED_MODULE_0__.ajaxSettings.xhr();
-
         if (xhrobj.upload) {
           xhrobj.upload.addEventListener('progress', function (event) {
             var percent = 0;
             var position = event.loaded || event.position;
             var total = event.total;
-
             if (event.lengthComputable) {
               percent = Math.ceil(position / total * 100);
-            } // Set progress
-
-
+            }
+            // Set progress
             DragDropImport.setProgress(hash, percent);
           }, false);
         }
-
         return xhrobj;
       },
       url: 'index.php?route=/import',
@@ -126,7 +115,6 @@ var DragDropImport = {
       data: formData,
       success: function (data) {
         DragDropImport.importFinished(hash, false, data.success);
-
         if (!data.success) {
           DragDropImport.importStatus[DragDropImport.importStatus.length] = {
             hash: hash,
@@ -134,10 +122,12 @@ var DragDropImport = {
           };
         }
       }
-    }); // -- provide link to cancel the upload
+    });
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize').html('<span hash="' + hash + '" class="pma_drop_file_status" task="cancel">' + window.Messages.dropImportMessageCancel + '</span>'); // -- add event listener to this link to abort upload operation
+    // -- provide link to cancel the upload
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize').html('<span hash="' + hash + '" class="pma_drop_file_status" task="cancel">' + window.Messages.dropImportMessageCancel + '</span>');
 
+    // -- add event listener to this link to abort upload operation
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').on('click', function () {
       if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('task') === 'cancel') {
         jqXHR.abort();
@@ -171,23 +161,18 @@ var DragDropImport = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('.noDragDrop').length !== 0) {
       return;
     }
-
     event.stopPropagation();
     event.preventDefault();
-
     if (!DragDropImport.hasFiles(event)) {
       return;
     }
-
     if (_modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db') === '') {
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').html(window.Messages.dropImportSelectDB);
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').html(window.Messages.dropImportDropFiles);
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').fadeIn();
   },
-
   /**
    * Check if dragged element contains Files
    *
@@ -198,7 +183,6 @@ var DragDropImport = {
   hasFiles: function (event) {
     return !(typeof event.originalEvent.dataTransfer.types === 'undefined' || jquery__WEBPACK_IMPORTED_MODULE_0__.inArray('Files', event.originalEvent.dataTransfer.types) < 0 || jquery__WEBPACK_IMPORTED_MODULE_0__.inArray('application/x-moz-nativeimage', event.originalEvent.dataTransfer.types) >= 0);
   },
-
   /**
    * Triggered when dragged file is being dragged over PMA UI
    *
@@ -212,17 +196,13 @@ var DragDropImport = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('.noDragDrop').length !== 0) {
       return;
     }
-
     event.stopPropagation();
     event.preventDefault();
-
     if (!DragDropImport.hasFiles(event)) {
       return;
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').fadeIn();
   },
-
   /**
    * Triggered when dragged objects are left
    *
@@ -236,7 +216,6 @@ var DragDropImport = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('.noDragDrop').length !== 0) {
       return;
     }
-
     event.stopPropagation();
     event.preventDefault();
     var $dropHandler = jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler');
@@ -244,7 +223,6 @@ var DragDropImport = {
     $dropHandler.fadeOut();
     $dropHandler.html(window.Messages.dropImportDropFiles);
   },
-
   /**
    * Called when upload has finished
    *
@@ -256,8 +234,8 @@ var DragDropImport = {
    */
   importFinished: function (hash, aborted, status) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').children('progress').hide();
-    var icon = 'icon ic_s_success'; // -- provide link to view upload status
-
+    var icon = 'icon ic_s_success';
+    // -- provide link to view upload status
     if (!aborted) {
       if (status) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').html('<span>' + window.Messages.dropImportMessageSuccess + '</a>');
@@ -268,18 +246,17 @@ var DragDropImport = {
     } else {
       icon = 'icon ic_s_notice';
     }
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').attr('task', 'info');
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"] span.filesize span.pma_drop_file_status').attr('task', 'info'); // Set icon
+    // Set icon
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').prepend('<img src="./themes/dot.gif" title="finished" class="' + icon + '"> ');
 
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').prepend('<img src="./themes/dot.gif" title="finished" class="' + icon + '"> '); // Decrease liveUploadCount by one
-
+    // Decrease liveUploadCount by one
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_import_count').html(--DragDropImport.liveUploadCount);
-
     if (!DragDropImport.liveUploadCount) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status h2 .close').fadeIn();
     }
   },
-
   /**
    * Triggered when dragged objects are dropped to UI
    * From this function, the AJAX Upload operation is initiated
@@ -294,13 +271,12 @@ var DragDropImport = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('.noDragDrop').length !== 0) {
       return;
     }
-
     var dbname = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db');
-    var server = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'); // if no database is selected -- no
+    var server = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
 
+    // if no database is selected -- no
     if (dbname !== '') {
       var files = event.originalEvent.dataTransfer.files;
-
       if (!files || files.length === 0) {
         // No files actually transferred
         jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').fadeOut();
@@ -308,68 +284,70 @@ var DragDropImport = {
         event.preventDefault();
         return;
       }
-
       jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status').slideDown();
-
       for (var i = 0; i < files.length; i++) {
         var ext = DragDropImport.getExtension(files[i].name);
         var hash = _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.hash(++DragDropImport.uploadCount);
         var $sqlImportStatusDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div');
-        $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '<span class="filesize" data-filename="' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>'); // scroll the UI to bottom
+        $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '<span class="filesize" data-filename="' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>');
 
+        // scroll the UI to bottom
         $sqlImportStatusDiv.scrollTop($sqlImportStatusDiv.scrollTop() + 50); // 50 hardcoded for now
 
         if (ext !== '') {
           // Increment liveUploadCount by one
           jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_import_count').html(++DragDropImport.liveUploadCount);
           jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status h2 .close').fadeOut();
-          jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').append('<br><progress max="100" value="2"></progress>'); // uploading
+          jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div li[data-hash="' + hash + '"]').append('<br><progress max="100" value="2"></progress>');
 
+          // uploading
           var fd = new FormData();
           fd.append('import_file', files[i]);
           fd.append('noplugin', Math.random().toString(36).substring(2, 12));
           fd.append('db', dbname);
           fd.append('server', server);
           fd.append('token', _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('token'));
-          fd.append('import_type', 'database'); // todo: method to find the value below
-
-          fd.append('MAX_FILE_SIZE', '4194304'); // todo: method to find the value below
-
-          fd.append('charset_of_file', 'utf-8'); // todo: method to find the value below
-
+          fd.append('import_type', 'database');
+          // todo: method to find the value below
+          fd.append('MAX_FILE_SIZE', '4194304');
+          // todo: method to find the value below
+          fd.append('charset_of_file', 'utf-8');
+          // todo: method to find the value below
           fd.append('allow_interrupt', 'yes');
           fd.append('skip_queries', '0');
           fd.append('format', ext);
           fd.append('sql_compatibility', 'NONE');
           fd.append('sql_no_auto_value_on_zero', 'something');
           fd.append('ajax_request', 'true');
-          fd.append('hash', hash); // init uploading
+          fd.append('hash', hash);
 
+          // init uploading
           DragDropImport.sendFileToServer(fd, hash);
         } else if (!DragDropImport.liveUploadCount) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status h2 .close').fadeIn();
         }
       }
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_handler').fadeOut();
     event.stopPropagation();
     event.preventDefault();
   }
 };
+
 /**
  * Called when some user drags, dragover, leave
  *       a file to the PMA UI
  * @param {object}, Event data
  * @return {void}
  */
-
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dragenter', DragDropImport.dragEnter);
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dragover', DragDropImport.dragOver);
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dragleave', '.pma_drop_handler', DragDropImport.dragLeave); // when file is dropped to PMA UI
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('dragleave', '.pma_drop_handler', DragDropImport.dragLeave);
 
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('drop', 'body', DragDropImport.drop); // minimizing-maximizing the sql ajax upload status
+// when file is dropped to PMA UI
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('drop', 'body', DragDropImport.drop);
 
+// minimizing-maximizing the sql ajax upload status
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.pma_sql_import_status h2 .minimize', function () {
   if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('toggle') === 'off') {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div').css('height', '270px');
@@ -380,15 +358,17 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.pma_sql_import_statu
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('toggle', 'off');
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).html('+'); // to maximise
   }
-}); // closing sql ajax upload status
+});
 
+// closing sql ajax upload status
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.pma_sql_import_status h2 .close', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status').fadeOut(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_sql_import_status div').html('');
     DragDropImport.importStatus = []; // clear the message array
   });
-}); // Closing the import result box
+});
 
+// Closing the import result box
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '.pma_drop_result h2 .close', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent('h2').parent('div').remove();
 });

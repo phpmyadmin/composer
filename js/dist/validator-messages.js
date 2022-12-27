@@ -14,7 +14,6 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-
 function extendingValidatorMessages() {
   jquery__WEBPACK_IMPORTED_MODULE_0__.extend(jquery__WEBPACK_IMPORTED_MODULE_0__.validator.messages, {
     required: window.Messages.strValidatorRequired,
@@ -39,7 +38,6 @@ function extendingValidatorMessages() {
     validationFunctionForAesDesEncrypt: jquery__WEBPACK_IMPORTED_MODULE_0__.validator.format(window.Messages.strValidationFunctionForAesDesEncrypt)
   });
 }
-
 window.extendingValidatorMessages = extendingValidatorMessages;
 
 /***/ })

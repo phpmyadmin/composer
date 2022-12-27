@@ -23,22 +23,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // TODO: change the axis
 
+
+// TODO: change the axis
 /**
  * @fileoverview JavaScript functions used on /table/search
  **/
 
 /* global Sql */
-
-/* global changeValueFieldType, verifyAfterSearchFieldChange */
-// js/table/change.js
+/* global changeValueFieldType, verifyAfterSearchFieldChange */ // js/table/change.js
 
 /**
  *  Display Help/Info
  * @return {false}
  **/
-
 function displayHelp() {
   var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#helpModal');
   modal.modal('show');
@@ -46,60 +44,53 @@ function displayHelp() {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#helpModalLabel').first().html(window.Messages.strHelpTitle);
   return false;
 }
+
 /**
  * Extend the array object for max function
  * @param {number[]} array
  * @return {int}
  **/
-
-
 Array.max = function (array) {
   return Math.max.apply(Math, array);
 };
+
 /**
  * Extend the array object for min function
  * @param {number[]} array
  * @return {int}
  **/
-
-
 Array.min = function (array) {
   return Math.min.apply(Math, array);
 };
+
 /**
  * Checks if a string contains only numeric value
  * @param {string} n (to be checked)
  * @return {bool}
  **/
-
-
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
 /**
  ** Checks if an object is empty
  * @param {object} obj (to be checked)
  * @return {bool}
  **/
-
-
 function isEmpty(obj) {
   var name;
-
   for (name in obj) {
     return false;
   }
-
   return true;
 }
+
 /**
  * Converts a date/time into timestamp
  * @param {string} val Date
  * @param {string} type Field type(datetime/timestamp/time/date)
  * @return {any} A value
  **/
-
-
 function getTimeStamp(val, type) {
   if (type.toString().search(/datetime/i) !== -1 || type.toString().search(/timestamp/i) !== -1) {
     return jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', val);
@@ -109,13 +100,12 @@ function getTimeStamp(val, type) {
     return jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.parseDate('yy-mm-dd', val);
   }
 }
+
 /**
  * Classifies the field type into numeric,timeseries or text
  * @param {object} field field type (as in database structure)
  * @return {'text'|'numeric'|'time'}
  **/
-
-
 function getType(field) {
   if (field.toString().search(/int/i) !== -1 || field.toString().search(/decimal/i) !== -1 || field.toString().search(/year/i) !== -1) {
     return 'numeric';
@@ -125,11 +115,10 @@ function getType(field) {
     return 'text';
   }
 }
+
 /**
  * Unbind all event handlers before tearing down a page
  */
-
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/zoom_plot_jqplot.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').off('change');
@@ -146,21 +135,21 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
   var currentChart = null;
   var searchedDataKey = null;
   var xLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').val();
-  var yLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').val(); // will be updated via Ajax
-
+  var yLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').val();
+  // will be updated via Ajax
   var xType = jquery__WEBPACK_IMPORTED_MODULE_0__('#types_0').val();
   var yType = jquery__WEBPACK_IMPORTED_MODULE_0__('#types_1').val();
-  var dataLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#dataLabel').val(); // Get query result
+  var dataLabel = jquery__WEBPACK_IMPORTED_MODULE_0__('#dataLabel').val();
 
+  // Get query result
   var searchedData;
-
   try {
     searchedData = JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0__('#querydata').html());
   } catch (err) {
     searchedData = null;
-  } // adding event listener on select after AJAX request
+  }
 
-
+  // adding event listener on select after AJAX request
   var comparisonOperatorOnChange = function () {
     var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0__('#inputSection select.column-operator');
     jquery__WEBPACK_IMPORTED_MODULE_0__.each(tableRows, function (index, item) {
@@ -170,12 +159,12 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
       });
     });
   };
+
   /**
    ** Input form submit on field change
    **/
+
   // first column choice corresponds to the X axis
-
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
@@ -198,8 +187,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
       comparisonOperatorOnChange();
       _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
-  }); // second column choice corresponds to the Y axis
+  });
 
+  // second column choice corresponds to the Y axis
   jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/table/zoom-search', {
@@ -265,10 +255,10 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
       _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.addDateTimePicker();
     });
   });
+
   /**
    * Input form validation
    **/
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#inputFormSubmitId').on('click', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_0').get(0).selectedIndex === 0 || jquery__WEBPACK_IMPORTED_MODULE_0__('#tableid_1').get(0).selectedIndex === 0) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strInputNull);
@@ -276,57 +266,50 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSameInputs);
     }
   });
+
   /**
    ** Prepare a div containing a link, otherwise it's incorrectly displayed
    ** after a couple of clicks
    **/
-
-  jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#zoom_search_form') // don't show it until we have results on-screen
+  jquery__WEBPACK_IMPORTED_MODULE_0__('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#zoom_search_form')
+  // don't show it until we have results on-screen
   .hide();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#zoom_search_form').slideToggle();
-
     if ($link.text() === window.Messages.strHideSearchCriteria) {
       $link.text(window.Messages.strShowSearchCriteria);
     } else {
       $link.text(window.Messages.strHideSearchCriteria);
-    } // avoid default click action
-
-
+    }
+    // avoid default click action
     return false;
   });
+
   /**
    * Handle saving of a row in the editor
    */
-
   var dataPointSave = function () {
     // Find changed values by comparing form values with selectedRow Object
     var newValues = {}; // Stores the values changed from original
-
     var sqlTypes = {};
     var it = 0;
     var xChange = false;
     var yChange = false;
     var key;
-
     var tempGetVal = function () {
       return jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
     };
-
     for (key in selectedRow) {
       var oldVal = selectedRow[key];
       var newVal = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fields_null_id_' + it).prop('checked') ? null : jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fieldID_' + it).val();
-
       if (newVal instanceof Array) {
         // when the column is of type SET
         newVal = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fieldID_' + it).map(tempGetVal).get().join(',');
       }
-
       if (oldVal !== newVal) {
         selectedRow[key] = newVal;
         newValues[key] = newVal;
-
         if (key === xLabel) {
           xChange = true;
           searchedData[searchedDataKey][xLabel] = newVal;
@@ -335,76 +318,76 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
           searchedData[searchedDataKey][yLabel] = newVal;
         }
       }
-
       var $input = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fieldID_' + it);
-
       if ($input.hasClass('bit')) {
         sqlTypes[key] = 'bit';
       } else {
         sqlTypes[key] = null;
       }
-
       it++;
     } // End data update
+
     // Update the chart series and replot
-
-
     if (xChange || yChange) {
       // Logic similar to plot generation, replot only if xAxis changes or yAxis changes.
       // Code includes a lot of checks so as to replot only when necessary
       if (xChange) {
-        xCord[searchedDataKey] = selectedRow[xLabel]; // [searchedDataKey][0] contains the x value
-
+        xCord[searchedDataKey] = selectedRow[xLabel];
+        // [searchedDataKey][0] contains the x value
         if (xType === 'numeric') {
           series[0][searchedDataKey][0] = selectedRow[xLabel];
         } else if (xType === 'time') {
           series[0][searchedDataKey][0] = getTimeStamp(selectedRow[xLabel], jquery__WEBPACK_IMPORTED_MODULE_0__('#types_0').val());
         } else {
-          series[0][searchedDataKey][0] = ''; // TODO: text values
+          series[0][searchedDataKey][0] = '';
+          // TODO: text values
         }
 
-        currentChart.series[0].data = series[0]; // TODO: axis changing
-
+        currentChart.series[0].data = series[0];
+        // TODO: axis changing
         currentChart.replot();
       }
-
       if (yChange) {
-        yCord[searchedDataKey] = selectedRow[yLabel]; // [searchedDataKey][1] contains the y value
-
+        yCord[searchedDataKey] = selectedRow[yLabel];
+        // [searchedDataKey][1] contains the y value
         if (yType === 'numeric') {
           series[0][searchedDataKey][1] = selectedRow[yLabel];
         } else if (yType === 'time') {
           series[0][searchedDataKey][1] = getTimeStamp(selectedRow[yLabel], jquery__WEBPACK_IMPORTED_MODULE_0__('#types_1').val());
         } else {
-          series[0][searchedDataKey][1] = ''; // TODO: text values
+          series[0][searchedDataKey][1] = '';
+          // TODO: text values
         }
 
-        currentChart.series[0].data = series[0]; // TODO: axis changing
-
+        currentChart.series[0].data = series[0];
+        // TODO: axis changing
         currentChart.replot();
       }
     } // End plot update
+
     // Generate SQL query for update
-
-
     if (!isEmpty(newValues)) {
       var sqlQuery = 'UPDATE `' + _modules_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` SET ';
-
       for (key in newValues) {
         sqlQuery += '`' + key + '`=';
-        var value = newValues[key]; // null
+        var value = newValues[key];
 
+        // null
         if (value === null) {
-          sqlQuery += 'NULL, '; // empty
+          sqlQuery += 'NULL, ';
+
+          // empty
         } else if (value.trim() === '') {
-          sqlQuery += '\'\', '; // other
+          sqlQuery += '\'\', ';
+
+          // other
         } else {
           // type explicitly identified
           if (sqlTypes[key] !== null) {
             if (sqlTypes[key] === 'bit') {
               sqlQuery += 'b\'' + value + '\', ';
-            } // type not explicitly identified
-
+            }
+            // type not explicitly identified
           } else {
             if (!isNumeric(value)) {
               sqlQuery += '\'' + value + '\', ';
@@ -413,9 +396,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
             }
           }
         }
-      } // remove two extraneous characters ', '
-
-
+      }
+      // remove two extraneous characters ', '
       sqlQuery = sqlQuery.substring(0, sqlQuery.length - 2);
       sqlQuery += ' WHERE ' + Sql.urlDecode(searchedData[searchedDataKey].where_clause);
       jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/sql', {
@@ -433,29 +415,28 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
         }
       }); // End $.post
     } // End database update
-
   };
 
   jquery__WEBPACK_IMPORTED_MODULE_0__('#dataPointSaveButton').on('click', function () {
     dataPointSave();
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#dataPointModalLabel').first().html(window.Messages.strDataPointContent);
+
   /**
    * Attach Ajax event handlers for input fields
    * in the dialog. Used to submit the Ajax
    * request when the ENTER key is pressed.
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('keydown', '#dataDisplay :input', function (e) {
     if (e.which === 13) {
       // 13 is the ENTER key
       e.preventDefault();
-
       if (typeof dataPointSave === 'function') {
         dataPointSave();
       }
     }
   });
+
   /*
    * Generate plot using jqplot
    */
@@ -472,7 +453,8 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
     var yVal;
     var format;
     var options = {
-      series: [// for a scatter plot
+      series: [
+      // for a scatter plot
       {
         showLine: false
       }],
@@ -503,31 +485,30 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
         zoom: true,
         showTooltip: false
       }
-    }; // If data label is not set, do not show tooltips
+    };
 
+    // If data label is not set, do not show tooltips
     if (dataLabel === '') {
       options.highlighter.show = false;
-    } // Classify types as either numeric,time,text
+    }
 
-
+    // Classify types as either numeric,time,text
     xType = getType(xType);
-    yType = getType(yType); // could have multiple series but we'll have just one
+    yType = getType(yType);
 
+    // could have multiple series but we'll have just one
     series[0] = [];
-
     if (xType === 'time') {
       var originalXType = jquery__WEBPACK_IMPORTED_MODULE_0__('#types_0').val();
-
       if (originalXType === 'date') {
         format = '%Y-%m-%d';
-      } // TODO: does not seem to work
+      }
+      // TODO: does not seem to work
       // else if (originalXType === 'time') {
       //  format = '%H:%M';
       // } else {
       //    format = '%Y-%m-%d %H:%M';
       // }
-
-
       jquery__WEBPACK_IMPORTED_MODULE_0__.extend(options.axes.xaxis, {
         renderer: jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot.DateAxisRenderer,
         tickOptions: {
@@ -535,14 +516,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
         }
       });
     }
-
     if (yType === 'time') {
       var originalYType = jquery__WEBPACK_IMPORTED_MODULE_0__('#types_1').val();
-
       if (originalYType === 'date') {
         format = '%Y-%m-%d';
       }
-
       jquery__WEBPACK_IMPORTED_MODULE_0__.extend(options.axes.yaxis, {
         renderer: jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot.DateAxisRenderer,
         tickOptions: {
@@ -550,34 +528,34 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
         }
       });
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__.each(searchedData, function (key, value) {
       if (xType === 'numeric') {
         xVal = parseFloat(value[xLabel]);
       }
-
       if (xType === 'time') {
         xVal = getTimeStamp(value[xLabel], originalXType);
       }
-
       if (yType === 'numeric') {
         yVal = parseFloat(value[yLabel]);
       }
-
       if (yType === 'time') {
         yVal = getTimeStamp(value[yLabel], originalYType);
       }
-
-      series[0].push([xVal, yVal, // extra Y values
-      value[dataLabel], // for highlighter
+      series[0].push([xVal, yVal,
+      // extra Y values
+      value[dataLabel],
+      // for highlighter
       // (may set an undefined value)
-      value.where_clause, // for click on point
-      key, // key from searchedData
+      value.where_clause,
+      // for click on point
+      key,
+      // key from searchedData
       value.where_clause_sign]);
-    }); // under IE 8, the initial display is mangled; after a manual
+    });
+
+    // under IE 8, the initial display is mangled; after a manual
     // resizing, it's ok
     // under IE 9, everything is fine
-
     currentChart = jquery__WEBPACK_IMPORTED_MODULE_0__.jqplot('querychart', series, options);
     currentChart.resetZoom();
     jquery__WEBPACK_IMPORTED_MODULE_0__('button.button-reset').on('click', function (event) {
@@ -595,7 +573,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
     });
     jquery__WEBPACK_IMPORTED_MODULE_0__('div#querychart').on('jqplotDataClick', function (event, seriesIndex, pointIndex, data) {
       searchedDataKey = data[4]; // key from searchedData (global)
-
       var fieldId = 0;
       var postParams = {
         'ajax_request': true,
@@ -610,17 +587,14 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
         // Row is contained in data.row_info,
         // now fill the displayResultForm with row values
         var key;
-
         for (key in data.row_info) {
           var $field = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fieldID_' + fieldId);
           var $fieldNull = jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_fields_null_id_' + fieldId);
-
           if (data.row_info[key] === null) {
             $fieldNull.prop('checked', true);
             $field.val('');
           } else {
             $fieldNull.prop('checked', false);
-
             if ($field.attr('multiple')) {
               // when the column is of type SET
               $field.val(data.row_info[key].split(','));
@@ -628,16 +602,13 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_pl
               $field.val(data.row_info[key]);
             }
           }
-
           fieldId++;
         }
-
         selectedRow = data.row_info;
       });
       jquery__WEBPACK_IMPORTED_MODULE_0__('#dataPointModal').modal('show');
     });
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#help_dialog').on('click', function () {
     displayHelp();
   });

@@ -18,12 +18,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * SQL syntax highlighting transformation plugin js
  *
  * @package PhpMyAdmin
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/sql_editor.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('textarea.transform_sql_editor').each(function () {
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0__(this), {}, 'both');

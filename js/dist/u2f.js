@@ -20,7 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', function () {
   var $inputReg = jquery__WEBPACK_IMPORTED_MODULE_0__('#u2f_registration_response');
-
   if ($inputReg.length > 0) {
     var $formReg = $inputReg.parents('form');
     $formReg.find('input[type=submit]').hide();
@@ -34,36 +33,29 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', func
             case 5:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FTimeout, false, 'error');
               break;
-
             case 4:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FErrorRegister, false, 'error');
               break;
-
             case 3:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FInvalidClient, false, 'error');
               break;
-
             case 2:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FBadRequest, false, 'error');
               break;
-
             default:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FUnknown, false, 'error');
               break;
           }
-
           return;
-        } // Fill and submit form.
+        }
 
-
+        // Fill and submit form.
         $inputReg.val(JSON.stringify(data));
         $formReg.trigger('submit');
       });
     }, 1000);
   }
-
   var $inputAuth = jquery__WEBPACK_IMPORTED_MODULE_0__('#u2f_authentication_response');
-
   if ($inputAuth.length > 0) {
     var $formAuth = $inputAuth.parents('form');
     $formAuth.find('input[type=submit]').hide();
@@ -78,28 +70,23 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', func
             case 5:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FTimeout, false, 'error');
               break;
-
             case 4:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FErrorAuthenticate, false, 'error');
               break;
-
             case 3:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FInvalidClient, false, 'error');
               break;
-
             case 2:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FBadRequest, false, 'error');
               break;
-
             default:
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)(window.Messages.strU2FUnknown, false, 'error');
               break;
           }
-
           return;
-        } // Fill and submit form.
+        }
 
-
+        // Fill and submit form.
         $inputAuth.val(JSON.stringify(data));
         $formAuth.trigger('submit');
       });

@@ -16,6 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  *
  *
@@ -25,7 +26,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/status/variables.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterAlert').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterText').off('keyup');
@@ -40,7 +40,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   var text = ''; // Holds filter text
 
   /* 3 Filtering functions */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterAlert').on('change', function () {
     alertFilter = this.checked;
     filterVariables();
@@ -59,7 +58,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   }).trigger('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterText').on('keyup', function () {
     var word = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().replace(/_/g, ' ');
-
     if (word.length === 0) {
       textFilter = null;
     } else {
@@ -73,20 +71,17 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         }
       }
     }
-
     text = word;
     filterVariables();
   }).trigger('keyup');
-  /* Filters the status variables by name/category/alert in the variables tab */
 
+  /* Filters the status variables by name/category/alert in the variables tab */
   function filterVariables() {
     var usefulLinks = 0;
     var section = text;
-
     if (categoryFilter.length > 0) {
       section = categoryFilter;
     }
-
     if (section.length > 1) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#linkSuggestions').find('span').each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('class').indexOf('status_' + section) !== -1) {
@@ -97,13 +92,11 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         }
       });
     }
-
     if (usefulLinks > 0) {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#linkSuggestions').css('display', '');
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#linkSuggestions').css('display', 'none');
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('#serverStatusVariables').find('th.name').each(function () {
       if ((textFilter === null || textFilter.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).text())) && (!alertFilter || jquery__WEBPACK_IMPORTED_MODULE_0__(this).next().find('span.text-danger').length > 0) && (categoryFilter.length === 0 || jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().hasClass('s_' + categoryFilter))) {
         jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().css('display', '');

@@ -14,12 +14,12 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
+
 /**
  * jqplot formatter for byte values
  *
  * @package phpMyAdmin
  */
-
 (function ($) {
   'use strict';
 
@@ -27,18 +27,14 @@ __webpack_require__.r(__webpack_exports__);
     var val = value;
     var i = index;
     var units = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
-
     while (val >= 1024 && i <= 6) {
       val /= 1024;
       i++;
     }
-
     var format = '%.1f';
-
     if (Math.floor(val) === val) {
       format = '%.0f';
     }
-
     return $.jqplot.sprintf(format + ' ' + units[i], val);
   };
   /**
@@ -49,13 +45,10 @@ __webpack_require__.r(__webpack_exports__);
    *
    * @return {String}
    */
-
-
   $.jqplot.byteFormatter = function (index) {
     var i = index || 0;
     return function (format, value) {
       var val = value;
-
       if (typeof val === 'number') {
         val = parseFloat(val) || 0;
         return formatByte(val, i);

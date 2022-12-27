@@ -18,6 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    function used in QBE for DB
  * @name            Database Operations
@@ -35,7 +36,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/qbe.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select[name^=criteriaColumn]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', '#searchId');
@@ -52,49 +52,47 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/qbe.
     jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbe').width(newWidthTblQbe);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#tblQbeFooters').width(newWidthTblQbe);
   });
+
   /**
    * Ajax handler to check the corresponding 'show' checkbox when column is selected
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', 'select[name^=criteriaColumn]', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).val()) {
       var index = /\d+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('name'));
       jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=criteriaShow\\[' + index + '\\]]').prop('checked', true);
     }
   });
+
   /**
    * Ajax event handlers for 'Select saved search'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#searchId', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#action').val('load');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#formQBE').trigger('submit');
   });
+
   /**
    * Ajax event handlers for 'Create bookmark'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#saveSearch', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#action').val('create');
   });
+
   /**
    * Ajax event handlers for 'Update bookmark'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#updateSearch', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#action').val('update');
   });
+
   /**
    * Ajax event handlers for 'Delete bookmark'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#deleteSearch', function () {
     var question = window.sprintf(window.Messages.strConfirmDeleteQBESearch, jquery__WEBPACK_IMPORTED_MODULE_0__('#searchId').find('option:selected').text());
-
     if (!confirm(question)) {
       return false;
     }
-
     jquery__WEBPACK_IMPORTED_MODULE_0__('#action').val('delete');
   });
   var windowwidth = jquery__WEBPACK_IMPORTED_MODULE_0__(window).width();

@@ -16,6 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  * Image upload transformations plugin js
  *
@@ -29,19 +30,17 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformatio
     if (this.files && this.files[0]) {
       var reader = new FileReader();
       var $input = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-
       reader.onload = function (e) {
         $input.prevAll('img').attr('src', e.target.result);
       };
-
       reader.readAsDataURL(this.files[0]);
     }
   });
 });
+
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('transformations/image_upload.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('input.image-upload').off('change');
 });

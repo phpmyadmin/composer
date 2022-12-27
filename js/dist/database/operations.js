@@ -30,6 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * @fileoverview    function used in server privilege pages
  * @name            Database Operations
@@ -50,7 +51,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Unbind all event handlers before tearing down a page
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/operations.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#rename_db_form.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('submit', '#copy_db_form.ajax');
@@ -63,20 +63,16 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
    */
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#rename_db_form.ajax', function (event) {
     event.preventDefault();
-
     if (_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.emptyCheckTheField(this, 'newname')) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
-
     var oldDbName = _modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
     var newDbName = jquery__WEBPACK_IMPORTED_MODULE_0__('#new_db_name').val();
-
     if (newDbName === oldDbName) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strDatabaseRenameToSameName, false, 'error');
       return false;
     }
-
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var question = (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)('CREATE DATABASE ' + newDbName + ' / DROP DATABASE ' + oldDbName);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
@@ -89,7 +85,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_navigation_tree').find('a:not(\'.expander\')').each(function () {
               var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-
               if ($thisAnchor.text() === data.newname) {
                 // simulate a click on the new db name
                 // in navigation
@@ -107,27 +102,22 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
   /**
    * Ajax Event Handler for 'Copy Database'
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#copy_db_form.ajax', function (event) {
     event.preventDefault();
-
     if (_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.emptyCheckTheField(this, 'newname')) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
-
     (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyingDatabase, false);
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
       // use messages that stay on screen
       jquery__WEBPACK_IMPORTED_MODULE_0__('.alert-success, .alert-danger').fadeOut();
-
       if (typeof data !== 'undefined' && data.success === true) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0__('#checkbox_switch').is(':checked')) {
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])(false);
-
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           };
@@ -135,7 +125,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.db));
           (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
         }
-
         _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
       } else {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -146,15 +135,14 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
   /**
    * Change tables columns visible only if change tables is checked
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__('#span_change_all_tables_columns_collations').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0__('#checkbox_change_all_tables_collations').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#span_change_all_tables_columns_collations').toggle();
   });
+
   /**
    * Ajax Event handler for 'Change Charset' of the database
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('submit', '#change_db_charset_form.ajax', function (event) {
     event.preventDefault();
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
@@ -172,14 +160,12 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
   /**
    * Ajax event handlers for Drop Database
    */
-
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#drop_db_anchor.ajax', function (event) {
     event.preventDefault();
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     /**
      * @var {String} question String containing the question to be asked for confirmation
      */
-
     var question = window.Messages.strDropDatabaseStrongWarning + ' ';
     question += window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE `' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db') + '`'));
     var params = (0,_modules_functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $link.getPostData());
@@ -191,7 +177,6 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
           _modules_navigation_js__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_js__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', ''));
           (0,_modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/server/databases');
-
           _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.callback = () => {
             (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           };

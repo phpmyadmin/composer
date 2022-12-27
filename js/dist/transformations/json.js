@@ -16,17 +16,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
 /**
  * JSON syntax highlighting transformation plugin
  */
-
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/json.js', function () {
   var $elm = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content').find('code.json');
   $elm.each(function () {
     var $json = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var $pre = $json.find('pre');
     /* We only care about visible elements to avoid double processing */
-
     if ($pre.is(':visible')) {
       var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0__('<div class="json-highlight cm-s-default"></div>');
       $json.append($highlight);

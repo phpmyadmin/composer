@@ -14,14 +14,12 @@ module.exports = jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-
 function registerDatePickerTranslations() {
   'use strict';
 
   if (!jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker) {
     return;
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].closeText = window.Messages.strCalendarClose;
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].prevText = window.Messages.strCalendarPrevious;
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].nextText = window.Messages.strCalendarNext;
@@ -33,26 +31,25 @@ function registerDatePickerTranslations() {
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].dayNamesMin = [window.Messages.strDayNameSunMin, window.Messages.strDayNameMonMin, window.Messages.strDayNameTueMin, window.Messages.strDayNameWedMin, window.Messages.strDayNameThuMin, window.Messages.strDayNameFriMin, window.Messages.strDayNameSatMin];
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].weekHeader = window.Messages.strWeekHeader;
   jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].showMonthAfterYear = window.Messages.strMonthAfterYear === 'calendar-year-month';
-  jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].yearSuffix = window.Messages.strYearSuffix !== 'none' ? window.Messages.strYearSuffix : ''; // eslint-disable-next-line no-underscore-dangle
+  jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""].yearSuffix = window.Messages.strYearSuffix !== 'none' ? window.Messages.strYearSuffix : '';
 
+  // eslint-disable-next-line no-underscore-dangle
   jquery__WEBPACK_IMPORTED_MODULE_0__.extend(jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker._defaults, jquery__WEBPACK_IMPORTED_MODULE_0__.datepicker.regional[""]);
 }
-
 function registerTimePickerTranslations() {
   'use strict';
 
   if (!jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker) {
     return;
   }
-
   jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""].timeText = window.Messages.strCalendarTime;
   jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""].hourText = window.Messages.strCalendarHour;
   jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""].minuteText = window.Messages.strCalendarMinute;
-  jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""].secondText = window.Messages.strCalendarSecond; // eslint-disable-next-line no-underscore-dangle
+  jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""].secondText = window.Messages.strCalendarSecond;
 
+  // eslint-disable-next-line no-underscore-dangle
   jquery__WEBPACK_IMPORTED_MODULE_0__.extend(jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker._defaults, jquery__WEBPACK_IMPORTED_MODULE_0__.timepicker.regional[""]);
 }
-
 registerDatePickerTranslations();
 registerTimePickerTranslations();
 
