@@ -7676,11 +7676,6 @@ parameters:
 			path: libraries/classes/Server/Status/Monitor.php
 
 		-
-			message: "#^Cannot call method fetchAssoc\\(\\) on PhpMyAdmin\\\\Dbal\\\\ResultInterface\\|false\\.$#"
-			count: 2
-			path: libraries/classes/Server/Status/Monitor.php
-
-		-
 			message: "#^Cannot call method loadavg\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Server/Status/Monitor.php
@@ -10557,6 +10552,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Http\\\\Factory\\\\ServerRequestFactoryTest\\:\\:dataProviderPsr7Implementations\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/classes/Http/Factory/ServerRequestFactoryTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$serverRequest of class PhpMyAdmin\\\\Http\\\\ServerRequest constructor expects Psr\\\\Http\\\\Message\\\\ServerRequestInterface, mixed given\\.$#"
 			count: 1
 			path: test/classes/Http/Factory/ServerRequestFactoryTest.php
 
