@@ -9,7 +9,7 @@ AJAX.registerTeardown('database/routines.js', function () {
   $(document).off('change', 'select[name=item_type]');
   $(document).off('change', 'select[name^=item_param_type]');
   $(document).off('change', 'select[name=item_returntype]');
-  $(document).off('click', 'input[name=routine_addparameter]');
+  $(document).off('click', '#addRoutineParameterButton');
   $(document).off('click', 'a.routine_param_remove_anchor');
 });
 const DatabaseRoutines = {
@@ -518,8 +518,6 @@ const DatabaseRoutines = {
     var that = this;
     // Make adjustments in the dialog to make it AJAX compatible
     $('td.routine_param_remove').show();
-    $('input[name=routine_removeparameter]').remove();
-    $('input[name=routine_addparameter]').css('width', '100%');
     // Enable/disable the 'options' dropdowns for parameters as necessary
     $('table.routine_params_table').last().find('th[colspan=2]').attr('colspan', '1');
     $('table.routine_params_table').last().find('tr').has('td').each(function () {
@@ -879,7 +877,7 @@ AJAX.registerOnload('database/routines.js', function () {
     const $table = $(this).closest('table.rte_table');
     DatabaseRoutines.setOptionsForParameter($table.find('select[name=item_returntype]'), $table.find('input[name=item_returnlength]'), $table.find('select[name=item_returnopts_text]'), $table.find('select[name=item_returnopts_num]'));
   });
-  $(document).on('click', 'input[name=routine_addparameter]', function (event) {
+  $(document).on('click', '#addRoutineParameterButton', function (event) {
     event.preventDefault();
     /**
      * @var routine_params_table jQuery object containing the reference
