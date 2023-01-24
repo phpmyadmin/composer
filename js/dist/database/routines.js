@@ -35,7 +35,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/ro
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select[name=item_type]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select[name^=item_param_type]');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('change', 'select[name=item_returntype]');
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'input[name=routine_addparameter]');
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', '#addRoutineParameterButton');
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).off('click', 'a.routine_param_remove_anchor');
 });
 const DatabaseRoutines = {
@@ -544,8 +544,6 @@ const DatabaseRoutines = {
     var that = this;
     // Make adjustments in the dialog to make it AJAX compatible
     jquery__WEBPACK_IMPORTED_MODULE_0__('td.routine_param_remove').show();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=routine_removeparameter]').remove();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=routine_addparameter]').css('width', '100%');
     // Enable/disable the 'options' dropdowns for parameters as necessary
     jquery__WEBPACK_IMPORTED_MODULE_0__('table.routine_params_table').last().find('th[colspan=2]').attr('colspan', '1');
     jquery__WEBPACK_IMPORTED_MODULE_0__('table.routine_params_table').last().find('tr').has('td').each(function () {
@@ -905,7 +903,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/rout
     const $table = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table.rte_table');
     DatabaseRoutines.setOptionsForParameter($table.find('select[name=item_returntype]'), $table.find('input[name=item_returnlength]'), $table.find('select[name=item_returnopts_text]'), $table.find('select[name=item_returnopts_num]'));
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'input[name=routine_addparameter]', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#addRoutineParameterButton', function (event) {
     event.preventDefault();
     /**
      * @var routine_params_table jQuery object containing the reference

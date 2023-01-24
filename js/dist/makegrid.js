@@ -629,11 +629,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
           // fill the cell edit with text from <td>
           var value = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(cell);
           if ($cell.attr('data-type') === 'json' && $cell.is('.truncated') === false) {
-            try {
-              value = JSON.stringify(JSON.parse(value), null, 4);
-            } catch (e) {
-              // Show as is
-            }
+            value = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.stringifyJSON(value, null, 4);
           }
           jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val(value);
           g.currentEditCell = cell;
@@ -1041,11 +1037,7 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
               $editArea.removeClass('edit_area_loading');
               if (typeof data !== 'undefined' && data.success === true) {
                 if ($td.attr('data-type') === 'json') {
-                  try {
-                    data.value = JSON.stringify(JSON.parse(data.value), null, 4);
-                  } catch (e) {
-                    // Show as is
-                  }
+                  data.value = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.stringifyJSON(data.value, null, 4);
                 }
                 $td.data('original_data', data.value);
                 jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val(data.value);
@@ -1257,7 +1249,12 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
               fieldsType.push('hex');
             }
             fieldsNull.push('');
-            fields.push($thisField.data('value'));
+            if ($thisField.attr('data-type') !== 'json') {
+              fields.push($thisField.data('value'));
+            } else {
+              const JSONString = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.stringifyJSON($thisField.data('value'));
+              fields.push(JSONString);
+            }
             var cellIndex = $thisField.index('.to_be_saved');
             if ($thisField.is(':not(.relation, .enum, .set, .bit)')) {
               if ($thisField.is('.transformed')) {
@@ -1478,7 +1475,14 @@ window.makeGrid = function (t, enableResize, enableReorder, enableVisib, enableG
         } else {
           thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0__(g.cEdit).find('.edit_box').val();
         }
-        if (g.wasEditedCellNull || thisFieldParams[fieldName] !== _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell)) {
+        let isValueUpdated;
+        if ($thisField.attr('data-type') !== 'json') {
+          isValueUpdated = thisFieldParams[fieldName] !== _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell);
+        } else {
+          const JSONString = _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.stringifyJSON(thisFieldParams[fieldName]);
+          isValueUpdated = JSONString !== JSON.stringify(JSON.parse(_modules_functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.getCellValue(g.currentEditCell)));
+        }
+        if (g.wasEditedCellNull || isValueUpdated) {
           needToPost = true;
         }
       }
