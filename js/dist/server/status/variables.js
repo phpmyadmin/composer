@@ -58,7 +58,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   }).trigger('change');
   jquery__WEBPACK_IMPORTED_MODULE_0__('#filterText').on('keyup', function () {
     var word = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val().replace(/_/g, ' ');
-    if (word.length === 0) {
+    if (word.length === 0 || word.length >= 32768) {
       textFilter = null;
     } else {
       try {
