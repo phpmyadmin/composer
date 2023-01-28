@@ -34,6 +34,7 @@ use const DIRECTORY_SEPARATOR;
 use const INFO_MODULES;
 use const PHP_EOL;
 use const PHP_OS;
+use const TEST_PATH;
 
 /**
  * @covers \PhpMyAdmin\Config
@@ -923,11 +924,11 @@ class ConfigTest extends AbstractTestCase
     {
         return [
             [
-                ROOT_PATH . 'test/test_data/config.inc.php',
+                TEST_PATH . 'test/test_data/config.inc.php',
                 true,
             ],
             [
-                ROOT_PATH . 'test/test_data/config-nonexisting.inc.php',
+                TEST_PATH . 'test/test_data/config-nonexisting.inc.php',
                 false,
             ],
         ];
