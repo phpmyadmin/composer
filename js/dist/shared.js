@@ -113,11 +113,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
 /* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
 /* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
-/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(20);
-/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(21);
-/* harmony import */ var _functions_ignorePhpErrors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(22);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
+/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(19);
+/* harmony import */ var _functions_ignorePhpErrors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(23);
 /* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(17);
-/* harmony import */ var _functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(23);
+/* harmony import */ var _functions_checkNumberOfFields_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(24);
 
 
 
@@ -1016,16 +1016,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 /* harmony import */ var _navigation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 /* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _indexes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18);
-/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
-/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
-/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(13);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11);
-/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(14);
-/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(20);
-/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(21);
-/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(17);
-/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(19);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
+/* harmony import */ var _tooltip_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
+/* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11);
+/* harmony import */ var _functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(14);
+/* harmony import */ var _functions_escape_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(18);
+/* harmony import */ var _functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(19);
+/* harmony import */ var _functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(17);
+/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(20);
+/* harmony import */ var _indexes_checkIndexType_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(21);
+/* harmony import */ var _indexes_checkIndexName_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(22);
+
 
 
 
@@ -1188,7 +1190,7 @@ Functions.addDatepicker = function ($thisElement, type, options) {
   if (type === 'time') {
     $thisElement.timepicker(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(defaultOptions, options));
     // Add a tip regarding entering MySQL allowed-values for TIME data-type
-    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_6__["default"])($thisElement, 'input', window.Messages.strMysqlAllowedValuesTipTime);
+    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])($thisElement, 'input', window.Messages.strMysqlAllowedValuesTipTime);
   } else {
     $thisElement.datetimepicker(jquery__WEBPACK_IMPORTED_MODULE_0__.extend(defaultOptions, options));
   }
@@ -1231,9 +1233,9 @@ Functions.addDateTimePicker = function () {
       // Add a tip regarding entering MySQL allowed-values
       // for TIME and DATE data-type
       if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('timefield')) {
-        (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
+        (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipTime);
       } else if (jquery__WEBPACK_IMPORTED_MODULE_0__(this).hasClass('datefield')) {
-        (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
+        (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this), 'input', window.Messages.strMysqlAllowedValuesTipDate);
       }
     });
   }
@@ -1783,7 +1785,7 @@ Functions.onloadIdleEvent = function () {
   function UpdateIdleTime() {
     var href = 'index.php?route=/';
     var guid = 'default';
-    if (_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('sessionStorage')) {
+    if (_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('sessionStorage')) {
       guid = window.sessionStorage.guid;
     }
     var params = {
@@ -1816,7 +1818,7 @@ Functions.onloadIdleEvent = function () {
         } else {
           // timeout occurred
           clearInterval(incInterval);
-          if (_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('sessionStorage')) {
+          if (_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('sessionStorage')) {
             window.sessionStorage.clear();
           }
           // append the login form on the page, disable all the forms which were not disabled already, close all the open jqueryui modal boxes
@@ -1832,7 +1834,7 @@ Functions.onloadIdleEvent = function () {
             jquery__WEBPACK_IMPORTED_MODULE_0__('input[name=token]').val(data.new_token);
           }
           idleSecondsCounter = 0;
-          (0,_functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_12__["default"])(data);
+          (0,_functions_handleRedirectAndReload_js__WEBPACK_IMPORTED_MODULE_11__["default"])(data);
         }
       }
     });
@@ -1840,7 +1842,7 @@ Functions.onloadIdleEvent = function () {
   if (_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('logged_in')) {
     incInterval = window.setInterval(SetIdleTime, 1000);
     var sessionTimeout = Math.min(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('LoginCookieValidity'), _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('session_gc_maxlifetime'));
-    if (_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('sessionStorage')) {
+    if (_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('sessionStorage')) {
       window.sessionStorage.setItem('guid', guid());
     }
     var interval = (sessionTimeout - 5) * 1000;
@@ -1971,7 +1973,7 @@ Functions.getForeignKeyCheckboxLoader = function () {
   var html = '';
   html += '<div class="mt-1 mb-2">';
   html += '<div class="load-default-fk-check-value">';
-  html += (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__["default"])('ajax_clock_small');
+  html += (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_10__["default"])('ajax_clock_small');
   html += '</div>';
   html += '</div>';
   return html;
@@ -2023,7 +2025,7 @@ Functions.onloadSqlQueryEditEvents = function () {
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(this).prev('form');
     var sqlQuery = $form.find('input[name=\'sql_query\']').val().trim();
     var $innerSql = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().prev().find('code.sql');
-    var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(sqlQuery) + '</textarea>\n';
+    var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(sqlQuery) + '</textarea>\n';
     newContent += Functions.getForeignKeyCheckboxLoader();
     newContent += '<input type="submit" id="sql_query_edit_save" class="btn btn-secondary button btnSave" value="' + window.Messages.strGo + '">\n';
     newContent += '<input type="button" id="sql_query_edit_discard" class="btn btn-secondary button btnDiscard" value="' + window.Messages.strCancel + '">\n';
@@ -2265,26 +2267,26 @@ Functions.previewSql = function ($form) {
   var formUrl = $form.attr('action');
   var sep = _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
   var formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
-  var $messageBox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+  var $messageBox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
     type: 'POST',
     url: formUrl,
     data: formData,
     success: function (response) {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($messageBox);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($messageBox);
       if (response.success) {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').modal('show');
         jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').find('.modal-body').first().html(response.sql_data);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModalLabel').first().html(window.Messages.strPreviewSQL);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal').on('shown.bs.modal', function () {
-          (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal'));
+          (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlModal'));
         });
       } else {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(response.message);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(response.message);
       }
     },
     error: function () {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
     }
   });
 };
@@ -2309,7 +2311,7 @@ Functions.confirmPreviewSql = function (sqlData, url, callback) {
   jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModalLabel').first().html(window.Messages.strPreviewSQL);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmCode').first().text(sqlData);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal').on('shown.bs.modal', function () {
-    (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal'));
+    (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSqlConfirmModal'));
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#previewSQLConfirmOkButton').on('click', function () {
     callback(url);
@@ -2357,7 +2359,7 @@ Functions.dismissNotifications = () => function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mouseup', 'span.ajax_notification.dismissable', function (event) {
     if (holdStarter && event.which === 1) {
       clearTimeout(holdStarter);
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
     }
   });
   /**
@@ -2738,12 +2740,12 @@ Functions.onloadCreateTableEvents = function () {
     if (Functions.checkTableEditForm($form[0], $form.find('input[name=orig_num_fields]').val())) {
       Functions.prepareForAjaxRequest($form);
       if (Functions.checkReservedWordColumns($form)) {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         // User wants to submit the form
         jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
           if (typeof data !== 'undefined' && data.success === true) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#properties_message').removeClass('alert-danger').html('');
-            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.message);
+            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.message);
             // Only if the create table dialog (distinct panel) exists
             var $createTableDialog = jquery__WEBPACK_IMPORTED_MODULE_0__('#create_table_dialog');
             if ($createTableDialog.length > 0) {
@@ -2757,7 +2759,7 @@ Functions.onloadCreateTableEvents = function () {
             var tablesTable = jquery__WEBPACK_IMPORTED_MODULE_0__('#tablesForm').find('tbody').not('#tbl_summary_row');
             // this is the first table created in this db
             if (tablesTable.length === 0) {
-              (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_13__["default"])(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('opendb_url'));
+              (0,_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_12__["default"])(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('opendb_url'));
             } else {
               /**
                * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
@@ -2798,7 +2800,7 @@ Functions.onloadCreateTableEvents = function () {
             var tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
             jquery__WEBPACK_IMPORTED_MODULE_0__.get(tableStructureUrl, params12, _ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
           } else {
-            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + data.error + '</div>', false);
+            (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + data.error + '</div>', false);
           }
         }); // end $.post()
       }
@@ -2816,7 +2818,7 @@ Functions.onloadCreateTableEvents = function () {
      * @var    the_form    object referring to the create table form
      */
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('form.create_table_form.ajax');
-    var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form);
 
     // User wants to add more fields to the table
@@ -2824,12 +2826,12 @@ Functions.onloadCreateTableEvents = function () {
       if (typeof data !== 'undefined' && data.success) {
         var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
         $pageContent.html(data.message);
-        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])($pageContent);
+        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])($pageContent);
         Functions.verifyColumnsProperties();
         Functions.hideShowConnection(jquery__WEBPACK_IMPORTED_MODULE_0__('.create_table_form select[name=tbl_storage_engine]'));
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($msgbox);
       } else {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.error);
       }
     }); // end $.post()
   }
@@ -2988,7 +2990,7 @@ Functions.onloadChangePasswordEvents = function () {
 
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', '#change_password_anchor.ajax', function (event) {
     event.preventDefault();
-    var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordGoButton').on('click', function () {
       event.preventDefault();
 
@@ -3006,19 +3008,19 @@ Functions.onloadChangePasswordEvents = function () {
        * page to work
        */
       var thisValue = jquery__WEBPACK_IMPORTED_MODULE_0__(this).val();
-      var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       $theForm.append('<input type="hidden" name="ajax_request" value="true">');
       jquery__WEBPACK_IMPORTED_MODULE_0__.post($theForm.attr('action'), $theForm.serialize() + _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
         if (typeof data === 'undefined' || data.success !== true) {
-          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+          (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.error, false);
           return;
         }
         var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content');
         $pageContent.prepend(data.message);
-        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])($pageContent);
+        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])($pageContent);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_dialog').hide().remove();
         jquery__WEBPACK_IMPORTED_MODULE_0__('#edit_user_dialog').dialog('close').remove();
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($msgbox);
       }); // end $.post()
       jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordModal').modal('hide');
     });
@@ -3026,7 +3028,7 @@ Functions.onloadChangePasswordEvents = function () {
       'ajax_request': true
     }, function (data) {
       if (typeof data === 'undefined' || !data.success) {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.error, false);
         return;
       }
       if (data.scripts) {
@@ -3038,7 +3040,7 @@ Functions.onloadChangePasswordEvents = function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__('#changePasswordModal').find('.modal-body').first().html(data.message);
       jquery__WEBPACK_IMPORTED_MODULE_0__('fieldset#fieldset_change_password').find('legend').remove().end().find('table.table').unwrap().addClass('m-3').find('input#text_pma_pw').trigger('focus');
       jquery__WEBPACK_IMPORTED_MODULE_0__('#fieldset_change_password_footer').hide();
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($msgbox);
       Functions.displayPasswordGenerateButton();
       jquery__WEBPACK_IMPORTED_MODULE_0__('#change_password_form').on('submit', function (e) {
         e.preventDefault();
@@ -3198,7 +3200,7 @@ Functions.onloadEnumSetEditor = function () {
     if (colname.length < 1) {
       title = window.Messages.enum_newColumnVals;
     } else {
-      title = window.Messages.enum_columnVals.replace(/%s/, '"' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(decodeURIComponent(colname)) + '"');
+      title = window.Messages.enum_columnVals.replace(/%s/, '"' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(decodeURIComponent(colname)) + '"');
     }
     // Get the values as a string
     var inputstring = jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('input').val();
@@ -3241,14 +3243,14 @@ Functions.onloadEnumSetEditor = function () {
       values.push('', '', '', '');
     }
     // Add the parsed values to the editor
-    var dropIcon = (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__["default"])('b_drop');
+    var dropIcon = (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_10__["default"])('b_drop');
     for (i = 0; i < values.length; i++) {
       fields += '<tr><td>' + '<input type=\'text\' value=\'' + values[i] + '\'>' + '</td><td class=\'drop\'>' + dropIcon + '</td></tr>';
     }
     /**
      * @var dialog HTML code for the ENUM/SET dialog
      */
-    var dialog = '<div id=\'enum_editor\'>' + '<fieldset class="pma-fieldset">' + '<legend>' + title + '</legend>' + '<p>' + (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values">' + fields + '</table>' + '</fieldset><fieldset class="pma-fieldset tblFooters">' + '<table class="table table-borderless add"><tr><td>' + '<div class=\'slider\'></div>' + '</td><td>' + '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' + window.sprintf(window.Messages.enum_addValue, 1) + '\'></div></form>' + '</td></tr></table>' + '<input type=\'hidden\' value=\'' +
+    var dialog = '<div id=\'enum_editor\'>' + '<fieldset class="pma-fieldset">' + '<legend>' + title + '</legend>' + '<p>' + (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_10__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values">' + fields + '</table>' + '</fieldset><fieldset class="pma-fieldset tblFooters">' + '<table class="table table-borderless add"><tr><td>' + '<div class=\'slider\'></div>' + '</td><td>' + '<form><div><input type=\'submit\' class=\'add_value btn btn-primary\' value=\'' + window.sprintf(window.Messages.enum_addValue, 1) + '\'></div></form>' + '</td></tr></table>' + '<input type=\'hidden\' value=\'' +
     // So we know which column's data is being edited
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('td').find('input').attr('id') + '\'>' + '</fieldset>' + '</div>';
     jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorGoButton').on('click', function () {
@@ -3319,14 +3321,14 @@ Functions.onloadEnumSetEditor = function () {
     var listSize = window.centralColumnList[db + '_' + table].length;
     var min = listSize <= maxRows ? listSize : maxRows;
     for (i = 0; i < min; i++) {
-      fields += '<tr><td><div><span class="fw-bold">' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_name) + '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
+      fields += '<tr><td><div><span class="fw-bold">' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_name) + '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
       if (window.centralColumnList[db + '_' + table][i].col_attribute !== '') {
-        fields += '(' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_attribute) + ') ';
+        fields += '(' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_attribute) + ') ';
       }
       if (window.centralColumnList[db + '_' + table][i].col_length !== '') {
-        fields += '(' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_length) + ') ';
+        fields += '(' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_length) + ') ';
       }
-      fields += (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_extra) + '</span>' + '</div></td>';
+      fields += (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_extra) + '</span>' + '</div></td>';
       if (pick) {
         fields += '<td><input class="btn btn-secondary pick w-100" type="submit" value="' + window.Messages.pickColumn + '" onclick="Functions.autoPopulate(\'' + colid + '\',' + i + ')"></td>';
       }
@@ -3335,7 +3337,7 @@ Functions.onloadEnumSetEditor = function () {
     var resultPointer = i;
     var searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
     if (fields === '') {
-      fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(db) + '\'');
+      fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(db) + '\'');
       searchIn = '';
     }
     var seeMore = '';
@@ -3404,7 +3406,7 @@ Functions.onloadEnumSetEditor = function () {
     e.preventDefault();
     var numNewRows = jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('div.slider').slider('value');
     while (numNewRows--) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.values').append('<tr class=\'hide\'><td>' + '<input type=\'text\'>' + '</td><td class=\'drop\'>' + (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_11__["default"])('b_drop') + '</td></tr>').find('tr').last().show('fast');
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#enumEditorModal').find('.values').append('<tr class=\'hide\'><td>' + '<input type=\'text\'>' + '</td><td class=\'drop\'>' + (0,_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_10__["default"])('b_drop') + '</td></tr>').find('tr').last().show('fast');
     }
   });
 
@@ -3414,35 +3416,6 @@ Functions.onloadEnumSetEditor = function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).remove();
     });
   });
-};
-
-/**
- * Ensures indexes names are valid according to their type and, for a primary
- * key, lock index name to 'PRIMARY'
- * @param {string} formId Variable which parses the form name as
- *                        the input
- * @return {boolean} false if there is no index form, true else
- */
-Functions.checkIndexName = function (formId) {
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#' + formId).length === 0) {
-    return false;
-  }
-
-  // Gets the elements pointers
-  var $theIdxName = jquery__WEBPACK_IMPORTED_MODULE_0__('#input_index_name');
-  var $theIdxChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
-
-  // Index is a primary key
-  if ($theIdxChoice.find('option:selected').val() === 'PRIMARY') {
-    $theIdxName.val('PRIMARY');
-    $theIdxName.prop('disabled', true);
-  } else {
-    if ($theIdxName.val() === 'PRIMARY') {
-      $theIdxName.val('');
-    }
-    $theIdxName.prop('disabled', false);
-  }
-  return true;
 };
 
 /**
@@ -3493,7 +3466,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
           return;
         }
         modalBody.innerHTML = response.sql_data;
-        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogPreviewModal'));
+        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('#indexDialogPreviewModal'));
       },
       error: () => {
         modalBody.innerHTML = '<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>';
@@ -3511,7 +3484,7 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
      * @var the_form object referring to the export form
      */
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm');
-    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     Functions.prepareForAjaxRequest($form);
     // User wants to submit the form
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
@@ -3520,8 +3493,8 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         $sqlqueryresults.remove();
       }
       if (typeof data !== 'undefined' && data.success === true) {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.message);
-        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query'));
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.message);
+        (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query'));
         jquery__WEBPACK_IMPORTED_MODULE_0__('.result_query .alert').remove();
         /* Reload the field form*/
         jquery__WEBPACK_IMPORTED_MODULE_0__('#table_index').remove();
@@ -3546,18 +3519,18 @@ Functions.indexDialogModal = function (routeUrl, url, title, callbackSuccess, ca
         if (callbackFailure) {
           callbackFailure();
         }
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)($error, false);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)($error, false);
       }
     }); // end $.post()
   });
 
-  var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+  var $msgbox = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post(routeUrl, url, function (data) {
     if (typeof data !== 'undefined' && data.success === false) {
       // in the case of an error, show the error message returned.
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.error, false);
     } else {
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($msgbox);
       // Show dialog if the request was successful
       modal.modal('show');
       modal.find('.modal-body').first().html(data.message);
@@ -3576,8 +3549,8 @@ Functions.indexRenameDialog = function (url, title, callbackSuccess, callbackFai
   Functions.indexDialogModal('index.php?route=/table/indexes/rename', url, title, callbackSuccess, callbackFailure);
 };
 Functions.showIndexEditDialog = function ($outer) {
-  _indexes_js__WEBPACK_IMPORTED_MODULE_4__.Indexes.checkIndexType();
-  Functions.checkIndexName('index_frm');
+  (0,_indexes_checkIndexType_js__WEBPACK_IMPORTED_MODULE_13__["default"])();
+  (0,_indexes_checkIndexName_js__WEBPACK_IMPORTED_MODULE_14__["default"])('index_frm');
   var $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns');
   $indexColumns.find('td').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', jquery__WEBPACK_IMPORTED_MODULE_0__(this).width() + 'px');
@@ -3630,7 +3603,7 @@ Functions.showHints = function ($div) {
     $newDiv = jquery__WEBPACK_IMPORTED_MODULE_0__('body');
   }
   $newDiv.find('.pma_hint').each(function () {
-    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('img'), 'img', jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('span').html());
+    (0,_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('img'), 'img', jquery__WEBPACK_IMPORTED_MODULE_0__(this).children('span').html());
   });
 };
 Functions.mainMenuResizerCallback = function () {
@@ -3736,7 +3709,7 @@ Functions.toggleButton = function ($obj) {
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).addClass('isActive');
     }
-    var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    var $msg = (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)();
     var $container = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
     var callback = jquery__WEBPACK_IMPORTED_MODULE_0__('span.callback', this).text();
     var operator;
@@ -3766,7 +3739,7 @@ Functions.toggleButton = function ($obj) {
     var parts = url.split('?');
     jquery__WEBPACK_IMPORTED_MODULE_0__.post(parts[0], parts[1] + '&ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msg);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxRemoveMessage)($msg);
         $container.removeClass(removeClass).addClass(addClass).animate({
           'left': operator + move + 'px'
         }, function () {
@@ -3775,7 +3748,7 @@ Functions.toggleButton = function ($obj) {
         // eslint-disable-next-line no-eval
         eval(callback);
       } else {
-        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+        (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_7__.ajaxShowMessage)(data.error, false);
         $container.removeClass('isActive');
       }
     });
@@ -3848,13 +3821,13 @@ Functions.onloadRecentFavoriteTables = () => {
       cache: false,
       type: 'POST',
       data: {
-        'favoriteTables': _config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined' ? window.localStorage.favoriteTables : '',
+        'favoriteTables': _config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined' ? window.localStorage.favoriteTables : '',
         'server': _common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'no_debug': true
       },
       success: function (data) {
         // Update localStorage.
-        if (_config_js__WEBPACK_IMPORTED_MODULE_5__.Config.isStorageSupported('localStorage')) {
+        if (_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
           window.localStorage.favoriteTables = data.favoriteTables;
         }
         jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_favorite_list').html(data.list);
@@ -3896,7 +3869,7 @@ Functions.slidingMessage = function (msg, $object) {
       $obj.children().remove();
       $obj.append('<div>' + msg + '</div>');
       // highlight any sql before taking height;
-      (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])($obj);
+      (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])($obj);
       $obj.find('div').first().hide();
       $obj.animate({
         height: $obj.find('div').first().height()
@@ -3907,7 +3880,7 @@ Functions.slidingMessage = function (msg, $object) {
     // inside it, so we simply slide it down
     $obj.width('100%').html('<div>' + msg + '</div>');
     // highlight any sql before taking height;
-    (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])($obj);
+    (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])($obj);
     var h = $obj.find('div').first().hide().height();
     $obj.find('div').first().css('height', 0).show().animate({
       height: h
@@ -3939,7 +3912,7 @@ Functions.onloadCodeMirrorEditor = () => {
       $elm.trigger('focus').on('blur', Functions.updateQueryParameters);
     }
   }
-  (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('body'));
+  (0,_sql_highlight_js__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('body'));
 };
 
 /**
@@ -4047,7 +4020,7 @@ Functions.teardownCreateView = () => {
 };
 Functions.onloadCreateView = function () {
   jquery__WEBPACK_IMPORTED_MODULE_0__('.logout').on('click', function () {
-    var form = jquery__WEBPACK_IMPORTED_MODULE_0__('<form method="POST" action="' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')) + '">' + '</form>');
+    var form = jquery__WEBPACK_IMPORTED_MODULE_0__('<form method="POST" action="' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + (0,_functions_escape_js__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(_common_js__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')) + '">' + '</form>');
     jquery__WEBPACK_IMPORTED_MODULE_0__('body').append(form);
     form.submit();
     sessionStorage.clear();
@@ -4058,7 +4031,7 @@ Functions.onloadCreateView = function () {
    */
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', 'a.create_view.ajax', function (e) {
     e.preventDefault();
-    (0,_functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_9__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
+    (0,_functions_handleCreateViewModal_js__WEBPACK_IMPORTED_MODULE_8__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__(this));
   });
   /**
    * Attach Ajax event handlers for input fields in the editor
@@ -7746,6 +7719,418 @@ function handleRedirectAndReload(data) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "escapeBacktick": function() { return /* binding */ escapeBacktick; },
+/* harmony export */   "escapeHtml": function() { return /* binding */ escapeHtml; },
+/* harmony export */   "escapeJsString": function() { return /* binding */ escapeJsString; },
+/* harmony export */   "escapeSingleQuote": function() { return /* binding */ escapeSingleQuote; }
+/* harmony export */ });
+/**
+ * @param {string} value
+ * @return {string}
+ */
+function escapeHtml() {
+  let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  const element = document.createElement('span');
+  element.appendChild(document.createTextNode(value));
+  return element.innerHTML;
+}
+
+/**
+ * JavaScript escaping
+ *
+ * @param {any} unsafe
+ * @return {string | false}
+ */
+function escapeJsString(unsafe) {
+  if (typeof unsafe !== 'undefined') {
+    return unsafe.toString().replace('\x00', '').replace('\\', '\\\\').replace('\'', '\\\'').replace('&#039;', '\\&#039;').replace('"', '\\"').replace('&quot;', '\\&quot;').replace('\n', '\n').replace('\r', '\r').replace(/<\/script/gi, '</\' + \'script');
+  } else {
+    return false;
+  }
+}
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+function escapeBacktick(s) {
+  return s.replace('`', '``');
+}
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+function escapeSingleQuote(s) {
+  return s.replace('\\', '\\\\').replace('\'', '\\\'');
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ getImageTag; }
+/* harmony export */ });
+/* harmony import */ var _escape_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+
+
+/**
+ * Returns an HTML IMG tag for a particular image from a theme,
+ * which may be an actual file or an icon from a sprite
+ *
+ * @param {string} image      The name of the file to get
+ * @param {string} alternate  Used to set 'alt' and 'title' attributes of the image
+ * @param {object} attributes An associative array of other attributes
+ *
+ * @return {object} The requested image, this object has two methods:
+ *                  .toString()        - Returns the IMG tag for the requested image
+ *                  .attr(name)        - Returns a particular attribute of the IMG
+ *                                       tag given it's name
+ *                  .attr(name, value) - Sets a particular attribute of the IMG
+ *                                       tag to the given value
+ */
+function getImageTag(image, alternate, attributes) {
+  var alt = alternate;
+  var attr = attributes;
+  // custom image object, it will eventually be returned by this functions
+  var retval = {
+    data: {
+      // this is private
+      alt: '',
+      title: '',
+      src: 'themes/dot.gif'
+    },
+    attr: function (name, value) {
+      if (value === undefined) {
+        if (this.data[name] === undefined) {
+          return '';
+        } else {
+          return this.data[name];
+        }
+      } else {
+        this.data[name] = value;
+      }
+    },
+    toString: function () {
+      var retval = '<' + 'img';
+      for (var i in this.data) {
+        retval += ' ' + i + '="' + this.data[i] + '"';
+      }
+      retval += ' /' + '>';
+      return retval;
+    }
+  };
+  // initialise missing parameters
+  if (attr === undefined) {
+    attr = {};
+  }
+  if (alt === undefined) {
+    alt = '';
+  }
+  // set alt
+  if (attr.alt !== undefined) {
+    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.alt));
+  } else {
+    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
+  }
+  // set title
+  if (attr.title !== undefined) {
+    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.title));
+  } else {
+    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
+  }
+  // set css classes
+  retval.attr('class', 'icon ic_' + image);
+  // set all other attributes
+  for (var i in attr) {
+    if (i === 'src') {
+      // do not allow to override the 'src' attribute
+      continue;
+    }
+    retval.attr(i, attr[i]);
+  }
+  return retval;
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ refreshMainContent; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+
+
+
+/**
+ * Refreshes the main frame
+ *
+ * @param {any} url Undefined to refresh to the same page
+ *                  String to go to a different page, e.g: 'index.php'
+ *
+ * @return {void}
+ */
+function refreshMainContent(url) {
+  var newUrl = url;
+  if (!newUrl) {
+    newUrl = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('a').attr('href') || window.location.pathname;
+    newUrl = newUrl.substring(0, newUrl.indexOf('?'));
+  }
+  if (newUrl.indexOf('?') !== -1) {
+    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery(_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator'));
+  } else {
+    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery('?');
+  }
+  jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>', {
+    href: newUrl
+  }).appendTo('body').trigger('click').remove();
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ checkIndexType; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+
+/**
+ * Hides/shows the inputs and submits appropriately depending
+ * on whether the index type chosen is 'SPATIAL' or not.
+ */
+function checkIndexType() {
+  /**
+   * @var {JQuery<HTMLElement}, Dropdown to select the index choice.
+   */
+  var $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
+  /**
+   * @var {JQuery<HTMLElement}, Dropdown to select the index type.
+   */
+  var $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_type');
+  /**
+   * @var {JQuery<HTMLElement}, Table header for the size column.
+   */
+  var $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('thead tr').children('th').eq(1);
+  /**
+   * @var {JQuery<HTMLElement}, Inputs to specify the columns for the index.
+   */
+  var $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]');
+  /**
+   * @var {JQuery<HTMLElement}, Inputs to specify sizes for columns of the index.
+   */
+  var $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[columns][sub_parts][]"]');
+  /**
+   * @var {JQuery<HTMLElement}, Footer containing the controllers to add more columns
+   */
+  var $addMore = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').find('.add_more');
+  if ($selectIndexChoice.val() === 'SPATIAL') {
+    // Disable and hide the size column
+    $sizeHeader.hide();
+    $sizeInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true).parent('td').hide();
+    });
+
+    // Disable and hide the columns of the index other than the first one
+    var initial = true;
+    $columnInputs.each(function () {
+      var $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      if (!initial) {
+        $columnInput.prop('disabled', true).parent('td').hide();
+      } else {
+        initial = false;
+      }
+    });
+
+    // Hide controllers to add more columns
+    $addMore.hide();
+  } else {
+    // Enable and show the size column
+    $sizeHeader.show();
+    $sizeInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
+    });
+
+    // Enable and show the columns of the index
+    $columnInputs.each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
+    });
+
+    // Show controllers to add more columns
+    $addMore.show();
+  }
+  if ($selectIndexChoice.val() === 'SPATIAL' || $selectIndexChoice.val() === 'FULLTEXT') {
+    $selectIndexType.val('').prop('disabled', true);
+  } else {
+    $selectIndexType.prop('disabled', false);
+  }
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ checkIndexName; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+
+/**
+ * Ensures indexes names are valid according to their type and, for a primary
+ * key, lock index name to 'PRIMARY'
+ * @param {string} formId Variable which parses the form name as
+ *                        the input
+ * @return {boolean} false if there is no index form, true else
+ */
+function checkIndexName(formId) {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#' + formId).length === 0) {
+    return false;
+  }
+
+  // Gets the elements pointers
+  var $theIdxName = jquery__WEBPACK_IMPORTED_MODULE_0__('#input_index_name');
+  var $theIdxChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
+
+  // Index is a primary key
+  if ($theIdxChoice.find('option:selected').val() === 'PRIMARY') {
+    $theIdxName.val('PRIMARY');
+    $theIdxName.prop('disabled', true);
+  } else {
+    if ($theIdxName.val() === 'PRIMARY') {
+      $theIdxName.val('');
+    }
+    $theIdxName.prop('disabled', false);
+  }
+  return true;
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ignorePhpErrors": function() { return /* binding */ ignorePhpErrors; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+
+/**
+ * Ignore the displayed php errors.
+ * Simply removes the displayed errors.
+ *
+ * @param {boolean} clearPrevErrors whether to clear errors stored
+ *             in $_SESSION['prev_errors'] at server
+ *
+ */
+function ignorePhpErrors(clearPrevErrors) {
+  var clearPrevious = clearPrevErrors;
+  if (typeof clearPrevious === 'undefined' || clearPrevious === null) {
+    clearPrevious = false;
+  }
+  // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
+  // It clears the prev_errors stored in session.
+  if (clearPrevious) {
+    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form');
+    $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
+    $pmaReportErrorsForm.trigger('submit');
+  }
+
+  // remove displayed errors
+  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors');
+  $pmaErrors.fadeOut('slow');
+  $pmaErrors.remove();
+}
+window.ignorePhpErrors = ignorePhpErrors;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ checkNumberOfFields; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+
+
+
+/* global maxInputVars */ // templates/javascript/variables.twig
+
+/**
+ * Check than forms have less fields than max allowed by PHP.
+ * @return {boolean}
+ */
+function checkNumberOfFields() {
+  if (typeof maxInputVars === 'undefined') {
+    return false;
+  }
+  if (false === maxInputVars) {
+    return false;
+  }
+  jquery__WEBPACK_IMPORTED_MODULE_0__('form').each(function () {
+    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input').length;
+    if (nbInputs > maxInputVars) {
+      var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
+      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
+      return false;
+    }
+    return true;
+  });
+  return true;
+}
+
+/***/ }),
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Indexes": function() { return /* binding */ Indexes; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
@@ -7756,7 +8141,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
 /* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
 /* harmony import */ var _functions_getJsConfirmCommonParam_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15);
-/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
+/* harmony import */ var _functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(20);
+/* harmony import */ var _indexes_checkIndexType_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(21);
+/* harmony import */ var _indexes_checkIndexName_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(22);
+
+
 
 
 
@@ -7845,77 +8234,6 @@ Indexes.getIndexArray = function (indexChoice) {
       return null;
   }
   return sourceArray;
-};
-
-/**
- * Hides/shows the inputs and submits appropriately depending
- * on whether the index type chosen is 'SPATIAL' or not.
- */
-Indexes.checkIndexType = function () {
-  /**
-   * @var {JQuery<HTMLElement}, Dropdown to select the index choice.
-   */
-  var $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_choice');
-  /**
-   * @var {JQuery<HTMLElement}, Dropdown to select the index type.
-   */
-  var $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0__('#select_index_type');
-  /**
-   * @var {JQuery<HTMLElement}, Table header for the size column.
-   */
-  var $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('thead tr').children('th').eq(1);
-  /**
-   * @var {JQuery<HTMLElement}, Inputs to specify the columns for the index.
-   */
-  var $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="index[columns][names][]"]');
-  /**
-   * @var {JQuery<HTMLElement}, Inputs to specify sizes for columns of the index.
-   */
-  var $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="index[columns][sub_parts][]"]');
-  /**
-   * @var {JQuery<HTMLElement}, Footer containing the controllers to add more columns
-   */
-  var $addMore = jquery__WEBPACK_IMPORTED_MODULE_0__('#index_frm').find('.add_more');
-  if ($selectIndexChoice.val() === 'SPATIAL') {
-    // Disable and hide the size column
-    $sizeHeader.hide();
-    $sizeInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', true).parent('td').hide();
-    });
-
-    // Disable and hide the columns of the index other than the first one
-    var initial = true;
-    $columnInputs.each(function () {
-      var $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-      if (!initial) {
-        $columnInput.prop('disabled', true).parent('td').hide();
-      } else {
-        initial = false;
-      }
-    });
-
-    // Hide controllers to add more columns
-    $addMore.hide();
-  } else {
-    // Enable and show the size column
-    $sizeHeader.show();
-    $sizeInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
-    });
-
-    // Enable and show the columns of the index
-    $columnInputs.each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).prop('disabled', false).parent('td').show();
-    });
-
-    // Show controllers to add more columns
-    $addMore.show();
-  }
-  if ($selectIndexChoice.val() === 'SPATIAL' || $selectIndexChoice.val() === 'FULLTEXT') {
-    $selectIndexType.val('').prop('disabled', true);
-  } else {
-    $selectIndexType.prop('disabled', false);
-  }
 };
 
 /**
@@ -8163,7 +8481,7 @@ Indexes.showAddIndexDialog = function (sourceArray, arrayIndex, targetColumns, c
         jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').modal('show');
         jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModalLabel').first().text(window.Messages.strAddIndex);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#addIndexModal').find('.modal-body').first().html(data.message);
-        _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
+        (0,_indexes_checkIndexName_js__WEBPACK_IMPORTED_MODULE_10__["default"])('index_frm');
         _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.showHints($div);
         jquery__WEBPACK_IMPORTED_MODULE_0__('#index_columns').find('td').each(function () {
           jquery__WEBPACK_IMPORTED_MODULE_0__(this).css('width', jquery__WEBPACK_IMPORTED_MODULE_0__(this).width() + 'px');
@@ -8324,8 +8642,8 @@ Indexes.on = () => function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('change', '#select_index_choice', function (event) {
     event.preventDefault();
-    Indexes.checkIndexType();
-    _functions_js__WEBPACK_IMPORTED_MODULE_2__.Functions.checkIndexName('index_frm');
+    (0,_indexes_checkIndexType_js__WEBPACK_IMPORTED_MODULE_9__["default"])();
+    (0,_indexes_checkIndexName_js__WEBPACK_IMPORTED_MODULE_10__["default"])('index_frm');
   });
 
   /**
@@ -8504,298 +8822,6 @@ Indexes.on = () => function () {
 
 
 /***/ }),
-/* 19 */
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ refreshMainContent; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _common_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-
-
-
-/**
- * Refreshes the main frame
- *
- * @param {any} url Undefined to refresh to the same page
- *                  String to go to a different page, e.g: 'index.php'
- *
- * @return {void}
- */
-function refreshMainContent(url) {
-  var newUrl = url;
-  if (!newUrl) {
-    newUrl = jquery__WEBPACK_IMPORTED_MODULE_0__('#selflink').find('a').attr('href') || window.location.pathname;
-    newUrl = newUrl.substring(0, newUrl.indexOf('?'));
-  }
-  if (newUrl.indexOf('?') !== -1) {
-    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery(_common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator'));
-  } else {
-    newUrl += _common_js__WEBPACK_IMPORTED_MODULE_1__.CommonParams.getUrlQuery('?');
-  }
-  jquery__WEBPACK_IMPORTED_MODULE_0__('<a></a>', {
-    href: newUrl
-  }).appendTo('body').trigger('click').remove();
-}
-
-/***/ }),
-/* 20 */
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "escapeBacktick": function() { return /* binding */ escapeBacktick; },
-/* harmony export */   "escapeHtml": function() { return /* binding */ escapeHtml; },
-/* harmony export */   "escapeJsString": function() { return /* binding */ escapeJsString; },
-/* harmony export */   "escapeSingleQuote": function() { return /* binding */ escapeSingleQuote; }
-/* harmony export */ });
-/**
- * @param {string} value
- * @return {string}
- */
-function escapeHtml() {
-  let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  const element = document.createElement('span');
-  element.appendChild(document.createTextNode(value));
-  return element.innerHTML;
-}
-
-/**
- * JavaScript escaping
- *
- * @param {any} unsafe
- * @return {string | false}
- */
-function escapeJsString(unsafe) {
-  if (typeof unsafe !== 'undefined') {
-    return unsafe.toString().replace('\x00', '').replace('\\', '\\\\').replace('\'', '\\\'').replace('&#039;', '\\&#039;').replace('"', '\\"').replace('&quot;', '\\&quot;').replace('\n', '\n').replace('\r', '\r').replace(/<\/script/gi, '</\' + \'script');
-  } else {
-    return false;
-  }
-}
-
-/**
- * @param {string} s
- * @return {string}
- */
-function escapeBacktick(s) {
-  return s.replace('`', '``');
-}
-
-/**
- * @param {string} s
- * @return {string}
- */
-function escapeSingleQuote(s) {
-  return s.replace('\\', '\\\\').replace('\'', '\\\'');
-}
-
-/***/ }),
-/* 21 */
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ getImageTag; }
-/* harmony export */ });
-/* harmony import */ var _escape_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
-
-
-/**
- * Returns an HTML IMG tag for a particular image from a theme,
- * which may be an actual file or an icon from a sprite
- *
- * @param {string} image      The name of the file to get
- * @param {string} alternate  Used to set 'alt' and 'title' attributes of the image
- * @param {object} attributes An associative array of other attributes
- *
- * @return {object} The requested image, this object has two methods:
- *                  .toString()        - Returns the IMG tag for the requested image
- *                  .attr(name)        - Returns a particular attribute of the IMG
- *                                       tag given it's name
- *                  .attr(name, value) - Sets a particular attribute of the IMG
- *                                       tag to the given value
- */
-function getImageTag(image, alternate, attributes) {
-  var alt = alternate;
-  var attr = attributes;
-  // custom image object, it will eventually be returned by this functions
-  var retval = {
-    data: {
-      // this is private
-      alt: '',
-      title: '',
-      src: 'themes/dot.gif'
-    },
-    attr: function (name, value) {
-      if (value === undefined) {
-        if (this.data[name] === undefined) {
-          return '';
-        } else {
-          return this.data[name];
-        }
-      } else {
-        this.data[name] = value;
-      }
-    },
-    toString: function () {
-      var retval = '<' + 'img';
-      for (var i in this.data) {
-        retval += ' ' + i + '="' + this.data[i] + '"';
-      }
-      retval += ' /' + '>';
-      return retval;
-    }
-  };
-  // initialise missing parameters
-  if (attr === undefined) {
-    attr = {};
-  }
-  if (alt === undefined) {
-    alt = '';
-  }
-  // set alt
-  if (attr.alt !== undefined) {
-    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.alt));
-  } else {
-    retval.attr('alt', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
-  }
-  // set title
-  if (attr.title !== undefined) {
-    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(attr.title));
-  } else {
-    retval.attr('title', (0,_escape_js__WEBPACK_IMPORTED_MODULE_0__.escapeHtml)(alt));
-  }
-  // set css classes
-  retval.attr('class', 'icon ic_' + image);
-  // set all other attributes
-  for (var i in attr) {
-    if (i === 'src') {
-      // do not allow to override the 'src' attribute
-      continue;
-    }
-    retval.attr(i, attr[i]);
-  }
-  return retval;
-}
-
-/***/ }),
-/* 22 */
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ignorePhpErrors": function() { return /* binding */ ignorePhpErrors; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-
-
-/**
- * Ignore the displayed php errors.
- * Simply removes the displayed errors.
- *
- * @param {boolean} clearPrevErrors whether to clear errors stored
- *             in $_SESSION['prev_errors'] at server
- *
- */
-function ignorePhpErrors(clearPrevErrors) {
-  var clearPrevious = clearPrevErrors;
-  if (typeof clearPrevious === 'undefined' || clearPrevious === null) {
-    clearPrevious = false;
-  }
-  // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
-  // It clears the prev_errors stored in session.
-  if (clearPrevious) {
-    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_report_errors_form');
-    $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
-    $pmaReportErrorsForm.trigger('submit');
-  }
-
-  // remove displayed errors
-  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0__('#pma_errors');
-  $pmaErrors.fadeOut('slow');
-  $pmaErrors.remove();
-}
-window.ignorePhpErrors = ignorePhpErrors;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ checkNumberOfFields; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
-
-
-
-/* global maxInputVars */ // templates/javascript/variables.twig
-
-/**
- * Check than forms have less fields than max allowed by PHP.
- * @return {boolean}
- */
-function checkNumberOfFields() {
-  if (typeof maxInputVars === 'undefined') {
-    return false;
-  }
-  if (false === maxInputVars) {
-    return false;
-  }
-  jquery__WEBPACK_IMPORTED_MODULE_0__('form').each(function () {
-    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0__(this).find(':input').length;
-    if (nbInputs > maxInputVars) {
-      var warning = window.sprintf(window.Messages.strTooManyInputs, maxInputVars);
-      (0,_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
-      return false;
-    }
-    return true;
-  });
-  return true;
-}
-
-/***/ }),
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
 /* 60 */,
 /* 61 */,
 /* 62 */,
@@ -8804,7 +8830,9 @@ function checkNumberOfFields() {
 /* 65 */,
 /* 66 */,
 /* 67 */,
-/* 68 */
+/* 68 */,
+/* 69 */,
+/* 70 */
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
