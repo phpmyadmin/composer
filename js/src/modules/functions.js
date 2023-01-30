@@ -2,7 +2,6 @@ import $ from 'jquery';
 import { AJAX } from './ajax.js';
 import { Navigation } from './navigation.js';
 import { CommonParams } from './common.js';
-import { Indexes } from './indexes.js';
 import { Config } from './config.js';
 import tooltip from './tooltip.js';
 import highlightSql from './sql-highlight.js';
@@ -12,6 +11,8 @@ import { escapeHtml } from './functions/escape.js';
 import getImageTag from './functions/getImageTag.js';
 import handleRedirectAndReload from './functions/handleRedirectAndReload.js';
 import refreshMainContent from './functions/refreshMainContent.js';
+import checkIndexType from './indexes/checkIndexType.js';
+import checkIndexName from './indexes/checkIndexName.js';
 
 /* global DatabaseStructure */ // js/database/structure.js
 /* global firstDayOfCalendar, themeImagePath */ // templates/javascript/variables.twig
@@ -2576,36 +2577,6 @@ Functions.onloadEnumSetEditor = function () {
 };
 
 /**
- * Ensures indexes names are valid according to their type and, for a primary
- * key, lock index name to 'PRIMARY'
- * @param {string} formId Variable which parses the form name as
- *                        the input
- * @return {boolean} false if there is no index form, true else
- */
-Functions.checkIndexName = function (formId) {
-    if ($('#' + formId).length === 0) {
-        return false;
-    }
-
-    // Gets the elements pointers
-    var $theIdxName = $('#input_index_name');
-    var $theIdxChoice = $('#select_index_choice');
-
-    // Index is a primary key
-    if ($theIdxChoice.find('option:selected').val() === 'PRIMARY') {
-        $theIdxName.val('PRIMARY');
-        $theIdxName.prop('disabled', true);
-    } else {
-        if ($theIdxName.val() === 'PRIMARY') {
-            $theIdxName.val('');
-        }
-        $theIdxName.prop('disabled', false);
-    }
-
-    return true;
-};
-
-/**
  * Handler for adding more columns to an index in the editor
  * @return {function}
  */
@@ -2759,8 +2730,8 @@ Functions.indexRenameDialog = function (url, title, callbackSuccess, callbackFai
 };
 
 Functions.showIndexEditDialog = function ($outer) {
-    Indexes.checkIndexType();
-    Functions.checkIndexName('index_frm');
+    checkIndexType();
+    checkIndexName('index_frm');
     var $indexColumns = $('#index_columns');
     $indexColumns.find('td').each(function () {
         $(this).css('width', $(this).width() + 'px');
