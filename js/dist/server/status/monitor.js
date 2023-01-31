@@ -8,19 +8,19 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 69:
+/***/ 74:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _modules_config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
-/* harmony import */ var _modules_tooltip_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
-/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(70);
-/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18);
-/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
+/* harmony import */ var _modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(75);
+/* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
+/* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18);
+/* harmony import */ var _modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13);
 
 
 
@@ -64,7 +64,7 @@ function serverResponseError() {
     },
     title: window.Messages.strRefreshFailed
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_attention') + window.Messages.strInvalidResponseExplanation);
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_attention') + window.Messages.strInvalidResponseExplanation);
   jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').dialog({
     classes: {
       'ui-dialog-titlebar-close': 'btn-close'
@@ -808,7 +808,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 
         // If json ok, try applying config
         try {
-          if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
+          if ((0,_modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
             window.localStorage.monitorCharts = JSON.stringify(json.monitorCharts);
             window.localStorage.monitorSettings = JSON.stringify(json.monitorSettings);
           }
@@ -816,7 +816,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         } catch (err) {
           alert(window.Messages.strFailedBuildingGrid);
           // If an exception is thrown, load default again
-          if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
+          if ((0,_modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
             window.localStorage.removeItem('monitorCharts');
             window.localStorage.removeItem('monitorSettings');
           }
@@ -840,7 +840,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('a[href="#clearMonitorConfig"]').on('click', function (event) {
     event.preventDefault();
-    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
+    if ((0,_modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
       window.localStorage.removeItem('monitorCharts');
       window.localStorage.removeItem('monitorSettings');
       window.localStorage.removeItem('monitorVersion');
@@ -852,9 +852,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     event.preventDefault();
     runtime.redrawCharts = !runtime.redrawCharts;
     if (!runtime.redrawCharts) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('play') + window.Messages.strResumeMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('play') + window.Messages.strResumeMonitor);
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('pause') + window.Messages.strPauseMonitor);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).html((0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('pause') + window.Messages.strPauseMonitor);
       if (!runtime.charts) {
         initGrid();
         jquery__WEBPACK_IMPORTED_MODULE_0__('a[href="#settingsPopup"]').show();
@@ -897,7 +897,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         } else {
           return serverResponseError();
         }
-        var icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success');
+        var icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success');
         var msg = '';
         var str = '';
         if (logVars.general_log === 'ON') {
@@ -911,24 +911,24 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
           msg = window.Messages.strSlowLogOn;
         }
         if (msg.length === 0) {
-          icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_error');
+          icon = (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_error');
           msg = window.Messages.strBothLogOff;
         }
         str = '<b>' + window.Messages.strCurrentSettings + '</b><br><div class="smallIndent">';
         str += icon + msg + '<br>';
         if (logVars.log_output !== 'TABLE') {
-          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
+          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_error') + ' ' + window.Messages.strLogOutNotTable + '<br>';
         } else {
-          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
+          str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success') + ' ' + window.Messages.strLogOutIsTable + '<br>';
         }
         if (logVars.slow_query_log === 'ON') {
           if (logVars.long_query_time > 2) {
-            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_attention') + ' ';
+            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_attention') + ' ';
             str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
             str += '<br>';
           }
           if (logVars.long_query_time < 2) {
-            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('s_success') + ' ';
+            str += (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success') + ' ';
             str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
             str += '<br>';
           }
@@ -1067,7 +1067,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       label: jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val().replace(/_/g, ' ')
     };
     newChart.series.push(newSeries);
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(newSeries.label + str) + '<br>');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#seriesPreview').append('- ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(newSeries.label + str) + '<br>');
     newChart.nodes.push(serie);
     jquery__WEBPACK_IMPORTED_MODULE_0__('#variableInput').val('');
     jquery__WEBPACK_IMPORTED_MODULE_0__('input[name="differentialValue"]').prop('checked', true);
@@ -1088,7 +1088,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     var i;
 
     /* Apply default values & config */
-    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
+    if ((0,_modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
       if (typeof window.localStorage.monitorCharts !== 'undefined') {
         runtime.charts = JSON.parse(window.localStorage.monitorCharts);
       }
@@ -1214,7 +1214,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   function addChart(chartObj, initialize) {
     var i;
     var settings = {
-      title: (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(chartObj.title),
+      title: (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(chartObj.title),
       grid: {
         drawBorder: false,
         shadow: false,
@@ -1960,7 +1960,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       if (name === 'user_host') {
         return value.replace(/(\[.*?\])+/g, '');
       }
-      return (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
+      return (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
     };
     for (var i = 0, l = rows.length; i < l; i++) {
       if (i === 0) {
@@ -1984,14 +1984,14 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 
     // Append a tooltip to the count column, if there exist one
     if (jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().text().indexOf('#') > -1) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_8__["default"])('b_help', '', {
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('tr').first().find('th').last().append('&nbsp;' + (0,_modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__["default"])('b_help', '', {
         'class': 'qroupedQueryInfoIcon'
       }));
       var tooltipContent = window.Messages.strCountColumnExplanation;
       if (groupInserts) {
         tooltipContent += '<p>' + window.Messages.strMoreCountColumnExplanation + '</p>';
       }
-      (0,_modules_tooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
+      (0,_modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0__('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
     }
     jquery__WEBPACK_IMPORTED_MODULE_0__('#logTable').find('table').tablesorter({
       sortList: [[cols.length - 1, 1]],
@@ -2096,7 +2096,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       }
       explain += '<p></p>';
       var tempExplain = function (key, value) {
-        var newValue = value === null ? 'null' : (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
+        var newValue = value === null ? 'null' : (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
         if (key === 'type' && newValue.toLowerCase() === 'all') {
           newValue = '<span class="text-danger">' + newValue + '</span>';
         }
@@ -2153,7 +2153,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
           jquery__WEBPACK_IMPORTED_MODULE_0__('#queryAnalyzerDialog').find('table.queryNums').hide();
           return false;
         });
-        profilingChart = (0,_modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_6__["default"])('queryProfiling', chartData);
+        profilingChart = (0,_modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_5__["default"])('queryProfiling', chartData);
       }
     });
     return profilingChart;
@@ -2170,7 +2170,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
       gridCopy[key].series = elem.series;
       gridCopy[key].maxYLabel = elem.maxYLabel;
     });
-    if (_modules_config_js__WEBPACK_IMPORTED_MODULE_4__.Config.isStorageSupported('localStorage')) {
+    if ((0,_modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
       window.localStorage.monitorCharts = JSON.stringify(gridCopy);
       window.localStorage.monitorSettings = JSON.stringify(monitorSettings);
       window.localStorage.monitorVersion = monitorProtocolVersion;
@@ -2189,7 +2189,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(69); });
+/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(74); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
