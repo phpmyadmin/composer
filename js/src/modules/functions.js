@@ -2,24 +2,23 @@ import $ from 'jquery';
 import { AJAX } from './ajax.js';
 import { Navigation } from './navigation.js';
 import { CommonParams } from './common.js';
-import { Config } from './config.js';
 import tooltip from './tooltip.js';
 import highlightSql from './sql-highlight.js';
 import { ajaxRemoveMessage, ajaxShowMessage } from './ajax-message.js';
-import handleCreateViewModal from './functions/handleCreateViewModal.js';
 import { escapeHtml } from './functions/escape.js';
 import getImageTag from './functions/getImageTag.js';
 import handleRedirectAndReload from './functions/handleRedirectAndReload.js';
 import refreshMainContent from './functions/refreshMainContent.js';
 import checkIndexType from './indexes/checkIndexType.js';
 import checkIndexName from './indexes/checkIndexName.js';
+import mainMenuResizerCallback from './functions/mainMenuResizerCallback.js';
+import isStorageSupported from './functions/isStorageSupported.js';
 
 /* global DatabaseStructure */ // js/database/structure.js
 /* global firstDayOfCalendar, themeImagePath */ // templates/javascript/variables.twig
 
 /**
  * General functions, usually for data manipulation pages.
- * @type {object}
  * @test-module Functions
  */
 const Functions = {};
@@ -798,7 +797,7 @@ Functions.onloadIdleEvent = function () {
     function UpdateIdleTime () {
         var href = 'index.php?route=/';
         var guid = 'default';
-        if (Config.isStorageSupported('sessionStorage')) {
+        if (isStorageSupported('sessionStorage')) {
             guid = window.sessionStorage.guid;
         }
         var params = {
@@ -833,7 +832,7 @@ Functions.onloadIdleEvent = function () {
                     updateTimeout = window.setTimeout(UpdateIdleTime, interval);
                 } else { // timeout occurred
                     clearInterval(incInterval);
-                    if (Config.isStorageSupported('sessionStorage')) {
+                    if (isStorageSupported('sessionStorage')) {
                         window.sessionStorage.clear();
                     }
                     // append the login form on the page, disable all the forms which were not disabled already, close all the open jqueryui modal boxes
@@ -861,7 +860,7 @@ Functions.onloadIdleEvent = function () {
             CommonParams.get('LoginCookieValidity'),
             CommonParams.get('session_gc_maxlifetime')
         );
-        if (Config.isStorageSupported('sessionStorage')) {
+        if (isStorageSupported('sessionStorage')) {
             window.sessionStorage.setItem('guid', guid());
         }
         var interval = (sessionTimeout - 5) * 1000;
@@ -1688,7 +1687,7 @@ Functions.sqlPrettyPrint = function (string) {
  * @param {Function} callbackFn   callback to execute after user clicks on OK
  * @param {Function} openCallback optional callback to run when dialog is shown
  *
- * @return {bool}
+ * @return {boolean}
  */
 Functions.confirm = function (question, url, callbackFn, openCallback) {
     var confirmState = CommonParams.get('confirm');
@@ -2790,18 +2789,12 @@ Functions.showHints = function ($div) {
     });
 };
 
-Functions.mainMenuResizerCallback = function () {
-    // 5 px margin for jumping menu in Chrome
-    // eslint-disable-next-line compat/compat
-    return $(document.body).width() - 5;
-};
-
 /**
  * @return {function}
  */
 Functions.initializeMenuResizer = () => function () {
     // Initialise the menu resize plugin
-    $('#topmenu').menuResizer(Functions.mainMenuResizerCallback);
+    $('#topmenu').menuResizer(mainMenuResizerCallback);
     // register resize event
     $(window).on('resize', function () {
         $('#topmenu').menuResizer('resize');
@@ -3005,7 +2998,7 @@ Functions.onloadRecentFavoriteTables = () => {
             cache: false,
             type: 'POST',
             data: {
-                'favoriteTables': (Config.isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined')
+                'favoriteTables': (isStorageSupported('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined')
                     ? window.localStorage.favoriteTables
                     : '',
                 'server': CommonParams.get('server'),
@@ -3013,7 +3006,7 @@ Functions.onloadRecentFavoriteTables = () => {
             },
             success: function (data) {
                 // Update localStorage.
-                if (Config.isStorageSupported('localStorage')) {
+                if (isStorageSupported('localStorage')) {
                     window.localStorage.favoriteTables = data.favoriteTables;
                 }
                 $('#pma_favorite_list').html(data.list);
@@ -3227,17 +3220,7 @@ Functions.getAutoSubmitEventHandler = function () {
     };
 };
 
-/**
- * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
- */
-const PrintPage = {
-    handleEvent: () => {
-        window.print();
-    }
-};
-
 Functions.teardownCreateView = () => {
-    $(document).off('click', 'a.create_view.ajax');
     $(document).off('keydown', '#createViewModal input, #createViewModal select');
     $(document).off('change', '#fkc_checkbox');
 };
@@ -3253,13 +3236,6 @@ Functions.onloadCreateView = function () {
         form.submit();
         sessionStorage.clear();
         return false;
-    });
-    /**
-     * Ajaxification for the "Create View" action
-     */
-    $(document).on('click', 'a.create_view.ajax', function (e) {
-        e.preventDefault();
-        handleCreateViewModal($(this));
     });
     /**
      * Attach Ajax event handlers for input fields in the editor
@@ -3488,28 +3464,6 @@ Functions.onloadLoginForm = () => {
 };
 
 /**
- * Formats timestamp for display
- *
- * @param {string} date
- * @param {bool} seconds
- * @return {string}
- */
-Functions.formatDateTime = function (date, seconds) {
-    var result = $.datepicker.formatDate('yy-mm-dd', date);
-    var timefmt = 'HH:mm';
-    if (seconds) {
-        timefmt = 'HH:mm:ss';
-    }
-    return result + ' ' + $.datepicker.formatTime(
-        timefmt, {
-            hour: date.getHours(),
-            minute: date.getMinutes(),
-            second: date.getSeconds()
-        }
-    );
-};
-
-/**
  * Toggle the Datetimepicker UI if the date value entered
  * by the user in the 'text box' is not going to be accepted
  * by the Datetimepicker plugin (but is accepted by MySQL)
@@ -3608,80 +3562,5 @@ Functions.getPostData = function () {
     return dataPost;
 };
 $.fn.getPostData = Functions.getPostData;
-
-/**
- * @return {function}
- */
-Functions.off = function () {
-    return function () {
-        Functions.teardownIdleEvent();
-        $(document).off('click', 'input:checkbox.checkall');
-        Functions.teardownSqlQueryEditEvents();
-        Functions.removeAutocompleteInfo();
-        Functions.teardownCreateTableEvents();
-        Functions.teardownEnumSetEditorMessage();
-        Functions.teardownEnumSetEditor();
-        $(document).off('click', '#index_frm input[type=submit]');
-        $('div.toggle-container').off('click');
-        $(document).off('change', 'select.pageselector');
-        Functions.teardownRecentFavoriteTables();
-        Functions.teardownCodeMirrorEditor();
-        $(document).off('change', '.autosubmit');
-        document.querySelectorAll('.jsPrintButton').forEach(item => {
-            item.removeEventListener('click', PrintPage);
-        });
-        Functions.teardownCreateView();
-        $(document).off('keydown', 'form input, form textarea, form select');
-        $(document).off('change', 'input[type=radio][name="pw_hash"]');
-        Functions.teardownSortLinkMouseEvent();
-    };
-};
-
-/**
- * @return {function}
- */
-Functions.on = function () {
-    return function () {
-        Functions.onloadIdleEvent();
-        $(document).on('click', 'input:checkbox.checkall', Functions.getCheckAllCheckboxEventHandler());
-        Functions.addDateTimePicker();
-
-        /**
-         * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
-         */
-        if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
-            $('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
-        }
-
-        Functions.onloadSqlQueryEditEvents();
-        Functions.onloadCreateTableEvents();
-        Functions.onloadChangePasswordEvents();
-        Functions.onloadEnumSetEditorMessage();
-        Functions.onloadEnumSetEditor();
-        $(document).on('click', '#index_frm input[type=submit]', Functions.getAddIndexEventHandler());
-        Functions.showHints();
-        Functions.initializeToggleButtons();
-        $(document).on('change', 'select.pageselector', Functions.getPageSelectorEventHandler());
-        Functions.onloadRecentFavoriteTables();
-        Functions.onloadCodeMirrorEditor();
-        Functions.onloadLockPage();
-        $(document).on('change', '.autosubmit', Functions.getAutoSubmitEventHandler());
-        document.querySelectorAll('.jsPrintButton').forEach(item => {
-            item.addEventListener('click', PrintPage);
-        });
-        Functions.onloadCreateView();
-        $(document).on('change', checkboxesSel, Functions.checkboxesChanged);
-        $(document).on('change', 'input.checkall_box', Functions.getCheckAllBoxEventHandler());
-        $(document).on('click', '.checkall-filter', Functions.getCheckAllFilterEventHandler());
-        $(document).on('change', checkboxesSel + ', input.checkall_box:checkbox:enabled', Functions.subCheckboxesChanged);
-        $(document).on('change', 'input.sub_checkall_box', Functions.getSubCheckAllBoxEventHandler());
-        $(document).on('keyup', '#filterText', Functions.getFilterTextEventHandler());
-        Functions.onloadFilterText();
-        Functions.onloadLoginForm();
-        $('form input, form textarea, form select').on('keydown', Functions.getKeyboardFormSubmitEventHandler());
-        $(document).on('change', 'select#select_authentication_plugin_cp', Functions.getSslPasswordEventHandler());
-        Functions.onloadSortLinkMouseEvent();
-    };
-};
 
 export { Functions };
