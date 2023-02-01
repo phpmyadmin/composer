@@ -346,7 +346,7 @@ const AJAX = {
   /**
    * Event handler for clicks on links and form submissions
    *
-   * @param {KeyboardEvent} event Event data
+   * @param {JQuery.Event} event Event data
    *
    * @return {boolean | void}
    */
@@ -969,7 +969,7 @@ const AJAX = {
 
   /**
    * Gracefully handle fatal server errors (e.g: 500 - Internal server error)
-   * @return {function}
+   * @return {function(JQuery.Event, JQuery.jqXHR): void}
    */
   getFatalErrorHandler: function () {
     return function (event, request) {
@@ -4252,7 +4252,7 @@ window.centralColumnList = [];
 
 /**
  * Make sure that ajax requests will not be cached by appending a random variable to their parameters.
- * @return {function}
+ * @return {function(JQuery.AjaxSettings, JQuery.AjaxSettings): void}
  */
 Functions.addNoCacheToAjaxRequests = () => function (options, originalOptions) {
   var nocache = new Date().getTime() + '' + Math.floor(Math.random() * 1000000);
