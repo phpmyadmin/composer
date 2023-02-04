@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[28],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[23],{
 
 /***/ 1:
 /***/ (function(module) {
@@ -64,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [49], function() { return __webpack_exec__(55); });
+/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(55); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

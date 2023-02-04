@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],[
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[44],[
 /* 0 */,
 /* 1 */,
 /* 2 */,
