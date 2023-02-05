@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 84:
+/***/ 85:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 /* harmony import */ var _modules_sql_highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
 /* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(10);
-/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(75);
+/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(76);
 /* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
 /* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(23);
 /* harmony import */ var _modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(13);
@@ -1278,7 +1278,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(84); });
+/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(85); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

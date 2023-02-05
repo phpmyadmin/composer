@@ -8,13 +8,13 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 51:
+/***/ 52:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
-/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(52);
-/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(53);
+/* harmony import */ var _modules_git_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
+/* harmony import */ var _modules_themes_manager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54);
 
 
 
@@ -34,7 +34,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerOnload('home.js', () 
 
 /***/ }),
 
-/***/ 52:
+/***/ 53:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -180,7 +180,7 @@ function showGitVersion() {
 
 /***/ }),
 
-/***/ 53:
+/***/ 54:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -206,7 +206,7 @@ const ThemesManager = {
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(51); });
+/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(52); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

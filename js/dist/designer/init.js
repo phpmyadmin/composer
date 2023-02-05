@@ -8,6 +8,34 @@ module.exports = jQuery;
 
 /***/ }),
 
+/***/ 43:
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DesignerConfig": function() { return /* binding */ DesignerConfig; }
+/* harmony export */ });
+const DesignerConfig = {
+  /** @type {any[]} */
+  jTabs: [],
+  /** @type {any[]} */
+  hTabs: [],
+  /** @type {any[]} */
+  contr: [],
+  /** @type {any[]} */
+  displayField: [],
+  /** @type {number} */
+  server: 0,
+  /** @type {number} */
+  selectedPage: -1,
+  /** @type {string} */
+  db: '',
+  /** @type {boolean} */
+  designerTablesEnabled: false
+};
+
+/***/ }),
+
 /***/ 41:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
@@ -238,6 +266,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
 /* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
+
 
 
 
@@ -894,23 +924,23 @@ DesignerHistory.queryFrom = function () {
   // if master table (key2) matches with tab used get all keys and check if tab_left matches
   // after this check if master table (key2) matches with tab left then check if any foreign matches with master .
   for (i = 0; i < 2; i++) {
-    for (K in window.contr) {
-      for (key in window.contr[K]) {
+    for (K in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr) {
+      for (key in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K]) {
         // contr name
-        for (key2 in window.contr[K][key]) {
+        for (key2 in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key]) {
           // table name
           parts = key2.split('.');
           if (DesignerHistory.found(tabUsed, parts[1]) > 0) {
-            for (key3 in window.contr[K][key][key2]) {
-              parts1 = window.contr[K][key][key2][key3][0].split('.');
+            for (key3 in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2]) {
+              parts1 = _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][0].split('.');
               if (DesignerHistory.found(tabLeft, parts1[1]) > 0) {
                 if (DesignerHistory.found(constraintsAdded, key) > 0) {
                   query += ' AND ' + '`' + parts[1] + '`.`' + key3 + '` = ';
-                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` ';
+                  query += '`' + parts1[1] + '`.`' + _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][1] + '` ';
                 } else {
                   query += '\n' + 'LEFT JOIN ';
                   query += '`' + parts[1] + '` ON ';
-                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` = ';
+                  query += '`' + parts1[1] + '`.`' + _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][1] + '` = ';
                   query += '`' + parts[1] + '`.`' + key3 + '` ';
                   constraintsAdded.push(key);
                 }
@@ -926,22 +956,22 @@ DesignerHistory.queryFrom = function () {
     tabUsed = DesignerHistory.addArray(tTabLeft, tabUsed);
     tabLeft = DesignerHistory.removeArray(tTabLeft, tabLeft);
     tTabLeft = [];
-    for (K in window.contr) {
-      for (key in window.contr[K]) {
-        for (key2 in window.contr[K][key]) {
+    for (K in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr) {
+      for (key in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K]) {
+        for (key2 in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key]) {
           // table name
           parts = key2.split('.');
           if (DesignerHistory.found(tabLeft, parts[1]) > 0) {
-            for (key3 in window.contr[K][key][key2]) {
-              parts1 = window.contr[K][key][key2][key3][0].split('.');
+            for (key3 in _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2]) {
+              parts1 = _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][0].split('.');
               if (DesignerHistory.found(tabUsed, parts1[1]) > 0) {
                 if (DesignerHistory.found(constraintsAdded, key) > 0) {
                   query += ' AND ' + '`' + parts[1] + '`.`' + key3 + '` = ';
-                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` ';
+                  query += '`' + parts1[1] + '`.`' + _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][1] + '` ';
                 } else {
                   query += '\n' + 'LEFT JOIN ';
                   query += '`' + parts[1] + '` ON ';
-                  query += '`' + parts1[1] + '`.`' + window.contr[K][key][key2][key3][1] + '` = ';
+                  query += '`' + parts1[1] + '`.`' + _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.contr[K][key][key2][key3][1] + '` = ';
                   query += '`' + parts[1] + '`.`' + key3 + '` ';
                   constraintsAdded.push(key);
                 }
@@ -1055,8 +1085,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 /* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41);
 /* harmony import */ var _history_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(42);
-/* harmony import */ var _move_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(43);
-/* harmony import */ var _page_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45);
+/* harmony import */ var _move_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(44);
+/* harmony import */ var _page_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(46);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(43);
+
 
 
 
@@ -1067,8 +1099,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Initializes the data required to run Designer, then fires it up.
  */
-
-/* global designerConfig */ // templates/database/designer/main.twig
 
 _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
   _history_js__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.vqbEditor = null;
@@ -1230,7 +1260,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
     return false;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#reloadPage').on('click', function () {
-    _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.loadPage(window.selectedPage);
+    _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0__('#angular_direct_button').on('click', function () {
     _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.angularDirect();
@@ -1319,19 +1349,22 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
     jquery__WEBPACK_IMPORTED_MODULE_0__('#ab').accordion('refresh');
     return false;
   });
-  window.jTabs = designerConfig.scriptTables.j_tabs;
-  window.hTabs = designerConfig.scriptTables.h_tabs;
-  window.contr = designerConfig.scriptContr;
-  window.displayField = designerConfig.scriptDisplayField;
-  window.server = designerConfig.server;
-  window.selectedPage = designerConfig.displayPage;
-  window.db = designerConfig.db;
-  window.designerTablesEnabled = designerConfig.tablesEnabled;
+
+  // @ts-ignore
+  const configValues = window.designerConfig;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.jTabs = configValues.scriptTables.j_tabs;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.hTabs = configValues.scriptTables.h_tabs;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.contr = configValues.scriptContr;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.displayField = configValues.scriptDisplayField;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.server = configValues.server;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage = configValues.displayPage;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db = configValues.db;
+  _config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled = configValues.tablesEnabled;
   _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.main();
-  if (!window.designerTablesEnabled) {
+  if (!_config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled) {
     _database_js__WEBPACK_IMPORTED_MODULE_2__.DesignerOfflineDB.open(function (success) {
       if (success) {
-        _page_js__WEBPACK_IMPORTED_MODULE_5__.DesignerPage.showTablesInLandingPage(window.db);
+        _page_js__WEBPACK_IMPORTED_MODULE_5__.DesignerPage.showTablesInLandingPage(_config_js__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db);
       }
     });
   }
@@ -1354,7 +1387,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1367,9 +1400,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 /* harmony import */ var _modules_functions_refreshMainContent_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23);
 /* harmony import */ var _modules_navigation_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-/* harmony import */ var _objects_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(44);
+/* harmony import */ var _objects_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(45);
 /* harmony import */ var _history_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(42);
-/* harmony import */ var _page_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(45);
+/* harmony import */ var _page_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(46);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(43);
+
 
 
 
@@ -1578,7 +1613,7 @@ DesignerMove.main = function () {
 DesignerMove.resizeOsnTab = function () {
   var maxX = 0;
   var maxY = 0;
-  for (var key in window.jTabs) {
+  for (var key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     var kX = parseInt(document.getElementById(key).style[mainDirection], 10) + document.getElementById(key).offsetWidth;
     var kY = parseInt(document.getElementById(key).style.top, 10) + document.getElementById(key).offsetHeight;
     maxX = maxX < kX ? kX : maxX;
@@ -1619,21 +1654,21 @@ DesignerMove.reload = function () {
   var key3;
   DesignerMove.clear();
   var osnTab = document.getElementById('osn_tab');
-  for (K in window.contr) {
-    for (key in window.contr[K]) {
+  for (K in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
+    for (key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
       // contr name
-      for (key2 in window.contr[K][key]) {
+      for (key2 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key]) {
         // table name
-        for (key3 in window.contr[K][key][key2]) {
+        for (key3 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2]) {
           // field name
-          if (!document.getElementById('check_vis_' + key2).checked || !document.getElementById('check_vis_' + window.contr[K][key][key2][key3][0]).checked) {
+          if (!document.getElementById('check_vis_' + key2).checked || !document.getElementById('check_vis_' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).checked) {
             // if hide
             continue;
           }
           var x1Left = document.getElementById(key2).offsetLeft + 1;
           var x1Right = x1Left + document.getElementById(key2).offsetWidth;
-          var x2Left = document.getElementById(window.contr[K][key][key2][key3][0]).offsetLeft;
-          var x2Right = x2Left + document.getElementById(window.contr[K][key][key2][key3][0]).offsetWidth;
+          var x2Left = document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft;
+          var x2Right = x2Left + document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
           a[0] = Math.abs(x1Left - x2Left);
           a[1] = Math.abs(x1Left - x2Right);
           a[2] = Math.abs(x1Right - x2Left);
@@ -1680,17 +1715,17 @@ DesignerMove.reload = function () {
           }
           var y1 = document.getElementById(key2).offsetTop + rowOffsetTop + heightField;
           rowOffsetTop = 0;
-          tabHideButton = document.getElementById('id_hide_tbody_' + window.contr[K][key][key2][key3][0]);
+          tabHideButton = document.getElementById('id_hide_tbody_' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]);
           if (tabHideButton.innerHTML === 'v') {
-            var toColumn = document.getElementById(window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]);
+            var toColumn = document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
             if (toColumn) {
               rowOffsetTop = toColumn.offsetTop;
             } else {
               continue;
             }
           }
-          var y2 = document.getElementById(window.contr[K][key][key2][key3][0]).offsetTop + rowOffsetTop + heightField;
-          DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]);
+          var y2 = document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + rowOffsetTop + heightField;
+          DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
         }
       }
     }
@@ -1947,7 +1982,7 @@ DesignerMove.addOtherDbTables = function () {
         jquery__WEBPACK_IMPORTED_MODULE_0__('#container-form').append($newTableDom);
         DesignerMove.enableTableEvents(null, $newTableDom);
         DesignerMove.addTableToTablesList(null, $newTableDom);
-        window.jTabs[dbEncoded + '.' + tableEncoded] = 1;
+        _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs[dbEncoded + '.' + tableEncoded] = 1;
         DesignerMove.markUnsaved();
       }
     });
@@ -1988,7 +2023,7 @@ DesignerMove.new = function () {
 // ------------------------------ SAVE ------------------------------------------
 // (del?) no for pdf
 DesignerMove.save = function (url) {
-  for (var key in window.jTabs) {
+  for (var key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     document.getElementById('t_x_' + key + '_').value = parseInt(document.getElementById(key).style.left, 10);
     document.getElementById('t_y_' + key + '_').value = parseInt(document.getElementById(key).style.top, 10);
     document.getElementById('t_v_' + key + '_').value = document.getElementById('id_tbody_' + key).style.display === 'none' ? 0 : 1;
@@ -1999,11 +2034,11 @@ DesignerMove.save = function (url) {
 };
 DesignerMove.getUrlPos = function (forceString) {
   var key;
-  if (window.designerTablesEnabled || forceString) {
+  if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled || forceString) {
     var poststr = '';
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     var i = 1;
-    for (key in window.jTabs) {
+    for (key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
       poststr += argsep + 't_x[' + i + ']=' + parseInt(document.getElementById(key).style.left, 10);
       poststr += argsep + 't_y[' + i + ']=' + parseInt(document.getElementById(key).style.top, 10);
       poststr += argsep + 't_v[' + i + ']=' + (document.getElementById('id_tbody_' + key).style.display === 'none' ? 0 : 1);
@@ -2015,7 +2050,7 @@ DesignerMove.getUrlPos = function (forceString) {
     return poststr;
   } else {
     var coords = [];
-    for (key in window.jTabs) {
+    for (key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
       if (document.getElementById('check_vis_' + key).checked) {
         var x = parseInt(document.getElementById(key).style.left, 10);
         var y = parseInt(document.getElementById(key).style.top, 10);
@@ -2027,10 +2062,10 @@ DesignerMove.getUrlPos = function (forceString) {
   }
 };
 DesignerMove.save2 = function (callback) {
-  if (window.designerTablesEnabled) {
+  if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     var poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
-    poststr += argsep + 'server=' + window.server + argsep + 'db=' + encodeURIComponent(window.db) + argsep + 'selected_page=' + window.selectedPage;
+    poststr += argsep + 'server=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + encodeURIComponent(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db) + argsep + 'selected_page=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage;
     poststr += DesignerMove.getUrlPos();
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', poststr, function (data) {
@@ -2047,7 +2082,7 @@ DesignerMove.save2 = function (callback) {
     });
   } else {
     var name = jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').html().trim();
-    _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(window.db, window.selectedPage, name, DesignerMove.getUrlPos(), function () {
+    _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage, name, DesignerMove.getUrlPos(), function () {
       DesignerMove.markSaved();
       if (typeof callback !== 'undefined') {
         callback();
@@ -2063,7 +2098,7 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
     return;
   }
   modal.modal('hide');
-  if (window.designerTablesEnabled) {
+  if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.prepareForAjaxRequest($form);
     jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
@@ -2073,7 +2108,7 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
         DesignerMove.markSaved();
         if (data.id) {
-          window.selectedPage = data.id;
+          _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage = data.id;
         }
         jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').text(name);
         if (typeof callback !== 'undefined') {
@@ -2082,10 +2117,10 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
       }
     });
   } else {
-    _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToNewPage(window.db, name, DesignerMove.getUrlPos(), function (page) {
+    _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToNewPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, name, DesignerMove.getUrlPos(), function (page) {
       DesignerMove.markSaved();
       if (page.pgNr) {
-        window.selectedPage = page.pgNr;
+        _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage = page.pgNr;
       }
       jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').text(page.pageDescr);
       if (typeof callback !== 'undefined') {
@@ -2095,10 +2130,10 @@ DesignerMove.submitSaveDialogAndClose = function (callback, modal) {
   }
 };
 DesignerMove.save3 = function (callback) {
-  if (window.selectedPage !== -1) {
+  if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage !== -1) {
     DesignerMove.save2(callback);
   } else {
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('<form action="index.php?route=/database/designer" method="post" name="save_page" id="save_page" class="ajax"></form>').append('<input type="hidden" name="server" value="' + window.server + '">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="hidden" name="db" />').val(window.db)).append('<input type="hidden" name="operation" value="savePage">').append('<input type="hidden" name="save_page" value="new">').append('<label for="selected_value">' + window.Messages.strPageName + '</label>:<input type="text" name="selected_value">');
+    var $form = jquery__WEBPACK_IMPORTED_MODULE_0__('<form action="index.php?route=/database/designer" method="post" name="save_page" id="save_page" class="ajax"></form>').append('<input type="hidden" name="server" value="' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + '">').append(jquery__WEBPACK_IMPORTED_MODULE_0__('<input type="hidden" name="db" />').val(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db)).append('<input type="hidden" name="operation" value="savePage">').append('<input type="hidden" name="save_page" value="new">').append('<label for="selected_value">' + window.Messages.strPageName + '</label>:<input type="text" name="selected_value">');
     var modal = DesignerMove.displayModal($form, window.Messages.strSavePage, '#designerGoModal');
     $form.on('submit', function (e) {
       e.preventDefault();
@@ -2119,16 +2154,16 @@ DesignerMove.editPages = function () {
     var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
       'ajax_request': true,
-      'server': window.server,
-      'db': window.db,
+      'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
+      'db': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db,
       'dialog': 'edit'
     }, function (data) {
       if (data.success === false) {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
       } else {
         (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
-        if (!window.designerTablesEnabled) {
-          _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(window.db, function (options) {
+        if (!_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
+          _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, function (options) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
           });
         }
@@ -2154,16 +2189,16 @@ DesignerMove.deletePages = function () {
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
-    'server': window.server,
-    'db': window.db,
+    'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
+    'db': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db,
     'dialog': 'delete'
   }, function (data) {
     if (data.success === false) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
-      if (!window.designerTablesEnabled) {
-        _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(window.db, function (options) {
+      if (!_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
+        _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, function (options) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
         });
       }
@@ -2176,9 +2211,9 @@ DesignerMove.deletePages = function () {
           return;
         }
         var $messageBox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        var deletingCurrentPage = parseInt(selected) === window.selectedPage;
+        var deletingCurrentPage = parseInt(selected) === _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage;
         _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.prepareForAjaxRequest($form);
-        if (window.designerTablesEnabled) {
+        if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize(), function (data) {
             if (data.success === false) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
@@ -2217,16 +2252,16 @@ DesignerMove.saveAs = function () {
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
-    'server': window.server,
-    'db': window.db,
+    'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
+    'db': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db,
     'dialog': 'save_as'
   }, function (data) {
     if (data.success === false) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
-      if (!window.designerTablesEnabled) {
-        _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(window.db, function (options) {
+      if (!_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
+        _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.createPageList(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, function (options) {
           jquery__WEBPACK_IMPORTED_MODULE_0__('#selected_page').append(options);
         });
       }
@@ -2251,7 +2286,7 @@ DesignerMove.saveAs = function () {
           name = selectedValue;
         }
         var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        if (window.designerTablesEnabled) {
+        if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
           _modules_functions_js__WEBPACK_IMPORTED_MODULE_1__.Functions.prepareForAjaxRequest($form);
           jquery__WEBPACK_IMPORTED_MODULE_0__.post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
             if (data.success === false) {
@@ -2260,30 +2295,30 @@ DesignerMove.saveAs = function () {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
               if (data.id) {
-                window.selectedPage = data.id;
+                _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage = data.id;
               }
-              DesignerMove.loadPage(window.selectedPage);
+              DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
             }
           }); // end $.post()
         } else {
           if (choice === 'same') {
             var selectedPageId = $selectedPage.find('option:selected').val();
-            _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(window.db, selectedPageId, name, DesignerMove.getUrlPos(), function (page) {
+            _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, selectedPageId, name, DesignerMove.getUrlPos(), function (page) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
               if (page.pgNr) {
-                window.selectedPage = page.pgNr;
+                _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage = page.pgNr;
               }
-              DesignerMove.loadPage(window.selectedPage);
+              DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
             });
           } else if (choice === 'new') {
-            _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToNewPage(window.db, name, DesignerMove.getUrlPos(), function (page) {
+            _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToNewPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, name, DesignerMove.getUrlPos(), function (page) {
               (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
               if (page.pgNr) {
-                window.selectedPage = page.pgNr;
+                _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage = page.pgNr;
               }
-              DesignerMove.loadPage(window.selectedPage);
+              DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
             });
           }
         }
@@ -2291,15 +2326,15 @@ DesignerMove.saveAs = function () {
         modal.modal('hide');
       });
       // select current page by default
-      if (window.selectedPage !== -1) {
-        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="selected_page"]').val(window.selectedPage);
+      if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage !== -1) {
+        jquery__WEBPACK_IMPORTED_MODULE_0__('select[name="selected_page"]').val(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
       }
     }
   }); // end $.post()
 };
 
 DesignerMove.promptToSaveCurrentPage = function (callback) {
-  if (change === 1 || window.selectedPage === -1) {
+  if (change === 1 || _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage === -1) {
     var modal = DesignerMove.displayModal('<div>' + window.Messages.strLeavingPage + '</div>', window.Messages.strSavePage, '#designerPromptModal');
     jquery__WEBPACK_IMPORTED_MODULE_0__('#designerModalYesButton').on('click', function () {
       modal.modal('hide');
@@ -2320,17 +2355,17 @@ DesignerMove.exportPages = function () {
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
     'ajax_request': true,
-    'server': window.server,
-    'db': window.db,
+    'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
+    'db': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db,
     'dialog': 'export',
-    'selected_page': window.selectedPage
+    'selected_page': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage
   }, function (data) {
     if (data.success === false) {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0__(data.message);
-      if (!window.designerTablesEnabled) {
+      if (!_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
         $form.append('<input type="hidden" name="offline_export" value="true">');
       }
       jquery__WEBPACK_IMPORTED_MODULE_0__.each(DesignerMove.getUrlPos(true).substring(1).split(argsep), function () {
@@ -2357,16 +2392,16 @@ DesignerMove.exportPages = function () {
 };
 
 DesignerMove.loadPage = function (page) {
-  if (window.designerTablesEnabled) {
+  if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
     var paramPage = '';
     var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     if (page !== null) {
       paramPage = argsep + 'page=' + page;
     }
-    jquery__WEBPACK_IMPORTED_MODULE_0__('<a href="index.php?route=/database/designer&server=' + window.server + argsep + 'db=' + encodeURIComponent(window.db) + paramPage + '"></a>').appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content')).trigger('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0__('<a href="index.php?route=/database/designer&server=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + encodeURIComponent(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db) + paramPage + '"></a>').appendTo(jquery__WEBPACK_IMPORTED_MODULE_0__('#page_content')).trigger('click');
   } else {
     if (page === null) {
-      _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.showTablesInLandingPage(window.db);
+      _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.showTablesInLandingPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db);
     } else if (page > -1) {
       _page_js__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.loadHtmlForPage(page);
     } else if (page === -1) {
@@ -2407,7 +2442,7 @@ DesignerMove.saveValueInConfig = function (indexSent, valueSent) {
     'operation': 'save_setting_value',
     'index': indexSent,
     'ajax_request': true,
-    'server': window.server,
+    'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
     'value': valueSent
   }, function (data) {
     if (data.success === false) {
@@ -2447,7 +2482,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
         alert(window.Messages.strPleaseSelectPrimaryOrUniqueKey);
         return; // 0;
       } // PK
-      if (window.jTabs[db + '.' + T] !== 1) {
+      if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs[db + '.' + T] !== 1) {
         document.getElementById('foreign_relation').style.display = 'none';
       }
       clickField = 1;
@@ -2455,7 +2490,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
       document.getElementById('designer_hint').innerHTML = window.Messages.strSelectForeignKey;
     } else {
       DesignerMove.startRelation(); // hidden hint...
-      if (window.jTabs[db + '.' + T] !== 1 || !pkLocal) {
+      if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs[db + '.' + T] !== 1 || !pkLocal) {
         document.getElementById('foreign_relation').style.display = 'none';
       }
       var left = globX - (document.getElementById('layer_new_relation').offsetWidth >> 1);
@@ -2469,12 +2504,12 @@ DesignerMove.clickField = function (db, T, f, pk) {
   if (onDisplayField) {
     var fieldNameToSend = decodeURIComponent(f);
     var newDisplayFieldClass = 'tab_field';
-    var oldTabField = document.getElementById('id_tr_' + T + '.' + window.displayField[T]);
+    var oldTabField = document.getElementById('id_tr_' + T + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
     // if is display field
-    if (window.displayField[T] === f) {
+    if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T] === f) {
       // The display field is already the one defined, user wants to remove it
       newDisplayFieldClass = 'tab_field';
-      delete window.displayField[T];
+      delete _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T];
       if (oldTabField) {
         // Clear the style
         // Set display field class on old item
@@ -2483,16 +2518,16 @@ DesignerMove.clickField = function (db, T, f, pk) {
       fieldNameToSend = '';
     } else {
       newDisplayFieldClass = 'tab_field_3';
-      if (window.displayField[T]) {
+      if (_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]) {
         // Had a previous one, clear it
         if (oldTabField) {
           // Set display field class on old item
           oldTabField.className = 'tab_field';
         }
-        delete window.displayField[T];
+        delete _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T];
       }
-      window.displayField[T] = f;
-      var tabField = document.getElementById('id_tr_' + T + '.' + window.displayField[T]);
+      _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T] = f;
+      var tabField = document.getElementById('id_tr_' + T + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
       if (tabField) {
         // Set new display field class
         tabField.className = newDisplayFieldClass;
@@ -2506,7 +2541,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
     jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', {
       'operation': 'setDisplayField',
       'ajax_request': true,
-      'server': window.server,
+      'server': _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
       'db': db,
       'table': T,
       'field': fieldNameToSend
@@ -2523,7 +2558,7 @@ DesignerMove.clickField = function (db, T, f, pk) {
 DesignerMove.newRelation = function () {
   document.getElementById('layer_new_relation').style.display = 'none';
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db + argsep + 'db2=p';
+  linkRelation += argsep + 'server=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db + argsep + 'db2=p';
   linkRelation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
   linkRelation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
@@ -2533,7 +2568,7 @@ DesignerMove.newRelation = function () {
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.message);
-      DesignerMove.loadPage(window.selectedPage);
+      DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
     }
   }); // end $.post()
 };
@@ -2581,7 +2616,7 @@ DesignerMove.smallTabAll = function (idThis) {
 
 // invert max/min all tables
 DesignerMove.smallTabInvert = function () {
-  for (var key in window.jTabs) {
+  for (var key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     DesignerMove.smallTab(key, 0);
   }
   DesignerMove.reload();
@@ -2594,7 +2629,7 @@ DesignerMove.relationLinesInvert = function () {
   DesignerMove.reload();
 };
 DesignerMove.smallTabRefresh = function () {
-  for (var key in window.jTabs) {
+  for (var key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     if (document.getElementById('id_hide_tbody_' + key).innerHTML !== 'v') {
       DesignerMove.smallTab(key, 0);
     }
@@ -2652,18 +2687,18 @@ DesignerMove.canvasClick = function (id, event) {
   localY -= jquery__WEBPACK_IMPORTED_MODULE_0__('#osn_tab').offset().top;
   DesignerMove.clear();
   var osnTab = document.getElementById('osn_tab');
-  for (K in window.contr) {
-    for (key in window.contr[K]) {
-      for (key2 in window.contr[K][key]) {
-        for (key3 in window.contr[K][key][key2]) {
-          if (!document.getElementById('check_vis_' + key2).checked || !document.getElementById('check_vis_' + window.contr[K][key][key2][key3][0]).checked) {
+  for (K in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
+    for (key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
+      for (key2 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key]) {
+        for (key3 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2]) {
+          if (!document.getElementById('check_vis_' + key2).checked || !document.getElementById('check_vis_' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).checked) {
             continue; // if hide
           }
 
           var x1Left = document.getElementById(key2).offsetLeft + 1; // document.getElementById(key2+"."+key3).offsetLeft;
           var x1Right = x1Left + document.getElementById(key2).offsetWidth;
-          var x2Left = document.getElementById(window.contr[K][key][key2][key3][0]).offsetLeft; // +document.getElementById(contr[K][key2][key3][0]+"."+contr[K][key2][key3][1]).offsetLeft
-          var x2Right = x2Left + document.getElementById(window.contr[K][key][key2][key3][0]).offsetWidth;
+          var x2Left = document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft; // +document.getElementById(contr[K][key2][key3][0]+"."+contr[K][key2][key3][1]).offsetLeft
+          var x2Right = x2Left + document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
           a[0] = Math.abs(x1Left - x2Left);
           a[1] = Math.abs(x1Left - x2Right);
           a[2] = Math.abs(x1Right - x2Left);
@@ -2699,17 +2734,17 @@ DesignerMove.canvasClick = function (id, event) {
             sLeft = 1;
           }
           var y1 = document.getElementById(key2).offsetTop + document.getElementById(key2 + '.' + key3).offsetTop + heightField;
-          var y2 = document.getElementById(window.contr[K][key][key2][key3][0]).offsetTop + document.getElementById(window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]).offsetTop + heightField;
+          var y2 = document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + document.getElementById(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]).offsetTop + heightField;
           if (!selected && localX > x1 - 10 && localX < x1 + 10 && localY > y1 - 7 && localY < y1 + 7) {
             DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, 'rgba(255,0,0,1)');
             selected = 1;
-            Key0 = window.contr[K][key][key2][key3][0];
-            Key1 = window.contr[K][key][key2][key3][1];
+            Key0 = _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0];
+            Key1 = _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1];
             Key2 = key2;
             Key3 = key3;
             Key = K;
           } else {
-            DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, window.contr[K][key][key2][key3][0] + '.' + window.contr[K][key][key2][key3][1]);
+            DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
           }
         }
       }
@@ -2729,7 +2764,7 @@ DesignerMove.canvasClick = function (id, event) {
 DesignerMove.updRelation = function () {
   document.getElementById('layer_upd_relation').style.display = 'none';
   var argsep = _modules_common_js__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  linkRelation += argsep + 'server=' + window.server + argsep + 'db=' + window.db;
+  linkRelation += argsep + 'server=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db;
   linkRelation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
   var $msgbox = (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
   jquery__WEBPACK_IMPORTED_MODULE_0__.post('index.php?route=/database/designer', linkRelation, function (data) {
@@ -2738,7 +2773,7 @@ DesignerMove.updRelation = function () {
     } else {
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.message);
-      DesignerMove.loadPage(window.selectedPage);
+      DesignerMove.loadPage(_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage);
     }
   }); // end $.post()
 };
@@ -2793,14 +2828,14 @@ DesignerMove.noHaveConstr = function (idThis) {
   var key;
   var key2;
   var key3;
-  for (K in window.contr) {
-    for (key in window.contr[K]) {
+  for (K in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
+    for (key in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
       // contr name
-      for (key2 in window.contr[K][key]) {
+      for (key2 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key]) {
         // table name
-        for (key3 in window.contr[K][key][key2]) {
+        for (key3 in _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2]) {
           // field name
-          a[key2] = a[window.contr[K][key][key2][key3][0]] = 1; // exist constr
+          a[key2] = a[_config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]] = 1; // exist constr
         }
       }
     }
@@ -3066,23 +3101,23 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     }
     p = document.getElementById('Query');
     whereObj = new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Where(rel.value, p.value); // make where object
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, whereObj, tableName, window.hTabs[dbTableNameUrl], 'Where'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, whereObj, tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Where'));
     sum = sum + 1;
   }
   if (document.getElementById('new_name').value !== '') {
     var renameObj = new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Rename(document.getElementById('new_name').value); // make Rename object
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, renameObj, tableName, window.hTabs[dbTableNameUrl], 'Rename'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, renameObj, tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Rename'));
     sum = sum + 1;
   }
   if (document.getElementById('operator').value !== '---') {
     var aggregateObj = new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Aggregate(document.getElementById('operator').value);
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, aggregateObj, tableName, window.hTabs[dbTableNameUrl], 'Aggregate'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, aggregateObj, tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Aggregate'));
     sum = sum + 1;
     // make aggregate operator
   }
 
   if (document.getElementById('groupby').checked === true) {
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, 'GroupBy', tableName, window.hTabs[dbTableNameUrl], 'GroupBy'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, 'GroupBy', tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'GroupBy'));
     sum = sum + 1;
     // make groupby
   }
@@ -3092,14 +3127,14 @@ DesignerMove.addObject = function (dbName, tableName, colName, dbTableNameUrl) {
       return;
     }
     whereObj = new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Having(document.getElementById('h_rel_opt').value, document.getElementById('having').value, document.getElementById('h_operator').value); // make where object
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, whereObj, tableName, window.hTabs[dbTableNameUrl], 'Having'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, whereObj, tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Having'));
     sum = sum + 1;
     // make having
   }
 
   if (document.getElementById('orderby').value !== '---') {
     var orderByObj = new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.OrderBy(document.getElementById('orderby').value);
-    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, orderByObj, tableName, window.hTabs[dbTableNameUrl], 'OrderBy'));
+    _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_js__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, orderByObj, tableName, _config_js__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'OrderBy'));
     sum = sum + 1;
     // make orderby
   }
@@ -3170,7 +3205,7 @@ DesignerMove.enableTableEvents = function (index, element) {
 
 /***/ }),
 
-/***/ 44:
+/***/ 45:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3202,7 +3237,7 @@ var DesignerObjects = {
 
 /***/ }),
 
-/***/ 45:
+/***/ 46:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3212,9 +3247,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
 /* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
-/* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(41);
-/* harmony import */ var _move_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(43);
-/* harmony import */ var _objects_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
+/* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(41);
+/* harmony import */ var _move_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44);
+/* harmony import */ var _objects_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(45);
+
 
 
 
@@ -3226,7 +3263,7 @@ DesignerPage.showTablesInLandingPage = function (db) {
   DesignerPage.loadFirstPage(db, function (page) {
     if (page) {
       DesignerPage.loadHtmlForPage(page.pgNr);
-      window.selectedPage = page.pgNr;
+      _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.selectedPage = page.pgNr;
     } else {
       DesignerPage.showNewPageTables(true);
     }
@@ -3240,7 +3277,7 @@ DesignerPage.saveToNewPage = function (db, pageName, tablePositions, callback) {
         tblCords.push(id);
         if (tablePositions.length === tblCords.length) {
           page.tblCords = tblCords;
-          _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.addObject('pdf_pages', page);
+          _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.addObject('pdf_pages', page);
         }
       };
       for (var pos = 0; pos < tablePositions.length; pos++) {
@@ -3259,12 +3296,12 @@ DesignerPage.saveToSelectedPage = function (db, pageId, pageName, tablePositions
     if (typeof callback !== 'undefined') {
       callback(page);
     }
-    window.selectedPage = page.pgNr;
+    _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.selectedPage = page.pgNr;
   });
 };
 DesignerPage.createNewPage = function (db, pageName, callback) {
-  var newPage = new _objects_js__WEBPACK_IMPORTED_MODULE_5__.DesignerObjects.PdfPage(db, pageName, []);
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.addObject('pdf_pages', newPage, function (pgNr) {
+  var newPage = new _objects_js__WEBPACK_IMPORTED_MODULE_6__.DesignerObjects.PdfPage(db, pageName, []);
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.addObject('pdf_pages', newPage, function (pgNr) {
     newPage.pgNr = pgNr;
     if (typeof callback !== 'undefined') {
       callback(newPage);
@@ -3272,10 +3309,10 @@ DesignerPage.createNewPage = function (db, pageName, callback) {
   });
 };
 DesignerPage.saveTablePositions = function (positions, callback) {
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.addObject('table_coords', positions, callback);
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.addObject('table_coords', positions, callback);
 };
 DesignerPage.createPageList = function (db, callback) {
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
     var html = '';
     for (var p = 0; p < pages.length; p++) {
       var page = pages[p];
@@ -3290,17 +3327,17 @@ DesignerPage.createPageList = function (db, callback) {
   });
 };
 DesignerPage.deletePage = function (pageId, callback) {
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
     if (page) {
       for (var i = 0; i < page.tblCords.length; i++) {
-        _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.deleteObject('table_coords', page.tblCords[i]);
+        _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.deleteObject('table_coords', page.tblCords[i]);
       }
-      _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.deleteObject('pdf_pages', pageId, callback);
+      _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.deleteObject('pdf_pages', pageId, callback);
     }
   });
 };
 DesignerPage.loadFirstPage = function (db, callback) {
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
     var firstPage = null;
     for (var i = 0; i < pages.length; i++) {
       var page = pages[i];
@@ -3327,12 +3364,12 @@ DesignerPage.showNewPageTables = function (check) {
       var element = document.getElementById(input.value);
       element.style.top = DesignerPage.getRandom(550, 20) + 'px';
       element.style.left = DesignerPage.getRandom(700, 20) + 'px';
-      _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.visibleTab(input, input.value);
+      _move_js__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.visibleTab(input, input.value);
     }
   }
-  window.selectedPage = -1;
+  _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.selectedPage = -1;
   jquery__WEBPACK_IMPORTED_MODULE_0__('#page_name').text(window.Messages.strUntitled);
-  _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.markUnsaved();
+  _move_js__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.markUnsaved();
 };
 DesignerPage.loadHtmlForPage = function (pageId) {
   DesignerPage.showNewPageTables(true);
@@ -3340,7 +3377,7 @@ DesignerPage.loadHtmlForPage = function (pageId) {
     jquery__WEBPACK_IMPORTED_MODULE_0__('#name-panel').find('#page_name').text(page.pageDescr);
     var tableMissing = false;
     for (var t = 0; t < tblCords.length; t++) {
-      var tbId = window.db + '.' + tblCords[t].tableName;
+      var tbId = _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.db + '.' + tblCords[t].tableName;
       var table = document.getElementById(tbId);
       if (table === null) {
         tableMissing = true;
@@ -3350,22 +3387,22 @@ DesignerPage.loadHtmlForPage = function (pageId) {
       table.style.left = tblCords[t].x + 'px';
       var checkbox = document.getElementById('check_vis_' + tbId);
       checkbox.checked = true;
-      _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.visibleTab(checkbox, checkbox.value);
+      _move_js__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.visibleTab(checkbox, checkbox.value);
     }
-    _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.markSaved();
+    _move_js__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.markSaved();
     if (tableMissing === true) {
-      _move_js__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.markUnsaved();
+      _move_js__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.markUnsaved();
       (0,_modules_ajax_message_js__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(window.Messages.strSavedPageTableMissing);
     }
-    window.selectedPage = page.pgNr;
+    _config_js__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.selectedPage = page.pgNr;
   });
 };
 DesignerPage.loadPageObjects = function (pageId, callback) {
-  _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
+  _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
     var tblCords = [];
     var count = page.tblCords.length;
     for (var i = 0; i < count; i++) {
-      _database_js__WEBPACK_IMPORTED_MODULE_3__.DesignerOfflineDB.loadObject('table_coords', page.tblCords[i], function (tblCord) {
+      _database_js__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('table_coords', page.tblCords[i], function (tblCord) {
         tblCords.push(tblCord);
         if (tblCords.length === count) {
           if (typeof callback !== 'undefined') {

@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 74:
+/***/ 75:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -17,7 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
 /* harmony import */ var _modules_common_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
 /* harmony import */ var _modules_tooltip_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
-/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(75);
+/* harmony import */ var _modules_functions_createProfilingChart_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(76);
 /* harmony import */ var _modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17);
 /* harmony import */ var _modules_functions_getImageTag_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18);
 /* harmony import */ var _modules_functions_isStorageSupported_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13);
@@ -2189,7 +2189,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(74); });
+/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(75); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

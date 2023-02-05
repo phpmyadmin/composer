@@ -8,7 +8,7 @@ module.exports = jQuery;
 
 /***/ }),
 
-/***/ 79:
+/***/ 80:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -112,7 +112,7 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(79); });
+/******/ __webpack_require__.O(0, [44], function() { return __webpack_exec__(80); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
