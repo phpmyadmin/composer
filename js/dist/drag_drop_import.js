@@ -140,7 +140,7 @@ var DragDropImport = {
           if (value.hash === hash) {
             jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_result:visible').remove();
             var filename = $this.parent('span').attr('data-filename');
-            jquery__WEBPACK_IMPORTED_MODULE_0__('body').append('<div class="pma_drop_result"><h2>' + window.Messages.dropImportImportResultHeader + ' - ' + filename + '<span class="close">x</span></h2>' + value.message + '</div>');
+            jquery__WEBPACK_IMPORTED_MODULE_0__('body').append('<div class="pma_drop_result"><h2>' + window.Messages.dropImportImportResultHeader + ' - ' + (0,_modules_functions_escape_js__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(filename) + '<span class="close">x</span></h2>' + value.message + '</div>');
             jquery__WEBPACK_IMPORTED_MODULE_0__('.pma_drop_result').draggable(); // to make this dialog draggable
           }
         });

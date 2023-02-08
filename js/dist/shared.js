@@ -2564,7 +2564,7 @@ window.validators = {
  * @param {string}  id       field id
  * @param {string}  type     validator (key in validators object)
  * @param {boolean} onKeyUp  whether fire on key up
- * @param {Array}   params   validation function parameters
+ * @param {any[]}   params   validation function parameters
  */
 Config.registerFieldValidator = (id, type, onKeyUp, params) => {
   if (typeof window.validators[type] === 'undefined') {
@@ -4234,7 +4234,7 @@ let sqlAutoCompleteInProgress = false;
 
 /**
  * Object containing list of columns in each table.
- * @type {(array|boolean)}
+ * @type {(any[]|boolean)}
  */
 let sqlAutoComplete = false;
 
@@ -4246,7 +4246,7 @@ let sqlAutoCompleteDefaultTable = '';
 
 /**
  * Array to hold the columns in central list per db.
- * @type {array}
+ * @type {any[]}
  */
 window.centralColumnList = [];
 
@@ -7766,31 +7766,31 @@ const Indexes = {};
 
 /**
  * Array to hold 'Primary' index columns.
- * @type {array}
+ * @type {any[]}
  */
 let primaryColumns = [];
 
 /**
  * Array to hold 'Unique' index columns.
- * @type {array}
+ * @type {any[]}
  */
 let uniqueColumns = [];
 
 /**
  * Array to hold 'Index' columns.
- * @type {array}
+ * @type {any[]}
  */
 let indexColumns = [];
 
 /**
  * Array to hold 'Fulltext' columns.
- * @type {array}
+ * @type {any[]}
  */
 let fulltextColumns = [];
 
 /**
  * Array to hold 'Spatial' columns.
- * @type {array}
+ * @type {any[]}
  */
 let spatialColumns = [];
 
