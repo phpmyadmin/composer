@@ -146,5 +146,6 @@
             "phpstan/extension-installer": true,
             "composer/package-versions-deprecated": true
         }
-    }
+    },
+    "version": "5.2.1"
 }
