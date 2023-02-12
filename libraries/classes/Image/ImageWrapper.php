@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Image;
 
-use function count;
+use GdImage;
+
 use function extension_loaded;
 use function function_exists;
 use function imagearc;
@@ -22,25 +23,13 @@ use function imagestring;
 use function imagesx;
 use function imagesy;
 
-use const PHP_VERSION_ID;
-
 final class ImageWrapper
 {
-    /** @var resource */
-    private $image;
-
-    /**
-     * @param resource $image
-     */
-    private function __construct($image)
+    private function __construct(private GdImage $image)
     {
-        $this->image = $image;
     }
 
-    /**
-     * @return resource
-     */
-    public function getImage()
+    public function getImage(): GdImage
     {
         return $this->image;
     }
@@ -141,19 +130,11 @@ final class ImageWrapper
 
     public function destroy(): bool
     {
-        if (PHP_VERSION_ID >= 80000) {
-            return true;
-        }
-
-        return imagedestroy($this->image);
+        return true;
     }
 
     public function filledPolygon(array $points, int $color): bool
     {
-        if (PHP_VERSION_ID < 80000) {
-            return imagefilledpolygon($this->image, $points, (int) (count($points) / 2), $color);
-        }
-
         return imagefilledpolygon($this->image, $points, $color);
     }
 
