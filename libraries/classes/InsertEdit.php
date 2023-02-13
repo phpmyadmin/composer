@@ -53,20 +53,15 @@ use const PASSWORD_DEFAULT;
 
 class InsertEdit
 {
-    /** @var DatabaseInterface */
-    private $dbi;
+    private DatabaseInterface $dbi;
 
-    /** @var Relation */
-    private $relation;
+    private Relation $relation;
 
-    /** @var Transformations */
-    private $transformations;
+    private Transformations $transformations;
 
-    /** @var FileListing */
-    private $fileListing;
+    private FileListing $fileListing;
 
-    /** @var Template */
-    private $template;
+    private Template $template;
 
     private const FUNC_OPTIONAL_PARAM = [
         'RAND',
@@ -1137,7 +1132,7 @@ class InsertEdit
             $specialChars = bin2hex($column['Default']);
         } elseif (substr($trueType, -4) === 'text') {
             $textDefault = substr($column['Default'], 1, -1);
-            $specialChars = stripcslashes($textDefault !== false ? $textDefault : $column['Default']);
+            $specialChars = stripcslashes($textDefault !== '' ? $textDefault : $column['Default']);
         } else {
             $specialChars = htmlspecialchars($column['Default']);
         }

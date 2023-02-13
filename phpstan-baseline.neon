@@ -4771,71 +4771,6 @@ parameters:
 			path: libraries/classes/Http/ServerRequest.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Image\\\\ImageWrapper\\:\\:filledPolygon\\(\\) has parameter \\$points with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$dst_image of function imagecopyresampled expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of class PhpMyAdmin\\\\Image\\\\ImageWrapper constructor expects resource, GdImage given\\.$#"
-			count: 3
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagearc expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagecolorallocate expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagefilledpolygon expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagejpeg expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imageline expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagepng expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagestring expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagesx expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#1 \\$image of function imagesy expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
-			message: "#^Parameter \\#2 \\$src_image of function imagecopyresampled expects GdImage, resource given\\.$#"
-			count: 1
-			path: libraries/classes/Image/ImageWrapper.php
-
-		-
 			message: "#^Casting to int something that's already int\\.$#"
 			count: 2
 			path: libraries/classes/Import.php
@@ -4959,11 +4894,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\IndexColumn\\:\\:set\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/IndexColumn.php
-
-		-
-			message: "#^Else branch is unreachable because ternary operator condition is always true\\.$#"
-			count: 1
-			path: libraries/classes/InsertEdit.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\InsertEdit\\:\\:analyzeTableColumnsArray\\(\\) has parameter \\$column with no value type specified in iterable type array\\.$#"
@@ -5307,11 +5237,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#4 \\$data of method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:foreignDropdown\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/InsertEdit.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between string and false will always evaluate to true\\.$#"
 			count: 1
 			path: libraries/classes/InsertEdit.php
 
@@ -9231,11 +9156,6 @@ parameters:
 			path: libraries/classes/VersionInformation.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 1
-			path: libraries/classes/ZipExtension.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\ZipExtension\\:\\:createFile\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/ZipExtension.php
@@ -9252,11 +9172,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\ZipExtension\\:\\:getContents\\(\\) should return array\\{error\\: string, data\\: string\\} but returns array\\{error\\: string, data\\: string\\|false\\}\\.$#"
-			count: 1
-			path: libraries/classes/ZipExtension.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$data has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/ZipExtension.php
 
