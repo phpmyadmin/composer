@@ -896,6 +896,21 @@ parameters:
 			path: libraries/classes/ConfigStorage/Relation.php
 
 		-
+			message: "#^Foreach overwrites \\$feature with its value variable\\.$#"
+			count: 1
+			path: libraries/classes/ConfigStorage/Relation.php
+
+		-
+			message: "#^Foreach overwrites \\$table with its key variable\\.$#"
+			count: 1
+			path: libraries/classes/ConfigStorage/Relation.php
+
+		-
+			message: "#^Foreach overwrites \\$work with its key variable\\.$#"
+			count: 1
+			path: libraries/classes/ConfigStorage/Relation.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:buildForeignDropdown\\(\\) has parameter \\$foreign with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/ConfigStorage/Relation.php
@@ -2391,6 +2406,11 @@ parameters:
 			path: libraries/classes/Controllers/Table/Structure/SaveController.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 2
+			path: libraries/classes/Controllers/Table/Structure/SaveController.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Controllers\\\\Table\\\\Structure\\\\SaveController\\:\\:adjustColumnPrivileges\\(\\) has parameter \\$adjust_privileges with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/Table/Structure/SaveController.php
@@ -2776,11 +2796,6 @@ parameters:
 			path: libraries/classes/Database/Designer.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Database\\\\Designer\\:\\:returnClassNamesFromMenuButtons\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Database/Designer.php
-
-		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Database/Designer/Common.php
@@ -2867,6 +2882,11 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: libraries/classes/Database/Qbe.php
+
+		-
+			message: "#^For loop initial assignment overwrites variable \\$columnIndex\\.$#"
 			count: 1
 			path: libraries/classes/Database/Qbe.php
 
@@ -3171,6 +3191,11 @@ parameters:
 			path: libraries/classes/Database/Routines.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 2
+			path: libraries/classes/Database/Routines.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Database\\\\Routines\\:\\:backupPrivileges\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Database/Routines.php
@@ -3411,11 +3436,6 @@ parameters:
 			path: libraries/classes/DatabaseInterface.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getColumnMapFromSql\\(\\) has parameter \\$viewColumns with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/DatabaseInterface.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\DatabaseInterface\\:\\:getColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/DatabaseInterface.php
@@ -3496,16 +3516,6 @@ parameters:
 			path: libraries/classes/Dbal/DbalInterface.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getColumnMapFromSql\\(\\) has parameter \\$viewColumns with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getColumnMapFromSql\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Dbal/DbalInterface.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Dbal\\\\DbalInterface\\:\\:getColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/DbalInterface.php
@@ -3569,6 +3579,36 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:numRows\\(\\) should return int\\|numeric\\-string but returns int\\|string\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/MysqliResult.php
+
+		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\SqlParser\\\\Statement\\:\\:\\$expr\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
+
+		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\SqlParser\\\\Statement\\:\\:\\$from\\.$#"
+			count: 2
+			path: libraries/classes/Display/Results.php
+
+		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\SqlParser\\\\Statement\\:\\:\\$limit\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
+
+		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\SqlParser\\\\Statement\\:\\:\\$where\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$column\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$database\\.$#"
+			count: 1
+			path: libraries/classes/Display/Results.php
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
@@ -3821,11 +3861,6 @@ parameters:
 			path: libraries/classes/Encoding.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Encoding\\:\\:convertString\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: libraries/classes/Encoding.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Encoding\\:\\:listEncodings\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Encoding.php
@@ -3851,17 +3886,7 @@ parameters:
 			path: libraries/classes/Engines/Bdb.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Engines\\\\Innodb\\:\\:getInfoPages\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Engines/Innodb.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Engines\\\\Innodb\\:\\:getVariables\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Engines/Innodb.php
-
-		-
-			message: "#^Return type \\(array\\) of method PhpMyAdmin\\\\Engines\\\\Innodb\\:\\:getInfoPages\\(\\) should be covariant with return type \\(array\\<string\\>\\) of method PhpMyAdmin\\\\StorageEngine\\:\\:getInfoPages\\(\\)$#"
 			count: 1
 			path: libraries/classes/Engines/Innodb.php
 
@@ -3881,22 +3906,12 @@ parameters:
 			path: libraries/classes/Engines/Ndbcluster.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Engines\\\\Pbxt\\:\\:getInfoPages\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Engines/Pbxt.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Engines\\\\Pbxt\\:\\:getVariables\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Engines/Pbxt.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Engines\\\\Pbxt\\:\\:resolveTypeSize\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Engines/Pbxt.php
-
-		-
-			message: "#^Return type \\(array\\) of method PhpMyAdmin\\\\Engines\\\\Pbxt\\:\\:getInfoPages\\(\\) should be covariant with return type \\(array\\<string\\>\\) of method PhpMyAdmin\\\\StorageEngine\\:\\:getInfoPages\\(\\)$#"
 			count: 1
 			path: libraries/classes/Engines/Pbxt.php
 
@@ -4064,11 +4079,6 @@ parameters:
 			message: "#^Property PhpMyAdmin\\\\Export\\:\\:\\$dumpBufferObjects type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Export.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Export\\\\Options\\:\\:getDatabasesForSelectOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Export/Options.php
 
 		-
 			message: "#^PHPDoc tag @var for variable \\$dbSelect has no value type specified in iterable type array\\.$#"
@@ -4551,6 +4561,11 @@ parameters:
 			path: libraries/classes/Gis/GisMultiPolygon.php
 
 		-
+			message: "#^Variable \\$label_point in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 2
+			path: libraries/classes/Gis/GisMultiPolygon.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Gis\\\\GisPoint\\:\\:generateParams\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Gis/GisPoint.php
@@ -4846,11 +4861,6 @@ parameters:
 			path: libraries/classes/Git.php
 
 		-
-			message: "#^Variable \\$position might not be defined\\.$#"
-			count: 1
-			path: libraries/classes/Git.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Header\\:\\:getJsParams\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Header.php
@@ -4951,6 +4961,11 @@ parameters:
 			path: libraries/classes/Import.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 5
+			path: libraries/classes/Import.php
+
+		-
 			message: "#^Foreach overwrites \\$sqlQuery with its value variable\\.$#"
 			count: 1
 			path: libraries/classes/Import.php
@@ -5018,6 +5033,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$lastCumulativeSize of method PhpMyAdmin\\\\Import\\:\\:getDecimalScale\\(\\) expects string, int\\|string given\\.$#"
 			count: 2
+			path: libraries/classes/Import.php
+
+		-
+			message: "#^Parameter \\#1 \\$sql of method PhpMyAdmin\\\\Import\\:\\:executeQuery\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
 			path: libraries/classes/Import.php
 
 		-
@@ -5501,11 +5521,6 @@ parameters:
 			path: libraries/classes/Linter.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Linter\\:\\:getLines\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Linter.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Linter\\:\\:lint\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Linter.php
@@ -5631,6 +5646,16 @@ parameters:
 			path: libraries/classes/Navigation/Navigation.php
 
 		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\:\\:\\$secondIcon\\.$#"
+			count: 2
+			path: libraries/classes/Navigation/NavigationTree.php
+
+		-
+			message: "#^Call to an undefined method PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\:\\:setHiddenCount\\(\\)\\.$#"
+			count: 1
+			path: libraries/classes/Navigation/NavigationTree.php
+
+		-
 			message: "#^Cannot access property \\$pos2 on PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/NavigationTree.php
@@ -5672,7 +5697,7 @@ parameters:
 
 		-
 			message: "#^Only numeric types are allowed in \\+, int\\|false given on the left side\\.$#"
-			count: 2
+			count: 1
 			path: libraries/classes/Navigation/NavigationTree.php
 
 		-
@@ -5709,11 +5734,6 @@ parameters:
 			message: "#^Property PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\:\\:\\$title \\(string\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/NavigationTree.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Navigation\\\\NodeFactory\\:\\:getInstance\\(\\) has parameter \\$name with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Navigation/NodeFactory.php
 
 		-
 			message: "#^Cannot access property \\$children on PhpMyAdmin\\\\Navigation\\\\Nodes\\\\Node\\|null\\.$#"
@@ -6191,6 +6211,11 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
 		-
+			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|null given\\.$#"
+			count: 3
+			path: libraries/classes/Plugins/Export/ExportCsv.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportHtmlword\\:\\:exportData\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportHtmlword.php
@@ -6239,6 +6264,11 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportLatex\\:\\:exportStructure\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 3
+			path: libraries/classes/Plugins/Export/ExportMediawiki.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportMediawiki\\:\\:exportData\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
@@ -6348,6 +6378,11 @@ parameters:
 		-
 			message: "#^Casting to string something that's already string\\.$#"
 			count: 2
+			path: libraries/classes/Plugins/Export/ExportSql.php
+
+		-
+			message: "#^Foreach overwrites \\$j with its key variable\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Export/ExportSql.php
 
 		-
@@ -6496,6 +6531,16 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportYaml.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
+
+		-
+			message: "#^Foreach overwrites \\$width with its value variable\\.$#"
+			count: 2
+			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\Helpers\\\\Pdf\\:\\:getTableDef\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
@@ -6541,11 +6586,6 @@ parameters:
 			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
 
 		-
-			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Export\\\\Helpers\\\\Pdf\\:\\:\\$colFits is never written, only read\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
-
-		-
 			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Export\\\\Helpers\\\\Pdf\\:\\:\\$colTitles type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
@@ -6563,16 +6603,6 @@ parameters:
 		-
 			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Export\\\\Helpers\\\\Pdf\\:\\:\\$tablewidths type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
-
-		-
-			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Export\\\\Helpers\\\\Pdf\\:\\:\\$titleWidth is never written, only read\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
-
-		-
-			message: "#^Variable \\$columns_cnt might not be defined\\.$#"
-			count: 6
 			path: libraries/classes/Plugins/Export/Helpers/Pdf.php
 
 		-
@@ -6632,11 +6662,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\IOTransformationsPlugin\\:\\:getInputHtml\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/IOTransformationsPlugin.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Plugins\\\\IOTransformationsPlugin\\:\\:getScripts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/IOTransformationsPlugin.php
 
@@ -6709,6 +6734,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$string of function trim expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Import/ImportMediawiki.php
+
+		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 2
+			path: libraries/classes/Plugins/Import/ImportOds.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Import\\\\ImportOds\\:\\:iterateOverColumns\\(\\) has parameter \\$col_names with no value type specified in iterable type array\\.$#"
@@ -6811,6 +6841,11 @@ parameters:
 			path: libraries/classes/Plugins/Import/ImportXml.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Import/ImportXml.php
+
+		-
 			message: "#^Offset 'charset' does not exist on SimpleXMLElement\\|null\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Import/ImportXml.php
@@ -6844,6 +6879,11 @@ parameters:
 			message: "#^array\\<int, array\\<int, string\\>\\|string\\>\\|string does not accept array\\<int, string\\>\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Import/ImportXml.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Import\\\\ShapeFileImport\\:\\:readSHP\\(\\) never returns false so it can be removed from the return type\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Import/ShapeFileImport.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Import\\\\Upload\\\\UploadNoplugin\\:\\:getUploadStatus\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -6931,6 +6971,11 @@ parameters:
 			path: libraries/classes/Plugins/Schema/Eps/TableStatsEps.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Schema/Pdf/Pdf.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Schema\\\\Pdf\\\\Pdf\\:\\:row\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Schema/Pdf/Pdf.php
@@ -6961,8 +7006,8 @@ parameters:
 			path: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
-			count: 2
+			message: "#^For loop initial assignment overwrites variable \\$size\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php
 
 		-
@@ -7157,7 +7202,7 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
-			count: 4
+			count: 3
 			path: libraries/classes/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php
 
 		-
@@ -7217,11 +7262,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Abs\\\\ImageUploadTransformationsPlugin\\:\\:getInputHtml\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Transformations/Abs/ImageUploadTransformationsPlugin.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Abs\\\\ImageUploadTransformationsPlugin\\:\\:getScripts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Transformations/Abs/ImageUploadTransformationsPlugin.php
 
@@ -7314,21 +7354,6 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Input\\\\Text_Plain_Iptolong\\:\\:getInputHtml\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Transformations/Input/Text_Plain_Iptolong.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Input\\\\Text_Plain_JsonEditor\\:\\:getScripts\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Transformations/Input/Text_Plain_JsonEditor.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Input\\\\Text_Plain_SqlEditor\\:\\:getScripts\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Transformations/Input/Text_Plain_SqlEditor.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Input\\\\Text_Plain_XmlEditor\\:\\:getScripts\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Plugins/Transformations/Input/Text_Plain_XmlEditor.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Transformations\\\\Output\\\\Text_Plain_Binarytoip\\:\\:applyTransformation\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
@@ -7756,11 +7781,6 @@ parameters:
 			path: libraries/classes/Server/Privileges.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Server\\\\Privileges\\:\\:extractPrivInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Server/Privileges.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Server\\\\Privileges\\:\\:fillInTablePrivileges\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Server/Privileges.php
@@ -7954,6 +7974,11 @@ parameters:
 			message: "#^Variable \\$userGroup on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: libraries/classes/Server/Privileges.php
+
+		-
+			message: "#^Access to an uninitialized property PhpMyAdmin\\\\Server\\\\Status\\\\Data\\:\\:\\$replicationInfo\\.$#"
+			count: 2
+			path: libraries/classes/Server/Status/Data.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Server\\\\Status\\\\Data\\:\\:calculateValues\\(\\) has parameter \\$server_status with no value type specified in iterable type array\\.$#"
@@ -8306,6 +8331,11 @@ parameters:
 			path: libraries/classes/Sql.php
 
 		-
+			message: "#^Access to an undefined property PhpMyAdmin\\\\SqlParser\\\\Statement\\:\\:\\$where\\.$#"
+			count: 1
+			path: libraries/classes/Sql.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Sql\\:\\:countQueryResults\\(\\) should return int\\|numeric\\-string but returns mixed\\.$#"
 			count: 1
 			path: libraries/classes/Sql.php
@@ -8521,11 +8551,6 @@ parameters:
 			path: libraries/classes/StorageEngine.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\SystemDatabase\\:\\:getNewTransformationDataSql\\(\\) has parameter \\$columnMap with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/SystemDatabase.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of method PhpMyAdmin\\\\DatabaseInterface\\:\\:quoteString\\(\\) expects string, string\\|null given\\.$#"
 			count: 4
 			path: libraries/classes/SystemDatabase.php
@@ -8546,6 +8571,11 @@ parameters:
 			path: libraries/classes/Table.php
 
 		-
+			message: "#^Foreach overwrites \\$trigger with its value variable\\.$#"
+			count: 1
+			path: libraries/classes/Table.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:duplicateInfo\\(\\) has parameter \\$getFields with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
@@ -8562,11 +8592,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:formatColumns\\(\\) has parameter \\$indexed with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:formatColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
@@ -8611,32 +8636,17 @@ parameters:
 			path: libraries/classes/Table.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getCreateOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getIndexedColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getNameAndTypeOfTheColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getNonGeneratedColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getNameAndTypeOfTheColumns\\(\\) should return array\\<string, string\\> but returns array\\<int\\|string, mixed\\>\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getNumRows\\(\\) should return int but returns mixed\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getReservedColumnNames\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
@@ -8662,11 +8672,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getUiPrefsFromDb\\(\\) should return array but returns mixed\\.$#"
-			count: 1
-			path: libraries/classes/Table.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Table\\:\\:getUniqueColumns\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Table.php
 
@@ -8912,6 +8917,11 @@ parameters:
 
 		-
 			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: libraries/classes/Tracker.php
+
+		-
+			message: "#^Foreach overwrites \\$logEntry with its value variable\\.$#"
 			count: 1
 			path: libraries/classes/Tracker.php
 
@@ -9196,6 +9206,11 @@ parameters:
 			path: libraries/classes/Tracking.php
 
 		-
+			message: "#^Foreach overwrites \\$file with its value variable\\.$#"
+			count: 1
+			path: libraries/classes/Transformations.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Transformations\\:\\:getAvailableMimeTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Transformations.php
@@ -9206,27 +9221,12 @@ parameters:
 			path: libraries/classes/TwoFactor.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\TwoFactor\\:\\:getAllBackends\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/TwoFactor.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\TwoFactor\\:\\:getAvailable\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/TwoFactor.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\TwoFactor\\:\\:getAvailableBackends\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/TwoFactor.php
-
-		-
 			message: "#^Method PhpMyAdmin\\\\TwoFactor\\:\\:getBackendForCurrentUser\\(\\) should return PhpMyAdmin\\\\Plugins\\\\TwoFactorPlugin but returns object\\.$#"
-			count: 1
-			path: libraries/classes/TwoFactor.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\TwoFactor\\:\\:getMissingDeps\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/TwoFactor.php
 
@@ -9331,6 +9331,11 @@ parameters:
 			path: libraries/classes/Util.php
 
 		-
+			message: "#^For loop initial assignment overwrites variable \\$i\\.$#"
+			count: 1
+			path: libraries/classes/Util.php
+
+		-
 			message: "#^Foreach overwrites \\$quote with its value variable\\.$#"
 			count: 1
 			path: libraries/classes/Util.php
@@ -9387,11 +9392,6 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Util\\:\\:getValueByKey\\(\\) has parameter \\$path with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: libraries/classes/Util.php
-
-		-
-			message: "#^Method PhpMyAdmin\\\\Util\\:\\:parseEnumSetValues\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Util.php
 
@@ -9499,6 +9499,21 @@ parameters:
 			message: "#^Variable \\$http_response_header in isset\\(\\) always exists and is not nullable\\.$#"
 			count: 1
 			path: libraries/classes/Utils/HttpRequest.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$date\\.$#"
+			count: 1
+			path: libraries/classes/VersionInformation.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$releases\\.$#"
+			count: 1
+			path: libraries/classes/VersionInformation.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$version\\.$#"
+			count: 1
+			path: libraries/classes/VersionInformation.php
 
 		-
 			message: "#^Comparison operation \"\\>\\=\" between int\\<1, max\\> and 1 is always true\\.$#"
@@ -11704,6 +11719,11 @@ parameters:
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\StorageEngineTest\\:\\:providerGetEngine\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/StorageEngineTest.php
+
+		-
+			message: "#^Method PhpMyAdmin\\\\Tests\\\\Stubs\\\\DbiDummy\\:\\:connect\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: test/classes/Stubs/DbiDummy.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Stubs\\\\DbiDummy\\:\\:fetchAny\\(\\) return type has no value type specified in iterable type array\\.$#"

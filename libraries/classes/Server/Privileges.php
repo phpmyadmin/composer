@@ -210,11 +210,11 @@ class Privileges
      * @param bool       $enableHTML add <dfn> tag with tooltips
      * @param bool       $tablePrivs whether row contains table privileges
      *
-     * @return array
+     * @return string[]
      *
      * @global resource $user_link the database connection
      */
-    public function extractPrivInfo($row = null, $enableHTML = false, $tablePrivs = false)
+    public function extractPrivInfo($row = null, $enableHTML = false, $tablePrivs = false): array
     {
         if ($tablePrivs) {
             $grants = $this->getTableGrantsArray();
@@ -774,18 +774,11 @@ class Privileges
         }
 
         if (! isset($GLOBALS['pred_hostname']) && isset($GLOBALS['hostname'])) {
-            switch (mb_strtolower($GLOBALS['hostname'])) {
-                case 'localhost':
-                case '127.0.0.1':
-                    $GLOBALS['pred_hostname'] = 'localhost';
-                    break;
-                case '%':
-                    $GLOBALS['pred_hostname'] = 'any';
-                    break;
-                default:
-                    $GLOBALS['pred_hostname'] = 'userdefined';
-                    break;
-            }
+            $GLOBALS['pred_hostname'] = match (mb_strtolower($GLOBALS['hostname'])) {
+                'localhost', '127.0.0.1' => 'localhost',
+                '%' => 'any',
+                default => 'userdefined',
+            };
         }
 
         $serverVersion = $this->dbi->getVersion();
@@ -2952,7 +2945,7 @@ class Privileges
         $urlDbname,
         string $username,
         string $hostname,
-        $dbname,
+        string|array $dbname,
         $tablename,
         string $route
     ): string {

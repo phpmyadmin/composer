@@ -389,18 +389,11 @@ class ReplicationGui
 
         // when we start editing a user, $GLOBALS['pred_hostname'] is not defined
         if (! isset($GLOBALS['pred_hostname']) && $hostname !== null) {
-            switch (mb_strtolower($hostname)) {
-                case 'localhost':
-                case '127.0.0.1':
-                    $GLOBALS['pred_hostname'] = 'localhost';
-                    break;
-                case '%':
-                    $GLOBALS['pred_hostname'] = 'any';
-                    break;
-                default:
-                    $GLOBALS['pred_hostname'] = 'userdefined';
-                    break;
-            }
+            $GLOBALS['pred_hostname'] = match (mb_strtolower($hostname)) {
+                'localhost', '127.0.0.1' => 'localhost',
+                '%' => 'any',
+                default => 'userdefined',
+            };
         }
 
         return $this->template->render('server/replication/primary_add_replica_user', [
@@ -506,8 +499,6 @@ class ReplicationGui
         $_SESSION['replication']['m_hostname'] = $hostname;
         $_SESSION['replication']['m_port'] = $port;
         $_SESSION['replication']['m_correct'] = '';
-        $_SESSION['replication']['sr_action_status'] = 'error';
-        $_SESSION['replication']['sr_action_info'] = __('Unknown error');
 
         // Attempt to connect to the new primary server
         $connectionToPrimary = $this->replication->connectToPrimary(

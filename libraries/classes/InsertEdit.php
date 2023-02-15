@@ -364,15 +364,11 @@ class InsertEdit
      */
     private function showTypeOrFunctionLabel($which): string
     {
-        switch ($which) {
-            case 'function':
-                return __('Function');
-
-            case 'type':
-                return __('Type');
-        }
-
-        return '';
+        return match ($which) {
+            'function' => __('Function'),
+            'type' => __('Type'),
+            default => '',
+        };
     }
 
     /**
@@ -476,35 +472,28 @@ class InsertEdit
      */
     private function getEnumSetAndTimestampColumns(array $column, $timestampSeen)
     {
-        switch ($column['True_Type']) {
-            case 'set':
-                return [
-                    'set',
-                    '',
-                    false,
-                ];
-
-            case 'enum':
-                return [
-                    'enum',
-                    '',
-                    false,
-                ];
-
-            case 'timestamp':
-                return [
-                    $column['Type'],
-                    ' text-nowrap',
-                    ! $timestampSeen, // can only occur once per table
-                ];
-
-            default:
-                return [
-                    $column['Type'],
-                    ' text-nowrap',
-                    false,
-                ];
-        }
+        return match ($column['True_Type']) {
+            'set' => [
+                'set',
+                '',
+                false,
+            ],
+            'enum' => [
+                'enum',
+                '',
+                false,
+            ],
+            'timestamp' => [
+                $column['Type'],
+                ' text-nowrap',
+                ! $timestampSeen, // can only occur once per table
+            ],
+            default => [
+                $column['Type'],
+                ' text-nowrap',
+                false,
+            ],
+        };
     }
 
     /**
@@ -555,7 +544,6 @@ class InsertEdit
      * @param string $specialCharsEncoded replaced char if the string starts
      *                                      with a \r\n pair (0x0d0a) add an extra \n
      * @param string $dataType            the html5 data-* attribute type
-     * @param bool   $readOnly            is column read only or not
      *
      * @return string                       an html snippet
      */
@@ -569,8 +557,7 @@ class InsertEdit
         $idindex,
         $textDir,
         $specialCharsEncoded,
-        $dataType,
-        $readOnly
+        $dataType
     ): string {
         $theClass = '';
         $textAreaRows = $GLOBALS['cfg']['TextareaRows'];
@@ -594,7 +581,6 @@ class InsertEdit
         return $backupField . "\n"
             . '<textarea name="fields' . $columnNameAppendix . '"'
             . ' class="' . $theClass . '"'
-            . ($readOnly ? ' readonly="readonly"' : '')
             . (isset($maxlength) ? ' data-maxlength="' . $maxlength . '"' : '')
             . ' rows="' . $textAreaRows . '"'
             . ' cols="' . $textareaCols . '"'
@@ -670,7 +656,6 @@ class InsertEdit
      * @param int    $tabindexForValue   offset for the values tabindex
      * @param int    $idindex            id index
      * @param string $dataType           the html5 data-* attribute type
-     * @param bool   $readOnly           is column read only or not
      *
      * @return string                       an html snippet
      */
@@ -683,19 +668,16 @@ class InsertEdit
         $tabindex,
         $tabindexForValue,
         $idindex,
-        $dataType,
-        $readOnly
+        $dataType
     ): string {
         $theClass = 'textfield';
         // verify True_Type which does not contain the parentheses and length
-        if (! $readOnly) {
-            if ($column['True_Type'] === 'date') {
-                $theClass .= ' datefield';
-            } elseif ($column['True_Type'] === 'time') {
-                $theClass .= ' timefield';
-            } elseif ($column['True_Type'] === 'datetime' || $column['True_Type'] === 'timestamp') {
-                $theClass .= ' datetimefield';
-            }
+        if ($column['True_Type'] === 'date') {
+            $theClass .= ' datefield';
+        } elseif ($column['True_Type'] === 'time') {
+            $theClass .= ' timefield';
+        } elseif ($column['True_Type'] === 'datetime' || $column['True_Type'] === 'timestamp') {
+            $theClass .= ' datetimefield';
         }
 
         $inputMinMax = '';
@@ -717,7 +699,6 @@ class InsertEdit
             . (isset($column['is_char']) && $column['is_char']
                 ? ' data-maxlength="' . $fieldsize . '"'
                 : '')
-            . ($readOnly ? ' readonly="readonly"' : '')
             . ($inputMinMax ? ' ' . $inputMinMax : '')
             . ' data-type="' . $dataType . '"'
             . ' class="' . $theClass . '" onchange="' . htmlspecialchars($onChangeClause, ENT_COMPAT) . '"'
@@ -821,7 +802,6 @@ class InsertEdit
      * @param array  $extractedColumnspec associative array containing type,
      *                                      spec_in_brackets and possibly
      *                                      enum_set_values (another array)
-     * @param bool   $readOnly            is column read only or not
      *
      * @return string an html snippet
      */
@@ -838,8 +818,7 @@ class InsertEdit
         $textDir,
         $specialCharsEncoded,
         $data,
-        array $extractedColumnspec,
-        $readOnly
+        array $extractedColumnspec
     ): string {
         // HTML5 data-* attribute data-type
         $dataType = $this->dbi->types->getTypeClass($column['True_Type']);
@@ -859,8 +838,7 @@ class InsertEdit
                 $idindex,
                 $textDir,
                 $specialCharsEncoded,
-                $dataType,
-                $readOnly
+                $dataType
             );
         } else {
             $htmlField = $this->getHtmlInput(
@@ -872,8 +850,7 @@ class InsertEdit
                 $tabindex,
                 $tabindexForValue,
                 $idindex,
-                $dataType,
-                $readOnly
+                $dataType
             );
         }
 
@@ -1076,12 +1053,15 @@ class InsertEdit
             $data = $currentRow[$column['Field']];
         }
 
-        //when copying row, it is useful to empty auto-increment column
-        // to prevent duplicate key error
-        if (isset($_POST['default_action']) && $_POST['default_action'] === 'insert') {
-            if ($column['Key'] === 'PRI' && str_contains($column['Extra'], 'auto_increment')) {
-                $data = $specialCharsEncoded = $specialChars = null;
-            }
+        /** @var string $defaultAction */
+        $defaultAction = $_POST['default_action'] ?? $_GET['default_action'] ?? '';
+        if (
+            $defaultAction === 'insert'
+            && $column['Key'] === 'PRI'
+            && str_contains($column['Extra'], 'auto_increment')
+        ) {
+            // When copying row, it is useful to empty auto-increment column to prevent duplicate key error.
+            $data = $specialCharsEncoded = $specialChars = null;
         }
 
         // If a timestamp field value is not included in an update
@@ -1225,7 +1205,7 @@ class InsertEdit
      * @param string|false $gotoInclude store some script for include, otherwise it is
      *                                   boolean false
      */
-    public function getGotoInclude($gotoInclude): string
+    public function getGotoInclude(string|false $gotoInclude): string
     {
         $validOptions = [
             'new_insert',
@@ -1641,7 +1621,7 @@ class InsertEdit
     public function getQueryValueForInsert(
         EditField $editField,
         bool $usingKey,
-        $whereClause
+        string|int $whereClause
     ): string {
         $protectedValue = '';
         if ($editField->type === 'protected' && $usingKey && $whereClause !== '') {
@@ -1892,9 +1872,10 @@ class InsertEdit
             $foundUniqueKey = false;
         }
 
-        // Copying a row - fetched data will be inserted as a new row,
-        // therefore the where clause is needless.
-        if (isset($_POST['default_action']) && $_POST['default_action'] === 'insert') {
+        /** @var string $defaultAction */
+        $defaultAction = $_POST['default_action'] ?? $_GET['default_action'] ?? '';
+        if ($defaultAction === 'insert') {
+            // Copying a row - fetched data will be inserted as a new row, therefore the where clause is needless.
             $whereClause = $whereClauses = null;
         }
 
@@ -2024,8 +2005,6 @@ class InsertEdit
         array $columnMime,
         $whereClause
     ) {
-        $readOnly = false;
-
         if (! isset($column['processed'])) {
             $column = $this->analyzeTableColumnsArray($column, $commentsMap, $timestampSeen);
         }
@@ -2268,8 +2247,7 @@ class InsertEdit
                         $tabindex,
                         $tabindexForValue,
                         $idindex,
-                        'HEX',
-                        $readOnly
+                        'HEX'
                     );
                 }
             } else {
@@ -2286,8 +2264,7 @@ class InsertEdit
                     $textDir,
                     $specialCharsEncoded,
                     $data,
-                    $extractedColumnspec,
-                    $readOnly
+                    $extractedColumnspec
                 );
             }
         }
@@ -2301,7 +2278,6 @@ class InsertEdit
             'show_function_fields' => $GLOBALS['cfg']['ShowFunctionFields'],
             'is_column_binary' => $isColumnBinary,
             'function_options' => $functionOptions,
-            'read_only' => $readOnly,
             'nullify_code' => $nullifyCode,
             'real_null_value' => $realNullValue,
             'id_index' => $idindex,
