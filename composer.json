@@ -144,5 +144,6 @@
             "phpstan/extension-installer": true,
             "composer/package-versions-deprecated": true
         }
-    }
+    },
+    "version": "6.0.0-dev"
 }
