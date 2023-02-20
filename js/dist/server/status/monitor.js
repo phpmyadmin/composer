@@ -824,7 +824,9 @@ _modules_ajax_js__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
         }
         jquery__WEBPACK_IMPORTED_MODULE_0__('#emptyDialog').dialog('close');
       };
-      reader.readAsText(input.files[0]);
+      if (input.files[0]) {
+        reader.readAsText(input.files[0]);
+      }
     };
     dlgBtns[window.Messages.strCancel].click = function () {
       jquery__WEBPACK_IMPORTED_MODULE_0__(this).dialog('close');
