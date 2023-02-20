@@ -232,8 +232,6 @@ class Results
      */
     public $transformationInfo;
 
-    private DatabaseInterface $dbi;
-
     private Relation $relation;
 
     private Transformations $transformations;
@@ -248,10 +246,8 @@ class Results
      * @param string $goto     the URL to go back in case of errors
      * @param string $sqlQuery the SQL query
      */
-    public function __construct(DatabaseInterface $dbi, $db, $table, $server, $goto, $sqlQuery)
+    public function __construct(private DatabaseInterface $dbi, $db, $table, $server, $goto, $sqlQuery)
     {
-        $this->dbi = $dbi;
-
         $this->relation = new Relation($this->dbi);
         $this->transformations = new Transformations();
         $this->template = new Template();
@@ -526,7 +522,7 @@ class Results
                 $isLink
                 && $previousTable != ''
                 && $fieldsMeta[$i]->table != ''
-                && $fieldsMeta[$i]->table != $previousTable
+                && $fieldsMeta[$i]->table !== $previousTable
             ) {
                 // don't display links
                 $hasEditLink = false;
@@ -1247,7 +1243,7 @@ class Results
      */
     private function getFullOrPartialTextButtonOrLink(): string
     {
-        $GLOBALS['theme'] = $GLOBALS['theme'] ?? null;
+        $GLOBALS['theme'] ??= null;
 
         $urlParamsFullText = [
             'db' => $this->properties['db'],
@@ -1945,7 +1941,7 @@ class Results
     ) {
         // Mostly because of browser transformations, to make the row-data accessible in a plugin.
 
-        $GLOBALS['row'] = $GLOBALS['row'] ?? null;
+        $GLOBALS['row'] ??= null;
 
         $tableBodyHtml = '';
 
@@ -3636,7 +3632,7 @@ class Results
         $sortedColumnIndex = false;
 
         foreach ($fieldsMeta as $key => $meta) {
-            if (($meta->table == $sortTable) && ($meta->name == $sortColumn)) {
+            if (($meta->table === $sortTable) && ($meta->name === $sortColumn)) {
                 $sortedColumnIndex = $key;
                 break;
             }

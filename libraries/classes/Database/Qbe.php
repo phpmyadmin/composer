@@ -211,9 +211,6 @@ class Qbe
     /** @var Relation */
     private $relation;
 
-    /** @var DatabaseInterface */
-    public $dbi;
-
     /** @var Template */
     public $template;
 
@@ -228,7 +225,7 @@ class Qbe
     public function __construct(
         Relation $relation,
         Template $template,
-        $dbi,
+        public $dbi,
         $dbname,
         array $savedSearchList = [],
         $currentSearch = null
@@ -236,7 +233,6 @@ class Qbe
         $this->db = $dbname;
         $this->savedSearchList = $savedSearchList;
         $this->currentSearch = $currentSearch;
-        $this->dbi = $dbi;
         $this->relation = $relation;
         $this->template = $template;
 
@@ -253,11 +249,11 @@ class Qbe
      */
     private function loadCriterias()
     {
-        if ($this->currentSearch === null || $this->currentSearch->getCriterias() === null) {
+        if ($this->currentSearch === null) {
             return $this;
         }
 
-        $criterias = $this->currentSearch->getCriterias();
+        $criterias = $this->currentSearch->getCriterias() ?? [];
         $_POST = $criterias + $_POST;
 
         return $this;
@@ -819,7 +815,7 @@ class Qbe
             $htmlOutput .= $this->getAndOrColCell(
                 $newColumnCount,
                 $checkedOptions,
-                $columnIndex + 1 == $this->criteriaColumnCount
+                $columnIndex + 1 === $this->criteriaColumnCount
             );
             $newColumnCount++;
         }
@@ -1573,7 +1569,7 @@ class Qbe
                     }
 
                     // We are done if all tables are in $finalized
-                    if (count($finalized) == count($searchTables)) {
+                    if (count($finalized) === count($searchTables)) {
                         return;
                     }
                 }

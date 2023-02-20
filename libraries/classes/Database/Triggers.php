@@ -37,23 +37,13 @@ class Triggers
     /** @var array<int, string> */
     private $event = ['INSERT', 'UPDATE', 'DELETE'];
 
-    private DatabaseInterface $dbi;
-
-    private Template $template;
-
-    /** @var ResponseRenderer */
-    private $response;
-
     /**
      * @param DatabaseInterface $dbi      DatabaseInterface instance.
      * @param Template          $template Template instance.
      * @param ResponseRenderer  $response Response instance.
      */
-    public function __construct(DatabaseInterface $dbi, Template $template, $response)
+    public function __construct(private DatabaseInterface $dbi, private Template $template, private $response)
     {
-        $this->dbi = $dbi;
-        $this->template = $template;
-        $this->response = $response;
     }
 
     /**
@@ -97,8 +87,8 @@ class Triggers
      */
     public function handleEditor(): void
     {
-        $GLOBALS['errors'] = $GLOBALS['errors'] ?? null;
-        $GLOBALS['message'] = $GLOBALS['message'] ?? null;
+        $GLOBALS['errors'] ??= null;
+        $GLOBALS['message'] ??= null;
 
         if (! empty($_POST['editor_process_add']) || ! empty($_POST['editor_process_edit'])) {
             $sql_query = '';
@@ -373,7 +363,7 @@ class Triggers
      */
     public function getQueryFromRequest()
     {
-        $GLOBALS['errors'] = $GLOBALS['errors'] ?? null;
+        $GLOBALS['errors'] ??= null;
 
         $query = 'CREATE ';
         if (! empty($_POST['item_definer'])) {

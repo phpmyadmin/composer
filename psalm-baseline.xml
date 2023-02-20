@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.0@d934875532c7eb344d6b2914c3525f116a6b0cf2">
+<files psalm-version="5.7.1@8e0fd880141f236847ab49a06f94f788d41a4292">
   <file src="libraries/classes/Advisory/Advisor.php">
     <MixedArgument>
       <code>$matches[1]</code>
@@ -1574,9 +1574,6 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
-      <code>$request</code>
-    </PossiblyUnusedParam>
     <RedundantCast>
       <code><![CDATA[(int) $GLOBALS['cfg']['MaxRows']]]></code>
     </RedundantCast>
@@ -1720,9 +1717,14 @@
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['single_table']]]></code>
       <code><![CDATA[$GLOBALS['table_select']]]></code>
+      <code><![CDATA[$GLOBALS['table_select']]]></code>
       <code><![CDATA[$GLOBALS['tables']]]></code>
       <code><![CDATA[$GLOBALS['unlim_num_rows']]]></code>
       <code>$each_table</code>
+      <code>$selectedTable</code>
+      <code>$tableData</code>
+      <code>$tableSelect</code>
+      <code>$tableStructure</code>
     </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -1813,17 +1815,14 @@
       <code><![CDATA[$GLOBALS['reload']]]></code>
       <code><![CDATA[$GLOBALS['single_table']]]></code>
     </InvalidArrayOffset>
+    <MixedArgument>
+      <code><![CDATA[$request->getParsedBodyParam('comment')]]></code>
+    </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['reload']]]></code>
       <code><![CDATA[$GLOBALS['single_table']]]></code>
     </MixedAssignment>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$_POST['comment']]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$_POST['comment']]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument>
       <code>$exportSqlPlugin</code>
     </PossiblyNullArgument>
@@ -1835,35 +1834,26 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="libraries/classes/Controllers/Database/QueryByExampleController.php">
-    <InvalidArgument>
-      <code><![CDATA[$_POST['searchId']]]></code>
-    </InvalidArgument>
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['currentSearchId']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
-      <code><![CDATA[$GLOBALS['savedSearch']]]></code>
-      <code><![CDATA[$GLOBALS['savedSearchList']]]></code>
     </InvalidArrayOffset>
+    <MixedArgument>
+      <code><![CDATA[$request->getParsedBodyParam('db')]]></code>
+      <code><![CDATA[$request->getParsedBodyParam('searchName')]]></code>
+      <code>$searchId</code>
+    </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['currentSearchId']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
-      <code><![CDATA[$GLOBALS['savedSearch']]]></code>
-      <code><![CDATA[$GLOBALS['savedSearchList']]]></code>
+      <code>$action</code>
+      <code>$searchId</code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
-      <code><![CDATA[$_POST['db']]]></code>
-      <code><![CDATA[$_POST['searchName']]]></code>
+      <code><![CDATA[$request->getParsedBody()]]></code>
+      <code><![CDATA[$request->getParsedBody()]]></code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$_POST['db']]]></code>
-      <code><![CDATA[$_POST['searchName']]]></code>
-    </PossiblyInvalidCast>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
-      <code>$request</code>
-    </PossiblyUnusedParam>
   </file>
   <file src="libraries/classes/Controllers/Database/RoutinesController.php">
     <InvalidArrayOffset>
@@ -2344,25 +2334,17 @@
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
+      <code><![CDATA[$request->getParsedBodyParam('selected')]]></code>
+      <code><![CDATA[$request->getParsedBodyParam('table')]]></code>
+      <code><![CDATA[$request->getParsedBodyParam('version')]]></code>
+      <code><![CDATA[$request->getParsedBodyParam('version')]]></code>
       <code>$table</code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
+      <code>$selectedTable</code>
       <code>$table</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$_POST['selected']]]></code>
-      <code><![CDATA[$_POST['table']]]></code>
-      <code><![CDATA[$_POST['version']]]></code>
-      <code><![CDATA[$_POST['version']]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$_POST['table']]]></code>
-      <code><![CDATA[$_POST['version']]]></code>
-    </PossiblyInvalidCast>
-    <PossiblyInvalidIterator>
-      <code><![CDATA[$_POST['selected_tbl']]]></code>
-    </PossiblyInvalidIterator>
     <PossiblyNullArgument>
       <code><![CDATA[$GLOBALS['text_dir']]]></code>
     </PossiblyNullArgument>
@@ -4325,7 +4307,6 @@
     </PossiblyInvalidOperand>
     <PossiblyNullArgument>
       <code>$result</code>
-      <code>$result</code>
     </PossiblyNullArgument>
     <PossiblyUnusedParam>
       <code>$request</code>
@@ -6165,9 +6146,6 @@
     </PossiblyNullReference>
   </file>
   <file src="libraries/classes/Database/Qbe.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[$this->currentSearch->getCriterias() === null]]></code>
-    </DocblockTypeContradiction>
     <InvalidArgument>
       <code>$sortOrder</code>
     </InvalidArgument>
@@ -7693,6 +7671,10 @@
       <code>mixed</code>
       <code>mixed</code>
     </PossiblyUnusedReturnValue>
+    <RedundantCondition>
+      <code>mb_strtolower($userExtension) !== $requiredExtension</code>
+      <code>mb_strtolower($userExtension) !== $requiredExtension</code>
+    </RedundantCondition>
   </file>
   <file src="libraries/classes/Export/Options.php">
     <InvalidArrayOffset>
@@ -8689,6 +8671,10 @@
     <PropertyNotSetInConstructor>
       <code>$modifiedSql</code>
     </PropertyNotSetInConstructor>
+    <RedundantCondition>
+      <code>mb_strtolower($user_extension) !== $required_extension</code>
+      <code>mb_strtolower($user_extension) !== $required_extension</code>
+    </RedundantCondition>
     <RedundantConditionGivenDocblockType>
       <code>is_numeric($pos)</code>
       <code>is_numeric($rows)</code>
@@ -9171,7 +9157,6 @@
       <code><![CDATA[$this->choice]]></code>
       <code><![CDATA[$this->comment]]></code>
       <code><![CDATA[$this->name]]></code>
-      <code><![CDATA[$this->nonUnique]]></code>
       <code><![CDATA[$this->packed]]></code>
       <code><![CDATA[$this->parser]]></code>
       <code><![CDATA[$this->remarks]]></code>
@@ -9680,8 +9665,6 @@
   </file>
   <file src="libraries/classes/Navigation/NavigationTree.php">
     <ArgumentTypeCoercion>
-      <code><![CDATA[$newChild['node']]]></code>
-      <code><![CDATA[$newChild['node']]]></code>
       <code>$table</code>
     </ArgumentTypeCoercion>
     <DocblockTypeContradiction>
@@ -9741,10 +9724,6 @@
       <code><![CDATA[$urlParams['pos3_name']]]></code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedMethodCall>
-      <code>addChild</code>
-      <code>setHiddenCount</code>
-    </MixedMethodCall>
     <MixedOperand>
       <code>$separators[0]</code>
       <code>$separators[0]</code>
@@ -9815,6 +9794,9 @@
     <TypeDoesNotContainType>
       <code><![CDATA[$value > 500]]></code>
     </TypeDoesNotContainType>
+    <UndefinedMethod>
+      <code>setHiddenCount</code>
+    </UndefinedMethod>
   </file>
   <file src="libraries/classes/Navigation/NodeFactory.php">
     <UnsafeInstantiation>
@@ -10234,10 +10216,6 @@
     <MixedArgumentTypeCoercion>
       <code>$master</code>
       <code>$master</code>
-      <code>$tableName</code>
-      <code>$tableName</code>
-      <code>$tableName</code>
-      <code>$tableName</code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$arr['foreign_db']]]></code>
@@ -10550,7 +10528,6 @@
       <code>$doc[1]</code>
       <code>$doc[1]</code>
       <code>$doc[2]</code>
-      <code>$propertyItem</code>
       <code>$propertyMainGroup</code>
       <code>$val</code>
       <code>$val</code>
@@ -10594,6 +10571,8 @@
       <code><![CDATA[$pitem->getName()]]></code>
       <code><![CDATA[$pitem->getName()]]></code>
       <code><![CDATA[$propertyGroup->getName()]]></code>
+      <code><![CDATA[$propertyItem->getForce()]]></code>
+      <code><![CDATA[$propertyItem->getForce()]]></code>
       <code><![CDATA[$propertyItem->getName()]]></code>
       <code><![CDATA[$propertyItem->getName()]]></code>
       <code><![CDATA[$propertyItem->getName()]]></code>
@@ -10612,11 +10591,6 @@
       <code>$property_class === SelectPropertyItem::class</code>
       <code>$property_class === TextPropertyItem::class</code>
     </TypeDoesNotContainType>
-    <UnnecessaryVarAnnotation>
-      <code>RadioPropertyItem</code>
-      <code>SelectPropertyItem</code>
-      <code>TextPropertyItem</code>
-    </UnnecessaryVarAnnotation>
   </file>
   <file src="libraries/classes/Plugins/Auth/AuthenticationConfig.php">
     <InvalidArrayOffset>
@@ -11282,12 +11256,7 @@
       <code><![CDATA[$trigger['create']]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$autoIncrement</code>
       <code>$compats</code>
-      <code>$constraints</code>
-      <code>$dropped</code>
-      <code>$indexes</code>
-      <code>$indexesFulltext</code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$GLOBALS['cfg']['Export']['remove_definer_from_definitions']]]></code>
@@ -13992,7 +13961,6 @@
       <code>null</code>
       <code>null</code>
       <code>null</code>
-      <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
     <PossiblyUnusedReturnValue>
       <code>bool</code>
@@ -14904,7 +14872,6 @@
       <code>$foreignTable</code>
       <code>$foreignTable</code>
       <code>$foreignTable</code>
-      <code>$getField</code>
       <code>$index</code>
       <code>$index[0]</code>
       <code>$masterField</code>
@@ -14988,7 +14955,6 @@
       <code><![CDATA[$optionsArray[$_POST['on_update'][$masterFieldMd5]]]]></code>
       <code><![CDATA[$optionsArray[$existrelForeign[$masterFieldMd5]['on_delete'] ?? '']]]></code>
       <code><![CDATA[$optionsArray[$existrelForeign[$masterFieldMd5]['on_update'] ?? '']]]></code>
-      <code>$rowFields[$getField]</code>
     </MixedArrayOffset>
     <MixedArrayTypeCoercion>
       <code><![CDATA[$optionsArray[$existrelForeign[$masterFieldMd5]['on_delete'] ?? '']]]></code>
@@ -15014,7 +14980,6 @@
       <code>$foreignField</code>
       <code>$foreignTable</code>
       <code>$foreignTable</code>
-      <code>$getField</code>
       <code>$index</code>
       <code>$key</code>
       <code>$masterField</code>
@@ -15167,7 +15132,6 @@
     </ReferenceConstraintViolation>
     <TypeDoesNotContainType>
       <code><![CDATA[! $this->dbi->query($GLOBALS['sql_query'])]]></code>
-      <code><![CDATA[$rowFields[$key] != 'cc']]></code>
     </TypeDoesNotContainType>
     <UnusedVariable>
       <code>$maintainRelations</code>
@@ -18443,6 +18407,9 @@
     </UndefinedMethod>
   </file>
   <file src="test/classes/TableTest.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$GLOBALS['sql_drop_table']]]></code>
+    </InvalidArrayOffset>
     <MixedAssignment>
       <code>$is_define_property</code>
       <code>$sql</code>
@@ -18453,9 +18420,15 @@
     </MixedInferredReturnType>
     <MixedMethodCall>
       <code>method</code>
+      <code>method</code>
+      <code>method</code>
+      <code>will</code>
+      <code>will</code>
       <code>will</code>
     </MixedMethodCall>
     <UndefinedMethod>
+      <code>expects</code>
+      <code>expects</code>
       <code>expects</code>
     </UndefinedMethod>
   </file>

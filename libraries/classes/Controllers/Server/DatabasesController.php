@@ -46,15 +46,12 @@ class DatabasesController extends AbstractController
     /** @var bool whether to show database statistics */
     private $hasStatistics;
 
-    private DatabaseInterface $dbi;
-
     public function __construct(
         ResponseRenderer $response,
         Template $template,
-        DatabaseInterface $dbi
+        private DatabaseInterface $dbi
     ) {
         parent::__construct($response, $template);
-        $this->dbi = $dbi;
 
         $checkUserPrivileges = new CheckUserPrivileges($dbi);
         $checkUserPrivileges->getPrivileges();
@@ -62,11 +59,11 @@ class DatabasesController extends AbstractController
 
     public function __invoke(ServerRequest $request): void
     {
-        $GLOBALS['server'] = $GLOBALS['server'] ?? null;
-        $GLOBALS['is_create_db_priv'] = $GLOBALS['is_create_db_priv'] ?? null;
-        $GLOBALS['db_to_create'] = $GLOBALS['db_to_create'] ?? null;
-        $GLOBALS['text_dir'] = $GLOBALS['text_dir'] ?? null;
-        $GLOBALS['errorUrl'] = $GLOBALS['errorUrl'] ?? null;
+        $GLOBALS['server'] ??= null;
+        $GLOBALS['is_create_db_priv'] ??= null;
+        $GLOBALS['db_to_create'] ??= null;
+        $GLOBALS['text_dir'] ??= null;
+        $GLOBALS['errorUrl'] ??= null;
 
         $params = [
             'statistics' => $_REQUEST['statistics'] ?? null,

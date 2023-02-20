@@ -30,15 +30,11 @@ use function strlen;
  */
 class Monitor
 {
-    /** @var DatabaseInterface */
-    private $dbi;
-
     /**
      * @param DatabaseInterface $dbi DatabaseInterface instance
      */
-    public function __construct($dbi)
+    public function __construct(private $dbi)
     {
-        $this->dbi = $dbi;
     }
 
     /**
@@ -506,7 +502,7 @@ class Monitor
         string $database,
         string $query
     ): array {
-        $GLOBALS['cached_affected_rows'] = $GLOBALS['cached_affected_rows'] ?? null;
+        $GLOBALS['cached_affected_rows'] ??= null;
 
         $return = [];
 

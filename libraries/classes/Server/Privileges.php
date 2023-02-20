@@ -63,15 +63,11 @@ class Privileges
     /** @var Template */
     public $template;
 
-    private RelationCleanup $relationCleanup;
-
     /** @var DatabaseInterface */
     public $dbi;
 
     /** @var Relation */
     public $relation;
-
-    private Plugins $plugins;
 
     /**
      * @param Template          $template        Template object
@@ -83,14 +79,12 @@ class Privileges
         Template $template,
         DatabaseInterface $dbi,
         Relation $relation,
-        RelationCleanup $relationCleanup,
-        Plugins $plugins
+        private RelationCleanup $relationCleanup,
+        private Plugins $plugins
     ) {
         $this->template = $template;
         $this->dbi = $dbi;
         $this->relation = $relation;
-        $this->relationCleanup = $relationCleanup;
-        $this->plugins = $plugins;
     }
 
     /**
@@ -570,7 +564,7 @@ class Privileges
      */
     public function setUserGroup($username, $userGroup): void
     {
-        $userGroup = $userGroup ?? '';
+        $userGroup ??= '';
         $configurableMenusFeature = $this->relation->getRelationParameters()->configurableMenusFeature;
         if ($configurableMenusFeature === null) {
             return;
@@ -748,11 +742,11 @@ class Privileges
         ?string $user = null,
         ?string $host = null
     ): string {
-        $GLOBALS['pred_username'] = $GLOBALS['pred_username'] ?? null;
-        $GLOBALS['pred_hostname'] = $GLOBALS['pred_hostname'] ?? null;
-        $GLOBALS['username'] = $GLOBALS['username'] ?? null;
-        $GLOBALS['hostname'] = $GLOBALS['hostname'] ?? null;
-        $GLOBALS['new_username'] = $GLOBALS['new_username'] ?? null;
+        $GLOBALS['pred_username'] ??= null;
+        $GLOBALS['pred_hostname'] ??= null;
+        $GLOBALS['username'] ??= null;
+        $GLOBALS['hostname'] ??= null;
+        $GLOBALS['new_username'] ??= null;
 
         [$usernameLength, $hostnameLength] = $this->getUsernameAndHostnameLength();
 
@@ -1245,10 +1239,10 @@ class Privileges
         $privileges = [];
         foreach ($allPrivileges as $privilege) {
             $userHost = $privilege['User'] . '@' . $privilege['Host'];
-            $privileges[$userHost] = $privileges[$userHost] ?? [];
+            $privileges[$userHost] ??= [];
             $privileges[$userHost]['user'] = (string) $privilege['User'];
             $privileges[$userHost]['host'] = (string) $privilege['Host'];
-            $privileges[$userHost]['privileges'] = $privileges[$userHost]['privileges'] ?? [];
+            $privileges[$userHost]['privileges'] ??= [];
             $privileges[$userHost]['privileges'][] = $this->getSpecificPrivilege($privilege);
         }
 
@@ -1279,7 +1273,7 @@ class Privileges
             foreach ($grantsArr as $grant) {
                 $specificPrivileges[$grant[0]] = 'N';
                 foreach ($tablePrivs as $tablePriv) {
-                    if ($grant[0] != $tablePriv) {
+                    if ($grant[0] !== $tablePriv) {
                         continue;
                     }
 

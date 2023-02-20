@@ -45,32 +45,14 @@ use function ucwords;
  */
 class Sql
 {
-    private DatabaseInterface $dbi;
-
-    private Relation $relation;
-
-    private RelationCleanup $relationCleanup;
-
-    private Transformations $transformations;
-
-    private Operations $operations;
-
-    private Template $template;
-
     public function __construct(
-        DatabaseInterface $dbi,
-        Relation $relation,
-        RelationCleanup $relationCleanup,
-        Operations $operations,
-        Transformations $transformations,
-        Template $template
+        private DatabaseInterface $dbi,
+        private Relation $relation,
+        private RelationCleanup $relationCleanup,
+        private Operations $operations,
+        private Transformations $transformations,
+        private Template $template
     ) {
-        $this->dbi = $dbi;
-        $this->relation = $relation;
-        $this->relationCleanup = $relationCleanup;
-        $this->operations = $operations;
-        $this->transformations = $transformations;
-        $this->template = $template;
     }
 
     /**
@@ -208,7 +190,7 @@ class Sql
                 $numberFound++;
             }
 
-            if ($numberFound == count($indexColumns)) {
+            if ($numberFound === count($indexColumns)) {
                 return true;
             }
         }
@@ -1356,7 +1338,7 @@ class Sql
         $sqlQuery,
         ?string $completeQuery
     ): string {
-        $GLOBALS['showtable'] = $GLOBALS['showtable'] ?? null;
+        $GLOBALS['showtable'] ??= null;
 
         // If we are retrieving the full value of a truncated field or the original
         // value of a transformed field, show it here

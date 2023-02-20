@@ -65,7 +65,7 @@ class BrowseForeigners
         int $indexByDescription,
         string $currentValue
     ): array {
-        $GLOBALS['theme'] = $GLOBALS['theme'] ?? null;
+        $GLOBALS['theme'] ??= null;
 
         $horizontalCount++;
         $output = '';
@@ -325,7 +325,7 @@ class BrowseForeigners
      */
     public function getForeignLimit(?string $foreignShowAll): ?string
     {
-        if (isset($foreignShowAll) && $foreignShowAll == __('Show all')) {
+        if ($foreignShowAll === __('Show all')) {
             return null;
         }
 

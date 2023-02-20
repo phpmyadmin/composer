@@ -57,13 +57,9 @@ use const SQL_DIR;
  */
 class Relation
 {
-    /** @var DatabaseInterface */
-    public $dbi;
-
     /** @param DatabaseInterface $dbi */
-    public function __construct($dbi)
+    public function __construct(public $dbi)
     {
-        $this->dbi = $dbi;
     }
 
     public function getRelationParameters(): RelationParameters
@@ -837,9 +833,9 @@ class Relation
             } else {
                 $key = '0x' . bin2hex($key);
                 if (str_contains($data, '0x')) {
-                    $selected = ($key == trim($data));
+                    $selected = ($key === trim($data));
                 } else {
-                    $selected = ($key == '0x' . $data);
+                    $selected = ($key === '0x' . $data);
                 }
             }
 
