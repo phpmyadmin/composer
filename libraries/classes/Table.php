@@ -1071,10 +1071,19 @@ class Table implements Stringable
                 $GLOBALS['sql_auto_increment'] = $_POST['sql_auto_increment'];
             }
 
+            $isView = (new Table($sourceTable, $sourceDb, $GLOBALS['dbi']))->isView();
             /**
              * The old structure of the table..
              */
-            $sqlStructure = $exportSqlPlugin->getTableDef($sourceDb, $sourceTable, "\n", $errorUrl, false, false);
+            $sqlStructure = $exportSqlPlugin->getTableDef(
+                $sourceDb,
+                $sourceTable,
+                "\n",
+                $errorUrl,
+                false,
+                false,
+                $isView
+            );
 
             unset($noConstraintsComments);
 
@@ -1101,7 +1110,7 @@ class Table implements Stringable
                  */
                 $statement = new DropStatement();
 
-                $tbl = new Table($targetDb, $targetTable);
+                $tbl = new Table($targetTable, $targetDb);
 
                 $statement->options = new OptionsArray(
                     [
@@ -2156,7 +2165,7 @@ class Table implements Stringable
 
         // specifying index type is allowed only for primary, unique and index only
         // TokuDB is using Fractal Tree, Using Type is not useless
-        // Ref: https://mariadb.com/kb/en/mariadb/storage-engine-index-types/
+        // Ref: https://mariadb.com/kb/en/storage-engine-index-types/
         $type = $index->getType();
         if (
             $index->getChoice() !== 'SPATIAL'
