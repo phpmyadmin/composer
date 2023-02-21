@@ -49,7 +49,7 @@ abstract class GisGeometry
      */
     abstract public function prepareRowAsPng(
         $spatial,
-        ?string $label,
+        string|null $label,
         array $color,
         array $scale_data,
         ImageWrapper $image
@@ -62,13 +62,13 @@ abstract class GisGeometry
      * @param string|null $label      label for the GIS data object
      * @param int[]       $color      color for the GIS data object
      * @param array       $scale_data array containing data related to scaling
-     * @param TCPDF       $pdf        TCPDF instance
+     * @param TCPDF       $pdf
      *
      * @return TCPDF the modified TCPDF instance
      */
     abstract public function prepareRowAsPdf(
         $spatial,
-        ?string $label,
+        string|null $label,
         array $color,
         array $scale_data,
         $pdf
@@ -101,7 +101,7 @@ abstract class GisGeometry
      *
      * @return ScaleData|null min, max values for x and y coordinates
      */
-    abstract public function scaleRow(string $spatial): ?ScaleData;
+    abstract public function scaleRow(string $spatial): ScaleData|null;
 
     /**
      * Generates the WKT with the set of parameters passed by the GIS editor.
@@ -147,7 +147,7 @@ abstract class GisGeometry
      *
      * @return ScaleData|null the updated min, max values
      */
-    protected function setMinMax(string $point_set, ?ScaleData $scaleData = null): ?ScaleData
+    protected function setMinMax(string $point_set, ScaleData|null $scaleData = null): ScaleData|null
     {
         // Separate each point
         $points = explode(',', $point_set);

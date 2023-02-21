@@ -29,11 +29,6 @@ class Designer
     /** @var Template */
     public $template;
 
-    /**
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Relation          $relation Relation instance
-     * @param Template          $template Template instance
-     */
     public function __construct(private DatabaseInterface $dbi, private Relation $relation, Template $template)
     {
         $this->template = $template;
@@ -320,7 +315,7 @@ class Designer
         array $scriptDisplayField,
         int $displayPage,
         bool $visualBuilderMode,
-        ?string $selectedPage,
+        string|null $selectedPage,
         array $paramsArray,
         array $tablePositions,
         array $tabColumn,

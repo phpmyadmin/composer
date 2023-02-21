@@ -32,10 +32,6 @@ use function rawurlencode;
  */
 class Common
 {
-    /**
-     * @param DatabaseInterface $dbi      DatabaseInterface object
-     * @param Relation          $relation Relation instance
-     */
     public function __construct(private DatabaseInterface $dbi, private Relation $relation)
     {
     }
@@ -48,7 +44,7 @@ class Common
      *
      * @return DesignerTable[] with table info
      */
-    public function getTablesInfo(?string $db = null, ?string $table = null): array
+    public function getTablesInfo(string|null $db = null, string|null $table = null): array
     {
         $designerTables = [];
         $db ??= $GLOBALS['db'];

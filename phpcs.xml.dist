@@ -36,9 +36,6 @@
     <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing.IncorrectLinesCountBeforeControlStructure">
         <severity>4</severity>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion.RequiredConstructorPropertyPromotion">
-        <severity>4</severity>
-    </rule>
     <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment">
         <severity>4</severity>
     </rule>
@@ -67,9 +64,6 @@
         <severity>4</severity>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification">
-        <severity>4</severity>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat.DisallowedShortNullable">
         <severity>4</severity>
     </rule>
     <rule ref="Squiz.NamingConventions.ValidVariableName.NotCamelCaps">

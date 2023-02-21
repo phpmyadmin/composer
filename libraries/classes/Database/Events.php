@@ -63,9 +63,7 @@ class Events
     ];
 
     /**
-     * @param DatabaseInterface $dbi      DatabaseInterface instance.
-     * @param Template          $template Template instance.
-     * @param ResponseRenderer  $response Response instance.
+     * @param ResponseRenderer $response
      */
     public function __construct(private DatabaseInterface $dbi, private Template $template, private $response)
     {
@@ -299,7 +297,7 @@ class Events
      *
      * @return array|null Data necessary to create the editor.
      */
-    public function getDataFromName($name): ?array
+    public function getDataFromName($name): array|null
     {
         $retval = [];
         $columns = '`EVENT_NAME`, `STATUS`, `EVENT_TYPE`, `EXECUTE_AT`, '
@@ -507,7 +505,7 @@ class Events
      * @param string     $db        Database
      * @param string     $operation Operation 'change' or ''
      */
-    private function sendEditor($mode, ?array $item, $title, $db, $operation): void
+    private function sendEditor($mode, array|null $item, $title, $db, $operation): void
     {
         if ($item !== null) {
             $editor = $this->getEditorForm($mode, $operation, $item);
@@ -631,7 +629,7 @@ class Events
         return $result;
     }
 
-    public static function getDefinition(DatabaseInterface $dbi, string $db, string $name): ?string
+    public static function getDefinition(DatabaseInterface $dbi, string $db, string $name): string|null
     {
         $result = $dbi->fetchValue(
             'SHOW CREATE EVENT ' . Util::backquote($db) . '.' . Util::backquote($name),

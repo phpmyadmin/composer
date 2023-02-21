@@ -50,7 +50,7 @@ class GisGeometryCollection extends GisGeometry
      *
      * @param string $spatial spatial data of a row
      */
-    public function scaleRow(string $spatial): ?ScaleData
+    public function scaleRow(string $spatial): ScaleData|null
     {
         $min_max = null;
 
@@ -91,7 +91,7 @@ class GisGeometryCollection extends GisGeometry
      */
     public function prepareRowAsPng(
         $spatial,
-        ?string $label,
+        string|null $label,
         array $color,
         array $scale_data,
         ImageWrapper $image
@@ -127,11 +127,11 @@ class GisGeometryCollection extends GisGeometry
      * @param string|null $label      label for the GIS GEOMETRYCOLLECTION object
      * @param int[]       $color      color for the GIS GEOMETRYCOLLECTION object
      * @param array       $scale_data array containing data related to scaling
-     * @param TCPDF       $pdf        TCPDF instance
+     * @param TCPDF       $pdf
      *
      * @return TCPDF the modified TCPDF instance
      */
-    public function prepareRowAsPdf($spatial, ?string $label, array $color, array $scale_data, $pdf)
+    public function prepareRowAsPdf($spatial, string|null $label, array $color, array $scale_data, $pdf)
     {
         // Trim to remove leading 'GEOMETRYCOLLECTION(' and trailing ')'
         $goem_col = mb_substr($spatial, 19, -1);

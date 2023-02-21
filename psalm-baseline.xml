@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.1@8e0fd880141f236847ab49a06f94f788d41a4292">
+<files psalm-version="5.7.5@5390c212bab06ee230c8720c2e9c54b823db00c8">
   <file src="libraries/classes/Advisory/Advisor.php">
     <MixedArgument>
       <code>$matches[1]</code>
@@ -352,8 +352,8 @@
       <code>$value</code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>?string</code>
       <code>string</code>
+      <code>string|null</code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code>$cookie_path</code>
@@ -1378,62 +1378,8 @@
                     && is_scalar($GLOBALS['cfg']['ForeignKeyDropdownOrder'][1])]]></code>
     </RedundantCondition>
   </file>
-  <file src="libraries/classes/ConfigStorage/RelationCleanup.php">
-    <DeprecatedMethod>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-    </DeprecatedMethod>
-  </file>
   <file src="libraries/classes/ConfigStorage/UserGroups.php">
     <DeprecatedMethod>
-      <code>escapeString</code>
-      <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
@@ -3297,8 +3243,6 @@
     </InvalidArrayOffset>
     <MixedArgument>
       <code>$database</code>
-      <code>$database</code>
-      <code>$database</code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
@@ -3702,7 +3646,6 @@
   </file>
   <file src="libraries/classes/Controllers/Server/UserGroupsController.php">
     <MixedArgument>
-      <code><![CDATA[$request->getParsedBodyParam('userGroup')]]></code>
       <code><![CDATA[$request->getParsedBodyParam('userGroup')]]></code>
       <code><![CDATA[$request->getParsedBodyParam('userGroup')]]></code>
       <code><![CDATA[$request->getParsedBodyParam('userGroup')]]></code>
@@ -4150,7 +4093,6 @@
   </file>
   <file src="libraries/classes/Controllers/Table/DropColumnController.php">
     <MixedArgument>
-      <code>$field</code>
       <code>$field</code>
       <code><![CDATA[$message->getMessage()]]></code>
     </MixedArgument>
@@ -7027,6 +6969,7 @@
       <code>$sortExpressionNoDirection</code>
     </InvalidArgument>
     <InvalidArrayOffset>
+      <code><![CDATA[$GLOBALS['cfg']['Order']]]></code>
       <code><![CDATA[$GLOBALS['cfg']['RowActionType']]]></code>
       <code><![CDATA[$GLOBALS['is_header_sent']]]></code>
       <code><![CDATA[$GLOBALS['row']]]></code>
@@ -7076,6 +7019,10 @@
       <code>$row[$i]</code>
       <code>$row[$i]</code>
       <code>$sessionMaxRows</code>
+      <code>$sortDirection[$index]</code>
+      <code>$sortDirection[$index]</code>
+      <code>$sortDirection[$index]</code>
+      <code>$sortDirection[$index]</code>
       <code>$sortExpressionNoDirection[$indexInExpression]</code>
       <code>$sortExpressionNoDirection[$indexInExpression]</code>
       <code>$sortExpressionNoDirection[$indexInExpression]</code>
@@ -7278,6 +7225,7 @@
       <code>$relationalDisplay</code>
       <code><![CDATA[$rowInfo[mb_strtolower($fieldsMeta[$m]->orgname)]]]></code>
       <code>$sessionMaxRows</code>
+      <code>$sortDirection[$specialIndex]</code>
       <code>$sqlQuery</code>
       <code>$sqlQueryAdd</code>
       <code>$tableCreateTime</code>
@@ -8707,7 +8655,7 @@
       <code>$start</code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>?int</code>
+      <code>int|null</code>
       <code>stdClass|null</code>
     </MixedInferredReturnType>
     <MixedOperand>
@@ -8781,6 +8729,17 @@
     <PossiblyInvalidArgument>
       <code>$message</code>
     </PossiblyInvalidArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[$GLOBALS['dbi']]]></code>
+    </PossiblyNullArgument>
+    <PropertyNotSetInConstructor>
+      <code>$menu</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCondition>
+      <code><![CDATA[$GLOBALS['config'] !== null]]></code>
+      <code><![CDATA[$GLOBALS['config'] !== null]]></code>
+      <code><![CDATA[$GLOBALS['dbi'] !== null]]></code>
+    </RedundantCondition>
     <RedundantFunctionCall>
       <code>strtolower</code>
     </RedundantFunctionCall>
@@ -8871,9 +8830,6 @@
       <code><![CDATA[$_REQUEST['session_max_rows']]]></code>
       <code><![CDATA[$_REQUEST['unlim_num_rows']]]></code>
     </RiskyCast>
-    <UnusedMethod>
-      <code>generateRowQueryOutput</code>
-    </UnusedMethod>
   </file>
   <file src="libraries/classes/Image/ImageWrapper.php">
     <PossiblyUnusedReturnValue>
@@ -9085,9 +9041,6 @@
       <code><![CDATA[$GLOBALS['read_multiply']]]></code>
       <code><![CDATA[$GLOBALS['timestamp']]]></code>
     </PossiblyNullOperand>
-    <RedundantCondition>
-      <code><![CDATA[mb_strlen($GLOBALS['sql_query']) > 50000]]></code>
-    </RedundantCondition>
   </file>
   <file src="libraries/classes/Import/Ajax.php">
     <MixedArrayAccess>
@@ -10650,6 +10603,9 @@
       <code><![CDATA[$_REQUEST['pma_servername']]]></code>
       <code>$tmp_host</code>
     </PossiblyInvalidCast>
+    <PossiblyInvalidPropertyAssignmentValue>
+      <code>$password</code>
+    </PossiblyInvalidPropertyAssignmentValue>
     <PossiblyNullReference>
       <code>removeCookie</code>
       <code>removeCookie</code>
@@ -12000,9 +11956,6 @@
     <RedundantCast>
       <code><![CDATA[(string) $GLOBALS['db']]]></code>
     </RedundantCast>
-    <RedundantCondition>
-      <code><![CDATA[$csvNewLine !== 'auto']]></code>
-    </RedundantCondition>
   </file>
   <file src="libraries/classes/Plugins/Import/ImportLdi.php">
     <InvalidArrayOffset>
@@ -12548,17 +12501,10 @@
       <code>$one_key</code>
       <code>$rel</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->diagram]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
       <code><![CDATA[$_REQUEST['dia_orientation']]]></code>
       <code><![CDATA[$_REQUEST['dia_paper']]]></code>
     </PossiblyInvalidCast>
-    <PossiblyNullReference>
-      <code>endDiaDoc</code>
-      <code>startDiaDoc</code>
-    </PossiblyNullReference>
     <UnusedProperty>
       <code>$bottomMargin</code>
       <code>$leftMargin</code>
@@ -12605,7 +12551,6 @@
     <InvalidArgument>
       <code><![CDATA[$this->tables[$foreignTable]]]></code>
       <code><![CDATA[$this->tables[$masterTable]]]></code>
-      <code>10</code>
     </InvalidArgument>
     <InvalidCast>
       <code><![CDATA[$this->tables[$foreignTable]]]></code>
@@ -12617,12 +12562,6 @@
       <code><![CDATA[$one_key['ref_table_name']]]></code>
       <code><![CDATA[$rel['foreign_field']]]></code>
       <code><![CDATA[$rel['foreign_table']]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code>$master_field</code>
@@ -12646,26 +12585,9 @@
       <code>$one_key</code>
       <code>$rel</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->diagram]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
       <code><![CDATA[$_REQUEST['eps_orientation']]]></code>
     </PossiblyInvalidCast>
-    <PossiblyNullReference>
-      <code>endEpsDoc</code>
-      <code>getFont</code>
-      <code>getFont</code>
-      <code>getFont</code>
-      <code>getFontSize</code>
-      <code>getFontSize</code>
-      <code>getFontSize</code>
-      <code>setAuthor</code>
-      <code>setDate</code>
-      <code>setFont</code>
-      <code>setOrientation</code>
-      <code>setTitle</code>
-    </PossiblyNullReference>
   </file>
   <file src="libraries/classes/Plugins/Schema/Eps/RelationStatsEps.php">
     <MixedMethodCall>
@@ -12828,15 +12750,9 @@
       <code>$table</code>
       <code>$table</code>
       <code>$table</code>
-      <code><![CDATA[$this->diagram->PageNo()]]></code>
-      <code><![CDATA[$this->diagram->customLinks['RT']['-']]]></code>
       <code><![CDATA[$this->diagram->customLinks['RT']['-']]]></code>
       <code><![CDATA[$this->diagram->customLinks['doc'][$table][$field_name]]]></code>
       <code><![CDATA[$this->diagram->customLinks['doc'][$table]['-']]]></code>
-      <code><![CDATA[max(
-                ($this->xMax - $this->xMin) / $innerWidth,
-                ($this->yMax - $this->yMin) / $innerHeight
-            ) * 100]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code>$master_field</code>
@@ -12896,8 +12812,6 @@
       <code>$field_name</code>
       <code>$foreignTable</code>
       <code>$index</code>
-      <code>$innerHeight</code>
-      <code>$innerWidth</code>
       <code>$links[0]</code>
       <code>$links[6]</code>
       <code>$one_field</code>
@@ -12915,15 +12829,9 @@
       <code><![CDATA[$foreigner['foreign_table']]]></code>
       <code><![CDATA[$foreigner['on_delete']]]></code>
       <code><![CDATA[$foreigner['on_update']]]></code>
-      <code>$innerHeight</code>
-      <code>$innerWidth</code>
       <code>$show_comment</code>
       <code>$table</code>
       <code>$table</code>
-      <code><![CDATA[max(
-                ($this->xMax - $this->xMin) / $innerWidth,
-                ($this->yMax - $this->yMin) / $innerHeight
-            )]]></code>
     </MixedOperand>
     <NullArgument>
       <code>null</code>
@@ -12932,7 +12840,6 @@
     </NullArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[$_REQUEST['pdf_table_order']]]></code>
-      <code><![CDATA[$this->diagram]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
       <code><![CDATA[$_REQUEST['pdf_orientation']]]></code>
@@ -12940,38 +12847,8 @@
       <code><![CDATA[$_REQUEST['pdf_table_order']]]></code>
     </PossiblyInvalidCast>
     <PossiblyNullArgument>
-      <code><![CDATA[$this->diagram->customLinks['RT']['-']]]></code>
       <code><![CDATA[$this->orientation]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$this->diagram->customLinks['RT']]]></code>
-      <code><![CDATA[$this->diagram->customLinks['RT']['-']]]></code>
-    </PossiblyNullArrayAccess>
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$this->diagram->customLinks]]></code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference>
-      <code>AddPage</code>
-      <code>Bookmark</code>
-      <code>Open</code>
-      <code>PageNo</code>
-      <code>getPageHeight</code>
-      <code>getPageWidth</code>
-      <code>setAlias</code>
-      <code>setAutoPageBreak</code>
-      <code>setAutoPageBreak</code>
-      <code>setAutoPageBreak</code>
-      <code>setCMargin</code>
-      <code>setCMargin</code>
-      <code>setCMargin</code>
-      <code>setFontSize</code>
-      <code>setFontSizeScale</code>
-      <code>setLineWidthScale</code>
-      <code>setLink</code>
-      <code>setOffline</code>
-      <code>setScale</code>
-      <code>setTitle</code>
-    </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$row['Null']]]></code>
     </PossiblyUndefinedArrayOffset>
@@ -13197,12 +13074,6 @@
       <code><![CDATA[$one_key['ref_table_name']]]></code>
       <code><![CDATA[$rel['foreign_field']]]></code>
       <code><![CDATA[$rel['foreign_table']]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFont()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
-      <code><![CDATA[$this->diagram->getFontSize()]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code>$master_field</code>
@@ -13227,29 +13098,13 @@
       <code>$rel</code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
-      <code><![CDATA[$this->diagram]]></code>
       <code><![CDATA[$this->tables[$table]]]></code>
       <code><![CDATA[$this->xMax + $border]]></code>
       <code><![CDATA[$this->xMin - $border]]></code>
       <code><![CDATA[$this->yMax + $border]]></code>
       <code><![CDATA[$this->yMin - $border]]></code>
     </PossiblyInvalidArgument>
-    <PossiblyNullReference>
-      <code>endSvgDoc</code>
-      <code>getFont</code>
-      <code>getFont</code>
-      <code>getFont</code>
-      <code>getFontSize</code>
-      <code>getFontSize</code>
-      <code>getFontSize</code>
-      <code>setAuthor</code>
-      <code>setFont</code>
-      <code>setFontSize</code>
-      <code>setTitle</code>
-      <code>startSvgDoc</code>
-    </PossiblyNullReference>
     <TooFewArguments>
-      <code>setFont</code>
       <code>tableDraw</code>
       <code>tableDraw</code>
     </TooFewArguments>
@@ -13881,11 +13736,17 @@
       <code><![CDATA[(string) $GLOBALS['table']]]></code>
     </RedundantCast>
     <RedundantCondition>
+      <code><![CDATA[$this->footer?->getDisplay()]]></code>
+      <code><![CDATA[$this->header?->getDisplay()]]></code>
       <code><![CDATA[is_scalar($GLOBALS['db'])]]></code>
       <code><![CDATA[is_scalar($GLOBALS['table'])]]></code>
       <code><![CDATA[isset($GLOBALS['db']) && is_scalar($GLOBALS['db'])]]></code>
       <code><![CDATA[isset($GLOBALS['table']) && is_scalar($GLOBALS['table'])]]></code>
     </RedundantCondition>
+    <TypeDoesNotContainNull>
+      <code><![CDATA[$this->footer]]></code>
+      <code><![CDATA[$this->header]]></code>
+    </TypeDoesNotContainNull>
     <TypeDoesNotContainType>
       <code><![CDATA['']]></code>
       <code><![CDATA['']]></code>
@@ -14142,8 +14003,8 @@
       <code>$value</code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>?string</code>
       <code>string</code>
+      <code>string|null</code>
     </MixedInferredReturnType>
     <MixedOperand>
       <code>$createUserShow</code>
@@ -14280,14 +14141,6 @@
       <code><![CDATA[$_POST['max_updates']]]></code>
       <code><![CDATA[$_POST['max_user_connections']]]></code>
     </RiskyCast>
-  </file>
-  <file src="libraries/classes/Server/Privileges/AccountLocking.php">
-    <DeprecatedMethod>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-      <code>escapeString</code>
-    </DeprecatedMethod>
   </file>
   <file src="libraries/classes/Server/Select.php">
     <MixedArgumentTypeCoercion>
@@ -14469,6 +14322,10 @@
       <code><![CDATA[$row['argument']]]></code>
       <code><![CDATA[$row['argument']]]></code>
       <code><![CDATA[$row['argument']]]></code>
+      <code><![CDATA[$row['argument']]]></code>
+      <code><![CDATA[$row['argument']]]></code>
+      <code><![CDATA[$row['sql_text']]]></code>
+      <code><![CDATA[$row['sql_text']]]></code>
       <code><![CDATA[$row['sql_text']]]></code>
       <code><![CDATA[$row['sql_text']]]></code>
       <code><![CDATA[$row['sql_text']]]></code>
@@ -15718,7 +15575,6 @@
     </MixedReturnStatement>
     <PossiblyNullReference>
       <code>get</code>
-      <code>get</code>
       <code>getCookie</code>
     </PossiblyNullReference>
     <PossiblyUnusedParam>
@@ -15757,6 +15613,9 @@
     </PossiblyNullOperand>
   </file>
   <file src="libraries/classes/Util.php">
+    <ArgumentTypeCoercion>
+      <code>$separator</code>
+    </ArgumentTypeCoercion>
     <DeprecatedMethod>
       <code>escapeString</code>
       <code>escapeString</code>
@@ -16211,9 +16070,6 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="test/classes/Command/TwigLintCommandTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code>$filesFound</code>
       <code>$filesInfos</code>
@@ -16226,11 +16082,6 @@
       <code>$filesFound</code>
       <code>$filesInfos</code>
     </MixedAssignment>
-  </file>
-  <file src="test/classes/Command/WriteGitRevisionCommandTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
   </file>
   <file src="test/classes/CommonTest.php">
     <MixedInferredReturnType>
@@ -16353,14 +16204,6 @@
       <code>setAccessible</code>
     </UnusedMethodCall>
   </file>
-  <file src="test/classes/ConfigStorage/RelationCleanupTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/ConfigStorage/RelationTest.php">
     <DocblockTypeContradiction>
       <code>assertSame</code>
@@ -16384,11 +16227,6 @@
       <code>assertSame</code>
       <code>assertSame</code>
     </TypeDoesNotContainType>
-  </file>
-  <file src="test/classes/ConfigStorage/UserGroupsTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
   </file>
   <file src="test/classes/ConfigTest.php">
     <InvalidArgument>
@@ -17092,6 +16930,8 @@
       <code><![CDATA[$_SESSION['tmpval']['relational_display']]]></code>
     </MixedArrayAssignment>
     <MixedAssignment>
+      <code>$data</code>
+      <code>$data</code>
       <code>$output</code>
       <code>$output</code>
       <code>$output</code>
@@ -17104,6 +16944,11 @@
       <code>array</code>
       <code>array</code>
     </MixedInferredReturnType>
+    <PossiblyInvalidArgument>
+      <code>testGetSingleAndMultiSortUrls</code>
+      <code>testGetSingleAndMultiSortUrls</code>
+      <code>testGetSingleAndMultiSortUrls</code>
+    </PossiblyInvalidArgument>
   </file>
   <file src="test/classes/Engines/PbxtTest.php">
     <MixedInferredReturnType>
@@ -18193,14 +18038,6 @@
       <code>assertIsArray</code>
     </RedundantCondition>
   </file>
-  <file src="test/classes/Server/Privileges/AccountLockingTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/Server/PrivilegesTest.php">
     <DeprecatedMethod>
       <code>escapeString</code>
@@ -18210,7 +18047,6 @@
       <code>escapeString</code>
       <code>escapeString</code>
       <code>escapeString</code>
-      <code>withConsecutive</code>
     </DeprecatedMethod>
     <MixedArgument>
       <code>$real_sql_query</code>
@@ -18356,8 +18192,8 @@
       <code>$val</code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>?array</code>
       <code>array</code>
+      <code>array|null</code>
     </MixedInferredReturnType>
     <MixedOperand>
       <code><![CDATA[$query_data['pos']]]></code>
@@ -18457,9 +18293,6 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/classes/TrackerTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedInferredReturnType>
       <code>array</code>
       <code>array</code>
@@ -18542,12 +18375,6 @@
     </MixedArrayAccess>
   </file>
   <file src="test/classes/UtilTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <InvalidArgument>
       <code>testGetMySQLDocuURL</code>
     </InvalidArgument>

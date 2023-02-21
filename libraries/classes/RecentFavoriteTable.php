@@ -61,8 +61,7 @@ class RecentFavoriteTable
     /**
      * Creates a new instance of RecentFavoriteTable
      *
-     * @param Template $template Template object
-     * @param string   $type     the table type
+     * @param string $type the table type
      */
     private function __construct(Template $template, string $type)
     {
@@ -378,7 +377,7 @@ class RecentFavoriteTable
      *
      * @return string|null pma table name
      */
-    private function getPmaTable(): ?string
+    private function getPmaTable(): string|null
     {
         $relationParameters = $this->relation->getRelationParameters();
         if ($this->tableType === 'recent' && $relationParameters->recentlyUsedTablesFeature !== null) {

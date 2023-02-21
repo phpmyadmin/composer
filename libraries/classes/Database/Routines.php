@@ -58,9 +58,7 @@ class Routines
     private $numericOptions = ['UNSIGNED', 'ZEROFILL', 'UNSIGNED ZEROFILL'];
 
     /**
-     * @param DatabaseInterface $dbi      DatabaseInterface instance.
-     * @param Template          $template Template instance.
-     * @param ResponseRenderer  $response Response instance.
+     * @param ResponseRenderer $response
      */
     public function __construct(private DatabaseInterface $dbi, private Template $template, private $response)
     {
@@ -539,7 +537,7 @@ class Routines
      *
      * @return array|null    Data necessary to create the routine editor.
      */
-    public function getDataFromName($name, $type, $all = true): ?array
+    public function getDataFromName($name, $type, $all = true): array|null
     {
         $retval = [];
 
@@ -1317,7 +1315,7 @@ class Routines
      *
      * @param array $row Columns
      */
-    private function browseRow(array $row): ?string
+    private function browseRow(array $row): string|null
     {
         $output = null;
         foreach ($row as $value) {
@@ -1607,7 +1605,7 @@ class Routines
     public static function getDetails(
         DatabaseInterface $dbi,
         string $db,
-        ?string $which = null,
+        string|null $which = null,
         string $name = ''
     ): array {
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
@@ -1659,7 +1657,7 @@ class Routines
         return $ret;
     }
 
-    public static function getFunctionDefinition(DatabaseInterface $dbi, string $db, string $name): ?string
+    public static function getFunctionDefinition(DatabaseInterface $dbi, string $db, string $name): string|null
     {
         $result = $dbi->fetchValue(
             'SHOW CREATE FUNCTION ' . Util::backquote($db) . '.' . Util::backquote($name),
@@ -1669,7 +1667,7 @@ class Routines
         return is_string($result) ? $result : null;
     }
 
-    public static function getProcedureDefinition(DatabaseInterface $dbi, string $db, string $name): ?string
+    public static function getProcedureDefinition(DatabaseInterface $dbi, string $db, string $name): string|null
     {
         $result = $dbi->fetchValue(
             'SHOW CREATE PROCEDURE ' . Util::backquote($db) . '.' . Util::backquote($name),

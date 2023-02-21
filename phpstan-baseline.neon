@@ -2156,11 +2156,6 @@ parameters:
 			path: libraries/classes/Controllers/Server/Status/VariablesController.php
 
 		-
-			message: "#^Parameter \\#2 \\$userGroup of static method PhpMyAdmin\\\\ConfigStorage\\\\UserGroups\\:\\:delete\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: libraries/classes/Controllers/Server/UserGroupsController.php
-
-		-
 			message: "#^Parameter \\#2 \\$userGroup of static method PhpMyAdmin\\\\ConfigStorage\\\\UserGroups\\:\\:edit\\(\\) expects string, mixed given\\.$#"
 			count: 2
 			path: libraries/classes/Controllers/Server/UserGroupsController.php
@@ -5636,6 +5631,11 @@ parameters:
 			path: libraries/classes/Message.php
 
 		-
+			message: "#^Right side of && is always true\\.$#"
+			count: 1
+			path: libraries/classes/Message.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Navigation\\\\Navigation\\:\\:getHiddenItems\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: libraries/classes/Navigation/Navigation.php
@@ -7006,7 +7006,7 @@ parameters:
 			path: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php
 
 		-
-			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Schema\\\\ExportRelationSchema\\:\\:\\$orientation \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			message: "#^Property PhpMyAdmin\\\\Plugins\\\\Schema\\\\ExportRelationSchema\\<PhpMyAdmin\\\\Plugins\\\\Schema\\\\Pdf\\\\Pdf\\>\\:\\:\\$orientation \\(string\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Schema/Pdf/PdfRelationSchema.php
 
@@ -7626,6 +7626,11 @@ parameters:
 			path: libraries/classes/ReplicationInfo.php
 
 		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 2
+			path: libraries/classes/ResponseRenderer.php
+
+		-
 			message: "#^Foreach overwrites \\$value with its value variable\\.$#"
 			count: 1
 			path: libraries/classes/ResponseRenderer.php
@@ -7637,6 +7642,16 @@ parameters:
 
 		-
 			message: "#^Property PhpMyAdmin\\\\ResponseRenderer\\:\\:\\$JSON type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/ResponseRenderer.php
+
+		-
+			message: "#^Using nullsafe method call on non\\-nullable type PhpMyAdmin\\\\Footer\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: libraries/classes/ResponseRenderer.php
+
+		-
+			message: "#^Using nullsafe method call on non\\-nullable type PhpMyAdmin\\\\Header\\. Use \\-\\> instead\\.$#"
 			count: 1
 			path: libraries/classes/ResponseRenderer.php
 
@@ -10301,6 +10316,11 @@ parameters:
 			path: test/classes/Display/ResultsTest.php
 
 		-
+			message: "#^Method PhpMyAdmin\\\\Tests\\\\Display\\\\ResultsTest\\:\\:dataProviderSortOrder\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/classes/Display/ResultsTest.php
+
+		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Display\\\\ResultsTest\\:\\:providerSetConfigParamsForDisplayTable\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: test/classes/Display/ResultsTest.php
@@ -10394,11 +10414,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
 			count: 4
 			path: test/classes/Display/ResultsTest.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between 4 and 4 will always evaluate to true\\.$#"
-			count: 1
-			path: test/classes/EncodingTest.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Tests\\\\Engines\\\\PbxtTest\\:\\:providerFortTestResolveTypeSize\\(\\) return type has no value type specified in iterable type array\\.$#"

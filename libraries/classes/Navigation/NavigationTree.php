@@ -136,8 +136,7 @@ class NavigationTree
     private $largeGroupWarning = false;
 
     /**
-     * @param Template          $template Template instance
-     * @param DatabaseInterface $dbi      DatabaseInterface instance
+     * @param Template $template
      */
     public function __construct(private $template, private DatabaseInterface $dbi)
     {
@@ -644,7 +643,7 @@ class NavigationTree
      *                   passed as an argument, $node
      *                   must be of type CONTAINER
      */
-    public function groupTree(?Node $node = null): void
+    public function groupTree(Node|null $node = null): void
     {
         if ($node === null) {
             $node = $this->tree;
