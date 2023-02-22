@@ -25,7 +25,7 @@ use ReflectionMethod;
 use stdClass;
 
 use function __;
-use function array_shift;
+use function bin2hex;
 
 use const MYSQLI_BLOB_FLAG;
 use const MYSQLI_NUM_FLAG;
@@ -99,7 +99,6 @@ class ExportOdtTest extends AbstractTestCase
         $_SESSION = ['relation' => [$GLOBALS['server'] => $relationParameters->toArray()]];
 
         $method = new ReflectionMethod(ExportOdt::class, 'setProperties');
-        $method->setAccessible(true);
         $properties = $method->invoke($this->object, null);
 
         $this->assertInstanceOf(ExportPluginProperties::class, $properties);
@@ -139,7 +138,8 @@ class ExportOdtTest extends AbstractTestCase
 
         $generalOptionsArray = $options->getProperties();
 
-        $generalOptions = array_shift($generalOptionsArray);
+        $generalOptions = $generalOptionsArray->current();
+        $generalOptionsArray->next();
 
         $this->assertInstanceOf(OptionsPropertyMainGroup::class, $generalOptions);
 
@@ -155,7 +155,7 @@ class ExportOdtTest extends AbstractTestCase
 
         $generalProperties = $generalOptions->getProperties();
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
 
         $this->assertInstanceOf(RadioPropertyItem::class, $property);
 
@@ -173,7 +173,8 @@ class ExportOdtTest extends AbstractTestCase
             $property->getValues()
         );
 
-        $generalOptions = array_shift($generalOptionsArray);
+        $generalOptions = $generalOptionsArray->current();
+        $generalOptionsArray->next();
 
         $this->assertInstanceOf(OptionsPropertyMainGroup::class, $generalOptions);
 
@@ -194,7 +195,8 @@ class ExportOdtTest extends AbstractTestCase
 
         $generalProperties = $generalOptions->getProperties();
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
+        $generalProperties->next();
 
         $this->assertInstanceOf(BoolPropertyItem::class, $property);
 
@@ -208,7 +210,8 @@ class ExportOdtTest extends AbstractTestCase
             $property->getText()
         );
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
+        $generalProperties->next();
 
         $this->assertInstanceOf(BoolPropertyItem::class, $property);
 
@@ -222,7 +225,7 @@ class ExportOdtTest extends AbstractTestCase
             $property->getText()
         );
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
 
         $this->assertInstanceOf(BoolPropertyItem::class, $property);
 
@@ -237,7 +240,7 @@ class ExportOdtTest extends AbstractTestCase
         );
 
         // hide structure
-        $generalOptions = array_shift($generalOptionsArray);
+        $generalOptions = $generalOptionsArray->current();
 
         $this->assertInstanceOf(OptionsPropertyMainGroup::class, $generalOptions);
 
@@ -258,7 +261,8 @@ class ExportOdtTest extends AbstractTestCase
 
         $generalProperties = $generalOptions->getProperties();
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
+        $generalProperties->next();
 
         $this->assertInstanceOf(BoolPropertyItem::class, $property);
 
@@ -272,7 +276,7 @@ class ExportOdtTest extends AbstractTestCase
             $property->getText()
         );
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
 
         $this->assertInstanceOf(TextPropertyItem::class, $property);
 
@@ -310,16 +314,10 @@ class ExportOdtTest extends AbstractTestCase
     public function testExportFooter(): void
     {
         $GLOBALS['odt_buffer'] = 'header';
-
-        $this->expectOutputRegex('/^504b.*636f6e74656e742e786d6c/');
-        $this->setOutputCallback('bin2hex');
-
-        $this->assertTrue(
-            $this->object->exportFooter()
-        );
-
+        $this->assertTrue($this->object->exportFooter());
+        $output = $this->getActualOutputForAssertion();
+        $this->assertMatchesRegularExpression('/^504b.*636f6e74656e742e786d6c/', bin2hex($output));
         $this->assertStringContainsString('header', $GLOBALS['odt_buffer']);
-
         $this->assertStringContainsString(
             '</office:text></office:body></office:document-content>',
             $GLOBALS['odt_buffer']
@@ -777,7 +775,6 @@ class ExportOdtTest extends AbstractTestCase
         $GLOBALS['dbi'] = $dbi;
 
         $method = new ReflectionMethod(ExportOdt::class, 'getTriggers');
-        $method->setAccessible(true);
         $result = $method->invoke($this->object, 'database', 'ta<ble');
 
         $this->assertSame($result, $GLOBALS['odt_buffer']);
@@ -952,7 +949,6 @@ class ExportOdtTest extends AbstractTestCase
     public function testFormatOneColumnDefinition(): void
     {
         $method = new ReflectionMethod(ExportOdt::class, 'formatOneColumnDefinition');
-        $method->setAccessible(true);
 
         $cols = [
             'Null' => 'Yes',

@@ -17,8 +17,6 @@ use PhpMyAdmin\Version;
 use ReflectionMethod;
 use ReflectionProperty;
 
-use function array_shift;
-
 /**
  * @covers \PhpMyAdmin\Plugins\Export\ExportJson
  * @group medium
@@ -60,11 +58,9 @@ class ExportJsonTest extends AbstractTestCase
     public function testSetProperties(): void
     {
         $method = new ReflectionMethod(ExportJson::class, 'setProperties');
-        $method->setAccessible(true);
         $method->invoke($this->object, null);
 
         $attrProperties = new ReflectionProperty(ExportJson::class, 'properties');
-        $attrProperties->setAccessible(true);
         $properties = $attrProperties->getValue($this->object);
 
         $this->assertInstanceOf(ExportPluginProperties::class, $properties);
@@ -99,7 +95,7 @@ class ExportJsonTest extends AbstractTestCase
         );
 
         $generalOptionsArray = $options->getProperties();
-        $generalOptions = $generalOptionsArray[0];
+        $generalOptions = $generalOptionsArray->current();
 
         $this->assertInstanceOf(OptionsPropertyMainGroup::class, $generalOptions);
 
@@ -110,7 +106,7 @@ class ExportJsonTest extends AbstractTestCase
 
         $generalProperties = $generalOptions->getProperties();
 
-        $property = array_shift($generalProperties);
+        $property = $generalProperties->current();
 
         $this->assertInstanceOf(HiddenPropertyItem::class, $property);
 
