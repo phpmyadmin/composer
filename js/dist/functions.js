@@ -489,7 +489,7 @@ Functions.prepareForAjaxRequest = function ($form) {
 Functions.checkPasswordStrength = function (value, meterObject, meterObjectLabel, username) {
   // List of words we don't want to appear in the password
   var customDict = ['phpmyadmin', 'mariadb', 'mysql', 'php', 'my', 'admin'];
-  if (username !== null) {
+  if (username) {
     customDict.push(username);
   }
   zxcvbnts.core.zxcvbnOptions.setOptions({
@@ -560,7 +560,7 @@ Functions.suggestPassword = function (passwordForm) {
   passwordForm.elements.pma_pw2.value = passwd.value;
   var meterObj = $jQueryPasswordForm.find('meter[name="pw_meter"]').first();
   var meterObjLabel = $jQueryPasswordForm.find('span[name="pw_strength"]').first();
-  Functions.checkPasswordStrength(passwd.value, meterObj, meterObjLabel);
+  Functions.checkPasswordStrength(passwd.value, meterObj, meterObjLabel, passwordForm.elements.username.value);
   return true;
 };
 
