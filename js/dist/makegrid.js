@@ -803,7 +803,9 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
             });
           } else {
             $(g.cEdit).on('keypress change paste', '.edit_box', function () {
-              $checkbox.prop('checked', false);
+              if ($(this).val() !== '') {
+                $checkbox.prop('checked', false);
+              }
             });
             // Capture ctrl+v (on IE and Chrome)
             $(g.cEdit).on('keydown', '.edit_box', function (e) {
@@ -837,6 +839,8 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
               if ($editArea.find('select').length > 0) {
                 $editArea.find('select').val('');
               }
+            } else if ($td.is('.datefield')) {
+              $('.ui-datepicker-trigger').trigger('click');
             } else {
               $editArea.find('textarea').val('');
             }
