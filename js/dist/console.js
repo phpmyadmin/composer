@@ -1107,7 +1107,6 @@ var ConsoleDebug = {
     // Possible 'exec' => Execution order, 'time' => Time taken, 'count'
     order: 'asc' // Possible 'asc', 'desc'
   },
-
   lastDebugInfo: {
     debugInfo: null,
     url: null

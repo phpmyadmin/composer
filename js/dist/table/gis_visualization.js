@@ -223,7 +223,6 @@ AJAX.registerOnload('table/gis_visualization.js', function () {
       return $('<div>'); // Give a fake element to be used for dragging display
     }
   });
-
   $(document).on('dragstart', 'svg', function (event, dd) {
     $('#placeholder').addClass('placeholderDrag');
     dragX = Math.round(dd.offset.left);
