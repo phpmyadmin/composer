@@ -25,6 +25,7 @@ use PhpMyAdmin\Utils\SessionCache;
 
 use function __;
 use function array_column;
+use function array_combine;
 use function array_diff;
 use function array_keys;
 use function array_map;
@@ -49,6 +50,7 @@ use function openlog;
 use function reset;
 use function sprintf;
 use function str_contains;
+use function str_replace;
 use function str_starts_with;
 use function stripos;
 use function strlen;
@@ -119,6 +121,9 @@ class DatabaseInterface implements DbalInterface
 
     /** @var array Current user and host cache */
     private $currentUser;
+
+    /** @var array<int, array<int, string>>|null Current role and host cache */
+    private $currentRoleAndHost = null;
 
     /** @var string|null lower_case_table_names value cache */
     private $lowerCaseTableNames = null;
@@ -595,11 +600,15 @@ class DatabaseInterface implements DbalInterface
                 }
 
                 if ($sortValues) {
+                    // See https://stackoverflow.com/a/32461188 for the explanation of below hack
+                    $keys = array_keys($each_tables);
                     if ($sort_order === 'DESC') {
-                        array_multisort($sortValues, SORT_DESC, $each_tables);
+                        array_multisort($sortValues, SORT_DESC, $each_tables, $keys);
                     } else {
-                        array_multisort($sortValues, SORT_ASC, $each_tables);
+                        array_multisort($sortValues, SORT_ASC, $each_tables, $keys);
                     }
+
+                    $each_tables = array_combine($keys, $each_tables);
                 }
 
                 // cleanup the temporary sort array
@@ -1702,6 +1711,38 @@ class DatabaseInterface implements DbalInterface
         return '@';
     }
 
+    /**
+     * gets the current role with host. Role maybe multiple separated by comma
+     * Support start from MySQL 8.x / MariaDB 10.0.5
+     *
+     * @see https://dev.mysql.com/doc/refman/8.0/en/roles.html
+     * @see https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_current-role
+     * @see https://mariadb.com/kb/en/mariadb-1005-release-notes/#newly-implemented-features
+     * @see https://mariadb.com/kb/en/roles_overview/
+     *
+     * @return array<int, array<int, string>> the current roles i.e. array of role@host
+     */
+    public function getCurrentRoles(): array
+    {
+        if (($this->isMariaDB() && $this->getVersion() < 100500) || $this->getVersion() < 80000) {
+            return [];
+        }
+
+        if (SessionCache::has('mysql_cur_role')) {
+            return SessionCache::get('mysql_cur_role');
+        }
+
+        $role = $this->fetchValue('SELECT CURRENT_ROLE();');
+        if ($role === false || $role === null || $role === 'NONE') {
+            return [];
+        }
+
+        $role = array_map('trim', explode(',', str_replace('`', '', $role)));
+        SessionCache::set('mysql_cur_role', $role);
+
+        return $role;
+    }
+
     public function isSuperUser(): bool
     {
         if (SessionCache::has('is_superuser')) {
@@ -1761,6 +1802,21 @@ class DatabaseInterface implements DbalInterface
             $hasGrantPrivilege = (bool) $result->numRows();
         }
 
+        if (! $hasGrantPrivilege) {
+            foreach ($this->getCurrentRolesAndHost() as [$role, $roleHost]) {
+                $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($role, $roleHost ?? '');
+                $result = $this->tryQuery($query);
+
+                if ($result) {
+                    $hasGrantPrivilege = (bool) $result->numRows();
+                }
+
+                if ($hasGrantPrivilege) {
+                    break;
+                }
+            }
+        }
+
         SessionCache::set('is_grantuser', $hasGrantPrivilege);
 
         return $hasGrantPrivilege;
@@ -1803,6 +1859,21 @@ class DatabaseInterface implements DbalInterface
             $hasCreatePrivilege = (bool) $result->numRows();
         }
 
+        if (! $hasCreatePrivilege) {
+            foreach ($this->getCurrentRolesAndHost() as [$role, $roleHost]) {
+                $query = QueryGenerator::getInformationSchemaDataForCreateRequest($role, $roleHost ?? '');
+                $result = $this->tryQuery($query);
+
+                if ($result) {
+                    $hasCreatePrivilege = (bool) $result->numRows();
+                }
+
+                if ($hasCreatePrivilege) {
+                    break;
+                }
+            }
+        }
+
         SessionCache::set('is_createuser', $hasCreatePrivilege);
 
         return $hasCreatePrivilege;
@@ -1831,6 +1902,24 @@ class DatabaseInterface implements DbalInterface
         }
 
         return $this->currentUser;
+    }
+
+    /**
+     * Get the current role and host.
+     *
+     * @return array<int, array<int, string>> array of role and hostname
+     */
+    public function getCurrentRolesAndHost(): array
+    {
+        if ($this->currentRoleAndHost === null) {
+            $roles = $this->getCurrentRoles();
+
+            $this->currentRoleAndHost = array_map(static function (string $role) {
+                return explode('@', $role);
+            }, $roles);
+        }
+
+        return $this->currentRoleAndHost;
     }
 
     /**
@@ -2210,12 +2299,6 @@ class DatabaseInterface implements DbalInterface
      */
     public function getDbCollation(string $db): string
     {
-        if (Utilities::isSystemSchema($db)) {
-            // We don't have to check the collation of the virtual
-            // information_schema database: We know it!
-            return 'utf8_general_ci';
-        }
-
         if (! $GLOBALS['cfg']['Server']['DisableIS']) {
             // this is slow with thousands of databases
             $sql = 'SELECT DEFAULT_COLLATION_NAME FROM information_schema.SCHEMATA'

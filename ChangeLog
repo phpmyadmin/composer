@@ -56,6 +56,33 @@ phpMyAdmin - ChangeLog
 - issue #14411 Fixed double tap to edit on mobile devices
 - issue        Update documentation to reflect that Node >= 12 is required to compile the JS and CSS files
 - issue #18578 Fixed PDF export NULL values gives a type error
+- issue #18650 Fixed double escaping on foreign key relation link title
+- issue #18533 Fixed wrong count for simulated queries
+- issue #18611 Fixed an error when searching a table without conditions
+- issue #17381 Fixed JS errors when editing indexes on create table
+- issue #14402 Fix the PRIMARY label still shown when using two columns for a PK on create table
+- issue #17347 Fixed JS errors when changing index settings on create table
+- issue        Fix BETWEEN search does not validate input because of spaces
+- issue        Fix JS number validation does not validate when the input is empty or emptied
+- issue #18561 Fix issue when adding System Monitor charts
+- issue #17363 Fix duplicate route parameter after logging in
+- issue #15670 Fix case where the data is truncated after changing a longtext column's collation
+- issue #18865 Fix missing text-nowrap for timestamps columns
+- issue #19022 Fix case where tables from wrong database is loaded in navigation tree
+- issue #18593 Fix drop db line included in server export if exporting only data
+- issue #18049 Also check that curl_exec is enabled for the new version check
+- issue #18451 Fix when editing inline central column, Null is always preselected
+- issue #19117 Allow changing the virtuality of a column without any other changes
+- issue #18566 Fixed error when importing exported view with USE INDEX hint
+- issue #17920 Fixed moving column with empty default value will replace it with ''
+- issue #18006 Fixed moving columns causes the default uuid() value to get quotes around it
+- issue #18962 Fixed move columns with ENUM() & DEFAULT causes invalid SQL
+- issue #18276 Fix on update CURRENT_TIMESTAMP doesn't show as default in attributes
+- issue #18240 Fix inserting value with UNIX_TIMESTAMP() without a parameter
+- issue #19125 Fixed CodeMirror tooltip is below modals
+- issue #18674 Fix formatted sql in browse table result has a linebreak after each token
+- issue #18210 Fixed add replica replication user on MariaDB doesn't work (SQL syntax)
+- issue #19041 Fix footer.twig gets printed to Binary File Download
 
 5.2.1 (2023-02-07)
 - issue #17522 Fix case where the routes cache file is invalid

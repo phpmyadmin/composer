@@ -20,6 +20,7 @@ use ReflectionClass;
 
 use function array_keys;
 use function in_array;
+use function method_exists;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -85,6 +86,13 @@ abstract class AbstractTestCase extends TestCase
         $_COOKIE = [];
         $_FILES = [];
         $_REQUEST = [];
+
+        $GLOBALS['server'] = 1;
+        $GLOBALS['text_dir'] = 'ltr';
+        $GLOBALS['db'] = '';
+        $GLOBALS['table'] = '';
+        $GLOBALS['PMA_PHP_SELF'] = '';
+
         // Config before DBI
         $this->setGlobalConfig();
         $this->loadContainerBuilder();
@@ -118,6 +126,34 @@ abstract class AbstractTestCase extends TestCase
         }
 
         $this->fail('Some error codes where not used !');
+    }
+
+    /**
+     * PHPUnit 8 compatibility
+     */
+    public static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ''): void
+    {
+        if (method_exists(TestCase::class, 'assertMatchesRegularExpression')) {
+            /** @phpstan-ignore-next-line */
+            parent::assertMatchesRegularExpression($pattern, $string, $message);
+        } else {
+            /** @psalm-suppress DeprecatedMethod */
+            self::assertRegExp($pattern, $string, $message);
+        }
+    }
+
+    /**
+     * PHPUnit 8 compatibility
+     */
+    public static function assertFileDoesNotExist(string $filename, string $message = ''): void
+    {
+        if (method_exists(TestCase::class, 'assertFileDoesNotExist')) {
+            /** @phpstan-ignore-next-line */
+            parent::assertFileDoesNotExist($filename, $message);
+        } else {
+            /** @psalm-suppress DeprecatedMethod */
+            parent::assertFileNotExists($filename, $message);
+        }
     }
 
     protected function loadContainerBuilder(): void
@@ -272,5 +308,24 @@ abstract class AbstractTestCase extends TestCase
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $params);
+    }
+
+    /**
+     * Get a private or protected property via reflection.
+     *
+     * @param object $object       The object to inspect, pass null for static objects()
+     * @param string $className    The class name
+     * @param string $propertyName The method name
+     * @phpstan-param class-string $className
+     *
+     * @return mixed
+     */
+    protected function getProperty(object $object, string $className, string $propertyName)
+    {
+        $class = new ReflectionClass($className);
+        $property = $class->getProperty($propertyName);
+        $property->setAccessible(true);
+
+        return $property->getValue($object);
     }
 }

@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Url;
+use ReflectionProperty;
 
+use function ini_get;
 use function is_string;
-use function method_exists;
 use function parse_str;
 use function str_repeat;
 use function urldecode;
@@ -17,6 +18,9 @@ use function urldecode;
  */
 class UrlTest extends AbstractTestCase
 {
+    /** @var string|false|null */
+    private static $inputArgSeparator = null;
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -214,12 +218,7 @@ class UrlTest extends AbstractTestCase
         $this->assertSame('0', $queryParams['pos']);
         $this->assertTrue(is_string($queryParams['eq']));
         $this->assertNotSame('', $queryParams['eq']);
-        if (method_exists($this, 'assertMatchesRegularExpression')) {
-            $this->assertMatchesRegularExpression('/^[a-zA-Z0-9-_=]+$/', $queryParams['eq']);
-        } else {
-            /** @psalm-suppress DeprecatedMethod */
-            $this->assertRegExp('/^[a-zA-Z0-9-_=]+$/', $queryParams['eq']);
-        }
+        $this->assertMatchesRegularExpression('/^[a-zA-Z0-9-_=]+$/', $queryParams['eq']);
 
         $decrypted = Url::decryptQuery($queryParams['eq']);
         $this->assertNotNull($decrypted);
@@ -242,14 +241,54 @@ class UrlTest extends AbstractTestCase
         $encrypted = Url::encryptQuery($query);
         $this->assertNotSame($query, $encrypted);
         $this->assertNotSame('', $encrypted);
-        if (method_exists($this, 'assertMatchesRegularExpression')) {
-            $this->assertMatchesRegularExpression('/^[a-zA-Z0-9-_=]+$/', $encrypted);
-        } else {
-            /** @psalm-suppress DeprecatedMethod */
-            $this->assertRegExp('/^[a-zA-Z0-9-_=]+$/', $encrypted);
-        }
+        $this->assertMatchesRegularExpression('/^[a-zA-Z0-9-_=]+$/', $encrypted);
 
         $decrypted = Url::decryptQuery($encrypted);
         $this->assertSame($query, $decrypted);
+    }
+
+    /**
+     * @param string|false $iniValue
+     *
+     * @dataProvider getArgSeparatorProvider
+     */
+    public function testGetArgSeparator(string $expected, $iniValue, ?string $cacheValue): void
+    {
+        $property = new ReflectionProperty(Url::class, 'inputArgSeparator');
+        $property->setAccessible(true);
+        $property->setValue(null, $cacheValue);
+
+        self::$inputArgSeparator = $iniValue;
+        self::assertSame($expected, Url::getArgSeparator());
+
+        self::$inputArgSeparator = null;
+        $property->setValue(null, null);
+    }
+
+    /** @psalm-return array<string, array{string, string|false, string|null}> */
+    public static function getArgSeparatorProvider(): array
+    {
+        return [
+            'ampersand' => ['&', '&', null],
+            'semicolon' => [';', ';', null],
+            'prefer ampersand' => ['&', '+;&$', null],
+            'prefer semicolon' => [';', '+;$', null],
+            'first char' => ['+', '+$', null],
+            'cache' => ['$', '&', '$'],
+            'empty value' => ['&', '', null],
+            'false' => ['&', false, null],
+        ];
+    }
+
+    /**
+     * Test double for ini_get('arg_separator.input') as it can't be changed using ini_set()
+     *
+     * @see Url::getArgSeparatorValueFromIni
+     *
+     * @return string|false
+     */
+    public static function getInputArgSeparator()
+    {
+        return self::$inputArgSeparator ?? ini_get('arg_separator.input');
     }
 }

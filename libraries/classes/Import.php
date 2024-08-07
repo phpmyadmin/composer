@@ -252,10 +252,15 @@ class Import
                     unset($sqlData['valid_full']);
                     for ($i = 0; $i < $count; $i++) {
                         $this->executeQuery($queries[$i], $fulls[$i], $sqlData);
+                        if ($GLOBALS['error']) {
+                            break;
+                        }
                     }
                 }
 
-                $this->executeQuery($import_run_buffer['sql'], $import_run_buffer['full'], $sqlData);
+                if (! $GLOBALS['error']) {
+                    $this->executeQuery($import_run_buffer['sql'], $import_run_buffer['full'], $sqlData);
+                }
             }
         } elseif (! empty($import_run_buffer['full'])) {
             if ($go_sql) {
@@ -1125,6 +1130,10 @@ class Import
             $numCols = count($tables[$i][self::COL_NAMES]);
             $numRows = count($tables[$i][self::ROWS]);
 
+            if ($numRows === 0) {
+                break;
+            }
+
             $tempSQLStr = 'INSERT INTO ' . Util::backquote($dbName) . '.'
                 . Util::backquote($tables[$i][self::TBL_NAME]) . ' (';
 
@@ -1466,6 +1475,7 @@ class Import
             'XTRADB',
             'SEQUENCE',
             'BDB',
+            'ROCKSDB',
         ];
 
         // Query to check if table is 'Transactional'.

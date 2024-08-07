@@ -22,6 +22,7 @@ use PhpMyAdmin\Table;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
 use ReflectionMethod;
+use ReflectionProperty;
 use stdClass;
 
 use function array_shift;
@@ -1061,7 +1062,7 @@ class ExportSqlTest extends AbstractTestCase
         $this->assertIsString($result);
         $this->assertStringContainsString('-- Triggers test_table', $result);
         $this->assertStringContainsString(
-            'CREATE TRIGGER `test_trigger` AFTER INSERT ON `test_table` FOR EACH ROW BEGIN END',
+            "CREATE TRIGGER `test_trigger` AFTER INSERT ON `test_table` FOR EACH ROW BEGIN END\n$$",
             $result
         );
 
@@ -1083,11 +1084,15 @@ class ExportSqlTest extends AbstractTestCase
             )
         );
         $result = ob_get_clean();
+        $sqlViewsProp = new ReflectionProperty(ExportSql::class, 'sqlViews');
+        $sqlViewsProp->setAccessible(true);
+        $sqlViews = $sqlViewsProp->getValue($this->object);
 
-        $this->assertIsString($result);
-        $this->assertStringContainsString('-- Structure for view test_table', $result);
-        $this->assertStringContainsString('DROP TABLE IF EXISTS `test_table`;', $result);
-        $this->assertStringContainsString('CREATE TABLE `test_table`', $result);
+        $this->assertEquals('', $result);
+        $this->assertIsString($sqlViews);
+        $this->assertStringContainsString('-- Structure for view test_table', $sqlViews);
+        $this->assertStringContainsString('DROP TABLE IF EXISTS `test_table`;', $sqlViews);
+        $this->assertStringContainsString('CREATE TABLE `test_table`', $sqlViews);
 
         // case 4
         $GLOBALS['sql_views_as_tables'] = true;
@@ -1586,7 +1591,7 @@ class ExportSqlTest extends AbstractTestCase
             . "REFERENCES dept_master (baz)\n"
             . ') ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE='
             . "latin1_general_ci COMMENT='List' AUTO_INCREMENT=5";
-        $result = $this->object->replaceWithAliases($sql_query, $aliases, $db, $table);
+        $result = $this->object->replaceWithAliases(null, $sql_query, $aliases, $db, $table);
 
         $this->assertEquals(
             "CREATE TABLE IF NOT EXISTS `bartest` (\n" .
@@ -1598,7 +1603,7 @@ class ExportSqlTest extends AbstractTestCase
             $result
         );
 
-        $result = $this->object->replaceWithAliases($sql_query, [], '', '');
+        $result = $this->object->replaceWithAliases(null, $sql_query, [], '', '');
 
         $this->assertEquals(
             "CREATE TABLE IF NOT EXISTS foo (\n" .
@@ -1611,8 +1616,7 @@ class ExportSqlTest extends AbstractTestCase
         );
 
         $table = 'bar';
-        $sql_query = 'DELIMITER $$' . "\n"
-            . 'CREATE TRIGGER `BEFORE_bar_INSERT` '
+        $sql_query = 'CREATE TRIGGER `BEFORE_bar_INSERT` '
             . 'BEFORE INSERT ON `bar` '
             . 'FOR EACH ROW BEGIN '
             . 'SET @cnt=(SELECT count(*) FROM bar WHERE '
@@ -1621,7 +1625,7 @@ class ExportSqlTest extends AbstractTestCase
             . 'IF @cnt<>0 THEN '
             . 'SET NEW.xy=1; '
             . 'END IF; END';
-        $result = $this->object->replaceWithAliases($sql_query, $aliases, $db, $table);
+        $result = $this->object->replaceWithAliases('$$', $sql_query, $aliases, $db, $table);
 
         $this->assertEquals(
             'CREATE TRIGGER `BEFORE_bar_INSERT` BEFORE INSERT ON `f` FOR EACH ROW BEGIN ' .
@@ -1630,6 +1634,57 @@ class ExportSqlTest extends AbstractTestCase
             'SET NEW.`n`=1; ' .
             'END IF; ' .
             'END',
+            $result
+        );
+
+        $table = 'bar';
+        $sql_query = <<<'SQL'
+CREATE FUNCTION `HTML_UnEncode`(`x` TEXT CHARSET utf8) RETURNS text CHARSET utf8
+BEGIN
+
+DECLARE TextString TEXT ;
+SET TextString = x ;
+
+#quotation mark
+IF INSTR( x , '&quot;' )
+THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
+END IF ;
+
+#apostrophe
+IF INSTR( x , '&apos;' )
+THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
+END IF ;
+
+RETURN TextString ;
+
+END
+SQL;
+
+        $result = $this->object->replaceWithAliases('$$', $sql_query, $aliases, $db, $table);
+
+        $expectedQuery = <<<'SQL'
+CREATE FUNCTION `HTML_UnEncode` (`x` TEXT CHARSET utf8) RETURNS TEXT CHARSET utf8  BEGIN
+
+DECLARE TextString TEXT ;
+SET TextString = x ;
+
+#quotation mark
+IF INSTR( x , '&quot;' )
+THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
+END IF ;
+
+#apostrophe
+IF INSTR( x , '&apos;' )
+THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
+END IF ;
+
+RETURN TextString ;
+
+END
+SQL;
+
+        $this->assertEquals(
+            $expectedQuery,
             $result
         );
     }

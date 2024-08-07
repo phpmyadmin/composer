@@ -1884,6 +1884,13 @@ class InsertEditTest extends AbstractTestCase
 
         $this->assertEquals('', $GLOBALS['table']);
 
+        $GLOBALS['goto'] = 'index.php?route=/sql&server=2';
+
+        $this->assertEquals(
+            '/sql',
+            $this->insertEdit->getGotoInclude('index')
+        );
+
         $_POST['after_insert'] = 'new_insert';
         $this->assertEquals(
             '/table/change',
@@ -3353,9 +3360,8 @@ class InsertEditTest extends AbstractTestCase
             $actual
         );
         $this->assertStringContainsString(
-            '<a href="#" target="_blank"><span class="text-nowrap"><img src="themes/dot.'
-            . 'gif" title="Edit/Insert" alt="Edit/Insert" class="icon ic_b_edit">&nbsp;Edit/Insert'
-            . '</span></a>',
+            '<a href="#" ><span class="text-nowrap"><img src="themes/dot.gif" title="Edit/Insert"' .
+            ' alt="Edit/Insert" class="icon ic_b_edit">&nbsp;Edit/Insert</span></a>',
             $actual
         );
     }

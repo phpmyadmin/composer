@@ -14,6 +14,8 @@ use PhpMyAdmin\SystemDatabase;
 use PhpMyAdmin\Utils\SessionCache;
 use stdClass;
 
+use function array_keys;
+
 /**
  * @covers \PhpMyAdmin\DatabaseInterface
  */
@@ -108,6 +110,74 @@ class DatabaseInterfaceTest extends AbstractTestCase
                 ],
                 true,
             ],
+        ];
+    }
+
+    /**
+     * Tests for DBI::getCurrentRole() method.
+     *
+     * @param string[][]|false $value
+     * @param string[]         $string
+     * @param string[][]       $expected
+     *
+     * @dataProvider currentRolesData
+     */
+    public function testGetCurrentRoles(
+        string $version,
+        bool $isRoleSupported,
+        $value,
+        array $string,
+        array $expected
+    ): void {
+        $this->dbi->setVersion(['@@version' => $version]);
+
+        SessionCache::remove('mysql_cur_role');
+
+        if ($isRoleSupported) {
+            $this->dummyDbi->addResult('SELECT CURRENT_ROLE();', $value);
+        }
+
+        self::assertSame($expected, $this->dbi->getCurrentRolesAndHost());
+
+        self::assertSame($string, $this->dbi->getCurrentRoles());
+
+        $this->assertAllQueriesConsumed();
+    }
+
+    /**
+     * Data provider for getCurrentRole() tests.
+     *
+     * @return mixed[]
+     */
+    public static function currentRolesData(): array
+    {
+        return [
+            ['10.4.99-MariaDB', false, false, [], []],
+            ['5.7.35 - MySQL Community Server (GPL)', false, false, [], []],
+            [
+                '8.0.0 - MySQL Community Server - GPL',
+                true,
+                [['`role`@`localhost`']],
+                ['role@localhost'],
+                [['role', 'localhost']],
+            ],
+            [
+                '8.0.0 - MySQL Community Server - GPL',
+                true,
+                [['`role`@`localhost`, `role2`@`localhost`']],
+                ['role@localhost', 'role2@localhost'],
+                [['role', 'localhost'], ['role2', 'localhost']],
+            ],
+            ['8.0.0 - MySQL Community Server - GPL', true, [['@`localhost`']], ['@localhost'], [['', 'localhost']]],
+            ['10.5.0-MariaDB', true, [['`role`@`localhost`']], ['role@localhost'], [['role', 'localhost']]],
+            [
+                '10.5.0-MariaDB',
+                true,
+                [['`role`@`localhost`, `role2`@`localhost`']],
+                ['role@localhost', 'role2@localhost'],
+                [['role', 'localhost'], ['role2', 'localhost']],
+            ],
+            ['10.5.0-MariaDB', true, [['@`localhost`']], ['@localhost'], [['', 'localhost']]],
         ];
     }
 
@@ -278,12 +348,6 @@ class DatabaseInterfaceTest extends AbstractTestCase
     public function testGetDbCollation(): void
     {
         $GLOBALS['server'] = 1;
-        // test case for system schema
-        $this->assertEquals(
-            'utf8_general_ci',
-            $this->dbi->getDbCollation('information_schema')
-        );
-
         $GLOBALS['cfg']['Server']['DisableIS'] = false;
         $GLOBALS['cfg']['DBG']['sql'] = false;
 
@@ -291,6 +355,16 @@ class DatabaseInterfaceTest extends AbstractTestCase
             'utf8_general_ci',
             $this->dbi->getDbCollation('pma_test')
         );
+
+        $GLOBALS['cfg']['Server']['DisableIS'] = true;
+
+        $this->dummyDbi->addSelectDb('information_schema');
+        $GLOBALS['db'] = 'information_schema';
+
+        $this->dummyDbi->removeDefaultResults();
+        $this->dummyDbi->addResult('SELECT @@collation_database', [['utf8mb3_general_ci']], ['@@collation_database']);
+
+        $this->assertEquals('utf8mb3_general_ci', $this->dbi->getDbCollation('information_schema'));
     }
 
     /**
@@ -581,6 +655,23 @@ class DatabaseInterfaceTest extends AbstractTestCase
 
         $actual = $this->dbi->getTablesFull('test_db');
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetTablesFullBug18913(): void
+    {
+        $GLOBALS['cfg']['Server']['DisableIS'] = true;
+        $GLOBALS['cfg']['NaturalOrder'] = false;
+
+        $expected = ['0', '1', '42'];
+
+        $this->dummyDbi->addResult('SHOW TABLE STATUS FROM `test_db_bug_18913`', [
+            ['0', ''],
+            ['1', ''],
+            ['42', ''],
+        ], ['Name', 'Engine']);
+
+        $actual = $this->dbi->getTablesFull('test_db_bug_18913');
+        $this->assertEquals($expected, array_keys($actual));
     }
 
     /**

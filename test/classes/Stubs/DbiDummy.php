@@ -50,9 +50,9 @@ class DbiDummy implements DbiExtension
      * @var array
      * @phpstan-var array{
      *     'query': string,
-     *     'result': ((int[]|string[]|array{string: string})[])|bool|bool[]|empty-array,
+     *     'result': list<array<string|float|int|null>>|array{true}|bool,
      *     'columns'?: string[],
-     *     'metadata'?: object[]|empty-array,
+     *     'metadata'?: object[],
      *     'used'?: bool,
      *     'pos'?: int
      * }[]
@@ -72,9 +72,9 @@ class DbiDummy implements DbiExtension
      * @var array
      * @phpstan-var array{
      *     'query': string,
-     *     'result': ((int[]|string[]|array{string: string})[])|bool|bool[]|empty-array,
+     *     'result': list<array<string|float|int|null>>|bool,
      *     'columns'?: string[],
-     *     'metadata'?: object[]|empty-array,
+     *     'metadata'?: object[],
      *     'pos'?: int
      * }[]
      */
@@ -493,7 +493,7 @@ class DbiDummy implements DbiExtension
      * @param array|bool $result   Expected result
      * @param string[]   $columns  The result columns
      * @param object[]   $metadata The result metadata
-     * @phpstan-param array<int, array<int, array{string: string}|bool|int|string|null>|bool>|bool $result
+     * @phpstan-param list<array<string|float|int|null>>|array{true}|bool $result
      */
     public function addResult(string $query, $result, array $columns = [], array $metadata = []): void
     {
@@ -582,7 +582,9 @@ class DbiDummy implements DbiExtension
             [
                 'query' => 'SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`'
                     . " WHERE `PRIVILEGE_TYPE` = 'CREATE USER'"
-                    . " AND '''pma_test''@''localhost''' LIKE `GRANTEE` LIMIT 1",
+                    . " AND '''pma_test''@''localhost''' LIKE `GRANTEE`"
+                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8mb4_general_ci"
+                    . " AND 'pma_test' LIKE `User` AND '' LIKE `Host` LIMIT 1",
                 'result' => [['1']],
             ],
             [
@@ -595,7 +597,9 @@ class DbiDummy implements DbiExtension
                     . ' UNION SELECT `GRANTEE`, `IS_GRANTABLE`'
                     . ' FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t'
                     . " WHERE `IS_GRANTABLE` = 'YES'"
-                    . " AND '''pma_test''@''localhost''' LIKE `GRANTEE` LIMIT 1",
+                    . " AND '''pma_test''@''localhost''' LIKE `GRANTEE`"
+                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8mb4_general_ci"
+                    . " AND 'pma_test' LIKE `User` AND '' LIKE `Host` LIMIT 1",
                 'result' => [['1']],
             ],
             [
@@ -2229,16 +2233,6 @@ class DbiDummy implements DbiExtension
                 'result' => [['PMA_table', 'InnoDB']],
             ],
             [
-                'query' => 'SELECT `id` FROM `table_1` WHERE `id` > 10 AND (`id` <> 20)',
-                'columns' => ['id'],
-                'result' => [['11'], ['12']],
-            ],
-            [
-                'query' => 'SELECT * FROM `table_1` WHERE `id` > 10',
-                'columns' => ['column'],
-                'result' => [['row1'], ['row2']],
-            ],
-            [
                 'query' => 'SELECT * FROM `PMA`.`table_1` LIMIT 1',
                 'columns' => ['column'],
                 'result' => [['table']],
@@ -2251,14 +2245,14 @@ class DbiDummy implements DbiExtension
             [
                 'query' => 'SELECT `ENGINE` FROM `information_schema`.`tables` WHERE `table_name` = "table_1"'
                     . ' AND `table_schema` = "PMA" AND UPPER(`engine`)'
-                    . ' IN ("INNODB", "FALCON", "NDB", "INFINIDB", "TOKUDB", "XTRADB", "SEQUENCE", "BDB")',
+                    . ' IN ("INNODB", "FALCON", "NDB", "INFINIDB", "TOKUDB", "XTRADB", "SEQUENCE", "BDB", "ROCKSDB")',
                 'columns' => ['ENGINE'],
                 'result' => [['INNODB']],
             ],
             [
                 'query' => 'SELECT `ENGINE` FROM `information_schema`.`tables` WHERE `table_name` = "table_2"'
                     . ' AND `table_schema` = "PMA" AND UPPER(`engine`)'
-                    . ' IN ("INNODB", "FALCON", "NDB", "INFINIDB", "TOKUDB", "XTRADB", "SEQUENCE", "BDB")',
+                    . ' IN ("INNODB", "FALCON", "NDB", "INFINIDB", "TOKUDB", "XTRADB", "SEQUENCE", "BDB", "ROCKSDB")',
                 'columns' => ['ENGINE'],
                 'result' => [['INNODB']],
             ],
@@ -2505,8 +2499,8 @@ class DbiDummy implements DbiExtension
                 'result' => [],
             ],
             [
-                'query' => 'SELECT * FROM `information_schema`.`bookmark` WHERE dbase = \'my_db\''
-                . ' AND (user = \'user\') AND `label` = \'test_tbl\' LIMIT 1',
+                'query' => 'SELECT * FROM `information_schema`.`bookmark` WHERE `label` = \'test_tbl\''
+                . ' AND dbase = \'my_db\' AND (user = \'user\') LIMIT 1',
                 'result' => [],
             ],
             [
@@ -3093,6 +3087,25 @@ class DbiDummy implements DbiExtension
                 'query' => 'SELECT COUNT(*) AS `row_count` FROM `world`.`CountryLanguage`',
                 'columns' => ['row_count'],
                 'result' => [['984']],
+            ],
+            [
+                'query' => 'SELECT `collapp`.`FULL_COLLATION_NAME` AS `Collation`,'
+                        . ' `collapp`.`CHARACTER_SET_NAME` AS `Charset`,'
+                        . ' `collapp`.`ID` AS `Id`,'
+                        . ' `collapp`.`IS_DEFAULT` AS `Default`,'
+                        . ' `coll`.`IS_COMPILED` AS `Compiled`,'
+                        . ' `coll`.`SORTLEN` AS `Sortlen`'
+                        . ' FROM `information_schema`.`COLLATION_CHARACTER_SET_APPLICABILITY` `collapp`'
+                        . ' LEFT JOIN `information_schema`.`COLLATIONS` `coll`'
+                        . ' ON `collapp`.`COLLATION_NAME`=`coll`.`COLLATION_NAME`',
+                'columns' => ['Collation', 'Charset', 'Id', 'Default', 'Compiled', 'Sortlen'],
+                'result' => [
+                    ['utf8mb4_general_ci', 'utf8mb4', '45', 'Yes', 'Yes', '1'],
+                    ['armscii8_general_ci', 'armscii8', '32', 'Yes', 'Yes', '1'],
+                    ['utf8_general_ci', 'utf8', '33', 'Yes', 'Yes', '1'],
+                    ['utf8_bin', 'utf8', '83', '', 'Yes', '1'],
+                    ['latin1_swedish_ci', 'latin1', '8', 'Yes', 'Yes', '1'],
+                ],
             ],
         ];
 

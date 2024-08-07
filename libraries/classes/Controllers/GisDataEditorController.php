@@ -44,7 +44,7 @@ class GisDataEditorController extends AbstractController
         /** @var array|null $gisDataParam */
         $gisDataParam = $request->getParsedBodyParam('gis_data');
         /** @var string $type */
-        $type = $request->getParsedBodyParam('type', '');
+        $type = $request->getParsedBodyParam('type', 'GEOMETRY');
         /** @var string|null $value */
         $value = $request->getParsedBodyParam('value');
         /** @var string|null $generate */
@@ -132,6 +132,7 @@ class GisDataEditorController extends AbstractController
             'srid' => $srid,
             'visualization' => $visualization,
             'open_layers' => $open_layers,
+            'column_type' => mb_strtoupper($type),
             'gis_types' => self::GIS_TYPES,
             'geom_type' => $geom_type,
             'geom_count' => $geom_count,

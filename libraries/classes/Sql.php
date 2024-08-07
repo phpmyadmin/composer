@@ -21,6 +21,7 @@ use PhpMyAdmin\SqlParser\Utils\Query;
 use PhpMyAdmin\Utils\ForeignKey;
 
 use function __;
+use function array_key_exists;
 use function array_keys;
 use function array_map;
 use function bin2hex;
@@ -198,7 +199,7 @@ class Sql
             foreach (array_keys($indexColumns) as $indexColumnName) {
                 if (
                     ! in_array($indexColumnName, $resultSetColumnNames)
-                    && in_array($indexColumnName, $columns)
+                    && array_key_exists($indexColumnName, $columns)
                     && ! str_contains($columns[$indexColumnName]['Extra'], 'INVISIBLE')
                 ) {
                     continue;
@@ -338,7 +339,7 @@ class Sql
             return null;
         }
 
-        return Util::parseEnumSetValues($fieldInfoResult[0]['Type']);
+        return Util::parseEnumSetValues($fieldInfoResult[0]['Type'], false);
     }
 
     /**
@@ -737,23 +738,27 @@ class Sql
                         ->countRecords(true);
                 }
             } else {
+                /** @var SelectStatement $statement */
                 $statement = $analyzedSqlResults['statement'];
 
-                // Remove ORDER BY to decrease unnecessary sorting time
-                if ($analyzedSqlResults['order'] !== false) {
-                    $statement->order = null;
+                $changeOrder = $analyzedSqlResults['order'] !== false;
+                $changeLimit = $analyzedSqlResults['limit'] !== false;
+                $changeExpression = $analyzedSqlResults['is_group'] === false
+                    && $analyzedSqlResults['distinct'] === false
+                    && $analyzedSqlResults['union'] === false
+                    && count($statement->expr) === 1;
+
+                if ($changeOrder || $changeLimit || $changeExpression) {
+                    $statement = clone $statement;
                 }
+
+                // Remove ORDER BY to decrease unnecessary sorting time
+                $statement->order = null;
 
                 // Removes LIMIT clause that might have been added
-                if ($analyzedSqlResults['limit'] !== null) {
-                    $statement->limit = null;
-                }
+                $statement->limit = null;
 
-                if (
-                    $analyzedSqlResults['is_group'] === false
-                    && $analyzedSqlResults['distinct'] === false
-                    && count($statement->expr) === 1
-                ) {
+                if ($changeExpression) {
                     $statement->expr[0] = new Expression();
                     $statement->expr[0]->expr = '1';
                 }
@@ -1061,7 +1066,7 @@ class Sql
         $response = ResponseRenderer::getInstance();
         $response->addJSON($extraData ?? []);
 
-        if (empty($analyzedSqlResults['is_select']) || isset($extraData['error'])) {
+        if (($result instanceof ResultInterface && $result->numFields() === 0) || isset($extraData['error'])) {
             return $queryMessage;
         }
 
@@ -1073,6 +1078,7 @@ class Sql
             'bkm_form' => '1',
             'text_btn' => '1',
             'pview_lnk' => '1',
+            'query_stats' => '1',
         ];
 
         $sqlQueryResultsTable = $this->getHtmlForSqlQueryResultsTable(
@@ -1125,7 +1131,7 @@ class Sql
             'db' => $db,
             'table' => $table,
             'sql_query' => $sqlQuery,
-            'is_procedure' => ! empty($analyzedSqlResults['procedure']),
+            'is_procedure' => ! empty($analyzedSqlResults['is_procedure']),
         ]);
     }
 
@@ -1217,6 +1223,7 @@ class Sql
                         $numRows,
                         $fieldsMeta,
                         $analyzedSqlResults['is_count'],
+                        $analyzedSqlResults['is_group'],
                         $analyzedSqlResults['is_export'],
                         $analyzedSqlResults['is_func'],
                         $analyzedSqlResults['is_analyse'],
@@ -1241,6 +1248,7 @@ class Sql
                         'bkm_form' => '1',
                         'text_btn' => '1',
                         'pview_lnk' => '1',
+                        'query_stats' => '1',
                     ];
 
                     $tableHtml .= $displayResultsObject->getTable(
@@ -1265,6 +1273,7 @@ class Sql
                 $unlimNumRows,
                 $fieldsMeta,
                 $analyzedSqlResults['is_count'],
+                $analyzedSqlResults['is_group'],
                 $analyzedSqlResults['is_export'],
                 $analyzedSqlResults['is_func'],
                 $analyzedSqlResults['is_analyse'],
@@ -1472,6 +1481,7 @@ class Sql
             'bkm_form' => '1',
             'text_btn' => '0',
             'pview_lnk' => '1',
+            'query_stats' => '1',
         ];
 
         if (! $editable) {
@@ -1483,6 +1493,7 @@ class Sql
                 'bkm_form' => '1',
                 'text_btn' => '1',
                 'pview_lnk' => '1',
+                'query_stats' => '1',
             ];
         }
 
@@ -1495,6 +1506,7 @@ class Sql
                 'bkm_form' => '0',
                 'text_btn' => '0',
                 'pview_lnk' => '0',
+                'query_stats' => '0',
             ];
         }
 
@@ -1723,10 +1735,6 @@ class Sql
             $sqlQueryForBookmark,
             $extraData
         );
-
-        if ($this->dbi->moreResults()) {
-            $this->dbi->nextResult();
-        }
 
         $warningMessages = $this->operations->getWarningMessagesArray();
 

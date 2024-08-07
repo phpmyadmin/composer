@@ -1245,7 +1245,7 @@ class InsertEdit
             if (! preg_match('@^[a-z_]+\.php$@', $GLOBALS['goto'])) {
                 // this should NOT happen
                 //$GLOBALS['goto'] = false;
-                if ($GLOBALS['goto'] === 'index.php?route=/sql') {
+                if (str_contains($GLOBALS['goto'], 'index.php?route=/sql')) {
                     $gotoInclude = '/sql';
                 } else {
                     $gotoInclude = false;
@@ -1614,7 +1614,7 @@ class InsertEdit
 
         if (
             ! in_array($multiEditFuncs[$key], $funcNoParam)
-            || ($currentValue != "''"
+            || ($currentValue !== ''
                 && in_array($multiEditFuncs[$key], $funcOptionalParam))
         ) {
             if (
@@ -1801,8 +1801,7 @@ class InsertEdit
             $currentValue = "b'" . $this->dbi->escapeString($currentValue) . "'";
         } elseif (
             ! ($type === 'datetime' || $type === 'timestamp' || $type === 'date')
-            || ($currentValue !== 'CURRENT_TIMESTAMP'
-                && $currentValue !== 'current_timestamp()')
+            || ! preg_match('/^current_timestamp(\([0-6]?\))?$/i', $currentValue)
         ) {
             $currentValue = "'" . $this->dbi->escapeString($currentValue)
                 . "'";
@@ -2397,6 +2396,8 @@ class InsertEdit
             'select_option_for_upload' => $selectOptionForUpload,
             'limit_chars' => $GLOBALS['cfg']['LimitChars'],
             'input_field_html' => $inputFieldHtml,
+            'tab_index' => $tabindex,
+            'tab_index_for_value' => $tabindexForValue,
         ]);
     }
 

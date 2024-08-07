@@ -1004,6 +1004,7 @@ select.invalid_value,
   top: 0;
   left: 0;
   background: $black;
+  opacity: 0.7;
   z-index: 1000;
   overflow: hidden;
 }
@@ -1713,6 +1714,7 @@ input#auto_increment_opt {
     overflow-y: scroll;
     padding: 0;
     margin: 0;
+    resize: both;
   }
 
   .edit_box_posting {

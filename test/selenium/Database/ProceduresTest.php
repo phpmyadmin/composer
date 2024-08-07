@@ -149,6 +149,15 @@ class ProceduresTest extends TestBase
             'READS SQL DATA'
         );
 
+        $action = $this->webDriver->action();
+        // Resize the too big text box to access Go button
+        $element = $this->byXPath('//*[@class="ui-resizable-handle ui-resizable-s"]');
+        $action->moveToElement($element)
+            ->clickAndHold()
+            ->moveByOffset(0, -120)// Resize
+            ->click()// Click to free the mouse
+            ->perform();
+
         $this->byCssSelector('div.ui-dialog-buttonset button:nth-child(1)')->click();
 
         $this->waitForElement(
@@ -216,7 +225,8 @@ class ProceduresTest extends TestBase
         $this->dbQuery(
             "SHOW PROCEDURE STATUS WHERE Db='" . $this->databaseName . "'",
             function (): void {
-                $this->assertFalse($this->isElementPresent('className', 'table_results'));
+                $this->assertTrue($this->isElementPresent('className', 'table_results'));
+                $this->assertFalse($this->isElementPresent('cssSelector', '.table_results tbody tr'));
             }
         );
     }

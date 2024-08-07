@@ -220,13 +220,12 @@ class OperationsTest extends TestBase
             '//div[@class=\'alert alert-success\' and contains(., \'MySQL returned an empty result set\')]'
         );
 
-        $this->waitForElement('xpath', "//a[@class='nav-link text-nowrap' and contains(., 'Structure')]");
-
         $this->dbQuery(
             'USE `' . $this->databaseName . '`;'
             . 'SHOW TABLES',
             function (): void {
-                $this->assertFalse($this->isElementPresent('className', 'table_results'));
+                $this->assertTrue($this->isElementPresent('className', 'table_results'));
+                $this->assertFalse($this->isElementPresent('cssSelector', '.table_results tbody tr'));
             }
         );
     }
