@@ -4,17 +4,17 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2022-06-18 09:18+0000\n"
-"Last-Translator: Максим <genkaok@yandex.ru>\n"
+"PO-Revision-Date: 2024-05-18 09:01+0000\n"
+"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/phpmyadmin/4-9/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: ajax.php:21 ajax.php:50 export.php:196 libraries/classes/Export.php:1095
 msgid "Bad type!"
@@ -1353,7 +1353,7 @@ msgstr "Пожалуйста, добавьте в серию хотя бы од�
 #: templates/database/designer/options_panel.twig:177
 #: templates/privileges/privileges_summary.twig:30
 msgid "None"
-msgstr "Ни одного"
+msgstr "Нет"
 
 #: js/messages.php:221
 msgid "Resume monitor"
@@ -1450,7 +1450,7 @@ msgid ""
 "database administrator."
 msgstr ""
 "Вы не можете изменить значения данных переменных. Пожалуйста, войдите под "
-"учетной записью root или свяжитесь с администратором базы данных."
+"учётной записью root или свяжитесь с администратором базы данных."
 
 #: js/messages.php:254
 msgid "Change settings"
@@ -1796,7 +1796,7 @@ msgstr "Ни одна база данных не выбрана."
 
 #: js/messages.php:374
 msgid "No accounts selected."
-msgstr "Не выбрано учетных записей."
+msgstr "Нет выбранных учётных записей."
 
 #: js/messages.php:375
 msgid "Dropping column"
@@ -2735,7 +2735,7 @@ msgstr "Скрыть"
 #: js/messages.php:786
 msgctxt "Previous month"
 msgid "Prev"
-msgstr "Предыдущий"
+msgstr "Пред"
 
 #: js/messages.php:791
 msgctxt "Next month"
@@ -4447,7 +4447,7 @@ msgid ""
 "Tracking of changes made in database. Requires the phpMyAdmin configuration "
 "storage."
 msgstr ""
-"Слежение за изменениями произведенными в базе данных. Для работы требуется "
+"Слежение за изменениями произведёнными в базе данных. Для работы требуется "
 "настройка хранения конфигурации phpMyAdmin."
 
 #: libraries/classes/Config/Descriptions.php:553 libraries/classes/Menu.php:364
@@ -5234,7 +5234,7 @@ msgid ""
 "database server"
 msgstr ""
 "Укажите, какую временную зону следует использовать. Временная зона может "
-"отличаться от зоны на сервере."
+"отличаться от зоны на сервере"
 
 #: libraries/classes/Config/Descriptions.php:988
 msgid "HTTP Basic Auth Realm name to display when doing HTTP Auth."
@@ -6350,11 +6350,11 @@ msgid ""
 "to an ISP where thousands of users, including you, are connected to."
 msgstr ""
 "Данный %sпараметр%s должен быть отключен, так как позволяет атакующему "
-"совершать перебор учетных данных к любому серверу MySQL. При необходимости "
+"совершать перебор учётных данных к любому серверу MySQL. При необходимости "
 "активации данного параметра, используйте %sсписок доверенных логинов для "
 "MySQL сервера%s или %sсписок доверенных прокси%s. Однако, защита по IP через "
-"доверенные прокси может быть ненадежной, если ваш IP не является выделенным "
-"и кроме вас принадлежит тысячам пользователей того же Интернет Провайдера."
+"доверенные прокси может быть ненадёжной, если ваш IP не является выделенным "
+"и кроме вас принадлежит тысячам пользователей того же провайдера Интернета."
 
 #: libraries/classes/Config/ServerConfigChecks.php:96
 msgid ""
@@ -6603,7 +6603,7 @@ msgstr "Тип события"
 #: libraries/classes/Controllers/Server/ServerBinlogController.php:159
 #: libraries/classes/ReplicationGui.php:629
 msgid "Server ID"
-msgstr "ID сервера"
+msgstr "ИД сервера"
 
 #: libraries/classes/Controllers/Server/ServerBinlogController.php:160
 msgid "Original position"
@@ -6861,9 +6861,9 @@ msgid ""
 "option is incompatible with phpMyAdmin and might cause some data to be "
 "corrupted!"
 msgstr ""
-"В конфигурации PHP включен несовместимый с phpMyAdmin параметр mbstring."
-"func_overload. Для предотвращения возможной потери данных данный параметр "
-"должен быть выключен!"
+"В конфигурации PHP включён несовместимый с phpMyAdmin параметр "
+"mbstring.func_overload. Для предотвращения возможной потери данных данный "
+"параметр должен быть отключён!"
 
 #: libraries/classes/Core.php:1231
 msgid ""
@@ -7338,7 +7338,7 @@ msgstr "%d всего"
 #: libraries/classes/Display/Results.php:4590 libraries/classes/Sql.php:1435
 #, php-format
 msgid "Query took %01.4f seconds."
-msgstr "Запрос занял %01.4f сек."
+msgstr "Запрос занял %01.4f с."
 
 #: libraries/classes/Display/Results.php:4689
 #: libraries/classes/Display/Results.php:4696 libraries/mult_submits.inc.php:57
@@ -7371,7 +7371,7 @@ msgstr "Использование результатов запроса"
 #: libraries/classes/Display/Results.php:5006
 #: templates/table/chart/tbl_chart.twig:10
 msgid "Display chart"
-msgstr "Отобразить график"
+msgstr "Показать график"
 
 #: libraries/classes/Display/Results.php:5028
 msgid "Visualize GIS data"
@@ -7956,8 +7956,8 @@ msgid ""
 "Only INSERT, UPDATE, DELETE and REPLACE SQL queries containing transactional "
 "engine tables can be rolled back."
 msgstr ""
-"Только для INSERT, UPDATE, DELETE и REPLACE SQL запросов, содержащих "
-"транзакционные таблицы движка, может быть произведен откат."
+"Только для запросов INSERT, UPDATE, DELETE и REPLACE SQL, содержащих "
+"транзакционные таблицы движка, может быть произведён откат."
 
 #: libraries/classes/Index.php:658
 #, php-format
@@ -8238,7 +8238,7 @@ msgstr "Центральные столбцы"
 
 #: libraries/classes/Menu.php:607
 msgid "User accounts"
-msgstr "Учетные записи пользователей"
+msgstr "Учётные записи пользователей"
 
 #: libraries/classes/Menu.php:634 libraries/classes/Server/Status/Data.php:121
 #: libraries/classes/Util.php:3996 templates/server/sub_page_header.twig:2
@@ -10487,7 +10487,7 @@ msgid ""
 "master."
 msgstr ""
 "Сразу после перезапуска MySQL сервера, пожалуйста, нажмите кнопку OK, после "
-"чего вы должны увидеть сообщение указывающее, что данный сервер <b>настроен</"
+"чего вы должны увидеть сообщение, указывающее, что этот сервер <b>настроен</"
 "b> как головной."
 
 #: libraries/classes/ReplicationGui.php:153
@@ -10904,7 +10904,7 @@ msgstr "Ошибка при обработке запроса:"
 
 #: libraries/classes/Rte/Footer.php:102
 msgid "OFF"
-msgstr "ВЫКЛЮЧИТЬ"
+msgstr "ОТКЛЮЧИТЬ"
 
 #: libraries/classes/Rte/Footer.php:107
 msgid "ON"
@@ -11388,7 +11388,7 @@ msgstr "Разрешает изменение и удаление хранимы
 #: libraries/classes/Server/Privileges.php:1387 server_privileges.php:71
 msgid "Allows creating, dropping and renaming user accounts."
 msgstr ""
-"Разрешает создание, удаление и переименование учетных записей пользователей."
+"Разрешает создание, удаление и переименование учётных записей пользователей."
 
 #: libraries/classes/Server/Privileges.php:460
 #: libraries/classes/Server/Privileges.php:1282 server_privileges.php:78
@@ -11591,11 +11591,11 @@ msgstr "Вы отменили привилегии для %s."
 #: libraries/classes/Server/Privileges.php:2175
 #: templates/privileges/add_user_fieldset.twig:7
 msgid "Add user account"
-msgstr "Добавить учетную запись пользователя"
+msgstr "Добавить учётную запись пользователя"
 
 #: libraries/classes/Server/Privileges.php:2184
 msgid "Database for user account"
-msgstr "База данных для учетных записей пользователей"
+msgstr "База данных для учётных записей пользователей"
 
 #: libraries/classes/Server/Privileges.php:2190
 msgid "Create database with same name and grant all privileges."
@@ -11695,11 +11695,11 @@ msgstr ""
 #: libraries/classes/Server/Privileges.php:3129
 msgid "Change login information / Copy user account"
 msgstr ""
-"Изменить регистрационные данные / Копировать учетную запись пользователя"
+"Изменить регистрационные данные / Копировать учётную запись пользователя"
 
 #: libraries/classes/Server/Privileges.php:3135
 msgid "Create a new user account with the same privileges and …"
-msgstr "Создать новую учетную запись пользователя с такими же привилегиями и …"
+msgstr "Создать новую учётную запись пользователя с такими же привилегиями и…"
 
 #: libraries/classes/Server/Privileges.php:3372
 #: templates/privileges/edit_routine_privileges.twig:12
@@ -11766,7 +11766,7 @@ msgstr "Редактирование привилегий:"
 
 #: libraries/classes/Server/Privileges.php:4547
 msgid "User account"
-msgstr "Учетная запись пользователя"
+msgstr "Учётная запись пользователя"
 
 #: libraries/classes/Server/Privileges.php:4621
 msgid ""
@@ -11779,7 +11779,7 @@ msgstr ""
 #: libraries/classes/Server/Privileges.php:4641
 #: libraries/classes/Server/Users.php:30
 msgid "User accounts overview"
-msgstr "Обзор учетных записей пользователей"
+msgstr "Обзор учётных записей пользователей"
 
 #: libraries/classes/Server/Privileges.php:4716
 msgid ""
@@ -11787,9 +11787,9 @@ msgid ""
 "will prevent other users from connecting if the host part of their account "
 "allows a connection from any (%) host."
 msgstr ""
-"Имеется учетная запись пользователя, позволяющая любому пользователю "
+"Имеется учётная запись пользователя, позволяющая любому пользователю "
 "подключиться к локальному хосту. Это предотвратит подключение других "
-"пользователей, если хост-часть их учетной записи разрешает соединение с "
+"пользователей, если хост-часть их учётной записи разрешает соединение с "
 "любым (%) хостом."
 
 #: libraries/classes/Server/Privileges.php:4758
@@ -12111,7 +12111,7 @@ msgstr ""
 "Включение директивы general_log может увеличить нагрузку на сервер на 5-15%. "
 "Имейте в виду, что генерирование статистики из журналов является интенсивной "
 "задачей для сервера, поэтому советуем выбирать небольшой промежуток времени "
-"и выключать general_log и очищать его таблицу после окончания мониторинга."
+"и отключать general_log и очищать его таблицу по окончании мониторинга."
 
 #: libraries/classes/Server/Status/Monitor.php:178
 #: libraries/classes/Server/Status/Monitor.php:286
@@ -12212,12 +12212,12 @@ msgid ""
 "Note: Enabling the auto refresh here might cause heavy traffic between the "
 "web server and the MySQL server."
 msgstr ""
-"Примечание: Включение автообновления может спровоцировать большой трафик "
-"между веб-сервером и сервером MySQL."
+"Примечание: Включение автообновления может вызвать увеличение трафика между "
+"веб-сервером и сервером MySQL."
 
 #: libraries/classes/Server/Status/Processes.php:65
 msgid "ID"
-msgstr "ID"
+msgstr "ИД"
 
 #: libraries/classes/Server/Status/Processes.php:81
 msgid "Command"
@@ -13128,7 +13128,7 @@ msgstr "Проблемы с индексами таблицы `%s`"
 #: libraries/classes/SqlQueryForm.php:140
 #, php-format
 msgid "Run SQL query/queries on server “%s”"
-msgstr "Выполнить SQL-запрос(ы) на сервере “%s”"
+msgstr "Выполнить SQL-запрос(ы) на сервере «%s»"
 
 #: libraries/classes/SqlQueryForm.php:157
 #, php-format
@@ -13155,7 +13155,7 @@ msgstr "Связать параметры"
 
 #: libraries/classes/SqlQueryForm.php:308
 msgid "Bookmark this SQL query:"
-msgstr "Создание закладки SQL запроса:"
+msgstr "Создание закладки SQL-запроса:"
 
 #: libraries/classes/SqlQueryForm.php:322
 msgid "Replace existing bookmark of same name"
@@ -13167,7 +13167,7 @@ msgstr "Разделитель"
 
 #: libraries/classes/SqlQueryForm.php:346
 msgid "Show this query here again"
-msgstr "Показать данный запрос снова"
+msgstr "Показать этот запрос снова"
 
 #: libraries/classes/SqlQueryForm.php:363
 msgid "Rollback when finished"
@@ -13427,7 +13427,7 @@ msgstr "Слежение за %1$s было включено на версии %
 #: libraries/classes/Tracking.php:894
 #, php-format
 msgid "Tracking for %1$s was deactivated at version %2$s."
-msgstr "Слежение за %1$s было выключено на версии %2$s."
+msgstr "Слежение за %1$s было отключено на версии %2$s."
 
 #: libraries/classes/Tracking.php:986
 #, php-format
@@ -13447,7 +13447,7 @@ msgstr "включено"
 #: libraries/classes/Tracking.php:1117 libraries/classes/Tracking.php:1253
 #: templates/table/tracking/selectable_tables.twig:11
 msgid "not active"
-msgstr "выключено"
+msgstr "отключено"
 
 #: libraries/classes/Types.php:203
 msgid ""
@@ -13789,7 +13789,7 @@ msgstr "Отправить запрос"
 #: libraries/classes/Util.php:1166
 msgctxt "Inline edit query"
 msgid "Edit inline"
-msgstr "Построчное редактирование"
+msgstr "Построчная правка"
 
 #. l10n: Short week day name for Sunday
 #: libraries/classes/Util.php:1506
@@ -13810,7 +13810,7 @@ msgstr "AM"
 #: libraries/classes/Util.php:1847
 #, php-format
 msgid "%s days, %s hours, %s minutes and %s seconds"
-msgstr "%s дней, %s часов, %s минут и %s секунд"
+msgstr "%s дн, %s ч, %s мин и %s с"
 
 #: libraries/classes/Util.php:1882
 msgid "Missing parameter:"
@@ -14405,7 +14405,7 @@ msgstr "Неправильное имя таблицы"
 #. l10n: In case a SQL query did not pass a security check
 #: tbl_get_field.php:46 transformation_wrapper.php:69
 msgid "There is an issue with your request."
-msgstr "В вашем запросе есть проблема."
+msgstr "С вашим запросом возникла проблема."
 
 #: tbl_replace.php:258
 #, php-format
@@ -14591,7 +14591,7 @@ msgstr "Сбой выполнения запроса"
 
 #: templates/console/display.twig:42 templates/console/display.twig:184
 msgid "Queried time"
-msgstr "Запрошенное время"
+msgstr "Время запроса"
 
 #: templates/console/display.twig:47
 msgid "During current session"
@@ -14747,7 +14747,7 @@ msgstr "Редактировать ENUM/SET значения"
 
 #: templates/privileges/delete_user_fieldset.twig:3
 msgid "Remove selected user accounts"
-msgstr "Удалить выбранные учетные записи пользователей"
+msgstr "Удалить выбранные учётные записи пользователей"
 
 #: templates/privileges/delete_user_fieldset.twig:6
 msgid "Revoke all active privileges from the users and delete them afterwards."
@@ -14979,13 +14979,13 @@ msgstr "Следующие Composer-пакеты отсутствуют:"
 #: templates/prefs_twofactor.twig:18
 msgid "Two-factor authentication is available and configured for this account."
 msgstr ""
-"Двухфакторная аутентификация доступна и настроена для этой учетной записи."
+"Двухфакторная аутентификация доступна и настроена для этой учётной записи."
 
 #: templates/prefs_twofactor.twig:20
 msgid ""
 "Two-factor authentication is available, but not configured for this account."
 msgstr ""
-"Двухфакторная аутентификация доступна, но не настроена для этой учетной "
+"Двухфакторная аутентификация доступна, но не настроена для этой учётной "
 "записи."
 
 #: templates/prefs_twofactor.twig:24
@@ -15317,7 +15317,7 @@ msgstr ""
 
 #: templates/table/structure/row_stats_table.twig:2
 msgid "Row statistics"
-msgstr "Статистика строки"
+msgstr "Статистика строк"
 
 #: templates/table/structure/row_stats_table.twig:8
 msgid "static"
@@ -15380,11 +15380,11 @@ msgstr "Включить"
 #: templates/table/tracking/activate_deactivate.twig:11
 #, php-format
 msgid "Deactivate tracking for %s"
-msgstr "Выключить слежение за %s"
+msgstr "Отключить слежение за %s"
 
 #: templates/table/tracking/activate_deactivate.twig:13
 msgid "Deactivate now"
-msgstr "Выключить"
+msgstr "Отключить сейчас"
 
 #: templates/display/export/method.twig:3
 msgid "Export method:"
@@ -15469,15 +15469,15 @@ msgstr "%s из %s"
 #: templates/display/import/javascript.twig:17
 #, php-format
 msgid "%s/sec."
-msgstr "%s/сек."
+msgstr "%s/с"
 
 #: templates/display/import/javascript.twig:18
 msgid "About %MIN min. %SEC sec. remaining."
-msgstr "Осталось около %MIN мин. %SEC сек."
+msgstr "Осталось около %MIN мин. %SEC с."
 
 #: templates/display/import/javascript.twig:19
 msgid "About %SEC sec. remaining."
-msgstr "Осталось около %SEC сек."
+msgstr "Осталось около %SEC с."
 
 #: templates/display/import/javascript.twig:20
 msgid "The file is being processed, please be patient."
@@ -15525,8 +15525,8 @@ msgid ""
 "Can you tell us the steps leading to this error? It decisively helps in "
 "debugging:"
 msgstr ""
-"Вы можете указать шаги, приведшие к этой ошибке? Это существенно поможет при "
-"выяснении причин проблемы."
+"Можете указать шаги, приведшие к этой ошибке? Это существенно поможет в "
+"отладке:"
 
 #: templates/error/report_form.twig:19
 msgid "You may examine the data in the error report:"
@@ -15680,8 +15680,8 @@ msgid ""
 "Note: Enabling the database statistics here might cause heavy traffic "
 "between the web server and the MySQL server."
 msgstr ""
-"Примечание: Включение статистики баз данных может спровоцировать большой "
-"трафик между веб-сервером и сервером MySQL."
+"Примечание: Включение статистики баз данных может вызвать увеличение трафика "
+"между веб-сервером и сервером MySQL."
 
 #: templates/server/databases/databases_footer.twig:70
 #: templates/server/databases/databases_footer.twig:71
@@ -16234,7 +16234,7 @@ msgstr "Слежение включено."
 
 #: templates/database/structure/tracking_icon.twig:5
 msgid "Tracking is not active."
-msgstr "Слежение выключено."
+msgstr "Слежение отключено."
 
 #: templates/export/alias_add.twig:4
 msgid "Define new aliases"
@@ -17228,15 +17228,15 @@ msgstr "Время медленного запуска"
 
 #: libraries/advisory_rules_generic.txt:318
 msgid "Slow_launch_time is above 2s."
-msgstr "Slow_launch_time больше 2 сек."
+msgstr "Slow_launch_time больше 2 с."
 
 #: libraries/advisory_rules_generic.txt:319
 msgid ""
 "Set {slow_launch_time} to 1s or 2s to correctly count threads that are slow "
 "to launch."
 msgstr ""
-"Установите переменную {slow_launch_time} на 1 или 2 сек., чтобы корректно "
-"считать медленно запускаемые потоки."
+"Установите переменную {slow_launch_time} на 1 или 2 с, чтобы верно считать "
+"медленно запускаемые потоки."
 
 #: libraries/advisory_rules_generic.txt:320
 #, php-format
@@ -17357,7 +17357,7 @@ msgstr "Отключен InnoDB?"
 
 #: libraries/advisory_rules_generic.txt:364
 msgid "You do not have InnoDB enabled."
-msgstr "У вас выключен InnoDB."
+msgstr "У вас отключён InnoDB."
 
 #: libraries/advisory_rules_generic.txt:365
 msgid "InnoDB is usually the better choice for table engines."
@@ -17695,7 +17695,7 @@ msgid ""
 "The max size of the result set in the query cache is the default of 1 MiB."
 msgstr ""
 "Максимальный размер результата установленный в кеше запросов, по умолчанию "
-"составляет 1 MiB."
+"составляет 1 МиБ."
 
 #: libraries/advisory_rules_mysql_before80003.txt:56
 msgid ""
@@ -17711,10 +17711,10 @@ msgstr ""
 "Изменение {query_cache_limit} (обычно повышение) может увеличить "
 "эффективность. Данная переменная определяет максимальный размер результата "
 "запроса, который будет добавлен в кеш запросов. При большом количестве "
-"результатов запросов свыше 1 MiB, которые могут быть без труда кешированы "
-"(большое количество процессов чтения, малое количество процессов записи), "
+"результатов запросов свыше 1 МиБ, которые могут быть без труда кешированы ("
+"большое количество процессов чтения, малое количество процессов записи), "
 "увеличение значения {query_cache_limit} увеличит эффективность. В то же "
-"время, при большом количестве результатов запросов превышающих 1 MiB, "
+"время, при большом количестве результатов запросов превышающих 1 МиБ, "
 "которые не подпадают под условие кеширования (часто недействительны при "
 "обновлении таблиц), увеличение {query_cache_limit} может снизить "
 "эффективность."
