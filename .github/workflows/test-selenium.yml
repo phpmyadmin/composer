@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  php-version: "8.1"
+  php-version: "8.2"
 
 jobs:
   selenium:
@@ -65,9 +65,7 @@ jobs:
           - "Database/Events"
           - "Database/Operations"
           - "Database/Procedures"
-          - "Database/QueryByExample"
           - "Database/Structure"
-          - "Database/Triggers"
           - "Export"
           - "Import"
           - "Login"
@@ -80,10 +78,11 @@ jobs:
           - "Table/Operations"
           - "Table/Structure"
           - "Tracking"
+          - "Triggers"
           - "Xss"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Refresh apt cache
         run: sudo apt-get update
@@ -92,31 +91,29 @@ jobs:
         run: sudo apt-get install -y gettext
 
       - name: Generate mo files
-        run: ./scripts/generate-mo --quiet
+        run: ./bin/generate-mo --quiet
 
       - name: Set up PHP ${{ env.php-version }}
         uses: shivammathur/setup-php@v2
         with:
           coverage: "none"
           php-version: ${{ env.php-version }}
-          extensions: mbstring, iconv, mysqli, zip, gd, bz2
+          extensions: :opcache, mbstring, iconv, mysqli, zip, gd, bz2
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: highest
+        uses: ramsey/composer-install@v3
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Install modules
         run: yarn install --non-interactive --production
 
       - name: Copy the config
-        run: cp test/config.e2e.inc.php config.inc.php
+        run: cp tests/config.e2e.inc.php config.inc.php
 
       - name: Start server
         env:
@@ -124,7 +121,9 @@ jobs:
           FPM_PATH: php-fpm${{ env.php-version }}
           SKIP_STANDALONE: 1
         run: |
-          ./test/start-local-server
+          sudo chown -R runner:docker /var/lib/nginx/
+          sudo chown -R runner:docker /var/log/nginx/
+          ./tests/start-local-server
           echo "SELENIUM_TEMPDIR=$(cat /tmp/last_temp_dir_phpMyAdminTests)" >> $GITHUB_OUTPUT
         id: start-local-server
 
@@ -134,12 +133,12 @@ jobs:
           TESTSUITE_SELENIUM_BROWSER: chrome
           TESTSUITE_USER: root
           TESTSUITE_PASSWORD: testbench
-          # Port defined in test/nginx.conf
+          # Port defined in tests/nginx.conf
           TESTSUITE_URL: http://docker-host-bridge:8000
           TESTSUITE_DATABASE_PREFIX: "selenium"
           TESTSUITE_SELENIUM_HOST: "127.0.0.1"
           TESTSUITE_SELENIUM_PORT: "4444"
-        run: ./vendor/bin/phpunit --testsuite selenium --no-logging --no-coverage --stop-on-skipped test/selenium/${{ matrix.test-name }}Test.php
+        run: ./vendor/bin/phpunit --testsuite end-to-end --no-logging --no-coverage --stop-on-skipped --testdox tests/end-to-end/${{ matrix.test-name }}Test.php
 
       - name: Output logs and stop server
         env:
@@ -149,10 +148,10 @@ jobs:
         run: |
           if [ -f "${SELENIUM_TEMPDIR}/php.log" ] ; then cat "${SELENIUM_TEMPDIR}/php.log" ; fi
           if [ -f "${SELENIUM_TEMPDIR}/nginx-error.log" ] ; then cat "${SELENIUM_TEMPDIR}/nginx-error.log" ; fi
-          ./test/stop-local-server
+          ./tests/stop-local-server
 
       - name: Upload screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ failure() }}
         with:
           name: selenium-screenshots

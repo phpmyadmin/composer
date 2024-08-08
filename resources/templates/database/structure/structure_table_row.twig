@@ -1,0 +1,240 @@
+<tr id="row_tbl_{{ curr }}"{{ table_is_view ? ' class="is_view"' }} data-filter-row="{{ current_table['TABLE_NAME']|upper }}">
+    <td class="text-center d-print-none">
+        <input type="checkbox"
+            name="selected_tbl[]"
+            class="{{ input_class }}"
+            value="{{ current_table['TABLE_NAME'] }}"
+            id="checkbox_tbl_{{ curr }}">
+    </td>
+    <th>
+        <a class="disableAjax" href="{{ url('/sql', table_url_params|merge({'pos': 0})) }}" title="{{ browse_table_label_title }}">
+            {{- browse_table_label_truename -}}
+        </a>
+        {{ tracking_icon|raw }}
+    </th>
+    {% if server_replica_status %}
+        <td class="text-center">
+            {{ ignored ? get_image('s_cancel', t('Not replicated')) }}
+            {{ do ? get_image('s_success', t('Replicated')) }}
+        </td>
+    {% endif %}
+
+    {# Favorite table anchor #}
+    {% if num_favorite_tables > 0 %}
+        <td class="text-center d-print-none">
+            {# Check if current table is already in favorite list #}
+            {% set fav_params = {
+                'db': db,
+                'ajax_request': true,
+                'favorite_table': current_table['TABLE_NAME'],
+                ((already_favorite ? 'remove' : 'add') ~ '_favorite'): true
+            } %}
+            {% include 'database/structure/favorite_anchor.twig' with {
+                'table_name_hash': table_name_hash,
+                'db_table_name_hash': db_table_name_hash,
+                'fav_params': fav_params,
+                'already_favorite': already_favorite,
+            } only %}
+        </td>
+    {% endif %}
+
+    <td class="text-center d-print-none">
+        <a class="disableAjax" href="{{ url('/sql', table_url_params|merge({'pos': 0})) }}">
+          {{ may_have_rows ? get_icon('b_browse', t('Browse')) : get_icon('bd_browse', t('Browse')) }}
+        </a>
+    </td>
+    <td class="text-center d-print-none">
+        <a class="disableAjax" href="{{ url('/table/structure', table_url_params) }}">
+          {{ get_icon('b_props', t('Structure')) }}
+        </a>
+    </td>
+    <td class="text-center d-print-none">
+        <a class="disableAjax" href="{{ url('/table/search', table_url_params) }}">
+          {{ may_have_rows ? get_icon('b_select', t('Search')) : get_icon('bd_select', t('Search')) }}
+        </a>
+    </td>
+
+    {% if not db_is_system_schema %}
+        <td class="text-center d-print-none">
+            <a class="disableAjax" href="{{ url('/table/change', table_url_params) }}">{{ get_icon('b_insrow', t('Insert')) }}</a>
+        </td>
+        {% if table_is_view %}
+            <td class="text-center d-print-none">
+                <a href="{{ url('/view/create', {
+                    'db': db,
+                    'table': current_table['TABLE_NAME']
+                }) }}">{{ get_icon('b_edit', t('Edit')) }}</a>
+            </td>
+        {% else %}
+          <td class="text-center d-print-none">
+                <a class="truncate_table_anchor ajax" href="{{ url('/sql') }}" data-post="{{ get_common(table_url_params|merge({
+                  'sql_query': empty_table_sql_query,
+                  'message_to_show': empty_table_message_to_show
+                }), '') }}">
+                  {{ may_have_rows ? get_icon('b_empty', t('Empty')) : get_icon('bd_empty', t('Empty')) }}
+                </a>
+          </td>
+        {% endif %}
+        <td class="text-center d-print-none">
+            <a class="ajax drop_table_anchor
+                {{- table_is_view or current_table['ENGINE'] == null ? ' view' }}" href="{{ url('/sql') }}" data-post="
+                {{- get_common(table_url_params|merge({
+                  'reload': 1,
+                  'purge': 1,
+                  'sql_query': drop_query,
+                  'message_to_show': drop_message
+                }), '') }}">
+                {{ get_icon('b_drop', t('Drop')) }}
+            </a>
+        </td>
+    {% endif %}
+
+    {% if current_table['TABLE_ROWS'] is defined
+        and (current_table['ENGINE'] != null or table_is_view) %}
+        {# Get the row count #}
+        {% set row_count = format_number(current_table['TABLE_ROWS'], 0) %}
+
+        {# Content to be appended into 'tbl_rows' cell.
+        If row count is approximate, display it as an anchor to get real count. #}
+        <td class="value tbl_rows font-monospace text-end"
+            data-table="{{ current_table['TABLE_NAME'] }}">
+            {% if approx_rows %}
+                <a href="{{ url('/database/structure/real-row-count', {
+                    'ajax_request': true,
+                    'db': db,
+                    'table': current_table['TABLE_NAME']
+                }) }}" class="ajax real_row_count">
+                    <bdi>
+                        ~{{ row_count }}
+                    </bdi>
+                </a>
+            {% else %}
+                {{ row_count }}
+            {% endif %}
+            {{ show_superscript|raw }}
+        </td>
+
+        {% if not (properties_num_columns > 1) %}
+            <td class="text-nowrap">
+                {% if current_table['ENGINE'] is not empty %}
+                    {{ current_table['ENGINE'] }}
+                {% elseif table_is_view %}
+                    {{ t('View') }}
+                {% endif %}
+            </td>
+            {% if collation|length > 0 %}
+                <td class="text-nowrap">
+                    {{ collation|raw }}
+                </td>
+            {% endif %}
+        {% endif %}
+
+        {% if is_show_stats %}
+            <td class="value tbl_size font-monospace text-end">
+                <a class="disableAjax" href="{{ url('/table/structure', table_url_params) }}#showusage">
+                    <span>{{ formatted_size }}</span>&nbsp;<span class="unit">{{ unit }}</span>
+                </a>
+            </td>
+            <td class="value tbl_overhead font-monospace text-end">
+                {{ overhead|raw }}
+            </td>
+        {% endif %}
+
+        {% if show_charset %}
+            <td class="text-nowrap">
+                {% if charset|length > 0 %}
+                    {{ charset|raw }}
+                {% endif %}
+            </td>
+        {% endif %}
+
+        {% if show_comment %}
+            {% set comment = current_table['Comment'] %}
+            <td>
+                {% if comment|length > limit_chars %}
+                    <abbr title="{{ comment }}">
+                        {{ comment|slice(0, limit_chars) }}
+                        ...
+                    </abbr>
+                {% else %}
+                    {{ comment }}
+                {% endif %}
+            </td>
+        {% endif %}
+
+        {% if show_creation %}
+            <td class="value tbl_creation font-monospace text-end">
+                {{ create_time }}
+            </td>
+        {% endif %}
+
+        {% if show_last_update %}
+            <td class="value tbl_last_update font-monospace text-end">
+                {{ update_time }}
+            </td>
+        {% endif %}
+
+        {% if show_last_check %}
+            <td class="value tbl_last_check font-monospace text-end">
+                {{ check_time }}
+            </td>
+        {% endif %}
+
+    {% elseif table_is_view %}
+        <td class="value tbl_rows font-monospace text-end">-</td>
+        <td class="text-nowrap">
+            {{ t('View') }}
+        </td>
+        <td class="text-nowrap">---</td>
+        {% if is_show_stats %}
+            <td class="value tbl_size font-monospace text-end">-</td>
+            <td class="value tbl_overhead font-monospace text-end">-</td>
+        {% endif %}
+        {% if show_charset %}
+            <td></td>
+        {% endif %}
+        {% if show_comment %}
+            <td></td>
+        {% endif %}
+        {% if show_creation %}
+            <td class="value tbl_creation font-monospace text-end">-</td>
+        {% endif %}
+        {% if show_last_update %}
+            <td class="value tbl_last_update font-monospace text-end">-</td>
+        {% endif %}
+        {% if show_last_check %}
+            <td class="value tbl_last_check font-monospace text-end">-</td>
+        {% endif %}
+
+    {% else %}
+
+        {% if db_is_system_schema %}
+            {% set action_colspan = 2 %}
+        {% else %}
+            {% set action_colspan = 4 %}
+        {% endif %}
+        {% if num_favorite_tables > 0 %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+        {% if show_charset %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+        {% if show_comment %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+        {% if show_creation %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+        {% if show_last_update %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+        {% if show_last_check %}
+            {% set action_colspan = action_colspan + 1 %}
+        {% endif %}
+
+        <td colspan="{{ action_colspan }}"
+            class="text-center">
+            {{ t('in use') }}
+        </td>
+    {% endif %}
+</tr>

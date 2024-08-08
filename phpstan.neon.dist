@@ -3,37 +3,25 @@ includes:
 parameters:
     level: max
     paths:
-        - .
+        - app
+        - public
+        - src
+        - tests
     scanFiles:
-        - libraries/constants.php
+        - app/constants.php
+        - examples/signon-script.php
     bootstrapFiles:
-        - test/phpstan-constants.php
+        - tests/phpstan-constants.php
     stubFiles:
-        - test/stubs/Query.stub
-        - test/stubs/uploadprogress.stub
+        - tests/stubs/uploadprogress.stub
     excludePaths:
-        - examples/openid.php
-        - node_modules/*
-        - libraries/cache/*
-        - test/doctum-config.php
-        - tmp/*
-        - twig-templates/*
-        - vendor/*
+        - app/cache/*
+        - tests/doctum-config.php
     dynamicConstantNames:
         - ROOT_PATH
         - VERSION_SUFFIX
-    strictRules:
-        # Allow non-booleans in conditions.
-        booleansInConditions: false
-        # Allow the empty() construct.
-        disallowedConstructs: false
-        # Allow dynamic calls to static methods.
-        strictCalls: false
     checkBenevolentUnionTypes: true
-    checkAlwaysTrueCheckTypeFunctionCall: true
-    checkAlwaysTrueStrictComparison: true
     checkUninitializedProperties: true
-    polluteScopeWithAlwaysIterableForeach: true
     checkDynamicProperties: true
     checkTooWideReturnTypesInProtectedAndPublicMethods: true
-    polluteScopeWithLoopInitialAssignments: true
+    checkImplicitMixed: true

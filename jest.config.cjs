@@ -1,21 +1,21 @@
 /* eslint-env node */
 
 module.exports = {
+    extensionsToTreatAsEsm: ['.ts'],
     coverageDirectory: '<rootDir>/build/javascript/',
-    collectCoverageFrom: ['<rootDir>/js/src/**/*.js'],
+    collectCoverageFrom: ['<rootDir>/resources/js/src/**/*.ts'],
     projects: [
         {
-            verbose: true,
             coveragePathIgnorePatterns: [
                 '<rootDir>/node_modules/',
-                '<rootDir>/js/vendor/',
+                '<rootDir>/public/js/vendor/',
             ],
             displayName: 'phpMyAdmin',
-            testMatch: ['<rootDir>/test/javascript/**/*.js'],
-            transform: {},
+            testMatch: ['<rootDir>/tests/javascript/**/*.ts'],
+            transform: { '\\.[jt]sx?$': 'babel-jest' },
             moduleNameMapper: {
-                '^phpmyadmin/(.*)$': '<rootDir>/js/src/$1',
-                '^@vendor/(.*)$': '<rootDir>/js/vendor/$1',
+                '^phpmyadmin/(.*)$': '<rootDir>/resources/js/src/$1',
+                '^@vendor/(.*)$': '<rootDir>/public/js/vendor/$1',
             },
             testEnvironment: 'jsdom',
         }

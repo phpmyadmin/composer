@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>{{ t('Export of trigger %s')|format(backquote(item_name)) }}</h2>
+
+  <div class="card">
+    <div class="card-body">
+      <textarea rows="15" class="form-control">{{ data|trim }}</textarea>
+    </div>
+  </div>
+</div>

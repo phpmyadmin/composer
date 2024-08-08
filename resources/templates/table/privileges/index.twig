@@ -1,0 +1,140 @@
+<div class="container">
+  {% if is_superuser %}
+    <h2>
+      {{ get_icon('b_usrcheck') }}
+      {{ t('Users having access to "%s"')|format('<a href="' ~ table_url ~ get_common({
+        'db': db,
+        'table': table
+      }, '&') ~ '">' ~ db|escape('html') ~ '.' ~ table|escape('html') ~ '</a>')|raw }}
+    </h2>
+
+    <form id="usersForm" action="{{ url('/server/privileges') }}" class="card mb-3">
+      {{ get_hidden_inputs(db, table) }}
+      <div class="card-body">
+        <div class="table-responsive-md jsresponsive">
+          <table class="table table-striped table-hover w-auto">
+            <thead>
+              <tr>
+                <th></th>
+                <th>{{ t('User name') }}</th>
+                <th>{{ t('Host name') }}</th>
+                <th>{{ t('Type') }}</th>
+                <th>{{ t('Privileges') }}</th>
+                <th>{{ t('Grant') }}</th>
+                <th colspan="2">{{ t('Action') }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for privilege in privileges %}
+                {% set privileges_amount = privilege.privileges|length %}
+                <tr>
+                  <td{% if privileges_amount > 1 %} class="align-middle" rowspan="{{ privileges_amount }}"{% endif %}>
+                    <input type="checkbox" class="checkall" name="selected_usr[]" id="checkbox_sel_users_{{ loop.index0 }}" value="
+                      {{- privilege.user ~ '&amp;#27;' ~ privilege.host }}">
+                  </td>
+                  <td{% if privileges_amount > 1 %} class="align-middle" rowspan="{{ privileges_amount }}"{% endif %}>
+                    {% if privilege.user is empty %}
+                      <span class="text-danger">{{ t('Any') }}</span>
+                    {% else %}
+                      {{ privilege.user }}
+                    {% endif %}
+                  </td>
+                  <td{% if privileges_amount > 1 %} class="align-middle" rowspan="{{ privileges_amount }}"{% endif %}>
+                    {{ privilege.host }}
+                  </td>
+                  {% for priv in privilege.privileges %}
+                    <td>
+                      {% if priv.type == 'g' %}
+                        {{ t('global') }}
+                      {% elseif priv.type == 'd' %}
+                        {% if priv.database == db|replace({'_': '\\_', '%': '\\%'}) %}
+                          {{ t('database-specific') }}
+                        {% else %}
+                          {{ t('wildcard') }}: <code>{{ priv.database }}</code>
+                        {% endif %}
+                      {% elseif priv.type == 't' %}
+                        {{ t('table-specific') }}
+                      {% elseif priv.type == 'r' %}
+                        {{ t('routine') }}
+                      {% endif %}
+                    </td>
+                    <td>
+                      <code>
+                        {% if priv.type == 'r' %}
+                          {{ priv.routine }}
+                          ({{ priv.privileges|join(', ')|upper }})
+                        {% else %}
+                          {{ priv.privileges|join(', ')|raw }}
+                        {% endif %}
+                      </code>
+                    </td>
+                    <td>
+                      {{ priv.has_grant ? t('Yes') : t('No') }}
+                    </td>
+                    <td>
+                      {% if is_grantuser %}
+                        <a class="edit_user_anchor" href="{{ url('/server/privileges', {
+                          'username': privilege.user,
+                          'hostname': privilege.host,
+                          'dbname': priv.database != '*' ? priv.database : db,
+                          'tablename': priv.table is defined and priv.table != '*' ? priv.table : table,
+                          'routinename': priv.routine ?? ''
+                        }) }}">
+                          {{ get_icon('b_usredit', t('Edit privileges')) }}
+                        </a>
+                      {% endif %}
+                    </td>
+                    <td class="text-center">
+                      <a class="export_user_anchor ajax" href="{{ url('/server/privileges', {
+                        'username': privilege.user,
+                        'hostname': privilege.host,
+                        'export': true,
+                        'initial': ''
+                      }) }}">
+                        {{ get_icon('b_tblexport', t('Export')) }}
+                      </a>
+                    </td>
+                  </tr>
+                  {% if privileges_amount > 1 %}
+                    <tr class="noclick">
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="7">
+                    {{ t('No user found.') }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          {{ get_image('select_all_arrow', t('With selected:'), {'dir': pma.text_dir, 'width': '38', 'height': '22'}) }}
+          <input type="checkbox" id="usersForm_checkall" class="checkall_box" title="{{ t('Check all') }}">
+          <label for="usersForm_checkall">{{ t('Check all') }}</label>
+          <em class="with-selected">{{ t('With selected:') }}</em>
+          <button class="btn btn-link mult_submit" type="submit" name="submit_mult" value="export" title="{{ t('Export') }}">
+            {{ get_icon('b_tblexport', t('Export')) }}
+          </button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    {{ t('Not enough privilege to view users.')|error }}
+  {% endif %}
+
+  {% if is_createuser %}
+    <div>
+      <a class="btn btn-primary" id="add_user_anchor" href="{{ url('/server/privileges', {
+        'adduser': true,
+        'dbname': db,
+        'tablename': table
+      }) }}">
+        {{ get_icon('b_usradd', t('Add user account')) }}
+      </a>
+    </div>
+  {% endif %}
+</div>

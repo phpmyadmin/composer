@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PhpMyAdmin\Controllers\Database\MultiTableQuery;
+
+use PhpMyAdmin\Controllers\InvocableController;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Http\Response;
+use PhpMyAdmin\Http\ServerRequest;
+use PhpMyAdmin\Query\Generator as QueryGenerator;
+use PhpMyAdmin\ResponseRenderer;
+
+use function array_map;
+use function implode;
+
+final class TablesController implements InvocableController
+{
+    public function __construct(private readonly ResponseRenderer $response, private readonly DatabaseInterface $dbi)
+    {
+    }
+
+    public function __invoke(ServerRequest $request): Response
+    {
+        /** @var string[] $tables */
+        $tables = $request->getQueryParam('tables', []);
+        /** @var string $db */
+        $db = $request->getQueryParam('db', '');
+
+        $tablesListForQuery = array_map($this->dbi->quoteString(...), $tables);
+
+        $constrains = $this->dbi->fetchResult(
+            QueryGenerator::getInformationSchemaForeignKeyConstraintsRequest(
+                $this->dbi->quoteString($db),
+                implode(',', $tablesListForQuery),
+            ),
+        );
+        $this->response->addJSON(['foreignKeyConstrains' => $constrains]);
+
+        return $this->response->response();
+    }
+}

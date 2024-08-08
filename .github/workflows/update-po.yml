@@ -18,10 +18,10 @@ jobs:
     if: (github.event_name == 'schedule' && github.repository == 'phpmyadmin/phpmyadmin') || (github.event_name != 'schedule')
     strategy:
       matrix:
-        php-version: ["8.1"]
+        php-version: ["8.2"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Gettext
         run: |
@@ -34,9 +34,7 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: highest
+        uses: ramsey/composer-install@v3
 
       - name: Set up git config
         run: |
@@ -45,7 +43,7 @@ jobs:
 
       - name: Update PO files
         run: |
-          ./scripts/update-po
+          ./bin/update-po
 
       - name: Push changes
         run: |

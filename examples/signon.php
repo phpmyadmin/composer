@@ -12,12 +12,12 @@ declare(strict_types=1);
 /* Use cookies for session */
 ini_set('session.use_cookies', 'true');
 /* Change this to true if using phpMyAdmin over https */
-$secure_cookie = false;
+$secureCookie = false;
 /* Need to have cookie visible from parent directory */
-session_set_cookie_params(0, '/', '', $secure_cookie, true);
+session_set_cookie_params(0, '/', '', $secureCookie, true);
 /* Create signon session */
-$session_name = 'SignonSession';
-session_name($session_name);
+$sessionName = 'SignonSession';
+session_name($sessionName);
 // Uncomment and change the following line to match your $cfg['SessionSavePath']
 //session_save_path('/foobar');
 @session_start();
@@ -32,7 +32,6 @@ if (isset($_POST['user'])) {
     /* Update another field of server configuration */
     $_SESSION['PMA_single_signon_cfgupdate'] = ['verbose' => 'Signon test'];
     $_SESSION['PMA_single_signon_HMAC_secret'] = hash('sha1', uniqid(strval(random_int(0, mt_getrandmax())), true));
-    $id = session_id();
     /* Close that session */
     @session_write_close();
     /* Redirect to phpMyAdmin (should use absolute URL here!) */

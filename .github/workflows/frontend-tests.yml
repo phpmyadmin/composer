@@ -4,9 +4,9 @@ on:
   push:
   pull_request:
     paths:
-      - 'js/**'
+      - 'resources/js/**'
       - '**.s?css'
-      - 'test/javascript/**'
+      - 'tests/javascript/**'
       - '.browserslistrc'
       - '.eslint*'
       - '*.cjs'
@@ -23,12 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Install modules
@@ -42,12 +42,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Install modules
@@ -61,12 +61,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Install modules

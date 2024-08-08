@@ -1,0 +1,17 @@
+{{ get_hidden_inputs() }}
+<p>
+    {{ t('Please scan following QR code into the two-factor authentication app on your device and enter authentication code it generates.') }}
+</p>
+<p>
+    {% if has_imagick %}
+        <img src="{{ image }}">
+    {% else %}
+        {{ image|raw }}
+    {% endif %}
+</p>
+<p>
+    {{ t('Secret/key:') }} <strong>{{ secret }}</strong>
+</p>
+<p>
+    <label>{{ t('Authentication code:') }} <input type="text" name="2fa_code" autocomplete="off"></label>
+</p>

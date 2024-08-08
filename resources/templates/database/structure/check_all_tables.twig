@@ -1,0 +1,61 @@
+<div class="clearfloat d-print-none">
+    {{ get_image('select_all_arrow', t('With selected:'), {'dir': pma.text_dir, 'width': '38', 'height': '22'}) }}
+    <input type="checkbox" id="tablesForm_checkall" class="checkall_box" title="{{ t('Check all') }}">
+    <label for="tablesForm_checkall">{{ t('Check all') }}</label>
+    {% if overhead_check != '' %}
+        / <a href="#" class="checkall-filter" data-checkall-selector=".tbl-overhead">{{ t('Check tables having overhead') }}</a>
+    {% endif %}
+    <select name="submit_mult" class="mx-5 my-0">
+        <option value="{{ t('With selected:') }}" selected="selected">{{ t('With selected:') }}</option>
+        <option value="copy_tbl">{{ t('Copy table') }}</option>
+        <option value="show_create">{{ t('Show create') }}</option>
+        <option value="export">{{ t('Export') }}</option>
+        {% if not db_is_system_schema and not disable_multi_table %}
+            <optgroup label="{{ t('Delete data or table') }}">
+                <option value="empty_tbl">{{ t('Empty') }}</option>
+                <option value="drop_tbl">{{ t('Drop') }}</option>
+            </optgroup>
+            <optgroup label="{{ t('Table maintenance') }}">
+                <option value="analyze_tbl">{{ t('Analyze table') }}</option>
+                <option value="check_tbl">{{ t('Check table') }}</option>
+                <option value="checksum_tbl">{{ t('Checksum table') }}</option>
+                <option value="optimize_tbl">{{ t('Optimize table') }}</option>
+                <option value="repair_tbl">{{ t('Repair table') }}</option>
+            </optgroup>
+            <optgroup label="{{ t('Prefix') }}">
+                <option value="add_prefix_tbl">{{ t('Add prefix to table') }}</option>
+                <option value="replace_prefix_tbl">{{ t('Replace table prefix') }}</option>
+                <option value="copy_tbl_change_prefix">{{ t('Copy table with prefix') }}</option>
+            </optgroup>
+        {% endif %}
+        {% if central_columns_work is defined and central_columns_work %}
+            <optgroup label="{{ t('Central columns') }}">
+                <option value="sync_unique_columns_central_list">{{ t('Add columns to central list') }}</option>
+                <option value="delete_unique_columns_central_list">{{ t('Remove columns from central list') }}</option>
+                <option value="make_consistent_with_central_list">{{ t('Make consistent with central list') }}</option>
+            </optgroup>
+        {% endif %}
+    </select>
+    {{ hidden_fields|join('\n')|raw }}
+</div>
+
+{% if central_columns_work is defined and central_columns_work %}
+  <div class="modal fade" id="makeConsistentWithCentralListModal" data-bs-backdrop="static" data-bs-keyboard="false"
+       tabindex="-1" aria-labelledby="makeConsistentWithCentralListModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="makeConsistentWithCentralListModalLabel">{{ t('Are you sure?') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ t('Cancel') }}"></button>
+        </div>
+        <div class="modal-body">
+          {{ t('This action may change some of the columns definition.[br]Are you sure you want to continue?')|sanitize }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ t('Cancel') }}</button>
+          <button type="button" class="btn btn-primary" id="makeConsistentWithCentralListContinue">{{ t('Continue') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,79 @@
+<form id="gis_data_editor_form" action="{{ url('/gis-data-editor') }}" method="post">
+  <div id="gis_data_editor">
+    <input type="hidden" name="field" value="{{ field }}">
+    <input type="hidden" name="type" value="{{ column_type }}">
+    {# The input field to which the final result should be added and corresponding null checkbox #}
+    {% if input_name is not null %}
+      <input type="hidden" name="input_name" value="{{ input_name }}">
+    {% endif %}
+    {{ get_hidden_inputs() }}
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div id="gis_data" class="gis-geometry mb-3" data-gis-data="{{ gis_data|json_encode }}">
+            <template id="gis_type_template">
+              <select class="gis_type form-select">
+                {% for gis_type in gis_types|filter(v => v != 'GEOMETRYCOLLECTION') %}
+                  <option value="{{ gis_type }}">{{ gis_type }}</option>
+                {% endfor %}
+              </select>
+            </template>
+
+            {# Header section - Inclueds GIS type selector and input field for SRID #}
+            <div class="gis-geometry-type mb-3 row">
+              <div class="col">
+                <label class="form-label" for="gisDataEditorTypeSelect">{{ t('Geometry type:') }}</label>
+                {% if column_type == 'GEOMETRY' %}
+                  <select id="gisDataEditorTypeSelect" name="gis_data[gis_type]" class="gis_type form-select">
+                    {% for gis_type in gis_types %}
+                      <option value="{{ gis_type }}"{{ geom_type == gis_type ? ' selected' }}>
+                        {{ gis_type }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                {% else %}
+                  <input type="text" id="gisDataEditorTypeSelect" name="gis_data[gis_type]" class="form-control" value="{{ geom_type }}" disabled readonly>
+                {% endif %}
+              </div>
+
+              <div class="col-auto">
+                <label class="form-label" for="srid"><abbr title="{{ t('Spatial Reference System Identifier') }}">{{ t('SRID:', context = 'Spatial Reference System Identifier') }}</abbr></label>
+                <input class="form-control" id="srid" name="gis_data[srid]" type="text" value="{{ srid }}">
+              </div>
+            </div>
+            {# End of header section #}
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <div class="card">
+            <div class="card-body">
+              <div id="visualization-placeholder" style="width: {{ width }}px; height: {{ height }}px;" data-ol-data="{{ open_layers_data|json_encode|e('html_attr') }}">
+                <div class="visualization-target visualization-target-svg hide">{{ visualization|raw }}</div>
+                <div class="visualization-target visualization-target-ol hide"></div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="form-switch mt-1">
+                <input type="checkbox" id="useOsmAsBaseLayerSwitch" class="form-check-input" value="useBaseLayer"{{ srid != 0 ? ' checked="checked"' }}>
+                <label for="useOsmAsBaseLayerSwitch" id="useOsmAsBaseLayerSwitchLabel">{{ t('Use OpenStreetMaps as Base Layer') }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="gis_data_textarea">{{ t('Output') }}</label>
+      <textarea class="form-control" id="gis_data_textarea" rows="5">{{ result }}</textarea>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-primary gis-copy-data" data-bs-dismiss="modal">{{ t('Copy') }}</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> {{ t('Cancel') }}</button>
+    </div>
+  </div>
+</form>

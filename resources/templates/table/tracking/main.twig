@@ -1,0 +1,125 @@
+{% if selectable_tables_entries|length > 0 %}
+    <form method="post" action="{{ url('/table/tracking', url_params) }}">
+        {{ get_hidden_inputs(db, table) }}
+        <select name="table" class="autosubmit">
+            {% for entry in selectable_tables_entries %}
+                <option value="{{ entry.name }}"
+                    {{- entry.name == selected_table ? ' selected' }}>
+                    {{ db }}.{{ entry.name }}
+                    {% if entry.active %}
+                        ({{ t('active') }})
+                    {% else %}
+                        ({{ t('not active') }})
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="show_versions_submit" value="1">
+    </form>
+{% endif %}
+<br>
+{% if last_version > 0 %}
+    <form method="post" action="{{ url('/table/tracking') }}" name="versionsForm" id="versionsForm" class="ajax">
+        {{ get_hidden_inputs(db, table) }}
+        <table id="versions" class="table table-striped table-hover table-sm w-auto">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ t('Version') }}</th>
+                    <th>{{ t('Created') }}</th>
+                    <th>{{ t('Updated') }}</th>
+                    <th>{{ t('Status') }}</th>
+                    <th>{{ t('Action') }}</th>
+                    <th>{{ t('Show') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for version in versions %}
+                    <tr>
+                        <td class="text-center">
+                            <input type="checkbox" name="selected_versions[]"
+                                class="checkall" id="selected_versions_{{- version['version']|escape }}"
+                                value="{{- version['version']|escape }}">
+                        </td>
+                        <td>
+                            <label for="selected_versions_{{- version['version']|escape }}">
+                                <b>{{ version['version']|escape }}</b>
+                            </label>
+                        </td>
+                        <td>{{ version['date_created']|escape }}</td>
+                        <td>{{ version['date_updated']|escape }}</td>
+                        {% if version['tracking_active'] == 1 %}
+                            {% set last_version_status = 1 %}
+                            <td>{{ t('active') }}</td>
+                        {% else %}
+                            {% set last_version_status = 0 %}
+                            <td>{{ t('not active') }}</td>
+                        {% endif %}
+                        <td>
+                            <a class="delete_version_anchor ajax" href="{{ url('/table/tracking') }}" data-post="
+                                {{- get_common(url_params|merge({
+                                    'version': version['version'],
+                                    'submit_delete_version': true
+                                }), '', false) }}">
+                                {{ get_icon('b_drop', t('Delete version')) }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url('/table/tracking') }}" data-post="
+                                {{- get_common(url_params|merge({
+                                    'version': version['version'],
+                                    'report': 'true'
+                                }), '', false) }}">
+                                {{ get_icon('b_report', t('Tracking report')) }}
+                            </a>
+                            <a href="{{ url('/table/tracking') }}" data-post="
+                                {{- get_common(url_params|merge({
+                                    'version': version['version'],
+                                    'snapshot': 'true'
+                                }), '', false) }}">
+                                {{ get_icon('b_props', t('Structure snapshot')) }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% include 'select_all.twig' with {
+            'form_name': 'versionsForm',
+        } only %}
+        <button class="btn btn-link mult_submit" type="submit" name="submit_mult" value="delete_version" title="{{ t('Delete version') }}">
+            {{ get_icon('b_drop', t('Delete version')) }}
+        </button>
+    </form>
+    {% set last_version_element = versions|first %}
+    <form method="post" action="{{ url('/table/tracking', url_params) }}" class="card">
+      {{ get_hidden_inputs(db, table) }}
+      <div class="card-header">
+        {% if last_version_element['tracking_active'] == 0 %}
+          {% set legend = t('Activate tracking for %s') %}
+          {% set value = 'activate_now' %}
+          {% set button = t('Activate now') %}
+        {% else %}
+          {% set legend = t('Deactivate tracking for %s') %}
+          {% set value = 'deactivate_now' %}
+          {% set button = t('Deactivate now') %}
+        {% endif %}
+
+        {{ legend|format(db ~ '.' ~ table) }}
+      </div>
+      <div class="card-body">
+        <input type="hidden" name="version" value="{{ last_version }}">
+        <input type="hidden" name="toggle_activation" value="{{ value }}">
+        <input class="btn btn-secondary" type="submit" value="{{ button }}">
+      </div>
+    </form>
+{% endif %}
+{% include 'create_tracking_version.twig' with {
+    'route': '/table/tracking',
+    'url_params': url_params,
+    'last_version': last_version,
+    'db': db,
+    'selected': [table],
+    'type': type,
+    'default_statements': default_statements,
+} only %}

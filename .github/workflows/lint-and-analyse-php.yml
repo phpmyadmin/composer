@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ["8.1"]
+        php-version: ["8.2"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -32,16 +32,15 @@ jobs:
       - name: Install Composer dependencies
         # Allow the previous check to fail but not abort
         if: always()
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
         with:
-          dependency-versions: highest
           # Ignore zip for php-webdriver/webdriver
           composer-options: "--ignore-platform-req=ext-zip"
 
       - name: Cache coding-standard
         # Allow the previous check to fail but not abort
         if: always()
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .phpcs-cache
           key: phpcs-cache
@@ -49,7 +48,7 @@ jobs:
       - name: Lint PHP files
         # Allow the previous check to fail but not abort
         if: always()
-        run: ./test/ci-phplint
+        run: ./tests/ci-phplint
 
       - name: Check coding-standard
         # Allow the previous check to fail but not abort
@@ -65,10 +64,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ["8.1"]
+        php-version: ["8.2"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -77,9 +76,7 @@ jobs:
           extensions: mbstring, iconv, mysqli, zip, gd, bz2
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: highest
+        uses: ramsey/composer-install@v3
 
       - name: Analyse files with PHPStan
         run: composer phpstan -- --memory-limit 2G

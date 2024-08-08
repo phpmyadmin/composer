@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="row">
+    <ul id="user_prefs_tabs" class="nav nav-pills m-2">
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/manage') }}" class="nav-link{{ route == '/preferences/manage' ? ' active' }} disableAjax">
+          {{ t('Manage your settings') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/two-factor') }}" class="nav-link{{ route == '/preferences/two-factor' ? ' active' }} disableAjax">
+          {{ t('Two-factor authentication') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/features') }}" class="nav-link{{ route == '/preferences/features' ? ' active' }} disableAjax">
+          {{ get_icon('b_tblops', t('Features'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/sql') }}" class="nav-link{{ route == '/preferences/sql' ? ' active' }} disableAjax">
+          {{ get_icon('b_sql', t('SQL queries'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/navigation') }}" class="nav-link{{ route == '/preferences/navigation' ? ' active' }} disableAjax">
+          {{ get_icon('b_select', t('Navigation panel'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/main-panel') }}" class="nav-link{{ route == '/preferences/main-panel' ? ' active' }} disableAjax">
+          {{ get_icon('b_props', t('Main panel'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/export') }}" class="nav-link{{ route == '/preferences/export' ? ' active' }} disableAjax">
+          {{ get_icon('b_export', t('Export'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+
+      <li class="nav-item my-1">
+        <a href="{{ url('/preferences/import') }}" class="nav-link{{ route == '/preferences/import' ? ' active' }} disableAjax">
+          {{ get_icon('b_import', t('Import'), false, false, 'TabsMode') }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  {% if is_saved %}
+    {{ t('Configuration has been saved.')|raw_success }}
+  {% endif %}
+
+  {% if not has_config_storage %}
+    {% apply format('<a href="' ~ get_docu_link('setup', 'linked-tables') ~ '" target="_blank" rel="noopener noreferrer">', '</a>')|notice %}
+      {{ t('Your preferences will be saved for current session only. Storing them permanently requires %sphpMyAdmin configuration storage%s.') }}
+    {% endapply %}
+  {% endif %}

@@ -16,27 +16,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.7'
+        uses: actions/checkout@v4
 
       - name: Install Sphinx for the documentation build
-        run: pip install 'Sphinx'
+        run: sudo apt install sphinx-doc python3-sphinx
 
       - name: Build the documentation
-        run: make -C doc html SPHINXOPTS='-n -W -a'
+        run: make -C docs html SPHINXOPTS='-n -W -a'
 
   build-release:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ["8.1"]
+        php-version: ["8.2"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install gettext
         run: sudo apt-get install -y gettext
@@ -49,18 +44,16 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          dependency-versions: highest
+        uses: ramsey/composer-install@v3
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.7'
 
@@ -68,4 +61,4 @@ jobs:
         run: pip install 'Sphinx'
 
       - name: Build the release
-        run: ./scripts/create-release.sh --ci
+        run: ./bin/internal/create-release.sh --ci

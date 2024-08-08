@@ -1,0 +1,25 @@
+{% if recent is not empty or favorite is not empty %}
+  <div class="row g-1 my-3 mx-1" id="recentFavoriteTablesWrapper">
+    {% if recent is not empty %}
+      <div class="col-auto dropdown">
+        <button title="{{ t('Recently visited tables') }}" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{- t('Recent') -}}
+        </button>
+        <ul class="dropdown-menu" id="recentTableList">
+          {{ recent|raw }}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if favorite is not empty %}
+      <div class="col-auto dropdown">
+        <button title="{{ t('Favorite tables') }}" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{- t('Favorites') -}}
+        </button>
+        <ul class="dropdown-menu" id="favoriteTableList">
+          {{ favorite|raw }}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
