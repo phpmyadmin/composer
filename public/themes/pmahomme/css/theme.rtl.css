@@ -14407,6 +14407,10 @@ textarea {
   text-shadow: 0 1px 0 #fff;
   vertical-align: middle;
 }
+.table th > span:empty::before,
+.table td > span:empty::before {
+  content: "​";
+}
 .table th {
   color: #000;
 }

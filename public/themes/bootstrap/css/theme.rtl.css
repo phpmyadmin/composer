@@ -15021,6 +15021,11 @@ body {
   text-align: right;
 }
 
+.table th > span:empty::before,
+.table td > span:empty::before {
+  content: "​";
+}
+
 @media only screen and (width >= 768px) {
   .table th.position-sticky {
     top: 96px;

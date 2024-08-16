@@ -14288,6 +14288,10 @@ textarea {
 .table th {
   background-color: #d3dce3;
 }
+.table th > span:empty::before,
+.table td > span:empty::before {
+  content: "​";
+}
 .table thead th {
   border-bottom: 0;
 }
