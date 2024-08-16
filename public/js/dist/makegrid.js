@@ -1424,7 +1424,7 @@ const makeGrid = function (t) {
           isValueUpdated = thisFieldParams[fieldName] !== (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getCellValue)(g.currentEditCell);
         } else {
           const JSONString = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.stringifyJSON)(thisFieldParams[fieldName]);
-          isValueUpdated = JSONString !== JSON.stringify(JSON.parse((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getCellValue)(g.currentEditCell)));
+          isValueUpdated = JSONString !== (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.stringifyJSON)((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getCellValue)(g.currentEditCell));
         }
         if (g.wasEditedCellNull || isValueUpdated) {
           needToPost = true;
