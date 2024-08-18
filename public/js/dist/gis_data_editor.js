@@ -30,8 +30,8 @@ function disposeGISEditorVisualization() {
 /**
  * Initialize the visualization in the GIS data editor.
  */
-function initGISEditorVisualization() {
-  visualizationController = new window.GisVisualizationController();
+function initGISEditorVisualization(olData) {
+  visualizationController = new window.GisVisualizationController(olData);
 }
 function withIndex(prefix) {
   let result = prefix;
@@ -188,7 +188,7 @@ function loadGISEditor(value, field, type, inputName) {
     disposeGISEditorVisualization();
     $gisEditorModal.find('.modal-title').first().html(data.gis_editor_title);
     $gisEditorModal.find('.modal-body').first().html(data.gis_editor);
-    initGISEditorVisualization();
+    initGISEditorVisualization(JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder').attr('data-ol-data')));
     const gisData = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gis_data').data('gisData');
     if (gisData) {
       let html;
@@ -241,8 +241,7 @@ function onCoordinateEdit(data) {
   disposeGISEditorVisualization();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder > .visualization-target-svg').html(data.visualization);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gis_data_textarea').val(data.result);
-  initGISEditorVisualization();
-  visualizationController.setOpenLayersData(data.openLayersData);
+  initGISEditorVisualization(data.openLayersData);
 }
 /**
  * Handles adding data points

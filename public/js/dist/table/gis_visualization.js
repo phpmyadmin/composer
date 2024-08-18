@@ -15,7 +15,6 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 
 
 
-let openLayersData = null;
 /**
  * @fileoverview    functions used for visualizing GIS data
  *
@@ -262,18 +261,49 @@ class OlVisualization extends GisVisualization {
   /**
    * @param {function(HTMLElement): ol.Map} initFn
    */
-  constructor(target, initFn) {
+  constructor(target, data) {
     super(target);
     _defineProperty(this, "olMap", undefined);
-    this.initFn = initFn;
+    this.data = data;
+  }
+  drawOpenLayers() {
+    if (typeof window.ol === 'undefined') {
+      return undefined;
+    }
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('head').append('<link rel="stylesheet" type="text/css" href="js/vendor/openlayers/theme/ol.css">');
+    const vectorSource = new window.ol.source.Vector({
+      features: getFeaturesFromOpenLayersData(this.data)
+    });
+    const map = new window.ol.Map({
+      target: this.target,
+      layers: [new window.ol.layer.Tile({
+        source: new window.ol.source.OSM()
+      }), new window.ol.layer.Vector({
+        source: vectorSource
+      })],
+      view: new window.ol.View({
+        center: [0, 0],
+        zoom: 4
+      }),
+      controls: [new window.ol.control.MousePosition({
+        coordinateFormat: window.ol.coordinate.createStringXY(4),
+        projection: 'EPSG:4326'
+      }), new window.ol.control.Zoom(), new window.ol.control.Attribution()]
+    });
+    const extent = vectorSource.getExtent();
+    if (!window.ol.extent.isEmpty(extent)) {
+      map.getView().fit(extent, {
+        padding: [20, 20, 20, 20]
+      });
+    }
+    return map;
   }
   show() {
     super.show();
     if (this.olMap) {
       this.olMap.updateSize();
     } else {
-      const initFn = this.initFn;
-      this.olMap = initFn(this.target);
+      this.olMap = this.drawOpenLayers();
     }
   }
   dispose() {
@@ -337,47 +367,12 @@ function getFeaturesFromOpenLayersData(geometries) {
   }
   return features;
 }
-function drawOpenLayers(target) {
-  var _openLayersData;
-  if (typeof window.ol === 'undefined') {
-    return undefined;
-  }
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('head').append('<link rel="stylesheet" type="text/css" href="js/vendor/openlayers/theme/ol.css">');
-  const vectorSource = new window.ol.source.Vector({});
-  const map = new window.ol.Map({
-    target: target,
-    layers: [new window.ol.layer.Tile({
-      source: new window.ol.source.OSM()
-    }), new window.ol.layer.Vector({
-      source: vectorSource
-    })],
-    view: new window.ol.View({
-      center: [0, 0],
-      zoom: 4
-    }),
-    controls: [new window.ol.control.MousePosition({
-      coordinateFormat: window.ol.coordinate.createStringXY(4),
-      projection: 'EPSG:4326'
-    }), new window.ol.control.Zoom(), new window.ol.control.Attribution()]
-  });
-  openLayersData = (_openLayersData = openLayersData) !== null && _openLayersData !== void 0 ? _openLayersData : JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder').attr('data-ol-data'));
-  const features = getFeaturesFromOpenLayersData(openLayersData);
-  for (const feature of features) {
-    vectorSource.addFeature(feature);
-  }
-  const extent = vectorSource.getExtent();
-  if (!window.ol.extent.isEmpty(extent)) {
-    map.getView().fit(extent, {
-      padding: [20, 20, 20, 20]
-    });
-  }
-  return map;
-}
 class GisVisualizationController {
-  constructor() {
+  constructor(olData) {
     _defineProperty(this, "svgVis", undefined);
     _defineProperty(this, "olVis", undefined);
     this.boundOnChoiceChange = this.onChoiceChange.bind(this);
+    this.olData = olData;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#useOsmAsBaseLayerSwitch', this.boundOnChoiceChange);
     if (typeof window.ol === 'undefined') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#useOsmAsBaseLayerSwitch, #useOsmAsBaseLayerSwitchLabel').hide();
@@ -400,7 +395,7 @@ class GisVisualizationController {
     let newVis;
     if (showOl) {
       if (!this.olVis) {
-        this.olVis = new OlVisualization(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder > .visualization-target-ol').get(0), drawOpenLayers);
+        this.olVis = new OlVisualization(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder > .visualization-target-ol').get(0), this.olData);
       }
       newVis = this.olVis;
     } else {
@@ -423,9 +418,6 @@ class GisVisualizationController {
       this.olVis.dispose();
     }
   }
-  setOpenLayersData(olData) {
-    openLayersData = olData;
-  }
 }
 window.GisVisualizationController = GisVisualizationController;
 let visualizationController;
@@ -447,7 +439,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/gis_v
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/gis_visualization.js', function () {
   // If we are in GIS visualization, initialize it
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#gis_div').length > 0) {
-    visualizationController = new GisVisualizationController();
+    visualizationController = new GisVisualizationController(JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#visualization-placeholder').attr('data-ol-data')));
   }
 });
 
