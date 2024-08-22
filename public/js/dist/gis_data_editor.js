@@ -50,10 +50,10 @@ function makeCoordinateInputs(prefix, data) {
   return '<div class="col"><label class="input-group input-group-sm"><span class="input-group-text">' + window.Messages.strX + '</span><input class="form-control" type="text" name="' + prefix + '[x]" value="' + (data ? data.x : '') + '">' + '</label></div>' + '<div class="col"><label class="input-group input-group-sm"><span class="input-group-text">' + window.Messages.strY + '</span><input class="form-control" type="text" name="' + prefix + '[y]" value="' + (data ? data.y : '') + '">' + '</label></div>';
 }
 function makePointNInputs(prefix, index, data) {
-  return '<div class="gis-coordinates row gx-2 align-items-center mb-2"><div class="col-2">' + window.Messages.strPoint + ' ' + (index + 1) + ':</div>' + makeCoordinateInputs(withIndex(prefix, index), data) + '</div>';
+  return '<div class="gis-coordinates row gx-2 align-items-center mb-2"><div class="col-3">' + window.Messages.strPoint + ' ' + (index + 1) + ':</div>' + makeCoordinateInputs(withIndex(prefix, index), data) + '</div>';
 }
 function makePointInputs(prefix, data) {
-  return '<div class="gis-coordinates-list card-body">' + '<div class="gis-coordinates row gx-2 align-items-center"><div class="col-2">' + window.Messages.strPoint + ':</div>' + makeCoordinateInputs(prefix, data) + '</div>' + '</div>';
+  return '<div class="gis-coordinates-list card-body">' + '<div class="gis-coordinates row gx-2 align-items-center"><div class="col-3">' + window.Messages.strPoint + ':</div>' + makeCoordinateInputs(prefix, data) + '</div>' + '</div>';
 }
 function makeMultiPointInputs(prefix, data) {
   const d = data || [];
