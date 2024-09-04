@@ -4791,7 +4791,7 @@ function onloadIdleEvent() {
             /* There is other active window, let's reset counter */
             idleSecondsCounter = 0;
           }
-          var remaining = Math.min( /* Remaining login validity */
+          var remaining = Math.min(/* Remaining login validity */
           _common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('LoginCookieValidity') - idleSecondsCounter, /* Remaining time till session GC */
           _common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('session_gc_maxlifetime'));
           var interval = 1000;
@@ -7672,7 +7672,7 @@ function addColumnToIndex(sourceArray, arrayIndex, indexChoice, colIndex) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(columns, function () {
       columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="field_name[' + this.col_index + ']"]').val());
     });
-    displayName = '[' + columnNames.join(', ') + ']';
+    displayName = '[' + columnNames.join(', ').trimRight() + ']';
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(columns, function () {
     var id = 'index_name_' + this.col_index + '_8';
