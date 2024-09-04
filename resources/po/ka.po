@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2024-08-25 00:22+0000\n"
-"PO-Revision-Date: 2024-04-18 08:29+0000\n"
+"POT-Creation-Date: 2024-09-01 00:25+0000\n"
+"PO-Revision-Date: 2024-09-01 16:52+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/ka/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -1363,7 +1363,7 @@ msgstr "შექმნა"
 
 #: resources/templates/database/data_dictionary/index.twig:4
 msgid "Database comment:"
-msgstr "ბაზის კომენტარი:"
+msgstr "მონაცემთა ბაზის კომენტარი:"
 
 #: resources/templates/database/data_dictionary/index.twig:8
 #: resources/templates/database/data_dictionary/index.twig:124
@@ -1444,7 +1444,7 @@ msgstr "იხილეთ ცხრილის სტრუქტურა"
 #: resources/templates/database/designer/database_tables.twig:93
 #, php-format
 msgid "Select \"%s\""
-msgstr "აირჩიეთ \"%s\""
+msgstr "მონიშნეთ \"%s\""
 
 #: resources/templates/database/designer/database_tables.twig:111
 #, php-format
@@ -2464,12 +2464,10 @@ msgid "Browse"
 msgstr "არჩევა"
 
 #: resources/templates/database/search/results.twig:43
-#, fuzzy, php-format
-#| msgid "<strong>Total:</strong> <em>%count%</em> match"
-#| msgid_plural "<strong>Total:</strong> <em>%count%</em> matches"
+#, php-format
 msgid "<strong>Total:</strong> <em>%s</em> match"
 msgid_plural "<strong>Total:</strong> <em>%s</em> matches"
-msgstr[0] "<strong>სულ:</strong><em>%count%</em> დამთხვევა"
+msgstr[0] "<strong>სულ:</strong><em>%s</em> დამთხვევა"
 
 #: resources/templates/database/structure/add_prefix.twig:4
 msgid "Add prefix"
@@ -3306,10 +3304,8 @@ msgid "Containing the word:"
 msgstr "შეიცავს სიტყვას:"
 
 #: resources/templates/gis_data_editor_form.twig:26
-#, fuzzy
-#| msgid "Geometry %d:"
 msgid "Geometry type:"
-msgstr "გეომეტრია %d:"
+msgstr "გეომეტრიის ტიპი:"
 
 #: resources/templates/gis_data_editor_form.twig:41
 msgid "Spatial Reference System Identifier"
@@ -5404,11 +5400,11 @@ msgstr "პრობლემა:"
 
 #: resources/templates/server/status/advisor/index.twig:71
 msgid "Recommendation:"
-msgstr "რეკომენდაციები:"
+msgstr "რეკომენდაცია:"
 
 #: resources/templates/server/status/advisor/index.twig:74
 msgid "Justification:"
-msgstr "დამტკიცება:"
+msgstr "ახსნა:"
 
 #: resources/templates/server/status/advisor/index.twig:77
 msgid "Used variable / formula:"
@@ -5476,16 +5472,14 @@ msgstr "განახლების სიხშირე"
 
 #: resources/templates/server/status/monitor/index.twig:28
 #: resources/templates/server/status/processes/index.twig:39
-#, fuzzy, php-format
-#| msgid "%d second"
+#, php-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d წამი"
 
 #: resources/templates/server/status/monitor/index.twig:30
 #: resources/templates/server/status/processes/index.twig:41
-#, fuzzy, php-format
-#| msgid "%d minute"
+#, php-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d წუთი"
@@ -5676,24 +5670,21 @@ msgstr "კითხვები გაშვების შემდეგ:"
 
 #. l10n: Average per hour
 #: resources/templates/server/status/queries/index.twig:15
-#, fuzzy, php-format
-#| msgid "ø per hour"
+#, php-format
 msgid "ø per hour: %s"
-msgstr "ø საათში"
+msgstr "ø საათში: %s"
 
 #. l10n: Average per minute
 #: resources/templates/server/status/queries/index.twig:16
-#, fuzzy, php-format
-#| msgid "per minute:"
+#, php-format
 msgid "ø per minute: %s"
-msgstr "წუთში:"
+msgstr "ø წუთში: %s"
 
 #. l10n: Average per second
 #: resources/templates/server/status/queries/index.twig:18
-#, fuzzy, php-format
-#| msgid "per second:"
+#, php-format
 msgid "ø per second: %s"
-msgstr "წამში:"
+msgstr "ø წამში: %s"
 
 #: resources/templates/server/status/queries/index.twig:32
 msgid "Statements"
@@ -6094,7 +6085,7 @@ msgstr ""
 
 #: resources/templates/sql/query.twig:162
 msgid "Bookmark:"
-msgstr "სანიშნი:"
+msgstr "სანიშნე:"
 
 #: resources/templates/sql/query.twig:171
 msgid "shared"
@@ -8776,6 +8767,9 @@ msgid ""
 "features, see [doc@linked-tables]phpMyAdmin configuration storage[/doc] in "
 "documentation."
 msgstr ""
+"მოირგეთ phpMyAdmin-ი კონფიგურაციის საცავი დამატებით ფუნქციებთან წვდომისთვის. "
+"იხილეთ [doc@linked-tables]phpMyAdmin-ის კონფიგურაციის საცავი[/doc] "
+"დოკუმენტაციაში."
 
 #: src/Config/Descriptions.php:193
 msgid ""
@@ -8843,7 +8837,7 @@ msgstr ""
 
 #: src/Config/Descriptions.php:214
 msgid "Authentication settings."
-msgstr "ავთენტიფიკაციის პარამეტრები."
+msgstr "ავთენტიფიკაციის მორგება."
 
 #: src/Config/Descriptions.php:215
 msgid "Enter server connection parameters."
@@ -9079,6 +9073,9 @@ msgid ""
 "storage). If disabled, this utilizes JS-routines to display query history "
 "(lost by window close)."
 msgstr ""
+"ჩართეთ, თუ გნებავთ ბაზაზე-დაყრდნობილი მოთხოვნების ისტორია იქონიოთ (სჭირდება "
+"phpMyAdmin-ის კონფიგურაციის საცავი). თუ გათიშულია, ეს მოთხოვნების ისტორიის "
+"საჩვენებლად JS-ს იყენებს (დაიკარგება ფანჯრის დახურვისას)."
 
 #: src/Config/Descriptions.php:331
 msgid "Allow users to create bookmarks that are available for all other users"
@@ -9095,6 +9092,8 @@ msgid ""
 "Leave blank for no [doc@bookmarks@]bookmark[/doc] support, suggested: "
 "[kbd]pma__bookmark[/kbd]"
 msgstr ""
+"დატოვეთ ცარიელი, რომ [doc@bookmarks@]სანიშნეების[/doc] მხარდაჭერის გარეშე "
+"იმუშაოთ. გირჩევთ: [kbd]pma__bookmark[/kbd]"
 
 #: src/Config/Descriptions.php:339
 msgid ""
@@ -9890,7 +9889,7 @@ msgstr "ხაზები მთავრდება"
 
 #: src/Config/Descriptions.php:648
 msgid "Excel edition"
-msgstr ""
+msgstr "Excel-ის ვერსია"
 
 #: src/Config/Descriptions.php:651
 msgid "Database name template"
@@ -10869,7 +10868,7 @@ msgstr ""
 #: src/Config/FormDisplay.php:820
 #, php-format
 msgid "maximum %s"
-msgstr "მაქსიმუმ %s"
+msgstr "მაქსიმალური %s"
 
 #: src/Config/Forms/Setup/ServersForm.php:26
 msgid "Config authentication"
@@ -11850,7 +11849,7 @@ msgstr "კომპოზიტური ინდექსის შექმ�
 
 #: src/Controllers/JavaScriptMessagesController.php:124
 msgid "Composite with:"
-msgstr "შედგენადია:"
+msgstr "აწყობილია:"
 
 #: src/Controllers/JavaScriptMessagesController.php:125
 msgid "Please select column(s) for the index."
@@ -12464,10 +12463,8 @@ msgid "Show query box"
 msgstr "ძებნის ფანჯრის ჩვენება"
 
 #: src/Controllers/JavaScriptMessagesController.php:402
-#, fuzzy
-#| msgid "Submit query"
 msgid "Edit query"
-msgstr "მოთხოვნის გაგზავნა"
+msgstr "მოთხოვნის ჩასწორება"
 
 #: src/Controllers/JavaScriptMessagesController.php:404
 #, php-format
@@ -15026,10 +15023,8 @@ msgid "Report"
 msgstr "ანგარიში"
 
 #: src/Exceptions/AuthenticationFailure.php:35
-#, fuzzy
-#| msgid "Cannot log in to the MySQL server"
 msgid "Cannot log in to the database server."
-msgstr "MySQL სერვერზე შესვლა შეუძლებელია"
+msgstr "MySQL სერვერზე შესვლა შეუძლებელია."
 
 #: src/Exceptions/AuthenticationFailure.php:43
 #: src/Exceptions/AuthenticationFailure.php:51
@@ -15843,10 +15838,9 @@ msgid "Wrong username/password. Access denied."
 msgstr ""
 
 #: src/Plugins/Auth/AuthenticationSignon.php:128
-#, fuzzy, php-format
-#| msgid "Can not find signon authentication script:"
+#, php-format
 msgid "Can not find signon authentication script: %s"
-msgstr "შესვლის ავთენტიკაციის სკრიპტი ვერ ვიპოვე:"
+msgstr "შესვლის ავთენტიკაციის სკრიპტი ვერ ვიპოვე: %s"
 
 #: src/Plugins/AuthenticationPluginFactory.php:31
 msgid "Invalid authentication method set in configuration:"
@@ -15961,7 +15955,7 @@ msgstr "ცხრილის წარწერა (გაგრძელებ
 #: src/Plugins/Export/ExportLatex.php:123
 #: src/Plugins/Export/ExportLatex.php:179
 msgid "Label key:"
-msgstr "ჭდის გასაღები:"
+msgstr "ჭდის იდენტიფიკატორი:"
 
 #: src/Plugins/Export/ExportLatex.php:131 src/Plugins/Export/ExportOdt.php:93
 #: src/Plugins/Export/ExportSql.php:158
@@ -15984,7 +15978,7 @@ msgstr "პირველ მწკრივში სვეტის სახ
 #: src/Plugins/Export/ExportLatex.php:213 src/Plugins/Export/ExportSql.php:723
 #: src/Plugins/Export/ExportXml.php:203
 msgid "Generation Time:"
-msgstr "გენერირების დრო:"
+msgstr "გენერაციის დრო:"
 
 #: src/Plugins/Export/ExportLatex.php:216 src/Plugins/Export/ExportSql.php:729
 #: src/Plugins/Export/ExportXml.php:206
@@ -16054,7 +16048,7 @@ msgstr "მეტამონაცემების გატანა"
 
 #: src/Plugins/Export/ExportSql.php:241
 msgid "Add statements:"
-msgstr "გამოსახულებების დამატება:"
+msgstr "პროცედურები დამატება:"
 
 #: src/Plugins/Export/ExportSql.php:249 src/Plugins/Export/ExportSql.php:258
 #: src/Plugins/Export/ExportSql.php:275 src/Plugins/Export/ExportSql.php:284
@@ -17091,7 +17085,7 @@ msgstr "სამიზნე ბაზა `%s` აღმოჩენილი �
 
 #: src/Table/Table.php:809
 msgid "Invalid database:"
-msgstr "არასწორი ბაზა:"
+msgstr "არასწორი მონაცემთა ბაზა:"
 
 #: src/Table/Table.php:827
 msgid "Invalid table name:"

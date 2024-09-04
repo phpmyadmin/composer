@@ -5351,18 +5351,8 @@ parameters:
 			path: src/Controllers/View/CreateController.php
 
 		-
-			message: "#^Binary operation \"\\*\" between string and 1024\\|1048576\\|1073741824\\|1099511627776 results in an error\\.$#"
-			count: 1
-			path: src/Core.php
-
-		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 8
-			path: src/Core.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
 			path: src/Core.php
 
 		-
@@ -5467,7 +5457,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$identifier of static method PhpMyAdmin\\\\Util\\:\\:backquote\\(\\) expects string\\|Stringable\\|null, mixed given\\.$#"
-			count: 4
+			count: 3
 			path: src/CreateAddField.php
 
 		-
@@ -5491,8 +5481,8 @@ parameters:
 			path: src/CreateAddField.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function trim expects string, mixed given\\.$#"
-			count: 1
+			message: "#^Parameter \\#1 \\$string of function rtrim expects string, mixed given\\.$#"
+			count: 2
 			path: src/CreateAddField.php
 
 		-
@@ -6822,7 +6812,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$path of static method PhpMyAdmin\\\\Error\\\\Error\\:\\:relPath\\(\\) expects string, mixed given\\.$#"
-			count: 3
+			count: 2
 			path: src/Error/Error.php
 
 		-
@@ -7641,6 +7631,21 @@ parameters:
 			path: src/Git.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: non\\-empty\\-string, 3\\?\\: numeric\\-string, 4\\?\\: non\\-falsy\\-string\\}\\.$#"
+			count: 1
+			path: src/Git.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: non\\-empty\\-string, 3\\?\\: numeric\\-string, 4\\?\\: non\\-falsy\\-string\\}\\.$#"
+			count: 1
+			path: src/Git.php
+
+		-
+			message: "#^Offset 3 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: non\\-empty\\-string, 3\\?\\: numeric\\-string, 4\\?\\: non\\-falsy\\-string\\}\\.$#"
+			count: 1
+			path: src/Git.php
+
+		-
 			message: "#^Only booleans are allowed in an if condition, string\\|false given\\.$#"
 			count: 1
 			path: src/Git.php
@@ -8181,6 +8186,11 @@ parameters:
 			path: src/InsertEdit.php
 
 		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string, 3\\?\\: numeric\\-string\\}\\.$#"
+			count: 1
+			path: src/InsertEdit.php
+
+		-
 			message: "#^Only booleans are allowed in &&, PhpMyAdmin\\\\Dbal\\\\ResultInterface\\|false given on the left side\\.$#"
 			count: 1
 			path: src/InsertEdit.php
@@ -8349,11 +8359,6 @@ parameters:
 			message: "#^Property PhpMyAdmin\\\\InsertEditColumn\\:\\:\\$trueType \\(string\\) does not accept string\\|null\\.$#"
 			count: 1
 			path: src/InsertEditColumn.php
-
-		-
-			message: "#^Binary operation \"\\-\" between string and 1 results in an error\\.$#"
-			count: 1
-			path: src/IpAllowDeny.php
 
 		-
 			message: "#^Parameter \\#2 \\$ipToTest of method PhpMyAdmin\\\\IpAllowDeny\\:\\:ipMaskTest\\(\\) expects string, string\\|true given\\.$#"
@@ -12401,6 +12406,11 @@ parameters:
 			path: src/Server/Status/Monitor.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string\\}\\.$#"
+			count: 1
+			path: src/Server/Status/Monitor.php
+
+		-
 			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
 			count: 4
 			path: src/Server/Status/Monitor.php
@@ -13886,6 +13896,11 @@ parameters:
 			path: src/Util.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/Util.php
+
+		-
 			message: "#^Offset int\\<1, 6\\> on array\\{string, string, string, string, string, string, string\\} in isset\\(\\) always exists and is not nullable\\.$#"
 			count: 1
 			path: src/Util.php
@@ -13996,6 +14011,11 @@ parameters:
 			path: src/Utils/HttpRequest.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: numeric\\-string\\}\\.$#"
+			count: 1
+			path: src/Utils/HttpRequest.php
+
+		-
 			message: "#^Only booleans are allowed in an if condition, string\\|false given\\.$#"
 			count: 1
 			path: src/Utils/HttpRequest.php
@@ -14049,6 +14069,46 @@ parameters:
 			message: "#^Match arm is unreachable because previous comparison is always true\\.$#"
 			count: 1
 			path: src/WebAuthn/CBORDecoder.php
+
+		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with Webauthn\\\\PublicKeyCredentialCreationOptions and 'Webauthn\\\\\\\\PublicKeyCredentialCreationOptions' will always evaluate to true\\.$#"
+			count: 1
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with Webauthn\\\\PublicKeyCredentialRequestOptions and 'Webauthn\\\\\\\\PublicKeyCredentialRequestOptions' will always evaluate to true\\.$#"
+			count: 1
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Cannot access offset 'authenticatorData' on mixed\\.$#"
+			count: 2
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Cannot access offset 'clientDataJSON' on mixed\\.$#"
+			count: 4
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Cannot access offset 'response' on mixed\\.$#"
+			count: 6
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Parameter \\#1 \\$haystack of function str_ends_with expects string, mixed given\\.$#"
+			count: 1
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function rtrim expects string, mixed given\\.$#"
+			count: 1
+			path: src/WebAuthn/WebauthnLibServer.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function sodium_base642bin expects string, mixed given\\.$#"
+			count: 3
+			path: src/WebAuthn/WebauthnLibServer.php
 
 		-
 			message: "#^Method PhpMyAdmin\\\\ZipExtension\\:\\:getContents\\(\\) should return array\\{error\\: string, data\\: string\\} but returns array\\{error\\: '', data\\: string\\|false\\}\\.$#"
@@ -14376,6 +14436,11 @@ parameters:
 			path: tests/unit/Config/FormDisplayTest.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: numeric\\-string\\}\\.$#"
+			count: 1
+			path: tests/unit/Config/FormTest.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'PhpMyAdmin\\\\\\\\Config\\\\\\\\Forms\\\\\\\\BaseFormList' and PhpMyAdmin\\\\Config\\\\Forms\\\\BaseFormList will always evaluate to true\\.$#"
 			count: 1
 			path: tests/unit/Config/Forms/FormListTest.php
@@ -14541,7 +14606,7 @@ parameters:
 			path: tests/unit/ConfigTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$haystack of function str_contains expects string, array\\<string\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$haystack of function str_contains expects string, array\\<int, string\\> given\\.$#"
 			count: 1
 			path: tests/unit/ConfigTest.php
 
@@ -15714,4 +15779,39 @@ parameters:
 			message: "#^Call to function base64_decode\\(\\) requires parameter \\#2 to be set\\.$#"
 			count: 1
 			path: tests/unit/WebAuthn/CBORDecoderTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'attestation' and array\\{challenge\\: non\\-falsy\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: non\\-empty\\-array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/CustomServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'challenge' and array\\{challenge\\: non\\-empty\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/CustomServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'pubKeyCredParams' and array\\{challenge\\: non\\-falsy\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/CustomServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with null will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/CustomServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'attestation' and array\\{challenge\\: non\\-falsy\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: non\\-empty\\-array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/WebauthnLibServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'challenge' and array\\{challenge\\: non\\-empty\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/WebauthnLibServerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'pubKeyCredParams' and array\\{challenge\\: non\\-falsy\\-string, rp\\: array\\{name\\: string, id\\: string\\}, user\\: array\\{id\\: string, name\\: string, displayName\\: string\\}, pubKeyCredParams\\: array\\<int, array\\{alg\\: int, type\\: 'public\\-key'\\}\\>, authenticatorSelection\\: array\\<string, string\\>, timeout\\: int\\<1, max\\>, attestation\\: non\\-empty\\-string\\} will always evaluate to true\\.$#"
+			count: 1
+			path: tests/unit/WebAuthn/WebauthnLibServerTest.php
 
