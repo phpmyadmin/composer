@@ -369,17 +369,32 @@ class Relation
      * @param string $db     the name of the db to check for
      * @param string $table  the name of the table to check for
      * @param string $column the name of the column to check for
-     * @param string $source the source for foreign key information
-     * @psalm-param 'both'|'internal'|'foreign' $source
      *
      * @return array<array<mixed>>
      */
-    public function getForeigners(string $db, string $table, string $column = '', string $source = 'both'): array
+    public function getForeigners(string $db, string $table, string $column = ''): array
+    {
+        $foreign = $this->getForeignersInternal($db, $table, $column);
+
+        if ($table !== '') {
+            $foreign['foreign_keys_data'] = $this->getForeignKeysData($db, $table);
+        }
+
+        return $foreign;
+    }
+
+    /**
+     * Gets all Relations to foreign tables for a given table or
+     * optionally a given column in a table
+     *
+     * @return array<array<mixed>>
+     */
+    public function getForeignersInternal(string $db, string $table, string $column = ''): array
     {
         $relationFeature = $this->getRelationParameters()->relationFeature;
         $foreign = [];
 
-        if ($relationFeature !== null && ($source === 'both' || $source === 'internal')) {
+        if ($relationFeature !== null) {
             $relQuery = 'SELECT `master_field`, `foreign_db`, '
                 . '`foreign_table`, `foreign_field`'
                 . ' FROM ' . Util::backquote($relationFeature->database)
@@ -394,17 +409,10 @@ class Relation
             $foreign = $this->dbi->fetchResult($relQuery, 'master_field', null, ConnectionType::ControlUser);
         }
 
-        if (($source === 'both' || $source === 'foreign') && $table !== '') {
-            $foreign['foreign_keys_data'] = $this->getForeignKeysData($table, $db);
-        }
-
         /**
          * Emulating relations for some information_schema tables
          */
-        if (
-            in_array(strtolower($db), ['information_schema', 'mysql'], true)
-            && ($source === 'internal' || $source === 'both')
-        ) {
+        if (in_array(strtolower($db), ['information_schema', 'mysql'], true)) {
             $internalRelations = strtolower($db) === 'information_schema'
                 ? InternalRelations::INFORMATION_SCHEMA
                 : InternalRelations::MYSQL;
@@ -427,8 +435,12 @@ class Relation
     }
 
     /** @return list<ForeignKey> */
-    private function getForeignKeysData(string $table, string $db): array
+    public function getForeignKeysData(string $db, string $table): array
     {
+        if ($table === '') {
+            return [];
+        }
+
         $tableObj = new Table($table, $db, $this->dbi);
         $showCreateTable = $tableObj->showCreate();
         if ($showCreateTable !== '') {
@@ -887,17 +899,17 @@ class Relation
     /**
      * Gets foreign keys in preparation for a drop-down selector
      *
-     * @param mixed[]|bool $foreigners    array of the foreign keys
-     * @param string       $field         the foreign field name
-     * @param bool         $overrideTotal whether to override the total
-     * @param string       $foreignFilter a possible filter
-     * @param string       $foreignLimit  a possible LIMIT clause
-     * @param bool         $getTotal      optional, whether to get total num of rows
-     *                                    in $foreignData['the_total;]
-     *                                    (has an effect of performance)
+     * @param mixed[] $foreigners    array of the foreign keys
+     * @param string  $field         the foreign field name
+     * @param bool    $overrideTotal whether to override the total
+     * @param string  $foreignFilter a possible filter
+     * @param string  $foreignLimit  a possible LIMIT clause
+     * @param bool    $getTotal      optional, whether to get total num of rows
+     *                               in $foreignData['the_total;]
+     *                               (has an effect of performance)
      */
     public function getForeignData(
-        array|bool $foreigners,
+        array $foreigners,
         string $field,
         bool $overrideTotal,
         string $foreignFilter,
@@ -909,7 +921,7 @@ class Relation
         $foreignLink = false;
         $dispRow = $foreignDisplay = $theTotal = $foreignField = null;
         do {
-            if ($foreigners === false || $foreigners === []) {
+            if ($foreigners === []) {
                 break;
             }
 
@@ -1247,7 +1259,7 @@ class Relation
      * @param string $table  name of master table.
      * @param string $column name of master table column.
      *
-     * @return mixed[]
+     * @return array<list<mixed[]>>
      */
     public function getChildReferences(string $db, string $table, string $column = ''): array
     {
@@ -1276,11 +1288,11 @@ class Relation
     /**
      * Check child table references and foreign key for a table column.
      *
-     * @param string       $db                  name of master table db.
-     * @param string       $table               name of master table.
-     * @param string       $column              name of master table column.
-     * @param mixed[]|null $foreignersFull      foreigners array for the whole table.
-     * @param mixed[]|null $childReferencesFull child references for the whole table.
+     * @param string                    $db                  name of master table db.
+     * @param string                    $table               name of master table.
+     * @param string                    $column              name of master table column.
+     * @param list<ForeignKey>|null     $foreignersFull      foreigners array for the whole table.
+     * @param array<list<mixed[]>>|null $childReferencesFull child references for the whole table.
      *
      * @return array<string, mixed> telling about references if foreign key.
      * @psalm-return array{isEditable: bool, isForeignKey: bool, isReferenced: bool, references: string[]}
@@ -1294,20 +1306,9 @@ class Relation
     ): array {
         $columnStatus = ['isEditable' => true, 'isReferenced' => false, 'isForeignKey' => false, 'references' => []];
 
-        $foreigners = [];
-        if ($foreignersFull !== null) {
-            if (isset($foreignersFull[$column])) {
-                $foreigners[$column] = $foreignersFull[$column];
-            }
+        $foreigners = $foreignersFull ?? $this->getForeignKeysData($db, $table);
 
-            if (isset($foreignersFull['foreign_keys_data'])) {
-                $foreigners['foreign_keys_data'] = $foreignersFull['foreign_keys_data'];
-            }
-        } else {
-            $foreigners = $this->getForeigners($db, $table, $column, 'foreign');
-        }
-
-        $foreigner = $this->searchColumnInForeigners($foreigners, $column);
+        $foreigner = $this->getColumnFromForeignKeysData($foreigners, $column);
 
         $childReferences = [];
         if ($childReferencesFull !== null) {
@@ -1318,9 +1319,9 @@ class Relation
             $childReferences = $this->getChildReferences($db, $table, $column);
         }
 
-        if (count($childReferences) > 0 || $foreigner) {
+        if ($childReferences !== [] || $foreigner !== false) {
             $columnStatus['isEditable'] = false;
-            if (count($childReferences) > 0) {
+            if ($childReferences !== []) {
                 $columnStatus['isReferenced'] = true;
                 foreach ($childReferences as $columns) {
                     $columnStatus['references'][] = Util::backquote($columns['table_schema'])
@@ -1328,7 +1329,7 @@ class Relation
                 }
             }
 
-            if ($foreigner) {
+            if ($foreigner !== false) {
                 $columnStatus['isForeignKey'] = true;
             }
         }
@@ -1352,9 +1353,28 @@ class Relation
             return false;
         }
 
+        /** @var list<ForeignKey> $foreignKeysData */
+        $foreignKeysData = $foreigners['foreign_keys_data'];
+
+        return $this->getColumnFromForeignKeysData($foreignKeysData, $column);
+    }
+
+    /**
+     * @param list<ForeignKey> $foreignKeysData
+     *
+     * @return false|array{
+     *  foreign_field: string,
+     *  foreign_db: string,
+     *  foreign_table: string|null,
+     *  constraint: string|null,
+     *  on_update: string,
+     *  on_delete: string
+     * }
+     */
+    public function getColumnFromForeignKeysData(array $foreignKeysData, string $column): array|false
+    {
         $foreigner = [];
-        /** @var ForeignKey $oneKey */
-        foreach ($foreigners['foreign_keys_data'] as $oneKey) {
+        foreach ($foreignKeysData as $oneKey) {
             $columnIndex = array_search($column, $oneKey->indexList);
             if ($columnIndex !== false) {
                 $foreigner['foreign_field'] = $oneKey->refIndexList[$columnIndex];
