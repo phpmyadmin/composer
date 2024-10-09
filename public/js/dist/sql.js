@@ -257,13 +257,14 @@ const insertQuery = function (queryType) {
   if (queryType === 'clear') {
     setQuery('');
     return;
-  } else if (queryType === 'format') {
+  } else if (queryType === 'format' || queryType === 'formatSingleLine') {
     if (window.codeMirrorEditor) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#querymessage').html(window.Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + window.themeImagePath + 'ajax_clock_small.gif" alt="">');
       var params = {
         'ajax_request': true,
         'sql': window.codeMirrorEditor.getValue(),
-        'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
+        'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
+        'formatSingleLine': queryType === 'formatSingleLine'
       };
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: 'POST',
