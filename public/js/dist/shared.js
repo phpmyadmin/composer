@@ -4027,6 +4027,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   previewSql: function() { return /* binding */ previewSql; },
 /* harmony export */   removeAutocompleteInfo: function() { return /* binding */ removeAutocompleteInfo; },
 /* harmony export */   setSelectOptions: function() { return /* binding */ setSelectOptions; },
+/* harmony export */   shouldShowEmptyPasswordWarning: function() { return /* binding */ shouldShowEmptyPasswordWarning; },
 /* harmony export */   showHints: function() { return /* binding */ showHints; },
 /* harmony export */   showIndexEditDialog: function() { return /* binding */ showIndexEditDialog; },
 /* harmony export */   slidingMessage: function() { return /* binding */ slidingMessage; },
@@ -5745,6 +5746,9 @@ function checkPassword($theForm) {
   }
   return true;
 }
+function shouldShowEmptyPasswordWarning(form) {
+  return form.find('#nopass_1').is(':checked') && form.data('allowNoPassword') === 0;
+}
 function onloadChangePasswordEvents() {
   /* Handler for hostname type */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '#select_pred_hostname', function () {
@@ -5824,21 +5828,30 @@ function onloadChangePasswordEvents() {
        * page to work
        */
       var thisValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-      var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      $theForm.append('<input type="hidden" name="ajax_request" value="true">');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post($theForm.attr('action'), $theForm.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
-        if (typeof data === 'undefined' || data.success !== true) {
-          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
-          return;
-        }
-        var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
-        $pageContent.prepend(data.message);
-        (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($pageContent);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_dialog').hide().remove();
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_user_dialog').dialog('close').remove();
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
-      }); // end $.post()
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#changePasswordModal').modal('hide');
+      var submitForm = function () {
+        var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+        $theForm.append('<input type="hidden" name="ajax_request" value="true">');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().post($theForm.attr('action'), $theForm.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
+          if (typeof data === 'undefined' || data.success !== true) {
+            (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
+            return;
+          }
+          var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+          $pageContent.prepend(data.message);
+          (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($pageContent);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_dialog').hide().remove();
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_user_dialog').dialog('close').remove();
+          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
+        }); // end $.post()
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#changePasswordModal').modal('hide');
+      };
+      if (shouldShowEmptyPasswordWarning($theForm)) {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(window.Messages.strPasswordEmptyWhenAllowNoPasswordIsEnabled, '', function () {
+          submitForm();
+        });
+      } else {
+        submitForm();
+      }
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), {
       'ajax_request': true

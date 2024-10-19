@@ -412,6 +412,21 @@ const CheckAddUser = {
     return (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkPassword)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(theForm));
   }
 };
+const CheckEmptyPasswordWhenAllowNoPasswordIsEnabled = {
+  handleEvent: function () {
+    const theForm = this;
+    if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.shouldShowEmptyPasswordWarning)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(theForm))) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(window.Messages.strPasswordEmptyWhenAllowNoPasswordIsEnabled, '', function () {
+        theForm.submit();
+        return true;
+      });
+      return false;
+    } else {
+      theForm.submit();
+      return true;
+    }
+  }
+};
 const selectPasswordRadioWhenChangingPassword = () => {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#nopass_0').prop('checked', true);
 };
@@ -483,6 +498,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/privil
   setMaxWidth();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addUsersForm').on('submit', CheckAddUser.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#copyUserForm').on('submit', CheckAddUser.handleEvent);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_form').on('submit', CheckEmptyPasswordWhenAllowNoPasswordIsEnabled.handleEvent);
 });
 
 /***/ }),

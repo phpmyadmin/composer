@@ -45,8 +45,25 @@ function getFormatsText() {
 function opsWithoutArg() {
   return ['IS NULL', 'IS NOT NULL'];
 }
+function opsWithMultipleArgs() {
+  return ['IN (...)', 'NOT IN (...)'];
+}
 function isOpWithoutArg(op) {
   return opsWithoutArg().includes(op);
+}
+function acceptsMultipleValues(op) {
+  return opsWithMultipleArgs().includes(op);
+}
+function joinWrappingElementsWith(array, char) {
+  let separator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ',';
+  let string = '';
+  array.forEach(function (option, index) {
+    string += "".concat(char).concat(option).concat(char);
+    if (index !== array.length - 1) {
+      string += separator;
+    }
+  });
+  return string;
 }
 function generateCondition(criteriaDiv, table) {
   const tableName = table.val();
@@ -58,11 +75,17 @@ function generateCondition(criteriaDiv, table) {
   if (criteriaDiv.find('.criteria_rhs').first().val() === 'text') {
     if (isOpWithoutArg(criteriaOp)) {
       query += ' ' + criteriaOp;
+    } else if (acceptsMultipleValues(criteriaOp)) {
+      const formatsText = getFormatsText();
+      const valuesInputs = criteriaDiv.find('input.val');
+      let critertiaTextArray = [];
+      valuesInputs.each(function () {
+        critertiaTextArray.push((0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeSingleQuote)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()));
+      });
+      criteriaText = joinWrappingElementsWith(critertiaTextArray, '\'');
+      query += window.sprintf(formatsText[criteriaOp], criteriaText);
     } else {
       const formatsText = getFormatsText();
-      if (!['IN (...)', 'NOT IN (...)'].includes(criteriaOp)) {
-        criteriaText = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeSingleQuote)(criteriaText);
-      }
       query += window.sprintf(formatsText[criteriaOp], criteriaText);
     }
   } else {

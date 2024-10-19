@@ -43,6 +43,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/mu
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#update_query_button').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_column_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.add-option');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.remove-option');
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/multi_table_query.js', function () {
   var editor = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#MultiSqlquery'), {}, 'vertical');
@@ -50,11 +52,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
   editor.setSize(-1, 50);
   var columnCount = 3;
   addNewColumnCallbacks();
-  function theHints() {
-    return {
-      'IN (...)': 'Separate the values by commas',
-      'NOT IN (...)': 'Separate the values by commas'
-    };
+  function opsWithMultipleArgs() {
+    return ['IN (...)', 'NOT IN (...)'];
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#update_query_button').on('click', function () {
     var columns = [];
@@ -181,18 +180,37 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.col_alias').prop('disabled', colIsStar);
     });
   });
+  const acceptsMultipleArgs = opsWithMultipleArgs();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_op').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('change', function () {
-      showHint(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+      if (acceptsMultipleArgs.includes(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().toString())) {
+        showMultiFields(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+      } else {
+        const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('.options');
+        options.parent().prepend('<input type="text" class="rhs_text_val query-form__input--wide" placeholder="Enter criteria as free text"></input>');
+        options.remove();
+      }
     });
   });
-  function showHint(opSelect) {
-    const hints = theHints();
-    const value = opSelect.val();
-    const criteriaInputCol = opSelect.closest('table').find('.rhs_text_val').parent();
-    criteriaInputCol.find('.rhs_hint').remove();
-    Object.keys(hints).includes(value) && criteriaInputCol.append("<p class=\"rhs_hint\">".concat(hints[value], "</p>"));
+  function showMultiFields(opSelect) {
+    const criteriaInput = opSelect.closest('table').find('.rhs_text_val');
+    const criteriaInputCol = criteriaInput.parent();
+    const hasAtLeastOneOption = criteriaInputCol.find('.option').length > 0;
+    if (!hasAtLeastOneOption) {
+      criteriaInputCol.append("\n                <div class=\"options\">\n                    <div class=\"option\">\n                        <input type=\"text\" class=\"val\" placeholder=\"Enter an option\" value=\"".concat(criteriaInput.val(), "\" />\n                        <input type=\"button\" class=\"btn btn-secondary add-option\" value=\"+\" />\n                    </div>\n                </div>\n            "));
+    }
+    criteriaInput.remove();
   }
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'input.add-option', function () {
+    const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.options');
+    options.find('.option').first().clone().appendTo(options);
+    const newAdded = options.find('.option').last();
+    newAdded.find('input.val').val('');
+    newAdded.append('<input type="button" class="btn btn-secondary remove-option" value="-" />');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'input.remove-option', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.option').remove();
+  });
   function addNewColumnCallbacks() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tableNameSelect').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('change', function () {
