@@ -80,7 +80,10 @@ function generateCondition(criteriaDiv, table) {
       const valuesInputs = criteriaDiv.find('input.val');
       let critertiaTextArray = [];
       valuesInputs.each(function () {
-        critertiaTextArray.push((0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeSingleQuote)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()));
+        let value = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeSingleQuote)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
+        if (!critertiaTextArray.includes(value)) {
+          critertiaTextArray.push(value);
+        }
       });
       criteriaText = joinWrappingElementsWith(critertiaTextArray, '\'');
       query += window.sprintf(formatsText[criteriaOp], criteriaText);

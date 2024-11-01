@@ -400,7 +400,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('sql.js', fu
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'a.delete_row.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('submit', '.bookmarkQueryForm');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#bkm_label').off('input');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('makegrid', '.sqlqueryresults');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('makeGrid', '.sqlqueryresults');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', '#button_submit_query');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', '#id_bookmark');
@@ -595,11 +595,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
     document.body.removeChild(textArea);
   }); // end of Copy to Clipboard action
   /**
-   * Attach the {@link makegrid} function to a custom event, which will be
+   * Attach the {@link makeGrid} function to a custom event, which will be
    * triggered manually everytime the table of results is reloaded
    * @memberOf    jQuery
    */
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('makegrid', '.sqlqueryresults', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('makeGrid', '.sqlqueryresults', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.table_results').each(function () {
       window.makeGrid(this);
     });
@@ -799,7 +799,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
             (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
           };
         }
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makegrid');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makeGrid');
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').show();
         if (typeof data.action_bookmark === 'undefined') {
           if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform input[name="retain_query_box"]').is(':checked') !== true) {
@@ -831,7 +831,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
-      $sqlqueryresults.html(data.message).trigger('makegrid');
+      $sqlqueryresults.html(data.message).trigger('makeGrid');
       (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($sqlqueryresults);
     }); // end $.post()
   }); // end displayOptionsForm handler
@@ -1150,7 +1150,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
   /**
    * create resizable table
    */
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makegrid');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makeGrid');
   /**
    * Check if there is any saved query
    */

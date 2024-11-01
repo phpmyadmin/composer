@@ -139,7 +139,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
         } else {
           // results found
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').html(data.message);
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makegrid');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').trigger('makeGrid');
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tbl_search_form')
         // workaround for bug #3168569 - Issue on toggling the "Hide search criteria" in chrome.
