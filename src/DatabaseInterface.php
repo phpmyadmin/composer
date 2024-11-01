@@ -16,6 +16,7 @@ use PhpMyAdmin\Dbal\Statement;
 use PhpMyAdmin\Dbal\Warning;
 use PhpMyAdmin\Error\ErrorHandler;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Query\Cache;
 use PhpMyAdmin\Query\Compatibility;
@@ -180,10 +181,7 @@ class DatabaseInterface implements DbalInterface
         $result = $this->tryQuery($query, $connectionType, $options, $cacheAffectedRows);
 
         if (! $result) {
-            // The following statement will exit
             Generator::mysqlDie($this->getError($connectionType), $query);
-
-            ResponseRenderer::getInstance()->callExit();
         }
 
         return $result;
@@ -1991,6 +1989,12 @@ class DatabaseInterface implements DbalInterface
     public function getVersionComment(): string
     {
         return $this->versionComment;
+    }
+
+    /** Whether connection is MySQL */
+    public function isMySql(): bool
+    {
+        return ! $this->isMariaDb;
     }
 
     /**

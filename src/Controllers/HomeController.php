@@ -18,9 +18,9 @@ use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
+use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Identifiers\TableName;
-use PhpMyAdmin\LanguageManager;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\MessageType;
 use PhpMyAdmin\ResponseRenderer;
@@ -78,7 +78,7 @@ final class HomeController implements InvocableController
         // This is for $cfg['ShowDatabasesNavigationAsTree'] = false;
         // See: https://github.com/phpmyadmin/phpmyadmin/issues/16520
         // The DB is defined here and sent to the JS front-end to refresh the DB tree
-        Current::$database = $request->getParsedBodyParam('db', '');
+        Current::$database = $request->getParsedBodyParamAsString('db', '');
         Current::$table = '';
         $GLOBALS['show_query'] = '1';
         $GLOBALS['errorUrl'] = Url::getFromRoute('/');

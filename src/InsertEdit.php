@@ -7,6 +7,7 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Plugins\IOTransformationsPlugin;
 use PhpMyAdmin\Plugins\TransformationsInterface;
 use PhpMyAdmin\Utils\Gis;
@@ -403,7 +404,7 @@ class InsertEdit
             . (isset($maxlength) ? ' data-maxlength="' . $maxlength . '"' : '')
             . ' rows="' . $textAreaRows . '"'
             . ' cols="' . $textareaCols . '"'
-            . ' dir="' . LanguageManager::$textDir . '"'
+            . ' dir="' . LanguageManager::$textDirection->value . '"'
             . ' id="field_' . $this->fieldIndex . '_3"'
             . ($onChangeClause !== '' ? ' onchange="' . htmlspecialchars($onChangeClause, ENT_COMPAT) . '"' : '')
             . ' tabindex="' . $this->fieldIndex . '"'
@@ -1131,6 +1132,8 @@ class InsertEdit
 
     /**
      * Get value part if a function was specified
+     *
+     * @psalm-return non-empty-string
      */
     private function formatAsSqlFunction(
         EditField $editField,
@@ -1929,6 +1932,16 @@ class InsertEdit
         return $htmlOutput . '  </tbody>'
             . '</table></div><br>'
             . '<div class="clearfloat"></div>';
+    }
+
+    /** @return array<string|null> */
+    public function getColumnDefaultValues(string $database, string $table): array
+    {
+        $sql = 'SELECT COLUMN_NAME, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '
+            . $this->dbi->quoteString($table)
+            . ' AND TABLE_SCHEMA = ' . $this->dbi->quoteString($database);
+
+        return $this->dbi->query($sql)->fetchAllKeyPair();
     }
 
     /**
