@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2024-10-27 00:25+0000\n"
-"PO-Revision-Date: 2024-05-31 05:09+0000\n"
+"POT-Creation-Date: 2024-11-03 00:25+0000\n"
+"PO-Revision-Date: 2024-11-03 19:25+0000\n"
 "Last-Translator: hoanghuy309 <hoanghuy309@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/vi/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -277,7 +277,7 @@ msgstr "cột"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:341
-#: src/Controllers/Server/PrivilegesController.php:290
+#: src/Controllers/Server/PrivilegesController.php:293
 #: src/Normalization.php:229 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -600,7 +600,7 @@ msgstr "Tên"
 #: resources/templates/table/structure/display_structure.twig:465
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:7
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:6
-#: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:288
+#: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:289
 #: src/Plugins/Export/ExportHtmlword.php:262
 #: src/Plugins/Export/ExportHtmlword.php:353
 #: src/Plugins/Export/ExportLatex.php:505 src/Plugins/Export/ExportOdt.php:364
@@ -877,7 +877,7 @@ msgstr "Tắt"
 #: src/Controllers/JavaScriptMessagesController.php:510
 #: src/Controllers/Table/DeleteRowsController.php:55
 #: src/Controllers/Table/DropColumnController.php:44
-#: src/Controllers/Table/Structure/PrimaryController.php:107
+#: src/Controllers/Table/Structure/PrimaryController.php:106
 #: src/IndexColumn.php:148 src/Index.php:469
 #: src/Plugins/Export/ExportHtmlword.php:595
 #: src/Plugins/Export/ExportLatex.php:572 src/Plugins/Export/ExportOdt.php:714
@@ -983,7 +983,7 @@ msgstr "Truy vấn lại"
 #: src/ConfigStorage/UserGroups.php:112
 #: src/Controllers/JavaScriptMessagesController.php:406
 #: src/Display/Results.php:2477 src/Html/Generator.php:517
-#: src/Html/Generator.php:783
+#: src/Html/Generator.php:785
 msgid "Edit"
 msgstr "Sửa"
 
@@ -2224,7 +2224,7 @@ msgstr "Tên máy"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:581
-#: src/Controllers/Server/PrivilegesController.php:408 src/Menu.php:256
+#: src/Controllers/Server/PrivilegesController.php:411 src/Menu.php:256
 #: src/Menu.php:364 src/Util.php:1472 src/Util.php:1488
 msgid "Privileges"
 msgstr "Đặc quyền"
@@ -2373,7 +2373,7 @@ msgstr "Tham số thủ tục"
 
 #: resources/templates/database/routines/execute_form.twig:18
 #: resources/templates/table/search/index.twig:36
-#: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:287
+#: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:288
 #: src/Navigation/Nodes/NodeFunction.php:24
 msgid "Function"
 msgstr "Hàm"
@@ -2698,7 +2698,7 @@ msgstr "Từ điển dữ liệu"
 #: resources/templates/navigation/tree/path.twig:9
 #: src/Controllers/Database/ExportController.php:84
 #: src/Controllers/Database/TrackingController.php:130
-#: src/Controllers/Export/ExportController.php:298
+#: src/Controllers/Export/ExportController.php:291
 msgid "No tables found in database."
 msgstr "Không tìm thấy bảng nào trong cơ sở dữ liệu"
 
@@ -3058,7 +3058,7 @@ msgstr "Chuyển đổi sang Kana"
 #: src/Controllers/Table/Partition/DropController.php:54
 #: src/Controllers/Table/Partition/RebuildController.php:54
 #: src/Controllers/Table/Partition/TruncateController.php:54
-#: src/Html/Generator.php:734 src/Import/Import.php:115 src/InsertEdit.php:487
+#: src/Html/Generator.php:736 src/Import/Import.php:115 src/InsertEdit.php:488
 #: src/Message.php:138
 msgid "Error"
 msgstr "Lỗi"
@@ -3084,7 +3084,7 @@ msgstr ""
 msgid "You may examine the data in the error report:"
 msgstr "Bạn có lẽ nên xem xét kỹ dữ liệu trong báo cáo lỗi:"
 
-#: resources/templates/error/report_form.twig:23 src/Error/ErrorHandler.php:404
+#: resources/templates/error/report_form.twig:23 src/Error/ErrorHandler.php:403
 msgid "Automatically send report next time"
 msgstr "Lần sau sẽ tự động gửi báo cáo"
 
@@ -3138,7 +3138,7 @@ msgstr "Cập nhật"
 #. l10n: Title of the option on the Export page
 #: resources/templates/export.twig:68
 #: src/Controllers/JavaScriptMessagesController.php:132
-#: src/Html/Generator.php:758
+#: src/Html/Generator.php:760
 msgid "SQL query:"
 msgstr "Truy vấn SQL:"
 
@@ -3407,7 +3407,7 @@ msgstr "Cài đặt cơ bản"
 #: resources/templates/modals/change_password.twig:5
 #: resources/templates/server/privileges/change_password.twig:10
 #: resources/templates/server/privileges/change_password.twig:11
-#: src/Controllers/UserPasswordController.php:90
+#: src/Controllers/UserPasswordController.php:91
 msgid "Change password"
 msgstr "Đổi mật khẩu"
 
@@ -3562,7 +3562,7 @@ msgstr "Lấy nó"
 #: resources/templates/import_status.twig:2
 #: resources/templates/user_password.twig:2
 #: src/Controllers/JavaScriptMessagesController.php:442
-#: src/Export/Export.php:1276 src/Html/Generator.php:849
+#: src/Export/Export.php:1276 src/Html/Generator.php:851
 #: src/Plugins/Schema/ExportRelationSchema.php:266
 msgid "Back"
 msgstr "Quay lại"
@@ -3613,7 +3613,7 @@ msgid "You may also drag and drop a file on any page."
 msgstr "Bạn cũng có thể kéo thả một tập tin trên bất kỳ trang nào."
 
 #: resources/templates/import.twig:56 resources/templates/import.twig:80
-#: src/InsertEdit.php:488
+#: src/InsertEdit.php:489
 msgid "The directory you set for upload work cannot be reached."
 msgstr "Thư mục bạn đặt cho việc tải lên không thể tiếp cận được."
 
@@ -3686,7 +3686,7 @@ msgid "Taking you to the target site."
 msgstr "Đưa bạn đến trang đích."
 
 #: resources/templates/list_navigator.twig:4 src/BrowseForeigners.php:278
-#: src/Language.php:178 src/Pdf.php:84
+#: src/I18n/Language.php:177 src/Pdf.php:84
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:458
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:483
 msgid "Page number:"
@@ -4156,7 +4156,7 @@ msgstr "Bạn đã kích hoạt xác thực hai yếu tố."
 #: src/Controllers/Database/Structure/EmptyTableController.php:49
 #: src/Controllers/Operations/TableController.php:347
 #: src/Controllers/Table/DropColumnController.php:61
-#: src/Controllers/Table/ReplaceController.php:283 src/Core.php:499
+#: src/Controllers/Table/ReplaceController.php:289 src/Core.php:499
 msgid "No change"
 msgstr "Không thay đổi gì"
 
@@ -4877,7 +4877,7 @@ msgstr "Cho phép đọc dữ liệu."
 #: resources/templates/server/privileges/privileges_table.twig:60
 #: resources/templates/server/privileges/privileges_table.twig:87
 #: resources/templates/server/privileges/privileges_table.twig:114
-#: resources/templates/table/search/index.twig:128 src/InsertEdit.php:496
+#: resources/templates/table/search/index.twig:128 src/InsertEdit.php:497
 msgid "Or"
 msgstr "Hoặc"
 
@@ -6098,7 +6098,7 @@ msgid "No users were found belonging to this user group."
 msgstr "Không tìm thấy người dùng nào trong nhóm người dùng này."
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:411
+#: src/Controllers/Server/PrivilegesController.php:414
 #: src/Server/Status/Processes.php:91
 msgid "User"
 msgstr "Người dùng"
@@ -6626,7 +6626,7 @@ msgstr "Kéo thả để thay đổi thứ tự"
 #: resources/templates/table/index_form.twig:203
 #: src/Controllers/JavaScriptMessagesController.php:494
 #: src/Controllers/JavaScriptMessagesController.php:646
-#: src/Error/ErrorHandler.php:410 src/InsertEdit.php:1515
+#: src/Error/ErrorHandler.php:409 src/InsertEdit.php:1518
 msgid "Ignore"
 msgstr "Bỏ qua"
 
@@ -6908,10 +6908,8 @@ msgid "Repair partition"
 msgstr "Xóa phân vùng"
 
 #: resources/templates/table/partition/truncate.twig:2
-#, fuzzy
-#| msgid "Subpartition"
 msgid "Truncate partition"
-msgstr "Phân vùng con"
+msgstr "Cắt bớt phân vùng"
 
 #: resources/templates/table/privileges/index.twig:57
 msgid "table-specific"
@@ -6935,6 +6933,9 @@ msgid ""
 "an index on it. Alternatively, you can define an index below, before "
 "creating the foreign key."
 msgstr ""
+"Tạo khóa ngoại trên cột không được lập chỉ mục sẽ tự động tạo chỉ mục trên "
+"cột đó. Ngoài ra, bạn có thể xác định chỉ mục bên dưới trước khi tạo khóa "
+"ngoại."
 
 #: resources/templates/table/relation/common_form.twig:26
 msgid ""
@@ -6953,10 +6954,8 @@ msgstr "+ Thêm ràng buộc"
 
 #: resources/templates/table/relation/common_form.twig:61
 #: resources/templates/table/relation/common_form.twig:69
-#, fuzzy
-#| msgid "Internal relations"
 msgid "Internal relationships"
-msgstr "Các quan hệ nội tại"
+msgstr "Mối quan hệ nội bộ"
 
 #: resources/templates/table/relation/common_form.twig:78
 msgid "Internal relation"
@@ -7090,10 +7089,8 @@ msgid "Extra"
 msgstr "Thêm"
 
 #: resources/templates/table/structure/display_structure.twig:70
-#, fuzzy
-#| msgid "MIME type"
 msgid "Media type:"
-msgstr "Kiểu MIME"
+msgstr "Kiểu phương tiện:"
 
 #: resources/templates/table/structure/display_structure.twig:91
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:47
@@ -7151,7 +7148,7 @@ msgstr "Đề xuất cấu trúc bảng"
 
 #: resources/templates/table/structure/display_structure.twig:409
 msgid "Normalize"
-msgstr ""
+msgstr "Bình thường"
 
 #: resources/templates/table/structure/display_structure.twig:415
 msgid "Track view"
@@ -7167,10 +7164,9 @@ msgid "at beginning of table"
 msgstr "tại đầu của bảng"
 
 #: resources/templates/table/structure/display_structure.twig:558
-#, fuzzy, php-format
-#| msgid "Create an index on &nbsp;%s&nbsp;columns"
+#, php-format
 msgid "Create an index on %s columns"
-msgstr "Tạo một chỉ mục trên &nbsp;%s&nbsp;columns"
+msgstr "Tạo một chỉ mục trên %s cột"
 
 #: resources/templates/table/structure/display_table_stats.twig:14
 msgid "Space usage"
@@ -7291,10 +7287,8 @@ msgid "Reset zoom"
 msgstr "Đặt lại mức phóng to"
 
 #: resources/templates/transformation_overview.twig:1
-#, fuzzy
-#| msgid "Available MIME types"
 msgid "Available media types"
-msgstr "Các kiểu MIME sẵn có"
+msgstr "Loại phương tiện sẵn có"
 
 #: resources/templates/transformation_overview.twig:13
 msgid "Available browser display transformations"
@@ -7302,8 +7296,6 @@ msgstr "Các chuyển dạng hiển thị trình duyệt sẵn có"
 
 #: resources/templates/transformation_overview.twig:19
 #: resources/templates/transformation_overview.twig:38
-#, fuzzy
-#| msgid "Description"
 msgctxt "for media type transformation"
 msgid "Description"
 msgstr "Mô tả"
@@ -7482,7 +7474,7 @@ msgstr "Tỷ lệ truy vấn chậm"
 #: src/Advisory/Rules.php:79
 msgid ""
 "There is a high percentage of slow queries compared to the server uptime."
-msgstr ""
+msgstr "Có tỷ lệ truy vấn chậm cao so với thời gian hoạt động của máy chủ."
 
 #: src/Advisory/Rules.php:84
 #, php-format
@@ -9166,12 +9158,11 @@ msgid "Users cannot set a higher value"
 msgstr "Người dùng không thể đặt giá trị cao hơn"
 
 #: src/Config/Descriptions.php:76
-#, fuzzy
 msgid ""
 "If enabled, user can enter any MySQL server in login form for cookie auth."
 msgstr ""
-"Nếu được kích hoạt, người dùng có thể nhập bất kỳ máy chủ MySQL trong mẫu "
-"đăng nhập cho cookie chính xác."
+"Nếu bật, người dùng có thể nhập bất kỳ máy chủ MySQL nào trong biểu mẫu đăng "
+"nhập để xác thực cookie."
 
 #: src/Config/Descriptions.php:79
 msgid ""
@@ -9205,48 +9196,37 @@ msgid "Enable bzip2 compression for import operations."
 msgstr "Bật nén bzip2 dành cho các thao tác nhập dữ liệu."
 
 #: src/Config/Descriptions.php:92
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter the URL for your reCAPTCHA v2 compatible API."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr "Nhập URL cho API tương thích reCAPTCHA v2 của bạn."
 
 #: src/Config/Descriptions.php:93
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid ""
 "Enter the Content-Security-Policy snippet for your reCAPTCHA v2 compatible "
 "API."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr ""
+"Nhập đoạn mã Chính sách bảo mật nội dung cho API tương thích reCAPTCHA v2 "
+"của bạn."
 
 #: src/Config/Descriptions.php:94
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter the request parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr "Nhập tham số yêu cầu được API tương thích reCAPTCHA v2 của bạn sử dụng."
 
 #: src/Config/Descriptions.php:95
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter the response parameter used by your reCAPTCHA v2 compatible API."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr ""
+"Nhập tham số phản hồi được API tương thích reCAPTCHA v2 của bạn sử dụng."
 
 #: src/Config/Descriptions.php:96
-#, fuzzy
-#| msgid "Enter your public key for your domain reCaptcha service."
 msgid "Enter your public key for the reCAPTCHA service on your domain."
-msgstr "Nhập vào khóa công cho dịch vụ reCaptcha theo miền của bạn."
+msgstr "Nhập khóa công khai cho dịch vụ reCAPTCHA trên miền của bạn."
 
 #: src/Config/Descriptions.php:97
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter your private key for your domain reCAPTCHA service."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr "Nhập khóa riêng cho dịch vụ reCAPTCHA tên miền của bạn."
 
 #: src/Config/Descriptions.php:98
-#, fuzzy
-#| msgid "Enter your private key for your domain reCaptcha service."
 msgid "Enter your siteverify URL for your reCAPTCHA service."
-msgstr "Nhập vào khóa riêng cho dịch vụ reCaptcha theo miền của bạn."
+msgstr "Nhập URL siteverify cho dịch vụ reCAPTCHA của bạn."
 
 #: src/Config/Descriptions.php:100
 msgid ""
@@ -9338,7 +9318,7 @@ msgstr ""
 #: src/Config/Descriptions.php:171 src/Config/Descriptions.php:708
 #: src/Plugins/Export/ExportSql.php:321
 msgid "Exclude definition of current user"
-msgstr ""
+msgstr "Loại trừ định nghĩa của người dùng hiện tại"
 
 #: src/Config/Descriptions.php:173
 msgid ""
@@ -9534,15 +9514,14 @@ msgid "Number of queries to skip from start."
 msgstr "Số lượng câu truy vấn được bỏ qua tính từ khởi đầu"
 
 #: src/Config/Descriptions.php:245
-#, fuzzy
 msgid ""
 "If TRUE, logout deletes cookies for all servers; when set to FALSE, logout "
 "only occurs for the current server. Setting this to FALSE makes it easy to "
 "forget to log out from other servers when connected to multiple servers."
 msgstr ""
-"Nếu ĐÚNG, đăng xuất xóa cookie cho tất cả các máy chủ; khi đặt thành SAI, "
-"đăng xuất chỉ xảy ra cho máy chủ hiện tại. Cài đặt này thành SAI khiến bạn "
-"dễ quên đăng xuất khỏi các máy chủ khác khi kết nối với nhiều máy chủ."
+"Nếu ĐÚNG, đăng xuất xóa cookie cho tất cả máy chủ; khi đặt là SAI, đăng xuất "
+"chỉ xảy ra ở máy chủ hiện tại. Cài đặt này thành SAI làm bạn dễ quên đăng "
+"xuất khỏi các máy chủ khác khi kết nối với nhiều máy chủ."
 
 #: src/Config/Descriptions.php:250
 msgid ""
@@ -9592,16 +9571,12 @@ msgstr ""
 "hơn một dòng, liên kết \"Kế trước\" và \"Kế tiếp\" sẽ được hiển thị."
 
 #: src/Config/Descriptions.php:274
-#, fuzzy
-#| msgid ""
-#| "The number of bytes a script is allowed to allocate, eg. [kbd]32M[/kbd] "
-#| "([kbd]-1[/kbd] for no limit and [kbd]0[/kbd] for no change)."
 msgid ""
 "The number of bytes a script is allowed to allocate, e.g. [kbd]32M[/kbd] "
 "([kbd]-1[/kbd] for no limit and [kbd]0[/kbd] for no change)."
 msgstr ""
-"Số bytes một văn lệnh được phép phân bổ, ví dụ: [kbd]32M[/kbd] ([kbd]-1[/"
-"kbd] để không giới hạn gì và [kbd]0[/kbd] để không thay đổi)."
+"Số byte mà tập lệnh được phép phân bổ, vd: [kbd]32M[/kbd] ([kbd]-1[/kbd] để "
+"không giới hạn và [kbd]0[/kbd] để không thay đổi)."
 
 #: src/Config/Descriptions.php:278
 msgid "In the navigation panel, replaces the database tree with a selector"
@@ -9648,17 +9623,13 @@ msgstr ""
 "Có cho hiển thị các thủ tục dưới cơ sở dữ liệu trong cây điều hướng hay không"
 
 #: src/Config/Descriptions.php:300
-#, fuzzy
-#| msgid "Whether to show events under database in the navigation tree"
 msgid "Whether to expand single database in the navigation tree automatically."
 msgstr ""
-"Có cho hiển thị các sự kiện dưới cơ sở dữ liệu trong cây điều hướng hay không"
+"Có nên tự động mở rộng cơ sở dữ liệu đơn lẻ trong cây điều hướng hay không."
 
 #: src/Config/Descriptions.php:302
-#, fuzzy
-#| msgid "Show logo in navigation panel."
 msgid "Set to 0 to collapse navigation panel."
-msgstr "Đặt thành 0 để xóa bảng điều hướng"
+msgstr "Đặt là 0 để thu gọn bảng điều hướng."
 
 #: src/Config/Descriptions.php:303
 msgid "Show logo in navigation panel."
@@ -9730,7 +9701,6 @@ msgstr ""
 "cột trong một bảng là từ dành riêng cho MySQL."
 
 #: src/Config/Descriptions.php:327
-#, fuzzy
 msgid ""
 "Enable if you want DB-based query history (requires phpMyAdmin configuration "
 "storage). If disabled, this utilizes JS-routines to display query history "
@@ -9760,16 +9730,12 @@ msgstr ""
 "[kbd]pma__bookmark[/kbd]"
 
 #: src/Config/Descriptions.php:339
-#, fuzzy
-#| msgid ""
-#| "Leave blank for no central columns support, suggested: "
-#| "[kbd]pma__central_columns[/kbd]."
 msgid ""
 "Leave blank for no column comments/media types, suggested: "
 "[kbd]pma__column_info[/kbd]."
 msgstr ""
-"Để trống nếu không có hỗ trợ cột trung tâm, gợi ý: "
-"[kbd]pma__central_columns[/kbd]."
+"Để trống nếu không có chú thích cột/loại phương tiện, gợi ý: "
+"[kbd]pma__column_info[/kbd]."
 
 #: src/Config/Descriptions.php:342
 msgid ""
@@ -9798,18 +9764,13 @@ msgstr ""
 "chủ."
 
 #: src/Config/Descriptions.php:354
-#, fuzzy
-#| msgid ""
-#| "More information on [a@https://sourceforge.net/p/phpmyadmin/"
-#| "bugs/2606/]PMA bug tracker[/a] and [a@https://bugs.mysql.com/19588]MySQL "
-#| "Bugs[/a]"
 msgid ""
 "More information on [a@https://github.com/phpmyadmin/phpmyadmin/"
 "issues/8970]phpMyAdmin issue tracker[/a] and [a@https://bugs.mysql."
 "com/19588]MySQL Bugs[/a]"
 msgstr ""
-"Thông tin thêm trên [a@https://sourceforge.net/p/phpmyadmin/bugs/2606/]PMA "
-"bug tracker[/a] và [a@https://bugs.mysql.com/19588]MySQL Bugs[/a]"
+"Thông tin thêm trên [a@https://github.com/phpmyadmin/phpmyadmin/issues/8970]"
+"theo dõi lỗi phpMyAdmin[/a] và [a@https://bugs.mysql.com/19588]Lỗi MySQL[/a]"
 
 #: src/Config/Descriptions.php:358
 msgid ""
@@ -9828,7 +9789,6 @@ msgstr ""
 "bản ghi cũ nhất được tự động xóa."
 
 #: src/Config/Descriptions.php:365
-#, fuzzy
 msgid ""
 "Leave blank for no export template support, suggested: "
 "[kbd]pma__export_templates[/kbd]."
@@ -9957,12 +9917,16 @@ msgid ""
 "Leave blank for no SQL query tracking support, suggested: "
 "[kbd]pma__tracking[/kbd]."
 msgstr ""
+"Để trống nếu không hỗ trợ theo dõi truy vấn SQL, gợi ý: "
+"[kbd]pma__tracking[/kbd]."
 
 #: src/Config/Descriptions.php:429
 msgid ""
 "Whether the tracking mechanism creates versions for tables and views "
 "automatically."
 msgstr ""
+"Liệu cơ chế theo dõi có tự động tạo phiên bản cho bảng và chế độ xem hay "
+"không."
 
 #: src/Config/Descriptions.php:432
 msgid ""
@@ -11710,21 +11674,21 @@ msgid "Cannot save settings, submitted configuration form contains errors!"
 msgstr ""
 "Không thể ghi các cài đặt lại, phần cấu hình đã gửi từ mẫu đơn có chứa lỗi!"
 
-#: src/Config.php:607
+#: src/Config.php:608
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
 msgstr "Tập tin cấu hình sẵn có (%s) không thể đọc được."
 
-#: src/Config.php:643
+#: src/Config.php:644
 msgid "Wrong permissions on configuration file, should not be world writable!"
 msgstr ""
 "Tập tin cấu hình được phân quyền không đúng, không thể là ai cũng được đọc!"
 
-#: src/Config.php:657
+#: src/Config.php:658
 msgid "Failed to read configuration file!"
 msgstr "Gặp lỗi khi đọc tập tin cấu hình!"
 
-#: src/Config.php:659
+#: src/Config.php:660
 #, fuzzy
 #| msgid ""
 #| "This usually means there is a syntax error in it, please check any errors "
@@ -11970,16 +11934,12 @@ msgstr ""
 "Tập tin %s  không có sẵn trên hệ thống, hãy truy cập %s để biết thêm thông "
 "tin."
 
-#: src/Controllers/Console/Bookmark/AddController.php:33
-msgid "Incomplete params"
-msgstr "Tham số chưa hoàn thiện"
-
-#: src/Controllers/Console/Bookmark/AddController.php:46
+#: src/Controllers/Console/Bookmark/AddController.php:39
 #: src/Controllers/JavaScriptMessagesController.php:597
 msgid "Failed"
 msgstr "Thất bại"
 
-#: src/Controllers/Console/Bookmark/AddController.php:58
+#: src/Controllers/Console/Bookmark/AddController.php:51
 msgid "Succeeded"
 msgstr "Thành công"
 
@@ -12003,14 +11963,14 @@ msgid "Showing rows %1$s - %2$s."
 msgstr "Hiển thị các hàng %1$s - %2$s."
 
 #. l10n: The user tries to save a page with an existing name in Designer
-#: src/Controllers/Database/DesignerController.php:100
+#: src/Controllers/Database/DesignerController.php:106
 #, php-format
 msgid ""
 "There already exists a page named \"%s\" please rename it to something else."
 msgstr ""
 
-#: src/Controllers/Database/DesignerController.php:168
-#: src/Controllers/Database/DesignerController.php:173
+#: src/Controllers/Database/DesignerController.php:177
+#: src/Controllers/Database/DesignerController.php:182
 #: src/Controllers/Database/EventsController.php:60
 #: src/Controllers/Database/ExportController.php:66
 #: src/Controllers/Database/ExportController.php:71
@@ -12037,8 +11997,8 @@ msgstr ""
 #: src/Controllers/Operations/ViewController.php:63
 #: src/Controllers/Operations/ViewController.php:68
 #: src/Controllers/Server/Databases/DestroyController.php:61
-#: src/Controllers/Table/AddFieldController.php:164
-#: src/Controllers/Table/AddFieldController.php:169
+#: src/Controllers/Table/AddFieldController.php:163
+#: src/Controllers/Table/AddFieldController.php:168
 #: src/Controllers/Table/ChangeController.php:68
 #: src/Controllers/Table/ChangeController.php:73
 #: src/Controllers/Table/ChartController.php:96
@@ -12066,8 +12026,8 @@ msgstr ""
 #: src/Controllers/Table/SqlController.php:70
 #: src/Controllers/Table/StructureController.php:94
 #: src/Controllers/Table/StructureController.php:99
-#: src/Controllers/Table/Structure/PrimaryController.php:74
-#: src/Controllers/Table/Structure/PrimaryController.php:79
+#: src/Controllers/Table/Structure/PrimaryController.php:73
+#: src/Controllers/Table/Structure/PrimaryController.php:78
 #: src/Controllers/Table/TrackingController.php:71
 #: src/Controllers/Table/TrackingController.php:76
 #: src/Controllers/Table/ZoomSearchController.php:100
@@ -12159,8 +12119,8 @@ msgstr "Bạn không có đủ thẩm quyền cần thiết để tạo một b�
 #: src/Controllers/Operations/TableController.php:105
 #: src/Controllers/Operations/ViewController.php:77
 #: src/Controllers/Operations/ViewController.php:82
-#: src/Controllers/Table/AddFieldController.php:178
-#: src/Controllers/Table/AddFieldController.php:183
+#: src/Controllers/Table/AddFieldController.php:177
+#: src/Controllers/Table/AddFieldController.php:182
 #: src/Controllers/Table/ChangeController.php:82
 #: src/Controllers/Table/ChangeController.php:87
 #: src/Controllers/Table/ChartController.php:110
@@ -12189,8 +12149,8 @@ msgstr "Bạn không có đủ thẩm quyền cần thiết để tạo một b�
 #: src/Controllers/Table/SqlController.php:84
 #: src/Controllers/Table/StructureController.php:108
 #: src/Controllers/Table/StructureController.php:113
-#: src/Controllers/Table/Structure/PrimaryController.php:88
-#: src/Controllers/Table/Structure/PrimaryController.php:93
+#: src/Controllers/Table/Structure/PrimaryController.php:87
+#: src/Controllers/Table/Structure/PrimaryController.php:92
 #: src/Controllers/Table/ZoomSearchController.php:114
 #: src/Controllers/Table/ZoomSearchController.php:119
 #: src/Controllers/Triggers/IndexController.php:81
@@ -12287,7 +12247,7 @@ msgstr "Chưa có bảng nào được chọn."
 msgid "Database Log"
 msgstr "Nhật ký Cơ sở dữ liệu"
 
-#: src/Controllers/ErrorReportController.php:95
+#: src/Controllers/ErrorReportController.php:92
 msgid ""
 "An error has been detected and an error report has been automatically "
 "submitted based on your settings."
@@ -12295,11 +12255,11 @@ msgstr ""
 "Một lỗi đã được phát hiện và một báo cáo lỗi đã tự động được gửi đi dựa trên "
 "cài đặt cấu hình của bạn."
 
-#: src/Controllers/ErrorReportController.php:99
+#: src/Controllers/ErrorReportController.php:96
 msgid "Thank you for submitting this report."
 msgstr "Cám ơn bạn đã gửi báo cáo."
 
-#: src/Controllers/ErrorReportController.php:103
+#: src/Controllers/ErrorReportController.php:100
 msgid ""
 "An error has been detected and an error report has been generated but failed "
 "to be sent."
@@ -12307,25 +12267,25 @@ msgstr ""
 "Một lỗi đã được phát hiện và báo cáo. Báo cáo về lỗi này đã được lập nhưng "
 "có lỗi trong quá trình gửi."
 
-#: src/Controllers/ErrorReportController.php:106
+#: src/Controllers/ErrorReportController.php:103
 msgid "If you experience any problems please submit a bug report manually."
 msgstr ""
 "Nếu bạn có kinh nghiệm phát hiện vấn đề nào đó không hoạt động tốt, xin hãy "
 "gửi báo cáo lỗi cho chúng tôi một cách thủ công."
 
-#: src/Controllers/ErrorReportController.php:109
+#: src/Controllers/ErrorReportController.php:106
 msgid "You may want to refresh the page."
 msgstr "Bạn có lẽ nên làm tươi trang này lại."
 
-#: src/Controllers/Export/ExportController.php:115 src/Export/Export.php:1214
+#: src/Controllers/Export/ExportController.php:108 src/Export/Export.php:1214
 msgid "Bad type!"
 msgstr "Sai kiểu!"
 
-#: src/Controllers/Export/ExportController.php:190
+#: src/Controllers/Export/ExportController.php:183
 msgid "Bad parameters!"
 msgstr "Tham số sai!"
 
-#: src/Controllers/GisDataEditorController.php:120
+#: src/Controllers/GisDataEditorController.php:116
 #, php-format
 msgid "Value for the column \"%s\""
 msgstr "Giá trị cho cột \"%s\""
@@ -12448,7 +12408,7 @@ msgstr ""
 "Không tìm thấy phần mở rộng curl và allow_url_fopen bị tắt. Do đó một số "
 "tính năng như báo cáo lỗi hoặc kiểm tra phiên bản bị vô hiệu."
 
-#: src/Controllers/Import/ImportController.php:169
+#: src/Controllers/Import/ImportController.php:168
 #, php-format
 msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
@@ -12457,23 +12417,23 @@ msgstr ""
 "Gần như chắc chắn là bạn cố tải một tập tin có kích cỡ quá lớn. Vui lòng đọc "
 "%stài liệu%s để khắc phục giới hạn này."
 
-#: src/Controllers/Import/ImportController.php:196
+#: src/Controllers/Import/ImportController.php:194
 #, fuzzy
 #| msgid "Remove last parameter"
 msgid "Incorrect format parameter"
 msgstr "Bỏ rãnh cuối"
 
-#: src/Controllers/Import/ImportController.php:310
-#: src/Controllers/Import/ImportController.php:523
+#: src/Controllers/Import/ImportController.php:308
+#: src/Controllers/Import/ImportController.php:521
 msgid "Showing bookmark"
 msgstr "Hiển thị đánh dấu"
 
-#: src/Controllers/Import/ImportController.php:330
-#: src/Controllers/Import/ImportController.php:519
+#: src/Controllers/Import/ImportController.php:328
+#: src/Controllers/Import/ImportController.php:517
 msgid "The bookmark has been deleted."
 msgstr "Đánh dấu đã được xóa."
 
-#: src/Controllers/Import/ImportController.php:442
+#: src/Controllers/Import/ImportController.php:440
 msgid ""
 "No data was received to import. Either no file name was submitted, or the "
 "file size exceeded the maximum size permitted by your PHP configuration. See "
@@ -12483,14 +12443,14 @@ msgstr ""
 "hoặc là cỡ của tập tin vượt quá kích thước mà phần cấu hình PHP của bạn cho "
 "phép. Xem [doc@faq1-16]FAQ 1.16[/doc]."
 
-#: src/Controllers/Import/ImportController.php:531
+#: src/Controllers/Import/ImportController.php:529
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
 msgstr[0] ""
 "Việc nhập vào đã được thực hiện thành công, %d truy vấn đã thực thi."
 
-#: src/Controllers/Import/ImportController.php:568
+#: src/Controllers/Import/ImportController.php:566
 #, php-format
 msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
@@ -12499,7 +12459,7 @@ msgstr ""
 "Văn lệnh đã vượt quá thời hạn chờ, nếu bạn muốn hoàn tất nhập khẩu, vui lòng "
 "%sgửi lại cùng tập tin%s và việc nhập vào sẽ được tiếp tục."
 
-#: src/Controllers/Import/ImportController.php:578
+#: src/Controllers/Import/ImportController.php:576
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
@@ -12508,16 +12468,16 @@ msgstr ""
 "thường có nghĩa là phpMyAdmin sẽ không thể hoàn tất việc nhập vào trừ khi "
 "bạn gia tăng giới hạn chờ của PHP."
 
-#: src/Controllers/Import/ImportController.php:641
+#: src/Controllers/Import/ImportController.php:639
 #: src/Controllers/Sql/SqlController.php:159
 msgid "\"DROP DATABASE\" statements are disabled."
 msgstr "Câu lệnh \"DROP DATABASE\" bị tăt."
 
-#: src/Controllers/Import/ImportController.php:696 src/Sql.php:877
+#: src/Controllers/Import/ImportController.php:692 src/Sql.php:877
 msgid "[ROLLBACK occurred.]"
 msgstr "[đã nảy sinh ROLLBACK.]"
 
-#: src/Controllers/Import/SimulateDmlController.php:84
+#: src/Controllers/Import/SimulateDmlController.php:83
 msgid "Only single-table UPDATE and DELETE queries can be simulated."
 msgstr "Chỉ các truy vấn UPDATE và DELETE trên một bảng được mô phỏng."
 
@@ -13935,7 +13895,7 @@ msgid "Please look at the bottom of this window."
 msgstr "Vui lòng xem ở phần dưới của cửa sổ này."
 
 #: src/Controllers/JavaScriptMessagesController.php:649
-#: src/Error/ErrorHandler.php:415
+#: src/Error/ErrorHandler.php:414
 msgid "Ignore All"
 msgstr "Bỏ qua tất"
 
@@ -14107,7 +14067,7 @@ msgctxt ""
 msgid "Table %s already exists!"
 msgstr "Bảng %s đã sẵn có từ trước rồi!"
 
-#: src/Controllers/JavaScriptMessagesController.php:721 src/InsertEdit.php:272
+#: src/Controllers/JavaScriptMessagesController.php:721 src/InsertEdit.php:273
 #: src/Navigation/Nodes/NodeDatabaseChild.php:50
 msgid "Hide"
 msgstr "Ẩn"
@@ -14676,7 +14636,7 @@ msgstr "Quan hệ bên trong đã bị gỡ bỏ."
 msgid "Two-factor authentication has been configured."
 msgstr "Phương thức xác thực trong cấu hình không hợp lệ:"
 
-#: src/Controllers/SchemaExportController.php:40
+#: src/Controllers/SchemaExportController.php:38
 #: src/Controllers/Server/UserGroupsFormController.php:44
 #: src/ResponseRenderer.php:476
 msgid "Missing parameter:"
@@ -14693,13 +14653,13 @@ msgid "%1$d database has been dropped successfully."
 msgid_plural "%1$d databases have been dropped successfully."
 msgstr[0] "%1$d cơ sở dữ liệu được xóa thành công."
 
-#: src/Controllers/Server/Privileges/AccountLockController.php:47
+#: src/Controllers/Server/Privileges/AccountLockController.php:45
 #, fuzzy, php-format
 #| msgid "The columns have been moved successfully."
 msgid "The account %s@%s has been successfully locked."
 msgstr "Các cột được di chuyển thành công."
 
-#: src/Controllers/Server/Privileges/AccountUnlockController.php:47
+#: src/Controllers/Server/Privileges/AccountUnlockController.php:45
 #, fuzzy, php-format
 #| msgid "The columns have been moved successfully."
 msgid "The account %s@%s has been successfully unlocked."
@@ -15338,7 +15298,7 @@ msgstr "Gặp lỗi khi cài đặt biến"
 #: src/Controllers/Setup/ServerDestroyController.php:41
 #: src/Controllers/Setup/ServersController.php:44
 #: src/Controllers/Setup/ShowConfigController.php:42
-#: src/Controllers/Setup/ValidateController.php:46
+#: src/Controllers/Setup/ValidateController.php:45
 msgid "Configuration already exists, setup is disabled!"
 msgstr ""
 
@@ -15370,11 +15330,11 @@ msgstr ""
 msgid "Insecure connection"
 msgstr "Kết nối không an toàn"
 
-#: src/Controllers/Setup/ValidateController.php:63
+#: src/Controllers/Setup/ValidateController.php:60
 msgid "Wrong data"
 msgstr "Sai dữ liệu"
 
-#: src/Controllers/Setup/ValidateController.php:72
+#: src/Controllers/Setup/ValidateController.php:69
 #, php-format
 msgid "Wrong data or no validation for %s"
 msgstr ""
@@ -15388,7 +15348,7 @@ msgstr "Đánh dấu %s đã được tạo ra."
 msgid "Bookmark not created!"
 msgstr "Chưa tạo đánh dấu!"
 
-#: src/Controllers/Table/AddFieldController.php:135
+#: src/Controllers/Table/AddFieldController.php:134
 #: src/Controllers/Table/IndexesController.php:142
 #: src/Controllers/Table/IndexRenameController.php:131
 #: src/Controllers/Table/Structure/PartitioningController.php:265
@@ -15464,7 +15424,7 @@ msgstr "Có quá nhiều phép gia nhập mà không dùng chỉ mục."
 
 #: src/Controllers/Table/GetFieldController.php:81
 #: src/Database/Routines.php:1046 src/Import/Import.php:131
-#: src/InsertEdit.php:199 src/Sql.php:863
+#: src/InsertEdit.php:200 src/Sql.php:863
 msgid "MySQL returned an empty result set (i.e. zero rows)."
 msgstr "MySQL trả về kết quả là trống rỗng (vd. không có hàng nào)."
 
@@ -15510,7 +15470,7 @@ msgstr "Cột trình bày đã được cập nhật thành công."
 msgid "Internal relationships were successfully updated."
 msgstr "Các quan hệ nội tại đã được cập nhật thành công."
 
-#: src/Controllers/Table/ReplaceController.php:183
+#: src/Controllers/Table/ReplaceController.php:184
 #, php-format
 msgid "Row: %1$s, Column: %2$s, Error: %3$s"
 msgstr "Hàng: %1$s, Cột: %2$s, Lỗi: %3$s"
@@ -15548,15 +15508,15 @@ msgstr "Bảng %1$s đã được thay đổi thành công. Đặc quyền đã 
 msgid "Tracking of %s is activated."
 msgstr "Việc theo dõi %s bị bất hoạt."
 
-#: src/Controllers/Table/TrackingController.php:151
+#: src/Controllers/Table/TrackingController.php:148
 msgid "SQL statements executed."
 msgstr "Các chỉ lệnh SQL đã thực hiện."
 
-#: src/Controllers/Table/TrackingController.php:205
+#: src/Controllers/Table/TrackingController.php:202
 msgid "Tracking versions deleted successfully."
 msgstr "Đã xóa thành công các phiên bản theo dõi."
 
-#: src/Controllers/Table/TrackingController.php:210
+#: src/Controllers/Table/TrackingController.php:207
 msgid "No versions selected."
 msgstr "Chưa chọn phiên bản nào."
 
@@ -15711,7 +15671,7 @@ msgstr "Truy vấn sau đây bị lỗi: \"%s\""
 #: src/Database/Events.php:115 src/Database/Events.php:136
 #: src/Database/Routines.php:104 src/Database/Routines.php:130
 #: src/Database/Routines.php:208 src/Database/Routines.php:222
-#: src/Database/Routines.php:1010 src/Html/Generator.php:799
+#: src/Database/Routines.php:1010 src/Html/Generator.php:801
 #: src/Triggers/Triggers.php:86 src/Triggers/Triggers.php:95
 #: src/Triggers/Triggers.php:109 src/Triggers/Triggers.php:130
 msgid "MySQL said: "
@@ -15766,7 +15726,7 @@ msgstr "Bạn phải cung cấp kiểu hợp lệ cho sự kiện."
 msgid "You must provide an event definition."
 msgstr "Phải cung cấp một định nghĩa sự kiện."
 
-#: src/DatabaseInterface.php:1128
+#: src/DatabaseInterface.php:1126
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -15774,13 +15734,13 @@ msgid ""
 "phpMyAdmin is currently using the default time zone of the database server."
 msgstr ""
 
-#: src/DatabaseInterface.php:1170
+#: src/DatabaseInterface.php:1168
 #, fuzzy
 #| msgid "Failed to read configuration file!"
 msgid "Failed to set configured collation connection!"
 msgstr "Không thể thiết lập kết nối với sự đối chiếu cấu hình!"
 
-#: src/DatabaseInterface.php:1684
+#: src/DatabaseInterface.php:1682
 msgid "Connection for controluser as defined in your configuration failed."
 msgstr ""
 "Kết nối cho bộ điều khiển được định nghĩa trong cấu hình của bạn không thành "
@@ -16184,11 +16144,11 @@ msgid ""
 "%sPrimeBase XT Home Page%s."
 msgstr ""
 
-#: src/Error/ErrorHandler.php:105
+#: src/Error/ErrorHandler.php:104
 msgid "Too many error messages, some are not displayed."
 msgstr "Quá nhiều lời nhắn lỗi, một số trong chúng sẽ không được hiển thị."
 
-#: src/Error/ErrorHandler.php:399
+#: src/Error/ErrorHandler.php:398
 msgid "Report"
 msgstr "Báo cáo"
 
@@ -16372,11 +16332,11 @@ msgctxt "Inline edit query"
 msgid "Edit inline"
 msgstr "Sửa chung dòng"
 
-#: src/Html/Generator.php:741
+#: src/Html/Generator.php:743
 msgid "Static analysis:"
 msgstr "Thống kê phân tích:"
 
-#: src/Html/Generator.php:744
+#: src/Html/Generator.php:746
 #, php-format
 msgid "%d errors were found during analysis."
 msgstr "Đã phát sinh %d lỗi trong quá trình phân tích."
@@ -16404,6 +16364,8 @@ msgid ""
 "The ini_get and/or ini_set functions are disabled in php.ini. phpMyAdmin "
 "requires these functions!"
 msgstr ""
+"Các hàm ini_get và/hoặc ini_set bị tắt trong php.ini. phpMyAdmin yêu cầu các "
+"chức năng này!"
 
 #: src/Http/Middleware/TokenMismatchChecking.php:30
 msgid "Error: Token mismatch"
@@ -16414,6 +16376,12 @@ msgid ""
 "Failed to set session cookie. Maybe you are using HTTP instead of HTTPS to "
 "access phpMyAdmin."
 msgstr ""
+"Không thể đặt cookie phiên. Có thể bạn đang sử dụng HTTP thay vì HTTPS để "
+"truy cập phpMyAdmin."
+
+#: src/I18n/LanguageManager.php:961
+msgid "Ignoring unsupported language code."
+msgstr "Bỏ qua mã ngôn ngữ không được hỗ trợ."
 
 #: src/Identifiers/InvalidDatabaseName.php:14
 #, fuzzy
@@ -16536,22 +16504,18 @@ msgstr ""
 "Các chỉ mục %1$s và %2$s dường như là giống nhau và một trong số chúng có "
 "thể gần như chắc chắn nên được xóa bỏ."
 
-#: src/InsertEdit.php:497
+#: src/InsertEdit.php:498
 msgid "web server upload directory:"
 msgstr "thư mục để tải lên máy chủ:"
 
-#: src/InsertEdit.php:924 src/Sql.php:860
+#: src/InsertEdit.php:925 src/Sql.php:860
 msgid "Showing SQL query"
 msgstr "Hiện truy vấn SQL"
 
-#: src/InsertEdit.php:948 src/Sql.php:840
+#: src/InsertEdit.php:949 src/Sql.php:840
 #, php-format
 msgid "Inserted row id: %1$d"
 msgstr "Chỉ số id người dùng kép: %1$d"
-
-#: src/LanguageManager.php:959
-msgid "Ignoring unsupported language code."
-msgstr "Bỏ qua mã ngôn ngữ không được hỗ trợ."
 
 #: src/Linter.php:112
 msgid ""
@@ -17985,51 +17949,51 @@ msgstr "Vui lòng kiểm tra đặc quyền của thư mục chứa cơ sở d�
 msgid "Details…"
 msgstr "Chi tiết…"
 
-#: src/Replication/ReplicationGui.php:417
+#: src/Replication/ReplicationGui.php:451
 msgid ""
 "Connection to server is disabled, please enable $cfg['AllowArbitraryServer'] "
 "in phpMyAdmin configuration."
 msgstr ""
 
-#: src/Replication/ReplicationGui.php:428
+#: src/Replication/ReplicationGui.php:462
 msgid "Replication started successfully."
 msgstr "Máy bản sao đã được khởi chạy thành công."
 
-#: src/Replication/ReplicationGui.php:429
+#: src/Replication/ReplicationGui.php:463
 msgid "Error starting replication."
 msgstr "Có lỗi khi khởi chạy máy bản sao."
 
-#: src/Replication/ReplicationGui.php:432
+#: src/Replication/ReplicationGui.php:466
 msgid "Replication stopped successfully."
 msgstr "Máy bản sao đã được dừng thành công."
 
-#: src/Replication/ReplicationGui.php:433
+#: src/Replication/ReplicationGui.php:467
 msgid "Error stopping replication."
 msgstr "Có lỗi khi dừng máy bản sao."
 
-#: src/Replication/ReplicationGui.php:436
+#: src/Replication/ReplicationGui.php:470
 msgid "Replication resetting successfully."
 msgstr "Máy bản sao đã được cài đặt lại thành công."
 
-#: src/Replication/ReplicationGui.php:437
+#: src/Replication/ReplicationGui.php:471
 msgid "Error resetting replication."
 msgstr "Có lỗi khi cài đặt lại máy bản sao."
 
-#: src/Replication/ReplicationGui.php:440
+#: src/Replication/ReplicationGui.php:474
 msgid "Success."
 msgstr "Thành công."
 
-#: src/Replication/ReplicationGui.php:441
+#: src/Replication/ReplicationGui.php:475
 msgid "Error."
 msgstr "Lỗi."
 
-#: src/Replication/ReplicationGui.php:486
+#: src/Replication/ReplicationGui.php:520
 #, fuzzy, php-format
 #| msgid "Unable to connect to master %s."
 msgid "Unable to connect to primary %s."
 msgstr "Không thể kết nối tới máy chính %s"
 
-#: src/Replication/ReplicationGui.php:496
+#: src/Replication/ReplicationGui.php:530
 #, fuzzy
 #| msgid ""
 #| "Unable to read master log position. Possible privilege problem on master."
@@ -18039,13 +18003,13 @@ msgstr ""
 "Không thể đọc vị trí nhật ký máy chính. Gần như chắc chắn là có trục trặc "
 "với đặc quyền trên máy chính."
 
-#: src/Replication/ReplicationGui.php:514
+#: src/Replication/ReplicationGui.php:548
 #, fuzzy
 #| msgid "Unable to change master!"
 msgid "Unable to change primary!"
 msgstr "Không thể đổi máy chính!"
 
-#: src/Replication/ReplicationGui.php:518
+#: src/Replication/ReplicationGui.php:552
 #, fuzzy, php-format
 #| msgid "Master server changed successfully to %s."
 msgid "Primary server changed successfully to %s."
@@ -18392,24 +18356,24 @@ msgstr "Không tìm thấy cơ sở dữ liệu nguồn “%s“!"
 msgid "Target database `%s` was not found!"
 msgstr "Không tìm thấy cơ sở dữ liệu đích “%s“!"
 
-#: src/Table/Table.php:810
+#: src/Table/Table.php:809
 msgid "Invalid database:"
 msgstr "Cơ sở dữ liệu không hợp lệ:"
 
-#: src/Table/Table.php:828
+#: src/Table/Table.php:827
 msgid "Invalid table name:"
 msgstr "Tên bảng không hợp lệ"
 
-#: src/Table/Table.php:873
+#: src/Table/Table.php:872
 #, php-format
 msgid "Table %1$s has been renamed to %2$s."
 msgstr "Bảng %1$s đã được đổi tên thành %2$s."
 
-#: src/Table/Table.php:1108
+#: src/Table/Table.php:1107
 msgid "Could not save table UI preferences!"
 msgstr "Không thể ghi lại bảng mới dùng"
 
-#: src/Table/Table.php:1130
+#: src/Table/Table.php:1129
 #, php-format
 msgid ""
 "Failed to cleanup table UI preferences (see $cfg['Servers'][$i]"
@@ -18418,7 +18382,7 @@ msgstr ""
 "Gặp lỗi khi dọn dẹp tùy thích bảng UI (xem $cfg['Servers'][$i]"
 "['MaxTableUiprefs'] %s)"
 
-#: src/Table/Table.php:1248
+#: src/Table/Table.php:1247
 #, php-format
 msgid ""
 "Cannot save UI property \"%s\". The changes made will not be persistent "
@@ -18429,7 +18393,7 @@ msgstr ""
 "không liên tục sau khi bạn làm mới trang này. Vui lòng kiểm tra xem cấu trúc "
 "bảng có bị thay đổi hay không."
 
-#: src/Table/Table.php:1594
+#: src/Table/Table.php:1571
 #, php-format
 msgid "Error creating foreign key on %1$s (check data types)"
 msgstr "Gặp lỗi khi tạo khóa ngoại trên %1$s (kiểm tra lại kiểu dữ liệu)"
@@ -18929,6 +18893,9 @@ msgstr "Lỗi trong kho nén ZIP:"
 #: src/ZipExtension.php:74
 msgid "No files found inside ZIP archive!"
 msgstr "Không tìm thấy tập tin nào trong kho ZIP!"
+
+#~ msgid "Incomplete params"
+#~ msgstr "Tham số chưa hoàn thiện"
 
 #, php-format
 #~ msgid "A primary key has been added on %s."
