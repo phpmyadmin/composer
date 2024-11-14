@@ -19,6 +19,7 @@ use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Html\MySQLDocumentation;
+use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Identifiers\TableName;
 use PhpMyAdmin\Message;
@@ -1349,10 +1350,11 @@ class Privileges
         string $sqlQuery,
         string $hostname,
         string $username,
+        string|null $dbname,
     ): array {
-        if (isset($GLOBALS['dbname'])) {
+        if ($dbname !== null) {
             //if (preg_match('/\\\\(?:_|%)/i', $dbname)) {
-            if (preg_match('/(?<!\\\\)(?:_|%)/', $GLOBALS['dbname']) === 1) {
+            if (preg_match('/(?<!\\\\)(?:_|%)/', $dbname) === 1) {
                 $dbnameIsWildcard = true;
             } else {
                 $dbnameIsWildcard = false;
@@ -2211,61 +2213,26 @@ class Privileges
     /**
      * update Data for information: Adds a user
      *
-     * @param string|mixed[]|null $dbname     db name
-     * @param string              $username   user name
-     * @param string              $hostname   host name
-     * @param string|null         $password   password
-     * @param bool                $isMenuwork is_menuwork set?
+     * @param string      $dbname     db name
+     * @param string      $username   user name
+     * @param string      $hostname   host name
+     * @param string|null $password   password
+     * @param bool        $isMenuwork is_menuwork set?
      *
      * @return array{Message|null, string[], string[]|null, string, bool}
      */
     public function addUser(
-        string|array|null $dbname,
+        string $dbname,
         string $username,
         string $hostname,
         string|null $password,
         bool $isMenuwork,
     ): array {
-        $message = null;
-        $queries = [];
-        $queriesForDisplay = null;
-        $sqlQuery = '';
-
-        if (! isset($_POST['adduser_submit']) && ! isset($_POST['change_copy'])) {
-            return [
-                $message,
-                $queries,
-                $queriesForDisplay,
-                $sqlQuery,
-                false, // Add user error
-            ];
-        }
-
         // Some reports were sent to the error reporting server with phpMyAdmin 5.1.0
         // pred_username was reported to be not defined
         $predUsername = $_POST['pred_username'] ?? '';
         if ($predUsername === 'any') {
             $username = '';
-        }
-
-        switch ($_POST['pred_hostname']) {
-            case 'any':
-                $hostname = '%';
-                break;
-            case 'localhost':
-                $hostname = 'localhost';
-                break;
-            case 'hosttable':
-                $hostname = '';
-                break;
-            case 'thishost':
-                $currentUserName = $this->dbi->fetchValue('SELECT USER()');
-                if (is_string($currentUserName)) {
-                    $hostname = mb_substr($currentUserName, mb_strrpos($currentUserName, '@') + 1);
-                    unset($currentUserName);
-                }
-
-                break;
         }
 
         if ($this->userExists($username, $hostname)) {
@@ -2275,9 +2242,9 @@ class Privileges
 
             return [
                 $message,
-                $queries,
-                $queriesForDisplay,
-                $sqlQuery,
+                [],
+                null,
+                '',
                 true, // Add user error
             ];
         }
@@ -2315,7 +2282,7 @@ class Privileges
                 $sqlQuery,
                 $username,
                 $hostname,
-                is_string($dbname) ? $dbname : '',
+                $dbname,
                 $alterRealSqlQuery,
                 $alterSqlQuery,
                 isset($_POST['createdb-1']),
@@ -2328,8 +2295,8 @@ class Privileges
 
             return [
                 $message,
-                $queries,
-                $queriesForDisplay,
+                [],
+                null,
                 $sqlQuery,
                 $error, // Add user error if the query fails
             ];
@@ -2339,6 +2306,7 @@ class Privileges
         $oldUserGroup = $_POST['old_usergroup'] ?? '';
         $this->setUserGroup($_POST['username'], $oldUserGroup);
 
+        $queries = [];
         $queries[] = $createUserReal;
         $queries[] = $realSqlQuery;
 
@@ -2352,6 +2320,7 @@ class Privileges
         // $queries_for_display, at the same position occupied
         // by the real query in $queries
         $tmpCount = count($queries);
+        $queriesForDisplay = [];
         $queriesForDisplay[$tmpCount - 2] = $createUserShow;
 
         if ($passwordSetReal !== '') {
@@ -2363,7 +2332,7 @@ class Privileges
         }
 
         return [
-            $message,
+            null,
             $queries,
             $queriesForDisplay,
             $sqlQuery,
@@ -2388,92 +2357,6 @@ class Privileges
         } else {
             $this->dbi->tryQuery('SET `old_passwords` = 0;');
         }
-    }
-
-    /**
-     * Update DB information: DB, Table, isWildcard
-     *
-     * @return mixed[]
-     * @psalm-return array{?string, ?string, array|string|null, ?string, ?string, bool}
-     */
-    public function getDataForDBInfo(): array
-    {
-        $username = null;
-        $hostname = null;
-        $dbname = null;
-        $tablename = null;
-        $routinename = null;
-
-        if (isset($_REQUEST['username'])) {
-            $username = (string) $_REQUEST['username'];
-        }
-
-        if (isset($_REQUEST['hostname'])) {
-            $hostname = (string) $_REQUEST['hostname'];
-        }
-
-        /**
-         * Checks if a dropdown box has been used for selecting a database / table
-         */
-        if (
-            isset($_POST['pred_tablename'])
-            && is_string($_POST['pred_tablename'])
-            && $_POST['pred_tablename'] !== ''
-        ) {
-            $tablename = $_POST['pred_tablename'];
-        } elseif (
-            isset($_REQUEST['tablename'])
-            && is_string($_REQUEST['tablename'])
-            && $_REQUEST['tablename'] !== ''
-        ) {
-            $tablename = $_REQUEST['tablename'];
-        }
-
-        if (
-            isset($_POST['pred_routinename'])
-            && is_string($_POST['pred_routinename'])
-            && $_POST['pred_routinename'] !== ''
-        ) {
-            $routinename = $_POST['pred_routinename'];
-        } elseif (
-            isset($_REQUEST['routinename'])
-            && is_string($_REQUEST['routinename'])
-            && $_REQUEST['routinename'] !== ''
-        ) {
-            $routinename = $_REQUEST['routinename'];
-        }
-
-        // Accept only array of non-empty strings
-        if (
-            isset($_POST['pred_dbname'])
-            && is_array($_POST['pred_dbname'])
-            && $_POST['pred_dbname'] === array_filter($_POST['pred_dbname'])
-        ) {
-            $dbname = $_POST['pred_dbname'];
-            // If dbname contains only one database.
-            if (count($dbname) === 1) {
-                $dbname = (string) $dbname[0];
-            }
-        }
-
-        if ($dbname === null && isset($_REQUEST['dbname'])) {
-            if (is_array($_REQUEST['dbname'])) {
-                // Accept only array of non-empty strings
-                if ($_REQUEST['dbname'] === array_filter($_REQUEST['dbname'])) {
-                    $dbname = $_REQUEST['dbname'];
-                }
-            } elseif (
-                is_string($_REQUEST['dbname'])
-                && $_REQUEST['dbname'] !== ''
-            ) {
-                $dbname = $_REQUEST['dbname'];
-            }
-        }
-
-        // check if given $dbname is a wildcard or not
-        $databaseNameIsWildcard = is_string($dbname) && preg_match('/(?<!\\\\)(?:_|%)/', $dbname) === 1;
-
-        return [$username, $hostname, $dbname, $tablename, $routinename, $databaseNameIsWildcard];
     }
 
     /**
@@ -3359,5 +3242,116 @@ class Privileges
         }
 
         return '';
+    }
+
+    public function getHostname(string $predHostname, string $globalHostname): string
+    {
+        switch ($predHostname) {
+            case 'any':
+                return '%';
+
+            case 'localhost':
+                return 'localhost';
+
+            case 'hosttable':
+                return '';
+
+            case 'thishost':
+                $currentUserName = $this->dbi->fetchValue('SELECT USER()');
+                if (is_string($currentUserName)) {
+                    return mb_substr($currentUserName, mb_strrpos($currentUserName, '@') + 1);
+                }
+        }
+
+        return $globalHostname;
+    }
+
+    public function isDatabaseNameWildcard(mixed $dbname): bool
+    {
+        return is_string($dbname) && preg_match('/(?<!\\\\)(?:_|%)/', $dbname) === 1;
+    }
+
+    public function getRoutinename(ServerRequest $request): string|null
+    {
+        $postPredRoutinename = $request->getParsedBodyParamAsString('pred_routinename', '');
+        /** @var mixed $requestRoutinename */
+        $requestRoutinename = $request->getParam('routinename');
+        if ($postPredRoutinename !== '') {
+            return $postPredRoutinename;
+        }
+
+        if (is_string($requestRoutinename) && $requestRoutinename !== '') {
+            return $requestRoutinename;
+        }
+
+        return null;
+    }
+
+    public function getTablename(ServerRequest $request): string|null
+    {
+        $postPredTablename = $request->getParsedBodyParamAsString('pred_tablename', '');
+        /** @var mixed $requestTablename */
+        $requestTablename = $request->getParam('tablename');
+        if ($postPredTablename !== '') {
+            return $postPredTablename;
+        }
+
+        if (is_string($requestTablename) && $requestTablename !== '') {
+            return $requestTablename;
+        }
+
+        return null;
+    }
+
+    /** @return string|string[]|null */
+    public function getDbname(ServerRequest $request): string|array|null
+    {
+        $dbname = null;
+        // Accept only array of non-empty strings
+        /** @var mixed $predDbname */
+        $predDbname = $request->getParsedBodyParam('pred_dbname');
+        if (
+            is_array($predDbname)
+            && $predDbname === array_filter($predDbname)
+        ) {
+            $dbname = $predDbname;
+            // If dbname contains only one database.
+            if (count($dbname) === 1) {
+                $dbname = (string) $dbname[0];
+            }
+        }
+
+        /** @var mixed $requestDbname */
+        $requestDbname = $request->getParam('dbname');
+        if ($dbname === null && $requestDbname !== null) {
+            if (is_array($requestDbname)) {
+                // Accept only array of non-empty strings
+                if ($requestDbname === array_filter($requestDbname)) {
+                    $dbname = $requestDbname;
+                }
+            } elseif (is_string($requestDbname) && $requestDbname !== '') {
+                $dbname = $requestDbname;
+            }
+        }
+
+        return $dbname;
+    }
+
+    public function getHostnameParam(ServerRequest $request): string|null
+    {
+        if ($request->has('hostname')) {
+            return (string) $request->getParam('hostname');
+        }
+
+        return null;
+    }
+
+    public function getUsernameParam(ServerRequest $request): string|null
+    {
+        if ($request->has('username')) {
+            return (string) $request->getParam('username');
+        }
+
+        return null;
     }
 }

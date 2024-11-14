@@ -26,6 +26,7 @@ use PhpMyAdmin\Plugins\Import\ImportFormat;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\UrlParams;
 use PhpMyAdmin\Util;
 use PhpMyAdmin\Utils\ForeignKey;
 use Throwable;
@@ -60,13 +61,11 @@ final class ImportController implements InvocableController
 
     public function __invoke(ServerRequest $request): Response
     {
-        $GLOBALS['goto'] ??= null;
         $GLOBALS['display_query'] ??= null;
         $GLOBALS['ajax_reload'] ??= null;
         $GLOBALS['import_text'] ??= null;
         $GLOBALS['message'] ??= null;
         $GLOBALS['errorUrl'] ??= null;
-        $GLOBALS['urlParams'] ??= null;
         $GLOBALS['error'] ??= null;
         $GLOBALS['result'] ??= null;
 
@@ -174,7 +173,7 @@ final class ImportController implements InvocableController
 
             // so we can obtain the message
             $_SESSION['Import_message']['message'] = $GLOBALS['message']->getDisplay();
-            $_SESSION['Import_message']['go_back_url'] = $GLOBALS['goto'];
+            $_SESSION['Import_message']['go_back_url'] = UrlParams::$goto;
 
             $this->response->setRequestStatus(false);
             $this->response->addJSON('message', $GLOBALS['message']);
@@ -197,31 +196,31 @@ final class ImportController implements InvocableController
         }
 
         if (Current::$table !== '' && Current::$database !== '') {
-            $GLOBALS['urlParams'] = ['db' => Current::$database, 'table' => Current::$table];
+            UrlParams::$params = ['db' => Current::$database, 'table' => Current::$table];
         } elseif (Current::$database !== '') {
-            $GLOBALS['urlParams'] = ['db' => Current::$database];
+            UrlParams::$params = ['db' => Current::$database];
         } else {
-            $GLOBALS['urlParams'] = [];
+            UrlParams::$params = [];
         }
 
         // Create error and goto url
         if (ImportSettings::$importType === 'table') {
-            $GLOBALS['goto'] = Url::getFromRoute('/table/import');
+            UrlParams::$goto = Url::getFromRoute('/table/import');
         } elseif (ImportSettings::$importType === 'database') {
-            $GLOBALS['goto'] = Url::getFromRoute('/database/import');
+            UrlParams::$goto = Url::getFromRoute('/database/import');
         } elseif (ImportSettings::$importType === 'server') {
-            $GLOBALS['goto'] = Url::getFromRoute('/server/import');
-        } elseif (empty($GLOBALS['goto']) || preg_match('@^index\.php$@i', $GLOBALS['goto']) !== 1) {
+            UrlParams::$goto = Url::getFromRoute('/server/import');
+        } elseif (UrlParams::$goto === '' || preg_match('@^index\.php$@i', UrlParams::$goto) !== 1) {
             if (Current::$table !== '' && Current::$database !== '') {
-                $GLOBALS['goto'] = Url::getFromRoute('/table/structure');
+                UrlParams::$goto = Url::getFromRoute('/table/structure');
             } elseif (Current::$database !== '') {
-                $GLOBALS['goto'] = Url::getFromRoute('/database/structure');
+                UrlParams::$goto = Url::getFromRoute('/database/structure');
             } else {
-                $GLOBALS['goto'] = Url::getFromRoute('/server/sql');
+                UrlParams::$goto = Url::getFromRoute('/server/sql');
             }
         }
 
-        $GLOBALS['errorUrl'] = $GLOBALS['goto'] . Url::getCommon($GLOBALS['urlParams'], '&');
+        $GLOBALS['errorUrl'] = UrlParams::$goto . Url::getCommon(UrlParams::$params, '&');
         $_SESSION['Import_message']['go_back_url'] = $GLOBALS['errorUrl'];
 
         if (Current::$database !== '') {
@@ -553,13 +552,13 @@ final class ImportController implements InvocableController
 
         // Did we hit timeout? Tell it user.
         if (ImportSettings::$timeoutPassed) {
-            $GLOBALS['urlParams']['timeout_passed'] = '1';
-            $GLOBALS['urlParams']['offset'] = ImportSettings::$offset;
+            UrlParams::$params['timeout_passed'] = '1';
+            UrlParams::$params['offset'] = ImportSettings::$offset;
             if (ImportSettings::$localImportFile !== '') {
-                $GLOBALS['urlParams']['local_import_file'] = ImportSettings::$localImportFile;
+                UrlParams::$params['local_import_file'] = ImportSettings::$localImportFile;
             }
 
-            $importUrl = $GLOBALS['errorUrl'] = $GLOBALS['goto'] . Url::getCommon($GLOBALS['urlParams'], '&');
+            $importUrl = $GLOBALS['errorUrl'] = UrlParams::$goto . Url::getCommon(UrlParams::$params, '&');
 
             $GLOBALS['message'] = Message::error(
                 __(
@@ -655,7 +654,7 @@ final class ImportController implements InvocableController
                     null, // sql_query_for_bookmark - see below
                     null, // message_to_show
                     null, // sql_data
-                    $GLOBALS['goto'], // goto
+                    UrlParams::$goto, // goto
                     null, // disp_query
                     null, // disp_message
                     $GLOBALS['sql_query'], // sql_query
@@ -718,7 +717,7 @@ final class ImportController implements InvocableController
             $this->response->addJSON('message', Message::error(ImportSettings::$message));
         } else {
             /** @psalm-suppress UnresolvableInclude */
-            include ROOT_PATH . $GLOBALS['goto'];
+            include ROOT_PATH . UrlParams::$goto;
         }
 
         return $this->response->response();

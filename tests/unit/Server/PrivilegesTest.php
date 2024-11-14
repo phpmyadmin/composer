@@ -13,6 +13,7 @@ use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Dbal\Statement;
 use PhpMyAdmin\Html\Generator;
+use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Server\Plugins;
 use PhpMyAdmin\Server\Privileges;
@@ -52,60 +53,96 @@ class PrivilegesTest extends AbstractTestCase
         DatabaseInterface::$instance = $this->dbi;
     }
 
-    public function testGetDataForDBInfo(): void
+    public function testGetUsernameParam(): void
     {
-        $_REQUEST['username'] = 'PMA_username';
-        $_REQUEST['hostname'] = 'PMA_hostname';
-        $_REQUEST['tablename'] = 'PMA_tablename';
-        $_REQUEST['dbname'] = 'PMA_dbname';
-
         $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
+        $requestTemplate = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/');
 
-        [
-            $username,
-            $hostname,
-            $dbname,
-            $tablename,
-            $routinename,
-            $dbnameIsWildcard,
-        ] = $serverPrivileges->getDataForDBInfo();
+        $request = $requestTemplate->withQueryParams(['username' => 'PMA_username']);
+        $username = $serverPrivileges->getUsernameParam($request);
         self::assertSame('PMA_username', $username);
+    }
+
+    public function testGetHostnameParam(): void
+    {
+        $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
+        $requestTemplate = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/');
+
+        $request = $requestTemplate->withQueryParams(['hostname' => 'PMA_hostname']);
+        $hostname = $serverPrivileges->getHostnameParam($request);
         self::assertSame('PMA_hostname', $hostname);
+    }
+
+    public function testGetDbname(): void
+    {
+        $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
+        $requestTemplate = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/');
+
+        $request = $requestTemplate->withQueryParams(['dbname' => 'PMA_dbname']);
+        $dbname = $serverPrivileges->getDbname($request);
         self::assertSame('PMA_dbname', $dbname);
-        self::assertSame('PMA_tablename', $tablename);
-        self::assertTrue($dbnameIsWildcard);
 
         //pre variable have been defined
-        $_POST['pred_tablename'] = 'PMA_pred__tablename';
-        $_POST['pred_dbname'] = ['PMA_pred_dbname'];
-        [, , $dbname, $tablename, $routinename, $dbnameIsWildcard] = $serverPrivileges->getDataForDBInfo();
+        $request = $requestTemplate->withParsedBody([
+            'pred_dbname' => ['PMA_pred_dbname'],
+        ]);
+        $dbname = $serverPrivileges->getDbname($request);
         self::assertSame('PMA_pred_dbname', $dbname);
-        self::assertSame('PMA_pred__tablename', $tablename);
-        self::assertTrue($dbnameIsWildcard);
 
         // Escaped database
-        $_POST['pred_tablename'] = 'PMA_pred__tablename';
-        $_POST['pred_dbname'] = ['PMA\_pred\_dbname'];
-        [, , $dbname, $tablename, $routinename, $dbnameIsWildcard] = $serverPrivileges->getDataForDBInfo();
+        $request = $requestTemplate->withParsedBody([
+            'pred_dbname' => ['PMA\_pred\_dbname'],
+        ]);
+        $dbname = $serverPrivileges->getDbname($request);
         self::assertSame('PMA\_pred\_dbname', $dbname);
-        self::assertSame('PMA_pred__tablename', $tablename);
-        self::assertFalse($dbnameIsWildcard);
 
         // Multiselect database - pred
-        unset($_POST['pred_tablename'], $_REQUEST['tablename'], $_REQUEST['dbname']);
-        $_POST['pred_dbname'] = ['PMA\_pred\_dbname', 'PMADbname2'];
-        [, , $dbname, $tablename, , $dbnameIsWildcard] = $serverPrivileges->getDataForDBInfo();
+        $request = $requestTemplate->withParsedBody([
+            'pred_dbname' => ['PMA\_pred\_dbname', 'PMADbname2'],
+        ]);
+        $dbname = $serverPrivileges->getDbname($request);
         self::assertSame(['PMA\_pred\_dbname', 'PMADbname2'], $dbname);
-        self::assertNull($tablename);
-        self::assertFalse($dbnameIsWildcard);
 
         // Multiselect database
-        unset($_POST['pred_tablename'], $_REQUEST['tablename'], $_POST['pred_dbname']);
-        $_REQUEST['dbname'] = ['PMA\_dbname', 'PMADbname2'];
-        [, , $dbname, $tablename, , $dbnameIsWildcard] = $serverPrivileges->getDataForDBInfo();
+        $request = $requestTemplate->withParsedBody([
+            'dbname' => ['PMA\_dbname', 'PMADbname2'],
+        ]);
+        $dbname = $serverPrivileges->getDbname($request);
         self::assertSame(['PMA\_dbname', 'PMADbname2'], $dbname);
+    }
+
+    public function testGetTablename(): void
+    {
+        $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
+        $requestTemplate = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/');
+
+        $request = $requestTemplate->withQueryParams(['tablename' => 'PMA_tablename']);
+        $tablename = $serverPrivileges->getTablename($request);
+        self::assertSame('PMA_tablename', $tablename);
+
+        $request = $requestTemplate->withParsedBody(['pred_tablename' => 'PMA_pred__tablename']);
+        $tablename = $serverPrivileges->getTablename($request);
+        self::assertSame('PMA_pred__tablename', $tablename);
+
+        $request = $requestTemplate->withParsedBody(['pred_tablename' => 'PMA_pred__tablename']);
+        $tablename = $serverPrivileges->getTablename($request);
+        self::assertSame('PMA_pred__tablename', $tablename);
+
+        $request = $requestTemplate->withParsedBody([]);
+        $tablename = $serverPrivileges->getTablename($request);
         self::assertNull($tablename);
-        self::assertFalse($dbnameIsWildcard);
+    }
+
+    public function testIsDatabaseNameWildcard(): void
+    {
+        $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
+
+        self::assertTrue($serverPrivileges->isDatabaseNameWildcard('PMA_dbname'));
+        self::assertTrue($serverPrivileges->isDatabaseNameWildcard('PMA_pred_dbname'));
+
+        self::assertFalse($serverPrivileges->isDatabaseNameWildcard('PMA\_pred\_dbname'));
+        self::assertFalse($serverPrivileges->isDatabaseNameWildcard(['PMA\_pred\_dbname', 'PMADbname2']));
+        self::assertFalse($serverPrivileges->isDatabaseNameWildcard(['PMA\_dbname', 'PMADbname2']));
     }
 
     public function testWildcardEscapeForGrant(): void
@@ -298,10 +335,8 @@ class PrivilegesTest extends AbstractTestCase
 
         $dbname = 'pma_dbname';
         $username = 'pma_username';
-        $hostname = 'pma_hostname';
-        $_POST['adduser_submit'] = true;
+        $hostname = 'localhost';
         $_POST['pred_username'] = 'any';
-        $_POST['pred_hostname'] = 'localhost';
         $_POST['pred_password'] = 'keep';
         $_POST['createdb-3'] = true;
         $_POST['userGroup'] = 'username';
@@ -348,10 +383,8 @@ class PrivilegesTest extends AbstractTestCase
         $GLOBALS['username'] = 'username';
         $dbname = 'pma_dbname';
         $username = 'pma_username';
-        $hostname = 'pma_hostname';
-        $_POST['adduser_submit'] = true;
+        $hostname = 'localhost';
         $_POST['pred_username'] = 'any';
-        $_POST['pred_hostname'] = 'localhost';
         $_POST['pred_password'] = 'keep';
         $_POST['createdb-3'] = true;
         $_POST['userGroup'] = 'username';
@@ -420,7 +453,6 @@ class PrivilegesTest extends AbstractTestCase
         $username = 'pma_username';
         $hostname = 'pma_hostname';
         $tablename = 'pma_tablename';
-        $_POST['adduser_submit'] = true;
         $_POST['pred_username'] = 'any';
         $_POST['pred_hostname'] = 'localhost';
         $_POST['createdb-3'] = true;
@@ -460,7 +492,6 @@ class PrivilegesTest extends AbstractTestCase
         $username = 'pma_username';
         $hostname = 'pma_hostname';
         $tablename = 'pma_tablename';
-        $_POST['adduser_submit'] = true;
         $_POST['pred_username'] = 'any';
         $_POST['pred_hostname'] = 'localhost';
         $_POST['createdb-3'] = true;
@@ -487,7 +518,6 @@ class PrivilegesTest extends AbstractTestCase
         $username = 'pma_username';
         $hostname = 'pma_hostname';
         $tablename = '';
-        $_POST['adduser_submit'] = true;
         $_POST['pred_username'] = 'any';
         $_POST['pred_hostname'] = 'localhost';
         $_POST['Grant_priv'] = 'Y';
@@ -531,7 +561,6 @@ class PrivilegesTest extends AbstractTestCase
         $username = 'pma_username';
         $hostname = 'pma_hostname';
         $tablename = '';
-        $_POST['adduser_submit'] = true;
         $_POST['pred_username'] = 'any';
         $_POST['pred_hostname'] = 'localhost';
         $_POST['Grant_priv'] = 'Y';
@@ -1145,15 +1174,20 @@ class PrivilegesTest extends AbstractTestCase
         $sqlQuery = 'pma_sql_query';
         $username = 'pma_username';
         $hostname = 'pma_hostname';
-        $GLOBALS['dbname'] = 'pma_dbname';
-        $_POST['adduser_submit'] = 'adduser_submit';
+        $dbname = 'pma_dbname';
         $_POST['username'] = 'username';
         $_POST['change_copy'] = 'change_copy';
         $_GET['validate_username'] = 'validate_username';
         $_GET['username'] = 'username';
         $_POST['update_privs'] = 'update_privs';
 
-        $extraData = $serverPrivileges->getExtraDataForAjaxBehavior($password, $sqlQuery, $hostname, $username);
+        $extraData = $serverPrivileges->getExtraDataForAjaxBehavior(
+            $password,
+            $sqlQuery,
+            $hostname,
+            $username,
+            $dbname,
+        );
 
         //user_exists
         self::assertFalse($extraData['user_exists']);
@@ -1960,5 +1994,32 @@ class PrivilegesTest extends AbstractTestCase
             $b,
             $serverPrivileges->unescapeGrantWildcards($a),
         );
+    }
+
+    #[DataProvider('providerGetHostname')]
+    public function testGetHostname(string $expected, string $predHostname, string $globalHostname): void
+    {
+        $dummyDbi = $this->createDbiDummy();
+        $dummyDbi->addResult(
+            'SELECT USER()',
+            [['@pma_host']],
+        );
+        $dbi = $this->createDatabaseInterface($dummyDbi);
+        $serverPrivileges = $this->getPrivileges($dbi);
+
+        self::assertSame(
+            $expected,
+            $serverPrivileges->getHostname($predHostname, $globalHostname),
+        );
+    }
+
+    /** @return iterable<int, string[]> */
+    public static function providerGetHostname(): iterable
+    {
+        yield ['%', 'any', ''];
+        yield ['localhost', 'localhost', ''];
+        yield ['', 'hosttable', ''];
+        yield ['pma_host', 'thishost', ''];
+        yield ['global', '', 'global'];
     }
 }

@@ -21,6 +21,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\UrlParams;
 
 use function __;
 use function array_fill;
@@ -51,7 +52,6 @@ class ChangeController implements InvocableController
     public function __invoke(ServerRequest $request): Response
     {
         $GLOBALS['disp_message'] ??= null;
-        $GLOBALS['urlParams'] ??= null;
         $GLOBALS['errorUrl'] ??= null;
         $GLOBALS['where_clause'] ??= null;
         $GLOBALS['unsaved_values'] ??= null;
@@ -122,30 +122,30 @@ class ChangeController implements InvocableController
 
         /**
          * Defines the url to return to in case of error in a sql statement
-         * (at this point, $GLOBALS['goto'] will be set but could be empty)
+         * (at this point, UrlParams::$goto will be set but could be empty)
          */
-        if (empty($GLOBALS['goto'])) {
+        if (UrlParams::$goto === '') {
             if (Current::$table !== '') {
                 // avoid a problem (see bug #2202709)
-                $GLOBALS['goto'] = Url::getFromRoute('/table/sql');
+                UrlParams::$goto = Url::getFromRoute('/table/sql');
             } else {
-                $GLOBALS['goto'] = Url::getFromRoute('/database/sql');
+                UrlParams::$goto = Url::getFromRoute('/database/sql');
             }
         }
 
         /** @var mixed $sqlQuery */
         $sqlQuery = $request->getParsedBodyParam('sql_query');
-        $GLOBALS['urlParams'] = ['db' => Current::$database, 'sql_query' => is_string($sqlQuery) ? $sqlQuery : ''];
+        UrlParams::$params = ['db' => Current::$database, 'sql_query' => is_string($sqlQuery) ? $sqlQuery : ''];
 
-        if (str_starts_with($GLOBALS['goto'] ?? '', 'index.php?route=/table')) {
-            $GLOBALS['urlParams']['table'] = Current::$table;
+        if (str_starts_with(UrlParams::$goto, 'index.php?route=/table')) {
+            UrlParams::$params['table'] = Current::$table;
         }
 
-        $GLOBALS['errorUrl'] = $GLOBALS['goto'] . Url::getCommon(
-            $GLOBALS['urlParams'],
-            ! str_contains($GLOBALS['goto'], '?') ? '?' : '&',
+        $GLOBALS['errorUrl'] = UrlParams::$goto . Url::getCommon(
+            UrlParams::$params,
+            ! str_contains(UrlParams::$goto, '?') ? '?' : '&',
         );
-        unset($GLOBALS['urlParams']);
+        UrlParams::$params = [];
 
         $commentsMap = $this->insertEdit->getCommentsMap(Current::$database, Current::$table);
 
@@ -192,9 +192,9 @@ class ChangeController implements InvocableController
 
         $htmlOutput = '';
 
-        $GLOBALS['urlParams']['db'] = Current::$database;
-        $GLOBALS['urlParams']['table'] = Current::$table;
-        $GLOBALS['urlParams'] = $this->urlParamsInEditMode($GLOBALS['urlParams'], $whereClauseArray);
+        UrlParams::$params['db'] = Current::$database;
+        UrlParams::$params['table'] = Current::$table;
+        UrlParams::$params = $this->urlParamsInEditMode($request, UrlParams::$params, $whereClauseArray);
 
         $hasBlobField = false;
         foreach ($tableColumns as $tableColumn) {
@@ -220,11 +220,11 @@ class ChangeController implements InvocableController
         }
 
         if (! $this->config->settings['ShowFunctionFields']) {
-            $htmlOutput .= $this->insertEdit->showTypeOrFunction('function', $GLOBALS['urlParams'], false);
+            $htmlOutput .= $this->insertEdit->showTypeOrFunction('function', UrlParams::$params, false);
         }
 
         if (! $this->config->settings['ShowFieldTypesInDataEditView']) {
-            $htmlOutput .= $this->insertEdit->showTypeOrFunction('type', $GLOBALS['urlParams'], false);
+            $htmlOutput .= $this->insertEdit->showTypeOrFunction('type', UrlParams::$params, false);
         }
 
         $GLOBALS['plugin_scripts'] = [];
@@ -244,7 +244,7 @@ class ChangeController implements InvocableController
             }
 
             $htmlOutput .= $this->insertEdit->getHtmlForInsertEditRow(
-                $GLOBALS['urlParams'],
+                UrlParams::$params,
                 $tableColumns,
                 $commentsMap,
                 $GLOBALS['current_result'],
@@ -295,12 +295,13 @@ class ChangeController implements InvocableController
     /**
      * Add some url parameters
      *
-     * @param mixed[] $urlParams        containing $db and $table as url parameters
-     * @param mixed[] $whereClauseArray where clauses array
+     * @param array<string, bool|int|string> $urlParams        containing $db and $table as url parameters
+     * @param string[]                       $whereClauseArray where clauses array
      *
-     * @return mixed[] Add some url parameters to $url_params array and return it
+     * @return array<string, bool|int|string> Add some url parameters to $url_params array and return it
      */
     public function urlParamsInEditMode(
+        ServerRequest $request,
         array $urlParams,
         array $whereClauseArray,
     ): array {
@@ -308,8 +309,9 @@ class ChangeController implements InvocableController
             $urlParams['where_clause'] = trim($whereClause);
         }
 
-        if (! empty($_POST['sql_query'])) {
-            $urlParams['sql_query'] = $_POST['sql_query'];
+        $sqlQuery = $request->getParsedBodyParamAsString('sql_query', '');
+        if ($sqlQuery !== '') {
+            $urlParams['sql_query'] = $sqlQuery;
         }
 
         return $urlParams;

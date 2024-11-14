@@ -1194,11 +1194,9 @@
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </InvalidArrayOffset>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </MixedAssignment>
     <PossiblyUnusedMethod>
@@ -1841,7 +1839,7 @@
       <code><![CDATA[$GLOBALS['result']]]></code>
     </InvalidArrayOffset>
     <MixedArgumentTypeCoercion>
-      <code><![CDATA[$GLOBALS['urlParams']]]></code>
+      <code><![CDATA[UrlParams::$params]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAssignment>
       <code><![CDATA[$_SESSION['Import_message']['go_back_url']]]></code>
@@ -1864,6 +1862,9 @@
     <MixedInferredReturnType>
       <code><![CDATA[Response]]></code>
     </MixedInferredReturnType>
+    <MixedPropertyTypeCoercion>
+      <code><![CDATA[['db' => Current::$database, 'table' => Current::$table]]]></code>
+    </MixedPropertyTypeCoercion>
     <PossiblyInvalidPropertyAssignmentValue>
       <code><![CDATA[$memoryLimit / 8]]></code>
     </PossiblyInvalidPropertyAssignmentValue>
@@ -1874,7 +1875,6 @@
       <code><![CDATA[$request->getParsedBodyParamAsString('import_type', '')]]></code>
     </PropertyTypeCoercion>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
       <code><![CDATA[empty($GLOBALS['sql_query'])]]></code>
       <code><![CDATA[empty($config->settings['MemoryLimit'])]]></code>
     </RiskyTruthyFalsyComparison>
@@ -2443,11 +2443,9 @@
   </file>
   <file src="src/Controllers/Server/PrivilegesController.php">
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['dbname']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
-      <code><![CDATA[$dbName ?? '']]></code>
       <code><![CDATA[$request->getQueryParam('initial')]]></code>
       <code><![CDATA[$urlDbname ?? '']]></code>
       <code><![CDATA[$urlDbname ?? '']]></code>
@@ -2456,9 +2454,7 @@
       <code><![CDATA[$queries]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['dbname']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
-      <code><![CDATA[$dbName]]></code>
     </MixedAssignment>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[! empty($GLOBALS['message']) && $GLOBALS['message'] instanceof Message]]></code>
@@ -2482,6 +2478,9 @@
       <code><![CDATA[$replicaConfigure]]></code>
       <code><![CDATA[$urlParams]]></code>
     </MixedAssignment>
+    <MixedPropertyTypeCoercion>
+      <code><![CDATA[$urlParams]]></code>
+    </MixedPropertyTypeCoercion>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -2799,7 +2798,6 @@
     </DeprecatedMethod>
     <InvalidArrayOffset>
       <code><![CDATA[$GLOBALS['ajax_reload']]]></code>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['disp_message']]]></code>
       <code><![CDATA[$GLOBALS['disp_query']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
@@ -2808,7 +2806,6 @@
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$GLOBALS['disp_message'] ?? null]]></code>
-      <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['message_to_show'] ?? null]]></code>
       <code><![CDATA[$GLOBALS['sql_query']]]></code>
@@ -2822,10 +2819,8 @@
     </MixedArrayAccess>
     <MixedAssignment>
       <code><![CDATA[$GLOBALS['ajax_reload']]]></code>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['disp_message']]]></code>
       <code><![CDATA[$GLOBALS['disp_query']]]></code>
-      <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['message_to_show']]]></code>
       <code><![CDATA[$GLOBALS['sql_query']]]></code>
@@ -2834,13 +2829,6 @@
       <code><![CDATA[$sqlQuery]]></code>
       <code><![CDATA[$sqlQuery]]></code>
     </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$GLOBALS['errorUrl']]]></code>
-    </MixedOperand>
-    <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['back'])]]></code>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
-    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Controllers/Table/AddFieldController.php">
     <InvalidArrayOffset>
@@ -2899,7 +2887,6 @@
       <code><![CDATA[$repopulate]]></code>
       <code><![CDATA[$request->getQueryParam('where_clause_signature')]]></code>
       <code><![CDATA[$whereClause]]></code>
-      <code><![CDATA[$whereClause]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$rowId]]></code>
@@ -2914,7 +2901,6 @@
       <code><![CDATA[$isUpload]]></code>
       <code><![CDATA[$repopulate]]></code>
       <code><![CDATA[$whereClause]]></code>
-      <code><![CDATA[$whereClause]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
       <code><![CDATA[$GLOBALS['current_result']]]></code>
@@ -2925,9 +2911,7 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$currentRow]]></code>
       <code><![CDATA[empty($GLOBALS['disp_message'])]]></code>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
       <code><![CDATA[empty($GLOBALS['unsaved_values'])]]></code>
-      <code><![CDATA[empty($_POST['sql_query'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Controllers/Table/ChangeRowsController.php">
@@ -2952,12 +2936,15 @@
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </InvalidArrayOffset>
     <MixedArgumentTypeCoercion>
-      <code><![CDATA[$GLOBALS['urlParams']]]></code>
+      <code><![CDATA[UrlParams::$params]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </MixedAssignment>
+    <MixedPropertyTypeCoercion>
+      <code><![CDATA[['db' => Current::$database, 'table' => Current::$table]]]></code>
+    </MixedPropertyTypeCoercion>
     <PossiblyInvalidArgument>
       <code><![CDATA[$_REQUEST['pos']]]></code>
       <code><![CDATA[$_REQUEST['session_max_rows']]]></code>
@@ -3411,6 +3398,9 @@
       <code><![CDATA[$GLOBALS['query']]]></code>
       <code><![CDATA[$GLOBALS['unsaved_values']]]></code>
     </InvalidArrayOffset>
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[UrlParams::$params]]></code>
+    </InvalidPropertyAssignmentValue>
     <MixedArgument>
       <code><![CDATA[$columnName]]></code>
       <code><![CDATA[$columnName]]></code>
@@ -3421,7 +3411,6 @@
       <code><![CDATA[$multiEditColumnsType[$key] ?? '']]></code>
       <code><![CDATA[$multiEditFuncs[$key] ?? '']]></code>
       <code><![CDATA[$multiEditSalt[$key] ?? null]]></code>
-      <code><![CDATA[$oneWhereClause]]></code>
       <code><![CDATA[$relationField]]></code>
       <code><![CDATA[$relationFieldValue]]></code>
     </MixedArgument>
@@ -3435,7 +3424,6 @@
       <code><![CDATA[$request->getParsedBodyParam('fields_name')['multi_edit']]]></code>
     </MixedArrayAccess>
     <MixedArrayAssignment>
-      <code><![CDATA[$GLOBALS['urlParams']['where_clause'][]]]></code>
       <code><![CDATA[$extraData['relations']]]></code>
       <code><![CDATA[$extraData['relations'][$cellIndex]]]></code>
       <code><![CDATA[$multiEditColumns[$key]]]></code>
@@ -3451,7 +3439,6 @@
       <code><![CDATA[$GLOBALS['query']]]></code>
       <code><![CDATA[$GLOBALS['unsaved_values']]]></code>
       <code><![CDATA[$GLOBALS['unsaved_values'][$rowNumber]]]></code>
-      <code><![CDATA[$GLOBALS['urlParams']['where_clause'][]]]></code>
       <code><![CDATA[$clauseIsUnique]]></code>
       <code><![CDATA[$columnName]]></code>
       <code><![CDATA[$columnName]]></code>
@@ -3468,19 +3455,17 @@
       <code><![CDATA[$multiEditFuncs]]></code>
       <code><![CDATA[$multiEditSalt]]></code>
       <code><![CDATA[$multiEditVirtual]]></code>
-      <code><![CDATA[$oneWhereClause]]></code>
       <code><![CDATA[$relationField]]></code>
       <code><![CDATA[$relationFieldValue]]></code>
       <code><![CDATA[$submitType]]></code>
-      <code><![CDATA[$whereClause]]></code>
       <code><![CDATA[$whereClause]]></code>
     </MixedAssignment>
     <MixedOperand>
       <code><![CDATA[$relationFieldValue]]></code>
     </MixedOperand>
-    <PossiblyNullArgument>
-      <code><![CDATA[$GLOBALS['urlParams']]]></code>
-    </PossiblyNullArgument>
+    <PossiblyInvalidArrayAssignment>
+      <code><![CDATA[UrlParams::$params['where_clause'][]]]></code>
+    </PossiblyInvalidArrayAssignment>
     <PossiblyUndefinedVariable>
       <code><![CDATA[$extraData]]></code>
     </PossiblyUndefinedVariable>
@@ -3528,14 +3513,12 @@
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$request->getQueryParam('sql_query', true)]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['back']]]></code>
       <code><![CDATA[$GLOBALS['errorUrl']]]></code>
     </MixedAssignment>
   </file>
@@ -6122,9 +6105,6 @@
     <MixedArgument>
       <code><![CDATA[$GLOBALS['sql_query']]]></code>
     </MixedArgument>
-    <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['error_message'])]]></code>
-    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Http/Middleware/TokenRequestParamChecking.php">
     <MixedArgument>
@@ -6134,16 +6114,6 @@
       <code><![CDATA[(string) $_POST['token']]]></code>
       <code><![CDATA[(string) $_POST['token']]]></code>
     </RedundantCast>
-  </file>
-  <file src="src/Http/Middleware/UrlParamsSetting.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$_REQUEST['back']]]></code>
-      <code><![CDATA[$_REQUEST['goto']]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$_REQUEST['back']]]></code>
-      <code><![CDATA[$_REQUEST['goto']]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="src/I18n/LanguageManager.php">
     <DeprecatedMethod>
@@ -6349,8 +6319,6 @@
       <code><![CDATA[$singleQuery]]></code>
       <code><![CDATA[$singleQuery]]></code>
       <code><![CDATA[$transformation[$type . '_options'] ?? '']]></code>
-      <code><![CDATA[$whereClause]]></code>
-      <code><![CDATA[$whereClause]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$query]]></code>
@@ -6383,8 +6351,6 @@
       <code><![CDATA[$maxlength]]></code>
       <code><![CDATA[$singleQuery]]></code>
       <code><![CDATA[$specialChars]]></code>
-      <code><![CDATA[$whereClause]]></code>
-      <code><![CDATA[$whereClause]]></code>
       <code><![CDATA[$whereClause]]></code>
     </MixedAssignment>
     <MixedOperand>
@@ -6421,7 +6387,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! $gotoInclude]]></code>
       <code><![CDATA[$editField->salt]]></code>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
       <code><![CDATA[empty($this->config->settings['UploadDir'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
@@ -7107,6 +7072,9 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
+    <InvalidArgument>
+      <code><![CDATA[$GLOBALS[$match]]]></code>
+    </InvalidArgument>
     <InvalidReturnStatement>
       <code><![CDATA[$GLOBALS[$name] ?? $name ?? '']]></code>
     </InvalidReturnStatement>
@@ -7121,9 +7089,6 @@
       <code><![CDATA[$val]]></code>
       <code><![CDATA[$val]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$GLOBALS[$match]]]></code>
-    </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$doc]]></code>
       <code><![CDATA[$propertyItem]]></code>
@@ -9589,6 +9554,10 @@
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
+    <InvalidArgument>
+      <code><![CDATA[$urlParams]]></code>
+      <code><![CDATA[$urlParams]]></code>
+    </InvalidArgument>
     <InvalidArrayOffset>
       <code><![CDATA[$GLOBALS['new_username']]]></code>
       <code><![CDATA[$GLOBALS['pred_hostname']]]></code>
@@ -9599,15 +9568,6 @@
       <code><![CDATA[$serverReplicationVariable]]></code>
       <code><![CDATA[$successMessage]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$GLOBALS['urlParams']]]></code>
-      <code><![CDATA[$urlParams]]></code>
-      <code><![CDATA[$urlParams]]></code>
-      <code><![CDATA[$urlParams]]></code>
-      <code><![CDATA[$urlParams]]></code>
-      <code><![CDATA[$urlParams]]></code>
-      <code><![CDATA[$urlParams]]></code>
-    </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$serverReplication[0][$variable]]]></code>
     </MixedArrayAccess>
@@ -9667,7 +9627,6 @@
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['error_message'])]]></code>
       <code><![CDATA[empty($_REQUEST['no_debug'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
@@ -9734,7 +9693,6 @@
       <code><![CDATA[$initials]]></code>
     </InvalidArgument>
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['dbname']]]></code>
       <code><![CDATA[$GLOBALS['new_username']]]></code>
       <code><![CDATA[$GLOBALS['pred_hostname']]]></code>
       <code><![CDATA[$GLOBALS['pred_username']]]></code>
@@ -9744,7 +9702,6 @@
       <code><![CDATA[$GLOBALS['x509_subject']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
-      <code><![CDATA[$GLOBALS['dbname']]]></code>
       <code><![CDATA[$paramDbName]]></code>
       <code><![CDATA[$paramDbName]]></code>
       <code><![CDATA[$paramRoutineName]]></code>
@@ -9830,8 +9787,10 @@
       <code><![CDATA[$origValue]]></code>
     </MixedOperand>
     <MixedReturnTypeCoercion>
+      <code><![CDATA[$dbname]]></code>
       <code><![CDATA[$extraData]]></code>
       <code><![CDATA[(string|bool)[]]]></code>
+      <code><![CDATA[string|string[]|null]]></code>
     </MixedReturnTypeCoercion>
     <PossiblyFalseOperand>
       <code><![CDATA[mb_strpos($row1['Type'], '(')]]></code>
@@ -9876,9 +9835,6 @@
       <code><![CDATA[$_POST['pma_pw']]]></code>
       <code><![CDATA[$_POST['userGroup']]]></code>
       <code><![CDATA[$_POST['username']]]></code>
-      <code><![CDATA[$_REQUEST['hostname']]]></code>
-      <code><![CDATA[$_REQUEST['username']]]></code>
-      <code><![CDATA[$dbname[0]]]></code>
       <code><![CDATA[$hashedPassword]]></code>
       <code><![CDATA[$oldUserGroup]]></code>
     </PossiblyInvalidCast>
@@ -9933,9 +9889,6 @@
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$row1[0]]]></code>
     </PossiblyUndefinedArrayOffset>
-    <RedundantCondition>
-      <code><![CDATA[is_string($_REQUEST['dbname'])]]></code>
-    </RedundantCondition>
     <RiskyCast>
       <code><![CDATA[$_POST['max_connections']]]></code>
       <code><![CDATA[$_POST['max_questions']]]></code>
@@ -10359,9 +10312,6 @@
       <code><![CDATA[$query]]></code>
     </PossiblyInvalidCast>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
       <code><![CDATA[empty($this->config->settings['Servers'][Current::$server]['verbose'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
@@ -14099,13 +14049,11 @@
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <PossiblyUnusedMethod>
+      <code><![CDATA[providerGetHostname]]></code>
       <code><![CDATA[providerUnEscapeMysqlWildcards]]></code>
     </PossiblyUnusedMethod>
     <UnusedVariable>
       <code><![CDATA[$password]]></code>
-      <code><![CDATA[$routinename]]></code>
-      <code><![CDATA[$routinename]]></code>
-      <code><![CDATA[$routinename]]></code>
     </UnusedVariable>
   </file>
   <file src="tests/unit/Server/SelectTest.php">
@@ -14176,9 +14124,6 @@
       <code><![CDATA[$config->settings]]></code>
       <code><![CDATA[$config->settings]]></code>
     </InvalidPropertyAssignmentValue>
-    <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($GLOBALS['goto'])]]></code>
-    </RiskyTruthyFalsyComparison>
   </file>
   <file src="tests/unit/SqlTest.php">
     <DeprecatedMethod>

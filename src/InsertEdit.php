@@ -19,7 +19,6 @@ use function array_merge;
 use function array_values;
 use function bin2hex;
 use function count;
-use function current;
 use function explode;
 use function htmlspecialchars;
 use function implode;
@@ -89,9 +88,9 @@ class InsertEdit
     /**
      * Retrieve form parameters for insert/edit form
      *
-     * @param string  $db               name of the database
-     * @param string  $table            name of the table
-     * @param mixed[] $whereClauseArray
+     * @param string   $db               name of the database
+     * @param string   $table            name of the table
+     * @param string[] $whereClauseArray
      *
      * @return array<string, string> array of insert/edit form parameters
      */
@@ -105,7 +104,7 @@ class InsertEdit
         $formParams = [
             'db' => $db,
             'table' => $table,
-            'goto' => $GLOBALS['goto'],
+            'goto' => UrlParams::$goto,
             'err_url' => $errorUrl,
             'sql_query' => $_POST['sql_query'] ?? '',
         ];
@@ -629,9 +628,9 @@ class InsertEdit
     /**
      * get html for continue insertion form
      *
-     * @param string  $table            name of the table
-     * @param string  $db               name of the database
-     * @param mixed[] $whereClauseArray
+     * @param string   $table            name of the table
+     * @param string   $db               name of the database
+     * @param string[] $whereClauseArray
      *
      * @return string                   an html snippet
      */
@@ -646,7 +645,7 @@ class InsertEdit
             'table' => $table,
             'where_clause_array' => $whereClauseArray,
             'err_url' => $errorUrl,
-            'goto' => $GLOBALS['goto'],
+            'goto' => UrlParams::$goto,
             'sql_query' => $_POST['sql_query'] ?? null,
             'has_where_clause' => isset($_POST['where_clause']),
             'insert_rows_default' => $this->config->settings['InsertRows'],
@@ -855,7 +854,7 @@ class InsertEdit
 
     /**
      * set $goto_include variable for different cases and retrieve like,
-     * if $GLOBALS['goto'] empty, if $goto_include previously not defined
+     * if UrlParams::$goto empty, if $goto_include previously not defined
      * and new_insert, same_insert, edit_next
      *
      * @param string|false $gotoInclude store some script for include, otherwise it is
@@ -868,16 +867,16 @@ class InsertEdit
             return '/table/change';
         }
 
-        if (! empty($GLOBALS['goto'])) {
-            if (preg_match('@^[a-z_]+\.php$@', $GLOBALS['goto']) !== 1) {
+        if (UrlParams::$goto !== '') {
+            if (preg_match('@^[a-z_]+\.php$@', UrlParams::$goto) !== 1) {
                 // this should NOT happen
-                //$GLOBALS['goto'] = false;
-                $gotoInclude = str_contains($GLOBALS['goto'], 'index.php?route=/sql') ? '/sql' : false;
+                //UrlParams::$goto = false;
+                $gotoInclude = str_contains(UrlParams::$goto, 'index.php?route=/sql') ? '/sql' : false;
             } else {
-                $gotoInclude = $GLOBALS['goto'];
+                $gotoInclude = UrlParams::$goto;
             }
 
-            if ($GLOBALS['goto'] === 'index.php?route=/database/sql' && Current::$table !== '') {
+            if (UrlParams::$goto === 'index.php?route=/database/sql' && Current::$table !== '') {
                 Current::$table = '';
             }
         }
@@ -1410,8 +1409,7 @@ class InsertEdit
      * @param string               $db          current database
      * @param string               $table       current table
      *
-     * @return array<int, bool|string[]|string|ResultInterface|ResultInterface[]|null>
-     * @phpstan-return array{
+     * @return array{
      *     bool,
      *     string[]|string|null,
      *     string[],
@@ -1666,7 +1664,7 @@ class InsertEdit
 
         //add data attributes "no of decimals" and "data type"
         $noDecimals = 0;
-        $type = current(explode('(', $column->pmaType));
+        $type = explode('(', $column->pmaType)[0];
         if (preg_match('/\(([^()]+)\)/', $column->pmaType, $match) === 1) {
             $match[0] = trim($match[0], '()');
             $noDecimals = $match[0];
@@ -1872,7 +1870,7 @@ class InsertEdit
      * @param string           $db               database
      * @param int              $rowId            row id
      * @param mixed[]          $repopulate       the data to be repopulated
-     * @param mixed[]          $whereClauseArray the array of where clauses
+     * @param string[]         $whereClauseArray the array of where clauses
      */
     public function getHtmlForInsertEditRow(
         array $urlParams,

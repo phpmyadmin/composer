@@ -21,6 +21,7 @@ use PhpMyAdmin\Table\Search;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\UniqueCondition;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\UrlParams;
 use PhpMyAdmin\Util;
 use PhpMyAdmin\Utils\Gis;
 
@@ -81,17 +82,15 @@ final class ZoomSearchController implements InvocableController
 
     public function __invoke(ServerRequest $request): Response
     {
-        $GLOBALS['goto'] ??= null;
-        $GLOBALS['urlParams'] ??= null;
         $GLOBALS['errorUrl'] ??= null;
         if (! $this->response->checkParameters(['db', 'table'])) {
             return $this->response->response();
         }
 
-        $GLOBALS['urlParams'] = ['db' => Current::$database, 'table' => Current::$table];
+        UrlParams::$params = ['db' => Current::$database, 'table' => Current::$table];
         $config = Config::getInstance();
         $GLOBALS['errorUrl'] = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
-        $GLOBALS['errorUrl'] .= Url::getCommon($GLOBALS['urlParams'], '&');
+        $GLOBALS['errorUrl'] .= Url::getCommon(UrlParams::$params, '&');
 
         $databaseName = DatabaseName::tryFrom($request->getParam('db'));
         if ($databaseName === null || ! $this->dbTableExists->selectDatabase($databaseName)) {
@@ -177,11 +176,11 @@ final class ZoomSearchController implements InvocableController
             return $this->response->response();
         }
 
-        if (! isset($GLOBALS['goto'])) {
-            $GLOBALS['goto'] = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
+        if (UrlParams::$goto === '') {
+            UrlParams::$goto = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
         }
 
-        $this->zoomSubmitAction($dataLabel, $GLOBALS['goto']);
+        $this->zoomSubmitAction($dataLabel, UrlParams::$goto);
 
         return $this->response->response();
     }
@@ -245,8 +244,8 @@ final class ZoomSearchController implements InvocableController
     private function displaySelectionFormAction(string $dataLabel): void
     {
         $config = Config::getInstance();
-        if (! isset($GLOBALS['goto'])) {
-            $GLOBALS['goto'] = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
+        if (UrlParams::$goto === '') {
+            UrlParams::$goto = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
         }
 
         $criteriaColumnNames = $_POST['criteriaColumnNames'] ?? null;
@@ -270,7 +269,7 @@ final class ZoomSearchController implements InvocableController
         $this->response->render('table/zoom_search/index', [
             'db' => Current::$database,
             'table' => Current::$table,
-            'goto' => $GLOBALS['goto'],
+            'goto' => UrlParams::$goto,
             'properties' => $properties,
             'geom_column_flag' => $this->geomColumnFlag,
             'column_names' => $this->columnNames,

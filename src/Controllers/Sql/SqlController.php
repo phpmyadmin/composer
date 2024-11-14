@@ -19,6 +19,7 @@ use PhpMyAdmin\ParseAnalyze;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\UrlParams;
 use PhpMyAdmin\Util;
 
 use function __;
@@ -41,7 +42,6 @@ class SqlController implements InvocableController
     {
         $GLOBALS['display_query'] ??= null;
         $GLOBALS['ajax_reload'] ??= null;
-        $GLOBALS['goto'] ??= null;
         $GLOBALS['errorUrl'] ??= null;
         $GLOBALS['unlim_num_rows'] ??= null;
         $GLOBALS['import_text'] ??= null;
@@ -49,7 +49,6 @@ class SqlController implements InvocableController
         $GLOBALS['message_to_show'] ??= null;
         $GLOBALS['disp_message'] ??= null;
         $GLOBALS['complete_query'] ??= null;
-        $GLOBALS['back'] ??= null;
 
         $this->pageSettings->init('Browse');
         $this->response->addHTML($this->pageSettings->getErrorHTML());
@@ -74,16 +73,16 @@ class SqlController implements InvocableController
          */
         $isGotofile = true;
         $config = Config::getInstance();
-        if (empty($GLOBALS['goto'])) {
+        if (UrlParams::$goto === '') {
             if (Current::$table === '') {
-                $GLOBALS['goto'] = Util::getScriptNameForOption($config->settings['DefaultTabDatabase'], 'database');
+                UrlParams::$goto = Util::getScriptNameForOption($config->settings['DefaultTabDatabase'], 'database');
             } else {
-                $GLOBALS['goto'] = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
+                UrlParams::$goto = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
             }
         }
 
         if (! isset($GLOBALS['errorUrl'])) {
-            $GLOBALS['errorUrl'] = ! empty($GLOBALS['back']) ? $GLOBALS['back'] : $GLOBALS['goto'];
+            $GLOBALS['errorUrl'] = UrlParams::$back !== '' ? UrlParams::$back : UrlParams::$goto;
             $GLOBALS['errorUrl'] .= Url::getCommon(
                 ['db' => Current::$database],
                 ! str_contains($GLOBALS['errorUrl'], '?') ? '?' : '&',
@@ -124,7 +123,7 @@ class SqlController implements InvocableController
             $GLOBALS['sql_query'] = $this->sql->getDefaultSqlQueryForBrowse(Current::$database, Current::$table);
 
             // set $goto to what will be displayed if query returns 0 rows
-            $GLOBALS['goto'] = '';
+            UrlParams::$goto = '';
         } elseif (! $this->response->checkParameters(['sql_query'])) {
             return $this->response->response();
         }
@@ -169,7 +168,7 @@ class SqlController implements InvocableController
         $storeBkm = $request->hasBodyParam('store_bkm');
         $bkmAllUsers = $request->getParsedBodyParam('bkm_all_users'); // Should this be hasBodyParam?
         if ($storeBkm && $bkmFields !== null) {
-            $this->addBookmark($GLOBALS['goto'], $bkmFields, (bool) $bkmAllUsers);
+            $this->addBookmark(UrlParams::$goto, $bkmFields, (bool) $bkmAllUsers);
 
             return $this->response->response();
         }
@@ -177,9 +176,9 @@ class SqlController implements InvocableController
         /**
          * Sets or modifies the $goto variable if required
          */
-        if ($GLOBALS['goto'] === Url::getFromRoute('/sql')) {
+        if (UrlParams::$goto === Url::getFromRoute('/sql')) {
             $isGotofile = false;
-            $GLOBALS['goto'] = Url::getFromRoute('/sql', [
+            UrlParams::$goto = Url::getFromRoute('/sql', [
                 'db' => Current::$database,
                 'table' => Current::$table,
                 'sql_query' => $GLOBALS['sql_query'],
@@ -194,7 +193,7 @@ class SqlController implements InvocableController
             $GLOBALS['import_text'] ?? null,
             $GLOBALS['message_to_show'] ?? null,
             null,
-            $GLOBALS['goto'],
+            UrlParams::$goto,
             isset($GLOBALS['disp_query']) ? $GLOBALS['display_query'] : null,
             $GLOBALS['disp_message'] ?? null,
             $GLOBALS['sql_query'],

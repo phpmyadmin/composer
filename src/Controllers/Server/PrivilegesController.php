@@ -49,7 +49,6 @@ final class PrivilegesController implements InvocableController
         $GLOBALS['message'] ??= null;
         $GLOBALS['username'] ??= null;
         $GLOBALS['hostname'] ??= null;
-        $GLOBALS['dbname'] ??= null;
 
         $userPrivileges = $this->userPrivilegesFactory->getPrivileges();
 
@@ -82,18 +81,12 @@ final class PrivilegesController implements InvocableController
             $this->dbi->selectDb('mysql');
         }
 
-        /**
-         * Get DB information: username, hostname, dbname,
-         * tablename, db_and_table, dbname_is_wildcard
-         */
-        [
-            $GLOBALS['username'],
-            $GLOBALS['hostname'],
-            $GLOBALS['dbname'],
-            $tablename,
-            $routinename,
-            $dbnameIsWildcard,
-        ] = $serverPrivileges->getDataForDBInfo();
+        $GLOBALS['username'] = $serverPrivileges->getUsernameParam($request);
+        $GLOBALS['hostname'] = $serverPrivileges->getHostnameParam($request);
+        $databaseName = $serverPrivileges->getDbname($request);
+        $tablename = $serverPrivileges->getTablename($request);
+        $routinename = $serverPrivileges->getRoutinename($request);
+        $dbnameIsWildcard = $serverPrivileges->isDatabaseNameWildcard($databaseName);
 
         /**
          * Checks if the user is allowed to do what they try to...
@@ -152,17 +145,33 @@ final class PrivilegesController implements InvocableController
          * Adds a user
          *   (Changes / copies a user, part II)
          */
-        [$retMessage, $queries, $queriesForDisplay, $GLOBALS['sql_query'], $addUserError] = $serverPrivileges->addUser(
-            $GLOBALS['dbname'] ?? null,
-            $GLOBALS['username'] ?? '',
-            $GLOBALS['hostname'] ?? '',
-            $password,
-            $relationParameters->configurableMenusFeature !== null,
-        );
-        //update the old variables
-        if (isset($retMessage)) {
-            $GLOBALS['message'] = $retMessage;
-            unset($retMessage);
+        $queries = [];
+        $queriesForDisplay = null;
+        $GLOBALS['sql_query'] = '';
+        $addUserError = false;
+        if ($request->hasBodyParam('adduser_submit') || $request->hasBodyParam('change_copy')) {
+            $hostname = $serverPrivileges->getHostname(
+                $request->getParsedBodyParamAsString('pred_hostname', ''),
+                $GLOBALS['hostname'] ?? '',
+            );
+            [
+                $retMessage,
+                $queries,
+                $queriesForDisplay,
+                $GLOBALS['sql_query'],
+                $addUserError,
+            ] = $serverPrivileges->addUser(
+                is_string($databaseName) ? $databaseName : '',
+                $GLOBALS['username'] ?? '',
+                $hostname,
+                $password,
+                $relationParameters->configurableMenusFeature !== null,
+            );
+            //update the old variables
+            if (isset($retMessage)) {
+                $GLOBALS['message'] = $retMessage;
+                unset($retMessage);
+            }
         }
 
         /**
@@ -179,22 +188,22 @@ final class PrivilegesController implements InvocableController
         }
 
         $itemType = '';
-        if (! empty($routinename) && is_string($GLOBALS['dbname'])) {
-            $itemType = $serverPrivileges->getRoutineType($GLOBALS['dbname'], $routinename);
+        if (! empty($routinename) && is_string($databaseName)) {
+            $itemType = $serverPrivileges->getRoutineType($databaseName, $routinename);
         }
 
         /**
          * Updates privileges
          */
         if ($request->hasBodyParam('update_privs')) {
-            if (is_array($GLOBALS['dbname'])) {
+            if (is_array($databaseName)) {
                 $statements = [];
-                foreach ($GLOBALS['dbname'] as $key => $dbName) {
+                foreach ($databaseName as $key => $dbName) {
                     [$statements[$key], $GLOBALS['message']] = $serverPrivileges->updatePrivileges(
                         $GLOBALS['username'] ?? '',
                         $GLOBALS['hostname'] ?? '',
                         $tablename ?? $routinename ?? '',
-                        $dbName ?? '',
+                        $dbName,
                         $itemType,
                     );
                 }
@@ -205,7 +214,7 @@ final class PrivilegesController implements InvocableController
                     $GLOBALS['username'] ?? '',
                     $GLOBALS['hostname'] ?? '',
                     $tablename ?? $routinename ?? '',
-                    $GLOBALS['dbname'] ?? '',
+                    $databaseName ?? '',
                     $itemType,
                 );
             }
@@ -230,7 +239,7 @@ final class PrivilegesController implements InvocableController
          */
         if ($request->hasBodyParam('revokeall')) {
             [$GLOBALS['message'], $GLOBALS['sql_query']] = $serverPrivileges->getMessageAndSqlQueryForPrivilegesRevoke(
-                is_string($GLOBALS['dbname']) ? $GLOBALS['dbname'] : '',
+                is_string($databaseName) ? $databaseName : '',
                 $tablename ?? $routinename ?? '',
                 $GLOBALS['username'] ?? '',
                 $GLOBALS['hostname'] ?? '',
@@ -299,6 +308,7 @@ final class PrivilegesController implements InvocableController
                 $GLOBALS['sql_query'] ?? '',
                 $GLOBALS['hostname'] ?? '',
                 $GLOBALS['username'] ?? '',
+                ! is_array($databaseName) ? $databaseName : null,
             );
 
             if (! empty($GLOBALS['message']) && $GLOBALS['message'] instanceof Message) {
@@ -347,15 +357,15 @@ final class PrivilegesController implements InvocableController
         if ($request->hasQueryParam('adduser') || $addUserError === true) {
             // Add user
             $this->response->addHTML($serverPrivileges->getHtmlForAddUser(
-                $serverPrivileges->escapeGrantWildcards(is_string($GLOBALS['dbname']) ? $GLOBALS['dbname'] : ''),
+                $serverPrivileges->escapeGrantWildcards(is_string($databaseName) ? $databaseName : ''),
             ));
         } else {
-            if (isset($GLOBALS['dbname']) && ! is_array($GLOBALS['dbname'])) {
+            if (is_string($databaseName)) {
                 $urlDbname = urlencode(
                     str_replace(
                         ['\_', '\%'],
                         ['_', '%'],
-                        $GLOBALS['dbname'],
+                        $databaseName,
                     ),
                 );
             }
@@ -371,7 +381,7 @@ final class PrivilegesController implements InvocableController
                     $serverPrivileges->getHtmlForRoutineSpecificPrivileges(
                         $GLOBALS['username'],
                         $GLOBALS['hostname'] ?? '',
-                        is_string($GLOBALS['dbname']) ? $GLOBALS['dbname'] : '',
+                        is_string($databaseName) ? $databaseName : '',
                         $routinename,
                         $serverPrivileges->escapeGrantWildcards($urlDbname ?? ''),
                     ),
@@ -389,7 +399,7 @@ final class PrivilegesController implements InvocableController
                         $serverPrivileges->escapeGrantWildcards($urlDbname ?? ''),
                         $GLOBALS['username'],
                         $GLOBALS['hostname'] ?? '',
-                        $GLOBALS['dbname'] ?? '',
+                        $databaseName ?? '',
                         $tablename ?? '',
                         $request->getRoute(),
                     ),
