@@ -309,7 +309,7 @@ const insertQuery = function (queryType) {
   // @ts-ignore
   var myListBox = document.sqlform.dummy;
   // @ts-ignore
-  table = document.sqlform.table.value;
+  table = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeBacktick)(document.sqlform.table.value);
   if (myListBox.options.length > 0) {
     sqlBoxLocked = true;
     var columnsList = '';

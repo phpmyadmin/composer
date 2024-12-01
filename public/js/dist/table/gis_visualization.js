@@ -238,7 +238,7 @@ class SvgVisualization extends GisVisualization {
   onMouseMove(event) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tooltip').remove();
     const target = event.target;
-    const contents = target.getAttribute('name').trim();
+    const contents = target.getAttribute('data-label').trim();
     if (contents === '') {
       return;
     }
