@@ -1024,27 +1024,9 @@ parameters:
 			path: src/Config/FormDisplay.php
 
 		-
-			message: '#^Only booleans are allowed in &&, mixed given on the left side\.$#'
-			identifier: booleanAnd.leftNotBoolean
-			count: 1
-			path: src/Config/FormDisplay.php
-
-		-
 			message: '#^Only booleans are allowed in a negated boolean, int\|string\|false given\.$#'
 			identifier: booleanNot.exprNotBoolean
 			count: 1
-			path: src/Config/FormDisplay.php
-
-		-
-			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
-			identifier: ternary.condNotBoolean
-			count: 1
-			path: src/Config/FormDisplay.php
-
-		-
-			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
-			identifier: if.condNotBoolean
-			count: 3
 			path: src/Config/FormDisplay.php
 
 		-
@@ -1182,12 +1164,6 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 2
-			path: src/Config/FormDisplayTemplate.php
-
-		-
-			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
-			identifier: ternary.condNotBoolean
 			count: 1
 			path: src/Config/FormDisplayTemplate.php
 
@@ -1482,12 +1458,6 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a ternary operator condition, int\<0, max\>\|false given\.$#'
 			identifier: ternary.condNotBoolean
-			count: 1
-			path: src/Config/Validator.php
-
-		-
-			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
-			identifier: if.condNotBoolean
 			count: 1
 			path: src/Config/Validator.php
 
@@ -2875,18 +2845,6 @@ parameters:
 			path: src/Controllers/Export/ExportController.php
 
 		-
-			message: '#^Call to an undefined method object\:\:exportFooter\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Call to an undefined method object\:\:exportHeader\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
@@ -2910,7 +2868,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 5
+			count: 4
 			path: src/Controllers/Export/ExportController.php
 
 		-
@@ -2962,18 +2920,6 @@ parameters:
 			path: src/Controllers/Export/ExportController.php
 
 		-
-			message: '#^Parameter \#1 \$exportPlugin of method PhpMyAdmin\\Export\\Export\:\:getFinalFilenameAndMimetypeForFilename\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#1 \$exportType of method PhpMyAdmin\\Export\\Export\:\:getFilenameAndMimetype\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
 			message: '#^Parameter \#1 \$exportType of method PhpMyAdmin\\Export\\Export\:\:getHtmlForDisplayedExportFooter\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -3016,7 +2962,13 @@ parameters:
 			path: src/Controllers/Export/ExportController.php
 
 		-
-			message: '#^Parameter \#2 \$compression of method PhpMyAdmin\\Export\\Export\:\:getFinalFilenameAndMimetypeForFilename\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#2 \$compression of method PhpMyAdmin\\Export\\Export\:\:getFinalFilename\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Controllers/Export/ExportController.php
+
+		-
+			message: '#^Parameter \#2 \$compression of method PhpMyAdmin\\Export\\Export\:\:getMimeType\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Export/ExportController.php
@@ -3028,13 +2980,7 @@ parameters:
 			path: src/Controllers/Export/ExportController.php
 
 		-
-			message: '#^Parameter \#2 \$exportPlugin of static method PhpMyAdmin\\Export\\Export\:\:exportRaw\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#2 \$rememberTemplate of method PhpMyAdmin\\Export\\Export\:\:getFilenameAndMimetype\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#2 \$exportType of method PhpMyAdmin\\Export\\Export\:\:rememberFilename\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Export/ExportController.php
@@ -3046,25 +2992,7 @@ parameters:
 			path: src/Controllers/Export/ExportController.php
 
 		-
-			message: '#^Parameter \#3 \$exportPlugin of method PhpMyAdmin\\Export\\Export\:\:exportServer\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#3 \$exportPlugin of method PhpMyAdmin\\Export\\Export\:\:getFilenameAndMimetype\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
 			message: '#^Parameter \#3 \$saveFilename of method PhpMyAdmin\\Export\\Export\:\:closeFile\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#4 \$compression of method PhpMyAdmin\\Export\\Export\:\:getFilenameAndMimetype\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Export/ExportController.php
@@ -3073,12 +3001,6 @@ parameters:
 			message: '#^Parameter \#4 \$errorUrl of method PhpMyAdmin\\Export\\Export\:\:exportServer\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#4 \$exportPlugin of method PhpMyAdmin\\Export\\Export\:\:exportTable\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
-			identifier: argument.type
-			count: 2
 			path: src/Controllers/Export/ExportController.php
 
 		-
@@ -3101,12 +3023,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#5 \$tableData of method PhpMyAdmin\\Export\\Export\:\:exportDatabase\(\) expects array\<string\>, array\<mixed\> given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Controllers/Export/ExportController.php
-
-		-
-			message: '#^Parameter \#6 \$exportPlugin of method PhpMyAdmin\\Export\\Export\:\:exportDatabase\(\) expects PhpMyAdmin\\Plugins\\ExportPlugin, object given\.$#'
 			identifier: argument.type
 			count: 2
 			path: src/Controllers/Export/ExportController.php
@@ -6493,12 +6409,6 @@ parameters:
 			path: src/Core.php
 
 		-
-			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
-			identifier: if.condNotBoolean
-			count: 1
-			path: src/Core.php
-
-		-
 			message: '#^Parameter \#1 \$sqlQuery of static method PhpMyAdmin\\Html\\Generator\:\:formatSql\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -8338,12 +8248,6 @@ parameters:
 			path: src/Display/Results.php
 
 		-
-			message: '#^Parameter \#5 \$expressions of class PhpMyAdmin\\UniqueCondition constructor expects array\<PhpMyAdmin\\SqlParser\\Components\\Expression\>, array\<PhpMyAdmin\\SqlParser\\Components\\CaseExpression\|PhpMyAdmin\\SqlParser\\Components\\Expression\> given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Display/Results.php
-
-		-
 			message: '#^Parameter \#5 \$sortDirection of method PhpMyAdmin\\Display\\Results\:\:getSingleAndMultiSortUrls\(\) expects array\<string\>, array\<mixed\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -8363,12 +8267,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#9 \$colVisibElement of method PhpMyAdmin\\Display\\Results\:\:getOrderLinkAndSortedHeaderHtml\(\) expects int\|string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Display/Results.php
-
-		-
-			message: '#^Parameter \$expressions of class PhpMyAdmin\\UniqueCondition constructor expects array\<PhpMyAdmin\\SqlParser\\Components\\Expression\>, array\<PhpMyAdmin\\SqlParser\\Components\\CaseExpression\|PhpMyAdmin\\SqlParser\\Components\\Expression\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Display/Results.php
@@ -8748,7 +8646,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 3
+			count: 2
 			path: src/Export/Export.php
 
 		-
@@ -16465,12 +16363,6 @@ parameters:
 			path: src/Sanitize.php
 
 		-
-			message: '#^Method PhpMyAdmin\\Sanitize\:\:isSetup\(\) should return bool but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Sanitize.php
-
-		-
 			message: '#^Method PhpMyAdmin\\Sanitize\:\:sanitizeFilename\(\) should return string but returns string\|null\.$#'
 			identifier: return.type
 			count: 1
@@ -18991,12 +18883,6 @@ parameters:
 			path: src/UniqueCondition.php
 
 		-
-			message: '#^Only booleans are allowed in &&, bool\|string given on the left side\.$#'
-			identifier: booleanAnd.leftNotBoolean
-			count: 1
-			path: src/UniqueCondition.php
-
-		-
 			message: '#^Parameter \#1 \$row of method PhpMyAdmin\\UniqueCondition\:\:getConditionValue\(\) expects float\|int\|string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -19038,7 +18924,7 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 2
+			count: 1
 			path: src/Url.php
 
 		-
@@ -19573,12 +19459,6 @@ parameters:
 			message: '#^Parameter \#3 \$value of function curl_setopt expects non\-empty\-string, string given\.$#'
 			identifier: argument.type
 			count: 2
-			path: src/Utils/HttpRequest.php
-
-		-
-			message: '#^Parameter \#3 \$value of function curl_setopt expects non\-empty\-string\|null, string given\.$#'
-			identifier: argument.type
-			count: 1
 			path: src/Utils/HttpRequest.php
 
 		-
