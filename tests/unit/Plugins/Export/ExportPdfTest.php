@@ -212,7 +212,7 @@ class ExportPdfTest extends AbstractTestCase
     public function testExportDBCreate(): void
     {
         self::assertTrue(
-            $this->object->exportDBCreate('testDB', 'database'),
+            $this->object->exportDBCreate('testDB'),
         );
     }
 
@@ -233,7 +233,6 @@ class ExportPdfTest extends AbstractTestCase
             $this->object->exportData(
                 'db',
                 'table',
-                'phpmyadmin.net/err',
                 'SELECT',
             ),
         );

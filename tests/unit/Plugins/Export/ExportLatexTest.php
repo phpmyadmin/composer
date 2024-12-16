@@ -11,7 +11,10 @@ use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Export\Export;
+use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportLatex;
+use PhpMyAdmin\Plugins\ExportPlugin;
+use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
@@ -50,9 +53,8 @@ class ExportLatexTest extends AbstractTestCase
         $GLOBALS['buffer_needed'] = false;
         $GLOBALS['asfile'] = true;
         $GLOBALS['save_on_server'] = false;
-        $GLOBALS['plugin_param'] = [];
-        $GLOBALS['plugin_param']['export_type'] = 'table';
-        $GLOBALS['plugin_param']['single_table'] = false;
+        ExportPlugin::$exportType = ExportType::Table;
+        ExportPlugin::$singleTable = false;
         Current::$database = 'db';
         Current::$table = 'table';
         $this->object = new ExportLatex(
@@ -75,8 +77,8 @@ class ExportLatexTest extends AbstractTestCase
 
     public function testSetProperties(): void
     {
-        $GLOBALS['plugin_param']['export_type'] = '';
-        $GLOBALS['plugin_param']['single_table'] = false;
+        ExportPlugin::$exportType = ExportType::Raw;
+        ExportPlugin::$singleTable = false;
 
         $relationParameters = RelationParameters::fromArray([
             'db' => 'db',
@@ -419,8 +421,8 @@ class ExportLatexTest extends AbstractTestCase
         );
 
         // case 2
-        $GLOBALS['plugin_param']['export_type'] = 'table';
-        $GLOBALS['plugin_param']['single_table'] = false;
+        ExportPlugin::$exportType = ExportType::Table;
+        ExportPlugin::$singleTable = false;
 
         $method->invoke($this->object, null);
 
@@ -472,7 +474,7 @@ class ExportLatexTest extends AbstractTestCase
     public function testExportDBCreate(): void
     {
         self::assertTrue(
-            $this->object->exportDBCreate('testDB', 'database'),
+            $this->object->exportDBCreate('testDB'),
         );
     }
 
@@ -492,7 +494,6 @@ class ExportLatexTest extends AbstractTestCase
         self::assertTrue($this->object->exportData(
             'test_db',
             'test_table',
-            'localhost',
             'SELECT * FROM `test_db`.`test_table`;',
         ));
         $result = ob_get_clean();
@@ -523,7 +524,6 @@ class ExportLatexTest extends AbstractTestCase
         self::assertTrue($this->object->exportData(
             'test_db',
             'test_table',
-            'localhost',
             'SELECT * FROM `test_db`.`test_table`;',
         ));
         $result = ob_get_clean();
@@ -605,18 +605,13 @@ class ExportLatexTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
+        $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
+            ->withParsedBody(['latex_relation' => 'On', 'latex_mime' => 'On', 'latex_comments' => 'On']);
+
+        $this->object->setExportOptions($request, []);
+
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'database',
-                '',
-                'test',
-                'test',
-                true,
-                true,
-                true,
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('database', '', 'test'));
         $result = ob_get_clean();
 
         //echo $result; die;
@@ -694,17 +689,7 @@ class ExportLatexTest extends AbstractTestCase
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'database',
-                '',
-                'test',
-                'test',
-                true,
-                true,
-                true,
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('database', '', 'test'));
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -752,14 +737,7 @@ class ExportLatexTest extends AbstractTestCase
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'database',
-                '',
-                'test',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('database', '', 'test'));
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -769,14 +747,7 @@ class ExportLatexTest extends AbstractTestCase
         self::assertStringContainsString('caption{latexcontinued}', $result);
 
         // case 4
-        self::assertTrue(
-            $this->object->exportStructure(
-                'database',
-                '',
-                'triggers',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('database', '', 'triggers'));
     }
 
     public function testTexEscape(): void

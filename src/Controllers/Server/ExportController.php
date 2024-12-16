@@ -13,8 +13,8 @@ use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
+use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\ResponseRenderer;
-use PhpMyAdmin\Url;
 
 use function __;
 use function array_merge;
@@ -32,7 +32,6 @@ final class ExportController implements InvocableController
     public function __invoke(ServerRequest $request): Response
     {
         $GLOBALS['unlim_num_rows'] ??= null;
-        $GLOBALS['errorUrl'] = Url::getFromRoute('/');
         $GLOBALS['tmp_select'] ??= null;
         $GLOBALS['select_item'] ??= null;
 
@@ -59,7 +58,7 @@ final class ExportController implements InvocableController
 
         $GLOBALS['single_table'] = $request->getParam('single_table') ?? $GLOBALS['single_table'] ?? null;
 
-        $exportList = Plugins::getExport('server', isset($GLOBALS['single_table']));
+        $exportList = Plugins::getExport(ExportType::Server, isset($GLOBALS['single_table']));
 
         if ($exportList === []) {
             $this->response->addHTML(Message::error(
@@ -70,7 +69,7 @@ final class ExportController implements InvocableController
         }
 
         $options = $this->export->getOptions(
-            'server',
+            ExportType::Server,
             Current::$database,
             Current::$table,
             Current::$sqlQuery,

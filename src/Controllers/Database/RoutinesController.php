@@ -18,7 +18,6 @@ use PhpMyAdmin\Identifiers\TableName;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Url;
 use PhpMyAdmin\UrlParams;
 use PhpMyAdmin\UserPrivilegesFactory;
 use PhpMyAdmin\Util;
@@ -50,9 +49,6 @@ final class RoutinesController implements InvocableController
 
     public function __invoke(ServerRequest $request): Response
     {
-        $GLOBALS['errors'] ??= null;
-        $GLOBALS['errorUrl'] ??= null;
-
         $this->response->addScriptFiles(['database/routines.js', 'sql.js']);
 
         $type = $_REQUEST['type'] ?? null;
@@ -70,8 +66,6 @@ final class RoutinesController implements InvocableController
              */
             if (Current::$table !== '' && in_array(Current::$table, $this->dbi->getTables(Current::$database), true)) {
                 UrlParams::$params = ['db' => Current::$database, 'table' => Current::$table];
-                $GLOBALS['errorUrl'] = Util::getScriptNameForOption($config->settings['DefaultTabTable'], 'table');
-                $GLOBALS['errorUrl'] .= Url::getCommon(UrlParams::$params, '&');
 
                 $databaseName = DatabaseName::tryFrom($request->getParam('db'));
                 if ($databaseName === null || ! $this->dbTableExists->selectDatabase($databaseName)) {
@@ -92,12 +86,6 @@ final class RoutinesController implements InvocableController
             } else {
                 Current::$table = '';
 
-                $GLOBALS['errorUrl'] = Util::getScriptNameForOption(
-                    $config->settings['DefaultTabDatabase'],
-                    'database',
-                );
-                $GLOBALS['errorUrl'] .= Url::getCommon(['db' => Current::$database], '&');
-
                 $databaseName = DatabaseName::tryFrom($request->getParam('db'));
                 if ($databaseName === null || ! $this->dbTableExists->selectDatabase($databaseName)) {
                     $this->response->redirectToRoute(
@@ -112,11 +100,6 @@ final class RoutinesController implements InvocableController
             $this->dbi->selectDb(Current::$database);
         }
 
-        /**
-         * Keep a list of errors that occurred while
-         * processing an 'Add' or 'Edit' operation.
-         */
-        $GLOBALS['errors'] = [];
         $GLOBALS['message'] ??= null;
 
         if (! empty($_POST['editor_process_add']) || ! empty($_POST['editor_process_edit'])) {
@@ -159,7 +142,7 @@ final class RoutinesController implements InvocableController
          */
         // FIXME: this must be simpler than that
         if (
-            $GLOBALS['errors'] !== []
+            $this->routines->getErrorCount() > 0
             || empty($_POST['editor_process_add'])
             && empty($_POST['editor_process_edit'])
             && (
@@ -222,7 +205,7 @@ final class RoutinesController implements InvocableController
                     }
                 } elseif (
                     $operation === 'add'
-                    || ($routine['item_num_params'] == 0 && $mode === 'add' && ! $GLOBALS['errors'])
+                    || ($routine['item_num_params'] == 0 && $mode === 'add' && $this->routines->getErrorCount() === 0)
                 ) {
                     $routine['item_param_dir'][] = '';
                     $routine['item_param_name'][] = '';

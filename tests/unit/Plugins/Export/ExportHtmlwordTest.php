@@ -11,6 +11,7 @@ use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Export\Export;
+use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Identifiers\TableName;
 use PhpMyAdmin\Identifiers\TriggerName;
 use PhpMyAdmin\Plugins\Export\ExportHtmlword;
@@ -284,7 +285,7 @@ class ExportHtmlwordTest extends AbstractTestCase
     public function testExportDBCreate(): void
     {
         self::assertTrue(
-            $this->object->exportDBCreate('testDB', 'database'),
+            $this->object->exportDBCreate('testDB'),
         );
     }
 
@@ -304,7 +305,6 @@ class ExportHtmlwordTest extends AbstractTestCase
         self::assertTrue($this->object->exportData(
             'test_db',
             'test_table',
-            'localhost',
             'SELECT * FROM `test_db`.`test_table`;',
         ));
         $result = ob_get_clean();
@@ -436,7 +436,12 @@ class ExportHtmlwordTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $result = $this->object->getTableDef('database', '', true, true, true);
+        $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
+            ->withParsedBody(['htmlword_relation' => 'On', 'htmlword_mime' => 'On', 'htmlword_comments' => 'On']);
+
+        $this->object->setExportOptions($request, []);
+
+        $result = $this->object->getTableDef('database', '');
 
         self::assertSame(
             '<table width="100%" cellspacing="1">' .
@@ -502,7 +507,7 @@ class ExportHtmlwordTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $result = $this->object->getTableDef('database', '', true, true, true);
+        $result = $this->object->getTableDef('database', '');
 
         self::assertStringContainsString('<td class="print">ftable (ffield)</td>', $result);
 
@@ -538,7 +543,12 @@ class ExportHtmlwordTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $result = $this->object->getTableDef('database', '', false, false, false);
+        $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
+            ->withParsedBody(['htmlword_relation' => 'On', 'htmlword_mime' => 'On']);
+
+        $this->object->setExportOptions($request, []);
+
+        $result = $this->object->getTableDef('database', '');
 
         self::assertSame(
             '<table width="100%" cellspacing="1">' .
@@ -579,14 +589,7 @@ class ExportHtmlwordTest extends AbstractTestCase
     {
         ob_start();
         $this->dummyDbi->addSelectDb('test_db');
-        self::assertTrue(
-            $this->object->exportStructure(
-                'test_db',
-                'test_table',
-                'create_table',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('test_db', 'test_table', 'create_table'));
         $this->dummyDbi->assertAllSelectsConsumed();
         $result = ob_get_clean();
 
@@ -605,14 +608,7 @@ class ExportHtmlwordTest extends AbstractTestCase
         );
 
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'test_db',
-                'test_table',
-                'triggers',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('test_db', 'test_table', 'triggers'));
         $result = ob_get_clean();
 
         self::assertSame(
@@ -627,14 +623,7 @@ class ExportHtmlwordTest extends AbstractTestCase
 
         ob_start();
         $this->dummyDbi->addSelectDb('test_db');
-        self::assertTrue(
-            $this->object->exportStructure(
-                'test_db',
-                'test_table',
-                'create_view',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('test_db', 'test_table', 'create_view'));
         $this->dummyDbi->assertAllSelectsConsumed();
         $result = ob_get_clean();
 
@@ -653,14 +642,7 @@ class ExportHtmlwordTest extends AbstractTestCase
         );
 
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'test_db',
-                'test_table',
-                'stand_in',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('test_db', 'test_table', 'stand_in'));
         $result = ob_get_clean();
 
         self::assertSame(

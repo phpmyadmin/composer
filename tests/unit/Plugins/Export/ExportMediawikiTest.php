@@ -214,7 +214,7 @@ class ExportMediawikiTest extends AbstractTestCase
     public function testExportDBCreate(): void
     {
         self::assertTrue(
-            $this->object->exportDBCreate('testDB', 'database'),
+            $this->object->exportDBCreate('testDB'),
         );
     }
 
@@ -242,14 +242,7 @@ class ExportMediawikiTest extends AbstractTestCase
         $GLOBALS['mediawiki_headers'] = true;
 
         ob_start();
-        self::assertTrue(
-            $this->object->exportStructure(
-                'db',
-                'table',
-                'create_table',
-                'test',
-            ),
-        );
+        self::assertTrue($this->object->exportStructure('db', 'table', 'create_table'));
         $result = ob_get_clean();
 
         self::assertSame(
@@ -294,7 +287,6 @@ class ExportMediawikiTest extends AbstractTestCase
             $this->object->exportData(
                 'test_db',
                 'test_table',
-                'localhost',
                 'SELECT * FROM `test_db`.`test_table`;',
             ),
         );

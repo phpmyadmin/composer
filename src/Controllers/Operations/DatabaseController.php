@@ -21,6 +21,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\MessageType;
 use PhpMyAdmin\Operations;
 use PhpMyAdmin\Plugins;
+use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Url;
@@ -50,7 +51,6 @@ final class DatabaseController implements InvocableController
     public function __invoke(ServerRequest $request): Response
     {
         $GLOBALS['message'] ??= null;
-        $GLOBALS['errorUrl'] ??= null;
         $GLOBALS['single_table'] ??= null;
 
         $userPrivileges = $this->userPrivilegesFactory->getPrivileges();
@@ -101,10 +101,12 @@ final class DatabaseController implements InvocableController
                     $tableNames = $this->dbi->getTables(Current::$database);
 
                     // remove all foreign key constraints, otherwise we can get errors
-                    $exportSqlPlugin = Plugins::getPlugin('export', 'sql', [
-                        'export_type' => 'database',
-                        'single_table' => isset($GLOBALS['single_table']),
-                    ]);
+                    $exportSqlPlugin = Plugins::getPlugin(
+                        'export',
+                        'sql',
+                        ExportType::Database,
+                        isset($GLOBALS['single_table']),
+                    );
 
                     // create stand-in tables for views
                     $views = $this->operations->getViewsAndCreateSqlViewStandIn(
@@ -230,8 +232,6 @@ final class DatabaseController implements InvocableController
         }
 
         $config = Config::getInstance();
-        $GLOBALS['errorUrl'] = Util::getScriptNameForOption($config->settings['DefaultTabDatabase'], 'database');
-        $GLOBALS['errorUrl'] .= Url::getCommon(['db' => Current::$database], '&');
 
         $databaseName = DatabaseName::tryFrom($request->getParam('db'));
         if ($databaseName === null || ! $this->dbTableExists->selectDatabase($databaseName)) {

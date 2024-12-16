@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers\Database;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Database\Events;
@@ -16,11 +15,9 @@ use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
 use function __;
-use function count;
 use function htmlspecialchars;
 use function mb_strtoupper;
 use function sprintf;
@@ -39,21 +36,12 @@ final class EventsController implements InvocableController
 
     public function __invoke(ServerRequest $request): Response
     {
-        $GLOBALS['errors'] ??= null;
-        $GLOBALS['errorUrl'] ??= null;
-
         $this->response->addScriptFiles(['database/events.js', 'sql.js']);
 
         if (! $request->isAjax()) {
             if (Current::$database === '') {
                 return $this->response->missingParameterError('db');
             }
-
-            $GLOBALS['errorUrl'] = Util::getScriptNameForOption(
-                Config::getInstance()->settings['DefaultTabDatabase'],
-                'database',
-            );
-            $GLOBALS['errorUrl'] .= Url::getCommon(['db' => Current::$database], '&');
 
             $databaseName = DatabaseName::tryFrom($request->getParam('db'));
             if ($databaseName === null || ! $this->dbTableExists->selectDatabase($databaseName)) {
@@ -65,11 +53,6 @@ final class EventsController implements InvocableController
             $this->dbi->selectDb(Current::$database);
         }
 
-        /**
-         * Keep a list of errors that occurred while
-         * processing an 'Add' or 'Edit' operation.
-         */
-        $GLOBALS['errors'] = [];
         $GLOBALS['message'] ??= null;
 
         if (! empty($_POST['editor_process_add']) || ! empty($_POST['editor_process_edit'])) {
@@ -118,7 +101,7 @@ final class EventsController implements InvocableController
          * Display a form used to add/edit a trigger, if necessary
          */
         if (
-            count($GLOBALS['errors'])
+            $this->events->getErrorCount() > 0
             || empty($_POST['editor_process_add'])
             && empty($_POST['editor_process_edit'])
             && (

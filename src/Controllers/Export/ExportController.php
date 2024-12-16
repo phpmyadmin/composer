@@ -19,14 +19,13 @@ use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
-use PhpMyAdmin\Plugins\Export\ExportSql;
 use PhpMyAdmin\Plugins\Export\ExportXml;
 use PhpMyAdmin\Plugins\ExportPlugin;
+use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\SelectStatement;
-use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use Webmozart\Assert\Assert;
 
@@ -36,7 +35,6 @@ use function function_exists;
 use function in_array;
 use function ini_set;
 use function is_array;
-use function is_string;
 use function register_shutdown_function;
 use function time;
 
@@ -51,8 +49,6 @@ final class ExportController implements InvocableController
 
     public function __invoke(ServerRequest $request): Response
     {
-        $GLOBALS['export_type'] ??= null;
-        $GLOBALS['errorUrl'] ??= null;
         $GLOBALS['message'] ??= null;
         $GLOBALS['compression'] ??= null;
         $GLOBALS['asfile'] ??= null;
@@ -98,15 +94,10 @@ final class ExportController implements InvocableController
             return $this->response->missingParameterError('what');
         }
 
-        if (! is_string($GLOBALS['export_type']) || $GLOBALS['export_type'] === '') {
-            return $this->response->missingParameterError('export_type');
-        }
+        $exportType = ExportType::from($request->getParsedBodyParamAsString('export_type'));
 
         // export class instance, not array of properties, as before
-        $exportPlugin = Plugins::getPlugin('export', $GLOBALS['what'], [
-            'export_type' => $GLOBALS['export_type'],
-            'single_table' => isset($GLOBALS['single_table']),
-        ]);
+        $exportPlugin = Plugins::getPlugin('export', $GLOBALS['what'], $exportType, isset($GLOBALS['single_table']));
 
         // Check export type
         if (! $exportPlugin instanceof ExportPlugin) {
@@ -116,11 +107,9 @@ final class ExportController implements InvocableController
             return $this->response->response();
         }
 
-        if ($request->hasBodyParam('sql_backquotes') && $exportPlugin instanceof ExportSql) {
-            $exportPlugin->useSqlBackquotes(true);
-        }
-
         $config = Config::getInstance();
+        $exportPlugin->setExportOptions($request, $config->settings['Export']);
+
         /**
          * valid compression methods
          */
@@ -141,7 +130,6 @@ final class ExportController implements InvocableController
         $GLOBALS['buffer_needed'] = false;
         $GLOBALS['save_filename'] = '';
         $GLOBALS['file_handle'] = '';
-        $GLOBALS['errorUrl'] = '';
         $filename = '';
         $separateFiles = '';
 
@@ -169,26 +157,23 @@ final class ExportController implements InvocableController
 
         $tableNames = [];
         // Generate error url and check for needed variables
-        if ($GLOBALS['export_type'] === 'server') {
-            $GLOBALS['errorUrl'] = Url::getFromRoute('/server/export');
-        } elseif ($GLOBALS['export_type'] === 'database' && Current::$database !== '') {
-            $GLOBALS['errorUrl'] = Url::getFromRoute('/database/export', ['db' => Current::$database]);
+        if ($exportType === ExportType::Database) {
+            if (Current::$database === '') {
+                return $this->response->missingParameterError('db');
+            }
+
             // Check if we have something to export
             $tableNames = $GLOBALS['table_select'] ?? [];
             Assert::isArray($tableNames);
             Assert::allString($tableNames);
-        } elseif ($GLOBALS['export_type'] === 'table' && Current::$database !== '' && Current::$table !== '') {
-            $GLOBALS['errorUrl'] = Url::getFromRoute('/table/export', [
-                'db' => Current::$database,
-                'table' => Current::$table,
-            ]);
-        } elseif ($GLOBALS['export_type'] === 'raw') {
-            $GLOBALS['errorUrl'] = Url::getFromRoute('/server/export', ['sql_query' => Current::$sqlQuery]);
-        } else {
-            $this->response->setRequestStatus(false);
-            $this->response->addHTML(Message::error(__('Bad parameters!'))->getDisplay());
+        } elseif ($exportType === ExportType::Table) {
+            if (Current::$database === '') {
+                return $this->response->missingParameterError('db');
+            }
 
-            return $this->response->response();
+            if (Current::$table === '') {
+                return $this->response->missingParameterError('table');
+            }
         }
 
         // Merge SQL Query aliases with Export aliases from
@@ -244,7 +229,7 @@ final class ExportController implements InvocableController
             $filenameTemplate = $request->getParsedBodyParamAsString('filename_template');
 
             if ((bool) $rememberTemplate) {
-                $this->export->rememberFilename($config, $GLOBALS['export_type'], $filenameTemplate);
+                $this->export->rememberFilename($config, $exportType, $filenameTemplate);
             }
 
             $filename = $this->export->getFinalFilename(
@@ -257,7 +242,7 @@ final class ExportController implements InvocableController
         }
 
         // For raw query export, filename will be export.extension
-        if ($GLOBALS['export_type'] === 'raw') {
+        if ($exportType === ExportType::Raw) {
             $filename = $this->export->getFinalFilename($exportPlugin, $GLOBALS['compression'], 'export');
         }
 
@@ -270,7 +255,7 @@ final class ExportController implements InvocableController
 
             // problem opening export file on server?
             if ($message !== null) {
-                $location = $this->export->getPageLocationAndSaveMessage($GLOBALS['export_type'], $message);
+                $location = $this->export->getPageLocationAndSaveMessage($exportType, $message);
                 $this->response->redirect($location);
 
                 return $this->response->response();
@@ -288,7 +273,7 @@ final class ExportController implements InvocableController
             Core::downloadHeader($filename, $mimeType);
         } else {
             // HTML
-            if ($GLOBALS['export_type'] === 'database') {
+            if ($exportType === ExportType::Database) {
                 $GLOBALS['num_tables'] = count($tableNames);
                 if ($GLOBALS['num_tables'] === 0) {
                     $GLOBALS['message'] = Message::error(
@@ -301,11 +286,7 @@ final class ExportController implements InvocableController
                 }
             }
 
-            echo $this->export->getHtmlForDisplayedExportHeader(
-                $GLOBALS['export_type'],
-                Current::$database,
-                Current::$table,
-            );
+            echo $this->export->getHtmlForDisplayedExportHeader($exportType, Current::$database, Current::$table);
         }
 
         try {
@@ -323,55 +304,16 @@ final class ExportController implements InvocableController
                 throw new ExportException('Failure during header export.');
             }
 
-            // Will we need relation & co. setup?
-            $doRelation = isset($GLOBALS[$GLOBALS['what'] . '_relation']);
-            $doComments = isset($GLOBALS[$GLOBALS['what'] . '_include_comments'])
-                || isset($GLOBALS[$GLOBALS['what'] . '_comments']);
-            $doMime = isset($GLOBALS[$GLOBALS['what'] . '_mime']);
-
-            // Include dates in export?
-            $doDates = isset($GLOBALS[$GLOBALS['what'] . '_dates']);
-
-            /** @var mixed $whatStrucOrData */
-            $whatStrucOrData = $GLOBALS[$GLOBALS['what'] . '_structure_or_data'] ?? null;
-            if (! in_array($whatStrucOrData, ['structure', 'data', 'structure_and_data'], true)) {
-                $whatStrucOrData = 'data';
-                /** @var mixed $whatStrucOrDataDefaultValue */
-                $whatStrucOrDataDefaultValue = $config->settings['Export'][$GLOBALS['what'] . '_structure_or_data']
-                    ?? null;
-                if (in_array($whatStrucOrDataDefaultValue, ['structure', 'data', 'structure_and_data'], true)) {
-                    $whatStrucOrData = $whatStrucOrDataDefaultValue;
-                }
-
-                $GLOBALS[$GLOBALS['what'] . '_structure_or_data'] = $whatStrucOrData;
-            }
-
-            if ($GLOBALS['export_type'] === 'raw') {
-                $whatStrucOrData = 'raw';
-            }
-
             /**
              * Builds the dump
              */
-            if ($GLOBALS['export_type'] === 'server') {
+            if ($exportType === ExportType::Server) {
                 if ($dbSelect === null) {
                     $dbSelect = '';
                 }
 
-                $this->export->exportServer(
-                    $dbSelect,
-                    $whatStrucOrData,
-                    $exportPlugin,
-                    $GLOBALS['errorUrl'],
-                    $GLOBALS['export_type'],
-                    $doRelation,
-                    $doComments,
-                    $doMime,
-                    $doDates,
-                    $aliases,
-                    $separateFiles,
-                );
-            } elseif ($GLOBALS['export_type'] === 'database') {
+                $this->export->exportServer($dbSelect, $exportPlugin, $aliases, $separateFiles);
+            } elseif ($exportType === ExportType::Database) {
                 if (! is_array($tableStructure)) {
                     $tableStructure = [];
                 }
@@ -391,16 +333,9 @@ final class ExportController implements InvocableController
                         $this->export->exportDatabase(
                             DatabaseName::from(Current::$database),
                             $tableNames,
-                            $whatStrucOrData,
                             $tableStructure,
                             $GLOBALS['table_data'],
                             $exportPlugin,
-                            $GLOBALS['errorUrl'],
-                            $GLOBALS['export_type'],
-                            $doRelation,
-                            $doComments,
-                            $doMime,
-                            $doDates,
                             $aliases,
                             $separateFiles,
                         );
@@ -411,28 +346,15 @@ final class ExportController implements InvocableController
                     $this->export->exportDatabase(
                         DatabaseName::from(Current::$database),
                         $tableNames,
-                        $whatStrucOrData,
                         $tableStructure,
                         $GLOBALS['table_data'],
                         $exportPlugin,
-                        $GLOBALS['errorUrl'],
-                        $GLOBALS['export_type'],
-                        $doRelation,
-                        $doComments,
-                        $doMime,
-                        $doDates,
                         $aliases,
                         $separateFiles,
                     );
                 }
-            } elseif ($GLOBALS['export_type'] === 'raw') {
-                Export::exportRaw(
-                    $whatStrucOrData,
-                    $exportPlugin,
-                    $GLOBALS['errorUrl'],
-                    Current::$database,
-                    Current::$sqlQuery,
-                );
+            } elseif ($exportType === ExportType::Raw) {
+                Export::exportRaw($exportPlugin, Current::$database, Current::$sqlQuery);
             } else {
                 // We export just one table
 
@@ -446,14 +368,7 @@ final class ExportController implements InvocableController
                         $this->export->exportTable(
                             Current::$database,
                             Current::$table,
-                            $whatStrucOrData,
                             $exportPlugin,
-                            $GLOBALS['errorUrl'],
-                            $GLOBALS['export_type'],
-                            $doRelation,
-                            $doComments,
-                            $doMime,
-                            $doDates,
                             $allrows,
                             $limitTo,
                             $limitFrom,
@@ -467,14 +382,7 @@ final class ExportController implements InvocableController
                     $this->export->exportTable(
                         Current::$database,
                         Current::$table,
-                        $whatStrucOrData,
                         $exportPlugin,
-                        $GLOBALS['errorUrl'],
-                        $GLOBALS['export_type'],
-                        $doRelation,
-                        $doComments,
-                        $doMime,
-                        $doDates,
                         $allrows,
                         $limitTo,
                         $limitFrom,
@@ -492,7 +400,7 @@ final class ExportController implements InvocableController
         }
 
         if ($GLOBALS['save_on_server'] && $GLOBALS['message'] instanceof Message) {
-            $location = $this->export->getPageLocationAndSaveMessage($GLOBALS['export_type'], $GLOBALS['message']);
+            $location = $this->export->getPageLocationAndSaveMessage($exportType, $GLOBALS['message']);
             $this->response->redirect($location);
 
             return $this->response->response();
@@ -502,11 +410,7 @@ final class ExportController implements InvocableController
          * Send the dump as a file...
          */
         if (empty($GLOBALS['asfile'])) {
-            echo $this->export->getHtmlForDisplayedExportFooter(
-                $GLOBALS['export_type'],
-                Current::$database,
-                Current::$table,
-            );
+            echo $this->export->getHtmlForDisplayedExportFooter($exportType, Current::$database, Current::$table);
 
             return $this->response->response();
         }
@@ -544,7 +448,7 @@ final class ExportController implements InvocableController
                 $this->export->dumpBuffer,
                 $GLOBALS['save_filename'],
             );
-            $location = $this->export->getPageLocationAndSaveMessage($GLOBALS['export_type'], $message);
+            $location = $this->export->getPageLocationAndSaveMessage($exportType, $message);
             $this->response->redirect($location);
 
             return $this->response->response();
@@ -563,10 +467,6 @@ final class ExportController implements InvocableController
     {
         if (isset($postParams['single_table'])) {
             $GLOBALS['single_table'] = $postParams['single_table'];
-        }
-
-        if (isset($postParams['export_type'])) {
-            $GLOBALS['export_type'] = $postParams['export_type'];
         }
 
         if (isset($postParams['table_select'])) {
@@ -597,10 +497,6 @@ final class ExportController implements InvocableController
             $GLOBALS['xkana'] = $postParams['xkana'];
         }
 
-        if (isset($postParams['htmlword_structure_or_data'])) {
-            $GLOBALS['htmlword_structure_or_data'] = $postParams['htmlword_structure_or_data'];
-        }
-
         if (isset($postParams['htmlword_null'])) {
             $GLOBALS['htmlword_null'] = $postParams['htmlword_null'];
         }
@@ -613,32 +509,8 @@ final class ExportController implements InvocableController
             $GLOBALS['mediawiki_headers'] = $postParams['mediawiki_headers'];
         }
 
-        if (isset($postParams['mediawiki_structure_or_data'])) {
-            $GLOBALS['mediawiki_structure_or_data'] = $postParams['mediawiki_structure_or_data'];
-        }
-
         if (isset($postParams['mediawiki_caption'])) {
             $GLOBALS['mediawiki_caption'] = $postParams['mediawiki_caption'];
-        }
-
-        if (isset($postParams['pdf_structure_or_data'])) {
-            $GLOBALS['pdf_structure_or_data'] = $postParams['pdf_structure_or_data'];
-        }
-
-        if (isset($postParams['odt_structure_or_data'])) {
-            $GLOBALS['odt_structure_or_data'] = $postParams['odt_structure_or_data'];
-        }
-
-        if (isset($postParams['odt_relation'])) {
-            $GLOBALS['odt_relation'] = $postParams['odt_relation'];
-        }
-
-        if (isset($postParams['odt_comments'])) {
-            $GLOBALS['odt_comments'] = $postParams['odt_comments'];
-        }
-
-        if (isset($postParams['odt_mime'])) {
-            $GLOBALS['odt_mime'] = $postParams['odt_mime'];
         }
 
         if (isset($postParams['odt_columns'])) {
@@ -647,10 +519,6 @@ final class ExportController implements InvocableController
 
         if (isset($postParams['odt_null'])) {
             $GLOBALS['odt_null'] = $postParams['odt_null'];
-        }
-
-        if (isset($postParams['codegen_structure_or_data'])) {
-            $GLOBALS['codegen_structure_or_data'] = $postParams['codegen_structure_or_data'];
         }
 
         if (isset($postParams['codegen_format'])) {
@@ -673,28 +541,12 @@ final class ExportController implements InvocableController
             $GLOBALS['excel_edition'] = $postParams['excel_edition'];
         }
 
-        if (isset($postParams['excel_structure_or_data'])) {
-            $GLOBALS['excel_structure_or_data'] = $postParams['excel_structure_or_data'];
-        }
-
-        if (isset($postParams['yaml_structure_or_data'])) {
-            $GLOBALS['yaml_structure_or_data'] = $postParams['yaml_structure_or_data'];
-        }
-
         if (isset($postParams['ods_null'])) {
             $GLOBALS['ods_null'] = $postParams['ods_null'];
         }
 
-        if (isset($postParams['ods_structure_or_data'])) {
-            $GLOBALS['ods_structure_or_data'] = $postParams['ods_structure_or_data'];
-        }
-
         if (isset($postParams['ods_columns'])) {
             $GLOBALS['ods_columns'] = $postParams['ods_columns'];
-        }
-
-        if (isset($postParams['json_structure_or_data'])) {
-            $GLOBALS['json_structure_or_data'] = $postParams['json_structure_or_data'];
         }
 
         if (isset($postParams['json_pretty_print'])) {
@@ -703,10 +555,6 @@ final class ExportController implements InvocableController
 
         if (isset($postParams['json_unicode'])) {
             $GLOBALS['json_unicode'] = $postParams['json_unicode'];
-        }
-
-        if (isset($postParams['xml_structure_or_data'])) {
-            $GLOBALS['xml_structure_or_data'] = $postParams['xml_structure_or_data'];
         }
 
         if (isset($postParams['xml_export_events'])) {
@@ -737,10 +585,6 @@ final class ExportController implements InvocableController
             $GLOBALS['xml_export_contents'] = $postParams['xml_export_contents'];
         }
 
-        if (isset($postParams['texytext_structure_or_data'])) {
-            $GLOBALS['texytext_structure_or_data'] = $postParams['texytext_structure_or_data'];
-        }
-
         if (isset($postParams['texytext_columns'])) {
             $GLOBALS['texytext_columns'] = $postParams['texytext_columns'];
         }
@@ -749,28 +593,8 @@ final class ExportController implements InvocableController
             $GLOBALS['texytext_null'] = $postParams['texytext_null'];
         }
 
-        if (isset($postParams['phparray_structure_or_data'])) {
-            $GLOBALS['phparray_structure_or_data'] = $postParams['phparray_structure_or_data'];
-        }
-
-        if (isset($postParams['sql_include_comments'])) {
-            $GLOBALS['sql_include_comments'] = $postParams['sql_include_comments'];
-        }
-
         if (isset($postParams['sql_header_comment'])) {
             $GLOBALS['sql_header_comment'] = $postParams['sql_header_comment'];
-        }
-
-        if (isset($postParams['sql_dates'])) {
-            $GLOBALS['sql_dates'] = $postParams['sql_dates'];
-        }
-
-        if (isset($postParams['sql_relation'])) {
-            $GLOBALS['sql_relation'] = $postParams['sql_relation'];
-        }
-
-        if (isset($postParams['sql_mime'])) {
-            $GLOBALS['sql_mime'] = $postParams['sql_mime'];
         }
 
         if (isset($postParams['sql_use_transaction'])) {
@@ -783,10 +607,6 @@ final class ExportController implements InvocableController
 
         if (isset($postParams['sql_compatibility'])) {
             $GLOBALS['sql_compatibility'] = $postParams['sql_compatibility'];
-        }
-
-        if (isset($postParams['sql_structure_or_data'])) {
-            $GLOBALS['sql_structure_or_data'] = $postParams['sql_structure_or_data'];
         }
 
         if (isset($postParams['sql_create_database'])) {
@@ -905,16 +725,8 @@ final class ExportController implements InvocableController
             $GLOBALS['csv_columns'] = $postParams['csv_columns'];
         }
 
-        if (isset($postParams['csv_structure_or_data'])) {
-            $GLOBALS['csv_structure_or_data'] = $postParams['csv_structure_or_data'];
-        }
-
         if (isset($postParams['latex_caption'])) {
             $GLOBALS['latex_caption'] = $postParams['latex_caption'];
-        }
-
-        if (isset($postParams['latex_structure_or_data'])) {
-            $GLOBALS['latex_structure_or_data'] = $postParams['latex_structure_or_data'];
         }
 
         if (isset($postParams['latex_structure_caption'])) {
@@ -927,18 +739,6 @@ final class ExportController implements InvocableController
 
         if (isset($postParams['latex_structure_label'])) {
             $GLOBALS['latex_structure_label'] = $postParams['latex_structure_label'];
-        }
-
-        if (isset($postParams['latex_relation'])) {
-            $GLOBALS['latex_relation'] = $postParams['latex_relation'];
-        }
-
-        if (isset($postParams['latex_comments'])) {
-            $GLOBALS['latex_comments'] = $postParams['latex_comments'];
-        }
-
-        if (isset($postParams['latex_mime'])) {
-            $GLOBALS['latex_mime'] = $postParams['latex_mime'];
         }
 
         if (isset($postParams['latex_columns'])) {

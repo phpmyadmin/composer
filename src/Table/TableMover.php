@@ -11,6 +11,7 @@ use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Export\ExportSql;
+use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\SqlParser\Components\Expression;
 use PhpMyAdmin\SqlParser\Components\OptionsArray;
 use PhpMyAdmin\SqlParser\Context;
@@ -46,8 +47,6 @@ class TableMover
         MoveMode $mode,
         bool $addDropIfExists,
     ): bool {
-        $GLOBALS['errorUrl'] ??= null;
-
         // Try moving the tables directly, using native `RENAME` statement.
         if ($what === MoveScope::Move) {
             $tbl = new Table($sourceTable, $sourceDb, $this->dbi);
@@ -464,10 +463,7 @@ class TableMover
          *
          * @var ExportSql $exportSqlPlugin
          */
-        $exportSqlPlugin = Plugins::getPlugin('export', 'sql', [
-            'export_type' => 'table',
-            'single_table' => false,
-        ]);
+        $exportSqlPlugin = Plugins::getPlugin('export', 'sql', ExportType::Table);
         // It is better that all identifiers are quoted
         $exportSqlPlugin->useSqlBackquotes(true);
 
@@ -481,7 +477,7 @@ class TableMover
         /**
          * The old structure of the table.
          */
-        $sqlStructure = $exportSqlPlugin->getTableDef($sourceDb, $sourceTable, false, false, $isView);
+        $sqlStructure = $exportSqlPlugin->getTableDef($sourceDb, $sourceTable, false, $isView);
 
         // -----------------------------------------------------------------
         // Phase 0: Preparing structures used.
