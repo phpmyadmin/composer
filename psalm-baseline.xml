@@ -1620,7 +1620,6 @@
     <InvalidArrayOffset>
       <code><![CDATA[$GLOBALS['language_stats']]]></code>
       <code><![CDATA[$GLOBALS['language_stats']]]></code>
-      <code><![CDATA[$GLOBALS['show_query']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$this->config->get('ShowGitRevision') ?? true]]></code>
@@ -1635,9 +1634,6 @@
     <MixedArrayTypeCoercion>
       <code><![CDATA[$config->settings['Servers'][Current::$server]]]></code>
     </MixedArrayTypeCoercion>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['show_query']]]></code>
-    </MixedAssignment>
     <PossiblyNullArgument>
       <code><![CDATA[$this->config->get('TempDir')]]></code>
     </PossiblyNullArgument>
@@ -1944,12 +1940,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -1958,12 +1948,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -1972,12 +1956,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -1986,12 +1964,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -2053,12 +2025,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -2067,12 +2033,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </InvalidArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['hash']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -2183,21 +2143,15 @@
   <file src="src/Controllers/Server/ExportController.php">
     <InvalidArrayOffset>
       <code><![CDATA[$GLOBALS['num_tables']]]></code>
-      <code><![CDATA[$GLOBALS['select_item']]]></code>
       <code><![CDATA[$GLOBALS['single_table']]]></code>
-      <code><![CDATA[$GLOBALS['tmp_select']]]></code>
       <code><![CDATA[$GLOBALS['unlim_num_rows']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$GLOBALS['num_tables']]]></code>
-      <code><![CDATA[$GLOBALS['select_item']]]></code>
       <code><![CDATA[$GLOBALS['unlim_num_rows']]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['select_item']]]></code>
-      <code><![CDATA[$GLOBALS['select_item']]]></code>
       <code><![CDATA[$GLOBALS['single_table']]]></code>
-      <code><![CDATA[$GLOBALS['tmp_select']]]></code>
       <code><![CDATA[$GLOBALS['unlim_num_rows']]]></code>
     </MixedAssignment>
     <PossiblyUnusedMethod>
@@ -2336,58 +2290,20 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Controllers/Server/Status/QueriesController.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$key]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment>
-      <code><![CDATA[$chart[__('Other statements')]]]></code>
-      <code><![CDATA[$hourFactor]]></code>
-      <code><![CDATA[$otherSum]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$hourFactor]]></code>
+    <PossiblyInvalidOperand>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
-    </MixedOperand>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[str_replace(['Com_', '_'], ['', ' '], $key)]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[str_replace(['Com_', '_'], ['', ' '], $key)]]></code>
-    </PossiblyInvalidCast>
+    </PossiblyInvalidOperand>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Controllers/Server/Status/StatusController.php">
-    <MixedArgument>
-      <code><![CDATA[$this->data->status['Aborted_clients']]]></code>
-      <code><![CDATA[$this->data->status['Aborted_clients'] * $hourFactor]]></code>
-      <code><![CDATA[$this->data->status['Aborted_clients'] * 100 / $this->data->status['Connections']]]></code>
-      <code><![CDATA[$this->data->status['Aborted_connects']]]></code>
-      <code><![CDATA[$this->data->status['Aborted_connects'] * $hourFactor]]></code>
-      <code><![CDATA[$this->data->status['Aborted_connects'] * 100 / $this->data->status['Connections']]]></code>
-      <code><![CDATA[$this->data->status['Bytes_received']]]></code>
-      <code><![CDATA[$this->data->status['Bytes_received'] * $hourFactor]]></code>
-      <code><![CDATA[$this->data->status['Bytes_received'] + $this->data->status['Bytes_sent']]]></code>
-      <code><![CDATA[$this->data->status['Bytes_received'] + $this->data->status['Bytes_sent']]]></code>
-      <code><![CDATA[$this->data->status['Bytes_sent']]]></code>
-      <code><![CDATA[$this->data->status['Bytes_sent'] * $hourFactor]]></code>
-      <code><![CDATA[$this->data->status['Connections']]]></code>
-      <code><![CDATA[$this->data->status['Connections'] * $hourFactor]]></code>
-      <code><![CDATA[$this->data->status['Max_used_connections']]]></code>
-      <code><![CDATA[($this->data->status['Bytes_received'] + $this->data->status['Bytes_sent']) * $hourFactor]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$hourFactor]]></code>
-      <code><![CDATA[$hourFactor]]></code>
-    </MixedAssignment>
-    <MixedOperand>
+    <PossiblyInvalidOperand>
       <code><![CDATA[$this->data->status['Aborted_clients']]]></code>
       <code><![CDATA[$this->data->status['Aborted_clients']]]></code>
       <code><![CDATA[$this->data->status['Aborted_connects']]]></code>
@@ -2397,40 +2313,38 @@
       <code><![CDATA[$this->data->status['Bytes_received']]]></code>
       <code><![CDATA[$this->data->status['Bytes_received']]]></code>
       <code><![CDATA[$this->data->status['Bytes_sent']]]></code>
+      <code><![CDATA[$this->data->status['Bytes_sent']]]></code>
+      <code><![CDATA[$this->data->status['Bytes_sent']]]></code>
+      <code><![CDATA[$this->data->status['Bytes_sent']]]></code>
+      <code><![CDATA[$this->data->status['Connections']]]></code>
+      <code><![CDATA[$this->data->status['Connections']]]></code>
       <code><![CDATA[$this->data->status['Connections']]]></code>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
-      <code><![CDATA[$this->data->status['Uptime']]]></code>
-    </MixedOperand>
+    </PossiblyInvalidOperand>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Controllers/Server/Status/VariablesController.php">
+    <InvalidOperand>
+      <code><![CDATA[$this->data->variables['thread_cache_size']]]></code>
+    </InvalidOperand>
     <MixedArgument>
       <code><![CDATA[$flush]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$name]]></code>
-      <code><![CDATA[$name]]></code>
-    </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$dontFormat]]></code>
       <code><![CDATA[$filterAlert]]></code>
       <code><![CDATA[$filterCategory]]></code>
       <code><![CDATA[$filterText]]></code>
       <code><![CDATA[$flush]]></code>
-      <code><![CDATA[$linkName]]></code>
-      <code><![CDATA[$linkUrl]]></code>
-      <code><![CDATA[$sectionLinks]]></code>
-      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedOperand>
+    <PossiblyInvalidOperand>
       <code><![CDATA[$this->data->status['Key_read_requests']]]></code>
       <code><![CDATA[$this->data->status['Key_write_requests']]]></code>
       <code><![CDATA[$this->data->status['Qcache_total_blocks']]]></code>
-      <code><![CDATA[$this->data->variables['thread_cache_size']]]></code>
-    </MixedOperand>
+    </PossiblyInvalidOperand>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
@@ -3661,15 +3575,9 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['change_password_message']]]></code>
-    </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$message->getDisplay()]]></code>
     </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['change_password_message']]]></code>
-    </MixedAssignment>
     <MixedMethodCall>
       <code><![CDATA[getDisplay]]></code>
     </MixedMethodCall>
@@ -6902,14 +6810,9 @@
     </DeprecatedMethod>
     <InvalidArrayOffset>
       <code><![CDATA[$GLOBALS['PHP_AUTH_PW']]]></code>
-      <code><![CDATA[$GLOBALS['PHP_AUTH_USER']]]></code>
     </InvalidArrayOffset>
-    <MixedArgument>
-      <code><![CDATA[$this->user]]></code>
-    </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$this->password]]></code>
-      <code><![CDATA[$this->user]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
       <code><![CDATA[$oldUser]]></code>
@@ -9205,7 +9108,6 @@
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
     <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['focus_querywindow']]]></code>
       <code><![CDATA[$GLOBALS['reload']]]></code>
     </InvalidArrayOffset>
     <MixedArgumentTypeCoercion>
@@ -9499,40 +9401,23 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Server/Status/Data.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$name]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment>
+    <InvalidOperand>
+      <code><![CDATA[$serverStatus['Key_blocks_unused']]]></code>
+      <code><![CDATA[$serverStatus['Key_blocks_used']]]></code>
+      <code><![CDATA[$serverVariables['key_buffer_size']]]></code>
+      <code><![CDATA[$serverVariables['key_buffer_size']]]></code>
+    </InvalidOperand>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$_POST['primary_connection'] ?? null]]></code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidOperand>
       <code><![CDATA[$keyReadRequests]]></code>
       <code><![CDATA[$keyReads]]></code>
       <code><![CDATA[$keyWriteRequests]]></code>
       <code><![CDATA[$keyWrites]]></code>
-      <code><![CDATA[$serverStatus['Key_buffer_fraction_%']]]></code>
-      <code><![CDATA[$serverStatus['Key_buffer_fraction_%']]]></code>
-      <code><![CDATA[$serverStatus['Key_read_ratio_%']]]></code>
-      <code><![CDATA[$serverStatus['Key_write_ratio_%']]]></code>
-      <code><![CDATA[$serverStatus['Threads_cache_hitrate_%']]]></code>
-      <code><![CDATA[$usedQueries[$name]]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$keyReads]]></code>
-      <code><![CDATA[$keyWrites]]></code>
-      <code><![CDATA[$serverStatus['Key_blocks_unused']]]></code>
-      <code><![CDATA[$serverStatus['Key_blocks_unused']
-                * $serverVariables['key_cache_block_size']
-                / $serverVariables['key_buffer_size']
-                * 100]]></code>
-      <code><![CDATA[$serverStatus['Key_blocks_used']]]></code>
+      <code><![CDATA[$serverStatus['Connections']]]></code>
       <code><![CDATA[$serverStatus['Threads_created']]]></code>
-      <code><![CDATA[$serverStatus['Threads_created']
-                / $serverStatus['Connections'] * 100]]></code>
-      <code><![CDATA[100 * $keyReads]]></code>
-      <code><![CDATA[100 * $keyWrites]]></code>
-    </MixedOperand>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$_POST['primary_connection'] ?? null]]></code>
-    </PossiblyInvalidArgument>
+    </PossiblyInvalidOperand>
     <UnusedProperty>
       <code><![CDATA[$dbi]]></code>
     </UnusedProperty>
@@ -9970,11 +9855,7 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArrayOffset>
-      <code><![CDATA[$GLOBALS['mime_map']]]></code>
-    </InvalidArrayOffset>
     <MixedArgument>
-      <code><![CDATA[$GLOBALS['mime_map'][$columnMeta['Field']] ?? []]]></code>
       <code><![CDATA[$columnMeta['Default']]]></code>
       <code><![CDATA[$columnMeta['DefaultValue']]]></code>
       <code><![CDATA[$columnMeta['Field']]]></code>
@@ -9986,20 +9867,15 @@
       <code><![CDATA[Util::getValueByKey($_POST, ['field_key', $columnNumber], '')]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code><![CDATA[$GLOBALS['mime_map'][$columnMeta['Field']]]]></code>
       <code><![CDATA[$columnMeta['column_status']['isEditable']]]></code>
       <code><![CDATA[$columnMeta['column_status']['isEditable']]]></code>
     </MixedArrayAccess>
-    <MixedArrayAssignment>
-      <code><![CDATA[$GLOBALS['mime_map'][$columnMeta['Field']]]]></code>
-    </MixedArrayAssignment>
     <MixedArrayOffset>
-      <code><![CDATA[$GLOBALS['mime_map'][$columnMeta['Field']]]]></code>
-      <code><![CDATA[$GLOBALS['mime_map'][$columnMeta['Field']]]]></code>
       <code><![CDATA[$commentsMap[$columnMeta['Field']]]]></code>
+      <code><![CDATA[$mimeMap[$columnMeta['Field']]]]></code>
+      <code><![CDATA[$mimeMap[$columnMeta['Field']]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code><![CDATA[$GLOBALS['mime_map']]]></code>
       <code><![CDATA[$columnMeta['Default']]]></code>
       <code><![CDATA[$columnMeta['Expression']]]></code>
       <code><![CDATA[$commentsMap[$columnMeta['Field']]]]></code>
@@ -11907,13 +11783,10 @@
   <file src="tests/unit/Controllers/Server/Status/AdvisorControllerTest.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
-    <InaccessibleProperty>
-      <code><![CDATA[$this->data->dataLoaded]]></code>
-      <code><![CDATA[$this->data->dataLoaded]]></code>
-    </InaccessibleProperty>
   </file>
   <file src="tests/unit/Controllers/Server/Status/Monitor/GeneralLogControllerTest.php">
     <DeprecatedMethod>
@@ -11978,22 +11851,10 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
-    <InaccessibleProperty>
-      <code><![CDATA[$this->data->status]]></code>
-      <code><![CDATA[$this->data->usedQueries]]></code>
-    </InaccessibleProperty>
-    <MixedArgument>
-      <code><![CDATA[$totalQueries * $hourFactor]]></code>
-      <code><![CDATA[$totalQueries * 60 / $this->data->status['Uptime']]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$hourFactor]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$hourFactor]]></code>
+    <PossiblyInvalidOperand>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
       <code><![CDATA[$this->data->status['Uptime']]]></code>
-    </MixedOperand>
+    </PossiblyInvalidOperand>
   </file>
   <file src="tests/unit/Controllers/Server/Status/StatusControllerTest.php">
     <DeprecatedMethod>
@@ -12001,16 +11862,7 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
-    <InaccessibleProperty>
-      <code><![CDATA[$data->status]]></code>
-      <code><![CDATA[$data->status]]></code>
-      <code><![CDATA[$data->status]]></code>
-      <code><![CDATA[$data->status]]></code>
-      <code><![CDATA[$data->status]]></code>
-      <code><![CDATA[$data->status]]></code>
-    </InaccessibleProperty>
   </file>
   <file src="tests/unit/Controllers/Server/Status/VariablesControllerTest.php">
     <DeprecatedMethod>
