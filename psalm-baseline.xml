@@ -266,9 +266,28 @@
     </UnusedVariable>
   </file>
   <file src="libraries/classes/Command/WriteGitRevisionCommand.php">
+    <MixedArgument occurrences="6">
+      <code>$author['date']</code>
+      <code>$author['email']</code>
+      <code>$author['name']</code>
+      <code>$committer['date']</code>
+      <code>$committer['email']</code>
+      <code>$committer['name']</code>
+    </MixedArgument>
     <NonInvariantDocblockPropertyType occurrences="1">
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$message</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidArrayOffset occurrences="6">
+      <code>$author['date']</code>
+      <code>$author['email']</code>
+      <code>$author['name']</code>
+      <code>$committer['date']</code>
+      <code>$committer['email']</code>
+      <code>$committer['name']</code>
+    </PossiblyInvalidArrayOffset>
   </file>
   <file src="libraries/classes/Common.php">
     <MixedArgument occurrences="5">
@@ -6748,16 +6767,11 @@
       <code>$db</code>
       <code>$table</code>
     </MixedArgument>
-    <MixedAssignment occurrences="4">
-      <code>$info</code>
+    <MixedAssignment occurrences="3">
       <code>$params['route']</code>
       <code>$params['server']</code>
       <code>$subObject</code>
     </MixedAssignment>
-    <MixedReturnTypeCoercion occurrences="2">
-      <code>array{revision: string, revisionUrl: string, branch: string, branchUrl: string}|[]</code>
-      <code>is_array($info) ? $info : []</code>
-    </MixedReturnTypeCoercion>
     <RedundantCast occurrences="3">
       <code>(string) $GLOBALS['db']</code>
       <code>(string) $GLOBALS['table']</code>
@@ -7542,22 +7556,17 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="libraries/classes/Git.php">
-    <MixedArgument occurrences="8">
+    <MixedArgument occurrences="7">
       <code>$commit</code>
       <code>$commit_json-&gt;message</code>
-      <code>$dataline</code>
       <code>$hash</code>
       <code>$hash</code>
       <code>$hash</code>
       <code>$offset + ($position * 20)</code>
       <code>$offset + ($position * 4)</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedAssignment occurrences="9">
       <code>$commit</code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="10">
-      <code>$commit</code>
-      <code>$dataline</code>
       <code>$end</code>
       <code>$git_location</code>
       <code>$isRemoteCommit</code>
@@ -7594,6 +7603,9 @@
       <code>$packOffsets[1]</code>
       <code>json_decode((string) $is_found)</code>
     </MixedReturnStatement>
+    <MixedReturnTypeCoercion occurrences="2">
+      <code>$info</code>
+    </MixedReturnTypeCoercion>
     <PossiblyInvalidArrayOffset occurrences="1">
       <code>$_SESSION['PMA_VERSION_COMMITDATA_' . $hash]</code>
     </PossiblyInvalidArrayOffset>
@@ -15516,6 +15528,11 @@
       <code>$dataSet</code>
       <code>$queryString</code>
     </MixedAssignment>
+  </file>
+  <file src="test/classes/GitTest.php">
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>assertIsArray</code>
+    </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/classes/HeaderTest.php">
     <MixedInferredReturnType occurrences="1">
