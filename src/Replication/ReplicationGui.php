@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Replication;
 
 use PhpMyAdmin\Config;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\ConnectionType;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\ResponseRenderer;
@@ -77,11 +77,11 @@ class ReplicationGui
             $primaryStatusTable = $this->getHtmlForReplicationStatusTable($connection, 'primary', true, false);
             $dbi = DatabaseInterface::getInstance();
             if ($dbi->isMySql() && $dbi->getVersion() >= 80022) {
-                $replicas = $dbi->fetchResult('SHOW REPLICAS', null, null);
+                $replicas = $dbi->fetchResultSimple('SHOW REPLICAS');
             } elseif ($dbi->isMariaDB() && $dbi->getVersion() >= 100501) {
-                $replicas = $dbi->fetchResult('SHOW REPLICA HOSTS', null, null);
+                $replicas = $dbi->fetchResultSimple('SHOW REPLICA HOSTS');
             } else {
-                $replicas = $dbi->fetchResult('SHOW SLAVE HOSTS');
+                $replicas = $dbi->fetchResultSimple('SHOW SLAVE HOSTS');
             }
 
             $urlParams = UrlParams::$params;
@@ -138,9 +138,9 @@ class ReplicationGui
 
         $serverReplicaMultiReplication = [];
         if ($dbi->isMariaDB() && $dbi->getVersion() >= 100501) {
-            $serverReplicaMultiReplication = $dbi->fetchResult('SHOW ALL REPLICAS STATUS');
+            $serverReplicaMultiReplication = $dbi->fetchResultSimple('SHOW ALL REPLICAS STATUS');
         } elseif ($dbi->isMariaDB()) {
-            $serverReplicaMultiReplication = $dbi->fetchResult('SHOW ALL SLAVES STATUS');
+            $serverReplicaMultiReplication = $dbi->fetchResultSimple('SHOW ALL SLAVES STATUS');
         }
 
         $isReplicaIoRunning = false;

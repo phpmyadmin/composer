@@ -6,6 +6,7 @@ namespace PhpMyAdmin;
 
 use DateTimeImmutable;
 use PhpMyAdmin\ConfigStorage\UserGroupLevel;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Query\Compatibility;
@@ -1427,7 +1428,7 @@ class Util
         // It future replace str_getcsv with $dbi->fetchSingleRow('SELECT '.$expressionInBrackets[1]);
 
         preg_match('/\((.*)\)/', $definition, $expressionInBrackets);
-        $matches = str_getcsv($expressionInBrackets[1], ',', "'");
+        $matches = str_getcsv($expressionInBrackets[1], ',', "'", '\\');
 
         $values = [];
         foreach ($matches as $value) {

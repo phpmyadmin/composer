@@ -8,6 +8,7 @@ use PhpMyAdmin\Bookmarks\BookmarkRepository;
 use PhpMyAdmin\ConfigStorage\Features\BookmarkFeature;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\ConfigStorage\RelationCleanup;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Display\DeleteLinkEnum;
 use PhpMyAdmin\Display\DisplayParts;
@@ -172,6 +173,10 @@ class Sql
      */
     private function resultSetContainsUniqueKey(string $db, string $table, array $fieldsMeta): bool
     {
+        if ($table === '') {
+            return false;
+        }
+
         $columns = $this->dbi->getColumns($db, $table);
         $resultSetColumnNames = [];
         foreach ($fieldsMeta as $oneMeta) {
@@ -311,7 +316,7 @@ class Sql
             $whereClause,
         ));
 
-        if ($row === null) {
+        if ($row === []) {
             return '';
         }
 

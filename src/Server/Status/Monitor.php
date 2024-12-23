@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Server\Status;
 
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Profiling;
 use PhpMyAdmin\Server\SysInfo\SysInfo;
 use PhpMyAdmin\Util;
@@ -485,8 +485,6 @@ class Monitor
         string $database,
         string $query,
     ): array {
-        $GLOBALS['cached_affected_rows'] ??= null;
-
         $return = [];
 
         if ($database !== '') {
@@ -503,7 +501,7 @@ class Monitor
         $sqlQuery = preg_replace('/^(\s*SELECT)/i', '\\1 SQL_NO_CACHE', $query);
 
         $this->dbi->tryQuery($sqlQuery);
-        $return['affectedRows'] = $GLOBALS['cached_affected_rows'];
+        $return['affectedRows'] = $this->dbi->affectedRows();
 
         $result = $this->dbi->tryQuery('EXPLAIN ' . $sqlQuery);
         if ($result !== false) {

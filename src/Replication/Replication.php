@@ -6,9 +6,9 @@ namespace PhpMyAdmin\Replication;
 
 use PhpMyAdmin\Config\Settings\Server;
 use PhpMyAdmin\Core;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\Connection;
 use PhpMyAdmin\Dbal\ConnectionType;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Query\Compatibility;
 
@@ -175,10 +175,8 @@ class Replication
      */
     public function replicaBinLogPrimary(ConnectionType $connectionType): array
     {
-        $data = $this->dbi->fetchResult(
+        $data = $this->dbi->fetchResultSimple(
             Compatibility::getShowBinLogStatusStmt($this->dbi),
-            null,
-            null,
             $connectionType,
         );
         $output = [];

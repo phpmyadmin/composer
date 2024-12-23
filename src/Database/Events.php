@@ -6,7 +6,7 @@ namespace PhpMyAdmin\Database;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
@@ -223,7 +223,7 @@ class Events
                  . ' AND EVENT_NAME=' . $this->dbi->quoteString($name);
         $query = 'SELECT ' . $columns . ' FROM `INFORMATION_SCHEMA`.`EVENTS` WHERE ' . $where . ';';
         $item = $this->dbi->fetchSingleRow($query);
-        if ($item === null || $item === []) {
+        if ($item === []) {
             return null;
         }
 
@@ -367,7 +367,7 @@ class Events
         }
 
         $result = [];
-        $events = $this->dbi->fetchResult($query);
+        $events = $this->dbi->fetchResultSimple($query);
 
         /** @var string[] $event */
         foreach ($events as $event) {

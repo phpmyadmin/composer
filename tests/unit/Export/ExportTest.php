@@ -7,7 +7,7 @@ namespace PhpMyAdmin\Tests\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\Export;
 use PhpMyAdmin\FlashMessenger;
 use PhpMyAdmin\Identifiers\DatabaseName;
@@ -98,13 +98,10 @@ class ExportTest extends AbstractTestCase
 
     public function testExportDatabase(): void
     {
-        $GLOBALS['sql_create_view'] = 'something';
         $GLOBALS['output_kanji_conversion'] = false;
         $GLOBALS['buffer_needed'] = false;
         $GLOBALS['asfile'] = false;
         Config::getInstance()->selectedServer['DisableIS'] = false;
-        $GLOBALS['sql_insert_syntax'] = 'both';
-        $GLOBALS['sql_max_query_size'] = '50000';
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         $dbiDummy = $this->createDbiDummy();
@@ -164,8 +161,6 @@ SQL;
         $config = Config::getInstance();
         $config->selectedServer['DisableIS'] = false;
         $config->selectedServer['only_db'] = '';
-        $GLOBALS['sql_insert_syntax'] = 'both';
-        $GLOBALS['sql_max_query_size'] = '50000';
         ExportPlugin::$exportType = ExportType::Server;
 
         // phpcs:disable Generic.Files.LineLength.TooLong

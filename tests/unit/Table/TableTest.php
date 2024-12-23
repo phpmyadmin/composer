@@ -8,8 +8,8 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\ConnectionType;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\ListDatabase;
 use PhpMyAdmin\Query\Cache;
 use PhpMyAdmin\SqlParser\Context;
@@ -49,9 +49,6 @@ class TableTest extends AbstractTestCase
         $config->settings['MaxExactCount'] = 100;
         $config->settings['MaxExactCountViews'] = 100;
         $config->selectedServer['pmadb'] = 'pmadb';
-        $GLOBALS['sql_auto_increment'] = true;
-        $GLOBALS['sql_if_not_exists'] = true;
-        $GLOBALS['sql_drop_table'] = true;
         $config->selectedServer['table_uiprefs'] = 'pma__table_uiprefs';
 
         $sqlIsViewTrue = 'SELECT 1'
@@ -88,39 +85,14 @@ class TableTest extends AbstractTestCase
 
         $getUniqueColumnsSql = 'SHOW INDEXES FROM `PMA`.`PMA_BookMark`';
 
-        $fetchResult = [
+        $fetchResultSimple = [
             [
                 $sqlAnalyzeStructureTrue,
-                null,
-                null,
                 ConnectionType::User,
                 [['COLUMN_NAME' => 'COLUMN_NAME', 'DATA_TYPE' => 'DATA_TYPE']],
             ],
             [
-                $getUniqueColumnsSql . ' WHERE (Non_unique = 0)',
-                ['Key_name', null],
-                'Column_name',
-                ConnectionType::User,
-                [['index1'], ['index3'], ['index5']],
-            ],
-            [
-                $getUniqueColumnsSql,
-                'Column_name',
-                'Column_name',
-                ConnectionType::User,
-                ['column1', 'column3', 'column5', 'ACCESSIBLE', 'ADD', 'ALL'],
-            ],
-            [
                 'SHOW COLUMNS FROM `PMA`.`PMA_BookMark`',
-                'Field',
-                'Field',
-                ConnectionType::User,
-                ['column1', 'column3', 'column5', 'ACCESSIBLE', 'ADD', 'ALL'],
-            ],
-            [
-                'SHOW COLUMNS FROM `PMA`.`PMA_BookMark`',
-                null,
-                null,
                 ConnectionType::User,
                 [
                     [
@@ -143,8 +115,6 @@ class TableTest extends AbstractTestCase
             ],
             [
                 'SHOW TRIGGERS FROM `PMA` LIKE \'PMA_BookMark\';',
-                null,
-                null,
                 ConnectionType::User,
                 [
                     [
@@ -175,8 +145,6 @@ class TableTest extends AbstractTestCase
             ],
             [
                 'SHOW TRIGGERS FROM `PMA` LIKE \'PMA_.BookMark\';',
-                null,
-                null,
                 ConnectionType::User,
                 [
                     [
@@ -210,8 +178,6 @@ class TableTest extends AbstractTestCase
                     . 'ACTION_STATEMENT, EVENT_OBJECT_SCHEMA, EVENT_OBJECT_TABLE, DEFINER FROM '
                     . "information_schema.TRIGGERS WHERE EVENT_OBJECT_SCHEMA COLLATE utf8_bin= 'PMA' "
                     . "AND EVENT_OBJECT_TABLE COLLATE utf8_bin = 'PMA_BookMark';",
-                null,
-                null,
                 ConnectionType::User,
                 [
                     [],
@@ -222,8 +188,6 @@ class TableTest extends AbstractTestCase
                     . 'ACTION_STATEMENT, EVENT_OBJECT_SCHEMA, EVENT_OBJECT_TABLE, DEFINER FROM '
                     . "information_schema.TRIGGERS WHERE EVENT_OBJECT_SCHEMA COLLATE utf8_bin= 'aa' "
                     . "AND EVENT_OBJECT_TABLE COLLATE utf8_bin = 'ad';",
-                null,
-                null,
                 ConnectionType::User,
                 [
                     [],
@@ -231,10 +195,32 @@ class TableTest extends AbstractTestCase
             ],
             [
                 'SHOW COLUMNS FROM `aa`.`ad`',
-                null,
-                null,
                 ConnectionType::User,
                 [],
+            ],
+        ];
+
+        $fetchResult = [
+            [
+                $getUniqueColumnsSql . ' WHERE (Non_unique = 0)',
+                ['Key_name', null],
+                'Column_name',
+                ConnectionType::User,
+                [['index1'], ['index3'], ['index5']],
+            ],
+            [
+                $getUniqueColumnsSql,
+                'Column_name',
+                'Column_name',
+                ConnectionType::User,
+                ['column1', 'column3', 'column5', 'ACCESSIBLE', 'ADD', 'ALL'],
+            ],
+            [
+                'SHOW COLUMNS FROM `PMA`.`PMA_BookMark`',
+                'Field',
+                'Field',
+                ConnectionType::User,
+                ['column1', 'column3', 'column5', 'ACCESSIBLE', 'ADD', 'ALL'],
             ],
         ];
 
@@ -270,6 +256,9 @@ class TableTest extends AbstractTestCase
 
         $dbi->expects(self::any())->method('fetchResult')
             ->willReturnMap($fetchResult);
+
+            $dbi->expects(self::any())->method('fetchResultSimple')
+                ->willReturnMap($fetchResultSimple);
 
         $dbi->expects(self::any())->method('fetchValue')
             ->willReturnMap($fetchValue);
@@ -1342,8 +1331,6 @@ class TableTest extends AbstractTestCase
         $targetTable = 'PMA_BookMark_new';
         $targetDb = 'PMA_new';
 
-        unset($GLOBALS['sql_drop_table']);
-
         $getTableMap = [
             [$targetDb, $targetTable, new Table($targetTable, $targetDb, $this->mockedDbi)],
             ['aa', 'ad', new Table('ad', 'aa', $this->mockedDbi)],
@@ -1399,29 +1386,29 @@ class TableTest extends AbstractTestCase
                 [
                     'SHOW CREATE TABLE `aa`.`ad`',
                     ConnectionType::User,
-                    DatabaseInterface::QUERY_BUFFERED,
+                    false,
                     true,
                     $resultStub,
                 ],
                 [
                     'SHOW TABLE STATUS FROM `aa` WHERE Name = \'ad\'',
                     ConnectionType::User,
-                    DatabaseInterface::QUERY_BUFFERED,
+                    false,
                     true,
                     $resultStub,
                 ],
-                ['USE `aa`', ConnectionType::User, DatabaseInterface::QUERY_BUFFERED, true, $resultStub],
+                ['USE `aa`', ConnectionType::User, false, true, $resultStub],
                 [
                     'RENAME TABLE `PMA`.`PMA_BookMark` TO `PMA`.`PMA_.BookMark`;',
                     ConnectionType::User,
-                    DatabaseInterface::QUERY_BUFFERED,
+                    false,
                     true,
                     false,
                 ],
                 [
                     'RENAME TABLE `aa`.`ad` TO `bb`.`ad`;',
                     ConnectionType::User,
-                    DatabaseInterface::QUERY_BUFFERED,
+                    false,
                     true,
                     false,
                 ],

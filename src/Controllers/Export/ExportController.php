@@ -57,7 +57,6 @@ final class ExportController implements InvocableController
         $GLOBALS['file_handle'] ??= null;
         $GLOBALS['output_charset_conversion'] ??= null;
         $GLOBALS['output_kanji_conversion'] ??= null;
-        $GLOBALS['what'] ??= null;
         $GLOBALS['single_table'] ??= null;
         $GLOBALS['save_filename'] ??= null;
         $GLOBALS['table_select'] ??= null;
@@ -68,7 +67,6 @@ final class ExportController implements InvocableController
         /** @var array<string, string> $postParams */
         $postParams = $request->getParsedBody();
 
-        $whatParam = $request->getParsedBodyParamAsString('what', '');
         $quickOrCustom = $request->getParsedBodyParamAsStringOrNull('quick_or_custom');
         $outputFormat = $request->getParsedBodyParamAsStringOrNull('output_format');
         $compressionParam = $request->getParsedBodyParamAsString('compression', '');
@@ -88,16 +86,15 @@ final class ExportController implements InvocableController
         $this->setGlobalsFromRequest($postParams);
 
         // sanitize this parameter which will be used below in a file inclusion
-        $GLOBALS['what'] = Core::securePath($whatParam);
-
-        if ($GLOBALS['what'] === '') {
+        $what = Core::securePath($request->getParsedBodyParamAsString('what', ''));
+        if ($what === '') {
             return $this->response->missingParameterError('what');
         }
 
         $exportType = ExportType::from($request->getParsedBodyParamAsString('export_type'));
 
         // export class instance, not array of properties, as before
-        $exportPlugin = Plugins::getPlugin('export', $GLOBALS['what'], $exportType, isset($GLOBALS['single_table']));
+        $exportPlugin = Plugins::getPlugin('export', $what, $exportType, isset($GLOBALS['single_table']));
 
         // Check export type
         if (! $exportPlugin instanceof ExportPlugin) {
@@ -497,34 +494,6 @@ final class ExportController implements InvocableController
             $GLOBALS['xkana'] = $postParams['xkana'];
         }
 
-        if (isset($postParams['htmlword_null'])) {
-            $GLOBALS['htmlword_null'] = $postParams['htmlword_null'];
-        }
-
-        if (isset($postParams['htmlword_columns'])) {
-            $GLOBALS['htmlword_columns'] = $postParams['htmlword_columns'];
-        }
-
-        if (isset($postParams['mediawiki_headers'])) {
-            $GLOBALS['mediawiki_headers'] = $postParams['mediawiki_headers'];
-        }
-
-        if (isset($postParams['mediawiki_caption'])) {
-            $GLOBALS['mediawiki_caption'] = $postParams['mediawiki_caption'];
-        }
-
-        if (isset($postParams['odt_columns'])) {
-            $GLOBALS['odt_columns'] = $postParams['odt_columns'];
-        }
-
-        if (isset($postParams['odt_null'])) {
-            $GLOBALS['odt_null'] = $postParams['odt_null'];
-        }
-
-        if (isset($postParams['codegen_format'])) {
-            $GLOBALS['codegen_format'] = $postParams['codegen_format'];
-        }
-
         if (isset($postParams['excel_null'])) {
             $GLOBALS['excel_null'] = $postParams['excel_null'];
         }
@@ -539,162 +508,6 @@ final class ExportController implements InvocableController
 
         if (isset($postParams['excel_edition'])) {
             $GLOBALS['excel_edition'] = $postParams['excel_edition'];
-        }
-
-        if (isset($postParams['ods_null'])) {
-            $GLOBALS['ods_null'] = $postParams['ods_null'];
-        }
-
-        if (isset($postParams['ods_columns'])) {
-            $GLOBALS['ods_columns'] = $postParams['ods_columns'];
-        }
-
-        if (isset($postParams['json_pretty_print'])) {
-            $GLOBALS['json_pretty_print'] = $postParams['json_pretty_print'];
-        }
-
-        if (isset($postParams['json_unicode'])) {
-            $GLOBALS['json_unicode'] = $postParams['json_unicode'];
-        }
-
-        if (isset($postParams['xml_export_events'])) {
-            $GLOBALS['xml_export_events'] = $postParams['xml_export_events'];
-        }
-
-        if (isset($postParams['xml_export_functions'])) {
-            $GLOBALS['xml_export_functions'] = $postParams['xml_export_functions'];
-        }
-
-        if (isset($postParams['xml_export_procedures'])) {
-            $GLOBALS['xml_export_procedures'] = $postParams['xml_export_procedures'];
-        }
-
-        if (isset($postParams['xml_export_tables'])) {
-            $GLOBALS['xml_export_tables'] = $postParams['xml_export_tables'];
-        }
-
-        if (isset($postParams['xml_export_triggers'])) {
-            $GLOBALS['xml_export_triggers'] = $postParams['xml_export_triggers'];
-        }
-
-        if (isset($postParams['xml_export_views'])) {
-            $GLOBALS['xml_export_views'] = $postParams['xml_export_views'];
-        }
-
-        if (isset($postParams['xml_export_contents'])) {
-            $GLOBALS['xml_export_contents'] = $postParams['xml_export_contents'];
-        }
-
-        if (isset($postParams['texytext_columns'])) {
-            $GLOBALS['texytext_columns'] = $postParams['texytext_columns'];
-        }
-
-        if (isset($postParams['texytext_null'])) {
-            $GLOBALS['texytext_null'] = $postParams['texytext_null'];
-        }
-
-        if (isset($postParams['sql_header_comment'])) {
-            $GLOBALS['sql_header_comment'] = $postParams['sql_header_comment'];
-        }
-
-        if (isset($postParams['sql_use_transaction'])) {
-            $GLOBALS['sql_use_transaction'] = $postParams['sql_use_transaction'];
-        }
-
-        if (isset($postParams['sql_disable_fk'])) {
-            $GLOBALS['sql_disable_fk'] = $postParams['sql_disable_fk'];
-        }
-
-        if (isset($postParams['sql_compatibility'])) {
-            $GLOBALS['sql_compatibility'] = $postParams['sql_compatibility'];
-        }
-
-        if (isset($postParams['sql_create_database'])) {
-            $GLOBALS['sql_create_database'] = $postParams['sql_create_database'];
-        }
-
-        if (isset($postParams['sql_drop_table'])) {
-            $GLOBALS['sql_drop_table'] = $postParams['sql_drop_table'];
-        }
-
-        if (isset($postParams['sql_procedure_function'])) {
-            $GLOBALS['sql_procedure_function'] = $postParams['sql_procedure_function'];
-        }
-
-        if (isset($postParams['sql_create_table'])) {
-            $GLOBALS['sql_create_table'] = $postParams['sql_create_table'];
-        }
-
-        if (isset($postParams['sql_create_view'])) {
-            $GLOBALS['sql_create_view'] = $postParams['sql_create_view'];
-        }
-
-        if (isset($postParams['sql_create_trigger'])) {
-            $GLOBALS['sql_create_trigger'] = $postParams['sql_create_trigger'];
-        }
-
-        if (isset($postParams['sql_view_current_user'])) {
-            $GLOBALS['sql_view_current_user'] = $postParams['sql_view_current_user'];
-        }
-
-        if (isset($postParams['sql_simple_view_export'])) {
-            $GLOBALS['sql_simple_view_export'] = $postParams['sql_simple_view_export'];
-        }
-
-        if (isset($postParams['sql_if_not_exists'])) {
-            $GLOBALS['sql_if_not_exists'] = $postParams['sql_if_not_exists'];
-        }
-
-        if (isset($postParams['sql_or_replace_view'])) {
-            $GLOBALS['sql_or_replace_view'] = $postParams['sql_or_replace_view'];
-        }
-
-        if (isset($postParams['sql_auto_increment'])) {
-            $GLOBALS['sql_auto_increment'] = $postParams['sql_auto_increment'];
-        }
-
-        if (isset($postParams['sql_truncate'])) {
-            $GLOBALS['sql_truncate'] = $postParams['sql_truncate'];
-        }
-
-        if (isset($postParams['sql_delayed'])) {
-            $GLOBALS['sql_delayed'] = $postParams['sql_delayed'];
-        }
-
-        if (isset($postParams['sql_ignore'])) {
-            $GLOBALS['sql_ignore'] = $postParams['sql_ignore'];
-        }
-
-        if (isset($postParams['sql_type'])) {
-            $GLOBALS['sql_type'] = $postParams['sql_type'];
-        }
-
-        if (isset($postParams['sql_insert_syntax'])) {
-            $GLOBALS['sql_insert_syntax'] = $postParams['sql_insert_syntax'];
-        }
-
-        if (isset($postParams['sql_max_query_size'])) {
-            $GLOBALS['sql_max_query_size'] = $postParams['sql_max_query_size'];
-        }
-
-        if (isset($postParams['sql_hex_for_binary'])) {
-            $GLOBALS['sql_hex_for_binary'] = $postParams['sql_hex_for_binary'];
-        }
-
-        if (isset($postParams['sql_utc_time'])) {
-            $GLOBALS['sql_utc_time'] = $postParams['sql_utc_time'];
-        }
-
-        if (isset($postParams['sql_drop_database'])) {
-            $GLOBALS['sql_drop_database'] = $postParams['sql_drop_database'];
-        }
-
-        if (isset($postParams['sql_views_as_tables'])) {
-            $GLOBALS['sql_views_as_tables'] = $postParams['sql_views_as_tables'];
-        }
-
-        if (isset($postParams['sql_metadata'])) {
-            $GLOBALS['sql_metadata'] = $postParams['sql_metadata'];
         }
 
         if (isset($postParams['csv_separator'])) {
@@ -721,45 +534,9 @@ final class ExportController implements InvocableController
             $GLOBALS['csv_removeCRLF'] = $postParams['csv_removeCRLF'];
         }
 
+        // phpcs:ignore SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed
         if (isset($postParams['csv_columns'])) {
             $GLOBALS['csv_columns'] = $postParams['csv_columns'];
-        }
-
-        if (isset($postParams['latex_caption'])) {
-            $GLOBALS['latex_caption'] = $postParams['latex_caption'];
-        }
-
-        if (isset($postParams['latex_structure_caption'])) {
-            $GLOBALS['latex_structure_caption'] = $postParams['latex_structure_caption'];
-        }
-
-        if (isset($postParams['latex_structure_continued_caption'])) {
-            $GLOBALS['latex_structure_continued_caption'] = $postParams['latex_structure_continued_caption'];
-        }
-
-        if (isset($postParams['latex_structure_label'])) {
-            $GLOBALS['latex_structure_label'] = $postParams['latex_structure_label'];
-        }
-
-        if (isset($postParams['latex_columns'])) {
-            $GLOBALS['latex_columns'] = $postParams['latex_columns'];
-        }
-
-        if (isset($postParams['latex_data_caption'])) {
-            $GLOBALS['latex_data_caption'] = $postParams['latex_data_caption'];
-        }
-
-        if (isset($postParams['latex_data_continued_caption'])) {
-            $GLOBALS['latex_data_continued_caption'] = $postParams['latex_data_continued_caption'];
-        }
-
-        if (isset($postParams['latex_data_label'])) {
-            $GLOBALS['latex_data_label'] = $postParams['latex_data_label'];
-        }
-
-        // phpcs:ignore SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed
-        if (isset($postParams['latex_null'])) {
-            $GLOBALS['latex_null'] = $postParams['latex_null'];
         }
     }
 }

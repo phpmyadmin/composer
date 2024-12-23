@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use ArrayObject;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Query\Utilities;
 
 use function array_merge;
@@ -100,7 +101,8 @@ class ListDatabase extends ArrayObject
         }
 
         if ($command !== '') {
-            $databaseList = $this->dbi->fetchResult($command);
+            /** @var string[] $databaseList */
+            $databaseList = $this->dbi->fetchSingleColumn($command);
         }
 
         if ($this->config->settings['NaturalOrder']) {

@@ -9,8 +9,8 @@ use PhpMyAdmin\ColumnFull;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Server;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\ConnectionType;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Dbal\DbiExtension;
 use PhpMyAdmin\Dbal\ResultInterface;
 use PhpMyAdmin\Dbal\Statement;
@@ -185,7 +185,7 @@ class DatabaseInterfaceTest extends AbstractTestCase
 
         $mock->expects(self::once())
             ->method('fetchSingleRow')
-            ->willReturn(null);
+            ->willReturn([]);
 
         $mock->expects(self::never())->method('setVersion');
 

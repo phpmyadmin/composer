@@ -7,6 +7,7 @@ namespace PhpMyAdmin;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Database\Events;
 use PhpMyAdmin\Database\Routines;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Engines\Innodb;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Partitioning\Partition;
@@ -247,7 +248,7 @@ class Operations
     public function runEventDefinitionsForDb(string $db, DatabaseName $newDatabaseName): void
     {
         /** @var string[] $eventNames */
-        $eventNames = $this->dbi->fetchResult(
+        $eventNames = $this->dbi->fetchSingleColumn(
             'SELECT EVENT_NAME FROM information_schema.EVENTS WHERE EVENT_SCHEMA= '
             . $this->dbi->quoteString($db) . ';',
         );

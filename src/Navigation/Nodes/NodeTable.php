@@ -9,7 +9,7 @@ namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPrivileges;
 use PhpMyAdmin\Util;
@@ -164,7 +164,7 @@ class NodeTable extends NodeDatabaseChild
                     $query .= 'AND `TABLE_SCHEMA`=' . $dbi->quoteString($db) . ' ';
                     $query .= 'ORDER BY `COLUMN_NAME` ASC ';
                     $query .= 'LIMIT ' . $pos . ', ' . $maxItems;
-                    $retval = $dbi->fetchResult($query);
+                    $retval = $dbi->fetchResultSimple($query);
                     break;
                 }
 
@@ -229,7 +229,7 @@ class NodeTable extends NodeDatabaseChild
                     . Util::getCollateForIS() . '=' . $dbi->quoteString($table) . ' ';
                     $query .= 'ORDER BY `TRIGGER_NAME` ASC ';
                     $query .= 'LIMIT ' . $pos . ', ' . $maxItems;
-                    $retval = $dbi->fetchResult($query);
+                    $retval = $dbi->fetchSingleColumn($query);
                     break;
                 }
 

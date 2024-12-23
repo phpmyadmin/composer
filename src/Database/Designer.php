@@ -9,7 +9,7 @@ use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Database\Designer\ColumnInfo;
 use PhpMyAdmin\Database\Designer\DesignerTable;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Template;
@@ -17,7 +17,6 @@ use PhpMyAdmin\Util;
 use stdClass;
 
 use function __;
-use function is_array;
 use function json_decode;
 use function str_contains;
 
@@ -146,7 +145,7 @@ class Designer
                 . ';';
 
             $result = $this->dbi->fetchSingleRow($query);
-            if (is_array($result)) {
+            if ($result !== []) {
                 $params = json_decode((string) $result['settings_data'], true);
             }
         }

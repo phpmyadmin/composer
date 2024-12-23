@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Import;
 
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\File;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Http\ServerRequest;
@@ -587,7 +587,7 @@ class ImportCsv extends AbstractImportCsv
             if ($this->newDatabaseName !== '') {
                 $newDb = $this->newDatabaseName;
             } else {
-                $result = $dbi->fetchResult('SHOW DATABASES');
+                $result = $dbi->fetchSingleColumn('SHOW DATABASES');
 
                 $newDb = 'CSV_DB ' . (count($result) + 1);
             }

@@ -7,8 +7,8 @@ namespace PhpMyAdmin\Database\Designer;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Dbal\ConnectionType;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Index;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
 use PhpMyAdmin\Table\Table;
@@ -330,7 +330,7 @@ class Common
             . ' FROM ' . Util::backquote($pdfFeature->database)
             . '.' . Util::backquote($pdfFeature->pdfPages)
             . ' WHERE `page_descr` = ' . $this->dbi->quoteString($pg, ConnectionType::ControlUser);
-        $pageNos = $this->dbi->fetchResult($query, null, null, ConnectionType::ControlUser);
+        $pageNos = $this->dbi->fetchResultSimple($query, ConnectionType::ControlUser);
 
         return $pageNos !== [];
     }
@@ -669,7 +669,7 @@ class Common
                 ConnectionType::ControlUser,
             );
 
-            if ($origData !== null && $origData !== []) {
+            if ($origData !== []) {
                 $origData = json_decode($origData['settings_data'], true);
                 $origData[$index] = $value;
                 $origData = json_encode($origData);

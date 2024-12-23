@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Database\MultiTableQuery;
 
 use PhpMyAdmin\Controllers\InvocableController;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
@@ -29,7 +29,7 @@ final class TablesController implements InvocableController
 
         $tablesListForQuery = array_map($this->dbi->quoteString(...), $tables);
 
-        $constrains = $this->dbi->fetchResult(
+        $constrains = $this->dbi->fetchResultSimple(
             QueryGenerator::getInformationSchemaForeignKeyConstraintsRequest(
                 $this->dbi->quoteString($db),
                 implode(',', $tablesListForQuery),

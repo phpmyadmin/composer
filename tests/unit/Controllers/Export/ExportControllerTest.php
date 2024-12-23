@@ -9,7 +9,7 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\Container\ContainerBuilder;
 use PhpMyAdmin\Controllers\Export\ExportController;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\Export;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
@@ -51,6 +51,7 @@ final class ExportControllerTest extends AbstractTestCase
         $GLOBALS['lang'] = 'en';
         $config = Config::getInstance();
         $config->selectServer('1');
+        $config->settings['Export']['sql_procedure_function'] = false;
 
         $dbiDummy->addResult(
             'SELECT `SCHEMA_NAME` FROM `INFORMATION_SCHEMA`.`SCHEMATA`',
@@ -211,6 +212,7 @@ final class ExportControllerTest extends AbstractTestCase
         $GLOBALS['lang'] = 'en';
         $config = Config::getInstance();
         $config->selectServer('1');
+        $config->settings['Export']['sql_procedure_function'] = false;
 
         $dbiDummy->addResult(
             'SELECT `SCHEMA_NAME` FROM `INFORMATION_SCHEMA`.`SCHEMATA`',
