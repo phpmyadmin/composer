@@ -65,8 +65,6 @@ final class HomeController implements InvocableController
             return $this->redirectToDatabaseOrTablePage($request);
         }
 
-        $GLOBALS['message'] ??= null;
-
         if ($request->isAjax() && ! empty($_REQUEST['access_time'])) {
             return $this->response->response();
         }
@@ -85,9 +83,9 @@ final class HomeController implements InvocableController
 
         $languageManager = LanguageManager::getInstance();
 
-        if (! empty($GLOBALS['message'])) {
-            $displayMessage = Generator::getMessage($GLOBALS['message']);
-            unset($GLOBALS['message']);
+        if (Current::$message !== null) {
+            $displayMessage = Generator::getMessage(Current::$message);
+            Current::$message = null;
         }
 
         if (isset($_SESSION['partial_logout'])) {
@@ -396,8 +394,6 @@ final class HomeController implements InvocableController
 
     private function checkLanguageStats(): void
     {
-        $GLOBALS['lang'] ??= null;
-
         /**
          * Warning about incomplete translations.
          *
@@ -411,8 +407,8 @@ final class HomeController implements InvocableController
         include ROOT_PATH . 'app/language_stats.inc.php';
         $config = Config::getInstance();
         if (
-            ! isset($GLOBALS['language_stats'][$GLOBALS['lang']])
-            || $GLOBALS['language_stats'][$GLOBALS['lang']] >= $config->settings['TranslationWarningThreshold']
+            ! isset($GLOBALS['language_stats'][Current::$lang])
+            || $GLOBALS['language_stats'][Current::$lang] >= $config->settings['TranslationWarningThreshold']
         ) {
             return;
         }

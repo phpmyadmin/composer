@@ -11,4 +11,6 @@ final class Current
     public static string $database = '';
     public static string $table = '';
     public static string $sqlQuery = '';
+    public static Message|null $message = null;
+    public static string $lang = 'en';
 }

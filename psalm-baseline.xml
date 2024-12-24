@@ -820,9 +820,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <MixedAssignment>
-      <code><![CDATA[$GLOBALS['message']]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -901,9 +898,6 @@
       <code><![CDATA[$_REQUEST['item_name']]]></code>
       <code><![CDATA[$itemName]]></code>
     </PossiblyInvalidCast>
-    <PossiblyNullReference>
-      <code><![CDATA[isSuccess]]></code>
-    </PossiblyNullReference>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
@@ -1096,9 +1090,6 @@
     <PossiblyNullOperand>
       <code><![CDATA[$title]]></code>
     </PossiblyNullOperand>
-    <PossiblyNullReference>
-      <code><![CDATA[isSuccess]]></code>
-    </PossiblyNullReference>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
@@ -1564,7 +1555,7 @@
       <code><![CDATA[$this->config->get('TempDir')]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code><![CDATA[$GLOBALS['language_stats'][$GLOBALS['lang']]]]></code>
+      <code><![CDATA[$GLOBALS['language_stats'][Current::$lang]]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
       <code><![CDATA[$config->settings['Servers'][Current::$server]]]></code>
@@ -1575,9 +1566,6 @@
     <PossiblyNullArgument>
       <code><![CDATA[$this->config->get('TempDir')]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$GLOBALS['language_stats']]]></code>
-    </PossiblyNullArrayOffset>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($_REQUEST['access_time'])]]></code>
       <code><![CDATA[empty($config->selectedServer['verbose'])]]></code>
@@ -2142,9 +2130,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$queries]]></code>
     </MixedArgumentTypeCoercion>
-    <RedundantConditionGivenDocblockType>
-      <code><![CDATA[! empty($GLOBALS['message']) && $GLOBALS['message'] instanceof Message]]></code>
-    </RedundantConditionGivenDocblockType>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($_REQUEST['ajax_page_request'])]]></code>
       <code><![CDATA[empty($routinename)]]></code>
@@ -3468,9 +3453,6 @@
                             $_REQUEST['item_name'],
                         )]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[isSuccess]]></code>
-    </PossiblyNullReference>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
@@ -5567,11 +5549,6 @@
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
   </file>
-  <file src="src/Http/Middleware/LanguageAndThemeCookieSaving.php">
-    <RedundantCast>
-      <code><![CDATA[(string) $GLOBALS['lang']]]></code>
-    </RedundantCast>
-  </file>
   <file src="src/Http/Middleware/ProfilingChecking.php">
     <DeprecatedMethod>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -7621,6 +7598,9 @@
       <code><![CDATA[$values[count($values) - 1]]]></code>
       <code><![CDATA[$values[count($values) - 1]]]></code>
     </InvalidArrayOffset>
+    <MixedAssignment>
+      <code><![CDATA[$GLOBALS['error']]]></code>
+    </MixedAssignment>
     <PossiblyNullOperand>
       <code><![CDATA[$ch]]></code>
     </PossiblyNullOperand>
@@ -10149,8 +10129,6 @@
     </MixedAssignment>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! Config::getInstance()->get('URLQueryEncryption')]]></code>
-      <code><![CDATA[empty($GLOBALS['lang'])]]></code>
-      <code><![CDATA[empty($GLOBALS['lang'])]]></code>
       <code><![CDATA[empty($config->getCookie('pma_lang'))]]></code>
       <code><![CDATA[empty($config->getCookie('pma_lang'))]]></code>
     </RiskyTruthyFalsyComparison>
@@ -11135,9 +11113,6 @@
       <code><![CDATA[assertSame]]></code>
     </RedundantConditionGivenDocblockType>
     <TypeDoesNotContainType>
-      <code><![CDATA[assertSame]]></code>
-      <code><![CDATA[assertSame]]></code>
-      <code><![CDATA[assertSame]]></code>
       <code><![CDATA[assertSame]]></code>
       <code><![CDATA[assertSame]]></code>
     </TypeDoesNotContainType>
@@ -13000,7 +12975,6 @@
   <file src="tests/unit/Plugins/Import/ImportShpTest.php">
     <RedundantCondition>
       <code><![CDATA[assertFalse]]></code>
-      <code><![CDATA[assertSame]]></code>
     </RedundantCondition>
   </file>
   <file src="tests/unit/Plugins/Schema/DiaRelationSchemaTest.php">
