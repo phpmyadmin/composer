@@ -3898,13 +3898,7 @@ parameters:
 			path: src/Controllers/Sql/SqlController.php
 
 		-
-			message: '#^Parameter \#10 \$dispMessage of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects PhpMyAdmin\\Message\|string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Sql/SqlController.php
-
-		-
-			message: '#^Parameter \#12 \$completeQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#11 \$completeQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Sql/SqlController.php
@@ -3916,19 +3910,25 @@ parameters:
 			path: src/Controllers/Sql/SqlController.php
 
 		-
-			message: '#^Parameter \#5 \$sqlQueryForBookmark of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#5 \$sqlQueryForBookmark of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Sql/SqlController.php
 
 		-
-			message: '#^Parameter \#6 \$messageToShow of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#6 \$messageToShow of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Sql/SqlController.php
 
 		-
-			message: '#^Parameter \#9 \$dispQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#8 \$dispQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controllers/Sql/SqlController.php
+
+		-
+			message: '#^Parameter \#9 \$dispMessage of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects PhpMyAdmin\\Message\|string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Sql/SqlController.php
@@ -4186,12 +4186,6 @@ parameters:
 			path: src/Controllers/Table/DeleteRowsController.php
 
 		-
-			message: '#^Parameter \#10 \$dispMessage of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects PhpMyAdmin\\Message\|string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/DeleteRowsController.php
-
-		-
 			message: '#^Parameter \#3 \$pos of method PhpMyAdmin\\Sql\:\:calculatePosForLastPage\(\) expects int\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -4204,7 +4198,13 @@ parameters:
 			path: src/Controllers/Table/DeleteRowsController.php
 
 		-
-			message: '#^Parameter \#9 \$dispQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#8 \$dispQuery of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controllers/Table/DeleteRowsController.php
+
+		-
+			message: '#^Parameter \#9 \$dispMessage of method PhpMyAdmin\\Sql\:\:executeQueryAndSendQueryResponse\(\) expects PhpMyAdmin\\Message\|string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Table/DeleteRowsController.php
@@ -4596,7 +4596,7 @@ parameters:
 		-
 			message: '#^Cannot access an offset on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
+			count: 1
 			path: src/Controllers/Table/ReplaceController.php
 
 		-
@@ -4626,7 +4626,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 8
+			count: 7
 			path: src/Controllers/Table/ReplaceController.php
 
 		-
@@ -4679,18 +4679,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$messages of method PhpMyAdmin\\Message\:\:addMessagesString\(\) expects array\<string\>, list\<PhpMyAdmin\\Message\|string\|null\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ReplaceController.php
-
-		-
-			message: '#^Parameter \#1 \$query of method PhpMyAdmin\\InsertEdit\:\:executeSqlQuery\(\) expects array\<mixed\>, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ReplaceController.php
-
-		-
-			message: '#^Parameter \#1 \$queryData of static method PhpMyAdmin\\Core\:\:previewSQL\(\) expects array\<mixed\>\|string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Table/ReplaceController.php
@@ -5610,12 +5598,6 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, int\|string given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/Core.php
-
-		-
-			message: '#^Parameter \#1 \$sqlQuery of static method PhpMyAdmin\\Html\\Generator\:\:formatSql\(\) expects string, mixed given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Core.php
 
@@ -6702,7 +6684,7 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 3
+			count: 2
 			path: src/Dbal/DatabaseInterface.php
 
 		-
@@ -9769,18 +9751,6 @@ parameters:
 			path: src/InsertEdit.php
 
 		-
-			message: '#^Parameter \#1 \$query of method PhpMyAdmin\\Dbal\\DatabaseInterface\:\:query\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/InsertEdit.php
-
-		-
-			message: '#^Parameter \#1 \$query of method PhpMyAdmin\\Dbal\\DatabaseInterface\:\:tryQuery\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/InsertEdit.php
-
-		-
 			message: '#^Parameter \#1 \$sqlQuery of static method PhpMyAdmin\\Core\:\:checkSqlQuerySignature\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -10200,7 +10170,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 7
+			count: 8
 			path: src/Navigation/Nodes/Node.php
 
 		-
@@ -15945,19 +15915,13 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in &&, string given on the right side\.$#'
 			identifier: booleanAnd.rightNotBoolean
-			count: 2
-			path: src/Sql.php
-
-		-
-			message: '#^Only booleans are allowed in &&, string\|null given on the left side\.$#'
-			identifier: booleanAnd.leftNotBoolean
-			count: 1
+			count: 3
 			path: src/Sql.php
 
 		-
 			message: '#^Only booleans are allowed in &&, string\|null given on the right side\.$#'
 			identifier: booleanAnd.rightNotBoolean
-			count: 2
+			count: 1
 			path: src/Sql.php
 
 		-
@@ -16021,13 +15985,7 @@ parameters:
 			path: src/Sql.php
 
 		-
-			message: '#^Parameter \#2 \$table of method PhpMyAdmin\\Sql\:\:handleSortOrder\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Sql.php
-
-		-
-			message: '#^Parameter \#3 \$column of method PhpMyAdmin\\Sql\:\:cleanupRelations\(\) expects string\|null, mixed given\.$#'
+			message: '#^Parameter \#3 \$column of method PhpMyAdmin\\Sql\:\:cleanupRelations\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Sql.php
@@ -16039,7 +15997,7 @@ parameters:
 			path: src/Sql.php
 
 		-
-			message: '#^Parameter \#5 \$bookmarkLabel of method PhpMyAdmin\\Sql\:\:storeTheQueryAsBookmark\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#4 \$bookmarkLabel of method PhpMyAdmin\\Sql\:\:storeTheQueryAsBookmark\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Sql.php
