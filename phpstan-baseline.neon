@@ -2965,12 +2965,6 @@ parameters:
 			path: src/Controllers/Import/ImportController.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 5
-			path: src/Controllers/Import/ImportController.php
-
-		-
 			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
 			identifier: if.condNotBoolean
 			count: 1
@@ -2992,12 +2986,6 @@ parameters:
 			message: '#^Parameter \#4 \$backUrl of static method PhpMyAdmin\\Html\\Generator\:\:mysqlDie\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 2
-			path: src/Controllers/Import/ImportController.php
-
-		-
-			message: '#^Parameter \#5 \$exit of static method PhpMyAdmin\\Html\\Generator\:\:mysqlDie\(\) expects bool, mixed given\.$#'
-			identifier: argument.type
-			count: 1
 			path: src/Controllers/Import/ImportController.php
 
 		-
@@ -3252,12 +3240,6 @@ parameters:
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
-			count: 1
-			path: src/Controllers/Preferences/ManageController.php
-
-		-
-			message: '#^Only booleans are allowed in an if condition, PhpMyAdmin\\Message\|string given\.$#'
-			identifier: if.condNotBoolean
 			count: 1
 			path: src/Controllers/Preferences/ManageController.php
 
@@ -9364,18 +9346,6 @@ parameters:
 			path: src/Import/Import.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/Import/Import.php
-
-		-
-			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
-			identifier: if.condNotBoolean
-			count: 1
-			path: src/Import/Import.php
-
-		-
 			message: '#^Parameter \#1 \$precision of static method PhpMyAdmin\\Import\\DecimalSize\:\:fromPrecisionAndScale\(\) expects int, int\|PhpMyAdmin\\Import\\DecimalSize given\.$#'
 			identifier: argument.type
 			count: 1
@@ -11428,33 +11398,9 @@ parameters:
 			path: src/Plugins/Export/ExportCodegen.php
 
 		-
-			message: '#^Binary operation "\." between mixed and \(list\<string\>\|string\) results in an error\.$#'
+			message: '#^Binary operation "\." between non\-empty\-string and \(list\<string\>\|string\) results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Binary operation "\." between mixed and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 4
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Binary operation "\." between mixed and string results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 2
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Binary operation "\." between non\-empty\-string and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 3
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Binary operation "\." between string and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 2
 			path: src/Plugins/Export/ExportCsv.php
 
 		-
@@ -11487,56 +11433,65 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 2
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
-			identifier: notEqual.notAllowed
-			count: 1
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
-			identifier: equal.notAllowed
-			count: 2
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Only booleans are allowed in &&, mixed given on the right side\.$#'
-			identifier: booleanAnd.rightNotBoolean
-			count: 3
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 4
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Parameter \#1 \$separator of function implode expects array\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '#^Parameter \#1 \$string of function mb_strtolower expects string, mixed given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Plugins/Export/ExportCsv.php
 
 		-
 			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, mixed given\.$#'
 			identifier: argument.type
-			count: 3
+			count: 1
 			path: src/Plugins/Export/ExportCsv.php
+
+		-
+			message: '#^Binary operation "\." between non\-empty\-string and \(list\<string\>\|string\) results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 2
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '#^Cannot access offset ''columns'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '#^Cannot access offset ''tables'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Plugins/Export/ExportExcel.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Plugins/Export/ExportExcel.php
 
 		-
 			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, string\|null given\.$#'
 			identifier: argument.type
 			count: 3
-			path: src/Plugins/Export/ExportCsv.php
+			path: src/Plugins/Export/ExportExcel.php
 
 		-
 			message: '#^Binary operation "\." between ''\<html xmlns\:o\="urn…'' and mixed results in an error\.$#'
@@ -12862,12 +12817,6 @@ parameters:
 			path: src/Plugins/Import/ImportCsv.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/Plugins/Import/ImportCsv.php
-
-		-
 			message: '#^Parameter \#1 \$columnNames of method PhpMyAdmin\\Plugins\\Import\\ImportCsv\:\:getColumnNames\(\) expects list\<string\>, array\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -12906,12 +12855,6 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always true\.$#'
 			identifier: booleanNot.alwaysTrue
-			count: 1
-			path: src/Plugins/Import/ImportMediawiki.php
-
-		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
 			count: 1
 			path: src/Plugins/Import/ImportMediawiki.php
 
@@ -12973,12 +12916,6 @@ parameters:
 			message: '#^Offset ''number\-columns\-repeated'' might not exist on SimpleXMLElement\|null\.$#'
 			identifier: offsetAccess.notFound
 			count: 2
-			path: src/Plugins/Import/ImportOds.php
-
-		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
 			path: src/Plugins/Import/ImportOds.php
 
 		-
@@ -13102,18 +13039,6 @@ parameters:
 			path: src/Plugins/Import/ImportSql.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 2
-			path: src/Plugins/Import/ImportSql.php
-
-		-
-			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
-			identifier: if.condNotBoolean
-			count: 1
-			path: src/Plugins/Import/ImportSql.php
-
-		-
 			message: '#^Parameter \#1 \$delimiter of method PhpMyAdmin\\SqlParser\\Utils\\BufferedQuery\:\:setDelimiter\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -13171,12 +13096,6 @@ parameters:
 			message: '#^Offset ''name'' might not exist on SimpleXMLElement\|null\.$#'
 			identifier: offsetAccess.notFound
 			count: 4
-			path: src/Plugins/Import/ImportXml.php
-
-		-
-			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
 			path: src/Plugins/Import/ImportXml.php
 
 		-
