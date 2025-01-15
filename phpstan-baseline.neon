@@ -2115,7 +2115,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 3
 			path: src/Controllers/Database/ImportController.php
 
 		-
@@ -2133,12 +2133,6 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
-			count: 1
-			path: src/Controllers/Database/ImportController.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
 			count: 1
 			path: src/Controllers/Database/ImportController.php
 
@@ -2776,12 +2770,6 @@ parameters:
 			path: src/Controllers/HomeController.php
 
 		-
-			message: '#^Cannot access offset string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Controllers/HomeController.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 6
@@ -3375,7 +3363,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 3
 			path: src/Controllers/Server/ImportController.php
 
 		-
@@ -3393,12 +3381,6 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
-			count: 1
-			path: src/Controllers/Server/ImportController.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
 			count: 1
 			path: src/Controllers/Server/ImportController.php
 
@@ -4077,7 +4059,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 3
 			path: src/Controllers/Table/ImportController.php
 
 		-
@@ -4095,12 +4077,6 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
-			count: 1
-			path: src/Controllers/Table/ImportController.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
 			count: 1
 			path: src/Controllers/Table/ImportController.php
 
@@ -5751,13 +5727,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Database/Designer.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
+			count: 2
 			path: src/Database/Designer.php
 
 		-
@@ -7500,7 +7470,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 3
+			count: 4
 			path: src/Export/Options.php
 
 		-
@@ -7527,7 +7497,7 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
-			count: 4
+			count: 3
 			path: src/Export/Options.php
 
 		-
@@ -10522,6 +10492,12 @@ parameters:
 			path: src/Plugins.php
 
 		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: src/Plugins.php
+
+		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
@@ -10540,49 +10516,13 @@ parameters:
 			path: src/Plugins.php
 
 		-
-			message: '#^Method PhpMyAdmin\\Plugins\:\:getString\(\) should return string but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Plugins.php
-
-		-
 			message: '#^Parameter \#1 \$link of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:show\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 2
 			path: src/Plugins.php
 
 		-
-			message: '#^Parameter \#1 \$name of static method PhpMyAdmin\\Plugins\:\:getString\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#1 \$string of function htmlspecialchars expects string, bool\|int\<0, max\>\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#1 \$string of function htmlspecialchars expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins.php
-
-		-
 			message: '#^Parameter \#2 \$anchor of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:showDocumentation\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#2 \$replace of function str_replace expects array\<string\>\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, bool\|int\<0, max\>\|string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Plugins.php
@@ -13474,36 +13414,6 @@ parameters:
 			path: src/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php
 
 		-
-			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
-			identifier: foreach.nonIterable
-			count: 1
-			path: src/Plugins/Transformations/Abs/DownloadTransformationsPlugin.php
-
-		-
-			message: '#^Cannot access property \$name on mixed\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: src/Plugins/Transformations/Abs/DownloadTransformationsPlugin.php
-
-		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 3
-			path: src/Plugins/Transformations/Abs/DownloadTransformationsPlugin.php
-
-		-
-			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
-			identifier: equal.notAllowed
-			count: 1
-			path: src/Plugins/Transformations/Abs/DownloadTransformationsPlugin.php
-
-		-
-			message: '#^Parameter \#1 \$string of function htmlspecialchars expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins/Transformations/Abs/DownloadTransformationsPlugin.php
-
-		-
 			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -13916,6 +13826,12 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: src/Properties/Options/OptionsPropertyGroup.php
+
+		-
+			message: '#^Loose comparison using \=\= between \(int\|string\|null\) and null will always evaluate to true\.$#'
+			identifier: equal.alwaysTrue
+			count: 1
+			path: src/Query/Compatibility.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
