@@ -722,7 +722,7 @@ function addNewContinueInsertionFields(event) {
       });
       // Insert/Clone the ignore checkboxes
       if (currRows === 1) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input id="insert_ignore_1" type="checkbox" name="insert_ignore_1" checked="checked">').insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').last()).after('<label for="insert_ignore_1">' + window.Messages.strIgnore + '</label>');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input id="insert_ignore_1" type="checkbox" name="insert_ignore_1" checked>').insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').last()).after('<label for="insert_ignore_1">' + window.Messages.strIgnore + '</label>');
       } else {
         /**
          * @var $last_checkbox   Object reference to the last checkbox in #insertForm

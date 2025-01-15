@@ -4962,7 +4962,7 @@ function loadForeignKeyCheckbox() {
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
-    var html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked="checked"' : '') + '>' + '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
+    var html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked' : '') + '>' + '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.load-default-fk-check-value').replaceWith(html);
   });
 }
@@ -6848,11 +6848,17 @@ function floatingMenuBar() {
 }
 /**
  * Scrolls the page to the top if clicking the server-breadcrumb bar
+ * If the user holds the Ctrl (or Meta on macOS) key, it prevents the scroll
+ * so they can open the link in a new tab.
+ *
  * @return {function}
  */
 function breadcrumbScrollToTop() {
   return function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#server-breadcrumb, #goto_pagetop', function (event) {
+      if (event.ctrlKey || event.metaKey) {
+        return;
+      }
       event.preventDefault();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('html, body').animate({
         scrollTop: 0
@@ -7731,7 +7737,7 @@ function getCompositeIndexList(sourceArray, colIndex) {
         alreadyPresent = true;
       }
     }
-    $compositeIndexList.append('<li>' + '<input type="radio" name="composite_with" ' + (alreadyPresent ? 'checked="checked"' : '') + ' id="composite_index_' + i + '" value="' + i + '">' + '<label for="composite_index_' + i + '">' + columnNames.join(', ') + '</label>' + '</li>');
+    $compositeIndexList.append('<li>' + '<input type="radio" name="composite_with" ' + (alreadyPresent ? 'checked' : '') + ' id="composite_index_' + i + '" value="' + i + '">' + '<label for="composite_index_' + i + '">' + columnNames.join(', ') + '</label>' + '</li>');
   }
   return $compositeIndexList;
 }
@@ -7874,7 +7880,7 @@ var removeIndexOnChangeEvent = function () {
  * @param {string} colIndex    Index of new column on form
  */
 function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
-  var $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="single_column" name="index_choice" checked="checked">' + '<label class="form-check-label" for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label></div>');
+  var $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="single_column" name="index_choice" checked>' + '<label class="form-check-label" for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label></div>');
   var $compositeIndexRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="composite_index" name="index_choice">' + '<label class="form-check-label" for="composite_index">' + window.Messages.strCreateCompositeIndex + '</label></div>');
   var $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<fieldset id="advance_index_creator"></fieldset>');
   $dialogContent.append('<legend>' + indexChoice.toUpperCase() + '</legend>');

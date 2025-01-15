@@ -49,11 +49,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/mu
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/multi_table_query.js', function () {
   var editor = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#MultiSqlquery'), {}, 'vertical');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.CodeMirror-line').css('text-align', 'left');
-  editor.setSize(-1, 50);
+  editor.setSize(-1, -1);
   var columnCount = 3;
   addNewColumnCallbacks();
   function opsWithMultipleArgs() {
     return ['IN (...)', 'NOT IN (...)'];
+  }
+  function opsWithTwoArgs() {
+    return ['BETWEEN', 'NOT BETWEEN'];
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#update_query_button').on('click', function () {
     var columns = [];
@@ -181,10 +184,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     });
   });
   const acceptsMultipleArgs = opsWithMultipleArgs();
+  const acceptsTwoArgs = opsWithTwoArgs();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_op').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('change', function () {
       if (acceptsMultipleArgs.includes(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().toString())) {
         showMultiFields(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+      } else if (acceptsTwoArgs.includes(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().toString())) {
+        showTwoFields(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
       } else {
         const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('.options');
         options.parent().prepend('<input type="text" class="rhs_text_val query-form__input--wide" placeholder="Enter criteria as free text"></input>');
@@ -192,14 +198,23 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       }
     });
   });
-  function showMultiFields(opSelect) {
-    const criteriaInput = opSelect.closest('table').find('.rhs_text_val');
-    const criteriaInputCol = criteriaInput.parent();
-    const hasAtLeastOneOption = criteriaInputCol.find('.option').length > 0;
-    if (!hasAtLeastOneOption) {
-      criteriaInputCol.append("\n                <div class=\"options\">\n                    <div class=\"option\">\n                        <input type=\"text\" class=\"val\" placeholder=\"Enter an option\" value=\"".concat(criteriaInput.val(), "\" />\n                        <input type=\"button\" class=\"btn btn-secondary add-option\" value=\"+\" />\n                    </div>\n                </div>\n            "));
+  function showTwoFields(opSelect) {
+    const critetiaRow = opSelect.closest('table').find('.rhs_text');
+    const critetiaCol = critetiaRow.find('td').last();
+    const criteriaInput = critetiaCol.find('input').first();
+    if (critetiaCol.find('.binary').length === 0) {
+      critetiaCol.empty();
+      critetiaCol.append("\n                <div class=\"options binary\">\n                    <input type=\"text\" class=\"val\" placeholder=\"".concat(window.Messages.strFirstValuePlaceholder, "\" value=\"").concat(criteriaInput.val(), "\" />\n                    <input type=\"text\" class=\"val\" placeholder=\"").concat(window.Messages.strSecondValuePlaceholder, "\" />\n                </div>\n            "));
     }
-    criteriaInput.remove();
+  }
+  function showMultiFields(opSelect) {
+    const critetiaRow = opSelect.closest('table').find('.rhs_text');
+    const critetiaCol = critetiaRow.find('td').last();
+    const criteriaInput = critetiaCol.find('input').first();
+    if (critetiaCol.find('.multi').length === 0) {
+      critetiaCol.empty();
+      critetiaCol.append("\n                <div class=\"options multi\">\n                    <div class=\"option\">\n                        <input type=\"text\" class=\"val\" placeholder=\"Enter an option\" value=\"".concat(criteriaInput.val(), "\" />\n                        <input type=\"button\" class=\"btn btn-secondary add-option\" value=\"+\" />\n                    </div>\n                </div>\n            "));
+    }
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'input.add-option', function () {
     const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.options');

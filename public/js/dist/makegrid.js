@@ -1643,7 +1643,7 @@ const makeGrid = function (t) {
         for (i = 0; i < $firstRowCols.length; i++) {
           var currHeader = $firstRowCols[i];
           var listElmt = document.createElement('div');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(listElmt).text(jquery__WEBPACK_IMPORTED_MODULE_0___default()(currHeader).text()).prepend('<input type="checkbox" ' + (g.colVisib[i] ? 'checked="checked" ' : '') + '>');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(listElmt).text(jquery__WEBPACK_IMPORTED_MODULE_0___default()(currHeader).text()).prepend('<input type="checkbox" ' + (g.colVisib[i] ? 'checked ' : '') + '>');
           $listDiv.append(listElmt);
           // add event on click
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(listElmt).on('click', tempClick);
