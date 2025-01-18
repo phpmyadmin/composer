@@ -32,9 +32,9 @@ AJAX.registerTeardown('database/multi_table_query.js', function () {
   $('#add_column_button').off('click');
 });
 AJAX.registerOnload('database/multi_table_query.js', function () {
-  var editor = Functions.getSqlEditor($('#MultiSqlquery'), {}, 'both');
+  var editor = Functions.getSqlEditor($('#MultiSqlquery'), {}, 'vertical');
   $('.CodeMirror-line').css('text-align', 'left');
-  editor.setSize(-1, 50);
+  editor.setSize(-1, -1);
   var columnCount = 3;
   addNewColumnCallbacks();
   function theHints() {

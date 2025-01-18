@@ -910,7 +910,7 @@ AJAX.registerOnload('functions.js', function () {
             /* There is other active window, let's reset counter */
             idleSecondsCounter = 0;
           }
-          var remaining = Math.min( /* Remaining login validity */
+          var remaining = Math.min(/* Remaining login validity */
           CommonParams.get('LoginCookieValidity') - idleSecondsCounter, /* Remaining time till session GC */
           CommonParams.get('session_gc_maxlifetime'));
           var interval = 1000;
@@ -1137,7 +1137,7 @@ Functions.insertQuery = function (queryType) {
   }
   var query = '';
   var myListBox = document.sqlform.dummy;
-  table = document.sqlform.table.value;
+  table = Functions.escapeBacktick(document.sqlform.table.value);
   if (myListBox.options.length > 0) {
     sqlBoxLocked = true;
     var columnsList = '';
@@ -3837,9 +3837,14 @@ $(function () {
 
 /**
  * Scrolls the page to the top if clicking the server-breadcrumb bar
+ * If the user holds the Ctrl (or Meta on macOS) key, it prevents the scroll
+ * so they can open the link in a new tab.
  */
 $(function () {
   $(document).on('click', '#server-breadcrumb, #goto_pagetop', function (event) {
+    if (event.ctrlKey || event.metaKey) {
+      return;
+    }
     event.preventDefault();
     $('html, body').animate({
       scrollTop: 0
