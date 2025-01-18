@@ -12780,6 +12780,10 @@ body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
   z-index: 9;
 }
 
+.bg-secondary {
+  color: #333;
+}
+
 /**
  * ENUM/SET editor styles
  */
