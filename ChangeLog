@@ -16,6 +16,7 @@ phpMyAdmin - ChangeLog
 - issue #19242 Removed the popup that warned about having an auto-saved query
 - issue        Added support for `BETWEEN` and `NOT BETWEEN` on the query generator
 - issue #17480 Added an option in the SQL box to "Format as a single line"
+- issue        Add support for `INSERT IGNORE` into for non table imports
 
 5.2.2 (not yet released)
 - issue #17851 Fix total count of rows in not accurate
@@ -161,6 +162,8 @@ phpMyAdmin - ChangeLog
 - issue        Fix sql editor height on multi-table query
 - issue #18852 Fix notification color scheme on the Bootstrap dark theme
 - issue #14542 Show the query even if no results are found in the Table search
+- issue #16936 Fixed import (e.g. ods) doesn't respect database default collation
+- issue #19000 Disable autocomplete for the create table/db name inputs
 
 5.2.1 (2023-02-07)
 - issue #17522 Fix case where the routes cache file is invalid
