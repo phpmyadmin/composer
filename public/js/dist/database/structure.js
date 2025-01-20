@@ -73,7 +73,7 @@ function fetchRealRowCount($target) {
         if (response.real_row_count_all) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(response.real_row_count_all, function (index, table) {
             // Update each table row count.
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data td[data-table*="' + table.table + '"]').text(table.row_count);
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data td[data-table*="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeJsString)(table.table) + '"]').text(table.row_count);
           });
         }
         // If to update a particular table's row count.
