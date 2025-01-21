@@ -2455,18 +2455,6 @@
     <MixedPropertyFetch occurrences="1">
       <code>$dblist-&gt;databases</code>
     </MixedPropertyFetch>
-    <PossiblyInvalidArgument occurrences="3">
-      <code>$database</code>
-      <code>$database</code>
-      <code>$database</code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="2">
-      <code>$database</code>
-      <code>$database</code>
-    </PossiblyInvalidCast>
-    <TypeDoesNotContainType occurrences="1">
-      <code>$selected_dbs === []</code>
-    </TypeDoesNotContainType>
   </file>
   <file src="libraries/classes/Controllers/Server/DatabasesController.php">
     <MixedArgument occurrences="9">
@@ -6385,9 +6373,6 @@
       <code>self::$engine</code>
       <code>self::$engine</code>
     </MixedAssignment>
-    <MixedOperand occurrences="1">
-      <code>$GLOBALS['cfg']['IconvExtraParams'] ?? ''</code>
-    </MixedOperand>
     <PossiblyNullArgument occurrences="1">
       <code>$GLOBALS['config']-&gt;getUploadTempDir()</code>
     </PossiblyNullArgument>
@@ -8093,7 +8078,7 @@
       <code>$specialChars</code>
       <code>$specialChars</code>
       <code>$specialCharsEncoded</code>
-      <code>$textDefault !== false ? $textDefault : $column['Default']</code>
+      <code>$textDefault !== '' ? $textDefault : $column['Default']</code>
       <code>$transformationPlugin-&gt;getScripts()</code>
       <code>$transformation[$type . '_options'] ?? ''</code>
       <code>$trueType</code>
