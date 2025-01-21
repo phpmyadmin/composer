@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2025-01-18 01:02+0000\n"
-"Last-Translator: William Desportes <williamdes@wdes.fr>\n"
+"PO-Revision-Date: 2025-01-21 15:38+0000\n"
+"Last-Translator: Maurício Meneghini Fauth <mauricio@mfauth.net>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/phpmyadmin/4-9/"
 "fi/>\n"
 "Language: fi\n"
@@ -17365,18 +17365,18 @@ msgstr ""
 #: libraries/advisory_rules_generic.txt:68
 #, php-format
 msgid "The slow query rate should be below 5%%, your value is %s%%."
-msgstr ""
+msgstr "Hitaan kyselysuhteen tulisi olla alle 5 %%, arvosi on %s %%."
 
 #: libraries/advisory_rules_generic.txt:70
-#, fuzzy
-#| msgid "Flush query cache"
 msgid "Slow query rate"
-msgstr "Tyhjennä kyselymuisti"
+msgstr "Hidas kyselysuhde"
 
 #: libraries/advisory_rules_generic.txt:73
 msgid ""
 "There is a high percentage of slow queries compared to the server uptime."
 msgstr ""
+"Hitaiden kyselyjen prosenttiosuus on suuri verrattuna palvelimen "
+"käyttöaikaan."
 
 #: libraries/advisory_rules_generic.txt:75
 #, php-format
@@ -17384,44 +17384,43 @@ msgid ""
 "You have a slow query rate of %s per hour, you should have less than 1%% per "
 "hour."
 msgstr ""
+"Sinulla on hidas kyselysuhde %s tunnissa, sinun pitäisi olla alle 1 %% "
+"tunnissa."
 
 #: libraries/advisory_rules_generic.txt:77
-#, fuzzy
-#| msgid "SQL queries"
 msgid "Long query time"
-msgstr "SQL-kyselyt"
+msgstr "Pitkä kyselyaika"
 
 #: libraries/advisory_rules_generic.txt:80
 msgid ""
 "{long_query_time} is set to 10 seconds or more, thus only slow queries that "
 "take above 10 seconds are logged."
 msgstr ""
+"{long_query_time} on 10 sekuntia tai enemmän, joten vain hitaat kyselyt, "
+"jotka kestävät yli 10 sekuntia, kirjataan lokiin."
 
 #: libraries/advisory_rules_generic.txt:81
 msgid ""
 "It is suggested to set {long_query_time} to a lower value, depending on your "
 "environment. Usually a value of 1-5 seconds is suggested."
 msgstr ""
+"On suositeltavaa asettaa {long_query_time} pienemmälle arvolle "
+"ympäristöstäsi riippuen. Yleensä arvoksi ehdotetaan 1-5 sekuntia."
 
 #: libraries/advisory_rules_generic.txt:82
-#, fuzzy, php-format
-#| msgid "long_query_time is set to %d second(s)."
+#, php-format
 msgid "long_query_time is currently set to %ds."
 msgstr "long_query_time on asetettu %d sekuntiin."
 
 #: libraries/advisory_rules_generic.txt:84
 #: libraries/advisory_rules_generic.txt:91
-#, fuzzy
-#| msgid "Show query box"
 msgid "Slow query logging"
-msgstr "Näytä kyselykenttä"
+msgstr "Hidas kyselyloki"
 
 #: libraries/advisory_rules_generic.txt:87
 #: libraries/advisory_rules_generic.txt:94
-#, fuzzy
-#| msgid "slow_query_log is enabled."
 msgid "The slow query log is disabled."
-msgstr "slow_query_log on käytössä."
+msgstr "Hidas kyselyloki on poistettu käytöstä."
 
 #: libraries/advisory_rules_generic.txt:88
 msgid ""
@@ -17870,11 +17869,12 @@ msgid ""
 msgstr ""
 
 #: libraries/advisory_rules_generic.txt:240
-#, fuzzy, php-format
-#| msgid "Sort buffer size"
+#, php-format
 msgid ""
 "max %% MyISAM key buffer ever used: %s%%, this value should be above 95%%"
-msgstr "Lajittelupuskurin koko"
+msgstr ""
+"maksimi %% koskaan käytetty MyISAM-avainpuskuri: %in %%, tämän arvon tulee "
+"olla yli 95 %%"
 
 #: libraries/advisory_rules_generic.txt:243
 #, fuzzy
@@ -18187,6 +18187,7 @@ msgstr ""
 #, php-format
 msgid "%s%% of all clients are aborted. This value should be below 2%%"
 msgstr ""
+"%s %% kaikista asiakkaista on keskeytetty. Tämän arvon tulee olla alle 2 %%"
 
 #: libraries/advisory_rules_generic.txt:352
 #, fuzzy
@@ -18247,12 +18248,13 @@ msgid ""
 msgstr ""
 
 #: libraries/advisory_rules_generic.txt:373
-#, fuzzy, php-format
-#| msgid "The number writes done to the InnoDB buffer pool."
+#, php-format
 msgid ""
 "Your InnoDB log size is at %s%% in relation to the InnoDB buffer pool size, "
 "it should not be below 20%%"
-msgstr "InnoDB:n puskurivarannon kirjoituspyyntöjen määrä."
+msgstr ""
+"InnoDB-lokikokosi on %s %% suhteessa InnoDB-puskurivarannon kokoon, sen ei "
+"pitäisi olla alle 20 %%"
 
 #: libraries/advisory_rules_generic.txt:375
 #, fuzzy
@@ -18318,6 +18320,10 @@ msgid ""
 "perfectly adequate for your system if you don't have much InnoDB tables or "
 "other services running on the same machine."
 msgstr ""
+"Käytät tällä hetkellä %s %% muististasi InnoDB-puskurivarannossa. Tämä "
+"sääntö käynnistyy, jos määrität alle 60 %%, mutta tämä saattaa olla täysin "
+"riittävä järjestelmällesi, jos sinulla ei ole paljon InnoDB-taulukoita tai "
+"muita palveluita käynnissä samassa koneessa."
 
 #: libraries/advisory_rules_generic.txt:391
 #, fuzzy
@@ -18381,10 +18387,9 @@ msgid "Consider increasing {query_cache_limit}."
 msgstr ""
 
 #: libraries/advisory_rules_mysql_before80003.txt:22
-#, fuzzy, php-format
-#| msgid "Sort buffer size"
+#, php-format
 msgid "The current query cache hit rate of %s%% is below 20%%"
-msgstr "Lajittelupuskurin koko"
+msgstr "Nykyinen kyselyn välimuistin osumasuhde %s %% on alle 20 %%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:24
 #, fuzzy
@@ -18403,11 +18408,13 @@ msgid ""
 msgstr ""
 
 #: libraries/advisory_rules_mysql_before80003.txt:29
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "The current ratio of free query cache memory to total query cache size is %s"
 "%%. It should be above 80%%"
 msgstr ""
+"Vapaan kyselyvälimuistin nykyinen suhde kyselyn välimuistin kokonaiskokoon "
+"on %s %%. Sen pitäisi olla yli 80%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:31
 #, fuzzy
@@ -18440,6 +18447,9 @@ msgid ""
 "that the query cache is an alternating pattern of free and used blocks. This "
 "value should be below 20%%."
 msgstr ""
+"Välimuisti on tällä hetkellä pirstoutunut %s %%:lla, 100 %%:n "
+"pirstoutuneisuus tarkoittaa, että kyselyvälimuisti on vuorotellen ilmaisia "
+"ja käytettyjä lohkoja. Tämän arvon tulisi olla alle 20 %%."
 
 #: libraries/advisory_rules_mysql_before80003.txt:38
 #, fuzzy
@@ -18468,6 +18478,8 @@ msgid ""
 "The ratio of removed queries to inserted queries is %s%%. The lower this "
 "value is, the better (This rules firing limit: 0.1%%)"
 msgstr ""
+"Poistettujen kyselyjen suhde lisättyihin kyselyihin on %s %%. Mitä pienempi "
+"tämä arvo on, sitä parempi (Tämä säätelee laukaisurajaa: 0,1 %%)"
 
 #: libraries/advisory_rules_mysql_before80003.txt:45
 #, fuzzy
