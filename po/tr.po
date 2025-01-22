@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2025-01-19 08:50+0000\n"
+"PO-Revision-Date: 2025-01-22 10:29+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/phpmyadmin/4-9/"
 "tr/>\n"
@@ -106,7 +106,7 @@ msgstr "Sütun"
 #: templates/columns_definitions/table_fields_definitions.twig:12
 #: templates/table/tracking/structure_snapshot_columns.twig:7
 msgid "Type"
-msgstr "Türü"
+msgstr "Tür"
 
 #: db_datadict.php:119 libraries/classes/CentralColumns.php:755
 #: libraries/classes/CentralColumns.php:1429 libraries/classes/Index.php:726
@@ -311,7 +311,7 @@ msgstr "Veritabanı adı boş!"
 
 #: db_operations.php:69
 msgid "Cannot copy database to the same name. Change the name and try again."
-msgstr "Veritabanı aynı isimde kopyalanamaz. Adı değiştirin ve tekrar deneyin."
+msgstr "Veritabanı aynı ada kopyalanamaz. Adı değiştirin ve tekrar deneyin."
 
 #: db_operations.php:156
 #, php-format
@@ -5031,7 +5031,7 @@ msgstr "Kısayol tuşlarını etkisizleştir"
 
 #: libraries/classes/Config/Descriptions.php:877
 msgid "Use natural order for sorting table and database names."
-msgstr "Tablo ve veritabanı adlarını sıralamak için doğal sıra kullanır."
+msgstr "Tablo ve veritabanı adlarını sıralamak için doğal sırayı kullanın."
 
 #: libraries/classes/Config/Descriptions.php:879
 msgid "Natural order"
@@ -5238,8 +5238,8 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:988
 msgid "HTTP Basic Auth Realm name to display when doing HTTP Auth."
 msgstr ""
-"HTTP Kimlik Doğrulaması yaparken görüntülemek için Basit Kimlik Doğrulaması "
-"alan adı."
+"HTTP Kimlik Doğrulaması yapılırken görüntülenecek HTTP Temel Kimlik "
+"Doğrulama Alanı adı."
 
 #: libraries/classes/Config/Descriptions.php:990
 msgid "HTTP Realm"
@@ -9150,7 +9150,7 @@ msgstr ""
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:177
 msgid "Username:"
-msgstr "Kullanıcı Adı:"
+msgstr "Kullanıcı adı:"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:189
 msgid "Server Choice:"
@@ -10073,7 +10073,7 @@ msgid ""
 "Converts an (IPv4) Internet network address stored as a BIGINT into a string "
 "in Internet standard dotted format."
 msgstr ""
-"BIGINT olarak saklanan bir (IPv4) Internet ağ adresini, Internet standart "
+"BIGINT olarak saklanan bir (IPv4) İnternet ağ adresini, Internet standart "
 "noktalı biçimindeki bir dizgiye dönüştürür."
 
 #: libraries/classes/Plugins/Transformations/Abs/PreApPendTransformationsPlugin.php:29
@@ -10167,7 +10167,7 @@ msgid ""
 "Converts an Internet network address stored as a binary string into a string "
 "in Internet standard (IPv4/IPv6) format."
 msgstr ""
-"İkili değer dizgisi olarak saklanan bir Internet ağ adresini, Internet "
+"İkili değer dizgisi olarak saklanan bir İnternet ağ adresini, Internet "
 "standart (IPv4/IPv6) biçimindeki bir dizgiye dönüştürür."
 
 #: libraries/classes/Plugins/Transformations/Output/Text_Plain_Json.php:47
@@ -11596,11 +11596,11 @@ msgstr "Kullanıcı hesabı için veritabanı"
 
 #: libraries/classes/Server/Privileges.php:2190
 msgid "Create database with same name and grant all privileges."
-msgstr "Aynı isimle veritabanı oluştur ve tüm yetkileri ver."
+msgstr "Aynı ad ile veritabanı oluştur ve tüm yetkileri ver."
 
 #: libraries/classes/Server/Privileges.php:2201
 msgid "Grant all privileges on wildcard name (username\\_%)."
-msgstr "Joker isimlere tüm yetkileri ver (kullanıcıadı\\_%)."
+msgstr "Joker karakterli ada tüm yetkileri ver (kullanıcıadı\\_%)."
 
 #: libraries/classes/Server/Privileges.php:2214
 #, php-format
@@ -12372,9 +12372,9 @@ msgid ""
 "table with a given name. This is called discovery. Handler_discover "
 "indicates the number of time tables have been discovered."
 msgstr ""
-"Eğer MySQL sunucusu verilen isimdeki tabloyu biliyorsa, NDB Küme depolama "
-"motorunu sorabilir. Buna keşfetme denir. Handler_discover tabloların keç kez "
-"keşfedildiğini gösterir."
+"MySQL sunucusu, NDB Küme depolama motoruna belirli bir ada sahip bir tablo "
+"hakkında bilgisi olup olmadığını sorabilir. Buna keşfetme denir. "
+"Handler_discover tabloların keç kez keşfedildiğini gösterir."
 
 #: libraries/classes/Server/Status/Variables.php:401
 msgid ""
@@ -14737,7 +14737,7 @@ msgstr "Kullanıcılardan tüm etkin yetkileri geri alır ve sonra da siler."
 #: templates/privileges/delete_user_fieldset.twig:10
 #: templates/privileges/delete_user_fieldset.twig:11
 msgid "Drop the databases that have the same names as the users."
-msgstr "Kullanıcılarla aynı isimlerde olan veritabanlarını kaldır."
+msgstr "Kullanıcılarla aynı ada sahip veritabanlarını kaldır."
 
 #: templates/table/structure/add_column.twig:9
 #, php-format
