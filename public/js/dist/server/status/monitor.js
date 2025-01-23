@@ -1996,15 +1996,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     }
     $table.append('<tfoot>' + '<tr><th colspan="' + (cols.length - 1) + '">' + window.Messages.strSumRows + ' ' + data.numRows + '<span class="float-end">' + window.Messages.strTotal + '</span></th><th class="text-end">' + data.sum.TOTAL + '</th></tr></tfoot>');
     // Append a tooltip to the count column, if there exist one
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('tr').first().find('th').last().text().indexOf('#') > -1) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('tr').first().find('th').last().append('&nbsp;' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('b_help', '', {
-        'class': 'qroupedQueryInfoIcon'
-      }));
-      var tooltipContent = window.Messages.strCountColumnExplanation;
+    const amountColumn = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('tr').first().find('th').last();
+    if (amountColumn.text().indexOf('#') > -1) {
+      amountColumn.append('&nbsp;' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('b_help'));
+      let tooltipContent = window.Messages.strCountColumnExplanation;
       if (groupInserts) {
-        tooltipContent += '<p>' + window.Messages.strMoreCountColumnExplanation + '</p>';
+        tooltipContent += '<br>' + window.Messages.strMoreCountColumnExplanation;
       }
-      (0,_modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('img.qroupedQueryInfoIcon'), 'img', tooltipContent);
+      (0,_modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(amountColumn, 'th', tooltipContent);
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('table').tablesorter({
       sortList: [[cols.length - 1, 1]],
