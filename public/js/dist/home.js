@@ -1,13 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[18],{
 
-/***/ 50:
+/***/ 49:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var _modules_git_info_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(51);
-/* harmony import */ var _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _modules_git_info_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(50);
+/* harmony import */ var _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
 
 
 
@@ -27,7 +27,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerOnload('home.js', () 
 
 /***/ }),
 
-/***/ 51:
+/***/ 50:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -37,7 +37,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
 
 
 
@@ -195,7 +195,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(50); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(49); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

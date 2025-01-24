@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[60],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[59],{
 
-/***/ 102:
+/***/ 100:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -46,7 +46,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(102); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(100); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

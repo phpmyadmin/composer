@@ -1,23 +1,23 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[21],{
 
-/***/ 55:
+/***/ 54:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
-/* harmony import */ var _modules_keyhandler_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(56);
-/* harmony import */ var _modules_page_settings_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57);
-/* harmony import */ var _modules_cross_framing_protection_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(58);
-/* harmony import */ var _modules_indexes_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(59);
+/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
+/* harmony import */ var _modules_keyhandler_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(55);
+/* harmony import */ var _modules_page_settings_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(56);
+/* harmony import */ var _modules_cross_framing_protection_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57);
+/* harmony import */ var _modules_indexes_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(58);
 /* harmony import */ var _modules_config_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
-/* harmony import */ var _modules_functions_checkNumberOfFields_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
-/* harmony import */ var _modules_navigation_event_loader_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(60);
-/* harmony import */ var _modules_functions_event_loader_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(62);
-/* harmony import */ var _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(52);
+/* harmony import */ var _modules_functions_checkNumberOfFields_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
+/* harmony import */ var _modules_navigation_event_loader_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(59);
+/* harmony import */ var _modules_functions_event_loader_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(61);
+/* harmony import */ var _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(51);
 
 
 
@@ -67,7 +67,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', () 
 
 /***/ }),
 
-/***/ 58:
+/***/ 57:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -96,7 +96,7 @@ const crossFramingProtection = () => {
 
 /***/ }),
 
-/***/ 62:
+/***/ 61:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -106,8 +106,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
-/* harmony import */ var _handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(61);
+/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+/* harmony import */ var _handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(60);
 
 
 
@@ -198,7 +198,7 @@ function onloadFunctions() {
 
 /***/ }),
 
-/***/ 61:
+/***/ 60:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -209,9 +209,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 /* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
+/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
 /* harmony import */ var _navigation_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
-/* harmony import */ var _getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(30);
+/* harmony import */ var _getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(29);
 
 
 
@@ -261,7 +261,7 @@ function handleCreateViewModal($this) {
 
 /***/ }),
 
-/***/ 56:
+/***/ 55:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -377,7 +377,7 @@ const KeyHandlerEvents = {
 
 /***/ }),
 
-/***/ 60:
+/***/ 59:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -388,17 +388,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _navigation_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-/* harmony import */ var _functions_handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61);
+/* harmony import */ var _functions_handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(60);
 /* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
-/* harmony import */ var _tooltip_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(10);
+/* harmony import */ var _functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
 
 
 
 
 
 
-
+function updateFavoriteTableButton(buttonId, htmlContent) {
+  var _window$bootstrap$Too;
+  const currentButton = document.getElementById(buttonId);
+  // Remove current tooltip before changing the button
+  (_window$bootstrap$Too = window.bootstrap.Tooltip.getInstance(currentButton)) === null || _window$bootstrap$Too === void 0 || _window$bootstrap$Too.dispose();
+  currentButton.outerHTML = htmlContent;
+  // Enable tooltip of the new button
+  new window.bootstrap.Tooltip(document.getElementById(buttonId));
+}
 /**
  * @return {function}
  */
@@ -609,7 +616,6 @@ function onloadNavigation() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.favorite_table_anchor', function (event) {
       event.preventDefault();
       var $self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      var anchorId = $self.attr('id');
       if ($self.data('favtargetn') !== null) {
         var $dataFavTargets = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a[data-favtargets="' + $self.data('favtargetn') + '"]');
         if ($dataFavTargets.length > 0) {
@@ -629,8 +635,9 @@ function onloadNavigation() {
         success: function (data) {
           if (data.changes) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#favoriteTableList').html(data.list);
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + anchorId).parent().html(data.anchor);
-            (0,_tooltip_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + anchorId), 'a', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + anchorId).attr('title'));
+            if ($self.attr('id')) {
+              updateFavoriteTableButton($self.attr('id'), data.anchor);
+            }
             // Update localStorage.
             if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_5__["default"])('localStorage')) {
               window.localStorage.favoriteTables = data.favoriteTables;
@@ -665,7 +672,7 @@ function onloadNavigation() {
 
 /***/ }),
 
-/***/ 57:
+/***/ 56:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -738,7 +745,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(55); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(54); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

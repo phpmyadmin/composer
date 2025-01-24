@@ -1,20 +1,18 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[22],{
 
-/***/ 63:
+/***/ 62:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
+/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
-/* harmony import */ var _modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
-/* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
-/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(16);
-
+/* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10);
+/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(15);
 
 
 
@@ -409,7 +407,7 @@ const makeGrid = function (t) {
             var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.createElement('div'));
             $tempDiv.html(data.error);
             $tempDiv.addClass('alert alert-danger');
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($tempDiv, false);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)($tempDiv, false);
           }
         });
       }
@@ -676,7 +674,7 @@ const makeGrid = function (t) {
               value = value.substring(0, g.maxTruncatedLen) + '...';
             }
             // Add <br> before carriage return.
-            var newHtml = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
+            var newHtml = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
             newHtml = newHtml.replace(/\n/g, '<br>\n');
             var decimals = parseInt($thisField.attr('data-decimals'));
             // remove decimal places if column type not supported
@@ -915,7 +913,7 @@ const makeGrid = function (t) {
           g.lastXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql/get-enum-values', postParams, function (data) {
             g.lastXHR = null;
             if (typeof data === 'object' && data.success === false) {
-              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, undefined, 'error');
+              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, undefined, 'error');
               return;
             }
             $editArea.removeClass('edit_area_loading');
@@ -954,7 +952,7 @@ const makeGrid = function (t) {
           g.lastXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql/get-set-values', postParams, function (data) {
             g.lastXHR = null;
             if (typeof data === 'object' && data.success === false) {
-              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, undefined, 'error');
+              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, undefined, 'error');
               return;
             }
             $editArea.removeClass('edit_area_loading');
@@ -1006,7 +1004,7 @@ const makeGrid = function (t) {
                 $td.data('original_data', data.value);
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val(data.value);
               } else {
-                (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
+                (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
               }
             }); // end $.post()
           }
@@ -1292,7 +1290,7 @@ const makeGrid = function (t) {
           }
           if (typeof data !== 'undefined' && data.success === true) {
             if (typeof options === 'undefined' || !options.move) {
-              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
             }
             // update where_clause related data in each edited row
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('td.to_be_saved').parents('tr').each(function () {
@@ -1339,7 +1337,7 @@ const makeGrid = function (t) {
                 } else {
                   $existingQuery.append(sqlOuter + tools);
                 }
-                (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($existingQuery);
+                (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__["default"])($existingQuery);
               }
             }
             // hide and/or update the successfully saved cells
@@ -1350,7 +1348,7 @@ const makeGrid = function (t) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').removeClass('to_be_saved').data('value', null).data('original_data', null);
             g.isCellEdited = false;
           } else {
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
             if (!g.saveCellsAtOnce) {
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').removeClass('to_be_saved');
             }
@@ -1413,7 +1411,7 @@ const makeGrid = function (t) {
             thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val();
           } else {
             var hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(hexError, false);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(hexError, false);
             thisFieldParams[fieldName] = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getCellValue)(g.currentEditCell);
           }
         } else {
@@ -1558,16 +1556,19 @@ const makeGrid = function (t) {
         }
       }).on('mouseleave', function () {
         g.showReorderHint = false;
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).uiTooltip('option', {
-          content: g.updateHint()
+        window.bootstrap.Tooltip.getOrCreateInstance(this, {
+          title: g.updateHint(),
+          html: true
+        }).setContent({
+          '.tooltip-inner': g.updateHint()
         });
       }).on('dblclick', function (e) {
         e.preventDefault();
         var res = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.copyToClipboard)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('column'));
         if (res) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strCopyColumnSuccess, false, 'success');
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyColumnSuccess, false, 'success');
         } else {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strCopyColumnFailure, false, 'error');
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyColumnFailure, false, 'error');
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.draggable a').on('dblclick', function (e) {
@@ -1618,8 +1619,15 @@ const makeGrid = function (t) {
       }
       // make sure we have more than one column
       if ($firstRowCols.length > 1) {
-        var $colVisibTh = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th:not(.draggable)').slice(0, 1);
-        (0,_modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_4__["default"])($colVisibTh, 'th', window.Messages.strColVisibHint);
+        const colVisibTh = g.t.querySelectorAll('th:not(.draggable)');
+        const $colVisibTh = jquery__WEBPACK_IMPORTED_MODULE_0___default()(colVisibTh).slice(0, 1);
+        colVisibTh.forEach(tableHeader => {
+          window.bootstrap.Tooltip.getOrCreateInstance(tableHeader, {
+            title: window.Messages.strColVisibHint
+          }).setContent({
+            '.tooltip-inner': window.Messages.strColVisibHint
+          });
+        });
         // create column visibility drop-down arrow(s)
         $colVisibTh.each(function () {
           var cd = document.createElement('div'); // column drop-down arrow
@@ -1999,10 +2007,12 @@ const makeGrid = function (t) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.gDiv).append(g.cEditStd);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.gDiv).append(g.cEditTextarea);
       // add hint for grid editing feature when hovering "Edit" link in each table row
-      const editRowAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.edit_row_anchor');
-      if (editRowAnchor.attr('data-grid-edit-config') !== 'disabled') {
-        editRowAnchor.find('a').tooltip();
-      }
+      g.t.querySelectorAll('.edit_row_anchor').forEach(editRowAnchor => {
+        if (editRowAnchor.dataset.gridEditConfig === 'disabled') {
+          return;
+        }
+        window.bootstrap.Tooltip.getOrCreateInstance(editRowAnchor.querySelector('a'));
+      });
     }
   };
   /** ****************
@@ -2070,19 +2080,36 @@ const makeGrid = function (t) {
     g.initGridEdit();
   }
   // create tooltip for each <th> with draggable class
-  (0,_modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th.draggable'), 'th', g.updateHint());
+  t.querySelectorAll('th.draggable').forEach(tableHeader => {
+    window.bootstrap.Tooltip.getOrCreateInstance(tableHeader, {
+      title: g.updateHint(),
+      html: true
+    }).setContent({
+      '.tooltip-inner': g.updateHint()
+    });
+  });
   // register events for hint tooltip (anchors inside draggable th)
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th.draggable a').on('mouseenter', function () {
     g.showSortHint = true;
     g.showMultiSortHint = true;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th.draggable').uiTooltip('option', {
-      content: g.updateHint()
+    t.querySelectorAll('th.draggable').forEach(tableHeader => {
+      window.bootstrap.Tooltip.getOrCreateInstance(tableHeader, {
+        title: g.updateHint(),
+        html: true
+      }).setContent({
+        '.tooltip-inner': g.updateHint()
+      });
     });
   }).on('mouseleave', function () {
     g.showSortHint = false;
     g.showMultiSortHint = false;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th.draggable').uiTooltip('option', {
-      content: g.updateHint()
+    t.querySelectorAll('th.draggable').forEach(tableHeader => {
+      window.bootstrap.Tooltip.getOrCreateInstance(tableHeader, {
+        title: g.updateHint(),
+        html: true
+      }).setContent({
+        '.tooltip-inner': g.updateHint()
+      });
     });
   });
   // register events for dragging-related feature
@@ -2154,7 +2181,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(63); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(62); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

@@ -1,22 +1,20 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[9],{
 
-/***/ 36:
+/***/ 35:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
+/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
 /* harmony import */ var _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
-/* harmony import */ var _modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
-/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(30);
-/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(16);
-/* harmony import */ var _modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25);
-
+/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(29);
+/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15);
+/* harmony import */ var _modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(24);
 
 
 
@@ -73,7 +71,7 @@ function fetchRealRowCount($target) {
         if (response.real_row_count_all) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(response.real_row_count_all, function (index, table) {
             // Update each table row count.
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data td[data-table*="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeJsString)(table.table) + '"]').text(table.row_count);
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data td[data-table*="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeJsString)(table.table) + '"]').text(table.row_count);
           });
         }
         // If to update a particular table's row count.
@@ -82,14 +80,19 @@ function fetchRealRowCount($target) {
           $target.parent().text(response.real_row_count);
         }
         // Adjust the 'Sum' displayed at the bottom.
-        (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
+        (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_8__["default"])();
       } else {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorRealRowCount);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorRealRowCount);
       }
     },
     error: function () {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorRealRowCount);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorRealRowCount);
     }
+  });
+}
+function addTooltipToFavoriteIcons() {
+  document.querySelectorAll('.favorite_table_anchor').forEach(favoriteTableAnchor => {
+    new window.bootstrap.Tooltip(favoriteTableAnchor);
   });
 }
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/structure.js', function () {
@@ -107,7 +110,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/stru
           const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm');
           const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
           const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
           _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/structure/central-columns/make-consistent', data, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#makeConsistentWithCentralListModal').modal('hide');
@@ -185,7 +188,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/stru
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     var data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
   });
@@ -206,20 +209,20 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/stru
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-    var question = window.Messages.strTruncateTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`') + (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
+    var question = window.Messages.strTruncateTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(currTableName) + '`') + (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $thisAnchor.getPostData());
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $thisAnchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           // Adjust table statistics
           var $tr = $thisAnchor.closest('tr');
           $tr.find('.tbl_rows').text('0');
           $tr.find('.tbl_size, .tbl_overhead').text('-');
-          (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
+          (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_8__["default"])();
         } else {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     }, _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.loadForeignKeyCheckbox);
@@ -248,31 +251,28 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/stru
      */
     var question;
     if (!isView) {
-      question = window.Messages.strDropTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
+      question = window.Messages.strDropTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(currTableName) + '`');
     } else {
-      question = window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
+      question = window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(currTableName) + '`');
     }
     question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $thisAnchor.getPostData());
+      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $thisAnchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
           $currRow.hide('medium').remove();
-          (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
+          (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_8__["default"])();
           _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
         } else {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + ' : ' + data.error, false);
         }
       }); // end $.post()
     }, _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.loadForeignKeyCheckbox);
   }); // end of Drop Table Ajax action
-  // Add tooltip to favorite icons.
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.favorite_table_anchor').each(function () {
-    (0,_modules_tooltip_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this), 'a', jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('title'));
-  });
+  addTooltipToFavoriteIcons();
   // Get real row count via Ajax.
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.real_row_count').on('click', function (event) {
     event.preventDefault();
@@ -297,7 +297,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(36); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(35); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[50],{
+(self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[49],{
 
-/***/ 92:
+/***/ 90:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(30);
+/* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(29);
 
 
 
@@ -148,7 +148,7 @@ module.exports = jQuery;
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, [39], function() { return __webpack_exec__(92); });
+/******/ __webpack_require__.O(0, [38], function() { return __webpack_exec__(90); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
