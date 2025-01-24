@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\ColumnFull;
+use PhpMyAdmin\Column;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Core;
@@ -85,7 +85,7 @@ class InsertEditTest extends AbstractTestCase
         $config->settings['CharTextareaRows'] = 5;
         $config->settings['CharTextareaCols'] = 6;
         $config->settings['AllowThirdPartyFraming'] = false;
-        $config->settings['SendErrorReports'] = 'ask';
+        $config->set('SendErrorReports', 'ask');
         $config->settings['DefaultTabDatabase'] = '/database/structure';
         $config->settings['ShowDatabasesNavigationAsTree'] = true;
         $config->settings['DefaultTabTable'] = '/sql';
@@ -655,8 +655,6 @@ class InsertEditTest extends AbstractTestCase
      */
     public function testGetMaxUploadSize(): void
     {
-        $config = Config::getInstance();
-        $config->set('max_upload_size', 257);
         $type = 'tinyblob';
         $result = $this->callFunction(
             $this->insertEdit,
@@ -668,8 +666,8 @@ class InsertEditTest extends AbstractTestCase
         self::assertSame("(Max: 256B)\n", $result);
 
         // case 2
-        $config->set('max_upload_size', 250);
-        $type = 'tinyblob';
+        // this should stub Util::getUploadSizeInBytes() but it's not possible
+        $type = 'blob';
         $result = $this->callFunction(
             $this->insertEdit,
             InsertEdit::class,
@@ -677,7 +675,7 @@ class InsertEditTest extends AbstractTestCase
             [$type],
         );
 
-        self::assertSame("(Max: 250B)\n", $result);
+        self::assertSame("(Max: 64KiB)\n", $result);
     }
 
     /**
@@ -2267,8 +2265,8 @@ class InsertEditTest extends AbstractTestCase
             ->with('db');
 
         $columns = [
-            new ColumnFull('b', 'd', null, false, '', null, '', '', ''),
-            new ColumnFull('f', 'h', null, true, '', null, '', '', ''),
+            new Column('b', 'd', null, false, '', null, '', '', ''),
+            new Column('f', 'h', null, true, '', null, '', '', ''),
         ];
 
         $dbi->expects(self::once())
@@ -2290,8 +2288,8 @@ class InsertEditTest extends AbstractTestCase
 
         self::assertEquals(
             [
-                new ColumnFull('b', 'd', null, false, '', null, '', '', ''),
-                new ColumnFull('f', 'h', null, true, '', null, '', '', ''),
+                new Column('b', 'd', null, false, '', null, '', '', ''),
+                new Column('f', 'h', null, true, '', null, '', '', ''),
             ],
             $result,
         );
@@ -2377,8 +2375,8 @@ class InsertEditTest extends AbstractTestCase
 
         $dbi->expects(self::once())
             ->method('getColumns')
-            ->with('db', 'table', true)
-            ->willReturn([new ColumnFull('d', 'd', null, false, '', null, '', '', 'b')]);
+            ->with('db', 'table')
+            ->willReturn([new Column('d', 'd', null, false, '', null, '', '', 'b')]);
 
         $dbi->expects(self::any())
             ->method('getTable')
@@ -2435,7 +2433,7 @@ class InsertEditTest extends AbstractTestCase
         $_SESSION[' HMAC_secret '] = hash('sha1', 'test');
         InsertEdit::$pluginScripts = [];
         $foreigners = ['foreign_keys_data' => []];
-        $tableColumn = new ColumnFull('col', 'varchar(20)', null, true, '', null, '', 'insert,update,select', '');
+        $tableColumn = new Column('col', 'varchar(20)', null, true, '', null, '', 'insert,update,select', '');
         $repopulate = [md5('col') => 'val'];
         $columnMime = [
             'input_transformation' => 'Input/Image_JPEG_Upload.php',
@@ -2485,7 +2483,7 @@ class InsertEditTest extends AbstractTestCase
         );
 
         // Test w/o input_transformation
-        $tableColumn = new ColumnFull('qwerty', 'datetime', null, true, '', null, '', 'insert,update,select', '');
+        $tableColumn = new Column('qwerty', 'datetime', null, true, '', null, '', 'insert,update,select', '');
         $repopulate = [md5('qwerty') => '12-10-14'];
         $actual = $this->callFunction(
             $this->insertEdit,
@@ -2574,7 +2572,7 @@ class InsertEditTest extends AbstractTestCase
         $config->settings['TextareaCols'] = 11;
         $foreigners = ['foreign_keys_data' => []];
         $tableColumns = [
-            new ColumnFull('test', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
+            new Column('test', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
         ];
 
         $actual = $this->insertEdit->getHtmlForInsertEditRow(
@@ -2617,8 +2615,8 @@ class InsertEditTest extends AbstractTestCase
 
         // edit
         $tableColumns = [
-            new ColumnFull('foo', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
-            new ColumnFull('bar', 'longtext', null, true, '', null, '', 'select,insert,references', ''),
+            new Column('foo', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
+            new Column('bar', 'longtext', null, true, '', null, '', 'select,insert,references', ''),
         ];
 
         $fieldMetadata = [
@@ -2647,9 +2645,9 @@ class InsertEditTest extends AbstractTestCase
 
         // insert
         $tableColumns = [
-            new ColumnFull('foo', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
-            new ColumnFull('bar', 'longtext', null, true, '', null, '', 'select,update,references', ''),
-            new ColumnFull('point', 'point', null, false, '', null, '', 'select,update,references', ''),
+            new Column('foo', 'longtext', null, true, '', null, '', 'select,insert,update,references', ''),
+            new Column('bar', 'longtext', null, true, '', null, '', 'select,update,references', ''),
+            new Column('point', 'point', null, false, '', null, '', 'select,update,references', ''),
         ];
         $actual = $this->insertEdit->getHtmlForInsertEditRow(
             [],

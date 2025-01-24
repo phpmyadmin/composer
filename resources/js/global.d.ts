@@ -10,6 +10,7 @@ interface Window {
     msCrypto: any;
     u2f: any;
     variableNames: string[];
+    bootstrap: typeof bootstrap;
 
     sprintf(format: string, ...values: (string|number)[]): string;
 }
@@ -22,19 +23,6 @@ interface JQuery {
     menuResizer: (method: string|Function) => any;
 
     filterByValue: (value: any) => any;
-
-    uiTooltip(): JQuery;
-    uiTooltip(methodName: 'destroy'): void;
-    uiTooltip(methodName: 'disable'): void;
-    uiTooltip(methodName: 'enable'): void;
-    uiTooltip(methodName: 'open'): void;
-    uiTooltip(methodName: 'close'): void;
-    uiTooltip(methodName: 'widget'): JQuery;
-    uiTooltip(methodName: string): JQuery;
-    uiTooltip(options: JQueryUI.TooltipOptions): JQuery;
-    uiTooltip(optionLiteral: string, optionName: string): any;
-    uiTooltip(optionLiteral: string, options: JQueryUI.TooltipOptions): any;
-    uiTooltip(optionLiteral: string, optionName: string, optionValue: any): JQuery;
 
     tablesorter: any;
 }

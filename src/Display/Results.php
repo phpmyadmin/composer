@@ -2084,8 +2084,6 @@ class Results
 
         $rowInfo = $this->getRowInfoForSpecialLinks($row);
 
-        // Load SpecialSchemaLinks for all rows
-        $specialSchemaLinks = SpecialSchemaLinks::get();
         $relationParameters = $this->relation->getRelationParameters();
 
         $columnCount = count($this->fieldsMeta);
@@ -2169,18 +2167,17 @@ class Results
                     . '_' . $this->transformationInfo[$dbLower][$orgTable][$orgName]::getMIMESubtype();
             }
 
-            // Check for the predefined fields need to show as link in schemas
-            if (isset($specialSchemaLinks[$dbLower][$tblLower][$nameLower])) {
-                $linkingUrl = $this->getSpecialLinkUrl(
-                    $specialSchemaLinks[$dbLower][$tblLower][$nameLower],
-                    $row[$i],
-                    $rowInfo,
-                );
-                $transformationPlugin = new Text_Plain_Link();
+            if ($dbLower === 'mysql' || $dbLower === 'information_schema') {
+                // Check for the predefined fields need to show as link in schemas
+                $specialSchemaLink = SpecialSchemaLinks::get($dbLower, $tblLower, $nameLower);
+                if ($specialSchemaLink !== null) {
+                    $linkingUrl = $this->getSpecialLinkUrl($specialSchemaLink, $row[$i], $rowInfo);
+                    $transformationPlugin = new Text_Plain_Link();
 
-                $transformOptions = [0 => $linkingUrl, 2 => true];
+                    $transformOptions = [0 => $linkingUrl, 2 => true];
 
-                $meta->internalMediaType = 'Text_Plain';
+                    $meta->internalMediaType = 'Text_Plain';
+                }
             }
 
             $expressions = [];
@@ -2711,11 +2708,7 @@ class Results
 
             // Convert to WKT format
             $wktval = Gis::convertToWellKnownText($column);
-            [
-                $isFieldTruncated,
-                $displayedColumn,
-                // skip 3rd param
-            ] = $this->getPartialText($wktval);
+            $displayedColumn = $this->getPartialText($wktval);
 
             return $this->getRowData(
                 $class,
@@ -2729,7 +2722,7 @@ class Results
                 '',
                 $whereComparison,
                 $transformOptions,
-                $isFieldTruncated,
+                $displayedColumn !== $wktval,
             );
         }
 
@@ -2739,11 +2732,7 @@ class Results
             $whereComparison = ' = ' . $column;
 
             $wkbval = substr(bin2hex($column), 8);
-            [
-                $isFieldTruncated,
-                $displayedColumn,
-                // skip 3rd param
-            ] = $this->getPartialText($wkbval);
+            $displayedColumn = $this->getPartialText($wkbval);
 
             return $this->getRowData(
                 $class,
@@ -2757,7 +2746,7 @@ class Results
                 '',
                 $whereComparison,
                 $transformOptions,
-                $isFieldTruncated,
+                $displayedColumn !== $wkbval,
             );
         }
 
@@ -2799,8 +2788,6 @@ class Results
         array $transformOptions,
         StatementInfo $statementInfo,
     ): string {
-        $originalLength = 0;
-
         $bIsText = $transformationPlugin !== null && ! str_contains($transformationPlugin::getMIMEType(), 'Text');
 
         // disable inline grid editing
@@ -2831,15 +2818,17 @@ class Results
 
         // Cut all fields to \PhpMyAdmin\Config::getInstance()->settings['LimitChars']
         // (unless it's a link-type transformation or binary)
+        $originalLength = 0;
         $originalDataForWhereClause = $column;
         $displayedColumn = $column;
         $isFieldTruncated = false;
         if (
-            ! ($transformationPlugin !== null
-            && str_contains($transformationPlugin::getName(), 'Link'))
+            ! ($transformationPlugin !== null && str_contains($transformationPlugin::getName(), 'Link'))
             && ! $meta->isBinary()
         ) {
-            [$isFieldTruncated, $column, $originalLength] = $this->getPartialText($column);
+            $originalLength = mb_strlen($displayedColumn);
+            $column = $this->getPartialText($displayedColumn);
+            $isFieldTruncated = $column !== $displayedColumn;
         }
 
         if ($meta->isMappedTypeBit) {
@@ -3702,11 +3691,9 @@ class Results
                 $result = '0x' . bin2hex($content);
             }
 
-            [
-                $isTruncated,
-                $result,
-                // skip 3rd param
-            ] = $this->getPartialText($result);
+            $preTruncation = $result;
+            $result = $this->getPartialText($result);
+            $isTruncated = $result !== $preTruncation;
         }
 
         /* Create link to download */
@@ -3752,9 +3739,7 @@ class Results
         }
 
         // Truncate values that are too long, see: #17902
-        [, $dispval] = $this->getPartialText($dispval);
-
-        return $dispval;
+        return $this->getPartialText($dispval);
     }
 
     /**
@@ -3908,23 +3893,16 @@ class Results
      * @see handleNonPrintableContents(), getDataCellForGeometryColumns(), getDataCellForNonNumericColumns
      *
      * @param string $str string to be truncated
-     *
-     * @return mixed[]
-     * @psalm-return array{bool, string, int}
      */
-    private function getPartialText(string $str): array
+    private function getPartialText(string $str): string
     {
-        $originalLength = mb_strlen($str);
         if (
-            $originalLength > $this->config->settings['LimitChars']
+            mb_strlen($str) > $this->config->settings['LimitChars']
             && $_SESSION['tmpval']['pftext'] === self::DISPLAY_PARTIAL_TEXT
         ) {
-            $str = mb_substr($str, 0, $this->config->settings['LimitChars']) . '...';
-            $truncated = true;
-        } else {
-            $truncated = false;
+            return mb_substr($str, 0, $this->config->settings['LimitChars']) . '...';
         }
 
-        return [$truncated, $str, $originalLength];
+        return $str;
     }
 }

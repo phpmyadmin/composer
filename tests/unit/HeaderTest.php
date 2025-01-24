@@ -71,9 +71,9 @@ class HeaderTest extends AbstractTestCase
         Current::$message = null;
         $config = Config::getInstance();
         $config->settings['CodemirrorEnable'] = false;
-        $config->settings['SendErrorReports'] = 'never';
+        $config->set('SendErrorReports', 'never');
         $config->settings['enable_drag_drop_import'] = false;
-        $config->settings['DisableShortcutKeys'] = true;
+        $config->set('DisableShortcutKeys', true);
         $dbi = $this->createDatabaseInterface();
         DatabaseInterface::$instance = $dbi;
         $relation = new Relation($dbi);
@@ -278,7 +278,6 @@ class HeaderTest extends AbstractTestCase
             ['name' => 'vendor/jquery/jquery-migrate.min.js', 'fire' => 0],
             ['name' => 'vendor/sprintf.js', 'fire' => 0],
             ['name' => 'vendor/jquery/jquery-ui.min.js', 'fire' => 0],
-            ['name' => 'name-conflict-fixes.js', 'fire' => 0],
             ['name' => 'vendor/bootstrap/bootstrap.bundle.min.js', 'fire' => 0],
             ['name' => 'vendor/js.cookie.min.js', 'fire' => 0],
             ['name' => 'vendor/jquery/jquery.validate.min.js', 'fire' => 0],
