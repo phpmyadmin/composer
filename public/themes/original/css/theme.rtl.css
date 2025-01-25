@@ -14563,7 +14563,7 @@ textarea#sqlquery {
   font-weight: bold;
 }
 .breadcrumb-navbar .breadcrumb-comment {
-  color: #d6d6d6;
+  color: var(--bs-gray);
   font-weight: bold;
   font-style: italic;
   text-shadow: none;
