@@ -603,7 +603,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('sql.js', func
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('makeGrid', '.sqlqueryresults', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.table_results').each(function () {
-      window.makeGrid(this);
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('td.grid_edit').length > 0) {
+        window.makeGrid(this);
+      }
     });
   });
   /**
