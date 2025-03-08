@@ -352,7 +352,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
           // loop through the correct order
           for (var i in data.columns) {
             var theColumn = data.columns[i];
-            var $theRow = $rows.find('input:checkbox[value=\'' + theColumn + '\']').closest('tr');
+            var $theRow = $rows.find('input:checkbox[value="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeJsString)(theColumn) + '"]').closest('tr');
             // append the row for this column to the table
             $fieldsTable.append($theRow);
           }
