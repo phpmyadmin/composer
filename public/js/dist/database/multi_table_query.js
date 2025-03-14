@@ -42,6 +42,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/mu
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).off('change');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#update_query_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#copy_query').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_column_button').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.add-option');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.remove-option');
@@ -166,6 +167,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#slide-handle').trigger('click'); // Collapse search criteria area
       }
     });
+  });
+  editor.getDoc().on('change', function () {
+    const query = editor.getDoc().getValue();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#copy_query').prop('disabled', query === '');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#copy_query').on('click', function () {
+    const query = editor.getDoc().getValue();
+    const copyStatus = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.copyToClipboard)(query, '<textarea>');
+    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.displayCopyNotification)(copyStatus);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_column_button').on('click', function () {
     columnCount++;

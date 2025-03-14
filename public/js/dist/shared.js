@@ -3949,6 +3949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   confirmQuery: function() { return /* binding */ confirmQuery; },
 /* harmony export */   copyToClipboard: function() { return /* binding */ copyToClipboard; },
 /* harmony export */   dismissNotifications: function() { return /* binding */ dismissNotifications; },
+/* harmony export */   displayCopyNotification: function() { return /* binding */ displayCopyNotification; },
 /* harmony export */   displayCopyStatus: function() { return /* binding */ displayCopyStatus; },
 /* harmony export */   displayPasswordGenerateButton: function() { return /* binding */ displayPasswordGenerateButton; },
 /* harmony export */   emptyCheckTheField: function() { return /* binding */ emptyCheckTheField; },
@@ -5319,6 +5320,18 @@ function displayCopyStatus(copyButton, copyStatus) {
   setTimeout(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#copyStatus').remove();
   }, 2000);
+}
+/**
+ * Displaying notification of copy to clipboard action.
+ *
+ * @param {boolean} copyStatus status of copyToClipboard
+ */
+function displayCopyNotification(copyStatus) {
+  if (copyStatus) {
+    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyQueryButtonSuccess, 1000, 'success');
+  } else {
+    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyQueryButtonFailure, 1000, 'error');
+  }
 }
 /**
  * @return {function}
