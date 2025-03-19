@@ -1,31 +1,315 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[12],{
 
-/***/ 40:
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
+/***/ 37:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DesignerConfig: function() { return /* binding */ DesignerConfig; }
-/* harmony export */ });
-const DesignerConfig = {
-  /** @type {any[]} */
-  jTabs: [],
-  /** @type {any[]} */
-  hTabs: [],
-  /** @type {any[]} */
-  contr: [],
-  /** @type {any[]} */
-  displayField: [],
-  /** @type {number} */
-  server: 0,
-  /** @type {number} */
-  selectedPage: -1,
-  /** @type {string} */
-  db: '',
-  /** @type {boolean} */
-  designerTablesEnabled: false
-};
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var _database_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38);
+/* harmony import */ var _history_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39);
+/* harmony import */ var _move_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(41);
+/* harmony import */ var _page_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43);
+/* harmony import */ var _config_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(40);
+
+
+
+
+
+
+
+/**
+ * Initializes the data required to run Designer, then fires it up.
+ */
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
+  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.vqbEditor = null;
+  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.historyArray = [];
+  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.selectField = [];
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_rename').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_having').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_Aggr').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_where').off('click');
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_rename').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Rename');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_having').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Having');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_Aggr').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Aggregate');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_where').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Where');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion({
+    collapsible: true,
+    active: 'none'
+  });
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('fullscreenchange');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').show();
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
+  var $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+  var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
+  var $span = $img.siblings('span');
+  $content.css({
+    'margin-left': '3px'
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('fullscreenchange', function () {
+    if (!document.fullscreenElement) {
+      $content.removeClass('content_fullscreen').css({
+        'width': 'auto',
+        'height': 'auto'
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#osn_tab').css({
+        'width': 'auto',
+        'height': 'auto'
+      });
+      $img.attr('src', $img.data('enter')).attr('title', $span.data('enter'));
+      $span.text($span.data('enter'));
+      // Saving the fullscreen state in config when
+      // designer exists fullscreen mode via ESC key
+      var valueSent = 'off';
+      _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.saveValueInConfig('full_screen', valueSent);
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').hide();
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').off('mouseenter mouseleave');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Show_left_menu').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newPage').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#editPage').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePos').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SaveAs').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delPages').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rel_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#display_field_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#reloadPage').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#angular_direct_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#grid_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SmallTabInvert').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPages').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_builder').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pin_Text').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#canvas').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS_all').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.scroll_tab_struct').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.scroll_tab_checkbox').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_scroll_tab').find('tr').off('click', '.designer_Tabs2,.designer_Tabs');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.select_all_1');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab,.small_tab2');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab_pref_1');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_noquery').off('mouseover');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_noquery').off('mouseout');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_query').off('mouseover');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_query').off('mouseout');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.tab_field_2,.tab_field_3,.tab_field');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.select_all_store_col');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab_pref_click_opt');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#del_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_button').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_close_option').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_new_rel_panel').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_new_rel_panel').off('click');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mouseup');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousedown');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousemove');
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Show_left_menu').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.showLeftMenu(this);
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.toggleFullscreen();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addOtherDbTables').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addOtherDbTables();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newPage').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.new();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#editPage').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.editPages();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePos').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.save3();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SaveAs').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.saveAs();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxStop', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selected_value').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePageNewRadio').prop('checked', true);
+      });
+    });
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delPages').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.deletePages();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startTableNew();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rel_button').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startRelation();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#display_field_button').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startDisplayField();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#reloadPage').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.loadPage(_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage);
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#angular_direct_button').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.angularDirect();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#grid_button').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.grid();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.smallTabAll(this);
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SmallTabInvert').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.smallTabInvert();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.relationLinesInvert();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPages').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.exportPages();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_builder').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.buildQuery();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.sideMenuRight(this);
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').on('mouseenter', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.showText();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').on('mouseleave', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.hideText();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pin_Text').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.pinText();
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#canvas').on('click', function (event) {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.canvasClick(this, event);
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS_all').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.hideTabAll(this);
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.noHaveConstr(this);
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').each(_move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.enableTableEvents);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').each(_move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addTableToTablesList);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#del_button').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.updRelation();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_button').on('click', function () {
+    document.getElementById('layer_upd_relation').style.display = 'none';
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.reload();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#ok_add_object').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addObject(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_db_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_table_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_col_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_db_and_table_name_url').val());
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_close_option').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.closeOption();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#ok_new_rel_panel').on('click', function () {
+    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.newRelation();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_new_rel_panel').on('click', function () {
+    document.getElementById('layer_new_relation').style.display = 'none';
+  });
+  _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.enablePageContentEvents();
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.trigger').off('click');
+});
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.trigger').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.panel').toggle('fast');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).toggleClass('active');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
+    return false;
+  });
+  const configValues = window.designerConfig;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.jTabs = configValues.scriptTables.j_tabs;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.hTabs = configValues.scriptTables.h_tabs;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.contr = configValues.scriptContr;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.displayField = configValues.scriptDisplayField;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.server = configValues.server;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage = configValues.displayPage;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db = configValues.db;
+  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled = configValues.tablesEnabled;
+  _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.main();
+  if (!_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled) {
+    _database_ts__WEBPACK_IMPORTED_MODULE_2__.DesignerOfflineDB.open(function (success) {
+      if (success) {
+        _page_ts__WEBPACK_IMPORTED_MODULE_5__.DesignerPage.showTablesInLandingPage(_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db);
+      }
+    });
+  }
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_Aggregate_Button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_Aggregate').css('display', 'none');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_having_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_having').css('display', 'none');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_rename_to_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_rename_to').css('display', 'none');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#build_query_button').on('click', function () {
+    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.buildQuery();
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_where_button').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_where').css('display', 'none');
+  });
+});
 
 /***/ }),
 
@@ -1048,308 +1332,31 @@ window.DesignerHistory = DesignerHistory;
 
 /***/ }),
 
-/***/ 37:
+/***/ 40:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _database_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38);
-/* harmony import */ var _history_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39);
-/* harmony import */ var _move_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(41);
-/* harmony import */ var _page_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43);
-/* harmony import */ var _config_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(40);
-
-
-
-
-
-
-
-/**
- * Initializes the data required to run Designer, then fires it up.
- */
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
-  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.vqbEditor = null;
-  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.historyArray = [];
-  _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.selectField = [];
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_rename').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_having').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_Aggr').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_where').off('click');
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_rename').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Rename');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_having').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Having');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_Aggr').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Aggregate');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_edit_where').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.edit('Where');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion({
-    collapsible: true,
-    active: 'none'
-  });
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('fullscreenchange');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').show();
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
-  var $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
-  var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
-  var $span = $img.siblings('span');
-  $content.css({
-    'margin-left': '3px'
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('fullscreenchange', function () {
-    if (!document.fullscreenElement) {
-      $content.removeClass('content_fullscreen').css({
-        'width': 'auto',
-        'height': 'auto'
-      });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#osn_tab').css({
-        'width': 'auto',
-        'height': 'auto'
-      });
-      $img.attr('src', $img.data('enter')).attr('title', $span.data('enter'));
-      $span.text($span.data('enter'));
-      // Saving the fullscreen state in config when
-      // designer exists fullscreen mode via ESC key
-      var valueSent = 'off';
-      _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.saveValueInConfig('full_screen', valueSent);
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').hide();
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').off('mouseenter mouseleave');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Show_left_menu').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newPage').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#editPage').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePos').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SaveAs').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delPages').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rel_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#display_field_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#reloadPage').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#angular_direct_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#grid_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SmallTabInvert').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPages').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_builder').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pin_Text').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#canvas').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS_all').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.scroll_tab_struct').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.scroll_tab_checkbox').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_scroll_tab').find('tr').off('click', '.designer_Tabs2,.designer_Tabs');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.select_all_1');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab,.small_tab2');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab_pref_1');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_noquery').off('mouseover');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_noquery').off('mouseout');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_query').off('mouseover');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tab_zag_query').off('mouseout');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.tab_field_2,.tab_field_3,.tab_field');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.select_all_store_col');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').off('click', '.small_tab_pref_click_opt');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#del_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_button').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_close_option').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_new_rel_panel').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cancel_new_rel_panel').off('click');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mouseup');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousedown');
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousemove');
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Show_left_menu').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.showLeftMenu(this);
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.toggleFullscreen();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addOtherDbTables').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addOtherDbTables();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newPage').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.new();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#editPage').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.editPages();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePos').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.save3();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SaveAs').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.saveAs();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxStop', function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selected_value').on('click', function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#savePageNewRadio').prop('checked', true);
-      });
-    });
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delPages').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.deletePages();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#StartTableNew').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startTableNew();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rel_button').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startRelation();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#display_field_button').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.startDisplayField();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#reloadPage').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.loadPage(_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage);
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#angular_direct_button').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.angularDirect();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#grid_button').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.grid();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.smallTabAll(this);
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#SmallTabInvert').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.smallTabInvert();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.relationLinesInvert();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPages').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.exportPages();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_builder').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.buildQuery();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.sideMenuRight(this);
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').on('mouseenter', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.showText();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').on('mouseleave', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.hideText();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pin_Text').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.pinText();
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#canvas').on('click', function (event) {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.canvasClick(this, event);
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS_all').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.hideTabAll(this);
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_HS').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.noHaveConstr(this);
-    return false;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').each(_move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.enableTableEvents);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab').each(_move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addTableToTablesList);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#del_button').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.updRelation();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_button').on('click', function () {
-    document.getElementById('layer_upd_relation').style.display = 'none';
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.reload();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#ok_add_object').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.addObject(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_db_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_table_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_col_name').val(), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ok_add_object_db_and_table_name_url').val());
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_close_option').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.closeOption();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#ok_new_rel_panel').on('click', function () {
-    _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.newRelation();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#cancel_new_rel_panel').on('click', function () {
-    document.getElementById('layer_new_relation').style.display = 'none';
-  });
-  _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.enablePageContentEvents();
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.trigger').off('click');
-});
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.trigger').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.panel').toggle('fast');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).toggleClass('active');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
-    return false;
-  });
-  const configValues = window.designerConfig;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.jTabs = configValues.scriptTables.j_tabs;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.hTabs = configValues.scriptTables.h_tabs;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.contr = configValues.scriptContr;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.displayField = configValues.scriptDisplayField;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.server = configValues.server;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.selectedPage = configValues.displayPage;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db = configValues.db;
-  _config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled = configValues.tablesEnabled;
-  _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.main();
-  if (!_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.designerTablesEnabled) {
-    _database_ts__WEBPACK_IMPORTED_MODULE_2__.DesignerOfflineDB.open(function (success) {
-      if (success) {
-        _page_ts__WEBPACK_IMPORTED_MODULE_5__.DesignerPage.showTablesInLandingPage(_config_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerConfig.db);
-      }
-    });
-  }
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_Aggregate_Button').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_Aggregate').css('display', 'none');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_having_button').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_having').css('display', 'none');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_rename_to_button').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_rename_to').css('display', 'none');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#build_query_button').on('click', function () {
-    _history_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerHistory.buildQuery();
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_where_button').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#query_where').css('display', 'none');
-  });
-});
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DesignerConfig: function() { return /* binding */ DesignerConfig; }
+/* harmony export */ });
+const DesignerConfig = {
+  /** @type {any[]} */
+  jTabs: [],
+  /** @type {any[]} */
+  hTabs: [],
+  /** @type {any[]} */
+  contr: [],
+  /** @type {any[]} */
+  displayField: [],
+  /** @type {number} */
+  server: 0,
+  /** @type {number} */
+  selectedPage: -1,
+  /** @type {string} */
+  db: '',
+  /** @type {boolean} */
+  designerTablesEnabled: false
+};
 
 /***/ }),
 
@@ -3389,13 +3396,6 @@ const DesignerPage = {
   getRandom: getRandom
 };
 
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

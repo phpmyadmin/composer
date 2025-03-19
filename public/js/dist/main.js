@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[21],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 54:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -64,200 +71,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', () 
   const themeColorModeToggle = document.getElementById('themeColorModeToggle');
   themeColorModeToggle === null || themeColorModeToggle === void 0 || themeColorModeToggle.addEventListener('change', _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_11__.ThemeColorModeToggle);
 });
-
-/***/ }),
-
-/***/ 57:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   crossFramingProtection: function() { return /* binding */ crossFramingProtection; }
-/* harmony export */ });
-/**
- * Conditionally included if framing is not allowed.
- */
-const crossFramingProtection = () => {
-  if (window.allowThirdPartyFraming) {
-    return;
-  }
-  if (window.self !== window.top) {
-    window.top.location = window.self.location;
-    return;
-  }
-  const styleElement = document.getElementById('cfs-style');
-  // check if styleElement has already been removed to avoid frequently reported js error
-  if (typeof styleElement === 'undefined' || styleElement === null) {
-    return;
-  }
-  styleElement.parentNode.removeChild(styleElement);
-};
-
-
-/***/ }),
-
-/***/ 61:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   onloadFunctions: function() { return /* binding */ onloadFunctions; },
-/* harmony export */   teardownFunctions: function() { return /* binding */ teardownFunctions; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
-/* harmony import */ var _handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(60);
-
-
-
-/**
- * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
- */
-const PrintPage = {
-  handleEvent: () => {
-    window.print();
-  }
-};
-/**
- * @return {function}
- */
-function teardownFunctions() {
-  return function () {
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownIdleEvent)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'input:checkbox.checkall');
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownSqlQueryEditEvents)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.removeAutocompleteInfo)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCreateTableEvents)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownEnumSetEditorMessage)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownEnumSetEditor)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', '#index_frm input[type=submit]');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.toggle-container').off('click');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', 'select.pageselector');
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownRecentFavoriteTables)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCodeMirrorEditor)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', '.autosubmit');
-    document.querySelectorAll('.jsPrintButton').forEach(item => {
-      item.removeEventListener('click', PrintPage);
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'a.create_view.ajax');
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCreateView)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('keydown', 'form input, form textarea, form select');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', 'input[type=radio][name="pw_hash"]');
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownSortLinkMouseEvent)();
-  };
-}
-/**
- * @return {function}
- */
-function onloadFunctions() {
-  return function () {
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadIdleEvent)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input:checkbox.checkall', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllCheckboxEventHandler)());
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.addDateTimePicker)();
-    /**
-     * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
-     */
-    if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
-    }
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSqlQueryEditEvents)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCreateTableEvents)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadChangePasswordEvents)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadEnumSetEditorMessage)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadEnumSetEditor)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#index_frm input[type=submit]', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getAddIndexEventHandler)());
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.showHints)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.initializeToggleButtons)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'select.pageselector', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getPageSelectorEventHandler)());
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadRecentFavoriteTables)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCodeMirrorEditor)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadLockPage)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '.autosubmit', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getAutoSubmitEventHandler)());
-    document.querySelectorAll('.jsPrintButton').forEach(item => {
-      item.addEventListener('click', PrintPage);
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.create_view.ajax', function (e) {
-      e.preventDefault();
-      (0,_handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
-    });
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCreateView)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesSel, _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesChanged);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input.checkall_box', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllBoxEventHandler)());
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.checkall-filter', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllFilterEventHandler)());
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesSel + ', input.checkall_box:checkbox:enabled', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.subCheckboxesChanged);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input.sub_checkall_box', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getSubCheckAllBoxEventHandler)());
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('keyup', '#filterText', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getFilterTextEventHandler)());
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadFilterText)();
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadLoginForm)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('form input, form textarea, form select').on('keydown', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getKeyboardFormSubmitEventHandler)());
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'select#select_authentication_plugin_cp', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getSslPasswordEventHandler)());
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSortLinkMouseEvent)();
-  };
-}
-
-/***/ }),
-
-/***/ 60:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ handleCreateViewModal; }
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
-/* harmony import */ var _navigation_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
-/* harmony import */ var _getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(29);
-
-
-
-
-
-
-/**
- * @param {JQuery<HTMLElement>} $this
- */
-function handleCreateViewModal($this) {
-  var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
-  var sep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  var params = (0,_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
-  params += sep + 'ajax_dialog=1';
-  jquery__WEBPACK_IMPORTED_MODULE_0___default().post($this.attr('href'), params, function (data) {
-    if (typeof data !== 'undefined' && data.success === true) {
-      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModalGoButton').on('click', function () {
-        if (typeof window.CodeMirror !== 'undefined') {
-          window.codeMirrorEditor.save();
-        }
-        $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/view/create', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('form').serialize(), function (data) {
-          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
-          if (typeof data !== 'undefined' && data.success === true) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').modal('hide');
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('.result_query').html(data.message);
-            _navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
-          } else {
-            (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
-          }
-        });
-      });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('.modal-body').first().html(data.message);
-      // Attach syntax highlighted editor
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').on('shown.bs.modal', function () {
-        window.codeMirrorEditor = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('textarea'));
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('input:visible[type=text]', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal')).first().trigger('focus');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').off('shown.bs.modal');
-      });
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').modal('show');
-    } else {
-      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
-    }
-  });
-}
 
 /***/ }),
 
@@ -372,6 +185,98 @@ const KeyHandlerEvents = {
       });
     };
   }
+};
+
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PageSettings: function() { return /* binding */ PageSettings; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+function createPageSettingsModal() {
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').length > 0) {
+    return;
+  }
+  const pageSettingsModalTemplate = '<div class="modal fade" id="pageSettingsModal" tabindex="-1" aria-labelledby="pageSettingsModalLabel" aria-hidden="true">' + '  <div class="modal-dialog modal-lg" id="pageSettingsModalDialog">' + '    <div class="modal-content">' + '      <div class="modal-header">' + '        <h5 class="modal-title" id="pageSettingsModalLabel">' + window.Messages.strPageSettings + '</h5>' + '        <button type="button" class="btn-close" id="pageSettingsModalCloseButton" aria-label="' + window.Messages.strClose + '"></button>' + '      </div>' + '      <div class="modal-body"></div>' + '      <div class="modal-footer">' + '        <button type="button" class="btn btn-secondary" id="pageSettingsModalApplyButton">' + window.Messages.strApply + '</button>' + '        <button type="button" class="btn btn-secondary" id="pageSettingsModalCancelButton">' + window.Messages.strCancel + '</button>' + '      </div>' + '    </div>' + '  </div>' + '</div>';
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(pageSettingsModalTemplate).appendTo('body');
+}
+/**
+ * @fileoverview    function used for page-related settings
+ * @name            Page-related settings
+ *
+ * @requires    jQueryUI
+ */
+function showSettings(selector) {
+  createPageSettingsModal();
+  // Keeping a clone to restore in case the user cancels the operation
+  var $clone = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').clone(true);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModalApplyButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.config-form').trigger('submit');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModalCloseButton,#pageSettingsModalCancelButton').on('click', function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').replaceWith($clone);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').modal('hide');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').modal('show');
+  // @ts-ignore
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').find('.modal-body').first().html(jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector));
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).css('display', 'block');
+}
+function showPageSettings() {
+  showSettings('#page_settings_modal');
+}
+function showNaviSettings() {
+  showSettings('#pma_navigation_settings');
+}
+const PageSettings = {
+  off: () => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').css('display', 'none');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings_icon').off('click');
+  },
+  on: () => {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_modal').length) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').css('display', 'inline');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').on('click', showPageSettings);
+    }
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings_icon').on('click', showNaviSettings);
+  }
+};
+
+
+/***/ }),
+
+/***/ 57:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   crossFramingProtection: function() { return /* binding */ crossFramingProtection; }
+/* harmony export */ });
+/**
+ * Conditionally included if framing is not allowed.
+ */
+const crossFramingProtection = () => {
+  if (window.allowThirdPartyFraming) {
+    return;
+  }
+  if (window.self !== window.top) {
+    window.top.location = window.self.location;
+    return;
+  }
+  const styleElement = document.getElementById('cfs-style');
+  // check if styleElement has already been removed to avoid frequently reported js error
+  if (typeof styleElement === 'undefined' || styleElement === null) {
+    return;
+  }
+  styleElement.parentNode.removeChild(styleElement);
 };
 
 
@@ -672,73 +577,168 @@ function onloadNavigation() {
 
 /***/ }),
 
-/***/ 56:
+/***/ 60:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PageSettings: function() { return /* binding */ PageSettings; }
+/* harmony export */   "default": function() { return /* binding */ handleCreateViewModal; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+/* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
+/* harmony import */ var _navigation_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+/* harmony import */ var _getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(29);
 
-function createPageSettingsModal() {
-  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').length > 0) {
-    return;
-  }
-  const pageSettingsModalTemplate = '<div class="modal fade" id="pageSettingsModal" tabindex="-1" aria-labelledby="pageSettingsModalLabel" aria-hidden="true">' + '  <div class="modal-dialog modal-lg" id="pageSettingsModalDialog">' + '    <div class="modal-content">' + '      <div class="modal-header">' + '        <h5 class="modal-title" id="pageSettingsModalLabel">' + window.Messages.strPageSettings + '</h5>' + '        <button type="button" class="btn-close" id="pageSettingsModalCloseButton" aria-label="' + window.Messages.strClose + '"></button>' + '      </div>' + '      <div class="modal-body"></div>' + '      <div class="modal-footer">' + '        <button type="button" class="btn btn-secondary" id="pageSettingsModalApplyButton">' + window.Messages.strApply + '</button>' + '        <button type="button" class="btn btn-secondary" id="pageSettingsModalCancelButton">' + window.Messages.strCancel + '</button>' + '      </div>' + '    </div>' + '  </div>' + '</div>';
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(pageSettingsModalTemplate).appendTo('body');
-}
+
+
+
+
+
 /**
- * @fileoverview    function used for page-related settings
- * @name            Page-related settings
- *
- * @requires    jQueryUI
+ * @param {JQuery<HTMLElement>} $this
  */
-function showSettings(selector) {
-  createPageSettingsModal();
-  // Keeping a clone to restore in case the user cancels the operation
-  var $clone = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').clone(true);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModalApplyButton').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.config-form').trigger('submit');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModalCloseButton,#pageSettingsModalCancelButton').on('click', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').replaceWith($clone);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').modal('hide');
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').modal('show');
-  // @ts-ignore
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModal').find('.modal-body').first().html(jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector));
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).css('display', 'block');
-}
-function showPageSettings() {
-  showSettings('#page_settings_modal');
-}
-function showNaviSettings() {
-  showSettings('#pma_navigation_settings');
-}
-const PageSettings = {
-  off: () => {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').css('display', 'none');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').off('click');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings_icon').off('click');
-  },
-  on: () => {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_modal').length) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').css('display', 'inline');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_settings_icon').on('click', showPageSettings);
+function handleCreateViewModal($this) {
+  var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
+  var sep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  var params = (0,_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
+  params += sep + 'ajax_dialog=1';
+  jquery__WEBPACK_IMPORTED_MODULE_0___default().post($this.attr('href'), params, function (data) {
+    if (typeof data !== 'undefined' && data.success === true) {
+      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModalGoButton').on('click', function () {
+        if (typeof window.CodeMirror !== 'undefined') {
+          window.codeMirrorEditor.save();
+        }
+        $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/view/create', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('form').serialize(), function (data) {
+          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxRemoveMessage)($msg);
+          if (typeof data !== 'undefined' && data.success === true) {
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').modal('hide');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('.result_query').html(data.message);
+            _navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
+          } else {
+            (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
+          }
+        });
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('.modal-body').first().html(data.message);
+      // Attach syntax highlighted editor
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').on('shown.bs.modal', function () {
+        window.codeMirrorEditor = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').find('textarea'));
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('input:visible[type=text]', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal')).first().trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').off('shown.bs.modal');
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').modal('show');
+    } else {
+      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error);
     }
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings_icon').on('click', showNaviSettings);
-  }
-};
-
+  });
+}
 
 /***/ }),
 
-/***/ 1:
-/***/ (function(module) {
+/***/ 61:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-module.exports = jQuery;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   onloadFunctions: function() { return /* binding */ onloadFunctions; },
+/* harmony export */   teardownFunctions: function() { return /* binding */ teardownFunctions; }
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _functions_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+/* harmony import */ var _handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(60);
+
+
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+ */
+const PrintPage = {
+  handleEvent: () => {
+    window.print();
+  }
+};
+/**
+ * @return {function}
+ */
+function teardownFunctions() {
+  return function () {
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownIdleEvent)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'input:checkbox.checkall');
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownSqlQueryEditEvents)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.removeAutocompleteInfo)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCreateTableEvents)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownEnumSetEditorMessage)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownEnumSetEditor)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', '#index_frm input[type=submit]');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.toggle-container').off('click');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', 'select.pageselector');
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownRecentFavoriteTables)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCodeMirrorEditor)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', '.autosubmit');
+    document.querySelectorAll('.jsPrintButton').forEach(item => {
+      item.removeEventListener('click', PrintPage);
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'a.create_view.ajax');
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownCreateView)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('keydown', 'form input, form textarea, form select');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', 'input[type=radio][name="pw_hash"]');
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.teardownSortLinkMouseEvent)();
+  };
+}
+/**
+ * @return {function}
+ */
+function onloadFunctions() {
+  return function () {
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadIdleEvent)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input:checkbox.checkall', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllCheckboxEventHandler)());
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.addDateTimePicker)();
+    /**
+     * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
+     */
+    if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
+    }
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSqlQueryEditEvents)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCreateTableEvents)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadChangePasswordEvents)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadEnumSetEditorMessage)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadEnumSetEditor)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#index_frm input[type=submit]', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getAddIndexEventHandler)());
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.showHints)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.initializeToggleButtons)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'select.pageselector', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getPageSelectorEventHandler)());
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadRecentFavoriteTables)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCodeMirrorEditor)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadLockPage)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '.autosubmit', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getAutoSubmitEventHandler)());
+    document.querySelectorAll('.jsPrintButton').forEach(item => {
+      item.addEventListener('click', PrintPage);
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.create_view.ajax', function (e) {
+      e.preventDefault();
+      (0,_handleCreateViewModal_ts__WEBPACK_IMPORTED_MODULE_2__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+    });
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCreateView)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesSel, _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesChanged);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input.checkall_box', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllBoxEventHandler)());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.checkall-filter', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllFilterEventHandler)());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.checkboxesSel + ', input.checkall_box:checkbox:enabled', _functions_ts__WEBPACK_IMPORTED_MODULE_1__.subCheckboxesChanged);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input.sub_checkall_box', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getSubCheckAllBoxEventHandler)());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('keyup', '#filterText', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getFilterTextEventHandler)());
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadFilterText)();
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadLoginForm)();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('form input, form textarea, form select').on('keydown', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getKeyboardFormSubmitEventHandler)());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'select#select_authentication_plugin_cp', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getSslPasswordEventHandler)());
+    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSortLinkMouseEvent)();
+  };
+}
 
 /***/ })
 

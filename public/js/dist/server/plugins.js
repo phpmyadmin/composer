@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[29],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 68:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -28,13 +35,6 @@ function makeColumnsSortable() {
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/plugins.js', function () {
   makeColumnsSortable();
 });
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

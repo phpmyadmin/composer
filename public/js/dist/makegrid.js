@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[22],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 62:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -2168,13 +2175,6 @@ window.makeGrid = makeGrid;
     }
   }; // end noSelect
 })((jquery__WEBPACK_IMPORTED_MODULE_0___default()));
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

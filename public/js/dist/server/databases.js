@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[28],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 67:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -129,13 +136,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/databa
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#dbStatsForm', DropDatabases.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#create_database_form.ajax', CreateDatabase.handleEvent);
 });
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

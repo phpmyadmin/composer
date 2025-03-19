@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[3],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 28:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -587,13 +594,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/even
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('tr.recurring_event_row, tr.onetime_event_row').toggle();
   });
 });
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

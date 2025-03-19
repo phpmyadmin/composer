@@ -1,98 +1,10 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[31],{
 
-/***/ 72:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ 1:
+/***/ (function(module) {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ chartByteFormatter; }
-/* harmony export */ });
-function formatByte(value, index) {
-  let val = value;
-  let i = index;
-  const units = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
-  while (val >= 1024 && i <= 6) {
-    val /= 1024;
-    i++;
-  }
-  let format = '%.1f';
-  if (Math.floor(val) === val) {
-    format = '%.0f';
-  }
-  return window.sprintf(format + ' ' + units[i], val);
-}
-/**
- * The index indicates what unit the incoming data will be in.
- * 0 for bytes, 1 for kilobytes and so on...
- *
- * @param index
- *
- * @return {string}
- */
-function chartByteFormatter(index) {
-  const i = index || 0;
-  return function (format, value) {
-    let val = value;
-    if (typeof val === 'number') {
-      val = parseFloat(val.toString()) || 0;
-      return formatByte(val, i);
-    } else {
-      return String(val);
-    }
-  };
-}
-
-/***/ }),
-
-/***/ 71:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ createProfilingChart; }
-/* harmony export */ });
-/* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-
-/**
- * Creates a Profiling Chart. Used in sql.js
- * and in server/status/monitor.js
- *
- * @param {string} target
- * @param {any[]} data
- *
- * @return {object}
- */
-function createProfilingChart(target, data) {
-  const lang = _common_ts__WEBPACK_IMPORTED_MODULE_0__.CommonParams.get('lang');
-  const numberFormat = new Intl.NumberFormat(lang.replace('_', '-'), {
-    style: 'unit',
-    unit: 'second',
-    unitDisplay: 'long',
-    notation: 'engineering'
-  });
-  return new window.Chart(target, {
-    type: 'pie',
-    data: {
-      labels: data.map(row => row[0]),
-      datasets: [{
-        data: data.map(row => row[1])
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: 'right'
-        },
-        tooltip: {
-          callbacks: {
-            label: context => context.parsed ? numberFormat.format(context.parsed) : ''
-          }
-        }
-      }
-    }
-  });
-}
+module.exports = jQuery;
 
 /***/ }),
 
@@ -2195,10 +2107,98 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
 
 /***/ }),
 
-/***/ 1:
-/***/ (function(module) {
+/***/ 71:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-module.exports = jQuery;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ createProfilingChart; }
+/* harmony export */ });
+/* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+
+/**
+ * Creates a Profiling Chart. Used in sql.js
+ * and in server/status/monitor.js
+ *
+ * @param {string} target
+ * @param {any[]} data
+ *
+ * @return {object}
+ */
+function createProfilingChart(target, data) {
+  const lang = _common_ts__WEBPACK_IMPORTED_MODULE_0__.CommonParams.get('lang');
+  const numberFormat = new Intl.NumberFormat(lang.replace('_', '-'), {
+    style: 'unit',
+    unit: 'second',
+    unitDisplay: 'long',
+    notation: 'engineering'
+  });
+  return new window.Chart(target, {
+    type: 'pie',
+    data: {
+      labels: data.map(row => row[0]),
+      datasets: [{
+        data: data.map(row => row[1])
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          position: 'right'
+        },
+        tooltip: {
+          callbacks: {
+            label: context => context.parsed ? numberFormat.format(context.parsed) : ''
+          }
+        }
+      }
+    }
+  });
+}
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ chartByteFormatter; }
+/* harmony export */ });
+function formatByte(value, index) {
+  let val = value;
+  let i = index;
+  const units = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
+  while (val >= 1024 && i <= 6) {
+    val /= 1024;
+    i++;
+  }
+  let format = '%.1f';
+  if (Math.floor(val) === val) {
+    format = '%.0f';
+  }
+  return window.sprintf(format + ' ' + units[i], val);
+}
+/**
+ * The index indicates what unit the incoming data will be in.
+ * 0 for bytes, 1 for kilobytes and so on...
+ *
+ * @param index
+ *
+ * @return {string}
+ */
+function chartByteFormatter(index) {
+  const i = index || 0;
+  return function (format, value) {
+    let val = value;
+    if (typeof val === 'number') {
+      val = parseFloat(val.toString()) || 0;
+      return formatByte(val, i);
+    } else {
+      return String(val);
+    }
+  };
+}
 
 /***/ })
 

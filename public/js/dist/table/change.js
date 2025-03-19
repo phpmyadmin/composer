@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[41],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 81:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -799,13 +806,6 @@ function changeValueFieldType(elem, searchIndex) {
 window.verifyAfterSearchFieldChange = verifyAfterSearchFieldChange;
 window.verificationsAfterFieldChange = verificationsAfterFieldChange;
 window.changeValueFieldType = changeValueFieldType;
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 

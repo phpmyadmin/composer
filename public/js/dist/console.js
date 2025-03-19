@@ -1,6 +1,13 @@
 "use strict";
 (self["webpackChunkphpmyadmin"] = self["webpackChunkphpmyadmin"] || []).push([[1],{
 
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = jQuery;
+
+/***/ }),
+
 /***/ 3:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -1385,6 +1392,13 @@ var ConsoleDebug = {
 
 /***/ }),
 
+/***/ 5:
+/***/ (function(module) {
+
+module.exports = CodeMirror;
+
+/***/ }),
+
 /***/ 25:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -1477,20 +1491,6 @@ function setConfigValue(key, value) {
     (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(message, false);
   });
 }
-
-/***/ }),
-
-/***/ 5:
-/***/ (function(module) {
-
-module.exports = CodeMirror;
-
-/***/ }),
-
-/***/ 1:
-/***/ (function(module) {
-
-module.exports = jQuery;
 
 /***/ })
 
