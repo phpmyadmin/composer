@@ -52,6 +52,8 @@ const checkIfDataTypeNumericOrDate = function (dataType) {
 const TableSelect = {
   checkIfDataTypeNumericOrDate: checkIfDataTypeNumericOrDate
 };
+const UNARY_OPERATORS = ['IS NULL', 'IS NOT NULL', '= \'\'', '!= \'\''];
+const opIsUnary = op => UNARY_OPERATORS.includes(op);
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -217,14 +219,16 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
    * Ajax event handler for Range-Search.
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('change', 'select[name*="criteriaColumnOperators"]', function () {
-    var $sourceSelect = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     // Get the column name.
     var columnName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('th').first().text();
     // Get the data-type of column excluding size.
     var dataType = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('td[data-type]').attr('data-type');
     dataType = TableSelect.checkIfDataTypeNumericOrDate(dataType);
     // Get the operator.
-    var operator = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const operator = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const $targetField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('[name*="criteriaValues"]');
+    $targetField.prop('disabled', opIsUnary(operator));
+    $targetField.siblings('.ui-datepicker-trigger').eq(0).toggle(!opIsUnary(operator));
     if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
       var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
@@ -262,7 +266,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
               if (minValue.length && maxValue.length) {
                 finalValue = minValue + ', ' + maxValue;
               }
-              var $targetField = $sourceSelect.closest('tr').find('[name*="criteriaValues"]');
               // If target field is a select list.
               if ($targetField.is('select')) {
                 $targetField.val(finalValue);
