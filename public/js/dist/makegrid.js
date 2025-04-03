@@ -136,8 +136,7 @@ const makeGrid = function (t) {
         objLeft: jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).position().left,
         objWidth: jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.draggable:visible').eq(n).find('span').outerWidth()
       };
-      // eslint-disable-next-line compat/compat
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'col-resize').noSelect();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'col-resize').addClass('user-select-none');
       if (g.isCellEditActive) {
         g.hideEditCell();
       }
@@ -172,8 +171,7 @@ const makeGrid = function (t) {
         objTop: objPos.top,
         objLeft: objPos.left
       };
-      // eslint-disable-next-line compat/compat
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'move').noSelect();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'move').addClass('user-select-none');
       if (g.isCellEditActive) {
         g.hideEditCell();
       }
@@ -256,8 +254,7 @@ const makeGrid = function (t) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cPointer).css('visibility', 'hidden');
         g.colReorder = false;
       }
-      // eslint-disable-next-line compat/compat
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'inherit').noSelect(false);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.body).css('cursor', 'inherit').removeClass('user-select-none');
     },
     /**
      * Resize column n to new width "nw"
@@ -2134,47 +2131,6 @@ const makeGrid = function (t) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.gDiv).addClass('data');
 };
 window.makeGrid = makeGrid;
-/**
- * jQuery plugin to cancel selection in HTML code.
- */
-(function ($) {
-  $.fn.noSelect = function () {
-    let p = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var prevent = p === null ? true : p;
-    /* eslint-disable compat/compat */
-    var isMsie = navigator.userAgent.indexOf('MSIE') > -1 || !!window.navigator.userAgent.match(/Trident.*rv:11\./);
-    var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-    var isSafari = navigator.userAgent.indexOf('Safari') > -1;
-    var isOpera = navigator.userAgent.indexOf('Presto') > -1;
-    /* eslint-enable compat/compat */
-    if (prevent) {
-      return this.each(function () {
-        if (isMsie || isSafari) {
-          $(this).on('selectstart', false);
-        } else if (isFirefox) {
-          $(this).css('MozUserSelect', 'none');
-          $('body').trigger('focus');
-        } else if (isOpera) {
-          $(this).on('mousedown', false);
-        } else {
-          $(this).attr('unselectable', 'on');
-        }
-      });
-    } else {
-      return this.each(function () {
-        if (isMsie || isSafari) {
-          $(this).off('selectstart');
-        } else if (isFirefox) {
-          $(this).css('MozUserSelect', 'inherit');
-        } else if (isOpera) {
-          $(this).off('mousedown');
-        } else {
-          $(this).removeAttr('unselectable');
-        }
-      });
-    }
-  }; // end noSelect
-})((jquery__WEBPACK_IMPORTED_MODULE_0___default()));
 
 /***/ })
 
