@@ -6127,65 +6127,55 @@ function onloadEnumSetEditor() {
       fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(db) + '\'');
       searchIn = '';
     }
-    var seeMore = '';
+    let seeMore = '';
     if (listSize > maxRows) {
-      seeMore = '<div class="card-footer">' + '<button type="button" class="btn btn-secondary" id="seeMore">' + window.Messages.seeMore + '</button></div>';
+      seeMore = '<button type="button" class="btn btn-secondary" id="seeMore">' + window.Messages.seeMore + '</button>';
     }
-    var centralColumnsDialog = '<div><div class="card">' + '<div class="card-body">' + searchIn + '<table id="col_list" class="table table-borderless values">' + fields + '</table>' + '</div>' + seeMore + '</div></div>';
-    var width = parseInt((parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').css('font-size'), 10) / 13 * 500).toString(), 10);
-    if (!width) {
-      width = 500;
+    let centralColumnsModal = document.getElementById('centralColumnsModal');
+    if (centralColumnsModal === null) {
+      const centralColumnsModalHtml = '<div class="modal fade" id="centralColumnsModal" tabindex="-1" aria-labelledby="centralColumnsModalLabel" aria-hidden="true">\n' + '  <div class="modal-dialog modal-lg">\n' + '    <div class="modal-content">\n' + '      <div class="modal-header">\n' + '        <h1 class="modal-title fs-5" id="centralColumnsModalLabel">' + window.Messages.pickColumnTitle + '</h1>\n' + '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="' + window.Messages.strClose + '"></button>\n' + '      </div>\n' + '      <div class="modal-body">\n' + searchIn + '<table id="col_list" class="table table-borderless values">' + fields + '</table>' + '      </div>\n' + '      <div class="modal-footer">\n' + seeMore + '        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">' + window.Messages.strClose + '</button>\n' + '      </div>\n' + '    </div>\n' + '  </div>\n' + '</div>\n';
+      document.body.insertAdjacentHTML('beforeend', centralColumnsModalHtml);
+      centralColumnsModal = document.getElementById('centralColumnsModal');
     }
-    var buttonOptions = {};
-    var $centralColumnsDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()(centralColumnsDialog).dialog({
-      classes: {
-        'ui-dialog-titlebar-close': 'btn-close'
-      },
-      minWidth: width,
-      maxHeight: 450,
-      modal: true,
-      title: window.Messages.pickColumnTitle,
-      buttons: buttonOptions,
-      open: function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').on('click', '.pick', function () {
-          $centralColumnsDialog.remove();
-        });
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.filter_rows').on('keyup', function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default().uiTableFilter(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
-        });
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#seeMore').on('click', function () {
-          fields = '';
-          min = listSize <= maxRows + resultPointer ? listSize : maxRows + resultPointer;
-          for (i = resultPointer; i < min; i++) {
-            fields += '<tr><td><div><span class="fw-bold">' + window.centralColumnList[db + '_' + table][i].col_name + '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
-            if (window.centralColumnList[db + '_' + table][i].col_attribute !== '') {
-              fields += '(' + window.centralColumnList[db + '_' + table][i].col_attribute + ') ';
-            }
-            if (window.centralColumnList[db + '_' + table][i].col_length !== '') {
-              fields += '(' + window.centralColumnList[db + '_' + table][i].col_length + ') ';
-            }
-            fields += window.centralColumnList[db + '_' + table][i].col_extra + '</span>' + '</div></td>';
-            if (pick) {
-              fields += '<td><input class="btn btn-secondary pick w-100" type="submit" value="' + window.Messages.pickColumn + '" onclick="window.pmaAutoPopulate(\'' + colid + '\',' + i + ')"></td>';
-            }
-            fields += '</tr>';
+    const modal = window.bootstrap.Modal.getOrCreateInstance(centralColumnsModal);
+    centralColumnsModal.addEventListener('shown.bs.modal', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').on('click', '.pick', function () {
+        modal.hide();
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.filter_rows').on('keyup', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().uiTableFilter(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#seeMore').on('click', function () {
+        fields = '';
+        min = listSize <= maxRows + resultPointer ? listSize : maxRows + resultPointer;
+        for (i = resultPointer; i < min; i++) {
+          fields += '<tr><td><div><span class="fw-bold">' + window.centralColumnList[db + '_' + table][i].col_name + '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
+          if (window.centralColumnList[db + '_' + table][i].col_attribute !== '') {
+            fields += '(' + window.centralColumnList[db + '_' + table][i].col_attribute + ') ';
           }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').append(fields);
-          resultPointer = i;
-          if (resultPointer === listSize) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#seeMore').hide();
+          if (window.centralColumnList[db + '_' + table][i].col_length !== '') {
+            fields += '(' + window.centralColumnList[db + '_' + table][i].col_length + ') ';
           }
-          return false;
-        });
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.ui-dialog').find('.ui-dialog-buttonpane button').first().trigger('focus');
-      },
-      close: function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').off('click', '.pick');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.filter_rows').off('keyup');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
-      }
+          fields += window.centralColumnList[db + '_' + table][i].col_extra + '</span>' + '</div></td>';
+          if (pick) {
+            fields += '<td><input class="btn btn-secondary pick w-100" type="submit" value="' + window.Messages.pickColumn + '" onclick="window.pmaAutoPopulate(\'' + colid + '\',' + i + ')"></td>';
+          }
+          fields += '</tr>';
+        }
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').append(fields);
+        resultPointer = i;
+        if (resultPointer === listSize) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#seeMore').hide();
+        }
+        modal.handleUpdate();
+      });
     });
-    return false;
+    centralColumnsModal.addEventListener('hidden.bs.modal', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#col_list').off('click', '.pick');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.filter_rows').off('keyup');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
+    });
+    modal.show();
   });
   // When "add a new value" is clicked, append an empty text field
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input.add_value', function (e) {
