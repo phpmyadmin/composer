@@ -1046,30 +1046,27 @@ function browseForeignDialog($thisA) {
   var showAllId = '#foreign_showAll';
   var tableId = '#browse_foreign_table';
   var filterId = '#input_foreign_filter';
-  var $dialog = null;
   var argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
   var params = $thisA.getPostData();
   params += argSep + 'ajax_request=true';
+  let browseForeignModal = document.getElementById('browseForeignModal');
+  if (browseForeignModal === null) {
+    const browseForeignModalHtml = '<div class="modal fade" id="browseForeignModal" tabindex="-1" aria-labelledby="browseForeignModalLabel" aria-hidden="true">\n' + '  <div class="modal-dialog modal-lg">\n' + '    <div class="modal-content">\n' + '      <div class="modal-header">\n' + '        <h1 class="modal-title fs-5" id="browseForeignModalLabel">' + window.Messages.strBrowseForeignValues + '</h1>\n' + '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="' + window.Messages.strClose + '"></button>\n' + '      </div>\n' + '      <div class="modal-body">\n' + '        <div class="spinner-border" role="status">\n' + '          <span class="visually-hidden">' + window.Messages.strLoading + '</span>\n' + '        </div>\n' + '      </div>\n' + '    </div>\n' + '  </div>\n' + '</div>\n';
+    document.body.insertAdjacentHTML('beforeend', browseForeignModalHtml);
+    browseForeignModal = document.getElementById('browseForeignModal');
+  }
+  const modal = window.bootstrap.Modal.getOrCreateInstance(browseForeignModal);
+  browseForeignModal.addEventListener('hidden.bs.modal', function () {
+    // remove event handlers attached to elements related to dialog
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId).off('click', 'td a.foreign_value');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).off('click', showAllId);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).off('submit');
+    // remove dialog itself
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
+  });
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post($thisA.attr('href'), params, function (data) {
-    // Creates browse foreign value dialog
-    $dialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>').append(data.message).dialog({
-      classes: {
-        'ui-dialog-titlebar-close': 'btn-close'
-      },
-      title: window.Messages.strBrowseForeignValues,
-      width: Math.min(jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width() - 100, 700),
-      maxHeight: jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height() - 100,
-      dialogClass: 'browse_foreign_modal',
-      close: function () {
-        // remove event handlers attached to elements related to dialog
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId).off('click', 'td a.foreign_value');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).off('click', showAllId);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).off('submit');
-        // remove dialog itself
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
-      },
-      modal: true
-    });
+    browseForeignModal.querySelector('.modal-body').innerHTML = data.message;
+    modal.show();
   }).done(function () {
     var showAll = false;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId).on('click', 'td a.foreign_value', function (e) {
@@ -1083,7 +1080,7 @@ function browseForeignDialog($thisA) {
       $input.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('key'));
       // Unchecks the Ignore checkbox for the current row
       $input.trigger('change');
-      $dialog.dialog('close');
+      modal.hide();
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).on('click', showAllId, function () {
       showAll = true;

@@ -1989,7 +1989,7 @@ const makeGrid = function (t) {
       });
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').on('click', function (e) {
         // hide edit cell if the click is not fromDat edit area
-        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents().index(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit)) === -1 && !jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents('.ui-datepicker-header').length && !jquery__WEBPACK_IMPORTED_MODULE_0___default()('.browse_foreign_modal.ui-dialog:visible').length && !jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest('.dismissable').length) {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents().index(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit)) === -1 && !jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents('.ui-datepicker-header').length && !jquery__WEBPACK_IMPORTED_MODULE_0___default()('#browseForeignModal').length && !jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest('.dismissable').length) {
           g.hideEditCell();
         }
       }).on('keydown', function (e) {

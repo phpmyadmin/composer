@@ -45,11 +45,6 @@ const DatabaseRoutines = {
    */
   paramTemplate: '',
   /**
-   * @var $ajaxDialog Query object containing the reference to the
-   *                  dialog that contains the editor
-   */
-  $ajaxDialog: null,
-  /**
    * @var syntaxHiglighter Reference to the codemirror editor
    */
   syntaxHiglighter: null,
@@ -139,42 +134,20 @@ const DatabaseRoutines = {
         return;
       }
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      /**
-       * @var buttonOptions Object containing options
-       *                     for jQueryUI dialog buttons
-       */
-      var buttonOptions = {
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-primary',
-          click: function () {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close').remove();
-          }
-        }
-      };
-      /**
-       * Display the dialog to the user
-       */
-      data.message = '<textarea cols="40" rows="15" class="w-100">' + data.message + '</textarea>';
-      var $ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        width: 500,
-        // @ts-ignore
-        buttons: buttonOptions,
-        title: data.title
+      const routinesExportTextarea = '<textarea id="routinesExportTextarea" cols="40" rows="15" class="form-control" aria-label="' + window.Messages.strRoutine + '"></textarea>';
+      const routinesExportModal = document.getElementById('routinesExportModal');
+      routinesExportModal.addEventListener('shown.bs.modal', function () {
+        routinesExportModal.querySelector('.modal-title').textContent = data.title;
+        routinesExportModal.querySelector('.modal-body').innerHTML = routinesExportTextarea;
+        document.getElementById('routinesExportTextarea').textContent = data.message;
+        (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#routinesExportTextarea'));
       });
-      // Attach syntax highlighted editor to export dialog
-      /**
-       * @var $elm jQuery object containing the reference
-       *           to the Export textarea.
-       */
-      var $elm = $ajaxDialog.find('textarea');
-      (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm);
-    } // end showExport()
+      routinesExportModal.addEventListener('hidden.bs.modal', function () {
+        routinesExportModal.querySelector('.modal-body').innerHTML = routinesExportTextarea;
+      });
+      window.bootstrap.Modal.getOrCreateInstance(routinesExportModal).show();
+    }
   },
-  // end exportDialog()
   editorDialog: function (isNew, $this) {
     var that = this;
     /**
@@ -201,26 +174,14 @@ const DatabaseRoutines = {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
         return;
       }
-      var buttonOptions = {
-        [window.Messages.strGo]: {
-          text: window.Messages.strGo,
-          class: 'btn btn-primary'
-        },
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-secondary'
-        }
-      };
       // We have successfully fetched the editor form
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      // Now define the function that is called when
-      // the user presses the "Go" button
-      // @ts-ignore
-      buttonOptions[window.Messages.strGo].click = function () {
+      const routinesEditorModalSaveEventHandler = function () {
         // Move the data from the codemirror editor back to the
         // textarea, where it can be used in the form submission.
         if (typeof window.CodeMirror !== 'undefined') {
-          that.syntaxHiglighter.save();
+          var _that$syntaxHiglighte;
+          (_that$syntaxHiglighte = that.syntaxHiglighter) === null || _that$syntaxHiglighte === void 0 || _that$syntaxHiglighte.save();
         }
         // Validate editor and submit request, if passed.
         if (!that.validate()) {
@@ -240,7 +201,7 @@ const DatabaseRoutines = {
           // Item created successfully
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
-          that.$ajaxDialog.dialog('close');
+          window.bootstrap.Modal.getOrCreateInstance('#routinesEditorModal').hide();
           var tableId = '#' + data.tableType + 'Table';
           // If we are in 'edit' mode, we must
           // remove the reference to the old row.
@@ -319,46 +280,32 @@ const DatabaseRoutines = {
             });
           }
           _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-        }); // end $.post()
-      }; // end of function that handles the submission of the Editor
-      // @ts-ignore
-      buttonOptions[window.Messages.strClose].click = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close');
+        });
       };
-      /**
-       * Display the dialog to the user
-       */
-      that.$ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="rteDialog">' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        height: 600,
-        width: '70%',
-        minWidth: 500,
+      const routinesEditorModal = document.getElementById('routinesEditorModal');
+      routinesEditorModal.addEventListener('shown.bs.modal', function () {
+        /**
+         * Issue #15810 - use button titles for modals (eg: new procedure)
+         * Respect the order: title on href tag, href content, title sent in response
+         */
+        routinesEditorModal.querySelector('.modal-title').textContent = $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text();
+        routinesEditorModal.querySelector('.modal-body').innerHTML = data.message;
+        const routinesEditorModalSaveButton = document.getElementById('routinesEditorModalSaveButton');
+        routinesEditorModalSaveButton === null || routinesEditorModalSaveButton === void 0 || routinesEditorModalSaveButton.addEventListener('click', routinesEditorModalSaveEventHandler);
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
+        });
         // @ts-ignore
-        buttons: buttonOptions,
-        // Issue #15810 - use button titles for modals (eg: new procedure)
-        // Respect the order: title on href tag, href content, title sent in response
-        title: $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text(),
-        modal: true,
-        open: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'max-height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').parents('.ui-dialog').height() > jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height()) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
-          });
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
-          });
-          // @ts-ignore
-          (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
-        },
-        close: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
-        }
+        (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
+      });
+      routinesEditorModal.addEventListener('hidden.bs.modal', function () {
+        const routinesEditorModalSaveButton = document.getElementById('routinesEditorModalSaveButton');
+        routinesEditorModalSaveButton === null || routinesEditorModalSaveButton === void 0 || routinesEditorModalSaveButton.removeEventListener('click', routinesEditorModalSaveEventHandler);
+        document.getElementById('routinesEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
       });
       /**
        * @var mode Used to remember whether the editor is in
@@ -379,9 +326,10 @@ const DatabaseRoutines = {
       };
       that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
       window.codeMirrorEditor = that.syntaxHiglighter;
+      window.bootstrap.Modal.getOrCreateInstance(routinesEditorModal).show();
       // Execute item-specific code
       that.postDialogShow(data);
-    }); // end $.get()
+    });
   },
   dropDialog: function ($this) {
     /**
@@ -612,7 +560,8 @@ const DatabaseRoutines = {
      *                the field that is being processed
      */
     var inputname = '';
-    this.$ajaxDialog.find('table.routine_params_table').last().find('tr').each(function () {
+    const routinesEditorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#routinesEditorModal');
+    routinesEditorModal.find('table.routine_params_table').last().find('tr').each(function () {
       // Every parameter of a routine must have
       // a non-empty direction, name and type
       if (!isSuccess) {
@@ -633,7 +582,7 @@ const DatabaseRoutines = {
       alert(window.Messages.strFormEmpty);
       return false;
     }
-    this.$ajaxDialog.find('table.routine_params_table').last().find('tr').each(function () {
+    routinesEditorModal.find('table.routine_params_table').last().find('tr').each(function () {
       // SET, ENUM, VARCHAR and VARBINARY fields must have length/values
       var $inputtyp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('select[name^=item_param_type]');
       var $inputlen = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name^=item_param_length]');
@@ -649,11 +598,11 @@ const DatabaseRoutines = {
       alert(window.Messages.strFormEmpty);
       return false;
     }
-    if (this.$ajaxDialog.find('select[name=item_type]').find(':selected').val() === 'FUNCTION') {
+    if (routinesEditorModal.find('select[name=item_type]').find(':selected').val() === 'FUNCTION') {
       // The length/values of return variable for functions must
       // be set, if the type is SET, ENUM, VARCHAR or VARBINARY.
-      var $returntyp = this.$ajaxDialog.find('select[name=item_returntype]');
-      var $returnlen = this.$ajaxDialog.find('input[name=item_returnlength]');
+      var $returntyp = routinesEditorModal.find('select[name=item_returntype]');
+      var $returnlen = routinesEditorModal.find('input[name=item_returnlength]');
       if (($returntyp.val() === 'ENUM' || $returntyp.val() === 'SET' || $returntyp.val().startsWith('VAR')) && $returnlen.val() === '') {
         $returnlen.trigger('focus');
         alert(window.Messages.strFormEmpty);
@@ -662,7 +611,8 @@ const DatabaseRoutines = {
     }
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name=item_type]').find(':selected').val() === 'FUNCTION') {
       // A function must contain a RETURN statement in its definition
-      if (this.$ajaxDialog.find('table.rte_table').find('textarea[name=item_definition]').val().toUpperCase().indexOf('RETURN') < 0) {
+      const itemDefinitionValue = routinesEditorModal.find('table.rte_table').find('textarea[name=item_definition]').val();
+      if (itemDefinitionValue.toUpperCase().indexOf('RETURN') < 0) {
         this.syntaxHiglighter.focus();
         alert(window.Messages.MissingReturn);
         return false;
@@ -779,20 +729,9 @@ const DatabaseRoutines = {
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
         return;
       }
-      var buttonOptions = {
-        [window.Messages.strGo]: {
-          text: window.Messages.strGo,
-          class: 'btn btn-primary'
-        },
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-secondary'
-        }
-      };
-      // Define the function that is called when
-      // the user presses the "Go" button
-      // @ts-ignore
-      buttonOptions[window.Messages.strGo].click = function () {
+      const routinesExecuteModal = document.getElementById('routinesExecuteModal');
+      const modal = window.bootstrap.Modal.getOrCreateInstance(routinesExecuteModal);
+      const routinesExecuteButtonEventHandler = function () {
         /**
          * @var data Form data to be sent in the AJAX request
          */
@@ -803,66 +742,59 @@ const DatabaseRoutines = {
             // Routine executed successfully
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
-            $ajaxDialog.dialog('close');
+            modal.hide();
           } else {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
           }
         });
       };
-      // @ts-ignore
-      buttonOptions[window.Messages.strClose].click = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close');
-      };
-      /**
-       * Display the dialog to the user
-       */
-      var $ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        width: 650,
-        // @ts-ignore
-        buttons: buttonOptions,
-        title: data.title,
-        modal: true,
-        close: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
-        }
+      routinesExecuteModal.addEventListener('hidden.bs.modal', function () {
+        routinesExecuteModal.querySelector('.modal-title').textContent = '';
+        routinesExecuteModal.querySelector('.modal-body').innerHTML = '';
+        const routinesExecuteModalExecuteButton = document.getElementById('routinesExecuteModalExecuteButton');
+        routinesExecuteModalExecuteButton === null || routinesExecuteModalExecuteButton === void 0 || routinesExecuteModalExecuteButton.removeEventListener('click', routinesExecuteButtonEventHandler);
       });
-      $ajaxDialog.find('input[name^=params]').first().trigger('focus');
-      /**
-       * Attach the datepickers to the relevant form fields
-       */
-      $ajaxDialog.find('input.datefield, input.datetimefield').each(function () {
-        (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'));
-      });
-      /*
-      * Define the function if the user presses enter
-      */
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').on('keyup', function (event) {
-        event.preventDefault();
-        if (event.keyCode !== 13) {
-          return;
-        }
+      routinesExecuteModal.addEventListener('shown.bs.modal', function () {
+        routinesExecuteModal.querySelector('.modal-title').textContent = data.title;
+        routinesExecuteModal.querySelector('.modal-body').innerHTML = data.message;
+        const routinesExecuteModalExecuteButton = document.getElementById('routinesExecuteModalExecuteButton');
+        routinesExecuteModalExecuteButton === null || routinesExecuteModalExecuteButton === void 0 || routinesExecuteModalExecuteButton.addEventListener('click', routinesExecuteButtonEventHandler);
+        const modalBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#routinesExecuteModal .modal-body');
+        modalBody.find('input[name^=params]').first().trigger('focus');
         /**
-         * @var data Form data to be sent in the AJAX request
+         * Attach the datepickers to the relevant form fields
          */
-        var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
-        $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, function (data) {
-          if (data.success !== true) {
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
+        modalBody.find('input.datefield, input.datetimefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'));
+        });
+        /*
+        * Define the function if the user presses enter
+        */
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').on('keyup', function (event) {
+          event.preventDefault();
+          if (event.keyCode !== 13) {
             return;
           }
-          // Routine executed successfully
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').off('keyup');
-          $ajaxDialog.remove();
+          /**
+           * @var data Form data to be sent in the AJAX request
+           */
+          var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
+          $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+          var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, function (data) {
+            if (data.success !== true) {
+              (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
+              return;
+            }
+            // Routine executed successfully
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
+            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').off('keyup');
+            modal.hide();
+          });
         });
       });
-    }); // end $.post()
+    });
   }
 };
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/routines.js', function () {
@@ -913,7 +845,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/rout
      * @var routine_params_table jQuery object containing the reference
      *                           to the routine parameters table
      */
-    const $routineParamsTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.ui-dialog').find('.routine_params_table');
+    const $routineParamsTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.modal').find('.routine_params_table');
     /**
      * @var new_param_row A string containing the HTML code for the
      *                    new row for the routine parameters table
@@ -922,7 +854,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/rout
     // Append the new row to the parameters table
     $routineParamsTable.append(newParamRow);
     // Make sure that the row is correctly shown according to the type of routine
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.ui-dialog').find('table.rte_table select[name=item_type]').val() === 'FUNCTION') {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.modal').find('table.rte_table select[name=item_type]').val() === 'FUNCTION') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('tr.routine_return_row').show();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.routine_direction_cell').hide();
     }
@@ -930,7 +862,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/rout
      * @var newrow jQuery object containing the reference to the newly
      *             inserted row in the routine parameters table
      */
-    const $newrow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.ui-dialog').find('table.routine_params_table').find('tr').has('td').last();
+    const $newrow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.modal').find('table.routine_params_table').find('tr').has('td').last();
     // Enable/disable the 'options' dropdowns for parameters as necessary
     DatabaseRoutines.setOptionsForParameter($newrow.find('select[name^=item_param_type]'), $newrow.find('input[name^=item_param_length]'), $newrow.find('select[name^=item_param_opts_text]'), $newrow.find('select[name^=item_param_opts_num]'));
   });
