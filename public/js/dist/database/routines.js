@@ -176,6 +176,7 @@ const DatabaseRoutines = {
       }
       // We have successfully fetched the editor form
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
+      let isEditMode = false;
       const routinesEditorModalSaveEventHandler = function () {
         // Move the data from the codemirror editor back to the
         // textarea, where it can be used in the form submission.
@@ -205,7 +206,7 @@ const DatabaseRoutines = {
           var tableId = '#' + data.tableType + 'Table';
           // If we are in 'edit' mode, we must
           // remove the reference to the old row.
-          if (mode === 'edit' && $editRow !== null) {
+          if (isEditMode && $editRow !== null) {
             $editRow.remove();
           }
           // Sometimes, like when moving a trigger from
@@ -301,34 +302,29 @@ const DatabaseRoutines = {
         });
         // @ts-ignore
         (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
+          isEditMode = true;
+        }
+        // Attach syntax highlighted editor to the definition
+        /**
+         * @var elm jQuery object containing the reference to
+         *                 the Definition textarea.
+         */
+        var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
+        var linterOptions = {
+          editorType: 'routine'
+        };
+        that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
+        window.codeMirrorEditor = that.syntaxHiglighter;
+        // Execute item-specific code
+        that.postDialogShow(data);
       });
       routinesEditorModal.addEventListener('hidden.bs.modal', function () {
         const routinesEditorModalSaveButton = document.getElementById('routinesEditorModalSaveButton');
         routinesEditorModalSaveButton === null || routinesEditorModalSaveButton === void 0 || routinesEditorModalSaveButton.removeEventListener('click', routinesEditorModalSaveEventHandler);
         document.getElementById('routinesEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
       });
-      /**
-       * @var mode Used to remember whether the editor is in
-       *           "Edit" or "Add" mode
-       */
-      var mode = 'add';
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
-        mode = 'edit';
-      }
-      // Attach syntax highlighted editor to the definition
-      /**
-       * @var elm jQuery object containing the reference to
-       *                 the Definition textarea.
-       */
-      var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
-      var linterOptions = {
-        editorType: 'routine'
-      };
-      that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
-      window.codeMirrorEditor = that.syntaxHiglighter;
       window.bootstrap.Modal.getOrCreateInstance(routinesEditorModal).show();
-      // Execute item-specific code
-      that.postDialogShow(data);
     });
   },
   dropDialog: function ($this) {
@@ -794,6 +790,7 @@ const DatabaseRoutines = {
           });
         });
       });
+      modal.show();
     });
   }
 };
