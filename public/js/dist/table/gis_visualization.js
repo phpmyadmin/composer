@@ -277,7 +277,14 @@ class OlVisualization extends GisVisualization {
     if (typeof window.ol === 'undefined') {
       return undefined;
     }
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('head').append('<link rel="stylesheet" type="text/css" href="js/vendor/openlayers/theme/ol.css">');
+    const olCss = 'js/vendor/openlayers/theme/ol.css';
+    if (!document.querySelector('link[rel="stylesheet"][href="' + olCss + '"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = olCss;
+      document.head.appendChild(link);
+    }
     const vectorSource = new window.ol.source.Vector({
       features: getFeaturesFromOpenLayersData(this.data)
     });
