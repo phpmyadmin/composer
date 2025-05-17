@@ -34,11 +34,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('triggers.js
 });
 const DatabaseTriggers = {
   /**
-   * @var $ajaxDialog Query object containing the reference to the
-   *                  dialog that contains the editor
-   */
-  $ajaxDialog: null,
-  /**
    * @var syntaxHiglighter Reference to the codemirror editor
    */
   syntaxHiglighter: null,
@@ -136,43 +131,20 @@ const DatabaseTriggers = {
         return;
       }
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      /**
-       * @var buttonOptions Object containing options
-       *                     for jQueryUI dialog buttons
-       */
-      var buttonOptions = {
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-primary'
-        }
-      };
-      // @ts-ignore
-      buttonOptions[window.Messages.strClose].click = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close').remove();
-      };
-      /**
-       * Display the dialog to the user
-       */
-      data.message = '<textarea cols="40" rows="15" class="w-100">' + data.message + '</textarea>';
-      var $ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        width: 500,
-        // @ts-ignore
-        buttons: buttonOptions,
-        title: data.title
+      const triggersExportTextarea = '<textarea id="triggersExportTextarea" cols="40" rows="15" class="form-control" aria-label="' + window.Messages.strTrigger + '"></textarea>';
+      const triggersExportModal = document.getElementById('triggersExportModal');
+      triggersExportModal.addEventListener('shown.bs.modal', function () {
+        triggersExportModal.querySelector('.modal-title').textContent = data.title;
+        triggersExportModal.querySelector('.modal-body').innerHTML = triggersExportTextarea;
+        document.getElementById('triggersExportTextarea').textContent = data.message;
+        (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#triggersExportTextarea'));
       });
-      // Attach syntax highlighted editor to export dialog
-      /**
-       * @var $elm jQuery object containing the reference
-       *           to the Export textarea.
-       */
-      var $elm = $ajaxDialog.find('textarea');
-      (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm);
-    } // end showExport()
+      triggersExportModal.addEventListener('hidden.bs.modal', function () {
+        triggersExportModal.querySelector('.modal-body').innerHTML = triggersExportTextarea;
+      });
+      window.bootstrap.Modal.getOrCreateInstance(triggersExportModal).show();
+    }
   },
-  // end exportDialog()
   editorDialog: function (isNew, $this) {
     var that = this;
     /**
@@ -199,22 +171,10 @@ const DatabaseTriggers = {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
         return;
       }
-      var buttonOptions = {
-        [window.Messages.strGo]: {
-          text: window.Messages.strGo,
-          class: 'btn btn-primary'
-        },
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-secondary'
-        }
-      };
       // We have successfully fetched the editor form
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      // Now define the function that is called when
-      // the user presses the "Go" button
-      // @ts-ignore
-      buttonOptions[window.Messages.strGo].click = function () {
+      let isEditMode = false;
+      function triggersEditorModalSaveEventHandler() {
         // Move the data from the codemirror editor back to the
         // textarea, where it can be used in the form submission.
         if (typeof window.CodeMirror !== 'undefined') {
@@ -238,10 +198,10 @@ const DatabaseTriggers = {
           // Item created successfully
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
-          that.$ajaxDialog.dialog('close');
+          window.bootstrap.Modal.getOrCreateInstance('#triggersEditorModal').hide();
           // If we are in 'edit' mode, we must
           // remove the reference to the old row.
-          if (mode === 'edit' && $editRow !== null) {
+          if (isEditMode && $editRow !== null) {
             $editRow.remove();
           }
           // Sometimes, like when moving a trigger from
@@ -317,65 +277,48 @@ const DatabaseTriggers = {
           }
           _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         }); // end $.post()
-      }; // end of function that handles the submission of the Editor
-      // @ts-ignore
-      buttonOptions[window.Messages.strClose].click = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close');
-      };
-      /**
-       * Display the dialog to the user
-       */
-      that.$ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="rteDialog">' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        width: '70%',
-        minWidth: 500,
-        // @ts-ignore
-        buttons: buttonOptions,
-        // Issue #15810 - use button titles for modals (eg: new procedure)
-        // Respect the order: title on href tag, href content, title sent in response
-        title: $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text(),
-        modal: true,
-        open: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'max-height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').parents('.ui-dialog').height() > jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height()) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
-          });
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
-          });
-          // @ts-ignore
-          (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
-        },
-        close: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
-        }
-      });
-      /**
-       * @var mode Used to remember whether the editor is in
-       *           "Edit" or "Add" mode
-       */
-      var mode = 'add';
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
-        mode = 'edit';
       }
-      // Attach syntax highlighted editor to the definition
-      /**
-       * @var elm jQuery object containing the reference to
-       *                 the Definition textarea.
-       */
-      var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
-      var linterOptions = {
-        editorType: 'trigger'
-      };
-      that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
-      window.codeMirrorEditor = that.syntaxHiglighter;
-    }); // end $.get()
+      const triggersEditorModal = document.getElementById('triggersEditorModal');
+      triggersEditorModal.addEventListener('shown.bs.modal', function () {
+        /**
+         * Issue #15810 - use button titles for modals (eg: new procedure)
+         * Respect the order: title on href tag, href content, title sent in response
+         */
+        triggersEditorModal.querySelector('.modal-title').textContent = $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text();
+        triggersEditorModal.querySelector('.modal-body').innerHTML = data.message;
+        const triggersEditorModalSaveButton = document.getElementById('triggersEditorModalSaveButton');
+        triggersEditorModalSaveButton === null || triggersEditorModalSaveButton === void 0 || triggersEditorModalSaveButton.addEventListener('click', triggersEditorModalSaveEventHandler);
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
+        });
+        // @ts-ignore
+        (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
+          isEditMode = true;
+        }
+        // Attach syntax highlighted editor to the definition
+        /**
+         * @var elm jQuery object containing the reference to
+         *                 the Definition textarea.
+         */
+        var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
+        var linterOptions = {
+          editorType: 'trigger'
+        };
+        that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
+        window.codeMirrorEditor = that.syntaxHiglighter;
+      });
+      triggersEditorModal.addEventListener('hidden.bs.modal', function () {
+        const triggersEditorModalSaveButton = document.getElementById('triggersEditorModalSaveButton');
+        triggersEditorModalSaveButton === null || triggersEditorModalSaveButton === void 0 || triggersEditorModalSaveButton.removeEventListener('click', triggersEditorModalSaveEventHandler);
+        document.getElementById('triggersEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
+      });
+      window.bootstrap.Modal.getOrCreateInstance(triggersEditorModal).show();
+    });
   },
   dropDialog: function ($this) {
     /**

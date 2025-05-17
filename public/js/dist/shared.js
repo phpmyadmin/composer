@@ -4783,9 +4783,6 @@ function onloadIdleEvent() {
           if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#modalOverlay').length) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('fieldset').not(':disabled').attr('disabled', 'disabled').addClass('disabled_for_expiration');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append(data.error);
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('.ui-dialog').each(function () {
-              jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('aria-describedby')).dialog('close');
-            });
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_username').trigger('focus');
           } else {
             _navigation_ts__WEBPACK_IMPORTED_MODULE_2__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.set('token', data.new_token));
@@ -5563,11 +5560,6 @@ function onloadCreateTableEvents() {
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#properties_message').removeClass('alert-danger').html('');
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
-        // Only if the create table dialog (distinct panel) exists
-        var $createTableDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#create_table_dialog');
-        if ($createTableDialog.length > 0) {
-          $createTableDialog.dialog('close').remove();
-        }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableslistcontainer').before(data.formatted_sql);
         /**
          * @var tables_table    Object referring to the <tbody> element that holds the list of tables
@@ -5813,10 +5805,8 @@ function onloadChangePasswordEvents() {
           var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
           $pageContent.prepend(data.message);
           (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__["default"])($pageContent);
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_dialog').hide().remove();
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_user_dialog').dialog('close').remove();
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
-        }); // end $.post()
+        });
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#changePasswordModal').modal('hide');
       };
       if (shouldShowEmptyPasswordWarning($theForm)) {
@@ -5844,11 +5834,7 @@ function onloadChangePasswordEvents() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldset_change_password_footer').hide();
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
       displayPasswordGenerateButton();
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_form').on('submit', function (e) {
-        e.preventDefault();
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button').first().trigger('click');
-      });
-    }); // end $.get()
+    });
   });
 }
 function teardownEnumSetEditorMessage() {
@@ -6780,22 +6766,6 @@ function onloadCreateView() {
     sessionStorage.clear();
     return false;
   });
-  /**
-   * Attach Ajax event handlers for input fields in the editor
-   * and used to submit the Ajax request when the ENTER key is pressed.
-   */
-  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#createViewModal').length !== 0) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('keydown', '#createViewModal input, #createViewModal select', function (e) {
-      if (e.which === 13) {
-        // 13 is the ENTER key
-        e.preventDefault();
-        // with preventing default, selection by <select> tag
-        // was also prevented in IE
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).trigger('blur');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.ui-dialog').find('.ui-button').first().trigger('click');
-      }
-    }); // end $(document).on()
-  }
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name="view[as]"]').length !== 0) {
     window.codeMirrorEditor = getSqlEditor(jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name="view[as]"]'));
   }

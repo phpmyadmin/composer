@@ -276,10 +276,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    **/
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#move_columns_anchor', function (e) {
     e.preventDefault();
-    var buttonOptionsError = {};
-    buttonOptionsError[window.Messages.strOK] = function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close').remove();
-    };
     var columns = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablestructure').find('tbody tr').each(function () {
       var colName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input:checkbox').eq(0).val();

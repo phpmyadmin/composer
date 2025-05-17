@@ -181,8 +181,7 @@ const DatabaseRoutines = {
         // Move the data from the codemirror editor back to the
         // textarea, where it can be used in the form submission.
         if (typeof window.CodeMirror !== 'undefined') {
-          var _that$syntaxHiglighte;
-          (_that$syntaxHiglighte = that.syntaxHiglighter) === null || _that$syntaxHiglighte === void 0 || _that$syntaxHiglighte.save();
+          that.syntaxHiglighter.save();
         }
         // Validate editor and submit request, if passed.
         if (!that.validate()) {

@@ -35,11 +35,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/ev
 });
 const DatabaseEvents = {
   /**
-   * @var $ajaxDialog Query object containing the reference to the
-   *                  dialog that contains the editor
-   */
-  $ajaxDialog: null,
-  /**
    * @var syntaxHiglighter Reference to the codemirror editor
    */
   syntaxHiglighter: null,
@@ -125,42 +120,20 @@ const DatabaseEvents = {
         return;
       }
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      /**
-       * @var buttonOptions Object containing options
-       *                     for jQueryUI dialog buttons
-       */
-      var buttonOptions = {
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-primary',
-          click: function () {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close').remove();
-          }
-        }
-      };
-      /**
-       * Display the dialog to the user
-       */
-      data.message = '<textarea cols="40" rows="15" class="w-100">' + data.message + '</textarea>';
-      var $ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        width: 500,
-        // @ts-ignore
-        buttons: buttonOptions,
-        title: data.title
+      const eventsExportTextarea = '<textarea id="eventsExportTextarea" cols="40" rows="15" class="form-control" aria-label="' + window.Messages.strEvent + '"></textarea>';
+      const eventsExportModal = document.getElementById('eventsExportModal');
+      eventsExportModal.addEventListener('shown.bs.modal', function () {
+        eventsExportModal.querySelector('.modal-title').textContent = data.title;
+        eventsExportModal.querySelector('.modal-body').innerHTML = eventsExportTextarea;
+        document.getElementById('eventsExportTextarea').textContent = data.message;
+        (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#eventsExportTextarea'));
       });
-      // Attach syntax highlighted editor to export dialog
-      /**
-       * @var $elm jQuery object containing the reference
-       *           to the Export textarea.
-       */
-      var $elm = $ajaxDialog.find('textarea');
-      (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm);
-    } // end showExport()
+      eventsExportModal.addEventListener('hidden.bs.modal', function () {
+        eventsExportModal.querySelector('.modal-body').innerHTML = eventsExportTextarea;
+      });
+      window.bootstrap.Modal.getOrCreateInstance(eventsExportModal).show();
+    }
   },
-  // end exportDialog()
   editorDialog: function (isNew, $this) {
     var that = this;
     /**
@@ -189,24 +162,8 @@ const DatabaseEvents = {
       }
       // We have successfully fetched the editor form
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
-      /**
-       * @var buttonOptions Object containing options
-       *                     for jQueryUI dialog buttons
-       */
-      var buttonOptions = {
-        [window.Messages.strGo]: {
-          text: window.Messages.strGo,
-          class: 'btn btn-primary'
-        },
-        [window.Messages.strClose]: {
-          text: window.Messages.strClose,
-          class: 'btn btn-secondary'
-        }
-      };
-      // Now define the function that is called when
-      // the user presses the "Go" button
-      // @ts-ignore
-      buttonOptions[window.Messages.strGo].click = function () {
+      let isEditMode = false;
+      function eventsEditorModalSaveEventHandler() {
         // Move the data from the codemirror editor back to the
         // textarea, where it can be used in the form submission.
         if (typeof window.CodeMirror !== 'undefined') {
@@ -228,10 +185,10 @@ const DatabaseEvents = {
             // Item created successfully
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.slidingMessage)(data.message);
-            that.$ajaxDialog.dialog('close');
+            window.bootstrap.Modal.getOrCreateInstance('#eventsEditorModal').hide();
             // If we are in 'edit' mode, we must
             // remove the reference to the old row.
-            if (mode === 'edit' && $editRow !== null) {
+            if (isEditMode && $editRow !== null) {
               $editRow.remove();
             }
             // Sometimes, like when moving a trigger from
@@ -306,68 +263,50 @@ const DatabaseEvents = {
               });
             }
             _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-          }); // end $.post()
-        } // end "if (that.validate())"
-      }; // end of function that handles the submission of the Editor
-      // @ts-ignore
-      buttonOptions[window.Messages.strClose].click = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).dialog('close');
-      };
-      /**
-       * Display the dialog to the user
-       */
-      that.$ajaxDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="rteDialog">' + data.message + '</div>').dialog({
-        classes: {
-          'ui-dialog-titlebar-close': 'btn-close'
-        },
-        height: 500,
-        width: '70%',
-        minWidth: 500,
-        // @ts-ignore
-        buttons: buttonOptions,
-        // Issue #15810 - use button titles for modals (eg: new procedure)
-        // Respect the order: title on href tag, href content, title sent in response
-        title: $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text(),
-        modal: true,
-        open: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'max-height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').parents('.ui-dialog').height() > jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height()) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rteDialog').dialog('option', 'height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height());
-          }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
           });
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
-          });
-          // @ts-ignore
-          (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
-        },
-        close: function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
         }
-      });
-      /**
-       * @var mode Used to remember whether the editor is in
-       *           "Edit" or "Add" mode
-       */
-      var mode = 'add';
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
-        mode = 'edit';
       }
-      // Attach syntax highlighted editor to the definition
-      /**
-       * @var elm jQuery object containing the reference to
-       *                 the Definition textarea.
-       */
-      var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
-      var linterOptions = {
-        editorType: 'event'
-      };
-      that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
-      window.codeMirrorEditor = that.syntaxHiglighter;
-    }); // end $.get()
+      const eventsEditorModal = document.getElementById('eventsEditorModal');
+      eventsEditorModal.addEventListener('shown.bs.modal', function () {
+        /**
+         * Issue #15810 - use button titles for modals (eg: new procedure)
+         * Respect the order: title on href tag, href content, title sent in response
+         */
+        eventsEditorModal.querySelector('.modal-title').textContent = $this.attr('title') || $this.text() || jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.title).text();
+        eventsEditorModal.querySelector('.modal-body').innerHTML = data.message;
+        const eventsEditorModalSaveButton = document.getElementById('eventsEditorModalSaveButton');
+        eventsEditorModalSaveButton === null || eventsEditorModalSaveButton === void 0 || eventsEditorModalSaveButton.addEventListener('click', eventsEditorModalSaveEventHandler);
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name=item_name]').trigger('focus');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'date');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input.datetimefield').each(function () {
+          (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('width', '95%'), 'datetime');
+        });
+        // @ts-ignore
+        (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).initialized = false;
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=editor_process_edit]').length > 0) {
+          isEditMode = true;
+        }
+        // Attach syntax highlighted editor to the definition
+        /**
+         * @var elm jQuery object containing the reference to
+         *                 the Definition textarea.
+         */
+        var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
+        var linterOptions = {
+          editorType: 'event'
+        };
+        that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
+        window.codeMirrorEditor = that.syntaxHiglighter;
+      });
+      eventsEditorModal.addEventListener('hidden.bs.modal', function () {
+        const eventsEditorModalSaveButton = document.getElementById('eventsEditorModalSaveButton');
+        eventsEditorModalSaveButton === null || eventsEditorModalSaveButton === void 0 || eventsEditorModalSaveButton.removeEventListener('click', eventsEditorModalSaveEventHandler);
+        document.getElementById('eventsEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
+      });
+      window.bootstrap.Modal.getOrCreateInstance(eventsEditorModal).show();
+    });
   },
   dropDialog: function ($this) {
     /**
@@ -532,9 +471,10 @@ const DatabaseEvents = {
      *          to an element that is being validated
      */
     var $elm = null;
-    if (this.$ajaxDialog.find('select[name=item_type]').find(':selected').val() === 'RECURRING') {
+    const eventsEditorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#eventsEditorModal');
+    if (eventsEditorModal.find('select[name=item_type]').find(':selected').val() === 'RECURRING') {
       // The interval field must not be empty for recurring events
-      $elm = this.$ajaxDialog.find('input[name=item_interval_value]');
+      $elm = eventsEditorModal.find('input[name=item_interval_value]');
       if ($elm.val() === '') {
         $elm.trigger('focus');
         alert(window.Messages.strFormEmpty);
@@ -542,7 +482,7 @@ const DatabaseEvents = {
       }
     } else {
       // The execute_at field must not be empty for "once off" events
-      $elm = this.$ajaxDialog.find('input[name=item_execute_at]');
+      $elm = eventsEditorModal.find('input[name=item_execute_at]');
       if ($elm.val() === '') {
         $elm.trigger('focus');
         alert(window.Messages.strFormEmpty);

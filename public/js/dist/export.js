@@ -699,7 +699,6 @@ function createAliasModal(event) {
   var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#renameExportModal');
   modal.modal('show');
   modal.on('shown.bs.modal', function () {
-    modal.closest('.ui-dialog').find('.ui-button').addClass('btn btn-secondary');
     var db = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db');
     if (db) {
       var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');

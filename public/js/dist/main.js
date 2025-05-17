@@ -493,8 +493,6 @@ function onloadNavigation() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.unhideNavItem.ajax', function (event) {
       event.preventDefault();
       var $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr');
-      var $hiddenTableCount = $tr.parents('tbody').children().length;
-      var $hideDialogBox = $tr.closest('div.ui-dialog');
       var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
       var argSep = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator');
       var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
@@ -507,9 +505,6 @@ function onloadNavigation() {
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)($msg);
           if (typeof data !== 'undefined' && data.success === true) {
             $tr.remove();
-            if ($hiddenTableCount === 1) {
-              $hideDialogBox.remove();
-            }
             _navigation_ts__WEBPACK_IMPORTED_MODULE_2__.Navigation.reload();
           } else {
             (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error);
