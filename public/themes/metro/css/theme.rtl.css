@@ -11542,9 +11542,6 @@ div#logTable {
 div#logTable table {
   width: 100%;
 }
-div#queryAnalyzerDialog {
-  min-width: 700px;
-}
 div#queryAnalyzerDialog div.CodeMirror-scroll {
   height: auto;
 }
@@ -12935,16 +12932,6 @@ meter[value="3"]::-webkit-meter-optimum-value {
 }
 
 /* styles for jQuery-ui to support rtl languages */
-body .ui-dialog .ui-dialog-titlebar-close {
-  left: 0.3em;
-  right: initial;
-}
-body .ui-dialog .ui-dialog-title {
-  float: right;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-  float: left;
-}
 body .ui-corner-all,
 body .ui-corner-top,
 body .ui-corner-left,
@@ -12968,34 +12955,6 @@ body .ui-corner-bottom,
 body .ui-corner-right,
 body .ui-corner-br {
   border-bottom-left-radius: 0;
-}
-body .ui-dialog {
-  padding: 0;
-}
-body .ui-dialog .ui-widget-header {
-  color: #fff;
-  border: none;
-  background-color: var(--navi-background);
-  background-image: none;
-}
-body .ui-dialog .ui-dialog-title {
-  padding: 5px;
-  font-weight: normal;
-}
-body .ui-dialog .ui-dialog-buttonpane button {
-  font-family: "Open Sans", "Segoe UI", sans-serif;
-  color: #fff;
-  background-color: var(--navi-background);
-  background-image: none;
-  border: 1px solid var(--button-background);
-}
-body .ui-dialog .ui-dialog-buttonpane button.ui-state-hover {
-  background-color: var(--button-hover);
-  border: 1px solid var(--button-hover);
-}
-body .ui-dialog .ui-dialog-buttonpane button.ui-state-active {
-  background-color: #333;
-  border: 1px solid #333;
 }
 
 #tooltip_editor {

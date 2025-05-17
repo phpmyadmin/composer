@@ -11436,9 +11436,6 @@ div#logTable {
 div#logTable table {
   width: 100%;
 }
-div#queryAnalyzerDialog {
-  min-width: 700px;
-}
 div#queryAnalyzerDialog div.CodeMirror-scroll {
   height: auto;
 }
@@ -12304,10 +12301,6 @@ div#page_content div.result_query {
   font-weight: bold;
 }
 
-.ui-dialog {
-  position: fixed;
-}
-
 .small_font {
   font-size: smaller;
 }
@@ -12862,26 +12855,6 @@ th.headerSortUp:hover .sorticon {
   background-image: url("../img/sort-asc.svg");
 }
 
-body .ui-dialog .ui-dialog-titlebar-close {
-  right: 0.3em;
-  left: initial;
-}
-body .ui-dialog .ui-dialog-title {
-  float: left;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-  float: right;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button {
-  color: #fff;
-  background: none;
-  background-color: #6c757d !important;
-  border-color: #6c757d;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button:hover {
-  background-color: #5a6268 !important;
-}
-
 #name-panel {
   overflow: hidden;
 }
@@ -12918,10 +12891,6 @@ body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button:hover {
   }
   #table_columns .tablesorter {
     min-width: 100%;
-  }
-  .ui-dialog {
-    margin: 1%;
-    width: 95% !important;
   }
 }
 #tooltip_editor {

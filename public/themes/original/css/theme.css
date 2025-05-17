@@ -12147,10 +12147,6 @@ div#page_content div.result_query {
   font-weight: bold;
 }
 
-.ui-dialog {
-  position: fixed;
-}
-
 .small_font {
   font-size: smaller;
 }
@@ -12650,16 +12646,6 @@ span.drag_icon {
 }
 
 /* styles for jQuery-ui to support rtl languages */
-body .ui-dialog .ui-dialog-titlebar-close {
-  right: 0.3em;
-  left: initial;
-}
-body .ui-dialog .ui-dialog-title {
-  float: left;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-  float: right;
-}
 body .ui-corner-all,
 body .ui-corner-top,
 body .ui-corner-left,
@@ -12683,33 +12669,6 @@ body .ui-corner-bottom,
 body .ui-corner-right,
 body .ui-corner-br {
   border-bottom-right-radius: 0;
-}
-body .ui-dialog {
-  padding: 0;
-  border-color: #000;
-}
-body .ui-dialog .ui-dialog-titlebar {
-  padding: 0.3em 0.5em;
-  border: none;
-  border-bottom: 1px solid #000;
-}
-body .ui-dialog .ui-dialog-titlebar button {
-  border: 1px solid #999;
-}
-body .ui-dialog .ui-dialog-content {
-  padding: 0.2em 0.4em;
-}
-body .ui-dialog .ui-dialog-buttonpane {
-  background: #d3dce3;
-  border-top: 1px solid #000;
-}
-body .ui-dialog .ui-dialog-buttonpane button {
-  margin: 0.1em 0 0.1em 0.4em;
-  border: 1px solid #999;
-  color: #000;
-}
-body .ui-dialog .ui-button-text-only .ui-button-text {
-  padding: 0.2em 0.6em;
 }
 
 /* templates/database/designer */
@@ -12745,10 +12704,6 @@ body .ui-dialog .ui-button-text-only .ui-button-text {
   }
   #table_columns .tablesorter {
     min-width: 100%;
-  }
-  .ui-dialog {
-    margin: 1%;
-    width: 95% !important;
   }
   #server-breadcrumb .item {
     margin: 4px;

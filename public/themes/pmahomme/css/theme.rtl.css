@@ -11366,9 +11366,6 @@ div#logTable {
 div#logTable table {
   width: 100%;
 }
-div#queryAnalyzerDialog {
-  min-width: 700px;
-}
 div#queryAnalyzerDialog div.CodeMirror-scroll {
   height: auto;
 }
@@ -12271,10 +12268,6 @@ div#page_content div.result_query {
   font-weight: bold;
 }
 
-.ui-dialog {
-  position: fixed;
-}
-
 .small_font {
   font-size: smaller;
 }
@@ -12784,17 +12777,6 @@ meter[value="3"]::-webkit-meter-optimum-value {
   background: linear-gradient(white 3%, #ffd700 5%, transparent 10%, #ffd700);
 }
 
-body .ui-dialog .ui-dialog-titlebar-close {
-  left: 0.3em;
-  right: initial;
-}
-body .ui-dialog .ui-dialog-title {
-  float: right;
-}
-body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-  float: left;
-}
-
 #name-panel {
   overflow: hidden;
 }
@@ -12826,10 +12808,6 @@ body .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
   }
   #table_columns .tablesorter {
     min-width: 100%;
-  }
-  .ui-dialog {
-    margin: 1%;
-    width: 95% !important;
   }
 }
 #tooltip_editor {
