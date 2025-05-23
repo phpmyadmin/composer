@@ -1465,12 +1465,6 @@ parameters:
 			path: src/ConfigStorage/Relation.php
 
 		-
-			message: '#^Cannot access an offset on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
 			count: 1
@@ -1657,12 +1651,6 @@ parameters:
 			path: src/ConfigStorage/Relation.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, string\|false\|null given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
 			message: '#^Only booleans are allowed in an if condition, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
 			identifier: if.condNotBoolean
 			count: 1
@@ -1671,18 +1659,6 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in an if condition, bool\|string\|null given\.$#'
 			identifier: if.condNotBoolean
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
-			message: '#^Parameter \#1 \$array of function array_reverse expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
-			message: '#^Parameter \#1 \$array of function array_shift expects array, mixed given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/ConfigStorage/Relation.php
 
@@ -1712,18 +1688,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$type of method PhpMyAdmin\\Types\:\:getTypeClass\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
-			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/ConfigStorage/Relation.php
-
-		-
-			message: '#^Parameter \#2 \$callback of function usort expects callable\(string\|null, string\|null\)\: int, Closure\(string, string\)\: int\<\-1, 1\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/ConfigStorage/Relation.php
@@ -1780,7 +1744,37 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
-			path: src/Console.php
+			path: src/Console/Console.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Console/History.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, string\|false\|null given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Console/History.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_reverse expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Console/History.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_shift expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Console/History.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Console/History.php
 
 		-
 			message: '#^Binary operation "\.\=" between mixed and '' \-\> '' results in an error\.$#'
@@ -3514,19 +3508,7 @@ parameters:
 			path: src/Controllers/Table/RelationController.php
 
 		-
-			message: '#^Parameter \#1 \$identifier of static method PhpMyAdmin\\Util\:\:backquote\(\) expects string\|Stringable\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Controllers/Table/RelationController.php
-
-		-
 			message: '#^Parameter \#1 \$multiEditColumnsName of method PhpMyAdmin\\Table\\Table\:\:updateInternalRelations\(\) expects array\<string\>, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/RelationController.php
-
-		-
-			message: '#^Parameter \#2 \$callback of function usort expects callable\(string\|null, string\|null\)\: int, Closure\(string, string\)\: int\<\-1, 1\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Table/RelationController.php
@@ -5047,12 +5029,6 @@ parameters:
 			path: src/Database/Designer/Common.php
 
 		-
-			message: '#^Parameter \#1 \$string of function rawurlencode expects string, int\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Database/Designer/Common.php
-
-		-
 			message: '#^Parameter \#1 \$string of function rawurlencode expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -6170,6 +6146,12 @@ parameters:
 
 		-
 			message: '#^Method PhpMyAdmin\\Encoding\:\:convertString\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Encoding.php
+
+		-
+			message: '#^Method PhpMyAdmin\\Encoding\:\:kanjiStrConv\(\) should return string but returns string\|false\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Encoding.php
@@ -10477,15 +10459,9 @@ parameters:
 			path: src/Plugins/Export/ExportSql.php
 
 		-
-			message: '#^Cannot access offset int\|string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Plugins/Export/ExportSql.php
-
-		-
 			message: '#^Cannot access offset string on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 11
+			count: 12
 			path: src/Plugins/Export/ExportSql.php
 
 		-
@@ -11719,12 +11695,6 @@ parameters:
 			path: src/Plugins/Schema/Dia/DiaRelationSchema.php
 
 		-
-			message: '#^Parameter \#2 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Dia\\DiaRelationSchema\:\:addRelation\(\) expects string, int\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins/Schema/Dia/DiaRelationSchema.php
-
-		-
 			message: '#^Parameter \#4 \$foreignField of method PhpMyAdmin\\Plugins\\Schema\\Dia\\DiaRelationSchema\:\:addRelation\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -11768,12 +11738,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#4 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Eps\\EpsRelationSchema\:\:addRelation\(\) expects string, \(int\|string\) given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins/Schema/Eps/EpsRelationSchema.php
-
-		-
-			message: '#^Parameter \#4 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Eps\\EpsRelationSchema\:\:addRelation\(\) expects string, int\|string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Schema/Eps/EpsRelationSchema.php
@@ -12070,12 +12034,6 @@ parameters:
 			path: src/Plugins/Schema/Pdf/PdfRelationSchema.php
 
 		-
-			message: '#^Parameter \#2 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Pdf\\PdfRelationSchema\:\:addRelation\(\) expects string, int\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins/Schema/Pdf/PdfRelationSchema.php
-
-		-
 			message: '#^Parameter \#4 \$foreignField of method PhpMyAdmin\\Plugins\\Schema\\Pdf\\PdfRelationSchema\:\:addRelation\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -12257,12 +12215,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#4 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Svg\\SvgRelationSchema\:\:addRelation\(\) expects string, \(int\|string\) given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins/Schema/Svg/SvgRelationSchema.php
-
-		-
-			message: '#^Parameter \#4 \$masterField of method PhpMyAdmin\\Plugins\\Schema\\Svg\\SvgRelationSchema\:\:addRelation\(\) expects string, int\|string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Schema/Svg/SvgRelationSchema.php
@@ -14655,7 +14607,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 13
+			count: 2
 			path: src/Table/Table.php
 
 		-
@@ -14750,12 +14702,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#2 \$string of function explode expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Table/Table.php
-
-		-
-			message: '#^Parameter \#3 \$foreignDb of method PhpMyAdmin\\Table\\Table\:\:getSQLToCreateForeignKey\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Table/Table.php
@@ -16760,6 +16706,15 @@ parameters:
 
 		-
 			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: tests/unit/ConsoleTest.php
+
+		-
+			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
 				Use dependency injection instead\.$#
 			'''
@@ -16793,6 +16748,15 @@ parameters:
 			identifier: staticMethod.deprecated
 			count: 2
 			path: tests/unit/Controllers/Console/Bookmark/AddControllerTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: tests/unit/Controllers/Console/Bookmark/RefreshControllerTest.php
 
 		-
 			message: '''

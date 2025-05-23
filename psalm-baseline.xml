@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.10.3@90b5b9f5e7c8e441b191d3c82c58214753d7c7c1">
+<files psalm-version="6.11.0@4ed53b7ccebc09ef60ec4c9e464bf8a01bfd35b0">
   <file src="app/services_loader.php">
     <MixedArgument>
       <code><![CDATA[$argumentName]]></code>
@@ -613,9 +613,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidArgument>
-      <code><![CDATA[usort($tables, strnatcasecmp(...))]]></code>
-    </InvalidArgument>
     <InvalidReturnStatement>
       <code><![CDATA[$tableNameReplacements]]></code>
     </InvalidReturnStatement>
@@ -623,9 +620,6 @@
       <code><![CDATA[array<string, string>]]></code>
     </InvalidReturnType>
     <MixedArgument>
-      <code><![CDATA[$_SESSION['sql_history']]]></code>
-      <code><![CDATA[$_SESSION['sql_history']]]></code>
-      <code><![CDATA[$_SESSION['sql_history']]]></code>
       <code><![CDATA[$columns['table_name']]]></code>
       <code><![CDATA[$columns['table_schema']]]></code>
       <code><![CDATA[$foreignDb]]></code>
@@ -637,9 +631,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[uksort($foreign, strnatcasecmp(...))]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAssignment>
-      <code><![CDATA[$_SESSION['sql_history'][]]]></code>
-    </MixedArrayAssignment>
     <MixedArrayOffset>
       <code><![CDATA[$foreign[$key]]]></code>
     </MixedArrayOffset>
@@ -670,7 +661,6 @@
       <code><![CDATA[bool]]></code>
     </PossiblyUnusedReturnValue>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[! $maxTime]]></code>
       <code><![CDATA[$relationParams[$work]]]></code>
       <code><![CDATA[empty($this->config->selectedServer[$feature])]]></code>
       <code><![CDATA[empty($this->config->selectedServer['bookmarktable'])]]></code>
@@ -710,10 +700,23 @@
       <code><![CDATA[$userGroups[$groupName]]]></code>
     </PossiblyNullArrayOffset>
   </file>
-  <file src="src/Console.php">
+  <file src="src/Console/Console.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
+  </file>
+  <file src="src/Console/History.php">
+    <MixedArgument>
+      <code><![CDATA[$_SESSION['sql_history']]]></code>
+      <code><![CDATA[$_SESSION['sql_history']]]></code>
+      <code><![CDATA[$_SESSION['sql_history']]]></code>
+    </MixedArgument>
+    <MixedArrayAssignment>
+      <code><![CDATA[$_SESSION['sql_history'][]]]></code>
+    </MixedArrayAssignment>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $maxTime]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Controllers/BrowseForeignersController.php">
     <PossiblyUnusedReturnValue>
@@ -2505,12 +2508,9 @@
       <code><![CDATA[$_POST['destination_table']]]></code>
       <code><![CDATA[$multiEditColumnsName]]></code>
       <code><![CDATA[$multiEditColumnsName]]></code>
-      <code><![CDATA[usort($tables, strnatcasecmp(...))]]></code>
     </InvalidArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[$_POST['display_field']]]></code>
-      <code><![CDATA[$_POST['foreignDb']]]></code>
-      <code><![CDATA[$_POST['foreignDb']]]></code>
       <code><![CDATA[$_POST['foreignDb']]]></code>
       <code><![CDATA[$_POST['foreignDb']]]></code>
       <code><![CDATA[$foreignTable]]></code>
@@ -3367,7 +3367,6 @@
       <code><![CDATA[$_POST['t_x'][$key]]]></code>
       <code><![CDATA[$_POST['t_y'][$key]]]></code>
       <code><![CDATA[$db]]></code>
-      <code><![CDATA[$oneField]]></code>
       <code><![CDATA[$oneTable['TABLE_NAME']]]></code>
       <code><![CDATA[$oneTable['TABLE_NAME']]]></code>
       <code><![CDATA[$tab]]></code>
@@ -7118,9 +7117,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$masterField]]></code>
     </MixedArgumentTypeCoercion>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$oneField]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
       <code><![CDATA[$_REQUEST['dia_orientation']]]></code>
       <code><![CDATA[$_REQUEST['dia_paper']]]></code>
@@ -7156,9 +7152,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$masterField]]></code>
     </MixedArgumentTypeCoercion>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$oneField]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
       <code><![CDATA[$_REQUEST['eps_orientation']]]></code>
     </PossiblyInvalidCast>
@@ -7337,7 +7330,6 @@
     </MixedOperand>
     <PossiblyInvalidArgument>
       <code><![CDATA[$_REQUEST['pdf_table_order']]]></code>
-      <code><![CDATA[$oneField]]></code>
       <code><![CDATA[$showTable['Check_time']]]></code>
       <code><![CDATA[$showTable['Create_time']]]></code>
       <code><![CDATA[$showTable['Update_time']]]></code>
@@ -7521,9 +7513,6 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$masterField]]></code>
     </MixedArgumentTypeCoercion>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$oneField]]></code>
-    </PossiblyInvalidArgument>
     <UnsupportedPropertyReferenceUsage>
       <code><![CDATA[$this->tables[$table]->width = &$this->tablewidth]]></code>
     </UnsupportedPropertyReferenceUsage>
@@ -8804,7 +8793,6 @@
     <PossiblyNullArgument>
       <code><![CDATA[$column['Extra']]]></code>
       <code><![CDATA[$column['Extra']]]></code>
-      <code><![CDATA[$existrelForeign[$masterFieldMd5]->refDbName]]></code>
       <code><![CDATA[$existrelForeign[$masterFieldMd5]->refTableName]]></code>
     </PossiblyNullArgument>
     <PossiblyNullOperand>
@@ -8817,11 +8805,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($existrelForeign[$masterFieldMd5]->onDelete)]]></code>
       <code><![CDATA[empty($existrelForeign[$masterFieldMd5]->onUpdate)]]></code>
-      <code><![CDATA[empty($foreignField)]]></code>
-      <code><![CDATA[empty($foreignField[$key])]]></code>
-      <code><![CDATA[empty($foreignField[$key])]]></code>
-      <code><![CDATA[empty($foreignField[$key])]]></code>
-      <code><![CDATA[empty($foreignTable)]]></code>
     </RiskyTruthyFalsyComparison>
     <UnsupportedPropertyReferenceUsage>
       <code><![CDATA[$this->uiprefs =& $_SESSION['tmpval']['table_uiprefs'][$serverId][$this->dbName][$this->name]]]></code>
@@ -9883,6 +9866,7 @@
   </file>
   <file src="tests/unit/ConsoleTest.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
   </file>
@@ -9904,6 +9888,7 @@
   </file>
   <file src="tests/unit/Controllers/Console/Bookmark/RefreshControllerTest.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
   </file>
