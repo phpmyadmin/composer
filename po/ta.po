@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2025-01-28 04:37+0000\n"
-"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"PO-Revision-Date: 2025-06-18 14:04+0000\n"
+"Last-Translator: Maurício Meneghini Fauth <mauricio@mfauth.net>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/phpmyadmin/4-9/ta/>"
 "\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12.1\n"
 
 #: ajax.php:21 ajax.php:50 export.php:196 libraries/classes/Export.php:1095
 msgid "Bad type!"
@@ -369,7 +369,7 @@ msgstr ""
 
 #: db_tracking.php:95
 msgid "No tables selected."
-msgstr "எந்த அட்டவணைகளும்  தேர்ந்தெடுக்கப்படவில்லை."
+msgstr "எந்த அட்டவணைகளும் தேர்ந்தெடுக்கப்படவில்லை."
 
 #: db_tracking.php:153
 msgid "Database Log"
@@ -646,7 +646,7 @@ msgstr ""
 #: index.php:202 libraries/classes/Footer.php:81
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:115
 msgid "phpMyAdmin Demo Server"
-msgstr "PHPMyAdmin  செயல்விளக்க சேவையகம்"
+msgstr "PHPMyAdmin செயல்விளக்க சேவையகம்"
 
 #: index.php:206 libraries/classes/Plugins/Auth/AuthenticationCookie.php:118
 #, php-format
@@ -785,8 +785,8 @@ msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
 msgstr ""
-"curl நீட்டிப்பு மற்றும் allow_url_fopen  முடக்கப்பட்டுள்ளது. இதனால் தவறு அறிக்கை, "
-"பதிப்பு சோதனை போன்ற அம்சங்கள் முடக்கப்பட்டுள்ளது."
+"curl நீட்டிப்பு மற்றும் allow_url_fopen முடக்கப்பட்டுள்ளது. இதனால் தவறு அறிக்கை, பதிப்புச்"
+" சோதனை போன்ற அம்சங்கள் முடக்கப்பட்டுள்ளது."
 
 #: index.php:543
 msgid ""
@@ -968,13 +968,13 @@ msgid ""
 "Do you really want to DROP the selected partition(s)? This will also DELETE "
 "the data related to the selected partition(s)!"
 msgstr ""
-"தேர்ந்தெடுக்கப்பட்ட பகிர்வு(கள்)களை கைவிட(DROP செய்ய) விரும்புகிறீர்களா? இது "
-"தேர்ந்தெடுக்கப்பட்ட பகிர்வு(கள்) தொடர்பான தரவை அழித்துவிடும் !"
+"தேர்ந்தெடுக்கப்பட்ட பகிர்வு(கள்)ஐக் (DROP)நீக்கம் செய்ய விரும்புகிறீர்களா? இது தேர்ந்தெடுக்கப்பட்"
+"ட பகிர்வு(கள்) தொடர்பான தரவை (DELETE) நீக்கும்!"
 
 #: js/messages.php:84
 msgid "Do you really want to TRUNCATE the selected partition(s)?"
 msgstr ""
-"தேர்ந்தெடுத்த பகிர்வு(கள்)களை உண்மையிலேயே காலி(TRUNCATE ) செய்ய விரும்புகிறீர்களா?"
+"தேர்ந்தெடுத்த பகிர்வு (கள்)ஐக் உண்மையிலேயே TRUNCATE (சுருக்கம்) செய்ய விரும்புகிறீர்களா?"
 
 #: js/messages.php:86
 msgid "Do you really want to remove partitioning?"
@@ -992,10 +992,10 @@ msgid ""
 "collation; in this case we suggest you revert to the original collation and "
 "refer to the tips at "
 msgstr ""
-"இந்தத் தரவு, உங்கள் தரவை புதிய இணைப்பிற்கு மாற்றியமைக்க முயற்சிக்கும். அரிதான "
-"சந்தர்ப்பங்களில், குறிப்பாக புதிய குறிமுறை அடுக்குவரிசையில் (collation) ஒரு குறிமுறை "
-"இல்லை என்றால், இந்த செயல்முறையால் தரவு புதிய குறிமுறை அடுக்குவரிசையில்(collation) "
-"தவறாக தோன்றக்கூடும்; இந்த வழக்கில், நீங்கள் அசல் குறிமுறை அடுக்குவரிசைக்கு மாற்றியமைக்க "
+"இந்தத் தரவு, உங்கள் தரவைப் புதிய இணைப்பிற்கு மாற்றியமைக்க முயற்சிக்கும். அரிதான "
+"சந்தர்ப்பங்களில், குறிப்பாகப் புதிய குறிமுறை அடுக்குவரிசையில் (collation) ஒரு குறிமுறை"
+" இல்லை என்றால், இந்தச் செயல்முறையால் தரவு புதிய குறிமுறை அடுக்குவரிசையில்(collation) "
+"தவறாகத் தோன்றக்கூடும்; இந்த வழக்கில், நீங்கள் அசல் குறிமுறை அடுக்குவரிசைக்கு மாற்றியமைக்க "
 "நாங்கள் பரிந்துரைக்கிறோம், மேலும் உதவிக்குறிப்புகளைப் பார்க்கவும் "
 
 #: js/messages.php:95
@@ -1033,7 +1033,7 @@ msgstr ""
 
 #: js/messages.php:112
 msgid "Save & close"
-msgstr "சேமித்துவிட்டபின் வெளியேறவும்"
+msgstr "சேமித்துவிட்டபின் மூடு"
 
 #: js/messages.php:113 libraries/classes/InsertEdit.php:1895
 #: prefs_manage.php:357 prefs_manage.php:368
@@ -2065,7 +2065,7 @@ msgid ""
 "Note: a, b -> d,f implies values of columns a and b combined together can "
 "determine values of column d and column f."
 msgstr ""
-"குறிப்பு: அ,ஆ->இ,ஈ என்பது அ மற்றும் ஆ நெடுவரிசைகளின் மதிப்புகள் கூட்டாக இ,ஈ  "
+"குறிப்பு: அ,ஆ->இ,ஈ என்பது அ மற்றும் ஆ நெடுவரிசைகளின் மதிப்புகள் கூட்டாக இ,ஈ "
 "நெடுவரிசைகளின் மதிப்புகளை முடிவுசெய்கிறது என்பதை குறிக்கிறது."
 
 #: js/messages.php:460
@@ -6218,9 +6218,9 @@ msgid "Compressed import will not work due to missing function %s."
 msgstr "செயல்பாடு %s காணாமல் போனதால் சுருக்கப்பட்ட இறக்குமதி இயங்காது."
 
 #: libraries/classes/Config/FormDisplay.php:844
-#, php-format
+#, fuzzy, php-format
 msgid "Compressed export will not work due to missing function %s."
-msgstr "காணாமல் போன செயல்பாடுகள் காரணமாக சுருக்கப்பட்ட ஏற்றுமதி இயங்காது."
+msgstr "காணாமல் போன செயல்பாடுகள் காரணமாகச் சுருக்கப்பட்ட ஏற்றுமதி இயங்காது."
 
 #: libraries/classes/Config/FormDisplay.php:857
 #, php-format
@@ -6316,8 +6316,8 @@ msgid ""
 msgstr ""
 "இந்த %soption %s முடக்கப்பட வேண்டும், ஏனெனில் இது எந்தவொரு MySQL சேவையகத்திற்கும் "
 "உள்நுழைவதைத் தாக்குபவர்களை அனுமதிக்கிறது. இது தேவை என்று நீங்கள் நினைத்தால், %sRESTRICT "
-"உள்நுழைவை MySQL சேவையகம் %s அல்லது %ச்ட்ரச்டட் ப்ராக்சீச் பட்டியல் %s க்கு பயன்படுத்தவும். "
-"இருப்பினும், உங்கள் ஐபி ஒரு ஐஎச்பிக்கு சொந்தமானது என்றால், நம்பகமான ப்ராக்சீச் பட்டியலுடன் "
+"உள்நுழைவை MySQL சேவையகம் %s அல்லது %s நம்பகமான பதிலாள்கள் பட்டியல் %s க்கு பயன்படுத்தவும்"
+". இருப்பினும், உங்கள் ஐபி ஒரு ஐஎச்பிக்கு சொந்தமானது என்றால், நம்பகமான ப்ராக்சீச் பட்டியலுடன் "
 "ஐபி அடிப்படையிலான பாதுகாப்பு நம்பகமானதாக இருக்காது, அங்கு நீங்கள் உட்பட ஆயிரக்கணக்கான "
 "பயனர்கள் இணைக்கப்பட்டுள்ளனர்."
 
@@ -6409,9 +6409,9 @@ msgid ""
 "may cause random session invalidation (currently session.gc_maxlifetime is "
 "%5$d)."
 msgstr ""
-"%1 $ ச்லோசின் குக்கீ செல்லுபடியாகும் %2 $ %ஐ விட அதிகமாக உள்ளது 3 $ அமர்வுக்கு "
-"அதிகமாகும். GC_MAXLIFETIME %4 $ S சீரற்ற அமர்வு செல்லாததை ஏற்படுத்தக்கூடும் (தற்போது "
-"அமர்வு. GC_MAXLIFETIME %5 $ D)."
+"%1$s உள்நுழைவு குக்கீ செல்லுபடியாகும் %2$sஐ விட அதிகமாக உள்ளது %3$sஅமர்வுக்கு "
+"அதிகமாகும். GC_MAXLIFETIME %4$sசீரற்ற அமர்வு செல்லாததை ஏற்படுத்தக்கூடும் (தற்போது அமர்வு"
+". GC_MAXLIFETIME %5$d)."
 
 #: libraries/classes/Config/ServerConfigChecks.php:442
 #, php-format
@@ -6666,7 +6666,7 @@ msgstr "சேவையக மாறிகள் மற்றும் அமை
 
 #: libraries/classes/Controllers/Server/ServerVariablesController.php:234
 msgid "Setting variable failed"
-msgstr "மாறி அமைப்பு  தோல்வியடைந்தது"
+msgstr "மாறி அமைப்பு தோல்வியடைந்தது"
 
 #: libraries/classes/Controllers/Table/TableChartController.php:84
 #: libraries/classes/Controllers/Table/TableGisVisualizationController.php:101
@@ -6825,8 +6825,8 @@ msgid ""
 "option is incompatible with phpMyAdmin and might cause some data to be "
 "corrupted!"
 msgstr ""
-"உங்கள் PHP அமைப்பாக்க கோப்பில்  mbstring.func_overload அமைவை இயலசெய்துள்ளீர். "
-"இவ்விருப்பம் PHPMyAdminஉடன் இணக்கமற்றது மேலும் சில தரவுகள் வீணாகலாம்!"
+"உங்கள் PHP அமைப்பாக்க கோப்பில் mbstring.func_overload அமைவை இயலசெய்துள்ளீர். இவ்விருப்பம்"
+" PHPMyAdminஉடன் இணக்கமற்றது மேலும் சில தரவுகள் வீணாகலாம்!"
 
 #: libraries/classes/Core.php:1231
 msgid ""
@@ -16623,7 +16623,7 @@ msgid ""
 "%s%% of all sorts cause temporary tables, this value should be lower than "
 "10%%."
 msgstr ""
-"அனைத்து வகையான S %% தற்காலிக அட்டவணைகளை ஏற்படுத்துகிறது, இந்த மதிப்பு 10 %% ஐ விட "
+"அனைத்து வகையான %s%% தற்காலிக அட்டவணைகளை ஏற்படுத்துகிறது, இந்த மதிப்பு 10%% ஐ விடக் "
 "குறைவாக இருக்க வேண்டும்."
 
 #: libraries/advisory_rules_generic.txt:161
@@ -16828,8 +16828,8 @@ msgid ""
 "%s%% of all temporary tables are being written to disk, this value should be "
 "below 25%%"
 msgstr ""
-"அனைத்து தற்காலிக அட்டவணைகளிலும்%s %% வட்டுக்கு எழுதப்பட்டுள்ளது, இந்த மதிப்பு 25 %ண்ட் "
-"குறைவாக இருக்க வேண்டும்"
+"அனைத்து தற்காலிக அட்டவணைகளிலும்%s%% வட்டுக்கு எழுதப்பட்டுள்ளது, இந்த மதிப்பு 25%% குறைவா"
+"க இருக்க வேண்டும்"
 
 #: libraries/advisory_rules_generic.txt:219
 msgid "Temp disk rate"
@@ -16911,8 +16911,8 @@ msgstr ""
 msgid ""
 "max %% MyISAM key buffer ever used: %s%%, this value should be above 95%%"
 msgstr ""
-"அதிகபட்சம் %% myisam key buffear இதுவரை பயன்படுத்தப்பட்டது:%s %%, இந்த மதிப்பு 95 "
-"%ுறமாக இருக்க வேண்டும்"
+"அதிகஅளவு %% myisam key buffear இதுவரை பயன்படுத்தப்பட்டது:%s%%, இந்த மதிப்பு 95 %% "
+"அதிகமாக இருக்க வேண்டும்"
 
 #: libraries/advisory_rules_generic.txt:243
 msgid "Percentage of MyISAM key buffer used"
@@ -16921,7 +16921,7 @@ msgstr "MyISAM விசை இடையகத்தின் விழுக்
 #: libraries/advisory_rules_generic.txt:248
 #, php-format
 msgid "%% MyISAM key buffer used: %s%%, this value should be above 95%%"
-msgstr "%% myisam key buffed:%s %%, இந்த மதிப்பு 95 %ுறமாக இருக்க வேண்டும்"
+msgstr "%% myisam key buffed:%s %%, இந்த மதிப்பு 95 %% அதிகமாக இருக்க வேண்டும்"
 
 #: libraries/advisory_rules_generic.txt:250
 msgid "Percentage of index reads from memory"
@@ -17081,7 +17081,7 @@ msgstr "{thread_cache_size} ஐ அதிகரிக்கவும்."
 #: libraries/advisory_rules_generic.txt:306
 #, php-format
 msgid "Thread cache hitrate: %s%%, this value should be above 80%%"
-msgstr "நூல் கேச் செய் விகிதம்:%%%, இந்த மதிப்பு 80 %ுறமாக இருக்க வேண்டும்"
+msgstr "நூல் கேச் செய் விகிதம்:%s%%, இந்த மதிப்பு 80 %% அதிகமாக இருக்க வேண்டும்"
 
 #: libraries/advisory_rules_generic.txt:308
 msgid "Threads that are slow to launch"
@@ -17153,7 +17153,7 @@ msgstr ""
 msgid ""
 "Max_used_connections is at %s%% of max_connections, it should be below 80%%"
 msgstr ""
-"Max_used_connections என்பது MAX_CONNECTIONS இன்%s %% இல் உள்ளது, இது 80%மிகக் "
+"Max_used_connections என்பது MAX_CONNECTIONS இன்%s %% இல் உள்ளது, இது 80%%மிகக் "
 "குறைவாக இருக்க வேண்டும்"
 
 #: libraries/advisory_rules_generic.txt:331
@@ -17290,8 +17290,8 @@ msgid ""
 "Your InnoDB log size is at %s%% in relation to the InnoDB buffer pool size, "
 "it should not be below 20%%"
 msgstr ""
-"உங்கள் INNODB பதிவு அளவு INNODB இடையக பூல் அளவு தொடர்பாக%s %% இல் உள்ளது, இது 20 "
-"%ண்ட் குறைவாக இருக்கக்கூடாது"
+"உங்கள் INNODB பதிவு அளவு INNODB இடையக பூல் அளவு தொடர்பாக%s %% இல் உள்ளது, இது 20%% "
+"குறைவாக இருக்கக் கூடாது"
 
 #: libraries/advisory_rules_generic.txt:375
 msgid "Max InnoDB log size"
@@ -17369,9 +17369,9 @@ msgid ""
 "other services running on the same machine."
 msgstr ""
 "நீங்கள் தற்போது உங்கள் நினைவகத்தின்%s %% ஐ இன்னோடிபி இடையகக் குளத்திற்கு பயன்படுத்துகிறீர்கள்"
-". நீங்கள் 60 %ுறத்திற்கும் குறைவாக ஒதுக்குகிறீர்கள் என்றால் இந்த விதி சுடுகிறது, இருப்பினும்"
+". நீங்கள் 60 %% த்திற்கும் குறைவாக ஒதுக்குகிறீர்கள் என்றால் இந்த விதி சுடுகிறது, இருப்பினும்"
 " உங்களிடம் அதிக இன்னோடிபி அட்டவணைகள் அல்லது ஒரே கணினியில் இயங்கும் பிற சேவைகள் "
-"இல்லையென்றால் இது உங்கள் கணினிக்கு போதுமானதாக இருக்கும்."
+"இல்லையென்றால் இது உங்கள் கணினிக்குப் போதுமானதாக இருக்கும்."
 
 #: libraries/advisory_rules_generic.txt:391
 msgid "MyISAM concurrent inserts"
@@ -17439,7 +17439,7 @@ msgstr "{query_cache_limit} அதிகரிப்பதைக் கவனி
 #: libraries/advisory_rules_mysql_before80003.txt:22
 #, php-format
 msgid "The current query cache hit rate of %s%% is below 20%%"
-msgstr "தற்போதைய வினவல் கேச் இட் வீதம்%s %% 20%எக்சுக்குக் கீழே உள்ளது"
+msgstr "தற்போதைய வினவல் கேச் இட் வீதம்%s %% 20%% க்குக் கீழே உள்ளது"
 
 #: libraries/advisory_rules_mysql_before80003.txt:24
 msgid "Query Cache usage"
