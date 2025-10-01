@@ -544,6 +544,10 @@ legend + * {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
+[type=search]::-webkit-search-cancel-button {
+  cursor: pointer;
+  filter: grayscale(1);
+}
 
 /* rtl:raw:
 [type="tel"],
@@ -4515,24 +4519,24 @@ textarea.form-control-lg {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  .card-group > .card:not(:last-child) .card-img-top,
-  .card-group > .card:not(:last-child) .card-header {
+  .card-group > .card:not(:last-child) > .card-img-top,
+  .card-group > .card:not(:last-child) > .card-header {
     border-top-right-radius: 0;
   }
-  .card-group > .card:not(:last-child) .card-img-bottom,
-  .card-group > .card:not(:last-child) .card-footer {
+  .card-group > .card:not(:last-child) > .card-img-bottom,
+  .card-group > .card:not(:last-child) > .card-footer {
     border-bottom-right-radius: 0;
   }
   .card-group > .card:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .card-group > .card:not(:first-child) .card-img-top,
-  .card-group > .card:not(:first-child) .card-header {
+  .card-group > .card:not(:first-child) > .card-img-top,
+  .card-group > .card:not(:first-child) > .card-header {
     border-top-left-radius: 0;
   }
-  .card-group > .card:not(:first-child) .card-img-bottom,
-  .card-group > .card:not(:first-child) .card-footer {
+  .card-group > .card:not(:first-child) > .card-img-bottom,
+  .card-group > .card:not(:first-child) > .card-footer {
     border-bottom-left-radius: 0;
   }
 }
@@ -5713,6 +5717,7 @@ textarea.form-control-lg {
 .spinner-grow,
 .spinner-border {
   display: inline-block;
+  flex-shrink: 0;
   width: var(--bs-spinner-width);
   height: var(--bs-spinner-height);
   vertical-align: var(--bs-spinner-vertical-align);
@@ -6110,6 +6115,10 @@ textarea.form-control-lg {
 .visually-hidden:not(caption),
 .visually-hidden-focusable:not(:focus):not(:focus-within):not(caption) {
   position: absolute !important;
+}
+.visually-hidden *,
+.visually-hidden-focusable:not(:focus):not(:focus-within) * {
+  overflow: hidden !important;
 }
 
 .stretched-link::after {
@@ -12021,13 +12030,6 @@ input#auto_increment_opt {
 .pma_table td {
   position: static;
 }
-.pma_table tbody td span {
-  display: block;
-  overflow: hidden;
-}
-.pma_table tbody td span code span {
-  display: inline;
-}
 .pma_table th.draggable span {
   margin-right: 10px;
 }
@@ -12194,7 +12196,7 @@ input#auto_increment_opt {
   padding: 0;
 }
 .cEdit .edit_area {
-  background: #fff;
+  background: var(--bs-body-bg);
   border: 1px solid #999;
   min-width: 10em;
   padding: 0.3em 0.5em;
@@ -12204,7 +12206,7 @@ input#auto_increment_opt {
   width: 97%;
 }
 .cEdit .cell_edit_hint {
-  color: #555;
+  color: var(--bs-body-color);
   font-size: 0.8em;
   margin: 0.3em 0.2em;
 }
@@ -12216,11 +12218,11 @@ input#auto_increment_opt {
   resize: both;
 }
 .cEdit .edit_box_posting {
-  background: #fff url("../img/ajax_clock_small.gif") no-repeat right center;
+  background: var(--bs-body-bg) url("../img/ajax_clock_small.gif") no-repeat right center;
   padding-right: 1.5em;
 }
 .cEdit .edit_area_loading {
-  background: #fff url("../img/ajax_clock_small.gif") no-repeat center;
+  background: var(--bs-body-bg) url("../img/ajax_clock_small.gif") no-repeat center;
   height: 10em;
 }
 .cEdit .goto_link {
@@ -12933,6 +12935,16 @@ th.headerSortUp:hover .sorticon {
 
 .table-responsive-md .data {
   z-index: 9;
+}
+
+.table-responsive-md {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+pre {
+  margin: 0;
 }
 
 /**
@@ -13754,7 +13766,6 @@ a.active.trigger:hover {
 
 .CodeMirror {
   height: 20rem;
-  direction: ltr;
   border: var(--bs-border-width) solid var(--bs-border-color-translucent);
   background-color: var(--bs-body-bg);
   color: var(--bs-body-color);

@@ -524,6 +524,10 @@ legend + * {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
+[type=search]::-webkit-search-cancel-button {
+  cursor: pointer;
+  filter: grayscale(1);
+}
 
 [type="tel"],
 [type="url"],
@@ -4376,24 +4380,24 @@ textarea.form-control-lg {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .card-group > .card:not(:last-child) .card-img-top,
-  .card-group > .card:not(:last-child) .card-header {
+  .card-group > .card:not(:last-child) > .card-img-top,
+  .card-group > .card:not(:last-child) > .card-header {
     border-top-left-radius: 0;
   }
-  .card-group > .card:not(:last-child) .card-img-bottom,
-  .card-group > .card:not(:last-child) .card-footer {
+  .card-group > .card:not(:last-child) > .card-img-bottom,
+  .card-group > .card:not(:last-child) > .card-footer {
     border-bottom-left-radius: 0;
   }
   .card-group > .card:not(:first-child) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  .card-group > .card:not(:first-child) .card-img-top,
-  .card-group > .card:not(:first-child) .card-header {
+  .card-group > .card:not(:first-child) > .card-img-top,
+  .card-group > .card:not(:first-child) > .card-header {
     border-top-right-radius: 0;
   }
-  .card-group > .card:not(:first-child) .card-img-bottom,
-  .card-group > .card:not(:first-child) .card-footer {
+  .card-group > .card:not(:first-child) > .card-img-bottom,
+  .card-group > .card:not(:first-child) > .card-footer {
     border-bottom-right-radius: 0;
   }
 }
@@ -5545,6 +5549,7 @@ textarea.form-control-lg {
 .spinner-grow,
 .spinner-border {
   display: inline-block;
+  flex-shrink: 0;
   width: var(--bs-spinner-width);
   height: var(--bs-spinner-height);
   vertical-align: var(--bs-spinner-vertical-align);
@@ -5936,6 +5941,10 @@ textarea.form-control-lg {
 .visually-hidden:not(caption),
 .visually-hidden-focusable:not(:focus):not(:focus-within):not(caption) {
   position: absolute !important;
+}
+.visually-hidden *,
+.visually-hidden-focusable:not(:focus):not(:focus-within) * {
+  overflow: hidden !important;
 }
 
 .stretched-link::after {
@@ -11971,13 +11980,6 @@ input#auto_increment_opt {
 .pma_table td {
   position: static;
 }
-.pma_table tbody td span {
-  display: block;
-  overflow: hidden;
-}
-.pma_table tbody td span code span {
-  display: inline;
-}
 .pma_table th.draggable span {
   margin-left: 10px;
 }
@@ -12858,8 +12860,18 @@ meter[value="3"]::-webkit-meter-optimum-value {
   z-index: 9;
 }
 
+.table-responsive-md {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 .bg-secondary {
   color: #333;
+}
+
+pre {
+  margin: 0;
 }
 
 /**
@@ -13690,7 +13702,6 @@ a.active.trigger:hover {
 
 .CodeMirror {
   height: 20rem;
-  direction: rtl;
 }
 
 .CodeMirror.cm-s-default div.CodeMirror-scroll {
