@@ -123,7 +123,7 @@ class Results
     /**
      * meta information about fields
      *
-     * @var FieldMetadata[]
+     * @var list<FieldMetadata>
      */
     private array $fieldsMeta = [];
 
@@ -153,9 +153,9 @@ class Results
      *     transformation_options?: string,
      *     input_transformation?: string,
      *     input_transformation_options?: string
-     * }>
+     * }>|null
      */
-    private array $mediaTypeMap = [];
+    private array|null $mediaTypeMap = null;
 
     /**
      * where clauses for each row, each table in the row
@@ -217,7 +217,7 @@ class Results
         private readonly string $sqlQuery,
     ) {
         $this->relation = new Relation($this->dbi);
-        $this->transformations = new Transformations();
+        $this->transformations = new Transformations($this->dbi, $this->relation);
         $this->template = new Template();
 
         $this->setDefaultTransformations();
@@ -319,21 +319,21 @@ class Results
     /**
      * Set properties which were not initialized at the constructor
      *
-     * @param int|string      $unlimNumRows     the total number of rows returned by the SQL query without
-     *                                          any appended "LIMIT" clause programmatically
-     * @param FieldMetadata[] $fieldsMeta       meta information about fields
-     * @param bool            $isCount          statement is SELECT COUNT
-     * @param bool            $isExport         statement contains INTO OUTFILE
-     * @param bool            $isFunction       statement contains a function like SUM()
-     * @param bool            $isAnalyse        statement contains PROCEDURE ANALYSE
-     * @param int|string      $numRows          total no. of rows returned by SQL query
-     * @param float           $queryTime        time taken for execute the SQL query
-     * @param bool            $isMaintenance    statement contains a maintenance command
-     * @param bool            $isExplain        statement contains EXPLAIN
-     * @param bool            $isShow           statement contains SHOW
-     * @param bool            $printView        print view was requested
-     * @param bool            $editable         whether the results set is editable
-     * @param bool            $isBrowseDistinct whether browsing distinct values
+     * @param int|string          $unlimNumRows     the total number of rows returned by the SQL query without
+     *                                              any appended "LIMIT" clause programmatically
+     * @param list<FieldMetadata> $fieldsMeta       meta information about fields
+     * @param bool                $isCount          statement is SELECT COUNT
+     * @param bool                $isExport         statement contains INTO OUTFILE
+     * @param bool                $isFunction       statement contains a function like SUM()
+     * @param bool                $isAnalyse        statement contains PROCEDURE ANALYSE
+     * @param int|string          $numRows          total no. of rows returned by SQL query
+     * @param float               $queryTime        time taken for execute the SQL query
+     * @param bool                $isMaintenance    statement contains a maintenance command
+     * @param bool                $isExplain        statement contains EXPLAIN
+     * @param bool                $isShow           statement contains SHOW
+     * @param bool                $printView        print view was requested
+     * @param bool                $editable         whether the results set is editable
+     * @param bool                $isBrowseDistinct whether browsing distinct values
      * @psalm-param int|numeric-string $unlimNumRows
      * @psalm-param int|numeric-string $numRows
      */
@@ -449,8 +449,8 @@ class Results
             // Displays edit/delete/sort/insert links?
             if (
                 $isLink
-                && $previousTable != ''
-                && $field->table != ''
+                && $previousTable !== ''
+                && $field->table !== ''
                 && $field->table !== $previousTable
             ) {
                 // don't display links
@@ -461,14 +461,14 @@ class Results
 
             // Always display print view link
             $hasPrintLink = true;
-            if ($field->table == '') {
+            if ($field->table === '') {
                 continue;
             }
 
             $previousTable = $field->table;
         }
 
-        if ($previousTable == '') { // no table for any of the columns
+        if ($previousTable === '') { // no table for any of the columns
             // don't display links
             $hasEditLink = false;
             $deleteLink = DeleteLinkEnum::NO_DELETE;
@@ -1072,7 +1072,7 @@ class Results
     {
         if (
             isset($_SESSION['tmpval']['possible_as_geometry'])
-            && $_SESSION['tmpval']['possible_as_geometry'] == false
+            && ! $_SESSION['tmpval']['possible_as_geometry']
             && $_SESSION['tmpval']['geoOption'] === self::GEOMETRY_DISP_GEOM
         ) {
             $_SESSION['tmpval']['geoOption'] = self::GEOMETRY_DISP_WKT;
@@ -1117,11 +1117,10 @@ class Results
             $urlParamsFullText['pftext'] = self::DISPLAY_FULL_TEXT;
         }
 
-        /** @var ThemeManager $themeManager */
         $themeManager = ContainerBuilder::getContainer()->get(ThemeManager::class);
 
         $tmpImage = '<img class="fulltext" src="'
-            . $themeManager->theme->getImgPath($tmpImageFile)
+            . $themeManager->getThemeImagePath($tmpImageFile)
             . '" alt="' . $tmpTxt . '" title="' . $tmpTxt . '">';
 
         return Generator::linkOrButton(Url::getFromRoute('/sql', $urlParamsFullText, false), null, $tmpImage);
@@ -1426,14 +1425,14 @@ class Results
         array $orderUrlParams,
         array $multiOrderUrlParams,
     ): string {
-        $urlPath = Url::getFromRoute('/sql', $multiOrderUrlParams, false);
+        $urlPath = Url::getFromRoute('/sql', $multiOrderUrlParams, true);
         $innerLinkContent = htmlspecialchars($fieldsMeta->name) . $orderImg
             . '<input type="hidden" value="'
             . $urlPath
             . '">';
 
         return Generator::linkOrButton(
-            Url::getFromRoute('/sql', $orderUrlParams, false),
+            Url::getFromRoute('/sql', $orderUrlParams, true),
             null,
             $innerLinkContent,
             ['class' => 'sortlink'],
@@ -1742,11 +1741,11 @@ class Results
             }
 
             $trClass = [];
-            if ($this->config->settings['BrowsePointerEnable'] != true) {
+            if (! $this->config->settings['BrowsePointerEnable']) {
                 $trClass[] = 'nopointer';
             }
 
-            if ($this->config->settings['BrowseMarkerEnable'] != true) {
+            if (! $this->config->settings['BrowseMarkerEnable']) {
                 $trClass[] = 'nomarker';
             }
 
@@ -1869,7 +1868,7 @@ class Results
             }
 
             // 2. Displays the rows' values
-            if ($this->mediaTypeMap === []) {
+            if ($this->mediaTypeMap === null) {
                 $this->setMimeMap();
             }
 
@@ -2033,7 +2032,7 @@ class Results
                 : '';
 
             $gridEdit = '';
-            if ($meta->orgtable != '' && $gridEditConfig !== 'disabled') {
+            if ($meta->orgtable !== '' && $gridEditConfig !== 'disabled') {
                 $gridEdit = $gridEditConfig === 'click' ? 'grid_edit click1' : 'grid_edit click2';
             }
 
@@ -2740,7 +2739,7 @@ class Results
             // some results of PROCEDURE ANALYSE() are reported as
             // being BINARY but they are quite readable,
             // so don't treat them as BINARY
-        } elseif ($meta->isBinary() && $this->isAnalyse !== true) {
+        } elseif ($meta->isBinary() && ! $this->isAnalyse) {
             // we show the BINARY or BLOB message and field's size
             // (or maybe use a transformation)
             $binaryOrBlob = 'BLOB';
@@ -3009,11 +3008,18 @@ class Results
 
             $sqlQueryMessage = Generator::getMessage($message, $this->sqlQuery, MessageType::Success);
         } elseif (! $this->printView && ! $isLimitedDisplay) {
-            $sqlQueryMessage = Generator::getMessage(
-                __('Your SQL query has been executed successfully.'),
-                $this->sqlQuery,
-                MessageType::Success,
-            );
+            $message = Message::success(__('Your SQL query has been executed successfully.'));
+
+            if ($this->queryTime > 0) {
+                $message->addText('(');
+
+                $messageQueryTime = Message::notice(__('Query took %01.4f seconds.') . ')');
+                $messageQueryTime->addParam($this->queryTime);
+
+                $message->addMessage($messageQueryTime, '');
+            }
+
+            $sqlQueryMessage = Generator::getMessage($message, $this->sqlQuery, MessageType::Success);
         }
 
         // 2.3 Prepare the navigation bars
@@ -3304,7 +3310,7 @@ class Results
         $message->addText('(');
 
         if ($messageViewWarning === false) {
-            if ($this->unlimNumRows != $total) {
+            if ($this->unlimNumRows !== $total) {
                 $messageTotal = Message::notice(
                     $preCount . __('%1$s total, %2$s in query'),
                 );

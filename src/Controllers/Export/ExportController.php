@@ -23,6 +23,7 @@ use PhpMyAdmin\Plugins\Export\ExportXml;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Sanitize;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\SelectStatement;
@@ -38,6 +39,7 @@ use function is_array;
 use function register_shutdown_function;
 use function time;
 
+#[Route('/export', ['GET', 'POST'])]
 final readonly class ExportController implements InvocableController
 {
     public function __construct(
@@ -237,7 +239,7 @@ final readonly class ExportController implements InvocableController
         // Generate filename and mime type if needed
         $mimeType = '';
         if (Export::$asFile) {
-            $filenameTemplate = $request->getParsedBodyParamAsString('filename_template');
+            $filenameTemplate = $request->getParsedBodyParamAsString('filename_template', '');
 
             if ((bool) $rememberTemplate) {
                 $this->export->rememberFilename($this->config, $exportType, $filenameTemplate);
@@ -287,7 +289,6 @@ final readonly class ExportController implements InvocableController
                     Current::$message = Message::error(
                         __('No tables found in database.'),
                     );
-                    /** @var DatabaseExportController $controller */
                     $controller = ContainerBuilder::getContainer()->get(DatabaseExportController::class);
 
                     return $controller($request);
@@ -429,7 +430,7 @@ final readonly class ExportController implements InvocableController
         }
 
         // Compression needed?
-        if (Export::$compression) {
+        if (Export::$compression !== '') {
             if ($separateFiles !== '') {
                 $this->export->dumpBuffer = $this->export->compress(
                     $this->export->dumpBufferObjects,

@@ -52,13 +52,13 @@ validateExtension() {
                 foundFileExt
             fi
         ;;
-        public/js/dist/*)
+        public/js/*)
             if [ "${extension}" != "js" ] && [ "${extension}" != "map" ]; then
                 foundFileExt
             fi
         ;;
-        resources/js/src/*)
-            if [ "${extension}" != "ts" ] && [ "${extension}" != "mjs" ]; then
+        resources/js/*)
+            if [ "${extension}" != "ts" ]; then
                 foundFileExt
             fi
         ;;
@@ -233,6 +233,8 @@ for filePath in ${FILE_LIST}; do
         */phpunit.xml.dist)
         foundFile;;
         */.scrutinizer.yml)
+        foundFile;;
+        */.phpstorm.meta.php)
         foundFile;;
         */codecov.yml)
         foundFile;;

@@ -173,7 +173,7 @@ class ImportShp extends ImportPlugin
             unlink($dbfFilePath);
         }
 
-        if ($shp->lastError != '') {
+        if ($shp->lastError !== '') {
             Import::$hasError = true;
             Current::$message = Message::error(
                 __('There was an error importing the ESRI shape file: "%s".'),
@@ -222,7 +222,7 @@ class ImportShp extends ImportPlugin
         $colNames = [];
         foreach ($shp->records as $record) {
             $tempRow = [];
-            if ($gisObj == null || ! method_exists($gisObj, 'getShape')) {
+            if ($gisObj === null || ! method_exists($gisObj, 'getShape')) {
                 $tempRow[] = null;
             } else {
                 $tempRow[] = "GeomFromText('" . $gisObj->getShape($record->shpData) . "')";

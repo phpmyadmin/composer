@@ -77,7 +77,7 @@ final class Search
      */
     private function generateWhereClause(): string
     {
-        if (isset($_POST['customWhereClause']) && trim($_POST['customWhereClause']) != '') {
+        if (isset($_POST['customWhereClause']) && trim($_POST['customWhereClause']) !== '') {
             return ' WHERE ' . $_POST['customWhereClause'];
         }
 
@@ -150,7 +150,7 @@ final class Search
         $where = '';
         if ($unaryFlag) {
             $where = $backquotedName . ' ' . $funcType;
-        } elseif (strncasecmp($types, 'enum', 4) == 0 && ! empty($criteriaValues)) {
+        } elseif (strncasecmp($types, 'enum', 4) === 0 && ! empty($criteriaValues)) {
             $where = $backquotedName;
             $where .= $this->getEnumWhereClause($criteriaValues, $funcType);
         } elseif ($criteriaValues != '') {
@@ -281,7 +281,7 @@ final class Search
             . '(' . Util::backquote($names) . ')';
 
         // If the where clause is something like 'IsEmpty(`spatial_col_name`)'
-        if (isset($geomUnaryFunctions[$geomFunc]) && trim($criteriaValues) == '') {
+        if (isset($geomUnaryFunctions[$geomFunc]) && trim($criteriaValues) === '') {
             $where = $geomFunctionApplied;
         } elseif (in_array($type, Gis::getDataTypes(), true) && ! empty($criteriaValues)) {
             // create gis data from the criteria input

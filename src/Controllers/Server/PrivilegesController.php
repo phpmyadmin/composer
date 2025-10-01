@@ -15,6 +15,7 @@ use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Server\Plugins;
 use PhpMyAdmin\Server\Privileges;
 use PhpMyAdmin\Template;
@@ -32,6 +33,7 @@ use function urlencode;
 /**
  * Server privileges and users manipulations.
  */
+#[Route('/server/privileges', ['GET', 'POST'])]
 final class PrivilegesController implements InvocableController
 {
     public function __construct(
@@ -188,7 +190,7 @@ final class PrivilegesController implements InvocableController
         }
 
         $itemType = '';
-        if (! empty($routinename) && is_string($databaseName)) {
+        if ($routinename !== '' && is_string($databaseName)) {
             $itemType = $serverPrivileges->getRoutineType($databaseName, $routinename);
         }
 
@@ -202,7 +204,7 @@ final class PrivilegesController implements InvocableController
                     [$statements[$key], Current::$message] = $serverPrivileges->updatePrivileges(
                         $serverPrivileges->username ?? '',
                         $serverPrivileges->hostname ?? '',
-                        $tablename ?? $routinename ?? '',
+                        $tablename ?? $routinename,
                         $dbName,
                         $itemType,
                     );
@@ -213,7 +215,7 @@ final class PrivilegesController implements InvocableController
                 [Current::$sqlQuery, Current::$message] = $serverPrivileges->updatePrivileges(
                     $serverPrivileges->username ?? '',
                     $serverPrivileges->hostname ?? '',
-                    $tablename ?? $routinename ?? '',
+                    $tablename ?? $routinename,
                     $databaseName ?? '',
                     $itemType,
                 );
@@ -240,7 +242,7 @@ final class PrivilegesController implements InvocableController
         if ($request->hasBodyParam('revokeall')) {
             [Current::$message, Current::$sqlQuery] = $serverPrivileges->getMessageAndSqlQueryForPrivilegesRevoke(
                 is_string($databaseName) ? $databaseName : '',
-                $tablename ?? $routinename ?? '',
+                $tablename ?? $routinename,
                 $serverPrivileges->username ?? '',
                 $serverPrivileges->hostname ?? '',
                 $itemType,
@@ -381,7 +383,7 @@ final class PrivilegesController implements InvocableController
                     $userPrivileges,
                     $request->getQueryParam('initial'),
                 ));
-            } elseif (! empty($routinename)) {
+            } elseif ($routinename !== '') {
                 $this->response->addHTML(
                     $serverPrivileges->getHtmlForRoutineSpecificPrivileges(
                         $serverPrivileges->username,

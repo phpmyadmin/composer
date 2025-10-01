@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Export;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -184,7 +185,7 @@ class Export
                         $writeResult = @fwrite(self::$fileHandle, $this->dumpBuffer);
                         // Here, use strlen rather than mb_strlen to get the length
                         // in bytes to compare against the number of bytes written.
-                        if ($writeResult != strlen($this->dumpBuffer)) {
+                        if ($writeResult === false || $writeResult !== strlen($this->dumpBuffer)) {
                             Current::$message = Message::error(
                                 __('Insufficient space to save the file %s.'),
                             );
@@ -212,15 +213,10 @@ class Export
             }
 
             if (self::$saveOnServer && $line !== '') {
-                if (self::$fileHandle !== null) {
-                    $writeResult = @fwrite(self::$fileHandle, $line);
-                } else {
-                    $writeResult = false;
-                }
-
+                $writeResult = self::$fileHandle !== null ? @fwrite(self::$fileHandle, $line) : false;
                 // Here, use strlen rather than mb_strlen to get the length
                 // in bytes to compare against the number of bytes written.
-                if ($writeResult === 0 || $writeResult === false || $writeResult != strlen($line)) {
+                if ($writeResult === 0 || $writeResult === false || $writeResult !== strlen($line)) {
                     Current::$message = Message::error(
                         __('Insufficient space to save the file %s.'),
                     );
@@ -1005,16 +1001,16 @@ class Export
     public function getMetadataTypes(): array
     {
         return [
-            'column_info',
-            'table_uiprefs',
-            'tracking',
-            'bookmark',
-            'relation',
-            'table_coords',
-            'pdf_pages',
-            'savedsearches',
-            'central_columns',
-            'export_templates',
+            RelationParameters::COLUMN_INFO,
+            RelationParameters::TABLE_UI_PREFS,
+            RelationParameters::TRACKING,
+            RelationParameters::BOOKMARK,
+            RelationParameters::RELATION,
+            RelationParameters::TABLE_COORDS,
+            RelationParameters::PDF_PAGES,
+            RelationParameters::SAVED_SEARCHES,
+            RelationParameters::CENTRAL_COLUMNS,
+            RelationParameters::EXPORT_TEMPLATES,
         ];
     }
 

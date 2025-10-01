@@ -20,6 +20,10 @@ use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Routing\Route;
+use PhpMyAdmin\SqlParser\Components\Limit;
+use PhpMyAdmin\SqlParser\Parser;
+use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UrlParams;
@@ -35,6 +39,7 @@ use function ob_start;
 /**
  * Handles creation of the GIS visualizations.
  */
+#[Route('/table/gis-visualization', ['GET', 'POST'])]
 final readonly class GisVisualizationController implements InvocableController
 {
     public function __construct(
@@ -62,9 +67,7 @@ final readonly class GisVisualizationController implements InvocableController
                 return $this->response->response();
             }
 
-            $this->response->redirectToRoute('/', ['reload' => true, 'message' => __('No databases selected.')]);
-
-            return $this->response->response();
+            return $this->response->redirectToRoute('/', ['reload' => true, 'message' => __('No databases selected.')]);
         }
 
         // SQL query for retrieving GIS data
@@ -80,18 +83,7 @@ final readonly class GisVisualizationController implements InvocableController
             return $this->response->response();
         }
 
-        $meta = $this->getColumnMeta($sqlQuery);
-
-        // Find the candidate fields for label column and spatial column
-        $labelCandidates = [];
-        $spatialCandidates = [];
-        foreach ($meta as $columnMeta) {
-            if ($columnMeta->isMappedTypeGeometry) {
-                $spatialCandidates[] = $columnMeta->name;
-            } else {
-                $labelCandidates[] = $columnMeta->name;
-            }
-        }
+        [$labelCandidates, $spatialCandidates] = $this->getCandidateColumns($sqlQuery);
 
         if ($spatialCandidates === []) {
             $this->response->setRequestStatus(false);
@@ -124,7 +116,7 @@ final readonly class GisVisualizationController implements InvocableController
             return $response->write((string) $output);
         }
 
-        $this->response->addScriptFiles(['vendor/openlayers/OpenLayers.js', 'table/gis_visualization.js']);
+        $this->response->addScriptFiles(['vendor/openlayers/openlayers.js', 'table/gis_visualization.js']);
 
         // If all the rows contain SRID, use OpenStreetMaps on the initial loading.
         $useBaseLayer = isset($_POST['redraw']) ? isset($_POST['useBaseLayer']) : $visualization->hasSrid();
@@ -253,5 +245,29 @@ final readonly class GisVisualizationController implements InvocableController
         $result = $this->dbi->tryQuery($sqlQuery);
 
         return $result === false ? [] : $this->dbi->getFieldsMeta($result);
+    }
+
+    /** @return array{list<string>, list<string>} */
+    private function getCandidateColumns(string $sqlQuery): array
+    {
+        $parser = new Parser($sqlQuery);
+        /** @var SelectStatement $statement */
+        $statement = $parser->statements[0];
+        $statement->limit = new Limit(0, 0);
+        $limitedSqlQuery = $statement->build();
+
+        $meta = $this->getColumnMeta($limitedSqlQuery);
+
+        $labelCandidates = [];
+        $spatialCandidates = [];
+        foreach ($meta as $columnMeta) {
+            if ($columnMeta->isMappedTypeGeometry) {
+                $spatialCandidates[] = $columnMeta->name;
+            } else {
+                $labelCandidates[] = $columnMeta->name;
+            }
+        }
+
+        return [$labelCandidates, $spatialCandidates];
     }
 }

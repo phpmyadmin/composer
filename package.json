@@ -7,14 +7,15 @@
   "license": "GPL-2.0",
   "private": true,
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "type": "module",
   "dependencies": {
-    "@babel/cli": "^7.27.0",
-    "@babel/core": "^7.26.10",
-    "@babel/preset-env": "^7.26.9",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.21.0",
+    "@babel/runtime": "^7.28.3",
     "@popperjs/core": "^2.11.8",
     "@types/bootstrap": "^5.2.6",
     "@types/chart.js": "^2.9.37",
@@ -27,7 +28,7 @@
     "@zxcvbn-ts/core": "^3.0.4",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^9.1.2",
-    "bootstrap": "5.3.5",
+    "bootstrap": "^5.3.8",
     "chart.js": "^4.4.3",
     "chartjs-adapter-date-fns": "^3.0.0",
     "chartjs-plugin-zoom": "^2.0.1",
@@ -45,7 +46,7 @@
     "locutus.sprintf": "^2.0.32-code-lts.1",
     "mini-css-extract-plugin": "^2.5.3",
     "ol": "^7.1.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.6",
     "postcss-cli": "^10.1.0",
     "postcss-loader": "^7.1.0",
     "rtlcss": "^4.3.0",
@@ -79,7 +80,7 @@
     "postinstall": "yarn run build",
     "build": "webpack",
     "css-lint": "stylelint \"public/themes/**/scss/*.scss\" \"public/setup/scss/*.scss\"",
-    "js-lint": "eslint resources/js/src tests/javascript jest.config.cjs",
+    "js-lint": "eslint resources/js tests/javascript jest.config.cjs",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

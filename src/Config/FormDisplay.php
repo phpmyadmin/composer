@@ -64,7 +64,7 @@ class FormDisplay
     /**
      * Paths changed so that they can be used as HTML ids, indexed by paths
      *
-     * @var mixed[]
+     * @var array<string, string>
      */
     private array $translatedPaths = [];
 
@@ -836,5 +836,11 @@ class FormDisplay
 
             $_POST[$key][] = $v;
         }
+    }
+
+    /** @return array<string, Form> */
+    public function getRegisteredForms(): array
+    {
+        return $this->forms;
     }
 }

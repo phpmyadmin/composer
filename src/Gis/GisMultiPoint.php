@@ -87,10 +87,6 @@ class GisMultiPoint extends GisGeometry
 
         foreach ($pointsArr as $point) {
             // draw a small circle to mark the point
-            if ($point[0] == '' || $point[1] == '') {
-                continue;
-            }
-
             $image->arc(
                 (int) round($point[0]),
                 (int) round($point[1]),
@@ -102,7 +98,7 @@ class GisMultiPoint extends GisGeometry
             );
         }
 
-        if ($label === '' || $pointsArr[0][0] == '' || $pointsArr[0][1] == '') {
+        if ($label === '' || ! isset($pointsArr[0])) {
             return;
         }
 
@@ -139,14 +135,10 @@ class GisMultiPoint extends GisGeometry
 
         foreach ($pointsArr as $point) {
             // draw a small circle to mark the point
-            if ($point[0] == '' || $point[1] == '') {
-                continue;
-            }
-
             $pdf->Circle($point[0], $point[1], 2, 0, 360, 'D', $line);
         }
 
-        if ($label === '' || $pointsArr[0][0] == '' || $pointsArr[0][1] == '') {
+        if ($label === '' || ! isset($pointsArr[0])) {
             return;
         }
 
@@ -168,13 +160,15 @@ class GisMultiPoint extends GisGeometry
      */
     public function prepareRowAsSvg(string $spatial, string $label, array $color, ScaleData $scaleData): string
     {
-        $pointOptions = [
-            'data-label' => $label,
+        $options = [
             'class' => 'multipoint vector',
             'fill' => 'white',
             'stroke' => sprintf('#%02x%02x%02x', $color[0], $color[1], $color[2]),
             'stroke-width' => 2,
         ];
+        if ($label !== '') {
+            $options['data-label'] = $label;
+        }
 
         // Trim to remove leading 'MULTIPOINT(' and trailing ')'
         $multipoint = mb_substr($spatial, 11, -1);
@@ -186,10 +180,8 @@ class GisMultiPoint extends GisGeometry
                 continue;
             }
 
-            $row .= '<circle cx="' . $point[0] . '" cy="'
-                . $point[1] . '" r="3"';
-            $pointOptions['id'] = $label . $this->getRandomId();
-            foreach ($pointOptions as $option => $val) {
+            $row .= '<circle cx="' . $point[0] . '" cy="' . $point[1] . '" r="3"';
+            foreach ($options as $option => $val) {
                 $row .= ' ' . $option . '="' . $val . '"';
             }
 

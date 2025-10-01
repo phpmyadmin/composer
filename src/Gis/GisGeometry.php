@@ -13,13 +13,10 @@ use PhpMyAdmin\Image\ImageWrapper;
 use TCPDF;
 
 use function array_map;
-use function defined;
 use function explode;
 use function mb_strripos;
 use function mb_substr;
-use function mt_getrandmax;
 use function preg_match;
-use function random_int;
 use function str_replace;
 use function trim;
 
@@ -235,7 +232,7 @@ abstract class GisGeometry
      * @param ScaleData|null $scaleData data related to scaling
      * @param bool           $linear    if true, as a 1D array, else as a 2D array
      *
-     * @return float[]|float[][] scaled points
+     * @psalm-return ($linear is true ? list<float> : list<array{float, float}>)
      */
     private function extractPointsInternal(string $pointSet, ScaleData|null $scaleData, bool $linear): array
     {
@@ -249,7 +246,7 @@ abstract class GisGeometry
             // Extract coordinates of the point
             $coordinates = explode(' ', $point);
 
-            if (isset($coordinates[1]) && trim($coordinates[0]) != '' && trim($coordinates[1]) != '') {
+            if (isset($coordinates[1]) && trim($coordinates[0]) !== '' && trim($coordinates[1]) !== '') {
                 $x = (float) $coordinates[0];
                 $y = (float) $coordinates[1];
                 if ($scaleData !== null) {
@@ -278,14 +275,11 @@ abstract class GisGeometry
      * @param string         $wktCoords string of comma separated points
      * @param ScaleData|null $scaleData data related to scaling
      *
-     * @return float[][] scaled points
+     * @return list<array{float, float}>
      */
     protected function extractPoints1d(string $wktCoords, ScaleData|null $scaleData): array
     {
-        /** @var float[][] $pointsArr */
-        $pointsArr = $this->extractPointsInternal($wktCoords, $scaleData, false);
-
-        return $pointsArr;
+        return $this->extractPointsInternal($wktCoords, $scaleData, false);
     }
 
     /**
@@ -294,14 +288,11 @@ abstract class GisGeometry
      * @param string         $wktCoords string of comma separated points
      * @param ScaleData|null $scaleData data related to scaling
      *
-     * @return float[] scaled points
+     * @return list<float>
      */
     protected function extractPoints1dLinear(string $wktCoords, ScaleData|null $scaleData): array
     {
-        /** @var float[] $pointsArr */
-        $pointsArr = $this->extractPointsInternal($wktCoords, $scaleData, true);
-
-        return $pointsArr;
+        return $this->extractPointsInternal($wktCoords, $scaleData, true);
     }
 
     /**
@@ -328,10 +319,5 @@ abstract class GisGeometry
         $parts = explode(')),((', $wktCoords);
 
         return array_map(fn (string $coord): array => $this->extractPoints2d($coord, $scaleData), $parts);
-    }
-
-    protected function getRandomId(): int
-    {
-        return ! defined('TESTSUITE') ? random_int(0, mt_getrandmax()) : 1234567890;
     }
 }

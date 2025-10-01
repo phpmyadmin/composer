@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\ConfigStorage\Relation;
+use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Database\Events;
 use PhpMyAdmin\Database\Routines;
 use PhpMyAdmin\Database\RoutineType;
@@ -466,7 +467,13 @@ class Operations
         $getFields = ['user', 'label', 'query'];
         $whereFields = ['dbase' => $db];
         $newFields = ['dbase' => $newDatabaseName->getName()];
-        $this->tableMover->duplicateInfo('bookmarkwork', 'bookmark', $getFields, $whereFields, $newFields);
+        $this->tableMover->duplicateInfo(
+            RelationParameters::BOOKMARK_WORK,
+            RelationParameters::BOOKMARK,
+            $getFields,
+            $whereFields,
+            $newFields,
+        );
     }
 
     /**
@@ -502,7 +509,7 @@ class Operations
          * This patch is to support newer MySQL/MariaDB while also for backward compatibilities.
          */
         if (
-            (strtolower($innodbFileFormat) === 'barracuda') || ($innodbFileFormat == '')
+            strtolower($innodbFileFormat) === 'barracuda' || $innodbFileFormat === ''
             && $innodbEnginePlugin->supportsFilePerTable()
         ) {
             $possibleRowFormats['INNODB']['DYNAMIC'] = 'DYNAMIC';
@@ -568,7 +575,7 @@ class Operations
                 . '.'
                 . Util::backquote($arr['foreign_table']);
 
-            if ($arr['foreign_table'] == Current::$table) {
+            if ($arr['foreign_table'] === Current::$table) {
                 $foreignTable = Current::$table . '1';
                 $joinQuery .= ' AS ' . Util::backquote($foreignTable);
             } else {
@@ -657,7 +664,7 @@ class Operations
         if (
             $pmaTable->isEngine(['MYISAM', 'ARIA', 'ISAM'])
             && isset($_POST['new_pack_keys'])
-            && $_POST['new_pack_keys'] != $packKeys
+            && $_POST['new_pack_keys'] !== $packKeys
         ) {
             $tableAlters[] = 'pack_keys = ' . $_POST['new_pack_keys'];
         }
@@ -884,7 +891,7 @@ class Operations
          * A target table name has been sent to this script -> do the work
          */
         if (isset($_POST['new_name']) && is_scalar($_POST['new_name']) && (string) $_POST['new_name'] !== '') {
-            if ($db === $targetDb && $table == $_POST['new_name']) {
+            if ($db === $targetDb && $table === $_POST['new_name']) {
                 if (isset($_POST['submit_move'])) {
                     $message = Message::error(__('Can\'t move table to same one!'));
                 } else {

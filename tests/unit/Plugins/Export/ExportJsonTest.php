@@ -40,11 +40,8 @@ class ExportJsonTest extends AbstractTestCase
         Export::$bufferNeeded = false;
         Export::$asFile = true;
         Export::$saveOnServer = false;
-        $this->object = new ExportJson(
-            new Relation($dbi),
-            new Export($dbi),
-            new Transformations(),
-        );
+        $relation = new Relation($dbi);
+        $this->object = new ExportJson($relation, new Export($dbi), new Transformations($dbi, $relation));
     }
 
     /**
@@ -123,7 +120,7 @@ class ExportJsonTest extends AbstractTestCase
         $this->expectOutputString(
             "[\n"
             . '{"type":"header","version":"' . Version::VERSION
-            . '","comment":"Export to JSON plugin for PHPMyAdmin"},'
+            . '","comment":"Export to JSON plugin for phpMyAdmin"},'
             . "\n",
         );
 

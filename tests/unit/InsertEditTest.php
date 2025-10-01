@@ -94,10 +94,11 @@ class InsertEditTest extends AbstractTestCase
         $config->settings['Confirm'] = true;
         $config->settings['LoginCookieValidity'] = 1440;
         $config->settings['enable_drag_drop_import'] = true;
+        $relation = new Relation($this->dbi);
         $this->insertEdit = new InsertEdit(
             $this->dbi,
-            new Relation($this->dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($this->dbi, $relation),
             new FileListing(),
             new Template(),
             $config,
@@ -207,10 +208,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn([], []);
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -252,10 +254,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn([$meta]);
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -287,10 +290,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($resultStub);
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -587,70 +591,6 @@ class InsertEditTest extends AbstractTestCase
     }
 
     /**
-     * Test for getHtmlInput
-     */
-    public function testGetHTMLinput(): void
-    {
-        Config::getInstance()->settings['ShowFunctionFields'] = true;
-        $column = new InsertEditColumn('f', 'date', false, 'PRI', null, '', -1, false, false, false, false);
-        (new ReflectionProperty(InsertEdit::class, 'fieldIndex'))->setValue($this->insertEdit, 23);
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlInput',
-            [$column, 'a', 'b', 30, 'c', 'DATE'],
-        );
-
-        self::assertSame(
-            '<input type="text" name="fieldsa" value="b" size="30" data-type="DATE"'
-            . ' class="textfield datefield" onchange="c" tabindex="23" id="field_23_3">',
-            $result,
-        );
-
-        // case 2 datetime
-        $column = new InsertEditColumn('f', 'datetime', false, 'PRI', null, '', -1, false, false, false, false);
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlInput',
-            [$column, 'a', 'b', 30, 'c', 'DATE'],
-        );
-        self::assertSame(
-            '<input type="text" name="fieldsa" value="b" size="30" data-type="DATE"'
-            . ' class="textfield datetimefield" onchange="c" tabindex="23" id="field_23_3">',
-            $result,
-        );
-
-        // case 3 timestamp
-        $column = new InsertEditColumn('f', 'timestamp', false, 'PRI', null, '', -1, false, false, false, false);
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlInput',
-            [$column, 'a', 'b', 30, 'c', 'DATE'],
-        );
-        self::assertSame(
-            '<input type="text" name="fieldsa" value="b" size="30" data-type="DATE"'
-            . ' class="textfield datetimefield" onchange="c" tabindex="23" id="field_23_3">',
-            $result,
-        );
-
-        // case 4 int
-        $column = new InsertEditColumn('f', 'int(11)', false, 'PRI', null, '', -1, false, false, false, false);
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlInput',
-            [$column, 'a', 'b', 11, 'c', 'INT'],
-        );
-        self::assertSame(
-            '<input type="text" name="fieldsa" value="b" size="11" min="-2147483648" max="2147483647" data-type="INT"'
-            . ' class="textfield" onchange="c" tabindex="23" inputmode="numeric" id="field_23_3">',
-            $result,
-        );
-    }
-
-    /**
      * Test for getMaxUploadSize
      */
     public function testGetMaxUploadSize(): void
@@ -754,14 +694,20 @@ class InsertEditTest extends AbstractTestCase
             ],
         );
 
+        // phpcs:disable Generic.Files.LineLength.TooLong
         self::assertSame(
-            "a\n"
-            . '<input type="text" name="fieldsb" value="&lt;" size="20" data-type="'
-            . 'DATE" class="textfield datetimefield" onchange="c" tabindex="22" id="field_22_3"'
-            . '><input type="hidden" name="auto_incrementb" value="1">'
-            . '<input type="hidden" name="fields_typeb" value="timestamp">',
+            <<<'HTML'
+            a
+              <input type="text" name="fieldsb"
+                value="&amp;lt;" size="20"    data-type="DATE"
+                class="textfield datetimefield"
+                onchange="c"
+                tabindex="22"
+                id="field_22_3"><input type="hidden" name="auto_incrementb" value="1"><input type="hidden" name="fields_typeb" value="timestamp">
+            HTML,
             $result,
         );
+        // phpcs:enable
 
         // case 3: (else -> datetime)
         $column = new InsertEditColumn(
@@ -1084,10 +1030,11 @@ class InsertEditTest extends AbstractTestCase
             ->getMock();
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -1299,10 +1246,11 @@ class InsertEditTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         Current::$database = 'db';
         Current::$table = 'table';
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -1382,10 +1330,11 @@ class InsertEditTest extends AbstractTestCase
         $_POST['submit_type'] = '';
 
         $dbi = DatabaseInterface::getInstance();
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -1405,10 +1354,11 @@ class InsertEditTest extends AbstractTestCase
         $_POST['submit_type'] = '';
 
         $dbi = DatabaseInterface::getInstance();
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -1437,10 +1387,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($warnings);
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -1487,10 +1438,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn('2');
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -2227,10 +2179,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn(false, '123', '2013-08-28 06:34:14');
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -2275,10 +2228,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($columns);
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -2330,10 +2284,11 @@ class InsertEditTest extends AbstractTestCase
         $response = new ReflectionProperty(ResponseRenderer::class, 'instance');
         $response->setValue(null, $responseMock);
 
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -2383,10 +2338,11 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn(new Table('table', 'db', $dbi));
 
         DatabaseInterface::$instance = $dbi;
+        $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
-            new Relation($dbi),
-            new Transformations(),
+            $relation,
+            new Transformations($dbi, $relation),
             new FileListing(),
             new Template(),
             Config::getInstance(),
@@ -2515,7 +2471,8 @@ class InsertEditTest extends AbstractTestCase
         self::assertStringContainsString('<option>UUID</option>', $actual);
         self::assertStringContainsString('<span class="column_type" dir="ltr">datetime</span>', $actual);
         self::assertStringContainsString(
-            '<input type="text" name="fields[multi_edit][0][d8578edf8458ce06fbc5bb76a58c5ca4]" value="12-10-14.000000"',
+            '<input type="text" name="fields[multi_edit][0][d8578edf8458ce06fbc5bb76a58c5ca4]"' . "\n"
+            . '    value="12-10-14.000000"',
             $actual,
         );
 

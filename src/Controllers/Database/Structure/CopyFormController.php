@@ -11,10 +11,12 @@ use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Template;
 
 use function __;
 
+#[Route('/database/structure/copy-form', ['POST'])]
 final class CopyFormController implements InvocableController
 {
     public function __construct(
@@ -43,7 +45,7 @@ final class CopyFormController implements InvocableController
 
         $databasesList = DatabaseInterface::getInstance()->getDatabaseList();
         foreach ($databasesList as $key => $databaseName) {
-            if ($databaseName == Current::$database) {
+            if ($databaseName === Current::$database) {
                 $databasesList->offsetUnset($key);
                 break;
             }

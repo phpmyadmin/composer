@@ -74,11 +74,8 @@ class ExportSqlTest extends AbstractTestCase
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
 
-        $this->object = new ExportSql(
-            new Relation($dbi),
-            new Export($dbi),
-            new Transformations(),
-        );
+        $relation = new Relation($dbi);
+        $this->object = new ExportSql($relation, new Export($dbi), new Transformations($dbi, $relation));
         $this->object->useSqlBackquotes(false);
     }
 
@@ -123,11 +120,11 @@ class ExportSqlTest extends AbstractTestCase
         ExportPlugin::$singleTable = false;
 
         $relationParameters = RelationParameters::fromArray([
-            'db' => 'db',
-            'relation' => 'relation',
-            'column_info' => 'column_info',
-            'relwork' => true,
-            'mimework' => true,
+            RelationParameters::DATABASE => 'db',
+            RelationParameters::RELATION => 'relation',
+            RelationParameters::COLUMN_INFO => 'column_info',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::MIME_WORK => true,
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
@@ -761,26 +758,26 @@ class ExportSqlTest extends AbstractTestCase
         ExportSql::$noConstraintsComments = false;
 
         $createTableStatement = <<<'SQL'
-CREATE TABLE `table` (
-    `payment_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-    `customer_id` smallint(5) unsigned NOT NULL,
-    `staff_id` tinyint(3) unsigned NOT NULL,
-    `rental_id` int(11) DEFAULT NULL,
-    `amount` decimal(5,2) NOT NULL,
-    `payment_date` datetime NOT NULL,
-    `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`payment_id`),
-    KEY `idx_fk_staff_id` (`staff_id`),
-    KEY `idx_fk_customer_id` (`customer_id`),
-    KEY `fk_payment_rental` (`rental_id`),
-    CONSTRAINT `fk_payment_customer`
-        FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,
-    CONSTRAINT `fk_payment_rental`
-        FOREIGN KEY (`rental_id`) REFERENCES `rental` (`rental_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT `fk_payment_staff`
-        FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16050 DEFAULT CHARSET=utf8
-SQL;
+            CREATE TABLE `table` (
+                `payment_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+                `customer_id` smallint(5) unsigned NOT NULL,
+                `staff_id` tinyint(3) unsigned NOT NULL,
+                `rental_id` int(11) DEFAULT NULL,
+                `amount` decimal(5,2) NOT NULL,
+                `payment_date` datetime NOT NULL,
+                `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                PRIMARY KEY (`payment_id`),
+                KEY `idx_fk_staff_id` (`staff_id`),
+                KEY `idx_fk_customer_id` (`customer_id`),
+                KEY `fk_payment_rental` (`rental_id`),
+                CONSTRAINT `fk_payment_customer`
+                    FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,
+                CONSTRAINT `fk_payment_rental`
+                    FOREIGN KEY (`rental_id`) REFERENCES `rental` (`rental_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+                CONSTRAINT `fk_payment_staff`
+                    FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON UPDATE CASCADE
+            ) ENGINE=InnoDB AUTO_INCREMENT=16050 DEFAULT CHARSET=utf8
+            SQL;
         $isViewQuery = 'SELECT 1 FROM information_schema.VIEWS WHERE TABLE_SCHEMA = \'db\' AND TABLE_NAME = \'table\'';
 
         $dbiDummy = $this->createDbiDummy();
@@ -868,12 +865,12 @@ SQL;
     public function testGetTableComments(): void
     {
         $relationParameters = RelationParameters::fromArray([
-            'relwork' => true,
-            'commwork' => true,
-            'mimework' => true,
-            'db' => 'database',
-            'relation' => 'rel',
-            'column_info' => 'col',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::COMM_WORK => true,
+            RelationParameters::MIME_WORK => true,
+            RelationParameters::DATABASE => 'database',
+            RelationParameters::RELATION => 'rel',
+            RelationParameters::COLUMN_INFO => 'col',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
@@ -889,7 +886,9 @@ SQL;
             );
 
         DatabaseInterface::$instance = $dbi;
-        $this->object->relation = new Relation($dbi);
+        $relation = new Relation($dbi);
+        $this->object = new ExportSql($relation, new Export($dbi), new Transformations($dbi, $relation));
+        $this->object->useSqlBackquotes(false);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_relation' => 'On', 'sql_mime' => 'On', 'sql_include_comments' => 'On']);
@@ -1401,7 +1400,7 @@ SQL;
             . ') ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE='
             . "latin1_general_ci COMMENT='List' AUTO_INCREMENT=5";
         $flag = false;
-        $result = $this->object->replaceWithAliases(null, $sqlQuery, $aliases, $db, $flag);
+        $result = $this->object->replaceWithAliases('', $sqlQuery, $aliases, $db, $flag);
 
         self::assertSame(
             "CREATE TABLE IF NOT EXISTS `bartest` (\n" .
@@ -1414,7 +1413,7 @@ SQL;
         );
 
         $flag = false;
-        $result = $this->object->replaceWithAliases(null, $sqlQuery, [], '', $flag);
+        $result = $this->object->replaceWithAliases('', $sqlQuery, [], '', $flag);
 
         self::assertSame(
             "CREATE TABLE IF NOT EXISTS foo (\n" .
@@ -1449,50 +1448,50 @@ SQL;
         );
 
         $sqlQuery = <<<'SQL'
-CREATE FUNCTION `HTML_UnEncode`(`x` TEXT CHARSET utf8) RETURNS text CHARSET utf8
-BEGIN
+            CREATE FUNCTION `HTML_UnEncode`(`x` TEXT CHARSET utf8) RETURNS text CHARSET utf8
+            BEGIN
 
-DECLARE TextString TEXT ;
-SET TextString = x ;
+            DECLARE TextString TEXT ;
+            SET TextString = x ;
 
-#quotation mark
-IF INSTR( x , '&quot;' )
-THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
-END IF ;
+            #quotation mark
+            IF INSTR( x , '&quot;' )
+            THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
+            END IF ;
 
-#apostrophe
-IF INSTR( x , '&apos;' )
-THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
-END IF ;
+            #apostrophe
+            IF INSTR( x , '&apos;' )
+            THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
+            END IF ;
 
-RETURN TextString ;
+            RETURN TextString ;
 
-END
-SQL;
+            END
+            SQL;
 
         $flag = false;
         $result = $this->object->replaceWithAliases('$$', $sqlQuery, $aliases, $db, $flag);
 
         $expectedQuery = <<<'SQL'
-CREATE FUNCTION `HTML_UnEncode` (`x` TEXT CHARSET utf8) RETURNS TEXT CHARSET utf8  BEGIN
+            CREATE FUNCTION `HTML_UnEncode` (`x` TEXT CHARSET utf8) RETURNS TEXT CHARSET utf8  BEGIN
 
-DECLARE TextString TEXT ;
-SET TextString = x ;
+            DECLARE TextString TEXT ;
+            SET TextString = x ;
 
-#quotation mark
-IF INSTR( x , '&quot;' )
-THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
-END IF ;
+            #quotation mark
+            IF INSTR( x , '&quot;' )
+            THEN SET TextString = REPLACE(TextString, '&quot;','"') ;
+            END IF ;
 
-#apostrophe
-IF INSTR( x , '&apos;' )
-THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
-END IF ;
+            #apostrophe
+            IF INSTR( x , '&apos;' )
+            THEN SET TextString = REPLACE(TextString, '&apos;','"') ;
+            END IF ;
 
-RETURN TextString ;
+            RETURN TextString ;
 
-END
-SQL;
+            END
+            SQL;
 
         self::assertSame($expectedQuery, $result);
     }

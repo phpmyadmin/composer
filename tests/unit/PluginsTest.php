@@ -16,6 +16,8 @@ use PhpMyAdmin\Transformations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
+use function extension_loaded;
+
 #[CoversClass(Plugins::class)]
 class PluginsTest extends AbstractTestCase
 {
@@ -29,9 +31,11 @@ class PluginsTest extends AbstractTestCase
     public function testGetExport(): void
     {
         $plugins = Plugins::getExport(ExportType::Database, false);
+        $isCurl = extension_loaded('curl');
         self::assertSame(ExportType::Database, ExportPlugin::$exportType);
         self::assertFalse(ExportPlugin::$singleTable);
-        self::assertCount(14, $plugins);
+        $pluginCount = $isCurl ? 14 : 13;
+        self::assertCount($pluginCount, $plugins);
         self::assertContainsOnlyInstancesOf(Plugins\ExportPlugin::class, $plugins);
     }
 
@@ -99,27 +103,14 @@ class PluginsTest extends AbstractTestCase
     public function testGetChoice(): void
     {
         $dbi = DatabaseInterface::getInstance();
+        $relation = new Relation($dbi);
+        $transformations = new Transformations($dbi, $relation);
+        $export = new Export($dbi);
         $exportList = [
-            new Plugins\Export\ExportJson(
-                new Relation($dbi),
-                new Export($dbi),
-                new Transformations(),
-            ),
-            new Plugins\Export\ExportOds(
-                new Relation($dbi),
-                new Export($dbi),
-                new Transformations(),
-            ),
-            new Plugins\Export\ExportSql(
-                new Relation($dbi),
-                new Export($dbi),
-                new Transformations(),
-            ),
-            new Plugins\Export\ExportXml(
-                new Relation($dbi),
-                new Export($dbi),
-                new Transformations(),
-            ),
+            new Plugins\Export\ExportJson($relation, $export, $transformations),
+            new Plugins\Export\ExportOds($relation, $export, $transformations),
+            new Plugins\Export\ExportSql($relation, $export, $transformations),
+            new Plugins\Export\ExportXml($relation, $export, $transformations),
         ];
         $actual = Plugins::getChoice($exportList, 'xml');
         $expected = [

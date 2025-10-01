@@ -12,7 +12,9 @@ use PhpMyAdmin\Export\TemplateModel;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Routing\Route;
 
+#[Route('/export/template/update', ['POST'])]
 final readonly class UpdateController implements InvocableController
 {
     public function __construct(
@@ -27,6 +29,7 @@ final readonly class UpdateController implements InvocableController
     {
         $templateId = (int) $request->getParsedBodyParamAsStringOrNull('templateId');
         $templateData = $request->getParsedBodyParamAsString('templateData', '');
+        $exportType = $request->getParsedBodyParamAsString('exportType', '');
 
         $exportTemplatesFeature = $this->relation->getRelationParameters()->exportTemplatesFeature;
         if ($exportTemplatesFeature === null) {
@@ -35,6 +38,7 @@ final readonly class UpdateController implements InvocableController
 
         $template = ExportTemplate::fromArray([
             'id' => $templateId,
+            'exportType' => $exportType,
             'username' => $this->config->selectedServer['user'],
             'data' => $templateData,
         ]);

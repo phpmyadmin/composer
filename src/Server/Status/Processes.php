@@ -10,7 +10,9 @@ use PhpMyAdmin\Util;
 
 use function __;
 use function array_change_key_case;
+use function array_key_exists;
 use function count;
+use function number_format;
 
 use const CASE_LOWER;
 
@@ -30,10 +32,8 @@ final class Processes
         $sqlQuery = $showFullSql
             ? 'SHOW FULL PROCESSLIST'
             : 'SHOW PROCESSLIST';
-        if (
-            ($orderByField !== '' && $sortOrder !== '')
-            || $showExecuting
-        ) {
+        $useIS = $showExecuting || ($orderByField !== '' && $sortOrder !== '');
+        if ($useIS) {
             $urlParams['order_by_field'] = $orderByField;
             $urlParams['sort_order'] = $sortOrder;
             $urlParams['showExecuting'] = $showExecuting;
@@ -54,6 +54,16 @@ final class Processes
             // Array keys need to modify due to the way it has used
             // to display column values
             $process = array_change_key_case($process, CASE_LOWER);
+
+            $progress = ! empty($process['progress']) ? $process['progress'] : '---';
+            if ($useIS && ! empty($process['progress'])) {
+                $stage = array_key_exists('stage', $process) ? (int) $process['stage'] : null;
+                $maxStage = array_key_exists('max_stage', $process) ? (int) $process['max_stage'] : null;
+                if ($stage !== null && $maxStage !== null && $maxStage > 1) {
+                    $progress = number_format(($stage - 1) / $maxStage * 100 + ((float) $progress) / $maxStage, 3);
+                }
+            }
+
             $rows[] = [
                 'id' => $process['id'],
                 'user' => $process['user'],
@@ -62,7 +72,7 @@ final class Processes
                 'command' => $process['command'],
                 'time' => $process['time'],
                 'state' => ! empty($process['state']) ? $process['state'] : '---',
-                'progress' => ! empty($process['progress']) ? $process['progress'] : '---',
+                'progress' => $progress,
                 'info' => ! empty($process['info']) ? Generator::formatSql($process['info'], ! $showFullSql) : '---',
             ];
         }
@@ -108,7 +118,7 @@ final class Processes
         foreach ($sortableColumns as $columnKey => $column) {
             $isSorted = $orderByField !== ''
                 && $sortOrder !== ''
-                && $orderByField == $column['order_by_field'];
+                && $orderByField === $column['order_by_field'];
 
             $column['sort_order'] = 'ASC';
             if ($isSorted && $sortOrder === 'ASC') {

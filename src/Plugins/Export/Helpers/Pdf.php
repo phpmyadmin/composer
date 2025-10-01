@@ -90,8 +90,9 @@ class Pdf extends PdfLib
     ) {
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);
 
-        $this->relation = new Relation(DatabaseInterface::getInstance());
-        $this->transformations = new Transformations();
+        $dbi = DatabaseInterface::getInstance();
+        $this->relation = new Relation($dbi);
+        $this->transformations = new Transformations($dbi, $this->relation);
     }
 
     /**
@@ -594,7 +595,7 @@ class Pdf extends PdfLib
             foreach ($data as $col => $txt) {
                 $this->page = $currpage;
                 $this->setXY($l, $h);
-                if ($this->tablewidths[$col] > 0) {
+                if (isset($this->tablewidths[$col]) && $this->tablewidths[$col] > 0) {
                     $this->MultiCell(
                         $this->tablewidths[$col],
                         // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
@@ -782,7 +783,7 @@ class Pdf extends PdfLib
                 $this->tablewidths[$i] = $sColWidth + $surplusToAdd;
             }
 
-            if ($this->displayColumn[$i] != false) {
+            if ($this->displayColumn[$i]) {
                 continue;
             }
 

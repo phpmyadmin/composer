@@ -58,11 +58,8 @@ class ExportLatexTest extends AbstractTestCase
         ExportPlugin::$singleTable = false;
         Current::$database = 'db';
         Current::$table = 'table';
-        $this->object = new ExportLatex(
-            new Relation($dbi),
-            new Export($dbi),
-            new Transformations(),
-        );
+        $relation = new Relation($dbi);
+        $this->object = new ExportLatex($relation, new Export($dbi), new Transformations($dbi, $relation));
     }
 
     /**
@@ -82,11 +79,11 @@ class ExportLatexTest extends AbstractTestCase
         ExportPlugin::$singleTable = false;
 
         $relationParameters = RelationParameters::fromArray([
-            'db' => 'db',
-            'relation' => 'relation',
-            'column_info' => 'column_info',
-            'relwork' => true,
-            'mimework' => true,
+            RelationParameters::DATABASE => 'db',
+            RelationParameters::RELATION => 'relation',
+            RelationParameters::COLUMN_INFO => 'column_info',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::MIME_WORK => true,
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
@@ -606,15 +603,17 @@ class ExportLatexTest extends AbstractTestCase
             ->willReturn(['comment' => 'testComment']);
 
         DatabaseInterface::$instance = $dbi;
-        $this->object->relation = new Relation($dbi);
+        $relation = new Relation($dbi);
+        $this->object->relation = $relation;
+        $this->object->transformations = new Transformations($dbi, $relation);
 
         $relationParameters = RelationParameters::fromArray([
-            'relwork' => true,
-            'commwork' => true,
-            'mimework' => true,
-            'db' => 'database',
-            'relation' => 'rel',
-            'column_info' => 'col',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::COMM_WORK => true,
+            RelationParameters::MIME_WORK => true,
+            RelationParameters::DATABASE => 'database',
+            RelationParameters::RELATION => 'rel',
+            RelationParameters::COLUMN_INFO => 'col',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
@@ -689,15 +688,17 @@ class ExportLatexTest extends AbstractTestCase
             ->willReturn(['comment' => 'testComment']);
 
         DatabaseInterface::$instance = $dbi;
-        $this->object->relation = new Relation($dbi);
+        $relation = new Relation($dbi);
+        $this->object->relation = $relation;
+        $this->object->transformations = new Transformations($dbi, $relation);
 
         $relationParameters = RelationParameters::fromArray([
-            'relwork' => true,
-            'commwork' => true,
-            'mimework' => true,
-            'db' => 'database',
-            'relation' => 'rel',
-            'column_info' => 'col',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::COMM_WORK => true,
+            RelationParameters::MIME_WORK => true,
+            RelationParameters::DATABASE => 'database',
+            RelationParameters::RELATION => 'rel',
+            RelationParameters::COLUMN_INFO => 'col',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
@@ -749,9 +750,9 @@ class ExportLatexTest extends AbstractTestCase
         $this->object->setExportOptions($request, []);
 
         $relationParameters = RelationParameters::fromArray([
-            'db' => 'database',
-            'relation' => 'rel',
-            'column_info' => 'col',
+            RelationParameters::DATABASE => 'database',
+            RelationParameters::RELATION => 'rel',
+            RelationParameters::COLUMN_INFO => 'col',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 

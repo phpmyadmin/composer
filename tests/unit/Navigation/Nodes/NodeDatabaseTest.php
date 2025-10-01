@@ -21,14 +21,11 @@ class NodeDatabaseTest extends AbstractTestCase
     public function testConstructor(): void
     {
         $parent = new NodeDatabase(new Config(), 'default');
-        self::assertSame(
-            [
-                'text' => ['route' => '/database/structure', 'params' => ['db' => null]],
-                'icon' => ['route' => '/database/operations', 'params' => ['db' => null]],
-                'title' => 'Structure',
-            ],
-            $parent->links,
-        );
+        self::assertSame('/database/structure', $parent->link->route);
+        self::assertSame(['db' => null], $parent->link->params);
+        self::assertSame('Structure', $parent->link->title);
+        self::assertSame('/database/operations', $parent->icon->route);
+        self::assertSame(['db' => null], $parent->icon->params);
         self::assertStringContainsString('database', $parent->classes);
     }
 
@@ -76,9 +73,9 @@ class NodeDatabaseTest extends AbstractTestCase
         $userPrivileges = new UserPrivileges();
 
         $relationParameters = RelationParameters::fromArray([
-            'db' => 'pmadb',
-            'navwork' => true,
-            'navigationhiding' => 'navigationhiding',
+            RelationParameters::DATABASE => 'pmadb',
+            RelationParameters::NAV_WORK => true,
+            RelationParameters::NAVIGATION_HIDING => 'navigationhiding',
         ]);
 
         $parent = new NodeDatabase($config, 'default');

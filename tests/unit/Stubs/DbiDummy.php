@@ -366,7 +366,7 @@ class DbiDummy implements DbiExtension
                 'query' => 'SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`'
                     . " WHERE `PRIVILEGE_TYPE` = 'CREATE USER'"
                     . " AND '''pma_test''@''localhost''' LIKE `GRANTEE`"
-                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8mb4_general_ci"
+                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y'"
                     . " AND 'pma_test' LIKE `User` AND '' LIKE `Host` LIMIT 1",
                 'result' => [['1']],
             ],
@@ -381,7 +381,7 @@ class DbiDummy implements DbiExtension
                     . ' FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t'
                     . " WHERE `IS_GRANTABLE` = 'YES'"
                     . " AND '''pma_test''@''localhost''' LIKE `GRANTEE`"
-                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8mb4_general_ci"
+                    . " UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y'"
                     . " AND 'pma_test' LIKE `User` AND '' LIKE `Host` LIMIT 1",
                 'result' => [['1']],
             ],
@@ -398,27 +398,6 @@ class DbiDummy implements DbiExtension
                     ['dummy2', 'NO', 'dummy2 comment'],
                     ['FEDERATED', 'NO', 'Federated MySQL storage engine'],
                     ['Pbxt', 'NO', 'Pbxt storage engine'],
-                ],
-            ],
-            [
-                'query' => 'SHOW STATUS WHERE Variable_name'
-                    . ' LIKE \'Innodb\\_buffer\\_pool\\_%\''
-                    . ' OR Variable_name = \'Innodb_page_size\';',
-                'result' => [
-                    ['Innodb_buffer_pool_pages_data', 0],
-                    ['Innodb_buffer_pool_pages_dirty', 0],
-                    ['Innodb_buffer_pool_pages_flushed', 0],
-                    ['Innodb_buffer_pool_pages_free', 0],
-                    ['Innodb_buffer_pool_pages_misc', 0],
-                    ['Innodb_buffer_pool_pages_total', 4096],
-                    ['Innodb_buffer_pool_read_ahead_rnd', 0],
-                    ['Innodb_buffer_pool_read_ahead', 0],
-                    ['Innodb_buffer_pool_read_ahead_evicted', 0],
-                    ['Innodb_buffer_pool_read_requests', 64],
-                    ['Innodb_buffer_pool_reads', 32],
-                    ['Innodb_buffer_pool_wait_free', 0],
-                    ['Innodb_buffer_pool_write_requests', 64],
-                    ['Innodb_page_size', 16384],
                 ],
             ],
             ['query' => 'SHOW ENGINE INNODB STATUS;', 'result' => false],

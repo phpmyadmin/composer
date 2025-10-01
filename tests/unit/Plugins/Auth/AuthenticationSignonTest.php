@@ -21,6 +21,8 @@ use function session_get_cookie_params;
 use function session_id;
 use function session_name;
 
+use const PHP_VERSION_ID;
+
 #[CoversClass(AuthenticationSignon::class)]
 class AuthenticationSignonTest extends AbstractTestCase
 {
@@ -73,9 +75,8 @@ class AuthenticationSignonTest extends AbstractTestCase
         $config->selectedServer['SignonURL'] = 'https://example.com/SignonURL';
         $config->selectedServer['LogoutURL'] = 'https://example.com/logoutURL';
 
-        $this->object->logOut();
+        $response = $this->object->logOut();
 
-        $response = $responseStub->getResponse();
         self::assertSame(['https://example.com/logoutURL'], $response->getHeader('Location'));
         self::assertSame(302, $response->getStatusCode());
     }
@@ -89,9 +90,8 @@ class AuthenticationSignonTest extends AbstractTestCase
         $config->selectedServer['SignonURL'] = 'https://example.com/SignonURL';
         $config->selectedServer['LogoutURL'] = '';
 
-        $this->object->logOut();
+        $response = $this->object->logOut();
 
-        $response = $responseStub->getResponse();
         self::assertSame(['https://example.com/SignonURL'], $response->getHeader('Location'));
         self::assertSame(302, $response->getStatusCode());
     }
@@ -156,9 +156,8 @@ class AuthenticationSignonTest extends AbstractTestCase
         $sessionName = session_name();
         $sessionID = session_id();
 
-        $this->object->logOut();
+        $response = $this->object->logOut();
 
-        $response = $responseStub->getResponse();
         self::assertSame(['https://example.com/SignonURL'], $response->getHeader('Location'));
         self::assertSame(302, $response->getStatusCode());
 
@@ -387,13 +386,15 @@ class AuthenticationSignonTest extends AbstractTestCase
             'path' => '/',
             'domain' => '',
             'secure' => false,
+            'partitioned' => false,
             'httponly' => false,
             'samesite' => '',
         ];
 
-        self::assertSame(
-            $defaultOptions,
-            session_get_cookie_params(),
-        );
+        if (PHP_VERSION_ID < 80500) {
+            unset($defaultOptions['partitioned']);
+        }
+
+        self::assertSame($defaultOptions, session_get_cookie_params());
     }
 }

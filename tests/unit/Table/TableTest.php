@@ -200,7 +200,7 @@ class TableTest extends AbstractTestCase
             ],
         ];
 
-        $fetchResult = [
+        $fetchResultMultidimensional = [
             [
                 $getUniqueColumnsSql . ' WHERE (Non_unique = 0)',
                 ['Key_name', null],
@@ -208,6 +208,9 @@ class TableTest extends AbstractTestCase
                 ConnectionType::User,
                 [['index1'], ['index3'], ['index5']],
             ],
+        ];
+
+        $fetchResult = [
             [
                 $getUniqueColumnsSql,
                 'Column_name',
@@ -257,8 +260,11 @@ class TableTest extends AbstractTestCase
         $dbi->expects(self::any())->method('fetchResult')
             ->willReturnMap($fetchResult);
 
-            $dbi->expects(self::any())->method('fetchResultSimple')
-                ->willReturnMap($fetchResultSimple);
+        $dbi->expects(self::any())->method('fetchResultSimple')
+            ->willReturnMap($fetchResultSimple);
+
+        $dbi->expects(self::any())->method('fetchResultMultidimensional')
+            ->willReturnMap($fetchResultMultidimensional);
 
         $dbi->expects(self::any())->method('fetchValue')
             ->willReturnMap($fetchValue);
@@ -927,14 +933,20 @@ class TableTest extends AbstractTestCase
         $newFields = ['field3', 'filed4'];
 
         $relationParameters = RelationParameters::fromArray([
-            'db' => 'PMA_db',
-            'relwork' => true,
-            'relation' => 'relation',
+            RelationParameters::DATABASE => 'PMA_db',
+            RelationParameters::REL_WORK => true,
+            RelationParameters::RELATION => 'relation',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
         $object = new TableMover($this->mockedDbi, new Relation($this->mockedDbi));
-        $ret = $object->duplicateInfo('relwork', 'relation', $getFields, $whereFields, $newFields);
+        $ret = $object->duplicateInfo(
+            RelationParameters::REL_WORK,
+            RelationParameters::RELATION,
+            $getFields,
+            $whereFields,
+            $newFields,
+        );
         self::assertSame(-1, $ret);
     }
 
@@ -1251,11 +1263,15 @@ class TableTest extends AbstractTestCase
         $dbi->expects(self::any())
             ->method('fetchResult')
             ->willReturn(
-                [['`one_pk`']],
-                [], // No Uniques found
                 ['`one_ind`', '`sec_ind`'],
                 [], // No Uniques found
+            );
+        $dbi->expects(self::any())
+            ->method('fetchResultMultidimensional')
+            ->willReturn(
+                [['`one_pk`']],
                 [], // No Indexed found
+                [], // No Uniques found
             );
 
         DatabaseInterface::$instance = $dbi;

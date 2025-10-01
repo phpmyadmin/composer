@@ -30,21 +30,25 @@ use PhpMyAdmin\Utils\ForeignKey;
 
 use function __;
 use function array_column;
+use function array_find_key;
 use function array_key_exists;
 use function array_keys;
 use function array_sum;
 use function arsort;
+use function assert;
 use function bin2hex;
 use function ceil;
 use function count;
 use function defined;
 use function htmlspecialchars;
 use function in_array;
+use function is_string;
 use function session_start;
 use function session_write_close;
 use function sprintf;
 use function str_contains;
 use function str_replace;
+use function strtoupper;
 use function ucwords;
 
 /**
@@ -153,18 +157,18 @@ class Sql
         $justOneTable = true;
         $prevTable = '';
         foreach ($fieldsMeta as $oneFieldMeta) {
-            if ($oneFieldMeta->table != '' && $prevTable != '' && $oneFieldMeta->table != $prevTable) {
+            if ($oneFieldMeta->table !== '' && $prevTable !== '' && $oneFieldMeta->table !== $prevTable) {
                 $justOneTable = false;
             }
 
-            if ($oneFieldMeta->table == '') {
+            if ($oneFieldMeta->table === '') {
                 continue;
             }
 
             $prevTable = $oneFieldMeta->table;
         }
 
-        return $justOneTable && $prevTable != '';
+        return $justOneTable && $prevTable !== '';
     }
 
     /**
@@ -576,10 +580,10 @@ class Sql
             return false;
         }
 
+        /** Is false, except when a USE statement was sent. */
         $currentDb = $this->dbi->fetchValue('SELECT DATABASE()');
 
-        // $current_db is false, except when a USE statement was sent
-        return ($currentDb != false) && ($db !== $currentDb);
+        return is_string($currentDb) && $db !== $currentDb;
     }
 
     /**
@@ -670,13 +674,33 @@ class Sql
                 /** @var SelectStatement $statement */
                 $statement = $statementInfo->statement;
 
+                assert($statement->options !== null);
+                /** @var int|null $noCacheIndex */
+                $noCacheIndex = array_find_key(
+                    $statement->options->options,
+                    static function (mixed $value): bool {
+                        return is_string($value) && strtoupper($value) === 'SQL_NO_CACHE';
+                    },
+                );
+
                 $changeExpression = ! $statementInfo->flags->isGroup
                     && ! $statementInfo->flags->distinct
                     && ! $statementInfo->flags->union
                     && count($statement->expr) === 1;
 
-                if ($statementInfo->flags->order || $statementInfo->flags->limit || $changeExpression) {
+                if (
+                    $statementInfo->flags->order
+                    || $statementInfo->flags->limit
+                    || $changeExpression
+                    || $noCacheIndex !== null
+                ) {
                     $statement = clone $statement;
+                    // Remove SQL_NO_CACHE from subquery because it is not valid sql
+                    if ($noCacheIndex !== null) {
+                        assert($statement->options !== null);
+                        $statement->options = clone $statement->options;
+                        unset($statement->options->options[$noCacheIndex]);
+                    }
                 }
 
                 // Remove ORDER BY to decrease unnecessary sorting time
@@ -740,8 +764,8 @@ class Sql
         $this->queryTime = $this->dbi->lastQueryExecutionTime;
 
         if (! defined('TESTSUITE')) {
-            // reopen session
-            session_start();
+            // reopen session but prevent PHP from sending the session cookie again
+            session_start(['use_cookies' => false]);
         }
 
         $errorMessage = '';
@@ -854,9 +878,9 @@ class Sql
             // the form should not have priority over errors
         } elseif ($messageToShow !== '' && $statementInfo->flags->queryType !== StatementType::Select) {
             $message = Message::rawSuccess(htmlspecialchars($messageToShow));
-        } elseif (! empty(self::$showAsPhp)) {
+        } elseif (self::$showAsPhp === true) {
             $message = Message::success(__('Showing as PHP code'));
-        } elseif (isset(self::$showAsPhp)) {
+        } elseif (self::$showAsPhp === false) {
             /* User disable showing as PHP, query is only displayed */
             $message = Message::notice(__('Showing SQL query'));
         } else {
@@ -931,7 +955,7 @@ class Sql
 
         $queryMessage = Generator::getMessage($message, $sqlQuery, MessageType::Success);
 
-        if (isset(self::$showAsPhp)) {
+        if (self::$showAsPhp !== null) {
             return $queryMessage;
         }
 
@@ -1082,7 +1106,7 @@ class Sql
         StatementInfo $statementInfo,
         bool $isLimitedDisplay = false,
     ): string {
-        $printView = isset($_POST['printview']) && $_POST['printview'] == '1';
+        $printView = isset($_POST['printview']) && $_POST['printview'];
         $isBrowseDistinct = ! empty($_POST['is_browse_distinct']);
 
         if ($statementInfo->flags->isProcedure) {
@@ -1273,7 +1297,7 @@ class Sql
     ): string {
         // If we are retrieving the full value of a truncated field or the original
         // value of a transformed field, show it here
-        if (isset($_POST['grid_edit']) && $_POST['grid_edit'] == true) {
+        if (isset($_POST['grid_edit']) && $_POST['grid_edit']) {
             $this->getResponseForGridEdit($result);
             ResponseRenderer::getInstance()->callExit();
         }
@@ -1343,7 +1367,7 @@ class Sql
             ]);
         }
 
-        if (isset($_POST['printview']) && $_POST['printview'] == '1') {
+        if (isset($_POST['printview']) && $_POST['printview']) {
             $displayParts = DisplayParts::fromArray([
                 'hasEditLink' => false,
                 'deleteLink' => DeleteLinkEnum::NO_DELETE,
@@ -1355,7 +1379,7 @@ class Sql
             ]);
         }
 
-        if (! isset($_POST['printview']) || $_POST['printview'] != '1') {
+        if (! isset($_POST['printview']) || ! $_POST['printview']) {
             $scripts->addFile('makegrid.js');
             $scripts->addFile('sql.js');
             Current::$message = null;
@@ -1533,7 +1557,7 @@ class Sql
         ResponseRenderer::$reload = $this->hasCurrentDbChanged($db);
         $this->dbi->selectDb($db);
 
-        if (isset(self::$showAsPhp)) {
+        if (self::$showAsPhp !== null) {
             // Only if we ask to see the php code
             // The following was copied from getQueryResponseForNoResultsReturned()
             // Delete if it's not needed in this context
@@ -1561,7 +1585,7 @@ class Sql
         $warningMessages = $this->dbi->getWarnings();
 
         // No rows returned -> move back to the calling page
-        if (($numRows == 0 && $unlimNumRows == 0) || $statementInfo->flags->isAffected || $result === false) {
+        if (($numRows === 0 && $unlimNumRows === 0) || $statementInfo->flags->isAffected || $result === false) {
             $htmlOutput = $this->getQueryResponseForNoResultsReturned(
                 $statementInfo,
                 $db,
@@ -1631,13 +1655,13 @@ class Sql
     public function calculatePosForLastPage(string $db, string $table, int|null $pos): int
     {
         if ($pos === null) {
-            $pos = $_SESSION['tmpval']['pos'];
+            $pos = (int) $_SESSION['tmpval']['pos'];
         }
 
         $tableObject = new Table($table, $db, $this->dbi);
         $unlimNumRows = $tableObject->countRecords(true);
         //If position is higher than number of rows
-        if ($unlimNumRows <= $pos && $pos != 0) {
+        if ($unlimNumRows <= $pos && $pos !== 0) {
             return $this->getStartPosToDisplayRow($unlimNumRows);
         }
 

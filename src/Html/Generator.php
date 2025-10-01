@@ -26,6 +26,7 @@ use PhpMyAdmin\TypeClass;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 use Throwable;
+use Twig\Attribute\AsTwigFunction;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -92,6 +93,7 @@ class Generator
      *
      * @return string link or empty string
      */
+    #[AsTwigFunction('link_to_var_documentation', isSafe: ['html'])]
     public static function linkToVarDocumentation(
         string $name,
         bool $useMariaDB = false,
@@ -109,13 +111,10 @@ class Generator
      *
      * @param string $message the message for the tooltip
      */
+    #[AsTwigFunction('show_hint', isSafe: ['html'])]
     public static function showHint(string $message): string
     {
-        if (Config::getInstance()->settings['ShowHint']) {
-            $classClause = ' class="pma_hint"';
-        } else {
-            $classClause = '';
-        }
+        $classClause = Config::getInstance()->settings['ShowHint'] ? ' class="pma_hint"' : '';
 
         return '<span' . $classClause . '>'
             . self::getImage('b_help')
@@ -169,6 +168,7 @@ class Generator
      *
      * @return string an html snippet
      */
+    #[AsTwigFunction('get_icon', isSafe: ['html'])]
     public static function getIcon(
         string $icon,
         string $alternate = '',
@@ -313,7 +313,7 @@ class Generator
      *
      * @return string An HTML snippet of a dropdown list with function names appropriate for the requested column.
      */
-    public static function getFunctionsForField(string $defaultFunction, mixed $foreignField = null): string
+    public static function getFunctionsForField(string $defaultFunction, bool $hasForeignField = false): string
     {
         // Create the output
         $retval = '<option></option>' . "\n";
@@ -322,7 +322,7 @@ class Generator
         $functions = DatabaseInterface::getInstance()->types->getAllFunctions();
         foreach ($functions as $function) {
             $retval .= '<option';
-            if ($function === $defaultFunction && $foreignField === null) {
+            if ($function === $defaultFunction && ! $hasForeignField) {
                 $retval .= ' selected';
             }
 
@@ -422,7 +422,7 @@ class Generator
         }
 
         $config = Config::getInstance();
-        $renderSql = $config->settings['ShowSQL'] == true && $sqlQuery !== '' && $sqlQuery !== ';';
+        $renderSql = $config->settings['ShowSQL'] && $sqlQuery !== '' && $sqlQuery !== ';';
 
         if (isset(Sql::$usingBookmarkMessage)) {
             $retval .= Sql::$usingBookmarkMessage->getDisplay();
@@ -449,13 +449,13 @@ class Generator
         // If we want to show some sql code it is easiest to create it here
         /* SQL-Parser-Analyzer */
 
-        if (! empty(Sql::$showAsPhp)) {
-            $newLine = '\\n"<br>' . "\n" . '&nbsp;&nbsp;&nbsp;&nbsp;. "';
+        if (Sql::$showAsPhp === true) {
+            $newLine = '\\n"' . "\n" . '    . "';
             $queryBase = htmlspecialchars(addslashes($sqlQuery));
             $queryBase = preg_replace('/((\015\012)|(\015)|(\012))/', $newLine, $queryBase);
-            $queryBase = '<code class="php" dir="ltr"><pre>' . "\n"
-                . '$sql = "' . $queryBase . '";' . "\n"
-                . '</pre></code>';
+            $queryBase = '<pre><code class="php" dir="ltr">'
+                . '$sql = "' . $queryBase . '";'
+                . '</code></pre>';
         } else {
             $queryBase = self::formatSql($sqlQuery, true);
         }
@@ -512,7 +512,7 @@ class Generator
 
         // even if the query is big and was truncated, offer the chance
         // to edit it (unless it's enormous, see linkOrButton() )
-        if (! empty($config->settings['SQLQuery']['Edit']) && empty(Sql::$showAsPhp)) {
+        if (! empty($config->settings['SQLQuery']['Edit']) && Sql::$showAsPhp !== true) {
             $editLink = '<div class="col-auto">'
                 . self::linkOrButton(
                     Url::getFromRoute($editLinkRoute, $urlParams),
@@ -528,7 +528,7 @@ class Generator
         // Also we would like to get the SQL formed in some nice
         // php-code
         if (! empty($config->settings['SQLQuery']['ShowAsPHP']) && ! $queryTooBig) {
-            if (! empty(Sql::$showAsPhp)) {
+            if (Sql::$showAsPhp === true) {
                 $phpLink = '<div class="col-auto">'
                     . self::linkOrButton(
                         Url::getFromRoute('/import', $urlParams),
@@ -565,7 +565,7 @@ class Generator
         // Refresh query
         if (
             ! empty($config->settings['SQLQuery']['Refresh'])
-            && ! isset(Sql::$showAsPhp) // 'Submit query' does the same
+            && Sql::$showAsPhp === null // 'Submit query' does the same
             && preg_match('@^(SELECT|SHOW)[[:space:]]+@i', $sqlQuery) === 1
         ) {
             $refreshLink = Url::getFromRoute('/sql', $urlParams);
@@ -613,7 +613,7 @@ class Generator
         /**
          * TODO: Should we have $cfg['SQLQuery']['InlineEdit']?
          */
-        if (! empty($config->settings['SQLQuery']['Edit']) && ! $queryTooBig && empty(Sql::$showAsPhp)) {
+        if (! empty($config->settings['SQLQuery']['Edit']) && ! $queryTooBig && Sql::$showAsPhp !== true) {
             $inlineEditLink = '<div class="col-auto">'
                 . self::linkOrButton(
                     '#',
@@ -642,6 +642,7 @@ class Generator
      *
      * @return string  the html link
      */
+    #[AsTwigFunction('show_php_docu', isSafe: ['html'])]
     public static function showPHPDocumentation(string $target): string
     {
         return self::showDocumentationLink(Core::getPHPDocLink($target));
@@ -871,6 +872,7 @@ class Generator
      *
      * @return string an html IMG tag
      */
+    #[AsTwigFunction('get_image', isSafe: ['html'])]
     public static function getImage(string $image, string $alternate = '', array $attributes = []): string
     {
         $alternate = htmlspecialchars($alternate);
@@ -921,6 +923,7 @@ class Generator
      *
      * @return string  the results to be echoed or saved in an array
      */
+    #[AsTwigFunction('link_or_button', isSafe: ['html'])]
     public static function linkOrButton(
         string $urlPath,
         array|null $urlParams,
@@ -1018,6 +1021,7 @@ class Generator
      *
      * @todo    use $pos from $_url_params
      */
+    #[AsTwigFunction('get_list_navigator', isSafe: ['html'])]
     public static function getListNavigator(
         int $count,
         int $pos,
@@ -1065,6 +1069,7 @@ class Generator
      *
      * @return string the formatted sql
      */
+    #[AsTwigFunction('format_sql', isSafe: ['html'])]
     public static function formatSql(string $sqlQuery, bool $truncate = false): string
     {
         $config = Config::getInstance();
@@ -1072,9 +1077,9 @@ class Generator
             $sqlQuery = mb_substr($sqlQuery, 0, $config->settings['MaxCharactersInDisplayedSQL']) . '[...]';
         }
 
-        return '<code class="sql" dir="ltr"><pre>' . "\n"
-            . htmlspecialchars($sqlQuery, ENT_COMPAT) . "\n"
-            . '</pre></code>';
+        return '<pre><code class="sql" dir="ltr">'
+            . htmlspecialchars($sqlQuery, ENT_COMPAT)
+            . '</code></pre>';
     }
 
     /**
@@ -1084,6 +1089,7 @@ class Generator
      *
      * @param string $selected The value to mark as selected in HTML mode
      */
+    #[AsTwigFunction('get_supported_datatypes', isSafe: ['html'])]
     public static function getSupportedDatatypes(string $selected): string
     {
         // NOTE: the SELECT tag is not included in this snippet.

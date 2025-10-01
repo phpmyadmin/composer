@@ -544,20 +544,21 @@ echo "* Running composer (version: $COMPOSER_VERSION)"
 composer install --no-interaction --no-dev
 
 # Parse the required versions from composer.json
-PACKAGES_VERSIONS=''
 PACKAGE_LIST='tecnickcom/tcpdf pragmarx/google2fa-qrcode bacon/bacon-qr-code code-lts/u2f-php-server web-auth/webauthn-lib'
+
+set --
 
 for PACKAGES in $PACKAGE_LIST
 do
     PKG_VERSION="$(get_composer_package_version "$PACKAGES")"
-    PACKAGES_VERSIONS="$PACKAGES_VERSIONS $PACKAGES:$PKG_VERSION"
+    set -- "$@" "$PACKAGES:$PKG_VERSION"
 done
 
-echo "* Installing composer packages '$PACKAGES_VERSIONS'"
+echo "* Installing composer packages '$*'"
 
 # Allows word splitting
 # shellcheck disable=SC2086
-composer require --no-interaction --update-no-dev $PACKAGES_VERSIONS
+composer require --no-interaction --update-no-dev "$@"
 
 echo "* Running a security checkup"
 security_checkup
@@ -644,7 +645,7 @@ for kit in $KITS ; do
         # Template test files
         rm -r resources/templates/test/
         rm phpunit.xml.*
-        rm .editorconfig .browserslistrc .eslintignore .jshintrc .eslintrc.json .stylelintrc.json psalm.xml psalm-baseline.xml phpstan.neon.dist phpstan-baseline.neon phpcs.xml.dist jest.config.cjs infection.json5.dist
+        rm .editorconfig .browserslistrc .eslintignore .jshintrc .eslintrc.json .stylelintrc.json psalm.xml psalm-baseline.xml phpstan.neon.dist phpstan-baseline.neon phpcs.xml.dist jest.config.cjs infection.json5.dist .phpstorm.meta.php
         # Gettext po files (if they were not removed by ./bin/internal/lang-cleanup.sh)
         rm -rf resources/po
         # Documentation source code
