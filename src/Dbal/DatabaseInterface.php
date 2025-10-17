@@ -1445,13 +1445,15 @@ class DatabaseInterface
             return $hasGrantPrivilege;
         }
 
+        $collation = $this->getServerCollation();
+
         [$user, $host] = $this->getCurrentUserAndHost();
-        $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($user, $host);
+        $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($user, $host, $collation);
         $hasGrantPrivilege = (bool) $this->fetchValue($query);
 
         if (! $hasGrantPrivilege) {
             foreach ($this->getCurrentRolesAndHost() as [$role, $roleHost]) {
-                $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($role, $roleHost ?? '');
+                $query = QueryGenerator::getInformationSchemaDataForGranteeRequest($role, $roleHost, $collation);
                 $hasGrantPrivilege = (bool) $this->fetchValue($query);
 
                 if ($hasGrantPrivilege) {
@@ -1492,13 +1494,15 @@ class DatabaseInterface
             return $hasCreatePrivilege;
         }
 
+        $collation = $this->getServerCollation();
+
         [$user, $host] = $this->getCurrentUserAndHost();
-        $query = QueryGenerator::getInformationSchemaDataForCreateRequest($user, $host);
+        $query = QueryGenerator::getInformationSchemaDataForCreateRequest($user, $host, $collation);
         $hasCreatePrivilege = (bool) $this->fetchValue($query);
 
         if (! $hasCreatePrivilege) {
             foreach ($this->getCurrentRolesAndHost() as [$role, $roleHost]) {
-                $query = QueryGenerator::getInformationSchemaDataForCreateRequest($role, $roleHost ?? '');
+                $query = QueryGenerator::getInformationSchemaDataForCreateRequest($role, $roleHost, $collation);
                 $hasCreatePrivilege = (bool) $this->fetchValue($query);
 
                 if ($hasCreatePrivilege) {
@@ -1552,7 +1556,7 @@ class DatabaseInterface
             $roles = $this->getCurrentRoles();
 
             $this->currentRoleAndHost = array_map(static function (string $role) {
-                return explode('@', $role);
+                return str_contains($role, '@') ? explode('@', $role) : [$role, ''];
             }, $roles);
         }
 

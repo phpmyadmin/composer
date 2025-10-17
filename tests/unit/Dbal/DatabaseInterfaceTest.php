@@ -158,6 +158,7 @@ final class DatabaseInterfaceTest extends AbstractTestCase
             ],
             ['8.0.0 - MySQL Community Server - GPL', true, [['@`localhost`']], ['@localhost'], [['', 'localhost']]],
             ['10.5.0-MariaDB', true, [['`role`@`localhost`']], ['role@localhost'], [['role', 'localhost']]],
+            ['10.5.0-MariaDB', true, [['`role`']], ['role'], [['role', '']]],
             [
                 '10.5.0-MariaDB',
                 true,
@@ -1054,10 +1055,11 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_grantuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             $result,
         );
         $dbi = $this->createDatabaseInterface($dbiDummy, $config);
@@ -1080,16 +1082,17 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_grantuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             [],
         );
         $dbiDummy->addResult('SELECT CURRENT_ROLE();', [['`role`@`localhost`']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''role''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'role' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''role''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'role' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             $result,
         );
         $dbi = $this->createDatabaseInterface($dbiDummy, $config);
@@ -1114,10 +1117,11 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_grantuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM (SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`COLUMN_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`TABLE_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`SCHEMA_PRIVILEGES` UNION SELECT `GRANTEE`, `IS_GRANTABLE` FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES`) t WHERE `IS_GRANTABLE` = 'YES' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             [],
         );
         $dbiDummy->addResult('SELECT CURRENT_ROLE();', $result);
@@ -1193,10 +1197,11 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_createuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             $result,
         );
         $dbi = $this->createDatabaseInterface($dbiDummy, $config);
@@ -1219,16 +1224,17 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_createuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             [],
         );
         $dbiDummy->addResult('SELECT CURRENT_ROLE();', [['`role`@`localhost`']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''role''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'role' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''role''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'role' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             $result,
         );
         $dbi = $this->createDatabaseInterface($dbiDummy, $config);
@@ -1253,10 +1259,11 @@ final class DatabaseInterfaceTest extends AbstractTestCase
         SessionCache::remove('is_createuser');
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT @@collation_server', [['utf8_general_ci']]);
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         $dbiDummy->addResult(
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
+            "SELECT 1 FROM `INFORMATION_SCHEMA`.`USER_PRIVILEGES` WHERE `PRIVILEGE_TYPE` = 'CREATE USER' AND '''test_user''@''localhost''' LIKE `GRANTEE` UNION SELECT 1 FROM mysql.user WHERE `create_user_priv` = 'Y' COLLATE utf8_general_ci AND 'test_user' LIKE `User` AND '' LIKE `Host` LIMIT 1",
             [],
         );
         $dbiDummy->addResult('SELECT CURRENT_ROLE();', $result);
