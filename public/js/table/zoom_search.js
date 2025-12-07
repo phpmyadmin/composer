@@ -249,7 +249,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
    ** Prepare a div containing a link, otherwise it's incorrectly displayed
    ** after a couple of clicks
    **/
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="togglesearchformdiv"><a id="togglesearchformlink"></a></div>').insertAfter('#zoom_search_form')
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="togglesearchformdiv"><button class="btn btn-sm btn-secondary" type="button" id="togglesearchformlink"></button></div>').insertAfter('#zoom_search_form')
   // don't show it until we have results on-screen
   .hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {

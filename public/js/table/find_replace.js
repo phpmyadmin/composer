@@ -25,7 +25,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/find_
  * Bind events
  */
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/find_replace.js', function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="toggle_find_div"><a id="toggle_find"></a></div>').insertAfter('#find_replace_form').hide();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="toggle_find_div"><button class="btn btn-sm btn-secondary" type="button" id="toggle_find"></button></div>').insertAfter('#find_replace_form').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggle_find').html(window.Messages.strHideFindNReplaceCriteria).on('click', function () {
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form').slideToggle();
