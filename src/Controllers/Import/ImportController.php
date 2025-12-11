@@ -585,13 +585,12 @@ final readonly class ImportController implements InvocableController
         //  can choke on it so avoid parsing)
         $sqlLength = mb_strlen(Current::$sqlQuery);
         if ($sqlLength <= $this->config->settings['MaxCharactersInDisplayedSQL']) {
-            [$statementInfo, Current::$database, $tableFromSql] = ParseAnalyze::sqlQuery(
+            [$statementInfo, Current::$database, $tableFromSql, $reloadNeeded] = ParseAnalyze::sqlQuery(
                 Current::$sqlQuery,
                 Current::$database,
             );
 
-            ResponseRenderer::$reload = $statementInfo->flags->reload;
-            ImportSettings::$offset = (int) $statementInfo->flags->offset;
+            ResponseRenderer::$reload = $reloadNeeded;
 
             if (Current::$table != $tableFromSql && $tableFromSql !== '') {
                 Current::$table = $tableFromSql;
@@ -611,22 +610,15 @@ final readonly class ImportController implements InvocableController
 
             foreach ($queriesToBeExecuted as Current::$sqlQuery) {
                 // parse sql query
-                [$statementInfo, Current::$database, $tableFromSql] = ParseAnalyze::sqlQuery(
+                [$statementInfo, Current::$database, $tableFromSql, $reloadNeeded] = ParseAnalyze::sqlQuery(
                     Current::$sqlQuery,
                     Current::$database,
                 );
 
-                ImportSettings::$offset = (int) $statementInfo->flags->offset;
-                ResponseRenderer::$reload = $statementInfo->flags->reload;
+                ResponseRenderer::$reload = $reloadNeeded;
 
                 // Check if User is allowed to issue a 'DROP DATABASE' Statement
-                if (
-                    $this->sql->hasNoRightsToDropDatabase(
-                        $statementInfo,
-                        $this->config->settings['AllowUserDropDatabase'],
-                        $this->dbi->isSuperUser(),
-                    )
-                ) {
+                if ($this->sql->hasNoRightsToDropDatabase($statementInfo)) {
                     Generator::mysqlDie(
                         __('"DROP DATABASE" statements are disabled.'),
                         '',

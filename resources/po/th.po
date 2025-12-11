@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2025-12-07 00:30+0000\n"
-"PO-Revision-Date: 2025-03-18 14:23+0000\n"
-"Last-Translator: AefghThreenine <aefgh39622@gmail.com>\n"
+"PO-Revision-Date: 2025-12-10 17:00+0000\n"
+"Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "th/>\n"
 "Language: th\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 #, fuzzy
@@ -146,7 +146,7 @@ msgstr "คุณไม่มีสิทธิที่จะเข้ามา
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:25
 #: src/Controllers/Table/StructureController.php:215
 msgid "Primary"
-msgstr "คีย์หลัก"
+msgstr "หลัก"
 
 #: resources/templates/columns_definitions/column_attributes.twig:116
 #: resources/templates/database/data_dictionary/index.twig:76
@@ -303,7 +303,7 @@ msgstr "ไป"
 #: resources/templates/table/structure/display_table_stats.twig:5
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:555
 msgid "Table comments:"
-msgstr "หมายเหตุของตาราง:"
+msgstr "คำอธิบายตาราง:"
 
 #: resources/templates/columns_definitions/column_definitions_form.twig:70
 msgid "Collation:"
@@ -801,7 +801,7 @@ msgstr "แอตทริบิวต์"
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
-msgstr "ค่าว่าง"
+msgstr "ไม่มีค่า"
 
 #: resources/templates/columns_definitions/table_fields_definitions.twig:36
 #: resources/templates/database/operations/index.twig:69
@@ -2386,7 +2386,7 @@ msgstr "สถิติฐานข้อมูล"
 #: resources/templates/database/operations/index.twig:10
 #: resources/templates/database/operations/index.twig:14
 msgid "Database comment"
-msgstr "หมายเหตุของฐานข้อมูล"
+msgstr "คำอธิบายฐานข้อมูล"
 
 #: resources/templates/database/operations/index.twig:55
 #, fuzzy
@@ -2868,12 +2868,10 @@ msgid "Browse"
 msgstr "เปิดดู"
 
 #: resources/templates/database/search/results.twig:43
-#, fuzzy, php-format
-#| msgid "<b>Total:</b> <i>%s</i> match"
-#| msgid_plural "<b>Total:</b> <i>%s</i> matches"
+#, php-format
 msgid "<strong>Total:</strong> <em>%s</em> match"
 msgid_plural "<strong>Total:</strong> <em>%s</em> matches"
-msgstr[0] "<b>รวม:</b> <i>%s</i> ผลลัพธ์ที่ตรง"
+msgstr[0] "<strong>ทั้งหมด:</strong> <em>%s</em> ค้นพบ"
 
 #: resources/templates/database/structure/add_prefix.twig:4
 #, fuzzy
@@ -3102,7 +3100,7 @@ msgstr "พจนานุกรมข้อมูล"
 #: src/Controllers/Database/TrackingController.php:124
 #: src/Controllers/Export/ExportController.php:290
 msgid "No tables found in database."
-msgstr "ไม่พบตารางใดๆ ในฐานข้อมูล"
+msgstr "ไม่พบตารางในฐานข้อมูล"
 
 #: resources/templates/database/structure/show_create.twig:2
 #, fuzzy
@@ -3580,7 +3578,7 @@ msgstr "ปรับปรุงคำค้น"
 #: src/Controllers/JavaScriptMessagesController.php:134
 #: src/Html/Generator.php:764
 msgid "SQL query:"
-msgstr "คำค้น SQL:"
+msgstr "คำสั่ง SQL:"
 
 #. l10n: Button to show the SQL query on the export page
 #: resources/templates/export.twig:72
@@ -3635,9 +3633,9 @@ msgid "Output:"
 msgstr ""
 
 #: resources/templates/export.twig:171 resources/templates/export.twig:366
-#, fuzzy, php-format
+#, php-format
 msgid "Save on server in the directory <strong>%s</strong>"
-msgstr "ไดเรกทอรีสำหรับอัพโหลด ที่เว็บเซิร์ฟเวอร์"
+msgstr "บันทึกไว้ในไดเรกทอรีบนเซิร์ฟเวอร์ <strong>%s</strong>"
 
 #: resources/templates/export.twig:178 resources/templates/export.twig:373
 #: src/Config/Descriptions.php:681 src/Config/Descriptions.php:684
@@ -3713,10 +3711,9 @@ msgid "Save & close"
 msgstr "บันทึกและปิด"
 
 #: resources/templates/export.twig:343
-#, fuzzy, php-format
-#| msgid "Statements"
+#, php-format
 msgid "Use %s statement"
-msgstr "คำสั่ง"
+msgstr "ใช้คำสั่ง %s"
 
 #: resources/templates/export.twig:352
 #, fuzzy
@@ -3833,7 +3830,7 @@ msgstr "ใช้ OpenStreetMaps เป็นชั้นพื้นฐาน"
 
 #: resources/templates/gis_data_editor_form.twig:70
 msgid "Output"
-msgstr "ส่งออก"
+msgstr "เอาท์พุต"
 
 #: resources/templates/home/git_info.twig:2
 msgid "Git revision:"
@@ -3868,7 +3865,7 @@ msgid ""
 "change root, debian-sys-maint and pma users. More information is available "
 "at %s."
 msgstr ""
-"คุณกำลังใช้งานเครื่องแม่ข่ายตัวอย่าง คุณสามารถทำอะไรก็ได้ในนี้ เพียงอย่าแก้ไขผู้ใช้ root, debian-"
+"คุณกำลังใช้งานเซิร์ฟเวอร์ทดลอง คุณสามารถทำอะไรก็ได้ในนี้ แต่กรุณาอย่าแก้ไขผู้ใช้ root, debian-"
 "sys-maint และ pma ข้อมูลเพิ่มเติมสามารถดูได้ที่ %s"
 
 #: resources/templates/home/index.twig:30
@@ -3892,11 +3889,11 @@ msgstr "ตรวจทานการเชื่อมต่อเซิร์
 #: resources/templates/home/index.twig:82
 #: resources/templates/preferences/manage/main.twig:55
 msgid "More settings"
-msgstr "ตั้งค่าเพิ่มเติม"
+msgstr "การตั้งค่าเพิ่มเติม"
 
 #: resources/templates/home/index.twig:93
 msgid "Appearance settings"
-msgstr "การตั้งค่าลักษณะ"
+msgstr "การตั้งค่ารูปลักษณ์"
 
 #: resources/templates/home/index.twig:103
 #: resources/templates/home/index.twig:104
@@ -6221,7 +6218,7 @@ msgstr "เซิร์ฟเวอร์"
 #: resources/templates/server/status/advisor/index.twig:6
 #: resources/templates/server/status/advisor/index.twig:19
 msgid "Advisor system"
-msgstr "แนะนำระบบ"
+msgstr "ระบบที่ปรึกษา"
 
 #: resources/templates/server/status/advisor/index.twig:9
 msgid "Not enough privilege to view the advisor."
@@ -6308,7 +6305,7 @@ msgstr "เซิร์ฟเวอร์"
 #: resources/templates/server/status/processes/list.twig:5
 #: src/Controllers/JavaScriptMessagesController.php:200
 msgid "Processes"
-msgstr "โพรเซส"
+msgstr "กระบวนการ"
 
 #: resources/templates/server/status/base.twig:16
 msgid "Query statistics"
@@ -6524,7 +6521,7 @@ msgstr "คำค้น SQL"
 #: resources/templates/server/status/monitor/index.twig:212
 #: src/Controllers/JavaScriptMessagesController.php:216
 msgid "Add chart to grid"
-msgstr "เพิ่มแสดงผลไปในตารางข้อมูล"
+msgstr "เพิ่มแผนภูมิลงในตาราง"
 
 #: resources/templates/server/status/monitor/index.twig:223
 #, fuzzy
@@ -6555,11 +6552,11 @@ msgstr ""
 
 #: resources/templates/server/status/monitor/index.twig:256
 msgid "From slow log"
-msgstr "จาก slow log"
+msgstr "จากบันทึกการทดสอบความหน่วงช้า"
 
 #: resources/templates/server/status/monitor/index.twig:257
 msgid "From general log"
-msgstr "จากประวัติทั่วไป"
+msgstr "จากบันทึกทั่วไป"
 
 #: resources/templates/server/status/monitor/index.twig:267
 #, fuzzy
@@ -6574,11 +6571,11 @@ msgstr "คำค้นจากตัวอย่าง"
 
 #: resources/templates/server/status/monitor/index.twig:280
 msgid "Analyse query"
-msgstr "วิเคราะห์คิวรี"
+msgstr "วิเคราะห์คำสั่งเรียกดู"
 
 #: resources/templates/server/status/monitor/index.twig:290
 msgid "Analysing logs"
-msgstr "วิเคราะห์ไฟล์บันทึก"
+msgstr "บันทึกการวิเคราะห์"
 
 #: resources/templates/server/status/monitor/index.twig:291
 #: resources/templates/server/status/monitor/index.twig:300
@@ -6593,19 +6590,19 @@ msgstr "กำลังวิเคราะห์และตรวจประ
 
 #: resources/templates/server/status/monitor/index.twig:310
 msgid "No data found"
-msgstr "ไม่มีข้อมูล"
+msgstr "ไม่พบข้อมูล"
 
 #: resources/templates/server/status/monitor/index.twig:314
 msgid "Log analysed, but no data found in this time span."
-msgstr "ประวัติถูกวิเคราะห์แล้ว แต่ไม่มีข้อมูลในช่วงนั้น"
+msgstr "ได้ทำการวิเคราะห์บันทึกแล้ว แต่ไม่พบข้อมูลในช่วงเวลาดังกล่าว"
 
 #: resources/templates/server/status/monitor/index.twig:327
 msgid "Loading logs"
-msgstr "กำลังเรียกดูประวัติ"
+msgstr "กำลังโหลดบันทึก"
 
 #: resources/templates/server/status/monitor/index.twig:331
 msgid "Log data loaded. Queries executed in this time span:"
-msgstr "ประวัติของข้อมูลถูกเรียกขึ้นมา คำสั่งได้ประมวลภายใน:"
+msgstr "โหลดข้อมูลบันทึกแล้ว คำสั่ง SQL ที่ดำเนินการในช่วงเวลานี้:"
 
 #: resources/templates/server/status/monitor/index.twig:336
 #, fuzzy
@@ -6615,7 +6612,7 @@ msgstr "ข้ามไปยังตารางเก็บประวัต
 
 #: resources/templates/server/status/monitor/index.twig:346
 msgid "Monitor refresh failed"
-msgstr "ไม่สามารถรีเฟรซหน้าจอได้"
+msgstr "การรีเฟรชการมอนิเตอร์ล้มเหลว"
 
 #: resources/templates/server/status/monitor/index.twig:350
 #: resources/templates/server/status/monitor/index.twig:369
@@ -6630,16 +6627,16 @@ msgid ""
 "This is most likely because your session expired. Reloading the page and "
 "reentering your credentials should help."
 msgstr ""
-"ในระหว่างที่กำลังแสดงผลข้อมูลนั้นเครื่องแม่ข่ายตอบสนองผิดพลาด "
-"น่าจะเกิดจากที่หมดเวลาเซสชั่นของท่าน กรุณายืนยันตัวตนใหม่อีกครั้ง"
+"ขณะที่กำลังร้องขอข้อมูลแผนภูมิใหม่ เซิร์ฟเวอร์มีการตอบกลับที่ไม่ถูกต้อง ซึ่งโดยมากแล้วอาจเป็นเพราะเซ"
+"สชันของคุณหมดอายุแล้ว การโหลดหน้าเว็บใหม่และป้อนข้อมูลประจำตัวของคุณอีกครั้งน่าจะช่วยได้"
 
 #: resources/templates/server/status/monitor/index.twig:355
 msgid "Reload page"
-msgstr "รีเฟรซหน้า"
+msgstr "โหลดหน้าเว็บใหม่"
 
 #: resources/templates/server/status/monitor/index.twig:365
 msgid "Local monitor configuration incompatible!"
-msgstr "การกำหนดค่าเครื่องภายในไม่สอดคล้องกัน!"
+msgstr "การตั้งค่าจอภาพในเครื่องไม่เข้ากัน!"
 
 #: resources/templates/server/status/monitor/index.twig:370
 #, fuzzy
@@ -6759,6 +6756,8 @@ msgid ""
 "On a busy server, the byte counters may overrun, so those statistics as "
 "reported by the MySQL server may be incorrect."
 msgstr ""
+"ในเซิร์ฟเวอร์ที่มีการใช้งานหนัก ตัวนับไบต์อาจทำงานเกินขีดจำกัด ดังนั้น สถิติที่รายงานโดยเซิร์ฟเวอร์ "
+"MySQL อาจไม่ถูกต้อง"
 
 #: resources/templates/server/status/status/index.twig:36
 #: src/Controllers/JavaScriptMessagesController.php:199
@@ -7181,7 +7180,7 @@ msgstr "ดูอย่างเดียว"
 #: resources/templates/sql/query.twig:221
 #: src/Controllers/JavaScriptMessagesController.php:133
 msgid "Simulate query"
-msgstr "จำลองการทำงาน"
+msgstr "จำลองคำสั่งเรียกดู"
 
 #: resources/templates/sql/relational_column_dropdown.twig:3
 #: resources/templates/table/insert/column_row.twig:48
@@ -8793,6 +8792,12 @@ msgid ""
 "mentioned in the beginning of an <a href=\"https://www.facebook.com/note.php?"
 "note_id=10150111255065841&comments\">Article by the Pythian Group</a>"
 msgstr ""
+"การเพิ่มค่า {max_heap_table_size} และ {tmp_table_size} อาจช่วยได้ อย่างไรก็ตาม บางตา"
+"รางชั่วคราวจะถูกเขียนลงดิสก์เสมอ โดยไม่ขึ้นอยู่กับค่าของตัวแปรเหล่านี้ ในการกำจัดตารางชั่วคราวเหล่"
+"านี้ คุณจำเป็นต้องเขียนคำสั่ง SQL ใหม่เพื่อหลีกเลี่ยงเงื่อนไขเหล่านั้น (ภายในตารางชั่วคราว: การมีคอ"
+"ลัมน์ BLOB หรือ TEXT หรือการมีคอลัมน์ที่มีขนาดใหญ่กว่า 512 ไบต์) ดังที่กล่าวไว้ในตอนต้นของ <a "
+"href=\"https://www.facebook.com/"
+"note.php?note_id=10150111255065841&comments\">บทความโดยกลุ่ม Pythian</a>"
 
 #: src/Advisory/Rules.php:362
 #, php-format
@@ -11770,7 +11775,7 @@ msgstr "เพิ่มค่า AUTO_INCREMENT"
 
 #: src/Config/Descriptions.php:793
 msgid "Read as multibytes"
-msgstr ""
+msgstr "อ่านเป็นมัลติไบต์"
 
 #: src/Config/Descriptions.php:794
 msgid "Initial state for sliders"
@@ -12477,7 +12482,7 @@ msgstr "อื่นๆ"
 
 #: src/Config/Descriptions.php:967
 msgid "Server connection collation"
-msgstr "การเรียงลำดับสำหรับการเชื่อมต่อเซิร์ฟเวอร์"
+msgstr "การรวบรวมการเชื่อมต่อเซิร์ฟเวอร์"
 
 #: src/Config/FormDisplay.php:579
 #, php-format
@@ -12663,26 +12668,22 @@ msgid ""
 msgstr ""
 
 #: src/Config/ServerConfigChecks.php:401
-#, fuzzy, php-format
-#| msgid ""
-#| "%sBzip2 compression and decompression%s requires functions (%s) which are "
-#| "unavailable on this system."
+#, php-format
 msgid ""
 "%1$sBzip2 compression and decompression%2$s requires functions (%3$s) which "
 "are unavailable on this system."
 msgstr ""
-"การบีบอัดและการคลาย %sBzip2%s ต้องใช้ฟังก์ชั่น (%s) ซึ่งเป็นสิ่งที่ไม่สามารถใช้งานได้ในระบบนี้"
+"%1$sBzip2 การบีบอัด และการคลายการบีบอัด %2$s จำเป็นต้องใช้ฟังก์ชัน (%3$s) ซึ่งไม่สามารถใช้ง"
+"านได้ในระบบนี้"
 
 #: src/Config/ServerConfigChecks.php:432
-#, fuzzy, php-format
-#| msgid ""
-#| "%sGZip compression and decompression%s requires functions (%s) which are "
-#| "unavailable on this system."
+#, php-format
 msgid ""
 "%1$sGZip compression and decompression%2$s requires functions (%3$s) which "
 "are unavailable on this system."
 msgstr ""
-"การบีบอัดและการคลาย %sGZip%s ต้องใช้ฟังก์ชั่น (%s) ซึ่งเป็นสิ่งที่ไม่สามารถใช้งานได้ในระบบนี้"
+"%1$sGZip การบีบอัด และการคลายการบีบอัด %2$s จำเป็นต้องใช้ฟังก์ชัน (%3$s) ซึ่งไม่สามารถใช้งา"
+"นได้ในระบบนี้"
 
 #: src/Config/Settings.php:3165
 #, php-format
@@ -12822,7 +12823,7 @@ msgstr "ค้นหา"
 msgid ""
 "The %s file is not available on this system, please visit %s for more "
 "information."
-msgstr "แฟ้ม %s ไม่สามารถใช้งานได้ในระบบนี้ สำหรับข้อมูลเพิ่มเติมกรุณาเยี่ยมชม %s"
+msgstr "ไฟล์ %s ไม่พร้อมใช้งานในระบบนี้ กรุณาไปที่ %s เพื่อดูข้อมูลเพิ่มเติม"
 
 #: src/Controllers/Console/Bookmark/AddController.php:42
 #: src/Controllers/JavaScriptMessagesController.php:568
@@ -12849,7 +12850,7 @@ msgstr "ตัวอักษรที่ไม่คาดหวังบนบ
 #: src/Controllers/Database/CentralColumnsController.php:148
 #, php-format
 msgid "Showing rows %1$s - %2$s."
-msgstr "กำลังแสดงแถวที่ %1$s - %2$s"
+msgstr "แสดงแถว %1$s - %2$s"
 
 #. l10n: The user tries to save a page with an existing name in Designer
 #: src/Controllers/Database/DesignerController.php:105
@@ -12926,7 +12927,7 @@ msgstr ""
 #: src/Controllers/View/CreateController.php:67
 #: src/Controllers/View/CreateController.php:72
 msgid "No databases selected."
-msgstr "ไม่มีฐานข้อมูลที่ถูกเลือก"
+msgstr "ไม่ได้เลือกฐานข้อมูล"
 
 #: src/Controllers/Database/EventsController.php:125
 #, fuzzy
@@ -12976,7 +12977,7 @@ msgstr ""
 #: src/Controllers/Server/ImportController.php:60
 #: src/Controllers/Table/ImportController.php:99
 msgid "Could not load import plugins, please check your installation!"
-msgstr "ไม่สามารถโหลดนำเข้าปลั๊กอินได้ กรุณาตรวจสอบการติดตั้งของคุณ!"
+msgstr "ไม่สามารถนำเข้าปลั๊กอินได้ กรุณาตรวจสอบการติดตั้งของคุณ!"
 
 #: src/Controllers/Database/PrivilegesController.php:64
 #: src/Controllers/Server/PrivilegesController.php:98
@@ -13117,49 +13118,50 @@ msgstr ""
 #: src/Controllers/Database/TrackingController.php:71
 #: src/Controllers/Database/TrackingController.php:97
 msgid "Tracking data deleted successfully."
-msgstr "ลบข้อมูลติดตามเรียบร้อยแล้ว"
+msgstr "ลบข้อมูลการติดตามเรียบร้อยแล้ว"
 
 #: src/Controllers/Database/TrackingController.php:82
 #, php-format
 msgid ""
 "Version %1$s was created for selected tables, tracking is active for them."
-msgstr "เวอร์ชัน %1$s ถูกสร้างขึ้นสำหรับตารางที่เลือก การติดตามจะเปิดใช้งานกับตารางพวกนั้น"
+msgstr ""
+"เวอร์ชัน %1$s ถูกสร้างขึ้นสำหรับตารางที่เลือก การติดตามเปิดใช้งานกับตารางพวกนั้น"
 
 #: src/Controllers/Database/TrackingController.php:114
 msgid "No tables selected."
-msgstr "ไม่มีตารางที่ถูกเลือก"
+msgstr "ไม่มีตารางที่เลือกไว้"
 
 #: src/Controllers/Database/TrackingController.php:149
 msgid "Database Log"
-msgstr "ประวัติการเข้าใช้ของฐานข้อมูล"
+msgstr "บันทึกฐานข้อมูล"
 
 #: src/Controllers/ErrorReportController.php:94
 msgid ""
 "An error has been detected and an error report has been automatically "
 "submitted based on your settings."
-msgstr "ตรวจพบข้อผิดพลาด และรายงานตามที่ได้ตั้งค่าไว้เรียบร้อยแล้ว"
+msgstr "ตรวจพบข้อผิดพลาด และได้แจ้งรายงานตามที่ตั้งค่าไว้โดยอัตโนมัติ"
 
 #: src/Controllers/ErrorReportController.php:98
 msgid "Thank you for submitting this report."
-msgstr "ขอบคุณสำหรับการรายงานครั้งนี้"
+msgstr "ขอบคุณสำหรับการรายงาน"
 
 #: src/Controllers/ErrorReportController.php:102
 msgid ""
 "An error has been detected and an error report has been generated but failed "
 "to be sent."
-msgstr "ตรวจพบข้อผิดพลาด และรายงานได้ถูกสร้างขึ้นแล้ว แต่ไม่สามารถส่งได้ในขณะนี้"
+msgstr "ตรวจพบข้อผิดพลาด และรายงานได้ถูกสร้างขึ้นแล้ว แต่การส่งล้มเหลว"
 
 #: src/Controllers/ErrorReportController.php:105
 msgid "If you experience any problems please submit a bug report manually."
-msgstr "หากคุณพบปัญหาในการใช้งานบางอย่าง กรุณารายงานข้อผิดพลาด้วยตัวคุณเอง"
+msgstr "หากคุณพบปัญหาใด ๆ ในการใช้งาน กรุณารายงานข้อผิดพลาดด้วยตนเอง"
 
 #: src/Controllers/ErrorReportController.php:108
 msgid "You may want to refresh the page."
-msgstr "คุณอาจจะต้องการรีเฟรซหน้านี้"
+msgstr "คุณอาจต้องการรีเฟรชหน้าเพจ"
 
 #: src/Controllers/Export/ExportController.php:119 src/Export/Export.php:1057
 msgid "Bad type!"
-msgstr "ประเภทไม่ถูกต้อง!"
+msgstr "รูปแบบไม่ดี!"
 
 #: src/Controllers/GisDataEditorController.php:118
 #, php-format
@@ -13171,8 +13173,8 @@ msgid ""
 "You were logged out from one server, to logout completely from phpMyAdmin, "
 "you need to logout from all servers."
 msgstr ""
-"คุณได้ออกจากระบบจากเครื่องแม่ข่ายหนึ่งแล้ว หากต้องการออกจากระบบ phpMyAdmin โดยสมบูรณ์ "
-"คุณต้องออกจากระบบจากเครื่องแม่ข่ายทั้งหมด"
+"คุณได้ลงชื่อออกจากเซิร์ฟเวอร์ หากต้องการลงชื่อออกจาก phpMyAdmin โดยสมบูรณ์ คุณต้องลงชื่อออกจา"
+"กเซิร์ฟเวอร์ทั้งหมด"
 
 #: src/Controllers/HomeController.php:197
 #, php-format
@@ -13180,13 +13182,13 @@ msgid ""
 "The phpMyAdmin configuration storage is not completely configured, some "
 "extended features have been deactivated. %sFind out why%s. "
 msgstr ""
-"พื้นที่จัดเก็บการกำหนดค่า phpMyAdmin ยังตั้งค่าไม่เสร็จสมบูรณ์ "
-"คุณลักษณะเพิ่มเติมบางอย่างได้ถูกปิดใช้งานแล้ว %sเรียนรู้เพิ่มเติม%s "
+"พื้นที่จัดเก็บการกำหนดค่า phpMyAdmin ยังตั้งค่าไม่เสร็จสมบูรณ์ คุณลักษณะเพิ่มเติมบางอย่างได้ถูกปิดใช้ง"
+"านแล้ว %sค้นหาสาเหตุ%s "
 
 #: src/Controllers/HomeController.php:203
 msgid ""
 "Or alternately go to 'Operations' tab of any database to set it up there."
-msgstr "หรือเข้าไปที่แท็บ 'การดำเนินการ' ของฐานข้อมูลใดๆ เพื่อตั้งค่า"
+msgstr "หรือไปที่แท็บ 'การดำเนินการ' ของฐานข้อมูลใด ๆ เพื่อตั้งค่าที่นั่น"
 
 #: src/Controllers/HomeController.php:267
 msgid ""
@@ -13205,8 +13207,8 @@ msgid ""
 "Login cookie store is lower than cookie validity configured in phpMyAdmin, "
 "because of this, your login will expire sooner than configured in phpMyAdmin."
 msgstr ""
-"การจัดเก็บคุกกี้เข้าสู่ระบบต่ำกว่าระยะเวลามีผลของคุกกี้ที่ได้กำหนดไว้ใน phpMyAdmin "
-"สิ่งนี้จะทำให้การเข้าสู่ระบบของคุณอาจหมดอายุเร็วกว่าที่กำหนดไว้ใน phpMyAdmin"
+"การจัดเก็บคุกกี้สำหรับการเข้าสู่ระบบนั้นต่ำกว่าความถูกต้องของคุกกี้ที่กำหนดค่าไว้ใน phpMyAdmin ด้วยส"
+"าเหตุนี้การเข้าสู่ระบบของคุณจะหมดอายุเร็วกว่าที่กำหนดค่าไว้ใน phpMyAdmin"
 
 #: src/Controllers/HomeController.php:306
 msgid ""
@@ -13237,9 +13239,9 @@ msgid ""
 "once phpMyAdmin has been configured. Otherwise the security of your server "
 "may be compromised by unauthorized people downloading your configuration."
 msgstr ""
-"ไดเรกทอรี [code]config[/code] ซึ่งถูกใช้โดยสคริปต์ตัวติดตั้งยังคงอยู่ในไดเรกทอรี phpMyAdmin "
-"ของคุณ เราขอแนะนำเป็นอย่างยิ่งว่าให้ลบออกหากได้กำหนดค่า phpMyAdmin เรียบร้อยแล้ว "
-"มิเช่นนั้นความปลอดภัยของเครื่องแม่ข่ายของคุณอาจถูกบุกรุกโดยบุคคลที่ไม่ได้รับอนุญาตที่เข้ามาดาวน์โหลดไฟล์กำหนดค่าของคุณ"
+"ไดเรกทอรี [code]config[/code] ซึ่งใช้โดยสคริปต์ติดตั้ง ยังคงอยู่ในไดเรกทอรี phpMyAdmin ของ"
+"คุณ ขอแนะนำอย่างยิ่งให้ลบไดเรกทอรีนี้ออกเมื่อกำหนดค่า phpMyAdmin เรียบร้อยแล้ว มิฉะนั้น ความปล"
+"อดภัยของเซิร์ฟเวอร์ของคุณอาจถูกบุกรุกโดยผู้ที่ไม่ได้รับอนุญาตที่ดาวน์โหลดการกำหนดค่าของคุณ"
 
 #: src/Controllers/HomeController.php:374
 #, php-format
@@ -13247,8 +13249,7 @@ msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
 "issues."
 msgstr ""
-"เครื่องแม่ข่ายกำลังทำงานโดยใช้ Suhosin "
-"โปรดศึกษา%sเอกสารกำกับโปรแกรม%sเพื่อดูปัญหาที่อาจเกิดขึ้นได้"
+"เซิร์ฟเวอร์ทำงานด้วย Suhosin กรุณาดู %sเอกสารประกอบ%s สำหรับปัญหาที่อาจเกิดขึ้น"
 
 #: src/Controllers/HomeController.php:388
 #, php-format
@@ -13256,8 +13257,8 @@ msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
 "templates and will be slow because of this."
 msgstr ""
-"ไม่สามารถเข้าถึง $cfg['TempDir'] (%s) ได้ phpMyAdmin "
-"จึงไม่สามารถทำการแคชแม่แบบได้และจะทำงานช้าลง"
+"ไม่สามารถเข้าถึง $cfg['TempDir'] (%s) ได้ phpMyAdmin จึงไม่สามารถทำการแคชแม่แบบได้และ"
+"จะทำงานช้าลงเพราะสาเหตุนี้"
 
 #: src/Controllers/HomeController.php:405
 msgid ""
@@ -13272,16 +13273,17 @@ msgid ""
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
 "split strings correctly and it may result in unexpected results."
 msgstr ""
-"ไม่พบส่วนขยาย mbstring ของ PHP และดูเหมือนคุณต้องใช้ชุดอักขระโดยไม่มีส่วนขยาย mbstring "
-"ของ phpMyAdmin ซึ่งไม่สามารถแยกอักขระได้อย่างถูกต้อง และอาจทำให้ผลลัพธ์ที่ไม่คาดคิดได้"
+"ไม่พบส่วนขยาย mbstring ของ PHP และดูเหมือนคุณกำลังใช้ชุดอักขระมัลติไบต์ เมื่อปราศจากส่วนขยา"
+"ย mbstring ของ phpMyAdmin ซึ่งไม่สามารถแยกอักขระได้อย่างถูกต้อง และอาจส่งผลให้เกิดผลลัพธ์ที่"
+"ไม่คาดคิดได้"
 
 #: src/Controllers/HomeController.php:476
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
 msgstr ""
-"ไม่พบส่วนขยาย curl และ allow_url_fopen ถูกปิดใช้งานอยู่ "
-"ทำให้บางคุณลักษณะอย่างการรายงานข้อผิดพลาดหรือตรวจสอบรุ่นล่าสุดจะถูกปิดไว้"
+"ไม่พบส่วนขยาย curl และ allow_url_fopen ถูกปิดการใช้งานอยู่ ทำให้บางคุณลักษณะ เช่น การราย"
+"งานข้อผิดพลาดหรือตรวจสอบเวอร์ชันจะถูกปิดไว้"
 
 #: src/Controllers/Import/ImportController.php:163
 #, php-format
@@ -13289,8 +13291,8 @@ msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
 "%sdocumentation%s for a workaround for this limit."
 msgstr ""
-"คุณพยายามที่จะอัพโหลดไฟล์ที่มีขนาดใหญ่เกินไป กรุณาดูที่ %s เอกสารช่วยเหลือ%s "
-"เพื่อแก้ไขปัญหาดังกล่าวนี้"
+"อาจเป็นเพราะคุณพยายามอัปโหลดไฟล์ที่มีขนาดใหญ่เกินไป กรุณาดูที่ %sdocumentation%s เพื่อแนวทาง"
+"แก้ปัญหาสำหรับข้อจำกัดนี้"
 
 #: src/Controllers/Import/ImportController.php:189
 #, fuzzy
@@ -13301,12 +13303,12 @@ msgstr "เอาฐานข้อมูลออก"
 #: src/Controllers/Import/ImportController.php:299
 #: src/Controllers/Import/ImportController.php:513
 msgid "Showing bookmark"
-msgstr "แสดงบุ๊คมาร์ค"
+msgstr "แสดงบุ๊กมาร์ก"
 
 #: src/Controllers/Import/ImportController.php:319
 #: src/Controllers/Import/ImportController.php:509
 msgid "The bookmark has been deleted."
-msgstr "ลบคำค้นที่จดไว้เรียบร้อยแล้ว"
+msgstr "บุ๊กมาร์กถูกลบแล้ว"
 
 #: src/Controllers/Import/ImportController.php:431
 msgid ""
@@ -13314,14 +13316,14 @@ msgid ""
 "file size exceeded the maximum size permitted by your PHP configuration. See "
 "[doc@faq1-16]FAQ 1.16[/doc]."
 msgstr ""
-"ไม่มีข้อมูลสำหรับการนำเข้า อาจจะไม่ได้ใส่ชื่อไฟล์ หรือขนาดไฟล์เกินขนาดสูงสุดที่ระบบตั้งไว้ "
-"กรุณาแก้ไขไฟล์ตั้งค่าของ PHP ดูเอกสารเพิ่มเติมได้ที่ [doc@faq1-16]FAQ 1.16[/doc]"
+"ไม่ได้รับข้อมูลที่จะนำเข้า อีกทั้งไม่มีชื่อไฟล์ด้วย หรือไฟล์มีขนาดใหญ่เกินกว่าการอนุญาตสูงสุดตามการกำหน"
+"ดค่า PHP ของคุณ ดู [doc@faq1-16]FAQ 1.16[/doc]"
 
 #: src/Controllers/Import/ImportController.php:521
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
-msgstr[0] "นำเข้าสำเร็จเรียบร้อย การเรียกใช้ %d รายการได้ถูกดำเนินการแล้ว"
+msgstr[0] "การนำเข้าเรียบร้อย %d การเรียกดูดำเนินการแล้ว"
 
 #: src/Controllers/Import/ImportController.php:558
 #, php-format
@@ -13329,16 +13331,16 @@ msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
 "same file%s and import will resume."
 msgstr ""
-"หมดเวลาการเรียกใช้สคริปต์แล้ว หากคุณต้องการนำเข้าให้เรียบร้อย กรุณา %sนำเข้าไฟล์เดิม%s "
-"อีกรอบ และการนำเข้าจะดำเนินต่อไป"
+"สคริปต์หมดเวลาแล้ว หากคุณต้องการนำเข้าให้เสร็จ กรุณา %sresubmit the same file%s และการ"
+"นำเข้าจะดำเนินการต่อให้"
 
 #: src/Controllers/Import/ImportController.php:568
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
 msgstr ""
-"ชุดข้อมูลที่นำเข้าล่าสุดไม่ได้สามารถนำเข้าได้ หมายความว่า phpMyAdmin ไม่สามารถนำเข้าได้ทัน "
-"ตามเวลารันสูงสุดที่กำหนดใน PHP"
+"อย่างไรก็ตามจากการรันครั้งล่าสุดไม่มีการแยกวิเคราะห์ข้อมูล ซึ่งโดยปกติจะหมายความว่า "
+"phpMyAdmin จะไม่สามารถดำเนินการนำเข้านี้ให้เสร็จสิ้นได้ เว้นแต่คุณจะเพิ่มขีดจำกัดเวลาของ php"
 
 #: src/Controllers/Import/ImportController.php:631
 #: src/Controllers/Sql/SqlController.php:145
@@ -13360,11 +13362,11 @@ msgstr "ไม่สามารถโหลดข้อมูลความค
 #: src/Controllers/JavaScriptMessagesController.php:55
 #, php-format
 msgid "Do you really want to execute \"%s\"?"
-msgstr "คุณแน่ใจหรือว่าต้องการดำเนินการ \"%s\"?"
+msgstr "คุณต้องการดำเนินการ \"%s\" จริงหรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:56
 msgid "You are about to DESTROY a complete database!"
-msgstr "คุณกำลังจะ ทํ า ล า ย ฐานข้อมูลหนึ่งโดยสมบูรณ์!"
+msgstr "คุณกำลังจะใช้คำสั่ง DESTROY ฐานข้อมูลโดยสมบูรณ์!"
 
 #: src/Controllers/JavaScriptMessagesController.php:58
 #, fuzzy
@@ -13375,11 +13377,11 @@ msgstr "ไม่สามารถเปลี่ยนชื่อฐานข
 
 #: src/Controllers/JavaScriptMessagesController.php:60
 msgid "You are about to DESTROY a complete table!"
-msgstr "คุณกำลังจะ ทํ า ล า ย ตารางหนึ่งโดยสมบูรณ์!"
+msgstr "คุณกำลังจะใช้คำสั่ง DESTROY ตารางโดยสมบูรณ์!"
 
 #: src/Controllers/JavaScriptMessagesController.php:61
 msgid "You are about to TRUNCATE a complete table!"
-msgstr "คุณกำลังจะ ล้ า ง ข้ อ มู ล ตารางหนึ่งโดยสมบูรณ์!"
+msgstr "คุณกำลังจะใช้คำสั่ง TRUNCATE ตารางโดยสมบูรณ์!"
 
 #: src/Controllers/JavaScriptMessagesController.php:62
 #, fuzzy
@@ -13397,15 +13399,15 @@ msgstr "ลบข้อมูลการติดตามของตารา
 
 #: src/Controllers/JavaScriptMessagesController.php:65
 msgid "Delete tracking data for this version?"
-msgstr "ลบข้อมูลการติดตามของรุ่นนี้?"
+msgstr "ลบข้อมูลการติดตามของเวอร์ชันนี้?"
 
 #: src/Controllers/JavaScriptMessagesController.php:66
 msgid "Delete tracking data for these versions?"
-msgstr "ลบข้อมูลการติดตามของรุ่นเหล่านี้?"
+msgstr "ลบข้อมูลการติดตามของเวอร์ชันเหล่านี้?"
 
 #: src/Controllers/JavaScriptMessagesController.php:67
 msgid "Delete entry from tracking report?"
-msgstr "ลบแถวข้อมูลจากรายงานการติดตาม?"
+msgstr "ลบรายการออกจากรายงานการติดตาม?"
 
 #: src/Controllers/JavaScriptMessagesController.php:68
 msgid "Deleting tracking data"
@@ -13413,56 +13415,57 @@ msgstr "กำลังลบข้อมูลการติดตาม"
 
 #: src/Controllers/JavaScriptMessagesController.php:69
 msgid "Dropping Primary Key/Index"
-msgstr "กำลังทิ้งคีย์หลัก/ดัชนี"
+msgstr "กำลังใช้คำสั่ง Drop คีย์หลัก/ดัชนี"
 
 #: src/Controllers/JavaScriptMessagesController.php:70
 msgid "Dropping Foreign key."
-msgstr "กำลังทิ้งคีย์นอก"
+msgstr "กำลังใช้คำสั่ง Drop คีย์นอก"
 
 #: src/Controllers/JavaScriptMessagesController.php:71
 #, php-format
 msgid "Do you really want to delete user group \"%s\"?"
-msgstr "คุณแน่ใจหรือว่าต้องการลบกลุ่มผู้ใช้ \"%s\"?"
+msgstr "คุณต้องการลบกลุ่มผู้ใช้ \"%s\" ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:72
 msgid "You have unsaved changes; are you sure you want to leave this page?"
-msgstr "คุณมีการเปลี่ยนแปลงข้อมูลที่ยังไม่ได้บันทึก คุณแน่ใจหรือว่าต้องการออกจากหน้านี้?"
+msgstr ""
+"คุณมีการเปลี่ยนแปลงข้อมูลที่ยังไม่ได้บันทึก; คุณต้องการออกจากหน้านี้ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:74
 msgid ""
 "You are trying to reduce the number of rows, but have already entered data "
 "in those rows which will be lost. Do you wish to continue?"
 msgstr ""
-"คุณกำลังพยายามลดจำนวนแถวแต่ได้ป้อนข้อมูลในแถวเหล่านั้นซึ่งจะสูญหายไป "
-"คุณต้องการดำเนินการต่อหรือไม่?"
+"คุณกำลังพยายามลดจำนวนแถว แต่ได้มีการป้อนข้อมูลไปแล้ว ซึ่งข้อมูลเหล่านั้นจะหายไป คุณต้องการดำเนิน"
+"การต่อหรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:77
 msgid "Do you really want to revoke the selected user(s) ?"
-msgstr "คุณแน่ใจหรือว่าต้องการยกเลิกสิทธิ์ของผู้ใช้ที่เลือกไว้?"
+msgstr "คุณต้องการยกเลิกสิทธิ์ของผู้ใช้ที่เลือกไว้ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:78
 msgid "Do you really want to delete this central column?"
-msgstr "คุณแน่ใจหรือว่าต้องการลบคอลัมน์ส่วนกลางนี้?"
+msgstr "คุณต้องการลบคอลัมน์ส่วนกลางนี้ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:79
 msgid "Do you really want to delete the selected items?"
-msgstr "คุณแน่ใจหรือว่าต้องการลบรายการที่เลือกไว้?"
+msgstr "คุณต้องการลบรายการที่เลือกไว้ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:81
 msgid ""
 "Do you really want to DROP the selected partition(s)? This will also DELETE "
 "the data related to the selected partition(s)!"
 msgstr ""
-"คุณแน่ใจหรือว่าต้องการ ทิ้ ง พาร์ติชั่นที่เลือกไว้? นี่จะเป็นการ ล บ "
-"ข้อมูลที่เกี่ยวข้องกับพาร์ติชั่นที่เลือกไว้ออกไปด้วย!"
+"คุณต้องการใช้คำสั่ง DROP พาร์ติชันที่เลือกไว้ใช่หรือไม่? นี่จะเป็นการลบข้อมูลที่เกี่ยวข้องกับพาร์ติชันที่เลือ"
+"กไว้ออกไปด้วย!"
 
 #: src/Controllers/JavaScriptMessagesController.php:84
 msgid "Do you really want to TRUNCATE the selected partition(s)?"
-msgstr "คุณแน่ใจหรือว่าต้องการ ล้ า ง ข้ อ มู ล ในพาร์ติชั่นที่เลือกไว้?"
+msgstr "คุณต้องการใช้คำสั่ง TRUNCATE ในพาร์ติชั่นที่เลือกไว้ใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:85
 msgid "Do you really want to remove partitioning?"
-msgstr "คุณแน่ใจหรือว่าต้องการนำการพาร์ติชั่นออก?"
+msgstr "คุณต้องการลบพาร์ติชั่นออกใช่หรือไม่?"
 
 #: src/Controllers/JavaScriptMessagesController.php:86
 #, fuzzy
@@ -13478,18 +13481,18 @@ msgid ""
 "collation; in this case we suggest you revert to the original collation and "
 "refer to the tips at "
 msgstr ""
-"การดำเนินการนี้จะพยายามแปลงข้อมูลของคุณให้อยู่ในชุดอักขระใหม่ ในกรณีสุดวิสัย "
-"หากมีอักขระใดที่ไม่มีอยู่ในชุดอักขระใหม่ "
-"กระบวนการนี้อาจทำให้ข้อมูลนั้นแสดงผลไม่ถูกต้องเมื่ออยู่ในชุดอักขระใหม่ ในกรณีนี้ "
-"เราแนะนำให้คุณแปลงกลับไปเป็นชุดอักขระเดิมแล้วดำเนินการตามเคล็ดลับที่ "
+"การดำเนินการนี้เป็นการพยายามแปลงข้อมูลของคุณให้อยู่ในชุดเทียบเคียงอักษรใหม่ ในบางกรณีที่พบได้ยา"
+"ก โดยเฉพาะอย่างยิ่งอักขระที่ไม่มีอยู่ในชุดเทียบเคียงอักษรใหม่ กระบวนการนี้อาจเป็นสาเหตุทำให้การแส"
+"ดงผลข้อมูลไม่ถูกต้องภายใต้ชุดเทียบเคียงอักษรใหม่; ในกรณีเช่นนี้ เราแนะนำให้คุณแปลงกลับไปเป็นชุดเที"
+"ยบเคึยงอักษระเดิมและโปรดดูคำแนะนำที่ "
 
 #: src/Controllers/JavaScriptMessagesController.php:94
 msgid "Garbled Data"
-msgstr "ข้อมูลที่ไม่สามารถอ่านได้"
+msgstr "ข้อมูลที่ผิดเพี้ยนไป"
 
 #: src/Controllers/JavaScriptMessagesController.php:96
 msgid "Are you sure you wish to change the collation and convert the data?"
-msgstr "คุณแน่ใจหรือว่าต้องการเปลี่ยนชุดอักขระและแปลงข้อมูล?"
+msgstr "คุณแน่ใจหรือว่าต้องการเปลี่ยนชุดเทียบเคียงอักษรและแปลงข้อมูล?"
 
 #: src/Controllers/JavaScriptMessagesController.php:99
 msgid ""
@@ -13500,16 +13503,17 @@ msgid ""
 "column(s) editing feature (the \"Change\" Link) on the table structure page. "
 "</b>"
 msgstr ""
-"ในการดำเนินการนี้, MySQL จะพยายามเชื่อมค่าของข้อมูลในแต่ละชุดอักขระ "
-"หากชุดอักขระไม่เข้ากันอาจทำให้เกิดการสูญเสียข้อมูล และข้อมูลในส่วนที่สูญเสียไปนี้อาจ<b>ไม่</"
-"b>สามารถกู้คืนได้จากการเปลี่ยนชุดอักขระคอลัมน์กลับคืน <b>หากต้องการแปลงข้อมูลที่มีอยู่เดิม, "
-"แนะนำให้ใช้คุณลักษณะการแก้ไขคอลัมน์ (ลิงก์ \"เปลี่ยน\") ที่อยู่ในหน้าโครงสร้างตาราง </b>"
+"ในการดำเนินการนี้ MySQL พยายามจับคู่ค่าข้อมูลระหว่างชุดเทียบเคียงอักษร หากชุดอักขระไม่เข้ากัน อา"
+"จเกิดการสูญหายของข้อมูล และข้อมูลที่สูญหายนั้นอาจ <b>ไม่สามารถ</b> กู้คืนได้ง่ายดายโดยการเปลี่ยน"
+"ชุดเทียบเคียงของคอลัมน์กลับ <b>ในการแปลงข้อมูลที่มีอยู่ ขอแนะนำให้ใช้คุณสมบัติการแก้ไขคอลัมน์ (ลิง"
+"ก์ \"เปลี่ยน\") ในหน้าโครงสร้างตาราง</b>"
 
 #: src/Controllers/JavaScriptMessagesController.php:107
 msgid ""
 "Are you sure you wish to change all the column collations and convert the "
 "data?"
-msgstr "คุณแน่ใจหรือว่าต้องการเปลี่ยนชุดอักขระคอลัมน์ทั้งหมดและแปลงข้อมูล?"
+msgstr ""
+"คุณแน่ใจหรือว่าต้องการเปลี่ยนคอลัมน์ชุดเทียบเคียงอักษรทั้งหมดและแปลงข้อมูล?"
 
 #: src/Controllers/JavaScriptMessagesController.php:112
 msgid "Reset all"
@@ -13525,11 +13529,11 @@ msgstr "เลือกอย่างน้อยหนึ่งตัวเล
 
 #: src/Controllers/JavaScriptMessagesController.php:117
 msgid "Please enter a valid number!"
-msgstr "โปรดกรอกตัวเลขที่ถูกต้อง!"
+msgstr "กรุณากรอกตัวเลขที่ถูกต้อง!"
 
 #: src/Controllers/JavaScriptMessagesController.php:118
 msgid "Please enter a valid length!"
-msgstr "โปรดกรอกความยาวที่ถูกต้อง!"
+msgstr "กรุณากรอกความยาวที่ถูกต้อง!"
 
 #: src/Controllers/JavaScriptMessagesController.php:119
 msgid "Add index"
@@ -13568,20 +13572,20 @@ msgstr "ค่าแกน Y"
 
 #: src/Controllers/JavaScriptMessagesController.php:141
 msgid "Please enter the SQL query first."
-msgstr "กรุณากรอกคิวรี่ SQL ก่อน"
+msgstr "กรุณากรอกคำสั่ง SQL ก่อน"
 
 #: src/Controllers/JavaScriptMessagesController.php:144
 msgid "The host name is empty!"
-msgstr "ชื่อโฮสต์ยังว่างเปล่าอยู่!"
+msgstr "ชื่อโฮสต์ว่างเปล่า!"
 
 #: src/Controllers/JavaScriptMessagesController.php:145
 msgid "The user name is empty!"
-msgstr "ชื่อผู้ใช้ยังว่างเปล่าอยู่!"
+msgstr "ชื่อผู้ใช้ว่างเปล่า!"
 
 #: src/Controllers/JavaScriptMessagesController.php:146
 #: src/Server/Privileges.php:766 src/UserPassword.php:40
 msgid "The password is empty!"
-msgstr "รหัสผ่านยังว่างเปล่าอยู่!"
+msgstr "รหัสผ่านว่างเปล่า!"
 
 #: src/Controllers/JavaScriptMessagesController.php:147
 #: src/Server/Privileges.php:764 src/UserPassword.php:44
@@ -13643,15 +13647,15 @@ msgstr "ระเบียนต่อหน้า"
 
 #: src/Controllers/JavaScriptMessagesController.php:177
 msgid "Query cache efficiency"
-msgstr "ประสิทธิภาพคำสั่ง"
+msgstr "ประสิทธิภาพของแคชคำสั่งเรียกดู"
 
 #: src/Controllers/JavaScriptMessagesController.php:178
 msgid "Query cache usage"
-msgstr "คำสั่งที่ถูกรันบนหน่วยความจำ"
+msgstr "การใช้งานแคชคำสั่งเรียกดู"
 
 #: src/Controllers/JavaScriptMessagesController.php:179
 msgid "Query cache used"
-msgstr "คำสั่งที่ถูกรันไปในหน่วยความจำแล้ว"
+msgstr "ใช้แคชคำสั่งเรียกดูแล้ว"
 
 #: src/Controllers/JavaScriptMessagesController.php:181
 msgid "System CPU usage"
@@ -13663,7 +13667,7 @@ msgstr "หน่วยความจำของระบบ"
 
 #: src/Controllers/JavaScriptMessagesController.php:183
 msgid "System swap"
-msgstr "หน่วยความจำ swap ของระบบ"
+msgstr "การสลับระบบ"
 
 #: src/Controllers/JavaScriptMessagesController.php:185
 msgid "Average load"
@@ -13675,11 +13679,11 @@ msgstr "จำนวนหน่วยความจำรวม"
 
 #: src/Controllers/JavaScriptMessagesController.php:187
 msgid "Cached memory"
-msgstr "จำนวนหน่วยความจำที่ถูกใช้"
+msgstr "หน่วยความจำแคชที่ใช้"
 
 #: src/Controllers/JavaScriptMessagesController.php:188
 msgid "Buffered memory"
-msgstr "จำนวนหน่วยความจำที่จอง"
+msgstr "หน่วยความจำบัฟเฟอร์"
 
 #: src/Controllers/JavaScriptMessagesController.php:189
 msgid "Free memory"
@@ -13699,19 +13703,19 @@ msgstr "การสลับที่ถูกแคช"
 
 #: src/Controllers/JavaScriptMessagesController.php:194
 msgid "Used swap"
-msgstr "จำนวนการสลับที่ใช้ไป"
+msgstr "การสลับที่ใช้ไป"
 
 #: src/Controllers/JavaScriptMessagesController.php:195
 msgid "Free swap"
-msgstr "จำนวนการสลับที่ว่าง"
+msgstr "การสลับที่ว่าง"
 
 #: src/Controllers/JavaScriptMessagesController.php:197
 msgid "Bytes sent"
-msgstr "Byte ที่ส่ง"
+msgstr "ไบต์ที่ส่ง"
 
 #: src/Controllers/JavaScriptMessagesController.php:198
 msgid "Bytes received"
-msgstr "Byte ที่รับ"
+msgstr "ไบต์ที่รับ"
 
 #. l10n: shortcuts for Byte
 #: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:311
@@ -13726,17 +13730,17 @@ msgstr "กิกะไบต์"
 #. l10n: shortcuts for Terabyte
 #: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:319
 msgid "TiB"
-msgstr "เทอราไบต์"
+msgstr "เทราไบต์"
 
 #. l10n: shortcuts for Petabyte
 #: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:321
 msgid "PiB"
-msgstr "เพตตะไบต์"
+msgstr "เพตาไบต์"
 
 #. l10n: shortcuts for Exabyte
 #: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:323
 msgid "EiB"
-msgstr "เอกซะไบต์"
+msgstr "เอ็กซ์บิไบต์"
 
 #: src/Controllers/JavaScriptMessagesController.php:210
 #, php-format
@@ -13761,11 +13765,11 @@ msgstr "คำค้น SQL"
 
 #: src/Controllers/JavaScriptMessagesController.php:221
 msgid "Resume monitor"
-msgstr "เรียกคืนการแสดงผล"
+msgstr "ทำการมอนิเตอร์ต่อ"
 
 #: src/Controllers/JavaScriptMessagesController.php:222
 msgid "Pause monitor"
-msgstr "หยุดการแสดงผล"
+msgstr "หยุดการมอนิเตอร์ชั่วคราว"
 
 #: src/Controllers/JavaScriptMessagesController.php:224
 msgid "Stop auto refresh"
@@ -13773,27 +13777,27 @@ msgstr "หยุดการรีเฟรชอัตโนมัติ"
 
 #: src/Controllers/JavaScriptMessagesController.php:226
 msgid "general_log and slow_query_log are enabled."
-msgstr "general_log และ slow_query_log ถูกเปิดไว้"
+msgstr "general_log และ slow_query_log เปิดการใช้งานไว้"
 
 #: src/Controllers/JavaScriptMessagesController.php:227
 msgid "general_log is enabled."
-msgstr "general_log ถูกเปิดไว้"
+msgstr "general_log เปิดการใช้งานไว้"
 
 #: src/Controllers/JavaScriptMessagesController.php:228
 msgid "slow_query_log is enabled."
-msgstr "slow_query_log ถูกเปิดไว้"
+msgstr "slow_query_log เปิดการใช้งานไว้"
 
 #: src/Controllers/JavaScriptMessagesController.php:229
 msgid "slow_query_log and general_log are disabled."
-msgstr "general_log และ slow_query_log ถูกปิดไว้"
+msgstr "general_log และ slow_query_log ปิดการใช้งานไว้"
 
 #: src/Controllers/JavaScriptMessagesController.php:230
 msgid "log_output is not set to TABLE."
-msgstr "log_output ไม่ได้ถูกตั้งกับตาราง"
+msgstr "log_output ไม่ได้ถูกตั้งไว้กับตาราง"
 
 #: src/Controllers/JavaScriptMessagesController.php:231
 msgid "log_output is set to TABLE."
-msgstr "log_output ถูกตั้งกับตาราง"
+msgstr "log_output ถูกตั้งกับไว้ตาราง"
 
 #: src/Controllers/JavaScriptMessagesController.php:233
 #, php-format
@@ -13802,8 +13806,8 @@ msgid ""
 "than %d seconds. It is advisable to set this long_query_time 0-2 seconds, "
 "depending on your system."
 msgstr ""
-"slow_query_log ถูกเปิดไว้ แต่ประวัติคำสั่งของเครื่องแม่ข่ายใช้เวลานานกว่า %d วินาที "
-"ขอแนะนำให้ตั้งค่า long_query_time ไว้ที่ 0-2 วินาที โดยขึ้นอยู่กับระบบของท่าน"
+"slow_query_log เปิดการใช้งานไว้ แต่เซิร์ฟเวอร์บันทึกประวัติเพียงคำสั่ง SQL เท่านั้นซึ่งใช้เวลานาน"
+"กว่า %d วินาที ขอแนะนำให้ตั้งค่า long_query_time ไว้ที่ 0-2 วินาที โดยขึ้นอยู่กับระบบของท่าน"
 
 #: src/Controllers/JavaScriptMessagesController.php:237
 #, php-format
@@ -13814,7 +13818,8 @@ msgstr "long_query_time ถูกตั้งไว้ที่ %d วินา�
 msgid ""
 "Following settings will be applied globally and reset to default on server "
 "restart:"
-msgstr "การตั้งค่านี้ถูกนำไปใช้ทั้งหมด และจะคืนค่ากลับเมื่อเริ่มเครื่องใหม่อีกครั้ง:"
+msgstr ""
+"การตั้งค่าต่อไปนี้จะถูกนำไปใช้ทั้งระบบ และจะตั้งเป็นค่าเริ่มต้นเมื่อรีสตาร์ทเซิร์ฟเวอร์:"
 
 #. l10n: %s is FILE or TABLE
 #: src/Controllers/JavaScriptMessagesController.php:242
@@ -13844,15 +13849,16 @@ msgstr "ตั้ง long_query_time เป็น %d วินาที"
 msgid ""
 "You can't change these variables. Please log in as root or contact your "
 "database administrator."
-msgstr "คุณไม่สามารถเปลี่ยนแปลงค่านี้ได้ กรุณาเข้าใช้งานเป็น root หรือติดต่อผู้ดูแลระบบ"
+msgstr ""
+"คุณไม่สามารถเปลี่ยนแปลงค่าเหล่านี้ได้ กรุณาลงชื่อเข้าใช้งานเป็น root หรือติดต่อผู้ดูแลระบบฐานข้อมูล"
 
 #: src/Controllers/JavaScriptMessagesController.php:252
 msgid "Change settings"
-msgstr "เปลี่ยนการตั้งค่า"
+msgstr "เปลี่ยนแปลงการตั้งค่า"
 
 #: src/Controllers/JavaScriptMessagesController.php:253
 msgid "Current settings"
-msgstr "ค่าที่ถูกตั้งปัจจุบัน"
+msgstr "การตั้งค่าปัจจุบัน"
 
 #: src/Controllers/JavaScriptMessagesController.php:255
 msgid "Chart title"
@@ -13861,7 +13867,7 @@ msgstr "ชื่อแผนภูมิ"
 #. l10n: As in differential values
 #: src/Controllers/JavaScriptMessagesController.php:257
 msgid "Differential"
-msgstr "ค่าที่ต่าง"
+msgstr "ความแตกต่าง"
 
 #: src/Controllers/JavaScriptMessagesController.php:258
 #, php-format
@@ -13874,7 +13880,7 @@ msgstr "หน่วย"
 
 #: src/Controllers/JavaScriptMessagesController.php:261
 msgid "The database name is not known for this query in the server's logs."
-msgstr "ชื่อฐานข้อมูลที่ไม่รู้จักสำหรับคิวรี่นี้ในบันทึกประวัติเซิร์ฟเวอร์"
+msgstr "ไม่พบชื่อฐานข้อมูลสำหรับคำสั่งเรียกดูนี้ในบันทึกของเซิร์ฟเวอร์"
 
 #: src/Controllers/JavaScriptMessagesController.php:263
 msgid ""
@@ -13882,8 +13888,9 @@ msgid ""
 "However only the SQL query itself has been used as a grouping criteria, so "
 "the other attributes of queries, such as start time, may differ."
 msgstr ""
-"สดมส์นี้แสดงจำนวนคำสั่งที่ถูกจัดกลุ่มเดียวกัน อย่างไรก็ดีการจัดกลุ่มจัดเพียงคำสั่ง แต่เวลาเริ่ม "
-"หรือข้อมูลบางอย่าง อาจแตกต่างกัน"
+"คอลัมน์นี้แสดงจำนวนของคำสั่งเรียกดูที่เหมือนกันซึ่งถูกจัดกลุ่มเข้าด้วยกัน อย่างไรก็ตาม เกณฑ์การจัดกลุ่มใ"
+"ช้เฉพาะคำสั่ง SQL เท่านั้น ดังนั้น คุณลักษณะอื่น ๆ ของคำสั่งเรียกดู เช่น เวลาเริ่มต้น อาจแตกต่างกันไ"
+"ด้"
 
 #: src/Controllers/JavaScriptMessagesController.php:268
 msgid ""
@@ -13891,8 +13898,8 @@ msgid ""
 "same table are also being grouped together, disregarding of the inserted "
 "data."
 msgstr ""
-"จากที่กลุ่มคำสั่ง เพิ่มข้อมูล ถูกเลือกหลายอันพร้อมๆกัน คำลังที่เพิ่มข้อมูลไปในตารางเดียวกัน "
-"จะถูกจับกลุ่มรวมกันโดยไม่สนเรื่องข้อมูลที่จะถูกเพิ่มเข้าไป"
+"เมื่อได้การจัดกลุ่มคำสั่ง INSERT ถูกเลือกแล้ว คำสั่ง INSERT ที่แทรกเข้าไปในตารางเดียวกันจึงถูกจัดก"
+"ลุ่มเข้าด้วยกัน โดยไม่คำนึงถึงข้อมูลที่แทรกเข้าไป"
 
 #: src/Controllers/JavaScriptMessagesController.php:273
 msgid "Analyzing…"
@@ -13900,7 +13907,7 @@ msgstr "กำลังวิเคราะห์…"
 
 #: src/Controllers/JavaScriptMessagesController.php:274
 msgid "Explain output"
-msgstr "อธิบายผลคำสั่ง"
+msgstr "อธิบายเอาท์พุต"
 
 #: src/Controllers/JavaScriptMessagesController.php:277
 msgid "Total time:"
@@ -13908,7 +13915,7 @@ msgstr "เวลารวม:"
 
 #: src/Controllers/JavaScriptMessagesController.php:278
 msgid "Profiling results"
-msgstr "ผลลัพธ์"
+msgstr "ผลการวิเคราะห์ข้อมูล"
 
 #: src/Controllers/JavaScriptMessagesController.php:279
 msgctxt "Display format"
@@ -13917,12 +13924,12 @@ msgstr "ตาราง"
 
 #: src/Controllers/JavaScriptMessagesController.php:280
 msgid "Chart"
-msgstr "ชุดแสดงผล"
+msgstr "แผนภูมิ"
 
 #. l10n: A collection of available filters
 #: src/Controllers/JavaScriptMessagesController.php:287
 msgid "Log table filter options"
-msgstr "ตัวเลือกรองประวัติตาราง"
+msgstr "ตัวเลือกบันทึกการกรองตาราง"
 
 #. l10n: Filter as in "Start Filtering"
 #: src/Controllers/JavaScriptMessagesController.php:289
@@ -13931,29 +13938,30 @@ msgstr "ตัวกรอง"
 
 #: src/Controllers/JavaScriptMessagesController.php:290
 msgid "Filter queries by word/regexp:"
-msgstr "ตัวกรอง โดย คำหรืออักขระ:"
+msgstr "ตัวกรองคำสั่งเรียกดูด้วยคำหรือ regexp:"
 
 #: src/Controllers/JavaScriptMessagesController.php:291
 msgid "Group queries, ignoring variable data in WHERE clauses"
-msgstr "กลุ่มคำสั่ง ไม่สนใจตัวแปรใน WHERE"
+msgstr "กลุ่มคำสั่งเรียกดู ไม่สนใจข้อมูลตัวแปรในประโยค WHERE"
 
 #: src/Controllers/JavaScriptMessagesController.php:292
 msgid "Sum of grouped rows:"
-msgstr "ผลรวมระเบียนต่อหน้า:"
+msgstr "ผลรวมของแถวที่จัดกลุ่ม:"
 
 #: src/Controllers/JavaScriptMessagesController.php:295
 msgid "Affected rows:"
-msgstr "ระเบียนที่มีผล:"
+msgstr "แถวที่มีผล:"
 
 #: src/Controllers/JavaScriptMessagesController.php:297
 msgid "Failed parsing config file. It doesn't seem to be valid JSON code."
-msgstr "การ parsing ไฟล์ตั้งค่าล้มเหลว สาเหตุมาจาก JSON"
+msgstr ""
+"การวิเคราะห์ไฟล์การกำหนดค่าล้มเหลว ดูเหมือนว่าไม่ใช่โค้ด JSON ที่ถูกต้อง"
 
 #: src/Controllers/JavaScriptMessagesController.php:299
 msgid ""
 "Failed building chart grid with imported config. Resetting to default config…"
 msgstr ""
-"การสร้างตารางแสดงผลล้มเหลว เป็นเพราะการตั้งค่า โปรดล้างค่ากลับไปเป็นการตั้งค่าแบบเริ่มแรก…"
+"การสร้างตารางแผนภูมิด้วยการตั้งค่าที่นำเข้าล้มเหลว ระบบจะรีเซ็ตเป็นการตั้งค่าเริ่มต้น…"
 
 #: src/Controllers/JavaScriptMessagesController.php:302
 msgid "Please enter a valid table name."
@@ -14013,11 +14021,11 @@ msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:332
 msgid "No accounts selected."
-msgstr "ยังไม่ได้เลือกบัญชี"
+msgstr "ไม่ได้เลือกบัญชี"
 
 #: src/Controllers/JavaScriptMessagesController.php:333
 msgid "Dropping column"
-msgstr "ทิ้งคอลัมน์"
+msgstr "กำลังลบคอลัมน์"
 
 #: src/Controllers/JavaScriptMessagesController.php:334
 msgid "Adding primary key"
@@ -14025,7 +14033,7 @@ msgstr "กำลังเพิ่มคีย์หลัก"
 
 #: src/Controllers/JavaScriptMessagesController.php:336
 msgid "Click to dismiss this notification"
-msgstr "กดเพื่อยกเลิกการเตือนนี้"
+msgstr "กดเพื่อยกเลิกการแจ้งเตือนนี้"
 
 #: src/Controllers/JavaScriptMessagesController.php:340
 msgid "Renaming databases"
@@ -14352,11 +14360,11 @@ msgstr "รูปหลายเหลี่ยม"
 
 #: src/Controllers/JavaScriptMessagesController.php:474
 msgid "Inner ring"
-msgstr "วงแหวนด้านใน"
+msgstr "กลุ่มวงใน"
 
 #: src/Controllers/JavaScriptMessagesController.php:475
 msgid "Outer ring"
-msgstr "วงแหวนด้านนอก"
+msgstr "กลุ่มวงนอก"
 
 #: src/Controllers/JavaScriptMessagesController.php:476
 msgid "Add a point"
@@ -14368,7 +14376,7 @@ msgstr "เพิ่มแถวข้อความ"
 
 #: src/Controllers/JavaScriptMessagesController.php:478
 msgid "Add an inner ring"
-msgstr "เพิ่มด้านใน"
+msgstr "เพิ่มกลุ่มวงใน"
 
 #: src/Controllers/JavaScriptMessagesController.php:479
 msgid "Add a polygon"
@@ -15328,7 +15336,8 @@ msgstr ""
 
 #: src/Controllers/Operations/DatabaseController.php:84
 msgid "Cannot copy database to the same name. Change the name and try again."
-msgstr "ไม่สามารถคัดลอกฐานข้อมูลเป็นชื่อเดียวกันได้ เปลี่ยนชื่อแล้วลองใหม่อีกครั้ง"
+msgstr ""
+"ไม่สามารถคัดลอกฐานข้อมูลแล้วใช้ชื่อซ้ำกันได้ เปลี่ยนชื่อแล้วลองใหม่อีกครั้ง"
 
 #: src/Controllers/Operations/DatabaseController.php:164
 #, php-format
@@ -15338,13 +15347,13 @@ msgstr "ฐานข้อมูล %1$s ได้ถูกเปลี่ยน
 #: src/Controllers/Operations/DatabaseController.php:178
 #, php-format
 msgid "Database %1$s has been copied to %2$s."
-msgstr "ฐานข้อมูล %1$s ได้ทำสำเนาในชื่อ %2$s แล้ว"
+msgstr "ฐานข้อมูล %1$s ได้ถูกคัดลอกเป็น %2$s แล้ว"
 
 #: src/Controllers/Operations/DatabaseController.php:277
 #, php-format
 msgid ""
 "The phpMyAdmin configuration storage has been deactivated. %sFind out why%s."
-msgstr "การจัดเก็บการตั้งค่าของ phpMyAdmin ได้ถูกระงับเอาไว้ %sรายละเอียดเพิ่มเติม%s"
+msgstr "ที่จัดเก็บการกำหนดค่า phpMyAdmin ถูกปิดใช้งานแล้ว %sค้นหาสาเหตุ%s"
 
 #: src/Controllers/Preferences/ManageController.php:87
 #, fuzzy
@@ -15664,7 +15673,7 @@ msgstr ""
 
 #: src/Controllers/Server/Status/VariablesController.php:345
 msgid "The amount of data read so far, in bytes."
-msgstr ""
+msgstr "ปริมาณข้อมูลที่อ่านได้จนถึงขณะนี้ มีหน่วยเป็นไบต์"
 
 #: src/Controllers/Server/Status/VariablesController.php:346
 msgid "The total number of data reads."
@@ -15676,7 +15685,7 @@ msgstr ""
 
 #: src/Controllers/Server/Status/VariablesController.php:348
 msgid "The amount of data written so far, in bytes."
-msgstr ""
+msgstr "ปริมาณข้อมูลที่ถูกเขียนจนถึงขณะนี้ มีหน่วยเป็นไบต์"
 
 #: src/Controllers/Server/Status/VariablesController.php:350
 msgid "The number of pages that have been written for doublewrite operations."
@@ -15714,7 +15723,7 @@ msgstr ""
 
 #: src/Controllers/Server/Status/VariablesController.php:362
 msgid "The number of bytes written to the log file."
-msgstr ""
+msgstr "จำนวนไบต์ที่เขียนลงในไฟล์บันทึก"
 
 #: src/Controllers/Server/Status/VariablesController.php:363
 msgid "The number of pages created."
@@ -15725,6 +15734,9 @@ msgid ""
 "The compiled-in InnoDB page size (default 16KB). Many values are counted in "
 "pages; the page size allows them to be easily converted to bytes."
 msgstr ""
+"ขนาดเพจหน่วยความจำ (page size) ของ InnoDB ที่คอมไพล์ไว้ (ค่าเริ่มต้น 16KB) ค่าหลายค่าถูกนั"
+"บเป็นเพจหน่วยความจำ ขนาดเพจหน่วยความจำ (page size) ช่วยให้สามารถแปลงค่าเหล่านั้นเป็นไบต์"
+"ได้อย่างง่ายดาย"
 
 #: src/Controllers/Server/Status/VariablesController.php:369
 msgid "The number of pages read."
@@ -16069,7 +16081,7 @@ msgstr ""
 #: src/Controllers/Sql/SqlController.php:213 src/Sql.php:1069
 #, php-format
 msgid "Bookmark %s has been created."
-msgstr "บุ๊คมาร์ค %s ได้ถูกสร้างขึ้น"
+msgstr "บุ๊กมาร์ก %s ถูกสร้างขึ้นแล้ว"
 
 #: src/Controllers/Sql/SqlController.php:220
 #, fuzzy
@@ -16241,10 +16253,10 @@ msgid_plural "The names '%s' are MySQL reserved keywords."
 msgstr[0] ""
 
 #: src/Controllers/Table/Structure/SaveController.php:212
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Table %1$s has been altered successfully. Privileges have been adjusted."
-msgstr "ลบผู้ใช้ที่เลือกไว้เรียบร้อยแล้ว."
+msgstr "ตาราง %1$s ได้รับการแก้ไขเรียบร้อยแล้ว สิทธิ์การใช้งานปรับปรุงแล้ว"
 
 #: src/Controllers/Table/TrackingController.php:90
 #, fuzzy, php-format
@@ -16429,10 +16441,9 @@ msgid "The backed up query was:"
 msgstr ""
 
 #: src/Database/Events.php:123
-#, fuzzy, php-format
-#| msgid "Table %s has been dropped."
+#, php-format
 msgid "Event %1$s has been modified."
-msgstr "โยนตาราง %s ทิ้งไปเรียบร้อยแล้ว"
+msgstr "กิจกรรม %1$s ได้รับการแก้ไขแล้ว"
 
 #: src/Database/Events.php:143
 #, fuzzy, php-format
@@ -16649,6 +16660,8 @@ msgid ""
 "The default pointer size in bytes, to be used by CREATE TABLE for MyISAM "
 "tables when no MAX_ROWS option is specified."
 msgstr ""
+"ขนาดพอยน์เตอร์เริ่มต้นในหน่วยเป็นไบต์ที่จะใช้โดยคำสั่ง CREATE TABLE สำหรับตาราง MyISAM เมื่อไ"
+"ม่ได้ระบุตัวเลือก MAX_ROWS"
 
 #: src/Engines/Myisam.php:36
 msgid "Automatic recovery mode"
@@ -17137,15 +17150,14 @@ msgid ""
 msgstr ""
 
 #: src/Import/Import.php:1172
-#, fuzzy, php-format
+#, php-format
 msgid "Go to table: %s"
-msgstr "ไม่มีฐานข้อมูล"
+msgstr "ไปที่ตาราง: %s"
 
 #: src/Import/Import.php:1180
-#, fuzzy, php-format
-#| msgid "Structure only"
+#, php-format
 msgid "Structure of %s"
-msgstr "เฉพาะโครงสร้าง"
+msgstr "โครงสร้างของ %s"
 
 #: src/Import/Import.php:1187 src/Import/Import.php:1236
 #, php-format
@@ -17176,9 +17188,9 @@ msgid "Edit structure by following the \"Structure\" link."
 msgstr ""
 
 #: src/Import/Import.php:1230
-#, fuzzy, php-format
+#, php-format
 msgid "Go to database: %s"
-msgstr "ไม่มีฐานข้อมูล"
+msgstr "ไปที่ฐานข้อมูล: %s"
 
 #: src/Indexes/Index.php:566
 #, php-format
@@ -17346,7 +17358,7 @@ msgstr ""
 
 #: src/Navigation/Nodes/Node.php:568
 msgid "Expand/Collapse"
-msgstr ""
+msgstr "ขยาย/ย่อ"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:22
 #: src/Navigation/Nodes/NodeProcedureContainer.php:26
@@ -17999,20 +18011,18 @@ msgstr "คำสั่ง"
 #: src/Plugins/Export/ExportSql.php:321 src/Plugins/Export/ExportSql.php:330
 #: src/Plugins/Export/ExportSql.php:354 src/Plugins/Export/ExportSql.php:382
 #: src/Plugins/Export/ExportSql.php:391
-#, fuzzy, php-format
-#| msgid "Statements"
+#, php-format
 msgid "Add %s statement"
-msgstr "คำสั่ง"
+msgstr "เพิ่ม %s คำสั่ง"
 
 #: src/Plugins/Export/ExportSql.php:337
 msgid "(less efficient as indexes will be generated during table creation)"
 msgstr ""
 
 #: src/Plugins/Export/ExportSql.php:344
-#, fuzzy, php-format
-#| msgid "Session value"
+#, php-format
 msgid "%s value"
-msgstr "ค่าเซสชั่น"
+msgstr "%s ค่า"
 
 #. l10n: Allow simplifying exported view syntax to only "CREATE VIEW"
 #: src/Plugins/Export/ExportSql.php:361
@@ -18121,10 +18131,9 @@ msgid "Metadata for database %s"
 msgstr "ข้อมูลที่หายไปสำหรับ %s"
 
 #: src/Plugins/Export/ExportSql.php:1411
-#, fuzzy, php-format
-#| msgid "Table structure for table"
+#, php-format
 msgid "Error reading structure for table %s:"
-msgstr "โครงสร้างตาราง"
+msgstr "การอ่านโครงสร้างตารางผิดพลาดของ %s:"
 
 #: src/Plugins/Export/ExportSql.php:1494
 msgid "It appears your database uses views;"
@@ -18175,19 +18184,18 @@ msgid "It appears your table uses triggers;"
 msgstr ""
 
 #: src/Plugins/Export/ExportSql.php:1947
-#, fuzzy, php-format
+#, php-format
 msgid "Structure for view %s exported as a table"
-msgstr "เฉพาะโครงสร้าง"
+msgstr "โครงสร้างมุมมองของ %s ถูกส่งออกเป็นตารางแล้ว"
 
 #: src/Plugins/Export/ExportSql.php:1974
 msgid "(See below for the actual view)"
 msgstr ""
 
 #: src/Plugins/Export/ExportSql.php:2029
-#, fuzzy, php-format
-#| msgid "Allows reading data."
+#, php-format
 msgid "Error reading data for table %s:"
-msgstr "อนุญาตให้อ่านข้อมูลได้."
+msgstr "การอ่านข้อมูลผิดพลาดของตาราง %s:"
 
 #: src/Plugins/Export/ExportSql.php:2581
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:566
@@ -18385,10 +18393,9 @@ msgid "PDF export page"
 msgstr "ประเภทที่ส่งออกไม่ถูกต้อง!"
 
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:119
-#, fuzzy, php-format
-#| msgid "Schema of the \"%s\" database - Page %s"
+#, php-format
 msgid "Schema of the %s database"
-msgstr "schema ของฐานข้อมูล \"%s\" - หน้า %s"
+msgstr "โครงร่างของฐานข้อมูล %s"
 
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:147
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:495
@@ -18657,10 +18664,9 @@ msgid ""
 msgstr ""
 
 #: src/Plugins/TwoFactorPlugin.php:57
-#, fuzzy, php-format
-#| msgid "Hardware authentication failed!"
+#, php-format
 msgid "Two-factor authentication failed: %s"
-msgstr "﻿ตรวจสอบฮาร์ดแวร์ล้มเหลว"
+msgstr "การยืนยันตัวตนสองขั้นตอนล้มเหลว: %s"
 
 #: src/Plugins/TwoFactorPlugin.php:62
 #, fuzzy
@@ -19343,30 +19349,41 @@ msgstr ""
 msgid ""
 "A 1-byte integer, signed range is -128 to 127, unsigned range is 0 to 255"
 msgstr ""
+"จำนวนเต็ม 1 ไบต์ ช่วงค่าแบบมีเครื่องหมาย คือ -128 ถึง 127 ช่วงค่าแบบไม่มีเครื่องหมาย คือ 0 ถึ"
+"ง 255"
 
 #: src/Types.php:162
 msgid ""
 "A 2-byte integer, signed range is -32,768 to 32,767, unsigned range is 0 to "
 "65,535"
 msgstr ""
+"จำนวนเต็ม 2 ไบต์ ช่วงค่าแบบมีเครื่องหมาย คือ -32,768 ถึง 32,767 ช่วงค่าแบบไม่มีเครื่องหมาย คื"
+"อ 0 ถึง 65,535"
 
 #: src/Types.php:164
 msgid ""
 "A 3-byte integer, signed range is -8,388,608 to 8,388,607, unsigned range is "
 "0 to 16,777,215"
 msgstr ""
+"จำนวนเต็ม 3 ไบต์ ช่วงค่าแบบมีเครื่องหมาย คือ -8,388,608 ถึง 8,388,607 ช่วงค่าแบบไม่มีเครื่อง"
+"หมาย คือ 0 ถึง 16,777,215"
 
 #: src/Types.php:167
 msgid ""
 "A 4-byte integer, signed range is -2,147,483,648 to 2,147,483,647, unsigned "
 "range is 0 to 4,294,967,295"
 msgstr ""
+"จำนวนเต็ม 4 ไบต์ ช่วงค่าแบบมีเครื่องหมาย คือ -2,147,483,648 ถึง 2,147,483,647 ช่วงค่าแบบ"
+"ไม่มีเครื่องหมาย คือ 0 ถึง 4,294,967,295"
 
 #: src/Types.php:172
 msgid ""
 "An 8-byte integer, signed range is -9,223,372,036,854,775,808 to "
 "9,223,372,036,854,775,807, unsigned range is 0 to 18,446,744,073,709,551,615"
 msgstr ""
+"จำนวนเต็ม 8 ไบต์ ช่วงค่าแบบมีเครื่องหมาย คือ -9,223,372,036,854,775,808 ถึง "
+"9,223,372,036,854,775,807 ช่วงค่าแบบไม่มีเครื่องหมาย คือ 0 ถึง "
+"18,446,744,073,709,551,615"
 
 #: src/Types.php:177
 msgid ""
@@ -19455,26 +19472,28 @@ msgstr ""
 "เพื่อสร้างอย่างใดอย่างหนึ่ง"
 
 #: src/Types.php:234
-#, fuzzy
 msgid ""
 "A TEXT column with a maximum length of 255 (2^8 - 1) characters, stored with "
 "a one-byte prefix indicating the length of the value in bytes"
 msgstr ""
-"﻿phpMyAdmin พยายามเชื่อมต่อไปยังเซิร์ฟเวอร์ MySQL และเซิร์ฟเวอร์ได้ปฏิเสธการเชื่อมต่อดังกล่าว "
-"คุณควรตรวจสอบโฮสต์ ชื่อผู้ใช้และรหัสผ่านในการกำหนดค่าของคุณ และให้แน่ใจว่าค่าต่างๆ "
-"สอดคล้องกับข้อมูลที่กำหนดไว้ โดยผู้ดูแลระบบของเซิร์ฟเวอร์ MySQL แล้ว"
+"คอลัมน์ข้อความ (TEXT) ที่มีความยาวตัวอักษรสูงสุด 255 (2^8 - 1) โดยจัดเก็บพร้อมคำนำหน้าหนึ่งไบ"
+"ต์ที่ระบุความยาวของค่าเป็นไบต์"
 
 #: src/Types.php:239
 msgid ""
 "A TEXT column with a maximum length of 65,535 (2^16 - 1) characters, stored "
 "with a two-byte prefix indicating the length of the value in bytes"
 msgstr ""
+"คอลัมน์ข้อความ (TEXT) ที่มีความยาวตัวอักษรสูงสุด 65,535 (2^16 - 1) โดยจัดเก็บพร้อมคำนำหน้าส"
+"องไบต์ที่ระบุความยาวของค่าเป็นไบต์"
 
 #: src/Types.php:244
 msgid ""
 "A TEXT column with a maximum length of 16,777,215 (2^24 - 1) characters, "
 "stored with a three-byte prefix indicating the length of the value in bytes"
 msgstr ""
+"คอลัมน์ข้อความ (TEXT) ที่มีความยาวตัวอักษรสูงสุด 16,777,215 (2^24 - 1) โดยจัดเก็บพร้อมคำนำ"
+"หน้าสามไบต์ที่ระบุความยาวของค่าเป็นไบต์"
 
 #: src/Types.php:249
 msgid ""
@@ -19482,42 +19501,54 @@ msgid ""
 "characters, stored with a four-byte prefix indicating the length of the "
 "value in bytes"
 msgstr ""
+"คอลัมน์ข้อความ (TEXT) ที่มีความยาวตัวอักษรสูงสุด 4,294,967,295 หรือ 4 กิกะไบต์ (2^32 - 1) "
+"โดยจัดเก็บพร้อมคำนำหน้าสี่ไบต์ที่ระบุความยาวของค่าในหน่วยไบต์"
 
 #: src/Types.php:254
 msgid ""
 "Similar to the CHAR type, but stores binary byte strings rather than non-"
 "binary character strings"
 msgstr ""
+"คล้ายกับชนิดข้อมูล CHAR แต่เก็บตัวอักษรเป็นไบต์แบบไบนารีแทนที่จะเป็นอักขระที่ไม่ใช่แบบไบนารี"
 
 #: src/Types.php:257
 msgid ""
 "Similar to the VARCHAR type, but stores binary byte strings rather than non-"
 "binary character strings"
 msgstr ""
+"คล้ายกับชนิดข้อมูล VARCHAR แต่เก็บตัวอักษรเป็นไบต์แบบไบนารีแทนที่จะเป็นอักขระที่ไม่ใช่แบบไบนารี"
 
 #: src/Types.php:261
 msgid ""
 "A BLOB column with a maximum length of 255 (2^8 - 1) bytes, stored with a "
 "one-byte prefix indicating the length of the value"
 msgstr ""
+"คอลัมน์ BLOB ที่มีความยาวสูงสุด 255 (2^8 - 1) ไบต์ จัดเก็บโดยมีคำนำหน้าหนึ่งไบต์ที่ระบุความยาวข"
+"องค่า"
 
 #: src/Types.php:265
 msgid ""
 "A BLOB column with a maximum length of 16,777,215 (2^24 - 1) bytes, stored "
 "with a three-byte prefix indicating the length of the value"
 msgstr ""
+"คอลัมน์ BLOB ที่มีความยาวสูงสุด 16,777,215 (2^24 - 1) ไบต์ จัดเก็บโดยมีคำนำหน้าสามไบต์ที่ระบุ"
+"ความยาวของค่า"
 
 #: src/Types.php:270
 msgid ""
 "A BLOB column with a maximum length of 65,535 (2^16 - 1) bytes, stored with "
 "a two-byte prefix indicating the length of the value"
 msgstr ""
+"คอลัมน์ BLOB ที่มีความยาวสูงสุด 65,535 (2^16 - 1) ไบต์ จัดเก็บโดยมีคำนำหน้าสองไบต์ที่ระบุความ"
+"ยาวของค่า"
 
 #: src/Types.php:274
 msgid ""
 "A BLOB column with a maximum length of 4,294,967,295 or 4GiB (2^32 - 1) "
 "bytes, stored with a four-byte prefix indicating the length of the value"
 msgstr ""
+"คอลัมน์ BLOB ที่มีความยาวสูงสุด 4,294,967,295 or 4GiB (2^32 - 1) ไบต์ จัดเก็บโดยมีคำนำหน้"
+"าสี่ไบต์ที่ระบุความยาวของค่า"
 
 #: src/Types.php:278
 msgid ""
