@@ -19,7 +19,14 @@ __webpack_require__.r(__webpack_exports__);
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '.criteria_op', function () {
   const op = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
   const criteria = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.table').find('.rhs_text_val');
-  isOpWithoutArg(op) ? criteria.hide().val('') : criteria.show();
+  const rhs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.table').find('.criteria_rhs');
+  if (isOpWithoutArg(op)) {
+    criteria.hide().val('');
+    rhs.hide();
+  } else {
+    criteria.show();
+    rhs.show();
+  }
 });
 function getFormatsText() {
   return {
