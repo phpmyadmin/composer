@@ -107,6 +107,7 @@ const ajaxShowMessage = function () {
   // Update message count to create distinct message elements every time
   ajaxMessageCount++;
   // Remove all old messages, if any
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('[role="tooltip"]').remove();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.ajax_notification[id^=ajax_message_num]').remove();
   /**
    * @var $retval    a jQuery object containing the reference
@@ -2206,13 +2207,15 @@ function addDateTimePicker() {
     // Add a tip regarding entering MySQL allowed-values for TIME and DATE data-type
     if (this.classList.contains('timefield')) {
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Tooltip.getOrCreateInstance(this, {
-        title: window.Messages.strMysqlAllowedValuesTipTime
+        title: window.Messages.strMysqlAllowedValuesTipTime,
+        trigger: 'hover'
       }).setContent({
         '.tooltip-inner': window.Messages.strMysqlAllowedValuesTipTime
       });
     } else if (this.classList.contains('datefield')) {
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Tooltip.getOrCreateInstance(this, {
-        title: window.Messages.strMysqlAllowedValuesTipDate
+        title: window.Messages.strMysqlAllowedValuesTipDate,
+        trigger: 'hover'
       }).setContent({
         '.tooltip-inner': window.Messages.strMysqlAllowedValuesTipDate
       });
@@ -3347,7 +3350,7 @@ function dismissNotifications() {
       var copyStatus = copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-text'));
       displayCopyStatus(this, copyStatus);
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseover mouseleave', '.ajax_notification a', function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseover mouseleave', 'span.ajax_notification.dismissable a', function (event) {
       let message = window.Messages.strDismiss;
       if (event.type === 'mouseover') {
         message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass('copyQueryBtn') ? window.Messages.strCopyToClipboard : window.Messages.strEditQuery;

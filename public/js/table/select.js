@@ -7,11 +7,13 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/ajax.ts");
-/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/functions.ts");
-/* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/common.ts");
-/* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/sql-highlight.ts");
-/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/ajax.ts");
+/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/functions.ts");
+/* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/common.ts");
+/* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/sql-highlight.ts");
+/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
+
 
 
 
@@ -50,13 +52,13 @@ const opIsUnary = op => UNARY_OPERATORS.includes(op);
 /**
  * Unbind all event handlers before tearing down a page
  */
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/select.js', function () {
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerTeardown('table/select.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').off('click');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('submit', '#tbl_search_form.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select.geom_func').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('change', 'select[name*="criteriaColumnOperators"]'); // Fix for bug #13778, changed 'click' to 'change'
 });
-_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.js', function () {
+_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.js', function () {
   /**
    * Prepare a div containing a link, otherwise it's incorrectly displayed
    * after a couple of clicks
@@ -91,10 +93,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
     // jQuery object to reuse
     var $searchForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     event.preventDefault();
+    // Dispose tooltips. See #19950
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.datefield, input.timefield').each(function () {
+      const tooltipInstance = bootstrap__WEBPACK_IMPORTED_MODULE_1__.Tooltip.getInstance(this);
+      if (tooltipInstance) {
+        tooltipInstance.dispose();
+      }
+    });
     // empty previous search results while we are waiting for new results
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').empty();
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSearching, false);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($searchForm);
+    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strSearching, false);
+    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.prepareForAjaxRequest)($searchForm);
     var values = {};
     $searchForm.find(':input').each(function () {
       var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
@@ -133,7 +142,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
       values.displayAllColumns = true;
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($searchForm.attr('action'), values, function (data) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
       if (typeof data !== 'undefined' && data.success === true) {
         if (typeof data.sql_query !== 'undefined') {
           // zero rows
@@ -158,7 +167,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
       } else {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').html(data.error);
       }
-      (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
+      (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
     }); // end $.post()
   });
   // Following section is related to the 'function based search' for geometry data types.
@@ -223,12 +232,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
     $targetField.prop('disabled', opIsUnary(operator));
     $targetField.siblings('.ui-datepicker-trigger').eq(0).toggle(!opIsUnary(operator));
     if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
-      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         url: 'index.php?route=/table/search',
         type: 'POST',
         data: {
-          'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
+          'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
           'ajax_request': 1,
           'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="db"]').val(),
           'table': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table"]').val(),
@@ -236,7 +245,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
           'range_search': 1
         },
         success: function (response) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msgbox);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
           if (response.success) {
             // Get the column min value.
             var min = response.column_data.min ? '(' + window.Messages.strColumnMin + ' ' + response.column_data.min + ')' : '';
@@ -250,8 +259,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value').first().val('');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value').first().val('');
             // Add datepicker wherever required.
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value'), dataType);
-            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value'), dataType);
+            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value'), dataType);
+            (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value'), dataType);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rangeSearchModalGo').on('click', function () {
               var minValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value').val();
               var maxValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value').val();
@@ -283,11 +292,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/select.
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).off('click');
             });
           } else {
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(response.error);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(response.error);
           }
         },
         error: function () {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
         }
       });
     }
