@@ -6458,6 +6458,39 @@ function checkIndexType() {
 
 /***/ }),
 
+/***/ "./resources/js/modules/json-highlight.ts":
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ highlightJson; }
+/* harmony export */ });
+/**
+ * Applies JSON syntax highlighting transformation using CodeMirror
+ *
+ * @param {JQuery} $base base element which contains the JSON code blocks
+ */
+function highlightJson($base) {
+  var $elm = $base.find('code.json');
+  $elm.each(function () {
+    var $json = $(this);
+    var $pre = $json.find('pre');
+    /* We only care about visible elements to avoid double processing */
+    if ($pre.is(':visible')) {
+      var $highlight = $('<div class="json-highlight cm-s-default"></div>');
+      $json.append($highlight);
+      // @ts-ignore
+      if (typeof window.CodeMirror !== 'undefined' && typeof window.CodeMirror.runMode === 'function') {
+        // @ts-ignore
+        window.CodeMirror.runMode($json.text(), 'application/json', $highlight[0]);
+        $pre.hide();
+      }
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/modules/navigation.ts":
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 

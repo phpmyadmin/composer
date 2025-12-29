@@ -14,10 +14,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/common.ts");
 /* harmony import */ var _modules_functions_createProfilingChart_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/functions/createProfilingChart.ts");
 /* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/sql-highlight.ts");
-/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
-/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
-/* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
-/* harmony import */ var _modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
+/* harmony import */ var _modules_json_highlight_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/json-highlight.ts");
+/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
+/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
+/* harmony import */ var _modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
+
 
 
 
@@ -66,7 +68,7 @@ function autoSave(query) {
   if (query) {
     var key = Sql.getAutoSavedKey();
     try {
-      if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage')) {
+      if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage')) {
         window.localStorage.setItem(key, query);
       } else {
         window.Cookies.set(key, query, {
@@ -75,7 +77,7 @@ function autoSave(query) {
       }
     } catch (e) {
       console.error(e);
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(e.message, false, 'error');
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(e.message, false, 'error');
     }
     checkSavedQuery();
   }
@@ -93,7 +95,7 @@ function showThisQuery(db, table, query) {
     'table': table,
     'query': query
   };
-  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage')) {
+  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage')) {
     window.localStorage.showThisQuery = 1;
     window.localStorage.showThisQueryObject = JSON.stringify(showThisQueryObject);
   } else {
@@ -112,7 +114,7 @@ function showThisQuery(db, table, query) {
 function setShowThisQuery() {
   var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="db"]').val();
   var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table"]').val();
-  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage')) {
+  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage')) {
     if (window.localStorage.showThisQueryObject !== undefined) {
       var storedDb = JSON.parse(window.localStorage.showThisQueryObject).db;
       var storedTable = JSON.parse(window.localStorage.showThisQueryObject).table;
@@ -141,7 +143,7 @@ function setShowThisQuery() {
  */
 function autoSaveWithSort(query) {
   if (query) {
-    if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage')) {
+    if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage')) {
       window.localStorage.setItem('autoSavedSqlSort', query);
     } else {
       window.Cookies.set('autoSavedSqlSort', query, {
@@ -154,7 +156,7 @@ function autoSaveWithSort(query) {
  * Clear saved SQL query with sort in local storage or cookie
  */
 function clearAutoSavedSort() {
-  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage')) {
+  if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage')) {
     window.localStorage.removeItem('autoSavedSqlSort');
   } else {
     window.Cookies.set('autoSavedSqlSort', '', {
@@ -300,7 +302,7 @@ const insertQuery = function (queryType) {
       key += '.' + table;
     }
     key = 'autoSavedSql_' + key;
-    if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
+    if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string') {
       setQuery(window.localStorage.getItem(key));
       // @ts-ignore
     } else if (window.Cookies.get(key, {
@@ -317,7 +319,7 @@ const insertQuery = function (queryType) {
   // @ts-ignore
   var myListBox = document.sqlform.dummy;
   // @ts-ignore
-  table = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeBacktick)(document.sqlform.table.value);
+  table = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__.escapeBacktick)(document.sqlform.table.value);
   if (myListBox.options.length > 0) {
     sqlBoxLocked = true;
     var columnsList = '';
@@ -467,7 +469,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').on('input propertychange', function () {
         Sql.autoSave(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').val());
       });
-      var useLocalStorageValue = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined';
+      var useLocalStorageValue = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage') && typeof window.localStorage.autoSavedSqlSort !== 'undefined';
       // Save sql query with sort
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#RememberSorting') !== undefined && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#RememberSorting').is(':checked')) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="sql_query"]').on('change', function () {
@@ -493,10 +495,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
   // Delete row from SQL results
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.delete_row.ajax', function (e) {
     e.preventDefault();
-    var question = window.sprintf(window.Messages.strDoYouReally, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('div').text()));
+    var question = window.sprintf(window.Messages.strDoYouReally, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('div').text()));
     var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $link.confirm(question, $link.attr('href'), function (url) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
       var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
       var params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
       var postData = $link.getPostData();
@@ -505,10 +507,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
       }
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (data.success) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.message);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(data.message);
           $link.closest('tr').remove();
         } else {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(data.error, false);
         }
       });
     });
@@ -516,13 +518,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
   // Ajaxification for 'Bookmark this SQL query'
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '.bookmarkQueryForm', function (e) {
     e.preventDefault();
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize(), function (data) {
       if (data.success) {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.message);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(data.message);
       } else {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(data.error, false);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(data.error, false);
       }
     });
   });
@@ -742,7 +744,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     }
     // remove any div containing a previous error message
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.alert-danger').remove();
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     var $sqlqueryresultsouter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter');
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.prepareForAjaxRequest)($form);
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
@@ -783,7 +785,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
           if (data.ajax_reload.reload) {
             if (data.ajax_reload.table_name) {
               _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.update(_modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.set('table', data.ajax_reload.table_name));
-              (0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_10__["default"])();
+              (0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__["default"])();
             } else {
               _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
             }
@@ -806,7 +808,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
           } else {
             url = 'index.php?route=/server/sql';
           }
-          (0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_10__["default"])(url);
+          (0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__["default"])(url);
           _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.callback = () => {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').show().html(data.message);
             (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
@@ -828,7 +830,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
           scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).height()
         }, 200);
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
     }); // end $.post()
   }); // end SQL Query submit
   /**
@@ -839,13 +841,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', 'form[name=\'displayOptionsForm\'].ajax', function (event) {
     event.preventDefault();
     var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
       var $sqlqueryresults = $form.parents('.sqlqueryresults');
       $sqlqueryresults.html(data.message).trigger('makeGrid');
       (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_7__["default"])($sqlqueryresults);
+      (0,_modules_json_highlight_ts__WEBPACK_IMPORTED_MODULE_8__["default"])($sqlqueryresults);
     }); // end $.post()
   }); // end displayOptionsForm handler
   // Filter row handling. --STARTS--
@@ -877,7 +880,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     const submitShowAllForm = function () {
       var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
       var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);
     };
@@ -911,7 +914,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').trigger('focus');
       return false;
     }
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       type: 'POST',
       url: 'index.php?route=/import/simulate-dml',
@@ -923,7 +926,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
         'sql_delimiter': delimiter
       },
       success: function (response) {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxRemoveMessage)($msgbox);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
         if (response.success) {
           var dialogContent = '<div class="preview_sql">';
           if (response.sql_data) {
@@ -948,11 +951,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
             (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(modal);
           });
         } else {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(response.error);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(response.error);
         }
       },
       error: function () {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest);
       }
     });
   });
@@ -966,7 +969,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     var $form = $button.closest('form');
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep;
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_8__.ajaxShowMessage)();
+    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
     var url;
     if (action === 'edit') {
@@ -1129,7 +1132,7 @@ function getAutoSavedKey() {
 function checkSavedQuery() {
   let key = Sql.getAutoSavedKey();
   let buttonGetAutoSavedQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saved');
-  let isAutoSavedInLocalStorage = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_11__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string';
+  let isAutoSavedInLocalStorage = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string';
   // @ts-ignore
   let isAutoSavedInCookie = window.Cookies.get(key, {
     path: _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('rootPath')
