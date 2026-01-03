@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2026-01-02 08:01+0000\n"
-"Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
+"PO-Revision-Date: 2026-01-03 06:36+0000\n"
+"Last-Translator: AnawinWz <imonmac@hotmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/4-9/th/>"
 "\n"
 "Language: th\n"
@@ -28,7 +28,7 @@ msgstr "ไฟล์ %s ไม่พร้อมใช้งานในระ�
 
 #: db_central_columns.php:129
 msgid "The central list of columns for the current database is empty."
-msgstr "รายการชุดกลางของคอลัมน์สำหรับฐานข้อมูลปัจจุบันว่างเปล่า"
+msgstr "รายการคอลัมน์กลางของฐานข้อมูลปัจจุบันนั้นว่างเปล่า"
 
 #: db_central_columns.php:158
 msgid "Click to sort."
@@ -334,7 +334,7 @@ msgstr "คุณต้องเลือกอย่างน้อยหนึ
 
 #: db_qbe.php:145 templates/database/multi_table_query/form.twig:3
 msgid "Multi-table query"
-msgstr "การเรียกดูหลายตาราง"
+msgstr "คำสั่งในหลายตาราง"
 
 #: db_qbe.php:149 templates/database/multi_table_query/form.twig:3
 msgid "Query by example"
@@ -10307,8 +10307,8 @@ msgid ""
 "This server is not configured as slave in a replication process. Would you "
 "like to %sconfigure%s it?"
 msgstr ""
-"เซิร์ฟเวอร์นี้ไม่ได้กำหนดค่าให้เป็นสเลฟในกระบวนการการจำลองแบบ คุณต้องการที่จะ %configure%s "
-"หรือไม่?"
+"เซิร์ฟเวอร์นี้ไม่ได้กำหนดค่าให้เป็นสเลฟในกระบวนการการจำลองแบบ คุณต้องการที่จะ "
+"%sconfigure%s หรือไม่?"
 
 #: libraries/classes/ReplicationGui.php:316
 msgid "Error management:"
@@ -11751,7 +11751,7 @@ msgstr "ตัววิเคราะห์คำสั่ง"
 
 #: libraries/classes/Server/Status/Monitor.php:117
 msgid "Monitor Instructions"
-msgstr "คำแนะนำการใช้งานจอภาพ"
+msgstr "คำแนะนำการใช้งาน Monitor"
 
 #: libraries/classes/Server/Status/Monitor.php:119
 msgid ""
@@ -11761,10 +11761,14 @@ msgid ""
 "enabled. Note however, that the general_log produces a lot of data and "
 "increases server load by up to 15%."
 msgstr ""
+"phpMyAdmin Monitor สามารถช่วยคุณในการปรับแต่งการกำหนดค่าเซิร์ฟเวอร์และติดตามการเรียกใช้ค"
+"ำสั่งที่ใช้เวลานาน หลังจากนั้นคุณจะต้องตั้งค่า log_output เป็น 'TABLE' และเปิดใช้งาน "
+"slow_query_log หรือ general_log อย่างไรก็ตาม โปรดทราบว่า general_log สร้างข้อมูลจำนว"
+"นมากและเพิ่มภาระให้กับเซิร์ฟเวอร์ได้มากถึง 15%"
 
 #: libraries/classes/Server/Status/Monitor.php:135
 msgid "Using the monitor:"
-msgstr ""
+msgstr "การใช้งาน monitor:"
 
 #: libraries/classes/Server/Status/Monitor.php:138
 msgid ""
@@ -11772,6 +11776,8 @@ msgid ""
 "may add charts and change the refresh rate under 'Settings', or remove any "
 "chart using the cog icon on each respective chart."
 msgstr ""
+"เบราว์เซอร์ของคุณจะรีเฟรชแผนภูมิที่แสดงทั้งหมดเป็นระยะ คุณสามารถเพิ่มแผนภูมิและเปลี่ยนอัตราการรีเ"
+"ฟรชได้ใน 'การตั้งค่า' หรือลบแผนภูมิใด ๆ โดยใช้ไอคอนรูปเฟืองที่อยู่บนแผนภูมิแต่ละรายการ"
 
 #: libraries/classes/Server/Status/Monitor.php:144
 msgid ""
@@ -11780,10 +11786,13 @@ msgid ""
 "confirmed, this will load a table of grouped queries, there you may click on "
 "any occurring SELECT statements to further analyze them."
 msgstr ""
+"หากต้องการแสดงคำสั่งจากบันทึก ให้เลือกช่วงเวลาที่เกี่ยวข้องบนแผนภูมิใดก็ได้โดยกดปุ่มเมาส์ซ้ายค้างไว้"
+"แล้วเลื่อนเมาส์ไปบนแผนภูมิ เมื่อยืนยันแล้ว ระบบจะโหลดตารางคำสั่งที่จัดกลุ่มไว้ คุณสามารถคลิกที่คำสั่ง "
+"SELECT ที่ปรากฏเพื่อวิเคราะห์เพิ่มเติมได้"
 
 #: libraries/classes/Server/Status/Monitor.php:154
 msgid "Please note:"
-msgstr ""
+msgstr "โปรดทราบ:"
 
 #: libraries/classes/Server/Status/Monitor.php:157
 msgid ""
@@ -11792,127 +11801,115 @@ msgid ""
 "it is advisable to select only a small time span and to disable the "
 "general_log and empty its table once monitoring is not required any more."
 msgstr ""
+"การเปิดใช้งาน general_log อาจทำให้ภาระงานของเซิร์ฟเวอร์เพิ่มขึ้น 5-15% นอกจากนี้ โปรดทราบ"
+"ว่าการสร้างสถิติจากบันทึกเป็นงานที่ใช้ทรัพยากรมาก ดังนั้นจึงควรเลือกช่วงเวลาสั้น ๆ และปิดใช้งาน "
+"general_log และล้างตารางเมื่อไม่ต้องการตรวจสอบอีกต่อไป"
 
 #: libraries/classes/Server/Status/Monitor.php:178
 #: libraries/classes/Server/Status/Monitor.php:286
-#, fuzzy
-#| msgid "Add new field"
 msgid "Add chart"
-msgstr "เพิ่มฟิลด์ใหม่"
+msgstr "เพิ่มแผนภูมิ"
 
 #: libraries/classes/Server/Status/Monitor.php:181
 msgid "Chart Title"
-msgstr "ชื่อการแสดงผล"
+msgstr "ชื่อแผนภูมิ"
 
 #: libraries/classes/Server/Status/Monitor.php:184
-#, fuzzy
-#| msgid "Remove database"
 msgid "Preset chart"
-msgstr "เอาฐานข้อมูลออก"
+msgstr "แผนภูมิที่ตั้งค่าไว้ล่วงหน้า"
 
 #: libraries/classes/Server/Status/Monitor.php:189
 msgid "Status variable(s)"
 msgstr "สถานะของตัวแปร"
 
 #: libraries/classes/Server/Status/Monitor.php:192
-#, fuzzy
-#| msgid "Select Tables"
 msgid "Select series:"
-msgstr "เลือกตาราง"
+msgstr "เลือกรูปแบบ:"
 
 #: libraries/classes/Server/Status/Monitor.php:194
 msgid "Commonly monitored"
-msgstr ""
+msgstr "มีการมอนิเตอร์โดยทั่วไป"
 
 #: libraries/classes/Server/Status/Monitor.php:210
 msgid "or type variable name:"
-msgstr ""
+msgstr "หรือพิมพ์ชื่อตัวแปร:"
 
 #: libraries/classes/Server/Status/Monitor.php:217
 msgid "Display as differential value"
-msgstr ""
+msgstr "แสดงผลเป็นค่าส่วนต่าง"
 
 #: libraries/classes/Server/Status/Monitor.php:221
 msgid "Apply a divisor"
-msgstr ""
+msgstr "ใช้ตัวหาร"
 
 #: libraries/classes/Server/Status/Monitor.php:229
 msgid "Append unit to data values"
-msgstr ""
+msgstr "เพิ่มหน่วยให้กับค่าข้อมูล"
 
 #: libraries/classes/Server/Status/Monitor.php:235
-#, fuzzy
 msgid "Add this series"
-msgstr "เพิ่มผู้ใช้ใหม่"
+msgstr "เพิ่มซีรีส์นี้"
 
 #: libraries/classes/Server/Status/Monitor.php:237
 msgid "Clear series"
-msgstr ""
+msgstr "ล้างซีรีส์"
 
 #: libraries/classes/Server/Status/Monitor.php:240
-#, fuzzy
 msgid "Series in chart:"
-msgstr "คำค้น SQL"
+msgstr "ซีรีส์ในแผนภูมิ:"
 
 #: libraries/classes/Server/Status/Monitor.php:261
-#, fuzzy
-#| msgid "Start"
 msgid "Start Monitor"
-msgstr "ส."
+msgstr "เริ่มการมอนิเตอร์"
 
 #: libraries/classes/Server/Status/Monitor.php:267
 msgid "Instructions/Setup"
-msgstr ""
+msgstr "คำแนะนำ/การตั้งค่า"
 
 #: libraries/classes/Server/Status/Monitor.php:270
 msgid "Done dragging (rearranging) charts"
-msgstr ""
+msgstr "เสร็จสิ้นการลาก (จัดเรียงใหม่) แผนภูมิแล้ว"
 
 #: libraries/classes/Server/Status/Monitor.php:290
 msgid "Enable charts dragging"
-msgstr ""
+msgstr "เปิดใช้งานการลากแผนภูมิ"
 
 #: libraries/classes/Server/Status/Monitor.php:294
 #: libraries/classes/Server/Status/Processes.php:38
-#, fuzzy
 msgid "Refresh rate"
-msgstr "เรียกใหม่"
+msgstr "อัตราการรีเฟรช"
 
 #: libraries/classes/Server/Status/Monitor.php:303
-#, fuzzy
-#| msgid "Add/Delete Field Columns"
 msgid "Chart columns"
-msgstr "เพิ่ม/ลบ คอลัมน์ (ฟิลด์)"
+msgstr "คอลัมน์แผนภูมิ"
 
 #: libraries/classes/Server/Status/Monitor.php:315
 msgid "Chart arrangement"
-msgstr ""
+msgstr "การจัดเรียงแผนภูมิ"
 
 #: libraries/classes/Server/Status/Monitor.php:318
 msgid ""
 "The arrangement of the charts is stored to the browsers local storage. You "
 "may want to export it if you have a complicated set up."
 msgstr ""
+"การจัดเรียงแผนภูมิจะถูกบันทึกไว้ในพื้นที่จัดเก็บข้อมูลภายในเครื่องของเบราว์เซอร์ คุณอาจต้องการส่งออก"
+"ข้อมูลหากการตั้งค่าของคุณค่อนข้างซับซ้อน"
 
 #: libraries/classes/Server/Status/Monitor.php:332
 msgid "Reset to default"
-msgstr ""
+msgstr "รีเซ็ตเป็นค่าเริ่มต้น"
 
 #: libraries/classes/Server/Status/Processes.php:33
-#, fuzzy
-#| msgid ""
-#| "Note: Enabling the database statistics here might cause heavy traffic "
-#| "between the web server and the MySQL server."
 msgid ""
 "Note: Enabling the auto refresh here might cause heavy traffic between the "
 "web server and the MySQL server."
 msgstr ""
-"โปรดทราบ: การเปิดใช้การเก็บสถิติของฐานข้อมูล อาจจะทำให้มีปริมาณการถ่ายโอนข้อมูลจำนวนมาก "
-"ระหว่างเว็บเซิร์ฟเวอร์ และเซิร์ฟเวอร์ MySQL."
+"หมายเหตุ: การเปิดใช้งานการรีเฟรชอัตโนมัติในที่นี้อาจทำให้เกิดปริมาณการรับส่งข้อมูลจำนวนมากระหว่า"
+"งเว็บเซิร์ฟเวอร์และเซิร์ฟเวอร์ MySQL"
 
 #: libraries/classes/Server/Status/Processes.php:65
 msgid "ID"
-msgstr "ID"
+msgstr "ไอดี"
 
 #: libraries/classes/Server/Status/Processes.php:81
 msgid "Command"
@@ -11920,7 +11917,7 @@ msgstr "คำสั่ง"
 
 #: libraries/classes/Server/Status/Processes.php:93
 msgid "Progress"
-msgstr ""
+msgstr "ความคืบหน้า"
 
 #: libraries/classes/Server/Status/Processes.php:235
 #: libraries/classes/Server/Status/Variables.php:47 templates/filter.twig:2
@@ -11928,32 +11925,25 @@ msgid "Filters"
 msgstr "ตัวกรอง"
 
 #: libraries/classes/Server/Status/Processes.php:243
-#, fuzzy
 msgid "Show only active"
-msgstr "แสดงตาราง"
+msgstr "แสดงเฉพาะที่ใช้งานอยู่"
 
 #: libraries/classes/Server/Status/Queries.php:40
 #, php-format
 msgid "Questions since startup: %s"
-msgstr ""
+msgstr "คำถามตั้งแต่เริ่มใช้งาน: %s"
 
 #: libraries/classes/Server/Status/Queries.php:51
-#, fuzzy
-#| msgid "per hour"
 msgid "per hour:"
-msgstr "ต่อชั่วโมง"
+msgstr "ต่อชั่วโมง:"
 
 #: libraries/classes/Server/Status/Queries.php:54
-#, fuzzy
-#| msgid "per minute"
 msgid "per minute:"
-msgstr "ต่อนาที"
+msgstr "ต่อนาที:"
 
 #: libraries/classes/Server/Status/Queries.php:61
-#, fuzzy
-#| msgid "per second"
 msgid "per second:"
-msgstr "ต่อวินาที"
+msgstr "ต่อวินาที:"
 
 #: libraries/classes/Server/Status/Queries.php:98
 msgid "Statements"
@@ -11962,42 +11952,38 @@ msgstr "คำสั่ง"
 #. l10n: # = Amount of queries
 #: libraries/classes/Server/Status/Queries.php:101
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: libraries/classes/Server/Status/Variables.php:52 templates/filter.twig:4
 msgid "Containing the word:"
 msgstr "ที่มีคำว่า:"
 
 #: libraries/classes/Server/Status/Variables.php:60
-#, fuzzy
 msgid "Show only alert values"
-msgstr "แสดงตาราง"
+msgstr "แสดงเฉพาะค่าการแจ้งเตือน"
 
 #: libraries/classes/Server/Status/Variables.php:65
 msgid "Filter by category…"
-msgstr ""
+msgstr "กรองตามหมวดหมู่…"
 
 #: libraries/classes/Server/Status/Variables.php:86
-#, fuzzy
 msgid "Show unformatted values"
-msgstr "แสดงตาราง"
+msgstr "แสดงค่าที่ไม่ได้จัดรูปแบบ"
 
 #: libraries/classes/Server/Status/Variables.php:105
-#, fuzzy
-#| msgid "Relations"
 msgid "Related links:"
-msgstr "รีเลชัน"
+msgstr "ลิงก์ที่เกี่ยวข้อง:"
 
 #: libraries/classes/Server/Status/Variables.php:341
 msgid ""
 "The number of connections that were aborted because the client died without "
 "closing the connection properly."
 msgstr ""
+"จำนวนการเชื่อมต่อที่ถูกยกเลิกเนื่องจากเครื่องลูกข่ายเลิกใช้งานโดยไม่ได้ปิดการเชื่อมต่ออย่างถูกต้อง"
 
 #: libraries/classes/Server/Status/Variables.php:345
-#, fuzzy
 msgid "The number of failed attempts to connect to the MySQL server."
-msgstr "จำกัดจำนวนการเชื่อมต่อใหม่ ที่ผู้ใช้จะสามารถเปิดได้ ต่อชั่วโมง"
+msgstr "จำนวนครั้งที่พยายามเชื่อมต่อกับเซิร์ฟเวอร์ MySQL ไม่สำเร็จ"
 
 #: libraries/classes/Server/Status/Variables.php:348
 msgid ""
@@ -12005,15 +11991,18 @@ msgid ""
 "exceeded the value of binlog_cache_size and used a temporary file to store "
 "statements from the transaction."
 msgstr ""
+"จำนวนธุรกรรมที่ใช้แคชบันทึกไบนารีชั่วคราว แต่เกินค่าของ binlog_cache_size และใช้ไฟล์ชั่วคราวใ"
+"นการจัดเก็บคำสั่งจากธุรกรรมนั้น"
 
 #: libraries/classes/Server/Status/Variables.php:353
 msgid "The number of transactions that used the temporary binary log cache."
-msgstr ""
+msgstr "จำนวนธุรกรรมที่ใช้แคชบันทึกไบนารีชั่วคราว"
 
 #: libraries/classes/Server/Status/Variables.php:356
 msgid ""
 "The number of connection attempts (successful or not) to the MySQL server."
 msgstr ""
+"จำนวนครั้งที่พยายามเชื่อมต่อ (ทั้งสำเร็จและไม่สำเร็จ) กับเซิร์ฟเวอร์ MySQL"
 
 #: libraries/classes/Server/Status/Variables.php:360
 msgid ""
@@ -12022,44 +12011,51 @@ msgid ""
 "to increase the tmp_table_size  value to cause temporary tables to be memory-"
 "based instead of disk-based."
 msgstr ""
+"จำนวนตารางชั่วคราวบนดิสก์ที่เซิร์ฟเวอร์สร้างขึ้นโดยอัตโนมัติขณะดำเนินการรันคำสั่ง หากค่า "
+"Created_tmp_disk_tables มีขนาดใหญ่ คุณอาจต้องการเพิ่มค่า tmp_table_size เพื่อให้ตารางชั่ว"
+"คราวถูกจัดเก็บไว้ในหน่วยความจำแทนที่จะเป็นบนดิสก์"
 
 #: libraries/classes/Server/Status/Variables.php:367
 msgid "How many temporary files mysqld has created."
-msgstr ""
+msgstr "mysqld สร้างไฟล์ชั่วคราวขึ้นมาจำนวนเท่าใด"
 
 #: libraries/classes/Server/Status/Variables.php:370
 msgid ""
 "The number of in-memory temporary tables created automatically by the server "
 "while executing statements."
 msgstr ""
+"จำนวนตารางชั่วคราวในหน่วยความจำที่เซิร์ฟเวอร์สร้างขึ้นโดยอัตโนมัติขณะดำเนินการรันคำสั่ง"
 
 #: libraries/classes/Server/Status/Variables.php:374
 msgid ""
 "The number of rows written with INSERT DELAYED for which some error occurred "
 "(probably duplicate key)."
 msgstr ""
+"จำนวนแถวที่เขียนด้วยคำสั่ง INSERT DELAYED ซึ่งเกิดข้อผิดพลาดบางอย่าง (อาจเป็นเพราะคีย์ซ้ำ)"
 
 #: libraries/classes/Server/Status/Variables.php:378
 msgid ""
 "The number of INSERT DELAYED handler threads in use. Every different table "
 "on which one uses INSERT DELAYED gets its own thread."
 msgstr ""
+"จำนวนรอบการทำงานที่ใช้จัดการคำสั่ง INSERT DELAYED แต่ละตารางที่ใช้คำสั่ง INSERT DELAYED จ"
+"ะได้รับรอบการทำงานของตัวเอง"
 
 #: libraries/classes/Server/Status/Variables.php:383
 msgid "The number of INSERT DELAYED rows written."
-msgstr ""
+msgstr "จำนวนแถวที่ INSERT DELAYED ถูกเขียน"
 
 #: libraries/classes/Server/Status/Variables.php:386
 msgid "The number of executed FLUSH statements."
-msgstr ""
+msgstr "จำนวนคำสั่ง FLUSH ที่ถูกดำเนินการ"
 
 #: libraries/classes/Server/Status/Variables.php:389
 msgid "The number of internal COMMIT statements."
-msgstr ""
+msgstr "จำนวนคำสั่ง COMMIT ภายใน"
 
 #: libraries/classes/Server/Status/Variables.php:392
 msgid "The number of times a row was deleted from a table."
-msgstr ""
+msgstr "จำนวนครั้งที่แถวถูกลบออกจากตาราง"
 
 #: libraries/classes/Server/Status/Variables.php:395
 msgid ""
@@ -12067,6 +12063,8 @@ msgid ""
 "table with a given name. This is called discovery. Handler_discover "
 "indicates the number of time tables have been discovered."
 msgstr ""
+"เซิร์ฟเวอร์ MySQL สามารถสอบถามระบบจัดเก็บข้อมูล NDB Cluster ว่ารู้จักตารางที่มีชื่อที่ส่งให้หรือไ"
+"ม่ กระบวนการนี้เรียกว่าการค้นพบ ตัวแปร Handler_discover จะระบุจำนวนครั้งที่ค้นพบตารางแล้ว"
 
 #: libraries/classes/Server/Status/Variables.php:401
 msgid ""
@@ -12074,12 +12072,16 @@ msgid ""
 "it suggests that the server is doing a lot of full index scans; for example, "
 "SELECT col1 FROM foo, assuming that col1 is indexed."
 msgstr ""
+"จำนวนครั้งที่อ่านรายการแรกจากดัชนี หากค่านี้สูง แสดงว่าเซิร์ฟเวอร์กำลังทำการสแกนดัชนีแบบเต็มรูปแบ"
+"บบ่อยครั้ง; ตัวอย่างเช่น SELECT col1 FROM foo โดยสมมติว่า col1 มีดัชนีอยู่แล้ว"
 
 #: libraries/classes/Server/Status/Variables.php:407
 msgid ""
 "The number of requests to read a row based on a key. If this is high, it is "
 "a good indication that your queries and tables are properly indexed."
 msgstr ""
+"จำนวนคำขออ่านแถวโดยใช้คีย์เป็นฐาน หากจำนวนนี้สูง แสดงว่าคำสั่งและตารางของคุณได้รับการจัดทำดัช"
+"นีอย่างเหมาะสมแล้ว"
 
 #: libraries/classes/Server/Status/Variables.php:412
 msgid ""
@@ -12087,12 +12089,16 @@ msgid ""
 "incremented if you are querying an index column with a range constraint or "
 "if you are doing an index scan."
 msgstr ""
+"จำนวนคำขอในการอ่านแถวถัดไปตามลำดับคีย์ ค่านี้จะเพิ่มขึ้นหากคุณกำลังรันคำสั่งคอลัมน์ดัชนีที่มีข้อจำกัดช่ว"
+"ง หรือหากคุณกำลังทำการสแกนดัชนี"
 
 #: libraries/classes/Server/Status/Variables.php:417
 msgid ""
 "The number of requests to read the previous row in key order. This read "
 "method is mainly used to optimize ORDER BY … DESC."
 msgstr ""
+"จำนวนคำขออ่านแถวก่อนหน้าตามลำดับคีย์ วิธีการอ่านนี้ใช้เป็นหลักในการปรับปรุงประสิทธิภาพของ "
+"ORDER BY … DESC"
 
 #: libraries/classes/Server/Status/Variables.php:421
 msgid ""
@@ -12101,6 +12107,9 @@ msgid ""
 "probably have a lot of queries that require MySQL to scan whole tables or "
 "you have joins that don't use keys properly."
 msgstr ""
+"จำนวนคำขออ่านแถวโดยอ้างอิงจากตำแหน่งคงที่ ค่านี้จะสูงหากคุณทำการรันคำสั่งจำนวนมากที่ต้องมีการเรี"
+"ยงลำดับผลลัพธ์ คุณอาจมีคำสั่งที่ต้องการให้ MySQL สแกนทั้งตาราง หรือมีการเชื่อมต่อตารางที่ไม่ใช้คีย์อย่"
+"างถูกต้อง"
 
 #: libraries/classes/Server/Status/Variables.php:428
 msgid ""
@@ -12109,34 +12118,37 @@ msgid ""
 "tables are not properly indexed or that your queries are not written to take "
 "advantage of the indexes you have."
 msgstr ""
+"จำนวนคำขอในการอ่านแถวถัดไปในไฟล์ข้อมูล ค่านี้จะสูงหากคุณทำการสแกนตารางบ่อยครั้ง โดยทั่วไปแล้"
+"ว นี่แสดงว่าตารางของคุณไม่ได้สร้างดัชนีอย่างถูกต้อง หรือคำสั่งของคุณไม่ได้เขียนขึ้นเพื่อใช้ประโยชน์จาก"
+"ดัชนีที่มีอยู่"
 
 #: libraries/classes/Server/Status/Variables.php:435
 msgid "The number of internal ROLLBACK statements."
-msgstr ""
+msgstr "จำนวนคำสั่ง ROLLBACK ภายใน"
 
 #: libraries/classes/Server/Status/Variables.php:438
 msgid "The number of requests to update a row in a table."
-msgstr ""
+msgstr "จำนวนคำขอในการอัปเดตแถวในตาราง"
 
 #: libraries/classes/Server/Status/Variables.php:441
 msgid "The number of requests to insert a row in a table."
-msgstr ""
+msgstr "จำนวนคำขอแทรกแถวลงในตาราง"
 
 #: libraries/classes/Server/Status/Variables.php:444
 msgid "The number of pages containing data (dirty or clean)."
-msgstr ""
+msgstr "จำนวนหน้าที่มีข้อมูล (ทั้งข้อมูลดิบและจัดรูปแบบแล้ว)"
 
 #: libraries/classes/Server/Status/Variables.php:447
 msgid "The number of pages currently dirty."
-msgstr ""
+msgstr "จำนวนหน้าที่ยังไม่ได้จัดรูปแบบ"
 
 #: libraries/classes/Server/Status/Variables.php:450
 msgid "The number of buffer pool pages that have been requested to be flushed."
-msgstr ""
+msgstr "จำนวนหน้าของบัฟเฟอร์พูลที่ได้รับการร้องขอให้ล้างข้อมูล"
 
 #: libraries/classes/Server/Status/Variables.php:454
 msgid "The number of free pages."
-msgstr ""
+msgstr "จำนวนหน้าว่าง"
 
 #: libraries/classes/Server/Status/Variables.php:457
 msgid ""
@@ -12144,6 +12156,8 @@ msgid ""
 "being read or written or that can't be flushed or removed for some other "
 "reason."
 msgstr ""
+"จำนวนหน้าข้อมูลที่ถูกล็อกไว้ในบัฟเฟอร์พูลของ InnoDB หน้าเหล่านี้คือหน้าข้อมูลที่กำลังถูกอ่านหรือเขียนอ"
+"ยู่ หรือหน้าข้อมูลที่ไม่สามารถล้างหรือลบออกได้ด้วยเหตุผลบางประการ"
 
 #: libraries/classes/Server/Status/Variables.php:462
 msgid ""
@@ -12152,32 +12166,40 @@ msgid ""
 "be calculated as Innodb_buffer_pool_pages_total - "
 "Innodb_buffer_pool_pages_free - Innodb_buffer_pool_pages_data."
 msgstr ""
+"จำนวนหน้าที่ไม่ว่างเนื่องจากถูกจัดสรรไว้เพื่องานสำหรับผู้บริหารระบบจัดการ เช่น การล็อกแถวหรือดัชนีแ"
+"ฮชแบบปรับได้ ค่านี้สามารถคำนวณได้จาก Innodb_buffer_pool_pages_total - "
+"Innodb_buffer_pool_pages_free - Innodb_buffer_pool_pages_data"
 
 #: libraries/classes/Server/Status/Variables.php:469
 msgid "Total size of buffer pool, in pages."
-msgstr ""
+msgstr "ขนาดรวมของบัฟเฟอร์พูล หน่วยเป็นเพจ"
 
 #: libraries/classes/Server/Status/Variables.php:472
 msgid ""
 "The number of \"random\" read-aheads InnoDB initiated. This happens when a "
 "query is to scan a large portion of a table but in random order."
 msgstr ""
+"จำนวนการอ่านล่วงหน้าแบบ \"สุ่ม\" ที่ InnoDB เริ่มต้นขึ้น เหตุการณ์นี้เกิดขึ้นเมื่อคำสั่งต้องการสแกนข้อ"
+"มูลจำนวนมากในตาราง แต่ในลำดับแบบสุ่ม"
 
 #: libraries/classes/Server/Status/Variables.php:477
 msgid ""
 "The number of sequential read-aheads InnoDB initiated. This happens when "
 "InnoDB does a sequential full table scan."
 msgstr ""
+"จำนวนการอ่านล่วงหน้าแบบเรียงลำดับที่ InnoDB เริ่มต้นขึ้น เหตุการณ์นี้เกิดขึ้นเมื่อ InnoDB ทำการสแก"
+"นตารางเต็มรูปแบบแบบเรียงลำดับ"
 
 #: libraries/classes/Server/Status/Variables.php:481
 msgid "The number of logical read requests InnoDB has done."
-msgstr ""
+msgstr "จำนวนคำขออ่านเชิงตรรกะที่ InnoDB ได้ดำเนินการไป"
 
 #: libraries/classes/Server/Status/Variables.php:484
 msgid ""
 "The number of logical reads that InnoDB could not satisfy from buffer pool "
 "and had to do a single-page read."
 msgstr ""
+"จำนวนการอ่านเชิงตรรกะที่ InnoDB ไม่สามารถตอบสนองได้จากบัฟเฟอร์พูล และต้องทำการอ่านทีละหน้า"
 
 #: libraries/classes/Server/Status/Variables.php:488
 msgid ""
@@ -12187,26 +12209,30 @@ msgid ""
 "counter counts instances of these waits. If the buffer pool size was set "
 "properly, this value should be small."
 msgstr ""
+"โดยปกติ การเขียนข้อมูลลงในบัฟเฟอร์พูลของ InnoDB จะเกิดขึ้นในเบื้องหลัง อย่างไรก็ตาม หากจำเป็น"
+"ต้องอ่านหรือสร้างหน้าข้อมูล และไม่มีหน้าข้อมูลที่ว่างเปล่าพร้อมใช้งาน จำเป็นต้องรอให้หน้าข้อมูลเหล่านั้น"
+"ถูกล้างออกไปก่อน ตัวนับนี้จะนับจำนวนครั้งที่เกิดการรอ หากตั้งค่าขนาดบัฟเฟอร์พูลอย่างถูกต้องแล้ว ค่านี้ค"
+"วรจะน้อย"
 
 #: libraries/classes/Server/Status/Variables.php:496
 msgid "The number writes done to the InnoDB buffer pool."
-msgstr ""
+msgstr "จำนวนการเขียนข้อมูลลงในบัฟเฟอร์พูลของ InnoDB"
 
 #: libraries/classes/Server/Status/Variables.php:499
 msgid "The number of fsync() operations so far."
-msgstr ""
+msgstr "จำนวนการดำเนินการ fsync() ที่ผ่านมา"
 
 #: libraries/classes/Server/Status/Variables.php:502
 msgid "The current number of pending fsync() operations."
-msgstr ""
+msgstr "จำนวนการดำเนินการ fsync() ที่รอดำเนินการในปัจจุบัน"
 
 #: libraries/classes/Server/Status/Variables.php:505
 msgid "The current number of pending reads."
-msgstr ""
+msgstr "จำนวนการอ่านที่รอดำเนินการในปัจจุบัน"
 
 #: libraries/classes/Server/Status/Variables.php:508
 msgid "The current number of pending writes."
-msgstr ""
+msgstr "จำนวนการเขียนข้อมูลที่รอดำเนินการในปัจจุบัน"
 
 #: libraries/classes/Server/Status/Variables.php:511
 msgid "The amount of data read so far, in bytes."
@@ -12214,11 +12240,11 @@ msgstr "ปริมาณข้อมูลที่อ่านได้จน
 
 #: libraries/classes/Server/Status/Variables.php:514
 msgid "The total number of data reads."
-msgstr ""
+msgstr "จำนวนการอ่านข้อมูลทั้งหมด"
 
 #: libraries/classes/Server/Status/Variables.php:517
 msgid "The total number of data writes."
-msgstr ""
+msgstr "จำนวนการเขียนข้อมูลทั้งหมด"
 
 #: libraries/classes/Server/Status/Variables.php:520
 msgid "The amount of data written so far, in bytes."
@@ -12226,37 +12252,39 @@ msgstr "ปริมาณข้อมูลที่ถูกเขียนจ
 
 #: libraries/classes/Server/Status/Variables.php:523
 msgid "The number of pages that have been written for doublewrite operations."
-msgstr ""
+msgstr "จำนวนหน้าที่เขียนไปแล้วสำหรับการดำเนินการเขียนซ้ำสองครั้ง"
 
 #: libraries/classes/Server/Status/Variables.php:527
 msgid "The number of doublewrite operations that have been performed."
-msgstr ""
+msgstr "จำนวนการดำเนินการเขียนซ้ำสองรอบที่ได้ดำเนินการไปแล้ว"
 
 #: libraries/classes/Server/Status/Variables.php:530
 msgid ""
 "The number of waits we had because log buffer was too small and we had to "
 "wait for it to be flushed before continuing."
 msgstr ""
+"จำนวนครั้งที่ต้องรอเกิดจากบัฟเฟอร์บันทึกข้อมูลมีขนาดเล็กเกินไป และเราต้องรอให้บัฟเฟอร์ถูกล้างก่อนจึง"
+"จะดำเนินการต่อได้"
 
 #: libraries/classes/Server/Status/Variables.php:534
 msgid "The number of log write requests."
-msgstr ""
+msgstr "จำนวนคำขอเขียนบันทึกข้อมูล"
 
 #: libraries/classes/Server/Status/Variables.php:537
 msgid "The number of physical writes to the log file."
-msgstr ""
+msgstr "จำนวนการเขียนข้อมูลจริงลงในไฟล์บันทึก"
 
 #: libraries/classes/Server/Status/Variables.php:540
 msgid "The number of fsync() writes done to the log file."
-msgstr ""
+msgstr "จำนวนการเขียนข้อมูลด้วยฟังก์ชัน fsync() ไปยังไฟล์บันทึก"
 
 #: libraries/classes/Server/Status/Variables.php:543
 msgid "The number of pending log file fsyncs."
-msgstr ""
+msgstr "จำนวนไฟล์บันทึก fsyncs ที่ค้างอยู่"
 
 #: libraries/classes/Server/Status/Variables.php:546
 msgid "Pending log file writes."
-msgstr ""
+msgstr "รอการเขียนไฟล์บันทึกข้อมูลอยู่"
 
 #: libraries/classes/Server/Status/Variables.php:549
 msgid "The number of bytes written to the log file."
@@ -12264,72 +12292,74 @@ msgstr "จำนวนไบต์ที่เขียนลงในไฟล
 
 #: libraries/classes/Server/Status/Variables.php:552
 msgid "The number of pages created."
-msgstr ""
+msgstr "จำนวนหน้าที่สร้างขึ้น"
 
 #: libraries/classes/Server/Status/Variables.php:555
 msgid ""
 "The compiled-in InnoDB page size (default 16KB). Many values are counted in "
 "pages; the page size allows them to be easily converted to bytes."
 msgstr ""
-"ขนาดเพจหน่วยความจำ (page size) ของ InnoDB ที่คอมไพล์ไว้ (ค่าเริ่มต้น 16KB) ค่าหลายค่าถูกนั"
-"บเป็นเพจหน่วยความจำ ขนาดเพจหน่วยความจำ (page size) ช่วยให้สามารถแปลงค่าเหล่านั้นเป็นไบต์"
-"ได้อย่างง่ายดาย"
+"ขนาดหน้าของ InnoDB ที่คอมไพล์ไว้ (ค่าเริ่มต้น 16KB) ค่าหลายค่าถูกนับเป็นหน้า; ขนาดหน้าช่วยให้สา"
+"มารถแปลงค่าเหล่านั้นเป็นไบต์ได้อย่างง่ายดาย"
 
 #: libraries/classes/Server/Status/Variables.php:560
 msgid "The number of pages read."
-msgstr ""
+msgstr "จำนวนหน้าที่อ่าน"
 
 #: libraries/classes/Server/Status/Variables.php:563
 msgid "The number of pages written."
-msgstr ""
+msgstr "จำนวนหน้าที่เขียน"
 
 #: libraries/classes/Server/Status/Variables.php:566
 msgid "The number of row locks currently being waited for."
-msgstr ""
+msgstr "จำนวนแถวที่ถูกล็อกที่กำลังรออยู่ในขณะนี้"
 
 #: libraries/classes/Server/Status/Variables.php:569
 msgid "The average time to acquire a row lock, in milliseconds."
-msgstr ""
+msgstr "เวลาเฉลี่ยในการล็อกแถว หน่วยเป็นมิลลิวินาที"
 
 #: libraries/classes/Server/Status/Variables.php:572
 msgid "The total time spent in acquiring row locks, in milliseconds."
-msgstr ""
+msgstr "เวลาทั้งหมดที่ใช้ในการล็อกแถว หน่วยเป็นมิลลิวินาที"
 
 #: libraries/classes/Server/Status/Variables.php:575
 msgid "The maximum time to acquire a row lock, in milliseconds."
-msgstr ""
+msgstr "เวลาสูงสุดในการล็อกแถว หน่วยเป็นมิลลิวินาที"
 
 #: libraries/classes/Server/Status/Variables.php:578
 msgid "The number of times a row lock had to be waited for."
-msgstr ""
+msgstr "จำนวนครั้งที่ต้องรอการล็อกแถว"
 
 #: libraries/classes/Server/Status/Variables.php:581
 msgid "The number of rows deleted from InnoDB tables."
-msgstr ""
+msgstr "จำนวนแถวที่ถูกลบออกจากตาราง InnoDB"
 
 #: libraries/classes/Server/Status/Variables.php:584
 msgid "The number of rows inserted in InnoDB tables."
-msgstr ""
+msgstr "จำนวนแถวที่ถูกแทรกในตาราง InnoDB"
 
 #: libraries/classes/Server/Status/Variables.php:587
 msgid "The number of rows read from InnoDB tables."
-msgstr ""
+msgstr "จำนวนแถวที่อ่านจากตาราง InnoDB"
 
 #: libraries/classes/Server/Status/Variables.php:590
 msgid "The number of rows updated in InnoDB tables."
-msgstr ""
+msgstr "จำนวนแถวที่ได้รับการอัปเดตในตาราง InnoDB"
 
 #: libraries/classes/Server/Status/Variables.php:593
 msgid ""
 "The number of key blocks in the key cache that have changed but haven't yet "
 "been flushed to disk. It used to be known as Not_flushed_key_blocks."
 msgstr ""
+"จำนวนบล็อกคีย์ในแคชคีย์ที่เปลี่ยนแปลงไปแต่ยังไม่ได้ถูกบันทึกลงดิสก์ เดิมเรียกว่า "
+"Not_flushed_key_blocks"
 
 #: libraries/classes/Server/Status/Variables.php:598
 msgid ""
 "The number of unused blocks in the key cache. You can use this value to "
 "determine how much of the key cache is in use."
 msgstr ""
+"จำนวนบล็อกที่ไม่ได้ใช้งานในแคชคีย์ คุณสามารถใช้ค่านี้เพื่อตรวจสอบว่าแคชคีย์ถูกใช้งานไปเท่าใด"
 
 #: libraries/classes/Server/Status/Variables.php:602
 msgid ""
@@ -12337,14 +12367,16 @@ msgid ""
 "that indicates the maximum number of blocks that have ever been in use at "
 "one time."
 msgstr ""
+"จำนวนบล็อกที่ใช้งานในแคชคีย์ ค่านี้เป็นค่าสูงสุดที่บ่งบอกถึงจำนวนบล็อกสูงสุดที่เคยถูกใช้งานพร้อมกันในเว"
+"ลาใดเวลาหนึ่ง"
 
 #: libraries/classes/Server/Status/Variables.php:607
 msgid "Percentage of used key cache (calculated value)"
-msgstr ""
+msgstr "เปอร์เซ็นต์ของแคชคีย์ที่ใช้ไป (ค่าที่คำนวณได้)"
 
 #: libraries/classes/Server/Status/Variables.php:610
 msgid "The number of requests to read a key block from the cache."
-msgstr ""
+msgstr "จำนวนคำขอในการอ่านบล็อกคีย์จากแคช"
 
 #: libraries/classes/Server/Status/Variables.php:613
 msgid ""
@@ -12352,25 +12384,30 @@ msgid ""
 "then your key_buffer_size value is probably too small. The cache miss rate "
 "can be calculated as Key_reads/Key_read_requests."
 msgstr ""
+"จำนวนการอ่านข้อมูลคีย์บล๊อกหลักจากดิสก์ หากค่า Key_reads มีขนาดใหญ่ แสดงว่าค่า "
+"key_buffer_size อาจเล็กเกินไป อัตราการพลาดแคชสามารถคำนวณได้จาก Key_reads / "
+"Key_read_requests"
 
 #: libraries/classes/Server/Status/Variables.php:619
 msgid ""
 "Key cache miss calculated as rate of physical reads compared to read "
 "requests (calculated value)"
 msgstr ""
+"แคชพลาดคีย์ คำนวณจากอัตราส่วนของการอ่านทางกายภาพเทียบกับคำขออ่าน (ค่าที่คำนวณได้)"
 
 #: libraries/classes/Server/Status/Variables.php:623
 msgid "The number of requests to write a key block to the cache."
-msgstr ""
+msgstr "จำนวนคำขอในการเขียนบล็อกคีย์ลงในแคช"
 
 #: libraries/classes/Server/Status/Variables.php:626
 msgid "The number of physical writes of a key block to disk."
-msgstr ""
+msgstr "จำนวนครั้งของการเขียนข้อมูลบล็อกคีย์ลงดิสก์"
 
 #: libraries/classes/Server/Status/Variables.php:629
 msgid ""
 "Percentage of physical writes compared to write requests (calculated value)"
 msgstr ""
+"เปอร์เซ็นต์ของการเขียนข้อมูลจริงเมื่อเทียบกับคำขอเขียนข้อมูล (ค่าที่คำนวณได้)"
 
 #: libraries/classes/Server/Status/Variables.php:633
 msgid ""
@@ -12378,34 +12415,38 @@ msgid ""
 "optimizer. Useful for comparing the cost of different query plans for the "
 "same query. The default value of 0 means that no query has been compiled yet."
 msgstr ""
+"ทรัพยากรที่ใช้โดยรวมของคำสั่งที่คอมไพล์ล่าสุด ซึ่งคำนวณโดยตัวเพิ่มประสิทธิภาพคำสั่ง มีประโยชน์สำหรับ"
+"การเปรียบเทียบการใช้ทรัพยากรของแผนคำสั่งต่าง ๆ สำหรับคำสั่งเดียวกัน ค่าเริ่มต้นคือ 0 หมายความว่"
+"ายังไม่มีการคอมไพล์คำสั่งใด ๆ"
 
 #: libraries/classes/Server/Status/Variables.php:639
 msgid ""
 "The maximum number of connections that have been in use simultaneously since "
 "the server started."
-msgstr ""
+msgstr "จำนวนการเชื่อมต่อสูงสุดที่ใช้งานพร้อมกันนับตั้งแต่เซิร์ฟเวอร์เริ่มทำงาน"
 
 #: libraries/classes/Server/Status/Variables.php:643
 msgid "The number of rows waiting to be written in INSERT DELAYED queues."
-msgstr ""
+msgstr "จำนวนแถวที่รอการเขียนในคิว INSERT DELAYED"
 
 #: libraries/classes/Server/Status/Variables.php:646
 msgid ""
 "The number of tables that have been opened. If opened tables is big, your "
 "table cache value is probably too small."
 msgstr ""
+"จำนวนตารางที่เปิด หากจำนวนตารางที่เปิดมีมาก แสดงว่าค่าแคชตารางของคุณอาจน้อยเกินไป"
 
 #: libraries/classes/Server/Status/Variables.php:650
 msgid "The number of files that are open."
-msgstr ""
+msgstr "จำนวนไฟล์ที่เปิดอยู่"
 
 #: libraries/classes/Server/Status/Variables.php:653
 msgid "The number of streams that are open (used mainly for logging)."
-msgstr ""
+msgstr "จำนวนสตรีมที่เปิดอยู่ (ส่วนใหญ่ใช้สำหรับการบันทึกข้อมูล)"
 
 #: libraries/classes/Server/Status/Variables.php:656
 msgid "The number of tables that are open."
-msgstr ""
+msgstr "จำนวนตารางที่เปิดอยู่"
 
 #: libraries/classes/Server/Status/Variables.php:659
 msgid ""
@@ -12413,18 +12454,20 @@ msgid ""
 "fragmentation issues, which may be solved by issuing a FLUSH QUERY CACHE "
 "statement."
 msgstr ""
+"จำนวนบล็อกหน่วยความจำว่างในแคชคำสั่ง ตัวเลขที่สูงอาจบ่งชี้ถึงปัญหาการกระจัดกระจายของหน่วยความ"
+"จำ ซึ่งสามารถแก้ไขได้โดยการใช้คำสั่ง FLUSH QUERY CACHE"
 
 #: libraries/classes/Server/Status/Variables.php:664
 msgid "The amount of free memory for query cache."
-msgstr ""
+msgstr "ปริมาณหน่วยความจำว่างสำหรับแคชคำสั่ง"
 
 #: libraries/classes/Server/Status/Variables.php:667
 msgid "The number of cache hits."
-msgstr ""
+msgstr "จำนวนการถึงแคช"
 
 #: libraries/classes/Server/Status/Variables.php:670
 msgid "The number of queries added to the cache."
-msgstr ""
+msgstr "จำนวนคำสั่งที่ถูกเพิ่มเข้าไปในแคช"
 
 #: libraries/classes/Server/Status/Variables.php:673
 msgid ""
@@ -12433,75 +12476,86 @@ msgid ""
 "cache size. The query cache uses a least recently used (LRU) strategy to "
 "decide which queries to remove from the cache."
 msgstr ""
+"จำนวนคำสั่งที่ถูกลบออกจากแคชเพื่อเพิ่มพื้นที่ว่างในหน่วยความจำสำหรับการแคชคำสั่งใหม่ ข้อมูลนี้สามารถ"
+"ช่วยคุณปรับขนาดแคชคำสั่งได้ แคชคำสั่งใช้กลยุทธ์การใช้งานล่าสุดน้อยที่สุด (LRU) เพื่อตัดสินใจว่าจะลบค"
+"ำสั่งใดออกจากแคช"
 
 #: libraries/classes/Server/Status/Variables.php:680
 msgid ""
 "The number of non-cached queries (not cachable, or not cached due to the "
 "query_cache_type setting)."
 msgstr ""
+"จำนวนของคำสั่งที่ไม่ถูกแคช (ไม่สามารถแคชได้ หรือไม่ถูกแคชเนื่องจากการตั้งค่า "
+"query_cache_type)"
 
 #: libraries/classes/Server/Status/Variables.php:684
 msgid "The number of queries registered in the cache."
-msgstr ""
+msgstr "จำนวนคำสั่งที่ลงทะเบียนไว้ในแคช"
 
 #: libraries/classes/Server/Status/Variables.php:687
 msgid "The total number of blocks in the query cache."
-msgstr ""
+msgstr "จำนวนบล็อกทั้งหมดในแคชคำสั่ง"
 
 #: libraries/classes/Server/Status/Variables.php:690
 msgid "The status of failsafe replication (not yet implemented)."
-msgstr ""
+msgstr "สถานะของการจำลองข้อมูลแบบป้องกันความล้มเหลว (ยังไม่ได้นำมาใช้งาน)"
 
 #: libraries/classes/Server/Status/Variables.php:693
 msgid ""
 "The number of joins that do not use indexes. If this value is not 0, you "
 "should carefully check the indexes of your tables."
 msgstr ""
+"จำนวนการเชื่อมต่อตารางที่ไม่ใช้ดัชนี หากค่านี้ไม่ใช่ 0 คุณควรตรวจสอบดัชนีของตารางอย่างละเอียด"
 
 #: libraries/classes/Server/Status/Variables.php:697
 msgid "The number of joins that used a range search on a reference table."
-msgstr ""
+msgstr "จำนวนการเชื่อมต่อที่ใช้การค้นหาช่วงบนตารางอ้างอิง"
 
 #: libraries/classes/Server/Status/Variables.php:700
 msgid ""
 "The number of joins without keys that check for key usage after each row. "
 "(If this is not 0, you should carefully check the indexes of your tables.)"
 msgstr ""
+"จำนวนการเชื่อมต่อที่ไม่มีคีย์ซึ่งตรวจสอบการใช้งานคีย์แต่ละแถว (หากค่านี้ไม่ใช่ 0 คุณควรตรวจสอบดัชนีข"
+"องตารางของคุณอย่างละเอียด)"
 
 #: libraries/classes/Server/Status/Variables.php:705
 msgid ""
 "The number of joins that used ranges on the first table. (It's normally not "
 "critical even if this is big.)"
 msgstr ""
+"จำนวนการเชื่อมต่อที่ใช้ช่วงข้อมูลในตารางแรก (โดยปกติแล้วไม่สำคัญมากนัก แม้ว่าจะมีจำนวนมากก็ตาม)"
 
 #: libraries/classes/Server/Status/Variables.php:709
 msgid "The number of joins that did a full scan of the first table."
-msgstr ""
+msgstr "จำนวนการเชื่อมต่อที่ทำการสแกนตารางแรกเต็มรูปแบบ"
 
 #: libraries/classes/Server/Status/Variables.php:712
 msgid "The number of temporary tables currently open by the slave SQL thread."
-msgstr ""
+msgstr "จำนวนตารางชั่วคราวที่เปิดใช้งานอยู่ในขณะนั้นโดยรอบการทำงาน SQL สเลฟ"
 
 #: libraries/classes/Server/Status/Variables.php:716
 msgid ""
 "Total (since startup) number of times the replication slave SQL thread has "
 "retried transactions."
 msgstr ""
+"จำนวนครั้งทั้งหมด (นับตั้งแต่เริ่มต้น) ที่รอบการทำงาน SQL ของระบบจำลองแบบได้ลองทำธุรกรรมซ้ำ"
 
 #: libraries/classes/Server/Status/Variables.php:720
 msgid "This is ON if this server is a slave that is connected to a master."
 msgstr ""
+"ฟังก์ชันนี้ ON หากเซิร์ฟเวอร์นี้เป็นเซิร์ฟเวอร์สเลฟที่เชื่อมต่อกับเซิร์ฟเวอร์มาสเตอร์"
 
 #: libraries/classes/Server/Status/Variables.php:723
 msgid ""
 "The number of threads that have taken more than slow_launch_time seconds to "
 "create."
-msgstr ""
+msgstr "จำนวนรอบการทำงานที่ใช้เวลาสร้างนานกว่า slow_launch_time วินาที"
 
 #: libraries/classes/Server/Status/Variables.php:727
 msgid ""
 "The number of queries that have taken more than long_query_time seconds."
-msgstr ""
+msgstr "จำนวนคำสั่งที่ใช้เวลานานกว่า long_query_time วินาที"
 
 #: libraries/classes/Server/Status/Variables.php:731
 msgid ""
@@ -12509,22 +12563,24 @@ msgid ""
 "is large, you should consider increasing the value of the sort_buffer_size "
 "system variable."
 msgstr ""
+"จำนวนรอบการรวมข้อมูลที่อัลกอริทึมการเรียงลำดับต้องทำ หากค่านี้มีขนาดใหญ่ คุณควรพิจารณาเพิ่มค่าตัวแ"
+"ปรระบบ sort_buffer_size"
 
 #: libraries/classes/Server/Status/Variables.php:736
 msgid "The number of sorts that were done with ranges."
-msgstr ""
+msgstr "จำนวนการเรียงลำดับที่ทำโดยใช้ช่วงข้อมูล"
 
 #: libraries/classes/Server/Status/Variables.php:739
 msgid "The number of sorted rows."
-msgstr ""
+msgstr "จำนวนแถวที่เรียงลำดับแล้ว"
 
 #: libraries/classes/Server/Status/Variables.php:742
 msgid "The number of sorts that were done by scanning the table."
-msgstr ""
+msgstr "จำนวนการเรียงลำดับที่ทำโดยการสแกนตาราง"
 
 #: libraries/classes/Server/Status/Variables.php:745
 msgid "The number of times that a table lock was acquired immediately."
-msgstr ""
+msgstr "จำนวนครั้งที่ล็อกตารางสำเร็จในทันที"
 
 #: libraries/classes/Server/Status/Variables.php:748
 msgid ""
@@ -12533,6 +12589,8 @@ msgid ""
 "should first optimize your queries, and then either split your table or "
 "tables or use replication."
 msgstr ""
+"จำนวนครั้งที่ไม่สามารถล็อกตารางได้ทันทีและต้องรอ หากค่านี้สูงและทำให้คุณประสบปัญหาด้านประสิทธิภา"
+"พ คุณควรปรับปรุงประสิทธิภาพของคำสั่งก่อน จากนั้นจึงค่อยแบ่งตารางหรือใช้การจำลองข้อมูล"
 
 #: libraries/classes/Server/Status/Variables.php:754
 msgid ""
@@ -12540,10 +12598,12 @@ msgid ""
 "calculated as Threads_created/Connections. If this value is red you should "
 "raise your thread_cache_size."
 msgstr ""
+"จำนวนรอบการทำงานในแคชรอบการทำงาน อัตราการถึงแคชสามารถคำนวณได้จาก "
+"Threads_created / Connections หากค่านี้เป็นสีแดง คุณควรเพิ่มค่า thread_cache_size"
 
 #: libraries/classes/Server/Status/Variables.php:759
 msgid "The number of currently open connections."
-msgstr ""
+msgstr "จำนวนการเชื่อมต่อที่เปิดใช้งานอยู่ในปัจจุบัน"
 
 #: libraries/classes/Server/Status/Variables.php:762
 msgid ""
@@ -12552,97 +12612,77 @@ msgid ""
 "doesn't give a notable performance improvement if you have a good thread "
 "implementation.)"
 msgstr ""
+"จำนวนรอบการทำงานที่สร้างขึ้นเพื่อรองรับการเชื่อมต่อ หากค่า Threads_created มีขนาดใหญ่ คุณอาจ"
+"ต้องการเพิ่มค่า thread_cache_size (โดยปกติแล้ว การทำเช่นนี้จะไม่ทำให้ประสิทธิภาพดีขึ้นอย่างเห็น"
+"ได้ชัด หากคุณมีการใช้งานรอบการทำงานที่ดีอยู่แล้ว)"
 
 #: libraries/classes/Server/Status/Variables.php:769
-#, fuzzy
-#| msgid "Tracking is not active."
 msgid "Thread cache hit rate (calculated value)"
-msgstr "หยุดการติดตามแล้ว"
+msgstr "อัตราการถึงแคชรอบการทำงาน (ค่าที่คำนวณได้)"
 
 #: libraries/classes/Server/Status/Variables.php:772
 msgid "The number of threads that are not sleeping."
-msgstr ""
+msgstr "จำนวนรอบการทำงานที่ไม่เข้าสู่โหมดพักการทำงาน"
 
 #: libraries/classes/Server/UserGroups.php:32
 #, php-format
 msgid "Users of '%s' user group"
-msgstr ""
+msgstr "ผู้ใช้กลุ่มผู้ใช้ '%s'"
 
 #: libraries/classes/Server/UserGroups.php:45
 msgid "No users were found belonging to this user group."
-msgstr ""
+msgstr "ไม่พบผู้ใช้รายใดที่อยู่ในกลุ่มผู้ใช้นี้"
 
 #: libraries/classes/Server/UserGroups.php:75
 #: libraries/classes/Server/Users.php:38
-#, fuzzy
-#| msgid "Users"
 msgid "User groups"
-msgstr "ผู้ใช้"
+msgstr "กลุ่มผู้ใช้"
 
 #: libraries/classes/Server/UserGroups.php:90
-#, fuzzy
-#| msgid "Server version"
 msgid "Server level tabs"
-msgstr "รุ่นของเซิร์ฟเวอร์"
+msgstr "แท็บระดับเซิร์ฟเวอร์"
 
 #: libraries/classes/Server/UserGroups.php:91
-#, fuzzy
-#| msgid "Database server"
 msgid "Database level tabs"
-msgstr "เซิร์ฟเวอร์ฐานข้อมูล"
+msgstr "แท็บระดับฐานข้อมูล"
 
 #: libraries/classes/Server/UserGroups.php:92
-#, fuzzy
-#| msgid "Table comments"
 msgid "Table level tabs"
-msgstr "หมายเหตุของตาราง"
+msgstr "แท็บระดับตาราง"
 
 #: libraries/classes/Server/UserGroups.php:121
-#, fuzzy
 msgid "View users"
-msgstr "เพิ่มผู้ใช้"
+msgstr "ดูผู้ใช้"
 
 #: libraries/classes/Server/UserGroups.php:159
 #: libraries/classes/Server/UserGroups.php:225
-#, fuzzy
-#| msgid "Add user"
 msgid "Add user group"
-msgstr "เพิ่มผู้ใช้"
+msgstr "เพิ่มกลุ่มผู้ใช้"
 
 #: libraries/classes/Server/UserGroups.php:228
 #, php-format
 msgid "Edit user group: '%s'"
-msgstr ""
+msgstr "แก้ไขกลุ่มผู้ใช้: '%s'"
 
 #: libraries/classes/Server/UserGroups.php:244
-#, fuzzy
-#| msgid "No privileges."
 msgid "User group menu assignments"
-msgstr "ไม่มีสิทธิใดๆ."
+msgstr "การกำหนดเมนูกลุ่มผู้ใช้"
 
 #: libraries/classes/Server/UserGroups.php:252
-#, fuzzy
-#| msgid "Column names"
 msgid "Group name:"
-msgstr "ชื่อคอลัมน์"
+msgstr "ชื่อกลุ่ม:"
 
 #: libraries/classes/Server/UserGroups.php:289
-#, fuzzy
-#| msgid "Server version"
 msgid "Server-level tabs"
-msgstr "รุ่นของเซิร์ฟเวอร์"
+msgstr "แท็บระดับเซิร์ฟเวอร์"
 
 #: libraries/classes/Server/UserGroups.php:292
-#, fuzzy
-#| msgid "Database server"
 msgid "Database-level tabs"
-msgstr "เซิร์ฟเวอร์ฐานข้อมูล"
+msgstr "แท็บระดับฐานข้อมูล"
 
 #: libraries/classes/Server/UserGroups.php:295
-#, fuzzy
-#| msgid "Table comments"
 msgid "Table-level tabs"
-msgstr "หมายเหตุของตาราง"
+msgstr "แท็บระดับตาราง"
 
 #: libraries/classes/Sql.php:266 libraries/classes/Util.php:1147
 #: templates/console/display.twig:31 templates/console/display.twig:175
@@ -12650,52 +12690,40 @@ msgid "Profiling"
 msgstr "การทำแฟ้มประวัติ"
 
 #: libraries/classes/Sql.php:269
-#, fuzzy
 msgid "Detailed profile"
-msgstr "เฉพาะข้อมูล"
+msgstr "รายละเอียดโปรไฟล์"
 
 #: libraries/classes/Sql.php:274 libraries/classes/Sql.php:290
-#, fuzzy
 msgid "State"
 msgstr "สถานะ"
 
 #: libraries/classes/Sql.php:287
 msgid "Summary by state"
-msgstr ""
+msgstr "สรุปแยกตามสถานะ"
 
 #: libraries/classes/Sql.php:293
-#, fuzzy
-#| msgid "Total time:"
 msgid "Total Time"
-msgstr "เวลารวม:"
+msgstr "เวลารวม"
 
 #: libraries/classes/Sql.php:295
-#, fuzzy
-#| msgid "Time"
 msgid "% Time"
-msgstr "เวลา"
+msgstr "% เวลา"
 
 #: libraries/classes/Sql.php:297
-#, fuzzy
-#| msgid "Close"
 msgid "Calls"
-msgstr "ปิด"
+msgstr "เรียก"
 
 #: libraries/classes/Sql.php:299
-#, fuzzy
-#| msgid "Time"
 msgid "ø Time"
-msgstr "เวลา"
+msgstr "ø เวลา"
 
 #: libraries/classes/Sql.php:604 libraries/classes/Sql.php:622
 msgid "Bookmark this SQL query"
-msgstr "จดคำค้นนี้ไว้"
+msgstr "บุ๊กมาร์กคำสั่ง SQL นี้"
 
 #: libraries/classes/Sql.php:608
-#, fuzzy
-#| msgid "Label"
 msgid "Label:"
-msgstr "ป้ายชื่อ"
+msgstr "ป้ายชื่อ:"
 
 #: libraries/classes/Sql.php:615 libraries/classes/SqlQueryForm.php:316
 msgid "Let every user access this bookmark"
@@ -12826,20 +12854,18 @@ msgid "This MySQL server does not support the %s storage engine."
 msgstr "MySQL ไม่รองรับ %s"
 
 #: libraries/classes/Table.php:338
-#, fuzzy
-#| msgid "unknown table status: "
 msgid "Unknown table status:"
-msgstr "ไม่ทราบสถานะตาราง: "
+msgstr "ไม่ทราบสถานะตาราง:"
 
 #: libraries/classes/Table.php:911
-#, fuzzy, php-format
+#, php-format
 msgid "Source database `%s` was not found!"
-msgstr "ค้นหาในฐานข้อมูล"
+msgstr "ไม่พบฐานข้อมูลต้นทาง `%s`!"
 
 #: libraries/classes/Table.php:919
-#, fuzzy, php-format
+#, php-format
 msgid "Target database `%s` was not found!"
-msgstr "ค้นหาในฐานข้อมูล"
+msgstr "ไม่พบฐานข้อมูลเป้าหมาย `%s`!"
 
 #: libraries/classes/Table.php:1462
 #, fuzzy
@@ -12908,10 +12934,9 @@ msgid "Error creating foreign key on %1$s (check data types)"
 msgstr ""
 
 #: libraries/classes/Template.php:127
-#, fuzzy, php-format
-#| msgid "Error while moving uploaded file."
+#, php-format
 msgid "Error while working with template cache: %s"
-msgstr "ข้อผิดพลาดขณะเคลื่อนย้ายไฟล์อัพโหลด"
+msgstr "เกิดข้อผิดพลาดขณะทำงานกับแคชต้นแบบ: %s"
 
 #: libraries/classes/Theme.php:186
 #, php-format
@@ -13050,16 +13075,14 @@ msgid "Tracking report for table `%s`"
 msgstr ""
 
 #: libraries/classes/Tracking.php:891
-#, fuzzy, php-format
-#| msgid "Tracking is active."
+#, php-format
 msgid "Tracking for %1$s was activated at version %2$s."
-msgstr "การติดตามเริ่มทำงานแล้ว"
+msgstr "การติดตามสำหรับ %1$s ถูกเปิดใช้งานในเวอร์ชัน %2$s"
 
 #: libraries/classes/Tracking.php:894
-#, fuzzy, php-format
-#| msgid "Tracking is active."
+#, php-format
 msgid "Tracking for %1$s was deactivated at version %2$s."
-msgstr "การติดตามเริ่มทำงานแล้ว"
+msgstr "การติดตามสำหรับ %1$s ถูกปิดใช้งานในเวอร์ชัน %2$s"
 
 #: libraries/classes/Tracking.php:986
 #, fuzzy, php-format
@@ -13127,12 +13150,16 @@ msgid ""
 "A fixed-point number (M, D) - the maximum number of digits (M) is 65 "
 "(default 10), the maximum number of decimals (D) is 30 (default 0)"
 msgstr ""
+"ตัวเลขแบบจุดคงที่ (M, D) - จำนวนหลักสูงสุด (M) คือ 65 (ค่าเริ่มต้นคือ 10) จำนวนจุดทศนิยมสูงสุ"
+"ด (D) คือ 30 (ค่าเริ่มต้นคือ 0)"
 
 #: libraries/classes/Types.php:236
 msgid ""
 "A small floating-point number, allowable values are -3.402823466E+38 to "
 "-1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38"
 msgstr ""
+"จำนวนทศนิยมขนาดเล็ก ค่าที่อนุญาตคือ -3.402823466E+38 ถึง -1.175494351E-38, 0 และ "
+"1.175494351E-38 ถึง 3.402823466E+38"
 
 #: libraries/classes/Types.php:242
 msgid ""
@@ -13140,71 +13167,82 @@ msgid ""
 "-1.7976931348623157E+308 to -2.2250738585072014E-308, 0, and "
 "2.2250738585072014E-308 to 1.7976931348623157E+308"
 msgstr ""
+"เลขทศนิยมความแม่นยำสูง ค่าที่อนุญาตคือ ตั้งแต่ -1.7976931348623157E+308 ถึง -"
+"2.2250738585072014E-308, 0 และ 2.2250738585072014E-308 ถึง "
+"1.7976931348623157E+308"
 
 #: libraries/classes/Types.php:248
 msgid ""
 "Synonym for DOUBLE (exception: in REAL_AS_FLOAT SQL mode it is a synonym for "
 "FLOAT)"
 msgstr ""
+"คำพ้องความหมายของ DOUBLE (ยกเว้น: ในโหมด SQL REAL_AS_FLOAT คำพ้องความหมายของ "
+"FLOAT)"
 
 #: libraries/classes/Types.php:253
 msgid ""
 "A bit-field type (M), storing M of bits per value (default is 1, maximum is "
 "64)"
 msgstr ""
+"ชนิดข้อมูลบิตฟิลด์ (M) สำหรับจัดเก็บค่าแต่ละค่าด้วยบิตจำนวน M บิต (ค่าเริ่มต้นคือ 1 ค่าสูงสุดคือ 64)"
 
 #: libraries/classes/Types.php:258
 msgid ""
 "A synonym for TINYINT(1), a value of zero is considered false, nonzero "
 "values are considered true"
 msgstr ""
+"คำพ้องความหมายของ TINYINT(1) ค่าศูนย์ถือว่าเป็นเท็จ ค่าที่ไม่ใช่ศูนย์ถือว่าเป็นจริง"
 
 #: libraries/classes/Types.php:262
 msgid "An alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE"
-msgstr ""
+msgstr "นามแฝงของ BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE"
 
 #: libraries/classes/Types.php:265
 #, php-format
 msgid "A date, supported range is %1$s to %2$s"
-msgstr "วันเวลา ช่วงที่ได้รับการสนับสนุน %1$s ถึง %2$s"
+msgstr "วันที่ ช่วงวันที่ที่รองรับคือ %1$s ถึง %2$s"
 
 #: libraries/classes/Types.php:270
 #, php-format
 msgid "A date and time combination, supported range is %1$s to %2$s"
-msgstr ""
+msgstr "รูปแบบวันที่พร้อมเวลาที่รองรับคือช่วง %1$s ถึง %2$s"
 
 #: libraries/classes/Types.php:275
 msgid ""
 "A timestamp, range is 1970-01-01 00:00:01 UTC to 2038-01-09 03:14:07 UTC, "
 "stored as the number of seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgstr ""
+"เวลาประทับ ช่วงเวลาคือ 1970-01-01 00:00:01 UTC ถึง 2038-01-09 03:14:07 UTC โดยจัดเ"
+"ก็บเป็นจำนวนวินาทีตั้งแต่ยุคเริ่มต้น (1970-01-01 00:00:00 UTC)"
 
 #: libraries/classes/Types.php:281
-#, fuzzy, php-format
-#| msgid "Error renaming table %1$s to %2$s"
+#, php-format
 msgid "A time, range is %1$s to %2$s"
-msgstr "มีข้อผิดพลาดจากเปลี่ยนชื่อตาราง %1$s เป็น %2$s"
+msgstr "เวลา ช่วงเวลาคือ %1$s ถึง %2$s"
 
 #: libraries/classes/Types.php:285
 msgid ""
 "A year in four-digit (4, default) or two-digit (2) format, the allowable "
 "values are 70 (1970) to 69 (2069) or 1901 to 2155 and 0000"
 msgstr ""
+"ปีในรูปแบบสี่หลัก (4, ค่าเริ่มต้น) หรือสองหลัก (2) ค่าที่อนุญาตคือ 70 (1970) ถึง 69 (2069) หรื"
+"อ 1901 ถึง 2155 และ 0000"
 
 #: libraries/classes/Types.php:291
 msgid ""
 "A fixed-length (0-255, default 1) string that is always right-padded with "
 "spaces to the specified length when stored"
 msgstr ""
+"สตริงความยาวคงที่ (0-255 ค่าเริ่มต้นคือ 1) ที่จะถูกเติมช่องว่างด้านขวาให้ครบตามความยาวที่ระบุเสม"
+"อเมื่อจัดเก็บ"
 
 #: libraries/classes/Types.php:297
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "A variable-length (%s) string, the effective maximum length is subject to "
 "the maximum row size"
 msgstr ""
-"﻿คุณคงไม่ได้สร้างแฟ้มการกำหนดค่า คุณอาจต้องการใช้ %1$ssetup script%2$s "
-"เพื่อสร้างอย่างใดอย่างหนึ่ง"
+"สตริงที่มีความยาวแปรผัน (%s) ความยาวสูงสุดที่ใช้งานได้จริงนั้นขึ้นอยู่กับขนาดแถวสูงสุด"
 
 #: libraries/classes/Types.php:303
 msgid ""
@@ -13290,28 +13328,27 @@ msgid ""
 "An enumeration, chosen from the list of up to 65,535 values or the special "
 "'' error value"
 msgstr ""
+"การนับค่า ค่าที่เลือกจากรายการค่าสูงสุด 65,535 ค่า หรือค่าพิเศษ '' ที่ผิดพลาด"
 
 #: libraries/classes/Types.php:363
 msgid "A single value chosen from a set of up to 64 members"
-msgstr ""
+msgstr "ค่าเดี่ยวที่ถูกเลือกจากชุดค่าที่มีสมาชิกได้มากถึง 64 ค่า"
 
 #: libraries/classes/Types.php:365
 msgid "A type that can store a geometry of any type"
-msgstr ""
+msgstr "ประเภทที่สามารถจัดเก็บรูปทรงเรขาคณิตได้ทุกประเภท"
 
 #: libraries/classes/Types.php:367
 msgid "A point in 2-dimensional space"
-msgstr ""
+msgstr "จุดในพื้นที่ 2 มิติ"
 
 #: libraries/classes/Types.php:369
 msgid "A curve with linear interpolation between points"
-msgstr ""
+msgstr "เส้นโค้งที่มีการประมาณค่าเชิงเส้นระหว่างจุดต่าง ๆ"
 
 #: libraries/classes/Types.php:371
-#, fuzzy
-#| msgid "Add a polygon"
 msgid "A polygon"
-msgstr "เพิ่มรูปหลายเหลี่ยม"
+msgstr "รูปหลายเหลี่ยม"
 
 #: libraries/classes/Types.php:373
 msgid "A collection of points"
@@ -14064,10 +14101,9 @@ msgid "No row selected."
 msgstr "ยังไม่ได้เลือกแถว"
 
 #: tbl_tracking.php:34
-#, fuzzy, php-format
-#| msgid "Tracking is active."
+#, php-format
 msgid "Tracking of %s is activated."
-msgstr "การติดตามเริ่มทำงานแล้ว"
+msgstr "การติดตามค่า %s ถูกเปิดใช้งานแล้ว"
 
 #: tbl_tracking.php:103
 #, fuzzy
@@ -14486,9 +14522,9 @@ msgid "Drop the databases that have the same names as the users."
 msgstr "โยนฐานข้อมูลที่มีชื่อเดียวกับผู้ใช้ทิ้ง."
 
 #: templates/table/structure/add_column.twig:9
-#, fuzzy, php-format
+#, php-format
 msgid "Add %s column(s)"
-msgstr "เพิ่มฟิลด์ใหม่"
+msgstr "เพิ่ม %s คอลัมน์"
 
 #: templates/table/structure/add_column.twig:14
 #, fuzzy
@@ -14516,11 +14552,9 @@ msgid "See table structure"
 msgstr "โครงสร้างของตาราง"
 
 #: templates/database/designer/database_tables.twig:91
-#, fuzzy, php-format
-#| msgctxt "Create SELECT … query"
-#| msgid "Select"
+#, php-format
 msgid "Select \"%s\""
-msgstr "เลือกทั้งหมด"
+msgstr "เลือก \"%s\""
 
 #: templates/database/designer/database_tables.twig:126
 #, php-format
@@ -14914,10 +14948,9 @@ msgid "Note: Setting these options to 0 (zero) removes the limit."
 msgstr "โปรดทราบ: ถ้าเปลี่ยนค่าเหล่านี้เป็น 0 (ศูนย์) จะหมายถึง ไม่มีขีดจำกัด."
 
 #: templates/database/structure/show_create_row.twig:7
-#, fuzzy, php-format
-#| msgid "Create User"
+#, php-format
 msgid "Create %s"
-msgstr "รุ่นของเซิร์ฟเวอร์"
+msgstr "สร้าง %s"
 
 #: templates/database/tracking/tracked_tables.twig:2
 msgid "Tracked tables"
@@ -14979,10 +15012,9 @@ msgid "Create version %1$s of %2$s"
 msgstr "สร้างเวอร์ชั่น %1$s ของ %2$s"
 
 #: templates/table/tracking/create_version.twig:16
-#, fuzzy, php-format
-#| msgid "Create version"
+#, php-format
 msgid "Create version %1$s"
-msgstr "สร้างเวอร์ชั่น"
+msgstr "สร้างเวอร์ชัน %1$s"
 
 #: templates/table/tracking/create_version.twig:20
 msgid "Track these data definition statements:"
@@ -15019,10 +15051,9 @@ msgid "As defined:"
 msgstr ""
 
 #: templates/server/databases/table_row.twig:13
-#, fuzzy, php-format
-#| msgid "Jump to database"
+#, php-format
 msgid "Jump to database '%s'"
-msgstr "ข้ามไปยังฐานข้อมูล"
+msgstr "ข้ามไปยังฐานข้อมูล '%s'"
 
 #: templates/server/databases/table_row.twig:63
 #, php-format
@@ -15200,10 +15231,9 @@ msgid "Activate now"
 msgstr ""
 
 #: templates/table/tracking/activate_deactivate.twig:11
-#, fuzzy, php-format
-#| msgid "Delete tracking data for this table"
+#, php-format
 msgid "Deactivate tracking for %s"
-msgstr "ลบการติดตามตารางนี้"
+msgstr "ปิดใช้งานการติดตามสำหรับ %s"
 
 #: templates/table/tracking/activate_deactivate.twig:13
 msgid "Deactivate now"
@@ -15374,10 +15404,9 @@ msgid "disabled"
 msgstr "ปิดใช้งาน"
 
 #: templates/table/relation/foreign_key_row.twig:15
-#, fuzzy, php-format
-#| msgid "Foreign key check:"
+#, php-format
 msgid "Foreign key constraint %s has been dropped"
-msgstr "ตรวจสอบคีย์ต่างประเทศ:"
+msgstr "ข้อจำกัดคีย์นอก %s ถูกลบออกแล้ว"
 
 #: templates/table/relation/foreign_key_row.twig:38
 #, fuzzy
@@ -15419,14 +15448,14 @@ msgid "Importing into the current server"
 msgstr "การนำเข้าฐานข้อมูลสู่เซิร์ฟเวอร์ปัจจุบัน"
 
 #: templates/display/import/import.twig:42
-#, fuzzy, php-format
+#, php-format
 msgid "Importing into the database \"%s\""
-msgstr "ไม่มีฐานข้อมูล"
+msgstr "กำลังนำเข้าสู่ฐานข้อมูล \"%s\""
 
 #: templates/display/import/import.twig:44
-#, fuzzy, php-format
+#, php-format
 msgid "Importing into the table \"%s\""
-msgstr "ไม่มีฐานข้อมูล"
+msgstr "นำเข้าสู่ตาราง \"%s\""
 
 #: templates/display/import/import.twig:50
 #, fuzzy
@@ -16559,17 +16588,13 @@ msgstr ""
 "า 100 ครั้งต่อวินาที"
 
 #: libraries/advisory_rules_generic.txt:154
-#, fuzzy
-#| msgid "Allows creating temporary tables."
 msgid "Percentage of sorts that cause temporary tables"
-msgstr "อนุญาตให้สร้างตารางชั่วคราว."
+msgstr "เปอร์เซ็นต์ของการเรียงลำดับที่ทำให้เกิดตารางชั่วคราว"
 
 #: libraries/advisory_rules_generic.txt:157
 #: libraries/advisory_rules_generic.txt:164
-#, fuzzy
-#| msgid "Allows creating temporary tables."
 msgid "Too many sorts are causing temporary tables."
-msgstr "อนุญาตให้สร้างตารางชั่วคราว."
+msgstr "การเรียงลำดับมากเกินไปทำให้เกิดตารางชั่วคราว"
 
 #: libraries/advisory_rules_generic.txt:158
 #: libraries/advisory_rules_generic.txt:165
@@ -16577,35 +16602,33 @@ msgid ""
 "Consider increasing {sort_buffer_size} and/or {read_rnd_buffer_size}, "
 "depending on your system memory limits."
 msgstr ""
+"ควรพิจารณาเพิ่มขนาด {sort_buffer_size} และ/หรือ {read_rnd_buffer_size} ขึ้นอยู่กับข้อจำ"
+"กัดของหน่วยความจำในระบบของคุณ"
 
 #: libraries/advisory_rules_generic.txt:159
 #, php-format
 msgid ""
 "%s%% of all sorts cause temporary tables, this value should be lower than "
 "10%%."
-msgstr ""
+msgstr "%s%% ทุกประเภททำให้เกิดตารางชั่วคราว ค่านี้ควรต่ำกว่า 10%%"
 
 #: libraries/advisory_rules_generic.txt:161
-#, fuzzy
-#| msgid "Allows creating temporary tables."
 msgid "Rate of sorts that cause temporary tables"
-msgstr "อนุญาตให้สร้างตารางชั่วคราว."
+msgstr "อัตราการเรียงลำดับที่ทำให้เกิดตารางชั่วคราว"
 
 #: libraries/advisory_rules_generic.txt:166
 #, php-format
 msgid ""
 "Temporary tables average: %s, this value should be less than 1 per hour."
-msgstr ""
+msgstr "ตารางชั่วคราวโดยเฉลี่ย: %s ค่านี้ควรน้อยกว่า 1 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:168
-#, fuzzy
-#| msgid "Start"
 msgid "Sort rows"
-msgstr "ส."
+msgstr "เรียงลำดับแถว"
 
 #: libraries/advisory_rules_generic.txt:171
 msgid "There are lots of rows being sorted."
-msgstr ""
+msgstr "มีการจัดเรียงข้อมูลหลายแถว"
 
 #: libraries/advisory_rules_generic.txt:172
 msgid ""
@@ -16614,46 +16637,43 @@ msgid ""
 "indexed columns in the ORDER BY clause, as this will result in much faster "
 "sorting."
 msgstr ""
+"แม้ว่าการเรียงลำดับแถวจำนวนมากจะไม่ใช่เรื่องผิดอะไร แต่คุณอาจต้องการตรวจสอบให้แน่ใจว่าคำสั่งที่ต้"
+"องการการเรียงลำดับจำนวนมากนั้นใช้คอลัมน์ที่มีดัชนีในส่วน ORDER BY เนื่องจากจะทำให้การเรียงลำดับ"
+"เร็วขึ้นมาก"
 
 #: libraries/advisory_rules_generic.txt:173
 #, php-format
 msgid "Sorted rows average: %s"
-msgstr ""
+msgstr "ค่าเฉลี่ยของแถวที่เรียงลำดับ: %s"
 
 #: libraries/advisory_rules_generic.txt:176
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "Rate of joins without indexes"
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "อัตราการร่วมกันโดยปราศจากดัชนี"
 
 #: libraries/advisory_rules_generic.txt:179
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "There are too many joins without indexes."
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "มีการร่วมกันมากเกินไปโดยไม่ปราศจากดัชนี"
 
 #: libraries/advisory_rules_generic.txt:180
 msgid ""
 "This means that joins are doing full table scans. Adding indexes for the "
 "columns being used in the join conditions will greatly speed up table joins."
 msgstr ""
+"นั่นหมายความว่าการร่วมกันจะทำการสแกนตารางทั้งหมด การเพิ่มดัชนีสำหรับคอลัมน์ที่ใช้ในเงื่อนไขการเชื่"
+"อมตารางจะช่วยเพิ่มความเร็วในการเชื่อมตารางได้อย่างมาก"
 
 #: libraries/advisory_rules_generic.txt:181
 #, php-format
 msgid "Table joins average: %s, this value should be less than 1 per hour"
-msgstr ""
+msgstr "ค่าเฉลี่ยของการเชื่อมตาราง: %s ค่านี้ควรน้อยกว่า 1 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:183
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "Rate of reading first index entry"
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "อัตราการอ่านรายการดัชนีแรก"
 
 #: libraries/advisory_rules_generic.txt:186
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "The rate of reading the first index entry is high."
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "อัตราการอ่านรายการดัชนีแรกนั้นสูง"
 
 #: libraries/advisory_rules_generic.txt:187
 msgid ""
@@ -16664,21 +16684,24 @@ msgid ""
 "scans. Other than that full index scans can only be reduced by rewriting "
 "queries."
 msgstr ""
+"โดยปกติแล้ว นี่บ่งชี้ว่ามีการสแกนดัชนีเต็มรูปแบบบ่อยครั้ง การสแกนดัชนีแบบเต็มรูปแบบเร็วกว่าการสแกนต"
+"าราง แต่ต้องใช้รอบการทำงานของ CPU จำนวนมากในตารางขนาดใหญ่ หากตารางเหล่านั้นมีการ "
+"UPDATE และ DELETE ข้อมูลจำนวนมาก การเรียกใช้ 'OPTIMIZE TABLE' อาจช่วยลดปริมาณและ/หรื"
+"อเพิ่มความเร็วในการสแกนดัชนีแบบเต็มรูปแบบได้ นอกเหนือจากนั้น การสแกนดัชนีแบบเต็มรูปแบบสามารถ"
+"ลดลงได้โดยการเขียนคำสั่ง SQL ใหม่เท่านั้น"
 
 #: libraries/advisory_rules_generic.txt:188
 #, php-format
 msgid "Index scans average: %s, this value should be less than 1 per hour"
-msgstr ""
+msgstr "การสแกนดัชนีโดยเฉลี่ย: %s ค่านี้ควรน้อยกว่า 1 ครั้งต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:190
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "Rate of reading fixed position"
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "อัตราการอ่านตำแหน่งคงที่"
 
 #: libraries/advisory_rules_generic.txt:193
 msgid "The rate of reading data from a fixed position is high."
-msgstr ""
+msgstr "อัตราการอ่านข้อมูลจากตำแหน่งคงที่นั้นสูง"
 
 #: libraries/advisory_rules_generic.txt:194
 msgid ""
@@ -16686,6 +16709,8 @@ msgid ""
 "scan, including join queries that do not use indexes. Add indexes where "
 "applicable."
 msgstr ""
+"นี่แสดงว่าคำสั่งจำนวนมากจำเป็นต้องจัดเรียงผลลัพธ์และ/หรือทำการสแกนตารางเต็มรูปแบบ รวมถึงคำสั่ง"
+"การเชื่อมต่อที่ไม่ใช้ดัชนี โปรดเพิ่มดัชนีในกรณีที่จำเป็น"
 
 #: libraries/advisory_rules_generic.txt:195
 #, php-format
@@ -16693,36 +16718,36 @@ msgid ""
 "Rate of reading fixed position average: %s, this value should be less than 1 "
 "per hour"
 msgstr ""
+"อัตราการอ่านตำแหน่งคงที่โดยเฉลี่ย: %s ค่านี้ควรน้อยกว่า 1 ครั้งต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:197
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "Rate of reading next table row"
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "อัตราการอ่านแถวถัดไปของตาราง"
 
 #: libraries/advisory_rules_generic.txt:200
 msgid "The rate of reading the next table row is high."
-msgstr ""
+msgstr "อัตราการอ่านแถวถัดไปในตารางนั้นสูง"
 
 #: libraries/advisory_rules_generic.txt:201
 msgid ""
 "This indicates that many queries are doing full table scans. Add indexes "
 "where applicable."
 msgstr ""
+"นี่แสดงว่ามีคำสั่งจำนวนมากที่ทำการสแกนตารางเต็มรูปแบบ ควรเพิ่มดัชนีในกรณีที่จำเป็น"
 
 #: libraries/advisory_rules_generic.txt:202
 #, php-format
 msgid ""
 "Rate of reading next table row: %s, this value should be less than 1 per hour"
-msgstr ""
+msgstr "อัตราการอ่านแถวถัดไปในตาราง: %s ค่านี้ควรน้อยกว่า 1 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:205
 msgid "Different tmp_table_size and max_heap_table_size"
-msgstr ""
+msgstr "tmp_table_size และ max_heap_table_size ที่แตกต่างกัน"
 
 #: libraries/advisory_rules_generic.txt:208
 msgid "{tmp_table_size} and {max_heap_table_size} are not the same."
-msgstr ""
+msgstr "{tmp_table_size} และ {max_heap_table_size} ไม่เหมือนกัน"
 
 #: libraries/advisory_rules_generic.txt:209
 msgid ""
@@ -16731,24 +16756,25 @@ msgid ""
 "wish to increase the in-memory table limit you will have to increase the "
 "other value as well."
 msgstr ""
+"หากคุณจงใจเปลี่ยนแปลงค่าใดค่าหนึ่ง: เซิร์ฟเวอร์จะใช้ค่าที่ต่ำกว่าในการกำหนดขนาดสูงสุดของตารางใน"
+"หน่วยความจำ ดังนั้นหากคุณต้องการเพิ่มขีดจำกัดของตารางในหน่วยความจำ คุณจะต้องเพิ่มค่าอีกค่าหนึ่งด้ว"
+"ยเช่นกัน"
 
 #: libraries/advisory_rules_generic.txt:210
 #, php-format
 msgid "Current values are tmp_table_size: %s, max_heap_table_size: %s"
-msgstr ""
+msgstr "ค่าปัจจุบันคือ tmp_table_size: %s, max_heap_table_size: %s"
 
 #: libraries/advisory_rules_generic.txt:212
-#, fuzzy
-#| msgid "Table of contents"
 msgid "Percentage of temp tables on disk"
-msgstr "สารบัญ"
+msgstr "เปอร์เซ็นต์ของตารางชั่วคราวบนดิสก์"
 
 #: libraries/advisory_rules_generic.txt:215
 #: libraries/advisory_rules_generic.txt:222
 msgid ""
 "Many temporary tables are being written to disk instead of being kept in "
 "memory."
-msgstr ""
+msgstr "ตารางชั่วคราวจำนวนมากถูกเขียนลงดิสก์แทนที่จะเก็บไว้ในหน่วยความจำ"
 
 #: libraries/advisory_rules_generic.txt:216
 msgid ""
@@ -16762,8 +16788,8 @@ msgid ""
 msgstr ""
 "การเพิ่มค่า {max_heap_table_size} และ {tmp_table_size} อาจช่วยได้ อย่างไรก็ตาม บางตา"
 "รางชั่วคราวจะถูกเขียนลงดิสก์เสมอ โดยไม่ขึ้นอยู่กับค่าของตัวแปรเหล่านี้ ในการกำจัดตารางชั่วคราวเหล่"
-"านี้ คุณจำเป็นต้องเขียนคำสั่ง SQL ใหม่เพื่อหลีกเลี่ยงเงื่อนไขเหล่านั้น (ภายในตารางชั่วคราว: การมีคอ"
-"ลัมน์ BLOB หรือ TEXT หรือการมีคอลัมน์ที่มีขนาดใหญ่กว่า 512 ไบต์) ดังที่กล่าวไว้ในตอนต้นของ <a "
+"านี้ คุณจำเป็นต้องเขียนคำสั่งใหม่เพื่อหลีกเลี่ยงเงื่อนไขเหล่านั้น (ภายในตารางชั่วคราว: การมีคอลัมน์ "
+"BLOB หรือ TEXT หรือการมีคอลัมน์ที่มีขนาดใหญ่กว่า 512 ไบต์) ดังที่กล่าวไว้ในตอนต้นของ <a "
 "href=\"https://www.facebook.com/"
 "note.php?note_id=10150111255065841&comments\">บทความโดยกลุ่ม Pythian</a>"
 
@@ -16772,14 +16798,11 @@ msgstr ""
 msgid ""
 "%s%% of all temporary tables are being written to disk, this value should be "
 "below 25%%"
-msgstr ""
+msgstr "%s%% ของตารางชั่วคราวทั้งหมดถูกเขียนลงดิสก์ ค่านี้ควรต่ำกว่า 25%%"
 
 #: libraries/advisory_rules_generic.txt:219
-#, fuzzy
-#| msgid "%s table"
-#| msgid_plural "%s tables"
 msgid "Temp disk rate"
-msgstr "%s ตาราง"
+msgstr "อัตราดิสก์ชั่วคราว"
 
 #: libraries/advisory_rules_generic.txt:223
 msgid ""
@@ -16793,8 +16816,8 @@ msgid ""
 msgstr ""
 "การเพิ่มค่า {max_heap_table_size} และ {tmp_table_size} อาจช่วยได้ อย่างไรก็ตาม บางตา"
 "รางชั่วคราวจะถูกเขียนลงดิสก์เสมอ โดยไม่ขึ้นอยู่กับค่าของตัวแปรเหล่านี้ ในการกำจัดตารางชั่วคราวเหล่"
-"านี้ คุณจะต้องเขียนคำสั่ง SQL ใหม่เพื่อหลีกเลี่ยงเงื่อนไขเหล่านั้น (ภายในตารางชั่วคราว: การมีคอลัม"
-"น์ BLOB หรือ TEXT หรือการมีคอลัมน์ที่มีขนาดใหญ่กว่า 512 ไบต์) ตามที่ระบุไว้ใน <a "
+"านี้ คุณจะต้องเขียนคำสั่งใหม่เพื่อหลีกเลี่ยงเงื่อนไขเหล่านั้น (ภายในตารางชั่วคราว: การมีคอลัมน์ "
+"BLOB หรือ TEXT หรือการมีคอลัมน์ที่มีขนาดใหญ่กว่า 512 ไบต์) ตามที่ระบุไว้ใน <a "
 "href=\"https://dev.mysql.com/doc/refman/5.5/en/internal-temporary-"
 "tables.html\">เอกสารประกอบ MySQL</a>"
 
@@ -16804,36 +16827,37 @@ msgid ""
 "Rate of temporary tables being written to disk: %s, this value should be "
 "less than 1 per hour"
 msgstr ""
+"อัตราการเขียนตารางชั่วคราวลงดิสก์: %s ค่านี้ควรน้อยกว่า 1 ครั้งต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:228
-#, fuzzy
 msgid "MyISAM key buffer size"
-msgstr "แสดงคำค้นแบบเต็ม"
+msgstr "ขนาดบัฟเฟอร์คีย์ MyISAM"
 
 #: libraries/advisory_rules_generic.txt:231
 msgid "Key buffer is not initialized. No MyISAM indexes will be cached."
-msgstr ""
+msgstr "บัฟเฟอร์คีย์ยังไม่ได้เริ่มต้นใช้งาน จะไม่มีการแคชดัชนี MyISAM"
 
 #: libraries/advisory_rules_generic.txt:232
 msgid ""
 "Set {key_buffer_size} depending on the size of your MyISAM indexes. 64M is a "
 "good start."
 msgstr ""
+"ตั้งค่า {key_buffer_size} ตามขนาดของดัชนี MyISAM ของคุณ ขนาด 64M เป็นค่าเริ่มต้นที่ดี"
 
 #: libraries/advisory_rules_generic.txt:233
 msgid "key_buffer_size is 0"
-msgstr ""
+msgstr "key_buffer_size คือ 0"
 
 #: libraries/advisory_rules_generic.txt:235
-#, fuzzy, php-format
+#, php-format
 msgid "Max %% MyISAM key buffer ever used"
-msgstr "แสดงคำค้นแบบเต็ม"
+msgstr "บัฟเฟอร์คีย์ MyISAM %% สูงสุดที่เคยใช้"
 
 #: libraries/advisory_rules_generic.txt:238
 #: libraries/advisory_rules_generic.txt:246
 #, php-format
 msgid "MyISAM key buffer (index cache) %% used is low."
-msgstr ""
+msgstr "บัฟเฟอร์คีย์ MyISAM (แคชดัชนี) %% ที่ใช้นั้นต่ำ"
 
 #: libraries/advisory_rules_generic.txt:239
 #: libraries/advisory_rules_generic.txt:247
@@ -16842,74 +16866,74 @@ msgid ""
 "tables to see if indexes have been removed, or examine queries and "
 "expectations about what indexes are being used."
 msgstr ""
+"คุณอาจจำเป็นต้องลดขนาดของ {key_buffer_size} ตรวจสอบตารางของคุณอีกครั้งเพื่อดูว่าดัชนีถูกลบไ"
+"ป หรือตรวจสอบคำสั่งและความคาดหวังเกี่ยวกับดัชนีที่กำลังใช้งานอยู่"
 
 #: libraries/advisory_rules_generic.txt:240
 #, php-format
 msgid ""
 "max %% MyISAM key buffer ever used: %s%%, this value should be above 95%%"
-msgstr ""
+msgstr "บัฟเฟอร์คีย์ MyISAM %% สูงสุดที่เคยใช้: %s%% ค่านี้ควรสูงกว่า 95%%"
 
 #: libraries/advisory_rules_generic.txt:243
-#, fuzzy
 msgid "Percentage of MyISAM key buffer used"
-msgstr "แสดงคำค้นแบบเต็ม"
+msgstr "เปอร์เซ็นต์ของบัฟเฟอร์คีย์ MyISAM ที่ใช้ไป"
 
 #: libraries/advisory_rules_generic.txt:248
 #, php-format
 msgid "%% MyISAM key buffer used: %s%%, this value should be above 95%%"
-msgstr ""
+msgstr "%% บัฟเฟอร์คีย์ MyISAM ที่ใช้: %s%% ค่านี้ควรสูงกว่า 95%%"
 
 #: libraries/advisory_rules_generic.txt:250
-#, fuzzy
 msgid "Percentage of index reads from memory"
-msgstr "แสดงคำค้นแบบเต็ม"
+msgstr "เปอร์เซ็นต์ของการอ่านดัชนีจากหน่วยความจำ"
 
 #: libraries/advisory_rules_generic.txt:253
 #, php-format
 msgid "The %% of indexes that use the MyISAM key buffer is low."
-msgstr ""
+msgstr "จำนวน %% ของดัชนีที่ใช้บัฟเฟอร์คีย์ MyISAM นั้นต่ำ"
 
 #: libraries/advisory_rules_generic.txt:254
 msgid "You may need to increase {key_buffer_size}."
-msgstr ""
+msgstr "คุณอาจต้องเพิ่ม {key_buffer_size}"
 
 #: libraries/advisory_rules_generic.txt:255
 #, php-format
 msgid "Index reads from memory: %s%%, this value should be above 95%%"
-msgstr ""
+msgstr "ค่าดัชนีที่อ่านจากหน่วยความจำ: %s%%, ค่านี้ควรสูงกว่า 95%%"
 
 #: libraries/advisory_rules_generic.txt:259
-#, fuzzy
-#| msgid "Table of contents"
 msgid "Rate of table open"
-msgstr "สารบัญ"
+msgstr "อัตราตารางที่เปิด"
 
 #: libraries/advisory_rules_generic.txt:262
 msgid "The rate of opening tables is high."
-msgstr ""
+msgstr "อัตราการเปิดตารางสูง"
 
 #: libraries/advisory_rules_generic.txt:263
 msgid ""
 "Opening tables requires disk I/O which is costly. Increasing "
 "{table_open_cache} might avoid this."
 msgstr ""
+"การเปิดตารางต้องใช้การอ่านเขียนข้อมูลจากดิสก์ ซึ่งใช้ทรัพยากรสูง การเพิ่มค่า "
+"{table_open_cache} อาจช่วยหลีกเลี่ยงปัญหานี้ได้"
 
 #: libraries/advisory_rules_generic.txt:264
 #, php-format
 msgid "Opened table rate: %s, this value should be less than 10 per hour"
-msgstr ""
+msgstr "อัตราตารางที่เปิด: %s ค่านี้ควรน้อยกว่า 10 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:266
-#, fuzzy
-#| msgid "Connections"
 msgid "Percentage of used open files limit"
-msgstr "การเชื่อมต่อ"
+msgstr "เปอร์เซ็นต์ของขีดจำกัดไฟล์ที่เปิดใช้"
 
 #: libraries/advisory_rules_generic.txt:269
 msgid ""
 "The number of open files is approaching the max number of open files.  You "
 "may get a \"Too many open files\" error."
 msgstr ""
+"จำนวนไฟล์ที่เปิดใกล้ถึงจำนวนสูงสุดแล้ว คุณอาจได้รับข้อความแสดงข้อผิดพลาด \"มีไฟล์เปิดอยู่มากเกินไ"
+"ป\""
 
 #: libraries/advisory_rules_generic.txt:270
 #: libraries/advisory_rules_generic.txt:277
@@ -16917,160 +16941,145 @@ msgid ""
 "Consider increasing {open_files_limit}, and check the error log when "
 "restarting after changing {open_files_limit}."
 msgstr ""
+"ลองพิจารณาเพิ่มค่า {open_files_limit} แล้วตรวจสอบบันทึกข้อผิดพลาดเมื่อรีสตาร์ทหลังจากเปลี่ยนค่"
+"า {open_files_limit} แล้ว"
 
 #: libraries/advisory_rules_generic.txt:271
 #, php-format
 msgid ""
 "The number of opened files is at %s%% of the limit. It should be below 85%%"
-msgstr ""
+msgstr "มีจำนวนไฟล์ที่เปิดอยู่ถึง %s%% ของขีดจำกัดแล้ว ควรต่ำกว่า 85%%"
 
 #: libraries/advisory_rules_generic.txt:273
-#, fuzzy
-#| msgid "% open files"
 msgid "Rate of open files"
-msgstr "แสดงตาราง"
+msgstr "อัตราการเปิดไฟล์"
 
 #: libraries/advisory_rules_generic.txt:276
-#, fuzzy
-#| msgid "% open files"
 msgid "The rate of opening files is high."
-msgstr "แสดงตาราง"
+msgstr "อัตราการเปิดไฟล์นั้นสูง"
 
 #: libraries/advisory_rules_generic.txt:278
 #, php-format
 msgid "Opened files rate: %s, this value should be less than 5 per hour"
-msgstr ""
+msgstr "อัตราการเปิดไฟล์: %s ค่านี้ควรน้อยกว่า 5 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:280
-#, fuzzy, php-format
-#| msgid "Create table on database %s"
+#, php-format
 msgid "Immediate table locks %%"
-msgstr "สร้างตารางในฐานข้อมูลนี้ %%"
+msgstr "การล็อกตารางทันที %%"
 
 #: libraries/advisory_rules_generic.txt:283
 #: libraries/advisory_rules_generic.txt:290
 msgid "Too many table locks were not granted immediately."
-msgstr ""
+msgstr "ตารางถูกล็อกไว้มากมายไม่ได้รับการอนุมัติทันที"
 
 #: libraries/advisory_rules_generic.txt:284
 #: libraries/advisory_rules_generic.txt:291
 msgid "Optimize queries and/or use InnoDB to reduce lock wait."
-msgstr ""
+msgstr "ปรับปรุงประสิทธิภาพคำสั่งและ/หรือใช้ InnoDB เพื่อลดระยะเวลารอการล็อก"
 
 #: libraries/advisory_rules_generic.txt:285
 #, php-format
 msgid "Immediate table locks: %s%%, this value should be above 95%%"
-msgstr ""
+msgstr "การล็อกตารางทันที: %s%% ค่านี้ควรสูงกว่า 95%%"
 
 #: libraries/advisory_rules_generic.txt:287
 msgid "Table lock wait rate"
-msgstr ""
+msgstr "อัตราการรอตารางล็อก"
 
 #: libraries/advisory_rules_generic.txt:292
 #, php-format
 msgid "Table lock wait rate: %s, this value should be less than 1 per hour"
-msgstr ""
+msgstr "อัตราการรอตารางล็อก: %s ค่านี้ควรน้อยกว่า 1 ครั้งต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:294
-#, fuzzy
 msgid "Thread cache"
-msgstr "ชนิดคำค้น"
+msgstr "แคชรอบการทำงาน"
 
 #: libraries/advisory_rules_generic.txt:297
 msgid ""
 "Thread cache is disabled, resulting in more overhead from new connections to "
 "MySQL."
 msgstr ""
+"แคชรอบการทำงานถูกปิดใช้งาน ส่งผลให้เกิดภาระงานเพิ่มขึ้นจากการเชื่อมต่อใหม่ไปยัง MySQL"
 
 #: libraries/advisory_rules_generic.txt:298
 msgid "Enable the thread cache by setting {thread_cache_size} > 0."
-msgstr ""
+msgstr "เปิดใช้งานแคชรอบการทำงานโดยตั้งค่า {thread_cache_size} > 0"
 
 #: libraries/advisory_rules_generic.txt:299
-#, fuzzy
-#| msgid "Tracking is not active."
 msgid "The thread cache is set to 0"
-msgstr "หยุดการติดตามแล้ว"
+msgstr "แคชรอบการทำงานถูกตั้งค่าเป็น 0"
 
 #: libraries/advisory_rules_generic.txt:301
-#, fuzzy, php-format
-#| msgid "Tracking is not active."
+#, php-format
 msgid "Thread cache hit rate %%"
-msgstr "หยุดการติดตามแล้ว"
+msgstr "อัตราการถึงแคชของรอบการทำงาน %%"
 
 #: libraries/advisory_rules_generic.txt:304
-#, fuzzy
-#| msgid "Tracking is not active."
 msgid "Thread cache is not efficient."
-msgstr "หยุดการติดตามแล้ว"
+msgstr "แคชรอบการทำงานไม่มีประสิทธิภาพ"
 
 #: libraries/advisory_rules_generic.txt:305
 msgid "Increase {thread_cache_size}."
-msgstr ""
+msgstr "เพิ่มค่า {thread_cache_size}"
 
 #: libraries/advisory_rules_generic.txt:306
 #, php-format
 msgid "Thread cache hitrate: %s%%, this value should be above 80%%"
-msgstr ""
+msgstr "อัตราการถึงแคชรอบการทำงาน: %s%% ค่านี้ควรสูงกว่า 80%%"
 
 #: libraries/advisory_rules_generic.txt:308
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "Threads that are slow to launch"
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "รอบการทำงานที่เริ่มต้นช้า"
 
 #: libraries/advisory_rules_generic.txt:311
-#, fuzzy
-#| msgid "Tracked tables"
 msgid "There are too many threads that are slow to launch."
-msgstr "ตารางที่ถูกติดตาม"
+msgstr "มีรอบการทำงานจำนวนมากที่เริ่มต้นทำงานช้าเกินไป"
 
 #: libraries/advisory_rules_generic.txt:312
 msgid ""
 "This generally happens in case of general system overload as it is pretty "
 "simple operations. You might want to monitor your system load carefully."
 msgstr ""
+"โดยทั่วไปแล้วเหตุการณ์นี้มักเกิดขึ้นในกรณีที่ระบบทำงานหนักเกินไป เนื่องจากเป็นการทำงานที่ค่อนข้างง่า"
+"ย คุณอาจต้องมอนิเตอร์ภาระการทำงานของระบบอย่างระมัดระวัง"
 
 #: libraries/advisory_rules_generic.txt:313
 #, php-format
 msgid "%s thread(s) took longer than %s seconds to start, it should be 0"
-msgstr ""
+msgstr "%s รอบการทำงานใช้เวลานานกว่า %s วินาทีในการเริ่มต้น ซึ่งควรจะเป็น 0"
 
 #: libraries/advisory_rules_generic.txt:315
 msgid "Slow launch time"
-msgstr ""
+msgstr "เวลาเปิดตัวช้า"
 
 #: libraries/advisory_rules_generic.txt:318
-#, fuzzy
-#| msgid "long_query_time is set to %d second(s)."
 msgid "Slow_launch_time is above 2s."
-msgstr "long_query_time ถูกตั้งไว้ที่ %d วินาที"
+msgstr "Slow_launch_time สูงกว่า 2 วินาที"
 
 #: libraries/advisory_rules_generic.txt:319
-#, fuzzy
-#| msgid "Tracked tables"
 msgid ""
 "Set {slow_launch_time} to 1s or 2s to correctly count threads that are slow "
 "to launch."
-msgstr "ตารางที่ถูกติดตาม"
+msgstr ""
+"ตั้งค่า {slow_launch_time} เป็น 1 หรือ 2 วินาที เพื่อนับจำนวนรอบการทำงานที่เริ่มต้นทำงานช้าอย่"
+"างถูกต้อง"
 
 #: libraries/advisory_rules_generic.txt:320
-#, fuzzy, php-format
-#| msgid "long_query_time is set to %d second(s)."
+#, php-format
 msgid "slow_launch_time is set to %s"
-msgstr "long_query_time ถูกตั้งไว้ที่ %d วินาที"
+msgstr "slow_launch_time ถูกตั้งค่าเป็น %s"
 
 #: libraries/advisory_rules_generic.txt:324
-#, fuzzy
-#| msgid "Connections"
 msgid "Percentage of used connections"
-msgstr "การเชื่อมต่อ"
+msgstr "เปอร์เซ็นต์ของการเชื่อมต่อที่ใช้แล้ว"
 
 #: libraries/advisory_rules_generic.txt:327
 msgid ""
 "The maximum amount of used connections is getting close to the value of "
 "{max_connections}."
-msgstr ""
+msgstr "จำนวนการเชื่อมต่อที่ใช้สูงสุดกำลังเข้าใกล้ค่า {max_connections} แล้ว"
 
 #: libraries/advisory_rules_generic.txt:328
 msgid ""
@@ -17078,25 +17087,24 @@ msgid ""
 "that do not close database handlers properly get killed sooner. Make sure "
 "the code closes database handlers properly."
 msgstr ""
+"เพิ่มค่า {max_connections} หรือลดค่า {wait_timeout} เพื่อให้การเชื่อมต่อที่ไม่ปิดตัวจัดการฐานข้"
+"อมูลอย่างถูกต้องถูกยุติเร็วขึ้น ตรวจสอบให้แน่ใจว่าโค้ดปิดตัวจัดการฐานข้อมูลอย่างถูกต้อง"
 
 #: libraries/advisory_rules_generic.txt:329
 #, php-format
 msgid ""
 "Max_used_connections is at %s%% of max_connections, it should be below 80%%"
 msgstr ""
+"Max_used_connections อยู่ที่ %s%% ของ max_connections ซึ่งควรจะต่ำกว่า 80%%"
 
 #: libraries/advisory_rules_generic.txt:331
-#, fuzzy
-#| msgid "Connections"
 msgid "Percentage of aborted connections"
-msgstr "การเชื่อมต่อ"
+msgstr "เปอร์เซ็นต์ของการเชื่อมต่อที่ถูกยกเลิก"
 
 #: libraries/advisory_rules_generic.txt:334
 #: libraries/advisory_rules_generic.txt:341
-#, fuzzy
-#| msgid "Too many clients are aborted."
 msgid "Too many connections are aborted."
-msgstr "การเข้าถึงด้วยไคลเอนต์มากเกินไปจะถูกยกเลิก"
+msgstr "มีการยกเลิกการเชื่อมต่อมากเกินไป"
 
 #: libraries/advisory_rules_generic.txt:335
 #: libraries/advisory_rules_generic.txt:342
@@ -17105,34 +17113,34 @@ msgid ""
 "\"https://www.percona.com/blog/2008/08/23/how-to-track-down-the-source-of-"
 "aborted_connects/\">This article</a> might help you track down the source."
 msgstr ""
+"การเชื่อมต่อมักถูกยกเลิกเมื่อไม่สามารถให้สิทธิ์ได้ <a href=\"https://www.percona.com/blog/"
+"2008/08/23/how-to-track-down-the-source-of-aborted_connects/\">บทความนี้</a> อา"
+"จช่วยคุณค้นหาต้นตอของปัญหาได้"
 
 #: libraries/advisory_rules_generic.txt:336
 #, php-format
 msgid "%s%% of all connections are aborted. This value should be below 1%%"
-msgstr ""
+msgstr "%s%% ของการเชื่อมต่อทั้งหมดถูกยกเลิก ค่านี้ควรต่ำกว่า 1%%"
 
 #: libraries/advisory_rules_generic.txt:338
-#, fuzzy
-#| msgid "Connections"
 msgid "Rate of aborted connections"
-msgstr "การเชื่อมต่อ"
+msgstr "อัตราการเชื่อมต่อที่ถูกยกเลิก"
 
 #: libraries/advisory_rules_generic.txt:343
 #, php-format
 msgid ""
 "Aborted connections rate is at %s, this value should be less than 1 per hour"
 msgstr ""
+"อัตราการเชื่อมต่อถูกยกเลิกอยู่ที่ %s ซึ่งค่านี้ควรน้อยกว่า 1 ครั้งต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:345
-#, fuzzy
-#| msgid "Table of contents"
 msgid "Percentage of aborted clients"
-msgstr "สารบัญ"
+msgstr "เปอร์เซ็นต์ของเครื่องลูกข่ายที่ยกเลิก"
 
 #: libraries/advisory_rules_generic.txt:348
 #: libraries/advisory_rules_generic.txt:355
 msgid "Too many clients are aborted."
-msgstr "การเข้าถึงด้วยไคลเอนต์มากเกินไปจะถูกยกเลิก"
+msgstr "เครื่องลูกข่ายจำนวนมากถูกยกเลิก"
 
 #: libraries/advisory_rules_generic.txt:349
 #: libraries/advisory_rules_generic.txt:356
@@ -17141,51 +17149,51 @@ msgid ""
 "MySQL properly. This can be due to network issues or code not closing a "
 "database handler properly. Check your network and code."
 msgstr ""
+"โดยปกติแล้ว การทำงานของเครื่องลูกข่ายจะถูกยกเลิกเมื่อไม่ได้ปิดการเชื่อมต่อกับ MySQL อย่างถูกต้อง "
+"ซึ่งอาจเกิดจากปัญหาเครือข่ายหรือโค้ดไม่ได้ปิดตัวจัดการฐานข้อมูลอย่างถูกต้อง ตรวจสอบเครือข่ายและโค้"
+"ดของคุณ"
 
 #: libraries/advisory_rules_generic.txt:350
 #, php-format
 msgid "%s%% of all clients are aborted. This value should be below 2%%"
-msgstr ""
+msgstr "%s%% ของเครื่องลูกข่ายทั้งหมดถูกยกเลิก ค่านี้ควรต่ำกว่า 2%%"
 
 #: libraries/advisory_rules_generic.txt:352
-#, fuzzy
-#| msgid "Table of contents"
 msgid "Rate of aborted clients"
-msgstr "สารบัญ"
+msgstr "อัตราเครื่องลูกข่ายที่ถูกยกเลิก"
 
 #: libraries/advisory_rules_generic.txt:357
 #, php-format
 msgid "Aborted client rate is at %s, this value should be less than 1 per hour"
 msgstr ""
+"อัตราเครื่องลูกข่ายที่ถูกยกเลิกอยู่ที่ %s ซึ่งค่านี้ควรน้อยกว่า 1 ต่อชั่วโมง"
 
 #: libraries/advisory_rules_generic.txt:361
 msgid "Is InnoDB disabled?"
-msgstr ""
+msgstr "InnoDB ถูกปิดใช้งานอยู่หรือไม่?"
 
 #: libraries/advisory_rules_generic.txt:364
-#, fuzzy
-#| msgid "Could not save recent table"
 msgid "You do not have InnoDB enabled."
-msgstr "ไม่สามารถบันทึกตารางล่าสุด"
+msgstr "คุณไม่ได้เปิดใช้งาน InnoDB"
 
 #: libraries/advisory_rules_generic.txt:365
 msgid "InnoDB is usually the better choice for table engines."
-msgstr ""
+msgstr "โดยทั่วไปแล้ว InnoDB เป็นตัวเลือกที่ดีกว่าสำหรับระบบจัดการตารางข้อมูล"
 
 #: libraries/advisory_rules_generic.txt:366
 msgid "have_innodb is set to 'value'"
-msgstr ""
+msgstr "have_innodb ถูกตั้งค่าเป็น 'value'"
 
 #: libraries/advisory_rules_generic.txt:368
 msgid "InnoDB log size"
-msgstr "ขนาดไฟล์บันทึกของ InnoDB"
+msgstr "ขนาดบันทึกของ InnoDB"
 
 #: libraries/advisory_rules_generic.txt:371
 msgid ""
 "The InnoDB log file size is not an appropriate size, in relation to the "
 "InnoDB buffer pool."
 msgstr ""
-"ขนาดไฟล์บันทึกของ InnoDB ไม่ได้เป็นขนาดที่เหมาะสม ที่มีความสัมพันธ์กับขนาดบัฟเฟอร์ของ InnoDB"
+"ขนาดไฟล์บันทึกของ InnoDB มีขนาดไม่เหมาะสม ที่มีความสัมพันธ์กับบัฟเฟอร์พูลของ InnoDB"
 
 #: libraries/advisory_rules_generic.txt:372
 #, php-format
@@ -17200,15 +17208,13 @@ msgid ""
 "fine. See also <a href=\"https://mysqldatabaseadministration.blogspot."
 "com/2007/01/increase-innodblogfilesize-proper-way.html\">this blog entry</a>"
 msgstr ""
-"โดยเฉพาะอย่างยิ่ง ในระบบที่มีจำนวนมากได้เขียนไปยังตารางของ InnoDB คุณควรตั้งค่า "
-"{innodb_log_file_size} เป็น 25%% ของ{innodb_buffer_pool_size} "
-"อย่างไรก็ตามค่าเหล่านี้จะได้รับการกู้คืนเมื่อระบบฐานข้อมูลมีปัญหา โดยไม่ควรตั้งค่าสูงกว่า 256 "
-"เมกะไบต์ และอย่างไรก็ดีโปรดทราบไว้ว่าคุณไม่เพียงแค่เปลี่ยนแปลงค่าเหล่านี้ได้ "
-"แต่คุณจำเป็นต้องปิดระบบเซิร์ฟเวอร์แล้วทำการเอาไฟล์บันทึกของInnoDB ออก และตั้งค่าใหม่ในไฟล์ my."
-"cnf แล้วเริ่มต้นเซิร์ฟเวอร์อีกครั้ง เพื่อตรวจสอบไฟล์บันทึกข้อผิดพลาด "
-"หากทุกอย่างดำเนินการไปได้ด้วยดี ดู <a href=\"https://mysqldatabaseadministration."
-"blogspot.com/2007/01/increase-innodblogfilesize-proper-way.html"
-"\">รายการบล็อก</a> นี้ได้"
+"โดยเฉพาะอย่างยิ่งในระบบที่มีการเขียนข้อมูลลงตาราง InnoDB จำนวนมาก คุณควรตั้งค่า "
+"{innodb_log_file_size} เป็น 25%% ของ {innodb_buffer_pool_size} อย่างไรก็ตาม ยิ่งค่า"
+"นี้สูงเท่าไร เวลาในการกู้คืนเมื่อฐานข้อมูลล่มก็จะยิ่งนานขึ้นเท่านั้น ดังนั้นค่านี้ไม่ควรตั้งไว้สูงกว่า 256 "
+"MiB มากนัก โปรดทราบว่าคุณไม่สามารถเปลี่ยนค่าของตัวแปรนี้ได้โดยง่าย คุณต้องปิดเซิร์ฟเวอร์ ลบไฟล์บั"
+"นทึก InnoDB ตั้งค่าใหม่ใน my.cnf เริ่มเซิร์ฟเวอร์ จากนั้นตรวจสอบบันทึกข้อผิดพลาดว่าทุกอย่างเรียบร้"
+"อยดี ดูเพิ่มเติมที่ <a href=\"https://mysqldatabaseadministration.blogspot.com/2007/"
+"01/increase-innodblogfilesize-proper-way.html\">บทความในบล็อกนี้</a>"
 
 #: libraries/advisory_rules_generic.txt:373
 #, php-format
@@ -17216,29 +17222,18 @@ msgid ""
 "Your InnoDB log size is at %s%% in relation to the InnoDB buffer pool size, "
 "it should not be below 20%%"
 msgstr ""
-"ขนาดบันทึกของ InnoDB เป็น %s%% ในความสัมพันธ์กับขนาดของบัฟเฟอร์ของ InnoDB "
-"ซึ่งไม่ควรจะต่ำกว่า 20%%"
+"ขนาดบันทึกของ InnoDB เป็น %s%% สัมพันธ์กับบัฟเฟอร์พูลของ InnoDB ซึ่งไม่ควรจะต่ำกว่า 20%%"
 
 #: libraries/advisory_rules_generic.txt:375
 msgid "Max InnoDB log size"
-msgstr "ขนาดข้อมูลบันทึกสูงสุดของ InnoDB"
+msgstr "ขนาดบันทึกสูงสุดของ InnoDB"
 
 #: libraries/advisory_rules_generic.txt:378
 msgid "The InnoDB log file size is inadequately large."
-msgstr "ขนาดไฟล์ข้อมูลบันทึก InnoDB ใหญ่เกินความจำเป็น"
+msgstr "ขนาดไฟล์บันทึกของ InnoDB นั้นใหญ่ไม่พอ"
 
 #: libraries/advisory_rules_generic.txt:379
-#, fuzzy, php-format
-#| msgid ""
-#| "It is usually sufficient to set {innodb_log_file_size} to 25%% of the "
-#| "size of {innodb_buffer_pool_size}. A very big {innodb_log_file_size} "
-#| "slows down the recovery time after a database crash considerably. See "
-#| "also <a href=\"https://www.mysqlperformanceblog.com/2006/07/03/choosing-"
-#| "proper-innodb_log_file_size/\">this Article</a>. You need to shutdown the "
-#| "server, remove the InnoDB log files, set the new value in my.cnf, start "
-#| "the server, then check the error logs if everything went fine. See also "
-#| "<a href=\"https://mysqldatabaseadministration.blogspot.com/2007/01/"
-#| "increase-innodblogfilesize-proper-way.html\">this blog entry</a>"
+#, php-format
 msgid ""
 "It is usually sufficient to set {innodb_log_file_size} to 25%% of the size "
 "of {innodb_buffer_pool_size}. A very big {innodb_log_file_size} slows down "
@@ -17250,45 +17245,33 @@ msgid ""
 "\"https://mysqldatabaseadministration.blogspot.com/2007/01/increase-"
 "innodblogfilesize-proper-way.html\">this blog entry</a>"
 msgstr ""
-"โดยทั่วไป {innodb_log_file_size} เป็น 25%% ของ {innodb_buffer_pool_size} "
-"ก็เพียงพอแล้ว หากตั้งค่าเหล่านี้มากเกินไปจะทำให้การกู้คืนเมื่อระบบฐานข้อมูลมีปัญหาทำได้ช้าลง "
-"ดูเพิ่มได้ที่<a href=\"https://www.mysqlperformanceblog.com/2006/07/03/choosing-"
-"proper-innodb_log_file_size/\">บทความนี้</a> "
-"โดยคุณจำเป็นต้องปิดระบบเซิร์ฟเวอร์แล้วทำการเอาไฟล์บันทึกของInnoDB ออก และตั้งค่าใหม่ในไฟล์ "
-"my.cnf แล้วเริ่มต้นเซิร์ฟเวอร์อีกครั้ง เพื่อตรวจสอบไฟล์บันทึกข้อผิดพลาด "
-"หากทุกอย่างดำเนินการไปได้ด้วยดี ดู <a href=\"https://mysqldatabaseadministration."
-"blogspot.com/2007/01/increase-innodblogfilesize-proper-way.html"
-"\">รายการบล็อก</a> นี้ได้"
+"โดยปกติแล้ว การตั้งค่า {innodb_log_file_size} ให้เป็น 25%% ของขนาด "
+"{innodb_buffer_pool_size} ก็เพียงพอแล้ว การตั้งค่า {innodb_log_file_size} ให้มีขนาดให"
+"ญ่เกินไปจะทำให้เวลาในการกู้คืนหลังจากฐานข้อมูลล่มช้าลงอย่างมาก ดูเพิ่มเติมได้ที่ <a "
+"href=\"https://www.percona.com/blog/2006/07/03/choosing-proper-"
+"innodb_log_file_size/\">บทความนี้</a> คุณต้องปิดเซิร์ฟเวอร์ ลบไฟล์บันทึก InnoDB ตั้งค่าใหม่ใ"
+"น my.cnf เริ่มเซิร์ฟเวอร์ จากนั้นตรวจสอบบันทึกข้อผิดพลาดว่าทุกอย่างเรียบร้อยดี ดูเพิ่มเติมได้ที่ <a "
+"href=\"https://mysqldatabaseadministration.blogspot.com/2007/01/increase-"
+"innodblogfilesize-proper-way.html\">บทความในบล็อกนี้</a>"
 
 #: libraries/advisory_rules_generic.txt:380
 #, php-format
 msgid "Your absolute InnoDB log size is %s MiB"
-msgstr "ขนาดข้อมูลบันทึก InnoDB ที่แท้จริงของคุณคือ %s MiB"
+msgstr "ขนาดไฟล์บันทึก InnoDB ของคุณคือ %s MiB"
 
 #: libraries/advisory_rules_generic.txt:382
 msgid "InnoDB buffer pool size"
-msgstr "ขนาดบัฟเฟอร์ของ InnoDB"
+msgstr "ขนาดบัฟเฟอร์พูลของ InnoDB"
 
 #: libraries/advisory_rules_generic.txt:385
 msgid "Your InnoDB buffer pool is fairly small."
-msgstr "ขนาดบัฟเฟอร์ InnoDB ของคุณมีขนาดเล็กเกินไป"
+msgstr "บัฟเฟอร์พูล InnoDB ของคุณมีขนาดค่อนข้างเล็ก"
 
 # buffer pool แปลเป็น บัฟเฟอร์
 # non-InnoDB-Tables ใช้คำทับศัพท์
 #
 #: libraries/advisory_rules_generic.txt:386
-#, fuzzy, php-format
-#| msgid ""
-#| "The InnoDB buffer pool has a profound impact on performance for InnoDB "
-#| "tables. Assign all your remaining memory to this buffer. For database "
-#| "servers that use solely InnoDB as storage engine and have no other "
-#| "services (e.g. a web server) running, you may set this as high as 80%% of "
-#| "your available memory. If that is not the case, you need to carefully "
-#| "assess the memory consumption of your other services and non-InnoDB-"
-#| "Tables and set this variable accordingly. If it is set too high, your "
-#| "system will start swapping, which decreases performance significantly. "
-#| "See also <a href=\"https://www.mysqlperformanceblog.com/2007/11/03/"
-#| "choosing-innodb_buffer_pool_size/\">this article</a>"
+#, php-format
 msgid ""
 "The InnoDB buffer pool has a profound impact on performance for InnoDB "
 "tables. Assign all your remaining memory to this buffer. For database "
@@ -17301,15 +17284,13 @@ msgid ""
 "\"https://www.percona.com/blog/2007/11/03/choosing-innodb_buffer_pool_size/"
 "\">this article</a>"
 msgstr ""
-"บัฟเฟอร์ของ InnoDB มีผลกระทบอย่างยิ่งในการปฏิบัติงานสำหรับตารางของ InnoDB "
-"กำหนดการจำส่วนที่เหลือทั้งหมดของคุณกับบัฟเฟอร์นี้ สำหรับเซิร์ฟเวอร์ฐานข้อมูลที่ใช้ InnoDB "
-"แต่เพียงผู้เดียวเป็นการเก็บโปรแกรม และมีไม่มีบริการอื่น ๆ (เช่นเว็บเซิร์ฟเวอร์) ทำงานอยู่ "
-"คุณอาจตั้งค่านี้ได้สูงถึง 80%% ของหน่วยความจำของคุณพร้อมใช้งานได้ ถ้าไม่ใช่กรณี "
-"คุณจำเป็นต้องประเมินปริมาณการใช้หน่วยความจำของบริการและตารางที่ไม่ได้ใช้ InnoDB อื่นๆ "
-"ของคุณอย่างระมัดระวัง และตั้งค่าตัวแปรนี้ตามลำดับ หากตั้งสูงเกินไป ระบบของคุณจะเริ่มต้นการเปลี่ยน "
-"ซึ่งลดประสิทธิภาพการทำงานอย่างมาก ดูเพิ่มเติม<a href=\"https://www."
-"mysqlperformanceblog.com/2007/11/03/choosing-innodb_buffer_pool_size/"
-"\">บทความนี้</a>"
+"บัฟเฟอร์พูลของ InnoDB มีผลกระทบอย่างมากต่อประสิทธิภาพของตาราง InnoDB ควรจัดสรรหน่วยความ"
+"จำที่เหลือทั้งหมดให้กับบัฟเฟอร์นี้ สำหรับเซิร์ฟเวอร์ฐานข้อมูลที่ใช้ InnoDB เป็นระบบจัดเก็บข้อมูลเพียงอย่"
+"างเดียวและไม่มีบริการอื่น ๆ (เช่น เว็บเซิร์ฟเวอร์) ทำงานอยู่ คุณอาจตั้งค่านี้ได้สูงถึง 80%% ของหน่วย"
+"ความจำที่มีอยู่ แต่ถ้าไม่ใช่กรณีนั้น คุณต้องประเมินการใช้หน่วยความจำของบริการอื่น ๆ และตารางที่ไม่ใ"
+"ช่ InnoDB อย่างรอบคอบ และตั้งค่าตัวแปรนี้ให้เหมาะสม หากตั้งค่าสูงเกินไป ระบบของคุณจะเริ่มทำการ"
+"สลับ ซึ่งจะลดประสิทธิภาพลงอย่างมาก ดูเพิ่มเติมได้ที่ <a href=\"https://www.percona.com/"
+"blog/2007/11/03/choosing-innodb_buffer_pool_size/\">บทความนี้</a>"
 
 #: libraries/advisory_rules_generic.txt:387
 #, php-format
@@ -17319,17 +17300,17 @@ msgid ""
 "perfectly adequate for your system if you don't have much InnoDB tables or "
 "other services running on the same machine."
 msgstr ""
-"คุณกำลังใช้ %s%% ของหน่วยความจำของคุณสำหรับการบัฟเฟอร์ InnoDB ถ้าคุณกำลังกำหนดน้อยกว่า "
-"60%% อย่างไรก็ตาม ที่นี้อาจไม่สมบูรณ์เพียงพอสำหรับระบบของคุณ ถ้าคุณไม่มีตาราง InnoDB "
-"มากหรือบริการอื่นๆ ที่ทำงานบนเครื่องเดียวกัน"
+"คุณกำลังใช้หน่วยความจำ %s%% สำหรับบัฟเฟอร์พูลของ InnoDB กฎนี้จะทำงานหากคุณจัดสรรหน่วยความจ"
+"ำน้อยกว่า 60%% อย่างไรก็ตาม นี่อาจดีมากพอสำหรับระบบของคุณ หากไม่ได้มีตาราง InnoDB หรือบริกา"
+"รอื่น ๆ ทำงานอยู่บนเครื่องเดียวกันมากนัก"
 
 #: libraries/advisory_rules_generic.txt:391
 msgid "MyISAM concurrent inserts"
-msgstr "MyISAM พร้อมแทรก"
+msgstr "การแทรกข้อมูลพร้อมกันของ MyISAM"
 
 #: libraries/advisory_rules_generic.txt:394
 msgid "Enable {concurrent_insert} by setting it to 1"
-msgstr "เปิดใช้งาน {concurrent_insert} ได้โดยตั้งค่าเป็น 1"
+msgstr "เปิดใช้งาน {concurrent_insert} โดยตั้งค่าเป็น 1"
 
 #: libraries/advisory_rules_generic.txt:395
 msgid ""
@@ -17337,21 +17318,21 @@ msgid ""
 "writers for a given table. See also <a href=\"https://dev.mysql.com/doc/"
 "refman/5.5/en/concurrent-inserts.html\">MySQL Documentation</a>"
 msgstr ""
-"การตั้งค่า {concurrent_insert} เป็น 1 "
-"จะช่วยลดการใช้งานระหว่างตัวอ่านและตัวเขียนสำหรับตารางที่กำหนด ดู<a href=\"https://dev."
-"mysql.com/doc/refman/5.5/en/concurrent-inserts.html\">เอกสาร MySQL</a>เพิ่มเติม"
+"การตั้งค่า {concurrent_insert} เป็น 1 จะช่วยลดการใช้งานระหว่างตัวอ่านและตัวเขียนสำหรับตาร"
+"างที่กำหนด ดูเพิ่มเติม<a href=\"https://dev.mysql.com/doc/refman/5.5/en/concurrent-"
+"inserts.html\">เอกสาร MySQL</a>"
 
 #: libraries/advisory_rules_generic.txt:396
 msgid "concurrent_insert is set to 0"
-msgstr "concurrent_insert ถูกตั้งค่าไว้ที่ 0"
+msgstr "concurrent_insert ถูกตั้งค่าเป็น 0"
 
 #: libraries/advisory_rules_mysql_before80003.txt:10
 msgid "Query cache disabled"
-msgstr "หน่วยความจำของชุดคำสั่ง ถูกปิดอยู่"
+msgstr "แคชคำสั่งถูกปิดใช้งาน"
 
 #: libraries/advisory_rules_mysql_before80003.txt:13
 msgid "The query cache is not enabled."
-msgstr "หน่วยความจำของชุดคำสั่ง ไม่ได้ถูกเปิดไว้"
+msgstr "แคชคำสั่งไม่ได้เปิดใช้งาน"
 
 #: libraries/advisory_rules_mysql_before80003.txt:14
 msgid ""
@@ -17360,43 +17341,48 @@ msgid ""
 "and setting {query_cache_type} to 'ON'. <b>Note:</b> If you are using "
 "memcached, ignore this recommendation."
 msgstr ""
+"แคชคำสั่งเป็นที่ทราบกันดีว่าช่วยปรับปรุงประสิทธิภาพได้อย่างมากหากกำหนดค่าอย่างถูกต้อง เปิดใช้งานโด"
+"ยการตั้งค่า {query_cache_size} เป็นค่า MiB สองหลัก และตั้งค่า {query_cache_type} เป็น "
+"'ON' <b>หมายเหตุ:</b> หากคุณใช้ memcached โปรดละเว้นคำแนะนำนี้"
 
 #: libraries/advisory_rules_mysql_before80003.txt:15
 msgid "query_cache_size is set to 0 or query_cache_type is set to 'OFF'"
 msgstr ""
+"หากตั้งค่า query_cache_size เป็น 0 หรือตั้งค่า query_cache_type เป็น 'OFF'"
 
 #: libraries/advisory_rules_mysql_before80003.txt:17
 #, php-format
 msgid "Query cache efficiency (%%)"
-msgstr "ประสิทธิภาพของ หน่วยความจำของชุดคำสั่ง (%%)"
+msgstr "ประสิทธิภาพแคชคำสั่ง (%%)"
 
 #: libraries/advisory_rules_mysql_before80003.txt:20
 msgid "Query cache not running efficiently, it has a low hit rate."
-msgstr ""
+msgstr "แคชคำสั่งทำงานได้ไม่เต็มประสิทธิภาพ มีอัตราการถึงต่ำ"
 
 #: libraries/advisory_rules_mysql_before80003.txt:21
 msgid "Consider increasing {query_cache_limit}."
-msgstr ""
+msgstr "ลองพิจารณาเพิ่มค่า {query_cache_limit}"
 
 #: libraries/advisory_rules_mysql_before80003.txt:22
 #, php-format
 msgid "The current query cache hit rate of %s%% is below 20%%"
-msgstr ""
+msgstr "อัตราการถึงแคชคำสั่งปัจจุบันของ %s%% ต่ำกว่า 20%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:24
 msgid "Query Cache usage"
-msgstr "การใช้งาน หน่วยความจำของชุดคำสั่ง"
+msgstr "การใช้งานแคชคำสั่ง"
 
 #: libraries/advisory_rules_mysql_before80003.txt:27
 #, php-format
 msgid "Less than 80%% of the query cache is being utilized."
-msgstr ""
+msgstr "มีการใช้งานแคชคำสั่งไม่ถึง 80%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:28
 msgid ""
 "This might be caused by {query_cache_limit} being too low. Flushing the "
 "query cache might help as well."
 msgstr ""
+"ปัญหานี้อาจเกิดจากค่า {query_cache_limit} ต่ำเกินไป การล้างแคชคำสั่งอาจช่วยได้เช่นกัน"
 
 #: libraries/advisory_rules_mysql_before80003.txt:29
 #, php-format
@@ -17404,18 +17390,16 @@ msgid ""
 "The current ratio of free query cache memory to total query cache size is %s"
 "%%. It should be above 80%%"
 msgstr ""
+"อัตราส่วนปัจจุบันของหน่วยความจำแคชคำสั่งที่ว่างอยู่ต่อขนาดแคชคำสั่งทั้งหมดคือ %s%% ซึ่งควรจะสูงกว่า "
+"80%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:31
-#, fuzzy
-#| msgid "Query cache usage"
 msgid "Query cache fragmentation"
-msgstr "คำสั่งที่ถูกรันบนหน่วยความจำ"
+msgstr "การกระจัดกระจายของแคชคำสั่ง"
 
 #: libraries/advisory_rules_mysql_before80003.txt:34
-#, fuzzy
-#| msgid "The query cache is not enabled."
 msgid "The query cache is considerably fragmented."
-msgstr "หน่วยความจำของชุดคำสั่ง ไม่ได้ถูกเปิดไว้"
+msgstr "แคชคำสั่งกระจัดกระจายเป็นอย่างมาก"
 
 #: libraries/advisory_rules_mysql_before80003.txt:35
 msgid ""
@@ -17428,6 +17412,12 @@ msgid ""
 "using this formula: (query_cache_size - qcache_free_memory) / "
 "qcache_queries_in_cache"
 msgstr ""
+"การกระจัดกระจายอย่างรุนแรงอาจทำให้ Qcache_lowmem_prunes เพิ่มขึ้น (อีก) ซึ่งอาจเกิดจากการ"
+"ตัดหน่วยความจำต่ำของแคชคำสั่งจำนวนมากเนื่องจาก {query_cache_size} มีขนาดเล็กเกินไป สำหรั"
+"บการแก้ไขปัญหาเร่งด่วนในระยะสั้น คุณสามารถล้างแคชคำสั่ง (อาจทำให้แคชคำสั่งถูกล็อกเป็นเวลานา"
+"น) การปรับ {query_cache_min_res_unit} ให้มีค่าต่ำลงอย่างระมัดระวังก็อาจช่วยได้เช่นกัน เช่น "
+"คุณสามารถตั้งค่าให้เป็นขนาดเฉลี่ยของคำสั่งในแคชโดยใช้สูตรนี้: (query_cache_size - "
+"qcache_free_memory) / qcache_queries_in_cache"
 
 #: libraries/advisory_rules_mysql_before80003.txt:36
 #, php-format
@@ -17436,18 +17426,18 @@ msgid ""
 "that the query cache is an alternating pattern of free and used blocks. This "
 "value should be below 20%%."
 msgstr ""
+"ขณะนี้แคชกระจัดกระจายเป็น %s%% โดยการกระจัดกระจาย 100%% หมายความว่าแคชคำสั่งมีรูปแบบสลับ"
+"กันระหว่างบล็อกว่างและบล็อกที่ใช้งานอยู่ ค่านี้ควรต่ำกว่า 20%%"
 
 #: libraries/advisory_rules_mysql_before80003.txt:38
-#, fuzzy
-#| msgid "Query cache used"
 msgid "Query cache low memory prunes"
-msgstr "คำสั่งที่ถูกรันไปในหน่วยความจำแล้ว"
+msgstr "การลบแคชคำสั่งที่มีหน่วยความจำเหลือน้อย"
 
 #: libraries/advisory_rules_mysql_before80003.txt:41
 msgid ""
 "Cached queries are removed due to low query cache memory from the query "
 "cache."
-msgstr ""
+msgstr "คำสั่งที่ถูกแคชไว้จะถูกลบออกเนื่องจากหน่วยความจำแคชคำสั่งเหลือน้อย"
 
 #: libraries/advisory_rules_mysql_before80003.txt:42
 msgid ""
@@ -17455,6 +17445,8 @@ msgid ""
 "overhead of maintaining the cache is likely to increase with its size, so do "
 "this in small increments and monitor the results."
 msgstr ""
+"คุณอาจต้องการเพิ่มขนาด {query_cache_size} แต่โปรดจำไว้ว่าทรัพยากรที่ใช้ในการบำรุงรักษาแคชมี"
+"แนวโน้มที่จะเพิ่มขึ้นตามขนาดของแคช ดังนั้นควรเพิ่มทีละน้อยและตรวจสอบผลลัพธ์สม่ำเสมอ"
 
 #: libraries/advisory_rules_mysql_before80003.txt:43
 #, php-format
@@ -17462,40 +17454,40 @@ msgid ""
 "The ratio of removed queries to inserted queries is %s%%. The lower this "
 "value is, the better (This rules firing limit: 0.1%%)"
 msgstr ""
+"อัตราส่วนของคำสั่งที่ถูกลบต่อคำสั่งที่ถูกแทรกคือ %s%% ค่านี้ยิ่งต่ำยิ่งดี (ขีดจำกัดการทำงานของกฎนี้คือ "
+"0.1%%)"
 
 #: libraries/advisory_rules_mysql_before80003.txt:45
-#, fuzzy
 msgid "Query cache max size"
-msgstr "ชนิดคำค้น"
+msgstr "ขนาดสูงสุดของแคชคำสั่ง"
 
 #: libraries/advisory_rules_mysql_before80003.txt:48
 msgid ""
 "The query cache size is above 128 MiB. Big query caches may cause "
 "significant overhead that is required to maintain the cache."
 msgstr ""
+"ขนาดของแคชคำสั่งมีขนาดใหญ่กว่า 128 MiB แคชคำสั่งขนาดใหญ่อาจทำให้เกิดภาระงานเพิ่มเติมจำนวนม"
+"ากที่จำเป็นในการบำรุงรักษาแคช"
 
 #: libraries/advisory_rules_mysql_before80003.txt:49
 msgid ""
 "Depending on your environment, it might be performance increasing to reduce "
 "this value."
-msgstr ""
+msgstr "ขึ้นอยู่กับสภาพแวดล้อมของคุณ การลดค่านี้อาจช่วยเพิ่มประสิทธิภาพได้"
 
 #: libraries/advisory_rules_mysql_before80003.txt:50
-#, fuzzy, php-format
-#| msgid "Current version: %s"
+#, php-format
 msgid "Current query cache size: %s"
-msgstr "รุ่นที่ใช้: %s"
+msgstr "ขนาดแคชคำสั่งปัจจุบัน: %s"
 
 #: libraries/advisory_rules_mysql_before80003.txt:52
-#, fuzzy
-#| msgid "Query results"
 msgid "Query cache min result size"
-msgstr "ผลลัพธ์ SQL"
+msgstr "ขนาดผลลัพธ์ขั้นต่ำของแคชคำสั่ง"
 
 #: libraries/advisory_rules_mysql_before80003.txt:55
 msgid ""
 "The max size of the result set in the query cache is the default of 1 MiB."
-msgstr ""
+msgstr "ขนาดสูงสุดของชุดผลลัพธ์ในแคชคำสั่งคือค่าเริ่มต้นที่ 1 MiB"
 
 #: libraries/advisory_rules_mysql_before80003.txt:56
 msgid ""
@@ -17508,6 +17500,12 @@ msgid ""
 "(often invalidated due to table updates) increasing {query_cache_limit} "
 "might reduce efficiency."
 msgstr ""
+"การเปลี่ยนค่า {query_cache_limit} (โดยปกติคือการเพิ่มค่า) อาจช่วยเพิ่มประสิทธิภาพได้ ตัวแปรนี้"
+"กำหนดขนาดสูงสุดที่ผลลัพธ์ของคำสั่งจะต้องถูกแทรกเข้าไปในแคชคำสั่ง หากมีผลลัพธ์ของคำสั่งจำนวนมากที่"
+"มีขนาดเกิน 1 MiB และสามารถแคชได้ดี (มีการอ่านมาก การเขียนน้อย) การเพิ่มค่า "
+"{query_cache_limit} จะช่วยเพิ่มประสิทธิภาพ ในขณะที่ในกรณีที่ผลลัพธ์ของคำสั่งจำนวนมากมีขนาดเกิ"
+"น 1 MiB และไม่สามารถแคชได้ดีนัก (มักถูกทำให้ไม่ถูกต้องเนื่องจากการอัปเดตตาราง) การเพิ่มค่า "
+"{query_cache_limit} อาจลดประสิทธิภาพลง"
 
 #: libraries/advisory_rules_mysql_before80003.txt:57
 msgid "query_cache_limit is set to 1 MiB"
