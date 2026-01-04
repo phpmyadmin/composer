@@ -4,16 +4,16 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2025-10-16 23:57-0300\n"
-"PO-Revision-Date: 2025-09-29 01:02+0000\n"
+"PO-Revision-Date: 2026-01-04 03:01+0000\n"
 "Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
-"Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/"
-"5-2/mk/>\n"
+"Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/5-"
+"2/mk/>\n"
 "Language: mk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==1 || n%10==1 ? 0 : 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -39,7 +39,7 @@ msgstr "Работно време е само %s"
 
 #: libraries/advisory_rules_generic.php:22
 msgid "Questions below 1,000"
-msgstr "Прашања под 1,000"
+msgstr "Прашања под 1000"
 
 #: libraries/advisory_rules_generic.php:26
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 #: libraries/advisory_rules_generic.php:32
 #, php-format
 msgid "Current amount of Questions: %s"
-msgstr "Сегашна вредност на Прашања: %s"
+msgstr "Сегашна количина на Прашања: %s"
 
 #: libraries/advisory_rules_generic.php:37
 msgid "Percentage of slow queries"
@@ -3395,7 +3395,7 @@ msgstr "Конзола"
 
 #: libraries/classes/Config/Descriptions.php:787
 msgid "GZip"
-msgstr ""
+msgstr "GZip"
 
 #: libraries/classes/Config/Descriptions.php:788
 msgid "Extra parameters for iconv"
@@ -15136,7 +15136,7 @@ msgstr "phpMyAdmin Демо Сервер"
 #: templates/footer.twig:34
 #, php-format
 msgid "Currently running Git revision %1$s from the %2$s branch."
-msgstr ""
+msgstr "Моментално на Git ревизијата %1$s од гранката %2$s."
 
 #: templates/footer.twig:36
 msgid "Git information missing!"
