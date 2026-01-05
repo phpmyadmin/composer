@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2026-01-04 09:01+0000\n"
-"Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
+"PO-Revision-Date: 2026-01-05 19:57+0000\n"
+"Last-Translator: Maurício Meneghini Fauth <mauricio@mfauth.com.br>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/4-"
 "9/mk/>\n"
 "Language: mk\n"
@@ -1760,7 +1760,7 @@ msgstr "Подесувања за Страници"
 
 #: js/messages.php:359 templates/config/form_display/fieldset_bottom.twig:8
 msgid "Apply"
-msgstr ""
+msgstr "Применете"
 
 #: js/messages.php:362 libraries/classes/Navigation/NavigationHeader.php:61
 #: libraries/classes/Server/Status/Monitor.php:130
@@ -6433,6 +6433,7 @@ msgstr ""
 #: libraries/classes/Config/FormDisplayTemplate.php:233
 msgid "This setting is disabled, it will not be applied to your configuration."
 msgstr ""
+"Оваа поставка е оневозможена, нема да се примени на вашата конфигурација."
 
 #: libraries/classes/Config/FormDisplayTemplate.php:235
 #: libraries/classes/Relation.php:113 libraries/classes/Relation.php:121
@@ -6775,8 +6776,8 @@ msgstr "Базата на податоци %1$s е креирана."
 #, php-format
 msgid "%1$d database has been dropped successfully."
 msgid_plural "%1$d databases have been dropped successfully."
-msgstr[0] "%s база на податоци успешно беше отфрлена."
-msgstr[1] "%s бази на податоци успешно беа отфрлени."
+msgstr[0] "%1$d база на податоци успешно беше отфрлена."
+msgstr[1] "%1$d бази на податоци успешно беа отфрлени."
 
 #: libraries/classes/Controllers/Server/ServerDatabasesController.php:343
 #: libraries/classes/Import.php:122
@@ -16092,7 +16093,7 @@ msgstr ""
 
 #: templates/columns_definitions/table_fields_definitions.twig:59
 msgid "Virtuality"
-msgstr ""
+msgstr "Виртуелност"
 
 #: templates/columns_definitions/table_fields_definitions.twig:65
 #, fuzzy
@@ -16352,7 +16353,7 @@ msgstr ""
 #: templates/columns_definitions/column_name.twig:4
 #, php-format
 msgid "Referenced by %s."
-msgstr ""
+msgstr "Референциран од %s."
 
 #: templates/columns_definitions/column_name.twig:12
 msgid "Is a foreign key."
