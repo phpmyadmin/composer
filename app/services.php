@@ -27,6 +27,7 @@ use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Export\TemplateModel;
 use PhpMyAdmin\FileListing;
 use PhpMyAdmin\FlashMessenger;
+use PhpMyAdmin\Header;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Middleware;
 use PhpMyAdmin\Import\Import;
@@ -88,18 +89,23 @@ return [
         DbTableExists::class => ['class' => DbTableExists::class, 'arguments' => ['@dbi']],
         'designer' => [
             'class' => Designer::class,
-            'arguments' => ['$dbi' => '@dbi', '$relation' => '@relation', '$template' => '@template'],
+            'arguments' => [
+                '$dbi' => '@dbi',
+                '$relation' => '@relation',
+                '$template' => '@template',
+                '$config' => '@config',
+            ],
         ],
         'designer_common' => [
             'class' => Common::class,
-            'arguments' => ['$dbi' => '@dbi', '$relation' => '@relation'],
+            'arguments' => ['$dbi' => '@dbi', '$relation' => '@relation', '$config' => '@config'],
         ],
         'error_handler' => ['class' => ErrorHandler::class, 'factory' => [ErrorHandler::class, 'getInstance']],
         'error_report' => [
             'class' => ErrorReport::class,
             'arguments' => ['@http_request', '@relation', '@template', '@config'],
         ],
-        'events' => ['class' => Events::class, 'arguments' => ['@dbi']],
+        'events' => ['class' => Events::class, 'arguments' => ['@dbi', '@config']],
         Export::class => ['class' => Export::class, 'arguments' => ['@dbi', '@' . OutputHandler::class]],
         'export' => Export::class,
         'export_options' => [
@@ -110,6 +116,10 @@ return [
         'expression_language' => ['class' => ExpressionLanguage::class],
         'file_listing' => ['class' => FileListing::class],
         FlashMessenger::class => ['class' => FlashMessenger::class],
+        Header::class => [
+            'class' => Header::class,
+            'arguments' => ['@template', '@' . Console::class, '@config', '@dbi', '@relation', '@user_preferences'],
+        ],
         'http_request' => ['class' => HttpRequest::class],
         ResponseFactory::class => [
             'class' => ResponseFactory::class,
@@ -262,7 +272,7 @@ return [
             'class' => ResponseRenderer::class,
             'factory' => [ResponseRenderer::class, 'getInstance'],
         ],
-        'routines' => ['class' => Routines::class, 'arguments' => ['@dbi']],
+        'routines' => ['class' => Routines::class, 'arguments' => ['@dbi', '@config']],
         'server_plugins' => ['class' => Plugins::class, 'arguments' => ['@dbi']],
         'server_privileges' => [
             'class' => Privileges::class,
