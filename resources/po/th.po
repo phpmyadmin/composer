@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-01-11 00:32+0000\n"
-"PO-Revision-Date: 2026-01-10 11:06+0000\n"
+"PO-Revision-Date: 2026-01-13 07:11+0000\n"
 "Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "th/>\n"
@@ -13,16 +13,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2-dev\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
 msgstr "จำเป็นต้องเปิดใช้งาน JavaScript เพื่อใช้งานในส่วนถัดไป"
 
 #: resources/templates/base.twig:46
-#, fuzzy
 msgid "Open user account menu"
-msgstr "เปิดเมนูผู้ใช้"
+msgstr "เปิดเมนูบัญชีผู้ใช้"
 
 #: resources/templates/base.twig:57 resources/templates/navigation/main.twig:35
 #: resources/templates/navigation/main.twig:36
@@ -30,12 +29,10 @@ msgid "phpMyAdmin documentation"
 msgstr "เอกสารประกอบของ phpMyAdmin"
 
 #: resources/templates/base.twig:62
-#, fuzzy
 msgid "MariaDB documentation"
 msgstr "เอกสารประกอบ MariaDB"
 
 #: resources/templates/base.twig:62
-#, fuzzy
 msgid "MySQL documentation"
 msgstr "เอกสารประกอบ MySQL"
 
@@ -48,7 +45,6 @@ msgid "Color mode for the theme"
 msgstr "โหมดสีสำหรับธีม"
 
 #: resources/templates/base.twig:80 resources/templates/home/index.twig:154
-#, fuzzy
 msgctxt "Light color mode of the theme"
 msgid "Light"
 msgstr "สว่าง"
@@ -316,19 +312,17 @@ msgstr "การเชื่อมต่อ:"
 #: resources/templates/columns_definitions/column_definitions_form.twig:109
 #: resources/templates/columns_definitions/partitions.twig:137
 #: resources/templates/table/operations/index.twig:141
-#, fuzzy
 msgid "Storage engine"
-msgstr "เครื่องมือที่เก็บข้อมูล"
+msgstr "ระบบเก็บข้อมูล"
 
 #: resources/templates/columns_definitions/column_definitions_form.twig:132
 msgid "PARTITION definition:"
 msgstr "การนิยาม PARTITION:"
 
 #: resources/templates/columns_definitions/column_definitions_form.twig:151
-#, fuzzy
 msgctxt "Online transaction part of the SQL DDL for InnoDB"
 msgid "Online transaction"
-msgstr "การแปลงที่เรียกใช้ได้"
+msgstr "ธุรกรรมออนไลน์"
 
 #: resources/templates/columns_definitions/column_definitions_form.twig:154
 #: resources/templates/modals/index_dialog_modal.twig:11
@@ -377,7 +371,6 @@ msgstr ""
 #: resources/templates/table/relation/common_form.twig:150
 #: resources/templates/table/zoom_search/result_form.twig:24
 #: resources/templates/table/zoom_search/result_form.twig:95
-#, fuzzy
 msgid "Loading"
 msgstr "กำลังโหลด…"
 
@@ -683,16 +676,15 @@ msgstr "ความยาว/เซต*"
 
 #: resources/templates/columns_definitions/table_fields_definitions.twig:29
 #: resources/templates/columns_definitions/table_fields_definitions.twig:17
-#, fuzzy
 msgid ""
 "If column type is \"enum\" or \"set\", please enter the values using this "
 "format: 'a','b','c'…<br>If you ever need to put a backslash (\"\\\") or a "
 "single quote (\"'\") amongst those values, precede it with a backslash (for "
 "example '\\\\xyz' or 'a\\'b')."
 msgstr ""
-"ถ้าชนิดของคอลัมน์เป็น \"enum\" หรือ \"set\" โปรดกรอกค่าตามรูปแบบ: 'a','b','c'…"
-"<br>ถ้าต้องการใส่เครื่องหมายทับกลับด้าน (\"\\\") หรือ อัญประกาศเดี่ยว (\"'\") "
-"เข้าไปในค่าเหล่านั้น ให้ใส่เครื่องหมายทับกลับด้านนำหน้า (ตัวอย่าง: '\\\\xyz' or 'a\\'b')"
+"หากคอลัมน์เป็นประเภท \"enum\" หรือ \"set\" โปรดป้อนค่าโดยใช้รูปแบบนี้: 'a','b','c'…<br>"
+"หากคุณต้องการใส่เครื่องหมายแบ็กสแลช (\"\\\") หรือเครื่องหมายอัญประกาศเดี่ยว (\"'\") ระหว่า"
+"งค่าเหล่านั้น ให้ใส่เครื่องหมายแบ็กสแลชนำหน้า (เช่น '\\\\xyz' หรือ 'a\\'b')"
 
 #: resources/templates/columns_definitions/table_fields_definitions.twig:32
 #: resources/templates/database/central_columns/edit.twig:11
@@ -846,9 +838,8 @@ msgstr "ย้ายคอลัมน์"
 #: src/Plugins/Export/ExportOdt.php:455
 #: src/Plugins/Export/ExportTexytext.php:359
 #: resources/templates/columns_definitions/table_fields_definitions.twig:71
-#, fuzzy
 msgid "Media type"
-msgstr "MIME-type"
+msgstr "ประเภทสื่อ"
 
 #: resources/templates/columns_definitions/table_fields_definitions.twig:87
 #: resources/templates/columns_definitions/table_fields_definitions.twig:98
@@ -1274,9 +1265,8 @@ msgid "Hide trace"
 msgstr "ซ่อนเส้นทาง"
 
 #: resources/templates/console/display.twig:120
-#, fuzzy
 msgid "Count:"
-msgstr "สดมภ์"
+msgstr "จำนวน:"
 
 #: resources/templates/console/display.twig:121
 #: src/Controllers/JavaScriptMessagesController.php:644
@@ -1322,9 +1312,8 @@ msgid "OK"
 msgstr "ตกลง"
 
 #: resources/templates/console/display.twig:178
-#, fuzzy
 msgid "Restore default values"
-msgstr "คืนค่าเดิม"
+msgstr "คืนค่าเริ่มต้น"
 
 #: resources/templates/console/display.twig:185 src/Config/Descriptions.php:958
 msgid "Always expand query messages"
@@ -1373,7 +1362,6 @@ msgid "Create version"
 msgstr "สร้างเวอร์ชัน"
 
 #: resources/templates/database/central_columns/edit.twig:15
-#, fuzzy
 msgctxt "Auto Increment"
 msgid "A_I"
 msgstr "A_I"
@@ -1384,9 +1372,8 @@ msgstr "เพิ่มคอลัมน์ใหม่"
 
 #: resources/templates/database/central_columns/main.twig:24
 #: resources/templates/database/central_columns/main.twig:234
-#, fuzzy
 msgid "Length/Value"
-msgstr "ความยาว/เซต*"
+msgstr "ความยาว/ค่า"
 
 #: resources/templates/database/central_columns/main.twig:36
 #: resources/templates/database/central_columns/main.twig:246
@@ -1399,15 +1386,13 @@ msgid "A_I"
 msgstr "A_I"
 
 #: resources/templates/database/central_columns/main.twig:129
-#, fuzzy
 msgid "The central list of columns for the current database is empty"
-msgstr "ไม่พบรายการกลางของฐานข้อมูลปัจจุบัน"
+msgstr "รายการคอลัมน์หลักสำหรับฐานข้อมูลปัจจุบันว่างเปล่า"
 
 #: resources/templates/database/central_columns/main.twig:168
 #: resources/templates/display/results/table.twig:139
-#, fuzzy
 msgid "Filter rows:"
-msgstr "ตัวกรอง"
+msgstr "ตัวกรองแถว:"
 
 #: resources/templates/database/central_columns/main.twig:171
 #: resources/templates/display/results/table.twig:143
@@ -1483,9 +1468,8 @@ msgstr "ยกเลิก"
 
 #: resources/templates/database/create_table.twig:3
 #: resources/templates/database/operations/index.twig:28
-#, fuzzy
 msgid "Create new table"
-msgstr "เริ่มหน้าใหม่"
+msgstr "สร้างตารางใหม่"
 
 #: resources/templates/database/create_table.twig:10
 #: resources/templates/database/operations/index.twig:35
@@ -1500,9 +1484,8 @@ msgid "Create"
 msgstr "สร้าง"
 
 #: resources/templates/database/data_dictionary/index.twig:4
-#, fuzzy
 msgid "Database comment:"
-msgstr "หมายเหตุของฐานข้อมูล"
+msgstr "หมายเหตุของฐานข้อมูล:"
 
 #: resources/templates/database/data_dictionary/index.twig:8
 #: resources/templates/database/data_dictionary/index.twig:125
@@ -1836,9 +1819,8 @@ msgid "Select page"
 msgstr "เลือกหน้า"
 
 #: resources/templates/database/designer/schema_export.twig:6
-#, fuzzy
 msgid "Select export relational type:"
-msgstr "แก้ไข หรือส่งออก รีเลชันแนล สกีมา"
+msgstr "เลือกประเภทความสัมพันธ์สำหรับการส่งออก:"
 
 #: resources/templates/database/events/editor_form.twig:10
 #: resources/templates/database/routines/editor_form.twig:11
@@ -2025,9 +2007,8 @@ msgid "Drop"
 msgstr "ลบทิ้ง"
 
 #: resources/templates/database/events/index.twig:29
-#, fuzzy
 msgid "Create new event"
-msgstr "รุ่นของเซิร์ฟเวอร์"
+msgstr "สร้างเหตุการณ์ใหม่"
 
 #: resources/templates/database/events/index.twig:38
 msgid "There are no events to display."
@@ -2051,9 +2032,8 @@ msgid "OFF"
 msgstr "ปิด"
 
 #: resources/templates/database/events/index.twig:161
-#, fuzzy
 msgid "Event editor"
-msgstr "รุ่น Excel"
+msgstr "ตัวแก้ไขเหตุการณ์"
 
 #: resources/templates/database/events/index.twig:166
 #: resources/templates/database/routines/index.twig:83
@@ -2074,14 +2054,12 @@ msgstr "กำลังโหลด…"
 #: resources/templates/database/routines/index.twig:88
 #: resources/templates/server/privileges/users_overview.twig:177
 #: resources/templates/triggers/list.twig:91
-#, fuzzy
 msgid "Save changes"
-msgstr "บันทึกหน้า"
+msgstr "บันทึกการเปลี่ยนแปลง"
 
 #: resources/templates/database/events/index.twig:181
-#, fuzzy
 msgid "Export event"
-msgstr "ยังไม่ได้เลือกแถว"
+msgstr "ส่งออกเหตุการณ์"
 
 #: resources/templates/database/export/index.twig:61
 msgid ""
@@ -3752,9 +3730,8 @@ msgid "Notice"
 msgstr "ประกาศ"
 
 #: resources/templates/home/index.twig:316
-#, fuzzy
 msgid "phpMyAdmin Themes"
-msgstr "หน้าเว็บ phpMyAdmin"
+msgstr "ธีม phpMyAdmin"
 
 #: resources/templates/home/index.twig:327
 msgid "Get more themes!"
@@ -3808,14 +3785,12 @@ msgstr ""
 "<strong>.sql.zip</strong>"
 
 #: resources/templates/import.twig:37
-#, fuzzy
 msgid "Upload a file"
-msgstr "บันทึกเป็นไฟล์"
+msgstr "อัปโหลดไฟล์"
 
 #: resources/templates/import.twig:40
-#, fuzzy
 msgid "Select file to import"
-msgstr "ไฟล์ที่ต้องการนำเข้า:"
+msgstr "เลือกไฟล์นำเข้า"
 
 #: resources/templates/import.twig:46 resources/templates/import.twig:72
 #: resources/templates/preferences/manage/main.twig:21
@@ -3930,9 +3905,8 @@ msgid "Password:"
 msgstr "รหัสผ่าน:"
 
 #: resources/templates/login/form.twig:93
-#, fuzzy
 msgid "Server choice:"
-msgstr "ตัวเลือกเซิร์ฟเวอร์"
+msgstr "ตัวเลือกเซิร์ฟเวอร์:"
 
 #: resources/templates/login/header.twig:10
 #: src/Plugins/Auth/AuthenticationConfig.php:83
@@ -3984,9 +3958,8 @@ msgstr ""
 #: resources/templates/login/twofactor/key_configure.twig:3
 #: resources/templates/login/twofactor/key.twig:3
 #: resources/templates/preferences/two_factor/main.twig:56
-#, fuzzy
 msgid "Deprecated!"
-msgstr "ทำซ้ำเรียบร้อยแล้ว"
+msgstr "เลิกใช้แล้ว!"
 
 #: resources/templates/login/twofactor/key_configure.twig:4
 #: resources/templates/login/twofactor/key.twig:4
@@ -4050,9 +4023,8 @@ msgid ""
 msgstr "โปรดเชื่อมต่ออุปกรณ์ WebAuthn/FIDO2 ของคุณ จากนั้นยืนยันการเข้าสู่ระบบบนอุปกรณ์"
 
 #: resources/templates/menu/main.twig:27
-#, fuzzy
 msgid "View:"
-msgstr "ตารางจำลอง (View)"
+msgstr "มุมมอง:"
 
 #: resources/templates/menu/main.twig:29 src/Plugins/Export/Helpers/Pdf.php:178
 msgid "Table:"
@@ -4060,9 +4032,8 @@ msgstr "ตาราง:"
 
 #. l10n: Show or hide the menu using the hamburger style button
 #: resources/templates/menu/main.twig:49
-#, fuzzy
 msgid "Toggle navigation"
-msgstr "คำอธิบายตาราง"
+msgstr "สลับการนำทาง"
 
 #. l10n: Current page
 #: resources/templates/menu/main.twig:59
@@ -4089,15 +4060,13 @@ msgstr "ล้างข้อมูลเซสชัน"
 
 #: resources/templates/navigation/main.twig:39
 #: resources/templates/navigation/main.twig:40
-#, fuzzy
 msgid "MariaDB Documentation"
-msgstr "เอกสารประกอบ"
+msgstr "เอกสารประกอบ MariaDB"
 
 #: resources/templates/navigation/main.twig:39
 #: resources/templates/navigation/main.twig:40
-#, fuzzy
 msgid "MySQL Documentation"
-msgstr "เอกสารประกอบ"
+msgstr "เอกสารประกอบ MySQL"
 
 #: resources/templates/navigation/main.twig:43
 #: resources/templates/navigation/main.twig:44
@@ -4119,9 +4088,8 @@ msgid "Drop files here"
 msgstr "หย่อนไฟล์ลงที่นี่"
 
 #: resources/templates/navigation/main.twig:88
-#, fuzzy
 msgid "SQL upload"
-msgstr "ผลลัพธ์ SQL"
+msgstr "อัปโหลด SQL"
 
 #: resources/templates/navigation/tree/database_select.twig:10
 #: resources/templates/server/databases/index.twig:3
@@ -4144,9 +4112,8 @@ msgid "Clear fast filter"
 msgstr "ล้างค่าตัวกรองเร็ว"
 
 #: resources/templates/navigation/tree/quick_warp.twig:5
-#, fuzzy
 msgid "Recently visited tables"
-msgstr "ตารางที่ใช้ล่าสุด"
+msgstr "ตารางที่เข้าชมล่าสุด"
 
 #: resources/templates/navigation/tree/quick_warp.twig:6
 msgid "Recent"
@@ -4378,9 +4345,8 @@ msgid "There are no recent tables."
 msgstr "ไม่มีตารางล่าสุด"
 
 #: resources/templates/relation/check_relations.twig:3
-#, fuzzy
 msgid "phpMyAdmin configuration storage"
-msgstr "เอกสารประกอบของ phpMyAdmin"
+msgstr "พื้นที่จัดเก็บการตั้งค่า phpMyAdmin"
 
 #: resources/templates/relation/check_relations.twig:9
 msgid "Configuration of pmadb…"
@@ -7581,9 +7547,8 @@ msgid "Reset zoom"
 msgstr "รีเซ็ตการซูม"
 
 #: resources/templates/transformation_overview.twig:1
-#, fuzzy
 msgid "Available media types"
-msgstr "MIME-types ที่มีอยู่"
+msgstr "ประเภทสื่อที่มีให้เลือก"
 
 #: resources/templates/transformation_overview.twig:13
 msgid "Available browser display transformations"
@@ -7591,10 +7556,9 @@ msgstr "การแปลงการแสดงผลเบราว์เซ
 
 #: resources/templates/transformation_overview.twig:19
 #: resources/templates/transformation_overview.twig:38
-#, fuzzy
 msgctxt "for media type transformation"
 msgid "Description"
-msgstr "คำอธิบาย"
+msgstr "รายละเอียด"
 
 #: resources/templates/transformation_overview.twig:32
 msgid "Available input transformations"
@@ -7848,7 +7812,7 @@ msgstr ""
 
 #: src/Advisory/Rules.php:128
 msgid "slow_query_log is set to 'OFF'"
-msgstr "slow_query_log  ถูกตั้งเป็น 'OFF'"
+msgstr "slow_query_log ถูกตั้งเป็น 'OFF'"
 
 #: src/Advisory/Rules.php:133
 msgid "Release Series"
@@ -16614,7 +16578,7 @@ msgstr "ใหม่"
 
 #: src/Navigation/Nodes/Node.php:568
 msgid "Expand/Collapse"
-msgstr "ขยาย/ย่อ"
+msgstr "ขยาย/ยุบ"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:22
 #: src/Navigation/Nodes/NodeProcedureContainer.php:26
@@ -17444,7 +17408,7 @@ msgstr "ความสัมพันธ์สำหรับตาราง"
 #: src/Plugins/Export/ExportSql.php:1928 src/Plugins/Export/ExportSql.php:1910
 #: src/Plugins/Export/ExportSql.php:1917
 msgid "It appears your table uses triggers;"
-msgstr "ดูเหมือนว่าตารางของคุณจะใช้ทริกเกอร์"
+msgstr "ดูเหมือนว่าตารางของคุณจะใช้ทริกเกอร์;"
 
 #: src/Plugins/Export/ExportSql.php:1962 src/Plugins/Export/ExportSql.php:1940
 #: src/Plugins/Export/ExportSql.php:1947
