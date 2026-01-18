@@ -518,6 +518,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
   // Ajaxification for 'Bookmark this SQL query'
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '.bookmarkQueryForm', function (e) {
     e.preventDefault();
+    if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.emptyCheckTheField)(this, 'bkm_fields[bkm_label]')) {
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
+      return false;
+    }
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize(), function (data) {
