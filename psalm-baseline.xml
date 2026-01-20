@@ -8792,9 +8792,6 @@
     </TypeDoesNotContainNull>
   </file>
   <file src="tests/unit/AbstractTestCase.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_SERVER['PHP_SELF']]]></code>
       <code><![CDATA[$_SERVER['REQUEST_TIME']]]></code>
