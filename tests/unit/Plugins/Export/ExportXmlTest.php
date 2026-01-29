@@ -31,46 +31,28 @@ use function ob_start;
 
 #[CoversClass(ExportXml::class)]
 #[Medium]
-class ExportXmlTest extends AbstractTestCase
+final class ExportXmlTest extends AbstractTestCase
 {
-    protected ExportXml $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = false;
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
         Current::$database = 'db';
         Config::getInstance()->selectedServer['DisableIS'] = true;
-        $relation = new Relation($dbi);
-        $this->object = new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportXml = $this->getExportXml();
+
         $method = new ReflectionMethod(ExportXml::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportXml, null);
 
         $attrProperties = new ReflectionProperty(ExportXml::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportXml);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -244,13 +226,14 @@ class ExportXmlTest extends AbstractTestCase
                 'xml_export_triggers' => 'On',
             ]);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml = $this->getExportXml();
+        $exportXml->setExportOptions($request, new Export());
 
-        $this->object->setTables([]);
+        $exportXml->setTables([]);
         Current::$table = 'table';
 
         ob_start();
-        $this->object->exportHeader();
+        $exportXml->exportHeader();
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -307,12 +290,12 @@ class ExportXmlTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_triggers' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml->setExportOptions($request, new Export());
 
-        $this->object->setTables(['t1', 't2']);
+        $exportXml->setTables(['t1', 't2']);
 
         ob_start();
-        $this->object->exportHeader();
+        $exportXml->exportHeader();
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -330,8 +313,9 @@ class ExportXmlTest extends AbstractTestCase
 
     public function testExportFooter(): void
     {
+        $exportXml = $this->getExportXml();
         $this->expectOutputString('&lt;/pma_xml_export&gt;');
-        $this->object->exportFooter();
+        $exportXml->exportFooter();
     }
 
     public function testExportDBHeader(): void
@@ -339,10 +323,11 @@ class ExportXmlTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_contents' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml = $this->getExportXml();
+        $exportXml->setExportOptions($request, new Export());
 
         ob_start();
-        $this->object->exportDBHeader('&db');
+        $exportXml->exportDBHeader('&db');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -352,9 +337,9 @@ class ExportXmlTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([]);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml->setExportOptions($request, new Export());
 
-        $this->object->exportDBHeader('&db');
+        $exportXml->exportDBHeader('&db');
     }
 
     public function testExportDBFooter(): void
@@ -362,10 +347,11 @@ class ExportXmlTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_contents' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml = $this->getExportXml();
+        $exportXml->setExportOptions($request, new Export());
 
         ob_start();
-        $this->object->exportDBFooter('&db');
+        $exportXml->exportDBFooter('&db');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -375,28 +361,33 @@ class ExportXmlTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([]);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml->setExportOptions($request, new Export());
 
-        $this->object->exportDBFooter('&db');
+        $exportXml->exportDBFooter('&db');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportXml = $this->getExportXml();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportXml->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_contents' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportXml = $this->getExportXml($dbi);
+        $exportXml->setExportOptions($request, new Export());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportXml->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -419,5 +410,13 @@ class ExportXmlTest extends AbstractTestCase
             . '        </table>' . "\n",
             $result,
         );
+    }
+
+    private function getExportXml(DatabaseInterface|null $dbi = null): ExportXml
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

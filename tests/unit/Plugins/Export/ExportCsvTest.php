@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
@@ -29,44 +30,26 @@ use function ob_start;
 
 #[CoversClass(ExportCsv::class)]
 #[Medium]
-class ExportCsvTest extends AbstractTestCase
+final class ExportCsvTest extends AbstractTestCase
 {
-    protected ExportCsv $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         Current::$database = '';
         Current::$table = '';
         Current::$lang = '';
-
-        $relation = new Relation($dbi);
-        $this->object = new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportCsv = $this->getExportCsv();
+
         $method = new ReflectionMethod(ExportCsv::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportCsv, null);
 
         $attrProperties = new ReflectionProperty(ExportCsv::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportCsv);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -230,46 +213,55 @@ class ExportCsvTest extends AbstractTestCase
     {
         // case 1
         $this->expectNotToPerformAssertions();
-        $this->object->exportHeader();
+        $exportCsv = $this->getExportCsv();
+        $exportCsv->exportHeader();
     }
 
     public function testExportFooter(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportFooter();
+        $exportCsv = $this->getExportCsv();
+        $exportCsv->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('testDB');
+        $exportCsv = $this->getExportCsv();
+        $exportCsv->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportCsv = $this->getExportCsv();
+        $exportCsv->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportCsv = $this->getExportCsv();
+        $exportCsv->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
         // case 1
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['csv_terminated' => ';', 'csv_columns' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
-        $this->object->exportHeader();
+        $exportCsv = $this->getExportCsv($dbi);
+        $exportCsv->setExportOptions($request, new Export());
+        $exportCsv->exportHeader();
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table_csv_export`;');
+        $exportCsv->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table_csv_export`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -282,15 +274,11 @@ class ExportCsvTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['csv_enclosed' => '"', 'csv_terminated' => ';', 'csv_columns' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
-        $this->object->exportHeader();
+        $exportCsv->setExportOptions($request, new Export());
+        $exportCsv->exportHeader();
 
         ob_start();
-        $this->object->exportData(
-            'test_db',
-            'test_table_csv_export',
-            'SELECT * FROM `test_db`.`test_table_csv_export`;',
-        );
+        $exportCsv->exportData('test_db', 'test_table_csv_export', 'SELECT * FROM `test_db`.`test_table_csv_export`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -308,15 +296,11 @@ class ExportCsvTest extends AbstractTestCase
                 'csv_columns' => 'On',
             ]);
 
-        $this->object->setExportOptions($request, new Export());
-        $this->object->exportHeader();
+        $exportCsv->setExportOptions($request, new Export());
+        $exportCsv->exportHeader();
 
         ob_start();
-        $this->object->exportData(
-            'test_db',
-            'test_table_csv_export',
-            'SELECT * FROM `test_db`.`test_table_csv_export`;',
-        );
+        $exportCsv->exportData('test_db', 'test_table_csv_export', 'SELECT * FROM `test_db`.`test_table_csv_export`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -326,5 +310,13 @@ class ExportCsvTest extends AbstractTestCase
                 . '3,|' . "\n" . 'Abcd|,2012-01-20 02:00:02' . "\n",
             $result,
         );
+    }
+
+    private function getExportCsv(DatabaseInterface|null $dbi = null): ExportCsv
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

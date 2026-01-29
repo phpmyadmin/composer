@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
@@ -22,41 +23,24 @@ use ReflectionProperty;
 
 #[CoversClass(ExportJson::class)]
 #[Medium]
-class ExportJsonTest extends AbstractTestCase
+final class ExportJsonTest extends AbstractTestCase
 {
-    protected ExportJson $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
-        $relation = new Relation($dbi);
-        $this->object = new ExportJson($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportJson = $this->getExportJson();
+
         $method = new ReflectionMethod(ExportJson::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportJson, null);
 
         $attrProperties = new ReflectionProperty(ExportJson::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportJson);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -113,44 +97,50 @@ class ExportJsonTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        $exportJson = $this->getExportJson();
         $this->expectOutputString(
             "[\n"
             . '{"type":"header","version":"' . Version::VERSION
             . '","comment":"Export to JSON plugin for phpMyAdmin"},'
             . "\n",
         );
-
-        $this->object->exportHeader();
+        $exportJson->exportHeader();
     }
 
     public function testExportFooter(): void
     {
+        $exportJson = $this->getExportJson();
         $this->expectOutputString(']' . "\n");
-
-        $this->object->exportFooter();
+        $exportJson->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportJson = $this->getExportJson();
         $this->expectOutputString('{"type":"database","name":"testDB"},' . "\n");
-
-        $this->object->exportDBHeader('testDB');
+        $exportJson->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportJson = $this->getExportJson();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportJson->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportJson = $this->getExportJson();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportJson->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportJson = $this->getExportJson($dbi);
         $this->expectOutputString(
             '{"type":"table","name":"test_table","database":"test_db","data":' . "\n"
             . '[' . "\n"
@@ -161,11 +151,15 @@ class ExportJsonTest extends AbstractTestCase
             . '}' . "\n",
         );
 
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportJson->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
     }
 
     public function testExportComplexData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportJson = $this->getExportJson($dbi);
         // normalString binaryField textField blobField
         $this->expectOutputString(
             '{"type":"table","name":"test_table_complex","database":"test_db","data":'
@@ -178,11 +172,15 @@ class ExportJsonTest extends AbstractTestCase
             . "]\n}\n",
         );
 
-        $this->object->exportData('test_db', 'test_table_complex', 'SELECT * FROM `test_db`.`test_table_complex`;');
+        $exportJson->exportData('test_db', 'test_table_complex', 'SELECT * FROM `test_db`.`test_table_complex`;');
     }
 
     public function testExportRawComplexData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportJson = $this->getExportJson($dbi);
         $this->expectOutputString(
             '{"type":"raw","data":'
             . "\n[\n"
@@ -194,6 +192,14 @@ class ExportJsonTest extends AbstractTestCase
             . "]\n}\n",
         );
 
-        $this->object->exportRawQuery('', 'SELECT * FROM `test_db`.`test_table_complex`;');
+        $exportJson->exportRawQuery('', 'SELECT * FROM `test_db`.`test_table_complex`;');
+    }
+
+    private function getExportJson(DatabaseInterface|null $dbi = null): ExportJson
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportJson($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

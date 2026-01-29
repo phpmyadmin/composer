@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -25,44 +26,27 @@ use function ob_start;
 
 #[CoversClass(ExportYaml::class)]
 #[Medium]
-class ExportYamlTest extends AbstractTestCase
+final class ExportYamlTest extends AbstractTestCase
 {
-    protected ExportYaml $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = false;
         Current::$database = '';
         Current::$table = '';
         Current::$lang = 'en';
-        $relation = new Relation($dbi);
-        $this->object = new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportYaml = $this->getExportYaml();
+
         $method = new ReflectionMethod(ExportYaml::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportYaml, null);
 
         $attrProperties = new ReflectionProperty(ExportYaml::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportYaml);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -110,8 +94,10 @@ class ExportYamlTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        $exportYaml = $this->getExportYaml();
+
         ob_start();
-        $this->object->exportHeader();
+        $exportYaml->exportHeader();
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -121,32 +107,41 @@ class ExportYamlTest extends AbstractTestCase
 
     public function testExportFooter(): void
     {
+        $exportYaml = $this->getExportYaml();
         $this->expectOutputString("...\n");
-        $this->object->exportFooter();
+        $exportYaml->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportYaml = $this->getExportYaml();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('&db');
+        $exportYaml->exportDBHeader('&db');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportYaml = $this->getExportYaml();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('&db');
+        $exportYaml->exportDBFooter('&db');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportYaml = $this->getExportYaml();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportYaml->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportYaml = $this->getExportYaml($dbi);
+
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table_yaml`;');
+        $exportYaml->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table_yaml`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -178,5 +173,13 @@ class ExportYamlTest extends AbstractTestCase
             '  textfield: &quot;+30.2103210000&quot;' . "\n",
             $result,
         );
+    }
+
+    private function getExportYaml(DatabaseInterface|null $dbi = null): ExportYaml
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

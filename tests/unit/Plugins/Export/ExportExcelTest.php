@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -29,40 +30,17 @@ use function ob_start;
 
 #[CoversClass(ExportExcel::class)]
 #[Medium]
-class ExportExcelTest extends AbstractTestCase
+final class ExportExcelTest extends AbstractTestCase
 {
-    protected ExportExcel $object;
-
-    /**
-     * Configures global environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-        $relation = new Relation($dbi);
-        $this->object = new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testSetProperties(): void
     {
+        $exportExcel = $this->getExportExcel();
+
         $method = new ReflectionMethod(ExportExcel::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportExcel, null);
 
         $attrProperties = new ReflectionProperty(ExportExcel::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportExcel);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -188,39 +166,46 @@ class ExportExcelTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        $exportExcel = $this->getExportExcel();
+
         // case 1
         $this->expectNotToPerformAssertions();
-        $this->object->exportHeader();
+        $exportExcel->exportHeader();
 
         // case 2
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['excel_edition' => 'mac_excel2003']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportExcel->setExportOptions($request, new Export());
 
-        $this->object->exportHeader();
+        $exportExcel->exportHeader();
 
         // case 3
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['excel_edition' => 'mac_excel2008']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportExcel->setExportOptions($request, new Export());
 
-        $this->object->exportHeader();
+        $exportExcel->exportHeader();
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportExcel = $this->getExportExcel($dbi);
+
         // case 1
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['excel_columns' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportExcel->setExportOptions($request, new Export());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportExcel->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -230,5 +215,13 @@ class ExportExcelTest extends AbstractTestCase
                 . '"3";"Abcd";"2012-01-20 02:00:02"' . "\015\012",
             $result,
         );
+    }
+
+    private function getExportExcel(DatabaseInterface|null $dbi = null): ExportExcel
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

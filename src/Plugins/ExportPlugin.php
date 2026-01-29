@@ -38,9 +38,9 @@ abstract class ExportPlugin implements Plugin
     protected StructureOrData $structureOrData = StructureOrData::Data;
 
     final public function __construct(
-        public Relation $relation,
-        protected OutputHandler $outputHandler,
-        public Transformations $transformations,
+        protected readonly Relation $relation,
+        protected readonly OutputHandler $outputHandler,
+        protected readonly Transformations $transformations,
     ) {
         $this->properties = $this->setProperties();
     }

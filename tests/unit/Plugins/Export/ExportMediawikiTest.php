@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
 use PhpMyAdmin\Column;
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export as SettingsExport;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
@@ -32,45 +33,27 @@ use function ob_start;
 
 #[CoversClass(ExportMediawiki::class)]
 #[Medium]
-class ExportMediawikiTest extends AbstractTestCase
+final class ExportMediawikiTest extends AbstractTestCase
 {
-    protected ExportMediawiki $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
         Current::$database = '';
         Current::$table = '';
         Current::$lang = 'en';
-        $relation = new Relation($dbi);
-        $this->object = new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
+
         $method = new ReflectionMethod(ExportMediawiki::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportMediawiki, null);
 
         $attrProperties = new ReflectionProperty(ExportMediawiki::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportMediawiki);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -181,32 +164,37 @@ class ExportMediawikiTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
         $this->expectNotToPerformAssertions();
-        $this->object->exportHeader();
+        $exportMediawiki->exportHeader();
     }
 
     public function testExportFooter(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
         $this->expectNotToPerformAssertions();
-        $this->object->exportFooter();
+        $exportMediawiki->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('testDB');
+        $exportMediawiki->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportMediawiki->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportMediawiki = $this->getExportMediawiki();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportMediawiki->exportDBCreate('testDB');
     }
 
     /**
@@ -233,10 +221,11 @@ class ExportMediawikiTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_headers' => 'On', 'mediawiki_caption' => 'On']);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportMediawiki = $this->getExportMediawiki();
+        $exportMediawiki->setExportOptions($request, new SettingsExport());
 
         ob_start();
-        $this->object->exportStructure('db', 'table', 'create_table');
+        $exportMediawiki->exportStructure('db', 'table', 'create_table');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -273,13 +262,17 @@ class ExportMediawikiTest extends AbstractTestCase
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_headers' => 'On', 'mediawiki_caption' => 'On']);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportMediawiki = $this->getExportMediawiki($dbi);
+        $exportMediawiki->setExportOptions($request, new SettingsExport());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportMediawiki->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -319,13 +312,15 @@ class ExportMediawikiTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_structure_or_data' => 'structure']);
-        $this->object->setExportOptions($request, new SettingsExport());
+
+        $exportMediawiki = $this->getExportMediawiki();
+        $exportMediawiki->setExportOptions($request, new SettingsExport());
         ob_start();
         $export = new Export($dbi, new OutputHandler());
         $export->exportTable(
             'testdb',
             'testtable',
-            $this->object,
+            $exportMediawiki,
             null,
             '0',
             '0',
@@ -336,5 +331,13 @@ class ExportMediawikiTest extends AbstractTestCase
         self::assertIsString($result);
         self::assertStringContainsString('Table structure for', $result);
         self::assertStringContainsString('testtable', $result);
+    }
+
+    private function getExportMediawiki(DatabaseInterface|null $dbi = null): ExportMediawiki
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }

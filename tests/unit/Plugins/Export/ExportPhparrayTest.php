@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -25,44 +26,27 @@ use function ob_start;
 
 #[CoversClass(ExportPhparray::class)]
 #[Medium]
-class ExportPhparrayTest extends AbstractTestCase
+final class ExportPhparrayTest extends AbstractTestCase
 {
-    protected ExportPhparray $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
         Current::$database = '';
         Current::$table = '';
         Current::$lang = 'en';
-        $relation = new Relation($dbi);
-        $this->object = new ExportPhparray($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportPhparray = $this->getExportPhparray();
+
         $method = new ReflectionMethod(ExportPhparray::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportPhparray, null);
 
         $attrProperties = new ReflectionProperty(ExportPhparray::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportPhparray);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -114,8 +98,10 @@ class ExportPhparrayTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        $exportPhparray = $this->getExportPhparray();
+
         ob_start();
-        $this->object->exportHeader();
+        $exportPhparray->exportHeader();
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -125,14 +111,17 @@ class ExportPhparrayTest extends AbstractTestCase
 
     public function testExportFooter(): void
     {
+        $exportPhparray = $this->getExportPhparray();
         $this->expectNotToPerformAssertions();
-        $this->object->exportFooter();
+        $exportPhparray->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportPhparray = $this->getExportPhparray();
+
         ob_start();
-        $this->object->exportDBHeader('db');
+        $exportPhparray->exportDBHeader('db');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -142,20 +131,27 @@ class ExportPhparrayTest extends AbstractTestCase
 
     public function testExportDBFooter(): void
     {
+        $exportPhparray = $this->getExportPhparray();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportPhparray->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportPhparray = $this->getExportPhparray();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportPhparray->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+        DatabaseInterface::$instance = $dbi;
+
+        $exportPhparray = $this->getExportPhparray($dbi);
+
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportPhparray->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -170,7 +166,7 @@ class ExportPhparrayTest extends AbstractTestCase
 
         // case 2: test invalid variable name fix
         ob_start();
-        $this->object->exportData('test_db', '0`932table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportPhparray->exportData('test_db', '0`932table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -183,5 +179,13 @@ class ExportPhparrayTest extends AbstractTestCase
             ');' . "\n",
             $result,
         );
+    }
+
+    private function getExportPhparray(DatabaseInterface|null $dbi = null): ExportPhparray
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $relation = new Relation($dbi, new Config());
+
+        return new ExportPhparray($relation, new OutputHandler(), new Transformations($dbi, $relation));
     }
 }
