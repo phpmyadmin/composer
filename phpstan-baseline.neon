@@ -9028,15 +9028,6 @@ parameters:
 			path: src/Plugins/Export/Helpers/Pdf.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 4
-			path: src/Plugins/Export/Helpers/Pdf.php
-
-		-
 			message: '#^Cannot access offset ''columns'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1

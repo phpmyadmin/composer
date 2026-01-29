@@ -7,6 +7,7 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportPdf;
@@ -188,15 +189,17 @@ final class ExportPdfTest extends AbstractTestCase
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+
         $pdf = $this->getMockBuilder(Pdf::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $pdf->expects(self::once())
             ->method('mysqlReport')
-            ->with('SELECT');
+            ->with($dbi, 'SELECT');
 
-        $exportPdf = $this->getExportPdf();
+        $exportPdf = $this->getExportPdf($dbi);
 
         $attrPdf = new ReflectionProperty(ExportPdf::class, 'pdf');
         $attrPdf->setValue($exportPdf, $pdf);
@@ -204,9 +207,9 @@ final class ExportPdfTest extends AbstractTestCase
         $exportPdf->exportData('db', 'table', 'SELECT');
     }
 
-    private function getExportPdf(): ExportPdf
+    private function getExportPdf(DatabaseInterface|null $dbi = null): ExportPdf
     {
-        $dbi = $this->createDatabaseInterface();
+        $dbi ??= $this->createDatabaseInterface();
         $config = new Config();
         $relation = new Relation($dbi, $config);
 

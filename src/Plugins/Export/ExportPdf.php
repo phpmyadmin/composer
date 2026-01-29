@@ -129,7 +129,7 @@ class ExportPdf extends ExportPlugin
         $this->pdf->setTableAlias($tableAlias);
         $this->pdf->setAliases($aliases);
         $this->pdf->setPurpose(__('Dumping data'));
-        $this->pdf->mysqlReport($sqlQuery);
+        $this->pdf->mysqlReport($this->dbi, $sqlQuery);
     }
 
     /**
@@ -149,7 +149,7 @@ class ExportPdf extends ExportPlugin
             $this->dbi->selectDb($db);
         }
 
-        $this->pdf->mysqlReport($sqlQuery);
+        $this->pdf->mysqlReport($this->dbi, $sqlQuery);
     }
 
     /**
@@ -189,8 +189,17 @@ class ExportPdf extends ExportPlugin
 
         match ($exportMode) {
             'create_table',
-            'create_view' => $this->pdf->getTableDef($db, $table, $this->doRelation, true, $this->doMime),
-            'triggers' => $this->pdf->getTriggers($db, $table),
+            'create_view' => $this->pdf->getTableDef(
+                $this->dbi,
+                $this->relation,
+                $this->transformations,
+                $db,
+                $table,
+                $this->doRelation,
+                true,
+                $this->doMime,
+            ),
+            'triggers' => $this->pdf->getTriggers($this->dbi, $db, $table),
             default => true,
         };
     }

@@ -64,37 +64,6 @@ class Pdf extends PdfLib
     /** @var mixed[] */
     private array $aliases = [];
 
-    private Relation $relation;
-
-    private Transformations $transformations;
-
-    /**
-     * Constructs PDF and configures standard parameters.
-     *
-     * @param string    $orientation page orientation
-     * @param string    $unit        unit
-     * @param string    $format      the format used for pages
-     * @param bool      $unicode     true means that the input text is unicode
-     * @param string    $encoding    charset encoding; default is UTF-8.
-     * @param bool      $diskcache   DEPRECATED TCPDF FEATURE
-     * @param false|int $pdfa        If not false, set the document to PDF/A mode and the good version (1 or 3)
-     */
-    public function __construct(
-        string $orientation = 'P',
-        string $unit = 'mm',
-        string $format = 'A4',
-        bool $unicode = true,
-        string $encoding = 'UTF-8',
-        bool $diskcache = false,
-        false|int $pdfa = false,
-    ) {
-        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);
-
-        $dbi = DatabaseInterface::getInstance();
-        $this->relation = new Relation($dbi);
-        $this->transformations = new Transformations($dbi, $this->relation);
-    }
-
     /**
      * Add page if needed.
      *
@@ -310,9 +279,9 @@ class Pdf extends PdfLib
      * @param string $db    database name
      * @param string $table table name
      */
-    public function getTriggers(string $db, string $table): void
+    public function getTriggers(DatabaseInterface $dbi, string $db, string $table): void
     {
-        $triggers = Triggers::getDetails(DatabaseInterface::getInstance(), $db, $table);
+        $triggers = Triggers::getDetails($dbi, $db, $table);
         if ($triggers === []) {
             return; //prevents printing blank trigger list for any table
         }
@@ -446,13 +415,16 @@ class Pdf extends PdfLib
      *                            export types which use this parameter
      */
     public function getTableDef(
+        DatabaseInterface $dbi,
+        Relation $relation,
+        Transformations $transformations,
         string $db,
         string $table,
         bool $doRelation,
         bool $doComments,
         bool $doMime,
     ): void {
-        $relationParameters = $this->relation->getRelationParameters();
+        $relationParameters = $relation->getRelationParameters();
 
         unset(
             $this->tablewidths,
@@ -461,7 +433,6 @@ class Pdf extends PdfLib
             $this->colAlign,
         );
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets fields properties
          */
@@ -478,7 +449,7 @@ class Pdf extends PdfLib
         if ($doRelation) {
             // Find which tables are related with the current one and write it in
             // an array
-            $foreigners = $this->relation->getForeigners($db, $table);
+            $foreigners = $relation->getForeigners($db, $table);
             $haveRel = ! $foreigners->isEmpty();
         }
 
@@ -530,11 +501,11 @@ class Pdf extends PdfLib
         // Now let's start to write the table structure
 
         if ($doComments) {
-            $comments = $this->relation->getComments($db, $table);
+            $comments = $relation->getComments($db, $table);
         }
 
         if ($doMime && $relationParameters->browserTransformationFeature !== null) {
-            $mimeMap = $this->transformations->getMime($db, $table, true);
+            $mimeMap = $transformations->getMime($db, $table, true);
         }
 
         $columns = $dbi->getColumns($db, $table);
@@ -658,7 +629,7 @@ class Pdf extends PdfLib
      *
      * @param string $query Query to execute
      */
-    public function mysqlReport(string $query): void
+    public function mysqlReport(DatabaseInterface $dbi, string $query): void
     {
         unset(
             $this->tablewidths,
@@ -667,7 +638,6 @@ class Pdf extends PdfLib
             $this->colAlign,
         );
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Pass 1 for column widths
          */
