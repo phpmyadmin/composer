@@ -8656,37 +8656,10 @@ parameters:
 			path: src/Plugins/AuthenticationPluginFactory.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportCodegen.php
-
-		-
 			message: '#^Parameter \#4 \$column of method PhpMyAdmin\\Plugins\\ExportPlugin\:\:getColumnAlias\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 2
 			path: src/Plugins/Export/ExportCodegen.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportCsv.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportExcel.php
 
 		-
 			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, string\|null given\.$#'
@@ -8695,31 +8668,13 @@ parameters:
 			path: src/Plugins/Export/ExportExcel.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 4
-			path: src/Plugins/Export/ExportHtmlword.php
-
-		-
 			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
 			identifier: notEqual.notAllowed
 			count: 2
 			path: src/Plugins/Export/ExportHtmlword.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportJson.php
-
-		-
-			message: '#^Parameter \#4 \$aliases of method PhpMyAdmin\\Plugins\\Export\\ExportJson\:\:doExportForQuery\(\) expects array\<string, array\{tables\: array\<string, array\{columns\: array\<string, string\>\}\>\}\>\|null, array\<mixed\> given\.$#'
+			message: '#^Parameter \#3 \$aliases of method PhpMyAdmin\\Plugins\\Export\\ExportJson\:\:doExportForQuery\(\) expects array\<string, array\{tables\: array\<string, array\{columns\: array\<string, string\>\}\>\}\>\|null, array\<mixed\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Export/ExportJson.php
@@ -8731,15 +8686,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
-			path: src/Plugins/Export/ExportLatex.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 4
 			path: src/Plugins/Export/ExportLatex.php
 
 		-
@@ -8773,24 +8719,6 @@ parameters:
 			path: src/Plugins/Export/ExportLatex.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: src/Plugins/Export/ExportMediawiki.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportOds.php
-
-		-
 			message: '#^Parameter \#1 \$string of function bin2hex expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -8801,15 +8729,6 @@ parameters:
 			identifier: argument.type
 			count: 3
 			path: src/Plugins/Export/ExportOds.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 5
-			path: src/Plugins/Export/ExportOdt.php
 
 		-
 			message: '#^Only booleans are allowed in an if condition, array\|false given\.$#'
@@ -8842,15 +8761,6 @@ parameters:
 			path: src/Plugins/Export/ExportOdt.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Plugins/Export/ExportPdf.php
-
-		-
 			message: '#^Class PhpMyAdmin\\Plugins\\Export\\ExportPdf has an uninitialized property \$pdf\. Give it default value or assign it in the constructor\.$#'
 			identifier: property.uninitialized
 			count: 1
@@ -8869,15 +8779,6 @@ parameters:
 			path: src/Plugins/Export/ExportPdf.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportPhparray.php
-
-		-
 			message: '#^Parameter \#2 \$subject of function preg_match expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -8890,15 +8791,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 4
-			path: src/Plugins/Export/ExportSql.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 15
 			path: src/Plugins/Export/ExportSql.php
 
 		-
@@ -9040,15 +8932,6 @@ parameters:
 			path: src/Plugins/Export/ExportSql.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 5
-			path: src/Plugins/Export/ExportTexytext.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
@@ -9070,15 +8953,6 @@ parameters:
 			path: src/Plugins/Export/ExportXml.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: src/Plugins/Export/ExportXml.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
@@ -9095,15 +8969,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Export/ExportXml.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 2
-			path: src/Plugins/Export/ExportYaml.php
 
 		-
 			message: '#^Binary operation "\+" between \(float\|int\) and mixed results in an error\.$#'

@@ -92,7 +92,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getCompatibilities')
             ->willReturn(['v1', 'v2']);
 
-        DatabaseInterface::$instance = $dbi;
         ExportPlugin::$exportType = ExportType::Server;
         ExportPlugin::$singleTable = false;
 
@@ -277,16 +276,13 @@ final class ExportSqlTest extends AbstractTestCase
 
     public function testExportRoutines(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_drop_table' => 'On',
                 'sql_procedure_function' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql($dbi);
+        $exportSql = $this->getExportSql();
         $exportSql->setExportOptions($request, new Export());
 
         $this->expectOutputString(
@@ -382,12 +378,10 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('query')
             ->with('SET time_zone = "GMT"');
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_use_transaction' => 'On', 'sql_disable_fk' => 'On', 'sql_utc_time' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         $this->expectOutputString('SET FOREIGN_KEY_CHECKS=1;' . "\n" . 'COMMIT;' . "\n");
@@ -421,8 +415,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('query')
             ->with('SET time_zone = "+00:00"');
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_include_comments' => 'On',
@@ -432,7 +424,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_utc_time' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -469,8 +461,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->with('db')
             ->willReturn('utf8_general_ci');
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_structure_or_data' => 'structure_and_data',
@@ -478,7 +468,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_drop_database' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -508,8 +498,8 @@ final class ExportSqlTest extends AbstractTestCase
             ->with('db')
             ->willReturn('testcollation');
 
-        DatabaseInterface::$instance = $dbi;
-
+        $exportSql = $this->getExportSql($dbi);
+        $exportSql->setExportOptions($request, new Export());
         $exportSql->useSqlBackquotes(false);
 
         ob_start();
@@ -580,12 +570,10 @@ final class ExportSqlTest extends AbstractTestCase
         $dbi->expects(self::any())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_procedure_function' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -608,12 +596,6 @@ final class ExportSqlTest extends AbstractTestCase
         $exportSql = $this->getExportSql();
         $exportSql->sqlConstraints = 'SqlConstraints';
 
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        DatabaseInterface::$instance = $dbi;
-
         ob_start();
         $exportSql->exportDBFooter('db');
         $result = ob_get_clean();
@@ -632,12 +614,10 @@ final class ExportSqlTest extends AbstractTestCase
             ->with('db', 'view')
             ->willReturn([new Column('cname', 'int', null, false, '', null, '', '', '')]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_drop_table' => 'On', 'sql_if_not_exists' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         $result = $exportSql->getTableDefStandIn('db', 'view');
@@ -675,12 +655,10 @@ final class ExportSqlTest extends AbstractTestCase
                 ),
             ]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_compatibility' => 'MSSQL', 'sql_if_not_exists' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         $method = new ReflectionMethod(ExportSql::class, 'getTableDefForView');
@@ -716,11 +694,11 @@ final class ExportSqlTest extends AbstractTestCase
                     'cmt',
                 ),
             ]);
-        DatabaseInterface::$instance = $dbi;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_if_not_exists' => 'On']);
 
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         $result = $method->invoke($exportSql, 'db', 'view');
@@ -780,7 +758,6 @@ final class ExportSqlTest extends AbstractTestCase
             ['Table', 'Create Table'],
         );
 
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
@@ -793,6 +770,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_drop_table' => 'On',
             ]);
 
+        $exportSql = $this->getExportSql($this->createDatabaseInterface($dbiDummy));
         $exportSql->setExportOptions($request, new Export());
 
         $result = $exportSql->getTableDef('db', 'table', true, false);
@@ -814,9 +792,6 @@ final class ExportSqlTest extends AbstractTestCase
 
     public function testGetTableDefWithError(): void
     {
-        $exportSql = $this->getExportSql();
-        $exportSql->sqlConstraints = null;
-
         ExportSql::$noConstraintsComments = false;
 
         $isViewQuery = 'SELECT 1 FROM information_schema.VIEWS WHERE TABLE_SCHEMA = \'db\' AND TABLE_NAME = \'table\'';
@@ -829,11 +804,13 @@ final class ExportSqlTest extends AbstractTestCase
         $dbiDummy->addResult('SHOW CREATE TABLE `db`.`table`', []);
         $dbiDummy->addErrorCode('error occurred');
 
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_include_comments' => 'On', 'sql_drop_table' => 'On']);
+
+        $exportSql = $this->getExportSql($this->createDatabaseInterface($dbiDummy));
+        $exportSql->sqlConstraints = null;
 
         $exportSql->setExportOptions($request, new Export());
 
@@ -869,8 +846,6 @@ final class ExportSqlTest extends AbstractTestCase
                 ['foo' => ['foreign_table' => 'ftable', 'foreign_field' => 'ffield']],
             );
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportSql = $this->getExportSql($dbi);
         $exportSql->useSqlBackquotes(false);
 
@@ -899,9 +874,6 @@ final class ExportSqlTest extends AbstractTestCase
 
     public function testExportStructure(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_backquotes' => 'true',
@@ -912,7 +884,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_create_trigger' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql($dbi);
+        $exportSql = $this->getExportSql();
         $exportSql->setExportOptions($request, new Export());
 
         // case 1
@@ -1055,7 +1027,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        DatabaseInterface::$instance = $dbi;
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
@@ -1068,7 +1039,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_hex_for_binary' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -1154,7 +1125,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        DatabaseInterface::$instance = $dbi;
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
@@ -1165,7 +1135,7 @@ final class ExportSqlTest extends AbstractTestCase
                 'sql_ignore' => 'On',
             ]);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -1201,13 +1171,12 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        DatabaseInterface::$instance = $dbi;
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_backquotes' => 'true', 'sql_include_comments' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         ob_start();
@@ -1245,13 +1214,12 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        DatabaseInterface::$instance = $dbi;
         Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_include_comments' => 'On']);
 
-        $exportSql = $this->getExportSql();
+        $exportSql = $this->getExportSql($dbi);
         $exportSql->setExportOptions($request, new Export());
 
         $this->expectException(ExportException::class);
@@ -1503,6 +1471,6 @@ final class ExportSqlTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportSql($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportSql($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

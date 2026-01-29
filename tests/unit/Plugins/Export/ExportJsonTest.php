@@ -6,7 +6,6 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Plugins\Export\ExportJson;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
@@ -137,10 +136,7 @@ final class ExportJsonTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportJson = $this->getExportJson($dbi);
+        $exportJson = $this->getExportJson();
         $this->expectOutputString(
             '{"type":"table","name":"test_table","database":"test_db","data":' . "\n"
             . '[' . "\n"
@@ -156,10 +152,7 @@ final class ExportJsonTest extends AbstractTestCase
 
     public function testExportComplexData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportJson = $this->getExportJson($dbi);
+        $exportJson = $this->getExportJson();
         // normalString binaryField textField blobField
         $this->expectOutputString(
             '{"type":"table","name":"test_table_complex","database":"test_db","data":'
@@ -177,10 +170,7 @@ final class ExportJsonTest extends AbstractTestCase
 
     public function testExportRawComplexData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportJson = $this->getExportJson($dbi);
+        $exportJson = $this->getExportJson();
         $this->expectOutputString(
             '{"type":"raw","data":'
             . "\n[\n"
@@ -195,11 +185,11 @@ final class ExportJsonTest extends AbstractTestCase
         $exportJson->exportRawQuery('', 'SELECT * FROM `test_db`.`test_table_complex`;');
     }
 
-    private function getExportJson(DatabaseInterface|null $dbi = null): ExportJson
+    private function getExportJson(): ExportJson
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportJson($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportJson($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

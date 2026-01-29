@@ -8,7 +8,6 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportCsv;
@@ -247,16 +246,13 @@ final class ExportCsvTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         // case 1
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['csv_terminated' => ';', 'csv_columns' => 'On']);
 
-        $exportCsv = $this->getExportCsv($dbi);
+        $exportCsv = $this->getExportCsv();
         $exportCsv->setExportOptions($request, new Export());
         $exportCsv->exportHeader();
 
@@ -312,11 +308,11 @@ final class ExportCsvTest extends AbstractTestCase
         );
     }
 
-    private function getExportCsv(DatabaseInterface|null $dbi = null): ExportCsv
+    private function getExportCsv(): ExportCsv
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

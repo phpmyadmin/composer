@@ -235,8 +235,6 @@ final class ExportOdsTest extends AbstractTestCase
                 [],
             );
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['ods_null' => '&']);
 
@@ -305,8 +303,6 @@ final class ExportOdsTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['ods_columns' => 'On']);
 
@@ -351,8 +347,6 @@ final class ExportOdsTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportOds = $this->getExportOds($dbi);
         $exportOds->setExportOptions($request, new Export());
         $exportOds->buffer = '';
@@ -370,6 +364,6 @@ final class ExportOdsTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

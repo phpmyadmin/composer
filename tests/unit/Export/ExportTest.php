@@ -70,7 +70,12 @@ class ExportTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         $export = new Export($dbi, new OutputHandler());
         $relation = new Relation($dbi);
-        $exportPlugin = new ExportPhparray($relation, $export->outputHandler, new Transformations($dbi, $relation));
+        $exportPlugin = new ExportPhparray(
+            $relation,
+            $export->outputHandler,
+            new Transformations($dbi, $relation),
+            $dbi,
+        );
 
         $export->outputHandler->setCompression('zip');
         $finalFileName = $export->getFinalFilename($exportPlugin, 'myfilename');
@@ -89,7 +94,12 @@ class ExportTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         $export = new Export($dbi, new OutputHandler());
         $relation = new Relation($dbi);
-        $exportPlugin = new ExportPhparray($relation, $export->outputHandler, new Transformations($dbi, $relation));
+        $exportPlugin = new ExportPhparray(
+            $relation,
+            $export->outputHandler,
+            new Transformations($dbi, $relation),
+            $dbi,
+        );
 
         $export->outputHandler->setCompression('zip');
         $mimeType = $export->getMimeType($exportPlugin);
@@ -139,7 +149,7 @@ class ExportTest extends AbstractTestCase
             ['test_table'],
             ['test_table'],
             ['test_table'],
-            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation)),
+            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi),
             [],
             SeparateFiles::None,
         );
@@ -209,7 +219,7 @@ class ExportTest extends AbstractTestCase
         $relation = new Relation($dbi);
         $export->exportServer(
             ['test_db'],
-            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation)),
+            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi),
             [],
             SeparateFiles::None,
         );

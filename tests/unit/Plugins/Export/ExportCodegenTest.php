@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportCodegen;
@@ -148,10 +147,7 @@ final class ExportCodegenTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['codegen_format' => '1']);
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportCodegen = $this->getExportCodegen($dbi);
+        $exportCodegen = $this->getExportCodegen();
         $exportCodegen->setExportOptions($request, new Export());
 
         ob_start();
@@ -199,10 +195,7 @@ final class ExportCodegenTest extends AbstractTestCase
 
     public function testHandleNHibernateCSBody(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportCodegen = $this->getExportCodegen($dbi);
+        $exportCodegen = $this->getExportCodegen();
 
         $method = new ReflectionMethod(ExportCodegen::class, 'handleNHibernateCSBody');
         $result = $method->invoke($exportCodegen, 'test_db', 'test_table');
@@ -256,10 +249,7 @@ final class ExportCodegenTest extends AbstractTestCase
 
     public function testHandleNHibernateXMLBody(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportCodegen = $this->getExportCodegen($dbi);
+        $exportCodegen = $this->getExportCodegen();
 
         $method = new ReflectionMethod(ExportCodegen::class, 'handleNHibernateXMLBody');
         $result = $method->invoke($exportCodegen, 'test_db', 'test_table');
@@ -284,11 +274,11 @@ final class ExportCodegenTest extends AbstractTestCase
         );
     }
 
-    private function getExportCodegen(DatabaseInterface|null $dbi = null): ExportCodegen
+    private function getExportCodegen(): ExportCodegen
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportCodegen($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportCodegen($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

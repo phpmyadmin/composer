@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Plugins\Export\ExportPhparray;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
@@ -145,10 +144,7 @@ final class ExportPhparrayTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportPhparray = $this->getExportPhparray($dbi);
+        $exportPhparray = $this->getExportPhparray();
 
         ob_start();
         $exportPhparray->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
@@ -181,11 +177,11 @@ final class ExportPhparrayTest extends AbstractTestCase
         );
     }
 
-    private function getExportPhparray(DatabaseInterface|null $dbi = null): ExportPhparray
+    private function getExportPhparray(): ExportPhparray
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportPhparray($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportPhparray($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

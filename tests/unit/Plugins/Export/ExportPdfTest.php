@@ -209,6 +209,6 @@ final class ExportPdfTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportPdf($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportPdf($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

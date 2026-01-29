@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportExcel;
@@ -191,10 +190,7 @@ final class ExportExcelTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportExcel = $this->getExportExcel($dbi);
+        $exportExcel = $this->getExportExcel();
 
         // case 1
         OutputHandler::$asFile = true;
@@ -217,11 +213,11 @@ final class ExportExcelTest extends AbstractTestCase
         );
     }
 
-    private function getExportExcel(DatabaseInterface|null $dbi = null): ExportExcel
+    private function getExportExcel(): ExportExcel
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

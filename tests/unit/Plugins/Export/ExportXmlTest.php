@@ -215,8 +215,6 @@ final class ExportXmlTest extends AbstractTestCase
         $dbiDummy->addResult('SHOW CREATE FUNCTION `d<"b`.`fn`', [['fn', 'fndef']], ['name', 'Create Function']);
         $dbiDummy->addResult('SHOW CREATE PROCEDURE `d<"b`.`pr`', [['pr', 'prdef']], ['name', 'Create Procedure']);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'xml_export_contents' => 'On',
@@ -226,7 +224,7 @@ final class ExportXmlTest extends AbstractTestCase
                 'xml_export_triggers' => 'On',
             ]);
 
-        $exportXml = $this->getExportXml();
+        $exportXml = $this->getExportXml($dbi);
         $exportXml->setExportOptions($request, new Export());
 
         $exportXml->setTables([]);
@@ -285,11 +283,10 @@ final class ExportXmlTest extends AbstractTestCase
             [],
         );
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_triggers' => 'On']);
 
+        $exportXml = $this->getExportXml($dbi);
         $exportXml->setExportOptions($request, new Export());
 
         $exportXml->setTables(['t1', 't2']);
@@ -375,15 +372,12 @@ final class ExportXmlTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['xml_export_contents' => 'On']);
 
-        $exportXml = $this->getExportXml($dbi);
+        $exportXml = $this->getExportXml();
         $exportXml->setExportOptions($request, new Export());
 
         ob_start();
@@ -417,6 +411,6 @@ final class ExportXmlTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

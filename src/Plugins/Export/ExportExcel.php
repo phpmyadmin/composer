@@ -134,11 +134,10 @@ class ExportExcel extends ExportPlugin
         string $sqlQuery,
         array $aliases = [],
     ): void {
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets the data from the database
          */
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         // If required, get fields name at the first line
         if ($this->columns) {
@@ -218,7 +217,7 @@ class ExportExcel extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);

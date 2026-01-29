@@ -107,10 +107,10 @@ class PluginsTest extends AbstractTestCase
         $transformations = new Transformations($dbi, $relation);
         $outputHandler = new OutputHandler();
         $exportList = [
-            new Plugins\Export\ExportJson($relation, $outputHandler, $transformations),
-            new Plugins\Export\ExportOds($relation, $outputHandler, $transformations),
-            new Plugins\Export\ExportSql($relation, $outputHandler, $transformations),
-            new Plugins\Export\ExportXml($relation, $outputHandler, $transformations),
+            new Plugins\Export\ExportJson($relation, $outputHandler, $transformations, $dbi),
+            new Plugins\Export\ExportOds($relation, $outputHandler, $transformations, $dbi),
+            new Plugins\Export\ExportSql($relation, $outputHandler, $transformations, $dbi),
+            new Plugins\Export\ExportXml($relation, $outputHandler, $transformations, $dbi),
         ];
         $actual = Plugins::getChoice($exportList, 'xml');
         $expected = [

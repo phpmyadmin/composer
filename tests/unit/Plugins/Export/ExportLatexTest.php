@@ -470,10 +470,7 @@ final class ExportLatexTest extends AbstractTestCase
                 'latex_null' => 'null',
             ]);
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportLatex = $this->getExportLatex($dbi);
+        $exportLatex = $this->getExportLatex();
         $exportLatex->setExportOptions($request, new SettingsExport());
 
         ob_start();
@@ -576,8 +573,6 @@ final class ExportLatexTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportLatex = $this->getExportLatex($dbi);
 
         $relationParameters = RelationParameters::fromArray([
@@ -660,8 +655,6 @@ final class ExportLatexTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportLatex = $this->getExportLatex($dbi);
         $exportLatex->setExportOptions($request, new SettingsExport());
 
@@ -705,8 +698,6 @@ final class ExportLatexTest extends AbstractTestCase
 
         $dbi->expects(self::never())
             ->method('tryQuery');
-
-        DatabaseInterface::$instance = $dbi;
 
         $config = Config::getInstance();
         $config->selectedServer['host'] = 'localhost';
@@ -779,11 +770,11 @@ final class ExportLatexTest extends AbstractTestCase
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        DatabaseInterface::$instance = $dbi;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['latex_structure_or_data' => 'structure']);
 
-        $exportLatex = $this->getExportLatex();
+        $exportLatex = $this->getExportLatex($dbi);
         $exportLatex->setExportOptions($request, new SettingsExport());
         ob_start();
         $export = new Export($dbi, new OutputHandler());
@@ -808,6 +799,6 @@ final class ExportLatexTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

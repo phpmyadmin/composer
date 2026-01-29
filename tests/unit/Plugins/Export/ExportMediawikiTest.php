@@ -216,12 +216,10 @@ final class ExportMediawikiTest extends AbstractTestCase
             ->with('db', 'table')
             ->willReturn($columns);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_headers' => 'On', 'mediawiki_caption' => 'On']);
 
-        $exportMediawiki = $this->getExportMediawiki();
+        $exportMediawiki = $this->getExportMediawiki($dbi);
         $exportMediawiki->setExportOptions($request, new SettingsExport());
 
         ob_start();
@@ -262,13 +260,10 @@ final class ExportMediawikiTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_headers' => 'On', 'mediawiki_caption' => 'On']);
 
-        $exportMediawiki = $this->getExportMediawiki($dbi);
+        $exportMediawiki = $this->getExportMediawiki();
         $exportMediawiki->setExportOptions($request, new SettingsExport());
 
         ob_start();
@@ -309,11 +304,11 @@ final class ExportMediawikiTest extends AbstractTestCase
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        DatabaseInterface::$instance = $dbi;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['mediawiki_structure_or_data' => 'structure']);
 
-        $exportMediawiki = $this->getExportMediawiki();
+        $exportMediawiki = $this->getExportMediawiki($dbi);
         $exportMediawiki->setExportOptions($request, new SettingsExport());
         ob_start();
         $export = new Export($dbi, new OutputHandler());
@@ -338,6 +333,6 @@ final class ExportMediawikiTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

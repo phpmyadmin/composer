@@ -265,10 +265,7 @@ final class ExportHtmlwordTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportHtmlword = $this->getExportHtmlword($dbi);
+        $exportHtmlword = $this->getExportHtmlword();
 
         // case 1
         OutputHandler::$asFile = true;
@@ -318,8 +315,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
             ->method('getColumns')
             ->with('database', 'view')
             ->willReturn([$column]);
-
-        DatabaseInterface::$instance = $dbi;
 
         $exportHtmlword = $this->getExportHtmlword($dbi);
 
@@ -377,8 +372,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
         $resultStub->expects(self::once())
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
-
-        DatabaseInterface::$instance = $dbi;
 
         $exportHtmlword = $this->getExportHtmlword($dbi);
 
@@ -452,8 +445,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportHtmlword = $this->getExportHtmlword($dbi);
         $exportHtmlword->setExportOptions($request, new SettingsExport());
 
@@ -494,8 +485,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
         $dbi->expects(self::never())
             ->method('tryQuery');
 
-        DatabaseInterface::$instance = $dbi;
-
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::DATABASE => 'database',
             RelationParameters::RELATION => 'rel',
@@ -506,6 +495,7 @@ final class ExportHtmlwordTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['htmlword_relation' => 'On', 'htmlword_mime' => 'On']);
 
+        $exportHtmlword = $this->getExportHtmlword($dbi);
         $exportHtmlword->setExportOptions($request, new SettingsExport());
 
         $result = $exportHtmlword->getTableDef('database', '');
@@ -553,10 +543,7 @@ final class ExportHtmlwordTest extends AbstractTestCase
     public function testExportStructure(): void
     {
         $dbiDummy = $this->createDbiDummy();
-        $dbi = $this->createDatabaseInterface($dbiDummy);
-        DatabaseInterface::$instance = $dbi;
-
-        $exportHtmlword = $this->getExportHtmlword($dbi);
+        $exportHtmlword = $this->getExportHtmlword($this->createDatabaseInterface($dbiDummy));
 
         ob_start();
         $dbiDummy->addSelectDb('test_db');
@@ -666,9 +653,8 @@ final class ExportHtmlwordTest extends AbstractTestCase
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        DatabaseInterface::$instance = $dbi;
 
-        $exportHtmlword = $this->getExportHtmlword();
+        $exportHtmlword = $this->getExportHtmlword($dbi);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['htmlword_structure_or_data' => 'structure']);
@@ -694,6 +680,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportHtmlword($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportHtmlword($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

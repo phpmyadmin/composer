@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests\Plugins\Export;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Plugins\Export\ExportYaml;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
@@ -135,10 +134,7 @@ final class ExportYamlTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportYaml = $this->getExportYaml($dbi);
+        $exportYaml = $this->getExportYaml();
 
         ob_start();
         $exportYaml->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table_yaml`;');
@@ -175,11 +171,11 @@ final class ExportYamlTest extends AbstractTestCase
         );
     }
 
-    private function getExportYaml(DatabaseInterface|null $dbi = null): ExportYaml
+    private function getExportYaml(): ExportYaml
     {
-        $dbi ??= $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

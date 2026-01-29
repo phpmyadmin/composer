@@ -5812,34 +5812,12 @@
     </UnsafeInstantiation>
   </file>
   <file src="src/Plugins/Export/ExportCodegen.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <PossiblyNullArgument>
       <code><![CDATA[$row[0]]]></code>
       <code><![CDATA[$row[0]]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Plugins/Export/ExportCsv.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
-  <file src="src/Plugins/Export/ExportExcel.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Plugins/Export/ExportHtmlword.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$comments[$fieldName]]]></code>
       <code><![CDATA[$mimeMap[$fieldName]['mimetype']]]></code>
@@ -5858,10 +5836,6 @@
     </PossiblyUndefinedVariable>
   </file>
   <file src="src/Plugins/Export/ExportJson.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$aliases]]></code>
     </MixedArgumentTypeCoercion>
@@ -5869,10 +5843,6 @@
   <file src="src/Plugins/Export/ExportLatex.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$mimeMap[$fieldName]['mimetype']]]></code>
@@ -5899,32 +5869,16 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Export/ExportMediawiki.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <PossiblyNullOperand>
       <code><![CDATA[$row[$i]]]></code>
     </PossiblyNullOperand>
   </file>
   <file src="src/Plugins/Export/ExportOds.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <PossiblyNullArgument>
       <code><![CDATA[$row[$j]]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Plugins/Export/ExportOdt.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$comments[$fieldName]]]></code>
       <code><![CDATA[$foreigner['foreign_field']]]></code>
@@ -5951,9 +5905,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Export/ExportPdf.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$this->pdf->getPDFData()]]></code>
     </MixedArgument>
@@ -5964,12 +5915,6 @@
       <code><![CDATA[$pdf]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Plugins/Export/ExportPhparray.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Plugins/Export/ExportSql.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$token->value]]></code>
@@ -5979,21 +5924,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
     <LessSpecificReturnStatement>
       <code><![CDATA[(int) $fromConfig]]></code>
@@ -6056,13 +5986,6 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Plugins/Export/ExportTexytext.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$comments[$fieldName]]]></code>
       <code><![CDATA[$mimeMap[$fieldName]['mimetype']]]></code>
@@ -6083,9 +6006,6 @@
   <file src="src/Plugins/Export/ExportXml.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
     <InvalidArgument>
       <code><![CDATA[$events]]></code>
@@ -6101,12 +6021,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($config->selectedServer['port'])]]></code>
     </RiskyTruthyFalsyComparison>
-  </file>
-  <file src="src/Plugins/Export/ExportYaml.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
   </file>
   <file src="src/Plugins/Export/Helpers/Pdf.php">
     <DeprecatedMethod>

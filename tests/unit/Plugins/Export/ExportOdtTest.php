@@ -359,8 +359,6 @@ final class ExportOdtTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([null, 'a<b', 'a>b', 'a&b'], []);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['odt_null' => '&']);
 
@@ -424,12 +422,10 @@ final class ExportOdtTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['odt_columns' => 'On']);
 
-        $exportOdt = $this->getExportOdt();
+        $exportOdt = $this->getExportOdt($dbi);
         $exportOdt->setExportOptions($request, new SettingsExport());
 
         $exportOdt->exportData('db', 'table', 'SELECT');
@@ -472,8 +468,6 @@ final class ExportOdtTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $exportOdt = $this->getExportOdt($dbi);
         $exportOdt->setExportOptions($request, new SettingsExport());
         $exportOdt->buffer = '';
@@ -493,10 +487,7 @@ final class ExportOdtTest extends AbstractTestCase
     public function testGetTableDefStandIn(): void
     {
         $dbiDummy = $this->createDbiDummy();
-        $dbi = $this->createDatabaseInterface($dbiDummy);
-        DatabaseInterface::$instance = $dbi;
-
-        $exportOdt = $this->getExportOdt($dbi);
+        $exportOdt = $this->getExportOdt($this->createDatabaseInterface($dbiDummy));
 
         $dbiDummy->addSelectDb('test_db');
         self::assertSame(
@@ -564,8 +555,6 @@ final class ExportOdtTest extends AbstractTestCase
         $resultStub->expects(self::once())
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
-
-        DatabaseInterface::$instance = $dbi;
 
         $exportOdt = $this->getExportOdt($dbi);
 
@@ -638,8 +627,6 @@ final class ExportOdtTest extends AbstractTestCase
         $resultStub->expects(self::once())
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
-
-        DatabaseInterface::$instance = $dbi;
 
         $exportOdt = $this->getExportOdt($dbi);
         $exportOdt->setExportOptions($request, new SettingsExport());
@@ -714,10 +701,7 @@ final class ExportOdtTest extends AbstractTestCase
     public function testExportStructure(): void
     {
         $dbiDummy = $this->createDbiDummy();
-        $dbi = $this->createDatabaseInterface($dbiDummy);
-        DatabaseInterface::$instance = $dbi;
-
-        $exportOdt = $this->getExportOdt($dbi);
+        $exportOdt = $this->getExportOdt($this->createDatabaseInterface($dbiDummy));
 
         // case 1
         $dbiDummy->addSelectDb('test_db');
@@ -879,11 +863,11 @@ final class ExportOdtTest extends AbstractTestCase
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        DatabaseInterface::$instance = $dbi;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['odt_structure_or_data' => 'structure']);
 
-        $exportOdt = $this->getExportOdt();
+        $exportOdt = $this->getExportOdt($dbi);
         $exportOdt->setExportOptions($request, new SettingsExport());
         $export = new Export($dbi, new OutputHandler());
         $export->exportTable(
@@ -904,6 +888,6 @@ final class ExportOdtTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportOdt($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportOdt($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }

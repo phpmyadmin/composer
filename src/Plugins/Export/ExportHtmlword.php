@@ -172,11 +172,10 @@ class ExportHtmlword extends ExportPlugin
 
         $this->outputHandler->addLine('<table width="100%" cellspacing="1">');
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets the data from the database
          */
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         // If required, get fields name at the first line
         if ($this->columns) {
@@ -240,8 +239,7 @@ class ExportHtmlword extends ExportPlugin
          * Get the unique keys in the view
          */
         $uniqueKeys = [];
-        $dbi = DatabaseInterface::getInstance();
-        $keys = $dbi->getTableIndexes($db, $view);
+        $keys = $this->dbi->getTableIndexes($db, $view);
         foreach ($keys as $key) {
             if ($key['Non_unique'] != 0) {
                 continue;
@@ -250,7 +248,7 @@ class ExportHtmlword extends ExportPlugin
             $uniqueKeys[] = $key['Column_name'];
         }
 
-        $columns = $dbi->getColumns($db, $view);
+        $columns = $this->dbi->getColumns($db, $view);
         foreach ($columns as $column) {
             $colAs = $this->getColumnAlias($aliases, $db, $view, $column->field);
 
@@ -278,11 +276,10 @@ class ExportHtmlword extends ExportPlugin
 
         $schemaInsert = '';
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets fields properties
          */
-        $dbi->selectDb($db);
+        $this->dbi->selectDb($db);
 
         // Check if we can use Relations
         $foreigners = $this->doRelation && $relationParameters->relationFeature !== null
@@ -329,12 +326,12 @@ class ExportHtmlword extends ExportPlugin
 
         $schemaInsert .= '</tr>';
 
-        $columns = $dbi->getColumns($db, $table);
+        $columns = $this->dbi->getColumns($db, $table);
         /**
          * Get the unique keys in the table
          */
         $uniqueKeys = [];
-        $keys = $dbi->getTableIndexes($db, $table);
+        $keys = $this->dbi->getTableIndexes($db, $table);
         foreach ($keys as $key) {
             if ($key['Non_unique'] != 0) {
                 continue;
@@ -447,7 +444,7 @@ class ExportHtmlword extends ExportPlugin
                 $dump .= $this->getTableDef($db, $table, $aliases);
                 break;
             case 'triggers':
-                $triggers = Triggers::getDetails(DatabaseInterface::getInstance(), $db, $table);
+                $triggers = Triggers::getDetails($this->dbi, $db, $table);
                 if ($triggers !== []) {
                     $dump .= '<h2>'
                     . __('Triggers') . ' ' . htmlspecialchars($tableAlias)

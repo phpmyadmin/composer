@@ -182,10 +182,7 @@ final class ExportTexytextTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
-        $exportTexytext = $this->getExportTexytext($dbi);
+        $exportTexytext = $this->getExportTexytext();
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['texytext_columns' => 'On']);
@@ -212,10 +209,7 @@ final class ExportTexytextTest extends AbstractTestCase
     public function testGetTableDefStandIn(): void
     {
         $dbiDummy = $this->createDbiDummy();
-        $dbi = $this->createDatabaseInterface($dbiDummy);
-        DatabaseInterface::$instance = $dbi;
-
-        $exportTexytext = $this->getExportTexytext($dbi);
+        $exportTexytext = $this->getExportTexytext($this->createDatabaseInterface($dbiDummy));
 
         $dbiDummy->addSelectDb('test_db');
         $result = $exportTexytext->getTableDefStandIn('test_db', 'test_table');
@@ -264,8 +258,6 @@ final class ExportTexytextTest extends AbstractTestCase
             ->willReturnMap([
                 ['db', 'table', ConnectionType::User, [$columnFull]],
             ]);
-
-        DatabaseInterface::$instance = $dbi;
 
         $exportTexytext = $this->getExportTexytext($dbi);
 
@@ -320,10 +312,7 @@ final class ExportTexytextTest extends AbstractTestCase
     public function testExportStructure(): void
     {
         $dbiDummy = $this->createDbiDummy();
-        $dbi = $this->createDatabaseInterface($dbiDummy);
-        DatabaseInterface::$instance = $dbi;
-
-        $exportTexytext = $this->getExportTexytext($dbi);
+        $exportTexytext = $this->getExportTexytext($this->createDatabaseInterface($dbiDummy));
 
         // case 1
         ob_start();
@@ -423,6 +412,6 @@ final class ExportTexytextTest extends AbstractTestCase
         $dbi ??= $this->createDatabaseInterface();
         $relation = new Relation($dbi, new Config());
 
-        return new ExportTexytext($relation, new OutputHandler(), new Transformations($dbi, $relation));
+        return new ExportTexytext($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
     }
 }
