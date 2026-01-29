@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2025-10-16 23:57-0300\n"
-"PO-Revision-Date: 2026-01-28 16:07+0000\n"
+"PO-Revision-Date: 2026-01-30 01:01+0000\n"
 "Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/5-"
 "2/mk/>\n"
@@ -4244,12 +4244,12 @@ msgstr "Покажи историја на барања на старт"
 #: libraries/classes/Config/Descriptions.php:978
 #: templates/console/display.twig:149
 msgid "Always expand query messages"
-msgstr ""
+msgstr "Секогаш прошири пораки за пребарување"
 
 #: libraries/classes/Config/Descriptions.php:979
 #: templates/console/display.twig:157
 msgid "Show current browsing query"
-msgstr ""
+msgstr "Прикажи моментално пребарувачко барање"
 
 #: libraries/classes/Config/Descriptions.php:980
 msgid "Execute queries on Enter and insert new line with Shift+Enter"
@@ -13518,6 +13518,8 @@ msgid ""
 "Execute queries on Enter and insert new line with Shift+Enter. To make this "
 "permanent, view settings."
 msgstr ""
+"Изврши барања про Enter и внеси нов ред со Shift+Enter. За да го направите "
+"ова трајно, погледнете ги поставките."
 
 #: templates/create_tracking_version.twig:10
 #, php-format
@@ -13531,11 +13533,11 @@ msgstr "Создади верзија %1$s"
 
 #: templates/create_tracking_version.twig:21
 msgid "Track these data definition statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за дефиниција на податоци:"
 
 #: templates/create_tracking_version.twig:60
 msgid "Track these data manipulation statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за манипулација на податоци:"
 
 #: templates/create_tracking_version.twig:77
 #, fuzzy
@@ -13657,7 +13659,7 @@ msgstr "Печати"
 #: templates/table/structure/display_structure.twig:478
 #: templates/table/tracking/structure_snapshot_indexes.twig:8
 msgid "Packed"
-msgstr ""
+msgstr "Запакувано"
 
 #: templates/database/data_dictionary/index.twig:78 templates/indexes.twig:21
 #: templates/table/structure/display_structure.twig:480
@@ -13720,11 +13722,11 @@ msgstr "Прикажи табели"
 #: templates/database/designer/main.twig:35
 #: templates/database/designer/main.twig:36
 msgid "View in fullscreen"
-msgstr ""
+msgstr "Прикажи во цел екран"
 
 #: templates/database/designer/main.twig:34
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Излез од цел екран"
 
 #: templates/database/designer/main.twig:48
 #: templates/database/designer/main.twig:52
