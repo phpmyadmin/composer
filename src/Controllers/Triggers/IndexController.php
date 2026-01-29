@@ -107,6 +107,7 @@ final class IndexController implements InvocableController
                     ) {
                         $insert = true;
                         $hasTriggerPrivilege = Util::currentUserHasPrivilege(
+                            $this->dbi,
                             'TRIGGER',
                             Current::$database,
                             Current::$table,
@@ -259,7 +260,12 @@ final class IndexController implements InvocableController
         }
 
         $triggers = Triggers::getDetails($this->dbi, Current::$database, Current::$table);
-        $hasTriggerPrivilege = Util::currentUserHasPrivilege('TRIGGER', Current::$database, Current::$table);
+        $hasTriggerPrivilege = Util::currentUserHasPrivilege(
+            $this->dbi,
+            'TRIGGER',
+            Current::$database,
+            Current::$table,
+        );
         $isAjax = $request->isAjax() && empty($request->getParam('ajax_page_request'));
 
         $this->response->render('triggers/list', [

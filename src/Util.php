@@ -1209,9 +1209,12 @@ class Util
      *                          string, table name where to also check
      *                          for privileges
      */
-    public static function currentUserHasPrivilege(string $priv, string|null $db = null, string|null $tbl = null): bool
-    {
-        $dbi = DatabaseInterface::getInstance();
+    public static function currentUserHasPrivilege(
+        DatabaseInterface $dbi,
+        string $priv,
+        string|null $db = null,
+        string|null $tbl = null,
+    ): bool {
         // Get the username for the current user in the format
         // required to use in the information schema database.
         [$user, $host] = $dbi->getCurrentUserAndHost();

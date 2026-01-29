@@ -500,7 +500,12 @@ final readonly class RoutinesController implements InvocableController
             'table' => Current::$table,
             'has_any_routines' => $items !== [],
             'rows' => $rows,
-            'has_privilege' => Util::currentUserHasPrivilege('CREATE ROUTINE', Current::$database, Current::$table),
+            'has_privilege' => Util::currentUserHasPrivilege(
+                $this->dbi,
+                'CREATE ROUTINE',
+                Current::$database,
+                Current::$table,
+            ),
             'list_navigator_html' => $listNavigator,
         ]);
 

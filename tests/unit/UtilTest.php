@@ -1095,9 +1095,9 @@ class UtilTest extends AbstractTestCase
     {
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1111,9 +1111,9 @@ SQL;
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1127,9 +1127,9 @@ SQL;
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1147,9 +1147,9 @@ SQL;
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT', 'my_data_base'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1167,9 +1167,9 @@ SQL;
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT', 'my_data_base'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1191,9 +1191,9 @@ SQL;
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
         $dbiDummy->addResult($tablePrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT', 'my_data_base', 'my_data_table'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base', 'my_data_table'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1215,9 +1215,9 @@ SQL;
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
         $dbiDummy->addResult($tablePrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT', 'my_data_base', 'my_data_table'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base', 'my_data_table'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 

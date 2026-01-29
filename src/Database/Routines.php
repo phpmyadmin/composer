@@ -1140,12 +1140,12 @@ class Routines
 
         // Since editing a procedure involved dropping and recreating, check also for
         // CREATE ROUTINE privilege to avoid lost procedures.
-        $hasCreateRoutine = Util::currentUserHasPrivilege('CREATE ROUTINE', Current::$database);
+        $hasCreateRoutine = Util::currentUserHasPrivilege($this->dbi, 'CREATE ROUTINE', Current::$database);
         $hasEditPrivilege = ($hasCreateRoutine && $currentUserIsRoutineDefiner)
                             || $this->dbi->isSuperUser();
         $hasExportPrivilege = ($hasCreateRoutine && $currentUserIsRoutineDefiner)
                             || $this->dbi->isSuperUser();
-        $hasExecutePrivilege = Util::currentUserHasPrivilege('EXECUTE', Current::$database)
+        $hasExecutePrivilege = Util::currentUserHasPrivilege($this->dbi, 'EXECUTE', Current::$database)
                             || $currentUserIsRoutineDefiner;
 
         // There is a problem with Util::currentUserHasPrivilege():
