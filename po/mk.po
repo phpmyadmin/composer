@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2026-01-28 16:07+0000\n"
+"PO-Revision-Date: 2026-01-30 01:01+0000\n"
 "Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/4-"
 "9/mk/>\n"
@@ -6332,12 +6332,12 @@ msgstr "Покажи историја на барања на старт"
 #: libraries/classes/Config/Descriptions.php:1468
 #: templates/console/display.twig:149
 msgid "Always expand query messages"
-msgstr ""
+msgstr "Секогаш прошири пораки за пребарување"
 
 #: libraries/classes/Config/Descriptions.php:1470
 #: templates/console/display.twig:157
 msgid "Show current browsing query"
-msgstr ""
+msgstr "Прикажи моментално пребарувачко барање"
 
 #: libraries/classes/Config/Descriptions.php:1472
 msgid "Execute queries on Enter and insert new line with Shift + Enter"
@@ -8117,7 +8117,7 @@ msgstr "Клучот не е дефиниран!"
 #: libraries/classes/Index.php:722
 #: templates/table/tracking/structure_snapshot_indexes.twig:8
 msgid "Packed"
-msgstr ""
+msgstr "Запакувано"
 
 #: libraries/classes/Index.php:724
 #: templates/table/tracking/structure_snapshot_indexes.twig:10
@@ -15474,11 +15474,11 @@ msgstr "Создади верзија %1$s"
 
 #: templates/table/tracking/create_version.twig:20
 msgid "Track these data definition statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за дефиниција на податоци:"
 
 #: templates/table/tracking/create_version.twig:59
 msgid "Track these data manipulation statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за манипулација на податоци:"
 
 #: templates/table/tracking/create_version.twig:76
 #, fuzzy
@@ -16189,11 +16189,11 @@ msgstr "Прикажи табели"
 #: templates/database/designer/side_menu.twig:29
 #: templates/database/designer/side_menu.twig:30
 msgid "View in fullscreen"
-msgstr ""
+msgstr "Прикажи во цел екран"
 
 #: templates/database/designer/side_menu.twig:28
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Излез од цел екран"
 
 #: templates/database/designer/side_menu.twig:42
 #: templates/database/designer/side_menu.twig:46
