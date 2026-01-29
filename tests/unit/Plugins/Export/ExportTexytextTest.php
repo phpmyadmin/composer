@@ -52,7 +52,6 @@ final class ExportTexytextTest extends AbstractTestCase
         Current::$database = '';
         Current::$table = '';
         Current::$lang = 'en';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
     }
 
     public function testSetProperties(): void
@@ -311,6 +310,8 @@ final class ExportTexytextTest extends AbstractTestCase
 
     public function testExportStructure(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = true;
+
         $dbiDummy = $this->createDbiDummy();
         $exportTexytext = $this->getExportTexytext($this->createDatabaseInterface($dbiDummy));
 
@@ -410,8 +411,9 @@ final class ExportTexytextTest extends AbstractTestCase
     private function getExportTexytext(DatabaseInterface|null $dbi = null): ExportTexytext
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportTexytext($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportTexytext($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

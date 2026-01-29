@@ -216,8 +216,9 @@ final class ExportExcelTest extends AbstractTestCase
     private function getExportExcel(): ExportExcel
     {
         $dbi = $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportExcel($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

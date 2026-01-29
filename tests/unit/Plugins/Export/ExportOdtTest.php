@@ -59,7 +59,6 @@ final class ExportOdtTest extends AbstractTestCase
         OutputHandler::$asFile = true;
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
-        Config::getInstance()->selectedServer['DisableIS'] = true;
     }
 
     public function testSetProperties(): void
@@ -700,6 +699,8 @@ final class ExportOdtTest extends AbstractTestCase
 
     public function testExportStructure(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = true;
+
         $dbiDummy = $this->createDbiDummy();
         $exportOdt = $this->getExportOdt($this->createDatabaseInterface($dbiDummy));
 
@@ -886,8 +887,9 @@ final class ExportOdtTest extends AbstractTestCase
     private function getExportOdt(DatabaseInterface|null $dbi = null): ExportOdt
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportOdt($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportOdt($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

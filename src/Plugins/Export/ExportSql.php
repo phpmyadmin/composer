@@ -9,7 +9,6 @@ namespace PhpMyAdmin\Plugins\Export;
 
 use DateTimeImmutable;
 use PhpMyAdmin\Charsets;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export as SettingsExport;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
 use PhpMyAdmin\Current;
@@ -573,7 +572,7 @@ class ExportSql extends ExportPlugin
 
             $flag = false;
             $createQuery = $this->replaceWithAliases($delimiter, $definition, $aliases, $db, $flag);
-            if ($createQuery !== '' && Config::getInstance()->settings['Export']['remove_definer_from_definitions']) {
+            if ($createQuery !== '' && $this->config->settings['Export']['remove_definer_from_definitions']) {
                 // Remove definer clause from routine definitions
                 $parser = new Parser('DELIMITER ' . $delimiter . "\n" . $createQuery);
                 $statement = $parser->statements[0];
@@ -750,10 +749,10 @@ class ExportSql extends ExportPlugin
             . $this->exportComment('version ' . Version::VERSION)
             . $this->exportComment('https://www.phpmyadmin.net/')
             . $this->exportComment();
-        $config = Config::getInstance();
-        $hostString = __('Host:') . ' ' . $config->selectedServer['host'];
-        if (! empty($config->selectedServer['port'])) {
-            $hostString .= ':' . $config->selectedServer['port'];
+
+        $hostString = __('Host:') . ' ' . $this->config->selectedServer['host'];
+        if (! empty($this->config->selectedServer['port'])) {
+            $hostString .= ':' . $this->config->selectedServer['port'];
         }
 
         $head .= $this->exportComment($hostString);
@@ -996,7 +995,7 @@ class ExportSql extends ExportPlugin
                 if (
                     $eventDef !== null
                     && $eventDef !== ''
-                    && Config::getInstance()->settings['Export']['remove_definer_from_definitions']
+                    && $this->config->settings['Export']['remove_definer_from_definitions']
                 ) {
                     // remove definer clause from the event definition
                     $parser = new Parser('DELIMITER ' . $delimiter . "\n" . $eventDef);
@@ -1422,7 +1421,7 @@ class ExportSql extends ExportPlugin
 
                 // exclude definition of current user
                 if (
-                    Config::getInstance()->settings['Export']['remove_definer_from_definitions']
+                    $this->config->settings['Export']['remove_definer_from_definitions']
                     || $this->viewCurrentUser
                 ) {
                     $statement->options->remove('DEFINER');

@@ -411,11 +411,11 @@ final class ExportLatexTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
-        $config = Config::getInstance();
+        $config = new Config();
         $config->selectedServer['port'] = 80;
         $config->selectedServer['host'] = 'localhost';
 
-        $exportLatex = $this->getExportLatex();
+        $exportLatex = $this->getExportLatex(config: $config);
 
         ob_start();
         $exportLatex->exportHeader();
@@ -456,10 +456,6 @@ final class ExportLatexTest extends AbstractTestCase
 
     public function testExportData(): void
     {
-        $config = Config::getInstance();
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['verbose'] = 'verb';
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'latex_caption' => 'On',
@@ -699,10 +695,6 @@ final class ExportLatexTest extends AbstractTestCase
         $dbi->expects(self::never())
             ->method('tryQuery');
 
-        $config = Config::getInstance();
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['verbose'] = 'verb';
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'latex_caption' => 'On',
@@ -794,11 +786,12 @@ final class ExportLatexTest extends AbstractTestCase
         self::assertStringContainsString('% Structure: testtable', $output);
     }
 
-    private function getExportLatex(DatabaseInterface|null $dbi = null): ExportLatex
+    private function getExportLatex(DatabaseInterface|null $dbi = null, Config|null $config = null): ExportLatex
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config ??= new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

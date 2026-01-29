@@ -174,8 +174,9 @@ final class ExportYamlTest extends AbstractTestCase
     private function getExportYaml(): ExportYaml
     {
         $dbi = $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportYaml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

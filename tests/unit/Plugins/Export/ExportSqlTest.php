@@ -60,7 +60,6 @@ final class ExportSqlTest extends AbstractTestCase
         Current::$database = '';
         Current::$table = '';
         Current::$lang = 'en';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
         OutputHandler::$asFile = false;
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
@@ -391,9 +390,6 @@ final class ExportSqlTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
-        $config = Config::getInstance();
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['port'] = 80;
         ExportSql::$oldTimezone = 'GMT';
         OutputHandler::$asFile = true;
         Current::$charset = 'utf-8';
@@ -487,8 +483,6 @@ final class ExportSqlTest extends AbstractTestCase
         self::assertStringContainsString('USE `db`;', $result);
 
         // case2: no backquotes
-        Config::getInstance()->selectedServer['DisableIS'] = true;
-
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -758,8 +752,6 @@ final class ExportSqlTest extends AbstractTestCase
             ['Table', 'Create Table'],
         );
 
-        Config::getInstance()->selectedServer['DisableIS'] = false;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_relation' => 'On',
@@ -803,8 +795,6 @@ final class ExportSqlTest extends AbstractTestCase
         $dbiDummy->addResult('USE `db`', true);
         $dbiDummy->addResult('SHOW CREATE TABLE `db`.`table`', []);
         $dbiDummy->addErrorCode('error occurred');
-
-        Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_include_comments' => 'On', 'sql_drop_table' => 'On']);
@@ -874,6 +864,8 @@ final class ExportSqlTest extends AbstractTestCase
 
     public function testExportStructure(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = true;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_backquotes' => 'true',
@@ -1027,8 +1019,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        Config::getInstance()->selectedServer['DisableIS'] = false;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_backquotes' => 'true',
@@ -1125,8 +1115,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        Config::getInstance()->selectedServer['DisableIS'] = false;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'sql_backquotes' => 'true',
@@ -1171,8 +1159,6 @@ final class ExportSqlTest extends AbstractTestCase
             ->method('getTable')
             ->willReturn($tableObj);
 
-        Config::getInstance()->selectedServer['DisableIS'] = false;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_backquotes' => 'true', 'sql_include_comments' => 'On']);
 
@@ -1213,8 +1199,6 @@ final class ExportSqlTest extends AbstractTestCase
         $dbi->expects(self::any())
             ->method('getTable')
             ->willReturn($tableObj);
-
-        Config::getInstance()->selectedServer['DisableIS'] = false;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['sql_include_comments' => 'On']);
@@ -1469,8 +1453,9 @@ final class ExportSqlTest extends AbstractTestCase
     private function getExportSql(DatabaseInterface|null $dbi = null): ExportSql
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportSql($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportSql($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

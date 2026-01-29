@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Foreigners;
 use PhpMyAdmin\ConfigStorage\Relation;
@@ -43,6 +44,7 @@ abstract class ExportPlugin implements Plugin
         protected readonly OutputHandler $outputHandler,
         protected readonly Transformations $transformations,
         protected readonly DatabaseInterface $dbi,
+        protected readonly Config $config,
     ) {
         $this->properties = $this->setProperties();
     }

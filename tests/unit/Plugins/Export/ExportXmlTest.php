@@ -41,7 +41,6 @@ final class ExportXmlTest extends AbstractTestCase
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
         Current::$database = 'db';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
     }
 
     public function testSetProperties(): void
@@ -148,11 +147,8 @@ final class ExportXmlTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = false;
         Current::$charset = 'iso-8859-1';
-        $config = Config::getInstance();
-        $config->selectedServer['port'] = 80;
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['DisableIS'] = false;
         Current::$database = 'd<"b';
 
         $functions = [['fn']];
@@ -372,6 +368,8 @@ final class ExportXmlTest extends AbstractTestCase
 
     public function testExportData(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = true;
+
         OutputHandler::$asFile = true;
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
@@ -409,8 +407,9 @@ final class ExportXmlTest extends AbstractTestCase
     private function getExportXml(DatabaseInterface|null $dbi = null): ExportXml
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportXml($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

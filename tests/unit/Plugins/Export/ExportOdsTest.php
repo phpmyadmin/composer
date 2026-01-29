@@ -362,8 +362,9 @@ final class ExportOdsTest extends AbstractTestCase
     private function getExportOds(DatabaseInterface|null $dbi = null): ExportOds
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

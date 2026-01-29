@@ -69,12 +69,14 @@ class ExportTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface();
         DatabaseInterface::$instance = $dbi;
         $export = new Export($dbi, new OutputHandler());
-        $relation = new Relation($dbi);
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
         $exportPlugin = new ExportPhparray(
             $relation,
             $export->outputHandler,
             new Transformations($dbi, $relation),
             $dbi,
+            $config,
         );
 
         $export->outputHandler->setCompression('zip');
@@ -93,12 +95,14 @@ class ExportTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface();
         DatabaseInterface::$instance = $dbi;
         $export = new Export($dbi, new OutputHandler());
-        $relation = new Relation($dbi);
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
         $exportPlugin = new ExportPhparray(
             $relation,
             $export->outputHandler,
             new Transformations($dbi, $relation),
             $dbi,
+            $config,
         );
 
         $export->outputHandler->setCompression('zip');
@@ -113,7 +117,8 @@ class ExportTest extends AbstractTestCase
     public function testExportDatabase(): void
     {
         OutputHandler::$asFile = false;
-        Config::getInstance()->selectedServer['DisableIS'] = false;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = false;
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         $dbiDummy = $this->createDbiDummy();
@@ -143,13 +148,13 @@ class ExportTest extends AbstractTestCase
         $export = new Export($dbi, new OutputHandler());
 
         ExportPlugin::$exportType = ExportType::Database;
-        $relation = new Relation($dbi);
+        $relation = new Relation($dbi, $config);
         $export->exportDatabase(
             DatabaseName::from('test_db'),
             ['test_table'],
             ['test_table'],
             ['test_table'],
-            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi),
+            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi, $config),
             [],
             SeparateFiles::None,
         );
@@ -216,10 +221,10 @@ class ExportTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         $export = new Export($dbi, new OutputHandler());
 
-        $relation = new Relation($dbi);
+        $relation = new Relation($dbi, $config);
         $export->exportServer(
             ['test_db'],
-            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi),
+            new ExportSql($relation, $export->outputHandler, new Transformations($dbi, $relation), $dbi, $config),
             [],
             SeparateFiles::None,
         );

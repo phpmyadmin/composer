@@ -8680,15 +8680,6 @@ parameters:
 			path: src/Plugins/Export/ExportJson.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Plugins/Export/ExportLatex.php
-
-		-
 			message: '#^Cannot call method fetchAssoc\(\) on PhpMyAdmin\\Dbal\\ResultInterface\|false\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -8783,15 +8774,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Export/ExportPhparray.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 4
-			path: src/Plugins/Export/ExportSql.php
 
 		-
 			message: '#^Cannot access property \$database on PhpMyAdmin\\SqlParser\\Components\\Expression\|null\.$#'
@@ -8942,15 +8924,6 @@ parameters:
 			identifier: notEqual.notAllowed
 			count: 2
 			path: src/Plugins/Export/ExportTexytext.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Plugins/Export/ExportXml.php
 
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
@@ -16417,15 +16390,6 @@ parameters:
 			path: tests/unit/Plugins/Export/ExportHtmlwordTest.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 3
-			path: tests/unit/Plugins/Export/ExportLatexTest.php
-
-		-
 			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 3
@@ -16452,19 +16416,13 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 9
+			count: 1
 			path: tests/unit/Plugins/Export/ExportSqlTest.php
 
 		-
 			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 2
-			path: tests/unit/Plugins/Export/ExportSqlTest.php
-
-		-
-			message: '#^Property PhpMyAdmin\\Config\:\:\$selectedServer \(array\{host\: string, port\: string, socket\: string, ssl\: bool, ssl_key\: string\|null, ssl_cert\: string\|null, ssl_ca\: string\|null, ssl_ca_path\: string\|null, \.\.\.\}\) does not accept array\{host\: string, port\: 80, socket\: string, ssl\: bool, ssl_key\: string\|null, ssl_cert\: string\|null, ssl_ca\: string\|null, ssl_ca_path\: string\|null, \.\.\.\}\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: tests/unit/Plugins/Export/ExportSqlTest.php
 
 		-
@@ -16483,12 +16441,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 2
-			path: tests/unit/Plugins/Export/ExportXmlTest.php
-
-		-
-			message: '#^Property PhpMyAdmin\\Config\:\:\$selectedServer \(array\{host\: string, port\: string, socket\: string, ssl\: bool, ssl_key\: string\|null, ssl_cert\: string\|null, ssl_ca\: string\|null, ssl_ca_path\: string\|null, \.\.\.\}\) does not accept array\{host\: string, port\: 80, socket\: string, ssl\: bool, ssl_key\: string\|null, ssl_cert\: string\|null, ssl_ca\: string\|null, ssl_ca_path\: string\|null, \.\.\.\}\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: tests/unit/Plugins/Export/ExportXmlTest.php
 
 		-

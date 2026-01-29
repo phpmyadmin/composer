@@ -311,8 +311,9 @@ final class ExportCsvTest extends AbstractTestCase
     private function getExportCsv(): ExportCsv
     {
         $dbi = $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportCsv($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

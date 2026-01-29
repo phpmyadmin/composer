@@ -50,7 +50,6 @@ final class ExportHtmlwordTest extends AbstractTestCase
         Current::$database = '';
         Current::$table = '';
         Current::$lang = '';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
     }
 
     public function testSetProperties(): void
@@ -542,6 +541,8 @@ final class ExportHtmlwordTest extends AbstractTestCase
 
     public function testExportStructure(): void
     {
+        Config::getInstance()->selectedServer['DisableIS'] = true;
+
         $dbiDummy = $this->createDbiDummy();
         $exportHtmlword = $this->getExportHtmlword($this->createDatabaseInterface($dbiDummy));
 
@@ -678,8 +679,9 @@ final class ExportHtmlwordTest extends AbstractTestCase
     private function getExportHtmlword(DatabaseInterface|null $dbi = null): ExportHtmlword
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportHtmlword($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportHtmlword($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

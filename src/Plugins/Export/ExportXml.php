@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use DateTimeImmutable;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Database\Events;
@@ -187,16 +186,15 @@ class ExportXml extends ExportPlugin
 
         $charset = $this->outputHandler->outputCharsetConversion ? Current::$charset : 'utf-8';
 
-        $config = Config::getInstance();
         $head = '<?xml version="1.0" encoding="' . $charset . '"?>' . "\n"
             . '<!--' . "\n"
             . '- phpMyAdmin XML Dump' . "\n"
             . '- version ' . Version::VERSION . "\n"
             . '- https://www.phpmyadmin.net' . "\n"
             . '-' . "\n"
-            . '- ' . __('Host:') . ' ' . htmlspecialchars($config->selectedServer['host']);
-        if (! empty($config->selectedServer['port'])) {
-            $head .= ':' . $config->selectedServer['port'];
+            . '- ' . __('Host:') . ' ' . htmlspecialchars($this->config->selectedServer['host']);
+        if (! empty($this->config->selectedServer['port'])) {
+            $head .= ':' . $this->config->selectedServer['port'];
         }
 
         $head .= "\n"

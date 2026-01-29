@@ -331,8 +331,9 @@ final class ExportMediawikiTest extends AbstractTestCase
     private function getExportMediawiki(DatabaseInterface|null $dbi = null): ExportMediawiki
     {
         $dbi ??= $this->createDatabaseInterface();
-        $relation = new Relation($dbi, new Config());
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
 
-        return new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi);
+        return new ExportMediawiki($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

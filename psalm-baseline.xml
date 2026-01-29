@@ -5841,9 +5841,6 @@
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Plugins/Export/ExportLatex.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$mimeMap[$fieldName]['mimetype']]]></code>
     </MixedArgument>
@@ -5865,7 +5862,7 @@
       <code><![CDATA[$record[$columns[$i]]]]></code>
     </PossiblyNullArgument>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($config->selectedServer['port'])]]></code>
+      <code><![CDATA[empty($this->config->selectedServer['port'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Export/ExportMediawiki.php">
@@ -5919,12 +5916,6 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$token->value]]></code>
     </ArgumentTypeCoercion>
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <LessSpecificReturnStatement>
       <code><![CDATA[(int) $fromConfig]]></code>
       <code><![CDATA[(int) $fromRequest]]></code>
@@ -5973,10 +5964,10 @@
     </PossiblyNullReference>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($column->collation)]]></code>
-      <code><![CDATA[empty($config->selectedServer['port'])]]></code>
       <code><![CDATA[empty($statement->fields)]]></code>
       <code><![CDATA[empty($statement->name->database)]]></code>
       <code><![CDATA[empty($statement->table->database)]]></code>
+      <code><![CDATA[empty($this->config->selectedServer['port'])]]></code>
       <code><![CDATA[empty($tmpres['Check_time'])]]></code>
       <code><![CDATA[empty($tmpres['Create_time'])]]></code>
       <code><![CDATA[empty($tmpres['Update_time'])]]></code>
@@ -6004,9 +5995,6 @@
     </PossiblyUndefinedVariable>
   </file>
   <file src="src/Plugins/Export/ExportXml.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <InvalidArgument>
       <code><![CDATA[$events]]></code>
     </InvalidArgument>
@@ -6019,7 +6007,7 @@
       <code><![CDATA[$charset]]></code>
     </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty($config->selectedServer['port'])]]></code>
+      <code><![CDATA[empty($this->config->selectedServer['port'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Export/Helpers/Pdf.php">
@@ -10506,11 +10494,6 @@
     </MixedAssignment>
   </file>
   <file src="tests/unit/Plugins/Export/ExportLatexTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$config->selectedServer]]></code>
       <code><![CDATA[$config->selectedServer]]></code>
@@ -10533,18 +10516,7 @@
   <file src="tests/unit/Plugins/Export/ExportSqlTest.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$config->selectedServer]]></code>
-    </InvalidPropertyAssignmentValue>
     <MixedArgument>
       <code><![CDATA[$result]]></code>
     </MixedArgument>
@@ -10563,11 +10535,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$config->selectedServer]]></code>
-      <code><![CDATA[$config->selectedServer]]></code>
-      <code><![CDATA[$config->selectedServer]]></code>
-    </InvalidPropertyAssignmentValue>
   </file>
   <file src="tests/unit/Plugins/Import/ImportLdiTest.php">
     <TypeDoesNotContainType>
@@ -10613,7 +10580,7 @@
   <file src="tests/unit/PluginsTest.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
+      <code><![CDATA[DatabaseInterface::getInstance($config)]]></code>
     </DeprecatedMethod>
     <PropertyTypeCoercion>
       <code><![CDATA[Config::getInstance()->settings]]></code>
