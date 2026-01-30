@@ -160,26 +160,15 @@ class UtilTest extends AbstractTestCase
     #[DataProvider('providerExpandUserString')]
     public function testExpandUserString(string $in, string $out): void
     {
-        $this->setGlobalConfig();
-
-        $config = Config::getInstance();
+        $config = new Config();
         $config->selectedServer['host'] = 'host&';
         $config->selectedServer['verbose'] = 'verbose';
         Current::$database = 'database';
         Current::$table = 'table';
+        $dbi = $this->createDatabaseInterface();
 
-        self::assertSame(
-            $out,
-            Util::expandUserString($in),
-        );
-
-        self::assertSame(
-            htmlspecialchars($out),
-            Util::expandUserString(
-                $in,
-                'htmlspecialchars',
-            ),
-        );
+        self::assertSame($out, Util::expandUserString($dbi, $config, $in));
+        self::assertSame(htmlspecialchars($out), Util::expandUserString($dbi, $config, $in, htmlspecialchars(...)));
     }
 
     /**

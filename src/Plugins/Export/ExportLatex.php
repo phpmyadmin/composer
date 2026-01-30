@@ -294,12 +294,16 @@ class ExportLatex extends ExportPlugin
         if ($this->caption) {
             $buffer .= ' \\caption{'
                 . Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
                     $this->dataCaption,
-                    [static::class, 'texEscape'],
+                    static::texEscape(...),
                     ['table' => $tableAlias, 'database' => $dbAlias],
                 )
                 . '} \\label{'
                 . Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
                     $this->dataLabel,
                     null,
                     ['table' => $tableAlias, 'database' => $dbAlias],
@@ -324,8 +328,10 @@ class ExportLatex extends ExportPlugin
                 $this->outputHandler->addLine(
                     '\\caption{'
                     . Util::expandUserString(
+                        $this->dbi,
+                        $this->config,
                         $this->dataContinuedCaption,
-                        [static::class, 'texEscape'],
+                        static::texEscape(...),
                         ['table' => $tableAlias, 'database' => $dbAlias],
                     )
                     . '} \\\\ ',
@@ -468,12 +474,16 @@ class ExportLatex extends ExportPlugin
         if ($this->caption) {
             $buffer .= ' \\caption{'
                 . Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
                     $this->structureCaption,
-                    [static::class, 'texEscape'],
+                    static::texEscape(...),
                     ['table' => $tableAlias, 'database' => $dbAlias],
                 )
                 . '} \\label{'
                 . Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
                     $this->structureLabel,
                     null,
                     ['table' => $tableAlias, 'database' => $dbAlias],
@@ -487,8 +497,10 @@ class ExportLatex extends ExportPlugin
         if ($this->caption) {
             $buffer .= ' \\caption{'
                 . Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
                     $this->structureContinuedCaption,
-                    [static::class, 'texEscape'],
+                    static::texEscape(...),
                     ['table' => $tableAlias, 'database' => $dbAlias],
                 )
                 . '} \\\\ ' . "\n";

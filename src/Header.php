@@ -421,9 +421,7 @@ class Header
                     $tempTitle = $this->config->config->TitleDefault;
                 }
 
-                $this->title = htmlspecialchars(
-                    Util::expandUserString($tempTitle),
-                );
+                $this->title = htmlspecialchars(Util::expandUserString($this->dbi, $this->config, $tempTitle));
             } else {
                 $this->title = 'phpMyAdmin';
             }

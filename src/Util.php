@@ -1079,6 +1079,8 @@ class Util
      * @psalm-param callable(string):string|null $escape
      */
     public static function expandUserString(
+        DatabaseInterface $dbi,
+        Config $config,
         string $string,
         callable|null $escape = null,
         array $updates = [],
@@ -1086,7 +1088,6 @@ class Util
         /* Content */
         $vars = [];
         $vars['http_host'] = Core::getEnv('HTTP_HOST');
-        $config = Config::getInstance();
         $vars['server_name'] = $config->selectedServer['host'];
         $vars['server_verbose'] = $config->selectedServer['verbose'];
 
@@ -1135,7 +1136,7 @@ class Util
 
         /* Fetch columns list if required */
         if (str_contains($string, '@COLUMNS@')) {
-            $columnsList = DatabaseInterface::getInstance()->getColumnNames(Current::$database, Current::$table);
+            $columnsList = $dbi->getColumnNames(Current::$database, Current::$table);
 
             $columnNames = [];
             if ($escape !== null) {

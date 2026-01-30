@@ -11,6 +11,7 @@ use PhpMyAdmin\Controllers\Database\ExportController as DatabaseExportController
 use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Exceptions\ExportException;
 use PhpMyAdmin\Export\Export;
@@ -50,6 +51,7 @@ final readonly class ExportController implements InvocableController
         private ResponseFactory $responseFactory,
         private Config $config,
         private UserPreferencesHandler $userPreferencesHandler,
+        private DatabaseInterface $dbi,
     ) {
     }
 
@@ -235,7 +237,7 @@ final readonly class ExportController implements InvocableController
 
             $filename = $this->export->getFinalFilename(
                 $exportPlugin,
-                Sanitize::sanitizeFilename(Util::expandUserString($filenameTemplate), true),
+                Sanitize::sanitizeFilename(Util::expandUserString($this->dbi, $this->config, $filenameTemplate), true),
             );
 
             $mimeType = $this->export->getMimeType($exportPlugin);
