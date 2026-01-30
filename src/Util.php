@@ -1569,15 +1569,17 @@ class Util
 
     /**
      * Wrapper around php's set_time_limit
+     *
+     * @param int<0, max> $timeLimit
      */
-    public static function setTimeLimit(): void
+    public static function setTimeLimit(int $timeLimit): void
     {
         // The function can be disabled in php.ini
         if (! function_exists('set_time_limit')) {
             return;
         }
 
-        @set_time_limit(Config::getInstance()->settings['ExecTimeLimit']);
+        @set_time_limit($timeLimit);
     }
 
     /**

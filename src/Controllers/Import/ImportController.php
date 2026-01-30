@@ -223,7 +223,7 @@ final readonly class ImportController implements InvocableController
             $this->dbi->selectDb(Current::$database);
         }
 
-        Util::setTimeLimit();
+        Util::setTimeLimit($this->config->settings['ExecTimeLimit']);
         if ($this->config->config->MemoryLimit !== '' && $this->config->config->MemoryLimit !== '0') {
             ini_set('memory_limit', $this->config->config->MemoryLimit);
         }
