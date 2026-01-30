@@ -810,7 +810,7 @@ class Util
      *
      * @return string per user directory
      */
-    public static function userDir(string $dir): string
+    public static function userDir(string $user, string $dir): string
     {
         if ($dir === '') {
             return '';
@@ -821,7 +821,7 @@ class Util
             $dir .= '/';
         }
 
-        return str_replace('%u', Core::securePath(Config::getInstance()->selectedServer['user']), $dir);
+        return str_replace('%u', Core::securePath($user), $dir);
     }
 
     /**

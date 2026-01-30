@@ -957,9 +957,7 @@ class UtilTest extends AbstractTestCase
     #[DataProvider('providerUserDir')]
     public function testUserDir(string $a, string $e): void
     {
-        Config::getInstance()->selectedServer['user'] = 'root';
-
-        self::assertSame($e, Util::userDir($a));
+        self::assertSame($e, Util::userDir('root', $a));
     }
 
     /**

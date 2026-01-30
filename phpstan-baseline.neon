@@ -13134,7 +13134,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 5
+			count: 4
 			path: src/Util.php
 
 		-
@@ -16941,7 +16941,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 5
+			count: 4
 			path: tests/unit/UtilTest.php
 
 		-

@@ -251,6 +251,7 @@ final readonly class ExportController implements InvocableController
         // Open file on server if needed
         if ($saveOnServer) {
             $message = $this->export->outputHandler->openFile(
+                $this->config->selectedServer['user'],
                 $this->config->config->SaveDir,
                 $filename,
                 $isQuickExport,

@@ -371,8 +371,10 @@ final readonly class ImportController implements InvocableController
             // sanitize $local_import_file as it comes from a POST
             ImportSettings::$localImportFile = Core::securePath(ImportSettings::$localImportFile);
 
-            ImportSettings::$importFile = Util::userDir($this->config->config->UploadDir)
-                . ImportSettings::$localImportFile;
+            ImportSettings::$importFile = Util::userDir(
+                $this->config->selectedServer['user'],
+                $this->config->config->UploadDir,
+            ) . ImportSettings::$localImportFile;
 
             /**
              * Do not allow symlinks to avoid security issues
