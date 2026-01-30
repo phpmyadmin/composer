@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-01-25 00:33+0000\n"
-"PO-Revision-Date: 2026-01-30 01:01+0000\n"
+"PO-Revision-Date: 2026-01-31 17:01+0000\n"
 "Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "th/>\n"
@@ -10218,7 +10218,7 @@ msgstr "ไดเรกทอรีบนเซิร์ฟเวอร์ซึ
 
 #: src/Config/Descriptions.php:581
 msgid "Allow for searching inside the entire database."
-msgstr "อนุญาตให้ค้นหาภายในฐานข้อมูลทั้งหมดได้"
+msgstr "อนุญาตการค้นหาภายในทั้งหมดของฐานข้อมูล"
 
 #: src/Config/Descriptions.php:582
 msgid "Enables check for latest version on main phpMyAdmin page."
