@@ -80,7 +80,7 @@ class UserPassword
         $sqlQuery = 'SET password = '
             . ($password === '' ? '\'\'' : $hashingFunction . '(\'***\')');
 
-        $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb();
+        $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb($this->dbi);
         if ($isPerconaOrMySql && $serverVersion >= 50706) {
             $sqlQuery = $this->getChangePasswordQueryAlterUserMySQL(
                 $serverVersion,
@@ -92,7 +92,7 @@ class UserPassword
             );
         } elseif (
             ($isPerconaOrMySql && $serverVersion >= 50507)
-            || (Compatibility::isMariaDb() && $serverVersion >= 50200)
+            || (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 50200)
         ) {
             // For MySQL and Percona versions 5.5.7+ and MariaDB versions 5.2+,
             // explicitly set value of `old_passwords` so that
@@ -185,7 +185,7 @@ class UserPassword
         $errUrl = Url::getFromRoute('/user-password');
 
         $serverVersion = $this->dbi->getVersion();
-        $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb();
+        $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb($this->dbi);
 
         if ($isPerconaOrMySql && $serverVersion >= 50706) {
             $localQuery = $this->getChangePasswordQueryAlterUserMySQL(
@@ -197,7 +197,7 @@ class UserPassword
                 $authPluginChanged,
             );
         } elseif (
-            Compatibility::isMariaDb()
+            Compatibility::isMariaDb($this->dbi)
             && $serverVersion >= 50200
             && $serverVersion < 100100
             && $origAuthPlugin !== ''

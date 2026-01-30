@@ -1470,4 +1470,20 @@ SQL;
         self::assertSame('s\\s', Util::unquoteDefaultValue('\'s\\\\s\''));
         self::assertSame('sq\'sq', Util::unquoteDefaultValue('\'sq\\\'sq\''));
     }
+
+    #[DataProvider('providerForTestGetServerType')]
+    public function testGetServerType(string $expected, string $version, string $versionComment): void
+    {
+        $dbi = $this->createDatabaseInterface();
+        $dbi->setVersion(['@@version' => $version, '@@version_comment' => $versionComment]);
+        self::assertSame($expected, Util::getServerType($dbi));
+    }
+
+    /** @return iterable<string, array{string, string, string}> */
+    public static function providerForTestGetServerType(): iterable
+    {
+        yield 'MySQL' => ['MySQL', '7.10.3', 'MySQL Community Server (GPL)'];
+        yield 'MariaDB' => ['MariaDB', '10.01.40-MariaDB-1:10.01.40+maria~ubu2204', 'mariadb.org binary distribution'];
+        yield 'Percona' => ['Percona Server', '6.1.0', "Percona Server (GPL), Release '11', Revision 'c1y2gr1df4a'"];
+    }
 }

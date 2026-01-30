@@ -1303,9 +1303,8 @@ class Util
      *
      * @phpstan-return 'MariaDB'|'Percona Server'|'MySQL'
      */
-    public static function getServerType(): string
+    public static function getServerType(DatabaseInterface $dbi): string
     {
-        $dbi = DatabaseInterface::getInstance();
         if ($dbi->isMariaDB()) {
             return 'MariaDB';
         }

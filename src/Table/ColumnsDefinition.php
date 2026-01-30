@@ -341,10 +341,14 @@ final class ColumnsDefinition
             'storage_engines' => $storageEngines,
             'connection' => $_POST['connection'] ?? null,
             'change_column' => $_POST['change_column'] ?? $_GET['change_column'] ?? null,
-            'is_virtual_columns_supported' => Compatibility::isVirtualColumnsSupported($this->dbi->getVersion()),
+            'is_virtual_columns_supported' => Compatibility::isVirtualColumnsSupported(
+                $this->dbi,
+                $this->dbi->getVersion(),
+            ),
             'is_integers_length_restricted' => $isIntegersLengthRestricted,
             'browse_mime' => $config->config->BrowseMIME ,
             'supports_stored_keyword' => Compatibility::supportsStoredKeywordForVirtualColumns(
+                $this->dbi,
                 $this->dbi->getVersion(),
             ),
             'server_version' => $this->dbi->getVersion(),

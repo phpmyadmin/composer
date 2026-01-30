@@ -149,7 +149,7 @@ final class Indexes
 
     public function getSqlQueryForRename(string $oldIndexName, Index $index, string $db, string $table): string
     {
-        if (! Compatibility::isCompatibleRenameIndex($this->dbi->getVersion())) {
+        if (! Compatibility::isCompatibleRenameIndex($this->dbi, $this->dbi->getVersion())) {
             return $this->getSqlQueryForIndexCreateOrEdit($oldIndexName, $index, $db, $table);
         }
 
