@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use DateTimeImmutable;
-use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Database\Events;
@@ -156,11 +155,10 @@ class ExportXml extends ExportPlugin
         foreach ($names as $name) {
             $head .= '            <pma:' . $type . ' name="' . htmlspecialchars($name) . '">' . "\n";
 
-            $dbi = DatabaseInterface::getInstance();
             $definition = match ($type) {
-                'function' => Routines::getFunctionDefinition($dbi, $db, $name),
-                'procedure' => Routines::getProcedureDefinition($dbi, $db, $name),
-                default => Events::getDefinition($dbi, $db, $name),
+                'function' => Routines::getFunctionDefinition($this->dbi, $db, $name),
+                'procedure' => Routines::getProcedureDefinition($this->dbi, $db, $name),
+                default => Events::getDefinition($this->dbi, $db, $name),
             };
 
             // Do some formatting
@@ -188,23 +186,21 @@ class ExportXml extends ExportPlugin
 
         $charset = $this->outputHandler->outputCharsetConversion ? Current::$charset : 'utf-8';
 
-        $config = Config::getInstance();
         $head = '<?xml version="1.0" encoding="' . $charset . '"?>' . "\n"
             . '<!--' . "\n"
             . '- phpMyAdmin XML Dump' . "\n"
             . '- version ' . Version::VERSION . "\n"
             . '- https://www.phpmyadmin.net' . "\n"
             . '-' . "\n"
-            . '- ' . __('Host:') . ' ' . htmlspecialchars($config->selectedServer['host']);
-        if (! empty($config->selectedServer['port'])) {
-            $head .= ':' . $config->selectedServer['port'];
+            . '- ' . __('Host:') . ' ' . htmlspecialchars($this->config->selectedServer['host']);
+        if (! empty($this->config->selectedServer['port'])) {
+            $head .= ':' . $this->config->selectedServer['port'];
         }
 
-        $dbi = DatabaseInterface::getInstance();
         $head .= "\n"
             . '- ' . __('Generation Time:') . ' '
             . Util::localisedDate(new DateTimeImmutable()) . "\n"
-            . '- ' . __('Server version:') . ' ' . $dbi->getVersionString() . "\n"
+            . '- ' . __('Server version:') . ' ' . $this->dbi->getVersionString() . "\n"
             . '- ' . __('PHP Version:') . ' ' . PHP_VERSION . "\n"
             . '-->' . "\n\n";
 
@@ -215,10 +211,10 @@ class ExportXml extends ExportPlugin
             . '>' . "\n";
 
         if ($exportStruct) {
-            $result = $dbi->fetchSingleRow(
+            $result = $this->dbi->fetchSingleRow(
                 'SELECT `DEFAULT_CHARACTER_SET_NAME`, `DEFAULT_COLLATION_NAME`'
                 . ' FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`'
-                . ' = ' . $dbi->quoteString(Current::$database) . ' LIMIT 1',
+                . ' = ' . $this->dbi->quoteString(Current::$database) . ' LIMIT 1',
             );
             $dbCollation = $result['DEFAULT_COLLATION_NAME'];
             $dbCharset = $result['DEFAULT_CHARACTER_SET_NAME'];
@@ -237,7 +233,7 @@ class ExportXml extends ExportPlugin
 
             foreach ($this->tables as $table) {
                 // Export tables and views
-                $result = $dbi->fetchResult(
+                $result = $this->dbi->fetchResult(
                     'SHOW CREATE TABLE ' . Util::backquote(Current::$database) . '.'
                     . Util::backquote($table),
                     0,
@@ -249,7 +245,7 @@ class ExportXml extends ExportPlugin
 
                 $tbl = (string) $result[$table][1];
 
-                $isView = $dbi->getTable(Current::$database, $table)->isView();
+                $isView = $this->dbi->getTable(Current::$database, $table)->isView();
 
                 $type = $isView ? 'view' : 'table';
 
@@ -275,7 +271,7 @@ class ExportXml extends ExportPlugin
                 }
 
                 // Export triggers
-                $triggers = Triggers::getDetails($dbi, Current::$database, $table);
+                $triggers = Triggers::getDetails($this->dbi, Current::$database, $table);
 
                 foreach ($triggers as $trigger) {
                     $code = $trigger->getCreateSql();
@@ -298,7 +294,7 @@ class ExportXml extends ExportPlugin
                 $head .= $this->exportDefinitions(
                     Current::$database,
                     'function',
-                    Routines::getNames($dbi, Current::$database, RoutineType::Function),
+                    Routines::getNames($this->dbi, Current::$database, RoutineType::Function),
                 );
             }
 
@@ -306,15 +302,15 @@ class ExportXml extends ExportPlugin
                 $head .= $this->exportDefinitions(
                     Current::$database,
                     'procedure',
-                    Routines::getNames($dbi, Current::$database, RoutineType::Procedure),
+                    Routines::getNames($this->dbi, Current::$database, RoutineType::Procedure),
                 );
             }
 
             if ($this->exportEvents) {
                 // Export events
-                $events = $dbi->fetchSingleColumn(
+                $events = $this->dbi->fetchSingleColumn(
                     'SELECT EVENT_NAME FROM information_schema.EVENTS '
-                    . 'WHERE EVENT_SCHEMA=' . $dbi->quoteString(Current::$database),
+                    . 'WHERE EVENT_SCHEMA=' . $this->dbi->quoteString(Current::$database),
                 );
                 $head .= $this->exportDefinitions(Current::$database, 'event', $events);
             }
@@ -393,9 +389,8 @@ class ExportXml extends ExportPlugin
         string $sqlQuery,
         array $aliases = [],
     ): void {
-        $dbi = DatabaseInterface::getInstance();
         // Do not export data for merge tables
-        if ($dbi->getTable($db, $table)->isMerge()) {
+        if ($this->dbi->getTable($db, $table)->isMerge()) {
             return;
         }
 
@@ -404,7 +399,7 @@ class ExportXml extends ExportPlugin
             return;
         }
 
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
         $columns = $result->getFieldNames();

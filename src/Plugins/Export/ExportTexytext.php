@@ -139,11 +139,10 @@ class ExportTexytext extends ExportPlugin
             : '==' . __('Dumping data for query result') . "\n\n",
         );
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets the data from the database
          */
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         // If required, get fields name at the first line
         if ($this->columns) {
@@ -192,7 +191,7 @@ class ExportTexytext extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);
@@ -215,8 +214,7 @@ class ExportTexytext extends ExportPlugin
          * Get the unique keys in the table
          */
         $uniqueKeys = [];
-        $dbi = DatabaseInterface::getInstance();
-        $keys = $dbi->getTableIndexes($db, $view);
+        $keys = $this->dbi->getTableIndexes($db, $view);
         foreach ($keys as $key) {
             if ($key['Non_unique'] != 0) {
                 continue;
@@ -228,7 +226,7 @@ class ExportTexytext extends ExportPlugin
         /**
          * Gets fields properties
          */
-        $dbi->selectDb($db);
+        $this->dbi->selectDb($db);
 
         /**
          * Displays the table structure
@@ -241,7 +239,7 @@ class ExportTexytext extends ExportPlugin
             . '|' . __('Default')
             . "\n|------\n";
 
-        $columns = $dbi->getColumns($db, $view);
+        $columns = $this->dbi->getColumns($db, $view);
         foreach ($columns as $column) {
             $colAs = $this->getColumnAlias($aliases, $db, $view, $column->field);
 
@@ -271,8 +269,7 @@ class ExportTexytext extends ExportPlugin
          * Get the unique keys in the table
          */
         $uniqueKeys = [];
-        $dbi = DatabaseInterface::getInstance();
-        $keys = $dbi->getTableIndexes($db, $table);
+        $keys = $this->dbi->getTableIndexes($db, $table);
         foreach ($keys as $key) {
             if ($key['Non_unique'] != 0) {
                 continue;
@@ -284,7 +281,7 @@ class ExportTexytext extends ExportPlugin
         /**
          * Gets fields properties
          */
-        $dbi->selectDb($db);
+        $this->dbi->selectDb($db);
 
         // Check if we can use Relations
         $foreigners = $this->doRelation && $relationParameters->relationFeature !== null ?
@@ -316,7 +313,7 @@ class ExportTexytext extends ExportPlugin
 
         $textOutput .= "\n|------\n";
 
-        $columns = $dbi->getColumns($db, $table);
+        $columns = $this->dbi->getColumns($db, $table);
         foreach ($columns as $column) {
             $colAs = $this->getColumnAlias($aliases, $db, $table, $column->field);
 
@@ -402,7 +399,7 @@ class ExportTexytext extends ExportPlugin
                 $dump .= $this->getTableDef($db, $table, $aliases);
                 break;
             case 'triggers':
-                $triggers = Triggers::getDetails(DatabaseInterface::getInstance(), $db, $table);
+                $triggers = Triggers::getDetails($this->dbi, $db, $table);
                 if ($triggers !== []) {
                     $dump .= '== ' . __('Triggers') . ' ' . $tableAlias . "\n\n";
                     $dump .= $this->getTriggers($triggers);

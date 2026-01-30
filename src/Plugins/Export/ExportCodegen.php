@@ -8,7 +8,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Config\Settings\Export;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\StructureOrData;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Plugins\Export\Helpers\TableProperty;
@@ -144,13 +143,7 @@ class ExportCodegen extends ExportPlugin
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
 
-        $result = DatabaseInterface::getInstance()->query(
-            sprintf(
-                'DESC %s.%s',
-                Util::backquote($db),
-                Util::backquote($table),
-            ),
-        );
+        $result = $this->dbi->query(sprintf('DESC %s.%s', Util::backquote($db), Util::backquote($table)));
 
         /** @var TableProperty[] $tableProperties */
         $tableProperties = [];
@@ -252,13 +245,7 @@ class ExportCodegen extends ExportPlugin
         $lines[] = '    <class '
             . 'name="' . self::cgMakeIdentifier($tableAlias) . '" '
             . 'table="' . self::cgMakeIdentifier($tableAlias) . '">';
-        $result = DatabaseInterface::getInstance()->query(
-            sprintf(
-                'DESC %s.%s',
-                Util::backquote($db),
-                Util::backquote($table),
-            ),
-        );
+        $result = $this->dbi->query(sprintf('DESC %s.%s', Util::backquote($db), Util::backquote($table)));
 
         while ($row = $result->fetchRow()) {
             $row[0] = $this->getColumnAlias($aliases, $db, $table, $row[0]);

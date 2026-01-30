@@ -201,11 +201,10 @@ class ExportOdt extends ExportPlugin
         array $aliases = [],
     ): void {
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $dbi = DatabaseInterface::getInstance();
         // Gets the data from the database
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
         $fieldsCnt = $result->numFields();
-        $fieldsMeta = $dbi->getFieldsMeta($result);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $this->buffer .= '<text:h text:outline-level="2" text:style-name="Heading_2"'
             . ' text:is-list-header="true">';
@@ -288,7 +287,7 @@ class ExportOdt extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);
@@ -306,11 +305,10 @@ class ExportOdt extends ExportPlugin
     public function getTableDefStandIn(string $db, string $view, array $aliases = []): string
     {
         $viewAlias = $this->getTableAlias($aliases, $db, $view);
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets fields properties
          */
-        $dbi->selectDb($db);
+        $this->dbi->selectDb($db);
 
         /**
          * Displays the table structure
@@ -336,7 +334,7 @@ class ExportOdt extends ExportPlugin
             . '</table:table-cell>'
             . '</table:table-row>';
 
-        $columns = $dbi->getColumns($db, $view);
+        $columns = $this->dbi->getColumns($db, $view);
         foreach ($columns as $column) {
             $colAs = $this->getColumnAlias($aliases, $db, $view, $column->field);
 
@@ -362,11 +360,10 @@ class ExportOdt extends ExportPlugin
 
         $relationParameters = $this->relation->getRelationParameters();
 
-        $dbi = DatabaseInterface::getInstance();
         /**
          * Gets fields properties
          */
-        $dbi->selectDb($db);
+        $this->dbi->selectDb($db);
 
         // Check if we can use Relations
         $foreigners = $this->doRelation && $relationParameters->relationFeature !== null ?
@@ -428,7 +425,7 @@ class ExportOdt extends ExportPlugin
 
         $this->buffer .= '</table:table-row>';
 
-        $columns = $dbi->getColumns($db, $table);
+        $columns = $this->dbi->getColumns($db, $table);
         foreach ($columns as $column) {
             $fieldName = $column->field;
             $colAs = $this->getColumnAlias($aliases, $db, $table, $column->field);
@@ -567,7 +564,7 @@ class ExportOdt extends ExportPlugin
                 $this->getTableDef($db, $table, $aliases);
                 break;
             case 'triggers':
-                $triggers = Triggers::getDetails(DatabaseInterface::getInstance(), $db, $table);
+                $triggers = Triggers::getDetails($this->dbi, $db, $table);
                 if ($triggers !== []) {
                     $this->buffer .= '<text:h text:outline-level="2" text:style-name="Heading_2"'
                     . ' text:is-list-header="true">'

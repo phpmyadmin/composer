@@ -182,7 +182,7 @@ class ExportJson extends ExportPlugin
             throw new ExportException('Failure during data export.');
         }
 
-        $this->doExportForQuery(DatabaseInterface::getInstance(), $sqlQuery, $buffer, $aliases, $db, $table);
+        $this->doExportForQuery($sqlQuery, $buffer, $aliases, $db, $table);
     }
 
     /**
@@ -199,7 +199,6 @@ class ExportJson extends ExportPlugin
      * >|null $aliases
      */
     private function doExportForQuery(
-        DatabaseInterface $dbi,
         string $sqlQuery,
         string $buffer,
         array|null $aliases,
@@ -210,9 +209,9 @@ class ExportJson extends ExportPlugin
 
         $this->outputHandler->addLine($header . "\n" . '[' . "\n");
 
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
         $columnsCnt = $result->numFields();
-        $fieldsMeta = $dbi->getFieldsMeta($result);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $columns = [];
         foreach ($fieldsMeta as $i => $field) {
@@ -287,12 +286,11 @@ class ExportJson extends ExportPlugin
             throw new ExportException('Failure during data export.');
         }
 
-        $dbi = DatabaseInterface::getInstance();
         if ($db !== '') {
-            $dbi->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
-        $this->doExportForQuery($dbi, $sqlQuery, $buffer, null, $db, null);
+        $this->doExportForQuery($sqlQuery, $buffer, null, $db, null);
     }
 
     public function setExportOptions(ServerRequest $request, Export $exportConfig): void

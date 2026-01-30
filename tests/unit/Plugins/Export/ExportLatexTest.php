@@ -38,37 +38,17 @@ use function ob_start;
 
 #[CoversClass(ExportLatex::class)]
 #[Medium]
-class ExportLatexTest extends AbstractTestCase
+final class ExportLatexTest extends AbstractTestCase
 {
-    protected ExportLatex $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
         Current::$database = 'db';
         Current::$table = 'table';
-        $relation = new Relation($dbi);
-        $this->object = new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-        unset($this->object);
     }
 
     public function testSetProperties(): void
@@ -85,8 +65,10 @@ class ExportLatexTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
+        $exportLatex = $this->getExportLatex();
+
         $method = new ReflectionMethod(ExportLatex::class, 'setProperties');
-        $properties = $method->invoke($this->object, null);
+        $properties = $method->invoke($exportLatex, null);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -420,7 +402,7 @@ class ExportLatexTest extends AbstractTestCase
         ExportPlugin::$exportType = ExportType::Table;
         ExportPlugin::$singleTable = false;
 
-        $method->invoke($this->object, null);
+        $method->invoke($exportLatex, null);
 
         $generalOptionsArray = $options->getProperties();
 
@@ -429,12 +411,14 @@ class ExportLatexTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
-        $config = Config::getInstance();
+        $config = new Config();
         $config->selectedServer['port'] = 80;
         $config->selectedServer['host'] = 'localhost';
 
+        $exportLatex = $this->getExportLatex(config: $config);
+
         ob_start();
-        $this->object->exportHeader();
+        $exportLatex->exportHeader();
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -444,35 +428,34 @@ class ExportLatexTest extends AbstractTestCase
 
     public function testExportFooter(): void
     {
+        $exportLatex = $this->getExportLatex();
         $this->expectNotToPerformAssertions();
-        $this->object->exportFooter();
+        $exportLatex->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportLatex = $this->getExportLatex();
         $this->expectOutputString("% \n% Database: 'testDB'\n% \n");
-
-        $this->object->exportDBHeader('testDB');
+        $exportLatex->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportLatex = $this->getExportLatex();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportLatex->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportLatex = $this->getExportLatex();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportLatex->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
-        $config = Config::getInstance();
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['verbose'] = 'verb';
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'latex_caption' => 'On',
@@ -483,10 +466,11 @@ class ExportLatexTest extends AbstractTestCase
                 'latex_null' => 'null',
             ]);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportLatex = $this->getExportLatex();
+        $exportLatex->setExportOptions($request, new SettingsExport());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportLatex->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertSame(
@@ -518,10 +502,10 @@ class ExportLatexTest extends AbstractTestCase
                 'latex_null' => 'null',
             ]);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportLatex->setExportOptions($request, new SettingsExport());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportLatex->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -585,10 +569,7 @@ class ExportLatexTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
 
-        DatabaseInterface::$instance = $dbi;
-        $relation = new Relation($dbi);
-        $this->object->relation = $relation;
-        $this->object->transformations = new Transformations($dbi, $relation);
+        $exportLatex = $this->getExportLatex($dbi);
 
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::REL_WORK => true,
@@ -603,10 +584,10 @@ class ExportLatexTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['latex_relation' => 'On', 'latex_mime' => 'On', 'latex_comments' => 'On']);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportLatex->setExportOptions($request, new SettingsExport());
 
         ob_start();
-        $this->object->exportStructure('database', '', 'test');
+        $exportLatex->exportStructure('database', '', 'test');
         $result = ob_get_clean();
 
         //echo $result; die;
@@ -670,10 +651,8 @@ class ExportLatexTest extends AbstractTestCase
             ->method('fetchAssoc')
             ->willReturn(['comment' => 'testComment']);
 
-        DatabaseInterface::$instance = $dbi;
-        $relation = new Relation($dbi);
-        $this->object->relation = $relation;
-        $this->object->transformations = new Transformations($dbi, $relation);
+        $exportLatex = $this->getExportLatex($dbi);
+        $exportLatex->setExportOptions($request, new SettingsExport());
 
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::REL_WORK => true,
@@ -686,7 +665,7 @@ class ExportLatexTest extends AbstractTestCase
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
         ob_start();
-        $this->object->exportStructure('database', '', 'test');
+        $exportLatex->exportStructure('database', '', 'test');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -716,12 +695,6 @@ class ExportLatexTest extends AbstractTestCase
         $dbi->expects(self::never())
             ->method('tryQuery');
 
-        DatabaseInterface::$instance = $dbi;
-
-        $config = Config::getInstance();
-        $config->selectedServer['host'] = 'localhost';
-        $config->selectedServer['verbose'] = 'verb';
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'latex_caption' => 'On',
@@ -730,7 +703,8 @@ class ExportLatexTest extends AbstractTestCase
                 'latex_structure_label' => 'latexlabel',
             ]);
 
-        $this->object->setExportOptions($request, new SettingsExport());
+        $exportLatex = $this->getExportLatex($dbi);
+        $exportLatex->setExportOptions($request, new SettingsExport());
 
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::DATABASE => 'database',
@@ -740,7 +714,7 @@ class ExportLatexTest extends AbstractTestCase
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
         ob_start();
-        $this->object->exportStructure('database', '', 'test');
+        $exportLatex->exportStructure('database', '', 'test');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -750,7 +724,7 @@ class ExportLatexTest extends AbstractTestCase
         self::assertStringContainsString('caption{latexcontinued}', $result);
 
         // case 4
-        $this->object->exportStructure('database', '', 'triggers');
+        $exportLatex->exportStructure('database', '', 'triggers');
     }
 
     public function testTexEscape(): void
@@ -764,7 +738,8 @@ class ExportLatexTest extends AbstractTestCase
     #[DataProvider('providerForGetTranslatedText')]
     public function testGetTranslatedText(string $text, string $expected): void
     {
-        self::assertSame($expected, $this->object->getTranslatedText($text));
+        $exportLatex = $this->getExportLatex();
+        self::assertSame($expected, $exportLatex->getTranslatedText($text));
     }
 
     /** @return iterable<array{string, string}> */
@@ -787,16 +762,18 @@ class ExportLatexTest extends AbstractTestCase
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        DatabaseInterface::$instance = $dbi;
+
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['latex_structure_or_data' => 'structure']);
-        $this->object->setExportOptions($request, new SettingsExport());
+
+        $exportLatex = $this->getExportLatex($dbi);
+        $exportLatex->setExportOptions($request, new SettingsExport());
         ob_start();
         $export = new Export($dbi, new OutputHandler());
         $export->exportTable(
             'testdb',
             'testtable',
-            $this->object,
+            $exportLatex,
             null,
             '0',
             '0',
@@ -807,5 +784,14 @@ class ExportLatexTest extends AbstractTestCase
         self::assertStringContainsString("% Database: 'testdb'", $output);
         self::assertStringContainsString("%\n", $output);
         self::assertStringContainsString('% Structure: testtable', $output);
+    }
+
+    private function getExportLatex(DatabaseInterface|null $dbi = null, Config|null $config = null): ExportLatex
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $config ??= new Config();
+        $relation = new Relation($dbi, $config);
+
+        return new ExportLatex($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }
