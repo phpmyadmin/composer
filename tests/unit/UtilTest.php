@@ -1367,8 +1367,6 @@ SQL;
 
     public function testGetSupportedDatatypes(): void
     {
-        $dbiDummy = $this->createDbiDummy();
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
         $expected = [
             'INT',
             'VARCHAR',
@@ -1415,7 +1413,7 @@ SQL;
             'GEOMETRYCOLLECTION',
             'JSON',
         ];
-        self::assertSame($expected, Util::getSupportedDatatypes());
+        self::assertSame($expected, Util::getSupportedDatatypes($this->createDatabaseInterface()));
     }
 
     /**

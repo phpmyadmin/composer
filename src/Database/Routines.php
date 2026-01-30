@@ -358,7 +358,7 @@ class Routines
             $retval['item_param_name'] = $_POST['item_param_name'];
             $retval['item_param_type'] = $_POST['item_param_type'];
             foreach ($retval['item_param_type'] as $key => $value) {
-                if (in_array($value, Util::getSupportedDatatypes(), true)) {
+                if (in_array($value, Util::getSupportedDatatypes($this->dbi), true)) {
                     continue;
                 }
 
@@ -380,7 +380,7 @@ class Routines
         $retval['item_returntype'] = '';
         if (
             isset($_POST['item_returntype'])
-            && in_array($_POST['item_returntype'], Util::getSupportedDatatypes(), true)
+            && in_array($_POST['item_returntype'], Util::getSupportedDatatypes($this->dbi), true)
         ) {
             $retval['item_returntype'] = $_POST['item_returntype'];
         }
@@ -726,7 +726,7 @@ class Routines
     ): string {
         $itemReturnType = $_POST['item_returntype'] ?? null;
 
-        if ($itemReturnType !== '' && in_array($itemReturnType, Util::getSupportedDatatypes(), true)) {
+        if ($itemReturnType !== '' && in_array($itemReturnType, Util::getSupportedDatatypes($this->dbi), true)) {
             $query .= 'RETURNS ' . $itemReturnType;
         } else {
             $this->errors[] = __('You must provide a valid return type for the routine.');

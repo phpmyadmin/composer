@@ -1162,10 +1162,10 @@ class Util
      *
      * @return string[] An array of datatypes.
      */
-    public static function getSupportedDatatypes(): array
+    public static function getSupportedDatatypes(DatabaseInterface $dbi): array
     {
         $retval = [];
-        foreach (DatabaseInterface::getInstance()->types->getColumns() as $value) {
+        foreach ($dbi->types->getColumns() as $value) {
             if (is_array($value)) {
                 foreach ($value as $subvalue) {
                     if ($subvalue === '-') {
