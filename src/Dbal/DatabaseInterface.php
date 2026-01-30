@@ -386,10 +386,12 @@ class DatabaseInterface
             if ($table !== [] && $table !== '') {
                 if (is_array($table)) {
                     $sqlWhereTable = QueryGenerator::getTableNameConditionForMultiple(
+                        Util::getCollateForIS($this),
                         array_map($this->quoteString(...), $table),
                     );
                 } else {
                     $sqlWhereTable = QueryGenerator::getTableNameCondition(
+                        Util::getCollateForIS($this),
                         $this->quoteString($tableIsGroup ? $this->escapeMysqlWildcards($table) : $table),
                         $tableIsGroup,
                     );
@@ -406,7 +408,11 @@ class DatabaseInterface
             // comparison (if we are looking for the db Aa we don't want
             // to find the db aa)
 
-            $sql = QueryGenerator::getSqlForTablesFull($this->quoteString($database), $sqlWhereTable);
+            $sql = QueryGenerator::getSqlForTablesFull(
+                Util::getCollateForIS($this),
+                $this->quoteString($database),
+                $sqlWhereTable,
+            );
 
             // Sort the tables
             $sql .= ' ORDER BY ' . $sortBy . ' ' . $sortOrder;
@@ -758,6 +764,7 @@ class DatabaseInterface
         ConnectionType $connectionType = ConnectionType::User,
     ): Column|null {
         $sql = QueryGenerator::getColumns(
+            Util::getCollateForIS($this),
             $this->quoteString($database, $connectionType),
             $this->quoteString($table, $connectionType),
             $this->quoteString($column, $connectionType),
@@ -798,6 +805,7 @@ class DatabaseInterface
         ConnectionType $connectionType = ConnectionType::User,
     ): array {
         $sql = QueryGenerator::getColumns(
+            Util::getCollateForIS($this),
             $this->quoteString($database, $connectionType),
             $this->quoteString($table, $connectionType),
         );
@@ -915,6 +923,7 @@ class DatabaseInterface
         ConnectionType $connectionType = ConnectionType::User,
     ): array {
         $sql = QueryGenerator::getColumnNamesAndTypes(
+            Util::getCollateForIS($this),
             $this->quoteString($database, $connectionType),
             $this->quoteString($table, $connectionType),
         );

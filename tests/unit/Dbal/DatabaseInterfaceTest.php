@@ -888,6 +888,7 @@ final class DatabaseInterfaceTest extends AbstractTestCase
             ['Field', 'Type', 'Collation', 'Null', 'Key', 'Default', 'Extra', 'Privileges', 'Comment'],
         );
         $dbiDummy->addResult('SHOW INDEXES FROM `test_db`.`test_table`', []);
+        $dbiDummy->addResult('SELECT @@lower_case_table_names', [['0']]);
         $dbi = $this->createDatabaseInterface($dbiDummy);
         $column = new Column('test_column', 'varchar(45)', null, false, '', null, '', '', '');
         self::assertEquals($column, $dbi->getColumn('test_db', 'test_table', 'test_column'));
@@ -914,6 +915,7 @@ final class DatabaseInterfaceTest extends AbstractTestCase
             ['Field', 'Type', 'Collation', 'Null', 'Key', 'Default', 'Extra', 'Privileges', 'Comment'],
         );
         $dbiDummy->addResult('SHOW INDEXES FROM `test_db`.`test_table`', []);
+        $dbiDummy->addResult('SELECT @@lower_case_table_names', [['0']]);
         $dbi = $this->createDatabaseInterface($dbiDummy);
         $column = new Column(
             'test_column',

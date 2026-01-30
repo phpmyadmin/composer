@@ -219,7 +219,8 @@ class Events
         $columns = '`EVENT_NAME`, `STATUS`, `EVENT_TYPE`, `EXECUTE_AT`, '
                  . '`INTERVAL_VALUE`, `INTERVAL_FIELD`, `STARTS`, `ENDS`, '
                  . '`EVENT_DEFINITION`, `ON_COMPLETION`, `DEFINER`, `EVENT_COMMENT`';
-        $where = 'EVENT_SCHEMA ' . Util::getCollateForIS() . '=' . $this->dbi->quoteString(Current::$database)
+        $where = 'EVENT_SCHEMA ' . Util::getCollateForIS($this->dbi)
+            . '=' . $this->dbi->quoteString(Current::$database)
                  . ' AND EVENT_NAME=' . $this->dbi->quoteString($name);
         $query = 'SELECT ' . $columns . ' FROM `INFORMATION_SCHEMA`.`EVENTS` WHERE ' . $where . ';';
         $item = $this->dbi->fetchSingleRow($query);
@@ -352,6 +353,7 @@ class Events
     {
         if (! $this->config->selectedServer['DisableIS']) {
             $query = QueryGenerator::getInformationSchemaEventsRequest(
+                Util::getCollateForIS($this->dbi),
                 $this->dbi->quoteString($db),
                 $name === '' ? null : $this->dbi->quoteString($name),
             );

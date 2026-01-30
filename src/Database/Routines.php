@@ -426,7 +426,8 @@ class Routines
         $fields = 'SPECIFIC_NAME, ROUTINE_TYPE, DTD_IDENTIFIER, '
                  . 'ROUTINE_DEFINITION, IS_DETERMINISTIC, SQL_DATA_ACCESS, '
                  . 'ROUTINE_COMMENT, SECURITY_TYPE';
-        $where = 'ROUTINE_SCHEMA ' . Util::getCollateForIS() . '=' . $this->dbi->quoteString(Current::$database)
+        $where = 'ROUTINE_SCHEMA ' . Util::getCollateForIS($this->dbi)
+            . '=' . $this->dbi->quoteString(Current::$database)
                  . ' AND SPECIFIC_NAME=' . $this->dbi->quoteString($name)
                  . ' AND ROUTINE_TYPE=' . $this->dbi->quoteString($type);
         $query = 'SELECT ' . $fields . ' FROM INFORMATION_SCHEMA.ROUTINES WHERE ' . $where . ';';
@@ -1188,6 +1189,7 @@ class Routines
         int $offset = 0,
     ): array {
         $query = QueryGenerator::getInformationSchemaRoutinesRequest(
+            Util::getCollateForIS($dbi),
             $dbi->quoteString($db),
             $which,
             $name === '' ? null : $dbi->quoteString($name),
@@ -1213,6 +1215,7 @@ class Routines
     public static function getRoutineCount(DatabaseInterface $dbi, string $db, RoutineType|null $which = null): int
     {
         $query = QueryGenerator::getInformationSchemaRoutinesCountRequest(
+            Util::getCollateForIS($dbi),
             $dbi->quoteString($db),
             $which,
         );

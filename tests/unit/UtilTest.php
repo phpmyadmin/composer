@@ -1352,8 +1352,7 @@ SQL;
     {
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT @@lower_case_table_names', [[$lowerCaseTableNames]], ['@@lower_case_table_names']);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
-        self::assertSame($expected, Util::getCollateForIS());
+        self::assertSame($expected, Util::getCollateForIS($this->createDatabaseInterface($dbiDummy)));
         $dbiDummy->assertAllQueriesConsumed();
     }
 

@@ -94,9 +94,9 @@ class NodeTable extends NodeDatabaseChild
                     $query = 'SELECT COUNT(*) ';
                     $query .= 'FROM `INFORMATION_SCHEMA`.`TRIGGERS` ';
                     $query .= 'WHERE `EVENT_OBJECT_SCHEMA` '
-                    . Util::getCollateForIS() . '=' . $dbi->quoteString($db) . ' ';
+                    . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($db) . ' ';
                     $query .= 'AND `EVENT_OBJECT_TABLE` '
-                    . Util::getCollateForIS() . '=' . $dbi->quoteString($table);
+                    . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($table);
                     $retval = (int) $dbi->fetchValue($query);
                 } else {
                     $db = Util::backquote($db);
@@ -189,8 +189,8 @@ class NodeTable extends NodeDatabaseChild
         if (! $this->config->selectedServer['DisableIS']) {
             $query = 'SELECT `TRIGGER_NAME` AS `name` ';
             $query .= 'FROM `INFORMATION_SCHEMA`.`TRIGGERS` ';
-            $query .= 'WHERE `EVENT_OBJECT_SCHEMA` ' . Util::getCollateForIS() . '=' . $dbi->quoteString($db) . ' ';
-            $query .= 'AND `EVENT_OBJECT_TABLE` ' . Util::getCollateForIS() . '=' . $dbi->quoteString($table) . ' ';
+            $query .= 'WHERE `EVENT_OBJECT_SCHEMA` ' . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($db) . ' ';
+            $query .= 'AND `EVENT_OBJECT_TABLE` ' . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($table) . ' ';
             $query .= 'ORDER BY `TRIGGER_NAME` ASC ';
             $query .= 'LIMIT ' . $pos . ', ' . $maxItems;
 

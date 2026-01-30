@@ -1472,9 +1472,9 @@ class Util
      *
      * @return string COLLATE clause if needed or empty string.
      */
-    public static function getCollateForIS(): string
+    public static function getCollateForIS(DatabaseInterface $dbi): string
     {
-        $names = DatabaseInterface::getInstance()->getLowerCaseNames();
+        $names = $dbi->getLowerCaseNames();
         if ($names === 0) {
             return 'COLLATE utf8_bin';
         }

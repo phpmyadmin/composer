@@ -47,6 +47,7 @@ class Triggers
     {
         if (! Config::getInstance()->selectedServer['DisableIS']) {
             $query = QueryGenerator::getInformationSchemaTriggersRequest(
+                Util::getCollateForIS($dbi),
                 $dbi->quoteString($db),
                 $table === '' ? null : $dbi->quoteString($table),
             );

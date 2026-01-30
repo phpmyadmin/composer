@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Query;
 
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Query\Generator;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -14,9 +13,6 @@ class GeneratorTest extends AbstractTestCase
 {
     public function testGetColumnsSql(): void
     {
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-
         self::assertSame(
             'SELECT `COLUMN_NAME` AS `Field`, `COLUMN_TYPE` AS `Type`, `COLLATION_NAME` AS `Collation`,'
                 . ' `IS_NULLABLE` AS `Null`, `COLUMN_KEY` AS `Key`, `COLUMN_DEFAULT` AS `Default`,'
@@ -24,10 +20,7 @@ class GeneratorTest extends AbstractTestCase
                 . ' FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` COLLATE utf8_bin = \'mydb\''
                 . ' AND `TABLE_NAME` COLLATE utf8_bin = \'mytable\''
                 . ' ORDER BY `ORDINAL_POSITION`',
-            Generator::getColumns(
-                "'mydb'",
-                "'mytable'",
-            ),
+            Generator::getColumns('COLLATE utf8_bin', "'mydb'", "'mytable'"),
         );
         self::assertSame(
             'SELECT `COLUMN_NAME` AS `Field`, `COLUMN_TYPE` AS `Type`, `COLLATION_NAME` AS `Collation`,'
@@ -36,11 +29,7 @@ class GeneratorTest extends AbstractTestCase
                 . ' FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` COLLATE utf8_bin = \'mydb\''
                 . ' AND `TABLE_NAME` COLLATE utf8_bin = \'mytable\' AND `COLUMN_NAME` = \'_idcolumn\''
                 . ' ORDER BY `ORDINAL_POSITION`',
-            Generator::getColumns(
-                "'mydb'",
-                "'mytable'",
-                "'_idcolumn'",
-            ),
+            Generator::getColumns('COLLATE utf8_bin', "'mydb'", "'mytable'", "'_idcolumn'"),
         );
         self::assertSame(
             'SELECT `COLUMN_NAME` AS `Field`, `COLUMN_TYPE` AS `Type`, `COLLATION_NAME` AS `Collation`,'
@@ -49,10 +38,7 @@ class GeneratorTest extends AbstractTestCase
                 . ' FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` COLLATE utf8_bin = \'mydb\''
                 . ' AND `TABLE_NAME` COLLATE utf8_bin = \'mytable\''
                 . ' ORDER BY `ORDINAL_POSITION`',
-            Generator::getColumns(
-                "'mydb'",
-                "'mytable'",
-            ),
+            Generator::getColumns('COLLATE utf8_bin', "'mydb'", "'mytable'"),
         );
         self::assertSame(
             'SELECT `COLUMN_NAME` AS `Field`, `COLUMN_TYPE` AS `Type`, `COLLATION_NAME` AS `Collation`,'
@@ -61,11 +47,7 @@ class GeneratorTest extends AbstractTestCase
                 . ' FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` COLLATE utf8_bin = \'mydb\''
                 . ' AND `TABLE_NAME` COLLATE utf8_bin = \'mytable\' AND `COLUMN_NAME` = \'_idcolumn\''
                 . ' ORDER BY `ORDINAL_POSITION`',
-            Generator::getColumns(
-                "'mydb'",
-                "'mytable'",
-                "'_idcolumn'",
-            ),
+            Generator::getColumns('COLLATE utf8_bin', "'mydb'", "'mytable'", "'_idcolumn'"),
         );
     }
 

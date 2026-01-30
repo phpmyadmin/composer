@@ -13143,7 +13143,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 3
+			count: 2
 			path: src/Util.php
 
 		-
