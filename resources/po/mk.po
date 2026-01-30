@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-01-25 00:33+0000\n"
-"PO-Revision-Date: 2026-01-28 16:07+0000\n"
+"PO-Revision-Date: 2026-01-30 01:01+0000\n"
 "Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/mk/>\n"
@@ -1277,7 +1277,7 @@ msgstr "Должина/Вредност*"
 
 #: resources/templates/console/display.twig:185 src/Config/Descriptions.php:958
 msgid "Always expand query messages"
-msgstr ""
+msgstr "Секогаш прошири пораки за пребарување"
 
 #: resources/templates/console/display.twig:189 src/Config/Descriptions.php:957
 msgid "Show query history at start"
@@ -1285,13 +1285,15 @@ msgstr "Покажи историја на барања на старт"
 
 #: resources/templates/console/display.twig:193 src/Config/Descriptions.php:959
 msgid "Show current browsing query"
-msgstr ""
+msgstr "Прикажи моментално пребарувачко барање"
 
 #: resources/templates/console/display.twig:197
 msgid ""
 "Execute queries on Enter and insert new line with Shift+Enter. To make this "
 "permanent, view settings."
 msgstr ""
+"Изврши барања про Enter и внеси нов ред со Shift+Enter. За да го направите "
+"ова трајно, погледнете ги поставките."
 
 #: resources/templates/console/display.twig:201 src/Config/Descriptions.php:961
 msgid "Switch to dark theme"
@@ -1309,11 +1311,11 @@ msgstr "Создади верзија %1$s"
 
 #: resources/templates/create_tracking_version.twig:21
 msgid "Track these data definition statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за дефиниција на податоци:"
 
 #: resources/templates/create_tracking_version.twig:60
 msgid "Track these data manipulation statements:"
-msgstr ""
+msgstr "Проследи ги овие изјави за манипулација на податоци:"
 
 #: resources/templates/create_tracking_version.twig:77
 #, fuzzy
@@ -1493,7 +1495,7 @@ msgstr "Име на клуч"
 #: resources/templates/table/structure/display_structure.twig:475
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:8
 msgid "Packed"
-msgstr ""
+msgstr "Запакувано"
 
 #: resources/templates/database/data_dictionary/index.twig:79
 #: resources/templates/indexes.twig:22
@@ -1564,11 +1566,11 @@ msgstr "Прикажи табели"
 #: resources/templates/database/designer/main.twig:35
 #: resources/templates/database/designer/main.twig:36
 msgid "View in fullscreen"
-msgstr ""
+msgstr "Прикажи во цел екран"
 
 #: resources/templates/database/designer/main.twig:34
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Излез од цел екран"
 
 #: resources/templates/database/designer/main.twig:40
 #: resources/templates/database/designer/main.twig:43

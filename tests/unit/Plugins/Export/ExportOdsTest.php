@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\ConnectionType;
@@ -40,42 +41,24 @@ use const MYSQLI_TYPE_TINY_BLOB;
 #[CoversClass(ExportOds::class)]
 #[Medium]
 #[RequiresPhpExtension('zip')]
-class ExportOdsTest extends AbstractTestCase
+final class ExportOdsTest extends AbstractTestCase
 {
-    protected ExportOds $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
-        $relation = new Relation($dbi);
-        $this->object = new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportOds = $this->getExportOds();
+
         $method = new ReflectionMethod(ExportOds::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportOds, null);
 
         $attrProperties = new ReflectionProperty(ExportOds::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportOds);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -166,42 +149,47 @@ class ExportOdsTest extends AbstractTestCase
 
     public function testExportHeader(): void
     {
-        $this->object->buffer = '';
-        $this->object->exportHeader();
+        $exportOds = $this->getExportOds();
+        $exportOds->buffer = '';
+        $exportOds->exportHeader();
         self::assertStringStartsWith(
             '<?xml version="1.0" encoding="utf-8"?><office:document-content',
-            $this->object->buffer,
+            $exportOds->buffer,
         );
     }
 
     public function testExportFooter(): void
     {
-        $this->object->buffer = 'header';
-        $this->object->exportFooter();
+        $exportOds = $this->getExportOds();
+        $exportOds->buffer = 'header';
+        $exportOds->exportFooter();
         $output = $this->getActualOutputForAssertion();
         self::assertMatchesRegularExpression('/^504b.*636f6e74656e742e786d6c/', bin2hex($output));
-        self::assertStringContainsString('header', $this->object->buffer);
-        self::assertStringContainsString('</office:spreadsheet>', $this->object->buffer);
-        self::assertStringContainsString('</office:body>', $this->object->buffer);
-        self::assertStringContainsString('</office:document-content>', $this->object->buffer);
+        self::assertStringContainsString('header', $exportOds->buffer);
+        self::assertStringContainsString('</office:spreadsheet>', $exportOds->buffer);
+        self::assertStringContainsString('</office:body>', $exportOds->buffer);
+        self::assertStringContainsString('</office:document-content>', $exportOds->buffer);
     }
 
     public function testExportDBHeader(): void
     {
+        $exportOds = $this->getExportOds();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('testDB');
+        $exportOds->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportOds = $this->getExportOds();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportOds->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportOds = $this->getExportOds();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportOds->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
@@ -247,14 +235,13 @@ class ExportOdsTest extends AbstractTestCase
                 [],
             );
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['ods_null' => '&']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportOds = $this->getExportOds($dbi);
+        $exportOds->setExportOptions($request, new Export());
 
-        $this->object->exportData('db', 'table', 'SELECT');
+        $exportOds->exportData('db', 'table', 'SELECT');
 
         self::assertSame(
             '<table:table table:name="table"><table:table-row><table:table-cell ' .
@@ -273,7 +260,7 @@ class ExportOdsTest extends AbstractTestCase
             'office:value="a&b" ><text:p>a&amp;b</text:p></table:table-cell>' .
             '<table:table-cell office:value-type="string"><text:p>&lt;</text:p>' .
             '</table:table-cell></table:table-row></table:table>',
-            $this->object->buffer,
+            $exportOds->buffer,
         );
     }
 
@@ -316,14 +303,13 @@ class ExportOdsTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['ods_columns' => 'On']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportOds = $this->getExportOds($dbi);
+        $exportOds->setExportOptions($request, new Export());
 
-        $this->object->exportData('db', 'table', 'SELECT');
+        $exportOds->exportData('db', 'table', 'SELECT');
 
         self::assertSame(
             '<table:table table:name="table"><table:table-row><table:table-cell ' .
@@ -331,7 +317,7 @@ class ExportOdsTest extends AbstractTestCase
             '-cell><table:table-cell office:value-type="string"><text:p>' .
             'fnam/&lt;e2</text:p></table:table-cell></table:table-row>' .
             '</table:table>',
-            $this->object->buffer,
+            $exportOds->buffer,
         );
 
         // with no row count
@@ -361,14 +347,24 @@ class ExportOdsTest extends AbstractTestCase
             ->method('fetchRow')
             ->willReturn([]);
 
-        DatabaseInterface::$instance = $dbi;
-        $this->object->buffer = '';
+        $exportOds = $this->getExportOds($dbi);
+        $exportOds->setExportOptions($request, new Export());
+        $exportOds->buffer = '';
 
-        $this->object->exportData('db', 'table', 'SELECT');
+        $exportOds->exportData('db', 'table', 'SELECT');
 
         self::assertSame(
             '<table:table table:name="table"><table:table-row></table:table-row></table:table>',
-            $this->object->buffer,
+            $exportOds->buffer,
         );
+    }
+
+    private function getExportOds(DatabaseInterface|null $dbi = null): ExportOds
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
+
+        return new ExportOds($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

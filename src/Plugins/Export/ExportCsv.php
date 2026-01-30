@@ -138,8 +138,7 @@ class ExportCsv extends ExportPlugin
         string $sqlQuery,
         array $aliases = [],
     ): void {
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $charsNeedingEnclosure = $this->separator . $this->enclosed . $this->terminated;
 
@@ -220,7 +219,7 @@ class ExportCsv extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);

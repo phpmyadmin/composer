@@ -7,9 +7,11 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Plugins;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Foreigners;
 use PhpMyAdmin\ConfigStorage\Relation;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Export\StructureOrData;
 use PhpMyAdmin\Http\ServerRequest;
@@ -38,9 +40,11 @@ abstract class ExportPlugin implements Plugin
     protected StructureOrData $structureOrData = StructureOrData::Data;
 
     final public function __construct(
-        public Relation $relation,
-        protected OutputHandler $outputHandler,
-        public Transformations $transformations,
+        protected readonly Relation $relation,
+        protected readonly OutputHandler $outputHandler,
+        protected readonly Transformations $transformations,
+        protected readonly DatabaseInterface $dbi,
+        protected readonly Config $config,
     ) {
         $this->properties = $this->setProperties();
     }

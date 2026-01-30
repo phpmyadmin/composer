@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -27,41 +28,24 @@ use function __;
 
 #[CoversClass(ExportPdf::class)]
 #[Medium]
-class ExportPdfTest extends AbstractTestCase
+final class ExportPdfTest extends AbstractTestCase
 {
-    protected ExportPdf $object;
-
-    /**
-     * Configures global environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
         OutputHandler::$asFile = true;
-        $relation = new Relation($dbi);
-        $this->object = new ExportPdf($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
     }
 
     public function testSetProperties(): void
     {
+        $exportPdf = $this->getExportPdf();
+
         $method = new ReflectionMethod(ExportPdf::class, 'setProperties');
-        $method->invoke($this->object, null);
+        $method->invoke($exportPdf, null);
 
         $attrProperties = new ReflectionProperty(ExportPdf::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportPdf);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -156,10 +140,11 @@ class ExportPdfTest extends AbstractTestCase
     {
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/');
 
-        $this->object->setExportOptions($request, new Export());
+        $exportPdf = $this->getExportPdf();
+        $exportPdf->setExportOptions($request, new Export());
 
         $attrPdf = new ReflectionProperty(ExportPdf::class, 'pdf');
-        $pdf = $attrPdf->getValue($this->object);
+        $pdf = $attrPdf->getValue($exportPdf);
         self::assertInstanceOf(Pdf::class, $pdf);
     }
 
@@ -173,43 +158,61 @@ class ExportPdfTest extends AbstractTestCase
             ->method('getPDFData')
             ->willReturn('');
 
-        $attrPdf = new ReflectionProperty(ExportPdf::class, 'pdf');
-        $attrPdf->setValue($this->object, $pdf);
+        $exportPdf = $this->getExportPdf();
 
-        $this->object->exportFooter();
+        $attrPdf = new ReflectionProperty(ExportPdf::class, 'pdf');
+        $attrPdf->setValue($exportPdf, $pdf);
+
+        $exportPdf->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
+        $exportPdf = $this->getExportPdf();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('testDB');
+        $exportPdf->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
+        $exportPdf = $this->getExportPdf();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportPdf->exportDBFooter('testDB');
     }
 
     public function testExportDBCreate(): void
     {
+        $exportPdf = $this->getExportPdf();
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBCreate('testDB');
+        $exportPdf->exportDBCreate('testDB');
     }
 
     public function testExportData(): void
     {
+        $dbi = $this->createDatabaseInterface();
+
         $pdf = $this->getMockBuilder(Pdf::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $pdf->expects(self::once())
             ->method('mysqlReport')
-            ->with('SELECT');
+            ->with($dbi, 'SELECT');
+
+        $exportPdf = $this->getExportPdf($dbi);
 
         $attrPdf = new ReflectionProperty(ExportPdf::class, 'pdf');
-        $attrPdf->setValue($this->object, $pdf);
+        $attrPdf->setValue($exportPdf, $pdf);
 
-        $this->object->exportData('db', 'table', 'SELECT');
+        $exportPdf->exportData('db', 'table', 'SELECT');
+    }
+
+    private function getExportPdf(DatabaseInterface|null $dbi = null): ExportPdf
+    {
+        $dbi ??= $this->createDatabaseInterface();
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
+
+        return new ExportPdf($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }

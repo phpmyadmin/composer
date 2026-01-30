@@ -124,8 +124,7 @@ class ExportPhparray extends ExportPlugin
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
 
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
         $columns = [];
@@ -198,7 +197,7 @@ class ExportPhparray extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);

@@ -95,11 +95,10 @@ class ExportYaml extends ExportPlugin
     ): void {
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
-        $fieldsMeta = $dbi->getFieldsMeta($result);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $columns = [];
         foreach ($fieldsMeta as $i => $field) {
@@ -158,7 +157,7 @@ class ExportYaml extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);

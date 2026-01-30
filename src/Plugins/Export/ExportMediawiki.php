@@ -109,7 +109,7 @@ class ExportMediawiki extends ExportPlugin
 
         $output = '';
         if ($exportMode === 'create_table') {
-            $columns = DatabaseInterface::getInstance()->getColumns($db, $table);
+            $columns = $this->dbi->getColumns($db, $table);
             $columns = array_values($columns);
 
             // Print structure comment
@@ -204,11 +204,10 @@ class ExportMediawiki extends ExportPlugin
             $output .= "|+'''" . $tableAlias . "'''" . $this->exportCRLF();
         }
 
-        $dbi = DatabaseInterface::getInstance();
         // Add the table headers
         if ($this->headers) {
             // Get column names
-            $columnNames = $dbi->getColumnNames($db, $table);
+            $columnNames = $this->dbi->getColumnNames($db, $table);
 
             // Add column names as table headers
             if ($columnNames !== []) {
@@ -225,7 +224,7 @@ class ExportMediawiki extends ExportPlugin
         }
 
         // Get the table data from the database
-        $result = $dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
         $fieldsCnt = $result->numFields();
 
         while ($row = $result->fetchRow()) {
@@ -253,7 +252,7 @@ class ExportMediawiki extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);

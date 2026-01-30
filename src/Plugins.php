@@ -82,6 +82,8 @@ class Plugins
                 $container->get(Relation::class),
                 $container->get(OutputHandler::class),
                 $container->get(Transformations::class),
+                $container->get(DatabaseInterface::class),
+                $container->get(Config::class),
             );
         }
 
@@ -162,6 +164,8 @@ class Plugins
                     $container->get(Relation::class),
                     $container->get(OutputHandler::class),
                     $container->get(Transformations::class),
+                    $container->get(DatabaseInterface::class),
+                    $container->get(Config::class),
                 );
             } elseif ($type === 'Import' && is_subclass_of($class, ImportPlugin::class)) {
                 $plugins[] = new $class(

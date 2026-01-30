@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Plugins\Export;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\Settings\Export;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Plugins\Export\ExportCodegen;
@@ -27,40 +27,17 @@ use function ob_start;
 
 #[CoversClass(ExportCodegen::class)]
 #[Medium]
-class ExportCodegenTest extends AbstractTestCase
+final class ExportCodegenTest extends AbstractTestCase
 {
-    protected ExportCodegen $object;
-
-    /**
-     * Configures global environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $dbi = $this->createDatabaseInterface();
-        DatabaseInterface::$instance = $dbi;
-        $relation = new Relation($dbi);
-        $this->object = new ExportCodegen($relation, new OutputHandler(), new Transformations($dbi, $relation));
-    }
-
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testSetProperties(): void
     {
         $method = new ReflectionMethod(ExportCodegen::class, 'setProperties');
-        $method->invoke($this->object, null);
+
+        $exportCodegen = $this->getExportCodegen();
+        $method->invoke($exportCodegen, null);
 
         $attrProperties = new ReflectionProperty(ExportCodegen::class, 'properties');
-        $properties = $attrProperties->getValue($this->object);
+        $properties = $attrProperties->getValue($exportCodegen);
 
         self::assertInstanceOf(ExportPluginProperties::class, $properties);
 
@@ -138,25 +115,29 @@ class ExportCodegenTest extends AbstractTestCase
     public function testExportHeader(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportHeader();
+        $exportCodegen = $this->getExportCodegen();
+        $exportCodegen->exportHeader();
     }
 
     public function testExportFooter(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportFooter();
+        $exportCodegen = $this->getExportCodegen();
+        $exportCodegen->exportFooter();
     }
 
     public function testExportDBHeader(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBHeader('testDB');
+        $exportCodegen = $this->getExportCodegen();
+        $exportCodegen->exportDBHeader('testDB');
     }
 
     public function testExportDBFooter(): void
     {
         $this->expectNotToPerformAssertions();
-        $this->object->exportDBFooter('testDB');
+        $exportCodegen = $this->getExportCodegen();
+        $exportCodegen->exportDBFooter('testDB');
     }
 
     public function testExportData(): void
@@ -166,10 +147,11 @@ class ExportCodegenTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['codegen_format' => '1']);
 
-        $this->object->setExportOptions($request, new Export());
+        $exportCodegen = $this->getExportCodegen();
+        $exportCodegen->setExportOptions($request, new Export());
 
         ob_start();
-        $this->object->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportCodegen->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
         $result = ob_get_clean();
 
         self::assertIsString($result);
@@ -213,8 +195,10 @@ class ExportCodegenTest extends AbstractTestCase
 
     public function testHandleNHibernateCSBody(): void
     {
+        $exportCodegen = $this->getExportCodegen();
+
         $method = new ReflectionMethod(ExportCodegen::class, 'handleNHibernateCSBody');
-        $result = $method->invoke($this->object, 'test_db', 'test_table');
+        $result = $method->invoke($exportCodegen, 'test_db', 'test_table');
 
         self::assertSame(
             'using System;' . "\n" .
@@ -265,8 +249,10 @@ class ExportCodegenTest extends AbstractTestCase
 
     public function testHandleNHibernateXMLBody(): void
     {
+        $exportCodegen = $this->getExportCodegen();
+
         $method = new ReflectionMethod(ExportCodegen::class, 'handleNHibernateXMLBody');
-        $result = $method->invoke($this->object, 'test_db', 'test_table');
+        $result = $method->invoke($exportCodegen, 'test_db', 'test_table');
 
         self::assertSame(
             '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
@@ -286,5 +272,14 @@ class ExportCodegenTest extends AbstractTestCase
             '</hibernate-mapping>',
             $result,
         );
+    }
+
+    private function getExportCodegen(): ExportCodegen
+    {
+        $dbi = $this->createDatabaseInterface();
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
+
+        return new ExportCodegen($relation, new OutputHandler(), new Transformations($dbi, $relation), $dbi, $config);
     }
 }
