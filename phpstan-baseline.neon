@@ -35126,6 +35126,11 @@ parameters:
 			path: libraries/classes/Table.php
 
 		-
+			message: "#^Cannot call method getVersion\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Table.php
+
+		-
 			message: "#^Cannot call method insertId\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Table.php

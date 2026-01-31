@@ -556,16 +556,25 @@ class Table implements Stringable
         // if column is virtual, check if server type is Mysql as only Mysql server
         // supports extra column properties
         $isVirtualColMysql = $virtuality && Compatibility::isMySqlOrPerconaDb();
-        // if column is virtual, check if server type is MariaDB as MariaDB server
-        // supports no extra virtual column properties except CHARACTER SET for text column types
-        $isVirtualColMariaDB = $virtuality && Compatibility::isMariaDb();
 
         $matches = preg_match('@^(TINYTEXT|TEXT|MEDIUMTEXT|LONGTEXT|VARCHAR|CHAR|ENUM|SET)$@i', $type);
         if (! empty($collation) && $collation !== 'NULL' && $matches) {
-            $query .= Util::getCharsetQueryPart(
-                $isVirtualColMariaDB ? (string) preg_replace('~_.+~s', '', $collation) : $collation,
-                true
-            );
+            // if column is virtual, check if server type is MariaDB as MariaDB server
+            // supports no extra virtual column properties except CHARACTER SET for text column types
+            // https://jira.mariadb.org/browse/MDEV-12161
+            if ($virtuality && Compatibility::isMariaDb()) {
+                $version = $dbi->getVersion();
+                $isVirtualCollationSupported =
+                    $version >= 100509 ||
+                    $version >= 100418 && $version < 100500 ||
+                    $version >= 100328 && $version < 100400 ||
+                    $version >= 100237 && $version < 100300;
+                if (! $isVirtualCollationSupported) {
+                    $collation = (string) preg_replace('~_.+~s', '', $collation);
+                }
+            }
+
+            $query .= Util::getCharsetQueryPart($collation, true);
         }
 
         if ($virtuality) {
