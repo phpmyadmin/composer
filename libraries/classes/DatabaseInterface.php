@@ -1104,10 +1104,11 @@ class DatabaseInterface implements DbalInterface
      */
     public function postConnect(): void
     {
-        $version = $this->fetchSingleRow('SELECT @@version, @@version_comment');
+        $version = $this->fetchSingleRow('SELECT @@version, @@version_comment, @@sql_mode');
 
         if (is_array($version)) {
             $this->setVersion($version);
+            Context::setMode($version['@@sql_mode']);
         }
 
         if ($this->versionInt > 50503) {

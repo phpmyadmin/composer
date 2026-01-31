@@ -277,6 +277,8 @@ class DatabaseInterfaceTest extends AbstractTestCase
         $versionQueryResult = [
             '@@version' => '10.20.7-MariaDB-1:10.9.3+maria~ubu2204',
             '@@version_comment' => 'mariadb.org binary distribution',
+            '@@sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,'
+                . 'NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
         ];
 
         $mock = $this->getMockBuilder(DatabaseInterface::class)
@@ -905,6 +907,8 @@ class DatabaseInterfaceTest extends AbstractTestCase
                 [
                     '@@version' => '6.1.0',
                     '@@version_comment' => "Percona Server (GPL), Release '11', Revision 'c1y2gr1df4a'",
+                    '@@sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,'
+                        . 'NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
                 ],
                 60100,
                 false,
@@ -914,6 +918,8 @@ class DatabaseInterfaceTest extends AbstractTestCase
                 [
                     '@@version' => '10.01.40-MariaDB-1:10.01.40+maria~ubu2204',
                     '@@version_comment' => 'mariadb.org binary distribution',
+                    '@@sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,'
+                        . 'NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
                 ],
                 100140,
                 true,
@@ -923,6 +929,8 @@ class DatabaseInterfaceTest extends AbstractTestCase
                 [
                     '@@version' => '7.10.3',
                     '@@version_comment' => 'MySQL Community Server (GPL)',
+                    '@@sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,'
+                        . 'NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
                 ],
                 71003,
                 false,
@@ -932,6 +940,8 @@ class DatabaseInterfaceTest extends AbstractTestCase
                 [
                     '@@version' => '5.5.0',
                     '@@version_comment' => '',
+                    '@@sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,'
+                        . 'NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
                 ],
                 50500,
                 false,

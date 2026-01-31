@@ -1103,11 +1103,6 @@ class Table implements Stringable
              */
             $destination = new Expression($targetDb, $targetTable, '');
 
-            // Find server's SQL mode so the builder can generate correct
-            // queries.
-            // One of the options that alters the behaviour is `ANSI_QUOTES`.
-            Context::setMode((string) $dbi->fetchValue('SELECT @@sql_mode'));
-
             // -----------------------------------------------------------------
             // Phase 1: Dropping existent element of the same name (if exists
             // and required).
