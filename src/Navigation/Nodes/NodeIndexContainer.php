@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Navigation\NodeType;
 
 use function __;
@@ -18,9 +19,9 @@ use function _pgettext;
  */
 class NodeIndexContainer extends Node
 {
-    public function __construct(Config $config)
+    public function __construct(DatabaseInterface $dbi, Config $config)
     {
-        parent::__construct($config, __('Indexes'), NodeType::Container);
+        parent::__construct($dbi, $config, __('Indexes'), NodeType::Container);
 
         $this->icon = new Icon('b_index', __('Indexes'), '/table/structure', ['db' => null, 'table' => null]);
         $this->link = new Link(

@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 
 use function __;
 use function strlen;
@@ -21,11 +22,11 @@ class NodeColumn extends Node
     public string $displayName;
 
     /** @param array{name:string|null, key:string, type:string|null, default:string|null, nullable:string} $item */
-    public function __construct(Config $config, array $item)
+    public function __construct(DatabaseInterface $dbi, Config $config, array $item)
     {
         $this->displayName = $this->getDisplayName($item);
 
-        parent::__construct($config, $item['name']);
+        parent::__construct($dbi, $config, $item['name']);
 
         $this->icon = new Icon(
             $this->getColumnIcon($item['key']),

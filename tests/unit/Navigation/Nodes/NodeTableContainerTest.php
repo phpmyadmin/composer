@@ -17,7 +17,7 @@ class NodeTableContainerTest extends AbstractTestCase
      */
     public function testConstructor(): void
     {
-        $parent = new NodeTableContainer(new Config());
+        $parent = new NodeTableContainer($this->createDatabaseInterface(), new Config());
         self::assertSame('/database/structure', $parent->link->route);
         self::assertSame(['tbl_type' => 'table', 'db' => null], $parent->link->params);
         self::assertSame('/database/structure', $parent->icon->route);

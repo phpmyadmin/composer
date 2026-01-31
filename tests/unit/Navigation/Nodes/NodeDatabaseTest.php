@@ -6,7 +6,6 @@ namespace PhpMyAdmin\Tests\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Navigation\Nodes\NodeDatabase;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\UserPrivileges;
@@ -20,7 +19,7 @@ class NodeDatabaseTest extends AbstractTestCase
      */
     public function testConstructor(): void
     {
-        $parent = new NodeDatabase(new Config(), 'default');
+        $parent = new NodeDatabase($this->createDatabaseInterface(), new Config(), 'default');
         self::assertSame('/database/structure', $parent->link->route);
         self::assertSame(['db' => null], $parent->link->params);
         self::assertSame('Structure', $parent->link->title);
@@ -36,10 +35,9 @@ class NodeDatabaseTest extends AbstractTestCase
     {
         $config = Config::getInstance();
         $config->selectedServer['DisableIS'] = true;
-        DatabaseInterface::$instance = $this->createDatabaseInterface();
         $userPrivileges = new UserPrivileges();
 
-        $parent = new NodeDatabase($config, 'default');
+        $parent = new NodeDatabase($this->createDatabaseInterface(), $config, 'default');
         self::assertSame(
             2,
             $parent->getPresence($userPrivileges, 'tables'),
@@ -69,7 +67,6 @@ class NodeDatabaseTest extends AbstractTestCase
     {
         $config = Config::getInstance();
         $config->selectedServer['DisableIS'] = true;
-        DatabaseInterface::$instance = $this->createDatabaseInterface();
 
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::DATABASE => 'pmadb',
@@ -77,7 +74,7 @@ class NodeDatabaseTest extends AbstractTestCase
             RelationParameters::NAVIGATION_HIDING => 'navigationhiding',
         ]);
 
-        $parent = new NodeDatabase($config, 'default');
+        $parent = new NodeDatabase($this->createDatabaseInterface(), $config, 'default');
 
         $tables = $parent->getDatabaseObjects($relationParameters, 'tables', 0);
         self::assertSame('test1', $tables[0]->realName);
@@ -99,7 +96,7 @@ class NodeDatabaseTest extends AbstractTestCase
      */
     public function testHiddenCount(): void
     {
-        $parent = new NodeDatabase(new Config(), 'default');
+        $parent = new NodeDatabase($this->createDatabaseInterface(), new Config(), 'default');
         $parent->setHiddenCount(1);
         self::assertSame(1, $parent->getHiddenCount());
         $parent->setHiddenCount(0);

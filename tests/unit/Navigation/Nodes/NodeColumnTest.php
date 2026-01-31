@@ -15,7 +15,7 @@ final class NodeColumnTest extends AbstractTestCase
 {
     public function testColumnNode(): void
     {
-        $nodeColumn = new NodeColumn(new Config(), [
+        $nodeColumn = new NodeColumn($this->createDatabaseInterface(), new Config(), [
             'name' => 'actor_id',
             'key' => 'PRI',
             'type' => 'smallint',
@@ -44,7 +44,7 @@ final class NodeColumnTest extends AbstractTestCase
 
     public function testColumnNodeWithTruncatedDefaultValue(): void
     {
-        $nodeColumn = new NodeColumn(new Config(), [
+        $nodeColumn = new NodeColumn($this->createDatabaseInterface(), new Config(), [
             'name' => 'last_update',
             'key' => '',
             'type' => 'timestamp',
@@ -58,7 +58,7 @@ final class NodeColumnTest extends AbstractTestCase
 
     public function testColumnNodeWithTruncatedDefaultValue2(): void
     {
-        $nodeColumn = new NodeColumn(new Config(), [
+        $nodeColumn = new NodeColumn($this->createDatabaseInterface(), new Config(), [
             'name' => 'email',
             'key' => 'UNI',
             'type' => 'varchar',
@@ -72,7 +72,7 @@ final class NodeColumnTest extends AbstractTestCase
 
     public function testColumnNodeWithoutTruncatedDefaultValue(): void
     {
-        $nodeColumn = new NodeColumn(new Config(), [
+        $nodeColumn = new NodeColumn($this->createDatabaseInterface(), new Config(), [
             'name' => 'email',
             'key' => '',
             'type' => 'varchar',

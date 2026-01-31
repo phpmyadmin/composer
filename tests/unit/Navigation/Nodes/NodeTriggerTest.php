@@ -17,7 +17,7 @@ class NodeTriggerTest extends AbstractTestCase
      */
     public function testConstructor(): void
     {
-        $parent = new NodeTrigger(new Config(), 'default');
+        $parent = new NodeTrigger($this->createDatabaseInterface(), new Config(), 'default');
         self::assertSame('/triggers', $parent->link->route);
         self::assertSame(
             ['edit_item' => 1, 'db' => null, 'item_name' => null],

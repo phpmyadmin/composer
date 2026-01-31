@@ -20,9 +20,9 @@ use function _pgettext;
 class NodeDatabaseContainer extends Node
 {
     /** @param string $name An identifier for the new node */
-    public function __construct(Config $config, string $name)
+    public function __construct(DatabaseInterface $dbi, Config $config, string $name)
     {
-        parent::__construct($config, $name, NodeType::Container);
+        parent::__construct($dbi, $config, $name, NodeType::Container);
 
         if (
             $config->settings['NavigationTreeEnableGrouping']
@@ -36,7 +36,7 @@ class NodeDatabaseContainer extends Node
             $this->separatorDepth = 10000;
         }
 
-        $userPrivilegesFactory = new UserPrivilegesFactory(DatabaseInterface::getInstance());
+        $userPrivilegesFactory = new UserPrivilegesFactory($this->dbi);
         $userPrivileges = $userPrivilegesFactory->getPrivileges();
 
         if (! $userPrivileges->isCreateDatabase || $config->settings['ShowCreateDb'] === false) {
