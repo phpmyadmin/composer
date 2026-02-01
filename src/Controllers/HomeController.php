@@ -162,7 +162,7 @@ final class HomeController implements InvocableController
             $databaseServer = [
                 'host' => $hostInfo,
                 'hostname' => $this->dbi->fetchValue('SELECT @@hostname;'),
-                'type' => Util::getServerType(),
+                'type' => Util::getServerType($this->dbi),
                 'connection' => Generator::getServerSSL(),
                 'version' => $this->dbi->getVersionString() . ' - ' . $this->dbi->getVersionComment(),
                 'user' => $this->dbi->fetchValue('SELECT USER();'),

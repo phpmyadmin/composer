@@ -113,7 +113,8 @@ class ObjectFetcher
         if (! $this->config->selectedServer['DisableIS']) {
             $query = 'SELECT `EVENT_NAME` AS `name` ';
             $query .= 'FROM `INFORMATION_SCHEMA`.`EVENTS` ';
-            $query .= 'WHERE `EVENT_SCHEMA` ' . Util::getCollateForIS() . '=' . $this->dbi->quoteString($realName);
+            $query .= 'WHERE `EVENT_SCHEMA` ' . Util::getCollateForIS($this->dbi)
+                . '=' . $this->dbi->quoteString($realName);
             if ($searchClause !== '') {
                 $query .= ' AND `EVENT_NAME` LIKE ';
                 $query .= $this->dbi->quoteString('%' . $this->dbi->escapeMysqlWildcards($searchClause) . '%');
@@ -216,7 +217,8 @@ class ObjectFetcher
         if (! $this->config->selectedServer['DisableIS']) {
             $query = 'SELECT `ROUTINE_NAME` AS `name` ';
             $query .= 'FROM `INFORMATION_SCHEMA`.`ROUTINES` ';
-            $query .= 'WHERE `ROUTINE_SCHEMA` ' . Util::getCollateForIS() . '=' . $this->dbi->quoteString($realName);
+            $query .= 'WHERE `ROUTINE_SCHEMA` ' . Util::getCollateForIS($this->dbi)
+                . '=' . $this->dbi->quoteString($realName);
             $query .= " AND `ROUTINE_TYPE`='" . $routineType . "'";
             if ($searchClause !== '') {
                 $query .= ' AND `ROUTINE_NAME` LIKE ';

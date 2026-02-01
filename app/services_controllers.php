@@ -377,6 +377,7 @@ return [
             ResponseFactory::class,
             Config::class,
             UserPreferencesHandler::class,
+            DatabaseInterface::class,
         ],
     ],
     Export\TablesController::class => [

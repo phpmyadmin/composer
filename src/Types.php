@@ -568,7 +568,7 @@ class Types
 
         $attributes = ['', 'BINARY', 'UNSIGNED', 'UNSIGNED ZEROFILL', 'on update CURRENT_TIMESTAMP'];
 
-        if (Compatibility::supportsCompressedColumns($serverVersion)) {
+        if (Compatibility::supportsCompressedColumns($this->dbi, $serverVersion)) {
             $attributes[] = 'COMPRESSED=zlib';
         }
 

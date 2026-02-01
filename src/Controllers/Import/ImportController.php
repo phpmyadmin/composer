@@ -223,7 +223,7 @@ final readonly class ImportController implements InvocableController
             $this->dbi->selectDb(Current::$database);
         }
 
-        Util::setTimeLimit();
+        Util::setTimeLimit($this->config->settings['ExecTimeLimit']);
         if ($this->config->config->MemoryLimit !== '' && $this->config->config->MemoryLimit !== '0') {
             ini_set('memory_limit', $this->config->config->MemoryLimit);
         }
@@ -371,8 +371,10 @@ final readonly class ImportController implements InvocableController
             // sanitize $local_import_file as it comes from a POST
             ImportSettings::$localImportFile = Core::securePath(ImportSettings::$localImportFile);
 
-            ImportSettings::$importFile = Util::userDir($this->config->config->UploadDir)
-                . ImportSettings::$localImportFile;
+            ImportSettings::$importFile = Util::userDir(
+                $this->config->selectedServer['user'],
+                $this->config->config->UploadDir,
+            ) . ImportSettings::$localImportFile;
 
             /**
              * Do not allow symlinks to avoid security issues

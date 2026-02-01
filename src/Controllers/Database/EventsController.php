@@ -79,7 +79,7 @@ final class EventsController implements InvocableController
                             'db' => Current::$database,
                             'table' => Current::$table,
                             'event' => $event,
-                            'has_privilege' => Util::currentUserHasPrivilege('EVENT', Current::$database),
+                            'has_privilege' => Util::currentUserHasPrivilege($this->dbi, 'EVENT', Current::$database),
                             'sql_drop' => $sqlDrop,
                             'row_class' => '',
                         ]),
@@ -243,7 +243,7 @@ final class EventsController implements InvocableController
         $this->response->render('database/events/index', [
             'db' => Current::$database,
             'items' => $items,
-            'has_privilege' => Util::currentUserHasPrivilege('EVENT', Current::$database),
+            'has_privilege' => Util::currentUserHasPrivilege($this->dbi, 'EVENT', Current::$database),
             'scheduler_state' => $this->events->getEventSchedulerStatus(),
             'is_ajax' => $request->isAjax() && empty($_REQUEST['ajax_page_request']),
         ]);

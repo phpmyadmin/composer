@@ -628,8 +628,8 @@ class Privileges
             $authPlugin = $this->getDefaultAuthenticationPlugin();
         }
 
-        $isNew = (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50507)
-            || (Compatibility::isMariaDb() && $serverVersion >= 50200);
+        $isNew = (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50507)
+            || (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 50200);
 
         $activeAuthPlugins = ['mysql_native_password' => __('Native MySQL authentication')];
         if ($isNew) {
@@ -777,7 +777,7 @@ class Privileges
             );
 
             // Use 'ALTER USER ...' syntax for MySQL 5.7.6+
-            if (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50706) {
+            if (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50706) {
                 if ($authenticationPlugin !== 'mysql_old_password') {
                     $queryPrefix = 'ALTER USER '
                         . $this->dbi->quoteString($username)
@@ -796,7 +796,7 @@ class Privileges
                 $sqlQuery = $queryPrefix . "'*'";
 
                 $localQuery = $queryPrefix . $this->dbi->quoteString($_POST['pma_pw']);
-            } elseif (Compatibility::isMariaDb() && $serverVersion >= 10000) {
+            } elseif (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 10000) {
                 // MariaDB uses "SET PASSWORD" syntax to change user password.
                 // On Galera cluster only DDL queries are replicated, since
                 // users are stored in MyISAM storage engine.
@@ -804,7 +804,7 @@ class Privileges
                     . $this->dbi->quoteString($username)
                     . '@' . $this->dbi->quoteString($hostname)
                     . ' = PASSWORD (' . $this->dbi->quoteString($_POST['pma_pw']) . ')';
-            } elseif (Compatibility::isMariaDb() && $serverVersion >= 50200 && $this->dbi->isSuperUser()) {
+            } elseif (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 50200 && $this->dbi->isSuperUser()) {
                 // Use 'UPDATE `mysql`.`user` ...' Syntax for MariaDB 5.2+
                 if ($authenticationPlugin === 'mysql_native_password') {
                     // Set the hashing method used by PASSWORD()
@@ -999,7 +999,7 @@ class Privileges
         $sqlQuery = '';
         if (
             isset($_POST['Grant_priv']) && $_POST['Grant_priv'] === 'Y'
-            && ! (Compatibility::isMySqlOrPerconaDb() && $this->dbi->getVersion() >= 80011)
+            && ! (Compatibility::isMySqlOrPerconaDb($this->dbi) && $this->dbi->getVersion() >= 80011)
         ) {
             $sqlQuery .= ' GRANT OPTION';
         }
@@ -2007,7 +2007,7 @@ class Privileges
             . ' TO ' . $this->dbi->quoteString($username) . '@'
             . $this->dbi->quoteString($hostname);
 
-        $isMySqlOrPercona = Compatibility::isMySqlOrPerconaDb();
+        $isMySqlOrPercona = Compatibility::isMySqlOrPerconaDb($this->dbi);
         $needsToUseAlter = $isMySqlOrPercona && $this->dbi->getVersion() >= 80011;
 
         if ($needsToUseAlter) {
@@ -2076,7 +2076,7 @@ class Privileges
                 }
 
                 if (
-                    Compatibility::isMySqlOrPerconaDb()
+                    Compatibility::isMySqlOrPerconaDb($this->dbi)
                     && $serverVersion >= 50606
                     && $serverVersion < 50706
                     && ((isset($row['authentication_string'])
@@ -2088,7 +2088,7 @@ class Privileges
                 }
 
                 if (
-                    Compatibility::isMariaDb()
+                    Compatibility::isMariaDb($this->dbi)
                     && $serverVersion >= 50500
                     && isset($row['authentication_string'])
                     && empty($row['password'])
@@ -2100,7 +2100,7 @@ class Privileges
                 // for MySQL 5.7.6+ since it does not have
                 // the 'password' column at all
                 if (
-                    Compatibility::isMySqlOrPerconaDb()
+                    Compatibility::isMySqlOrPerconaDb($this->dbi)
                     && $serverVersion >= 50706
                     && isset($row['authentication_string'])
                 ) {
@@ -2447,7 +2447,7 @@ class Privileges
     public function getHtmlForUserOverview(UserPrivileges $userPrivileges, string|null $initial): string
     {
         $serverVersion = $this->dbi->getVersion();
-        $passwordColumn = Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50706
+        $passwordColumn = Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50706
             ? 'authentication_string'
             : 'Password';
 
@@ -2850,7 +2850,7 @@ class Privileges
     private function checkIfMariaDBPwdCheckPluginActive(): bool
     {
         $serverVersion = $this->dbi->getVersion();
-        if (! (Compatibility::isMariaDb() && $serverVersion >= 100002)) {
+        if (! (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 100002)) {
             return false;
         }
 
@@ -2894,7 +2894,11 @@ class Privileges
 
         // 'IDENTIFIED WITH auth_plugin'
         // is supported by MySQL 5.5.7+
-        if (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50507 && isset($_POST['authentication_plugin'])) {
+        if (
+            Compatibility::isMySqlOrPerconaDb($this->dbi)
+            && $serverVersion >= 50507
+            && isset($_POST['authentication_plugin'])
+        ) {
             $createUserStmt .= ' IDENTIFIED WITH '
                 . $_POST['authentication_plugin'];
         }
@@ -2902,7 +2906,7 @@ class Privileges
         // 'IDENTIFIED VIA auth_plugin'
         // is supported by MariaDB 5.2+
         if (
-            Compatibility::isMariaDb()
+            Compatibility::isMariaDb($this->dbi)
             && $serverVersion >= 50200
             && isset($_POST['authentication_plugin'])
             && ! $isMariaDBPwdPluginActive
@@ -2935,8 +2939,8 @@ class Privileges
         // and 'CREATE USER ... VIA .. USING ..' syntax for
         // newer MariaDB versions
         if (
-            (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50706)
-            || (Compatibility::isMariaDb() && $serverVersion >= 50200)
+            (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50706)
+            || (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 50200)
         ) {
             $passwordSetReal = '';
 
@@ -2945,11 +2949,15 @@ class Privileges
 
             // MariaDB uses 'USING' whereas MySQL uses 'AS'
             // but MariaDB with validation plugin needs cleartext password
-            if (Compatibility::isMariaDb() && ! $isMariaDBPwdPluginActive && isset($_POST['authentication_plugin'])) {
+            if (
+                Compatibility::isMariaDb($this->dbi)
+                && ! $isMariaDBPwdPluginActive
+                && isset($_POST['authentication_plugin'])
+            ) {
                 $createUserStmt .= ' USING %s';
-            } elseif (Compatibility::isMariaDb()) {
+            } elseif (Compatibility::isMariaDb($this->dbi)) {
                 $createUserStmt .= ' IDENTIFIED BY %s';
-            } elseif (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 80011) {
+            } elseif (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 80011) {
                 if (! str_contains($createUserStmt, 'IDENTIFIED')) {
                     // Maybe the authentication_plugin was not posted and then a part is missing
                     $createUserStmt .= ' IDENTIFIED BY %s';
@@ -2966,8 +2974,8 @@ class Privileges
                 $createUserReal = sprintf($createUserStmt, "''");
             } else {
                 if (
-                    ! ((Compatibility::isMariaDb() && $isMariaDBPwdPluginActive)
-                    || Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 80011)
+                    ! ((Compatibility::isMariaDb($this->dbi) && $isMariaDBPwdPluginActive)
+                    || Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 80011)
                 ) {
                     $hashedPassword = $this->getHashedPassword($_POST['pma_pw']);
                 } else {
@@ -2997,7 +3005,7 @@ class Privileges
 
         $alterRealSqlQuery = '';
         $alterSqlQuery = '';
-        if (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 80011) {
+        if (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 80011) {
             $sqlQueryStmt = '';
             if (isset($_POST['Grant_priv']) && $_POST['Grant_priv'] === 'Y') {
                 $sqlQueryStmt = ' WITH GRANT OPTION';
@@ -3015,7 +3023,7 @@ class Privileges
         $requireClause = $this->getRequireClause();
         $withClause = $this->getWithClauseForAddUserAndUpdatePrivs();
 
-        if (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 80011) {
+        if (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 80011) {
             $alterRealSqlQuery .= $requireClause;
             $alterSqlQuery .= $requireClause;
             $alterRealSqlQuery .= $withClause;
@@ -3045,9 +3053,9 @@ class Privileges
         // Use 'SET PASSWORD' for pre-5.7.6 MySQL versions
         // and pre-5.2.0 MariaDB
         if (
-            (Compatibility::isMySqlOrPerconaDb()
+            (Compatibility::isMySqlOrPerconaDb($this->dbi)
             && $serverVersion >= 50706)
-            || (Compatibility::isMariaDb()
+            || (Compatibility::isMariaDb($this->dbi)
             && $serverVersion >= 50200)
         ) {
             $passwordSetReal = '';
@@ -3127,9 +3135,9 @@ class Privileges
         $serverVersion = $this->dbi->getVersion();
         $origAuthPlugin = $this->getCurrentAuthenticationPlugin($username, $hostname);
 
-        $isNew = (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50507)
-            || (Compatibility::isMariaDb() && $serverVersion >= 50200);
-        $hasMoreAuthPlugins = (Compatibility::isMySqlOrPerconaDb() && $serverVersion >= 50706)
+        $isNew = (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50507)
+            || (Compatibility::isMariaDb($this->dbi) && $serverVersion >= 50200);
+        $hasMoreAuthPlugins = (Compatibility::isMySqlOrPerconaDb($this->dbi) && $serverVersion >= 50706)
             || ($this->dbi->isSuperUser() && $editOthers);
 
         $activeAuthPlugins = ['mysql_native_password' => __('Native MySQL authentication')];

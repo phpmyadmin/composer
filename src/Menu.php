@@ -286,7 +286,11 @@ class Menu
             $tabs['tracking']['active'] = $route === '/table/tracking';
         }
 
-        if (! $isSystemSchema && Util::currentUserHasPrivilege('TRIGGER', $this->db, $this->table) && ! $tableIsView) {
+        if (
+            ! $isSystemSchema
+            && Util::currentUserHasPrivilege($this->dbi, 'TRIGGER', $this->db, $this->table)
+            && ! $tableIsView
+        ) {
             $tabs['triggers']['route'] = '/triggers';
             $tabs['triggers']['text'] = __('Triggers');
             $tabs['triggers']['icon'] = 'b_triggers';
@@ -372,14 +376,14 @@ class Menu
             $tabs['routines']['icon'] = 'b_routines';
             $tabs['routines']['active'] = $route === '/database/routines';
 
-            if (Util::currentUserHasPrivilege('EVENT', $this->db)) {
+            if (Util::currentUserHasPrivilege($this->dbi, 'EVENT', $this->db)) {
                 $tabs['events']['route'] = '/database/events';
                 $tabs['events']['text'] = __('Events');
                 $tabs['events']['icon'] = 'b_events';
                 $tabs['events']['active'] = $route === '/database/events';
             }
 
-            if (Util::currentUserHasPrivilege('TRIGGER', $this->db)) {
+            if (Util::currentUserHasPrivilege($this->dbi, 'TRIGGER', $this->db)) {
                 $tabs['triggers']['route'] = '/triggers';
                 $tabs['triggers']['text'] = __('Triggers');
                 $tabs['triggers']['icon'] = 'b_triggers';

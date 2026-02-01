@@ -124,7 +124,7 @@ class OptionsTest extends AbstractTestCase
             'exec_time_limit' => $config->settings['ExecTimeLimit'],
             'rows' => [],
             'has_save_dir' => true,
-            'save_dir' => Util::userDir($config->config->SaveDir),
+            'save_dir' => Util::userDir($config->selectedServer['user'], $config->config->SaveDir),
             'export_is_checked' => $config->settings['Export']['quick_export_onserver'],
             'export_overwrite_is_checked' => $config->settings['Export']['quick_export_onserver_overwrite'],
             'has_aliases' => false,

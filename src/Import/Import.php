@@ -1089,7 +1089,7 @@ final class Import
             : '';
 
         return $fileListing->getFileSelectOptions(
-            Util::userDir($config->config->UploadDir),
+            Util::userDir($config->selectedServer['user'], $config->config->UploadDir),
             $matcher,
             $active,
         );

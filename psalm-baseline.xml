@@ -8525,14 +8525,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
@@ -10865,8 +10857,6 @@
       <code><![CDATA[$tz]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>

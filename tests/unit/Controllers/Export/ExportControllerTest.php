@@ -210,6 +210,7 @@ final class ExportControllerTest extends AbstractTestCase
             ResponseFactory::create(),
             $config,
             $userPreferencesHandler,
+            $dbi,
         );
         $response = $exportController($request);
         $output = $this->getActualOutputForAssertion();
@@ -384,6 +385,7 @@ final class ExportControllerTest extends AbstractTestCase
             ResponseFactory::create(),
             $config,
             $userPreferencesHandler,
+            $dbi,
         );
         $response = $exportController($request);
         $output = $this->getActualOutputForAssertion();
@@ -547,6 +549,7 @@ final class ExportControllerTest extends AbstractTestCase
             ResponseFactory::create(),
             $config,
             $userPreferencesHandler,
+            $dbi,
         );
         $response = $exportController($request);
 
@@ -714,6 +717,7 @@ final class ExportControllerTest extends AbstractTestCase
             ResponseFactory::create(),
             $config,
             $userPreferencesHandler,
+            $dbi,
         );
         $response = $exportController($request);
 

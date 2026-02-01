@@ -170,9 +170,13 @@ class Normalization
             'relation_parameters' => $relationParameters,
             'content_cells' => $contentCells,
             'change_column' => $_POST['change_column'] ?? $_GET['change_column'] ?? null,
-            'is_virtual_columns_supported' => Compatibility::isVirtualColumnsSupported($this->dbi->getVersion()),
+            'is_virtual_columns_supported' => Compatibility::isVirtualColumnsSupported(
+                $this->dbi,
+                $this->dbi->getVersion(),
+            ),
             'browse_mime' => $this->config->config->BrowseMIME,
             'supports_stored_keyword' => Compatibility::supportsStoredKeywordForVirtualColumns(
+                $this->dbi,
                 $this->dbi->getVersion(),
             ),
             'server_version' => $this->dbi->getVersion(),

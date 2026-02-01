@@ -25,15 +25,13 @@ class Generator
      *
      * @return string a segment of the WHERE clause
      */
-    public static function getTableNameCondition(
-        string $escapedTabletable,
-        bool $tblIsGroup,
-    ): string {
+    public static function getTableNameCondition(string $collate, string $escapedTabletable, bool $tblIsGroup): string
+    {
         $sqlWhereTable = 'AND t.`TABLE_NAME` ';
         if ($tblIsGroup) {
             $sqlWhereTable .= 'LIKE ' . $escapedTabletable . '%';
         } else {
-            $sqlWhereTable .= Util::getCollateForIS() . ' = ' . $escapedTabletable;
+            $sqlWhereTable .= $collate . ' = ' . $escapedTabletable;
         }
 
         return $sqlWhereTable;
@@ -46,9 +44,9 @@ class Generator
      *
      * @return string a segment of the WHERE clause
      */
-    public static function getTableNameConditionForMultiple(array $escapedTables): string
+    public static function getTableNameConditionForMultiple(string $collate, array $escapedTables): string
     {
-        return 'AND t.`TABLE_NAME` ' . Util::getCollateForIS() . ' IN (' . implode(', ', $escapedTables) . ')';
+        return 'AND t.`TABLE_NAME` ' . $collate . ' IN (' . implode(', ', $escapedTables) . ')';
     }
 
     /**
@@ -80,7 +78,7 @@ class Generator
      *
      * @return string the SQL statement
      */
-    public static function getSqlForTablesFull(string $thisDatabases, string $sqlWhereTable): string
+    public static function getSqlForTablesFull(string $collate, string $thisDatabases, string $sqlWhereTable): string
     {
         return 'SELECT *,'
             . ' `TABLE_SCHEMA`       AS `Db`,'
@@ -105,7 +103,7 @@ class Generator
             . ' `CREATE_OPTIONS`     AS `Create_options`,'
             . ' `TABLE_COMMENT`      AS `Comment`'
             . ' FROM `information_schema`.`TABLES` t'
-            . ' WHERE `TABLE_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `TABLE_SCHEMA` ' . $collate
             . ' IN (' . $thisDatabases . ')'
             . ' ' . $sqlWhereTable;
     }
@@ -136,6 +134,7 @@ class Generator
      * Returns SQL query for fetching columns for a table
      */
     public static function getColumns(
+        string $collate,
         string $quotedDatabase,
         string $quotedTable,
         string|null $quotedColumn = null,
@@ -151,30 +150,29 @@ class Generator
             . ' `PRIVILEGES` AS `Privileges`,'
             . ' `COLUMN_COMMENT` AS `Comment`'
             . ' FROM `information_schema`.`COLUMNS`'
-            . ' WHERE `TABLE_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `TABLE_SCHEMA` ' . $collate
             . ' = ' . $quotedDatabase
-            . ' AND `TABLE_NAME` ' . Util::getCollateForIS()
+            . ' AND `TABLE_NAME` ' . $collate
             . ' = ' . $quotedTable
             . ($quotedColumn !== null ? ' AND `COLUMN_NAME` = ' . $quotedColumn : '')
             . ' ORDER BY `ORDINAL_POSITION`';
     }
 
-    public static function getColumnNamesAndTypes(
-        string $quotedDatabase,
-        string $quotedTable,
-    ): string {
+    public static function getColumnNamesAndTypes(string $collate, string $quotedDatabase, string $quotedTable): string
+    {
         return 'SELECT'
             . ' `COLUMN_NAME`,'
             . ' `COLUMN_TYPE`'
             . ' FROM `information_schema`.`COLUMNS`'
-            . ' WHERE `TABLE_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `TABLE_SCHEMA` ' . $collate
             . ' = ' . $quotedDatabase
-            . ' AND `TABLE_NAME` ' . Util::getCollateForIS()
+            . ' AND `TABLE_NAME` ' . $collate
             . ' = ' . $quotedTable
             . ' ORDER BY `ORDINAL_POSITION`';
     }
 
     public static function getInformationSchemaRoutinesRequest(
+        string $collate,
         string $quotedDbName,
         RoutineType|null $routineType,
         string|null $quotedRoutineName,
@@ -187,7 +185,7 @@ class Generator
             . ' `DEFINER` AS `Definer`,'
             . ' `DTD_IDENTIFIER`'
             . ' FROM `information_schema`.`ROUTINES`'
-            . ' WHERE `ROUTINE_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `ROUTINE_SCHEMA` ' . $collate
             . ' = ' . $quotedDbName;
         if ($routineType !== null) {
             $query .= " AND `ROUTINE_TYPE` = '" . $routineType->value . "'";
@@ -211,13 +209,14 @@ class Generator
     }
 
     public static function getInformationSchemaRoutinesCountRequest(
+        string $collate,
         string $quotedDbName,
         RoutineType|null $routineType,
         string|null $quotedRoutineName = null,
     ): string {
         $query = 'SELECT COUNT(*) AS `count`'
             . ' FROM `information_schema`.`ROUTINES`'
-            . ' WHERE `ROUTINE_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `ROUTINE_SCHEMA` ' . $collate
             . ' = ' . $quotedDbName;
         if ($routineType !== null) {
             $query .= " AND `ROUTINE_TYPE` = '" . $routineType->value . "'";
@@ -230,8 +229,11 @@ class Generator
         return $query;
     }
 
-    public static function getInformationSchemaEventsRequest(string $escapedDb, string|null $escapedEventName): string
-    {
+    public static function getInformationSchemaEventsRequest(
+        string $collate,
+        string $escapedDb,
+        string|null $escapedEventName,
+    ): string {
         $query = 'SELECT'
             . ' `EVENT_SCHEMA` AS `Db`,'
             . ' `EVENT_NAME` AS `Name`,'
@@ -249,7 +251,7 @@ class Generator
             . ' `COLLATION_CONNECTION` AS `collation_connection`, '
             . '`DATABASE_COLLATION` AS `Database Collation`'
             . ' FROM `information_schema`.`EVENTS`'
-            . ' WHERE `EVENT_SCHEMA` ' . Util::getCollateForIS()
+            . ' WHERE `EVENT_SCHEMA` ' . $collate
             . ' = ' . $escapedDb;
         if ($escapedEventName !== null) {
             $query .= ' AND `EVENT_NAME` = ' . $escapedEventName;
@@ -258,16 +260,19 @@ class Generator
         return $query;
     }
 
-    public static function getInformationSchemaTriggersRequest(string $escapedDb, string|null $escapedTable): string
-    {
+    public static function getInformationSchemaTriggersRequest(
+        string $collate,
+        string $escapedDb,
+        string|null $escapedTable,
+    ): string {
         $query = 'SELECT TRIGGER_SCHEMA, TRIGGER_NAME, EVENT_MANIPULATION'
             . ', EVENT_OBJECT_TABLE, ACTION_TIMING, ACTION_STATEMENT'
             . ', EVENT_OBJECT_SCHEMA, EVENT_OBJECT_TABLE, DEFINER'
             . ' FROM information_schema.TRIGGERS'
-            . ' WHERE EVENT_OBJECT_SCHEMA ' . Util::getCollateForIS() . '= ' . $escapedDb;
+            . ' WHERE EVENT_OBJECT_SCHEMA ' . $collate . '= ' . $escapedDb;
 
         if ($escapedTable !== null) {
-            $query .= ' AND EVENT_OBJECT_TABLE ' . Util::getCollateForIS() . ' = ' . $escapedTable . ';';
+            $query .= ' AND EVENT_OBJECT_TABLE ' . $collate . ' = ' . $escapedTable . ';';
         }
 
         return $query;
