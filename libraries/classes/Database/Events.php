@@ -174,6 +174,16 @@ class Events
             if ($this->response->isAjax()) {
                 if ($message->isSuccess()) {
                     $events = $this->dbi->getEvents($db, $_POST['item_name']);
+                    if ($events === []) {
+                        $this->response->setRequestStatus(false);
+                        $this->response->addJSON(
+                            'message',
+                            __('The event was dropped immediately after creation.')
+                        );
+                        $this->response->addJSON('tableType', 'events');
+                        exit;
+                    }
+
                     $event = $events[0];
                     $this->response->addJSON(
                         'name',
