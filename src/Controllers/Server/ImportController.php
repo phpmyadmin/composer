@@ -110,7 +110,7 @@ final readonly class ImportController implements InvocableController
             'can_convert_kanji' => Encoding::canConvertKanji(),
             'charsets' => $charsets,
             'is_foreign_key_check' => ForeignKey::isCheckEnabled(),
-            'user_upload_dir' => Util::userDir($this->config->config->UploadDir),
+            'user_upload_dir' => Util::userDir($this->config->selectedServer['user'], $this->config->config->UploadDir),
             'local_files' => Import::getLocalFiles($this->config, $importList),
         ]);
 

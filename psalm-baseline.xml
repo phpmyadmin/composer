@@ -5246,18 +5246,6 @@
       <code><![CDATA[$value > 500]]></code>
     </TypeDoesNotContainType>
   </file>
-  <file src="src/Navigation/Nodes/Node.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Navigation/Nodes/NodeColumn.php">
     <PossiblyNullArgument>
       <code><![CDATA[$item['name']]]></code>
@@ -5268,26 +5256,12 @@
       <code><![CDATA[$retval]]></code>
     </PossiblyNullOperand>
   </file>
-  <file src="src/Navigation/Nodes/NodeDatabase.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Navigation/Nodes/NodeDatabaseChild.php">
     <PossiblyInvalidPropertyFetch>
       <code><![CDATA[$this->getRealParent()->realName]]></code>
     </PossiblyInvalidPropertyFetch>
   </file>
-  <file src="src/Navigation/Nodes/NodeDatabaseContainer.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Navigation/Nodes/NodeTable.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$row]]></code>
     </MixedArgumentTypeCoercion>
@@ -8525,14 +8499,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
@@ -10865,8 +10831,6 @@
       <code><![CDATA[$tz]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>

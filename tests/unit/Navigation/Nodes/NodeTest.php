@@ -19,7 +19,7 @@ final class NodeTest extends AbstractTestCase
 {
     public function testNewNode(): void
     {
-        $node = new Node(new Config(), 'Object Node');
+        $node = new Node($this->createDatabaseInterface(), new Config(), 'Object Node');
         self::assertSame('Object Node', $node->name);
         self::assertSame('Object Node', $node->realName);
         self::assertSame(NodeType::Object, $node->type);
@@ -28,7 +28,7 @@ final class NodeTest extends AbstractTestCase
 
     public function testNewNodeWithEmptyName(): void
     {
-        $node = new Node(new Config(), '');
+        $node = new Node($this->createDatabaseInterface(), new Config(), '');
         self::assertSame('', $node->name);
         self::assertSame('', $node->realName);
         self::assertSame(NodeType::Object, $node->type);
@@ -37,7 +37,7 @@ final class NodeTest extends AbstractTestCase
 
     public function testNewContainerNode(): void
     {
-        $node = new Node(new Config(), 'Container Node', NodeType::Container);
+        $node = new Node($this->createDatabaseInterface(), new Config(), 'Container Node', NodeType::Container);
         self::assertSame('Container Node', $node->name);
         self::assertSame('Container Node', $node->realName);
         self::assertSame(NodeType::Container, $node->type);
@@ -46,7 +46,7 @@ final class NodeTest extends AbstractTestCase
 
     public function testNewGroupNode(): void
     {
-        $node = new Node(new Config(), 'Group Node', NodeType::Object, true);
+        $node = new Node($this->createDatabaseInterface(), new Config(), 'Group Node', NodeType::Object, true);
         self::assertSame('Group Node', $node->name);
         self::assertSame('Group Node', $node->realName);
         self::assertSame(NodeType::Object, $node->type);
@@ -57,9 +57,10 @@ final class NodeTest extends AbstractTestCase
     public function testAddChildNode(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $childOne = new Node($config, 'child one');
-        $childTwo = new Node($config, 'child two');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $childOne = new Node($dbi, $config, 'child one');
+        $childTwo = new Node($dbi, $config, 'child two');
         self::assertSame([], $parent->children);
         self::assertNull($childOne->parent);
         self::assertNull($childTwo->parent);
@@ -76,8 +77,9 @@ final class NodeTest extends AbstractTestCase
     public function testGetChildNode(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $child = new Node($config, 'child real name');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $child = new Node($dbi, $config, 'child real name');
         $child->name = 'child';
         self::assertNull($parent->getChild('child'));
         self::assertNull($parent->getChild('child', true));
@@ -98,9 +100,10 @@ final class NodeTest extends AbstractTestCase
     public function testGetChildNodeWithEqualNumericName(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $childOne = new Node($config, '0');
-        $childTwo = new Node($config, '00');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $childOne = new Node($dbi, $config, '0');
+        $childTwo = new Node($dbi, $config, '00');
         $parent->addChild($childOne);
         $parent->addChild($childTwo);
         self::assertSame($childTwo, $parent->getChild('00'));
@@ -112,10 +115,11 @@ final class NodeTest extends AbstractTestCase
     public function testRemoveChildNode(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $childOne = new Node($config, 'child one');
-        $childTwo = new Node($config, 'child two');
-        $childThree = new Node($config, 'child three');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $childOne = new Node($dbi, $config, 'child one');
+        $childTwo = new Node($dbi, $config, 'child two');
+        $childThree = new Node($dbi, $config, 'child three');
         $parent->addChild($childOne);
         $parent->addChild($childTwo);
         $parent->addChild($childThree);
@@ -129,12 +133,13 @@ final class NodeTest extends AbstractTestCase
     public function testParents(): void
     {
         $config = new Config();
-        $dbContainer = new Node($config, 'root', NodeType::Container);
-        $dbGroup = new Node($config, 'db_group', NodeType::Container, true);
-        $dbOne = new Node($config, 'db_group__one');
-        $dbTwo = new Node($config, 'db_group__two');
-        $tableContainer = new Node($config, 'tables', NodeType::Container);
-        $table = new Node($config, 'table');
+        $dbi = $this->createDatabaseInterface();
+        $dbContainer = new Node($dbi, $config, 'root', NodeType::Container);
+        $dbGroup = new Node($dbi, $config, 'db_group', NodeType::Container, true);
+        $dbOne = new Node($dbi, $config, 'db_group__one');
+        $dbTwo = new Node($dbi, $config, 'db_group__two');
+        $tableContainer = new Node($dbi, $config, 'tables', NodeType::Container);
+        $table = new Node($dbi, $config, 'table');
         $dbContainer->addChild($dbGroup);
         $dbGroup->addChild($dbOne);
         $dbGroup->addChild($dbTwo);
@@ -159,9 +164,10 @@ final class NodeTest extends AbstractTestCase
     public function testRealParent(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $child = new Node($config, 'child');
-        $grandchild = new Node($config, 'grandchild');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $child = new Node($dbi, $config, 'child');
+        $grandchild = new Node($dbi, $config, 'grandchild');
         $parent->addChild($child);
         $child->addChild($grandchild);
         self::assertFalse($parent->getRealParent());
@@ -172,8 +178,9 @@ final class NodeTest extends AbstractTestCase
     public function testNodeHasChildren(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $child = new Node($config, 'child');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $child = new Node($dbi, $config, 'child');
         self::assertFalse($parent->hasChildren(true));
         self::assertFalse($parent->hasChildren(false));
         $parent->addChild($child);
@@ -184,10 +191,11 @@ final class NodeTest extends AbstractTestCase
     public function testNodeHasChildrenWithContainers(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $containerOne = new Node($config, 'container 1', NodeType::Container);
-        $containerTwo = new Node($config, 'container 2', NodeType::Container);
-        $child = new Node($config, 'child');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $containerOne = new Node($dbi, $config, 'container 1', NodeType::Container);
+        $containerTwo = new Node($dbi, $config, 'container 2', NodeType::Container);
+        $child = new Node($dbi, $config, 'child');
         self::assertFalse($parent->hasChildren());
         self::assertFalse($parent->hasChildren(false));
         $parent->addChild($containerOne);
@@ -204,9 +212,10 @@ final class NodeTest extends AbstractTestCase
     public function testNodeHasSiblings(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $childOne = new Node($config, 'child one');
-        $childTwo = new Node($config, 'child two');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $childOne = new Node($dbi, $config, 'child one');
+        $childTwo = new Node($dbi, $config, 'child two');
         $parent->addChild($childOne);
         self::assertFalse($parent->hasSiblings());
         self::assertFalse($childOne->hasSiblings());
@@ -217,11 +226,12 @@ final class NodeTest extends AbstractTestCase
     public function testNodeHasSiblingsWithContainers(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $childOne = new Node($config, 'child one');
-        $containerOne = new Node($config, 'container 1', NodeType::Container);
-        $containerTwo = new Node($config, 'container 2', NodeType::Container);
-        $childTwo = new Node($config, 'child two');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $childOne = new Node($dbi, $config, 'child one');
+        $containerOne = new Node($dbi, $config, 'container 1', NodeType::Container);
+        $containerTwo = new Node($dbi, $config, 'container 2', NodeType::Container);
+        $childTwo = new Node($dbi, $config, 'child two');
         $parent->addChild($childOne);
         $parent->addChild($containerOne);
         self::assertFalse($childOne->hasSiblings(), 'An empty container node should not be considered a sibling.');
@@ -237,10 +247,11 @@ final class NodeTest extends AbstractTestCase
     public function testNodeHasSiblingsForNodesAtLevelThree(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $child = new Node($config, 'child');
-        $grandchild = new Node($config, 'grandchild');
-        $greatGrandchild = new Node($config, 'great grandchild');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $child = new Node($dbi, $config, 'child');
+        $grandchild = new Node($dbi, $config, 'grandchild');
+        $greatGrandchild = new Node($dbi, $config, 'great grandchild');
         $parent->addChild($child);
         $child->addChild($grandchild);
         $grandchild->addChild($greatGrandchild);
@@ -253,11 +264,12 @@ final class NodeTest extends AbstractTestCase
     public function testGetPaths(): void
     {
         $config = new Config();
-        $parent = new Node($config, 'parent');
-        $group = new Node($config, 'group', NodeType::Container, true);
-        $childOne = new Node($config, 'child one');
-        $container = new Node($config, 'container', NodeType::Container);
-        $childTwo = new Node($config, 'child two');
+        $dbi = $this->createDatabaseInterface();
+        $parent = new Node($dbi, $config, 'parent');
+        $group = new Node($dbi, $config, 'group', NodeType::Container, true);
+        $childOne = new Node($dbi, $config, 'child one');
+        $container = new Node($dbi, $config, 'container', NodeType::Container);
+        $childTwo = new Node($dbi, $config, 'child two');
         $parent->addChild($group);
         $group->addChild($childOne);
         $childOne->addChild($container);
@@ -275,12 +287,12 @@ final class NodeTest extends AbstractTestCase
 
     public function testGetWhereClause(): void
     {
-        DatabaseInterface::$instance = $this->createDatabaseInterface();
+        $dbi = $this->createDatabaseInterface();
         $method = new ReflectionMethod(Node::class, 'getWhereClause');
 
         $config = Config::getInstance();
         // Vanilla case
-        $node = new Node($config, 'default');
+        $node = new Node($dbi, $config, 'default');
         self::assertSame('WHERE TRUE ', $method->invoke($node, 'SCHEMA_NAME'));
 
         // When a schema names is passed as search clause
@@ -343,13 +355,12 @@ final class NodeTest extends AbstractTestCase
         $expectedSql .= "CONCAT(SCHEMA_NAME, '_')) ";
         $expectedSql .= 'ORDER BY SCHEMA_NAME ASC';
 
-        $node = new Node($config, 'node');
-
         $dbi = self::createMock(DatabaseInterface::class);
         $dbi->expects(self::once())->method('fetchSingleColumn')->with($expectedSql);
         $dbi->expects(self::any())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
-        DatabaseInterface::$instance = $dbi;
+
+        $node = new Node($dbi, $config, 'node');
         $node->getData(new UserPrivileges(), 10);
     }
 
@@ -369,12 +380,10 @@ final class NodeTest extends AbstractTestCase
         $expectedSql .= 'ORDER BY `SCHEMA_NAME` ';
         $expectedSql .= 'LIMIT 10, 20';
 
-        $node = new Node($config, 'node');
-
         $dbi = self::createMock(DatabaseInterface::class);
         $dbi->expects(self::once())->method('fetchSingleColumn')->with($expectedSql);
 
-        DatabaseInterface::$instance = $dbi;
+        $node = new Node($dbi, $config, 'node');
         $node->getData(new UserPrivileges(), 10);
     }
 
@@ -388,8 +397,6 @@ final class NodeTest extends AbstractTestCase
         $config->settings['NavigationTreeEnableGrouping'] = true;
         $config->set('FirstLevelNavigationItems', 2);
         $config->settings['NavigationTreeDbSeparator'] = '_';
-
-        $node = new Node($config, 'node');
 
         $resultStub = self::createMock(DummyResult::class);
 
@@ -414,7 +421,7 @@ final class NodeTest extends AbstractTestCase
         $dbi->expects(self::any())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
-        DatabaseInterface::$instance = $dbi;
+        $node = new Node($dbi, $config, 'node');
         $node->getData(new UserPrivileges(), 0, 'db');
     }
 
@@ -427,8 +434,6 @@ final class NodeTest extends AbstractTestCase
         $config->selectedServer['DisableIS'] = true;
         $config->settings['NavigationTreeEnableGrouping'] = false;
         $config->set('FirstLevelNavigationItems', 2);
-
-        $node = new Node($config, 'node');
 
         $resultStub = self::createMock(DummyResult::class);
 
@@ -446,7 +451,7 @@ final class NodeTest extends AbstractTestCase
         $dbi->expects(self::once())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
-        DatabaseInterface::$instance = $dbi;
+        $node = new Node($dbi, $config, 'node');
         $result = $node->getData(new UserPrivileges(), 0, 'db');
 
         self::assertSame(['db', 'aa_db'], $result);
@@ -470,11 +475,11 @@ final class NodeTest extends AbstractTestCase
         $query .= 'WHERE TRUE ';
         $query .= ') t ';
 
-        $node = new Node($config, 'node');
-
         $dbi = self::createMock(DatabaseInterface::class);
         $dbi->expects(self::once())->method('fetchValue')->with($query);
-        DatabaseInterface::$instance = $dbi;
+
+        $node = new Node($dbi, $config, 'node');
+
         self::assertSame(0, $node->getPresence(new UserPrivileges()));
     }
 
@@ -491,10 +496,11 @@ final class NodeTest extends AbstractTestCase
         $query .= 'FROM INFORMATION_SCHEMA.SCHEMATA ';
         $query .= 'WHERE TRUE ';
 
-        $node = new Node($config, 'node');
         $dbi = self::createMock(DatabaseInterface::class);
         $dbi->expects(self::once())->method('fetchValue')->with($query);
-        DatabaseInterface::$instance = $dbi;
+
+        $node = new Node($dbi, $config, 'node');
+
         self::assertSame(0, $node->getPresence(new UserPrivileges()));
     }
 
@@ -507,8 +513,6 @@ final class NodeTest extends AbstractTestCase
         $config->selectedServer['DisableIS'] = true;
         $config->settings['NavigationTreeEnableGrouping'] = true;
 
-        $node = new Node($config, 'node');
-
         $resultStub = self::createMock(DummyResult::class);
 
         // test with no search clause
@@ -518,7 +522,7 @@ final class NodeTest extends AbstractTestCase
             ->with('SHOW DATABASES WHERE TRUE ')
             ->willReturn($resultStub);
 
-        DatabaseInterface::$instance = $dbi;
+        $node = new Node($dbi, $config, 'node');
         self::assertSame(0, $node->getPresence(new UserPrivileges()));
 
         // test with a search clause
@@ -532,13 +536,14 @@ final class NodeTest extends AbstractTestCase
         $dbi->expects(self::any())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
-        DatabaseInterface::$instance = $dbi;
+        $node = new Node($dbi, $config, 'node');
         self::assertSame(0, $node->getPresence(new UserPrivileges(), '', 'dbname'));
     }
 
     public function testGetInstanceForNewNode(): void
     {
-        $node = (new Node(new Config()))->getInstanceForNewNode('New', 'new_database italics');
+        $node = (new Node($this->createDatabaseInterface(), new Config()))
+            ->getInstanceForNewNode('New', 'new_database italics');
         self::assertSame('New', $node->name);
         self::assertSame(NodeType::Object, $node->type);
         self::assertFalse($node->isGroup);

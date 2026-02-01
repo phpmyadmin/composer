@@ -72,28 +72,26 @@ class Compatibility
         return $eachTables;
     }
 
-    public static function isMySqlOrPerconaDb(): bool
+    public static function isMySqlOrPerconaDb(DatabaseInterface $dbi): bool
     {
-        $serverType = Util::getServerType();
+        $serverType = Util::getServerType($dbi);
 
         return $serverType === 'MySQL' || $serverType === 'Percona Server';
     }
 
-    public static function isMariaDb(): bool
+    public static function isMariaDb(DatabaseInterface $dbi): bool
     {
-        $serverType = Util::getServerType();
-
-        return $serverType === 'MariaDB';
+        return Util::getServerType($dbi) === 'MariaDB';
     }
 
-    public static function isCompatibleRenameIndex(int $serverVersion): bool
+    public static function isCompatibleRenameIndex(DatabaseInterface $dbi, int $serverVersion): bool
     {
-        if (self::isMySqlOrPerconaDb()) {
+        if (self::isMySqlOrPerconaDb($dbi)) {
             return $serverVersion >= 50700;
         }
 
         // @see https://mariadb.com/kb/en/alter-table/#rename-indexkey
-        if (self::isMariaDb()) {
+        if (self::isMariaDb($dbi)) {
             return $serverVersion >= 100502;
         }
 
@@ -104,7 +102,7 @@ class Compatibility
     {
         // MySQL made restrictions on the integer types' length from versions >= 8.0.18
         // See: https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-19.html
-        $serverType = Util::getServerType();
+        $serverType = Util::getServerType($dbi);
         $serverVersion = $dbi->getVersion();
 
         return $serverType === 'MySQL' && $serverVersion >= 80018;
@@ -140,15 +138,15 @@ class Compatibility
     /**
      * Returns whether the database server supports virtual columns
      */
-    public static function isVirtualColumnsSupported(int $serverVersion): bool
+    public static function isVirtualColumnsSupported(DatabaseInterface $dbi, int $serverVersion): bool
     {
         // @see: https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-6.html
-        if (self::isMySqlOrPerconaDb()) {
+        if (self::isMySqlOrPerconaDb($dbi)) {
             return $serverVersion >= 50706;
         }
 
         // @see https://mariadb.com/kb/en/changes-improvements-in-mariadb-52/#new-features
-        if (self::isMariaDb()) {
+        if (self::isMariaDb($dbi)) {
             return $serverVersion >= 50200;
         }
 
@@ -195,15 +193,15 @@ class Compatibility
     /**
      * Returns whether the database server supports virtual columns
      */
-    public static function supportsStoredKeywordForVirtualColumns(int $serverVersion): bool
+    public static function supportsStoredKeywordForVirtualColumns(DatabaseInterface $dbi, int $serverVersion): bool
     {
         // @see: https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-6.html
-        if (self::isMySqlOrPerconaDb()) {
+        if (self::isMySqlOrPerconaDb($dbi)) {
             return $serverVersion >= 50706;
         }
 
         // @see https://mariadb.com/kb/en/generated-columns/#mysql-compatibility-support
-        if (self::isMariaDb()) {
+        if (self::isMariaDb($dbi)) {
             return $serverVersion >= 100201;
         }
 
@@ -213,11 +211,11 @@ class Compatibility
     /**
      * Returns whether the database server supports compressed columns
      */
-    public static function supportsCompressedColumns(int $serverVersion): bool
+    public static function supportsCompressedColumns(DatabaseInterface $dbi, int $serverVersion): bool
     {
         // @see https://mariadb.com/kb/en/innodb-page-compression/#comment_1992
         // Comment: Page compression is only available in MariaDB >= 10.1. [...]
-        if (self::isMariaDb()) {
+        if (self::isMariaDb($dbi)) {
             return $serverVersion >= 100100;
         }
 

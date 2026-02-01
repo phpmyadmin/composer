@@ -767,7 +767,10 @@ class PrivilegesTest extends AbstractTestCase
 
     public function testGetSqlQueriesForDisplayAndAddUserWithUserDefinedPassword(): void
     {
-        $dbi = $this->createDatabaseInterface();
+        $dbiDummy = $this->createDbiDummy();
+        $dbiDummy->addResult("SHOW PLUGINS SONAME LIKE '%_password_check%'", []);
+        $dbiDummy->addResult("SELECT PASSWORD('pma_password');", [['*pma_password*']]);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
         $dbi->setVersion(['@@version' => '10.4.3-MariaDB']);
 
         $serverPrivileges = $this->getPrivileges($dbi);
@@ -784,8 +787,9 @@ class PrivilegesTest extends AbstractTestCase
             $password,
         );
 
+        $dbiDummy->assertAllQueriesConsumed();
         self::assertSame(
-            'CREATE USER \'PMA_username\'@\'PMA_hostname\' IDENTIFIED BY \'pma_password\';',
+            'CREATE USER \'PMA_username\'@\'PMA_hostname\' IDENTIFIED BY \'*pma_password*\';',
             $createUserReal,
         );
         self::assertSame('CREATE USER \'PMA_username\'@\'PMA_hostname\' IDENTIFIED BY \'***\';', $createUserShow);

@@ -465,10 +465,10 @@ class Table implements Stringable
 
         // if column is virtual, check if server type is Mysql as only Mysql server
         // supports extra column properties
-        $isVirtualColMysql = $virtuality && Compatibility::isMySqlOrPerconaDb();
+        $isVirtualColMysql = $virtuality && Compatibility::isMySqlOrPerconaDb($dbi);
         // if column is virtual, check if server type is MariaDB as MariaDB server
         // supports no extra virtual column properties except CHARACTER SET for text column types
-        $isVirtualColMariaDB = $virtuality && Compatibility::isMariaDb();
+        $isVirtualColMariaDB = $virtuality && Compatibility::isMariaDb($dbi);
 
         $matches = preg_match('@^(TINYTEXT|TEXT|MEDIUMTEXT|LONGTEXT|VARCHAR|CHAR|ENUM|SET)$@i', $type) === 1;
         if ($collation !== '' && $collation !== 'NULL' && $matches) {
@@ -1693,7 +1693,7 @@ class Table implements Stringable
     public function getColumnGenerationExpression(string|null $column = null): array|bool
     {
         if (
-            Compatibility::isMySqlOrPerconaDb()
+            Compatibility::isMySqlOrPerconaDb($this->dbi)
             && $this->dbi->getVersion() > 50705
             && ! Config::getInstance()->selectedServer['DisableIS']
         ) {

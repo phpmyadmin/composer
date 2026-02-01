@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 
 use function __;
 use function _pgettext;
@@ -17,9 +18,9 @@ use function _pgettext;
  */
 class NodeViewContainer extends NodeDatabaseChildContainer
 {
-    public function __construct(Config $config)
+    public function __construct(DatabaseInterface $dbi, Config $config)
     {
-        parent::__construct($config, __('Views'));
+        parent::__construct($dbi, $config, __('Views'));
 
         $this->icon = new Icon('b_views', __('Views'), '/database/structure', ['tbl_type' => 'view', 'db' => null]);
         $this->link = new Link(

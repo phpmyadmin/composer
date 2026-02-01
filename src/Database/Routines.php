@@ -358,7 +358,7 @@ class Routines
             $retval['item_param_name'] = $_POST['item_param_name'];
             $retval['item_param_type'] = $_POST['item_param_type'];
             foreach ($retval['item_param_type'] as $key => $value) {
-                if (in_array($value, Util::getSupportedDatatypes(), true)) {
+                if (in_array($value, Util::getSupportedDatatypes($this->dbi), true)) {
                     continue;
                 }
 
@@ -380,7 +380,7 @@ class Routines
         $retval['item_returntype'] = '';
         if (
             isset($_POST['item_returntype'])
-            && in_array($_POST['item_returntype'], Util::getSupportedDatatypes(), true)
+            && in_array($_POST['item_returntype'], Util::getSupportedDatatypes($this->dbi), true)
         ) {
             $retval['item_returntype'] = $_POST['item_returntype'];
         }
@@ -426,7 +426,8 @@ class Routines
         $fields = 'SPECIFIC_NAME, ROUTINE_TYPE, DTD_IDENTIFIER, '
                  . 'ROUTINE_DEFINITION, IS_DETERMINISTIC, SQL_DATA_ACCESS, '
                  . 'ROUTINE_COMMENT, SECURITY_TYPE';
-        $where = 'ROUTINE_SCHEMA ' . Util::getCollateForIS() . '=' . $this->dbi->quoteString(Current::$database)
+        $where = 'ROUTINE_SCHEMA ' . Util::getCollateForIS($this->dbi)
+            . '=' . $this->dbi->quoteString(Current::$database)
                  . ' AND SPECIFIC_NAME=' . $this->dbi->quoteString($name)
                  . ' AND ROUTINE_TYPE=' . $this->dbi->quoteString($type);
         $query = 'SELECT ' . $fields . ' FROM INFORMATION_SCHEMA.ROUTINES WHERE ' . $where . ';';
@@ -726,7 +727,7 @@ class Routines
     ): string {
         $itemReturnType = $_POST['item_returntype'] ?? null;
 
-        if ($itemReturnType !== '' && in_array($itemReturnType, Util::getSupportedDatatypes(), true)) {
+        if ($itemReturnType !== '' && in_array($itemReturnType, Util::getSupportedDatatypes($this->dbi), true)) {
             $query .= 'RETURNS ' . $itemReturnType;
         } else {
             $this->errors[] = __('You must provide a valid return type for the routine.');
@@ -1140,12 +1141,12 @@ class Routines
 
         // Since editing a procedure involved dropping and recreating, check also for
         // CREATE ROUTINE privilege to avoid lost procedures.
-        $hasCreateRoutine = Util::currentUserHasPrivilege('CREATE ROUTINE', Current::$database);
+        $hasCreateRoutine = Util::currentUserHasPrivilege($this->dbi, 'CREATE ROUTINE', Current::$database);
         $hasEditPrivilege = ($hasCreateRoutine && $currentUserIsRoutineDefiner)
                             || $this->dbi->isSuperUser();
         $hasExportPrivilege = ($hasCreateRoutine && $currentUserIsRoutineDefiner)
                             || $this->dbi->isSuperUser();
-        $hasExecutePrivilege = Util::currentUserHasPrivilege('EXECUTE', Current::$database)
+        $hasExecutePrivilege = Util::currentUserHasPrivilege($this->dbi, 'EXECUTE', Current::$database)
                             || $currentUserIsRoutineDefiner;
 
         // There is a problem with Util::currentUserHasPrivilege():
@@ -1188,6 +1189,7 @@ class Routines
         int $offset = 0,
     ): array {
         $query = QueryGenerator::getInformationSchemaRoutinesRequest(
+            Util::getCollateForIS($dbi),
             $dbi->quoteString($db),
             $which,
             $name === '' ? null : $dbi->quoteString($name),
@@ -1213,6 +1215,7 @@ class Routines
     public static function getRoutineCount(DatabaseInterface $dbi, string $db, RoutineType|null $which = null): int
     {
         $query = QueryGenerator::getInformationSchemaRoutinesCountRequest(
+            Util::getCollateForIS($dbi),
             $dbi->quoteString($db),
             $which,
         );

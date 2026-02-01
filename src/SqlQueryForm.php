@@ -159,7 +159,12 @@ class SqlQueryForm
             $tmpDbLink .= htmlspecialchars($db) . '</a>';
             $legend = sprintf(__('Run SQL query/queries on database %s'), $tmpDbLink);
             if ($query === '') {
-                $query = Util::expandUserString($this->config->settings['DefaultQueryDatabase'], Util::backquote(...));
+                $query = Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
+                    $this->config->settings['DefaultQueryDatabase'],
+                    Util::backquote(...),
+                );
             }
         } else {
             $db = Current::$database;
@@ -174,7 +179,12 @@ class SqlQueryForm
             $tmpTblLink .= htmlspecialchars($db) . '.' . htmlspecialchars($table) . '</a>';
             $legend = sprintf(__('Run SQL query/queries on table %s'), $tmpTblLink);
             if ($query === '') {
-                $query = Util::expandUserString($this->config->settings['DefaultQueryTable'], Util::backquote(...));
+                $query = Util::expandUserString(
+                    $this->dbi,
+                    $this->config,
+                    $this->config->settings['DefaultQueryTable'],
+                    Util::backquote(...),
+                );
             }
         }
 

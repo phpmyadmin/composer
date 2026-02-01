@@ -26,9 +26,9 @@ class NodeTable extends NodeDatabaseChild
     public Icon|null $secondIcon = null;
 
     /** @param string $name An identifier for the new node */
-    public function __construct(Config $config, string $name)
+    public function __construct(DatabaseInterface $dbi, Config $config, string $name)
     {
-        parent::__construct($config, $name);
+        parent::__construct($dbi, $config, $name);
 
         $icon = $this->addIcon(
             $this->config->settings['NavigationTreeDefaultTabTable'],
@@ -66,15 +66,14 @@ class NodeTable extends NodeDatabaseChild
         $retval = 0;
         $db = $this->getRealParent()->realName;
         $table = $this->realName;
-        $dbi = DatabaseInterface::getInstance();
         switch ($type) {
             case 'columns':
                 if (! $this->config->selectedServer['DisableIS']) {
                     $query = 'SELECT COUNT(*) ';
                     $query .= 'FROM `INFORMATION_SCHEMA`.`COLUMNS` ';
-                    $query .= 'WHERE `TABLE_NAME`=' . $dbi->quoteString($table) . ' ';
-                    $query .= 'AND `TABLE_SCHEMA`=' . $dbi->quoteString($db);
-                    $retval = (int) $dbi->fetchValue($query);
+                    $query .= 'WHERE `TABLE_NAME`=' . $this->dbi->quoteString($table) . ' ';
+                    $query .= 'AND `TABLE_SCHEMA`=' . $this->dbi->quoteString($db);
+                    $retval = (int) $this->dbi->fetchValue($query);
                 } else {
                     $db = Util::backquote($db);
                     $table = Util::backquote($table);
@@ -94,13 +93,13 @@ class NodeTable extends NodeDatabaseChild
                     $query = 'SELECT COUNT(*) ';
                     $query .= 'FROM `INFORMATION_SCHEMA`.`TRIGGERS` ';
                     $query .= 'WHERE `EVENT_OBJECT_SCHEMA` '
-                    . Util::getCollateForIS() . '=' . $dbi->quoteString($db) . ' ';
+                    . Util::getCollateForIS($this->dbi) . '=' . $this->dbi->quoteString($db) . ' ';
                     $query .= 'AND `EVENT_OBJECT_TABLE` '
-                    . Util::getCollateForIS() . '=' . $dbi->quoteString($table);
-                    $retval = (int) $dbi->fetchValue($query);
+                    . Util::getCollateForIS($this->dbi) . '=' . $this->dbi->quoteString($table);
+                    $retval = (int) $this->dbi->fetchValue($query);
                 } else {
                     $db = Util::backquote($db);
-                    $query = 'SHOW TRIGGERS FROM ' . $db . ' WHERE `Table` = ' . $dbi->quoteString($table);
+                    $query = 'SHOW TRIGGERS FROM ' . $db . ' WHERE `Table` = ' . $this->dbi->quoteString($table);
                     $retval = $this->queryAndGetNumRows($query);
                 }
 
@@ -132,7 +131,7 @@ class NodeTable extends NodeDatabaseChild
 
             $columnNodes = [];
             foreach ($dbi->fetchResultSimple($query) as $row) {
-                $columnNodes[] = new NodeColumn($this->config, $row);
+                $columnNodes[] = new NodeColumn($this->dbi, $this->config, $row);
             }
 
             return $columnNodes;
@@ -146,7 +145,7 @@ class NodeTable extends NodeDatabaseChild
 
         $columnNodes = [];
         foreach (array_slice($handle->fetchAllAssoc(), $pos, $maxItems) as $arr) {
-            $columnNodes[] = new NodeColumn($this->config, [
+            $columnNodes[] = new NodeColumn($this->dbi, $this->config, [
                 'name' => $arr['Field'],
                 'key' => $arr['Key'] ?? '',
                 'type' => Util::extractColumnSpec($arr['Type'])['type'],
@@ -173,7 +172,7 @@ class NodeTable extends NodeDatabaseChild
         $indexNodes = [];
         /** @var string $indexName */
         foreach (array_slice($handle->fetchAllAssoc(), $pos, $maxItems) as ['Key_name' => $indexName]) {
-            $indexNodes[] = new NodeIndex($this->config, $indexName);
+            $indexNodes[] = new NodeIndex($this->dbi, $this->config, $indexName);
         }
 
         return $indexNodes;
@@ -189,15 +188,15 @@ class NodeTable extends NodeDatabaseChild
         if (! $this->config->selectedServer['DisableIS']) {
             $query = 'SELECT `TRIGGER_NAME` AS `name` ';
             $query .= 'FROM `INFORMATION_SCHEMA`.`TRIGGERS` ';
-            $query .= 'WHERE `EVENT_OBJECT_SCHEMA` ' . Util::getCollateForIS() . '=' . $dbi->quoteString($db) . ' ';
-            $query .= 'AND `EVENT_OBJECT_TABLE` ' . Util::getCollateForIS() . '=' . $dbi->quoteString($table) . ' ';
+            $query .= 'WHERE `EVENT_OBJECT_SCHEMA` ' . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($db) . ' ';
+            $query .= 'AND `EVENT_OBJECT_TABLE` ' . Util::getCollateForIS($dbi) . '=' . $dbi->quoteString($table) . ' ';
             $query .= 'ORDER BY `TRIGGER_NAME` ASC ';
             $query .= 'LIMIT ' . $pos . ', ' . $maxItems;
 
             $triggerNodes = [];
             /** @var string $triggerName */
             foreach ($dbi->fetchSingleColumn($query) as $triggerName) {
-                $triggerNodes[] = new NodeTrigger($this->config, $triggerName);
+                $triggerNodes[] = new NodeTrigger($this->dbi, $this->config, $triggerName);
             }
 
             return $triggerNodes;
@@ -212,7 +211,7 @@ class NodeTable extends NodeDatabaseChild
         $triggerNodes = [];
         /** @var string $triggerName */
         foreach (array_slice($handle->fetchAllAssoc(), $pos, $maxItems) as ['Trigger' => $triggerName]) {
-            $triggerNodes[] = new NodeTrigger($this->config, $triggerName);
+            $triggerNodes[] = new NodeTrigger($this->dbi, $this->config, $triggerName);
         }
 
         return $triggerNodes;

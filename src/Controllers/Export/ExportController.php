@@ -11,6 +11,7 @@ use PhpMyAdmin\Controllers\Database\ExportController as DatabaseExportController
 use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Exceptions\ExportException;
 use PhpMyAdmin\Export\Export;
@@ -50,6 +51,7 @@ final readonly class ExportController implements InvocableController
         private ResponseFactory $responseFactory,
         private Config $config,
         private UserPreferencesHandler $userPreferencesHandler,
+        private DatabaseInterface $dbi,
     ) {
     }
 
@@ -204,7 +206,7 @@ final readonly class ExportController implements InvocableController
         /**
          * Increase time limit for script execution and initializes some variables
          */
-        Util::setTimeLimit();
+        Util::setTimeLimit($this->config->settings['ExecTimeLimit']);
         if ($this->config->config->MemoryLimit !== '' && $this->config->config->MemoryLimit !== '0') {
             ini_set('memory_limit', $this->config->config->MemoryLimit);
         }
@@ -235,7 +237,7 @@ final readonly class ExportController implements InvocableController
 
             $filename = $this->export->getFinalFilename(
                 $exportPlugin,
-                Sanitize::sanitizeFilename(Util::expandUserString($filenameTemplate), true),
+                Sanitize::sanitizeFilename(Util::expandUserString($this->dbi, $this->config, $filenameTemplate), true),
             );
 
             $mimeType = $this->export->getMimeType($exportPlugin);
@@ -249,6 +251,7 @@ final readonly class ExportController implements InvocableController
         // Open file on server if needed
         if ($saveOnServer) {
             $message = $this->export->outputHandler->openFile(
+                $this->config->selectedServer['user'],
                 $this->config->config->SaveDir,
                 $filename,
                 $isQuickExport,

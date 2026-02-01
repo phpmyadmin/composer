@@ -17,7 +17,7 @@ class NodeViewContainerTest extends AbstractTestCase
      */
     public function testConstructor(): void
     {
-        $parent = new NodeViewContainer(new Config());
+        $parent = new NodeViewContainer($this->createDatabaseInterface(), new Config());
         self::assertSame('/database/structure', $parent->link->route);
         self::assertSame(['tbl_type' => 'view', 'db' => null], $parent->link->params);
         self::assertSame('/database/structure', $parent->icon->route);

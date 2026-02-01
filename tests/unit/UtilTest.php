@@ -160,26 +160,15 @@ class UtilTest extends AbstractTestCase
     #[DataProvider('providerExpandUserString')]
     public function testExpandUserString(string $in, string $out): void
     {
-        $this->setGlobalConfig();
-
-        $config = Config::getInstance();
+        $config = new Config();
         $config->selectedServer['host'] = 'host&';
         $config->selectedServer['verbose'] = 'verbose';
         Current::$database = 'database';
         Current::$table = 'table';
+        $dbi = $this->createDatabaseInterface();
 
-        self::assertSame(
-            $out,
-            Util::expandUserString($in),
-        );
-
-        self::assertSame(
-            htmlspecialchars($out),
-            Util::expandUserString(
-                $in,
-                'htmlspecialchars',
-            ),
-        );
+        self::assertSame($out, Util::expandUserString($dbi, $config, $in));
+        self::assertSame(htmlspecialchars($out), Util::expandUserString($dbi, $config, $in, htmlspecialchars(...)));
     }
 
     /**
@@ -968,9 +957,7 @@ class UtilTest extends AbstractTestCase
     #[DataProvider('providerUserDir')]
     public function testUserDir(string $a, string $e): void
     {
-        Config::getInstance()->selectedServer['user'] = 'root';
-
-        self::assertSame($e, Util::userDir($a));
+        self::assertSame($e, Util::userDir('root', $a));
     }
 
     /**
@@ -1095,9 +1082,9 @@ class UtilTest extends AbstractTestCase
     {
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1111,9 +1098,9 @@ SQL;
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1127,9 +1114,9 @@ SQL;
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1147,9 +1134,9 @@ SQL;
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT', 'my_data_base'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1167,9 +1154,9 @@ SQL;
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['groot_%@%']]);
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT', 'my_data_base'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1191,9 +1178,9 @@ SQL;
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
         $dbiDummy->addResult($tablePrivilegeQuery, [['EVENT']]);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertTrue(Util::currentUserHasPrivilege('EVENT', 'my_data_base', 'my_data_table'));
+        self::assertTrue(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base', 'my_data_table'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1215,9 +1202,9 @@ SQL;
         $dbiDummy->addResult($globalPrivilegeQuery, []);
         $dbiDummy->addResult($databasePrivilegeQuery, []);
         $dbiDummy->addResult($tablePrivilegeQuery, []);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
-        self::assertFalse(Util::currentUserHasPrivilege('EVENT', 'my_data_base', 'my_data_table'));
+        self::assertFalse(Util::currentUserHasPrivilege($dbi, 'EVENT', 'my_data_base', 'my_data_table'));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1365,8 +1352,7 @@ SQL;
     {
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addResult('SELECT @@lower_case_table_names', [[$lowerCaseTableNames]], ['@@lower_case_table_names']);
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
-        self::assertSame($expected, Util::getCollateForIS());
+        self::assertSame($expected, Util::getCollateForIS($this->createDatabaseInterface($dbiDummy)));
         $dbiDummy->assertAllQueriesConsumed();
     }
 
@@ -1380,8 +1366,6 @@ SQL;
 
     public function testGetSupportedDatatypes(): void
     {
-        $dbiDummy = $this->createDbiDummy();
-        DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
         $expected = [
             'INT',
             'VARCHAR',
@@ -1428,7 +1412,7 @@ SQL;
             'GEOMETRYCOLLECTION',
             'JSON',
         ];
-        self::assertSame($expected, Util::getSupportedDatatypes());
+        self::assertSame($expected, Util::getSupportedDatatypes($this->createDatabaseInterface()));
     }
 
     /**
@@ -1484,5 +1468,21 @@ SQL;
         self::assertSame('q\'q', Util::unquoteDefaultValue('\'q\'q\''));
         self::assertSame('s\\s', Util::unquoteDefaultValue('\'s\\\\s\''));
         self::assertSame('sq\'sq', Util::unquoteDefaultValue('\'sq\\\'sq\''));
+    }
+
+    #[DataProvider('providerForTestGetServerType')]
+    public function testGetServerType(string $expected, string $version, string $versionComment): void
+    {
+        $dbi = $this->createDatabaseInterface();
+        $dbi->setVersion(['@@version' => $version, '@@version_comment' => $versionComment]);
+        self::assertSame($expected, Util::getServerType($dbi));
+    }
+
+    /** @return iterable<string, array{string, string, string}> */
+    public static function providerForTestGetServerType(): iterable
+    {
+        yield 'MySQL' => ['MySQL', '7.10.3', 'MySQL Community Server (GPL)'];
+        yield 'MariaDB' => ['MariaDB', '10.01.40-MariaDB-1:10.01.40+maria~ubu2204', 'mariadb.org binary distribution'];
+        yield 'Percona' => ['Percona Server', '6.1.0', "Percona Server (GPL), Release '11', Revision 'c1y2gr1df4a'"];
     }
 }

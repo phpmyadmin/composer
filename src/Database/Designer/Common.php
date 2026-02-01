@@ -86,6 +86,7 @@ class Common
         foreach ($designerTables as $designerTable) {
             $fieldsRs = $this->dbi->query(
                 QueryGenerator::getColumnNamesAndTypes(
+                    Util::getCollateForIS($this->dbi),
                     $this->dbi->quoteString($designerTable->getDatabaseName()),
                     $this->dbi->quoteString($designerTable->getTableName()),
                 ),

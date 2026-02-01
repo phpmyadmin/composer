@@ -367,9 +367,8 @@ class File
             return false;
         }
 
-        $this->setName(
-            Util::userDir($this->config->config->UploadDir) . Core::securePath($name),
-        );
+        $userDir = Util::userDir($this->config->selectedServer['user'], $this->config->config->UploadDir);
+        $this->setName($userDir . Core::securePath($name));
         if (@is_link((string) $this->getName())) {
             $this->errorMessage = Message::error(__('File is a symbolic link'));
             $this->setName(null);

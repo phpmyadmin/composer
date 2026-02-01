@@ -810,7 +810,7 @@ class Util
      *
      * @return string per user directory
      */
-    public static function userDir(string $dir): string
+    public static function userDir(string $user, string $dir): string
     {
         if ($dir === '') {
             return '';
@@ -821,7 +821,7 @@ class Util
             $dir .= '/';
         }
 
-        return str_replace('%u', Core::securePath(Config::getInstance()->selectedServer['user']), $dir);
+        return str_replace('%u', Core::securePath($user), $dir);
     }
 
     /**
@@ -1079,6 +1079,8 @@ class Util
      * @psalm-param callable(string):string|null $escape
      */
     public static function expandUserString(
+        DatabaseInterface $dbi,
+        Config $config,
         string $string,
         callable|null $escape = null,
         array $updates = [],
@@ -1086,7 +1088,6 @@ class Util
         /* Content */
         $vars = [];
         $vars['http_host'] = Core::getEnv('HTTP_HOST');
-        $config = Config::getInstance();
         $vars['server_name'] = $config->selectedServer['host'];
         $vars['server_verbose'] = $config->selectedServer['verbose'];
 
@@ -1135,7 +1136,7 @@ class Util
 
         /* Fetch columns list if required */
         if (str_contains($string, '@COLUMNS@')) {
-            $columnsList = DatabaseInterface::getInstance()->getColumnNames(Current::$database, Current::$table);
+            $columnsList = $dbi->getColumnNames(Current::$database, Current::$table);
 
             $columnNames = [];
             if ($escape !== null) {
@@ -1161,10 +1162,10 @@ class Util
      *
      * @return string[] An array of datatypes.
      */
-    public static function getSupportedDatatypes(): array
+    public static function getSupportedDatatypes(DatabaseInterface $dbi): array
     {
         $retval = [];
-        foreach (DatabaseInterface::getInstance()->types->getColumns() as $value) {
+        foreach ($dbi->types->getColumns() as $value) {
             if (is_array($value)) {
                 foreach ($value as $subvalue) {
                     if ($subvalue === '-') {
@@ -1209,9 +1210,12 @@ class Util
      *                          string, table name where to also check
      *                          for privileges
      */
-    public static function currentUserHasPrivilege(string $priv, string|null $db = null, string|null $tbl = null): bool
-    {
-        $dbi = DatabaseInterface::getInstance();
+    public static function currentUserHasPrivilege(
+        DatabaseInterface $dbi,
+        string $priv,
+        string|null $db = null,
+        string|null $tbl = null,
+    ): bool {
         // Get the username for the current user in the format
         // required to use in the information schema database.
         [$user, $host] = $dbi->getCurrentUserAndHost();
@@ -1299,9 +1303,8 @@ class Util
      *
      * @phpstan-return 'MariaDB'|'Percona Server'|'MySQL'
      */
-    public static function getServerType(): string
+    public static function getServerType(DatabaseInterface $dbi): string
     {
-        $dbi = DatabaseInterface::getInstance();
         if ($dbi->isMariaDB()) {
             return 'MariaDB';
         }
@@ -1469,9 +1472,9 @@ class Util
      *
      * @return string COLLATE clause if needed or empty string.
      */
-    public static function getCollateForIS(): string
+    public static function getCollateForIS(DatabaseInterface $dbi): string
     {
-        $names = DatabaseInterface::getInstance()->getLowerCaseNames();
+        $names = $dbi->getLowerCaseNames();
         if ($names === 0) {
             return 'COLLATE utf8_bin';
         }
@@ -1566,15 +1569,17 @@ class Util
 
     /**
      * Wrapper around php's set_time_limit
+     *
+     * @param int<0, max> $timeLimit
      */
-    public static function setTimeLimit(): void
+    public static function setTimeLimit(int $timeLimit): void
     {
         // The function can be disabled in php.ini
         if (! function_exists('set_time_limit')) {
             return;
         }
 
-        @set_time_limit(Config::getInstance()->settings['ExecTimeLimit']);
+        @set_time_limit($timeLimit);
     }
 
     /**

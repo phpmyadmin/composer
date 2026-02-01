@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Navigation\NodeType;
 
 use function is_string;
@@ -18,9 +19,9 @@ use function is_string;
 abstract class NodeDatabaseChildContainer extends NodeDatabaseChild
 {
     /** @param string $name An identifier for the new node */
-    public function __construct(Config $config, string $name)
+    public function __construct(DatabaseInterface $dbi, Config $config, string $name)
     {
-        parent::__construct($config, $name, NodeType::Container);
+        parent::__construct($dbi, $config, $name, NodeType::Container);
 
         if (! $this->config->settings['NavigationTreeEnableGrouping']) {
             return;

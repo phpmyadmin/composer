@@ -176,13 +176,14 @@ class OutputHandler
     }
 
     public function openFile(
+        string $user,
         string $saveDirectory,
         string $filename,
         bool $quickExport,
         bool $quickOverwriteFile,
         bool $overwriteFile,
     ): Message|null {
-        $this->saveFilename = Util::userDir($saveDirectory) . preg_replace('@[/\\\\]@', '_', $filename);
+        $this->saveFilename = Util::userDir($user, $saveDirectory) . preg_replace('@[/\\\\]@', '_', $filename);
 
         if (
             @file_exists($this->saveFilename)
