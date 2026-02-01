@@ -44,9 +44,9 @@ class NodeDatabase extends Node
     private ObjectFetcher $objectFetcher;
 
     /** @param string $name An identifier for the new node */
-    public function __construct(Config $config, string $name)
+    public function __construct(DatabaseInterface $dbi, Config $config, string $name)
     {
-        parent::__construct($config, $name);
+        parent::__construct($dbi, $config, $name);
 
         $this->icon = new Icon(
             's_db',
@@ -64,7 +64,7 @@ class NodeDatabase extends Node
         $this->classes = 'database';
         $this->urlParamName = 'db';
 
-        $this->objectFetcher = new ObjectFetcher(DatabaseInterface::getInstance(), $this->config);
+        $this->objectFetcher = new ObjectFetcher($this->dbi, $this->config);
     }
 
     /**
@@ -131,11 +131,11 @@ class NodeDatabase extends Node
         $retval = [];
         foreach ($names as $item) {
             $retval[] = match ($type) {
-                'tables' => new NodeTable($this->config, $item),
-                'views' => new NodeView($this->config, $item),
-                'procedures' => new NodeProcedure($this->config, $item),
-                'functions' => new NodeFunction($this->config, $item),
-                'events' => new NodeEvent($this->config, $item),
+                'tables' => new NodeTable($this->dbi, $this->config, $item),
+                'views' => new NodeView($this->dbi, $this->config, $item),
+                'procedures' => new NodeProcedure($this->dbi, $this->config, $item),
+                'functions' => new NodeFunction($this->dbi, $this->config, $item),
+                'events' => new NodeEvent($this->dbi, $this->config, $item),
             };
         }
 
@@ -158,15 +158,16 @@ class NodeDatabase extends Node
 
         $navTable = Util::backquote($relationParameters->navigationItemsHidingFeature->database)
             . '.' . Util::backquote($relationParameters->navigationItemsHidingFeature->navigationHiding);
-        $dbi = DatabaseInterface::getInstance();
+
         $sqlQuery = 'SELECT `item_name` FROM ' . $navTable
             . ' WHERE `username`='
-            . $dbi->quoteString($relationParameters->user, ConnectionType::ControlUser)
+            . $this->dbi->quoteString($relationParameters->user, ConnectionType::ControlUser)
             . ' AND `item_type`='
-            . $dbi->quoteString($type, ConnectionType::ControlUser)
+            . $this->dbi->quoteString($type, ConnectionType::ControlUser)
             . ' AND `db_name`='
-            . $dbi->quoteString($this->realName, ConnectionType::ControlUser);
-        $result = $dbi->tryQueryAsControlUser($sqlQuery);
+            . $this->dbi->quoteString($this->realName, ConnectionType::ControlUser);
+
+        $result = $this->dbi->tryQueryAsControlUser($sqlQuery);
         $hiddenItems = [];
         if ($result instanceof ResultInterface) {
             /** @var list<string> $hiddenItems */

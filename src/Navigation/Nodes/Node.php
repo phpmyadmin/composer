@@ -102,6 +102,7 @@ class Node
      *                          Only relevant if the node is of type CONTAINER
      */
     public function __construct(
+        protected readonly DatabaseInterface $dbi,
         protected readonly Config $config,
         public string $name = '',
         public readonly NodeType $type = NodeType::Object,
@@ -122,7 +123,7 @@ class Node
         string $name,
         string $classes,
     ): Node {
-        $node = new Node($this->config, $name);
+        $node = new Node($this->dbi, $this->config, $name);
         $node->isNew = true;
         $node->classes = $classes;
 
@@ -340,7 +341,6 @@ class Node
      */
     public function getPresence(UserPrivileges $userPrivileges, string $type = '', string $searchClause = ''): int
     {
-        $dbi = DatabaseInterface::getInstance();
         if (
             ! $this->config->settings['NavigationTreeEnableGrouping']
             || ! $this->config->settings['ShowDatabasesNavigationAsTree']
@@ -350,7 +350,7 @@ class Node
                 $query .= 'FROM INFORMATION_SCHEMA.SCHEMATA ';
                 $query .= $this->getWhereClause('SCHEMA_NAME', $searchClause);
 
-                return (int) $dbi->fetchValue($query);
+                return (int) $this->dbi->fetchValue($query);
             }
 
             if ($userPrivileges->databasesToTest === false) {
@@ -362,7 +362,7 @@ class Node
 
             $retval = 0;
             foreach ($this->getDatabasesToSearch($userPrivileges, $searchClause) as $db) {
-                $query = 'SHOW DATABASES LIKE ' . $dbi->quoteString($db);
+                $query = 'SHOW DATABASES LIKE ' . $this->dbi->quoteString($db);
                 $retval += $this->queryAndGetNumRows($query);
             }
 
@@ -380,14 +380,14 @@ class Node
             $query .= $this->getWhereClause('SCHEMA_NAME', $searchClause);
             $query .= ') t ';
 
-            return (int) $dbi->fetchValue($query);
+            return (int) $this->dbi->fetchValue($query);
         }
 
         if ($userPrivileges->databasesToTest !== false) {
             $prefixMap = [];
             foreach ($this->getDatabasesToSearch($userPrivileges, $searchClause) as $db) {
-                $query = 'SHOW DATABASES LIKE ' . $dbi->quoteString($db);
-                $handle = $dbi->tryQuery($query);
+                $query = 'SHOW DATABASES LIKE ' . $this->dbi->quoteString($db);
+                $handle = $this->dbi->tryQuery($query);
                 if ($handle === false) {
                     continue;
                 }
@@ -413,7 +413,7 @@ class Node
         $prefixMap = [];
         $query = 'SHOW DATABASES ';
         $query .= $this->getWhereClause('Database', $searchClause);
-        $handle = $dbi->tryQuery($query);
+        $handle = $this->dbi->tryQuery($query);
         if ($handle !== false) {
             /** @var string $value */
             foreach ($handle->fetchAllColumn() as $value) {
@@ -454,7 +454,7 @@ class Node
     {
         $databases = [];
         if ($searchClause !== '') {
-            $databases = ['%' . DatabaseInterface::getInstance()->escapeMysqlWildcards($searchClause) . '%'];
+            $databases = ['%' . $this->dbi->escapeMysqlWildcards($searchClause) . '%'];
         } elseif ($this->config->selectedServer['only_db'] !== '') {
             $databases = (array) $this->config->selectedServer['only_db'];
         } elseif ($userPrivileges->databasesToTest !== false && $userPrivileges->databasesToTest !== []) {
@@ -476,15 +476,14 @@ class Node
     private function getWhereClause(string $columnName, string $searchClause = ''): string
     {
         $whereClause = 'WHERE TRUE ';
-        $dbi = DatabaseInterface::getInstance();
         if ($searchClause !== '') {
             $whereClause .= 'AND ' . Util::backquote($columnName)
-                . ' LIKE ' . $dbi->quoteString('%' . $dbi->escapeMysqlWildcards($searchClause) . '%') . ' ';
+                . ' LIKE ' . $this->dbi->quoteString('%' . $this->dbi->escapeMysqlWildcards($searchClause) . '%') . ' ';
         }
 
         if ($this->config->selectedServer['hide_db'] !== '') {
             $whereClause .= 'AND ' . Util::backquote($columnName)
-                . ' NOT REGEXP ' . $dbi->quoteString($this->config->selectedServer['hide_db']) . ' ';
+                . ' NOT REGEXP ' . $this->dbi->quoteString($this->config->selectedServer['hide_db']) . ' ';
         }
 
         if ($this->config->selectedServer['only_db'] !== '') {
@@ -496,7 +495,7 @@ class Node
             $subClauses = [];
             foreach ($this->config->selectedServer['only_db'] as $eachOnlyDb) {
                 $subClauses[] = ' ' . Util::backquote($columnName)
-                    . ' LIKE ' . $dbi->quoteString($eachOnlyDb) . ' ';
+                    . ' LIKE ' . $this->dbi->quoteString($eachOnlyDb) . ' ';
             }
 
             $whereClause .= implode('OR', $subClauses) . ') ';
@@ -573,13 +572,13 @@ class Node
         if ($navigationItemsHidingFeature !== null) {
             $navTable = Util::backquote($navigationItemsHidingFeature->database)
                 . '.' . Util::backquote($navigationItemsHidingFeature->navigationHiding);
-            $dbi = DatabaseInterface::getInstance();
+
             $sqlQuery = 'SELECT `db_name`, COUNT(*) AS `count` FROM ' . $navTable
                 . ' WHERE `username`='
-                . $dbi->quoteString($this->config->selectedServer['user'])
+                . $this->dbi->quoteString($this->config->selectedServer['user'])
                 . ' GROUP BY `db_name`';
 
-            return $dbi->fetchResult($sqlQuery, 'db_name', 'count', ConnectionType::ControlUser);
+            return $this->dbi->fetchResult($sqlQuery, 'db_name', 'count', ConnectionType::ControlUser);
         }
 
         return null;
@@ -594,7 +593,6 @@ class Node
     private function getDataFromInfoSchema(int $pos, string $searchClause): array
     {
         $maxItems = $this->config->config->FirstLevelNavigationItems;
-        $dbi = DatabaseInterface::getInstance();
         if (
             ! $this->config->settings['NavigationTreeEnableGrouping']
             || ! $this->config->settings['ShowDatabasesNavigationAsTree']
@@ -606,7 +604,7 @@ class Node
                 $maxItems,
             );
 
-            return $dbi->fetchSingleColumn($query);
+            return $this->dbi->fetchSingleColumn($query);
         }
 
         $dbSeparator = $this->config->settings['NavigationTreeDbSeparator'];
@@ -617,13 +615,13 @@ class Node
                 . ' ORDER BY DB_first_level ASC LIMIT %3$d, %4$d) t2'
                 . ' %2$sAND 1 = LOCATE(CONCAT(DB_first_level, %1$s),'
                 . ' CONCAT(SCHEMA_NAME, %1$s)) ORDER BY SCHEMA_NAME ASC',
-            $dbi->quoteString($dbSeparator),
+            $this->dbi->quoteString($dbSeparator),
             $this->getWhereClause('SCHEMA_NAME', $searchClause),
             $pos,
             $maxItems,
         );
 
-        return $dbi->fetchSingleColumn($query);
+        return $this->dbi->fetchSingleColumn($query);
     }
 
     /**
@@ -635,12 +633,11 @@ class Node
     private function getDataFromShowDatabases(int $pos, string $searchClause): array
     {
         $maxItems = $this->config->config->FirstLevelNavigationItems;
-        $dbi = DatabaseInterface::getInstance();
         if (
             ! $this->config->settings['NavigationTreeEnableGrouping']
             || ! $this->config->settings['ShowDatabasesNavigationAsTree']
         ) {
-            $handle = $dbi->tryQuery(sprintf(
+            $handle = $this->dbi->tryQuery(sprintf(
                 'SHOW DATABASES %s',
                 $this->getWhereClause('Database', $searchClause),
             ));
@@ -652,7 +649,7 @@ class Node
         }
 
         $dbSeparator = $this->config->settings['NavigationTreeDbSeparator'];
-        $handle = $dbi->tryQuery(sprintf(
+        $handle = $this->dbi->tryQuery(sprintf(
             'SHOW DATABASES %s',
             $this->getWhereClause('Database', $searchClause),
         ));
@@ -679,8 +676,8 @@ class Node
         foreach ($prefixes as $prefix) {
             $subClauses[] = sprintf(
                 ' LOCATE(%s, CONCAT(`Database`, %s)) = 1 ',
-                $dbi->quoteString($prefix . $dbSeparator),
-                $dbi->quoteString($dbSeparator),
+                $this->dbi->quoteString($prefix . $dbSeparator),
+                $this->dbi->quoteString($dbSeparator),
             );
         }
 
@@ -690,7 +687,7 @@ class Node
             implode('OR', $subClauses),
         );
 
-        return $dbi->fetchSingleColumn($query);
+        return $this->dbi->fetchSingleColumn($query);
     }
 
     /**
@@ -702,7 +699,6 @@ class Node
     private function getDataFromShowDatabasesLike(UserPrivileges $userPrivileges, int $pos, string $searchClause): array
     {
         $maxItems = $this->config->config->FirstLevelNavigationItems;
-        $dbi = DatabaseInterface::getInstance();
         if (
             ! $this->config->settings['NavigationTreeEnableGrouping']
             || ! $this->config->settings['ShowDatabasesNavigationAsTree']
@@ -710,7 +706,7 @@ class Node
             $retval = [];
             $count = 0;
             foreach ($this->getDatabasesToSearch($userPrivileges, $searchClause) as $db) {
-                $handle = $dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $dbi->quoteString($db)));
+                $handle = $this->dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $this->dbi->quoteString($db)));
                 if ($handle === false) {
                     continue;
                 }
@@ -744,7 +740,7 @@ class Node
         $prefixMap = [];
         $total = $pos + $maxItems;
         foreach ($this->getDatabasesToSearch($userPrivileges, $searchClause) as $db) {
-            $handle = $dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $dbi->quoteString($db)));
+            $handle = $this->dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $this->dbi->quoteString($db)));
             if ($handle === false) {
                 continue;
             }
@@ -770,7 +766,7 @@ class Node
         $prefixes = array_slice(array_keys($prefixMap), $pos);
 
         foreach ($this->getDatabasesToSearch($userPrivileges, $searchClause) as $db) {
-            $handle = $dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $dbi->quoteString($db)));
+            $handle = $this->dbi->tryQuery(sprintf('SHOW DATABASES LIKE %s', $this->dbi->quoteString($db)));
             if ($handle === false) {
                 continue;
             }
@@ -806,8 +802,7 @@ class Node
      */
     protected function queryAndGetNumRows(string $query): int
     {
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->tryQuery($query);
+        $result = $this->dbi->tryQuery($query);
 
         if ($result === false) {
             return 0;

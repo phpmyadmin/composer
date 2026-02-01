@@ -25,7 +25,7 @@ class NodeTableTest extends AbstractTestCase
         $config->settings['NavigationTreeDefaultTabTable'] = '/table/search';
         $config->settings['NavigationTreeDefaultTabTable2'] = '/table/change';
 
-        $parent = new NodeTable($config, 'default');
+        $parent = new NodeTable($this->createDatabaseInterface(), $config, 'default');
         self::assertSame('/sql', $parent->link->route);
         self::assertSame(['pos' => 0, 'db' => null, 'table' => null], $parent->link->params);
         self::assertSame('Browse', $parent->link->title);
@@ -47,7 +47,7 @@ class NodeTableTest extends AbstractTestCase
     {
         $config = Config::getInstance();
         $config->settings['NavigationTreeDefaultTabTable'] = $target;
-        $node = new NodeTable($config, 'default');
+        $node = new NodeTable($this->createDatabaseInterface(), $config, 'default');
         self::assertSame($imageName, $node->icon->image);
         self::assertSame($imageTitle, $node->icon->title);
     }
@@ -84,8 +84,8 @@ class NodeTableTest extends AbstractTestCase
                 ],
             );
 
-        $nodeContainer = new NodeDatabase($config, 'DB');
-        $nodeTable = new NodeTable($config, 'node');
+        $nodeContainer = new NodeDatabase($dbi, $config, 'DB');
+        $nodeTable = new NodeTable($dbi, $config, 'node');
         $nodeContainer->addChild($nodeTable);
 
         $result = $nodeTable->getColumns($dbi, 1);
@@ -120,8 +120,8 @@ class NodeTableTest extends AbstractTestCase
                 ],
             );
 
-        $nodeContainer = new NodeDatabase($config, 'DB');
-        $nodeTable = new NodeTable($config, 'node');
+        $nodeContainer = new NodeDatabase($dbi, $config, 'DB');
+        $nodeTable = new NodeTable($dbi, $config, 'node');
         $nodeContainer->addChild($nodeTable);
 
         $result = $nodeTable->getColumns($dbi, 1);
@@ -147,8 +147,8 @@ class NodeTableTest extends AbstractTestCase
                 ],
             );
 
-        $nodeContainer = new NodeDatabase($config, 'DB');
-        $nodeTable = new NodeTable($config, 'node');
+        $nodeContainer = new NodeDatabase($dbi, $config, 'DB');
+        $nodeTable = new NodeTable($dbi, $config, 'node');
         $nodeContainer->addChild($nodeTable);
 
         $result = $nodeTable->getTriggers($dbi, 1);
@@ -185,8 +185,8 @@ class NodeTableTest extends AbstractTestCase
                 ],
             );
 
-        $nodeContainer = new NodeDatabase($config, 'DB');
-        $nodeTable = new NodeTable($config, 'node');
+        $nodeContainer = new NodeDatabase($dbi, $config, 'DB');
+        $nodeTable = new NodeTable($dbi, $config, 'node');
         $nodeContainer->addChild($nodeTable);
 
         $result = $nodeTable->getTriggers($dbi, 1);
@@ -219,8 +219,8 @@ class NodeTableTest extends AbstractTestCase
                 ],
             );
 
-        $nodeContainer = new NodeDatabase($config, 'DB');
-        $nodeTable = new NodeTable($config, 'node');
+        $nodeContainer = new NodeDatabase($dbi, $config, 'DB');
+        $nodeTable = new NodeTable($dbi, $config, 'node');
         $nodeContainer->addChild($nodeTable);
 
         $result = $nodeTable->getIndexes($dbi, 1);

@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Navigation\NodeType;
 
 use function __;
@@ -18,9 +19,9 @@ use function _pgettext;
  */
 class NodeColumnContainer extends Node
 {
-    public function __construct(Config $config)
+    public function __construct(DatabaseInterface $dbi, Config $config)
     {
-        parent::__construct($config, __('Columns'), NodeType::Container);
+        parent::__construct($dbi, $config, __('Columns'), NodeType::Container);
 
         $this->icon = new Icon('pause', __('Columns'), '/table/structure', ['db' => null, 'table' => null]);
         $this->link = new Link(

@@ -15,7 +15,7 @@ final class NodeColumnContainerTest extends AbstractTestCase
 {
     public function testColumnContainer(): void
     {
-        $nodeColumnContainer = new NodeColumnContainer(new Config());
+        $nodeColumnContainer = new NodeColumnContainer($this->createDatabaseInterface(), new Config());
         self::assertSame('Columns', $nodeColumnContainer->name);
         self::assertSame(NodeType::Container, $nodeColumnContainer->type);
         self::assertFalse($nodeColumnContainer->isGroup);

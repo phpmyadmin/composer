@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Navigation\Nodes;
 
 use PhpMyAdmin\Config;
+use PhpMyAdmin\Dbal\DatabaseInterface;
 
 use function __;
 
@@ -17,9 +18,9 @@ use function __;
 class NodeView extends NodeDatabaseChild
 {
     /** @param string $name An identifier for the new node */
-    public function __construct(Config $config, string $name)
+    public function __construct(DatabaseInterface $dbi, Config $config, string $name)
     {
-        parent::__construct($config, $name);
+        parent::__construct($dbi, $config, $name);
 
         $this->icon = new Icon('b_props', __('View'), '/table/structure', ['db' => null, 'table' => null]);
         $this->link = new Link(

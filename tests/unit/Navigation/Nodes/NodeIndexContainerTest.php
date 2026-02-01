@@ -17,7 +17,7 @@ class NodeIndexContainerTest extends AbstractTestCase
      */
     public function testConstructor(): void
     {
-        $parent = new NodeIndexContainer(new Config());
+        $parent = new NodeIndexContainer($this->createDatabaseInterface(), new Config());
         self::assertSame('/table/structure', $parent->link->route);
         self::assertSame(['db' => null, 'table' => null], $parent->link->params);
         self::assertSame('/table/structure', $parent->icon->route);

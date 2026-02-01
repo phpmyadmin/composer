@@ -38,7 +38,7 @@ class NodeDatabaseChildTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
         $this->object = $this->getMockBuilder(NodeDatabaseChild::class)
-            ->setConstructorArgs([$config, 'child'])
+            ->setConstructorArgs([$this->createDatabaseInterface(), $config, 'child'])
             ->onlyMethods(['getItemType'])
             ->getMock();
     }
@@ -64,7 +64,7 @@ class NodeDatabaseChildTest extends AbstractTestCase
             RelationParameters::NAVIGATION_HIDING => 'navigationhiding',
         ]);
 
-        $parent = new NodeDatabase(Config::getInstance(), 'parent');
+        $parent = new NodeDatabase($this->createDatabaseInterface(), Config::getInstance(), 'parent');
         $parent->addChild($this->object);
         $this->object->expects(self::once())
             ->method('getItemType')
