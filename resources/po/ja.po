@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-01 00:41+0000\n"
-"PO-Revision-Date: 2025-10-29 09:45+0000\n"
-"Last-Translator: Masahiro Fujimoto <mfujimot@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 19:01+0000\n"
+"Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/ja/>\n"
 "Language: ja\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -12580,8 +12580,9 @@ msgstr ""
 "データが失われますが、続行しますか？"
 
 #: src/Controllers/JavaScriptMessagesController.php:77
+#, fuzzy
 msgid "Do you really want to revoke the selected user(s) ?"
-msgstr "選択されたユーザ「%s」を本当に無効にしますか？"
+msgstr "選択されたユーザー「%s」を本当に無効にしますか？"
 
 #: src/Controllers/JavaScriptMessagesController.php:78
 msgid "Do you really want to delete this central column?"

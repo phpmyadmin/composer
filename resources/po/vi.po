@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-01 00:41+0000\n"
-"PO-Revision-Date: 2025-05-14 19:50+0000\n"
-"Last-Translator: Xuan Hung <mr.hungdx@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 19:01+0000\n"
+"Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/vi/>\n"
 "Language: vi\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -12779,6 +12779,7 @@ msgstr ""
 "này sẽ bị mất. Bạn có muốn tiếp tục không?"
 
 #: src/Controllers/JavaScriptMessagesController.php:77
+#, fuzzy
 msgid "Do you really want to revoke the selected user(s) ?"
 msgstr "Bạn có thực sự muốn thực thi \"%s\"?"
 
