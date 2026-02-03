@@ -22,30 +22,26 @@ use function imagestring;
 use function imagesx;
 use function imagesy;
 
-final class ImageWrapper
+final readonly class ImageWrapper
 {
-    private function __construct(private GdImage $image)
+    private function __construct(public GdImage $image)
     {
-    }
-
-    public function getImage(): GdImage
-    {
-        return $this->image;
     }
 
     /**
-     * @param array<string, int>|null $background
-     * @psalm-param array{red: int, green: int, blue: int} $background
+     * @param int<1, max>                                                         $width
+     * @param int<1, max>                                                         $height
+     * @param array{red: int<0, 255>, green: int<0, 255>, blue: int<0, 255>}|null $background
      */
     public static function create(int $width, int $height, array|null $background = null): self|null
     {
         if (! extension_loaded('gd')) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
         $image = imagecreatetruecolor($width, $height);
         if ($image === false) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
         if ($background === null) {
@@ -54,11 +50,11 @@ final class ImageWrapper
 
         $backgroundColor = imagecolorallocate($image, $background['red'], $background['green'], $background['blue']);
         if ($backgroundColor === false) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
         if (! imagefilledrectangle($image, 0, 0, $width - 1, $height - 1, $backgroundColor)) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
         return new self($image);
@@ -67,7 +63,7 @@ final class ImageWrapper
     public static function fromString(string $data): self|null
     {
         if (! extension_loaded('gd')) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
         $image = imagecreatefromstring($data);
@@ -90,6 +86,11 @@ final class ImageWrapper
         return imagearc($this->image, $centerX, $centerY, $width, $height, $startAngle, $endAngle, $color);
     }
 
+    /**
+     * @param int<0, 255> $red
+     * @param int<0, 255> $green
+     * @param int<0, 255> $blue
+     */
     public function colorAllocate(int $red, int $green, int $blue): int|false
     {
         return imagecolorallocate($this->image, $red, $green, $blue);
@@ -108,7 +109,7 @@ final class ImageWrapper
     ): bool {
         return imagecopyresampled(
             $this->image,
-            $sourceImage->getImage(),
+            $sourceImage->image,
             $destinationX,
             $destinationY,
             $sourceX,
@@ -126,6 +127,7 @@ final class ImageWrapper
         return imagefilledpolygon($this->image, $points, $color);
     }
 
+    /** @return int<1, max> */
     public function height(): int
     {
         return imagesy($this->image);
@@ -135,7 +137,7 @@ final class ImageWrapper
     public function jpeg($file = null, int $quality = -1): bool
     {
         if (! function_exists('imagejpeg')) {
-            return false;
+            return false; // @codeCoverageIgnore
         }
 
         return imagejpeg($this->image, $file, $quality);
@@ -150,7 +152,7 @@ final class ImageWrapper
     public function png($file = null, int $quality = -1, int $filters = -1): bool
     {
         if (! function_exists('imagepng')) {
-            return false;
+            return false; // @codeCoverageIgnore
         }
 
         return imagepng($this->image, $file, $quality, $filters);
@@ -161,6 +163,7 @@ final class ImageWrapper
         return imagestring($this->image, $font, $x, $y, $string, $color);
     }
 
+    /** @return int<1, max> */
     public function width(): int
     {
         return imagesx($this->image);

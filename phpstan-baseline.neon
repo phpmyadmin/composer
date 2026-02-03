@@ -3763,6 +3763,18 @@ parameters:
 			path: src/Controllers/Transformation/WrapperController.php
 
 		-
+			message: '#^Parameter \#1 \$width of static method PhpMyAdmin\\Image\\ImageWrapper\:\:create\(\) expects int\<1, max\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controllers/Transformation/WrapperController.php
+
+		-
+			message: '#^Parameter \#2 \$height of static method PhpMyAdmin\\Image\\ImageWrapper\:\:create\(\) expects int\<1, max\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controllers/Transformation/WrapperController.php
+
+		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 11
@@ -6193,6 +6205,12 @@ parameters:
 			path: src/Gis/GisLineString.php
 
 		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisLineString.php
+
+		-
 			message: '#^Parameter \#5 \$color of method PhpMyAdmin\\Image\\ImageWrapper\:\:line\(\) expects int, int\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -6271,6 +6289,12 @@ parameters:
 			path: src/Gis/GisMultiLineString.php
 
 		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisMultiLineString.php
+
+		-
 			message: '#^Parameter \#5 \$color of method PhpMyAdmin\\Image\\ImageWrapper\:\:line\(\) expects int, int\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -6326,6 +6350,12 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$point of method PhpMyAdmin\\Gis\\GisGeometry\:\:getWktCoord\(\) expects array\{x\: float\|int\|string, y\: float\|int\|string\}\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisMultiPoint.php
+
+		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Gis/GisMultiPoint.php
@@ -6451,6 +6481,12 @@ parameters:
 			path: src/Gis/GisMultiPolygon.php
 
 		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisMultiPolygon.php
+
+		-
 			message: '#^Parameter \#2 \$color of method PhpMyAdmin\\Image\\ImageWrapper\:\:filledPolygon\(\) expects int, int\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -6488,6 +6524,12 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$point of method PhpMyAdmin\\Gis\\GisGeometry\:\:getWktCoord\(\) expects array\{x\: float\|int\|string, y\: float\|int\|string\}\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisPoint.php
+
+		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Gis/GisPoint.php
@@ -6541,6 +6583,12 @@ parameters:
 			path: src/Gis/GisPolygon.php
 
 		-
+			message: '#^Parameter \#1 \$red of method PhpMyAdmin\\Image\\ImageWrapper\:\:colorAllocate\(\) expects int\<0, 255\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisPolygon.php
+
+		-
 			message: '#^Parameter \#2 \$color of method PhpMyAdmin\\Image\\ImageWrapper\:\:filledPolygon\(\) expects int, int\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -6579,6 +6627,18 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
+			count: 1
+			path: src/Gis/GisVisualization.php
+
+		-
+			message: '#^Parameter \#1 \$width of static method PhpMyAdmin\\Image\\ImageWrapper\:\:create\(\) expects int\<1, max\>, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Gis/GisVisualization.php
+
+		-
+			message: '#^Parameter \#2 \$height of static method PhpMyAdmin\\Image\\ImageWrapper\:\:create\(\) expects int\<1, max\>, int given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Gis/GisVisualization.php
 
@@ -6992,36 +7052,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: src/I18n/LanguageManager.php
-
-		-
-			message: '#^Parameter \#1 \$width of function imagecreatetruecolor expects int\<1, max\>, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Image/ImageWrapper.php
-
-		-
-			message: '#^Parameter \#2 \$height of function imagecreatetruecolor expects int\<1, max\>, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Image/ImageWrapper.php
-
-		-
-			message: '#^Parameter \#2 \$red of function imagecolorallocate expects int\<0, 255\>, int given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Image/ImageWrapper.php
-
-		-
-			message: '#^Parameter \#3 \$green of function imagecolorallocate expects int\<0, 255\>, int given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Image/ImageWrapper.php
-
-		-
-			message: '#^Parameter \#4 \$blue of function imagecolorallocate expects int\<0, 255\>, int given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Image/ImageWrapper.php
 
 		-
 			message: '#^Cannot access offset ''handler'' on mixed\.$#'

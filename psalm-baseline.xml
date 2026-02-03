@@ -2865,6 +2865,10 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Controllers/Transformation/WrapperController.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$destHeight]]></code>
+      <code><![CDATA[$destWidth]]></code>
+    </ArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -4368,6 +4372,11 @@
     </MixedAssignment>
   </file>
   <file src="src/Gis/GisLineString.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$dataRow[$i] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
@@ -4397,6 +4406,11 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Gis/GisMultiLineString.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$dataRow[$i][$j] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
@@ -4442,6 +4456,11 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Gis/GisMultiPoint.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$dataRow[$i] ?? null]]></code>
     </MixedArgument>
@@ -4471,6 +4490,11 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Gis/GisMultiPolygon.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <InvalidArgument>
       <code><![CDATA[$pointsArr]]></code>
     </InvalidArgument>
@@ -4572,6 +4596,11 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Gis/GisPoint.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$gisData[$index]['POINT'] ?? null]]></code>
     </MixedArgument>
@@ -4585,6 +4614,11 @@
     </PossiblyFalseArgument>
   </file>
   <file src="src/Gis/GisPolygon.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+    </ArgumentTypeCoercion>
     <InvalidArgument>
       <code><![CDATA[$pointsArr]]></code>
     </InvalidArgument>
@@ -4616,6 +4650,10 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Gis/GisVisualization.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->height]]></code>
+      <code><![CDATA[$this->width]]></code>
+    </ArgumentTypeCoercion>
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -4902,12 +4940,15 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Image/ImageWrapper.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[imagesx($this->image)]]></code>
+      <code><![CDATA[imagesy($this->image)]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[int<1, max>]]></code>
+      <code><![CDATA[int<1, max>]]></code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedReturnValue>
-      <code><![CDATA[bool]]></code>
-      <code><![CDATA[bool]]></code>
-      <code><![CDATA[bool]]></code>
-      <code><![CDATA[bool]]></code>
-      <code><![CDATA[bool]]></code>
       <code><![CDATA[bool]]></code>
     </PossiblyUnusedReturnValue>
   </file>
