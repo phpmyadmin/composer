@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 4.9.7-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2020-10-10 13:32-0300\n"
-"PO-Revision-Date: 2025-03-23 22:10+0000\n"
+"PO-Revision-Date: 2026-02-03 19:01+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
-"4-9/id/>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/4-"
+"9/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Poedit-Basepath: ../../..\n"
 
 #: ajax.php:21 ajax.php:50 export.php:196 libraries/classes/Export.php:1095
@@ -1290,33 +1290,33 @@ msgstr "B"
 #: js/messages.php:204 libraries/classes/Server/Status/Monitor.php:224
 #: libraries/classes/Util.php:1266
 msgid "KiB"
-msgstr "KB"
+msgstr "KiB"
 
 #. l10n: shortcuts for Megabyte
 #: js/messages.php:205 libraries/classes/Server/Status/Monitor.php:225
 #: libraries/classes/Util.php:1268
 msgid "MiB"
-msgstr "MB"
+msgstr "MiB"
 
 #. l10n: shortcuts for Gigabyte
 #: js/messages.php:206 libraries/classes/Util.php:1270
 msgid "GiB"
-msgstr "GB"
+msgstr "GiB"
 
 #. l10n: shortcuts for Terabyte
 #: js/messages.php:207 libraries/classes/Util.php:1272
 msgid "TiB"
-msgstr "TB"
+msgstr "TiB"
 
 #. l10n: shortcuts for Petabyte
 #: js/messages.php:208 libraries/classes/Util.php:1274
 msgid "PiB"
-msgstr "PB"
+msgstr "PiB"
 
 #. l10n: shortcuts for Exabyte
 #: js/messages.php:209 libraries/classes/Util.php:1276
 msgid "EiB"
-msgstr "EB"
+msgstr "EiB"
 
 #: js/messages.php:210
 #, php-format
@@ -2393,7 +2393,7 @@ msgstr "Seret untuk menyusun ulang."
 
 #: js/messages.php:592
 msgid "Click to sort results by this column."
-msgstr "KIik untuk menyortir hasil dari kolom ini."
+msgstr "Klik untuk menyortir hasil dari kolom ini."
 
 #: js/messages.php:594
 msgid ""
@@ -3726,7 +3726,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:127
 msgid "Enable linter"
-msgstr "Aktifkan linter SQL"
+msgstr "Aktifkan linter"
 
 #: libraries/classes/Config/Descriptions.php:130
 msgid ""
@@ -4131,7 +4131,7 @@ msgstr "Tanggal Pembuatan/Pembaruan/Pemeriksaan"
 
 #: libraries/classes/Config/Descriptions.php:362
 msgid "Use delayed inserts"
-msgstr "Gunakan perintah INSERT memperlambat"
+msgstr "Gunakan sisipan tertunda"
 
 #: libraries/classes/Config/Descriptions.php:364
 #: libraries/classes/Plugins/Export/ExportSql.php:155
@@ -4173,7 +4173,7 @@ msgstr ""
 
 #: libraries/classes/Config/Descriptions.php:391
 msgid "Use ignore inserts"
-msgstr "Gunakan INSERT dengan IGNORE"
+msgstr "Gunakan sisipan abaikan"
 
 #: libraries/classes/Config/Descriptions.php:395
 msgid "Syntax to use when inserting data"
@@ -6104,7 +6104,7 @@ msgstr "ZIP"
 
 #: libraries/classes/Config/Descriptions.php:1437
 msgid "Enter your public key for your domain reCaptcha service."
-msgstr "Masukkan kunci publik Anda untuk layanan reCAPTCHA domain Anda."
+msgstr "Masukkan kunci publik Anda untuk layanan reCaptcha domain Anda."
 
 #: libraries/classes/Config/Descriptions.php:1439
 msgid "Public key for reCaptcha"
@@ -6112,7 +6112,7 @@ msgstr "Kunci publik untuk reCaptcha"
 
 #: libraries/classes/Config/Descriptions.php:1441
 msgid "Enter your private key for your domain reCaptcha service."
-msgstr "Masukkan kunci privat Anda untuk layanan reCAPTCHA domain Anda."
+msgstr "Masukkan kunci privat Anda untuk layanan reCaptcha domain Anda."
 
 #: libraries/classes/Config/Descriptions.php:1443
 msgid "Private key for reCaptcha"
@@ -6450,8 +6450,8 @@ msgid ""
 "%sLogin cookie validity%s should be set to 1800 seconds (30 minutes) at "
 "most. Values larger than 1800 may pose a security risk such as impersonation."
 msgstr ""
-"%sLogin cookie validity%s harus di set ke 1800 detik (30 menit) maksimal. "
-"NIlai lebih besar dari 1800 dapat menimbulkan risiko keamanan seperti "
+"%sLogin cookie validity%s harus diatur ke 1800 detik (30 menit) maksimal. "
+"Nilai lebih besar dari 1800 dapat menimbulkan risiko keamanan seperti "
 "peniruan."
 
 #: libraries/classes/Config/ServerConfigChecks.php:466
@@ -6460,7 +6460,7 @@ msgid ""
 "If using [kbd]cookie[/kbd] authentication and %sLogin cookie store%s is not "
 "0, %sLogin cookie validity%s must be set to a value less or equal to it."
 msgstr ""
-"JIka menggunakan otentikasi [kbd]cookie[/kbd] dan %sLogin cookie store%s "
+"Jika menggunakan otentikasi [kbd]cookie[/kbd] dan %sLogin cookie store%s "
 "bukan 0, %sLogin cookie validity%s harus diatur ke nilai kurang atau sama "
 "dengan itu."
 
@@ -13135,7 +13135,7 @@ msgstr "Pembatas"
 
 #: libraries/classes/SqlQueryForm.php:346
 msgid "Show this query here again"
-msgstr "Tampilkan ulang perintah SQL"
+msgstr "Tampilkan ulang kueri ini di sini"
 
 #: libraries/classes/SqlQueryForm.php:363
 msgid "Rollback when finished"
@@ -13964,11 +13964,11 @@ msgstr "Kustom - seperti di atas, namun tanpa pilihan cepat/kustom"
 
 #: libraries/config.values.php:201
 msgid "complete inserts"
-msgstr "INSERT lengkap"
+msgstr "sisipan lengkap"
 
 #: libraries/config.values.php:202
 msgid "extended inserts"
-msgstr "INSERT yang diperluas"
+msgstr "sisipan yang diperluas"
 
 #: libraries/config.values.php:203
 msgid "both of the above"
