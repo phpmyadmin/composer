@@ -14,24 +14,21 @@ final readonly class RecentFavoriteTable implements JsonSerializable
     {
     }
 
-    /** @param array{db:string, table:string} $array */
+    /** @param array{db: non-empty-string, table: non-empty-string} $array */
     public static function fromArray(array $array): self
     {
         return new self(DatabaseName::from($array['db']), TableName::from($array['table']));
     }
 
-    /** @return array{db:string, table:string} */
+    /** @return array{db: non-empty-string, table: non-empty-string} */
     public function toArray(): array
     {
         return ['db' => $this->db->getName(), 'table' => $this->table->getName()];
     }
 
-    /** @return array<string, string> */
-    public function jsonSerialize(): mixed
+    /** @return array{db: non-empty-string, table: non-empty-string} */
+    public function jsonSerialize(): array
     {
-        return [
-            'db' => $this->db->getName(),
-            'table' => $this->table->getName(),
-        ];
+        return $this->toArray();
     }
 }
