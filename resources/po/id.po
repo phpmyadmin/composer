@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-01 00:41+0000\n"
-"PO-Revision-Date: 2025-09-22 08:02+0000\n"
+"PO-Revision-Date: 2026-02-03 19:01+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/id/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Poedit-Basepath: ../../..\n"
 
 #: resources/templates/base.twig:36 resources/templates/login/header.twig:13
@@ -5917,13 +5917,13 @@ msgstr "Terapkan pemisah"
 #: resources/templates/server/status/monitor/index.twig:181
 #: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:309
 msgid "KiB"
-msgstr "KB"
+msgstr "KiB"
 
 #. l10n: shortcuts for Megabyte
 #: resources/templates/server/status/monitor/index.twig:182
 #: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:311
 msgid "MiB"
-msgstr "MB"
+msgstr "MiB"
 
 #: resources/templates/server/status/monitor/index.twig:188
 msgid "Append unit to data values"
@@ -6510,7 +6510,7 @@ msgstr "Pembatas"
 
 #: resources/templates/sql/query.twig:122
 msgid "Show this query here again"
-msgstr "Tampilkan ulang perintah SQL"
+msgstr "Tampilkan ulang kueri ini di sini"
 
 #: resources/templates/sql/query.twig:130 src/Config/Descriptions.php:923
 msgid "Retain query box"
@@ -9237,11 +9237,11 @@ msgstr "Kustom - seperti di atas, namun tanpa pilihan cepat/kustom"
 
 #: src/Config/ConfigFile.php:722
 msgid "complete inserts"
-msgstr "INSERT lengkap"
+msgstr "sisipan lengkap"
 
 #: src/Config/ConfigFile.php:723
 msgid "extended inserts"
-msgstr "INSERT yang diperluas"
+msgstr "sisipan yang diperluas"
 
 #: src/Config/ConfigFile.php:724
 msgid "both of the above"
@@ -10556,7 +10556,7 @@ msgstr "Aktifkan CodeMirror"
 
 #: src/Config/Descriptions.php:607
 msgid "Enable linter"
-msgstr "Aktifkan linter SQL"
+msgstr "Aktifkan linter"
 
 #: src/Config/Descriptions.php:608
 msgid "Minimum size for input field"
@@ -10804,7 +10804,7 @@ msgstr "Tanggal Pembuatan/Pembaruan/Pemeriksaan"
 
 #: src/Config/Descriptions.php:691
 msgid "Use delayed inserts"
-msgstr "Gunakan perintah INSERT memperlambat"
+msgstr "Gunakan sisipan tertunda"
 
 #: src/Config/Descriptions.php:692 src/Plugins/Export/ExportSql.php:233
 msgid "Disable foreign key checks"
@@ -10837,7 +10837,7 @@ msgstr "tampilan %s"
 
 #: src/Config/Descriptions.php:710
 msgid "Use ignore inserts"
-msgstr "Gunakan INSERT dengan IGNORE"
+msgstr "Gunakan sisipan abaikan"
 
 #: src/Config/Descriptions.php:712
 msgid "Syntax to use when inserting data"
@@ -11876,8 +11876,8 @@ msgid ""
 "%sLogin cookie validity%s should be set to 1800 seconds (30 minutes) at "
 "most. Values larger than 1800 may pose a security risk such as impersonation."
 msgstr ""
-"%sLogin cookie validity%s harus di set ke 1800 detik (30 menit) maksimal. "
-"NIlai lebih besar dari 1800 dapat menimbulkan risiko keamanan seperti "
+"%sLogin cookie validity%s harus diatur ke 1800 detik (30 menit) maksimal. "
+"Nilai lebih besar dari 1800 dapat menimbulkan risiko keamanan seperti "
 "peniruan."
 
 #: src/Config/ServerConfigChecks.php:366
@@ -11886,7 +11886,7 @@ msgid ""
 "If using [kbd]cookie[/kbd] authentication and %sLogin cookie store%s is not "
 "0, %sLogin cookie validity%s must be set to a value less or equal to it."
 msgstr ""
-"JIka menggunakan otentikasi [kbd]cookie[/kbd] dan %sLogin cookie store%s "
+"Jika menggunakan otentikasi [kbd]cookie[/kbd] dan %sLogin cookie store%s "
 "bukan 0, %sLogin cookie validity%s harus diatur ke nilai kurang atau sama "
 "dengan itu."
 
@@ -12968,22 +12968,22 @@ msgstr "B"
 #. l10n: shortcuts for Gigabyte
 #: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:313
 msgid "GiB"
-msgstr "GB"
+msgstr "GiB"
 
 #. l10n: shortcuts for Terabyte
 #: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:315
 msgid "TiB"
-msgstr "TB"
+msgstr "TiB"
 
 #. l10n: shortcuts for Petabyte
 #: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:317
 msgid "PiB"
-msgstr "PB"
+msgstr "PiB"
 
 #. l10n: shortcuts for Exabyte
 #: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:319
 msgid "EiB"
-msgstr "EB"
+msgstr "EiB"
 
 #: src/Controllers/JavaScriptMessagesController.php:210
 #, php-format
@@ -13761,7 +13761,7 @@ msgstr "Seret untuk menyusun ulang."
 
 #: src/Controllers/JavaScriptMessagesController.php:545
 msgid "Click to sort results by this column."
-msgstr "KIik untuk menyortir hasil dari kolom ini."
+msgstr "Klik untuk menyortir hasil dari kolom ini."
 
 #: src/Controllers/JavaScriptMessagesController.php:547
 msgid ""
