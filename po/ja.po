@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2025-10-16 23:57-0300\n"
-"PO-Revision-Date: 2026-02-03 19:01+0000\n"
-"Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
+"PO-Revision-Date: 2026-02-04 21:01+0000\n"
+"Last-Translator: Sandra Swift <nolamiller1203+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/phpmyadmin/5-2/"
 "ja/>\n"
 "Language: ja\n"
@@ -5514,9 +5514,8 @@ msgstr ""
 "データが失われますが、続行しますか？"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:64
-#, fuzzy
 msgid "Do you really want to revoke the selected user(s) ?"
-msgstr "選択されたユーザー「%s」を本当に無効にしますか？"
+msgstr "選択されたユーザーを本当に無効にしますか？"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:65
 msgid "Do you really want to delete this central column?"
