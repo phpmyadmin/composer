@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-01 00:41+0000\n"
-"PO-Revision-Date: 2026-02-03 19:01+0000\n"
+"PO-Revision-Date: 2026-02-05 00:42+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/tr/>\n"
@@ -4379,7 +4379,7 @@ msgstr ""
 
 #: resources/templates/relation/check_relations.twig:195
 msgid "Bookmarked SQL query:"
-msgstr "Yer işaretli SQL sorgusu:"
+msgstr "Yeri işaretli SQL sorgusu:"
 
 #: resources/templates/relation/check_relations.twig:220
 msgid "SQL history:"
