@@ -16,7 +16,7 @@ use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Identifiers\TableName;
 use PhpMyAdmin\Tests\AbstractTestCase;
-use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseStub;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionProperty;
 
@@ -34,15 +34,14 @@ final class SyncFavoriteTablesControllerTest extends AbstractTestCase
 
         (new ReflectionProperty(RecentFavoriteTables::class, 'instances'))->setValue(null, []);
 
-        $recentFavoriteTable = new RecentFavoriteTable(
-            DatabaseName::from('test_db'),
-            TableName::from('test_table'),
-        );
+        $recentFavoriteTable = new RecentFavoriteTable(DatabaseName::from('test_db'), TableName::from('test_table'));
         $dbiDummy->addResult('SELECT 1 FROM `test_db`.`test_table` LIMIT 1;', [['1']], ['1']);
         $dbiDummy->addResult('SELECT `tables` FROM `pmadb`.`favorite` WHERE `username` = \'root\'', []);
-        $dbiDummy->addResult("REPLACE INTO `pmadb`.`favorite` (`username`, `tables`) VALUES ('root', "
-        . $dbi->quoteString(json_encode([$recentFavoriteTable])) .
-        ')', true);
+        $dbiDummy->addResult(
+            "REPLACE INTO `pmadb`.`favorite` (`username`, `tables`) VALUES ('root', "
+            . $dbi->quoteString((string) json_encode([$recentFavoriteTable])) . ')',
+            true,
+        );
 
         $relationParameters = RelationParameters::fromArray([
             RelationParameters::DATABASE => 'pmadb',
@@ -51,9 +50,11 @@ final class SyncFavoriteTablesControllerTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $response = new ResponseStub();
-        $response->setAjax(true);
-        $controller = new SyncFavoriteTablesController($response, new Relation($dbi), new Config());
+        $config = Config::$instance = new Config();
+        $config->selectedServer['user'] = 'root';
+        $responseRenderer = new ResponseRenderer();
+        $responseRenderer->setAjax(true);
+        $controller = new SyncFavoriteTablesController($responseRenderer, new Relation($dbi, $config), $config);
 
         // The user hash for test
         $user = 'dc76e9f0c0006e8f919e0c515c66dbba3982f785';
@@ -68,7 +69,8 @@ final class SyncFavoriteTablesControllerTest extends AbstractTestCase
         $json = json_decode((string) $response->getBody(), true);
 
         self::assertIsArray($json);
-        self::assertSame($favoriteTable, $json['favoriteTables'] ?? '');
+        self::assertArrayHasKey('favoriteTables', $json);
+        self::assertSame($favoriteTable, $json['favoriteTables']);
         self::assertArrayHasKey('list', $json);
         /**
          * @psalm-suppress TypeDoesNotContainType
