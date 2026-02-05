@@ -56,6 +56,7 @@ class Plugins
      *
      * @param string $type   the type of the plugin (import, export, etc)
      * @param string $format the format of the plugin (sql, xml, et )
+     * @phpstan-param 'export'|'import'|'schema' $type
      *
      * @return object|null new plugin instance
      */
@@ -74,9 +75,8 @@ class Plugins
             return null;
         }
 
+        $container = ContainerBuilder::getContainer();
         if ($type === 'export') {
-            $container = ContainerBuilder::getContainer();
-
             /** @psalm-suppress MixedMethodCall */
             return new $class(
                 $container->get(Relation::class),
@@ -87,6 +87,16 @@ class Plugins
             );
         }
 
+        if ($type === 'import') {
+            /** @psalm-suppress MixedMethodCall */
+            return new $class(
+                $container->get(Import::class),
+                $container->get(DatabaseInterface::class),
+                $container->get(Config::class),
+            );
+        }
+
+        /** @psalm-suppress MixedMethodCall */
         return new $class();
     }
 
@@ -590,7 +600,7 @@ class Plugins
                 $ret .= '<p class="card-text">' . __('This format has no options') . '</p>';
             }
 
-            $ret .= '</div>';
+            $ret .= '</div>' . "\n\n";
         }
 
         return $ret;

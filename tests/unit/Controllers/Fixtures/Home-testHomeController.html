@@ -1,0 +1,247 @@
+%A
+
+<div id="maincontainer">
+  
+  <div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-lg-7 col-12">
+                  
+            <div class="card mt-4">
+              <div class="card-header">
+                General settings
+              </div>
+              <ul class="list-group list-group-flush">
+                
+                                                      <li id="li_change_password" class="list-group-item">
+                      <a href="index.php?route=/user-password&lang=en" id="change_password_anchor" class="ajax">
+                        <span class="text-nowrap"><img src="themes/dot.gif" title="Change password" alt="Change password" class="icon ic_s_passwd">&nbsp;Change password</span>
+                      </a>
+                      <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="changePasswordModalDialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordModalLabel">Change password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="changePasswordGoButton">Go</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+                    </li>
+                  
+                  <li id="li_select_mysql_collation" class="list-group-item">
+                    <form method="post" action="index.php?route=/collation-connection&lang=en" class="row row-cols-lg-auto align-items-center disableAjax">
+                      <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+                      <div class="col-12">
+                        <label for="collationConnectionSelect" class="col-form-label">
+                          <img src="themes/dot.gif" title="" alt="" class="icon ic_s_asci">
+                          Server connection collation:
+                          <a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fcharset-connection.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+                        </label>
+                      </div>
+                                            <div class="col-12">
+                        <select lang="en" dir="ltr" name="collation_connection" id="collationConnectionSelect" class="form-select autosubmit">
+                          <option value="">Collation</option>
+                          <option value=""></option>
+                                                      <optgroup label="armscii8" title="armscii8_general_ci">
+                                                              <option value="armscii8_general_ci" title="Armenian, case-insensitive">armscii8_general_ci</option>
+                                                          </optgroup>
+                                                      <optgroup label="latin1" title="cp1252 West European">
+                                                              <option value="latin1_swedish_ci" title="Swedish, case-insensitive">latin1_swedish_ci</option>
+                                                          </optgroup>
+                                                      <optgroup label="utf8" title="UTF-8 Unicode">
+                                                              <option value="utf8_bin" title="Unicode, binary">utf8_bin</option>
+                                                              <option value="utf8_general_ci" title="Unicode, case-insensitive">utf8_general_ci</option>
+                                                          </optgroup>
+                                                      <optgroup label="utf8mb4" title="utf8mb4_0900_ai_ci">
+                                                              <option value="utf8mb4_general_ci" title="Unicode (UCA 4.0.0), case-insensitive" selected>utf8mb4_general_ci</option>
+                                                          </optgroup>
+                                                  </select>
+                      </div>
+                                          </form>
+                  </li>
+
+                  <li id="li_user_preferences" class="list-group-item">
+                    <a href="index.php?route=/preferences/manage&lang=en">
+                      <span class="text-nowrap"><img src="themes/dot.gif" title="More settings" alt="More settings" class="icon ic_b_tblops">&nbsp;More settings</span>
+                    </a>
+                  </li>
+                              </ul>
+            </div>
+          
+                        <div class="card mt-4">
+              <div class="card-header">
+                Appearance settings
+              </div>
+              <ul class="list-group list-group-flush">
+%A
+                                  <li id="li_select_theme" class="list-group-item">
+                    <form method="post" action="index.php?route=/themes/set&lang=en" class="row row-cols-lg-auto align-items-center disableAjax">
+                      <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+                      <div class="col-12">
+                        <label for="themeSelect" class="col-form-label">
+                          <span class="text-nowrap"><img src="themes/dot.gif" title="Theme" alt="Theme" class="icon ic_s_theme">&nbsp;Theme</span>
+                        </label>
+                      </div>
+                      <div class="col-12">
+                        <div class="input-group">
+                          <select name="set_theme" class="form-select autosubmit" lang="en" dir="ltr" id="themeSelect">
+                                                      </select>
+                          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#themesModal">
+                            View all
+                          </button>
+                        </div>
+                      </div>
+
+                                          </form>
+                  </li>
+                              </ul>
+            </div>
+                      </div>
+
+      <div class="col-lg-5 col-12">
+                  <div class="card mt-4">
+            <div class="card-header">
+              Database server
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Server:
+                
+              </li>
+              <li class="list-group-item">
+                Hostname:
+                test-hostname
+              </li>
+              <li class="list-group-item">
+                Server type:
+                MySQL
+              </li>
+              <li class="list-group-item">
+                Server connection:
+                <span class="">SSL is not being used</span> <a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Fsetup.html%23ssl" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+              </li>
+              <li class="list-group-item">
+                Server version:
+                5.50.0 - 
+              </li>
+              <li class="list-group-item">
+                User:
+                
+              </li>
+              <li class="list-group-item">
+                Server charset:
+                <span lang="en" dir="ltr">
+                  utf8mb4_0900_ai_ci (utf8mb4)
+                </span>
+              </li>
+            </ul>
+          </div>
+        
+                  <div class="card mt-4">
+            <div class="card-header">
+              Web server
+            </div>
+            <ul class="list-group list-group-flush">
+                                              <li class="list-group-item" id="li_mysql_client_version">
+                  Database client version:
+                  libmysql - mysqlnd x.x.x-dev (phpMyAdmin tests)
+                </li>
+                <li class="list-group-item">
+                  PHP extension:
+                                      mysqli
+                    <a href="index.php?route=/url&url=https%3A%2F%2Fwww.php.net%2Fmanual%2Fen%2Fbook.mysqli.php" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+%A                                    mbstring
+                    <a href="index.php?route=/url&url=https%3A%2F%2Fwww.php.net%2Fmanual%2Fen%2Fbook.mbstring.php" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+                                      sodium
+                    <a href="index.php?route=/url&url=https%3A%2F%2Fwww.php.net%2Fmanual%2Fen%2Fbook.sodium.php" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+                                  </li>
+                <li class="list-group-item">
+                  PHP version:
+                  %s
+                </li>
+                                        </ul>
+          </div>
+        
+          <div class="card mt-4">
+            <div class="card-header">
+              phpMyAdmin
+            </div>
+            <ul class="list-group list-group-flush">
+              <li id="li_pma_version" class="list-group-item jsversioncheck">
+                Version information:
+                <span class="version">%s</span>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Findex.html" target="_blank" rel="noopener noreferrer">
+                  Documentation
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/url&amp;url=https%3A%2F%2Fwww.phpmyadmin.net%2F" target="_blank" rel="noopener noreferrer">
+                  Official Homepage
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/url&amp;url=https%3A%2F%2Fwww.phpmyadmin.net%2Fcontribute%2F" target="_blank" rel="noopener noreferrer">
+                  Contribute
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/url&amp;url=https%3A%2F%2Fwww.phpmyadmin.net%2Fsupport%2F" target="_blank" rel="noopener noreferrer">
+                  Get support
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/changelog&lang=en" target="_blank">
+                  List of changes
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="index.php?route=/license&lang=en" target="_blank">
+                  License
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+              <div class="alert alert-warning" role="alert">
+                      <img src="themes/dot.gif" title="Warning" alt="Warning" class="icon ic_s_attention">
+                    The <code>HTTP_HOST</code> variable is missing, which might cause phpMyAdmin to not work properly. Please refer to <a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq1-46" target="documentation">documentation</a> for possible issues.
+        </div>
+          </div>
+  </div>
+
+  <div class="modal fade" id="themesModal" tabindex="-1" aria-labelledby="themesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="themesModalLabel">phpMyAdmin Themes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading…</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="index.php?route=/url&amp;url=https%3A%2F%2Fwww.phpmyadmin.net%2Fthemes%2F#pma_6_0" class="btn btn-primary" rel="noopener noreferrer" target="_blank">
+            Get more themes!
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="alert alert-primary" role="alert">
+  <img src="themes/dot.gif" title="" alt="" class="icon ic_s_notice"> The phpMyAdmin configuration storage is not completely configured, some extended features have been deactivated. <a href="index.php?route=/check-relations&lang=en" data-post="?lang=en">Find out why</a>. <br>Or alternately go to 'Operations' tab of any database to set it up there.
+</div>
+
