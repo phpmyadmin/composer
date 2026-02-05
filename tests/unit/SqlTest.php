@@ -11,6 +11,7 @@ use PhpMyAdmin\ConfigStorage\RelationCleanup;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
+use PhpMyAdmin\Indexes\Index;
 use PhpMyAdmin\ParseAnalyze;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\Template;
@@ -19,6 +20,7 @@ use PhpMyAdmin\Transformations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
+use ReflectionProperty;
 use stdClass;
 
 use const MYSQLI_TYPE_SHORT;
@@ -646,6 +648,118 @@ class SqlTest extends AbstractTestCase
         self::assertStringContainsString('data-type="int"', $actual);
         self::assertStringContainsString('data-type="string"', $actual);
         self::assertStringContainsString('data-type="timestamp"', $actual);
+    }
+
+    public function testExecuteQueryAndSendQueryResponseWithNoResult(): void
+    {
+        $config = Config::$instance = new Config();
+        $dbiDummy = $this->createDbiDummy();
+        $dbi = DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $relation = new Relation($dbi, $config);
+
+        $sql = new Sql(
+            $dbi,
+            $relation,
+            new RelationCleanup($this->dbi, $relation),
+            new Transformations($this->dbi, $relation),
+            new Template($config),
+            new BookmarkRepository($this->dbi, $relation),
+            $config,
+        );
+
+        $dbiDummy->removeDefaultResults();
+        $dbiDummy->addResult('SELECT DATABASE()', [['sakila']]);
+        $dbiDummy->addSelectDb('sakila');
+        $dbiDummy->addResult(
+            "SHOW SESSION VARIABLES LIKE 'FOREIGN_KEY_CHECKS';",
+            [['foreign_key_checks', 'ON']],
+            ['Variable_name', 'Value'],
+        );
+        $dbiDummy->addResult(
+            "SELECT * FROM `sakila`.`country` WHERE `last_update` > '2025-02-01' LIMIT 0, 25",
+            [],
+            ['country_id', 'country', 'last_update'],
+            [
+                FieldHelper::fromArray(['type' => MYSQLI_TYPE_SHORT, 'length' => 5]),
+                FieldHelper::fromArray(['type' => MYSQLI_TYPE_VAR_STRING, 'length' => 200]),
+                FieldHelper::fromArray(['type' => MYSQLI_TYPE_TIMESTAMP, 'length' => 19]),
+            ],
+        );
+        $dbiDummy->addResult('SHOW WARNINGS', []);
+        $dbiDummy->addResult('SELECT @@have_profiling', [['YES']]);
+        $dbiDummy->addResult('SELECT @@lower_case_table_names', [['0']]);
+        // phpcs:disable Generic.Files.LineLength.TooLong
+        $dbiDummy->addResult(
+            "SHOW TABLE STATUS FROM `sakila` WHERE `Name` LIKE 'country%'",
+            [['country', 'InnoDB', '10', 'Dynamic', '109', '150', '16384', '0', '0', '0', '110', '2011-12-13 14:15:16', null, null, 'utf8mb4_general_ci', null, '', '', '0', 'N']],
+            ['Name', 'Engine', 'Version', 'Row_format', 'Rows', 'Avg_row_length', 'Data_length', 'Max_data_length', 'Index_length', 'Data_free', 'Auto_increment', 'Create_time', 'Update_time', 'Check_time', 'Collation', 'Checksum', 'Create_options', 'Comment', 'Max_index_length', 'Temporary'],
+        );
+        $dbiDummy->addResult('SELECT COUNT(*) FROM `sakila`.`country`', [['109']]);
+        $dbiDummy->addResult(
+            'SHOW CREATE TABLE `sakila`.`country`',
+            [['country', "CREATE TABLE `country` (\n  `country_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,\n  `country` varchar(50) NOT NULL,\n  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),\n  PRIMARY KEY (`country_id`)\n) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4"]],
+            ['Table', 'Create Table'],
+        );
+        $dbiDummy->addResult(
+            "SELECT `COLUMN_NAME` AS `Field`, `COLUMN_TYPE` AS `Type`, `COLLATION_NAME` AS `Collation`, `IS_NULLABLE` AS `Null`, `COLUMN_KEY` AS `Key`, `COLUMN_DEFAULT` AS `Default`, `EXTRA` AS `Extra`, `PRIVILEGES` AS `Privileges`, `COLUMN_COMMENT` AS `Comment` FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` COLLATE utf8_bin = 'sakila' AND `TABLE_NAME` COLLATE utf8_bin = 'country' ORDER BY `ORDINAL_POSITION`",
+            [
+                ['country_id', 'smallint(5) unsigned', null, 'NO', 'PRI', null, 'auto_increment', 'select,insert,update,references', ''],
+                ['country', 'varchar(50)', 'utf8mb4_general_ci', 'NO', '', null, '', 'select,insert,update,references', ''],
+                ['last_update', 'timestamp', null, 'NO', '', 'current_timestamp()', 'on update current_timestamp()', 'select,insert,update,references', ''],
+            ],
+            ['Field', 'Type', 'Collation', 'Null', 'Key', 'Default', 'Extra', 'Privileges', 'Comment'],
+        );
+        // phpcs:enable
+        $dbiDummy->addResult(
+            'SHOW INDEXES FROM `sakila`.`country`',
+            [['country', '0', 'PRIMARY', 'country_id']],
+            ['Table', 'Non_unique', 'Key_name', 'Column_name'],
+        );
+        $dbiDummy->addResult(
+            "SHOW SESSION VARIABLES LIKE 'FOREIGN_KEY_CHECKS';",
+            [['foreign_key_checks', 'ON']],
+            ['Variable_name', 'Value'],
+        );
+
+        $_SESSION['tmpval'] = [];
+        $_SESSION['sql_from_query_box'] = true;
+        Current::$database = 'sakila';
+        Current::$table = 'country';
+        Current::$sqlQuery = "SELECT * FROM `sakila`.`country` WHERE `last_update` > '2025-02-01';";
+
+        $config->selectedServer['DisableIS'] = true;
+        $config->selectedServer['user'] = 'user';
+
+        (new ReflectionProperty(Index::class, 'registry'))->setValue(null, []);
+
+        $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com');
+
+        $actual = $sql->executeQueryAndSendQueryResponse(
+            $request,
+            null,
+            false,
+            'sakila',
+            'different_table',
+            '',
+            '',
+            'index.php?route=/sql',
+            null,
+            '',
+            "SELECT * FROM `sakila`.`country` WHERE `last_update` > '2025-02-01';",
+            "SELECT * FROM `sakila`.`country` WHERE `last_update` > '2025-02-01';",
+        );
+
+        $dbiDummy->assertAllQueriesConsumed();
+        $dbiDummy->assertAllSelectsConsumed();
+        self::assertStringContainsString('MySQL returned an empty result set (i.e. zero rows). (Query took', $actual);
+        self::assertStringContainsString(
+            "SELECT * FROM `sakila`.`country` WHERE `last_update` &gt; '2025-02-01';",
+            $actual,
+        );
+        self::assertStringContainsString('data-column="country_id"', $actual);
+        self::assertStringContainsString('data-column="country"', $actual);
+        self::assertStringContainsString('data-column="last_update"', $actual);
+        self::assertStringContainsString("<tbody>\n        \n      </tbody>", $actual);
     }
 
     public function testGetDetailedProfilingStatsWithoutData(): void
