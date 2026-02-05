@@ -5617,9 +5617,6 @@
       <code><![CDATA[$val]]></code>
       <code><![CDATA[$val]]></code>
     </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[new $class()]]></code>
-    </MixedMethodCall>
     <PossiblyInvalidCast>
       <code><![CDATA[$config->settings[$section][$opt]]]></code>
     </PossiblyInvalidCast>
