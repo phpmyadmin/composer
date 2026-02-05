@@ -667,11 +667,6 @@
       <code><![CDATA[$service['factory']]]></code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="src/Controllers/BrowseForeignersController.php">
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[Response]]></code>
-    </PossiblyUnusedReturnValue>
-  </file>
   <file src="src/Controllers/ChangeLogController.php">
     <MixedOperand>
       <code><![CDATA[$releaseLinks[$matches[1]]]]></code>
