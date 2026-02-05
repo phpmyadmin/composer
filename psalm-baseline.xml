@@ -5706,7 +5706,7 @@
     <InvalidReturnType occurrences="1">
       <code>int|bool</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="46">
+    <MixedArgument occurrences="47">
       <code>$a</code>
       <code>$arrayKeys</code>
       <code>$b</code>
@@ -5752,6 +5752,7 @@
       <code>$user</code>
       <code>$user</code>
       <code>$user</code>
+      <code>$version['@@sql_mode']</code>
       <code>$warningsCount</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="5">
