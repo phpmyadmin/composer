@@ -138,12 +138,7 @@ class ExportToon extends ExportPlugin
                     $buffer .= str_repeat(' ', $this->indent);
                 }
 
-                if ($col === null) {
-                    $buffer .= 'null';
-                    continue;
-                }
-
-                $buffer .= $col;
+                $buffer .= $col ?? 'null';
 
                 // phpcs:ignore SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed
                 if ($index !== $columnsCnt - 1) {
