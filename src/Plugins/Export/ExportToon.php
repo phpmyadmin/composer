@@ -192,7 +192,7 @@ class ExportToon extends ExportPlugin
         );
 
         $this->indent = $this->setIntValue(
-            (int) $request->getParsedBodyParam('toon_indent'),
+            $request->getParsedBodyParam('toon_indent'),
             $exportConfig->toon_indent ?? $this->indent,
         );
         // phpcs:enable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
@@ -215,8 +215,8 @@ class ExportToon extends ExportPlugin
 
     private function setIntValue(mixed $fromRequest, mixed $fromConfig): int
     {
-        if (is_int($fromRequest)) {
-            return $fromRequest;
+        if (ctype_digit($fromRequest)) {
+            return (int) $fromRequest;
         }
 
         if (is_int($fromConfig)) {
