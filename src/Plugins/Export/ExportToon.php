@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Config\Settings\Export;
+use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\StructureOrData;
 use PhpMyAdmin\Http\ServerRequest;
@@ -20,7 +21,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
 use function array_key_last;
-use function is_int;
+use function ctype_digit;
 use function is_string;
 use function sprintf;
 use function str_repeat;
@@ -95,12 +96,11 @@ class ExportToon extends ExportPlugin
     ): void {
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->query($sqlQuery);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
         $rowsCnt = $result->numRows();
-        $fieldsMeta = $dbi->getFieldsMeta($result);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $columns = [];
         foreach ($fieldsMeta as $i => $field) {
@@ -166,7 +166,7 @@ class ExportToon extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);
@@ -192,7 +192,7 @@ class ExportToon extends ExportPlugin
         );
 
         $this->indent = $this->setIntValue(
-            (int) $request->getParsedBodyParam('toon_indent'),
+            $request->getParsedBodyParam('toon_indent'),
             $exportConfig->toon_indent ?? $this->indent,
         );
         // phpcs:enable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
@@ -200,29 +200,25 @@ class ExportToon extends ExportPlugin
         $this->setupExportConfiguration();
     }
 
-    private function setStringValue(mixed $fromRequest, mixed $fromConfig): string
+    private function setStringValue(mixed $fromRequest, string $fromConfig): string
     {
         if (is_string($fromRequest) && $fromRequest !== '') {
             return $fromRequest;
         }
 
-        if (is_string($fromConfig) && $fromConfig !== '') {
+        if ($fromConfig !== '') {
             return $fromConfig;
         }
 
         return '';
     }
 
-    private function setIntValue(mixed $fromRequest, mixed $fromConfig): int
+    private function setIntValue(mixed $fromRequest, int $fromConfig): int
     {
-        if (is_int($fromRequest)) {
-            return $fromRequest;
+        if (ctype_digit((string) $fromRequest)) {
+            return (int) $fromRequest;
         }
 
-        if (is_int($fromConfig)) {
-            return $fromConfig;
-        }
-
-        return 0;
+        return $fromConfig;
     }
 }
