@@ -46,7 +46,7 @@ class PluginsTest extends AbstractTestCase
         $isCurl = extension_loaded('curl');
         self::assertSame(ExportType::Database, ExportPlugin::$exportType);
         self::assertFalse(ExportPlugin::$singleTable);
-        $pluginCount = $isCurl ? 14 : 13;
+        $pluginCount = $isCurl ? 15 : 14;
         self::assertCount($pluginCount, $plugins);
         self::assertContainsOnlyInstancesOf(ExportPlugin::class, $plugins);
     }
@@ -430,6 +430,12 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="texytext_columns" value="y" id="checkbox_texytext_columns" ><label class="form-check-label" for="checkbox_texytext_columns">Put columns names in the first row</label></div><li class="list-group-item">
             <label for="text_texytext_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="texytext_null" value="NULL" id="text_texytext_null"></ul></div></li>
+            </div>
+
+            <div id="toon_options" class="format_specific_options"><h3>TOON</h3>
+            <div id="toon_general_opts"><ul class="list-group"><li class="list-group-item">
+            <label for="text_toon_separator" class="form-label">Columns separated with:</label><input class="form-control" type="text" name="toon_separator" value="," id="text_toon_separator"><li class="list-group-item">
+            <label for="text_toon_indent" class="form-label">Indentation:</label><input class="form-control" type="text" name="toon_indent" value="2" id="text_toon_indent"><li class="list-group-item"><input type="hidden" name="toon_structure_or_data" value="structure_and_data"></li></ul></div>
             </div>
 
             <div id="yaml_options" class="format_specific_options"><h3>YAML</h3>
