@@ -200,29 +200,25 @@ class ExportToon extends ExportPlugin
         $this->setupExportConfiguration();
     }
 
-    private function setStringValue(mixed $fromRequest, mixed $fromConfig): string
+    private function setStringValue(mixed $fromRequest, string $fromConfig): string
     {
         if (is_string($fromRequest) && $fromRequest !== '') {
             return $fromRequest;
         }
 
-        if (is_string($fromConfig) && $fromConfig !== '') {
+        if ($fromConfig !== '') {
             return $fromConfig;
         }
 
         return '';
     }
 
-    private function setIntValue(mixed $fromRequest, mixed $fromConfig): int
+    private function setIntValue(mixed $fromRequest, int $fromConfig): int
     {
-        if (ctype_digit($fromRequest)) {
+        if (ctype_digit((string) $fromRequest)) {
             return (int) $fromRequest;
         }
 
-        if (is_int($fromConfig)) {
-            return $fromConfig;
-        }
-
-        return 0;
+        return $fromConfig;
     }
 }
