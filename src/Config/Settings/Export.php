@@ -55,6 +55,9 @@ use function in_array;
  *     csv_escaped: string,
  *     csv_terminated: string,
  *     csv_removeCRLF: bool,
+ *     toon_indent: int,
+ *     toon_separator: string,
+ *     toon_structure_or_data: StructureOrDataType,
  *     excel_columns: bool,
  *     excel_null: string,
  *     excel_edition: 'mac_excel2003'|'mac_excel2008'|'win',
@@ -441,6 +444,29 @@ final class Export
      * ```
      */
     public bool $csv_removeCRLF;
+
+    /**
+     * ```php
+     * $cfg['Export']['toon_indent'] = 2;
+     * ```
+     */
+    public int $toon_indent;
+
+    /**
+     * ```php
+     * $cfg['Export']['toon_separator'] = ',';
+     * ```
+     */
+    public string $toon_separator;
+
+    /**
+     * ```php
+     * $cfg['Export']['toon_structure_or_data'] = 'structure_and_data';
+     * ```
+     *
+     * @psalm-var StructureOrDataType
+     */
+    public string $toon_structure_or_data;
 
     /**
      * ```php
@@ -1031,6 +1057,9 @@ final class Export
         $this->csv_escaped = $this->setCsvEscaped($export);
         $this->csv_terminated = $this->setCsvTerminated($export);
         $this->csv_removeCRLF = $this->setCsvRemoveCRLF($export);
+        $this->toon_indent = $this->setToonIndent($export);
+        $this->toon_separator = $this->setToonSeparator($export);
+        $this->toon_structure_or_data = $this->setToonStructureOrData($export);
         $this->excel_columns = $this->setExcelColumns($export);
         $this->excel_null = $this->setExcelNull($export);
         $this->excel_edition = $this->setExcelEdition($export);
@@ -1146,6 +1175,9 @@ final class Export
             'csv_escaped' => $this->csv_escaped,
             'csv_terminated' => $this->csv_terminated,
             'csv_removeCRLF' => $this->csv_removeCRLF,
+            'toon_indent' => $this->toon_indent,
+            'toon_separator' => $this->toon_separator,
+            'toon_structure_or_data' => $this->toon_structure_or_data,
             'excel_columns' => $this->excel_columns,
             'excel_null' => $this->excel_null,
             'excel_edition' => $this->excel_edition,
@@ -1678,6 +1710,43 @@ final class Export
         }
 
         return (bool) $export['csv_removeCRLF'];
+    }
+
+    /** @param array<int|string, mixed> $export */
+    private function setToonIndent(array $export): int
+    {
+        if (! isset($export['toon_indent'])) {
+            return 2;
+        }
+
+        return (int) $export['toon_indent'];
+    }
+
+    /** @param array<int|string, mixed> $export */
+    private function setToonSeparator(array $export): string
+    {
+        if (! isset($export['toon_separator'])) {
+            return ',';
+        }
+
+        return (string) $export['toon_separator'];
+    }
+
+    /**
+     * @param array<int|string, mixed> $export
+     *
+     * @psalm-return StructureOrDataType
+     */
+    private function setToonStructureOrData(array $export): string
+    {
+        if (
+            ! isset($export['toon_structure_or_data'])
+            || ! in_array($export['toon_structure_or_data'], ['structure', 'data'], true)
+        ) {
+            return 'structure_and_data';
+        }
+
+        return $export['toon_structure_or_data'];
     }
 
     /** @param array<int|string, mixed> $export */
