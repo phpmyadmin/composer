@@ -1134,18 +1134,11 @@ function getAutoSavedKey() {
   return 'autoSavedSql_' + key;
 }
 function checkSavedQuery() {
-  let key = Sql.getAutoSavedKey();
-  let buttonGetAutoSavedQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saved');
-  let isAutoSavedInLocalStorage = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string';
-  // @ts-ignore
-  let isAutoSavedInCookie = window.Cookies.get(key, {
+  const key = Sql.getAutoSavedKey();
+  const haveAutoSavedQuery = (0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('localStorage') && typeof window.localStorage.getItem(key) === 'string' || window.Cookies.withAttributes({
     path: _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('rootPath')
-  });
-  if (isAutoSavedInLocalStorage || isAutoSavedInCookie) {
-    buttonGetAutoSavedQuery.prop('disabled', false);
-    return;
-  }
-  buttonGetAutoSavedQuery.prop('disabled', true);
+  }).get(key);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saved').prop('disabled', !haveAutoSavedQuery);
 }
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'a.browse_foreign', function (e) {
