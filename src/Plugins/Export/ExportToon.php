@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Config\Settings\Export;
+use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\StructureOrData;
 use PhpMyAdmin\Http\ServerRequest;
@@ -95,12 +96,11 @@ class ExportToon extends ExportPlugin
     ): void {
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $dbi = DatabaseInterface::getInstance();
-        $result = $dbi->query($sqlQuery);
+        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
         $rowsCnt = $result->numRows();
-        $fieldsMeta = $dbi->getFieldsMeta($result);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $columns = [];
         foreach ($fieldsMeta as $i => $field) {
@@ -166,7 +166,7 @@ class ExportToon extends ExportPlugin
     public function exportRawQuery(string $db, string $sqlQuery): void
     {
         if ($db !== '') {
-            DatabaseInterface::getInstance()->selectDb($db);
+            $this->dbi->selectDb($db);
         }
 
         $this->exportData($db, '', $sqlQuery);
