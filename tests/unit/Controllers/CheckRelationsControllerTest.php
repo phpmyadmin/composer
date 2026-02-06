@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers;
 
+use Fig\Http\Message\StatusCodeInterface;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
@@ -21,7 +22,7 @@ use PHPUnit\Framework\Attributes\Test;
 use ReflectionProperty;
 
 #[CoversClass(CheckRelationsController::class)]
-class CheckRelationsControllerTest extends AbstractTestCase
+final class CheckRelationsControllerTest extends AbstractTestCase
 {
     protected DatabaseInterface $dbi;
 
@@ -43,23 +44,17 @@ class CheckRelationsControllerTest extends AbstractTestCase
 
         $request = self::createStub(ServerRequest::class);
 
-        $response = new ResponseRenderer();
+        $responseRenderer = new ResponseRenderer();
         $config = Config::getInstance();
         $config->selectedServer['pmadb'] = '';
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, null);
-        $controller = new CheckRelationsController($response, new Relation($this->dbi), $config);
-        $controller($request);
+        $controller = new CheckRelationsController($responseRenderer, new Relation($this->dbi), $config);
+        $response = $controller($request);
 
-        $actual = $response->getHTMLResult();
-
-        self::assertStringContainsString('phpMyAdmin configuration storage', $actual);
-        self::assertStringContainsString(
-            'Configuration of pmadb…' . "\n" . '      <span class="text-danger"><strong>not OK</strong></span>',
-            $actual,
-        );
-        self::assertStringContainsString(
-            'Create</a> a database named &#039;phpmyadmin&#039; and setup the phpMyAdmin configuration storage there.',
-            $actual,
+        self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertStringEqualsFile(
+            __DIR__ . '/Fixtures/CheckRelations-testCheckRelationsController.html',
+            (string) $response->getBody(),
         );
     }
 
@@ -126,31 +121,18 @@ class CheckRelationsControllerTest extends AbstractTestCase
         $dbiDummy->addResult('SELECT NULL FROM `pma__recent` LIMIT 0', []);
         $dbiDummy->addResult('SELECT NULL FROM `pma__history` LIMIT 0', []);
         $dbiDummy->addResult('SELECT NULL FROM `pma__relation` LIMIT 0', []);
+        // phpcs:enable
 
         $controller = new CheckRelationsController(new ResponseRenderer(), new Relation($dbi, $config), $config);
         $response = $controller($request);
 
-        $responseBody = (string) $response->getBody();
-        self::assertStringContainsString("General relation features:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Display features:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Designer and creation of PDFs:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Displaying column comments:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Bookmarked SQL query:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("SQL history:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Persistent recently used tables:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Persistent favorite tables:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Persistent tables&#039; UI preferences:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Tracking:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("User preferences:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Configurable menus:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Hide/show navigation items:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Saving Query-By-Example searches:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Managing central list of columns:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Remembering designer settings:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        self::assertStringContainsString("Saving export templates:\n                      <span class=\"text-success\">Enabled</span>", $responseBody);
-        // phpcs:enable
-
         $dbiDummy->assertAllQueriesConsumed();
         $dbiDummy->assertAllSelectsConsumed();
+
+        self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertStringEqualsFile(
+            __DIR__ . '/Fixtures/CheckRelations-createConfigStorage.html',
+            (string) $response->getBody(),
+        );
     }
 }
