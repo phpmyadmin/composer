@@ -24,6 +24,8 @@ use function mb_strtoupper;
 use function sprintf;
 use function trim;
 
+use const ENT_NOQUOTES;
+
 #[Route('/database/events', ['GET', 'POST'])]
 final class EventsController implements InvocableController
 {
@@ -205,14 +207,14 @@ final class EventsController implements InvocableController
                 $title = sprintf(__('Export of event %s'), $itemName);
 
                 if ($request->isAjax()) {
-					$exportData = htmlspecialchars(trim($exportData));	
-					$this->response->addJSON('message', $exportData);
+                    $exportData = htmlspecialchars(trim($exportData));
+                    $this->response->addJSON('message', $exportData);
                     $this->response->addJSON('title', $title);
 
                     return $this->response->response();
-				} else {
-					$exportData = htmlspecialchars(trim($exportData),ENT_NOQUOTES);
-				}
+                }
+
+                $exportData = htmlspecialchars(trim($exportData), ENT_NOQUOTES);
 
                 $output = '<div class="container">';
                 $output .= '<h2>' . $title . '</h2>';
