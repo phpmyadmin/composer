@@ -486,6 +486,9 @@ class Generator
         $isSelect = preg_match('@^SELECT[[:space:]]+@i', $sqlQuery) === 1;
         if (! empty($config->settings['SQLQuery']['Explain']) && ! $queryTooBig) {
             $explainParams = $urlParams;
+            $explainRegex = '@^EXPLAIN[[:space:]]+(?:ANALYZE[[:space:]]+)?'
+                . '(?:FORMAT=(?:JSON|TREE|TRADITIONAL)[[:space:]]+)?';
+
             if ($isSelect) {
                 $explainParams['sql_query'] = 'EXPLAIN ' . $sqlQuery;
                 $explainLink = '<div class="col-auto">'
@@ -495,8 +498,8 @@ class Generator
                         __('Explain SQL'),
                         ['class' => 'btn btn-link'],
                     ) . '</div>' . "\n";
-            } elseif (preg_match('@^EXPLAIN[[:space:]]+SELECT[[:space:]]+@i', $sqlQuery) === 1) {
-                $explainParams['sql_query'] = mb_substr($sqlQuery, 8);
+            } elseif (preg_match($explainRegex . 'SELECT[[:space:]]+@i', $sqlQuery) === 1) {
+                $explainParams['sql_query'] = preg_replace($explainRegex . '@i', '', $sqlQuery, 1);
                 $explainLink = '<div class="col-auto">'
                     . self::linkOrButton(
                         Url::getFromRoute('/import', $explainParams),
