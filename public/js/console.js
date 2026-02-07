@@ -1483,7 +1483,7 @@ function setConfigValue(key, value) {
 /***/ "codemirror":
 /***/ (function(module) {
 
-module.exports = CodeMirror;
+module.exports = window.CodeMirror;
 
 /***/ }),
 
