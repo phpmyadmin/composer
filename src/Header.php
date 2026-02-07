@@ -291,6 +291,8 @@ class Header
         return [
             'lang' => Current::$lang,
             'allow_third_party_framing' => $this->config->config->AllowThirdPartyFraming,
+            'codemirror_enable' => $this->config->config->CodemirrorEnable,
+            'lint_enable' => $this->config->config->LintEnable,
             'theme_path' => $theme->getPath(),
             'server' => Current::$server,
             'title' => $this->getPageTitle(),
