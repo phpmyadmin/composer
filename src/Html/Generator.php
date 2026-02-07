@@ -488,6 +488,7 @@ class Generator
             $explainParams = $urlParams;
             $explainRegex = '@^EXPLAIN[[:space:]]+(?:ANALYZE[[:space:]]+)?'
                 . '(?:FORMAT=(?:JSON|TREE|TRADITIONAL)[[:space:]]+)?';
+            $analyzeRegex = '@^ANALYZE[[:space:]]+(?:FORMAT=(?:JSON|TRADITIONAL)[[:space:]]+)?';
 
             if ($isSelect) {
                 $explainParams['sql_query'] = 'EXPLAIN ' . $sqlQuery;
@@ -505,6 +506,16 @@ class Generator
                         Url::getFromRoute('/import', $explainParams),
                         null,
                         __('Skip Explain SQL'),
+                        ['class' => 'btn btn-link'],
+                    ) . '</div>' . "\n";
+            } elseif (preg_match($analyzeRegex . 'SELECT[[:space:]]+@i', $sqlQuery) === 1) {
+                $explainParams['sql_query'] = preg_replace($analyzeRegex . '@i', '', $sqlQuery, 1);
+
+                $explainLink = '<div class="col-auto">'
+                    . self::linkOrButton(
+                        Url::getFromRoute('/import', $explainParams),
+                        null,
+                        __('Skip Analyze SQL'),
                         ['class' => 'btn btn-link'],
                     ) . '</div>' . "\n";
             }
