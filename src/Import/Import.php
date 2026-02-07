@@ -573,15 +573,14 @@ final class Import
 
             if ($lastCumulativeType === ColumnType::Decimal) {
                 $oldInt = $lastCumulativeSize->precision - $lastCumulativeSize->scale;
-                $newInt = mb_strlen($cell);
 
-                if ($oldInt >= $newInt) {
+                if ($oldInt >= $currSize) {
                     /* Use old decimal size */
                     return $lastCumulativeSize;
                 }
 
                 return DecimalSize::fromPrecisionAndScale(
-                    $newInt + $lastCumulativeSize->scale,
+                    $currSize + $lastCumulativeSize->scale,
                     $lastCumulativeSize->scale,
                 );
             }
