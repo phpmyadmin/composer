@@ -183,15 +183,19 @@ class ExportToonTest extends AbstractTestCase
         $exportToon->setExportOptions($request, new Export());
 
         ob_start();
-        $exportToon->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportToon->exportData(
+            'test_db',
+            'test_table_export_toon',
+            'SELECT * FROM `test_db`.`test_table_export_toon`;',
+        );
         $result = ob_get_clean();
 
         self::assertIsString($result);
         self::assertSame(
-            'test_db.test_table[3]{id,name,datetimefield}:' . "\n" .
-            '  1,abcd,2011-01-20 02:00:02' . "\n" .
-            '  2,foo,2010-01-20 02:00:02' . "\n" .
-            '  3,Abcd,2012-01-20 02:00:02' . "\n\n",
+            'test_db.test_table_export_toon[3]{id,name,datetimefield,textfield,intfield}:' . "\n" .
+            '  1,abcd,2011-01-20 02:00:02,31,null' . "\n" .
+            '  2,foo,2010-01-20 02:00:02,null,null' . "\n" .
+            '  3,Abcd,2012-01-20 02:00:02,null,8' . "\n\n",
             $result,
         );
     }
@@ -205,15 +209,19 @@ class ExportToonTest extends AbstractTestCase
         $exportToon->setExportOptions($request, new Export());
 
         ob_start();
-        $exportToon->exportData('test_db', 'test_table', 'SELECT * FROM `test_db`.`test_table`;');
+        $exportToon->exportData(
+            'test_db',
+            'test_table_export_toon',
+            'SELECT * FROM `test_db`.`test_table_export_toon`;',
+        );
         $result = ob_get_clean();
 
         self::assertIsString($result);
         self::assertSame(
-            'test_db.test_table[3|]{id|name|datetimefield}:' . "\n" .
-            '    1|abcd|2011-01-20 02:00:02' . "\n" .
-            '    2|foo|2010-01-20 02:00:02' . "\n" .
-            '    3|Abcd|2012-01-20 02:00:02' . "\n\n",
+            'test_db.test_table_export_toon[3|]{id|name|datetimefield|textfield|intfield}:' . "\n" .
+            '    1|abcd|2011-01-20 02:00:02|31|null' . "\n" .
+            '    2|foo|2010-01-20 02:00:02|null|null' . "\n" .
+            '    3|Abcd|2012-01-20 02:00:02|null|8' . "\n\n",
             $result,
         );
     }

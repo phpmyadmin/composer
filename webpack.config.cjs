@@ -108,7 +108,7 @@ module.exports = [
         },
         externals: {
             jquery: 'jQuery',
-            codemirror: 'CodeMirror',
+            codemirror: 'window.CodeMirror',
         },
         module: {
             rules: [

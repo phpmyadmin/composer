@@ -32,6 +32,7 @@ use function trim;
 use const MYSQLI_TYPE_BLOB;
 use const MYSQLI_TYPE_DATETIME;
 use const MYSQLI_TYPE_DECIMAL;
+use const MYSQLI_TYPE_INT24;
 use const MYSQLI_TYPE_STRING;
 
 // phpcs:disable Generic.Files.LineLength.TooLong
@@ -1728,6 +1729,22 @@ class DbiDummy implements DbiExtension
                     ['3', 'Abcd', '2012-01-20 02:00:02', null],
                     ['4', 'Abcd', '2012-01-20 02:00:02', '123'],
                     ['5', 'Abcd', '2012-01-20 02:00:02', '+30.2103210000'],
+                ],
+            ],
+            [
+                'query' => 'SELECT * FROM `test_db`.`test_table_export_toon`;',
+                'columns' => ['id', 'name', 'datetimefield', 'textfield', 'intfield'],
+                'metadata' => [
+                    FieldHelper::fromArray(['type' => MYSQLI_TYPE_DECIMAL]),
+                    FieldHelper::fromArray(['type' => MYSQLI_TYPE_STRING]),
+                    FieldHelper::fromArray(['type' => MYSQLI_TYPE_DATETIME]),
+                    FieldHelper::fromArray(['type' => MYSQLI_TYPE_STRING]),
+                    FieldHelper::fromArray(['type' => MYSQLI_TYPE_INT24]),
+                ],
+                'result' => [
+                    ['1', 'abcd', '2011-01-20 02:00:02',31,null],
+                    ['2', 'foo', '2010-01-20 02:00:02',null,null],
+                    ['3', 'Abcd', '2012-01-20 02:00:02',null,8],
                 ],
             ],
             [
