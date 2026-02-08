@@ -2091,6 +2091,10 @@
     </MixedArrayAssignment>
   </file>
   <file src="libraries/classes/Controllers/HomeController.php">
+    <InvalidArrayOffset occurrences="2">
+      <code>$cfg['URLQueryEncryption']</code>
+      <code>$cfg['URLQueryEncryptionSecretKey']</code>
+    </InvalidArrayOffset>
     <MixedArgument occurrences="3">
       <code>$message</code>
       <code>$this-&gt;config-&gt;get('ShowGitRevision') ?? true</code>
