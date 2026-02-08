@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-01 00:41+0000\n"
+"POT-Creation-Date: 2026-02-08 00:45+0000\n"
 "PO-Revision-Date: 2022-02-15 16:21+0000\n"
 "Last-Translator: Maurício Meneghini Fauth <mauricio@fauth.dev>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -15,92 +15,93 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.11-dev\n"
 
-#: resources/templates/base.twig:36 resources/templates/login/header.twig:13
+#: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
 msgstr "Javascript debe estar activo a partir de aquí!"
 
-#: resources/templates/base.twig:46
+#: resources/templates/base.twig:50
 #, fuzzy
 #| msgid "Add user"
 msgid "Open user account menu"
 msgstr "Engadir un usuario"
 
-#: resources/templates/base.twig:57 resources/templates/navigation/main.twig:35
+#: resources/templates/base.twig:61 resources/templates/navigation/main.twig:35
 #: resources/templates/navigation/main.twig:36
 msgid "phpMyAdmin documentation"
 msgstr "Documentación do phpMyAdmin"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 #, fuzzy
 #| msgid "Documentation"
 msgid "MariaDB documentation"
 msgstr "Documentación"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 #, fuzzy
 #| msgid "Documentation"
 msgid "MySQL documentation"
 msgstr "Documentación"
 
-#: resources/templates/base.twig:73
+#: resources/templates/base.twig:77
 #, fuzzy
 #| msgid "Appearance settings"
 msgid "Appearance:"
 msgstr "Configuración da aparencia"
 
-#: resources/templates/base.twig:76 resources/templates/home/index.twig:150
+#: resources/templates/base.twig:80 resources/templates/home/index.twig:150
 msgid "Color mode for the theme"
 msgstr ""
 
-#: resources/templates/base.twig:80 resources/templates/home/index.twig:154
+#: resources/templates/base.twig:84 resources/templates/home/index.twig:154
 #, fuzzy
 #| msgid "Right"
 msgctxt "Light color mode of the theme"
 msgid "Light"
 msgstr "Dereita"
 
-#: resources/templates/base.twig:82 resources/templates/home/index.twig:156
+#: resources/templates/base.twig:86 resources/templates/home/index.twig:156
 msgctxt "Dark color mode of the theme"
 msgid "Dark"
 msgstr ""
 
-#: resources/templates/base.twig:95
+#: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
 #: src/Util.php:1366
 msgid "Settings"
 msgstr "Configuración"
 
-#: resources/templates/base.twig:99 resources/templates/navigation/main.twig:30
+#: resources/templates/base.twig:103
+#: resources/templates/navigation/main.twig:30
 #: resources/templates/navigation/main.twig:31
 msgid "Log out"
 msgstr "Saír"
 
-#: resources/templates/base.twig:108
+#: resources/templates/base.twig:112
 #: src/Controllers/JavaScriptMessagesController.php:315
 msgid "Page-related settings"
 msgstr "Configuración relacionada coas páxinas"
 
-#: resources/templates/base.twig:110
+#: resources/templates/base.twig:114
 msgid "Click on the bar to scroll to top of page"
 msgstr "Prema a barra para desprazarse até a parte superior da páxina"
 
-#: resources/templates/base.twig:132 resources/templates/base.twig:134
-#: resources/templates/base.twig:136
+#: resources/templates/base.twig:136 resources/templates/base.twig:138
+#: resources/templates/base.twig:140
 msgid "Open new phpMyAdmin window"
 msgstr "Abrir unha xanela nova co phpMyAdmin"
 
-#: resources/templates/base.twig:151 resources/templates/home/index.twig:18
+#: resources/templates/base.twig:155 resources/templates/home/index.twig:18
 #: resources/templates/login/form.twig:5
 msgid "phpMyAdmin Demo Server"
 msgstr "Servidor de demostración do phpMyAdmin"
 
-#: resources/templates/base.twig:159
+#: resources/templates/base.twig:163
 #, php-format
 msgid "Currently running Git revision %1$s from the %2$s branch."
 msgstr "Estase a executar a versión %1$s de Git da galla %2$s."
 
-#: resources/templates/base.twig:161
+#: resources/templates/base.twig:165
 msgid "Git information missing!"
 msgstr "Falta información sobre Git!"
 
@@ -163,7 +164,7 @@ msgstr "Único"
 #: resources/templates/table/structure/display_table_stats.twig:22
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:27
 #: src/Controllers/Table/StructureController.php:219
-#: src/Navigation/Nodes/NodeIndex.php:26
+#: src/Navigation/Nodes/NodeIndex.php:27
 msgid "Index"
 msgstr "Índice"
 
@@ -496,7 +497,7 @@ msgstr "Escoller unha chave externa"
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:9
 #: resources/templates/table/zoom_search/index.twig:36
 #: resources/templates/table/zoom_search/result_form.twig:33
-#: src/Navigation/Nodes/NodeColumn.php:32
+#: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
 #: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
@@ -634,10 +635,10 @@ msgstr "Usuarios"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
-#: src/Navigation/Nodes/NodeColumn.php:37
+#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1062 src/Util.php:1375
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1062 src/Util.php:1375
 #: src/Util.php:1392
 msgid "Structure"
 msgstr "Estrutura"
@@ -1147,7 +1148,7 @@ msgstr "Historial"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Import/Import.php:1157 src/Import/Import.php:1215
 #: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
@@ -1156,7 +1157,8 @@ msgstr "Historial"
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
 #: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56 src/Plugins/Export/ExportXml.php:68
+#: src/Plugins/Export/ExportTexytext.php:56
+#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
 #: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:79
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
@@ -1523,8 +1525,8 @@ msgstr "Liga a"
 #: resources/templates/table/structure/display_structure.twig:458
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:1
 #: src/Controllers/Server/DatabasesController.php:261
-#: src/Navigation/Nodes/NodeIndexContainer.php:23
-#: src/Navigation/Nodes/NodeIndexContainer.php:25
+#: src/Navigation/Nodes/NodeIndexContainer.php:24
+#: src/Navigation/Nodes/NodeIndexContainer.php:26
 msgid "Indexes"
 msgstr "Índices"
 
@@ -1953,8 +1955,8 @@ msgid "Definer"
 msgstr "Definidor"
 
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
-#: src/Navigation/Nodes/NodeEventContainer.php:22
-#: src/Navigation/Nodes/NodeEventContainer.php:24
+#: src/Navigation/Nodes/NodeEventContainer.php:23
+#: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1384
 msgid "Events"
@@ -2143,8 +2145,8 @@ msgstr "Táboas:"
 #: resources/templates/database/structure/show_create.twig:6
 #: src/Config/Descriptions.php:743
 #: src/Controllers/Server/DatabasesController.php:258
-#: src/Navigation/Nodes/NodeTableContainer.php:22
-#: src/Navigation/Nodes/NodeTableContainer.php:24
+#: src/Navigation/Nodes/NodeTableContainer.php:23
+#: src/Navigation/Nodes/NodeTableContainer.php:25
 #: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "Táboas"
@@ -2615,7 +2617,7 @@ msgstr "Parámetros da rutina"
 #: resources/templates/database/routines/execute_form.twig:19
 #: resources/templates/table/search/index.twig:36
 #: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:257
-#: src/Navigation/Nodes/NodeFunction.php:26
+#: src/Navigation/Nodes/NodeFunction.php:27
 msgid "Function"
 msgstr "Función"
 
@@ -2638,7 +2640,7 @@ msgstr "Rutinas"
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1064
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1064
 #: src/Util.php:1377 src/Util.php:1394
 msgid "Search"
 msgstr "Buscar"
@@ -2767,7 +2769,7 @@ msgstr[1] "%1$s coincidencias en <strong>%2$s</strong>"
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:244 src/Util.php:1066 src/Util.php:1391
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1066 src/Util.php:1391
 msgid "Browse"
 msgstr "Visualizar"
 
@@ -3027,8 +3029,8 @@ msgid "Table"
 msgstr "Táboa"
 
 #: resources/templates/database/structure/show_create.twig:30
-#: src/Navigation/Nodes/NodeViewContainer.php:22
-#: src/Navigation/Nodes/NodeViewContainer.php:24
+#: src/Navigation/Nodes/NodeViewContainer.php:23
+#: src/Navigation/Nodes/NodeViewContainer.php:25
 #: src/Plugins/Export/ExportXml.php:117
 msgid "Views"
 msgstr "Vistas"
@@ -3039,7 +3041,7 @@ msgstr "Vistas"
 #: src/Controllers/Operations/TableController.php:118
 #: src/Controllers/Operations/TableController.php:312
 #: src/Controllers/Table/StructureController.php:149
-#: src/Navigation/Nodes/NodeView.php:24
+#: src/Navigation/Nodes/NodeView.php:25
 msgid "View"
 msgstr "Vista"
 
@@ -3066,7 +3068,7 @@ msgstr "Duplicado"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1065 src/Util.php:1395
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1065 src/Util.php:1395
 msgid "Insert"
 msgstr "Inserir"
 
@@ -3766,7 +3768,7 @@ msgstr "Configuración xeral"
 #: resources/templates/modals/change_password.twig:5
 #: resources/templates/server/privileges/change_password.twig:10
 #: resources/templates/server/privileges/change_password.twig:11
-#: src/Controllers/UserPasswordController.php:81
+#: src/Controllers/UserPasswordController.php:79
 msgid "Change password"
 msgstr "Trocar o contrasinal"
 
@@ -7117,8 +7119,8 @@ msgid "Bind parameters"
 msgstr "Os parámetros son incorrectos!"
 
 #: resources/templates/sql/query.twig:63
-#: src/Navigation/Nodes/NodeColumnContainer.php:23
-#: src/Navigation/Nodes/NodeColumnContainer.php:25
+#: src/Navigation/Nodes/NodeColumnContainer.php:24
+#: src/Navigation/Nodes/NodeColumnContainer.php:26
 msgid "Columns"
 msgstr "Columnas"
 
@@ -8166,7 +8168,7 @@ msgstr "Tempo"
 #: resources/templates/triggers/editor_form.twig:52
 #: resources/templates/triggers/list.twig:52
 #: src/Controllers/JavaScriptMessagesController.php:365
-#: src/Navigation/Nodes/NodeEvent.php:26
+#: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
 #: src/Plugins/Export/ExportTexytext.php:367
@@ -8181,8 +8183,8 @@ msgid "Export of trigger %s"
 msgstr "Exportar o disparador %s"
 
 #: resources/templates/triggers/list.twig:3 src/Menu.php:295 src/Menu.php:388
-#: src/Navigation/Nodes/NodeTriggerContainer.php:23
-#: src/Navigation/Nodes/NodeTriggerContainer.php:25
+#: src/Navigation/Nodes/NodeTriggerContainer.php:24
+#: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
@@ -10022,7 +10024,7 @@ msgstr "Nome do ficheiro"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1063
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1063
 #: src/Util.php:1361 src/Util.php:1376 src/Util.php:1393
 msgid "SQL"
 msgstr "SQL"
@@ -12964,12 +12966,12 @@ msgstr ""
 "Non é posíbel gardar a configuración; o formulario de configuración enviado "
 "contén erros!"
 
-#: src/Config.php:250
+#: src/Config.php:246
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
 msgstr "O ficheiro de configuración existente (%s) non e lexíbel."
 
-#: src/Config.php:283
+#: src/Config.php:279
 msgid "Wrong permissions on configuration file, should not be world writable!"
 msgstr ""
 "Os permisos do ficheiro de configuración son incorrectos; non debería poder "
@@ -14565,7 +14567,7 @@ msgid "No routine is exportable. Required privileges may be lacking."
 msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:364
-#: src/Navigation/Nodes/NodeTrigger.php:26
+#: src/Navigation/Nodes/NodeTrigger.php:27
 #, fuzzy
 #| msgid "Triggers"
 msgid "Trigger"
@@ -16971,7 +16973,7 @@ msgid ""
 "%2$s."
 msgstr "Non se atopou ningún disparador co nome %1$s na base de datos %2$s"
 
-#: src/Controllers/UserPasswordController.php:48
+#: src/Controllers/UserPasswordController.php:46
 msgid "You don't have sufficient privileges to be here right now!"
 msgstr "Non ten dereitos suficientes para estar aquí agora!"
 
@@ -17866,42 +17868,42 @@ msgstr "Non introduza máis de {0} caracteres"
 msgid "The trigger name cannot end with a space character."
 msgstr "As palabras divídense cun carácter de espazo (« »)."
 
-#: src/Import/Import.php:944
+#: src/Import/Import.php:943
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
 msgstr ""
 
-#: src/Import/Import.php:1161
+#: src/Import/Import.php:1160
 #, php-format
 msgid "Go to table: %s"
 msgstr "Ir á táboa: %s"
 
-#: src/Import/Import.php:1169
+#: src/Import/Import.php:1168
 #, php-format
 msgid "Structure of %s"
 msgstr "Estrutura de %s"
 
-#: src/Import/Import.php:1176 src/Import/Import.php:1225
+#: src/Import/Import.php:1175 src/Import/Import.php:1224
 #, php-format
 msgid "Edit settings for %s"
 msgstr "Editar a configuración de %s"
 
-#: src/Import/Import.php:1187
+#: src/Import/Import.php:1186
 #, php-format
 msgid "Go to view: %s"
 msgstr "Ir á vista: %s"
 
-#: src/Import/Import.php:1208
+#: src/Import/Import.php:1207
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr "As estruturas seguintes foron creadas ou alteradas. Aquí pode:"
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1209
 msgid "View a structure's contents by clicking on its name."
 msgstr "Ver o contido dunha estrutura premendo no seu nome."
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1210
 #, fuzzy
 #| msgid ""
 #| "Change any of its settings by clicking the corresponding \"Options\" link"
@@ -17910,13 +17912,13 @@ msgid ""
 msgstr ""
 "Mudar calquera destas opcións premendo a ligazón «Opcións» correspondente"
 
-#: src/Import/Import.php:1212
+#: src/Import/Import.php:1211
 #, fuzzy
 #| msgid "Edit structure by following the \"Structure\" link"
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "Editar a estrutura seguindo a ligazón «Estrutura»"
 
-#: src/Import/Import.php:1219
+#: src/Import/Import.php:1218
 #, php-format
 msgid "Go to database: %s"
 msgstr "Ir á base de datos: %s"
@@ -18053,7 +18055,7 @@ msgstr[1] "atopáronse outros %s resultados"
 msgid "Collapse all"
 msgstr ""
 
-#: src/Navigation/Nodes/NodeColumnContainer.php:33
+#: src/Navigation/Nodes/NodeColumnContainer.php:34
 msgctxt "Create new column"
 msgid "New"
 msgstr "Nova"
@@ -18066,65 +18068,65 @@ msgctxt "Create new database"
 msgid "New"
 msgstr "Nova"
 
-#: src/Navigation/Nodes/NodeDatabase.php:195
+#: src/Navigation/Nodes/NodeDatabase.php:196
 #, fuzzy
 #| msgid "Show hint"
 msgid "Show hidden items"
 msgstr "Mostrar consellos"
 
-#: src/Navigation/Nodes/NodeEventContainer.php:32
+#: src/Navigation/Nodes/NodeEventContainer.php:33
 msgctxt "Create new event"
 msgid "New"
 msgstr "Novo"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:22
-#: src/Navigation/Nodes/NodeFunctionContainer.php:26
+#: src/Navigation/Nodes/NodeFunctionContainer.php:23
+#: src/Navigation/Nodes/NodeFunctionContainer.php:27
 #: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr "Funcións"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:37
+#: src/Navigation/Nodes/NodeFunctionContainer.php:38
 msgctxt "Create new function"
 msgid "New"
 msgstr "Nova"
 
-#: src/Navigation/Nodes/NodeIndexContainer.php:33
+#: src/Navigation/Nodes/NodeIndexContainer.php:34
 msgctxt "Create new index"
 msgid "New"
 msgstr "Novo"
 
-#: src/Navigation/Nodes/Node.php:563
+#: src/Navigation/Nodes/Node.php:562
 msgid "Expand/Collapse"
 msgstr ""
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:22
-#: src/Navigation/Nodes/NodeProcedureContainer.php:26
+#: src/Navigation/Nodes/NodeProcedureContainer.php:23
+#: src/Navigation/Nodes/NodeProcedureContainer.php:27
 #: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "Procedementos"
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:37
+#: src/Navigation/Nodes/NodeProcedureContainer.php:38
 msgctxt "Create new procedure"
 msgid "New"
 msgstr "Novo"
 
-#: src/Navigation/Nodes/NodeProcedure.php:26
+#: src/Navigation/Nodes/NodeProcedure.php:27
 #, fuzzy
 #| msgid "Procedures"
 msgid "Procedure"
 msgstr "Procedementos"
 
-#: src/Navigation/Nodes/NodeTableContainer.php:33
+#: src/Navigation/Nodes/NodeTableContainer.php:34
 msgctxt "Create new table"
 msgid "New"
 msgstr "Nova"
 
-#: src/Navigation/Nodes/NodeTriggerContainer.php:33
+#: src/Navigation/Nodes/NodeTriggerContainer.php:34
 msgctxt "Create new trigger"
 msgid "New"
 msgstr "Novo"
 
-#: src/Navigation/Nodes/NodeViewContainer.php:33
+#: src/Navigation/Nodes/NodeViewContainer.php:34
 msgctxt "Create new view"
 msgid "New"
 msgstr "Nova"
@@ -18497,7 +18499,7 @@ msgstr ""
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 
-#: src/Plugins/Export/ExportCsv.php:68
+#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "Columnas separadas por:"
@@ -18951,6 +18953,12 @@ msgstr ""
 "Sistema de bases de datos ou servidor de MySQL máis vello co que maximizar a "
 "compatibilidade da saída:"
 
+#: src/Plugins/Export/ExportToon.php:68
+#, fuzzy
+#| msgid "Orientation"
+msgid "Indentation:"
+msgstr "Orientación"
+
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
 msgstr "Opcións de creación de obxectos (recoméndanse todas)"
@@ -19101,7 +19109,7 @@ msgstr "Non empregar <code>AUTO_INCREMENT</code> cos valores cero"
 msgid "XML"
 msgstr "XML"
 
-#: src/Plugins.php:590
+#: src/Plugins.php:600
 msgid "This format has no options"
 msgstr "Este formato non ten opcións"
 
