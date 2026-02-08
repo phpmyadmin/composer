@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-01 00:41+0000\n"
+"POT-Creation-Date: 2026-02-08 00:45+0000\n"
 "PO-Revision-Date: 2026-01-31 17:01+0000\n"
 "Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -15,82 +15,83 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.16-dev\n"
 
-#: resources/templates/base.twig:36 resources/templates/login/header.twig:13
+#: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
 msgstr "จำเป็นต้องเปิดใช้งาน JavaScript เพื่อใช้งานในส่วนถัดไป"
 
-#: resources/templates/base.twig:46
+#: resources/templates/base.twig:50
 msgid "Open user account menu"
 msgstr "เปิดเมนูบัญชีผู้ใช้"
 
-#: resources/templates/base.twig:57 resources/templates/navigation/main.twig:35
+#: resources/templates/base.twig:61 resources/templates/navigation/main.twig:35
 #: resources/templates/navigation/main.twig:36
 msgid "phpMyAdmin documentation"
 msgstr "เอกสารประกอบของ phpMyAdmin"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 msgid "MariaDB documentation"
 msgstr "เอกสารประกอบ MariaDB"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 msgid "MySQL documentation"
 msgstr "เอกสารประกอบ MySQL"
 
-#: resources/templates/base.twig:73
+#: resources/templates/base.twig:77
 msgid "Appearance:"
 msgstr "การตั้งค่าลักษณะ"
 
-#: resources/templates/base.twig:76 resources/templates/home/index.twig:150
+#: resources/templates/base.twig:80 resources/templates/home/index.twig:150
 msgid "Color mode for the theme"
 msgstr "โหมดสีสำหรับธีม"
 
-#: resources/templates/base.twig:80 resources/templates/home/index.twig:154
+#: resources/templates/base.twig:84 resources/templates/home/index.twig:154
 msgctxt "Light color mode of the theme"
 msgid "Light"
 msgstr "สว่าง"
 
-#: resources/templates/base.twig:82 resources/templates/home/index.twig:156
+#: resources/templates/base.twig:86 resources/templates/home/index.twig:156
 msgctxt "Dark color mode of the theme"
 msgid "Dark"
 msgstr "มืด"
 
-#: resources/templates/base.twig:95
+#: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
 #: src/Util.php:1366
 msgid "Settings"
 msgstr "การตั้งค่า"
 
-#: resources/templates/base.twig:99 resources/templates/navigation/main.twig:30
+#: resources/templates/base.twig:103
+#: resources/templates/navigation/main.twig:30
 #: resources/templates/navigation/main.twig:31
 msgid "Log out"
 msgstr "ออกจากระบบ"
 
-#: resources/templates/base.twig:108
+#: resources/templates/base.twig:112
 #: src/Controllers/JavaScriptMessagesController.php:315
 msgid "Page-related settings"
 msgstr "การตั้งค่าหน้าที่เกี่ยวข้อง"
 
-#: resources/templates/base.twig:110
+#: resources/templates/base.twig:114
 msgid "Click on the bar to scroll to top of page"
 msgstr "คลิกที่แถบเพื่อเลื่อนไปยังบนสุดของหน้า"
 
-#: resources/templates/base.twig:132 resources/templates/base.twig:134
-#: resources/templates/base.twig:136
+#: resources/templates/base.twig:136 resources/templates/base.twig:138
+#: resources/templates/base.twig:140
 msgid "Open new phpMyAdmin window"
 msgstr "เปิดหน้าต่าง phpMyAdmin ใหม่"
 
-#: resources/templates/base.twig:151 resources/templates/home/index.twig:18
+#: resources/templates/base.twig:155 resources/templates/home/index.twig:18
 #: resources/templates/login/form.twig:5
 msgid "phpMyAdmin Demo Server"
 msgstr "เซิร์ฟเวอร์ phpMyAdmin ทดลอง"
 
-#: resources/templates/base.twig:159
+#: resources/templates/base.twig:163
 #, php-format
 msgid "Currently running Git revision %1$s from the %2$s branch."
 msgstr "ขณะนี้กำลังใช้งาน Git revision %1$s จาก branch %2$s"
 
-#: resources/templates/base.twig:161
+#: resources/templates/base.twig:165
 msgid "Git information missing!"
 msgstr "ข้อมูล Git หายไป!"
 
@@ -151,7 +152,7 @@ msgstr "เอกลักษณ์"
 #: resources/templates/table/structure/display_table_stats.twig:22
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:27
 #: src/Controllers/Table/StructureController.php:219
-#: src/Navigation/Nodes/NodeIndex.php:26
+#: src/Navigation/Nodes/NodeIndex.php:27
 msgid "Index"
 msgstr "ดัชนี"
 
@@ -471,7 +472,7 @@ msgstr "เลือกคีย์นอก"
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:9
 #: resources/templates/table/zoom_search/index.twig:36
 #: resources/templates/table/zoom_search/result_form.twig:33
-#: src/Navigation/Nodes/NodeColumn.php:32
+#: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
 #: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
@@ -577,10 +578,10 @@ msgstr "กลุ่มโหนด"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
-#: src/Navigation/Nodes/NodeColumn.php:37
+#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1062 src/Util.php:1375
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1062 src/Util.php:1375
 #: src/Util.php:1392
 msgid "Structure"
 msgstr "โครงสร้าง"
@@ -1071,7 +1072,7 @@ msgstr "ประวัติ"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Import/Import.php:1157 src/Import/Import.php:1215
 #: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
@@ -1080,7 +1081,8 @@ msgstr "ประวัติ"
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
 #: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56 src/Plugins/Export/ExportXml.php:68
+#: src/Plugins/Export/ExportTexytext.php:56
+#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
 #: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:79
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
@@ -1426,8 +1428,8 @@ msgstr "เชื่อมไปยัง"
 #: resources/templates/table/structure/display_structure.twig:458
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:1
 #: src/Controllers/Server/DatabasesController.php:261
-#: src/Navigation/Nodes/NodeIndexContainer.php:23
-#: src/Navigation/Nodes/NodeIndexContainer.php:25
+#: src/Navigation/Nodes/NodeIndexContainer.php:24
+#: src/Navigation/Nodes/NodeIndexContainer.php:26
 msgid "Indexes"
 msgstr "ดัชนี"
 
@@ -1817,8 +1819,8 @@ msgid "Definer"
 msgstr "ตัวกำหนด"
 
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
-#: src/Navigation/Nodes/NodeEventContainer.php:22
-#: src/Navigation/Nodes/NodeEventContainer.php:24
+#: src/Navigation/Nodes/NodeEventContainer.php:23
+#: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1384
 msgid "Events"
@@ -1995,8 +1997,8 @@ msgstr "ตาราง:"
 #: resources/templates/database/structure/show_create.twig:6
 #: src/Config/Descriptions.php:743
 #: src/Controllers/Server/DatabasesController.php:258
-#: src/Navigation/Nodes/NodeTableContainer.php:22
-#: src/Navigation/Nodes/NodeTableContainer.php:24
+#: src/Navigation/Nodes/NodeTableContainer.php:23
+#: src/Navigation/Nodes/NodeTableContainer.php:25
 #: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "ตาราง"
@@ -2423,7 +2425,7 @@ msgstr "พารามิเตอร์รูทีน"
 #: resources/templates/database/routines/execute_form.twig:19
 #: resources/templates/table/search/index.twig:36
 #: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:257
-#: src/Navigation/Nodes/NodeFunction.php:26
+#: src/Navigation/Nodes/NodeFunction.php:27
 msgid "Function"
 msgstr "ฟังก์ชั่น"
 
@@ -2444,7 +2446,7 @@ msgstr "กิจวัตร"
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1064
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1064
 #: src/Util.php:1377 src/Util.php:1394
 msgid "Search"
 msgstr "ค้นหา"
@@ -2558,7 +2560,7 @@ msgstr[0] "%1$s ตรงกับ <strong>%2$s</strong>"
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:244 src/Util.php:1066 src/Util.php:1391
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1066 src/Util.php:1391
 msgid "Browse"
 msgstr "เรียกดู"
 
@@ -2792,8 +2794,8 @@ msgid "Table"
 msgstr "ตาราง"
 
 #: resources/templates/database/structure/show_create.twig:30
-#: src/Navigation/Nodes/NodeViewContainer.php:22
-#: src/Navigation/Nodes/NodeViewContainer.php:24
+#: src/Navigation/Nodes/NodeViewContainer.php:23
+#: src/Navigation/Nodes/NodeViewContainer.php:25
 #: src/Plugins/Export/ExportXml.php:117
 msgid "Views"
 msgstr "มุมมอง"
@@ -2804,7 +2806,7 @@ msgstr "มุมมอง"
 #: src/Controllers/Operations/TableController.php:118
 #: src/Controllers/Operations/TableController.php:312
 #: src/Controllers/Table/StructureController.php:149
-#: src/Navigation/Nodes/NodeView.php:24
+#: src/Navigation/Nodes/NodeView.php:25
 msgid "View"
 msgstr "มุมมอง"
 
@@ -2831,7 +2833,7 @@ msgstr "ทำซ้ำเรียบร้อยแล้ว"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1065 src/Util.php:1395
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1065 src/Util.php:1395
 msgid "Insert"
 msgstr "แทรก"
 
@@ -3472,7 +3474,7 @@ msgstr "การตั้งค่าทั่วไป"
 #: resources/templates/modals/change_password.twig:5
 #: resources/templates/server/privileges/change_password.twig:10
 #: resources/templates/server/privileges/change_password.twig:11
-#: src/Controllers/UserPasswordController.php:81
+#: src/Controllers/UserPasswordController.php:79
 msgid "Change password"
 msgstr "เปลี่ยนรหัสผ่าน"
 
@@ -6395,8 +6397,8 @@ msgid "Bind parameters"
 msgstr "โยงพารามิเตอร์"
 
 #: resources/templates/sql/query.twig:63
-#: src/Navigation/Nodes/NodeColumnContainer.php:23
-#: src/Navigation/Nodes/NodeColumnContainer.php:25
+#: src/Navigation/Nodes/NodeColumnContainer.php:24
+#: src/Navigation/Nodes/NodeColumnContainer.php:26
 msgid "Columns"
 msgstr "คอลัมน์"
 
@@ -7323,7 +7325,7 @@ msgstr "เวลา"
 #: resources/templates/triggers/editor_form.twig:52
 #: resources/templates/triggers/list.twig:52
 #: src/Controllers/JavaScriptMessagesController.php:365
-#: src/Navigation/Nodes/NodeEvent.php:26
+#: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
 #: src/Plugins/Export/ExportTexytext.php:367
@@ -7338,8 +7340,8 @@ msgid "Export of trigger %s"
 msgstr "ส่งออกทริกเกอร์ %s"
 
 #: resources/templates/triggers/list.twig:3 src/Menu.php:295 src/Menu.php:388
-#: src/Navigation/Nodes/NodeTriggerContainer.php:23
-#: src/Navigation/Nodes/NodeTriggerContainer.php:25
+#: src/Navigation/Nodes/NodeTriggerContainer.php:24
+#: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
@@ -8884,7 +8886,7 @@ msgstr "เวียดนาม"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1063
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1063
 #: src/Util.php:1361 src/Util.php:1376 src/Util.php:1393
 msgid "SQL"
 msgstr "SQL"
@@ -11474,12 +11476,12 @@ msgstr "ค่าการแปลงเริ่มต้น"
 msgid "Cannot save settings, submitted configuration form contains errors!"
 msgstr "ไม่สามารถบันทึกการตั้งค่าได้ รูปแบบการกำหนดค่าที่ส่งเข้ามามีข้อผิดพลาด!"
 
-#: src/Config.php:250
+#: src/Config.php:246
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
 msgstr "ไฟล์การกำหนดค่า %s ไม่สามารถอ่านได้"
 
-#: src/Config.php:283
+#: src/Config.php:279
 msgid "Wrong permissions on configuration file, should not be world writable!"
 msgstr "สิทธิ์การเข้าถึงไฟล์การตั้งค่าไม่ถูกต้อง ไฟล์ไม่ควรอนุญาตให้ทั้งระบบเขียนได้!"
 
@@ -12978,7 +12980,7 @@ msgid "No routine is exportable. Required privileges may be lacking."
 msgstr "ไม่สามารถส่งออกขั้นตอนการทำงานใด ๆ ได้ อาจขาดสิทธิ์ที่จำเป็น"
 
 #: src/Controllers/JavaScriptMessagesController.php:364
-#: src/Navigation/Nodes/NodeTrigger.php:26
+#: src/Navigation/Nodes/NodeTrigger.php:27
 msgid "Trigger"
 msgstr "ทริกเกอร์"
 
@@ -15108,7 +15110,7 @@ msgid ""
 "%2$s."
 msgstr "เกิดข้อผิดพลาดในการประมวลผลคำขอ: ไม่พบทริกเกอร์ชื่อ %1$s ในฐานข้อมูล %2$s"
 
-#: src/Controllers/UserPasswordController.php:48
+#: src/Controllers/UserPasswordController.php:46
 msgid "You don't have sufficient privileges to be here right now!"
 msgstr "คุณไม่มีสิทธิ์เพียงพอที่จะอยู่ที่นี่ในตอนนี้!"
 
@@ -15913,7 +15915,7 @@ msgstr "ชื่อทริกเกอร์ไม่สามารถมี
 msgid "The trigger name cannot end with a space character."
 msgstr "ชื่อทริกเกอร์ไม่สามารถลงท้ายด้วยตัวอักษรเว้นวรรค"
 
-#: src/Import/Import.php:944
+#: src/Import/Import.php:943
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
@@ -15921,45 +15923,45 @@ msgstr ""
 "เฉพาะคำสั่ง SQL ประเภท INSERT, UPDATE, DELETE, REPLACE และ SET (โดยไม่มีตัวเลือก "
 "เช่น GLOBAL) ที่มีตารางของระบบธุรกรรมเท่านั้นที่สามารถย้อนกลับได้"
 
-#: src/Import/Import.php:1161
+#: src/Import/Import.php:1160
 #, php-format
 msgid "Go to table: %s"
 msgstr "ไปที่ตาราง: %s"
 
-#: src/Import/Import.php:1169
+#: src/Import/Import.php:1168
 #, php-format
 msgid "Structure of %s"
 msgstr "โครงสร้างของ %s"
 
-#: src/Import/Import.php:1176 src/Import/Import.php:1225
+#: src/Import/Import.php:1175 src/Import/Import.php:1224
 #, php-format
 msgid "Edit settings for %s"
 msgstr "แก้ไขการตั้งค่าสำหรับ %s"
 
-#: src/Import/Import.php:1187
+#: src/Import/Import.php:1186
 #, php-format
 msgid "Go to view: %s"
 msgstr "ไปที่มุมมอง: %s"
 
-#: src/Import/Import.php:1208
+#: src/Import/Import.php:1207
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr "โครงสร้างต่อไปนี้ได้รับการสร้างขึ้นหรือดัดแปลงแล้ว คุณสามารถ:"
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1209
 msgid "View a structure's contents by clicking on its name."
 msgstr "ดูรายละเอียดของโครงสร้างได้โดยคลิกที่ชื่อของโครงสร้างนั้น"
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1210
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr "คุณสามารถเปลี่ยนแปลงการตั้งค่าใด ๆ ได้โดยคลิกที่ลิงก์ \"ตัวเลือก\" ที่เกี่ยวข้อง"
 
-#: src/Import/Import.php:1212
+#: src/Import/Import.php:1211
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "แก้ไขโครงสร้างโดยคลิกที่ลิงก์ \"โครงสร้าง\""
 
-#: src/Import/Import.php:1219
+#: src/Import/Import.php:1218
 #, php-format
 msgid "Go to database: %s"
 msgstr "ไปยังฐานข้อมูล: %s"
@@ -16078,7 +16080,7 @@ msgstr[0] "พบผลลัพธ์ %s"
 msgid "Collapse all"
 msgstr "ย่อทั้งหมด"
 
-#: src/Navigation/Nodes/NodeColumnContainer.php:33
+#: src/Navigation/Nodes/NodeColumnContainer.php:34
 msgctxt "Create new column"
 msgid "New"
 msgstr "ใหม่"
@@ -16088,61 +16090,61 @@ msgctxt "Create new database"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeDatabase.php:195
+#: src/Navigation/Nodes/NodeDatabase.php:196
 msgid "Show hidden items"
 msgstr "แสดงรายการที่ซ่อนไว้"
 
-#: src/Navigation/Nodes/NodeEventContainer.php:32
+#: src/Navigation/Nodes/NodeEventContainer.php:33
 msgctxt "Create new event"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:22
-#: src/Navigation/Nodes/NodeFunctionContainer.php:26
+#: src/Navigation/Nodes/NodeFunctionContainer.php:23
+#: src/Navigation/Nodes/NodeFunctionContainer.php:27
 #: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr "ฟังก์ชั่น"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:37
+#: src/Navigation/Nodes/NodeFunctionContainer.php:38
 msgctxt "Create new function"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeIndexContainer.php:33
+#: src/Navigation/Nodes/NodeIndexContainer.php:34
 msgctxt "Create new index"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/Node.php:563
+#: src/Navigation/Nodes/Node.php:562
 msgid "Expand/Collapse"
 msgstr "ขยาย/ยุบ"
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:22
-#: src/Navigation/Nodes/NodeProcedureContainer.php:26
+#: src/Navigation/Nodes/NodeProcedureContainer.php:23
+#: src/Navigation/Nodes/NodeProcedureContainer.php:27
 #: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "ขั้นตอน"
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:37
+#: src/Navigation/Nodes/NodeProcedureContainer.php:38
 msgctxt "Create new procedure"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeProcedure.php:26
+#: src/Navigation/Nodes/NodeProcedure.php:27
 msgid "Procedure"
 msgstr "ขั้นตอน"
 
-#: src/Navigation/Nodes/NodeTableContainer.php:33
+#: src/Navigation/Nodes/NodeTableContainer.php:34
 msgctxt "Create new table"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeTriggerContainer.php:33
+#: src/Navigation/Nodes/NodeTriggerContainer.php:34
 msgctxt "Create new trigger"
 msgid "New"
 msgstr "ใหม่"
 
-#: src/Navigation/Nodes/NodeViewContainer.php:33
+#: src/Navigation/Nodes/NodeViewContainer.php:34
 msgctxt "Create new view"
 msgid "New"
 msgstr "ใหม่"
@@ -16508,7 +16510,7 @@ msgstr "วิธีการตรวจสอบสิทธิ์ที่ต
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr "คุณได้เปิดใช้งานการตรวจสอบสิทธิ์แบบสองขั้นตอนแล้ว โปรดยืนยันการเข้าสู่ระบบของคุณ"
 
-#: src/Plugins/Export/ExportCsv.php:68
+#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "คอลัมน์ถูกแบ่งด้วย:"
@@ -16920,6 +16922,12 @@ msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr "ระบบฐานข้อมูลหรือเซิร์ฟเวอร์ MySQL รุ่นเก่าเพื่อเพิ่มความเข้ากันได้ของผลลัพธ์ให้สูงสุดกับ:"
 
+#: src/Plugins/Export/ExportToon.php:68
+#, fuzzy
+#| msgid "Orientation"
+msgid "Indentation:"
+msgstr "การวางแนว"
+
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
 msgstr "ตัวเลือกการสร้างวัตถุ (แนะนำให้ใช้ทุกตัวเลือก)"
@@ -17061,7 +17069,7 @@ msgstr "ห้ามใช้ <code>AUTO_INCREMENT</code> สำหรับค�
 msgid "XML"
 msgstr "XML"
 
-#: src/Plugins.php:590
+#: src/Plugins.php:600
 msgid "This format has no options"
 msgstr "รูปแบบนี้ไม่มีตัวเลือก"
 

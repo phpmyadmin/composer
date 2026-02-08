@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-01 00:41+0000\n"
+"POT-Creation-Date: 2026-02-08 00:45+0000\n"
 "PO-Revision-Date: 2025-12-29 11:00+0000\n"
 "Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -18,82 +18,83 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.15.1\n"
 
-#: resources/templates/base.twig:36 resources/templates/login/header.twig:13
+#: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
 msgstr "சாவாச்கிரிப்ட் இந்த புள்ளியைத் தாண்டி இயக்கப்பட வேண்டும்!"
 
-#: resources/templates/base.twig:46
+#: resources/templates/base.twig:50
 msgid "Open user account menu"
 msgstr "பயனர் கணக்கு மெனுவைத் திறக்கவும்"
 
-#: resources/templates/base.twig:57 resources/templates/navigation/main.twig:35
+#: resources/templates/base.twig:61 resources/templates/navigation/main.twig:35
 #: resources/templates/navigation/main.twig:36
 msgid "phpMyAdmin documentation"
 msgstr "phpMyAdmin ஆவணச்சான்று"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 msgid "MariaDB documentation"
 msgstr "மரியாடிபி ஆவணம்"
 
-#: resources/templates/base.twig:62
+#: resources/templates/base.twig:66
 msgid "MySQL documentation"
 msgstr "MySQL ஆவணங்கள்"
 
-#: resources/templates/base.twig:73
+#: resources/templates/base.twig:77
 msgid "Appearance:"
 msgstr "தோற்றம்:"
 
-#: resources/templates/base.twig:76 resources/templates/home/index.twig:150
+#: resources/templates/base.twig:80 resources/templates/home/index.twig:150
 msgid "Color mode for the theme"
 msgstr "கருப்பொருளுக்கான வண்ண பயன்முறை"
 
-#: resources/templates/base.twig:80 resources/templates/home/index.twig:154
+#: resources/templates/base.twig:84 resources/templates/home/index.twig:154
 msgctxt "Light color mode of the theme"
 msgid "Light"
 msgstr "ஒளி"
 
-#: resources/templates/base.twig:82 resources/templates/home/index.twig:156
+#: resources/templates/base.twig:86 resources/templates/home/index.twig:156
 msgctxt "Dark color mode of the theme"
 msgid "Dark"
 msgstr "இருண்ட"
 
-#: resources/templates/base.twig:95
+#: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
 #: src/Util.php:1366
 msgid "Settings"
 msgstr "அமைவுகள்"
 
-#: resources/templates/base.twig:99 resources/templates/navigation/main.twig:30
+#: resources/templates/base.twig:103
+#: resources/templates/navigation/main.twig:30
 #: resources/templates/navigation/main.twig:31
 msgid "Log out"
 msgstr "செல்பதிகை"
 
-#: resources/templates/base.twig:108
+#: resources/templates/base.twig:112
 #: src/Controllers/JavaScriptMessagesController.php:315
 msgid "Page-related settings"
 msgstr "பக்கம் தொடர்பான அமைப்புகள்"
 
-#: resources/templates/base.twig:110
+#: resources/templates/base.twig:114
 msgid "Click on the bar to scroll to top of page"
 msgstr "பக்கத்தின் மேல் உருட்ட பட்டியில் சொடுக்கு செய்க"
 
-#: resources/templates/base.twig:132 resources/templates/base.twig:134
-#: resources/templates/base.twig:136
+#: resources/templates/base.twig:136 resources/templates/base.twig:138
+#: resources/templates/base.twig:140
 msgid "Open new phpMyAdmin window"
 msgstr "புதிய Phpmyadmin சாளரத்தைத் திறக்கவும்"
 
-#: resources/templates/base.twig:151 resources/templates/home/index.twig:18
+#: resources/templates/base.twig:155 resources/templates/home/index.twig:18
 #: resources/templates/login/form.twig:5
 msgid "phpMyAdmin Demo Server"
 msgstr "PHPMyAdmin செயல்விளக்க சேவையகம்"
 
-#: resources/templates/base.twig:159
+#: resources/templates/base.twig:163
 #, php-format
 msgid "Currently running Git revision %1$s from the %2$s branch."
 msgstr "தற்போது Git %2$s கிளையிலிருந்து %1$s திருத்தபதிப்பு இயங்குகிறது."
 
-#: resources/templates/base.twig:161
+#: resources/templates/base.twig:165
 msgid "Git information missing!"
 msgstr "Git தகவல் காணவில்லை!"
 
@@ -156,7 +157,7 @@ msgstr "தனித்தன்மை"
 #: resources/templates/table/structure/display_table_stats.twig:22
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:27
 #: src/Controllers/Table/StructureController.php:219
-#: src/Navigation/Nodes/NodeIndex.php:26
+#: src/Navigation/Nodes/NodeIndex.php:27
 msgid "Index"
 msgstr "சுட்டுதொகுப்புக்குறி"
 
@@ -476,7 +477,7 @@ msgstr "ஒரு வெளிநாட்டு விசை."
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:9
 #: resources/templates/table/zoom_search/index.twig:36
 #: resources/templates/table/zoom_search/result_form.twig:33
-#: src/Navigation/Nodes/NodeColumn.php:32
+#: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
 #: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
@@ -582,10 +583,10 @@ msgstr "முனை குழு"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
-#: src/Navigation/Nodes/NodeColumn.php:37
+#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1062 src/Util.php:1375
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1062 src/Util.php:1375
 #: src/Util.php:1392
 msgid "Structure"
 msgstr "கட்டமைப்பு"
@@ -1078,7 +1079,7 @@ msgstr "வரலாறு"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Import/Import.php:1157 src/Import/Import.php:1215
 #: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
@@ -1087,7 +1088,8 @@ msgstr "வரலாறு"
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
 #: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56 src/Plugins/Export/ExportXml.php:68
+#: src/Plugins/Export/ExportTexytext.php:56
+#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
 #: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:79
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
@@ -1433,8 +1435,8 @@ msgstr "இணைப்புகள்"
 #: resources/templates/table/structure/display_structure.twig:458
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:1
 #: src/Controllers/Server/DatabasesController.php:261
-#: src/Navigation/Nodes/NodeIndexContainer.php:23
-#: src/Navigation/Nodes/NodeIndexContainer.php:25
+#: src/Navigation/Nodes/NodeIndexContainer.php:24
+#: src/Navigation/Nodes/NodeIndexContainer.php:26
 msgid "Indexes"
 msgstr "சுட்டுகள்"
 
@@ -1824,8 +1826,8 @@ msgid "Definer"
 msgstr "வரையறுக்கவும்"
 
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
-#: src/Navigation/Nodes/NodeEventContainer.php:22
-#: src/Navigation/Nodes/NodeEventContainer.php:24
+#: src/Navigation/Nodes/NodeEventContainer.php:23
+#: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1384
 msgid "Events"
@@ -2004,8 +2006,8 @@ msgstr "அட்டவணைகள்:"
 #: resources/templates/database/structure/show_create.twig:6
 #: src/Config/Descriptions.php:743
 #: src/Controllers/Server/DatabasesController.php:258
-#: src/Navigation/Nodes/NodeTableContainer.php:22
-#: src/Navigation/Nodes/NodeTableContainer.php:24
+#: src/Navigation/Nodes/NodeTableContainer.php:23
+#: src/Navigation/Nodes/NodeTableContainer.php:25
 #: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "அட்டவணைகள்"
@@ -2437,7 +2439,7 @@ msgstr "வழக்கமான அளவுருக்கள்"
 #: resources/templates/database/routines/execute_form.twig:19
 #: resources/templates/table/search/index.twig:36
 #: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:257
-#: src/Navigation/Nodes/NodeFunction.php:26
+#: src/Navigation/Nodes/NodeFunction.php:27
 msgid "Function"
 msgstr "செயல்கூறு"
 
@@ -2458,7 +2460,7 @@ msgstr "நடைமுறைகள்"
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1064
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1064
 #: src/Util.php:1377 src/Util.php:1394
 msgid "Search"
 msgstr "தேடு"
@@ -2575,7 +2577,7 @@ msgstr[1] "%1$s அட்டவணையில் பொருந்தியவ
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:244 src/Util.php:1066 src/Util.php:1391
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1066 src/Util.php:1391
 msgid "Browse"
 msgstr "உலாவு"
 
@@ -2813,8 +2815,8 @@ msgid "Table"
 msgstr "அட்டவணை"
 
 #: resources/templates/database/structure/show_create.twig:30
-#: src/Navigation/Nodes/NodeViewContainer.php:22
-#: src/Navigation/Nodes/NodeViewContainer.php:24
+#: src/Navigation/Nodes/NodeViewContainer.php:23
+#: src/Navigation/Nodes/NodeViewContainer.php:25
 #: src/Plugins/Export/ExportXml.php:117
 msgid "Views"
 msgstr "காட்சிகள்"
@@ -2825,7 +2827,7 @@ msgstr "காட்சிகள்"
 #: src/Controllers/Operations/TableController.php:118
 #: src/Controllers/Operations/TableController.php:312
 #: src/Controllers/Table/StructureController.php:149
-#: src/Navigation/Nodes/NodeView.php:24
+#: src/Navigation/Nodes/NodeView.php:25
 msgid "View"
 msgstr "நோக்கு"
 
@@ -2852,7 +2854,7 @@ msgstr "இரட்டையாக்கப்பட்டது"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1065 src/Util.php:1395
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1065 src/Util.php:1395
 msgid "Insert"
 msgstr "செருகு"
 
@@ -3498,7 +3500,7 @@ msgstr "பொதுவான அமைவுகள்"
 #: resources/templates/modals/change_password.twig:5
 #: resources/templates/server/privileges/change_password.twig:10
 #: resources/templates/server/privileges/change_password.twig:11
-#: src/Controllers/UserPasswordController.php:81
+#: src/Controllers/UserPasswordController.php:79
 msgid "Change password"
 msgstr "கடவுச்சொல்லை மாற்றவும்"
 
@@ -6457,8 +6459,8 @@ msgid "Bind parameters"
 msgstr "அளவுருக்களை பிணைக்கவும்"
 
 #: resources/templates/sql/query.twig:63
-#: src/Navigation/Nodes/NodeColumnContainer.php:23
-#: src/Navigation/Nodes/NodeColumnContainer.php:25
+#: src/Navigation/Nodes/NodeColumnContainer.php:24
+#: src/Navigation/Nodes/NodeColumnContainer.php:26
 msgid "Columns"
 msgstr "நெடுவரிசைகள்"
 
@@ -7393,7 +7395,7 @@ msgstr "நேரம்"
 #: resources/templates/triggers/editor_form.twig:52
 #: resources/templates/triggers/list.twig:52
 #: src/Controllers/JavaScriptMessagesController.php:365
-#: src/Navigation/Nodes/NodeEvent.php:26
+#: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
 #: src/Plugins/Export/ExportTexytext.php:367
@@ -7408,8 +7410,8 @@ msgid "Export of trigger %s"
 msgstr "%s செயல்தூண்டியின் தரவேற்றம்"
 
 #: resources/templates/triggers/list.twig:3 src/Menu.php:295 src/Menu.php:388
-#: src/Navigation/Nodes/NodeTriggerContainer.php:23
-#: src/Navigation/Nodes/NodeTriggerContainer.php:25
+#: src/Navigation/Nodes/NodeTriggerContainer.php:24
+#: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
@@ -9031,7 +9033,7 @@ msgstr "வியட்நாமிய"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1063
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1063
 #: src/Util.php:1361 src/Util.php:1376 src/Util.php:1393
 msgid "SQL"
 msgstr "கவிமொ"
@@ -11689,12 +11691,12 @@ msgstr "இயல்புநிலை மாற்றங்கள்"
 msgid "Cannot save settings, submitted configuration form contains errors!"
 msgstr "அமைப்புகளைச் சேமிக்க முடியாது, சமர்ப்பிக்கப்பட்ட உள்ளமைவு படிவத்தில் பிழைகள் உள்ளன!"
 
-#: src/Config.php:250
+#: src/Config.php:246
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
 msgstr "இப்போதுள்ள அமைப்பாக்க கோப்பு (%s) படிக்கமுடியாததாக உள்ளது."
 
-#: src/Config.php:283
+#: src/Config.php:279
 msgid "Wrong permissions on configuration file, should not be world writable!"
 msgstr ""
 "அமைப்பாக்க கோப்பு தவறான அணுகல்இசைவுடன் உள்ளது.அனைவரும் திருத்தக்கூடியதாக இருக்ககூடாது!"
@@ -13247,7 +13249,7 @@ msgstr ""
 "செயல்முறை எதுவும் தரவேற்றம் செய்யப்படவில்லை. தேவைப்படும் உரிமைகள் குறைவாக இருக்கலாம்."
 
 #: src/Controllers/JavaScriptMessagesController.php:364
-#: src/Navigation/Nodes/NodeTrigger.php:26
+#: src/Navigation/Nodes/NodeTrigger.php:27
 msgid "Trigger"
 msgstr "தூண்டுதல்"
 
@@ -15430,7 +15432,7 @@ msgid ""
 msgstr ""
 "செயலாக்க கோரிக்கையில் பிழை: தரவுத்தள %2$s இல் %1$s என்ற பெயருடன் தூண்டுதல் இல்லை."
 
-#: src/Controllers/UserPasswordController.php:48
+#: src/Controllers/UserPasswordController.php:46
 msgid "You don't have sufficient privileges to be here right now!"
 msgstr "இப்போது இங்கே இருக்க உங்களுக்கு போதுமான சலுகைகள் இல்லை!"
 
@@ -16260,7 +16262,7 @@ msgstr "தூண்டுதல் பெயர் %d எழுத்துக�
 msgid "The trigger name cannot end with a space character."
 msgstr "தூண்டுதல் பெயர் விண்வெளி எழுத்துடன் முடிவடைய முடியாது."
 
-#: src/Import/Import.php:944
+#: src/Import/Import.php:943
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
@@ -16269,48 +16271,48 @@ msgstr ""
 "புதுப்பிக்கவும், நீக்கவும், மாற்றவும், அமைக்கவும் (உலகளாவிய விருப்பங்கள் இல்லாமல்) மீண்டும் "
 "உருட்ட முடியும்."
 
-#: src/Import/Import.php:1161
+#: src/Import/Import.php:1160
 #, php-format
 msgid "Go to table: %s"
 msgstr "அட்டவணைக்குச் செல்லுங்கள்: %s"
 
-#: src/Import/Import.php:1169
+#: src/Import/Import.php:1168
 #, php-format
 msgid "Structure of %s"
 msgstr "%s இன் அமைப்பு"
 
-#: src/Import/Import.php:1176 src/Import/Import.php:1225
+#: src/Import/Import.php:1175 src/Import/Import.php:1224
 #, php-format
 msgid "Edit settings for %s"
 msgstr "%s க்கான அமைப்புகளைத் திருத்தவும்"
 
-#: src/Import/Import.php:1187
+#: src/Import/Import.php:1186
 #, php-format
 msgid "Go to view: %s"
 msgstr "பார்வைக்குச் செல்லுங்கள்: %s"
 
-#: src/Import/Import.php:1208
+#: src/Import/Import.php:1207
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr ""
 "பின்வரும் கட்டமைப்புகள் உருவாக்கப்பட்டுள்ளன அல்லது மாற்றப்பட்டுள்ளன. இங்கே நீங்கள் முடியும்:"
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1209
 msgid "View a structure's contents by clicking on its name."
 msgstr "ஒரு கட்டமைப்பின் உள்ளடக்கங்களை அதன் பெயரைக் சொடுக்கு செய்வதன் மூலம் காண்க."
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1210
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr ""
 "தொடர்புடைய \"விருப்பங்கள்\" இணைப்பைக் சொடுக்கு செய்வதன் மூலம் அதன் எந்த அமைப்புகளையும் "
 "மாற்றவும்."
 
-#: src/Import/Import.php:1212
+#: src/Import/Import.php:1211
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "\"கட்டமைப்பு\" இணைப்பைப் பின்பற்றுவதன் மூலம் கட்டமைப்பைத் திருத்தவும்."
 
-#: src/Import/Import.php:1219
+#: src/Import/Import.php:1218
 #, php-format
 msgid "Go to database: %s"
 msgstr "தரவுத்தளம்: %s க்கு செல்க"
@@ -16434,7 +16436,7 @@ msgstr[1] "%s முடிவுகள் காணப்பட்டன"
 msgid "Collapse all"
 msgstr "அனைத்தையும் சரக்கு"
 
-#: src/Navigation/Nodes/NodeColumnContainer.php:33
+#: src/Navigation/Nodes/NodeColumnContainer.php:34
 msgctxt "Create new column"
 msgid "New"
 msgstr "புதியது"
@@ -16444,61 +16446,61 @@ msgctxt "Create new database"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeDatabase.php:195
+#: src/Navigation/Nodes/NodeDatabase.php:196
 msgid "Show hidden items"
 msgstr "மறைக்கப்பட்ட உருப்படிகளை காட்டு"
 
-#: src/Navigation/Nodes/NodeEventContainer.php:32
+#: src/Navigation/Nodes/NodeEventContainer.php:33
 msgctxt "Create new event"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:22
-#: src/Navigation/Nodes/NodeFunctionContainer.php:26
+#: src/Navigation/Nodes/NodeFunctionContainer.php:23
+#: src/Navigation/Nodes/NodeFunctionContainer.php:27
 #: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr "செயல்பாடுகள்"
 
-#: src/Navigation/Nodes/NodeFunctionContainer.php:37
+#: src/Navigation/Nodes/NodeFunctionContainer.php:38
 msgctxt "Create new function"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeIndexContainer.php:33
+#: src/Navigation/Nodes/NodeIndexContainer.php:34
 msgctxt "Create new index"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/Node.php:563
+#: src/Navigation/Nodes/Node.php:562
 msgid "Expand/Collapse"
 msgstr "விரிவாக்கு/சரிவு"
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:22
-#: src/Navigation/Nodes/NodeProcedureContainer.php:26
+#: src/Navigation/Nodes/NodeProcedureContainer.php:23
+#: src/Navigation/Nodes/NodeProcedureContainer.php:27
 #: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "நடைமுறைகள்"
 
-#: src/Navigation/Nodes/NodeProcedureContainer.php:37
+#: src/Navigation/Nodes/NodeProcedureContainer.php:38
 msgctxt "Create new procedure"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeProcedure.php:26
+#: src/Navigation/Nodes/NodeProcedure.php:27
 msgid "Procedure"
 msgstr "செயல்முறை"
 
-#: src/Navigation/Nodes/NodeTableContainer.php:33
+#: src/Navigation/Nodes/NodeTableContainer.php:34
 msgctxt "Create new table"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeTriggerContainer.php:33
+#: src/Navigation/Nodes/NodeTriggerContainer.php:34
 msgctxt "Create new trigger"
 msgid "New"
 msgstr "புதியது"
 
-#: src/Navigation/Nodes/NodeViewContainer.php:33
+#: src/Navigation/Nodes/NodeViewContainer.php:34
 msgctxt "Create new view"
 msgid "New"
 msgstr "புதியது"
@@ -16887,7 +16889,7 @@ msgstr ""
 "நீங்கள் இரண்டு காரணி அங்கீகாரத்தை இயக்கியுள்ளீர்கள், தயவுசெய்து உங்கள் உள்நுழைவை "
 "உறுதிப்படுத்தவும்."
 
-#: src/Plugins/Export/ExportCsv.php:68
+#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "இதனுடன் பிரிக்கப்பட்ட நெடுவரிசைகள்:"
@@ -17314,6 +17316,12 @@ msgstr ""
 "இதனுடன் வெளியீட்டு பொருந்தக்கூடிய தன்மையை அதிகரிக்க தரவுத்தள அமைப்பு அல்லது பழைய MySQL "
 "சேவையகம்:"
 
+#: src/Plugins/Export/ExportToon.php:68
+#, fuzzy
+#| msgid "Orientation"
+msgid "Indentation:"
+msgstr "நோக்குநிலை"
+
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
 msgstr "பொருள் உருவாக்கும் விருப்பங்கள் (அனைத்தும் பரிந்துரைக்கப்படுகின்றன)"
@@ -17459,7 +17467,7 @@ msgstr "சுழிய மதிப்புகளுக்கு <code> Auto_i
 msgid "XML"
 msgstr "நீகுமொ"
 
-#: src/Plugins.php:590
+#: src/Plugins.php:600
 msgid "This format has no options"
 msgstr "இந்த வடிவத்திற்கு விருப்பங்கள் இல்லை"
 
