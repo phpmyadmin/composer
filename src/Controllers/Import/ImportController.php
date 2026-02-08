@@ -155,9 +155,8 @@ final readonly class ImportController implements InvocableController
 
         // If we didn't get any parameters, either user called this directly, or
         // upload limit has been reached, let's assume the second possibility.
-        $getParams = $request->getQueryParams();
         $postParams = $request->getParsedBody();
-        if ($postParams === [] && $getParams === []) {
+        if ($postParams === []) {
             Current::$message = Message::error(
                 __(
                     'You probably tried to upload a file that is too large. Please refer ' .
