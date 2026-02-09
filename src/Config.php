@@ -308,7 +308,7 @@ class Config
     {
         $part = array_shift($parts);
         if ($parts === []) {
-            if ($array[$part] === $value) {
+            if (isset($array[$part]) && $array[$part] === $value) {
                 return false;
             }
 
