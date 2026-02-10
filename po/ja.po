@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2025-10-16 23:57-0300\n"
-"PO-Revision-Date: 2026-02-04 21:01+0000\n"
+"PO-Revision-Date: 2026-02-10 10:09+0000\n"
 "Last-Translator: Sandra Swift <nolamiller1203+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/phpmyadmin/5-2/"
 "ja/>\n"
@@ -12909,18 +12909,15 @@ msgid "A date and time combination, supported range is %1$s to %2$s"
 msgstr "日時 (日付と時刻)、有効範囲は %1$s から %2$s"
 
 #: libraries/classes/Types.php:306
-#, fuzzy
-#| msgid ""
-#| "A timestamp, range is 1970-01-01 00:00:01 UTC to 2038-01-09 03:14:07 UTC, "
-#| "stored as the number of seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgid ""
 "A timestamp, range is 1970-01-01 00:00:01 UTC to 2038-01-19 03:14:07 UTC on "
 "32-bit platforms (MariaDB 11.3 and earlier), and up to 2106-02-07 06:28:15 "
 "UTC on 64-bit platforms (MariaDB 11.5 and later), stored as the number of "
 "seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgstr ""
-"タイムスタンプ、範囲は 1970-01-01 00:00:01 UTC から 2038-01-09 03:14:07 UTC "
-"で、1970-01-01 00:00:00 UTC からの経過秒数を示しています"
+"タイムスタンプ、範囲は 1970-01-01 00:00:01 UTC から MariaDB 11.3以前の32bit環"
+"境では 2038-01-09 03:14:07 UTC 、MariaDB 11.5以降の64bit環境では 2106-02-07 "
+"06:28:15 UTC  で、1970-01-01 00:00:00 UTC からの経過秒数を示しています"
 
 #: libraries/classes/Types.php:314
 #, php-format
