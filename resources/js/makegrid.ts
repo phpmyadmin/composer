@@ -2391,7 +2391,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
 
             function renderCellSelection () {
                 g.renderedSelectedCells.clear();
-                $(g.t).find('.cell-selected').removeClass(selectingClass);
+                $(g.t).find(`.${selectingClass}`).removeClass(selectingClass).removeClass('with-bg-color');
                 if (g.selectedColumns.size === 0) {
                     return;
                 }
@@ -2402,7 +2402,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
                         const columns = rowIndex === -1 ?
                             $(g.t).find('thead tr').eq(0).find('th').eq(cellIndex - colspan) :
                             $(g.t).find('tbody tr').eq(rowIndex).find('td').eq(cellIndex);
-                        columns.addClass(selectingClass);
+                        columns.addClass((g.selectedColumns.size === 1 && g.selectedRows.size === 1) ? selectingClass : `${selectingClass} with-bg-color`);
                     });
                 });
             }
@@ -2456,12 +2456,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
 
             // Keyboard events for cell selection
             $(document).on('keydown', function (e) {
-                // add throttle to avoid multiple events firing too quickly
-                if (keyboardEventTimestamp && (Date.now() - keyboardEventTimestamp) < 100) {
-                    return;
-                }
 
-                keyboardEventTimestamp = Date.now();
 
                 if (document.activeElement && $(document.activeElement).is('input, textarea, select')) {
                     return; // do not interfere with input fields
@@ -2474,9 +2469,16 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
 
                     // Select all cells with header
                     $(g.t).find('tbody > tr, thead > tr').each(function () {
-                        $(this).find('td.data, th:not(.column_action)').addClass(selectingClass);
+                        $(this).find('td.data, th:not(.column_action)').addClass(`${selectingClass} with-bg-color`);
                     });
                 }
+
+                // add throttle to avoid multiple events firing too quickly
+                if (keyboardEventTimestamp && (Date.now() - keyboardEventTimestamp) < 100) {
+                    return;
+                }
+
+                keyboardEventTimestamp = Date.now();
 
                 // arrow + shift to select cells
                 if (e.shiftKey && g.endSelectCell) {
@@ -2586,7 +2588,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
                 }
 
                 if (!e.ctrlKey && !e.metaKey) {
-                    $(g.t).find('.cell-selected').removeClass(selectingClass);
+                    $(g.t).find(`.${selectingClass}`).removeClass(`${selectingClass} with-bg-color`);
                     resetCellSelection();
                     isMultiselect = false;
                 } else {
@@ -2652,7 +2654,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
                     return;
                 }
 
-                if ($(g.t).find('.cell-selected').length > 0) {
+                if ($(g.t).find(`.${selectingClass}`).length > 0) {
                     let selectionText = '';
 
                     const headers: string[] = [];

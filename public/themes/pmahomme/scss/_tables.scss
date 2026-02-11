@@ -32,6 +32,10 @@
 
   .cell-selected  {
     outline: 1px solid #7facd6;
+
+    &.with-bg-color {
+      background-color: #d0e4f7;
+    }
   }
 }
 
