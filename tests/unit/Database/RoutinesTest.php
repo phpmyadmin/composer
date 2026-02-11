@@ -542,4 +542,52 @@ class RoutinesTest extends AbstractTestCase
 
         $dbiDummy->assertAllQueriesConsumed();
     }
+
+    public function testGetDataFromName(): void
+    {
+        Current::$database = 'test_db';
+
+        $dbiDummy = $this->createDbiDummy();
+        // phpcs:disable Generic.Files.LineLength.TooLong
+        $dbiDummy->addResult(
+            "SELECT SPECIFIC_NAME, ROUTINE_TYPE, DTD_IDENTIFIER, ROUTINE_DEFINITION, IS_DETERMINISTIC, SQL_DATA_ACCESS, ROUTINE_COMMENT, SECURITY_TYPE FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA COLLATE utf8_bin='test_db' AND SPECIFIC_NAME='test_function' AND ROUTINE_TYPE='FUNCTION';",
+            [['test_function', 'FUNCTION', 'char(50)', "BEGIN RETURN CONCAT('Hello, ', s, '!'); END", 'YES', 'CONTAINS SQL', 'Comment', 'DEFINER']],
+            ['SPECIFIC_NAME', 'ROUTINE_TYPE', 'DTD_IDENTIFIER', 'ROUTINE_DEFINITION', 'IS_DETERMINISTIC', 'SQL_DATA_ACCESS', 'ROUTINE_COMMENT', 'SECURITY_TYPE'],
+        );
+        $dbiDummy->addResult(
+            'SHOW CREATE FUNCTION `test_db`.`test_function`',
+            [["CREATE DEFINER=`test_user`@`localhost` FUNCTION `test_function`(`s` CHAR(50) CHARSET utf8mb4) RETURNS char(50) CHARSET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci DETERMINISTIC COMMENT 'Comment' BEGIN RETURN CONCAT('Hello, ', s, '!'); END"]],
+            ['Create Function'],
+        );
+        // phpcs:enable
+
+        $routines = new Routines($this->createDatabaseInterface($dbiDummy), new Config());
+        $data = $routines->getDataFromName('test_function', 'FUNCTION');
+        $dbiDummy->assertAllQueriesConsumed();
+
+        self::assertSame([
+            'item_name' => 'test_function',
+            'item_type' => 'FUNCTION',
+            'item_num_params' => 1,
+            'item_param_dir' => [null],
+            'item_param_name' => ['s'],
+            'item_param_type' => ['CHAR'],
+            'item_param_length' => ['50'],
+            'item_param_length_arr' => [['50']],
+            'item_param_opts_num' => ['utf8mb4'],
+            'item_param_opts_text' => ['utf8mb4'],
+            'item_type_toggle' => 'PROCEDURE',
+            'item_returntype' => 'CHAR',
+            'item_returnlength' => '50',
+            'item_returnopts_num' => '',
+            'item_returnopts_text' => 'utf8mb4',
+            'item_definer' => '`test_user`@`localhost`',
+            'item_definition' => "BEGIN RETURN CONCAT('Hello, ', s, '!'); END",
+            'item_isdeterministic' => " checked='checked'",
+            'item_securitytype_definer' => " selected='selected'",
+            'item_securitytype_invoker' => '',
+            'item_sqldataaccess' => 'CONTAINS SQL',
+            'item_comment' => 'Comment',
+        ], $data);
+    }
 }
