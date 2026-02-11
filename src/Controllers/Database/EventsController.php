@@ -62,6 +62,17 @@ final class EventsController implements InvocableController
             if ($request->isAjax()) {
                 if (Current::$message instanceof Message && Current::$message->isSuccess()) {
                     $events = $this->events->getDetails(Current::$database, $_POST['item_name']);
+                    if ($events === []) {
+                        $this->response->setRequestStatus(false);
+                        $this->response->addJSON(
+                            'message',
+                            __('The event was dropped immediately after creation.'),
+                        );
+                        $this->response->addJSON('tableType', 'events');
+
+                        return $this->response->response();
+                    }
+
                     $event = $events[0];
                     $this->response->addJSON(
                         'name',

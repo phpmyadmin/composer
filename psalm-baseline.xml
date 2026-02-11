@@ -3381,13 +3381,10 @@
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$itemParamDir]]></code>
       <code><![CDATA[$itemParamName]]></code>
-      <code><![CDATA[$options]]></code>
-      <code><![CDATA[$options]]></code>
       <code><![CDATA[$retval['item_param_opts_num'][$idx]]]></code>
       <code><![CDATA[$value]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
-      <code><![CDATA[$opt['value']]]></code>
       <code><![CDATA[$opt['value']]]></code>
       <code><![CDATA[$routine['item_param_dir'][$i]]]></code>
       <code><![CDATA[$routine['item_param_dir'][$i]]]></code>
@@ -3431,8 +3428,6 @@
       <code><![CDATA[$itemParamName]]></code>
       <code><![CDATA[$itemParamType]]></code>
       <code><![CDATA[$opt]]></code>
-      <code><![CDATA[$opt]]></code>
-      <code><![CDATA[$options[]]]></code>
       <code><![CDATA[$retval['item_param_opts_num'][$idx][]]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
@@ -3491,11 +3486,9 @@
       <code><![CDATA[$param->type->parameters]]></code>
       <code><![CDATA[$routine['SPECIFIC_NAME']]]></code>
       <code><![CDATA[$routine['SPECIFIC_NAME']]]></code>
-      <code><![CDATA[$stmt->return->parameters]]></code>
     </PossiblyNullArgument>
     <PossiblyNullIterator>
       <code><![CDATA[$param->type->options->options]]></code>
-      <code><![CDATA[$stmt->return->options->options]]></code>
     </PossiblyNullIterator>
     <PossiblyNullOperand>
       <code><![CDATA[$_POST['item_original_type']]]></code>
@@ -3505,13 +3498,9 @@
       <code><![CDATA[$param->type->options]]></code>
       <code><![CDATA[$param->type->options->options]]></code>
       <code><![CDATA[$param->type->parameters]]></code>
-      <code><![CDATA[$stmt->return->name]]></code>
-      <code><![CDATA[$stmt->return->options]]></code>
-      <code><![CDATA[$stmt->return->options->options]]></code>
-      <code><![CDATA[$stmt->return->parameters]]></code>
     </PossiblyNullPropertyFetch>
     <PossiblyNullReference>
-      <code><![CDATA[get]]></code>
+      <code><![CDATA[has]]></code>
     </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_POST['item_original_type']]]></code>
@@ -3633,6 +3622,7 @@
     </PossiblyInvalidOperand>
     <PossiblyNullArgument>
       <code><![CDATA[$_SERVER['SCRIPT_NAME']]]></code>
+      <code><![CDATA[$version['@@sql_mode']]]></code>
     </PossiblyNullArgument>
     <PossiblyNullArrayAccess>
       <code><![CDATA[$resultTarget[]]]></code>
@@ -5005,9 +4995,11 @@
       <code><![CDATA[$params['columns']]]></code>
     </MixedArgument>
     <MixedArrayOffset>
+      <code><![CDATA[$columns['collations'][$key]]]></code>
       <code><![CDATA[$columns['sub_parts'][$key]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
+      <code><![CDATA[$collation]]></code>
       <code><![CDATA[$column]]></code>
       <code><![CDATA[$key]]></code>
       <code><![CDATA[$name]]></code>
@@ -8048,7 +8040,8 @@
       <code><![CDATA[$column->getSubPart()]]></code>
     </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[! $column->getSubPart()]]></code>
+      <code><![CDATA[! $column->getCollation()]]></code>
+      <code><![CDATA[$column->getSubPart()]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Table/Search.php">

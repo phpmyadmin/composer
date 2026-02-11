@@ -99,7 +99,7 @@
                 <option value="">{{ t('Charset') }}</option>
                 <option value=""></option>
                 {% for charset in charsets %}
-                  <option value="{{ charset.getName() }}" title="{{ charset.getDescription() }}"{{ routine.item_returnopts_text == charset.getName() ? ' selected' }}>{{ charset.getName() }}</option>
+                  <option value="{{ charset.getName() }}" title="{{ charset.getDescription() }}"{{ routine.item_returnopts_text|lower == charset.getName() ? ' selected' }}>{{ charset.getName() }}</option>
                 {% endfor %}
               </select>
             </div>

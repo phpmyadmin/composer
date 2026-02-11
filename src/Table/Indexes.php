@@ -98,11 +98,20 @@ final class Indexes
         $indexFields = [];
         foreach ($index->getColumns() as $key => $column) {
             $indexFields[$key] = Util::backquote($column->getName());
-            if (! $column->getSubPart()) {
+            if ($column->getSubPart()) {
+                $indexFields[$key] .= '(' . $column->getSubPart() . ')';
+            }
+
+            if (! $column->getCollation()) {
                 continue;
             }
 
-            $indexFields[$key] .= '(' . $column->getSubPart() . ')';
+            $collation = $column->getCollation();
+            if ($collation === 'A') {
+                $indexFields[$key] .= ' ASC';
+            } elseif ($collation === 'D') {
+                $indexFields[$key] .= ' DESC';
+            }
         }
 
         if ($indexFields === []) {

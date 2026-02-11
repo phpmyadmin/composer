@@ -753,7 +753,10 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
 
                         // remove decimal places if column type not supported
                         if ((decimals === 0) && ($thisField.attr('data-type').indexOf('time') !== -1)) {
-                            newHtml = newHtml.substring(0, newHtml.indexOf('.'));
+                            var index = newHtml.indexOf('.');
+                            if (index !== -1) {
+                                newHtml = newHtml.substring(0, index);
+                            }
                         }
 
                         // remove additional decimal places

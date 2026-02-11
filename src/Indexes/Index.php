@@ -231,9 +231,11 @@ class Index
             // coming from form
             // $columns[names][]
             // $columns[sub_parts][]
+            // $columns[collations][]
             foreach ($columns['names'] as $key => $name) {
                 $subPart = $columns['sub_parts'][$key] ?? '';
-                $addedColumns[] = ['Column_name' => $name, 'Sub_part' => $subPart];
+                $collation = $columns['collations'][$key] ?? null;
+                $addedColumns[] = ['Column_name' => $name, 'Sub_part' => $subPart, 'Collation' => $collation];
             }
         } else {
             // coming from SHOW INDEXES
