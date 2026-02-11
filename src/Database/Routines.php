@@ -484,14 +484,11 @@ class Routines
             $retval['item_returnlength'] = implode(',', $stmt->return->parameters);
 
             // Extract charset (CHARSET or CHARACTER SET) separately from numeric options
-            /** @var string|false $charset */
-            $charset = $stmt->return->options->has('CHARSET');
-            if ($charset === false) {
-                /** @var string|false $charset */
-                $charset = $stmt->return->options->has('CHARACTER SET');
-            }
+            $charset = $stmt->return->options->has('CHARSET')
+                ? $stmt->return->options->get('CHARSET')
+                : $stmt->return->options->get('CHARACTER SET');
 
-            $retval['item_returnopts_text'] = is_string($charset) ? mb_strtolower($charset) : '';
+            $retval['item_returnopts_text'] = mb_strtolower((string) $charset);
 
             // Extract numeric options (UNSIGNED, ZEROFILL, UNSIGNED ZEROFILL.)
             $numericOpts = [];
@@ -506,7 +503,7 @@ class Routines
             $retval['item_returnopts_num'] = implode(' ', $numericOpts);
         }
 
-        $retval['item_definer'] = $stmt->options?->has('DEFINER') ?? false;
+        $retval['item_definer'] = $stmt->options?->get('DEFINER') ?? '';
         $retval['item_definition'] = $body;
         $retval['item_isdeterministic'] = '';
         if ($routine['IS_DETERMINISTIC'] === 'YES') {
