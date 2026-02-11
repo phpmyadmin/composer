@@ -479,19 +479,31 @@ class Routines
         $retval['item_returnopts_num'] = '';
         $retval['item_returnopts_text'] = '';
 
-        if (! empty($routine['DTD_IDENTIFIER'])) {
-            $options = [];
-            foreach ($stmt->return->options->options as $opt) {
-                $options[] = is_string($opt) ? $opt : $opt['value'];
-            }
-
+        if (! empty($routine['DTD_IDENTIFIER']) && $stmt->return !== null) {
             $retval['item_returntype'] = $stmt->return->name;
             $retval['item_returnlength'] = implode(',', $stmt->return->parameters);
-            $retval['item_returnopts_num'] = implode(' ', $options);
-            $retval['item_returnopts_text'] = implode(' ', $options);
+
+            // Extract charset (CHARSET or CHARACTER SET) separately from numeric options
+            $charset = $stmt->return->options->has('CHARSET')
+                ? $stmt->return->options->get('CHARSET')
+                : $stmt->return->options->get('CHARACTER SET');
+
+            $retval['item_returnopts_text'] = mb_strtolower((string) $charset);
+
+            // Extract numeric options (UNSIGNED, ZEROFILL, UNSIGNED ZEROFILL.)
+            $numericOpts = [];
+            foreach ($stmt->return->options->options as $opt) {
+                if (! is_string($opt) || ! in_array($opt, $this->numericOptions, true)) {
+                    continue;
+                }
+
+                $numericOpts[] = $opt;
+            }
+
+            $retval['item_returnopts_num'] = implode(' ', $numericOpts);
         }
 
-        $retval['item_definer'] = $stmt->options->get('DEFINER');
+        $retval['item_definer'] = $stmt->options?->get('DEFINER') ?? '';
         $retval['item_definition'] = $body;
         $retval['item_isdeterministic'] = '';
         if ($routine['IS_DETERMINISTIC'] === 'YES') {

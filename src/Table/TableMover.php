@@ -16,7 +16,6 @@ use PhpMyAdmin\Plugins\Export\ExportSql;
 use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\SqlParser\Components\Expression;
 use PhpMyAdmin\SqlParser\Components\OptionsArray;
-use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\AlterStatement;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
@@ -502,11 +501,6 @@ class TableMover
          * The destination where the table is moved or copied to.
          */
         $destination = new Expression($targetDb, $targetTable, '');
-
-        // Find server's SQL mode so the builder can generate correct
-        // queries.
-        // One of the options that alters the behaviour is `ANSI_QUOTES`.
-        Context::setMode((string) $this->dbi->fetchValue('SELECT @@sql_mode'));
 
         // -----------------------------------------------------------------
         // Phase 1: Dropping existent element of the same name (if exists

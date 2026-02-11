@@ -4560,13 +4560,13 @@ parameters:
 		-
 			message: '#^Cannot access property \$name on PhpMyAdmin\\SqlParser\\Components\\DataType\|null\.$#'
 			identifier: property.nonObject
-			count: 2
+			count: 1
 			path: src/Database/Routines.php
 
 		-
 			message: '#^Cannot access property \$options on PhpMyAdmin\\SqlParser\\Components\\DataType\|null\.$#'
 			identifier: property.nonObject
-			count: 2
+			count: 1
 			path: src/Database/Routines.php
 
 		-
@@ -4578,7 +4578,7 @@ parameters:
 		-
 			message: '#^Cannot access property \$parameters on PhpMyAdmin\\SqlParser\\Components\\DataType\|null\.$#'
 			identifier: property.nonObject
-			count: 3
+			count: 2
 			path: src/Database/Routines.php
 
 		-
@@ -4589,6 +4589,12 @@ parameters:
 
 		-
 			message: '#^Cannot call method get\(\) on PhpMyAdmin\\SqlParser\\Components\\OptionsArray\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Database/Routines.php
+
+		-
+			message: '#^Cannot call method has\(\) on PhpMyAdmin\\SqlParser\\Components\\OptionsArray\|null\.$#'
 			identifier: method.nonObject
 			count: 1
 			path: src/Database/Routines.php
@@ -4895,6 +4901,12 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string, PhpMyAdmin\\Dbal\\ConnectionType\=\)\: non\-empty\-string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Dbal/DatabaseInterface.php
+
+		-
+			message: '#^Parameter \#1 \$mode of static method PhpMyAdmin\\SqlParser\\Context\:\:setMode\(\) expects int\|string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Dbal/DatabaseInterface.php
@@ -7161,7 +7173,7 @@ parameters:
 		-
 			message: '#^Cannot access offset mixed on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			count: 2
 			path: src/Indexes/Index.php
 
 		-
@@ -12238,8 +12250,14 @@ parameters:
 			path: src/Table/Indexes.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, int\|null given\.$#'
+			message: '#^Only booleans are allowed in a negated boolean, string\|null given\.$#'
 			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Table/Indexes.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, int\|null given\.$#'
+			identifier: if.condNotBoolean
 			count: 1
 			path: src/Table/Indexes.php
 

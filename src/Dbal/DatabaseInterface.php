@@ -1032,10 +1032,11 @@ class DatabaseInterface
      */
     public function postConnect(Server $currentServer): void
     {
-        $version = $this->fetchSingleRow('SELECT @@version, @@version_comment');
+        $version = $this->fetchSingleRow('SELECT @@version, @@version_comment, @@sql_mode');
 
         if ($version !== []) {
             $this->setVersion($version);
+            Context::setMode($version['@@sql_mode']);
         }
 
         $this->query(

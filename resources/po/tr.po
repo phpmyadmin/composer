@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-08 00:45+0000\n"
-"PO-Revision-Date: 2026-02-05 00:42+0000\n"
+"PO-Revision-Date: 2026-02-11 04:23+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/tr/>\n"
@@ -17434,10 +17434,8 @@ msgstr ""
 "MySQL sunucusu:"
 
 #: src/Plugins/Export/ExportToon.php:68
-#, fuzzy
-#| msgid "Orientation"
 msgid "Indentation:"
-msgstr "Yönlendirme"
+msgstr "Girinti:"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
