@@ -1480,17 +1480,17 @@ function setConfigValue(key, value) {
 
 /***/ }),
 
-/***/ "codemirror":
-/***/ (function(module) {
-
-module.exports = window.CodeMirror;
-
-/***/ }),
-
 /***/ "jquery":
 /***/ (function(module) {
 
 module.exports = jQuery;
+
+/***/ }),
+
+/***/ "codemirror":
+/***/ (function(module) {
+
+module.exports = window.CodeMirror;
 
 /***/ })
 
