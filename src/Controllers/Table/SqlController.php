@@ -26,13 +26,13 @@ use function htmlspecialchars;
  * Table SQL executor
  */
 #[Route('/table/sql', ['GET', 'POST'])]
-class SqlController implements InvocableController
+readonly class SqlController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly SqlQueryForm $sqlQueryForm,
-        private readonly PageSettings $pageSettings,
-        private readonly DbTableExists $dbTableExists,
+        private ResponseRenderer $response,
+        private SqlQueryForm $sqlQueryForm,
+        private PageSettings $pageSettings,
+        private DbTableExists $dbTableExists,
     ) {
     }
 
