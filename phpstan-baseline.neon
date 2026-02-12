@@ -8281,12 +8281,6 @@ parameters:
 			path: src/Plugins.php
 
 		-
-			message: '#^Call to function in_array\(\) with arguments \(class\-string\<PhpMyAdmin\\Properties\\Options\\Groups\\OptionsPropertySubgroup\>&literal\-string\)\|null, array\{''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\BoolPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\MessageOnlyPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\SelectPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\TextPropertyItem''\} and true will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
-			path: src/Plugins.php
-
-		-
 			message: '#^Call to function method_exists\(\) with PhpMyAdmin\\Properties\\Options\\OptionsPropertyItem and ''getText'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1

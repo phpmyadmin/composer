@@ -5638,14 +5638,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
-    <TypeDoesNotContainType>
-      <code><![CDATA[in_array($propertyClass, [
-                BoolPropertyItem::class,
-                MessageOnlyPropertyItem::class,
-                SelectPropertyItem::class,
-                TextPropertyItem::class,
-            ], true)]]></code>
-    </TypeDoesNotContainType>
     <UndefinedMethod>
       <code><![CDATA[getProperties]]></code>
     </UndefinedMethod>

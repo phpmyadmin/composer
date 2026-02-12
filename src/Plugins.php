@@ -28,6 +28,7 @@ use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyGroup;
 use PhpMyAdmin\Properties\Options\OptionsPropertyItem;
+use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 use SplFileInfo;
 use Throwable;
 
@@ -326,14 +327,12 @@ class Plugins
 
         $propertyClass = null;
         if ($properties !== null) {
-            /** @var OptionsPropertySubgroup $propertyItem */
             foreach ($properties as $propertyItem) {
                 $propertyClass = $propertyItem::class;
                 // if the property is a subgroup, we deal with it recursively
-                if (str_contains($propertyClass, 'Subgroup')) {
+                if ($propertyItem instanceof OptionsPropertySubgroup) {
                     // for subgroups
                     // each subgroup can have a header, which may also be a form element
-                    /** @var OptionsPropertyItem|null $subgroupHeader */
                     $subgroupHeader = $propertyItem->getSubgroupHeader();
                     if ($subgroupHeader !== null) {
                         $ret .= self::getOneOption($plugin, $section, $pluginName, $subgroupHeader);

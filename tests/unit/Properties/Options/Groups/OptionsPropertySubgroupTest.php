@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Properties\Options\Groups;
 
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
+use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
@@ -40,7 +41,7 @@ class OptionsPropertySubgroupTest extends AbstractTestCase
      */
     public function testGetSetSubgroupHeader(): void
     {
-        $propertyItem = new OptionsPropertySubgroup();
+        $propertyItem = new BoolPropertyItem();
         $this->object->setSubgroupHeader($propertyItem);
 
         self::assertSame(
