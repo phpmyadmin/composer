@@ -20,7 +20,6 @@ use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Session;
 use PhpMyAdmin\Url;
@@ -72,16 +71,14 @@ class AuthenticationCookie extends AuthenticationPlugin
      */
     public function showLoginForm(): Response
     {
-        $responseRenderer = ResponseRenderer::getInstance();
-
         /**
          * When sending login modal after session has expired, send the
          * new token explicitly with the response to update the token
          * in all the forms having a hidden token.
          */
         $sessionExpired = isset($_REQUEST['check_timeout']) || isset($_REQUEST['session_timedout']);
-        if (! $sessionExpired && $responseRenderer->loginPage()) {
-            return $responseRenderer->response();
+        if (! $sessionExpired && $this->responseRenderer->loginPage()) {
+            return $this->responseRenderer->response();
         }
 
         /**
@@ -90,8 +87,8 @@ class AuthenticationCookie extends AuthenticationPlugin
          * in all the forms having a hidden token.
          */
         if ($sessionExpired) {
-            $responseRenderer->setRequestStatus(false);
-            $responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
+            $this->responseRenderer->setRequestStatus(false);
+            $this->responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
         }
 
         /**
@@ -99,7 +96,7 @@ class AuthenticationCookie extends AuthenticationPlugin
          * using the modal was successful after session expiration.
          */
         if (isset($_REQUEST['session_timedout'])) {
-            $responseRenderer->addJSON('logged_in', 0);
+            $this->responseRenderer->addJSON('logged_in', 0);
         }
 
         $config = Config::getInstance();
@@ -164,7 +161,7 @@ class AuthenticationCookie extends AuthenticationPlugin
 
         $configFooter = Footer::renderFooter();
 
-        $responseRenderer->addHTML($this->template->render('login/form', [
+        $this->responseRenderer->addHTML($this->template->render('login/form', [
             'login_header' => $loginHeader,
             'is_demo' => $config->config->debug->demo,
             'error_messages' => $errorMessages,
@@ -195,7 +192,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             'config_footer' => $configFooter,
         ]));
 
-        return $responseRenderer->response();
+        return $this->responseRenderer->response();
     }
 
     /**
@@ -454,12 +451,11 @@ class AuthenticationCookie extends AuthenticationPlugin
 
         // user logged in successfully after session expiration
         if (isset($_REQUEST['session_timedout'])) {
-            $responseRenderer = ResponseRenderer::getInstance();
-            $responseRenderer->addJSON('logged_in', 1);
-            $responseRenderer->addJSON('success', 1);
-            $responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
+            $this->responseRenderer->addJSON('logged_in', 1);
+            $this->responseRenderer->addJSON('success', 1);
+            $this->responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         // Set server cookies if required (once per session) and, in this case,
@@ -473,11 +469,11 @@ class AuthenticationCookie extends AuthenticationPlugin
          */
         Util::clearUserCache();
 
-        $responseRenderer = ResponseRenderer::getInstance();
-
         return ResponseFactory::create()->createResponse(StatusCodeInterface::STATUS_FOUND)->withHeader(
             'Location',
-            $responseRenderer->fixRelativeUrlForRedirect('./index.php?route=/' . Url::getCommonRaw($urlParams, '&')),
+            $this->responseRenderer->fixRelativeUrlForRedirect(
+                './index.php?route=/' . Url::getCommonRaw($urlParams, '&'),
+            ),
         );
     }
 
@@ -539,11 +535,9 @@ class AuthenticationCookie extends AuthenticationPlugin
 
         self::$connectionError = $this->getErrorMessage($failure);
 
-        $responseRenderer = ResponseRenderer::getInstance();
-
         // needed for PHP-CGI (not need for FastCGI or mod-php)
-        $responseRenderer->addHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-        $responseRenderer->addHeader('Pragma', 'no-cache');
+        $this->responseRenderer->addHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+        $this->responseRenderer->addHeader('Pragma', 'no-cache');
 
         return $this->showLoginForm();
     }

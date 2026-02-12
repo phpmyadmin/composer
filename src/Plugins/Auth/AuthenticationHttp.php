@@ -18,7 +18,6 @@ use PhpMyAdmin\Footer;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
-use PhpMyAdmin\ResponseRenderer;
 
 use function __;
 use function base64_decode;
@@ -39,13 +38,12 @@ class AuthenticationHttp extends AuthenticationPlugin
      */
     public function showLoginForm(): Response
     {
-        $responseRenderer = ResponseRenderer::getInstance();
-        if ($responseRenderer->isAjax()) {
-            $responseRenderer->setRequestStatus(false);
+        if ($this->responseRenderer->isAjax()) {
+            $this->responseRenderer->setRequestStatus(false);
             // reload_flag removes the token parameter from the URL and reloads
-            $responseRenderer->addJSON('reload_flag', '1');
+            $this->responseRenderer->addJSON('reload_flag', '1');
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         return $this->authForm();
@@ -69,34 +67,32 @@ class AuthenticationHttp extends AuthenticationPlugin
             $realmMessage = $config->selectedServer['auth_http_realm'];
         }
 
-        $response = ResponseRenderer::getInstance();
-
         // remove non US-ASCII to respect RFC2616
         $realmMessage = preg_replace('/[^\x20-\x7e]/i', '', $realmMessage);
-        $response->addHeader('WWW-Authenticate', 'Basic realm="' . $realmMessage . '"');
-        $response->setStatusCode(StatusCodeInterface::STATUS_UNAUTHORIZED);
+        $this->responseRenderer->addHeader('WWW-Authenticate', 'Basic realm="' . $realmMessage . '"');
+        $this->responseRenderer->setStatusCode(StatusCodeInterface::STATUS_UNAUTHORIZED);
 
         /* HTML header */
-        $response->setMinimalFooter();
-        $header = $response->getHeader();
+        $this->responseRenderer->setMinimalFooter();
+        $header = $this->responseRenderer->getHeader();
         $header->setTitle(__('Access denied!'));
         $header->disableMenuAndConsole();
         $header->setBodyId('loginform');
 
-        $response->addHTML('<h1>');
-        $response->addHTML(sprintf(__('Welcome to %s'), ' phpMyAdmin'));
-        $response->addHTML('</h1>');
-        $response->addHTML('<h3>');
-        $response->addHTML(
+        $this->responseRenderer->addHTML('<h1>');
+        $this->responseRenderer->addHTML(sprintf(__('Welcome to %s'), ' phpMyAdmin'));
+        $this->responseRenderer->addHTML('</h1>');
+        $this->responseRenderer->addHTML('<h3>');
+        $this->responseRenderer->addHTML(
             Message::error(
                 __('Wrong username/password. Access denied.'),
             )->getDisplay(),
         );
-        $response->addHTML('</h3>');
+        $this->responseRenderer->addHTML('</h3>');
 
-        $response->addHTML(Footer::renderFooter());
+        $this->responseRenderer->addHTML(Footer::renderFooter());
 
-        return $response->response();
+        return $this->responseRenderer->response();
     }
 
     /**
@@ -179,13 +175,12 @@ class AuthenticationHttp extends AuthenticationPlugin
 
         $error = DatabaseInterface::getInstance()->getError();
         if ($error && DatabaseInterface::$errorNumber !== 1045) {
-            $responseRenderer = ResponseRenderer::getInstance();
-            $responseRenderer->addHTML($this->template->render('error/generic', [
+            $this->responseRenderer->addHTML($this->template->render('error/generic', [
                 'lang' => Current::$lang,
                 'error_message' => $error,
             ]));
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         return $this->authForm();

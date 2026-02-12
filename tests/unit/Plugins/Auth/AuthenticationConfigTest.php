@@ -11,6 +11,7 @@ use PhpMyAdmin\Exceptions\AuthenticationFailure;
 use PhpMyAdmin\Plugins\Auth\AuthenticationConfig;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseRendererStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Medium;
 use ReflectionProperty;
@@ -36,7 +37,7 @@ class AuthenticationConfigTest extends AbstractTestCase
         Current::$server = 2;
         Current::$database = 'db';
         Current::$table = 'table';
-        $this->object = new AuthenticationConfig();
+        $this->object = new AuthenticationConfig(new ResponseRendererStub());
     }
 
     /**
@@ -52,14 +53,18 @@ class AuthenticationConfigTest extends AbstractTestCase
     public function testShowLoginFormWithoutAjax(): void
     {
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(false);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
+        $this->object = new AuthenticationConfig($responseRenderer);
         self::assertNull($this->object->showLoginForm());
     }
 
     public function testShowLoginFormWithAjax(): void
     {
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(true);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(true);
+        $this->object = new AuthenticationConfig($responseRenderer);
         $response = $this->object->showLoginForm();
         self::assertNotNull($response);
         $body = (string) $response->getBody();
@@ -93,8 +98,6 @@ class AuthenticationConfigTest extends AbstractTestCase
             ->disableOriginalConstructor()
             ->getMock();
         DatabaseInterface::$instance = $dbi;
-
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
 
         $response = $this->object->showFailure(AuthenticationFailure::deniedByDatabaseServer());
 

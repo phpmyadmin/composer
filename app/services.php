@@ -262,7 +262,10 @@ return [
     ],
     OutputHandler::class => ['class' => OutputHandler::class],
     Maintenance::class => ['class' => Maintenance::class, 'arguments' => [DatabaseInterface::class]],
-    AuthenticationPluginFactory::class => ['class' => AuthenticationPluginFactory::class],
+    AuthenticationPluginFactory::class => [
+        'class' => AuthenticationPluginFactory::class,
+        'arguments' => [ResponseRenderer::class],
+    ],
     Relation::class => ['class' => Relation::class, 'arguments' => [DatabaseInterface::class, Config::class]],
     RelationCleanup::class => [
         'class' => RelationCleanup::class,

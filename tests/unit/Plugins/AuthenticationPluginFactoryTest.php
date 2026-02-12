@@ -12,6 +12,7 @@ use PhpMyAdmin\Plugins\Auth\AuthenticationHttp;
 use PhpMyAdmin\Plugins\Auth\AuthenticationSignon;
 use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -26,7 +27,7 @@ class AuthenticationPluginFactoryTest extends AbstractTestCase
     public function testValidPlugins(string $type, string $class): void
     {
         Config::getInstance()->selectedServer['auth_type'] = $type;
-        $plugin = (new AuthenticationPluginFactory())->create();
+        $plugin = (new AuthenticationPluginFactory(new ResponseRenderer()))->create();
         self::assertInstanceOf($class, $plugin);
     }
 
@@ -44,16 +45,17 @@ class AuthenticationPluginFactoryTest extends AbstractTestCase
         Config::getInstance()->selectedServer['auth_type'] = 'invalid';
         $this->expectException(AuthenticationPluginException::class);
         $this->expectExceptionMessage('Invalid authentication method set in configuration: invalid');
-        (new AuthenticationPluginFactory())->create();
+        (new AuthenticationPluginFactory(new ResponseRenderer()))->create();
     }
 
     public function testSameInstance(): void
     {
         $config = Config::getInstance();
         $config->selectedServer['auth_type'] = 'cookie';
-        $factory = new AuthenticationPluginFactory();
+        $responseRenderer = new ResponseRenderer();
+        $factory = new AuthenticationPluginFactory($responseRenderer);
         $firstInstance = $factory->create();
-        $secondInstance = (new AuthenticationPluginFactory())->create();
+        $secondInstance = (new AuthenticationPluginFactory($responseRenderer))->create();
         self::assertNotSame($firstInstance, $secondInstance);
         $thirdInstance = $factory->create();
         self::assertSame($firstInstance, $thirdInstance);

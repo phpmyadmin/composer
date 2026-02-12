@@ -56,7 +56,7 @@ class AuthenticationCookieTest extends AbstractTestCase
         Current::$database = 'db';
         Current::$table = 'table';
         $_POST['pma_password'] = '';
-        $this->object = new AuthenticationCookie();
+        $this->object = new AuthenticationCookie(new ResponseRendererStub());
         $_SERVER['PHP_SELF'] = '/phpmyadmin/index.php';
         Config::getInstance()->selectedServer['DisableIS'] = false;
         AuthenticationCookie::$connectionError = '';
@@ -79,6 +79,8 @@ class AuthenticationCookieTest extends AbstractTestCase
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
         $responseRenderer = ResponseRenderer::getInstance();
         $responseRenderer->setAjax(true);
+
+        $this->object = new AuthenticationCookie($responseRenderer);
 
         $response = $this->object->showLoginForm();
 
@@ -108,8 +110,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         Current::$database = 'testDb';
         Current::$table = 'testTable';
         $config->settings['Servers'] = [1, 2];
-
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
 
         $response = $this->object->showLoginForm();
 
@@ -166,9 +166,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         $config->set('CaptchaLoginPublicKey', 'testpubkey');
         Current::$server = 2;
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $response = $this->object->showLoginForm();
 
         $result = (string) $response->getBody();
@@ -219,9 +216,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         $config->set('CaptchaMethod', 'checkbox');
         Current::$server = 2;
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $response = $this->object->showLoginForm();
 
         $result = (string) $response->getBody();
@@ -265,9 +259,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         $config->set('LoginCookieDeleteAll', false);
         $config->settings['Servers'] = [1];
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $config->selectedServer['LogoutURL'] = 'https://example.com/logout';
         $config->selectedServer['auth_type'] = 'cookie';
 
@@ -286,9 +277,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         $config->selectedServer['auth_type'] = 'cookie';
 
         $_COOKIE['pmaAuth-2'] = '';
-
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
 
         $response = $this->object->logOut();
 
@@ -318,9 +306,6 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testLogoutDelete(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $config = Config::getInstance();
         $config->set('LoginCookieDeleteAll', true);
         $config->set('PmaAbsoluteUri', '');
@@ -338,9 +323,6 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testLogout(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $config = Config::getInstance();
         $config->set('LoginCookieDeleteAll', false);
         $config->set('PmaAbsoluteUri', '');
@@ -533,9 +515,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         $config->settings['LoginCookieStore'] = 100;
         AuthenticationCookie::$fromCookie = false;
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $this->object->storeCredentials();
         $response = $this->object->rememberCredentials();
         self::assertNotNull($response);
@@ -548,8 +527,9 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testAuthFailsNoPass(): void
     {
+        $responseRenderer = new ResponseRendererStub();
         $this->object = $this->getMockBuilder(AuthenticationCookie::class)
-            ->disableOriginalConstructor()
+            ->setConstructorArgs([$responseRenderer])
             ->onlyMethods(['showLoginForm'])
             ->getMock();
 
@@ -559,16 +539,13 @@ class AuthenticationCookieTest extends AbstractTestCase
 
         $_COOKIE['pmaAuth-2'] = 'pass';
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         try {
             $this->object->showFailure(AuthenticationFailure::emptyPasswordDeniedByConfiguration());
         } catch (Throwable $throwable) {
         }
 
         self::assertInstanceOf(ExitException::class, $throwable ?? null);
-        $response = $responseStub->getResponse();
+        $response = $responseRenderer->getResponse();
         self::assertSame(['no-store, no-cache, must-revalidate'], $response->getHeader('Cache-Control'));
         self::assertSame(['no-cache'], $response->getHeader('Pragma'));
         self::assertSame(200, $response->getStatusCode());
@@ -616,8 +593,9 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testAuthFailsDeny(): void
     {
+        $responseRenderer = new ResponseRendererStub();
         $this->object = $this->getMockBuilder(AuthenticationCookie::class)
-            ->disableOriginalConstructor()
+            ->setConstructorArgs([$responseRenderer])
             ->onlyMethods(['showLoginForm'])
             ->getMock();
 
@@ -627,16 +605,13 @@ class AuthenticationCookieTest extends AbstractTestCase
 
         $_COOKIE['pmaAuth-2'] = 'pass';
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         try {
             $this->object->showFailure(AuthenticationFailure::deniedByAllowDenyRules());
         } catch (Throwable $throwable) {
         }
 
         self::assertInstanceOf(ExitException::class, $throwable ?? null);
-        $response = $responseStub->getResponse();
+        $response = $responseRenderer->getResponse();
         self::assertSame(['no-store, no-cache, must-revalidate'], $response->getHeader('Cache-Control'));
         self::assertSame(['no-cache'], $response->getHeader('Pragma'));
         self::assertSame(200, $response->getStatusCode());
@@ -646,8 +621,9 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testAuthFailsActivity(): void
     {
+        $responseRenderer = new ResponseRendererStub();
         $this->object = $this->getMockBuilder(AuthenticationCookie::class)
-            ->disableOriginalConstructor()
+            ->setConstructorArgs([$responseRenderer])
             ->onlyMethods(['showLoginForm'])
             ->getMock();
 
@@ -659,16 +635,13 @@ class AuthenticationCookieTest extends AbstractTestCase
 
         Config::getInstance()->set('LoginCookieValidity', 10);
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         try {
             $this->object->showFailure(AuthenticationFailure::loggedOutDueToInactivity());
         } catch (Throwable $throwable) {
         }
 
         self::assertInstanceOf(ExitException::class, $throwable ?? null);
-        $response = $responseStub->getResponse();
+        $response = $responseRenderer->getResponse();
         self::assertSame(['no-store, no-cache, must-revalidate'], $response->getHeader('Cache-Control'));
         self::assertSame(['no-cache'], $response->getHeader('Pragma'));
         self::assertSame(200, $response->getStatusCode());
@@ -682,8 +655,9 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testAuthFailsDBI(): void
     {
+        $responseRenderer = new ResponseRendererStub();
         $this->object = $this->getMockBuilder(AuthenticationCookie::class)
-            ->disableOriginalConstructor()
+            ->setConstructorArgs([$responseRenderer])
             ->onlyMethods(['showLoginForm'])
             ->getMock();
 
@@ -704,16 +678,13 @@ class AuthenticationCookieTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         DatabaseInterface::$errorNumber = 42;
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         try {
             $this->object->showFailure(AuthenticationFailure::deniedByDatabaseServer());
         } catch (Throwable $throwable) {
         }
 
         self::assertInstanceOf(ExitException::class, $throwable ?? null);
-        $response = $responseStub->getResponse();
+        $response = $responseRenderer->getResponse();
         self::assertSame(['no-store, no-cache, must-revalidate'], $response->getHeader('Cache-Control'));
         self::assertSame(['no-cache'], $response->getHeader('Pragma'));
         self::assertSame(200, $response->getStatusCode());
@@ -723,8 +694,9 @@ class AuthenticationCookieTest extends AbstractTestCase
 
     public function testAuthFailsErrno(): void
     {
+        $responseRenderer = new ResponseRendererStub();
         $this->object = $this->getMockBuilder(AuthenticationCookie::class)
-            ->disableOriginalConstructor()
+            ->setConstructorArgs([$responseRenderer])
             ->onlyMethods(['showLoginForm'])
             ->getMock();
 
@@ -745,16 +717,13 @@ class AuthenticationCookieTest extends AbstractTestCase
 
         DatabaseInterface::$errorNumber = null;
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         try {
             $this->object->showFailure(AuthenticationFailure::deniedByDatabaseServer());
         } catch (Throwable $throwable) {
         }
 
         self::assertInstanceOf(ExitException::class, $throwable ?? null);
-        $response = $responseStub->getResponse();
+        $response = $responseRenderer->getResponse();
         self::assertSame(['no-store, no-cache, must-revalidate'], $response->getHeader('Cache-Control'));
         self::assertSame(['no-cache'], $response->getHeader('Pragma'));
         self::assertSame(200, $response->getStatusCode());

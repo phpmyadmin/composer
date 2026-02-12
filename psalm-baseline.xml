@@ -5798,9 +5798,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <UnsafeInstantiation>
-      <code><![CDATA[new $class()]]></code>
-    </UnsafeInstantiation>
   </file>
   <file src="src/Plugins/Export/ExportCodegen.php">
     <PossiblyNullArgument>
