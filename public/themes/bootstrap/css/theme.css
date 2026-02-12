@@ -15123,6 +15123,12 @@ body {
 .table td > span:empty::before {
   content: "​";
 }
+.table .cell-selected {
+  outline: 1px solid #7facd6;
+}
+.table .cell-selected.with-bg-color {
+  background-color: #d0e4f7;
+}
 
 @media only screen and (width >= 768px) {
   .table th.position-sticky {

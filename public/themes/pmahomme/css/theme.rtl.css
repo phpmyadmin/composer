@@ -14518,6 +14518,12 @@ textarea {
   font-weight: bold;
   text-align: center;
 }
+.table .cell-selected {
+  outline: 1px solid #7facd6;
+}
+.table .cell-selected.with-bg-color {
+  background-color: #d0e4f7;
+}
 
 .table-hover tbody tr:hover {
   background: linear-gradient(#ced6df, #b6c6d7);
