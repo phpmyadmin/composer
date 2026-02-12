@@ -79,7 +79,10 @@ return [
         'arguments' => [Template::class, Config::class, ThemeManager::class],
     ],
     Config::class => ['class' => Config::class, 'factory' => [Config::class, 'getInstance']],
-    Config\PageSettings::class => ['class' => Config\PageSettings::class, 'arguments' => [UserPreferences::class]],
+    Config\PageSettings::class => [
+        'class' => Config\PageSettings::class,
+        'arguments' => [UserPreferences::class, ResponseRenderer::class],
+    ],
     CentralColumns::class => ['class' => CentralColumns::class, 'arguments' => [DatabaseInterface::class]],
     CreateAddField::class => ['class' => CreateAddField::class, 'arguments' => [DatabaseInterface::class]],
     DatabaseInterface::class => [

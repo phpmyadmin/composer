@@ -11,12 +11,11 @@ use PhpMyAdmin\Config\UserPreferences;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\BackupStaticProperties;
 use PHPUnit\Framework\Attributes\CoversClass;
-use ReflectionProperty;
 
 #[CoversClass(PageSettings::class)]
 class PageSettingsTest extends AbstractTestCase
@@ -51,7 +50,7 @@ class PageSettingsTest extends AbstractTestCase
             $config,
             new Clock(),
         );
-        $object = new PageSettings($userPreferences);
+        $object = new PageSettings($userPreferences, new ResponseRenderer());
         $object->init('NonExistent');
 
         self::assertSame('', $object->getHTML());
@@ -63,8 +62,6 @@ class PageSettingsTest extends AbstractTestCase
     #[BackupStaticProperties(true)]
     public function testShowGroupBrowse(): void
     {
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-
         $config = Config::getInstance();
         $dbi = DatabaseInterface::getInstance();
         $userPreferences = new UserPreferences(
@@ -74,7 +71,7 @@ class PageSettingsTest extends AbstractTestCase
             $config,
             new Clock(),
         );
-        $object = new PageSettings($userPreferences);
+        $object = new PageSettings($userPreferences, new ResponseRenderer());
         $object->init('Browse');
 
         $html = $object->getHTML();
@@ -132,7 +129,7 @@ class PageSettingsTest extends AbstractTestCase
             $config,
             new Clock(),
         );
-        $pageSettings = new PageSettings($userPreferences);
+        $pageSettings = new PageSettings($userPreferences, new ResponseRenderer());
         $pageSettings->init('Navi', 'pma_navigation_settings');
 
         $html = $pageSettings->getHTML();

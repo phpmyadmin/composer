@@ -108,7 +108,7 @@ class Navigation
                     $this->config,
                     new Clock(),
                 );
-                $pageSettings = new PageSettings($userPreferences);
+                $pageSettings = new PageSettings($userPreferences, $response);
                 $pageSettings->init('Navi', 'pma_navigation_settings');
                 $response->addHTML($pageSettings->getErrorHTML());
                 $navigationSettings = $pageSettings->getHTML();

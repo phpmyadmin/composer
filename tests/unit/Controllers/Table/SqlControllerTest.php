@@ -56,10 +56,11 @@ final class SqlControllerTest extends AbstractTestCase
 
         $relation = new Relation($dbi);
         $bookmarkRepository = new BookmarkRepository($dbi, $relation);
+        $responseRenderer = new ResponseRenderer();
         $response = (new SqlController(
-            new ResponseRenderer(),
+            $responseRenderer,
             new SqlQueryForm($template, $dbi, $bookmarkRepository),
-            new PageSettings($userPreferences),
+            new PageSettings($userPreferences, $responseRenderer),
             new DbTableExists($dbi),
         ))($request);
 

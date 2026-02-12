@@ -369,7 +369,7 @@
   </file>
   <file src="src/Config/PageSettings.php">
     <ArgumentTypeCoercion>
-      <code><![CDATA[$response->getSelfUrl()]]></code>
+      <code><![CDATA[$this->responseRenderer->getSelfUrl()]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
