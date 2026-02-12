@@ -76,14 +76,6 @@ abstract class PluginPropertyItem extends PropertyItem
     }
 
     /**
-     * Returns the property type ( either "options", or "plugin" ).
-     */
-    public function getPropertyType(): string
-    {
-        return 'plugin';
-    }
-
-    /**
      * Whether each plugin has to be saved as a file
      */
     public function getForceFile(): bool

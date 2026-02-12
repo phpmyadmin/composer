@@ -33,14 +33,6 @@ class OptionsPropertySubgroupTest extends AbstractTestCase
         unset($this->object);
     }
 
-    public function testGetItemType(): void
-    {
-        self::assertSame(
-            'subgroup',
-            $this->object->getItemType(),
-        );
-    }
-
     /**
      * Test for
      *     - PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup::getSubgroupHeader

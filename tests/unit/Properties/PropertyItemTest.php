@@ -21,9 +21,7 @@ class PropertyItemTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->stub = $this->getMockBuilder(PropertyItem::class)
-            ->onlyMethods(['getItemType', 'getPropertyType'])
-            ->getMock();
+        $this->stub = $this->getMockBuilder(PropertyItem::class)->getMock();
     }
 
     /**

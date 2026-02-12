@@ -21,9 +21,7 @@ class OptionsPropertyItemTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->stub = $this->getMockBuilder(OptionsPropertyItem::class)
-            ->onlyMethods(['getItemType'])
-            ->getMock();
+        $this->stub = $this->getMockBuilder(OptionsPropertyItem::class)->onlyMethods([])->getMock();
     }
 
     /**
@@ -78,14 +76,6 @@ class OptionsPropertyItemTest extends AbstractTestCase
         self::assertSame(
             'force123',
             $this->stub->getForce(),
-        );
-    }
-
-    public function testGetPropertyType(): void
-    {
-        self::assertSame(
-            'options',
-            $this->stub->getPropertyType(),
         );
     }
 }

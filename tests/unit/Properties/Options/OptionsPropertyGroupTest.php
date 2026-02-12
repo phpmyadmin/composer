@@ -22,9 +22,7 @@ class OptionsPropertyGroupTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->stub = $this->getMockBuilder(OptionsPropertyGroup::class)
-            ->onlyMethods(['getItemType'])
-            ->getMock();
+        $this->stub = $this->getMockBuilder(OptionsPropertyGroup::class)->onlyMethods([])->getMock();
     }
 
     /**

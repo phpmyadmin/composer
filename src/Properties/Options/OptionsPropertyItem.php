@@ -55,12 +55,4 @@ abstract class OptionsPropertyItem extends PropertyItem
     {
         $this->force = $force;
     }
-
-    /**
-     * Returns the property type ( either "options", or "plugin" ).
-     */
-    public function getPropertyType(): string
-    {
-        return 'options';
-    }
 }

@@ -33,14 +33,6 @@ class ImportPluginPropertiesTest extends AbstractTestCase
         unset($this->object);
     }
 
-    public function testGetItemType(): void
-    {
-        self::assertSame(
-            'import',
-            $this->object->getItemType(),
-        );
-    }
-
     /**
      * Test for
      *     - PhpMyAdmin\Properties\Plugins\ImportPluginProperties::getOptionsText
