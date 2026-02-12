@@ -17,6 +17,7 @@ use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Plugins\Plugin;
 use PhpMyAdmin\Plugins\SchemaPlugin;
+use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\DocPropertyItem;
@@ -45,7 +46,6 @@ use function mb_strtoupper;
 use function mb_substr;
 use function method_exists;
 use function sprintf;
-use function str_contains;
 use function str_starts_with;
 use function strcasecmp;
 use function usort;
@@ -298,7 +298,7 @@ class Plugins
         $properties = null;
         if (! $isSubgroup) {
             // for subgroup headers
-            if (str_contains($propertyGroup::class, 'PropertyItem')) {
+            if ($propertyGroup instanceof OptionsPropertyOneItem) {
                 $properties = [$propertyGroup];
             } else {
                 // for main groups
@@ -362,7 +362,7 @@ class Plugins
             $ret .= '</ul></div>';
         }
 
-        if (method_exists($propertyGroup, 'getDoc')) {
+        if ($propertyGroup instanceof OptionsPropertyOneItem) {
             $doc = $propertyGroup->getDoc();
             if (is_array($doc)) {
                 if (count($doc) === 3) {
@@ -580,7 +580,8 @@ class Plugins
             $ret .= '<h3>' . $plugin->getTranslatedText($text) . '</h3>';
 
             $noOptions = true;
-            if ($options !== null && count($options) > 0) {
+            if ($options !== null && $options->count() > 0) {
+                /** @var OptionsPropertyMainGroup $propertyMainGroup */
                 foreach ($options->getProperties() as $propertyMainGroup) {
                     // check for hidden properties
                     $noOptions = true;
