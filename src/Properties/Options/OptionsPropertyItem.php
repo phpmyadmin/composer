@@ -8,14 +8,12 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Properties\Options;
 
-use PhpMyAdmin\Properties\PropertyItem;
-
 /**
  * Superclass for
  *  - PhpMyAdmin\Properties\Options\OptionsPropertyOneItem and
  *  - OptionsProperty Group
  */
-abstract class OptionsPropertyItem extends PropertyItem
+abstract class OptionsPropertyItem
 {
     /**
      * What to force

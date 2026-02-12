@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Properties\Plugins;
 
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
-use PhpMyAdmin\Properties\PropertyItem;
 
 /**
  * Superclass for
@@ -17,7 +16,7 @@ use PhpMyAdmin\Properties\PropertyItem;
  *  - PhpMyAdmin\Properties\Plugins\ImportPluginProperties and
  *  - TransformationsPluginProperties
  */
-abstract class PluginPropertyItem extends PropertyItem
+abstract class PluginPropertyItem
 {
     private string $text = '';
     private string $extension = '';
