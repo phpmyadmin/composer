@@ -30,6 +30,7 @@ use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Export\TemplateModel;
 use PhpMyAdmin\FileListing;
 use PhpMyAdmin\FlashMessenger;
+use PhpMyAdmin\Footer;
 use PhpMyAdmin\Header;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Middleware;
@@ -271,6 +272,15 @@ return [
     ResponseRenderer::class => [
         'class' => ResponseRenderer::class,
         'factory' => [ResponseRenderer::class, 'getInstance'],
+        'arguments' => [
+            Config::class,
+            Template::class,
+            Header::class,
+            Footer::class,
+            ErrorHandler::class,
+            DatabaseInterface::class,
+            ResponseFactory::class,
+        ],
     ],
     Routines::class => ['class' => Routines::class, 'arguments' => [DatabaseInterface::class, Config::class]],
     Plugins::class => ['class' => Plugins::class, 'arguments' => [DatabaseInterface::class]],
@@ -380,4 +390,5 @@ return [
     ],
     LanguageManager::class => ['class' => LanguageManager::class, 'factory' => [LanguageManager::class, 'getInstance']],
     ClockInterface::class => ['class' => Clock::class],
+    Footer::class => ['class' => Footer::class, 'arguments' => [Template::class, Config::class]],
 ];
