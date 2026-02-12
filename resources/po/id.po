@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-08 00:45+0000\n"
-"PO-Revision-Date: 2026-02-03 19:01+0000\n"
+"PO-Revision-Date: 2026-02-12 05:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/id/>\n"
@@ -17432,10 +17432,8 @@ msgstr ""
 "kompatibilitas dengan:"
 
 #: src/Plugins/Export/ExportToon.php:68
-#, fuzzy
-#| msgid "Orientation"
 msgid "Indentation:"
-msgstr "Orientasi"
+msgstr "Indentasi:"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"

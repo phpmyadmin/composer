@@ -15211,15 +15211,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
-			path: tests/unit/Controllers/Table/SqlControllerTest.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
 			path: tests/unit/Controllers/Table/Structure/ChangeControllerTest.php
 
 		-

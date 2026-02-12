@@ -5,6 +5,14 @@
       content: "\200b";
     }
   }
+
+  .cell-selected  {
+    outline: 1px solid #7facd6;
+
+    &.with-bg-color {
+      background-color: #d0e4f7;
+    }
+  }
 }
 
 @media only screen and (width >= 768px) {
