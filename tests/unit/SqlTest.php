@@ -16,6 +16,7 @@ use PhpMyAdmin\ParseAnalyze;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Transformations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -61,6 +62,7 @@ class SqlTest extends AbstractTestCase
             new Template($config),
             new BookmarkRepository($this->dbi, $relation),
             $config,
+            new ResponseRenderer(),
         );
     }
 
@@ -666,6 +668,7 @@ class SqlTest extends AbstractTestCase
             new Template($config),
             new BookmarkRepository($this->dbi, $relation),
             $config,
+            new ResponseRenderer(),
         );
 
         $dbiDummy->removeDefaultResults();

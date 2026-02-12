@@ -47,6 +47,7 @@ final class SearchControllerTest extends AbstractTestCase
         $config = new Config();
         $relation = new Relation($dbi, $config);
         $template = new Template($config);
+        $responseRenderer = new ResponseRenderer();
         $sql = new Sql(
             $dbi,
             $relation,
@@ -55,9 +56,9 @@ final class SearchControllerTest extends AbstractTestCase
             $template,
             new BookmarkRepository($dbi, $relation),
             $config,
+            $responseRenderer,
         );
 
-        $responseRenderer = new ResponseRenderer();
         $controller = new SearchController(
             $responseRenderer,
             $template,

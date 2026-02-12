@@ -112,6 +112,7 @@ class ReplaceControllerTest extends AbstractTestCase
                 $template,
                 $bookmarkRepository,
                 $config,
+                $response,
             ),
             $pageSettings,
             $bookmarkRepository,

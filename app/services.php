@@ -307,6 +307,7 @@ return [
             Template::class,
             BookmarkRepository::class,
             Config::class,
+            ResponseRenderer::class,
         ],
     ],
     SqlQueryForm::class => [
