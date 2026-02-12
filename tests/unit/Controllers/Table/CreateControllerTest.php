@@ -191,7 +191,7 @@ class CreateControllerTest extends AbstractTestCase
 
         $relation = new Relation($dbi);
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $expected = $template->render('columns_definitions/column_definitions_form', [
             'is_backup' => false,
             'fields_meta' => null,

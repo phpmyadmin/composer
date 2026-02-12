@@ -60,7 +60,8 @@ class EnumValuesControllerTest extends AbstractTestCase
         ]);
 
         $responseRenderer = new ResponseRenderer();
-        $template = new Template();
+        $config = Config::getInstance();
+        $template = new Template($config);
         $relation = new Relation($this->dbi);
         $bookmarkRepository = new BookmarkRepository($this->dbi, $relation);
         $sql = new Sql(
@@ -70,7 +71,7 @@ class EnumValuesControllerTest extends AbstractTestCase
             self::createStub(Transformations::class),
             $template,
             $bookmarkRepository,
-            Config::getInstance(),
+            $config,
         );
 
         $sqlController = new EnumValuesController($responseRenderer, $template, $sql);
@@ -121,7 +122,8 @@ class EnumValuesControllerTest extends AbstractTestCase
             ]);
 
         $responseRenderer = new ResponseRenderer();
-        $template = new Template();
+        $config = Config::getInstance();
+        $template = new Template($config);
         $relation = new Relation($this->dbi);
         $bookmarkRepository = new BookmarkRepository($this->dbi, $relation);
         $sql = new Sql(
@@ -131,7 +133,7 @@ class EnumValuesControllerTest extends AbstractTestCase
             self::createStub(Transformations::class),
             $template,
             $bookmarkRepository,
-            Config::getInstance(),
+            $config,
         );
 
         $sqlController = new EnumValuesController($responseRenderer, $template, $sql);

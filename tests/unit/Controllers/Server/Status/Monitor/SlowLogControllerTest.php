@@ -50,7 +50,7 @@ class SlowLogControllerTest extends AbstractTestCase
         $dbi = DatabaseInterface::getInstance();
         $controller = new SlowLogController(
             $response,
-            new Template(),
+            new Template(new Config()),
             $this->data,
             new Monitor($dbi),
             $dbi,

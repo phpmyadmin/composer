@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\ConfigStorage;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Features\ConfigurableMenusFeature;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -56,7 +57,7 @@ class UserGroups
             }
         }
 
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('server/user_groups/user_listings', [
             'user_group_special_chars' => $userGroupSpecialChars,
@@ -116,7 +117,7 @@ class UserGroups
 
         $addUserUrl = Url::getFromRoute('/server/user-groups', ['addUserGroup' => 1]);
         $addUserIcon = Generator::getIcon('b_usradd');
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('server/user_groups/user_groups', [
             'action' => $action,
@@ -240,7 +241,7 @@ class UserGroups
             $allowedTabs['table'],
         );
 
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('server/user_groups/edit_user_groups', [
             'user_group' => $userGroup,
@@ -272,7 +273,7 @@ class UserGroups
             $tabDetails[] = $tabDetail;
         }
 
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('server/user_groups/tab_list', [
             'title' => $title,

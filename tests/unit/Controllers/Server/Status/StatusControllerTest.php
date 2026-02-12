@@ -63,10 +63,11 @@ class StatusControllerTest extends AbstractTestCase
             ['Com_empty_query', '0'],
         ], ['Variable_name', 'Value']);
 
-        $data = new Data($dbi, Config::getInstance());
+        $config = Config::getInstance();
+        $data = new Data($dbi, $config);
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
 
         $controller = new StatusController(
             $response,

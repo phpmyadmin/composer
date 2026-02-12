@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Engines;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Engines\Innodb\BufferPool;
 use PhpMyAdmin\StorageEngine;
@@ -109,7 +110,7 @@ class Innodb extends StorageEngine
      */
     public function getPageBufferPool(): string
     {
-        return (new Template())->render('server/engines/_innodb_buffer_pool', [
+        return (new Template(Config::getInstance()))->render('server/engines/_innodb_buffer_pool', [
             'buffer_pool' => $this->getBufferPoolStatus(),
         ]);
     }

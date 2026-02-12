@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Normalization\FirstNormalForm;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Normalization\FirstNormalForm\FirstStepController;
 use PhpMyAdmin\Current;
@@ -33,7 +34,7 @@ class FirstStepControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody(['normalizeTo' => $normalizeTo]);
 

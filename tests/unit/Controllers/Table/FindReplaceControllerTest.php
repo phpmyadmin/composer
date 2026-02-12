@@ -33,12 +33,13 @@ final class FindReplaceControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
 
         $responseRenderer = new ResponseRenderer();
+        $config = new Config();
         $controller = new FindReplaceController(
             $responseRenderer,
-            new Template(),
+            new Template($config),
             $dbi,
             new DbTableExists($dbi),
-            new Config(),
+            $config,
         );
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
@@ -80,12 +81,13 @@ final class FindReplaceControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
 
         $responseRenderer = new ResponseRenderer();
+        $config = new Config();
         $controller = new FindReplaceController(
             $responseRenderer,
-            new Template(),
+            new Template($config),
             $dbi,
             new DbTableExists($dbi),
-            new Config(),
+            $config,
         );
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')

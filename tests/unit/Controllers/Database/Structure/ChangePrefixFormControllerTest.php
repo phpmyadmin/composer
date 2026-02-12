@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Controllers\Database\Structure;
 
 use Fig\Http\Message\StatusCodeInterface;
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Database\Structure\ChangePrefixFormController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
@@ -25,7 +26,7 @@ final class ChangePrefixFormControllerTest extends AbstractTestCase
             ->withQueryParams(['db' => 'test_db'])
             ->withParsedBody(['selected_tbl' => ['test_table']]);
 
-        $template = new Template();
+        $template = new Template(new Config());
         $controller = new ChangePrefixFormController(new ResponseRenderer(), ResponseFactory::create(), $template);
         $response = $controller($request);
 

@@ -34,7 +34,7 @@ class IndexRenameControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
 
-        $template = new Template();
+        $template = new Template(new Config());
         $expected = $template->render('table/index_rename_form', [
             'index' => new Index(['Key_name' => 'index']),
             'form_params' => ['db' => 'test_db', 'table' => 'test_table_index_rename', 'old_index' => 'index'],
@@ -60,7 +60,8 @@ class IndexRenameControllerTest extends AbstractTestCase
         $indexRegistry = new ReflectionProperty(Index::class, 'registry');
         $indexRegistry->setValue(null, []);
 
-        Config::getInstance()->selectedServer['DisableIS'] = true;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = true;
 
         Current::$database = 'test_db';
         Current::$table = 'test_table_index_rename';
@@ -106,7 +107,7 @@ class IndexRenameControllerTest extends AbstractTestCase
             ]);
 
         $responseRenderer = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $controller = new IndexRenameController(
             $responseRenderer,
             $template,

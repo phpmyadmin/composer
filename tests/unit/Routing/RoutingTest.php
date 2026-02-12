@@ -127,7 +127,7 @@ final class RoutingTest extends AbstractTestCase
 
     public function testCallSetupControllerWithInvalidRoute(): void
     {
-        $template = new Template();
+        $template = new Template(new Config());
         $container = self::createStub(ContainerInterface::class);
         $container->method('get')->willReturn($template);
         ContainerBuilder::$container = $container;

@@ -1215,7 +1215,7 @@ class ResultsTest extends AbstractTestCase
         self::assertNotFalse($dtResult);
         $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
 
-        $template = new Template();
+        $template = new Template($config);
 
         $tableHeadersForColumns = $template->render('display/results/table_headers_for_columns', [
             'is_sortable' => true,
@@ -1507,7 +1507,7 @@ class ResultsTest extends AbstractTestCase
         self::assertNotFalse($dtResult);
         $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
 
-        $template = new Template();
+        $template = new Template($config);
 
         $tableHeadersForColumns = $template->render('display/results/table_headers_for_columns', [
             'is_sortable' => true,

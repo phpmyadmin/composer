@@ -173,7 +173,7 @@ class AddFieldControllerTest extends AbstractTestCase
 
         $relation = new Relation($dbi);
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $expected = $template->render('columns_definitions/column_definitions_form', [
             'is_backup' => false,
             'fields_meta' => null,
@@ -261,7 +261,7 @@ class AddFieldControllerTest extends AbstractTestCase
         (new AddFieldController(
             $response,
             $transformations,
-            new Config(),
+            $config,
             $dbi,
             new ColumnsDefinition($dbi, $relation, $transformations),
             new DbTableExists($dbi),

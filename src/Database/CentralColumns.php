@@ -71,7 +71,7 @@ class CentralColumns
         $this->disableIs = $config->selectedServer['DisableIS'];
 
         $this->relation = new Relation($this->dbi);
-        $this->template = new Template();
+        $this->template = new Template($config);
     }
 
     /**

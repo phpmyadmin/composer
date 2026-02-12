@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Table\DeleteConfirmController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -36,7 +37,7 @@ class DeleteConfirmControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $expected = $template->render('table/delete/confirm', [
             'db' => 'test_db',
             'table' => 'test_table',

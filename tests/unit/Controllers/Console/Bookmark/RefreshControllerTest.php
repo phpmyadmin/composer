@@ -25,10 +25,11 @@ class RefreshControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $this->createDatabaseInterface();
         $response = new ResponseRenderer();
         $dbi = DatabaseInterface::getInstance();
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $bookmarkRepository = new BookmarkRepository($dbi, $relation);
-        $template = new Template();
-        $history = new History($dbi, $relation, Config::getInstance());
+        $template = new Template($config);
+        $history = new History($dbi, $relation, $config);
         $controller = new RefreshController(
             $response,
             new Console($relation, $template, $bookmarkRepository, $history),

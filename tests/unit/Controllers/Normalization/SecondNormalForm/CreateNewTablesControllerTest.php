@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Normalization\SecondNormalForm;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Normalization\SecondNormalForm\CreateNewTablesController;
 use PhpMyAdmin\Current;
@@ -35,7 +36,7 @@ class CreateNewTablesControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'pd' => json_encode(['ID, task' => [], 'task' => ['timestamp']]),

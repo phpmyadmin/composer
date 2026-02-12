@@ -20,7 +20,7 @@ final class UrlRedirectorTest extends AbstractTestCase
         $config = Config::getInstance();
         $config->set('PmaAbsoluteUri', 'http://localhost/phpmyadmin');
 
-        $urlRedirector = new UrlRedirector(new ResponseRenderer(), new Template(), ResponseFactory::create());
+        $urlRedirector = new UrlRedirector(new ResponseRenderer(), new Template($config), ResponseFactory::create());
 
         $response = $urlRedirector->redirect('https://user:pass@example.com/');
         self::assertSame('/phpmyadmin/', $response->getHeaderLine('Location'));
@@ -31,7 +31,11 @@ final class UrlRedirectorTest extends AbstractTestCase
     {
         $_SERVER['SERVER_NAME'] = 'localhost';
 
-        $urlRedirector = new UrlRedirector(new ResponseRenderer(), new Template(), ResponseFactory::create());
+        $urlRedirector = new UrlRedirector(
+            new ResponseRenderer(),
+            new Template(new Config()),
+            ResponseFactory::create(),
+        );
 
         $response = $urlRedirector->redirect('https://phpmyadmin.net/');
         $expected = <<<'HTML'

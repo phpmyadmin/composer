@@ -42,7 +42,7 @@ class FooterTest extends AbstractTestCase
         $config->selectedServer['DisableIS'] = false;
         $config->selectedServer['verbose'] = 'verbose host';
         $_GET['reload_left_frame'] = '1';
-        $this->object = new Footer(new Template(), $config);
+        $this->object = new Footer(new Template($config), $config);
         Current::$sqlQuery = '';
         $_POST = [];
     }
@@ -100,7 +100,8 @@ class FooterTest extends AbstractTestCase
      */
     public function testGetScripts(): void
     {
-        $footer = new Footer(new Template(), Config::getInstance());
+        $config = Config::getInstance();
+        $footer = new Footer(new Template($config), $config);
         self::assertStringContainsString(
             '<script data-cfasync="false">',
             $footer->getScripts()->getDisplay(),
@@ -112,7 +113,8 @@ class FooterTest extends AbstractTestCase
      */
     public function testDisplay(): void
     {
-        $footer = new Footer(new Template(), Config::getInstance());
+        $config = Config::getInstance();
+        $footer = new Footer(new Template($config), $config);
         $scripts = <<<'HTML'
 
             <script data-cfasync="false">
@@ -141,8 +143,9 @@ class FooterTest extends AbstractTestCase
      */
     public function testMinimal(): void
     {
-        $template = new Template();
-        $footer = new Footer($template, Config::getInstance());
+        $config = Config::getInstance();
+        $template = new Template($config);
+        $footer = new Footer($template, $config);
         $footer->setMinimal();
         $expected = [
             'is_minimal' => true,

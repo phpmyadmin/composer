@@ -36,11 +36,8 @@ class Template
 
     public const TEMPLATES_FOLDER = ROOT_PATH . 'resources/templates';
 
-    private Config $config;
-
-    public function __construct(Config|null $config = null)
+    public function __construct(private readonly Config $config)
     {
-        $this->config = $config ?? Config::getInstance();
     }
 
     public static function getTwigEnvironment(string|null $cacheDir, bool $isDevEnv): Environment

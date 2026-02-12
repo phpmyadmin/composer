@@ -50,7 +50,7 @@ class MonitorControllerTest extends AbstractTestCase
 
         $controller = new MonitorController(
             $response,
-            new Template(),
+            new Template(new Config()),
             $this->data,
             DatabaseInterface::getInstance(),
         );

@@ -54,7 +54,7 @@ class GeneralLogControllerTest extends AbstractTestCase
         $dbi = DatabaseInterface::getInstance();
         $controller = new GeneralLogController(
             $response,
-            new Template(),
+            new Template(new Config()),
             $this->data,
             new Monitor($dbi),
             $dbi,

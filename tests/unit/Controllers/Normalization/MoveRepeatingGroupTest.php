@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Normalization;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Normalization\MoveRepeatingGroup;
 use PhpMyAdmin\Current;
@@ -38,7 +39,7 @@ class MoveRepeatingGroupTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'repeatingColumns' => 'col1, col2',

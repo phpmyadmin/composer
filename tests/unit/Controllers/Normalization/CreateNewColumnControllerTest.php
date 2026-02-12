@@ -32,7 +32,7 @@ class CreateNewColumnControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $request = self::createStub(ServerRequest::class);
 
         $relation = new Relation($dbi);

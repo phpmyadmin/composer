@@ -23,7 +23,7 @@ class FormDisplayTemplate
 
     public function __construct(protected Config $config)
     {
-        $this->template = new Template();
+        $this->template = new Template($this->config);
     }
 
     /**

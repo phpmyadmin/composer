@@ -219,7 +219,7 @@ class Results
     ) {
         $this->relation = new Relation($this->dbi);
         $this->transformations = new Transformations($this->dbi, $this->relation);
-        $this->template = new Template();
+        $this->template = new Template($this->config);
 
         $this->setDefaultTransformations();
 

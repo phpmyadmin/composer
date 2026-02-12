@@ -55,7 +55,7 @@ class TrackingControllerTest extends AbstractTestCase
             ->withParsedBody(['version' => '', 'table' => '']);
 
         $responseRenderer = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $trackingChecker = self::createStub(TrackingChecker::class);
         $relation = new Relation($this->dbi);
         $bookmarkRepository = new BookmarkRepository($this->dbi, $relation);

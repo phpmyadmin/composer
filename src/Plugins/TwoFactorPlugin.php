@@ -43,7 +43,7 @@ class TwoFactorPlugin
 
     public function __construct(protected TwoFactor $twofactor)
     {
-        $this->template = new Template();
+        $this->template = new Template(Config::getInstance());
     }
 
     /**

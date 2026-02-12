@@ -51,7 +51,7 @@ class ProcessesControllerTest extends AbstractTestCase
         $dbi = DatabaseInterface::getInstance();
         $controller = new ProcessesController(
             $response,
-            new Template(),
+            new Template(new Config()),
             $this->data,
             $dbi,
             new Processes($dbi),
