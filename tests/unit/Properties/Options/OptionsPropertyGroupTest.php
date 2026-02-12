@@ -42,7 +42,7 @@ class OptionsPropertyGroupTest extends AbstractTestCase
         $this->stub->addProperty($propertyItem);
 
         self::assertTrue($this->stub->getProperties()->offsetExists($propertyItem));
-        self::assertSame(1, $this->stub->getNrOfProperties());
+        self::assertCount(1, $this->stub);
     }
 
     public function testRemoveProperty(): void
@@ -64,13 +64,13 @@ class OptionsPropertyGroupTest extends AbstractTestCase
         self::assertTrue($this->stub->getProperties()->offsetExists($propertyItem));
     }
 
-    public function testGetNrOfProperties(): void
+    public function testCount(): void
     {
         $propertyItem = new BoolPropertyItem();
         $this->stub->addProperty($propertyItem);
         $this->stub->addProperty($propertyItem);
         $propertyItem2 = new BoolPropertyItem();
         $this->stub->addProperty($propertyItem2);
-        self::assertSame(2, $this->stub->getNrOfProperties());
+        self::assertSame(2, $this->stub->count());
     }
 }

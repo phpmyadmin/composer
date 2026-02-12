@@ -10603,12 +10603,6 @@ parameters:
 			path: src/Profiling.php
 
 		-
-			message: '#^Method PhpMyAdmin\\Properties\\Options\\OptionsPropertyGroup\:\:count\(\) should return int\<0, max\> but returns int\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Properties/Options/OptionsPropertyGroup.php
-
-		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
 			count: 1
@@ -16475,6 +16469,12 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/unit/PluginsTest.php
+
+		-
+			message: '#^You should use assertCount\(\$expectedCount, \$variable\) instead of assertSame\(\$expectedCount, \$variable\-\>count\(\)\)\.$#'
+			identifier: phpunit.assertCount
+			count: 1
+			path: tests/unit/Properties/Options/OptionsPropertyGroupTest.php
 
 		-
 			message: '''
