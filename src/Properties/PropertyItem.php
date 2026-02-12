@@ -24,15 +24,4 @@ abstract class PropertyItem
      *  - PhpMyAdmin\Properties\Plugins\PluginPropertyItem     ( "export", "import", "transformations" )
      */
     abstract public function getItemType(): string;
-
-    /**
-     * Only overwritten in the PhpMyAdmin\Properties\Options\OptionsPropertyGroup class:
-     * Used to tell whether we can use the current item as a group by calling
-     * the addProperty() or removeProperty() methods, which are not available
-     * for simple PhpMyAdmin\Properties\Options\OptionsPropertyOneItem subclasses.
-     */
-    public function getGroup(): static|null
-    {
-        return null;
-    }
 }

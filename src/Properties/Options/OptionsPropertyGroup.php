@@ -57,14 +57,6 @@ abstract class OptionsPropertyGroup extends OptionsPropertyItem implements Count
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
 
     /**
-     * Gets the instance of the class
-     */
-    public function getGroup(): static
-    {
-        return $this;
-    }
-
-    /**
      * Gets the group of properties
      *
      * @return SplObjectStorage<OptionsPropertyItem, null>
