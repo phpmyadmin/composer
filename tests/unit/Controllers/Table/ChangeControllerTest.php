@@ -64,6 +64,7 @@ final class ChangeControllerTest extends AbstractTestCase
             new FileListing(),
             $template,
             $config,
+            $response,
         );
 
         (new ChangeController(
@@ -175,6 +176,7 @@ final class ChangeControllerTest extends AbstractTestCase
             new FileListing(),
             $template,
             $config,
+            $response,
         );
 
         (new ChangeController(

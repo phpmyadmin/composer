@@ -139,6 +139,7 @@ return [
             FileListing::class,
             Template::class,
             Config::class,
+            ResponseRenderer::class,
         ],
     ],
     Middleware\ErrorHandling::class => [
