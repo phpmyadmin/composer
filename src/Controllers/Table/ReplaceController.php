@@ -25,6 +25,7 @@ use PhpMyAdmin\Query\Generator as QueryGenerator;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Table\Table;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\UrlParams;
 use PhpMyAdmin\Util;
@@ -43,18 +44,19 @@ use function sprintf;
  * Manipulation of table data like inserting, replacing and updating.
  */
 #[Route('/table/replace', ['GET', 'POST'])]
-final class ReplaceController implements InvocableController
+final readonly class ReplaceController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly InsertEdit $insertEdit,
-        private readonly Transformations $transformations,
-        private readonly Relation $relation,
-        private readonly DatabaseInterface $dbi,
-        private readonly SqlController $sqlController,
-        private readonly DatabaseSqlController $databaseSqlController,
-        private readonly ChangeController $changeController,
-        private readonly TableSqlController $tableSqlController,
+        private ResponseRenderer $response,
+        private InsertEdit $insertEdit,
+        private Transformations $transformations,
+        private Relation $relation,
+        private DatabaseInterface $dbi,
+        private SqlController $sqlController,
+        private DatabaseSqlController $databaseSqlController,
+        private ChangeController $changeController,
+        private TableSqlController $tableSqlController,
+        private Template $template,
     ) {
     }
 
@@ -297,7 +299,10 @@ final class ReplaceController implements InvocableController
 
         // If there is a request for SQL previewing.
         if ($request->hasBodyParam('preview_sql')) {
-            Core::previewSQL($query);
+            $this->response->addJSON(
+                'sql_data',
+                $this->template->render('components/_preview_sql', ['query_data' => $query]),
+            );
 
             return $this->response->response();
         }

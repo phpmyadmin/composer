@@ -129,6 +129,7 @@ class ReplaceControllerTest extends AbstractTestCase
             self::createStub(DatabaseSqlController::class),
             self::createStub(ChangeController::class),
             self::createStub(TableSqlController::class),
+            $template,
         );
 
         UrlParams::$goto = 'index.php?route=/sql';
@@ -171,6 +172,7 @@ class ReplaceControllerTest extends AbstractTestCase
             self::createStub(DatabaseSqlController::class),
             self::createStub(ChangeController::class),
             self::createStub(TableSqlController::class),
+            new Template(new Config()),
         );
 
         /** @var array $result */

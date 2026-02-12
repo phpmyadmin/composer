@@ -266,6 +266,7 @@ class AddFieldControllerTest extends AbstractTestCase
             new ColumnsDefinition($dbi, $relation, $transformations),
             new DbTableExists($dbi),
             new UserPrivilegesFactory($dbi),
+            $template,
         ))($request);
 
         self::assertSame($expected, $response->getHTMLResult());

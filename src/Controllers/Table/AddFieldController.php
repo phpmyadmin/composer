@@ -6,7 +6,6 @@ namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\InvocableController;
-use PhpMyAdmin\Core;
 use PhpMyAdmin\CreateAddField;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -21,6 +20,7 @@ use PhpMyAdmin\MessageType;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Table\ColumnsDefinition;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPrivilegesFactory;
@@ -35,16 +35,17 @@ use function strlen;
  * Displays add field form and handles it.
  */
 #[Route('/table/add-field', ['GET', 'POST'])]
-final class AddFieldController implements InvocableController
+final readonly class AddFieldController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Transformations $transformations,
-        private readonly Config $config,
-        private readonly DatabaseInterface $dbi,
-        private readonly ColumnsDefinition $columnsDefinition,
-        private readonly DbTableExists $dbTableExists,
-        private readonly UserPrivilegesFactory $userPrivilegesFactory,
+        private ResponseRenderer $response,
+        private Transformations $transformations,
+        private Config $config,
+        private DatabaseInterface $dbi,
+        private ColumnsDefinition $columnsDefinition,
+        private DbTableExists $dbTableExists,
+        private UserPrivilegesFactory $userPrivilegesFactory,
+        private Template $template,
     ) {
     }
 
@@ -92,7 +93,10 @@ final class AddFieldController implements InvocableController
 
             // If there is a request for SQL previewing.
             if (isset($_POST['preview_sql'])) {
-                Core::previewSQL(Current::$sqlQuery);
+                $this->response->addJSON(
+                    'sql_data',
+                    $this->template->render('components/_preview_sql', ['query_data' => Current::$sqlQuery]),
+                );
 
                 return $this->response->response();
             }

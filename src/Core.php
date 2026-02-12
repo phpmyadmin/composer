@@ -498,29 +498,6 @@ class Core
     }
 
     /**
-     * Displays SQL query before executing.
-     *
-     * @param string[]|string $queryData Array containing queries or query itself
-     */
-    public static function previewSQL(array|string $queryData): void
-    {
-        $retval = '<div class="preview_sql">';
-        if ($queryData === '' || $queryData === []) {
-            $retval .= __('No change');
-        } elseif (is_array($queryData)) {
-            foreach ($queryData as $query) {
-                $retval .= Html\Generator::formatSql($query);
-            }
-        } else {
-            $retval .= Html\Generator::formatSql($queryData);
-        }
-
-        $retval .= '</div>';
-        $response = ResponseRenderer::getInstance();
-        $response->addJSON('sql_data', $retval);
-    }
-
-    /**
      * recursively check if variable is empty
      *
      * @param mixed $value the variable

@@ -12,6 +12,7 @@ use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\ServerRequest;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Transformations;
@@ -94,7 +95,8 @@ class SaveControllerTest extends AbstractTestCase
         $mock->expects(self::once())->method('__invoke')->with($request)
             ->willReturn(ResponseFactory::create()->createResponse());
 
-        $relation = new Relation($dbi);
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
         (new SaveController(
             new ResponseRenderer(),
             $relation,
@@ -102,7 +104,8 @@ class SaveControllerTest extends AbstractTestCase
             $dbi,
             $mock,
             new UserPrivilegesFactory($dbi),
-            new Config(),
+            $config,
+            new Template($config),
         ))($request);
 
         self::assertArrayNotHasKey('selected', $_POST);
@@ -118,7 +121,8 @@ class SaveControllerTest extends AbstractTestCase
         $class = new ReflectionClass(SaveController::class);
         $method = $class->getMethod('adjustColumnPrivileges');
 
-        $relation = new Relation($dbi);
+        $config = new Config();
+        $relation = new Relation($dbi, $config);
         $ctrl = new SaveController(
             new ResponseRenderer(),
             $relation,
@@ -126,7 +130,8 @@ class SaveControllerTest extends AbstractTestCase
             $dbi,
             self::createStub(StructureController::class),
             new UserPrivilegesFactory($dbi),
-            new Config(),
+            $config,
+            new Template($config),
         );
 
         self::assertFalse(

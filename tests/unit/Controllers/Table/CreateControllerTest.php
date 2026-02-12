@@ -280,6 +280,7 @@ class CreateControllerTest extends AbstractTestCase
             $dbi,
             new ColumnsDefinition($dbi, $relation, $transformations),
             new UserPrivilegesFactory($dbi),
+            $template,
         ))($request);
 
         self::assertSame($expected, $response->getHTMLResult());

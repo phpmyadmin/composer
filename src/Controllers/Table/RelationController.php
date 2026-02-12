@@ -9,7 +9,6 @@ use PhpMyAdmin\ConfigStorage\Features\DisplayFeature;
 use PhpMyAdmin\ConfigStorage\Features\RelationFeature;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\InvocableController;
-use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
@@ -133,7 +132,10 @@ final readonly class RelationController implements InvocableController
 
         // If there is a request for SQL previewing.
         if (isset($_POST['preview_sql'])) {
-            Core::previewSQL($previewSqlData);
+            $this->response->addJSON(
+                'sql_data',
+                $this->template->render('components/_preview_sql', ['query_data' => $previewSqlData]),
+            );
 
             return $this->response->response();
         }
