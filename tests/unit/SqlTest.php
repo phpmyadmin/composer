@@ -77,7 +77,7 @@ class SqlTest extends AbstractTestCase
             $this->sql,
             Sql::class,
             'getSqlWithLimitClause',
-            [ParseAnalyze::sqlQuery('SELECT * FROM test LIMIT 0, 10', Current::$database)[0]],
+            [ParseAnalyze::sqlQuery('SELECT * FROM test LIMIT 0, 10', Current::$database, false)[0]],
         ));
     }
 
@@ -91,31 +91,31 @@ class SqlTest extends AbstractTestCase
 
         self::assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                ParseAnalyze::sqlQuery('SELECT * FROM tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT * FROM tbl', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                ParseAnalyze::sqlQuery('SELECT col FROM tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT col FROM tbl', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                ParseAnalyze::sqlQuery('SELECT 1', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT 1', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                ParseAnalyze::sqlQuery('SELECT col1, col2 FROM tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT col1, col2 FROM tbl', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isRememberSortingOrder', [
-                ParseAnalyze::sqlQuery('SELECT COUNT(*) from tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT COUNT(*) from tbl', Current::$database, false)[0],
             ]),
         );
     }
@@ -130,13 +130,13 @@ class SqlTest extends AbstractTestCase
 
         self::assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isAppendLimitClause', [
-                ParseAnalyze::sqlQuery('SELECT * FROM tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT * FROM tbl', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isAppendLimitClause', [
-                ParseAnalyze::sqlQuery('SELECT * from tbl LIMIT 0, 10', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT * from tbl LIMIT 0, 10', Current::$database, false)[0],
             ]),
         );
     }
@@ -147,15 +147,15 @@ class SqlTest extends AbstractTestCase
         $_SESSION['tmpval']['max_rows'] = 10;
 
         self::assertTrue(Sql::isJustBrowsing(
-            ParseAnalyze::sqlQuery('SELECT * FROM db.tbl', Current::$database)[0],
+            ParseAnalyze::sqlQuery('SELECT * FROM db.tbl', Current::$database, false)[0],
         ));
 
         self::assertTrue(Sql::isJustBrowsing(
-            ParseAnalyze::sqlQuery('SELECT * FROM tbl WHERE 1', Current::$database)[0],
+            ParseAnalyze::sqlQuery('SELECT * FROM tbl WHERE 1', Current::$database, false)[0],
         ));
 
         self::assertFalse(Sql::isJustBrowsing(
-            ParseAnalyze::sqlQuery('SELECT * from tbl1, tbl2 LIMIT 0, 10', Current::$database)[0],
+            ParseAnalyze::sqlQuery('SELECT * from tbl1, tbl2 LIMIT 0, 10', Current::$database, false)[0],
         ));
     }
 
@@ -166,19 +166,19 @@ class SqlTest extends AbstractTestCase
     {
         self::assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                ParseAnalyze::sqlQuery('ALTER TABLE tbl DROP COLUMN col', Current::$database)[0],
+                ParseAnalyze::sqlQuery('ALTER TABLE tbl DROP COLUMN col', Current::$database, false)[0],
             ]),
         );
 
         self::assertTrue(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                ParseAnalyze::sqlQuery('DROP TABLE tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('DROP TABLE tbl', Current::$database, false)[0],
             ]),
         );
 
         self::assertFalse(
             $this->callFunction($this->sql, Sql::class, 'isDeleteTransformationInfo', [
-                ParseAnalyze::sqlQuery('SELECT * from tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT * from tbl', Current::$database, false)[0],
             ]),
         );
     }
@@ -195,19 +195,19 @@ class SqlTest extends AbstractTestCase
 
         self::assertTrue(
             $this->sql->hasNoRightsToDropDatabase(
-                ParseAnalyze::sqlQuery('DROP DATABASE db', Current::$database)[0],
+                ParseAnalyze::sqlQuery('DROP DATABASE db', Current::$database, false)[0],
             ),
         );
 
         self::assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
-                ParseAnalyze::sqlQuery('DROP TABLE tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('DROP TABLE tbl', Current::$database, false)[0],
             ),
         );
 
         self::assertFalse(
             $this->sql->hasNoRightsToDropDatabase(
-                ParseAnalyze::sqlQuery('SELECT * from tbl', Current::$database)[0],
+                ParseAnalyze::sqlQuery('SELECT * from tbl', Current::$database, false)[0],
             ),
         );
     }
@@ -445,7 +445,7 @@ class SqlTest extends AbstractTestCase
                 $justBrowsing,
                 'my_dataset',// db
                 'company_users',// table
-                ParseAnalyze::sqlQuery($sqlQuery ?? '', Current::$database)[0],
+                ParseAnalyze::sqlQuery($sqlQuery ?? '', Current::$database, false)[0],
             ],
         );
         self::assertSame($expectedNumRows, $result);

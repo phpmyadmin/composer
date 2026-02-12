@@ -1456,7 +1456,7 @@ class Sql
     ): string {
         if ($statementInfo === null) {
             // Parse and analyze the query
-            [$statementInfo, $db, $tableFromSql] = ParseAnalyze::sqlQuery($sqlQuery, $db);
+            [$statementInfo, $db, $tableFromSql] = ParseAnalyze::sqlQuery($sqlQuery, $db, $request->isAjax());
 
             $table = $tableFromSql !== '' ? $tableFromSql : $table;
         }

@@ -27,7 +27,7 @@ final class QueryController implements InvocableController
         $db = $request->getParam('db');
         $database = DatabaseName::from($db);
 
-        [, $db] = ParseAnalyze::sqlQuery($sqlQuery, $database->getName());
+        [, $db] = ParseAnalyze::sqlQuery($sqlQuery, $database->getName(), $request->isAjax());
 
         $goto = Url::getFromRoute('/database/multi-table-query');
 

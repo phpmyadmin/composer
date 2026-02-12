@@ -119,6 +119,7 @@ readonly class SqlController implements InvocableController
         [$statementInfo, Current::$database, $tableFromSql] = ParseAnalyze::sqlQuery(
             Current::$sqlQuery,
             Current::$database,
+            $request->isAjax(),
         );
 
         if (Current::$table != $tableFromSql && $tableFromSql !== '') {

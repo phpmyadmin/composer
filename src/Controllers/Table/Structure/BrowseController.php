@@ -60,7 +60,11 @@ final class BrowseController implements InvocableController
         );
 
         // Parse and analyze the query
-        [$statementInfo, Current::$database] = ParseAnalyze::sqlQuery($sqlQuery, Current::$database);
+        [$statementInfo, Current::$database] = ParseAnalyze::sqlQuery(
+            $sqlQuery,
+            Current::$database,
+            $request->isAjax(),
+        );
 
         $this->response->addHTML(
             $this->sql->executeQueryAndGetQueryResponse(

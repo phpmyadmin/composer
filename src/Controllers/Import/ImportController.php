@@ -590,6 +590,7 @@ final readonly class ImportController implements InvocableController
             [$statementInfo, Current::$database, $tableFromSql, $reloadNeeded] = ParseAnalyze::sqlQuery(
                 Current::$sqlQuery,
                 Current::$database,
+                $request->isAjax(),
             );
 
             ResponseRenderer::$reload = $reloadNeeded;
@@ -615,6 +616,7 @@ final readonly class ImportController implements InvocableController
                 [$statementInfo, Current::$database, $tableFromSql, $reloadNeeded] = ParseAnalyze::sqlQuery(
                     Current::$sqlQuery,
                     Current::$database,
+                    $request->isAjax(),
                 );
 
                 ResponseRenderer::$reload = $reloadNeeded;
