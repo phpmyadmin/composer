@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-08 00:45+0000\n"
-"PO-Revision-Date: 2025-09-23 19:02+0000\n"
+"PO-Revision-Date: 2026-02-13 08:09+0000\n"
 "Last-Translator: dingo thirteen <dingo13@d404.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "nl/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -12583,9 +12583,9 @@ msgid ""
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
 "possible issues."
 msgstr ""
-"De [code]HTTP_HOST[/code] variabele ontbreekt, wat mogelijk phpMyAdmin niet "
-"correct laat werken. Voor meer informatie over mogelijke problemen zie "
-"[doc@faq1-46]documentation[/doc]."
+"De [code]HTTP_HOST[/code] variabele ontbreek, waardoor phpMyAdmin mogelijk "
+"niet goed werkt. Voor meer informatie zie [doc@faq1-46]documentation[/doc] "
+"voor mogelijke problemen."
 
 #: src/Controllers/HomeController.php:458
 msgid ""
@@ -17574,10 +17574,8 @@ msgstr ""
 "maximaliseren:"
 
 #: src/Plugins/Export/ExportToon.php:68
-#, fuzzy
-#| msgid "Orientation"
 msgid "Indentation:"
-msgstr "Oriëntatie"
+msgstr "Inspringen:"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
@@ -18836,10 +18834,10 @@ msgid ""
 "UTC on 64-bit platforms (MariaDB 11.5 and later), stored as the number of "
 "seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgstr ""
-"Een tijdstip, van 1970-01-01 00:00:01 UTC tot 2038-01-19 03:14:07 UTC op 32-"
-"bits platforms (MariaDB 11.3 en eerder), en tot 2106-02-07 06:28:15 UTC op "
-"64-bits platforms (MariaDB 11.5 en later) wordt opgeslagen als aantal "
-"seconden sinds het beginmoment (1970-01-01 00:00:00 UTC)"
+"Een tijdstip, met een bereik van 1970-01-01 00:00:01 UTC tot 2038-01-09 "
+"03:14:07 UTC op 32-bit platforms (MariaDB 11.3 en eerder), en tot 2106-02-07 "
+"06:28:15 UTC op 64-bit platforms (MariaDB 11.5 en later) wordt opgeslagen "
+"als aantal seconden sinds het beginmoment (1970-01-01 00:00:00 UTC)"
 
 #: src/Types.php:214
 #, php-format
