@@ -827,7 +827,7 @@ class NavigationTree
      *
      * @return string HTML code for the navigation tree
      */
-    public function renderState(UserPrivileges $userPrivileges): string
+    public function renderState(ResponseRenderer $responseRenderer, UserPrivileges $userPrivileges): string
     {
         $this->buildPath($userPrivileges);
 
@@ -845,7 +845,7 @@ class NavigationTree
         usort($children, $this->sortNode(...));
         $this->setVisibility();
 
-        $nodes = $this->renderNodes($userPrivileges, $children);
+        $nodes = $this->renderNodes($responseRenderer, $userPrivileges, $children);
 
         return $this->template->render('navigation/tree/state', [
             'quick_warp' => $quickWarp,
@@ -861,7 +861,7 @@ class NavigationTree
      *
      * @return string|false HTML code for the navigation tree
      */
-    public function renderPath(UserPrivileges $userPrivileges): string|false
+    public function renderPath(ResponseRenderer $responseRenderer, UserPrivileges $userPrivileges): string|false
     {
         $node = $this->buildPath($userPrivileges);
         if (! is_bool($node)) {
@@ -872,7 +872,7 @@ class NavigationTree
             $children = $node->children;
             usort($children, $this->sortNode(...));
 
-            $listContent .= $this->renderNodes($userPrivileges, $children, false);
+            $listContent .= $this->renderNodes($responseRenderer, $userPrivileges, $children, false);
 
             if (! $this->config->settings['ShowDatabasesNavigationAsTree']) {
                 $parents = $node->parents(true);
@@ -900,8 +900,7 @@ class NavigationTree
                 ),
                 $results,
             );
-            ResponseRenderer::getInstance()
-                ->addJSON('results', $results);
+            $responseRenderer->addJSON('results', $results);
         }
 
         if ($node !== false) {
@@ -970,17 +969,21 @@ class NavigationTree
     }
 
     /** @param Node[] $children */
-    private function renderNodes(UserPrivileges $userPrivileges, array $children, bool $hasFirstClass = true): string
-    {
+    private function renderNodes(
+        ResponseRenderer $responseRenderer,
+        UserPrivileges $userPrivileges,
+        array $children,
+        bool $hasFirstClass = true,
+    ): string {
         $nodes = '';
         $lastKey = array_key_last($children);
         foreach ($children as $i => $child) {
             if ($i === 0) {
-                $nodes .= $this->renderNode($userPrivileges, $child, $hasFirstClass ? 'first' : '');
+                $nodes .= $this->renderNode($responseRenderer, $userPrivileges, $child, $hasFirstClass ? 'first' : '');
             } elseif ($i !== $lastKey) {
-                $nodes .= $this->renderNode($userPrivileges, $child);
+                $nodes .= $this->renderNode($responseRenderer, $userPrivileges, $child);
             } else {
-                $nodes .= $this->renderNode($userPrivileges, $child, 'last');
+                $nodes .= $this->renderNode($responseRenderer, $userPrivileges, $child, 'last');
             }
         }
 
@@ -995,8 +998,12 @@ class NavigationTree
      *
      * @return string HTML code for the tree node or branch
      */
-    private function renderNode(UserPrivileges $userPrivileges, Node $node, string $class = ''): string
-    {
+    private function renderNode(
+        ResponseRenderer $responseRenderer,
+        UserPrivileges $userPrivileges,
+        Node $node,
+        string $class = '',
+    ): string {
         $controlButtons = '';
         $paths = $node->getPaths();
         $nodeIsContainer = $node->type === NodeType::Container;
@@ -1014,8 +1021,7 @@ class NavigationTree
         }
 
         if ($showNode) {
-            $response = ResponseRenderer::getInstance();
-            if ($nodeIsContainer && $node->children === [] && ! $response->isAjax()) {
+            if ($nodeIsContainer && $node->children === [] && ! $responseRenderer->isAjax()) {
                 return '';
             }
 
@@ -1079,7 +1085,7 @@ class NavigationTree
                 $extraClass = ' last';
             }
 
-            $buffer .= $this->renderNode($userPrivileges, $child, $child->classes . $extraClass);
+            $buffer .= $this->renderNode($responseRenderer, $userPrivileges, $child, $child->classes . $extraClass);
         }
 
         if ($buffer !== '') {
@@ -1114,7 +1120,7 @@ class NavigationTree
      *
      * @return string HTML code
      */
-    public function renderDbSelect(UserPrivileges $userPrivileges): string
+    public function renderDbSelect(ResponseRenderer $responseRenderer, UserPrivileges $userPrivileges): string
     {
         $this->buildPath($userPrivileges);
 
@@ -1156,7 +1162,7 @@ class NavigationTree
         usort($children, $this->sortNode(...));
         $this->setVisibility();
 
-        $nodes = $this->renderNodes($userPrivileges, $children);
+        $nodes = $this->renderNodes($responseRenderer, $userPrivileges, $children);
 
         $databaseUrl = Url::getFromRoute(Config::getInstance()->config->DefaultTabDatabase);
 

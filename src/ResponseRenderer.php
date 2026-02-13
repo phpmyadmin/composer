@@ -244,7 +244,7 @@ class ResponseRenderer
     private function getDisplay(): string
     {
         return $this->template->render('base', [
-            'header' => $this->header->getDisplay(),
+            'header' => $this->header->getDisplay($this),
             'content' => $this->HTML,
             'footer' => $this->footer->getDisplay(),
         ]);

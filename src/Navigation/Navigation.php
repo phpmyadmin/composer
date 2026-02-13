@@ -60,7 +60,7 @@ class Navigation
      *
      * @return string The navigation tree
      */
-    public function getDisplay(): string
+    public function getDisplay(ResponseRenderer $responseRenderer): string
     {
         $userPrivileges = $this->userPrivilegesFactory->getPrivileges();
 
@@ -72,8 +72,7 @@ class Navigation
             'source' => '',
         ];
 
-        $response = ResponseRenderer::getInstance();
-        if (! $response->isAjax()) {
+        if (! $responseRenderer->isAjax()) {
             $logo['source'] = $this->getLogoSource();
             $logo['has_link'] = $this->config->settings['NavigationLogoLink'] !== '';
             $logo['link'] = trim($this->config->settings['NavigationLogoLink']);
@@ -108,27 +107,27 @@ class Navigation
                     $this->config,
                     new Clock(),
                 );
-                $pageSettings = new PageSettings($userPreferences, $response);
+                $pageSettings = new PageSettings($userPreferences, $responseRenderer);
                 $pageSettings->init('Navi', 'pma_navigation_settings');
-                $response->addHTML($pageSettings->getErrorHTML());
+                $responseRenderer->addHTML($pageSettings->getErrorHTML());
                 $navigationSettings = $pageSettings->getHTML();
             }
         }
 
-        if (! $response->isAjax() || ! empty($_POST['full']) || ! empty($_POST['reload'])) {
+        if (! $responseRenderer->isAjax() || ! empty($_POST['full']) || ! empty($_POST['reload'])) {
             if ($this->config->settings['ShowDatabasesNavigationAsTree']) {
                 // provide database tree in navigation
-                $navRender = $this->tree->renderState($userPrivileges);
+                $navRender = $this->tree->renderState($responseRenderer, $userPrivileges);
             } else {
                 // provide legacy pre-4.0 navigation
-                $navRender = $this->tree->renderDbSelect($userPrivileges);
+                $navRender = $this->tree->renderDbSelect($responseRenderer, $userPrivileges);
             }
         } else {
-            $navRender = $this->tree->renderPath($userPrivileges);
+            $navRender = $this->tree->renderPath($responseRenderer, $userPrivileges);
         }
 
         return $this->template->render('navigation/main', [
-            'is_ajax' => $response->isAjax(),
+            'is_ajax' => $responseRenderer->isAjax(),
             'logo' => $logo,
             'config_navigation_width' => $this->config->settings['NavigationWidth'],
             'is_synced' => $this->config->settings['NavigationLinkWithMainPanel'],

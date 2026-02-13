@@ -11,6 +11,7 @@ use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Navigation\NavigationTree;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\UserPrivileges;
 use PHPUnit\Framework\Attributes\CoversClass;
 
@@ -59,7 +60,7 @@ class NavigationTreeTest extends AbstractTestCase
      */
     public function testRenderState(): void
     {
-        $result = $this->object->renderState(new UserPrivileges());
+        $result = $this->object->renderState(new ResponseRenderer(), new UserPrivileges());
         self::assertStringContainsString('recentFavoriteTablesWrapper', $result);
     }
 
@@ -68,7 +69,7 @@ class NavigationTreeTest extends AbstractTestCase
      */
     public function testRenderPath(): void
     {
-        $result = $this->object->renderPath(new UserPrivileges());
+        $result = $this->object->renderPath(new ResponseRenderer(), new UserPrivileges());
         self::assertIsString($result);
         self::assertStringContainsString('list_container', $result);
     }
@@ -78,7 +79,7 @@ class NavigationTreeTest extends AbstractTestCase
      */
     public function testRenderDbSelect(): void
     {
-        $result = $this->object->renderDbSelect(new UserPrivileges());
+        $result = $this->object->renderDbSelect(new ResponseRenderer(), new UserPrivileges());
         self::assertStringContainsString('pma_navigation_select_database', $result);
     }
 
@@ -109,7 +110,7 @@ class NavigationTreeTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
 
         $object = new NavigationTree(new Template($config), $dbi, new Relation($dbi), $config);
-        $result = $object->renderState(new UserPrivileges());
+        $result = $object->renderState(new ResponseRenderer(), new UserPrivileges());
         self::assertStringContainsString('<li class="first navGroup">', $result);
         self::assertStringContainsString('functions' . "\n", $result);
         self::assertStringContainsString('<div class="list_container" style="display: none;">', $result);

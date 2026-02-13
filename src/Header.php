@@ -212,7 +212,7 @@ class Header
     }
 
     /** @return array<string, mixed> */
-    public function getDisplay(): array
+    public function getDisplay(ResponseRenderer $responseRenderer): array
     {
         $themeManager = ContainerBuilder::getContainer()->get(ThemeManager::class);
         $theme = $themeManager->theme;
@@ -251,7 +251,8 @@ class Header
         $scripts->addFiles($this->console->getScripts());
 
         if ($this->isMenuEnabled() && Current::$server > 0) {
-            $navigation = (new Navigation($this->template, $this->relation, $this->dbi, $this->config))->getDisplay();
+            $navigation = (new Navigation($this->template, $this->relation, $this->dbi, $this->config))
+                ->getDisplay($responseRenderer);
         }
 
         $customHeader = self::renderHeader();
