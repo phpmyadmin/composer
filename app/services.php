@@ -236,7 +236,7 @@ return [
     ],
     Middleware\ResponseRendererLoading::class => [
         'class' => Middleware\ResponseRendererLoading::class,
-        'arguments' => [Config::class],
+        'arguments' => [Config::class, ResponseRenderer::class],
     ],
     Middleware\ProfilingChecking::class => ['class' => Middleware\ProfilingChecking::class],
     Middleware\UserPreferencesLoading::class => [
