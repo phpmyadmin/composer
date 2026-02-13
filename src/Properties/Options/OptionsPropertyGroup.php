@@ -57,14 +57,6 @@ abstract class OptionsPropertyGroup extends OptionsPropertyItem implements Count
     /* ~~~~~~~~~~~~~~~~~~~~ Getters and Setters ~~~~~~~~~~~~~~~~~~~~ */
 
     /**
-     * Gets the instance of the class
-     */
-    public function getGroup(): static
-    {
-        return $this;
-    }
-
-    /**
      * Gets the group of properties
      *
      * @return SplObjectStorage<OptionsPropertyItem, null>
@@ -75,18 +67,10 @@ abstract class OptionsPropertyGroup extends OptionsPropertyItem implements Count
     }
 
     /**
-     * Gets the number of properties
-     */
-    public function getNrOfProperties(): int
-    {
-        return $this->properties->count();
-    }
-
-    /**
      * Countable interface implementation.
      */
     public function count(): int
     {
-        return $this->getNrOfProperties();
+        return $this->properties->count();
     }
 }

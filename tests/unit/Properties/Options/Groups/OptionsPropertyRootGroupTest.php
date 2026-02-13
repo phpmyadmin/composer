@@ -33,14 +33,6 @@ class OptionsPropertyRootGroupTest extends AbstractTestCase
         unset($this->object);
     }
 
-    public function testGetItemType(): void
-    {
-        self::assertSame(
-            'root',
-            $this->object->getItemType(),
-        );
-    }
-
     /**
      * Test for contable interface
      */

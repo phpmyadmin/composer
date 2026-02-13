@@ -5606,15 +5606,7 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <MixedArgument>
-      <code><![CDATA[$doc[0]]]></code>
-      <code><![CDATA[$doc[1]]]></code>
-      <code><![CDATA[$doc[1]]]></code>
-      <code><![CDATA[$doc[2]]]></code>
-    </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$doc]]></code>
-      <code><![CDATA[$propertyItem]]></code>
       <code><![CDATA[$val]]></code>
       <code><![CDATA[$val]]></code>
     </MixedAssignment>
@@ -5652,17 +5644,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
-    <TypeDoesNotContainType>
-      <code><![CDATA[in_array($propertyClass, [
-                BoolPropertyItem::class,
-                MessageOnlyPropertyItem::class,
-                SelectPropertyItem::class,
-                TextPropertyItem::class,
-            ], true)]]></code>
-    </TypeDoesNotContainType>
-    <UndefinedMethod>
-      <code><![CDATA[getProperties]]></code>
-    </UndefinedMethod>
   </file>
   <file src="src/Plugins/Auth/AuthenticationConfig.php">
     <DeprecatedMethod>

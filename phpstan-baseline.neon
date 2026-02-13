@@ -8296,30 +8296,12 @@ parameters:
 			path: src/Pdf.php
 
 		-
-			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
-			identifier: foreach.nonIterable
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Call to an undefined method PhpMyAdmin\\Properties\\Options\\OptionsPropertyItem\:\:getProperties\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Plugins.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
 			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Call to function in_array\(\) with arguments \(class\-string\<PhpMyAdmin\\Properties\\Options\\Groups\\OptionsPropertySubgroup\>&literal\-string\)\|null, array\{''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\BoolPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\MessageOnlyPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\SelectPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\TextPropertyItem''\} and true will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
 			path: src/Plugins.php
 
 		-
@@ -8350,24 +8332,6 @@ parameters:
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
 			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#1 \$link of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:show\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#2 \$anchor of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:showDocumentation\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#5 \$anchor of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:show\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
 			path: src/Plugins.php
 
 		-
@@ -10643,12 +10607,6 @@ parameters:
 			identifier: if.condNotBoolean
 			count: 1
 			path: src/Profiling.php
-
-		-
-			message: '#^Method PhpMyAdmin\\Properties\\Options\\OptionsPropertyGroup\:\:count\(\) should return int\<0, max\> but returns int\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Properties/Options/OptionsPropertyGroup.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
@@ -16508,6 +16466,12 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/unit/PluginsTest.php
+
+		-
+			message: '#^You should use assertCount\(\$expectedCount, \$variable\) instead of assertSame\(\$expectedCount, \$variable\-\>count\(\)\)\.$#'
+			identifier: phpunit.assertCount
+			count: 1
+			path: tests/unit/Properties/Options/OptionsPropertyGroupTest.php
 
 		-
 			message: '''
