@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\GisDataEditorController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -28,7 +29,7 @@ class GisDataEditorControllerTest extends AbstractTestCase
 
         DatabaseInterface::$instance = $this->createDatabaseInterface();
 
-        $this->controller = new GisDataEditorController(new ResponseRenderer(), new Template());
+        $this->controller = new GisDataEditorController(new ResponseRenderer(), new Template(new Config()));
     }
 
     #[DataProvider('providerForTestValidateGisData')]

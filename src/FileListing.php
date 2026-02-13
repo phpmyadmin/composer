@@ -89,7 +89,7 @@ class FileListing
             return false;
         }
 
-        $template = new Template();
+        $template = new Template($this->config);
 
         return $template->render('file_select_options', ['filesList' => $list, 'active' => $active]);
     }

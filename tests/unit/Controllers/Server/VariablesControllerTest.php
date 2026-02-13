@@ -76,7 +76,7 @@ class VariablesControllerTest extends AbstractTestCase
             ->with('SHOW SESSION VARIABLES;')
             ->willReturn($resultStub);
 
-        $controller = new VariablesController($response, new Template(), $this->mockedDbi);
+        $controller = new VariablesController($response, new Template(new Config()), $this->mockedDbi);
 
         $controller(self::createStub(ServerRequest::class));
         $html = $response->getHTMLResult();
@@ -118,7 +118,7 @@ class VariablesControllerTest extends AbstractTestCase
     {
         $controller = new VariablesController(
             ResponseRenderer::getInstance(),
-            new Template(),
+            new Template(new Config()),
             $this->mockedDbi,
         );
 
@@ -184,7 +184,7 @@ class VariablesControllerTest extends AbstractTestCase
 
         $controller = new VariablesController(
             ResponseRenderer::getInstance(),
-            new Template(),
+            new Template(new Config()),
             $this->mockedDbi,
         );
 
@@ -237,7 +237,7 @@ class VariablesControllerTest extends AbstractTestCase
 
         $controller = new VariablesController(
             ResponseRenderer::getInstance(),
-            new Template(),
+            new Template(new Config()),
             $this->mockedDbi,
         );
 

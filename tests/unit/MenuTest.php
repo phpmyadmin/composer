@@ -67,7 +67,8 @@ final class MenuTest extends AbstractTestCase
     {
         $dbi = $this->createDatabaseInterface();
         DatabaseInterface::$instance = $dbi;
+        $config = new Config();
 
-        return new Menu($dbi, new Template(), new Config(), new Relation($dbi), $db, $table);
+        return new Menu($dbi, new Template($config), $config, new Relation($dbi), $db, $table);
     }
 }

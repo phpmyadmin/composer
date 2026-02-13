@@ -46,7 +46,7 @@ class NavigationTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $this->object = new Navigation(new Template(), new Relation($dbi), $dbi, $config);
+        $this->object = new Navigation(new Template($config), new Relation($dbi), $dbi, $config);
     }
 
     /**
@@ -77,7 +77,8 @@ class NavigationTest extends AbstractTestCase
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
         DatabaseInterface::$instance = $dbi;
-        $this->object = new Navigation(new Template(), new Relation($dbi), $dbi, Config::getInstance());
+        $config = Config::getInstance();
+        $this->object = new Navigation(new Template($config), new Relation($dbi), $dbi, $config);
         $this->object->hideNavigationItem('itemName', 'itemType', 'db');
     }
 
@@ -99,7 +100,8 @@ class NavigationTest extends AbstractTestCase
         $dbi->expects(self::any())->method('quoteString')
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
         DatabaseInterface::$instance = $dbi;
-        $this->object = new Navigation(new Template(), new Relation($dbi), $dbi, Config::getInstance());
+        $config = Config::getInstance();
+        $this->object = new Navigation(new Template($config), new Relation($dbi), $dbi, $config);
         $this->object->unhideNavigationItem('itemName', 'itemType', 'db');
     }
 

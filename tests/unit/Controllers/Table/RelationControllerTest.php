@@ -35,7 +35,8 @@ class RelationControllerTest extends AbstractTestCase
 
         Current::$database = 'db';
         Current::$table = 'table';
-        Config::getInstance()->selectedServer['DisableIS'] = false;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = false;
         //$_SESSION
 
         $_POST['foreignDb'] = 'db';
@@ -46,7 +47,7 @@ class RelationControllerTest extends AbstractTestCase
             ->getMock();
 
         $this->response = new ResponseStub();
-        $this->template = new Template();
+        $this->template = new Template($config);
     }
 
     /**

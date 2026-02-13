@@ -1916,14 +1916,15 @@ class PrivilegesTest extends AbstractTestCase
                 ['Host' => 'test.host', 'User' => 'test.user', 'Priv' => '{"account_locked":true}'],
             );
 
+        $config = new Config();
         $relation = new Relation($this->dbi);
         $serverPrivileges = new Privileges(
-            new Template(),
+            new Template($config),
             $dbi,
             $relation,
             new RelationCleanup($this->dbi, $relation),
             new Plugins($this->dbi),
-            new Config(),
+            $config,
         );
         $method = new ReflectionMethod(Privileges::class, 'getUserPrivileges');
 
@@ -1935,15 +1936,16 @@ class PrivilegesTest extends AbstractTestCase
 
     private function getPrivileges(DatabaseInterface $dbi): Privileges
     {
+        $config = new Config();
         $relation = new Relation($dbi);
 
         return new Privileges(
-            new Template(),
+            new Template($config),
             $dbi,
             $relation,
             new RelationCleanup($dbi, $relation),
             new Plugins($dbi),
-            new Config(),
+            $config,
         );
     }
 

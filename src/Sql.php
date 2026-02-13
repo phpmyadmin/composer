@@ -1669,7 +1669,7 @@ class Sql
     {
         $indexes = Index::getFromTable($this->dbi, $table, $db);
         $indexesDuplicates = Index::findDuplicates($table, $db);
-        $template = new Template();
+        $template = new Template($this->config);
 
         return $template->render('indexes', [
             'url_params' => UrlParams::$params,

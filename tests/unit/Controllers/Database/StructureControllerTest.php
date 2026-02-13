@@ -40,7 +40,8 @@ class StructureControllerTest extends AbstractTestCase
     {
         parent::setUp();
 
-        Config::getInstance()->selectedServer['DisableIS'] = false;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = false;
         Current::$table = 'table';
         Current::$database = 'db';
 
@@ -61,7 +62,7 @@ class StructureControllerTest extends AbstractTestCase
 
         DatabaseInterface::$instance = $dbi;
 
-        $this->template = new Template();
+        $this->template = new Template($config);
         $this->response = new ResponseStub();
         $this->relation = new Relation($dbi);
         $this->replication = new Replication($dbi);

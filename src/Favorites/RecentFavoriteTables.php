@@ -89,7 +89,7 @@ class RecentFavoriteTables
     public static function getInstance(TableType $type): RecentFavoriteTables
     {
         if (! array_key_exists($type->value, self::$instances)) {
-            $template = new Template();
+            $template = new Template(Config::getInstance());
             $dbi = DatabaseInterface::getInstance();
             self::$instances[$type->value] = new RecentFavoriteTables(
                 $template,

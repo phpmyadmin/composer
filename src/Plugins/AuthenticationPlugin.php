@@ -54,7 +54,7 @@ abstract class AuthenticationPlugin
     public function __construct()
     {
         $this->ipAllowDeny = new IpAllowDeny();
-        $this->template = new Template();
+        $this->template = new Template(Config::getInstance());
     }
 
     /**

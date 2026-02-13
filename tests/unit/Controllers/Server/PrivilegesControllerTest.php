@@ -71,13 +71,14 @@ class PrivilegesControllerTest extends AbstractTestCase
         $request->method('getQueryParam')->willReturnMap([['initial', null, null]]);
 
         $response = new ResponseRenderer();
+        $config = new Config();
         (new PrivilegesController(
             $response,
-            new Template(),
+            new Template($config),
             new Relation($this->dbi),
             $this->dbi,
             new UserPrivilegesFactory($this->dbi),
-            new Config(),
+            $config,
         ))($request);
 
         $this->dummyDbi->assertAllQueriesConsumed();
@@ -139,7 +140,7 @@ class PrivilegesControllerTest extends AbstractTestCase
 
         $controller = new PrivilegesController(
             new ResponseRenderer(),
-            new Template(),
+            new Template($config),
             new Relation($dbi),
             $dbi,
             new UserPrivilegesFactory($dbi),

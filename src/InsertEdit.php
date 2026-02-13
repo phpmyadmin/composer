@@ -636,7 +636,7 @@ class InsertEdit
             $function = $this->showTypeOrFunction('function', $urlParams, true);
         }
 
-        $template = new Template();
+        $template = new Template($this->config);
 
         return $template->render('table/insert/get_head_and_foot_of_insert_row_table', [
             'type' => $type,
@@ -1420,7 +1420,7 @@ class InsertEdit
      */
     public function getHtmlForInsertEditFormHeader(bool $hasBlobField, bool $isUpload): string
     {
-        $template = new Template();
+        $template = new Template($this->config);
 
         return $template->render('table/insert/get_html_for_insert_edit_form_header', [
             'has_blob_field' => $hasBlobField,

@@ -23,7 +23,8 @@ class BrowseForeignersTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->browseForeigners = new BrowseForeigners(new Template(), new Config(), new ThemeManager());
+        $config = new Config();
+        $this->browseForeigners = new BrowseForeigners(new Template($config), $config, new ThemeManager());
     }
 
     /**
@@ -48,7 +49,7 @@ class BrowseForeignersTest extends AbstractTestCase
 
         $config = new Config();
         $config->set('MaxRows', 50);
-        $browseForeigners = new BrowseForeigners(new Template(), $config, new ThemeManager());
+        $browseForeigners = new BrowseForeigners(new Template($config), $config, new ThemeManager());
 
         self::assertSame(
             'LIMIT 10, 50 ',
@@ -127,7 +128,7 @@ class BrowseForeignersTest extends AbstractTestCase
 
         $config = new Config();
         $config->set('LimitChars', 5);
-        $browseForeigners = new BrowseForeigners(new Template(), $config, new ThemeManager());
+        $browseForeigners = new BrowseForeigners(new Template($config), $config, new ThemeManager());
 
         self::assertSame(
             ['fooba...', 'foobar<baz'],

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Html;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Url;
@@ -18,7 +19,7 @@ class SecurityTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->template = new Template();
+        $this->template = new Template(new Config());
     }
 
     protected function tearDown(): void

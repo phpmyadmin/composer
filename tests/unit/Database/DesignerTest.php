@@ -83,7 +83,8 @@ class DesignerTest extends AbstractTestCase
         $this->mockDatabaseInteraction($db);
 
         $dbi = DatabaseInterface::getInstance();
-        $this->designer = new Designer($dbi, new Relation($dbi), new Template(), new Config());
+        $config = new Config();
+        $this->designer = new Designer($dbi, new Relation($dbi), new Template($config), $config);
 
         $method = new ReflectionMethod(Designer::class, 'getPageIdsAndNames');
         $result = $method->invokeArgs($this->designer, [$db]);
@@ -104,7 +105,8 @@ class DesignerTest extends AbstractTestCase
         $this->mockDatabaseInteraction($db);
 
         $dbi = DatabaseInterface::getInstance();
-        $this->designer = new Designer($dbi, new Relation($dbi), new Template(), new Config());
+        $config = new Config();
+        $this->designer = new Designer($dbi, new Relation($dbi), new Template($config), $config);
 
         $result = $this->designer->getHtmlForEditOrDeletePages($db, $operation);
         self::assertStringContainsString('<input type="hidden" name="operation" value="' . $operation . '">', $result);
@@ -125,7 +127,8 @@ class DesignerTest extends AbstractTestCase
         $this->mockDatabaseInteraction($db);
 
         $dbi = DatabaseInterface::getInstance();
-        $this->designer = new Designer($dbi, new Relation($dbi), new Template(), new Config());
+        $config = new Config();
+        $this->designer = new Designer($dbi, new Relation($dbi), new Template($config), $config);
 
         $result = $this->designer->getHtmlForPageSaveAs($db);
         self::assertStringContainsString('<input type="hidden" name="operation" value="savePage">', $result);
@@ -156,7 +159,8 @@ class DesignerTest extends AbstractTestCase
         $page = 2;
 
         $dbi = DatabaseInterface::getInstance();
-        $this->designer = new Designer($dbi, new Relation($dbi), new Template(), new Config());
+        $config = new Config();
+        $this->designer = new Designer($dbi, new Relation($dbi), new Template($config), $config);
 
         $result = $this->designer->getHtmlForSchemaExport($db, $page, null, null);
         // export type

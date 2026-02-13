@@ -20,10 +20,11 @@ class ConsoleTest extends AbstractTestCase
     {
         DatabaseInterface::$instance = $this->createDatabaseInterface();
         $dbi = DatabaseInterface::getInstance();
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $bookmarkRepository = new BookmarkRepository($dbi, $relation);
-        $history = new History($dbi, $relation, Config::getInstance());
-        $console = new Console($relation, new Template(), $bookmarkRepository, $history);
+        $history = new History($dbi, $relation, $config);
+        $console = new Console($relation, new Template($config), $bookmarkRepository, $history);
         self::assertSame(['console.js'], $console->getScripts());
     }
 }

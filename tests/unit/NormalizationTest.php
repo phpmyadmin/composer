@@ -96,7 +96,12 @@ class NormalizationTest extends AbstractTestCase
             ->willReturn(['`id`_cnt' => 0, '`col1`_cnt' => 0, '`col2`_cnt' => 0]);
 
         $relation = new Relation($dbi);
-        $this->normalization = new Normalization($dbi, $relation, new Transformations($dbi, $relation), new Template());
+        $this->normalization = new Normalization(
+            $dbi,
+            $relation,
+            new Transformations($dbi, $relation),
+            new Template($config),
+        );
     }
 
     /**
@@ -133,7 +138,7 @@ class NormalizationTest extends AbstractTestCase
             $this->dbi,
             $relation,
             new Transformations($this->dbi, $relation),
-            new Template(),
+            new Template($config),
         );
         $result = $normalization->getHtmlForCreateNewColumn($userPrivileges, $numFields, $db, $table);
         self::assertStringContainsString('<table id="table_columns"', $result);

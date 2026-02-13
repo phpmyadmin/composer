@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Error;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\MessageType;
 use PhpMyAdmin\Template;
@@ -422,7 +423,7 @@ class Error extends Message
     {
         $this->isDisplayed(true);
 
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('error/get_display', [
             'context' => $this->getLevel() === MessageType::Error ? 'danger' : 'primary',

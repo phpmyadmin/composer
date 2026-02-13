@@ -89,7 +89,8 @@ class IndexesControllerTest extends AbstractTestCase
 
         $response = new ResponseStub();
         $index = new Index();
-        $template = new Template();
+        $config = Config::getInstance();
+        $template = new Template($config);
 
         $method = new ReflectionMethod(IndexesController::class, 'displayForm');
 
@@ -99,7 +100,7 @@ class IndexesControllerTest extends AbstractTestCase
             $dbi,
             new Indexes($dbi),
             new DbTableExists($dbi),
-            Config::getInstance(),
+            $config,
         );
 
         $_POST['create_index'] = true;

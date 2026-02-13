@@ -65,7 +65,7 @@ final class TrackingTest extends AbstractTestCase
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
 
-        $template = new Template();
+        $template = new Template($config);
         $relation = new Relation($dbi);
         $bookmarkRepository = new BookmarkRepository($dbi, $relation);
         $this->tracking = new Tracking(

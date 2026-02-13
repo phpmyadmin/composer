@@ -77,7 +77,7 @@ class InsertEditTest extends AbstractTestCase
             $relation,
             new Transformations($this->dbi, $relation),
             new FileListing(),
-            new Template(),
+            new Template($config),
             $config,
         );
 
@@ -185,14 +185,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn([], []);
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
         $result = $this->callFunction(
             $this->insertEdit,
@@ -231,14 +232,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn([$meta]);
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = $this->callFunction(
@@ -267,14 +269,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($resultStub);
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = $this->callFunction(
@@ -983,14 +986,15 @@ class InsertEditTest extends AbstractTestCase
             ->getMock();
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $currentRow['f'] = '123';
@@ -1190,14 +1194,15 @@ class InsertEditTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
         Current::$database = 'db';
         Current::$table = 'table';
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
         $this->insertEdit->setSessionForEditNext('`a` = 2');
 
@@ -1272,14 +1277,15 @@ class InsertEditTest extends AbstractTestCase
         $_POST['submit_type'] = '';
 
         $dbi = DatabaseInterface::getInstance();
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
         $result = $this->insertEdit->executeSqlQuery($query);
 
@@ -1295,14 +1301,15 @@ class InsertEditTest extends AbstractTestCase
         $_POST['submit_type'] = '';
 
         $dbi = DatabaseInterface::getInstance();
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
         $result = $this->insertEdit->executeSqlQuery($query);
 
@@ -1328,14 +1335,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($warnings);
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = (array) $this->callFunction(
@@ -1380,14 +1388,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn('2');
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = $this->insertEdit->getDisplayValueForForeignTableColumn('=1', $map, 'f');
@@ -2118,14 +2127,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn(false, '123', '2013-08-28 06:34:14');
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $this->insertEdit->verifyWhetherValueCanBeTruncatedAndAppendExtraData('db', 'table', 'a', $extraData);
@@ -2167,14 +2177,15 @@ class InsertEditTest extends AbstractTestCase
             ->willReturn($columns);
 
         DatabaseInterface::$instance = $dbi;
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = $this->insertEdit->getTableColumns('db', 'table');
@@ -2218,14 +2229,15 @@ class InsertEditTest extends AbstractTestCase
         $response = new ReflectionProperty(ResponseRenderer::class, 'instance');
         $response->setValue(null, $responseMock);
 
+        $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
             $dbi,
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         $result = $this->insertEdit->determineInsertOrEdit('1', 'db', 'table');
@@ -2278,8 +2290,8 @@ class InsertEditTest extends AbstractTestCase
             $relation,
             new Transformations($dbi, $relation),
             new FileListing(),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
 
         self::assertSame(

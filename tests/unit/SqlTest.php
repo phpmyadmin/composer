@@ -51,15 +51,16 @@ class SqlTest extends AbstractTestCase
         Current::$database = 'db';
         Current::$table = 'table';
 
+        $config = Config::getInstance();
         $relation = new Relation($this->dbi);
         $this->sql = new Sql(
             $this->dbi,
             $relation,
             new RelationCleanup($this->dbi, $relation),
             new Transformations($this->dbi, $relation),
-            new Template(),
+            new Template($config),
             new BookmarkRepository($this->dbi, $relation),
-            Config::getInstance(),
+            $config,
         );
     }
 

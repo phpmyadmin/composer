@@ -629,6 +629,10 @@
   </file>
   <file src="src/ConfigStorage/UserGroups.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -3932,6 +3936,7 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <PossiblyNullArgument>
       <code><![CDATA[Config::getInstance()->getUploadTempDir()]]></code>
@@ -3942,6 +3947,7 @@
   </file>
   <file src="src/Engines/Innodb.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -3955,6 +3961,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Error/Error.php">
+    <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
+    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$step]]></code>
       <code><![CDATA[$step['args']]]></code>
@@ -4158,6 +4167,7 @@
   </file>
   <file src="src/Favorites/RecentFavoriteTables.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
@@ -4743,6 +4753,7 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -5168,6 +5179,9 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Message.php">
+    <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
+    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$this->params]]></code>
     </MixedArgument>
@@ -5777,6 +5791,7 @@
       <code><![CDATA[$redirectUrl]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
@@ -7223,6 +7238,7 @@
   <file src="src/Plugins/TwoFactorPlugin.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
+      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
   </file>
   <file src="src/Plugins/UploadInterface.php">
@@ -8239,11 +8255,6 @@
     <UnusedVariable>
       <code><![CDATA[$maintainRelations]]></code>
     </UnusedVariable>
-  </file>
-  <file src="src/Template.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
   </file>
   <file src="src/Theme/Theme.php">
     <MixedArgument>
@@ -10188,7 +10199,6 @@
   </file>
   <file src="tests/unit/InsertEditTest.php">
     <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>

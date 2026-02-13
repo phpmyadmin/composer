@@ -1325,6 +1325,15 @@ parameters:
 
 		-
 			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 4
+			path: src/ConfigStorage/UserGroups.php
+
+		-
+			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
 				Use dependency injection instead\.$#
 			'''
@@ -5448,7 +5457,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 4
+			count: 5
 			path: src/Encoding.php
 
 		-
@@ -5480,6 +5489,15 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Encoding.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Engines/Innodb.php
 
 		-
 			message: '''
@@ -5518,6 +5536,15 @@ parameters:
 			message: '#^Binary operation "\.\=" between non\-falsy\-string and mixed results in an error\.$#'
 			identifier: assignOp.invalid
 			count: 2
+			path: src/Error/Error.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
 			path: src/Error/Error.php
 
 		-
@@ -5895,7 +5922,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 3
+			count: 4
 			path: src/Favorites/RecentFavoriteTables.php
 
 		-
@@ -6846,7 +6873,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 9
 			path: src/Html/Generator.php
 
 		-
@@ -7571,6 +7598,15 @@ parameters:
 			identifier: plus.leftNonNumeric
 			count: 1
 			path: src/Menu.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Message.php
 
 		-
 			message: '#^Cannot cast mixed to string\.$#'
@@ -8592,7 +8628,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 6
+			count: 7
 			path: src/Plugins/AuthenticationPlugin.php
 
 		-
@@ -10593,7 +10629,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 2
 			path: src/Plugins/TwoFactorPlugin.php
 
 		-
@@ -12590,15 +12626,6 @@ parameters:
 			identifier: argument.type
 			count: 6
 			path: src/Table/TableMover.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Template.php
 
 		-
 			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
@@ -15873,7 +15900,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 21
+			count: 20
 			path: tests/unit/InsertEditTest.php
 
 		-
