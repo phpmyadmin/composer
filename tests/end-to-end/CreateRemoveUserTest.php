@@ -89,6 +89,8 @@ class CreateRemoveUserTest extends TestBase
         $success = $this->waitForElement('cssSelector', '.alert-success');
         self::assertStringContainsString('You have added a new user', $success->getText());
 
+        $this->gotoHomepage();
+
         // Removing the newly added user
         $this->waitForElement('partialLinkText', 'User accounts')->click();
         $this->waitForElement('id', 'usersForm');
