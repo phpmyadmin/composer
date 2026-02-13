@@ -95,7 +95,7 @@ final class BrowseForeignersControllerTest extends AbstractTestCase
         $dbiDummy->addResult('SELECT COUNT(*) FROM .`actor`', [['3']], ['COUNT(*)']);
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template($config);
 
         $response = (new BrowseForeignersController(
             new ResponseRenderer(),

@@ -25,7 +25,7 @@ class TemplateTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->template = new Template();
+        $this->template = new Template(new Config());
     }
 
     /**
@@ -126,13 +126,14 @@ class TemplateTest extends AbstractTestCase
 
     public function testLoadingTwigEnvOnlyOnce(): void
     {
+        $config = new Config();
         $twigEnvCacheProperty = new ReflectionProperty(Template::class, 'twig');
         $twigEnvCacheProperty->setValue(null, null);
-        $template = new Template();
+        $template = new Template($config);
         self::assertSame("static content\n", $template->render('test/static'));
         $twigEnv = $twigEnvCacheProperty->getValue();
         self::assertInstanceOf(Environment::class, $twigEnv);
-        $template2 = new Template();
+        $template2 = new Template($config);
         self::assertSame("static content\n", $template2->render('test/static'));
         self::assertSame($twigEnv, $twigEnvCacheProperty->getValue());
     }
@@ -140,7 +141,7 @@ class TemplateTest extends AbstractTestCase
     public function testDisableCache(): void
     {
         (new ReflectionProperty(Template::class, 'twig'))->setValue(null, null);
-        $template = new Template(self::createStub(Config::class));
+        $template = new Template(new Config());
         $template->disableCache();
         $twig = (new ReflectionProperty(Template::class, 'twig'))->getValue();
         self::assertInstanceOf(Environment::class, $twig);

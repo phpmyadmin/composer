@@ -1048,7 +1048,7 @@ class Generator
             );
         }
 
-        return (new Template())->render('list_navigator', [
+        return (new Template(Config::getInstance()))->render('list_navigator', [
             'count' => $count,
             'max_count' => $maxCount,
             'classes' => $classes,

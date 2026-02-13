@@ -17,6 +17,7 @@ use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Plugins\Plugin;
 use PhpMyAdmin\Plugins\SchemaPlugin;
+use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\DocPropertyItem;
@@ -28,6 +29,7 @@ use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyGroup;
 use PhpMyAdmin\Properties\Options\OptionsPropertyItem;
+use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 use SplFileInfo;
 use Throwable;
 
@@ -44,7 +46,6 @@ use function mb_strtoupper;
 use function mb_substr;
 use function method_exists;
 use function sprintf;
-use function str_contains;
 use function str_starts_with;
 use function strcasecmp;
 use function usort;
@@ -297,7 +298,7 @@ class Plugins
         $properties = null;
         if (! $isSubgroup) {
             // for subgroup headers
-            if (str_contains($propertyGroup::class, 'PropertyItem')) {
+            if ($propertyGroup instanceof OptionsPropertyOneItem) {
                 $properties = [$propertyGroup];
             } else {
                 // for main groups
@@ -326,14 +327,12 @@ class Plugins
 
         $propertyClass = null;
         if ($properties !== null) {
-            /** @var OptionsPropertySubgroup $propertyItem */
             foreach ($properties as $propertyItem) {
                 $propertyClass = $propertyItem::class;
                 // if the property is a subgroup, we deal with it recursively
-                if (str_contains($propertyClass, 'Subgroup')) {
+                if ($propertyItem instanceof OptionsPropertySubgroup) {
                     // for subgroups
                     // each subgroup can have a header, which may also be a form element
-                    /** @var OptionsPropertyItem|null $subgroupHeader */
                     $subgroupHeader = $propertyItem->getSubgroupHeader();
                     if ($subgroupHeader !== null) {
                         $ret .= self::getOneOption($plugin, $section, $pluginName, $subgroupHeader);
@@ -363,7 +362,7 @@ class Plugins
             $ret .= '</ul></div>';
         }
 
-        if (method_exists($propertyGroup, 'getDoc')) {
+        if ($propertyGroup instanceof OptionsPropertyOneItem) {
             $doc = $propertyGroup->getDoc();
             if (is_array($doc)) {
                 if (count($doc) === 3) {
@@ -581,7 +580,8 @@ class Plugins
             $ret .= '<h3>' . $plugin->getTranslatedText($text) . '</h3>';
 
             $noOptions = true;
-            if ($options !== null && count($options) > 0) {
+            if ($options !== null && $options->count() > 0) {
+                /** @var OptionsPropertyMainGroup $propertyMainGroup */
                 foreach ($options->getProperties() as $propertyMainGroup) {
                     // check for hidden properties
                     $noOptions = true;

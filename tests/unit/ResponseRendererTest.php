@@ -8,11 +8,9 @@ use Fig\Http\Message\StatusCodeInterface;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
-use PhpMyAdmin\Header;
 use PhpMyAdmin\Html\MySQLDocumentation;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
-use PhpMyAdmin\Scripts;
 use PhpMyAdmin\Template;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionProperty;
@@ -49,9 +47,7 @@ final class ResponseRendererTest extends AbstractTestCase
     {
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
         $response = ResponseRenderer::getInstance();
-        $header = $response->getHeader();
-        $headerScripts = (new ReflectionProperty(Header::class, 'scripts'))->getValue($header);
-        self::assertInstanceOf(Scripts::class, $headerScripts);
+        $headerScripts = $response->getHeader()->getScripts();
         $files = array_column($headerScripts->getFiles(), 'name');
         self::assertNotContains('server/privileges.js', $files);
         self::assertNotContains('vendor/zxcvbn-ts.js', $files);

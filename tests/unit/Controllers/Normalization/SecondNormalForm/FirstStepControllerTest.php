@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Normalization\SecondNormalForm;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Normalization\SecondNormalForm\FirstStepController;
 use PhpMyAdmin\Current;
@@ -27,7 +28,7 @@ class FirstStepControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface();
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
 
         $relation = new Relation($dbi);
         $controller = new FirstStepController(

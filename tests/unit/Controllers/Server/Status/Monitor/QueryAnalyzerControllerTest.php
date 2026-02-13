@@ -44,7 +44,13 @@ class QueryAnalyzerControllerTest extends AbstractTestCase
         $dummyDbi->cachedAffectedRows = 123;
 
         $statusData = new Data($dbi, $config);
-        $controller = new QueryAnalyzerController($response, new Template(), $statusData, new Monitor($dbi), $dbi);
+        $controller = new QueryAnalyzerController(
+            $response,
+            new Template($config),
+            $statusData,
+            new Monitor($dbi),
+            $dbi,
+        );
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([

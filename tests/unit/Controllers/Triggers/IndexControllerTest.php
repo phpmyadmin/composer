@@ -27,7 +27,8 @@ final class IndexControllerTest extends AbstractTestCase
     {
         Current::$server = 2;
         Current::$database = 'test_db';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = true;
 
         $dummyDbi = $this->createDbiDummy();
         // phpcs:disable Generic.Files.LineLength.TooLong
@@ -47,7 +48,7 @@ final class IndexControllerTest extends AbstractTestCase
         // phpcs:enable
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template($config);
         $response = new ResponseRenderer();
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
@@ -196,7 +197,8 @@ final class IndexControllerTest extends AbstractTestCase
     {
         Current::$server = 2;
         Current::$database = 'test_db';
-        Config::getInstance()->selectedServer['DisableIS'] = true;
+        $config = Config::getInstance();
+        $config->selectedServer['DisableIS'] = true;
 
         $dummyDbi = $this->createDbiDummy();
         // phpcs:disable Generic.Files.LineLength.TooLong
@@ -216,7 +218,7 @@ final class IndexControllerTest extends AbstractTestCase
         // phpcs:enable
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template($config);
         $response = new ResponseRenderer();
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
@@ -337,7 +339,7 @@ final class IndexControllerTest extends AbstractTestCase
 
         $dbi = self::createStub(DatabaseInterface::class);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template(new Config());
         $response = new ResponseRenderer();
         $indexController = new IndexController(
             $response,

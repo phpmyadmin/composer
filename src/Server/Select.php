@@ -87,7 +87,7 @@ class Select
             }
         }
 
-        $template = new Template();
+        $template = new Template($config);
 
         return $template->render('server/select/index', [
             'not_only_options' => $notOnlyOptions,

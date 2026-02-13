@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Database;
 
 use PhpMyAdmin\Column;
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Database\Search;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -48,7 +49,7 @@ class SearchTest extends AbstractTestCase
             ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
 
         DatabaseInterface::$instance = $dbi;
-        $this->object = new Search($dbi, 'pma_test', new Template());
+        $this->object = new Search($dbi, 'pma_test', new Template(new Config()));
         // $this->object->setSearchParams(new \PhpMyAdmin\Http\ServerRequest());
     }
 
@@ -80,7 +81,7 @@ class SearchTest extends AbstractTestCase
                 'criteriaSearchOptionIncludeHex' => $includeHex,
             ]);
 
-        $this->object = new Search(DatabaseInterface::getInstance(), 'pma_test', new Template());
+        $this->object = new Search(DatabaseInterface::getInstance(), 'pma_test', new Template(new Config()));
         $this->object->setSearchParams($request);
         self::assertSame(
             $expected,

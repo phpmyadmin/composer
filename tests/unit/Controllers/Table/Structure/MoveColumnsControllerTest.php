@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table\Structure;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Table\Structure\MoveColumnsController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Message;
@@ -39,7 +40,7 @@ class MoveColumnsControllerTest extends AbstractTestCase
 
         $controller = new MoveColumnsController(
             new ResponseStub(),
-            new Template(),
+            new Template(new Config()),
             $dbi,
         );
         /** @var string|Message $alterStatement */

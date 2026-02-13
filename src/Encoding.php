@@ -282,7 +282,7 @@ class Encoding
      */
     public static function kanjiEncodingForm(): string
     {
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('encoding/kanji_encoding_form');
     }

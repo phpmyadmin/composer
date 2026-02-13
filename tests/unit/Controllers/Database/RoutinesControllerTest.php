@@ -78,7 +78,7 @@ final class RoutinesControllerTest extends AbstractTestCase
 
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template($config);
         $response = new ResponseRenderer();
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
@@ -314,7 +314,7 @@ final class RoutinesControllerTest extends AbstractTestCase
 
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
-        $template = new Template();
+        $template = new Template($config);
         $response = new ResponseRenderer();
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')

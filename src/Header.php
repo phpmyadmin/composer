@@ -33,14 +33,9 @@ use const JSON_HEX_TAG;
  */
 class Header
 {
-    /**
-     * Scripts instance
-     */
-    private Scripts $scripts;
-    /**
-     * Menu instance
-     */
-    private Menu $menu;
+    private Scripts|null $scripts = null;
+    private Menu|null $menu = null;
+
     /**
      * The page title
      */
@@ -69,16 +64,6 @@ class Header
         private readonly UserPreferences $userPreferences,
         private readonly UserPreferencesHandler $userPreferencesHandler,
     ) {
-        $this->menu = new Menu(
-            $this->dbi,
-            $this->template,
-            $this->config,
-            $this->relation,
-            Current::$database,
-            Current::$table,
-        );
-        $this->scripts = new Scripts($this->template);
-        $this->addDefaultScripts();
     }
 
     private function isMenuEnabled(): bool
@@ -92,11 +77,14 @@ class Header
         return $this->isMenuEnabled;
     }
 
-    /**
-     * Loads common scripts
-     */
-    private function addDefaultScripts(): void
+    public function getScripts(): Scripts
     {
+        if ($this->scripts !== null) {
+            return $this->scripts;
+        }
+
+        $this->scripts = new Scripts($this->template);
+
         $this->scripts->addFile('runtime.js');
         $this->scripts->addFile('vendor/jquery/jquery.min.js');
         $this->scripts->addFile('vendor/jquery/jquery-migrate.min.js');
@@ -112,6 +100,8 @@ class Header
         $this->scripts->addFile('main.js');
 
         $this->scripts->addCode($this->getJsParamsCode());
+
+        return $this->scripts;
     }
 
     /**
@@ -166,23 +156,21 @@ class Header
         return 'window.Navigation.update(window.CommonParams.setAll(' . json_encode($params, JSON_HEX_TAG) . '));';
     }
 
-    /**
-     * Returns the Scripts object
-     *
-     * @return Scripts object
-     */
-    public function getScripts(): Scripts
-    {
-        return $this->scripts;
-    }
-
-    /**
-     * Returns the Menu object
-     *
-     * @return Menu object
-     */
     public function getMenu(): Menu
     {
+        if ($this->menu !== null) {
+            return $this->menu;
+        }
+
+        $this->menu = new Menu(
+            $this->dbi,
+            $this->template,
+            $this->config,
+            $this->relation,
+            Current::$database,
+            Current::$table,
+        );
+
         return $this->menu;
     }
 
@@ -228,40 +216,39 @@ class Header
     {
         $themeManager = ContainerBuilder::getContainer()->get(ThemeManager::class);
         $theme = $themeManager->theme;
+        $scripts = $this->getScripts();
 
         // The user preferences have been merged at this point
         // so we can conditionally add CodeMirror, other scripts and settings
         if ($this->config->config->CodemirrorEnable) {
-            $this->scripts->addFile('vendor/codemirror/lib/codemirror.js');
-            $this->scripts->addFile('vendor/codemirror/mode/sql/sql.js');
-            $this->scripts->addFile('vendor/codemirror/addon/runmode/runmode.js');
-            $this->scripts->addFile('vendor/codemirror/addon/hint/show-hint.js');
-            $this->scripts->addFile('vendor/codemirror/addon/hint/sql-hint.js');
+            $scripts->addFile('vendor/codemirror/lib/codemirror.js');
+            $scripts->addFile('vendor/codemirror/mode/sql/sql.js');
+            $scripts->addFile('vendor/codemirror/addon/runmode/runmode.js');
+            $scripts->addFile('vendor/codemirror/addon/hint/show-hint.js');
+            $scripts->addFile('vendor/codemirror/addon/hint/sql-hint.js');
             if ($this->config->config->LintEnable) {
-                $this->scripts->addFile('vendor/codemirror/addon/lint/lint.js');
-                $this->scripts->addFile('codemirror/addon/lint/sql-lint.js');
+                $scripts->addFile('vendor/codemirror/addon/lint/lint.js');
+                $scripts->addFile('codemirror/addon/lint/sql-lint.js');
             }
         }
 
         if ($this->config->config->SendErrorReports !== 'never') {
-            $this->scripts->addFile('vendor/tracekit.js');
-            $this->scripts->addFile('error_report.js');
+            $scripts->addFile('vendor/tracekit.js');
+            $scripts->addFile('error_report.js');
         }
 
         if ($this->config->config->enable_drag_drop_import) {
-            $this->scripts->addFile('drag_drop_import.js');
+            $scripts->addFile('drag_drop_import.js');
         }
 
         if (! $this->config->config->DisableShortcutKeys) {
-            $this->scripts->addFile('shortcuts_handler.js');
+            $scripts->addFile('shortcuts_handler.js');
         }
 
-        $this->scripts->addCode($this->getVariablesForJavaScript());
+        $scripts->addCode($this->getVariablesForJavaScript());
 
-        $this->scripts->addCode(
-            'ConsoleEnterExecutes=' . ($this->config->config->ConsoleEnterExecutes ? 'true' : 'false'),
-        );
-        $this->scripts->addFiles($this->console->getScripts());
+        $scripts->addCode('ConsoleEnterExecutes=' . ($this->config->config->ConsoleEnterExecutes ? 'true' : 'false'));
+        $scripts->addFiles($this->console->getScripts());
 
         if ($this->isMenuEnabled() && Current::$server > 0) {
             $navigation = (new Navigation($this->template, $this->relation, $this->dbi, $this->config))->getDisplay();
@@ -277,16 +264,17 @@ class Header
             $loadUserPreferences = $this->userPreferences->autoloadGetHeader();
         }
 
+        $menu = '';
         if ($this->isMenuEnabled() && Current::$server > 0) {
-            $menu = $this->menu->getDisplay();
+            $menu = $this->getMenu()->getDisplay();
         }
 
         $console = $this->console->getDisplay();
         $messages = $this->getMessage();
         $isLoggedIn = $this->dbi->isConnected();
 
-        $this->scripts->addFile('datetimepicker.js');
-        $this->scripts->addFile('validator-messages.js');
+        $scripts->addFile('datetimepicker.js');
+        $scripts->addFile('validator-messages.js');
 
         return [
             'lang' => Current::$lang,
@@ -296,7 +284,7 @@ class Header
             'theme_path' => $theme->getPath(),
             'server' => Current::$server,
             'title' => $this->getPageTitle(),
-            'scripts' => $this->scripts->getDisplay(),
+            'scripts' => $scripts->getDisplay(),
             'body_id' => $this->bodyId,
             'navigation' => $navigation ?? '',
             'custom_header' => $customHeader,
@@ -305,7 +293,7 @@ class Header
             'is_warnings_enabled' => $this->warningsEnabled,
             'is_menu_enabled' => $this->isMenuEnabled(),
             'is_logged_in' => $isLoggedIn,
-            'menu' => $menu ?? '',
+            'menu' => $menu,
             'console' => $console,
             'messages' => $messages,
             'theme_color_mode' => $theme->getColorMode(),

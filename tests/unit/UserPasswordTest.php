@@ -29,14 +29,15 @@ class UserPasswordTest extends AbstractTestCase
 
         $dbi = $this->createDatabaseInterface();
 
+        $config = new Config();
         $relation = new Relation($dbi);
         $serverPrivileges = new Privileges(
-            new Template(),
+            new Template($config),
             $dbi,
             $relation,
             new RelationCleanup($dbi, $relation),
             new Plugins($dbi),
-            new Config(),
+            $config,
         );
         $this->object = new UserPassword(
             $serverPrivileges,

@@ -46,7 +46,12 @@ class VariablesControllerTest extends AbstractTestCase
     {
         $response = new ResponseRenderer();
 
-        $controller = new VariablesController($response, new Template(), $this->data, DatabaseInterface::getInstance());
+        $controller = new VariablesController(
+            $response,
+            new Template(new Config()),
+            $this->data,
+            DatabaseInterface::getInstance(),
+        );
 
         $this->dummyDbi->addSelectDb('mysql');
         $controller(self::createStub(ServerRequest::class));

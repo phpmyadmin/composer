@@ -77,7 +77,8 @@ class GisVisualizationControllerTest extends AbstractTestCase
         ];
         $downloadUrl = Url::getFromRoute('/table/gis-visualization', $downloadParams + $params);
 
-        $template = new Template();
+        $config = new Config();
+        $template = new Template($config);
         $expected = $template->render('table/gis_visualization/gis_visualization', [
             'url_params' => $params,
             'download_url' => $downloadUrl,
@@ -121,7 +122,7 @@ class GisVisualizationControllerTest extends AbstractTestCase
             $dbi,
             new DbTableExists($dbi),
             ResponseFactory::create(),
-            new Config(),
+            $config,
         );
         $response = $controller($request);
 

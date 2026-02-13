@@ -83,7 +83,7 @@ class TableControllerTest extends AbstractTestCase
         $charsets = Charsets::getCharsets($this->dbi, false);
         $collations = Charsets::getCollations($this->dbi, false);
 
-        $expectedOutput = (new Template())->render('table/operations/index', [
+        $expectedOutput = (new Template($config))->render('table/operations/index', [
             'db' => 'test_db',
             'table' => 'test_table',
             'url_params' => [

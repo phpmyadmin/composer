@@ -1325,6 +1325,15 @@ parameters:
 
 		-
 			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 4
+			path: src/ConfigStorage/UserGroups.php
+
+		-
+			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
 				Use dependency injection instead\.$#
 			'''
@@ -5448,7 +5457,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 4
+			count: 5
 			path: src/Encoding.php
 
 		-
@@ -5480,6 +5489,15 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Encoding.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Engines/Innodb.php
 
 		-
 			message: '''
@@ -5518,6 +5536,15 @@ parameters:
 			message: '#^Binary operation "\.\=" between non\-falsy\-string and mixed results in an error\.$#'
 			identifier: assignOp.invalid
 			count: 2
+			path: src/Error/Error.php
+
+		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
 			path: src/Error/Error.php
 
 		-
@@ -5895,7 +5922,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 3
+			count: 4
 			path: src/Favorites/RecentFavoriteTables.php
 
 		-
@@ -6846,7 +6873,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 9
 			path: src/Html/Generator.php
 
 		-
@@ -7573,6 +7600,15 @@ parameters:
 			path: src/Menu.php
 
 		-
+			message: '''
+				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
+				Use dependency injection instead\.$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: src/Message.php
+
+		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
 			count: 1
@@ -8260,30 +8296,12 @@ parameters:
 			path: src/Pdf.php
 
 		-
-			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
-			identifier: foreach.nonIterable
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Call to an undefined method PhpMyAdmin\\Properties\\Options\\OptionsPropertyItem\:\:getProperties\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Plugins.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
 			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Call to function in_array\(\) with arguments \(class\-string\<PhpMyAdmin\\Properties\\Options\\Groups\\OptionsPropertySubgroup\>&literal\-string\)\|null, array\{''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\BoolPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\MessageOnlyPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\SelectPropertyItem'', ''PhpMyAdmin\\\\Properties\\\\Options\\\\Items\\\\TextPropertyItem''\} and true will always evaluate to false\.$#'
-			identifier: function.impossibleType
-			count: 1
 			path: src/Plugins.php
 
 		-
@@ -8314,24 +8332,6 @@ parameters:
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
 			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#1 \$link of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:show\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#2 \$anchor of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:showDocumentation\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Parameter \#5 \$anchor of static method PhpMyAdmin\\Html\\MySQLDocumentation\:\:show\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
 			path: src/Plugins.php
 
 		-
@@ -8592,7 +8592,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 6
+			count: 7
 			path: src/Plugins/AuthenticationPlugin.php
 
 		-
@@ -10593,7 +10593,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 2
 			path: src/Plugins/TwoFactorPlugin.php
 
 		-
@@ -10607,12 +10607,6 @@ parameters:
 			identifier: if.condNotBoolean
 			count: 1
 			path: src/Profiling.php
-
-		-
-			message: '#^Method PhpMyAdmin\\Properties\\Options\\OptionsPropertyGroup\:\:count\(\) should return int\<0, max\> but returns int\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Properties/Options/OptionsPropertyGroup.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
@@ -12590,15 +12584,6 @@ parameters:
 			identifier: argument.type
 			count: 6
 			path: src/Table/TableMover.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Template.php
 
 		-
 			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
@@ -15873,7 +15858,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 21
+			count: 20
 			path: tests/unit/InsertEditTest.php
 
 		-
@@ -16481,6 +16466,12 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/unit/PluginsTest.php
+
+		-
+			message: '#^You should use assertCount\(\$expectedCount, \$variable\) instead of assertSame\(\$expectedCount, \$variable\-\>count\(\)\)\.$#'
+			identifier: phpunit.assertCount
+			count: 1
+			path: tests/unit/Properties/Options/OptionsPropertyGroupTest.php
 
 		-
 			message: '''

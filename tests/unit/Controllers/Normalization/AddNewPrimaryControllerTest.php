@@ -32,7 +32,7 @@ class AddNewPrimaryControllerTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dbiDummy);
         DatabaseInterface::$instance = $dbi;
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
 
         $relation = new Relation($dbi);
         $controller = new AddNewPrimaryController(

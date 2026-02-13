@@ -42,7 +42,8 @@ abstract class TextImageLinkTransformationsPlugin extends TransformationsPlugin
      */
     public function applyTransformation(string $buffer, array $options = [], FieldMetadata|null $meta = null): string
     {
-        $cfg = Config::getInstance()->settings;
+        $config = Config::getInstance();
+        $cfg = $config->settings;
         $options = $this->getOptions($options, $cfg['DefaultTransformations']['TextImageLink']);
         $url = $options[0] . $buffer;
         /* Do not allow javascript links */
@@ -50,7 +51,7 @@ abstract class TextImageLinkTransformationsPlugin extends TransformationsPlugin
             return htmlspecialchars($url);
         }
 
-        $template = new Template();
+        $template = new Template($config);
 
         return $template->render('plugins/text_image_link_transformations', [
             'url' => $url,

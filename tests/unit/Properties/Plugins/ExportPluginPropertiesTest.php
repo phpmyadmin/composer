@@ -33,14 +33,6 @@ class ExportPluginPropertiesTest extends AbstractTestCase
         unset($this->object);
     }
 
-    public function testGetItemType(): void
-    {
-        self::assertSame(
-            'export',
-            $this->object->getItemType(),
-        );
-    }
-
     /**
      * Test for
      *     - PhpMyAdmin\Properties\Plugins\ExportPluginProperties::getForceFile

@@ -41,7 +41,7 @@ final class ZoomSearchControllerTest extends AbstractTestCase
             ->withQueryParams(['db' => 'test_db', 'table' => 'test_table']);
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $controller = new ZoomSearchController(
             $response,
             $template,
@@ -91,7 +91,7 @@ final class ZoomSearchControllerTest extends AbstractTestCase
             ->withParsedBody(['change_tbl_info' => '1']);
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $controller = new ZoomSearchController(
             $response,
             $template,

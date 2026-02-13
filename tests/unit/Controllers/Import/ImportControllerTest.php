@@ -87,7 +87,7 @@ class ImportControllerTest extends AbstractTestCase
         $responseRenderer = new ResponseRenderer();
         $relation = new Relation($this->dbi);
         $bookmarkRepository = new BookmarkRepository($this->dbi, $relation);
-        $template = new Template();
+        $template = new Template($config);
         $sql = new Sql(
             $this->dbi,
             $relation,

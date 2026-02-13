@@ -48,7 +48,10 @@ class ReplicationGuiTest extends AbstractTestCase
         Current::$table = 'table';
         UrlParams::$params = [];
 
-        $this->replicationGui = new ReplicationGui(new Replication(DatabaseInterface::getInstance()), new Template());
+        $this->replicationGui = new ReplicationGui(
+            new Replication(DatabaseInterface::getInstance()),
+            new Template($config),
+        );
     }
 
     public function testGetHtmlForPrimaryReplication(): void

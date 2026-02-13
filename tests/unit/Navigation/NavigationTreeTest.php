@@ -41,7 +41,7 @@ class NavigationTreeTest extends AbstractTestCase
         Current::$database = 'db';
         Current::$table = '';
 
-        $this->object = new NavigationTree(new Template(), $dbi, new Relation($dbi), $config);
+        $this->object = new NavigationTree(new Template($config), $dbi, new Relation($dbi), $config);
     }
 
     /**
@@ -108,7 +108,7 @@ class NavigationTreeTest extends AbstractTestCase
         $dbi = $this->createDatabaseInterface($dummyDbi);
         DatabaseInterface::$instance = $dbi;
 
-        $object = new NavigationTree(new Template(), $dbi, new Relation($dbi), $config);
+        $object = new NavigationTree(new Template($config), $dbi, new Relation($dbi), $config);
         $result = $object->renderState(new UserPrivileges());
         self::assertStringContainsString('<li class="first navGroup">', $result);
         self::assertStringContainsString('functions' . "\n", $result);

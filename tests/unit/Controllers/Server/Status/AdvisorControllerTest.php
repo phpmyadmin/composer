@@ -36,7 +36,7 @@ class AdvisorControllerTest extends AbstractTestCase
         $config->selectedServer['host'] = 'localhost';
 
         $this->response = new ResponseRenderer();
-        $this->template = new Template();
+        $this->template = new Template($config);
         $this->data = new Data(DatabaseInterface::getInstance(), $config);
     }
 

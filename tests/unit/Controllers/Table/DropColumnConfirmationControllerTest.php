@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests\Controllers\Table;
 
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\Table\DropColumnConfirmationController;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\DbTableExists;
@@ -41,7 +42,7 @@ class DropColumnConfirmationControllerTest extends AbstractTestCase
         $response = new ResponseRenderer();
         $response->setAjax(true);
 
-        $template = new Template();
+        $template = new Template(new Config());
         $expected = $template->render('table/structure/drop_confirm', [
             'db' => 'test_db',
             'table' => 'test_table',

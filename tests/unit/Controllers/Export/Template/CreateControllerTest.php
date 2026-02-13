@@ -48,7 +48,7 @@ class CreateControllerTest extends AbstractTestCase
         $config->selectedServer['user'] = 'user';
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template($config);
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com/')
             ->withParsedBody([
                 'exportType' => 'raw',

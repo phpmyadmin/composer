@@ -76,7 +76,8 @@ class ChartControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $dbi;
 
         $response = new ResponseRenderer();
-        $template = new Template();
+        $config = new Config();
+        $template = new Template($config);
         $expected = $template->render('table/chart/tbl_chart', [
             'url_params' => [
                 'db' => 'test_db',
@@ -105,7 +106,7 @@ class ChartControllerTest extends AbstractTestCase
                 'unlim_num_rows' => '4',
             ]);
 
-        (new ChartController($response, $dbi, new DbTableExists($dbi), new Config()))($request);
+        (new ChartController($response, $dbi, new DbTableExists($dbi), $config))($request);
         self::assertSame($expected, $response->getHTMLResult());
     }
 }

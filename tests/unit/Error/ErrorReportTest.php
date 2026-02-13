@@ -54,7 +54,7 @@ class ErrorReportTest extends AbstractTestCase
         $this->errorReport = new ErrorReport(
             new HttpRequest(),
             new Relation($this->dbi),
-            new Template(),
+            new Template($config),
             $config,
         );
         $this->errorReport->setSubmissionUrl('http://localhost');
@@ -133,11 +133,12 @@ class ErrorReportTest extends AbstractTestCase
             )
             ->willReturn($return);
 
+        $config = Config::getInstance();
         $this->errorReport = new ErrorReport(
             $httpRequest,
             new Relation($this->dbi),
-            new Template(),
-            Config::getInstance(),
+            new Template($config),
+            $config,
         );
         $this->errorReport->setSubmissionUrl($submissionUrl);
 

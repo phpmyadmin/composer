@@ -536,7 +536,7 @@ class Message implements Stringable
     {
         $this->isDisplayed(true);
 
-        $template = new Template();
+        $template = new Template(Config::getInstance());
 
         return $template->render('message', ['context' => $this->getContext(), 'message' => $this->getMessage()]);
     }

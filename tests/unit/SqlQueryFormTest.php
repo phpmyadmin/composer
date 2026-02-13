@@ -54,14 +54,14 @@ class SqlQueryFormTest extends AbstractTestCase
         );
         $this->dbi = $this->createDatabaseInterface($this->dummyDbi);
         DatabaseInterface::$instance = $this->dbi;
+        $config = Config::getInstance();
         $relation = new Relation($this->dbi);
         $bookmarkRepository = new BookmarkRepository($this->dbi, $relation);
-        $this->sqlQueryForm = new SqlQueryForm(new Template(), $this->dbi, $bookmarkRepository);
+        $this->sqlQueryForm = new SqlQueryForm(new Template($config), $this->dbi, $bookmarkRepository);
 
         Current::$database = 'PMA_db';
         Current::$table = 'PMA_table';
 
-        $config = Config::getInstance();
         $config->settings['TextareaAutoSelect'] = true;
 
         $relationParameters = RelationParameters::fromArray([

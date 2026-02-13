@@ -37,7 +37,7 @@ final class ChangeLogControllerTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'https://example.com/');
 
         $responseRenderer = new ResponseRenderer();
-        $template = new Template();
+        $template = new Template(new Config());
         $controller = new ChangeLogController($responseRenderer, $config, ResponseFactory::create(), $template);
         $response = $controller($request);
 
@@ -57,7 +57,12 @@ final class ChangeLogControllerTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'https://example.com/');
 
         $responseRenderer = new ResponseRenderer();
-        $controller = new ChangeLogController($responseRenderer, $config, ResponseFactory::create(), new Template());
+        $controller = new ChangeLogController(
+            $responseRenderer,
+            $config,
+            ResponseFactory::create(),
+            new Template(new Config()),
+        );
         $response = $controller($request);
 
         self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
