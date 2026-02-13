@@ -55,7 +55,7 @@ use function sprintf;
 
 readonly class Application
 {
-    public function __construct(private ResponseFactory $responseFactory)
+    public function __construct(private ResponseFactory $responseFactory, private ResponseRenderer $responseRenderer)
     {
     }
 
@@ -67,7 +67,7 @@ readonly class Application
     public function run(bool $isSetupPage = false): void
     {
         $container = ContainerBuilder::getContainer();
-        $requestHandler = new QueueRequestHandler($container, new ApplicationHandler($this));
+        $requestHandler = new QueueRequestHandler($container, new ApplicationHandler($this, $this->responseRenderer));
         $requestHandler->add(ErrorHandling::class);
         $requestHandler->add(OutputBuffering::class);
         $requestHandler->add(PhpExtensionsChecking::class);

@@ -73,7 +73,10 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 return [
     Advisor::class => ['class' => Advisor::class, 'arguments' => [DatabaseInterface::class, ExpressionLanguage::class]],
-    Application::class => ['class' => Application::class, 'arguments' => [ResponseFactory::class]],
+    Application::class => [
+        'class' => Application::class,
+        'arguments' => [ResponseFactory::class, ResponseRenderer::class],
+    ],
     BrowseForeigners::class => [
         'class' => BrowseForeigners::class,
         'arguments' => [Template::class, Config::class, ThemeManager::class],
