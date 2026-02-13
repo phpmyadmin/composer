@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-08 00:45+0000\n"
-"PO-Revision-Date: 2025-11-13 15:51+0000\n"
+"PO-Revision-Date: 2026-02-14 16:09+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "phpmyadmin/master/en_GB/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -17278,10 +17278,8 @@ msgstr ""
 "Database system or older MySQL server to maximise output compatibility with:"
 
 #: src/Plugins/Export/ExportToon.php:68
-#, fuzzy
-#| msgid "Orientation"
 msgid "Indentation:"
-msgstr "Orientation"
+msgstr "Indentation:"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
