@@ -177,7 +177,10 @@ return [
         'class' => Middleware\UrlParamsSetting::class,
         'arguments' => [Config::class],
     ],
-    Middleware\TokenRequestParamChecking::class => ['class' => Middleware\TokenRequestParamChecking::class],
+    Middleware\TokenRequestParamChecking::class => [
+        'class' => Middleware\TokenRequestParamChecking::class,
+        'arguments' => [ResponseRenderer::class],
+    ],
     Middleware\DatabaseAndTableSetting::class => ['class' => Middleware\DatabaseAndTableSetting::class],
     Middleware\SqlQueryGlobalSetting::class => ['class' => Middleware\SqlQueryGlobalSetting::class],
     Middleware\LanguageLoading::class => ['class' => Middleware\LanguageLoading::class],

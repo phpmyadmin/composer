@@ -7,8 +7,8 @@ namespace PhpMyAdmin\Tests\Http\Middleware;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Http\Middleware\TokenRequestParamChecking;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ final class TokenRequestParamCheckingTest extends TestCase
     {
         $_POST = [];
 
-        $middleware = new TokenRequestParamChecking();
+        $middleware = new TokenRequestParamChecking(new ResponseRenderer());
 
         $_POST['test'] = 'test';
         $_SESSION[' PMA_token '] = 'token';
@@ -36,7 +36,7 @@ final class TokenRequestParamCheckingTest extends TestCase
     {
         $_POST = [];
 
-        $middleware = new TokenRequestParamChecking();
+        $middleware = new TokenRequestParamChecking(new ResponseRenderer());
 
         $_POST['test'] = 'test';
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'http://example.com/');
@@ -47,14 +47,14 @@ final class TokenRequestParamCheckingTest extends TestCase
 
     public function testCheckTokenRequestParamWithTokenMismatch(): void
     {
-        $middleware = new TokenRequestParamChecking();
+        $responseRenderer = new ResponseRenderer();
+        $middleware = new TokenRequestParamChecking($responseRenderer);
 
         $dbi = DatabaseInterface::getInstanceForTest(new DbiDummy());
         DatabaseInterface::$instance = $dbi;
 
         $_SESSION[' PMA_token '] = 'mismatch';
 
-        $responseRenderer = ResponseRenderer::getInstance();
         $responseRenderer->setAjax(true);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'http://example.com/')
