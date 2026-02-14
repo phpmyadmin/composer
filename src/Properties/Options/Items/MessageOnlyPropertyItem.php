@@ -16,7 +16,7 @@ class MessageOnlyPropertyItem extends OptionsPropertyOneItem
 {
     public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
-        $ret = '<li class="list-group-item">' . "\n";
+        $ret = '<li class="list-group-item">';
         $ret .= $plugin->getTranslatedText($this->getText() ?? '');
         $ret .= Plugins::getDocumentationLinkHtml($this);
 

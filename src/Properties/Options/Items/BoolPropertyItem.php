@@ -16,8 +16,8 @@ class BoolPropertyItem extends OptionsPropertyOneItem
 {
     public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
-        $ret = '<li class="list-group-item">' . "\n";
-        $ret .= '<div class="form-check form-switch">' . "\n";
+        $ret = '<li class="list-group-item">';
+        $ret .= '<div class="form-check form-switch">';
         $ret .= '<input class="form-check-input" type="checkbox" role="switch" name="' . $pluginName . '_'
             . $this->getName() . '"'
             . ' value="y" id="checkbox_' . $pluginName . '_'

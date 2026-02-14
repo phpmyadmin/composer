@@ -277,7 +277,7 @@ class Plugins
         OptionsPropertyItem $propertyGroup,
         bool $isSubgroup = false,
     ): string {
-        $ret = "\n";
+        $ret = '';
 
         $properties = null;
         if (! $isSubgroup) {
@@ -286,7 +286,7 @@ class Plugins
                 $properties = [$propertyGroup];
             } else {
                 // for main groups
-                $ret .= '<div id="' . $pluginName . '_' . $propertyGroup->getName() . '">';
+                $ret .= "\n" . '<div id="' . $pluginName . '_' . $propertyGroup->getName() . '">';
 
                 $text = null;
                 if (method_exists($propertyGroup, 'getText')) {
@@ -297,7 +297,7 @@ class Plugins
                     $ret .= '<h5 class="card-title mt-4 mb-2">' . $plugin->getTranslatedText($text) . '</h5>';
                 }
 
-                $ret .= '<ul class="list-group">';
+                $ret .= '<ul class="list-group">' . "\n";
             }
         }
 
@@ -327,6 +327,8 @@ class Plugins
                         $ret .= '>';
                     }
 
+                    $ret .= "\n";
+
                     $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $propertyItem, true);
                     continue;
                 }
@@ -338,13 +340,13 @@ class Plugins
 
         if ($isSubgroup) {
             // end subgroup
-            $ret .= '</ul>';
+            $ret .= '</ul>' . "\n";
         } elseif ($notSubgroupHeader) {
             // end main group
-            $ret .= '</ul></div>';
+            $ret .= '</ul></div>' . "\n";
         }
 
-        return $ret . "\n";
+        return $ret;
     }
 
     private static function getHtmlForProperty(
@@ -354,7 +356,7 @@ class Plugins
         OptionsPropertyItem $propertyItem,
     ): string {
         if ($propertyItem instanceof OptionsPropertyOneItem) {
-            return $propertyItem->getHtml($plugin, $pluginType, $pluginName);
+            return $propertyItem->getHtml($plugin, $pluginType, $pluginName) . "\n";
         }
 
         return '';

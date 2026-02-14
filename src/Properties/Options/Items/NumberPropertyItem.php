@@ -18,7 +18,7 @@ class NumberPropertyItem extends OptionsPropertyOneItem
 {
     public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
-        $ret = '<li class="list-group-item">' . "\n";
+        $ret = '<li class="list-group-item">';
         $ret .= '<label for="number_' . $pluginName . '_'
             . $this->getName() . '" class="form-label">'
             . $plugin->getTranslatedText($this->getText() ?? '') . '</label>';
