@@ -157,6 +157,9 @@ final readonly class ImportController implements InvocableController
         // upload limit has been reached, let's assume the second possibility.
         $getParams = $request->getQueryParams();
         $postParams = $request->getParsedBody();
+
+        unset($getParams['route']);
+
         if ($postParams === [] && $getParams === []) {
             Current::$message = Message::error(
                 __(
