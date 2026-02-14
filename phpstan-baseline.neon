@@ -16468,12 +16468,6 @@ parameters:
 			path: tests/unit/PluginsTest.php
 
 		-
-			message: '#^You should use assertCount\(\$expectedCount, \$variable\) instead of assertSame\(\$expectedCount, \$variable\-\>count\(\)\)\.$#'
-			identifier: phpunit.assertCount
-			count: 1
-			path: tests/unit/Properties/Options/OptionsPropertyGroupTest.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
