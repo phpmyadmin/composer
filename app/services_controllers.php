@@ -451,7 +451,7 @@ return [
     ],
     LogoutController::class => [
         'class' => LogoutController::class,
-        'arguments' => [AuthenticationPluginFactory::class],
+        'arguments' => [AuthenticationPluginFactory::class, ResponseRenderer::class],
     ],
     NavigationController::class => [
         'class' => NavigationController::class,
