@@ -390,7 +390,6 @@ class Plugins
                     );
 
                 if ($propertyItem->getForce() != null) {
-                    // Same code is also few lines lower, update both if needed
                     $ret .= ' onclick="if (!this.checked &amp;&amp; '
                         . '(!document.getElementById(\'checkbox_' . $pluginName
                         . '_' . $propertyItem->getForce() . '\') '
