@@ -19,6 +19,7 @@ use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Import\ImportSettings;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Import\Upload\UploadNoplugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
@@ -48,7 +49,7 @@ class ImportControllerTest extends AbstractTestCase
         ImportSettings::$importType = 'table';
         $importList = Plugins::getImport();
         $choice = Plugins::getChoice($importList, 'xml');
-        $options = Plugins::getOptions('Import', $importList);
+        $options = Plugins::getOptions(PluginType::Import, $importList);
 
         $template = new Template($config);
         $userPreferences = new UserPreferences($dbi, new Relation($dbi, $config), $template, $config, new Clock());

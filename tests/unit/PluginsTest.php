@@ -20,6 +20,7 @@ use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Plugins\Import\ImportSql;
 use PhpMyAdmin\Plugins\ImportPlugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Plugins\Schema\SchemaPdf;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
@@ -66,13 +67,12 @@ class PluginsTest extends AbstractTestCase
         self::assertContainsOnlyInstancesOf(SchemaPlugin::class, $plugins);
     }
 
-    /** @psalm-param 'Export'|'Import'|'Schema' $section */
     #[DataProvider('providerForTestGetDefault')]
     public function testGetDefault(
         string $expected,
         string|int|null $actualConfig,
         string|null $actualGet,
-        string $section,
+        PluginType $pluginType,
         string $option,
         bool|null $timeoutPassed,
     ): void {
@@ -85,30 +85,30 @@ class PluginsTest extends AbstractTestCase
             $_GET[$option] = $actualGet;
         }
 
-        Config::getInstance()->settings[$section][$option] = $actualConfig;
-        $default = Plugins::getDefault($section, $option);
+        Config::getInstance()->settings[$pluginType->value][$option] = $actualConfig;
+        $default = Plugins::getDefault($pluginType, $option);
         self::assertSame($expected, $default);
     }
 
-    /** @return array<array{string, string|int|null, string|null, 'Export'|'Import'|'Schema', string, bool|null}> */
+    /** @return array<array{string, string|int|null, string|null, PluginType, string, bool|null}> */
     public static function providerForTestGetDefault(): array
     {
         return [
-            ['xml', 'xml', null, 'Export', 'format', null],
-            ['xml', 'sql', 'xml', 'Export', 'format', null],
-            ['xml', null, 'xml', 'Export', 'format', null],
-            ['', null, null, 'Export', 'format', null],
+            ['xml', 'xml', null, PluginType::Export, 'format', null],
+            ['xml', 'sql', 'xml', PluginType::Export, 'format', null],
+            ['xml', null, 'xml', PluginType::Export, 'format', null],
+            ['', null, null, PluginType::Export, 'format', null],
             [
                 'strLatexStructure strTest strLatexContinued',
                 'strLatexStructure strTest strLatexContinued',
                 null,
-                'Export',
+                PluginType::Export,
                 'latex_structure_continued_caption',
                 null,
             ],
-            ['xml', 'sql', 'xml', 'Export', 'format', true],
-            ['sql', 'sql', 'xml', 'Export', 'format', false],
-            ['30', 30, null, 'Import', 'skip_queries', null],
+            ['xml', 'sql', 'xml', PluginType::Export, 'format', true],
+            ['sql', 'sql', 'xml', PluginType::Export, 'format', false],
+            ['30', 30, null, PluginType::Import, 'skip_queries', null],
         ];
     }
 
@@ -151,7 +151,7 @@ class PluginsTest extends AbstractTestCase
         ContainerBuilder::$container = $this->getContainerForGetOptions($this->createDatabaseInterface($dbiDummy));
         ImportSettings::$importType = 'table';
 
-        $options = Plugins::getOptions('Import', Plugins::getImport());
+        $options = Plugins::getOptions(PluginType::Import, Plugins::getImport());
         $dbiDummy->assertAllQueriesConsumed();
 
         // phpcs:disable Generic.Files.LineLength.TooLong
@@ -221,7 +221,7 @@ class PluginsTest extends AbstractTestCase
     {
         ContainerBuilder::$container = $this->getContainerForGetOptions($this->createDatabaseInterface());
 
-        $options = Plugins::getOptions('Export', Plugins::getExport(ExportType::Table, true));
+        $options = Plugins::getOptions(PluginType::Export, Plugins::getExport(ExportType::Table, true));
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         $expected = <<<'HTML'
@@ -452,7 +452,7 @@ class PluginsTest extends AbstractTestCase
     public function testGetOptionsForSchema(): void
     {
         ContainerBuilder::$container = $this->getContainerForGetOptions($this->createDatabaseInterface());
-        $options = Plugins::getOptions('Schema', Plugins::getSchema());
+        $options = Plugins::getOptions(PluginType::Schema, Plugins::getSchema());
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         $expected = <<<'HTML'

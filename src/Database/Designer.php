@@ -12,6 +12,7 @@ use PhpMyAdmin\Database\Designer\DesignerTable;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Util;
 use stdClass;
@@ -118,7 +119,7 @@ class Designer
         }
 
         $choice = Plugins::getChoice($exportList, $this->getFormat($formatParam, $exportTypeParam));
-        $options = Plugins::getOptions('Schema', $exportList);
+        $options = Plugins::getOptions(PluginType::Schema, $exportList);
 
         return $this->template->render('database/designer/schema_export', [
             'db' => $db,

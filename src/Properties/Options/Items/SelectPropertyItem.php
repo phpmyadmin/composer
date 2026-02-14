@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Properties\Options\Items;
 
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 
 use function htmlspecialchars;
@@ -15,7 +16,7 @@ use function htmlspecialchars;
  */
 class SelectPropertyItem extends OptionsPropertyOneItem
 {
-    public function getHtml(Plugin $plugin, string $section, string $pluginName): string
+    public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
         $ret = '<li class="list-group-item">' . "\n";
         $ret .= '<label for="select_' . $pluginName . '_'
@@ -26,7 +27,7 @@ class SelectPropertyItem extends OptionsPropertyOneItem
             . ' id="select_' . $pluginName . '_'
             . $this->getName() . '">';
         $default = htmlspecialchars($plugin->getTranslatedText(Plugins::getDefault(
-            $section,
+            $pluginType,
             $pluginName . '_' . $this->getName(),
         )));
         foreach ($this->getValues() as $key => $val) {

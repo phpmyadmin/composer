@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Properties\Options\Items;
 
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 
 /**
@@ -13,7 +14,7 @@ use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
  */
 class BoolPropertyItem extends OptionsPropertyOneItem
 {
-    public function getHtml(Plugin $plugin, string $section, string $pluginName): string
+    public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
         $ret = '<li class="list-group-item">' . "\n";
         $ret .= '<div class="form-check form-switch">' . "\n";
@@ -23,7 +24,7 @@ class BoolPropertyItem extends OptionsPropertyOneItem
             . $this->getName() . '"'
             . ' '
             . Plugins::checkboxCheck(
-                $section,
+                $pluginType,
                 $pluginName . '_' . $this->getName(),
             );
 

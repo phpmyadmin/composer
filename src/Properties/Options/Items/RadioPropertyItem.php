@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Properties\Options\Items;
 
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 
 use function htmlspecialchars;
@@ -15,10 +16,10 @@ use function htmlspecialchars;
  */
 class RadioPropertyItem extends OptionsPropertyOneItem
 {
-    public function getHtml(Plugin $plugin, string $section, string $pluginName): string
+    public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
         $default = htmlspecialchars($plugin->getTranslatedText(Plugins::getDefault(
-            $section,
+            $pluginType,
             $pluginName . '_' . $this->getName(),
         )));
 

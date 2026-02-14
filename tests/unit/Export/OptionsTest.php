@@ -18,6 +18,7 @@ use PhpMyAdmin\Export\TemplateModel;
 use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ExportType;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Theme\ThemeManager;
@@ -110,7 +111,7 @@ class OptionsTest extends AbstractTestCase
             ],
             'export_method' => $config->config->Export->method,
             'plugins_choice' => $dropdown,
-            'options' => Plugins::getOptions('Export', $exportList),
+            'options' => Plugins::getOptions(PluginType::Export, $exportList),
             'can_convert_kanji' => Encoding::canConvertKanji(),
             'exec_time_limit' => $config->settings['ExecTimeLimit'],
             'rows' => [],

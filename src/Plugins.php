@@ -16,6 +16,7 @@ use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
@@ -197,21 +198,18 @@ class Plugins
      * Returns html input tag option 'checked' if plugin $opt
      * should be set by config or request
      *
-     * @param string $section name of config section in
-     *                        \PhpMyAdmin\Config::getInstance()->settings[$section] for plugin
-     * @param string $opt     name of option
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param string $opt name of option
      *
      * @return string  html input tag option 'checked'
      */
-    public static function checkboxCheck(string $section, string $opt): string
+    public static function checkboxCheck(PluginType $pluginType, string $opt): string
     {
         // If the form is being repopulated using $_GET data, that is priority
         if (
             isset($_GET[$opt])
             || ! isset($_GET['repopulate'])
             && ((ImportSettings::$timeoutPassed && isset($_REQUEST[$opt]))
-                || ! empty(Config::getInstance()->settings[$section][$opt]))
+                || ! empty(Config::getInstance()->settings[$pluginType->value][$opt]))
         ) {
             return ' checked';
         }
@@ -222,14 +220,12 @@ class Plugins
     /**
      * Returns default value for option $opt
      *
-     * @param string $section name of config section in
-     *                        \PhpMyAdmin\Config::getInstance()->settings[$section] for plugin
-     * @param string $opt     name of option
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param PluginType $pluginType type of the plugin
+     * @param string     $opt        name of option
      *
      * @return string  default value for option $opt
      */
-    public static function getDefault(string $section, string $opt): string
+    public static function getDefault(PluginType $pluginType, string $opt): string
     {
         if (isset($_GET[$opt]) && is_string($_GET[$opt])) {
             // If the form is being repopulated using $_GET data, that is priority
@@ -241,8 +237,8 @@ class Plugins
         }
 
         $config = Config::getInstance();
-        if (isset($config->settings[$section][$opt])) {
-            return (string) $config->settings[$section][$opt];
+        if (isset($config->settings[$pluginType->value][$opt])) {
+            return (string) $config->settings[$pluginType->value][$opt];
         }
 
         return '';
@@ -274,17 +270,15 @@ class Plugins
     /**
      * Returns single option in a list element
      *
-     * @param string              $section       name of config section in $cfg[$section] for plugin
      * @param string              $pluginName    unique plugin name
      * @param OptionsPropertyItem $propertyGroup options property main group instance
      * @param bool                $isSubgroup    if this group is a subgroup
-     * @psalm-param 'Export'|'Import'|'Schema' $section
      *
      * @return string  table row with option
      */
     private static function getOneOption(
         Plugin $plugin,
-        string $section,
+        PluginType $pluginType,
         string $pluginName,
         OptionsPropertyItem $propertyGroup,
         bool $isSubgroup = false,
@@ -329,7 +323,7 @@ class Plugins
                     // each subgroup can have a header, which may also be a form element
                     $subgroupHeader = $propertyItem->getSubgroupHeader();
                     if ($subgroupHeader !== null) {
-                        $ret .= self::getOneOption($plugin, $section, $pluginName, $subgroupHeader);
+                        $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $subgroupHeader);
                     }
 
                     $ret .= '<li class="list-group-item"><ul class="list-group"';
@@ -339,12 +333,12 @@ class Plugins
                         $ret .= '>';
                     }
 
-                    $ret .= self::getOneOption($plugin, $section, $pluginName, $propertyItem, true);
+                    $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $propertyItem, true);
                     continue;
                 }
 
                 // single property item
-                $ret .= self::getHtmlForProperty($plugin, $section, $pluginName, $propertyItem);
+                $ret .= self::getHtmlForProperty($plugin, $pluginType, $pluginName, $propertyItem);
             }
         }
 
@@ -359,28 +353,20 @@ class Plugins
         return $ret . "\n";
     }
 
-    /**
-     * Get HTML for properties items
-     *
-     * @param string              $section      name of config section in $cfg[$section] for plugin
-     * @param string              $pluginName   unique plugin name
-     * @param OptionsPropertyItem $propertyItem Property item
-     * @psalm-param 'Export'|'Import'|'Schema' $section
-     */
-    public static function getHtmlForProperty(
+    private static function getHtmlForProperty(
         Plugin $plugin,
-        string $section,
+        PluginType $pluginType,
         string $pluginName,
         OptionsPropertyItem $propertyItem,
     ): string {
         return match (true) {
-            $propertyItem instanceof BoolPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof HiddenPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof MessageOnlyPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof RadioPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof SelectPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof TextPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
-            $propertyItem instanceof NumberPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof BoolPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof HiddenPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof MessageOnlyPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof RadioPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof SelectPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof TextPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
+            $propertyItem instanceof NumberPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
             default => '',
         };
     }
@@ -388,13 +374,11 @@ class Plugins
     /**
      * Returns html div with editable options for plugin
      *
-     * @param string                                       $section name of config section in $cfg[$section]
-     * @param ExportPlugin[]|ImportPlugin[]|SchemaPlugin[] $list    array with plugin instances
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param ExportPlugin[]|ImportPlugin[]|SchemaPlugin[] $list array with plugin instances
      *
      * @return string  html fieldset with plugin options
      */
-    public static function getOptions(string $section, array $list): string
+    public static function getOptions(PluginType $pluginType, array $list): string
     {
         $ret = '';
         // Options for plugins that support them
@@ -422,7 +406,7 @@ class Plugins
                         }
                     }
 
-                    $ret .= self::getOneOption($plugin, $section, $pluginName, $propertyMainGroup);
+                    $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $propertyMainGroup);
                 }
             }
 

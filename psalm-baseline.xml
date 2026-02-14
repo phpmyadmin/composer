@@ -5607,14 +5607,14 @@
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <PossiblyInvalidCast>
-      <code><![CDATA[$config->settings[$section][$opt]]]></code>
+      <code><![CDATA[$config->settings[$pluginType->value][$opt]]]></code>
     </PossiblyInvalidCast>
     <PossiblyNullOperand>
       <code><![CDATA[$propertyGroup->getName()]]></code>
       <code><![CDATA[$subgroupHeader->getName()]]></code>
     </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
+      <code><![CDATA[empty(Config::getInstance()->settings[$pluginType->value][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Auth/AuthenticationConfig.php">
@@ -7205,9 +7205,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Properties/Options/Items/BoolPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getForce()]]></code>
       <code><![CDATA[$this->getForce()]]></code>
@@ -7218,9 +7215,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/HiddenPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
       <code><![CDATA[$this->getName()]]></code>
@@ -7229,13 +7223,10 @@
   <file src="src/Properties/Options/Items/MessageOnlyPropertyItem.php">
     <PossiblyUnusedParam>
       <code><![CDATA[$pluginName]]></code>
-      <code><![CDATA[$section]]></code>
+      <code><![CDATA[$pluginType]]></code>
     </PossiblyUnusedParam>
   </file>
   <file src="src/Properties/Options/Items/NumberPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
       <code><![CDATA[$this->getName()]]></code>
@@ -7244,9 +7235,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/RadioPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$val]]></code>
     </MixedAssignment>
@@ -7258,9 +7246,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/SelectPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$val]]></code>
     </MixedAssignment>
@@ -7272,9 +7257,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/TextPropertyItem.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$section]]></code>
-    </ArgumentTypeCoercion>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
       <code><![CDATA[$this->getName()]]></code>

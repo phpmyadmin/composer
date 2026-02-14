@@ -10597,24 +10597,6 @@ parameters:
 			path: src/Properties/Options/Items/BoolPropertyItem.php
 
 		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:checkboxCheck\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Properties/Options/Items/BoolPropertyItem.php
-
-		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:getDefault\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Properties/Options/Items/HiddenPropertyItem.php
-
-		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:getDefault\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Properties/Options/Items/NumberPropertyItem.php
-
-		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
 			count: 1
@@ -10623,12 +10605,6 @@ parameters:
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
-			count: 1
-			path: src/Properties/Options/Items/RadioPropertyItem.php
-
-		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:getDefault\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Properties/Options/Items/RadioPropertyItem.php
 
@@ -10643,18 +10619,6 @@ parameters:
 			identifier: equal.notAllowed
 			count: 1
 			path: src/Properties/Options/Items/SelectPropertyItem.php
-
-		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:getDefault\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Properties/Options/Items/SelectPropertyItem.php
-
-		-
-			message: '#^Parameter \#1 \$section of static method PhpMyAdmin\\Plugins\:\:getDefault\(\) expects ''Export''\|''Import''\|''Schema'', string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Properties/Options/Items/TextPropertyItem.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'

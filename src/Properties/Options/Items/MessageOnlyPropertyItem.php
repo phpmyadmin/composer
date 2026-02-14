@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Properties\Options\Items;
 
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
 
 /**
@@ -13,7 +14,7 @@ use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
  */
 class MessageOnlyPropertyItem extends OptionsPropertyOneItem
 {
-    public function getHtml(Plugin $plugin, string $section, string $pluginName): string
+    public function getHtml(Plugin $plugin, PluginType $pluginType, string $pluginName): string
     {
         $ret = '<li class="list-group-item">' . "\n";
         $ret .= $plugin->getTranslatedText($this->getText() ?? '');
