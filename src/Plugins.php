@@ -404,8 +404,7 @@ class Plugins
         OptionsPropertyItem $propertyItem,
     ): string {
         $ret = '';
-        $propertyClass = $propertyItem::class;
-        switch ($propertyClass) {
+        switch ($propertyItem::class) {
             case BoolPropertyItem::class:
                 $ret .= '<li class="list-group-item">' . "\n";
                 $ret .= '<div class="form-check form-switch">' . "\n";
