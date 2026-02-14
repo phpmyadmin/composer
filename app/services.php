@@ -245,7 +245,10 @@ return [
         'class' => Middleware\ResponseRendererLoading::class,
         'arguments' => [Config::class, ResponseRenderer::class],
     ],
-    Middleware\ProfilingChecking::class => ['class' => Middleware\ProfilingChecking::class],
+    Middleware\ProfilingChecking::class => [
+        'class' => Middleware\ProfilingChecking::class,
+        'arguments' => [ResponseRenderer::class, DatabaseInterface::class],
+    ],
     Middleware\UserPreferencesLoading::class => [
         'class' => Middleware\UserPreferencesLoading::class,
         'arguments' => [UserPreferencesHandler::class],
