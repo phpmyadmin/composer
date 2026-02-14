@@ -64,6 +64,7 @@ use PhpMyAdmin\Tracking\Tracking;
 use PhpMyAdmin\Tracking\TrackingChecker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Triggers\Triggers;
+use PhpMyAdmin\UrlRedirector;
 use PhpMyAdmin\UserPassword;
 use PhpMyAdmin\UserPrivilegesFactory;
 use PhpMyAdmin\Utils\HttpRequest;
@@ -202,7 +203,7 @@ return [
     Middleware\ThemeInitialization::class => ['class' => Middleware\ThemeInitialization::class],
     Middleware\UrlRedirection::class => [
         'class' => Middleware\UrlRedirection::class,
-        'arguments' => [Template::class, ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [UrlRedirector::class, UserPreferencesHandler::class],
     ],
     Middleware\SetupPageRedirection::class => [
         'class' => Middleware\SetupPageRedirection::class,
@@ -405,4 +406,8 @@ return [
     LanguageManager::class => ['class' => LanguageManager::class, 'factory' => [LanguageManager::class, 'getInstance']],
     ClockInterface::class => ['class' => Clock::class],
     Footer::class => ['class' => Footer::class, 'arguments' => [Template::class, Config::class]],
+    UrlRedirector::class => [
+        'class' => UrlRedirector::class,
+        'arguments' => [ResponseRenderer::class, Template::class, ResponseFactory::class],
+    ],
 ];
