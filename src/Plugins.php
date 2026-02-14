@@ -20,7 +20,6 @@ use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
 use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\DocPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\MessageOnlyPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\NumberPropertyItem;
@@ -435,9 +434,6 @@ class Plugins
                 $ret .= '<label class="form-check-label" for="checkbox_' . $pluginName . '_'
                     . $propertyItem->getName() . '">'
                     . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label></div>';
-                break;
-            case DocPropertyItem::class:
-                echo DocPropertyItem::class;
                 break;
             case HiddenPropertyItem::class:
                 $ret .= '<li class="list-group-item"><input type="hidden" name="' . $pluginName . '_'
