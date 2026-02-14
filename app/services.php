@@ -207,7 +207,7 @@ return [
     ],
     Middleware\SetupPageRedirection::class => [
         'class' => Middleware\SetupPageRedirection::class,
-        'arguments' => [Config::class, ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [Config::class, ResponseFactory::class, UserPreferencesHandler::class, ResponseRenderer::class],
     ],
     Middleware\MinimumCommonRedirection::class => [
         'class' => Middleware\MinimumCommonRedirection::class,
