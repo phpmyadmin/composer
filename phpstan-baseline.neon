@@ -2206,7 +2206,7 @@ parameters:
 			path: src/Controllers/Preferences/ManageController.php
 
 		-
-			message: '#^Parameter \#1 \$fileName of method PhpMyAdmin\\Config\\UserPreferences\:\:redirect\(\) expects string, string\|false given\.$#'
+			message: '#^Parameter \#1 \$fileName of method PhpMyAdmin\\Config\\UserPreferences\:\:getUrlToRedirect\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Preferences/ManageController.php
@@ -14202,7 +14202,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 7
 			path: tests/unit/Config/UserPreferencesTest.php
 
 		-
@@ -14211,7 +14211,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 7
 			path: tests/unit/Config/UserPreferencesTest.php
 
 		-

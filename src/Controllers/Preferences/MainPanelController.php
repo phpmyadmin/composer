@@ -62,7 +62,11 @@ final readonly class MainPanelController implements InvocableController
                 $this->userPreferencesHandler->loadUserPreferences();
                 $hash = ltrim($request->getParsedBodyParamAsString('tab_hash'), '#');
 
-                return $this->userPreferences->redirect('index.php?route=/preferences/main-panel', null, $hash);
+                $this->response->redirect(
+                    $this->userPreferences->getUrlToRedirect('index.php?route=/preferences/main-panel', null, $hash),
+                );
+
+                return $this->response->response();
             }
         }
 
