@@ -5644,6 +5644,11 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[RadioPropertyItem]]></code>
+      <code><![CDATA[SelectPropertyItem]]></code>
+      <code><![CDATA[TextPropertyItem]]></code>
+    </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Plugins/Auth/AuthenticationConfig.php">
     <DeprecatedMethod>

@@ -167,7 +167,7 @@ class PluginsTest extends AbstractTestCase
             <label for="number_csv_partial_import" class="form-label">Import these many number of rows (optional):</label><input class="form-control" type="number" name="csv_partial_import" value="" id="number_csv_partial_import" min="0"><li class="list-group-item">
             <label for="text_csv_columns" class="form-label">Column names: <span class="pma_hint"><img src="themes/dot.gif" title="" alt="" class="icon ic_b_help"><span class="hide">If the data in each row of the file is not in the same order as in the database, list the corresponding column names here. Column names must be separated by commas and not enclosed in quotations.</span></span></label><input class="form-control" type="text" name="csv_columns" value="" id="text_csv_columns"><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="csv_ignore" value="y" id="checkbox_csv_ignore" ><label class="form-check-label" for="checkbox_csv_ignore">Do not abort on INSERT error</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="csv_ignore" value="y" id="checkbox_csv_ignore" ><label class="form-check-label" for="checkbox_csv_ignore">Do not abort on INSERT error</label></div></ul></div>
             </div>
 
             <div id="ldi_options" class="format_specific_options"><h3>CSV using LOAD DATA</h3>
@@ -182,7 +182,7 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="ldi_ignore" value="y" id="checkbox_ldi_ignore" ><label class="form-check-label" for="checkbox_ldi_ignore">Do not abort on INSERT error</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="ldi_local_option" value="y" id="checkbox_ldi_local_option"  checked><label class="form-check-label" for="checkbox_ldi_local_option">Use LOCAL keyword</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="ldi_local_option" value="y" id="checkbox_ldi_local_option"  checked><label class="form-check-label" for="checkbox_ldi_local_option">Use LOCAL keyword</label></div></ul></div>
             </div>
 
             <div id="shp_options" class="format_specific_options"><h3>ESRI Shape File</h3><p class="card-text">This format has no options</p></div>
@@ -198,14 +198,14 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="ods_recognize_percentages" value="y" id="checkbox_ods_recognize_percentages"  checked><label class="form-check-label" for="checkbox_ods_recognize_percentages">Import percentages as proper decimals <i>(ex. 12.00% to .12)</i></label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="ods_recognize_currency" value="y" id="checkbox_ods_recognize_currency"  checked><label class="form-check-label" for="checkbox_ods_recognize_currency">Import currencies <i>(ex. $5.00 to 5.00)</i></label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="ods_recognize_currency" value="y" id="checkbox_ods_recognize_currency"  checked><label class="form-check-label" for="checkbox_ods_recognize_currency">Import currencies <i>(ex. $5.00 to 5.00)</i></label></div></ul></div>
             </div>
 
             <div id="sql_options" class="format_specific_options"><h3>SQL</h3>
             <div id="sql_general_opts"><ul class="list-group"><li class="list-group-item">
-            <label for="select_sql_compatibility" class="form-label">SQL compatibility mode:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select><li class="list-group-item">
+            <label for="select_sql_compatibility" class="form-label">SQL compatibility mode:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fsql-mode.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_no_auto_value_on_zero" value="y" id="checkbox_sql_no_auto_value_on_zero"  checked><label class="form-check-label" for="checkbox_sql_no_auto_value_on_zero">Do not use <code>AUTO_INCREMENT</code> for zero values</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_no_auto_value_on_zero" value="y" id="checkbox_sql_no_auto_value_on_zero"  checked><label class="form-check-label" for="checkbox_sql_no_auto_value_on_zero">Do not use <code>AUTO_INCREMENT</code> for zero values</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fsql-mode.html%23sqlmode_no_auto_value_on_zero" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a></ul></div>
             </div>
 
             <div id="xml_options" class="format_specific_options"><h3>XML</h3><p class="card-text">This format has no options</p></div>
@@ -227,7 +227,7 @@ class PluginsTest extends AbstractTestCase
         $expected = <<<'HTML'
             <div id="codegen_options" class="format_specific_options"><h3>CodeGen</h3>
             <div id="codegen_general_opts"><ul class="list-group"><li class="list-group-item"><input type="hidden" name="codegen_structure_or_data" value="data"></li><li class="list-group-item">
-            <label for="select_codegen_format" class="form-label">Format:</label><select class="form-select" name="codegen_format" id="select_codegen_format"><option value="0" selected>NHibernate C# DO</option><option value="1">NHibernate XML</option></select></ul></div></li>
+            <label for="select_codegen_format" class="form-label">Format:</label><select class="form-select" name="codegen_format" id="select_codegen_format"><option value="0" selected>NHibernate C# DO</option><option value="1">NHibernate XML</option></select></ul></div>
             </div>
 
             <div id="csv_options" class="format_specific_options"><h3>CSV</h3>
@@ -258,30 +258,30 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="json_pretty_print" value="y" id="checkbox_json_pretty_print" ><label class="form-check-label" for="checkbox_json_pretty_print">Output pretty-printed JSON (Use human-readable formatting)</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="json_unicode" value="y" id="checkbox_json_unicode"  checked><label class="form-check-label" for="checkbox_json_unicode">Output unicode characters unescaped</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="json_unicode" value="y" id="checkbox_json_unicode"  checked><label class="form-check-label" for="checkbox_json_unicode">Output unicode characters unescaped</label></div></ul></div>
             </div>
 
             <div id="latex_options" class="format_specific_options"><h3>LaTeX</h3>
             <div id="latex_general_opts"><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="latex_caption" value="y" id="checkbox_latex_caption"  checked><label class="form-check-label" for="checkbox_latex_caption">Include table caption</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="latex_caption" value="y" id="checkbox_latex_caption"  checked><label class="form-check-label" for="checkbox_latex_caption">Include table caption</label></div></ul></div>
 
             <div id="latex_dump_what"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group"><li class="list-group-item"><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="structure" id="radio_latex_structure_or_data_structure"><label class="form-check-label" for="radio_latex_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="data" id="radio_latex_structure_or_data_data"><label class="form-check-label" for="radio_latex_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_latex_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_latex_structure_or_data_structure_and_data">structure and data</label></div></li></ul></div>
 
             <div id="latex_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group"><li class="list-group-item">
-            <label for="text_latex_structure_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_structure_caption" value="Structure of table @TABLE@" id="text_latex_structure_caption"><li class="list-group-item">
-            <label for="text_latex_structure_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_structure_continued_caption" value="Structure of table @TABLE@ (continued)" id="text_latex_structure_continued_caption"><li class="list-group-item">
-            <label for="text_latex_structure_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_structure_label" value="tab:@TABLE@-structure" id="text_latex_structure_label"><li class="list-group-item">
+            <label for="text_latex_structure_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_structure_caption" value="Structure of table @TABLE@" id="text_latex_structure_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
+            <label for="text_latex_structure_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_structure_continued_caption" value="Structure of table @TABLE@ (continued)" id="text_latex_structure_continued_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
+            <label for="text_latex_structure_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_structure_label" value="tab:@TABLE@-structure" id="text_latex_structure_label"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="latex_comments" value="y" id="checkbox_latex_comments"  checked><label class="form-check-label" for="checkbox_latex_comments">Display comments</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="latex_comments" value="y" id="checkbox_latex_comments"  checked><label class="form-check-label" for="checkbox_latex_comments">Display comments</label></div></ul></div>
 
             <div id="latex_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="latex_columns" value="y" id="checkbox_latex_columns"  checked><label class="form-check-label" for="checkbox_latex_columns">Put columns names in the first row:</label></div><li class="list-group-item">
-            <label for="text_latex_data_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_data_caption" value="Content of table @TABLE@" id="text_latex_data_caption"><li class="list-group-item">
-            <label for="text_latex_data_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_data_continued_caption" value="Content of table @TABLE@ (continued)" id="text_latex_data_continued_caption"><li class="list-group-item">
-            <label for="text_latex_data_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_data_label" value="tab:@TABLE@-data" id="text_latex_data_label"><li class="list-group-item">
-            <label for="text_latex_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="latex_null" value="\textit{NULL}" id="text_latex_null"></ul></div></li>
+            <label for="text_latex_data_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_data_caption" value="Content of table @TABLE@" id="text_latex_data_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
+            <label for="text_latex_data_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_data_continued_caption" value="Content of table @TABLE@ (continued)" id="text_latex_data_continued_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
+            <label for="text_latex_data_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_data_label" value="tab:@TABLE@-data" id="text_latex_data_label"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
+            <label for="text_latex_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="latex_null" value="\textit{NULL}" id="text_latex_null"></ul></div>
             </div>
 
             <div id="mediawiki_options" class="format_specific_options"><h3>MediaWiki Table</h3>
@@ -293,7 +293,7 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="mediawiki_caption" value="y" id="checkbox_mediawiki_caption"  checked><label class="form-check-label" for="checkbox_mediawiki_caption">Export table names</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="mediawiki_headers" value="y" id="checkbox_mediawiki_headers"  checked><label class="form-check-label" for="checkbox_mediawiki_headers">Export table headers</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="mediawiki_headers" value="y" id="checkbox_mediawiki_headers"  checked><label class="form-check-label" for="checkbox_mediawiki_headers">Export table headers</label></div></ul></div>
             </div>
 
             <div id="htmlword_options" class="format_specific_options"><h3>Microsoft Word 2000</h3>
@@ -302,7 +302,7 @@ class PluginsTest extends AbstractTestCase
             <div id="htmlword_dump_what"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group"><li class="list-group-item">
             <label for="text_htmlword_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="htmlword_null" value="NULL" id="text_htmlword_null"><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="htmlword_columns" value="y" id="checkbox_htmlword_columns" ><label class="form-check-label" for="checkbox_htmlword_columns">Put columns names in the first row</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="htmlword_columns" value="y" id="checkbox_htmlword_columns" ><label class="form-check-label" for="checkbox_htmlword_columns">Put columns names in the first row</label></div></ul></div>
             </div>
 
             <div id="ods_options" class="format_specific_options"><h3>OpenDocument Spreadsheet</h3>
@@ -317,17 +317,17 @@ class PluginsTest extends AbstractTestCase
 
             <div id="odt_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="odt_comments" value="y" id="checkbox_odt_comments"  checked><label class="form-check-label" for="checkbox_odt_comments">Display comments</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="odt_comments" value="y" id="checkbox_odt_comments"  checked><label class="form-check-label" for="checkbox_odt_comments">Display comments</label></div></ul></div>
 
             <div id="odt_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="odt_columns" value="y" id="checkbox_odt_columns"  checked><label class="form-check-label" for="checkbox_odt_columns">Put columns names in the first row</label></div><li class="list-group-item">
-            <label for="text_odt_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="odt_null" value="NULL" id="text_odt_null"></ul></div></li>
+            <label for="text_odt_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="odt_null" value="NULL" id="text_odt_null"></ul></div>
             </div>
 
             <div id="pdf_options" class="format_specific_options"><h3>PDF</h3>
             <div id="pdf_general_opts"><ul class="list-group"><li class="list-group-item">
-            <label for="text_pdf_report_title" class="form-label">Report title:</label><input class="form-control" type="text" name="pdf_report_title" value="" id="text_pdf_report_title"></ul></div></li>
+            <label for="text_pdf_report_title" class="form-label">Report title:</label><input class="form-control" type="text" name="pdf_report_title" value="" id="text_pdf_report_title"></ul></div>
 
             <div id="pdf_dump_what"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group"><li class="list-group-item"><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="structure" id="radio_pdf_structure_or_data_structure"><label class="form-check-label" for="radio_pdf_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="data" id="radio_pdf_structure_or_data_data" checked><label class="form-check-label" for="radio_pdf_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_pdf_structure_or_data_structure_and_data"><label class="form-check-label" for="radio_pdf_structure_or_data_structure_and_data">structure and data</label></div></li></ul></div>
             </div>
@@ -340,22 +340,22 @@ class PluginsTest extends AbstractTestCase
             <div id="sql_general_opts"><ul class="list-group">
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_include_comments" value="y" id="checkbox_sql_include_comments"  checked><label class="form-check-label" for="checkbox_sql_include_comments">Display comments <i>(includes info such as export timestamp, PHP version, and server version)</i></label></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_include_comments" value="y" id="checkbox_sql_include_comments"  checked><label class="form-check-label" for="checkbox_sql_include_comments">Display comments <i>(includes info such as export timestamp, PHP version, and server version)</i></label></div>
             <li class="list-group-item"><ul class="list-group" id="ul_include_comments">
             <li class="list-group-item">
             <label for="text_sql_header_comment" class="form-label">Additional custom header comment (\n splits lines):</label><input class="form-control" type="text" name="sql_header_comment" value="" id="text_sql_header_comment"><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_dates" value="y" id="checkbox_sql_dates" ><label class="form-check-label" for="checkbox_sql_dates">Include a timestamp of when databases were created, last updated, and last checked</label></div></ul></li></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_dates" value="y" id="checkbox_sql_dates" ><label class="form-check-label" for="checkbox_sql_dates">Include a timestamp of when databases were created, last updated, and last checked</label></div></ul></li>
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_use_transaction" value="y" id="checkbox_sql_use_transaction"  checked><label class="form-check-label" for="checkbox_sql_use_transaction">Enclose export in a transaction</label></div><li class="list-group-item">
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_use_transaction" value="y" id="checkbox_sql_use_transaction"  checked><label class="form-check-label" for="checkbox_sql_use_transaction">Enclose export in a transaction</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fmysqldump.html%23option_mysqldump_single-transaction" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_disable_fk" value="y" id="checkbox_sql_disable_fk" ><label class="form-check-label" for="checkbox_sql_disable_fk">Disable foreign key checks</label></div><li class="list-group-item">
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_disable_fk" value="y" id="checkbox_sql_disable_fk" ><label class="form-check-label" for="checkbox_sql_disable_fk">Disable foreign key checks</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fserver-system-variables.html%23sysvar_foreign_key_checks" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_views_as_tables" value="y" id="checkbox_sql_views_as_tables" ><label class="form-check-label" for="checkbox_sql_views_as_tables">Export views as tables</label></div><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_metadata" value="y" id="checkbox_sql_metadata" ><label class="form-check-label" for="checkbox_sql_metadata">Export metadata</label></div><li class="list-group-item">
-            <label for="select_sql_compatibility" class="form-label">Database system or older MySQL server to maximize output compatibility with:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select>
+            <label for="select_sql_compatibility" class="form-label">Database system or older MySQL server to maximize output compatibility with:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fsql-mode.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
             <li class="list-group-item"><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="structure" id="radio_sql_structure_or_data_structure"><label class="form-check-label" for="radio_sql_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="data" id="radio_sql_structure_or_data_data"><label class="form-check-label" for="radio_sql_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_sql_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_sql_structure_or_data_structure_and_data">structure and data</label></div></li>
             <li class="list-group-item"><ul class="list-group" id="ul_structure_or_data">
             </ul></li>
@@ -363,24 +363,24 @@ class PluginsTest extends AbstractTestCase
 
             <div id="sql_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group">
             <li class="list-group-item">
-            Add statements:</li>
+            Add statements:
             <li class="list-group-item"><ul class="list-group" id="ul_add_statements">
             <li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_drop_table" value="y" id="checkbox_sql_drop_table" ><label class="form-check-label" for="checkbox_sql_drop_table">Add <code>DROP TABLE</code><code> / TRIGGER</code> statement</label></div>
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_table" value="y" id="checkbox_sql_create_table"  checked><label class="form-check-label" for="checkbox_sql_create_table">Add <code>CREATE TABLE</code> statement</label></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_table" value="y" id="checkbox_sql_create_table"  checked><label class="form-check-label" for="checkbox_sql_create_table">Add <code>CREATE TABLE</code> statement</label></div>
             <li class="list-group-item"><ul class="list-group" id="ul_create_table">
             <li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_if_not_exists" value="y" id="checkbox_sql_if_not_exists" ><label class="form-check-label" for="checkbox_sql_if_not_exists"><code>IF NOT EXISTS</code> (less efficient as indexes will be generated during table creation)</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_auto_increment" value="y" id="checkbox_sql_auto_increment"  checked><label class="form-check-label" for="checkbox_sql_auto_increment"><code>AUTO_INCREMENT</code> value</label></div></ul></li></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_auto_increment" value="y" id="checkbox_sql_auto_increment"  checked><label class="form-check-label" for="checkbox_sql_auto_increment"><code>AUTO_INCREMENT</code> value</label></div></ul></li>
 
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_view" value="y" id="checkbox_sql_create_view"  checked><label class="form-check-label" for="checkbox_sql_create_view">Add <code>CREATE VIEW</code> statement</label></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_view" value="y" id="checkbox_sql_create_view"  checked><label class="form-check-label" for="checkbox_sql_create_view">Add <code>CREATE VIEW</code> statement</label></div>
             <li class="list-group-item"><ul class="list-group" id="ul_create_view">
             <li class="list-group-item">
             <div class="form-check form-switch">
@@ -388,31 +388,31 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_view_current_user" value="y" id="checkbox_sql_view_current_user" ><label class="form-check-label" for="checkbox_sql_view_current_user">Exclude definition of current user</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_or_replace_view" value="y" id="checkbox_sql_or_replace_view" ><label class="form-check-label" for="checkbox_sql_or_replace_view"><code>OR REPLACE</code> view</label></div></ul></li></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_or_replace_view" value="y" id="checkbox_sql_or_replace_view" ><label class="form-check-label" for="checkbox_sql_or_replace_view"><code>OR REPLACE</code> view</label></div></ul></li>
             <li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_procedure_function" value="y" id="checkbox_sql_procedure_function"  checked><label class="form-check-label" for="checkbox_sql_procedure_function">Add <code>CREATE PROCEDURE / FUNCTION / EVENT</code> statement</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_trigger" value="y" id="checkbox_sql_create_trigger"  checked><label class="form-check-label" for="checkbox_sql_create_trigger">Add <code>CREATE TRIGGER</code> statement</label></div></ul></li></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_create_trigger" value="y" id="checkbox_sql_create_trigger"  checked><label class="form-check-label" for="checkbox_sql_create_trigger">Add <code>CREATE TRIGGER</code> statement</label></div></ul></li>
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_backquotes" value="y" id="checkbox_sql_backquotes"  checked><label class="form-check-label" for="checkbox_sql_backquotes">Enclose table and column names with backquotes <i>(Protects column and table names formed with special characters or keywords)</i></label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_backquotes" value="y" id="checkbox_sql_backquotes"  checked><label class="form-check-label" for="checkbox_sql_backquotes">Enclose table and column names with backquotes <i>(Protects column and table names formed with special characters or keywords)</i></label></div></ul></div>
 
             <div id="sql_data"><h5 class="card-title mt-4 mb-2">Data creation options</h5><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_truncate" value="y" id="checkbox_sql_truncate" ><label class="form-check-label" for="checkbox_sql_truncate">Truncate table before insert</label></div>
             <li class="list-group-item">
-            </li>
+
             <li class="list-group-item"><ul class="list-group" id="ul_Instead of <code>INSERT</code> statements, use:">
             <li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_delayed" value="y" id="checkbox_sql_delayed" ><label class="form-check-label" for="checkbox_sql_delayed"><code>INSERT DELAYED</code> statements</label></div><li class="list-group-item">
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_delayed" value="y" id="checkbox_sql_delayed" ><label class="form-check-label" for="checkbox_sql_delayed"><code>INSERT DELAYED</code> statements</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Finsert-delayed.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_ignore" value="y" id="checkbox_sql_ignore" ><label class="form-check-label" for="checkbox_sql_ignore"><code>INSERT IGNORE</code> statements</label></div></ul></li></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_ignore" value="y" id="checkbox_sql_ignore" ><label class="form-check-label" for="checkbox_sql_ignore"><code>INSERT IGNORE</code> statements</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Finsert.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a></ul></li>
             <li class="list-group-item">
             <label for="select_sql_type" class="form-label">Function to use when dumping data:</label><select class="form-select" name="sql_type" id="select_sql_type"><option value="INSERT" selected>INSERT</option><option value="UPDATE">UPDATE</option><option value="REPLACE">REPLACE</option></select>
             <li class="list-group-item">
-            Syntax to use when inserting data:</li>
+            Syntax to use when inserting data:
             <li class="list-group-item"><ul class="list-group" id="ul_">
             <li class="list-group-item"><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="complete" id="radio_sql_insert_syntax_complete"><label class="form-check-label" for="radio_sql_insert_syntax_complete">include column names in every <code>INSERT</code> statement <br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES (1,2,3)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="extended" id="radio_sql_insert_syntax_extended"><label class="form-check-label" for="radio_sql_insert_syntax_extended">insert multiple rows in every <code>INSERT</code> statement<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6), (7,8,9)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="both" id="radio_sql_insert_syntax_both" checked><label class="form-check-label" for="radio_sql_insert_syntax_both">both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="none" id="radio_sql_insert_syntax_none"><label class="form-check-label" for="radio_sql_insert_syntax_none">neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3)</code></label></div></li></ul></li>
             <li class="list-group-item">
@@ -420,7 +420,7 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="sql_hex_for_binary" value="y" id="checkbox_sql_hex_for_binary"  checked><label class="form-check-label" for="checkbox_sql_hex_for_binary">Dump binary columns in hexadecimal notation <i>(for example, "abc" becomes 0x616263)</i></label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="sql_utc_time" value="y" id="checkbox_sql_utc_time"  checked><label class="form-check-label" for="checkbox_sql_utc_time">Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and reloaded between servers in different time zones)</i></label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="sql_utc_time" value="y" id="checkbox_sql_utc_time"  checked><label class="form-check-label" for="checkbox_sql_utc_time">Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and reloaded between servers in different time zones)</i></label></div></ul></div>
             </div>
 
             <div id="texytext_options" class="format_specific_options"><h3>Texy! text</h3>
@@ -429,7 +429,7 @@ class PluginsTest extends AbstractTestCase
             <div id="texytext_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group"><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="texytext_columns" value="y" id="checkbox_texytext_columns" ><label class="form-check-label" for="checkbox_texytext_columns">Put columns names in the first row</label></div><li class="list-group-item">
-            <label for="text_texytext_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="texytext_null" value="NULL" id="text_texytext_null"></ul></div></li>
+            <label for="text_texytext_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="texytext_null" value="NULL" id="text_texytext_null"></ul></div>
             </div>
 
             <div id="toon_options" class="format_specific_options"><h3>TOON</h3>
@@ -463,7 +463,7 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="dia_show_keys" value="y" id="checkbox_dia_show_keys" ><label class="form-check-label" for="checkbox_dia_show_keys">Only show keys</label></div><li class="list-group-item">
             <label for="select_dia_orientation" class="form-label">Orientation</label><select class="form-select" name="dia_orientation" id="select_dia_orientation"><option value="L" selected>Landscape</option><option value="P">Portrait</option></select><li class="list-group-item">
-            <label for="select_dia_paper" class="form-label">Paper size</label><select class="form-select" name="dia_paper" id="select_dia_paper"><option value="A3">A3</option><option value="A4" selected>A4</option><option value="A5">A5</option><option value="letter">letter</option><option value="legal">legal</option></select></ul></div></li>
+            <label for="select_dia_paper" class="form-label">Paper size</label><select class="form-select" name="dia_paper" id="select_dia_paper"><option value="A3">A3</option><option value="A4" selected>A4</option><option value="A5">A5</option><option value="letter">letter</option><option value="legal">legal</option></select></ul></div>
             </div>
 
             <div id="eps_options" class="format_specific_options"><h3>EPS</h3>
@@ -474,7 +474,7 @@ class PluginsTest extends AbstractTestCase
             <input class="form-check-input" type="checkbox" role="switch" name="eps_show_keys" value="y" id="checkbox_eps_show_keys" ><label class="form-check-label" for="checkbox_eps_show_keys">Only show keys</label></div><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="eps_all_tables_same_width" value="y" id="checkbox_eps_all_tables_same_width" ><label class="form-check-label" for="checkbox_eps_all_tables_same_width">Same width for all tables</label></div><li class="list-group-item">
-            <label for="select_eps_orientation" class="form-label">Orientation</label><select class="form-select" name="eps_orientation" id="select_eps_orientation"><option value="L" selected>Landscape</option><option value="P">Portrait</option></select></ul></div></li>
+            <label for="select_eps_orientation" class="form-label">Orientation</label><select class="form-select" name="eps_orientation" id="select_eps_orientation"><option value="L" selected>Landscape</option><option value="P">Portrait</option></select></ul></div>
             </div>
 
             <div id="pdf_options" class="format_specific_options"><h3>PDF</h3>
@@ -491,7 +491,7 @@ class PluginsTest extends AbstractTestCase
             <input class="form-check-input" type="checkbox" role="switch" name="pdf_show_grid" value="y" id="checkbox_pdf_show_grid" ><label class="form-check-label" for="checkbox_pdf_show_grid">Show grid</label></div><li class="list-group-item">
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="pdf_with_doc" value="y" id="checkbox_pdf_with_doc"  checked><label class="form-check-label" for="checkbox_pdf_with_doc">Data dictionary</label></div><li class="list-group-item">
-            <label for="select_pdf_table_order" class="form-label">Order of the tables</label><select class="form-select" name="pdf_table_order" id="select_pdf_table_order"><option value="" selected>None</option><option value="name_asc">Name (Ascending)</option><option value="name_desc">Name (Descending)</option></select></ul></div></li>
+            <label for="select_pdf_table_order" class="form-label">Order of the tables</label><select class="form-select" name="pdf_table_order" id="select_pdf_table_order"><option value="" selected>None</option><option value="name_asc">Name (Ascending)</option><option value="name_desc">Name (Descending)</option></select></ul></div>
             </div>
 
             <div id="svg_options" class="format_specific_options"><h3>SVG</h3>
@@ -501,7 +501,7 @@ class PluginsTest extends AbstractTestCase
             <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" name="svg_show_keys" value="y" id="checkbox_svg_show_keys" ><label class="form-check-label" for="checkbox_svg_show_keys">Only show keys</label></div><li class="list-group-item">
             <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" name="svg_all_tables_same_width" value="y" id="checkbox_svg_all_tables_same_width" ><label class="form-check-label" for="checkbox_svg_all_tables_same_width">Same width for all tables</label></div></ul></div></li>
+            <input class="form-check-input" type="checkbox" role="switch" name="svg_all_tables_same_width" value="y" id="checkbox_svg_all_tables_same_width" ><label class="form-check-label" for="checkbox_svg_all_tables_same_width">Same width for all tables</label></div></ul></div>
             </div>
 
 

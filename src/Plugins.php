@@ -36,8 +36,6 @@ use function __;
 use function class_exists;
 use function count;
 use function htmlspecialchars;
-use function in_array;
-use function is_array;
 use function is_string;
 use function is_subclass_of;
 use function mb_strtolower;
@@ -324,10 +322,8 @@ class Plugins
             }
         }
 
-        $propertyClass = null;
         if ($properties !== null) {
             foreach ($properties as $propertyItem) {
-                $propertyClass = $propertyItem::class;
                 // if the property is a subgroup, we deal with it recursively
                 if ($propertyItem instanceof OptionsPropertySubgroup) {
                     // for subgroups
@@ -359,31 +355,6 @@ class Plugins
         } elseif ($notSubgroupHeader) {
             // end main group
             $ret .= '</ul></div>';
-        }
-
-        if ($propertyGroup instanceof OptionsPropertyOneItem) {
-            $doc = $propertyGroup->getDoc();
-            if (is_array($doc)) {
-                if (count($doc) === 3) {
-                    $ret .= MySQLDocumentation::show($doc[1], false, null, null, $doc[2]);
-                } elseif (count($doc) === 1) {
-                    $ret .= MySQLDocumentation::showDocumentation('faq', $doc[0]);
-                } else {
-                    $ret .= MySQLDocumentation::show($doc[1]);
-                }
-            }
-        }
-
-        // Close the list element after $doc link is displayed
-        if (
-            in_array($propertyClass, [
-                BoolPropertyItem::class,
-                MessageOnlyPropertyItem::class,
-                SelectPropertyItem::class,
-                TextPropertyItem::class,
-            ], true)
-        ) {
-            $ret .= '</li>';
         }
 
         return $ret . "\n";
@@ -433,6 +404,8 @@ class Plugins
                 $ret .= '<label class="form-check-label" for="checkbox_' . $pluginName . '_'
                     . $propertyItem->getName() . '">'
                     . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label></div>';
+                $ret .= self::getDocumentationLinkHtml($propertyItem);
+                $ret .= '</li>';
                 break;
             case HiddenPropertyItem::class:
                 $ret .= '<li class="list-group-item"><input type="hidden" name="' . $pluginName . '_'
@@ -447,6 +420,8 @@ class Plugins
             case MessageOnlyPropertyItem::class:
                 $ret .= '<li class="list-group-item">' . "\n";
                 $ret .= $plugin->getTranslatedText($propertyItem->getText() ?? '');
+                $ret .= self::getDocumentationLinkHtml($propertyItem);
+                $ret .= '</li>';
                 break;
             case RadioPropertyItem::class:
                 /** @var RadioPropertyItem $pitem */
@@ -501,6 +476,8 @@ class Plugins
                 }
 
                 $ret .= '</select>';
+                $ret .= self::getDocumentationLinkHtml($propertyItem);
+                $ret .= '</li>';
                 break;
             case TextPropertyItem::class:
                 /** @var TextPropertyItem $pitem */
@@ -525,6 +502,8 @@ class Plugins
                         ? ' maxlength="' . $pitem->getLen() . '"'
                         : '')
                     . '>';
+                $ret .= self::getDocumentationLinkHtml($propertyItem);
+                $ret .= '</li>';
                 break;
             case NumberPropertyItem::class:
                 $ret .= '<li class="list-group-item">' . "\n";
@@ -599,5 +578,23 @@ class Plugins
         }
 
         return $ret;
+    }
+
+    public static function getDocumentationLinkHtml(OptionsPropertyOneItem $propertyGroup): string
+    {
+        $doc = $propertyGroup->getDoc();
+        if ($doc === '') {
+            return '';
+        }
+
+        if (is_string($doc)) {
+            return MySQLDocumentation::showDocumentation('faq', $doc);
+        }
+
+        if (count($doc) === 2) {
+            return MySQLDocumentation::show($doc[0], anchor: $doc[1]);
+        }
+
+        return MySQLDocumentation::show($doc[0]);
     }
 }

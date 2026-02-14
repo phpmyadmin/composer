@@ -193,8 +193,7 @@ class Util
             }
         }
 
-        $url = 'https://dev.mysql.com/doc/refman/'
-            . $mysql . '/' . $lang . '/' . $link . '.html';
+        $url = 'https://dev.mysql.com/doc/refman/' . $mysql . '/' . $lang . '/' . $link . '.html';
         if ($anchor !== '') {
             $url .= '#' . $anchor;
         }
