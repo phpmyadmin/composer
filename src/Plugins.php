@@ -35,7 +35,6 @@ use Throwable;
 use function __;
 use function class_exists;
 use function count;
-use function htmlspecialchars;
 use function is_string;
 use function is_subclass_of;
 use function mb_strtolower;
@@ -374,158 +373,16 @@ class Plugins
         string $pluginName,
         OptionsPropertyItem $propertyItem,
     ): string {
-        $ret = '';
-        switch ($propertyItem::class) {
-            case BoolPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<div class="form-check form-switch">' . "\n";
-                $ret .= '<input class="form-check-input" type="checkbox" role="switch" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="y" id="checkbox_' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' '
-                    . self::checkboxCheck(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    );
-
-                if ($propertyItem->getForce() != null) {
-                    $ret .= ' onclick="if (!this.checked &amp;&amp; '
-                        . '(!document.getElementById(\'checkbox_' . $pluginName
-                        . '_' . $propertyItem->getForce() . '\') '
-                        . '|| !document.getElementById(\'checkbox_'
-                        . $pluginName . '_' . $propertyItem->getForce()
-                        . '\').checked)) '
-                        . 'return false; else return true;"';
-                }
-
-                $ret .= '>';
-                $ret .= '<label class="form-check-label" for="checkbox_' . $pluginName . '_'
-                    . $propertyItem->getName() . '">'
-                    . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label></div>';
-                $ret .= self::getDocumentationLinkHtml($propertyItem);
-                $ret .= '</li>';
-                break;
-            case HiddenPropertyItem::class:
-                $ret .= '<li class="list-group-item"><input type="hidden" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    )))
-                    . '"></li>';
-                break;
-            case MessageOnlyPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= $plugin->getTranslatedText($propertyItem->getText() ?? '');
-                $ret .= self::getDocumentationLinkHtml($propertyItem);
-                $ret .= '</li>';
-                break;
-            case RadioPropertyItem::class:
-                /** @var RadioPropertyItem $pitem */
-                $pitem = $propertyItem;
-
-                $default = htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                    $section,
-                    $pluginName . '_' . $pitem->getName(),
-                )));
-
-                $ret .= '<li class="list-group-item">';
-
-                foreach ($pitem->getValues() as $key => $val) {
-                    $ret .= '<div class="form-check"><input type="radio" name="' . $pluginName
-                        . '_' . $pitem->getName() . '" class="form-check-input" value="' . $key
-                        . '" id="radio_' . $pluginName . '_'
-                        . $pitem->getName() . '_' . $key . '"';
-                    if ($key == $default) {
-                        $ret .= ' checked';
-                    }
-
-                    $ret .= '><label class="form-check-label" for="radio_' . $pluginName . '_'
-                        . $pitem->getName() . '_' . $key . '">'
-                        . $plugin->getTranslatedText((string) $val) . '</label></div>';
-                }
-
-                $ret .= '</li>';
-
-                break;
-            case SelectPropertyItem::class:
-                /** @var SelectPropertyItem $pitem */
-                $pitem = $propertyItem;
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="select_' . $pluginName . '_'
-                    . $pitem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($pitem->getText() ?? '') . '</label>';
-                $ret .= '<select class="form-select" name="' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ' id="select_' . $pluginName . '_'
-                    . $pitem->getName() . '">';
-                $default = htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                    $section,
-                    $pluginName . '_' . $pitem->getName(),
-                )));
-                foreach ($pitem->getValues() as $key => $val) {
-                    $ret .= '<option value="' . $key . '"';
-                    if ($key == $default) {
-                        $ret .= ' selected';
-                    }
-
-                    $ret .= '>' . $plugin->getTranslatedText((string) $val) . '</option>';
-                }
-
-                $ret .= '</select>';
-                $ret .= self::getDocumentationLinkHtml($propertyItem);
-                $ret .= '</li>';
-                break;
-            case TextPropertyItem::class:
-                /** @var TextPropertyItem $pitem */
-                $pitem = $propertyItem;
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="text_' . $pluginName . '_'
-                    . $pitem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($pitem->getText() ?? '') . '</label>';
-                $ret .= '<input class="form-control" type="text" name="' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $pitem->getName(),
-                    ))) . '"'
-                    . ' id="text_' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ($pitem->getSize() !== 0
-                        ? ' size="' . $pitem->getSize() . '"'
-                        : '')
-                    . ($pitem->getLen() !== 0
-                        ? ' maxlength="' . $pitem->getLen() . '"'
-                        : '')
-                    . '>';
-                $ret .= self::getDocumentationLinkHtml($propertyItem);
-                $ret .= '</li>';
-                break;
-            case NumberPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="number_' . $pluginName . '_'
-                    . $propertyItem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label>';
-                $ret .= '<input class="form-control" type="number" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    ))) . '"'
-                    . ' id="number_' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' min="0"'
-                    . '>';
-                break;
-            default:
-                break;
-        }
-
-        return $ret;
+        return match (true) {
+            $propertyItem instanceof BoolPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof HiddenPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof MessageOnlyPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof RadioPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof SelectPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof TextPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            $propertyItem instanceof NumberPropertyItem => $propertyItem->getHtml($plugin, $section, $pluginName),
+            default => '',
+        };
     }
 
     /**

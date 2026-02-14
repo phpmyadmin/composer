@@ -5606,49 +5606,16 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <MixedAssignment>
-      <code><![CDATA[$val]]></code>
-      <code><![CDATA[$val]]></code>
-    </MixedAssignment>
     <PossiblyInvalidCast>
       <code><![CDATA[$config->settings[$section][$opt]]]></code>
     </PossiblyInvalidCast>
     <PossiblyNullOperand>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
       <code><![CDATA[$propertyGroup->getName()]]></code>
-      <code><![CDATA[$propertyItem->getForce()]]></code>
-      <code><![CDATA[$propertyItem->getForce()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
       <code><![CDATA[$subgroupHeader->getName()]]></code>
     </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
-    <UnnecessaryVarAnnotation>
-      <code><![CDATA[RadioPropertyItem]]></code>
-      <code><![CDATA[SelectPropertyItem]]></code>
-      <code><![CDATA[TextPropertyItem]]></code>
-    </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Plugins/Auth/AuthenticationConfig.php">
     <DeprecatedMethod>
@@ -7236,6 +7203,84 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$dbi->fetchValue('SELECT @@have_profiling')]]></code>
     </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Properties/Options/Items/BoolPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getForce()]]></code>
+      <code><![CDATA[$this->getForce()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/HiddenPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/MessageOnlyPropertyItem.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$pluginName]]></code>
+      <code><![CDATA[$section]]></code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Properties/Options/Items/NumberPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/RadioPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <MixedAssignment>
+      <code><![CDATA[$val]]></code>
+    </MixedAssignment>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/SelectPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <MixedAssignment>
+      <code><![CDATA[$val]]></code>
+    </MixedAssignment>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/TextPropertyItem.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$section]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
   </file>
   <file src="src/Query/Compatibility.php">
     <PossiblyInvalidArgument>

@@ -4,11 +4,43 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Properties\Options\Items;
 
+use PhpMyAdmin\Plugins;
+use PhpMyAdmin\Plugins\Plugin;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
+
+use function htmlspecialchars;
 
 /**
  * Single property item class of type select
  */
 class SelectPropertyItem extends OptionsPropertyOneItem
 {
+    public function getHtml(Plugin $plugin, string $section, string $pluginName): string
+    {
+        $ret = '<li class="list-group-item">' . "\n";
+        $ret .= '<label for="select_' . $pluginName . '_'
+            . $this->getName() . '" class="form-label">'
+            . $plugin->getTranslatedText($this->getText() ?? '') . '</label>';
+        $ret .= '<select class="form-select" name="' . $pluginName . '_'
+            . $this->getName() . '"'
+            . ' id="select_' . $pluginName . '_'
+            . $this->getName() . '">';
+        $default = htmlspecialchars($plugin->getTranslatedText(Plugins::getDefault(
+            $section,
+            $pluginName . '_' . $this->getName(),
+        )));
+        foreach ($this->getValues() as $key => $val) {
+            $ret .= '<option value="' . $key . '"';
+            if ($key == $default) {
+                $ret .= ' selected';
+            }
+
+            $ret .= '>' . $plugin->getTranslatedText((string) $val) . '</option>';
+        }
+
+        $ret .= '</select>';
+        $ret .= Plugins::getDocumentationLinkHtml($this);
+
+        return $ret;
+    }
 }
