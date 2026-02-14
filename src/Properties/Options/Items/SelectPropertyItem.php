@@ -36,7 +36,7 @@ class SelectPropertyItem extends OptionsPropertyOneItem
                 $ret .= ' selected';
             }
 
-            $ret .= '>' . $plugin->getTranslatedText((string) $val) . '</option>';
+            $ret .= '>' . $plugin->getTranslatedText($val) . '</option>';
         }
 
         $ret .= '</select>';

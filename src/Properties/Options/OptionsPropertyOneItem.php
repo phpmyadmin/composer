@@ -13,7 +13,7 @@ namespace PhpMyAdmin\Properties\Options;
  */
 abstract class OptionsPropertyOneItem extends OptionsPropertyItem
 {
-    /** @var mixed[] */
+    /** @var string[] */
     private array $values = [];
 
     /** @var string|string[] */
@@ -27,7 +27,7 @@ abstract class OptionsPropertyOneItem extends OptionsPropertyItem
     /**
      * Gets the values
      *
-     * @return mixed[]
+     * @return string[]
      */
     public function getValues(): array
     {
@@ -37,7 +37,7 @@ abstract class OptionsPropertyOneItem extends OptionsPropertyItem
     /**
      * Sets the values
      *
-     * @param mixed[] $values values
+     * @param string[] $values values
      */
     public function setValues(array $values): void
     {

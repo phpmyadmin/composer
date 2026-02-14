@@ -36,7 +36,7 @@ class RadioPropertyItem extends OptionsPropertyOneItem
 
             $ret .= '><label class="form-check-label" for="radio_' . $pluginName . '_'
                 . $this->getName() . '_' . $key . '">'
-                . $plugin->getTranslatedText((string) $val) . '</label></div>';
+                . $plugin->getTranslatedText($val) . '</label></div>';
         }
 
         $ret .= '</li>';

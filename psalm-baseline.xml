@@ -7235,9 +7235,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/RadioPropertyItem.php">
-    <MixedAssignment>
-      <code><![CDATA[$val]]></code>
-    </MixedAssignment>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
       <code><![CDATA[$this->getName()]]></code>
@@ -7246,9 +7243,6 @@
     </PossiblyNullOperand>
   </file>
   <file src="src/Properties/Options/Items/SelectPropertyItem.php">
-    <MixedAssignment>
-      <code><![CDATA[$val]]></code>
-    </MixedAssignment>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
       <code><![CDATA[$this->getName()]]></code>

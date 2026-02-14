@@ -77,7 +77,7 @@ abstract class SchemaPlugin implements Plugin
     /**
      * Returns the array of paper sizes
      *
-     * @return mixed[] array of paper sizes
+     * @return string[] array of paper sizes
      */
     protected function getPaperSizeArray(): array
     {

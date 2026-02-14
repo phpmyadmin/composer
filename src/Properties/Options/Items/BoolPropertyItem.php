@@ -28,7 +28,7 @@ class BoolPropertyItem extends OptionsPropertyOneItem
                 $pluginName . '_' . $this->getName(),
             );
 
-        if ($this->getForce() != null) {
+        if ($this->getForce() !== null) {
             $ret .= ' onclick="if (!this.checked &amp;&amp; '
                 . '(!document.getElementById(\'checkbox_' . $pluginName
                 . '_' . $this->getForce() . '\') '

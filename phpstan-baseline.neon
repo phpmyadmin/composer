@@ -10591,28 +10591,10 @@ parameters:
 			path: src/Profiling.php
 
 		-
-			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
-			identifier: notEqual.notAllowed
-			count: 1
-			path: src/Properties/Options/Items/BoolPropertyItem.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: src/Properties/Options/Items/RadioPropertyItem.php
-
-		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
 			count: 1
 			path: src/Properties/Options/Items/RadioPropertyItem.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: src/Properties/Options/Items/SelectPropertyItem.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
