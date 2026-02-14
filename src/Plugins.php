@@ -20,13 +20,7 @@ use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
-use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\MessageOnlyPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\NumberPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyGroup;
 use PhpMyAdmin\Properties\Options\OptionsPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
@@ -359,16 +353,11 @@ class Plugins
         string $pluginName,
         OptionsPropertyItem $propertyItem,
     ): string {
-        return match (true) {
-            $propertyItem instanceof BoolPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof HiddenPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof MessageOnlyPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof RadioPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof SelectPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof TextPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            $propertyItem instanceof NumberPropertyItem => $propertyItem->getHtml($plugin, $pluginType, $pluginName),
-            default => '',
-        };
+        if ($propertyItem instanceof OptionsPropertyOneItem) {
+            return $propertyItem->getHtml($plugin, $pluginType, $pluginName);
+        }
+
+        return '';
     }
 
     /**

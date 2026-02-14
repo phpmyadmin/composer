@@ -7220,12 +7220,6 @@
       <code><![CDATA[$this->getName()]]></code>
     </PossiblyNullOperand>
   </file>
-  <file src="src/Properties/Options/Items/MessageOnlyPropertyItem.php">
-    <PossiblyUnusedParam>
-      <code><![CDATA[$pluginName]]></code>
-      <code><![CDATA[$pluginType]]></code>
-    </PossiblyUnusedParam>
-  </file>
   <file src="src/Properties/Options/Items/NumberPropertyItem.php">
     <PossiblyNullOperand>
       <code><![CDATA[$this->getName()]]></code>
