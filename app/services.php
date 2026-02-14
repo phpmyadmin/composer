@@ -210,7 +210,7 @@ return [
     ],
     Middleware\MinimumCommonRedirection::class => [
         'class' => Middleware\MinimumCommonRedirection::class,
-        'arguments' => [ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [ResponseFactory::class, UserPreferencesHandler::class, ResponseRenderer::class],
     ],
     Middleware\LanguageAndThemeCookieSaving::class => [
         'class' => Middleware\LanguageAndThemeCookieSaving::class,
