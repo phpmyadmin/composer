@@ -1213,7 +1213,7 @@ class ResultsTest extends AbstractTestCase
         ]);
 
         self::assertNotFalse($dtResult);
-        $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
+        $actual = $object->getTable($dtResult, $displayParts, $statementInfo, false);
 
         $template = new Template($config);
 
@@ -1505,7 +1505,7 @@ class ResultsTest extends AbstractTestCase
         ]);
 
         self::assertNotFalse($dtResult);
-        $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
+        $actual = $object->getTable($dtResult, $displayParts, $statementInfo, false);
 
         $template = new Template($config);
 

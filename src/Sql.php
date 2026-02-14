@@ -1113,6 +1113,7 @@ class Sql
                 $printView,
                 $editable,
                 $isBrowseDistinct,
+                $request->isAjax(),
                 $isLimitedDisplay,
             );
         }
@@ -1134,7 +1135,13 @@ class Sql
             $isBrowseDistinct,
         );
 
-        return $displayResultsObject->getTable($result, $displayParts, $statementInfo, $isLimitedDisplay);
+        return $displayResultsObject->getTable(
+            $result,
+            $displayParts,
+            $statementInfo,
+            $request->isAjax(),
+            $isLimitedDisplay,
+        );
     }
 
     private function getHtmlForStoredProcedureResults(
@@ -1144,6 +1151,7 @@ class Sql
         bool $printView,
         bool $editable,
         bool $isBrowseDistinct,
+        bool $isAjax,
         bool $isLimitedDisplay,
     ): string {
         $tableHtml = '';
@@ -1183,6 +1191,7 @@ class Sql
                     $result,
                     $displayParts,
                     $statementInfo,
+                    $isAjax,
                     $isLimitedDisplay,
                 );
             }
