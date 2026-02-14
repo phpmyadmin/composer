@@ -445,7 +445,10 @@ return [
         'class' => LicenseController::class,
         'arguments' => [ResponseRenderer::class, ResponseFactory::class],
     ],
-    LintController::class => ['class' => LintController::class, 'arguments' => [ResponseFactory::class]],
+    LintController::class => [
+        'class' => LintController::class,
+        'arguments' => [ResponseFactory::class, ResponseRenderer::class],
+    ],
     LogoutController::class => [
         'class' => LogoutController::class,
         'arguments' => [AuthenticationPluginFactory::class],

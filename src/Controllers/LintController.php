@@ -20,7 +20,7 @@ use function json_encode;
  * Represents the interface between the linter and the query editor.
  */
 #[Route('/lint', ['GET', 'POST'])]
-final class LintController implements InvocableController
+final readonly class LintController implements InvocableController
 {
     private const EDITOR_SQL_PREFIX = [
         'event' => "DELIMITER $$ CREATE EVENT `a` ON SCHEDULE EVERY MINUTE DO\n",
@@ -28,14 +28,14 @@ final class LintController implements InvocableController
         'trigger' => "DELIMITER $$ CREATE TRIGGER `a` AFTER INSERT ON `b` FOR EACH ROW\n",
     ];
 
-    public function __construct(private readonly ResponseFactory $responseFactory)
+    public function __construct(private ResponseFactory $responseFactory, private ResponseRenderer $responseRenderer)
     {
     }
 
     public function __invoke(ServerRequest $request): Response
     {
         if (! $request->isAjax()) {
-            return ResponseRenderer::getInstance()->response();
+            return $this->responseRenderer->response();
         }
 
         /**
