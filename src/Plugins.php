@@ -338,7 +338,7 @@ class Plugins
 
         if ($isSubgroup) {
             // end subgroup
-            $ret .= '</ul></li>';
+            $ret .= '</ul>';
         } elseif ($notSubgroupHeader) {
             // end main group
             $ret .= '</ul></div>';

@@ -39,8 +39,6 @@ class RadioPropertyItem extends OptionsPropertyOneItem
                 . $plugin->getTranslatedText($val) . '</label></div>';
         }
 
-        $ret .= '</li>';
-
         return $ret;
     }
 }

@@ -25,6 +25,6 @@ class HiddenPropertyItem extends OptionsPropertyOneItem
                 $pluginType,
                 $pluginName . '_' . $this->getName(),
             )))
-            . '"></li>';
+            . '">';
     }
 }
