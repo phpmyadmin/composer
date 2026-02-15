@@ -401,7 +401,7 @@ final class ZoomSearchController implements InvocableController
 
             $foreignDropdown[$columnIndex] = $this->relation->foreignDropdown(
                 $foreignData[$columnIndex]->dispRow,
-                $foreignData[$columnIndex]->foreignField,
+                $foreignData[$columnIndex]->foreignField ?? '',
                 $foreignData[$columnIndex]->foreignDisplay,
                 '',
                 $this->config->settings['ForeignKeyMaxLimit'],
@@ -496,7 +496,7 @@ final class ZoomSearchController implements InvocableController
         if ($hasForeigner && $foreignData->dispRow !== null) {
             $foreignDropdown = $this->relation->foreignDropdown(
                 $foreignData->dispRow,
-                $foreignData->foreignField,
+                $foreignData->foreignField ?? '',
                 $foreignData->foreignDisplay,
                 '',
                 $this->config->settings['ForeignKeyMaxLimit'],

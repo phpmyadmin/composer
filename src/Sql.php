@@ -259,7 +259,7 @@ class Sql
 
         $dropdown = $this->relation->foreignDropdown(
             $foreignData->dispRow,
-            $foreignData->foreignField,
+            $foreignData->foreignField ?? '',
             $foreignData->foreignDisplay,
             $currentValue,
             $this->config->settings['ForeignKeyMaxLimit'],

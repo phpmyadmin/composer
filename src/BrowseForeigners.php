@@ -207,7 +207,7 @@ class BrowseForeigners
         $keys = [];
         foreach ($foreignData->dispRow as $relrow) {
             $descriptions[] = $relrow[$foreignData->foreignDisplay] ?? '';
-            $keys[] = $relrow[$foreignData->foreignField];
+            $keys[] = $relrow[$foreignData->foreignField ?? ''];
         }
 
         asort($keys);

@@ -1543,7 +1543,7 @@ class InsertEdit
                 $column->type,
                 $insertMode,
             );
-            $functionOptions = Generator::getFunctionsForField($defaultFunction, true);
+            $functionOptions = Generator::getFunctionsForField($defaultFunction, $foreignData->foreignField !== null);
         }
 
         // nullify code is needed by the js nullify() function to be able to generate calls to nullify() in jQuery
@@ -1603,7 +1603,7 @@ class InsertEdit
             if ($foreignData->dispRow !== null) {
                 $foreignDropdown = $this->relation->foreignDropdown(
                     $foreignData->dispRow,
-                    $foreignData->foreignField,
+                    $foreignData->foreignField ?? '',
                     $foreignData->foreignDisplay,
                     $data,
                     $this->config->config->ForeignKeyMaxLimit,
