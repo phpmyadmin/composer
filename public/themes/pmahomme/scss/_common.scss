@@ -1349,6 +1349,11 @@ input#auto_increment_opt {
   border: 1px solid #aaa;
   overflow: hidden;
   box-sizing: content-box;
+  resize: vertical;
+
+  svg {
+    height: 100%;
+  }
 
   .visualization-target {
     height: 100%;
