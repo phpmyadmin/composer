@@ -1351,15 +1351,15 @@ input#auto_increment_opt {
   box-sizing: content-box;
   resize: vertical;
 
-  svg {
-    height: 100%;
-  }
-
   .visualization-target {
     height: 100%;
   }
 
   .visualization-target-svg {
+    >svg {
+      height: 100%;
+    }
+
     .button {
       position: absolute;
       cursor: pointer;
