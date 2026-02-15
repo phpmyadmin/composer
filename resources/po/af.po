@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-08 00:45+0000\n"
+"POT-Creation-Date: 2026-02-15 00:38+0000\n"
 "PO-Revision-Date: 2022-12-06 00:47+0000\n"
 "Last-Translator: MP-van-Niekerk <manie@wedoweb.co.za>\n"
 "Language-Team: Afrikaans <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -215,6 +215,8 @@ msgstr "Na %s"
 #: resources/templates/server/privileges/privileges_summary.twig:31
 #: resources/templates/server/status/monitor/index.twig:206
 #: resources/templates/server/status/processes/list.twig:72
+#: resources/templates/table/index_form.twig:198
+#: resources/templates/table/index_form.twig:238
 #: resources/templates/table/zoom_search/index.twig:62
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
@@ -276,7 +278,7 @@ msgstr "Kolom name"
 #: resources/templates/sql/query.twig:150
 #: resources/templates/sql/query.twig:201
 #: resources/templates/table/find_replace/index.twig:62
-#: resources/templates/table/index_form.twig:245
+#: resources/templates/table/index_form.twig:262
 #: resources/templates/table/insert/actions_panel.twig:38
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:6
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:20
@@ -346,7 +348,7 @@ msgstr "Wys PHP informasie"
 #: resources/templates/columns_definitions/column_definitions_form.twig:154
 #: resources/templates/modals/index_dialog_modal.twig:11
 #: resources/templates/modals/index_dialog_modal.twig:21
-#: resources/templates/table/index_form.twig:246
+#: resources/templates/table/index_form.twig:263
 #: resources/templates/table/index_rename_form.twig:28
 #: resources/templates/table/insert/actions_panel.twig:36
 #: resources/templates/table/relation/common_form.twig:141
@@ -755,6 +757,7 @@ msgstr ""
 #: resources/templates/server/databases/index.twig:29
 #: resources/templates/server/databases/index.twig:30
 #: resources/templates/server/databases/index.twig:123
+#: resources/templates/table/index_form.twig:147
 #: resources/templates/table/operations/index.twig:159
 #: resources/templates/table/search/index.twig:40
 #: resources/templates/table/structure/display_structure.twig:23
@@ -972,7 +975,7 @@ msgstr "Onbeskikbaar"
 #: src/Controllers/Table/DeleteRowsController.php:34
 #: src/Controllers/Table/DropColumnController.php:46
 #: src/Controllers/Table/Structure/PrimaryController.php:101
-#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:472
+#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
@@ -1008,8 +1011,8 @@ msgstr "Ja"
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:23
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:24
 #: src/Controllers/JavaScriptMessagesController.php:343
-#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:446
-#: src/Indexes/Index.php:472 src/Plugins/Export/ExportHtmlword.php:517
+#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
+#: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
@@ -1076,7 +1079,7 @@ msgstr "in navraag"
 #: resources/templates/table/structure/display_structure.twig:494
 #: resources/templates/triggers/row.twig:28
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
-#: src/ConfigStorage/UserGroups.php:112
+#: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
 #: src/Display/Results.php:1872 src/Html/Generator.php:520
 #: src/Html/Generator.php:789
@@ -7015,7 +7018,7 @@ msgstr "SQL resultaat"
 #: src/Controllers/Table/Partition/RepairController.php:49
 #: src/Controllers/Table/Partition/TruncateController.php:50
 #: src/Controllers/Table/RelationController.php:145
-#: src/Database/Routines.php:1020 src/Display/Results.php:2969
+#: src/Database/Routines.php:1032 src/Display/Results.php:2969
 #: src/Message.php:122
 msgid "Your SQL query has been executed successfully."
 msgstr "Jou SQL-navraag is suksesvol uitgevoer."
@@ -7369,20 +7372,20 @@ msgstr "Gebruiker"
 msgid "Comment:"
 msgstr "Kommentaar"
 
-#: resources/templates/table/index_form.twig:162
-#: resources/templates/table/index_form.twig:199
+#: resources/templates/table/index_form.twig:165
+#: resources/templates/table/index_form.twig:209
 msgid "Drag to reorder"
 msgstr ""
 
-#: resources/templates/table/index_form.twig:167
-#: resources/templates/table/index_form.twig:203
+#: resources/templates/table/index_form.twig:170
+#: resources/templates/table/index_form.twig:213
 #: src/Controllers/JavaScriptMessagesController.php:465
 #: src/Controllers/JavaScriptMessagesController.php:617
 #: src/Error/ErrorHandler.php:426 src/InsertEdit.php:1411
 msgid "Ignore"
 msgstr "Ignoreer"
 
-#: resources/templates/table/index_form.twig:237
+#: resources/templates/table/index_form.twig:254
 #: src/Controllers/JavaScriptMessagesController.php:123
 #, fuzzy, php-format
 msgid "Add %s column(s) to index"
@@ -12416,24 +12419,24 @@ msgid ""
 "configuration storage there."
 msgstr ""
 
-#: src/ConfigStorage/UserGroups.php:105
+#: src/ConfigStorage/UserGroups.php:106
 #, fuzzy
 msgid "View users"
 msgstr "Enige gebruiker"
 
-#: src/ConfigStorage/UserGroups.php:228
+#: src/ConfigStorage/UserGroups.php:229
 #, fuzzy
 #| msgid "Server version"
 msgid "Server-level tabs"
 msgstr "Bediener weergawe"
 
-#: src/ConfigStorage/UserGroups.php:233
+#: src/ConfigStorage/UserGroups.php:234
 #, fuzzy
 #| msgid "Databases"
 msgid "Database-level tabs"
 msgstr "databasisse"
 
-#: src/ConfigStorage/UserGroups.php:238
+#: src/ConfigStorage/UserGroups.php:239
 #, fuzzy
 #| msgid "Table comments"
 msgid "Table-level tabs"
@@ -12647,17 +12650,21 @@ msgstr ""
 msgid "No databases selected."
 msgstr ""
 
-#: src/Controllers/Database/EventsController.php:125
+#: src/Controllers/Database/EventsController.php:69
+msgid "The event was dropped immediately after creation."
+msgstr ""
+
+#: src/Controllers/Database/EventsController.php:136
 #, fuzzy
 msgid "Add event"
 msgstr "Voeg 'n nuwe gebruiker by"
 
-#: src/Controllers/Database/EventsController.php:129
+#: src/Controllers/Database/EventsController.php:140
 #, fuzzy
 msgid "Edit event"
 msgstr "Voeg 'n nuwe gebruiker by"
 
-#: src/Controllers/Database/EventsController.php:178
+#: src/Controllers/Database/EventsController.php:189
 #: src/Controllers/Database/RoutinesController.php:273
 #: src/Controllers/Database/RoutinesController.php:303
 #: src/Controllers/Database/RoutinesController.php:371
@@ -12665,18 +12672,18 @@ msgstr "Voeg 'n nuwe gebruiker by"
 msgid "Error in processing request:"
 msgstr ""
 
-#: src/Controllers/Database/EventsController.php:180
+#: src/Controllers/Database/EventsController.php:191
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid "No event with name %1$s found in database %2$s."
 msgstr "Geen tabelle in databasis gevind nie."
 
-#: src/Controllers/Database/EventsController.php:206
+#: src/Controllers/Database/EventsController.php:217
 #, php-format
 msgid "Export of event %s"
 msgstr ""
 
-#: src/Controllers/Database/EventsController.php:224
+#: src/Controllers/Database/EventsController.php:235
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid ""
@@ -12990,7 +12997,7 @@ msgid ""
 "this some features such as error reporting or version check are disabled."
 msgstr ""
 
-#: src/Controllers/Import/ImportController.php:163
+#: src/Controllers/Import/ImportController.php:166
 #, php-format
 msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
@@ -12999,22 +13006,22 @@ msgstr ""
 "Jy het heel moontlik te groot leer probeer oplaai. Verwys asb na "
 "%sdocumentation%s vir 'n omseiling van die limiet."
 
-#: src/Controllers/Import/ImportController.php:189
+#: src/Controllers/Import/ImportController.php:192
 #, fuzzy
 msgid "Incorrect format parameter"
 msgstr "Hernoem tabel na"
 
-#: src/Controllers/Import/ImportController.php:299
-#: src/Controllers/Import/ImportController.php:515
+#: src/Controllers/Import/ImportController.php:302
+#: src/Controllers/Import/ImportController.php:518
 msgid "Showing bookmark"
 msgstr "Aantoon van boekmerk"
 
-#: src/Controllers/Import/ImportController.php:319
-#: src/Controllers/Import/ImportController.php:511
+#: src/Controllers/Import/ImportController.php:322
+#: src/Controllers/Import/ImportController.php:514
 msgid "The bookmark has been deleted."
 msgstr "Die boekmerk is verwyder."
 
-#: src/Controllers/Import/ImportController.php:433
+#: src/Controllers/Import/ImportController.php:436
 msgid ""
 "No data was received to import. Either no file name was submitted, or the "
 "file size exceeded the maximum size permitted by your PHP configuration. See "
@@ -13024,14 +13031,14 @@ msgstr ""
 "die lêergrootte het die maksimum grootte wat deur jou PHP-konfigurasie "
 "toegelaat word, oorskry. Sien [doc@faq1-16]FAQ 1.16[/doc]."
 
-#: src/Controllers/Import/ImportController.php:523
+#: src/Controllers/Import/ImportController.php:526
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
 msgstr[0] "Invoer is suksesvol voltooi, %d navraag is uitgevoer."
 msgstr[1] "Invoer is suksesvol voltooi, %d navrae is uitgevoer."
 
-#: src/Controllers/Import/ImportController.php:560
+#: src/Controllers/Import/ImportController.php:563
 #, php-format
 msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
@@ -13040,7 +13047,7 @@ msgstr ""
 "Skrip-uitteltyd geslaag, as jy invoer wil voltooi, %sdien asseblief "
 "dieselfde lêer%s in en invoer sal hervat."
 
-#: src/Controllers/Import/ImportController.php:570
+#: src/Controllers/Import/ImportController.php:573
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
@@ -13049,12 +13056,12 @@ msgstr ""
 "dat phpMyAdmin nie hierdie invoer sal kan voltooi nie, tensy jy php-tydperke "
 "verhoog."
 
-#: src/Controllers/Import/ImportController.php:625
+#: src/Controllers/Import/ImportController.php:628
 #: src/Controllers/Sql/SqlController.php:137
 msgid "\"DROP DATABASE\" statements are disabled."
 msgstr "\"DROP DATABASE\" stellings word nie toegelaat nie."
 
-#: src/Controllers/Import/ImportController.php:676 src/Sql.php:906
+#: src/Controllers/Import/ImportController.php:679 src/Sql.php:906
 msgid "[ROLLBACK occurred.]"
 msgstr ""
 
@@ -15970,7 +15977,7 @@ msgid "There is an issue with your request."
 msgstr ""
 
 #: src/Controllers/Table/GetFieldController.php:87
-#: src/Database/Routines.php:1037 src/Import/Import.php:138
+#: src/Database/Routines.php:1049 src/Import/Import.php:138
 #: src/InsertEdit.php:160 src/Sql.php:892
 msgid "MySQL returned an empty result set (i.e. zero rows)."
 msgstr "MySQL het niks teruggegee nie (dus nul rye)."
@@ -16218,7 +16225,7 @@ msgstr ""
 #: src/Database/Events.php:93 src/Database/Events.php:102
 #: src/Database/Events.php:136 src/Database/Routines.php:105
 #: src/Database/Routines.php:131 src/Database/Routines.php:209
-#: src/Database/Routines.php:997 src/Triggers/Triggers.php:84
+#: src/Database/Routines.php:1009 src/Triggers/Triggers.php:84
 #: src/Triggers/Triggers.php:93 src/Triggers/Triggers.php:128
 #, php-format
 msgid "The following query has failed: \"%s\""
@@ -16228,7 +16235,7 @@ msgstr ""
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1001 src/Html/Generator.php:805
+#: src/Database/Routines.php:1013 src/Html/Generator.php:805
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -16259,7 +16266,7 @@ msgstr "Tabel %s is verwyder"
 msgid "One or more errors have occurred while processing your request:"
 msgstr ""
 
-#: src/Database/Events.php:267 src/Database/Routines.php:803
+#: src/Database/Events.php:267 src/Database/Routines.php:815
 #: src/Triggers/Triggers.php:191
 msgid "The definer must be in the \"username@hostname\" format!"
 msgstr ""
@@ -16310,52 +16317,52 @@ msgstr "Tabel %s is verwyder"
 msgid "Routine %1$s has been modified."
 msgstr "Tabel %s is verwyder"
 
-#: src/Database/Routines.php:648
+#: src/Database/Routines.php:660
 msgid "You must provide a name and a type for each routine parameter."
 msgstr ""
 
-#: src/Database/Routines.php:666
+#: src/Database/Routines.php:678
 #, php-format
 msgid "Invalid direction \"%s\" given for parameter."
 msgstr ""
 
-#: src/Database/Routines.php:686 src/Database/Routines.php:751
+#: src/Database/Routines.php:698 src/Database/Routines.php:763
 msgid ""
 "You must provide length/values for routine parameters of type ENUM, SET, "
 "VARCHAR and VARBINARY."
 msgstr ""
 
-#: src/Database/Routines.php:733
+#: src/Database/Routines.php:745
 msgid "You must provide a valid return type for the routine."
 msgstr ""
 
-#: src/Database/Routines.php:810
+#: src/Database/Routines.php:822
 #, fuzzy
 #| msgid "Invalid export type"
 msgid "Invalid routine type!"
 msgstr "Verkeerde uitvoer tipe"
 
-#: src/Database/Routines.php:816
+#: src/Database/Routines.php:828
 msgid "You must provide a routine name!"
 msgstr ""
 
-#: src/Database/Routines.php:879
+#: src/Database/Routines.php:891
 msgid "You must provide a routine definition."
 msgstr ""
 
-#: src/Database/Routines.php:1013
+#: src/Database/Routines.php:1025
 #, php-format
 msgid "Execution results of routine %s"
 msgstr ""
 
-#: src/Database/Routines.php:1028
+#: src/Database/Routines.php:1040
 #, php-format
 msgid "%d row affected by the last statement inside the procedure."
 msgid_plural "%d rows affected by the last statement inside the procedure."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Dbal/DatabaseInterface.php:1061
+#: src/Dbal/DatabaseInterface.php:1062
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -16363,7 +16370,7 @@ msgid ""
 "phpMyAdmin is currently using the default time zone of the database server."
 msgstr ""
 
-#: src/Dbal/DatabaseInterface.php:1102
+#: src/Dbal/DatabaseInterface.php:1103
 msgid "Failed to set configured collation connection!"
 msgstr ""
 
@@ -16408,44 +16415,44 @@ msgstr "totaal"
 msgid "Link not found!"
 msgstr "Skakel nie gevind nie"
 
-#: src/Engines/Innodb.php:29
+#: src/Engines/Innodb.php:30
 msgid "Data home directory"
 msgstr ""
 
-#: src/Engines/Innodb.php:30
+#: src/Engines/Innodb.php:31
 msgid "The common part of the directory path for all InnoDB data files."
 msgstr ""
 
-#: src/Engines/Innodb.php:32
+#: src/Engines/Innodb.php:33
 #, fuzzy
 msgid "Data files"
 msgstr "Slegs Data"
 
-#: src/Engines/Innodb.php:34
+#: src/Engines/Innodb.php:35
 msgid "Autoextend increment"
 msgstr ""
 
-#: src/Engines/Innodb.php:36
+#: src/Engines/Innodb.php:37
 msgid ""
 "The increment size for extending the size of an autoextending tablespace "
 "when it becomes full."
 msgstr ""
 
-#: src/Engines/Innodb.php:41
+#: src/Engines/Innodb.php:42
 msgid "Buffer pool size"
 msgstr ""
 
-#: src/Engines/Innodb.php:42
+#: src/Engines/Innodb.php:43
 msgid ""
 "The size of the memory buffer InnoDB uses to cache data and indexes of its "
 "tables."
 msgstr ""
 
-#: src/Engines/Innodb.php:102
+#: src/Engines/Innodb.php:103
 msgid "Buffer Pool"
 msgstr ""
 
-#: src/Engines/Innodb.php:102 src/Server/Status/Data.php:187
+#: src/Engines/Innodb.php:103 src/Server/Status/Data.php:187
 msgid "InnoDB Status"
 msgstr ""
 
@@ -16976,7 +16983,7 @@ msgstr ""
 msgid "Go to database: %s"
 msgstr "Geen databasisse"
 
-#: src/Indexes/Index.php:566
+#: src/Indexes/Index.php:568
 #, php-format
 msgid ""
 "The indexes %1$s and %2$s seem to be equal and one of them could possibly be "
@@ -18823,15 +18830,15 @@ msgstr ""
 msgid "This MySQL server does not support the %s storage engine."
 msgstr ""
 
-#: src/Table/Indexes.php:71 src/Table/Indexes.php:161
+#: src/Table/Indexes.php:71 src/Table/Indexes.php:170
 msgid "The name of the primary key must be \"PRIMARY\"!"
 msgstr "Die naam van die primere sleutel moet PRIMARY wees!"
 
-#: src/Table/Indexes.php:83 src/Table/Indexes.php:168
+#: src/Table/Indexes.php:83 src/Table/Indexes.php:177
 msgid "Can't rename index to PRIMARY!"
 msgstr "Kannie die indeks hernoem na PRIMARY!"
 
-#: src/Table/Indexes.php:109
+#: src/Table/Indexes.php:118
 msgid "No index parts defined!"
 msgstr "Geen indeks dele gedefinieer!"
 
@@ -18840,45 +18847,45 @@ msgstr "Geen indeks dele gedefinieer!"
 msgid "Problems with indexes of table `%s`"
 msgstr ""
 
-#: src/Table/TableMover.php:310
+#: src/Table/TableMover.php:309
 #, fuzzy, php-format
 msgid "Source database `%s` was not found!"
 msgstr "Soek in databasis"
 
-#: src/Table/TableMover.php:319
+#: src/Table/TableMover.php:318
 #, fuzzy, php-format
 msgid "Target database `%s` was not found!"
 msgstr "Soek in databasis"
 
-#: src/Table/Table.php:820
+#: src/Table/Table.php:829
 #, fuzzy
 msgid "Invalid database:"
 msgstr "Geen databasisse"
 
-#: src/Table/Table.php:838
+#: src/Table/Table.php:847
 #, fuzzy
 #| msgid "Inside table(s):"
 msgid "Invalid table name:"
 msgstr "Binne tabel(le):"
 
-#: src/Table/Table.php:883
+#: src/Table/Table.php:892
 #, fuzzy, php-format
 #| msgid "Table %s has been renamed to %s."
 msgid "Table %1$s has been renamed to %2$s."
 msgstr "Tabel %s is vernoem na %s"
 
-#: src/Table/Table.php:1119
+#: src/Table/Table.php:1128
 msgid "Could not save table UI preferences!"
 msgstr ""
 
-#: src/Table/Table.php:1141
+#: src/Table/Table.php:1150
 #, php-format
 msgid ""
 "Failed to cleanup table UI preferences (see $cfg['Servers'][$i]"
 "['MaxTableUiprefs'] %s)"
 msgstr ""
 
-#: src/Table/Table.php:1259
+#: src/Table/Table.php:1268
 #, php-format
 msgid ""
 "Cannot save UI property \"%s\". The changes made will not be persistent "
@@ -18886,7 +18893,7 @@ msgid ""
 "changed."
 msgstr ""
 
-#: src/Table/Table.php:1584
+#: src/Table/Table.php:1593
 #, php-format
 msgid "Error creating foreign key on %1$s (check data types)"
 msgstr ""

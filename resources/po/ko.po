@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-08 00:45+0000\n"
+"POT-Creation-Date: 2026-02-15 00:38+0000\n"
 "PO-Revision-Date: 2024-10-17 16:16+0000\n"
 "Last-Translator: \"Yong Kim (Neatnet)\" <neatnet@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -196,6 +196,8 @@ msgstr "%s 다음에"
 #: resources/templates/server/privileges/privileges_summary.twig:31
 #: resources/templates/server/status/monitor/index.twig:206
 #: resources/templates/server/status/processes/list.twig:72
+#: resources/templates/table/index_form.twig:198
+#: resources/templates/table/index_form.twig:238
 #: resources/templates/table/zoom_search/index.twig:62
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
@@ -253,7 +255,7 @@ msgstr "열"
 #: resources/templates/sql/query.twig:150
 #: resources/templates/sql/query.twig:201
 #: resources/templates/table/find_replace/index.twig:62
-#: resources/templates/table/index_form.twig:245
+#: resources/templates/table/index_form.twig:262
 #: resources/templates/table/insert/actions_panel.twig:38
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:6
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:20
@@ -317,7 +319,7 @@ msgstr "온라인 트랜잭션"
 #: resources/templates/columns_definitions/column_definitions_form.twig:154
 #: resources/templates/modals/index_dialog_modal.twig:11
 #: resources/templates/modals/index_dialog_modal.twig:21
-#: resources/templates/table/index_form.twig:246
+#: resources/templates/table/index_form.twig:263
 #: resources/templates/table/index_rename_form.twig:28
 #: resources/templates/table/insert/actions_panel.twig:36
 #: resources/templates/table/relation/common_form.twig:141
@@ -695,6 +697,7 @@ msgstr "기본값에는, 역슬래시나 따옴표 없이 단 하나의 값을 �
 #: resources/templates/server/databases/index.twig:29
 #: resources/templates/server/databases/index.twig:30
 #: resources/templates/server/databases/index.twig:123
+#: resources/templates/table/index_form.twig:147
 #: resources/templates/table/operations/index.twig:159
 #: resources/templates/table/search/index.twig:40
 #: resources/templates/table/structure/display_structure.twig:23
@@ -900,7 +903,7 @@ msgstr "사용불가"
 #: src/Controllers/Table/DeleteRowsController.php:34
 #: src/Controllers/Table/DropColumnController.php:46
 #: src/Controllers/Table/Structure/PrimaryController.php:101
-#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:472
+#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
@@ -936,8 +939,8 @@ msgstr "예"
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:23
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:24
 #: src/Controllers/JavaScriptMessagesController.php:343
-#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:446
-#: src/Indexes/Index.php:472 src/Plugins/Export/ExportHtmlword.php:517
+#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
+#: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
@@ -1002,7 +1005,7 @@ msgstr "다시 쿼리하기"
 #: resources/templates/table/structure/display_structure.twig:494
 #: resources/templates/triggers/row.twig:28
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
-#: src/ConfigStorage/UserGroups.php:112
+#: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
 #: src/Display/Results.php:1872 src/Html/Generator.php:520
 #: src/Html/Generator.php:789
@@ -6415,7 +6418,7 @@ msgstr "프로파일링 결과로 파이 차트."
 #: src/Controllers/Table/Partition/RepairController.php:49
 #: src/Controllers/Table/Partition/TruncateController.php:50
 #: src/Controllers/Table/RelationController.php:145
-#: src/Database/Routines.php:1020 src/Display/Results.php:2969
+#: src/Database/Routines.php:1032 src/Display/Results.php:2969
 #: src/Message.php:122
 msgid "Your SQL query has been executed successfully."
 msgstr "쿼리가 정상적으로 실행되었습니다."
@@ -6716,20 +6719,20 @@ msgstr "파서:"
 msgid "Comment:"
 msgstr "설명:"
 
-#: resources/templates/table/index_form.twig:162
-#: resources/templates/table/index_form.twig:199
+#: resources/templates/table/index_form.twig:165
+#: resources/templates/table/index_form.twig:209
 msgid "Drag to reorder"
 msgstr "재정렬하려면 드래그"
 
-#: resources/templates/table/index_form.twig:167
-#: resources/templates/table/index_form.twig:203
+#: resources/templates/table/index_form.twig:170
+#: resources/templates/table/index_form.twig:213
 #: src/Controllers/JavaScriptMessagesController.php:465
 #: src/Controllers/JavaScriptMessagesController.php:617
 #: src/Error/ErrorHandler.php:426 src/InsertEdit.php:1411
 msgid "Ignore"
 msgstr "무시"
 
-#: resources/templates/table/index_form.twig:237
+#: resources/templates/table/index_form.twig:254
 #: src/Controllers/JavaScriptMessagesController.php:123
 #, php-format
 msgid "Add %s column(s) to index"
@@ -11724,19 +11727,19 @@ msgstr ""
 "'%s'라는 데이터베이스를 생성하는 데 필요한 권한이 없습니다. 데이터베이스의 "
 "'테이블 작업' 탭으로 이동하여 phpMyAdmin 구성 저장소를 설정할 수 있습니다."
 
-#: src/ConfigStorage/UserGroups.php:105
+#: src/ConfigStorage/UserGroups.php:106
 msgid "View users"
 msgstr "사용자 보기"
 
-#: src/ConfigStorage/UserGroups.php:228
+#: src/ConfigStorage/UserGroups.php:229
 msgid "Server-level tabs"
 msgstr "서버 단위 탭"
 
-#: src/ConfigStorage/UserGroups.php:233
+#: src/ConfigStorage/UserGroups.php:234
 msgid "Database-level tabs"
 msgstr "데이터베이스 단위 탭"
 
-#: src/ConfigStorage/UserGroups.php:238
+#: src/ConfigStorage/UserGroups.php:239
 msgid "Table-level tabs"
 msgstr "테이블 단위 탭"
 
@@ -11937,15 +11940,19 @@ msgstr ""
 msgid "No databases selected."
 msgstr "데이터베이스를 선택하지 않았습니다."
 
-#: src/Controllers/Database/EventsController.php:125
+#: src/Controllers/Database/EventsController.php:69
+msgid "The event was dropped immediately after creation."
+msgstr ""
+
+#: src/Controllers/Database/EventsController.php:136
 msgid "Add event"
 msgstr "이벤트 추가"
 
-#: src/Controllers/Database/EventsController.php:129
+#: src/Controllers/Database/EventsController.php:140
 msgid "Edit event"
 msgstr "이벤트 수정"
 
-#: src/Controllers/Database/EventsController.php:178
+#: src/Controllers/Database/EventsController.php:189
 #: src/Controllers/Database/RoutinesController.php:273
 #: src/Controllers/Database/RoutinesController.php:303
 #: src/Controllers/Database/RoutinesController.php:371
@@ -11953,17 +11960,17 @@ msgstr "이벤트 수정"
 msgid "Error in processing request:"
 msgstr "요청 처리 중 에러가 발생:"
 
-#: src/Controllers/Database/EventsController.php:180
+#: src/Controllers/Database/EventsController.php:191
 #, php-format
 msgid "No event with name %1$s found in database %2$s."
 msgstr "%2$s 데이터베이스에 %1$s라는 이름의 이벤트가 없습니다."
 
-#: src/Controllers/Database/EventsController.php:206
+#: src/Controllers/Database/EventsController.php:217
 #, php-format
 msgid "Export of event %s"
 msgstr "이벤트 %s 추출"
 
-#: src/Controllers/Database/EventsController.php:224
+#: src/Controllers/Database/EventsController.php:235
 #, php-format
 msgid ""
 "Error in processing request: No event with name %1$s found in database %2$s."
@@ -12298,7 +12305,7 @@ msgstr ""
 "curl 확장 기능이 발견되지 않았고 allow_url_fopen 이 비활성화 되어있습니다. 이"
 "로 인해 오류 보고나 버전 체크와 같은 기능들이 제한됩니다."
 
-#: src/Controllers/Import/ImportController.php:163
+#: src/Controllers/Import/ImportController.php:166
 #, php-format
 msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
@@ -12307,21 +12314,21 @@ msgstr ""
 "너무 큰 파일을 업로드하려고 시도했습니다. 제한을 해결하기 위해서는 "
 "%sdocumentation%s를 참조하여 주십시오."
 
-#: src/Controllers/Import/ImportController.php:189
+#: src/Controllers/Import/ImportController.php:192
 msgid "Incorrect format parameter"
 msgstr "잘못된 포맷 파라미터"
 
-#: src/Controllers/Import/ImportController.php:299
-#: src/Controllers/Import/ImportController.php:515
+#: src/Controllers/Import/ImportController.php:302
+#: src/Controllers/Import/ImportController.php:518
 msgid "Showing bookmark"
 msgstr "북마크 표시"
 
-#: src/Controllers/Import/ImportController.php:319
-#: src/Controllers/Import/ImportController.php:511
+#: src/Controllers/Import/ImportController.php:322
+#: src/Controllers/Import/ImportController.php:514
 msgid "The bookmark has been deleted."
 msgstr "북마크가 삭제되었습니다."
 
-#: src/Controllers/Import/ImportController.php:433
+#: src/Controllers/Import/ImportController.php:436
 msgid ""
 "No data was received to import. Either no file name was submitted, or the "
 "file size exceeded the maximum size permitted by your PHP configuration. See "
@@ -12330,13 +12337,13 @@ msgstr ""
 "가져올 데이터가 없습니다. 파일이 지정되지 않았거나 파일 크기가 PHP 설정의 최"
 "대 파일 크기를 초과했을 수 있습니다. [doc@faq1-16]FAQ 1.16[/doc] 참조."
 
-#: src/Controllers/Import/ImportController.php:523
+#: src/Controllers/Import/ImportController.php:526
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
 msgstr[0] "가져오기가 정상적으로 완료되었습니다, %d 쿼리가 실행되었습니다."
 
-#: src/Controllers/Import/ImportController.php:560
+#: src/Controllers/Import/ImportController.php:563
 #, php-format
 msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
@@ -12345,7 +12352,7 @@ msgstr ""
 "스크립트 시간 제한이 초과되었습니다. 이어서 하시려면 같은 파일을 다시 전송해 "
 "주세요 (%s, %s)."
 
-#: src/Controllers/Import/ImportController.php:570
+#: src/Controllers/Import/ImportController.php:573
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
@@ -12353,12 +12360,12 @@ msgstr ""
 "파싱된 데이터가 없지만, 이것은 보통 phpMyAdmin이 php 시간 제한을 늘리지 않고"
 "는 이 가져오기를 마칠 수 없음을 뜻합니다."
 
-#: src/Controllers/Import/ImportController.php:625
+#: src/Controllers/Import/ImportController.php:628
 #: src/Controllers/Sql/SqlController.php:137
 msgid "\"DROP DATABASE\" statements are disabled."
 msgstr "\"DROP DATABASE\" 구문은 허락되지 않습니다."
 
-#: src/Controllers/Import/ImportController.php:676 src/Sql.php:906
+#: src/Controllers/Import/ImportController.php:679 src/Sql.php:906
 msgid "[ROLLBACK occurred.]"
 msgstr "[ROLLBACK이 발생했습니다.]"
 
@@ -15133,7 +15140,7 @@ msgid "There is an issue with your request."
 msgstr "요청에 문제가 있습니다."
 
 #: src/Controllers/Table/GetFieldController.php:87
-#: src/Database/Routines.php:1037 src/Import/Import.php:138
+#: src/Database/Routines.php:1049 src/Import/Import.php:138
 #: src/InsertEdit.php:160 src/Sql.php:892
 msgid "MySQL returned an empty result set (i.e. zero rows)."
 msgstr "결과값이 없습니다. (빈 레코드 리턴)."
@@ -15344,7 +15351,7 @@ msgstr "개요 플러그인을 로드할 수 없습니다. 올바로 설치되�
 #: src/Database/Events.php:93 src/Database/Events.php:102
 #: src/Database/Events.php:136 src/Database/Routines.php:105
 #: src/Database/Routines.php:131 src/Database/Routines.php:209
-#: src/Database/Routines.php:997 src/Triggers/Triggers.php:84
+#: src/Database/Routines.php:1009 src/Triggers/Triggers.php:84
 #: src/Triggers/Triggers.php:93 src/Triggers/Triggers.php:128
 #, php-format
 msgid "The following query has failed: \"%s\""
@@ -15354,7 +15361,7 @@ msgstr "쿼리 실행 실패: \"%s\""
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1001 src/Html/Generator.php:805
+#: src/Database/Routines.php:1013 src/Html/Generator.php:805
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -15384,7 +15391,7 @@ msgstr "이벤트 %1$s 를 생성했습니다."
 msgid "One or more errors have occurred while processing your request:"
 msgstr "요청을 처리하는 중에 하나 혹은 그 이상의 오류가 발생했습니다:"
 
-#: src/Database/Events.php:267 src/Database/Routines.php:803
+#: src/Database/Events.php:267 src/Database/Routines.php:815
 #: src/Triggers/Triggers.php:191
 msgid "The definer must be in the \"username@hostname\" format!"
 msgstr "디파이너의 형식은 \"username@hostname\" 이어야 합니다!"
@@ -15433,16 +15440,16 @@ msgstr "%1$s 루틴이수정되었습니다. 권한이 조정되었습니다."
 msgid "Routine %1$s has been modified."
 msgstr "루틴 %1$s가 수정되었습니다."
 
-#: src/Database/Routines.php:648
+#: src/Database/Routines.php:660
 msgid "You must provide a name and a type for each routine parameter."
 msgstr "각 루틴 매개변수의 이름과 유형을 제공해야 합니다."
 
-#: src/Database/Routines.php:666
+#: src/Database/Routines.php:678
 #, php-format
 msgid "Invalid direction \"%s\" given for parameter."
 msgstr "매개 변수에 대해 지정된 방향 \"%s\"가 잘못되었습니다."
 
-#: src/Database/Routines.php:686 src/Database/Routines.php:751
+#: src/Database/Routines.php:698 src/Database/Routines.php:763
 msgid ""
 "You must provide length/values for routine parameters of type ENUM, SET, "
 "VARCHAR and VARBINARY."
@@ -15450,36 +15457,36 @@ msgstr ""
 "ENUM, SET, VARCHAR, VARBINARY 유형의 루틴 매개변수에 대한 길이/값을 제공해야 "
 "합니다."
 
-#: src/Database/Routines.php:733
+#: src/Database/Routines.php:745
 msgid "You must provide a valid return type for the routine."
 msgstr "루틴에 유효한 반환 유형을 제공해야 합니다."
 
-#: src/Database/Routines.php:810
+#: src/Database/Routines.php:822
 #, fuzzy
 #| msgid "Invalid routine type: \"%s\""
 msgid "Invalid routine type!"
 msgstr "잘못된 루틴 타입: \"%s\""
 
-#: src/Database/Routines.php:816
+#: src/Database/Routines.php:828
 msgid "You must provide a routine name!"
 msgstr "루틴 이름이 필요합니다!"
 
-#: src/Database/Routines.php:879
+#: src/Database/Routines.php:891
 msgid "You must provide a routine definition."
 msgstr "루틴의 정의를 제공해야 합니다."
 
-#: src/Database/Routines.php:1013
+#: src/Database/Routines.php:1025
 #, php-format
 msgid "Execution results of routine %s"
 msgstr "루틴 %s의 실행 결과"
 
-#: src/Database/Routines.php:1028
+#: src/Database/Routines.php:1040
 #, php-format
 msgid "%d row affected by the last statement inside the procedure."
 msgid_plural "%d rows affected by the last statement inside the procedure."
 msgstr[0] "프로시저 내부의 마지막 구문에 %d 행이 영향을 받습니다."
 
-#: src/Dbal/DatabaseInterface.php:1061
+#: src/Dbal/DatabaseInterface.php:1062
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -15490,7 +15497,7 @@ msgstr ""
 "[%3$d]['SessionTimeZone'][/em]에 대한 구성 설정을 확인하십시오. phpMyAdmin은 "
 "현재 데이터베이스 서버의 기본 시간대를 사용하고 있습니다."
 
-#: src/Dbal/DatabaseInterface.php:1102
+#: src/Dbal/DatabaseInterface.php:1103
 msgid "Failed to set configured collation connection!"
 msgstr "문자정렬순서 연결을 설정하는데 실패했습니다!"
 
@@ -15531,33 +15538,33 @@ msgstr "합계 %s"
 msgid "Link not found!"
 msgstr "링크를 찾을 수 없습니다!"
 
-#: src/Engines/Innodb.php:29
+#: src/Engines/Innodb.php:30
 msgid "Data home directory"
 msgstr "데이터 홈 디렉토리"
 
-#: src/Engines/Innodb.php:30
+#: src/Engines/Innodb.php:31
 msgid "The common part of the directory path for all InnoDB data files."
 msgstr "모든 InnoDB 데이터 파일에 대한, 파일 경로의 공통 부분."
 
-#: src/Engines/Innodb.php:32
+#: src/Engines/Innodb.php:33
 msgid "Data files"
 msgstr "데이터 파일"
 
-#: src/Engines/Innodb.php:34
+#: src/Engines/Innodb.php:35
 msgid "Autoextend increment"
 msgstr "자동 확장 시 늘어나는 테이블 크기"
 
-#: src/Engines/Innodb.php:36
+#: src/Engines/Innodb.php:37
 msgid ""
 "The increment size for extending the size of an autoextending tablespace "
 "when it becomes full."
 msgstr "테이블이 가득 찼을 때 자동 확장되는 테이블 공간의 증가량입니다."
 
-#: src/Engines/Innodb.php:41
+#: src/Engines/Innodb.php:42
 msgid "Buffer pool size"
 msgstr "버퍼풀 크기"
 
-#: src/Engines/Innodb.php:42
+#: src/Engines/Innodb.php:43
 msgid ""
 "The size of the memory buffer InnoDB uses to cache data and indexes of its "
 "tables."
@@ -15565,11 +15572,11 @@ msgstr ""
 "InnoDB가 테이블의 데이터 및 인덱스를 캐시하는 데 사용하는 메모리 버퍼의 크기"
 "입니다."
 
-#: src/Engines/Innodb.php:102
+#: src/Engines/Innodb.php:103
 msgid "Buffer Pool"
 msgstr "버퍼풀"
 
-#: src/Engines/Innodb.php:102 src/Server/Status/Data.php:187
+#: src/Engines/Innodb.php:103 src/Server/Status/Data.php:187
 msgid "InnoDB Status"
 msgstr "InnoDB 상태"
 
@@ -16118,7 +16125,7 @@ msgstr "\"구조\" 링크를 따라 구조를 편집합니다."
 msgid "Go to database: %s"
 msgstr "데이터베이스 이동: %s"
 
-#: src/Indexes/Index.php:566
+#: src/Indexes/Index.php:568
 #, php-format
 msgid ""
 "The indexes %1$s and %2$s seem to be equal and one of them could possibly be "
@@ -17979,15 +17986,15 @@ msgstr "%s 는 이 MySQL 서버에서 비활성화되었습니다."
 msgid "This MySQL server does not support the %s storage engine."
 msgstr "이 MySQL 서버는 %s 스토리지 엔진을 지원하지 않습니다."
 
-#: src/Table/Indexes.php:71 src/Table/Indexes.php:161
+#: src/Table/Indexes.php:71 src/Table/Indexes.php:170
 msgid "The name of the primary key must be \"PRIMARY\"!"
 msgstr "기본 키의 이름은 \"PRIMARY\"여야 합니다!"
 
-#: src/Table/Indexes.php:83 src/Table/Indexes.php:168
+#: src/Table/Indexes.php:83 src/Table/Indexes.php:177
 msgid "Can't rename index to PRIMARY!"
 msgstr "인덱스 이름을 PRIMARY로 변경할 수 없습니다!"
 
-#: src/Table/Indexes.php:109
+#: src/Table/Indexes.php:118
 msgid "No index parts defined!"
 msgstr "인덱스 부분의 정의가 없음!"
 
@@ -17996,34 +18003,34 @@ msgstr "인덱스 부분의 정의가 없음!"
 msgid "Problems with indexes of table `%s`"
 msgstr "`%s` 테이블의 인덱스에 문제가 있습니다"
 
-#: src/Table/TableMover.php:310
+#: src/Table/TableMover.php:309
 #, php-format
 msgid "Source database `%s` was not found!"
 msgstr "원본 데이터베이스 '%s'를 찾을 수 없습니다!"
 
-#: src/Table/TableMover.php:319
+#: src/Table/TableMover.php:318
 #, php-format
 msgid "Target database `%s` was not found!"
 msgstr "목표 데이터베이스 '%s'를 찾을 수 없습니다!"
 
-#: src/Table/Table.php:820
+#: src/Table/Table.php:829
 msgid "Invalid database:"
 msgstr "잘못된 데이터베이스:"
 
-#: src/Table/Table.php:838
+#: src/Table/Table.php:847
 msgid "Invalid table name:"
 msgstr "잘못된 테이블 이름:"
 
-#: src/Table/Table.php:883
+#: src/Table/Table.php:892
 #, php-format
 msgid "Table %1$s has been renamed to %2$s."
 msgstr "테이블 %1$s을(를) %2$s(으)로 이름을 변경하였습니다."
 
-#: src/Table/Table.php:1119
+#: src/Table/Table.php:1128
 msgid "Could not save table UI preferences!"
 msgstr "테이블 UI 설정을 저장할 수 없습니다!"
 
-#: src/Table/Table.php:1141
+#: src/Table/Table.php:1150
 #, php-format
 msgid ""
 "Failed to cleanup table UI preferences (see $cfg['Servers'][$i]"
@@ -18032,7 +18039,7 @@ msgstr ""
 "테이블 UI 설정을 정리하는 데 실패했습니다. ($cfg['Servers'][$i]"
 "['MaxTableUiprefs'] %s 를 참조하세요)"
 
-#: src/Table/Table.php:1259
+#: src/Table/Table.php:1268
 #, php-format
 msgid ""
 "Cannot save UI property \"%s\". The changes made will not be persistent "
@@ -18042,7 +18049,7 @@ msgstr ""
 "UI 특성 %s을(를) 저장할 수 없습니다. 새로고침후에도 이 변경은 반영되지 않을것"
 "입니다. 테이블 구조가 변경되었는지 확인 바랍니다."
 
-#: src/Table/Table.php:1584
+#: src/Table/Table.php:1593
 #, php-format
 msgid "Error creating foreign key on %1$s (check data types)"
 msgstr "%1$s의 외래키 생성 에러 (데이터 타입을 확인하세요)"

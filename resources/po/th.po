@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-08 00:45+0000\n"
+"POT-Creation-Date: 2026-02-15 00:38+0000\n"
 "PO-Revision-Date: 2026-01-31 17:01+0000\n"
 "Last-Translator: Jiraroj Leelarattanawong <legendarybuilder@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -194,6 +194,8 @@ msgstr "หลัง %s"
 #: resources/templates/server/privileges/privileges_summary.twig:31
 #: resources/templates/server/status/monitor/index.twig:206
 #: resources/templates/server/status/processes/list.twig:72
+#: resources/templates/table/index_form.twig:198
+#: resources/templates/table/index_form.twig:238
 #: resources/templates/table/zoom_search/index.twig:62
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
@@ -251,7 +253,7 @@ msgstr "คอลัมน์"
 #: resources/templates/sql/query.twig:150
 #: resources/templates/sql/query.twig:201
 #: resources/templates/table/find_replace/index.twig:62
-#: resources/templates/table/index_form.twig:245
+#: resources/templates/table/index_form.twig:262
 #: resources/templates/table/insert/actions_panel.twig:38
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:6
 #: resources/templates/table/insert/get_head_and_foot_of_insert_row_table.twig:20
@@ -315,7 +317,7 @@ msgstr "ธุรกรรมออนไลน์"
 #: resources/templates/columns_definitions/column_definitions_form.twig:154
 #: resources/templates/modals/index_dialog_modal.twig:11
 #: resources/templates/modals/index_dialog_modal.twig:21
-#: resources/templates/table/index_form.twig:246
+#: resources/templates/table/index_form.twig:263
 #: resources/templates/table/index_rename_form.twig:28
 #: resources/templates/table/insert/actions_panel.twig:36
 #: resources/templates/table/relation/common_form.twig:141
@@ -695,6 +697,7 @@ msgstr ""
 #: resources/templates/server/databases/index.twig:29
 #: resources/templates/server/databases/index.twig:30
 #: resources/templates/server/databases/index.twig:123
+#: resources/templates/table/index_form.twig:147
 #: resources/templates/table/operations/index.twig:159
 #: resources/templates/table/search/index.twig:40
 #: resources/templates/table/structure/display_structure.twig:23
@@ -900,7 +903,7 @@ msgstr "ปิดการใช้อยู่"
 #: src/Controllers/Table/DeleteRowsController.php:34
 #: src/Controllers/Table/DropColumnController.php:46
 #: src/Controllers/Table/Structure/PrimaryController.php:101
-#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:472
+#: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
@@ -936,8 +939,8 @@ msgstr "ใช่"
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:23
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:24
 #: src/Controllers/JavaScriptMessagesController.php:343
-#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:446
-#: src/Indexes/Index.php:472 src/Plugins/Export/ExportHtmlword.php:517
+#: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
+#: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
 #: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
 #: src/Plugins/Export/ExportTexytext.php:461
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
@@ -1002,7 +1005,7 @@ msgstr "สั่งคำสั่งอีกครั้ง"
 #: resources/templates/table/structure/display_structure.twig:494
 #: resources/templates/triggers/row.twig:28
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
-#: src/ConfigStorage/UserGroups.php:112
+#: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
 #: src/Display/Results.php:1872 src/Html/Generator.php:520
 #: src/Html/Generator.php:789
@@ -6373,7 +6376,7 @@ msgstr "แผนภูมิวงกลมแสดงลักษณะผล
 #: src/Controllers/Table/Partition/RepairController.php:49
 #: src/Controllers/Table/Partition/TruncateController.php:50
 #: src/Controllers/Table/RelationController.php:145
-#: src/Database/Routines.php:1020 src/Display/Results.php:2969
+#: src/Database/Routines.php:1032 src/Display/Results.php:2969
 #: src/Message.php:122
 msgid "Your SQL query has been executed successfully."
 msgstr "คำสั่ง SQL ของคุณได้รับการดำเนินการเรียบร้อยแล้ว"
@@ -6672,20 +6675,20 @@ msgstr "ตัวแยกวิเคราะห์:"
 msgid "Comment:"
 msgstr "หมายเหตุ:"
 
-#: resources/templates/table/index_form.twig:162
-#: resources/templates/table/index_form.twig:199
+#: resources/templates/table/index_form.twig:165
+#: resources/templates/table/index_form.twig:209
 msgid "Drag to reorder"
 msgstr "ลากเพื่อจัดเรียงลำดับใหม่"
 
-#: resources/templates/table/index_form.twig:167
-#: resources/templates/table/index_form.twig:203
+#: resources/templates/table/index_form.twig:170
+#: resources/templates/table/index_form.twig:213
 #: src/Controllers/JavaScriptMessagesController.php:465
 #: src/Controllers/JavaScriptMessagesController.php:617
 #: src/Error/ErrorHandler.php:426 src/InsertEdit.php:1411
 msgid "Ignore"
 msgstr "เพิกเฉย"
 
-#: resources/templates/table/index_form.twig:237
+#: resources/templates/table/index_form.twig:254
 #: src/Controllers/JavaScriptMessagesController.php:123
 #, php-format
 msgid "Add %s column(s) to index"
@@ -11635,19 +11638,19 @@ msgstr ""
 "คุณไม่มีสิทธิ์ที่จำเป็นในการสร้างฐานข้อมูลชื่อ '%s' คุณสามารถไปที่แท็บ 'การปฏิบัติการ' "
 "ของฐานข้อมูลใดก็ได้เพื่อตั้งค่าการจัดเก็บการกำหนดค่า phpMyAdmin ที่นั่น"
 
-#: src/ConfigStorage/UserGroups.php:105
+#: src/ConfigStorage/UserGroups.php:106
 msgid "View users"
 msgstr "ดูผู้ใช้"
 
-#: src/ConfigStorage/UserGroups.php:228
+#: src/ConfigStorage/UserGroups.php:229
 msgid "Server-level tabs"
 msgstr "แท็บระดับเซิร์ฟเวอร์"
 
-#: src/ConfigStorage/UserGroups.php:233
+#: src/ConfigStorage/UserGroups.php:234
 msgid "Database-level tabs"
 msgstr "แท็บระดับฐานข้อมูล"
 
-#: src/ConfigStorage/UserGroups.php:238
+#: src/ConfigStorage/UserGroups.php:239
 msgid "Table-level tabs"
 msgstr "แท็บระดับตาราง"
 
@@ -11841,15 +11844,19 @@ msgstr "มีหน้าเพจชื่อ \"%s\" อยู่แล้ว 
 msgid "No databases selected."
 msgstr "ไม่ได้เลือกฐานข้อมูล"
 
-#: src/Controllers/Database/EventsController.php:125
+#: src/Controllers/Database/EventsController.php:69
+msgid "The event was dropped immediately after creation."
+msgstr ""
+
+#: src/Controllers/Database/EventsController.php:136
 msgid "Add event"
 msgstr "เพิ่มเหตุการณ์"
 
-#: src/Controllers/Database/EventsController.php:129
+#: src/Controllers/Database/EventsController.php:140
 msgid "Edit event"
 msgstr "แก้ไขเหตุการณ์"
 
-#: src/Controllers/Database/EventsController.php:178
+#: src/Controllers/Database/EventsController.php:189
 #: src/Controllers/Database/RoutinesController.php:273
 #: src/Controllers/Database/RoutinesController.php:303
 #: src/Controllers/Database/RoutinesController.php:371
@@ -11857,17 +11864,17 @@ msgstr "แก้ไขเหตุการณ์"
 msgid "Error in processing request:"
 msgstr "เกิดข้อผิดพลาดในการประมวลผลคำขอ:"
 
-#: src/Controllers/Database/EventsController.php:180
+#: src/Controllers/Database/EventsController.php:191
 #, php-format
 msgid "No event with name %1$s found in database %2$s."
 msgstr "ไม่พบเหตุการณ์ที่มีชื่อ %1$s ในฐานข้อมูล %2$s"
 
-#: src/Controllers/Database/EventsController.php:206
+#: src/Controllers/Database/EventsController.php:217
 #, php-format
 msgid "Export of event %s"
 msgstr "ส่งออกเหตุการณ์ %s"
 
-#: src/Controllers/Database/EventsController.php:224
+#: src/Controllers/Database/EventsController.php:235
 #, php-format
 msgid ""
 "Error in processing request: No event with name %1$s found in database %2$s."
@@ -12194,7 +12201,7 @@ msgstr ""
 "ไม่พบส่วนขยาย curl และ allow_url_fopen ถูกปิดการใช้งานอยู่ ทำให้บางคุณลักษณะ เช่น "
 "การรายงานข้อผิดพลาดหรือตรวจสอบเวอร์ชันจะถูกปิดไว้"
 
-#: src/Controllers/Import/ImportController.php:163
+#: src/Controllers/Import/ImportController.php:166
 #, php-format
 msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
@@ -12203,21 +12210,21 @@ msgstr ""
 "อาจเป็นเพราะคุณพยายามอัปโหลดไฟล์ที่มีขนาดใหญ่เกินไป กรุณาดูที่ %sdocumentation%s "
 "เพื่อแนวทางแก้ปัญหาสำหรับข้อจำกัดนี้"
 
-#: src/Controllers/Import/ImportController.php:189
+#: src/Controllers/Import/ImportController.php:192
 msgid "Incorrect format parameter"
 msgstr "พารามิเตอร์รูปแบบไม่ถูกต้อง"
 
-#: src/Controllers/Import/ImportController.php:299
-#: src/Controllers/Import/ImportController.php:515
+#: src/Controllers/Import/ImportController.php:302
+#: src/Controllers/Import/ImportController.php:518
 msgid "Showing bookmark"
 msgstr "แสดงบุ๊กมาร์ก"
 
-#: src/Controllers/Import/ImportController.php:319
-#: src/Controllers/Import/ImportController.php:511
+#: src/Controllers/Import/ImportController.php:322
+#: src/Controllers/Import/ImportController.php:514
 msgid "The bookmark has been deleted."
 msgstr "บุ๊กมาร์กถูกลบแล้ว"
 
-#: src/Controllers/Import/ImportController.php:433
+#: src/Controllers/Import/ImportController.php:436
 msgid ""
 "No data was received to import. Either no file name was submitted, or the "
 "file size exceeded the maximum size permitted by your PHP configuration. See "
@@ -12227,13 +12234,13 @@ msgstr ""
 "หรือไฟล์มีขนาดใหญ่เกินกว่าการอนุญาตสูงสุดตามการกำหนดค่า PHP ของคุณ ดู [doc@faq1-16]FAQ "
 "1.16[/doc]"
 
-#: src/Controllers/Import/ImportController.php:523
+#: src/Controllers/Import/ImportController.php:526
 #, php-format
 msgid "Import has been successfully finished, %d query executed."
 msgid_plural "Import has been successfully finished, %d queries executed."
 msgstr[0] "การนำเข้าเรียบร้อย %d การเรียกดูดำเนินการแล้ว"
 
-#: src/Controllers/Import/ImportController.php:560
+#: src/Controllers/Import/ImportController.php:563
 #, php-format
 msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
@@ -12242,7 +12249,7 @@ msgstr ""
 "สคริปต์หมดเวลาแล้ว หากคุณต้องการนำเข้าให้เสร็จ กรุณา %sresubmit the same file%s "
 "และการนำเข้าจะดำเนินการต่อให้"
 
-#: src/Controllers/Import/ImportController.php:570
+#: src/Controllers/Import/ImportController.php:573
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
@@ -12250,12 +12257,12 @@ msgstr ""
 "อย่างไรก็ตามจากการรันครั้งล่าสุดไม่มีการแยกวิเคราะห์ข้อมูล ซึ่งโดยปกติจะหมายความว่า "
 "phpMyAdmin จะไม่สามารถดำเนินการนำเข้านี้ให้เสร็จสิ้นได้ เว้นแต่คุณจะเพิ่มขีดจำกัดเวลาของ php"
 
-#: src/Controllers/Import/ImportController.php:625
+#: src/Controllers/Import/ImportController.php:628
 #: src/Controllers/Sql/SqlController.php:137
 msgid "\"DROP DATABASE\" statements are disabled."
 msgstr "คำสั่ง \"DROP DATABASE\" ถูกปิดไว้"
 
-#: src/Controllers/Import/ImportController.php:676 src/Sql.php:906
+#: src/Controllers/Import/ImportController.php:679 src/Sql.php:906
 msgid "[ROLLBACK occurred.]"
 msgstr "[เกิดการย้อนกลับ]"
 
@@ -14995,7 +15002,7 @@ msgid "There is an issue with your request."
 msgstr "มีปัญหาเกี่ยวกับคำขอของคุณ"
 
 #: src/Controllers/Table/GetFieldController.php:87
-#: src/Database/Routines.php:1037 src/Import/Import.php:138
+#: src/Database/Routines.php:1049 src/Import/Import.php:138
 #: src/InsertEdit.php:160 src/Sql.php:892
 msgid "MySQL returned an empty result set (i.e. zero rows)."
 msgstr "MySQL ส่งคืนชุดผลลัพธ์ว่างเปล่า (กล่าวคือ ศูนย์แถว)"
@@ -15203,7 +15210,7 @@ msgstr "ไม่สามารถโหลดปลั๊กอินโคร
 #: src/Database/Events.php:93 src/Database/Events.php:102
 #: src/Database/Events.php:136 src/Database/Routines.php:105
 #: src/Database/Routines.php:131 src/Database/Routines.php:209
-#: src/Database/Routines.php:997 src/Triggers/Triggers.php:84
+#: src/Database/Routines.php:1009 src/Triggers/Triggers.php:84
 #: src/Triggers/Triggers.php:93 src/Triggers/Triggers.php:128
 #, php-format
 msgid "The following query has failed: \"%s\""
@@ -15213,7 +15220,7 @@ msgstr "คำสั่งการเรียกดูต่อไปนี้
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1001 src/Html/Generator.php:805
+#: src/Database/Routines.php:1013 src/Html/Generator.php:805
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -15243,7 +15250,7 @@ msgstr "กิจกรรม %1$s ได้ถูกสร้างขึ้น
 msgid "One or more errors have occurred while processing your request:"
 msgstr "เกิดข้อผิดพลาดอย่างน้อยหนึ่งรายการระหว่างการประมวลผลคำขอของคุณ:"
 
-#: src/Database/Events.php:267 src/Database/Routines.php:803
+#: src/Database/Events.php:267 src/Database/Routines.php:815
 #: src/Triggers/Triggers.php:191
 msgid "The definer must be in the \"username@hostname\" format!"
 msgstr "ตัวกำหนดค่าต้องอยู่ในรูปแบบ \"username@hostname\"!"
@@ -15292,50 +15299,50 @@ msgstr "กิจวัตร %1$s ได้รับการแก้ไขแ
 msgid "Routine %1$s has been modified."
 msgstr "กิจวัตร %1$s ได้รับการแก้ไขแล้ว"
 
-#: src/Database/Routines.php:648
+#: src/Database/Routines.php:660
 msgid "You must provide a name and a type for each routine parameter."
 msgstr "คุณต้องระบุชื่อและประเภทสำหรับพารามิเตอร์แต่ละตัวของรูทีน"
 
-#: src/Database/Routines.php:666
+#: src/Database/Routines.php:678
 #, php-format
 msgid "Invalid direction \"%s\" given for parameter."
 msgstr "ระบุทิศทาง \"%s\" ไม่ถูกต้องสำหรับพารามิเตอร์"
 
-#: src/Database/Routines.php:686 src/Database/Routines.php:751
+#: src/Database/Routines.php:698 src/Database/Routines.php:763
 msgid ""
 "You must provide length/values for routine parameters of type ENUM, SET, "
 "VARCHAR and VARBINARY."
 msgstr ""
 "คุณต้องระบุความยาว/ค่าสำหรับพารามิเตอร์ของรูทีนประเภท ENUM, SET, VARCHAR และ VARBINARY"
 
-#: src/Database/Routines.php:733
+#: src/Database/Routines.php:745
 msgid "You must provide a valid return type for the routine."
 msgstr "คุณต้องระบุประเภทค่าส่งคืนที่ถูกต้องสำหรับรูทีนนี้"
 
-#: src/Database/Routines.php:810
+#: src/Database/Routines.php:822
 msgid "Invalid routine type!"
 msgstr "ประเภทกิจวัตรไม่ถูกต้อง"
 
-#: src/Database/Routines.php:816
+#: src/Database/Routines.php:828
 msgid "You must provide a routine name!"
 msgstr "คุณต้องระบุชื่อรูทีน!"
 
-#: src/Database/Routines.php:879
+#: src/Database/Routines.php:891
 msgid "You must provide a routine definition."
 msgstr "คุณต้องระบุคำจำกัดความของรูทีน"
 
-#: src/Database/Routines.php:1013
+#: src/Database/Routines.php:1025
 #, php-format
 msgid "Execution results of routine %s"
 msgstr "ผลลัพธ์การดำเนินการของรูทีน %s"
 
-#: src/Database/Routines.php:1028
+#: src/Database/Routines.php:1040
 #, php-format
 msgid "%d row affected by the last statement inside the procedure."
 msgid_plural "%d rows affected by the last statement inside the procedure."
 msgstr[0] "แถวที่ %d ได้รับผลกระทบจากคำสั่งสุดท้ายภายในขั้นตอนการทำงาน"
 
-#: src/Dbal/DatabaseInterface.php:1061
+#: src/Dbal/DatabaseInterface.php:1062
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -15346,7 +15353,7 @@ msgstr ""
 "[em]$cfg['Servers'][%3$d]['SessionTimeZone'][/em] ขณะนี้ phpMyAdmin "
 "กำลังใช้เขตเวลาเริ่มต้นของเซิร์ฟเวอร์ฐานข้อมูล"
 
-#: src/Dbal/DatabaseInterface.php:1102
+#: src/Dbal/DatabaseInterface.php:1103
 msgid "Failed to set configured collation connection!"
 msgstr "ไม่สามารถกำหนดค่าการเชื่อมต่อการเรียงลำดับที่กำหนดค่าไว้ได้!"
 
@@ -15387,43 +15394,43 @@ msgstr "ทั้งหมด %s"
 msgid "Link not found!"
 msgstr "ไม่พบลิงก์!"
 
-#: src/Engines/Innodb.php:29
+#: src/Engines/Innodb.php:30
 msgid "Data home directory"
 msgstr "ไดเร็กทอรีข้อมูลหน้าหลัก"
 
-#: src/Engines/Innodb.php:30
+#: src/Engines/Innodb.php:31
 msgid "The common part of the directory path for all InnoDB data files."
 msgstr "ส่วนที่ใช้ร่วมกันของเส้นทางไดเร็กทอรีสำหรับไฟล์ข้อมูล InnoDB ทั้งหมด"
 
-#: src/Engines/Innodb.php:32
+#: src/Engines/Innodb.php:33
 msgid "Data files"
 msgstr "ไฟล์ข้อมูล"
 
-#: src/Engines/Innodb.php:34
+#: src/Engines/Innodb.php:35
 msgid "Autoextend increment"
 msgstr "เพิ่มค่าอัตโนมัติ"
 
-#: src/Engines/Innodb.php:36
+#: src/Engines/Innodb.php:37
 msgid ""
 "The increment size for extending the size of an autoextending tablespace "
 "when it becomes full."
 msgstr "การขยายขนาดสำหรับการเพิ่มพื้นที่ตารางอัตโนมัติเมื่อเต็ม"
 
-#: src/Engines/Innodb.php:41
+#: src/Engines/Innodb.php:42
 msgid "Buffer pool size"
 msgstr "ขนาดบัฟเฟอร์พูล"
 
-#: src/Engines/Innodb.php:42
+#: src/Engines/Innodb.php:43
 msgid ""
 "The size of the memory buffer InnoDB uses to cache data and indexes of its "
 "tables."
 msgstr "ขนาดของบัฟเฟอร์หน่วยความจำที่ InnoDB ใช้ในการแคชข้อมูลและดัชนีของตารางต่าง ๆ"
 
-#: src/Engines/Innodb.php:102
+#: src/Engines/Innodb.php:103
 msgid "Buffer Pool"
 msgstr "บัฟเฟอร์พูล"
 
-#: src/Engines/Innodb.php:102 src/Server/Status/Data.php:187
+#: src/Engines/Innodb.php:103 src/Server/Status/Data.php:187
 msgid "InnoDB Status"
 msgstr "สถานะของ InnoDB"
 
@@ -15966,7 +15973,7 @@ msgstr "แก้ไขโครงสร้างโดยคลิกที่
 msgid "Go to database: %s"
 msgstr "ไปยังฐานข้อมูล: %s"
 
-#: src/Indexes/Index.php:566
+#: src/Indexes/Index.php:568
 #, php-format
 msgid ""
 "The indexes %1$s and %2$s seem to be equal and one of them could possibly be "
@@ -17801,15 +17808,15 @@ msgstr "%s ถูกปิดใช้งานสำหรับเซิร์
 msgid "This MySQL server does not support the %s storage engine."
 msgstr "เซิร์ฟเวอร์ MySQL นี้ไม่รองรับระบบจัดเก็บข้อมูล %s"
 
-#: src/Table/Indexes.php:71 src/Table/Indexes.php:161
+#: src/Table/Indexes.php:71 src/Table/Indexes.php:170
 msgid "The name of the primary key must be \"PRIMARY\"!"
 msgstr "ชื่อของคีย์หลักจะต้องเป็น \"PRIMARY\" เท่านั้น!"
 
-#: src/Table/Indexes.php:83 src/Table/Indexes.php:168
+#: src/Table/Indexes.php:83 src/Table/Indexes.php:177
 msgid "Can't rename index to PRIMARY!"
 msgstr "ไม่สามารถแก้ไขชื่อดัชนีเป็น PRIMARY ได้!"
 
-#: src/Table/Indexes.php:109
+#: src/Table/Indexes.php:118
 msgid "No index parts defined!"
 msgstr "ไม่มีการกำหนดส่วนดัชนี!"
 
@@ -17818,34 +17825,34 @@ msgstr "ไม่มีการกำหนดส่วนดัชนี!"
 msgid "Problems with indexes of table `%s`"
 msgstr "ปัญหาเกี่ยวกับดัชนีของตาราง `%s`"
 
-#: src/Table/TableMover.php:310
+#: src/Table/TableMover.php:309
 #, php-format
 msgid "Source database `%s` was not found!"
 msgstr "ไม่พบฐานข้อมูลต้นทาง `%s`!"
 
-#: src/Table/TableMover.php:319
+#: src/Table/TableMover.php:318
 #, php-format
 msgid "Target database `%s` was not found!"
 msgstr "ไม่พบฐานข้อมูลเป้าหมาย `%s`!"
 
-#: src/Table/Table.php:820
+#: src/Table/Table.php:829
 msgid "Invalid database:"
 msgstr "ฐานข้อมูลไม่ถูกต้อง:"
 
-#: src/Table/Table.php:838
+#: src/Table/Table.php:847
 msgid "Invalid table name:"
 msgstr "ชื่อตารางไม่ถูกต้อง:"
 
-#: src/Table/Table.php:883
+#: src/Table/Table.php:892
 #, php-format
 msgid "Table %1$s has been renamed to %2$s."
 msgstr "ตาราง %1$s ได้ถูกแก้ไขชื่อเป็น %2$s"
 
-#: src/Table/Table.php:1119
+#: src/Table/Table.php:1128
 msgid "Could not save table UI preferences!"
 msgstr "ไม่สามารถบันทึกค่ากำหนด UI ของตารางได้!"
 
-#: src/Table/Table.php:1141
+#: src/Table/Table.php:1150
 #, php-format
 msgid ""
 "Failed to cleanup table UI preferences (see $cfg['Servers'][$i]"
@@ -17854,7 +17861,7 @@ msgstr ""
 "ไม่สามารถล้างค่ากำหนด UI ของตารางได้ (ดู $cfg['Servers'][$i]['MaxTableUiprefs'] "
 "%s)"
 
-#: src/Table/Table.php:1259
+#: src/Table/Table.php:1268
 #, php-format
 msgid ""
 "Cannot save UI property \"%s\". The changes made will not be persistent "
@@ -17864,7 +17871,7 @@ msgstr ""
 "ไม่สามารถบันทึกคุณสมบัติ UI \"%s\" ได้ การเปลี่ยนแปลงจะไม่คงอยู่หลังจากที่คุณรีเฟรชหน้านี้ "
 "โปรดตรวจสอบว่าโครงสร้างตารางมีการเปลี่ยนแปลงแล้ว"
 
-#: src/Table/Table.php:1584
+#: src/Table/Table.php:1593
 #, php-format
 msgid "Error creating foreign key on %1$s (check data types)"
 msgstr "เกิดข้อผิดพลาดในการสร้างคีย์นอกบน %1$s (ตรวจสอบชนิดข้อมูล)"
