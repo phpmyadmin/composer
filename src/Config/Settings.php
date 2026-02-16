@@ -15,6 +15,7 @@ use PhpMyAdmin\Config\Settings\Transformations;
 
 use function __;
 use function array_map;
+use function array_replace;
 use function defined;
 use function in_array;
 use function is_array;
@@ -5425,15 +5426,16 @@ final class Settings
      */
     private function setDefaultFunctions(array $settings): array
     {
+        $defaults = [
+            'FUNC_CHAR' => '',
+            'FUNC_DATE' => '',
+            'FUNC_NUMBER' => '',
+            'FUNC_SPATIAL' => 'GeomFromText',
+            'FUNC_UUID' => 'UUID',
+            'first_timestamp' => 'NOW',
+        ];
         if (! isset($settings['DefaultFunctions']) || ! is_array($settings['DefaultFunctions'])) {
-            return [
-                'FUNC_CHAR' => '',
-                'FUNC_DATE' => '',
-                'FUNC_NUMBER' => '',
-                'FUNC_SPATIAL' => 'GeomFromText',
-                'FUNC_UUID' => 'UUID',
-                'first_timestamp' => 'NOW',
-            ];
+            return $defaults;
         }
 
         $defaultFunctions = [];
@@ -5449,7 +5451,7 @@ final class Settings
             $defaultFunctions[$key] = (string) $value;
         }
 
-        return $defaultFunctions;
+        return array_replace($defaults, $defaultFunctions);
     }
 
     /**
