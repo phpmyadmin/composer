@@ -361,7 +361,7 @@ final class SearchController implements InvocableController
         if ($hasForeigner && $foreignData->dispRow !== null) {
             $foreignDropdown = $this->relation->foreignDropdown(
                 $foreignData->dispRow,
-                $foreignData->foreignField,
+                $foreignData->foreignField ?? '',
                 $foreignData->foreignDisplay,
                 '',
                 $this->config->settings['ForeignKeyMaxLimit'],

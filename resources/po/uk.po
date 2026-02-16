@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-15 00:38+0000\n"
-"PO-Revision-Date: 2026-02-14 16:09+0000\n"
+"PO-Revision-Date: 2026-02-16 02:09+0000\n"
 "Last-Translator: Hotripak <hotr1pak@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/uk/>\n"
@@ -12155,7 +12155,7 @@ msgstr "Жодної бази даних не вибрано."
 
 #: src/Controllers/Database/EventsController.php:69
 msgid "The event was dropped immediately after creation."
-msgstr ""
+msgstr "Подія була скасована відразу після створення."
 
 #: src/Controllers/Database/EventsController.php:136
 msgid "Add event"

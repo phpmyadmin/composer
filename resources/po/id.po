@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-15 00:38+0000\n"
-"PO-Revision-Date: 2026-02-12 05:09+0000\n"
+"PO-Revision-Date: 2026-02-16 02:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/id/>\n"
@@ -12154,7 +12154,7 @@ msgstr "Basis data belum dipilih."
 
 #: src/Controllers/Database/EventsController.php:69
 msgid "The event was dropped immediately after creation."
-msgstr ""
+msgstr "Peristiwa langsung dihapus setelah pembuatan."
 
 #: src/Controllers/Database/EventsController.php:136
 msgid "Add event"
