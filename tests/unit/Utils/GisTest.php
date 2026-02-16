@@ -46,7 +46,7 @@ class GisTest extends AbstractTestCase
 
         $dbi->expects($SRIDOption ? self::once() : self::exactly(2))
             ->method('fetchSingleRow')
-            ->with($expectedQuery)
+            ->with($expectedQuery, DatabaseInterface::FETCH_NUM)
             ->willReturn($returnData);
 
         DatabaseInterface::$instance = $dbi;
