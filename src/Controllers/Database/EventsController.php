@@ -211,9 +211,9 @@ final class EventsController implements InvocableController
                 $exportData = false;
             }
 
-            $itemName = htmlspecialchars(Util::backquote($itemName));
+            $itemName = Util::backquote($itemName);
             if ($exportData !== false) {
-                $exportData = htmlspecialchars(trim($exportData));
+                $exportData = trim($exportData);
                 $title = sprintf(__('Export of event %s'), $itemName);
 
                 if ($request->isAjax()) {
@@ -222,6 +222,8 @@ final class EventsController implements InvocableController
 
                     return $this->response->response();
                 }
+
+                $exportData = htmlspecialchars($exportData);
 
                 $output = '<div class="container">';
                 $output .= '<h2>' . $title . '</h2>';
@@ -233,7 +235,7 @@ final class EventsController implements InvocableController
             } else {
                 $message = sprintf(
                     __('Error in processing request: No event with name %1$s found in database %2$s.'),
-                    $itemName,
+                    htmlspecialchars($itemName),
                     htmlspecialchars(Util::backquote(Current::$database)),
                 );
                 $message = Message::error($message);
