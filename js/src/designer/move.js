@@ -559,7 +559,7 @@ DesignerMove.requestFullscreen = function (e) {
     } else if (e.msRequestFullscreen) {
         return e.msRequestFullscreen();
     }
-}
+};
 
 DesignerMove.toggleFullscreen = function () {
     var valueSent = '';
@@ -569,10 +569,10 @@ DesignerMove.toggleFullscreen = function () {
     const pageContent = document.getElementById('page_content');
 
     var fullscreenEnabled =
-        document.fullscreenEnabled ||
         document.webkitFullscreenEnabled ||
         document.mozFullScreenEnabled ||
-        document.msFullscreenEnabled;
+        document.msFullscreenEnabled ||
+        document.fullscreenEnabled;
 
     if (! fullscreenEnabled) {
         Functions.ajaxShowMessage(Messages.strFullscreenRequestDenied, null, 'error');
