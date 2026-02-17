@@ -494,6 +494,10 @@ DesignerMove.toggleFullscreen = function () {
   var $span = $img.siblings('span');
   var $content = $('#page_content');
   const pageContent = document.getElementById('page_content');
+  if (!document.fullscreenEnabled) {
+    Functions.ajaxShowMessage(Messages.strFullscreenRequestDenied, null, 'error');
+    return;
+  }
   if (!document.fullscreenElement) {
     $img.attr('src', $img.data('exit')).attr('title', $span.data('exit'));
     $span.text($span.data('exit'));

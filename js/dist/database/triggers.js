@@ -103,7 +103,6 @@ const DatabaseTriggers = {
         'ajax_request': true
       }, showExport);
     }
-    Functions.ajaxRemoveMessage($msg);
     function showExport(data) {
       if (data.success === true) {
         Functions.ajaxRemoveMessage($msg);
