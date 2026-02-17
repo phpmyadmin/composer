@@ -230,9 +230,9 @@ final class IndexController implements InvocableController
                 $triggerName->getName(),
             )?->getCreateSql('');
             if ($exportData !== null && $request->isAjax()) {
-                $title = sprintf(__('Export of trigger %s'), htmlspecialchars(Util::backquote($triggerName)));
+                $title = sprintf(__('Export of trigger %s'), Util::backquote($triggerName));
                 $this->response->addJSON('title', $title);
-                $this->response->addJSON('message', htmlspecialchars(trim($exportData)));
+                $this->response->addJSON('message', trim($exportData));
 
                 return $this->response->response();
             }
