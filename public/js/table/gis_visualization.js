@@ -91,8 +91,8 @@ class SvgVisualization extends GisVisualization {
     _defineProperty(this, "dragX", 0);
     _defineProperty(this, "dragY", 0);
     this.svgEl = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.target).find('svg').get(0);
-    this.originalWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.svgEl).width();
-    this.originalHeight = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.svgEl).height();
+    this.originalWidth = Number(this.svgEl.getAttribute('width'));
+    this.originalHeight = Number(this.svgEl.getAttribute('height'));
     this.width = this.originalWidth;
     this.height = this.originalHeight;
     this.boundOnMouseWheel = this.onMouseWheel.bind(this);
