@@ -549,6 +549,18 @@ DesignerMove.rect = function (x1, y1, w, h, color) {
 };
 
 // --------------------------- FULLSCREEN -------------------------------------
+DesignerMove.requestFullscreen = function (e) {
+    if (e.requestFullscreen) {
+        return e.requestFullscreen();
+    } else if (e.webkitRequestFullscreen) {
+        return e.webkitRequestFullscreen();
+    } else if (e.mozRequestFullScreen) {
+        return e.mozRequestFullScreen();
+    } else if (e.msRequestFullscreen) {
+        return e.msRequestFullscreen();
+    }
+}
+
 DesignerMove.toggleFullscreen = function () {
     var valueSent = '';
     var $img = $('#toggleFullscreen').find('img');
@@ -559,7 +571,7 @@ DesignerMove.toggleFullscreen = function () {
     var fullscreenEnabled =
         document.fullscreenEnabled ||
         document.webkitFullscreenEnabled ||
-        document.mozFullScreenEnabled ||
+        document.mozFullscreenEnabled ||
         document.msFullscreenEnabled;
 
     if (! fullscreenEnabled) {
@@ -578,7 +590,7 @@ DesignerMove.toggleFullscreen = function () {
 
         $('#osn_tab').css({ 'width': screen.width + 'px', 'height': screen.height });
         valueSent = 'on';
-        pageContent.requestFullscreen();
+        DesignerMove.requestFullscreen(pageContent);
     } else {
         $img.attr('src', $img.data('enter'))
             .attr('title', $span.data('enter'));
