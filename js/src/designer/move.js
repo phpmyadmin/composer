@@ -556,7 +556,9 @@ DesignerMove.toggleFullscreen = function () {
     var $content = $('#page_content');
     const pageContent = document.getElementById('page_content');
 
-    if (! document.fullscreenEnabled) {
+    var fullscreenEnabled = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+
+    if (! fullscreenEnabled) {
         Functions.ajaxShowMessage(Messages.strFullscreenRequestDenied, null, 'error');
 
         return;
