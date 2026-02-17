@@ -568,8 +568,8 @@ DesignerMove.toggleFullscreen = function () {
     var $content = $('#page_content');
     const pageContent = document.getElementById('page_content');
 
-    // eslint-disable-next-line compat/compat
     var fullscreenEnabled =
+        // eslint-disable-next-line compat/compat
         document.fullscreenEnabled ||
         document.webkitFullscreenEnabled ||
         document.mozFullScreenEnabled ||
