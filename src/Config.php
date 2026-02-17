@@ -635,17 +635,14 @@ class Config
         if (isset($this->config->Servers[$serverNumber])) {
             $this->hasSelectedServer = true;
             $this->selectedServer = $this->config->Servers[$serverNumber]->asArray();
-            $this->settings['Server'] = $this->selectedServer;
         } elseif (isset($this->config->Servers[$this->config->ServerDefault])) {
             $this->hasSelectedServer = true;
             $serverNumber = $this->config->ServerDefault;
             $this->selectedServer = $this->config->Servers[$this->config->ServerDefault]->asArray();
-            $this->settings['Server'] = $this->selectedServer;
         } else {
             $this->hasSelectedServer = false;
             $serverNumber = 0;
             $this->selectedServer = (new Server())->asArray();
-            $this->settings['Server'] = [];
         }
 
         $this->server = $serverNumber;
