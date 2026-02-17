@@ -571,7 +571,7 @@ DesignerMove.toggleFullscreen = function () {
     var fullscreenEnabled =
         document.fullscreenEnabled ||
         document.webkitFullscreenEnabled ||
-        document.mozFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
         document.msFullscreenEnabled;
 
     if (! fullscreenEnabled) {
