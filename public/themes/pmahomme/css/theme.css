@@ -11939,8 +11939,12 @@ input#auto_increment_opt {
   border: 1px solid #aaa;
   overflow: hidden;
   box-sizing: content-box;
+  resize: vertical;
 }
 #visualization-placeholder .visualization-target {
+  height: 100%;
+}
+#visualization-placeholder .visualization-target-svg > svg {
   height: 100%;
 }
 #visualization-placeholder .visualization-target-svg .button {
