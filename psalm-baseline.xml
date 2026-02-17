@@ -113,11 +113,6 @@
     </UnusedVariable>
   </file>
   <file src="src/Config.php">
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->settings]]></code>
-      <code><![CDATA[$this->settings]]></code>
-      <code><![CDATA[$this->settings]]></code>
-    </InvalidPropertyAssignmentValue>
     <MixedAssignment>
       <code><![CDATA[$array[$part]]]></code>
     </MixedAssignment>
@@ -9172,10 +9167,6 @@
     </TypeDoesNotContainType>
   </file>
   <file src="tests/unit/ConfigTest.php">
-    <InvalidArrayOffset>
-      <code><![CDATA[$config->settings['Server']]]></code>
-      <code><![CDATA[$config->settings['Server']]]></code>
-    </InvalidArrayOffset>
     <PossiblyInvalidArgument>
       <code><![CDATA[testIsHttps]]></code>
       <code><![CDATA[testIsHttps]]></code>

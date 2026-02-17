@@ -425,16 +425,13 @@ class ConfigTest extends AbstractTestCase
         $selectedServer = $config->selectServer($request);
         self::assertSame($expected, $selectedServer);
         self::assertGreaterThanOrEqual(0, $selectedServer);
-        self::assertArrayHasKey('Server', $config->settings);
         self::assertSame($expected, $config->server);
         if ($expected >= 1) {
             self::assertTrue($config->hasSelectedServer());
             $expectedServer = $config->config->Servers[$expected]->asArray();
-            self::assertSame($expectedServer, $config->settings['Server']);
             self::assertSame($expectedServer, $config->selectedServer);
         } else {
             self::assertFalse($config->hasSelectedServer());
-            self::assertSame([], $config->settings['Server']);
             self::assertSame((new Server())->asArray(), $config->selectedServer);
         }
     }
