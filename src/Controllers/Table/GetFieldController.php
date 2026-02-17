@@ -49,16 +49,38 @@ final class GetFieldController implements InvocableController
 
         /* Select database */
         if (! $this->dbi->selectDb(Current::$database)) {
-            Generator::mysqlDie(
+            $errorMessage = Generator::mysqlDie(
                 sprintf(__('\'%s\' database does not exist.'), htmlspecialchars(Current::$database)),
                 '',
                 false,
             );
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage);
+
+            return $this->response->response();
         }
 
         /* Check if table exists */
         if ($this->dbi->getColumns(Current::$database, Current::$table) === []) {
-            Generator::mysqlDie(__('Invalid table name'));
+            $errorMessage = Generator::mysqlDie(__('Invalid table name'), '', true);
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage);
+
+            return $this->response->response();
         }
 
         $whereClause = (string) $request->getQueryParam('where_clause', '');
@@ -83,10 +105,18 @@ final class GetFieldController implements InvocableController
 
         /* Check return code */
         if ($result === false) {
-            Generator::mysqlDie(
-                __('MySQL returned an empty result set (i.e. zero rows).'),
-                $sql,
-            );
+            $errorMessage = Generator::mysqlDie(__('MySQL returned an empty result set (i.e. zero rows).'), $sql, true);
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage);
+
+            return $this->response->response();
         }
 
         $result ??= '';

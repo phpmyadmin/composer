@@ -137,12 +137,20 @@ final class SaveController implements InvocableController
             // To allow replication, we first select the db to use
             // and then run queries on this db.
             if (! $this->dbi->selectDb(Current::$database)) {
-                Generator::mysqlDie(
+                $errorMessage = Generator::mysqlDie(
                     $this->dbi->getError(),
                     'USE ' . Util::backquote(Current::$database) . ';',
                     false,
-                    $errUrl,
                 );
+
+                if ($this->response->isAjax()) {
+                    $this->response->setRequestStatus(false);
+                    $this->response->addJSON('message', $errorMessage);
+                    $this->response->callExit();
+                }
+
+                $this->response->addHTML($errorMessage . Generator::getBackUrlHtml($errUrl));
+                $this->response->callExit();
             }
 
             $sqlQuery = 'ALTER TABLE ' . Util::backquote(Current::$table) . ' ';

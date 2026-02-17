@@ -108,8 +108,8 @@ final readonly class AddFieldController implements InvocableController
             );
 
             if (! $result) {
-                $errorMessageHtml = Generator::mysqlDie('', '', false, $errorUrl, false);
-                $this->response->addHTML($errorMessageHtml ?? '');
+                $errorMessageHtml = Generator::mysqlDie('', '', false);
+                $this->response->addHTML($errorMessageHtml);
                 $this->response->setRequestStatus(false);
 
                 return $this->response->response();

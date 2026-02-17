@@ -492,7 +492,14 @@ class Sql
             $this->responseRenderer->setRequestStatus(false);
             $this->responseRenderer->addJSON('message', $message);
         } else {
-            Generator::mysqlDie($error, $fullSqlQuery, false);
+            $errorMessage = Generator::mysqlDie($error, $fullSqlQuery, false);
+            if ($this->responseRenderer->isAjax()) {
+                $this->responseRenderer->setRequestStatus(false);
+                $this->responseRenderer->addJSON('message', $errorMessage);
+                $this->responseRenderer->callExit();
+            }
+
+            $this->responseRenderer->addHTML($errorMessage);
         }
 
         $this->responseRenderer->callExit();

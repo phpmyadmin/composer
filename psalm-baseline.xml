@@ -2253,6 +2253,7 @@
     <MixedArgument>
       <code><![CDATA[Current::$database]]></code>
       <code><![CDATA[Current::$table]]></code>
+      <code><![CDATA[Current::$table]]></code>
     </MixedArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[Current::$database]]></code>
@@ -8177,10 +8178,6 @@
       <code><![CDATA[$column['Extra']]]></code>
       <code><![CDATA[$existrelForeign[$masterFieldMd5]->refTableName]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullOperand>
-      <code><![CDATA[Generator::mysqlDie($tmpErrorCreate, $createQuery, false, '', false)]]></code>
-      <code><![CDATA[Generator::mysqlDie($tmpErrorDrop, $dropQuery, false, '', false)]]></code>
-    </PossiblyNullOperand>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[true|Message]]></code>
     </PossiblyUnusedReturnValue>

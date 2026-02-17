@@ -2020,7 +2020,7 @@ parameters:
 			path: src/Controllers/Import/ImportController.php
 
 		-
-			message: '#^Parameter \#4 \$backUrl of static method PhpMyAdmin\\Html\\Generator\:\:mysqlDie\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#1 \$backUrl of static method PhpMyAdmin\\Html\\Generator\:\:getBackUrlHtml\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Import/ImportController.php

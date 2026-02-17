@@ -601,7 +601,21 @@ final readonly class ImportController implements InvocableController
         }
 
         foreach (ImportSettings::$failedQueries as $die) {
-            Generator::mysqlDie($die['error'], $die['sql'], false, Import::$errorUrl, Import::$hasError);
+            $errorMessage = Generator::mysqlDie($die['error'], $die['sql'], false);
+            if (! Import::$hasError) {
+                continue;
+            }
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage . Generator::getBackUrlHtml(Import::$errorUrl));
+
+            return $this->response->response();
         }
 
         if (ImportSettings::$goSql) {
@@ -623,12 +637,24 @@ final readonly class ImportController implements InvocableController
 
                 // Check if User is allowed to issue a 'DROP DATABASE' Statement
                 if ($this->sql->hasNoRightsToDropDatabase($statementInfo)) {
-                    Generator::mysqlDie(
+                    $errorMessage = Generator::mysqlDie(
                         __('"DROP DATABASE" statements are disabled.'),
                         '',
                         false,
-                        $_SESSION['Import_message']['go_back_url'],
                     );
+
+                    if ($this->response->isAjax()) {
+                        $this->response->setRequestStatus(false);
+                        $this->response->addJSON('message', $errorMessage);
+
+                        return $this->response->response();
+                    }
+
+                    $this->response->addHTML(
+                        $errorMessage . Generator::getBackUrlHtml($_SESSION['Import_message']['go_back_url']),
+                    );
+
+                    return $this->response->response();
                 }
 
                 if (Current::$table != $tableFromSql && $tableFromSql !== '') {

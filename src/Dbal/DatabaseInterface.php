@@ -19,6 +19,7 @@ use PhpMyAdmin\Query\Cache;
 use PhpMyAdmin\Query\Compatibility;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
 use PhpMyAdmin\Query\Utilities;
+use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Routing;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\StorageEngine;
@@ -176,7 +177,17 @@ class DatabaseInterface
         $result = $this->tryQuery($query, $connectionType, $unbuffered, $cacheAffectedRows);
 
         if (! $result) {
-            Generator::mysqlDie($this->getError($connectionType), $query);
+            $errorMessage = Generator::mysqlDie($this->getError($connectionType), $query, true);
+
+            $response = ResponseRenderer::getInstance();
+            if ($response->isAjax()) {
+                $response->setRequestStatus(false);
+                $response->addJSON('message', $errorMessage);
+                $response->callExit();
+            }
+
+            $response->addHTML($errorMessage);
+            $response->callExit();
         }
 
         return $result;
@@ -671,7 +682,17 @@ class DatabaseInterface
 
             $mysqlError = $this->getError($connectionType);
             if ($databases === [] && self::$errorNumber !== null) {
-                Generator::mysqlDie($mysqlError, $sql);
+                $errorMessage = Generator::mysqlDie($mysqlError, $sql, true);
+
+                $response = ResponseRenderer::getInstance();
+                if ($response->isAjax()) {
+                    $response->setRequestStatus(false);
+                    $response->addJSON('message', $errorMessage);
+                    $response->callExit();
+                }
+
+                $response->addHTML($errorMessage);
+                $response->callExit();
             }
 
             // display only databases also in official database list

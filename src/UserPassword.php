@@ -227,12 +227,17 @@ class UserPassword
         }
 
         if (! @$this->dbi->tryQuery($localQuery)) {
-            Generator::mysqlDie(
-                $this->dbi->getError(),
-                $sqlQuery,
-                false,
-                $errUrl,
-            );
+            $errorMessage = Generator::mysqlDie($this->dbi->getError(), $sqlQuery, false);
+
+            $response = ResponseRenderer::getInstance();
+            if ($response->isAjax()) {
+                $response->setRequestStatus(false);
+                $response->addJSON('message', $errorMessage);
+                $response->callExit();
+            }
+
+            $response->addHTML($errorMessage . Generator::getBackUrlHtml($errUrl));
+            $response->callExit();
         }
 
         // Flush privileges after successful password change
