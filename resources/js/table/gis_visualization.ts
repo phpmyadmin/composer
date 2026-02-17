@@ -121,8 +121,8 @@ class SvgVisualization extends GisVisualization {
         super(target);
 
         this.svgEl = $(this.target).find('svg').get(0);
-        this.originalWidth = $(this.svgEl).width();
-        this.originalHeight = $(this.svgEl).height();
+        this.originalWidth = Number(this.svgEl.getAttribute('width'));
+        this.originalHeight = Number(this.svgEl.getAttribute('height'));
         this.width = this.originalWidth;
         this.height = this.originalHeight;
 
