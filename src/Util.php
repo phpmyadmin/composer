@@ -1743,11 +1743,12 @@ class Util
             $fileSize = '5M';
         }
 
-        $size = ini_parse_quantity($fileSize);
+        // Using error suppression operator because ini_parse_quantity() can throw a warning if the value is invalid
+        $size = @ini_parse_quantity($fileSize);
         $postSize = ini_get('post_max_size');
 
         if ($postSize !== '' && $postSize !== false) {
-            $size = min($size, ini_parse_quantity($postSize));
+            $size = min($size, @ini_parse_quantity($postSize));
         }
 
         return $size;
