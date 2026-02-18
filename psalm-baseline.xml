@@ -2967,9 +2967,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidOperand>
-      <code><![CDATA[$matches[1]]]></code>
-    </InvalidOperand>
     <MixedArgument>
       <code><![CDATA[$path[$depth + 1]]]></code>
     </MixedArgument>

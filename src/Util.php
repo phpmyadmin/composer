@@ -40,6 +40,7 @@ use function htmlspecialchars_decode;
 use function implode;
 use function in_array;
 use function ini_get;
+use function ini_parse_quantity;
 use function is_array;
 use function is_object;
 use function is_scalar;
@@ -1742,11 +1743,11 @@ class Util
             $fileSize = '5M';
         }
 
-        $size = Core::getRealSize($fileSize);
+        $size = ini_parse_quantity($fileSize);
         $postSize = ini_get('post_max_size');
 
         if ($postSize !== '' && $postSize !== false) {
-            $size = min($size, Core::getRealSize($postSize));
+            $size = min($size, ini_parse_quantity($postSize));
         }
 
         return $size;

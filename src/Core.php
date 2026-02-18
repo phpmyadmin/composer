@@ -120,38 +120,6 @@ class Core
     }
 
     /**
-     * Converts numbers like 10M into bytes
-     * Used with permission from Moodle (https://moodle.org) by Martin Dougiamas
-     * (renamed with PMA prefix to avoid double definition when embedded
-     * in Moodle)
-     *
-     * @param string|int $size size (Default = 0)
-     */
-    public static function getRealSize(string|int $size = 0): int
-    {
-        if (! $size) {
-            return 0;
-        }
-
-        $binaryprefixes = [
-            'T' => 1099511627776,
-            't' => 1099511627776,
-            'G' => 1073741824,
-            'g' => 1073741824,
-            'M' => 1048576,
-            'm' => 1048576,
-            'K' => 1024,
-            'k' => 1024,
-        ];
-
-        if (preg_match('/^([0-9]+)([KMGT])/i', (string) $size, $matches) === 1) {
-            return (int) ($matches[1] * $binaryprefixes[$matches[2]]);
-        }
-
-        return (int) $size;
-    }
-
-    /**
      * Checks if the given $page is index.php and returns true if valid.
      * It ignores query parameters in $page (script.php?ignored)
      */
