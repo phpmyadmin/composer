@@ -561,6 +561,14 @@ DesignerMove.requestFullscreen = function (e) {
     }
 };
 
+DesignerMove.fullscreenEnabled = function () {
+    // eslint-disable-next-line compat/compat
+    return document.fullscreenEnabled ||
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled;
+};
+
 DesignerMove.toggleFullscreen = function () {
     var valueSent = '';
     var $img = $('#toggleFullscreen').find('img');
@@ -568,14 +576,7 @@ DesignerMove.toggleFullscreen = function () {
     var $content = $('#page_content');
     const pageContent = document.getElementById('page_content');
 
-    var fullscreenEnabled =
-        // eslint-disable-next-line compat/compat
-        document.fullscreenEnabled ||
-        document.webkitFullscreenEnabled ||
-        document.mozFullScreenEnabled ||
-        document.msFullscreenEnabled;
-
-    if (! fullscreenEnabled) {
+    if (! DesignerMove.fullscreenEnabled()) {
         Functions.ajaxShowMessage(Messages.strFullscreenRequestDenied, null, 'error');
 
         return;
