@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Controllers;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Dbal\DatabaseInterface;
+use PhpMyAdmin\Exceptions\UserPasswordUpdateFailure;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
@@ -13,6 +14,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\MessageType;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
+use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPassword;
 
 use function __;
@@ -64,10 +66,24 @@ final readonly class UserPasswordController implements InvocableController
             $message = $changePasswordMessage['msg'];
 
             if (! $changePasswordMessage['error']) {
-                $sqlQuery = $this->userPassword->changePassword(
-                    $password,
-                    $request->getParsedBodyParamAsStringOrNull('authentication_plugin'),
-                );
+                try {
+                    $sqlQuery = $this->userPassword->changePassword(
+                        $password,
+                        $request->getParsedBodyParamAsStringOrNull('authentication_plugin'),
+                    );
+                } catch (UserPasswordUpdateFailure $exception) {
+                    if ($request->isAjax()) {
+                        $this->response->setRequestStatus(false);
+                        $this->response->addJSON('message', $exception->getMessage());
+
+                        return $this->response->response();
+                    }
+
+                    $backUrlHtml = Generator::getBackUrlHtml(Url::getFromRoute('/user-password'));
+                    $this->response->addHTML($exception->getMessage() . $backUrlHtml);
+
+                    return $this->response->response();
+                }
 
                 if ($request->isAjax()) {
                     $sqlQuery = Generator::getMessage($changePasswordMessage['msg'], $sqlQuery, MessageType::Success);

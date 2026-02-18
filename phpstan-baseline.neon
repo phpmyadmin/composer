@@ -12991,12 +12991,6 @@ parameters:
 			path: src/UserPassword.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/UserPassword.php
-
-		-
 			message: '#^Parameter \#1 \$password of method PhpMyAdmin\\Server\\Privileges\:\:getHashedPassword\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
