@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\FieldMetadata;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
@@ -19,6 +20,7 @@ use PhpMyAdmin\Util;
 
 use function __;
 use function array_values;
+use function bin2hex;
 use function count;
 use function htmlspecialchars;
 use function str_repeat;
@@ -317,12 +319,20 @@ class ExportMediawiki extends ExportPlugin
         // Get the table data from the database
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $result->numFields();
+        /** @var FieldMetadata[] $fieldsMeta */
+        $fieldsMeta = $dbi->getFieldsMeta($result);
 
         while ($row = $result->fetchRow()) {
             $output .= '|-' . $this->exportCRLF();
 
             // Use '|' for separating table columns
             for ($i = 0; $i < $fields_cnt; ++$i) {
+                if (! isset($row[$i])) {
+                    $row[$i] = 'NULL';
+                } elseif ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                    $row[$i] = '0x' . bin2hex($row[$i]);
+                }
+
                 $output .= ' | ' . $row[$i] . '' . $this->exportCRLF();
             }
         }
