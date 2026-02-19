@@ -321,7 +321,7 @@ final class ImportController extends AbstractController
         $run_query = true;
         $charset_conversion = false;
         $reset_charset = false;
-        $msg = 'Sorry an unexpected error happened!';
+        $msg = __('Sorry an unexpected error happened!');
 
         /** @var bool|mixed $result */
         $result = false;
