@@ -319,7 +319,6 @@ class ExportMediawiki extends ExportPlugin
         // Get the table data from the database
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $result->numFields();
-        /** @var FieldMetadata[] $fieldsMeta */
         $fieldsMeta = $dbi->getFieldsMeta($result);
 
         while ($row = $result->fetchRow()) {

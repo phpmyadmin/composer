@@ -300,7 +300,6 @@ class ExportLatex extends ExportPlugin
         $result = $dbi->tryQuery($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columns_cnt = $result->numFields();
-        /** @var FieldMetadata[] $fieldsMeta */
         $fieldsMeta = $dbi->getFieldsMeta($result);
         $columns = [];
         $columns_alias = [];

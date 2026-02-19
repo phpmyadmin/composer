@@ -187,7 +187,6 @@ class ExportTexytext extends ExportPlugin
         // Gets the data from the database
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $result->numFields();
-        /** @var FieldMetadata[] $fieldsMeta */
         $fieldsMeta = $dbi->getFieldsMeta($result);
 
         // If required, get fields name at the first line

@@ -171,7 +171,6 @@ class ExportPhparray extends ExportPlugin
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columns_cnt = $result->numFields();
-        /** @var FieldMetadata[] $fieldsMeta */
         $fieldsMeta = $dbi->getFieldsMeta($result);
         $columns = [];
         foreach ($result->getFieldNames() as $i => $col_as) {

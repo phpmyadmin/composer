@@ -9640,7 +9640,8 @@
     <PossiblyFalseReference occurrences="1">
       <code>numFields</code>
     </PossiblyFalseReference>
-    <PossiblyNullArgument occurrences="1">
+    <PossiblyNullArgument occurrences="2">
+      <code>$record[$columns[$i]]</code>
       <code>$record[$columns[$i]]</code>
     </PossiblyNullArgument>
   </file>
@@ -10134,6 +10135,9 @@
     <MixedAssignment occurrences="1">
       <code>$col_as</code>
     </MixedAssignment>
+    <PossiblyNullArgument occurrences="1">
+      <code>$record[$i]</code>
+    </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Plugins/Export/Helpers/Pdf.php">
     <MixedArgument occurrences="79">
