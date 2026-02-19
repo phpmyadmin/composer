@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\FieldMetadata;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyRootGroup;
@@ -19,6 +20,7 @@ use PhpMyAdmin\Util;
 use PhpMyAdmin\Version;
 
 use function __;
+use function bin2hex;
 use function count;
 use function in_array;
 use function mb_strpos;
@@ -298,6 +300,8 @@ class ExportLatex extends ExportPlugin
         $result = $dbi->tryQuery($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columns_cnt = $result->numFields();
+        /** @var FieldMetadata[] $fieldsMeta */
+        $fieldsMeta = $dbi->getFieldsMeta($result);
         $columns = [];
         $columns_alias = [];
         foreach ($result->getFieldNames() as $i => $col_as) {
@@ -398,9 +402,15 @@ class ExportLatex extends ExportPlugin
             // print each row
             for ($i = 0; $i < $columns_cnt; $i++) {
                 if ($record[$columns[$i]] !== null && isset($record[$columns[$i]])) {
-                    $column_value = self::texEscape(
-                        stripslashes($record[$columns[$i]])
-                    );
+                    if ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                        $column_value = self::texEscape(
+                            '0x' . bin2hex($record[$columns[$i]])
+                        );
+                    } else {
+                        $column_value = self::texEscape(
+                            stripslashes($record[$columns[$i]])
+                        );
+                    }
                 } else {
                     $column_value = $GLOBALS['latex_null'];
                 }
