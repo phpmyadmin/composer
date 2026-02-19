@@ -4897,11 +4897,6 @@
       <code><![CDATA[Current::$sqlQuery]]></code>
     </MixedArgument>
   </file>
-  <file src="src/Http/Middleware/TokenRequestParamChecking.php">
-    <MixedArgument>
-      <code><![CDATA[$_SESSION[' PMA_token ']]]></code>
-    </MixedArgument>
-  </file>
   <file src="src/Http/Middleware/UriSchemeUpdating.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -8466,7 +8461,6 @@
       <code><![CDATA[$params['server']]]></code>
       <code><![CDATA[$params['server']]]></code>
       <code><![CDATA[$value]]></code>
-      <code><![CDATA[$values['token']]]></code>
     </MixedAssignment>
   </file>
   <file src="src/UserPassword.php">

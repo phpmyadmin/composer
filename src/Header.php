@@ -122,7 +122,7 @@ class Header
             'server' => Current::$server,
             'table' => Current::$table,
             'db' => Current::$database,
-            'token' => $_SESSION[' PMA_token '],
+            'token' => Session::getToken(),
             'text_dir' => LanguageManager::$textDirection->value,
             'LimitChars' => $this->config->config->limitChars,
             'pftext' => $pftext,

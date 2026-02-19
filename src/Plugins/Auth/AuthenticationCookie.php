@@ -88,7 +88,7 @@ class AuthenticationCookie extends AuthenticationPlugin
          */
         if ($sessionExpired) {
             $this->responseRenderer->setRequestStatus(false);
-            $this->responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
+            $this->responseRenderer->addJSON('new_token', Session::getToken());
         }
 
         /**
@@ -453,7 +453,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         if (isset($_REQUEST['session_timedout'])) {
             $this->responseRenderer->addJSON('logged_in', 1);
             $this->responseRenderer->addJSON('success', 1);
-            $this->responseRenderer->addJSON('new_token', $_SESSION[' PMA_token ']);
+            $this->responseRenderer->addJSON('new_token', Session::getToken());
 
             return $this->responseRenderer->response();
         }
