@@ -700,6 +700,7 @@ class UtilTest extends AbstractTestCase
     public static function providerTestGetRealSize(): array
     {
         return [
+            ['', 0],
             ['0', 0],
             ['1kb', 1],
             ['1024k', 1024 * 1024],

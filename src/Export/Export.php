@@ -32,7 +32,6 @@ use function http_build_query;
 use function implode;
 use function in_array;
 use function ini_get;
-use function ini_parse_quantity;
 use function is_array;
 use function is_numeric;
 use function mb_strlen;
@@ -114,7 +113,7 @@ class Export
      */
     public function getMemoryLimit(): int
     {
-        $memoryLimit = ini_parse_quantity((string) ini_get('memory_limit'));
+        $memoryLimit = Util::getRealSize(ini_get('memory_limit'));
 
         // Some of memory is needed for other things and as threshold.
         // During export I had allocated (see memory_get_usage function)

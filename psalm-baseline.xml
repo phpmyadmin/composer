@@ -1319,9 +1319,6 @@
     </UnusedVariable>
   </file>
   <file src="src/Controllers/Import/ImportController.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$memoryLimit]]></code>
-    </ArgumentTypeCoercion>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[UrlParams::$params]]></code>
     </MixedArgumentTypeCoercion>
@@ -4059,9 +4056,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Export/Export.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[(string) ini_get('memory_limit')]]></code>
-    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$dbAlias]]></code>
       <code><![CDATA[$dbAlias]]></code>
