@@ -112,6 +112,7 @@ class ReplaceControllerTest extends AbstractTestCase
                 $template,
                 $bookmarkRepository,
                 $config,
+                $response,
             ),
             $pageSettings,
             $bookmarkRepository,
@@ -120,7 +121,7 @@ class ReplaceControllerTest extends AbstractTestCase
 
         $replaceController = new ReplaceController(
             $response,
-            new InsertEdit($dbi, $relation, $transformations, new FileListing(), $template, $config),
+            new InsertEdit($dbi, $relation, $transformations, new FileListing(), $template, $config, $response),
             $transformations,
             $relation,
             $dbi,
@@ -128,6 +129,7 @@ class ReplaceControllerTest extends AbstractTestCase
             self::createStub(DatabaseSqlController::class),
             self::createStub(ChangeController::class),
             self::createStub(TableSqlController::class),
+            $template,
         );
 
         UrlParams::$goto = 'index.php?route=/sql';
@@ -170,6 +172,7 @@ class ReplaceControllerTest extends AbstractTestCase
             self::createStub(DatabaseSqlController::class),
             self::createStub(ChangeController::class),
             self::createStub(TableSqlController::class),
+            new Template(new Config()),
         );
 
         /** @var array $result */

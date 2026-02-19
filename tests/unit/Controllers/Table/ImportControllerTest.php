@@ -52,7 +52,8 @@ class ImportControllerTest extends AbstractTestCase
 
         $template = new Template($config);
         $userPreferences = new UserPreferences($dbi, new Relation($dbi, $config), $template, $config, new Clock());
-        $pageSettings = new PageSettings($userPreferences);
+        $response = new ResponseRenderer();
+        $pageSettings = new PageSettings($userPreferences, $response);
         $pageSettings->init('Import');
         $expected = $template->render('table/import/index', [
             'page_settings_error_html' => $pageSettings->getErrorHTML(),
@@ -93,7 +94,6 @@ class ImportControllerTest extends AbstractTestCase
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
             ->withQueryParams(['db' => 'test_db', 'table' => 'test_table', 'format' => 'xml']);
 
-        $response = new ResponseRenderer();
         (new ImportController($response, $dbi, $pageSettings, new DbTableExists($dbi), $config))($request);
         self::assertSame($expected, $response->getHTMLResult());
     }

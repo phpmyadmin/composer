@@ -125,7 +125,10 @@ class NavigationControllerTest extends AbstractTestCase
             $responseRenderer,
             new Navigation($template, $relation, $this->dbi, $config),
             $relation,
-            new PageSettings(new UserPreferences($this->dbi, $relation, $template, $config, new Clock())),
+            new PageSettings(
+                new UserPreferences($this->dbi, $relation, $template, $config, new Clock()),
+                $responseRenderer,
+            ),
         );
 
         $_POST['full'] = '1';
@@ -274,7 +277,10 @@ class NavigationControllerTest extends AbstractTestCase
             $responseRenderer,
             new Navigation($template, $relation, $this->dbi, $config),
             $relation,
-            new PageSettings(new UserPreferences($this->dbi, $relation, $template, $config, new Clock())),
+            new PageSettings(
+                new UserPreferences($this->dbi, $relation, $template, $config, new Clock()),
+                $responseRenderer,
+            ),
         );
 
         $_POST['full'] = '1';

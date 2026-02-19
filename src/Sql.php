@@ -69,6 +69,7 @@ class Sql
         private readonly Template $template,
         private readonly BookmarkRepository $bookmarkRepository,
         private readonly Config $config,
+        private readonly ResponseRenderer $responseRenderer,
     ) {
     }
 
@@ -486,16 +487,22 @@ class Sql
      */
     private function handleQueryExecuteError(bool $isGotoFile, string $error, string $fullSqlQuery): never
     {
-        $response = ResponseRenderer::getInstance();
         if ($isGotoFile) {
             $message = Message::rawError($error);
-            $response->setRequestStatus(false);
-            $response->addJSON('message', $message);
+            $this->responseRenderer->setRequestStatus(false);
+            $this->responseRenderer->addJSON('message', $message);
         } else {
-            Generator::mysqlDie($error, $fullSqlQuery, false);
+            $errorMessage = Generator::mysqlDie($error, $fullSqlQuery, false);
+            if ($this->responseRenderer->isAjax()) {
+                $this->responseRenderer->setRequestStatus(false);
+                $this->responseRenderer->addJSON('message', $errorMessage);
+                $this->responseRenderer->callExit();
+            }
+
+            $this->responseRenderer->addHTML($errorMessage);
         }
 
-        $response->callExit();
+        $this->responseRenderer->callExit();
     }
 
     /**
@@ -746,8 +753,7 @@ class Sql
         string $table,
         string $sqlQueryForBookmark,
     ): array {
-        $response = ResponseRenderer::getInstance();
-        $response->getHeader()->getMenu()->setTable($table);
+        $this->responseRenderer->getHeader()->getMenu()->setTable($table);
 
         Profiling::enable($this->dbi);
 
@@ -982,9 +988,8 @@ class Sql
             $extraData['indexes_list'] = $this->getIndexList($table, $db);
         }
 
-        $response = ResponseRenderer::getInstance();
-        $response->addJSON($extraData);
-        $header = $response->getHeader();
+        $this->responseRenderer->addJSON($extraData);
+        $header = $this->responseRenderer->getHeader();
         $scripts = $header->getScripts();
         $scripts->addFile('sql.js');
 
@@ -1060,8 +1065,7 @@ class Sql
             $row[0] = bin2hex($row[0]);
         }
 
-        $response = ResponseRenderer::getInstance();
-        $response->addJSON('value', $row[0]);
+        $this->responseRenderer->addJSON('value', $row[0]);
     }
 
     /**
@@ -1116,6 +1120,7 @@ class Sql
                 $printView,
                 $editable,
                 $isBrowseDistinct,
+                $request->isAjax(),
                 $isLimitedDisplay,
             );
         }
@@ -1137,7 +1142,13 @@ class Sql
             $isBrowseDistinct,
         );
 
-        return $displayResultsObject->getTable($result, $displayParts, $statementInfo, $isLimitedDisplay);
+        return $displayResultsObject->getTable(
+            $result,
+            $displayParts,
+            $statementInfo,
+            $request->isAjax(),
+            $isLimitedDisplay,
+        );
     }
 
     private function getHtmlForStoredProcedureResults(
@@ -1147,6 +1158,7 @@ class Sql
         bool $printView,
         bool $editable,
         bool $isBrowseDistinct,
+        bool $isAjax,
         bool $isLimitedDisplay,
     ): string {
         $tableHtml = '';
@@ -1186,6 +1198,7 @@ class Sql
                     $result,
                     $displayParts,
                     $statementInfo,
+                    $isAjax,
                     $isLimitedDisplay,
                 );
             }
@@ -1289,14 +1302,13 @@ class Sql
         // value of a transformed field, show it here
         if ($request->hasBodyParam('grid_edit')) {
             $this->getResponseForGridEdit($result);
-            ResponseRenderer::getInstance()->callExit();
+            $this->responseRenderer->callExit();
         }
 
         // Gets the list of fields properties
         $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
-        $response = ResponseRenderer::getInstance();
-        $header = $response->getHeader();
+        $header = $this->responseRenderer->getHeader();
         $scripts = $header->getScripts();
 
         $justOneTable = $this->resultSetHasJustOneTable($fieldsMeta);
@@ -1456,7 +1468,7 @@ class Sql
     ): string {
         if ($statementInfo === null) {
             // Parse and analyze the query
-            [$statementInfo, $db, $tableFromSql] = ParseAnalyze::sqlQuery($sqlQuery, $db);
+            [$statementInfo, $db, $tableFromSql] = ParseAnalyze::sqlQuery($sqlQuery, $db, $request->isAjax());
 
             $table = $tableFromSql !== '' ? $tableFromSql : $table;
         }

@@ -24,7 +24,6 @@ use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Json;
 use PhpMyAdmin\Plugins\Transformations\Output\Text_Plain_Sql;
 use PhpMyAdmin\Plugins\Transformations\Text_Plain_Link;
 use PhpMyAdmin\Plugins\TransformationsInterface;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\SqlParser\Components\OrderKeyword;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
@@ -1697,6 +1696,7 @@ class Results
         DisplayParts $displayParts,
         array $map,
         StatementInfo $statementInfo,
+        bool $isAjax,
         bool $isLimitedDisplay = false,
     ): string {
         // Mostly because of browser transformations, to make the row-data accessible in a plugin.
@@ -1773,6 +1773,7 @@ class Results
                         $statementInfo,
                         $gridEditConfig,
                         $urlSqlQuery,
+                        $isAjax,
                     );
                 } elseif ($this->config->settings['RowActionLinks'] === self::POSITION_NONE) {
                     $tableBodyHtml .= $this->getLinksHtml(
@@ -1782,6 +1783,7 @@ class Results
                         $statementInfo,
                         $gridEditConfig,
                         $urlSqlQuery,
+                        $isAjax,
                     );
                 }
             }
@@ -1816,6 +1818,7 @@ class Results
                     $statementInfo,
                     $gridEditConfig,
                     $urlSqlQuery,
+                    $isAjax,
                 );
             }
 
@@ -1853,6 +1856,7 @@ class Results
         StatementInfo $statementInfo,
         string $gridEditConfig,
         string $urlSqlQuery,
+        bool $isAjax,
     ): string {
         $uniqueCondition = $this->getUniqueCondition($statementInfo);
         $whereClause = $uniqueCondition->getWhereClause();
@@ -1902,7 +1906,7 @@ class Results
             'row_number' => $rowNumber,
             'where_clause' => $whereClause,
             'condition' => json_encode($conditionArray),
-            'is_ajax' => ResponseRenderer::getInstance()->isAjax(),
+            'is_ajax' => $isAjax,
             'js_conf' => $jsConf,
             'grid_edit_config' => $gridEditConfig,
         ]);
@@ -2911,6 +2915,7 @@ class Results
         ResultInterface $dtResult,
         DisplayParts $displayParts,
         StatementInfo $statementInfo,
+        bool $isAjax,
         bool $isLimitedDisplay = false,
     ): string {
         // The statement this table is built for.
@@ -3046,7 +3051,7 @@ class Results
         // 3. ----- Prepare the results table -----
         $headers = $this->getTableHeaders($displayParts, $statementInfo, $sortExpressions, $isLimitedDisplay);
 
-        $body = $this->getTableBody($dtResult, $displayParts, $map, $statementInfo, $isLimitedDisplay);
+        $body = $this->getTableBody($dtResult, $displayParts, $map, $statementInfo, $isAjax, $isLimitedDisplay);
 
         // 4. ----- Prepares the link for multi-fields edit and delete
         $isClauseUnique = $this->isClauseUnique($dtResult, $statementInfo, $displayParts->deleteLink);

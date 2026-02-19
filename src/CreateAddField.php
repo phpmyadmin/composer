@@ -446,12 +446,21 @@ class CreateAddField
         // To allow replication, we first select the db to use and then run queries
         // on this db.
         if (! $this->dbi->selectDb($db)) {
-            Generator::mysqlDie(
+            $errorMessage = Generator::mysqlDie(
                 $this->dbi->getError(),
                 'USE ' . Util::backquote($db->getName()),
                 false,
-                $errorUrl,
             );
+
+            $response = ResponseRenderer::getInstance();
+            if ($response->isAjax()) {
+                $response->setRequestStatus(false);
+                $response->addJSON('message', $errorMessage);
+                $response->callExit();
+            }
+
+            $response->addHTML($errorMessage . Generator::getBackUrlHtml($errorUrl));
+            $response->callExit();
         }
 
         return (bool) $this->dbi->tryQuery($sqlQuery);

@@ -63,7 +63,7 @@ final class MoveColumnsController implements InvocableController
         if ($previewSql) {
             $this->response->addJSON(
                 'sql_data',
-                $this->template->render('preview_sql', ['query_data' => $sqlQuery]),
+                $this->template->render('components/_preview_sql', ['query_data' => $sqlQuery]),
             );
 
             return $this->response->response();

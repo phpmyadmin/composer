@@ -48,7 +48,7 @@ final class ChangeControllerTest extends AbstractTestCase
         $template = new Template($config);
         $relation = new Relation($dbi, $config);
         $userPreferences = new UserPreferences($dbi, $relation, $template, $config, new Clock());
-        $pageSettings = new PageSettings($userPreferences);
+        $pageSettings = new PageSettings($userPreferences, $response);
         $pageSettings->init('Edit');
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'http://example.com/')
@@ -64,6 +64,7 @@ final class ChangeControllerTest extends AbstractTestCase
             new FileListing(),
             $template,
             $config,
+            $response,
         );
 
         (new ChangeController(
@@ -157,7 +158,7 @@ final class ChangeControllerTest extends AbstractTestCase
         $relation = new Relation($dbi, $config);
         $template = new Template($config);
         $userPreferences = new UserPreferences($dbi, $relation, $template, $config, new Clock());
-        $pageSettings = new PageSettings($userPreferences);
+        $pageSettings = new PageSettings($userPreferences, $response);
         $pageSettings->init('Edit');
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
@@ -175,6 +176,7 @@ final class ChangeControllerTest extends AbstractTestCase
             new FileListing(),
             $template,
             $config,
+            $response,
         );
 
         (new ChangeController(

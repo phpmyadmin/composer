@@ -38,7 +38,7 @@ class AuthenticationHttpTest extends AbstractTestCase
         Current::$database = 'db';
         Current::$table = 'table';
         Current::$lang = 'en';
-        $this->object = new AuthenticationHttp();
+        $this->object = new AuthenticationHttp(new ResponseRendererStub());
     }
 
     /**
@@ -57,9 +57,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $config->selectedServer['auth_type'] = 'http';
         $config->selectedServer['LogoutURL'] = 'https://example.com/logout';
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $response = $this->object->logOut();
 
         self::assertSame(['https://example.com/logout'], $response->getHeader('Location'));
@@ -71,9 +68,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $config = Config::getInstance();
         $config->selectedServer['auth_type'] = 'http';
         $config->selectedServer['verbose'] = 'verboseMessagê';
-
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
 
         $response = $this->object->showLoginForm();
 
@@ -88,9 +82,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $config->selectedServer['verbose'] = '';
         $config->selectedServer['host'] = 'hòst';
 
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $response = $this->object->showLoginForm();
 
         self::assertSame(['Basic realm="phpMyAdmin hst"'], $response->getHeader('WWW-Authenticate'));
@@ -103,9 +94,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $config->selectedServer['auth_type'] = 'http';
         $config->selectedServer['host'] = '';
         $config->selectedServer['auth_http_realm'] = 'rêäealmmessage';
-
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
 
         $response = $this->object->showLoginForm();
 
@@ -250,8 +238,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $config->selectedServer['host'] = '';
         $_REQUEST = [];
         Current::$server = 0;
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(false);
 
         $dbi = $this->getMockBuilder(DatabaseInterface::class)
             ->disableOriginalConstructor()
@@ -265,7 +251,9 @@ class AuthenticationHttpTest extends AbstractTestCase
         DatabaseInterface::$errorNumber = 31;
 
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(false);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
+        $this->object = new AuthenticationHttp($responseRenderer);
 
         $response = $this->object->showFailure(AuthenticationFailure::deniedByDatabaseServer());
 
@@ -277,14 +265,18 @@ class AuthenticationHttpTest extends AbstractTestCase
         DatabaseInterface::$errorNumber = 1045;
 
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(false);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
+        $this->object = new AuthenticationHttp($responseRenderer);
 
         $response = $this->object->showFailure(AuthenticationFailure::deniedByDatabaseServer());
         $result = (string) $response->getBody();
         self::assertStringContainsString('Wrong username/password. Access denied.', $result);
 
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(false);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
+        $this->object = new AuthenticationHttp($responseRenderer);
 
         // case 3
         DatabaseInterface::$errorNumber = 1043;
@@ -298,8 +290,9 @@ class AuthenticationHttpTest extends AbstractTestCase
         Current::$database = '';
         Current::$table = '';
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        ResponseRenderer::getInstance()->setAjax(true);
-        $response = (new AuthenticationHttp())->showLoginForm();
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(true);
+        $response = (new AuthenticationHttp($responseRenderer))->showLoginForm();
 
         $body = (string) $response->getBody();
         self::assertJson($body);

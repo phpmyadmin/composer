@@ -87,14 +87,14 @@ class StructureControllerTest extends AbstractTestCase
         $relation = new Relation($this->dbi, $config);
         $template = new Template($config);
         $userPreferences = new UserPreferences($this->dbi, $relation, $template, $config, new Clock());
-        $pageSettings = new PageSettings($userPreferences);
+        $response = new ResponseRenderer();
+        $pageSettings = new PageSettings($userPreferences, $response);
         $pageSettings->init('TableStructure');
         $fields = $this->dbi->getColumns(Current::$database, Current::$table);
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/')
             ->withQueryParams(['route' => '/table/structure', 'db' => 'test_db', 'table' => 'test_table']);
 
-        $response = new ResponseRenderer();
         (new StructureController(
             $response,
             $template,

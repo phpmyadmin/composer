@@ -26,7 +26,7 @@ class ParseAnalyze
      *
      * @return array{StatementInfo, string, string, bool}
      */
-    public static function sqlQuery(string $sqlQuery, string $db): array
+    public static function sqlQuery(string $sqlQuery, string $db, bool $isAjaxRequest): array
     {
         $info = Query::getAll($sqlQuery);
 
@@ -60,8 +60,7 @@ class ParseAnalyze
 
             // There is no point checking if a reloading is required if we already decided
             // to reload. Also, no reload is required for AJAX requests.
-            $response = ResponseRenderer::getInstance();
-            if (! $reload && ! $response->isAjax()) {
+            if (! $reload && ! $isAjaxRequest) {
                 // NOTE: Database names are case-insensitive.
                 $reload = strcasecmp($db, $previousDb) !== 0;
             }

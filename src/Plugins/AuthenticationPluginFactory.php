@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Plugins;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Exceptions\AuthenticationPluginException;
+use PhpMyAdmin\ResponseRenderer;
 
 use function __;
 use function class_exists;
@@ -16,6 +17,10 @@ use function ucfirst;
 class AuthenticationPluginFactory
 {
     private AuthenticationPlugin|null $plugin = null;
+
+    public function __construct(private readonly ResponseRenderer $responseRenderer)
+    {
+    }
 
     /** @throws AuthenticationPluginException */
     public function create(): AuthenticationPlugin
@@ -32,7 +37,7 @@ class AuthenticationPluginFactory
             );
         }
 
-        $this->plugin = new $class();
+        $this->plugin = new $class($this->responseRenderer);
 
         return $this->plugin;
     }

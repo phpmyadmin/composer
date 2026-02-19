@@ -221,7 +221,11 @@ final readonly class ManageController implements InvocableController
                     // reload config
                     $this->userPreferencesHandler->loadUserPreferences();
 
-                    return $this->userPreferences->redirect($returnUrl ?? '', $redirectParams);
+                    $this->response->redirect(
+                        $this->userPreferences->getUrlToRedirect($returnUrl ?? '', $redirectParams),
+                    );
+
+                    return $this->response->response();
                 }
 
                 $error = $result;
@@ -231,7 +235,11 @@ final readonly class ManageController implements InvocableController
             if ($result === true) {
                 $this->config->removeCookie('pma_lang');
 
-                return $this->userPreferences->redirect('index.php?route=/preferences/manage');
+                $this->response->redirect(
+                    $this->userPreferences->getUrlToRedirect('index.php?route=/preferences/manage'),
+                );
+
+                return $this->response->response();
             }
 
             return $this->response->response();

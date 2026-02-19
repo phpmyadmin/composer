@@ -842,12 +842,21 @@ class Privileges
 
                 // Update the plugin for the user
                 if (! $this->dbi->tryQuery($updatePluginQuery)) {
-                    Generator::mysqlDie(
+                    $errorMessage = Generator::mysqlDie(
                         $this->dbi->getError(),
                         $updatePluginQuery,
                         false,
-                        $errorUrl,
                     );
+
+                    $response = ResponseRenderer::getInstance();
+                    if ($response->isAjax()) {
+                        $response->setRequestStatus(false);
+                        $response->addJSON('message', $errorMessage);
+                        $response->callExit();
+                    }
+
+                    $response->addHTML($errorMessage . Generator::getBackUrlHtml($errorUrl));
+                    $response->callExit();
                 }
 
                 $this->dbi->tryQuery('FLUSH PRIVILEGES;');
@@ -878,12 +887,21 @@ class Privileges
             }
 
             if (! $this->dbi->tryQuery($localQuery)) {
-                Generator::mysqlDie(
+                $errorMessage = Generator::mysqlDie(
                     $this->dbi->getError(),
                     $sqlQuery,
                     false,
-                    $errorUrl,
                 );
+
+                $response = ResponseRenderer::getInstance();
+                if ($response->isAjax()) {
+                    $response->setRequestStatus(false);
+                    $response->addJSON('message', $errorMessage);
+                    $response->callExit();
+                }
+
+                $response->addHTML($errorMessage . Generator::getBackUrlHtml($errorUrl));
+                $response->callExit();
             }
 
             // Flush privileges after successful password change

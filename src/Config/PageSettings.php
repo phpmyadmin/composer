@@ -39,8 +39,10 @@ class PageSettings
      */
     private string $HTML = '';
 
-    public function __construct(private UserPreferences $userPreferences)
-    {
+    public function __construct(
+        private readonly UserPreferences $userPreferences,
+        private readonly ResponseRenderer $responseRenderer,
+    ) {
     }
 
     /**
@@ -95,9 +97,8 @@ class PageSettings
         $result = $this->userPreferences->save($configFile->getConfigArray());
         if ($result === true) {
             // reload page
-            $response = ResponseRenderer::getInstance();
-            $response->redirect($response->getSelfUrl());
-            $response->callExit();
+            $this->responseRenderer->redirect($this->responseRenderer->getSelfUrl());
+            $this->responseRenderer->callExit();
         }
 
         return $result;
@@ -135,15 +136,17 @@ class PageSettings
      */
     private function getPageSettingsDisplay(FormDisplay $formDisplay, Message|null $error): string
     {
-        $response = ResponseRenderer::getInstance();
-
         $retval = '';
 
         $this->storeError($formDisplay, $error);
 
         $retval .= '<div id="' . $this->elemId . '">';
         $retval .= '<div class="page_settings">';
-        $retval .= $formDisplay->getDisplay(false, $response->getSelfUrl(), ['submit_save' => $this->groupName]);
+        $retval .= $formDisplay->getDisplay(
+            false,
+            $this->responseRenderer->getSelfUrl(),
+            ['submit_save' => $this->groupName],
+        );
         $retval .= '</div>';
         $retval .= '</div>';
 

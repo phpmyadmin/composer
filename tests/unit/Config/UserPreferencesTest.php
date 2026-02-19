@@ -14,14 +14,11 @@ use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Message;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Clock\MockClock;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
-use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseRendererStub;
 use PhpMyAdmin\Url;
-use PHPUnit\Framework\Attributes\BackupStaticProperties;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionProperty;
 
@@ -546,20 +543,11 @@ class UserPreferencesTest extends AbstractTestCase
         );
     }
 
-    #[BackupStaticProperties(true)]
-    public function testRedirect(): void
+    public function testGetUrlToRedirect(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
-        Current::$lang = '';
-        Current::$database = 'db';
-        Current::$table = 'table';
-
-        $config = Config::getInstance();
-        $config->set('PmaAbsoluteUri', '');
-
-        $dbi = DatabaseInterface::getInstance();
+        Current::$lang = 'en';
+        $config = new Config();
+        $dbi = $this->createDatabaseInterface();
         $userPreferences = new UserPreferences(
             $dbi,
             new Relation($dbi, $config),
@@ -567,14 +555,10 @@ class UserPreferencesTest extends AbstractTestCase
             $config,
             new Clock(),
         );
-        $response = $userPreferences->redirect(
-            'file.html',
-            ['a' => 'b'],
-            'h ash',
+        self::assertSame(
+            './file.html?a=b&saved=1&server=2&lang=en#h+ash',
+            $userPreferences->getUrlToRedirect('file.html', ['a' => 'b'], 'h ash'),
         );
-
-        self::assertSame(['/phpmyadmin/file.html?a=b&saved=1&server=2#h+ash'], $response->getHeader('Location'));
-        self::assertSame(302, $response->getStatusCode());
     }
 
     /**

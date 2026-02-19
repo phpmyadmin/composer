@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Dbal\DatabaseInterface;
+use PhpMyAdmin\Exceptions\UserPasswordUpdateFailure;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
 use PhpMyAdmin\Query\Compatibility;
@@ -182,8 +183,6 @@ class UserPassword
         string $origAuthPlugin,
         bool $authPluginChanged,
     ): void {
-        $errUrl = Url::getFromRoute('/user-password');
-
         $serverVersion = $this->dbi->getVersion();
         $isPerconaOrMySql = Compatibility::isMySqlOrPerconaDb($this->dbi);
 
@@ -226,13 +225,8 @@ class UserPassword
                 : $hashingFunction . '(' . $this->dbi->quoteString($password) . ')');
         }
 
-        if (! @$this->dbi->tryQuery($localQuery)) {
-            Generator::mysqlDie(
-                $this->dbi->getError(),
-                $sqlQuery,
-                false,
-                $errUrl,
-            );
+        if ($this->dbi->tryQuery($localQuery) === false) {
+            throw new UserPasswordUpdateFailure(Generator::mysqlDie($this->dbi->getError(), $sqlQuery, false));
         }
 
         // Flush privileges after successful password change

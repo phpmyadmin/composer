@@ -8,7 +8,6 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Controllers\Table\StructureController;
-use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Html\Generator;
@@ -21,6 +20,7 @@ use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Table\Table;
 use PhpMyAdmin\Table\UiProperty;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPrivileges;
@@ -49,6 +49,7 @@ final class SaveController implements InvocableController
         private readonly StructureController $structureController,
         private readonly UserPrivilegesFactory $userPrivilegesFactory,
         private readonly Config $config,
+        private readonly Template $template,
     ) {
         $this->tableObj = $this->dbi->getTable(Current::$database, Current::$table);
     }
@@ -136,12 +137,20 @@ final class SaveController implements InvocableController
             // To allow replication, we first select the db to use
             // and then run queries on this db.
             if (! $this->dbi->selectDb(Current::$database)) {
-                Generator::mysqlDie(
+                $errorMessage = Generator::mysqlDie(
                     $this->dbi->getError(),
                     'USE ' . Util::backquote(Current::$database) . ';',
                     false,
-                    $errUrl,
                 );
+
+                if ($this->response->isAjax()) {
+                    $this->response->setRequestStatus(false);
+                    $this->response->addJSON('message', $errorMessage);
+                    $this->response->callExit();
+                }
+
+                $this->response->addHTML($errorMessage . Generator::getBackUrlHtml($errUrl));
+                $this->response->callExit();
             }
 
             $sqlQuery = 'ALTER TABLE ' . Util::backquote(Current::$table) . ' ';
@@ -154,7 +163,12 @@ final class SaveController implements InvocableController
 
             // If there is a request for SQL previewing.
             if (isset($_POST['preview_sql'])) {
-                Core::previewSQL($changes !== [] ? $sqlQuery : '');
+                $this->response->addJSON(
+                    'sql_data',
+                    $this->template->render('components/_preview_sql', [
+                        'query_data' => $changes !== [] ? $sqlQuery : '',
+                    ]),
+                );
 
                 $this->response->callExit();
             }

@@ -445,10 +445,13 @@ return [
         'class' => LicenseController::class,
         'arguments' => [ResponseRenderer::class, ResponseFactory::class],
     ],
-    LintController::class => ['class' => LintController::class, 'arguments' => [ResponseFactory::class]],
+    LintController::class => [
+        'class' => LintController::class,
+        'arguments' => [ResponseFactory::class, ResponseRenderer::class],
+    ],
     LogoutController::class => [
         'class' => LogoutController::class,
-        'arguments' => [AuthenticationPluginFactory::class],
+        'arguments' => [AuthenticationPluginFactory::class, ResponseRenderer::class],
     ],
     NavigationController::class => [
         'class' => NavigationController::class,
@@ -842,6 +845,7 @@ return [
             ColumnsDefinition::class,
             DbTableExists::class,
             UserPrivilegesFactory::class,
+            Template::class,
         ],
     ],
     Table\ChangeController::class => [
@@ -873,6 +877,7 @@ return [
             DatabaseInterface::class,
             ColumnsDefinition::class,
             UserPrivilegesFactory::class,
+            Template::class,
         ],
     ],
     Table\DeleteConfirmController::class => [
@@ -1050,6 +1055,7 @@ return [
             Database\SqlController::class,
             Table\ChangeController::class,
             Table\SqlController::class,
+            Template::class,
         ],
     ],
     Table\SearchController::class => [
@@ -1139,6 +1145,7 @@ return [
             Table\StructureController::class,
             UserPrivilegesFactory::class,
             Config::class,
+            Template::class,
         ],
     ],
     Table\Structure\SpatialController::class => [

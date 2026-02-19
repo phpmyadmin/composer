@@ -16,7 +16,6 @@ use PhpMyAdmin\MessageType;
 use PhpMyAdmin\Profiling;
 use PhpMyAdmin\Providers\ServerVariables\ServerVariablesProvider;
 use PhpMyAdmin\Query\Compatibility;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Sql;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
@@ -680,21 +679,9 @@ class Generator
      * @param string $serverMessage Server's error message.
      * @param string $sqlQuery      The SQL query that failed.
      * @param bool   $isModifyLink  Whether to show a "modify" link or not.
-     * @param string $backUrl       URL for the "back" link (full path is not required).
-     * @param bool   $exit          Whether execution should be stopped or the error message should be returned.
-     *
-     * @psalm-return ($exit is true ? never : string|null)
-     *
-     * @global string $table The current table.
-     * @global string $db    The current database.
      */
-    public static function mysqlDie(
-        string $serverMessage = '',
-        string $sqlQuery = '',
-        bool $isModifyLink = true,
-        string $backUrl = '',
-        bool $exit = true,
-    ): string|null {
+    public static function mysqlDie(string $serverMessage, string $sqlQuery, bool $isModifyLink): string
+    {
         /**
          * Error message to be built.
          */
@@ -827,37 +814,26 @@ class Generator
         $errorMessage .= '</div>';
         $_SESSION['Import_message']['message'] = $errorMessage;
 
-        if (! $exit) {
-            return $errorMessage;
+        return $errorMessage;
+    }
+
+    public static function getBackUrlHtml(string $backUrl): string
+    {
+        if ($backUrl === '') {
+            return '';
         }
 
-        /**
-         * If this is an AJAX request, there is no "Back" link and
-         * `Response()` is used to send the response.
-         */
-        $response = ResponseRenderer::getInstance();
-        if ($response->isAjax()) {
-            $response->setRequestStatus(false);
-            $response->addJSON('message', $errorMessage);
-            $response->callExit();
+        if (str_contains($backUrl, '?')) {
+            $backUrl .= '&amp;no_history=true';
+        } else {
+            $backUrl .= '?no_history=true';
         }
 
-        if ($backUrl !== '') {
-            if (str_contains($backUrl, '?')) {
-                $backUrl .= '&amp;no_history=true';
-            } else {
-                $backUrl .= '?no_history=true';
-            }
+        $_SESSION['Import_message']['go_back_url'] = $backUrl;
 
-            $_SESSION['Import_message']['go_back_url'] = $backUrl;
-
-            $errorMessage .= '<div class="card"><div class="card-body">'
-                . '[ <a href="' . $backUrl . '">' . __('Back') . '</a> ]'
-                . '</div></div>' . "\n\n";
-        }
-
-        $response->addHTML($errorMessage);
-        $response->callExit();
+        return '<div class="card"><div class="card-body">'
+            . '[ <a href="' . $backUrl . '">' . __('Back') . '</a> ]'
+            . '</div></div>' . "\n\n";
     }
 
     /**

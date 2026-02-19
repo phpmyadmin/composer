@@ -84,6 +84,7 @@ class InsertEdit
         private readonly FileListing $fileListing,
         private readonly Template $template,
         private readonly Config $config,
+        private readonly ResponseRenderer $responseRenderer,
     ) {
     }
 
@@ -155,7 +156,7 @@ class InsertEdit
             $rows[$keyId] = $result[$keyId]->fetchAssoc();
 
             if ($rows[$keyId] === []) {
-                ResponseRenderer::getInstance()->addHTML(
+                $this->responseRenderer->addHTML(
                     Generator::getMessage(
                         __('MySQL returned an empty result set (i.e. zero rows).'),
                         $localQuery,

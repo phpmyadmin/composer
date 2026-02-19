@@ -62,6 +62,7 @@ class DeleteRowsControllerTest extends AbstractTestCase
             ->withParsedBody(['original_sql_query' => 'SELECT * FROM `test_db`.`test_table`']);
 
         $relation = new Relation($dbi, $config);
+        $response = new ResponseRenderer();
         $sql = new Sql(
             $dbi,
             $relation,
@@ -70,9 +71,9 @@ class DeleteRowsControllerTest extends AbstractTestCase
             new Template($config),
             new BookmarkRepository($dbi, $relation),
             $config,
+            $response,
         );
 
-        $response = new ResponseRenderer();
         (new DeleteRowsController($response, $dbi, $sql))($request);
         $actual = $response->getHTMLResult();
         self::assertStringContainsString(

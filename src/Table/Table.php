@@ -1556,7 +1556,7 @@ class Table implements Stringable
 
                     if ($tmpErrorDrop !== '') {
                         $seenError = true;
-                        $htmlOutput .= Generator::mysqlDie($tmpErrorDrop, $dropQuery, false, '', false);
+                        $htmlOutput .= Generator::mysqlDie($tmpErrorDrop, $dropQuery, false);
                         continue;
                     }
                 } else {
@@ -1596,7 +1596,7 @@ class Table implements Stringable
                         $message->addParam(implode(', ', $masterField));
                         $htmlOutput .= $message->getDisplay();
                     } else {
-                        $htmlOutput .= Generator::mysqlDie($tmpErrorCreate, $createQuery, false, '', false);
+                        $htmlOutput .= Generator::mysqlDie($tmpErrorCreate, $createQuery, false);
                     }
 
                     $htmlOutput .= MySQLDocumentation::show('create-table-foreign-keys') . "\n";
