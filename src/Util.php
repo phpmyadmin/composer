@@ -1006,13 +1006,13 @@ class Util
         // for the case ENUM('&#8211;','&ldquo;')
         $displayedType = htmlspecialchars($printType, ENT_COMPAT);
         $config = Config::getInstance();
-        if (mb_strlen($printType) > $config->settings['LimitChars']) {
+        if (mb_strlen($printType) > $config->config->limitChars) {
             $displayedType = '<abbr title="' . htmlspecialchars($printType) . '">';
             $displayedType .= htmlspecialchars(
                 mb_substr(
                     $printType,
                     0,
-                    $config->settings['LimitChars'],
+                    $config->config->limitChars,
                 ) . '...',
                 ENT_COMPAT,
             );

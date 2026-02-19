@@ -1142,7 +1142,7 @@ class Results
             'comments_map' => $commentsMap,
             'column_name' => $fieldsMeta->name,
             'table_name' => $fieldsMeta->table,
-            'limit_chars' => $this->config->settings['LimitChars'],
+            'limit_chars' => $this->config->config->limitChars,
         ]);
     }
 
@@ -2702,7 +2702,7 @@ class Results
             return $this->buildEmptyDisplay($class, $conditionField, $meta);
         }
 
-        // Cut all fields to \PhpMyAdmin\Config::getInstance()->settings['LimitChars']
+        // Cut all fields to \PhpMyAdmin\Config::getInstance()->config->limitChars
         // (unless it's a link-type transformation or binary)
         $originalLength = 0;
         $originalDataForWhereClause = $column;
@@ -3173,7 +3173,7 @@ class Results
             mb_substr(
                 (string) $columnForFirstRow,
                 0,
-                $this->config->settings['LimitChars'],
+                $this->config->config->limitChars,
             ) . '...',
         );
 
@@ -3199,7 +3199,7 @@ class Results
             mb_substr(
                 (string) $columnForLastRow,
                 0,
-                $this->config->settings['LimitChars'],
+                $this->config->config->limitChars,
             ) . '...',
         );
 
@@ -3760,10 +3760,10 @@ class Results
     private function getPartialText(string $str): string
     {
         if (
-            mb_strlen($str) > $this->config->settings['LimitChars']
+            mb_strlen($str) > $this->config->config->limitChars
             && $_SESSION['tmpval']['pftext'] === self::DISPLAY_PARTIAL_TEXT
         ) {
-            return mb_substr($str, 0, $this->config->settings['LimitChars']) . '...';
+            return mb_substr($str, 0, $this->config->config->limitChars) . '...';
         }
 
         return $str;

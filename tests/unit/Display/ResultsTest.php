@@ -363,7 +363,7 @@ class ResultsTest extends AbstractTestCase
     public function testGetPartialText(string $pftext, int $limitChars, string $str, string $output): void
     {
         $_SESSION['tmpval']['pftext'] = $pftext;
-        Config::getInstance()->settings['LimitChars'] = $limitChars;
+        Config::getInstance()->set('LimitChars', $limitChars);
         self::assertSame(
             $output,
             $this->callFunction(
@@ -442,7 +442,6 @@ class ResultsTest extends AbstractTestCase
     ): void {
         $_SESSION['tmpval']['display_binary'] = $displayBinary;
         $_SESSION['tmpval']['display_blob'] = $displayBlob;
-        Config::getInstance()->settings['LimitChars'] = 50;
         self::assertStringContainsString(
             $output,
             $this->callFunction(
@@ -615,7 +614,6 @@ class ResultsTest extends AbstractTestCase
         $_SESSION['tmpval']['display_blob'] = false;
         $_SESSION['tmpval']['relational_display'] = false;
         $config = Config::getInstance();
-        $config->settings['LimitChars'] = 50;
         $config->settings['ProtectBinary'] = $protectBinary;
         $statementInfo = new StatementInfo(new Parser(), null, new StatementFlags(), [], []);
         self::assertStringContainsString(

@@ -9858,7 +9858,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <DocblockTypeContradiction>
       <code><![CDATA[assertSame]]></code>
@@ -9928,7 +9927,6 @@
     </PossiblyInvalidArgument>
     <PropertyTypeCoercion>
       <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[Config::getInstance()->settings]]></code>
     </PropertyTypeCoercion>
   </file>
   <file src="tests/unit/EncodingTest.php">
@@ -10539,14 +10537,6 @@
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-    </InvalidPropertyAssignmentValue>
   </file>
   <file src="tests/unit/Routing/RoutingTest.php">
     <DeprecatedMethod>
@@ -10592,12 +10582,6 @@
       <code><![CDATA[$config->settings['Servers']['0']]]></code>
     </InvalidArrayOffset>
     <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
-      <code><![CDATA[$config->settings]]></code>
       <code><![CDATA[$config->settings]]></code>
     </InvalidPropertyAssignmentValue>
     <PossiblyInvalidArgument>
@@ -10818,7 +10802,6 @@
       <code><![CDATA[$tz]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
