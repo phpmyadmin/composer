@@ -7894,13 +7894,15 @@
       <code>self::$registry[$schema][$table]</code>
       <code>self::$registry[$schema][$table]</code>
     </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="4">
+    <MixedArrayOffset occurrences="5">
+      <code>$columns['collations'][$key]</code>
       <code>$columns['sub_parts'][$key]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="20">
+    <MixedAssignment occurrences="21">
+      <code>$collation</code>
       <code>$column</code>
       <code>$column</code>
       <code>$data['columns'][]</code>
