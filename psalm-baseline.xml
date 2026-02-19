@@ -9929,7 +9929,6 @@
     <PropertyTypeCoercion>
       <code><![CDATA[$config->settings]]></code>
       <code><![CDATA[Config::getInstance()->settings]]></code>
-      <code><![CDATA[Config::getInstance()->settings]]></code>
     </PropertyTypeCoercion>
   </file>
   <file src="tests/unit/EncodingTest.php">

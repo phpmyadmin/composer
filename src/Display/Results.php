@@ -1267,12 +1267,12 @@ class Results
             $tableName = $currentTable === '' ? '' : Util::backquote($currentTable) . '.';
             $expression = $tableName . Util::backquote($currentColumn);
             // Set the direction to the config value or perform SMART mode
-            if ($this->config->settings['Order'] === self::SMART_SORT_ORDER) {
+            if ($this->config->config->Order === self::SMART_SORT_ORDER) {
                 $direction = $fieldsMeta->isDateTimeType()
                     ? self::DESCENDING_SORT_DIR
                     : self::ASCENDING_SORT_DIR;
             } else {
-                $direction = $this->config->settings['Order'];
+                $direction = $this->config->config->Order;
             }
 
             $sortExpressions[] = new SortExpression(

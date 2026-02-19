@@ -1663,7 +1663,7 @@ class ResultsTest extends AbstractTestCase
         self::assertSame($tableTemplate, $actual);
     }
 
-    /** @return array<string, array{string, string, int}> */
+    /** @return array<string, array{'ASC'|'DESC'|'SMART', 'ASC'|'DESC', int}> */
     public static function dataProviderSortOrder(): array
     {
         return [
@@ -1745,13 +1745,17 @@ class ResultsTest extends AbstractTestCase
         ];
     }
 
+    /**
+     * @param 'ASC'|'DESC'|'SMART' $orderSetting
+     * @param 'ASC'|'DESC'         $querySortDirection
+     */
     #[DataProvider('dataProviderSortOrder')]
     public function testGetSingleAndMultiSortUrls(
         string $orderSetting,
         string $querySortDirection,
         int $metaType,
     ): void {
-        Config::getInstance()->settings['Order'] = $orderSetting;
+        Config::getInstance()->set('Order', $orderSetting);
 
         $data = $this->callFunction(
             $this->object,
