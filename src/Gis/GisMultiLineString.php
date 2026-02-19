@@ -165,7 +165,7 @@ class GisMultiLineString extends GisGeometry
     public function prepareRowAsSvg(string $spatial, string $label, array $color, ScaleData $scaleData): string
     {
         $options = [
-            'class' => 'linestring vector',
+            'class' => 'multilinestring vector',
             'fill' => 'none',
             'stroke' => sprintf('#%02x%02x%02x', $color[0], $color[1], $color[2]),
             'stroke-width' => 2,

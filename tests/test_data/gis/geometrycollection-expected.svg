@@ -6,8 +6,8 @@
 <path d="M15,15L15,65L65,15ZM22,28L22,48L31,38ZM28,22L48,22L38,31Z" class="polygon vector" stroke="black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8" data-label="GeometryCollection"/>
 <circle cx="25" cy="75" r="3" class="multipoint vector" fill="white" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
 <circle cx="175" cy="75" r="3" class="multipoint vector" fill="white" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
-<polyline points="135,15 180,15 135,25 " class="linestring vector" fill="none" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
-<polyline points="185,65 185,20 175,65 " class="linestring vector" fill="none" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
+<polyline points="135,15 180,15 135,25 " class="multilinestring vector" fill="none" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
+<polyline points="185,65 185,20 175,65 " class="multilinestring vector" fill="none" stroke="#b02ee0" stroke-width="2" data-label="GeometryCollection"/>
 <path d="M185,135L185,85L135,135ZM175,125L175,110L160,125Z" class="multipolygon vector" stroke="black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8" data-label="GeometryCollection"/>
 <path d="M175,85L125,85L125,135ZM150,95L135,95L135,110Z" class="multipolygon vector" stroke="black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8" data-label="GeometryCollection"/>
 </g>
