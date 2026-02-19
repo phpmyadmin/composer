@@ -630,6 +630,8 @@ class DatabaseInterface
      *
      * @return mixed[]
      *
+     * @throws DatabasesFullInfoFailure
+     *
      * @todo    move into ListDatabase?
      */
     public function getDatabasesFull(
@@ -682,17 +684,7 @@ class DatabaseInterface
 
             $mysqlError = $this->getError($connectionType);
             if ($databases === [] && self::$errorNumber !== null) {
-                $errorMessage = Generator::mysqlDie($mysqlError, $sql, true);
-
-                $response = ResponseRenderer::getInstance();
-                if ($response->isAjax()) {
-                    $response->setRequestStatus(false);
-                    $response->addJSON('message', $errorMessage);
-                    $response->callExit();
-                }
-
-                $response->addHTML($errorMessage);
-                $response->callExit();
+                throw new DatabasesFullInfoFailure(Generator::mysqlDie($mysqlError, $sql, true));
             }
 
             // display only databases also in official database list

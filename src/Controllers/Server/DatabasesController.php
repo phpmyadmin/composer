@@ -10,6 +10,7 @@ use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
+use PhpMyAdmin\Dbal\DatabasesFullInfoFailure;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Query\Utilities;
@@ -98,15 +99,29 @@ final class DatabasesController implements InvocableController
          * Gets the databases list
          */
         if (Current::$server > 0) {
-            $this->databases = $this->dbi->getDatabasesFull(
-                null,
-                $this->hasStatistics,
-                ConnectionType::User,
-                $this->sortBy,
-                $this->sortOrder,
-                $position,
-                true,
-            );
+            try {
+                $this->databases = $this->dbi->getDatabasesFull(
+                    null,
+                    $this->hasStatistics,
+                    ConnectionType::User,
+                    $this->sortBy,
+                    $this->sortOrder,
+                    $position,
+                    true,
+                );
+            } catch (DatabasesFullInfoFailure $exception) {
+                if ($request->isAjax()) {
+                    $this->response->setRequestStatus(false);
+                    $this->response->addJSON('message', $exception->getMessage());
+
+                    return $this->response->response();
+                }
+
+                $this->response->addHTML($exception->getMessage());
+
+                return $this->response->response();
+            }
+
             $this->databaseCount = count($this->dbi->getDatabaseList());
         }
 
