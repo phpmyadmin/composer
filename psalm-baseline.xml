@@ -7750,7 +7750,7 @@
       <code>$tables[$i][self::TBL_NAME]</code>
       <code>$tables[$n][self::TBL_NAME]</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="27">
+    <MixedArrayAccess occurrences="28">
       <code>$analyses[$i][self::FORMATTEDSQL][$colCount]</code>
       <code>$analyses[$i][self::SIZES]</code>
       <code>$analyses[$i][self::TYPES]</code>
@@ -7768,6 +7768,7 @@
       <code>$tables[$i][self::COL_NAMES]</code>
       <code>$tables[$i][self::COL_NAMES]</code>
       <code>$tables[$i][self::COL_NAMES]</code>
+      <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
@@ -7894,13 +7895,15 @@
       <code>self::$registry[$schema][$table]</code>
       <code>self::$registry[$schema][$table]</code>
     </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="4">
+    <MixedArrayOffset occurrences="5">
+      <code>$columns['collations'][$key]</code>
       <code>$columns['sub_parts'][$key]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="20">
+    <MixedAssignment occurrences="21">
+      <code>$collation</code>
       <code>$column</code>
       <code>$column</code>
       <code>$data['columns'][]</code>
