@@ -1743,15 +1743,27 @@ class Util
             $fileSize = '5M';
         }
 
-        // Using error suppression operator because ini_parse_quantity() can throw a warning if the value is invalid
-        $size = @ini_parse_quantity($fileSize);
+        $size = self::getRealSize($fileSize);
         $postSize = ini_get('post_max_size');
 
         if ($postSize !== '' && $postSize !== false) {
-            $size = min($size, @ini_parse_quantity($postSize));
+            $size = min($size, self::getRealSize($postSize));
         }
 
         return $size;
+    }
+
+    /**
+     * Converts numbers like 10M into bytes
+     */
+    public static function getRealSize(string $size): int
+    {
+        if ($size === '') {
+            return 0;
+        }
+
+        // Using error suppression operator because ini_parse_quantity() can throw a warning if the value is invalid
+        return @ini_parse_quantity($size);
     }
 
     public static function unquoteDefaultValue(string $value): string
