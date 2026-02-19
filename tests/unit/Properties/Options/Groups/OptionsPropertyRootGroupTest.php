@@ -24,16 +24,6 @@ class OptionsPropertyRootGroupTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for contable interface
      */
     public function testCountable(): void

@@ -65,18 +65,6 @@ class ConfigTest extends AbstractTestCase
         return $config;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-        unset($this->permTestObj);
-    }
-
     public function testLoadConfigs(): void
     {
         $defaultConfig = $this->createConfig();

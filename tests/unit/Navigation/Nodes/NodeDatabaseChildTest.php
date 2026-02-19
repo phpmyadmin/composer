@@ -44,16 +44,6 @@ class NodeDatabaseChildTest extends AbstractTestCase
     }
 
     /**
-     * Tears down the fixture.
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Tests getHtmlForControlButtons() method
      */
     public function testGetHtmlForControlButtons(): void

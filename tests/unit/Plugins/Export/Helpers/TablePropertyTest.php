@@ -25,16 +25,6 @@ class TablePropertyTest extends AbstractTestCase
         $this->object = new TableProperty($row);
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testConstructor(): void
     {
         self::assertSame('name', $this->object->name);

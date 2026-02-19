@@ -47,13 +47,6 @@ class IndexesControllerTest extends AbstractTestCase
         UrlParams::$params = ['db' => 'db', 'server' => 1];
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-    }
-
     /**
      * Tests for displayFormAction()
      */

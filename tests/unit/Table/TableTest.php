@@ -318,13 +318,6 @@ class TableTest extends AbstractTestCase
         $this->mockedDbi = $dbi;
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-    }
-
     /**
      * Test for constructor
      */

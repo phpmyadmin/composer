@@ -39,17 +39,6 @@ class ConfigFileTest extends AbstractTestCase
     }
 
     /**
-     * TearDown function for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        $this->object->setConfigData([]);
-        unset($this->object);
-    }
-
-    /**
      * Test for new ConfigFile()
      */
     public function testNewObjectState(): void
