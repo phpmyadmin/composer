@@ -38,7 +38,7 @@ class VersionInformation
      */
     public function getLatestVersions(): array|null
     {
-        if (! Config::getInstance()->settings['VersionCheck']) {
+        if (! Config::getInstance()->config->VersionCheck) {
             return null;
         }
 

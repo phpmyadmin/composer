@@ -49,7 +49,6 @@ class VersionInformationTest extends AbstractTestCase
     public function testGetLatestVersion(): void
     {
         $this->setProxySettings();
-        Config::getInstance()->settings['VersionCheck'] = true;
         unset($_SESSION['cache']['version_check']);
         $versionInformation = new VersionInformation();
         $version = $versionInformation->getLatestVersions();
