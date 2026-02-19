@@ -10722,12 +10722,6 @@
     </MixedArrayAccess>
   </file>
   <file src="tests/unit/TransformationsTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[['ServerDefault' => 1, 'ActionLinksMode' => 'icons']]]></code>
-    </InvalidPropertyAssignmentValue>
     <PossiblyInvalidArgument>
       <code><![CDATA[testFixup]]></code>
       <code><![CDATA[testFixup]]></code>
