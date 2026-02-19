@@ -646,7 +646,7 @@ class DatabaseInterface
         $sortOrder = strtoupper($sortOrder);
 
         if ($limitCount === true) {
-            $limitCount = $this->config->settings['MaxDbList'];
+            $limitCount = $this->config->config->MaxDbList;
         }
 
         $applyLimitAndOrderManual = true;

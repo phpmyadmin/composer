@@ -9372,9 +9372,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$config->settings]]></code>
-    </InvalidPropertyAssignmentValue>
   </file>
   <file src="tests/unit/Controllers/PhpInfoControllerTest.php">
     <DeprecatedMethod>
