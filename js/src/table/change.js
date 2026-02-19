@@ -452,12 +452,11 @@ AJAX.registerTeardown('table/change.js', function () {
     $(document).off('change', '#insert_rows');
 
     // Reset grid edit state
-    $('table').each(function () {
-        var grid = $(this).data('pmaGrid');
-        if (grid && typeof grid.resetGridEditState === 'function') {
-            grid.resetGridEditState();
-        }
-    });
+    var grid = $('table.table_results').data('pmaGrid');
+
+    if (grid && typeof grid.resetGridEditState === 'function') {
+        grid.resetGridEditState();
+    }
 });
 
 /**
