@@ -9925,9 +9925,6 @@
       <code><![CDATA[testSetConfigParamsForDisplayTable]]></code>
       <code><![CDATA[testSetConfigParamsForDisplayTable]]></code>
     </PossiblyInvalidArgument>
-    <PropertyTypeCoercion>
-      <code><![CDATA[$config->settings]]></code>
-    </PropertyTypeCoercion>
   </file>
   <file src="tests/unit/EncodingTest.php">
     <DeprecatedMethod>

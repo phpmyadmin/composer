@@ -2681,7 +2681,7 @@ class Results
         // or transformation plugin is of non text type
         // such as image
         $isTypeBlob = $meta->isType(FieldMetadata::TYPE_BLOB);
-        $cfgProtectBinary = $this->config->settings['ProtectBinary'];
+        $cfgProtectBinary = $this->config->config->ProtectBinary;
         if (
             ($meta->isBinary()
             && (

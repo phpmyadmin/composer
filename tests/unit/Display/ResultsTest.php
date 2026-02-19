@@ -455,7 +455,7 @@ class ResultsTest extends AbstractTestCase
 
     /**
      * @return array<array{
-     *   string,
+     *   'blob'|'noblob'|'all',
      *   string|null,
      *   string,
      *   object,
@@ -587,15 +587,15 @@ class ResultsTest extends AbstractTestCase
     }
 
     /**
-     * @param string      $protectBinary    all|blob|noblob|no
-     * @param string|null $column           the relevant column in data row
-     * @param string      $class            the html class for column
-     * @param object      $meta             the meta-information about the field
-     * @param mixed[]     $map              the list of relations
-     * @param mixed[]     $urlParams        the parameters for generate url
-     * @param bool        $conditionField   the column should highlighted or not
-     * @param string[]    $transformOptions the transformation parameters
-     * @param string      $output           the output of this function
+     * @param 'blob'|'noblob'|'all' $protectBinary    all|blob|noblob|no
+     * @param string|null           $column           the relevant column in data row
+     * @param string                $class            the html class for column
+     * @param object                $meta             the meta-information about the field
+     * @param mixed[]               $map              the list of relations
+     * @param mixed[]               $urlParams        the parameters for generate url
+     * @param bool                  $conditionField   the column should highlighted or not
+     * @param string[]              $transformOptions the transformation parameters
+     * @param string                $output           the output of this function
      */
     #[DataProvider('dataProviderForTestGetDataCellForNonNumericColumns')]
     public function testGetDataCellForNonNumericColumns(
@@ -614,7 +614,7 @@ class ResultsTest extends AbstractTestCase
         $_SESSION['tmpval']['display_blob'] = false;
         $_SESSION['tmpval']['relational_display'] = false;
         $config = Config::getInstance();
-        $config->settings['ProtectBinary'] = $protectBinary;
+        $config->set('ProtectBinary', $protectBinary);
         $statementInfo = new StatementInfo(new Parser(), null, new StatementFlags(), [], []);
         self::assertStringContainsString(
             $output,
