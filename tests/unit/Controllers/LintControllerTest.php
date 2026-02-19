@@ -11,6 +11,7 @@ use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 use function json_encode;
@@ -113,6 +114,6 @@ final class LintControllerTest extends AbstractTestCase
 
     private function getLintController(): LintController
     {
-        return new LintController(ResponseFactory::create());
+        return new LintController(ResponseFactory::create(), new ResponseRenderer());
     }
 }

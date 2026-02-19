@@ -14,7 +14,6 @@ use PhpMyAdmin\Exceptions\AuthenticationFailure;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Util;
 use RuntimeException;
 
@@ -41,21 +40,20 @@ class AuthenticationSignon extends AuthenticationPlugin
      */
     public function showLoginForm(): Response
     {
-        $responseRenderer = ResponseRenderer::getInstance();
         unset($_SESSION['LAST_SIGNON_URL']);
         $config = Config::getInstance();
         if (empty($config->selectedServer['SignonURL'])) {
-            $responseRenderer->addHTML($this->template->render('error/generic', [
+            $this->responseRenderer->addHTML($this->template->render('error/generic', [
                 'lang' => Current::$lang,
                 'error_message' => 'You must set SignonURL!',
             ]));
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         return ResponseFactory::create()->createResponse(StatusCodeInterface::STATUS_FOUND)->withHeader(
             'Location',
-            $responseRenderer->fixRelativeUrlForRedirect($config->selectedServer['SignonURL']),
+            $this->responseRenderer->fixRelativeUrlForRedirect($config->selectedServer['SignonURL']),
         );
     }
 

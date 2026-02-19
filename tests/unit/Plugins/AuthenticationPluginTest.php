@@ -39,8 +39,11 @@ final class AuthenticationPluginTest extends AbstractTestCase
         );
         $dbiDummy->addResult('SELECT CURRENT_USER();', [['test_user@localhost']]);
         DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
 
-        $object = new class extends AuthenticationPlugin {
+        $object = new class ($responseRenderer) extends AuthenticationPlugin {
             public function showLoginForm(): Response|null
             {
                 return null;
@@ -66,9 +69,6 @@ final class AuthenticationPluginTest extends AbstractTestCase
             RelationParameters::USER_CONFIG => 'pma__userconfig',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        $responseRenderer = ResponseRenderer::getInstance();
-        $responseRenderer->setAjax(false);
 
         $request = ServerRequestFactory::create()->createServerRequest('GET', 'http://example.com/');
 
@@ -101,8 +101,11 @@ final class AuthenticationPluginTest extends AbstractTestCase
             ['config_data', 'ts'],
         );
         DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
+        $responseRenderer = ResponseRenderer::getInstance();
+        $responseRenderer->setAjax(false);
 
-        $object = new class extends AuthenticationPlugin {
+        $object = new class ($responseRenderer) extends AuthenticationPlugin {
             public function showLoginForm(): Response|null
             {
                 return null;
@@ -128,9 +131,6 @@ final class AuthenticationPluginTest extends AbstractTestCase
             RelationParameters::USER_CONFIG => 'pma__userconfig',
         ]);
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, $relationParameters);
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
-        $responseRenderer = ResponseRenderer::getInstance();
-        $responseRenderer->setAjax(false);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'http://example.com/')
             ->withParsedBody(['2fa_confirm' => '1']);

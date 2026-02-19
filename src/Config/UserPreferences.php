@@ -11,10 +11,8 @@ use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
-use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Identifiers\DatabaseName;
 use PhpMyAdmin\Message;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -266,18 +264,16 @@ readonly class UserPreferences
     }
 
     /**
-     * Redirects after saving new user preferences
+     * Get URL to redirect after saving new user preferences.
      *
      * @param string       $fileName Filename
      * @param mixed[]|null $params   URL parameters
      * @param string|null  $hash     Hash value
+     *
+     * @return non-empty-string
      */
-    public function redirect(
-        string $fileName,
-        array|null $params = null,
-        string|null $hash = null,
-    ): Response {
-        // redirect
+    public function getUrlToRedirect(string $fileName, array|null $params = null, string|null $hash = null): string
+    {
         $urlParams = ['saved' => 1];
         if (is_array($params)) {
             $urlParams = array_merge($params, $urlParams);
@@ -287,12 +283,7 @@ readonly class UserPreferences
             $hash = '#' . urlencode($hash);
         }
 
-        $responseRenderer = ResponseRenderer::getInstance();
-        $responseRenderer->redirect(
-            './' . $fileName . Url::getCommonRaw($urlParams, ! str_contains($fileName, '?') ? '?' : '&') . $hash,
-        );
-
-        return $responseRenderer->response();
+        return './' . $fileName . Url::getCommonRaw($urlParams, ! str_contains($fileName, '?') ? '?' : '&') . $hash;
     }
 
     /**

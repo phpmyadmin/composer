@@ -11,19 +11,20 @@ use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 
 #[Route('/logout', ['GET', 'POST'])]
-final class LogoutController implements InvocableController
+final readonly class LogoutController implements InvocableController
 {
-    public function __construct(private readonly AuthenticationPluginFactory $authPluginFactory)
-    {
+    public function __construct(
+        private AuthenticationPluginFactory $authPluginFactory,
+        private ResponseRenderer $responseRenderer,
+    ) {
     }
 
     public function __invoke(ServerRequest $request): Response
     {
-        $responseRenderer = ResponseRenderer::getInstance();
         if (! $request->isPost()) {
-            $responseRenderer->redirect('./index.php?route=/');
+            $this->responseRenderer->redirect('./index.php?route=/');
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         $authPlugin = $this->authPluginFactory->create();

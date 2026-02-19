@@ -96,6 +96,7 @@ class ImportControllerTest extends AbstractTestCase
             $template,
             $bookmarkRepository,
             $config,
+            $responseRenderer,
         );
 
         $importController = new ImportController(

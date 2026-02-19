@@ -11,11 +11,9 @@ use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Exceptions\AuthenticationFailure;
 use PhpMyAdmin\Exceptions\ExitException;
 use PhpMyAdmin\Plugins\Auth\AuthenticationSignon;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Tests\AbstractTestCase;
-use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseRendererStub;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
-use ReflectionProperty;
 
 use function session_get_cookie_params;
 use function session_id;
@@ -40,7 +38,7 @@ class AuthenticationSignonTest extends AbstractTestCase
         DatabaseInterface::$instance = $this->createDatabaseInterface();
         Current::$database = 'db';
         Current::$table = 'table';
-        $this->object = new AuthenticationSignon();
+        $this->object = new AuthenticationSignon(new ResponseRenderer());
     }
 
     /**
@@ -56,19 +54,17 @@ class AuthenticationSignonTest extends AbstractTestCase
     public function testAuth(): void
     {
         Current::$server = 0;
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
         Config::getInstance()->selectedServer['SignonURL'] = '';
         $_REQUEST = [];
-        ResponseRenderer::getInstance()->setAjax(false);
+        $responseRenderer = new ResponseRenderer();
+        $responseRenderer->setAjax(false);
+        $this->object = new AuthenticationSignon($responseRenderer);
         $response = $this->object->showLoginForm();
         self::assertStringContainsString('You must set SignonURL!', (string) $response->getBody());
     }
 
     public function testAuthLogoutURL(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $config = Config::getInstance();
         $config->selectedServer['SignonURL'] = 'https://example.com/SignonURL';
         $config->selectedServer['LogoutURL'] = 'https://example.com/logoutURL';
@@ -81,9 +77,6 @@ class AuthenticationSignonTest extends AbstractTestCase
 
     public function testAuthLogout(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $config = Config::getInstance();
         $config->selectedServer['SignonURL'] = 'https://example.com/SignonURL';
         $config->selectedServer['LogoutURL'] = '';
@@ -130,9 +123,6 @@ class AuthenticationSignonTest extends AbstractTestCase
     public function testAuthCheckToken(): void
     {
         $_SESSION = [' PMA_token ' => 'eefefef'];
-
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
 
         $config = Config::getInstance();
         $config->selectedServer = (new Server([

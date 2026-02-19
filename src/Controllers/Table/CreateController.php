@@ -6,7 +6,6 @@ namespace PhpMyAdmin\Controllers\Table;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\InvocableController;
-use PhpMyAdmin\Core;
 use PhpMyAdmin\CreateAddField;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
@@ -16,6 +15,7 @@ use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Table\ColumnsDefinition;
+use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPrivilegesFactory;
@@ -32,15 +32,16 @@ use function strlen;
  * Displays table create form and handles it.
  */
 #[Route('/table/create', ['GET', 'POST'])]
-final class CreateController implements InvocableController
+final readonly class CreateController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Transformations $transformations,
-        private readonly Config $config,
-        private readonly DatabaseInterface $dbi,
-        private readonly ColumnsDefinition $columnsDefinition,
-        private readonly UserPrivilegesFactory $userPrivilegesFactory,
+        private ResponseRenderer $response,
+        private Transformations $transformations,
+        private Config $config,
+        private DatabaseInterface $dbi,
+        private ColumnsDefinition $columnsDefinition,
+        private UserPrivilegesFactory $userPrivilegesFactory,
+        private Template $template,
     ) {
     }
 
@@ -58,22 +59,43 @@ final class CreateController implements InvocableController
          * Selects the database to work with
          */
         if (! $this->dbi->selectDb(Current::$database)) {
-            Generator::mysqlDie(
+            $errorMessage = Generator::mysqlDie(
                 sprintf(__('\'%s\' database does not exist.'), htmlspecialchars(Current::$database)),
                 '',
                 false,
-                'index.php',
             );
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage . Generator::getBackUrlHtml(Url::getFromRoute('/')));
+
+            return $this->response->response();
         }
 
         if ($this->dbi->getColumns(Current::$database, Current::$table) !== []) {
             // table exists already
-            Generator::mysqlDie(
+            $errorMessage = Generator::mysqlDie(
                 sprintf(__('Table %s already exists!'), htmlspecialchars(Current::$table)),
                 '',
                 false,
-                Url::getFromRoute('/database/structure', ['db' => Current::$database]),
             );
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $backUrl = Url::getFromRoute('/database/structure', ['db' => Current::$database]);
+            $this->response->addHTML($errorMessage . Generator::getBackUrlHtml($backUrl));
+
+            return $this->response->response();
         }
 
         $createAddField = new CreateAddField($this->dbi);
@@ -93,7 +115,10 @@ final class CreateController implements InvocableController
 
             // If there is a request for SQL previewing.
             if (isset($_POST['preview_sql'])) {
-                Core::previewSQL(Current::$sqlQuery);
+                $this->response->addJSON(
+                    'sql_data',
+                    $this->template->render('components/_preview_sql', ['query_data' => Current::$sqlQuery]),
+                );
 
                 return $this->response->response();
             }

@@ -9,20 +9,15 @@ use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
 use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Tests\AbstractTestCase;
-use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseRendererStub;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
-use ReflectionProperty;
 
 #[CoversClass(LogoutController::class)]
-class LogoutControllerTest extends AbstractTestCase
+final class LogoutControllerTest extends AbstractTestCase
 {
     public function testValidLogout(): void
     {
-        $responseStub = new ResponseRendererStub();
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, $responseStub);
-
         $request = self::createStub(ServerRequest::class);
         $request->method('isPost')->willReturn(true);
 
@@ -34,10 +29,8 @@ class LogoutControllerTest extends AbstractTestCase
         $factory = self::createStub(AuthenticationPluginFactory::class);
         $factory->method('create')->willReturn($authPlugin);
 
-        $response = (new LogoutController($factory))($request);
+        $response = (new LogoutController($factory, new ResponseRenderer()))($request);
 
         self::assertSame($expectedResponse, $response);
-
-        (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);
     }
 }

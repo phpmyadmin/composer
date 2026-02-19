@@ -26,7 +26,7 @@ use function substr;
  */
 class ResponseRenderer
 {
-    private static ResponseRenderer|null $instance = null;
+    private static self|null $instance = null;
 
     /**
      * HTML data to be used in the response
@@ -154,29 +154,29 @@ class ResponseRenderer
         $this->isAjax = $isAjax;
     }
 
-    /**
-     * Returns the singleton object
-     */
-    public static function getInstance(): ResponseRenderer
-    {
+    public static function getInstance(
+        Config|null $config = null,
+        Template|null $template = null,
+        Header|null $header = null,
+        Footer|null $footer = null,
+        ErrorHandler|null $errorHandler = null,
+        DatabaseInterface|null $dbi = null,
+        ResponseFactory|null $responseFactory = null,
+    ): self {
         if (self::$instance !== null) {
             return self::$instance;
         }
 
-        $header = ContainerBuilder::getContainer()->get(Header::class);
+        $container = ContainerBuilder::getContainer();
 
-        $config = Config::getInstance();
-        $template = new Template($config);
-        $dbi = DatabaseInterface::getInstance();
-
-        self::$instance = new ResponseRenderer(
-            $config,
-            $template,
-            $header,
-            new Footer($template, $config),
-            ErrorHandler::getInstance(),
-            $dbi,
-            ResponseFactory::create(),
+        self::$instance = new self(
+            $config ?? $container->get(Config::class),
+            $template ?? $container->get(Template::class),
+            $header ?? $container->get(Header::class),
+            $footer ?? $container->get(Footer::class),
+            $errorHandler ?? $container->get(ErrorHandler::class),
+            $dbi ?? $container->get(DatabaseInterface::class),
+            $responseFactory ?? $container->get(ResponseFactory::class),
         );
 
         return self::$instance;
@@ -244,7 +244,7 @@ class ResponseRenderer
     private function getDisplay(): string
     {
         return $this->template->render('base', [
-            'header' => $this->header->getDisplay(),
+            'header' => $this->header->getDisplay($this),
             'content' => $this->HTML,
             'footer' => $this->footer->getDisplay(),
         ]);

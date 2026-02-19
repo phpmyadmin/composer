@@ -22,6 +22,7 @@ use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\NumberPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ImportPluginProperties;
+use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Util;
 
 use function __;
@@ -677,12 +678,17 @@ class ImportCsv extends AbstractImportCsv
         // If there is an error in the parameters entered,
         // indicate that immediately.
         if ($paramError) {
-            Generator::mysqlDie(
-                Current::$message->getMessage(),
-                '',
-                false,
-                $errUrl,
-            );
+            $errorMessage = Generator::mysqlDie(Current::$message->getMessage(), '', false);
+
+            $response = ResponseRenderer::getInstance();
+            if ($response->isAjax()) {
+                $response->setRequestStatus(false);
+                $response->addJSON('message', $errorMessage);
+                $response->callExit();
+            }
+
+            $response->addHTML($errorMessage . Generator::getBackUrlHtml($errUrl));
+            $response->callExit();
         }
 
         return [Import::$hasError, Current::$message];

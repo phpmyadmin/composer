@@ -26,8 +26,12 @@ use function session_id;
  * GET Requests would never have token and therefore checking
  * mismatch does not make sense.
  */
-final class TokenRequestParamChecking implements MiddlewareInterface
+final readonly class TokenRequestParamChecking implements MiddlewareInterface
 {
+    public function __construct(private ResponseRenderer $responseRenderer)
+    {
+    }
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         assert($request instanceof ServerRequest);
@@ -60,11 +64,10 @@ final class TokenRequestParamChecking implements MiddlewareInterface
 
         if ($request->isAjax()) {
             // There is no point in even attempting to process an ajax request if there is a token mismatch
-            $responseRenderer = ResponseRenderer::getInstance();
-            $responseRenderer->setRequestStatus(false);
-            $responseRenderer->addJSON('message', Message::error(__('Error: Token mismatch')));
+            $this->responseRenderer->setRequestStatus(false);
+            $this->responseRenderer->addJSON('message', Message::error(__('Error: Token mismatch')));
 
-            return $responseRenderer->response();
+            return $this->responseRenderer->response();
         }
 
         /**

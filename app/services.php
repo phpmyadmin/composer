@@ -30,6 +30,7 @@ use PhpMyAdmin\Export\OutputHandler;
 use PhpMyAdmin\Export\TemplateModel;
 use PhpMyAdmin\FileListing;
 use PhpMyAdmin\FlashMessenger;
+use PhpMyAdmin\Footer;
 use PhpMyAdmin\Header;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Middleware;
@@ -63,6 +64,7 @@ use PhpMyAdmin\Tracking\Tracking;
 use PhpMyAdmin\Tracking\TrackingChecker;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Triggers\Triggers;
+use PhpMyAdmin\UrlRedirector;
 use PhpMyAdmin\UserPassword;
 use PhpMyAdmin\UserPrivilegesFactory;
 use PhpMyAdmin\Utils\HttpRequest;
@@ -72,13 +74,19 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 return [
     Advisor::class => ['class' => Advisor::class, 'arguments' => [DatabaseInterface::class, ExpressionLanguage::class]],
-    Application::class => ['class' => Application::class, 'arguments' => [ResponseFactory::class]],
+    Application::class => [
+        'class' => Application::class,
+        'arguments' => [ResponseFactory::class, ResponseRenderer::class],
+    ],
     BrowseForeigners::class => [
         'class' => BrowseForeigners::class,
         'arguments' => [Template::class, Config::class, ThemeManager::class],
     ],
     Config::class => ['class' => Config::class, 'factory' => [Config::class, 'getInstance']],
-    Config\PageSettings::class => ['class' => Config\PageSettings::class, 'arguments' => [UserPreferences::class]],
+    Config\PageSettings::class => [
+        'class' => Config\PageSettings::class,
+        'arguments' => [UserPreferences::class, ResponseRenderer::class],
+    ],
     CentralColumns::class => ['class' => CentralColumns::class, 'arguments' => [DatabaseInterface::class]],
     CreateAddField::class => ['class' => CreateAddField::class, 'arguments' => [DatabaseInterface::class]],
     DatabaseInterface::class => [
@@ -138,6 +146,7 @@ return [
             FileListing::class,
             Template::class,
             Config::class,
+            ResponseRenderer::class,
         ],
     ],
     Middleware\ErrorHandling::class => [
@@ -172,7 +181,10 @@ return [
         'class' => Middleware\UrlParamsSetting::class,
         'arguments' => [Config::class],
     ],
-    Middleware\TokenRequestParamChecking::class => ['class' => Middleware\TokenRequestParamChecking::class],
+    Middleware\TokenRequestParamChecking::class => [
+        'class' => Middleware\TokenRequestParamChecking::class,
+        'arguments' => [ResponseRenderer::class],
+    ],
     Middleware\DatabaseAndTableSetting::class => ['class' => Middleware\DatabaseAndTableSetting::class],
     Middleware\SqlQueryGlobalSetting::class => ['class' => Middleware\SqlQueryGlobalSetting::class],
     Middleware\LanguageLoading::class => ['class' => Middleware\LanguageLoading::class],
@@ -191,15 +203,15 @@ return [
     Middleware\ThemeInitialization::class => ['class' => Middleware\ThemeInitialization::class],
     Middleware\UrlRedirection::class => [
         'class' => Middleware\UrlRedirection::class,
-        'arguments' => [Template::class, ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [UrlRedirector::class, UserPreferencesHandler::class],
     ],
     Middleware\SetupPageRedirection::class => [
         'class' => Middleware\SetupPageRedirection::class,
-        'arguments' => [Config::class, ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [Config::class, ResponseFactory::class, UserPreferencesHandler::class, ResponseRenderer::class],
     ],
     Middleware\MinimumCommonRedirection::class => [
         'class' => Middleware\MinimumCommonRedirection::class,
-        'arguments' => [ResponseFactory::class, UserPreferencesHandler::class],
+        'arguments' => [ResponseFactory::class, UserPreferencesHandler::class, ResponseRenderer::class],
     ],
     Middleware\LanguageAndThemeCookieSaving::class => [
         'class' => Middleware\LanguageAndThemeCookieSaving::class,
@@ -231,9 +243,12 @@ return [
     ],
     Middleware\ResponseRendererLoading::class => [
         'class' => Middleware\ResponseRendererLoading::class,
-        'arguments' => [Config::class],
+        'arguments' => [Config::class, ResponseRenderer::class],
     ],
-    Middleware\ProfilingChecking::class => ['class' => Middleware\ProfilingChecking::class],
+    Middleware\ProfilingChecking::class => [
+        'class' => Middleware\ProfilingChecking::class,
+        'arguments' => [ResponseRenderer::class, DatabaseInterface::class],
+    ],
     Middleware\UserPreferencesLoading::class => [
         'class' => Middleware\UserPreferencesLoading::class,
         'arguments' => [UserPreferencesHandler::class],
@@ -260,7 +275,10 @@ return [
     ],
     OutputHandler::class => ['class' => OutputHandler::class],
     Maintenance::class => ['class' => Maintenance::class, 'arguments' => [DatabaseInterface::class]],
-    AuthenticationPluginFactory::class => ['class' => AuthenticationPluginFactory::class],
+    AuthenticationPluginFactory::class => [
+        'class' => AuthenticationPluginFactory::class,
+        'arguments' => [ResponseRenderer::class],
+    ],
     Relation::class => ['class' => Relation::class, 'arguments' => [DatabaseInterface::class, Config::class]],
     RelationCleanup::class => [
         'class' => RelationCleanup::class,
@@ -271,6 +289,15 @@ return [
     ResponseRenderer::class => [
         'class' => ResponseRenderer::class,
         'factory' => [ResponseRenderer::class, 'getInstance'],
+        'arguments' => [
+            Config::class,
+            Template::class,
+            Header::class,
+            Footer::class,
+            ErrorHandler::class,
+            DatabaseInterface::class,
+            ResponseFactory::class,
+        ],
     ],
     Routines::class => ['class' => Routines::class, 'arguments' => [DatabaseInterface::class, Config::class]],
     Plugins::class => ['class' => Plugins::class, 'arguments' => [DatabaseInterface::class]],
@@ -296,6 +323,7 @@ return [
             Template::class,
             BookmarkRepository::class,
             Config::class,
+            ResponseRenderer::class,
         ],
     ],
     SqlQueryForm::class => [
@@ -380,4 +408,9 @@ return [
     ],
     LanguageManager::class => ['class' => LanguageManager::class, 'factory' => [LanguageManager::class, 'getInstance']],
     ClockInterface::class => ['class' => Clock::class],
+    Footer::class => ['class' => Footer::class, 'arguments' => [Template::class, Config::class]],
+    UrlRedirector::class => [
+        'class' => UrlRedirector::class,
+        'arguments' => [ResponseRenderer::class, Template::class, ResponseFactory::class],
+    ],
 ];

@@ -2020,7 +2020,7 @@ parameters:
 			path: src/Controllers/Import/ImportController.php
 
 		-
-			message: '#^Parameter \#4 \$backUrl of static method PhpMyAdmin\\Html\\Generator\:\:mysqlDie\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#1 \$backUrl of static method PhpMyAdmin\\Html\\Generator\:\:getBackUrlHtml\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Import/ImportController.php
@@ -2206,7 +2206,7 @@ parameters:
 			path: src/Controllers/Preferences/ManageController.php
 
 		-
-			message: '#^Parameter \#1 \$fileName of method PhpMyAdmin\\Config\\UserPreferences\:\:redirect\(\) expects string, string\|false given\.$#'
+			message: '#^Parameter \#1 \$fileName of method PhpMyAdmin\\Config\\UserPreferences\:\:getUrlToRedirect\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Preferences/ManageController.php
@@ -6974,15 +6974,6 @@ parameters:
 
 		-
 			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Http/Middleware/ProfilingChecking.php
-
-		-
-			message: '''
 				#^Access to deprecated static property \$route of class PhpMyAdmin\\Routing\\Routing\:
 				Use \{@see ServerRequest\:\:getRoute\(\)\} instead\.$#
 			'''
@@ -10816,24 +10807,6 @@ parameters:
 			path: src/Replication/ReplicationInfo.php
 
 		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/ResponseRenderer.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
-			path: src/ResponseRenderer.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
@@ -13018,12 +12991,6 @@ parameters:
 			path: src/UserPassword.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/UserPassword.php
-
-		-
 			message: '#^Parameter \#1 \$password of method PhpMyAdmin\\Server\\Privileges\:\:getHashedPassword\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -14220,7 +14187,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 7
 			path: tests/unit/Config/UserPreferencesTest.php
 
 		-
@@ -14229,7 +14196,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 8
+			count: 7
 			path: tests/unit/Config/UserPreferencesTest.php
 
 		-

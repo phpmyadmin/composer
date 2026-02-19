@@ -16,11 +16,11 @@ use PhpMyAdmin\EditField;
 use PhpMyAdmin\FileListing;
 use PhpMyAdmin\InsertEdit;
 use PhpMyAdmin\InsertEditColumn;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Table\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\TypeClass;
 use PhpMyAdmin\Url;
@@ -79,24 +79,13 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $this->dbi->setVersion([
             '@@version' => '10.9.3-MariaDB-1:10.9.3+maria~ubu2204',
             '@@version_comment' => 'mariadb.org binary distribution',
         ]);
-    }
-
-    /**
-     * Teardown all objects
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        $response = new ReflectionProperty(ResponseRenderer::class, 'instance');
-        $response->setValue(null, null);
-        DatabaseInterface::$instance = null;
     }
 
     /**
@@ -194,6 +183,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
         $result = $this->callFunction(
             $this->insertEdit,
@@ -241,6 +231,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = $this->callFunction(
@@ -278,6 +269,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = $this->callFunction(
@@ -995,6 +987,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $currentRow['f'] = '123';
@@ -1203,6 +1196,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
         $this->insertEdit->setSessionForEditNext('`a` = 2');
 
@@ -1286,6 +1280,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
         $result = $this->insertEdit->executeSqlQuery($query);
 
@@ -1310,6 +1305,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
         $result = $this->insertEdit->executeSqlQuery($query);
 
@@ -1344,6 +1340,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = (array) $this->callFunction(
@@ -1397,6 +1394,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = $this->insertEdit->getDisplayValueForForeignTableColumn('=1', $map, 'f');
@@ -2136,6 +2134,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $this->insertEdit->verifyWhetherValueCanBeTruncatedAndAppendExtraData('db', 'table', 'a', $extraData);
@@ -2186,6 +2185,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = $this->insertEdit->getTableColumns('db', 'table');
@@ -2220,15 +2220,6 @@ class InsertEditTest extends AbstractTestCase
         $_POST['after_insert'] = 'edit_next';
         $_POST['default_action'] = 'insert';
 
-        $responseMock = $this->getMockBuilder(ResponseRenderer::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['addHtml'])
-            ->getMock();
-
-        $restoreInstance = ResponseRenderer::getInstance();
-        $response = new ReflectionProperty(ResponseRenderer::class, 'instance');
-        $response->setValue(null, $responseMock);
-
         $config = Config::getInstance();
         $relation = new Relation($dbi);
         $this->insertEdit = new InsertEdit(
@@ -2238,6 +2229,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         $result = $this->insertEdit->determineInsertOrEdit('1', 'db', 'table');
@@ -2253,8 +2245,6 @@ class InsertEditTest extends AbstractTestCase
         $_POST['default_action'] = '';
 
         $result = $this->insertEdit->determineInsertOrEdit(null, 'db', 'table');
-
-        $response->setValue(null, $restoreInstance);
 
         self::assertSame(
             [true, null, $resultStub, [[], []], false, 'edit_next'],
@@ -2292,6 +2282,7 @@ class InsertEditTest extends AbstractTestCase
             new FileListing(),
             new Template($config),
             $config,
+            new ResponseRenderer(),
         );
 
         self::assertSame(

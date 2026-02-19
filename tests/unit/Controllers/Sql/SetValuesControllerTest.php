@@ -72,6 +72,7 @@ class SetValuesControllerTest extends AbstractTestCase
             $template,
             $bookmarkRepository,
             $config,
+            $responseRenderer,
         );
 
         $sqlController = new SetValuesController($responseRenderer, $template, $sql);
@@ -134,6 +135,7 @@ class SetValuesControllerTest extends AbstractTestCase
             $template,
             $bookmarkRepository,
             $config,
+            $responseRenderer,
         );
 
         $sqlController = new SetValuesController($responseRenderer, $template, $sql);

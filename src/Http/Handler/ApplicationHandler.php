@@ -14,9 +14,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function assert;
 
-final class ApplicationHandler implements RequestHandlerInterface
+final readonly class ApplicationHandler implements RequestHandlerInterface
 {
-    public function __construct(private readonly Application $application)
+    public function __construct(private Application $application, private ResponseRenderer $responseRenderer)
     {
     }
 
@@ -26,7 +26,7 @@ final class ApplicationHandler implements RequestHandlerInterface
         try {
             return $this->application->handle($request);
         } catch (ExitException) {
-            return ResponseRenderer::getInstance()->response();
+            return $this->responseRenderer->response();
         }
     }
 }

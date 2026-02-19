@@ -119,6 +119,7 @@ readonly class SqlController implements InvocableController
         [$statementInfo, Current::$database, $tableFromSql] = ParseAnalyze::sqlQuery(
             Current::$sqlQuery,
             Current::$database,
+            $request->isAjax(),
         );
 
         if (Current::$table != $tableFromSql && $tableFromSql !== '') {
@@ -133,12 +134,22 @@ readonly class SqlController implements InvocableController
          * into account this case.
          */
         if ($this->sql->hasNoRightsToDropDatabase($statementInfo)) {
-            Generator::mysqlDie(
+            $errorMessage = Generator::mysqlDie(
                 __('"DROP DATABASE" statements are disabled.'),
                 '',
                 false,
-                $errorUrl,
             );
+
+            if ($this->response->isAjax()) {
+                $this->response->setRequestStatus(false);
+                $this->response->addJSON('message', $errorMessage);
+
+                return $this->response->response();
+            }
+
+            $this->response->addHTML($errorMessage . Generator::getBackUrlHtml($errorUrl));
+
+            return $this->response->response();
         }
 
         /**

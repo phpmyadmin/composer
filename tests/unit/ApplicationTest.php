@@ -9,6 +9,7 @@ use PhpMyAdmin\Config;
 use PhpMyAdmin\Container\ContainerBuilder;
 use PhpMyAdmin\Exceptions\ConfigException;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
+use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Template;
 use PHPUnit\Framework\Attributes\BackupStaticProperties;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -18,6 +19,7 @@ final class ApplicationTest extends AbstractTestCase
 {
     public function testInit(): void
     {
+        ContainerBuilder::$container = null;
         $application = ContainerBuilder::getContainer()->get(Application::class);
         self::assertSame($application, Application::init());
     }
@@ -39,7 +41,7 @@ final class ApplicationTest extends AbstractTestCase
             'error_message' => 'Failed to load phpMyAdmin configuration.',
         ]);
 
-        $application = new Application(ResponseFactory::create());
+        $application = new Application(ResponseFactory::create(), self::createStub(ResponseRenderer::class));
         $application->run();
 
         $output = $this->getActualOutputForAssertion();

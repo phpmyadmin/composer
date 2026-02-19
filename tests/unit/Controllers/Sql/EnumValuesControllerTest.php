@@ -72,6 +72,7 @@ class EnumValuesControllerTest extends AbstractTestCase
             $template,
             $bookmarkRepository,
             $config,
+            $responseRenderer,
         );
 
         $sqlController = new EnumValuesController($responseRenderer, $template, $sql);
@@ -134,6 +135,7 @@ class EnumValuesControllerTest extends AbstractTestCase
             $template,
             $bookmarkRepository,
             $config,
+            $responseRenderer,
         );
 
         $sqlController = new EnumValuesController($responseRenderer, $template, $sql);

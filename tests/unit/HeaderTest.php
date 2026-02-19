@@ -19,6 +19,7 @@ use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\Clock\MockClock;
+use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Theme\ThemeManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -102,7 +103,7 @@ class HeaderTest extends AbstractTestCase
         $header = new Header($template, $console, $config, $dbi, $relation, $userPreferences, $userPreferencesHandler);
 
         $header->setBodyId('PMA_header_id');
-        $actual = $header->getDisplay();
+        $actual = $header->getDisplay(new ResponseRenderer());
         $expected = [
             'lang' => 'en',
             'allow_third_party_framing' => false,

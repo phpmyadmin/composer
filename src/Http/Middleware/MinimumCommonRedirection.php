@@ -23,6 +23,7 @@ final readonly class MinimumCommonRedirection implements MiddlewareInterface
     public function __construct(
         private ResponseFactory $responseFactory,
         private UserPreferencesHandler $userPreferencesHandler,
+        private ResponseRenderer $responseRenderer,
     ) {
     }
 
@@ -44,7 +45,7 @@ final readonly class MinimumCommonRedirection implements MiddlewareInterface
                 $this->responseFactory,
             );
         } catch (ExitException) {
-            return ResponseRenderer::getInstance()->response();
+            return $this->responseRenderer->response();
         }
     }
 

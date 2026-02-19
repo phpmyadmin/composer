@@ -364,7 +364,7 @@
   </file>
   <file src="src/Config/PageSettings.php">
     <ArgumentTypeCoercion>
-      <code><![CDATA[$response->getSelfUrl()]]></code>
+      <code><![CDATA[$this->responseRenderer->getSelfUrl()]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
@@ -2247,6 +2247,7 @@
   <file src="src/Controllers/Table/GetFieldController.php">
     <MixedArgument>
       <code><![CDATA[Current::$database]]></code>
+      <code><![CDATA[Current::$table]]></code>
       <code><![CDATA[Current::$table]]></code>
     </MixedArgument>
     <PossiblyInvalidArgument>
@@ -4854,9 +4855,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Http/Middleware/ProfilingChecking.php">
-    <DeprecatedMethod>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Http/Middleware/RequestProblemChecking.php">
     <PossiblyUnusedMethod>
@@ -5793,9 +5794,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <UnsafeInstantiation>
-      <code><![CDATA[new $class()]]></code>
-    </UnsafeInstantiation>
   </file>
   <file src="src/Plugins/Export/ExportCodegen.php">
     <PossiblyNullArgument>
@@ -7320,10 +7318,6 @@
     </MixedArgument>
   </file>
   <file src="src/ResponseRenderer.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$params]]></code>
     </MixedArgumentTypeCoercion>
@@ -8179,10 +8173,6 @@
       <code><![CDATA[$column['Extra']]]></code>
       <code><![CDATA[$existrelForeign[$masterFieldMd5]->refTableName]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullOperand>
-      <code><![CDATA[Generator::mysqlDie($tmpErrorCreate, $createQuery, false, '', false)]]></code>
-      <code><![CDATA[Generator::mysqlDie($tmpErrorDrop, $dropQuery, false, '', false)]]></code>
-    </PossiblyNullOperand>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[true|Message]]></code>
     </PossiblyUnusedReturnValue>
@@ -8998,8 +8988,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>

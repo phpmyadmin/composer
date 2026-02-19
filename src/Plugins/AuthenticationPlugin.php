@@ -51,7 +51,7 @@ abstract class AuthenticationPlugin
 
     public Template $template;
 
-    public function __construct()
+    final public function __construct(protected readonly ResponseRenderer $responseRenderer)
     {
         $this->ipAllowDeny = new IpAllowDeny();
         $this->template = new Template(Config::getInstance());
@@ -131,7 +131,6 @@ abstract class AuthenticationPlugin
             }
         }
 
-        $response = ResponseRenderer::getInstance();
         if ($server === 0) {
             /* delete user's choices that were stored in session */
             if (! defined('TESTSUITE')) {
@@ -140,16 +139,16 @@ abstract class AuthenticationPlugin
             }
 
             /* Redirect to login form (or configured URL) */
-            $response->redirect($redirectUrl);
+            $this->responseRenderer->redirect($redirectUrl);
 
-            return $response->response();
+            return $this->responseRenderer->response();
         }
 
         /* Redirect to other authenticated server */
         $_SESSION['partial_logout'] = true;
-        $response->redirect('./index.php?route=/' . Url::getCommonRaw(['server' => $server], '&'));
+        $this->responseRenderer->redirect('./index.php?route=/' . Url::getCommonRaw(['server' => $server], '&'));
 
-        return $response->response();
+        return $this->responseRenderer->response();
     }
 
     /**
@@ -307,22 +306,21 @@ abstract class AuthenticationPlugin
             return null;
         }
 
-        $responseRenderer = ResponseRenderer::getInstance();
-        if ($responseRenderer->loginPage()) {
-            return $responseRenderer->response();
+        if ($this->responseRenderer->loginPage()) {
+            return $this->responseRenderer->response();
         }
 
-        $responseRenderer->addHTML($this->template->render('login/header', ['session_expired' => false]));
-        $responseRenderer->addHTML(Message::rawNotice(
+        $this->responseRenderer->addHTML($this->template->render('login/header', ['session_expired' => false]));
+        $this->responseRenderer->addHTML(Message::rawNotice(
             __('You have enabled two factor authentication, please confirm your login.'),
         )->getDisplay());
-        $responseRenderer->addHTML($this->template->render('login/twofactor', [
+        $this->responseRenderer->addHTML($this->template->render('login/twofactor', [
             'form' => $twofactor->render($request),
             'show_submit' => $twofactor->showSubmit(),
         ]));
-        $responseRenderer->addHTML($this->template->render('login/footer'));
-        $responseRenderer->addHTML(Footer::renderFooter());
+        $this->responseRenderer->addHTML($this->template->render('login/footer'));
+        $this->responseRenderer->addHTML(Footer::renderFooter());
 
-        return $responseRenderer->response();
+        return $this->responseRenderer->response();
     }
 }

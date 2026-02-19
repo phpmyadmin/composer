@@ -873,7 +873,7 @@ class ResultsTest extends AbstractTestCase
         $config = Config::getInstance();
 
         $query = 'ANALYZE FORMAT=JSON SELECT * FROM test_table';
-        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db);
+        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db, false);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com');
 
@@ -883,7 +883,7 @@ class ResultsTest extends AbstractTestCase
         self::assertSame('F', $_SESSION['tmpval']['pftext']);
 
         $query = 'ANALYZE NO_WRITE_TO_BINLOG TABLE test_table';
-        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db);
+        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db, false);
 
         $object = new DisplayResults($this->dbi, $config, $db, $table, 2, '', $query);
         $object->setConfigParamsForDisplayTable($request, $statementInfo);
@@ -909,7 +909,7 @@ class ResultsTest extends AbstractTestCase
         $db = 'test_db';
         $table = 'test_table';
         $query = 'SELECT * FROM `test_db`.`test_table`;';
-        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db);
+        [$statementInfo] = ParseAnalyze::sqlQuery($query, $db, false);
 
         $request = ServerRequestFactory::create()->createServerRequest('POST', 'https://example.com')
             ->withQueryParams($queryParams)
@@ -1151,7 +1151,7 @@ class ResultsTest extends AbstractTestCase
 
         (new ReflectionProperty(DisplayResults::class, 'uniqueId'))->setValue($object, 1234567890);
 
-        [$statementInfo] = ParseAnalyze::sqlQuery($query, Current::$database);
+        [$statementInfo] = ParseAnalyze::sqlQuery($query, Current::$database, false);
         $fieldsMeta = [
             FieldHelper::fromArray([
                 'type' => MYSQLI_TYPE_DECIMAL,
@@ -1213,7 +1213,7 @@ class ResultsTest extends AbstractTestCase
         ]);
 
         self::assertNotFalse($dtResult);
-        $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
+        $actual = $object->getTable($dtResult, $displayParts, $statementInfo, false);
 
         $template = new Template($config);
 
@@ -1446,7 +1446,7 @@ class ResultsTest extends AbstractTestCase
 
         (new ReflectionProperty(DisplayResults::class, 'uniqueId'))->setValue($object, 1234567890);
 
-        [$statementInfo] = ParseAnalyze::sqlQuery($query, Current::$database);
+        [$statementInfo] = ParseAnalyze::sqlQuery($query, Current::$database, false);
         $fieldsMeta = [
             FieldHelper::fromArray([
                 'type' => MYSQLI_TYPE_LONG,
@@ -1505,7 +1505,7 @@ class ResultsTest extends AbstractTestCase
         ]);
 
         self::assertNotFalse($dtResult);
-        $actual = $object->getTable($dtResult, $displayParts, $statementInfo);
+        $actual = $object->getTable($dtResult, $displayParts, $statementInfo, false);
 
         $template = new Template($config);
 

@@ -27,14 +27,15 @@ final class AuthenticationTest extends AbstractTestCase
 
         $dbi = $this->createDatabaseInterface();
         $config = new Config();
+        $responseRenderer = new ResponseRenderer();
         $authentication = new Authentication(
             $configMock,
             new Template($config),
             ResponseFactory::create(),
-            new AuthenticationPluginFactory(),
+            new AuthenticationPluginFactory($responseRenderer),
             $dbi,
             new Relation($dbi, $config),
-            new ResponseRenderer(),
+            $responseRenderer,
         );
 
         $response = self::createStub(ResponseInterface::class);

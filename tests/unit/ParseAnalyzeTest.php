@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\ParseAnalyze;
-use PhpMyAdmin\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(ParseAnalyze::class)]
@@ -23,9 +22,8 @@ class ParseAnalyzeTest extends AbstractTestCase
     public function testSqlQuery(): void
     {
         Current::$lang = 'en';
-        ResponseRenderer::getInstance()->setAjax(false);
 
-        $actual = ParseAnalyze::sqlQuery('SELECT * FROM `sakila`.`actor`', 'sakila_test');
+        $actual = ParseAnalyze::sqlQuery('SELECT * FROM `sakila`.`actor`', 'sakila_test', false);
 
         self::assertSame('sakila', $actual[1]);
         self::assertSame('actor', $actual[2]);
@@ -39,9 +37,8 @@ class ParseAnalyzeTest extends AbstractTestCase
     public function testSqlQuery2(): void
     {
         Current::$lang = 'en';
-        ResponseRenderer::getInstance()->setAjax(false);
 
-        $actual = ParseAnalyze::sqlQuery('SELECT `first_name`, `title` FROM `actor`, `film`', 'sakila');
+        $actual = ParseAnalyze::sqlQuery('SELECT `first_name`, `title` FROM `actor`, `film`', 'sakila', false);
 
         self::assertSame('sakila', $actual[1]);
         self::assertSame('', $actual[2]);

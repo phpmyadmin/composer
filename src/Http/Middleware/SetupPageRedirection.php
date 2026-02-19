@@ -27,6 +27,7 @@ final readonly class SetupPageRedirection implements MiddlewareInterface
         private Config $config,
         private ResponseFactory $responseFactory,
         private UserPreferencesHandler $userPreferencesHandler,
+        private ResponseRenderer $responseRenderer,
     ) {
     }
 
@@ -43,7 +44,7 @@ final readonly class SetupPageRedirection implements MiddlewareInterface
         try {
             return Routing::callSetupController($request, $this->responseFactory);
         } catch (ExitException) {
-            return ResponseRenderer::getInstance()->response();
+            return $this->responseRenderer->response();
         }
     }
 

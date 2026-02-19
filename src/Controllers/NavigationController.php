@@ -90,7 +90,7 @@ final class NavigationController implements InvocableController
             }
         }
 
-        $this->response->addJSON('message', $this->navigation->getDisplay());
+        $this->response->addJSON('message', $this->navigation->getDisplay($this->response));
 
         return $this->response->response();
     }

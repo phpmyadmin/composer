@@ -13,7 +13,6 @@ use PhpMyAdmin\Error\ErrorHandler;
 use PhpMyAdmin\Exceptions\AuthenticationFailure;
 use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Plugins\AuthenticationPlugin;
-use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Url;
 
@@ -33,16 +32,15 @@ class AuthenticationConfig extends AuthenticationPlugin
      */
     public function showLoginForm(): Response|null
     {
-        $responseRenderer = ResponseRenderer::getInstance();
-        if (! $responseRenderer->isAjax()) {
+        if (! $this->responseRenderer->isAjax()) {
             return null;
         }
 
-        $responseRenderer->setRequestStatus(false);
+        $this->responseRenderer->setRequestStatus(false);
         // reload_flag removes the token parameter from the URL and reloads
-        $responseRenderer->addJSON('reload_flag', '1');
+        $this->responseRenderer->addJSON('reload_flag', '1');
 
-        return $responseRenderer->response();
+        return $this->responseRenderer->response();
     }
 
     /**
@@ -69,9 +67,8 @@ class AuthenticationConfig extends AuthenticationPlugin
         $errorHandler = ErrorHandler::getInstance();
 
         /* HTML header */
-        $responseRenderer = ResponseRenderer::getInstance();
-        $responseRenderer->setMinimalFooter();
-        $header = $responseRenderer->getHeader();
+        $this->responseRenderer->setMinimalFooter();
+        $header = $this->responseRenderer->getHeader();
         $header->setBodyId('loginform');
         $header->setTitle(__('Access denied!'));
         $header->disableMenuAndConsole();
@@ -145,8 +142,8 @@ class AuthenticationConfig extends AuthenticationPlugin
 
         echo '</table>' , "\n";
 
-        $responseRenderer->addHTML((string) ob_get_clean());
+        $this->responseRenderer->addHTML((string) ob_get_clean());
 
-        return $responseRenderer->response();
+        return $this->responseRenderer->response();
     }
 }
