@@ -121,7 +121,7 @@ class GisMultiLineString extends GisGeometry
         ScaleData $scaleData,
         TCPDF $pdf,
     ): void {
-        $line = ['width' => 1.5, 'color' => $color];
+        $lineStyle = ['all' => ['width' => 1.5, 'color' => $color]];
 
         // Trim to remove leading 'MULTILINESTRING((' and trailing '))'
         $multilineString = mb_substr($spatial, 17, -2);
@@ -130,20 +130,12 @@ class GisMultiLineString extends GisGeometry
 
         $firstLine = true;
         foreach ($linestrings as $linestring) {
-            $pointsArr = $this->extractPoints1d($linestring, $scaleData);
-            foreach ($pointsArr as $point) {
-                if (isset($tempPoint)) {
-                    // draw line section
-                    $pdf->Line($tempPoint[0], $tempPoint[1], $point[0], $point[1], $line);
-                }
+            $pointsArr = $this->extractPoints1dLinear($linestring, $scaleData);
+            $pdf->PolyLine($pointsArr, 'S', $lineStyle);
 
-                $tempPoint = $point;
-            }
-
-            unset($tempPoint);
             // print label
             if ($label !== '' && $firstLine) {
-                $pdf->setXY($pointsArr[1][0], $pointsArr[1][1]);
+                $pdf->setXY($pointsArr[2], $pointsArr[3]);
                 $pdf->setFontSize(5);
                 $pdf->Cell(0, 0, $label);
             }

@@ -4362,16 +4362,12 @@
     <MixedArgument>
       <code><![CDATA[$dataRow[$i] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$dataRow[$i]]]></code>
       <code><![CDATA[$dataRow['data_length']]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
@@ -4396,8 +4392,6 @@
     <MixedArgument>
       <code><![CDATA[$dataRow[$i][$j] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
@@ -4411,8 +4405,6 @@
       <code><![CDATA[$rowData['parts'][$i]]]></code>
       <code><![CDATA[$rowData['parts'][$i]['points']]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
