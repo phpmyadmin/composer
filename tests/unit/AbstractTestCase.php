@@ -70,6 +70,9 @@ abstract class AbstractTestCase extends TestCase
 
         (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, null);
         ContainerBuilder::$container = null;
+        DatabaseInterface::$instance = null;
+        Config::$instance = null;
+        (new ReflectionProperty(Template::class, 'twig'))->setValue(null, null);
     }
 
     protected function createDatabaseInterface(
@@ -101,18 +104,6 @@ abstract class AbstractTestCase extends TestCase
     protected function setProxySettings(): void
     {
         HttpRequest::setProxySettingsFromEnv();
-    }
-
-    /**
-     * Destroys the environment built for the test.
-     * Clean all variables
-     */
-    protected function tearDown(): void
-    {
-        ContainerBuilder::$container = null;
-        DatabaseInterface::$instance = null;
-        Config::$instance = null;
-        (new ReflectionProperty(Template::class, 'twig'))->setValue(null, null);
     }
 
     /**
