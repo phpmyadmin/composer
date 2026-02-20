@@ -31,7 +31,7 @@ class HttpRequestTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->setProxySettings();
+        HttpRequest::setProxySettingsFromEnv();
 
         DatabaseInterface::$instance = $this->createDatabaseInterface();
         $this->httpRequest = new HttpRequest();

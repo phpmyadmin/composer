@@ -20,7 +20,6 @@ use PhpMyAdmin\SqlParser\Translator;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Tracking\Tracker;
-use PhpMyAdmin\Utils\HttpRequest;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
@@ -104,11 +103,6 @@ abstract class AbstractTestCase extends TestCase
 
         $languageManager->activate($languageEn);
         Translator::load();
-    }
-
-    protected function setProxySettings(): void
-    {
-        HttpRequest::setProxySettingsFromEnv();
     }
 
     /**
