@@ -10,6 +10,7 @@ use PhpMyAdmin\Gis\GisVisualization;
 use PhpMyAdmin\Gis\GisVisualizationSettings;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionProperty;
 
 #[CoversClass(GisVisualization::class)]
 class GisVisualizationTest extends AbstractTestCase
@@ -174,7 +175,7 @@ class GisVisualizationTest extends AbstractTestCase
     {
         $this->dbi->setVersion(['@@version' => '8.0.0']);
         $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        $this->setProperty($gis, GisVisualization::class, 'rows', 10);
+        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 10);
         $queryString = $this->callFunction(
             $gis,
             GisVisualization::class,
@@ -188,8 +189,8 @@ class GisVisualizationTest extends AbstractTestCase
         );
 
         $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        $this->setProperty($gis, GisVisualization::class, 'pos', 10);
-        $this->setProperty($gis, GisVisualization::class, 'rows', 15);
+        (new ReflectionProperty(GisVisualization::class, 'pos'))->setValue($gis, 10);
+        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 15);
         $queryString = $this->callFunction(
             $gis,
             GisVisualization::class,
