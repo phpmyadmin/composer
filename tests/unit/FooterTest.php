@@ -12,6 +12,7 @@ use PhpMyAdmin\Footer;
 use PhpMyAdmin\Template;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Medium;
+use ReflectionMethod;
 
 use function json_encode;
 
@@ -77,7 +78,7 @@ class FooterTest extends AbstractTestCase
         $object->childIterator = new ArrayIterator();
         $object->child->parent = $object;
 
-        $this->callFunction($this->object, Footer::class, 'removeRecursion', [&$object]);
+        (new ReflectionMethod(Footer::class, 'removeRecursion'))->invokeArgs($this->object, [&$object]);
         self::assertSame(
             '{"child":{"parent":"***RECURSION***"},"childIterator":"***ITERATOR***"}',
             json_encode($object),

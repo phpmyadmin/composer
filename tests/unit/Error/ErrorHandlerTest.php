@@ -15,6 +15,7 @@ use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Medium;
+use ReflectionMethod;
 use Throwable;
 
 use function array_keys;
@@ -105,12 +106,7 @@ class ErrorHandlerTest extends AbstractTestCase
      */
     public function testCheckSavedErrors(): void
     {
-        $this->callFunction(
-            $this->object,
-            ErrorHandler::class,
-            'checkSavedErrors',
-            [],
-        );
+        (new ReflectionMethod(ErrorHandler::class, 'checkSavedErrors'))->invokeArgs($this->object, []);
         self::assertArrayNotHasKey('errors', $_SESSION);
     }
 

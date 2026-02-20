@@ -9757,14 +9757,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <MixedArgument>
-      <code><![CDATA[$this->callFunction(
-                $this->centralColumns,
-                CentralColumns::class,
-                'getHtmlForEditTableRow',
-                [self::MODIFIED_COLUMN_DATA[0], 0],
-            )]]></code>
-    </MixedArgument>
   </file>
   <file src="tests/unit/Database/DesignerTest.php">
     <DeprecatedMethod>
@@ -9848,28 +9840,6 @@
     <MixedArgument>
       <code><![CDATA[$output]]></code>
       <code><![CDATA[$output]]></code>
-      <code><![CDATA[$this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getDataCellForNonNumericColumns',
-                [
-                    $column,
-                    $class,
-                    $meta,
-                    $map,
-                    $urlParams,
-                    $conditionField,
-                    $transformationPlugin,
-                    $transformOptions,
-                    $statementInfo,
-                ],
-            )]]></code>
-      <code><![CDATA[$this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'handleNonPrintableContents',
-                [$category, $content, $transformationPlugin, $transformOptions, $meta, $urlParams, &$isTruncated],
-            )]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$_SESSION['tmpval']['pftext']]]></code>

@@ -20,6 +20,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionMethod;
 use ReflectionProperty;
 
 use function array_slice;
@@ -309,15 +310,10 @@ class CentralColumnsTest extends AbstractTestCase
             'phpmyadmin',
         );
 
-        self::assertStringContainsString(
-            $this->callFunction(
-                $this->centralColumns,
-                CentralColumns::class,
-                'getHtmlForEditTableRow',
-                [self::MODIFIED_COLUMN_DATA[0], 0],
-            ),
-            $result,
-        );
+        $actual = (new ReflectionMethod(CentralColumns::class, 'getHtmlForEditTableRow'))
+            ->invokeArgs($this->centralColumns, [self::MODIFIED_COLUMN_DATA[0], 0]);
+        self::assertIsString($actual);
+        self::assertStringContainsString($actual, $result);
     }
 
     /**
@@ -377,12 +373,8 @@ class CentralColumnsTest extends AbstractTestCase
             ->willReturn(array_slice(self::COLUMN_DATA, 1, 1));
         self::assertSame(
             array_slice(self::MODIFIED_COLUMN_DATA, 1, 1),
-            $this->callFunction(
-                $this->centralColumns,
-                CentralColumns::class,
-                'findExistingColumns',
-                ['phpmyadmin', ['col1']],
-            ),
+            (new ReflectionMethod(CentralColumns::class, 'findExistingColumns'))
+                ->invokeArgs($this->centralColumns, ['phpmyadmin', ['col1']]),
         );
     }
 

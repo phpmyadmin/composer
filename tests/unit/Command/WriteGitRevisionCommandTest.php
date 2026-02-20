@@ -7,6 +7,7 @@ namespace PhpMyAdmin\Tests\Command;
 use PhpMyAdmin\Command\WriteGitRevisionCommand;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
 use Symfony\Component\Console\Command\Command;
 
 use function class_exists;
@@ -59,15 +60,10 @@ class WriteGitRevisionCommandTest extends AbstractTestCase
                 ],
             );
 
-        $output = $this->callFunction(
-            $command,
-            WriteGitRevisionCommand::class,
-            'getRevisionInfo',
-            [
-                'https://github.com/phpmyadmin/phpmyadmin/commit/%s',
-                'https://github.com/phpmyadmin/phpmyadmin/tree/%s',
-            ],
-        );
+        $output = (new ReflectionMethod(WriteGitRevisionCommand::class, 'getRevisionInfo'))->invokeArgs($command, [
+            'https://github.com/phpmyadmin/phpmyadmin/commit/%s',
+            'https://github.com/phpmyadmin/phpmyadmin/tree/%s',
+        ]);
         $template = <<<'PHP'
             <?php
 

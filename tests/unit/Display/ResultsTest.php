@@ -34,6 +34,7 @@ use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Transformations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionMethod;
 use ReflectionProperty;
 use stdClass;
 
@@ -91,12 +92,8 @@ class ResultsTest extends AbstractTestCase
     public function testisSelect(): void
     {
         self::assertTrue(
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'isSelect',
-                [Query::getAll('SELECT * FROM pma')],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'isSelect'))
+                ->invokeArgs($this->object, [Query::getAll('SELECT * FROM pma')]),
         );
     }
 
@@ -104,12 +101,8 @@ class ResultsTest extends AbstractTestCase
     {
         self::assertSame(
             'datetimefield',
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getClassForDateTimeRelatedFields',
-                [FieldHelper::fromArray(['type' => MYSQLI_TYPE_TIMESTAMP])],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getClassForDateTimeRelatedFields'))
+                ->invokeArgs($this->object, [FieldHelper::fromArray(['type' => MYSQLI_TYPE_TIMESTAMP])]),
         );
     }
 
@@ -117,12 +110,8 @@ class ResultsTest extends AbstractTestCase
     {
         self::assertSame(
             'datefield',
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getClassForDateTimeRelatedFields',
-                [FieldHelper::fromArray(['type' => MYSQLI_TYPE_DATE])],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getClassForDateTimeRelatedFields'))
+                ->invokeArgs($this->object, [FieldHelper::fromArray(['type' => MYSQLI_TYPE_DATE])]),
         );
     }
 
@@ -130,12 +119,8 @@ class ResultsTest extends AbstractTestCase
     {
         self::assertSame(
             'text',
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getClassForDateTimeRelatedFields',
-                [FieldHelper::fromArray(['type' => MYSQLI_TYPE_STRING])],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getClassForDateTimeRelatedFields'))
+                ->invokeArgs($this->object, [FieldHelper::fromArray(['type' => MYSQLI_TYPE_STRING])]),
         );
     }
 
@@ -147,12 +132,7 @@ class ResultsTest extends AbstractTestCase
         $_SESSION['tmpval']['max_rows'] = DisplayResults::ALL_ROWS;
         self::assertSame(
             [0, 0],
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getOffsets',
-                [],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getOffsets'))->invokeArgs($this->object, []),
         );
     }
 
@@ -165,12 +145,7 @@ class ResultsTest extends AbstractTestCase
         $_SESSION['tmpval']['pos'] = 4;
         self::assertSame(
             [9, 0],
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getOffsets',
-                [],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getOffsets'))->invokeArgs($this->object, []),
         );
     }
 
@@ -248,12 +223,8 @@ class ResultsTest extends AbstractTestCase
 
         self::assertSame(
             $output,
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getSpecialLinkUrl',
-                [$specialSchemaLinks[$db][$table][$fieldName], $columnValue, $rowInfo],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getSpecialLinkUrl'))
+                ->invokeArgs($this->object, [$specialSchemaLinks[$db][$table][$fieldName], $columnValue, $rowInfo]),
         );
     }
 
@@ -299,24 +270,16 @@ class ResultsTest extends AbstractTestCase
 
         self::assertEquals(
             $output,
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getRowInfoForSpecialLinks',
-                [$row],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getRowInfoForSpecialLinks'))
+                ->invokeArgs($this->object, [$row]),
         );
     }
 
     public function testSetHighlightedColumnGlobalField(): void
     {
         $query = 'SELECT * FROM db_name WHERE `db_name`.`tbl`.id > 0 AND `id` < 10';
-        $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'setHighlightedColumnGlobalField',
-            [Query::getAll($query)],
-        );
+        (new ReflectionMethod(DisplayResults::class, 'setHighlightedColumnGlobalField'))
+            ->invokeArgs($this->object, [Query::getAll($query)]);
 
         self::assertSame([
             'db_name' => true,
@@ -355,12 +318,7 @@ class ResultsTest extends AbstractTestCase
         Config::getInstance()->set('LimitChars', $limitChars);
         self::assertSame(
             $output,
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getPartialText',
-                [$str],
-            ),
+            (new ReflectionMethod(DisplayResults::class, 'getPartialText'))->invokeArgs($this->object, [$str]),
         );
     }
 
@@ -431,15 +389,12 @@ class ResultsTest extends AbstractTestCase
     ): void {
         $_SESSION['tmpval']['display_binary'] = $displayBinary;
         $_SESSION['tmpval']['display_blob'] = $displayBlob;
-        self::assertStringContainsString(
-            $output,
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'handleNonPrintableContents',
-                [$category, $content, $transformationPlugin, $transformOptions, $meta, $urlParams, &$isTruncated],
-            ),
+        $actual = (new ReflectionMethod(DisplayResults::class, 'handleNonPrintableContents'))->invokeArgs(
+            $this->object,
+            [$category, $content, $transformationPlugin, $transformOptions, $meta, $urlParams, &$isTruncated],
         );
+        self::assertIsString($actual);
+        self::assertStringContainsString($output, $actual);
     }
 
     /**
@@ -605,25 +560,22 @@ class ResultsTest extends AbstractTestCase
         $config = Config::getInstance();
         $config->set('ProtectBinary', $protectBinary);
         $statementInfo = new StatementInfo(new Parser(), null, new StatementFlags(), [], []);
-        self::assertStringContainsString(
-            $output,
-            $this->callFunction(
-                $this->object,
-                DisplayResults::class,
-                'getDataCellForNonNumericColumns',
-                [
-                    $column,
-                    $class,
-                    $meta,
-                    $map,
-                    $urlParams,
-                    $conditionField,
-                    $transformationPlugin,
-                    $transformOptions,
-                    $statementInfo,
-                ],
-            ),
+        $actual = (new ReflectionMethod(DisplayResults::class, 'getDataCellForNonNumericColumns'))->invokeArgs(
+            $this->object,
+            [
+                $column,
+                $class,
+                $meta,
+                $map,
+                $urlParams,
+                $conditionField,
+                $transformationPlugin,
+                $transformOptions,
+                $statementInfo,
+            ],
         );
+        self::assertIsString($actual);
+        self::assertStringContainsString($output, $actual);
     }
 
     /**
@@ -691,21 +643,16 @@ class ResultsTest extends AbstractTestCase
         );
 
         // Actually invoke tested method
-        $output = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'getRowValues',
-            [
-                ['3600', 'true'],
-                0,
-                false,
-                [],
-                'disabled',
-                false,
-                $query,
-                Query::getAll($query),
-            ],
-        );
+        $output = (new ReflectionMethod(DisplayResults::class, 'getRowValues'))->invokeArgs($this->object, [
+            ['3600', 'true'],
+            0,
+            false,
+            [],
+            'disabled',
+            false,
+            $query,
+            Query::getAll($query),
+        ]);
 
         // Dateformat
         self::assertStringContainsString('Jan 01, 1970 at 01:00 AM', $output);
@@ -786,12 +733,8 @@ class ResultsTest extends AbstractTestCase
         string $colName,
         string $urlParamsRemove,
     ): void {
-        $output = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'getSortOrderHiddenInputs',
-            [$urlParams, $colName],
-        );
+        $output = (new ReflectionMethod(DisplayResults::class, 'getSortOrderHiddenInputs'))
+            ->invokeArgs($this->object, [$urlParams, $colName]);
         $out = urldecode(htmlspecialchars_decode($output));
         self::assertStringContainsString(
             'name="url-remove-order" value="index.php?route=/sql&sql_query=' . $sqlRemove,
@@ -823,30 +766,17 @@ class ResultsTest extends AbstractTestCase
     /** @see https://github.com/phpmyadmin/phpmyadmin/issues/16836 */
     public function testBuildValueDisplayNoTrainlingSpaces(): void
     {
-        $output = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'buildValueDisplay',
-            ['my_class', false, '  special value  '],
-        );
+        $output = (new ReflectionMethod(DisplayResults::class, 'buildValueDisplay'))
+            ->invokeArgs($this->object, ['my_class', false, '  special value  ']);
         self::assertSame('<td class="text-start my_class">  special value  </td>' . "\n", $output);
-        $output = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'buildValueDisplay',
-            ['my_class', false, '0x11e6ac0cfb1e8bf3bf48b827ebdafb0b'],
-        );
+        $output = (new ReflectionMethod(DisplayResults::class, 'buildValueDisplay'))
+            ->invokeArgs($this->object, ['my_class', false, '0x11e6ac0cfb1e8bf3bf48b827ebdafb0b']);
         self::assertSame('<td class="text-start my_class">0x11e6ac0cfb1e8bf3bf48b827ebdafb0b</td>' . "\n", $output);
-        $output = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'buildValueDisplay',
-            [
-                'my_class',
-                true,// condition mode
-                '0x11e6ac0cfb1e8bf3bf48b827ebdafb0b',
-            ],
-        );
+        $output = (new ReflectionMethod(DisplayResults::class, 'buildValueDisplay'))->invokeArgs($this->object, [
+            'my_class',
+            true,// condition mode
+            '0x11e6ac0cfb1e8bf3bf48b827ebdafb0b',
+        ]);
         self::assertSame(
             '<td class="text-start my_class condition">0x11e6ac0cfb1e8bf3bf48b827ebdafb0b</td>' . "\n",
             $output,
@@ -1745,17 +1675,12 @@ class ResultsTest extends AbstractTestCase
     ): void {
         Config::getInstance()->set('Order', $orderSetting);
 
-        $data = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'getSingleAndMultiSortUrls',
-            [
-                [new SortExpression('Country', 'Code', 'ASC', '`Country`.`Code`')],
-                'Country',
-                'FoundedIn',
-                FieldHelper::fromArray(['type' => $metaType]),
-            ],
-        );
+        $data = (new ReflectionMethod(DisplayResults::class, 'getSingleAndMultiSortUrls'))->invokeArgs($this->object, [
+            [new SortExpression('Country', 'Code', 'ASC', '`Country`.`Code`')],
+            'Country',
+            'FoundedIn',
+            FieldHelper::fromArray(['type' => $metaType]),
+        ]);
 
         self::assertSame([
             'ORDER BY `Country`.`FoundedIn` ' . $querySortDirection, // singleSortOrder
@@ -1763,17 +1688,12 @@ class ResultsTest extends AbstractTestCase
             '', // orderImg
         ], $data);
 
-        $data = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'getSingleAndMultiSortUrls',
-            [
-                [new SortExpression('Country', 'Code', 'ASC', '`Country`.`Code`')],
-                'Country',
-                'Code2',
-                FieldHelper::fromArray(['type' => $metaType]),
-            ],
-        );
+        $data = (new ReflectionMethod(DisplayResults::class, 'getSingleAndMultiSortUrls'))->invokeArgs($this->object, [
+            [new SortExpression('Country', 'Code', 'ASC', '`Country`.`Code`')],
+            'Country',
+            'Code2',
+            FieldHelper::fromArray(['type' => $metaType]),
+        ]);
 
         self::assertSame([
             'ORDER BY `Country`.`Code2` ' . $querySortDirection, // singleSortOrder
@@ -1781,21 +1701,16 @@ class ResultsTest extends AbstractTestCase
             '', // orderImg
         ], $data);
 
-        $data = $this->callFunction(
-            $this->object,
-            DisplayResults::class,
-            'getSingleAndMultiSortUrls',
+        $data = (new ReflectionMethod(DisplayResults::class, 'getSingleAndMultiSortUrls'))->invokeArgs($this->object, [
             [
-                [
-                    new SortExpression('Country', 'Continent', 'DESC', '`Country`.`Continent`'),
-                    new SortExpression('Country', 'Region', 'ASC', '`Country`.`Region`'),
-                    new SortExpression('Country', 'Population', 'ASC', '`Country`.`Population`'),
-                ],
-                'Country',
-                'Code2',
-                FieldHelper::fromArray(['type' => $metaType]),
+                new SortExpression('Country', 'Continent', 'DESC', '`Country`.`Continent`'),
+                new SortExpression('Country', 'Region', 'ASC', '`Country`.`Region`'),
+                new SortExpression('Country', 'Population', 'ASC', '`Country`.`Population`'),
             ],
-        );
+            'Country',
+            'Code2',
+            FieldHelper::fromArray(['type' => $metaType]),
+        ]);
 
         self::assertSame([
             'ORDER BY `Country`.`Code2` ' . $querySortDirection, // singleSortOrder

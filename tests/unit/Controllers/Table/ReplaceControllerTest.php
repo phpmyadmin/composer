@@ -28,6 +28,7 @@ use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\UrlParams;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
 use ReflectionProperty;
 
 #[CoversClass(ReplaceController::class)]
@@ -176,12 +177,8 @@ class ReplaceControllerTest extends AbstractTestCase
         );
 
         /** @var array $result */
-        $result = $this->callFunction(
-            $replaceController,
-            ReplaceController::class,
-            'getParamsForUpdateOrInsert',
-            [$request1],
-        );
+        $result = (new ReflectionMethod(ReplaceController::class, 'getParamsForUpdateOrInsert'))
+            ->invokeArgs($replaceController, [$request1]);
 
         self::assertSame(
             [['LIMIT 1'], true, true],
@@ -195,12 +192,8 @@ class ReplaceControllerTest extends AbstractTestCase
         ]);
 
         /** @var array $result */
-        $result = $this->callFunction(
-            $replaceController,
-            ReplaceController::class,
-            'getParamsForUpdateOrInsert',
-            [$request2],
-        );
+        $result = (new ReflectionMethod(ReplaceController::class, 'getParamsForUpdateOrInsert'))
+            ->invokeArgs($replaceController, [$request2]);
 
         self::assertSame(
             [['a', 'c'], false, true],

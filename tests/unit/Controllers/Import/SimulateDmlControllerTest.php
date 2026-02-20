@@ -18,6 +18,7 @@ use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionMethod;
 use ReflectionProperty;
 
 use function count;
@@ -50,10 +51,11 @@ final class SimulateDmlControllerTest extends AbstractTestCase
 
         $controller = new SimulateDmlController(new ResponseRenderer(), new SimulateDml($dbi));
         /** @var Parser $parser */
-        $parser = $this->callFunction($controller, SimulateDmlController::class, 'createParser', [$sqlQuery, ';']);
+        $parser = (new ReflectionMethod(SimulateDmlController::class, 'createParser'))
+            ->invokeArgs($controller, [$sqlQuery, ';']);
         self::assertCount(count($expectedPerQuery), $parser->statements);
 
-        $this->callFunction($controller, SimulateDmlController::class, 'process', [$parser]);
+        (new ReflectionMethod(SimulateDmlController::class, 'process'))->invokeArgs($controller, [$parser]);
 
         $dummyDbi->assertAllSelectsConsumed();
         $dummyDbi->assertAllQueriesConsumed();

@@ -18,6 +18,7 @@ use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Types;
 use PhpMyAdmin\UserPrivileges;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
 use stdClass;
 
 use function __;
@@ -399,12 +400,8 @@ class NormalizationTest extends AbstractTestCase
     public function testGetAllCombinationPartialKeys(): void
     {
         $primaryKey = ['id', 'col1', 'col2'];
-        $result = $this->callFunction(
-            $this->normalization,
-            Normalization::class,
-            'getAllCombinationPartialKeys',
-            [$primaryKey],
-        );
+        $result = (new ReflectionMethod(Normalization::class, 'getAllCombinationPartialKeys'))
+            ->invokeArgs($this->normalization, [$primaryKey]);
 
         self::assertSame(
             ['', 'id', 'col1', 'col1,id', 'col2', 'col2,id', 'col2,col1'],
