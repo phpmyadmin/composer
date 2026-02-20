@@ -6991,12 +6991,6 @@ parameters:
 			path: src/Http/Middleware/StatementHistory.php
 
 		-
-			message: '#^Parameter \#1 \$known_string of function hash_equals expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Http/Middleware/TokenRequestParamChecking.php
-
-		-
 			message: '#^Method PhpMyAdmin\\Http\\ServerRequest\:\:getAttributes\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -11618,12 +11612,6 @@ parameters:
 			identifier: class.nameCase
 			count: 1
 			path: src/Server/SysInfo/WindowsNt.php
-
-		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 3
-			path: src/Session.php
 
 		-
 			message: '#^Only booleans are allowed in &&, string\|false given on the left side\.$#'

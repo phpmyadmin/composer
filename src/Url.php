@@ -124,8 +124,9 @@ class Url
         $fields = '';
 
         /* Always include token in plain forms */
-        if ($isToken === false && isset($_SESSION[' PMA_token '])) {
-            $values['token'] = $_SESSION[' PMA_token '];
+        $token = Session::getToken();
+        if ($isToken === false && $token !== '') {
+            $values['token'] = $token;
         }
 
         foreach ($values as $name => $value) {

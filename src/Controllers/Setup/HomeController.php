@@ -14,6 +14,7 @@ use PhpMyAdmin\Http\Response;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Session;
 use PhpMyAdmin\Setup\Index;
 use PhpMyAdmin\Setup\SetupHelper;
 use PhpMyAdmin\Template;
@@ -104,7 +105,7 @@ final class HomeController implements InvocableController
                 'auth_type' => $configFile->getValue('Servers/' . $id . '/auth_type'),
                 'dsn' => $configFile->getServerDSN($id),
                 'params' => [
-                    'token' => $_SESSION[' PMA_token '],
+                    'token' => Session::getToken(),
                     'edit' => ['page' => 'servers', 'mode' => 'edit', 'id' => $id],
                     'remove' => ['page' => 'servers', 'mode' => 'remove', 'id' => $id],
                 ],
