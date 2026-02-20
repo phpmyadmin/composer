@@ -252,7 +252,7 @@ final readonly class ImportController implements InvocableController
         ImportSettings::$runQuery = true;
         ImportSettings::$charsetConversion = false;
         $resetCharset = false;
-        ImportSettings::$message = 'Sorry an unexpected error happened!';
+        ImportSettings::$message = __('Sorry an unexpected error happened!');
 
         Import::$result = false;
 

@@ -517,6 +517,12 @@ const toggleFullscreen = function () {
     var $content = $('#page_content');
     const pageContent = document.getElementById('page_content');
 
+    if (! document.fullscreenEnabled) {
+        ajaxShowMessage(window.Messages.strFullscreenRequestDenied, null, 'error');
+
+        return;
+    }
+
     if (! document.fullscreenElement) {
         $img.attr('src', $img.data('exit'))
             .attr('title', $span.data('exit'));

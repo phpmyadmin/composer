@@ -692,6 +692,7 @@ final class JavaScriptMessagesController implements InvocableController
             'strHide' => __('Hide'),
             'strShow' => __('Show'),
             'strStructure' => __('Structure'),
+            'strFullscreenRequestDenied' => __('The fullscreen request was denied.'),
 
             'strMonthNameJan' => _pgettext('Month name', 'January'),
             'strMonthNameFeb' => _pgettext('Month name', 'February'),

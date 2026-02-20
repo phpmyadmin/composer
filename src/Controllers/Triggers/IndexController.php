@@ -228,18 +228,18 @@ final class IndexController implements InvocableController
                 Current::$database,
                 Current::$table,
                 $triggerName->getName(),
-            )?->getCreateSql('');
+            )?->getCreateSql('$$');
             if ($exportData !== null && $request->isAjax()) {
                 $title = sprintf(__('Export of trigger %s'), Util::backquote($triggerName));
                 $this->response->addJSON('title', $title);
-                $this->response->addJSON('message', trim($exportData));
+                $this->response->addJSON('message', trim("DELIMITER $$\n" . $exportData));
 
                 return $this->response->response();
             }
 
             if ($exportData !== null) {
                 $this->response->render('triggers/export', [
-                    'data' => $exportData,
+                    'data' => "DELIMITER $$\n" . $exportData,
                     'item_name' => $triggerName->getName(),
                 ]);
 
