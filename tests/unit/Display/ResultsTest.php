@@ -73,14 +73,14 @@ class ResultsTest extends AbstractTestCase
 
         $this->setLanguage();
 
-        $this->dummyDbi = $this->createDbiDummy();
-        $this->dbi = $this->createDatabaseInterface($this->dummyDbi);
-        DatabaseInterface::$instance = $this->dbi;
         Current::$server = 2;
         Current::$database = 'db';
         Current::$table = 'table';
-        $config = Config::getInstance();
+        $config = Config::$instance = new Config();
         $config->selectedServer['DisableIS'] = false;
+        $this->dummyDbi = $this->createDbiDummy();
+        $this->dbi = $this->createDatabaseInterface($this->dummyDbi, $config);
+        DatabaseInterface::$instance = $this->dbi;
         $this->object = new DisplayResults($this->dbi, $config, 'as', '', 2, '', '');
         $_SESSION[' HMAC_secret '] = 'test';
     }
@@ -1118,8 +1118,9 @@ class ResultsTest extends AbstractTestCase
 
     public function testGetTable(): void
     {
-        $config = Config::getInstance();
+        $config = Config::$instance = new Config();
         $config->selectedServer['DisableIS'] = true;
+        $this->dbi = $this->createDatabaseInterface($this->dummyDbi, $config);
 
         Current::$server = 2;
         Current::$database = 'test_db';

@@ -15417,7 +15417,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 9
+			count: 7
 			path: tests/unit/Display/ResultsTest.php
 
 		-
