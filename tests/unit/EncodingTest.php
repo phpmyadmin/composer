@@ -34,13 +34,6 @@ class EncodingTest extends AbstractTestCase
         Encoding::initEngine();
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        Encoding::initEngine();
-    }
-
     /**
      * Test for Encoding::convertString
      */

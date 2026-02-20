@@ -25,16 +25,6 @@ class OptionsPropertyItemTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->stub);
-    }
-
-    /**
      * Test for
      *     - PhpMyAdmin\Properties\Options\OptionsPropertyItem::getName
      *     - PhpMyAdmin\Properties\Options\OptionsPropertyItem::setName

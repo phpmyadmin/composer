@@ -24,16 +24,6 @@ class ExportPluginPropertiesTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for
      *     - PhpMyAdmin\Properties\Plugins\ExportPluginProperties::getForceFile
      *     - PhpMyAdmin\Properties\Plugins\ExportPluginProperties::setForceFile

@@ -37,16 +37,6 @@ class FormTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for Form::__constructor
      */
     public function testContructor(): void

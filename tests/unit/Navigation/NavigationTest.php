@@ -50,16 +50,6 @@ class NavigationTest extends AbstractTestCase
     }
 
     /**
-     * Tears down the fixture.
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Tests hideNavigationItem() method.
      */
     public function testHideNavigationItem(): void

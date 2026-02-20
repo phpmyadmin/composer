@@ -24,16 +24,6 @@ class ImportPluginPropertiesTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for
      *     - PhpMyAdmin\Properties\Plugins\ImportPluginProperties::getOptionsText
      *     - PhpMyAdmin\Properties\Plugins\ImportPluginProperties::setOptionsText

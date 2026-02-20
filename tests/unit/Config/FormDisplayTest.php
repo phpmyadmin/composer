@@ -37,16 +37,6 @@ class FormDisplayTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for FormDisplay::registerForm
      */
     public function testRegisterForm(): void

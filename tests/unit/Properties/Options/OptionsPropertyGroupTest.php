@@ -25,16 +25,6 @@ class OptionsPropertyGroupTest extends AbstractTestCase
         $this->stub = $this->getMockBuilder(OptionsPropertyGroup::class)->onlyMethods([])->getMock();
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->stub);
-    }
-
     public function testAddProperty(): void
     {
         $propertyItem = new BoolPropertyItem();
