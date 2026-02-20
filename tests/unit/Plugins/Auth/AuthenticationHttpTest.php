@@ -41,16 +41,6 @@ class AuthenticationHttpTest extends AbstractTestCase
         $this->object = new AuthenticationHttp(new ResponseRendererStub());
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testAuthLogoutUrl(): void
     {
         $config = Config::getInstance();

@@ -45,12 +45,11 @@ class TableControllerTest extends AbstractTestCase
         Current::$table = 'test_table';
 
         $config = Config::getInstance();
-        $config->selectServer('1');
-        $config->settings['MaxDbList'] = 0;
+        $config->set('MaxDbList', 1);
 
         $this->dummyDbi->addResult(
             'SELECT `SCHEMA_NAME` FROM `INFORMATION_SCHEMA`.`SCHEMATA`',
-            [['test_db']],
+            [['test_db'], ['information_schema']],
             ['SCHEMA_NAME'],
         );
         $this->dummyDbi->addSelectDb('test_db');

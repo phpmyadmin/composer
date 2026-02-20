@@ -22,13 +22,6 @@ class SecurityTest extends AbstractTestCase
         $this->template = new Template(new Config());
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->template);
-    }
-
     public function testInjectCodeUsingTemplate(): void
     {
         self::assertSame(

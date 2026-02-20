@@ -443,7 +443,7 @@ final readonly class TableController implements InvocableController
 
         $databaseList = [];
         $listDatabase = $this->dbi->getDatabaseList();
-        if (count($listDatabase) <= $this->config->settings['MaxDbList']) {
+        if (count($listDatabase) <= $this->config->config->MaxDbList) {
             $databaseList = $listDatabase->getList();
         }
 

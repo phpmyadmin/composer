@@ -62,16 +62,6 @@ class AuthenticationCookieTest extends AbstractTestCase
         AuthenticationCookie::$connectionError = '';
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testAuthErrorAJAX(): void
     {
         AuthenticationCookie::$connectionError = 'Error';

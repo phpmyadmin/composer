@@ -56,8 +56,6 @@ class GitTest extends AbstractTestCase
         rmdir($this->testDir);
 
         parent::tearDown();
-
-        unset($this->object);
     }
 
     /**

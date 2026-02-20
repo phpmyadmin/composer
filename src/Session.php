@@ -12,6 +12,7 @@ use function htmlspecialchars;
 use function implode;
 use function ini_get;
 use function ini_set;
+use function is_string;
 use function preg_replace;
 use function session_abort;
 use function session_cache_limiter;
@@ -38,6 +39,10 @@ class Session
      */
     private static function generateToken(): void
     {
+        /**
+         * Token which is used for authenticating access queries.
+         * (we use "space PMA_token space" to prevent overwriting)
+         */
         $_SESSION[' PMA_token '] = Util::generateRandom(16, true);
         $_SESSION[' HMAC_secret '] = Util::generateRandom(16);
 
@@ -45,11 +50,20 @@ class Session
          * Check if token is properly generated (the generation can fail, for example
          * due to missing /dev/random for openssl).
          */
-        if (! empty($_SESSION[' PMA_token '])) {
+        if (self::getToken() !== '') {
             return;
         }
 
         throw new SessionHandlerException('Failed to generate random CSRF token!');
+    }
+
+    public static function getToken(): string
+    {
+        if (isset($_SESSION[' PMA_token ']) && is_string($_SESSION[' PMA_token '])) {
+            return $_SESSION[' PMA_token '];
+        }
+
+        return '';
     }
 
     /**
@@ -192,11 +206,7 @@ class Session
             self::sessionFailed($errors);
         }
 
-        /**
-         * Token which is used for authenticating access queries.
-         * (we use "space PMA_token space" to prevent overwriting)
-         */
-        if (! empty($_SESSION[' PMA_token '])) {
+        if (self::getToken() !== '') {
             return;
         }
 
@@ -219,7 +229,7 @@ class Session
         // A third cookie will be sent by session_regenerate_id() which will override these two
         session_start();
 
-        if (! empty($_SESSION[' PMA_token '])) {
+        if (self::getToken() !== '') {
             return;
         }
 

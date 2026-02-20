@@ -40,16 +40,6 @@ class AuthenticationConfigTest extends AbstractTestCase
         $this->object = new AuthenticationConfig(new ResponseRendererStub());
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testShowLoginFormWithoutAjax(): void
     {
         (new ReflectionProperty(ResponseRenderer::class, 'instance'))->setValue(null, null);

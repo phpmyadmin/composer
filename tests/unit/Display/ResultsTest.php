@@ -86,17 +86,6 @@ class ResultsTest extends AbstractTestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for isSelect function
      */
     public function testisSelect(): void
@@ -363,7 +352,7 @@ class ResultsTest extends AbstractTestCase
     public function testGetPartialText(string $pftext, int $limitChars, string $str, string $output): void
     {
         $_SESSION['tmpval']['pftext'] = $pftext;
-        Config::getInstance()->settings['LimitChars'] = $limitChars;
+        Config::getInstance()->set('LimitChars', $limitChars);
         self::assertSame(
             $output,
             $this->callFunction(
@@ -442,7 +431,6 @@ class ResultsTest extends AbstractTestCase
     ): void {
         $_SESSION['tmpval']['display_binary'] = $displayBinary;
         $_SESSION['tmpval']['display_blob'] = $displayBlob;
-        Config::getInstance()->settings['LimitChars'] = 50;
         self::assertStringContainsString(
             $output,
             $this->callFunction(
@@ -456,7 +444,7 @@ class ResultsTest extends AbstractTestCase
 
     /**
      * @return array<array{
-     *   string,
+     *   'blob'|'noblob'|'all',
      *   string|null,
      *   string,
      *   object,
@@ -588,15 +576,15 @@ class ResultsTest extends AbstractTestCase
     }
 
     /**
-     * @param string      $protectBinary    all|blob|noblob|no
-     * @param string|null $column           the relevant column in data row
-     * @param string      $class            the html class for column
-     * @param object      $meta             the meta-information about the field
-     * @param mixed[]     $map              the list of relations
-     * @param mixed[]     $urlParams        the parameters for generate url
-     * @param bool        $conditionField   the column should highlighted or not
-     * @param string[]    $transformOptions the transformation parameters
-     * @param string      $output           the output of this function
+     * @param 'blob'|'noblob'|'all' $protectBinary    all|blob|noblob|no
+     * @param string|null           $column           the relevant column in data row
+     * @param string                $class            the html class for column
+     * @param object                $meta             the meta-information about the field
+     * @param mixed[]               $map              the list of relations
+     * @param mixed[]               $urlParams        the parameters for generate url
+     * @param bool                  $conditionField   the column should highlighted or not
+     * @param string[]              $transformOptions the transformation parameters
+     * @param string                $output           the output of this function
      */
     #[DataProvider('dataProviderForTestGetDataCellForNonNumericColumns')]
     public function testGetDataCellForNonNumericColumns(
@@ -615,8 +603,7 @@ class ResultsTest extends AbstractTestCase
         $_SESSION['tmpval']['display_blob'] = false;
         $_SESSION['tmpval']['relational_display'] = false;
         $config = Config::getInstance();
-        $config->settings['LimitChars'] = 50;
-        $config->settings['ProtectBinary'] = $protectBinary;
+        $config->set('ProtectBinary', $protectBinary);
         $statementInfo = new StatementInfo(new Parser(), null, new StatementFlags(), [], []);
         self::assertStringContainsString(
             $output,
@@ -1663,7 +1650,7 @@ class ResultsTest extends AbstractTestCase
         self::assertSame($tableTemplate, $actual);
     }
 
-    /** @return array<string, array{string, string, int}> */
+    /** @return array<string, array{'ASC'|'DESC'|'SMART', 'ASC'|'DESC', int}> */
     public static function dataProviderSortOrder(): array
     {
         return [
@@ -1745,13 +1732,17 @@ class ResultsTest extends AbstractTestCase
         ];
     }
 
+    /**
+     * @param 'ASC'|'DESC'|'SMART' $orderSetting
+     * @param 'ASC'|'DESC'         $querySortDirection
+     */
     #[DataProvider('dataProviderSortOrder')]
     public function testGetSingleAndMultiSortUrls(
         string $orderSetting,
         string $querySortDirection,
         int $metaType,
     ): void {
-        Config::getInstance()->settings['Order'] = $orderSetting;
+        Config::getInstance()->set('Order', $orderSetting);
 
         $data = $this->callFunction(
             $this->object,

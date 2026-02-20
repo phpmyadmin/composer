@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Server;
 
 use PhpMyAdmin\Config;
-use PhpMyAdmin\Current;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Url;
@@ -24,20 +23,7 @@ class SelectTest extends AbstractTestCase
     {
         parent::setUp();
 
-        //$_REQUEST
-        $_REQUEST['log'] = 'index1';
-        $_REQUEST['pos'] = 3;
-
         $config = Config::getInstance();
-        $config->settings['RememberSorting'] = true;
-        $config->settings['SQP'] = [];
-        $config->settings['MaxCharactersInDisplayedSQL'] = 1000;
-        $config->settings['ShowSQL'] = true;
-        $config->settings['TableNavigationLinksMode'] = 'icons';
-        $config->settings['LimitChars'] = 100;
-
-        Current::$table = 'table';
-
         $config->settings['Servers'] = [
             '0' => [
                 'host' => 'host0',
@@ -54,7 +40,6 @@ class SelectTest extends AbstractTestCase
                 'auth_type' => 'config',
             ],
         ];
-        //$_SESSION
     }
 
     /**
@@ -64,9 +49,6 @@ class SelectTest extends AbstractTestCase
     public function testRender(bool $notOnlyOptions): void
     {
         $config = Config::getInstance();
-        if ($notOnlyOptions) {
-            $config->settings['DisplayServersList'] = null;
-        }
 
         $html = Select::render($notOnlyOptions);
         $server = $config->settings['Servers']['0'];

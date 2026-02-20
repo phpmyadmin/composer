@@ -171,7 +171,7 @@ final class DatabasesController implements InvocableController
             'database_count' => $this->databaseCount,
             'pos' => $position,
             'url_params' => $urlParams,
-            'max_db_list' => $this->config->settings['MaxDbList'],
+            'max_db_list' => $this->config->config->MaxDbList,
             'has_primary_replication' => $primaryInfo['status'],
             'has_replica_replication' => $replicaInfo['status'],
             'is_drop_allowed' => $this->dbi->isSuperUser() || $this->config->settings['AllowUserDropDatabase'],

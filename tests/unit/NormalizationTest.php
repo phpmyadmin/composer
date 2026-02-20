@@ -7,7 +7,6 @@ namespace PhpMyAdmin\Tests;
 use PhpMyAdmin\Column;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Message;
@@ -43,17 +42,7 @@ class NormalizationTest extends AbstractTestCase
 
         $this->dummyDbi = $this->createDbiDummy();
         $this->dbi = $this->createDatabaseInterface($this->dummyDbi);
-        DatabaseInterface::$instance = $this->dbi;
         $config = Config::getInstance();
-        $config->settings['LimitChars'] = 50;
-        $config->settings['ShowHint'] = true;
-        $config->settings['ActionLinksMode'] = 'icons';
-        Current::$database = 'PMA_db';
-        Current::$table = 'PMA_table';
-        $config->selectedServer['DisableIS'] = false;
-        $_POST['change_column'] = null;
-
-        //$_SESSION
 
         //mock DBI
         $dbi = $this->getMockBuilder(DatabaseInterface::class)

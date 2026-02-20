@@ -107,8 +107,6 @@ const DatabaseTriggers = {
             $.get($this.attr('href'), { 'ajax_request': true }, showExport);
         }
 
-        ajaxRemoveMessage($msg);
-
         function showExport (data) {
             if (data.success !== true) {
                 ajaxShowMessage(data.error, false);

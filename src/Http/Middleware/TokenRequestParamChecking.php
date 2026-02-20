@@ -8,6 +8,7 @@ use PhpMyAdmin\Exceptions\MismatchedSessionId;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\ResponseRenderer;
+use PhpMyAdmin\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -49,7 +50,7 @@ final readonly class TokenRequestParamChecking implements MiddlewareInterface
     public function checkTokenRequestParam(ServerRequest $request): ResponseInterface|null
     {
         $token = $request->getParsedBodyParamAsString('token', '');
-        if ($token !== '' && hash_equals($_SESSION[' PMA_token '], $token)) {
+        if ($token !== '' && hash_equals(Session::getToken(), $token)) {
             return null;
         }
 

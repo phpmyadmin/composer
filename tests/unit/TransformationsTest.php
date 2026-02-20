@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tests;
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\ConfigStorage\RelationParameters;
-use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PhpMyAdmin\Transformations;
@@ -28,17 +26,6 @@ class TransformationsTest extends AbstractTestCase
         parent::setUp();
 
         $dbi = DatabaseInterface::$instance = $this->createDatabaseInterface();
-        Current::$table = 'table';
-        Current::$database = 'db';
-        $config = Config::getInstance();
-        $config->settings = ['ServerDefault' => 1, 'ActionLinksMode' => 'icons'];
-        $config->selectedServer['pmadb'] = 'pmadb';
-        $config->selectedServer['user'] = 'user';
-        $config->selectedServer['bookmarktable'] = '';
-        $config->selectedServer['relation'] = '';
-        $config->selectedServer['table_info'] = '';
-        $config->selectedServer['table_coords'] = '';
-        $config->selectedServer['column_info'] = 'column_info';
 
         $this->transformations = new Transformations($dbi, new Relation($dbi));
     }

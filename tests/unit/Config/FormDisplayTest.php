@@ -37,16 +37,6 @@ class FormDisplayTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
-    /**
      * Test for FormDisplay::registerForm
      */
     public function testRegisterForm(): void
@@ -384,9 +374,9 @@ class FormDisplayTest extends AbstractTestCase
         $config = Config::getInstance();
         $config->setSetup(false);
 
-        $config->settings['MaxDbList'] = 10;
-        $config->settings['MaxTableList'] = 10;
-        $config->settings['QueryHistoryMax'] = 10;
+        $config->set('MaxDbList', 10);
+        $config->set('MaxTableList', 10);
+        $config->set('QueryHistoryMax', 10);
 
         $method->invokeArgs(
             $this->object,

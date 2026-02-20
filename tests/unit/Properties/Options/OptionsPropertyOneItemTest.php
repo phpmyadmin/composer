@@ -25,16 +25,6 @@ class OptionsPropertyOneItemTest extends AbstractTestCase
     }
 
     /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->stub);
-    }
-
-    /**
      * Test for
      *     - PhpMyAdmin\Properties\Options\OptionsPropertyOneItem::getValues
      *     - PhpMyAdmin\Properties\Options\OptionsPropertyOneItem::setValues

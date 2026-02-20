@@ -37,13 +37,6 @@ class ExportControllerTest extends AbstractTestCase
         DatabaseInterface::$instance = $this->createDatabaseInterface();
     }
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        DatabaseInterface::$instance = null;
-    }
-
     public function testExportController(): void
     {
         Current::$database = 'test_db';

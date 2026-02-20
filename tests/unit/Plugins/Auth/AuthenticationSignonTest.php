@@ -41,16 +41,6 @@ class AuthenticationSignonTest extends AbstractTestCase
         $this->object = new AuthenticationSignon(new ResponseRenderer());
     }
 
-    /**
-     * tearDown for test cases
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->object);
-    }
-
     public function testAuth(): void
     {
         Current::$server = 0;
