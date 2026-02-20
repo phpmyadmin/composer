@@ -18,6 +18,7 @@ use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionProperty;
 
 use function count;
 use function json_decode;
@@ -57,12 +58,11 @@ final class SimulateDmlControllerTest extends AbstractTestCase
         $dummyDbi->assertAllSelectsConsumed();
         $dummyDbi->assertAllQueriesConsumed();
 
-        /** @var string $error */
-        $error = $this->getProperty($controller, SimulateDmlController::class, 'error');
+        $error = (new ReflectionProperty(SimulateDmlController::class, 'error'))->getValue($controller);
         self::assertSame('', $error);
 
-        /** @var list<array<mixed>> $result */
-        $result = $this->getProperty($controller, SimulateDmlController::class, 'data');
+        $result = (new ReflectionProperty(SimulateDmlController::class, 'data'))->getValue($controller);
+        self::assertIsArray($result);
 
         foreach ($expectedPerQuery as $idx => $expectedData) {
             /** @var DeleteStatement|UpdateStatement $statement */
