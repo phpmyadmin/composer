@@ -5326,13 +5326,10 @@
       <code>Util::getSupportedDatatypes()</code>
       <code>Util::getSupportedDatatypes()</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="3">
-      <code>$options</code>
-      <code>$options</code>
+    <MixedArgumentTypeCoercion occurrences="1">
       <code>$value</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="31">
-      <code>$opt['value']</code>
+    <MixedArrayAccess occurrences="30">
       <code>$priv[0]</code>
       <code>$priv[1]</code>
       <code>$priv[2]</code>
@@ -5404,10 +5401,8 @@
       <code>$routine['item_param_type'][$i]</code>
       <code>$routine['item_param_type'][$routine['item_num_params'] - 1]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="19">
+    <MixedAssignment occurrences="17">
       <code>$i</code>
-      <code>$opt</code>
-      <code>$options[]</code>
       <code>$priv</code>
       <code>$retval['item_comment']</code>
       <code>$retval['item_definer']</code>
@@ -5526,32 +5521,20 @@
       <code>$itemReturnType</code>
       <code>$itemSqlDataAccess</code>
     </PossiblyInvalidOperand>
-    <PossiblyNullArgument occurrences="4">
+    <PossiblyNullArgument occurrences="3">
       <code>$create_routine</code>
       <code>$mode</code>
       <code>$routine['item_name']</code>
-      <code>$stmt-&gt;return-&gt;parameters</code>
     </PossiblyNullArgument>
     <PossiblyNullArrayAccess occurrences="2">
       <code>$routine['item_name']</code>
       <code>$routine['item_type']</code>
     </PossiblyNullArrayAccess>
-    <PossiblyNullIterator occurrences="1">
-      <code>$stmt-&gt;return-&gt;options-&gt;options</code>
-    </PossiblyNullIterator>
     <PossiblyNullOperand occurrences="3">
       <code>$output</code>
       <code>$this-&gt;browseRow($row)</code>
       <code>$title</code>
     </PossiblyNullOperand>
-    <PossiblyNullPropertyFetch occurrences="3">
-      <code>$stmt-&gt;return-&gt;name</code>
-      <code>$stmt-&gt;return-&gt;options</code>
-      <code>$stmt-&gt;return-&gt;parameters</code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference occurrences="1">
-      <code>has</code>
-    </PossiblyNullReference>
   </file>
   <file src="libraries/classes/Database/Search.php">
     <MixedArgument occurrences="4">
@@ -7894,13 +7877,15 @@
       <code>self::$registry[$schema][$table]</code>
       <code>self::$registry[$schema][$table]</code>
     </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="4">
+    <MixedArrayOffset occurrences="5">
+      <code>$columns['collations'][$key]</code>
       <code>$columns['sub_parts'][$key]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
       <code>self::$registry[$schema][$table][$keyName]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="20">
+    <MixedAssignment occurrences="21">
+      <code>$collation</code>
       <code>$column</code>
       <code>$column</code>
       <code>$data['columns'][]</code>
