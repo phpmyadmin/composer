@@ -2530,3 +2530,7 @@ body {
 pre {
   margin: 0;
 }
+
+code.php {
+  color: var(--#{$prefix}code-color);
+}
