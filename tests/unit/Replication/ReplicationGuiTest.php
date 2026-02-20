@@ -33,17 +33,8 @@ class ReplicationGuiTest extends AbstractTestCase
         parent::setUp();
 
         DatabaseInterface::$instance = $this->createDatabaseInterface();
-        //$_POST
-        $_POST['primary_add_user'] = 'primary_add_user';
 
         $config = Config::getInstance();
-        $config->settings['RememberSorting'] = true;
-        $config->settings['SQP'] = [];
-        $config->settings['MaxCharactersInDisplayedSQL'] = 1000;
-        $config->settings['ShowSQL'] = true;
-        $config->settings['TableNavigationLinksMode'] = 'icons';
-        $config->settings['LimitChars'] = 100;
-        $config->settings['ShowHint'] = true;
 
         Current::$table = 'table';
         UrlParams::$params = [];

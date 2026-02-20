@@ -650,7 +650,7 @@ class Relation
                 mb_check_encoding($value, 'utf-8')
                 && preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', $value) !== 1
             ) {
-                if (mb_strlen($value) <= $this->config->settings['LimitChars']) {
+                if (mb_strlen($value) <= $this->config->config->limitChars) {
                     // show as text if it's valid utf-8
                     $value = htmlspecialchars($value);
                 } else {
@@ -659,7 +659,7 @@ class Relation
                         mb_substr(
                             $value,
                             0,
-                            $this->config->settings['LimitChars'],
+                            $this->config->config->limitChars,
                         ) . '...',
                     );
                 }

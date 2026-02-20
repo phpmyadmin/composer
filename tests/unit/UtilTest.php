@@ -197,8 +197,6 @@ class UtilTest extends AbstractTestCase
     #[DataProvider('providerExtractColumnSpec')]
     public function testExtractColumnSpec(string $in, array $out): void
     {
-        Config::getInstance()->settings['LimitChars'] = 1000;
-
         self::assertEquals(
             $out,
             Util::extractColumnSpec($in),

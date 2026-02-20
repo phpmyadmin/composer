@@ -430,7 +430,7 @@ final class StructureController implements InvocableController
                 ),
                 'num_favorite_tables' => $this->config->settings['NumFavoriteTables'],
                 'properties_num_columns' => $this->config->config->PropertiesNumColumns,
-                'limit_chars' => $this->config->settings['LimitChars'],
+                'limit_chars' => $this->config->config->limitChars,
                 'show_charset' => $this->config->settings['ShowDbStructureCharset'],
                 'show_comment' => $this->config->settings['ShowDbStructureComment'],
                 'show_creation' => $this->config->settings['ShowDbStructureCreation'],
