@@ -1800,6 +1800,10 @@ const toggleFullscreen = function () {
   var $span = $img.siblings('span');
   var $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
   const pageContent = document.getElementById('page_content');
+  if (!document.fullscreenEnabled) {
+    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strFullscreenRequestDenied, null, 'error');
+    return;
+  }
   if (!document.fullscreenElement) {
     $img.attr('src', $img.data('exit')).attr('title', $span.data('exit'));
     $span.text($span.data('exit'));

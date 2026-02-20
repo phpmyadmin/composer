@@ -119,7 +119,6 @@ const DatabaseTriggers = {
         'ajax_request': true
       }, showExport);
     }
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
     function showExport(data) {
       if (data.success !== true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
