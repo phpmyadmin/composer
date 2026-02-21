@@ -7607,7 +7607,8 @@
       <code>$urlParams</code>
       <code>$urlParams</code>
     </InvalidArgument>
-    <InvalidArrayOffset occurrences="2">
+    <InvalidArrayOffset occurrences="3">
+      <code>$GLOBALS['cfg']['URLQueryEncryption']</code>
       <code>$server['ssl']</code>
       <code>$server['ssl_verify']</code>
     </InvalidArrayOffset>
@@ -7733,7 +7734,7 @@
       <code>$tables[$i][self::TBL_NAME]</code>
       <code>$tables[$n][self::TBL_NAME]</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="27">
+    <MixedArrayAccess occurrences="28">
       <code>$analyses[$i][self::FORMATTEDSQL][$colCount]</code>
       <code>$analyses[$i][self::SIZES]</code>
       <code>$analyses[$i][self::TYPES]</code>
@@ -7751,6 +7752,7 @@
       <code>$tables[$i][self::COL_NAMES]</code>
       <code>$tables[$i][self::COL_NAMES]</code>
       <code>$tables[$i][self::COL_NAMES]</code>
+      <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
       <code>$tables[$i][self::ROWS]</code>
@@ -9625,7 +9627,8 @@
     <PossiblyFalseReference occurrences="1">
       <code>numFields</code>
     </PossiblyFalseReference>
-    <PossiblyNullArgument occurrences="1">
+    <PossiblyNullArgument occurrences="2">
+      <code>$record[$columns[$i]]</code>
       <code>$record[$columns[$i]]</code>
     </PossiblyNullArgument>
   </file>
@@ -10119,6 +10122,9 @@
     <MixedAssignment occurrences="1">
       <code>$col_as</code>
     </MixedAssignment>
+    <PossiblyNullArgument occurrences="1">
+      <code>$record[$i]</code>
+    </PossiblyNullArgument>
   </file>
   <file src="libraries/classes/Plugins/Export/Helpers/Pdf.php">
     <MixedArgument occurrences="79">
@@ -15977,7 +15983,8 @@
     </MixedArgument>
   </file>
   <file src="test/classes/Plugins/Import/ImportXmlTest.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument occurrences="2">
+      <code>$import_notice</code>
       <code>$import_notice</code>
     </MixedArgument>
   </file>

@@ -19936,6 +19936,11 @@ parameters:
 			path: libraries/classes/Html/Generator.php
 
 		-
+			message: "#^Cannot access offset 'URLQueryEncryption' on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Html/Generator.php
+
+		-
 			message: "#^Cannot access offset 'first_timestamp' on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Html/Generator.php
@@ -20392,12 +20397,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 2 on mixed\\.$#"
-			count: 8
+			count: 9
 			path: libraries/classes/Import.php
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 21
+			count: 22
 			path: libraries/classes/Import.php
 
 		-
@@ -20447,7 +20452,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
-			count: 7
+			count: 8
 			path: libraries/classes/Import.php
 
 		-
@@ -20557,7 +20562,7 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in a negated boolean, int\\|false given\\.$#"
-			count: 1
+			count: 2
 			path: libraries/classes/Import.php
 
 		-
@@ -25577,7 +25582,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 1
+			count: 3
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
 		-
@@ -25591,12 +25596,27 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
 		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportCsv.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportCsv.php
+
+		-
 			message: "#^Cannot call method fetchRow\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
 		-
 			message: "#^Cannot call method getFieldNames\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportCsv.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
@@ -25622,6 +25642,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportCsv\\:\\:exportData\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportCsv.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportCsv.php
 
@@ -25961,6 +25986,11 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportLatex.php
 
 		-
+			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
+			count: 2
+			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
 			message: "#^Cannot access offset mixed on mixed\\.$#"
 			count: 3
 			path: libraries/classes/Plugins/Export/ExportLatex.php
@@ -25968,6 +25998,16 @@ parameters:
 		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 2
+			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Export/ExportLatex.php
 
 		-
@@ -25982,6 +26022,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method getFieldNames\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportLatex.php
 
@@ -26027,6 +26072,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$columnSpecification of static method PhpMyAdmin\\\\Util\\:\\:extractColumnSpec\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportLatex.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportLatex.php
 
@@ -26092,7 +26142,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 1
+			count: 4
 			path: libraries/classes/Plugins/Export/ExportMediawiki.php
 
 		-
@@ -26103,6 +26153,16 @@ parameters:
 		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 2
+			path: libraries/classes/Plugins/Export/ExportMediawiki.php
+
+		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportMediawiki.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Export/ExportMediawiki.php
 
 		-
@@ -26117,6 +26177,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method getColumns\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportMediawiki.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportMediawiki.php
 
@@ -26147,6 +26212,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportMediawiki\\:\\:exportStructure\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportMediawiki.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportMediawiki.php
 
@@ -26492,7 +26562,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 1
+			count: 4
 			path: libraries/classes/Plugins/Export/ExportPhparray.php
 
 		-
@@ -26506,12 +26576,27 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportPhparray.php
 
 		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportPhparray.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportPhparray.php
+
+		-
 			message: "#^Cannot call method fetchRow\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportPhparray.php
 
 		-
 			message: "#^Cannot call method getFieldNames\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportPhparray.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportPhparray.php
 
@@ -26542,6 +26627,11 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in a negated boolean, int\\|false given\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportPhparray.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportPhparray.php
 
@@ -27287,7 +27377,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 1
+			count: 3
 			path: libraries/classes/Plugins/Export/ExportTexytext.php
 
 		-
@@ -27298,6 +27388,16 @@ parameters:
 		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 3
+			path: libraries/classes/Plugins/Export/ExportTexytext.php
+
+		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportTexytext.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Export/ExportTexytext.php
 
 		-
@@ -27312,6 +27412,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method getFieldNames\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportTexytext.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportTexytext.php
 
@@ -27382,6 +27487,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$columnSpecification of static method PhpMyAdmin\\\\Util\\:\\:extractColumnSpec\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportTexytext.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportTexytext.php
 
@@ -27477,7 +27587,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 2
+			count: 4
 			path: libraries/classes/Plugins/Export/ExportXml.php
 
 		-
@@ -27488,6 +27598,16 @@ parameters:
 		-
 			message: "#^Cannot access offset string on mixed\\.$#"
 			count: 2
+			path: libraries/classes/Plugins/Export/ExportXml.php
+
+		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportXml.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
+			count: 1
 			path: libraries/classes/Plugins/Export/ExportXml.php
 
 		-
@@ -27512,6 +27632,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method getFieldNames\\(\\) on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportXml.php
+
+		-
+			message: "#^Cannot call method getFieldsMeta\\(\\) on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportXml.php
 
@@ -27596,6 +27721,11 @@ parameters:
 			path: libraries/classes/Plugins/Export/ExportXml.php
 
 		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportXml.php
+
+		-
 			message: "#^Parameter \\#1 \\$db of method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportXml\\:\\:exportDefinitions\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportXml.php
@@ -27662,7 +27792,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 1
+			count: 3
 			path: libraries/classes/Plugins/Export/ExportYaml.php
 
 		-
@@ -27672,6 +27802,16 @@ parameters:
 
 		-
 			message: "#^Cannot access offset string on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportYaml.php
+
+		-
+			message: "#^Cannot access property \\$isBinary on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportYaml.php
+
+		-
+			message: "#^Cannot access property \\$isMappedTypeGeometry on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportYaml.php
 
@@ -27717,6 +27857,11 @@ parameters:
 
 		-
 			message: "#^Method PhpMyAdmin\\\\Plugins\\\\Export\\\\ExportYaml\\:\\:exportData\\(\\) has parameter \\$aliases with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: libraries/classes/Plugins/Export/ExportYaml.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, mixed given\\.$#"
 			count: 1
 			path: libraries/classes/Plugins/Export/ExportYaml.php
 
@@ -46932,7 +47077,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
-			count: 5
+			count: 10
 			path: test/classes/Plugins/Import/ImportXmlTest.php
 
 		-

@@ -1068,6 +1068,7 @@ class Generator
                                     str_contains($url, 'sql_query=')
                                     && ! str_contains($url, 'sql_signature=')
                                 )
+                                || $GLOBALS['cfg']['URLQueryEncryption']
                                 || str_contains($url, 'view[as]=');
         if ($respectUrlLengthLimit && $isDataPostFormatSupported) {
             $parts = explode('?', $url, 2);

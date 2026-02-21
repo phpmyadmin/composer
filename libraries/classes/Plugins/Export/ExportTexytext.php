@@ -18,6 +18,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 use PhpMyAdmin\Util;
 
 use function __;
+use function bin2hex;
 use function htmlspecialchars;
 use function in_array;
 use function str_replace;
@@ -185,6 +186,7 @@ class ExportTexytext extends ExportPlugin
         // Gets the data from the database
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $result->numFields();
+        $fieldsMeta = $dbi->getFieldsMeta($result);
 
         // If required, get fields name at the first line
         if (isset($GLOBALS[$what . '_columns'])) {
@@ -212,6 +214,10 @@ class ExportTexytext extends ExportPlugin
                     $value = $GLOBALS[$what . '_null'];
                 } elseif ($row[$j] == '0' || $row[$j] != '') {
                     $value = $row[$j];
+
+                    if ($fieldsMeta[$j]->isMappedTypeGeometry || $fieldsMeta[$j]->isBinary) {
+                        $value = '0x' . bin2hex($value);
+                    }
                 } else {
                     $value = ' ';
                 }

@@ -1169,7 +1169,8 @@ class Import
                         if ($analyses != null) {
                             $isVarchar = ($analyses[$i][self::TYPES][$colCount] === self::VARCHAR);
                         } else {
-                            $isVarchar = ! is_numeric($tables[$i][self::ROWS][$j][$k]);
+                            $isVarchar = ! is_numeric($tables[$i][self::ROWS][$j][$k])
+                                && ! preg_match('/^0x[0-9a-f]+$/', (string) $tables[$i][self::ROWS][$j][$k]);
                         }
 
                         /* Don't put quotes around NULL fields */

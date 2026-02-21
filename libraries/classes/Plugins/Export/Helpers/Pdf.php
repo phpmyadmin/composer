@@ -267,6 +267,16 @@ class Pdf extends PdfLib
                 $this->page = $currpage;
                 $this->setXY($l, $h);
                 if ($this->tablewidths[$col] > 0) {
+                    if ($txt !== null) {
+                        if ($this->fields[$col]->isType(FieldMetadata::TYPE_GEOMETRY)) {
+                            $txt = '[GEOMETRY]';
+                        }
+
+                        if ($this->fields[$col]->isType(FieldMetadata::TYPE_BLOB) || $this->fields[$col]->isBinary()) {
+                            $txt = '[BLOB]';
+                        }
+                    }
+
                     $this->MultiCell($this->tablewidths[$col], $lineheight, $txt ?? 'NULL', 0, $this->colAlign[$col]);
                     $l += $this->tablewidths[$col];
                 }
@@ -770,7 +780,7 @@ class Pdf extends PdfLib
             }
 
             /**
-             * @todo do not deactivate completely the display
+             * do not deactivate completely the display
              * but show the field's name and [BLOB]
              */
             if ($this->fields[$i]->isBinary()) {

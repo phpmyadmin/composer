@@ -17,6 +17,7 @@ use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
+use function bin2hex;
 use function mb_strtolower;
 use function mb_substr;
 use function preg_replace;
@@ -220,6 +221,7 @@ class ExportCsv extends ExportPlugin
         // Gets the data from the database
         $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
         $fields_cnt = $result->numFields();
+        $fieldsMeta = $dbi->getFieldsMeta($result);
 
         // If required, get fields name at the first line
         if (isset($GLOBALS['csv_columns']) && $GLOBALS['csv_columns']) {
@@ -254,6 +256,10 @@ class ExportCsv extends ExportPlugin
                 if (! isset($row[$j])) {
                     $schema_insert .= $GLOBALS[$what . '_null'];
                 } elseif ($row[$j] == '0' || $row[$j] != '') {
+                    if ($fieldsMeta[$j]->isMappedTypeGeometry || $fieldsMeta[$j]->isBinary) {
+                        $row[$j] = '0x' . bin2hex($row[$j]);
+                    }
+
                     // always enclose fields
                     if ($what === 'excel') {
                         $row[$j] = preg_replace("/\015(\012)?/", "\012", $row[$j]);
