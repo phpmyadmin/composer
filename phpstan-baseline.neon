@@ -1978,12 +1978,6 @@ parameters:
 			path: src/Controllers/Import/ImportController.php
 
 		-
-			message: '#^Casting to string something that''s already string\.$#'
-			identifier: cast.useless
-			count: 1
-			path: src/Controllers/Import/ImportController.php
-
-		-
 			message: '#^Comparison operation "\<\=" between 0 and int\<1, max\> is always true\.$#'
 			identifier: smallerOrEqual.alwaysTrue
 			count: 1
@@ -3925,12 +3919,6 @@ parameters:
 			path: src/Core.php
 
 		-
-			message: '#^Only booleans are allowed in a negated boolean, int\|string given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/Core.php
-
-		-
 			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -5782,12 +5770,6 @@ parameters:
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
 			count: 2
-			path: src/Export/Export.php
-
-		-
-			message: '#^Casting to string something that''s already string\.$#'
-			identifier: cast.useless
-			count: 1
 			path: src/Export/Export.php
 
 		-
