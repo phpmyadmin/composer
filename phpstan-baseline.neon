@@ -19936,6 +19936,11 @@ parameters:
 			path: libraries/classes/Html/Generator.php
 
 		-
+			message: "#^Cannot access offset 'URLQueryEncryption' on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Html/Generator.php
+
+		-
 			message: "#^Cannot access offset 'first_timestamp' on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Html/Generator.php

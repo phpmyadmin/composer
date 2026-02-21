@@ -7607,7 +7607,8 @@
       <code>$urlParams</code>
       <code>$urlParams</code>
     </InvalidArgument>
-    <InvalidArrayOffset occurrences="2">
+    <InvalidArrayOffset occurrences="3">
+      <code>$GLOBALS['cfg']['URLQueryEncryption']</code>
       <code>$server['ssl']</code>
       <code>$server['ssl_verify']</code>
     </InvalidArrayOffset>
