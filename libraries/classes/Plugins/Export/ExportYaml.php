@@ -17,6 +17,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
 use function array_key_exists;
+use function bin2hex;
 use function is_numeric;
 use function str_replace;
 use function stripslashes;
@@ -179,6 +180,10 @@ class ExportYaml extends ExportPlugin
                 if (is_numeric($record[$i]) && $isNotString) {
                     $buffer .= '  ' . $columns[$i] . ': ' . $record[$i] . $crlf;
                     continue;
+                }
+
+                if ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                    $record[$i] = '0x' . bin2hex($record[$i]);
                 }
 
                 $record[$i] = str_replace(

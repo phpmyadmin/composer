@@ -15,6 +15,7 @@ use PhpMyAdmin\Util;
 use PhpMyAdmin\Version;
 
 use function __;
+use function bin2hex;
 use function count;
 use function htmlspecialchars;
 use function is_array;
@@ -463,6 +464,7 @@ class ExportXml extends ExportPlugin
             $result = $dbi->query($sqlQuery, DatabaseInterface::CONNECT_USER, DatabaseInterface::QUERY_UNBUFFERED);
 
             $columns_cnt = $result->numFields();
+            $fieldsMeta = $dbi->getFieldsMeta($result);
             $columns = [];
             foreach ($result->getFieldNames() as $column) {
                 $columns[] = stripslashes($column);
@@ -487,6 +489,8 @@ class ExportXml extends ExportPlugin
                     // the XML structure
                     if (! isset($record[$i])) {
                         $record[$i] = 'NULL';
+                    } elseif ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                        $record[$i] = '0x' . bin2hex($record[$i]);
                     }
 
                     $buffer .= '            <column name="'
