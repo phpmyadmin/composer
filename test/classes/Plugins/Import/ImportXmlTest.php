@@ -117,4 +117,37 @@ class ImportXmlTest extends AbstractTestCase
         self::assertStringContainsString('Edit settings for `pma_bookmarktest`', $import_notice);
         self::assertTrue($GLOBALS['finished']);
     }
+
+    /**
+     * Test for doImport using second dataset
+     *
+     * @group medium
+     * @requires extension simplexml
+     */
+    public function testDoImportDataset2(): void
+    {
+        global $import_notice;
+
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $GLOBALS['dbi'] = $dbi;
+
+        $GLOBALS['import_file'] = 'test/test_data/test.xml';
+
+        $importHandle = new File($GLOBALS['import_file']);
+        $importHandle->open();
+
+        $this->object->doImport($importHandle);
+
+        self::assertStringContainsString(
+            'The following structures have either been created or altered.',
+            $import_notice
+        );
+        self::assertStringContainsString('Go to database: `test`', $import_notice);
+        self::assertStringContainsString('Edit settings for `test`', $import_notice);
+        self::assertStringContainsString('Go to table: `test`', $import_notice);
+        self::assertStringContainsString('Edit settings for `test`', $import_notice);
+        self::assertTrue($GLOBALS['finished']);
+    }
 }

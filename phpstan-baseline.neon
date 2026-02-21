@@ -20392,12 +20392,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 2 on mixed\\.$#"
-			count: 8
+			count: 9
 			path: libraries/classes/Import.php
 
 		-
 			message: "#^Cannot access offset int\\<0, max\\> on mixed\\.$#"
-			count: 21
+			count: 22
 			path: libraries/classes/Import.php
 
 		-
@@ -20447,7 +20447,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
-			count: 7
+			count: 8
 			path: libraries/classes/Import.php
 
 		-
@@ -20557,7 +20557,7 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in a negated boolean, int\\|false given\\.$#"
-			count: 1
+			count: 2
 			path: libraries/classes/Import.php
 
 		-
@@ -46932,7 +46932,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
-			count: 5
+			count: 10
 			path: test/classes/Plugins/Import/ImportXmlTest.php
 
 		-
