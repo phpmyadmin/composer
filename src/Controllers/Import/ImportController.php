@@ -36,7 +36,6 @@ use function __;
 use function _ngettext;
 use function in_array;
 use function ini_get;
-use function ini_parse_quantity;
 use function ini_set;
 use function is_array;
 use function is_link;
@@ -343,8 +342,7 @@ final readonly class ImportController implements InvocableController
 
         // We can not read all at once, otherwise we can run out of memory
         // Calculate value of the limit
-        $memoryLimit = (string) ini_get('memory_limit');
-        $memoryLimit = ini_parse_quantity($memoryLimit);
+        $memoryLimit = Util::getRealSize(ini_get('memory_limit'));
         // 2 MB as default
         if ($memoryLimit === 0) {
             $memoryLimit = 2 * 1024 * 1024;

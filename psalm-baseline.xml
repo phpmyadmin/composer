@@ -1319,9 +1319,6 @@
     </UnusedVariable>
   </file>
   <file src="src/Controllers/Import/ImportController.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$memoryLimit]]></code>
-    </ArgumentTypeCoercion>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[UrlParams::$params]]></code>
     </MixedArgumentTypeCoercion>
@@ -2968,9 +2965,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <InvalidOperand>
-      <code><![CDATA[$matches[1]]]></code>
-    </InvalidOperand>
     <MixedArgument>
       <code><![CDATA[$path[$depth + 1]]]></code>
     </MixedArgument>
@@ -4063,9 +4057,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Export/Export.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[(string) ini_get('memory_limit')]]></code>
-    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$dbAlias]]></code>
       <code><![CDATA[$dbAlias]]></code>
@@ -9843,8 +9834,6 @@
   </file>
   <file src="tests/unit/Display/ResultsTest.php">
     <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>

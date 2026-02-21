@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Cache;
+use PhpMyAdmin\Charsets;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Container\ContainerBuilder;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Dbal\DbiExtension;
+use PhpMyAdmin\Encoding;
 use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Plugins\Export\ExportSql;
 use PhpMyAdmin\Sql;
@@ -68,8 +70,14 @@ abstract class AbstractTestCase extends TestCase
         Cache::purge();
         Tracker::disable();
 
-        (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, null);
         ContainerBuilder::$container = null;
+        DatabaseInterface::$instance = null;
+        Config::$instance = null;
+        (new ReflectionProperty(Template::class, 'twig'))->setValue(null, null);
+        (new ReflectionProperty(Relation::class, 'cache'))->setValue(null, null);
+        (new ReflectionProperty(Charsets::class, 'charsets'))->setValue(null, []);
+        (new ReflectionProperty(Charsets::class, 'collations'))->setValue(null, []);
+        (new ReflectionProperty(Encoding::class, 'engine'))->setValue(null, null);
     }
 
     protected function createDatabaseInterface(
@@ -101,18 +109,6 @@ abstract class AbstractTestCase extends TestCase
     protected function setProxySettings(): void
     {
         HttpRequest::setProxySettingsFromEnv();
-    }
-
-    /**
-     * Destroys the environment built for the test.
-     * Clean all variables
-     */
-    protected function tearDown(): void
-    {
-        ContainerBuilder::$container = null;
-        DatabaseInterface::$instance = null;
-        Config::$instance = null;
-        (new ReflectionProperty(Template::class, 'twig'))->setValue(null, null);
     }
 
     /**

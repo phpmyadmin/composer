@@ -14,7 +14,6 @@ use PhpMyAdmin\Tests\Clock\MockClock;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use stdClass;
 
 use function _pgettext;
@@ -255,42 +254,6 @@ class CoreTest extends AbstractTestCase
             ['shell.php?sql.php&test=true', false],
             ['index.php%3Fsql.php%26test%3Dtrue', true],
             ['shell.php%3Fsql.php%26test%3Dtrue', false],
-        ];
-    }
-
-    /**
-     * Test for Core::getRealSize
-     *
-     * @param string $size     Size
-     * @param int    $expected Expected value
-     */
-    #[DataProvider('providerTestGetRealSize')]
-    #[Group('32bit-incompatible')]
-    public function testGetRealSize(string $size, int $expected): void
-    {
-        self::assertSame($expected, Core::getRealSize($size));
-    }
-
-    /**
-     * Data provider for testGetRealSize
-     *
-     * @return array<array{string, int}>
-     */
-    public static function providerTestGetRealSize(): array
-    {
-        return [
-            ['0', 0],
-            ['1kb', 1024],
-            ['1024k', 1024 * 1024],
-            ['8m', 8 * 1024 * 1024],
-            ['12gb', 12 * 1024 * 1024 * 1024],
-            ['1024', 1024],
-            ['8000m', 8 * 1000 * 1024 * 1024],
-            ['8G', 8 * 1024 * 1024 * 1024],
-            ['2048', 2048],
-            ['2048K', 2048 * 1024],
-            ['2048K', 2048 * 1024],
-            ['102400K', 102400 * 1024],
         ];
     }
 
