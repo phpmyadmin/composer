@@ -9841,8 +9841,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <DocblockTypeContradiction>
       <code><![CDATA[assertSame]]></code>
