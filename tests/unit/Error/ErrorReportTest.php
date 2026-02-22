@@ -18,6 +18,7 @@ use PhpMyAdmin\Utils\UserAgentParser;
 use PhpMyAdmin\Version;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionMethod;
 
 use function htmlspecialchars;
 use function json_encode;
@@ -328,12 +329,7 @@ class ErrorReportTest extends AbstractTestCase
         // $this->errorReport->sanitizeUrl
         self::assertSame(
             $result,
-            $this->callFunction(
-                $this->errorReport,
-                ErrorReport::class,
-                'sanitizeUrl',
-                [$url],
-            ),
+            (new ReflectionMethod(ErrorReport::class, 'sanitizeUrl'))->invokeArgs($this->errorReport, [$url]),
         );
     }
 }

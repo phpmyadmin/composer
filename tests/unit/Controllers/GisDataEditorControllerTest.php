@@ -14,6 +14,7 @@ use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use ReflectionMethod;
 
 #[CoversClass(GisDataEditorController::class)]
 class GisDataEditorControllerTest extends AbstractTestCase
@@ -37,16 +38,8 @@ class GisDataEditorControllerTest extends AbstractTestCase
     public function testValidateGisData(mixed $gisData, string $type, string|null $value, string $expected): void
     {
         /** @var string $gisData */
-        $gisData = $this->callFunction(
-            $this->controller,
-            GisDataEditorController::class,
-            'extractGisType',
-            [
-                $gisData,
-                $type,
-                $value,
-            ],
-        );
+        $gisData = (new ReflectionMethod(GisDataEditorController::class, 'extractGisType'))
+            ->invokeArgs($this->controller, [$gisData, $type, $value]);
         self::assertSame($expected, $gisData);
     }
 

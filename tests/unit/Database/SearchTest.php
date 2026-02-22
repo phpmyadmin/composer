@@ -14,6 +14,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionMethod;
 
 #[CoversClass(Search::class)]
 class SearchTest extends AbstractTestCase
@@ -74,12 +75,7 @@ class SearchTest extends AbstractTestCase
         $this->object->setSearchParams($request);
         self::assertSame(
             $expected,
-            $this->callFunction(
-                $this->object,
-                Search::class,
-                'getWhereClause',
-                ['table1'],
-            ),
+            (new ReflectionMethod(Search::class, 'getWhereClause'))->invokeArgs($this->object, ['table1']),
         );
     }
 
@@ -188,12 +184,7 @@ class SearchTest extends AbstractTestCase
                 'select_count' => 'SELECT COUNT(*) AS `count` FROM `pma`.`table1` WHERE FALSE',
                 'delete' => 'DELETE FROM `pma`.`table1` WHERE FALSE',
             ],
-            $this->callFunction(
-                $this->object,
-                Search::class,
-                'getSearchSqls',
-                ['table1'],
-            ),
+            (new ReflectionMethod(Search::class, 'getSearchSqls'))->invokeArgs($this->object, ['table1']),
         );
     }
 

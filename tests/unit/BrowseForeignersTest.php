@@ -10,6 +10,7 @@ use PhpMyAdmin\ConfigStorage\ForeignData;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Theme\ThemeManager;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
 
 #[CoversClass(BrowseForeigners::class)]
 class BrowseForeignersTest extends AbstractTestCase
@@ -70,33 +71,21 @@ class BrowseForeignersTest extends AbstractTestCase
         $foreignData = new ForeignData(false, 5, '', null, '');
         self::assertSame(
             '',
-            $this->callFunction(
-                $this->browseForeigners,
-                BrowseForeigners::class,
-                'getHtmlForGotoPage',
-                [$foreignData, 0],
-            ),
+            (new ReflectionMethod(BrowseForeigners::class, 'getHtmlForGotoPage'))
+                ->invokeArgs($this->browseForeigners, [$foreignData, 0]),
         );
 
         $foreignData = new ForeignData(false, 5, '', [], '');
 
         self::assertSame(
             '',
-            $this->callFunction(
-                $this->browseForeigners,
-                BrowseForeigners::class,
-                'getHtmlForGotoPage',
-                [$foreignData, 15],
-            ),
+            (new ReflectionMethod(BrowseForeigners::class, 'getHtmlForGotoPage'))
+                ->invokeArgs($this->browseForeigners, [$foreignData, 15]),
         );
 
         $foreignData = new ForeignData(false, 30, '', [], '');
-        $result = $this->callFunction(
-            $this->browseForeigners,
-            BrowseForeigners::class,
-            'getHtmlForGotoPage',
-            [$foreignData, 15],
-        );
+        $result = (new ReflectionMethod(BrowseForeigners::class, 'getHtmlForGotoPage'))
+            ->invokeArgs($this->browseForeigners, [$foreignData, 15]);
 
         self::assertStringStartsWith('Page number:', $result);
 
@@ -118,12 +107,8 @@ class BrowseForeignersTest extends AbstractTestCase
 
         self::assertSame(
             ['foobar<baz', ''],
-            $this->callFunction(
-                $this->browseForeigners,
-                BrowseForeigners::class,
-                'getDescriptionAndTitle',
-                [$desc],
-            ),
+            (new ReflectionMethod(BrowseForeigners::class, 'getDescriptionAndTitle'))
+                ->invokeArgs($this->browseForeigners, [$desc]),
         );
 
         $config = new Config();
@@ -132,12 +117,8 @@ class BrowseForeignersTest extends AbstractTestCase
 
         self::assertSame(
             ['fooba...', 'foobar<baz'],
-            $this->callFunction(
-                $browseForeigners,
-                BrowseForeigners::class,
-                'getDescriptionAndTitle',
-                [$desc],
-            ),
+            (new ReflectionMethod(BrowseForeigners::class, 'getDescriptionAndTitle'))
+                ->invokeArgs($browseForeigners, [$desc]),
         );
     }
 

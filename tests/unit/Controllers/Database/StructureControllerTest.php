@@ -21,6 +21,7 @@ use PhpMyAdmin\Tracking\TrackingChecker;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionMethod;
 
 #[CoversClass(StructureController::class)]
 class StructureControllerTest extends AbstractTestCase
@@ -338,31 +339,19 @@ class StructureControllerTest extends AbstractTestCase
 
         self::assertSame(
             [[], '', '', 0],
-            $this->callFunction(
-                $structureController,
-                StructureController::class,
-                'getValuesForMroongaTable',
-                [[], 0],
-            ),
+            (new ReflectionMethod(StructureController::class, 'getValuesForMroongaTable'))
+                ->invokeArgs($structureController, [[], 0]),
         );
 
         // Enable stats
         $config->settings['ShowStats'] = true;
-        $this->callFunction(
-            $structureController,
-            StructureController::class,
-            'getDatabaseInfo',
-            [self::createStub(ServerRequest::class)],
-        );
+        (new ReflectionMethod(StructureController::class, 'getDatabaseInfo'))
+            ->invokeArgs($structureController, [self::createStub(ServerRequest::class)]);
 
         self::assertSame(
             [['Data_length' => 45, 'Index_length' => 60], '105', 'B', 105],
-            $this->callFunction(
-                $structureController,
-                StructureController::class,
-                'getValuesForMroongaTable',
-                [['Data_length' => 45, 'Index_length' => 60], 0],
-            ),
+            (new ReflectionMethod(StructureController::class, 'getValuesForMroongaTable'))
+                ->invokeArgs($structureController, [['Data_length' => 45, 'Index_length' => 60], 0]),
         );
 
         self::assertSame(
@@ -372,12 +361,8 @@ class StructureControllerTest extends AbstractTestCase
                 'B',
                 180, //105 + 75
             ],
-            $this->callFunction(
-                $structureController,
-                StructureController::class,
-                'getValuesForMroongaTable',
-                [['Data_length' => 45, 'Index_length' => 60], 75],
-            ),
+            (new ReflectionMethod(StructureController::class, 'getValuesForMroongaTable'))
+                ->invokeArgs($structureController, [['Data_length' => 45, 'Index_length' => 60], 75]),
         );
     }
 

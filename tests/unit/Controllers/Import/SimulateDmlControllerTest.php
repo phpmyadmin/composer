@@ -18,6 +18,8 @@ use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
 use PhpMyAdmin\Url;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionMethod;
+use ReflectionProperty;
 
 use function count;
 use function json_decode;
@@ -49,20 +51,20 @@ final class SimulateDmlControllerTest extends AbstractTestCase
 
         $controller = new SimulateDmlController(new ResponseRenderer(), new SimulateDml($dbi));
         /** @var Parser $parser */
-        $parser = $this->callFunction($controller, SimulateDmlController::class, 'createParser', [$sqlQuery, ';']);
+        $parser = (new ReflectionMethod(SimulateDmlController::class, 'createParser'))
+            ->invokeArgs($controller, [$sqlQuery, ';']);
         self::assertCount(count($expectedPerQuery), $parser->statements);
 
-        $this->callFunction($controller, SimulateDmlController::class, 'process', [$parser]);
+        (new ReflectionMethod(SimulateDmlController::class, 'process'))->invokeArgs($controller, [$parser]);
 
         $dummyDbi->assertAllSelectsConsumed();
         $dummyDbi->assertAllQueriesConsumed();
 
-        /** @var string $error */
-        $error = $this->getProperty($controller, SimulateDmlController::class, 'error');
+        $error = (new ReflectionProperty(SimulateDmlController::class, 'error'))->getValue($controller);
         self::assertSame('', $error);
 
-        /** @var list<array<mixed>> $result */
-        $result = $this->getProperty($controller, SimulateDmlController::class, 'data');
+        $result = (new ReflectionProperty(SimulateDmlController::class, 'data'))->getValue($controller);
+        self::assertIsArray($result);
 
         foreach ($expectedPerQuery as $idx => $expectedData) {
             /** @var DeleteStatement|UpdateStatement $statement */

@@ -28,6 +28,7 @@ use PhpMyAdmin\UrlParams;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Medium;
+use ReflectionMethod;
 use ReflectionProperty;
 
 use function hash;
@@ -185,12 +186,8 @@ class InsertEditTest extends AbstractTestCase
             $config,
             new ResponseRenderer(),
         );
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'analyzeWhereClauses',
-            [$clauses, 'table', 'db'],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'analyzeWhereClauses'))
+            ->invokeArgs($this->insertEdit, [$clauses, 'table', 'db']);
 
         self::assertSame(
             [[$resultStub1, $resultStub2], [['assoc1'], ['assoc2']], false],
@@ -234,12 +231,8 @@ class InsertEditTest extends AbstractTestCase
             new ResponseRenderer(),
         );
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'hasUniqueCondition',
-            [['1' => 1], $resultStub],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'hasUniqueCondition'))
+            ->invokeArgs($this->insertEdit, [['1' => 1], $resultStub]);
 
         self::assertTrue($result);
 
@@ -272,12 +265,8 @@ class InsertEditTest extends AbstractTestCase
             new ResponseRenderer(),
         );
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'loadFirstRow',
-            ['table', 'db'],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'loadFirstRow'))
+            ->invokeArgs($this->insertEdit, ['table', 'db']);
 
         self::assertSame($resultStub, $result);
     }
@@ -298,12 +287,7 @@ class InsertEditTest extends AbstractTestCase
     {
         Config::getInstance()->set('InsertRows', $configValue);
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getInsertRows',
-            [],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getInsertRows'))->invokeArgs($this->insertEdit, []);
 
         self::assertSame($rowsValue, $result);
     }
@@ -365,24 +349,16 @@ class InsertEditTest extends AbstractTestCase
         $fieldName = 'f1<';
 
         self::assertSame(
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getColumnTitle',
-                [$fieldName, []],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getColumnTitle'))
+                ->invokeArgs($this->insertEdit, [$fieldName, []]),
             'f1&lt;',
         );
 
         $comments = [];
         $comments['f1<'] = 'comment>';
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getColumnTitle',
-            [$fieldName, $comments],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getColumnTitle'))
+            ->invokeArgs($this->insertEdit, [$fieldName, $comments]);
 
         $result = $this->parseString($result);
 
@@ -463,12 +439,8 @@ class InsertEditTest extends AbstractTestCase
         );
         self::assertSame(
             '1',
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getNullifyCodeForNullColumn',
-                [$column, $foreigners, false],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getNullifyCodeForNullColumn'))
+                ->invokeArgs($this->insertEdit, [$column, $foreigners, false]),
         );
 
         $column = new InsertEditColumn(
@@ -486,35 +458,23 @@ class InsertEditTest extends AbstractTestCase
         );
         self::assertSame(
             '2',
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getNullifyCodeForNullColumn',
-                [$column, $foreigners, false],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getNullifyCodeForNullColumn'))
+                ->invokeArgs($this->insertEdit, [$column, $foreigners, false]),
         );
 
         $column = new InsertEditColumn('f', 'set', false, '', null, '', -1, false, false, false, false);
         self::assertSame(
             '3',
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getNullifyCodeForNullColumn',
-                [$column, $foreigners, false],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getNullifyCodeForNullColumn'))
+                ->invokeArgs($this->insertEdit, [$column, $foreigners, false]),
         );
 
         $column = new InsertEditColumn('f', '', false, '', null, '', -1, false, false, false, false);
         $foreigners = new Foreigners(['f' => ['y']]);
         self::assertSame(
             '4',
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getNullifyCodeForNullColumn',
-                [$column, $foreigners, false],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getNullifyCodeForNullColumn'))
+                ->invokeArgs($this->insertEdit, [$column, $foreigners, false]),
         );
     }
 
@@ -541,12 +501,8 @@ class InsertEditTest extends AbstractTestCase
             false,
         );
         (new ReflectionProperty(InsertEdit::class, 'fieldIndex'))->setValue($this->insertEdit, 2);
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getTextarea',
-            [$column, 'a', 'b', '', 'foobar', TypeClass::Char],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getTextarea'))
+            ->invokeArgs($this->insertEdit, [$column, 'a', 'b', '', 'foobar', TypeClass::Char]);
 
         $result = $this->parseString($result);
 
@@ -564,24 +520,14 @@ class InsertEditTest extends AbstractTestCase
     public function testGetMaxUploadSize(): void
     {
         $type = 'tinyblob';
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getMaxUploadSize',
-            [$type],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getMaxUploadSize'))->invokeArgs($this->insertEdit, [$type]);
 
         self::assertSame("(Max: 256B)\n", $result);
 
         // case 2
         // this should stub Util::getUploadSizeInBytes() but it's not possible
         $type = 'blob';
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getMaxUploadSize',
-            [$type],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getMaxUploadSize'))->invokeArgs($this->insertEdit, [$type]);
 
         self::assertSame("(Max: 64KiB)\n", $result);
     }
@@ -598,10 +544,8 @@ class InsertEditTest extends AbstractTestCase
 
         $extractedColumnSpec = '25';
         (new ReflectionProperty(InsertEdit::class, 'fieldIndex'))->setValue($this->insertEdit, 22);
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -637,10 +581,8 @@ class InsertEditTest extends AbstractTestCase
             false,
             false,
         );
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -682,10 +624,8 @@ class InsertEditTest extends AbstractTestCase
             false,
             false,
         );
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -704,10 +644,8 @@ class InsertEditTest extends AbstractTestCase
 
         // case 4: (else -> date)
         $column = new InsertEditColumn('f', 'date', false, '', null, 'auto_increment', 20, false, false, false, false);
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -726,10 +664,8 @@ class InsertEditTest extends AbstractTestCase
 
         // case 5: (else -> bit)
         $column = new InsertEditColumn('f', 'bit', false, '', null, 'auto_increment', 20, false, false, false, false);
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -748,10 +684,8 @@ class InsertEditTest extends AbstractTestCase
 
         // case 6: (else -> uuid)
         $column = new InsertEditColumn('f', 'uuid', false, '', null, 'auto_increment', 20, false, false, false, false);
-        $result = $this->callFunction(
+        $result = (new ReflectionMethod(InsertEdit::class, 'getValueColumnForOtherDatatypes'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getValueColumnForOtherDatatypes',
             [
                 $column,
                 'defchar',
@@ -794,12 +728,8 @@ class InsertEditTest extends AbstractTestCase
 
         self::assertSame(
             40,
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getColumnSize',
-                [$column, $specInBrackets],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getColumnSize'))
+                ->invokeArgs($this->insertEdit, [$column, $specInBrackets]),
         );
 
         self::assertSame('textarea', $config->config->CharEditing);
@@ -820,12 +750,8 @@ class InsertEditTest extends AbstractTestCase
         );
         self::assertSame(
             30,
-            $this->callFunction(
-                $this->insertEdit,
-                InsertEdit::class,
-                'getColumnSize',
-                [$column, $specInBrackets],
-            ),
+            (new ReflectionMethod(InsertEdit::class, 'getColumnSize'))
+                ->invokeArgs($this->insertEdit, [$column, $specInBrackets]),
         );
     }
 
@@ -878,12 +804,8 @@ class InsertEditTest extends AbstractTestCase
     {
         $urlParams = ['ShowFunctionFields' => 2];
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getHeadAndFootOfInsertRowTable',
-            [$urlParams],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getHeadAndFootOfInsertRowTable'))
+            ->invokeArgs($this->insertEdit, [$urlParams]);
 
         $result = $this->parseString($result);
 
@@ -916,12 +838,8 @@ class InsertEditTest extends AbstractTestCase
             false,
         );
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, '', 'a', false],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, '', 'a', false]);
 
         self::assertEquals(
             [true, null, null, '<input type="hidden" name="fields_preva" value="">'],
@@ -947,12 +865,8 @@ class InsertEditTest extends AbstractTestCase
             false,
         );
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, $extractedColumnSpec, 'a', false],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, $extractedColumnSpec, 'a', false]);
 
         self::assertEquals(
             [false, '00000000000001111011', null, '<input type="hidden" name="fields_preva" value="123">'],
@@ -960,12 +874,8 @@ class InsertEditTest extends AbstractTestCase
         );
 
         $currentRow['f'] = 'abcd';
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, $extractedColumnSpec, 'a', true],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, $extractedColumnSpec, 'a', true]);
 
         self::assertEquals(
             [false, 'abcd', null, '<input type="hidden" name="fields_preva" value="abcd">'],
@@ -1006,12 +916,8 @@ class InsertEditTest extends AbstractTestCase
             false,
         );
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, $extractedColumnSpec, 'a', false],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, $extractedColumnSpec, 'a', false]);
 
         self::assertEquals(
             [false, "'',", null, '<input type="hidden" name="fields_preva" value="\'\',">'],
@@ -1035,12 +941,8 @@ class InsertEditTest extends AbstractTestCase
         $currentRow['f'] = '11001';
         $extractedColumnSpec = '20';
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, $extractedColumnSpec, 'a', false],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, $extractedColumnSpec, 'a', false]);
 
         self::assertSame(
             [
@@ -1055,12 +957,8 @@ class InsertEditTest extends AbstractTestCase
         // Case 5
         $currentRow['f'] = "11001\x00";
 
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValueAndBackupFieldForExistingRow',
-            [$currentRow, $column, $extractedColumnSpec, 'a', false],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValueAndBackupFieldForExistingRow'))
+            ->invokeArgs($this->insertEdit, [$currentRow, $column, $extractedColumnSpec, 'a', false]);
 
         self::assertSame(
             [
@@ -1083,12 +981,8 @@ class InsertEditTest extends AbstractTestCase
         string $expected,
     ): void {
         /** @var string $result */
-        $result = $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getDefaultValue',
-            [$defaultValue, $trueType],
-        );
+        $result = (new ReflectionMethod(InsertEdit::class, 'getDefaultValue'))
+            ->invokeArgs($this->insertEdit, [$defaultValue, $trueType]);
 
         self::assertSame($expected, $result);
     }
@@ -1343,12 +1237,8 @@ class InsertEditTest extends AbstractTestCase
             new ResponseRenderer(),
         );
 
-        $result = (array) $this->callFunction(
-            $this->insertEdit,
-            InsertEdit::class,
-            'getWarningMessages',
-            [],
-        );
+        $result = (array) (new ReflectionMethod(InsertEdit::class, 'getWarningMessages'))
+            ->invokeArgs($this->insertEdit, []);
 
         self::assertSame(['Error: #1001 Message 1', 'Warning: #1002 Message 2'], $result);
     }
@@ -2334,10 +2224,8 @@ class InsertEditTest extends AbstractTestCase
         ];
 
         // Test w/ input transformation
-        $actual = $this->callFunction(
+        $actual = (new ReflectionMethod(InsertEdit::class, 'getHtmlForInsertEditFormColumn'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlForInsertEditFormColumn',
             [
                 $tableColumn,
                 0,
@@ -2378,10 +2266,8 @@ class InsertEditTest extends AbstractTestCase
         // Test w/o input_transformation
         $tableColumn = new Column('qwerty', 'datetime', null, true, '', null, '', 'insert,update,select', '');
         $repopulate = [md5('qwerty') => '12-10-14'];
-        $actual = $this->callFunction(
+        $actual = (new ReflectionMethod(InsertEdit::class, 'getHtmlForInsertEditFormColumn'))->invokeArgs(
             $this->insertEdit,
-            InsertEdit::class,
-            'getHtmlForInsertEditFormColumn',
             [
                 $tableColumn,
                 0,

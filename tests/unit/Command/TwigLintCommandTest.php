@@ -8,6 +8,7 @@ use PhpMyAdmin\Command\TwigLintCommand;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
 use Symfony\Component\Console\Command\Command;
 use Twig\Error\SyntaxError;
 
@@ -39,7 +40,7 @@ class TwigLintCommandTest extends AbstractTestCase
 
     public function testGetTemplateContents(): void
     {
-        $contents = $this->callFunction($this->command, TwigLintCommand::class, 'getTemplateContents', [
+        $contents = (new ReflectionMethod(TwigLintCommand::class, 'getTemplateContents'))->invokeArgs($this->command, [
             __DIR__ . '/../_data/file_listing/subfolder/one.ini',
         ]);
 
@@ -49,7 +50,7 @@ class TwigLintCommandTest extends AbstractTestCase
     public function testFindFiles(): void
     {
         $path = __DIR__ . '/../_data/file_listing';
-        $filesFound = $this->callFunction($this->command, TwigLintCommand::class, 'findFiles', [$path]);
+        $filesFound = (new ReflectionMethod(TwigLintCommand::class, 'findFiles'))->invokeArgs($this->command, [$path]);
 
         // Sort results to avoid file system test specific failures
         sort($filesFound, SORT_NATURAL);
@@ -65,7 +66,8 @@ class TwigLintCommandTest extends AbstractTestCase
     public function testGetFilesInfo(): void
     {
         $path = __DIR__ . '/../_data/file_listing';
-        $filesInfos = $this->callFunction($this->command, TwigLintCommand::class, 'getFilesInfo', [$path]);
+        $filesInfos = (new ReflectionMethod(TwigLintCommand::class, 'getFilesInfo'))
+            ->invokeArgs($this->command, [$path]);
 
         // Sort results to avoid file system test specific failures
         sort($filesInfos, SORT_REGULAR);
@@ -107,15 +109,18 @@ class TwigLintCommandTest extends AbstractTestCase
 
     public function testGetContext(): void
     {
-        $context = $this->callFunction($this->command, TwigLintCommand::class, 'getContext', ['{{ file }', 0]);
+        $context = (new ReflectionMethod(TwigLintCommand::class, 'getContext'))
+            ->invokeArgs($this->command, ['{{ file }', 0]);
 
         self::assertSame([1 => '{{ file }'], $context);
 
-        $context = $this->callFunction($this->command, TwigLintCommand::class, 'getContext', ['{{ file }', 3]);
+        $context = (new ReflectionMethod(TwigLintCommand::class, 'getContext'))
+            ->invokeArgs($this->command, ['{{ file }', 3]);
 
         self::assertSame([1 => '{{ file }'], $context);
 
-        $context = $this->callFunction($this->command, TwigLintCommand::class, 'getContext', ['{{ file }', 5]);
+        $context = (new ReflectionMethod(TwigLintCommand::class, 'getContext'))
+            ->invokeArgs($this->command, ['{{ file }', 5]);
 
         self::assertSame([], $context);
     }

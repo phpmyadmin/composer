@@ -13,6 +13,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
+use ReflectionMethod;
 
 use function curl_version;
 use function ini_get;
@@ -31,7 +32,7 @@ class HttpRequestTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->setProxySettings();
+        HttpRequest::setProxySettingsFromEnv();
 
         DatabaseInterface::$instance = $this->createDatabaseInterface();
         $this->httpRequest = new HttpRequest();
@@ -75,12 +76,8 @@ class HttpRequestTest extends AbstractTestCase
         bool $returnOnlyStatus,
         bool|string|null $expected,
     ): void {
-        $result = $this->callFunction(
-            $this->httpRequest,
-            HttpRequest::class,
-            'curl',
-            [$url, $method, $returnOnlyStatus],
-        );
+        $result = (new ReflectionMethod(HttpRequest::class, 'curl'))
+            ->invokeArgs($this->httpRequest, [$url, $method, $returnOnlyStatus]);
         $this->validateHttp($result, $expected);
     }
 
@@ -102,7 +99,7 @@ class HttpRequestTest extends AbstractTestCase
         bool|string|null $expected,
     ): void {
         $this->checkCurlSslFlagsSupport();
-        $result = $this->callFunction($this->httpRequest, HttpRequest::class, 'curl', [
+        $result = (new ReflectionMethod(HttpRequest::class, 'curl'))->invokeArgs($this->httpRequest, [
             $url,
             $method,
             $returnOnlyStatus,
@@ -131,7 +128,7 @@ class HttpRequestTest extends AbstractTestCase
         bool|string|null $expected,
     ): void {
         $this->checkCurlSslFlagsSupport();
-        $result = $this->callFunction($this->httpRequest, HttpRequest::class, 'curl', [
+        $result = (new ReflectionMethod(HttpRequest::class, 'curl'))->invokeArgs($this->httpRequest, [
             $url,
             $method,
             $returnOnlyStatus,
@@ -162,12 +159,8 @@ class HttpRequestTest extends AbstractTestCase
             self::markTestSkipped('Configuration directive allow_url_fopen is not enabled.');
         }
 
-        $result = $this->callFunction(
-            $this->httpRequest,
-            HttpRequest::class,
-            'fopen',
-            [$url, $method, $returnOnlyStatus],
-        );
+        $result = (new ReflectionMethod(HttpRequest::class, 'fopen'))
+            ->invokeArgs($this->httpRequest, [$url, $method, $returnOnlyStatus]);
         $this->validateHttp($result, $expected);
     }
 

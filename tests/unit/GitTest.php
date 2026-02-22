@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Git;
+use PhpMyAdmin\Utils\HttpRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Medium;
@@ -36,7 +37,7 @@ class GitTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->setProxySettings();
+        HttpRequest::setProxySettingsFromEnv();
 
         $this->testDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR
                         . 'gittempdir_' . random_int(0, mt_getrandmax()) . DIRECTORY_SEPARATOR;

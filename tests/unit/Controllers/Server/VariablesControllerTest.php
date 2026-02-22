@@ -20,6 +20,7 @@ use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PhpMyAdmin\Tests\Stubs\ResponseRenderer as ResponseStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionMethod;
 use ReflectionProperty;
 
 use function __;
@@ -137,35 +138,23 @@ class VariablesControllerTest extends AbstractTestCase
         $response = new ReflectionProperty(ServerVariablesProvider::class, 'instance');
         $response->setValue(null, $voidProviderMock);
 
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
 
         self::assertSame('<abbr title="3">3 B</abbr>', $formattedValue);
         self::assertTrue($isHtmlFormatted);
 
         //name is_numeric and the value type is not byte
         $args = [$nameForValueNotByte, '3'];
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
         self::assertSame('3', $formattedValue);
         self::assertFalse($isHtmlFormatted);
 
         //value is not a number
         $args = [$nameForValueNotByte, 'value'];
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
         self::assertSame('value', $formattedValue);
         self::assertFalse($isHtmlFormatted);
     }
@@ -194,35 +183,23 @@ class VariablesControllerTest extends AbstractTestCase
         //name is_numeric and the value type is byte
         $args = [$nameForValueByte, '3'];
 
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
 
         self::assertSame('<abbr title="3">3 B</abbr>', $formattedValue);
         self::assertTrue($isHtmlFormatted);
 
         //name is_numeric and the value type is not byte
         $args = [$nameForValueNotByte, '3'];
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
         self::assertSame('3', $formattedValue);
         self::assertFalse($isHtmlFormatted);
 
         //value is not a number
         $args = [$nameForValueNotByte, 'value'];
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
         self::assertSame('value', $formattedValue);
         self::assertFalse($isHtmlFormatted);
     }
@@ -246,12 +223,8 @@ class VariablesControllerTest extends AbstractTestCase
         //name is_numeric and the value type is byte
         $args = [$nameForValueByte, '3'];
 
-        [$formattedValue, $isHtmlFormatted] = $this->callFunction(
-            $controller,
-            VariablesController::class,
-            'formatVariable',
-            $args,
-        );
+        [$formattedValue, $isHtmlFormatted] = ((new ReflectionMethod(VariablesController::class, 'formatVariable'))
+            ->invokeArgs($controller, $args));
 
         self::assertSame('3', $formattedValue);
         self::assertFalse($isHtmlFormatted);
