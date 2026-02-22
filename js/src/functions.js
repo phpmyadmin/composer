@@ -105,6 +105,8 @@ $.ajaxPrefilter(function (options, originalOptions) {
 
 /**
  * Get an empty string for user-agent, if undefined
+ *
+ * @return {string}
  */
 Functions.userAgent = function () {
     try {
