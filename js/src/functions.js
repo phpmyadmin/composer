@@ -109,7 +109,7 @@ $.ajaxPrefilter(function (options, originalOptions) {
 Functions.userAgent = function () {
     try {
         return navigator.userAgent;
-    } catch {
+    } catch (e) {
         return '';
     }
 };
