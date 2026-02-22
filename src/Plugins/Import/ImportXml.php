@@ -202,11 +202,11 @@ class ImportXml extends ImportPlugin
         }
 
         /**
-         * Only build SQL from data if there is data present.
+         * Only build SQL from data if there is data present and no structure.
          * Set values to NULL if they were not present
          * to maintain Import::buildSql() call integrity
          */
-        if ($tables !== [] && $analyses === null) {
+        if (! $structPresent && $tables !== [] && $analyses === null) {
             $create = null;
         }
 
