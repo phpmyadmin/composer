@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-15 00:38+0000\n"
+"POT-Creation-Date: 2026-02-22 00:36+0000\n"
 "PO-Revision-Date: 2022-02-15 16:21+0000\n"
 "Last-Translator: Maurício Meneghini Fauth <mauricio@fauth.dev>\n"
 "Language-Team: Mongolian <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -69,7 +69,7 @@ msgstr ""
 #: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
-#: src/Util.php:1366
+#: src/Util.php:1367
 #, fuzzy
 #| msgid "General relation features"
 msgid "Settings"
@@ -225,7 +225,7 @@ msgstr "%s-ы дараа"
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
 #: src/Controllers/JavaScriptMessagesController.php:218
-#: src/Display/Results.php:931 src/Plugins/Export/ExportSql.php:1992
+#: src/Display/Results.php:930 src/Plugins/Export/ExportSql.php:1992
 #: src/Plugins/Schema/SchemaPdf.php:96
 msgid "None"
 msgstr "Байхгүй"
@@ -657,8 +657,8 @@ msgstr "Хэрэглэгч"
 #: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1062 src/Util.php:1375
-#: src/Util.php:1392
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
+#: src/Util.php:1393
 msgid "Structure"
 msgstr "Бүтэц"
 
@@ -700,7 +700,7 @@ msgstr "Нэр"
 #: resources/templates/table/structure/display_structure.twig:473
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:7
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:6
-#: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:258
+#: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
 #: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
@@ -922,6 +922,15 @@ msgstr "Хөтчийн өөрчлөл"
 msgid "Input transformation options"
 msgstr "Өөрчлөлийн сонголтууд"
 
+#: resources/templates/components/_preview_sql.twig:3
+#: src/Controllers/Database/Structure/DropTableController.php:44
+#: src/Controllers/Database/Structure/EmptyTableController.php:43
+#: src/Controllers/Operations/TableController.php:328
+#: src/Controllers/Table/DropColumnController.php:63
+#: src/Controllers/Table/ReplaceController.php:291
+msgid "No change"
+msgstr "Солигдохгүй"
+
 #: resources/templates/config/form_display/display.twig:46
 #: src/Controllers/JavaScriptMessagesController.php:316
 msgid "Apply"
@@ -940,7 +949,7 @@ msgstr "Да.эхлэх"
 #: resources/templates/server/variables/index.twig:17
 #: resources/templates/setup/home/index.twig:116
 #: resources/templates/setup/home/index.twig:134 src/Engines/Pbxt.php:167
-#: src/Html/Generator.php:672 src/Html/MySQLDocumentation.php:51
+#: src/Html/Generator.php:671 src/Html/MySQLDocumentation.php:51
 #: src/Sanitize.php:188
 msgid "Documentation"
 msgstr "Баримт"
@@ -1112,8 +1121,8 @@ msgstr "асуултад"
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
 #: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
-#: src/Display/Results.php:1872 src/Html/Generator.php:520
-#: src/Html/Generator.php:789
+#: src/Display/Results.php:1876 src/Html/Generator.php:519
+#: src/Html/Generator.php:776
 msgid "Edit"
 msgstr "Засах"
 
@@ -1131,7 +1140,7 @@ msgstr "Засах"
 #: resources/templates/setup/home/index.twig:69
 #: resources/templates/sql/query.twig:189
 #: src/Controllers/JavaScriptMessagesController.php:381
-#: src/Display/Results.php:2410 src/Tracking/Tracking.php:224
+#: src/Display/Results.php:2414 src/Tracking/Tracking.php:224
 msgid "Delete"
 msgstr "Устгах"
 
@@ -1152,8 +1161,8 @@ msgstr "Устгах"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1567
-#: src/Server/Privileges.php:1569 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
+#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "Өгөгдлийн сан"
 
@@ -1195,7 +1204,7 @@ msgstr "SQL түүх"
 #: src/Plugins/Export/ExportSql.php:169
 #: src/Plugins/Export/ExportTexytext.php:56
 #: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:79
+#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1236,7 +1245,7 @@ msgstr "SQL тайлбар"
 
 #: resources/templates/console/display.twig:55
 #: resources/templates/console/display.twig:213
-#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:607
+#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:606
 msgid "Profiling"
 msgstr ""
 
@@ -1339,8 +1348,8 @@ msgstr ""
 #: resources/templates/console/display.twig:133
 #: resources/templates/server/status/processes/index.twig:19
 #: resources/templates/server/status/variables/index.twig:42
-#: src/Config/Descriptions.php:928 src/Export/Export.php:693
-#: src/Html/Generator.php:576
+#: src/Config/Descriptions.php:928 src/Export/Export.php:692
+#: src/Html/Generator.php:575
 msgid "Refresh"
 msgstr "Да.дуудах"
 
@@ -1605,7 +1614,7 @@ msgstr "Холбоос"
 #: resources/templates/indexes.twig:3
 #: resources/templates/table/structure/display_structure.twig:458
 #: resources/templates/table/tracking/structure_snapshot_indexes.twig:1
-#: src/Controllers/Server/DatabasesController.php:261
+#: src/Controllers/Server/DatabasesController.php:276
 #: src/Navigation/Nodes/NodeIndexContainer.php:24
 #: src/Navigation/Nodes/NodeIndexContainer.php:26
 msgid "Indexes"
@@ -2003,7 +2012,7 @@ msgstr "Хэрэг явдлын төрөл"
 #: resources/templates/table/tracking/main.twig:31
 #: src/Config/ConfigFile.php:578
 #: src/Controllers/JavaScriptMessagesController.php:275 src/Menu.php:450
-#: src/Server/Status/Processes.php:106 src/Util.php:1362
+#: src/Server/Status/Processes.php:106 src/Util.php:1363
 msgid "Status"
 msgstr "Статус"
 
@@ -2080,7 +2089,7 @@ msgstr ""
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
-#: src/Util.php:1384
+#: src/Util.php:1385
 msgid "Events"
 msgstr ""
 
@@ -2143,8 +2152,8 @@ msgstr "Бүгдийг чагтлах"
 #: resources/templates/triggers/row.twig:41
 #: src/Config/Forms/User/ExportForm.php:148
 #: src/Controllers/JavaScriptMessagesController.php:361 src/Menu.php:241
-#: src/Menu.php:347 src/Menu.php:469 src/Server/Privileges.php:1283
-#: src/Util.php:1364 src/Util.php:1379 src/Util.php:1396
+#: src/Menu.php:347 src/Menu.php:469 src/Server/Privileges.php:1301
+#: src/Util.php:1365 src/Util.php:1380 src/Util.php:1397
 msgid "Export"
 msgstr "Гаргах"
 
@@ -2260,7 +2269,7 @@ msgid "Exporting tables from \"%s\" database"
 msgstr "%s ӨС-д шинэ хүснэгт үүсгэх"
 
 #: resources/templates/database/export/index.twig:14
-#: src/Navigation/Navigation.php:226
+#: src/Navigation/Navigation.php:225
 #, fuzzy
 #| msgid "Tables"
 msgid "Tables:"
@@ -2269,7 +2278,7 @@ msgstr "Хүснэгт"
 #: resources/templates/database/export/index.twig:22
 #: resources/templates/database/structure/show_create.twig:6
 #: src/Config/Descriptions.php:743
-#: src/Controllers/Server/DatabasesController.php:258
+#: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
 #: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
@@ -2283,7 +2292,7 @@ msgstr "Хүснэгт"
 #: src/Config/Forms/User/ExportForm.php:106
 #: src/Config/Forms/User/ExportForm.php:131
 #: src/Config/Forms/User/ExportForm.php:137
-#: src/Controllers/Server/DatabasesController.php:260
+#: src/Controllers/Server/DatabasesController.php:275
 msgid "Data"
 msgstr "Өгөгдөл"
 
@@ -2355,7 +2364,7 @@ msgid "criteria"
 msgstr "Хэмжүүр"
 
 #: resources/templates/database/multi_table_query/form.twig:56
-#: src/Util.php:1634
+#: src/Util.php:1635
 msgid "Sort"
 msgstr "Эрэмбэлэх"
 
@@ -2366,8 +2375,8 @@ msgstr "Эрэмбэлэх"
 #: resources/templates/server/status/processes/list.twig:14
 #: resources/templates/table/operations/index.twig:28
 #: resources/templates/table/search/index.twig:158
-#: src/Config/ConfigFile.php:554 src/Display/Results.php:1392
-#: src/Display/Results.php:1398 src/Util.php:1642 src/Util.php:1659
+#: src/Config/ConfigFile.php:554 src/Display/Results.php:1391
+#: src/Display/Results.php:1397 src/Util.php:1643 src/Util.php:1660
 msgid "Ascending"
 msgstr "Өсөхөөр"
 
@@ -2378,8 +2387,8 @@ msgstr "Өсөхөөр"
 #: resources/templates/server/status/processes/list.twig:12
 #: resources/templates/table/operations/index.twig:32
 #: resources/templates/table/search/index.twig:162
-#: src/Config/ConfigFile.php:554 src/Display/Results.php:1387
-#: src/Display/Results.php:1403 src/Util.php:1647 src/Util.php:1664
+#: src/Config/ConfigFile.php:554 src/Display/Results.php:1386
+#: src/Display/Results.php:1402 src/Util.php:1648 src/Util.php:1665
 msgid "Descending"
 msgstr "Буурахаар"
 
@@ -2433,7 +2442,7 @@ msgid "Copy query"
 msgstr "Update асуулт"
 
 #: resources/templates/database/multi_table_query/form.twig:176
-#: src/Html/Generator.php:545
+#: src/Html/Generator.php:544
 #, fuzzy
 #| msgid "Submit Query"
 msgid "Submit query"
@@ -2602,7 +2611,7 @@ msgstr "Log нэр"
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
 #: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
-#: src/Menu.php:369 src/Util.php:1382 src/Util.php:1398
+#: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "Онцгой эрхүүд"
 
@@ -2647,7 +2656,7 @@ msgstr "Шинэ талбар нэмэх"
 #: resources/templates/server/privileges/new_user_ajax.twig:45
 #: resources/templates/server/privileges/users_overview.twig:75
 #: resources/templates/table/privileges/index.twig:84
-#: src/Server/Privileges.php:1275
+#: src/Server/Privileges.php:1293
 #, fuzzy
 #| msgid "Edit Privileges"
 msgid "Edit privileges"
@@ -2655,7 +2664,7 @@ msgstr "Онцгой эрхүүдийг засах"
 
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2061
+#: src/Server/Privileges.php:2079
 #, fuzzy
 #| msgid "No user(s) found."
 msgid "No user found."
@@ -2677,7 +2686,7 @@ msgstr "Сонгогдсонтой:"
 
 #: resources/templates/database/privileges/index.twig:122
 #: resources/templates/table/privileges/index.twig:126
-#: src/Server/Privileges.php:1219
+#: src/Server/Privileges.php:1237
 msgid "Not enough privilege to view users."
 msgstr ""
 
@@ -2772,7 +2781,7 @@ msgstr ""
 
 #: resources/templates/database/routines/execute_form.twig:19
 #: resources/templates/table/search/index.twig:36
-#: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:257
+#: resources/templates/table/zoom_search/index.twig:34 src/InsertEdit.php:258
 #: src/Navigation/Nodes/NodeFunction.php:27
 msgid "Function"
 msgstr "Функц"
@@ -2782,7 +2791,7 @@ msgid "This routine does not require any parameters."
 msgstr ""
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
-#: src/Util.php:1383
+#: src/Util.php:1384
 msgid "Routines"
 msgstr ""
 
@@ -2794,8 +2803,8 @@ msgstr ""
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1064
-#: src/Util.php:1377 src/Util.php:1394
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1065
+#: src/Util.php:1378 src/Util.php:1395
 msgid "Search"
 msgstr "Хайх"
 
@@ -2934,7 +2943,7 @@ msgstr[1] "%s олдоц(ууд) хүснэгт <i>%s</i>-д"
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1066 src/Util.php:1391
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1067 src/Util.php:1392
 msgid "Browse"
 msgstr "Хөтлөх"
 
@@ -2962,7 +2971,7 @@ msgstr[1] "%s хүснэгтүүд"
 #: resources/templates/database/structure/body_for_table_summary.twig:8
 #: resources/templates/database/structure/table_header.twig:10
 #: resources/templates/server/replication/index.twig:5 src/Menu.php:501
-#: src/Server/Status/Data.php:124 src/Util.php:1368
+#: src/Server/Status/Data.php:124 src/Util.php:1369
 msgid "Replication"
 msgstr "Олшруулалт"
 
@@ -3085,7 +3094,7 @@ msgid "Copy table with prefix"
 msgstr "Хүснэгтийн өгөгдлийг орлуулах файл"
 
 #: resources/templates/database/structure/check_all_tables.twig:32
-#: src/Menu.php:409 src/Util.php:1388
+#: src/Menu.php:409 src/Util.php:1389
 #, fuzzy
 #| msgid "Add/Delete Field Columns"
 msgid "Central columns"
@@ -3207,8 +3216,8 @@ msgstr "SQL асуудал харуулах"
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1573
-#: src/Server/Privileges.php:1575
+#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
+#: src/Server/Privileges.php:1593
 msgid "Table"
 msgstr "Хүснэгт"
 
@@ -3258,7 +3267,7 @@ msgstr "Олшруулалт"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1065 src/Util.php:1395
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1066 src/Util.php:1396
 msgid "Insert"
 msgstr "Оруулах"
 
@@ -3277,7 +3286,7 @@ msgstr "хэрэглэгдэж байна"
 #: resources/templates/table/structure/display_partitions.twig:29
 #: resources/templates/table/structure/display_structure.twig:220
 #: resources/templates/table/structure/display_table_stats.twig:116
-#: src/Controllers/Server/DatabasesController.php:259 src/Import/Import.php:133
+#: src/Controllers/Server/DatabasesController.php:274 src/Import/Import.php:133
 msgid "Rows"
 msgstr "Мөрүүд"
 
@@ -3294,7 +3303,7 @@ msgstr "Хэмжээ"
 
 #: resources/templates/database/structure/table_header.twig:38
 #: resources/templates/table/structure/display_table_stats.twig:30
-#: src/Controllers/Server/DatabasesController.php:263
+#: src/Controllers/Server/DatabasesController.php:278
 msgid "Overhead"
 msgstr "Толгой дээр"
 
@@ -3484,14 +3493,14 @@ msgid "Extra options"
 msgstr "Хүснэгтийн сонголтууд"
 
 #: resources/templates/display/results/table.twig:212
-#: src/Display/Results.php:1113
+#: src/Display/Results.php:1112
 #, fuzzy
 #| msgid "Partial Texts"
 msgid "Partial texts"
 msgstr "Бичвэрийн зарим хэсэг"
 
 #: resources/templates/display/results/table.twig:216
-#: src/Display/Results.php:1117
+#: src/Display/Results.php:1116
 #, fuzzy
 #| msgid "Full Texts"
 msgid "Full texts"
@@ -3538,7 +3547,7 @@ msgstr ""
 #: resources/templates/display/results/table.twig:324
 #: resources/templates/gis_data_editor_form.twig:75
 #: src/Controllers/JavaScriptMessagesController.php:467
-#: src/Display/Results.php:1873 src/Html/Generator.php:84
+#: src/Display/Results.php:1877 src/Html/Generator.php:83
 msgid "Copy"
 msgstr "Хуулах"
 
@@ -3549,7 +3558,7 @@ msgstr "Асуудлын үр дүнгийн үйлдэл"
 
 #: resources/templates/display/results/table.twig:353
 #: src/Controllers/JavaScriptMessagesController.php:466
-#: src/Export/Export.php:712
+#: src/Export/Export.php:711
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -3583,7 +3592,7 @@ msgstr ""
 #: src/Controllers/Table/Partition/DropController.php:56
 #: src/Controllers/Table/Partition/RebuildController.php:56
 #: src/Controllers/Table/Partition/TruncateController.php:56
-#: src/Html/Generator.php:740 src/Import/Import.php:122 src/InsertEdit.php:422
+#: src/Html/Generator.php:727 src/Import/Import.php:122 src/InsertEdit.php:423
 #: src/Message.php:138
 msgid "Error"
 msgstr "Алдаа"
@@ -3676,7 +3685,7 @@ msgstr "Update асуулт"
 #. l10n: Title of the option on the Export page
 #: resources/templates/export.twig:68
 #: src/Controllers/JavaScriptMessagesController.php:134
-#: src/Html/Generator.php:764
+#: src/Html/Generator.php:751
 #, fuzzy
 #| msgid "SQL query"
 msgid "SQL query:"
@@ -4002,7 +4011,7 @@ msgstr "Ерөнхий хамаатай онцлог"
 #: resources/templates/modals/change_password.twig:5
 #: resources/templates/server/privileges/change_password.twig:10
 #: resources/templates/server/privileges/change_password.twig:11
-#: src/Controllers/UserPasswordController.php:79
+#: src/Controllers/UserPasswordController.php:95
 msgid "Change password"
 msgstr "Нууц үг солих"
 
@@ -4187,7 +4196,7 @@ msgstr "авах"
 #: resources/templates/import_status.twig:2
 #: resources/templates/user_password.twig:2
 #: src/Controllers/JavaScriptMessagesController.php:411
-#: src/Export/Export.php:735 src/Html/Generator.php:855
+#: src/Export/Export.php:734 src/Html/Generator.php:835
 #: src/Plugins/Schema/ExportRelationSchema.php:266
 msgid "Back"
 msgstr "Өмнөх"
@@ -4198,7 +4207,7 @@ msgstr "Өмнөх"
 #: resources/templates/server/status/monitor/index.twig:53
 #: resources/templates/server/status/monitor/index.twig:69
 #: src/Config/Forms/User/ImportForm.php:58 src/Menu.php:250 src/Menu.php:357
-#: src/Menu.php:474 src/Util.php:1365 src/Util.php:1380 src/Util.php:1397
+#: src/Menu.php:474 src/Util.php:1366 src/Util.php:1381 src/Util.php:1398
 msgid "Import"
 msgstr "Оруулах"
 
@@ -4241,7 +4250,7 @@ msgid "You may also drag and drop a file on any page."
 msgstr ""
 
 #: resources/templates/import.twig:56 resources/templates/import.twig:80
-#: src/InsertEdit.php:423
+#: src/InsertEdit.php:424
 msgid "The directory you set for upload work cannot be reached."
 msgstr "Таны сонгосон хавтас \"upload\" хийгдэхгүй байна."
 
@@ -4365,8 +4374,8 @@ msgid "Server choice:"
 msgstr "Сервэр сонго"
 
 #: resources/templates/login/header.twig:10
-#: src/Plugins/Auth/AuthenticationConfig.php:83
-#: src/Plugins/Auth/AuthenticationHttp.php:87
+#: src/Plugins/Auth/AuthenticationConfig.php:80
+#: src/Plugins/Auth/AuthenticationHttp.php:83
 #, php-format
 msgid "Welcome to %s"
 msgstr "%s-д тавтай морилно уу"
@@ -4561,7 +4570,7 @@ msgstr "SQL-үр дүн"
 #: resources/templates/server/export/index.twig:14
 #: resources/templates/server/privileges/user_properties.twig:20
 #: src/Config/ConfigFile.php:576 src/Config/Descriptions.php:728
-#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1360
+#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1361
 msgid "Databases"
 msgstr "Өгөгдлийн сангууд"
 
@@ -4809,15 +4818,6 @@ msgstr ""
 #: resources/templates/preferences/two_factor/main.twig:52
 msgid "You have enabled two factor authentication."
 msgstr ""
-
-#: resources/templates/preview_sql.twig:3
-#: src/Controllers/Database/Structure/DropTableController.php:44
-#: src/Controllers/Database/Structure/EmptyTableController.php:43
-#: src/Controllers/Operations/TableController.php:328
-#: src/Controllers/Table/DropColumnController.php:63
-#: src/Controllers/Table/ReplaceController.php:289 src/Core.php:509
-msgid "No change"
-msgstr "Солигдохгүй"
 
 #: resources/templates/recent_favorite_table_favorite.twig:3
 #, fuzzy
@@ -5071,7 +5071,7 @@ msgid "Re-login to phpMyAdmin to load the updated configuration file."
 msgstr ""
 
 #: resources/templates/server/binlog/index.twig:3 src/Menu.php:494
-#: src/Server/Status/Data.php:119 src/Util.php:1367
+#: src/Server/Status/Data.php:119 src/Util.php:1368
 msgid "Binary log"
 msgstr "Хоёртын log"
 
@@ -5301,7 +5301,7 @@ msgstr "Бичихээр хүлээгдэх нь %"
 #: resources/templates/server/engines/show.twig:18
 #: resources/templates/server/engines/show.twig:21
 #: resources/templates/sql/query.twig:194 src/Config/ConfigFile.php:580
-#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1369
+#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1370
 msgid "Variables"
 msgstr "Утгууд"
 
@@ -5328,7 +5328,7 @@ msgid "Importing into the current server"
 msgstr "MySQL руу нэвтэрч чадсангүй"
 
 #: resources/templates/server/plugins/index.twig:4 src/Menu.php:522
-#: src/Util.php:1371
+#: src/Util.php:1372
 msgid "Plugins"
 msgstr "Нэмэлтүүд"
 
@@ -5464,7 +5464,7 @@ msgstr "Хэрэглэгч"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1579 src/Server/Privileges.php:1581
+#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
 #, fuzzy
 #| msgid "Add new field"
 msgid "Routine"
@@ -5478,7 +5478,7 @@ msgid ""
 msgstr ""
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1580
+#: src/Server/Privileges.php:1598
 #, fuzzy
 #| msgid "Column-specific privileges"
 msgid "Routine-specific privileges"
@@ -5637,7 +5637,7 @@ msgstr "Дараагийн мөрийг засах"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1574
+#: src/Server/Privileges.php:1592
 msgid "Table-specific privileges"
 msgstr "Хүснэгтийн тусгай онцгой эрхүүд"
 
@@ -5678,7 +5678,7 @@ msgstr "Өгөгдөл уншихыг зөвшөөрөх."
 #: resources/templates/server/privileges/privileges_table.twig:60
 #: resources/templates/server/privileges/privileges_table.twig:87
 #: resources/templates/server/privileges/privileges_table.twig:114
-#: resources/templates/table/search/index.twig:128 src/InsertEdit.php:431
+#: resources/templates/table/search/index.twig:128 src/InsertEdit.php:432
 msgid "Or"
 msgstr "Эсвэл"
 
@@ -5816,7 +5816,7 @@ msgid "Global privileges"
 msgstr "Глобал онцгой эрх"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1568
+#: src/Server/Privileges.php:1586
 msgid "Database-specific privileges"
 msgstr "Онцгой эрх, өгөгдлийн сангийн эрх"
 
@@ -6649,13 +6649,13 @@ msgstr ""
 
 #. l10n: shortcuts for Kilobyte
 #: resources/templates/server/status/monitor/index.twig:181
-#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:309
+#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:310
 msgid "KiB"
 msgstr "кБ"
 
 #. l10n: shortcuts for Megabyte
 #: resources/templates/server/status/monitor/index.twig:182
-#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:311
+#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:312
 msgid "MiB"
 msgstr "МБ"
 
@@ -6727,7 +6727,7 @@ msgid "Query analyzer"
 msgstr "Асуултын төрөл"
 
 #: resources/templates/server/status/monitor/index.twig:273 src/Menu.php:339
-#: src/Util.php:1378
+#: src/Util.php:1379
 msgid "Query"
 msgstr "Асуулт (Query)"
 
@@ -6841,7 +6841,7 @@ msgid "Start auto refresh"
 msgstr ""
 
 #: resources/templates/server/status/processes/list.twig:44
-#: src/Display/Results.php:2428
+#: src/Display/Results.php:2432
 msgid "Kill"
 msgstr "Алах"
 
@@ -7258,8 +7258,8 @@ msgstr "Асуудлын үр дүнгийн үйлдэл"
 #: src/Controllers/Table/Partition/RebuildController.php:50
 #: src/Controllers/Table/Partition/RepairController.php:49
 #: src/Controllers/Table/Partition/TruncateController.php:50
-#: src/Controllers/Table/RelationController.php:145
-#: src/Database/Routines.php:1032 src/Display/Results.php:2969
+#: src/Controllers/Table/RelationController.php:147
+#: src/Database/Routines.php:1032 src/Display/Results.php:2974
 #: src/Message.php:122
 #, fuzzy
 #| msgid "Your SQL query has been executed successfully."
@@ -7634,7 +7634,7 @@ msgstr ""
 #: resources/templates/table/index_form.twig:213
 #: src/Controllers/JavaScriptMessagesController.php:465
 #: src/Controllers/JavaScriptMessagesController.php:617
-#: src/Error/ErrorHandler.php:426 src/InsertEdit.php:1411
+#: src/Error/ErrorHandler.php:426 src/InsertEdit.php:1412
 msgid "Ignore"
 msgstr "Үл тоох"
 
@@ -7865,7 +7865,7 @@ msgstr "Үнэн зөв өгөгдлийг шалгах:"
 
 #: resources/templates/table/operations/view.twig:8
 #: src/Config/ConfigFile.php:592 src/Menu.php:268 src/Menu.php:278
-#: src/Menu.php:362 src/Util.php:1067 src/Util.php:1381 src/Util.php:1399
+#: src/Menu.php:362 src/Util.php:1068 src/Util.php:1382 src/Util.php:1400
 msgid "Operations"
 msgstr "Үйлдлүүд"
 
@@ -8252,7 +8252,7 @@ msgid "Effective"
 msgstr "Эффекттэй"
 
 #: resources/templates/table/structure/display_table_stats.twig:43
-#: src/Controllers/Server/DatabasesController.php:262
+#: src/Controllers/Server/DatabasesController.php:277
 #: src/Controllers/Server/Status/StatusController.php:141
 #: src/Controllers/Server/Status/StatusController.php:191
 msgid "Total"
@@ -8431,7 +8431,7 @@ msgstr ""
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
 #: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1385 src/Util.php:1401
+#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr ""
 
@@ -10074,8 +10074,8 @@ msgstr "Хүснэгтийн нэр"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1063
-#: src/Util.php:1361 src/Util.php:1376 src/Util.php:1393
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1064
+#: src/Util.php:1362 src/Util.php:1377 src/Util.php:1394
 msgid "SQL"
 msgstr "SQL"
 
@@ -10138,7 +10138,7 @@ msgid "Closed"
 msgstr "Хаагдаагүй хашилт"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:722
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Week day name"
@@ -10146,7 +10146,7 @@ msgid "Monday"
 msgstr "Да"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:723
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Week day name"
@@ -10154,7 +10154,7 @@ msgid "Tuesday"
 msgstr "Мя"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:724
 #, fuzzy
 #| msgid "Wednesday"
 msgctxt "Week day name"
@@ -10162,7 +10162,7 @@ msgid "Wednesday"
 msgstr "Лхагва гараг"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:725
 #, fuzzy
 #| msgid "Thursday"
 msgctxt "Week day name"
@@ -10170,7 +10170,7 @@ msgid "Thursday"
 msgstr "Пүрэв гараг"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:726
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Week day name"
@@ -10178,7 +10178,7 @@ msgid "Friday"
 msgstr "Ба"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:727
 #, fuzzy
 #| msgid "Saturday"
 msgctxt "Week day name"
@@ -10186,7 +10186,7 @@ msgid "Saturday"
 msgstr "Бямба гариг"
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:720
+#: src/Controllers/JavaScriptMessagesController.php:721
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Week day name"
@@ -11600,14 +11600,14 @@ msgid "Put columns names in the first row"
 msgstr "Эхний мөрт талбаруудын нэрийг тавих"
 
 #: src/Config/Descriptions.php:641 src/Config/Descriptions.php:774
-#: src/Config/Descriptions.php:780 src/Plugins/Import/ImportCsv.php:654
+#: src/Config/Descriptions.php:780 src/Plugins/Import/ImportCsv.php:655
 #, fuzzy
 #| msgid "Fields enclosed by"
 msgid "Columns enclosed with"
 msgstr "Талбарыг хаасан"
 
 #: src/Config/Descriptions.php:642 src/Config/Descriptions.php:775
-#: src/Config/Descriptions.php:781 src/Plugins/Import/ImportCsv.php:665
+#: src/Config/Descriptions.php:781 src/Plugins/Import/ImportCsv.php:666
 #, fuzzy
 #| msgid "Fields escaped by"
 msgid "Columns escaped with"
@@ -11627,14 +11627,14 @@ msgid "Remove CRLF characters within columns"
 msgstr ""
 
 #: src/Config/Descriptions.php:645 src/Config/Descriptions.php:778
-#: src/Config/Descriptions.php:785 src/Plugins/Import/ImportCsv.php:639
+#: src/Config/Descriptions.php:785 src/Plugins/Import/ImportCsv.php:640
 #, fuzzy
 #| msgid "Lines terminated by"
 msgid "Columns terminated with"
 msgstr "Шугамыг төгсгөгч"
 
 #: src/Config/Descriptions.php:646 src/Config/Descriptions.php:773
-#: src/Plugins/Import/ImportCsv.php:672
+#: src/Plugins/Import/ImportCsv.php:673
 #, fuzzy
 #| msgid "Lines terminated by"
 msgid "Lines terminated with"
@@ -11959,7 +11959,7 @@ msgid "Partial import: allow interrupt"
 msgstr ""
 
 #: src/Config/Descriptions.php:776 src/Config/Descriptions.php:782
-#: src/Plugins/Import/ImportCsv.php:150 src/Plugins/Import/ImportLdi.php:77
+#: src/Plugins/Import/ImportCsv.php:151 src/Plugins/Import/ImportLdi.php:77
 msgid "Do not abort on INSERT error"
 msgstr ""
 
@@ -12085,7 +12085,7 @@ msgstr "Бичвэр талбар хэрэглэх"
 
 #: src/Config/Descriptions.php:811
 #: src/Controllers/JavaScriptMessagesController.php:586
-#: src/Navigation/NavigationTree.php:1251
+#: src/Navigation/NavigationTree.php:1257
 #, fuzzy
 #| msgid "Use text field"
 msgid "Link with main panel"
@@ -12581,11 +12581,11 @@ msgstr ""
 msgid "Skip locked tables"
 msgstr ""
 
-#: src/Config/Descriptions.php:927 src/Html/Generator.php:495
+#: src/Config/Descriptions.php:927 src/Html/Generator.php:494
 msgid "Explain SQL"
 msgstr "SQL тайлбар"
 
-#: src/Config/Descriptions.php:929 src/Html/Generator.php:556
+#: src/Config/Descriptions.php:929 src/Html/Generator.php:555
 #, fuzzy
 #| msgid "Create PHP Code"
 msgid "Create PHP code"
@@ -12728,7 +12728,7 @@ msgid "Missing data for %s"
 msgstr ""
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:805
 msgid "Incorrect value!"
 msgstr ""
 
@@ -12809,7 +12809,7 @@ msgstr "CSV хэрэглэх нь LOAD DATA"
 msgid "Default transformations"
 msgstr "Хөтчийн өөрчлөл"
 
-#: src/Config/PageSettings.php:122
+#: src/Config/PageSettings.php:123
 msgid "Cannot save settings, submitted configuration form contains errors!"
 msgstr ""
 
@@ -12922,17 +12922,17 @@ msgid ""
 "are unavailable on this system."
 msgstr ""
 
-#: src/Config/Settings.php:3165
+#: src/Config/Settings.php:3166
 #, fuzzy, php-format
 #| msgid "Server"
 msgid "Server %d"
 msgstr "Сервэр"
 
-#: src/ConfigStorage/Relation.php:1103
+#: src/ConfigStorage/Relation.php:1102
 msgid "no description"
 msgstr "тайлбаргүй"
 
-#: src/ConfigStorage/Relation.php:1296
+#: src/ConfigStorage/Relation.php:1295
 #, php-format
 msgid ""
 "You do not have necessary privileges to create a database named '%s'. You "
@@ -12964,13 +12964,13 @@ msgstr "Хэрэглэгчийн өгөгдлийн сан"
 msgid "Table-level tabs"
 msgstr "Хүснэгтийн нэр"
 
-#: src/Config/UserPreferences.php:178
+#: src/Config/UserPreferences.php:176
 #, fuzzy
 #| msgid "Could not load default configuration from: \"%1$s\""
 msgid "Could not save configuration"
 msgstr "Анхдагч тохиргоо дуудагдсангүй нь: \"%1$s\""
 
-#: src/Config/UserPreferences.php:189
+#: src/Config/UserPreferences.php:187
 #, fuzzy
 #| msgid ""
 #| "The phpMyAdmin configuration storage has been deactivated. To find out "
@@ -13025,24 +13025,24 @@ msgid "Incorrect IP address: %s"
 msgstr ""
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:804
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Not a valid port number!"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:801
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid "Not a positive number!"
 msgstr ""
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:803
 msgid "Not a non-negative number!"
 msgstr ""
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:806
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr ""
@@ -13136,8 +13136,8 @@ msgstr ""
 #: src/Controllers/Operations/ViewController.php:61
 #: src/Controllers/Operations/ViewController.php:66
 #: src/Controllers/Server/Databases/DestroyController.php:65
-#: src/Controllers/Table/AddFieldController.php:161
-#: src/Controllers/Table/AddFieldController.php:166
+#: src/Controllers/Table/AddFieldController.php:165
+#: src/Controllers/Table/AddFieldController.php:170
 #: src/Controllers/Table/ChangeController.php:70
 #: src/Controllers/Table/ChangeController.php:75
 #: src/Controllers/Table/ChartController.php:87
@@ -13216,7 +13216,7 @@ msgstr "ӨС-д хүснэгт олдсонгүй."
 msgid "Export of event %s"
 msgstr "Гаргах/Оруулах хэмжээс"
 
-#: src/Controllers/Database/EventsController.php:235
+#: src/Controllers/Database/EventsController.php:237
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid ""
@@ -13266,8 +13266,8 @@ msgstr "Танд хангалттай эрх байхгүй!"
 #: src/Controllers/Operations/TableController.php:103
 #: src/Controllers/Operations/ViewController.php:73
 #: src/Controllers/Operations/ViewController.php:78
-#: src/Controllers/Table/AddFieldController.php:173
-#: src/Controllers/Table/AddFieldController.php:178
+#: src/Controllers/Table/AddFieldController.php:177
+#: src/Controllers/Table/AddFieldController.php:182
 #: src/Controllers/Table/ChangeController.php:82
 #: src/Controllers/Table/ChangeController.php:87
 #: src/Controllers/Table/ChartController.php:102
@@ -13356,7 +13356,7 @@ msgid "Success!"
 msgstr "Амжилттай!"
 
 #: src/Controllers/Database/StructureController.php:566
-#: src/Display/Results.php:3255
+#: src/Display/Results.php:3260
 #, php-format
 msgid ""
 "This view has at least this number of rows. Please refer to "
@@ -13418,7 +13418,7 @@ msgstr ""
 msgid "You may want to refresh the page."
 msgstr ""
 
-#: src/Controllers/Export/ExportController.php:120 src/Export/Export.php:673
+#: src/Controllers/Export/ExportController.php:120 src/Export/Export.php:672
 msgid "Bad type!"
 msgstr "Буруу төрөл!"
 
@@ -13531,7 +13531,7 @@ msgid ""
 "this some features such as error reporting or version check are disabled."
 msgstr ""
 
-#: src/Controllers/Import/ImportController.php:166
+#: src/Controllers/Import/ImportController.php:165
 #, php-format
 msgid ""
 "You probably tried to upload a file that is too large. Please refer to "
@@ -13540,30 +13540,34 @@ msgstr ""
 "Хэтэрхий том хэмжээтэй файл ачаалахыг оролдсон бололтой. Үүнийг хэрхэн "
 "шийдэхийг %sбаримтжуулалт%s-с уншина уу."
 
-#: src/Controllers/Import/ImportController.php:192
+#: src/Controllers/Import/ImportController.php:191
 #, fuzzy
 #| msgid "Rename database to"
 msgid "Incorrect format parameter"
 msgstr "Өгөгдлийн санг д.нэрлэх нь"
 
-#: src/Controllers/Import/ImportController.php:302
-#: src/Controllers/Import/ImportController.php:518
+#: src/Controllers/Import/ImportController.php:254
+msgid "Sorry an unexpected error happened!"
+msgstr ""
+
+#: src/Controllers/Import/ImportController.php:301
+#: src/Controllers/Import/ImportController.php:516
 msgid "Showing bookmark"
 msgstr "Хавчуургыг харуулж байна"
 
-#: src/Controllers/Import/ImportController.php:322
-#: src/Controllers/Import/ImportController.php:514
+#: src/Controllers/Import/ImportController.php:321
+#: src/Controllers/Import/ImportController.php:512
 msgid "The bookmark has been deleted."
 msgstr "Хавчуурга устлаа."
 
-#: src/Controllers/Import/ImportController.php:436
+#: src/Controllers/Import/ImportController.php:434
 msgid ""
 "No data was received to import. Either no file name was submitted, or the "
 "file size exceeded the maximum size permitted by your PHP configuration. See "
 "[doc@faq1-16]FAQ 1.16[/doc]."
 msgstr ""
 
-#: src/Controllers/Import/ImportController.php:526
+#: src/Controllers/Import/ImportController.php:524
 #, fuzzy, php-format
 #| msgid "Import has been successfully finished, %d queries executed."
 msgid "Import has been successfully finished, %d query executed."
@@ -13571,25 +13575,25 @@ msgid_plural "Import has been successfully finished, %d queries executed."
 msgstr[0] "Оруулалт амжилттай дууслаа, %d асуудал ажиллав."
 msgstr[1] "Оруулалт амжилттай дууслаа, %d асуудал ажиллав."
 
-#: src/Controllers/Import/ImportController.php:563
+#: src/Controllers/Import/ImportController.php:561
 #, php-format
 msgid ""
 "Script timeout passed, if you want to finish import, please %sresubmit the "
 "same file%s and import will resume."
 msgstr ""
 
-#: src/Controllers/Import/ImportController.php:573
+#: src/Controllers/Import/ImportController.php:571
 msgid ""
 "However on last run no data has been parsed, this usually means phpMyAdmin "
 "won't be able to finish this import unless you increase php time limits."
 msgstr ""
 
-#: src/Controllers/Import/ImportController.php:628
-#: src/Controllers/Sql/SqlController.php:137
+#: src/Controllers/Import/ImportController.php:642
+#: src/Controllers/Sql/SqlController.php:138
 msgid "\"DROP DATABASE\" statements are disabled."
 msgstr "\"ӨС устгах\" нь хаалттай."
 
-#: src/Controllers/Import/ImportController.php:679 src/Sql.php:906
+#: src/Controllers/Import/ImportController.php:705 src/Sql.php:912
 msgid "[ROLLBACK occurred.]"
 msgstr ""
 
@@ -13863,12 +13867,12 @@ msgid "The user name is empty!"
 msgstr "Хэрэглэгчийн нэр хоосон!"
 
 #: src/Controllers/JavaScriptMessagesController.php:146
-#: src/Server/Privileges.php:766 src/UserPassword.php:40
+#: src/Server/Privileges.php:766 src/UserPassword.php:41
 msgid "The password is empty!"
 msgstr "Нууц үг хоосон байна!"
 
 #: src/Controllers/JavaScriptMessagesController.php:147
-#: src/Server/Privileges.php:764 src/UserPassword.php:44
+#: src/Server/Privileges.php:764 src/UserPassword.php:45
 msgid "The passwords aren't the same!"
 msgstr "Нууц їгнїїд ялгаатай байна!"
 
@@ -13914,12 +13918,12 @@ msgid "Other"
 msgstr "Бусад"
 
 #. l10n: Thousands separator
-#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:389
+#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:390
 msgid ","
 msgstr ","
 
 #. l10n: Decimal separator
-#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:387
+#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:388
 msgid "."
 msgstr "."
 
@@ -14028,27 +14032,27 @@ msgid "Bytes received"
 msgstr "Ирсэн"
 
 #. l10n: shortcuts for Byte
-#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:307
+#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:308
 msgid "B"
 msgstr "Байт"
 
 #. l10n: shortcuts for Gigabyte
-#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:313
+#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:314
 msgid "GiB"
 msgstr "ГБ"
 
 #. l10n: shortcuts for Terabyte
-#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:315
+#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:316
 msgid "TiB"
 msgstr "TB"
 
 #. l10n: shortcuts for Petabyte
-#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:317
+#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:318
 msgid "PiB"
 msgstr "PB"
 
 #. l10n: shortcuts for Exabyte
-#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:319
+#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:320
 msgid "EiB"
 msgstr "EB"
 
@@ -14562,7 +14566,7 @@ msgstr ""
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:753
+#: src/Controllers/JavaScriptMessagesController.php:754
 #: src/Normalization.php:349
 #, fuzzy
 #| msgid "None"
@@ -15007,7 +15011,7 @@ msgid "Hide panel"
 msgstr "Шинэ талбар нэмэх"
 
 #: src/Controllers/JavaScriptMessagesController.php:587
-#: src/Navigation/NavigationTree.php:1254
+#: src/Navigation/NavigationTree.php:1260
 #, fuzzy
 #| msgid "Use text field"
 msgid "Unlink from main panel"
@@ -15248,180 +15252,184 @@ msgctxt ""
 msgid "Table %s already exists!"
 msgstr "Хүснэгт %s нь оршин байна!"
 
-#: src/Controllers/JavaScriptMessagesController.php:692 src/InsertEdit.php:242
+#: src/Controllers/JavaScriptMessagesController.php:692 src/InsertEdit.php:243
 #: src/Navigation/Nodes/NodeDatabaseChild.php:50
 msgid "Hide"
 msgstr "Нуух"
 
-#: src/Controllers/JavaScriptMessagesController.php:696
+#: src/Controllers/JavaScriptMessagesController.php:695
+msgid "The fullscreen request was denied."
+msgstr ""
+
+#: src/Controllers/JavaScriptMessagesController.php:697
 #, fuzzy
 #| msgid "Binary"
 msgctxt "Month name"
 msgid "January"
 msgstr "Хоёртын "
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:698
 #, fuzzy
 #| msgid "February"
 msgctxt "Month name"
 msgid "February"
 msgstr "Хоёрдугаар сар"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:699
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Month name"
 msgid "March"
 msgstr "3-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:700
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Month name"
 msgid "April"
 msgstr "4-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:701
 #, fuzzy
 #| msgid "May"
 msgctxt "Month name"
 msgid "May"
 msgstr "5-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:702
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Month name"
 msgid "June"
 msgstr "6-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:703
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Month name"
 msgid "July"
 msgstr "7-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:704
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Month name"
 msgid "August"
 msgstr "8-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:705
 #, fuzzy
 #| msgid "September"
 msgctxt "Month name"
 msgid "September"
 msgstr "Есдүгээр сар"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:706
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Month name"
 msgid "October"
 msgstr "10р"
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:707
 #, fuzzy
 #| msgid "November"
 msgctxt "Month name"
 msgid "November"
 msgstr "Арваннэгдүгээр сар"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:708
 #, fuzzy
 #| msgid "December"
 msgctxt "Month name"
 msgid "December"
 msgstr "Арванхоёрдугаар сар"
 
-#: src/Controllers/JavaScriptMessagesController.php:708 src/Util.php:501
+#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
 #, fuzzy
 #| msgid "Jan"
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "1-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
 #, fuzzy
 #| msgid "Feb"
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "2-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "3-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "4-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
 #, fuzzy
 #| msgid "May"
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "5-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "6-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "7-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "8-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
 #, fuzzy
 #| msgid "Sep"
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "9-р"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "10р"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
 #, fuzzy
 #| msgid "Nov"
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "11р"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
 #, fuzzy
 #| msgid "Dec"
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "12р"
 
-#: src/Controllers/JavaScriptMessagesController.php:727 src/Util.php:515
+#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
 #, fuzzy
 #| msgctxt "Short week day name"
 #| msgid "Sun"
@@ -15429,159 +15437,159 @@ msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "Ня"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "Да"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "Мя"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "Лх"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "Пү"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "Ба"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "Бя"
 
-#: src/Controllers/JavaScriptMessagesController.php:734
+#: src/Controllers/JavaScriptMessagesController.php:735
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "Ня"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:736
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "Да"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:737
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "Мя"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:738
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "Лх"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:739
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "Пү"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:740
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "Ба"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:741
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "Бя"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:742
 msgctxt "Column header for week of the year in calendar"
 msgid "Wk"
 msgstr ""
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:743
+#: src/Controllers/JavaScriptMessagesController.php:744
 #, fuzzy
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "calendar-month-year"
 
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:745
 #, fuzzy
 #| msgid "None"
 msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "Байхгүй"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:746
 #, fuzzy
 #| msgid "Time"
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "Цаг"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:747
 #, fuzzy
 #| msgid "Hour"
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr "Цаг"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:748
 #, fuzzy
 #| msgid "in use"
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "хэрэглэгдэж байна"
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:749
 #, fuzzy
 #| msgid "per second"
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "секундэд"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:750
 #, fuzzy
 #| msgid "seconds"
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "секундэд"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:751
 #, fuzzy
 #| msgid "per second"
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "секундэд"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:752
 #, fuzzy
 #| msgid "Time"
 msgctxt "The time zone for a time of day"
@@ -15589,7 +15597,7 @@ msgid "Time zone"
 msgstr "Цаг"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:755
+#: src/Controllers/JavaScriptMessagesController.php:756
 #, fuzzy
 #| msgid "Previous"
 msgctxt "Previous month"
@@ -15597,7 +15605,7 @@ msgid "Prev"
 msgstr "Өмнөх"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:757
+#: src/Controllers/JavaScriptMessagesController.php:758
 #, fuzzy
 #| msgid "Next"
 msgctxt "Next month"
@@ -15605,157 +15613,157 @@ msgid "Next"
 msgstr "Цааш"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:759
+#: src/Controllers/JavaScriptMessagesController.php:760
 msgid "Today"
 msgstr "Өнөөдөр"
 
-#: src/Controllers/JavaScriptMessagesController.php:762
+#: src/Controllers/JavaScriptMessagesController.php:763
 msgid "This field is required"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:764
 #, fuzzy
 #| msgid "Use text field"
 msgid "Please fix this field"
 msgstr "Бичвэр талбар хэрэглэх"
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:765
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid email address"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:766
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid URL"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:767
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid date"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:768
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid date ( ISO )"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:769
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid number"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:770
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid credit card number"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:771
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter only digits"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:772
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter the same value again"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:773
 msgid "Please enter no more than {0} characters"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:774
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter at least {0} characters"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:775
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:776
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a value between {0} and {1}"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:777
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a value less than or equal to {0}"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:778
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:779
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid date or time"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:780
 #, fuzzy
 #| msgid "%d is not valid row number."
 msgid "Please enter a valid HEX input"
 msgstr "%d нь мөрийн буруу дугаар байна."
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:781
+#: src/Controllers/JavaScriptMessagesController.php:782
 msgid "This column can not contain a 32 chars value"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:784
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:789
+#: src/Controllers/JavaScriptMessagesController.php:790
 msgid ""
 "The file being uploaded is probably larger than the maximum allowed size."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:791
+#: src/Controllers/JavaScriptMessagesController.php:792
 #, php-format
 msgid "%s of %s"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:793
 #, php-format
 msgid "%s/sec."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:794
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:795
 msgid "About %SEC sec. remaining."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:796
 msgid "The file is being processed, please be patient."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:797
 #, fuzzy
 #| msgid "Format of imported file"
 msgid "Uploading your import file…"
 msgstr "Оруулсан файлын тогтнол"
 
-#: src/Controllers/JavaScriptMessagesController.php:798
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -16563,7 +16571,7 @@ msgstr ""
 
 #: src/Controllers/Setup/ConfigController.php:44
 #: src/Controllers/Setup/FormController.php:45
-#: src/Controllers/Setup/HomeController.php:48
+#: src/Controllers/Setup/HomeController.php:49
 #: src/Controllers/Setup/ServerDestroyController.php:42
 #: src/Controllers/Setup/ServersController.php:45
 #: src/Controllers/Setup/ShowConfigController.php:43
@@ -16575,19 +16583,19 @@ msgstr ""
 msgid "Incorrect form specified!"
 msgstr ""
 
-#: src/Controllers/Setup/HomeController.php:74
+#: src/Controllers/Setup/HomeController.php:75
 msgid ""
 "You are not using a secure connection; all data (including potentially "
 "sensitive information, like passwords) is transferred unencrypted!"
 msgstr ""
 
-#: src/Controllers/Setup/HomeController.php:79
+#: src/Controllers/Setup/HomeController.php:80
 msgid ""
 "If your server is also configured to accept HTTPS requests follow this link "
 "to use a secure connection."
 msgstr ""
 
-#: src/Controllers/Setup/HomeController.php:83
+#: src/Controllers/Setup/HomeController.php:84
 msgid "Insecure connection"
 msgstr ""
 
@@ -16602,23 +16610,23 @@ msgstr "ӨС байхгүй"
 msgid "Wrong data or no validation for %s"
 msgstr ""
 
-#: src/Controllers/Sql/SqlController.php:207 src/Sql.php:1076
+#: src/Controllers/Sql/SqlController.php:218 src/Sql.php:1080
 #, fuzzy, php-format
 #| msgid "Bookmark %s created"
 msgid "Bookmark %s has been created."
 msgstr "Тэмдэглэл %s нь үүсгэгдлээ"
 
-#: src/Controllers/Sql/SqlController.php:214
+#: src/Controllers/Sql/SqlController.php:225
 #, fuzzy
 #| msgid "Bookmark %s created"
 msgid "Bookmark not created!"
 msgstr "Тэмдэглэл %s нь үүсгэгдлээ"
 
-#: src/Controllers/Table/AddFieldController.php:136
+#: src/Controllers/Table/AddFieldController.php:140
 #: src/Controllers/Table/IndexesController.php:139
 #: src/Controllers/Table/IndexRenameController.php:123
 #: src/Controllers/Table/Structure/PartitioningController.php:265
-#: src/Controllers/Table/Structure/SaveController.php:217
+#: src/Controllers/Table/Structure/SaveController.php:231
 #, php-format
 msgid "Table %1$s has been altered successfully."
 msgstr ""
@@ -16646,13 +16654,13 @@ msgstr ""
 msgid "No data to display"
 msgstr "ӨС байхгүй"
 
-#: src/Controllers/Table/CreateController.php:62
+#: src/Controllers/Table/CreateController.php:63
 #: src/Controllers/Table/GetFieldController.php:53
 #, php-format
 msgid "'%s' database does not exist."
 msgstr ""
 
-#: src/Controllers/Table/CreateController.php:72
+#: src/Controllers/Table/CreateController.php:83
 #, php-format
 msgid "Table %s already exists!"
 msgstr "Хүснэгт %s нь оршин байна!"
@@ -16678,19 +16686,19 @@ msgid_plural "%1$d columns have been dropped successfully."
 msgstr[0] "%s ӨС амжилттай устгагдлаа."
 msgstr[1] "%s ӨС амжилттай устгагдлаа."
 
-#: src/Controllers/Table/GetFieldController.php:61
+#: src/Controllers/Table/GetFieldController.php:72
 msgid "Invalid table name"
 msgstr "Хүснэгтийн буруу нэр"
 
 #. l10n: In case a SQL query did not pass a security check
-#: src/Controllers/Table/GetFieldController.php:72
+#: src/Controllers/Table/GetFieldController.php:94
 #: src/Controllers/Transformation/WrapperController.php:77
 msgid "There is an issue with your request."
 msgstr ""
 
-#: src/Controllers/Table/GetFieldController.php:87
+#: src/Controllers/Table/GetFieldController.php:108
 #: src/Database/Routines.php:1049 src/Import/Import.php:138
-#: src/InsertEdit.php:160 src/Sql.php:892
+#: src/InsertEdit.php:161 src/Sql.php:898
 msgid "MySQL returned an empty result set (i.e. zero rows)."
 msgstr "MySQL хоосон үр дүн буцаалаа (тэг мөрүүд г.м.)."
 
@@ -16726,19 +16734,19 @@ msgstr "Хүснэгтийн нэр хоосон байна!"
 msgid "Invalid database or table name."
 msgstr "Хүснэгтийн буруу нэр"
 
-#: src/Controllers/Table/RelationController.php:325
+#: src/Controllers/Table/RelationController.php:327
 #, fuzzy
 #| msgid "Thread %s was successfully killed."
 msgid "Display column was successfully updated."
 msgstr "Thread %s нь устгагдав."
 
-#: src/Controllers/Table/RelationController.php:359
+#: src/Controllers/Table/RelationController.php:361
 #, fuzzy
 #| msgid "Internal relation added"
 msgid "Internal relationships were successfully updated."
 msgstr "Дотоод холбоо нэмэгдэв"
 
-#: src/Controllers/Table/ReplaceController.php:184
+#: src/Controllers/Table/ReplaceController.php:186
 #, php-format
 msgid "Row: %1$s, Column: %2$s, Error: %3$s"
 msgstr ""
@@ -16764,7 +16772,7 @@ msgid "The selected columns are already in the correct order."
 msgstr ""
 
 #: src/Controllers/Table/Structure/PartitioningController.php:257
-#: src/Controllers/Table/Structure/SaveController.php:267
+#: src/Controllers/Table/Structure/SaveController.php:281
 #: src/Tracking/Tracking.php:731
 #, fuzzy
 #| msgid "Query type"
@@ -16778,7 +16786,7 @@ msgid_plural "The names '%s' are MySQL reserved keywords."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Controllers/Table/Structure/SaveController.php:212
+#: src/Controllers/Table/Structure/SaveController.php:226
 #, fuzzy, php-format
 #| msgid "Table %s has been moved to %s."
 msgid ""
@@ -16832,7 +16840,7 @@ msgid ""
 "%2$s."
 msgstr "ӨС-д хүснэгт олдсонгүй."
 
-#: src/Controllers/UserPasswordController.php:46
+#: src/Controllers/UserPasswordController.php:48
 msgid "You don't have sufficient privileges to be here right now!"
 msgstr "Танд хангалттай эрх байхгүй!"
 
@@ -16963,7 +16971,7 @@ msgstr ""
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1013 src/Html/Generator.php:805
+#: src/Database/Routines.php:1013 src/Html/Generator.php:792
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -17098,7 +17106,7 @@ msgid_plural "%d rows affected by the last statement inside the procedure."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Dbal/DatabaseInterface.php:1062
+#: src/Dbal/DatabaseInterface.php:1075
 #, php-format
 msgid ""
 "Unable to use timezone \"%1$s\" for server %2$d. Please check your "
@@ -17106,7 +17114,7 @@ msgid ""
 "phpMyAdmin is currently using the default time zone of the database server."
 msgstr ""
 
-#: src/Dbal/DatabaseInterface.php:1103
+#: src/Dbal/DatabaseInterface.php:1116
 #, fuzzy
 #| msgid "Could not load default configuration from: \"%1$s\""
 msgid "Failed to set configured collation connection!"
@@ -17119,36 +17127,36 @@ msgid ""
 "available, but is being hidden by the %s configuration directive."
 msgstr ""
 
-#: src/Display/Results.php:2387 src/Display/Results.php:2402
+#: src/Display/Results.php:2391 src/Display/Results.php:2406
 #, fuzzy
 #| msgid "The row has been deleted."
 msgid "The row has been deleted."
 msgstr "Мөр устгагдсан"
 
-#: src/Display/Results.php:2974 src/Display/Results.php:3296 src/Sql.php:898
+#: src/Display/Results.php:2979 src/Display/Results.php:3301 src/Sql.php:904
 #, fuzzy, php-format
 #| msgid "Query took %01.4f sec"
 msgid "Query took %01.4f seconds."
 msgstr "Асуулт нь %01.4f сек авлаа"
 
-#: src/Display/Results.php:3264
+#: src/Display/Results.php:3269
 #, fuzzy, php-format
 #| msgid "Showing rows"
 msgid "Showing rows %1s - %2s"
 msgstr "Мөрүүдийг харуулж байна"
 
-#: src/Display/Results.php:3278
+#: src/Display/Results.php:3283
 #, php-format
 msgid "%1$s total, %2$s in query"
 msgstr ""
 
-#: src/Display/Results.php:3283
+#: src/Display/Results.php:3288
 #, fuzzy, php-format
 #| msgid "total"
 msgid "%s total"
 msgstr "Нийт"
 
-#: src/Display/Results.php:3592
+#: src/Display/Results.php:3597
 #, fuzzy
 #| msgid "Link not found"
 msgid "Link not found!"
@@ -17418,8 +17426,8 @@ msgstr "MySQL руу нэвтэрч чадсангүй"
 
 #: src/Exceptions/AuthenticationFailure.php:43
 #: src/Exceptions/AuthenticationFailure.php:51
-#: src/Plugins/Auth/AuthenticationConfig.php:76
-#: src/Plugins/Auth/AuthenticationHttp.php:82
+#: src/Plugins/Auth/AuthenticationConfig.php:73
+#: src/Plugins/Auth/AuthenticationHttp.php:78
 msgid "Access denied!"
 msgstr "Хандах эрхгүй!"
 
@@ -17541,58 +17549,58 @@ msgstr ""
 msgid "Session not found."
 msgstr "Холбоос олдсонгүй"
 
-#: src/Html/Generator.php:150
+#: src/Html/Generator.php:149
 #, fuzzy, php-format
 #| msgid "Jump to database \"%s\"."
 msgid "Jump to database “%s”."
 msgstr "\"%s\" өгөгдлийн сан руу үсрэх."
 
-#: src/Html/Generator.php:217
+#: src/Html/Generator.php:216
 msgid "SSL is not being used"
 msgstr ""
 
-#: src/Html/Generator.php:224
+#: src/Html/Generator.php:223
 msgid "SSL is used with disabled verification"
 msgstr ""
 
-#: src/Html/Generator.php:226
+#: src/Html/Generator.php:225
 msgid "SSL is used without certification authority"
 msgstr ""
 
-#: src/Html/Generator.php:229
+#: src/Html/Generator.php:228
 msgid "SSL is used"
 msgstr ""
 
-#: src/Html/Generator.php:333
+#: src/Html/Generator.php:332
 msgid "The PHP function password_hash() with default options."
 msgstr ""
 
-#: src/Html/Generator.php:334
+#: src/Html/Generator.php:333
 msgid "password_hash() PHP function"
 msgstr ""
 
-#: src/Html/Generator.php:504
+#: src/Html/Generator.php:503
 msgid "Skip Explain SQL"
 msgstr "SQL тайлбарлахыг орхих"
 
-#: src/Html/Generator.php:536
+#: src/Html/Generator.php:535
 #, fuzzy
 #| msgid "Without PHP Code"
 msgid "Without PHP code"
 msgstr "PHP-кодгүй"
 
-#: src/Html/Generator.php:621
+#: src/Html/Generator.php:620
 #, fuzzy
 #| msgid "Add new field"
 msgctxt "Inline edit query"
 msgid "Edit inline"
 msgstr "Шинэ талбар нэмэх"
 
-#: src/Html/Generator.php:747
+#: src/Html/Generator.php:734
 msgid "Static analysis:"
 msgstr ""
 
-#: src/Html/Generator.php:750
+#: src/Html/Generator.php:737
 #, php-format
 msgid "%d errors were found during analysis."
 msgstr ""
@@ -17621,13 +17629,13 @@ msgid ""
 "requires these functions!"
 msgstr ""
 
-#: src/Http/Middleware/TokenRequestParamChecking.php:56
+#: src/Http/Middleware/TokenRequestParamChecking.php:61
 msgid ""
 "Failed to set session cookie. Maybe you are using HTTP instead of HTTPS to "
 "access phpMyAdmin."
 msgstr ""
 
-#: src/Http/Middleware/TokenRequestParamChecking.php:65
+#: src/Http/Middleware/TokenRequestParamChecking.php:69
 msgid "Error: Token mismatch"
 msgstr ""
 
@@ -17746,17 +17754,17 @@ msgid ""
 "removed."
 msgstr ""
 
-#: src/InsertEdit.php:432
+#: src/InsertEdit.php:433
 #, fuzzy
 #| msgid "web server upload directory"
 msgid "web server upload directory:"
 msgstr "web-сервэр түлхэх хавтас"
 
-#: src/InsertEdit.php:845 src/Sql.php:889
+#: src/InsertEdit.php:846 src/Sql.php:895
 msgid "Showing SQL query"
 msgstr "SQL асуудал харуулах"
 
-#: src/InsertEdit.php:869 src/Sql.php:869
+#: src/InsertEdit.php:870 src/Sql.php:875
 #, php-format
 msgid "Inserted row id: %1$d"
 msgstr ""
@@ -17771,7 +17779,7 @@ msgstr ""
 msgid "%1$s (near <code>%2$s</code>)"
 msgstr ""
 
-#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1386 src/Util.php:1400
+#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1387 src/Util.php:1401
 msgid "Tracking"
 msgstr ""
 
@@ -17779,7 +17787,7 @@ msgstr ""
 msgid "Database seems to be empty!"
 msgstr "Өгөгдлийн сан хоосон санагдаж байна!"
 
-#: src/Menu.php:402 src/Util.php:1387
+#: src/Menu.php:402 src/Util.php:1388
 msgid "Designer"
 msgstr "Дизайнч"
 
@@ -17789,11 +17797,11 @@ msgstr "Дизайнч"
 msgid "User accounts"
 msgstr "Хэрэглэгч"
 
-#: src/Menu.php:512 src/Util.php:1370
+#: src/Menu.php:512 src/Util.php:1371
 msgid "Charsets"
 msgstr "Кодлолууд"
 
-#: src/Menu.php:517 src/Util.php:1372
+#: src/Menu.php:517 src/Util.php:1373
 msgid "Engines"
 msgstr "Хөдөлгүүрүүд"
 
@@ -17820,31 +17828,31 @@ msgid_plural "%1$d rows inserted."
 msgstr[0] "Сонгогдсон мөргүй"
 msgstr[1] "Сонгогдсон мөргүй"
 
-#: src/Navigation/Navigation.php:222
+#: src/Navigation/Navigation.php:221
 #, fuzzy
 #| msgid "Column names"
 msgid "Groups:"
 msgstr "Баганын нэрс"
 
-#: src/Navigation/Navigation.php:223
+#: src/Navigation/Navigation.php:222
 #, fuzzy
 #| msgid "Event"
 msgid "Events:"
 msgstr "Үзэгдэл"
 
-#: src/Navigation/Navigation.php:224
+#: src/Navigation/Navigation.php:223
 #, fuzzy
 #| msgid "Functions"
 msgid "Functions:"
 msgstr "Функцүүд"
 
-#: src/Navigation/Navigation.php:225
+#: src/Navigation/Navigation.php:224
 #, fuzzy
 #| msgid "Procedures"
 msgid "Procedures:"
 msgstr "Процедурүүд"
 
-#: src/Navigation/Navigation.php:227
+#: src/Navigation/Navigation.php:226
 #, fuzzy
 #| msgid "View"
 msgid "Views:"
@@ -17869,7 +17877,7 @@ msgid_plural "%s results found"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Navigation/NavigationTree.php:1246
+#: src/Navigation/NavigationTree.php:1252
 msgid "Collapse all"
 msgstr ""
 
@@ -18236,7 +18244,7 @@ msgstr ""
 msgid "Error while creating PDF:"
 msgstr "Өгөгдөл уншихыг зөвшөөрөх."
 
-#: src/Plugins/Auth/AuthenticationConfig.php:98
+#: src/Plugins/Auth/AuthenticationConfig.php:95
 #, php-format
 msgid ""
 "You probably did not create a configuration file. You might want to use the "
@@ -18245,7 +18253,7 @@ msgstr ""
 "Үүний шалтгаан нь магадгүй та тохиргооны файл үүсгээгүй байж болох юм. Та "
 "%1$ssetup script%2$s -ийг ашиглаж нэгийг үүсгэж болно."
 
-#: src/Plugins/Auth/AuthenticationConfig.php:115
+#: src/Plugins/Auth/AuthenticationConfig.php:112
 msgid ""
 "phpMyAdmin tried to connect to the MySQL server, and the server rejected the "
 "connection. You should check the host, username and password in your "
@@ -18255,52 +18263,52 @@ msgstr ""
 "phpMyAdmin нь MySQL сервэр лүү холбогдох гэсэн ч, сервэр хүлээн авсангүй. "
 "config.inc.php дэх сервэр, хэрэглэгчийн нэр болон нууц үгээ шалга."
 
-#: src/Plugins/Auth/AuthenticationConfig.php:133
+#: src/Plugins/Auth/AuthenticationConfig.php:130
 msgid "Retry to connect"
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:127
+#: src/Plugins/Auth/AuthenticationCookie.php:124
 msgid "Your session has expired. Please log in again."
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:236
+#: src/Plugins/Auth/AuthenticationCookie.php:233
 msgid "Missing Captcha verification, maybe it has been blocked by adblock?"
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:271
+#: src/Plugins/Auth/AuthenticationCookie.php:268
 msgid "Failed to connect to the reCAPTCHA service!"
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:273
+#: src/Plugins/Auth/AuthenticationCookie.php:270
 msgid "Entered captcha is wrong, try again!"
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:285
+#: src/Plugins/Auth/AuthenticationCookie.php:282
 msgid ""
 "Your password is too long. To prevent denial-of-service attacks, phpMyAdmin "
 "restricts passwords to less than 2000 characters."
 msgstr ""
 
-#: src/Plugins/Auth/AuthenticationCookie.php:303
+#: src/Plugins/Auth/AuthenticationCookie.php:300
 #, fuzzy
 #| msgid "Cannot log in to the MySQL server"
 msgid "You are not allowed to log in to this MySQL server!"
 msgstr "MySQL руу нэвтэрч чадсангүй"
 
-#: src/Plugins/Auth/AuthenticationHttp.php:92
+#: src/Plugins/Auth/AuthenticationHttp.php:88
 msgid "Wrong username/password. Access denied."
 msgstr "Нэвтрэгч/нууц үг буруу. Хандах боломжгүй."
 
-#: src/Plugins/Auth/AuthenticationSignon.php:129
+#: src/Plugins/Auth/AuthenticationSignon.php:127
 #, php-format
 msgid "Can not find signon authentication script: %s"
 msgstr ""
 
-#: src/Plugins/AuthenticationPluginFactory.php:31
+#: src/Plugins/AuthenticationPluginFactory.php:36
 msgid "Invalid authentication method set in configuration:"
 msgstr "Тохиргоонд сонгогдсон буруу зөвшөөрлийн арга:"
 
-#: src/Plugins/AuthenticationPlugin.php:317
+#: src/Plugins/AuthenticationPlugin.php:315
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 
@@ -18816,55 +18824,55 @@ msgid ""
 "Update data when duplicate keys found on import (add ON DUPLICATE KEY UPDATE)"
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:92
+#: src/Plugins/Import/ImportCsv.php:93
 msgid "Name of the new table (optional):"
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:101
+#: src/Plugins/Import/ImportCsv.php:102
 msgid "Name of the new database (optional):"
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:110 src/Plugins/Import/ImportCsv.php:128
+#: src/Plugins/Import/ImportCsv.php:111 src/Plugins/Import/ImportCsv.php:129
 msgid "Import these many number of rows (optional):"
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:118 src/Plugins/Import/ImportOds.php:73
+#: src/Plugins/Import/ImportCsv.php:119 src/Plugins/Import/ImportOds.php:73
 msgid ""
 "The first line of the file contains the table column names <i>(if this is "
 "unchecked, the first line will become part of the data)</i>"
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:135
+#: src/Plugins/Import/ImportCsv.php:136
 msgid ""
 "If the data in each row of the file is not in the same order as in the "
 "database, list the corresponding column names here. Column names must be "
 "separated by commas and not enclosed in quotations."
 msgstr ""
 
-#: src/Plugins/Import/ImportCsv.php:143
+#: src/Plugins/Import/ImportCsv.php:144
 #, fuzzy
 #| msgid "Column names"
 msgid "Column names:"
 msgstr "Баганын нэрс"
 
-#: src/Plugins/Import/ImportCsv.php:275 src/Plugins/Import/ImportCsv.php:528
+#: src/Plugins/Import/ImportCsv.php:276 src/Plugins/Import/ImportCsv.php:529
 #, php-format
 msgid "Invalid format of CSV input on line %d."
 msgstr "CSV оруулалтад %d мөрөнд буруу тогтнол байна."
 
-#: src/Plugins/Import/ImportCsv.php:482
+#: src/Plugins/Import/ImportCsv.php:483
 #, fuzzy, php-format
 #| msgid "Invalid field count in CSV input on line %d."
 msgid "Invalid column count in CSV input on line %d."
 msgstr "CSV оруулалтад %d мөрөнд буруу талбарын тоо байна."
 
-#: src/Plugins/Import/ImportCsv.php:637 src/Plugins/Import/ImportCsv.php:652
-#: src/Plugins/Import/ImportCsv.php:663 src/Plugins/Import/ImportCsv.php:670
+#: src/Plugins/Import/ImportCsv.php:638 src/Plugins/Import/ImportCsv.php:653
+#: src/Plugins/Import/ImportCsv.php:664 src/Plugins/Import/ImportCsv.php:671
 #, php-format
 msgid "Invalid parameter for CSV import: %s"
 msgstr "CSV оруулалтад буруу параметр нь: %s"
 
-#: src/Plugins/Import/ImportCsv.php:755
+#: src/Plugins/Import/ImportCsv.php:761
 #, php-format
 msgid ""
 "Invalid column (%s) specified! Ensure that columns names are spelled "
@@ -19063,7 +19071,7 @@ msgstr ""
 
 #. l10n: See https://www.php.net/manual/en/function.strftime.php
 #: src/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php:129
-#: src/Util.php:526
+#: src/Util.php:527
 msgid "%B %d, %Y at %I:%M %p"
 msgstr "%Y оны %B сарын %d., %H:%M"
 
@@ -19442,7 +19450,7 @@ msgid "Error 405! Request method not allowed."
 msgstr ""
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3143
+#: src/Server/Privileges.php:3161
 #, fuzzy
 #| msgid "Documentation"
 msgid "Native MySQL authentication"
@@ -19485,58 +19493,58 @@ msgstr "Онцгой эрхгүй."
 msgid "Includes all privileges except GRANT."
 msgstr ""
 
-#: src/Server/Privileges.php:893
+#: src/Server/Privileges.php:911
 #, php-format
 msgid "The password for %s was changed successfully."
 msgstr "%s-ы нууц үг солигдлоо."
 
-#: src/Server/Privileges.php:941
+#: src/Server/Privileges.php:959
 #, php-format
 msgid "You have revoked the privileges for %s."
 msgstr "Онцгой эрх %s -ыг хүчингүй болголоо."
 
-#: src/Server/Privileges.php:1279
+#: src/Server/Privileges.php:1297
 msgid "Revoke"
 msgstr "Хүчингүй"
 
-#: src/Server/Privileges.php:1883
+#: src/Server/Privileges.php:1901
 msgid "No users selected for deleting!"
 msgstr "Устгахаар хэрэглэгч сонгогдсонгүй!"
 
-#: src/Server/Privileges.php:1886
+#: src/Server/Privileges.php:1904
 msgid "Reloading the privileges"
 msgstr "Онцгой эрхийг дахин дуудаж байна"
 
-#: src/Server/Privileges.php:1911
+#: src/Server/Privileges.php:1929
 msgid "The selected users have been deleted successfully."
 msgstr "Сонгогдсон хэрэглэгч устгагдлаа."
 
-#: src/Server/Privileges.php:1985
+#: src/Server/Privileges.php:2003
 #, fuzzy, php-format
 msgid "You have updated the privileges for %s."
 msgstr "Онцгой эрх шинэчлэгдлээ"
 
-#: src/Server/Privileges.php:2143
+#: src/Server/Privileges.php:2161
 #, php-format
 msgid "Deleting %s"
 msgstr "%s-г устгаж байна"
 
-#: src/Server/Privileges.php:2173
+#: src/Server/Privileges.php:2191
 msgid "The privileges were reloaded successfully."
 msgstr "Онцгой эрхүүд дахин дуудагдлаа."
 
-#: src/Server/Privileges.php:2238
+#: src/Server/Privileges.php:2256
 #, php-format
 msgid "The user %s already exists!"
 msgstr "Хэрэглэгч %s оршин байна!"
 
-#: src/Server/Privileges.php:2391
+#: src/Server/Privileges.php:2409
 #, fuzzy, php-format
 #| msgid "Privileges"
 msgid "Privileges for %s"
 msgstr "Онцгой эрхүүд"
 
-#: src/Server/Privileges.php:2477
+#: src/Server/Privileges.php:2495
 #, fuzzy, php-format
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -19554,7 +19562,7 @@ msgstr ""
 "агуулга нь сервэрт хэрэглэгдэж буйгаас өөр байна. Энэ тохиолдолд %sдахин "
 "дуудаж%s үргэлжлүүлнэ үү."
 
-#: src/Server/Privileges.php:2493
+#: src/Server/Privileges.php:2511
 #, fuzzy
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -19573,11 +19581,11 @@ msgstr ""
 "агуулга нь сервэрт хэрэглэгдэж буйгаас өөр байна. Энэ тохиолдолд %sдахин "
 "дуудаж%s үргэлжлүүлнэ үү."
 
-#: src/Server/Privileges.php:2781
+#: src/Server/Privileges.php:2799
 msgid "You have added a new user."
 msgstr "Шинэ хэрэглэгч нэмэгдлээ."
 
-#: src/Server/Privileges.php:3235
+#: src/Server/Privileges.php:3253
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -19673,23 +19681,23 @@ msgstr ""
 msgid "No newer stable version is available"
 msgstr ""
 
-#: src/Sql.php:444
+#: src/Sql.php:445
 #, php-format
 msgid "Using bookmark \"%s\" as default browse query."
 msgstr ""
 
-#: src/Sql.php:886
+#: src/Sql.php:892
 msgid "Showing as PHP code"
 msgstr "PHP кодоор харуулах"
 
-#: src/Sql.php:1235
+#: src/Sql.php:1248
 #, php-format
 msgid ""
 "Current selection does not contain a unique column. Grid edit, checkbox, "
 "Edit, Copy and Delete features are not available. %s"
 msgstr ""
 
-#: src/Sql.php:1249
+#: src/Sql.php:1262
 #, php-format
 msgid ""
 "Current selection does not contain a unique column. Grid edit, Edit, Copy "
@@ -20231,37 +20239,37 @@ msgctxt "spatial types"
 msgid "Spatial"
 msgstr "Нийт"
 
-#: src/UserPassword.php:36
+#: src/UserPassword.php:37
 msgid "The profile has been updated."
 msgstr "Профиль шинэчлэгдлээ."
 
-#: src/UserPassword.php:48
+#: src/UserPassword.php:49
 #, fuzzy
 #| msgid "Password Hashing"
 msgid "Password is too long!"
 msgstr "Нууц үг хувиргах"
 
-#: src/Util.php:129
+#: src/Util.php:130
 #, php-format
 msgid "Max: %s%s"
 msgstr "ХИ хэмжээ: %s%s"
 
-#: src/Util.php:535
+#: src/Util.php:536
 msgctxt "AM/PM indication in time"
 msgid "PM"
 msgstr ""
 
-#: src/Util.php:537
+#: src/Util.php:538
 msgctxt "AM/PM indication in time"
 msgid "AM"
 msgstr ""
 
-#: src/Util.php:610
+#: src/Util.php:611
 #, php-format
 msgid "%s days, %s hours, %s minutes and %s seconds"
 msgstr "%s өдөр, %s цаг, %s минут, %s секунд"
 
-#: src/Util.php:1363
+#: src/Util.php:1364
 #, fuzzy
 #| msgid "User"
 msgid "Users"
