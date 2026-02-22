@@ -10,6 +10,8 @@ use PhpMyAdmin\Gis\GisVisualization;
 use PhpMyAdmin\Gis\GisVisualizationSettings;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionMethod;
+use ReflectionProperty;
 
 #[CoversClass(GisVisualization::class)]
 class GisVisualizationTest extends AbstractTestCase
@@ -33,33 +35,23 @@ class GisVisualizationTest extends AbstractTestCase
         $this->dbi->setVersion(['@@version' => '5.5.0']);
         $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
 
-        $dataSet = $this->callFunction(
-            $gis,
-            GisVisualization::class,
-            'scaleDataSet',
+        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
             [
-                [
-                    ['abc' => null],// The column is nullable
-                    ['abc' => 2],// Some impossible test case
-                ],
+                ['abc' => null],// The column is nullable
+                ['abc' => 2],// Some impossible test case
             ],
-        );
+        ]);
         self::assertNull($dataSet);
 
-        $dataSet = $this->callFunction(
-            $gis,
-            GisVisualization::class,
-            'scaleDataSet',
+        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
             [
-                [
-                    ['abc' => null],// The column is nullable
-                    ['abc' => 2],// Some impossible test case
-                    ['abc' => 'MULTILINESTRING((36 140,47 233,62 75),(36 100,17 233,178 93))'],
-                    ['abc' => 'POINT(100 250)'],
-                    ['abc' => 'MULTIPOINT(125 50,156 250,178 143,175 80)'],
-                ],
+                ['abc' => null],// The column is nullable
+                ['abc' => 2],// Some impossible test case
+                ['abc' => 'MULTILINESTRING((36 140,47 233,62 75),(36 100,17 233,178 93))'],
+                ['abc' => 'POINT(100 250)'],
+                ['abc' => 'MULTIPOINT(125 50,156 250,178 143,175 80)'],
             ],
-        );
+        ]);
         self::assertEquals(
             new ScaleData(
                 offsetX: -45.35714285714286,
@@ -71,17 +63,12 @@ class GisVisualizationTest extends AbstractTestCase
         );
 
         // Regression test for bug with 0.0 sentinel values
-        $dataSet = $this->callFunction(
-            $gis,
-            GisVisualization::class,
-            'scaleDataSet',
+        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
             [
-                [
-                    ['abc' => 'MULTIPOLYGON(((0 0,0 3,3 3,3 0,0 0),(1 1,1 2,2 2,2 1,1 1)))'],
-                    ['abc' => 'MULTIPOLYGON(((10 10,10 13,13 13,13 10,10 10),(11 11,11 12,12 12,12 11,11 11)))'],
-                ],
+                ['abc' => 'MULTIPOLYGON(((0 0,0 3,3 3,3 0,0 0),(1 1,1 2,2 2,2 1,1 1)))'],
+                ['abc' => 'MULTIPOLYGON(((10 10,10 13,13 13,13 10,10 10),(11 11,11 12,12 12,12 11,11 11)))'],
             ],
-        );
+        ]);
         self::assertEquals(
             new ScaleData(
                 scale: 32.30769230769231,
@@ -99,12 +86,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQueryOld(): void
     {
         $this->dbi->setVersion(['@@version' => '5.5.0']);
-        $queryString = $this->callFunction(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
+            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
 
         self::assertSame('SELECT ASTEXT(`abc`) AS `abc`, SRID(`abc`) AS `srid` FROM () AS `temp_gis`', $queryString);
     }
@@ -115,12 +98,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQuery(): void
     {
         $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = $this->callFunction(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
+            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
 
         self::assertSame(
             'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',
@@ -134,10 +113,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQueryTrimSqlEnd(): void
     {
         $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = $this->callFunction(
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs(
             GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            GisVisualization::class,
-            'modifySqlQuery',
             ['SELECT 1 FROM foo;'],
         );
 
@@ -153,10 +130,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQueryLabelColumn(): void
     {
         $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = $this->callFunction(
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs(
             GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'country_geom', 'country name')),
-            GisVisualization::class,
-            'modifySqlQuery',
             [''],
         );
 
@@ -174,13 +149,8 @@ class GisVisualizationTest extends AbstractTestCase
     {
         $this->dbi->setVersion(['@@version' => '8.0.0']);
         $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        $this->setProperty($gis, GisVisualization::class, 'rows', 10);
-        $queryString = $this->callFunction(
-            $gis,
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 10);
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs($gis, ['']);
 
         self::assertSame(
             'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis` LIMIT 10',
@@ -188,14 +158,9 @@ class GisVisualizationTest extends AbstractTestCase
         );
 
         $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        $this->setProperty($gis, GisVisualization::class, 'pos', 10);
-        $this->setProperty($gis, GisVisualization::class, 'rows', 15);
-        $queryString = $this->callFunction(
-            $gis,
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        (new ReflectionProperty(GisVisualization::class, 'pos'))->setValue($gis, 10);
+        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 15);
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs($gis, ['']);
 
         self::assertSame(
             'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis` LIMIT 10, 15',
@@ -209,12 +174,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQueryVersion8(): void
     {
         $this->dbi->setVersion(['@@version' => '8.0.1']);
-        $queryString = $this->callFunction(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
+            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
 
         self::assertSame(
             'SELECT ST_ASTEXT(`abc`, \'axis-order=long-lat\') AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',
@@ -228,12 +189,8 @@ class GisVisualizationTest extends AbstractTestCase
     public function testModifyQueryMariaDB(): void
     {
         $this->dbi->setVersion(['@@version' => '8.0.0-MariaDB']);
-        $queryString = $this->callFunction(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            GisVisualization::class,
-            'modifySqlQuery',
-            [''],
-        );
+        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
+            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
 
         self::assertSame(
             'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',

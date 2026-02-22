@@ -20,9 +20,7 @@ use PhpMyAdmin\SqlParser\Translator;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\Stubs\DbiDummy;
 use PhpMyAdmin\Tracking\Tracker;
-use PhpMyAdmin\Utils\HttpRequest;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use ReflectionProperty;
 
 /**
@@ -104,62 +102,5 @@ abstract class AbstractTestCase extends TestCase
 
         $languageManager->activate($languageEn);
         Translator::load();
-    }
-
-    protected function setProxySettings(): void
-    {
-        HttpRequest::setProxySettingsFromEnv();
-    }
-
-    /**
-     * Call protected functions by setting visibility to public.
-     *
-     * @param object|null $object     The object to inspect, pass null for static objects()
-     * @param string      $className  The class name
-     * @param string      $methodName The method name
-     * @param mixed[]     $params     The parameters for the invocation
-     * @phpstan-param class-string $className
-     *
-     * @return mixed the output from the protected method.
-     */
-    protected function callFunction(object|null $object, string $className, string $methodName, array $params): mixed
-    {
-        $class = new ReflectionClass($className);
-        $method = $class->getMethod($methodName);
-
-        return $method->invokeArgs($object, $params);
-    }
-
-    /**
-     * Set a private or protected property via reflection.
-     *
-     * @param object|null $object       The object to inspect, pass null for static objects()
-     * @param string      $className    The class name
-     * @param string      $propertyName The method name
-     * @param mixed       $value        The parameters for the invocation
-     * @phpstan-param class-string $className
-     */
-    protected function setProperty(object|null $object, string $className, string $propertyName, mixed $value): void
-    {
-        $class = new ReflectionClass($className);
-        $property = $class->getProperty($propertyName);
-
-        $property->setValue($object, $value);
-    }
-
-    /**
-     * Get a private or protected property via reflection.
-     *
-     * @param object $object       The object to inspect, pass null for static objects()
-     * @param string $className    The class name
-     * @param string $propertyName The method name
-     * @phpstan-param class-string $className
-     */
-    protected function getProperty(object $object, string $className, string $propertyName): mixed
-    {
-        $class = new ReflectionClass($className);
-        $property = $class->getProperty($propertyName);
-
-        return $property->getValue($object);
     }
 }

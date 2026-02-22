@@ -15283,12 +15283,6 @@ parameters:
 			path: tests/unit/Database/CentralColumnsTest.php
 
 		-
-			message: '#^Parameter \#1 \$needle of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/unit/Database/CentralColumnsTest.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
 				Use dependency injection instead\.$#
@@ -15465,7 +15459,7 @@ parameters:
 		-
 			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
 			identifier: argument.type
-			count: 4
+			count: 2
 			path: tests/unit/Display/ResultsTest.php
 
 		-

@@ -9,6 +9,7 @@ use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use RangeException;
+use ReflectionMethod;
 use Symfony\Component\Console\Command\Command;
 
 use function class_exists;
@@ -60,12 +61,7 @@ class SetVersionCommandTest extends AbstractTestCase
 
         $this->expectException(RangeException::class);
         $this->expectExceptionMessage('The version number is in the wrong format: ' . $version);
-        $this->callFunction(
-            $this->command,
-            SetVersionCommand::class,
-            'getGeneratedClass',
-            [$version],
-        );
+        (new ReflectionMethod(SetVersionCommand::class, 'getGeneratedClass'))->invokeArgs($this->command, [$version]);
     }
 
     /** @return mixed[][] */
@@ -170,12 +166,8 @@ class SetVersionCommandTest extends AbstractTestCase
             self::markTestSkipped('The Symfony Console is missing');
         }
 
-        $output = $this->callFunction(
-            $this->command,
-            SetVersionCommand::class,
-            'getGeneratedClass',
-            [$version],
-        );
+        $output = (new ReflectionMethod(SetVersionCommand::class, 'getGeneratedClass'))
+            ->invokeArgs($this->command, [$version]);
         $template = <<<'PHP'
             <?php
 

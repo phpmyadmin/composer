@@ -25,6 +25,7 @@ use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionMethod;
 use ReflectionProperty;
 
 use const MYSQLI_TYPE_STRING;
@@ -1290,24 +1291,16 @@ class TableTest extends AbstractTestCase
 
         $tableObj = new Table('PMA_table', 'db', $this->mockedDbi);
 
-        $sql = $this->callFunction(
-            $tableObj,
-            Table::class,
-            'getSQLToCreateForeignKey',
-            [$table, $field, $foreignDb, $foreignTable, $foreignField],
-        );
+        $sql = (new ReflectionMethod(Table::class, 'getSQLToCreateForeignKey'))
+            ->invokeArgs($tableObj, [$table, $field, $foreignDb, $foreignTable, $foreignField]);
         $sqlExcepted = 'ALTER TABLE `PMA_table` ADD  '
             . 'FOREIGN KEY (`PMA_field1`, `PMA_field2`) REFERENCES '
             . '`foreignDb`.`foreignTable`(`foreignField1`, `foreignField2`);';
         self::assertSame($sqlExcepted, $sql);
 
         // Exclude db name when relations are made between table in the same db
-        $sql = $this->callFunction(
-            $tableObj,
-            Table::class,
-            'getSQLToCreateForeignKey',
-            [$table, $field, 'db', $foreignTable, $foreignField],
-        );
+        $sql = (new ReflectionMethod(Table::class, 'getSQLToCreateForeignKey'))
+            ->invokeArgs($tableObj, [$table, $field, 'db', $foreignTable, $foreignField]);
         $sqlExcepted = 'ALTER TABLE `PMA_table` ADD  '
             . 'FOREIGN KEY (`PMA_field1`, `PMA_field2`) REFERENCES '
             . '`foreignTable`(`foreignField1`, `foreignField2`);';

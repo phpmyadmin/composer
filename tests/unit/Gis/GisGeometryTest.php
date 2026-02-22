@@ -11,6 +11,7 @@ use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionMethod;
 
 #[CoversClass(GisGeometry::class)]
 class GisGeometryTest extends AbstractTestCase
@@ -48,12 +49,8 @@ class GisGeometryTest extends AbstractTestCase
     #[DataProvider('providerForTestGetCoordinatesExtent')]
     public function testGetCoordinatesExtent(string $pointSet, Extent $expected): void
     {
-        $extent = $this->callFunction(
-            $this->object,
-            GisGeometry::class,
-            'getCoordinatesExtent',
-            [$pointSet],
-        );
+        $extent = (new ReflectionMethod(GisGeometry::class, 'getCoordinatesExtent'))
+            ->invokeArgs($this->object, [$pointSet]);
         self::assertEquals($expected, $extent);
     }
 
@@ -87,12 +84,8 @@ class GisGeometryTest extends AbstractTestCase
     {
         self::assertSame(
             $output,
-            $this->callFunction(
-                $this->object,
-                GisGeometry::class,
-                'parseWktAndSrid',
-                [$value],
-            ),
+            (new ReflectionMethod(GisGeometry::class, 'parseWktAndSrid'))
+                ->invokeArgs($this->object, [$value]),
         );
     }
 
@@ -131,12 +124,8 @@ class GisGeometryTest extends AbstractTestCase
         bool $linear,
         array $output,
     ): void {
-        $points = $this->callFunction(
-            $this->object,
-            GisGeometry::class,
-            'extractPointsInternal',
-            [$pointSet, $scaleData, $linear],
-        );
+        $points = (new ReflectionMethod(GisGeometry::class, 'extractPointsInternal'))
+            ->invokeArgs($this->object, [$pointSet, $scaleData, $linear]);
         self::assertEquals($output, $points);
     }
 

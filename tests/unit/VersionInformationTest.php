@@ -6,6 +6,7 @@ namespace PhpMyAdmin\Tests;
 
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Release;
+use PhpMyAdmin\Utils\HttpRequest;
 use PhpMyAdmin\VersionInformation;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -28,7 +29,7 @@ class VersionInformationTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->setProxySettings();
+        HttpRequest::setProxySettingsFromEnv();
 
         $this->releases = [];
 
@@ -48,7 +49,7 @@ class VersionInformationTest extends AbstractTestCase
     #[Group('network')]
     public function testGetLatestVersion(): void
     {
-        $this->setProxySettings();
+        HttpRequest::setProxySettingsFromEnv();
         unset($_SESSION['cache']['version_check']);
         $versionInformation = new VersionInformation();
         $version = $versionInformation->getLatestVersions();
