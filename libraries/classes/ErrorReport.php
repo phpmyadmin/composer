@@ -86,7 +86,7 @@ class ErrorReport
             'browser_version' => $this->config->get('PMA_USR_BROWSER_VER'),
             'user_os' => $this->config->get('PMA_USR_OS'),
             'server_software' => $_SERVER['SERVER_SOFTWARE'] ?? null,
-            'user_agent_string' => $_SERVER['HTTP_USER_AGENT'],
+            'user_agent_string' => $_SERVER['HTTP_USER_AGENT'] ?? null,
             'locale' => $this->config->getCookie('pma_lang'),
             'configuration_storage' => $relationParameters->db === null ? 'disabled' : 'enabled',
             'php_version' => PHP_VERSION,
