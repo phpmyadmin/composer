@@ -334,7 +334,8 @@ class Header
 
         // The user preferences have been merged at this point
         // so we can conditionally add CodeMirror, other scripts and settings
-        if ($GLOBALS['cfg']['CodemirrorEnable']) {
+        // See #20159, why we need to check for HTTP_USER_AGENT here
+        if ($GLOBALS['cfg']['CodemirrorEnable'] && isset($_SERVER['HTTP_USER_AGENT'])) {
             $this->scripts->addFile('vendor/codemirror/lib/codemirror.js');
             $this->scripts->addFile('vendor/codemirror/mode/sql/sql.js');
             $this->scripts->addFile('vendor/codemirror/addon/runmode/runmode.js');
