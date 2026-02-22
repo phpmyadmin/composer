@@ -1720,7 +1720,7 @@ Functions.highlightSql = function ($base) {
         if ($pre.is(':visible')) {
             var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
             $sql.append($highlight);
-            if (typeof CodeMirror !== 'undefined') {
+            if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
                 CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
                 $pre.hide();
                 $highlight.find('.cm-keyword').each(Functions.documentationKeyword);
@@ -1791,7 +1791,7 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
     var $notHighlighted = $('<pre>' + htmlValue + '</pre>');
 
     // Tries to highlight code using CodeMirror.
-    if (typeof CodeMirror !== 'undefined') {
+    if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
         var $highlighted = $('<div class="' + type + '-highlight cm-s-default"></div>');
         CodeMirror.runMode(rawValue, mode, $highlighted[0]);
         $notHighlighted.hide();
