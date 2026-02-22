@@ -2528,3 +2528,9 @@ meter {
 pre {
   margin: 0;
 }
+
+code.json,
+code.php,
+code.sql {
+  color: var(--#{$prefix}code-color);
+}
