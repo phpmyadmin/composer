@@ -12902,6 +12902,12 @@ pre {
   margin: 0;
 }
 
+code.json,
+code.php,
+code.sql {
+  color: var(--bs-code-color);
+}
+
 /**
  * ENUM/SET editor styles
  */
