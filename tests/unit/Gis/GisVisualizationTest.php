@@ -80,173 +80,176 @@ class GisVisualizationTest extends AbstractTestCase
 
     /**
      * Scale the data set
+     *
+     * @param list<array{abc: string|int|null}> $data
      */
-    public function testScaleDataSet(): void
+    #[DataProvider('providerForTestScaleDataSet')]
+    public function testScaleDataSet(ScaleData|null $expected, array $data): void
     {
-        $this->dbi->setVersion(['@@version' => '5.5.0']);
-        $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-
-        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
-            [
-                ['abc' => null],// The column is nullable
-                ['abc' => 2],// Some impossible test case
-            ],
-        ]);
-        self::assertNull($dataSet);
-
-        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
-            [
-                ['abc' => null],// The column is nullable
-                ['abc' => 2],// Some impossible test case
-                ['abc' => 'MULTILINESTRING((36 140,47 233,62 75),(36 100,17 233,178 93))'],
-                ['abc' => 'POINT(100 250)'],
-                ['abc' => 'MULTIPOINT(125 50,156 250,178 143,175 80)'],
-            ],
-        ]);
-        self::assertEquals(
-            new ScaleData(
-                offsetX: -45.35714285714286,
-                offsetY: 42.85714285714286,
-                scale: 2.1,
-                height: 450,
-            ),
-            $dataSet,
+        $gis = GisVisualization::getByData(
+            $data,
+            new GisVisualizationSettings(width: 600, height: 450, spatialColumn: 'abc'),
         );
+        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))
+            ->invoke($gis, $data);
 
-        // Regression test for bug with 0.0 sentinel values
-        $dataSet = (new ReflectionMethod(GisVisualization::class, 'scaleDataSet'))->invokeArgs($gis, [
-            [
-                ['abc' => 'MULTIPOLYGON(((0 0,0 3,3 3,3 0,0 0),(1 1,1 2,2 2,2 1,1 1)))'],
-                ['abc' => 'MULTIPOLYGON(((10 10,10 13,13 13,13 10,10 10),(11 11,11 12,12 12,12 11,11 11)))'],
+        self::assertEquals($expected, $dataSet);
+    }
+
+    /** @return array<string, list{ScaleData|null, list<array{abc: string|int|null}>}> */
+    public static function providerForTestScaleDataSet(): array
+    {
+        return [
+            'no valid data' => [
+                null,
+                [
+                    ['abc' => null], // The column is nullable
+                    ['abc' => 2], // Some impossible test case
+                ],
             ],
-        ]);
-        self::assertEquals(
-            new ScaleData(
-                scale: 32.30769230769231,
-                offsetX: -2.7857142857142865,
-                offsetY: -0.4642857142857143,
-                height: 450,
-            ),
-            $dataSet,
-        );
+            'partially valid data' => [
+                new ScaleData(offsetX: -45.35714285714286, offsetY: 42.85714285714286, scale: 2.1, height: 450),
+                [
+                    ['abc' => null], // The column is nullable
+                    ['abc' => 2], // Some impossible test case
+                    ['abc' => 'MULTILINESTRING((36 140,47 233,62 75),(36 100,17 233,178 93))'],
+                    ['abc' => 'POINT(100 250)'],
+                    ['abc' => 'MULTIPOINT(125 50,156 250,178 143,175 80)'],
+                ],
+            ],
+            'Regression test for bug with 0.0 sentinel values' => [
+                new ScaleData(
+                    scale: 32.30769230769231,
+                    offsetX: -2.7857142857142865,
+                    offsetY: -0.4642857142857143,
+                    height: 450,
+                ),
+                [
+                    ['abc' => 'MULTIPOLYGON(((0 0,0 3,3 3,3 0,0 0),(1 1,1 2,2 2,2 1,1 1)))'],
+                    ['abc' => 'MULTIPOLYGON(((10 10,10 13,13 13,13 10,10 10),(11 11,11 12,12 12,12 11,11 11)))'],
+                ],
+            ],
+        ];
+    }
+
+    /** @param array{version:string,sql:string,spatialColumn:string,labelColumn?:string,rows?:int,pos?:int} $config */
+    #[DataProvider('providerForTestModifyQuery')]
+    public function testModifyQuery(string $expected, array $config): void
+    {
+        $this->dbi->setVersion(['@@version' => $config['version']]);
+
+        $vis = new ReflectionClass(GisVisualization::class);
+        $obj = $vis->newInstanceWithoutConstructor();
+        $vis->getProperty('pos')->setValue($obj, $config['pos'] ?? 0);
+        $vis->getProperty('rows')->setValue($obj, $config['rows'] ?? 0);
+        $vis->getProperty('spatialColumn')->setValue($obj, $config['spatialColumn']);
+        $vis->getProperty('labelColumn')->setValue($obj, $config['labelColumn'] ?? '');
+
+        $queryString = $vis->getMethod('modifySqlQuery')->invoke($obj, $config['sql']);
+
+        self::assertSame($expected, $queryString);
     }
 
     /**
-     * Modify the query for an old version
+     * @return Generator<
+     *   string,
+     *   list{
+     *     string,
+     *     array{
+     *       version: string,
+     *       sql: string,
+     *       spatialColumn: string,
+     *       labelColumn?: string,
+     *       rows?: int,
+     *       pos?: int,
+     *     }
+     *   }
+     * >
      */
-    public function testModifyQueryOld(): void
+    public static function providerForTestModifyQuery(): Generator
     {
-        $this->dbi->setVersion(['@@version' => '5.5.0']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
-            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
+        yield 'Modify the query for an old version' => [
+            'SELECT ASTEXT(`abc`) AS `abc`, SRID(`abc`) AS `srid` FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis`',
+            [
+                'version' => '5.5.0',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+                'spatialColumn' => 'abc',
+            ],
+        ];
 
-        self::assertSame('SELECT ASTEXT(`abc`) AS `abc`, SRID(`abc`) AS `srid` FROM () AS `temp_gis`', $queryString);
-    }
+        yield 'Modify the query for an MySQL 8.0 version' => [
+            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid`'
+            . ' FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis`',
+            [
+                'version' => '8.0.0',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+            ],
+        ];
 
-    /**
-     * Modify the query for an MySQL 8.0 version
-     */
-    public function testModifyQuery(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
-            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
-
-        self::assertSame(
-            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',
-            $queryString,
-        );
-    }
-
-    /**
-     * Modify the query for an MySQL 8.0 version and trim the SQL end character
-     */
-    public function testModifyQueryTrimSqlEnd(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')),
-            ['SELECT 1 FROM foo;'],
-        );
-
-        self::assertSame(
+        yield 'Modify the query for an MySQL 8.0 version and trim the SQL end character' => [
             'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM (SELECT 1 FROM foo) AS `temp_gis`',
-            $queryString,
-        );
-    }
+            [
+                'version' => '8.0.0',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT 1 FROM foo;',
+            ],
+        ];
 
-    /**
-     * Modify the query for an MySQL 8.0 version using a label column
-     */
-    public function testModifyQueryLabelColumn(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs(
-            GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'country_geom', 'country name')),
-            [''],
-        );
-
-        self::assertSame(
+        yield 'Modify the query for an MySQL 8.0 version using a label column' => [
             'SELECT `country name`, ST_ASTEXT(`country_geom`) AS `country_geom`,'
-            . ' ST_SRID(`country_geom`) AS `srid` FROM () AS `temp_gis`',
-            $queryString,
-        );
-    }
+            . ' ST_SRID(`country_geom`) AS `srid`'
+            . " FROM (SELECT POINT(0, 0) AS country_geom, 'country name') AS `temp_gis`",
+            [
+                'version' => '8.0.0',
+                'spatialColumn' => 'country_geom',
+                'labelColumn' => 'country name',
+                'sql' => "SELECT POINT(0, 0) AS country_geom, 'country name'",
+            ],
+        ];
 
-    /**
-     * Modify the query for an MySQL 8.0 version adding a LIMIT statement
-     */
-    public function testModifyQueryWithLimit(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.0']);
-        $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 10);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs($gis, ['']);
+        yield 'Modify the query for an MySQL 8.0 version adding a LIMIT statement' => [
+            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid`'
+            . ' FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis` LIMIT 10',
+            [
+                'version' => '8.0.0',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+                'rows' => 10,
+            ],
+        ];
 
-        self::assertSame(
-            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis` LIMIT 10',
-            $queryString,
-        );
+        yield 'Modify the query for an MySQL 8.0 version adding a LIMIT statement with offset' => [
+            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid`'
+            . ' FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis` LIMIT 10, 15',
+            [
+                'version' => '8.0.0',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+                'rows' => 15,
+                'pos' => 10,
+            ],
+        ];
 
-        $gis = GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc'));
-        (new ReflectionProperty(GisVisualization::class, 'pos'))->setValue($gis, 10);
-        (new ReflectionProperty(GisVisualization::class, 'rows'))->setValue($gis, 15);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))->invokeArgs($gis, ['']);
+        yield 'Modify the query for an MySQL 8.0.1 version' => [
+            'SELECT ST_ASTEXT(`abc`, \'axis-order=long-lat\') AS `abc`, ST_SRID(`abc`) AS `srid`'
+            . ' FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis`',
+            [
+                'version' => '8.0.1',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+            ],
+        ];
 
-        self::assertSame(
-            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis` LIMIT 10, 15',
-            $queryString,
-        );
-    }
-
-    /**
-     * Modify the query for an MySQL 8.0.1 version
-     */
-    public function testModifyQueryVersion8(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.1']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
-            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
-
-        self::assertSame(
-            'SELECT ST_ASTEXT(`abc`, \'axis-order=long-lat\') AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',
-            $queryString,
-        );
-    }
-
-    /**
-     * Modify the query for a MariaDB 10.4 version
-     */
-    public function testModifyQueryMariaDB(): void
-    {
-        $this->dbi->setVersion(['@@version' => '8.0.0-MariaDB']);
-        $queryString = (new ReflectionMethod(GisVisualization::class, 'modifySqlQuery'))
-            ->invokeArgs(GisVisualization::getByData([], new GisVisualizationSettings(600, 450, 'abc')), ['']);
-
-        self::assertSame(
-            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid` FROM () AS `temp_gis`',
-            $queryString,
-        );
+        yield 'Modify the query for a MariaDB 10.4 version' => [
+            'SELECT ST_ASTEXT(`abc`) AS `abc`, ST_SRID(`abc`) AS `srid`'
+            . ' FROM (SELECT POINT(0, 0) AS abc) AS `temp_gis`',
+            [
+                'version' => '8.0.0-MariaDB',
+                'spatialColumn' => 'abc',
+                'sql' => 'SELECT POINT(0, 0) AS abc',
+            ],
+        ];
     }
 
     /** @return array<string,list{string,list<array{label:string,wkt:string,srid:int|null}>}> */
