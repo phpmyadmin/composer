@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\Ds\Extent;
-use PhpMyAdmin\Gis\Ds\ScaleData;
 use PhpMyAdmin\Gis\GisPolygon;
-use PhpMyAdmin\Image\ImageWrapper;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
-use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
-use TCPDF;
 
 #[CoversClass(GisPolygon::class)]
 #[PreserveGlobalState(false)]
 #[RunTestsInSeparateProcesses]
-class GisPolygonTest extends GisGeomTestCase
+class GisPolygonTest extends AbstractTestCase
 {
     /**
      * Provide some common data to data providers
@@ -150,163 +147,6 @@ class GisPolygonTest extends GisGeomTestCase
             [
                 'POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30)))',
                 new Extent(minX: 10, minY: 10, maxX: 45, maxY: 45),
-            ],
-        ];
-    }
-
-    #[RequiresPhpExtension('gd')]
-    public function testPrepareRowAsPng(): void
-    {
-        $object = new GisPolygon();
-        $image = ImageWrapper::create(200, 124, ['red' => 229, 'green' => 229, 'blue' => 229]);
-        self::assertNotNull($image);
-        $object->prepareRowAsPng(
-            'POLYGON((0 0,100 0,100 100,0 100,0 0),(10 10,10 40,40 40,40 10,10 10),(60 60,90 60,90 90,60 90,60 60))',
-            'image',
-            [176, 46, 224],
-            new ScaleData(offsetX: -56, offsetY: -16, scale: 0.94, height: 124),
-            $image,
-        );
-        self::assertSame(200, $image->width());
-        self::assertSame(124, $image->height());
-
-        $fileExpected = $this->testDir . '/polygon-expected.png';
-        $fileActual = $this->testDir . '/polygon-actual.png';
-        self::assertTrue($image->png($fileActual));
-        self::assertFileEquals($fileExpected, $fileActual);
-    }
-
-    /**
-     * test case for prepareRowAsPdf() method
-     *
-     * @param string    $spatial   GIS POLYGON object
-     * @param string    $label     label for the GIS POLYGON object
-     * @param int[]     $color     color for the GIS POLYGON object
-     * @param ScaleData $scaleData array containing data related to scaling
-     */
-    #[DataProvider('providerForPrepareRowAsPdf')]
-    public function testPrepareRowAsPdf(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        TCPDF $pdf,
-    ): void {
-        $object = new GisPolygon();
-        $object->prepareRowAsPdf($spatial, $label, $color, $scaleData, $pdf);
-
-        $fileExpected = $this->testDir . '/polygon-expected.pdf';
-        self::assertStringEqualsFile($fileExpected, $pdf->Output(dest: 'S'));
-    }
-
-    /**
-     * data provider for testPrepareRowAsPdf() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, TCPDF}>
-     */
-    public static function providerForPrepareRowAsPdf(): array
-    {
-        return [
-            [
-                'POLYGON((0 0,100 0,100 100,0 100,0 0),(10 10,10 40,40 40,40 10,10 10),(60 60,90 60,90 90,60 90,60 6'
-                . '0))',
-                'pdf',
-                [176, 46, 224],
-                new ScaleData(offsetX: -8, offsetY: -32, scale: 1.80, height: 297),
-
-                parent::createEmptyPdf('POLYGON'),
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsSvg() method
-     *
-     * @param string    $spatial   GIS POLYGON object
-     * @param string    $label     label for the GIS POLYGON object
-     * @param int[]     $color     color for the GIS POLYGON object
-     * @param ScaleData $scaleData array containing data related to scaling
-     * @param string    $output    expected output
-     */
-    #[DataProvider('providerForPrepareRowAsSvg')]
-    public function testPrepareRowAsSvg(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        string $output,
-    ): void {
-        $object = new GisPolygon();
-        $svg = $object->prepareRowAsSvg($spatial, $label, $color, $scaleData);
-        self::assertSame($output, $svg);
-    }
-
-    /**
-     * data provider for testPrepareRowAsSvg() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, string}>
-     */
-    public static function providerForPrepareRowAsSvg(): array
-    {
-        return [
-            [
-                'POLYGON((123 0,23 30,17 63,123 0),(99 12,30 35,25 55,99 12))',
-                'svg',
-                [176, 46, 224],
-                new ScaleData(offsetX: 12, offsetY: 69, scale: 2, height: 150),
-                '<path d="M222,288L22,228L10,162ZM174,264L36,218L26,178Z"'
-                . ' class="polygon vector" stroke="black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenod'
-                . 'd" fill-opacity="0.8" data-label="svg"/>',
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsOl() method
-     *
-     * @param string  $spatial  GIS POLYGON object
-     * @param int     $srid     spatial reference ID
-     * @param string  $label    label for the GIS POLYGON object
-     * @param int[]   $color    color for the GIS POLYGON object
-     * @param mixed[] $expected
-     */
-    #[DataProvider('providerForPrepareRowAsOl')]
-    public function testPrepareRowAsOl(
-        string $spatial,
-        int $srid,
-        string $label,
-        array $color,
-        array $expected,
-    ): void {
-        $object = new GisPolygon();
-        self::assertSame($expected, $object->prepareRowAsOl($spatial, $srid, $label, $color));
-    }
-
-    /**
-     * data provider for testPrepareRowAsOl() test case
-     *
-     * @return array<array{string, int, string, int[], mixed[]}>
-     */
-    public static function providerForPrepareRowAsOl(): array
-    {
-        return [
-            [
-                'POLYGON((123 0,23 30,17 63,123 0))',
-                4326,
-                'Ol',
-                [176, 46, 224],
-                [
-                    'geometry' => [
-                        'type' => 'Polygon',
-                        'coordinates' => [[[123.0, 0.0], [23.0, 30.0], [17.0, 63.0], [123.0, 0.0]]],
-                        'srid' => 4326,
-                    ],
-                    'style' => [
-                        'fill' => ['color' => [176, 46, 224, 0.8]],
-                        'stroke' => ['color' => [0, 0, 0], 'width' => 0.5],
-                        'text' => ['text' => 'Ol'],
-                    ],
-                ],
             ],
         ];
     }

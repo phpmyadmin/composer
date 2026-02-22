@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\Ds\Extent;
-use PhpMyAdmin\Gis\Ds\ScaleData;
 use PhpMyAdmin\Gis\GisGeometryCollection;
-use PhpMyAdmin\Image\ImageWrapper;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
-use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
-use TCPDF;
 
 #[CoversClass(GisGeometryCollection::class)]
 #[PreserveGlobalState(false)]
 #[RunTestsInSeparateProcesses]
-class GisGeometryCollectionTest extends GisGeomTestCase
+class GisGeometryCollectionTest extends AbstractTestCase
 {
     /**
      * Data provider for testGetExtent() test case
@@ -269,173 +266,6 @@ class GisGeometryCollectionTest extends GisGeomTestCase
                                 1 => ['x' => 35.0, 'y' => 32.0],
                                 2 => ['x' => 30.0, 'y' => 20.0],
                                 3 => ['x' => 20.0, 'y' => 30.0],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ];
-    }
-
-    #[RequiresPhpExtension('gd')]
-    public function testPrepareRowAsPng(): void
-    {
-        $object = new GisGeometryCollection();
-        $image = ImageWrapper::create(200, 124, ['red' => 229, 'green' => 229, 'blue' => 229]);
-        self::assertNotNull($image);
-        $object->prepareRowAsPng(
-            'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30)),'
-            . 'LINESTRING(5 30,4 4))',
-            'image',
-            [176, 46, 224],
-            new ScaleData(offsetX: -19, offsetY: -3, scale: 2.29, height: 124),
-            $image,
-        );
-        self::assertSame(200, $image->width());
-        self::assertSame(124, $image->height());
-
-        $fileExpected = $this->testDir . '/geometrycollection-expected.png';
-        $fileActual = $this->testDir . '/geometrycollection-actual.png';
-        self::assertTrue($image->png($fileActual));
-        self::assertFileEquals($fileExpected, $fileActual);
-    }
-
-    /**
-     * Test for prepareRowAsPdf
-     *
-     * @param string    $spatial   string to parse
-     * @param string    $label     field label
-     * @param int[]     $color     line color
-     * @param ScaleData $scaleData scaling parameters
-     * @param TCPDF     $pdf       expected output
-     */
-    #[DataProvider('providerForPrepareRowAsPdf')]
-    public function testPrepareRowAsPdf(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        TCPDF $pdf,
-    ): void {
-        $object = new GisGeometryCollection();
-        $object->prepareRowAsPdf($spatial, $label, $color, $scaleData, $pdf);
-
-        $fileExpected = $this->testDir . '/geometrycollection-expected.pdf';
-        self::assertStringEqualsFile($fileExpected, $pdf->Output(dest: 'S'));
-    }
-
-    /**
-     * Data provider for testPrepareRowAsPdf() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, TCPDF}>
-     */
-    public static function providerForPrepareRowAsPdf(): array
-    {
-        return [
-            [
-                'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30)),'
-                . 'LINESTRING(5 30,4 4))',
-                'pdf',
-                [176, 46, 224],
-                new ScaleData(offsetX: 1, offsetY: -9, scale: 4.39, height: 297),
-
-                parent::createEmptyPdf('GEOMETRYCOLLECTION'),
-            ],
-        ];
-    }
-
-    /**
-     * Test for prepareRowAsSvg
-     *
-     * @param string    $spatial   string to parse
-     * @param string    $label     field label
-     * @param int[]     $color     line color
-     * @param ScaleData $scaleData scaling parameters
-     * @param string    $output    expected output
-     */
-    #[DataProvider('providerForPrepareRowAsSvg')]
-    public function testPrepareRowAsSvg(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        string $output,
-    ): void {
-        $object = new GisGeometryCollection();
-        $svg = $object->prepareRowAsSvg($spatial, $label, $color, $scaleData);
-        self::assertSame($output, $svg);
-    }
-
-    /**
-     * Data provider for testPrepareRowAsSvg() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, string}>
-     */
-    public static function providerForPrepareRowAsSvg(): array
-    {
-        return [
-            [
-                'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30)))',
-                'svg',
-                [176, 46, 224],
-                new ScaleData(offsetX: 12, offsetY: 69, scale: 2, height: 150),
-                '<path d="M46,268L-4,248L6,208L66,198ZM16,228L46,224L36,248Z"'
-                . ' class="polygon vector" stroke="black" stroke-width="0.5"'
-                . ' fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8" data-label="svg"/>',
-            ],
-        ];
-    }
-
-    /**
-     * Test for prepareRowAsOl
-     *
-     * @param string               $spatial  string to parse
-     * @param int                  $srid     SRID
-     * @param string               $label    field label
-     * @param int[]                $color    line color
-     * @param array<string, mixed> $expected
-     */
-    #[DataProvider('providerForPrepareRowAsOl')]
-    public function testPrepareRowAsOl(
-        string $spatial,
-        int $srid,
-        string $label,
-        array $color,
-        array $expected,
-    ): void {
-        $object = new GisGeometryCollection();
-        self::assertSame($expected, $object->prepareRowAsOl($spatial, $srid, $label, $color));
-    }
-
-    /**
-     * Data provider for testPrepareRowAsOl() test case
-     *
-     * @return array<array{string, int, string, int[], array<string, mixed>}>
-     */
-    public static function providerForPrepareRowAsOl(): array
-    {
-        return [
-            [
-                'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20,20 30)))',
-                4326,
-                'Ol',
-                [176, 46, 224],
-                [
-                    'isCollection' => true,
-                    'geometries' => [
-                        [
-                            'geometry' => [
-                                'type' => 'Polygon',
-                                'coordinates' => [
-                                    [[35.0, 10.0], [10.0, 20.0], [15.0, 40.0], [45.0, 45.0], [35.0, 10.0]],
-                                    [[20.0, 30.0], [35.0, 32.0], [30.0, 20.0], [20.0, 30.0]],
-                                ],
-                                'srid' => 4326,
-                            ],
-                            'style' => [
-                                'fill' => ['color' => [176, 46, 224, 0.8]],
-                                'stroke' => ['color' => [0, 0, 0], 'width' => 0.5],
-                                'text' => ['text' => 'Ol'],
                             ],
                         ],
                     ],

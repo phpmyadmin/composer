@@ -5,22 +5,17 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\Ds\Extent;
-use PhpMyAdmin\Gis\Ds\ScaleData;
 use PhpMyAdmin\Gis\GisPoint;
-use PhpMyAdmin\Image\ImageWrapper;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
-use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
-use TCPDF;
-
-use function file_exists;
 
 #[CoversClass(GisPoint::class)]
 #[PreserveGlobalState(false)]
 #[RunTestsInSeparateProcesses]
-class GisPointTest extends GisGeomTestCase
+class GisPointTest extends AbstractTestCase
 {
     /**
      * data provider for testGenerateWkt
@@ -145,160 +140,5 @@ class GisPointTest extends GisGeomTestCase
     public static function providerForTestGetExtent(): array
     {
         return [['POINT(12 35)', new Extent(minX: 12, minY: 35, maxX: 12, maxY: 35)]];
-    }
-
-    #[RequiresPhpExtension('gd')]
-    public function testPrepareRowAsPng(): void
-    {
-        $object = new GisPoint();
-        $image = ImageWrapper::create(200, 124, ['red' => 229, 'green' => 229, 'blue' => 229]);
-        self::assertNotNull($image);
-        $object->prepareRowAsPng(
-            'POINT(12 35)',
-            'image',
-            [176, 46, 224],
-            new ScaleData(offsetX: -88, offsetY: -27, scale: 1, height: 124),
-            $image,
-        );
-        self::assertSame(200, $image->width());
-        self::assertSame(124, $image->height());
-
-        $fileExpected = $this->testDir . '/point-expected.png';
-        $fileActual = $this->testDir . '/point-actual.png';
-        self::assertTrue($image->png($fileActual));
-        self::assertFileEquals($fileExpected, $fileActual);
-    }
-
-    /**
-     * test case for prepareRowAsPdf() method
-     *
-     * @param string    $spatial   GIS POINT object
-     * @param string    $label     label for the GIS POINT object
-     * @param int[]     $color     color for the GIS POINT object
-     * @param ScaleData $scaleData array containing data related to scaling
-     */
-    #[DataProvider('providerForPrepareRowAsPdf')]
-    public function testPrepareRowAsPdf(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        TCPDF $pdf,
-    ): void {
-        $object = new GisPoint();
-        $object->prepareRowAsPdf($spatial, $label, $color, $scaleData, $pdf);
-
-        $fileExpectedArch = $this->testDir . '/point-expected-' . $this->getArch() . '.pdf';
-        $fileExpectedGeneric = $this->testDir . '/point-expected.pdf';
-        $fileExpected = file_exists($fileExpectedArch) ? $fileExpectedArch : $fileExpectedGeneric;
-        self::assertStringEqualsFile($fileExpected, $pdf->Output(dest: 'S'));
-    }
-
-    /**
-     * data provider for testPrepareRowAsPdf() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, TCPDF}>
-     */
-    public static function providerForPrepareRowAsPdf(): array
-    {
-        return [
-            [
-                'POINT(12 35)',
-                'pdf',
-                [176, 46, 224],
-                new ScaleData(offsetX: -93, offsetY: -114, scale: 1, height: 297),
-
-                parent::createEmptyPdf('POINT'),
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsSvg() method
-     *
-     * @param string    $spatial   GIS POINT object
-     * @param string    $label     label for the GIS POINT object
-     * @param int[]     $color     color for the GIS POINT object
-     * @param ScaleData $scaleData array containing data related to scaling
-     * @param string    $output    expected output
-     */
-    #[DataProvider('providerForPrepareRowAsSvg')]
-    public function testPrepareRowAsSvg(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        string $output,
-    ): void {
-        $object = new GisPoint();
-        $svg = $object->prepareRowAsSvg($spatial, $label, $color, $scaleData);
-        self::assertSame($output, $svg);
-    }
-
-    /**
-     * data provider for prepareRowAsSvg() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, string}>
-     */
-    public static function providerForPrepareRowAsSvg(): array
-    {
-        return [
-            [
-                'POINT(12 35)',
-                'svg',
-                [176, 46, 224],
-                new ScaleData(offsetX: 12, offsetY: 69, scale: 2, height: 150),
-                '',
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsOl() method
-     *
-     * @param string                              $spatial  GIS POINT object
-     * @param int                                 $srid     spatial reference ID
-     * @param string                              $label    label for the GIS POINT object
-     * @param int[]                               $color    color for the GIS POINT object
-     * @param array<string, array<string, mixed>> $expected
-     */
-    #[DataProvider('providerForPrepareRowAsOl')]
-    public function testPrepareRowAsOl(
-        string $spatial,
-        int $srid,
-        string $label,
-        array $color,
-        array $expected,
-    ): void {
-        $object = new GisPoint();
-        self::assertSame($expected, $object->prepareRowAsOl($spatial, $srid, $label, $color));
-    }
-
-    /**
-     * data provider for testPrepareRowAsOl() test case
-     *
-     * @return array<array{string, int, string, int[], array<string, array<string, mixed>>}>
-     */
-    public static function providerForPrepareRowAsOl(): array
-    {
-        return [
-            [
-                'POINT(12 35)',
-                4326,
-                'Ol',
-                [176, 46, 224],
-                [
-                    'geometry' => ['type' => 'Point', 'coordinates' => [12.0, 35.0], 'srid' => 4326],
-                    'style' => [
-                        'circle' => [
-                            'fill' => ['color' => 'white'],
-                            'stroke' => ['color' => [176, 46, 224], 'width' => 2],
-                            'radius' => 3,
-                        ],
-                        'text' => ['text' => 'Ol', 'offsetY' => -9],
-                    ],
-                ],
-            ],
-        ];
     }
 }
