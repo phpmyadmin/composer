@@ -112,6 +112,7 @@ Functions.userAgent = function () {
     try {
         return navigator.userAgent;
     } catch (e) {
+        console.error(e);
         return '';
     }
 };
