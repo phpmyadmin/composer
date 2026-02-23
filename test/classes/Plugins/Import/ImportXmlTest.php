@@ -108,7 +108,7 @@ class ImportXmlTest extends AbstractTestCase
             . '            ;'
             . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) '
             . 'VALUES (, \'\', \'\', \'\', \'\');;',
-            $sql_query,
+            $sql_query
         );
 
         self::assertTrue($GLOBALS['finished']);
