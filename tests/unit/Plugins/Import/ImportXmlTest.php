@@ -108,7 +108,8 @@ final class ImportXmlTest extends AbstractTestCase
             . '  PRIMARY KEY (`id`)' . "\n"
             . ') ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=\'Bookmarks\';' . "\n"
             . '            ;'
-            . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) VALUES (1, , , , );',
+            . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) '
+            . 'VALUES (1, , , , );',
             Current::$sqlQuery,
         );
 
