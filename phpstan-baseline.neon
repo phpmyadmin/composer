@@ -47077,7 +47077,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$haystack of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, mixed given\\.$#"
-			count: 10
+			count: 5
 			path: test/classes/Plugins/Import/ImportXmlTest.php
 
 		-
