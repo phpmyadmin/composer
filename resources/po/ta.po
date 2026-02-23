@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-22 00:36+0000\n"
-"PO-Revision-Date: 2025-12-29 11:00+0000\n"
-"Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
+"PO-Revision-Date: 2026-02-24 08:09+0000\n"
+"Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "ta/>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -1961,9 +1961,8 @@ msgid "OFF"
 msgstr "அணை"
 
 #: resources/templates/database/events/index.twig:161
-#, fuzzy
 msgid "Event editor"
-msgstr "எக்செல் பதிப்பு"
+msgstr "நிகழ்வு திருத்தி"
 
 #: resources/templates/database/events/index.twig:166
 #: resources/templates/database/routines/index.twig:83
@@ -1988,9 +1987,8 @@ msgid "Save changes"
 msgstr "மாற்றங்களைச் சேமிக்கவும்"
 
 #: resources/templates/database/events/index.twig:181
-#, fuzzy
 msgid "Export event"
-msgstr "%s நிகழ்வின் தரவேற்றம்"
+msgstr "நிகழ்வு ஏற்றம்"
 
 #: resources/templates/database/export/index.twig:61
 msgid ""
@@ -2148,9 +2146,8 @@ msgid "Update query"
 msgstr "வினவலைப் புதுப்பிக்கவும்"
 
 #: resources/templates/database/multi_table_query/form.twig:175
-#, fuzzy
 msgid "Copy query"
-msgstr "வினவலைப் புதுப்பிக்கவும்"
+msgstr "வினவலை நகல்"
 
 #: resources/templates/database/multi_table_query/form.twig:176
 #: src/Html/Generator.php:544
@@ -2457,7 +2454,7 @@ msgstr "செயல்கூறு"
 
 #: resources/templates/database/routines/execute_form.twig:54
 msgid "This routine does not require any parameters."
-msgstr ""
+msgstr "இந்த வழக்கத்திற்கு எந்த அளவுருக்களும் தேவையில்லை."
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
 #: src/Util.php:1384
@@ -8327,15 +8324,14 @@ msgid "Too many connections are aborted."
 msgstr "பல இணைப்புகள் கைவிடப்படுகின்றன."
 
 #: src/Advisory/Rules.php:580 src/Advisory/Rules.php:594
-#, fuzzy
 msgid ""
 "Connections are usually aborted when they cannot be authorized. <a "
 "href=\"https://www.percona.com/blog/2008/08/23/how-to-track-down-the-source-"
 "of-aborted_connects/\">This article</a> might help you track down the source."
 msgstr ""
-"இணைப்புகள் பொதுவாக அங்கீகரிக்க முடியாதபோது கைவிடப்படுகின்றன. <a href=\"https://www."
-"percona.com/blog/2008/08/23/how-to-to-track-down-the-source-of-"
-"aborted_connects/\"> இந்த கட்டுரை உங்களுக்கு உதவக்கூடும் மூலத்தைக் கண்காணிக்கவும்."
+"இணைப்புகள் பொதுவாக அங்கீகரிக்க முடியாதபோது கைவிடப்படுகின்றன. <a href=\"https://"
+"www.percona.com/blog/2008/08/23/how-to-to-track-down-the-source-of-"
+"aborted_connects/\"> இந்தக் கட்டுரை உங்களுக்கு உதவக்கூடும் மூலத்தைக் கண்காணிக்கவும்."
 
 #: src/Advisory/Rules.php:584
 #, php-format
