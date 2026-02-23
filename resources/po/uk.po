@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-22 00:36+0000\n"
-"PO-Revision-Date: 2026-02-16 02:09+0000\n"
+"PO-Revision-Date: 2026-02-23 02:09+0000\n"
 "Last-Translator: Hotripak <hotr1pak@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/uk/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -12544,7 +12544,7 @@ msgstr "Неправильний параметр формату"
 
 #: src/Controllers/Import/ImportController.php:254
 msgid "Sorry an unexpected error happened!"
-msgstr ""
+msgstr "Вибачте, сталася несподівана помилка!"
 
 #: src/Controllers/Import/ImportController.php:301
 #: src/Controllers/Import/ImportController.php:516
@@ -14096,7 +14096,7 @@ msgstr "Приховати"
 
 #: src/Controllers/JavaScriptMessagesController.php:695
 msgid "The fullscreen request was denied."
-msgstr ""
+msgstr "Запит на перехід у повноекранний режим було відхилено."
 
 #: src/Controllers/JavaScriptMessagesController.php:697
 msgctxt "Month name"

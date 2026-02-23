@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-22 00:36+0000\n"
-"PO-Revision-Date: 2026-02-16 02:09+0000\n"
+"PO-Revision-Date: 2026-02-23 02:09+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/tr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -12548,7 +12548,7 @@ msgstr "Yanlış biçim parametresi"
 
 #: src/Controllers/Import/ImportController.php:254
 msgid "Sorry an unexpected error happened!"
-msgstr ""
+msgstr "Üzgünüz beklenmeyen bir hata oldu!"
 
 #: src/Controllers/Import/ImportController.php:301
 #: src/Controllers/Import/ImportController.php:516
@@ -14104,7 +14104,7 @@ msgstr "Gizle"
 
 #: src/Controllers/JavaScriptMessagesController.php:695
 msgid "The fullscreen request was denied."
-msgstr ""
+msgstr "Tam ekran isteği reddedildi."
 
 #: src/Controllers/JavaScriptMessagesController.php:697
 msgctxt "Month name"

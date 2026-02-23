@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-22 00:36+0000\n"
-"PO-Revision-Date: 2026-02-17 13:09+0000\n"
+"PO-Revision-Date: 2026-02-23 02:09+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "phpmyadmin/master/en_GB/>\n"
@@ -12432,7 +12432,7 @@ msgstr "Incorrect format parameter"
 
 #: src/Controllers/Import/ImportController.php:254
 msgid "Sorry an unexpected error happened!"
-msgstr ""
+msgstr "Sorry an unexpected error happened!"
 
 #: src/Controllers/Import/ImportController.php:301
 #: src/Controllers/Import/ImportController.php:516
@@ -13969,7 +13969,7 @@ msgstr "Hide"
 
 #: src/Controllers/JavaScriptMessagesController.php:695
 msgid "The fullscreen request was denied."
-msgstr ""
+msgstr "The fullscreen request was denied."
 
 #: src/Controllers/JavaScriptMessagesController.php:697
 msgctxt "Month name"
