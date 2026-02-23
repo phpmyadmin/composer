@@ -206,7 +206,7 @@ class ImportXml extends ImportPlugin
          * Set values to NULL if they were not present
          * to maintain Import::buildSql() call integrity
          */
-        if (! $structPresent && $tables !== [] && $analyses === null) {
+        if (! $structPresent && $tables !== []) {
             $create = null;
         }
 
