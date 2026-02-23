@@ -282,14 +282,8 @@ class PrivilegesTest extends AbstractTestCase
 
         $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface($dummyDbi));
 
-        //$_POST['change_copy'] not set
-        $password = $serverPrivileges->getDataForChangeOrCopyUser('', '');
-
-        //$_POST['change_copy'] is set
-        $_POST['change_copy'] = true;
         $password = $serverPrivileges->getDataForChangeOrCopyUser('PMA_old_username', 'PMA_old_hostname');
         self::assertSame('pma_password', $password);
-        unset($_POST['change_copy']);
     }
 
     public function testGetExportUserDefinitionTextarea(): void
@@ -346,7 +340,7 @@ class PrivilegesTest extends AbstractTestCase
             $retMessage,,,
             $sqlQuery,
             $addUserError,
-        ] = $serverPrivileges->addUser($dbname, $username, $hostname, $dbname, true);
+        ] = $serverPrivileges->addUser($dbname, $username, $hostname, $dbname, true, false);
         self::assertInstanceOf(Message::class, $retMessage);
         self::assertSame(
             'You have added a new user.',
@@ -394,7 +388,7 @@ class PrivilegesTest extends AbstractTestCase
             $retMessage,,,
             $sqlQuery,
             $addUserError,
-        ] = $serverPrivileges->addUser($dbname, $username, $hostname, $dbname, true);
+        ] = $serverPrivileges->addUser($dbname, $username, $hostname, $dbname, true, false);
 
         self::assertInstanceOf(Message::class, $retMessage);
         self::assertSame(
@@ -1179,7 +1173,6 @@ class PrivilegesTest extends AbstractTestCase
         $hostname = 'pma_hostname';
         $dbname = 'pma_dbname';
         $_POST['username'] = 'username';
-        $_POST['change_copy'] = 'change_copy';
         $_GET['validate_username'] = 'validate_username';
         $_GET['username'] = 'username';
         $_POST['update_privs'] = 'update_privs';
@@ -1190,6 +1183,7 @@ class PrivilegesTest extends AbstractTestCase
             $hostname,
             $username,
             $dbname,
+            true,
         );
 
         //user_exists
@@ -1353,7 +1347,6 @@ class PrivilegesTest extends AbstractTestCase
     {
         $serverPrivileges = $this->getPrivileges($this->createDatabaseInterface());
 
-        $_POST['change_copy'] = 'change_copy';
         $_POST['old_hostname'] = 'old_hostname';
         $_POST['old_username'] = 'old_username';
         $relationParameters = RelationParameters::fromArray([]);
@@ -1361,7 +1354,7 @@ class PrivilegesTest extends AbstractTestCase
 
         $queries = [];
 
-        $ret = $serverPrivileges->getDataForDeleteUsers($queries);
+        $ret = $serverPrivileges->getDataForDeleteUsers($queries, true);
 
         $item = ["# Deleting 'old_username'@'old_hostname' ...", "DROP USER 'old_username'@'old_hostname';"];
         self::assertSame($item, $ret);

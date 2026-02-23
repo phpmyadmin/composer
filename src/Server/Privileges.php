@@ -1367,6 +1367,7 @@ class Privileges
         string $hostname,
         string $username,
         string|null $dbname,
+        bool $isChangeCopyUser,
     ): array {
         if ($dbname !== null) {
             //if (preg_match('/\\\\(?:_|%)/i', $dbname)) {
@@ -1389,7 +1390,7 @@ class Privileges
             $extraData['sql_query'] = Generator::getMessage('', $sqlQuery);
         }
 
-        if (isset($_POST['change_copy'])) {
+        if ($isChangeCopyUser) {
             $user = [
                 'name' => $username,
                 'host' => $hostname,
@@ -2068,68 +2069,60 @@ class Privileges
     /**
      * Get List of information: Changes / copies a user
      */
-    public function getDataForChangeOrCopyUser(string $oldUsername, string $oldHostname): string|null
+    public function getDataForChangeOrCopyUser(string $oldUsername, string $oldHostname): Message|string|null
     {
-        if (isset($_POST['change_copy'])) {
-            $userHostCondition = $this->getUserHostCondition($oldUsername, $oldHostname);
-            $row = $this->dbi->fetchSingleRow('SELECT * FROM `mysql`.`user` ' . $userHostCondition . ';');
-            if ($row === []) {
-                $response = ResponseRenderer::getInstance();
-                $response->addHTML(
-                    Message::notice(__('No user found.'))->getDisplay(),
-                );
-                unset($_POST['change_copy']);
-            } else {
-                $this->sslType = $row['ssl_type'];
-                $this->sslCipher = $row['ssl_cipher'];
-                $this->x509Issuer = $row['x509_issuer'];
-                $this->x509Subject = $row['x509_subject'];
-
-                $serverVersion = $this->dbi->getVersion();
-                // Recent MySQL versions have the field "Password" in mysql.user,
-                // so the previous extract creates $row['Password'] but this script
-                // uses $password
-                if (! isset($row['password']) && isset($row['Password'])) {
-                    $row['password'] = $row['Password'];
-                }
-
-                if (
-                    Compatibility::isMySqlOrPerconaDb($this->dbi)
-                    && $serverVersion >= 50606
-                    && $serverVersion < 50706
-                    && ((isset($row['authentication_string'])
-                    && empty($row['password']))
-                    || (isset($row['plugin'])
-                    && $row['plugin'] === 'sha256_password'))
-                ) {
-                    $row['password'] = $row['authentication_string'];
-                }
-
-                if (
-                    Compatibility::isMariaDb($this->dbi)
-                    && $serverVersion >= 50500
-                    && isset($row['authentication_string'])
-                    && empty($row['password'])
-                ) {
-                    $row['password'] = $row['authentication_string'];
-                }
-
-                // Always use 'authentication_string' column
-                // for MySQL 5.7.6+ since it does not have
-                // the 'password' column at all
-                if (
-                    Compatibility::isMySqlOrPerconaDb($this->dbi)
-                    && $serverVersion >= 50706
-                    && isset($row['authentication_string'])
-                ) {
-                    $row['password'] = $row['authentication_string'];
-                }
-
-                return $row['password'];
-            }
+        $userHostCondition = $this->getUserHostCondition($oldUsername, $oldHostname);
+        $row = $this->dbi->fetchSingleRow('SELECT * FROM `mysql`.`user` ' . $userHostCondition . ';');
+        if ($row === []) {
+            return Message::notice(__('No user found.'));
         }
 
-        return null;
+        $this->sslType = $row['ssl_type'];
+        $this->sslCipher = $row['ssl_cipher'];
+        $this->x509Issuer = $row['x509_issuer'];
+        $this->x509Subject = $row['x509_subject'];
+
+        $serverVersion = $this->dbi->getVersion();
+        // Recent MySQL versions have the field "Password" in mysql.user,
+        // so the previous extract creates $row['Password'] but this script
+        // uses $password
+        if (! isset($row['password']) && isset($row['Password'])) {
+            $row['password'] = $row['Password'];
+        }
+
+        if (
+            Compatibility::isMySqlOrPerconaDb($this->dbi)
+            && $serverVersion >= 50606
+            && $serverVersion < 50706
+            && ((isset($row['authentication_string'])
+            && empty($row['password']))
+            || (isset($row['plugin'])
+            && $row['plugin'] === 'sha256_password'))
+        ) {
+            $row['password'] = $row['authentication_string'];
+        }
+
+        if (
+            Compatibility::isMariaDb($this->dbi)
+            && $serverVersion >= 50500
+            && isset($row['authentication_string'])
+            && empty($row['password'])
+        ) {
+            $row['password'] = $row['authentication_string'];
+        }
+
+        // Always use 'authentication_string' column
+        // for MySQL 5.7.6+ since it does not have
+        // the 'password' column at all
+        if (
+            Compatibility::isMySqlOrPerconaDb($this->dbi)
+            && $serverVersion >= 50706
+            && isset($row['authentication_string'])
+        ) {
+            $row['password'] = $row['authentication_string'];
+        }
+
+        return $row['password'];
     }
 
     /**
@@ -2139,9 +2132,9 @@ class Privileges
      *
      * @return mixed[]
      */
-    public function getDataForDeleteUsers(array $queries): array
+    public function getDataForDeleteUsers(array $queries, bool $isChangeCopyUser): array
     {
-        if (isset($_POST['change_copy'])) {
+        if ($isChangeCopyUser) {
             $selectedUsr = [$_POST['old_username'] . '&amp;#27;' . $_POST['old_hostname']];
         } else {
             // null happens when no user was selected
@@ -2244,6 +2237,7 @@ class Privileges
         string $hostname,
         string|null $password,
         bool $isMenuwork,
+        bool $isChangeCopyUser,
     ): array {
         // Some reports were sent to the error reporting server with phpMyAdmin 5.1.0
         // pred_username was reported to be not defined
@@ -2277,7 +2271,7 @@ class Privileges
             $alterSqlQuery,
         ] = $this->getSqlQueriesForDisplayAndAddUser($username, $hostname, $password ?? '');
 
-        if (empty($_POST['change_copy'])) {
+        if (! $isChangeCopyUser) {
             $error = false;
 
             if (! $this->dbi->tryQuery($createUserReal)) {
