@@ -95,27 +95,23 @@ final class ImportXmlTest extends AbstractTestCase
         $importXml = $this->getImportXml($dbi);
         $importXml->doImport($importHandle);
 
-        // If import successfully, PMA will show all databases and tables
-        // imported as following HTML Page
-        /*
-           The following structures have either been created or altered. Here you
-           can:
-           View a structure's contents by clicking on its name
-           Change any of its settings by clicking the corresponding "Options" link
-           Edit structure by following the "Structure" link
-
-           phpmyadmintest (Options)
-           pma_bookmarktest (Structure) (Options)
-        */
-
-        self::assertStringContainsString(
-            'The following structures have either been created or altered.',
-            ImportSettings::$importNotice,
+        //assert that all sql are executed
+        self::assertSame(
+            'CREATE DATABASE IF NOT EXISTS `phpmyadmintest` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;'
+            . 'USE `phpmyadmintest`;' . "\n"
+            . 'CREATE TABLE IF NOT EXISTS `pma_bookmarktest` (' . "\n"
+            . '  `id` int(11) NOT NULL AUTO_INCREMENT,' . "\n"
+            . '  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT \'\',' . "\n"
+            . '  `query` text COLLATE utf8_bin NOT NULL,' . "\n"
+            . '  PRIMARY KEY (`id`)' . "\n"
+            . ') ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=\'Bookmarks\';' . "\n"
+            . '            ;'
+            . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) VALUES (1, , , , );',
+            Current::$sqlQuery,
         );
-        self::assertStringContainsString('Go to database: `phpmyadmintest`', ImportSettings::$importNotice);
-        self::assertStringContainsString('Edit settings for `phpmyadmintest`', ImportSettings::$importNotice);
-        self::assertStringContainsString('Go to table: `pma_bookmarktest`', ImportSettings::$importNotice);
-        self::assertStringContainsString('Edit settings for `pma_bookmarktest`', ImportSettings::$importNotice);
+
         self::assertTrue(ImportSettings::$finished);
     }
 
