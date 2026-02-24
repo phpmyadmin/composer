@@ -655,7 +655,7 @@ class Generator
             if (
                 ! empty($cfg['SQLQuery']['Refresh'])
                 && ! isset($GLOBALS['show_as_php']) // 'Submit query' does the same
-                && preg_match('@^(SELECT|SHOW)[[:space:]]+@i', $sqlQuery)
+                && preg_match('@^(ANALYZE|EXPLAIN|SELECT|SHOW)[[:space:]]+@i', $sqlQuery)
             ) {
                 $refreshLink = Url::getFromRoute('/sql', $urlParams);
                 $refreshLink = ' [&nbsp;'
