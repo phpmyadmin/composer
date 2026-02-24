@@ -14,7 +14,12 @@ class LoginTest extends TestBase
     /**
      * Create a test database for this test class
      */
-    protected static bool $createDatabase = false;
+    protected bool $createDatabase = false;
+
+    /**
+     * Login before starting this test
+     */
+    protected bool $login = false;
 
     protected function setUp(): void
     {
@@ -28,7 +33,6 @@ class LoginTest extends TestBase
      */
     public function testSuccessfulLogin(): void
     {
-        $this->login();
         $this->waitForElement('xpath', '//*[@id="server-breadcrumb"]');
         self::assertTrue($this->isSuccessLogin());
         $this->logOutIfLoggedIn();

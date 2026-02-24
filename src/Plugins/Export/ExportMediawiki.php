@@ -23,6 +23,7 @@ use PhpMyAdmin\Util;
 
 use function __;
 use function array_values;
+use function bin2hex;
 use function htmlspecialchars;
 use function str_repeat;
 
@@ -226,6 +227,7 @@ class ExportMediawiki extends ExportPlugin
         // Get the table data from the database
         $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
         $fieldsCnt = $result->numFields();
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         while ($row = $result->fetchRow()) {
             $output .= '|-' . $this->exportCRLF();
@@ -233,6 +235,12 @@ class ExportMediawiki extends ExportPlugin
             // Use '|' for separating table columns
             /** @infection-ignore-all */
             for ($i = 0; $i < $fieldsCnt; ++$i) {
+                if (! isset($row[$i])) {
+                    $row[$i] = 'NULL';
+                } elseif ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                    $row[$i] = '0x' . bin2hex($row[$i]);
+                }
+
                 $output .= ' | ' . $row[$i] . $this->exportCRLF();
             }
         }

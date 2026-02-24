@@ -108,6 +108,24 @@ final class ImportXmlTest extends AbstractTestCase
            pma_bookmarktest (Structure) (Options)
         */
 
+        //assert that all sql are executed
+        self::assertSame(
+            'CREATE DATABASE IF NOT EXISTS `phpmyadmintest` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;'
+            . 'USE `phpmyadmintest`;' . "\n"
+            . 'CREATE TABLE IF NOT EXISTS `pma_bookmarktest` (' . "\n"
+            . '  `id` int(11) NOT NULL AUTO_INCREMENT,' . "\n"
+            . '  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT \'\',' . "\n"
+            . '  `query` text COLLATE utf8_bin NOT NULL,' . "\n"
+            . '  PRIMARY KEY (`id`)' . "\n"
+            . ') ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=\'Bookmarks\';' . "\n"
+            . '            ;'
+            . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) '
+            . 'VALUES (, \'\', \'\', \'\', \'\');;',
+            Current::$sqlQuery,
+        );
+
         self::assertStringContainsString(
             'The following structures have either been created or altered.',
             ImportSettings::$importNotice,
@@ -125,5 +143,51 @@ final class ImportXmlTest extends AbstractTestCase
         $config = new Config();
 
         return new ImportXml(new Import($dbiObject, new ResponseRenderer(), $config), $dbiObject, $config);
+    }
+
+    /**
+     * Test for doImport using second dataset
+     */
+    #[RequiresPhpExtension('simplexml')]
+    public function testDoImportDataset2(): void
+    {
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $importHandle = new File(ImportSettings::$importFile);
+        $importHandle->open();
+
+        ImportSettings::$importFile = 'test/test_data/test.xml';
+
+        $importXml = $this->getImportXml($dbi);
+        $importXml->doImport($importHandle);
+
+        self::assertSame(
+            'CREATE DATABASE IF NOT EXISTS `phpmyadmintest` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;'
+            . 'USE `phpmyadmintest`;' . "\n"
+            . 'CREATE TABLE IF NOT EXISTS `pma_bookmarktest` (' . "\n"
+            . '  `id` int(11) NOT NULL AUTO_INCREMENT,' . "\n"
+            . '  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT \'\',' . "\n"
+            . '  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT \'\',' . "\n"
+            . '  `query` text COLLATE utf8_bin NOT NULL,' . "\n"
+            . '  PRIMARY KEY (`id`)' . "\n"
+            . ') ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=\'Bookmarks\';' . "\n"
+            . '            ;'
+            . 'INSERT INTO `phpmyadmintest`.`pma_bookmarktest` (`id`, `dbase`, `user`, `label`, `query`) '
+            . 'VALUES (, \'\', \'\', \'\', \'\');;',
+            Current::$sqlQuery,
+        );
+
+        self::assertStringContainsString(
+            'The following structures have either been created or altered.',
+            ImportSettings::$importNotice,
+        );
+        self::assertStringContainsString('Go to database: `test`', ImportSettings::$importNotice);
+        self::assertStringContainsString('Edit settings for `test`', ImportSettings::$importNotice);
+        self::assertStringContainsString('Go to table: `test`', ImportSettings::$importNotice);
+        self::assertStringContainsString('Edit settings for `test`', ImportSettings::$importNotice);
+        self::assertTrue(ImportSettings::$finished);
     }
 }

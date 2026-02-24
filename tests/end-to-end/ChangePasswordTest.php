@@ -16,15 +16,13 @@ class ChangePasswordTest extends TestBase
     /**
      * Create a test database for this test class
      */
-    protected static bool $createDatabase = false;
+    protected bool $createDatabase = false;
 
     /**
      * Tests the changing of the password
      */
     public function testChangePassword(): void
     {
-        $this->login();
-
         $e = $this->waitForElement('id', 'change_password_anchor');
         $e->click();
 

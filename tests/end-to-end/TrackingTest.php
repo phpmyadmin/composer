@@ -33,7 +33,6 @@ class TrackingTest extends TestBase
             . 'INSERT INTO `test_table` (val) VALUES (2), (3);',
         );
 
-        $this->login();
         $this->skipIfNotPMADB();
 
         $this->navigateDatabase($this->databaseName);

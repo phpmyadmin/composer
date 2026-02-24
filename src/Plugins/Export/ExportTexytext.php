@@ -25,6 +25,7 @@ use PhpMyAdmin\Triggers\Triggers;
 use PhpMyAdmin\Util;
 
 use function __;
+use function bin2hex;
 use function htmlspecialchars;
 use function in_array;
 use function is_string;
@@ -143,6 +144,7 @@ class ExportTexytext extends ExportPlugin
          * Gets the data from the database
          */
         $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         // If required, get fields name at the first line
         if ($this->columns) {
@@ -160,11 +162,15 @@ class ExportTexytext extends ExportPlugin
         // Format the data
         while ($row = $result->fetchRow()) {
             $textOutput = '';
-            foreach ($row as $field) {
+            foreach ($row as $j => $field) {
                 if ($field === null) {
                     $value = $this->null;
                 } elseif ($field !== '') {
                     $value = $field;
+
+                    if ($fieldsMeta[$j]->isMappedTypeGeometry || $fieldsMeta[$j]->isBinary) {
+                        $value = '0x' . bin2hex($value);
+                    }
                 } else {
                     $value = ' ';
                 }

@@ -565,7 +565,7 @@ class Generator
         if (
             ! empty($config->settings['SQLQuery']['Refresh'])
             && Sql::$showAsPhp === null // 'Submit query' does the same
-            && preg_match('@^(SELECT|SHOW)[[:space:]]+@i', $sqlQuery) === 1
+            && preg_match('@^(ANALYZE|EXPLAIN|SELECT|SHOW)[[:space:]]+@i', $sqlQuery) === 1
         ) {
             $refreshLink = Url::getFromRoute('/sql', $urlParams);
             $refreshLink = '<div class="col-auto">'
@@ -954,6 +954,7 @@ class Generator
                 // Has as sql_query without a signature, to be accepted it needs to be sent using POST
                 str_contains($url, 'sql_query=') && ! str_contains($url, 'sql_signature=')
             )
+            || $config->config->URLQueryEncryption
             || str_contains($url, 'view[as]=');
         if ($respectUrlLengthLimit && $isDataPostFormatSupported) {
             $parts = explode('?', $url, 2);

@@ -25,6 +25,7 @@ use PhpMyAdmin\Util;
 use PhpMyAdmin\Version;
 
 use function __;
+use function bin2hex;
 use function htmlspecialchars;
 use function mb_substr;
 use function rtrim;
@@ -402,6 +403,7 @@ class ExportXml extends ExportPlugin
         $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
         $columns = $result->getFieldNames();
 
         $buffer = '        <!-- ' . __('Table') . ' '
@@ -418,6 +420,8 @@ class ExportXml extends ExportPlugin
                 // the XML structure
                 if (! isset($record[$i])) {
                     $record[$i] = 'NULL';
+                } elseif ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                    $record[$i] = '0x' . bin2hex($record[$i]);
                 }
 
                 $buffer .= '            <column name="'

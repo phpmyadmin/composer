@@ -8,7 +8,8 @@ import {
     getCellValue,
     stringifyJSON,
     toggleDatepickerIfInvalid,
-    updateCode
+    updateCode,
+    userAgent
 } from './modules/functions.ts';
 import { CommonParams } from './modules/common.ts';
 import highlightSql from './modules/sql-highlight.ts';
@@ -277,7 +278,7 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
             for (var n = 0, l = $firstRowCols.length; n < l; n++) {
                 var $col = $($firstRowCols[n]);
                 var colWidth;
-                if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
+                if (userAgent().toLowerCase().indexOf('safari') !== -1) {
                     colWidth = $col.outerWidth();
                 } else {
                     colWidth = $col.outerWidth(true);
@@ -299,6 +300,20 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
             }
 
             $(g.cRsz).css('height', $(g.t).height());
+        },
+
+        /**
+         * Clears the current cell edit state, internal flags,
+         * and any pending save request.
+         */
+        resetGridEditState: function () {
+            g.isCellEditActive = false;
+            g.isEditCellTextEditable = false;
+            g.currentEditCell = null;
+            g.wasEditedCellNull = false;
+            g.isCellEdited = false;
+            g.isSaving = false;
+            g.lastXHR = null;
         },
 
         /**
@@ -2823,6 +2838,9 @@ const makeGrid = function (t, enableResize = undefined, enableReorder = undefine
     // some adjustment
     $(t).removeClass('data');
     $(g.gDiv).addClass('data');
+    /* Store the grid controller instance on the table element so it can be accessed later by other modules
+       (e.g. during AJAX teardown) without exposing the grid object as a global variable.*/
+    $(t).data('pmaGrid', g);
     g.initCellSelection();
 };
 

@@ -847,7 +847,8 @@ final class Import
                         if ($analyses !== null) {
                             $isVarchar = $analyses[$tableIndex][$columnIndex]->type === ColumnType::Varchar;
                         } else {
-                            $isVarchar = ! is_numeric($row[$columnIndex]);
+                            $isVarchar = ! is_numeric($row[$columnIndex])
+                                && ! preg_match('/^0x[0-9a-f]+$/', (string) $row[$columnIndex]);
                         }
 
                         /* Don't put quotes around NULL fields */

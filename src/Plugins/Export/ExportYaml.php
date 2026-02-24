@@ -21,6 +21,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
 use function array_key_exists;
+use function bin2hex;
 use function is_numeric;
 use function str_replace;
 
@@ -128,6 +129,10 @@ class ExportYaml extends ExportPlugin
                 if ($record[$i] === null) {
                     $buffer .= '  ' . $columns[$i] . ': null' . "\n";
                     continue;
+                }
+
+                if ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                    $record[$i] = '0x' . bin2hex($record[$i]);
                 }
 
                 $isNotString = isset($fieldsMeta[$i]) && $fieldsMeta[$i]->isNotType(FieldMetadata::TYPE_STRING);

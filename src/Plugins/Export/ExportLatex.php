@@ -28,6 +28,8 @@ use function __;
 use function addcslashes;
 use function array_keys;
 use function array_values;
+use function assert;
+use function bin2hex;
 use function in_array;
 use function is_string;
 use function mb_strpos;
@@ -272,8 +274,10 @@ class ExportLatex extends ExportPlugin
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
 
         $result = $this->dbi->tryQuery($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        assert($result !== false);
 
         $columnsCnt = $result->numFields();
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
         $columns = [];
         $columnsAlias = [];
         foreach ($result->getFieldNames() as $i => $colAs) {
@@ -350,7 +354,13 @@ class ExportLatex extends ExportPlugin
             /** @infection-ignore-all */
             for ($i = 0; $i < $columnsCnt; $i++) {
                 if ($record[$columns[$i]] !== null) {
-                    $columnValue = self::texEscape($record[$columns[$i]]);
+                    if ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary) {
+                        $columnValue = self::texEscape(
+                            '0x' . bin2hex($record[$columns[$i]]),
+                        );
+                    } else {
+                        $columnValue = self::texEscape($record[$columns[$i]]);
+                    }
                 } else {
                     $columnValue = $this->null;
                 }

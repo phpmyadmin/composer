@@ -18,7 +18,6 @@ class CreateTest extends TestBase
     {
         parent::setUp();
 
-        $this->login();
         $this->navigateDatabase($this->databaseName);
     }
 

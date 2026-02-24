@@ -462,9 +462,9 @@ export default function highlightSql ($base) {
         var $pre = $sql.closest('pre');
         /* We only care about visible elements to avoid double processing */
         if ($sql.is(':visible')) {
-            var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
-            $pre.append($highlight);
             if (typeof window.CodeMirror !== 'undefined') {
+                var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
+                $pre.append($highlight);
                 // @ts-ignore
                 window.CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
                 $sql.hide();

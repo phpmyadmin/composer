@@ -21,6 +21,7 @@ use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
+use function bin2hex;
 use function implode;
 use function is_string;
 use function str_replace;
@@ -139,6 +140,7 @@ class ExportCsv extends ExportPlugin
         array $aliases = [],
     ): void {
         $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
 
         $charsNeedingEnclosure = $this->separator . $this->enclosed . $this->terminated;
 
@@ -165,7 +167,7 @@ class ExportCsv extends ExportPlugin
         // Format the data
         while ($row = $result->fetchRow()) {
             $insertValues = [];
-            foreach ($row as $field) {
+            foreach ($row as $j => $field) {
                 if ($field === null) {
                     $insertValues[] = $this->null;
                     continue;
@@ -173,6 +175,11 @@ class ExportCsv extends ExportPlugin
 
                 if ($field === '') {
                     $insertValues[] = '';
+                    continue;
+                }
+
+                if ($fieldsMeta[$j]->isMappedTypeGeometry || $fieldsMeta[$j]->isBinary) {
+                    $insertValues[] = '0x' . bin2hex($row[$j] ?? '');
                     continue;
                 }
 

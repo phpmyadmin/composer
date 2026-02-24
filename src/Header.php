@@ -217,10 +217,12 @@ class Header
         $themeManager = ContainerBuilder::getContainer()->get(ThemeManager::class);
         $theme = $themeManager->theme;
         $scripts = $this->getScripts();
+        $userAgent = Core::getEnv('HTTP_USER_AGENT');
 
         // The user preferences have been merged at this point
         // so we can conditionally add CodeMirror, other scripts and settings
-        if ($this->config->config->CodemirrorEnable) {
+        // See #20159, why we need to check for HTTP_USER_AGENT here
+        if ($this->config->config->CodemirrorEnable && $userAgent !== '') {
             $scripts->addFile('vendor/codemirror/lib/codemirror.js');
             $scripts->addFile('vendor/codemirror/mode/sql/sql.js');
             $scripts->addFile('vendor/codemirror/addon/runmode/runmode.js');

@@ -21,6 +21,7 @@ use PhpMyAdmin\Util;
 use PhpMyAdmin\Version;
 
 use function __;
+use function bin2hex;
 use function preg_match;
 use function preg_replace;
 use function strtr;
@@ -127,6 +128,7 @@ class ExportPhparray extends ExportPlugin
         $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
 
         $columnsCnt = $result->numFields();
+        $fieldsMeta = $this->dbi->getFieldsMeta($result);
         $columns = [];
         foreach ($result->getFieldNames() as $i => $colAs) {
             $colAs = $this->getColumnAlias($aliases, $db, $table, $colAs);
@@ -171,6 +173,10 @@ class ExportPhparray extends ExportPlugin
 
             /** @infection-ignore-all */
             for ($i = 0; $i < $columnsCnt; $i++) {
+                if ($record[$i] !== null && ($fieldsMeta[$i]->isMappedTypeGeometry || $fieldsMeta[$i]->isBinary)) {
+                    $record[$i] = '0x' . bin2hex($record[$i]);
+                }
+
                 $buffer .= var_export($columns[$i], true)
                     . ' => ' . var_export($record[$i], true)
                     . ($i + 1 >= $columnsCnt ? '' : ',');

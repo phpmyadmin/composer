@@ -34,7 +34,6 @@ class StructureTest extends TestBase
             . 'INSERT INTO `test_table` (val) VALUES (2);',
         );
 
-        $this->login();
         $this->navigateDatabase($this->databaseName);
 
         // Let the Database page load

@@ -38,7 +38,8 @@ import {
     teardownIdleEvent,
     teardownRecentFavoriteTables,
     teardownSortLinkMouseEvent,
-    teardownSqlQueryEditEvents
+    teardownSqlQueryEditEvents,
+    userAgent,
 } from '../functions.ts';
 import handleCreateViewModal from './handleCreateViewModal.ts';
 
@@ -93,7 +94,7 @@ export function onloadFunctions () {
         /**
          * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
          */
-        if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
+        if (userAgent().match(/(iphone|ipod|ipad)/i)) {
             $('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
         }
 
