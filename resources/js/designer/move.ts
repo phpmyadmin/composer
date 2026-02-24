@@ -525,8 +525,11 @@ const requestFullscreen = function (e) {
 const fullscreenEnabled = function () {
     // eslint-disable-next-line compat/compat
     return document.fullscreenEnabled ||
+        // @ts-ignore: Exists on Webkit
         document.webkitFullscreenEnabled ||
+        // @ts-ignore: Exists on Firefox
         document.mozFullScreenEnabled ||
+        // @ts-ignore: Exists on Microsoft
         document.msFullscreenEnabled;
 };
 
