@@ -25,7 +25,6 @@ class NormalizationTest extends TestBase
             . ');'
         );
 
-        $this->login();
         $this->navigateTable('test_table');
         $this->waitForElement('xpath', "(//a[contains(., 'Structure')])")->click();
 

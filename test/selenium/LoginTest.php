@@ -14,7 +14,14 @@ class LoginTest extends TestBase
      *
      * @var bool
      */
-    protected static $createDatabase = false;
+    protected $createDatabase = false;
+
+    /**
+     * Login before starting this test
+     *
+     * @var bool
+     */
+    protected $login = false;
 
     protected function setUp(): void
     {

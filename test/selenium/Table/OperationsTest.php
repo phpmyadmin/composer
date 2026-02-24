@@ -32,7 +32,6 @@ class OperationsTest extends TestBase
             . 'INSERT INTO test_table (val, val2) VALUES (33, 44);'
         );
 
-        $this->login();
         $this->navigateTable('test_table');
 
         $this->waitAjax();

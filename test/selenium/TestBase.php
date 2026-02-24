@@ -95,7 +95,14 @@ abstract class TestBase extends TestCase
      *
      * @var bool
      */
-    protected static $createDatabase = true;
+    protected $createDatabase = true;
+
+    /**
+     * Login before starting this test
+     *
+     * @var bool
+     */
+    protected $login = true;
 
     /**
      * Did the test create the phpMyAdmin storage database ?
@@ -148,7 +155,11 @@ abstract class TestBase extends TestCase
         $this->navigateTo('');
         $this->webDriver->manage()->window()->maximize();
 
-        if (! static::$createDatabase) {
+        if ($this->login) {
+            $this->login();
+        }
+
+        if (! $this->createDatabase) {
             // Stop here, we where not asked to create a database
             return;
         }

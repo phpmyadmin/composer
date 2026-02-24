@@ -49,8 +49,6 @@ class ProceduresTest extends TestBase
             . ');'
         );
 
-        $this->login();
-
         $this->navigateDatabase($this->databaseName);
         $this->expandMore();
     }
