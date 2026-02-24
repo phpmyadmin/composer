@@ -65,6 +65,19 @@ export function addNoCacheToAjaxRequests (options: JQuery.AjaxSettings, original
 }
 
 /**
+ * Get an empty string for user-agent, if undefined
+ */
+export function userAgent (): string {
+    try {
+        return navigator.userAgent;
+    } catch (e) {
+        console.error(e);
+
+        return '';
+    }
+}
+
+/**
  * Adds a date/time picker to an element
  *
  * @param {object} $thisElement a jQuery object pointing to the element

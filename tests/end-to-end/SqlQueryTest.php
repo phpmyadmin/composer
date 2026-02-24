@@ -25,7 +25,6 @@ class SqlQueryTest extends TestBase
             . ');'
             . 'INSERT INTO `test_table` (val) VALUES (2), (3), (4), (5);',
         );
-        $this->login();
     }
 
     /**

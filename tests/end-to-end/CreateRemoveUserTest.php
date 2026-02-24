@@ -17,7 +17,7 @@ class CreateRemoveUserTest extends TestBase
     /**
      * Create a test database for this test class
      */
-    protected static bool $createDatabase = false;
+    protected bool $createDatabase = false;
 
     /**
      * Username for the user
@@ -39,7 +39,6 @@ class CreateRemoveUserTest extends TestBase
         $this->skipIfNotSuperUser();
         $this->txtUsername = 'test_user_' . bin2hex(random_bytes(4));
         $this->txtPassword = 'abc_123';
-        $this->login();
     }
 
     /**

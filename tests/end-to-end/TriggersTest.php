@@ -33,8 +33,6 @@ class TriggersTest extends TestBase
             . 'INSERT INTO `test_table2` (val) VALUES (2);',
         );
 
-        $this->login();
-
         $this->navigateDatabase($this->databaseName);
     }
 

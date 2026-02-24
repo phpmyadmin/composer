@@ -12,16 +12,6 @@ use PHPUnit\Framework\Attributes\Large;
 class ImportTest extends TestBase
 {
     /**
-     * setUp function
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->login();
-    }
-
-    /**
      * Test for server level import
      */
     public function testServerImport(): void

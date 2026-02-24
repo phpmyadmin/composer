@@ -20,7 +20,6 @@ class CreateDropDatabaseTest extends TestBase
 
         /* TODO: For now this tests needs superuser for deleting database */
         $this->skipIfNotSuperUser();
-        $this->login();
     }
 
     /**

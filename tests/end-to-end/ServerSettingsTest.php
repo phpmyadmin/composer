@@ -16,7 +16,7 @@ class ServerSettingsTest extends TestBase
     /**
      * Create a test database for this test class
      */
-    protected static bool $createDatabase = false;
+    protected bool $createDatabase = false;
 
     /**
      * setUp function
@@ -25,7 +25,6 @@ class ServerSettingsTest extends TestBase
     {
         parent::setUp();
 
-        $this->login();
         $this->expandMore();
         $this->waitForElement('partialLinkText', 'Settings')->click();
         $this->waitAjax();

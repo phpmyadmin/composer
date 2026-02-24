@@ -30,7 +30,6 @@ class InsertTest extends TestBase
             . ');',
         );
 
-        $this->login();
         $this->navigateTable('test_table');
     }
 

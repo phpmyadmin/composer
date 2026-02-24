@@ -14,14 +14,7 @@ class XssTest extends TestBase
     /**
      * Create a test database for this test class
      */
-    protected static bool $createDatabase = false;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->login();
-    }
+    protected bool $createDatabase = false;
 
     /**
      * Tests the SQL query tab with a null query

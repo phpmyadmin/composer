@@ -13,11 +13,28 @@ permissions:
 
 env:
   php-version: "8.2"
+  node-version: "20"
 
 jobs:
+  generate-matrix:
+    name: Generate the matrix of Selenium tests
+    if: "!contains(github.event.head_commit.message, '[ci selenium skip]')"
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.tests-list.outputs.tests }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - id: tests-list
+        name: Send test names to outputs
+        run: |
+          set -euo pipefail
+          TEST_NAMES="[$(find $PWD/tests/end-to-end/ -type f -name '*Test.php' -print |sed -E "s,$PWD/tests/end-to-end/(.*)Test.php,{\"test-name\": \"\1\"}," | paste -sd ",")]"
+          echo "tests=$(printf "$TEST_NAMES")" >> $GITHUB_OUTPUT
   selenium:
     name: "Selenium"
     if: "!contains(github.event.head_commit.message, '[ci selenium skip]')"
+    needs: generate-matrix
     runs-on: "ubuntu-latest"
     services:
       database-server:
@@ -58,28 +75,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test-name:
-          - "ChangePassword"
-          - "CreateDropDatabase"
-          - "CreateRemoveUser"
-          - "Database/Events"
-          - "Database/Operations"
-          - "Database/Procedures"
-          - "Database/Structure"
-          - "Export"
-          - "Import"
-          - "Login"
-          - "Normalization"
-          - "ServerSettings"
-          - "SqlQuery"
-          - "Table/Browse"
-          - "Table/Create"
-          - "Table/Insert"
-          - "Table/Operations"
-          - "Table/Structure"
-          - "Tracking"
-          - "Triggers"
-          - "Xss"
+        include: ${{ fromJSON(needs.generate-matrix.outputs.tests) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -103,7 +99,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '${{ env.node-version }}'
           cache: 'yarn'
 
       - name: Install modules

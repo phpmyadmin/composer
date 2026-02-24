@@ -7092,7 +7092,7 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
-			count: 6
+			count: 7
 			path: src/Import/Import.php
 
 		-
@@ -7121,6 +7121,12 @@ parameters:
 
 		-
 			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Import/Import.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, int\|false given\.$#'
 			identifier: booleanNot.exprNotBoolean
 			count: 1
 			path: src/Import/Import.php
@@ -8633,24 +8639,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Plugins/Export/ExportJson.php
-
-		-
-			message: '#^Cannot call method fetchAssoc\(\) on PhpMyAdmin\\Dbal\\ResultInterface\|false\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Plugins/Export/ExportLatex.php
-
-		-
-			message: '#^Cannot call method getFieldNames\(\) on PhpMyAdmin\\Dbal\\ResultInterface\|false\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Plugins/Export/ExportLatex.php
-
-		-
-			message: '#^Cannot call method numFields\(\) on PhpMyAdmin\\Dbal\\ResultInterface\|false\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Plugins/Export/ExportLatex.php
 
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
@@ -11061,7 +11049,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 14
+			count: 13
 			path: src/Server/Privileges.php
 
 		-

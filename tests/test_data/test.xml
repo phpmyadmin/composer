@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.2.4-dev
+- https://www.phpmyadmin.net
+-
+- Host: localhost:3306
+- Generation Time: Feb 19, 2026 at 03:28 AM
+- Server version: 12.2.2-MariaDB
+- PHP Version: 7.2.34
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="test" collation="utf8mb4_general_ci" charset="utf8mb4">
+            <pma:table name="test">
+                CREATE TABLE `test` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `binary` binary(16) NOT NULL,
+                  `name` varchar(20) NOT NULL,
+                  `shape` geometry DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'test'
+    -->
+    <database name="test">
+        <!-- Table test -->
+        <table name="test">
+            <column name="id">1</column>
+            <column name="binary">0x10000000000000000000000000000000</column>
+            <column name="name">POLYGON</column>
+            <column name="shape">0x00000000010300000001000000040000000000000000405f40000000000000000000000000008063400000000000006940000000000040664000000000004057400000000000405f400000000000000000</column>
+        </table>
+        <table name="test">
+            <column name="id">2</column>
+            <column name="binary">0x20000000000000000000000000000000</column>
+            <column name="name">MULTIPOLYGON</column>
+            <column name="shape">0x00000000010600000002000000010300000001000000040000000000000000006140000000000000444000000000006062400000000000c0544000000000004064400000000000c0524000000000000061400000000000004440010300000001000000040000000000000000405a4000000000000000000000000000004c400000000000006940000000000080534000000000004057400000000000405a400000000000000000</column>
+        </table>
+        <table name="test">
+            <column name="id">3</column>
+            <column name="binary">0x30000000000000000000000000000000</column>
+            <column name="name">MULTIPOINT</column>
+            <column name="shape">0x0000000001040000000400000001010000000000000000405f400000000000004940010100000000000000008063400000000000406f40010100000000000000004066400000000000e0614001010000000000000000e065400000000000005440</column>
+        </table>
+        <table name="test">
+            <column name="id">4</column>
+            <column name="binary">0x40000000000000000000000000000000</column>
+            <column name="name">MULTILINESTRING</column>
+            <column name="shape">0x000000000105000000020000000102000000030000000000000000004240000000000080614000000000008047400000000000206d400000000000004f400000000000c052400102000000030000000000000000004240000000000000594000000000000031400000000000206d4000000000004066400000000000405740</column>
+        </table>
+        <table name="test">
+            <column name="id">5</column>
+            <column name="binary">0x50000000000000000000000000000000</column>
+            <column name="name">POINT</column>
+            <column name="shape">0x00000000010100000000000000000059400000000000406f40</column>
+        </table>
+        <table name="test">
+            <column name="id">6</column>
+            <column name="binary">0x60000000000000000000000000000000</column>
+            <column name="name">LINESTRING</column>
+            <column name="shape">0x0000000001020000000400000000000000008063400000000000003840000000000040664000000000000058400000000000606d4000000000000069400000000000a063400000000000c06140</column>
+        </table>
+        <table name="test">
+            <column name="id">7</column>
+            <column name="binary">0x70000000000000000000000000000000</column>
+            <column name="name">GEOMETRYCOLLECTION</column>
+            <column name="shape">0x000000000107000000030000000101000000000000000000594000000000000059400102000000050000000000000000000000000000000000000000000000000059400000000000005940000000000000694000000000000069400000000000c072400000000000c07240000000000000794000000000000079400103000000020000000500000000000000008041400000000000002440000000000000244000000000000034400000000000002e40000000000000444000000000008046400000000000804640000000000080414000000000000024400400000000000000000034400000000000003e40000000000080414000000000008041400000000000003e40000000000000344000000000000034400000000000003e40</column>
+        </table>
+        <table name="test">
+            <column name="id">8</column>
+            <column name="binary">0x80000000000000000000000000000000</column>
+            <column name="name">TEST</column>
+            <column name="shape">NULL</column>
+        </table>
+    </database>
+</pma_xml_export>

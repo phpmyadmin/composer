@@ -183,9 +183,10 @@ class Pdf extends PdfLib
     /**
      * Generate table
      *
-     * @param int|float $lineheight Height of line
+     * @param int|float           $lineheight Height of line
+     * @param list<FieldMetadata> $fields     meta info for fields in $this->results
      */
-    public function morepagestable(int|float $lineheight = 8): void
+    public function morepagestable(int|float $lineheight, array $fields): void
     {
         // some things to set and 'remember'
         $l = $this->lMargin;
@@ -212,6 +213,16 @@ class Pdf extends PdfLib
                 $this->page = $currpage;
                 $this->setXY($l, $h);
                 if ($this->tablewidths[$col] > 0) {
+                    if ($txt !== null) {
+                        if ($fields[$col]->isType(FieldMetadata::TYPE_GEOMETRY)) {
+                            $txt = '[GEOMETRY]';
+                        }
+
+                        if ($fields[$col]->isType(FieldMetadata::TYPE_BLOB) || $fields[$col]->isBinary()) {
+                            $txt = '[BLOB]';
+                        }
+                    }
+
                     $this->MultiCell($this->tablewidths[$col], $lineheight, $txt ?? 'NULL', 0, $this->colAlign[$col]);
                     $l += $this->tablewidths[$col];
                 }
@@ -690,7 +701,7 @@ class Pdf extends PdfLib
             }
 
             /**
-             * @todo do not deactivate completely the display
+             * do not deactivate completely the display
              * but show the field's name and [BLOB]
              */
             if ($fields[$i]->isBinary()) {
@@ -765,11 +776,12 @@ class Pdf extends PdfLib
         // Pass 2
 
         $this->results = $dbi->query($query, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        $fields = $dbi->getFieldsMeta($this->results);
         $this->setY($this->tMargin);
         $this->AddPage();
         $this->setFont(PdfLib::PMA_PDF_FONT, '', 9);
         // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
-        $this->morepagestable($this->FontSizePt);
+        $this->morepagestable($this->FontSizePt, $fields);
     }
 
     public function setTitleFontSize(int $titleFontSize): void

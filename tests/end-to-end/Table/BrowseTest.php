@@ -34,7 +34,6 @@ class BrowseTest extends TestBase
             . " (3, 'Abcd', '2012-01-20 02:00:02');",
         );
 
-        $this->login();
         $this->navigateTable('test_table');
 
         $this->waitAjax();

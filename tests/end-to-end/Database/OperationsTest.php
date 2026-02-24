@@ -12,16 +12,6 @@ use PHPUnit\Framework\Attributes\Large;
 #[Large]
 class OperationsTest extends TestBase
 {
-    /**
-     * setUp function
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->login();
-    }
-
     private function getToDBOperations(): void
     {
         $this->gotoHomepage();

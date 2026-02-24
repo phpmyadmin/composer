@@ -1316,6 +1316,7 @@
     </RiskyTruthyFalsyComparison>
     <UnusedVariable>
       <code><![CDATA[$collationsList]]></code>
+      <code><![CDATA[$encryptionKeyLength]]></code>
     </UnusedVariable>
   </file>
   <file src="src/Controllers/Import/ImportController.php">
@@ -4048,9 +4049,6 @@
       <code><![CDATA[$_POST['url']]]></code>
       <code><![CDATA[$exception['url']]]></code>
     </PossiblyInvalidCast>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_SERVER['HTTP_USER_AGENT']]]></code>
-    </PossiblyUndefinedArrayOffset>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($_POST['description'])]]></code>
       <code><![CDATA[empty($_POST['exception'])]]></code>
@@ -4973,6 +4971,9 @@
       <code><![CDATA[$lastCumulativeSize->scale]]></code>
       <code><![CDATA[$lastCumulativeSize->scale]]></code>
     </PossiblyInvalidPropertyFetch>
+    <PossiblyUndefinedArrayOffset>
+      <code><![CDATA[$row[$columnIndex]]]></code>
+    </PossiblyUndefinedArrayOffset>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[ImportSettings::$runQuery]]></code>
     </RiskyTruthyFalsyComparison>
@@ -5820,15 +5821,11 @@
     <MixedOperand>
       <code><![CDATA[$comments[$fieldName]]]></code>
     </MixedOperand>
-    <PossiblyFalseReference>
-      <code><![CDATA[fetchAssoc]]></code>
-      <code><![CDATA[getFieldNames]]></code>
-      <code><![CDATA[numFields]]></code>
-    </PossiblyFalseReference>
     <PossiblyInvalidOperand>
       <code><![CDATA[str_replace('_', '/', $mimeMap[$fieldName]['mimetype'])]]></code>
     </PossiblyInvalidOperand>
     <PossiblyNullArgument>
+      <code><![CDATA[$record[$columns[$i]]]]></code>
       <code><![CDATA[$record[$columns[$i]]]]></code>
     </PossiblyNullArgument>
     <RiskyTruthyFalsyComparison>
@@ -5881,6 +5878,11 @@
     <PropertyNotSetInConstructor>
       <code><![CDATA[$pdf]]></code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Plugins/Export/ExportPhparray.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$record[$i]]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/Plugins/Export/ExportSql.php">
     <ArgumentTypeCoercion>
@@ -7533,7 +7535,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($_POST[$currentGrant[0] . '_none'])]]></code>
       <code><![CDATA[empty($_POST[$currentGrant[0] . '_none'])]]></code>
-      <code><![CDATA[empty($_POST['change_copy'])]]></code>
       <code><![CDATA[empty($_POST['nopass'])]]></code>
       <code><![CDATA[empty($_POST['pma_pw'])]]></code>
       <code><![CDATA[empty($_POST['pma_pw2'])]]></code>
@@ -10519,9 +10520,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <UnusedVariable>
-      <code><![CDATA[$password]]></code>
-    </UnusedVariable>
   </file>
   <file src="tests/unit/Server/SelectTest.php">
     <DeprecatedMethod>

@@ -34,7 +34,7 @@ class EventsTest extends TestBase
             . 'INSERT INTO `test_table` (val) VALUES (2);'
             . 'SET GLOBAL event_scheduler="ON";',
         );
-        $this->login();
+
         $this->navigateDatabase($this->databaseName);
 
         // Let the Database page load
