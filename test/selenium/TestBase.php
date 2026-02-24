@@ -176,7 +176,7 @@ abstract class TestBase extends TestCase
         $this->dbQuery(
             'CREATE DATABASE IF NOT EXISTS `' . $this->databaseName . '`; USE `' . $this->databaseName . '`;'
         );
-        static::$createDatabase = true;
+        $this->createDatabase = true;
     }
 
     public function getDbPrefix(): string
@@ -1108,7 +1108,7 @@ JS;
      */
     protected function tearDown(): void
     {
-        if (static::$createDatabase) {
+        if ($this->createDatabase) {
             $this->dbQuery('DROP DATABASE IF EXISTS `' . $this->databaseName . '`;');
         }
 
