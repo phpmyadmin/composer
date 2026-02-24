@@ -104,6 +104,20 @@ $.ajaxPrefilter(function (options, originalOptions) {
 });
 
 /**
+ * Get an empty string for user-agent, if undefined
+ *
+ * @return {string}
+ */
+Functions.userAgent = function () {
+    try {
+        return navigator.userAgent;
+    } catch (e) {
+        console.error(e);
+        return '';
+    }
+};
+
+/**
  * Adds a date/time picker to an element
  *
  * @param {object} $thisElement a jQuery object pointing to the element
@@ -1095,7 +1109,7 @@ AJAX.registerOnload('functions.js', function () {
     /**
      * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
      */
-    if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
+    if (Functions.userAgent().match(/(iphone|ipod|ipad)/i)) {
         $('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
     }
 });

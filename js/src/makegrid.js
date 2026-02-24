@@ -260,7 +260,7 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
             for (var n = 0, l = $firstRowCols.length; n < l; n++) {
                 var $col = $($firstRowCols[n]);
                 var colWidth;
-                if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
+                if (Functions.userAgent().toLowerCase().indexOf('safari') !== -1) {
                     colWidth = $col.outerWidth();
                 } else {
                     colWidth = $col.outerWidth(true);
@@ -2317,10 +2317,10 @@ var makeGrid = function (t, enableResize, enableReorder, enableVisib, enableGrid
     $.fn.noSelect = function (p) { // no select plugin by Paulo P.Marinas
         var prevent = (p === null) ? true : p;
         /* eslint-disable compat/compat */
-        var isMsie = navigator.userAgent.indexOf('MSIE') > -1 || !!window.navigator.userAgent.match(/Trident.*rv:11\./);
-        var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-        var isSafari = navigator.userAgent.indexOf('Safari') > -1;
-        var isOpera = navigator.userAgent.indexOf('Presto') > -1;
+        var isMsie = Functions.userAgent().indexOf('MSIE') > -1 || !!Functions.userAgent().match(/Trident.*rv:11\./);
+        var isFirefox = Functions.userAgent().indexOf('Firefox') > -1;
+        var isSafari = Functions.userAgent().indexOf('Safari') > -1;
+        var isOpera = Functions.userAgent().indexOf('Presto') > -1;
         /* eslint-enable compat/compat */
         if (prevent) {
             return this.each(function () {
