@@ -1721,7 +1721,7 @@ Functions.documentationBuiltin = function (idx, elm) {
 };
 
 /**
- * Higlights SQL using CodeMirror.
+ * Highlights SQL using CodeMirror.
  *
  * @param $base
  */
@@ -1732,7 +1732,7 @@ Functions.highlightSql = function ($base) {
         var $pre = $sql.find('pre');
         /* We only care about visible elements to avoid double processing */
         if ($pre.is(':visible')) {
-            if (typeof CodeMirror !== 'undefined') {
+            if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
                 var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
                 $sql.append($highlight);
                 CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
@@ -1805,7 +1805,7 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
     var $notHighlighted = $('<pre>' + htmlValue + '</pre>');
 
     // Tries to highlight code using CodeMirror.
-    if (typeof CodeMirror !== 'undefined') {
+    if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
         var $highlighted = $('<div class="' + type + '-highlight cm-s-default"></div>');
         CodeMirror.runMode(rawValue, mode, $highlighted[0]);
         $notHighlighted.hide();
