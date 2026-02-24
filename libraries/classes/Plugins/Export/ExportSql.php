@@ -2230,7 +2230,7 @@ class ExportSql extends ExportPlugin
         $sqlQuery,
         array $aliases = []
     ): bool {
-        global $current_row, $sql_backquotes, $dbi;
+        global $current_row, $sql_backquotes, $sql_insert_syntax, $dbi;
 
         // Do not export data for merge tables
         if ($dbi->getTable($db, $table)->isMerge()) {
@@ -2343,7 +2343,7 @@ class ExportSql extends ExportPlugin
             }
 
             // scheme for inserting fields
-            if ($GLOBALS['sql_insert_syntax'] === 'complete' || $GLOBALS['sql_insert_syntax'] === 'both') {
+            if ($sql_insert_syntax === 'complete' || $sql_insert_syntax === 'both') {
                 $fields = implode(', ', $fieldSet);
                 $schemaInsert = $sqlCommand . $insertDelayed . ' INTO '
                     . Util::backquoteCompat($tableAlias, $compat, $sql_backquotes)
@@ -2360,8 +2360,8 @@ class ExportSql extends ExportPlugin
         $current_row = 0;
         $querySize = 0;
         if (
-            ($GLOBALS['sql_insert_syntax'] === 'extended'
-            || $GLOBALS['sql_insert_syntax'] === 'both')
+            ($sql_insert_syntax === 'extended'
+            || $sql_insert_syntax === 'both')
             && (! isset($GLOBALS['sql_type'])
             || $GLOBALS['sql_type'] !== 'UPDATE')
         ) {
@@ -2477,7 +2477,7 @@ class ExportSql extends ExportPlugin
                 unset($tmpUniqueCondition, $tmpClauseIsUnique);
             } else {
                 // Extended inserts case
-                if ($GLOBALS['sql_insert_syntax'] === 'extended' || $GLOBALS['sql_insert_syntax'] === 'both') {
+                if ($sql_insert_syntax === 'extended' || $sql_insert_syntax === 'both') {
                     if ($current_row == 1) {
                         $insertLine = $schemaInsert . '('
                             . implode(', ', $values) . ')';
