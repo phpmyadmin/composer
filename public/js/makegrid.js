@@ -273,7 +273,7 @@ const makeGrid = function (t) {
       for (var n = 0, l = $firstRowCols.length; n < l; n++) {
         var $col = jquery__WEBPACK_IMPORTED_MODULE_0___default()($firstRowCols[n]);
         var colWidth;
-        if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
+        if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.userAgent)().toLowerCase().indexOf('safari') !== -1) {
           colWidth = $col.outerWidth();
         } else {
           colWidth = $col.outerWidth(true);
@@ -290,6 +290,19 @@ const makeGrid = function (t) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('thead th').first().addClass('before-condition');
       }
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).css('height', jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).height());
+    },
+    /**
+     * Clears the current cell edit state, internal flags,
+     * and any pending save request.
+     */
+    resetGridEditState: function () {
+      g.isCellEditActive = false;
+      g.isEditCellTextEditable = false;
+      g.currentEditCell = null;
+      g.wasEditedCellNull = false;
+      g.isCellEdited = false;
+      g.isSaving = false;
+      g.lastXHR = null;
     },
     /**
      * Shift column from index oldn to newn.
@@ -2460,6 +2473,9 @@ const makeGrid = function (t) {
   // some adjustment
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).removeClass('data');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.gDiv).addClass('data');
+  /* Store the grid controller instance on the table element so it can be accessed later by other modules
+     (e.g. during AJAX teardown) without exposing the grid object as a global variable.*/
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).data('pmaGrid', g);
   g.initCellSelection();
 };
 window.makeGrid = makeGrid;

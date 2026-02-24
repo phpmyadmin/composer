@@ -1999,7 +1999,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   teardownSortLinkMouseEvent: function() { return /* binding */ teardownSortLinkMouseEvent; },
 /* harmony export */   teardownSqlQueryEditEvents: function() { return /* binding */ teardownSqlQueryEditEvents; },
 /* harmony export */   toggleDatepickerIfInvalid: function() { return /* binding */ toggleDatepickerIfInvalid; },
-/* harmony export */   updateCode: function() { return /* binding */ updateCode; }
+/* harmony export */   updateCode: function() { return /* binding */ updateCode; },
+/* harmony export */   userAgent: function() { return /* binding */ userAgent; }
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
@@ -2074,6 +2075,17 @@ function addNoCacheToAjaxRequests(options, originalOptions) {
       '_nocache': nocache,
       'token': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('token')
     });
+  }
+}
+/**
+ * Get an empty string for user-agent, if undefined
+ */
+function userAgent() {
+  try {
+    return navigator.userAgent;
+  } catch (e) {
+    console.error(e);
+    return '';
   }
 }
 /**
@@ -8173,9 +8185,9 @@ function highlightSql($base) {
     var $pre = $sql.closest('pre');
     /* We only care about visible elements to avoid double processing */
     if ($sql.is(':visible')) {
-      var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sql-highlight cm-s-default"></div>');
-      $pre.append($highlight);
       if (typeof window.CodeMirror !== 'undefined') {
+        var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sql-highlight cm-s-default"></div>');
+        $pre.append($highlight);
         // @ts-ignore
         window.CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
         $sql.hide();

@@ -434,6 +434,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/chang
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'input.checkbox_null');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="submit_type"]').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', '#insert_rows');
+  // Reset grid edit state
+  var grid = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.table_results').data('pmaGrid');
+  if (grid && typeof grid.resetGridEditState === 'function') {
+    grid.resetGridEditState();
+  }
 });
 /**
  * Ajax handlers for Change Table page

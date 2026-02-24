@@ -158,7 +158,7 @@ function onloadFunctions() {
     /**
      * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
      */
-    if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
+    if ((0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.userAgent)().match(/(iphone|ipod|ipad)/i)) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
     }
     (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSqlQueryEditEvents)();
