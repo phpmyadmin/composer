@@ -97,7 +97,8 @@ class ExportToon extends ExportPlugin
     ): void {
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        // use buffered query to get $rowsCnt
+        $result = $this->dbi->queryAsControlUser($sqlQuery);
 
         $columnsCnt = $result->numFields();
         $rowsCnt = $result->numRows();
