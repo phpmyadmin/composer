@@ -95,7 +95,14 @@ abstract class TestBase extends TestCase
      *
      * @var bool
      */
-    protected static $createDatabase = true;
+    protected $createDatabase = true;
+
+    /**
+     * Login before starting this test
+     *
+     * @var bool
+     */
+    protected $login = true;
 
     /**
      * Did the test create the phpMyAdmin storage database ?
@@ -148,7 +155,11 @@ abstract class TestBase extends TestCase
         $this->navigateTo('');
         $this->webDriver->manage()->window()->maximize();
 
-        if (! static::$createDatabase) {
+        if ($this->login) {
+            $this->login();
+        }
+
+        if (! $this->createDatabase) {
             // Stop here, we where not asked to create a database
             return;
         }
@@ -165,7 +176,7 @@ abstract class TestBase extends TestCase
         $this->dbQuery(
             'CREATE DATABASE IF NOT EXISTS `' . $this->databaseName . '`; USE `' . $this->databaseName . '`;'
         );
-        static::$createDatabase = true;
+        $this->createDatabase = true;
     }
 
     public function getDbPrefix(): string
@@ -1097,7 +1108,7 @@ JS;
      */
     protected function tearDown(): void
     {
-        if (static::$createDatabase) {
+        if ($this->createDatabase) {
             $this->dbQuery('DROP DATABASE IF EXISTS `' . $this->databaseName . '`;');
         }
 

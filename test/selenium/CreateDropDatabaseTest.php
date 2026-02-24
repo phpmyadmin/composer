@@ -17,7 +17,6 @@ class CreateDropDatabaseTest extends TestBase
         parent::setUp();
         /* TODO: For now this tests needs superuser for deleting database */
         $this->skipIfNotSuperUser();
-        $this->login();
     }
 
     /**

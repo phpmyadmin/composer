@@ -10,15 +10,6 @@ namespace PhpMyAdmin\Tests\Selenium;
 class ImportTest extends TestBase
 {
     /**
-     * setUp function
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->login();
-    }
-
-    /**
      * Test for server level import
      *
      * @group large

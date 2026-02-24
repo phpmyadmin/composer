@@ -24,8 +24,6 @@ class ExportTest extends TestBase
             . ');'
             . 'INSERT INTO `test_table` (val) VALUES (2);'
         );
-
-        $this->login();
     }
 
     /**

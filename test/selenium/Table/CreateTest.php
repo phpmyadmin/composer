@@ -16,8 +16,6 @@ class CreateTest extends TestBase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->login();
         $this->navigateDatabase($this->databaseName);
     }
 
