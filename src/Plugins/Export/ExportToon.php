@@ -8,8 +8,6 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Plugins\Export;
 
 use PhpMyAdmin\Config\Settings\Export;
-use PhpMyAdmin\Dbal\ConnectionType;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Export\StructureOrData;
 use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\Plugins\ExportPlugin;
@@ -21,6 +19,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
 use function array_key_last;
+use function bin2hex;
 use function ctype_digit;
 use function is_string;
 use function sprintf;
@@ -96,7 +95,8 @@ class ExportToon extends ExportPlugin
     ): void {
         $dbAlias = $this->getDbAlias($aliases, $db);
         $tableAlias = $this->getTableAlias($aliases, $db, $table);
-        $result = $this->dbi->query($sqlQuery, ConnectionType::User, DatabaseInterface::QUERY_UNBUFFERED);
+        // use buffered query to get $rowsCnt
+        $result = $this->dbi->queryAsControlUser($sqlQuery);
 
         $columnsCnt = $result->numFields();
         $rowsCnt = $result->numRows();
@@ -136,6 +136,13 @@ class ExportToon extends ExportPlugin
             foreach ($row as $index => $col) {
                 if ($index === 0) {
                     $buffer .= str_repeat(' ', $this->indent);
+                }
+
+                if (
+                    $col !== null
+                    && ($fieldsMeta[$index]->isMappedTypeGeometry || $fieldsMeta[$index]->isBinary)
+                ) {
+                    $col = '0x' . bin2hex($col);
                 }
 
                 $buffer .= $col ?? 'null';
