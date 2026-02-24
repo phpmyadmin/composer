@@ -711,7 +711,8 @@ final class JavaScriptMessagesController
             'strShow' => __('Show'),
             'strStructure' => __('Structure'),
             'strFullscreenRequestDenied' => __(
-                'The fullscreen request was denied because the Fullscreen API is disabled by user preference in the browser.'
+                'The fullscreen request was denied because'
+                . ' the Fullscreen API is disabled by user preference in the browser.'
             ),
         ];
     }
