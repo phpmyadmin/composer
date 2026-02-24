@@ -513,7 +513,7 @@ var ConsoleInput = {
     if (ConsoleInput.inputs !== null) {
       return;
     }
-    if (typeof CodeMirror !== 'undefined') {
+    if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
       ConsoleInput.codeMirror = true;
     }
     ConsoleInput.inputs = [];
