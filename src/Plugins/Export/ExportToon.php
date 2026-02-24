@@ -21,6 +21,7 @@ use PhpMyAdmin\Properties\Plugins\ExportPluginProperties;
 
 use function __;
 use function array_key_last;
+use function bin2hex;
 use function ctype_digit;
 use function is_string;
 use function sprintf;
