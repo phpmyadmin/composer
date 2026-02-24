@@ -138,6 +138,13 @@ class ExportToon extends ExportPlugin
                     $buffer .= str_repeat(' ', $this->indent);
                 }
 
+                if (
+                    $col !== null
+                    && ($fieldsMeta[$index]->isMappedTypeGeometry || $fieldsMeta[$index]->isBinary)
+                ) {
+                    $col = '0x' . bin2hex($col);
+                }
+
                 $buffer .= $col ?? 'null';
 
                 // phpcs:ignore SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed
