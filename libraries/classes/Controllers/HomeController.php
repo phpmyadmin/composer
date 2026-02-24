@@ -348,6 +348,40 @@ class HomeController extends AbstractController
         }
 
         /**
+         * Check if user does not have defined query encryption key and it is being used.
+         */
+        if ($cfg['URLQueryEncryption']) {
+            $encryptionKeyLength = 0;
+            // This can happen if the user did use getenv() to set URLQueryEncryptionSecretKey
+            if (is_string($cfg['URLQueryEncryptionSecretKey'])) {
+                $encryptionKeyLength = mb_strlen($cfg['URLQueryEncryptionSecretKey'], '8bit');
+            }
+
+            if ($encryptionKeyLength < SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+                $this->errors[] = [
+                    'message' => __(
+                        'The configuration file needs a valid key for query encryption.'
+                        . ' A temporary key was automatically generated for you.'
+                        . ' Please refer to the [doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc].'
+                    ),
+                    'severity' => 'warning',
+                ];
+            } elseif ($encryptionKeyLength > SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+                $this->errors[] = [
+                    'message' => sprintf(
+                        __(
+                            'The query encryption key in the configuration file is longer than necessary.'
+                            . ' It should only be %d bytes long.'
+                            . ' Please refer to the [doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc].'
+                        ),
+                        SODIUM_CRYPTO_SECRETBOX_KEYBYTES
+                    ),
+                    'severity' => 'warning',
+                ];
+            }
+        }
+
+        /**
          * Check for existence of config directory which should not exist in
          * production environment.
          */

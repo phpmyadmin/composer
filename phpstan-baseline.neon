@@ -6106,6 +6106,16 @@ parameters:
 			path: libraries/classes/Controllers/HomeController.php
 
 		-
+			message: "#^Cannot access offset 'URLQueryEncryption' on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/HomeController.php
+
+		-
+			message: "#^Cannot access offset 'URLQueryEncryptionS…' on mixed\\.$#"
+			count: 1
+			path: libraries/classes/Controllers/HomeController.php
+
+		-
 			message: "#^Cannot access offset 'VersionCheck' on mixed\\.$#"
 			count: 1
 			path: libraries/classes/Controllers/HomeController.php
