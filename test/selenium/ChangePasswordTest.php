@@ -19,7 +19,7 @@ class ChangePasswordTest extends TestBase
      *
      * @var bool
      */
-    protected static $createDatabase = false;
+    protected $createDatabase = false;
 
     /**
      * Array of AssertionFailedError->toString
@@ -35,8 +35,6 @@ class ChangePasswordTest extends TestBase
      */
     public function testChangePassword(): void
     {
-        $this->login();
-
         $e = $this->waitForElement('id', 'change_password_anchor');
         $e->click();
 

@@ -549,6 +549,26 @@ DesignerMove.rect = function (x1, y1, w, h, color) {
 };
 
 // --------------------------- FULLSCREEN -------------------------------------
+DesignerMove.requestFullscreen = function (e) {
+    if (e.requestFullscreen) {
+        return e.requestFullscreen();
+    } else if (e.webkitRequestFullscreen) {
+        return e.webkitRequestFullscreen();
+    } else if (e.mozRequestFullScreen) {
+        return e.mozRequestFullScreen();
+    } else if (e.msRequestFullscreen) {
+        return e.msRequestFullscreen();
+    }
+};
+
+DesignerMove.fullscreenEnabled = function () {
+    // eslint-disable-next-line compat/compat
+    return document.fullscreenEnabled ||
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled;
+};
+
 DesignerMove.toggleFullscreen = function () {
     var valueSent = '';
     var $img = $('#toggleFullscreen').find('img');
@@ -556,7 +576,7 @@ DesignerMove.toggleFullscreen = function () {
     var $content = $('#page_content');
     const pageContent = document.getElementById('page_content');
 
-    if (! document.fullscreenEnabled) {
+    if (! DesignerMove.fullscreenEnabled()) {
         Functions.ajaxShowMessage(Messages.strFullscreenRequestDenied, null, 'error');
 
         return;
@@ -572,7 +592,7 @@ DesignerMove.toggleFullscreen = function () {
 
         $('#osn_tab').css({ 'width': screen.width + 'px', 'height': screen.height });
         valueSent = 'on';
-        pageContent.requestFullscreen();
+        DesignerMove.requestFullscreen(pageContent);
     } else {
         $img.attr('src', $img.data('enter'))
             .attr('title', $span.data('enter'));

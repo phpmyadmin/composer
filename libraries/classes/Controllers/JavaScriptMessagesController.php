@@ -710,7 +710,10 @@ final class JavaScriptMessagesController
             'strHide' => __('Hide'),
             'strShow' => __('Show'),
             'strStructure' => __('Structure'),
-            'strFullscreenRequestDenied' => __('The fullscreen request was denied.'),
+            'strFullscreenRequestDenied' => __(
+                'The fullscreen request was denied because'
+                . ' the Fullscreen API is disabled by user preference in the browser.'
+            ),
         ];
     }
 }

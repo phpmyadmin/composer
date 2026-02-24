@@ -104,6 +104,20 @@ $.ajaxPrefilter(function (options, originalOptions) {
 });
 
 /**
+ * Get an empty string for user-agent, if undefined
+ *
+ * @return {string}
+ */
+Functions.userAgent = function () {
+    try {
+        return navigator.userAgent;
+    } catch (e) {
+        console.error(e);
+        return '';
+    }
+};
+
+/**
  * Adds a date/time picker to an element
  *
  * @param {object} $thisElement a jQuery object pointing to the element
@@ -1095,7 +1109,7 @@ AJAX.registerOnload('functions.js', function () {
     /**
      * Add attribute to text boxes for iOS devices (based on bugID: 3508912)
      */
-    if (navigator.userAgent.match(/(iphone|ipod|ipad)/i)) {
+    if (Functions.userAgent().match(/(iphone|ipod|ipad)/i)) {
         $('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
     }
 });
@@ -1707,7 +1721,7 @@ Functions.documentationBuiltin = function (idx, elm) {
 };
 
 /**
- * Higlights SQL using CodeMirror.
+ * Highlights SQL using CodeMirror.
  *
  * @param $base
  */
@@ -1718,9 +1732,9 @@ Functions.highlightSql = function ($base) {
         var $pre = $sql.find('pre');
         /* We only care about visible elements to avoid double processing */
         if ($pre.is(':visible')) {
-            var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
-            $sql.append($highlight);
-            if (typeof CodeMirror !== 'undefined') {
+            if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
+                var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
+                $sql.append($highlight);
                 CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
                 $pre.hide();
                 $highlight.find('.cm-keyword').each(Functions.documentationKeyword);
@@ -1791,7 +1805,7 @@ Functions.updateCode = function ($base, htmlValue, rawValue) {
     var $notHighlighted = $('<pre>' + htmlValue + '</pre>');
 
     // Tries to highlight code using CodeMirror.
-    if (typeof CodeMirror !== 'undefined') {
+    if (typeof CodeMirror !== 'undefined' && typeof CodeMirror.runMode === 'function') {
         var $highlighted = $('<div class="' + type + '-highlight cm-s-default"></div>');
         CodeMirror.runMode(rawValue, mode, $highlighted[0]);
         $notHighlighted.hide();
