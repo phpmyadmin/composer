@@ -1732,9 +1732,9 @@ Functions.highlightSql = function ($base) {
         var $pre = $sql.find('pre');
         /* We only care about visible elements to avoid double processing */
         if ($pre.is(':visible')) {
-            var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
-            $sql.append($highlight);
             if (typeof CodeMirror !== 'undefined') {
+                var $highlight = $('<div class="sql-highlight cm-s-default"></div>');
+                $sql.append($highlight);
                 CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);
                 $pre.hide();
                 $highlight.find('.cm-keyword').each(Functions.documentationKeyword);
