@@ -7533,7 +7533,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($_POST[$currentGrant[0] . '_none'])]]></code>
       <code><![CDATA[empty($_POST[$currentGrant[0] . '_none'])]]></code>
-      <code><![CDATA[empty($_POST['change_copy'])]]></code>
       <code><![CDATA[empty($_POST['nopass'])]]></code>
       <code><![CDATA[empty($_POST['pma_pw'])]]></code>
       <code><![CDATA[empty($_POST['pma_pw2'])]]></code>
@@ -10519,9 +10518,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <UnusedVariable>
-      <code><![CDATA[$password]]></code>
-    </UnusedVariable>
   </file>
   <file src="tests/unit/Server/SelectTest.php">
     <DeprecatedMethod>

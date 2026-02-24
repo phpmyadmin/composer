@@ -108,12 +108,14 @@ final class PrivilegesController implements InvocableController
             )->getDisplay());
         }
 
+        $isChangeCopyUser = $request->hasBodyParam('change_copy');
+
         /**
          * Checks if the user is using "Change Login Information / Copy User" dialog
          * only to update the password
          */
         if (
-            $request->hasBodyParam('change_copy')
+            $isChangeCopyUser
             && $serverPrivileges->username === $request->getParsedBodyParam('old_username')
             && $serverPrivileges->hostname === $request->getParsedBodyParam('old_hostname')
         ) {
@@ -131,13 +133,19 @@ final class PrivilegesController implements InvocableController
             return $this->response->response();
         }
 
-        /**
-         * Changes / copies a user, part I
-         */
-        $password = $serverPrivileges->getDataForChangeOrCopyUser(
-            $request->getParsedBodyParamAsString('old_username', ''),
-            $request->getParsedBodyParamAsString('old_hostname', ''),
-        );
+        $password = null;
+        if ($isChangeCopyUser) {
+            /** Changes / copies a user, part I */
+            $password = $serverPrivileges->getDataForChangeOrCopyUser(
+                $request->getParsedBodyParamAsString('old_username', ''),
+                $request->getParsedBodyParamAsString('old_hostname', ''),
+            );
+            if ($password instanceof Message) {
+                $this->response->addHTML($password->getDisplay());
+                $password = null;
+                $isChangeCopyUser = false;
+            }
+        }
 
         /**
          * Adds a user
@@ -147,7 +155,7 @@ final class PrivilegesController implements InvocableController
         $queriesForDisplay = null;
         Current::$sqlQuery = '';
         $addUserError = false;
-        if ($request->hasBodyParam('adduser_submit') || $request->hasBodyParam('change_copy')) {
+        if ($request->hasBodyParam('adduser_submit') || $isChangeCopyUser) {
             $hostname = $serverPrivileges->getHostname(
                 $request->getParsedBodyParamAsString('pred_hostname', ''),
                 $serverPrivileges->hostname ?? '',
@@ -164,6 +172,7 @@ final class PrivilegesController implements InvocableController
                 $hostname,
                 $password,
                 $relationParameters->configurableMenusFeature !== null,
+                $isChangeCopyUser,
             );
             //update the old variables
             if ($retMessage !== null) {
@@ -176,7 +185,7 @@ final class PrivilegesController implements InvocableController
          * Changes / copies a user, part III
          */
         if (
-            $request->hasBodyParam('change_copy')
+            $isChangeCopyUser
             && $serverPrivileges->username !== null
             && $serverPrivileges->hostname !== null
         ) {
@@ -266,10 +275,10 @@ final class PrivilegesController implements InvocableController
          */
         if (
             $request->hasBodyParam('delete')
-            || ($request->hasBodyParam('change_copy') && $request->getParsedBodyParam('mode') < 4)
+            || ($isChangeCopyUser && $request->getParsedBodyParam('mode') < 4)
         ) {
-            $queries = $serverPrivileges->getDataForDeleteUsers($queries);
-            if (! $request->hasBodyParam('change_copy')) {
+            $queries = $serverPrivileges->getDataForDeleteUsers($queries, $isChangeCopyUser);
+            if (! $isChangeCopyUser) {
                 [Current::$sqlQuery, Current::$message] = $serverPrivileges->deleteUser($queries);
             }
         }
@@ -277,7 +286,7 @@ final class PrivilegesController implements InvocableController
         /**
          * Changes / copies a user, part V
          */
-        if ($request->hasBodyParam('change_copy')) {
+        if ($isChangeCopyUser) {
             $queries = $serverPrivileges->getDataForQueries($queries, $queriesForDisplay);
             Current::$message = Message::success();
             Current::$sqlQuery = implode("\n", $queries);
@@ -311,6 +320,7 @@ final class PrivilegesController implements InvocableController
                 $serverPrivileges->hostname ?? '',
                 $serverPrivileges->username ?? '',
                 ! is_array($databaseName) ? $databaseName : null,
+                $isChangeCopyUser,
             );
 
             if (Current::$message instanceof Message) {
