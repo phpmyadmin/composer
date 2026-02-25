@@ -14,6 +14,7 @@ use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\SqlQueryForm;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Clock\MockClock;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PhpMyAdmin\Tracking\LogType;
 use PhpMyAdmin\Tracking\TrackedData;
@@ -21,14 +22,12 @@ use PhpMyAdmin\Tracking\TrackedDataType;
 use PhpMyAdmin\Tracking\Tracking;
 use PhpMyAdmin\Tracking\TrackingChecker;
 use PhpMyAdmin\Url;
-use PhpMyAdmin\Util;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionProperty;
 
 use function __;
 use function _pgettext;
-use function date;
 use function htmlspecialchars;
 use function ini_get;
 use function ini_restore;
@@ -558,9 +557,10 @@ final class TrackingTest extends AbstractTestCase
         ini_set('url_rewriter.tags', 'a=href,area=href,frame=src,form=,fieldset=');
         $entries = [['statement' => 'first statement'], ['statement' => 'second statement']];
         $expectedDump = '# Tracking report for table `test&gt; table`' . "\n"
-            . '# ' . date('Y-m-d H:i:sP') . "\n"
+            . '# 2015-10-21 05:28:00-02:00' . "\n"
             . 'first statementsecond statement';
-        $actual = $tracking->getDownloadInfoForExport('test>  table', $entries);
+        $clock = MockClock::from('2015-10-21T05:28:00-02:00');
+        $actual = $tracking->getDownloadInfoForExport($clock, 'test>  table', $entries);
         self::assertSame('log_test&gt; table.sql', $actual['filename']);
         self::assertSame($expectedDump, $actual['dump']);
         self::assertSame('', ini_get('url_rewriter.tags'));
@@ -600,61 +600,35 @@ final class TrackingTest extends AbstractTestCase
         self::assertTrue($tracking->deleteTracking('testdb', 'testtable'));
     }
 
-    /**
-     * Test for changeTrackingData()
-     */
     public function testChangeTrackingData(): void
     {
-        $dbi = $this->getMockBuilder(DatabaseInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $sqlQuery1 = 'UPDATE `pmadb`.`tracking`' .
-        " SET `schema_sql` = '# new_data_processed'" .
-        " WHERE `db_name` = 'pma_db'" .
-        " AND `table_name` = 'pma_table'" .
-        " AND `version` = '1.0'";
-
-        $date = Util::date('Y-m-d H:i:s');
-
         $newData = [
-            ['date' => $date, 'username' => 'user1', 'statement' => 'test_statement1'],
-            ['date' => $date, 'username' => 'user2', 'statement' => 'test_statement2'],
+            ['date' => '2026-02-25 19:29:34', 'username' => 'user1', 'statement' => 'test_statement1'],
+            ['date' => '2026-02-25 19:29:34', 'username' => 'user2', 'statement' => 'test_statement2'],
         ];
 
-        $sqlQuery2 = 'UPDATE `pmadb`.`tracking`' .
-        " SET `data_sql` = '# log " . $date . " user1test_statement1\n" .
-        '# log ' . $date . " user2test_statement2\n'" .
-        " WHERE `db_name` = 'pma_db'" .
-        " AND `table_name` = 'pma_table'" .
-        " AND `version` = '1.0'";
-
-        $resultStub1 = self::createMock(DummyResult::class);
-        $resultStub2 = self::createMock(DummyResult::class);
-
-        $dbi->method('queryAsControlUser')
-            ->willReturnMap([[$sqlQuery1, $resultStub1], [$sqlQuery2, $resultStub2]]);
-
-        $dbi->expects(self::any())->method('quoteString')
-            ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
+        $dbiDummy = $this->createDbiDummy();
+        $dbiDummy->addResult(
+            'UPDATE `pmadb`.`tracking`' .
+            " SET `data_sql` = '# log 2026-02-25 19:29:34 user1test_statement1 " .
+            "# log 2026-02-25 19:29:34 user2test_statement2 '" .
+            " WHERE `db_name` = 'pma_db'" .
+            " AND `table_name` = 'pma_table'" .
+            " AND `version` = '1.0'",
+            true,
+        );
+        $dbi = $this->createDatabaseInterface($dbiDummy);
 
         $tracking = new Tracking(
             self::createStub(SqlQueryForm::class),
             self::createStub(Template::class),
-            new Relation(DatabaseInterface::getInstance()),
+            new Relation($dbi, new Config()),
             $dbi,
             self::createStub(TrackingChecker::class),
         );
 
-        self::assertTrue(
-            $tracking->changeTrackingData(
-                'pma_db',
-                'pma_table',
-                '1.0',
-                TrackedDataType::DML,
-                $newData,
-            ),
-        );
+        self::assertTrue($tracking->changeTrackingData('pma_db', 'pma_table', '1.0', TrackedDataType::DML, $newData));
+        $dbiDummy->assertAllQueriesConsumed();
     }
 
     /**

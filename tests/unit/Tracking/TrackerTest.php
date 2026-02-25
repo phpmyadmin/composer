@@ -12,9 +12,9 @@ use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\ConnectionType;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Tests\AbstractTestCase;
+use PhpMyAdmin\Tests\Clock\MockClock;
 use PhpMyAdmin\Tests\Stubs\DummyResult;
 use PhpMyAdmin\Tracking\Tracker;
-use PhpMyAdmin\Util;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
@@ -136,12 +136,12 @@ class TrackerTest extends AbstractTestCase
      */
     public function testGetLogComment(): void
     {
-        $date = Util::date('Y-m-d H:i:s');
-        Config::getInstance()->selectedServer['user'] = 'pma_test_user';
+        $config = Config::$instance = new Config();
+        $config->selectedServer['user'] = 'pma_test_user';
 
         self::assertSame(
-            '# log ' . $date . " pma_test_user\n",
-            Tracker::getLogComment(),
+            "# log 2015-10-21 05:28:00 pma_test_user\n",
+            Tracker::getLogComment(MockClock::from('2015-10-21T05:28:00-02:00')),
         );
     }
 

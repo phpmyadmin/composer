@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Controllers\Table;
 
 use DateTimeImmutable;
+use PhpMyAdmin\Clock\Clock;
 use PhpMyAdmin\Controllers\InvocableController;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Current;
@@ -130,7 +131,7 @@ final class TrackingController implements InvocableController
 
                 // Export as file download
                 if ($reportExportType === 'sqldumpfile') {
-                    $downloadInfo = $this->tracking->getDownloadInfoForExport($tableParam, $entries);
+                    $downloadInfo = $this->tracking->getDownloadInfoForExport(new Clock(), $tableParam, $entries);
                     $response = $this->responseFactory->createResponse();
                     Core::downloadHeader($downloadInfo['filename'], 'text/x-sql', mb_strlen($downloadInfo['dump']));
 
