@@ -290,6 +290,8 @@ class Types
                 . 'addresses assuming conventional mapping of IPv4 addresses '
                 . 'into IPv6 addresses'),
             'UUID' => __('128-bit UUID (Universally Unique Identifier)'),
+            'VECTOR' => __('Stores vector data optimized for operations '
+                . 'such as similarity search and machine learning applications'),
             default => '',
         };
     }
