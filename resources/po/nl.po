@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-22 00:36+0000\n"
+"POT-Creation-Date: 2026-02-25 13:54+0000\n"
 "PO-Revision-Date: 2026-02-24 08:09+0000\n"
 "Last-Translator: dingo thirteen <dingo13@d404.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -277,7 +277,7 @@ msgstr "Kolom(men)"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
-#: src/Controllers/Server/PrivilegesController.php:305
+#: src/Controllers/Server/PrivilegesController.php:314
 #: src/Normalization.php:235 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -480,11 +480,11 @@ msgstr "Is een vreemde sleutel."
 #: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
-#: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
+#: src/Plugins/Export/ExportLatex.php:465 src/Plugins/Export/ExportOdt.php:324
 #: src/Plugins/Export/ExportOdt.php:395
-#: src/Plugins/Export/ExportTexytext.php:236
-#: src/Plugins/Export/ExportTexytext.php:296
-#: src/Plugins/Export/Helpers/Pdf.php:458
+#: src/Plugins/Export/ExportTexytext.php:242
+#: src/Plugins/Export/ExportTexytext.php:302
+#: src/Plugins/Export/Helpers/Pdf.php:469
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:602
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:624
 msgid "Column"
@@ -583,7 +583,7 @@ msgstr "Node groep"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
 #: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
@@ -604,8 +604,8 @@ msgstr "Structuur"
 #: resources/templates/triggers/list.twig:47
 #: src/Plugins/Export/ExportHtmlword.php:396
 #: src/Plugins/Export/ExportOdt.php:503
-#: src/Plugins/Export/ExportTexytext.php:365
-#: src/Plugins/Export/Helpers/Pdf.php:300
+#: src/Plugins/Export/ExportTexytext.php:371
+#: src/Plugins/Export/Helpers/Pdf.php:311
 msgid "Name"
 msgstr "Naam"
 
@@ -632,11 +632,11 @@ msgstr "Naam"
 #: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
-#: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
+#: src/Plugins/Export/ExportLatex.php:466 src/Plugins/Export/ExportOdt.php:327
 #: src/Plugins/Export/ExportOdt.php:398
-#: src/Plugins/Export/ExportTexytext.php:237
-#: src/Plugins/Export/ExportTexytext.php:297
-#: src/Plugins/Export/Helpers/Pdf.php:460
+#: src/Plugins/Export/ExportTexytext.php:243
+#: src/Plugins/Export/ExportTexytext.php:303
+#: src/Plugins/Export/Helpers/Pdf.php:471
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:603
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:625
 msgid "Type"
@@ -671,11 +671,11 @@ msgstr ""
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:10
 #: src/Plugins/Export/ExportHtmlword.php:234
 #: src/Plugins/Export/ExportHtmlword.php:305
-#: src/Plugins/Export/ExportLatex.php:458 src/Plugins/Export/ExportOdt.php:333
+#: src/Plugins/Export/ExportLatex.php:468 src/Plugins/Export/ExportOdt.php:333
 #: src/Plugins/Export/ExportOdt.php:404
-#: src/Plugins/Export/ExportTexytext.php:239
-#: src/Plugins/Export/ExportTexytext.php:299
-#: src/Plugins/Export/Helpers/Pdf.php:464
+#: src/Plugins/Export/ExportTexytext.php:245
+#: src/Plugins/Export/ExportTexytext.php:305
+#: src/Plugins/Export/Helpers/Pdf.php:475
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:606
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:628
 msgid "Default"
@@ -736,11 +736,11 @@ msgstr "Attributen"
 #: resources/templates/table/zoom_search/result_form.twig:34
 #: src/Plugins/Export/ExportHtmlword.php:231
 #: src/Plugins/Export/ExportHtmlword.php:302
-#: src/Plugins/Export/ExportLatex.php:457 src/Plugins/Export/ExportOdt.php:330
+#: src/Plugins/Export/ExportLatex.php:467 src/Plugins/Export/ExportOdt.php:330
 #: src/Plugins/Export/ExportOdt.php:401
-#: src/Plugins/Export/ExportTexytext.php:238
-#: src/Plugins/Export/ExportTexytext.php:298
-#: src/Plugins/Export/Helpers/Pdf.php:462
+#: src/Plugins/Export/ExportTexytext.php:244
+#: src/Plugins/Export/ExportTexytext.php:304
+#: src/Plugins/Export/Helpers/Pdf.php:473
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
@@ -762,9 +762,9 @@ msgstr "Rechten aanpassen"
 #: resources/templates/table/structure/display_structure.twig:28
 #: src/Config/Descriptions.php:660 src/Config/Descriptions.php:675
 #: src/Config/Descriptions.php:711 src/Plugins/Export/ExportHtmlword.php:315
-#: src/Plugins/Export/ExportLatex.php:464 src/Plugins/Export/ExportOdt.php:414
-#: src/Plugins/Export/ExportTexytext.php:305
-#: src/Plugins/Export/Helpers/Pdf.php:481
+#: src/Plugins/Export/ExportLatex.php:474 src/Plugins/Export/ExportOdt.php:414
+#: src/Plugins/Export/ExportTexytext.php:311
+#: src/Plugins/Export/Helpers/Pdf.php:492
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:618
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:631
 msgid "Comments"
@@ -783,8 +783,8 @@ msgstr "Kolom verplaatsen"
 #: src/Config/Descriptions.php:664 src/Config/Descriptions.php:676
 #: src/Config/Descriptions.php:714 src/Plugins/Export/ExportHtmlword.php:322
 #: src/Plugins/Export/ExportOdt.php:421
-#: src/Plugins/Export/ExportTexytext.php:310
-#: src/Plugins/Export/Helpers/Pdf.php:489
+#: src/Plugins/Export/ExportTexytext.php:316
+#: src/Plugins/Export/Helpers/Pdf.php:500
 msgid "Media type"
 msgstr "Media type"
 
@@ -921,8 +921,8 @@ msgstr "Uitgeschakeld"
 #: src/Controllers/Table/Structure/PrimaryController.php:101
 #: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "Yes"
 msgstr "Ja"
@@ -957,8 +957,8 @@ msgstr "Ja"
 #: src/Controllers/JavaScriptMessagesController.php:343
 #: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
 #: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "No"
 msgstr "Nee"
@@ -1063,8 +1063,8 @@ msgstr "Verwijderen"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
-#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:117 src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1588 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "Database"
 
@@ -1091,18 +1091,18 @@ msgstr "Geschiedenis"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1157 src/Import/Import.php:1215
-#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
+#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:57
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
-#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:87
-#: src/Plugins/Export/ExportMediawiki.php:49
+#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:89
+#: src/Plugins/Export/ExportMediawiki.php:50
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
-#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
+#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:47
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56
-#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
+#: src/Plugins/Export/ExportTexytext.php:57
+#: src/Plugins/Export/ExportToon.php:50 src/Plugins/Export/ExportXml.php:69
+#: src/Plugins/Export/ExportYaml.php:46 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1434,9 +1434,9 @@ msgstr "Afdrukken"
 
 #: resources/templates/database/data_dictionary/index.twig:28
 #: src/Plugins/Export/ExportHtmlword.php:309
-#: src/Plugins/Export/ExportLatex.php:460 src/Plugins/Export/ExportOdt.php:408
-#: src/Plugins/Export/ExportTexytext.php:301
-#: src/Plugins/Export/Helpers/Pdf.php:473
+#: src/Plugins/Export/ExportLatex.php:470 src/Plugins/Export/ExportOdt.php:408
+#: src/Plugins/Export/ExportTexytext.php:307
+#: src/Plugins/Export/Helpers/Pdf.php:484
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:608
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:630
 msgid "Links to"
@@ -1811,8 +1811,8 @@ msgstr "Einde"
 #: resources/templates/triggers/editor_form.twig:62
 #: src/Plugins/Export/ExportHtmlword.php:399
 #: src/Plugins/Export/ExportOdt.php:512
-#: src/Plugins/Export/ExportTexytext.php:368
-#: src/Plugins/Export/Helpers/Pdf.php:306
+#: src/Plugins/Export/ExportTexytext.php:374
+#: src/Plugins/Export/Helpers/Pdf.php:317
 msgid "Definition"
 msgstr "Definitie"
 
@@ -1841,7 +1841,7 @@ msgstr "DEFINER"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
 #: src/Util.php:1385
 msgid "Events"
 msgstr "Gebeurtenissen"
@@ -2019,7 +2019,7 @@ msgstr "Tabellen:"
 #: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
-#: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
+#: src/Plugins/Export/ExportXml.php:108 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "Tabellen"
 
@@ -2299,7 +2299,7 @@ msgstr "Servernaam"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
-#: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
+#: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
 #: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "Rechten"
@@ -2350,7 +2350,7 @@ msgstr "Rechten bewerken"
 # Enkelvoud.
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2079
+#: src/Server/Privileges.php:2077
 msgid "No user found."
 msgstr "Geen gebruiker gevonden."
 
@@ -2745,8 +2745,8 @@ msgstr ""
 "dat u wilt doorgaan?"
 
 #: resources/templates/database/structure/copy_form.twig:5
-#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:251
-#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:356
+#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:253
+#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:357
 #: src/Plugins/Export/Helpers/Pdf.php:146
 msgid "Database:"
 msgstr "Database:"
@@ -2818,15 +2818,15 @@ msgstr "Aanmaakquery's worden getoond"
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
-#: src/Server/Privileges.php:1593
+#: src/Plugins/Export/ExportXml.php:409 src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1594
 msgid "Table"
 msgstr "Tabel"
 
 #: resources/templates/database/structure/show_create.twig:30
 #: src/Navigation/Nodes/NodeViewContainer.php:23
 #: src/Navigation/Nodes/NodeViewContainer.php:25
-#: src/Plugins/Export/ExportXml.php:117
+#: src/Plugins/Export/ExportXml.php:118
 msgid "Views"
 msgstr "Views"
 
@@ -3567,8 +3567,8 @@ msgid "Server connection:"
 msgstr "Serververbinding:"
 
 #: resources/templates/home/index.twig:198
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:764
-#: src/Plugins/Export/ExportXml.php:203
+#: src/Plugins/Export/ExportLatex.php:234 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportXml.php:204
 msgid "Server version:"
 msgstr "Serverversie:"
 
@@ -4803,7 +4803,7 @@ msgstr "Gebruikersaccount"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
+#: src/Server/Privileges.php:1598 src/Server/Privileges.php:1600
 msgid "Routine"
 msgstr "Routine"
 
@@ -4817,7 +4817,7 @@ msgstr ""
 "op dit moment ingelogd bent."
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1598
+#: src/Server/Privileges.php:1599
 msgid "Routine-specific privileges"
 msgstr "Routine-specifieke rechten"
 
@@ -4957,7 +4957,7 @@ msgstr "Gebruikersgroep bewerken"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1593
 msgid "Table-specific privileges"
 msgstr "Tabel-specifieke rechten"
 
@@ -5126,7 +5126,7 @@ msgid "Global privileges"
 msgstr "Globale rechten"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1587
 msgid "Database-specific privileges"
 msgstr "Database-specifieke rechten"
 
@@ -5440,8 +5440,8 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:224 src/Plugins/Export/ExportSql.php:753
-#: src/Plugins/Export/ExportXml.php:195
+#: src/Plugins/Export/ExportLatex.php:226 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportXml.php:196
 msgid "Host:"
 msgstr "Host:"
 
@@ -6283,7 +6283,7 @@ msgid "No users were found belonging to this user group."
 msgstr "Er zijn geen gebruikers gevonden die tot deze gebruikersgroep behoren."
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:432
+#: src/Controllers/Server/PrivilegesController.php:442
 #: src/Server/Status/Processes.php:101
 msgid "User"
 msgstr "Gebruiker"
@@ -6442,8 +6442,8 @@ msgstr "Toestand"
 #: src/Controllers/JavaScriptMessagesController.php:276
 #: src/Plugins/Export/ExportHtmlword.php:397
 #: src/Plugins/Export/ExportOdt.php:506
-#: src/Plugins/Export/ExportTexytext.php:366
-#: src/Plugins/Export/Helpers/Pdf.php:302 src/Server/Status/Processes.php:105
+#: src/Plugins/Export/ExportTexytext.php:372
+#: src/Plugins/Export/Helpers/Pdf.php:313 src/Server/Status/Processes.php:105
 msgid "Time"
 msgstr "Tijd"
 
@@ -7457,8 +7457,8 @@ msgstr "Tijdstip"
 #: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
-#: src/Plugins/Export/ExportTexytext.php:367
-#: src/Plugins/Export/Helpers/Pdf.php:304
+#: src/Plugins/Export/ExportTexytext.php:373
+#: src/Plugins/Export/Helpers/Pdf.php:315
 msgid "Event"
 msgstr "Gebeurtenis"
 
@@ -7474,8 +7474,8 @@ msgstr "Export van trigger %s"
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
-#: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr "Triggers"
 
@@ -9178,43 +9178,43 @@ msgid "Closed"
 msgstr "Gesloten"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:725
 msgctxt "Week day name"
 msgid "Monday"
 msgstr "maandag"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:726
 msgctxt "Week day name"
 msgid "Tuesday"
 msgstr "dinsdag"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:727
 msgctxt "Week day name"
 msgid "Wednesday"
 msgstr "woensdag"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:728
 msgctxt "Week day name"
 msgid "Thursday"
 msgstr "donderdag"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:729
 msgctxt "Week day name"
 msgid "Friday"
 msgstr "vrijdag"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:727
+#: src/Controllers/JavaScriptMessagesController.php:730
 msgctxt "Week day name"
 msgid "Saturday"
 msgstr "zaterdag"
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:724
 msgctxt "Week day name"
 msgid "Sunday"
 msgstr "zondag"
@@ -9246,33 +9246,33 @@ msgstr "Uitschakelen"
 #: src/Config/ConfigFile.php:664 src/Config/ConfigFile.php:716
 #: src/Config/ConfigFile.php:728 src/Config/ConfigFile.php:736
 #: src/Config/ConfigFile.php:741 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure"
 msgstr "structuur"
 
 #: src/Config/ConfigFile.php:665 src/Config/ConfigFile.php:717
 #: src/Config/ConfigFile.php:729 src/Config/ConfigFile.php:737
 #: src/Config/ConfigFile.php:742 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "data"
 msgstr "data"
 
 #: src/Config/ConfigFile.php:666 src/Config/ConfigFile.php:718
 #: src/Config/ConfigFile.php:730 src/Config/ConfigFile.php:738
 #: src/Config/ConfigFile.php:743 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure and data"
 msgstr "structuur en data"
 
@@ -10763,11 +10763,11 @@ msgstr "Compressie"
 #: src/Config/Descriptions.php:640 src/Config/Descriptions.php:647
 #: src/Config/Descriptions.php:655 src/Config/Descriptions.php:659
 #: src/Config/Descriptions.php:672 src/Config/Descriptions.php:674
-#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:98
+#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:99
 #: src/Plugins/Export/ExportExcel.php:80
 #: src/Plugins/Export/ExportHtmlword.php:93 src/Plugins/Export/ExportOds.php:71
 #: src/Plugins/Export/ExportOdt.php:129
-#: src/Plugins/Export/ExportTexytext.php:86
+#: src/Plugins/Export/ExportTexytext.php:87
 msgid "Put columns names in the first row"
 msgstr "Kolomnamen in de eerste rij plaatsen"
 
@@ -10821,16 +10821,16 @@ msgstr "Tabelnaamtemplate"
 #: src/Config/Descriptions.php:657 src/Config/Descriptions.php:670
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:717
 #: src/Config/Descriptions.php:723 src/Plugins/Export/ExportHtmlword.php:68
-#: src/Plugins/Export/ExportLatex.php:108
-#: src/Plugins/Export/ExportMediawiki.php:59
-#: src/Plugins/Export/ExportMediawiki.php:65
+#: src/Plugins/Export/ExportLatex.php:110
+#: src/Plugins/Export/ExportMediawiki.php:60
+#: src/Plugins/Export/ExportMediawiki.php:66
 #: src/Plugins/Export/ExportOdt.php:75 src/Plugins/Export/ExportPdf.php:76
 #: src/Plugins/Export/ExportSql.php:263
-#: src/Plugins/Export/ExportTexytext.php:66
+#: src/Plugins/Export/ExportTexytext.php:67
 msgid "Dump table"
 msgstr "Exporteer tabel"
 
-#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:99
+#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:101
 msgid "Include table caption"
 msgstr "Tabeltitel toevoegen"
 
@@ -11761,7 +11761,7 @@ msgid "Missing data for %s"
 msgstr "Ontbrekende gegevens voor %s"
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:808
 msgid "Incorrect value!"
 msgstr "Foutieve waarde!"
 
@@ -12086,22 +12086,22 @@ msgid "Incorrect IP address: %s"
 msgstr "Foutief IP-adres: %s"
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:807
 msgid "Not a valid port number!"
 msgstr "Geen geldig poortnummer!"
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:805
 msgid "Not a positive number!"
 msgstr "Geen positief getal!"
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:806
 msgid "Not a non-negative number!"
 msgstr "Geen niet-negatief getal!"
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:806
+#: src/Controllers/JavaScriptMessagesController.php:809
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr "Waarde moet lager of gelijk zijn aan %s!"
@@ -12554,7 +12554,37 @@ msgstr ""
 "Het hoeft maar %d bytes lang te zijn. Voor meer informatie zie "
 "[doc@cfg_blowfish_secret]documentatie[/doc]."
 
-#: src/Controllers/HomeController.php:353
+#: src/Controllers/HomeController.php:356
+#, fuzzy
+#| msgid ""
+#| "The configuration file needs a valid key for cookie encryption. A "
+#| "temporary key was automatically generated for you. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The configuration file needs a valid key for query encryption. A temporary "
+"key was automatically generated for you. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"Het configuratiebestand heeft een geldige sleutel nodig voor cookie "
+"encryptie. Een tijdelijke sleutel is automatisch voor u gegenereerd. Voor "
+"meer informatie zie [doc@cfg_blowfish_secret]documentatie[/doc]."
+
+#: src/Controllers/HomeController.php:366
+#, fuzzy, php-format
+#| msgid ""
+#| "The cookie encryption key in the configuration file is longer than "
+#| "necessary. It should only be %d bytes long. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The query encryption key in the configuration file is longer than necessary. "
+"It should only be %d bytes long. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"De cookie encryptie sleutel in het configuratiebestand is langer dan nodig. "
+"Het hoeft maar %d bytes lang te zijn. Voor meer informatie zie "
+"[doc@cfg_blowfish_secret]documentatie[/doc]."
+
+#: src/Controllers/HomeController.php:384
 msgid ""
 "Directory [code]config[/code], which is used by the setup script, still "
 "exists in your phpMyAdmin directory. It is strongly recommended to remove it "
@@ -12567,7 +12597,7 @@ msgstr ""
 "aangetast worden omdat ongepriviligieerde personen uw configuratie kunnen "
 "downloaden."
 
-#: src/Controllers/HomeController.php:374
+#: src/Controllers/HomeController.php:405
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
@@ -12575,7 +12605,7 @@ msgid ""
 msgstr ""
 "De server gebruikt Suhosin. Zie de %sdocumentatie%s voor mogelijke problemen."
 
-#: src/Controllers/HomeController.php:388
+#: src/Controllers/HomeController.php:419
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
@@ -12584,7 +12614,7 @@ msgstr ""
 "De $cfg['TempDir'] (%s) is niet benaderbaar. phpMyAdmin kan de templates "
 "niet in de cache zetten en zal daardoor langzamer werken."
 
-#: src/Controllers/HomeController.php:405
+#: src/Controllers/HomeController.php:436
 msgid ""
 "The [code]HTTP_HOST[/code] variable is missing, which might cause phpMyAdmin "
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
@@ -12594,7 +12624,7 @@ msgstr ""
 "niet goed werkt. Voor meer informatie zie [doc@faq1-46]documentation[/doc] "
 "voor mogelijke problemen."
 
-#: src/Controllers/HomeController.php:458
+#: src/Controllers/HomeController.php:489
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
@@ -12604,7 +12634,7 @@ msgstr ""
 "karakterset te gebruiken. Zonder de uitbreiding mbstring kan phpMyAdmin "
 "strings niet correct splitsen, wat tot onverwachte resultaten kan leiden."
 
-#: src/Controllers/HomeController.php:476
+#: src/Controllers/HomeController.php:507
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
@@ -13541,7 +13571,7 @@ msgstr "Tweede stap van normalisatie (2NF)"
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:754
+#: src/Controllers/JavaScriptMessagesController.php:757
 #: src/Normalization.php:349
 msgid "Done"
 msgstr "Klaar"
@@ -14200,346 +14230,348 @@ msgstr "Tabel %s bestaat reeds!"
 msgid "Hide"
 msgstr "Verbergen"
 
-#: src/Controllers/JavaScriptMessagesController.php:695
-msgid "The fullscreen request was denied."
-msgstr "Het verzoek om volledig scherm is geweigerd."
+#: src/Controllers/JavaScriptMessagesController.php:696
+msgid ""
+"The fullscreen request was denied because the Fullscreen API is disabled by "
+"user preference in the browser."
+msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:700
 msgctxt "Month name"
 msgid "January"
 msgstr "januari"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:701
 msgctxt "Month name"
 msgid "February"
 msgstr "februari"
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:702
 msgctxt "Month name"
 msgid "March"
 msgstr "maart"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:703
 msgctxt "Month name"
 msgid "April"
 msgstr "april"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:704
 msgctxt "Month name"
 msgid "May"
 msgstr "mei"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:705
 msgctxt "Month name"
 msgid "June"
 msgstr "juni"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:706
 msgctxt "Month name"
 msgid "July"
 msgstr "juli"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:707
 msgctxt "Month name"
 msgid "August"
 msgstr "augustus"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:708
 msgctxt "Month name"
 msgid "September"
 msgstr "september"
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:709
 msgctxt "Month name"
 msgid "October"
 msgstr "oktober"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:710
 msgctxt "Month name"
 msgid "November"
 msgstr "november"
 
-#: src/Controllers/JavaScriptMessagesController.php:708
+#: src/Controllers/JavaScriptMessagesController.php:711
 msgctxt "Month name"
 msgid "December"
 msgstr "december"
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "jan"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "feb"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "mrt"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "apr"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "mei"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "jun"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "jul"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "aug"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "sep"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "okt"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "nov"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "dec"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
 msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "zon"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "ma"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "di"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "wo"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "do"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "vr"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "za"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:738
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "zo"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:739
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "ma"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:740
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "di"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:741
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "wo"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:742
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "do"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:743
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "vr"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:744
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "za"
 
-#: src/Controllers/JavaScriptMessagesController.php:742
+#: src/Controllers/JavaScriptMessagesController.php:745
 msgctxt "Column header for week of the year in calendar"
 msgid "Wk"
 msgstr "Wk"
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:747
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "calendar-month-year"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:748
 msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "geen"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:749
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "Tijd"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:750
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr "Uur"
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:751
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "Minuut"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:752
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "Seconde"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:753
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "Milliseconde"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:754
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "Microseconde"
 
-#: src/Controllers/JavaScriptMessagesController.php:752
+#: src/Controllers/JavaScriptMessagesController.php:755
 msgctxt "The time zone for a time of day"
 msgid "Time zone"
 msgstr "Tijdzone"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:756
+#: src/Controllers/JavaScriptMessagesController.php:759
 msgctxt "Previous month"
 msgid "Prev"
 msgstr "Vorige"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:758
+#: src/Controllers/JavaScriptMessagesController.php:761
 msgctxt "Next month"
 msgid "Next"
 msgstr "Volgende"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:760
+#: src/Controllers/JavaScriptMessagesController.php:763
 msgid "Today"
 msgstr "Vandaag"
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:766
 msgid "This field is required"
 msgstr "Dit veld is verplicht"
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:767
 msgid "Please fix this field"
 msgstr "Repareer a.u.b. dit veld"
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:768
 msgid "Please enter a valid email address"
 msgstr "A.u.b. een geldig e-mailadres invoeren"
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:769
 msgid "Please enter a valid URL"
 msgstr "A.u.b. een geldige URL ingeven"
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:770
 msgid "Please enter a valid date"
 msgstr "A.u.b. een geldige datum in geven"
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:771
 msgid "Please enter a valid date ( ISO )"
 msgstr "A.u.b. een valide datum (ISO) in geven"
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:772
 msgid "Please enter a valid number"
 msgstr "Vul a.u.b. een geldig nummer in"
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:773
 msgid "Please enter a valid credit card number"
 msgstr "Vul a.u.b, een geldig creditcardnummer in"
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:774
 msgid "Please enter only digits"
 msgstr "Vul a.u.b. alleen cijfers in"
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:775
 msgid "Please enter the same value again"
 msgstr "A,u,b, dezelfde waarde nogmaals in geven"
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:776
 msgid "Please enter no more than {0} characters"
 msgstr "Vul a.u,b, niet meer dan {0} tekens in"
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:777
 msgid "Please enter at least {0} characters"
 msgstr "Vul a.u,b, minstens {0} tekens in"
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:778
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr "Vul a.u.b. een waarde tussen {0} en {1} tekens lang in"
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:779
 msgid "Please enter a value between {0} and {1}"
 msgstr "Vul a.u,b. een waarde tussen {0} en {1} in"
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:780
 msgid "Please enter a value less than or equal to {0}"
 msgstr "Vul a.u.b. een waarde kleiner of gelijk aan {0} in"
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:781
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "Vul a.u.b. een waarde groter of gelijk aan {0} in"
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:782
 msgid "Please enter a valid date or time"
 msgstr "Vul a.u.b. een geldige datum of tijd in"
 
-#: src/Controllers/JavaScriptMessagesController.php:780
+#: src/Controllers/JavaScriptMessagesController.php:783
 msgid "Please enter a valid HEX input"
 msgstr "Vul a.u.b.een geldige waarde in HEX in"
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:782
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid "This column can not contain a 32 chars value"
 msgstr "Deze kolom kan geen 32-karakter waarde bevatten"
 
-#: src/Controllers/JavaScriptMessagesController.php:785
+#: src/Controllers/JavaScriptMessagesController.php:788
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
@@ -14547,38 +14579,38 @@ msgstr ""
 "Deze functies retourneren een binair resultaat; om inconsistente resultaten "
 "te voorkomen moet u deze opslaan in een BINARY, VARBINARY of BLOB kolom."
 
-#: src/Controllers/JavaScriptMessagesController.php:790
+#: src/Controllers/JavaScriptMessagesController.php:793
 msgid ""
 "The file being uploaded is probably larger than the maximum allowed size."
 msgstr "Het geüploade bestand is mogelijk groter dan de limiet toestaat."
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:795
 #, php-format
 msgid "%s of %s"
 msgstr "%s van %s"
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:796
 #, php-format
 msgid "%s/sec."
 msgstr "%s/sec."
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:797
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr "Ongeveer %MIN minuten en %SEC seconden resterend."
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:798
 msgid "About %SEC sec. remaining."
 msgstr "Nog ongeveer %SEC seconden resterend."
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid "The file is being processed, please be patient."
 msgstr "Het bestand wordt verwerkt, een ogenblik geduld."
 
-#: src/Controllers/JavaScriptMessagesController.php:797
+#: src/Controllers/JavaScriptMessagesController.php:800
 msgid "Uploading your import file…"
 msgstr "Uw te importeren bestand wordt geüpload…"
 
-#: src/Controllers/JavaScriptMessagesController.php:799
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -14601,7 +14633,7 @@ msgid "No such column"
 msgstr "Geen dergelijke kolom"
 
 #: src/Controllers/Normalization/GetColumnsController.php:35
-#: src/Normalization.php:230 src/Types.php:648
+#: src/Normalization.php:230 src/Types.php:650
 msgctxt "string types"
 msgid "String"
 msgstr "Tekenreeks"
@@ -14682,7 +14714,7 @@ msgstr "Het gebruikersaccount %s@2%s is succesvol vergrendeld."
 msgid "The account %s@%s has been successfully unlocked."
 msgstr "Het gebruikersaccount %s@%s is succesvol ontgrendeld."
 
-#: src/Controllers/Server/PrivilegesController.php:123
+#: src/Controllers/Server/PrivilegesController.php:125
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
@@ -16527,7 +16559,7 @@ msgstr "De trigger naam kan niet langer zijn dan %d tekens."
 msgid "The trigger name cannot end with a space character."
 msgstr "De triggernaam kan niet eindigen op een spatie."
 
-#: src/Import/Import.php:943
+#: src/Import/Import.php:944
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
@@ -16536,45 +16568,45 @@ msgstr ""
 "SQL-query's die transactionele tabellen bevatten, kunnen teruggedraaid "
 "worden."
 
-#: src/Import/Import.php:1160
+#: src/Import/Import.php:1161
 #, php-format
 msgid "Go to table: %s"
 msgstr "Ga naar tabel: %s"
 
-#: src/Import/Import.php:1168
+#: src/Import/Import.php:1169
 #, php-format
 msgid "Structure of %s"
 msgstr "Structuur van %s"
 
-#: src/Import/Import.php:1175 src/Import/Import.php:1224
+#: src/Import/Import.php:1176 src/Import/Import.php:1225
 #, php-format
 msgid "Edit settings for %s"
 msgstr "Instellingen voor %s wijzigen"
 
-#: src/Import/Import.php:1186
+#: src/Import/Import.php:1187
 #, php-format
 msgid "Go to view: %s"
 msgstr "Ga naar view: %s"
 
-#: src/Import/Import.php:1207
+#: src/Import/Import.php:1208
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr "De volgende structuren zijn aangemaakt of aangepast. Hier kunt u:"
 
-#: src/Import/Import.php:1209
+#: src/Import/Import.php:1210
 msgid "View a structure's contents by clicking on its name."
 msgstr "Bekijk de inhoud van een structuur door op de naam te klikken."
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1211
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr "Een instelling wijzigen door op \"Opties\" te klikken."
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1212
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "Klik op de \"Structuur\"-link om de structuur aan te passen."
 
-#: src/Import/Import.php:1218
+#: src/Import/Import.php:1219
 #, php-format
 msgid "Go to database: %s"
 msgstr "Ga naar database: %s"
@@ -16723,7 +16755,7 @@ msgstr "Nieuw"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:98
 msgid "Functions"
 msgstr "Functies"
 
@@ -16743,7 +16775,7 @@ msgstr "Uitklappen/samenvouwen"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:103
 msgid "Procedures"
 msgstr "Procedures"
 
@@ -17166,35 +17198,35 @@ msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 "U hebt tweeweg autorisatie ingeschakeld, bevestig a.u.b. uw aanmelding."
 
-#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
+#: src/Plugins/Export/ExportCsv.php:69 src/Plugins/Export/ExportToon.php:62
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "Kolommen gescheiden door:"
 
-#: src/Plugins/Export/ExportCsv.php:73
+#: src/Plugins/Export/ExportCsv.php:74
 #: src/Plugins/Import/AbstractImportCsv.php:42
 msgid "Columns enclosed with:"
 msgstr "Kolommen omsloten met:"
 
-#: src/Plugins/Export/ExportCsv.php:78
+#: src/Plugins/Export/ExportCsv.php:79
 #: src/Plugins/Import/AbstractImportCsv.php:49
 msgid "Columns escaped with:"
 msgstr "Kolommen omgezet met wisselteken:"
 
-#: src/Plugins/Export/ExportCsv.php:83
+#: src/Plugins/Export/ExportCsv.php:84
 #: src/Plugins/Import/AbstractImportCsv.php:56
 msgid "Lines terminated with:"
 msgstr "Regels beëindigd door:"
 
-#: src/Plugins/Export/ExportCsv.php:88 src/Plugins/Export/ExportExcel.php:70
+#: src/Plugins/Export/ExportCsv.php:89 src/Plugins/Export/ExportExcel.php:70
 #: src/Plugins/Export/ExportHtmlword.php:88
-#: src/Plugins/Export/ExportLatex.php:203 src/Plugins/Export/ExportOds.php:66
+#: src/Plugins/Export/ExportLatex.php:205 src/Plugins/Export/ExportOds.php:66
 #: src/Plugins/Export/ExportOdt.php:134
-#: src/Plugins/Export/ExportTexytext.php:91
+#: src/Plugins/Export/ExportTexytext.php:92
 msgid "Replace NULL with:"
 msgstr "Vervang NULL door:"
 
-#: src/Plugins/Export/ExportCsv.php:93 src/Plugins/Export/ExportExcel.php:75
+#: src/Plugins/Export/ExportCsv.php:94 src/Plugins/Export/ExportExcel.php:75
 msgid "Remove carriage return/line feed characters within columns"
 msgstr "Verwijder CRLF-tekens uit kolommen"
 
@@ -17203,33 +17235,33 @@ msgid "Excel edition:"
 msgstr "Excel-editie:"
 
 #: src/Plugins/Export/ExportHtmlword.php:82
-#: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:123
-#: src/Plugins/Export/ExportTexytext.php:80
-#: src/Plugins/Export/ExportXml.php:125
+#: src/Plugins/Export/ExportLatex.php:176 src/Plugins/Export/ExportOdt.php:123
+#: src/Plugins/Export/ExportTexytext.php:81
+#: src/Plugins/Export/ExportXml.php:126
 msgid "Data dump options"
 msgstr "Dataexport-opties"
 
 #: src/Plugins/Export/ExportHtmlword.php:169
 #: src/Plugins/Export/ExportOdt.php:212 src/Plugins/Export/ExportSql.php:2101
-#: src/Plugins/Export/ExportTexytext.php:138
+#: src/Plugins/Export/ExportTexytext.php:139
 msgid "Dumping data for table"
 msgstr "Gegevens worden geëxporteerd voor tabel"
 
 #: src/Plugins/Export/ExportHtmlword.php:441
 #: src/Plugins/Export/ExportOdt.php:561 src/Plugins/Export/ExportSql.php:1837
-#: src/Plugins/Export/ExportTexytext.php:397
+#: src/Plugins/Export/ExportTexytext.php:403
 msgid "Table structure for table"
 msgstr "Tabelstructuur voor tabel"
 
 #: src/Plugins/Export/ExportHtmlword.php:458
 #: src/Plugins/Export/ExportOdt.php:581 src/Plugins/Export/ExportSql.php:1903
-#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportTexytext.php:416
 msgid "Structure for view"
 msgstr "Structuur voor de view"
 
 #: src/Plugins/Export/ExportHtmlword.php:464
 #: src/Plugins/Export/ExportOdt.php:589 src/Plugins/Export/ExportSql.php:1946
-#: src/Plugins/Export/ExportTexytext.php:414
+#: src/Plugins/Export/ExportTexytext.php:420
 msgid "Stand-in structure for view"
 msgstr "Stand-in structuur voor view"
 
@@ -17242,84 +17274,84 @@ msgstr ""
 msgid "Output unicode characters unescaped"
 msgstr "Uitvoer met onbeschermde unicode lettertekens"
 
-#: src/Plugins/Export/ExportLatex.php:68
+#: src/Plugins/Export/ExportLatex.php:70
 msgid "Content of table @TABLE@"
 msgstr "Inhoud van tabel @TABLE@"
 
-#: src/Plugins/Export/ExportLatex.php:69
+#: src/Plugins/Export/ExportLatex.php:71
 msgid "(continued)"
 msgstr "(vervolgd)"
 
-#: src/Plugins/Export/ExportLatex.php:70
+#: src/Plugins/Export/ExportLatex.php:72
 msgid "Structure of table @TABLE@"
 msgstr "Structuur van de tabel @TABLE@"
 
-#: src/Plugins/Export/ExportLatex.php:123 src/Plugins/Export/ExportOdt.php:90
+#: src/Plugins/Export/ExportLatex.php:125 src/Plugins/Export/ExportOdt.php:90
 #: src/Plugins/Export/ExportSql.php:279
 msgid "Object creation options"
 msgstr "Object-aanmaakopties"
 
-#: src/Plugins/Export/ExportLatex.php:129
-#: src/Plugins/Export/ExportLatex.php:185
+#: src/Plugins/Export/ExportLatex.php:131
+#: src/Plugins/Export/ExportLatex.php:187
 msgid "Table caption:"
 msgstr "Tabeltitel:"
 
-#: src/Plugins/Export/ExportLatex.php:135
-#: src/Plugins/Export/ExportLatex.php:191
+#: src/Plugins/Export/ExportLatex.php:137
+#: src/Plugins/Export/ExportLatex.php:193
 msgid "Table caption (continued):"
 msgstr "Tabeltitel (vervolg):"
 
-#: src/Plugins/Export/ExportLatex.php:141
-#: src/Plugins/Export/ExportLatex.php:197
+#: src/Plugins/Export/ExportLatex.php:143
+#: src/Plugins/Export/ExportLatex.php:199
 msgid "Label key:"
 msgstr "Labelsleutel:"
 
-#: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:98
+#: src/Plugins/Export/ExportLatex.php:151 src/Plugins/Export/ExportOdt.php:98
 #: src/Plugins/Export/ExportSql.php:205
 msgid "Display foreign key relationships"
 msgstr "Toon vreemdesleutelrelaties"
 
-#: src/Plugins/Export/ExportLatex.php:156 src/Plugins/Export/ExportOdt.php:105
+#: src/Plugins/Export/ExportLatex.php:158 src/Plugins/Export/ExportOdt.php:105
 msgid "Display comments"
 msgstr "Toon opmerkingen"
 
-#: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:111
+#: src/Plugins/Export/ExportLatex.php:164 src/Plugins/Export/ExportOdt.php:111
 #: src/Plugins/Export/ExportSql.php:213
 msgid "Display media types"
 msgstr "Toon beschikbare media typen"
 
-#: src/Plugins/Export/ExportLatex.php:180
+#: src/Plugins/Export/ExportLatex.php:182
 msgid "Put columns names in the first row:"
 msgstr "Kolomnamen in de eerste regel plaatsen:"
 
-#: src/Plugins/Export/ExportLatex.php:230 src/Plugins/Export/ExportSql.php:760
-#: src/Plugins/Export/ExportXml.php:201
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportXml.php:202
 msgid "Generation Time:"
 msgstr "Gegenereerd op:"
 
-#: src/Plugins/Export/ExportLatex.php:233 src/Plugins/Export/ExportSql.php:766
-#: src/Plugins/Export/ExportXml.php:204
+#: src/Plugins/Export/ExportLatex.php:235 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportXml.php:205
 msgid "PHP Version:"
 msgstr "PHP-versie:"
 
-#: src/Plugins/Export/ExportLatex.php:286 src/Plugins/Export/ExportSql.php:1992
+#: src/Plugins/Export/ExportLatex.php:290 src/Plugins/Export/ExportSql.php:1992
 msgid "Data:"
 msgstr "Gegevens:"
 
-#: src/Plugins/Export/ExportLatex.php:435
+#: src/Plugins/Export/ExportLatex.php:445
 msgid "Structure:"
 msgstr "Structuur:"
 
-#: src/Plugins/Export/ExportMediawiki.php:77
+#: src/Plugins/Export/ExportMediawiki.php:78
 msgid "Export table names"
 msgstr "Tabelnamen exporteren"
 
-#: src/Plugins/Export/ExportMediawiki.php:84
+#: src/Plugins/Export/ExportMediawiki.php:85
 msgid "Export table headers"
 msgstr "Exporteer tabel kopregels"
 
 #: src/Plugins/Export/ExportOdt.php:213
-#: src/Plugins/Export/ExportTexytext.php:139
+#: src/Plugins/Export/ExportTexytext.php:140
 msgid "Dumping data for query result"
 msgstr "Gegevens worden geëxporteerd voor query resultaat"
 
@@ -17588,15 +17620,15 @@ msgstr ""
 "Databasesysteem of oudere MySQL-server om uitvoercompatibiliteit mee te "
 "maximaliseren:"
 
-#: src/Plugins/Export/ExportToon.php:68
+#: src/Plugins/Export/ExportToon.php:67
 msgid "Indentation:"
 msgstr "Inspringen:"
 
-#: src/Plugins/Export/ExportXml.php:86
+#: src/Plugins/Export/ExportXml.php:87
 msgid "Object creation options (all are recommended)"
 msgstr "Object-aanmaakopties (alle zijn aangeraden)"
 
-#: src/Plugins/Export/ExportXml.php:130
+#: src/Plugins/Export/ExportXml.php:131
 msgid "Export contents"
 msgstr "Exporteerinhoud"
 
@@ -18226,7 +18258,7 @@ msgid "Error 405! Request method not allowed."
 msgstr "Fout 405! Methode voor aanvragen niet toegestaan."
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3161
+#: src/Server/Privileges.php:3155
 msgid "Native MySQL authentication"
 msgstr "MySQL authenticatie"
 
@@ -18273,43 +18305,43 @@ msgstr "U heeft de rechten ingetrokken voor %s."
 msgid "Revoke"
 msgstr "Ongedaan maken"
 
-#: src/Server/Privileges.php:1901
+#: src/Server/Privileges.php:1902
 msgid "No users selected for deleting!"
 msgstr "Geen gebruikers geselecteerd om te verwijderen!"
 
-#: src/Server/Privileges.php:1904
+#: src/Server/Privileges.php:1905
 msgid "Reloading the privileges"
 msgstr "De rechten worden opnieuw geladen"
 
-#: src/Server/Privileges.php:1929
+#: src/Server/Privileges.php:1930
 msgid "The selected users have been deleted successfully."
 msgstr "De geselecteerde gebruikers zijn met succes verwijderd."
 
-#: src/Server/Privileges.php:2003
+#: src/Server/Privileges.php:2004
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "U heeft de rechten aangepast voor %s."
 
-#: src/Server/Privileges.php:2161
+#: src/Server/Privileges.php:2154
 #, php-format
 msgid "Deleting %s"
 msgstr "Verwijderen van %s"
 
-#: src/Server/Privileges.php:2191
+#: src/Server/Privileges.php:2184
 msgid "The privileges were reloaded successfully."
 msgstr "De rechten zijn succesvol opnieuw geladen."
 
-#: src/Server/Privileges.php:2256
+#: src/Server/Privileges.php:2250
 #, php-format
 msgid "The user %s already exists!"
 msgstr "De gebruiker %s bestaat al!"
 
-#: src/Server/Privileges.php:2409
+#: src/Server/Privileges.php:2403
 #, php-format
 msgid "Privileges for %s"
 msgstr "Rechten voor %s"
 
-#: src/Server/Privileges.php:2495
+#: src/Server/Privileges.php:2489
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -18323,7 +18355,7 @@ msgstr ""
 "dit het geval zijn dan moet men %s de rechtentabel vernieuwen %s voordat men "
 "verder gaat."
 
-#: src/Server/Privileges.php:2511
+#: src/Server/Privileges.php:2505
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -18337,11 +18369,11 @@ msgstr ""
 "aangebracht. Mocht dit het geval zijn dan moet de gebruikersrechten opnieuw "
 "geladen worden, maar op dit moment heeft u niet het RELOAD gebruikersrecht."
 
-#: src/Server/Privileges.php:2799
+#: src/Server/Privileges.php:2793
 msgid "You have added a new user."
 msgstr "U heeft een nieuwe gebruiker toegevoegd."
 
-#: src/Server/Privileges.php:3253
+#: src/Server/Privileges.php:3247
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -19038,17 +19070,23 @@ msgstr ""
 msgid "128-bit UUID (Universally Unique Identifier)"
 msgstr "128-bit UUID (Universele Unieke Identificatie)"
 
-#: src/Types.php:602
+#: src/Types.php:293
+msgid ""
+"Stores vector data optimized for operations such as similarity search and "
+"machine learning applications"
+msgstr ""
+
+#: src/Types.php:604
 msgctxt "numeric types"
 msgid "Numeric"
 msgstr "Numeriek"
 
-#: src/Types.php:620
+#: src/Types.php:622
 msgctxt "date and time types"
 msgid "Date and time"
 msgstr "Datum en tijd"
 
-#: src/Types.php:650
+#: src/Types.php:652
 msgctxt "spatial types"
 msgid "Spatial"
 msgstr "Ruimtelijk"
@@ -19092,6 +19130,9 @@ msgstr "Fout in het ZIP-archief:"
 #: src/ZipExtension.php:74
 msgid "No files found inside ZIP archive!"
 msgstr "Geen bestanden gevonden in ZIP-archief!"
+
+#~ msgid "The fullscreen request was denied."
+#~ msgstr "Het verzoek om volledig scherm is geweigerd."
 
 #~ msgid "Exporting a raw query is not supported for this export method."
 #~ msgstr ""

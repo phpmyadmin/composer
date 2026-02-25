@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-22 00:36+0000\n"
+"POT-Creation-Date: 2026-02-25 13:54+0000\n"
 "PO-Revision-Date: 2022-02-15 16:20+0000\n"
 "Last-Translator: Maurício Meneghini Fauth <mauricio@fauth.dev>\n"
 "Language-Team: Albanian <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -286,7 +286,7 @@ msgstr "Kolona(t)"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
-#: src/Controllers/Server/PrivilegesController.php:305
+#: src/Controllers/Server/PrivilegesController.php:314
 #: src/Normalization.php:235 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -493,11 +493,11 @@ msgstr "Është një çelës i huaj."
 #: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
-#: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
+#: src/Plugins/Export/ExportLatex.php:465 src/Plugins/Export/ExportOdt.php:324
 #: src/Plugins/Export/ExportOdt.php:395
-#: src/Plugins/Export/ExportTexytext.php:236
-#: src/Plugins/Export/ExportTexytext.php:296
-#: src/Plugins/Export/Helpers/Pdf.php:458
+#: src/Plugins/Export/ExportTexytext.php:242
+#: src/Plugins/Export/ExportTexytext.php:302
+#: src/Plugins/Export/Helpers/Pdf.php:469
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:602
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:624
 msgid "Column"
@@ -596,7 +596,7 @@ msgstr "Grup nyjë"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
 #: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
@@ -617,8 +617,8 @@ msgstr "Struktura"
 #: resources/templates/triggers/list.twig:47
 #: src/Plugins/Export/ExportHtmlword.php:396
 #: src/Plugins/Export/ExportOdt.php:503
-#: src/Plugins/Export/ExportTexytext.php:365
-#: src/Plugins/Export/Helpers/Pdf.php:300
+#: src/Plugins/Export/ExportTexytext.php:371
+#: src/Plugins/Export/Helpers/Pdf.php:311
 msgid "Name"
 msgstr "Emri"
 
@@ -645,11 +645,11 @@ msgstr "Emri"
 #: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
-#: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
+#: src/Plugins/Export/ExportLatex.php:466 src/Plugins/Export/ExportOdt.php:327
 #: src/Plugins/Export/ExportOdt.php:398
-#: src/Plugins/Export/ExportTexytext.php:237
-#: src/Plugins/Export/ExportTexytext.php:297
-#: src/Plugins/Export/Helpers/Pdf.php:460
+#: src/Plugins/Export/ExportTexytext.php:243
+#: src/Plugins/Export/ExportTexytext.php:303
+#: src/Plugins/Export/Helpers/Pdf.php:471
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:603
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:625
 msgid "Type"
@@ -685,11 +685,11 @@ msgstr ""
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:10
 #: src/Plugins/Export/ExportHtmlword.php:234
 #: src/Plugins/Export/ExportHtmlword.php:305
-#: src/Plugins/Export/ExportLatex.php:458 src/Plugins/Export/ExportOdt.php:333
+#: src/Plugins/Export/ExportLatex.php:468 src/Plugins/Export/ExportOdt.php:333
 #: src/Plugins/Export/ExportOdt.php:404
-#: src/Plugins/Export/ExportTexytext.php:239
-#: src/Plugins/Export/ExportTexytext.php:299
-#: src/Plugins/Export/Helpers/Pdf.php:464
+#: src/Plugins/Export/ExportTexytext.php:245
+#: src/Plugins/Export/ExportTexytext.php:305
+#: src/Plugins/Export/Helpers/Pdf.php:475
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:606
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:628
 msgid "Default"
@@ -750,11 +750,11 @@ msgstr "Atributet"
 #: resources/templates/table/zoom_search/result_form.twig:34
 #: src/Plugins/Export/ExportHtmlword.php:231
 #: src/Plugins/Export/ExportHtmlword.php:302
-#: src/Plugins/Export/ExportLatex.php:457 src/Plugins/Export/ExportOdt.php:330
+#: src/Plugins/Export/ExportLatex.php:467 src/Plugins/Export/ExportOdt.php:330
 #: src/Plugins/Export/ExportOdt.php:401
-#: src/Plugins/Export/ExportTexytext.php:238
-#: src/Plugins/Export/ExportTexytext.php:298
-#: src/Plugins/Export/Helpers/Pdf.php:462
+#: src/Plugins/Export/ExportTexytext.php:244
+#: src/Plugins/Export/ExportTexytext.php:304
+#: src/Plugins/Export/Helpers/Pdf.php:473
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
@@ -776,9 +776,9 @@ msgstr "Përshtat privilegjet"
 #: resources/templates/table/structure/display_structure.twig:28
 #: src/Config/Descriptions.php:660 src/Config/Descriptions.php:675
 #: src/Config/Descriptions.php:711 src/Plugins/Export/ExportHtmlword.php:315
-#: src/Plugins/Export/ExportLatex.php:464 src/Plugins/Export/ExportOdt.php:414
-#: src/Plugins/Export/ExportTexytext.php:305
-#: src/Plugins/Export/Helpers/Pdf.php:481
+#: src/Plugins/Export/ExportLatex.php:474 src/Plugins/Export/ExportOdt.php:414
+#: src/Plugins/Export/ExportTexytext.php:311
+#: src/Plugins/Export/Helpers/Pdf.php:492
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:618
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:631
 msgid "Comments"
@@ -797,8 +797,8 @@ msgstr "Lëviz kolonën"
 #: src/Config/Descriptions.php:664 src/Config/Descriptions.php:676
 #: src/Config/Descriptions.php:714 src/Plugins/Export/ExportHtmlword.php:322
 #: src/Plugins/Export/ExportOdt.php:421
-#: src/Plugins/Export/ExportTexytext.php:310
-#: src/Plugins/Export/Helpers/Pdf.php:489
+#: src/Plugins/Export/ExportTexytext.php:316
+#: src/Plugins/Export/Helpers/Pdf.php:500
 #, fuzzy
 #| msgid "MIME type"
 msgid "Media type"
@@ -936,8 +936,8 @@ msgstr "Pasivizuar"
 #: src/Controllers/Table/Structure/PrimaryController.php:101
 #: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "Yes"
 msgstr "Po"
@@ -972,8 +972,8 @@ msgstr "Po"
 #: src/Controllers/JavaScriptMessagesController.php:343
 #: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
 #: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "No"
 msgstr "Jo"
@@ -1078,8 +1078,8 @@ msgstr "Fshij"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
-#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:117 src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1588 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "Databaza"
 
@@ -1106,18 +1106,18 @@ msgstr "Historia"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1157 src/Import/Import.php:1215
-#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
+#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:57
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
-#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:87
-#: src/Plugins/Export/ExportMediawiki.php:49
+#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:89
+#: src/Plugins/Export/ExportMediawiki.php:50
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
-#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
+#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:47
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56
-#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
+#: src/Plugins/Export/ExportTexytext.php:57
+#: src/Plugins/Export/ExportToon.php:50 src/Plugins/Export/ExportXml.php:69
+#: src/Plugins/Export/ExportYaml.php:46 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1468,9 +1468,9 @@ msgstr "Printo"
 
 #: resources/templates/database/data_dictionary/index.twig:28
 #: src/Plugins/Export/ExportHtmlword.php:309
-#: src/Plugins/Export/ExportLatex.php:460 src/Plugins/Export/ExportOdt.php:408
-#: src/Plugins/Export/ExportTexytext.php:301
-#: src/Plugins/Export/Helpers/Pdf.php:473
+#: src/Plugins/Export/ExportLatex.php:470 src/Plugins/Export/ExportOdt.php:408
+#: src/Plugins/Export/ExportTexytext.php:307
+#: src/Plugins/Export/Helpers/Pdf.php:484
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:608
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:630
 msgid "Links to"
@@ -1850,8 +1850,8 @@ msgstr "Fund"
 #: resources/templates/triggers/editor_form.twig:62
 #: src/Plugins/Export/ExportHtmlword.php:399
 #: src/Plugins/Export/ExportOdt.php:512
-#: src/Plugins/Export/ExportTexytext.php:368
-#: src/Plugins/Export/Helpers/Pdf.php:306
+#: src/Plugins/Export/ExportTexytext.php:374
+#: src/Plugins/Export/Helpers/Pdf.php:317
 msgid "Definition"
 msgstr "Përkufizimi"
 
@@ -1879,7 +1879,7 @@ msgstr "Përcaktuesi"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
 #: src/Util.php:1385
 msgid "Events"
 msgstr "Ngjarjet"
@@ -2069,7 +2069,7 @@ msgstr "Tabelat:"
 #: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
-#: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
+#: src/Plugins/Export/ExportXml.php:108 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "Tabela"
 
@@ -2383,7 +2383,7 @@ msgstr "Emri i pritësit"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
-#: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
+#: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
 #: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "Privilegjet"
@@ -2433,7 +2433,7 @@ msgstr "Redakto privilegjet"
 
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2079
+#: src/Server/Privileges.php:2077
 msgid "No user found."
 msgstr "Nuk gjendet asnjë përdorues."
 
@@ -2842,8 +2842,8 @@ msgstr ""
 "sigurtë, qe doni te vazhdoni?"
 
 #: resources/templates/database/structure/copy_form.twig:5
-#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:251
-#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:356
+#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:253
+#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:357
 #: src/Plugins/Export/Helpers/Pdf.php:146
 msgid "Database:"
 msgstr "Databaza:"
@@ -2915,15 +2915,15 @@ msgstr "Shfaqën krijo pyetsorët"
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
-#: src/Server/Privileges.php:1593
+#: src/Plugins/Export/ExportXml.php:409 src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1594
 msgid "Table"
 msgstr "Tabela"
 
 #: resources/templates/database/structure/show_create.twig:30
 #: src/Navigation/Nodes/NodeViewContainer.php:23
 #: src/Navigation/Nodes/NodeViewContainer.php:25
-#: src/Plugins/Export/ExportXml.php:117
+#: src/Plugins/Export/ExportXml.php:118
 msgid "Views"
 msgstr "Shfaqje"
 
@@ -3699,8 +3699,8 @@ msgid "Server connection:"
 msgstr "Lidhja e serverit:"
 
 #: resources/templates/home/index.twig:198
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:764
-#: src/Plugins/Export/ExportXml.php:203
+#: src/Plugins/Export/ExportLatex.php:234 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportXml.php:204
 msgid "Server version:"
 msgstr "Versioni i serverit:"
 
@@ -5043,7 +5043,7 @@ msgstr "Llogaria e përdoruesit"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
+#: src/Server/Privileges.php:1598 src/Server/Privileges.php:1600
 msgid "Routine"
 msgstr "Rutina"
 
@@ -5057,7 +5057,7 @@ msgstr ""
 "cilën keni hyrë aktualisht."
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1598
+#: src/Server/Privileges.php:1599
 msgid "Routine-specific privileges"
 msgstr "Privilegjet specifike të rutinës"
 
@@ -5208,7 +5208,7 @@ msgstr "Redakto grupin e përdoruesit"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1593
 msgid "Table-specific privileges"
 msgstr "Privilegjet specifike të tabelës"
 
@@ -5379,7 +5379,7 @@ msgid "Global privileges"
 msgstr "Privilegje globale"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1587
 msgid "Database-specific privileges"
 msgstr "Privilegjet specifike të databazës"
 
@@ -5694,8 +5694,8 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:224 src/Plugins/Export/ExportSql.php:753
-#: src/Plugins/Export/ExportXml.php:195
+#: src/Plugins/Export/ExportLatex.php:226 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportXml.php:196
 msgid "Host:"
 msgstr "Pritësi (host):"
 
@@ -6652,7 +6652,7 @@ msgid "No users were found belonging to this user group."
 msgstr "Nuk gjenden përdorues, që i përkasin këtij grupi të përdoruesve."
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:432
+#: src/Controllers/Server/PrivilegesController.php:442
 #: src/Server/Status/Processes.php:101
 msgid "User"
 msgstr "Përdoruesi"
@@ -6819,8 +6819,8 @@ msgstr "Gjendja"
 #: src/Controllers/JavaScriptMessagesController.php:276
 #: src/Plugins/Export/ExportHtmlword.php:397
 #: src/Plugins/Export/ExportOdt.php:506
-#: src/Plugins/Export/ExportTexytext.php:366
-#: src/Plugins/Export/Helpers/Pdf.php:302 src/Server/Status/Processes.php:105
+#: src/Plugins/Export/ExportTexytext.php:372
+#: src/Plugins/Export/Helpers/Pdf.php:313 src/Server/Status/Processes.php:105
 msgid "Time"
 msgstr "Koha"
 
@@ -7881,8 +7881,8 @@ msgstr "Koha"
 #: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
-#: src/Plugins/Export/ExportTexytext.php:367
-#: src/Plugins/Export/Helpers/Pdf.php:304
+#: src/Plugins/Export/ExportTexytext.php:373
+#: src/Plugins/Export/Helpers/Pdf.php:315
 msgid "Event"
 msgstr "Ngjarje"
 
@@ -7898,8 +7898,8 @@ msgstr "Eksporti i shkrehësit %s"
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
-#: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr "Shkrehësit"
 
@@ -9667,7 +9667,7 @@ msgid "Closed"
 msgstr "Mbyllur"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:725
 #, fuzzy
 #| msgid "Monday"
 msgctxt "Week day name"
@@ -9675,7 +9675,7 @@ msgid "Monday"
 msgstr "E hënë"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:726
 #, fuzzy
 #| msgid "Tuesday"
 msgctxt "Week day name"
@@ -9683,7 +9683,7 @@ msgid "Tuesday"
 msgstr "E martë"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:727
 #, fuzzy
 #| msgid "Wednesday"
 msgctxt "Week day name"
@@ -9691,7 +9691,7 @@ msgid "Wednesday"
 msgstr "E mërkurë"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:728
 #, fuzzy
 #| msgid "Thursday"
 msgctxt "Week day name"
@@ -9699,7 +9699,7 @@ msgid "Thursday"
 msgstr "E enjte"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:729
 #, fuzzy
 #| msgid "Friday"
 msgctxt "Week day name"
@@ -9707,7 +9707,7 @@ msgid "Friday"
 msgstr "E premte"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:727
+#: src/Controllers/JavaScriptMessagesController.php:730
 #, fuzzy
 #| msgid "Saturday"
 msgctxt "Week day name"
@@ -9715,7 +9715,7 @@ msgid "Saturday"
 msgstr "E shtunë"
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:724
 #, fuzzy
 #| msgid "Sunday"
 msgctxt "Week day name"
@@ -9749,33 +9749,33 @@ msgstr "Pasivizo"
 #: src/Config/ConfigFile.php:664 src/Config/ConfigFile.php:716
 #: src/Config/ConfigFile.php:728 src/Config/ConfigFile.php:736
 #: src/Config/ConfigFile.php:741 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure"
 msgstr "strukturën"
 
 #: src/Config/ConfigFile.php:665 src/Config/ConfigFile.php:717
 #: src/Config/ConfigFile.php:729 src/Config/ConfigFile.php:737
 #: src/Config/ConfigFile.php:742 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "data"
 msgstr "të dhënat"
 
 #: src/Config/ConfigFile.php:666 src/Config/ConfigFile.php:718
 #: src/Config/ConfigFile.php:730 src/Config/ConfigFile.php:738
 #: src/Config/ConfigFile.php:743 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure and data"
 msgstr "strukturën dhe të dhënat"
 
@@ -11287,11 +11287,11 @@ msgstr "Kompresim"
 #: src/Config/Descriptions.php:640 src/Config/Descriptions.php:647
 #: src/Config/Descriptions.php:655 src/Config/Descriptions.php:659
 #: src/Config/Descriptions.php:672 src/Config/Descriptions.php:674
-#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:98
+#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:99
 #: src/Plugins/Export/ExportExcel.php:80
 #: src/Plugins/Export/ExportHtmlword.php:93 src/Plugins/Export/ExportOds.php:71
 #: src/Plugins/Export/ExportOdt.php:129
-#: src/Plugins/Export/ExportTexytext.php:86
+#: src/Plugins/Export/ExportTexytext.php:87
 msgid "Put columns names in the first row"
 msgstr "Vendos emrat e kolonave në radhë të parë"
 
@@ -11345,16 +11345,16 @@ msgstr "Modeli i emrit të tabelës"
 #: src/Config/Descriptions.php:657 src/Config/Descriptions.php:670
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:717
 #: src/Config/Descriptions.php:723 src/Plugins/Export/ExportHtmlword.php:68
-#: src/Plugins/Export/ExportLatex.php:108
-#: src/Plugins/Export/ExportMediawiki.php:59
-#: src/Plugins/Export/ExportMediawiki.php:65
+#: src/Plugins/Export/ExportLatex.php:110
+#: src/Plugins/Export/ExportMediawiki.php:60
+#: src/Plugins/Export/ExportMediawiki.php:66
 #: src/Plugins/Export/ExportOdt.php:75 src/Plugins/Export/ExportPdf.php:76
 #: src/Plugins/Export/ExportSql.php:263
-#: src/Plugins/Export/ExportTexytext.php:66
+#: src/Plugins/Export/ExportTexytext.php:67
 msgid "Dump table"
 msgstr "Zbraz tabelën"
 
-#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:99
+#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:101
 msgid "Include table caption"
 msgstr "Përfshij kokat e tabelës"
 
@@ -12311,7 +12311,7 @@ msgid "Missing data for %s"
 msgstr "Mungojnë të dhëna për %s"
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:808
 msgid "Incorrect value!"
 msgstr "Vlerë jokorrekte!"
 
@@ -12645,22 +12645,22 @@ msgid "Incorrect IP address: %s"
 msgstr "Adresë jokorrekte IP: %s"
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:807
 msgid "Not a valid port number!"
 msgstr "Nuk është një numër i vlefshëm porte!"
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:805
 msgid "Not a positive number!"
 msgstr "Nuk është një numër pozitiv!"
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:806
 msgid "Not a non-negative number!"
 msgstr "Nuk është një numër jo-negativ!"
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:806
+#: src/Controllers/JavaScriptMessagesController.php:809
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr "Vlera duhet të jetë e barabartë ose më e ulët se %s!"
@@ -13113,7 +13113,22 @@ msgid ""
 "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgstr ""
 
-#: src/Controllers/HomeController.php:353
+#: src/Controllers/HomeController.php:356
+msgid ""
+"The configuration file needs a valid key for query encryption. A temporary "
+"key was automatically generated for you. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+
+#: src/Controllers/HomeController.php:366
+#, php-format
+msgid ""
+"The query encryption key in the configuration file is longer than necessary. "
+"It should only be %d bytes long. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+
+#: src/Controllers/HomeController.php:384
 msgid ""
 "Directory [code]config[/code], which is used by the setup script, still "
 "exists in your phpMyAdmin directory. It is strongly recommended to remove it "
@@ -13126,7 +13141,7 @@ msgstr ""
 "tuaj mund të rrezikohet nga njerëz të paautorizuar që mund të shkarkojnë "
 "konfigurimin tuaj."
 
-#: src/Controllers/HomeController.php:374
+#: src/Controllers/HomeController.php:405
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
@@ -13135,7 +13150,7 @@ msgstr ""
 "Serveri po punon me Suhosin. Ju lutem, refero %sdokumentacionin%s për "
 "çështje të mundshme."
 
-#: src/Controllers/HomeController.php:388
+#: src/Controllers/HomeController.php:419
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
@@ -13144,14 +13159,14 @@ msgstr ""
 "$cfg['TempDir'] (%s) nuk është i arritshëm. phpMyAdmin nuk është në gjendje "
 "të cache templates dhe do të jetë i ngadalshëm për shkak të kësaj."
 
-#: src/Controllers/HomeController.php:405
+#: src/Controllers/HomeController.php:436
 msgid ""
 "The [code]HTTP_HOST[/code] variable is missing, which might cause phpMyAdmin "
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
 "possible issues."
 msgstr ""
 
-#: src/Controllers/HomeController.php:458
+#: src/Controllers/HomeController.php:489
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
@@ -13162,7 +13177,7 @@ msgstr ""
 "është në gjendje të ndajë vargjet si duhet dhe kjo mund të rezultojë në "
 "rezultate të papritura."
 
-#: src/Controllers/HomeController.php:476
+#: src/Controllers/HomeController.php:507
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
@@ -14116,7 +14131,7 @@ msgstr "Hapi i dytë i normalizimit (2NF)"
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:754
+#: src/Controllers/JavaScriptMessagesController.php:757
 #: src/Normalization.php:349
 msgid "Done"
 msgstr "U krye"
@@ -14785,277 +14800,279 @@ msgstr "Tabela %s ekziston ndërkohë!"
 msgid "Hide"
 msgstr "Fsheh"
 
-#: src/Controllers/JavaScriptMessagesController.php:695
-msgid "The fullscreen request was denied."
+#: src/Controllers/JavaScriptMessagesController.php:696
+msgid ""
+"The fullscreen request was denied because the Fullscreen API is disabled by "
+"user preference in the browser."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:700
 #, fuzzy
 #| msgid "January"
 msgctxt "Month name"
 msgid "January"
 msgstr "Janar"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:701
 #, fuzzy
 #| msgid "February"
 msgctxt "Month name"
 msgid "February"
 msgstr "Shkurt"
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:702
 #, fuzzy
 #| msgid "March"
 msgctxt "Month name"
 msgid "March"
 msgstr "Mars"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:703
 #, fuzzy
 #| msgid "April"
 msgctxt "Month name"
 msgid "April"
 msgstr "Prill"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:704
 #, fuzzy
 #| msgid "May"
 msgctxt "Month name"
 msgid "May"
 msgstr "Maj"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:705
 #, fuzzy
 #| msgid "June"
 msgctxt "Month name"
 msgid "June"
 msgstr "June"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:706
 #, fuzzy
 #| msgid "July"
 msgctxt "Month name"
 msgid "July"
 msgstr "Korrik"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:707
 #, fuzzy
 #| msgid "August"
 msgctxt "Month name"
 msgid "August"
 msgstr "Gusht"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:708
 #, fuzzy
 #| msgid "September"
 msgctxt "Month name"
 msgid "September"
 msgstr "Shtator"
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:709
 #, fuzzy
 #| msgid "October"
 msgctxt "Month name"
 msgid "October"
 msgstr "Tetor"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:710
 #, fuzzy
 #| msgid "November"
 msgctxt "Month name"
 msgid "November"
 msgstr "Nëntor"
 
-#: src/Controllers/JavaScriptMessagesController.php:708
+#: src/Controllers/JavaScriptMessagesController.php:711
 #, fuzzy
 #| msgid "December"
 msgctxt "Month name"
 msgid "December"
 msgstr "Dhjetor"
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
 #, fuzzy
 #| msgid "Jan"
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "Jan"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
 #, fuzzy
 #| msgid "Feb"
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "Shk"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "Mar"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "Pri"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
 #, fuzzy
 #| msgid "May"
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "Maj"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "Jun"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "Kor"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "Gus"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
 #, fuzzy
 #| msgid "Sep"
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "Sht"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "Tet"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
 #, fuzzy
 #| msgid "Nov"
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "Nën"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
 #, fuzzy
 #| msgid "Dec"
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "Dhj"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "Die"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "Hën"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "Mar"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "Mër"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "Enj"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "Pre"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "Sht"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:738
 #, fuzzy
 #| msgid "Su"
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "Di"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:739
 #, fuzzy
 #| msgid "Mo"
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "Hë"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:740
 #, fuzzy
 #| msgid "Tu"
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "Ma"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:741
 #, fuzzy
 #| msgid "We"
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "Më"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:742
 #, fuzzy
 #| msgid "Th"
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "Enj"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:743
 #, fuzzy
 #| msgid "Fr"
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "Pr"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:744
 #, fuzzy
 #| msgid "Sa"
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "Sh"
 
-#: src/Controllers/JavaScriptMessagesController.php:742
+#: src/Controllers/JavaScriptMessagesController.php:745
 #, fuzzy
 #| msgid "Wk"
 msgctxt "Column header for week of the year in calendar"
@@ -15063,13 +15080,13 @@ msgid "Wk"
 msgstr "Wk"
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:747
 #, fuzzy
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "calendar-month-year"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:748
 #, fuzzy
 #| msgctxt "Year suffix"
 #| msgid "none"
@@ -15077,49 +15094,49 @@ msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "asnjë"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:749
 #, fuzzy
 #| msgid "Time"
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "Koha"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:750
 #, fuzzy
 #| msgid "Hour"
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr "Orë"
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:751
 #, fuzzy
 #| msgid "Minute"
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "Minutë"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:752
 #, fuzzy
 #| msgid "Second"
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "Dytësor"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:753
 #, fuzzy
 #| msgid "seconds"
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "në sekondë"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:754
 #, fuzzy
 #| msgid "per second"
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "për sekondë"
 
-#: src/Controllers/JavaScriptMessagesController.php:752
+#: src/Controllers/JavaScriptMessagesController.php:755
 #, fuzzy
 #| msgctxt "Chart type"
 #| msgid "Timeline"
@@ -15128,7 +15145,7 @@ msgid "Time zone"
 msgstr "Linjë kohore"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:756
+#: src/Controllers/JavaScriptMessagesController.php:759
 #, fuzzy
 #| msgctxt "Previous month"
 #| msgid "Prev"
@@ -15137,7 +15154,7 @@ msgid "Prev"
 msgstr "Para"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:758
+#: src/Controllers/JavaScriptMessagesController.php:761
 #, fuzzy
 #| msgctxt "Next month"
 #| msgid "Next"
@@ -15146,94 +15163,94 @@ msgid "Next"
 msgstr "Tjetër"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:760
+#: src/Controllers/JavaScriptMessagesController.php:763
 msgid "Today"
 msgstr "Sot"
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:766
 msgid "This field is required"
 msgstr "Kjo fushë kërkohet"
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:767
 msgid "Please fix this field"
 msgstr "Ju lutem, fiksoje këtë fushë"
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:768
 msgid "Please enter a valid email address"
 msgstr "Ju lutem, fut një adresë të vlefshme email"
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:769
 msgid "Please enter a valid URL"
 msgstr "Ju lutem, fut një URL të vlefshme"
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:770
 msgid "Please enter a valid date"
 msgstr "Ju lutem, fut një datë të vlefshme"
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:771
 msgid "Please enter a valid date ( ISO )"
 msgstr "Ju lutem, fut një datë të vlefshme ( ISO )"
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:772
 msgid "Please enter a valid number"
 msgstr "Ju lutem, fut një numër të vlefshëm"
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:773
 msgid "Please enter a valid credit card number"
 msgstr "Ju lutem, fut një numër të vlefshëm karte krediti"
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:774
 msgid "Please enter only digits"
 msgstr "Ju lutem, fut vetëm numra"
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:775
 msgid "Please enter the same value again"
 msgstr "Ju lutem, fut të njëjtën vlerë përsëri"
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:776
 msgid "Please enter no more than {0} characters"
 msgstr "Ju lutem, mos fut më shumë se {0} karaktere"
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:777
 msgid "Please enter at least {0} characters"
 msgstr "Ju lutem, fut së paku {0} karaktere"
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:778
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr "Ju lutem, fut një vlerë të gjatë ndërmjet {0} dhe {1} karaktere"
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:779
 msgid "Please enter a value between {0} and {1}"
 msgstr "Ju lutem, fut një vlerë ndërmjet {0} dhe {1}"
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:780
 msgid "Please enter a value less than or equal to {0}"
 msgstr "Ju lutem, fut një vlerë më të vogël ose të barabartë me {0}"
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:781
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "Ju lutem, fut një vlerë më të madhe ose të barabartë me {0}"
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:782
 msgid "Please enter a valid date or time"
 msgstr "Ju lutem, fut një datë ose kohë të vlefshme"
 
-#: src/Controllers/JavaScriptMessagesController.php:780
+#: src/Controllers/JavaScriptMessagesController.php:783
 msgid "Please enter a valid HEX input"
 msgstr "Ju lutem, fut një hyrje HEX të vlefshëm"
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:782
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid "This column can not contain a 32 chars value"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:785
+#: src/Controllers/JavaScriptMessagesController.php:788
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:790
+#: src/Controllers/JavaScriptMessagesController.php:793
 #, fuzzy
 #| msgid ""
 #| "The file being uploaded is probably larger than the maximum allowed size "
@@ -15246,33 +15263,33 @@ msgstr ""
 "lejuar, ose kjo është një defekt i njohur në bazën webkit të shfletuesve  "
 "(Safari, Google Chrome, Arora etj.)."
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:795
 #, php-format
 msgid "%s of %s"
 msgstr "%s nga %s"
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:796
 #, php-format
 msgid "%s/sec."
 msgstr "%s/sek."
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:797
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr "Rreth %MIN min. %SEC sek. kanë mbetur."
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:798
 msgid "About %SEC sec. remaining."
 msgstr "Rreth %SEC sek. kanë mbetur."
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid "The file is being processed, please be patient."
 msgstr "Fili po proçesohet, ju lutem, tregoni durim."
 
-#: src/Controllers/JavaScriptMessagesController.php:797
+#: src/Controllers/JavaScriptMessagesController.php:800
 msgid "Uploading your import file…"
 msgstr "Ngarkon filin tuaj të importit…"
 
-#: src/Controllers/JavaScriptMessagesController.php:799
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -15295,7 +15312,7 @@ msgid "No such column"
 msgstr "Jo kolonë të tillë"
 
 #: src/Controllers/Normalization/GetColumnsController.php:35
-#: src/Normalization.php:230 src/Types.php:648
+#: src/Normalization.php:230 src/Types.php:650
 msgctxt "string types"
 msgid "String"
 msgstr "Varg (string)"
@@ -15382,7 +15399,7 @@ msgstr "Kolonat kanë lëvizur me sukses."
 msgid "The account %s@%s has been successfully unlocked."
 msgstr "Kolonat kanë lëvizur me sukses."
 
-#: src/Controllers/Server/PrivilegesController.php:123
+#: src/Controllers/Server/PrivilegesController.php:125
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
@@ -17272,7 +17289,7 @@ msgstr "Ju lutem, mos fut më shumë se {0} karaktere"
 msgid "The trigger name cannot end with a space character."
 msgstr "Fjalët ndahen me një karakter hapësire (\" \")."
 
-#: src/Import/Import.php:943
+#: src/Import/Import.php:944
 #, fuzzy
 #| msgid ""
 #| "Only INSERT, UPDATE, DELETE and REPLACE SQL queries containing "
@@ -17284,47 +17301,47 @@ msgstr ""
 "Vetëm pyetsorët INSERT, UPDATE, DELETE dhe REPLACE SQL, që përmbajnë tabela "
 "të makinës transaksionale, mund të rikthehen."
 
-#: src/Import/Import.php:1160
+#: src/Import/Import.php:1161
 #, php-format
 msgid "Go to table: %s"
 msgstr "Shko tek tabela: %s"
 
-#: src/Import/Import.php:1168
+#: src/Import/Import.php:1169
 #, php-format
 msgid "Structure of %s"
 msgstr "Struktura e %s"
 
-#: src/Import/Import.php:1175 src/Import/Import.php:1224
+#: src/Import/Import.php:1176 src/Import/Import.php:1225
 #, php-format
 msgid "Edit settings for %s"
 msgstr "Redakto cilësimet për %s"
 
-#: src/Import/Import.php:1186
+#: src/Import/Import.php:1187
 #, php-format
 msgid "Go to view: %s"
 msgstr "Shko tek pamja: %s"
 
-#: src/Import/Import.php:1207
+#: src/Import/Import.php:1208
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr "Strukturat e mëposhtme janë krijuar ose ndryshuar. Këtu ju mund të:"
 
-#: src/Import/Import.php:1209
+#: src/Import/Import.php:1210
 msgid "View a structure's contents by clicking on its name."
 msgstr "Shfaq një përmbajtje të strukturës duke klikuar mbi emrin e saj."
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1211
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr ""
 "Ndrysho ndonjë nga rregullimet e saj, duke klikuar lidhjen korresponduese "
 "\"Options\" (opsionet)."
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1212
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "Redakto strukturën duke ndjekur lidhjen \"Struktura\"."
 
-#: src/Import/Import.php:1218
+#: src/Import/Import.php:1219
 #, php-format
 msgid "Go to database: %s"
 msgstr "Shko tek databaza: %s"
@@ -17475,7 +17492,7 @@ msgstr "E re"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:98
 msgid "Functions"
 msgstr "Funksionet"
 
@@ -17495,7 +17512,7 @@ msgstr "Zgjero/Ngushto"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:103
 msgid "Procedures"
 msgstr "Proçedurat"
 
@@ -17916,35 +17933,35 @@ msgstr "Metodë e pavlefshme autentifikimi e vendosur në konfigurim:"
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 
-#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
+#: src/Plugins/Export/ExportCsv.php:69 src/Plugins/Export/ExportToon.php:62
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "Kolonat e ndara me:"
 
-#: src/Plugins/Export/ExportCsv.php:73
+#: src/Plugins/Export/ExportCsv.php:74
 #: src/Plugins/Import/AbstractImportCsv.php:42
 msgid "Columns enclosed with:"
 msgstr "Kolonat e mbyllura me:"
 
-#: src/Plugins/Export/ExportCsv.php:78
+#: src/Plugins/Export/ExportCsv.php:79
 #: src/Plugins/Import/AbstractImportCsv.php:49
 msgid "Columns escaped with:"
 msgstr "Kolonat ikin nga:"
 
-#: src/Plugins/Export/ExportCsv.php:83
+#: src/Plugins/Export/ExportCsv.php:84
 #: src/Plugins/Import/AbstractImportCsv.php:56
 msgid "Lines terminated with:"
 msgstr "Rreshta që përfundojnë me:"
 
-#: src/Plugins/Export/ExportCsv.php:88 src/Plugins/Export/ExportExcel.php:70
+#: src/Plugins/Export/ExportCsv.php:89 src/Plugins/Export/ExportExcel.php:70
 #: src/Plugins/Export/ExportHtmlword.php:88
-#: src/Plugins/Export/ExportLatex.php:203 src/Plugins/Export/ExportOds.php:66
+#: src/Plugins/Export/ExportLatex.php:205 src/Plugins/Export/ExportOds.php:66
 #: src/Plugins/Export/ExportOdt.php:134
-#: src/Plugins/Export/ExportTexytext.php:91
+#: src/Plugins/Export/ExportTexytext.php:92
 msgid "Replace NULL with:"
 msgstr "Zëvendëso NULL me:"
 
-#: src/Plugins/Export/ExportCsv.php:93 src/Plugins/Export/ExportExcel.php:75
+#: src/Plugins/Export/ExportCsv.php:94 src/Plugins/Export/ExportExcel.php:75
 msgid "Remove carriage return/line feed characters within columns"
 msgstr ""
 "Largo transportin e karaktereve të furnizimit kthim/linjë brenda kolonave"
@@ -17954,33 +17971,33 @@ msgid "Excel edition:"
 msgstr "Edicioni excel:"
 
 #: src/Plugins/Export/ExportHtmlword.php:82
-#: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:123
-#: src/Plugins/Export/ExportTexytext.php:80
-#: src/Plugins/Export/ExportXml.php:125
+#: src/Plugins/Export/ExportLatex.php:176 src/Plugins/Export/ExportOdt.php:123
+#: src/Plugins/Export/ExportTexytext.php:81
+#: src/Plugins/Export/ExportXml.php:126
 msgid "Data dump options"
 msgstr "Opsionet e heqjes (dump) së të dhënave"
 
 #: src/Plugins/Export/ExportHtmlword.php:169
 #: src/Plugins/Export/ExportOdt.php:212 src/Plugins/Export/ExportSql.php:2101
-#: src/Plugins/Export/ExportTexytext.php:138
+#: src/Plugins/Export/ExportTexytext.php:139
 msgid "Dumping data for table"
 msgstr "Zbraz të dhënat për tabelën"
 
 #: src/Plugins/Export/ExportHtmlword.php:441
 #: src/Plugins/Export/ExportOdt.php:561 src/Plugins/Export/ExportSql.php:1837
-#: src/Plugins/Export/ExportTexytext.php:397
+#: src/Plugins/Export/ExportTexytext.php:403
 msgid "Table structure for table"
 msgstr "Struktura e tabelës për tabelën"
 
 #: src/Plugins/Export/ExportHtmlword.php:458
 #: src/Plugins/Export/ExportOdt.php:581 src/Plugins/Export/ExportSql.php:1903
-#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportTexytext.php:416
 msgid "Structure for view"
 msgstr "Struktura për pamjen"
 
 #: src/Plugins/Export/ExportHtmlword.php:464
 #: src/Plugins/Export/ExportOdt.php:589 src/Plugins/Export/ExportSql.php:1946
-#: src/Plugins/Export/ExportTexytext.php:414
+#: src/Plugins/Export/ExportTexytext.php:420
 msgid "Stand-in structure for view"
 msgstr "Struktura zëvendësuese për pamjen"
 
@@ -17992,86 +18009,86 @@ msgstr "Produkti printuar-bukur JSON (Përdor formatim human-lexueshëm)"
 msgid "Output unicode characters unescaped"
 msgstr "Karakteret e Unicode të prodhimit janë të hapura"
 
-#: src/Plugins/Export/ExportLatex.php:68
+#: src/Plugins/Export/ExportLatex.php:70
 msgid "Content of table @TABLE@"
 msgstr "Përmbajtja e tabelës @TABLE@"
 
-#: src/Plugins/Export/ExportLatex.php:69
+#: src/Plugins/Export/ExportLatex.php:71
 msgid "(continued)"
 msgstr "(vazhduar)"
 
-#: src/Plugins/Export/ExportLatex.php:70
+#: src/Plugins/Export/ExportLatex.php:72
 msgid "Structure of table @TABLE@"
 msgstr "Struktura e tabelës @TABLE@"
 
-#: src/Plugins/Export/ExportLatex.php:123 src/Plugins/Export/ExportOdt.php:90
+#: src/Plugins/Export/ExportLatex.php:125 src/Plugins/Export/ExportOdt.php:90
 #: src/Plugins/Export/ExportSql.php:279
 msgid "Object creation options"
 msgstr "Opsionet e krijimit të objektit"
 
-#: src/Plugins/Export/ExportLatex.php:129
-#: src/Plugins/Export/ExportLatex.php:185
+#: src/Plugins/Export/ExportLatex.php:131
+#: src/Plugins/Export/ExportLatex.php:187
 msgid "Table caption:"
 msgstr "Emri i tabelës:"
 
-#: src/Plugins/Export/ExportLatex.php:135
-#: src/Plugins/Export/ExportLatex.php:191
+#: src/Plugins/Export/ExportLatex.php:137
+#: src/Plugins/Export/ExportLatex.php:193
 msgid "Table caption (continued):"
 msgstr "Emri i tabelës (vazhdon):"
 
-#: src/Plugins/Export/ExportLatex.php:141
-#: src/Plugins/Export/ExportLatex.php:197
+#: src/Plugins/Export/ExportLatex.php:143
+#: src/Plugins/Export/ExportLatex.php:199
 msgid "Label key:"
 msgstr "Etiketa e çelësit:"
 
-#: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:98
+#: src/Plugins/Export/ExportLatex.php:151 src/Plugins/Export/ExportOdt.php:98
 #: src/Plugins/Export/ExportSql.php:205
 msgid "Display foreign key relationships"
 msgstr "Shfaq marrëdhëniet me çelësin e huaj"
 
-#: src/Plugins/Export/ExportLatex.php:156 src/Plugins/Export/ExportOdt.php:105
+#: src/Plugins/Export/ExportLatex.php:158 src/Plugins/Export/ExportOdt.php:105
 msgid "Display comments"
 msgstr "Shfaq komentet"
 
-#: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:111
+#: src/Plugins/Export/ExportLatex.php:164 src/Plugins/Export/ExportOdt.php:111
 #: src/Plugins/Export/ExportSql.php:213
 #, fuzzy
 #| msgid "Display MIME types"
 msgid "Display media types"
 msgstr "Shfaq tipet MIME"
 
-#: src/Plugins/Export/ExportLatex.php:180
+#: src/Plugins/Export/ExportLatex.php:182
 msgid "Put columns names in the first row:"
 msgstr "Vendos emrat e kolonave në radhë të parë:"
 
-#: src/Plugins/Export/ExportLatex.php:230 src/Plugins/Export/ExportSql.php:760
-#: src/Plugins/Export/ExportXml.php:201
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportXml.php:202
 msgid "Generation Time:"
 msgstr "Koha e gjenerimit:"
 
-#: src/Plugins/Export/ExportLatex.php:233 src/Plugins/Export/ExportSql.php:766
-#: src/Plugins/Export/ExportXml.php:204
+#: src/Plugins/Export/ExportLatex.php:235 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportXml.php:205
 msgid "PHP Version:"
 msgstr "PHP Versioni:"
 
-#: src/Plugins/Export/ExportLatex.php:286 src/Plugins/Export/ExportSql.php:1992
+#: src/Plugins/Export/ExportLatex.php:290 src/Plugins/Export/ExportSql.php:1992
 msgid "Data:"
 msgstr "Të dhëna:"
 
-#: src/Plugins/Export/ExportLatex.php:435
+#: src/Plugins/Export/ExportLatex.php:445
 msgid "Structure:"
 msgstr "Struktura:"
 
-#: src/Plugins/Export/ExportMediawiki.php:77
+#: src/Plugins/Export/ExportMediawiki.php:78
 msgid "Export table names"
 msgstr "Eksporti i emrave të tabelës"
 
-#: src/Plugins/Export/ExportMediawiki.php:84
+#: src/Plugins/Export/ExportMediawiki.php:85
 msgid "Export table headers"
 msgstr "Eksporti i kokave të tabelës"
 
 #: src/Plugins/Export/ExportOdt.php:213
-#: src/Plugins/Export/ExportTexytext.php:139
+#: src/Plugins/Export/ExportTexytext.php:140
 #, fuzzy
 #| msgid "Dumping data for table"
 msgid "Dumping data for query result"
@@ -18347,17 +18364,17 @@ msgstr ""
 "Sistemi i databazës ose serveri i vjetër MySQL për të maksimizuar "
 "pajtueshmërinë e rezultatit me:"
 
-#: src/Plugins/Export/ExportToon.php:68
+#: src/Plugins/Export/ExportToon.php:67
 #, fuzzy
 #| msgid "Orientation"
 msgid "Indentation:"
 msgstr "Orientimi"
 
-#: src/Plugins/Export/ExportXml.php:86
+#: src/Plugins/Export/ExportXml.php:87
 msgid "Object creation options (all are recommended)"
 msgstr "Opsionet e krijimit të objektit (të gjitha rekomandohen)"
 
-#: src/Plugins/Export/ExportXml.php:130
+#: src/Plugins/Export/ExportXml.php:131
 msgid "Export contents"
 msgstr "Përmbajtja e eksportit"
 
@@ -19006,7 +19023,7 @@ msgid "Error 405! Request method not allowed."
 msgstr ""
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3161
+#: src/Server/Privileges.php:3155
 msgid "Native MySQL authentication"
 msgstr "Autentifikimi autokton MySQL"
 
@@ -19059,43 +19076,43 @@ msgstr "Keni anuluar privilegjet për %s."
 msgid "Revoke"
 msgstr "Tërhiq"
 
-#: src/Server/Privileges.php:1901
+#: src/Server/Privileges.php:1902
 msgid "No users selected for deleting!"
 msgstr "Nuk janë zgjedhur përdorues për fshirje!"
 
-#: src/Server/Privileges.php:1904
+#: src/Server/Privileges.php:1905
 msgid "Reloading the privileges"
 msgstr "Ringarkon privilegjet"
 
-#: src/Server/Privileges.php:1929
+#: src/Server/Privileges.php:1930
 msgid "The selected users have been deleted successfully."
 msgstr "Përdoruesit e zgjedhur u fshinë me sukses."
 
-#: src/Server/Privileges.php:2003
+#: src/Server/Privileges.php:2004
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "Keni aktualizuar privilegjet për %s."
 
-#: src/Server/Privileges.php:2161
+#: src/Server/Privileges.php:2154
 #, php-format
 msgid "Deleting %s"
 msgstr "Fshin %s"
 
-#: src/Server/Privileges.php:2191
+#: src/Server/Privileges.php:2184
 msgid "The privileges were reloaded successfully."
 msgstr "Privilegjet u ri-ngarkuan me sukses."
 
-#: src/Server/Privileges.php:2256
+#: src/Server/Privileges.php:2250
 #, php-format
 msgid "The user %s already exists!"
 msgstr "Përdoruesi %s ekziston ndërkohë!"
 
-#: src/Server/Privileges.php:2409
+#: src/Server/Privileges.php:2403
 #, php-format
 msgid "Privileges for %s"
 msgstr "Privilegjet për %s"
 
-#: src/Server/Privileges.php:2495
+#: src/Server/Privileges.php:2489
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -19108,7 +19125,7 @@ msgstr ""
 "privilegjet që përdor serveri, nëse ato janë ndryshuar me dorë. Në këtë "
 "rast, duhet të %s reloader privilegjet %s para se të vazhdoni."
 
-#: src/Server/Privileges.php:2511
+#: src/Server/Privileges.php:2505
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -19122,11 +19139,11 @@ msgstr ""
 "rast, privilegjet duhet të rifreskohen, por aktualisht, ju nuk keni "
 "privilegj RELOAD."
 
-#: src/Server/Privileges.php:2799
+#: src/Server/Privileges.php:2793
 msgid "You have added a new user."
 msgstr "Keni shtuar një përdorues të ri."
 
-#: src/Server/Privileges.php:3253
+#: src/Server/Privileges.php:3247
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -19819,17 +19836,23 @@ msgid "128-bit UUID (Universally Unique Identifier)"
 msgstr ""
 "Ruaj një Universally Unique Identifier (UUID) (identifikues unik universal)"
 
-#: src/Types.php:602
+#: src/Types.php:293
+msgid ""
+"Stores vector data optimized for operations such as similarity search and "
+"machine learning applications"
+msgstr ""
+
+#: src/Types.php:604
 msgctxt "numeric types"
 msgid "Numeric"
 msgstr "Numerike"
 
-#: src/Types.php:620
+#: src/Types.php:622
 msgctxt "date and time types"
 msgid "Date and time"
 msgstr "Data dhe ora"
 
-#: src/Types.php:650
+#: src/Types.php:652
 msgctxt "spatial types"
 msgid "Spatial"
 msgstr "Spacial (hapësinor)"

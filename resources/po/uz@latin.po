@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-22 00:36+0000\n"
+"POT-Creation-Date: 2026-02-25 13:54+0000\n"
 "PO-Revision-Date: 2022-02-15 16:21+0000\n"
 "Last-Translator: Maurício Meneghini Fauth <mauricio@fauth.dev>\n"
 "Language-Team: Uzbek (latin) <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -305,7 +305,7 @@ msgstr "Ustun(lar) qo‘shish"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
-#: src/Controllers/Server/PrivilegesController.php:305
+#: src/Controllers/Server/PrivilegesController.php:314
 #: src/Normalization.php:235 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -523,11 +523,11 @@ msgstr "Tashqi kalitni tanlang"
 #: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
-#: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
+#: src/Plugins/Export/ExportLatex.php:465 src/Plugins/Export/ExportOdt.php:324
 #: src/Plugins/Export/ExportOdt.php:395
-#: src/Plugins/Export/ExportTexytext.php:236
-#: src/Plugins/Export/ExportTexytext.php:296
-#: src/Plugins/Export/Helpers/Pdf.php:458
+#: src/Plugins/Export/ExportTexytext.php:242
+#: src/Plugins/Export/ExportTexytext.php:302
+#: src/Plugins/Export/Helpers/Pdf.php:469
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:602
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:624
 msgid "Column"
@@ -658,7 +658,7 @@ msgstr "Foydalanuvchi"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
 #: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
@@ -679,8 +679,8 @@ msgstr "Tuzilishi"
 #: resources/templates/triggers/list.twig:47
 #: src/Plugins/Export/ExportHtmlword.php:396
 #: src/Plugins/Export/ExportOdt.php:503
-#: src/Plugins/Export/ExportTexytext.php:365
-#: src/Plugins/Export/Helpers/Pdf.php:300
+#: src/Plugins/Export/ExportTexytext.php:371
+#: src/Plugins/Export/Helpers/Pdf.php:311
 msgid "Name"
 msgstr "Nomi"
 
@@ -707,11 +707,11 @@ msgstr "Nomi"
 #: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
-#: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
+#: src/Plugins/Export/ExportLatex.php:466 src/Plugins/Export/ExportOdt.php:327
 #: src/Plugins/Export/ExportOdt.php:398
-#: src/Plugins/Export/ExportTexytext.php:237
-#: src/Plugins/Export/ExportTexytext.php:297
-#: src/Plugins/Export/Helpers/Pdf.php:460
+#: src/Plugins/Export/ExportTexytext.php:243
+#: src/Plugins/Export/ExportTexytext.php:303
+#: src/Plugins/Export/Helpers/Pdf.php:471
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:603
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:625
 msgid "Type"
@@ -752,11 +752,11 @@ msgstr ""
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:10
 #: src/Plugins/Export/ExportHtmlword.php:234
 #: src/Plugins/Export/ExportHtmlword.php:305
-#: src/Plugins/Export/ExportLatex.php:458 src/Plugins/Export/ExportOdt.php:333
+#: src/Plugins/Export/ExportLatex.php:468 src/Plugins/Export/ExportOdt.php:333
 #: src/Plugins/Export/ExportOdt.php:404
-#: src/Plugins/Export/ExportTexytext.php:239
-#: src/Plugins/Export/ExportTexytext.php:299
-#: src/Plugins/Export/Helpers/Pdf.php:464
+#: src/Plugins/Export/ExportTexytext.php:245
+#: src/Plugins/Export/ExportTexytext.php:305
+#: src/Plugins/Export/Helpers/Pdf.php:475
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:606
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:628
 msgid "Default"
@@ -817,11 +817,11 @@ msgstr "Atributlar"
 #: resources/templates/table/zoom_search/result_form.twig:34
 #: src/Plugins/Export/ExportHtmlword.php:231
 #: src/Plugins/Export/ExportHtmlword.php:302
-#: src/Plugins/Export/ExportLatex.php:457 src/Plugins/Export/ExportOdt.php:330
+#: src/Plugins/Export/ExportLatex.php:467 src/Plugins/Export/ExportOdt.php:330
 #: src/Plugins/Export/ExportOdt.php:401
-#: src/Plugins/Export/ExportTexytext.php:238
-#: src/Plugins/Export/ExportTexytext.php:298
-#: src/Plugins/Export/Helpers/Pdf.php:462
+#: src/Plugins/Export/ExportTexytext.php:244
+#: src/Plugins/Export/ExportTexytext.php:304
+#: src/Plugins/Export/Helpers/Pdf.php:473
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
@@ -845,9 +845,9 @@ msgstr "Privilegiyalarni tahrirlash"
 #: resources/templates/table/structure/display_structure.twig:28
 #: src/Config/Descriptions.php:660 src/Config/Descriptions.php:675
 #: src/Config/Descriptions.php:711 src/Plugins/Export/ExportHtmlword.php:315
-#: src/Plugins/Export/ExportLatex.php:464 src/Plugins/Export/ExportOdt.php:414
-#: src/Plugins/Export/ExportTexytext.php:305
-#: src/Plugins/Export/Helpers/Pdf.php:481
+#: src/Plugins/Export/ExportLatex.php:474 src/Plugins/Export/ExportOdt.php:414
+#: src/Plugins/Export/ExportTexytext.php:311
+#: src/Plugins/Export/Helpers/Pdf.php:492
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:618
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:631
 msgid "Comments"
@@ -868,8 +868,8 @@ msgstr "Ustun(lar)ni olib tashlash"
 #: src/Config/Descriptions.php:664 src/Config/Descriptions.php:676
 #: src/Config/Descriptions.php:714 src/Plugins/Export/ExportHtmlword.php:322
 #: src/Plugins/Export/ExportOdt.php:421
-#: src/Plugins/Export/ExportTexytext.php:310
-#: src/Plugins/Export/Helpers/Pdf.php:489
+#: src/Plugins/Export/ExportTexytext.php:316
+#: src/Plugins/Export/Helpers/Pdf.php:500
 #, fuzzy
 #| msgid "MIME type"
 msgid "Media type"
@@ -1022,8 +1022,8 @@ msgstr "Faolsizlantirilgan"
 #: src/Controllers/Table/Structure/PrimaryController.php:101
 #: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "Yes"
 msgstr "Ha"
@@ -1058,8 +1058,8 @@ msgstr "Ha"
 #: src/Controllers/JavaScriptMessagesController.php:343
 #: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
 #: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "No"
 msgstr "Yo‘q"
@@ -1166,8 +1166,8 @@ msgstr "O‘chirish"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
-#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:117 src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1588 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "Ma`lumotlar bazasi"
 
@@ -1198,18 +1198,18 @@ msgstr "SQL-so‘rovlar tarixi"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1157 src/Import/Import.php:1215
-#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
+#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:57
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
-#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:87
-#: src/Plugins/Export/ExportMediawiki.php:49
+#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:89
+#: src/Plugins/Export/ExportMediawiki.php:50
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
-#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
+#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:47
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56
-#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
+#: src/Plugins/Export/ExportTexytext.php:57
+#: src/Plugins/Export/ExportToon.php:50 src/Plugins/Export/ExportXml.php:69
+#: src/Plugins/Export/ExportYaml.php:46 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1610,9 +1610,9 @@ msgstr "Chop etish"
 
 #: resources/templates/database/data_dictionary/index.twig:28
 #: src/Plugins/Export/ExportHtmlword.php:309
-#: src/Plugins/Export/ExportLatex.php:460 src/Plugins/Export/ExportOdt.php:408
-#: src/Plugins/Export/ExportTexytext.php:301
-#: src/Plugins/Export/Helpers/Pdf.php:473
+#: src/Plugins/Export/ExportLatex.php:470 src/Plugins/Export/ExportOdt.php:408
+#: src/Plugins/Export/ExportTexytext.php:307
+#: src/Plugins/Export/Helpers/Pdf.php:484
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:608
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:630
 msgid "Links to"
@@ -2067,8 +2067,8 @@ msgstr "Oxiri"
 #: resources/templates/triggers/editor_form.twig:62
 #: src/Plugins/Export/ExportHtmlword.php:399
 #: src/Plugins/Export/ExportOdt.php:512
-#: src/Plugins/Export/ExportTexytext.php:368
-#: src/Plugins/Export/Helpers/Pdf.php:306
+#: src/Plugins/Export/ExportTexytext.php:374
+#: src/Plugins/Export/Helpers/Pdf.php:317
 #, fuzzy
 #| msgid "Description"
 msgid "Definition"
@@ -2100,7 +2100,7 @@ msgstr ""
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
 #: src/Util.php:1385
 msgid "Events"
 msgstr "Hodisalar"
@@ -2299,7 +2299,7 @@ msgstr "Jadvallar"
 #: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
-#: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
+#: src/Plugins/Export/ExportXml.php:108 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "Jadvallar"
 
@@ -2628,7 +2628,7 @@ msgstr "Jurnal fayli"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
-#: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
+#: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
 #: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "Privilegiyalar"
@@ -2682,7 +2682,7 @@ msgstr "Privilegiyalarni tahrirlash"
 
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2079
+#: src/Server/Privileges.php:2077
 #, fuzzy
 #| msgid "No user(s) found."
 msgid "No user found."
@@ -3155,8 +3155,8 @@ msgid ""
 msgstr ""
 
 #: resources/templates/database/structure/copy_form.twig:5
-#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:251
-#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:356
+#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:253
+#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:357
 #: src/Plugins/Export/Helpers/Pdf.php:146
 #, fuzzy
 #| msgid "Database"
@@ -3244,15 +3244,15 @@ msgstr "Show SQL so‘rovlarini ko‘rsatish"
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
-#: src/Server/Privileges.php:1593
+#: src/Plugins/Export/ExportXml.php:409 src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1594
 msgid "Table"
 msgstr "Jadval"
 
 #: resources/templates/database/structure/show_create.twig:30
 #: src/Navigation/Nodes/NodeViewContainer.php:23
 #: src/Navigation/Nodes/NodeViewContainer.php:25
-#: src/Plugins/Export/ExportXml.php:117
+#: src/Plugins/Export/ExportXml.php:118
 #, fuzzy
 #| msgid "View"
 msgid "Views"
@@ -4130,8 +4130,8 @@ msgid "Server connection:"
 msgstr "Noxavfsiz ulanish"
 
 #: resources/templates/home/index.twig:198
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:764
-#: src/Plugins/Export/ExportXml.php:203
+#: src/Plugins/Export/ExportLatex.php:234 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportXml.php:204
 #, fuzzy
 #| msgid "Server version"
 msgid "Server version:"
@@ -5569,7 +5569,7 @@ msgstr "Foydalanuvchi"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
+#: src/Server/Privileges.php:1598 src/Server/Privileges.php:1600
 #, fuzzy
 #| msgid "Routines"
 msgid "Routine"
@@ -5583,7 +5583,7 @@ msgid ""
 msgstr ""
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1598
+#: src/Server/Privileges.php:1599
 #, fuzzy
 #| msgid "Column-specific privileges"
 msgid "Routine-specific privileges"
@@ -5744,7 +5744,7 @@ msgstr "Serverlarni tahrirlash"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1593
 msgid "Table-specific privileges"
 msgstr "Jadval darajasijagi privilegiyalar"
 
@@ -5928,7 +5928,7 @@ msgid "Global privileges"
 msgstr "Global privilegiyalar"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1587
 msgid "Database-specific privileges"
 msgstr "Ma`lumotlar bazasi privilegiyalari"
 
@@ -6274,8 +6274,8 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:224 src/Plugins/Export/ExportSql.php:753
-#: src/Plugins/Export/ExportXml.php:195
+#: src/Plugins/Export/ExportLatex.php:226 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportXml.php:196
 #, fuzzy
 #| msgid "Host"
 msgid "Host:"
@@ -7263,7 +7263,7 @@ msgid "No users were found belonging to this user group."
 msgstr ""
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:432
+#: src/Controllers/Server/PrivilegesController.php:442
 #: src/Server/Status/Processes.php:101
 msgid "User"
 msgstr "Foydalanuvchi"
@@ -7433,8 +7433,8 @@ msgstr "Boshlang‘ich"
 #: src/Controllers/JavaScriptMessagesController.php:276
 #: src/Plugins/Export/ExportHtmlword.php:397
 #: src/Plugins/Export/ExportOdt.php:506
-#: src/Plugins/Export/ExportTexytext.php:366
-#: src/Plugins/Export/Helpers/Pdf.php:302 src/Server/Status/Processes.php:105
+#: src/Plugins/Export/ExportTexytext.php:372
+#: src/Plugins/Export/Helpers/Pdf.php:313 src/Server/Status/Processes.php:105
 msgid "Time"
 msgstr "Vaqt"
 
@@ -8671,8 +8671,8 @@ msgstr "Vaqt"
 #: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
-#: src/Plugins/Export/ExportTexytext.php:367
-#: src/Plugins/Export/Helpers/Pdf.php:304
+#: src/Plugins/Export/ExportTexytext.php:373
+#: src/Plugins/Export/Helpers/Pdf.php:315
 msgid "Event"
 msgstr "Hodisa"
 
@@ -8689,8 +8689,8 @@ msgstr "Triggеrlarni eksport qilish"
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
-#: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr "Triggerlar"
 
@@ -10415,7 +10415,7 @@ msgid "Closed"
 msgstr "Yopish"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:725
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Week day name"
@@ -10423,7 +10423,7 @@ msgid "Monday"
 msgstr "Dush"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:726
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Week day name"
@@ -10431,7 +10431,7 @@ msgid "Tuesday"
 msgstr "Sesh"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:727
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Week day name"
@@ -10439,7 +10439,7 @@ msgid "Wednesday"
 msgstr "Sesh"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:728
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Week day name"
@@ -10447,7 +10447,7 @@ msgid "Thursday"
 msgstr "Sesh"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:729
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Week day name"
@@ -10455,13 +10455,13 @@ msgid "Friday"
 msgstr "Jum"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:727
+#: src/Controllers/JavaScriptMessagesController.php:730
 msgctxt "Week day name"
 msgid "Saturday"
 msgstr ""
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:724
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Week day name"
@@ -10501,33 +10501,33 @@ msgstr "Faolsizlantirilgan"
 #: src/Config/ConfigFile.php:664 src/Config/ConfigFile.php:716
 #: src/Config/ConfigFile.php:728 src/Config/ConfigFile.php:736
 #: src/Config/ConfigFile.php:741 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure"
 msgstr "tuzilish"
 
 #: src/Config/ConfigFile.php:665 src/Config/ConfigFile.php:717
 #: src/Config/ConfigFile.php:729 src/Config/ConfigFile.php:737
 #: src/Config/ConfigFile.php:742 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "data"
 msgstr ""
 
 #: src/Config/ConfigFile.php:666 src/Config/ConfigFile.php:718
 #: src/Config/ConfigFile.php:730 src/Config/ConfigFile.php:738
 #: src/Config/ConfigFile.php:743 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 #, fuzzy
 #| msgid "Structure and data"
 msgid "structure and data"
@@ -12306,11 +12306,11 @@ msgstr "Siqish"
 #: src/Config/Descriptions.php:640 src/Config/Descriptions.php:647
 #: src/Config/Descriptions.php:655 src/Config/Descriptions.php:659
 #: src/Config/Descriptions.php:672 src/Config/Descriptions.php:674
-#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:98
+#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:99
 #: src/Plugins/Export/ExportExcel.php:80
 #: src/Plugins/Export/ExportHtmlword.php:93 src/Plugins/Export/ExportOds.php:71
 #: src/Plugins/Export/ExportOdt.php:129
-#: src/Plugins/Export/ExportTexytext.php:86
+#: src/Plugins/Export/ExportTexytext.php:87
 #, fuzzy
 #| msgid "Put fields names in the first row"
 msgid "Put columns names in the first row"
@@ -12380,18 +12380,18 @@ msgstr "Jadval nomi shabloni"
 #: src/Config/Descriptions.php:657 src/Config/Descriptions.php:670
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:717
 #: src/Config/Descriptions.php:723 src/Plugins/Export/ExportHtmlword.php:68
-#: src/Plugins/Export/ExportLatex.php:108
-#: src/Plugins/Export/ExportMediawiki.php:59
-#: src/Plugins/Export/ExportMediawiki.php:65
+#: src/Plugins/Export/ExportLatex.php:110
+#: src/Plugins/Export/ExportMediawiki.php:60
+#: src/Plugins/Export/ExportMediawiki.php:66
 #: src/Plugins/Export/ExportOdt.php:75 src/Plugins/Export/ExportPdf.php:76
 #: src/Plugins/Export/ExportSql.php:263
-#: src/Plugins/Export/ExportTexytext.php:66
+#: src/Plugins/Export/ExportTexytext.php:67
 #, fuzzy
 #| msgid "%s table(s)"
 msgid "Dump table"
 msgstr "Jadvallar soni: \"%s\""
 
-#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:99
+#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:101
 msgid "Include table caption"
 msgstr "Jadvalga sarlavha qo‘shish"
 
@@ -13489,7 +13489,7 @@ msgid "Missing data for %s"
 msgstr "\"%s\" maydonida ma`lumot yo‘q"
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:808
 #, fuzzy
 #| msgid "Incorrect value"
 msgid "Incorrect value!"
@@ -13914,28 +13914,28 @@ msgid "Incorrect IP address: %s"
 msgstr "Noto‘g‘ri IP-adres: \"%s\""
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:807
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Not a valid port number!"
 msgstr "Noto‘g‘ri port nomeri"
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:805
 #, fuzzy
 #| msgid "Not a positive number"
 msgid "Not a positive number!"
 msgstr "Musbat son emas"
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:806
 #, fuzzy
 #| msgid "Not a non-negative number"
 msgid "Not a non-negative number!"
 msgstr "Nomanfiy son emas"
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:806
+#: src/Controllers/JavaScriptMessagesController.php:809
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr ""
@@ -14409,7 +14409,22 @@ msgid ""
 "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgstr ""
 
-#: src/Controllers/HomeController.php:353
+#: src/Controllers/HomeController.php:356
+msgid ""
+"The configuration file needs a valid key for query encryption. A temporary "
+"key was automatically generated for you. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+
+#: src/Controllers/HomeController.php:366
+#, php-format
+msgid ""
+"The query encryption key in the configuration file is longer than necessary. "
+"It should only be %d bytes long. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+
+#: src/Controllers/HomeController.php:384
 #, fuzzy
 #| msgid ""
 #| "Directory [code]config[/code], which is used by the setup script, still "
@@ -14425,7 +14440,7 @@ msgstr ""
 "katalogi haliyam mavjud. phpMyAdmin muvaffaqiyatli o‘rnatilgandan keyin, uni "
 "o‘chirish tavsiya etiladi."
 
-#: src/Controllers/HomeController.php:374
+#: src/Controllers/HomeController.php:405
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
@@ -14434,21 +14449,21 @@ msgstr ""
 "Server \"Suhosin\" himoya tizimadan foydalanmoqda. Yuzaga kelgan muammolar "
 "yechimi uchun \"%s\"dokumentatsiya\"%s\" ga qarang."
 
-#: src/Controllers/HomeController.php:388
+#: src/Controllers/HomeController.php:419
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
 "templates and will be slow because of this."
 msgstr ""
 
-#: src/Controllers/HomeController.php:405
+#: src/Controllers/HomeController.php:436
 msgid ""
 "The [code]HTTP_HOST[/code] variable is missing, which might cause phpMyAdmin "
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
 "possible issues."
 msgstr ""
 
-#: src/Controllers/HomeController.php:458
+#: src/Controllers/HomeController.php:489
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
@@ -14459,7 +14474,7 @@ msgstr ""
 "navbatida ma`lumot yo‘qolishiga olib kelishi mumkin. PHP \"mbstring\" "
 "kengaytmasini o‘rnatish qat`iy tavsiya etiladi."
 
-#: src/Controllers/HomeController.php:476
+#: src/Controllers/HomeController.php:507
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
@@ -15528,7 +15543,7 @@ msgstr ""
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:754
+#: src/Controllers/JavaScriptMessagesController.php:757
 #: src/Normalization.php:349
 #, fuzzy
 #| msgid "Donate"
@@ -16240,171 +16255,173 @@ msgstr "\"%s\" nomli jadval mavjud!"
 msgid "Hide"
 msgstr "Yashirish"
 
-#: src/Controllers/JavaScriptMessagesController.php:695
-msgid "The fullscreen request was denied."
+#: src/Controllers/JavaScriptMessagesController.php:696
+msgid ""
+"The fullscreen request was denied because the Fullscreen API is disabled by "
+"user preference in the browser."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:700
 #, fuzzy
 #| msgid "Binary"
 msgctxt "Month name"
 msgid "January"
 msgstr "Ikkilik"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:701
 msgctxt "Month name"
 msgid "February"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:702
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Month name"
 msgid "March"
 msgstr "Mar"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:703
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Month name"
 msgid "April"
 msgstr "Apr"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:704
 #, fuzzy
 #| msgid "May"
 msgctxt "Month name"
 msgid "May"
 msgstr "May"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:705
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Month name"
 msgid "June"
 msgstr "Iyun"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:706
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Month name"
 msgid "July"
 msgstr "Iyul"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:707
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Month name"
 msgid "August"
 msgstr "Avg"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:708
 msgctxt "Month name"
 msgid "September"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:709
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Month name"
 msgid "October"
 msgstr "Okt"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:710
 msgctxt "Month name"
 msgid "November"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:708
+#: src/Controllers/JavaScriptMessagesController.php:711
 msgctxt "Month name"
 msgid "December"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
 #, fuzzy
 #| msgid "Jan"
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "Yanv"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
 #, fuzzy
 #| msgid "Feb"
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "Fev"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "Mar"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "Apr"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
 #, fuzzy
 #| msgid "May"
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "May"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "Iyun"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "Iyul"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "Avg"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
 #, fuzzy
 #| msgid "Sep"
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "Sen"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "Okt"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
 #, fuzzy
 #| msgid "Nov"
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "Noya"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
 #, fuzzy
 #| msgid "Dec"
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "Dek"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
 #, fuzzy
 #| msgctxt "Short week day name"
 #| msgid "Sun"
@@ -16412,98 +16429,98 @@ msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "Yaksh"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "Dush"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "Sesh"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "Chor"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "Pay"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "Jum"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "Shan"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:738
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "Yaksh"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:739
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "Dush"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:740
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "Sesh"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:741
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "Chor"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:742
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "Pay"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:743
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "Jum"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:744
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "Shan"
 
-#: src/Controllers/JavaScriptMessagesController.php:742
+#: src/Controllers/JavaScriptMessagesController.php:745
 #, fuzzy
 #| msgid "Wiki"
 msgctxt "Column header for week of the year in calendar"
@@ -16511,60 +16528,60 @@ msgid "Wk"
 msgstr "Viki"
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:747
 #, fuzzy
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "calendar-month-year"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:748
 #, fuzzy
 #| msgid "None"
 msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "Yo‘q"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:749
 #, fuzzy
 #| msgid "Time"
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "Vaqt"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:750
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:751
 #, fuzzy
 #| msgid "in use"
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "ishlatilmoqda"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:752
 #, fuzzy
 #| msgid "per second"
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "sekundiga"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:753
 #, fuzzy
 #| msgid "seconds"
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "sekundiga"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:754
 #, fuzzy
 #| msgid "per second"
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "sekundiga"
 
-#: src/Controllers/JavaScriptMessagesController.php:752
+#: src/Controllers/JavaScriptMessagesController.php:755
 #, fuzzy
 #| msgid "Time"
 msgctxt "The time zone for a time of day"
@@ -16572,7 +16589,7 @@ msgid "Time zone"
 msgstr "Vaqt"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:756
+#: src/Controllers/JavaScriptMessagesController.php:759
 #, fuzzy
 #| msgid "Previous"
 msgctxt "Previous month"
@@ -16580,7 +16597,7 @@ msgid "Prev"
 msgstr "Orqaga"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:758
+#: src/Controllers/JavaScriptMessagesController.php:761
 #, fuzzy
 #| msgid "Next"
 msgctxt "Next month"
@@ -16588,126 +16605,126 @@ msgid "Next"
 msgstr "Keyingi"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:760
+#: src/Controllers/JavaScriptMessagesController.php:763
 #, fuzzy
 #| msgid "Total"
 msgid "Today"
 msgstr "Jami"
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:766
 msgid "This field is required"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:767
 #, fuzzy
 #| msgid "Use text field"
 msgid "Please fix this field"
 msgstr "Matnmaydonini ishlatish"
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:768
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid email address"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:769
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid URL"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:770
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid date"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:771
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid date ( ISO )"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:772
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid number"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:773
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid credit card number"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:774
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter only digits"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:775
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter the same value again"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:776
 msgid "Please enter no more than {0} characters"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:777
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter at least {0} characters"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:778
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:779
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a value between {0} and {1}"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:780
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a value less than or equal to {0}"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:781
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:782
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid date or time"
 msgstr "Noto‘g‘ri port nomeri"
 
-#: src/Controllers/JavaScriptMessagesController.php:780
+#: src/Controllers/JavaScriptMessagesController.php:783
 #, fuzzy
 #| msgid "Not a valid port number"
 msgid "Please enter a valid HEX input"
 msgstr "Noto‘g‘ri port nomeri"
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:782
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid "This column can not contain a 32 chars value"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:785
+#: src/Controllers/JavaScriptMessagesController.php:788
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:790
+#: src/Controllers/JavaScriptMessagesController.php:793
 #, fuzzy
 #| msgid ""
 #| "The file being uploaded is probably larger than the maximum allowed size "
@@ -16720,35 +16737,35 @@ msgstr ""
 "asoslangan brauzеrlarning (Safari, Google Chrome, Arora va hkz) ma’lum "
 "kamchiligi."
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:795
 #, php-format
 msgid "%s of %s"
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:796
 #, php-format
 msgid "%s/sec."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:797
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:798
 msgid "About %SEC sec. remaining."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid "The file is being processed, please be patient."
 msgstr "Fayl qayta ishlanmoqda, iltimos, sabr qiling."
 
-#: src/Controllers/JavaScriptMessagesController.php:797
+#: src/Controllers/JavaScriptMessagesController.php:800
 #, fuzzy
 #| msgid "Format of imported file"
 msgid "Uploading your import file…"
 msgstr "Import qilinayotgan fayl formati"
 
-#: src/Controllers/JavaScriptMessagesController.php:799
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -16775,7 +16792,7 @@ msgid "No such column"
 msgstr "Ustun(lar)ni olib tashlash"
 
 #: src/Controllers/Normalization/GetColumnsController.php:35
-#: src/Normalization.php:230 src/Types.php:648
+#: src/Normalization.php:230 src/Types.php:650
 #, fuzzy
 #| msgid "Lines terminated by"
 msgctxt "string types"
@@ -16871,7 +16888,7 @@ msgstr "Belgilangan foydalanuvchilar muvaffaqiyatli o‘chirildi."
 msgid "The account %s@%s has been successfully unlocked."
 msgstr "Belgilangan foydalanuvchilar muvaffaqiyatli o‘chirildi."
 
-#: src/Controllers/Server/PrivilegesController.php:123
+#: src/Controllers/Server/PrivilegesController.php:125
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
@@ -18835,50 +18852,50 @@ msgstr "So‘zlar bo‘sh joy (\" \") yordamida bo‘lingan."
 msgid "The trigger name cannot end with a space character."
 msgstr "So‘zlar bo‘sh joy (\" \") yordamida bo‘lingan."
 
-#: src/Import/Import.php:943
+#: src/Import/Import.php:944
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
 msgstr ""
 
-#: src/Import/Import.php:1160
+#: src/Import/Import.php:1161
 #, fuzzy, php-format
 #| msgid "Go to table"
 msgid "Go to table: %s"
 msgstr "Ushbu jadvalga o‘tish"
 
-#: src/Import/Import.php:1168
+#: src/Import/Import.php:1169
 #, fuzzy, php-format
 #| msgid "Structure only"
 msgid "Structure of %s"
 msgstr "Faqat tuzilishi"
 
-#: src/Import/Import.php:1175 src/Import/Import.php:1224
+#: src/Import/Import.php:1176 src/Import/Import.php:1225
 #, fuzzy, php-format
 #| msgid "Missing data for %s"
 msgid "Edit settings for %s"
 msgstr "\"%s\" maydonida ma`lumot yo‘q"
 
-#: src/Import/Import.php:1186
+#: src/Import/Import.php:1187
 #, fuzzy, php-format
 #| msgid "Go to view"
 msgid "Go to view: %s"
 msgstr "Ushbu ko‘rinishga o‘tish"
 
-#: src/Import/Import.php:1207
+#: src/Import/Import.php:1208
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr ""
 "Quyidagi tuzilishlar yo tuzildi yo o‘zgartirildi. Bu yerda siz quyidagi "
 "amallarni bajarishingiz mumkin:"
 
-#: src/Import/Import.php:1209
+#: src/Import/Import.php:1210
 #, fuzzy
 #| msgid "View a structure`s contents by clicking on its name"
 msgid "View a structure's contents by clicking on its name."
 msgstr "Tuzilmani ko‘rish uchun uning nomi ustiga sichqoncha tugmasini bosing"
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1211
 #, fuzzy
 #| msgid ""
 #| "Change any of its settings by clicking the corresponding \"Options\" link"
@@ -18886,13 +18903,13 @@ msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr "Quyidagi tanlovlarni o‘zgartirish uchun, \"Tanlovlar\" bog‘iga bosing"
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1212
 #, fuzzy
 #| msgid "Edit its structure by following the \"Structure\" link"
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "Tuzilmani o‘zgartirish uchun, \"Tuzilma\" bog‘iga kiring"
 
-#: src/Import/Import.php:1218
+#: src/Import/Import.php:1219
 #, fuzzy, php-format
 #| msgid "Go to database"
 msgid "Go to database: %s"
@@ -19055,7 +19072,7 @@ msgstr ""
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:98
 msgid "Functions"
 msgstr "Funksiyalar"
 
@@ -19075,7 +19092,7 @@ msgstr ""
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:103
 msgid "Procedures"
 msgstr "Muolajalar"
 
@@ -19472,45 +19489,45 @@ msgstr ""
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr ""
 
-#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
+#: src/Plugins/Export/ExportCsv.php:69 src/Plugins/Export/ExportToon.php:62
 #: src/Plugins/Import/AbstractImportCsv.php:36
 #, fuzzy
 #| msgid "Lines terminated by"
 msgid "Columns separated with:"
 msgstr "Qatorlar bo‘luvchisi"
 
-#: src/Plugins/Export/ExportCsv.php:73
+#: src/Plugins/Export/ExportCsv.php:74
 #: src/Plugins/Import/AbstractImportCsv.php:42
 #, fuzzy
 #| msgid "Fields enclosed by"
 msgid "Columns enclosed with:"
 msgstr "Maydon qiymatlari quyidagi belgi ichiga olingan "
 
-#: src/Plugins/Export/ExportCsv.php:78
+#: src/Plugins/Export/ExportCsv.php:79
 #: src/Plugins/Import/AbstractImportCsv.php:49
 #, fuzzy
 #| msgid "Fields escaped by"
 msgid "Columns escaped with:"
 msgstr "Belgi oldida quyidagi belgi mavjud "
 
-#: src/Plugins/Export/ExportCsv.php:83
+#: src/Plugins/Export/ExportCsv.php:84
 #: src/Plugins/Import/AbstractImportCsv.php:56
 #, fuzzy
 #| msgid "Lines terminated by"
 msgid "Lines terminated with:"
 msgstr "Qatorlar bo‘luvchisi"
 
-#: src/Plugins/Export/ExportCsv.php:88 src/Plugins/Export/ExportExcel.php:70
+#: src/Plugins/Export/ExportCsv.php:89 src/Plugins/Export/ExportExcel.php:70
 #: src/Plugins/Export/ExportHtmlword.php:88
-#: src/Plugins/Export/ExportLatex.php:203 src/Plugins/Export/ExportOds.php:66
+#: src/Plugins/Export/ExportLatex.php:205 src/Plugins/Export/ExportOds.php:66
 #: src/Plugins/Export/ExportOdt.php:134
-#: src/Plugins/Export/ExportTexytext.php:91
+#: src/Plugins/Export/ExportTexytext.php:92
 #, fuzzy
 #| msgid "Replace NULL by"
 msgid "Replace NULL with:"
 msgstr "NULL qiymatni quyidagiga almashtirish"
 
-#: src/Plugins/Export/ExportCsv.php:93 src/Plugins/Export/ExportExcel.php:75
+#: src/Plugins/Export/ExportCsv.php:94 src/Plugins/Export/ExportExcel.php:75
 #, fuzzy
 #| msgid "Remove CRLF characters within fields"
 msgid "Remove carriage return/line feed characters within columns"
@@ -19523,9 +19540,9 @@ msgid "Excel edition:"
 msgstr "Excel-versiyasi"
 
 #: src/Plugins/Export/ExportHtmlword.php:82
-#: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:123
-#: src/Plugins/Export/ExportTexytext.php:80
-#: src/Plugins/Export/ExportXml.php:125
+#: src/Plugins/Export/ExportLatex.php:176 src/Plugins/Export/ExportOdt.php:123
+#: src/Plugins/Export/ExportTexytext.php:81
+#: src/Plugins/Export/ExportXml.php:126
 #, fuzzy
 #| msgid "Databases display options"
 msgid "Data dump options"
@@ -19533,25 +19550,25 @@ msgstr "Ma`lumotlar bazalarini ko‘rsatish afzalliklari"
 
 #: src/Plugins/Export/ExportHtmlword.php:169
 #: src/Plugins/Export/ExportOdt.php:212 src/Plugins/Export/ExportSql.php:2101
-#: src/Plugins/Export/ExportTexytext.php:138
+#: src/Plugins/Export/ExportTexytext.php:139
 msgid "Dumping data for table"
 msgstr "Jadval ma`lumotlarini damp qilish"
 
 #: src/Plugins/Export/ExportHtmlword.php:441
 #: src/Plugins/Export/ExportOdt.php:561 src/Plugins/Export/ExportSql.php:1837
-#: src/Plugins/Export/ExportTexytext.php:397
+#: src/Plugins/Export/ExportTexytext.php:403
 msgid "Table structure for table"
 msgstr "Jadval tuzilishi"
 
 #: src/Plugins/Export/ExportHtmlword.php:458
 #: src/Plugins/Export/ExportOdt.php:581 src/Plugins/Export/ExportSql.php:1903
-#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportTexytext.php:416
 msgid "Structure for view"
 msgstr "Namoyish etish uchun tuzilma"
 
 #: src/Plugins/Export/ExportHtmlword.php:464
 #: src/Plugins/Export/ExportOdt.php:589 src/Plugins/Export/ExportSql.php:1946
-#: src/Plugins/Export/ExportTexytext.php:414
+#: src/Plugins/Export/ExportTexytext.php:420
 msgid "Stand-in structure for view"
 msgstr "Namoyish etish uchun tuzilma"
 
@@ -19563,112 +19580,112 @@ msgstr ""
 msgid "Output unicode characters unescaped"
 msgstr ""
 
-#: src/Plugins/Export/ExportLatex.php:68
+#: src/Plugins/Export/ExportLatex.php:70
 msgid "Content of table @TABLE@"
 msgstr "@TABLE@ jadvalining mundarijasi"
 
-#: src/Plugins/Export/ExportLatex.php:69
+#: src/Plugins/Export/ExportLatex.php:71
 msgid "(continued)"
 msgstr "(davomi)"
 
-#: src/Plugins/Export/ExportLatex.php:70
+#: src/Plugins/Export/ExportLatex.php:72
 msgid "Structure of table @TABLE@"
 msgstr "@TABLE@ jadvalining tuzilishi"
 
-#: src/Plugins/Export/ExportLatex.php:123 src/Plugins/Export/ExportOdt.php:90
+#: src/Plugins/Export/ExportLatex.php:125 src/Plugins/Export/ExportOdt.php:90
 #: src/Plugins/Export/ExportSql.php:279
 #, fuzzy
 #| msgid "Transformation options"
 msgid "Object creation options"
 msgstr "O‘girishlar parametrlari"
 
-#: src/Plugins/Export/ExportLatex.php:129
-#: src/Plugins/Export/ExportLatex.php:185
+#: src/Plugins/Export/ExportLatex.php:131
+#: src/Plugins/Export/ExportLatex.php:187
 #, fuzzy
 #| msgid "Table caption"
 msgid "Table caption:"
 msgstr "Jadval sarlavhasi"
 
-#: src/Plugins/Export/ExportLatex.php:135
-#: src/Plugins/Export/ExportLatex.php:191
+#: src/Plugins/Export/ExportLatex.php:137
+#: src/Plugins/Export/ExportLatex.php:193
 #, fuzzy
 #| msgid "Table caption"
 msgid "Table caption (continued):"
 msgstr "Jadval sarlavhasi"
 
-#: src/Plugins/Export/ExportLatex.php:141
-#: src/Plugins/Export/ExportLatex.php:197
+#: src/Plugins/Export/ExportLatex.php:143
+#: src/Plugins/Export/ExportLatex.php:199
 #, fuzzy
 #| msgid "Label key"
 msgid "Label key:"
 msgstr "Belgi identifikatori"
 
-#: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:98
+#: src/Plugins/Export/ExportLatex.php:151 src/Plugins/Export/ExportOdt.php:98
 #: src/Plugins/Export/ExportSql.php:205
 #, fuzzy
 #| msgid "Disable foreign key checks"
 msgid "Display foreign key relationships"
 msgstr "Tashqi kalitlarni tekshirishni o‘chirish"
 
-#: src/Plugins/Export/ExportLatex.php:156 src/Plugins/Export/ExportOdt.php:105
+#: src/Plugins/Export/ExportLatex.php:158 src/Plugins/Export/ExportOdt.php:105
 #, fuzzy
 #| msgid "Displaying Column Comments"
 msgid "Display comments"
 msgstr "Maydon izohlarini ko‘rsatish"
 
-#: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:111
+#: src/Plugins/Export/ExportLatex.php:164 src/Plugins/Export/ExportOdt.php:111
 #: src/Plugins/Export/ExportSql.php:213
 #, fuzzy
 #| msgid "Available MIME types"
 msgid "Display media types"
 msgstr "Mavjud MIME turlari"
 
-#: src/Plugins/Export/ExportLatex.php:180
+#: src/Plugins/Export/ExportLatex.php:182
 #, fuzzy
 #| msgid "Put fields names in the first row"
 msgid "Put columns names in the first row:"
 msgstr "Maydon nomlarini birinchi qatorga joylashtirish"
 
-#: src/Plugins/Export/ExportLatex.php:230 src/Plugins/Export/ExportSql.php:760
-#: src/Plugins/Export/ExportXml.php:201
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportXml.php:202
 #, fuzzy
 #| msgid "Generation Time"
 msgid "Generation Time:"
 msgstr "Tuzilgan sana"
 
-#: src/Plugins/Export/ExportLatex.php:233 src/Plugins/Export/ExportSql.php:766
-#: src/Plugins/Export/ExportXml.php:204
+#: src/Plugins/Export/ExportLatex.php:235 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportXml.php:205
 #, fuzzy
 #| msgid "PHP Version"
 msgid "PHP Version:"
 msgstr "PHP versiyasm"
 
-#: src/Plugins/Export/ExportLatex.php:286 src/Plugins/Export/ExportSql.php:1992
+#: src/Plugins/Export/ExportLatex.php:290 src/Plugins/Export/ExportSql.php:1992
 #, fuzzy
 #| msgid "Data"
 msgid "Data:"
 msgstr "Ma`lumotlar"
 
-#: src/Plugins/Export/ExportLatex.php:435
+#: src/Plugins/Export/ExportLatex.php:445
 #, fuzzy
 #| msgid "Structure"
 msgid "Structure:"
 msgstr "Tuzilishi"
 
-#: src/Plugins/Export/ExportMediawiki.php:77
+#: src/Plugins/Export/ExportMediawiki.php:78
 #, fuzzy
 #| msgid "Export contents"
 msgid "Export table names"
 msgstr "Tarkibini eksport qilish"
 
-#: src/Plugins/Export/ExportMediawiki.php:84
+#: src/Plugins/Export/ExportMediawiki.php:85
 #, fuzzy
 #| msgid "horizontal (rotated headers)"
 msgid "Export table headers"
 msgstr "gorizontal (aylantirilgan sarlavhalar)"
 
 #: src/Plugins/Export/ExportOdt.php:213
-#: src/Plugins/Export/ExportTexytext.php:139
+#: src/Plugins/Export/ExportTexytext.php:140
 #, fuzzy
 #| msgid "Dumping data for table"
 msgid "Dumping data for query result"
@@ -19960,17 +19977,17 @@ msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr ""
 
-#: src/Plugins/Export/ExportToon.php:68
+#: src/Plugins/Export/ExportToon.php:67
 #, fuzzy
 #| msgid "Creation"
 msgid "Indentation:"
 msgstr "Tuzish"
 
-#: src/Plugins/Export/ExportXml.php:86
+#: src/Plugins/Export/ExportXml.php:87
 msgid "Object creation options (all are recommended)"
 msgstr ""
 
-#: src/Plugins/Export/ExportXml.php:130
+#: src/Plugins/Export/ExportXml.php:131
 msgid "Export contents"
 msgstr "Tarkibini eksport qilish"
 
@@ -20673,7 +20690,7 @@ msgid "Error 405! Request method not allowed."
 msgstr ""
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3161
+#: src/Server/Privileges.php:3155
 #, fuzzy
 #| msgid "Host authentication order"
 msgid "Native MySQL authentication"
@@ -20730,44 +20747,44 @@ msgstr "\"%s\" foydalanuvchining privilegiyalari bekor qilindi."
 msgid "Revoke"
 msgstr "Bekor qilish"
 
-#: src/Server/Privileges.php:1901
+#: src/Server/Privileges.php:1902
 msgid "No users selected for deleting!"
 msgstr "O‘chirish lozim bo‘lgan foydalanuvchilar tanlanmagan!"
 
-#: src/Server/Privileges.php:1904
+#: src/Server/Privileges.php:1905
 msgid "Reloading the privileges"
 msgstr "Privilegiyalar qayta yuklanmoqda"
 
-#: src/Server/Privileges.php:1929
+#: src/Server/Privileges.php:1930
 msgid "The selected users have been deleted successfully."
 msgstr "Belgilangan foydalanuvchilar muvaffaqiyatli o‘chirildi."
 
-#: src/Server/Privileges.php:2003
+#: src/Server/Privileges.php:2004
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "\"%s\" uchun privilegiyalar o‘zgartirildi."
 
-#: src/Server/Privileges.php:2161
+#: src/Server/Privileges.php:2154
 #, php-format
 msgid "Deleting %s"
 msgstr "\"%s\" o‘chirilmoqda"
 
-#: src/Server/Privileges.php:2191
+#: src/Server/Privileges.php:2184
 msgid "The privileges were reloaded successfully."
 msgstr "Privilegiyalar muvaffaqiyatli qayta yuklandi."
 
-#: src/Server/Privileges.php:2256
+#: src/Server/Privileges.php:2250
 #, php-format
 msgid "The user %s already exists!"
 msgstr "\"%s\" nomli foydalanuvchi mavjud!"
 
-#: src/Server/Privileges.php:2409
+#: src/Server/Privileges.php:2403
 #, fuzzy, php-format
 #| msgid "Privileges"
 msgid "Privileges for %s"
 msgstr "Privilegiyalar"
 
-#: src/Server/Privileges.php:2495
+#: src/Server/Privileges.php:2489
 #, fuzzy, php-format
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -20785,7 +20802,7 @@ msgstr ""
 "ma`lumotlar server tomonidan ishlatilayotgan privilegiyalardan farq qilishi "
 "mumkin. Bu holda %sprivilegiyalarni qayta yuklash%s kerak."
 
-#: src/Server/Privileges.php:2511
+#: src/Server/Privileges.php:2505
 #, fuzzy
 #| msgid ""
 #| "Note: phpMyAdmin gets the users' privileges directly from MySQL's "
@@ -20804,11 +20821,11 @@ msgstr ""
 "ma`lumotlar server tomonidan ishlatilayotgan privilegiyalardan farq qilishi "
 "mumkin. Bu holda %sprivilegiyalarni qayta yuklash%s kerak."
 
-#: src/Server/Privileges.php:2799
+#: src/Server/Privileges.php:2793
 msgid "You have added a new user."
 msgstr "Siz yangi foydalanuvchi qo‘shdingiz."
 
-#: src/Server/Privileges.php:3253
+#: src/Server/Privileges.php:3247
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -21465,19 +21482,25 @@ msgstr ""
 msgid "128-bit UUID (Universally Unique Identifier)"
 msgstr ""
 
-#: src/Types.php:602
+#: src/Types.php:293
+msgid ""
+"Stores vector data optimized for operations such as similarity search and "
+"machine learning applications"
+msgstr ""
+
+#: src/Types.php:604
 msgctxt "numeric types"
 msgid "Numeric"
 msgstr ""
 
-#: src/Types.php:620
+#: src/Types.php:622
 #, fuzzy
 #| msgid "Create an index"
 msgctxt "date and time types"
 msgid "Date and time"
 msgstr "Yangi indeks tuzish"
 
-#: src/Types.php:650
+#: src/Types.php:652
 #, fuzzy
 #| msgid "Log file count"
 msgctxt "spatial types"

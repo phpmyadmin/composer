@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-22 00:36+0000\n"
+"POT-Creation-Date: 2026-02-25 13:54+0000\n"
 "PO-Revision-Date: 2026-02-24 08:09+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -279,7 +279,7 @@ msgstr "நெடுவரிசை (கள்)"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
-#: src/Controllers/Server/PrivilegesController.php:305
+#: src/Controllers/Server/PrivilegesController.php:314
 #: src/Normalization.php:235 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -482,11 +482,11 @@ msgstr "ஒரு வெளிநாட்டு விசை."
 #: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
-#: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
+#: src/Plugins/Export/ExportLatex.php:465 src/Plugins/Export/ExportOdt.php:324
 #: src/Plugins/Export/ExportOdt.php:395
-#: src/Plugins/Export/ExportTexytext.php:236
-#: src/Plugins/Export/ExportTexytext.php:296
-#: src/Plugins/Export/Helpers/Pdf.php:458
+#: src/Plugins/Export/ExportTexytext.php:242
+#: src/Plugins/Export/ExportTexytext.php:302
+#: src/Plugins/Export/Helpers/Pdf.php:469
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:602
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:624
 msgid "Column"
@@ -585,7 +585,7 @@ msgstr "முனை குழு"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
 #: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
@@ -606,8 +606,8 @@ msgstr "கட்டமைப்பு"
 #: resources/templates/triggers/list.twig:47
 #: src/Plugins/Export/ExportHtmlword.php:396
 #: src/Plugins/Export/ExportOdt.php:503
-#: src/Plugins/Export/ExportTexytext.php:365
-#: src/Plugins/Export/Helpers/Pdf.php:300
+#: src/Plugins/Export/ExportTexytext.php:371
+#: src/Plugins/Export/Helpers/Pdf.php:311
 msgid "Name"
 msgstr "பெயர்"
 
@@ -634,11 +634,11 @@ msgstr "பெயர்"
 #: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
-#: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
+#: src/Plugins/Export/ExportLatex.php:466 src/Plugins/Export/ExportOdt.php:327
 #: src/Plugins/Export/ExportOdt.php:398
-#: src/Plugins/Export/ExportTexytext.php:237
-#: src/Plugins/Export/ExportTexytext.php:297
-#: src/Plugins/Export/Helpers/Pdf.php:460
+#: src/Plugins/Export/ExportTexytext.php:243
+#: src/Plugins/Export/ExportTexytext.php:303
+#: src/Plugins/Export/Helpers/Pdf.php:471
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:603
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:625
 msgid "Type"
@@ -673,11 +673,11 @@ msgstr ""
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:10
 #: src/Plugins/Export/ExportHtmlword.php:234
 #: src/Plugins/Export/ExportHtmlword.php:305
-#: src/Plugins/Export/ExportLatex.php:458 src/Plugins/Export/ExportOdt.php:333
+#: src/Plugins/Export/ExportLatex.php:468 src/Plugins/Export/ExportOdt.php:333
 #: src/Plugins/Export/ExportOdt.php:404
-#: src/Plugins/Export/ExportTexytext.php:239
-#: src/Plugins/Export/ExportTexytext.php:299
-#: src/Plugins/Export/Helpers/Pdf.php:464
+#: src/Plugins/Export/ExportTexytext.php:245
+#: src/Plugins/Export/ExportTexytext.php:305
+#: src/Plugins/Export/Helpers/Pdf.php:475
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:606
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:628
 msgid "Default"
@@ -738,11 +738,11 @@ msgstr "பண்புக்கூறுகள்"
 #: resources/templates/table/zoom_search/result_form.twig:34
 #: src/Plugins/Export/ExportHtmlword.php:231
 #: src/Plugins/Export/ExportHtmlword.php:302
-#: src/Plugins/Export/ExportLatex.php:457 src/Plugins/Export/ExportOdt.php:330
+#: src/Plugins/Export/ExportLatex.php:467 src/Plugins/Export/ExportOdt.php:330
 #: src/Plugins/Export/ExportOdt.php:401
-#: src/Plugins/Export/ExportTexytext.php:238
-#: src/Plugins/Export/ExportTexytext.php:298
-#: src/Plugins/Export/Helpers/Pdf.php:462
+#: src/Plugins/Export/ExportTexytext.php:244
+#: src/Plugins/Export/ExportTexytext.php:304
+#: src/Plugins/Export/Helpers/Pdf.php:473
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
@@ -764,9 +764,9 @@ msgstr "சலுகைகளை சரிசெய்யவும்"
 #: resources/templates/table/structure/display_structure.twig:28
 #: src/Config/Descriptions.php:660 src/Config/Descriptions.php:675
 #: src/Config/Descriptions.php:711 src/Plugins/Export/ExportHtmlword.php:315
-#: src/Plugins/Export/ExportLatex.php:464 src/Plugins/Export/ExportOdt.php:414
-#: src/Plugins/Export/ExportTexytext.php:305
-#: src/Plugins/Export/Helpers/Pdf.php:481
+#: src/Plugins/Export/ExportLatex.php:474 src/Plugins/Export/ExportOdt.php:414
+#: src/Plugins/Export/ExportTexytext.php:311
+#: src/Plugins/Export/Helpers/Pdf.php:492
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:618
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:631
 msgid "Comments"
@@ -785,8 +785,8 @@ msgstr "நிரல்வரிசையை நகர்த்து"
 #: src/Config/Descriptions.php:664 src/Config/Descriptions.php:676
 #: src/Config/Descriptions.php:714 src/Plugins/Export/ExportHtmlword.php:322
 #: src/Plugins/Export/ExportOdt.php:421
-#: src/Plugins/Export/ExportTexytext.php:310
-#: src/Plugins/Export/Helpers/Pdf.php:489
+#: src/Plugins/Export/ExportTexytext.php:316
+#: src/Plugins/Export/Helpers/Pdf.php:500
 msgid "Media type"
 msgstr "ஊடக வகை"
 
@@ -921,8 +921,8 @@ msgstr "முடக்கப்பட்டது"
 #: src/Controllers/Table/Structure/PrimaryController.php:101
 #: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "Yes"
 msgstr "ஆம்"
@@ -957,8 +957,8 @@ msgstr "ஆம்"
 #: src/Controllers/JavaScriptMessagesController.php:343
 #: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
 #: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "No"
 msgstr "இல்லை"
@@ -1063,8 +1063,8 @@ msgstr "அழி"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
-#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:117 src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1588 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "தரவுத்தளம்"
 
@@ -1091,18 +1091,18 @@ msgstr "வரலாறு"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1157 src/Import/Import.php:1215
-#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
+#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:57
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
-#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:87
-#: src/Plugins/Export/ExportMediawiki.php:49
+#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:89
+#: src/Plugins/Export/ExportMediawiki.php:50
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
-#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
+#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:47
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56
-#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
+#: src/Plugins/Export/ExportTexytext.php:57
+#: src/Plugins/Export/ExportToon.php:50 src/Plugins/Export/ExportXml.php:69
+#: src/Plugins/Export/ExportYaml.php:46 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1434,9 +1434,9 @@ msgstr "அச்சிடுக"
 
 #: resources/templates/database/data_dictionary/index.twig:28
 #: src/Plugins/Export/ExportHtmlword.php:309
-#: src/Plugins/Export/ExportLatex.php:460 src/Plugins/Export/ExportOdt.php:408
-#: src/Plugins/Export/ExportTexytext.php:301
-#: src/Plugins/Export/Helpers/Pdf.php:473
+#: src/Plugins/Export/ExportLatex.php:470 src/Plugins/Export/ExportOdt.php:408
+#: src/Plugins/Export/ExportTexytext.php:307
+#: src/Plugins/Export/Helpers/Pdf.php:484
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:608
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:630
 msgid "Links to"
@@ -1811,8 +1811,8 @@ msgstr "முடிவு"
 #: resources/templates/triggers/editor_form.twig:62
 #: src/Plugins/Export/ExportHtmlword.php:399
 #: src/Plugins/Export/ExportOdt.php:512
-#: src/Plugins/Export/ExportTexytext.php:368
-#: src/Plugins/Export/Helpers/Pdf.php:306
+#: src/Plugins/Export/ExportTexytext.php:374
+#: src/Plugins/Export/Helpers/Pdf.php:317
 msgid "Definition"
 msgstr "வரையறை"
 
@@ -1840,7 +1840,7 @@ msgstr "வரையறுக்கவும்"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
 #: src/Util.php:1385
 msgid "Events"
 msgstr "நிகழ்வுகள்"
@@ -2018,7 +2018,7 @@ msgstr "அட்டவணைகள்:"
 #: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
-#: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
+#: src/Plugins/Export/ExportXml.php:108 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "அட்டவணைகள்"
 
@@ -2298,7 +2298,7 @@ msgstr "புரவலன் பெயர்"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
-#: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
+#: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
 #: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "சலுகைகள்"
@@ -2348,7 +2348,7 @@ msgstr "சலுகைகளைத் திருத்தவும்"
 
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2079
+#: src/Server/Privileges.php:2077
 msgid "No user found."
 msgstr "எந்த பயனரும் கிடைக்கவில்லை."
 
@@ -2745,8 +2745,8 @@ msgstr ""
 "விரும்புகிறீர்களா?"
 
 #: resources/templates/database/structure/copy_form.twig:5
-#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:251
-#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:356
+#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:253
+#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:357
 #: src/Plugins/Export/Helpers/Pdf.php:146
 msgid "Database:"
 msgstr "தரவுத்தளம்:"
@@ -2818,15 +2818,15 @@ msgstr "உருவாக்க வினவல்களைக் காட்�
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
-#: src/Server/Privileges.php:1593
+#: src/Plugins/Export/ExportXml.php:409 src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1594
 msgid "Table"
 msgstr "அட்டவணை"
 
 #: resources/templates/database/structure/show_create.twig:30
 #: src/Navigation/Nodes/NodeViewContainer.php:23
 #: src/Navigation/Nodes/NodeViewContainer.php:25
-#: src/Plugins/Export/ExportXml.php:117
+#: src/Plugins/Export/ExportXml.php:118
 msgid "Views"
 msgstr "காட்சிகள்"
 
@@ -3567,8 +3567,8 @@ msgid "Server connection:"
 msgstr "சேவையக இணைப்பு:"
 
 #: resources/templates/home/index.twig:198
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:764
-#: src/Plugins/Export/ExportXml.php:203
+#: src/Plugins/Export/ExportLatex.php:234 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportXml.php:204
 msgid "Server version:"
 msgstr "வழங்கி பதிப்பு:"
 
@@ -4782,7 +4782,7 @@ msgstr "பயனர் கணக்கு"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
+#: src/Server/Privileges.php:1598 src/Server/Privileges.php:1600
 msgid "Routine"
 msgstr "வழக்கமான"
 
@@ -4794,7 +4794,7 @@ msgid ""
 msgstr "குறிப்பு: நீங்கள் தற்போது உள்நுழைந்த பயனரின் சலுகைகளைத் திருத்த முயற்சிக்கிறீர்கள்."
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1598
+#: src/Server/Privileges.php:1599
 msgid "Routine-specific privileges"
 msgstr "வழக்கமான-குறிப்பிட்ட சலுகைகள்"
 
@@ -4931,7 +4931,7 @@ msgstr "பயனர் குழுவை தொகுக்க"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1593
 msgid "Table-specific privileges"
 msgstr "அட்டவணை சார்ந்த சலுகைகள்"
 
@@ -5098,7 +5098,7 @@ msgid "Global privileges"
 msgstr "உலகளாவிய சலுகைகள்"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1587
 msgid "Database-specific privileges"
 msgstr "தரவுத்தள-குறிப்பிட்ட சலுகைகள்"
 
@@ -5395,8 +5395,8 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:224 src/Plugins/Export/ExportSql.php:753
-#: src/Plugins/Export/ExportXml.php:195
+#: src/Plugins/Export/ExportLatex.php:226 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportXml.php:196
 msgid "Host:"
 msgstr "புரவலன்:"
 
@@ -6231,7 +6231,7 @@ msgid "No users were found belonging to this user group."
 msgstr "இந்த பயனர் குழுவைச் சேர்ந்தவர்கள் யாரும் காணப்படவில்லை."
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:432
+#: src/Controllers/Server/PrivilegesController.php:442
 #: src/Server/Status/Processes.php:101
 msgid "User"
 msgstr "பயனர்"
@@ -6388,8 +6388,8 @@ msgstr "சனி->நிலை"
 #: src/Controllers/JavaScriptMessagesController.php:276
 #: src/Plugins/Export/ExportHtmlword.php:397
 #: src/Plugins/Export/ExportOdt.php:506
-#: src/Plugins/Export/ExportTexytext.php:366
-#: src/Plugins/Export/Helpers/Pdf.php:302 src/Server/Status/Processes.php:105
+#: src/Plugins/Export/ExportTexytext.php:372
+#: src/Plugins/Export/Helpers/Pdf.php:313 src/Server/Status/Processes.php:105
 msgid "Time"
 msgstr "நேரம்"
 
@@ -7398,8 +7398,8 @@ msgstr "நேரம்"
 #: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
-#: src/Plugins/Export/ExportTexytext.php:367
-#: src/Plugins/Export/Helpers/Pdf.php:304
+#: src/Plugins/Export/ExportTexytext.php:373
+#: src/Plugins/Export/Helpers/Pdf.php:315
 msgid "Event"
 msgstr "நிகழ்வு"
 
@@ -7415,8 +7415,8 @@ msgstr "%s செயல்தூண்டியின் தரவேற்ற�
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
-#: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr "தூண்டுதல்கள்"
 
@@ -8329,8 +8329,8 @@ msgid ""
 "href=\"https://www.percona.com/blog/2008/08/23/how-to-track-down-the-source-"
 "of-aborted_connects/\">This article</a> might help you track down the source."
 msgstr ""
-"இணைப்புகள் பொதுவாக அங்கீகரிக்க முடியாதபோது கைவிடப்படுகின்றன. <a href=\"https://"
-"www.percona.com/blog/2008/08/23/how-to-to-track-down-the-source-of-"
+"இணைப்புகள் பொதுவாக அங்கீகரிக்க முடியாதபோது கைவிடப்படுகின்றன. <a href=\"https://www."
+"percona.com/blog/2008/08/23/how-to-to-track-down-the-source-of-"
 "aborted_connects/\"> இந்தக் கட்டுரை உங்களுக்கு உதவக்கூடும் மூலத்தைக் கண்காணிக்கவும்."
 
 #: src/Advisory/Rules.php:584
@@ -9088,43 +9088,43 @@ msgid "Closed"
 msgstr "மூடப்பட்டது"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:725
 msgctxt "Week day name"
 msgid "Monday"
 msgstr "திங்கள்"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:726
 msgctxt "Week day name"
 msgid "Tuesday"
 msgstr "செவ்வாய்க்கிழமை"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:727
 msgctxt "Week day name"
 msgid "Wednesday"
 msgstr "புதன்கிழமை"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:728
 msgctxt "Week day name"
 msgid "Thursday"
 msgstr "வியாழக்கிழமை"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:729
 msgctxt "Week day name"
 msgid "Friday"
 msgstr "வெள்ளிக்கிழமை"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:727
+#: src/Controllers/JavaScriptMessagesController.php:730
 msgctxt "Week day name"
 msgid "Saturday"
 msgstr "காரிக்கிழமை"
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:724
 msgctxt "Week day name"
 msgid "Sunday"
 msgstr "ஞாயிற்றுக்கிழமை"
@@ -9156,33 +9156,33 @@ msgstr "முடக்கு"
 #: src/Config/ConfigFile.php:664 src/Config/ConfigFile.php:716
 #: src/Config/ConfigFile.php:728 src/Config/ConfigFile.php:736
 #: src/Config/ConfigFile.php:741 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure"
 msgstr "கட்டமைப்பு"
 
 #: src/Config/ConfigFile.php:665 src/Config/ConfigFile.php:717
 #: src/Config/ConfigFile.php:729 src/Config/ConfigFile.php:737
 #: src/Config/ConfigFile.php:742 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "data"
 msgstr "தரவு"
 
 #: src/Config/ConfigFile.php:666 src/Config/ConfigFile.php:718
 #: src/Config/ConfigFile.php:730 src/Config/ConfigFile.php:738
 #: src/Config/ConfigFile.php:743 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure and data"
 msgstr "கட்டமைப்பும் தரவும்"
 
@@ -10617,11 +10617,11 @@ msgstr "சுருக்க"
 #: src/Config/Descriptions.php:640 src/Config/Descriptions.php:647
 #: src/Config/Descriptions.php:655 src/Config/Descriptions.php:659
 #: src/Config/Descriptions.php:672 src/Config/Descriptions.php:674
-#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:98
+#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:99
 #: src/Plugins/Export/ExportExcel.php:80
 #: src/Plugins/Export/ExportHtmlword.php:93 src/Plugins/Export/ExportOds.php:71
 #: src/Plugins/Export/ExportOdt.php:129
-#: src/Plugins/Export/ExportTexytext.php:86
+#: src/Plugins/Export/ExportTexytext.php:87
 msgid "Put columns names in the first row"
 msgstr "முதல் வரிசையில் நெடுவரிசை பெயர்களை வைக்கவும்"
 
@@ -10675,16 +10675,16 @@ msgstr "அட்டவணை பெயர் வார்ப்புரு"
 #: src/Config/Descriptions.php:657 src/Config/Descriptions.php:670
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:717
 #: src/Config/Descriptions.php:723 src/Plugins/Export/ExportHtmlword.php:68
-#: src/Plugins/Export/ExportLatex.php:108
-#: src/Plugins/Export/ExportMediawiki.php:59
-#: src/Plugins/Export/ExportMediawiki.php:65
+#: src/Plugins/Export/ExportLatex.php:110
+#: src/Plugins/Export/ExportMediawiki.php:60
+#: src/Plugins/Export/ExportMediawiki.php:66
 #: src/Plugins/Export/ExportOdt.php:75 src/Plugins/Export/ExportPdf.php:76
 #: src/Plugins/Export/ExportSql.php:263
-#: src/Plugins/Export/ExportTexytext.php:66
+#: src/Plugins/Export/ExportTexytext.php:67
 msgid "Dump table"
 msgstr "டம்ப் டேபிள்"
 
-#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:99
+#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:101
 msgid "Include table caption"
 msgstr "அட்டவணை தலைப்பு சேர்க்கவும்"
 
@@ -11613,7 +11613,7 @@ msgid "Missing data for %s"
 msgstr "%s க்கான தரவு காணவில்லை"
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:808
 msgid "Incorrect value!"
 msgstr "தவறான மதிப்பு!"
 
@@ -11925,22 +11925,22 @@ msgid "Incorrect IP address: %s"
 msgstr "தவறான ஐபி முகவரி: %s"
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:807
 msgid "Not a valid port number!"
 msgstr "செல்லுபடியாகும் துறைமுகம் எண் அல்ல!"
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:805
 msgid "Not a positive number!"
 msgstr "நேர்மறை எண் அல்ல!"
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:806
 msgid "Not a non-negative number!"
 msgstr "எதிர்மறை அல்லாத எண் அல்ல!"
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:806
+#: src/Controllers/JavaScriptMessagesController.php:809
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr "மதிப்பு %s ஐ விட குறைவாகவோ அல்லது சமமாகவோ இருக்க வேண்டும்!"
@@ -12389,7 +12389,37 @@ msgstr ""
 "மட்டுமே நீளமாக இருக்க வேண்டும். தயவுசெய்து [doc@cfg_blowfish_secret] ஆவணங்களைப் "
 "பார்க்கவும் [/doc]."
 
-#: src/Controllers/HomeController.php:353
+#: src/Controllers/HomeController.php:356
+#, fuzzy
+#| msgid ""
+#| "The configuration file needs a valid key for cookie encryption. A "
+#| "temporary key was automatically generated for you. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The configuration file needs a valid key for query encryption. A temporary "
+"key was automatically generated for you. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"குக்கீ குறியாக்கத்திற்கு உள்ளமைவு கோப்புக்கு சரியான விசை தேவை. உங்களுக்காக ஒரு தற்காலிக "
+"விசை தானாக உருவாக்கப்பட்டது. தயவுசெய்து [doc@cfg_blowfish_secret] ஆவணங்களைப் "
+"பார்க்கவும் [/doc]."
+
+#: src/Controllers/HomeController.php:366
+#, fuzzy, php-format
+#| msgid ""
+#| "The cookie encryption key in the configuration file is longer than "
+#| "necessary. It should only be %d bytes long. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The query encryption key in the configuration file is longer than necessary. "
+"It should only be %d bytes long. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"உள்ளமைவு கோப்பில் உள்ள குக்கீ குறியாக்க விசை தேவையானதை விட நீளமானது. இது %d பைட்டுகள் "
+"மட்டுமே நீளமாக இருக்க வேண்டும். தயவுசெய்து [doc@cfg_blowfish_secret] ஆவணங்களைப் "
+"பார்க்கவும் [/doc]."
+
+#: src/Controllers/HomeController.php:384
 msgid ""
 "Directory [code]config[/code], which is used by the setup script, still "
 "exists in your phpMyAdmin directory. It is strongly recommended to remove it "
@@ -12401,7 +12431,7 @@ msgstr ""
 "பரிந்துரைக்கிறது. இல்லையெனில் உங்கள் சர்வர் பாதுகாப்பு கட்டமைப்பு கோவையை அங்கீகரிக்கப்படாத "
 "பயனர் பதிவிறக்குவதால் பாதிப்பு ஏற்படும்."
 
-#: src/Controllers/HomeController.php:374
+#: src/Controllers/HomeController.php:405
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
@@ -12410,7 +12440,7 @@ msgstr ""
 "வழங்கி SUSHOSIN உடன் இயங்குகிறது. நிகழக்கூடிய பிழைமுறைகளுக்கு தயவுசெய்து "
 "%sஆவணச்சான்றை%s காண்க."
 
-#: src/Controllers/HomeController.php:388
+#: src/Controllers/HomeController.php:419
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
@@ -12419,7 +12449,7 @@ msgstr ""
 "$ Cfg ['tempdir'] (%s) அணுக முடியாது. Phpmyadmin வார்ப்புருக்களை கேச் செய்ய "
 "முடியவில்லை, இதன் காரணமாக மெதுவாக இருக்கும்."
 
-#: src/Controllers/HomeController.php:405
+#: src/Controllers/HomeController.php:436
 msgid ""
 "The [code]HTTP_HOST[/code] variable is missing, which might cause phpMyAdmin "
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
@@ -12428,7 +12458,7 @@ msgstr ""
 "[code]HTTP_HOST[/code] மாறி இல்லை, இது phpMyAdmin சரியாக வேலை செய்யாமல் போகலாம். "
 "சாத்தியமான சிக்கல்களுக்கு [doc@faq1-46]ஆவணத்தைப்[/doc] பார்க்கவும்."
 
-#: src/Controllers/HomeController.php:458
+#: src/Controllers/HomeController.php:489
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
@@ -12438,7 +12468,7 @@ msgstr ""
 "பயன்படுத்துகின்றீர்கள். mbstring PHP நீட்சி இல்லாமல் PHPMyAdminஆல் சரங்களை சரியாக "
 "பிரிக்கவியலாது அதனால் எதிர்பாரா முடிவுகள் கிடைக்கலாம்."
 
-#: src/Controllers/HomeController.php:476
+#: src/Controllers/HomeController.php:507
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
@@ -13361,7 +13391,7 @@ msgstr "சீராக்கலின் இரண்டாம் படிந�
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:754
+#: src/Controllers/JavaScriptMessagesController.php:757
 #: src/Normalization.php:349
 msgid "Done"
 msgstr "முடிந்த"
@@ -13997,346 +14027,348 @@ msgstr "அட்டவணை %s ஏற்கனவே உள்ளன!"
 msgid "Hide"
 msgstr "மறை"
 
-#: src/Controllers/JavaScriptMessagesController.php:695
-msgid "The fullscreen request was denied."
+#: src/Controllers/JavaScriptMessagesController.php:696
+msgid ""
+"The fullscreen request was denied because the Fullscreen API is disabled by "
+"user preference in the browser."
 msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:700
 msgctxt "Month name"
 msgid "January"
 msgstr "மா-தை"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:701
 msgctxt "Month name"
 msgid "February"
 msgstr "தை-மாசி"
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:702
 msgctxt "Month name"
 msgid "March"
 msgstr "மா-பங்குனி"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:703
 msgctxt "Month name"
 msgid "April"
 msgstr "ப-சித்திரை"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:704
 msgctxt "Month name"
 msgid "May"
 msgstr "சி-வைகாசி"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:705
 msgctxt "Month name"
 msgid "June"
 msgstr "வை-ஆனி"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:706
 msgctxt "Month name"
 msgid "July"
 msgstr "ஆ-ஆடி"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:707
 msgctxt "Month name"
 msgid "August"
 msgstr "ஆ-ஆவணி"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:708
 msgctxt "Month name"
 msgid "September"
 msgstr "ஆ-புரட்டாசி"
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:709
 msgctxt "Month name"
 msgid "October"
 msgstr "பு-ஐப்பசி"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:710
 msgctxt "Month name"
 msgid "November"
 msgstr "ஐ-கார்த்திகை"
 
-#: src/Controllers/JavaScriptMessagesController.php:708
+#: src/Controllers/JavaScriptMessagesController.php:711
 msgctxt "Month name"
 msgid "December"
 msgstr "கா-மார்கழி"
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "சனவரி"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "பிப்ரவரி"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "மார்"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "ஏப்ரல்"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "சி-வைகாசி"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "சூன்"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "சூலை"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "ஆக"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "செப்"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "அக்"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "ஒன்பது"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "டிசம்பர்"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
 msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "சூரியன்"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "தி"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "செவ்வாய்"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "அறிவன்"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "Thu"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "வெள்ளி"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "காரி"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:738
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "அவை"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:739
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "மோ"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:740
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "செ"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:741
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "நாங்கள்"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:742
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "வது"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:743
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "Fr"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:744
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "ச"
 
-#: src/Controllers/JavaScriptMessagesController.php:742
+#: src/Controllers/JavaScriptMessagesController.php:745
 msgctxt "Column header for week of the year in calendar"
 msgid "Wk"
 msgstr "Wk"
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:747
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "காலண்டர்-மாத ஆண்டு"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:748
 msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "எதுவுமில்லை"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:749
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "நேரம்"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:750
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr "மணி"
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:751
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "நிமிடங்கள்"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:752
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "இரண்டாவது"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:753
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "மில்லி நொடி"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:754
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "மைக்ரோ செகண்ட்"
 
-#: src/Controllers/JavaScriptMessagesController.php:752
+#: src/Controllers/JavaScriptMessagesController.php:755
 msgctxt "The time zone for a time of day"
 msgid "Time zone"
 msgstr "நேர மண்டலம்"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:756
+#: src/Controllers/JavaScriptMessagesController.php:759
 msgctxt "Previous month"
 msgid "Prev"
 msgstr "முந்தைய"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:758
+#: src/Controllers/JavaScriptMessagesController.php:761
 msgctxt "Next month"
 msgid "Next"
 msgstr "அடுத்தது"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:760
+#: src/Controllers/JavaScriptMessagesController.php:763
 msgid "Today"
 msgstr "இன்று"
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:766
 msgid "This field is required"
 msgstr "இந்த புலம் தேவை"
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:767
 msgid "Please fix this field"
 msgstr "இந்த புலத்தை சரிசெய்யவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:768
 msgid "Please enter a valid email address"
 msgstr "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:769
 msgid "Please enter a valid URL"
 msgstr "செல்லுபடியாகும் முகவரி ஐ உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:770
 msgid "Please enter a valid date"
 msgstr "சரியான தேதியை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:771
 msgid "Please enter a valid date ( ISO )"
 msgstr "செல்லுபடியாகும் தேதியை (ஐஎச்ஓ) உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:772
 msgid "Please enter a valid number"
 msgstr "செல்லுபடியாகும் எண்ணை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:773
 msgid "Please enter a valid credit card number"
 msgstr "செல்லுபடியாகும் கடன் அட்டை எண்ணை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:774
 msgid "Please enter only digits"
 msgstr "தயவுசெய்து இலக்கங்களை மட்டும் உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:775
 msgid "Please enter the same value again"
 msgstr "அதே மதிப்பை மீண்டும் உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:776
 msgid "Please enter no more than {0} characters"
 msgstr "தயவுசெய்து {0} எழுத்துக்களை விட அதிகமாக உள்ளிட வேண்டாம்"
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:777
 msgid "Please enter at least {0} characters"
 msgstr "தயவுசெய்து குறைந்தது {0} எழுத்துக்களை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:778
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr "{0} மற்றும் {1} எழுத்துக்களுக்கு இடையில் ஒரு மதிப்பை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:779
 msgid "Please enter a value between {0} and {1}"
 msgstr "{0} மற்றும் {1 between க்கு இடையில் ஒரு மதிப்பை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:780
 msgid "Please enter a value less than or equal to {0}"
 msgstr "தயவுசெய்து {0 than க்கு சமமான அல்லது சமமான மதிப்பை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:781
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "தயவுசெய்து {0 than ஐ விட அதிகமாகவோ அல்லது சமமாகவோ உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:782
 msgid "Please enter a valid date or time"
 msgstr "சரியான தேதி அல்லது நேரத்தை உள்ளிடவும்"
 
-#: src/Controllers/JavaScriptMessagesController.php:780
+#: src/Controllers/JavaScriptMessagesController.php:783
 msgid "Please enter a valid HEX input"
 msgstr "செல்லுபடியாகும் ஃச் உள்ளீட்டை உள்ளிடவும்"
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:782
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid "This column can not contain a 32 chars value"
 msgstr "இந்த நெடுவரிசையில் 32 எழுத்துக்கள் மதிப்பைக் கொண்டிருக்க முடியாது"
 
-#: src/Controllers/JavaScriptMessagesController.php:785
+#: src/Controllers/JavaScriptMessagesController.php:788
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
@@ -14344,38 +14376,38 @@ msgstr ""
 "இந்த செயல்பாடுகள் ஒரு பைனரி முடிவைத் தரும்; சீரற்ற முடிவுகளைத் தவிர்க்க நீங்கள் அதை ஒரு "
 "பைனரி, வர்பினரி அல்லது குமிழ் நெடுவரிசையில் சேமிக்க வேண்டும்."
 
-#: src/Controllers/JavaScriptMessagesController.php:790
+#: src/Controllers/JavaScriptMessagesController.php:793
 msgid ""
 "The file being uploaded is probably larger than the maximum allowed size."
 msgstr "பதிவேற்றப்படும் கோப்பு அதிகபட்சமாக அனுமதிக்கப்பட்ட அளவை விட பெரியது."
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:795
 #, php-format
 msgid "%s of %s"
 msgstr "%s %s"
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:796
 #, php-format
 msgid "%s/sec."
 msgstr "%s/நொடி."
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:797
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr "சுமார் %நிமிடம். %நொடி நொடி. மீதமுள்ள."
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:798
 msgid "About %SEC sec. remaining."
 msgstr "சுமார் %நொடி. மீதமுள்ள."
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid "The file is being processed, please be patient."
 msgstr "கோப்பு செயலாக்கப்படுகிறது, தயவுசெய்து பொறுமையாக இருங்கள்."
 
-#: src/Controllers/JavaScriptMessagesController.php:797
+#: src/Controllers/JavaScriptMessagesController.php:800
 msgid "Uploading your import file…"
 msgstr "உங்கள் இறக்குமதி கோப்பை பதிவேற்றுதல்…"
 
-#: src/Controllers/JavaScriptMessagesController.php:799
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -14398,7 +14430,7 @@ msgid "No such column"
 msgstr "அதுபோல் நிரல்வரிசை இல்லை"
 
 #: src/Controllers/Normalization/GetColumnsController.php:35
-#: src/Normalization.php:230 src/Types.php:648
+#: src/Normalization.php:230 src/Types.php:650
 msgctxt "string types"
 msgid "String"
 msgstr "சரம்"
@@ -14477,7 +14509,7 @@ msgstr "கணக்கு %s@ %s வெற்றிகரமாக பூட்
 msgid "The account %s@%s has been successfully unlocked."
 msgstr "கணக்கு %s@ %s வெற்றிகரமாக திறக்கப்பட்டுள்ளது."
 
-#: src/Controllers/Server/PrivilegesController.php:123
+#: src/Controllers/Server/PrivilegesController.php:125
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
@@ -16273,7 +16305,7 @@ msgstr "தூண்டுதல் பெயர் %d எழுத்துக�
 msgid "The trigger name cannot end with a space character."
 msgstr "தூண்டுதல் பெயர் விண்வெளி எழுத்துடன் முடிவடைய முடியாது."
 
-#: src/Import/Import.php:943
+#: src/Import/Import.php:944
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
@@ -16282,48 +16314,48 @@ msgstr ""
 "புதுப்பிக்கவும், நீக்கவும், மாற்றவும், அமைக்கவும் (உலகளாவிய விருப்பங்கள் இல்லாமல்) மீண்டும் "
 "உருட்ட முடியும்."
 
-#: src/Import/Import.php:1160
+#: src/Import/Import.php:1161
 #, php-format
 msgid "Go to table: %s"
 msgstr "அட்டவணைக்குச் செல்லுங்கள்: %s"
 
-#: src/Import/Import.php:1168
+#: src/Import/Import.php:1169
 #, php-format
 msgid "Structure of %s"
 msgstr "%s இன் அமைப்பு"
 
-#: src/Import/Import.php:1175 src/Import/Import.php:1224
+#: src/Import/Import.php:1176 src/Import/Import.php:1225
 #, php-format
 msgid "Edit settings for %s"
 msgstr "%s க்கான அமைப்புகளைத் திருத்தவும்"
 
-#: src/Import/Import.php:1186
+#: src/Import/Import.php:1187
 #, php-format
 msgid "Go to view: %s"
 msgstr "பார்வைக்குச் செல்லுங்கள்: %s"
 
-#: src/Import/Import.php:1207
+#: src/Import/Import.php:1208
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr ""
 "பின்வரும் கட்டமைப்புகள் உருவாக்கப்பட்டுள்ளன அல்லது மாற்றப்பட்டுள்ளன. இங்கே நீங்கள் முடியும்:"
 
-#: src/Import/Import.php:1209
+#: src/Import/Import.php:1210
 msgid "View a structure's contents by clicking on its name."
 msgstr "ஒரு கட்டமைப்பின் உள்ளடக்கங்களை அதன் பெயரைக் சொடுக்கு செய்வதன் மூலம் காண்க."
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1211
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr ""
 "தொடர்புடைய \"விருப்பங்கள்\" இணைப்பைக் சொடுக்கு செய்வதன் மூலம் அதன் எந்த அமைப்புகளையும் "
 "மாற்றவும்."
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1212
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "\"கட்டமைப்பு\" இணைப்பைப் பின்பற்றுவதன் மூலம் கட்டமைப்பைத் திருத்தவும்."
 
-#: src/Import/Import.php:1218
+#: src/Import/Import.php:1219
 #, php-format
 msgid "Go to database: %s"
 msgstr "தரவுத்தளம்: %s க்கு செல்க"
@@ -16468,7 +16500,7 @@ msgstr "புதியது"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:98
 msgid "Functions"
 msgstr "செயல்பாடுகள்"
 
@@ -16488,7 +16520,7 @@ msgstr "விரிவாக்கு/சரிவு"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:103
 msgid "Procedures"
 msgstr "நடைமுறைகள்"
 
@@ -16900,35 +16932,35 @@ msgstr ""
 "நீங்கள் இரண்டு காரணி அங்கீகாரத்தை இயக்கியுள்ளீர்கள், தயவுசெய்து உங்கள் உள்நுழைவை "
 "உறுதிப்படுத்தவும்."
 
-#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
+#: src/Plugins/Export/ExportCsv.php:69 src/Plugins/Export/ExportToon.php:62
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "இதனுடன் பிரிக்கப்பட்ட நெடுவரிசைகள்:"
 
-#: src/Plugins/Export/ExportCsv.php:73
+#: src/Plugins/Export/ExportCsv.php:74
 #: src/Plugins/Import/AbstractImportCsv.php:42
 msgid "Columns enclosed with:"
 msgstr "இணைக்கப்பட்ட நெடுவரிசைகள்:"
 
-#: src/Plugins/Export/ExportCsv.php:78
+#: src/Plugins/Export/ExportCsv.php:79
 #: src/Plugins/Import/AbstractImportCsv.php:49
 msgid "Columns escaped with:"
 msgstr "நெடுவரிசைகள் தப்பித்தன:"
 
-#: src/Plugins/Export/ExportCsv.php:83
+#: src/Plugins/Export/ExportCsv.php:84
 #: src/Plugins/Import/AbstractImportCsv.php:56
 msgid "Lines terminated with:"
 msgstr "கோடுகள் நிறுத்தப்பட்டன:"
 
-#: src/Plugins/Export/ExportCsv.php:88 src/Plugins/Export/ExportExcel.php:70
+#: src/Plugins/Export/ExportCsv.php:89 src/Plugins/Export/ExportExcel.php:70
 #: src/Plugins/Export/ExportHtmlword.php:88
-#: src/Plugins/Export/ExportLatex.php:203 src/Plugins/Export/ExportOds.php:66
+#: src/Plugins/Export/ExportLatex.php:205 src/Plugins/Export/ExportOds.php:66
 #: src/Plugins/Export/ExportOdt.php:134
-#: src/Plugins/Export/ExportTexytext.php:91
+#: src/Plugins/Export/ExportTexytext.php:92
 msgid "Replace NULL with:"
 msgstr "பூச்யத்தை மாற்றவும்:"
 
-#: src/Plugins/Export/ExportCsv.php:93 src/Plugins/Export/ExportExcel.php:75
+#: src/Plugins/Export/ExportCsv.php:94 src/Plugins/Export/ExportExcel.php:75
 msgid "Remove carriage return/line feed characters within columns"
 msgstr "நெடுவரிசைகளுக்குள் வண்டி வருவாய்/வரி தீவன எழுத்துகளை அகற்று"
 
@@ -16937,33 +16969,33 @@ msgid "Excel edition:"
 msgstr "எக்செல் பதிப்பு:"
 
 #: src/Plugins/Export/ExportHtmlword.php:82
-#: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:123
-#: src/Plugins/Export/ExportTexytext.php:80
-#: src/Plugins/Export/ExportXml.php:125
+#: src/Plugins/Export/ExportLatex.php:176 src/Plugins/Export/ExportOdt.php:123
+#: src/Plugins/Export/ExportTexytext.php:81
+#: src/Plugins/Export/ExportXml.php:126
 msgid "Data dump options"
 msgstr "தரவு டம்ப் விருப்பங்கள்"
 
 #: src/Plugins/Export/ExportHtmlword.php:169
 #: src/Plugins/Export/ExportOdt.php:212 src/Plugins/Export/ExportSql.php:2101
-#: src/Plugins/Export/ExportTexytext.php:138
+#: src/Plugins/Export/ExportTexytext.php:139
 msgid "Dumping data for table"
 msgstr "அட்டவணைக்கான தரவை கொட்டுகிறது"
 
 #: src/Plugins/Export/ExportHtmlword.php:441
 #: src/Plugins/Export/ExportOdt.php:561 src/Plugins/Export/ExportSql.php:1837
-#: src/Plugins/Export/ExportTexytext.php:397
+#: src/Plugins/Export/ExportTexytext.php:403
 msgid "Table structure for table"
 msgstr "அட்டவணைக்கான அட்டவணை அமைப்பு"
 
 #: src/Plugins/Export/ExportHtmlword.php:458
 #: src/Plugins/Export/ExportOdt.php:581 src/Plugins/Export/ExportSql.php:1903
-#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportTexytext.php:416
 msgid "Structure for view"
 msgstr "பார்வைக்கு அமைப்பு"
 
 #: src/Plugins/Export/ExportHtmlword.php:464
 #: src/Plugins/Export/ExportOdt.php:589 src/Plugins/Export/ExportSql.php:1946
-#: src/Plugins/Export/ExportTexytext.php:414
+#: src/Plugins/Export/ExportTexytext.php:420
 msgid "Stand-in structure for view"
 msgstr "பார்வைக்கு ச்டாண்ட்-இன் அமைப்பு"
 
@@ -16976,84 +17008,84 @@ msgstr ""
 msgid "Output unicode characters unescaped"
 msgstr "வெளியீடு யூனிகோட் எழுத்துக்கள் வெளியிடப்படாதவை"
 
-#: src/Plugins/Export/ExportLatex.php:68
+#: src/Plugins/Export/ExportLatex.php:70
 msgid "Content of table @TABLE@"
 msgstr "அட்டவணையின் உள்ளடக்கம் @அட்டவணை @"
 
-#: src/Plugins/Export/ExportLatex.php:69
+#: src/Plugins/Export/ExportLatex.php:71
 msgid "(continued)"
 msgstr "(தொடர்ந்தது)"
 
-#: src/Plugins/Export/ExportLatex.php:70
+#: src/Plugins/Export/ExportLatex.php:72
 msgid "Structure of table @TABLE@"
 msgstr "அட்டவணையின் அமைப்பு @அட்டவணை @"
 
-#: src/Plugins/Export/ExportLatex.php:123 src/Plugins/Export/ExportOdt.php:90
+#: src/Plugins/Export/ExportLatex.php:125 src/Plugins/Export/ExportOdt.php:90
 #: src/Plugins/Export/ExportSql.php:279
 msgid "Object creation options"
 msgstr "பொருள் உருவாக்கும் விருப்பங்கள்"
 
-#: src/Plugins/Export/ExportLatex.php:129
-#: src/Plugins/Export/ExportLatex.php:185
+#: src/Plugins/Export/ExportLatex.php:131
+#: src/Plugins/Export/ExportLatex.php:187
 msgid "Table caption:"
 msgstr "அட்டவணை தலைப்பு:"
 
-#: src/Plugins/Export/ExportLatex.php:135
-#: src/Plugins/Export/ExportLatex.php:191
+#: src/Plugins/Export/ExportLatex.php:137
+#: src/Plugins/Export/ExportLatex.php:193
 msgid "Table caption (continued):"
 msgstr "அட்டவணை தலைப்பு (தொடரும்):"
 
-#: src/Plugins/Export/ExportLatex.php:141
-#: src/Plugins/Export/ExportLatex.php:197
+#: src/Plugins/Export/ExportLatex.php:143
+#: src/Plugins/Export/ExportLatex.php:199
 msgid "Label key:"
 msgstr "சிட்டை குறிப்பெழுத்து:"
 
-#: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:98
+#: src/Plugins/Export/ExportLatex.php:151 src/Plugins/Export/ExportOdt.php:98
 #: src/Plugins/Export/ExportSql.php:205
 msgid "Display foreign key relationships"
 msgstr "வெளிநாட்டு முக்கிய உறவுகளைக் காண்பி"
 
-#: src/Plugins/Export/ExportLatex.php:156 src/Plugins/Export/ExportOdt.php:105
+#: src/Plugins/Export/ExportLatex.php:158 src/Plugins/Export/ExportOdt.php:105
 msgid "Display comments"
 msgstr "கருத்துரைகளை காட்டுக"
 
-#: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:111
+#: src/Plugins/Export/ExportLatex.php:164 src/Plugins/Export/ExportOdt.php:111
 #: src/Plugins/Export/ExportSql.php:213
 msgid "Display media types"
 msgstr "ஊடக வகைகளைக் காண்பி"
 
-#: src/Plugins/Export/ExportLatex.php:180
+#: src/Plugins/Export/ExportLatex.php:182
 msgid "Put columns names in the first row:"
 msgstr "முதல் வரிசையில் நெடுவரிசை பெயர்களை வைக்கவும்:"
 
-#: src/Plugins/Export/ExportLatex.php:230 src/Plugins/Export/ExportSql.php:760
-#: src/Plugins/Export/ExportXml.php:201
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportXml.php:202
 msgid "Generation Time:"
 msgstr "இயற்றப்பட்ட நேரம்:"
 
-#: src/Plugins/Export/ExportLatex.php:233 src/Plugins/Export/ExportSql.php:766
-#: src/Plugins/Export/ExportXml.php:204
+#: src/Plugins/Export/ExportLatex.php:235 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportXml.php:205
 msgid "PHP Version:"
 msgstr "PHP பதிப்பு:"
 
-#: src/Plugins/Export/ExportLatex.php:286 src/Plugins/Export/ExportSql.php:1992
+#: src/Plugins/Export/ExportLatex.php:290 src/Plugins/Export/ExportSql.php:1992
 msgid "Data:"
 msgstr "தரவு:"
 
-#: src/Plugins/Export/ExportLatex.php:435
+#: src/Plugins/Export/ExportLatex.php:445
 msgid "Structure:"
 msgstr "வடிவமைப்பு:"
 
-#: src/Plugins/Export/ExportMediawiki.php:77
+#: src/Plugins/Export/ExportMediawiki.php:78
 msgid "Export table names"
 msgstr "அட்டவணை பெயர்களை தரவாக்குக"
 
-#: src/Plugins/Export/ExportMediawiki.php:84
+#: src/Plugins/Export/ExportMediawiki.php:85
 msgid "Export table headers"
 msgstr "அட்டவணை தலைப்புகளை தரவேற்றுக"
 
 #: src/Plugins/Export/ExportOdt.php:213
-#: src/Plugins/Export/ExportTexytext.php:139
+#: src/Plugins/Export/ExportTexytext.php:140
 msgid "Dumping data for query result"
 msgstr "வினவல் முடிவுக்கான தரவை கொட்டுதல்"
 
@@ -17327,17 +17359,17 @@ msgstr ""
 "இதனுடன் வெளியீட்டு பொருந்தக்கூடிய தன்மையை அதிகரிக்க தரவுத்தள அமைப்பு அல்லது பழைய MySQL "
 "சேவையகம்:"
 
-#: src/Plugins/Export/ExportToon.php:68
+#: src/Plugins/Export/ExportToon.php:67
 #, fuzzy
 #| msgid "Orientation"
 msgid "Indentation:"
 msgstr "நோக்குநிலை"
 
-#: src/Plugins/Export/ExportXml.php:86
+#: src/Plugins/Export/ExportXml.php:87
 msgid "Object creation options (all are recommended)"
 msgstr "பொருள் உருவாக்கும் விருப்பங்கள் (அனைத்தும் பரிந்துரைக்கப்படுகின்றன)"
 
-#: src/Plugins/Export/ExportXml.php:130
+#: src/Plugins/Export/ExportXml.php:131
 msgid "Export contents"
 msgstr "உள்ளடக்கத்தை தரவேற்றுக"
 
@@ -17957,7 +17989,7 @@ msgid "Error 405! Request method not allowed."
 msgstr "பிழை 405! கோரிக்கை முறை அனுமதிக்கப்படவில்லை."
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3161
+#: src/Server/Privileges.php:3155
 msgid "Native MySQL authentication"
 msgstr "சொந்த MySQL ஏற்பு"
 
@@ -18004,43 +18036,43 @@ msgstr "%s க்கான சலுகைகளை நீங்கள் ரத
 msgid "Revoke"
 msgstr "ரத்து செய்யுங்கள்"
 
-#: src/Server/Privileges.php:1901
+#: src/Server/Privileges.php:1902
 msgid "No users selected for deleting!"
 msgstr "நீக்க பயனர்கள் யாரும் தேர்ந்தெடுக்கப்படவில்லை!"
 
-#: src/Server/Privileges.php:1904
+#: src/Server/Privileges.php:1905
 msgid "Reloading the privileges"
 msgstr "சலுகைகளை மீண்டும் ஏற்றுகிறது"
 
-#: src/Server/Privileges.php:1929
+#: src/Server/Privileges.php:1930
 msgid "The selected users have been deleted successfully."
 msgstr "தேர்ந்தெடுக்கப்பட்ட பயனர்கள் வெற்றிகரமாக நீக்கப்பட்டுள்ளனர்."
 
-#: src/Server/Privileges.php:2003
+#: src/Server/Privileges.php:2004
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "%s க்கான சலுகைகளை நீங்கள் புதுப்பித்துள்ளீர்கள்."
 
-#: src/Server/Privileges.php:2161
+#: src/Server/Privileges.php:2154
 #, php-format
 msgid "Deleting %s"
 msgstr "%s நீக்குதல்"
 
-#: src/Server/Privileges.php:2191
+#: src/Server/Privileges.php:2184
 msgid "The privileges were reloaded successfully."
 msgstr "சலுகைகள் வெற்றிகரமாக மீண்டும் ஏற்றப்பட்டன."
 
-#: src/Server/Privileges.php:2256
+#: src/Server/Privileges.php:2250
 #, php-format
 msgid "The user %s already exists!"
 msgstr "பயனர் %s ஏற்கனவே உள்ளன!"
 
-#: src/Server/Privileges.php:2409
+#: src/Server/Privileges.php:2403
 #, php-format
 msgid "Privileges for %s"
 msgstr "%s க்கான சலுகைகள்"
 
-#: src/Server/Privileges.php:2495
+#: src/Server/Privileges.php:2489
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -18053,7 +18085,7 @@ msgstr ""
 "பயன்படுத்தும் சலுகைகளிலிருந்து வேறுபடலாம். இந்த வழக்கில், நீங்கள் தொடர்வதற்கு முன்பு %s "
 "சலுகைகளை %sreload செய்ய வேண்டும்."
 
-#: src/Server/Privileges.php:2511
+#: src/Server/Privileges.php:2505
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -18066,11 +18098,11 @@ msgstr ""
 "பயன்படுத்தும் சலுகைகளிலிருந்து வேறுபடலாம். இந்த வழக்கில், சலுகைகள் மீண்டும் ஏற்றப்பட "
 "வேண்டும், ஆனால் தற்போது, உங்களுக்கு மறுஏற்றம் சலுகை இல்லை."
 
-#: src/Server/Privileges.php:2799
+#: src/Server/Privileges.php:2793
 msgid "You have added a new user."
 msgstr "நீங்கள் புதிய பயனாளரை சேர்த்துள்ளீர்கள்."
 
-#: src/Server/Privileges.php:3253
+#: src/Server/Privileges.php:3247
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -18750,17 +18782,23 @@ msgstr ""
 msgid "128-bit UUID (Universally Unique Identifier)"
 msgstr "128-பிட் UUID (உலகளவில் தனித்துவமான அடையாளங்காட்டி)"
 
-#: src/Types.php:602
+#: src/Types.php:293
+msgid ""
+"Stores vector data optimized for operations such as similarity search and "
+"machine learning applications"
+msgstr ""
+
+#: src/Types.php:604
 msgctxt "numeric types"
 msgid "Numeric"
 msgstr "எண் வரிசை"
 
-#: src/Types.php:620
+#: src/Types.php:622
 msgctxt "date and time types"
 msgid "Date and time"
 msgstr "நாள் மற்றும் நேரம்"
 
-#: src/Types.php:650
+#: src/Types.php:652
 msgctxt "spatial types"
 msgid "Spatial"
 msgstr "வெளி சார்பு"
