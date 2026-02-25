@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Tracking;
 
+use PhpMyAdmin\Clock\Clock;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Features\TrackingFeature;
 use PhpMyAdmin\ConfigStorage\Relation;
@@ -25,6 +26,7 @@ use PhpMyAdmin\SqlParser\Statements\RenameStatement;
 use PhpMyAdmin\SqlParser\Statements\TruncateStatement;
 use PhpMyAdmin\SqlParser\Statements\UpdateStatement;
 use PhpMyAdmin\Util;
+use Psr\Clock\ClockInterface;
 
 use function in_array;
 use function preg_quote;
@@ -134,9 +136,9 @@ class Tracker
      *
      * @return string Comment, contains date and username
      */
-    public static function getLogComment(): string
+    public static function getLogComment(ClockInterface $clock): string
     {
-        $date = Util::date('Y-m-d H:i:s');
+        $date = $clock->now()->format('Y-m-d H:i:s');
         $user = preg_replace('/\s+/', ' ', Config::getInstance()->selectedServer['user']);
 
         return '# log ' . $date . ' ' . $user . "\n";
@@ -174,7 +176,8 @@ class Tracker
 
         $exportSqlPlugin->useSqlBackquotes(true);
 
-        $date = Util::date('Y-m-d H:i:s');
+        $clock = new Clock();
+        $date = $clock->now()->format('Y-m-d H:i:s');
 
         // Get data definition snapshot of table
 
@@ -199,18 +202,17 @@ class Tracker
 
         // Get DROP TABLE / DROP VIEW and CREATE TABLE SQL statements
         $createSql = '';
-
         if ($config->selectedServer['tracking_add_drop_table'] && ! $isView) {
-            $createSql .= self::getLogComment()
+            $createSql .= self::getLogComment($clock)
                 . 'DROP TABLE IF EXISTS ' . Util::backquote($tableName) . ";\n";
         }
 
         if ($config->selectedServer['tracking_add_drop_view'] && $isView) {
-            $createSql .= self::getLogComment()
+            $createSql .= self::getLogComment($clock)
                 . 'DROP VIEW IF EXISTS ' . Util::backquote($tableName) . ";\n";
         }
 
-        $createSql .= self::getLogComment() . $exportSqlPlugin->getTableDef($dbName, $tableName);
+        $createSql .= self::getLogComment($clock) . $exportSqlPlugin->getTableDef($dbName, $tableName);
 
         // Save version
         $trackingFeature = $relation->getRelationParameters()->trackingFeature;
@@ -259,7 +261,8 @@ class Tracker
         $dbi = DatabaseInterface::getInstance();
         $relation = new Relation($dbi);
 
-        $date = Util::date('Y-m-d H:i:s');
+        $clock = new Clock();
+        $date = $clock->now()->format('Y-m-d H:i:s');
 
         $config = Config::getInstance();
         if ($trackingSet === '') {
@@ -267,12 +270,11 @@ class Tracker
         }
 
         $createSql = '';
-
         if ($config->selectedServer['tracking_add_drop_database']) {
-            $createSql .= self::getLogComment() . 'DROP DATABASE IF EXISTS ' . Util::backquote($dbName) . ";\n";
+            $createSql .= self::getLogComment($clock) . 'DROP DATABASE IF EXISTS ' . Util::backquote($dbName) . ";\n";
         }
 
-        $createSql .= self::getLogComment() . $query;
+        $createSql .= self::getLogComment($clock) . $query;
 
         $trackingFeature = $relation->getRelationParameters()->trackingFeature;
         if ($trackingFeature === null) {
@@ -619,7 +621,8 @@ class Tracker
             default => '',
         };
 
-        $date = Util::date('Y-m-d H:i:s');
+        $clock = new Clock();
+        $date = $clock->now()->format('Y-m-d H:i:s');
 
         // Cut off `dbname`. from query
         $query = preg_replace(
@@ -629,7 +632,7 @@ class Tracker
         );
 
         // Add log information
-        $query = self::getLogComment() . $query;
+        $query = self::getLogComment($clock) . $query;
 
         $relation = new Relation($dbi);
         $trackingFeature = $relation->getRelationParameters()->trackingFeature;

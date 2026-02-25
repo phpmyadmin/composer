@@ -26,7 +26,6 @@ use function bin2hex;
 use function chr;
 use function count;
 use function ctype_digit;
-use function date;
 use function decbin;
 use function explode;
 use function extension_loaded;
@@ -1556,16 +1555,6 @@ class Util
         }
 
         return $asHex ? bin2hex($result) : $result;
-    }
-
-    /**
-     * Wrapper around PHP date function
-     *
-     * @param string $format Date format string
-     */
-    public static function date(string $format): string
-    {
-        return date($format);
     }
 
     /**

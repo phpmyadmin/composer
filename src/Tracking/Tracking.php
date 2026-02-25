@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tracking;
 
 use DateTimeImmutable;
+use PhpMyAdmin\Clock\Clock;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Core;
@@ -20,12 +21,12 @@ use PhpMyAdmin\SqlQueryForm;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use Psr\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
 use function __;
 use function array_merge;
 use function array_multisort;
-use function date;
 use function explode;
 use function htmlspecialchars;
 use function in_array;
@@ -616,7 +617,8 @@ class Tracking
         $logSchemaEntries = explode('# log ', (string) $mixed['schema_sql']);
         $logDataEntries = explode('# log ', (string) $mixed['data_sql']);
 
-        $ddlDateFrom = $date = Util::date('Y-m-d H:i:s');
+        $clock = new Clock();
+        $ddlDateFrom = $date = $clock->now()->format('Y-m-d H:i:s');
 
         $ddlog = [];
         $firstIteration = true;
@@ -829,14 +831,14 @@ class Tracking
      * @return array<string, string>
      * @psalm-return array{filename: non-empty-string, dump: non-empty-string}
      */
-    public function getDownloadInfoForExport(string $table, array $entries): array
+    public function getDownloadInfoForExport(ClockInterface $clock, string $table, array $entries): array
     {
         ini_set('url_rewriter.tags', '');
 
         // Replace all multiple whitespaces by a single space
         $table = htmlspecialchars((string) preg_replace('/\s+/', ' ', $table));
         $dump = '# ' . sprintf(__('Tracking report for table `%s`'), $table) . "\n"
-            . '# ' . date('Y-m-d H:i:sP') . "\n";
+            . '# ' . $clock->now()->format('Y-m-d H:i:sP') . "\n";
         foreach ($entries as $entry) {
             $dump .= $entry['statement'];
         }
