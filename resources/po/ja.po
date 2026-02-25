@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-22 00:36+0000\n"
+"POT-Creation-Date: 2026-02-25 13:54+0000\n"
 "PO-Revision-Date: 2026-02-24 08:09+0000\n"
 "Last-Translator: Sandra Swift <nolamiller1203+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -276,7 +276,7 @@ msgstr "カラム"
 #: resources/templates/triggers/editor_form.twig:75
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
-#: src/Controllers/Server/PrivilegesController.php:305
+#: src/Controllers/Server/PrivilegesController.php:314
 #: src/Normalization.php:235 src/Tracking/Tracking.php:287
 #: src/Tracking/Tracking.php:402
 msgid "Go"
@@ -479,11 +479,11 @@ msgstr "外部キーです。"
 #: src/Navigation/Nodes/NodeColumn.php:33
 #: src/Plugins/Export/ExportHtmlword.php:225
 #: src/Plugins/Export/ExportHtmlword.php:296
-#: src/Plugins/Export/ExportLatex.php:455 src/Plugins/Export/ExportOdt.php:324
+#: src/Plugins/Export/ExportLatex.php:465 src/Plugins/Export/ExportOdt.php:324
 #: src/Plugins/Export/ExportOdt.php:395
-#: src/Plugins/Export/ExportTexytext.php:236
-#: src/Plugins/Export/ExportTexytext.php:296
-#: src/Plugins/Export/Helpers/Pdf.php:458
+#: src/Plugins/Export/ExportTexytext.php:242
+#: src/Plugins/Export/ExportTexytext.php:302
+#: src/Plugins/Export/Helpers/Pdf.php:469
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:602
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:624
 msgid "Column"
@@ -582,7 +582,7 @@ msgstr "ノードグループ"
 #: src/Config/Forms/User/ExportForm.php:98
 #: src/Config/Forms/User/ExportForm.php:126
 #: src/Controllers/JavaScriptMessagesController.php:694
-#: src/Import/Import.php:1156 src/Menu.php:214 src/Menu.php:322
+#: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
 #: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
@@ -603,8 +603,8 @@ msgstr "構造"
 #: resources/templates/triggers/list.twig:47
 #: src/Plugins/Export/ExportHtmlword.php:396
 #: src/Plugins/Export/ExportOdt.php:503
-#: src/Plugins/Export/ExportTexytext.php:365
-#: src/Plugins/Export/Helpers/Pdf.php:300
+#: src/Plugins/Export/ExportTexytext.php:371
+#: src/Plugins/Export/Helpers/Pdf.php:311
 msgid "Name"
 msgstr "名前"
 
@@ -631,11 +631,11 @@ msgstr "名前"
 #: resources/templates/table/zoom_search/index.twig:37 src/InsertEdit.php:259
 #: src/Plugins/Export/ExportHtmlword.php:228
 #: src/Plugins/Export/ExportHtmlword.php:299
-#: src/Plugins/Export/ExportLatex.php:456 src/Plugins/Export/ExportOdt.php:327
+#: src/Plugins/Export/ExportLatex.php:466 src/Plugins/Export/ExportOdt.php:327
 #: src/Plugins/Export/ExportOdt.php:398
-#: src/Plugins/Export/ExportTexytext.php:237
-#: src/Plugins/Export/ExportTexytext.php:297
-#: src/Plugins/Export/Helpers/Pdf.php:460
+#: src/Plugins/Export/ExportTexytext.php:243
+#: src/Plugins/Export/ExportTexytext.php:303
+#: src/Plugins/Export/Helpers/Pdf.php:471
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:603
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:625
 msgid "Type"
@@ -669,11 +669,11 @@ msgstr ""
 #: resources/templates/table/tracking/structure_snapshot_columns.twig:10
 #: src/Plugins/Export/ExportHtmlword.php:234
 #: src/Plugins/Export/ExportHtmlword.php:305
-#: src/Plugins/Export/ExportLatex.php:458 src/Plugins/Export/ExportOdt.php:333
+#: src/Plugins/Export/ExportLatex.php:468 src/Plugins/Export/ExportOdt.php:333
 #: src/Plugins/Export/ExportOdt.php:404
-#: src/Plugins/Export/ExportTexytext.php:239
-#: src/Plugins/Export/ExportTexytext.php:299
-#: src/Plugins/Export/Helpers/Pdf.php:464
+#: src/Plugins/Export/ExportTexytext.php:245
+#: src/Plugins/Export/ExportTexytext.php:305
+#: src/Plugins/Export/Helpers/Pdf.php:475
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:606
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:628
 msgid "Default"
@@ -734,11 +734,11 @@ msgstr "属性"
 #: resources/templates/table/zoom_search/result_form.twig:34
 #: src/Plugins/Export/ExportHtmlword.php:231
 #: src/Plugins/Export/ExportHtmlword.php:302
-#: src/Plugins/Export/ExportLatex.php:457 src/Plugins/Export/ExportOdt.php:330
+#: src/Plugins/Export/ExportLatex.php:467 src/Plugins/Export/ExportOdt.php:330
 #: src/Plugins/Export/ExportOdt.php:401
-#: src/Plugins/Export/ExportTexytext.php:238
-#: src/Plugins/Export/ExportTexytext.php:298
-#: src/Plugins/Export/Helpers/Pdf.php:462
+#: src/Plugins/Export/ExportTexytext.php:244
+#: src/Plugins/Export/ExportTexytext.php:304
+#: src/Plugins/Export/Helpers/Pdf.php:473
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:605
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:627
 msgid "Null"
@@ -760,9 +760,9 @@ msgstr "権限を調整"
 #: resources/templates/table/structure/display_structure.twig:28
 #: src/Config/Descriptions.php:660 src/Config/Descriptions.php:675
 #: src/Config/Descriptions.php:711 src/Plugins/Export/ExportHtmlword.php:315
-#: src/Plugins/Export/ExportLatex.php:464 src/Plugins/Export/ExportOdt.php:414
-#: src/Plugins/Export/ExportTexytext.php:305
-#: src/Plugins/Export/Helpers/Pdf.php:481
+#: src/Plugins/Export/ExportLatex.php:474 src/Plugins/Export/ExportOdt.php:414
+#: src/Plugins/Export/ExportTexytext.php:311
+#: src/Plugins/Export/Helpers/Pdf.php:492
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:618
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:631
 msgid "Comments"
@@ -781,8 +781,8 @@ msgstr "カラムを移動させる"
 #: src/Config/Descriptions.php:664 src/Config/Descriptions.php:676
 #: src/Config/Descriptions.php:714 src/Plugins/Export/ExportHtmlword.php:322
 #: src/Plugins/Export/ExportOdt.php:421
-#: src/Plugins/Export/ExportTexytext.php:310
-#: src/Plugins/Export/Helpers/Pdf.php:489
+#: src/Plugins/Export/ExportTexytext.php:316
+#: src/Plugins/Export/Helpers/Pdf.php:500
 msgid "Media type"
 msgstr "メディア型"
 
@@ -916,8 +916,8 @@ msgstr "無効"
 #: src/Controllers/Table/Structure/PrimaryController.php:101
 #: src/Indexes/IndexColumn.php:148 src/Indexes/Index.php:474
 #: src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "Yes"
 msgstr "はい"
@@ -952,8 +952,8 @@ msgstr "はい"
 #: src/Controllers/JavaScriptMessagesController.php:343
 #: src/Indexes/IndexColumn.php:145 src/Indexes/Index.php:448
 #: src/Indexes/Index.php:474 src/Plugins/Export/ExportHtmlword.php:517
-#: src/Plugins/Export/ExportLatex.php:525 src/Plugins/Export/ExportOdt.php:628
-#: src/Plugins/Export/ExportTexytext.php:461
+#: src/Plugins/Export/ExportLatex.php:535 src/Plugins/Export/ExportOdt.php:628
+#: src/Plugins/Export/ExportTexytext.php:467
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:670
 msgid "No"
 msgstr "いいえ"
@@ -1058,8 +1058,8 @@ msgstr "削除"
 #: resources/templates/table/relation/foreign_key_row.twig:91
 #: src/Config/Descriptions.php:934 src/Plugins/Export/ExportHtmlword.php:147
 #: src/Plugins/Export/ExportOdt.php:185
-#: src/Plugins/Export/ExportTexytext.php:116 src/Server/Privileges.php:1585
-#: src/Server/Privileges.php:1587 src/Server/Status/Processes.php:103
+#: src/Plugins/Export/ExportTexytext.php:117 src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1588 src/Server/Status/Processes.php:103
 msgid "Database"
 msgstr "データベース"
 
@@ -1086,18 +1086,18 @@ msgstr "履歴"
 #: resources/templates/database/designer/database_tables.twig:116
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
-#: src/Import/Import.php:1157 src/Import/Import.php:1215
-#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:56
+#: src/Import/Import.php:1158 src/Import/Import.php:1216
+#: src/Plugins/Export/ExportCodegen.php:58 src/Plugins/Export/ExportCsv.php:57
 #: src/Plugins/Export/ExportExcel.php:58
 #: src/Plugins/Export/ExportHtmlword.php:58
-#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:87
-#: src/Plugins/Export/ExportMediawiki.php:49
+#: src/Plugins/Export/ExportJson.php:73 src/Plugins/Export/ExportLatex.php:89
+#: src/Plugins/Export/ExportMediawiki.php:50
 #: src/Plugins/Export/ExportOds.php:54 src/Plugins/Export/ExportOdt.php:65
-#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:46
+#: src/Plugins/Export/ExportPdf.php:55 src/Plugins/Export/ExportPhparray.php:47
 #: src/Plugins/Export/ExportSql.php:169
-#: src/Plugins/Export/ExportTexytext.php:56
-#: src/Plugins/Export/ExportToon.php:51 src/Plugins/Export/ExportXml.php:68
-#: src/Plugins/Export/ExportYaml.php:45 src/Plugins/Import/ImportCsv.php:80
+#: src/Plugins/Export/ExportTexytext.php:57
+#: src/Plugins/Export/ExportToon.php:50 src/Plugins/Export/ExportXml.php:69
+#: src/Plugins/Export/ExportYaml.php:46 src/Plugins/Import/ImportCsv.php:80
 #: src/Plugins/Import/ImportLdi.php:60
 #: src/Plugins/Import/ImportMediawiki.php:62
 #: src/Plugins/Import/ImportOds.php:60 src/Plugins/Import/ImportShp.php:76
@@ -1429,9 +1429,9 @@ msgstr "印刷"
 
 #: resources/templates/database/data_dictionary/index.twig:28
 #: src/Plugins/Export/ExportHtmlword.php:309
-#: src/Plugins/Export/ExportLatex.php:460 src/Plugins/Export/ExportOdt.php:408
-#: src/Plugins/Export/ExportTexytext.php:301
-#: src/Plugins/Export/Helpers/Pdf.php:473
+#: src/Plugins/Export/ExportLatex.php:470 src/Plugins/Export/ExportOdt.php:408
+#: src/Plugins/Export/ExportTexytext.php:307
+#: src/Plugins/Export/Helpers/Pdf.php:484
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:608
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:630
 msgid "Links to"
@@ -1806,8 +1806,8 @@ msgstr "終了"
 #: resources/templates/triggers/editor_form.twig:62
 #: src/Plugins/Export/ExportHtmlword.php:399
 #: src/Plugins/Export/ExportOdt.php:512
-#: src/Plugins/Export/ExportTexytext.php:368
-#: src/Plugins/Export/Helpers/Pdf.php:306
+#: src/Plugins/Export/ExportTexytext.php:374
+#: src/Plugins/Export/Helpers/Pdf.php:317
 msgid "Definition"
 msgstr "定義"
 
@@ -1835,7 +1835,7 @@ msgstr "定義者"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
 #: src/Util.php:1385
 msgid "Events"
 msgstr "イベント"
@@ -2013,7 +2013,7 @@ msgstr "テーブル："
 #: src/Controllers/Server/DatabasesController.php:273
 #: src/Navigation/Nodes/NodeTableContainer.php:23
 #: src/Navigation/Nodes/NodeTableContainer.php:25
-#: src/Plugins/Export/ExportXml.php:107 src/Server/Status/Data.php:126
+#: src/Plugins/Export/ExportXml.php:108 src/Server/Status/Data.php:126
 msgid "Tables"
 msgstr "テーブル"
 
@@ -2293,7 +2293,7 @@ msgstr "ホスト名"
 #: resources/templates/server/sub_page_header.twig:2
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
-#: src/Controllers/Server/PrivilegesController.php:429 src/Menu.php:257
+#: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
 #: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
 msgid "Privileges"
 msgstr "権限"
@@ -2343,7 +2343,7 @@ msgstr "権限を編集"
 
 #: resources/templates/database/privileges/index.twig:102
 #: resources/templates/table/privileges/index.twig:106
-#: src/Server/Privileges.php:2079
+#: src/Server/Privileges.php:2077
 msgid "No user found."
 msgstr "ユーザが存在しません。"
 
@@ -2733,8 +2733,8 @@ msgid ""
 msgstr "この操作はいくつかのカラム定義を変更します。[br]本当に続けますか？"
 
 #: resources/templates/database/structure/copy_form.twig:5
-#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:251
-#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:356
+#: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:253
+#: src/Plugins/Export/ExportSql.php:914 src/Plugins/Export/ExportXml.php:357
 #: src/Plugins/Export/Helpers/Pdf.php:146
 msgid "Database:"
 msgstr "データベース:"
@@ -2806,15 +2806,15 @@ msgstr "作成クエリが表示されている"
 #: resources/templates/table/relation/foreign_key_row.twig:102
 #: resources/templates/triggers/editor_form.twig:32
 #: resources/templates/triggers/list.twig:49 src/Config/Descriptions.php:937
-#: src/Plugins/Export/ExportXml.php:407 src/Server/Privileges.php:1591
-#: src/Server/Privileges.php:1593
+#: src/Plugins/Export/ExportXml.php:409 src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1594
 msgid "Table"
 msgstr "テーブル"
 
 #: resources/templates/database/structure/show_create.twig:30
 #: src/Navigation/Nodes/NodeViewContainer.php:23
 #: src/Navigation/Nodes/NodeViewContainer.php:25
-#: src/Plugins/Export/ExportXml.php:117
+#: src/Plugins/Export/ExportXml.php:118
 msgid "Views"
 msgstr "ビュー"
 
@@ -3551,8 +3551,8 @@ msgid "Server connection:"
 msgstr "サーバの接続："
 
 #: resources/templates/home/index.twig:198
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:764
-#: src/Plugins/Export/ExportXml.php:203
+#: src/Plugins/Export/ExportLatex.php:234 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportXml.php:204
 msgid "Server version:"
 msgstr "サーバのバージョン："
 
@@ -4782,7 +4782,7 @@ msgstr "ユーザアカウント"
 #: resources/templates/server/privileges/edit_routine_privileges.twig:46
 #: resources/templates/server/privileges/edit_routine_privileges.twig:59
 #: src/Controllers/JavaScriptMessagesController.php:363
-#: src/Server/Privileges.php:1597 src/Server/Privileges.php:1599
+#: src/Server/Privileges.php:1598 src/Server/Privileges.php:1600
 msgid "Routine"
 msgstr "ルーチン"
 
@@ -4794,7 +4794,7 @@ msgid ""
 msgstr "注意: 現在ログインしているユーザの権限を編集しようとしています。"
 
 #: resources/templates/server/privileges/edit_routine_privileges.twig:47
-#: src/Server/Privileges.php:1598
+#: src/Server/Privileges.php:1599
 msgid "Routine-specific privileges"
 msgstr "ルーチン固有の権限"
 
@@ -4933,7 +4933,7 @@ msgstr "ユーザグループを編集"
 #: resources/templates/server/privileges/privileges_summary.twig:19
 #: resources/templates/server/privileges/privileges_table.twig:7
 #: resources/templates/server/privileges/privileges_table.twig:267
-#: src/Server/Privileges.php:1592
+#: src/Server/Privileges.php:1593
 msgid "Table-specific privileges"
 msgstr "テーブル固有の権限"
 
@@ -5102,7 +5102,7 @@ msgid "Global privileges"
 msgstr "グローバル権限"
 
 #: resources/templates/server/privileges/privileges_table.twig:265
-#: src/Server/Privileges.php:1586
+#: src/Server/Privileges.php:1587
 msgid "Database-specific privileges"
 msgstr "データベース固有の権限"
 
@@ -5390,8 +5390,8 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:224 src/Plugins/Export/ExportSql.php:753
-#: src/Plugins/Export/ExportXml.php:195
+#: src/Plugins/Export/ExportLatex.php:226 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportXml.php:196
 msgid "Host:"
 msgstr "ホスト:"
 
@@ -6225,7 +6225,7 @@ msgid "No users were found belonging to this user group."
 msgstr "このユーザグループにユーザが存在しません。"
 
 #: resources/templates/server/user_groups/user_listings.twig:9
-#: src/Controllers/Server/PrivilegesController.php:432
+#: src/Controllers/Server/PrivilegesController.php:442
 #: src/Server/Status/Processes.php:101
 msgid "User"
 msgstr "ユーザ"
@@ -6382,8 +6382,8 @@ msgstr "状態"
 #: src/Controllers/JavaScriptMessagesController.php:276
 #: src/Plugins/Export/ExportHtmlword.php:397
 #: src/Plugins/Export/ExportOdt.php:506
-#: src/Plugins/Export/ExportTexytext.php:366
-#: src/Plugins/Export/Helpers/Pdf.php:302 src/Server/Status/Processes.php:105
+#: src/Plugins/Export/ExportTexytext.php:372
+#: src/Plugins/Export/Helpers/Pdf.php:313 src/Server/Status/Processes.php:105
 msgid "Time"
 msgstr "時間"
 
@@ -7390,8 +7390,8 @@ msgstr "実行時機"
 #: src/Navigation/Nodes/NodeEvent.php:27
 #: src/Plugins/Export/ExportHtmlword.php:398
 #: src/Plugins/Export/ExportOdt.php:509
-#: src/Plugins/Export/ExportTexytext.php:367
-#: src/Plugins/Export/Helpers/Pdf.php:304
+#: src/Plugins/Export/ExportTexytext.php:373
+#: src/Plugins/Export/Helpers/Pdf.php:315
 msgid "Event"
 msgstr "イベント"
 
@@ -7407,8 +7407,8 @@ msgstr "トリガ %s をエクスポートする"
 #: src/Plugins/Export/ExportHtmlword.php:450
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
-#: src/Plugins/Export/ExportTexytext.php:404
-#: src/Plugins/Export/ExportXml.php:112 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
 msgid "Triggers"
 msgstr "トリガ"
 
@@ -9096,43 +9096,43 @@ msgid "Closed"
 msgstr "閉じておく"
 
 #: src/Config/ConfigFile.php:608
-#: src/Controllers/JavaScriptMessagesController.php:722
+#: src/Controllers/JavaScriptMessagesController.php:725
 msgctxt "Week day name"
 msgid "Monday"
 msgstr "月曜日"
 
 #: src/Config/ConfigFile.php:609
-#: src/Controllers/JavaScriptMessagesController.php:723
+#: src/Controllers/JavaScriptMessagesController.php:726
 msgctxt "Week day name"
 msgid "Tuesday"
 msgstr "火曜日"
 
 #: src/Config/ConfigFile.php:610
-#: src/Controllers/JavaScriptMessagesController.php:724
+#: src/Controllers/JavaScriptMessagesController.php:727
 msgctxt "Week day name"
 msgid "Wednesday"
 msgstr "水曜日"
 
 #: src/Config/ConfigFile.php:611
-#: src/Controllers/JavaScriptMessagesController.php:725
+#: src/Controllers/JavaScriptMessagesController.php:728
 msgctxt "Week day name"
 msgid "Thursday"
 msgstr "木曜日"
 
 #: src/Config/ConfigFile.php:612
-#: src/Controllers/JavaScriptMessagesController.php:726
+#: src/Controllers/JavaScriptMessagesController.php:729
 msgctxt "Week day name"
 msgid "Friday"
 msgstr "金曜日"
 
 #: src/Config/ConfigFile.php:613
-#: src/Controllers/JavaScriptMessagesController.php:727
+#: src/Controllers/JavaScriptMessagesController.php:730
 msgctxt "Week day name"
 msgid "Saturday"
 msgstr "土曜日"
 
 #: src/Config/ConfigFile.php:614
-#: src/Controllers/JavaScriptMessagesController.php:721
+#: src/Controllers/JavaScriptMessagesController.php:724
 msgctxt "Week day name"
 msgid "Sunday"
 msgstr "日曜日"
@@ -9164,33 +9164,33 @@ msgstr "無効"
 #: src/Config/ConfigFile.php:664 src/Config/ConfigFile.php:716
 #: src/Config/ConfigFile.php:728 src/Config/ConfigFile.php:736
 #: src/Config/ConfigFile.php:741 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure"
 msgstr "構造"
 
 #: src/Config/ConfigFile.php:665 src/Config/ConfigFile.php:717
 #: src/Config/ConfigFile.php:729 src/Config/ConfigFile.php:737
 #: src/Config/ConfigFile.php:742 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "data"
 msgstr "データ"
 
 #: src/Config/ConfigFile.php:666 src/Config/ConfigFile.php:718
 #: src/Config/ConfigFile.php:730 src/Config/ConfigFile.php:738
 #: src/Config/ConfigFile.php:743 src/Plugins/Export/ExportHtmlword.php:73
-#: src/Plugins/Export/ExportLatex.php:113
-#: src/Plugins/Export/ExportMediawiki.php:69
+#: src/Plugins/Export/ExportLatex.php:115
+#: src/Plugins/Export/ExportMediawiki.php:70
 #: src/Plugins/Export/ExportOdt.php:80 src/Plugins/Export/ExportPdf.php:80
 #: src/Plugins/Export/ExportSql.php:267
-#: src/Plugins/Export/ExportTexytext.php:71
+#: src/Plugins/Export/ExportTexytext.php:72
 msgid "structure and data"
 msgstr "構造とデータ"
 
@@ -10612,11 +10612,11 @@ msgstr "圧縮"
 #: src/Config/Descriptions.php:640 src/Config/Descriptions.php:647
 #: src/Config/Descriptions.php:655 src/Config/Descriptions.php:659
 #: src/Config/Descriptions.php:672 src/Config/Descriptions.php:674
-#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:98
+#: src/Config/Descriptions.php:721 src/Plugins/Export/ExportCsv.php:99
 #: src/Plugins/Export/ExportExcel.php:80
 #: src/Plugins/Export/ExportHtmlword.php:93 src/Plugins/Export/ExportOds.php:71
 #: src/Plugins/Export/ExportOdt.php:129
-#: src/Plugins/Export/ExportTexytext.php:86
+#: src/Plugins/Export/ExportTexytext.php:87
 msgid "Put columns names in the first row"
 msgstr "1 行目にカラム名を追加する"
 
@@ -10670,16 +10670,16 @@ msgstr "テーブル名のテンプレート"
 #: src/Config/Descriptions.php:657 src/Config/Descriptions.php:670
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:717
 #: src/Config/Descriptions.php:723 src/Plugins/Export/ExportHtmlword.php:68
-#: src/Plugins/Export/ExportLatex.php:108
-#: src/Plugins/Export/ExportMediawiki.php:59
-#: src/Plugins/Export/ExportMediawiki.php:65
+#: src/Plugins/Export/ExportLatex.php:110
+#: src/Plugins/Export/ExportMediawiki.php:60
+#: src/Plugins/Export/ExportMediawiki.php:66
 #: src/Plugins/Export/ExportOdt.php:75 src/Plugins/Export/ExportPdf.php:76
 #: src/Plugins/Export/ExportSql.php:263
-#: src/Plugins/Export/ExportTexytext.php:66
+#: src/Plugins/Export/ExportTexytext.php:67
 msgid "Dump table"
 msgstr "ダンプするテーブル"
 
-#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:99
+#: src/Config/Descriptions.php:658 src/Plugins/Export/ExportLatex.php:101
 msgid "Include table caption"
 msgstr "テーブルのキャプションを含める"
 
@@ -11608,7 +11608,7 @@ msgid "Missing data for %s"
 msgstr "%s ためのデータがありません"
 
 #: src/Config/FormDisplay.php:620 src/Config/Validator.php:589
-#: src/Controllers/JavaScriptMessagesController.php:805
+#: src/Controllers/JavaScriptMessagesController.php:808
 msgid "Incorrect value!"
 msgstr "不正な値です!"
 
@@ -11920,22 +11920,22 @@ msgid "Incorrect IP address: %s"
 msgstr "不正な IP アドレス：%s"
 
 #: src/Config/Validator.php:524
-#: src/Controllers/JavaScriptMessagesController.php:804
+#: src/Controllers/JavaScriptMessagesController.php:807
 msgid "Not a valid port number!"
 msgstr "有効なポート番号ではありません!"
 
 #: src/Config/Validator.php:546
-#: src/Controllers/JavaScriptMessagesController.php:802
+#: src/Controllers/JavaScriptMessagesController.php:805
 msgid "Not a positive number!"
 msgstr "正の値ではありません!"
 
 #: src/Config/Validator.php:568
-#: src/Controllers/JavaScriptMessagesController.php:803
+#: src/Controllers/JavaScriptMessagesController.php:806
 msgid "Not a non-negative number!"
 msgstr "負でない値ではありません!"
 
 #: src/Config/Validator.php:607
-#: src/Controllers/JavaScriptMessagesController.php:806
+#: src/Controllers/JavaScriptMessagesController.php:809
 #, php-format
 msgid "Value must be less than or equal to %s!"
 msgstr "値は %s 以下でなければいけません!"
@@ -12380,7 +12380,37 @@ msgstr ""
 "バイトだけです。[doc@cfg_blowfish_secret]ドキュメント[/doc]を参照してくださ"
 "い。"
 
-#: src/Controllers/HomeController.php:353
+#: src/Controllers/HomeController.php:356
+#, fuzzy
+#| msgid ""
+#| "The configuration file needs a valid key for cookie encryption. A "
+#| "temporary key was automatically generated for you. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The configuration file needs a valid key for query encryption. A temporary "
+"key was automatically generated for you. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"クッキーの暗号化のために、構成ファイルに有効なキーが必要です。一時的なキーが"
+"自動的に作成されました。[doc@cfg_blowfish_secret]ドキュメント[/doc]を参照して"
+"ください。"
+
+#: src/Controllers/HomeController.php:366
+#, fuzzy, php-format
+#| msgid ""
+#| "The cookie encryption key in the configuration file is longer than "
+#| "necessary. It should only be %d bytes long. Please refer to the "
+#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+msgid ""
+"The query encryption key in the configuration file is longer than necessary. "
+"It should only be %d bytes long. Please refer to the "
+"[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
+msgstr ""
+"構成ファイル内にあるクッキーの暗号化キーが必要以上に長いです。必要なのは %d "
+"バイトだけです。[doc@cfg_blowfish_secret]ドキュメント[/doc]を参照してくださ"
+"い。"
+
+#: src/Controllers/HomeController.php:384
 msgid ""
 "Directory [code]config[/code], which is used by the setup script, still "
 "exists in your phpMyAdmin directory. It is strongly recommended to remove it "
@@ -12392,7 +12422,7 @@ msgstr ""
 "ことを強くお勧めします。削除しない場合、誰でも認証なしでサーバの設定をダウン"
 "ロードすることができるため、サーバのセキュリティが低下します。"
 
-#: src/Controllers/HomeController.php:374
+#: src/Controllers/HomeController.php:405
 #, php-format
 msgid ""
 "Server running with Suhosin. Please refer to %sdocumentation%s for possible "
@@ -12401,7 +12431,7 @@ msgstr ""
 "Suhosin が稼働しているため問題が発生する可能性があります。詳しくは%sドキュメ"
 "ント%sをご覧ください。"
 
-#: src/Controllers/HomeController.php:388
+#: src/Controllers/HomeController.php:419
 #, php-format
 msgid ""
 "The $cfg['TempDir'] (%s) is not accessible. phpMyAdmin is not able to cache "
@@ -12410,7 +12440,7 @@ msgstr ""
 "$cfg['TempDir'] (%s) にアクセスできません。phpMyAdmin はテンプレートをキャッ"
 "シュすることができないため、低速になります。"
 
-#: src/Controllers/HomeController.php:405
+#: src/Controllers/HomeController.php:436
 msgid ""
 "The [code]HTTP_HOST[/code] variable is missing, which might cause phpMyAdmin "
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
@@ -12420,7 +12450,7 @@ msgstr ""
 "あります。発生しうる問題は [doc@faq1-46]documentation[/doc] を参照してくださ"
 "い。"
 
-#: src/Controllers/HomeController.php:458
+#: src/Controllers/HomeController.php:489
 msgid ""
 "The mbstring PHP extension was not found and you seem to be using a "
 "multibyte charset. Without the mbstring extension phpMyAdmin is unable to "
@@ -12430,7 +12460,7 @@ msgstr ""
 "いるようですが、mbstring 拡張がないと phpMyAdmin は文字列を正しく分割できない"
 "ため予期しない結果になることがあります。"
 
-#: src/Controllers/HomeController.php:476
+#: src/Controllers/HomeController.php:507
 msgid ""
 "The curl extension was not found and allow_url_fopen is disabled. Due to "
 "this some features such as error reporting or version check are disabled."
@@ -13350,7 +13380,7 @@ msgstr "第２正規化 (2NF)"
 
 #. l10n: Display text for calendar close link
 #: src/Controllers/JavaScriptMessagesController.php:403
-#: src/Controllers/JavaScriptMessagesController.php:754
+#: src/Controllers/JavaScriptMessagesController.php:757
 #: src/Normalization.php:349
 msgid "Done"
 msgstr "決定"
@@ -13986,346 +14016,348 @@ msgstr "テーブル %s は既に存在します!"
 msgid "Hide"
 msgstr "隠す"
 
-#: src/Controllers/JavaScriptMessagesController.php:695
-msgid "The fullscreen request was denied."
-msgstr "フルスクリーンリクエストは却下されました。"
+#: src/Controllers/JavaScriptMessagesController.php:696
+msgid ""
+"The fullscreen request was denied because the Fullscreen API is disabled by "
+"user preference in the browser."
+msgstr ""
 
-#: src/Controllers/JavaScriptMessagesController.php:697
+#: src/Controllers/JavaScriptMessagesController.php:700
 msgctxt "Month name"
 msgid "January"
 msgstr "1 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:698
+#: src/Controllers/JavaScriptMessagesController.php:701
 msgctxt "Month name"
 msgid "February"
 msgstr "2 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:699
+#: src/Controllers/JavaScriptMessagesController.php:702
 msgctxt "Month name"
 msgid "March"
 msgstr "3 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:700
+#: src/Controllers/JavaScriptMessagesController.php:703
 msgctxt "Month name"
 msgid "April"
 msgstr "4 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:701
+#: src/Controllers/JavaScriptMessagesController.php:704
 msgctxt "Month name"
 msgid "May"
 msgstr "5 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:702
+#: src/Controllers/JavaScriptMessagesController.php:705
 msgctxt "Month name"
 msgid "June"
 msgstr "6 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:703
+#: src/Controllers/JavaScriptMessagesController.php:706
 msgctxt "Month name"
 msgid "July"
 msgstr "7 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:704
+#: src/Controllers/JavaScriptMessagesController.php:707
 msgctxt "Month name"
 msgid "August"
 msgstr "8 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:705
+#: src/Controllers/JavaScriptMessagesController.php:708
 msgctxt "Month name"
 msgid "September"
 msgstr "9 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:706
+#: src/Controllers/JavaScriptMessagesController.php:709
 msgctxt "Month name"
 msgid "October"
 msgstr "10 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:707
+#: src/Controllers/JavaScriptMessagesController.php:710
 msgctxt "Month name"
 msgid "November"
 msgstr "11 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:708
+#: src/Controllers/JavaScriptMessagesController.php:711
 msgctxt "Month name"
 msgid "December"
 msgstr "12 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:709 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "1 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:710 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "2 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:711 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "3 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "4 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "5 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "6 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "7 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "8 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "9 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "10 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "11 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "12 月"
 
-#: src/Controllers/JavaScriptMessagesController.php:728 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
 msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "日"
 
-#: src/Controllers/JavaScriptMessagesController.php:729 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "月"
 
-#: src/Controllers/JavaScriptMessagesController.php:730 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "火"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "水"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "木"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "金"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "土"
 
-#: src/Controllers/JavaScriptMessagesController.php:735
+#: src/Controllers/JavaScriptMessagesController.php:738
 msgctxt "Minimal week day name for Sunday"
 msgid "Su"
 msgstr "日"
 
-#: src/Controllers/JavaScriptMessagesController.php:736
+#: src/Controllers/JavaScriptMessagesController.php:739
 msgctxt "Minimal week day name for Monday"
 msgid "Mo"
 msgstr "月"
 
-#: src/Controllers/JavaScriptMessagesController.php:737
+#: src/Controllers/JavaScriptMessagesController.php:740
 msgctxt "Minimal week day name for Tuesday"
 msgid "Tu"
 msgstr "火"
 
-#: src/Controllers/JavaScriptMessagesController.php:738
+#: src/Controllers/JavaScriptMessagesController.php:741
 msgctxt "Minimal week day name for Wednesday"
 msgid "We"
 msgstr "水"
 
-#: src/Controllers/JavaScriptMessagesController.php:739
+#: src/Controllers/JavaScriptMessagesController.php:742
 msgctxt "Minimal week day name for Thursday"
 msgid "Th"
 msgstr "木"
 
-#: src/Controllers/JavaScriptMessagesController.php:740
+#: src/Controllers/JavaScriptMessagesController.php:743
 msgctxt "Minimal week day name for Friday"
 msgid "Fr"
 msgstr "金"
 
-#: src/Controllers/JavaScriptMessagesController.php:741
+#: src/Controllers/JavaScriptMessagesController.php:744
 msgctxt "Minimal week day name for Saturday"
 msgid "Sa"
 msgstr "土"
 
-#: src/Controllers/JavaScriptMessagesController.php:742
+#: src/Controllers/JavaScriptMessagesController.php:745
 msgctxt "Column header for week of the year in calendar"
 msgid "Wk"
 msgstr "週"
 
 #. l10n: DO NOT TRANSLATE! Use either "calendar-month-year" or "calendar-year-month".
-#: src/Controllers/JavaScriptMessagesController.php:744
+#: src/Controllers/JavaScriptMessagesController.php:747
 msgctxt "The month-year order in a calendar"
 msgid "calendar-month-year"
 msgstr "calendar-year-month"
 
-#: src/Controllers/JavaScriptMessagesController.php:745
+#: src/Controllers/JavaScriptMessagesController.php:748
 msgctxt "Year suffix for calendar, \"none\" is empty"
 msgid "none"
 msgstr "none"
 
-#: src/Controllers/JavaScriptMessagesController.php:746
+#: src/Controllers/JavaScriptMessagesController.php:749
 msgctxt "A specific point in the day, as shown on a clock"
 msgid "Time"
 msgstr "時刻"
 
-#: src/Controllers/JavaScriptMessagesController.php:747
+#: src/Controllers/JavaScriptMessagesController.php:750
 msgctxt "Unit of time"
 msgid "Hour"
 msgstr "時"
 
-#: src/Controllers/JavaScriptMessagesController.php:748
+#: src/Controllers/JavaScriptMessagesController.php:751
 msgctxt "Unit of time"
 msgid "Minute"
 msgstr "分"
 
-#: src/Controllers/JavaScriptMessagesController.php:749
+#: src/Controllers/JavaScriptMessagesController.php:752
 msgctxt "Unit of time"
 msgid "Second"
 msgstr "秒"
 
-#: src/Controllers/JavaScriptMessagesController.php:750
+#: src/Controllers/JavaScriptMessagesController.php:753
 msgctxt "Unit of time"
 msgid "Millisecond"
 msgstr "ミリ秒"
 
-#: src/Controllers/JavaScriptMessagesController.php:751
+#: src/Controllers/JavaScriptMessagesController.php:754
 msgctxt "Unit of time"
 msgid "Microsecond"
 msgstr "マイクロ秒"
 
-#: src/Controllers/JavaScriptMessagesController.php:752
+#: src/Controllers/JavaScriptMessagesController.php:755
 msgctxt "The time zone for a time of day"
 msgid "Time zone"
 msgstr "タイムゾーン"
 
 #. l10n: Display text for previous month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:756
+#: src/Controllers/JavaScriptMessagesController.php:759
 msgctxt "Previous month"
 msgid "Prev"
 msgstr "前月"
 
 #. l10n: Display text for next month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:758
+#: src/Controllers/JavaScriptMessagesController.php:761
 msgctxt "Next month"
 msgid "Next"
 msgstr "翌月"
 
 #. l10n: Display text for current month link in calendar
-#: src/Controllers/JavaScriptMessagesController.php:760
+#: src/Controllers/JavaScriptMessagesController.php:763
 msgid "Today"
 msgstr "今日"
 
-#: src/Controllers/JavaScriptMessagesController.php:763
+#: src/Controllers/JavaScriptMessagesController.php:766
 msgid "This field is required"
 msgstr "このフィールドは必須です"
 
-#: src/Controllers/JavaScriptMessagesController.php:764
+#: src/Controllers/JavaScriptMessagesController.php:767
 msgid "Please fix this field"
 msgstr "この項目を修正してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:765
+#: src/Controllers/JavaScriptMessagesController.php:768
 msgid "Please enter a valid email address"
 msgstr "有効なメールアドレスを入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:766
+#: src/Controllers/JavaScriptMessagesController.php:769
 msgid "Please enter a valid URL"
 msgstr "有効なURLを入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:767
+#: src/Controllers/JavaScriptMessagesController.php:770
 msgid "Please enter a valid date"
 msgstr "有効な日付を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:768
+#: src/Controllers/JavaScriptMessagesController.php:771
 msgid "Please enter a valid date ( ISO )"
 msgstr "有効な日付(ISO準拠)を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:769
+#: src/Controllers/JavaScriptMessagesController.php:772
 msgid "Please enter a valid number"
 msgstr "有効な数値を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:770
+#: src/Controllers/JavaScriptMessagesController.php:773
 msgid "Please enter a valid credit card number"
 msgstr "有効なクレジットカード番号を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:771
+#: src/Controllers/JavaScriptMessagesController.php:774
 msgid "Please enter only digits"
 msgstr "数字のみを入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:772
+#: src/Controllers/JavaScriptMessagesController.php:775
 msgid "Please enter the same value again"
 msgstr "同じ値をもう一度入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:773
+#: src/Controllers/JavaScriptMessagesController.php:776
 msgid "Please enter no more than {0} characters"
 msgstr "{0}文字以上を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:774
+#: src/Controllers/JavaScriptMessagesController.php:777
 msgid "Please enter at least {0} characters"
 msgstr "少なくとも {0}文字以上を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:775
+#: src/Controllers/JavaScriptMessagesController.php:778
 msgid "Please enter a value between {0} and {1} characters long"
 msgstr "{0} から {1} の間の値を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:776
+#: src/Controllers/JavaScriptMessagesController.php:779
 msgid "Please enter a value between {0} and {1}"
 msgstr "{0} から {1} の間の値を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:777
+#: src/Controllers/JavaScriptMessagesController.php:780
 msgid "Please enter a value less than or equal to {0}"
 msgstr "{0} 以下の値を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:778
+#: src/Controllers/JavaScriptMessagesController.php:781
 msgid "Please enter a value greater than or equal to {0}"
 msgstr "{0} 以上の値を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:779
+#: src/Controllers/JavaScriptMessagesController.php:782
 msgid "Please enter a valid date or time"
 msgstr "有効な日付または時刻を入力してください"
 
-#: src/Controllers/JavaScriptMessagesController.php:780
+#: src/Controllers/JavaScriptMessagesController.php:783
 msgid "Please enter a valid HEX input"
 msgstr "有効な 16 進数の値を入力してください"
 
 #. l10n: To validate the usage of a MD5 function on the column
-#: src/Controllers/JavaScriptMessagesController.php:782
+#: src/Controllers/JavaScriptMessagesController.php:785
 msgid "This column can not contain a 32 chars value"
 msgstr "このカラムに 32 文字の値を入れることはできません"
 
-#: src/Controllers/JavaScriptMessagesController.php:785
+#: src/Controllers/JavaScriptMessagesController.php:788
 msgid ""
 "These functions are meant to return a binary result; to avoid inconsistent "
 "results you should store it in a BINARY, VARBINARY, or BLOB column."
@@ -14333,38 +14365,38 @@ msgstr ""
 "これらの関数はバイナリの結果を返します。一貫性のない結果にならないよう、この"
 "値は BINARY, VARBINARY, BLOB のいずれかのカラムに格納してください。"
 
-#: src/Controllers/JavaScriptMessagesController.php:790
+#: src/Controllers/JavaScriptMessagesController.php:793
 msgid ""
 "The file being uploaded is probably larger than the maximum allowed size."
 msgstr "アップロードされているファイルが、おそらく最大許容サイズよりも大きい。"
 
-#: src/Controllers/JavaScriptMessagesController.php:792
+#: src/Controllers/JavaScriptMessagesController.php:795
 #, php-format
 msgid "%s of %s"
 msgstr "%s of %s"
 
-#: src/Controllers/JavaScriptMessagesController.php:793
+#: src/Controllers/JavaScriptMessagesController.php:796
 #, php-format
 msgid "%s/sec."
 msgstr "%s/秒。"
 
-#: src/Controllers/JavaScriptMessagesController.php:794
+#: src/Controllers/JavaScriptMessagesController.php:797
 msgid "About %MIN min. %SEC sec. remaining."
 msgstr "残り時間 約 %MIN 分 %SEC 秒。"
 
-#: src/Controllers/JavaScriptMessagesController.php:795
+#: src/Controllers/JavaScriptMessagesController.php:798
 msgid "About %SEC sec. remaining."
 msgstr "残り時間 約 %SEC 秒。"
 
-#: src/Controllers/JavaScriptMessagesController.php:796
+#: src/Controllers/JavaScriptMessagesController.php:799
 msgid "The file is being processed, please be patient."
 msgstr "ファイルが処理されています。しばらくお待ちください。"
 
-#: src/Controllers/JavaScriptMessagesController.php:797
+#: src/Controllers/JavaScriptMessagesController.php:800
 msgid "Uploading your import file…"
 msgstr "インポートファイルをアップロードしています…"
 
-#: src/Controllers/JavaScriptMessagesController.php:799
+#: src/Controllers/JavaScriptMessagesController.php:802
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
@@ -14387,7 +14419,7 @@ msgid "No such column"
 msgstr "カラムはありません"
 
 #: src/Controllers/Normalization/GetColumnsController.php:35
-#: src/Normalization.php:230 src/Types.php:648
+#: src/Normalization.php:230 src/Types.php:650
 msgctxt "string types"
 msgid "String"
 msgstr "文字列"
@@ -14468,7 +14500,7 @@ msgstr "アカウント %s@%s がロックされました。"
 msgid "The account %s@%s has been successfully unlocked."
 msgstr "アカウント %s@%s のロックが解除されました。"
 
-#: src/Controllers/Server/PrivilegesController.php:123
+#: src/Controllers/Server/PrivilegesController.php:125
 msgid ""
 "Username and hostname didn't change. If you only want to change the "
 "password, 'Change password' tab should be used."
@@ -16245,7 +16277,7 @@ msgstr "トリガ名を %d 文字より長くすることはできません。"
 msgid "The trigger name cannot end with a space character."
 msgstr "トリガ名を空白文字で終えることはできません。"
 
-#: src/Import/Import.php:943
+#: src/Import/Import.php:944
 msgid ""
 "Only INSERT, UPDATE, DELETE, REPLACE and SET (without options like GLOBAL) "
 "SQL queries containing transactional engine tables can be rolled back."
@@ -16253,47 +16285,47 @@ msgstr ""
 "トランザクションエンジンのテーブルを含む INSERT、UPDATE、DELETE、REPLACE、SET"
 "（GLOBAL などのオプションなし）の SQL クエリのみをロールバックできます。"
 
-#: src/Import/Import.php:1160
+#: src/Import/Import.php:1161
 #, php-format
 msgid "Go to table: %s"
 msgstr "テーブル %s に移動"
 
-#: src/Import/Import.php:1168
+#: src/Import/Import.php:1169
 #, php-format
 msgid "Structure of %s"
 msgstr "%s の構造"
 
-#: src/Import/Import.php:1175 src/Import/Import.php:1224
+#: src/Import/Import.php:1176 src/Import/Import.php:1225
 #, php-format
 msgid "Edit settings for %s"
 msgstr "%s に対する設定の変更を行います"
 
-#: src/Import/Import.php:1186
+#: src/Import/Import.php:1187
 #, php-format
 msgid "Go to view: %s"
 msgstr "ビュー %s に移動"
 
-#: src/Import/Import.php:1207
+#: src/Import/Import.php:1208
 msgid ""
 "The following structures have either been created or altered. Here you can:"
 msgstr ""
 "以下に示す構成が、作成もしくは変更されました。ここで次のことが行えます。"
 
-#: src/Import/Import.php:1209
+#: src/Import/Import.php:1210
 msgid "View a structure's contents by clicking on its name."
 msgstr "名前をクリックすることで構造内容を表示します。"
 
-#: src/Import/Import.php:1210
+#: src/Import/Import.php:1211
 msgid ""
 "Change any of its settings by clicking the corresponding \"Options\" link."
 msgstr ""
 "「オプション」のリンクをクリックすることで対応する設定の変更が行えます。"
 
-#: src/Import/Import.php:1211
+#: src/Import/Import.php:1212
 msgid "Edit structure by following the \"Structure\" link."
 msgstr "名前の後ろにある「構造」のリンクより構造の編集が行えます。"
 
-#: src/Import/Import.php:1218
+#: src/Import/Import.php:1219
 #, php-format
 msgid "Go to database: %s"
 msgstr "データベース %s に移動"
@@ -16438,7 +16470,7 @@ msgstr "新規作成"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:98
 msgid "Functions"
 msgstr "関数"
 
@@ -16458,7 +16490,7 @@ msgstr "展開/折りたたみ"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:103
 msgid "Procedures"
 msgstr "プロシージャ"
 
@@ -16860,35 +16892,35 @@ msgstr "設定ファイルに無効な認証方法が指定されています:"
 msgid "You have enabled two factor authentication, please confirm your login."
 msgstr "二要素認証が有効化しています。認証コードを入力してください。"
 
-#: src/Plugins/Export/ExportCsv.php:68 src/Plugins/Export/ExportToon.php:63
+#: src/Plugins/Export/ExportCsv.php:69 src/Plugins/Export/ExportToon.php:62
 #: src/Plugins/Import/AbstractImportCsv.php:36
 msgid "Columns separated with:"
 msgstr "カラムの区切り記号:"
 
-#: src/Plugins/Export/ExportCsv.php:73
+#: src/Plugins/Export/ExportCsv.php:74
 #: src/Plugins/Import/AbstractImportCsv.php:42
 msgid "Columns enclosed with:"
 msgstr "カラム囲み記号:"
 
-#: src/Plugins/Export/ExportCsv.php:78
+#: src/Plugins/Export/ExportCsv.php:79
 #: src/Plugins/Import/AbstractImportCsv.php:49
 msgid "Columns escaped with:"
 msgstr "カラムのエスケープ記号:"
 
-#: src/Plugins/Export/ExportCsv.php:83
+#: src/Plugins/Export/ExportCsv.php:84
 #: src/Plugins/Import/AbstractImportCsv.php:56
 msgid "Lines terminated with:"
 msgstr "行の終端記号:"
 
-#: src/Plugins/Export/ExportCsv.php:88 src/Plugins/Export/ExportExcel.php:70
+#: src/Plugins/Export/ExportCsv.php:89 src/Plugins/Export/ExportExcel.php:70
 #: src/Plugins/Export/ExportHtmlword.php:88
-#: src/Plugins/Export/ExportLatex.php:203 src/Plugins/Export/ExportOds.php:66
+#: src/Plugins/Export/ExportLatex.php:205 src/Plugins/Export/ExportOds.php:66
 #: src/Plugins/Export/ExportOdt.php:134
-#: src/Plugins/Export/ExportTexytext.php:91
+#: src/Plugins/Export/ExportTexytext.php:92
 msgid "Replace NULL with:"
 msgstr "NULL の代替文字列:"
 
-#: src/Plugins/Export/ExportCsv.php:93 src/Plugins/Export/ExportExcel.php:75
+#: src/Plugins/Export/ExportCsv.php:94 src/Plugins/Export/ExportExcel.php:75
 msgid "Remove carriage return/line feed characters within columns"
 msgstr "カラム内の改行/復帰文字を削除する"
 
@@ -16897,33 +16929,33 @@ msgid "Excel edition:"
 msgstr "Excel のエディション:"
 
 #: src/Plugins/Export/ExportHtmlword.php:82
-#: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:123
-#: src/Plugins/Export/ExportTexytext.php:80
-#: src/Plugins/Export/ExportXml.php:125
+#: src/Plugins/Export/ExportLatex.php:176 src/Plugins/Export/ExportOdt.php:123
+#: src/Plugins/Export/ExportTexytext.php:81
+#: src/Plugins/Export/ExportXml.php:126
 msgid "Data dump options"
 msgstr "データのダンプオプション"
 
 #: src/Plugins/Export/ExportHtmlword.php:169
 #: src/Plugins/Export/ExportOdt.php:212 src/Plugins/Export/ExportSql.php:2101
-#: src/Plugins/Export/ExportTexytext.php:138
+#: src/Plugins/Export/ExportTexytext.php:139
 msgid "Dumping data for table"
 msgstr "テーブルのデータのダンプ"
 
 #: src/Plugins/Export/ExportHtmlword.php:441
 #: src/Plugins/Export/ExportOdt.php:561 src/Plugins/Export/ExportSql.php:1837
-#: src/Plugins/Export/ExportTexytext.php:397
+#: src/Plugins/Export/ExportTexytext.php:403
 msgid "Table structure for table"
 msgstr "テーブルの構造"
 
 #: src/Plugins/Export/ExportHtmlword.php:458
 #: src/Plugins/Export/ExportOdt.php:581 src/Plugins/Export/ExportSql.php:1903
-#: src/Plugins/Export/ExportTexytext.php:410
+#: src/Plugins/Export/ExportTexytext.php:416
 msgid "Structure for view"
 msgstr "ビュー用の構造"
 
 #: src/Plugins/Export/ExportHtmlword.php:464
 #: src/Plugins/Export/ExportOdt.php:589 src/Plugins/Export/ExportSql.php:1946
-#: src/Plugins/Export/ExportTexytext.php:414
+#: src/Plugins/Export/ExportTexytext.php:420
 msgid "Stand-in structure for view"
 msgstr "ビュー用の代替構造"
 
@@ -16935,84 +16967,84 @@ msgstr "JSONをプリティプリント出力する（人間が読める書式�
 msgid "Output unicode characters unescaped"
 msgstr "エスケープしないでUnicode文字を出力する"
 
-#: src/Plugins/Export/ExportLatex.php:68
+#: src/Plugins/Export/ExportLatex.php:70
 msgid "Content of table @TABLE@"
 msgstr "テーブル @TABLE@ の内容"
 
-#: src/Plugins/Export/ExportLatex.php:69
+#: src/Plugins/Export/ExportLatex.php:71
 msgid "(continued)"
 msgstr "(続き)"
 
-#: src/Plugins/Export/ExportLatex.php:70
+#: src/Plugins/Export/ExportLatex.php:72
 msgid "Structure of table @TABLE@"
 msgstr "テーブル @TABLE@ の構造"
 
-#: src/Plugins/Export/ExportLatex.php:123 src/Plugins/Export/ExportOdt.php:90
+#: src/Plugins/Export/ExportLatex.php:125 src/Plugins/Export/ExportOdt.php:90
 #: src/Plugins/Export/ExportSql.php:279
 msgid "Object creation options"
 msgstr "生成オプション"
 
-#: src/Plugins/Export/ExportLatex.php:129
-#: src/Plugins/Export/ExportLatex.php:185
+#: src/Plugins/Export/ExportLatex.php:131
+#: src/Plugins/Export/ExportLatex.php:187
 msgid "Table caption:"
 msgstr "テーブルのキャプション:"
 
-#: src/Plugins/Export/ExportLatex.php:135
-#: src/Plugins/Export/ExportLatex.php:191
+#: src/Plugins/Export/ExportLatex.php:137
+#: src/Plugins/Export/ExportLatex.php:193
 msgid "Table caption (continued):"
 msgstr "テーブルのキャプション (続き):"
 
-#: src/Plugins/Export/ExportLatex.php:141
-#: src/Plugins/Export/ExportLatex.php:197
+#: src/Plugins/Export/ExportLatex.php:143
+#: src/Plugins/Export/ExportLatex.php:199
 msgid "Label key:"
 msgstr "ラベルキー:"
 
-#: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:98
+#: src/Plugins/Export/ExportLatex.php:151 src/Plugins/Export/ExportOdt.php:98
 #: src/Plugins/Export/ExportSql.php:205
 msgid "Display foreign key relationships"
 msgstr "外部キーリレーションシップを表示する"
 
-#: src/Plugins/Export/ExportLatex.php:156 src/Plugins/Export/ExportOdt.php:105
+#: src/Plugins/Export/ExportLatex.php:158 src/Plugins/Export/ExportOdt.php:105
 msgid "Display comments"
 msgstr "コメントを表示する"
 
-#: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:111
+#: src/Plugins/Export/ExportLatex.php:164 src/Plugins/Export/ExportOdt.php:111
 #: src/Plugins/Export/ExportSql.php:213
 msgid "Display media types"
 msgstr "メディア タイプを表示する"
 
-#: src/Plugins/Export/ExportLatex.php:180
+#: src/Plugins/Export/ExportLatex.php:182
 msgid "Put columns names in the first row:"
 msgstr "1 行目にカラム名を追加する:"
 
-#: src/Plugins/Export/ExportLatex.php:230 src/Plugins/Export/ExportSql.php:760
-#: src/Plugins/Export/ExportXml.php:201
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportXml.php:202
 msgid "Generation Time:"
 msgstr "生成日時:"
 
-#: src/Plugins/Export/ExportLatex.php:233 src/Plugins/Export/ExportSql.php:766
-#: src/Plugins/Export/ExportXml.php:204
+#: src/Plugins/Export/ExportLatex.php:235 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportXml.php:205
 msgid "PHP Version:"
 msgstr "PHP のバージョン:"
 
-#: src/Plugins/Export/ExportLatex.php:286 src/Plugins/Export/ExportSql.php:1992
+#: src/Plugins/Export/ExportLatex.php:290 src/Plugins/Export/ExportSql.php:1992
 msgid "Data:"
 msgstr "データ:"
 
-#: src/Plugins/Export/ExportLatex.php:435
+#: src/Plugins/Export/ExportLatex.php:445
 msgid "Structure:"
 msgstr "構造:"
 
-#: src/Plugins/Export/ExportMediawiki.php:77
+#: src/Plugins/Export/ExportMediawiki.php:78
 msgid "Export table names"
 msgstr "テーブル名をエクスポートする"
 
-#: src/Plugins/Export/ExportMediawiki.php:84
+#: src/Plugins/Export/ExportMediawiki.php:85
 msgid "Export table headers"
 msgstr "カラム名をエクスポートする"
 
 #: src/Plugins/Export/ExportOdt.php:213
-#: src/Plugins/Export/ExportTexytext.php:139
+#: src/Plugins/Export/ExportTexytext.php:140
 msgid "Dumping data for query result"
 msgstr "クエリ結果のデータのダンプ"
 
@@ -17270,17 +17302,17 @@ msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr "他のデータベースシステムまたは古い MySQL サーバとの互換性:"
 
-#: src/Plugins/Export/ExportToon.php:68
+#: src/Plugins/Export/ExportToon.php:67
 #, fuzzy
 #| msgid "Orientation"
 msgid "Indentation:"
 msgstr "向き"
 
-#: src/Plugins/Export/ExportXml.php:86
+#: src/Plugins/Export/ExportXml.php:87
 msgid "Object creation options (all are recommended)"
 msgstr "生成オプション (すべて推奨)"
 
-#: src/Plugins/Export/ExportXml.php:130
+#: src/Plugins/Export/ExportXml.php:131
 msgid "Export contents"
 msgstr "内容をエクスポートする"
 
@@ -17903,7 +17935,7 @@ msgid "Error 405! Request method not allowed."
 msgstr "エラー 405! リクエストメソッドは許可されていません。"
 
 #: src/Server/Plugins.php:53 src/Server/Privileges.php:634
-#: src/Server/Privileges.php:3161
+#: src/Server/Privileges.php:3155
 msgid "Native MySQL authentication"
 msgstr "ネイティブMySQL認証"
 
@@ -17950,43 +17982,43 @@ msgstr "%s の権限を取り消しました。"
 msgid "Revoke"
 msgstr "取り消し"
 
-#: src/Server/Privileges.php:1901
+#: src/Server/Privileges.php:1902
 msgid "No users selected for deleting!"
 msgstr "削除するユーザが選択されていません!"
 
-#: src/Server/Privileges.php:1904
+#: src/Server/Privileges.php:1905
 msgid "Reloading the privileges"
 msgstr "権限を再読み込みしています"
 
-#: src/Server/Privileges.php:1929
+#: src/Server/Privileges.php:1930
 msgid "The selected users have been deleted successfully."
 msgstr "選択されたユーザは正常に削除されました。"
 
-#: src/Server/Privileges.php:2003
+#: src/Server/Privileges.php:2004
 #, php-format
 msgid "You have updated the privileges for %s."
 msgstr "%s の権限を更新しました。"
 
-#: src/Server/Privileges.php:2161
+#: src/Server/Privileges.php:2154
 #, php-format
 msgid "Deleting %s"
 msgstr "%s を削除中です"
 
-#: src/Server/Privileges.php:2191
+#: src/Server/Privileges.php:2184
 msgid "The privileges were reloaded successfully."
 msgstr "権限を正常に再読み込みしました。"
 
-#: src/Server/Privileges.php:2256
+#: src/Server/Privileges.php:2250
 #, php-format
 msgid "The user %s already exists!"
 msgstr "ユーザ %s は既に存在します!"
 
-#: src/Server/Privileges.php:2409
+#: src/Server/Privileges.php:2403
 #, php-format
 msgid "Privileges for %s"
 msgstr "%s に対する権限"
 
-#: src/Server/Privileges.php:2495
+#: src/Server/Privileges.php:2489
 #, php-format
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
@@ -17999,7 +18031,7 @@ msgstr ""
 "限の内容が一致しなくなることがありますので、作業を続ける前に %s権限の再読み込"
 "み%s をしてください。"
 
-#: src/Server/Privileges.php:2511
+#: src/Server/Privileges.php:2505
 msgid ""
 "Note: phpMyAdmin gets the users’ privileges directly from MySQL’s privilege "
 "tables. The content of these tables may differ from the privileges the "
@@ -18012,11 +18044,11 @@ msgstr ""
 "致しなくなることがあります。この場合、権限を再読み込みする必要がありますが、"
 "あなたは RELOAD 権限を持っていません。"
 
-#: src/Server/Privileges.php:2799
+#: src/Server/Privileges.php:2793
 msgid "You have added a new user."
 msgstr "新しいユーザを追加しました。"
 
-#: src/Server/Privileges.php:3253
+#: src/Server/Privileges.php:3247
 msgid ""
 "A user account allowing any user from localhost to connect is present. This "
 "will prevent other users from connecting if the host part of their account "
@@ -18695,17 +18727,23 @@ msgstr ""
 msgid "128-bit UUID (Universally Unique Identifier)"
 msgstr "128 ビット UUID (Universally Unique Identifier)"
 
-#: src/Types.php:602
+#: src/Types.php:293
+msgid ""
+"Stores vector data optimized for operations such as similarity search and "
+"machine learning applications"
+msgstr ""
+
+#: src/Types.php:604
 msgctxt "numeric types"
 msgid "Numeric"
 msgstr "数値"
 
-#: src/Types.php:620
+#: src/Types.php:622
 msgctxt "date and time types"
 msgid "Date and time"
 msgstr "日付・時刻"
 
-#: src/Types.php:650
+#: src/Types.php:652
 msgctxt "spatial types"
 msgid "Spatial"
 msgstr "空間データ"
@@ -18749,6 +18787,9 @@ msgstr "ZIP アーカイブにエラーがあります:"
 #: src/ZipExtension.php:74
 msgid "No files found inside ZIP archive!"
 msgstr "ZIP アーカイブにファイルが含まれていません!"
+
+#~ msgid "The fullscreen request was denied."
+#~ msgstr "フルスクリーンリクエストは却下されました。"
 
 #~ msgid "Exporting a raw query is not supported for this export method."
 #~ msgstr ""
