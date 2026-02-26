@@ -28,7 +28,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/tr
  * Bind event handlers
  */
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/tracking.js', function () {
-  var $versions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#versions');
+  const $versions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#versions');
   $versions.find('tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sorticon"></div>'));
   $versions.tablesorter({
     sortList: [[1, 0]],
@@ -50,7 +50,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
       }
     }
   });
-  var $noVersions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#noversions');
+  const $noVersions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#noversions');
   $noVersions.find('tr').first().find('th').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sorticon"></div>'));
   $noVersions.tablesorter({
     sortList: [[1, 0]],
@@ -63,18 +63,18 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
       }
     }
   });
-  var $body = jquery__WEBPACK_IMPORTED_MODULE_0___default()('body');
+  const $body = jquery__WEBPACK_IMPORTED_MODULE_0___default()('body');
   /**
    * Handles multi submit for tracked tables
    */
   $body.on('click', '#trackedForm.ajax button[name="submit_mult"], #trackedForm.ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
-    var $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $form = $button.parent('form');
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
+    const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = $button.parent('form');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     if ($button.val() === 'delete_tracking') {
-      var question = window.Messages.strDeleteTrackingDataMultiple;
+      const question = window.Messages.strDeleteTrackingDataMultiple;
       $button.confirm(question, $form.attr('action'), function (url) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDeletingTrackingData);
         _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
@@ -91,10 +91,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
    */
   $body.on('click', '#untrackedForm.ajax button[name="submit_mult"], #untrackedForm.ajax input[name="submit_mult"]', function (e) {
     e.preventDefault();
-    var $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $form = $button.parent('form');
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
+    const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = $button.parent('form');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -104,13 +104,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
    */
   $body.on('click', 'a.delete_tracking_anchor.ajax', function (e) {
     e.preventDefault();
-    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var question = window.Messages.strDeleteTrackingData;
+    const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = window.Messages.strDeleteTrackingData;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDeletingTrackingData);
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $anchor;
-      var argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
+      const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+      let params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
       params += argSep + 'ajax_page_request=1';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
