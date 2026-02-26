@@ -4360,16 +4360,12 @@
     <MixedArgument>
       <code><![CDATA[$dataRow[$i] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$dataRow[$i]]]></code>
       <code><![CDATA[$dataRow['data_length']]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
@@ -4394,8 +4390,6 @@
     <MixedArgument>
       <code><![CDATA[$dataRow[$i][$j] ?? null]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
@@ -4409,8 +4403,6 @@
       <code><![CDATA[$rowData['parts'][$i]]]></code>
       <code><![CDATA[$rowData['parts'][$i]['points']]]></code>
       <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[0]]]></code>
-      <code><![CDATA[$tempPoint[1]]]></code>
       <code><![CDATA[$tempPoint[1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
@@ -5589,43 +5581,15 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
-    <MixedAssignment>
-      <code><![CDATA[$val]]></code>
-      <code><![CDATA[$val]]></code>
-    </MixedAssignment>
     <PossiblyInvalidCast>
-      <code><![CDATA[$config->settings[$section][$opt]]]></code>
+      <code><![CDATA[$config->settings[$pluginType->value][$opt]]]></code>
     </PossiblyInvalidCast>
     <PossiblyNullOperand>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
-      <code><![CDATA[$pitem->getName()]]></code>
       <code><![CDATA[$propertyGroup->getName()]]></code>
-      <code><![CDATA[$propertyItem->getForce()]]></code>
-      <code><![CDATA[$propertyItem->getForce()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
-      <code><![CDATA[$propertyItem->getName()]]></code>
       <code><![CDATA[$subgroupHeader->getName()]]></code>
     </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
-      <code><![CDATA[empty(Config::getInstance()->settings[$section][$opt])]]></code>
+      <code><![CDATA[empty(Config::getInstance()->settings[$pluginType->value][$opt])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Plugins/Auth/AuthenticationConfig.php">
@@ -7212,6 +7176,54 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$dbi->fetchValue('SELECT @@have_profiling')]]></code>
     </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Properties/Options/Items/BoolPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getForce()]]></code>
+      <code><![CDATA[$this->getForce()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/HiddenPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/NumberPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/RadioPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/SelectPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
+  </file>
+  <file src="src/Properties/Options/Items/TextPropertyItem.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+      <code><![CDATA[$this->getName()]]></code>
+    </PossiblyNullOperand>
   </file>
   <file src="src/Query/Compatibility.php">
     <PossiblyInvalidArgument>
@@ -9985,8 +9997,6 @@
   <file src="tests/unit/Gis/GisVisualizationTest.php">
     <MixedAssignment>
       <code><![CDATA[$dataSet]]></code>
-      <code><![CDATA[$dataSet]]></code>
-      <code><![CDATA[$queryString]]></code>
     </MixedAssignment>
   </file>
   <file src="tests/unit/GitTest.php">
@@ -10642,7 +10652,6 @@
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$config->selectedServer]]></code>
@@ -10661,7 +10670,6 @@
   <file src="tests/unit/Tracking/TrackingTest.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
     </DeprecatedMethod>

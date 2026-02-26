@@ -21,7 +21,7 @@ class OptionsPropertyOneItemTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->stub = $this->getMockBuilder(OptionsPropertyOneItem::class)->onlyMethods([])->getMock();
+        $this->stub = $this->getMockBuilder(OptionsPropertyOneItem::class)->onlyMethods(['getHtml'])->getMock();
     }
 
     /**
@@ -31,10 +31,10 @@ class OptionsPropertyOneItemTest extends AbstractTestCase
      */
     public function testGetSetValues(): void
     {
-        $this->stub->setValues([1, 2]);
+        $this->stub->setValues(['1', '2']);
 
         self::assertSame(
-            [1, 2],
+            ['1', '2'],
             $this->stub->getValues(),
         );
     }

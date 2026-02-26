@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg version="1.1" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="200" height="150">
+<g>
+<circle cx="100" cy="75" r="3" class="point vector" fill="white" stroke="#b02ee0" stroke-width="2" data-label="Point"/>
+<polyline points="25,85 15,135 65,125 " class="linestring vector" fill="none" stroke="#e0642e" stroke-width="2" data-label="LineString"/>
+<path d="M15,15L15,65L65,15ZM22,28L22,48L31,38ZM28,22L48,22L38,31Z" class="polygon vector" stroke="black" stroke-width="0.5" fill="#e0d62e" fill-rule="evenodd" fill-opacity="0.8" data-label="Polygon"/>
+<circle cx="25" cy="75" r="3" class="multipoint vector" fill="white" stroke="#2e97e0" stroke-width="2" data-label="MultiPoint"/>
+<circle cx="175" cy="75" r="3" class="multipoint vector" fill="white" stroke="#2e97e0" stroke-width="2" data-label="MultiPoint"/>
+<polyline points="135,15 180,15 135,25 " class="multilinestring vector" fill="none" stroke="#bce02e" stroke-width="2" data-label="MultiLineString"/>
+<polyline points="185,65 185,20 175,65 " class="multilinestring vector" fill="none" stroke="#bce02e" stroke-width="2" data-label="MultiLineString"/>
+<path d="M185,135L185,85L135,135ZM175,125L175,110L160,125Z" class="multipolygon vector" stroke="black" stroke-width="0.5" fill="#e02e75" fill-rule="evenodd" fill-opacity="0.8" data-label="MultiPolygon"/>
+<path d="M175,85L125,85L125,135ZM150,95L135,95L135,110Z" class="multipolygon vector" stroke="black" stroke-width="0.5" fill="#e02e75" fill-rule="evenodd" fill-opacity="0.8" data-label="MultiPolygon"/>
+</g>
+</svg>

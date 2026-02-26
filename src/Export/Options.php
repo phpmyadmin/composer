@@ -13,6 +13,7 @@ use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\ExportType;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\Table\Table;
 use PhpMyAdmin\Util;
@@ -178,7 +179,7 @@ final readonly class Options
             'hidden_inputs' => $hiddenInputs,
             'export_method' => $_POST['quick_or_custom'] ?? $config->config->Export->method,
             'plugins_choice' => $dropdown,
-            'options' => Plugins::getOptions('Export', $exportList),
+            'options' => Plugins::getOptions(PluginType::Export, $exportList),
             'can_convert_kanji' => Encoding::canConvertKanji(),
             'exec_time_limit' => $config->settings['ExecTimeLimit'],
             'rows' => $rows,

@@ -378,24 +378,29 @@ class GisVisualization
      */
     public function toFileAsPdf(string $fileName): void
     {
-        // create pdf
-        $pdf = new TCPDF('', 'pt', Config::getInstance()->config->PDFDefaultPageSize, true, 'UTF-8', false);
-
-        // disable header and footer
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-
-        //set auto page breaks
-        $pdf->setAutoPageBreak(false);
-
-        // add a page
-        $pdf->AddPage();
-
+        $fileName = $this->sanitizeName($fileName, 'pdf');
+        $pdf = $this->createEmptyPdf(Config::getInstance()->config->PDFDefaultPageSize ?? 'A4');
         $this->prepareDataSet($this->data, 'pdf', $pdf);
 
-        // sanitize file name
-        $fileName = $this->sanitizeName($fileName, 'pdf');
         $pdf->Output($fileName, 'D');
+    }
+
+    private function createEmptyPdf(string $format): TCPDF
+    {
+        $pdf = new TCPDF(
+            orientation: 'P',
+            unit: 'pt',
+            format: $format,
+            unicode: true,
+            encoding: 'UTF-8',
+            diskcache: false,
+        );
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->setAutoPageBreak(false);
+        $pdf->AddPage();
+
+        return $pdf;
     }
 
     /**
