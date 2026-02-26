@@ -21,6 +21,7 @@ use PhpMyAdmin\Http\ServerRequest;
 use PhpMyAdmin\I18n\LanguageManager;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ExportType;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Tests\AbstractTestCase;
 use PhpMyAdmin\Tests\Stubs\ResponseRenderer;
@@ -75,7 +76,7 @@ class ExportControllerTest extends AbstractTestCase
             ],
             'export_method' => 'quick',
             'plugins_choice' => Plugins::getChoice($exportList, 'sql'),
-            'options' => Plugins::getOptions('Export', $exportList),
+            'options' => Plugins::getOptions(PluginType::Export, $exportList),
             'can_convert_kanji' => false,
             'exec_time_limit' => 300,
             'rows' => [

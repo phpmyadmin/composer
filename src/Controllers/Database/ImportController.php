@@ -20,6 +20,7 @@ use PhpMyAdmin\Import\Import;
 use PhpMyAdmin\Import\ImportSettings;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 use PhpMyAdmin\Util;
@@ -93,9 +94,9 @@ final readonly class ImportController implements InvocableController
         $hiddenInputs = [$idKey => $uploadId, 'import_type' => 'database', 'db' => Current::$database];
 
         $choice = Plugins::getChoice($importList, $this->getFormat($request->getParam('format')));
-        $options = Plugins::getOptions('Import', $importList);
+        $options = Plugins::getOptions(PluginType::Import, $importList);
         $skipQueriesDefault = $this->getSkipQueries($request->getParam('skip_queries'));
-        $isAllowInterruptChecked = Plugins::checkboxCheck('Import', 'allow_interrupt');
+        $isAllowInterruptChecked = Plugins::checkboxCheck(PluginType::Import, 'allow_interrupt');
         $maxUploadSize = Util::getUploadSizeInBytes();
 
         $this->response->render('database/import/index', [

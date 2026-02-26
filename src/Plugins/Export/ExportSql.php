@@ -223,7 +223,7 @@ class ExportSql extends ExportPlugin
             __('Enclose export in a transaction'),
         );
         $leaf->setDoc(
-            ['programs', 'mysqldump', 'option_mysqldump_single-transaction'],
+            ['mysqldump', 'option_mysqldump_single-transaction'],
         );
         $generalOptions->addProperty($leaf);
 
@@ -233,7 +233,7 @@ class ExportSql extends ExportPlugin
             __('Disable foreign key checks'),
         );
         $leaf->setDoc(
-            ['manual_MySQL_Database_Administration', 'server-system-variables', 'sysvar_foreign_key_checks'],
+            ['server-system-variables', 'sysvar_foreign_key_checks'],
         );
         $generalOptions->addProperty($leaf);
 
@@ -433,7 +433,7 @@ class ExportSql extends ExportPlugin
             __('<code>INSERT DELAYED</code> statements'),
         );
         $leaf->setDoc(
-            ['manual_MySQL_Database_Administration', 'insert_delayed'],
+            ['insert_delayed'],
         );
         $subgroup->addProperty($leaf);
 
@@ -442,7 +442,7 @@ class ExportSql extends ExportPlugin
             __('<code>INSERT IGNORE</code> statements'),
         );
         $leaf->setDoc(
-            ['manual_MySQL_Database_Administration', 'insert'],
+            ['insert'],
         );
         $subgroup->addProperty($leaf);
         $dataOptions->addProperty($subgroup);
@@ -2572,7 +2572,7 @@ class ExportSql extends ExportPlugin
         );
         $leaf->setValues($values);
         $leaf->setDoc(
-            ['manual_MySQL_Database_Administration', 'Server_SQL_mode'],
+            ['sql-mode'],
         );
         $generalOptions->addProperty($leaf);
     }

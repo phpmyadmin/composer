@@ -16,17 +16,11 @@ use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Plugins\ExportType;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Plugins\Plugin;
+use PhpMyAdmin\Plugins\PluginType;
 use PhpMyAdmin\Plugins\SchemaPlugin;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertyMainGroup;
 use PhpMyAdmin\Properties\Options\Groups\OptionsPropertySubgroup;
-use PhpMyAdmin\Properties\Options\Items\BoolPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\DocPropertyItem;
 use PhpMyAdmin\Properties\Options\Items\HiddenPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\MessageOnlyPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\NumberPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\RadioPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\SelectPropertyItem;
-use PhpMyAdmin\Properties\Options\Items\TextPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyGroup;
 use PhpMyAdmin\Properties\Options\OptionsPropertyItem;
 use PhpMyAdmin\Properties\Options\OptionsPropertyOneItem;
@@ -36,9 +30,6 @@ use Throwable;
 use function __;
 use function class_exists;
 use function count;
-use function htmlspecialchars;
-use function in_array;
-use function is_array;
 use function is_string;
 use function is_subclass_of;
 use function mb_strtolower;
@@ -201,21 +192,18 @@ class Plugins
      * Returns html input tag option 'checked' if plugin $opt
      * should be set by config or request
      *
-     * @param string $section name of config section in
-     *                        \PhpMyAdmin\Config::getInstance()->settings[$section] for plugin
-     * @param string $opt     name of option
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param string $opt name of option
      *
      * @return string  html input tag option 'checked'
      */
-    public static function checkboxCheck(string $section, string $opt): string
+    public static function checkboxCheck(PluginType $pluginType, string $opt): string
     {
         // If the form is being repopulated using $_GET data, that is priority
         if (
             isset($_GET[$opt])
             || ! isset($_GET['repopulate'])
             && ((ImportSettings::$timeoutPassed && isset($_REQUEST[$opt]))
-                || ! empty(Config::getInstance()->settings[$section][$opt]))
+                || ! empty(Config::getInstance()->settings[$pluginType->value][$opt]))
         ) {
             return ' checked';
         }
@@ -226,14 +214,12 @@ class Plugins
     /**
      * Returns default value for option $opt
      *
-     * @param string $section name of config section in
-     *                        \PhpMyAdmin\Config::getInstance()->settings[$section] for plugin
-     * @param string $opt     name of option
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param PluginType $pluginType type of the plugin
+     * @param string     $opt        name of option
      *
      * @return string  default value for option $opt
      */
-    public static function getDefault(string $section, string $opt): string
+    public static function getDefault(PluginType $pluginType, string $opt): string
     {
         if (isset($_GET[$opt]) && is_string($_GET[$opt])) {
             // If the form is being repopulated using $_GET data, that is priority
@@ -245,8 +231,8 @@ class Plugins
         }
 
         $config = Config::getInstance();
-        if (isset($config->settings[$section][$opt])) {
-            return (string) $config->settings[$section][$opt];
+        if (isset($config->settings[$pluginType->value][$opt])) {
+            return (string) $config->settings[$pluginType->value][$opt];
         }
 
         return '';
@@ -278,22 +264,20 @@ class Plugins
     /**
      * Returns single option in a list element
      *
-     * @param string              $section       name of config section in $cfg[$section] for plugin
      * @param string              $pluginName    unique plugin name
      * @param OptionsPropertyItem $propertyGroup options property main group instance
      * @param bool                $isSubgroup    if this group is a subgroup
-     * @psalm-param 'Export'|'Import'|'Schema' $section
      *
      * @return string  table row with option
      */
     private static function getOneOption(
         Plugin $plugin,
-        string $section,
+        PluginType $pluginType,
         string $pluginName,
         OptionsPropertyItem $propertyGroup,
         bool $isSubgroup = false,
     ): string {
-        $ret = "\n";
+        $ret = '';
 
         $properties = null;
         if (! $isSubgroup) {
@@ -302,7 +286,7 @@ class Plugins
                 $properties = [$propertyGroup];
             } else {
                 // for main groups
-                $ret .= '<div id="' . $pluginName . '_' . $propertyGroup->getName() . '">';
+                $ret .= "\n" . '<div id="' . $pluginName . '_' . $propertyGroup->getName() . '">';
 
                 $text = null;
                 if (method_exists($propertyGroup, 'getText')) {
@@ -313,7 +297,7 @@ class Plugins
                     $ret .= '<h5 class="card-title mt-4 mb-2">' . $plugin->getTranslatedText($text) . '</h5>';
                 }
 
-                $ret .= '<ul class="list-group">';
+                $ret .= '<ul class="list-group">' . "\n";
             }
         }
 
@@ -325,17 +309,15 @@ class Plugins
             }
         }
 
-        $propertyClass = null;
         if ($properties !== null) {
             foreach ($properties as $propertyItem) {
-                $propertyClass = $propertyItem::class;
                 // if the property is a subgroup, we deal with it recursively
                 if ($propertyItem instanceof OptionsPropertySubgroup) {
                     // for subgroups
                     // each subgroup can have a header, which may also be a form element
                     $subgroupHeader = $propertyItem->getSubgroupHeader();
                     if ($subgroupHeader !== null) {
-                        $ret .= self::getOneOption($plugin, $section, $pluginName, $subgroupHeader);
+                        $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $subgroupHeader);
                     }
 
                     $ret .= '<li class="list-group-item"><ul class="list-group"';
@@ -345,226 +327,49 @@ class Plugins
                         $ret .= '>';
                     }
 
-                    $ret .= self::getOneOption($plugin, $section, $pluginName, $propertyItem, true);
+                    $ret .= "\n";
+
+                    $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $propertyItem, true);
                     continue;
                 }
 
                 // single property item
-                $ret .= self::getHtmlForProperty($plugin, $section, $pluginName, $propertyItem);
+                $ret .= self::getHtmlForProperty($plugin, $pluginType, $pluginName, $propertyItem);
             }
         }
 
         if ($isSubgroup) {
             // end subgroup
-            $ret .= '</ul></li>';
+            $ret .= '</ul>' . "\n";
         } elseif ($notSubgroupHeader) {
             // end main group
-            $ret .= '</ul></div>';
-        }
-
-        if ($propertyGroup instanceof OptionsPropertyOneItem) {
-            $doc = $propertyGroup->getDoc();
-            if (is_array($doc)) {
-                if (count($doc) === 3) {
-                    $ret .= MySQLDocumentation::show($doc[1], false, null, null, $doc[2]);
-                } elseif (count($doc) === 1) {
-                    $ret .= MySQLDocumentation::showDocumentation('faq', $doc[0]);
-                } else {
-                    $ret .= MySQLDocumentation::show($doc[1]);
-                }
-            }
-        }
-
-        // Close the list element after $doc link is displayed
-        if (
-            in_array($propertyClass, [
-                BoolPropertyItem::class,
-                MessageOnlyPropertyItem::class,
-                SelectPropertyItem::class,
-                TextPropertyItem::class,
-            ], true)
-        ) {
-            $ret .= '</li>';
-        }
-
-        return $ret . "\n";
-    }
-
-    /**
-     * Get HTML for properties items
-     *
-     * @param string              $section      name of config section in $cfg[$section] for plugin
-     * @param string              $pluginName   unique plugin name
-     * @param OptionsPropertyItem $propertyItem Property item
-     * @psalm-param 'Export'|'Import'|'Schema' $section
-     */
-    public static function getHtmlForProperty(
-        Plugin $plugin,
-        string $section,
-        string $pluginName,
-        OptionsPropertyItem $propertyItem,
-    ): string {
-        $ret = '';
-        $propertyClass = $propertyItem::class;
-        switch ($propertyClass) {
-            case BoolPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<div class="form-check form-switch">' . "\n";
-                $ret .= '<input class="form-check-input" type="checkbox" role="switch" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="y" id="checkbox_' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' '
-                    . self::checkboxCheck(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    );
-
-                if ($propertyItem->getForce() != null) {
-                    // Same code is also few lines lower, update both if needed
-                    $ret .= ' onclick="if (!this.checked &amp;&amp; '
-                        . '(!document.getElementById(\'checkbox_' . $pluginName
-                        . '_' . $propertyItem->getForce() . '\') '
-                        . '|| !document.getElementById(\'checkbox_'
-                        . $pluginName . '_' . $propertyItem->getForce()
-                        . '\').checked)) '
-                        . 'return false; else return true;"';
-                }
-
-                $ret .= '>';
-                $ret .= '<label class="form-check-label" for="checkbox_' . $pluginName . '_'
-                    . $propertyItem->getName() . '">'
-                    . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label></div>';
-                break;
-            case DocPropertyItem::class:
-                echo DocPropertyItem::class;
-                break;
-            case HiddenPropertyItem::class:
-                $ret .= '<li class="list-group-item"><input type="hidden" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    )))
-                    . '"></li>';
-                break;
-            case MessageOnlyPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= $plugin->getTranslatedText($propertyItem->getText() ?? '');
-                break;
-            case RadioPropertyItem::class:
-                /** @var RadioPropertyItem $pitem */
-                $pitem = $propertyItem;
-
-                $default = htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                    $section,
-                    $pluginName . '_' . $pitem->getName(),
-                )));
-
-                $ret .= '<li class="list-group-item">';
-
-                foreach ($pitem->getValues() as $key => $val) {
-                    $ret .= '<div class="form-check"><input type="radio" name="' . $pluginName
-                        . '_' . $pitem->getName() . '" class="form-check-input" value="' . $key
-                        . '" id="radio_' . $pluginName . '_'
-                        . $pitem->getName() . '_' . $key . '"';
-                    if ($key == $default) {
-                        $ret .= ' checked';
-                    }
-
-                    $ret .= '><label class="form-check-label" for="radio_' . $pluginName . '_'
-                        . $pitem->getName() . '_' . $key . '">'
-                        . $plugin->getTranslatedText((string) $val) . '</label></div>';
-                }
-
-                $ret .= '</li>';
-
-                break;
-            case SelectPropertyItem::class:
-                /** @var SelectPropertyItem $pitem */
-                $pitem = $propertyItem;
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="select_' . $pluginName . '_'
-                    . $pitem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($pitem->getText() ?? '') . '</label>';
-                $ret .= '<select class="form-select" name="' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ' id="select_' . $pluginName . '_'
-                    . $pitem->getName() . '">';
-                $default = htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                    $section,
-                    $pluginName . '_' . $pitem->getName(),
-                )));
-                foreach ($pitem->getValues() as $key => $val) {
-                    $ret .= '<option value="' . $key . '"';
-                    if ($key == $default) {
-                        $ret .= ' selected';
-                    }
-
-                    $ret .= '>' . $plugin->getTranslatedText((string) $val) . '</option>';
-                }
-
-                $ret .= '</select>';
-                break;
-            case TextPropertyItem::class:
-                /** @var TextPropertyItem $pitem */
-                $pitem = $propertyItem;
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="text_' . $pluginName . '_'
-                    . $pitem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($pitem->getText() ?? '') . '</label>';
-                $ret .= '<input class="form-control" type="text" name="' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $pitem->getName(),
-                    ))) . '"'
-                    . ' id="text_' . $pluginName . '_'
-                    . $pitem->getName() . '"'
-                    . ($pitem->getSize() !== 0
-                        ? ' size="' . $pitem->getSize() . '"'
-                        : '')
-                    . ($pitem->getLen() !== 0
-                        ? ' maxlength="' . $pitem->getLen() . '"'
-                        : '')
-                    . '>';
-                break;
-            case NumberPropertyItem::class:
-                $ret .= '<li class="list-group-item">' . "\n";
-                $ret .= '<label for="number_' . $pluginName . '_'
-                    . $propertyItem->getName() . '" class="form-label">'
-                    . $plugin->getTranslatedText($propertyItem->getText() ?? '') . '</label>';
-                $ret .= '<input class="form-control" type="number" name="' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' value="'
-                    . htmlspecialchars($plugin->getTranslatedText(self::getDefault(
-                        $section,
-                        $pluginName . '_' . $propertyItem->getName(),
-                    ))) . '"'
-                    . ' id="number_' . $pluginName . '_'
-                    . $propertyItem->getName() . '"'
-                    . ' min="0"'
-                    . '>';
-                break;
-            default:
-                break;
+            $ret .= '</ul></div>' . "\n";
         }
 
         return $ret;
     }
 
+    private static function getHtmlForProperty(
+        Plugin $plugin,
+        PluginType $pluginType,
+        string $pluginName,
+        OptionsPropertyItem $propertyItem,
+    ): string {
+        if ($propertyItem instanceof OptionsPropertyOneItem) {
+            return $propertyItem->getHtml($plugin, $pluginType, $pluginName) . "\n";
+        }
+
+        return '';
+    }
+
     /**
      * Returns html div with editable options for plugin
      *
-     * @param string                                       $section name of config section in $cfg[$section]
-     * @param ExportPlugin[]|ImportPlugin[]|SchemaPlugin[] $list    array with plugin instances
-     * @psalm-param 'Export'|'Import'|'Schema' $section
+     * @param ExportPlugin[]|ImportPlugin[]|SchemaPlugin[] $list array with plugin instances
      *
      * @return string  html fieldset with plugin options
      */
-    public static function getOptions(string $section, array $list): string
+    public static function getOptions(PluginType $pluginType, array $list): string
     {
         $ret = '';
         // Options for plugins that support them
@@ -592,7 +397,7 @@ class Plugins
                         }
                     }
 
-                    $ret .= self::getOneOption($plugin, $section, $pluginName, $propertyMainGroup);
+                    $ret .= self::getOneOption($plugin, $pluginType, $pluginName, $propertyMainGroup);
                 }
             }
 
@@ -604,5 +409,23 @@ class Plugins
         }
 
         return $ret;
+    }
+
+    public static function getDocumentationLinkHtml(OptionsPropertyOneItem $propertyGroup): string
+    {
+        $doc = $propertyGroup->getDoc();
+        if ($doc === '') {
+            return '';
+        }
+
+        if (is_string($doc)) {
+            return MySQLDocumentation::showDocumentation('faq', $doc);
+        }
+
+        if (count($doc) === 2) {
+            return MySQLDocumentation::show($doc[0], anchor: $doc[1]);
+        }
+
+        return MySQLDocumentation::show($doc[0]);
     }
 }

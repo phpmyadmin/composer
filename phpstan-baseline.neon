@@ -8284,27 +8284,9 @@ parameters:
 			path: src/Plugins.php
 
 		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 2
-			path: src/Plugins.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
-			identifier: notEqual.notAllowed
-			count: 1
-			path: src/Plugins.php
-
-		-
-			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
-			identifier: equal.notAllowed
-			count: 2
 			path: src/Plugins.php
 
 		-
@@ -10562,6 +10544,18 @@ parameters:
 			identifier: if.condNotBoolean
 			count: 1
 			path: src/Profiling.php
+
+		-
+			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
+			identifier: equal.notAllowed
+			count: 1
+			path: src/Properties/Options/Items/RadioPropertyItem.php
+
+		-
+			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
+			identifier: equal.notAllowed
+			count: 1
+			path: src/Properties/Options/Items/SelectPropertyItem.php
 
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
@@ -16367,12 +16361,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/unit/PluginsTest.php
-
-		-
-			message: '#^You should use assertCount\(\$expectedCount, \$variable\) instead of assertSame\(\$expectedCount, \$variable\-\>count\(\)\)\.$#'
-			identifier: phpunit.assertCount
-			count: 1
-			path: tests/unit/Properties/Options/OptionsPropertyGroupTest.php
 
 		-
 			message: '''
