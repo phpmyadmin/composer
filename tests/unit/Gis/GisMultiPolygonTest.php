@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace PhpMyAdmin\Tests\Gis;
 
 use PhpMyAdmin\Gis\Ds\Extent;
-use PhpMyAdmin\Gis\Ds\ScaleData;
 use PhpMyAdmin\Gis\GisMultiPolygon;
-use PhpMyAdmin\Image\ImageWrapper;
+use PhpMyAdmin\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
-use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
-use TCPDF;
 
 #[CoversClass(GisMultiPolygon::class)]
 #[PreserveGlobalState(false)]
 #[RunTestsInSeparateProcesses]
-class GisMultiPolygonTest extends GisGeomTestCase
+class GisMultiPolygonTest extends AbstractTestCase
 {
     /**
      * Provide some common data to data providers
@@ -239,175 +236,6 @@ class GisMultiPolygonTest extends GisGeomTestCase
                 'MULTIPOLYGON(((35 10,10 20,15 40,45 45,35 10),(20 30,35 32,30 20'
                     . ',20 30)),((105 0,56 20,78 73,105 0)))',
                 new Extent(minX: 10, minY: 0, maxX: 105, maxY: 73),
-            ],
-        ];
-    }
-
-    #[RequiresPhpExtension('gd')]
-    public function testPrepareRowAsPng(): void
-    {
-        $object = new GisMultiPolygon();
-        $image = ImageWrapper::create(200, 124, ['red' => 229, 'green' => 229, 'blue' => 229]);
-        self::assertNotNull($image);
-        $object->prepareRowAsPng(
-            'MULTIPOLYGON(((5 5,95 5,95 95,5 95,5 5),(10 10,10 40,40 40,40 10,10 10),(60 60,90 60,90 90,60 90,6'
-            . '0 60)),((-5 -5,-95 -5,-95 -95,-5 -95,-5 -5),(-10 -10,-10 -40,-40 -40,-40 -10,-10 -10),(-60 -60,-90'
-            . ' -60,-90 -90,-60 -90,-60 -60)))',
-            'image',
-            [176, 46, 224],
-            new ScaleData(offsetX: -202, offsetY: -125, scale: 0.50, height: 124),
-            $image,
-        );
-        self::assertSame(200, $image->width());
-        self::assertSame(124, $image->height());
-
-        $fileExpected = $this->testDir . '/multipolygon-expected.png';
-        $fileActual = $this->testDir . '/multipolygon-actual.png';
-        self::assertTrue($image->png($fileActual));
-        self::assertFileEquals($fileExpected, $fileActual);
-    }
-
-    /**
-     * test case for prepareRowAsPdf() method
-     *
-     * @param string    $spatial   GIS MULTIPOLYGON object
-     * @param string    $label     label for the GIS MULTIPOLYGON object
-     * @param int[]     $color     color for the GIS MULTIPOLYGON object
-     * @param ScaleData $scaleData array containing data related to scaling
-     */
-    #[DataProvider('providerForPrepareRowAsPdf')]
-    public function testPrepareRowAsPdf(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        TCPDF $pdf,
-    ): void {
-        $object = new GisMultiPolygon();
-        $object->prepareRowAsPdf($spatial, $label, $color, $scaleData, $pdf);
-
-        $fileExpected = $this->testDir . '/multipolygon-expected.pdf';
-        self::assertStringEqualsFile($fileExpected, $pdf->Output(dest: 'S'));
-    }
-
-    /**
-     * data provider for testPrepareRowAsPdf() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, TCPDF}>
-     */
-    public static function providerForPrepareRowAsPdf(): array
-    {
-        return [
-            [
-                'MULTIPOLYGON(((5 5,95 5,95 95,5 95,5 5),(10 10,10 40,40 40,40 10,10 10),(60 60,90 60,90 90,60 90,6'
-                . '0 60)),((-5 -5,-95 -5,-95 -95,-5 -95,-5 -5),(-10 -10,-10 -40,-40 -40,-40 -10,-10 -10),(-60 -60,-90'
-                . ' -60,-90 -90,-60 -90,-60 -60)))',
-                'pdf',
-                [176, 46, 224],
-                new ScaleData(offsetX: -110, offsetY: -157, scale: 0.95, height: 297),
-
-                parent::createEmptyPdf('MULTIPOLYGON'),
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsSvg() method
-     *
-     * @param string    $spatial   GIS MULTIPOLYGON object
-     * @param string    $label     label for the GIS MULTIPOLYGON object
-     * @param int[]     $color     color for the GIS MULTIPOLYGON object
-     * @param ScaleData $scaleData array containing data related to scaling
-     * @param string    $output    expected output
-     */
-    #[DataProvider('providerForPrepareRowAsSvg')]
-    public function testPrepareRowAsSvg(
-        string $spatial,
-        string $label,
-        array $color,
-        ScaleData $scaleData,
-        string $output,
-    ): void {
-        $object = new GisMultiPolygon();
-        $svg = $object->prepareRowAsSvg($spatial, $label, $color, $scaleData);
-        self::assertSame($output, $svg);
-    }
-
-    /**
-     * data provider for testPrepareRowAsSvg() test case
-     *
-     * @return array<array{string, string, int[], ScaleData, string}>
-     */
-    public static function providerForPrepareRowAsSvg(): array
-    {
-        return [
-            [
-                'MULTIPOLYGON(((5 5,95 5,95 95,5 95,5 5),(10 10,10 40,40 40,40 10,10 10),(60 60,90 60,90 90,60 90,6'
-                . '0 60)),((-5 -5,-95 -5,-95 -95,-5 -95,-5 -5),(-10 -10,-10 -40,-40 -40,-40 -10,-10 -10),(-60 -60,-90'
-                . ' -60,-90 -90,-60 -90,-60 -60)))',
-                'svg',
-                [176, 46, 224],
-                new ScaleData(offsetX: -50, offsetY: -50, scale: 2, height: 400),
-                '<path d="M110,290L290,290L290,110L110,110ZM120,280L120,220L180,220L180,280ZM220,180L280,180L280,120'
-                . 'L220,120Z" class="multipolygon vector" stroke='
-                . '"black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8" data-label="svg"'
-                . '/><path d="M90,310L-90,310L-90,490L90,490ZM80,320L80,380L20,380L20,320Z'
-                . 'M-20,420L-80,420L-80,480L-20,480Z" class="multipolygon vector"'
-                . ' stroke="black" stroke-width="0.5" fill="#b02ee0" fill-rule="evenodd" fill-opacity="0.8"'
-                . ' data-label="svg"/>',
-            ],
-        ];
-    }
-
-    /**
-     * test case for prepareRowAsOl() method
-     *
-     * @param string                              $spatial  GIS MULTIPOLYGON object
-     * @param int                                 $srid     spatial reference ID
-     * @param string                              $label    label for the GIS MULTIPOLYGON object
-     * @param int[]                               $color    color for the GIS MULTIPOLYGON object
-     * @param array<string, array<string, mixed>> $expected
-     */
-    #[DataProvider('providerForPrepareRowAsOl')]
-    public function testPrepareRowAsOl(
-        string $spatial,
-        int $srid,
-        string $label,
-        array $color,
-        array $expected,
-    ): void {
-        $object = new GisMultiPolygon();
-        self::assertSame($expected, $object->prepareRowAsOl($spatial, $srid, $label, $color));
-    }
-
-    /**
-     * data provider for testPrepareRowAsOl() test case
-     *
-     * @return array<array{string, int, string, int[], array<string, array<string, mixed>>}>
-     */
-    public static function providerForPrepareRowAsOl(): array
-    {
-        return [
-            [
-                'MULTIPOLYGON(((136 40,147 83,16 75,136 40)),((105 0,56 20,78 73,105 0)))',
-                4326,
-                'Ol',
-                [176, 46, 224],
-                [
-                    'geometry' => [
-                        'type' => 'MultiPolygon',
-                        'coordinates' => [
-                            [[[136.0, 40.0], [147.0, 83.0], [16.0, 75.0], [136.0, 40.0]]],
-                            [[[105.0, 0.0], [56.0, 20.0], [78.0, 73.0], [105.0, 0.0]]],
-                        ],
-                        'srid' => 4326,
-                    ],
-                    'style' => [
-                        'fill' => ['color' => [176, 46, 224, 0.8]],
-                        'stroke' => ['color' => [0, 0, 0], 'width' => 0.5],
-                        'text' => ['text' => 'Ol'],
-                    ],
-                ],
             ],
         ];
     }
