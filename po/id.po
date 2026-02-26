@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-25 10:35-0300\n"
-"PO-Revision-Date: 2026-02-03 19:01+0000\n"
+"PO-Revision-Date: 2026-02-26 20:09+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
-"5-2/id/>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/5-"
+"2/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Poedit-Basepath: ../../..\n"
 
 #: libraries/advisory_rules_generic.php:9
@@ -5339,34 +5339,25 @@ msgstr ""
 "[doc@cfg_blowfish_secret][/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:363
-#, fuzzy
-#| msgid ""
-#| "The configuration file needs a valid key for cookie encryption. A "
-#| "temporary key was automatically generated for you. Please refer to the "
-#| "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgid ""
 "The configuration file needs a valid key for query encryption. A temporary "
 "key was automatically generated for you. Please refer to the "
 "[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
 msgstr ""
-"File konfigurasi memerlukan kunci yang valid untuk enkripsi kuki. Kunci "
-"sementara dibuat secara otomatis untuk Anda. Silakan lihat dokumentasi "
-"[doc@cfg_blowfish_secret][/doc]."
+"Berkas konfigurasi memerlukan kunci yang valid untuk enkripsi kueri. Kunci "
+"sementara telah dihasilkan secara otomatis untuk Anda. Silakan lihat "
+"[doc@cfg_URLQueryEncryptionSecretKey]dokumentasi[/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:373
-#, fuzzy, php-format
-#| msgid ""
-#| "The cookie encryption key in the configuration file is longer than "
-#| "necessary. It should only be %d bytes long. Please refer to the "
-#| "[doc@cfg_blowfish_secret]documentation[/doc]."
+#, php-format
 msgid ""
 "The query encryption key in the configuration file is longer than necessary. "
 "It should only be %d bytes long. Please refer to the "
 "[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
 msgstr ""
-"Kunci enkripsi kuki dalam berkas konfigurasi lebih panjang dari yang "
-"diperlukan. Panjangnya seharusnya hanya %d byte. Silakan lihat dokumentasi "
-"[doc@cfg_blowfish_secret][/doc]."
+"Kunci enkripsi kueri dalam berkas konfigurasi lebih panjang dari yang "
+"diperlukan. Seharusnya hanya sepanjang %d byte. Silakan lihat "
+"[doc@cfg_URLQueryEncryptionSecretKey]dokumentasi[/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:391
 msgid ""
@@ -5452,7 +5443,7 @@ msgstr ""
 
 #: libraries/classes/Controllers/Import/ImportController.php:324
 msgid "Sorry an unexpected error happened!"
-msgstr ""
+msgstr "Maaf terjadi galat yang tidak terduga!"
 
 #: libraries/classes/Controllers/Import/ImportController.php:372
 #: libraries/classes/Controllers/Import/ImportController.php:610
@@ -7585,6 +7576,8 @@ msgid ""
 "The fullscreen request was denied because the Fullscreen API is disabled by "
 "user preference in the browser."
 msgstr ""
+"Permintaan tampilan layar penuh ditolak karena API Layar Penuh dinonaktifkan "
+"oleh preferensi pengguna di peramban."
 
 #: libraries/classes/Controllers/NavigationController.php:46
 msgid "Fatal error: The navigation can only be accessed via AJAX"
@@ -8822,7 +8815,7 @@ msgstr "Satu atau beberapa galat telah terjadi saat memproses permintaan Anda:"
 
 #: libraries/classes/Database/Events.php:181
 msgid "The event was dropped immediately after creation."
-msgstr ""
+msgstr "Peristiwa langsung dihapus setelah pembuatan."
 
 #: libraries/classes/Database/Events.php:249
 msgid "Add event"
@@ -13292,6 +13285,8 @@ msgid ""
 "Stores vector data optimized for operations such as similarity search and "
 "machine learning applications"
 msgstr ""
+"Menyimpan data vektor yang dioptimalkan untuk operasi seperti pencarian "
+"kemiripan dan aplikasi pembelajaran mesin"
 
 #: libraries/classes/Types.php:798
 msgctxt "numeric types"
