@@ -786,11 +786,6 @@
       <code><![CDATA[$_SESSION[Ajax::SESSION_KEY]['handler']::getIdKey()]]></code>
     </MixedMethodCall>
   </file>
-  <file src="src/Controllers/Database/MultiTableQuery/QueryController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Controllers/Database/MultiTableQuery/TablesController.php">
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
