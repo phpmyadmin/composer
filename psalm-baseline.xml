@@ -705,9 +705,6 @@
     <PossiblyNullArrayOffset>
       <code><![CDATA[$pkArray]]></code>
     </PossiblyNullArrayOffset>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/DesignerController.php">
     <MixedArgument>
