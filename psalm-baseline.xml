@@ -791,11 +791,6 @@
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
   </file>
-  <file src="src/Controllers/Database/MultiTableQueryController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Controllers/Database/PrivilegesController.php">
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
