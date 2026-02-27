@@ -773,9 +773,6 @@
       <code><![CDATA[$tableSelect]]></code>
       <code><![CDATA[$tableStructure]]></code>
     </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/ImportController.php">
     <MixedArrayAccess>
