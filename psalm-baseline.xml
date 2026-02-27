@@ -691,11 +691,6 @@
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
   </file>
-  <file src="src/Controllers/Database/CentralColumns/PopulateColumnsController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Controllers/Database/DataDictionaryController.php">
     <MixedArgument>
       <code><![CDATA[Current::$database]]></code>

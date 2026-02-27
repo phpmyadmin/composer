@@ -13,12 +13,10 @@ use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
 
 #[Route('/database/central-columns/populate', ['POST'])]
-final class PopulateColumnsController implements InvocableController
+final readonly class PopulateColumnsController implements InvocableController
 {
-    public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly CentralColumns $centralColumns,
-    ) {
+    public function __construct(private ResponseRenderer $response, private CentralColumns $centralColumns)
+    {
     }
 
     public function __invoke(ServerRequest $request): Response
