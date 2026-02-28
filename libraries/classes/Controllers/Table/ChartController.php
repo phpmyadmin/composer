@@ -216,7 +216,7 @@ class ChartController extends AbstractController
             $tmp_row = [];
             foreach ($data_row as $data_column => $data_value) {
                 $escaped_value = $data_value === null ? null : htmlspecialchars($data_value);
-                $tmp_row[htmlspecialchars($data_column)] = $escaped_value;
+                $tmp_row[htmlspecialchars((string) $data_column)] = $escaped_value;
             }
 
             $sanitized_data[] = $tmp_row;

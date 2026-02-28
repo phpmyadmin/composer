@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-25 10:35-0300\n"
-"PO-Revision-Date: 2026-01-13 06:38+0000\n"
+"PO-Revision-Date: 2026-02-28 07:09+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/phpmyadmin/5-2/"
 "ru/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.2-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -5365,19 +5365,14 @@ msgstr ""
 "[doc@cfg_blowfish_secret]документации[/doc] ."
 
 #: libraries/classes/Controllers/HomeController.php:363
-#, fuzzy
-#| msgid ""
-#| "The configuration file needs a valid key for cookie encryption. A "
-#| "temporary key was automatically generated for you. Please refer to the "
-#| "[doc@cfg_blowfish_secret]documentation[/doc]."
 msgid ""
 "The configuration file needs a valid key for query encryption. A temporary "
 "key was automatically generated for you. Please refer to the "
 "[doc@cfg_URLQueryEncryptionSecretKey]documentation[/doc]."
 msgstr ""
-"Для шифрования куки в конфигурационном файле необходим действующий ключ. "
-"Временный ключ был автоматически создан для вас. Пожалуйста, обратитесь к "
-"[doc@cfg_blowfish_secret]документации[/doc] ."
+"В файле конфигурации необходим действительный ключ для шифрования запросов. "
+"Для вас был автоматически сгенерирован временный ключ. Пожалуйста, "
+"обратитесь к [doc@cfg_URLQueryEncryptionSecretKey]документации[/doc]."
 
 #: libraries/classes/Controllers/HomeController.php:373
 #, fuzzy, php-format

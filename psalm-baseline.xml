@@ -5930,11 +5930,11 @@
       <code>is_array($row) ? $row : []</code>
     </InvalidReturnStatement>
     <InvalidReturnType occurrences="5">
-      <code>array&lt;int, array&lt;string,string|null&gt;&gt;</code>
       <code>array&lt;int, string|null&gt;</code>
       <code>array&lt;int,string|null&gt;</code>
       <code>array&lt;string, string|null&gt;</code>
       <code>array&lt;string,string|null&gt;</code>
+      <code>list&lt;array&lt;array-key, string|null&gt;&gt;</code>
     </InvalidReturnType>
     <MixedArgument occurrences="2">
       <code>$field-&gt;flags</code>
@@ -16224,6 +16224,9 @@
     </MixedReturnStatement>
   </file>
   <file src="test/classes/Stubs/DummyResult.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>array&lt;int, array&lt;string,string|null&gt;&gt;</code>
+    </LessSpecificImplementedReturnType>
     <MixedReturnTypeCoercion occurrences="6">
       <code>$this-&gt;link-&gt;fetchAssoc($this-&gt;result) ?? []</code>
       <code>$this-&gt;link-&gt;fetchRow($this-&gt;result) ?? []</code>

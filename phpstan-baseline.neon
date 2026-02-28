@@ -2816,7 +2816,7 @@ parameters:
 			path: libraries/classes/ConfigStorage/Relation.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:getForeignData\\(\\) should return array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, non\\-empty\\-array\\>\\|null, foreign_field\\: mixed\\} but returns array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, array\\<string, string\\|null\\>\\>\\|null, foreign_field\\: mixed\\}\\.$#"
+			message: "#^Method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:getForeignData\\(\\) should return array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, non\\-empty\\-array\\>\\|null, foreign_field\\: mixed\\} but returns array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, array\\<string\\|null\\>\\>\\|null, foreign_field\\: mixed\\}\\.$#"
 			count: 1
 			path: libraries/classes/ConfigStorage/Relation.php
 
@@ -15466,12 +15466,12 @@ parameters:
 			path: libraries/classes/Dbal/MysqliResult.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string, string\\|null\\>\\> but returns array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string\\|null\\>\\> but returns array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/MysqliResult.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string, string\\|null\\>\\> but returns array\\<int\\<0, max\\>, array\\<string, float\\|int\\|string\\|null\\>\\>\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string\\|null\\>\\> but returns array\\<int\\<0, max\\>, array\\<string, float\\|int\\|string\\|null\\>\\>\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/MysqliResult.php
 
