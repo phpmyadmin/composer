@@ -1,0 +1,2496 @@
+<div class="container">
+  <h2 class="my-3">
+    <img src="themes/dot.gif" title="Export" alt="Export" class="icon ic_b_export">
+          Exporting tables from &quot;test_db&quot; database
+    </h2>
+
+  
+  <div id="page_settings_modal"><div class="page_settings"><form method="post" action="index.php&#x3F;route&#x3D;&#x25;2F&amp;db&#x3D;test_db&amp;server&#x3D;1&amp;lang&#x3D;en" class="config-form disableAjax">
+  <input type="hidden" name="tab_hash" value="">
+      <input type="hidden" name="check_page_refresh" id="check_page_refresh" value="">
+    <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+  <input type="hidden" name="submit_save" value="Export">
+
+  <ul class="nav nav-tabs" id="configFormDisplayTab" role="tablist">
+          <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="Export_defaults-tab" href="#Export_defaults" data-bs-toggle="tab" role="tab" aria-controls="Export_defaults" aria-selected="true">Export defaults</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Sql-tab" href="#Sql" data-bs-toggle="tab" role="tab" aria-controls="Sql" aria-selected="false">SQL</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="CodeGen-tab" href="#CodeGen" data-bs-toggle="tab" role="tab" aria-controls="CodeGen" aria-selected="false">CodeGen</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Csv-tab" href="#Csv" data-bs-toggle="tab" role="tab" aria-controls="Csv" aria-selected="false">CSV</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Latex-tab" href="#Latex" data-bs-toggle="tab" role="tab" aria-controls="Latex" aria-selected="false">LaTeX</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Microsoft_Office-tab" href="#Microsoft_Office" data-bs-toggle="tab" role="tab" aria-controls="Microsoft_Office" aria-selected="false">Microsoft Office</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Open_Document-tab" href="#Open_Document" data-bs-toggle="tab" role="tab" aria-controls="Open_Document" aria-selected="false">OpenDocument</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Texy-tab" href="#Texy" data-bs-toggle="tab" role="tab" aria-controls="Texy" aria-selected="false">Texy! text</a>
+      </li>
+      </ul>
+  <div class="tab-content">
+          <div class="tab-pane fade show active" id="Export_defaults" role="tabpanel" aria-labelledby="Export_defaults-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">Export defaults</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default export options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>Export defaults</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Export-method">Export method</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-method" id="Export-method" class="w-75">
+                            <option value="quick" selected>Quick - display only the minimal options to configure</option>
+                            <option value="custom">Custom - display all possible options to configure</option>
+                            <option value="custom-no-form">Custom - like above, but without the quick/custom choice</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-method" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Quick
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-quick_export_onserver">Save on server</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-quick_export_onserver" id="Export-quick_export_onserver">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-quick_export_onserver" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-quick_export_onserver_overwrite">Overwrite existing file(s)</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-quick_export_onserver_overwrite" id="Export-quick_export_onserver_overwrite">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-quick_export_onserver_overwrite" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Custom
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-format">Format</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-format" id="Export-format" class="w-75">
+                            <option value="codegen">codegen</option>
+                            <option value="csv">csv</option>
+                            <option value="excel">excel</option>
+                            <option value="htmlword">htmlword</option>
+                            <option value="latex">latex</option>
+                            <option value="ods">ods</option>
+                            <option value="odt">odt</option>
+                            <option value="pdf">pdf</option>
+                            <option value="sql" selected>sql</option>
+                            <option value="texytext">texytext</option>
+                            <option value="xml">xml</option>
+                            <option value="yaml">yaml</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-format" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-compression">Compression</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-compression" id="Export-compression" class="w-75">
+                            <option value="none" selected>none</option>
+                            <option value="zip">zip</option>
+                            <option value="gzip">gzip</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-compression" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-charset">Character set of the file</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-charset" id="Export-charset" class="w-75">
+                            <option value="" label=&quot;None&quot; selected></option>
+                            <option value="iso-8859-1">iso-8859-1</option>
+                            <option value="iso-8859-2">iso-8859-2</option>
+                            <option value="iso-8859-3">iso-8859-3</option>
+                            <option value="iso-8859-4">iso-8859-4</option>
+                            <option value="iso-8859-5">iso-8859-5</option>
+                            <option value="iso-8859-6">iso-8859-6</option>
+                            <option value="iso-8859-7">iso-8859-7</option>
+                            <option value="iso-8859-8">iso-8859-8</option>
+                            <option value="iso-8859-9">iso-8859-9</option>
+                            <option value="iso-8859-10">iso-8859-10</option>
+                            <option value="iso-8859-11">iso-8859-11</option>
+                            <option value="iso-8859-12">iso-8859-12</option>
+                            <option value="iso-8859-13">iso-8859-13</option>
+                            <option value="iso-8859-14">iso-8859-14</option>
+                            <option value="iso-8859-15">iso-8859-15</option>
+                            <option value="windows-1250">windows-1250</option>
+                            <option value="windows-1251">windows-1251</option>
+                            <option value="windows-1252">windows-1252</option>
+                            <option value="windows-1256">windows-1256</option>
+                            <option value="windows-1257">windows-1257</option>
+                            <option value="koi8-r">koi8-r</option>
+                            <option value="big5">big5</option>
+                            <option value="gb2312">gb2312</option>
+                            <option value="utf-16">utf-16</option>
+                            <option value="utf-8">utf-8</option>
+                            <option value="utf-7">utf-7</option>
+                            <option value="x-user-defined">x-user-defined</option>
+                            <option value="euc-jp">euc-jp</option>
+                            <option value="ks_c_5601-1987">ks_c_5601-1987</option>
+                            <option value="tis-620">tis-620</option>
+                            <option value="SHIFT_JIS">SHIFT_JIS</option>
+                            <option value="SJIS">SJIS</option>
+                            <option value="SJIS-win">SJIS-win</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-charset" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-lock_tables">Use <code>LOCK TABLES</code> statement</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-lock_tables" id="Export-lock_tables">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-lock_tables" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-as_separate_files">Export as separate files</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-as_separate_files" id="Export-as_separate_files">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-as_separate_files" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header-field group-header-2">
+  <th>
+    <label for="Export-asfile">Save as file</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-asfile" id="Export-asfile" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-asfile" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-onserver">Save on server</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-onserver" id="Export-onserver">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-onserver" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-onserver_overwrite">Overwrite existing file(s)</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-onserver_overwrite" id="Export-onserver_overwrite">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-onserver_overwrite" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-file_template_table">Table name template</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-file_template_table" id="Export-file_template_table" value="@TABLE@" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-file_template_table" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-file_template_database">Database name template</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-file_template_database" id="Export-file_template_database" value="@DATABASE@" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-file_template_database" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-file_template_server">Server name template</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-file_template_server" id="Export-file_template_server" value="@SERVER@" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-file_template_server" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Sql" role="tabpanel" aria-labelledby="Sql-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">SQL</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>SQL</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header-field group-header-1">
+  <th>
+    <label for="Export-sql_include_comments">Comments</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_include_comments" id="Export-sql_include_comments" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_include_comments" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_dates">Creation/Update/Check dates</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_dates" id="Export-sql_dates">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_dates" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_relation">Relationships</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_relation" id="Export-sql_relation">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_relation" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_mime">Media type</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_mime" id="Export-sql_mime">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_mime" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_use_transaction">Enclose export in a transaction</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_use_transaction" id="Export-sql_use_transaction" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_use_transaction" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_disable_fk">Disable foreign key checks</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_disable_fk" id="Export-sql_disable_fk">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_disable_fk" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_views_as_tables">Export views as tables</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_views_as_tables" id="Export-sql_views_as_tables">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_views_as_tables" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_metadata">Export related metadata from phpMyAdmin configuration storage</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_metadata" id="Export-sql_metadata">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_metadata" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_compatibility">SQL compatibility mode</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-sql_compatibility" id="Export-sql_compatibility" class="w-75">
+                            <option value="NONE" selected>NONE</option>
+                            <option value="ANSI">ANSI</option>
+                            <option value="DB2">DB2</option>
+                            <option value="MAXDB">MAXDB</option>
+                            <option value="MYSQL323">MYSQL323</option>
+                            <option value="MYSQL40">MYSQL40</option>
+                            <option value="MSSQL">MSSQL</option>
+                            <option value="ORACLE">ORACLE</option>
+                            <option value="TRADITIONAL">TRADITIONAL</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_compatibility" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-sql_structure_or_data">Dump table</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-sql_structure_or_data" id="Export-sql_structure_or_data" class="w-75">
+                            <option value="structure">structure</option>
+                            <option value="data">data</option>
+                            <option value="structure_and_data" selected>structure and data</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_structure_or_data" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Structure
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_drop_database">Add DROP DATABASE</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_drop_database" id="Export-sql_drop_database">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_drop_database" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_create_database">Add CREATE DATABASE / USE</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_create_database" id="Export-sql_create_database">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_create_database" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_drop_table">Add DROP TABLE / VIEW / PROCEDURE / FUNCTION / EVENT / TRIGGER</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_drop_table" id="Export-sql_drop_table">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_drop_table" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header-field group-header-2">
+  <th>
+    <label for="Export-sql_create_table">Add CREATE TABLE</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_create_table" id="Export-sql_create_table" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_create_table" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-sql_if_not_exists">Add IF NOT EXISTS (less efficient as indexes will be generated during table creation)</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_if_not_exists" id="Export-sql_if_not_exists">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_if_not_exists" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-sql_auto_increment">Add AUTO_INCREMENT value</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_auto_increment" id="Export-sql_auto_increment" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_auto_increment" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header-field group-header-2">
+  <th>
+    <label for="Export-sql_create_view">Add CREATE VIEW</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_create_view" id="Export-sql_create_view" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_create_view" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-sql_view_current_user">Export/sql_view_current_user</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_view_current_user" id="Export-sql_view_current_user">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_view_current_user" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-sql_or_replace_view">OR REPLACE view</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_or_replace_view" id="Export-sql_or_replace_view">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_or_replace_view" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_procedure_function">Add CREATE PROCEDURE / FUNCTION / EVENT</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_procedure_function" id="Export-sql_procedure_function" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_procedure_function" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_create_trigger">Add CREATE TRIGGER</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_create_trigger" id="Export-sql_create_trigger" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_create_trigger" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_backquotes">Enclose table and column names with backquotes</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_backquotes" id="Export-sql_backquotes" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_backquotes" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Data
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_delayed">Use delayed inserts</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_delayed" id="Export-sql_delayed">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_delayed" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_ignore">Use ignore inserts</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_ignore" id="Export-sql_ignore">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_ignore" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_type">Export type</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-sql_type" id="Export-sql_type" class="w-75">
+                            <option value="INSERT" selected>INSERT</option>
+                            <option value="UPDATE">UPDATE</option>
+                            <option value="REPLACE">REPLACE</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_type" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_insert_syntax">Syntax to use when inserting data</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-sql_insert_syntax" id="Export-sql_insert_syntax" class="w-75">
+                            <option value="complete">complete inserts</option>
+                            <option value="extended">extended inserts</option>
+                            <option value="both" selected>both of the above</option>
+                            <option value="none">neither of the above</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_insert_syntax" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_max_query_size">Maximal length of created query</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="number" name="Export-sql_max_query_size" id="Export-sql_max_query_size" value="50000" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_max_query_size" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_hex_for_binary">Use hexadecimal for BINARY & BLOB</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_hex_for_binary" id="Export-sql_hex_for_binary" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_hex_for_binary" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-sql_utc_time">Export time in UTC</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-sql_utc_time" id="Export-sql_utc_time" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-sql_utc_time" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="CodeGen" role="tabpanel" aria-labelledby="CodeGen-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">CodeGen</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>CodeGen</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Export-codegen_format">Format</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-codegen_format" id="Export-codegen_format" class="w-75">
+                            <option value="0" selected>NHibernate C# DO</option>
+                            <option value="1">NHibernate XML</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-codegen_format" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Csv" role="tabpanel" aria-labelledby="Csv-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">CSV</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>CSV</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header group-header-1">
+    <th colspan="2">
+        CSV
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_separator">Columns terminated with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-csv_separator" id="Export-csv_separator" value="," class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_separator" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_enclosed">Columns enclosed with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-csv_enclosed" id="Export-csv_enclosed" value="&quot;" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_enclosed" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_escaped">Columns escaped with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-csv_escaped" id="Export-csv_escaped" value="&quot;" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_escaped" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_terminated">Lines terminated with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-csv_terminated" id="Export-csv_terminated" value="AUTO" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_terminated" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-csv_null" id="Export-csv_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_removeCRLF">Remove CRLF characters within columns</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-csv_removeCRLF" id="Export-csv_removeCRLF">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_removeCRLF" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-csv_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-csv_columns" id="Export-csv_columns" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-csv_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        CSV for MS Excel
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-excel_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-excel_null" id="Export-excel_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-excel_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-excel_removeCRLF">Remove CRLF characters within columns</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-excel_removeCRLF" id="Export-excel_removeCRLF">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-excel_removeCRLF" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-excel_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-excel_columns" id="Export-excel_columns" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-excel_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-excel_edition">Excel edition</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-excel_edition" id="Export-excel_edition" class="w-75">
+                            <option value="win" selected>Windows</option>
+                            <option value="mac_excel2003">Excel 2003 / Macintosh</option>
+                            <option value="mac_excel2008">Excel 2008 / Macintosh</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-excel_edition" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Latex" role="tabpanel" aria-labelledby="Latex-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">LaTeX</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>LaTeX</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Export-latex_caption">Include table caption</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-latex_caption" id="Export-latex_caption" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_caption" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Export-latex_structure_or_data">Dump table</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_structure_or_data" id="Export-latex_structure_or_data" value="structure_and_data" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_structure_or_data" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Structure
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_structure_caption">Table caption</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_structure_caption" id="Export-latex_structure_caption" value="strLatexStructure" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_structure_caption" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_structure_continued_caption">Continued table caption</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_structure_continued_caption" id="Export-latex_structure_continued_caption" value="strLatexStructure strLatexContinued" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_structure_continued_caption" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_structure_label">Label key</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_structure_label" id="Export-latex_structure_label" value="tab:@TABLE@-structure" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_structure_label" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_relation">Relationships</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-latex_relation" id="Export-latex_relation" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_relation" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_comments">Comments</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-latex_comments" id="Export-latex_comments" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_comments" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_mime">Media type</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-latex_mime" id="Export-latex_mime" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_mime" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Data
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-latex_columns" id="Export-latex_columns" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_data_caption">Table caption</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_data_caption" id="Export-latex_data_caption" value="strLatexContent" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_data_caption" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_data_continued_caption">Continued table caption</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_data_continued_caption" id="Export-latex_data_continued_caption" value="strLatexContent strLatexContinued" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_data_continued_caption" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_data_label">Label key</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_data_label" id="Export-latex_data_label" value="tab:@TABLE@-data" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_data_label" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-latex_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+          <input type="text" name="Export-latex_null" id="Export-latex_null" value="\textit{NULL}" class="w-75">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-latex_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Microsoft_Office" role="tabpanel" aria-labelledby="Microsoft_Office-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">Microsoft Office</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>Microsoft Office</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header group-header-1">
+    <th colspan="2">
+        Microsoft Word 2000
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-htmlword_structure_or_data">Dump table</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-htmlword_structure_or_data" id="Export-htmlword_structure_or_data" class="w-75">
+                            <option value="structure">structure</option>
+                            <option value="data">data</option>
+                            <option value="structure_and_data" selected>structure and data</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-htmlword_structure_or_data" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-htmlword_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-htmlword_null" id="Export-htmlword_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-htmlword_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-htmlword_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-htmlword_columns" id="Export-htmlword_columns">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-htmlword_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Open_Document" role="tabpanel" aria-labelledby="Open_Document-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">OpenDocument</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>OpenDocument</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header group-header-1">
+    <th colspan="2">
+        OpenDocument Spreadsheet
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-ods_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-ods_columns" id="Export-ods_columns" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-ods_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-ods_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-ods_null" id="Export-ods_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-ods_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        OpenDocument Text
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-odt_structure_or_data">Dump table</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-odt_structure_or_data" id="Export-odt_structure_or_data" class="w-75">
+                            <option value="structure">structure</option>
+                            <option value="data">data</option>
+                            <option value="structure_and_data" selected>structure and data</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_structure_or_data" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-2">
+    <th colspan="2">
+        Structure
+    </th>
+</tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-odt_relation">Relationships</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-odt_relation" id="Export-odt_relation" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_relation" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-odt_comments">Comments</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-odt_comments" id="Export-odt_comments" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_comments" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-odt_mime">Media type</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-odt_mime" id="Export-odt_mime" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_mime" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-2">
+    <th colspan="2">
+        Data
+    </th>
+</tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-odt_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-odt_columns" id="Export-odt_columns" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-2">
+  <th>
+    <label for="Export-odt_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-odt_null" id="Export-odt_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-odt_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Texy" role="tabpanel" aria-labelledby="Texy-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">Texy! text</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options</h6>
+            
+            <fieldset class="optbox">
+              <legend>Texy! text</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Export-texytext_structure_or_data">Dump table</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Export-texytext_structure_or_data" id="Export-texytext_structure_or_data" class="w-75">
+                            <option value="structure">structure</option>
+                            <option value="data">data</option>
+                            <option value="structure_and_data" selected>structure and data</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-texytext_structure_or_data" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        Data
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-texytext_null">Replace NULL with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Export-texytext_null" id="Export-texytext_null" value="NULL" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Export-texytext_null" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Export-texytext_columns">Put columns names in the first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Export-texytext_columns" id="Export-texytext_columns">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Export-texytext_columns" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+      </div>
+</form>
+
+<span id="configInlineParamsData"
+      data-field-validators="&#x5B;&#x7B;&quot;fieldId&quot;&#x3A;&quot;Export-sql_max_query_size&quot;,&quot;name&quot;&#x3A;&quot;validatePositiveNumber&quot;,&quot;args&quot;&#x3A;null&#x7D;&#x5D;"
+      data-default-values="&#x7B;&quot;Export-method&quot;&#x3A;&#x5B;&quot;quick&quot;&#x5D;,&quot;Export-quick_export_onserver&quot;&#x3A;false,&quot;Export-quick_export_onserver_overwrite&quot;&#x3A;false,&quot;Export-format&quot;&#x3A;&#x5B;&quot;sql&quot;&#x5D;,&quot;Export-compression&quot;&#x3A;&#x5B;&quot;none&quot;&#x5D;,&quot;Export-charset&quot;&#x3A;&#x5B;&quot;&quot;&#x5D;,&quot;Export-lock_tables&quot;&#x3A;false,&quot;Export-as_separate_files&quot;&#x3A;false,&quot;Export-asfile&quot;&#x3A;true,&quot;Export-onserver&quot;&#x3A;false,&quot;Export-onserver_overwrite&quot;&#x3A;false,&quot;Export-file_template_table&quot;&#x3A;&quot;&#x40;TABLE&#x40;&quot;,&quot;Export-file_template_database&quot;&#x3A;&quot;&#x40;DATABASE&#x40;&quot;,&quot;Export-file_template_server&quot;&#x3A;&quot;&#x40;SERVER&#x40;&quot;,&quot;Export-sql_include_comments&quot;&#x3A;true,&quot;Export-sql_dates&quot;&#x3A;false,&quot;Export-sql_relation&quot;&#x3A;false,&quot;Export-sql_mime&quot;&#x3A;false,&quot;Export-sql_use_transaction&quot;&#x3A;true,&quot;Export-sql_disable_fk&quot;&#x3A;false,&quot;Export-sql_views_as_tables&quot;&#x3A;false,&quot;Export-sql_metadata&quot;&#x3A;false,&quot;Export-sql_compatibility&quot;&#x3A;&#x5B;&quot;NONE&quot;&#x5D;,&quot;Export-sql_structure_or_data&quot;&#x3A;&#x5B;&quot;structure_and_data&quot;&#x5D;,&quot;Export-sql_drop_database&quot;&#x3A;false,&quot;Export-sql_create_database&quot;&#x3A;false,&quot;Export-sql_drop_table&quot;&#x3A;false,&quot;Export-sql_create_table&quot;&#x3A;true,&quot;Export-sql_if_not_exists&quot;&#x3A;false,&quot;Export-sql_auto_increment&quot;&#x3A;true,&quot;Export-sql_create_view&quot;&#x3A;true,&quot;Export-sql_view_current_user&quot;&#x3A;false,&quot;Export-sql_or_replace_view&quot;&#x3A;false,&quot;Export-sql_procedure_function&quot;&#x3A;true,&quot;Export-sql_create_trigger&quot;&#x3A;true,&quot;Export-sql_backquotes&quot;&#x3A;true,&quot;Export-sql_delayed&quot;&#x3A;false,&quot;Export-sql_ignore&quot;&#x3A;false,&quot;Export-sql_type&quot;&#x3A;&#x5B;&quot;INSERT&quot;&#x5D;,&quot;Export-sql_insert_syntax&quot;&#x3A;&#x5B;&quot;both&quot;&#x5D;,&quot;Export-sql_max_query_size&quot;&#x3A;&quot;50000&quot;,&quot;Export-sql_hex_for_binary&quot;&#x3A;true,&quot;Export-sql_utc_time&quot;&#x3A;true,&quot;Export-codegen_format&quot;&#x3A;&#x5B;0&#x5D;,&quot;Export-csv_separator&quot;&#x3A;&quot;,&quot;,&quot;Export-csv_enclosed&quot;&#x3A;&quot;&#x5C;&quot;&quot;,&quot;Export-csv_escaped&quot;&#x3A;&quot;&#x5C;&quot;&quot;,&quot;Export-csv_terminated&quot;&#x3A;&quot;AUTO&quot;,&quot;Export-csv_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-csv_removeCRLF&quot;&#x3A;false,&quot;Export-csv_columns&quot;&#x3A;true,&quot;Export-excel_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-excel_removeCRLF&quot;&#x3A;false,&quot;Export-excel_columns&quot;&#x3A;true,&quot;Export-excel_edition&quot;&#x3A;&#x5B;&quot;win&quot;&#x5D;,&quot;Export-latex_caption&quot;&#x3A;true,&quot;Export-latex_structure_or_data&quot;&#x3A;&quot;structure_and_data&quot;,&quot;Export-latex_structure_caption&quot;&#x3A;&quot;strLatexStructure&quot;,&quot;Export-latex_structure_continued_caption&quot;&#x3A;&quot;strLatexStructure&#x20;strLatexContinued&quot;,&quot;Export-latex_structure_label&quot;&#x3A;&quot;tab&#x3A;&#x40;TABLE&#x40;-structure&quot;,&quot;Export-latex_relation&quot;&#x3A;true,&quot;Export-latex_comments&quot;&#x3A;true,&quot;Export-latex_mime&quot;&#x3A;true,&quot;Export-latex_columns&quot;&#x3A;true,&quot;Export-latex_data_caption&quot;&#x3A;&quot;strLatexContent&quot;,&quot;Export-latex_data_continued_caption&quot;&#x3A;&quot;strLatexContent&#x20;strLatexContinued&quot;,&quot;Export-latex_data_label&quot;&#x3A;&quot;tab&#x3A;&#x40;TABLE&#x40;-data&quot;,&quot;Export-latex_null&quot;&#x3A;&quot;&#x5C;&#x5C;textit&#x7B;NULL&#x7D;&quot;,&quot;Export-htmlword_structure_or_data&quot;&#x3A;&#x5B;&quot;structure_and_data&quot;&#x5D;,&quot;Export-htmlword_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-htmlword_columns&quot;&#x3A;false,&quot;Export-ods_columns&quot;&#x3A;true,&quot;Export-ods_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-odt_structure_or_data&quot;&#x3A;&#x5B;&quot;structure_and_data&quot;&#x5D;,&quot;Export-odt_relation&quot;&#x3A;true,&quot;Export-odt_comments&quot;&#x3A;true,&quot;Export-odt_mime&quot;&#x3A;true,&quot;Export-odt_columns&quot;&#x3A;true,&quot;Export-odt_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-texytext_structure_or_data&quot;&#x3A;&#x5B;&quot;structure_and_data&quot;&#x5D;,&quot;Export-texytext_null&quot;&#x3A;&quot;NULL&quot;,&quot;Export-texytext_columns&quot;&#x3A;false&#x7D;"></span>
+</div></div>
+
+  
+
+  
+  
+  
+  <form method="post" action="index.php?route=/export&lang=en" name="dump" class="disableAjax">
+    <input type="hidden" name="db" value="test_db"><input type="hidden" name="table" value=""><input type="hidden" name="export_type" value="database"><input type="hidden" name="export_method" value="quick"><input type="hidden" name="template_id" value=""><input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+
+          <div class="card mb-3" id="quick_or_custom">
+        <div class="card-header">Export method:</div>
+        <div class="card-body">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quick_or_custom" value="quick" id="radio_quick_export" checked>
+            <label class="form-check-label" for="radio_quick_export">Quick - display only the minimal options</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quick_or_custom" value="custom" id="radio_custom_export">
+            <label class="form-check-label" for="radio_custom_export">Custom - display all possible options</label>
+          </div>
+        </div>
+      </div>
+    
+    <div class="card mb-3" id="format">
+      <div class="card-header">Format:</div>
+      <div class="card-body">
+        <select class="form-select" id="plugins" name="what" aria-label="File format to export">
+                      <option value="codegen" data-is-binary="false">CodeGen</option>
+                      <option value="csv" data-is-binary="false">CSV</option>
+                      <option value="excel" data-is-binary="false">CSV for MS Excel</option>
+                      <option value="json" data-is-binary="false">JSON</option>
+                      <option value="latex" data-is-binary="false">LaTeX</option>
+                      <option value="mediawiki" data-is-binary="false">MediaWiki Table</option>
+                      <option value="htmlword" data-is-binary="true">Microsoft Word 2000</option>
+                      <option value="ods" data-is-binary="true">OpenDocument Spreadsheet</option>
+                      <option value="odt" data-is-binary="true">OpenDocument Text</option>
+                      <option value="pdf" data-is-binary="true">PDF</option>
+                      <option value="phparray" data-is-binary="false">PHP array</option>
+                      <option value="sql" selected data-is-binary="false">SQL</option>
+                      <option value="texytext" data-is-binary="false">Texy! text</option>
+                      <option value="toon" data-is-binary="true">TOON</option>
+                      <option value="xml" data-is-binary="false">XML</option>
+                      <option value="yaml" data-is-binary="true">YAML</option>
+                  </select>
+      </div>
+    </div>
+
+          <div class="card mb-3 d-none" id="databases_and_tables">
+      <div class="card-header">Tables:</div>
+      <div class="card-body" style="overflow-y: scroll; max-height: 20em;">
+        <input type="hidden" name="structure_or_data_forced" value="0">
+
+        <table class="table table-sm table-striped table-hover export_table_select">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tables</th>
+              <th class="export_structure text-center">Structure</th>
+              <th class="export_data text-center">Data</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="align-middle">Select all</td>
+              <td class="export_structure text-center">
+                <input type="checkbox" id="table_structure_all" aria-label="Export the structure of all tables.">
+              </td>
+              <td class="export_data text-center">
+                <input type="checkbox" id="table_data_all" aria-label="Export the data of all tables.">
+              </td>
+            </tr>
+          </thead>
+
+          <tbody>
+                          <tr class="marked">
+                <td>
+                  <input class="checkall" type="checkbox" name="table_select[]" value="test_table" checked>
+                </td>
+                <td class="align-middle text-nowrap">test_table</td>
+                <td class="export_structure text-center">
+                  <input type="checkbox" name="table_structure[]" value="test_table" checked>
+                </td>
+                <td class="export_data text-center">
+                  <input type="checkbox" name="table_data[]" value="test_table" checked>
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+      </div>
+    </div>
+  
+    
+    
+    <div class="modal fade" id="renameExportModal" tabindex="-1" aria-labelledby="renameExportModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="renameExportModalLabel">Rename exported databases/tables/columns</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body overflow-auto">
+            <table class="table align-middle mb-3" id="alias_data">
+              <thead>
+                <tr>
+                  <th colspan="4">
+                    Defined aliases
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                              </tbody>
+
+                            <tfoot class="hide">
+                <tr>
+                  <th></th>
+                  <td></td>
+                  <td>
+                    <input name="aliases_new" value="" type="text">
+                  </td>
+                  <td>
+                    <button class="alias_remove btn btn-secondary">Remove</button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th colspan="4">Define new aliases</th>
+                </tr>
+              </thead>
+              <tr>
+                <td>
+                  <label>Select database:</label>
+                </td>
+                <td>
+                  <select id="db_alias_select">
+                    <option value=""></option>
+                  </select>
+                </td>
+                <td>
+                  <input id="db_alias_name" placeholder="New database name" disabled="1">
+                </td>
+                <td>
+                  <button id="db_alias_button" class="btn btn-secondary" disabled="1">Add</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label>Select table:</label>
+                </td>
+                <td>
+                  <select id="table_alias_select">
+                    <option value=""></option>
+                  </select>
+                </td>
+                <td>
+                  <input id="table_alias_name" placeholder="New table name" disabled="1">
+                </td>
+                <td>
+                  <button id="table_alias_button" class="btn btn-secondary" disabled="1">Add</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label>Select column:</label>
+                </td>
+                <td>
+                  <select id="column_alias_select">
+                    <option value=""></option>
+                  </select>
+                </td>
+                <td>
+                  <input id="column_alias_name" placeholder="New column name" disabled="1">
+                </td>
+                <td>
+                  <button id="column_alias_button" class="btn btn-secondary" disabled="1">Add</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="saveAndCloseBtn" data-bs-dismiss="modal">
+              Save &amp; close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3 d-none" id="output">
+      <div class="card-header">Output:</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="btn_alias_config">
+            <label class="form-check-label" for="btn_alias_config">Rename exported databases/tables/columns</label>
+          </div>
+        </li>
+
+                  <li class="list-group-item">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" name="lock_tables" value="y" id="checkbox_lock_tables">
+              <label class="form-check-label" for="checkbox_lock_tables">
+                Use <code>LOCK TABLES</code> statement
+              </label>
+            </div>
+          </li>
+        
+        <li class="list-group-item">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="radio_view_as_text" name="output_format" value="astext">
+            <label class="form-check-label" for="radio_view_as_text">View output as text</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="output_format" value="sendit" id="radio_dump_asfile" checked>
+            <label class="form-check-label" for="radio_dump_asfile">Save output to a file</label>
+          </div>
+          <div class="hstack gap-3">
+            <div class="vr"></div>
+            <ul class="list-group" id="ul_save_asfile">
+              
+              <li class="list-group-item">
+                <div class="row g-3 align-items-center">
+                  <div class="col-auto">
+                    <label for="filename_template" class="col-form-label">
+                      File name template:
+                      <span class="pma_hint"><img src="themes/dot.gif" title="" alt="" class="icon ic_b_help"><span class="hide">This value is interpreted using the 'strftime' function, so you can use time formatting strings. Additionally the following transformations will happen:   @SERVER@ will become the server name and @DATABASE@ will become the database name.
+ Other text will be kept as is. See the FAQ 6.27 for details.</span></span>
+                    </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" class="form-control" name="filename_template" id="filename_template" value="@DATABASE@">
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" name="remember_template" id="checkbox_remember_template" checked>
+                      <label class="form-check-label" for="checkbox_remember_template">
+                        Use this for future exports
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+                              <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-auto">
+                      <label for="select_charset" class="col-form-label">Character set of the file:</label>
+                    </div>
+                    <div class="col-auto">
+                      <select class="form-select" id="select_charset" name="charset">
+                                                  <option value="iso-8859-1">iso-8859-1</option>
+                                                  <option value="iso-8859-2">iso-8859-2</option>
+                                                  <option value="iso-8859-3">iso-8859-3</option>
+                                                  <option value="iso-8859-4">iso-8859-4</option>
+                                                  <option value="iso-8859-5">iso-8859-5</option>
+                                                  <option value="iso-8859-6">iso-8859-6</option>
+                                                  <option value="iso-8859-7">iso-8859-7</option>
+                                                  <option value="iso-8859-8">iso-8859-8</option>
+                                                  <option value="iso-8859-9">iso-8859-9</option>
+                                                  <option value="iso-8859-10">iso-8859-10</option>
+                                                  <option value="iso-8859-11">iso-8859-11</option>
+                                                  <option value="iso-8859-12">iso-8859-12</option>
+                                                  <option value="iso-8859-13">iso-8859-13</option>
+                                                  <option value="iso-8859-14">iso-8859-14</option>
+                                                  <option value="iso-8859-15">iso-8859-15</option>
+                                                  <option value="windows-1250">windows-1250</option>
+                                                  <option value="windows-1251">windows-1251</option>
+                                                  <option value="windows-1252">windows-1252</option>
+                                                  <option value="windows-1256">windows-1256</option>
+                                                  <option value="windows-1257">windows-1257</option>
+                                                  <option value="koi8-r">koi8-r</option>
+                                                  <option value="big5">big5</option>
+                                                  <option value="gb2312">gb2312</option>
+                                                  <option value="utf-16">utf-16</option>
+                                                  <option value="utf-8" selected>utf-8</option>
+                                                  <option value="utf-7">utf-7</option>
+                                                  <option value="x-user-defined">x-user-defined</option>
+                                                  <option value="euc-jp">euc-jp</option>
+                                                  <option value="ks_c_5601-1987">ks_c_5601-1987</option>
+                                                  <option value="tis-620">tis-620</option>
+                                                  <option value="SHIFT_JIS">SHIFT_JIS</option>
+                                                  <option value="SJIS">SJIS</option>
+                                                  <option value="SJIS-win">SJIS-win</option>
+                                              </select>
+                    </div>
+                  </div>
+                </li>
+              
+                              <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-auto">
+                      <label for="compression" class="col-form-label">Compression:</label>
+                    </div>
+                    <div class="col-auto">
+                      <select class="form-select" id="compression" name="compression">
+                        <option value="none">None</option>
+                                                  <option value="zip">
+                            zipped
+                          </option>
+                                                                          <option value="gzip">
+                            gzipped
+                          </option>
+                                              </select>
+                    </div>
+                  </div>
+                </li>
+              
+                              <li class="list-group-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="checkbox_as_separate_files" name="as_separate_files" value="database">
+                    <label class="form-check-label" for="checkbox_as_separate_files">
+                                              Export tables as separate files
+                                          </label>
+                  </div>
+                </li>
+                          </ul>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <label for="maxsize" class="form-label">Skip tables larger than:</label>
+          <input class="form-control" type="number" id="maxsize" name="maxsize" aria-describedby="maxsizeHelp">
+          <div id="maxsizeHelp" class="form-text">The size is measured in MiB.</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card mb-3 d-none" id="format_specific_opts">
+      <div class="card-header">Format-specific options:</div>
+      <div class="card-body">
+        <div id="codegen_options" class="format_specific_options"><h3>CodeGen</h3>
+<div id="codegen_general_opts"><ul class="list-group">
+<li class="list-group-item"><input type="hidden" name="codegen_structure_or_data" value="data">
+<li class="list-group-item"><label for="select_codegen_format" class="form-label">Format:</label><select class="form-select" name="codegen_format" id="select_codegen_format"><option value="0" selected>NHibernate C# DO</option><option value="1">NHibernate XML</option></select>
+</ul></div>
+</div>
+
+<div id="csv_options" class="format_specific_options"><h3>CSV</h3>
+<div id="csv_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="text_csv_separator" class="form-label">Columns separated with:</label><input class="form-control" type="text" name="csv_separator" value="," id="text_csv_separator">
+<li class="list-group-item"><label for="text_csv_enclosed" class="form-label">Columns enclosed with:</label><input class="form-control" type="text" name="csv_enclosed" value="&quot;" id="text_csv_enclosed">
+<li class="list-group-item"><label for="text_csv_escaped" class="form-label">Columns escaped with:</label><input class="form-control" type="text" name="csv_escaped" value="&quot;" id="text_csv_escaped">
+<li class="list-group-item"><label for="text_csv_terminated" class="form-label">Lines terminated with:</label><input class="form-control" type="text" name="csv_terminated" value="AUTO" id="text_csv_terminated">
+<li class="list-group-item"><label for="text_csv_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="csv_null" value="NULL" id="text_csv_null">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="csv_removeCRLF" value="y" id="checkbox_csv_removeCRLF" ><label class="form-check-label" for="checkbox_csv_removeCRLF">Remove carriage return/line feed characters within columns</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="csv_columns" value="y" id="checkbox_csv_columns"  checked><label class="form-check-label" for="checkbox_csv_columns">Put columns names in the first row</label></div>
+<li class="list-group-item"><input type="hidden" name="csv_structure_or_data" value="data">
+</ul></div>
+</div>
+
+<div id="excel_options" class="format_specific_options"><h3>CSV for MS Excel</h3>
+<div id="excel_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="text_excel_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="excel_null" value="NULL" id="text_excel_null">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="excel_removeCRLF" value="y" id="checkbox_excel_removeCRLF" ><label class="form-check-label" for="checkbox_excel_removeCRLF">Remove carriage return/line feed characters within columns</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="excel_columns" value="y" id="checkbox_excel_columns"  checked><label class="form-check-label" for="checkbox_excel_columns">Put columns names in the first row</label></div>
+<li class="list-group-item"><label for="select_excel_edition" class="form-label">Excel edition:</label><select class="form-select" name="excel_edition" id="select_excel_edition"><option value="win" selected>Windows</option><option value="mac_excel2003">Excel 2003 / Macintosh</option><option value="mac_excel2008">Excel 2008 / Macintosh</option></select>
+<li class="list-group-item"><input type="hidden" name="excel_structure_or_data" value="data">
+</ul></div>
+</div>
+
+<div id="json_options" class="format_specific_options"><h3>JSON</h3>
+<div id="json_general_opts"><ul class="list-group">
+<li class="list-group-item"><input type="hidden" name="json_structure_or_data" value="data">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="json_pretty_print" value="y" id="checkbox_json_pretty_print" ><label class="form-check-label" for="checkbox_json_pretty_print">Output pretty-printed JSON (Use human-readable formatting)</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="json_unicode" value="y" id="checkbox_json_unicode"  checked><label class="form-check-label" for="checkbox_json_unicode">Output unicode characters unescaped</label></div>
+</ul></div>
+</div>
+
+<div id="latex_options" class="format_specific_options"><h3>LaTeX</h3>
+<div id="latex_general_opts"><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="latex_caption" value="y" id="checkbox_latex_caption"  checked><label class="form-check-label" for="checkbox_latex_caption">Include table caption</label></div>
+</ul></div>
+
+<div id="latex_dump_what"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="structure" id="radio_latex_structure_or_data_structure"><label class="form-check-label" for="radio_latex_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="data" id="radio_latex_structure_or_data_data"><label class="form-check-label" for="radio_latex_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="latex_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_latex_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_latex_structure_or_data_structure_and_data">structure and data</label></div>
+</ul></div>
+
+<div id="latex_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group">
+<li class="list-group-item"><label for="text_latex_structure_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_structure_caption" value="Structure of table @TABLE@" id="text_latex_structure_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><label for="text_latex_structure_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_structure_continued_caption" value="Structure of table @TABLE@ (continued)" id="text_latex_structure_continued_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><label for="text_latex_structure_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_structure_label" value="tab:@TABLE@-structure" id="text_latex_structure_label"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="latex_comments" value="y" id="checkbox_latex_comments"  checked><label class="form-check-label" for="checkbox_latex_comments">Display comments</label></div>
+</ul></div>
+
+<div id="latex_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="latex_columns" value="y" id="checkbox_latex_columns"  checked><label class="form-check-label" for="checkbox_latex_columns">Put columns names in the first row:</label></div>
+<li class="list-group-item"><label for="text_latex_data_caption" class="form-label">Table caption:</label><input class="form-control" type="text" name="latex_data_caption" value="Content of table @TABLE@" id="text_latex_data_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><label for="text_latex_data_continued_caption" class="form-label">Table caption (continued):</label><input class="form-control" type="text" name="latex_data_continued_caption" value="Content of table @TABLE@ (continued)" id="text_latex_data_continued_caption"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><label for="text_latex_data_label" class="form-label">Label key:</label><input class="form-control" type="text" name="latex_data_label" value="tab:@TABLE@-data" id="text_latex_data_label"><a href="index.php?route=/url&url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Ffaq.html%23faq6-27" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><label for="text_latex_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="latex_null" value="\textit{NULL}" id="text_latex_null">
+</ul></div>
+</div>
+
+<div id="mediawiki_options" class="format_specific_options"><h3>MediaWiki Table</h3>
+<div id="mediawiki_general_opts"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="mediawiki_structure_or_data" class="form-check-input" value="structure" id="radio_mediawiki_structure_or_data_structure"><label class="form-check-label" for="radio_mediawiki_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="mediawiki_structure_or_data" class="form-check-input" value="data" id="radio_mediawiki_structure_or_data_data" checked><label class="form-check-label" for="radio_mediawiki_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="mediawiki_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_mediawiki_structure_or_data_structure_and_data"><label class="form-check-label" for="radio_mediawiki_structure_or_data_structure_and_data">structure and data</label></div>
+<li class="list-group-item"><ul class="list-group" id="ul_structure_or_data">
+</ul>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="mediawiki_caption" value="y" id="checkbox_mediawiki_caption"  checked><label class="form-check-label" for="checkbox_mediawiki_caption">Export table names</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="mediawiki_headers" value="y" id="checkbox_mediawiki_headers"  checked><label class="form-check-label" for="checkbox_mediawiki_headers">Export table headers</label></div>
+</ul></div>
+</div>
+
+<div id="htmlword_options" class="format_specific_options"><h3>Microsoft Word 2000</h3>
+<div id="htmlword_dump_what"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="htmlword_structure_or_data" class="form-check-input" value="structure" id="radio_htmlword_structure_or_data_structure"><label class="form-check-label" for="radio_htmlword_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="htmlword_structure_or_data" class="form-check-input" value="data" id="radio_htmlword_structure_or_data_data"><label class="form-check-label" for="radio_htmlword_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="htmlword_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_htmlword_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_htmlword_structure_or_data_structure_and_data">structure and data</label></div>
+</ul></div>
+
+<div id="htmlword_dump_what"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group">
+<li class="list-group-item"><label for="text_htmlword_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="htmlword_null" value="NULL" id="text_htmlword_null">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="htmlword_columns" value="y" id="checkbox_htmlword_columns" ><label class="form-check-label" for="checkbox_htmlword_columns">Put columns names in the first row</label></div>
+</ul></div>
+</div>
+
+<div id="ods_options" class="format_specific_options"><h3>OpenDocument Spreadsheet</h3>
+<div id="ods_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="text_ods_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="ods_null" value="NULL" id="text_ods_null">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="ods_columns" value="y" id="checkbox_ods_columns"  checked><label class="form-check-label" for="checkbox_ods_columns">Put columns names in the first row</label></div>
+<li class="list-group-item"><input type="hidden" name="ods_structure_or_data" value="data">
+</ul></div>
+</div>
+
+<div id="odt_options" class="format_specific_options"><h3>OpenDocument Text</h3>
+<div id="odt_general_opts"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="odt_structure_or_data" class="form-check-input" value="structure" id="radio_odt_structure_or_data_structure"><label class="form-check-label" for="radio_odt_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="odt_structure_or_data" class="form-check-input" value="data" id="radio_odt_structure_or_data_data"><label class="form-check-label" for="radio_odt_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="odt_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_odt_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_odt_structure_or_data_structure_and_data">structure and data</label></div>
+</ul></div>
+
+<div id="odt_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="odt_comments" value="y" id="checkbox_odt_comments"  checked><label class="form-check-label" for="checkbox_odt_comments">Display comments</label></div>
+</ul></div>
+
+<div id="odt_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="odt_columns" value="y" id="checkbox_odt_columns"  checked><label class="form-check-label" for="checkbox_odt_columns">Put columns names in the first row</label></div>
+<li class="list-group-item"><label for="text_odt_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="odt_null" value="NULL" id="text_odt_null">
+</ul></div>
+</div>
+
+<div id="pdf_options" class="format_specific_options"><h3>PDF</h3>
+<div id="pdf_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="text_pdf_report_title" class="form-label">Report title:</label><input class="form-control" type="text" name="pdf_report_title" value="" id="text_pdf_report_title">
+</ul></div>
+
+<div id="pdf_dump_what"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="structure" id="radio_pdf_structure_or_data_structure"><label class="form-check-label" for="radio_pdf_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="data" id="radio_pdf_structure_or_data_data" checked><label class="form-check-label" for="radio_pdf_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="pdf_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_pdf_structure_or_data_structure_and_data"><label class="form-check-label" for="radio_pdf_structure_or_data_structure_and_data">structure and data</label></div>
+</ul></div>
+</div>
+
+<div id="phparray_options" class="format_specific_options"><h3>PHP array</h3>
+<div id="phparray_general_opts"><ul class="list-group">
+<li class="list-group-item"><input type="hidden" name="phparray_structure_or_data" value="data">
+</ul></div>
+<p class="card-text">This format has no options</p></div>
+
+<div id="sql_options" class="format_specific_options"><h3>SQL</h3>
+<div id="sql_general_opts"><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_include_comments" value="y" id="checkbox_sql_include_comments"  checked><label class="form-check-label" for="checkbox_sql_include_comments">Display comments <i>(includes info such as export timestamp, PHP version, and server version)</i></label></div>
+<li class="list-group-item"><ul class="list-group" id="ul_include_comments">
+<li class="list-group-item"><label for="text_sql_header_comment" class="form-label">Additional custom header comment (\n splits lines):</label><input class="form-control" type="text" name="sql_header_comment" value="" id="text_sql_header_comment">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_dates" value="y" id="checkbox_sql_dates" ><label class="form-check-label" for="checkbox_sql_dates">Include a timestamp of when databases were created, last updated, and last checked</label></div>
+</ul>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_use_transaction" value="y" id="checkbox_sql_use_transaction"  checked><label class="form-check-label" for="checkbox_sql_use_transaction">Enclose export in a transaction</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Fmysqldump.html%23option_mysqldump_single-transaction" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_disable_fk" value="y" id="checkbox_sql_disable_fk" ><label class="form-check-label" for="checkbox_sql_disable_fk">Disable foreign key checks</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Fserver-system-variables.html%23sysvar_foreign_key_checks" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_views_as_tables" value="y" id="checkbox_sql_views_as_tables" ><label class="form-check-label" for="checkbox_sql_views_as_tables">Export views as tables</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_metadata" value="y" id="checkbox_sql_metadata" ><label class="form-check-label" for="checkbox_sql_metadata">Export metadata</label></div>
+<li class="list-group-item"><label for="select_sql_compatibility" class="form-label">Database system or older MySQL server to maximize output compatibility with:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Fsql-mode.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="structure" id="radio_sql_structure_or_data_structure"><label class="form-check-label" for="radio_sql_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="data" id="radio_sql_structure_or_data_data"><label class="form-check-label" for="radio_sql_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="sql_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_sql_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_sql_structure_or_data_structure_and_data">structure and data</label></div>
+<li class="list-group-item"><ul class="list-group" id="ul_structure_or_data">
+</ul>
+</ul></div>
+
+<div id="sql_structure"><h5 class="card-title mt-4 mb-2">Object creation options</h5><ul class="list-group">
+<li class="list-group-item">Add statements:
+<li class="list-group-item"><ul class="list-group" id="ul_add_statements">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_create_database" value="y" id="checkbox_sql_create_database" ><label class="form-check-label" for="checkbox_sql_create_database">Add <code>CREATE DATABASE / USE</code> statement</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_drop_table" value="y" id="checkbox_sql_drop_table" ><label class="form-check-label" for="checkbox_sql_drop_table">Add <code>DROP TABLE / VIEW / PROCEDURE / FUNCTION / EVENT</code><code> / TRIGGER</code> statement</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_create_table" value="y" id="checkbox_sql_create_table"  checked><label class="form-check-label" for="checkbox_sql_create_table">Add <code>CREATE TABLE</code> statement</label></div>
+<li class="list-group-item"><ul class="list-group" id="ul_create_table">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_if_not_exists" value="y" id="checkbox_sql_if_not_exists" ><label class="form-check-label" for="checkbox_sql_if_not_exists"><code>IF NOT EXISTS</code> (less efficient as indexes will be generated during table creation)</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_auto_increment" value="y" id="checkbox_sql_auto_increment"  checked><label class="form-check-label" for="checkbox_sql_auto_increment"><code>AUTO_INCREMENT</code> value</label></div>
+</ul>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_create_view" value="y" id="checkbox_sql_create_view"  checked><label class="form-check-label" for="checkbox_sql_create_view">Add <code>CREATE VIEW</code> statement</label></div>
+<li class="list-group-item"><ul class="list-group" id="ul_create_view">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_simple_view_export" value="y" id="checkbox_sql_simple_view_export" ><label class="form-check-label" for="checkbox_sql_simple_view_export">Use simple view export</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_view_current_user" value="y" id="checkbox_sql_view_current_user" ><label class="form-check-label" for="checkbox_sql_view_current_user">Exclude definition of current user</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_or_replace_view" value="y" id="checkbox_sql_or_replace_view" ><label class="form-check-label" for="checkbox_sql_or_replace_view"><code>OR REPLACE</code> view</label></div>
+</ul>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_procedure_function" value="y" id="checkbox_sql_procedure_function"  checked><label class="form-check-label" for="checkbox_sql_procedure_function">Add <code>CREATE PROCEDURE / FUNCTION / EVENT</code> statement</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_create_trigger" value="y" id="checkbox_sql_create_trigger"  checked><label class="form-check-label" for="checkbox_sql_create_trigger">Add <code>CREATE TRIGGER</code> statement</label></div>
+</ul>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_backquotes" value="y" id="checkbox_sql_backquotes"  checked><label class="form-check-label" for="checkbox_sql_backquotes">Enclose table and column names with backquotes <i>(Protects column and table names formed with special characters or keywords)</i></label></div>
+</ul></div>
+
+<div id="sql_data"><h5 class="card-title mt-4 mb-2">Data creation options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_truncate" value="y" id="checkbox_sql_truncate" ><label class="form-check-label" for="checkbox_sql_truncate">Truncate table before insert</label></div>
+<li class="list-group-item">
+<li class="list-group-item"><ul class="list-group" id="ul_Instead of <code>INSERT</code> statements, use:">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_delayed" value="y" id="checkbox_sql_delayed" ><label class="form-check-label" for="checkbox_sql_delayed"><code>INSERT DELAYED</code> statements</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Finsert-delayed.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_ignore" value="y" id="checkbox_sql_ignore" ><label class="form-check-label" for="checkbox_sql_ignore"><code>INSERT IGNORE</code> statements</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Finsert.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+</ul>
+<li class="list-group-item"><label for="select_sql_type" class="form-label">Function to use when dumping data:</label><select class="form-select" name="sql_type" id="select_sql_type"><option value="INSERT" selected>INSERT</option><option value="UPDATE">UPDATE</option><option value="REPLACE">REPLACE</option></select>
+<li class="list-group-item">Syntax to use when inserting data:
+<li class="list-group-item"><ul class="list-group" id="ul_">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="complete" id="radio_sql_insert_syntax_complete"><label class="form-check-label" for="radio_sql_insert_syntax_complete">include column names in every <code>INSERT</code> statement <br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES (1,2,3)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="extended" id="radio_sql_insert_syntax_extended"><label class="form-check-label" for="radio_sql_insert_syntax_extended">insert multiple rows in every <code>INSERT</code> statement<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6), (7,8,9)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="both" id="radio_sql_insert_syntax_both" checked><label class="form-check-label" for="radio_sql_insert_syntax_both">both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code></label></div><div class="form-check"><input type="radio" name="sql_insert_syntax" class="form-check-input" value="none" id="radio_sql_insert_syntax_none"><label class="form-check-label" for="radio_sql_insert_syntax_none">neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3)</code></label></div>
+</ul>
+<li class="list-group-item"><label for="number_sql_max_query_size" class="form-label">Maximal length of created query</label><input class="form-control" type="number" name="sql_max_query_size" value="50000" id="number_sql_max_query_size" min="0">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_hex_for_binary" value="y" id="checkbox_sql_hex_for_binary"  checked><label class="form-check-label" for="checkbox_sql_hex_for_binary">Dump binary columns in hexadecimal notation <i>(for example, "abc" becomes 0x616263)</i></label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_utc_time" value="y" id="checkbox_sql_utc_time"  checked><label class="form-check-label" for="checkbox_sql_utc_time">Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and reloaded between servers in different time zones)</i></label></div>
+</ul></div>
+</div>
+
+<div id="texytext_options" class="format_specific_options"><h3>Texy! text</h3>
+<div id="texytext_general_opts"><h5 class="card-title mt-4 mb-2">Dump table</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check"><input type="radio" name="texytext_structure_or_data" class="form-check-input" value="structure" id="radio_texytext_structure_or_data_structure"><label class="form-check-label" for="radio_texytext_structure_or_data_structure">structure</label></div><div class="form-check"><input type="radio" name="texytext_structure_or_data" class="form-check-input" value="data" id="radio_texytext_structure_or_data_data"><label class="form-check-label" for="radio_texytext_structure_or_data_data">data</label></div><div class="form-check"><input type="radio" name="texytext_structure_or_data" class="form-check-input" value="structure_and_data" id="radio_texytext_structure_or_data_structure_and_data" checked><label class="form-check-label" for="radio_texytext_structure_or_data_structure_and_data">structure and data</label></div>
+</ul></div>
+
+<div id="texytext_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="texytext_columns" value="y" id="checkbox_texytext_columns" ><label class="form-check-label" for="checkbox_texytext_columns">Put columns names in the first row</label></div>
+<li class="list-group-item"><label for="text_texytext_null" class="form-label">Replace NULL with:</label><input class="form-control" type="text" name="texytext_null" value="NULL" id="text_texytext_null">
+</ul></div>
+</div>
+
+<div id="toon_options" class="format_specific_options"><h3>TOON</h3>
+<div id="toon_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="text_toon_separator" class="form-label">Columns separated with:</label><input class="form-control" type="text" name="toon_separator" value="," id="text_toon_separator">
+<li class="list-group-item"><label for="text_toon_indent" class="form-label">Indentation:</label><input class="form-control" type="text" name="toon_indent" value="2" id="text_toon_indent">
+<li class="list-group-item"><input type="hidden" name="toon_structure_or_data" value="structure_and_data">
+</ul></div>
+</div>
+
+<div id="xml_options" class="format_specific_options"><h3>XML</h3>
+<div id="xml_general_opts"><ul class="list-group">
+<li class="list-group-item"><input type="hidden" name="xml_structure_or_data" value="data">
+</ul></div>
+
+<div id="xml_structure"><h5 class="card-title mt-4 mb-2">Object creation options (all are recommended)</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_events" value="y" id="checkbox_xml_export_events"  checked><label class="form-check-label" for="checkbox_xml_export_events">Events</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_functions" value="y" id="checkbox_xml_export_functions"  checked><label class="form-check-label" for="checkbox_xml_export_functions">Functions</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_procedures" value="y" id="checkbox_xml_export_procedures"  checked><label class="form-check-label" for="checkbox_xml_export_procedures">Procedures</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_tables" value="y" id="checkbox_xml_export_tables"  checked><label class="form-check-label" for="checkbox_xml_export_tables">Tables</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_triggers" value="y" id="checkbox_xml_export_triggers"  checked><label class="form-check-label" for="checkbox_xml_export_triggers">Triggers</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_views" value="y" id="checkbox_xml_export_views"  checked><label class="form-check-label" for="checkbox_xml_export_views">Views</label></div>
+</ul></div>
+
+<div id="xml_data"><h5 class="card-title mt-4 mb-2">Data dump options</h5><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="xml_export_contents" value="y" id="checkbox_xml_export_contents"  checked><label class="form-check-label" for="checkbox_xml_export_contents">Export contents</label></div>
+</ul></div>
+</div>
+
+<div id="yaml_options" class="format_specific_options"><h3>YAML</h3>
+<div id="yaml_general_opts"><ul class="list-group">
+<li class="list-group-item"><input type="hidden" name="yaml_structure_or_data" value="data">
+</ul></div>
+<p class="card-text">This format has no options</p></div>
+
+
+      </div>
+    </div>
+
+    
+    <div id="submit">
+      <input id="buttonGo" class="btn btn-primary" type="submit" value="Export" data-exec-time-limit="300">
+    </div>
+  </form>
+</div>

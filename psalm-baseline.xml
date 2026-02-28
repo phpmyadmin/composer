@@ -691,16 +691,6 @@
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
   </file>
-  <file src="src/Controllers/Database/CentralColumns/PopulateColumnsController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Controllers/Database/CentralColumnsController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Controllers/Database/DataDictionaryController.php">
     <MixedArgument>
       <code><![CDATA[Current::$database]]></code>
@@ -715,9 +705,6 @@
     <PossiblyNullArrayOffset>
       <code><![CDATA[$pkArray]]></code>
     </PossiblyNullArrayOffset>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/DesignerController.php">
     <MixedArgument>
@@ -786,9 +773,6 @@
       <code><![CDATA[$tableSelect]]></code>
       <code><![CDATA[$tableStructure]]></code>
     </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/ImportController.php">
     <MixedArrayAccess>
@@ -801,24 +785,11 @@
     <MixedMethodCall>
       <code><![CDATA[$_SESSION[Ajax::SESSION_KEY]['handler']::getIdKey()]]></code>
     </MixedMethodCall>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Controllers/Database/MultiTableQuery/QueryController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/MultiTableQuery/TablesController.php">
     <PossiblyUnusedReturnValue>
       <code><![CDATA[Response]]></code>
     </PossiblyUnusedReturnValue>
-  </file>
-  <file src="src/Controllers/Database/MultiTableQueryController.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Controllers/Database/PrivilegesController.php">
     <PossiblyUnusedReturnValue>

@@ -27,14 +27,14 @@ use function count;
 use function is_array;
 
 #[Route('/database/export', ['GET', 'POST'])]
-final class ExportController implements InvocableController
+final readonly class ExportController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Export $export,
-        private readonly Options $exportOptions,
-        private readonly PageSettings $pageSettings,
-        private readonly DbTableExists $dbTableExists,
+        private ResponseRenderer $response,
+        private Export $export,
+        private Options $exportOptions,
+        private PageSettings $pageSettings,
+        private DbTableExists $dbTableExists,
     ) {
     }
 

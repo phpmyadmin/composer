@@ -20,13 +20,13 @@ use function is_array;
 use function str_replace;
 
 #[Route('/database/data-dictionary', ['GET'])]
-final class DataDictionaryController implements InvocableController
+final readonly class DataDictionaryController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Relation $relation,
-        private readonly Transformations $transformations,
-        private readonly DatabaseInterface $dbi,
+        private ResponseRenderer $response,
+        private Relation $relation,
+        private Transformations $transformations,
+        private DatabaseInterface $dbi,
     ) {
     }
 

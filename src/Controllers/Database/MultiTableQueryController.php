@@ -18,12 +18,12 @@ use PhpMyAdmin\Template;
  * Handles database multi-table querying
  */
 #[Route('/database/multi-table-query', ['GET'])]
-final class MultiTableQueryController implements InvocableController
+final readonly class MultiTableQueryController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Template $template,
-        private readonly DatabaseInterface $dbi,
+        private ResponseRenderer $response,
+        private Template $template,
+        private DatabaseInterface $dbi,
     ) {
     }
 
