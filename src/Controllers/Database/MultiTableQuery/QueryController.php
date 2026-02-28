@@ -15,9 +15,9 @@ use PhpMyAdmin\Sql;
 use PhpMyAdmin\Url;
 
 #[Route('/database/multi-table-query/query', ['POST'])]
-final class QueryController implements InvocableController
+final readonly class QueryController implements InvocableController
 {
-    public function __construct(private readonly ResponseRenderer $response, private readonly Sql $sql)
+    public function __construct(private ResponseRenderer $response, private Sql $sql)
     {
     }
 

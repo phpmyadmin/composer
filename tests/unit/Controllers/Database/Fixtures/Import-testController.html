@@ -1,0 +1,803 @@
+<div class="container">
+  <h2 class="my-3">
+    <img src="themes/dot.gif" title="Import" alt="Import" class="icon ic_b_import">
+    Importing into the database &quot;test_db&quot;  </h2>
+
+  
+  <div id="page_settings_modal"><div class="page_settings"><form method="post" action="index.php&#x3F;route&#x3D;&#x25;2F&amp;db&#x3D;test_db&amp;server&#x3D;1&amp;lang&#x3D;en" class="config-form disableAjax">
+  <input type="hidden" name="tab_hash" value="">
+      <input type="hidden" name="check_page_refresh" id="check_page_refresh" value="">
+    <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+  <input type="hidden" name="submit_save" value="Import">
+
+  <ul class="nav nav-tabs" id="configFormDisplayTab" role="tablist">
+          <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="Import_defaults-tab" href="#Import_defaults" data-bs-toggle="tab" role="tab" aria-controls="Import_defaults" aria-selected="true">Import defaults</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Sql-tab" href="#Sql" data-bs-toggle="tab" role="tab" aria-controls="Sql" aria-selected="false">SQL</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Csv-tab" href="#Csv" data-bs-toggle="tab" role="tab" aria-controls="Csv" aria-selected="false">CSV</a>
+      </li>
+          <li class="nav-item" role="presentation">
+        <a class="nav-link" id="Open_Document-tab" href="#Open_Document" data-bs-toggle="tab" role="tab" aria-controls="Open_Document" aria-selected="false">OpenDocument</a>
+      </li>
+      </ul>
+  <div class="tab-content">
+          <div class="tab-pane fade show active" id="Import_defaults" role="tabpanel" aria-labelledby="Import_defaults-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">Import defaults</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default common import options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>Import defaults</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Import-format">Format of imported file</label>
+
+    
+    
+          <small>Default format; be aware that this list depends on location (database, table) and only SQL is always available.</small>
+      </th>
+
+  <td>
+          <select name="Import-format" id="Import-format" class="w-75">
+                            <option value="csv">csv</option>
+                            <option value="docsql">docsql</option>
+                            <option value="ldi">ldi</option>
+                            <option value="sql" selected>sql</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-format" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Import-charset">Character set of the file</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Import-charset" id="Import-charset" class="w-75">
+                            <option value="" label=&quot;None&quot; selected></option>
+                            <option value="iso-8859-1">iso-8859-1</option>
+                            <option value="iso-8859-2">iso-8859-2</option>
+                            <option value="iso-8859-3">iso-8859-3</option>
+                            <option value="iso-8859-4">iso-8859-4</option>
+                            <option value="iso-8859-5">iso-8859-5</option>
+                            <option value="iso-8859-6">iso-8859-6</option>
+                            <option value="iso-8859-7">iso-8859-7</option>
+                            <option value="iso-8859-8">iso-8859-8</option>
+                            <option value="iso-8859-9">iso-8859-9</option>
+                            <option value="iso-8859-10">iso-8859-10</option>
+                            <option value="iso-8859-11">iso-8859-11</option>
+                            <option value="iso-8859-12">iso-8859-12</option>
+                            <option value="iso-8859-13">iso-8859-13</option>
+                            <option value="iso-8859-14">iso-8859-14</option>
+                            <option value="iso-8859-15">iso-8859-15</option>
+                            <option value="windows-1250">windows-1250</option>
+                            <option value="windows-1251">windows-1251</option>
+                            <option value="windows-1252">windows-1252</option>
+                            <option value="windows-1256">windows-1256</option>
+                            <option value="windows-1257">windows-1257</option>
+                            <option value="koi8-r">koi8-r</option>
+                            <option value="big5">big5</option>
+                            <option value="gb2312">gb2312</option>
+                            <option value="utf-16">utf-16</option>
+                            <option value="utf-8">utf-8</option>
+                            <option value="utf-7">utf-7</option>
+                            <option value="x-user-defined">x-user-defined</option>
+                            <option value="euc-jp">euc-jp</option>
+                            <option value="ks_c_5601-1987">ks_c_5601-1987</option>
+                            <option value="tis-620">tis-620</option>
+                            <option value="SHIFT_JIS">SHIFT_JIS</option>
+                            <option value="SJIS">SJIS</option>
+                            <option value="SJIS-win">SJIS-win</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-charset" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Import-allow_interrupt">Partial import: allow interrupt</label>
+
+    
+    
+          <small>Allow interrupt of import in case script detects it is close to time limit. This might be a good way to import large files, however it can break transactions.</small>
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-allow_interrupt" id="Import-allow_interrupt" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-allow_interrupt" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Import-skip_queries">Partial import: skip queries</label>
+
+    
+    
+          <small>Number of queries to skip from start.</small>
+      </th>
+
+  <td>
+          <input type="number" name="Import-skip_queries" id="Import-skip_queries" value="0" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-skip_queries" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="enable_drag_drop_import">Enable drag and drop import</label>
+
+          <span class="doc">
+        <a href="index.php?route=/url&amp;url=https%3A%2F%2Fdocs.phpmyadmin.net%2Fen%2Flatest%2Fconfig.html%23cfg_enable_drag_drop_import" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+      </span>
+    
+    
+          <small>Uncheck the checkbox to disable drag and drop import</small>
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="enable_drag_drop_import" id="enable_drag_drop_import" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#enable_drag_drop_import" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Sql" role="tabpanel" aria-labelledby="Sql-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">SQL</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>SQL</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr>
+  <th>
+    <label for="Import-sql_compatibility">SQL compatibility mode</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Import-sql_compatibility" id="Import-sql_compatibility" class="w-75">
+                            <option value="NONE" selected>NONE</option>
+                            <option value="ANSI">ANSI</option>
+                            <option value="DB2">DB2</option>
+                            <option value="MAXDB">MAXDB</option>
+                            <option value="MYSQL323">MYSQL323</option>
+                            <option value="MYSQL40">MYSQL40</option>
+                            <option value="MSSQL">MSSQL</option>
+                            <option value="ORACLE">ORACLE</option>
+                            <option value="TRADITIONAL">TRADITIONAL</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-sql_compatibility" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Import-sql_no_auto_value_on_zero">Do not use AUTO_INCREMENT for zero values</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-sql_no_auto_value_on_zero" id="Import-sql_no_auto_value_on_zero" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-sql_no_auto_value_on_zero" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr>
+  <th>
+    <label for="Import-sql_read_as_multibytes">Read as multibytes</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-sql_read_as_multibytes" id="Import-sql_read_as_multibytes">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-sql_read_as_multibytes" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Csv" role="tabpanel" aria-labelledby="Csv-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">CSV</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>CSV</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header group-header-1">
+    <th colspan="2">
+        CSV
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_replace">Add ON DUPLICATE KEY UPDATE</label>
+
+    
+    
+          <small>Update data when duplicate keys found on import</small>
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-csv_replace" id="Import-csv_replace">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_replace" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_ignore">Do not abort on INSERT error</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-csv_ignore" id="Import-csv_ignore">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_ignore" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_terminated">Columns terminated with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-csv_terminated" id="Import-csv_terminated" value="," class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_terminated" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_enclosed">Columns enclosed with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-csv_enclosed" id="Import-csv_enclosed" value="&quot;" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_enclosed" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_escaped">Columns escaped with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-csv_escaped" id="Import-csv_escaped" value="&quot;" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_escaped" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-csv_col_names">Lines terminated with</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-csv_col_names" id="Import-csv_col_names">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-csv_col_names" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-header group-header-1">
+    <th colspan="2">
+        CSV using LOAD DATA
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_replace">Add ON DUPLICATE KEY UPDATE</label>
+
+    
+    
+          <small>Update data when duplicate keys found on import</small>
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ldi_replace" id="Import-ldi_replace">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_replace" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_ignore">Do not abort on INSERT error</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ldi_ignore" id="Import-ldi_ignore">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_ignore" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_terminated">Columns terminated with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-ldi_terminated" id="Import-ldi_terminated" value=";" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_terminated" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_enclosed">Columns enclosed with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-ldi_enclosed" id="Import-ldi_enclosed" value="&quot;" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_enclosed" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_escaped">Columns escaped with</label>
+
+    
+    
+      </th>
+
+  <td>
+                <input type="text" size="25" name="Import-ldi_escaped" id="Import-ldi_escaped" value="\" class="">
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_escaped" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ldi_local_option">Use LOCAL keyword</label>
+
+    
+    
+      </th>
+
+  <td>
+          <select name="Import-ldi_local_option" id="Import-ldi_local_option" class="w-75">
+                            <option value="auto" selected>auto</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+              </select>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ldi_local_option" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+          <div class="tab-pane fade" id="Open_Document" role="tabpanel" aria-labelledby="Open_Document-tab">
+        <div class="card border-top-0">
+          <div class="card-body">
+            <h5 class="card-title visually-hidden">OpenDocument</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Customize default options.</h6>
+            
+            <fieldset class="optbox">
+              <legend>OpenDocument</legend>
+
+                            
+              <table class="table table-borderless">
+                <tr class="group-header group-header-1">
+    <th colspan="2">
+        OpenDocument Spreadsheet
+    </th>
+</tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ods_col_names">Column names in first row</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ods_col_names" id="Import-ods_col_names">
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ods_col_names" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ods_empty_rows">Do not import empty rows</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ods_empty_rows" id="Import-ods_empty_rows" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ods_empty_rows" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ods_recognize_percentages">Import percentages as proper decimals (12.00% to .12)</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ods_recognize_percentages" id="Import-ods_recognize_percentages" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ods_recognize_percentages" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+<tr class="group-field group-field-1">
+  <th>
+    <label for="Import-ods_recognize_currency">Import currencies ($5.00 to 5.00)</label>
+
+    
+    
+      </th>
+
+  <td>
+          <span class="checkbox">
+        <input type="checkbox" name="Import-ods_recognize_currency" id="Import-ods_recognize_currency" checked>
+      </span>
+    
+    
+    
+          <a class="restore-default hide" href="#Import-ods_recognize_currency" title="Restore default value"><img src="themes/dot.gif" title="Restore default value" alt="Restore default value" class="icon ic_s_reload"></a>
+    
+          </td>
+
+  </tr>
+
+              </table>
+            </fieldset>
+          </div>
+
+                  </div>
+      </div>
+      </div>
+</form>
+
+<span id="configInlineParamsData"
+      data-field-validators="&#x5B;&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-skip_queries&quot;,&quot;name&quot;&#x3A;&quot;validateNonNegativeNumber&quot;,&quot;args&quot;&#x3A;null&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-csv_terminated&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-csv_enclosed&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x3F;&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-csv_escaped&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-ldi_terminated&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-ldi_enclosed&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x3F;&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;,&#x7B;&quot;fieldId&quot;&#x3A;&quot;Import-ldi_escaped&quot;,&quot;name&quot;&#x3A;&quot;validateByRegex&quot;,&quot;args&quot;&#x3A;&#x5B;&quot;&#x5C;&#x2F;&#x5E;.&#x24;&#x5C;&#x2F;&quot;&#x5D;&#x7D;&#x5D;"
+      data-default-values="&#x7B;&quot;Import-format&quot;&#x3A;&#x5B;&quot;sql&quot;&#x5D;,&quot;Import-charset&quot;&#x3A;&#x5B;&quot;&quot;&#x5D;,&quot;Import-allow_interrupt&quot;&#x3A;true,&quot;Import-skip_queries&quot;&#x3A;&quot;0&quot;,&quot;enable_drag_drop_import&quot;&#x3A;true,&quot;Import-sql_compatibility&quot;&#x3A;&#x5B;&quot;NONE&quot;&#x5D;,&quot;Import-sql_no_auto_value_on_zero&quot;&#x3A;true,&quot;Import-sql_read_as_multibytes&quot;&#x3A;false,&quot;Import-csv_replace&quot;&#x3A;false,&quot;Import-csv_ignore&quot;&#x3A;false,&quot;Import-csv_terminated&quot;&#x3A;&quot;,&quot;,&quot;Import-csv_enclosed&quot;&#x3A;&quot;&#x5C;&quot;&quot;,&quot;Import-csv_escaped&quot;&#x3A;&quot;&#x5C;&quot;&quot;,&quot;Import-csv_col_names&quot;&#x3A;false,&quot;Import-ldi_replace&quot;&#x3A;false,&quot;Import-ldi_ignore&quot;&#x3A;false,&quot;Import-ldi_terminated&quot;&#x3A;&quot;&#x3B;&quot;,&quot;Import-ldi_enclosed&quot;&#x3A;&quot;&#x5C;&quot;&quot;,&quot;Import-ldi_escaped&quot;&#x3A;&quot;&#x5C;&#x5C;&quot;,&quot;Import-ldi_local_option&quot;&#x3A;&#x5B;&quot;auto&quot;&#x5D;,&quot;Import-ods_col_names&quot;&#x3A;false,&quot;Import-ods_empty_rows&quot;&#x3A;true,&quot;Import-ods_recognize_percentages&quot;&#x3A;true,&quot;Import-ods_recognize_currency&quot;&#x3A;true&#x7D;"></span>
+</div></div>
+
+  <iframe id="import_upload_iframe" name="import_upload_iframe" width="1" height="1" class="hide"></iframe>
+  <div id="import_form_status" class="hide"></div>
+
+  <div class="d-none" id="upload_progress_info" data-upload-id="abc1234567890" data-handler="PhpMyAdmin&#x5C;Plugins&#x5C;Import&#x5C;Upload&#x5C;UploadNoplugin"></div>
+
+  <div id="importmain">
+    <img src="./themes/pmahomme/img/ajax_clock_small.gif" width="16" height="16" alt="ajax clock" class="hide">
+
+    <form id="import_file_form" action="index.php?route=/import&lang=en" method="post" enctype="multipart/form-data" name="import" class="disableAjax">
+      <input type="hidden" name="noplugin" value="abc1234567890"><input type="hidden" name="import_type" value="database"><input type="hidden" name="db" value="test_db"><input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="token">
+
+      <div class="card mb-3">
+        <div class="card-header">File to import:</div>
+        <div class="card-body">
+                                <p class="card-text">
+              File may be compressed (gzip, bzip2, zip) or uncompressed.<br>
+              A compressed file's name must end in <strong>.[format].[compression]</strong>. Example: <strong>.sql.zip</strong>
+            </p>
+          
+                      <div class="mb-3">
+              <label class="form-label" for="input_import_file">Browse your computer: <small>(Max: 2,048KiB)</small></label>
+              <input class="form-control" type="file" name="import_file" id="input_import_file">
+            </div>
+            <div id="upload_form_status" class="hide"></div>
+            <div id="upload_form_status_info" class="hide"></div>
+            <p class="card-text">You may also drag and drop a file on any page.</p>
+          
+          <label class="form-label" for="charset_of_file">Character set of the file:</label>
+                      <select class="form-select" id="charset_of_file" name="charset_of_file" size="1">
+                              <option value="iso-8859-1">iso-8859-1</option>
+                              <option value="iso-8859-2">iso-8859-2</option>
+                              <option value="iso-8859-3">iso-8859-3</option>
+                              <option value="iso-8859-4">iso-8859-4</option>
+                              <option value="iso-8859-5">iso-8859-5</option>
+                              <option value="iso-8859-6">iso-8859-6</option>
+                              <option value="iso-8859-7">iso-8859-7</option>
+                              <option value="iso-8859-8">iso-8859-8</option>
+                              <option value="iso-8859-9">iso-8859-9</option>
+                              <option value="iso-8859-10">iso-8859-10</option>
+                              <option value="iso-8859-11">iso-8859-11</option>
+                              <option value="iso-8859-12">iso-8859-12</option>
+                              <option value="iso-8859-13">iso-8859-13</option>
+                              <option value="iso-8859-14">iso-8859-14</option>
+                              <option value="iso-8859-15">iso-8859-15</option>
+                              <option value="windows-1250">windows-1250</option>
+                              <option value="windows-1251">windows-1251</option>
+                              <option value="windows-1252">windows-1252</option>
+                              <option value="windows-1256">windows-1256</option>
+                              <option value="windows-1257">windows-1257</option>
+                              <option value="koi8-r">koi8-r</option>
+                              <option value="big5">big5</option>
+                              <option value="gb2312">gb2312</option>
+                              <option value="utf-16">utf-16</option>
+                              <option value="utf-8" selected>utf-8</option>
+                              <option value="utf-7">utf-7</option>
+                              <option value="x-user-defined">x-user-defined</option>
+                              <option value="euc-jp">euc-jp</option>
+                              <option value="ks_c_5601-1987">ks_c_5601-1987</option>
+                              <option value="tis-620">tis-620</option>
+                              <option value="SHIFT_JIS">SHIFT_JIS</option>
+                              <option value="SJIS">SJIS</option>
+                              <option value="SJIS-win">SJIS-win</option>
+                          </select>
+                  </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header">Partial import:</div>
+        <div class="card-body">
+          
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" name="allow_interrupt" value="yes" id="checkbox_allow_interrupt" checked aria-describedby="allowInterruptHelp">
+            <label class="form-check-label" for="checkbox_allow_interrupt">
+              Allow the interruption of an import in case the script detects it is close to the PHP timeout limit.
+            </label>
+            <div id="allowInterruptHelp" class="form-text">This might be a good way to import large files, however it can break transactions.</div>
+          </div>
+
+                      <label class="form-label" for="text_skip_queries">Skip this number of queries (for SQL) starting from the first one:</label>
+            <input class="form-control" type="number" name="skip_queries" value="0" id="text_skip_queries" min="0">
+                  </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header">Other options</div>
+        <div class="card-body">
+          <input type="hidden" name="fk_checks" value="0">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" name="fk_checks" id="fk_checks" value="1">
+            <label class="form-check-label" for="fk_checks">Enable foreign key checks</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header">Format</div>
+        <div class="card-body">
+          <select class="form-select" id="plugins" name="format" aria-label="Format">
+                          <option value="csv">CSV</option>
+                          <option value="shp">ESRI Shape File</option>
+                          <option value="mediawiki">MediaWiki Table</option>
+                          <option value="ods">OpenDocument Spreadsheet</option>
+                          <option value="sql" selected>SQL</option>
+                          <option value="xml">XML</option>
+                      </select>
+
+          <div id="import_notification"></div>
+        </div>
+      </div>
+
+      <div class="card mb-3" id="format_specific_opts">
+        <div class="card-header">Format-specific options:</div>
+        <div class="card-body">
+          <div id="csv_options" class="format_specific_options"><h3>CSV</h3>
+<div id="csv_general_opts"><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="csv_replace" value="y" id="checkbox_csv_replace" ><label class="form-check-label" for="checkbox_csv_replace">Update data when duplicate keys found on import (add ON DUPLICATE KEY UPDATE)</label></div>
+<li class="list-group-item"><label for="text_csv_terminated" class="form-label">Columns separated with:</label><input class="form-control" type="text" name="csv_terminated" value="," id="text_csv_terminated" size="2">
+<li class="list-group-item"><label for="text_csv_enclosed" class="form-label">Columns enclosed with:</label><input class="form-control" type="text" name="csv_enclosed" value="&quot;" id="text_csv_enclosed" size="2" maxlength="2">
+<li class="list-group-item"><label for="text_csv_escaped" class="form-label">Columns escaped with:</label><input class="form-control" type="text" name="csv_escaped" value="&quot;" id="text_csv_escaped" size="2" maxlength="2">
+<li class="list-group-item"><label for="text_csv_new_line" class="form-label">Lines terminated with:</label><input class="form-control" type="text" name="csv_new_line" value="auto" id="text_csv_new_line" size="2">
+<li class="list-group-item"><label for="text_csv_new_tbl_name" class="form-label">Name of the new table (optional):</label><input class="form-control" type="text" name="csv_new_tbl_name" value="" id="text_csv_new_tbl_name">
+<li class="list-group-item"><label for="number_csv_partial_import" class="form-label">Import these many number of rows (optional):</label><input class="form-control" type="number" name="csv_partial_import" value="" id="number_csv_partial_import" min="0">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="csv_col_names" value="y" id="checkbox_csv_col_names" ><label class="form-check-label" for="checkbox_csv_col_names">The first line of the file contains the table column names <i>(if this is unchecked, the first line will become part of the data)</i></label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="csv_ignore" value="y" id="checkbox_csv_ignore" ><label class="form-check-label" for="checkbox_csv_ignore">Do not abort on INSERT error</label></div>
+</ul></div>
+</div>
+
+<div id="shp_options" class="format_specific_options"><h3>ESRI Shape File</h3><p class="card-text">This format has no options</p></div>
+
+<div id="mediawiki_options" class="format_specific_options"><h3>MediaWiki Table</h3><p class="card-text">This format has no options</p></div>
+
+<div id="ods_options" class="format_specific_options"><h3>OpenDocument Spreadsheet</h3>
+<div id="ods_general_opts"><ul class="list-group">
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="ods_col_names" value="y" id="checkbox_ods_col_names" ><label class="form-check-label" for="checkbox_ods_col_names">The first line of the file contains the table column names <i>(if this is unchecked, the first line will become part of the data)</i></label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="ods_empty_rows" value="y" id="checkbox_ods_empty_rows"  checked><label class="form-check-label" for="checkbox_ods_empty_rows">Do not import empty rows</label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="ods_recognize_percentages" value="y" id="checkbox_ods_recognize_percentages"  checked><label class="form-check-label" for="checkbox_ods_recognize_percentages">Import percentages as proper decimals <i>(ex. 12.00% to .12)</i></label></div>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="ods_recognize_currency" value="y" id="checkbox_ods_recognize_currency"  checked><label class="form-check-label" for="checkbox_ods_recognize_currency">Import currencies <i>(ex. $5.00 to 5.00)</i></label></div>
+</ul></div>
+</div>
+
+<div id="sql_options" class="format_specific_options"><h3>SQL</h3>
+<div id="sql_general_opts"><ul class="list-group">
+<li class="list-group-item"><label for="select_sql_compatibility" class="form-label">SQL compatibility mode:</label><select class="form-select" name="sql_compatibility" id="select_sql_compatibility"><option value="NONE" selected>NONE</option><option value="ANSI">ANSI</option><option value="DB2">DB2</option><option value="MAXDB">MAXDB</option><option value="MYSQL323">MYSQL323</option><option value="MYSQL40">MYSQL40</option><option value="MSSQL">MSSQL</option><option value="ORACLE">ORACLE</option><option value="TRADITIONAL">TRADITIONAL</option></select><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Fsql-mode.html" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+<li class="list-group-item"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="sql_no_auto_value_on_zero" value="y" id="checkbox_sql_no_auto_value_on_zero"  checked><label class="form-check-label" for="checkbox_sql_no_auto_value_on_zero">Do not use <code>AUTO_INCREMENT</code> for zero values</label></div><a href="index.php?route=/url&url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.5%2Fen%2Fsql-mode.html%23sqlmode_no_auto_value_on_zero" target="mysql_doc"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+</ul></div>
+</div>
+
+<div id="xml_options" class="format_specific_options"><h3>XML</h3><p class="card-text">This format has no options</p></div>
+
+
+        </div>
+      </div>
+
+            
+      <div id="submit">
+        <input id="buttonGo" class="btn btn-primary" type="submit" value="Import">
+      </div>
+    </form>
+  </div>
+</div>
