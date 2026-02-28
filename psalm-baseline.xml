@@ -12835,7 +12835,7 @@
       <code>$arrInstance[$name]</code>
       <code>$arrInstance[$name]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="20">
+    <MixedAssignment occurrences="21">
       <code>$arrInstance[$name]</code>
       <code>$arrProp</code>
       <code>$arrWEBMCol</code>
@@ -12849,6 +12849,7 @@
       <code>$mem['SwapUsed']</code>
       <code>$name</code>
       <code>$objItem</code>
+      <code>$objLocator</code>
       <code>$objWEBM</code>
       <code>$propItem</code>
       <code>$sum</code>
@@ -12857,7 +12858,8 @@
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
+    <MixedMethodCall occurrences="2">
+      <code>ConnectServer</code>
       <code>Instances_</code>
     </MixedMethodCall>
     <MixedOperand occurrences="7">
@@ -12877,10 +12879,10 @@
     <PossiblyNullReference occurrences="1">
       <code>Get</code>
     </PossiblyNullReference>
-    <UndefinedMagicMethod occurrences="2">
-      <code>ConnectServer</code>
-      <code>Get</code>
-    </UndefinedMagicMethod>
+    <UndefinedDocblockClass occurrences="2">
+      <code>$this-&gt;wmi</code>
+      <code>COM|null</code>
+    </UndefinedDocblockClass>
   </file>
   <file src="libraries/classes/Session.php">
     <MixedArgument occurrences="3">
@@ -14576,11 +14578,6 @@
       <code>$filesInfos</code>
     </MixedAssignment>
   </file>
-  <file src="test/classes/Command/WriteGitRevisionCommandTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/CommonTest.php">
     <DocblockTypeContradiction occurrences="2">
       <code>assertFalse</code>
@@ -14676,12 +14673,6 @@
     </MixedAssignment>
   </file>
   <file src="test/classes/ConfigStorage/RelationCleanupTest.php">
-    <DeprecatedMethod occurrences="4">
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <NonInvariantDocblockPropertyType occurrences="1">
       <code>$dbi</code>
     </NonInvariantDocblockPropertyType>
@@ -14713,16 +14704,7 @@
       <code>assertSame</code>
     </TypeDoesNotContainType>
   </file>
-  <file src="test/classes/ConfigStorage/UserGroupsTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/ConfigTest.php">
-    <DeprecatedMethod occurrences="2">
-      <code>expectError</code>
-      <code>expectErrorMessage</code>
-    </DeprecatedMethod>
     <MixedInferredReturnType occurrences="8">
       <code>array</code>
       <code>array</code>
@@ -15561,14 +15543,6 @@
       <code>array</code>
     </MixedInferredReturnType>
   </file>
-  <file src="test/classes/Navigation/NodeFactoryTest.php">
-    <DeprecatedMethod occurrences="4">
-      <code>expectError</code>
-      <code>expectError</code>
-      <code>expectErrorMessage</code>
-      <code>expectErrorMessage</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/Navigation/Nodes/NodeColumnContainerTest.php">
     <RedundantConditionGivenDocblockType occurrences="1">
       <code>assertIsArray</code>
@@ -15889,10 +15863,6 @@
     </MixedAssignment>
   </file>
   <file src="test/classes/Plugins/Export/ExportSqlTest.php">
-    <DeprecatedMethod occurrences="2">
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <InvalidArrayOffset occurrences="1">
       <code>$GLOBALS['sql_constraints']</code>
     </InvalidArrayOffset>
@@ -16098,18 +16068,7 @@
       <code>assertIsArray</code>
     </RedundantCondition>
   </file>
-  <file src="test/classes/Server/Privileges/AccountLockingTest.php">
-    <DeprecatedMethod occurrences="4">
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-  </file>
   <file src="test/classes/Server/PrivilegesTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedArgument occurrences="5">
       <code>$export</code>
       <code>$extra_data['new_privileges']</code>
@@ -16348,9 +16307,6 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/classes/TrackerTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedAssignment occurrences="1">
       <code>$result</code>
     </MixedAssignment>
@@ -16416,12 +16372,6 @@
     </TypeDoesNotContainType>
   </file>
   <file src="test/classes/UtilTest.php">
-    <DeprecatedMethod occurrences="4">
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedArgument occurrences="3">
       <code>$_SESSION['cache']['server_server']</code>
       <code>$_SESSION['cache']['server_server']</code>
@@ -16529,12 +16479,6 @@
     </MixedArrayAccess>
   </file>
   <file src="test/classes/VersionInformationTest.php">
-    <DeprecatedMethod occurrences="4">
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
     <MixedArrayAccess occurrences="1">
       <code>$_SESSION['cache']['version_check']</code>
     </MixedArrayAccess>
@@ -16578,9 +16522,6 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/selenium/TestBase.php">
-    <DeprecatedConstant occurrences="1">
-      <code>ChromeOptions::CAPABILITY_W3C</code>
-    </DeprecatedConstant>
     <DocblockTypeContradiction occurrences="1">
       <code>$this-&gt;webDriver === null</code>
     </DocblockTypeContradiction>
