@@ -52,7 +52,8 @@ interface ResultInterface extends IteratorAggregate
     /**
      * Returns all rows of the result
      *
-     * @return array<int, array<string,string|null>>
+     * @return array<int, array<string|null>>
+     * @psalm-return list<array<array-key, string|null>>
      */
     public function fetchAllAssoc(): array;
 

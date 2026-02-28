@@ -2816,7 +2816,7 @@ parameters:
 			path: libraries/classes/ConfigStorage/Relation.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:getForeignData\\(\\) should return array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, non\\-empty\\-array\\>\\|null, foreign_field\\: mixed\\} but returns array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, array\\<string, string\\|null\\>\\>\\|null, foreign_field\\: mixed\\}\\.$#"
+			message: "#^Method PhpMyAdmin\\\\ConfigStorage\\\\Relation\\:\\:getForeignData\\(\\) should return array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, non\\-empty\\-array\\>\\|null, foreign_field\\: mixed\\} but returns array\\{foreign_link\\: bool, the_total\\: mixed, foreign_display\\: string, disp_row\\: array\\<int, array\\<string\\|null\\>\\>\\|null, foreign_field\\: mixed\\}\\.$#"
 			count: 1
 			path: libraries/classes/ConfigStorage/Relation.php
 
@@ -15466,12 +15466,12 @@ parameters:
 			path: libraries/classes/Dbal/MysqliResult.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string, string\\|null\\>\\> but returns array\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string\\|null\\>\\> but returns array\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/MysqliResult.php
 
 		-
-			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string, string\\|null\\>\\> but returns array\\<int\\<0, max\\>, array\\<string, float\\|int\\|string\\|null\\>\\>\\.$#"
+			message: "#^Method PhpMyAdmin\\\\Dbal\\\\MysqliResult\\:\\:fetchAllAssoc\\(\\) should return array\\<int, array\\<string\\|null\\>\\> but returns array\\<int\\<0, max\\>, array\\<string, float\\|int\\|string\\|null\\>\\>\\.$#"
 			count: 1
 			path: libraries/classes/Dbal/MysqliResult.php
 
@@ -40746,8 +40746,21 @@ parameters:
 			path: test/classes/AbstractNetworkTestCase.php
 
 		-
+			message: """
+				#^Call to deprecated method assertRegExp\\(\\) of class PHPUnit\\\\Framework\\\\Assert\\:
+				https\\://github\\.com/sebastianbergmann/phpunit/issues/4086$#
+			"""
+			count: 1
+			path: test/classes/AbstractTestCase.php
+
+		-
 			message: "#^Call to function in_array\\(\\) requires parameter \\#3 to be set\\.$#"
 			count: 2
+			path: test/classes/AbstractTestCase.php
+
+		-
+			message: "#^Call to function method_exists\\(\\) with 'PHPUnit\\\\\\\\Framework\\\\\\\\TestCase' and 'assertMatchesRegula…' will always evaluate to true\\.$#"
+			count: 1
 			path: test/classes/AbstractTestCase.php
 
 		-
@@ -41019,6 +41032,11 @@ parameters:
 			message: "#^Parameter \\#1 \\$array_arg of function sort expects TArray of array\\<T\\>, mixed given\\.$#"
 			count: 2
 			path: test/classes/Command/TwigLintCommandTest.php
+
+		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 1
+			path: test/classes/Command/WriteGitRevisionCommandTest.php
 
 		-
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
@@ -41386,6 +41404,11 @@ parameters:
 			path: test/classes/Config/SettingsTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 4
+			path: test/classes/ConfigStorage/RelationCleanupTest.php
+
+		-
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:equalTo\\(\\)\\.$#"
 			count: 32
 			path: test/classes/ConfigStorage/RelationCleanupTest.php
@@ -41566,6 +41589,11 @@ parameters:
 			path: test/classes/ConfigStorage/RelationTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 1
+			path: test/classes/ConfigStorage/UserGroupsTest.php
+
+		-
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:equalTo\\(\\)\\.$#"
 			count: 2
 			path: test/classes/ConfigStorage/UserGroupsTest.php
@@ -41599,6 +41627,22 @@ parameters:
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:returnValue\\(\\)\\.$#"
 			count: 3
 			path: test/classes/ConfigStorage/UserGroupsTest.php
+
+		-
+			message: """
+				#^Call to deprecated method expectError\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\:
+				https\\://github\\.com/sebastianbergmann/phpunit/issues/5062$#
+			"""
+			count: 1
+			path: test/classes/ConfigTest.php
+
+		-
+			message: """
+				#^Call to deprecated method expectErrorMessage\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\:
+				https\\://github\\.com/sebastianbergmann/phpunit/issues/5062$#
+			"""
+			count: 1
+			path: test/classes/ConfigTest.php
 
 		-
 			message: "#^Cannot access offset 'ProxyUrl' on mixed\\.$#"
@@ -45851,6 +45895,22 @@ parameters:
 			path: test/classes/Navigation/NavigationTreeTest.php
 
 		-
+			message: """
+				#^Call to deprecated method expectError\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\:
+				https\\://github\\.com/sebastianbergmann/phpunit/issues/5062$#
+			"""
+			count: 2
+			path: test/classes/Navigation/NodeFactoryTest.php
+
+		-
+			message: """
+				#^Call to deprecated method expectErrorMessage\\(\\) of class PHPUnit\\\\Framework\\\\TestCase\\:
+				https\\://github\\.com/sebastianbergmann/phpunit/issues/5062$#
+			"""
+			count: 2
+			path: test/classes/Navigation/NodeFactoryTest.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\{text\\: array\\{route\\: string, params\\: array\\<string, mixed\\>\\}, icon\\: array\\{route\\: string, params\\: array\\<string, mixed\\>\\}, second_icon\\?\\: array\\{route\\: string, params\\: array\\<string, mixed\\>\\}, title\\?\\: string\\} will always evaluate to true\\.$#"
 			count: 1
 			path: test/classes/Navigation/Nodes/NodeColumnContainerTest.php
@@ -46701,6 +46761,11 @@ parameters:
 			path: test/classes/Plugins/Export/ExportPdfTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 2
+			path: test/classes/Plugins/Export/ExportSqlTest.php
+
+		-
 			message: "#^Cannot access offset 'DisableIS' on mixed\\.$#"
 			count: 8
 			path: test/classes/Plugins/Export/ExportSqlTest.php
@@ -47381,6 +47446,11 @@ parameters:
 			path: test/classes/Server/PluginsTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 4
+			path: test/classes/Server/Privileges/AccountLockingTest.php
+
+		-
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:equalTo\\(\\)\\.$#"
 			count: 12
 			path: test/classes/Server/Privileges/AccountLockingTest.php
@@ -47399,6 +47469,11 @@ parameters:
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:once\\(\\)\\.$#"
 			count: 18
 			path: test/classes/Server/Privileges/AccountLockingTest.php
+
+		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 1
+			path: test/classes/Server/PrivilegesTest.php
 
 		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with null will always evaluate to true\\.$#"
@@ -48346,6 +48421,11 @@ parameters:
 			path: test/classes/ThemeTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 1
+			path: test/classes/TrackerTest.php
+
+		-
 			message: "#^Cannot access offset 'DisableIS' on mixed\\.$#"
 			count: 1
 			path: test/classes/TrackerTest.php
@@ -48916,6 +48996,11 @@ parameters:
 			path: test/classes/UserPreferencesTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 4
+			path: test/classes/UtilTest.php
+
+		-
 			message: "#^Cannot access offset 'AllowThirdPartyFram…' on mixed\\.$#"
 			count: 1
 			path: test/classes/UtilTest.php
@@ -49246,6 +49331,11 @@ parameters:
 			path: test/classes/Utils/SessionCacheTest.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 4
+			path: test/classes/VersionInformationTest.php
+
+		-
 			message: "#^Cannot access offset 'Servers' on mixed\\.$#"
 			count: 4
 			path: test/classes/VersionInformationTest.php
@@ -49488,6 +49578,14 @@ parameters:
 		-
 			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
 			count: 8
+			path: test/selenium/TestBase.php
+
+		-
+			message: """
+				#^Fetching deprecated class constant CAPABILITY_W3C of class Facebook\\\\WebDriver\\\\Chrome\\\\ChromeOptions\\:
+				Use CAPABILITY instead$#
+			"""
+			count: 1
 			path: test/selenium/TestBase.php
 
 		-
