@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-25 13:54+0000\n"
+"POT-Creation-Date: 2026-03-01 00:40+0000\n"
 "PO-Revision-Date: 2026-01-08 06:01+0000\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -60,7 +60,7 @@ msgstr "قاراڭغۇ"
 #: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
-#: src/Util.php:1367
+#: src/Util.php:1365
 msgid "Settings"
 msgstr "تەڭشەك"
 
@@ -280,8 +280,8 @@ msgstr "رەت"
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
 #: src/Controllers/Server/PrivilegesController.php:314
-#: src/Normalization.php:235 src/Tracking/Tracking.php:287
-#: src/Tracking/Tracking.php:402
+#: src/Normalization.php:235 src/Tracking/Tracking.php:288
+#: src/Tracking/Tracking.php:403
 msgid "Go"
 msgstr "ئىجرا قىلىش"
 
@@ -446,7 +446,7 @@ msgstr "يۈكلەۋاتىدۇ"
 #: resources/templates/triggers/list.twig:102
 #: resources/templates/triggers/list.twig:106
 #: src/Controllers/JavaScriptMessagesController.php:154
-#: src/Tracking/Tracking.php:200 src/Tracking/Tracking.php:540
+#: src/Tracking/Tracking.php:201 src/Tracking/Tracking.php:541
 msgid "Close"
 msgstr "تاقاش"
 
@@ -602,8 +602,8 @@ msgstr "قوشۇلغىنى %s"
 #: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
-#: src/Util.php:1393
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1061 src/Util.php:1374
+#: src/Util.php:1391
 msgid "Structure"
 msgstr "تۈزۈلىشى"
 
@@ -876,7 +876,7 @@ msgstr "ئەسلىگە قايتۇرۇش"
 #: resources/templates/server/variables/index.twig:17
 #: resources/templates/setup/home/index.twig:116
 #: resources/templates/setup/home/index.twig:134 src/Engines/Pbxt.php:167
-#: src/Html/Generator.php:671 src/Html/MySQLDocumentation.php:51
+#: src/Html/Generator.php:685 src/Html/MySQLDocumentation.php:51
 #: src/Sanitize.php:188
 msgid "Documentation"
 msgstr "قوللانما"
@@ -1048,8 +1048,8 @@ msgstr "تەكشۈرۈش"
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
 #: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
-#: src/Display/Results.php:1876 src/Html/Generator.php:519
-#: src/Html/Generator.php:776
+#: src/Display/Results.php:1876 src/Html/Generator.php:533
+#: src/Html/Generator.php:790
 msgid "Edit"
 msgstr "تەھىرلەش"
 
@@ -1067,7 +1067,7 @@ msgstr "تەھىرلەش"
 #: resources/templates/setup/home/index.twig:69
 #: resources/templates/sql/query.twig:189
 #: src/Controllers/JavaScriptMessagesController.php:381
-#: src/Display/Results.php:2414 src/Tracking/Tracking.php:224
+#: src/Display/Results.php:2414 src/Tracking/Tracking.php:225
 msgid "Delete"
 msgstr "ئۆچۈرۈش"
 
@@ -1172,7 +1172,7 @@ msgstr "SQL ئىزاھى"
 
 #: resources/templates/console/display.twig:55
 #: resources/templates/console/display.twig:213
-#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:606
+#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:620
 msgid "Profiling"
 msgstr "ئاساسىي مەزمۇن"
 
@@ -1272,7 +1272,7 @@ msgstr "ئېلىنغان ۋاقىت:"
 #: resources/templates/server/status/processes/index.twig:19
 #: resources/templates/server/status/variables/index.twig:42
 #: src/Config/Descriptions.php:928 src/Export/Export.php:692
-#: src/Html/Generator.php:575
+#: src/Html/Generator.php:589
 msgid "Refresh"
 msgstr "يېڭلاش"
 
@@ -1927,7 +1927,7 @@ msgstr "قىممەت ئىسمى"
 #: resources/templates/table/tracking/main.twig:31
 #: src/Config/ConfigFile.php:578
 #: src/Controllers/JavaScriptMessagesController.php:275 src/Menu.php:450
-#: src/Server/Status/Processes.php:106 src/Util.php:1363
+#: src/Server/Status/Processes.php:106 src/Util.php:1361
 msgid "Status"
 msgstr "ھالەت"
 
@@ -2000,7 +2000,7 @@ msgstr "Definer"
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
-#: src/Util.php:1385
+#: src/Util.php:1383
 msgid "Events"
 msgstr "ھادىسە"
 
@@ -2064,7 +2064,7 @@ msgstr "ھەممىنى تاللاش"
 #: src/Config/Forms/User/ExportForm.php:148
 #: src/Controllers/JavaScriptMessagesController.php:361 src/Menu.php:241
 #: src/Menu.php:347 src/Menu.php:469 src/Server/Privileges.php:1301
-#: src/Util.php:1365 src/Util.php:1380 src/Util.php:1397
+#: src/Util.php:1363 src/Util.php:1378 src/Util.php:1395
 msgid "Export"
 msgstr "چىقىرىش"
 
@@ -2280,7 +2280,7 @@ msgid "criteria"
 msgstr "شەرت"
 
 #: resources/templates/database/multi_table_query/form.twig:56
-#: src/Util.php:1635
+#: src/Util.php:1623
 msgid "Sort"
 msgstr "تۈرلەش"
 
@@ -2292,7 +2292,7 @@ msgstr "تۈرلەش"
 #: resources/templates/table/operations/index.twig:28
 #: resources/templates/table/search/index.twig:158
 #: src/Config/ConfigFile.php:554 src/Display/Results.php:1391
-#: src/Display/Results.php:1397 src/Util.php:1643 src/Util.php:1660
+#: src/Display/Results.php:1397 src/Util.php:1631 src/Util.php:1648
 msgid "Ascending"
 msgstr "ئارتىش"
 
@@ -2304,7 +2304,7 @@ msgstr "ئارتىش"
 #: resources/templates/table/operations/index.twig:32
 #: resources/templates/table/search/index.twig:162
 #: src/Config/ConfigFile.php:554 src/Display/Results.php:1386
-#: src/Display/Results.php:1402 src/Util.php:1648 src/Util.php:1665
+#: src/Display/Results.php:1402 src/Util.php:1636 src/Util.php:1653
 msgid "Descending"
 msgstr "كېمىيىش"
 
@@ -2358,7 +2358,7 @@ msgid "Copy query"
 msgstr "يېڭلاش"
 
 #: resources/templates/database/multi_table_query/form.twig:176
-#: src/Html/Generator.php:544
+#: src/Html/Generator.php:558
 #, fuzzy
 #| msgid "Submit Query"
 msgid "Submit query"
@@ -2431,21 +2431,21 @@ msgstr "ساندان ئىسمى"
 #: resources/templates/database/operations/index.twig:132
 #: resources/templates/database/structure/copy_form.twig:21
 #: resources/templates/table/operations/index.twig:283
-#: src/Tracking/Tracking.php:272
+#: src/Tracking/Tracking.php:273
 msgid "Structure only"
 msgstr "تۈزىلىشىنىلا"
 
 #: resources/templates/database/operations/index.twig:138
 #: resources/templates/database/structure/copy_form.twig:17
 #: resources/templates/table/operations/index.twig:289
-#: src/Tracking/Tracking.php:278
+#: src/Tracking/Tracking.php:279
 msgid "Structure and data"
 msgstr "تۈزۈلىشى ۋە ئۇچۇر"
 
 #: resources/templates/database/operations/index.twig:144
 #: resources/templates/database/structure/copy_form.twig:25
 #: resources/templates/table/operations/index.twig:295
-#: src/Tracking/Tracking.php:275
+#: src/Tracking/Tracking.php:276
 msgid "Data only"
 msgstr "ئۇچۇرنىلا"
 
@@ -2523,7 +2523,7 @@ msgstr "دائىملىق"
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
 #: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
-#: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
+#: src/Menu.php:369 src/Util.php:1381 src/Util.php:1397
 msgid "Privileges"
 msgstr "ھۇقۇقى"
 
@@ -2701,7 +2701,7 @@ msgid "This routine does not require any parameters."
 msgstr "File %s does not contain any key id"
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
-#: src/Util.php:1384
+#: src/Util.php:1382
 msgid "Routines"
 msgstr "دائىملىق"
 
@@ -2713,8 +2713,8 @@ msgstr "دائىملىق"
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1065
-#: src/Util.php:1378 src/Util.php:1395
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1063
+#: src/Util.php:1376 src/Util.php:1393
 msgid "Search"
 msgstr "ئىزدەش"
 
@@ -2852,7 +2852,7 @@ msgstr[0] "%s ئۇيغۇنلۇق تىپىلدى، جەدۋىلى <i>%s</i>"
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1067 src/Util.php:1392
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1065 src/Util.php:1390
 msgid "Browse"
 msgstr "كۆزەت"
 
@@ -2877,7 +2877,7 @@ msgstr[0] "%s جەدۋەل"
 #: resources/templates/database/structure/body_for_table_summary.twig:8
 #: resources/templates/database/structure/table_header.twig:10
 #: resources/templates/server/replication/index.twig:5 src/Menu.php:501
-#: src/Server/Status/Data.php:124 src/Util.php:1369
+#: src/Server/Status/Data.php:124 src/Util.php:1367
 msgid "Replication"
 msgstr "كۆچۈرۈش"
 
@@ -2997,7 +2997,7 @@ msgid "Copy table with prefix"
 msgstr "جەدۋەلنى ئالدى بىلەن كۆچۈرۈڭ"
 
 #: resources/templates/database/structure/check_all_tables.twig:32
-#: src/Menu.php:409 src/Util.php:1389
+#: src/Menu.php:409 src/Util.php:1387
 #, fuzzy
 #| msgid "Add/Delete columns"
 msgid "Central columns"
@@ -3168,7 +3168,7 @@ msgstr "تەكرارلاندى"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1066 src/Util.php:1396
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1064 src/Util.php:1394
 msgid "Insert"
 msgstr "قىستۇرۇش"
 
@@ -3277,13 +3277,13 @@ msgstr "نەشىر"
 
 #: resources/templates/database/tracking/tables.twig:115
 #: resources/templates/table/tracking/main.twig:73
-#: src/Tracking/Tracking.php:199
+#: src/Tracking/Tracking.php:200
 msgid "Tracking report"
 msgstr "ئىزلاش خاتىرىسى"
 
 #: resources/templates/database/tracking/tables.twig:126
 #: resources/templates/table/tracking/main.twig:80
-#: src/Tracking/Tracking.php:539
+#: src/Tracking/Tracking.php:540
 msgid "Structure snapshot"
 msgstr "تۈزۈلمە رەسىمى"
 
@@ -3489,7 +3489,7 @@ msgstr "كاناغا ئۆزگەرتىڭ"
 #: src/Controllers/Table/Partition/DropController.php:56
 #: src/Controllers/Table/Partition/RebuildController.php:56
 #: src/Controllers/Table/Partition/TruncateController.php:56
-#: src/Html/Generator.php:727 src/Import/Import.php:122 src/InsertEdit.php:423
+#: src/Html/Generator.php:741 src/Import/Import.php:122 src/InsertEdit.php:423
 #: src/Message.php:138
 msgid "Error"
 msgstr "خاتالىق"
@@ -3585,7 +3585,7 @@ msgstr "يېڭلاش"
 #. l10n: Title of the option on the Export page
 #: resources/templates/export.twig:68
 #: src/Controllers/JavaScriptMessagesController.php:134
-#: src/Html/Generator.php:751
+#: src/Html/Generator.php:765
 #, fuzzy
 #| msgid "SQL query"
 msgid "SQL query:"
@@ -4084,7 +4084,7 @@ msgstr "ئېلىش"
 #: resources/templates/import_status.twig:2
 #: resources/templates/user_password.twig:2
 #: src/Controllers/JavaScriptMessagesController.php:411
-#: src/Export/Export.php:734 src/Html/Generator.php:835
+#: src/Export/Export.php:734 src/Html/Generator.php:849
 #: src/Plugins/Schema/ExportRelationSchema.php:266
 msgid "Back"
 msgstr "قايتىش"
@@ -4095,7 +4095,7 @@ msgstr "قايتىش"
 #: resources/templates/server/status/monitor/index.twig:53
 #: resources/templates/server/status/monitor/index.twig:69
 #: src/Config/Forms/User/ImportForm.php:58 src/Menu.php:250 src/Menu.php:357
-#: src/Menu.php:474 src/Util.php:1366 src/Util.php:1381 src/Util.php:1398
+#: src/Menu.php:474 src/Util.php:1364 src/Util.php:1379 src/Util.php:1396
 msgid "Import"
 msgstr "كىرگۈزۈش"
 
@@ -4477,7 +4477,7 @@ msgstr "SQL يوللاش"
 #: resources/templates/server/export/index.twig:14
 #: resources/templates/server/privileges/user_properties.twig:20
 #: src/Config/ConfigFile.php:576 src/Config/Descriptions.php:728
-#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1361
+#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1359
 msgid "Databases"
 msgstr "ساندان"
 
@@ -4989,7 +4989,7 @@ msgid "Re-login to phpMyAdmin to load the updated configuration file."
 msgstr "يېڭىلانغان سەپلىمە ھۆججىتىنى يۈكلەش ئۈچۈن phpMyAdmin غا قايتا كىرىڭ."
 
 #: resources/templates/server/binlog/index.twig:3 src/Menu.php:494
-#: src/Server/Status/Data.php:119 src/Util.php:1368
+#: src/Server/Status/Data.php:119 src/Util.php:1366
 msgid "Binary log"
 msgstr "ئىككىلىك خاتىرە"
 
@@ -5218,7 +5218,7 @@ msgstr "ساقلاشنى ساقلاش%"
 #: resources/templates/server/engines/show.twig:18
 #: resources/templates/server/engines/show.twig:21
 #: resources/templates/sql/query.twig:194 src/Config/ConfigFile.php:580
-#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1370
+#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1368
 msgid "Variables"
 msgstr "ئۆزگەرگۈچى مىقدار"
 
@@ -5243,7 +5243,7 @@ msgid "Importing into the current server"
 msgstr "MySQL مۇلازىمىتېرىغا ئۇلىنالمىدى."
 
 #: resources/templates/server/plugins/index.twig:4 src/Menu.php:522
-#: src/Util.php:1372
+#: src/Util.php:1370
 msgid "Plugins"
 msgstr "قىستۇرمىلار"
 
@@ -6588,13 +6588,13 @@ msgstr "بۆلگۈچ ئىشلىتىڭ"
 
 #. l10n: shortcuts for Kilobyte
 #: resources/templates/server/status/monitor/index.twig:181
-#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:310
+#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:308
 msgid "KiB"
 msgstr "KiB"
 
 #. l10n: shortcuts for Megabyte
 #: resources/templates/server/status/monitor/index.twig:182
-#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:312
+#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:310
 msgid "MiB"
 msgstr "MB"
 
@@ -6667,7 +6667,7 @@ msgid "Query analyzer"
 msgstr "تەكشۈرۈش"
 
 #: resources/templates/server/status/monitor/index.twig:273 src/Menu.php:339
-#: src/Util.php:1379
+#: src/Util.php:1377
 msgid "Query"
 msgstr "تەكشۈرۈش"
 
@@ -7809,7 +7809,7 @@ msgstr "پايدىلىنىشچانلىقىنى تەكشۈرۈڭ"
 
 #: resources/templates/table/operations/view.twig:8
 #: src/Config/ConfigFile.php:592 src/Menu.php:268 src/Menu.php:278
-#: src/Menu.php:362 src/Util.php:1068 src/Util.php:1382 src/Util.php:1400
+#: src/Menu.php:362 src/Util.php:1066 src/Util.php:1380 src/Util.php:1398
 msgid "Operations"
 msgstr "ئىشلەملەر"
 
@@ -8365,7 +8365,7 @@ msgstr "قوزغىتىش% s"
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
 #: src/Plugins/Export/ExportTexytext.php:410
-#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1384 src/Util.php:1400
 msgid "Triggers"
 msgstr "Triggers"
 
@@ -10110,8 +10110,8 @@ msgstr "قىممەت ئىسمى"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1064
-#: src/Util.php:1362 src/Util.php:1377 src/Util.php:1394
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1062
+#: src/Util.php:1360 src/Util.php:1375 src/Util.php:1392
 msgid "SQL"
 msgstr "SQL"
 
@@ -12740,11 +12740,11 @@ msgstr "ستاتىستىكا كۆرسەت"
 msgid "Skip locked tables"
 msgstr "قۇلۇپلانغان جەدۋەللەرنى ئاتلاڭ"
 
-#: src/Config/Descriptions.php:927 src/Html/Generator.php:494
+#: src/Config/Descriptions.php:927 src/Html/Generator.php:498
 msgid "Explain SQL"
 msgstr "SQL ئىزاھى"
 
-#: src/Config/Descriptions.php:929 src/Html/Generator.php:555
+#: src/Config/Descriptions.php:929 src/Html/Generator.php:569
 #, fuzzy
 #| msgid "Create PHP Code"
 msgid "Create PHP code"
@@ -13325,8 +13325,8 @@ msgstr "«% S» دەپ ئاتىلىدىغان بىر بەت بار ، ئۇنى �
 #: src/Controllers/Database/EventsController.php:52
 #: src/Controllers/Database/ExportController.php:57
 #: src/Controllers/Database/ExportController.php:62
-#: src/Controllers/Database/ImportController.php:60
-#: src/Controllers/Database/ImportController.php:65
+#: src/Controllers/Database/ImportController.php:61
+#: src/Controllers/Database/ImportController.php:66
 #: src/Controllers/Database/RoutinesController.php:80
 #: src/Controllers/Database/RoutinesController.php:98
 #: src/Controllers/Database/SearchController.php:53
@@ -13365,8 +13365,8 @@ msgstr "«% S» دەپ ئاتىلىدىغان بىر بەت بار ، ئۇنى �
 #: src/Controllers/Table/FindReplaceController.php:80
 #: src/Controllers/Table/GisVisualizationController.php:65
 #: src/Controllers/Table/GisVisualizationController.php:70
-#: src/Controllers/Table/ImportController.php:69
-#: src/Controllers/Table/ImportController.php:74
+#: src/Controllers/Table/ImportController.php:70
+#: src/Controllers/Table/ImportController.php:75
 #: src/Controllers/Table/IndexesController.php:67
 #: src/Controllers/Table/IndexesController.php:74
 #: src/Controllers/Table/IndexRenameController.php:55
@@ -13379,8 +13379,8 @@ msgstr "«% S» دەپ ئاتىلىدىغان بىر بەت بار ، ئۇنى �
 #: src/Controllers/Table/StructureController.php:98
 #: src/Controllers/Table/Structure/PrimaryController.php:69
 #: src/Controllers/Table/Structure/PrimaryController.php:76
-#: src/Controllers/Table/TrackingController.php:68
-#: src/Controllers/Table/TrackingController.php:73
+#: src/Controllers/Table/TrackingController.php:69
+#: src/Controllers/Table/TrackingController.php:74
 #: src/Controllers/Table/ZoomSearchController.php:102
 #: src/Controllers/Table/ZoomSearchController.php:107
 #: src/Controllers/Triggers/IndexController.php:66
@@ -13438,9 +13438,9 @@ msgstr "سانداندا جەدۋەل يوق"
 msgid "Could not load export plugins, please check your installation!"
 msgstr "ئېكسپورت قىستۇرمىلىرىنى يۈكلىيەلمىدى ، قاچىلاشنى تەكشۈرۈپ بېقىڭ!"
 
-#: src/Controllers/Database/ImportController.php:75
-#: src/Controllers/Server/ImportController.php:60
-#: src/Controllers/Table/ImportController.php:99
+#: src/Controllers/Database/ImportController.php:76
+#: src/Controllers/Server/ImportController.php:61
+#: src/Controllers/Table/ImportController.php:100
 msgid "Could not load import plugins, please check your installation!"
 msgstr "قىستۇرمىلار كىرگۈزىشكە ئامالسىز، قاچىلانمىنى تەكشۈرۈپ بىقىڭ!"
 
@@ -13486,8 +13486,8 @@ msgstr "ئىشلەتكۈچىلەرنى باشقۇرۇش ھوقۇقىڭىز يو�
 #: src/Controllers/Table/DropColumnConfirmationController.php:68
 #: src/Controllers/Table/FindReplaceController.php:87
 #: src/Controllers/Table/FindReplaceController.php:92
-#: src/Controllers/Table/ImportController.php:81
-#: src/Controllers/Table/ImportController.php:86
+#: src/Controllers/Table/ImportController.php:82
+#: src/Controllers/Table/ImportController.php:87
 #: src/Controllers/Table/IndexesController.php:82
 #: src/Controllers/Table/IndexesController.php:87
 #: src/Controllers/Table/IndexRenameController.php:67
@@ -14216,12 +14216,12 @@ msgid "Other"
 msgstr "باشقىلىرى"
 
 #. l10n: Thousands separator
-#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:390
+#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:388
 msgid ","
 msgstr ","
 
 #. l10n: Decimal separator
-#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:388
+#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:386
 msgid "."
 msgstr "."
 
@@ -14320,27 +14320,27 @@ msgid "Bytes received"
 msgstr "بايت قوبۇل قىلىندى"
 
 #. l10n: shortcuts for Byte
-#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:308
+#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:306
 msgid "B"
 msgstr "بايت"
 
 #. l10n: shortcuts for Gigabyte
-#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:314
+#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:312
 msgid "GiB"
 msgstr "GB"
 
 #. l10n: shortcuts for Terabyte
-#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:316
+#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:314
 msgid "TiB"
 msgstr "TB"
 
 #. l10n: shortcuts for Petabyte
-#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:318
+#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:316
 msgid "PiB"
 msgstr "PiB"
 
 #. l10n: shortcuts for Exabyte
-#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:320
+#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:318
 msgid "EiB"
 msgstr "EB"
 
@@ -15677,67 +15677,67 @@ msgctxt "Month name"
 msgid "December"
 msgstr "12-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:500
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "1-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:501
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "2-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:502
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "3-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:503
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "4-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:504
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "باھار"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:505
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "6-ئاي"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:506
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "چىللە"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:507
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "تومۇز"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:508
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "مىزان"
 
-#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:509
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "ئوغۇز"
 
-#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:510
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "ئوغلاق"
 
-#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:511
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "كۆنەك"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:514
 #, fuzzy
 #| msgctxt "Short week day name"
 #| msgid "Sun"
@@ -15745,32 +15745,32 @@ msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "يەكشەنبە"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:515
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "دۈشەنبە"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:516
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "سەيشەنبە"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:517
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "چارشەنبە"
 
-#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:518
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "پەيشەنبە"
 
-#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:519
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "جۈمە"
 
-#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:520
 msgctxt "Short week day name for Saturday"
 msgid "Sat"
 msgstr "شەنبە"
@@ -17109,7 +17109,7 @@ msgstr ""
 
 #: src/Controllers/Table/Structure/PartitioningController.php:257
 #: src/Controllers/Table/Structure/SaveController.php:281
-#: src/Tracking/Tracking.php:731
+#: src/Tracking/Tracking.php:733
 #, fuzzy
 #| msgid "Query"
 msgid "Query error"
@@ -17128,23 +17128,23 @@ msgid ""
 "Table %1$s has been altered successfully. Privileges have been adjusted."
 msgstr "%s كۆرۈنمە ئۆچۈرۈلدى"
 
-#: src/Controllers/Table/TrackingController.php:90
+#: src/Controllers/Table/TrackingController.php:91
 #, fuzzy, php-format
 #| msgid "Tracking is active."
 msgid "Tracking of %s is activated."
 msgstr "ئاكتىپ ئىزلاش"
 
-#: src/Controllers/Table/TrackingController.php:143
+#: src/Controllers/Table/TrackingController.php:144
 msgid "SQL statements executed."
 msgstr "SQL جۈملىلىرى ئىجرا قىلىندى."
 
-#: src/Controllers/Table/TrackingController.php:197
+#: src/Controllers/Table/TrackingController.php:198
 #, fuzzy
 #| msgid "Database %s has been dropped."
 msgid "Tracking versions deleted successfully."
 msgstr "ساندان %s ئۆچۈرۈلدى."
 
-#: src/Controllers/Table/TrackingController.php:202
+#: src/Controllers/Table/TrackingController.php:203
 #, fuzzy
 #| msgid "With selected:"
 msgid "No versions selected."
@@ -17292,7 +17292,7 @@ msgstr "!خاتالىق:مۇناسىۋەت قۇشۇلمىغان."
 msgid "Internal relationship has been removed."
 msgstr ".ئىچكى ئۇلىنىش مۇاسىۋىتى قۇشۇلدى"
 
-#: src/Database/Designer.php:116
+#: src/Database/Designer.php:117
 #, fuzzy
 #| msgid "Could not load import plugins, please check your installation!"
 msgid "Could not load schema plugins, please check your installation!"
@@ -17311,7 +17311,7 @@ msgstr "تۆۋەندىكى سوئال مەغلۇپ بولدى: \"% s\""
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1013 src/Html/Generator.php:792
+#: src/Database/Routines.php:1013 src/Html/Generator.php:806
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -17970,28 +17970,34 @@ msgstr "سۈكۈتتىكى تاللاشلار بىلەن PHP ئىقتىدارى 
 msgid "password_hash() PHP function"
 msgstr "password_hash () PHP ئىقتىدارى"
 
-#: src/Html/Generator.php:503
+#: src/Html/Generator.php:507
 msgid "Skip Explain SQL"
 msgstr "SQL ئىزاھىىدىن ئاتلاش"
 
-#: src/Html/Generator.php:535
+#: src/Html/Generator.php:517
+#, fuzzy
+#| msgid "Skip Validate SQL"
+msgid "Skip Analyze SQL"
+msgstr "SQL دەلىللەشتىن ئاتلاش"
+
+#: src/Html/Generator.php:549
 #, fuzzy
 #| msgid "Without PHP Code"
 msgid "Without PHP code"
 msgstr "PHP كودى يوق"
 
-#: src/Html/Generator.php:620
+#: src/Html/Generator.php:634
 #, fuzzy
 #| msgid "Print view"
 msgctxt "Inline edit query"
 msgid "Edit inline"
 msgstr "بېسىپ كۆرسىتىش"
 
-#: src/Html/Generator.php:734
+#: src/Html/Generator.php:748
 msgid "Static analysis:"
 msgstr "تۇراقلىق تەھلىل:"
 
-#: src/Html/Generator.php:737
+#: src/Html/Generator.php:751
 #, fuzzy, php-format
 msgid "%d errors were found during analysis."
 msgstr "تەھلىل جەريانىدا% d خاتالىق بايقالدى."
@@ -18176,7 +18182,7 @@ msgstr ""
 msgid "%1$s (near <code>%2$s</code>)"
 msgstr "% 1 $ s (<code>% 2 $ s </code> غا يېقىن)"
 
-#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1387 src/Util.php:1401
+#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1385 src/Util.php:1399
 msgid "Tracking"
 msgstr "ئىز قۇغلاش"
 
@@ -18184,7 +18190,7 @@ msgstr "ئىز قۇغلاش"
 msgid "Database seems to be empty!"
 msgstr "سانلىق مەلۇمات ئامبىرى قۇرۇق!"
 
-#: src/Menu.php:402 src/Util.php:1388
+#: src/Menu.php:402 src/Util.php:1386
 msgid "Designer"
 msgstr "لايىھەلىگۈچ"
 
@@ -18192,11 +18198,11 @@ msgstr "لايىھەلىگۈچ"
 msgid "User accounts"
 msgstr "ئىشلەتكۈچى ھېساباتى"
 
-#: src/Menu.php:512 src/Util.php:1371
+#: src/Menu.php:512 src/Util.php:1369
 msgid "Charsets"
 msgstr "Charsets"
 
-#: src/Menu.php:517 src/Util.php:1373
+#: src/Menu.php:517 src/Util.php:1371
 msgid "Engines"
 msgstr "ماتور"
 
@@ -19406,7 +19412,7 @@ msgstr "نۆل قىممەت ئۈچۈن <code> AUTO_INCREMENT </code> نى ئىش
 msgid "XML"
 msgstr "XML"
 
-#: src/Plugins.php:600
+#: src/Plugins.php:405
 msgid "This format has no options"
 msgstr "بۇ فورماتنىڭ تاللىشى يوق"
 
@@ -19531,7 +19537,7 @@ msgstr ""
 
 #. l10n: See https://www.php.net/manual/en/function.strftime.php
 #: src/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php:129
-#: src/Util.php:527
+#: src/Util.php:525
 msgid "%B %d, %Y at %I:%M %p"
 msgstr "%يىل %ئاي %كۈن %سائەت:%مىنۇت"
 
@@ -20305,53 +20311,53 @@ msgstr "سانلىق مەلۇمات ئېنىقلىمىسى"
 msgid "Data manipulation statement"
 msgstr "سانلىق مەلۇماتلارنى كونترول قىلىش باياناتى"
 
-#: src/Tracking/Tracking.php:203
+#: src/Tracking/Tracking.php:204
 msgid "Tracking statements"
 msgstr "ئىز قوغلاش بايانلىرى"
 
-#: src/Tracking/Tracking.php:219
+#: src/Tracking/Tracking.php:220
 #, fuzzy
 #| msgid "Delete tracking data for this table"
 msgid "Delete tracking data row from report"
 msgstr "سانلىق مەلۇماتنى ئىزقوغلاپ ئۈچۈرۈش"
 
-#: src/Tracking/Tracking.php:229
+#: src/Tracking/Tracking.php:230
 msgid "No data"
 msgstr "سانلىق مەلۇمات يوق"
 
-#: src/Tracking/Tracking.php:290
+#: src/Tracking/Tracking.php:291
 #, fuzzy, php-format
 msgid "Show %1$s with dates from %2$s to %3$s by user %4$s %5$s"
 msgstr ""
 "% 1 $ s نى% 2 $ s دىن% 3 $ s غىچە ئىشلەتكۈچىلەر% 4 $ s% 5 $ s كۆرسىتىدۇ"
 
-#: src/Tracking/Tracking.php:393
+#: src/Tracking/Tracking.php:394
 msgid "SQL dump (file download)"
 msgstr "SQL تۆكۈش (ھۆججەت چۈشۈرۈش)"
 
-#: src/Tracking/Tracking.php:395
+#: src/Tracking/Tracking.php:396
 msgid "SQL dump"
 msgstr "SQL تۆكۈش"
 
-#: src/Tracking/Tracking.php:398
+#: src/Tracking/Tracking.php:399
 msgid "This option will replace your table and contained data."
 msgstr "بۇ تاللاش جەدۋىلىڭىزنى ۋە سانلىق مەلۇماتلارنى ئۆز ئىچىگە ئالىدۇ."
 
-#: src/Tracking/Tracking.php:400
+#: src/Tracking/Tracking.php:401
 msgid "SQL execution"
 msgstr "SQL ئىجرا"
 
-#: src/Tracking/Tracking.php:404
+#: src/Tracking/Tracking.php:405
 #, fuzzy, php-format
 msgid "Export as %s"
 msgstr "ئېكسپورت% s"
 
-#: src/Tracking/Tracking.php:557
+#: src/Tracking/Tracking.php:558
 #, fuzzy, php-format
 msgid "Version %s snapshot (SQL code)"
 msgstr "نەشىرى% s رەسىمگە تارتىش (SQL كودى)"
 
-#: src/Tracking/Tracking.php:790
+#: src/Tracking/Tracking.php:792
 msgid ""
 "You can execute the dump by creating and using a temporary database. Please "
 "ensure that you have the privileges to do so."
@@ -20359,39 +20365,39 @@ msgstr ""
 "ۋاقىتلىق ساندان قۇرۇش ۋە ئىشلىتىش ئارقىلىق ئەخلەت ساندۇقىنى ئىجرا "
 "قىلالايسىز. بۇنداق قىلىش ئىمتىيازىڭىزغا كاپالەتلىك قىلىڭ."
 
-#: src/Tracking/Tracking.php:794
+#: src/Tracking/Tracking.php:796
 msgid "Comment out these two lines if you do not need them."
 msgstr "ئەگەر بۇ ئىككى قۇرغا ئېھتىياجلىق بولمىسىڭىز باھا بېرىڭ."
 
-#: src/Tracking/Tracking.php:805
+#: src/Tracking/Tracking.php:807
 msgid "SQL statements exported. Please copy the dump or execute it."
 msgstr ""
 "SQL باياناتى ئېكىسپورت قىلىندى. ئەخلەت ساندۇقىنى كۆچۈرۈڭ ياكى ئىجرا قىلىڭ."
 
-#: src/Tracking/Tracking.php:838
+#: src/Tracking/Tracking.php:840
 #, fuzzy, php-format
 msgid "Tracking report for table `%s`"
 msgstr "جەدۋەل `% s` نىڭ ئىز قوغلاش دوكلاتى"
 
-#: src/Tracking/Tracking.php:861
+#: src/Tracking/Tracking.php:863
 #, fuzzy, php-format
 #| msgid "Tracking is active."
 msgid "Tracking for %1$s was activated at version %2$s."
 msgstr "ئاكتىپ ئىزلاش"
 
-#: src/Tracking/Tracking.php:864
+#: src/Tracking/Tracking.php:866
 #, fuzzy, php-format
 #| msgid "Tracking is active."
 msgid "Tracking for %1$s was deactivated at version %2$s."
 msgstr "ئاكتىپ ئىزلاش"
 
-#: src/Tracking/Tracking.php:959
+#: src/Tracking/Tracking.php:961
 #, fuzzy, php-format
 #| msgid "Create version"
 msgid "Version %1$s of %2$s was deleted."
 msgstr "نەشىرنى قۇىماق"
 
-#: src/Tracking/Tracking.php:990
+#: src/Tracking/Tracking.php:992
 #, fuzzy, php-format
 msgid "Version %1$s was created, tracking for %2$s is active."
 msgstr "% 1 $ s نەشرى قۇرۇلدى ،% 2 $ s نى ئىز قوغلاش ئاكتىپ."
@@ -20788,27 +20794,27 @@ msgstr "ئارخىپ يېڭىلاندى."
 msgid "Password is too long!"
 msgstr "پارول ھېسابلاش"
 
-#: src/Util.php:130
+#: src/Util.php:129
 #, php-format
 msgid "Max: %s%s"
 msgstr "ئەڭ چوڭ:%s%s"
 
-#: src/Util.php:536
+#: src/Util.php:534
 msgctxt "AM/PM indication in time"
 msgid "PM"
 msgstr "PM"
 
-#: src/Util.php:538
+#: src/Util.php:536
 msgctxt "AM/PM indication in time"
 msgid "AM"
 msgstr "AM"
 
-#: src/Util.php:611
+#: src/Util.php:609
 #, php-format
 msgid "%s days, %s hours, %s minutes and %s seconds"
 msgstr "%s كۈن, %s سائەت, %s مىنىۇ ۋە %s سېكوند"
 
-#: src/Util.php:1364
+#: src/Util.php:1362
 msgid "Users"
 msgstr "ئىشلەتكۈچى"
 
@@ -21611,9 +21617,6 @@ msgstr "ZIP ئارخىپى ئىچىدە ھۆججەت تېپىلمىدى!"
 #~ msgstr ""
 #~ "كۆزنەكنى يىڭىلاشقا ئامالسىز،سىز بەلكەم باش كۆزنەكنى تاقىۋەتكەن بۇلىشىڭىز "
 #~ "ياكى تور كۆرەۈچىڭىزنىڭ بىخەتەرلىك تەڭشىكى تسقۇنلۇق قىلغان بۇلىشى مۇمكىن."
-
-#~ msgid "Skip Validate SQL"
-#~ msgstr "SQL دەلىللەشتىن ئاتلاش"
 
 #~ msgid "Validate SQL"
 #~ msgstr "SQL دەلىللەش"

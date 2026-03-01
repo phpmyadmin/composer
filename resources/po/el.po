@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-02-25 13:54+0000\n"
+"POT-Creation-Date: 2026-03-01 00:40+0000\n"
 "PO-Revision-Date: 2026-01-03 06:36+0000\n"
 "Last-Translator: liviuconcioiu <liviu.concioiu@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -57,7 +57,7 @@ msgstr "Σκοτεινό"
 #: resources/templates/base.twig:99
 #: resources/templates/server/status/monitor/index.twig:8
 #: src/Controllers/JavaScriptMessagesController.php:215 src/Menu.php:479
-#: src/Util.php:1367
+#: src/Util.php:1365
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -277,8 +277,8 @@ msgstr "στήλη(ες)"
 #: resources/templates/view_create.twig:123 src/BrowseForeigners.php:180
 #: src/Controllers/JavaScriptMessagesController.php:311
 #: src/Controllers/Server/PrivilegesController.php:314
-#: src/Normalization.php:235 src/Tracking/Tracking.php:287
-#: src/Tracking/Tracking.php:402
+#: src/Normalization.php:235 src/Tracking/Tracking.php:288
+#: src/Tracking/Tracking.php:403
 msgid "Go"
 msgstr "Εκτέλεση"
 
@@ -445,7 +445,7 @@ msgstr "Φόρτωση…"
 #: resources/templates/triggers/list.twig:102
 #: resources/templates/triggers/list.twig:106
 #: src/Controllers/JavaScriptMessagesController.php:154
-#: src/Tracking/Tracking.php:200 src/Tracking/Tracking.php:540
+#: src/Tracking/Tracking.php:201 src/Tracking/Tracking.php:541
 msgid "Close"
 msgstr "Κλείσιμο"
 
@@ -587,8 +587,8 @@ msgstr "Κόμβος ομάδας"
 #: src/Import/Import.php:1157 src/Menu.php:214 src/Menu.php:322
 #: src/Navigation/Nodes/NodeColumn.php:38
 #: src/Navigation/Nodes/NodeDatabase.php:59
-#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1063 src/Util.php:1376
-#: src/Util.php:1393
+#: src/Navigation/Nodes/NodeTable.php:239 src/Util.php:1061 src/Util.php:1374
+#: src/Util.php:1391
 msgid "Structure"
 msgstr "Δομή"
 
@@ -852,7 +852,7 @@ msgstr "Επαναφορά"
 #: resources/templates/server/variables/index.twig:17
 #: resources/templates/setup/home/index.twig:116
 #: resources/templates/setup/home/index.twig:134 src/Engines/Pbxt.php:167
-#: src/Html/Generator.php:671 src/Html/MySQLDocumentation.php:51
+#: src/Html/Generator.php:685 src/Html/MySQLDocumentation.php:51
 #: src/Sanitize.php:188
 msgid "Documentation"
 msgstr "Τεκμηρίωση"
@@ -1024,8 +1024,8 @@ msgstr "Επανερώτημα"
 #: resources/templates/triggers/row.twig:31 src/Config/Descriptions.php:926
 #: src/ConfigStorage/UserGroups.php:113
 #: src/Controllers/JavaScriptMessagesController.php:379
-#: src/Display/Results.php:1876 src/Html/Generator.php:519
-#: src/Html/Generator.php:776
+#: src/Display/Results.php:1876 src/Html/Generator.php:533
+#: src/Html/Generator.php:790
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -1043,7 +1043,7 @@ msgstr "Επεξεργασία"
 #: resources/templates/setup/home/index.twig:69
 #: resources/templates/sql/query.twig:189
 #: src/Controllers/JavaScriptMessagesController.php:381
-#: src/Display/Results.php:2414 src/Tracking/Tracking.php:224
+#: src/Display/Results.php:2414 src/Tracking/Tracking.php:225
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -1136,7 +1136,7 @@ msgstr "Εξήγηση"
 
 #: resources/templates/console/display.twig:55
 #: resources/templates/console/display.twig:213
-#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:606
+#: resources/templates/sql/profiling_chart.twig:3 src/Html/Generator.php:620
 msgid "Profiling"
 msgstr "Δημιουργία προφίλ"
 
@@ -1218,7 +1218,7 @@ msgstr "Χρόνος που παρήλθε:"
 #: resources/templates/server/status/processes/index.twig:19
 #: resources/templates/server/status/variables/index.twig:42
 #: src/Config/Descriptions.php:928 src/Export/Export.php:692
-#: src/Html/Generator.php:575
+#: src/Html/Generator.php:589
 msgid "Refresh"
 msgstr "Ανανέωση"
 
@@ -1782,7 +1782,7 @@ msgstr "Όνομα συμβάντος"
 #: resources/templates/table/tracking/main.twig:31
 #: src/Config/ConfigFile.php:578
 #: src/Controllers/JavaScriptMessagesController.php:275 src/Menu.php:450
-#: src/Server/Status/Processes.php:106 src/Util.php:1363
+#: src/Server/Status/Processes.php:106 src/Util.php:1361
 msgid "Status"
 msgstr "Κατάσταση"
 
@@ -1850,7 +1850,7 @@ msgstr "Οριστής"
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
 #: src/Plugins/Export/ExportSql.php:984 src/Plugins/Export/ExportXml.php:93
-#: src/Util.php:1385
+#: src/Util.php:1383
 msgid "Events"
 msgstr "Συμβάντα"
 
@@ -1912,7 +1912,7 @@ msgstr "Επιλογή όλων"
 #: src/Config/Forms/User/ExportForm.php:148
 #: src/Controllers/JavaScriptMessagesController.php:361 src/Menu.php:241
 #: src/Menu.php:347 src/Menu.php:469 src/Server/Privileges.php:1301
-#: src/Util.php:1365 src/Util.php:1380 src/Util.php:1397
+#: src/Util.php:1363 src/Util.php:1378 src/Util.php:1395
 msgid "Export"
 msgstr "Εξαγωγή"
 
@@ -2101,7 +2101,7 @@ msgid "criteria"
 msgstr "κριτήρια"
 
 #: resources/templates/database/multi_table_query/form.twig:56
-#: src/Util.php:1635
+#: src/Util.php:1623
 msgid "Sort"
 msgstr "Ταξινόμηση"
 
@@ -2113,7 +2113,7 @@ msgstr "Ταξινόμηση"
 #: resources/templates/table/operations/index.twig:28
 #: resources/templates/table/search/index.twig:158
 #: src/Config/ConfigFile.php:554 src/Display/Results.php:1391
-#: src/Display/Results.php:1397 src/Util.php:1643 src/Util.php:1660
+#: src/Display/Results.php:1397 src/Util.php:1631 src/Util.php:1648
 msgid "Ascending"
 msgstr "Αύξουσα"
 
@@ -2125,7 +2125,7 @@ msgstr "Αύξουσα"
 #: resources/templates/table/operations/index.twig:32
 #: resources/templates/table/search/index.twig:162
 #: src/Config/ConfigFile.php:554 src/Display/Results.php:1386
-#: src/Display/Results.php:1402 src/Util.php:1648 src/Util.php:1665
+#: src/Display/Results.php:1402 src/Util.php:1636 src/Util.php:1653
 msgid "Descending"
 msgstr "Φθίνουσα"
 
@@ -2165,7 +2165,7 @@ msgid "Copy query"
 msgstr "Αντιγραφή ερωτήματος"
 
 #: resources/templates/database/multi_table_query/form.twig:176
-#: src/Html/Generator.php:544
+#: src/Html/Generator.php:558
 msgid "Submit query"
 msgstr "Υποβολή ερωτήματος"
 
@@ -2226,21 +2226,21 @@ msgstr "Όνομα βάσης δεδομένων"
 #: resources/templates/database/operations/index.twig:132
 #: resources/templates/database/structure/copy_form.twig:21
 #: resources/templates/table/operations/index.twig:283
-#: src/Tracking/Tracking.php:272
+#: src/Tracking/Tracking.php:273
 msgid "Structure only"
 msgstr "Μόνο η δομή"
 
 #: resources/templates/database/operations/index.twig:138
 #: resources/templates/database/structure/copy_form.twig:17
 #: resources/templates/table/operations/index.twig:289
-#: src/Tracking/Tracking.php:278
+#: src/Tracking/Tracking.php:279
 msgid "Structure and data"
 msgstr "Δομή και δεδομένα"
 
 #: resources/templates/database/operations/index.twig:144
 #: resources/templates/database/structure/copy_form.twig:25
 #: resources/templates/table/operations/index.twig:295
-#: src/Tracking/Tracking.php:275
+#: src/Tracking/Tracking.php:276
 msgid "Data only"
 msgstr "Μόνο τα δεδομένα"
 
@@ -2314,7 +2314,7 @@ msgstr "Όνομασία φιλοξενητή"
 #: resources/templates/table/privileges/index.twig:22
 #: src/Config/ConfigFile.php:582
 #: src/Controllers/Server/PrivilegesController.php:439 src/Menu.php:257
-#: src/Menu.php:369 src/Util.php:1383 src/Util.php:1399
+#: src/Menu.php:369 src/Util.php:1381 src/Util.php:1397
 msgid "Privileges"
 msgstr "Δικαιώματα"
 
@@ -2472,7 +2472,7 @@ msgid "This routine does not require any parameters."
 msgstr "Αυτή η ρουτίνα δεν απαιτεί καμία παράμετρο."
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
-#: src/Util.php:1384
+#: src/Util.php:1382
 msgid "Routines"
 msgstr "Εργασίες"
 
@@ -2484,8 +2484,8 @@ msgstr "Εργασίες"
 #: resources/templates/server/databases/index.twig:77
 #: src/Config/ConfigFile.php:522 src/Config/ConfigFile.php:536
 #: src/Config/ConfigFile.php:590 src/Config/ConfigFile.php:600 src/Menu.php:223
-#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1065
-#: src/Util.php:1378 src/Util.php:1395
+#: src/Menu.php:331 src/Navigation/Nodes/NodeTable.php:240 src/Util.php:1063
+#: src/Util.php:1376 src/Util.php:1393
 msgid "Search"
 msgstr "Αναζήτηση"
 
@@ -2599,7 +2599,7 @@ msgstr[1] "%1$s αποτελέσματα στο <strong>%2$s</strong>"
 #: resources/templates/table/structure/display_structure.twig:271
 #: src/Config/ConfigFile.php:526 src/Config/ConfigFile.php:540
 #: src/Config/ConfigFile.php:604 src/Menu.php:207
-#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1067 src/Util.php:1392
+#: src/Navigation/Nodes/NodeTable.php:243 src/Util.php:1065 src/Util.php:1390
 msgid "Browse"
 msgstr "Περιήγηση"
 
@@ -2624,7 +2624,7 @@ msgstr[1] "%s πίνακες"
 #: resources/templates/database/structure/body_for_table_summary.twig:8
 #: resources/templates/database/structure/table_header.twig:10
 #: resources/templates/server/replication/index.twig:5 src/Menu.php:501
-#: src/Server/Status/Data.php:124 src/Util.php:1369
+#: src/Server/Status/Data.php:124 src/Util.php:1367
 msgid "Replication"
 msgstr "Αναπαραγωγή"
 
@@ -2730,7 +2730,7 @@ msgid "Copy table with prefix"
 msgstr "Αντιγραφή πίνακα με πρόθεμα"
 
 #: resources/templates/database/structure/check_all_tables.twig:32
-#: src/Menu.php:409 src/Util.php:1389
+#: src/Menu.php:409 src/Util.php:1387
 msgid "Central columns"
 msgstr "Κεντρικές στήλες"
 
@@ -2877,7 +2877,7 @@ msgstr "Αναπαραγμένο"
 #: resources/templates/database/structure/structure_table_row.twig:59
 #: resources/templates/sql/query.twig:76 src/Config/ConfigFile.php:524
 #: src/Config/ConfigFile.php:538 src/Config/ConfigFile.php:602 src/Menu.php:234
-#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1066 src/Util.php:1396
+#: src/Navigation/Nodes/NodeTable.php:241 src/Util.php:1064 src/Util.php:1394
 msgid "Insert"
 msgstr "Προσθήκη"
 
@@ -2984,13 +2984,13 @@ msgstr "Εκδόσεις"
 
 #: resources/templates/database/tracking/tables.twig:115
 #: resources/templates/table/tracking/main.twig:73
-#: src/Tracking/Tracking.php:199
+#: src/Tracking/Tracking.php:200
 msgid "Tracking report"
 msgstr "Αναφορά παρακολούθησης"
 
 #: resources/templates/database/tracking/tables.twig:126
 #: resources/templates/table/tracking/main.twig:80
-#: src/Tracking/Tracking.php:539
+#: src/Tracking/Tracking.php:540
 msgid "Structure snapshot"
 msgstr "Στιγμιότυπο δομής"
 
@@ -3180,7 +3180,7 @@ msgstr "Μετατροπή σε Kana"
 #: src/Controllers/Table/Partition/DropController.php:56
 #: src/Controllers/Table/Partition/RebuildController.php:56
 #: src/Controllers/Table/Partition/TruncateController.php:56
-#: src/Html/Generator.php:727 src/Import/Import.php:122 src/InsertEdit.php:423
+#: src/Html/Generator.php:741 src/Import/Import.php:122 src/InsertEdit.php:423
 #: src/Message.php:138
 msgid "Error"
 msgstr "Σφάλμα"
@@ -3261,7 +3261,7 @@ msgstr "Ενημέρωση"
 #. l10n: Title of the option on the Export page
 #: resources/templates/export.twig:68
 #: src/Controllers/JavaScriptMessagesController.php:134
-#: src/Html/Generator.php:751
+#: src/Html/Generator.php:765
 msgid "SQL query:"
 msgstr "Εντολή SQL:"
 
@@ -3689,7 +3689,7 @@ msgstr "Πάρτε το"
 #: resources/templates/import_status.twig:2
 #: resources/templates/user_password.twig:2
 #: src/Controllers/JavaScriptMessagesController.php:411
-#: src/Export/Export.php:734 src/Html/Generator.php:835
+#: src/Export/Export.php:734 src/Html/Generator.php:849
 #: src/Plugins/Schema/ExportRelationSchema.php:266
 msgid "Back"
 msgstr "Επιστροφή"
@@ -3700,7 +3700,7 @@ msgstr "Επιστροφή"
 #: resources/templates/server/status/monitor/index.twig:53
 #: resources/templates/server/status/monitor/index.twig:69
 #: src/Config/Forms/User/ImportForm.php:58 src/Menu.php:250 src/Menu.php:357
-#: src/Menu.php:474 src/Util.php:1366 src/Util.php:1381 src/Util.php:1398
+#: src/Menu.php:474 src/Util.php:1364 src/Util.php:1379 src/Util.php:1396
 msgid "Import"
 msgstr "Εισαγωγή"
 
@@ -4074,7 +4074,7 @@ msgstr "Αποστολή SQL"
 #: resources/templates/server/export/index.twig:14
 #: resources/templates/server/privileges/user_properties.twig:20
 #: src/Config/ConfigFile.php:576 src/Config/Descriptions.php:728
-#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1361
+#: src/Config/Descriptions.php:739 src/Menu.php:440 src/Util.php:1359
 msgid "Databases"
 msgstr "Βάσεις δεδομένων"
 
@@ -4573,7 +4573,7 @@ msgstr ""
 "ρυθμίσεων."
 
 #: resources/templates/server/binlog/index.twig:3 src/Menu.php:494
-#: src/Server/Status/Data.php:119 src/Util.php:1368
+#: src/Server/Status/Data.php:119 src/Util.php:1366
 msgid "Binary log"
 msgstr "Δυαδικό αρχείο καταγραφής"
 
@@ -4785,7 +4785,7 @@ msgstr "Αναμονές εγγραφής σε ποσοστό"
 #: resources/templates/server/engines/show.twig:18
 #: resources/templates/server/engines/show.twig:21
 #: resources/templates/sql/query.twig:194 src/Config/ConfigFile.php:580
-#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1370
+#: src/Menu.php:507 src/Server/Status/Data.php:186 src/Util.php:1368
 msgid "Variables"
 msgstr "Μεταβλητές"
 
@@ -4806,7 +4806,7 @@ msgid "Importing into the current server"
 msgstr "Εισαγωγή στον τρέχοντα διακομιστή"
 
 #: resources/templates/server/plugins/index.twig:4 src/Menu.php:522
-#: src/Util.php:1372
+#: src/Util.php:1370
 msgid "Plugins"
 msgstr "Πρόσθετα"
 
@@ -6142,13 +6142,13 @@ msgstr "Εφαρμογή διαιρέτη"
 
 #. l10n: shortcuts for Kilobyte
 #: resources/templates/server/status/monitor/index.twig:181
-#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:310
+#: src/Controllers/JavaScriptMessagesController.php:204 src/Util.php:308
 msgid "KiB"
 msgstr "KB"
 
 #. l10n: shortcuts for Megabyte
 #: resources/templates/server/status/monitor/index.twig:182
-#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:312
+#: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:310
 msgid "MiB"
 msgstr "MB"
 
@@ -6212,7 +6212,7 @@ msgid "Query analyzer"
 msgstr "Αναλυτής ερωτήματος"
 
 #: resources/templates/server/status/monitor/index.twig:273 src/Menu.php:339
-#: src/Util.php:1379
+#: src/Util.php:1377
 msgid "Query"
 msgstr "Επερώτημα κατά παράδειγμα"
 
@@ -7253,7 +7253,7 @@ msgstr "Έλεγχος αναφορικής ακεραιότητας"
 
 #: resources/templates/table/operations/view.twig:8
 #: src/Config/ConfigFile.php:592 src/Menu.php:268 src/Menu.php:278
-#: src/Menu.php:362 src/Util.php:1068 src/Util.php:1382 src/Util.php:1400
+#: src/Menu.php:362 src/Util.php:1066 src/Util.php:1380 src/Util.php:1398
 msgid "Operations"
 msgstr "Λειτουργίες"
 
@@ -7728,7 +7728,7 @@ msgstr "Εξαγωγή της ενέργειας %s"
 #: src/Plugins/Export/ExportOdt.php:571 src/Plugins/Export/ExportPdf.php:174
 #: src/Plugins/Export/ExportSql.php:1855
 #: src/Plugins/Export/ExportTexytext.php:410
-#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1386 src/Util.php:1402
+#: src/Plugins/Export/ExportXml.php:113 src/Util.php:1384 src/Util.php:1400
 msgid "Triggers"
 msgstr "Δείκτες"
 
@@ -9403,8 +9403,8 @@ msgstr "Βιετναμέζικα"
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
 #: src/Config/ConfigFile.php:588 src/Config/ConfigFile.php:598
 #: src/Config/Descriptions.php:755 src/Menu.php:219 src/Menu.php:327
-#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1064
-#: src/Util.php:1362 src/Util.php:1377 src/Util.php:1394
+#: src/Menu.php:445 src/Navigation/Nodes/NodeTable.php:242 src/Util.php:1062
+#: src/Util.php:1360 src/Util.php:1375 src/Util.php:1392
 msgid "SQL"
 msgstr "Κώδικας SQL"
 
@@ -11965,11 +11965,11 @@ msgstr "Εμφάνιση στατιστικών"
 msgid "Skip locked tables"
 msgstr "Παράβλεψη κλειδωμένων πινάκων"
 
-#: src/Config/Descriptions.php:927 src/Html/Generator.php:494
+#: src/Config/Descriptions.php:927 src/Html/Generator.php:498
 msgid "Explain SQL"
 msgstr "Ανάλυση SQL"
 
-#: src/Config/Descriptions.php:929 src/Html/Generator.php:555
+#: src/Config/Descriptions.php:929 src/Html/Generator.php:569
 msgid "Create PHP code"
 msgstr "Δημιουργία κώδικα PHP"
 
@@ -12517,8 +12517,8 @@ msgstr "Υπάρχει ήδη σελίδα με το όνομα «%s», μετο
 #: src/Controllers/Database/EventsController.php:52
 #: src/Controllers/Database/ExportController.php:57
 #: src/Controllers/Database/ExportController.php:62
-#: src/Controllers/Database/ImportController.php:60
-#: src/Controllers/Database/ImportController.php:65
+#: src/Controllers/Database/ImportController.php:61
+#: src/Controllers/Database/ImportController.php:66
 #: src/Controllers/Database/RoutinesController.php:80
 #: src/Controllers/Database/RoutinesController.php:98
 #: src/Controllers/Database/SearchController.php:53
@@ -12557,8 +12557,8 @@ msgstr "Υπάρχει ήδη σελίδα με το όνομα «%s», μετο
 #: src/Controllers/Table/FindReplaceController.php:80
 #: src/Controllers/Table/GisVisualizationController.php:65
 #: src/Controllers/Table/GisVisualizationController.php:70
-#: src/Controllers/Table/ImportController.php:69
-#: src/Controllers/Table/ImportController.php:74
+#: src/Controllers/Table/ImportController.php:70
+#: src/Controllers/Table/ImportController.php:75
 #: src/Controllers/Table/IndexesController.php:67
 #: src/Controllers/Table/IndexesController.php:74
 #: src/Controllers/Table/IndexRenameController.php:55
@@ -12571,8 +12571,8 @@ msgstr "Υπάρχει ήδη σελίδα με το όνομα «%s», μετο
 #: src/Controllers/Table/StructureController.php:98
 #: src/Controllers/Table/Structure/PrimaryController.php:69
 #: src/Controllers/Table/Structure/PrimaryController.php:76
-#: src/Controllers/Table/TrackingController.php:68
-#: src/Controllers/Table/TrackingController.php:73
+#: src/Controllers/Table/TrackingController.php:69
+#: src/Controllers/Table/TrackingController.php:74
 #: src/Controllers/Table/ZoomSearchController.php:102
 #: src/Controllers/Table/ZoomSearchController.php:107
 #: src/Controllers/Triggers/IndexController.php:66
@@ -12627,9 +12627,9 @@ msgid "Could not load export plugins, please check your installation!"
 msgstr ""
 "Αδύνατη η φόρτωση προσθέτων εξαγωγής, για αυτό εξέξτε την εγκατάστασή σας!"
 
-#: src/Controllers/Database/ImportController.php:75
-#: src/Controllers/Server/ImportController.php:60
-#: src/Controllers/Table/ImportController.php:99
+#: src/Controllers/Database/ImportController.php:76
+#: src/Controllers/Server/ImportController.php:61
+#: src/Controllers/Table/ImportController.php:100
 msgid "Could not load import plugins, please check your installation!"
 msgstr ""
 "Αδύνατη η φόρτωση προσθέτων εισαγωγής, για αυτό ελέξτε την εγκατάστασή σας!"
@@ -12676,8 +12676,8 @@ msgstr "Δεν έχετε τα δικαιώματα για να διαχειρι
 #: src/Controllers/Table/DropColumnConfirmationController.php:68
 #: src/Controllers/Table/FindReplaceController.php:87
 #: src/Controllers/Table/FindReplaceController.php:92
-#: src/Controllers/Table/ImportController.php:81
-#: src/Controllers/Table/ImportController.php:86
+#: src/Controllers/Table/ImportController.php:82
+#: src/Controllers/Table/ImportController.php:87
 #: src/Controllers/Table/IndexesController.php:82
 #: src/Controllers/Table/IndexesController.php:87
 #: src/Controllers/Table/IndexRenameController.php:67
@@ -13331,12 +13331,12 @@ msgid "Other"
 msgstr "Άλλα"
 
 #. l10n: Thousands separator
-#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:390
+#: src/Controllers/JavaScriptMessagesController.php:169 src/Util.php:388
 msgid ","
 msgstr "."
 
 #. l10n: Decimal separator
-#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:388
+#: src/Controllers/JavaScriptMessagesController.php:171 src/Util.php:386
 msgid "."
 msgstr ","
 
@@ -13423,27 +13423,27 @@ msgid "Bytes received"
 msgstr "Ληφθέντα Bytes"
 
 #. l10n: shortcuts for Byte
-#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:308
+#: src/Controllers/JavaScriptMessagesController.php:203 src/Util.php:306
 msgid "B"
 msgstr "B"
 
 #. l10n: shortcuts for Gigabyte
-#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:314
+#: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:312
 msgid "GiB"
 msgstr "GB"
 
 #. l10n: shortcuts for Terabyte
-#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:316
+#: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:314
 msgid "TiB"
 msgstr "TB"
 
 #. l10n: shortcuts for Petabyte
-#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:318
+#: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:316
 msgid "PiB"
 msgstr "PB"
 
 #. l10n: shortcuts for Exabyte
-#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:320
+#: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:318
 msgid "EiB"
 msgstr "EB"
 
@@ -14660,131 +14660,131 @@ msgctxt "Month name"
 msgid "December"
 msgstr "Δεκεμβρίου"
 
-#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:502
+#: src/Controllers/JavaScriptMessagesController.php:712 src/Util.php:500
 #, fuzzy
 #| msgid "Jan"
 msgctxt "Short month name for January"
 msgid "Jan"
 msgstr "Ιαν"
 
-#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:503
+#: src/Controllers/JavaScriptMessagesController.php:713 src/Util.php:501
 #, fuzzy
 #| msgid "Feb"
 msgctxt "Short month name for February"
 msgid "Feb"
 msgstr "Φεβ"
 
-#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:504
+#: src/Controllers/JavaScriptMessagesController.php:714 src/Util.php:502
 #, fuzzy
 #| msgid "Mar"
 msgctxt "Short month name for March"
 msgid "Mar"
 msgstr "Μαρ"
 
-#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:505
+#: src/Controllers/JavaScriptMessagesController.php:715 src/Util.php:503
 #, fuzzy
 #| msgid "Apr"
 msgctxt "Short month name for April"
 msgid "Apr"
 msgstr "Απρ"
 
-#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:506
+#: src/Controllers/JavaScriptMessagesController.php:716 src/Util.php:504
 #, fuzzy
 #| msgid "May"
 msgctxt "Short month name for May"
 msgid "May"
 msgstr "Μαΐου"
 
-#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:507
+#: src/Controllers/JavaScriptMessagesController.php:717 src/Util.php:505
 #, fuzzy
 #| msgid "Jun"
 msgctxt "Short month name for June"
 msgid "Jun"
 msgstr "Ιουν"
 
-#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:508
+#: src/Controllers/JavaScriptMessagesController.php:718 src/Util.php:506
 #, fuzzy
 #| msgid "Jul"
 msgctxt "Short month name for July"
 msgid "Jul"
 msgstr "Ιουλ"
 
-#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:509
+#: src/Controllers/JavaScriptMessagesController.php:719 src/Util.php:507
 #, fuzzy
 #| msgid "Aug"
 msgctxt "Short month name for August"
 msgid "Aug"
 msgstr "Αυγ"
 
-#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:510
+#: src/Controllers/JavaScriptMessagesController.php:720 src/Util.php:508
 #, fuzzy
 #| msgid "Sep"
 msgctxt "Short month name for September"
 msgid "Sep"
 msgstr "Σεπ"
 
-#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:511
+#: src/Controllers/JavaScriptMessagesController.php:721 src/Util.php:509
 #, fuzzy
 #| msgid "Oct"
 msgctxt "Short month name for October"
 msgid "Oct"
 msgstr "Οκτ"
 
-#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:512
+#: src/Controllers/JavaScriptMessagesController.php:722 src/Util.php:510
 #, fuzzy
 #| msgid "Nov"
 msgctxt "Short month name for November"
 msgid "Nov"
 msgstr "Νοε"
 
-#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:513
+#: src/Controllers/JavaScriptMessagesController.php:723 src/Util.php:511
 #, fuzzy
 #| msgid "Dec"
 msgctxt "Short month name for December"
 msgid "Dec"
 msgstr "Δεκ"
 
-#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:516
+#: src/Controllers/JavaScriptMessagesController.php:731 src/Util.php:514
 msgctxt "Short week day name for Sunday"
 msgid "Sun"
 msgstr "Κυρ"
 
-#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:517
+#: src/Controllers/JavaScriptMessagesController.php:732 src/Util.php:515
 #, fuzzy
 #| msgid "Mon"
 msgctxt "Short week day name for Monday"
 msgid "Mon"
 msgstr "Δευ"
 
-#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:518
+#: src/Controllers/JavaScriptMessagesController.php:733 src/Util.php:516
 #, fuzzy
 #| msgid "Tue"
 msgctxt "Short week day name for Tuesday"
 msgid "Tue"
 msgstr "Τρί"
 
-#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:519
+#: src/Controllers/JavaScriptMessagesController.php:734 src/Util.php:517
 #, fuzzy
 #| msgid "Wed"
 msgctxt "Short week day name for Wednesday"
 msgid "Wed"
 msgstr "Τετ"
 
-#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:520
+#: src/Controllers/JavaScriptMessagesController.php:735 src/Util.php:518
 #, fuzzy
 #| msgid "Thu"
 msgctxt "Short week day name for Thursday"
 msgid "Thu"
 msgstr "Πέμ"
 
-#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:521
+#: src/Controllers/JavaScriptMessagesController.php:736 src/Util.php:519
 #, fuzzy
 #| msgid "Fri"
 msgctxt "Short week day name for Friday"
 msgid "Fri"
 msgstr "Παρ"
 
-#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:522
+#: src/Controllers/JavaScriptMessagesController.php:737 src/Util.php:520
 #, fuzzy
 #| msgid "Sat"
 msgctxt "Short week day name for Saturday"
@@ -16150,7 +16150,7 @@ msgstr ""
 
 #: src/Controllers/Table/Structure/PartitioningController.php:257
 #: src/Controllers/Table/Structure/SaveController.php:281
-#: src/Tracking/Tracking.php:731
+#: src/Tracking/Tracking.php:733
 msgid "Query error"
 msgstr "Σφάλμα ερωτήματος"
 
@@ -16167,20 +16167,20 @@ msgid ""
 "Table %1$s has been altered successfully. Privileges have been adjusted."
 msgstr "Ο πίνακας %1$s αλλάχτηκε επιτυχώς. Τα προνόμια έχουν προσαρμοστεί."
 
-#: src/Controllers/Table/TrackingController.php:90
+#: src/Controllers/Table/TrackingController.php:91
 #, php-format
 msgid "Tracking of %s is activated."
 msgstr "Παρακολούθηση του %s ενεργοποιήθηκε."
 
-#: src/Controllers/Table/TrackingController.php:143
+#: src/Controllers/Table/TrackingController.php:144
 msgid "SQL statements executed."
 msgstr "Οι δηλώσεις SQL εκτελέστηκαν."
 
-#: src/Controllers/Table/TrackingController.php:197
+#: src/Controllers/Table/TrackingController.php:198
 msgid "Tracking versions deleted successfully."
 msgstr "Οι παρακολουθούμενες εκδόσεις διεγράφησαν επιτυχώς."
 
-#: src/Controllers/Table/TrackingController.php:202
+#: src/Controllers/Table/TrackingController.php:203
 msgid "No versions selected."
 msgstr "Δεν επιλέχθηκαν εκδόσεις."
 
@@ -16299,7 +16299,7 @@ msgstr "Σφάλμα: Δεν μπόρεσε να απομακρυνθεί η ε�
 msgid "Internal relationship has been removed."
 msgstr "Η εσωτερική συσχέτιση έχει απομακρυνθεί."
 
-#: src/Database/Designer.php:116
+#: src/Database/Designer.php:117
 msgid "Could not load schema plugins, please check your installation!"
 msgstr ""
 "Αδύνατη η φόρτωση προσθέτων σχήματος, για αυτό ελέξτε την εγκατάστασή σας!"
@@ -16317,7 +16317,7 @@ msgstr "Το ακόλουθο ερώτημα έχει αποτύχει: «%s»"
 #: src/Database/Events.php:119 src/Database/Events.php:140
 #: src/Database/Routines.php:109 src/Database/Routines.php:135
 #: src/Database/Routines.php:213 src/Database/Routines.php:227
-#: src/Database/Routines.php:1013 src/Html/Generator.php:792
+#: src/Database/Routines.php:1013 src/Html/Generator.php:806
 #: src/Triggers/Triggers.php:88 src/Triggers/Triggers.php:97
 #: src/Triggers/Triggers.php:111 src/Triggers/Triggers.php:132
 msgid "MySQL said: "
@@ -16965,24 +16965,30 @@ msgstr "Η συνάρτηση PHP password_hash() με τις προεπιλεγ
 msgid "password_hash() PHP function"
 msgstr "Η συνάρτηση PHP password_hash()"
 
-#: src/Html/Generator.php:503
+#: src/Html/Generator.php:507
 msgid "Skip Explain SQL"
 msgstr "Χωρίς ανάλυση SQL"
 
-#: src/Html/Generator.php:535
+#: src/Html/Generator.php:517
+#, fuzzy
+#| msgid "Skip Validate SQL"
+msgid "Skip Analyze SQL"
+msgstr "Παράβλεψη επικύρωσης SQL"
+
+#: src/Html/Generator.php:549
 msgid "Without PHP code"
 msgstr "Χωρίς κώδικα PHP"
 
-#: src/Html/Generator.php:620
+#: src/Html/Generator.php:634
 msgctxt "Inline edit query"
 msgid "Edit inline"
 msgstr "Επεξεργασία εσωτερικά"
 
-#: src/Html/Generator.php:734
+#: src/Html/Generator.php:748
 msgid "Static analysis:"
 msgstr "Στατική ανάλυση:"
 
-#: src/Html/Generator.php:737
+#: src/Html/Generator.php:751
 #, php-format
 msgid "%d errors were found during analysis."
 msgstr "%d σφάλματα βρέθηκαν κατά την ανάλυση."
@@ -17172,7 +17178,7 @@ msgstr ""
 msgid "%1$s (near <code>%2$s</code>)"
 msgstr "%1$s (κοντά στο <code>%2$s</code>)"
 
-#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1387 src/Util.php:1401
+#: src/Menu.php:284 src/Menu.php:395 src/Util.php:1385 src/Util.php:1399
 msgid "Tracking"
 msgstr "Παρακολούθηση"
 
@@ -17180,7 +17186,7 @@ msgstr "Παρακολούθηση"
 msgid "Database seems to be empty!"
 msgstr "Η βάση δεδομένων φαίνεται να είναι άδεια!"
 
-#: src/Menu.php:402 src/Util.php:1388
+#: src/Menu.php:402 src/Util.php:1386
 msgid "Designer"
 msgstr "Σχεδιαστής"
 
@@ -17188,11 +17194,11 @@ msgstr "Σχεδιαστής"
 msgid "User accounts"
 msgstr "Λογαριασμοί χρήστη"
 
-#: src/Menu.php:512 src/Util.php:1371
+#: src/Menu.php:512 src/Util.php:1369
 msgid "Charsets"
 msgstr "Σύνολο χαρακτήρων"
 
-#: src/Menu.php:517 src/Util.php:1373
+#: src/Menu.php:517 src/Util.php:1371
 msgid "Engines"
 msgstr "Μηχανές"
 
@@ -18303,7 +18309,7 @@ msgstr "Να μην γίνεται <code>AUTO_INCREMENT</code> σε μηδενι
 msgid "XML"
 msgstr "Κώδικας XML"
 
-#: src/Plugins.php:600
+#: src/Plugins.php:405
 msgid "This format has no options"
 msgstr "Αυτή η μορφή δεν έχει επιλογές"
 
@@ -18417,7 +18423,7 @@ msgstr ""
 
 #. l10n: See https://www.php.net/manual/en/function.strftime.php
 #: src/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php:129
-#: src/Util.php:527
+#: src/Util.php:525
 msgid "%B %d, %Y at %I:%M %p"
 msgstr "%d %B %Y στις %H:%M:%S"
 
@@ -19202,51 +19208,51 @@ msgstr "Δήλωση ορισμού δεδομένων"
 msgid "Data manipulation statement"
 msgstr "Δήλωση χειρισμού δεδομένων"
 
-#: src/Tracking/Tracking.php:203
+#: src/Tracking/Tracking.php:204
 msgid "Tracking statements"
 msgstr "Δηλώσεις παρακολούθησης"
 
-#: src/Tracking/Tracking.php:219
+#: src/Tracking/Tracking.php:220
 msgid "Delete tracking data row from report"
 msgstr "Διαγραφή γραμμής δεδομένων παρακολούθησης από την αναφορά"
 
-#: src/Tracking/Tracking.php:229
+#: src/Tracking/Tracking.php:230
 msgid "No data"
 msgstr "Δεν υπάρχουν δεδομένα"
 
-#: src/Tracking/Tracking.php:290
+#: src/Tracking/Tracking.php:291
 #, php-format
 msgid "Show %1$s with dates from %2$s to %3$s by user %4$s %5$s"
 msgstr "Εμφάνιση %1$s με ημερομηνίες από %2$s έως %3$s από χρήστη %4$s %5$s"
 
-#: src/Tracking/Tracking.php:393
+#: src/Tracking/Tracking.php:394
 msgid "SQL dump (file download)"
 msgstr "Κάδος SQL (λήψη αρχείου)"
 
-#: src/Tracking/Tracking.php:395
+#: src/Tracking/Tracking.php:396
 msgid "SQL dump"
 msgstr "Κάδος SQL"
 
-#: src/Tracking/Tracking.php:398
+#: src/Tracking/Tracking.php:399
 msgid "This option will replace your table and contained data."
 msgstr ""
 "Αυτή η επιλογή θα αντικαταστήσει τον πίνακα και τα περιεχόμενά δεδομένα."
 
-#: src/Tracking/Tracking.php:400
+#: src/Tracking/Tracking.php:401
 msgid "SQL execution"
 msgstr "Εκτέλεση SQL"
 
-#: src/Tracking/Tracking.php:404
+#: src/Tracking/Tracking.php:405
 #, php-format
 msgid "Export as %s"
 msgstr "Εξαγωγή ως %s"
 
-#: src/Tracking/Tracking.php:557
+#: src/Tracking/Tracking.php:558
 #, php-format
 msgid "Version %s snapshot (SQL code)"
 msgstr "Στιγμιότυπο έκδοσης %s (κώδικας SQL)"
 
-#: src/Tracking/Tracking.php:790
+#: src/Tracking/Tracking.php:792
 msgid ""
 "You can execute the dump by creating and using a temporary database. Please "
 "ensure that you have the privileges to do so."
@@ -19254,35 +19260,35 @@ msgstr ""
 "Μπορείτε να εκτελέσετε τον κάδο δημιουργώντας και χρησιμοποιώντας μι "
 "προσωρινή βάση δεδομένων. Σιγουρευτείτε ότι έχετε τα δικαιώματα για αυτό."
 
-#: src/Tracking/Tracking.php:794
+#: src/Tracking/Tracking.php:796
 msgid "Comment out these two lines if you do not need them."
 msgstr "Κάντε σχόλια αυτές τις δύο γραμμές αν δεν τις χρειάζεστε."
 
-#: src/Tracking/Tracking.php:805
+#: src/Tracking/Tracking.php:807
 msgid "SQL statements exported. Please copy the dump or execute it."
 msgstr "Οι δηλώσεις SQL εξήχθησαν. Αντιγράψτε τον κάδο ή εκτελέστε τον."
 
-#: src/Tracking/Tracking.php:838
+#: src/Tracking/Tracking.php:840
 #, php-format
 msgid "Tracking report for table `%s`"
 msgstr "Αναφορά παρακολούθησης για τον πίνακα «%s»"
 
-#: src/Tracking/Tracking.php:861
+#: src/Tracking/Tracking.php:863
 #, php-format
 msgid "Tracking for %1$s was activated at version %2$s."
 msgstr "Παρακολούθηση του %1$s ενεργοποιήθηκε στην έκδοση %2$s."
 
-#: src/Tracking/Tracking.php:864
+#: src/Tracking/Tracking.php:866
 #, php-format
 msgid "Tracking for %1$s was deactivated at version %2$s."
 msgstr "Παρακολούθηση του %1$s απενεργοποιήθηκε στην έκδοση %2$s."
 
-#: src/Tracking/Tracking.php:959
+#: src/Tracking/Tracking.php:961
 #, php-format
 msgid "Version %1$s of %2$s was deleted."
 msgstr "Η έκδοση %1$s από %2$s διαγράφτηκε."
 
-#: src/Tracking/Tracking.php:990
+#: src/Tracking/Tracking.php:992
 #, php-format
 msgid "Version %1$s was created, tracking for %2$s is active."
 msgstr "Η έκδοση %1$s δημιουργήθηκε, η παρακολούθηση του %2$s ενεργοποιήθηκε."
@@ -19663,27 +19669,27 @@ msgstr "Τα στοιχεία ανανεώθηκαν."
 msgid "Password is too long!"
 msgstr "Ο κωδικός πρόσβασης είναι πολύ μεγάλος!"
 
-#: src/Util.php:130
+#: src/Util.php:129
 #, php-format
 msgid "Max: %s%s"
 msgstr "Μέγιστο μέγεθος: %s%s"
 
-#: src/Util.php:536
+#: src/Util.php:534
 msgctxt "AM/PM indication in time"
 msgid "PM"
 msgstr "μ.μ."
 
-#: src/Util.php:538
+#: src/Util.php:536
 msgctxt "AM/PM indication in time"
 msgid "AM"
 msgstr "π.μ."
 
-#: src/Util.php:611
+#: src/Util.php:609
 #, php-format
 msgid "%s days, %s hours, %s minutes and %s seconds"
 msgstr "%s μέρες, %s ώρες, %s λεπτά %s δευτερόλεπτα"
 
-#: src/Util.php:1364
+#: src/Util.php:1362
 msgid "Users"
 msgstr "Χρήστες"
 
@@ -21395,9 +21401,6 @@ msgstr "Δεν βρέθηκαν αρχεία στο συμπιεσμένο αρ�
 
 #~ msgid "Failed to connect to SQL validator!"
 #~ msgstr "Αδύνατη η σύνδεση στο εγκυροποιητή SQL!"
-
-#~ msgid "Skip Validate SQL"
-#~ msgstr "Παράβλεψη επικύρωσης SQL"
 
 #~ msgid "Validate SQL"
 #~ msgstr "Επικύρωση SQL"
