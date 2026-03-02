@@ -1609,12 +1609,6 @@ parameters:
 			path: src/Controllers/Database/RoutinesController.php
 
 		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 1
-			path: src/Controllers/Database/SearchController.php
-
-		-
 			message: '#^Parameter \#1 \$database of method PhpMyAdmin\\Database\\CentralColumns\:\:deleteColumnsFromList\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -11043,7 +11037,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 13
+			count: 12
 			path: src/Server/Privileges.php
 
 		-
@@ -11079,7 +11073,7 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 13
+			count: 11
 			path: src/Server/Privileges.php
 
 		-
