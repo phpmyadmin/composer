@@ -27,9 +27,12 @@ use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UrlParams;
+use TCPDF;
 
 use function __;
 use function array_search;
+use function class_exists;
+use function extension_loaded;
 use function in_array;
 use function is_array;
 use function is_string;
@@ -106,6 +109,8 @@ final readonly class GisVisualizationController implements InvocableController
 
         $visualization = GisVisualization::get($sqlQuery, $visualizationSettings, $rows, $pos);
 
+        $downloadOptions = $this->getDownloadOptions();
+
         if (isset($_GET['saveToFile'])) {
             $response = $this->responseFactory->createResponse();
             $filename = $visualization->getSpatialColumn();
@@ -153,11 +158,29 @@ final readonly class GisVisualizationController implements InvocableController
             'useBaseLayer' => $useBaseLayer,
             'visualization' => $visualization->asSVG(),
             'open_layers_data' => $visualization->asOl(),
+            'download_options' => $downloadOptions,
         ]);
 
         $this->response->addHTML($html);
 
         return $this->response->response();
+    }
+
+    /** @return list<'svg'|'png'|'pdf'> */
+    private function getDownloadOptions(): array
+    {
+        $downloadOptions = [];
+        if (class_exists(TCPDF::class)) {
+            $downloadOptions[] = 'pdf';
+        }
+
+        if (extension_loaded('gd')) {
+            $downloadOptions[] = 'png';
+        }
+
+        $downloadOptions[] = 'svg';
+
+        return $downloadOptions;
     }
 
     /**
