@@ -4317,6 +4317,9 @@ Functions.configSet = function (key, value) {
       value: serialized
     },
     success: function (data) {
+      if (typeof data === 'undefined') {
+        return;
+      }
       if (data.success !== true) {
         // Try to find a message to display
         if (data.error || data.message || false) {
@@ -4361,6 +4364,9 @@ Functions.configGet = function (key, cached, successCallback, failureCallback) {
       key: key
     },
     success: function (data) {
+      if (typeof data === 'undefined') {
+        return;
+      }
       if (data.success !== true) {
         // Try to find a message to display
         if (data.error || data.message || false) {
