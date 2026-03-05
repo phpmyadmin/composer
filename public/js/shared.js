@@ -7719,7 +7719,7 @@ function updateNavigationWidthConfig(value) {
       value: value
     },
     success: function (data) {
-      if (data.success !== true) {
+      if (typeof data !== 'undefined' && data.success !== true) {
         // Try to find a message to display
         if (data.error || data.message) {
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(data.error || data.message);

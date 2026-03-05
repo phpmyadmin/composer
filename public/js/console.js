@@ -1090,7 +1090,7 @@ var ConsoleDebug = {
   initialize: function () {
     // Try to get debug info after every AJAX request
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('ajaxSuccess', function (event, xhr, settings, data) {
-      if (data.debug) {
+      if (typeof data !== 'undefined' && data.debug) {
         ConsoleDebug.showLog(data.debug, settings.url);
       }
     });

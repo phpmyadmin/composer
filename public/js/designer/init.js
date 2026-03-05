@@ -1888,6 +1888,9 @@ const addTableToTablesList = function (index, tableDom) {
  */
 const displayModal = function (form, heading, type) {
   var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()(type);
+  modal.one('hidden.bs.modal', function () {
+    modal.find('*').off('click'); // Unregister all click events when the modal is hidden
+  });
   modal.modal('show');
   modal.find('.modal-body').first().html(form);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(type + 'Label').first().html(heading);
@@ -1939,7 +1942,6 @@ const addOtherDbTables = function () {
         DesignerMove.markUnsaved();
       }
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
     modal.modal('hide');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table_from').on('change', function () {
@@ -2095,7 +2097,6 @@ const save3 = function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
       var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_page');
       $form.trigger('submit');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
       modal.modal('hide');
     });
   }
@@ -2127,7 +2128,6 @@ const editPages = function () {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
           }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
           modal.modal('hide');
           DesignerMove.loadPage(selected);
         });
@@ -2191,7 +2191,6 @@ const deletePages = function () {
             }
           });
         }
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
         modal.modal('hide');
       });
     }
@@ -2272,7 +2271,6 @@ const saveAs = function () {
             });
           }
         }
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
         modal.modal('hide');
       });
       // select current page by default
@@ -2332,7 +2330,6 @@ const exportPages = function () {
       var modal = DesignerMove.displayModal($form, window.Messages.strExportRelationalSchema, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_export_pages').trigger('submit');
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister the event for other modals to not call this one
         modal.modal('hide');
       });
     }
