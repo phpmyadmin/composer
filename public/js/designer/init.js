@@ -2215,7 +2215,8 @@ const saveAs = function () {
         });
       }
       var modal = DesignerMove.displayModal(data.message, window.Messages.strSavePageAs, '#designerGoModal');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages').on('submit', function (e) {
+        e.preventDefault();
         var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages');
         var selectedValue = $form.find('input[name="selected_value"]').val().trim();
         var $selectedPage = $form.find('select[name="selected_page"]');
@@ -2272,6 +2273,9 @@ const saveAs = function () {
           }
         }
         modal.modal('hide');
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages').trigger('submit');
       });
       // select current page by default
       if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage !== -1) {

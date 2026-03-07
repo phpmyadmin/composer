@@ -1428,6 +1428,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
                 continue;
               }
               value -= oldChartData[key][j][0].value;
+              // Show original value instead of negative value when database server is restarted
+              if (value < 0) {
+                value = parseFloat(chartData[key][j][0].value);
+              }
             }
             if (elem.nodes[j].valueDivisor) {
               value = value / elem.nodes[j].valueDivisor;
