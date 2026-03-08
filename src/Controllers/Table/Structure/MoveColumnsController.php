@@ -29,12 +29,12 @@ use function implode;
 use function is_array;
 
 #[Route('/table/structure/move-columns', ['POST'])]
-final class MoveColumnsController implements InvocableController
+final readonly class MoveColumnsController implements InvocableController
 {
     public function __construct(
-        private readonly ResponseRenderer $response,
-        private readonly Template $template,
-        private readonly DatabaseInterface $dbi,
+        private ResponseRenderer $response,
+        private Template $template,
+        private DatabaseInterface $dbi,
     ) {
     }
 
@@ -91,8 +91,8 @@ final class MoveColumnsController implements InvocableController
     private function generateAlterTableSql(string $createTableSql, array $moveColumns): string|Message
     {
         $parser = new Parser($createTableSql);
-        /** @var CreateStatement $statement */
         $statement = $parser->statements[0];
+        assert($statement instanceof CreateStatement);
         /** @var CreateDefinition[] $fields For CREATE TABLE statement the type is CreateDefinition[] */
         $fields = $statement->fields;
         $columns = [];
