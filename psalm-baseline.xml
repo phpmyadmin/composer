@@ -2198,12 +2198,6 @@
       <code><![CDATA[$_SESSION['tmpval']['max_rows']]]></code>
       <code><![CDATA[$_SESSION['tmpval']['pos']]]></code>
     </MixedArrayAccess>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$_GET['fileFormat']]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$_GET['fileFormat']]]></code>
-    </PossiblyInvalidCast>
     <RiskyCast>
       <code><![CDATA[$_POST['pos'] ?? $_GET['pos'] ?? $_SESSION['tmpval']['pos']]]></code>
       <code><![CDATA[$_POST['session_max_rows'] ?? $_GET['session_max_rows']]]></code>
@@ -4238,6 +4232,8 @@
       <code><![CDATA[$params]]></code>
     </InvalidArgument>
     <MixedAssignment>
+      <code><![CDATA[$_SESSION['debug']]]></code>
+      <code><![CDATA[$subObject]]></code>
       <code><![CDATA[$subObject]]></code>
     </MixedAssignment>
     <MixedReturnTypeCoercion>
@@ -4264,9 +4260,6 @@
       <code><![CDATA[$object]]></code>
       <code><![CDATA[empty($_REQUEST['no_debug'])]]></code>
     </RiskyTruthyFalsyComparison>
-    <UnusedReturnValue>
-      <code><![CDATA[mixed]]></code>
-    </UnusedReturnValue>
   </file>
   <file src="src/Gis/Ds/Polygon.php">
     <NullArgument>
