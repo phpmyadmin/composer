@@ -2331,7 +2331,7 @@ const makeGrid = function (t) {
       });
       // Copy handler
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('copy', function (e) {
-        if (!document.body.contains(g.t)) {
+        if (!document.body.contains(g.t) || g.isCellEditActive) {
           return;
         }
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find(".".concat(selectingClass)).length > 0) {
