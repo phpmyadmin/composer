@@ -922,27 +922,9 @@ parameters:
 			path: src/Config/UserPreferencesHandler.php
 
 		-
-			message: '#^Cannot access offset ''Server'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Config/UserPreferencesHandler.php
-
-		-
-			message: '#^Cannot access offset ''ThemeDefault'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: src/Config/UserPreferencesHandler.php
-
-		-
 			message: '#^Cannot access offset ''config_mtime'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
-			path: src/Config/UserPreferencesHandler.php
-
-		-
-			message: '#^Cannot access offset ''lang'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 3
 			path: src/Config/UserPreferencesHandler.php
 
 		-
@@ -976,19 +958,7 @@ parameters:
 			path: src/Config/UserPreferencesHandler.php
 
 		-
-			message: '#^Only booleans are allowed in &&, string\|null given on the right side\.$#'
-			identifier: booleanAnd.rightNotBoolean
-			count: 1
-			path: src/Config/UserPreferencesHandler.php
-
-		-
 			message: '#^Parameter \#1 \$code of method PhpMyAdmin\\I18n\\LanguageManager\:\:getLanguage\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Config/UserPreferencesHandler.php
-
-		-
-			message: '#^Parameter \#2 \.\.\.\$replacements of function array_replace_recursive expects array, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Config/UserPreferencesHandler.php
@@ -6076,32 +6046,8 @@ parameters:
 			path: src/File.php
 
 		-
-			message: '#^Method PhpMyAdmin\\File\:\:getCompression\(\) should return string but returns string\|false\.$#'
-			identifier: return.type
-			count: 1
-			path: src/File.php
-
-		-
-			message: '#^Only booleans are allowed in &&, bool\|string given on the left side\.$#'
-			identifier: booleanAnd.leftNotBoolean
-			count: 1
-			path: src/File.php
-
-		-
 			message: '#^Only booleans are allowed in a negated boolean, resource\|false given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 1
-			path: src/File.php
-
-		-
-			message: '#^Parameter \#1 \$file of function bzopen expects resource\|string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/File.php
-
-		-
-			message: '#^Parameter \#1 \$file of method PhpMyAdmin\\ZipExtension\:\:getContents\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/File.php
 
@@ -6127,12 +6073,6 @@ parameters:
 			message: '#^Property PhpMyAdmin\\File\:\:\$handle \(resource\|null\) does not accept resource\|false\.$#'
 			identifier: assign.propertyType
 			count: 4
-			path: src/File.php
-
-		-
-			message: '#^Switch condition type \(string\) does not match case condition false \(false\)\.$#'
-			identifier: switch.type
-			count: 1
 			path: src/File.php
 
 		-
@@ -9487,12 +9427,6 @@ parameters:
 			path: src/Plugins/Import/ImportXml.php
 
 		-
-			message: '#^Cannot access property \$table on SimpleXMLElement\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: src/Plugins/Import/ImportXml.php
-
-		-
 			message: '#^Cannot call method attributes\(\) on SimpleXMLElement\|null\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -9513,7 +9447,7 @@ parameters:
 		-
 			message: '#^Offset ''name'' might not exist on SimpleXMLElement\|null\.$#'
 			identifier: offsetAccess.notFound
-			count: 4
+			count: 3
 			path: src/Plugins/Import/ImportXml.php
 
 		-
@@ -16449,7 +16383,7 @@ parameters:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
+			count: 3
 			path: tests/unit/PluginsTest.php
 
 		-
