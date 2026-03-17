@@ -992,7 +992,6 @@ const makeGrid = function (t) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).on('keyup', '.edit_box', function () {
               $editArea.find('textarea').val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
             });
-            $editArea.append('<div class="cell_edit_hint">' + g.cellEditHint + '</div>');
           } else {
             // handle truncated/transformed values values
             $editArea.addClass('edit_area_loading');
@@ -1024,6 +1023,7 @@ const makeGrid = function (t) {
             }); // end $.post()
           }
           g.isEditCellTextEditable = true;
+          $editArea.append('<div class="cell_edit_hint">' + g.cellEditHint + '</div>');
         } else if ($td.is('.timefield, .datefield, .datetimefield, .timestampfield')) {
           var $inputField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box');
           // remember current datetime value in $input_field, if it is not null
