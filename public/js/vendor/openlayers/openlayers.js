@@ -12651,6 +12651,1420 @@ function setWithCredentials(xhrWithCredentials) {
 
 /***/ }),
 
+/***/ "./node_modules/ol/format/Feature.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   transformExtentWithOptions: function() { return /* binding */ transformExtentWithOptions; },
+/* harmony export */   transformGeometryWithOptions: function() { return /* binding */ transformGeometryWithOptions; }
+/* harmony export */ });
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/util.js");
+/* harmony import */ var _proj_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/proj.js");
+/**
+ * @module ol/format/Feature
+ */
+
+
+
+/**
+ * @typedef {Object} ReadOptions
+ * @property {import("../proj.js").ProjectionLike} [dataProjection] Projection of the data we are reading.
+ * If not provided, the projection will be derived from the data (where possible) or
+ * the `dataProjection` of the format is assigned (where set). If the projection
+ * can not be derived from the data and if no `dataProjection` is set for a format,
+ * the features will not be reprojected.
+ * @property {import("../extent.js").Extent} [extent] Tile extent in map units of the tile being read.
+ * This is only required when reading data with tile pixels as geometry units. When configured,
+ * a `dataProjection` with `TILE_PIXELS` as `units` and the tile's pixel extent as `extent` needs to be
+ * provided.
+ * @property {import("../proj.js").ProjectionLike} [featureProjection] Projection of the feature geometries
+ * created by the format reader. If not provided, features will be returned in the
+ * `dataProjection`.
+ */
+
+/**
+ * @typedef {Object} WriteOptions
+ * @property {import("../proj.js").ProjectionLike} [dataProjection] Projection of the data we are writing.
+ * If not provided, the `dataProjection` of the format is assigned (where set).
+ * If no `dataProjection` is set for a format, the features will be returned
+ * in the `featureProjection`.
+ * @property {import("../proj.js").ProjectionLike} [featureProjection] Projection of the feature geometries
+ * that will be serialized by the format writer. If not provided, geometries are assumed
+ * to be in the `dataProjection` if that is set; in other words, they are not transformed.
+ * @property {boolean} [rightHanded] When writing geometries, follow the right-hand
+ * rule for linear ring orientation.  This means that polygons will have counter-clockwise
+ * exterior rings and clockwise interior rings.  By default, coordinates are serialized
+ * as they are provided at construction.  If `true`, the right-hand rule will
+ * be applied.  If `false`, the left-hand rule will be applied (clockwise for
+ * exterior and counter-clockwise for interior rings).  Note that not all
+ * formats support this.  The GeoJSON format does use this property when writing
+ * geometries.
+ * @property {number} [decimals] Maximum number of decimal places for coordinates.
+ * Coordinates are stored internally as floats, but floating-point arithmetic can create
+ * coordinates with a large number of decimal places, not generally wanted on output.
+ * Set a number here to round coordinates. Can also be used to ensure that
+ * coordinates read in can be written back out with the same number of decimals.
+ * Default is no rounding.
+ */
+
+/**
+ * @typedef {'arraybuffer' | 'json' | 'text' | 'xml'} Type
+ */
+
+/**
+ * @classdesc
+ * Abstract base class; normally only used for creating subclasses and not
+ * instantiated in apps.
+ * Base class for feature formats.
+ * {@link module:ol/format/Feature~FeatureFormat} subclasses provide the ability to decode and encode
+ * {@link module:ol/Feature~Feature} objects from a variety of commonly used geospatial
+ * file formats.  See the documentation for each format for more details.
+ *
+ * @abstract
+ * @api
+ */
+class FeatureFormat {
+  constructor() {
+    /**
+     * @protected
+     * @type {import("../proj/Projection.js").default|undefined}
+     */
+    this.dataProjection = undefined;
+
+    /**
+     * @protected
+     * @type {import("../proj/Projection.js").default|undefined}
+     */
+    this.defaultFeatureProjection = undefined;
+
+    /**
+     * A list media types supported by the format in descending order of preference.
+     * @type {Array<string>}
+     */
+    this.supportedMediaTypes = null;
+  }
+
+  /**
+   * Adds the data projection to the read options.
+   * @param {Document|Element|Object|string} source Source.
+   * @param {ReadOptions} [options] Options.
+   * @return {ReadOptions|undefined} Options.
+   * @protected
+   */
+  getReadOptions(source, options) {
+    if (options) {
+      let dataProjection = options.dataProjection
+        ? (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(options.dataProjection)
+        : this.readProjection(source);
+      if (
+        options.extent &&
+        dataProjection &&
+        dataProjection.getUnits() === 'tile-pixels'
+      ) {
+        dataProjection = (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(dataProjection);
+        dataProjection.setWorldExtent(options.extent);
+      }
+      options = {
+        dataProjection: dataProjection,
+        featureProjection: options.featureProjection,
+      };
+    }
+    return this.adaptOptions(options);
+  }
+
+  /**
+   * Sets the `dataProjection` on the options, if no `dataProjection`
+   * is set.
+   * @param {WriteOptions|ReadOptions|undefined} options
+   *     Options.
+   * @protected
+   * @return {WriteOptions|ReadOptions|undefined}
+   *     Updated options.
+   */
+  adaptOptions(options) {
+    return Object.assign(
+      {
+        dataProjection: this.dataProjection,
+        featureProjection: this.defaultFeatureProjection,
+      },
+      options
+    );
+  }
+
+  /**
+   * @abstract
+   * @return {Type} The format type.
+   */
+  getType() {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Read a single feature from a source.
+   *
+   * @abstract
+   * @param {Document|Element|Object|string} source Source.
+   * @param {ReadOptions} [options] Read options.
+   * @return {import("../Feature.js").FeatureLike} Feature.
+   */
+  readFeature(source, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Read all features from a source.
+   *
+   * @abstract
+   * @param {Document|Element|ArrayBuffer|Object|string} source Source.
+   * @param {ReadOptions} [options] Read options.
+   * @return {Array<import("../Feature.js").FeatureLike>} Features.
+   */
+  readFeatures(source, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Read a single geometry from a source.
+   *
+   * @abstract
+   * @param {Document|Element|Object|string} source Source.
+   * @param {ReadOptions} [options] Read options.
+   * @return {import("../geom/Geometry.js").default} Geometry.
+   */
+  readGeometry(source, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Read the projection from a source.
+   *
+   * @abstract
+   * @param {Document|Element|Object|string} source Source.
+   * @return {import("../proj/Projection.js").default|undefined} Projection.
+   */
+  readProjection(source) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Encode a feature in this format.
+   *
+   * @abstract
+   * @param {import("../Feature.js").default} feature Feature.
+   * @param {WriteOptions} [options] Write options.
+   * @return {string|ArrayBuffer} Result.
+   */
+  writeFeature(feature, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Encode an array of features in this format.
+   *
+   * @abstract
+   * @param {Array<import("../Feature.js").default>} features Features.
+   * @param {WriteOptions} [options] Write options.
+   * @return {string|ArrayBuffer} Result.
+   */
+  writeFeatures(features, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+
+  /**
+   * Write a single geometry in this format.
+   *
+   * @abstract
+   * @param {import("../geom/Geometry.js").default} geometry Geometry.
+   * @param {WriteOptions} [options] Write options.
+   * @return {string|ArrayBuffer} Result.
+   */
+  writeGeometry(geometry, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.abstract)();
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (FeatureFormat);
+
+/**
+ * @param {import("../geom/Geometry.js").default} geometry Geometry.
+ * @param {boolean} write Set to true for writing, false for reading.
+ * @param {WriteOptions|ReadOptions} [options] Options.
+ * @return {import("../geom/Geometry.js").default} Transformed geometry.
+ */
+function transformGeometryWithOptions(geometry, write, options) {
+  const featureProjection = options
+    ? (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(options.featureProjection)
+    : null;
+  const dataProjection = options ? (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(options.dataProjection) : null;
+
+  let transformed;
+  if (
+    featureProjection &&
+    dataProjection &&
+    !(0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.equivalent)(featureProjection, dataProjection)
+  ) {
+    transformed = (write ? geometry.clone() : geometry).transform(
+      write ? featureProjection : dataProjection,
+      write ? dataProjection : featureProjection
+    );
+  } else {
+    transformed = geometry;
+  }
+  if (
+    write &&
+    options &&
+    /** @type {WriteOptions} */ (options).decimals !== undefined
+  ) {
+    const power = Math.pow(10, /** @type {WriteOptions} */ (options).decimals);
+    // if decimals option on write, round each coordinate appropriately
+    /**
+     * @param {Array<number>} coordinates Coordinates.
+     * @return {Array<number>} Transformed coordinates.
+     */
+    const transform = function (coordinates) {
+      for (let i = 0, ii = coordinates.length; i < ii; ++i) {
+        coordinates[i] = Math.round(coordinates[i] * power) / power;
+      }
+      return coordinates;
+    };
+    if (transformed === geometry) {
+      transformed = geometry.clone();
+    }
+    transformed.applyTransform(transform);
+  }
+  return transformed;
+}
+
+/**
+ * @param {import("../extent.js").Extent} extent Extent.
+ * @param {ReadOptions} [options] Read options.
+ * @return {import("../extent.js").Extent} Transformed extent.
+ */
+function transformExtentWithOptions(extent, options) {
+  const featureProjection = options
+    ? (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(options.featureProjection)
+    : null;
+  const dataProjection = options ? (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.get)(options.dataProjection) : null;
+
+  if (
+    featureProjection &&
+    dataProjection &&
+    !(0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.equivalent)(featureProjection, dataProjection)
+  ) {
+    return (0,_proj_js__WEBPACK_IMPORTED_MODULE_1__.transformExtent)(extent, dataProjection, featureProjection);
+  }
+  return extent;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ol/format/TextFeature.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _format_Feature_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/format/Feature.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/util.js");
+/**
+ * @module ol/format/TextFeature
+ */
+
+
+
+/**
+ * @classdesc
+ * Abstract base class; normally only used for creating subclasses and not
+ * instantiated in apps.
+ * Base class for text feature formats.
+ *
+ * @abstract
+ */
+class TextFeature extends _format_Feature_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {import("./Feature.js").Type} Format.
+   */
+  getType() {
+    return 'text';
+  }
+
+  /**
+   * Read the feature from the source.
+   *
+   * @param {Document|Element|Object|string} source Source.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @return {import("../Feature.js").default} Feature.
+   * @api
+   */
+  readFeature(source, options) {
+    return this.readFeatureFromText(
+      getText(source),
+      this.adaptOptions(options)
+    );
+  }
+
+  /**
+   * @abstract
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @protected
+   * @return {import("../Feature.js").default} Feature.
+   */
+  readFeatureFromText(text, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+
+  /**
+   * Read the features from the source.
+   *
+   * @param {Document|Element|Object|string} source Source.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @return {Array<import("../Feature.js").default>} Features.
+   * @api
+   */
+  readFeatures(source, options) {
+    return this.readFeaturesFromText(
+      getText(source),
+      this.adaptOptions(options)
+    );
+  }
+
+  /**
+   * @abstract
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @protected
+   * @return {Array<import("../Feature.js").default>} Features.
+   */
+  readFeaturesFromText(text, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+
+  /**
+   * Read the geometry from the source.
+   *
+   * @param {Document|Element|Object|string} source Source.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @return {import("../geom/Geometry.js").default} Geometry.
+   * @api
+   */
+  readGeometry(source, options) {
+    return this.readGeometryFromText(
+      getText(source),
+      this.adaptOptions(options)
+    );
+  }
+
+  /**
+   * @abstract
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @protected
+   * @return {import("../geom/Geometry.js").default} Geometry.
+   */
+  readGeometryFromText(text, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+
+  /**
+   * Read the projection from the source.
+   *
+   * @param {Document|Element|Object|string} source Source.
+   * @return {import("../proj/Projection.js").default|undefined} Projection.
+   * @api
+   */
+  readProjection(source) {
+    return this.readProjectionFromText(getText(source));
+  }
+
+  /**
+   * @param {string} text Text.
+   * @protected
+   * @return {import("../proj/Projection.js").default|undefined} Projection.
+   */
+  readProjectionFromText(text) {
+    return this.dataProjection;
+  }
+
+  /**
+   * Encode a feature as a string.
+   *
+   * @param {import("../Feature.js").default} feature Feature.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @return {string} Encoded feature.
+   * @api
+   */
+  writeFeature(feature, options) {
+    return this.writeFeatureText(feature, this.adaptOptions(options));
+  }
+
+  /**
+   * @abstract
+   * @param {import("../Feature.js").default} feature Features.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeFeatureText(feature, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+
+  /**
+   * Encode an array of features as string.
+   *
+   * @param {Array<import("../Feature.js").default>} features Features.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @return {string} Encoded features.
+   * @api
+   */
+  writeFeatures(features, options) {
+    return this.writeFeaturesText(features, this.adaptOptions(options));
+  }
+
+  /**
+   * @abstract
+   * @param {Array<import("../Feature.js").default>} features Features.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeFeaturesText(features, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+
+  /**
+   * Write a single geometry.
+   *
+   * @param {import("../geom/Geometry.js").default} geometry Geometry.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @return {string} Geometry.
+   * @api
+   */
+  writeGeometry(geometry, options) {
+    return this.writeGeometryText(geometry, this.adaptOptions(options));
+  }
+
+  /**
+   * @abstract
+   * @param {import("../geom/Geometry.js").default} geometry Geometry.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeGeometryText(geometry, options) {
+    return (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+  }
+}
+
+/**
+ * @param {Document|Element|Object|string} source Source.
+ * @return {string} Text.
+ */
+function getText(source) {
+  if (typeof source === 'string') {
+    return source;
+  }
+  return '';
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (TextFeature);
+
+
+/***/ }),
+
+/***/ "./node_modules/ol/format/WKT.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Feature_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/Feature.js");
+/* harmony import */ var _geom_GeometryCollection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/geom/GeometryCollection.js");
+/* harmony import */ var _geom_LineString_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/ol/geom/LineString.js");
+/* harmony import */ var _geom_MultiLineString_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/geom/MultiLineString.js");
+/* harmony import */ var _geom_MultiPoint_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/geom/MultiPoint.js");
+/* harmony import */ var _geom_MultiPolygon_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/geom/MultiPolygon.js");
+/* harmony import */ var _geom_Point_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/geom/Point.js");
+/* harmony import */ var _geom_Polygon_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/geom/Polygon.js");
+/* harmony import */ var _TextFeature_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/ol/format/TextFeature.js");
+/* harmony import */ var _Feature_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./node_modules/ol/format/Feature.js");
+/**
+ * @module ol/format/WKT
+ */
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Geometry constructors
+ * @enum {function (new:import("../geom/Geometry.js").default, Array, import("../geom/Geometry.js").GeometryLayout)}
+ */
+const GeometryConstructor = {
+  'POINT': _geom_Point_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+  'LINESTRING': _geom_LineString_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  'POLYGON': _geom_Polygon_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+  'MULTIPOINT': _geom_MultiPoint_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+  'MULTILINESTRING': _geom_MultiLineString_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  'MULTIPOLYGON': _geom_MultiPolygon_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+};
+
+/**
+ * @typedef {Object} Options
+ * @property {boolean} [splitCollection=false] Whether to split GeometryCollections into
+ * multiple features on reading.
+ */
+
+/**
+ * @typedef {Object} Token
+ * @property {number} type Type.
+ * @property {number|string} [value] Value.
+ * @property {number} position Position.
+ */
+
+/**
+ * @const
+ * @type {string}
+ */
+const EMPTY = 'EMPTY';
+
+/**
+ * @const
+ * @type {string}
+ */
+const Z = 'Z';
+
+/**
+ * @const
+ * @type {string}
+ */
+const M = 'M';
+
+/**
+ * @const
+ * @type {string}
+ */
+const ZM = 'ZM';
+
+/**
+ * @const
+ * @enum {number}
+ */
+const TokenType = {
+  START: 0,
+  TEXT: 1,
+  LEFT_PAREN: 2,
+  RIGHT_PAREN: 3,
+  NUMBER: 4,
+  COMMA: 5,
+  EOF: 6,
+};
+
+/**
+ * @type {Object<import("../geom/Geometry.js").Type, string>}
+ */
+const wktTypeLookup = {
+  Point: 'POINT',
+  LineString: 'LINESTRING',
+  Polygon: 'POLYGON',
+  MultiPoint: 'MULTIPOINT',
+  MultiLineString: 'MULTILINESTRING',
+  MultiPolygon: 'MULTIPOLYGON',
+  GeometryCollection: 'GEOMETRYCOLLECTION',
+  Circle: 'CIRCLE',
+};
+
+/**
+ * Class to tokenize a WKT string.
+ */
+class Lexer {
+  /**
+   * @param {string} wkt WKT string.
+   */
+  constructor(wkt) {
+    /**
+     * @type {string}
+     */
+    this.wkt = wkt;
+
+    /**
+     * @type {number}
+     * @private
+     */
+    this.index_ = -1;
+  }
+
+  /**
+   * @param {string} c Character.
+   * @return {boolean} Whether the character is alphabetic.
+   * @private
+   */
+  isAlpha_(c) {
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+  }
+
+  /**
+   * @param {string} c Character.
+   * @param {boolean} [decimal] Whether the string number
+   *     contains a dot, i.e. is a decimal number.
+   * @return {boolean} Whether the character is numeric.
+   * @private
+   */
+  isNumeric_(c, decimal) {
+    decimal = decimal !== undefined ? decimal : false;
+    return (c >= '0' && c <= '9') || (c == '.' && !decimal);
+  }
+
+  /**
+   * @param {string} c Character.
+   * @return {boolean} Whether the character is whitespace.
+   * @private
+   */
+  isWhiteSpace_(c) {
+    return c == ' ' || c == '\t' || c == '\r' || c == '\n';
+  }
+
+  /**
+   * @return {string} Next string character.
+   * @private
+   */
+  nextChar_() {
+    return this.wkt.charAt(++this.index_);
+  }
+
+  /**
+   * Fetch and return the next token.
+   * @return {Token} Next string token.
+   */
+  nextToken() {
+    const c = this.nextChar_();
+    const position = this.index_;
+    /** @type {number|string} */
+    let value = c;
+    let type;
+
+    if (c == '(') {
+      type = TokenType.LEFT_PAREN;
+    } else if (c == ',') {
+      type = TokenType.COMMA;
+    } else if (c == ')') {
+      type = TokenType.RIGHT_PAREN;
+    } else if (this.isNumeric_(c) || c == '-') {
+      type = TokenType.NUMBER;
+      value = this.readNumber_();
+    } else if (this.isAlpha_(c)) {
+      type = TokenType.TEXT;
+      value = this.readText_();
+    } else if (this.isWhiteSpace_(c)) {
+      return this.nextToken();
+    } else if (c === '') {
+      type = TokenType.EOF;
+    } else {
+      throw new Error('Unexpected character: ' + c);
+    }
+
+    return {position: position, value: value, type: type};
+  }
+
+  /**
+   * @return {number} Numeric token value.
+   * @private
+   */
+  readNumber_() {
+    let c;
+    const index = this.index_;
+    let decimal = false;
+    let scientificNotation = false;
+    do {
+      if (c == '.') {
+        decimal = true;
+      } else if (c == 'e' || c == 'E') {
+        scientificNotation = true;
+      }
+      c = this.nextChar_();
+    } while (
+      this.isNumeric_(c, decimal) ||
+      // if we haven't detected a scientific number before, 'e' or 'E'
+      // hint that we should continue to read
+      (!scientificNotation && (c == 'e' || c == 'E')) ||
+      // once we know that we have a scientific number, both '-' and '+'
+      // are allowed
+      (scientificNotation && (c == '-' || c == '+'))
+    );
+    return parseFloat(this.wkt.substring(index, this.index_--));
+  }
+
+  /**
+   * @return {string} String token value.
+   * @private
+   */
+  readText_() {
+    let c;
+    const index = this.index_;
+    do {
+      c = this.nextChar_();
+    } while (this.isAlpha_(c));
+    return this.wkt.substring(index, this.index_--).toUpperCase();
+  }
+}
+
+/**
+ * Class to parse the tokens from the WKT string.
+ */
+class Parser {
+  /**
+   * @param {Lexer} lexer The lexer.
+   */
+  constructor(lexer) {
+    /**
+     * @type {Lexer}
+     * @private
+     */
+    this.lexer_ = lexer;
+
+    /**
+     * @type {Token}
+     * @private
+     */
+    this.token_ = {
+      position: 0,
+      type: TokenType.START,
+    };
+
+    /**
+     * @type {import("../geom/Geometry.js").GeometryLayout}
+     * @private
+     */
+    this.layout_ = 'XY';
+  }
+
+  /**
+   * Fetch the next token form the lexer and replace the active token.
+   * @private
+   */
+  consume_() {
+    this.token_ = this.lexer_.nextToken();
+  }
+
+  /**
+   * Tests if the given type matches the type of the current token.
+   * @param {TokenType} type Token type.
+   * @return {boolean} Whether the token matches the given type.
+   */
+  isTokenType(type) {
+    return this.token_.type == type;
+  }
+
+  /**
+   * If the given type matches the current token, consume it.
+   * @param {TokenType} type Token type.
+   * @return {boolean} Whether the token matches the given type.
+   */
+  match(type) {
+    const isMatch = this.isTokenType(type);
+    if (isMatch) {
+      this.consume_();
+    }
+    return isMatch;
+  }
+
+  /**
+   * Try to parse the tokens provided by the lexer.
+   * @return {import("../geom/Geometry.js").default} The geometry.
+   */
+  parse() {
+    this.consume_();
+    return this.parseGeometry_();
+  }
+
+  /**
+   * Try to parse the dimensional info.
+   * @return {import("../geom/Geometry.js").GeometryLayout} The layout.
+   * @private
+   */
+  parseGeometryLayout_() {
+    /** @type {import("../geom/Geometry.js").GeometryLayout} */
+    let layout = 'XY';
+    const dimToken = this.token_;
+    if (this.isTokenType(TokenType.TEXT)) {
+      const dimInfo = dimToken.value;
+      if (dimInfo === Z) {
+        layout = 'XYZ';
+      } else if (dimInfo === M) {
+        layout = 'XYM';
+      } else if (dimInfo === ZM) {
+        layout = 'XYZM';
+      }
+      if (layout !== 'XY') {
+        this.consume_();
+      }
+    }
+    return layout;
+  }
+
+  /**
+   * @return {Array<import("../geom/Geometry.js").default>} A collection of geometries.
+   * @private
+   */
+  parseGeometryCollectionText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const geometries = [];
+      do {
+        geometries.push(this.parseGeometry_());
+      } while (this.match(TokenType.COMMA));
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return geometries;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<number>} All values in a point.
+   * @private
+   */
+  parsePointText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const coordinates = this.parsePoint_();
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<number>>} All points in a linestring.
+   * @private
+   */
+  parseLineStringText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const coordinates = this.parsePointList_();
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<Array<number>>>} All points in a polygon.
+   * @private
+   */
+  parsePolygonText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const coordinates = this.parseLineStringTextList_();
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<number>>} All points in a multipoint.
+   * @private
+   */
+  parseMultiPointText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      let coordinates;
+      if (this.token_.type == TokenType.LEFT_PAREN) {
+        coordinates = this.parsePointTextList_();
+      } else {
+        coordinates = this.parsePointList_();
+      }
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<Array<number>>>} All linestring points
+   *                                          in a multilinestring.
+   * @private
+   */
+  parseMultiLineStringText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const coordinates = this.parseLineStringTextList_();
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<Array<Array<number>>>>} All polygon points in a multipolygon.
+   * @private
+   */
+  parseMultiPolygonText_() {
+    if (this.match(TokenType.LEFT_PAREN)) {
+      const coordinates = this.parsePolygonTextList_();
+      if (this.match(TokenType.RIGHT_PAREN)) {
+        return coordinates;
+      }
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<number>} A point.
+   * @private
+   */
+  parsePoint_() {
+    const coordinates = [];
+    const dimensions = this.layout_.length;
+    for (let i = 0; i < dimensions; ++i) {
+      const token = this.token_;
+      if (this.match(TokenType.NUMBER)) {
+        coordinates.push(/** @type {number} */ (token.value));
+      } else {
+        break;
+      }
+    }
+    if (coordinates.length == dimensions) {
+      return coordinates;
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+
+  /**
+   * @return {Array<Array<number>>} An array of points.
+   * @private
+   */
+  parsePointList_() {
+    const coordinates = [this.parsePoint_()];
+    while (this.match(TokenType.COMMA)) {
+      coordinates.push(this.parsePoint_());
+    }
+    return coordinates;
+  }
+
+  /**
+   * @return {Array<Array<number>>} An array of points.
+   * @private
+   */
+  parsePointTextList_() {
+    const coordinates = [this.parsePointText_()];
+    while (this.match(TokenType.COMMA)) {
+      coordinates.push(this.parsePointText_());
+    }
+    return coordinates;
+  }
+
+  /**
+   * @return {Array<Array<Array<number>>>} An array of points.
+   * @private
+   */
+  parseLineStringTextList_() {
+    const coordinates = [this.parseLineStringText_()];
+    while (this.match(TokenType.COMMA)) {
+      coordinates.push(this.parseLineStringText_());
+    }
+    return coordinates;
+  }
+
+  /**
+   * @return {Array<Array<Array<Array<number>>>>} An array of points.
+   * @private
+   */
+  parsePolygonTextList_() {
+    const coordinates = [this.parsePolygonText_()];
+    while (this.match(TokenType.COMMA)) {
+      coordinates.push(this.parsePolygonText_());
+    }
+    return coordinates;
+  }
+
+  /**
+   * @return {boolean} Whether the token implies an empty geometry.
+   * @private
+   */
+  isEmptyGeometry_() {
+    const isEmpty =
+      this.isTokenType(TokenType.TEXT) && this.token_.value == EMPTY;
+    if (isEmpty) {
+      this.consume_();
+    }
+    return isEmpty;
+  }
+
+  /**
+   * Create an error message for an unexpected token error.
+   * @return {string} Error message.
+   * @private
+   */
+  formatErrorMessage_() {
+    return (
+      'Unexpected `' +
+      this.token_.value +
+      '` at position ' +
+      this.token_.position +
+      ' in `' +
+      this.lexer_.wkt +
+      '`'
+    );
+  }
+
+  /**
+   * @return {import("../geom/Geometry.js").default} The geometry.
+   * @private
+   */
+  parseGeometry_() {
+    const token = this.token_;
+    if (this.match(TokenType.TEXT)) {
+      const geomType = /** @type {string} */ (token.value);
+      this.layout_ = this.parseGeometryLayout_();
+      const isEmpty = this.isEmptyGeometry_();
+      if (geomType == 'GEOMETRYCOLLECTION') {
+        if (isEmpty) {
+          return new _geom_GeometryCollection_js__WEBPACK_IMPORTED_MODULE_1__["default"]([]);
+        }
+        const geometries = this.parseGeometryCollectionText_();
+        return new _geom_GeometryCollection_js__WEBPACK_IMPORTED_MODULE_1__["default"](geometries);
+      }
+      const ctor = GeometryConstructor[geomType];
+      if (!ctor) {
+        throw new Error('Invalid geometry type: ' + geomType);
+      }
+
+      let coordinates;
+
+      if (isEmpty) {
+        if (geomType == 'POINT') {
+          coordinates = [NaN, NaN];
+        } else {
+          coordinates = [];
+        }
+      } else {
+        switch (geomType) {
+          case 'POINT': {
+            coordinates = this.parsePointText_();
+            break;
+          }
+          case 'LINESTRING': {
+            coordinates = this.parseLineStringText_();
+            break;
+          }
+          case 'POLYGON': {
+            coordinates = this.parsePolygonText_();
+            break;
+          }
+          case 'MULTIPOINT': {
+            coordinates = this.parseMultiPointText_();
+            break;
+          }
+          case 'MULTILINESTRING': {
+            coordinates = this.parseMultiLineStringText_();
+            break;
+          }
+          case 'MULTIPOLYGON': {
+            coordinates = this.parseMultiPolygonText_();
+            break;
+          }
+          default:
+            break;
+        }
+      }
+
+      return new ctor(coordinates, this.layout_);
+    }
+    throw new Error(this.formatErrorMessage_());
+  }
+}
+
+/**
+ * @classdesc
+ * Geometry format for reading and writing data in the `WellKnownText` (WKT)
+ * format.
+ *
+ * @api
+ */
+class WKT extends _TextFeature_js__WEBPACK_IMPORTED_MODULE_8__["default"] {
+  /**
+   * @param {Options} [options] Options.
+   */
+  constructor(options) {
+    super();
+
+    options = options ? options : {};
+
+    /**
+     * Split GeometryCollection into multiple features.
+     * @type {boolean}
+     * @private
+     */
+    this.splitCollection_ =
+      options.splitCollection !== undefined ? options.splitCollection : false;
+  }
+
+  /**
+   * Parse a WKT string.
+   * @param {string} wkt WKT string.
+   * @return {import("../geom/Geometry.js").default}
+   *     The geometry created.
+   * @private
+   */
+  parse_(wkt) {
+    const lexer = new Lexer(wkt);
+    const parser = new Parser(lexer);
+    return parser.parse();
+  }
+
+  /**
+   * @protected
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @return {import("../Feature.js").default} Feature.
+   */
+  readFeatureFromText(text, options) {
+    const geom = this.readGeometryFromText(text, options);
+    const feature = new _Feature_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    feature.setGeometry(geom);
+    return feature;
+  }
+
+  /**
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @protected
+   * @return {Array<Feature>} Features.
+   */
+  readFeaturesFromText(text, options) {
+    let geometries = [];
+    const geometry = this.readGeometryFromText(text, options);
+    if (this.splitCollection_ && geometry.getType() == 'GeometryCollection') {
+      geometries = /** @type {GeometryCollection} */ (
+        geometry
+      ).getGeometriesArray();
+    } else {
+      geometries = [geometry];
+    }
+    const features = [];
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      const feature = new _Feature_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+      feature.setGeometry(geometries[i]);
+      features.push(feature);
+    }
+    return features;
+  }
+
+  /**
+   * @param {string} text Text.
+   * @param {import("./Feature.js").ReadOptions} [options] Read options.
+   * @protected
+   * @return {import("../geom/Geometry.js").default} Geometry.
+   */
+  readGeometryFromText(text, options) {
+    const geometry = this.parse_(text);
+    return (0,_Feature_js__WEBPACK_IMPORTED_MODULE_9__.transformGeometryWithOptions)(geometry, false, options);
+  }
+
+  /**
+   * @param {import("../Feature.js").default} feature Features.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeFeatureText(feature, options) {
+    const geometry = feature.getGeometry();
+    if (geometry) {
+      return this.writeGeometryText(geometry, options);
+    }
+    return '';
+  }
+
+  /**
+   * @param {Array<import("../Feature.js").default>} features Features.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeFeaturesText(features, options) {
+    if (features.length == 1) {
+      return this.writeFeatureText(features[0], options);
+    }
+    const geometries = [];
+    for (let i = 0, ii = features.length; i < ii; ++i) {
+      geometries.push(features[i].getGeometry());
+    }
+    const collection = new _geom_GeometryCollection_js__WEBPACK_IMPORTED_MODULE_1__["default"](geometries);
+    return this.writeGeometryText(collection, options);
+  }
+
+  /**
+   * @param {import("../geom/Geometry.js").default} geometry Geometry.
+   * @param {import("./Feature.js").WriteOptions} [options] Write options.
+   * @protected
+   * @return {string} Text.
+   */
+  writeGeometryText(geometry, options) {
+    return encode((0,_Feature_js__WEBPACK_IMPORTED_MODULE_9__.transformGeometryWithOptions)(geometry, true, options));
+  }
+}
+
+/**
+ * @param {Point} geom Point geometry.
+ * @return {string} Coordinates part of Point as WKT.
+ */
+function encodePointGeometry(geom) {
+  const coordinates = geom.getCoordinates();
+  if (coordinates.length === 0) {
+    return '';
+  }
+  return coordinates.join(' ');
+}
+
+/**
+ * @param {MultiPoint} geom MultiPoint geometry.
+ * @return {string} Coordinates part of MultiPoint as WKT.
+ */
+function encodeMultiPointGeometry(geom) {
+  const array = [];
+  const components = geom.getPoints();
+  for (let i = 0, ii = components.length; i < ii; ++i) {
+    array.push('(' + encodePointGeometry(components[i]) + ')');
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {GeometryCollection} geom GeometryCollection geometry.
+ * @return {string} Coordinates part of GeometryCollection as WKT.
+ */
+function encodeGeometryCollectionGeometry(geom) {
+  const array = [];
+  const geoms = geom.getGeometries();
+  for (let i = 0, ii = geoms.length; i < ii; ++i) {
+    array.push(encode(geoms[i]));
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {LineString|import("../geom/LinearRing.js").default} geom LineString geometry.
+ * @return {string} Coordinates part of LineString as WKT.
+ */
+function encodeLineStringGeometry(geom) {
+  const coordinates = geom.getCoordinates();
+  const array = [];
+  for (let i = 0, ii = coordinates.length; i < ii; ++i) {
+    array.push(coordinates[i].join(' '));
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {MultiLineString} geom MultiLineString geometry.
+ * @return {string} Coordinates part of MultiLineString as WKT.
+ */
+function encodeMultiLineStringGeometry(geom) {
+  const array = [];
+  const components = geom.getLineStrings();
+  for (let i = 0, ii = components.length; i < ii; ++i) {
+    array.push('(' + encodeLineStringGeometry(components[i]) + ')');
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {Polygon} geom Polygon geometry.
+ * @return {string} Coordinates part of Polygon as WKT.
+ */
+function encodePolygonGeometry(geom) {
+  const array = [];
+  const rings = geom.getLinearRings();
+  for (let i = 0, ii = rings.length; i < ii; ++i) {
+    array.push('(' + encodeLineStringGeometry(rings[i]) + ')');
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {MultiPolygon} geom MultiPolygon geometry.
+ * @return {string} Coordinates part of MultiPolygon as WKT.
+ */
+function encodeMultiPolygonGeometry(geom) {
+  const array = [];
+  const components = geom.getPolygons();
+  for (let i = 0, ii = components.length; i < ii; ++i) {
+    array.push('(' + encodePolygonGeometry(components[i]) + ')');
+  }
+  return array.join(',');
+}
+
+/**
+ * @param {import("../geom/SimpleGeometry.js").default} geom SimpleGeometry geometry.
+ * @return {string} Potential dimensional information for WKT type.
+ */
+function encodeGeometryLayout(geom) {
+  const layout = geom.getLayout();
+  let dimInfo = '';
+  if (layout === 'XYZ' || layout === 'XYZM') {
+    dimInfo += Z;
+  }
+  if (layout === 'XYM' || layout === 'XYZM') {
+    dimInfo += M;
+  }
+  return dimInfo;
+}
+
+/**
+ * @const
+ * @type {Object<string, function(import("../geom/Geometry.js").default): string>}
+ */
+const GeometryEncoder = {
+  'Point': encodePointGeometry,
+  'LineString': encodeLineStringGeometry,
+  'Polygon': encodePolygonGeometry,
+  'MultiPoint': encodeMultiPointGeometry,
+  'MultiLineString': encodeMultiLineStringGeometry,
+  'MultiPolygon': encodeMultiPolygonGeometry,
+  'GeometryCollection': encodeGeometryCollectionGeometry,
+};
+
+/**
+ * Encode a geometry as WKT.
+ * @param {import("../geom/Geometry.js").default} geom The geometry to encode.
+ * @return {string} WKT string for the geometry.
+ */
+function encode(geom) {
+  const type = geom.getType();
+  const geometryEncoder = GeometryEncoder[type];
+  const enc = geometryEncoder(geom);
+  let wktType = wktTypeLookup[type];
+  if (typeof (/** @type {?} */ (geom).getFlatCoordinates) === 'function') {
+    const dimInfo = encodeGeometryLayout(
+      /** @type {import("../geom/SimpleGeometry.js").default} */ (geom)
+    );
+    if (dimInfo.length > 0) {
+      wktType += ' ' + dimInfo;
+    }
+  }
+  if (enc.length === 0) {
+    return wktType + ' ' + EMPTY;
+  }
+  return wktType + '(' + enc + ')';
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (WKT);
+
+
+/***/ }),
+
 /***/ "./node_modules/ol/functions.js":
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
@@ -13100,6 +14514,357 @@ class Geometry extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Geometry);
+
+
+/***/ }),
+
+/***/ "./node_modules/ol/geom/GeometryCollection.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _events_EventType_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/events/EventType.js");
+/* harmony import */ var _Geometry_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/geom/Geometry.js");
+/* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/ol/extent.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/events.js");
+/**
+ * @module ol/geom/GeometryCollection
+ */
+
+
+
+
+
+/**
+ * @classdesc
+ * An array of {@link module:ol/geom/Geometry~Geometry} objects.
+ *
+ * @api
+ */
+class GeometryCollection extends _Geometry_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
+  /**
+   * @param {Array<Geometry>} [geometries] Geometries.
+   */
+  constructor(geometries) {
+    super();
+
+    /**
+     * @private
+     * @type {Array<Geometry>}
+     */
+    this.geometries_ = geometries ? geometries : null;
+
+    /**
+     * @type {Array<import("../events.js").EventsKey>}
+     */
+    this.changeEventsKeys_ = [];
+
+    this.listenGeometriesChange_();
+  }
+
+  /**
+   * @private
+   */
+  unlistenGeometriesChange_() {
+    this.changeEventsKeys_.forEach(_events_js__WEBPACK_IMPORTED_MODULE_3__.unlistenByKey);
+    this.changeEventsKeys_.length = 0;
+  }
+
+  /**
+   * @private
+   */
+  listenGeometriesChange_() {
+    if (!this.geometries_) {
+      return;
+    }
+    for (let i = 0, ii = this.geometries_.length; i < ii; ++i) {
+      this.changeEventsKeys_.push(
+        (0,_events_js__WEBPACK_IMPORTED_MODULE_3__.listen)(this.geometries_[i], _events_EventType_js__WEBPACK_IMPORTED_MODULE_0__["default"].CHANGE, this.changed, this)
+      );
+    }
+  }
+
+  /**
+   * Make a complete copy of the geometry.
+   * @return {!GeometryCollection} Clone.
+   * @api
+   */
+  clone() {
+    const geometryCollection = new GeometryCollection(null);
+    geometryCollection.setGeometries(this.geometries_);
+    geometryCollection.applyProperties(this);
+    return geometryCollection;
+  }
+
+  /**
+   * @param {number} x X.
+   * @param {number} y Y.
+   * @param {import("../coordinate.js").Coordinate} closestPoint Closest point.
+   * @param {number} minSquaredDistance Minimum squared distance.
+   * @return {number} Minimum squared distance.
+   */
+  closestPointXY(x, y, closestPoint, minSquaredDistance) {
+    if (minSquaredDistance < (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.closestSquaredDistanceXY)(this.getExtent(), x, y)) {
+      return minSquaredDistance;
+    }
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      minSquaredDistance = geometries[i].closestPointXY(
+        x,
+        y,
+        closestPoint,
+        minSquaredDistance
+      );
+    }
+    return minSquaredDistance;
+  }
+
+  /**
+   * @param {number} x X.
+   * @param {number} y Y.
+   * @return {boolean} Contains (x, y).
+   */
+  containsXY(x, y) {
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      if (geometries[i].containsXY(x, y)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * @param {import("../extent.js").Extent} extent Extent.
+   * @protected
+   * @return {import("../extent.js").Extent} extent Extent.
+   */
+  computeExtent(extent) {
+    (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.createOrUpdateEmpty)(extent);
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.extend)(extent, geometries[i].getExtent());
+    }
+    return extent;
+  }
+
+  /**
+   * Return the geometries that make up this geometry collection.
+   * @return {Array<Geometry>} Geometries.
+   * @api
+   */
+  getGeometries() {
+    return cloneGeometries(this.geometries_);
+  }
+
+  /**
+   * @return {Array<Geometry>} Geometries.
+   */
+  getGeometriesArray() {
+    return this.geometries_;
+  }
+
+  /**
+   * @return {Array<Geometry>} Geometries.
+   */
+  getGeometriesArrayRecursive() {
+    /** @type {Array<Geometry>} */
+    let geometriesArray = [];
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      if (geometries[i].getType() === this.getType()) {
+        geometriesArray = geometriesArray.concat(
+          /** @type {GeometryCollection} */ (
+            geometries[i]
+          ).getGeometriesArrayRecursive()
+        );
+      } else {
+        geometriesArray.push(geometries[i]);
+      }
+    }
+    return geometriesArray;
+  }
+
+  /**
+   * Create a simplified version of this geometry using the Douglas Peucker algorithm.
+   * @param {number} squaredTolerance Squared tolerance.
+   * @return {GeometryCollection} Simplified GeometryCollection.
+   */
+  getSimplifiedGeometry(squaredTolerance) {
+    if (this.simplifiedGeometryRevision !== this.getRevision()) {
+      this.simplifiedGeometryMaxMinSquaredTolerance = 0;
+      this.simplifiedGeometryRevision = this.getRevision();
+    }
+    if (
+      squaredTolerance < 0 ||
+      (this.simplifiedGeometryMaxMinSquaredTolerance !== 0 &&
+        squaredTolerance < this.simplifiedGeometryMaxMinSquaredTolerance)
+    ) {
+      return this;
+    }
+
+    const simplifiedGeometries = [];
+    const geometries = this.geometries_;
+    let simplified = false;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      const geometry = geometries[i];
+      const simplifiedGeometry =
+        geometry.getSimplifiedGeometry(squaredTolerance);
+      simplifiedGeometries.push(simplifiedGeometry);
+      if (simplifiedGeometry !== geometry) {
+        simplified = true;
+      }
+    }
+    if (simplified) {
+      const simplifiedGeometryCollection = new GeometryCollection(null);
+      simplifiedGeometryCollection.setGeometriesArray(simplifiedGeometries);
+      return simplifiedGeometryCollection;
+    }
+    this.simplifiedGeometryMaxMinSquaredTolerance = squaredTolerance;
+    return this;
+  }
+
+  /**
+   * Get the type of this geometry.
+   * @return {import("./Geometry.js").Type} Geometry type.
+   * @api
+   */
+  getType() {
+    return 'GeometryCollection';
+  }
+
+  /**
+   * Test if the geometry and the passed extent intersect.
+   * @param {import("../extent.js").Extent} extent Extent.
+   * @return {boolean} `true` if the geometry and the extent intersect.
+   * @api
+   */
+  intersectsExtent(extent) {
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      if (geometries[i].intersectsExtent(extent)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * @return {boolean} Is empty.
+   */
+  isEmpty() {
+    return this.geometries_.length === 0;
+  }
+
+  /**
+   * Rotate the geometry around a given coordinate. This modifies the geometry
+   * coordinates in place.
+   * @param {number} angle Rotation angle in radians.
+   * @param {import("../coordinate.js").Coordinate} anchor The rotation center.
+   * @api
+   */
+  rotate(angle, anchor) {
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      geometries[i].rotate(angle, anchor);
+    }
+    this.changed();
+  }
+
+  /**
+   * Scale the geometry (with an optional origin).  This modifies the geometry
+   * coordinates in place.
+   * @abstract
+   * @param {number} sx The scaling factor in the x-direction.
+   * @param {number} [sy] The scaling factor in the y-direction (defaults to sx).
+   * @param {import("../coordinate.js").Coordinate} [anchor] The scale origin (defaults to the center
+   *     of the geometry extent).
+   * @api
+   */
+  scale(sx, sy, anchor) {
+    if (!anchor) {
+      anchor = (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.getCenter)(this.getExtent());
+    }
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      geometries[i].scale(sx, sy, anchor);
+    }
+    this.changed();
+  }
+
+  /**
+   * Set the geometries that make up this geometry collection.
+   * @param {Array<Geometry>} geometries Geometries.
+   * @api
+   */
+  setGeometries(geometries) {
+    this.setGeometriesArray(cloneGeometries(geometries));
+  }
+
+  /**
+   * @param {Array<Geometry>} geometries Geometries.
+   */
+  setGeometriesArray(geometries) {
+    this.unlistenGeometriesChange_();
+    this.geometries_ = geometries;
+    this.listenGeometriesChange_();
+    this.changed();
+  }
+
+  /**
+   * Apply a transform function to the coordinates of the geometry.
+   * The geometry is modified in place.
+   * If you do not want the geometry modified in place, first `clone()` it and
+   * then use this function on the clone.
+   * @param {import("../proj.js").TransformFunction} transformFn Transform function.
+   * Called with a flat array of geometry coordinates.
+   * @api
+   */
+  applyTransform(transformFn) {
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      geometries[i].applyTransform(transformFn);
+    }
+    this.changed();
+  }
+
+  /**
+   * Translate the geometry.  This modifies the geometry coordinates in place.  If
+   * instead you want a new geometry, first `clone()` this geometry.
+   * @param {number} deltaX Delta X.
+   * @param {number} deltaY Delta Y.
+   * @api
+   */
+  translate(deltaX, deltaY) {
+    const geometries = this.geometries_;
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      geometries[i].translate(deltaX, deltaY);
+    }
+    this.changed();
+  }
+
+  /**
+   * Clean up.
+   */
+  disposeInternal() {
+    this.unlistenGeometriesChange_();
+    super.disposeInternal();
+  }
+}
+
+/**
+ * @param {Array<Geometry>} geometries Geometries.
+ * @return {Array<Geometry>} Cloned geometries.
+ */
+function cloneGeometries(geometries) {
+  const clonedGeometries = [];
+  for (let i = 0, ii = geometries.length; i < ii; ++i) {
+    clonedGeometries.push(geometries[i].clone());
+  }
+  return clonedGeometries;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (GeometryCollection);
 
 
 /***/ }),

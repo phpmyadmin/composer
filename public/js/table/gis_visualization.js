@@ -9,33 +9,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/ajax.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
-/* harmony import */ var ol__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/Feature.js");
-/* harmony import */ var ol__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/Map.js");
-/* harmony import */ var ol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/View.js");
-/* harmony import */ var ol_control__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/control/Attribution.js");
-/* harmony import */ var ol_control__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/control/MousePosition.js");
-/* harmony import */ var ol_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/ol/control/Zoom.js");
+/* harmony import */ var ol_Feature__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/Feature.js");
+/* harmony import */ var ol_Map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/Map.js");
+/* harmony import */ var ol_View__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/View.js");
+/* harmony import */ var ol_control_Attribution__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/control/Attribution.js");
+/* harmony import */ var ol_control_MousePosition__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/control/MousePosition.js");
+/* harmony import */ var ol_control_Zoom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/ol/control/Zoom.js");
 /* harmony import */ var ol_coordinate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./node_modules/ol/coordinate.js");
 /* harmony import */ var ol_extent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/ol/extent.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./node_modules/ol/geom/LineString.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("./node_modules/ol/geom/MultiLineString.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("./node_modules/ol/geom/MultiPoint.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("./node_modules/ol/geom/MultiPolygon.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("./node_modules/ol/geom/Point.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("./node_modules/ol/geom/Polygon.js");
-/* harmony import */ var ol_layer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("./node_modules/ol/layer/Tile.js");
-/* harmony import */ var ol_layer__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("./node_modules/ol/layer/Vector.js");
-/* harmony import */ var ol_proj__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("./node_modules/ol/proj.js");
-/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("./node_modules/ol/source/OSM.js");
-/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__("./node_modules/ol/source/Vector.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__("./node_modules/ol/style/Circle.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__("./node_modules/ol/style/Fill.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__("./node_modules/ol/style/Stroke.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__("./node_modules/ol/style/Style.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__("./node_modules/ol/style/Text.js");
+/* harmony import */ var ol_format_WKT__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./node_modules/ol/format/WKT.js");
+/* harmony import */ var ol_layer_Tile__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("./node_modules/ol/layer/Tile.js");
+/* harmony import */ var ol_layer_Vector__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("./node_modules/ol/layer/Vector.js");
+/* harmony import */ var ol_source_OSM__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("./node_modules/ol/source/OSM.js");
+/* harmony import */ var ol_source_Vector__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("./node_modules/ol/source/Vector.js");
+/* harmony import */ var ol_style_Circle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("./node_modules/ol/style/Circle.js");
+/* harmony import */ var ol_style_Fill__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("./node_modules/ol/style/Fill.js");
+/* harmony import */ var ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("./node_modules/ol/style/Stroke.js");
+/* harmony import */ var ol_style_Style__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("./node_modules/ol/style/Style.js");
+/* harmony import */ var ol_style_Text__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("./node_modules/ol/style/Text.js");
+/* harmony import */ var ol_proj__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__("./node_modules/ol/proj.js");
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -291,13 +296,48 @@ class SvgVisualization extends GisVisualization {
   }
 }
 class OlVisualization extends GisVisualization {
-  /**
-   * @param {function(HTMLElement): ol.Map} initFn
-   */
   constructor(target, data) {
     super(target);
     _defineProperty(this, "olMap", undefined);
     this.data = data;
+  }
+  getFeaturesFromData(geometries) {
+    let features = [];
+    const addFeature = (index, data, geometry) => {
+      const feature = new ol_Feature__WEBPACK_IMPORTED_MODULE_3__["default"](geometry);
+      feature.set('index', index, true);
+      if (data.label) {
+        feature.set('label', data.label, true);
+      }
+      features.push(feature);
+    };
+    const projections = {};
+    const reader = new ol_format_WKT__WEBPACK_IMPORTED_MODULE_11__["default"]();
+    for (let i = 0, ii = geometries.length; i < ii; ++i) {
+      var _data$srid;
+      const data = geometries[i];
+      const dataProjection = 'EPSG:' + ((_data$srid = data.srid) !== null && _data$srid !== void 0 ? _data$srid : 4326);
+      if (!(dataProjection in projections)) {
+        projections[dataProjection] = (0,ol_proj__WEBPACK_IMPORTED_MODULE_21__.get)(dataProjection);
+      }
+      // Skip features which use an unknown projection
+      if (!projections[dataProjection]) {
+        continue;
+      }
+      const geometry = reader.readGeometry(data.wkt, {
+        dataProjection,
+        featureProjection: 'EPSG:3857'
+      });
+      if (geometry.getType() === 'GeometryCollection') {
+        const geometries = geometry.getGeometriesArrayRecursive();
+        geometries.forEach(geometry => {
+          addFeature(i, data, geometry);
+        });
+      } else {
+        addFeature(i, data, geometry);
+      }
+    }
+    return features;
   }
   drawOpenLayers() {
     if (!document.querySelector('script[src*="js/vendor/openlayers/openlayers.js"]')) {
@@ -311,24 +351,100 @@ class OlVisualization extends GisVisualization {
       link.href = olCss;
       document.head.appendChild(link);
     }
-    const vectorSource = new ol_source__WEBPACK_IMPORTED_MODULE_21__["default"]({
-      features: getFeaturesFromOpenLayersData(this.data)
+    const styleFactory = {
+      Point: color => new ol_style_Style__WEBPACK_IMPORTED_MODULE_19__["default"]({
+        image: new ol_style_Circle__WEBPACK_IMPORTED_MODULE_16__["default"]({
+          radius: 3,
+          fill: new ol_style_Fill__WEBPACK_IMPORTED_MODULE_17__["default"]({
+            color: 'white'
+          }),
+          stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+            width: 2,
+            color
+          })
+        }),
+        text: new ol_style_Text__WEBPACK_IMPORTED_MODULE_20__["default"]({
+          stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+            width: 2,
+            color: 'white'
+          })
+        })
+      }),
+      LineString: color => new ol_style_Style__WEBPACK_IMPORTED_MODULE_19__["default"]({
+        stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+          width: 2,
+          color: color
+        }),
+        text: new ol_style_Text__WEBPACK_IMPORTED_MODULE_20__["default"]({
+          stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+            width: 2,
+            color: 'white'
+          })
+        })
+      }),
+      Polygon: color => new ol_style_Style__WEBPACK_IMPORTED_MODULE_19__["default"]({
+        fill: new ol_style_Fill__WEBPACK_IMPORTED_MODULE_17__["default"]({
+          color: [...color, 0.8]
+        }),
+        stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+          width: .5,
+          color: 'black'
+        }),
+        text: new ol_style_Text__WEBPACK_IMPORTED_MODULE_20__["default"]({
+          stroke: new ol_style_Stroke__WEBPACK_IMPORTED_MODULE_18__["default"]({
+            width: 2,
+            color: 'white'
+          })
+        })
+      })
+    };
+    const vectorSource = new ol_source_Vector__WEBPACK_IMPORTED_MODULE_15__["default"]({
+      features: this.getFeaturesFromData(this.data.geometries)
     });
-    const map = new ol__WEBPACK_IMPORTED_MODULE_4__["default"]({
+    let currentFeatureIndex;
+    const colors = this.data.colors;
+    const cache = {};
+    const vectorLayer = new ol_layer_Vector__WEBPACK_IMPORTED_MODULE_13__["default"]({
+      source: vectorSource,
+      style: function (feature) {
+        const index = feature.get('index');
+        const type = feature.getGeometry().getType().replace('Multi', '');
+        const selected = index === currentFeatureIndex;
+        const key = type + (selected ? '+' : '-') + index % colors.length;
+        let style = cache[key];
+        if (!style) {
+          let color = colors[index % colors.length];
+          if (selected) {
+            color = color.map(c => c * 1.2);
+          }
+          style = styleFactory[type](color);
+          cache[key] = style;
+        }
+        style.getText().setText(feature.get('label'));
+        return style;
+      }
+    });
+    const map = new ol_Map__WEBPACK_IMPORTED_MODULE_4__["default"]({
       target: this.target,
-      layers: [new ol_layer__WEBPACK_IMPORTED_MODULE_17__["default"]({
-        source: new ol_source__WEBPACK_IMPORTED_MODULE_20__["default"]()
-      }), new ol_layer__WEBPACK_IMPORTED_MODULE_18__["default"]({
-        source: vectorSource
-      })],
-      view: new ol__WEBPACK_IMPORTED_MODULE_5__["default"]({
+      layers: [new ol_layer_Tile__WEBPACK_IMPORTED_MODULE_12__["default"]({
+        source: new ol_source_OSM__WEBPACK_IMPORTED_MODULE_14__["default"]()
+      }), vectorLayer],
+      view: new ol_View__WEBPACK_IMPORTED_MODULE_5__["default"]({
         center: [0, 0],
         zoom: 4
       }),
-      controls: [new ol_control__WEBPACK_IMPORTED_MODULE_7__["default"]({
+      controls: [new ol_control_MousePosition__WEBPACK_IMPORTED_MODULE_7__["default"]({
         coordinateFormat: (0,ol_coordinate__WEBPACK_IMPORTED_MODULE_9__.createStringXY)(4),
         projection: 'EPSG:4326'
-      }), new ol_control__WEBPACK_IMPORTED_MODULE_8__["default"](), new ol_control__WEBPACK_IMPORTED_MODULE_6__["default"]()]
+      }), new ol_control_Zoom__WEBPACK_IMPORTED_MODULE_8__["default"](), new ol_control_Attribution__WEBPACK_IMPORTED_MODULE_6__["default"]()]
+    });
+    map.on('pointermove', evt => {
+      var _map$forEachFeatureAt;
+      const newFeatureIndex = (_map$forEachFeatureAt = map.forEachFeatureAtPixel(evt.pixel, f => f)) === null || _map$forEachFeatureAt === void 0 ? void 0 : _map$forEachFeatureAt.get('index');
+      if (newFeatureIndex !== currentFeatureIndex) {
+        currentFeatureIndex = newFeatureIndex;
+        vectorLayer.changed();
+      }
     });
     const extent = vectorSource.getExtent();
     if (!(0,ol_extent__WEBPACK_IMPORTED_MODULE_10__.isEmpty)(extent)) {
@@ -354,62 +470,6 @@ class OlVisualization extends GisVisualization {
     }
     super.dispose();
   }
-}
-function getFeaturesFromOpenLayersData(geometries) {
-  let features = [];
-  for (const geometry of geometries) {
-    if (geometry.isCollection) {
-      features = features.concat(getFeaturesFromOpenLayersData(geometry.geometries));
-      continue;
-    }
-    let olGeometry = null;
-    const style = {};
-    if (geometry.geometry.type === 'LineString') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_11__["default"](geometry.geometry.coordinates);
-      style.stroke = new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.stroke);
-    } else if (geometry.geometry.type === 'MultiLineString') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_12__["default"](geometry.geometry.coordinates);
-      style.stroke = new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.stroke);
-    } else if (geometry.geometry.type === 'MultiPoint') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_13__["default"](geometry.geometry.coordinates);
-      style.image = new ol_style__WEBPACK_IMPORTED_MODULE_22__["default"]({
-        fill: new ol_style__WEBPACK_IMPORTED_MODULE_23__["default"](geometry.style.circle.fill),
-        stroke: new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.circle.stroke),
-        radius: geometry.style.circle.radius
-      });
-    } else if (geometry.geometry.type === 'MultiPolygon') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_14__["default"](geometry.geometry.coordinates);
-      style.fill = new ol_style__WEBPACK_IMPORTED_MODULE_23__["default"](geometry.style.fill);
-      style.stroke = new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.stroke);
-    } else if (geometry.geometry.type === 'Point') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_15__["default"](geometry.geometry.coordinates);
-      style.image = new ol_style__WEBPACK_IMPORTED_MODULE_22__["default"]({
-        fill: new ol_style__WEBPACK_IMPORTED_MODULE_23__["default"](geometry.style.circle.fill),
-        stroke: new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.circle.stroke),
-        radius: geometry.style.circle.radius
-      });
-    } else if (geometry.geometry.type === 'Polygon') {
-      olGeometry = new ol_geom__WEBPACK_IMPORTED_MODULE_16__["default"](geometry.geometry.coordinates);
-      style.fill = new ol_style__WEBPACK_IMPORTED_MODULE_23__["default"](geometry.style.fill);
-      style.stroke = new ol_style__WEBPACK_IMPORTED_MODULE_24__["default"](geometry.style.stroke);
-    } else {
-      throw new Error();
-    }
-    if (geometry.geometry.srid !== 3857) {
-      const source = 'EPSG:' + (geometry.geometry.srid !== 0 ? geometry.geometry.srid : 4326);
-      const sourceProj = (0,ol_proj__WEBPACK_IMPORTED_MODULE_19__.get)(source);
-      if (sourceProj) {
-        olGeometry = olGeometry.transform(source, 'EPSG:3857');
-      }
-    }
-    if (geometry.style.text) {
-      style.text = new ol_style__WEBPACK_IMPORTED_MODULE_26__["default"](geometry.style.text);
-    }
-    const feature = new ol__WEBPACK_IMPORTED_MODULE_3__["default"](olGeometry);
-    feature.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_25__["default"](style));
-    features.push(feature);
-  }
-  return features;
 }
 class GisVisualizationController {
   constructor(olData) {
