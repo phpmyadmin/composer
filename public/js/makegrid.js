@@ -2291,8 +2291,9 @@ const makeGrid = function (t) {
         g.startSelectCell = this;
         g.isSelectingCells = true;
         selectCell(this);
-        // Prevent text selection
-        e.preventDefault();
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).on('mouseleave.cellSelect', 'td.data', function () {
+          window.getSelection().removeAllRanges();
+        });
         // Dynamic mouseover for drag
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).on('mouseover.cellSelect', 'td.data, thead th:not(.column_action)', function (e) {
           if (!g.isSelectingCells || g.endSelectCell === this) {
@@ -2326,12 +2327,14 @@ const makeGrid = function (t) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseup.cellSelect', function () {
           g.isSelectingCells = false;
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).off('mouseover.cellSelect');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).off('mouseleave.cellSelect');
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mouseup.cellSelect');
         });
       });
       // Copy handler
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('copy', function (e) {
-        if (!document.body.contains(g.t) || g.isCellEditActive) {
+        const selection = window.getSelection();
+        if (!document.body.contains(g.t) || g.isCellEditActive || selection.rangeCount > 0 && !selection.isCollapsed) {
           return;
         }
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find(".".concat(selectingClass)).length > 0) {
