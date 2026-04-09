@@ -212,6 +212,7 @@ AJAX.registerTeardown('sql.js', function () {
   $(document).off('submit', '.maxRowsForm');
   $(document).off('click', '#view_as');
   $(document).off('click', '#sqlquery');
+  $('#simulateDmlModal').modal('hide');
 });
 
 /**
