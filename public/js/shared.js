@@ -4636,7 +4636,7 @@ function slidingMessage(msg) {
     // If the second argument was not supplied,
     // we might have to create a new DOM node.
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#PMA_slidingMessage').length === 0) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content').prepend('<span id="PMA_slidingMessage" ' + 'class="d-inline-block"></span>');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content').prepend('<div id="PMA_slidingMessage" ' + 'class="position-relative" style="z-index: 1"></div>');
     }
     $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#PMA_slidingMessage');
   }
@@ -4651,6 +4651,9 @@ function slidingMessage(msg) {
       $obj.find('div').first().hide();
       $obj.animate({
         height: $obj.find('div').first().height()
+      }, function () {
+        $obj.css('height', 'auto');
+        $obj.find('div').first().css('height', 'auto');
       }).find('div').first().fadeIn();
     });
   } else {
@@ -4663,9 +4666,10 @@ function slidingMessage(msg) {
     $obj.find('div').first().css('height', 0).show().animate({
       height: h
     }, function () {
-      // Set the height of the parent
-      // to the height of the child
-      $obj.height($obj.find('div').first().height());
+      // After animation, allow the container and its content
+      // to resize naturally (e.g. when using "Edit inline")
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('height', 'auto');
+      $obj.css('height', 'auto');
     });
   }
   return true;

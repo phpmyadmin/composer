@@ -41,6 +41,10 @@ var DragDropImport = {
    */
   importStatus: [],
   /**
+   * @var {boolean}, true when drag was initiated from current document DOM
+   */
+  internalDomDrag: false,
+  /**
    * Checks if any dropped file has valid extension or not
    *
    * @param {string} file filename
@@ -156,6 +160,30 @@ var DragDropImport = {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler').fadeIn();
   },
   /**
+   * Marks drag as internal if it starts from current page DOM.
+   *
+   * @param {MouseEvent} event obj
+   *
+   * @return {void}
+   */
+  markInternalDrag: function (event) {
+    var dataTransfer = event.originalEvent && event.originalEvent.dataTransfer;
+    // OS file drags do not trigger dragstart on current document.
+    // If we can already detect real file payload here, do not mark internal.
+    if (dataTransfer && dataTransfer.types && jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('Files', dataTransfer.types) >= 0) {
+      return;
+    }
+    DragDropImport.internalDomDrag = true;
+  },
+  /**
+   * Clears internal drag marker.
+   *
+   * @return {void}
+   */
+  clearInternalDrag: function () {
+    DragDropImport.internalDomDrag = false;
+  },
+  /**
    * Check if dragged element contains Files
    *
    * @param event the event object
@@ -163,7 +191,38 @@ var DragDropImport = {
    * @return {boolean}
    */
   hasFiles: function (event) {
-    return !(typeof event.originalEvent.dataTransfer.types === 'undefined' || jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('Files', event.originalEvent.dataTransfer.types) < 0 || jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('application/x-moz-nativeimage', event.originalEvent.dataTransfer.types) >= 0);
+    var dataTransfer = event.originalEvent.dataTransfer;
+    var types = dataTransfer.types;
+    // Chrome/Edge may expose browser-internal drags as 'Files'.
+    if (DragDropImport.internalDomDrag) {
+      return false;
+    }
+    if (typeof types === 'undefined') {
+      return false;
+    }
+    // Not a file drag at all
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('Files', types) === -1) {
+      return false;
+    }
+    // Firefox native file drag - allow it
+    // "Firefox also adds a non-standard text item of type application/x-moz-file
+    // containing the full path of the file on the user's file system. Unless within
+    // privileged code (such as an extension), its value is the empty string."
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('application/x-moz-file', types) !== -1) {
+      return true;
+    }
+    // Firefox native image drag - exclude it
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('application/x-moz-nativeimage', types) === -1) {
+      return false;
+    }
+    // Chromium browsers (Chrome, Edge, Brave, Opera) include 'Files' even when
+    // dragging browser-internal elements like images or icons. These drags also
+    // include 'text/uri-list' and/or 'text/html', which are not present when
+    // the user is dragging a real file from the OS filesystem.
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('text/uri-list', types) !== -1 || jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('text/html', types) !== -1) {
+      return false;
+    }
+    return true;
   },
   /**
    * Triggered when dragged file is being dragged over PMA UI
@@ -245,6 +304,13 @@ var DragDropImport = {
     }
     var dbname = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db');
     var server = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    if (!DragDropImport.hasFiles(event)) {
+      DragDropImport.clearInternalDrag();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler').fadeOut();
+      event.stopPropagation();
+      event.preventDefault();
+      return;
+    }
     // if no database is selected -- no
     if (dbname !== '') {
       var files = event.originalEvent.dataTransfer.files;
@@ -293,6 +359,7 @@ var DragDropImport = {
         }
       }
     }
+    DragDropImport.clearInternalDrag();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler').fadeOut();
     event.stopPropagation();
     event.preventDefault();
@@ -304,6 +371,8 @@ var DragDropImport = {
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('dragenter', DragDropImport.dragEnter);
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('dragover', DragDropImport.dragOver);
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('dragleave', '.pma_drop_handler', DragDropImport.dragLeave);
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('dragstart', DragDropImport.markInternalDrag);
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('dragend drop', DragDropImport.clearInternalDrag);
 // when file is dropped to PMA UI
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('drop', 'body', DragDropImport.drop);
 // minimizing-maximizing the sql ajax upload status
