@@ -1255,7 +1255,6 @@
       <code><![CDATA[empty($this->config->selectedServer['verbose'])]]></code>
       <code><![CDATA[empty($this->config->settings['Servers'][Current::$server]['pmadb'])]]></code>
       <code><![CDATA[ini_get('allow_url_fopen')]]></code>
-      <code><![CDATA[ini_get('suhosin.request.max_value_length')]]></code>
     </RiskyTruthyFalsyComparison>
     <UnusedVariable>
       <code><![CDATA[$collationsList]]></code>
@@ -2128,24 +2127,12 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Controllers/Table/ExportController.php">
-    <MixedArgument>
-      <code><![CDATA[Current::$database]]></code>
-      <code><![CDATA[Current::$table]]></code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[Current::$whereClause]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedPropertyTypeCoercion>
-      <code><![CDATA[UrlParams::$params]]></code>
-      <code><![CDATA[UrlParams::$params]]></code>
-      <code><![CDATA[['db' => Current::$database, 'table' => Current::$table]]]></code>
-    </MixedPropertyTypeCoercion>
     <PossiblyNullArgument>
       <code><![CDATA[$parser->list]]></code>
     </PossiblyNullArgument>
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[Response]]></code>
-    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Controllers/Table/ExportRowsController.php">
     <InvalidPropertyAssignmentValue>
@@ -3868,7 +3855,6 @@
   <file src="src/Engines/Innodb.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
       <code><![CDATA[DatabaseInterface::getInstance()]]></code>
@@ -9430,6 +9416,7 @@
   </file>
   <file src="tests/unit/Controllers/Table/ExportControllerTest.php">
     <DeprecatedMethod>
+      <code><![CDATA[Config::getInstance()]]></code>
       <code><![CDATA[Config::getInstance()]]></code>
     </DeprecatedMethod>
   </file>
