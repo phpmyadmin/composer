@@ -23,9 +23,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('multi_column_sort.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('th.draggable.column_heading.pointer.marker a').on('click', function (event) {
-    var orderUrlRemove = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('input[name="url-remove-order"]').val();
-    var orderUrlAdd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('input[name="url-add-order"]').val();
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let orderUrlRemove = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('input[name="url-remove-order"]').val();
+    let orderUrlAdd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('input[name="url-add-order"]').val();
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     if (event.ctrlKey || event.altKey) {
       event.preventDefault();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);

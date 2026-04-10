@@ -47,9 +47,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 (function ($) {
   $.fn.sortableTable = function (method) {
-    var methods = {
+    const methods = {
       init: function (options) {
-        var tb = new SortableTableInstance(this, options);
+        const tb = new SortableTableInstance(this, options);
         tb.init();
         $(this).data('sortableTable', tb);
       },
@@ -69,16 +69,16 @@ __webpack_require__.r(__webpack_exports__);
     }
     function SortableTableInstance(table) {
       let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var down = false;
-      var $draggedEl;
-      var oldCell;
-      var previewMove;
-      var id;
+      let down = false;
+      let $draggedEl;
+      let oldCell;
+      let previewMove;
+      let id;
       /* Mouse handlers on the child elements */
-      var onMouseUp = function (e) {
+      const onMouseUp = function (e) {
         dropAt(e.pageX, e.pageY);
       };
-      var onMouseDown = function (e) {
+      const onMouseDown = function (e) {
         $draggedEl = $(this).children();
         if ($draggedEl.length === 0) {
           return;
@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         return false;
       };
-      var globalMouseMove = function (e) {
+      const globalMouseMove = function (e) {
         if (down) {
           move(e.pageX, e.pageY);
           if (inside($(oldCell), e.pageX, e.pageY)) {
@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         return false;
       };
-      var globalMouseOut = function () {
+      const globalMouseOut = function () {
         if (down) {
           down = false;
           if (previewMove) {
@@ -171,11 +171,11 @@ __webpack_require__.r(__webpack_exports__);
         $(document).off('mouseleave', globalMouseOut);
       };
       function switchElement(drag, dropTo) {
-        var dragPosDiff = {
+        const dragPosDiff = {
           left: $(drag).children().first().offset().left - $(dropTo).offset().left,
           top: $(drag).children().first().offset().top - $(dropTo).offset().top
         };
-        var dropPosDiff = null;
+        let dropPosDiff = null;
         if ($(dropTo).children().length > 0) {
           dropPosDiff = {
             left: $(dropTo).children().first().offset().left - $(drag).offset().left,
@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
       function inside($el, x, y) {
-        var off = $el.offset();
+        const off = $el.offset();
         return y >= off.top && x >= off.left && x < off.left + $el.width() && y < off.top + $el.height();
       }
       function insideRect(pos, r) {
@@ -226,7 +226,7 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
         down = false;
-        var switched = false;
+        let switched = false;
         $(table).find('td').each(function () {
           if ($(this).children().first().attr('class') !== $(oldCell).children().first().attr('class') && inside($(this), x, y)) {
             switchElement(oldCell, this);

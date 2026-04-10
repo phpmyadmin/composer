@@ -26,15 +26,15 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#no_https').remove();
   } else {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#no_https a').on('click', function () {
-      var oldLocation = window.location;
+      const oldLocation = window.location;
       window.location.href = 'https:' + oldLocation.href.substring(oldLocation.protocol.length);
       return false;
     });
   }
-  var hiddenMessages = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.hiddenmessage');
+  const hiddenMessages = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.hiddenmessage');
   if (hiddenMessages.length > 0) {
     hiddenMessages.hide();
-    var link = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#show_hidden_messages');
+    const link = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#show_hidden_messages');
     link.on('click', function (e) {
       e.preventDefault();
       hiddenMessages.show();
@@ -46,11 +46,11 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
 });
 // set document width
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
-  var width = 0;
+  let width = 0;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.tabs li').each(function () {
     width += jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).width() + 10;
   });
-  var contentWidth = width;
+  const contentWidth = width;
   width += 250;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('min-width', width);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tabs_contents').css('min-width', contentWidth);
@@ -71,7 +71,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
  * @return {boolean|void}
  */
 function ajaxValidate(parent, id, values) {
-  var $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(parent);
+  let $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(parent);
   // ensure that parent is a fieldset
   if ($parent.attr('tagName') !== 'FIELDSET') {
     $parent = $parent.closest('fieldset');
@@ -95,7 +95,7 @@ function ajaxValidate(parent, id, values) {
       if (response === null) {
         return;
       }
-      var error = {};
+      const error = {};
       if (typeof response !== 'object') {
         // @ts-ignore
         error[$parent.id] = [response];
@@ -103,8 +103,8 @@ function ajaxValidate(parent, id, values) {
         // @ts-ignore
         error[$parent.id] = [response.error];
       } else {
-        for (var key in response) {
-          var value = response[key];
+        for (let key in response) {
+          const value = response[key];
           error[key] = Array.isArray(value) ? value : [value];
         }
       }
@@ -134,7 +134,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, window.validators, {
      */
     hide_db: function (isKeyUp) {
       if (!isKeyUp && this.value !== '') {
-        var data = {};
+        const data = {};
         data[this.id] = this.value;
         ajaxValidate(this, 'Servers/1/hide_db', data);
       }
@@ -149,7 +149,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, window.validators, {
      */
     TrustedProxies: function (isKeyUp) {
       if (!isKeyUp && this.value !== '') {
-        var data = {};
+        const data = {};
         data[this.id] = this.value;
         ajaxValidate(this, 'TrustedProxies', data);
       }
@@ -193,7 +193,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, window.validators, {
       if (isKeyUp) {
         return true;
       }
-      var prefix = _modules_config_ts__WEBPACK_IMPORTED_MODULE_1__.Config.getIdPrefix(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input'));
+      const prefix = _modules_config_ts__WEBPACK_IMPORTED_MODULE_1__.Config.getIdPrefix(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input'));
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + prefix + 'pmadb').val() !== '') {
         ajaxValidate(this, 'Server_pmadb', _modules_config_ts__WEBPACK_IMPORTED_MODULE_1__.Config.getAllValues());
       }
@@ -212,7 +212,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
     if (this !== e.target) {
       return;
     }
-    var el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input');
+    const el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input');
     if (el.prop('disabled')) {
       return;
     }
@@ -225,7 +225,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.delete-server').on('click', function (e) {
     e.preventDefault();
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($this.attr('href'), $this.attr('data-post'), function () {
       window.location.replace('../setup/index.php?route=/setup');
     });

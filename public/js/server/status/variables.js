@@ -26,10 +26,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('server/stat
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status/variables.js', function () {
   // Filters for status variables
-  var textFilter = null;
-  var alertFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterAlert').prop('checked');
-  var categoryFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterCategory').find(':selected').val();
-  var text = ''; // Holds filter text
+  let textFilter = null;
+  let alertFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterAlert').prop('checked');
+  let categoryFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterCategory').find(':selected').val();
+  let text = ''; // Holds filter text
   /* 3 Filtering functions */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterAlert').on('change', function () {
     alertFilter = this.checked;
@@ -48,7 +48,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
     serverStatusVariables.show();
   }).trigger('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterText').on('keyup', function () {
-    var word = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().replace(/_/g, ' ');
+    const word = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().replace(/_/g, ' ');
     if (word.length === 0 || word.length >= 32768) {
       textFilter = null;
     } else {
@@ -67,8 +67,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/status
   }).trigger('keyup');
   /* Filters the status variables by name/category/alert in the variables tab */
   function filterVariables() {
-    var usefulLinks = 0;
-    var section = text;
+    let usefulLinks = 0;
+    let section = text;
     if (categoryFilter.length > 0) {
       section = categoryFilter;
     }

@@ -14,7 +14,7 @@ __webpack_require__.r(__webpack_exports__);
  * Make columns sortable, but only for tables with more than 1 data row.
  */
 function makeColumnsSortable() {
-  var $tables = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins_plugins table:has(tbody tr + tr)');
+  const $tables = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins_plugins table:has(tbody tr + tr)');
   $tables.tablesorter({
     sortList: [[0, 0]],
     headers: {

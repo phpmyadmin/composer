@@ -48,10 +48,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/mu
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.remove-option');
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/multi_table_query.js', function () {
-  var editor = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#MultiSqlquery'), {}, 'vertical');
+  const editor = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#MultiSqlquery'), {}, 'vertical');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.CodeMirror-line').css('text-align', 'left');
   editor.setSize(-1, -1);
-  var columnCount = 3;
+  let columnCount = 3;
   addNewColumnCallbacks();
   function opsWithMultipleArgs() {
     return ['IN (...)', 'NOT IN (...)'];
@@ -60,13 +60,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     return ['BETWEEN', 'NOT BETWEEN'];
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#update_query_button').on('click', function () {
-    var columns = [];
-    var tableAliases = {};
+    const columns = [];
+    const tableAliases = {};
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tableNameSelect').each(function () {
-      var $show = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.show_col').first();
+      const $show = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.show_col').first();
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() !== '' && $show.prop('checked')) {
-        var tableAlias = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.table_alias').first().val();
-        var columnAlias = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.col_alias').first().val();
+        const tableAlias = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.table_alias').first().val();
+        const columnAlias = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.col_alias').first().val();
         if (tableAlias !== '') {
           columns.push([tableAlias, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.columnNameSelect').first().val()]);
         } else {
@@ -86,7 +86,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Nothing selected', false, 'error');
       return;
     }
-    var foreignKeys;
+    let foreignKeys;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       type: 'GET',
       async: false,
@@ -102,7 +102,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         foreignKeys = response.foreignKeyConstrains;
       }
     });
-    var query = 'SELECT ' + '`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][0]) + '`.';
+    let query = 'SELECT ' + '`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][0]) + '`.';
     if (columns[0][1] === '*') {
       query += '*';
     } else {
@@ -111,7 +111,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     if (columns[0][2] !== '') {
       query += ' AS `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[0][2]) + '`';
     }
-    for (var i = 1; i < columns.length; i++) {
+    for (let i = 1; i < columns.length; i++) {
       query += ', `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeBacktick)(columns[i][0]) + '`.';
       if (columns[i][1] === '*') {
         query += '*';
@@ -124,7 +124,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     }
     query += '\nFROM ';
     query += window.generateFromBlock(tableAliases, foreignKeys);
-    var $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_col:checked').length;
+    const $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_col:checked').length;
     if ($criteriaColCount > 0) {
       query += '\nWHERE ';
       query += window.generateWhereBlock();
@@ -133,13 +133,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     editor.getDoc().setValue(query);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_query').on('click', function () {
-    var query = editor.getDoc().getValue();
+    const query = editor.getDoc().getValue();
     // Verifying that the query is not empty
     if (query === '') {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strEmptyQuery, false, 'error');
       return;
     }
-    var data = {
+    const data = {
       'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_name').val(),
       'sql_query': query,
       'ajax_request': '1',
@@ -151,7 +151,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       url: 'index.php?route=/database/multi-table-query/query',
       data: data,
       success: function (data) {
-        var $resultsDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
+        const $resultsDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
         $resultsDom.find('.ajax:not(.pageselector)').each(function () {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('click', function (event) {
             event.preventDefault();
@@ -179,7 +179,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_column_button').on('click', function () {
     columnCount++;
-    var $newColumnDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="col"></div>').html(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#new_column_layout').html());
+    const $newColumnDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="col"></div>').html(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#new_column_layout').html());
     $newColumnDom.find('.jsCriteriaButton').first().attr('data-bs-target', '#criteriaOptionsExtra' + columnCount.toString());
     $newColumnDom.find('.jsCriteriaButton').first().attr('aria-controls', 'criteriaOptionsExtra' + columnCount.toString());
     $newColumnDom.find('.jsCriteriaOptions').first().attr('id', 'criteriaOptionsExtra' + columnCount.toString());
@@ -260,10 +260,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.jsCriteriaButton').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('click', function (event, from) {
         if (from === null) {
-          var $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.criteria_col').first();
+          const $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.criteria_col').first();
           $checkbox.prop('checked', !$checkbox.prop('checked'));
         }
-        var $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_col:checked').length;
+        const $criteriaColCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_col:checked').length;
         if ($criteriaColCount > 1) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.jsCriteriaOptions').first().find('.logical_operator').first().css('display', 'table-row');
         }
@@ -271,7 +271,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_col').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('change', function () {
-        var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.jsCriteriaButton').first();
+        const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.jsCriteriaButton').first();
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked') && !$anchor.hasClass('collapsed') || !jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked') && $anchor.hasClass('collapsed')) {
           // Do not collapse on checkbox tick as it does not make sense
           // The user has it open and wants to tick the box
@@ -282,8 +282,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.criteria_rhs').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).on('change', function () {
-        var $rhsCol = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().siblings('.rhs_table').first();
-        var $rhsText = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().siblings('.rhs_text').first();
+        const $rhsCol = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().siblings('.rhs_table').first();
+        const $rhsText = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().siblings('.rhs_text').first();
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === 'text') {
           $rhsCol.css('display', 'none');
           $rhsText.css('display', 'table-row');

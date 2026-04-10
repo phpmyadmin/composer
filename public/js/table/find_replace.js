@@ -27,7 +27,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/find_
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/find_replace.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="toggle_find_div"><button class="btn btn-sm btn-secondary" type="button" id="toggle_find"></button></div>').insertAfter('#find_replace_form').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggle_find').html(window.Messages.strHideFindNReplaceCriteria).on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form').slideToggle();
     if ($link.text() === window.Messages.strHideFindNReplaceCriteria) {
       $link.text(window.Messages.strShowFindNReplaceCriteria);
@@ -38,9 +38,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/find_re
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form').on('submit', function (e) {
     e.preventDefault();
-    var findReplaceForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form');
+    const findReplaceForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form');
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)(findReplaceForm);
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(findReplaceForm.attr('action'), findReplaceForm.serialize(), function (data) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       if (data.success === true) {

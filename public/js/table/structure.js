@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function reloadFieldForm() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').attr('action'), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true', function (formData) {
-    var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(formData.message);
+    const $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(formData.message);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').replaceWith($tempDiv.find('#fieldsForm'));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addColumns').replaceWith($tempDiv.find('#addColumns'));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('ul').replaceWith($tempDiv.find('#move_columns_dialog ul'));
@@ -85,10 +85,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     /**
      * @var form object referring to the export form
      */
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var fieldCnt = Number($form.find('input[name=orig_num_fields]').val());
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const fieldCnt = Number($form.find('input[name=orig_num_fields]').val());
     function submitForm() {
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').length !== 0) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').remove();
@@ -122,14 +122,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       }); // end $.post()
     }
     function checkIfConfirmRequired($form) {
-      var i = 0;
-      var id;
-      var elm;
-      var val;
-      var nameOrig;
-      var elmOrig;
-      var valOrig;
-      var checkRequired = false;
+      let i = 0;
+      let id;
+      let elm;
+      let val;
+      let nameOrig;
+      let elmOrig;
+      let valOrig;
+      let checkRequired = false;
       for (i = 0; i < fieldCnt; i++) {
         id = '#field_' + i + '_5';
         elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(id);
@@ -158,7 +158,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
         // User wants to submit the form
         // If Collation is changed, Warn and Confirm
         if (checkIfConfirmRequired($form)) {
-          var question = window.sprintf(window.Messages.strChangeColumnCollation, 'https://wiki.phpmyadmin.net/pma/Garbled_data');
+          const question = window.sprintf(window.Messages.strChangeColumnCollation, 'https://wiki.phpmyadmin.net/pma/Garbled_data');
           $form.confirm(question, $form.attr('action'), function () {
             submitForm();
           });
@@ -176,28 +176,28 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     /**
      * @var currTableName String containing the name of the current table
      */
-    var currTableName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form').find('input[name=table]').val();
+    const currTableName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form').find('input[name=table]').val();
     /**
      * @var currRow    Object reference to the currently selected row (i.e. field in the table)
      */
-    var $currRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr');
+    const $currRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr');
     /**
      * @var currColumnName    String containing name of the field referred to by {@link curr_row}
      */
-    var currColumnName = $currRow.children('th').children('label').text().trim();
+    let currColumnName = $currRow.children('th').children('label').text().trim();
     currColumnName = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeJsString)((0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName));
     /**
      * @var $afterFieldItem    Corresponding entry in the 'After' field.
      */
-    var $afterFieldItem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name=\'after_field\'] option[value=\'' + currColumnName + '\']');
+    const $afterFieldItem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name=\'after_field\'] option[value=\'' + currColumnName + '\']');
     /**
      * @var question String containing the question to be asked for confirmation
      */
-    var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
-    var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
+    const $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingColumn, false);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingColumn, false);
+      let params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
       params += _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=1';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
@@ -210,8 +210,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
             (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content'));
           }
           // Adjust the row numbers
-          for (var $row = $currRow.next(); $row.length > 0; $row = $row.next()) {
-            var newVal = parseInt($row.find('td').eq(1).text(), 10) - 1;
+          for (let $row = $currRow.next(); $row.length > 0; $row = $row.next()) {
+            const newVal = parseInt($row.find('td').eq(1).text(), 10) - 1;
             $row.find('td').eq(1).text(newVal);
           }
           $afterFieldItem.remove();
@@ -239,10 +239,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.add_key.ajax', function (event) {
     event.preventDefault();
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var currTableName = $this.closest('form').find('input[name=table]').val();
-    var currColumnName = $this.parents('tr').children('th').children('label').text().trim();
-    var addClause = '';
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const currTableName = $this.closest('form').find('input[name=table]').val();
+    const currColumnName = $this.parents('tr').children('th').children('label').text().trim();
+    let addClause = '';
     if ($this.is('.add_primary_key_anchor')) {
       addClause = 'ADD PRIMARY KEY';
     } else if ($this.is('.add_index_anchor')) {
@@ -254,12 +254,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     } else if ($this.is('.add_fulltext_anchor')) {
       addClause = 'ADD FULLTEXT';
     }
-    var question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currTableName) + '` ' + addClause + '(`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName) + '`);');
-    var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currTableName) + '` ' + addClause + '(`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName) + '`);');
+    const $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $this;
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
+      let params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])(this, $thisAnchor.getPostData());
       params += _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=1';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     });
@@ -269,17 +269,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    **/
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#move_columns_anchor', function (e) {
     e.preventDefault();
-    var columns = [];
+    const columns = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablestructure').find('tbody tr').each(function () {
-      var colName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input:checkbox').eq(0).val();
-      var hiddenInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').prop({
+      const colName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input:checkbox').eq(0).val();
+      const hiddenInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').prop({
         name: 'move_columns[]',
         type: 'hidden'
       }).val(colName);
       columns[columns.length] = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<li></li>').addClass('placeholderDrag').text(colName).append(hiddenInput);
     });
-    var colList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('ul').find('li').remove().end();
-    for (var i in columns) {
+    const colList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('ul').find('li').remove().end();
+    for (let i in columns) {
       colList.append(columns[i]);
     }
     colList.sortable({
@@ -287,7 +287,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       containment: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('div'),
       tolerance: 'pointer'
     }).disableSelection();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('form');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#move_columns_dialog').find('form');
     $form.data('serialized-unmoved', $form.serialize());
     const designerModalPreviewModal = document.getElementById('designerModalPreviewModal');
     designerModalPreviewModal.addEventListener('shown.bs.modal', () => {
@@ -324,10 +324,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').off('click'); // Unregister previous modals
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
       event.preventDefault();
-      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsModal');
-      var $form = $this.find('form');
-      var serialized = $form.serialize();
+      const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+      const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsModal');
+      const $form = $this.find('form');
+      const serialized = $form.serialize();
       // check if any columns were moved at all
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsModal').modal('hide');
       if (serialized === $form.data('serialized-unmoved')) {
@@ -337,24 +337,24 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.prop('action'), serialized + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true', function (data) {
         if (data.success === false) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
-          var errorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsErrorModal');
+          const errorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsErrorModal');
           errorModal.modal('show');
           errorModal.find('.modal-body').first().html(data.error);
         } else {
           // sort the fields table
-          var $fieldsTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table#tablestructure tbody');
+          const $fieldsTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table#tablestructure tbody');
           // remove all existing rows and remember them
-          var $rows = $fieldsTable.find('tr').remove();
+          const $rows = $fieldsTable.find('tr').remove();
           // loop through the correct order
-          for (var i in data.columns) {
-            var theColumn = data.columns[i];
-            var $theRow = $rows.find('input:checkbox[value=' + jquery__WEBPACK_IMPORTED_MODULE_0___default().escapeSelector(theColumn) + ']').closest('tr');
+          for (let i in data.columns) {
+            const theColumn = data.columns[i];
+            const $theRow = $rows.find('input:checkbox[value=' + jquery__WEBPACK_IMPORTED_MODULE_0___default().escapeSelector(theColumn) + ']').closest('tr');
             // append the row for this column to the table
             $fieldsTable.append($theRow);
           }
-          var $firstrow = $fieldsTable.find('tr').eq(0);
+          const $firstrow = $fieldsTable.find('tr').eq(0);
           // Adjust the row numbers and colors
-          for (var $row = $firstrow; $row.length > 0; $row = $row.next()) {
+          for (let $row = $firstrow; $row.length > 0; $row = $row.next()) {
             $row.find('td').eq(1).text($row.index() + 1).end().removeClass('odd even').addClass($row.index() % 2 === 0 ? 'odd' : 'even');
           }
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
@@ -367,9 +367,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', '#fieldsForm button.mult_submit', function (e) {
     e.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-    var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(this.formAction, submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -379,9 +379,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a[id^=partition_action].ajax', function (e) {
     e.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     function submitPartitionAction(url) {
-      var params = 'ajax_request=true&ajax_page_request=true&' + $link.getPostData();
+      const params = 'ajax_request=true&ajax_page_request=true&' + $link.getPostData();
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $link;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -403,10 +403,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#remove_partitioning.ajax', function (e) {
     e.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var question = window.Messages.strRemovePartitioningWarning;
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = window.Messages.strRemovePartitioningWarning;
     $link.confirm(question, $link.attr('href'), function (url) {
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])({
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])({
         'ajax_request': true,
         'ajax_page_request': true
       }, $link.getPostData());

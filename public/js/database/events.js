@@ -43,7 +43,7 @@ const DatabaseEvents = {
      * @var $elm a jQuery object containing the reference
      *           to an element that is being validated
      */
-    var $elm = null;
+    let $elm = null;
     // Common validation. At the very least the name
     // and the definition must be provided for an item
     $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.rte_table').last().find('input[name=item_name]');
@@ -67,21 +67,21 @@ const DatabaseEvents = {
     return this.validateCustom();
   },
   exportDialog: function ($this) {
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+    const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     if ($this.attr('id') === 'bulkActionExportButton') {
-      var combined = {
+      const combined = {
         success: true,
         title: window.Messages.strExport,
         message: '',
         error: ''
       };
       // export anchors of all selected rows
-      var exportAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.export_anchor');
-      var count = exportAnchors.length;
-      var returnCount = 0;
-      var p = jquery__WEBPACK_IMPORTED_MODULE_0___default().when();
+      const exportAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.export_anchor');
+      const count = exportAnchors.length;
+      let returnCount = 0;
+      let p = jquery__WEBPACK_IMPORTED_MODULE_0___default().when();
       exportAnchors.each(function () {
-        var h = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
+        const h = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
         p = p.then(function () {
           return jquery__WEBPACK_IMPORTED_MODULE_0___default().get(h, {
             'ajax_request': true
@@ -130,13 +130,13 @@ const DatabaseEvents = {
     }
   },
   editorDialog: function (isNew, $this) {
-    var that = this;
+    const that = this;
     /**
      * @var $edit_row jQuery object containing the reference to
      *                the row of the the item being edited
      *                from the list of items
      */
-    var $editRow = null;
+    let $editRow = null;
     if ($this.hasClass('edit_anchor')) {
       // Remember the row of the item being edited for later,
       // so that if the edit is successful, we can replace the
@@ -147,7 +147,7 @@ const DatabaseEvents = {
      * @var $msg jQuery object containing the reference to
      *           the AJAX message shown to the user
      */
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+    let $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -169,9 +169,9 @@ const DatabaseEvents = {
           /**
            * @var data Form data to be sent in the AJAX request
            */
-          var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
+          const data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
           $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-          var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().attr('action');
+          const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().attr('action');
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, function (data) {
             if (data.success !== true) {
               (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -199,12 +199,12 @@ const DatabaseEvents = {
                *           to find the correct location where
                *           to insert a new row.
                */
-              var text = '';
+              let text = '';
               /**
                * @var inserted Whether a new item has been
                *               inserted in the list or not
                */
-              var inserted = false;
+              let inserted = false;
               jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data').find('tr').each(function () {
                 text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('td').eq(0).find('strong').text().toUpperCase().trim();
                 if (text !== '' && text > data.name) {
@@ -239,12 +239,12 @@ const DatabaseEvents = {
             /**
              * @var ct Count of processed rows
              */
-            var ct = 0;
+            let ct = 0;
             /**
              * @var rowclass Class to be attached to the row
              *               that is being processed
              */
-            var rowclass = '';
+            let rowclass = '';
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data').find('tr').has('td').each(function () {
               rowclass = ct % 2 === 0 ? 'odd' : 'even';
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass().addClass(rowclass);
@@ -288,8 +288,8 @@ const DatabaseEvents = {
          * @var elm jQuery object containing the reference to
          *                 the Definition textarea.
          */
-        var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
-        var linterOptions = {
+        const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
+        const linterOptions = {
           editorType: 'event'
         };
         that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
@@ -307,19 +307,19 @@ const DatabaseEvents = {
     /**
      * @var $curr_row Object containing reference to the current row
      */
-    var $currRow = $this.parents('tr');
+    const $currRow = $this.parents('tr');
     /**
      * @var question String containing the question to be asked for confirmation
      */
-    var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').text($currRow.children('td').children('.drop_sql').html());
+    const question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').text($currRow.children('td').children('.drop_sql').html());
     // We ask for confirmation first here, before submitting the ajax request
     $this.confirm(question, $this.attr('href'), function (url) {
       /**
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $this.getPostData());
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $this.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (data.success !== true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -329,7 +329,7 @@ const DatabaseEvents = {
          * @var $table Object containing reference
          *             to the main list of elements
          */
-        var $table = $currRow.parent();
+        const $table = $currRow.parent();
         // Check how many rows will be left after we remove
         // the one that the user has requested us to remove
         if ($table.find('tr').length === 3) {
@@ -351,12 +351,12 @@ const DatabaseEvents = {
             /**
              * @var ct Count of processed rows
              */
-            var ct = 0;
+            let ct = 0;
             /**
              * @var rowclass Class to be attached to the row
              *               that is being processed
              */
-            var rowclass = '';
+            let rowclass = '';
             $table.find('tr').has('td').each(function () {
               rowclass = ct % 2 === 1 ? 'odd' : 'even';
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass().addClass(rowclass);
@@ -379,19 +379,19 @@ const DatabaseEvents = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       // drop anchors of all selected rows
-      var dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.drop_anchor');
-      var success = true;
-      var count = dropAnchors.length;
-      var returnCount = 0;
+      const dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.drop_anchor');
+      let success = true;
+      const count = dropAnchors.length;
+      let returnCount = 0;
       dropAnchors.each(function () {
-        var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         /**
          * @var $curr_row Object containing reference to the current row
          */
-        var $currRow = $anchor.parents('tr');
-        var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $anchor.getPostData());
+        const $currRow = $anchor.parents('tr');
+        const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $anchor.getPostData());
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post($anchor.attr('href'), params, function (data) {
           returnCount++;
           if (data.success !== true) {
@@ -406,7 +406,7 @@ const DatabaseEvents = {
            * @var $table Object containing reference
            *             to the main list of elements
            */
-          var $table = $currRow.parent();
+          const $table = $currRow.parent();
           // Check how many rows will be left after we remove
           // the one that the user has requested us to remove
           if ($table.find('tr').length === 3) {
@@ -426,12 +426,12 @@ const DatabaseEvents = {
               /**
                * @var ct Count of processed rows
                */
-              var ct = 0;
+              let ct = 0;
               /**
                * @var rowclass Class to be attached to the row
                *               that is being processed
                */
-              var rowclass = '';
+              let rowclass = '';
               $table.find('tr').has('td').each(function () {
                 rowclass = ct % 2 === 1 ? 'odd' : 'even';
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass().addClass(rowclass);
@@ -465,7 +465,7 @@ const DatabaseEvents = {
      * @var elm a jQuery object containing the reference
      *          to an element that is being validated
      */
-    var $elm = null;
+    let $elm = null;
     const eventsEditorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#eventsEditorModal');
     if (eventsEditorModal.find('select[name=item_type]').find(':selected').val() === 'RECURRING') {
       // The interval field must not be empty for recurring events

@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function nullify(theType, md5Field, multiEdit) {
   // @ts-ignore
-  var rowForm = document.forms.insertForm;
+  const rowForm = document.forms.insertForm;
   if (typeof rowForm.elements['funcs' + multiEdit + '[' + md5Field + ']'] !== 'undefined') {
     rowForm.elements['funcs' + multiEdit + '[' + md5Field + ']'].selectedIndex = -1;
   }
@@ -37,13 +37,13 @@ function nullify(theType, md5Field, multiEdit) {
     rowForm.elements['fields' + multiEdit + '[' + md5Field + ']'][1].selectedIndex = -1;
     // Other "ENUM" field
   } else if (Number(theType) === 2) {
-    var elts = rowForm.elements['fields' + multiEdit + '[' + md5Field + ']'];
+    const elts = rowForm.elements['fields' + multiEdit + '[' + md5Field + ']'];
     // when there is just one option in ENUM:
     if (elts.checked) {
       elts.checked = false;
     } else {
-      var eltsCnt = elts.length;
-      for (var i = 0; i < eltsCnt; i++) {
+      const eltsCnt = elts.length;
+      for (let i = 0; i < eltsCnt; i++) {
         elts[i].checked = false;
       } // end for
     } // end if
@@ -73,7 +73,7 @@ function daysInFebruary(year) {
 }
 // function to convert single digit to double digit
 function fractionReplace(number) {
-  var num = parseInt(number, 10);
+  const num = parseInt(number, 10);
   return num >= 1 && num <= 9 ? '0' + num : '00';
 }
 /* function to check the validity of date
@@ -85,23 +85,23 @@ function fractionReplace(number) {
 */
 function isDate(val) {
   let tmstmp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-  var value = val.replace(/[.|*|^|+|//|@]/g, '-');
-  var arrayVal = value.split('-');
-  for (var a = 0; a < arrayVal.length; a++) {
+  let value = val.replace(/[.|*|^|+|//|@]/g, '-');
+  const arrayVal = value.split('-');
+  for (let a = 0; a < arrayVal.length; a++) {
     if (arrayVal[a].length === 1) {
       arrayVal[a] = fractionReplace(arrayVal[a]);
     }
   }
   value = arrayVal.join('-');
-  var pos = 2;
-  var dtexp = new RegExp(/^([0-9]{4})-(((01|03|05|07|08|10|12)-((0[0-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)-((0[0-9])|([1-2][0-9])|30))|((00)-(00)))$/);
+  let pos = 2;
+  const dtexp = new RegExp(/^([0-9]{4})-(((01|03|05|07|08|10|12)-((0[0-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)-((0[0-9])|([1-2][0-9])|30))|((00)-(00)))$/);
   if (value.length === 8) {
     pos = 0;
   }
   if (dtexp.test(value)) {
-    var month = parseInt(value.substring(pos + 3, pos + 5), 10);
-    var day = parseInt(value.substring(pos + 6, pos + 8), 10);
-    var year = parseInt(value.substring(0, pos + 2), 10);
+    const month = parseInt(value.substring(pos + 3, pos + 5), 10);
+    const day = parseInt(value.substring(pos + 6, pos + 8), 10);
+    let year = parseInt(value.substring(0, pos + 2), 10);
     if (month === 2 && day > daysInFebruary(year)) {
       return false;
     }
@@ -128,14 +128,16 @@ function isDate(val) {
 * 3) 2:23:43.123456
 */
 function isTime(val) {
-  var arrayVal = val.split(':');
-  for (var a = 0, l = arrayVal.length; a < l; a++) {
+  const arrayVal = val.split(':');
+  let a = 0;
+  const l = arrayVal.length;
+  for (; a < l; a++) {
     if (arrayVal[a].length === 1) {
       arrayVal[a] = fractionReplace(arrayVal[a]);
     }
   }
-  var newVal = arrayVal.join(':');
-  var tmexp = new RegExp(/^(-)?(([0-7]?[0-9][0-9])|(8[0-2][0-9])|(83[0-8])):((0[0-9])|([1-5][0-9])):((0[0-9])|([1-5][0-9]))(\.[0-9]{1,6}){0,1}$/);
+  const newVal = arrayVal.join(':');
+  const tmexp = new RegExp(/^(-)?(([0-7]?[0-9][0-9])|(8[0-2][0-9])|(83[0-8])):((0[0-9])|([1-5][0-9])):((0[0-9])|([1-5][0-9]))(\.[0-9]{1,6}){0,1}$/);
   return tmexp.test(newVal);
 }
 /**
@@ -152,7 +154,7 @@ function checkForCheckbox(multiEdit) {
 // used in Search page mostly for INT fields
 // eslint-disable-next-line no-unused-vars
 function verifyAfterSearchFieldChange(index, searchFormId) {
-  var $thisInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'criteriaValues[' + index + ']\']');
+  const $thisInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'criteriaValues[' + index + ']\']');
   // Add  data-skip-validators attribute to skip validation in changeValueFieldType function
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldID_' + index).data('data-skip-validators')) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(searchFormId).validate().destroy();
@@ -162,7 +164,7 @@ function verifyAfterSearchFieldChange(index, searchFormId) {
   if ($thisInput.data('type') === 'INT' || $thisInput.data('type') === 'TINYINT') {
     // Trim spaces if it's an integer
     $thisInput.val($thisInput.val().trim());
-    var hasMultiple = $thisInput.prop('multiple');
+    const hasMultiple = $thisInput.prop('multiple');
     if (hasMultiple) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(searchFormId).validate({
         // update errors as we write
@@ -236,8 +238,8 @@ function validateMultipleIntField(jqueryInput, returnValueIfFine) {
  * @param {boolean} returnValueIfIsNumber the value to return if the validator passes
  */
 function validateIntField(jqueryInput, returnValueIfIsNumber) {
-  var mini = parseInt(jqueryInput.data('min'));
-  var maxi = parseInt(jqueryInput.data('max'));
+  const mini = parseInt(jqueryInput.data('min'));
+  const maxi = parseInt(jqueryInput.data('max'));
   // removing previous rules
   jqueryInput.rules('remove');
   jqueryInput.rules('add', {
@@ -287,17 +289,17 @@ function validateFloatField(jqueryInput, returnValueIfIsNumber) {
   });
 }
 function verificationsAfterFieldChange(urlField, multiEdit, theType) {
-  var evt = window.event || arguments.callee.caller.arguments[0];
-  var target = evt.target || evt.srcElement;
-  var $thisInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(':input[name^=\'fields[multi_edit][' + multiEdit + '][' + urlField + ']\']');
+  const evt = window.event || arguments.callee.caller.arguments[0];
+  const target = evt.target || evt.srcElement;
+  const $thisInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(':input[name^=\'fields[multi_edit][' + multiEdit + '][' + urlField + ']\']');
   // the function drop-down that corresponds to this input field
-  var $thisFunction = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name=\'funcs[multi_edit][' + multiEdit + '][' + urlField + ']\']');
-  var functionSelected = false;
+  const $thisFunction = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name=\'funcs[multi_edit][' + multiEdit + '][' + urlField + ']\']');
+  let functionSelected = false;
   if (typeof $thisFunction.val() !== 'undefined' && $thisFunction.val() !== null && $thisFunction.val().length > 0) {
     functionSelected = true;
   }
   // To generate the textbox that can take the salt
-  var newSaltBox = '<br><input type=text name=salt[multi_edit][' + multiEdit + '][' + urlField + ']' + ' id=salt_' + target.id + ' placeholder=\'' + window.Messages.strEncryptionKey + '\'>';
+  const newSaltBox = '<br><input type=text name=salt[multi_edit][' + multiEdit + '][' + urlField + ']' + ' id=salt_' + target.id + ' placeholder=\'' + window.Messages.strEncryptionKey + '\'>';
   // If encrypting or decrypting functions that take salt as input is selected append the new textbox for salt
   if (target.value === 'AES_ENCRYPT' || target.value === 'AES_DECRYPT' || target.value === 'DES_ENCRYPT' || target.value === 'DES_DECRYPT' || target.value === 'ENCRYPT' || target.value === 'SHA2') {
     if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#salt_' + target.id).length) {
@@ -308,7 +310,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#salt_' + target.id).prev('br').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#salt_' + target.id).remove();
   }
-  var couldFetchRules = false;
+  let couldFetchRules = false;
   try {
     // See: issue #18792 - In some weird cases the input goes away before it validates
     // And it breaks jquery, this is a well known jquery bug with different trigger schemes
@@ -344,7 +346,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
   }
   if (target.value === 'HEX' && theType.startsWith('int')) {
     // Add note when HEX function is selected on a int
-    var newHexInfo = '<br><p id="note' + target.id + '">' + window.Messages.HexConversionInfo + '</p>';
+    const newHexInfo = '<br><p id="note' + target.id + '">' + window.Messages.HexConversionInfo + '</p>';
     if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#note' + target.id).length) {
       $thisInput.after(newHexInfo);
     }
@@ -356,7 +358,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'fields_null[multi_edit][' + multiEdit + '][' + urlField + ']\']').prop('checked', false);
   // Unchecks the Ignore checkbox for the current row
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'insert_ignore_' + multiEdit + '\']').prop('checked', false);
-  var charExceptionHandling;
+  let charExceptionHandling;
   if (theType.startsWith('char')) {
     charExceptionHandling = theType.substring(5, 6);
   } else if (theType.startsWith('varchar')) {
@@ -390,7 +392,7 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
       validateIntField($thisInput, checkForCheckbox(multiEdit));
       // validation for CHAR types
     } else if ($thisInput.data('type') === 'CHAR') {
-      var maxlen = $thisInput.data('maxlength');
+      let maxlen = $thisInput.data('maxlength');
       if (typeof maxlen !== 'undefined') {
         if (maxlen <= 4) {
           maxlen = charExceptionHandling;
@@ -435,7 +437,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/chang
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="submit_type"]').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('change', '#insert_rows');
   // Reset grid edit state
-  var grid = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.table_results').data('pmaGrid');
+  const grid = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.table_results').data('pmaGrid');
   if (grid && typeof grid.resetGridEditState === 'function') {
     grid.resetGridEditState();
   }
@@ -469,25 +471,25 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.
       return !(value.startsWith('MD5') && typeof options.data('maxlength') !== 'undefined' && options.data('maxlength') < 32);
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default().validator.addMethod('validationFunctionForAesDesEncrypt', function (value, element, options) {
-      var funType = value.substring(0, 3);
+      const funType = value.substring(0, 3);
       if (funType !== 'AES' && funType !== 'DES') {
         return false;
       }
-      var dataType = options.data('type');
+      const dataType = options.data('type');
       if (dataType === 'HEX' || dataType === 'CHAR') {
         return true;
       }
       return false;
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default().validator.addMethod('validationFunctionForDateTime', function (value, element, options) {
-      var dtValue = value;
-      var theType = options;
+      let dtValue = value;
+      const theType = options;
       if (theType === 'date') {
         return isDate(dtValue);
       } else if (theType === 'time') {
         return isTime(dtValue);
       } else if (theType === 'datetime' || theType === 'timestamp') {
-        var tmstmp = false;
+        let tmstmp = false;
         dtValue = dtValue.trim();
         if (dtValue === 'CURRENT_TIMESTAMP' || dtValue === 'current_timestamp()') {
           return true;
@@ -498,7 +500,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.
         if (dtValue === '0000-00-00 00:00:00') {
           return true;
         }
-        var dv = dtValue.indexOf(' ');
+        const dv = dtValue.indexOf(' ');
         if (dv === -1) {
           // Only the date component, which is valid
           return isDate(dtValue, tmstmp);
@@ -538,11 +540,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.
    * Uncheck the null checkbox as geometry data is placed on the input field
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'button.gis-copy-data', function () {
-    var inputName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form#gis_data_editor_form').find('input[name=\'input_name\']').val();
-    var currentRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'' + inputName + '\']').parents('tr');
-    var $nullCheckbox = currentRow.find('.checkbox_null');
+    const inputName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form#gis_data_editor_form').find('input[name=\'input_name\']').val();
+    const currentRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'' + inputName + '\']').parents('tr');
+    const $nullCheckbox = currentRow.find('.checkbox_null');
     $nullCheckbox.prop('checked', false);
-    var rowId = currentRow.find('.open_gis_editor').data('row-id');
+    const rowId = currentRow.find('.open_gis_editor').data('row-id');
     // Unchecks the Ignore checkbox for the current row
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'insert_ignore_' + rowId + '\']').prop('checked', false);
   });
@@ -564,15 +566,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.
    * available).
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="submit_type"]').on('change', function () {
-    var thisElemSubmitTypeVal = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-    var $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable');
-    var autoIncrementColumn = $table.find('input[name^="auto_increment"]');
+    const thisElemSubmitTypeVal = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable');
+    const autoIncrementColumn = $table.find('input[name^="auto_increment"]');
     autoIncrementColumn.each(function () {
-      var $thisElemAIField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      var thisElemName = $thisElemAIField.attr('name');
-      var prevValueField = $table.find('input[name="' + thisElemName.replace('auto_increment', 'fields_prev') + '"]');
-      var valueField = $table.find('input[name="' + thisElemName.replace('auto_increment', 'fields') + '"]');
-      var previousValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(prevValueField).val();
+      const $thisElemAIField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const thisElemName = $thisElemAIField.attr('name');
+      const prevValueField = $table.find('input[name="' + thisElemName.replace('auto_increment', 'fields_prev') + '"]');
+      const valueField = $table.find('input[name="' + thisElemName.replace('auto_increment', 'fields') + '"]');
+      const previousValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(prevValueField).val();
       if (previousValue !== undefined) {
         if (thisElemSubmitTypeVal === 'insert' || thisElemSubmitTypeVal === 'insertignore' || thisElemSubmitTypeVal === 'showinsert') {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(valueField).val(null);
@@ -586,7 +588,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/change.
    * Handle ENTER key when press on Continue insert with field
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insert_rows').on('keypress', function (e) {
-    var key = e.which;
+    const key = e.which;
     if (key === 13) {
       addNewContinueInsertionFields(e);
     }
@@ -601,22 +603,23 @@ function addNewContinueInsertionFields(event) {
   /**
    * @var columnCount   Number of number of columns table has.
    */
-  var columnCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').first().find('tr').has('input[name*=\'fields_name\']').length;
+  const columnCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').first().find('tr').has('input[name*=\'fields_name\']').length;
   /**
    * @var curr_rows   Number of current insert rows already on page
    */
-  var currRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').length;
+  let currRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').length;
   /**
    * @var target_rows Number of rows the user wants
    */
-  var targetRows = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insert_rows').val());
+  const targetRows = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insert_rows').val());
   // remove all datepickers
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.datefield, input.datetimefield').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).datepicker('destroy');
   });
+  let newRowIndex;
   if (currRows < targetRows) {
-    var tempIncrementIndex = function () {
-      var $thisElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const tempIncrementIndex = function () {
+      const $thisElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       /**
        * Extract the index from the name attribute for all input/select fields and increment it
        * name is of format funcs[multi_edit][10][<long random string of alphanum chars>]
@@ -624,33 +627,33 @@ function addNewContinueInsertionFields(event) {
       /**
        * @var this_name   String containing name of the input/select elements
        */
-      var thisName = $thisElement.attr('name');
+      const thisName = $thisElement.attr('name');
       /** split {@link thisName} at [10], so we have the parts that can be concatenated later */
-      var nameParts = thisName.split(/\[\d+\]/);
+      const nameParts = thisName.split(/\[\d+\]/);
       /** extract the [10] from  {@link nameParts} */
-      var oldRowIndexString = thisName.match(/\[\d+\]/)[0];
+      const oldRowIndexString = thisName.match(/\[\d+\]/)[0];
       /** extract 10 - had to split into two steps to accomodate double digits */
-      var oldRowIndex = parseInt(oldRowIndexString.match(/\d+/)[0], 10);
+      const oldRowIndex = parseInt(oldRowIndexString.match(/\d+/)[0], 10);
       /** calculate next index i.e. 11 */
       newRowIndex = oldRowIndex + 1;
       /** generate the new name i.e. funcs[multi_edit][11][foobarbaz] */
-      var newName = nameParts[0] + '[' + newRowIndex + ']' + nameParts[1];
-      var hashedField = nameParts[1].match(/\[(.+)\]/)[1];
+      const newName = nameParts[0] + '[' + newRowIndex + ']' + nameParts[1];
+      const hashedField = nameParts[1].match(/\[(.+)\]/)[1];
       $thisElement.attr('name', newName);
       /** If element is select[name*='funcs'], update id */
       if ($thisElement.is('select[name*=\'funcs\']')) {
-        var thisId = $thisElement.attr('id');
-        var idParts = thisId.split(/_/);
-        var oldIdIndex = idParts[1];
-        var prevSelectedValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#field_' + oldIdIndex + '_1').val();
-        var newIdIndex = parseInt(oldIdIndex) + columnCount;
-        var newId = 'field_' + newIdIndex + '_1';
+        const thisId = $thisElement.attr('id');
+        const idParts = thisId.split(/_/);
+        const oldIdIndex = idParts[1];
+        const prevSelectedValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#field_' + oldIdIndex + '_1').val();
+        const newIdIndex = parseInt(oldIdIndex) + columnCount;
+        const newId = 'field_' + newIdIndex + '_1';
         $thisElement.attr('id', newId);
         $thisElement.find('option').filter(function () {
           return jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text() === prevSelectedValue;
         }).attr('selected', 'selected');
         // If salt field is there then update its id.
-        var nextSaltInput = $thisElement.parent().next('td').next('td').find('input[name*=\'salt\']');
+        const nextSaltInput = $thisElement.parent().next('td').next('td').find('input[name*=\'salt\']');
         if (nextSaltInput.length !== 0) {
           nextSaltInput.attr('id', 'salt_' + newId);
         }
@@ -669,7 +672,7 @@ function addNewContinueInsertionFields(event) {
         // Keep these values to be used when the element
         // will change
         .data('hashed_field', hashedField).data('new_row_index', newRowIndex).on('change', function () {
-          var $changedElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+          const $changedElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
           verificationsAfterFieldChange($changedElement.data('hashed_field'), $changedElement.data('new_row_index'), $changedElement.closest('tr').find('span.column_type').html());
         });
       }
@@ -681,20 +684,21 @@ function addNewContinueInsertionFields(event) {
         // Keep these values to be used when the element
         // will be clicked
         .data('hashed_field', hashedField).data('new_row_index', newRowIndex).on('click', function () {
-          var $changedElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+          const $changedElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
           nullify($changedElement.siblings('.nullify_code').val(), $changedElement.data('hashed_field'), '[multi_edit][' + $changedElement.data('new_row_index') + ']');
         });
       }
     };
-    var tempReplaceAnchor = function () {
-      var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      var newValue = 'rownumber=' + newRowIndex;
+    const tempReplaceAnchor = function () {
+      const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const newValue = 'rownumber=' + newRowIndex;
       // needs improvement in case something else inside
       // the href contains this pattern
-      var newHref = $anchor.attr('href').replace(/rownumber=\d+/, newValue);
+      const newHref = $anchor.attr('href').replace(/rownumber=\d+/, newValue);
       $anchor.attr('href', newHref);
     };
-    var restoreValue = function () {
+    let $checkedValue;
+    const restoreValue = function () {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('span.column_type').html() === 'enum') {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === $checkedValue) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('checked', true);
@@ -707,18 +711,18 @@ function addNewContinueInsertionFields(event) {
       /**
        * @var $last_row    Object referring to the last row
        */
-      var $lastRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').find('.insertRowTable').last();
+      const $lastRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').find('.insertRowTable').last();
       // need to access this at more than one level
       // (also needs improvement because it should be calculated
       //  just once per cloned row, not once per column)
-      var newRowIndex = 0;
-      var $checkedValue = $lastRow.find('input:checked').val();
+      newRowIndex = 0;
+      $checkedValue = $lastRow.find('input:checked').val();
       // Clone the insert tables
       $lastRow.clone(true, true).insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#actions_panel').closest('div')).find('input[name*=multi_edit],select[name*=multi_edit],textarea[name*=multi_edit]').each(tempIncrementIndex).end().find('.foreign_values_anchor').each(tempReplaceAnchor);
-      var $oldRow = $lastRow.find('.textfield');
+      const $oldRow = $lastRow.find('.textfield');
       $oldRow.each(restoreValue);
       // set the value of enum field of new row to default
-      var $newRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').find('.insertRowTable').last();
+      const $newRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').find('.insertRowTable').last();
       $newRow.find('.textfield').each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('span.column_type').html() === 'enum') {
           if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('span.default_value').html()) {
@@ -735,14 +739,14 @@ function addNewContinueInsertionFields(event) {
         /**
          * @var $last_checkbox   Object reference to the last checkbox in #insertForm
          */
-        var $lastCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').children('input:checkbox').last();
+        const $lastCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#insertForm').children('input:checkbox').last();
         /** name of {@link $lastCheckbox} */
-        var lastCheckboxName = $lastCheckbox.attr('name');
+        const lastCheckboxName = $lastCheckbox.attr('name');
         /** index of {@link $lastCheckbox} */
         // @ts-ignore
-        var lastCheckboxIndex = parseInt(lastCheckboxName.match(/\d+/), 10);
+        const lastCheckboxIndex = parseInt(lastCheckboxName.match(/\d+/), 10);
         /** name of new {@link $lastCheckbox} */
-        var newName = lastCheckboxName.replace(/\d+/, (lastCheckboxIndex + 1).toString());
+        const newName = lastCheckboxName.replace(/\d+/, (lastCheckboxIndex + 1).toString());
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<br><div class="clearfloat"></div>').insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.insertRowTable').last());
         $lastCheckbox.clone().attr({
           'id': newName,
@@ -756,7 +760,7 @@ function addNewContinueInsertionFields(event) {
     // recompute tabindex for text fields and other controls at footer;
     // IMO it's not really important to handle the tabindex for
     // function and Null
-    var tabIndex = 0;
+    let tabIndex = 0;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.textfield, .char, textarea').each(function () {
       tabIndex++;
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('tabindex', tabIndex);
@@ -772,7 +776,7 @@ function addNewContinueInsertionFields(event) {
      * Displays alert if data loss possible on decrease
      * of rows.
      */
-    var checkLock = jquery__WEBPACK_IMPORTED_MODULE_0___default().isEmptyObject(_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.lockedTargets);
+    const checkLock = jquery__WEBPACK_IMPORTED_MODULE_0___default().isEmptyObject(_modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.lockedTargets);
     if (checkLock || confirm(window.Messages.strConfirmRowChange) === true) {
       while (currRows > targetRows) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[id^=insert_ignore]').last().nextUntil('fieldset').addBack().remove();
@@ -786,12 +790,12 @@ function addNewContinueInsertionFields(event) {
   (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDateTimePicker)();
 }
 function changeValueFieldType(elem, searchIndex) {
-  var fieldsValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#fieldID_' + searchIndex);
+  const fieldsValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#fieldID_' + searchIndex);
   // @ts-ignore
   if (0 === fieldsValue.size()) {
     return;
   }
-  var type = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elem).val();
+  const type = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elem).val();
   if ('LIKE' === type || 'LIKE %...%' === type || 'NOT LIKE' === type || 'NOT LIKE %...%' === type) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldID_' + searchIndex).data('data-skip-validators', true);
     return;

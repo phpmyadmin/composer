@@ -25,7 +25,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export_output
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.export_copy_to_clipboard_btn').on('click', function (e) {
     e.preventDefault();
-    var copyStatus = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.copyToClipboard)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea#textSQLDUMP').val(), '<textarea>');
+    const copyStatus = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.copyToClipboard)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea#textSQLDUMP').val(), '<textarea>');
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.displayCopyStatus)(this, copyStatus);
   });
 });

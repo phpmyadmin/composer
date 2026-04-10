@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
  * Class to handle PMA Drag and Drop Import
  *      feature
  */
-var DragDropImport = {
+const DragDropImport = {
   /**
    * @var {number}, count of total uploads in this view
    */
@@ -52,8 +52,8 @@ var DragDropImport = {
    * @return {string}, extension for valid extension, '' otherwise
    */
   getExtension: function (file) {
-    var arr = file.split('.');
-    var ext = arr[arr.length - 1];
+    const arr = file.split('.');
+    let ext = arr[arr.length - 1];
     // check if compressed
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray(ext.toLowerCase(), DragDropImport.allowedCompressedExtensions) !== -1) {
       ext = arr[arr.length - 2];
@@ -80,15 +80,15 @@ var DragDropImport = {
    * @param {string} hash hash of the current file upload
    */
   sendFileToServer: function (formData, hash) {
-    var jqXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+    const jqXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       xhr: function () {
-        var xhrobj = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajaxSettings.xhr();
+        const xhrobj = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajaxSettings.xhr();
         if (xhrobj.upload) {
           xhrobj.upload.addEventListener('progress', function (event) {
-            var percent = 0;
+            let percent = 0;
             // @ts-ignore
-            var position = event.loaded || event.position;
-            var total = event.total;
+            const position = event.loaded || event.position;
+            const total = event.total;
             if (event.lengthComputable) {
               percent = Math.ceil(position / total * 100);
             }
@@ -124,11 +124,11 @@ var DragDropImport = {
         DragDropImport.importFinished(hash, true, false);
       } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('span').html() === window.Messages.dropImportMessageFailed) {
         // -- view information
-        var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         jquery__WEBPACK_IMPORTED_MODULE_0___default().each(DragDropImport.importStatus, function (key, value) {
           if (value.hash === hash) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_result:visible').remove();
-            var filename = $this.parent('span').attr('data-filename');
+            const filename = $this.parent('span').attr('data-filename');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append('<div class="pma_drop_result"><h2>' + window.Messages.dropImportImportResultHeader + ' - ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(filename) + '<span class="close">x</span></h2>' + value.message + '</div>');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_result').draggable(); // to make this dialog draggable
           }
@@ -167,7 +167,7 @@ var DragDropImport = {
    * @return {void}
    */
   markInternalDrag: function (event) {
-    var dataTransfer = event.originalEvent && event.originalEvent.dataTransfer;
+    const dataTransfer = event.originalEvent && event.originalEvent.dataTransfer;
     // OS file drags do not trigger dragstart on current document.
     // If we can already detect real file payload here, do not mark internal.
     if (dataTransfer && dataTransfer.types && jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray('Files', dataTransfer.types) >= 0) {
@@ -191,8 +191,8 @@ var DragDropImport = {
    * @return {boolean}
    */
   hasFiles: function (event) {
-    var dataTransfer = event.originalEvent.dataTransfer;
-    var types = dataTransfer.types;
+    const dataTransfer = event.originalEvent.dataTransfer;
+    const types = dataTransfer.types;
     // Chrome/Edge may expose browser-internal drags as 'Files'.
     if (DragDropImport.internalDomDrag) {
       return false;
@@ -255,7 +255,7 @@ var DragDropImport = {
     }
     event.stopPropagation();
     event.preventDefault();
-    var $dropHandler = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler');
+    const $dropHandler = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler');
     $dropHandler.clearQueue().stop();
     $dropHandler.fadeOut();
     $dropHandler.html(window.Messages.dropImportDropFiles);
@@ -269,7 +269,7 @@ var DragDropImport = {
    */
   importFinished: function (hash, aborted, status) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status div li[data-hash="' + hash + '"]').children('progress').hide();
-    var icon = 'icon ic_s_success';
+    let icon = 'icon ic_s_success';
     // -- provide link to view upload status
     if (!aborted) {
       if (status) {
@@ -302,8 +302,8 @@ var DragDropImport = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.noDragDrop').length !== 0) {
       return;
     }
-    var dbname = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db');
-    var server = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    const dbname = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db');
+    const server = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     if (!DragDropImport.hasFiles(event)) {
       DragDropImport.clearInternalDrag();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler').fadeOut();
@@ -313,7 +313,7 @@ var DragDropImport = {
     }
     // if no database is selected -- no
     if (dbname !== '') {
-      var files = event.originalEvent.dataTransfer.files;
+      const files = event.originalEvent.dataTransfer.files;
       if (!files || files.length === 0) {
         // No files actually transferred
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_drop_handler').fadeOut();
@@ -322,10 +322,10 @@ var DragDropImport = {
         return;
       }
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status').slideDown();
-      for (var i = 0; i < files.length; i++) {
-        var ext = DragDropImport.getExtension(files[i].name);
-        var hash = _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.hash(++DragDropImport.uploadCount);
-        var $sqlImportStatusDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status div');
+      for (let i = 0; i < files.length; i++) {
+        const ext = DragDropImport.getExtension(files[i].name);
+        const hash = _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.hash(++DragDropImport.uploadCount);
+        const $sqlImportStatusDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status div');
         $sqlImportStatusDiv.append('<li data-hash="' + hash + '">' + (ext !== '' ? '' : '<img src="./themes/dot.gif" title="invalid format" class="icon ic_s_notice"> ') + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '<span class="filesize" data-filename="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(files[i].name) + '">' + (files[i].size / 1024).toFixed(2) + ' kb</span></li>');
         // scroll the UI to bottom
         $sqlImportStatusDiv.scrollTop($sqlImportStatusDiv.scrollTop() + 50); // 50 hardcoded for now
@@ -335,7 +335,7 @@ var DragDropImport = {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status h2 .close').fadeOut();
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pma_sql_import_status div li[data-hash="' + hash + '"]').append('<br><progress max="100" value="2"></progress>');
           // uploading
-          var fd = new FormData();
+          const fd = new FormData();
           fd.append('import_file', files[i]);
           fd.append('noplugin', Math.random().toString(36).substring(2, 12));
           fd.append('db', dbname);

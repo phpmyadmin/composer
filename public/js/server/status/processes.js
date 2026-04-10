@@ -25,8 +25,8 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @package PhpMyAdmin
  */
-// object to store process list state information
-var processList = {
+/** object to store process list state information */
+const processList = {
   // denotes whether auto refresh is on or off
   autoRefresh: false,
   // stores the GET request which refresh process list
@@ -59,11 +59,11 @@ var processList = {
    */
   killProcessHandler: function (event) {
     event.preventDefault();
-    var argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
+    const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
     params += argSep + 'ajax_request=1' + argSep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     // Get row element of the process to be killed.
-    var $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr');
+    const $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), params, function (data) {
       // Check if process was killed or not.
       if (data.hasOwnProperty('success') && data.success) {
@@ -71,7 +71,7 @@ var processList = {
         $tr.remove();
         // As we just removed a row, reapply odd-even classes
         // to keep table stripes consistent
-        var $tableProcessListTr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableprocesslist').find('> tbody > tr');
+        const $tableProcessListTr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableprocesslist').find('> tbody > tr');
         $tableProcessListTr.each(function (index) {
           if (index >= 0 && index % 2 === 0) {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass('odd').addClass('even');
@@ -100,11 +100,11 @@ var processList = {
     if (processList.autoRefresh) {
       // Only fetch the table contents
       processList.refreshUrl = 'index.php?route=/server/status/processes/refresh';
-      var interval = parseInt(processList.refreshInterval, 10) * 1000;
-      var urlParams = processList.getUrlParams();
+      const interval = parseInt(processList.refreshInterval, 10) * 1000;
+      const urlParams = processList.getUrlParams();
       processList.refreshRequest = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(processList.refreshUrl, urlParams, function (data) {
         if (data.hasOwnProperty('success') && data.success) {
-          var $newTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
+          const $newTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableprocesslist').html($newTable.html());
           (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableprocesslist'));
         }
@@ -127,8 +127,8 @@ var processList = {
    * change between play & pause
    */
   setRefreshLabel: function () {
-    var img = 'play';
-    var label = window.Messages.strStartRefresh;
+    let img = 'play';
+    let label = window.Messages.strStartRefresh;
     if (processList.autoRefresh) {
       img = 'pause';
       label = window.Messages.strStopRefresh;
@@ -144,7 +144,7 @@ var processList = {
    * @return {object} urlParams - url parameters with autoRefresh request
    */
   getUrlParams: function () {
-    var urlParams = {
+    const urlParams = {
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
       'refresh': true,

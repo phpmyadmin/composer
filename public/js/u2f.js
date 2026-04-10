@@ -13,13 +13,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', function () {
-  var $inputReg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#u2f_registration_response');
+  const $inputReg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#u2f_registration_response');
   if ($inputReg.length > 0) {
-    var $formReg = $inputReg.parents('form');
+    const $formReg = $inputReg.parents('form');
     $formReg.find('input[type=submit]').hide();
     setTimeout(function () {
       // A magic JS function that talks to the USB device. This function will keep polling for the USB device until it finds one.
-      var request = JSON.parse($inputReg.attr('data-request'));
+      const request = JSON.parse($inputReg.attr('data-request'));
       if (!(window.u2f && typeof window.u2f.register === 'function')) {
         return;
       }
@@ -51,14 +51,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('u2f.js', func
       });
     }, 1000);
   }
-  var $inputAuth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#u2f_authentication_response');
+  const $inputAuth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#u2f_authentication_response');
   if ($inputAuth.length > 0) {
-    var $formAuth = $inputAuth.parents('form');
+    const $formAuth = $inputAuth.parents('form');
     $formAuth.find('input[type=submit]').hide();
     setTimeout(function () {
       // Magic JavaScript talking to your HID
       // appid, challenge, authenticateRequests
-      var request = JSON.parse($inputAuth.attr('data-request'));
+      const request = JSON.parse($inputAuth.attr('data-request'));
       if (!(window.u2f && typeof window.u2f.sign === 'function')) {
         return;
       }

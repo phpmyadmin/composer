@@ -76,13 +76,13 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @requires    jQueryUI
  */
-var runtime = {};
-var serverTimeDiff;
-var serverOs;
-var isSuperUser;
-var serverDbIsLocal;
-var chartSize;
-var monitorSettings;
+let runtime = {};
+let serverTimeDiff;
+let serverOs;
+let isSuperUser;
+let serverDbIsLocal;
+let chartSize;
+let monitorSettings;
 function serverResponseError() {
   bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance('#serverResponseErrorModal').show();
 }
@@ -118,7 +118,7 @@ function destroyGrid() {
   monitorSettings = null;
 }
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status/monitor.js', function () {
-  var $jsDataForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js_data');
+  const $jsDataForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js_data');
   serverTimeDiff = new Date().getTime() - Number($jsDataForm.find('input[name=server_time]').val());
   serverOs = $jsDataForm.find('input[name=server_os]').val();
   isSuperUser = $jsDataForm.find('input[name=is_superuser]').val();
@@ -166,7 +166,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#loadingMonitorIcon').remove();
   // Codemirror is loaded on demand so we might need to initialize it
   if (!window.codeMirrorEditor) {
-    var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery');
+    const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery');
     if ($elm.length > 0 && typeof window.CodeMirror !== 'undefined') {
       window.codeMirrorEditor = window.CodeMirror.fromTextArea($elm[0], {
         lineNumbers: true,
@@ -185,15 +185,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   });
   /** ** Monitor charting implementation ****/
   /* Saves the previous ajax response for differential values */
-  var oldChartData = null;
+  let oldChartData = null;
   // Holds about to be created chart
-  var newChart = null;
-  var chartSpacing;
+  let newChart = null;
+  let chartSpacing;
   // Whenever the monitor object (runtime.charts) or the settings object
   // (monitorSettings) changes in a way incompatible to the previous version,
   // increase this number. It will reset the users monitor and settings object
   // in their localStorage to the default configuration
-  var monitorProtocolVersion = '1.0';
+  const monitorProtocolVersion = '1.0';
   // Runtime parameter of the monitor, is being fully set in initGrid()
   runtime = {
     // Holds all visible charts in the grid
@@ -216,7 +216,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     xmax: -1
   };
   monitorSettings = null;
-  var defaultMonitorSettings = {
+  const defaultMonitorSettings = {
     columns: 3,
     chartSize: {
       width: 295,
@@ -229,9 +229,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     gridRefresh: 5000
   };
   // Allows drag and drop rearrange and print/edit icons on charts
-  var editMode = false;
+  let editMode = false;
   /* List of preconfigured charts that the user may select */
-  var presetCharts = {
+  const presetCharts = {
     // Query cache efficiency
     'qce': {
       title: window.Messages.strQueryCacheEfficiency,
@@ -497,7 +497,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       break;
   }
   // Default setting for the chart grid
-  var defaultChartGrid = {
+  const defaultChartGrid = {
     'c0': {
       title: window.Messages.strQuestions,
       series: [{
@@ -598,9 +598,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       height: chartSize.height + 'px'
     });
     /* Reorder all charts that it fills all column cells */
-    var numColumns;
-    var $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('tr').first();
-    var tempManageCols = function () {
+    let numColumns;
+    let $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('tr').first();
+    const tempManageCols = function () {
       if (numColumns > monitorSettings.columns) {
         if ($tr.next().length === 0) {
           $tr.after('<tr></tr>');
@@ -609,7 +609,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       }
       numColumns++;
     };
-    var tempAddCol = function () {
+    const tempAddCol = function () {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next().length !== 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next().find('td').first());
       }
@@ -621,8 +621,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       // To little cells in one row => for each cell to little,
       // move all cells backwards by 1
       if ($tr.next().length > 0) {
-        var cnt = monitorSettings.columns - $tr.find('td').length;
-        for (var i = 0; i < cnt; i++) {
+        const cnt = monitorSettings.columns - $tr.find('td').length;
+        for (let i = 0; i < cnt; i++) {
           $tr.append($tr.next().find('td').first());
           $tr.nextAll().each(tempAddCol);
         }
@@ -654,7 +654,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorAddNewChartButton').on('click', function (event) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addChartButton').on('click', function () {
-      var type = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartType"]:checked').val();
+      const type = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartType"]:checked').val();
       if (type === 'preset') {
         newChart = presetCharts[jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addChartModal').find('select[name="presetCharts"]').prop('value')];
       } else {
@@ -681,7 +681,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#closeModalButton').off('click');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addChartButton').off('click');
     });
-    var $presetList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addChartModal').find('select[name="presetCharts"]');
+    const $presetList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addChartModal').find('select[name="presetCharts"]');
     if ($presetList.html().length === 0) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(presetCharts, function (key, value) {
         $presetList.append('<option value="' + key + '">' + value.title + '</option>');
@@ -704,7 +704,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#seriesPreview').html('<i>' + window.Messages.strNone + '</i>');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorExportConfigButton').on('click', function () {
-    var gridCopy = {};
+    const gridCopy = {};
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (key, elem) {
       gridCopy[key] = {};
       gridCopy[key].nodes = elem.nodes;
@@ -713,15 +713,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       gridCopy[key].title = elem.title;
       gridCopy[key].maxYLabel = elem.maxYLabel;
     });
-    var exportData = {
+    const exportData = {
       monitorCharts: gridCopy,
       monitorSettings: monitorSettings
     };
-    var blob = new Blob([JSON.stringify(exportData)], {
+    let blob = new Blob([JSON.stringify(exportData)], {
       type: 'application/octet-stream'
     });
-    var url = null;
-    var fileName = 'monitor-config.json';
+    let url = null;
+    const fileName = 'monitor-config.json';
     // @ts-ignore
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
       // @ts-ignore
@@ -740,14 +740,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     }, 100);
   });
   function monitorImportConfigImportEventHandler() {
-    var input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorImportConfigModal').find('#import_file')[0];
-    var reader = new FileReader();
+    const input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorImportConfigModal').find('#import_file')[0];
+    const reader = new FileReader();
     reader.onerror = function (event) {
       alert(window.Messages.strFailedParsingConfig + '\n' + event.target.error.code);
     };
     reader.onload = function (e) {
-      var data = e.target.result;
-      var json = null;
+      const data = e.target.result;
+      let json = null;
       // Try loading config
       try {
         json = JSON.parse(data);
@@ -816,7 +816,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   const $dialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorInstructionsModal');
   function loadLogVars() {
     let getvars = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-    var vars = {
+    const vars = {
       'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     };
@@ -824,7 +824,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(vars, getvars);
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/status/monitor/log-vars', vars, function (data) {
-      var logVars;
+      let logVars;
       if (typeof data !== 'undefined' && data.success === true) {
         logVars = data.message;
       } else {
@@ -832,9 +832,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         serverResponseError();
         return;
       }
-      var icon = (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success');
-      var msg = '';
-      var str = '';
+      let icon = (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success');
+      let msg = '';
+      let str = '';
       if (logVars.general_log === 'ON') {
         if (logVars.slow_query_log === 'ON') {
           msg = window.Messages.strBothLogOn;
@@ -873,7 +873,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         str += '<p></p><b>' + window.Messages.strChangeSettings + '</b>';
         str += '<div class="smallIndent">';
         str += window.Messages.strSettingsAppliedGlobal + '<br>';
-        var varValue = 'TABLE';
+        let varValue = 'TABLE';
         if (logVars.log_output === 'TABLE') {
           varValue = 'FILE';
         }
@@ -913,7 +913,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       $dialog.find('div.ajaxContent').html(str);
       $dialog.find('img.ajaxIcon').hide();
       $dialog.find('a.set').on('click', function () {
-        var nameValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href').split('-');
+        const nameValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href').split('-');
         loadLogVars({
           varName: nameValue[0].substring(1),
           varValue: nameValue[1]
@@ -928,7 +928,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartType"]').on('change', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartVariableSettings').toggle(this.checked && this.value === 'variable');
-    var title = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartTitle"]').val();
+    const title = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartTitle"]').val();
     if (title === window.Messages.strChartTitle || title === jquery__WEBPACK_IMPORTED_MODULE_0___default()('label[for="' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartTitle"]').data('lastRadio') + '"]').text()) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="chartTitle"]').data('lastRadio', jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id')).val(jquery__WEBPACK_IMPORTED_MODULE_0___default()('label[for="' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id') + '"]').text());
     }
@@ -980,7 +980,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         maxYLabel: 0
       };
     }
-    var serie = {
+    const serie = {
       dataPoints: [{
         type: 'statusvar',
         name: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#variableInput').val()
@@ -996,10 +996,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="useUnit"]').prop('checked')) {
       serie.unit = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="valueUnit"]').val();
     }
-    var str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
+    let str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
     str += serie.valueDivisor ? ', ' + window.sprintf(window.Messages.strDividedBy, serie.valueDivisor) : '';
     str += serie.unit ? ', ' + window.Messages.strUnit + ': ' + serie.unit : '';
-    var newSeries = {
+    const newSeries = {
       label: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#variableInput').val().replace(/_/g, ' ')
     };
     newChart.series.push(newSeries);
@@ -1020,7 +1020,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   });
   /* Initializes the monitor, called only once */
   function initGrid() {
-    var i;
+    let i;
     /* Apply default values & config */
     if ((0,_modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('localStorage')) {
       if (typeof window.localStorage.monitorCharts !== 'undefined') {
@@ -1057,7 +1057,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     };
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').html('');
     /* Add all charts - in correct order */
-    var keys = [];
+    const keys = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (key) {
       keys.push(key);
     });
@@ -1066,8 +1066,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       addChart(runtime.charts[keys[i]], true);
     }
     /* Fill in missing cells */
-    var numCharts = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('.monitorChart').length;
-    var numMissingCells = (monitorSettings.columns - numCharts % monitorSettings.columns) % monitorSettings.columns;
+    const numCharts = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('.monitorChart').length;
+    const numMissingCells = (monitorSettings.columns - numCharts % monitorSettings.columns) % monitorSettings.columns;
     for (i = 0; i < numMissingCells; i++) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('tr').last().append('<td></td>');
     }
@@ -1080,13 +1080,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   /* Calls destroyGrid() and initGrid(), but before doing so it saves the chart
    * data from each chart and restores it after the monitor is initialized again */
   function rebuildGrid() {
-    var oldData = null;
+    let oldData = null;
     if (runtime.charts) {
       oldData = {};
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (key, chartObj) {
-        for (var i = 0, l = chartObj.nodes.length; i < l; i++) {
+        let i = 0;
+        const l = chartObj.nodes.length;
+        for (; i < l; i++) {
           oldData[chartObj.nodes[i].dataPoint] = [];
-          for (var j = 0, ll = chartObj.chart.data.datasets[i].data.length; j < ll; j++) {
+          let j = 0;
+          const ll = chartObj.chart.data.datasets[i].data.length;
+          for (; j < ll; j++) {
             oldData[chartObj.nodes[i].dataPoint].push([chartObj.chart.data.datasets[i].data[j].x, chartObj.chart.data.datasets[i].data[j].y]);
           }
         }
@@ -1097,15 +1101,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Calculates the dynamic chart size that depends on the column width */
   function calculateChartSize() {
-    var panelWidth;
+    let panelWidth;
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').height() > jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).height()) {
       // has vertical scroll bar
       panelWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').innerWidth();
     } else {
       panelWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').innerWidth() - 10; // leave some space for vertical scroll bar
     }
-    var wdt = panelWidth;
-    var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+    let wdt = panelWidth;
+    const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
     if (windowWidth > 768) {
       wdt = (panelWidth - monitorSettings.columns * Math.abs(chartSpacing.width)) / monitorSettings.columns;
     }
@@ -1117,8 +1121,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   /* Adds a chart to the chart grid */
   function addChart(chartObj) {
     let initialize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-    var i;
-    var settings = {
+    let i;
+    const settings = {
       title: (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(chartObj.title),
       grid: {
         drawBorder: false,
@@ -1182,7 +1186,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     }
     settings.series = chartObj.series;
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + 'gridChartCanvas' + runtime.chartAI).length === 0) {
-      var numCharts = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('.monitorChart').length;
+      const numCharts = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').find('.monitorChart').length;
       if (numCharts === 0 || numCharts % monitorSettings.columns === 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartGrid').append('<tr></tr>');
       }
@@ -1193,17 +1197,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     }
     // Set series' data as [0,0], smooth lines won't plot with data array having null values.
     // also chart won't plot initially with no data and data comes on refreshChartGrid()
-    var series = [];
+    const series = [];
     for (i in chartObj.series) {
       series.push([[0, 0]]);
     }
-    var tempTooltipContentEditor = function (str, seriesIndex, pointIndex, plot) {
-      var j;
+    const tempTooltipContentEditor = function (str, seriesIndex, pointIndex, plot) {
+      let j;
       // TODO: move style to theme CSS
-      var tooltipHtml = '<div id="tooltip_editor">';
+      let tooltipHtml = '<div id="tooltip_editor">';
       // x value i.e. time
-      var timeValue = str.split(',')[0];
-      var seriesValue;
+      const timeValue = str.split(',')[0];
+      let seriesValue;
       tooltipHtml += 'Time: ' + timeValue;
       tooltipHtml += '<span id="tooltip_font">';
       // Add y values to the tooltip per series
@@ -1214,8 +1218,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         } else {
           return;
         }
-        var seriesLabel = plot.series[j].label;
-        var seriesColor = plot.series[j].color;
+        const seriesLabel = plot.series[j].label;
+        const seriesColor = plot.series[j].color;
         // format y value
         if (plot.series[0]._yaxis.tickOptions.formatter) {
           // eslint-disable-line no-underscore-dangle
@@ -1364,8 +1368,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(logAnalyseModal).show();
   }
   function loadLog(type, min, max) {
-    var dateStart = Date.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logAnalyseDialog').find('input[name="dateStart"]').datepicker('getDate').toString()) || min;
-    var dateEnd = Date.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logAnalyseDialog').find('input[name="dateEnd"]').datepicker('getDate').toString()) || max;
+    const dateStart = Date.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logAnalyseDialog').find('input[name="dateStart"]').datepicker('getDate').toString()) || min;
+    const dateEnd = Date.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logAnalyseDialog').find('input[name="dateEnd"]').datepicker('getDate').toString()) || max;
     loadLogStatistics({
       src: type,
       start: dateStart,
@@ -1382,27 +1386,27 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       'requiredData': JSON.stringify(runtime.dataList),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (data) {
-      var chartData;
+      let chartData;
       if (typeof data !== 'undefined' && data.success === true) {
         chartData = data.message;
       } else {
         serverResponseError();
         return;
       }
-      var value;
-      var i = 0;
-      var diff;
-      var total;
+      let value;
+      let i = 0;
+      let diff;
+      let total;
       /* Update values in each graph */
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (orderKey, elem) {
-        var key = elem.chartID;
+        const key = elem.chartID;
         // If newly added chart, we have no data for it yet
         if (!chartData[key]) {
           return;
         }
         // Draw all series
         total = 0;
-        for (var j = 0; j < elem.nodes.length; j++) {
+        for (let j = 0; j < elem.nodes.length; j++) {
           // Update x-axis
           if (i === 0 && j === 0) {
             if (oldChartData === null) {
@@ -1465,7 +1469,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         }
         // update chart options
         // keep ticks number/positioning consistent while refreshrate changes
-        var tickInterval = (runtime.xmax - runtime.xmin) / 5;
+        const tickInterval = (runtime.xmax - runtime.xmin) / 5;
         elem.chart.data.labels = [runtime.xmax - tickInterval * 4, runtime.xmax - tickInterval * 3, runtime.xmax - tickInterval * 2, runtime.xmax - tickInterval, runtime.xmax];
         if (elem.title !== window.Messages.strSystemCPUUsage && elem.title !== window.Messages.strQueryCacheEfficiency && elem.title !== window.Messages.strSystemMemory && elem.title !== window.Messages.strSystemSwap && elem.maxYLabel > 0) {
           elem.chart.options.scales.y.max = Math.ceil(elem.maxYLabel * 1.1);
@@ -1487,7 +1491,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
    * Function to get the highest plotted point's y label, to scale the chart.
    */
   function getMaxYLabel(dataValues) {
-    var maxY = dataValues[0].y;
+    let maxY = dataValues[0].y;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(dataValues, function (k, v) {
       maxY = v.y > maxY ? v.y : maxY;
     });
@@ -1495,6 +1499,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Function that supplies special value transform functions for chart values */
   function chartValueTransform(name, cur, prev) {
+    let newCur;
+    let newPrev;
+    let diffTotal;
+    let diffIdle;
+    let diffQHits;
     switch (name) {
       case 'cpu-linux':
         if (prev === null) {
@@ -1502,10 +1511,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         }
         // cur and prev are datapoint arrays, but containing
         // only 1 element for cpu-linux
-        var newCur = cur[0];
-        var newPrev = prev[0];
-        var diffTotal = newCur.busy + newCur.idle - (newPrev.busy + newPrev.idle);
-        var diffIdle = newCur.idle - newPrev.idle;
+        newCur = cur[0];
+        newPrev = prev[0];
+        diffTotal = newCur.busy + newCur.idle - (newPrev.busy + newPrev.idle);
+        diffIdle = newCur.idle - newPrev.idle;
         return 100 * (diffTotal - diffIdle) / diffTotal;
       // Query cache efficiency (%)
       case 'qce':
@@ -1513,7 +1522,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
           return undefined;
         }
         // cur[0].value is Qcache_hits, cur[1].value is Com_select
-        var diffQHits = cur[0].value - prev[0].value;
+        diffQHits = cur[0].value - prev[0].value;
         // No NaN please :-)
         if (cur[1].value - prev[1].value === 0) {
           return 0;
@@ -1536,10 +1545,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     runtime.dataList = {};
     // Store an own id, because the property name is subject of reordering,
     // thus destroying our mapping with runtime.charts <=> runtime.dataList
-    var chartID = 0;
+    let chartID = 0;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (key, chart) {
       runtime.dataList[chartID] = [];
-      for (var i = 0, l = chart.nodes.length; i < l; i++) {
+      let i = 0;
+      const l = chart.nodes.length;
+      for (; i < l; i++) {
         runtime.dataList[chartID][i] = chart.nodes[i].dataPoints;
       }
       runtime.charts[key].chartID = chartID;
@@ -1548,7 +1559,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Loads the log table data, generates the table and handles the filters */
   function loadLogStatistics(opts) {
-    var logRequest = null;
+    let logRequest = null;
     if (!opts.removeVariables) {
       opts.removeVariables = false;
     }
@@ -1562,7 +1573,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       }
     });
     bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(analysingLogsModal).show();
-    var url = 'index.php?route=/server/status/monitor/slow-log';
+    let url = 'index.php?route=/server/status/monitor/slow-log';
     if (opts.src === 'general') {
       url = 'index.php?route=/server/status/monitor/general-log';
     }
@@ -1574,7 +1585,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       'limitTypes': opts.limitTypes,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (data) {
-      var logData;
+      let logData;
       if (typeof data !== 'undefined' && data.success === true) {
         logData = data.message;
       } else {
@@ -1590,7 +1601,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       runtime.logDataCols = buildLogTable(logData, opts.removeVariables);
       const analysingLogsLogDataLoadedModalBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#analysingLogsLogDataLoadedModal .modal-body');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(logData.sum, function (key, value) {
-        var newKey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+        let newKey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
         if (newKey === 'Total') {
           newKey = '<b>' + newKey + '</b>';
         }
@@ -1633,8 +1644,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
      *                to group queries ignoring data in WHERE clauses
      */
     function filterQueries(varFilterChange) {
-      var textFilter;
-      var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterQueryText').val();
+      let textFilter;
+      const val = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterQueryText').val();
       if (val.length === 0) {
         textFilter = null;
       } else {
@@ -1648,24 +1659,24 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
           }
         }
       }
-      var rowSum = 0;
-      var totalSum = 0;
-      var i = 0;
-      var q;
-      var noVars = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#noWHEREData').prop('checked');
-      var equalsFilter = /([^=]+)=(\d+|(('|"|).*?[^\\])\4((\s+)|$))/gi;
-      var functionFilter = /([a-z0-9_]+)\(.+?\)/gi;
-      var filteredQueries = {};
-      var filteredQueriesLines = {};
-      var hide = false;
-      var rowData;
-      var queryColumnName = runtime.logDataCols[runtime.logDataCols.length - 2];
-      var sumColumnName = runtime.logDataCols[runtime.logDataCols.length - 1];
-      var isSlowLog = opts.src === 'slow';
-      var columnSums = {};
+      let rowSum = 0;
+      let totalSum = 0;
+      let i = 0;
+      let q;
+      const noVars = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#noWHEREData').prop('checked');
+      const equalsFilter = /([^=]+)=(\d+|(('|"|).*?[^\\])\4((\s+)|$))/gi;
+      const functionFilter = /([a-z0-9_]+)\(.+?\)/gi;
+      const filteredQueries = {};
+      const filteredQueriesLines = {};
+      let hide = false;
+      let rowData;
+      const queryColumnName = runtime.logDataCols[runtime.logDataCols.length - 2];
+      const sumColumnName = runtime.logDataCols[runtime.logDataCols.length - 1];
+      const isSlowLog = opts.src === 'slow';
+      const columnSums = {};
       // For the slow log we have to count many columns (query_time, lock_time, rows_examined, rows_sent, etc.)
-      var countRow = function (query, row) {
-        var cells = row.match(/<td>(.*?)<\/td>/gi);
+      const countRow = function (query, row) {
+        const cells = row.match(/<td>(.*?)<\/td>/gi);
         if (!columnSums[query]) {
           columnSums[query] = [0, 0, 0, 0];
         }
@@ -1678,7 +1689,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       };
       // We just assume the sql text is always in the second last column, and that the total count is right of it
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('table tbody tr td.queryCell').each(function () {
-        var $t = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        const $t = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         // If query is a SELECT and user enabled or disabled to group
         // queries ignoring data in where statements, we
         // need to re-calculate the sums of each row
@@ -1736,9 +1747,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       // We finished summarizing counts => Update count values of all grouped entries
       if (varFilterChange) {
         if (noVars) {
-          var numCol;
-          var row;
-          var $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('table tbody');
+          let numCol;
+          let row;
+          const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').find('table tbody');
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(filteredQueriesLines, function (key, value) {
             if (filteredQueries[key] <= 1) {
               return;
@@ -1765,15 +1776,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Turns a timespan (12:12:12) into a number */
   function timeToSec(timeStr) {
-    var time = timeStr.split(':');
+    const time = timeStr.split(':');
     return parseInt(time[0], 10) * 3600 + parseInt(time[1], 10) * 60 + parseInt(time[2], 10);
   }
   /* Turns a number into a timespan (100 into 00:01:40) */
   function secToTime(timeInt) {
-    var time = timeInt;
-    var hours = Math.floor(time / 3600);
+    let time = timeInt;
+    let hours = Math.floor(time / 3600);
     time -= hours * 3600;
-    var minutes = Math.floor(time / 60);
+    let minutes = Math.floor(time / 60);
     time -= minutes * 60;
     if (hours < 10) {
       hours = '0' + hours;
@@ -1788,31 +1799,35 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Constructs the log table out of the retrieved server data */
   function buildLogTable(data, groupInserts) {
-    var rows = data.rows;
-    var cols = [];
-    var $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<table class="table table-striped table-hover align-middle sortable"></table>');
-    var $tBody;
-    var $tRow;
-    var $tCell;
+    const rows = data.rows;
+    const cols = [];
+    const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<table class="table table-striped table-hover align-middle sortable"></table>');
+    let $tBody;
+    let $tRow;
+    let $tCell;
     // @ts-ignore
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logTable').html($table);
-    var tempPushKey = function (key) {
+    const tempPushKey = function (key) {
       cols.push(key);
     };
-    var formatValue = function (name, value) {
+    const formatValue = function (name, value) {
       if (name === 'user_host') {
         return value.replace(/(\[.*?\])+/g, '');
       }
       return (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
     };
-    for (var i = 0, l = rows.length; i < l; i++) {
+    let i = 0;
+    const l = rows.length;
+    for (; i < l; i++) {
       if (i === 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().each(rows[0], tempPushKey);
         $table.append('<thead>' + '<tr><th class="text-nowrap">' + cols.join('</th><th class="text-nowrap">') + '</th></tr>' + '</thead>');
         $table.append($tBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tbody></tbody>'));
       }
       $tBody.append($tRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tr class="noclick"></tr>'));
-      for (var j = 0, ll = cols.length; j < ll; j++) {
+      let j = 0;
+      const ll = cols.length;
+      for (; j < ll; j++) {
         // Assuming the query column is the second last
         if (j === cols.length - 2 && rows[i][cols[j]].match(/^SELECT/i)) {
           $tRow.append($tCell = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<td class="linkElem queryCell">' + formatValue(cols[j], rows[i][cols[j]]) + '</td>'));
@@ -1884,8 +1899,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Loads and displays the analyzed query data */
   function loadQueryAnalysis(rowData) {
-    var db = rowData.db || '';
-    var profilingChart = null;
+    const db = rowData.db || '';
+    let profilingChart = null;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder').html(window.Messages.strAnalyzing + ' <img class="ajaxIcon" src="' + window.themeImagePath + 'ajax_clock_small.gif" alt="">');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/status/monitor/query', {
       'ajax_request': true,
@@ -1893,9 +1908,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       'database': db,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (responseData) {
-      var data = responseData;
-      var i;
-      var l;
+      let data = responseData;
+      let i;
+      let l;
       if (typeof data !== 'undefined' && data.success === true) {
         data = data.message;
       }
@@ -1906,10 +1921,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder').html('<div class="alert alert-danger" role="alert">' + data.error + '</div>');
         return;
       }
-      var totalTime = 0;
+      let totalTime = 0;
       // Float sux, I'll use table :(
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder').html('<table class="table table-borderless"><tr><td class="explain"></td><td class="chart"></td></tr></table>');
-      var explain = '<b>' + window.Messages.strExplainOutput + '</b> ' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#explain_docu').html();
+      let explain = '<b>' + window.Messages.strExplainOutput + '</b> ' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#explain_docu').html();
       if (data.explain.length > 1) {
         explain += ' (';
         for (i = 0; i < data.explain.length; i++) {
@@ -1921,8 +1936,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
         explain += ')';
       }
       explain += '<p></p>';
-      var tempExplain = function (key, value) {
-        var newValue = value === null ? 'null' : (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
+      const tempExplain = function (key, value) {
+        let newValue = value === null ? 'null' : (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_6__.escapeHtml)(value);
         if (key === 'type' && newValue.toLowerCase() === 'all') {
           newValue = '<span class="text-danger">' + newValue + '</span>';
         }
@@ -1939,15 +1954,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       explain += '<p><b>' + window.Messages.strAffectedRows + '</b> ' + data.affectedRows;
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder td.explain').append(explain);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder a[href*="#showExplain"]').on('click', function () {
-        var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href').split('-')[1];
+        const id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href').split('-')[1];
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('div[class*="explain"]').hide();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('div[class*="explain-' + id + '"]').show();
       });
       if (data.profiling) {
-        var chartData = [];
-        var numberTable = '<table class="table table-sm table-striped table-hover w-auto queryNums"><thead><tr><th>' + window.Messages.strStatus + '</th><th>' + window.Messages.strTime + '</th></tr></thead><tbody>';
-        var duration;
-        var otherTime = 0;
+        const chartData = [];
+        let numberTable = '<table class="table table-sm table-striped table-hover w-auto queryNums"><thead><tr><th>' + window.Messages.strStatus + '</th><th>' + window.Messages.strTime + '</th></tr></thead><tbody>';
+        let duration;
+        let otherTime = 0;
         for (i = 0, l = data.profiling.length; i < l; i++) {
           duration = parseFloat(data.profiling[i].duration);
           totalTime += duration;
@@ -1985,7 +2000,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   }
   /* Saves the monitor to localstorage */
   function saveMonitor() {
-    var gridCopy = {};
+    const gridCopy = {};
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(runtime.charts, function (key, elem) {
       gridCopy[key] = {};
       gridCopy[key].nodes = elem.nodes;

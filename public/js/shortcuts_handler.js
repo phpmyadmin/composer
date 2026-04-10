@@ -21,17 +21,17 @@ __webpack_require__.r(__webpack_exports__);
  * Register key events on load
  */
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
-  var databaseOp = false;
-  var tableOp = false;
-  var keyD = 68;
-  var keyT = 84;
-  var keyK = 75;
-  var keyS = 83;
-  var keyF = 70;
-  var keyE = 69;
-  var keyH = 72;
-  var keyC = 67;
-  var keyBackSpace = 8;
+  let databaseOp = false;
+  let tableOp = false;
+  const keyD = 68;
+  const keyT = 84;
+  const keyK = 75;
+  const keyS = 83;
+  const keyF = 70;
+  const keyE = 69;
+  const keyH = 72;
+  const keyC = 67;
+  const keyBackSpace = 8;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('keyup', function (e) {
     // is a string but is also a boolean according to https://api.jquery.com/prop/
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).prop('contenteditable') === 'true' || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).prop('contenteditable') === true) {
@@ -69,8 +69,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
     if (e.target.nodeName === 'INPUT' || e.target.nodeName === 'TEXTAREA' || e.target.nodeName === 'SELECT') {
       return;
     }
-    var isTable;
-    var isDb;
+    let isTable;
+    let isDb;
     if (e.keyCode === keyD) {
       databaseOp = true;
     } else if (e.keyCode === keyK) {

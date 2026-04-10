@@ -53,7 +53,7 @@ const DatabaseRoutines = {
      * @var $elm a jQuery object containing the reference
      *           to an element that is being validated
      */
-    var $elm = null;
+    let $elm = null;
     // Common validation. At the very least the name
     // and the definition must be provided for an item
     $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.rte_table').last().find('input[name=item_name]');
@@ -77,25 +77,25 @@ const DatabaseRoutines = {
     return this.validateCustom();
   },
   exportDialog: function ($this) {
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+    const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     if ($this.attr('id') === 'bulkActionExportButton') {
-      var combined = {
+      const combined = {
         success: true,
         title: window.Messages.strExport,
         message: '',
         error: ''
       };
       // export anchors of all selected rows
-      var exportAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.export_anchor');
-      var count = exportAnchors.length;
-      var returnCount = 0;
+      const exportAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.export_anchor');
+      const count = exportAnchors.length;
+      let returnCount = 0;
       // No routine is exportable (due to privilege issues)
       if (count === 0) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.NoExportable);
       }
-      var p = jquery__WEBPACK_IMPORTED_MODULE_0___default().when();
+      let p = jquery__WEBPACK_IMPORTED_MODULE_0___default().when();
       exportAnchors.each(function () {
-        var h = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
+        const h = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
         p = p.then(function () {
           return jquery__WEBPACK_IMPORTED_MODULE_0___default().get(h, {
             'ajax_request': true
@@ -144,13 +144,13 @@ const DatabaseRoutines = {
     }
   },
   editorDialog: function (isNew, $this) {
-    var that = this;
+    const that = this;
     /**
      * @var $edit_row jQuery object containing the reference to
      *                the row of the the item being edited
      *                from the list of items
      */
-    var $editRow = null;
+    let $editRow = null;
     if ($this.hasClass('edit_anchor')) {
       // Remember the row of the item being edited for later,
       // so that if the edit is successful, we can replace the
@@ -161,7 +161,7 @@ const DatabaseRoutines = {
      * @var $msg jQuery object containing the reference to
      *           the AJAX message shown to the user
      */
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+    let $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -185,9 +185,9 @@ const DatabaseRoutines = {
         /**
          * @var data Form data to be sent in the AJAX request
          */
-        var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
+        const data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
         $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().attr('action');
+        const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().attr('action');
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, function (data) {
           if (data.success !== true) {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -197,7 +197,7 @@ const DatabaseRoutines = {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.message);
           bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance('#routinesEditorModal').hide();
-          var tableId = '#' + data.tableType + 'Table';
+          const tableId = '#' + data.tableType + 'Table';
           // If we are in 'edit' mode, we must
           // remove the reference to the old row.
           if (isEditMode && $editRow !== null) {
@@ -216,12 +216,12 @@ const DatabaseRoutines = {
              *           to find the correct location where
              *           to insert a new row.
              */
-            var text = '';
+            let text = '';
             /**
              * @var inserted Whether a new item has been
              *               inserted in the list or not
              */
-            var inserted = false;
+            let inserted = false;
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId + '.data').find('tr').each(function () {
               text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('td').eq(0).find('strong').text().toUpperCase().trim();
               if (text !== '' && text > data.name) {
@@ -256,12 +256,12 @@ const DatabaseRoutines = {
           /**
            * @var ct Count of processed rows
            */
-          var ct = 0;
+          let ct = 0;
           /**
            * @var rowclass Class to be attached to the row
            *               that is being processed
            */
-          var rowclass = '';
+          let rowclass = '';
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId + '.data').find('tr').has('td').each(function () {
             rowclass = ct % 2 === 0 ? 'odd' : 'even';
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass('odd even').addClass(rowclass);
@@ -304,8 +304,8 @@ const DatabaseRoutines = {
          * @var elm jQuery object containing the reference to
          *                 the Definition textarea.
          */
-        var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
-        var linterOptions = {
+        const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea[name=item_definition]').last();
+        const linterOptions = {
           editorType: 'routine'
         };
         that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
@@ -325,19 +325,19 @@ const DatabaseRoutines = {
     /**
      * @var $curr_row Object containing reference to the current row
      */
-    var $currRow = $this.parents('tr');
+    const $currRow = $this.parents('tr');
     /**
      * @var question String containing the question to be asked for confirmation
      */
-    var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').text($currRow.children('td').children('.drop_sql').html());
+    const question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').text($currRow.children('td').children('.drop_sql').html());
     // We ask for confirmation first here, before submitting the ajax request
     $this.confirm(question, $this.attr('href'), function (url) {
       /**
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $this.getPostData());
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $this.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (data.success !== true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -347,7 +347,7 @@ const DatabaseRoutines = {
          * @var $table Object containing reference
          *             to the main list of elements
          */
-        var $table = $currRow.parent().parent();
+        const $table = $currRow.parent().parent();
         // Check how many rows will be left after we remove
         // the one that the user has requested us to remove
         if ($table.find('tr').length === 3) {
@@ -369,12 +369,12 @@ const DatabaseRoutines = {
             /**
              * @var ct Count of processed rows
              */
-            var ct = 0;
+            let ct = 0;
             /**
              * @var rowclass Class to be attached to the row
              *               that is being processed
              */
-            var rowclass = '';
+            let rowclass = '';
             $table.find('tr').has('td').each(function () {
               rowclass = ct % 2 === 1 ? 'odd' : 'even';
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass('odd even').addClass(rowclass);
@@ -397,19 +397,19 @@ const DatabaseRoutines = {
        * @var msg jQuery object containing the reference to
        *          the AJAX message shown to the user
        */
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       // drop anchors of all selected rows
-      var dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.drop_anchor');
-      var success = true;
-      var count = dropAnchors.length;
-      var returnCount = 0;
+      const dropAnchors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall:checked').parents('tr').find('.drop_anchor');
+      let success = true;
+      const count = dropAnchors.length;
+      let returnCount = 0;
       dropAnchors.each(function () {
-        var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         /**
          * @var $curr_row Object containing reference to the current row
          */
-        var $currRow = $anchor.parents('tr');
-        var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $anchor.getPostData());
+        const $currRow = $anchor.parents('tr');
+        const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $anchor.getPostData());
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post($anchor.attr('href'), params, function (data) {
           returnCount++;
           if (data.success !== true) {
@@ -424,7 +424,7 @@ const DatabaseRoutines = {
            * @var $table Object containing reference
            *             to the main list of elements
            */
-          var $table = $currRow.parent().parent();
+          const $table = $currRow.parent().parent();
           // Check how many rows will be left after we remove
           // the one that the user has requested us to remove
           if ($table.find('tr').length === 3) {
@@ -444,12 +444,12 @@ const DatabaseRoutines = {
               /**
                * @var ct Count of processed rows
                */
-              var ct = 0;
+              let ct = 0;
               /**
                * @var rowclass Class to be attached to the row
                *               that is being processed
                */
-              var rowclass = '';
+              let rowclass = '';
               $table.find('tr').has('td').each(function () {
                 rowclass = ct % 2 === 1 ? 'odd' : 'even';
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass('odd even').addClass(rowclass);
@@ -481,7 +481,7 @@ const DatabaseRoutines = {
   postDialogShow: function (data) {
     // Cache the template for a parameter table row
     DatabaseRoutines.paramTemplate = data.paramTemplate;
-    var that = this;
+    const that = this;
     // Make adjustments in the dialog to make it AJAX compatible
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.routine_param_remove').show();
     // Enable/disable the 'options' dropdowns for parameters as necessary
@@ -509,14 +509,14 @@ const DatabaseRoutines = {
      * @var index Counter used for reindexing the input
      *            fields in the routine parameters table
      */
-    var index = 0;
+    let index = 0;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.routine_params_table tbody').find('tr').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(':input').each(function () {
         /**
          * @var inputname The value of the name attribute of
          *                the input field being reindexed
          */
-        var inputname = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name');
+        const inputname = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name');
         if (inputname.startsWith('item_param_dir')) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name', inputname.substring(0, 14) + '[' + index + ']');
         } else if (inputname.startsWith('item_param_name')) {
@@ -544,12 +544,12 @@ const DatabaseRoutines = {
     /**
      * @var isSuccess Stores the outcome of the validation
      */
-    var isSuccess = true;
+    let isSuccess = true;
     /**
      * @var inputname The value of the "name" attribute for
      *                the field that is being processed
      */
-    var inputname = '';
+    let inputname = '';
     const routinesEditorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#routinesEditorModal');
     routinesEditorModal.find('table.routine_params_table').last().find('tr').each(function () {
       // Every parameter of a routine must have
@@ -574,8 +574,8 @@ const DatabaseRoutines = {
     }
     routinesEditorModal.find('table.routine_params_table').last().find('tr').each(function () {
       // SET, ENUM, VARCHAR and VARBINARY fields must have length/values
-      var $inputtyp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('select[name^=item_param_type]');
-      var $inputlen = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name^=item_param_length]');
+      const $inputtyp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('select[name^=item_param_type]');
+      const $inputlen = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name^=item_param_length]');
       if ($inputtyp.length && $inputlen.length) {
         if (($inputtyp.val() === 'ENUM' || $inputtyp.val() === 'SET' || $inputtyp.val().startsWith('VAR')) && $inputlen.val() === '') {
           $inputlen.trigger('focus');
@@ -591,8 +591,8 @@ const DatabaseRoutines = {
     if (routinesEditorModal.find('select[name=item_type]').find(':selected').val() === 'FUNCTION') {
       // The length/values of return variable for functions must
       // be set, if the type is SET, ENUM, VARCHAR or VARBINARY.
-      var $returntyp = routinesEditorModal.find('select[name=item_returntype]');
-      var $returnlen = routinesEditorModal.find('input[name=item_returnlength]');
+      const $returntyp = routinesEditorModal.find('select[name=item_returntype]');
+      const $returnlen = routinesEditorModal.find('input[name=item_returnlength]');
       if (($returntyp.val() === 'ENUM' || $returntyp.val() === 'SET' || $returntyp.val().startsWith('VAR')) && $returnlen.val() === '') {
         $returnlen.trigger('focus');
         alert(window.Messages.strFormEmpty);
@@ -632,13 +632,13 @@ const DatabaseRoutines = {
      *              to an element to be displayed when no
      *              options are available
      */
-    var $noOpts = $text.parent().parent().find('.no_opts');
+    const $noOpts = $text.parent().parent().find('.no_opts');
     /**
      * @var no_len a jQuery object containing the reference
      *             to an element to be displayed when no
      *             "length/values" field is available
      */
-    var $noLen = $len.parent().parent().find('.no_len');
+    const $noLen = $len.parent().parent().find('.no_len');
     // Process for parameter options
     switch ($type.val()) {
       case 'TINYINT':
@@ -703,8 +703,8 @@ const DatabaseRoutines = {
      * @var msg jQuery object containing the reference to
      *          the AJAX message shown to the user
      */
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
-    var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])($this[0], $this.getPostData());
+    let $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+    const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])($this[0], $this.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($this.attr('href'), params, function (data) {
       if (data.success !== true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -725,7 +725,7 @@ const DatabaseRoutines = {
         /**
          * @var data Form data to be sent in the AJAX request
          */
-        var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
+        const data = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').last().serialize();
         $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/routines', data, function (data) {
           if (data.success === true) {
@@ -768,9 +768,9 @@ const DatabaseRoutines = {
           /**
            * @var data Form data to be sent in the AJAX request
            */
-          var data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
+          const data = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
           $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-          var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
+          const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, function (data) {
             if (data.success !== true) {
               (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);

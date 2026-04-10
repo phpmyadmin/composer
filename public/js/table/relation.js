@@ -39,7 +39,7 @@ const showHideClauses = function ($thisDropdown) {
 const setDropdownValues = function ($dropdown, values) {
   let selectedValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
   $dropdown.empty();
-  var optionsAsString = '';
+  let optionsAsString = '';
   // add an empty string to the beginning for empty selection
   values.unshift('');
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(values, function () {
@@ -53,12 +53,12 @@ const setDropdownValues = function ($dropdown, values) {
  * @param $dropdown the dropdown whose value got changed
  */
 const getDropdownValues = function ($dropdown) {
-  var foreignDb = null;
-  var foreignTable = null;
-  var $databaseDd;
-  var $tableDd;
-  var $columnDd;
-  var foreign = '';
+  let foreignDb = null;
+  let foreignTable = null;
+  let $databaseDd;
+  let $tableDd;
+  let $columnDd;
+  let foreign = '';
   // if the changed dropdown is for foreign key constraints
   if ($dropdown.is('select[name^="destination_foreign"]')) {
     $databaseDd = $dropdown.parent().parent().parent().find('select[name^="destination_foreign_db"]');
@@ -90,13 +90,13 @@ const getDropdownValues = function ($dropdown) {
       return;
     }
   }
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
-  var $form = $dropdown.parents('form');
-  var $db = $form.find('input[name="db"]').val();
-  var $table = $form.find('input[name="table"]').val();
-  var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  var params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
-  var $server = $form.find('input[name="server"]');
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+  const $form = $dropdown.parents('form');
+  const $db = $form.find('input[name="db"]').val();
+  const $table = $form.find('input[name="table"]').val();
+  const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  let params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
+  const $server = $form.find('input[name="server"]');
   if ($server.length > 0) {
     params += argsep + 'server=' + $form.find('input[name="server"]').val();
   }
@@ -116,7 +116,7 @@ const getDropdownValues = function ($dropdown) {
         } else {
           // if a table selector
           // set values for the column dropdown
-          var primary = null;
+          let primary = null;
           if (typeof data.primary !== 'undefined' && 1 === data.primary.length) {
             primary = data.primary[0];
           }
@@ -159,7 +159,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
     // Add field.
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev('span').clone(true, true).insertBefore(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)).find('select').val('');
     // Add foreign field.
-    var $sourceElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name^="destination_foreign_column[' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-index') + ']"]').last().parent();
+    const $sourceElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name^="destination_foreign_column[' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-index') + ']"]').last().parent();
     $sourceElem.clone(true, true).insertAfter($sourceElem).find('select').val('');
   });
   /**
@@ -168,11 +168,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'a.add_foreign_key', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var $prevRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').prev('tr');
-    var $newRow = $prevRow.clone(true, true);
+    const $prevRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').prev('tr');
+    const $newRow = $prevRow.clone(true, true);
     // Update serial number.
-    var currIndex = $newRow.find('a.add_foreign_key_field').attr('data-index');
-    var newIndex = parseInt(currIndex) + 1;
+    const currIndex = $newRow.find('a.add_foreign_key_field').attr('data-index');
+    const newIndex = parseInt(currIndex) + 1;
     $newRow.find('a.add_foreign_key_field').attr('data-index', newIndex);
     // Update form parameter names.
     $newRow.find('select[name^="foreign_key_fields_name"]').not($newRow.find('select[name^="foreign_key_fields_name"]').first()).find('select[name^="destination_foreign_column"]').not($newRow.find('select[name^="foreign_key_fields_name"]').not($newRow.find('select[name^="foreign_key_fields_name"]').first()).find('select[name^="destination_foreign_column"]').first()).each(function () {
@@ -192,14 +192,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.drop_foreign_key_anchor.ajax').on('click', function (event) {
     event.preventDefault();
-    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     // Object containing reference to the current field's row
-    var $currRow = $anchor.parents('tr');
-    var dropQuery = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)($currRow.children('td').children('.drop_foreign_key_msg').val());
-    var question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
+    const $currRow = $anchor.parents('tr');
+    const dropQuery = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)($currRow.children('td').children('.drop_foreign_key_msg').val());
+    const question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDroppingForeignKey, false);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDroppingForeignKey, false);
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msg);
@@ -210,7 +210,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
       }); // end $.post()
     });
   }); // end Drop Foreign key
-  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+  const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 });
 

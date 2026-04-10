@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function exportPrivilegesModalHandler(data, msgbox) {
   if (typeof data !== 'undefined' && data.success === true) {
-    var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModal');
+    const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModal');
     // Remove any previous privilege modal data, if any
     modal.find('.modal-body').first().html('');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModalLabel').first().html('Loading');
@@ -130,11 +130,11 @@ const AccountLocking = {
  */
 const AddUserLoginCheckUsername = {
   handleEvent: function () {
-    var username = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-    var $warning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#user_exists_warning');
+    const username = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const $warning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#user_exists_warning');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_pred_username').val() === 'userdefined' && username !== '') {
-      var href = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name=\'usersForm\']').attr('action');
-      var params = {
+      const href = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name=\'usersForm\']').attr('action');
+      const params = {
         'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'validate_username': true,
@@ -159,9 +159,9 @@ const AddUserLoginCheckUsername = {
  */
 const PasswordStrength = {
   handleEvent: function () {
-    var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#password_strength_meter');
-    var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#password_strength');
-    var username = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="username"]');
+    const meterObj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#password_strength_meter');
+    const meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#password_strength');
+    const username = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="username"]');
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.checkPasswordStrength)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val(), meterObj, meterObjLabel, username.val());
   }
 };
@@ -182,8 +182,8 @@ const SwitchToUseTextField = {
  */
 const ChangePasswordStrength = {
   handleEvent: function () {
-    var meterObj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_strength_meter');
-    var meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_strength');
+    const meterObj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_strength_meter');
+    const meterObjLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_strength');
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.checkPasswordStrength)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val(), meterObj, meterObjLabel, _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('user'));
   }
 };
@@ -194,7 +194,7 @@ const ChangePasswordStrength = {
  */
 const ShowSha256PasswordNotice = {
   handleEvent: function () {
-    var selectedPlugin = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const selectedPlugin = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
     if (selectedPlugin === 'sha256_password') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ssl_reqd_warning').show();
     } else {
@@ -211,19 +211,19 @@ const RevokeUser = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var $thisButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#usersForm');
+    const $thisButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#usersForm');
     $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
-      var $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropUsersDbCheckbox');
+      const $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropUsersDbCheckbox');
       if ($dropUsersDbCheckbox.is(':checked')) {
-        var isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
+        const isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
         if (!isConfirmed) {
           // Uncheck the drop users database checkbox
           $dropUsersDbCheckbox.prop('checked', false);
         }
       }
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
-      var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+      const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
@@ -234,7 +234,7 @@ const RevokeUser = {
           }
           // Remove the revoked user from the users list
           $form.find('input:checkbox:checked').parents('tr').slideUp('medium', function () {
-            var thisUserInitial = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input:checkbox').val().charAt(0).toUpperCase();
+            const thisUserInitial = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input:checkbox').val().charAt(0).toUpperCase();
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).remove();
             // If this is the last user with thisUserInitial, remove the link from #userAccountsPagination
             if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#userRightsTable').find('input:checkbox[value^="' + thisUserInitial + '"], input:checkbox[value^="' + thisUserInitial.toLowerCase() + '"]').length === 0) {
@@ -272,11 +272,11 @@ const ExportPrivileges = {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strNoAccountSelected, 2000, 'success');
       return;
     }
-    var msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-    var serverId = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server');
-    var selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
-    var postStr = selectedUsers + '&submit_mult=export' + argsep + 'ajax_request=true&server=' + serverId;
+    const msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+    const serverId = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server');
+    const selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
+    const postStr = selectedUsers + '&submit_mult=export' + argsep + 'ajax_request=true&server=' + serverId;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.form).prop('action'), postStr, function (data) {
       exportPrivilegesModalHandler(data, msgbox);
     }); // end $.post
@@ -291,7 +291,7 @@ const ExportUser = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+    const msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), {
       'ajax_request': true
     }, function (data) {
@@ -304,7 +304,7 @@ const ExportUser = {
  */
 const SslTypeToggle = {
   handleEvent: function () {
-    var $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#specified_div');
+    const $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#specified_div');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ssl_type_SPECIFIED').is(':checked')) {
       $div.find('input').prop('disabled', false);
     } else {
@@ -317,7 +317,7 @@ const SslTypeToggle = {
  */
 const SslPrivilegeToggle = {
   handleEvent: function () {
-    var $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#require_ssl_div');
+    const $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#require_ssl_div');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked')) {
       $div.find('input').prop('disabled', false);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ssl_type_SPECIFIED').trigger('change');
@@ -330,14 +330,14 @@ const SslPrivilegeToggle = {
  * Create submenu for simpler interface
  */
 function addOrUpdateSubmenu() {
-  var $editUserDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_user_dialog');
+  const $editUserDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_user_dialog');
   if ($editUserDialog.length === 0) {
     return;
   }
-  var $subNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.nav-pills');
-  var submenuLabel;
-  var submenuLink;
-  var linkNumber;
+  let $subNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.nav-pills');
+  let submenuLabel;
+  let submenuLink;
+  let linkNumber;
   // if submenu exists yet, remove it first
   if ($subNav.length > 0) {
     $subNav.remove();
@@ -383,14 +383,14 @@ const SelectAllPrivileges = {
    */
   handleEvent: function (event) {
     const method = event.target.getAttribute('data-select-target');
-    var options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(method).first().children();
+    const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(method).first().children();
     options.each(function (_, obj) {
       obj.selected = true;
     });
   }
 };
 function setMaxWidth() {
-  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+  const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.jsresponsive').css('max-width', windowWidth - 35 + 'px');
 }
 /**

@@ -49,7 +49,7 @@ let config;
 /**
  * Console object
  */
-var Console = {
+const Console = {
   /**
    * @var {JQuery}, jQuery object, selector is '#pma_console>.content'
    * @access private
@@ -215,7 +215,7 @@ var Console = {
           return;
         }
         try {
-          var data = JSON.parse(xhr.responseText);
+          const data = JSON.parse(xhr.responseText);
           Console.ajaxCallback(data);
         } catch (e) {
           // eslint-disable-next-line no-console, compat/compat
@@ -298,7 +298,7 @@ var Console = {
    */
   collapse: function () {
     config.setMode('collapse');
-    var pmaConsoleHeight = Math.max(92, config.height);
+    const pmaConsoleHeight = Math.max(92, config.height);
     Console.$consoleToolbar.addClass('collapsed');
     Console.$consoleAllContents.height(pmaConsoleHeight);
     Console.$consoleContent.css({
@@ -315,7 +315,7 @@ var Console = {
   show: function () {
     let inputFocus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
     config.setMode('show');
-    var pmaConsoleHeight = Math.max(92, config.height);
+    let pmaConsoleHeight = Math.max(92, config.height);
     // eslint-disable-next-line compat/compat
     pmaConsoleHeight = Math.min(config.height, (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 25);
     Console.$consoleContent.css({
@@ -363,7 +363,7 @@ var Console = {
    * this param also can be JQuery object, if you need.
    */
   showCard: function (cardSelector) {
-    var $card = null;
+    let $card = null;
     if (typeof cardSelector !== 'string') {
       if (cardSelector.length > 0) {
         $card = cardSelector;
@@ -400,7 +400,7 @@ var Console = {
     }
   },
   isSelect: function (queryString) {
-    var regExp = /^SELECT\s+/i;
+    const regExp = /^SELECT\s+/i;
     return regExp.test(queryString);
   }
 };
@@ -409,7 +409,7 @@ var Console = {
  * Careful: this object UI logics highly related with functions under Console
  * Resizing min-height is 32, if small than it, console will collapse
  */
-var ConsoleResizer = {
+const ConsoleResizer = {
   posY: 0,
   height: 0,
   resultHeight: 0,
@@ -476,7 +476,7 @@ var ConsoleResizer = {
 /**
  * Console input object
  */
-var ConsoleInput = {
+const ConsoleInput = {
   /**
    * @var array, contains Codemirror objects or input jQuery objects
    * @access private
@@ -572,17 +572,17 @@ var ConsoleInput = {
    */
   historyNavigate: function (event) {
     if (event.keyCode === 38 || event.keyCode === 40) {
-      var upPermitted = false;
-      var downPermitted = false;
-      var editor = ConsoleInput.inputs.console;
-      var cursorLine;
-      var totalLine;
+      let upPermitted = false;
+      let downPermitted = false;
+      const editor = ConsoleInput.inputs.console;
+      let cursorLine;
+      let totalLine;
       if (ConsoleInput.codeMirror) {
         cursorLine = editor.getCursor().line;
         totalLine = editor.lineCount();
       } else {
         // Get cursor position from textarea
-        var text = ConsoleInput.getText();
+        const text = ConsoleInput.getText();
         cursorLine = text.substring(0, editor.prop('selectionStart')).split('\n').length - 1;
         totalLine = text.split(/\r*\n/).length;
       }
@@ -592,8 +592,8 @@ var ConsoleInput = {
       if (cursorLine === totalLine - 1) {
         downPermitted = true;
       }
-      var nextCount;
-      var queryString = false;
+      let nextCount;
+      let queryString = false;
       if (upPermitted && event.keyCode === 38) {
         // Navigate up in history
         if (ConsoleInput.historyCount === 0) {
@@ -743,7 +743,7 @@ var ConsoleInput = {
 /**
  * Console messages, and message items management object
  */
-var ConsoleMessages = {
+const ConsoleMessages = {
   /**
    * Used for clear the messages
    */
@@ -765,9 +765,9 @@ var ConsoleMessages = {
    * @return {string | false} message
    */
   getHistory: function (nthLast) {
-    var $queries = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .query');
-    var length = $queries.length;
-    var $query = $queries.eq(length - nthLast);
+    const $queries = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .query');
+    const length = $queries.length;
+    const $query = $queries.eq(length - nthLast);
     if (!$query || length - nthLast < 0) {
       return false;
     } else {
@@ -781,8 +781,8 @@ var ConsoleMessages = {
    * @param {boolean} enterExecutes Only Enter has to be pressed to execute query.
    */
   showInstructions: function (enterExecutes) {
-    var enter = +enterExecutes || 0; // conversion to int
-    var $welcomeMsg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.welcome span');
+    const enter = +enterExecutes || 0; // conversion to int
+    const $welcomeMsg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message.welcome span');
     $welcomeMsg.children('[id^=instructions]').hide();
     $welcomeMsg.children('#instructions-' + enter).show();
   },
@@ -798,9 +798,9 @@ var ConsoleMessages = {
       return false;
     }
     // Generate an ID for each message, we can find them later
-    var msgId = Math.round(Math.random() * 899999999999 + 100000000000);
-    var now = new Date();
-    var $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message ' + (config.alwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
+    const msgId = Math.round(Math.random() * 899999999999 + 100000000000);
+    const now = new Date();
+    const $newMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message ' + (config.alwaysExpand ? 'expanded' : 'collapsed') + '" msgid="' + msgId + '"><div class="action_content"></div></div>');
     switch (msgType) {
       case 'query':
         $newMessage.append('<div class="query highlighted"></div>');
@@ -833,7 +833,7 @@ var ConsoleMessages = {
    */
   appendQuery: function (queryData) {
     let state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-    var targetMessage = ConsoleMessages.append(queryData.sql_query, 'query');
+    const targetMessage = ConsoleMessages.append(queryData.sql_query, 'query');
     if (!targetMessage) {
       return false;
     }
@@ -860,7 +860,7 @@ var ConsoleMessages = {
   },
   messageEventBinds: function ($target) {
     // Leave unbinded elements, remove binded.
-    var $targetMessage = $target.filter(':not(.binded)');
+    const $targetMessage = $target.filter(':not(.binded)');
     if ($targetMessage.length === 0) {
       return;
     }
@@ -878,8 +878,8 @@ var ConsoleMessages = {
       ConsoleInput.focus();
     });
     $targetMessage.find('.action.requery').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       if (confirm(window.Messages.strConsoleRequeryConfirm + '\n' + (query.length < 100 ? query : query.slice(0, 100) + '...'))) {
         Console.execute(query, {
           db: $message.attr('targetdb'),
@@ -888,21 +888,21 @@ var ConsoleMessages = {
       }
     });
     $targetMessage.find('.action.bookmark').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       ConsoleBookmarks.addBookmark(query, $message.attr('targetdb'));
       Console.showCard('#pma_bookmarks .card.add');
     });
     $targetMessage.find('.action.edit_bookmark').on('click', function () {
-      var query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
-      var isShared = $message.find('span.bookmark_label').hasClass('shared');
-      var label = $message.find('span.bookmark_label').text();
+      const query = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text();
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const isShared = $message.find('span.bookmark_label').hasClass('shared');
+      const label = $message.find('span.bookmark_label').text();
       ConsoleBookmarks.addBookmark(query, $message.attr('targetdb'), label, isShared);
       Console.showCard('#pma_bookmarks .card.add');
     });
     $targetMessage.find('.action.delete_bookmark').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       if (confirm(window.Messages.strConsoleDeleteBookmarkConfirm + '\n' + $message.find('.bookmark_label').text())) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
           'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
@@ -915,7 +915,7 @@ var ConsoleMessages = {
       }
     });
     $targetMessage.find('.action.profiling').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       Console.execute(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text(), {
         db: $message.attr('targetdb'),
         table: $message.attr('targettable'),
@@ -923,14 +923,14 @@ var ConsoleMessages = {
       });
     });
     $targetMessage.find('.action.explain').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       Console.execute('EXPLAIN ' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().siblings('.query').text(), {
         db: $message.attr('targetdb'),
         table: $message.attr('targettable')
       });
     });
     $targetMessage.find('.action.dbg_show_trace').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       if (!$message.find('.trace').length) {
         ConsoleDebug.getQueryDetails($message.data('queryInfo'), $message.data('totalTime'), $message);
         ConsoleMessages.messageEventBinds($message.find('.message:not(.binded)'));
@@ -939,17 +939,17 @@ var ConsoleMessages = {
       $message.removeClass('hide_trace');
     });
     $targetMessage.find('.action.dbg_hide_trace').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       $message.addClass('hide_trace');
       $message.removeClass('show_trace');
     });
     $targetMessage.find('.action.dbg_show_args').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       $message.addClass('show_args expanded');
       $message.removeClass('hide_args collapsed');
     });
     $targetMessage.find('.action.dbg_hide_args').on('click', function () {
-      var $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
+      const $message = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.message');
       $message.addClass('hide_args collapsed');
       $message.removeClass('show_args expanded');
     });
@@ -962,14 +962,14 @@ var ConsoleMessages = {
     }
   },
   msgAppend: function (msgId, msgString) {
-    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message[msgid=' + msgId + ']');
+    const $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.content .console_message_container .message[msgid=' + msgId + ']');
     if ($targetMessage.length === 0 || isNaN(parseInt(msgId)) || typeof msgString !== 'string') {
       return false;
     }
     $targetMessage.append('<div>' + msgString + '</div>');
   },
   updateQuery: function (msgId, isSuccessed, queryData) {
-    var $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.console_message_container .message[msgid=' + parseInt(msgId) + ']');
+    const $targetMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').find('.console_message_container .message[msgid=' + parseInt(msgId) + ']');
     if ($targetMessage.length === 0 || isNaN(parseInt(msgId))) {
       return false;
     }
@@ -1010,7 +1010,7 @@ var ConsoleMessages = {
 /**
  * Console bookmarks card, and bookmarks items management object
  */
-var ConsoleBookmarks = {
+const ConsoleBookmarks = {
   bookmarks: [],
   addBookmark: function (queryString, targetDb) {
     let label = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
@@ -1082,7 +1082,7 @@ var ConsoleBookmarks = {
     });
   }
 };
-var ConsoleDebug = {
+const ConsoleDebug = {
   lastDebugInfo: {
     debugInfo: null,
     url: null
@@ -1102,8 +1102,8 @@ var ConsoleDebug = {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_exec').addClass('active');
       }
     }
-    var orderBy = config.orderBy;
-    var order = config.order;
+    const orderBy = config.orderBy;
+    const order = config.order;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by.sort_' + orderBy).addClass('active');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order.order_' + order).addClass('active');
     // Initialize actions in toolbar
@@ -1126,7 +1126,7 @@ var ConsoleDebug = {
       }
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by').on('click', function () {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order_by').removeClass('active');
       $this.addClass('active');
       if ($this.hasClass('sort_time')) {
@@ -1139,7 +1139,7 @@ var ConsoleDebug = {
       ConsoleDebug.refresh();
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order').on('click', function () {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.button.order').removeClass('active');
       $this.addClass('active');
       if ($this.hasClass('order_asc')) {
@@ -1157,7 +1157,7 @@ var ConsoleDebug = {
     ConsoleDebug.showLog(Console.debugSqlInfo);
   },
   formatFunctionCall: function (dbgStep) {
-    var functionName = '';
+    let functionName = '';
     if ('class' in dbgStep) {
       functionName += dbgStep.class;
       functionName += dbgStep.type;
@@ -1171,17 +1171,17 @@ var ConsoleDebug = {
     return functionName;
   },
   formatFunctionArgs: function (dbgStep) {
-    var $args = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>');
+    const $args = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>');
     if (dbgStep.args.length) {
       $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text(window.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
-      for (var i = 0; i < dbgStep.args.length; i++) {
+      for (let i = 0; i < dbgStep.args.length; i++) {
         $args.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message">').html('<pre>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
       }
     }
     return $args;
   },
   formatFileName: function (dbgStep) {
-    var fileName = '';
+    let fileName = '';
     if ('file' in dbgStep) {
       fileName += dbgStep.file;
       fileName += '#' + dbgStep.line;
@@ -1189,11 +1189,11 @@ var ConsoleDebug = {
     return fileName;
   },
   formatBackTrace: function (dbgTrace) {
-    var $traceElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="trace">');
+    const $traceElem = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="trace">');
     $traceElem.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">'));
-    var step;
-    var $stepElem;
-    for (var stepId in dbgTrace) {
+    let step;
+    let $stepElem;
+    for (let stepId in dbgTrace) {
       if (dbgTrace.hasOwnProperty(stepId)) {
         step = dbgTrace[stepId];
         if (!Array.isArray(step) && typeof step !== 'object') {
@@ -1213,11 +1213,11 @@ var ConsoleDebug = {
     return $traceElem;
   },
   formatQueryOrGroup: function (queryInfo, totalTime) {
-    var grouped;
-    var queryText;
-    var queryTime;
-    var count;
-    var i;
+    let grouped;
+    let queryText;
+    let queryTime;
+    let count;
+    let i;
     if (Array.isArray(queryInfo)) {
       // It is grouped
       grouped = true;
@@ -1231,7 +1231,7 @@ var ConsoleDebug = {
       queryText = queryInfo.query;
       queryTime = queryInfo.time;
     }
-    var $query = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message collapsed hide_trace">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.templates .debug_query').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="query">').text(queryText)).data('queryInfo', queryInfo).data('totalTime', totalTime);
+    const $query = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message collapsed hide_trace">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.templates .debug_query').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="query">').text(queryText)).data('queryInfo', queryInfo).data('totalTime', totalTime);
     if (grouped) {
       $query.find('span.text.count').removeClass('hide');
       $query.find('span.text.count span').text(count);
@@ -1250,8 +1250,8 @@ var ConsoleDebug = {
   },
   getQueryDetails: function (queryInfo, totalTime, $query) {
     if (Array.isArray(queryInfo)) {
-      var $singleQuery;
-      for (var i in queryInfo) {
+      let $singleQuery;
+      for (let i in queryInfo) {
         $singleQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome trace">').text(parseInt(i) + 1 + '.').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="time">').text(window.Messages.strConsoleDebugTimeTaken + ' ' + ConsoleDebug.getQueryTimeTaken(queryInfo[i].time, totalTime)));
         this.appendQueryExtraInfo(queryInfo[i], $singleQuery);
         $query.append('<div class="message welcome trace">').append($singleQuery);
@@ -1266,8 +1266,8 @@ var ConsoleDebug = {
     this.lastDebugInfo.url = url;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debugLog').empty();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').empty();
-    var debugJson = false;
-    var i;
+    let debugJson = false;
+    let i;
     if (typeof debugInfo === 'object' && 'queries' in debugInfo) {
       // Copy it to debugJson, so that it doesn't get changed
       if (!('queries' in debugInfo)) {
@@ -1294,11 +1294,11 @@ var ConsoleDebug = {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').text(window.Messages.strConsoleDebugError);
       return;
     }
-    var allQueries = debugJson.queries;
-    var uniqueQueries = [];
-    var totalExec = allQueries.length;
+    const allQueries = debugJson.queries;
+    let uniqueQueries = [];
+    const totalExec = allQueries.length;
     // Calculate total time and make unique query array
-    var totalTime = 0;
+    let totalTime = 0;
     for (i = 0; i < totalExec; ++i) {
       totalTime += allQueries[i].time;
       if (!(allQueries[i].hash in uniqueQueries)) {
@@ -1307,9 +1307,9 @@ var ConsoleDebug = {
       uniqueQueries[allQueries[i].hash].push(allQueries[i]);
     }
     // Count total unique queries, convert uniqueQueries to Array
-    var totalUnique = 0;
-    var uniqueArray = [];
-    for (var hash in uniqueQueries) {
+    let totalUnique = 0;
+    const uniqueArray = [];
+    for (let hash in uniqueQueries) {
       if (uniqueQueries.hasOwnProperty(hash)) {
         ++totalUnique;
         uniqueArray.push(uniqueQueries[hash]);
@@ -1319,17 +1319,17 @@ var ConsoleDebug = {
     // Show summary
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text(window.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
     if (url) {
-      var decodedUrl = new URLSearchParams(url.split('?')[1]);
+      const decodedUrl = new URLSearchParams(url.split('?')[1]);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="script_name">').text(decodedUrl.has('route') ? decodedUrl.get('route') : url));
     }
     // For sorting queries
     function sortByTime(a, b) {
-      var order = config.order === 'asc' ? 1 : -1;
+      const order = config.order === 'asc' ? 1 : -1;
       if (Array.isArray(a) && Array.isArray(b)) {
         // It is grouped
-        var timeA = 0;
-        var timeB = 0;
-        var i;
+        let timeA = 0;
+        let timeB = 0;
+        let i;
         for (i in a) {
           timeA += a[i].time;
         }
@@ -1342,11 +1342,11 @@ var ConsoleDebug = {
       }
     }
     function sortByCount(a, b) {
-      var order = config.order === 'asc' ? 1 : -1;
+      const order = config.order === 'asc' ? 1 : -1;
       return (a.length - b.length) * order;
     }
-    var orderBy = config.orderBy;
-    var order = config.order;
+    const orderBy = config.orderBy;
+    const order = config.order;
     if (config.groupQueries) {
       // Sort queries
       if (orderBy === 'time') {
@@ -1377,7 +1377,7 @@ var ConsoleDebug = {
     ConsoleMessages.messageEventBinds(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.message:not(.binded)'));
   },
   refresh: function () {
-    var last = this.lastDebugInfo;
+    const last = this.lastDebugInfo;
     ConsoleDebug.showLog(last.debugInfo, last.url);
   }
 };

@@ -46,11 +46,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/opera
  * @param {JQuery} linkObject
  * @param {'TRUNCATE'|'DELETE'} action
  */
-var confirmAndPost = function (linkObject, action) {
+const confirmAndPost = function (linkObject, action) {
   /**
    * @var {string} question String containing the question to be asked for confirmation
    */
-  var question = '';
+  let question = '';
   if (action === 'TRUNCATE') {
     question += window.Messages.strTruncateTableStrongWarning + ' ';
   } else if (action === 'DELETE') {
@@ -60,7 +60,7 @@ var confirmAndPost = function (linkObject, action) {
   question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
   linkObject.confirm(question, linkObject.attr('href'), function (url) {
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-    var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, linkObject.getPostData());
+    const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, linkObject.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').length !== 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').remove();
@@ -89,9 +89,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#copyTable.ajax', function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'submit_copy=Go', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         if ($form.find('input[name=\'switch_to_new\']').prop('checked')) {
@@ -116,9 +116,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#moveTableForm', function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'submit_move=1', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
@@ -140,12 +140,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#tableOptionsForm', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $tblNameField = $form.find('input[name=new_name]');
-    var $tblCollationField = $form.find('select[name=tbl_collation]');
-    var collationOrigValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="tbl_collation"] option[selected]').val();
-    var $changeAllColumnCollationsCheckBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_change_all_collations');
-    var question = window.Messages.strChangeAllColumnCollationsWarning;
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $tblNameField = $form.find('input[name=new_name]');
+    const $tblCollationField = $form.find('select[name=tbl_collation]');
+    const collationOrigValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="tbl_collation"] option[selected]').val();
+    const $changeAllColumnCollationsCheckBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_change_all_collations');
+    const question = window.Messages.strChangeAllColumnCollationsWarning;
     if ($tblNameField.val() !== $tblNameField[0].defaultValue) {
       // reload page and navigation if the table has been renamed
       (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
@@ -187,7 +187,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#tbl_maintenance li a.maintain_action.ajax', function (event) {
     event.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').length !== 0) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').remove();
     }
@@ -195,11 +195,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.result_query').remove();
     }
     // variables which stores the common attributes
-    var params = jquery__WEBPACK_IMPORTED_MODULE_0___default().param({
+    let params = jquery__WEBPACK_IMPORTED_MODULE_0___default().param({
       'ajax_request': 1,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     });
-    var postData = $link.getPostData();
+    const postData = $link.getPostData();
     if (postData) {
       params += _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + postData;
     }
@@ -209,7 +209,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
           scrollTop: 0
         });
       }
-      var $tempDiv;
+      let $tempDiv;
       if (typeof data !== 'undefined' && data.success === true && data.sql_query !== undefined) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
@@ -219,7 +219,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       } else if (typeof data !== 'undefined' && data.success === true) {
         $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'></div>');
         $tempDiv.html(data.message);
-        var $success = $tempDiv.find('.result_query .alert-success');
+        const $success = $tempDiv.find('.result_query .alert-success');
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($success);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class=\'sqlqueryresults ajax\'></div>').prependTo('#page_content');
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').html(data.message);
@@ -229,7 +229,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
       } else {
         $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'></div>');
         $tempDiv.html(data.error);
-        var $error;
+        let $error;
         if ($tempDiv.find('.error code').length !== 0) {
           $error = $tempDiv.find('.error code').addClass('error');
         } else {
@@ -245,10 +245,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#partitionsForm', function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     function submitPartitionMaintenance() {
-      var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      var submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+      const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -267,16 +267,16 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#drop_tbl_anchor.ajax', function (event) {
     event.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /**
      * @var {string} question String containing the question to be asked for confirmation
      */
-    var question = window.Messages.strDropTableStrongWarning + ' ';
+    let question = window.Messages.strDropTableStrongWarning + ' ';
     question += window.sprintf(window.Messages.strDoYouReally, $link[0].getAttribute('data-query'));
     question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
-      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
+      const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
@@ -295,15 +295,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
   }); // end of Drop Table Ajax action
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#drop_view_anchor.ajax', function (event) {
     event.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /**
      * @var {string} question String containing the question to be asked for confirmation
      */
-    var question = window.Messages.strDropTableStrongWarning + ' ';
+    let question = window.Messages.strDropTableStrongWarning + ' ';
     question += window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table') + '`'));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
-      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
+      const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);

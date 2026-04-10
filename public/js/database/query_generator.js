@@ -116,11 +116,11 @@ function generateCondition(criteriaDiv, table) {
   return query;
 }
 function generateWhereBlock() {
-  var count = 0;
-  var query = '';
+  let count = 0;
+  let query = '';
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tableNameSelect').each(function () {
-    var criteriaDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.jsCriteriaOptions').first();
-    var useCriteria = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.criteria_col').first();
+    const criteriaDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.jsCriteriaOptions').first();
+    const useCriteria = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.criteria_col').first();
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() !== '' && useCriteria.prop('checked')) {
       if (count > 0) {
         criteriaDiv.find('input.logical_op').each(function () {
@@ -136,7 +136,7 @@ function generateWhereBlock() {
   return query;
 }
 function generateJoin(newTable, tableAliases, fk) {
-  var query = '';
+  let query = '';
   query += ' \n\tLEFT JOIN ' + '`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(newTable) + '`';
   if (tableAliases[fk.TABLE_NAME][0] !== '') {
     query += ' AS `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__.escapeBacktick)(tableAliases[newTable][0]) + '`';
@@ -154,13 +154,13 @@ function generateJoin(newTable, tableAliases, fk) {
   return query;
 }
 function existReference(table, fk, usedTables) {
-  var isReferredBy = fk.TABLE_NAME === table && usedTables.includes(fk.REFERENCED_TABLE_NAME);
-  var isReferencedBy = fk.REFERENCED_TABLE_NAME === table && usedTables.includes(fk.TABLE_NAME);
+  const isReferredBy = fk.TABLE_NAME === table && usedTables.includes(fk.REFERENCED_TABLE_NAME);
+  const isReferencedBy = fk.REFERENCED_TABLE_NAME === table && usedTables.includes(fk.TABLE_NAME);
   return isReferredBy || isReferencedBy;
 }
 function tryJoinTable(table, tableAliases, usedTables, foreignKeys) {
-  for (var i = 0; i < foreignKeys.length; i++) {
-    var fk = foreignKeys[i];
+  for (let i = 0; i < foreignKeys.length; i++) {
+    const fk = foreignKeys[i];
     if (existReference(table, fk, usedTables)) {
       return generateJoin(table, tableAliases, fk);
     }
@@ -168,7 +168,7 @@ function tryJoinTable(table, tableAliases, usedTables, foreignKeys) {
   return '';
 }
 function appendTable(table, tableAliases, usedTables, foreignKeys) {
-  var query = tryJoinTable(table, tableAliases, usedTables, foreignKeys);
+  let query = tryJoinTable(table, tableAliases, usedTables, foreignKeys);
   if (query === '') {
     if (usedTables.length > 0) {
       query += '\n\t, ';
@@ -182,9 +182,9 @@ function appendTable(table, tableAliases, usedTables, foreignKeys) {
   return query;
 }
 function generateFromBlock(tableAliases, foreignKeys) {
-  var usedTables = [];
-  var query = '';
-  for (var table in tableAliases) {
+  const usedTables = [];
+  let query = '';
+  for (let table in tableAliases) {
     if (tableAliases.hasOwnProperty(table)) {
       query += appendTable(table, tableAliases, usedTables, foreignKeys);
     }

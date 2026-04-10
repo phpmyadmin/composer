@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
  * general function, usually for data manipulation pages
  *
  */
-var ErrorReport = {
+const ErrorReport = {
   /**
    * @var {object}, stores the last exception info
    */
@@ -47,8 +47,8 @@ var ErrorReport = {
     if (data.report_setting === 'ask') {
       ErrorReport.showErrorNotification();
     } else if (data.report_setting === 'always') {
-      var reportData = ErrorReport.getReportData(exception);
-      var postData = jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(reportData, {
+      const reportData = ErrorReport.getReportData(exception);
+      const postData = jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(reportData, {
         'send_error_report': true,
         'automatic': true
       });
@@ -127,17 +127,17 @@ var ErrorReport = {
    * Shows the small notification that asks for user permission
    */
   showErrorNotification: function () {
-    var key = Math.random().toString(36).substring(2, 12);
+    let key = Math.random().toString(36).substring(2, 12);
     while (key in ErrorReport.keyDict) {
       key = Math.random().toString(36).substring(2, 12);
     }
     ErrorReport.keyDict[key] = 1;
-    var $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="alert alert-danger" role="alert" id="error_notification_' + key + '"></div>').append((0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_4__["default"])('s_error') + window.Messages.strErrorOccurred);
-    var $buttons = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="float-end"></div>');
-    var buttonHtml = '<button class="btn btn-primary" id="show_error_report_' + key + '">';
+    const $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="alert alert-danger" role="alert" id="error_notification_' + key + '"></div>').append((0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_4__["default"])('s_error') + window.Messages.strErrorOccurred);
+    const $buttons = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="float-end"></div>');
+    let buttonHtml = '<button class="btn btn-primary" id="show_error_report_' + key + '">';
     buttonHtml += window.Messages.strShowReportDetails;
     buttonHtml += '</button>';
-    var settingsUrl = 'index.php?route=/preferences/features&server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    const settingsUrl = 'index.php?route=/preferences/features&server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     buttonHtml += '<a class="ajax" href="' + settingsUrl + '">';
     buttonHtml += (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_4__["default"])('s_cog', window.Messages.strChangeReportSettings);
     buttonHtml += '</a>';
@@ -176,8 +176,8 @@ var ErrorReport = {
     if (exception.message === null || typeof exception.message === 'undefined') {
       return '';
     }
-    var reg = /([a-zA-Z]+):/;
-    var regexResult = reg.exec(exception.message);
+    const reg = /([a-zA-Z]+):/;
+    const regexResult = reg.exec(exception.message);
     if (regexResult && regexResult.length === 2) {
       return regexResult[1];
     }
@@ -199,10 +199,10 @@ var ErrorReport = {
    */
   getReportData: function (exception) {
     if (exception && exception.stack && exception.stack.length) {
-      for (var i = 0; i < exception.stack.length; i++) {
-        var stack = exception.stack[i];
+      for (let i = 0; i < exception.stack.length; i++) {
+        const stack = exception.stack[i];
         if (stack.context && stack.context.length) {
-          for (var j = 0; j < stack.context.length; j++) {
+          for (let j = 0; j < stack.context.length; j++) {
             if (stack.context[j].length > 80) {
               stack.context[j] = stack.context[j].substring(-1, 75) + '//...';
             }
@@ -210,7 +210,7 @@ var ErrorReport = {
         }
       }
     }
-    var reportData = {
+    const reportData = {
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'ajax_request': true,
       'exception': exception,
@@ -233,7 +233,7 @@ var ErrorReport = {
    */
   wrapFunction: function (func) {
     if (!func.wrapped) {
-      var newFunc = function () {
+      const newFunc = function () {
         try {
           return func.apply(this, arguments);
         } catch (x) {
@@ -255,9 +255,9 @@ var ErrorReport = {
    * Automatically wraps the callback in AJAX.registerOnload
    */
   wrapAjaxOnloadCallback: function () {
-    var oldOnload = _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload;
+    const oldOnload = _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload;
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload = function (file, func) {
-      var wrappedFunction = ErrorReport.wrapFunction(func);
+      const wrappedFunction = ErrorReport.wrapFunction(func);
       oldOnload.call(this, file, wrappedFunction);
     };
   },
@@ -265,9 +265,9 @@ var ErrorReport = {
    * Automatically wraps the callback in $.fn.on
    */
   wrapJqueryOnCallback: function () {
-    var oldOn = (jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).on;
+    const oldOn = (jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).on;
     (jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).on = function () {
-      for (var i = 1; i <= 3; i++) {
+      for (let i = 1; i <= 3; i++) {
         if (typeof arguments[i] === 'function') {
           arguments[i] = ErrorReport.wrapFunction(arguments[i]);
           break;

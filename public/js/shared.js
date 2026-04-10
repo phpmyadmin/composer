@@ -63,17 +63,17 @@ const ajaxShowMessage = function () {
   let message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   let timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   let type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var msg = message;
-  var newTimeOut = timeout;
+  let msg = message;
+  let newTimeOut = timeout;
   /**
    * @var self_closing Whether the notification will automatically disappear
    */
-  var selfClosing = true;
+  let selfClosing = true;
   /**
    * @var dismissable Whether the user will be able to remove
    *                  the notification by clicking on it
    */
-  var dismissable = true;
+  let dismissable = true;
   // Handle the case when a empty data.message is passed.
   // We don't want the empty message
   if (msg === '') {
@@ -113,7 +113,7 @@ const ajaxShowMessage = function () {
    * @var $retval    a jQuery object containing the reference
    *                 to the created AJAX message
    */
-  var $retval = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show();
+  const $retval = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show();
   // If the notification is self-closing we should create a callback to remove it
   if (selfClosing) {
     $retval.delay(newTimeOut).fadeOut('medium', function () {
@@ -239,12 +239,12 @@ const AJAX = {
    * @return {number}
    */
   hash: function (key) {
-    var newKey = key;
+    let newKey = key;
     /* https://burtleburtle.net/bob/hash/doobs.html#one */
     newKey += '';
-    var len = newKey.length;
-    var hash = 0;
-    var i = 0;
+    const len = newKey.length;
+    let hash = 0;
+    let i = 0;
     for (; i < len; ++i) {
       hash += newKey.charCodeAt(i);
       hash += hash << 10;
@@ -264,7 +264,7 @@ const AJAX = {
    * @return {self} For chaining
    */
   registerOnload: function (file, func) {
-    var eventName = 'onload_' + AJAX.hash(file);
+    const eventName = 'onload_' + AJAX.hash(file);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on(eventName, func);
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -285,7 +285,7 @@ const AJAX = {
    * @return {self} For chaining
    */
   registerTeardown: function (file, func) {
-    var eventName = 'teardown_' + AJAX.hash(file);
+    const eventName = 'teardown_' + AJAX.hash(file);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on(eventName, func);
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -302,7 +302,7 @@ const AJAX = {
    * @param {string} file The filename for which to fire the event
    */
   fireOnload: function (file) {
-    var eventName = 'onload_' + AJAX.hash(file);
+    const eventName = 'onload_' + AJAX.hash(file);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).trigger(eventName);
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -318,7 +318,7 @@ const AJAX = {
    * @param {string} file The filename for which to fire the event
    */
   fireTeardown: function (file) {
-    var eventName = 'teardown_' + AJAX.hash(file);
+    const eventName = 'teardown_' + AJAX.hash(file);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).triggerHandler(eventName);
     if (this.debug) {
       // eslint-disable-next-line no-console
@@ -339,9 +339,9 @@ const AJAX = {
         return;
       }
     }
-    var newHash = null;
-    var oldHash = null;
-    var lockId;
+    let newHash = null;
+    let oldHash = null;
+    let lockId;
     // CodeMirror lock
     if (event.data.value === 3) {
       newHash = event.data.content;
@@ -409,7 +409,7 @@ const AJAX = {
     // In some cases we don't want to handle the request here and either
     // leave the browser deal with it natively (e.g: file download)
     // or leave an existing ajax event handler present elsewhere deal with it
-    var href = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
+    const href = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
     if (typeof event !== 'undefined' && (event.shiftKey || event.ctrlKey || event.metaKey)) {
       return true;
     } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('target')) {
@@ -437,8 +437,8 @@ const AJAX = {
       return false;
     }
     AJAX.resetLock();
-    var isLink = !!href || false;
-    var previousLinkAborted = false;
+    let isLink = !!href || false;
+    let previousLinkAborted = false;
     if (AJAX.active === true) {
       // Cancel the old request if abortable, when the user requests
       // something else. Otherwise silently bail out, as there is already
@@ -465,10 +465,10 @@ const AJAX = {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('html, body').animate({
       scrollTop: 0
     }, 'fast');
-    var url = isLink ? href : jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
-    var argsep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var params = 'ajax_request=true' + argsep + 'ajax_page_request=true';
-    var dataPost = AJAX.source.getPostData();
+    const url = isLink ? href : jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
+    const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let params = 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    const dataPost = AJAX.source.getPostData();
     if (!isLink) {
       params += argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
     } else if (dataPost) {
@@ -484,7 +484,7 @@ const AJAX = {
       AJAX.$msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
       // Save reference for the new link request
       AJAX.xhr = jquery__WEBPACK_IMPORTED_MODULE_0___default().get(url, params, AJAX.responseHandler);
-      var state = {
+      const state = {
         url: href
       };
       if (previousLinkAborted) {
@@ -500,7 +500,7 @@ const AJAX = {
        * The event was saved in the jQuery data object by an onload
        * handler defined below. Workaround for bug #3583316
        */
-      var onsubmit = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('onsubmit');
+      const onsubmit = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('onsubmit');
       // Submit the request if there is no onsubmit handler
       // or if it returns a value that evaluates to true
       if (typeof onsubmit !== 'function' || onsubmit.apply(this, [event])) {
@@ -534,7 +534,7 @@ const AJAX = {
       (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content'));
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_errors').remove();
-    var msg = '';
+    let msg = '';
     if (data.errSubmitMsg) {
       msg = data.errSubmitMsg;
     }
@@ -654,7 +654,7 @@ const AJAX = {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('title').replaceWith(data.title);
         }
         if (data.menu) {
-          var state = {
+          const state = {
             url: data.selflink,
             menu: data.menu
           };
@@ -676,15 +676,15 @@ const AJAX = {
           (0,_functions_checkNumberOfFields_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
         }
         if (data.selflink) {
-          var source = data.selflink.split('?')[0];
+          const source = data.selflink.split('?')[0];
           // Check for faulty links
-          var $selflinkReplace = {
+          const $selflinkReplace = {
             'index.php?route=/import': 'index.php?route=/table/sql',
             'index.php?route=/table/chart': 'index.php?route=/sql',
             'index.php?route=/table/gis-visualization': 'index.php?route=/sql'
           };
           if ($selflinkReplace[source]) {
-            var replacement = $selflinkReplace[source];
+            const replacement = $selflinkReplace[source];
             data.selflink = data.selflink.replace(source, replacement);
           }
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').find('> a').attr('href', data.selflink);
@@ -700,7 +700,7 @@ const AJAX = {
           (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_3__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content'));
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_errors').remove();
-        var msg = '';
+        let msg = '';
         if (data.errSubmitMsg) {
           msg = data.errSubmitMsg;
         }
@@ -751,7 +751,7 @@ const AJAX = {
     } else {
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(data.error, false);
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)(AJAX.$msgbox);
-      var $ajaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
+      const $ajaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
       $ajaxError.attr({
         'id': 'ajaxError'
       });
@@ -817,8 +817,8 @@ const AJAX = {
      */
     load: function (files) {
       let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-      var self = this;
-      var i;
+      const self = this;
+      let i;
       // Clear loaded scripts if they are from another version of phpMyAdmin.
       // Depends on common params being set before loading scripts in responseHandler
       if (self.scriptsVersion === null) {
@@ -840,7 +840,7 @@ const AJAX = {
         }
       }
       for (i in files) {
-        var script = files[i].name;
+        const script = files[i].name;
         // Only for scripts that we don't already have
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray(script, self.scripts) === -1) {
           this.add(script, false);
@@ -882,9 +882,9 @@ const AJAX = {
      * @param {Function} callback
      */
     appendScript: function (name, callback) {
-      var head = document.head || document.getElementsByTagName('head')[0];
-      var script = document.createElement('script');
-      var self = this;
+      const head = document.head || document.getElementsByTagName('head')[0];
+      const script = document.createElement('script');
+      const self = this;
       script.src = 'js/' + name + '?' + 'v=' + encodeURIComponent(_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('version'));
       script.async = false;
       script.onload = function () {
@@ -899,7 +899,7 @@ const AJAX = {
      * @param {Function} callback The callback to call after resetting
      */
     reset: function (callback) {
-      for (var i in this.scriptsToBeFired) {
+      for (let i in this.scriptsToBeFired) {
         AJAX.fireTeardown(this.scriptsToBeFired[i]);
       }
       this.scriptsToBeFired = [];
@@ -928,13 +928,13 @@ const AJAX = {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('onsubmit', this.onsubmit).attr('onsubmit', '');
       }
     });
-    var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+    const $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
     /**
      * Workaround for passing submit button name,value on ajax form submit
      * by appending hidden element with submit button name and value.
      */
     $pageContent.on('click', 'form input[type=submit]', function () {
-      var buttonName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name');
+      const buttonName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name');
       if (typeof buttonName === 'undefined') {
         return;
       }
@@ -969,28 +969,28 @@ const AJAX = {
    */
   loadEventHandler: function () {
     return function () {
-      var menuContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer').clone()).html();
+      const menuContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer').clone()).html();
       // set initial state reload
-      var initState = 'state' in window.history && window.history.state !== null;
-      var initURL = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').find('> a').attr('href') || location.href;
-      var state = {
+      let initState = 'state' in window.history && window.history.state !== null;
+      const initURL = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').find('> a').attr('href') || location.href;
+      const state = {
         url: initURL,
         menu: menuContent
       };
       history.replaceState(state, null);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('popstate', function (event) {
-        var initPop = !initState && location.href === initURL;
+        const initPop = !initState && location.href === initURL;
         initState = true;
         // check if popstate fired on first page itself
         if (initPop) {
           return;
         }
         // @ts-ignore
-        var state = event.originalEvent.state;
+        const state = event.originalEvent.state;
         if (state && state.menu) {
           AJAX.$msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
-          var params = 'ajax_request=true' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
-          var url = state.url || location.href;
+          const params = 'ajax_request=true' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
+          const url = state.url || location.href;
           jquery__WEBPACK_IMPORTED_MODULE_0___default().get(url, params, AJAX.responseHandler);
           // TODO: Check if sometimes menu is not retrieved from server,
           // Not sure but it seems menu was missing only for printview which
@@ -1016,8 +1016,8 @@ const AJAX = {
       }
       // Don't handle aborted requests
       if (request.status !== 0 || request.statusText !== 'abort') {
-        var details = '';
-        var state = request.state();
+        let details = '';
+        const state = request.state();
         if ('responseJSON' in request && 'isErrorResponse' in request.responseJSON && request.responseJSON.isErrorResponse) {
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(request.responseJSON.error) + '</div>', false);
           AJAX.active = false;
@@ -1063,7 +1063,7 @@ const CommonParams = function () {
    * @var {Object} params An associative array of key value pairs
    * @access private
    */
-  var params = {};
+  const params = {};
   // The returned object is the public part of the module
   return {
     /**
@@ -1076,7 +1076,7 @@ const CommonParams = function () {
      */
     setAll: function (obj) {
       let updateNavigation = false;
-      for (var i in obj) {
+      for (let i in obj) {
         if (params[i] !== undefined && params[i] !== obj[i]) {
           if (i === 'db' || i === 'table') {
             updateNavigation = true;
@@ -1121,9 +1121,9 @@ const CommonParams = function () {
      * @return {string}
      */
     getUrlQuery: function (separator) {
-      var sep = typeof separator !== 'undefined' ? separator : '?';
-      var common = this.get('common_query');
-      var argsep = CommonParams.get('arg_separator');
+      const sep = typeof separator !== 'undefined' ? separator : '?';
+      let common = this.get('common_query');
+      const argsep = CommonParams.get('arg_separator');
       if (typeof common === 'string' && common.length > 0) {
         // If the last char is the separator, do not add it
         // Else add it
@@ -1168,8 +1168,8 @@ const defaultValues = {};
  * @return {string}
  */
 function getFieldType(field) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
-  var tagName = $field.prop('tagName');
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const tagName = $field.prop('tagName');
   if (tagName === 'INPUT') {
     return $field.attr('type');
   } else if (tagName === 'SELECT') {
@@ -1186,7 +1186,7 @@ function getFieldType(field) {
  * @param {boolean} display
  */
 function setRestoreDefaultBtn(field, display) {
-  var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field).closest('td').find('.restore-default img');
+  const $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field).closest('td').find('.restore-default img');
   $el[display ? 'show' : 'hide']();
 }
 /**
@@ -1195,11 +1195,11 @@ function setRestoreDefaultBtn(field, display) {
  * @param {Element | JQuery<Element>} field
  */
 function markField(field) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
-  var type = getFieldType($field);
-  var isDefault = checkFieldDefault($field, type);
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const type = getFieldType($field);
+  const isDefault = checkFieldDefault($field, type);
   // checkboxes uses parent <span> for marking
-  var $fieldMarker = type === 'checkbox' ? $field.parent() : $field;
+  const $fieldMarker = type === 'checkbox' ? $field.parent() : $field;
   setRestoreDefaultBtn($field, !isDefault);
   $fieldMarker[isDefault ? 'removeClass' : 'addClass']('custom');
 }
@@ -1217,7 +1217,10 @@ function markField(field) {
  * @param {string | boolean}  value
  */
 function setFieldValue(field, fieldType, value) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  let options;
+  let imax;
+  let i = 0;
   switch (fieldType) {
     case 'text':
     case 'number':
@@ -1227,9 +1230,8 @@ function setFieldValue(field, fieldType, value) {
       $field.prop('checked', value);
       break;
     case 'select':
-      var options = $field.prop('options');
-      var i;
-      var imax = options.length;
+      options = $field.prop('options');
+      imax = options.length;
       for (i = 0; i < imax; i++) {
         options[i].selected = value.indexOf(options[i].value) !== -1;
       }
@@ -1251,7 +1253,11 @@ function setFieldValue(field, fieldType, value) {
  * @return {boolean | string | string[] | null}
  */
 function getFieldValue(field, fieldType) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  let options;
+  let imax;
+  let items;
+  let i = 0;
   switch (fieldType) {
     case 'text':
     case 'number':
@@ -1259,10 +1265,9 @@ function getFieldValue(field, fieldType) {
     case 'checkbox':
       return $field.prop('checked');
     case 'select':
-      var options = $field.prop('options');
-      var i;
-      var imax = options.length;
-      var items = [];
+      options = $field.prop('options');
+      imax = options.length;
+      items = [];
       for (i = 0; i < imax; i++) {
         if (options[i].selected) {
           items.push(options[i].value);
@@ -1278,11 +1283,11 @@ function getFieldValue(field, fieldType) {
  * @return {object}
  */
 function getAllValues() {
-  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('fieldset input, fieldset select, fieldset textarea');
-  var values = {};
-  var type;
-  var value;
-  for (var i = 0; i < $elements.length; i++) {
+  const $elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('fieldset input, fieldset select, fieldset textarea');
+  const values = {};
+  let type;
+  let value;
+  for (let i = 0; i < $elements.length; i++) {
     type = getFieldType($elements[i]);
     value = getFieldValue($elements[i], type);
     if (typeof value !== 'undefined') {
@@ -1304,13 +1309,13 @@ function getAllValues() {
  * @return {boolean}
  */
 function checkFieldDefault(field, type) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
-  var fieldId = $field.attr('id');
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const fieldId = $field.attr('id');
   if (typeof defaultValues[fieldId] === 'undefined') {
     return true;
   }
-  var isDefault = true;
-  var currentValue = getFieldValue($field, type);
+  let isDefault = true;
+  const currentValue = getFieldValue($field, type);
   if (type !== 'select') {
     isDefault = currentValue === defaultValues[fieldId];
   } else {
@@ -1318,7 +1323,7 @@ function checkFieldDefault(field, type) {
     if (currentValue.length !== defaultValues[fieldId].length) {
       isDefault = false;
     } else {
-      for (var i = 0; i < currentValue.length; i++) {
+      for (let i = 0; i < currentValue.length; i++) {
         if (currentValue[i] !== defaultValues[fieldId][i]) {
           isDefault = false;
           break;
@@ -1359,7 +1364,7 @@ const validators = {
     if (isKeyUp && this.value === '') {
       return true;
     }
-    var result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
+    const result = this.value !== '0' && window.validators.regExpNumeric.test(this.value);
     return result ? true : window.Messages.configErrorInvalidPositiveNumber;
   },
   /**
@@ -1373,7 +1378,7 @@ const validators = {
     if (isKeyUp && this.value === '') {
       return true;
     }
-    var result = window.validators.regExpNumeric.test(this.value);
+    const result = window.validators.regExpNumeric.test(this.value);
     return result ? true : window.Messages.configErrorInvalidNonNegativeNumber;
   },
   /**
@@ -1385,7 +1390,7 @@ const validators = {
     if (this.value === '') {
       return true;
     }
-    var result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
+    const result = window.validators.regExpNumeric.test(this.value) && this.value !== '0';
     return result && this.value <= 65535 ? true : window.Messages.configErrorInvalidPortNumber;
   },
   /**
@@ -1401,8 +1406,8 @@ const validators = {
       return true;
     }
     // convert PCRE regexp
-    var parts = regexp.match(window.validators.regExpPcreExtract);
-    var valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
+    const parts = regexp.match(window.validators.regExpPcreExtract);
+    const valid = this.value.match(new RegExp(parts[2], parts[3])) !== null;
     return valid ? true : window.Messages.configErrorInvalidValue;
   },
   /**
@@ -1414,7 +1419,7 @@ const validators = {
    * @return {true|string}
    */
   validateUpperBound: function (isKeyUp, maxValue) {
-    var val = parseInt(this.value, 10);
+    const val = parseInt(this.value, 10);
     if (isNaN(val)) {
       return true;
     }
@@ -1455,15 +1460,17 @@ function registerFieldValidator(id, type, onKeyUp) {
  */
 function getFieldValidators(fieldId, onKeyUpOnly) {
   // look for field bound validator
-  var name = fieldId && fieldId.match(/[^-]+$/)[0];
+  const name = fieldId && fieldId.match(/[^-]+$/)[0];
   if (typeof window.validators.field[name] !== 'undefined') {
     return [[window.validators.field[name], null]];
   }
   // look for registered validators
-  var functions = [];
+  const functions = [];
   if (typeof validate[fieldId] !== 'undefined') {
     // validate[field_id]: array of [type, params, onKeyUp]
-    for (var i = 0, imax = validate[fieldId].length; i < imax; i++) {
+    let i = 0;
+    const imax = validate[fieldId].length;
+    for (; i < imax; i++) {
       if (onKeyUpOnly && !validate[fieldId][i][2]) {
         continue;
       }
@@ -1481,14 +1488,14 @@ function getFieldValidators(fieldId, onKeyUpOnly) {
  * @param {object} errorList list of errors in the form {field id: error array}
  */
 function displayErrors(errorList) {
-  var tempIsEmpty = function (item) {
+  const tempIsEmpty = function (item) {
     return item !== '';
   };
-  for (var fieldId in errorList) {
-    var errors = errorList[fieldId];
-    var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + fieldId);
-    var isFieldset = $field.attr('tagName') === 'FIELDSET';
-    var $errorCnt;
+  for (let fieldId in errorList) {
+    let errors = errorList[fieldId];
+    const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + fieldId);
+    const isFieldset = $field.attr('tagName') === 'FIELDSET';
+    let $errorCnt;
     if (isFieldset) {
       $errorCnt = $field.find('dl.errors');
     } else {
@@ -1499,7 +1506,7 @@ function displayErrors(errorList) {
     // CSS error class
     if (!isFieldset) {
       // checkboxes uses parent <span> for marking
-      var $fieldMarker = $field.attr('type') === 'checkbox' ? $field.parent() : $field;
+      const $fieldMarker = $field.attr('type') === 'checkbox' ? $field.parent() : $field;
       $fieldMarker[errors.length ? 'addClass' : 'removeClass']('field-error');
     }
     if (errors.length) {
@@ -1513,8 +1520,10 @@ function displayErrors(errorList) {
           $field.closest('td').append($errorCnt);
         }
       }
-      var html = '';
-      for (var i = 0, imax = errors.length; i < imax; i++) {
+      let html = '';
+      let i = 0;
+      const imax = errors.length;
+      for (; i < imax; i++) {
         html += '<dd>' + errors[i] + '</dd>';
       }
       $errorCnt.html(html);
@@ -1528,10 +1537,10 @@ function displayErrors(errorList) {
  * Validates fields and fieldsets and call displayError function as required
  */
 function setDisplayError() {
-  var elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.optbox input[id], .optbox select[id], .optbox textarea[id]');
+  const elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.optbox input[id], .optbox select[id], .optbox textarea[id]');
   // run all field validators
-  var errors = {};
-  for (var i = 0; i < elements.length; i++) {
+  const errors = {};
+  for (let i = 0; i < elements.length; i++) {
     validateField(elements[i], false, errors);
   }
   // run all fieldset validators
@@ -1548,10 +1557,10 @@ function setDisplayError() {
  * @param {object}  errors
  */
 function validateFieldset(fieldset, isKeyUp, errors) {
-  var $fieldset = jquery__WEBPACK_IMPORTED_MODULE_0___default()(fieldset);
+  const $fieldset = jquery__WEBPACK_IMPORTED_MODULE_0___default()(fieldset);
   if ($fieldset.length && typeof window.validators.fieldset[$fieldset.attr('id')] !== 'undefined') {
-    var fieldsetErrors = window.validators.fieldset[$fieldset.attr('id')].apply($fieldset[0], [isKeyUp]);
-    for (var fieldId in fieldsetErrors) {
+    const fieldsetErrors = window.validators.fieldset[$fieldset.attr('id')].apply($fieldset[0], [isKeyUp]);
+    for (let fieldId in fieldsetErrors) {
       if (typeof errors[fieldId] === 'undefined') {
         errors[fieldId] = [];
       }
@@ -1570,13 +1579,13 @@ function validateFieldset(fieldset, isKeyUp, errors) {
  * @param {object}  errors
  */
 function validateField(field, isKeyUp, errors) {
-  var args;
-  var result;
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
-  var fieldId = $field.attr('id');
+  let args;
+  let result;
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const fieldId = $field.attr('id');
   errors[fieldId] = [];
-  var functions = getFieldValidators(fieldId, isKeyUp);
-  for (var i = 0; i < functions.length; i++) {
+  const functions = getFieldValidators(fieldId, isKeyUp);
+  for (let i = 0; i < functions.length; i++) {
     if (typeof functions[i][1] !== 'undefined' && functions[i][1] !== null) {
       args = functions[i][1].slice(0);
     } else {
@@ -1599,8 +1608,8 @@ function validateField(field, isKeyUp, errors) {
  * @param {boolean} isKeyUp
  */
 function validateFieldAndFieldset(field, isKeyUp) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
-  var errors = {};
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()(field);
+  const errors = {};
   validateField($field, isKeyUp, errors);
   validateFieldset($field.closest('fieldset.optbox'), isKeyUp, errors);
   Config.displayErrors(errors);
@@ -1609,7 +1618,7 @@ function loadInlineConfig() {
   if (!Array.isArray(configInlineParams)) {
     return;
   }
-  for (var i = 0; i < configInlineParams.length; ++i) {
+  for (let i = 0; i < configInlineParams.length; ++i) {
     if (typeof configInlineParams[i] === 'function') {
       configInlineParams[i]();
     }
@@ -1640,15 +1649,15 @@ function setupValidation() {
     Config.loadInlineConfig();
   }
   // register validators and mark custom values
-  var $elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.optbox input[id], .optbox select[id], .optbox textarea[id]');
+  const $elements = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.optbox input[id], .optbox select[id], .optbox textarea[id]');
   $elements.each(function () {
     markField(this);
-    var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $el.on('change', function () {
       validateFieldAndFieldset(this, false);
       markField(this);
     });
-    var tagName = $el.attr('tagName');
+    const tagName = $el.attr('tagName');
     // text fields can be validated after each change
     if (tagName === 'INPUT' && $el.attr('type') === 'text') {
       $el.on('keyup', function () {
@@ -1663,11 +1672,11 @@ function setupValidation() {
   });
   // check whether we've refreshed a page and browser remembered modified
   // form values
-  var $checkPageRefresh = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#check_page_refresh');
+  const $checkPageRefresh = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#check_page_refresh');
   if ($checkPageRefresh.length === 0 || $checkPageRefresh.val() === '1') {
     // run all field validators
-    var errors = {};
-    for (var i = 0; i < $elements.length; i++) {
+    const errors = {};
+    for (let i = 0; i < $elements.length; i++) {
       validateField($elements[i], false, errors);
     }
     // run all fieldset validators
@@ -1683,9 +1692,9 @@ function setupValidation() {
 // END: Form validation and field operations
 // ------------------------------------------------------------------
 function adjustPrefsNotification() {
-  var $prefsAutoLoad = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#prefs_autoload');
-  var $tableNameControl = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_name_col_no');
-  var $prefsAutoShowing = $prefsAutoLoad.css('display') !== 'none';
+  const $prefsAutoLoad = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#prefs_autoload');
+  const $tableNameControl = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_name_col_no');
+  const $prefsAutoShowing = $prefsAutoLoad.css('display') !== 'none';
   if ($prefsAutoShowing && $tableNameControl.length) {
     $tableNameControl.css('top', '55px');
   }
@@ -1699,7 +1708,7 @@ function adjustPrefsNotification() {
  * @param {string} fieldId
  */
 function restoreField(fieldId) {
-  var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + fieldId);
+  const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + fieldId);
   if ($field.length === 0 || defaultValues[fieldId] === undefined) {
     return;
   }
@@ -1712,14 +1721,14 @@ function setupRestoreField() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css('opacity', 0.25);
   }).on('click', '.restore-default, .set-value', function (e) {
     e.preventDefault();
-    var href = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
-    var fieldSel;
+    const href = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
+    let fieldSel;
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass('restore-default')) {
       fieldSel = href;
       restoreField(fieldSel.substring(1));
     } else {
       fieldSel = href.match(/^[^=]+/)[0];
-      var value = href.match(/=(.+)$/)[1];
+      const value = href.match(/=(.+)$/)[1];
       setFieldValue(jquery__WEBPACK_IMPORTED_MODULE_0___default()(fieldSel), 'text', value);
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(fieldSel).trigger('change');
@@ -1739,8 +1748,8 @@ function setupRestoreField() {
  * @param {Element} form
  */
 function savePrefsToLocalStorage(form) {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form);
-  var submit = $form.find('input[type=submit]');
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(form);
+  const submit = $form.find('input[type=submit]');
   submit.prop('disabled', true);
   jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     url: 'index.php?route=/preferences/manage',
@@ -1759,7 +1768,7 @@ function savePrefsToLocalStorage(form) {
         updatePrefsDate();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.localStorage-empty').hide();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.localStorage-exists').show();
-        var group = $form.parent('.card-body');
+        const group = $form.parent('.card-body');
         group.css('height', group.height() + 'px');
         $form.hide('fast');
         $form.prev('.click-hide-message').show('fast');
@@ -1776,22 +1785,22 @@ function savePrefsToLocalStorage(form) {
  * Updates preferences timestamp in Import form
  */
 function updatePrefsDate() {
-  var d = new Date(window.localStorage.configMtimeLocal);
-  var msg = window.Messages.strSavedOn.replace('@DATE@', (0,_functions_formatDateTime_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(d));
+  const d = new Date(window.localStorage.configMtimeLocal);
+  const msg = window.Messages.strSavedOn.replace('@DATE@', (0,_functions_formatDateTime_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(d));
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#opts_import_local_storage').find('div.localStorage-exists').html(msg);
 }
 /**
  * Prepares message which informs that localStorage preferences are available and can be imported or deleted
  */
 function offerPrefsAutoimport() {
-  var hasConfig = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_3__["default"])('localStorage') && (window.localStorage.config || false);
-  var $cnt = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#prefs_autoload');
+  const hasConfig = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_3__["default"])('localStorage') && (window.localStorage.config || false);
+  const $cnt = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#prefs_autoload');
   if (!$cnt.length || !hasConfig) {
     return;
   }
   $cnt.find('a').on('click', function (e) {
     e.preventDefault();
-    var $a = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $a = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     if ($a.attr('href') === '#no') {
       $cnt.remove();
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php', {
@@ -1832,28 +1841,30 @@ function off() {
  */
 function on() {
   return function () {
-    var $topmenuUpt = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#user_prefs_tabs');
+    const $topmenuUpt = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#user_prefs_tabs');
     $topmenuUpt.find('a.active').attr('rel', 'samepage');
     $topmenuUpt.find('a:not(.active)').attr('rel', 'newpage');
     Config.setupValidation();
     adjustPrefsNotification();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.optbox input[type=button][name=submit_reset]').on('click', function () {
-      var fields = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('fieldset').find('input, select, textarea');
-      for (var i = 0, imax = fields.length; i < imax; i++) {
+      const fields = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('fieldset').find('input, select, textarea');
+      let i = 0;
+      const imax = fields.length;
+      for (; i < imax; i++) {
         setFieldValue(fields[i], getFieldType(fields[i]), defaultValues[fields[i].id]);
       }
       setDisplayError();
     });
     Config.setupRestoreField();
     offerPrefsAutoimport();
-    var $radios = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#import_local_storage, #export_local_storage');
+    const $radios = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#import_local_storage, #export_local_storage');
     if (!$radios.length) {
       return;
     }
     // enable JavaScript dependent fields
     $radios.prop('disabled', false).add('#export_text_file, #import_text_file').on('click', function () {
-      var enableId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
-      var disableId;
+      const enableId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
+      let disableId;
       if (enableId.match(/local_storage$/)) {
         disableId = enableId.replace(/local_storage$/, 'text_file');
       } else {
@@ -1863,16 +1874,16 @@ function on() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#opts_' + enableId).removeClass('disabled').find('input').prop('disabled', false);
     });
     // detect localStorage state
-    var lsSupported = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_3__["default"])('localStorage', true);
-    var lsExists = lsSupported ? window.localStorage.config || false : false;
+    const lsSupported = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_3__["default"])('localStorage', true);
+    const lsExists = lsSupported ? window.localStorage.config || false : false;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.localStorage-' + (lsSupported ? 'un' : '') + 'supported').hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.localStorage-' + (lsExists ? 'empty' : 'exists')).hide();
     if (lsExists) {
       updatePrefsDate();
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.prefs-form').on('change', function () {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      var disabled = false;
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      let disabled = false;
       if (!lsSupported) {
         disabled = $form.find('input[type=radio][value$=local_storage]').prop('checked');
       } else if (!lsExists && $form.attr('name') === 'prefs_import' && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#import_local_storage')[0].checked) {
@@ -1880,7 +1891,7 @@ function on() {
       }
       $form.find('input[type=submit]').prop('disabled', disabled);
     }).on('submit', function (e) {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       if ($form.attr('name') === 'prefs_export' && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#export_local_storage')[0].checked) {
         e.preventDefault();
         // use AJAX to read JSON settings and save them
@@ -2101,13 +2112,13 @@ function addDatepicker($thisElement) {
   if (type !== 'date' && type !== 'time' && type !== 'datetime' && type !== 'timestamp') {
     return;
   }
-  var showTimepicker = true;
+  let showTimepicker = true;
   if (type === 'date') {
     showTimepicker = false;
   }
   // Getting the current Date and time
-  var currentDateTime = new Date();
-  var defaultOptions = {
+  const currentDateTime = new Date();
+  const defaultOptions = {
     timeInput: true,
     hour: currentDateTime.getHours(),
     minute: currentDateTime.getMinutes(),
@@ -2189,12 +2200,12 @@ function addDateTimePicker() {
     return;
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.timefield, input.datefield, input.datetimefield').each(function () {
-    var decimals = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr('data-decimals'));
-    var type = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr('data-type');
-    var showMillisec = false;
-    var showMicrosec = false;
-    var timeFormat = 'HH:mm:ss';
-    var hourMax = 23;
+    const decimals = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr('data-decimals'));
+    const type = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr('data-type');
+    let showMillisec = false;
+    let showMicrosec = false;
+    let timeFormat = 'HH:mm:ss';
+    let hourMax = 23;
     // check for decimal places of seconds
     if (decimals > 0 && type.indexOf('time') !== -1) {
       if (decimals > 3) {
@@ -2249,9 +2260,9 @@ function getSqlEditor($textarea) {
   if ($textarea.length === 0 || typeof window.CodeMirror === 'undefined') {
     return null;
   }
-  var resizeType = resize;
+  let resizeType = resize;
   // merge options for CodeMirror
-  var defaults = {
+  const defaults = {
     lineNumbers: true,
     matchBrackets: true,
     extraKeys: {
@@ -2279,7 +2290,7 @@ function getSqlEditor($textarea) {
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, defaults, options);
   // create CodeMirror editor
-  var codemirrorEditor = window.CodeMirror.fromTextArea($textarea[0], defaults);
+  const codemirrorEditor = window.CodeMirror.fromTextArea($textarea[0], defaults);
   // allow resizing
   if (!resizeType) {
     resizeType = 'vertical';
@@ -2307,7 +2318,7 @@ function clearSelection() {
     // @ts-ignore
     document.selection.empty();
   } else if (window.getSelection) {
-    var sel = window.getSelection();
+    const sel = window.getSelection();
     if (sel.empty) {
       sel.empty();
     }
@@ -2328,7 +2339,7 @@ function hideShowDefaultValue($defaultType) {
   } else {
     $defaultType.siblings('.default_value').hide();
     if ($defaultType.val() === 'NULL') {
-      var $nullCheckbox = $defaultType.closest('tr').find('.allow_null');
+      const $nullCheckbox = $defaultType.closest('tr').find('.allow_null');
       $nullCheckbox.prop('checked', true);
     }
   }
@@ -2375,7 +2386,7 @@ function prepareForAjaxRequest($form) {
 }
 function checkPasswordStrength(value, meterObject, meterObjectLabel, username) {
   // List of words we don't want to appear in the password
-  var customDict = ['phpmyadmin', 'mariadb', 'mysql', 'php', 'my', 'admin'];
+  const customDict = ['phpmyadmin', 'mariadb', 'mysql', 'php', 'my', 'admin'];
   if (username) {
     customDict.push(username);
   }
@@ -2384,8 +2395,8 @@ function checkPasswordStrength(value, meterObject, meterObjectLabel, username) {
       userInputs: customDict
     }
   });
-  var zxcvbnObject = window.zxcvbnts.core.zxcvbn(value);
-  var strength = zxcvbnObject.score;
+  const zxcvbnObject = window.zxcvbnts.core.zxcvbn(value);
+  let strength = zxcvbnObject.score;
   strength = parseInt(strength);
   meterObject.val(strength);
   switch (strength) {
@@ -2416,13 +2427,13 @@ function suggestPassword(passwordForm) {
   // restrict the password to just letters and numbers to avoid problems:
   // "editors and viewers regard the password as multiple words and
   // things like double click no longer work"
-  var pwchars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWYXZ@!_.*/()[]-';
-  var passwordlength = 16; // do we want that to be dynamic?  no, keep it simple :)
-  var passwd = passwordForm.generated_pw;
+  const pwchars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWYXZ@!_.*/()[]-';
+  const passwordlength = 16; // do we want that to be dynamic?  no, keep it simple :)
+  const passwd = passwordForm.generated_pw;
   // eslint-disable-next-line compat/compat
-  var randomWords = new Int32Array(passwordlength);
+  const randomWords = new Int32Array(passwordlength);
   passwd.value = '';
-  var i;
+  let i;
   // First we're going to try to use a built-in CSPRNG
   // eslint-disable-next-line compat/compat
   if (window.crypto && window.crypto.getRandomValues) {
@@ -2440,12 +2451,12 @@ function suggestPassword(passwordForm) {
   for (i = 0; i < passwordlength; i++) {
     passwd.value += pwchars.charAt(Math.abs(randomWords[i]) % pwchars.length);
   }
-  var $jQueryPasswordForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(passwordForm);
+  const $jQueryPasswordForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(passwordForm);
   passwordForm.elements.pma_pw.value = passwd.value;
   passwordForm.elements.pma_pw2.value = passwd.value;
-  var meterObj = $jQueryPasswordForm.find('meter[name="pw_meter"]').first();
-  var meterObjLabel = $jQueryPasswordForm.find('span[name="pw_strength"]').first();
-  var username = '';
+  const meterObj = $jQueryPasswordForm.find('meter[name="pw_meter"]').first();
+  const meterObjLabel = $jQueryPasswordForm.find('span[name="pw_strength"]').first();
+  let username = '';
   if (passwordForm.elements.username) {
     username = passwordForm.elements.username.value;
   }
@@ -2456,18 +2467,18 @@ function suggestPassword(passwordForm) {
  * for PhpMyAdmin\Display\ChangePassword and /user-password
  */
 function displayPasswordGenerateButton() {
-  var generatePwdRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tr></tr>').addClass('align-middle');
+  const generatePwdRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tr></tr>').addClass('align-middle');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('<td></td>').html(window.Messages.strGeneratePassword).appendTo(generatePwdRow);
-  var pwdCell = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<td colspan="2"></td>').addClass('row').appendTo(generatePwdRow);
+  const pwdCell = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<td colspan="2"></td>').addClass('row').appendTo(generatePwdRow);
   pwdCell.append('<div class="d-flex align-items-center col-4"></div>');
-  var pwdButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
+  const pwdButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
     type: 'button',
     id: 'button_generate_password',
     value: window.Messages.strGenerate
   }).addClass('btn btn-secondary button').on('click', function () {
     suggestPassword(this.form);
   });
-  var pwdTextbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
+  const pwdTextbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
     type: 'text',
     name: 'generated_pw',
     id: 'generated_pw'
@@ -2477,11 +2488,11 @@ function displayPasswordGenerateButton() {
   if (document.getElementById('button_generate_password') === null) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tr_element_before_generate_password').parent().append(generatePwdRow);
   }
-  var generatePwdDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').addClass('item');
+  const generatePwdDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').addClass('item');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('<label></label>').attr({
     for: 'button_generate_password'
   }).html(window.Messages.strGeneratePassword + ':').appendTo(generatePwdDiv);
-  var optionsSpan = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span></span>').addClass('options').appendTo(generatePwdDiv);
+  const optionsSpan = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span></span>').addClass('options').appendTo(generatePwdDiv);
   pwdButton.clone(true).appendTo(optionsSpan);
   pwdTextbox.clone(true).appendTo(generatePwdDiv);
   if (document.getElementById('button_generate_password') === null) {
@@ -2503,7 +2514,7 @@ function confirmLink(theLink, theSqlQuery) {
   if (window.Messages.strDoYouReally === '' || typeof window.opera !== 'undefined') {
     return true;
   }
-  var isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, theSqlQuery));
+  const isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, theSqlQuery));
   if (isConfirmed) {
     if (typeof theLink.href !== 'undefined') {
       theLink.href += _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'is_js_confirmed=1';
@@ -2534,19 +2545,19 @@ function confirmQuery(theForm1, sqlQuery1) {
   // for this kind of verification
   // For now, I just added a ^ to check for the statement at
   // beginning of expression
-  var doConfirmRegExp0 = new RegExp('^\\s*DROP\\s+(IF EXISTS\\s+)?(TABLE|PROCEDURE)\\s', 'i');
-  var doConfirmRegExp1 = new RegExp('^\\s*ALTER\\s+TABLE\\s+((`[^`]+`)|([A-Za-z0-9_$]+))\\s+DROP\\s', 'i');
-  var doConfirmRegExp2 = new RegExp('^\\s*DELETE\\s+FROM\\s', 'i');
-  var doConfirmRegExp3 = new RegExp('^\\s*TRUNCATE\\s', 'i');
-  var doConfirmRegExp4 = new RegExp('^(?=.*UPDATE\\b)^((?!WHERE).)*$', 'i');
+  const doConfirmRegExp0 = new RegExp('^\\s*DROP\\s+(IF EXISTS\\s+)?(TABLE|PROCEDURE)\\s', 'i');
+  const doConfirmRegExp1 = new RegExp('^\\s*ALTER\\s+TABLE\\s+((`[^`]+`)|([A-Za-z0-9_$]+))\\s+DROP\\s', 'i');
+  const doConfirmRegExp2 = new RegExp('^\\s*DELETE\\s+FROM\\s', 'i');
+  const doConfirmRegExp3 = new RegExp('^\\s*TRUNCATE\\s', 'i');
+  const doConfirmRegExp4 = new RegExp('^(?=.*UPDATE\\b)^((?!WHERE).)*$', 'i');
   if (doConfirmRegExp0.test(sqlQuery1) || doConfirmRegExp1.test(sqlQuery1) || doConfirmRegExp2.test(sqlQuery1) || doConfirmRegExp3.test(sqlQuery1) || doConfirmRegExp4.test(sqlQuery1)) {
-    var message;
+    let message;
     if (sqlQuery1.length > 100) {
       message = sqlQuery1.substring(0, 100) + '\n    ...';
     } else {
       message = sqlQuery1;
     }
-    var isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, message));
+    const isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, message));
     // statement is confirmed -> update the
     // "is_js_confirmed" form field so the confirm test won't be
     // run on the server side and allows to submit the form
@@ -2573,21 +2584,21 @@ function confirmQuery(theForm1, sqlQuery1) {
  */
 function checkSqlQuery(theForm) {
   // get the textarea element containing the query
-  var sqlQuery;
+  let sqlQuery;
   if (window.codeMirrorEditor) {
     window.codeMirrorEditor.save();
     sqlQuery = window.codeMirrorEditor.getValue();
   } else {
     sqlQuery = theForm.elements.sql_query.value;
   }
-  var spaceRegExp = new RegExp('\\s+');
+  const spaceRegExp = new RegExp('\\s+');
   if (typeof theForm.elements.sql_file !== 'undefined' && theForm.elements.sql_file.value.replace(spaceRegExp, '') !== '') {
     return true;
   }
   if (typeof theForm.elements.id_bookmark !== 'undefined' && (theForm.elements.id_bookmark.value !== null || theForm.elements.id_bookmark.value !== '') && theForm.elements.id_bookmark.selectedIndex !== 0) {
     return true;
   }
-  var result = false;
+  let result = false;
   // Checks for "DROP/DELETE/ALTER" statements
   if (sqlQuery.replace(spaceRegExp, '') !== '') {
     result = confirmQuery(theForm, sqlQuery);
@@ -2611,8 +2622,8 @@ function checkSqlQuery(theForm) {
  * @return {boolean} whether the form field is empty or not
  */
 function emptyCheckTheField(theForm, theFieldName) {
-  var theField = theForm.elements[theFieldName];
-  var spaceRegExp = new RegExp('\\s+');
+  const theField = theForm.elements[theFieldName];
+  const spaceRegExp = new RegExp('\\s+');
   return theField.value.replace(spaceRegExp, '') === '';
 }
 /**
@@ -2629,10 +2640,10 @@ function emptyCheckTheField(theForm, theFieldName) {
 function checkFormElementInRange(theForm, theFieldName, message) {
   let minimum = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : undefined;
   let maximum = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : undefined;
-  var theField = theForm.elements[theFieldName];
-  var val = parseInt(theField.value, 10);
-  var min = 0;
-  var max = Number.MAX_VALUE;
+  const theField = theForm.elements[theFieldName];
+  const val = parseInt(theField.value, 10);
+  let min = 0;
+  let max = Number.MAX_VALUE;
   if (typeof minimum !== 'undefined') {
     min = minimum;
   }
@@ -2657,13 +2668,13 @@ function checkFormElementInRange(theForm, theFieldName, message) {
 function checkTableEditForm(theForm, fieldsCnt) {
   // TODO: avoid sending a message if user just wants to add a line
   // on the form but has not completed at least one field name
-  var atLeastOneField = 0;
-  var i;
-  var elm;
-  var elm2;
-  var elm3;
-  var val;
-  var id;
+  let atLeastOneField = 0;
+  let i;
+  let elm;
+  let elm2;
+  let elm3;
+  let val;
+  let id;
   for (i = 0; i < fieldsCnt; i++) {
     id = '#field_' + i + '_2';
     elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(id);
@@ -2687,13 +2698,13 @@ function checkTableEditForm(theForm, fieldsCnt) {
     }
   }
   if (atLeastOneField === 0) {
-    var theField = theForm.elements.field_0_1;
+    const theField = theForm.elements.field_0_1;
     alert(window.Messages.strFormEmpty);
     theField.focus();
     return false;
   }
   // at least this section is under jQuery
-  var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.textfield[name=\'table\']');
+  const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.textfield[name=\'table\']');
   if ($input.val() === '') {
     alert(window.Messages.strFormEmpty);
     $input.trigger('focus');
@@ -2747,12 +2758,12 @@ function onloadIdleEvent() {
     idleSecondsCounter++;
   }
   function UpdateIdleTime() {
-    var href = 'index.php?route=/';
-    var guid = 'default';
+    const href = 'index.php?route=/';
+    let guid = 'default';
     if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_14__["default"])('sessionStorage')) {
       guid = window.sessionStorage.guid;
     }
-    var params = {
+    const params = {
       'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
       'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
@@ -2770,10 +2781,10 @@ function onloadIdleEvent() {
             /* There is other active window, let's reset counter */
             idleSecondsCounter = 0;
           }
-          var remaining = Math.min(/* Remaining login validity */
+          const remaining = Math.min(/* Remaining login validity */
           _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('LoginCookieValidity') - idleSecondsCounter, /* Remaining time till session GC */
           _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('session_gc_maxlifetime'));
-          var interval = 1000;
+          let interval = 1000;
           if (remaining > 5) {
             // max value for setInterval() function
             interval = Math.min((remaining - 1) * 1000, Math.pow(2, 31) - 1);
@@ -2802,11 +2813,11 @@ function onloadIdleEvent() {
   }
   if (_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('logged_in')) {
     incInterval = window.setInterval(SetIdleTime, 1000);
-    var sessionTimeout = Math.min(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('LoginCookieValidity'), _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('session_gc_maxlifetime'));
+    const sessionTimeout = Math.min(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('LoginCookieValidity'), _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('session_gc_maxlifetime'));
     if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_14__["default"])('sessionStorage')) {
       window.sessionStorage.setItem('guid', guid());
     }
-    var interval = (sessionTimeout - 5) * 1000;
+    let interval = (sessionTimeout - 5) * 1000;
     if (interval > Math.pow(2, 31) - 1) {
       // max value for setInterval() function
       interval = Math.pow(2, 31) - 1;
@@ -2819,13 +2830,13 @@ function onloadIdleEvent() {
  */
 function getCheckAllCheckboxEventHandler() {
   return function (e) {
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $tr = $this.closest('tr');
-    var $table = $this.closest('table');
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $tr = $this.closest('tr');
+    const $table = $this.closest('table');
     if (!e.shiftKey || lastClickedRow === -1) {
       // usual click
-      var $checkbox = $tr.find(':checkbox.checkall');
-      var checked = $this.prop('checked');
+      const $checkbox = $tr.find(':checkbox.checkall');
+      const checked = $this.prop('checked');
       $checkbox.prop('checked', checked).trigger('change');
       if (checked) {
         $tr.addClass('marked table-active');
@@ -2839,8 +2850,8 @@ function getCheckAllCheckboxEventHandler() {
     } else {
       // handle the shift click
       clearSelection();
-      var start;
-      var end;
+      let start;
+      let end;
       // clear last shift click result
       if (lastShiftClickedRow >= 0) {
         if (lastShiftClickedRow >= lastClickedRow) {
@@ -2853,7 +2864,7 @@ function getCheckAllCheckboxEventHandler() {
         $tr.parent().find('tr:not(.noclick)').slice(start, end + 1).removeClass('marked table-active').find(':checkbox').prop('checked', false).trigger('change');
       }
       // handle new shift click
-      var currRow = $table.find('tbody tr:not(.noclick)').index($tr);
+      const currRow = $table.find('tbody tr:not(.noclick)').index($tr);
       if (currRow >= lastClickedRow) {
         start = lastClickedRow;
         end = currRow;
@@ -2888,9 +2899,9 @@ function updateQueryParameters() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#parametersDiv').empty();
     return;
   }
-  var query = window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').val();
-  var allParameters = query.match(/:[a-zA-Z0-9_]+/g);
-  var parameters = [];
+  const query = window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').val();
+  const allParameters = query.match(/:[a-zA-Z0-9_]+/g);
+  const parameters = [];
   // get unique parameters
   if (allParameters) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(allParameters, function (i, parameter) {
@@ -2902,12 +2913,12 @@ function updateQueryParameters() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#parametersDiv').text(window.Messages.strNoParam);
     return;
   }
-  var $temp = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
+  const $temp = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
   $temp.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#parametersDiv').children());
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#parametersDiv').empty();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(parameters, function (i, parameter) {
-    var paramName = parameter.substring(1);
-    var $param = $temp.find('#paramSpan_' + paramName);
+    const paramName = parameter.substring(1);
+    let $param = $temp.find('#paramSpan_' + paramName);
     if (!$param.length) {
       $param = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="parameter" id="paramSpan_' + paramName + '"></span>');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('<label for="param_' + paramName + '"></label>').text(parameter).appendTo($param);
@@ -2922,7 +2933,7 @@ function updateQueryParameters() {
  * @return {string}
  */
 function getForeignKeyCheckboxLoader() {
-  var html = '';
+  let html = '';
   html += '<div class="mt-1 mb-2">';
   html += '<div class="load-default-fk-check-value">';
   html += (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('ajax_clock_small');
@@ -2932,12 +2943,12 @@ function getForeignKeyCheckboxLoader() {
 }
 function loadForeignKeyCheckbox() {
   // Load default foreign key check value
-  var params = {
+  const params = {
     'ajax_request': true,
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
-    var html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked' : '') + '>' + '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
+    const html = '<input type="hidden" name="fk_checks" value="0">' + '<input type="checkbox" name="fk_checks" id="fk_checks"' + (data.default_fk_check_value ? ' checked' : '') + '>' + '<label for="fk_checks">' + window.Messages.strForeignKeyCheck + '</label>';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.load-default-fk-check-value').replaceWith(html);
   });
 }
@@ -2975,14 +2986,14 @@ function onloadSqlQueryEditEvents() {
       // we don't want another copy of it
       return false;
     }
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().find('form');
-    var sqlQuery = $form.find('input[name=\'sql_query\']').val().trim();
-    var $innerSql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().parent().prev().find('code.sql').closest('pre');
-    var newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(sqlQuery) + '</textarea>\n';
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().find('form');
+    const sqlQuery = $form.find('input[name=\'sql_query\']').val().trim();
+    const $innerSql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().parent().prev().find('code.sql').closest('pre');
+    let newContent = '<textarea name="sql_query_edit" id="sql_query_edit">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(sqlQuery) + '</textarea>\n';
     newContent += getForeignKeyCheckboxLoader();
     newContent += '<input type="submit" id="sql_query_edit_save" class="btn btn-secondary button btnSave" value="' + window.Messages.strGo + '">\n';
     newContent += '<input type="button" id="sql_query_edit_discard" class="btn btn-secondary button btnDiscard" value="' + window.Messages.strCancel + '">\n';
-    var $editorArea = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#inline_editor');
+    let $editorArea = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#inline_editor');
     if ($editorArea.length === 0) {
       $editorArea = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="inline_editor_outer"></div>');
       $editorArea.insertBefore($innerSql);
@@ -2995,16 +3006,16 @@ function onloadSqlQueryEditEvents() {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input#sql_query_edit_save', function () {
     // hide already existing success message
-    var sqlQuery;
+    let sqlQuery;
     if (codeMirrorInlineEditor) {
       codeMirrorInlineEditor.save();
       sqlQuery = codeMirrorInlineEditor.getValue();
     } else {
       sqlQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('#sql_query_edit').val();
     }
-    var fkCheck = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('#fk_checks').is(':checked');
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.inline_edit_sql').parent().parent().find('form');
-    var $fakeForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form>', {
+    const fkCheck = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().find('#fk_checks').is(':checked');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.inline_edit_sql').parent().parent().find('form');
+    const $fakeForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form>', {
       action: 'index.php?route=/import',
       method: 'post'
     }).append($form.find('input[name=server], input[name=db], input[name=table], input[name=token]').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
@@ -3031,12 +3042,12 @@ function onloadSqlQueryEditEvents() {
     $fakeForm.appendTo(jquery__WEBPACK_IMPORTED_MODULE_0___default()('body')).trigger('submit');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input#sql_query_edit_discard', function () {
-    var $divEditor = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#inline_editor_outer');
+    const $divEditor = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#inline_editor_outer');
     $divEditor.siblings('pre').show();
     $divEditor.remove();
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '#parameterized', updateQueryParameters);
-  var $inputUsername = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_username');
+  const $inputUsername = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_username');
   if ($inputUsername) {
     if ($inputUsername.val() === '') {
       $inputUsername.trigger('focus');
@@ -3056,13 +3067,13 @@ function codeMirrorAutoCompleteOnInputRead(instance) {
       instance.options.hintOptions.tables = false;
       instance.options.hintOptions.defaultTable = '';
       sqlAutoCompleteInProgress = true;
-      var params = {
+      const params = {
         'ajax_request': true,
         'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
         'no_debug': true
       };
-      var columnHintRender = function (elem, self, data) {
+      const columnHintRender = function (elem, self, data) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="autocomplete-column-name">').text(data.columnName).appendTo(elem);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="autocomplete-column-hint">').text(data.columnHint).appendTo(elem);
       };
@@ -3072,12 +3083,12 @@ function codeMirrorAutoCompleteOnInputRead(instance) {
         data: params,
         success: function (data) {
           if (data.success) {
-            var tables = data.tables;
+            const tables = data.tables;
             sqlAutoCompleteDefaultTable = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table');
             sqlAutoComplete = [];
-            for (var table in tables) {
+            for (let table in tables) {
               if (tables.hasOwnProperty(table)) {
-                var columns = tables[table];
+                const columns = tables[table];
                 // @ts-ignore
                 table = {
                   text: table,
@@ -3112,9 +3123,9 @@ function codeMirrorAutoCompleteOnInputRead(instance) {
   if (instance.state.completionActive) {
     return;
   }
-  var cur = instance.getCursor();
-  var token = instance.getTokenAt(cur);
-  var string = '';
+  const cur = instance.getCursor();
+  const token = instance.getTokenAt(cur);
+  let string = '';
   if (token.string.match(/^[.`\w@]\w*$/)) {
     string = token.string;
   }
@@ -3131,12 +3142,12 @@ function removeAutocompleteInfo() {
  * Binds the CodeMirror to the text area used to inline edit a query.
  */
 function bindCodeMirrorToInlineEditor() {
-  var $inlineEditor = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sql_query_edit');
+  const $inlineEditor = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sql_query_edit');
   if ($inlineEditor.length === 0) {
     return;
   }
   if (typeof window.CodeMirror !== 'undefined') {
-    var height = $inlineEditor.css('height');
+    const height = $inlineEditor.css('height');
     codeMirrorInlineEditor = getSqlEditor($inlineEditor);
     codeMirrorInlineEditor.getWrapperElement().style.height = height;
     codeMirrorInlineEditor.refresh();
@@ -3166,13 +3177,13 @@ function catchKeypressesFromSqlInlineEdit(event) {
  * @return {boolean}        whether content was updated or not
  */
 function updateCode($base, htmlValue, rawValue) {
-  var $code = $base.find('code');
+  const $code = $base.find('code');
   if ($code.length === 0) {
     return false;
   }
   // Determines the type of the content and appropriate CodeMirror mode.
-  var type = '';
-  var mode = '';
+  let type = '';
+  let mode = '';
   if ($code.hasClass('json')) {
     type = 'json';
     mode = 'application/json';
@@ -3186,10 +3197,10 @@ function updateCode($base, htmlValue, rawValue) {
     return false;
   }
   // Element used to display unhighlighted code.
-  var $notHighlighted = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<pre>' + htmlValue + '</pre>');
+  const $notHighlighted = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<pre>' + htmlValue + '</pre>');
   // Tries to highlight code using CodeMirror.
   if (typeof window.CodeMirror !== 'undefined') {
-    var $highlighted = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="' + type + '-highlight cm-s-default"></div>');
+    const $highlighted = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="' + type + '-highlight cm-s-default"></div>');
     // @ts-ignore
     window.CodeMirror.runMode(rawValue, mode, $highlighted[0]);
     $notHighlighted.hide();
@@ -3205,10 +3216,10 @@ function updateCode($base, htmlValue, rawValue) {
  * @param {JQuery<HTMLElement>} $form Form containing query data
  */
 function previewSql($form) {
-  var formUrl = $form.attr('action');
-  var sep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-  var formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
-  var $messageBox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+  const formUrl = $form.attr('action');
+  const sep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+  const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
+  const $messageBox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     type: 'POST',
     url: formUrl,
@@ -3263,7 +3274,7 @@ function confirmPreviewSql(sqlData, url, callback) {
  * @return {boolean}
  */
 function checkReservedWordColumns($form) {
-  var isConfirmed = true;
+  let isConfirmed = true;
   jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     type: 'POST',
     url: 'index.php?route=/table/structure/reserved-word-check',
@@ -3287,7 +3298,7 @@ function checkReservedWordColumns($form) {
  */
 function copyToClipboard(text) {
   let inputType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '<input>';
-  var $temp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputType);
+  const $temp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputType);
   $temp.css({
     'position': 'fixed',
     'width': '2em',
@@ -3300,7 +3311,7 @@ function copyToClipboard(text) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append($temp);
   $temp.val(text).trigger('select');
   try {
-    var res = document.execCommand('copy');
+    const res = document.execCommand('copy');
     $temp.remove();
     return res;
   } catch (e) {
@@ -3345,7 +3356,7 @@ function dismissNotifications() {
      * Allows the user to dismiss a notification
      * created with ajaxShowMessage()
      */
-    var holdStarter = null;
+    let holdStarter = null;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mousedown', 'span.ajax_notification.dismissable', function () {
       holdStarter = setTimeout(function () {
         holdStarter = null;
@@ -3359,7 +3370,7 @@ function dismissNotifications() {
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.copyQueryBtn', function (event) {
       event.preventDefault();
-      var copyStatus = copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-text'));
+      const copyStatus = copyToClipboard(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-text'));
       displayCopyStatus(this, copyStatus);
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseover mouseleave', 'span.ajax_notification.dismissable a', function (event) {
@@ -3384,9 +3395,9 @@ function dismissNotifications() {
  * @param selectElement
  */
 function showNoticeForEnum(selectElement) {
-  var enumNoticeId = selectElement.attr('id').split('_')[1];
+  let enumNoticeId = selectElement.attr('id').split('_')[1];
   enumNoticeId += '_' + (parseInt(selectElement.attr('id').split('_')[2], 10) + 1);
-  var selectedType = selectElement.val();
+  const selectedType = selectElement.val();
   if (selectedType === 'ENUM' || selectedType === 'SET') {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('p#enum_notice_' + enumNoticeId).show();
   } else {
@@ -3400,10 +3411,10 @@ function showWarningForIntTypes() {
   if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#length_not_allowed').length) {
     return;
   }
-  var lengthRestrictions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select.column_type option').map(function () {
+  const lengthRestrictions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select.column_type option').map(function () {
     return jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).filter(':selected').attr('data-length-restricted');
   }).get();
-  var restricationFound = lengthRestrictions.some(restriction => Number(restriction) === 1);
+  const restricationFound = lengthRestrictions.some(restriction => Number(restriction) === 1);
   if (restricationFound) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('div#length_not_allowed').show();
   } else {
@@ -3419,8 +3430,8 @@ function showWarningForIntTypes() {
  * @return {string}        The formatted number
  */
 function prettyProfilingNum(number, accuracy) {
-  var num = number;
-  var acc = accuracy;
+  let num = number;
+  let acc = accuracy;
   if (!acc) {
     acc = 2;
   }
@@ -3457,7 +3468,7 @@ function confirmDialog(question) {
   let url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
   let callbackFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
   let openCallback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : undefined;
-  var confirmState = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('confirm');
+  const confirmState = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('confirm');
   if (!confirmState) {
     // user does not want to confirm
     if (typeof callbackFn === 'function') {
@@ -3496,11 +3507,11 @@ function sortTable(textSelector) {
     /**
      * @var table_body  Object referring to the table's <tbody> element
      */
-    var tableBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const tableBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /**
      * @var rows    Object referring to the collection of rows in {@link tableBody}
      */
-    var rows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('tr').get();
+    const rows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('tr').get();
     // get the text of the field that we will sort by
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(rows, function (index, row) {
       // @ts-ignore
@@ -3544,7 +3555,7 @@ function onloadCreateTableEvents() {
     /**
      * @var    the_form    object referring to the create table form
      */
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /*
      * First validate the form; if there is a problem, avoid submitting it
      *
@@ -3570,7 +3581,7 @@ function onloadCreateTableEvents() {
         /**
          * @var tables_table    Object referring to the <tbody> element that holds the list of tables
          */
-        var tablesTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm').find('tbody').not('#tbl_summary_row');
+        const tablesTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm').find('tbody').not('#tbl_summary_row');
         // this is the first table created in this db
         if (tablesTable.length === 0) {
           (0,_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_10__["default"])(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('opendb_url'));
@@ -3578,23 +3589,23 @@ function onloadCreateTableEvents() {
           /**
            * @var curr_last_row   Object referring to the last <tr> element in {@link tablesTable}
            */
-          var currLastRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tablesTable).find('tr').last();
+          const currLastRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tablesTable).find('tr').last();
           /**
            * @var curr_last_row_index_string   String containing the index of {@link currLastRow}
            */
-          var currLastRowIndexString = jquery__WEBPACK_IMPORTED_MODULE_0___default()(currLastRow).find('input:checkbox').attr('id').match(/\d+/)[0];
+          const currLastRowIndexString = jquery__WEBPACK_IMPORTED_MODULE_0___default()(currLastRow).find('input:checkbox').attr('id').match(/\d+/)[0];
           /**
            * @var curr_last_row_index Index of {@link currLastRow}
            */
-          var currLastRowIndex = parseFloat(currLastRowIndexString);
+          const currLastRowIndex = parseFloat(currLastRowIndexString);
           /**
            * @var new_last_row_index   Index of the new row to be appended to {@link tablesTable}
            */
-          var newLastRowIndex = currLastRowIndex + 1;
+          const newLastRowIndex = currLastRowIndex + 1;
           /**
            * @var new_last_row_id String containing the id of the row to be appended to {@link tablesTable}
            */
-          var newLastRowId = 'checkbox_tbl_' + newLastRowIndex;
+          const newLastRowId = 'checkbox_tbl_' + newLastRowIndex;
           data.newTableString = data.newTableString.replace(/checkbox_tbl_/, newLastRowId);
           // append to table
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.newTableString).appendTo(tablesTable);
@@ -3606,9 +3617,9 @@ function onloadCreateTableEvents() {
         // Refresh navigation as a new table has been added
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         // Redirect to table structure page on creation of new table
-        var argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-        var params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
-        var tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
+        const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+        const params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
+        const tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
         jquery__WEBPACK_IMPORTED_MODULE_0___default().get(tableStructureUrl, params12, _ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);
       }); // end $.post()
     }
@@ -3623,8 +3634,8 @@ function onloadCreateTableEvents() {
     /**
      * @var    the_form    object referring to the create table form
      */
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.create_table_form.ajax');
-    var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.create_table_form.ajax');
+    const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     prepareForAjaxRequest($form);
     // User wants to add more fields to the table
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + '&' + actionParam, function (data) {
@@ -3632,7 +3643,7 @@ function onloadCreateTableEvents() {
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error);
         return;
       }
-      var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+      const $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
       $pageContent.html(data.message);
       (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($pageContent);
       verifyColumnsProperties();
@@ -3659,8 +3670,8 @@ function onloadCreateTableEvents() {
    * Attach event handler to manage changes in number of partitions and subpartitions
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input[name=partition_count],input[name=subpartition_count],select[name=partition_by]', function () {
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $form = $this.parents('form');
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = $this.parents('form');
     if ($form.is('.create_table_form.ajax')) {
       submitChangesInCreateTableForm('submit_partition_change=1');
     } else {
@@ -3671,15 +3682,15 @@ function onloadCreateTableEvents() {
     if (!this.checked) {
       return;
     }
-    var colRegEx = /\d/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name'));
+    const colRegEx = /\d/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name'));
     const col = colRegEx[0];
-    var $selectFieldKey = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + col + ']"]');
+    const $selectFieldKey = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + col + ']"]');
     if ($selectFieldKey.val() === 'none_' + col) {
       $selectFieldKey.val('primary_' + col).trigger('change', [false]);
     }
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').off('click', 'input.preview_sql').on('click', 'input.preview_sql', function () {
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form');
     previewSql($form);
   });
 }
@@ -3696,14 +3707,14 @@ function checkPassword($theForm) {
   if ($theForm.find('#nopass_1').is(':checked')) {
     return true;
   } else {
-    var $pred = $theForm.find('#select_pred_password');
+    const $pred = $theForm.find('#select_pred_password');
     if ($pred.length && ($pred.val() === 'none' || $pred.val() === 'keep')) {
       return true;
     }
   }
-  var $password = $theForm.find('input[name=pma_pw]');
-  var $passwordRepeat = $theForm.find('input[name=pma_pw2]');
-  var alertMessage = false;
+  const $password = $theForm.find('input[name=pma_pw]');
+  const $passwordRepeat = $theForm.find('input[name=pma_pw2]');
+  let alertMessage = false;
   if ($password.val() === '') {
     alertMessage = window.Messages.strPasswordEmpty;
   } else if ($password.val() !== $passwordRepeat.val()) {
@@ -3724,7 +3735,7 @@ function shouldShowEmptyPasswordWarning(form) {
 function onloadChangePasswordEvents() {
   /* Handler for hostname type */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '#select_pred_hostname', function () {
-    var hostname = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_hostname');
+    const hostname = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_hostname');
     if (this.value === 'any') {
       hostname.val('%');
     } else if (this.value === 'localhost') {
@@ -3784,13 +3795,13 @@ function onloadChangePasswordEvents() {
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#change_password_anchor.ajax', function (event) {
     event.preventDefault();
-    var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+    const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#changePasswordGoButton').on('click', function () {
       event.preventDefault();
       /**
        * @var $the_form    Object referring to the change password form
        */
-      var $theForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_form');
+      const $theForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#change_password_form');
       if (!checkPassword($theForm)) {
         return false;
       }
@@ -3799,16 +3810,16 @@ function onloadChangePasswordEvents() {
        * Need to append this for the change password form on Server Privileges
        * page to work
        */
-      var thisValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-      var submitForm = function () {
-        var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      const thisValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+      const submitForm = function () {
+        const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         $theForm.append('<input type="hidden" name="ajax_request" value="true">');
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post($theForm.attr('action'), $theForm.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
           if (typeof data === 'undefined' || data.success !== true) {
             (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
             return;
           }
-          var $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+          const $pageContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
           $pageContent.prepend(data.message);
           (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($pageContent);
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
@@ -3883,8 +3894,8 @@ function onloadEnumSetEditorMessage() {
  * @param $engineSelector storage engine selector
  */
 function hideShowConnection($engineSelector) {
-  var $connection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form input[name=connection]');
-  var $labelTh = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form #storage-engine-connection');
+  const $connection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form input[name=connection]');
+  const $labelTh = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form #storage-engine-connection');
   if ($engineSelector.val() !== 'FEDERATED') {
     $connection.prop('disabled', true).parent('td').hide();
     $labelTh.hide();
@@ -3900,7 +3911,7 @@ function hideShowConnection($engineSelector) {
  */
 function validateDefaultValue($nullCheckbox) {
   if (!$nullCheckbox.prop('checked')) {
-    var $default = $nullCheckbox.closest('tr').find('.default_type');
+    const $default = $nullCheckbox.closest('tr').find('.default_type');
     if ($default.val() === 'NULL') {
       $default.val('NONE');
     }
@@ -3913,21 +3924,21 @@ function validateDefaultValue($nullCheckbox) {
  * @param {number} offset of the selected column in central list of columns
  */
 function autoPopulate(inputId, offset) {
-  var db = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
-  var table = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table');
-  var newInputId = inputId.substring(0, inputId.length - 1);
+  const db = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
+  const table = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table');
+  const newInputId = inputId.substring(0, inputId.length - 1);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '1').val(window.centralColumnList[db + '_' + table][offset].col_name);
-  var colType = window.centralColumnList[db + '_' + table][offset].col_type.toUpperCase();
+  const colType = window.centralColumnList[db + '_' + table][offset].col_type.toUpperCase();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '2').val(colType);
-  var $input3 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '3');
+  const $input3 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '3');
   $input3.val(window.centralColumnList[db + '_' + table][offset].col_length);
   if (colType === 'ENUM' || colType === 'SET') {
     $input3.next().show();
   } else {
     $input3.next().hide();
   }
-  var colDefault = window.centralColumnList[db + '_' + table][offset].col_default.toUpperCase();
-  var $input4 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '4');
+  let colDefault = window.centralColumnList[db + '_' + table][offset].col_default.toUpperCase();
+  const $input4 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '4');
   if (colDefault === 'NULL' || colDefault === 'CURRENT_TIMESTAMP' || colDefault === 'CURRENT_TIMESTAMP()') {
     if (colDefault === 'CURRENT_TIMESTAMP()') {
       colDefault = 'CURRENT_TIMESTAMP';
@@ -3944,7 +3955,7 @@ function autoPopulate(inputId, offset) {
     $input4.siblings('.default_value').val(window.centralColumnList[db + '_' + table][offset].col_default);
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '5').val(window.centralColumnList[db + '_' + table][offset].col_collation);
-  var $input6 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '6');
+  const $input6 = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + newInputId + '6');
   $input6.val(window.centralColumnList[db + '_' + table][offset].col_attribute);
   if (window.centralColumnList[db + '_' + table][offset].col_extra === 'on update CURRENT_TIMESTAMP') {
     $input6.val(window.centralColumnList[db + '_' + table][offset].col_extra);
@@ -3972,9 +3983,9 @@ function teardownEnumSetEditor() {
 function onloadEnumSetEditor() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.open_enum_editor', function () {
     // Get the name of the column that is being edited
-    var colname = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('input').first().val();
-    var title;
-    var i;
+    const colname = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('input').first().val();
+    let title;
+    let i;
     // And use it to make up a title for the page
     if (colname.length < 1) {
       title = window.Messages.enum_newColumnVals;
@@ -3982,16 +3993,16 @@ function onloadEnumSetEditor() {
       title = window.Messages.enum_columnVals.replace(/%s/, '"' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(decodeURIComponent(colname)) + '"');
     }
     // Get the values as a string
-    var inputstring = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').val();
+    let inputstring = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').val();
     // Escape html entities
     inputstring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').text(inputstring).html();
     // Parse the values, escaping quotes and
     // slashes on the fly, into an array
-    var values = [];
-    var inString = false;
-    var curr;
-    var next;
-    var buffer = '';
+    const values = [];
+    let inString = false;
+    let curr;
+    let next;
+    let buffer = '';
     for (i = 0; i < inputstring.length; i++) {
       curr = inputstring.charAt(i);
       next = i === inputstring.length ? '' : inputstring.charAt(i + 1);
@@ -4015,38 +4026,38 @@ function onloadEnumSetEditor() {
       // The leftovers in the buffer are the last value (if any)
       values.push(buffer);
     }
-    var fields = '';
+    let fields = '';
     // If there are no values, maybe the user is about to make a
     // new list so we add a few for them to get started with.
     if (values.length === 0) {
       values.push('', '', '', '');
     }
     // Add the parsed values to the editor
-    var dropIcon = (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('b_drop');
-    var dragIcon = '<span class="drag-handle">&#9776;</span>';
+    const dropIcon = (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('b_drop');
+    const dragIcon = '<span class="drag-handle">&#9776;</span>';
     for (i = 0; i < values.length; i++) {
       fields += '<tr><td>' + '<input type=\'text\' value=\'' + values[i] + '\'>' + '</td><td class=\'drop\'>' + dropIcon + '</td><td class="drag-col">' + dragIcon + '</td></tr>';
     }
     /**
      * @var dialog HTML code for the ENUM/SET dialog
      */
-    var dialog = '<div id="enum_editor" class="card">' + '<div class="card-header">' + title + '</div>' + '<div class="card-body">' + '<p>' + (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values"><tbody>' + fields + '</tbody></table>' + '</div><div class="card-footer">' + '<table class="table table-borderless add"><tr><td>' + '<div class="slider"></div>' + '</td><td>' + '<form><div><input type="submit" class="add_value btn btn-primary" value="' + window.sprintf(window.Messages.enum_addValue, 1) + '"></div></form>' + '</td></tr></table>' + '<input type="hidden" value="' +
+    const dialog = '<div id="enum_editor" class="card">' + '<div class="card-header">' + title + '</div>' + '<div class="card-body">' + '<p>' + (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values"><tbody>' + fields + '</tbody></table>' + '</div><div class="card-footer">' + '<table class="table table-borderless add"><tr><td>' + '<div class="slider"></div>' + '</td><td>' + '<form><div><input type="submit" class="add_value btn btn-primary" value="' + window.sprintf(window.Messages.enum_addValue, 1) + '"></div></form>' + '</td></tr></table>' + '<input type="hidden" value="' +
     // So we know which column's data is being edited
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').attr('id') + '">' + '</div>' + '</div>';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorGoButton').on('click', function () {
       // When the submit button is clicked,
       // put the data back into the original form
-      var valueArray = [];
+      const valueArray = [];
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('.values input').each(function (index, elm) {
-        var val = elm.value.replace(/\\/g, '\\\\').replace(/'/g, '\'\'');
+        const val = elm.value.replace(/\\/g, '\\\\').replace(/'/g, '\'\'');
         valueArray.push('\'' + val + '\'');
       });
       // get the Length/Values text field where this value belongs
-      var valuesId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('input[type=\'hidden\']').val();
+      const valuesId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('input[type=\'hidden\']').val();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#' + valuesId).val(valueArray.join(','));
     });
     // Show the dialog
-    var width = parseInt((parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').css('font-size'), 10) / 13 * 340).toString(), 10);
+    let width = parseInt((parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').css('font-size'), 10) / 13 * 340).toString(), 10);
     if (!width) {
       width = 340;
     }
@@ -4075,23 +4086,23 @@ function onloadEnumSetEditor() {
     return false;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.central_columns_dialog', function () {
-    var href = 'index.php?route=/database/central-columns';
-    var db = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
-    var table = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table');
-    var maxRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('maxrows');
-    var pick = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('pick');
+    const href = 'index.php?route=/database/central-columns';
+    const db = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
+    const table = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table');
+    const maxRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('maxrows');
+    let pick = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('pick');
     if (pick !== false) {
       pick = true;
     }
-    var params = {
+    const params = {
       'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
       'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
       'cur_table': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table'),
       'getColumnList': true
     };
-    var colid = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').attr('id');
-    var fields = '';
+    const colid = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').attr('id');
+    let fields = '';
     if (!(db + '_' + table in window.centralColumnList)) {
       window.centralColumnList.push(db + '_' + table);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
@@ -4104,9 +4115,9 @@ function onloadEnumSetEditor() {
         async: false
       });
     }
-    var i = 0;
-    var listSize = window.centralColumnList[db + '_' + table].length;
-    var min = listSize <= maxRows ? listSize : maxRows;
+    let i = 0;
+    const listSize = window.centralColumnList[db + '_' + table].length;
+    let min = listSize <= maxRows ? listSize : maxRows;
     for (i = 0; i < min; i++) {
       fields += '<tr><td><div><span class="fw-bold">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(window.centralColumnList[db + '_' + table][i].col_name) + '</span><br><span class="color_gray">' + window.centralColumnList[db + '_' + table][i].col_type;
       if (window.centralColumnList[db + '_' + table][i].col_attribute !== '') {
@@ -4121,8 +4132,8 @@ function onloadEnumSetEditor() {
       }
       fields += '</tr>';
     }
-    var resultPointer = i;
-    var searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
+    let resultPointer = i;
+    let searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
     if (fields === '') {
       fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(db) + '\'');
       searchIn = '';
@@ -4180,7 +4191,7 @@ function onloadEnumSetEditor() {
   // When "add a new value" is clicked, append an empty text field
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input.add_value', function (e) {
     e.preventDefault();
-    var numNewRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('div.slider').slider('value');
+    let numNewRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('div.slider').slider('value');
     while (numNewRows--) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorModal').find('.values').append('<tr class=\'hide\'><td>' + '<input type=\'text\'>' + '</td><td class=\'drop\'>' + (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('b_drop') + '</td><td class="drag-col">' + '<span class="drag-handle">&#9776;</span>' + '</td></tr>').find('tr').last().show('fast');
     }
@@ -4199,21 +4210,21 @@ function onloadEnumSetEditor() {
 function getAddIndexEventHandler() {
   return function (event) {
     event.preventDefault();
-    var hadAddButtonHidden = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('.add_fields').hasClass('hide');
+    const hadAddButtonHidden = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('.add_fields').hasClass('hide');
     if (hadAddButtonHidden === false) {
-      var rowsToAdd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('.slider').slider('value');
-      var tempEmptyVal = function () {
+      let rowsToAdd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('.slider').slider('value');
+      const tempEmptyVal = function () {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val('');
       };
-      var tempSetFocus = function () {
+      const tempSetFocus = function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('option:selected').val() === '') {
           return true;
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('input').trigger('focus');
       };
       while (rowsToAdd--) {
-        var $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns');
-        var $newrow = $indexColumns.find('tbody > tr').first().clone().appendTo($indexColumns.find('tbody'));
+        const $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns');
+        const $newrow = $indexColumns.find('tbody > tr').first().clone().appendTo($indexColumns.find('tbody'));
         $newrow.find(':input').each(tempEmptyVal);
         // focus index size input on column picked
         $newrow.find('select').on('change', tempSetFocus);
@@ -4224,7 +4235,7 @@ function getAddIndexEventHandler() {
 function indexDialogModal(routeUrl, url, title, callbackSuccess) {
   let callbackFailure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : undefined;
   /* Remove the hidden dialogs if there are*/
-  var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#indexDialogModal');
+  const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#indexDialogModal');
   const indexDialogPreviewModal = document.getElementById('indexDialogPreviewModal');
   indexDialogPreviewModal.addEventListener('shown.bs.modal', () => {
     const modalBody = indexDialogPreviewModal.querySelector('.modal-body');
@@ -4257,12 +4268,12 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
     /**
      * @var the_form object referring to the export form
      */
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
     (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     prepareForAjaxRequest($form);
     // User wants to submit the form
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
-      var $sqlqueryresults = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults');
+      const $sqlqueryresults = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults');
       if ($sqlqueryresults.length !== 0) {
         $sqlqueryresults.remove();
       }
@@ -4273,7 +4284,7 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
         /* Reload the field form*/
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_index').remove();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(data.index_table).find('#table_index').insertAfter('#index_header');
-        var $editIndexDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#indexDialogModal');
+        const $editIndexDialog = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#indexDialogModal');
         if ($editIndexDialog.length > 0) {
           $editIndexDialog.modal('hide');
         }
@@ -4283,8 +4294,8 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
         }
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
       } else {
-        var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(data.error);
-        var $error;
+        const $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(data.error);
+        let $error;
         if ($tempDiv.find('.error code').length !== 0) {
           $error = $tempDiv.find('.error code').addClass('error');
         } else {
@@ -4297,7 +4308,7 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
       }
     }); // end $.post()
   });
-  var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+  const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post(routeUrl, url, function (data) {
     if (typeof data !== 'undefined' && data.success === false) {
       // in the case of an error, show the error message returned.
@@ -4326,7 +4337,7 @@ function indexRenameDialog(url, title, callbackSuccess) {
 function showIndexEditDialog($outer) {
   (0,_indexes_checkIndexType_ts__WEBPACK_IMPORTED_MODULE_11__["default"])();
   (0,_indexes_checkIndexName_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('index_frm');
-  var $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns');
+  const $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns');
   $indexColumns.find('tbody').sortable({
     axis: 'y',
     containment: $indexColumns.find('tbody'),
@@ -4335,14 +4346,14 @@ function showIndexEditDialog($outer) {
     // Add custom dragged row
     // @ts-ignore
     helper: function (event, tr) {
-      var $originalCells = tr.children();
-      var $helper = tr.clone();
+      const $originalCells = tr.children();
+      const $helper = tr.clone();
       $helper.children().each(function (index) {
         // Set cell width in dragged row
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).width($originalCells.eq(index).outerWidth());
-        var $childrenSelect = $originalCells.eq(index).children('select');
+        const $childrenSelect = $originalCells.eq(index).children('select');
         if ($childrenSelect.length) {
-          var selectedIndex = $childrenSelect.prop('selectedIndex');
+          const selectedIndex = $childrenSelect.prop('selectedIndex');
           // Set correct select value in dragged row
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('select').prop('selectedIndex', selectedIndex);
         }
@@ -4372,7 +4383,7 @@ function showIndexEditDialog($outer) {
   // Focus the slider, otherwise it looks nearly transparent
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.ui-slider-handle').addClass('ui-state-focus');
   // set focus on index name input, if empty
-  var input = $outer.find('input#input_index_name');
+  const input = $outer.find('input#input_index_name');
   if (!input.val()) {
     input.trigger('focus');
   }
@@ -4391,7 +4402,7 @@ function showHints() {
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#no_hint').length > 0) {
     return;
   }
-  var $newDiv = $div;
+  let $newDiv = $div;
   if ($newDiv === undefined || !($newDiv instanceof (jquery__WEBPACK_IMPORTED_MODULE_0___default())) || $newDiv.length === 0) {
     $newDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('body');
   }
@@ -4427,7 +4438,7 @@ function initializeMenuResizer() {
 function toggleButton($obj) {
   // In rtl mode the toggle switch is flipped horizontally
   // so we need to take that into account
-  var right;
+  let right;
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.text_direction', $obj).text() === 'ltr') {
     right = 'right';
   } else {
@@ -4437,15 +4448,15 @@ function toggleButton($obj) {
    * @var  h  Height of the button, used to scale the
    *          background image and position the layers
    */
-  var h = $obj.height();
+  const h = $obj.height();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('img', $obj).height(h);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('table', $obj).css('bottom', h - 1);
   /**
    * @var  on   Width of the "ON" part of the toggle switch
    * @var  off  Width of the "OFF" part of the toggle switch
    */
-  var on = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOn', $obj).width();
-  var off = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).width();
+  const on = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOn', $obj).width();
+  const off = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).width();
   // Make the "ON" and "OFF" parts of the switch the same size
   // + 2 pixels to avoid overflowed
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOn > div', $obj).width(Math.max(on, off) + 2);
@@ -4453,7 +4464,7 @@ function toggleButton($obj) {
   /**
    *  @var  w  Width of the central part of the switch
    */
-  var w = parseInt((jquery__WEBPACK_IMPORTED_MODULE_0___default()('img', $obj).height() / 16 * 22).toString(), 10);
+  const w = parseInt((jquery__WEBPACK_IMPORTED_MODULE_0___default()('img', $obj).height() / 16 * 22).toString(), 10);
   // Resize the central part of the switch on the top
   // layer to match the background
   jquery__WEBPACK_IMPORTED_MODULE_0___default()($obj).find('table td').eq(1).children('div').width(w);
@@ -4463,17 +4474,17 @@ function toggleButton($obj) {
    * @var  offset  By how many pixels to move the background
    *               image, so that it matches the top layer
    */
-  var imgw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('img', $obj).width();
-  var tblw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table', $obj).width();
-  var offset = parseInt(((imgw - tblw) / 2).toString(), 10);
+  const imgw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('img', $obj).width();
+  const tblw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('table', $obj).width();
+  const offset = parseInt(((imgw - tblw) / 2).toString(), 10);
   // Move the background to match the layout of the top layer
   $obj.find('img').css(right, offset);
   /**
    * @var  offw    Outer width of the "ON" part of the toggle switch
    * @var  btnw    Outer width of the central part of the switch
    */
-  var offw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).outerWidth();
-  var btnw = jquery__WEBPACK_IMPORTED_MODULE_0___default()($obj).find('table td').eq(1).outerWidth();
+  const offw = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).outerWidth();
+  const btnw = jquery__WEBPACK_IMPORTED_MODULE_0___default()($obj).find('table td').eq(1).outerWidth();
   // Resize the main div so that exactly one side of
   // the switch plus the central part fit into it.
   $obj.width(offw + btnw + 2);
@@ -4481,7 +4492,7 @@ function toggleButton($obj) {
    * @var  move  How many pixels to move the
    *             switch by when toggling
    */
-  var move = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).outerWidth();
+  const move = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.toggleOff', $obj).outerWidth();
   // If the switch is initialized to the
   // OFF state we need to move it now.
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.toggle-container', $obj).hasClass('off')) {
@@ -4502,13 +4513,13 @@ function toggleButton($obj) {
     } else {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('isActive');
     }
-    var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
-    var $container = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var callback = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.callback', this).text();
-    var operator;
-    var url;
-    var removeClass;
-    var addClass;
+    const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+    const $container = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const callback = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.callback', this).text();
+    let operator;
+    let url;
+    let removeClass;
+    let addClass;
     // Perform the actual toggle
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass('on')) {
       if (right === 'right') {
@@ -4529,7 +4540,7 @@ function toggleButton($obj) {
       removeClass = 'off';
       addClass = 'on';
     }
-    var parts = url.split('?');
+    const parts = url.split('?');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(parts[0], parts[1] + '&ajax_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
@@ -4549,7 +4560,7 @@ function toggleButton($obj) {
 }
 function initializeToggleButtons() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.toggleAjax').each(function () {
-    var $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).show();
+    const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).show();
     $button.find('img').each(function () {
       if (this.complete) {
         toggleButton($button);
@@ -4586,7 +4597,7 @@ function onloadRecentFavoriteTables() {
   if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sync_favorite_tables').length) {
     return;
   }
-  var favoriteTables = '';
+  let favoriteTables = '';
   if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_14__["default"])('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined' && window.localStorage.favoriteTables !== 'undefined') {
     favoriteTables = window.localStorage.favoriteTables;
     if (favoriteTables === 'undefined') {
@@ -4626,7 +4637,7 @@ function onloadRecentFavoriteTables() {
  */
 function slidingMessage(msg) {
   let $object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-  var $obj = $object;
+  let $obj = $object;
   if (msg === undefined || msg.length === 0) {
     // Don't show an empty message
     return false;
@@ -4662,7 +4673,7 @@ function slidingMessage(msg) {
     $obj.width('100%').html('<div>' + msg + '</div>');
     // highlight any sql before taking height;
     (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])($obj);
-    var h = $obj.find('div').first().hide().height();
+    const h = $obj.find('div').first().hide().height();
     $obj.find('div').first().css('height', 0).show().animate({
       height: h
     }, function () {
@@ -4678,7 +4689,7 @@ function slidingMessage(msg) {
  * Attach CodeMirror editor to SQL edit area.
  */
 function onloadCodeMirrorEditor() {
-  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery');
+  const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery');
   if ($elm.siblings().filter('.CodeMirror').length > 0) {
     return;
   }
@@ -4737,7 +4748,7 @@ function onloadLockPage() {
  * @return {string}
  */
 function getCellValue(td) {
-  var $td = jquery__WEBPACK_IMPORTED_MODULE_0___default()(td);
+  const $td = jquery__WEBPACK_IMPORTED_MODULE_0___default()(td);
   if ($td.is('.null')) {
     return '';
   } else if ((!$td.is('.to_be_saved') || $td.is('.set')) && $td.data('original_data')) {
@@ -4778,7 +4789,7 @@ function teardownCreateView() {
 }
 function onloadCreateView() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.logout').on('click', function () {
-    var form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form method="POST" action="' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('token')) + '">' + '</form>');
+    const form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form method="POST" action="' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href') + '" class="disableAjax">' + '<input type="hidden" name="token" value="' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('token')) + '">' + '</form>');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append(form);
     form.submit();
     sessionStorage.clear();
@@ -4797,7 +4808,7 @@ function floatingMenuBar() {
     if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').length || jquery__WEBPACK_IMPORTED_MODULE_0___default()('#PMA_disable_floating_menubar').length !== 0) {
       return;
     }
-    var left = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'ltr' ? 'left' : 'right';
+    const left = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'ltr' ? 'left' : 'right';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').css('margin-' + left, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width() + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer').width()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb')).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer'));
     // Allow the DOM to render, then adjust the padding on the body
     setTimeout(function () {
@@ -4831,12 +4842,12 @@ const checkboxesSel = 'input.checkall:checkbox:enabled';
  * Watches checkboxes in a form to set the checkall box accordingly
  */
 function checkboxesChanged() {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.form);
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.form);
   // total number of checkboxes in current form
-  var totalBoxes = $form.find(checkboxesSel).length;
+  const totalBoxes = $form.find(checkboxesSel).length;
   // number of checkboxes checked in current form
-  var checkedBoxes = $form.find(checkboxesSel + ':checked').length;
-  var $checkall = $form.find('input.checkall_box');
+  const checkedBoxes = $form.find(checkboxesSel + ':checked').length;
+  const $checkall = $form.find('input.checkall_box');
   if (totalBoxes === checkedBoxes) {
     $checkall.prop({
       checked: true,
@@ -4859,7 +4870,7 @@ function checkboxesChanged() {
  */
 function getCheckAllBoxEventHandler() {
   return function () {
-    var isChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked');
+    const isChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.form).find(checkboxesSel).not('.row-hidden').prop('checked', isChecked).parents('tr').toggleClass('marked table-active', isChecked);
   };
 }
@@ -4868,8 +4879,8 @@ function getCheckAllBoxEventHandler() {
  */
 function getCheckAllFilterEventHandler() {
   return function () {
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var selector = $this.data('checkall-selector');
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const selector = $this.data('checkall-selector');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.checkall_box').prop('checked', false);
     $this.parents('form').find(checkboxesSel).filter(selector).prop('checked', true).trigger('change').parents('tr').toggleClass('marked', true);
     return false;
@@ -4879,12 +4890,12 @@ function getCheckAllFilterEventHandler() {
  * Watches checkboxes in a sub form to set the sub checkall box accordingly
  */
 function subCheckboxesChanged() {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent();
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent();
   // total number of checkboxes in current sub form
-  var totalBoxes = $form.find(checkboxesSel).length;
+  const totalBoxes = $form.find(checkboxesSel).length;
   // number of checkboxes checked in current sub form
-  var checkedBoxes = $form.find(checkboxesSel + ':checked').length;
-  var $checkall = $form.find('input.sub_checkall_box');
+  const checkedBoxes = $form.find(checkboxesSel + ':checked').length;
+  const $checkall = $form.find('input.sub_checkall_box');
   if (totalBoxes === checkedBoxes) {
     $checkall.prop({
       checked: true,
@@ -4907,8 +4918,8 @@ function subCheckboxesChanged() {
  */
 function getSubCheckAllBoxEventHandler() {
   return function () {
-    var isChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked');
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent();
+    const isChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).is(':checked');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent();
     $form.find(checkboxesSel).prop('checked', isChecked).parents('tr').toggleClass('marked', isChecked);
   };
 }
@@ -4924,10 +4935,10 @@ function getSubCheckAllBoxEventHandler() {
  */
 function getFilterTextEventHandler() {
   return function () {
-    var filterInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().toUpperCase().replace(/ /g, '_');
-    var count = 0;
+    const filterInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().toUpperCase().replace(/ /g, '_');
+    let count = 0;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-filter-row]').each(function () {
-      var $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       /* Can not use data() here as it does magic conversion to int for numeric values */
       if ($row.attr('data-filter-row').indexOf(filterInput) > -1) {
         count += 1;
@@ -4947,7 +4958,7 @@ function getFilterTextEventHandler() {
 }
 function onloadFilterText() {
   /* Trigger filtering of the list based on incoming database name */
-  var $filter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterText');
+  const $filter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filterText');
   if ($filter.val()) {
     $filter.trigger('keyup').trigger('select');
   }
@@ -4962,20 +4973,21 @@ function onloadFilterText() {
  * @return {string}
  */
 function formatBytes(bytesToFormat, subDecimals, pointChar) {
-  var bytes = bytesToFormat;
-  var decimals = subDecimals;
-  var point = pointChar;
+  let bytes = bytesToFormat;
+  let decimals = subDecimals;
+  let point = pointChar;
   if (!decimals) {
     decimals = 0;
   }
   if (!point) {
     point = '.';
   }
-  var units = ['B', 'KiB', 'MiB', 'GiB'];
-  for (var i = 0; bytes > 1024 && i < units.length; i++) {
+  const units = ['B', 'KiB', 'MiB', 'GiB'];
+  let i = 0;
+  for (; bytes > 1024 && i < units.length; i++) {
     bytes /= 1024;
   }
-  var factor = Math.pow(10, decimals);
+  const factor = Math.pow(10, decimals);
   bytes = Math.round(bytes * factor) / factor;
   bytes = bytes.toString().split('.').join(point);
   return bytes + ' ' + units[i];
@@ -4985,7 +4997,7 @@ function onloadLoginForm() {
    * Reveal the login form to users with JS enabled
    * and focus the appropriate input field
    */
-  var $loginform = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#loginform');
+  const $loginform = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#loginform');
   if ($loginform.length) {
     $loginform.find('.js-show').show();
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_username').val()) {
@@ -4994,7 +5006,7 @@ function onloadLoginForm() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_username').trigger('focus');
     }
   }
-  var $httpsWarning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-https-mismatch');
+  const $httpsWarning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#js-https-mismatch');
   if ($httpsWarning.length) {
     if (window.location.protocol === 'https:' !== _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('is_https')) {
       $httpsWarning.show();
@@ -5013,8 +5025,8 @@ function toggleDatepickerIfInvalid($td, $inputField) {
   // If the Datetimepicker UI is not present, return
   if ($inputField.hasClass('hasDatepicker')) {
     // Regex allowed by the Datetimepicker UI
-    var dtexpDate = new RegExp(['^([0-9]{4})', '-(((01|03|05|07|08|10|12)-((0[1-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)', '-((0[1-9])|([1-2][0-9])|30)))$'].join(''));
-    var dtexpTime = new RegExp(['^(([0-1][0-9])|(2[0-3]))', ':((0[0-9])|([1-5][0-9]))', ':((0[0-9])|([1-5][0-9]))(.[0-9]{1,6}){0,1}$'].join(''));
+    const dtexpDate = new RegExp(['^([0-9]{4})', '-(((01|03|05|07|08|10|12)-((0[1-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)', '-((0[1-9])|([1-2][0-9])|30)))$'].join(''));
+    const dtexpTime = new RegExp(['^(([0-1][0-9])|(2[0-3]))', ':((0[0-9])|([1-5][0-9]))', ':((0[0-9])|([1-5][0-9]))(.[0-9]{1,6}){0,1}$'].join(''));
     // If key-ed in Time or Date values are unsupported by the UI, close it
     if ($td.attr('data-type') === 'date' && !dtexpDate.test($inputField.val())) {
       $inputField.datepicker('hide');
@@ -5041,7 +5053,7 @@ function getKeyboardFormSubmitEventHandler() {
     if (e.which !== 13 || !(e.ctrlKey || e.altKey)) {
       return;
     }
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form');
     // There could be multiple submit buttons on the same form,
     // we assume all of them behave identical and just click one.
     if (!$form.find('input[type="submit"]').first() || !$form.find('input[type="submit"]').first().trigger('click')) {
@@ -5082,7 +5094,7 @@ function onloadSortLinkMouseEvent() {
  * @return {string}
  */
 function getPostData() {
-  var dataPost = this.attr('data-post');
+  let dataPost = this.attr('data-post');
   // Strip possible leading ?
   if (dataPost !== undefined && dataPost.startsWith('?')) {
     dataPost = dataPost.substring(1);
@@ -5114,23 +5126,23 @@ __webpack_require__.r(__webpack_exports__);
  * when truncating, creating, dropping or inserting into a table
  */
 function adjustTotals() {
-  var byteUnits = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
+  const byteUnits = [window.Messages.strB, window.Messages.strKiB, window.Messages.strMiB, window.Messages.strGiB, window.Messages.strTiB, window.Messages.strPiB, window.Messages.strEiB];
   /**
    * @var $allTr jQuery object that references all the rows in the list of tables
    */
-  var $allTr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm').find('table.data tbody').first().find('tr');
+  const $allTr = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm').find('table.data tbody').first().find('tr');
   // New summary values for the table
-  var tableSum = $allTr.length;
-  var rowsSum = 0;
-  var sizeSum = 0;
-  var overheadSum = 0;
-  var rowSumApproximated = false;
+  const tableSum = $allTr.length;
+  let rowsSum = 0;
+  let sizeSum = 0;
+  let overheadSum = 0;
+  let rowSumApproximated = false;
   $allTr.each(function () {
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var i;
-    var tmpVal;
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    let i;
+    let tmpVal;
     // Get the number of rows for this SQL table
-    var strRows = $this.find('.tbl_rows').text();
+    let strRows = $this.find('.tbl_rows').text();
     // If the value is approximated
     if (strRows.indexOf('~') === 0) {
       rowSumApproximated = true;
@@ -5138,17 +5150,17 @@ function adjustTotals() {
       strRows = strRows.substring(1, strRows.length);
     }
     strRows = strRows.replace(/[,.\s]/g, '');
-    var intRow = parseInt(strRows, 10);
+    const intRow = parseInt(strRows, 10);
     if (!isNaN(intRow)) {
       rowsSum += intRow;
     }
     // Extract the size and overhead
-    var valSize = 0;
-    var valOverhead = 0;
-    var strSize = $this.find('.tbl_size span:not(.unit)').text().trim();
-    var strSizeUnit = $this.find('.tbl_size span.unit').text().trim();
-    var strOverhead = $this.find('.tbl_overhead span:not(.unit)').text().trim();
-    var strOverheadUnit = $this.find('.tbl_overhead span.unit').text().trim();
+    let valSize = 0;
+    let valOverhead = 0;
+    const strSize = $this.find('.tbl_size span:not(.unit)').text().trim();
+    const strSizeUnit = $this.find('.tbl_size span.unit').text().trim();
+    const strOverhead = $this.find('.tbl_overhead span:not(.unit)').text().trim();
+    const strOverheadUnit = $this.find('.tbl_overhead span.unit').text().trim();
     // Given a value and a unit, such as 100 and KiB, for the table size
     // and overhead calculate their numeric values in bytes, such as 102400
     for (i = 0; i < byteUnits.length; i++) {
@@ -5170,8 +5182,8 @@ function adjustTotals() {
   });
   // Add some commas for readability:
   // 1000000 becomes 1,000,000
-  var strRowSum = rowsSum + '';
-  var regex = /(\d+)(\d{3})/;
+  let strRowSum = rowsSum + '';
+  const regex = /(\d+)(\d{3})/;
   while (regex.test(strRowSum)) {
     strRowSum = strRowSum.replace(regex, '$1' + ',' + '$2');
   }
@@ -5180,8 +5192,8 @@ function adjustTotals() {
     strRowSum = '~' + strRowSum;
   }
   // Calculate the magnitude for the size and overhead values
-  var sizeMagnitude = 0;
-  var overheadMagnitude = 0;
+  let sizeMagnitude = 0;
+  let overheadMagnitude = 0;
   while (sizeSum >= 1024) {
     sizeSum /= 1024;
     sizeMagnitude++;
@@ -5193,7 +5205,7 @@ function adjustTotals() {
   sizeSum = Math.round(sizeSum * 10) / 10;
   overheadSum = Math.round(overheadSum * 10) / 10;
   // Update summary with new data
-  var $summary = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tbl_summary_row');
+  const $summary = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tbl_summary_row');
   $summary.find('.tbl_num').text(window.sprintf(window.Messages.strNTables, tableSum));
   if (rowSumApproximated) {
     $summary.find('.row_count_sum').text(strRowSum);
@@ -5231,9 +5243,9 @@ function checkNumberOfFields() {
     return false;
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('form').each(function () {
-    var nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(':input').length;
+    const nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(':input').length;
     if (nbInputs > window.maxInputVars) {
-      var warning = window.sprintf(window.Messages.strTooManyInputs, window.maxInputVars);
+      const warning = window.sprintf(window.Messages.strTooManyInputs, window.maxInputVars);
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
       return false;
     }
@@ -5364,8 +5376,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 function formatDateTime(date) {
   let seconds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var result = jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker.formatDate('yy-mm-dd', date);
-  var timefmt = 'HH:mm';
+  const result = jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker.formatDate('yy-mm-dd', date);
+  let timefmt = 'HH:mm';
   if (seconds) {
     timefmt = 'HH:mm:ss';
   }
@@ -5406,10 +5418,10 @@ __webpack_require__.r(__webpack_exports__);
 function getImageTag(image) {
   let alternate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
   let attributes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-  var alt = alternate;
-  var attr = attributes;
+  let alt = alternate;
+  let attr = attributes;
   // custom image object, it will eventually be returned by this functions
-  var retval = {
+  let retval = {
     data: {
       // this is private
       alt: '',
@@ -5428,8 +5440,8 @@ function getImageTag(image) {
       }
     },
     toString: function () {
-      var retval = '<' + 'img';
-      for (var i in this.data) {
+      let retval = '<' + 'img';
+      for (let i in this.data) {
         retval += ' ' + i + '="' + this.data[i] + '"';
       }
       retval += ' /' + '>';
@@ -5458,7 +5470,7 @@ function getImageTag(image) {
   // set css classes
   retval.attr('class', 'icon ic_' + image);
   // set all other attributes
-  for (var i in attr) {
+  for (let i in attr) {
     if (i === 'src') {
       // do not allow to override the 'src' attribute
       continue;
@@ -5488,9 +5500,9 @@ __webpack_require__.r(__webpack_exports__);
  * @return {string}
  */
 function getJsConfirmCommonParam(elem, parameters) {
-  var $elem = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elem);
-  var params = parameters;
-  var sep = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator');
+  const $elem = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elem);
+  let params = parameters;
+  const sep = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator');
   if (params) {
     // Strip possible leading ?
     if (params.startsWith('?')) {
@@ -5556,19 +5568,19 @@ __webpack_require__.r(__webpack_exports__);
  */
 function ignorePhpErrors() {
   let clearPrevErrors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-  var clearPrevious = clearPrevErrors;
+  let clearPrevious = clearPrevErrors;
   if (typeof clearPrevious === 'undefined' || clearPrevious === null) {
     clearPrevious = false;
   }
   // send AJAX request to /error-report with send_error_report=0, exception_type=php & token.
   // It clears the prev_errors stored in session.
   if (clearPrevious) {
-    var $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_report_errors_form');
+    const $pmaReportErrorsForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_report_errors_form');
     $pmaReportErrorsForm.find('input[name="send_error_report"]').val(0); // change send_error_report to '0'
     $pmaReportErrorsForm.trigger('submit');
   }
   // remove displayed errors
-  var $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_errors');
+  const $pmaErrors = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_errors');
   $pmaErrors.fadeOut('slow');
   $pmaErrors.remove();
 }
@@ -5653,7 +5665,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function refreshMainContent() {
   let url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-  var newUrl = url;
+  let newUrl = url;
   if (!newUrl) {
     newUrl = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').find('a').attr('href') || window.location.pathname;
     newUrl = newUrl.substring(0, newUrl.indexOf('?'));
@@ -5782,17 +5794,17 @@ function setIndexFormParameters(sourceArray, indexChoice) {
  */
 function removeColumnFromIndex(colIndex) {
   // Get previous index details.
-  var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]').attr('data-index');
+  const previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]').attr('data-index');
   if (previousIndex.length) {
     const previousIndexes = previousIndex.split(',');
-    var sourceArray = Indexes.getIndexArray(previousIndexes[0]);
+    const sourceArray = Indexes.getIndexArray(previousIndexes[0]);
     if (sourceArray === null) {
       return;
     }
     if (previousIndex[1] in sourceArray) {
       // Remove column from index array.
-      var sourceLength = sourceArray[previousIndexes[1]].columns.length;
-      for (var i = 0; i < sourceLength; i++) {
+      const sourceLength = sourceArray[previousIndexes[1]].columns.length;
+      for (let i = 0; i < sourceLength; i++) {
         if (i in sourceArray[previousIndex[1]].columns) {
           if (sourceArray[previousIndexes[1]].columns[i].col_index === colIndex) {
             sourceArray[previousIndexes[1]].columns.splice(i, 1);
@@ -5823,16 +5835,16 @@ function addColumnToIndex(sourceArray, arrayIndex, indexChoice, colIndex) {
     // Remove column from other indexes (if any).
     Indexes.removeColumnFromIndex(colIndex);
   }
-  var indexName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Key_name]"]').val();
-  var indexComment = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Index_comment]"]').val();
-  var keyBlockSize = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Key_block_size]"]').val();
-  var parser = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Parser]"]').val();
-  var indexType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[Index_type]"]').val();
-  var columns = [];
+  const indexName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Key_name]"]').val();
+  const indexComment = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Index_comment]"]').val();
+  const keyBlockSize = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Key_block_size]"]').val();
+  const parser = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[Parser]"]').val();
+  const indexType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[Index_type]"]').val();
+  const columns = [];
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns').find('tbody').find('tr').each(function () {
     // Get columns in particular order.
-    var colIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('select[name="index[columns][names][]"]').val();
-    var size = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name="index[columns][sub_parts][]"]').val();
+    const colIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('select[name="index[columns][names][]"]').val();
+    const size = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[name="index[columns][sub_parts][]"]').val();
     columns.push({
       'col_index': colIndex,
       'size': size
@@ -5849,22 +5861,22 @@ function addColumnToIndex(sourceArray, arrayIndex, indexChoice, colIndex) {
     'columns': columns
   };
   // Display index name (or column list)
-  var displayName = indexName;
+  let displayName = indexName;
   if (displayName === '') {
-    var columnNames = [];
+    const columnNames = [];
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(columns, function () {
       columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="field_name[' + this.col_index + ']"]').val());
     });
     displayName = '[' + columnNames.join(', ').trimRight() + ']';
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(columns, function () {
-    var id = 'index_name_' + this.col_index + '_8';
-    var $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + id);
+    const id = 'index_name_' + this.col_index + '_8';
+    let $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + id);
     if ($name.length === 0) {
       $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
       $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + this.col_index + ']"]'));
     }
-    var $text = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<small>').text(displayName);
+    const $text = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<small>').text(displayName);
     // @ts-ignore
     $name.html($text);
   });
@@ -5888,14 +5900,14 @@ function getCompositeIndexList(sourceArray, colIndex) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#composite_index_list').remove();
   }
   // Html list.
-  var $compositeIndexList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<ul id="composite_index_list">' + '<div>' + window.Messages.strCompositeWith + '</div>' + '</ul>');
+  const $compositeIndexList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<ul id="composite_index_list">' + '<div>' + window.Messages.strCompositeWith + '</div>' + '</ul>');
   // Add each column to list available for composite index.
-  var sourceLength = sourceArray.length;
-  var alreadyPresent = false;
-  for (var i = 0; i < sourceLength; i++) {
-    var subArrayLen = sourceArray[i].columns.length;
-    var columnNames = [];
-    for (var j = 0; j < subArrayLen; j++) {
+  const sourceLength = sourceArray.length;
+  let alreadyPresent = false;
+  for (let i = 0; i < sourceLength; i++) {
+    const subArrayLen = sourceArray[i].columns.length;
+    const columnNames = [];
+    for (let j = 0; j < subArrayLen; j++) {
       columnNames.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="field_name[' + sourceArray[i].columns[j].col_index + ']"]').val());
       if (colIndex === sourceArray[i].columns[j].col_index) {
         alreadyPresent = true;
@@ -5905,8 +5917,8 @@ function getCompositeIndexList(sourceArray, colIndex) {
   }
   return $compositeIndexList;
 }
-var addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
-  var isMissingValue = false;
+const addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
+  let isMissingValue = false;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[columns][names][]"]').each(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === '') {
       isMissingValue = true;
@@ -5932,11 +5944,11 @@ var addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
  */
 function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, index) {
   let showDialog = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : undefined;
-  var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true;
+  const showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true;
   // Prepare post-data.
-  var $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table"]');
-  var table = $table.length > 0 ? $table.val() : '';
-  var postData = {
+  const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table"]');
+  const table = $table.length > 0 ? $table.val() : '';
+  const postData = {
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
     'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="db"]').val(),
     'table': table,
@@ -5945,10 +5957,10 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
     'index': index,
     'columns': ''
   };
-  var columns = {};
-  for (var i = 0; i < targetColumns.length; i++) {
-    var columnName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="field_name[' + targetColumns[i] + ']"]').val();
-    var columnType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_type[' + targetColumns[i] + ']"]').val().toLowerCase();
+  const columns = {};
+  for (let i = 0; i < targetColumns.length; i++) {
+    const columnName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="field_name[' + targetColumns[i] + ']"]').val();
+    const columnType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_type[' + targetColumns[i] + ']"]').val().toLowerCase();
     columns[columnName] = [columnType, targetColumns[i]];
   }
   postData.columns = JSON.stringify(columns);
@@ -5959,11 +5971,11 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModalCancelButton').on('click', function () {
     if (colIndex >= 0) {
       // Handle state on 'Cancel'.
-      var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]');
+      const $selectList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]');
       if (!$selectList.attr('data-index').length) {
         $selectList.find('option[value*="none"]').attr('selected', 'selected');
       } else {
-        var previousIndex = $selectList.attr('data-index').split(',');
+        const previousIndex = $selectList.attr('data-index').split(',');
         $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
       }
     }
@@ -5972,14 +5984,14 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModalCloseButton').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModal').modal('hide');
   });
-  var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+  const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/indexes', postData, function (data) {
     if (data.success === false) {
       // in the case of an error, show the error message returned.
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
-      var $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
+      const $div = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>');
       if (showDialogLocal) {
         // Show dialog if the request was successful
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndex').length > 0) {
@@ -6015,7 +6027,7 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
         $div.attr({
           'id': 'addIndex'
         });
-        var isMissingValue = false;
+        let isMissingValue = false;
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[columns][names][]"]').each(function () {
           if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === '') {
             isMissingValue = true;
@@ -6031,7 +6043,7 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
     }
   });
 }
-var removeIndexOnChangeEvent = function () {
+const removeIndexOnChangeEvent = function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#composite_index').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single_column').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModal').modal('hide');
@@ -6044,9 +6056,9 @@ var removeIndexOnChangeEvent = function () {
  * @param {string} colIndex    Index of new column on form
  */
 function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
-  var $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="single_column" name="index_choice" checked>' + '<label class="form-check-label" for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label></div>');
-  var $compositeIndexRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="composite_index" name="index_choice">' + '<label class="form-check-label" for="composite_index">' + window.Messages.strCreateCompositeIndex + '</label></div>');
-  var $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<fieldset id="advance_index_creator"></fieldset>');
+  const $singleColumnRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="single_column" name="index_choice" checked>' + '<label class="form-check-label" for="single_column">' + window.Messages.strCreateSingleColumnIndex + '</label></div>');
+  const $compositeIndexRadio = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="form-check">' + '<input class="form-check-input" type="radio" id="composite_index" name="index_choice">' + '<label class="form-check-label" for="composite_index">' + window.Messages.strCreateCompositeIndex + '</label></div>');
+  const $dialogContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<fieldset id="advance_index_creator"></fieldset>');
   $dialogContent.append('<legend>' + indexChoice.toUpperCase() + '</legend>');
   // For UNIQUE/INDEX type, show choice for single-column and composite index.
   $dialogContent.append($singleColumnRadio);
@@ -6055,7 +6067,7 @@ function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
   // 'OK' operation.
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModalGoButton').on('click', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#single_column').is(':checked')) {
-      var index = {
+      const index = {
         'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
         'Index_choice': indexChoice.toUpperCase()
       };
@@ -6066,10 +6078,10 @@ function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title=""' + ' alt="" class="icon ic_s_error"> ' + window.Messages.strFormEmpty + ' </div>', false);
         return false;
       }
-      var arrayIndex = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="composite_with"]:checked').val());
-      var sourceLength = sourceArray[arrayIndex].columns.length;
-      var targetColumns = [];
-      for (var i = 0; i < sourceLength; i++) {
+      const arrayIndex = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="composite_with"]:checked').val());
+      const sourceLength = sourceArray[arrayIndex].columns.length;
+      const targetColumns = [];
+      for (let i = 0; i < sourceLength; i++) {
         targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
       }
       targetColumns.push(colIndex);
@@ -6079,11 +6091,11 @@ function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModalCancelButton').on('click', function () {
     // Handle state on 'Cancel'.
-    var $selectList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]');
+    const $selectList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + colIndex + ']"]');
     if (!$selectList.attr('data-index').length) {
       $selectList.find('option[value*="none"]').attr('selected', 'selected');
     } else {
-      var previousIndex = $selectList.attr('data-index').split(',');
+      const previousIndex = $selectList.attr('data-index').split(',');
       $selectList.find('option[value*="' + previousIndex[0].toLowerCase() + '"]').attr('selected', 'selected');
     }
     removeIndexOnChangeEvent();
@@ -6139,19 +6151,19 @@ function on() {
   return function () {
     Indexes.resetColumnLists();
     // for table creation form
-    var $engineSelector = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form select[name=tbl_storage_engine]');
+    const $engineSelector = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.create_table_form select[name=tbl_storage_engine]');
     if ($engineSelector.length) {
       (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.hideShowConnection)($engineSelector);
     }
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
     if ($form.length > 0) {
       (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.showIndexEditDialog)($form);
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#save_index_frm', function (event) {
       event.preventDefault();
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
-      var argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      var submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
+      const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
+      const submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       _ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -6170,26 +6182,28 @@ function on() {
      */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.drop_primary_key_index_anchor.ajax', function (event) {
       event.preventDefault();
-      var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       /**
        * @var $currRow Object containing reference to the current field's row
        */
-      var $currRow = $anchor.parents('tr');
+      const $currRow = $anchor.parents('tr');
       /** @var {number} rows Number of columns in the key */
-      var rows = Number($anchor.parents('td').attr('rowspan')) || 1;
+      const rows = Number($anchor.parents('td').attr('rowspan')) || 1;
       /** @var {number} $rowsToHide Rows that should be hidden */
-      var $rowsToHide = $currRow;
-      for (var i = 1, $lastRow = $currRow.next(); i < rows; i++, $lastRow = $lastRow.next()) {
+      let $rowsToHide = $currRow;
+      let i = 1;
+      let $lastRow = $currRow.next();
+      for (; i < rows; i++, $lastRow = $lastRow.next()) {
         $rowsToHide = $rowsToHide.add($lastRow);
       }
-      var question = $currRow.children('td').children('.drop_primary_key_index_msg').val();
+      const question = $currRow.children('td').children('.drop_primary_key_index_msg').val();
       (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.confirmPreviewSql)(question, $anchor.attr('href'), function (url) {
-        var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingPrimaryKeyIndex, false);
-        var params = (0,_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $anchor.getPostData());
+        const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingPrimaryKeyIndex, false);
+        const params = (0,_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $anchor.getPostData());
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
           if (typeof data !== 'undefined' && data.success === true) {
             (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
-            var $tableRef = $rowsToHide.closest('table');
+            const $tableRef = $rowsToHide.closest('table');
             if ($rowsToHide.length === $tableRef.find('tbody > tr').length) {
               // We are about to remove all rows from the table
               $tableRef.hide('medium', function () {
@@ -6223,11 +6237,11 @@ function on() {
      **/
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#table_index tbody tr td.edit_index.ajax, #index_div .add_index.ajax', function (event) {
       event.preventDefault();
-      var url;
-      var title;
+      let url;
+      let title;
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').length === 0) {
         // Add index
-        var valid = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkFormElementInRange)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form')[0], 'added_fields', 'Column count has to be larger than zero.');
+        const valid = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkFormElementInRange)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form')[0], 'added_fields', 'Column count has to be larger than zero.');
         if (!valid) {
           return;
         }
@@ -6250,8 +6264,8 @@ function on() {
      **/
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#table_index tbody tr td.rename_index.ajax', function (event) {
       event.preventDefault();
-      var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').getPostData();
-      var title = window.Messages.strRenameIndex;
+      let url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').getPostData();
+      const title = window.Messages.strRenameIndex;
       url += _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
       (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexRenameDialog)(url, title, function (data) {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
@@ -6264,19 +6278,19 @@ function on() {
      * and column addition.
      */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('change', 'select[name*="field_key"]', function (e, showDialog) {
-      var showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true;
+      const showDialogLocal = typeof showDialog !== 'undefined' ? showDialog : true;
       // Index of column on Table edit and create page.
-      var colIndexRegEx = /\d+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name'));
+      const colIndexRegEx = /\d+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name'));
       const colIndex = colIndexRegEx[0];
       // Choice of selected index.
-      var indexChoiceRegEx = /[a-z]+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
+      const indexChoiceRegEx = /[a-z]+/.exec(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
       const indexChoice = indexChoiceRegEx[0];
       // Array containing corresponding indexes.
-      var sourceArray = null;
+      let sourceArray = null;
       if (indexChoice === 'none') {
         Indexes.removeColumnFromIndex(colIndex);
-        var id = 'index_name_' + colIndex + '_8';
-        var $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + id);
+        const id = 'index_name_' + colIndex + '_8';
+        let $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + id);
         if ($name.length === 0) {
           $name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<a id="' + id + '" href="#" class="ajax show_index_dialog"></a>');
           $name.insertAfter(jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="field_key[' + '0' + ']"]'));
@@ -6290,17 +6304,17 @@ function on() {
         return;
       }
       if (sourceArray.length === 0) {
-        var index = {
+        const index = {
           'Key_name': indexChoice === 'primary' ? 'PRIMARY' : '',
           'Index_choice': indexChoice.toUpperCase()
         };
         Indexes.showAddIndexDialog(sourceArray, 0, [colIndex], colIndex, index, showDialogLocal);
       } else {
         if (indexChoice === 'primary') {
-          var arrayIndex = 0;
-          var sourceLength = sourceArray[arrayIndex].columns.length;
-          var targetColumns = [];
-          for (var i = 0; i < sourceLength; i++) {
+          const arrayIndex = 0;
+          const sourceLength = sourceArray[arrayIndex].columns.length;
+          const targetColumns = [];
+          for (let i = 0; i < sourceLength; i++) {
             targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
           }
           targetColumns.push(colIndex);
@@ -6314,17 +6328,17 @@ function on() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.show_index_dialog', function (e) {
       e.preventDefault();
       // Get index details.
-      var previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev('select').attr('data-index').split(',');
-      var indexChoice = previousIndex[0];
-      var arrayIndex = previousIndex[1];
-      var sourceArray = Indexes.getIndexArray(indexChoice);
+      const previousIndex = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev('select').attr('data-index').split(',');
+      const indexChoice = previousIndex[0];
+      const arrayIndex = previousIndex[1];
+      const sourceArray = Indexes.getIndexArray(indexChoice);
       if (sourceArray === null) {
         return;
       }
       if (arrayIndex in sourceArray) {
-        var sourceLength = sourceArray[arrayIndex].columns.length;
-        var targetColumns = [];
-        for (var i = 0; i < sourceLength; i++) {
+        const sourceLength = sourceArray[arrayIndex].columns.length;
+        const targetColumns = [];
+        for (let i = 0; i < sourceLength; i++) {
           targetColumns.push(sourceArray[arrayIndex].columns[i].col_index);
         }
         Indexes.showAddIndexDialog(sourceArray, arrayIndex, targetColumns, -1, sourceArray[arrayIndex]);
@@ -6378,8 +6392,8 @@ function checkIndexName(formId) {
     return false;
   }
   // Gets the elements pointers
-  var $theIdxName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_index_name');
-  var $theIdxChoice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_choice');
+  const $theIdxName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_index_name');
+  const $theIdxChoice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_choice');
   // Index is a primary key
   if ($theIdxChoice.find('option:selected').val() === 'PRIMARY') {
     $theIdxName.val('PRIMARY');
@@ -6413,27 +6427,27 @@ function checkIndexType() {
   /**
    * @var {JQuery<HTMLElement}, Dropdown to select the index choice.
    */
-  var $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_choice');
+  const $selectIndexChoice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_choice');
   /**
    * @var {JQuery<HTMLElement}, Dropdown to select the index type.
    */
-  var $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_type');
+  const $selectIndexType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_index_type');
   /**
    * @var {JQuery<HTMLElement}, Table header for the size column.
    */
-  var $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns').find('thead tr').children('th').eq(1);
+  const $sizeHeader = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns').find('thead tr').children('th').eq(1);
   /**
    * @var {JQuery<HTMLElement}, Inputs to specify the columns for the index.
    */
-  var $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[columns][names][]"]');
+  const $columnInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="index[columns][names][]"]');
   /**
    * @var {JQuery<HTMLElement}, Inputs to specify sizes for columns of the index.
    */
-  var $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[columns][sub_parts][]"]');
+  const $sizeInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="index[columns][sub_parts][]"]');
   /**
    * @var {JQuery<HTMLElement}, Footer containing the controllers to add more columns
    */
-  var $addMore = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm').find('.add_more');
+  const $addMore = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm').find('.add_more');
   if ($selectIndexChoice.val() === 'SPATIAL') {
     // Disable and hide the size column
     $sizeHeader.hide();
@@ -6441,9 +6455,9 @@ function checkIndexType() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('disabled', true).parent('td').hide();
     });
     // Disable and hide the columns of the index other than the first one
-    var initial = true;
+    let initial = true;
     $columnInputs.each(function () {
-      var $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $columnInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       if (!initial) {
         $columnInput.prop('disabled', true).parent('td').hide();
       } else {
@@ -6487,13 +6501,13 @@ __webpack_require__.r(__webpack_exports__);
  * @param {JQuery} $base base element which contains the JSON code blocks
  */
 function highlightJson($base) {
-  var $elm = $base.find('code.json');
+  const $elm = $base.find('code.json');
   $elm.each(function () {
-    var $json = $(this);
-    var $pre = $json.find('pre');
+    const $json = $(this);
+    const $pre = $json.find('pre');
     /* We only care about visible elements to avoid double processing */
     if ($pre.is(':visible')) {
-      var $highlight = $('<div class="json-highlight cm-s-default"></div>');
+      const $highlight = $('<div class="json-highlight cm-s-default"></div>');
       $json.append($highlight);
       // @ts-ignore
       if (typeof window.CodeMirror !== 'undefined' && typeof window.CodeMirror.runMode === 'function') {
@@ -6535,7 +6549,7 @@ __webpack_require__.r(__webpack_exports__);
 function treeStateUpdate() {
   // update if session storage is supported
   if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('sessionStorage')) {
-    var storage = window.sessionStorage;
+    const storage = window.sessionStorage;
     // try catch necessary here to detect whether
     // content to be stored exceeds storage capacity
     try {
@@ -6559,10 +6573,10 @@ function treeStateUpdate() {
  */
 function filterStateUpdate(filterName, filterValue) {
   if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('sessionStorage')) {
-    var storage = window.sessionStorage;
+    const storage = window.sessionStorage;
     try {
-      var currentFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default().extend({}, JSON.parse(storage.getItem('navTreeSearchFilters')));
-      var filter = {};
+      let currentFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default().extend({}, JSON.parse(storage.getItem('navTreeSearchFilters')));
+      const filter = {};
       filter[filterName] = filterValue;
       currentFilter = jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(currentFilter, filter);
       storage.setItem('navTreeSearchFilters', JSON.stringify(currentFilter));
@@ -6576,25 +6590,25 @@ function filterStateUpdate(filterName, filterValue) {
  */
 function filterStateRestore() {
   if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('sessionStorage') && typeof window.sessionStorage.navTreeSearchFilters !== 'undefined') {
-    var searchClauses = JSON.parse(window.sessionStorage.navTreeSearchFilters);
+    const searchClauses = JSON.parse(window.sessionStorage.navTreeSearchFilters);
     if (Object.keys(searchClauses).length < 1) {
       return;
     }
     // restore database filter if present and not empty
     if (searchClauses.hasOwnProperty('dbFilter') && searchClauses.dbFilter.length) {
-      var $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree');
+      const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree');
       if (!$obj.data('fastFilter')) {
         $obj.data('fastFilter', new Navigation.FastFilter.Filter($obj, ''));
       }
       $obj.find('li.fast_filter.db_fast_filter input.searchClause').val(searchClauses.dbFilter).trigger('keyup');
     }
     // find all table filters present in the tree
-    var $tableFilters = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree li.database').children('div.list_container').find('li.fast_filter input.searchClause');
+    const $tableFilters = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree li.database').children('div.list_container').find('li.fast_filter input.searchClause');
     // restore table filters
     $tableFilters.each(function () {
-      $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
+      const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
       // aPath associated with this filter
-      var filterName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('input[name=aPath]').val();
+      const filterName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('input[name=aPath]').val();
       // if this table's filter has a state stored in storage
       if (searchClauses.hasOwnProperty(filterName) && searchClauses[filterName].length) {
         // clear state if item is not visible,
@@ -6620,15 +6634,15 @@ function filterStateRestore() {
  * @param callback    callback function
  */
 function loadChildNodes(isNode, $expandElem, callback) {
-  var $destination = null;
-  var params = null;
+  let $destination = null;
+  let params = null;
   if (isNode) {
     if (!$expandElem.hasClass('expander')) {
       return;
     }
     $destination = $expandElem.closest('li');
-    var pos2Name = $expandElem.find('span.pos2_nav');
-    var pathsNav = $expandElem.find('span.paths_nav');
+    const pos2Name = $expandElem.find('span.pos2_nav');
+    const pathsNav = $expandElem.find('span.paths_nav');
     params = {
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
       'aPath': pathsNav.attr('data-apath'),
@@ -6674,7 +6688,7 @@ function loadChildNodes(isNode, $expandElem, callback) {
         }).slideDown('slow');
       }
       if (data.errors) {
-        var $errors = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.errors);
+        const $errors = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.errors);
         if ($errors.children().length > 0) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_errors').append(data.errors);
         }
@@ -6690,9 +6704,9 @@ function loadChildNodes(isNode, $expandElem, callback) {
       }
       window.location.reload();
     } else {
-      var $throbber = $expandElem.find('img.throbber');
+      const $throbber = $expandElem.find('img.throbber');
       $throbber.hide();
-      var $icon = $expandElem.find('img.ic_b_plus');
+      const $icon = $expandElem.find('img.ic_b_plus');
       $icon.show();
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
     }
@@ -6704,8 +6718,8 @@ function loadChildNodes(isNode, $expandElem, callback) {
  * @param $expandElem expander
  */
 function collapseTreeNode($expandElem) {
-  var $children = $expandElem.closest('li').children('div.list_container');
-  var $icon = $expandElem.find('img');
+  const $children = $expandElem.closest('li').children('div.list_container');
+  const $icon = $expandElem.find('img');
   if ($expandElem.hasClass('loaded')) {
     if ($icon.is('.ic_b_minus')) {
       $icon.removeClass('ic_b_minus').addClass('ic_b_plus');
@@ -6723,25 +6737,25 @@ function collapseTreeNode($expandElem) {
  * @return {object}
  */
 function traverseForPaths() {
-  var params = {
+  const params = {
     pos: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('div.dbselector select').val()
   };
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').length) {
     return params;
   }
-  var count = 0;
+  let count = 0;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('a.expander:visible').each(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('img').is('.ic_b_minus') && jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('li').find('div.list_container .ic_b_minus').length === 0) {
-      var pathsNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.paths_nav');
+      const pathsNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.paths_nav');
       params['n' + count + '_aPath'] = pathsNav.attr('data-apath');
       params['n' + count + '_vPath'] = pathsNav.attr('data-vpath');
-      var pos2Nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.pos2_nav');
+      let pos2Nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.pos2_nav');
       if (pos2Nav.length === 0) {
         pos2Nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().find('span.pos2_nav').last();
       }
       params['n' + count + '_pos2_name'] = pos2Nav.attr('data-name');
       params['n' + count + '_pos2_value'] = pos2Nav.attr('data-value');
-      var pos3Nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.pos3_nav');
+      const pos3Nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('span.pos3_nav');
       params['n' + count + '_pos3_name'] = pos3Nav.attr('data-name');
       params['n' + count + '_pos3_value'] = pos3Nav.attr('data-value');
       count++;
@@ -6757,8 +6771,8 @@ function traverseForPaths() {
  */
 function expandTreeNode($expandElem) {
   let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-  var $children = $expandElem.closest('li').children('div.list_container');
-  var $icon = $expandElem.find('img');
+  let $children = $expandElem.closest('li').children('div.list_container');
+  const $icon = $expandElem.find('img');
   if ($expandElem.hasClass('loaded')) {
     if ($icon.is('.ic_b_plus')) {
       $icon.removeClass('ic_b_plus').addClass('ic_b_minus');
@@ -6769,7 +6783,7 @@ function expandTreeNode($expandElem) {
     }
     $children.promise().done(Navigation.treeStateUpdate);
   } else {
-    var $throbber = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').find('.throbber').first().clone().css({
+    const $throbber = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').find('.throbber').first().clone().css({
       visibility: 'visible',
       display: 'block'
     }).on('click', false);
@@ -6777,7 +6791,7 @@ function expandTreeNode($expandElem) {
     $throbber.insertBefore($icon);
     Navigation.loadChildNodes(true, $expandElem, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
-        var $destination = $expandElem.closest('li');
+        const $destination = $expandElem.closest('li');
         $icon.removeClass('ic_b_plus').addClass('ic_b_minus');
         $children = $destination.children('div.list_container');
         $children.slideDown('fast');
@@ -6807,10 +6821,10 @@ function expandTreeNode($expandElem) {
  */
 function scrollToView($element, $forceToTop) {
   Navigation.filterStateRestore();
-  var $container = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content');
-  var elemTop = $element.offset().top - $container.offset().top;
-  var textHeight = 20;
-  var scrollPadding = 20; // extra padding from top of bottom when scrolling to view
+  const $container = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content');
+  const elemTop = $element.offset().top - $container.offset().top;
+  const textHeight = 20;
+  const scrollPadding = 20; // extra padding from top of bottom when scrolling to view
   if (elemTop < 0 || $forceToTop) {
     $container.stop().animate({
       scrollTop: elemTop + $container.scrollTop() - scrollPadding
@@ -6825,11 +6839,11 @@ function scrollToView($element, $forceToTop) {
  * Expand the navigation and highlight the current database or table/view
  */
 function showCurrent() {
-  var db = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
-  var table = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
-  var autoexpand = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('autoexpand');
+  const db = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
+  const table = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
+  const autoexpand = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('autoexpand');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.selected').removeClass('selected');
-  var $dbItem;
+  let $dbItem;
   if (db) {
     $dbItem = findLoadedItem(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('> div'), db, 'database', !table);
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').length && jquery__WEBPACK_IMPORTED_MODULE_0___default()('option:selected', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select')).length) {
@@ -6840,7 +6854,7 @@ function showCurrent() {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content').find('span.loaded_db').first().text() !== jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').val()) {
         Navigation.loadChildNodes(false, jquery__WEBPACK_IMPORTED_MODULE_0___default()('option:selected', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select')), function () {
           handleTableOrDb(table, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content'));
-          var $children = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content').children('div.list_container');
+          const $children = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content').children('div.list_container');
           $children.promise().done(Navigation.treeStateUpdate);
         });
       } else {
@@ -6854,9 +6868,9 @@ function showCurrent() {
   } else if (autoexpand && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content > ul > li.database').length === 1) {
     // automatically expand the list if there is only single database
     // find the name of the database
-    var dbItemName = '';
+    let dbItemName = '';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content > ul > li.database').children('a').each(function () {
-      var name = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text();
+      const name = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text();
       if (!dbItemName && name.trim()) {
         // if the name is not empty, it is the desired element
         dbItemName = name;
@@ -6867,7 +6881,7 @@ function showCurrent() {
   }
   Navigation.showFullName(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree'));
   function fullExpand(table, $dbItem) {
-    var $expander = $dbItem.children('div').first().children('a.expander');
+    const $expander = $dbItem.children('div').first().children('a.expander');
     // if not loaded or loaded but collapsed
     if (!$expander.hasClass('loaded') || $expander.find('img').is('.ic_b_plus')) {
       Navigation.expandTreeNode($expander, function () {
@@ -6881,10 +6895,10 @@ function showCurrent() {
     if (table) {
       loadAndHighlightTableOrView($dbItem, table);
     } else {
-      var $container = $dbItem.children('div.list_container');
-      var $tableContainer = $container.children('ul').children('li.tableContainer');
+      const $container = $dbItem.children('div.list_container');
+      const $tableContainer = $container.children('ul').children('li.tableContainer');
       if ($tableContainer.length > 0) {
-        var $expander = $tableContainer.children('div').first().children('a.expander');
+        const $expander = $tableContainer.children('div').first().children('a.expander');
         $tableContainer.addClass('selected');
         Navigation.expandTreeNode($expander, function () {
           Navigation.scrollToView($dbItem, true);
@@ -6895,13 +6909,13 @@ function showCurrent() {
     }
   }
   function findLoadedItem($container, name, clazz, doSelect) {
-    var ret = false;
+    let ret = false;
     $container.children('ul').children('li').each(function () {
-      var $li = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $li = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       // this is a navigation group, recurse
       if ($li.is('.navGroup')) {
-        var $container = $li.children('div.list_container');
-        var $childRet = findLoadedItem($container, name, clazz, doSelect);
+        const $container = $li.children('div.list_container');
+        const $childRet = findLoadedItem($container, name, clazz, doSelect);
         if ($childRet) {
           ret = $childRet;
           return false;
@@ -6915,7 +6929,7 @@ function showCurrent() {
           }
           // traverse up and expand and parent navigation groups
           $li.parents('.navGroup').each(function () {
-            var $cont = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('div.list_container');
+            const $cont = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('div.list_container');
             if (!$cont.is(':visible')) {
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('div').first().children('a.expander').trigger('click');
             }
@@ -6928,22 +6942,22 @@ function showCurrent() {
     return ret;
   }
   function loadAndHighlightTableOrView($dbItem, itemName) {
-    var $container = $dbItem.children('div.list_container');
-    var $expander;
-    var $whichItem = isItemInContainer($container, itemName, 'li.nav_node_table, li.view');
+    const $container = $dbItem.children('div.list_container');
+    let $expander;
+    let $whichItem = isItemInContainer($container, itemName, 'li.nav_node_table, li.view');
     // If item already there in some container
     if ($whichItem) {
       // get the relevant container while may also be a subcontainer
-      var $relatedContainer = $whichItem.closest('li.subContainer').length ? $whichItem.closest('li.subContainer') : $dbItem;
+      const $relatedContainer = $whichItem.closest('li.subContainer').length ? $whichItem.closest('li.subContainer') : $dbItem;
       $whichItem = findLoadedItem($relatedContainer.children('div.list_container'), itemName, null, true);
       // Show directly
       showTableOrView($whichItem, $relatedContainer.children('div').first().children('a.expander'));
       // else if item not there, try loading once
     } else {
-      var $subContainers = $dbItem.find('.subContainer');
+      const $subContainers = $dbItem.find('.subContainer');
       // If there are subContainers i.e. tableContainer or viewContainer
       if ($subContainers.length > 0) {
-        var $containers = [];
+        const $containers = [];
         $subContainers.each(function (index) {
           $containers[index] = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
           $expander = $containers[index].children('div').first().children('a.expander');
@@ -6962,7 +6976,7 @@ function showCurrent() {
   }
   function loadAndShowTableOrView($expander, $relatedContainer, itemName) {
     Navigation.loadChildNodes(true, $expander, function () {
-      var $whichItem = findLoadedItem($relatedContainer.children('div.list_container'), itemName, null, true);
+      const $whichItem = findLoadedItem($relatedContainer.children('div.list_container'), itemName, null, true);
       if ($whichItem) {
         showTableOrView($whichItem, $expander);
       }
@@ -6976,8 +6990,8 @@ function showCurrent() {
     });
   }
   function isItemInContainer($container, name, clazz) {
-    var $whichItem = null;
-    var $items = $container.find(clazz);
+    let $whichItem = null;
+    const $items = $container.find(clazz);
     $items.each(function () {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('a').text() === name) {
         $whichItem = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
@@ -7003,7 +7017,7 @@ function disableSettings() {
 function ensureSettings(selflink) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings_icon').removeClass('hide');
   if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_settings').length) {
-    var params = {
+    const params = {
       getNaviSettings: true,
       server: _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server')
     };
@@ -7030,12 +7044,12 @@ function ensureSettings(selflink) {
 function reload() {
   let callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   let paths = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var params = {
+  const params = {
     'reload': true,
     'no_debug': true,
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server')
   };
-  var pathsLocal = paths || Navigation.traverseForPaths();
+  const pathsLocal = paths || Navigation.traverseForPaths();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(params, pathsLocal);
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').length) {
     params.db = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
@@ -7066,7 +7080,7 @@ function reload() {
   }
 }
 function selectCurrentDatabase() {
-  var $naviDbSelect = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select');
+  const $naviDbSelect = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select');
   if (!$naviDbSelect.length) {
     return false;
   }
@@ -7086,24 +7100,24 @@ function selectCurrentDatabase() {
  * initiated the action of changing the page
  */
 function treePagination($this) {
-  var $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
-  var isDbSelector = $this.closest('div.pageselector').is('.dbselector');
-  var url = 'index.php?route=/navigation';
-  var params = 'ajax_request=true';
+  const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+  const isDbSelector = $this.closest('div.pageselector').is('.dbselector');
+  const url = 'index.php?route=/navigation';
+  let params = 'ajax_request=true';
   if ($this[0].tagName === 'A') {
     params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + $this.getPostData();
   } else {
     // tagName === 'SELECT'
     params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + $this.closest('form').serialize();
   }
-  var searchClause = Navigation.FastFilter.getSearchClause();
+  const searchClause = Navigation.FastFilter.getSearchClause();
   if (searchClause) {
     params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent(searchClause);
   }
   if (isDbSelector) {
     params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + 'full=true';
   } else {
-    var searchClause2 = Navigation.FastFilter.getSearchClause2($this);
+    const searchClause2 = Navigation.FastFilter.getSearchClause2($this);
     if (searchClause2) {
       params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + 'searchClause2=' + encodeURIComponent(searchClause2);
     }
@@ -7111,7 +7125,7 @@ function treePagination($this) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
     if (typeof data !== 'undefined' && data.success) {
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
-      var val;
+      let val;
       if (isDbSelector) {
         val = Navigation.FastFilter.getSearchClause();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').html(data.message).children('div').show();
@@ -7119,7 +7133,7 @@ function treePagination($this) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter input.searchClause').val(val);
         }
       } else {
-        var $parent = $this.closest('div.list_container').parent();
+        const $parent = $this.closest('div.list_container').parent();
         val = Navigation.FastFilter.getSearchClause2($this);
         $this.closest('div.list_container').html(jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message).children().show());
         if (val) {
@@ -7157,14 +7171,14 @@ const ResizeHandler = function () {
    * @param {number} position Navigation width in pixels
    */
   this.setWidth = function (position) {
-    var pos = position;
+    let pos = position;
     if (typeof pos !== 'number') {
       pos = 240;
     }
-    var $resizer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer');
-    var resizerWidth = $resizer.width();
-    var $collapser = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_collapser');
-    var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+    const $resizer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer');
+    const resizerWidth = $resizer.width();
+    const $collapser = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_collapser');
+    const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width(pos);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('margin-' + this.left, pos + 'px');
     // Issue #15127 : Adding fixed positioning to menubar
@@ -7175,9 +7189,9 @@ const ResizeHandler = function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').outerHeight(true));
     }, 2);
     if (window.MutationObserver) {
-      var target = document.getElementById('floating_menubar');
+      const target = document.getElementById('floating_menubar');
       if (target) {
-        var observer = new MutationObserver(function () {
+        const observer = new MutationObserver(function () {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').outerHeight(true));
         });
         observer.observe(target, {
@@ -7217,9 +7231,9 @@ const ResizeHandler = function () {
    * @return {number} Navigation width in pixels
    */
   this.getPos = function (event) {
-    var pos = event.pageX;
-    var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
-    var windowScroll = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollLeft();
+    let pos = event.pageX;
+    const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+    const windowScroll = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).scrollLeft();
     pos = pos - windowScroll;
     if (this.left !== 'left') {
       pos = windowWidth - event.pageX;
@@ -7288,7 +7302,7 @@ const ResizeHandler = function () {
   this.mousemove = function (event) {
     event.preventDefault();
     if (event.data && event.data.resize_handler) {
-      var pos = event.data.resize_handler.getPos(event);
+      const pos = event.data.resize_handler.getPos(event);
       event.data.resize_handler.setWidth(pos);
     }
   };
@@ -7299,8 +7313,8 @@ const ResizeHandler = function () {
    */
   this.collapse = function (event) {
     event.preventDefault();
-    var panelWidth = event.data.resize_handler.panelWidth;
-    var width = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width();
+    let panelWidth = event.data.resize_handler.panelWidth;
+    const width = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width();
     if (width === 0 && panelWidth === 0) {
       panelWidth = 240;
     }
@@ -7312,11 +7326,11 @@ const ResizeHandler = function () {
    * Event handler for resizing the navigation tree height on window resize
    */
   this.treeResize = function () {
-    var $nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation');
-    var $navTree = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree');
-    var $navHeader = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_header');
-    var $navTreeContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content');
-    var height = $nav.height() - $navHeader.height();
+    const $nav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation');
+    const $navTree = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree');
+    const $navHeader = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_header');
+    const $navTreeContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content');
+    let height = $nav.height() - $navHeader.height();
     height = height > 50 ? height : 800; // keep min. height
     $navTree.height(height);
     if ($navTreeContent.length > 0) {
@@ -7398,7 +7412,7 @@ const FastFilter = {
      * @var {number} timeout Used to delay the request for asynchronous search
      */
     this.timeout = null;
-    var $filterInput = $this.find('li.fast_filter input.searchClause');
+    const $filterInput = $this.find('li.fast_filter input.searchClause');
     if ($filterInput.length !== 0 && $filterInput.val() !== '' && $filterInput.val() !== $filterInput[0].defaultValue) {
       this.request();
     }
@@ -7409,8 +7423,8 @@ const FastFilter = {
    * @return {string}
    */
   getSearchClause: function () {
-    var retval = '';
-    var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
+    let retval = '';
+    const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
     if ($input.length && $input.val() !== $input[0].defaultValue) {
       retval = $input.val();
     }
@@ -7425,12 +7439,12 @@ const FastFilter = {
    * @return {string}
    */
   getSearchClause2: function ($this) {
-    var $filterContainer = $this.closest('div.list_container');
-    var $filterInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()([]);
+    const $filterContainer = $this.closest('div.list_container');
+    let $filterInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()([]);
     if ($filterContainer.find('li.fast_filter:not(.db_fast_filter) input.searchClause').length !== 0) {
       $filterInput = $filterContainer.find('li.fast_filter:not(.db_fast_filter) input.searchClause');
     }
-    var searchClause2 = '';
+    let searchClause2 = '';
     if ($filterInput.length !== 0 && $filterInput.first().val() !== $filterInput[0].defaultValue) {
       searchClause2 = $filterInput.val();
     }
@@ -7442,7 +7456,7 @@ const FastFilter = {
    */
   events: {
     focus: function () {
-      var $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
+      const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
       if (!$obj.data('fastFilter')) {
         $obj.data('fastFilter', new Navigation.FastFilter.Filter($obj, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()));
       }
@@ -7456,14 +7470,14 @@ const FastFilter = {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val(this.defaultValue);
       }
-      var $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
+      const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === this.defaultValue && $obj.data('fastFilter')) {
         $obj.data('fastFilter').restore();
       }
     },
     keyup: function (event) {
-      var $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
-      var str = '';
+      const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container');
+      let str = '';
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() !== this.defaultValue && jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() !== '') {
         $obj.find('div.pageselector').hide();
         str = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
@@ -7472,15 +7486,14 @@ const FastFilter = {
        * FIXME at the server level a value match is done while on
        * the client side it is a regex match. These two should be aligned
        */
-      // regex used for filtering.
-      var regex;
+      let regex;
       try {
         regex = new RegExp(str, 'i');
       } catch (err) {
         return;
       }
       // this is the div that houses the items to be filtered by this filter.
-      var outerContainer;
+      let outerContainer;
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('li.fast_filter').is('.db_fast_filter')) {
         outerContainer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content');
       } else {
@@ -7489,7 +7502,7 @@ const FastFilter = {
       // filters items that are directly under the div as well as grouped in
       // groups. Does not filter child items (i.e. a database search does
       // not filter tables)
-      var itemFilter = function ($curr) {
+      const itemFilter = function ($curr) {
         $curr.children('ul').children('li.navGroup').each(function () {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('div.list_container').each(function () {
             itemFilter(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)); // recursive
@@ -7505,9 +7518,9 @@ const FastFilter = {
       };
       itemFilter(outerContainer);
       // hides containers that does not have any visible children
-      var containerFilter = function ($curr) {
+      const containerFilter = function ($curr) {
         $curr.children('ul').children('li.navGroup').each(function () {
-          var $group = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+          const $group = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
           $group.children('div.list_container').each(function () {
             containerFilter(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)); // recursive
           });
@@ -7530,7 +7543,7 @@ const FastFilter = {
         $obj.data('fastFilter').restore(true);
       }
       // update filter state
-      var filterName;
+      let filterName;
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('name') === 'searchClause2') {
         filterName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('input[name=aPath]').val();
       } else {
@@ -7541,11 +7554,11 @@ const FastFilter = {
     clear: function (event) {
       event.stopPropagation();
       // Clear the input and apply the fast filter with empty input
-      var filter = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container').data('fastFilter');
+      const filter = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container').data('fastFilter');
       if (filter) {
         filter.restore();
       }
-      var value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev()[0].defaultValue;
+      const value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev()[0].defaultValue;
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev().val(value).trigger('keyup');
     }
   }
@@ -7566,7 +7579,7 @@ FastFilter.Filter.prototype.update = function (searchClause) {
  * Multiple calls to this function will always abort the previous request
  */
 FastFilter.Filter.prototype.request = function () {
-  var self = this;
+  const self = this;
   if (self.$this.find('li.fast_filter').find('img.throbber').length === 0) {
     self.$this.find('li.fast_filter').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="throbber"></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_content').find('img.throbber').clone().css({
       visibility: 'visible',
@@ -7576,9 +7589,9 @@ FastFilter.Filter.prototype.request = function () {
   if (self.xhr) {
     self.xhr.abort();
   }
-  var params = self.$this.find('> ul > li > form.fast_filter').first().serialize();
+  let params = self.$this.find('> ul > li > form.fast_filter').first().serialize();
   if (self.$this.find('> ul > li > form.fast_filter').first().find('input[name=searchClause]').length === 0) {
-    var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
+    const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
     if ($input.length && $input.val() !== $input[0].defaultValue) {
       params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + 'searchClause=' + encodeURIComponent($input.val());
     }
@@ -7590,7 +7603,7 @@ FastFilter.Filter.prototype.request = function () {
     data: params,
     complete: function (jqXHR, status) {
       if (status !== 'abort') {
-        var data = JSON.parse(jqXHR.responseText);
+        const data = JSON.parse(jqXHR.responseText);
         self.$this.find('li.fast_filter').find('div.throbber').remove();
         if (data && data.results) {
           self.swap.apply(self, [data.message]);
@@ -7633,14 +7646,14 @@ FastFilter.Filter.prototype.restore = function (focus) {
 function showFullName($containerELem) {
   $containerELem.find('.hover_show_full').on('mouseenter', function () {
     /** mouseenter */
-    var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var thisOffset = $this.offset();
+    const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const thisOffset = $this.offset();
     if ($this.text() === '') {
       return;
     }
-    var $parent = $this.parent();
+    const $parent = $this.parent();
     if ($parent.offset().left + $parent.outerWidth() < thisOffset.left + $this.outerWidth()) {
-      var $fullNameLayer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#full_name_layer');
+      let $fullNameLayer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#full_name_layer');
       if ($fullNameLayer.length === 0) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append('<div id="full_name_layer" class="hide"></div>');
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#full_name_layer').on('mouseleave', function () {
@@ -8123,12 +8136,12 @@ function documentationAdd($elm, params) {
   if (typeof window.mysqlDocTemplate === 'undefined') {
     return;
   }
-  var url = window.sprintf(decodeURIComponent(window.mysqlDocTemplate), params[0]);
+  let url = window.sprintf(decodeURIComponent(window.mysqlDocTemplate), params[0]);
   if (params.length > 1) {
     // The # needs to be escaped to be part of the destination URL
     url += encodeURIComponent('#') + params[1];
   }
-  var content = $elm.text();
+  const content = $elm.text();
   $elm.text('');
   $elm.append('<a target="mysql_doc" class="cm-sql-doc" href="' + url + '">' + content + '</a>');
 }
@@ -8139,20 +8152,20 @@ function documentationAdd($elm, params) {
  * @param elm
  */
 function documentationKeyword(idx, elm) {
-  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elm);
+  const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elm);
   /* Skip already processed ones */
   if ($elm.find('a').length > 0) {
     return;
   }
-  var keyword = $elm.text().toUpperCase();
-  var $next = $elm.next('.cm-keyword');
+  const keyword = $elm.text().toUpperCase();
+  const $next = $elm.next('.cm-keyword');
   if ($next) {
-    var nextKeyword = $next.text().toUpperCase();
-    var full = keyword + ' ' + nextKeyword;
-    var $next2 = $next.next('.cm-keyword');
+    const nextKeyword = $next.text().toUpperCase();
+    const full = keyword + ' ' + nextKeyword;
+    const $next2 = $next.next('.cm-keyword');
     if ($next2) {
-      var next2Keyword = $next2.text().toUpperCase();
-      var full2 = full + ' ' + next2Keyword;
+      const next2Keyword = $next2.text().toUpperCase();
+      const full2 = full + ' ' + next2Keyword;
       if (full2 in mysqlDocKeyword) {
         documentationAdd($elm, mysqlDocKeyword[full2]);
         documentationAdd($next, mysqlDocKeyword[full2]);
@@ -8177,8 +8190,8 @@ function documentationKeyword(idx, elm) {
  * @param elm
  */
 function documentationBuiltin(idx, elm) {
-  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elm);
-  var builtin = $elm.text().toUpperCase();
+  const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(elm);
+  const builtin = $elm.text().toUpperCase();
   if (builtin in mysqlDocBuiltin) {
     documentationAdd($elm, mysqlDocBuiltin[builtin]);
   }
@@ -8189,14 +8202,14 @@ function documentationBuiltin(idx, elm) {
  * @param $base
  */
 function highlightSql($base) {
-  var $elm = $base.find('code.sql');
+  const $elm = $base.find('code.sql');
   $elm.each(function () {
-    var $sql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $pre = $sql.closest('pre');
+    const $sql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $pre = $sql.closest('pre');
     /* We only care about visible elements to avoid double processing */
     if ($sql.is(':visible')) {
       if (typeof window.CodeMirror !== 'undefined') {
-        var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sql-highlight cm-s-default"></div>');
+        const $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="sql-highlight cm-s-default"></div>');
         $pre.append($highlight);
         // @ts-ignore
         window.CodeMirror.runMode($sql.text(), 'text/x-mysql', $highlight[0]);

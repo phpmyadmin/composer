@@ -21,8 +21,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformatio
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.image-upload').on('change', function () {
     const fileInput = this;
     if (fileInput.files && fileInput.files[0]) {
-      var reader = new FileReader();
-      var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const reader = new FileReader();
+      const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       reader.onload = function (e) {
         $input.prevAll('img').attr('src', e.target.result);
       };

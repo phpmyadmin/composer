@@ -42,11 +42,11 @@ const makeGrid = function (t) {
   let enableReorder = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
   let enableVisib = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : undefined;
   let enableGridEdit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : undefined;
-  var isResizeEnabled = enableResize === undefined ? true : enableResize;
-  var isReorderEnabled = enableReorder === undefined ? true : enableReorder;
-  var isVisibEnabled = enableVisib === undefined ? true : enableVisib;
-  var isGridEditEnabled = enableGridEdit === undefined ? true : enableGridEdit;
-  var g = {
+  const isResizeEnabled = enableResize === undefined ? true : enableResize;
+  const isReorderEnabled = enableReorder === undefined ? true : enableReorder;
+  const isVisibEnabled = enableVisib === undefined ? true : enableVisib;
+  const isGridEditEnabled = enableGridEdit === undefined ? true : enableGridEdit;
+  const g = {
     /** *********
      * Constant
      ***********/
@@ -122,7 +122,7 @@ const makeGrid = function (t) {
      * @param obj dragged div object
      */
     dragStartRsz: function (e, obj) {
-      var n = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).find('div').index(obj); // get the index of separator (i.e., column index)
+      const n = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).find('div').index(obj); // get the index of separator (i.e., column index)
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).addClass('colborder_active');
       g.colRsz = {
         x0: e.pageX,
@@ -145,7 +145,7 @@ const makeGrid = function (t) {
     dragStartReorder: function (e, obj) {
       // prepare the cCpy (column copy) and cPointer (column pointer) from the dragged column
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cCpy).text(jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).text());
-      var objPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).position();
+      const objPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).position();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cCpy).css({
         top: objPos.top + 20,
         left: objPos.left,
@@ -156,7 +156,7 @@ const makeGrid = function (t) {
         top: objPos.top
       });
       // get the column index, zero-based
-      var n = g.getHeaderIdx(obj);
+      const n = g.getHeaderIdx(obj);
       g.colReorder = {
         x0: e.pageX,
         y0: e.pageY,
@@ -177,7 +177,7 @@ const makeGrid = function (t) {
      * @param e event
      */
     dragMove: function (e) {
-      var dx;
+      let dx;
       if (g.colRsz) {
         dx = e.pageX - g.colRsz.x0;
         if (g.colRsz.objWidth + dx > g.minColWidth) {
@@ -188,14 +188,14 @@ const makeGrid = function (t) {
         dx = e.pageX - g.colReorder.x0;
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cCpy).css('left', g.colReorder.objLeft + dx).show();
         // pointer animation
-        var hoveredCol = g.getHoveredCol(e);
+        const hoveredCol = g.getHoveredCol(e);
         if (hoveredCol) {
-          var newn = g.getHeaderIdx(hoveredCol);
+          const newn = g.getHeaderIdx(hoveredCol);
           g.colReorder.newn = newn;
           if (newn !== g.colReorder.n) {
             // show the column pointer in the right place
-            var colPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(hoveredCol).position();
-            var newleft = newn < g.colReorder.n ? colPos.left : colPos.left + jquery__WEBPACK_IMPORTED_MODULE_0___default()(hoveredCol).outerWidth();
+            const colPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(hoveredCol).position();
+            const newleft = newn < g.colReorder.n ? colPos.left : colPos.left + jquery__WEBPACK_IMPORTED_MODULE_0___default()(hoveredCol).outerWidth();
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cPointer).css({
               left: newleft,
               visibility: 'visible'
@@ -214,12 +214,12 @@ const makeGrid = function (t) {
      */
     dragEnd: function (e) {
       if (g.colRsz) {
-        var dx = e.pageX - g.colRsz.x0;
-        var nw = g.colRsz.objWidth + dx;
+        const dx = e.pageX - g.colRsz.x0;
+        let nw = g.colRsz.objWidth + dx;
         if (nw < g.minColWidth) {
           nw = g.minColWidth;
         }
-        var n = g.colRsz.n;
+        const n = g.colRsz.n;
         // do the resizing
         g.resize(n, nw);
         g.reposRsz();
@@ -231,7 +231,7 @@ const makeGrid = function (t) {
         if (g.colReorder.newn !== g.colReorder.n) {
           g.shiftCol(g.colReorder.n, g.colReorder.newn);
           // assign new position
-          var objPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.colReorder.obj).position();
+          const objPos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.colReorder.obj).position();
           g.colReorder.objTop = objPos.top;
           g.colReorder.objLeft = objPos.left;
           g.colReorder.n = g.colReorder.newn;
@@ -267,12 +267,14 @@ const makeGrid = function (t) {
      */
     reposRsz: function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).find('div').hide();
-      var $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable:visible');
-      var $resizeHandles = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).find('div').removeClass('condition');
+      const $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable:visible');
+      const $resizeHandles = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cRsz).find('div').removeClass('condition');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('table.pma_table').find('thead th').first().removeClass('before-condition');
-      for (var n = 0, l = $firstRowCols.length; n < l; n++) {
-        var $col = jquery__WEBPACK_IMPORTED_MODULE_0___default()($firstRowCols[n]);
-        var colWidth;
+      let n = 0;
+      const l = $firstRowCols.length;
+      for (; n < l; n++) {
+        const $col = jquery__WEBPACK_IMPORTED_MODULE_0___default()($firstRowCols[n]);
+        let colWidth;
         if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.userAgent)().toLowerCase().indexOf('safari') !== -1) {
           colWidth = $col.outerWidth();
         } else {
@@ -327,7 +329,7 @@ const makeGrid = function (t) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).find('.lDiv div').eq(newn).after(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).find('.lDiv div').eq(oldn));
       }
       // adjust the colOrder
-      var tmp = g.colOrder[oldn];
+      let tmp = g.colOrder[oldn];
       g.colOrder.splice(oldn, 1);
       g.colOrder.splice(newn, 0, tmp);
       // adjust the colVisib
@@ -344,11 +346,11 @@ const makeGrid = function (t) {
      * @return {object|undefined} the hovered column's th object or undefined if no hovered column found.
      */
     getHoveredCol: function (e) {
-      var hoveredCol;
-      var $headers = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.draggable:visible');
+      let hoveredCol;
+      const $headers = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.draggable:visible');
       $headers.each(function () {
-        var left = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).offset().left;
-        var right = left + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).outerWidth();
+        const left = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).offset().left;
+        const right = left + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).outerWidth();
         if (left <= e.pageX && e.pageX <= right) {
           hoveredCol = this;
         }
@@ -369,9 +371,9 @@ const makeGrid = function (t) {
      */
     restoreColOrder: function () {
       // use insertion sort, since we already have shiftCol function
-      for (var i = 1; i < g.colOrder.length; i++) {
-        var x = g.colOrder[i];
-        var j = i - 1;
+      for (let i = 1; i < g.colOrder.length; i++) {
+        const x = g.colOrder[i];
+        let j = i - 1;
         while (j >= 0 && x < g.colOrder[j]) {
           j--;
         }
@@ -396,7 +398,7 @@ const makeGrid = function (t) {
           // Issue: https://github.com/phpmyadmin/phpmyadmin/issues/15658
           return;
         }
-        var postParams = {
+        const postParams = {
           'ajax_request': true,
           'db': g.db,
           'table': g.table,
@@ -416,7 +418,7 @@ const makeGrid = function (t) {
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql/set-column-preferences', postParams, function (data) {
           if (data.success !== true) {
-            var $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.createElement('div'));
+            const $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.createElement('div'));
             $tempDiv.html(data.error);
             $tempDiv.addClass('alert alert-danger');
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($tempDiv, false);
@@ -430,15 +432,15 @@ const makeGrid = function (t) {
      */
     refreshRestoreButton: function () {
       // check if table state is as initial state
-      var isInitial = true;
-      for (var i = 0; i < g.colOrder.length; i++) {
+      let isInitial = true;
+      for (let i = 0; i < g.colOrder.length; i++) {
         if (g.colOrder[i] !== i) {
           isInitial = false;
           break;
         }
       }
       // check if only one visible column left
-      var isOneColumn = g.visibleHeadersCount === 1;
+      const isOneColumn = g.visibleHeadersCount === 1;
       // enable or disable restore button
       if (isInitial || isOneColumn) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('div.restore_column').hide();
@@ -453,7 +455,7 @@ const makeGrid = function (t) {
      *
      */
     updateHint: function () {
-      var text = '';
+      let text = '';
       if (!g.colRsz && !g.colReorder) {
         // if not resizing or dragging
         if (g.visibleHeadersCount > 1) {
@@ -549,7 +551,7 @@ const makeGrid = function (t) {
     showColList: function (obj) {
       // only show when not resizing or reordering
       if (!g.colRsz && !g.colReorder) {
-        var pos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).position();
+        const pos = jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).position();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).css({
           top: pos.top + jquery__WEBPACK_IMPORTED_MODULE_0___default()(obj).outerHeight(true)
         }).show();
@@ -567,10 +569,10 @@ const makeGrid = function (t) {
      * Reposition the column visibility drop-down arrow.
      */
     reposDrop: function () {
-      var $th = jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th:not(.draggable)');
-      for (var i = 0; i < $th.length; i++) {
-        var $cd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cDrop).find('div').eq(i); // column drop-down arrow
-        var pos = jquery__WEBPACK_IMPORTED_MODULE_0___default()($th[i]).position();
+      const $th = jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('th:not(.draggable)');
+      for (let i = 0; i < $th.length; i++) {
+        const $cd = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cDrop).find('div').eq(i); // column drop-down arrow
+        const pos = jquery__WEBPACK_IMPORTED_MODULE_0___default()($th[i]).position();
         $cd.css({
           left: pos.left + jquery__WEBPACK_IMPORTED_MODULE_0___default()($th[i]).width() - $cd.width(),
           top: pos.top
@@ -581,7 +583,7 @@ const makeGrid = function (t) {
      * Show all hidden columns.
      */
     showAllColumns: function () {
-      for (var i = 0; i < g.colVisib.length; i++) {
+      for (let i = 0; i < g.colVisib.length; i++) {
         if (!g.colVisib[i]) {
           g.toggleCol(i);
         }
@@ -595,13 +597,13 @@ const makeGrid = function (t) {
      */
     showEditCell: function (cell) {
       // destroy the date picker instance left if any, see: #17703
-      var $datePickerInstance = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.hasDatepicker');
+      const $datePickerInstance = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.hasDatepicker');
       if ($datePickerInstance.length > 0) {
         $datePickerInstance.datepicker('destroy');
       }
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(cell).is('.grid_edit') && !g.colRsz && !g.colReorder) {
         if (!g.isCellEditActive) {
-          var $cell = jquery__WEBPACK_IMPORTED_MODULE_0___default()(cell);
+          const $cell = jquery__WEBPACK_IMPORTED_MODULE_0___default()(cell);
           if ('string' === $cell.attr('data-type') || 'blob' === $cell.attr('data-type') || 'json' === $cell.attr('data-type')) {
             g.cEdit = g.cEditTextarea;
           } else {
@@ -618,7 +620,7 @@ const makeGrid = function (t) {
             height: $cell.outerHeight()
           });
           // fill the cell edit with text from <td>
-          var value = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getCellValue)(cell);
+          let value = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getCellValue)(cell);
           if ($cell.attr('data-type') === 'json' && $cell.is('.truncated') === false) {
             value = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.stringifyJSON)(value, null, 4);
           }
@@ -630,8 +632,8 @@ const makeGrid = function (t) {
         }
       }
       function moveCursorToEnd(input) {
-        var originalValue = input.val();
-        var originallength = originalValue.length;
+        const originalValue = input.val();
+        const originallength = originalValue.length;
         input.val('');
         input.trigger('blur').trigger('focus').val(originalValue);
         input[0].setSelectionRange(originallength, originallength);
@@ -671,14 +673,14 @@ const makeGrid = function (t) {
         if (g.currentEditCell) {
           // save value of currently edited cell
           // replace current edited field with the new value
-          var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-          var isNull = $thisField.data('value') === null;
+          const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+          const isNull = $thisField.data('value') === null;
           if (isNull) {
             $thisField.find('span').html('NULL');
             $thisField.addClass('null');
           } else {
             $thisField.removeClass('null');
-            var value = data.isNeedToRecheck ? data.truncatableFieldValue : $thisField.data('value');
+            let value = data.isNeedToRecheck ? data.truncatableFieldValue : $thisField.data('value');
             // Truncates the text.
             $thisField.removeClass('truncated');
             if (_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('pftext') === 'P' && value.length > g.maxTruncatedLen) {
@@ -686,12 +688,12 @@ const makeGrid = function (t) {
               value = value.substring(0, g.maxTruncatedLen) + '...';
             }
             // Add <br> before carriage return.
-            var newHtml = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
+            let newHtml = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
             newHtml = newHtml.replace(/\n/g, '<br>\n');
-            var decimals = parseInt($thisField.attr('data-decimals'));
+            const decimals = parseInt($thisField.attr('data-decimals'));
             // remove decimal places if column type not supported
             if (decimals === 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
-              var index = newHtml.indexOf('.');
+              const index = newHtml.indexOf('.');
               if (index !== -1) {
                 newHtml = newHtml.substring(0, index);
               }
@@ -700,12 +702,12 @@ const makeGrid = function (t) {
             if (decimals > 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
               newHtml = newHtml.substring(0, newHtml.length - (6 - decimals));
             }
-            var selector = 'span';
+            let selector = 'span';
             if ($thisField.hasClass('hex') && $thisField.find('a').length) {
               selector = 'a';
             }
             // Updates the code keeping highlighting (if any).
-            var $target = $thisField.find(selector);
+            const $target = $thisField.find(selector);
             if (!(0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.updateCode)($target, newHtml, value)) {
               $target.html(newHtml);
             }
@@ -716,13 +718,13 @@ const makeGrid = function (t) {
         }
         if (data.transformations !== undefined) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(data.transformations, function (cellIndex, value) {
-            var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').eq(Number(cellIndex));
+            const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').eq(Number(cellIndex));
             $thisField.find('span').html(value);
           });
         }
         if (data.relations !== undefined) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(data.relations, function (cellIndex, value) {
-            var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').eq(Number(cellIndex));
+            const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('.to_be_saved').eq(Number(cellIndex));
             $thisField.find('span').html(value);
           });
         }
@@ -736,7 +738,7 @@ const makeGrid = function (t) {
       g.isCellEditActive = false;
       g.currentEditCell = null;
       // destroy datepicker in edit area, if exist
-      var $dp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.hasDatepicker');
+      const $dp = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.hasDatepicker');
       if ($dp.length > 0) {
         // @ts-ignore
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mousedown', (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker)._checkExternalClick); // eslint-disable-line no-underscore-dangle
@@ -757,40 +759,40 @@ const makeGrid = function (t) {
         /**
          * @var $td current edited cell
          */
-        var $td = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+        const $td = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
         /**
          * @var $editArea the editing area
          */
-        var $editArea = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_area');
+        const $editArea = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_area');
         /**
          * @var whereClause WHERE clause for the edited cell
          */
-        var whereClause = $td.parent('tr').find('.where_clause').val();
+        const whereClause = $td.parent('tr').find('.where_clause').val();
         /**
          * @var fieldName  String containing the name of this field.
          * @see window.Sql.getFieldName()
          */
-        var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(t), $td);
+        const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(t), $td);
         /**
          * @var relationCurrValue String current value of the field (for fields that are foreign keyed).
          */
-        var relationCurrValue = $td.text();
+        const relationCurrValue = $td.text();
         /**
          * @var relationKeyOrDisplayColumn String relational key if in 'Relational display column' mode,
          * relational display column if in 'Relational key' mode (for fields that are foreign keyed).
          */
-        var relationKeyOrDisplayColumn = $td.find('a').attr('title');
+        const relationKeyOrDisplayColumn = $td.find('a').attr('title');
         /**
          * @var currValue String current value of the field (for fields that are of type enum or set).
          */
-        var currValue = $td.find('span').text();
+        const currValue = $td.find('span').text();
         // empty all edit area, then rebuild it based on $td classes
         $editArea.empty();
         // remember this instead of testing more than once
-        var isNull = $td.is('.null');
+        const isNull = $td.is('.null');
         // add goto link, if this cell contains a link
         if ($td.find('a').length > 0) {
-          var gotoLink = document.createElement('div');
+          const gotoLink = document.createElement('div');
           gotoLink.className = 'goto_link';
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(gotoLink).append(g.gotoLinkText + ' ').append($td.find('a').clone());
           $editArea.append(gotoLink);
@@ -799,7 +801,7 @@ const makeGrid = function (t) {
         if ($td.is(':not(.not_null)')) {
           // append a null checkbox
           $editArea.append('<div class="null_div"><label>NULL:<input type="checkbox"></label></div>');
-          var $checkbox = $editArea.find('.null_div input');
+          const $checkbox = $editArea.find('.null_div input');
           // check if current <td> is NULL
           if (isNull) {
             $checkbox.prop('checked', true);
@@ -847,7 +849,7 @@ const makeGrid = function (t) {
               $editArea.find('select').val('');
             } else if ($td.is('.set')) {
               $editArea.find('select').find('option').each(function () {
-                var $option = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+                const $option = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
                 $option.prop('selected', false);
               });
             } else if ($td.is('.relation')) {
@@ -868,7 +870,7 @@ const makeGrid = function (t) {
           'top': '0',
           'position': ''
         });
-        var postParams;
+        let postParams;
         if ($td.is('.relation')) {
           // handle relations
           $editArea.addClass('edit_area_loading');
@@ -891,7 +893,7 @@ const makeGrid = function (t) {
             $editArea.removeClass('edit_area_loading');
             if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.dropdown).is('select')) {
               // save original_data
-              var value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.dropdown).val();
+              const value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.dropdown).val();
               $td.data('original_data', value);
               // update the text input field, in case where the "Relational display column" is checked
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val(value);
@@ -982,7 +984,7 @@ const makeGrid = function (t) {
         } else if ($td.is('.truncated, .transformed')) {
           if ($td.is('.to_be_saved')) {
             // cell has been edited
-            var value = $td.data('value');
+            const value = $td.data('value');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val(value);
             $editArea.append('<textarea></textarea>');
             $editArea.find('textarea').val(value);
@@ -1000,7 +1002,7 @@ const makeGrid = function (t) {
             /**
              * @var sqlQuery   String containing the SQL query used to retrieve value of truncated/transformed data
              */
-            var sqlQuery = 'SELECT `' + fieldName + '` FROM `' + g.table + '` WHERE ' + whereClause;
+            const sqlQuery = 'SELECT `' + fieldName + '` FROM `' + g.table + '` WHERE ' + whereClause;
             // Make the Ajax call and get the data, wrap it and insert it
             g.lastXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
               'server': g.server,
@@ -1025,12 +1027,12 @@ const makeGrid = function (t) {
           g.isEditCellTextEditable = true;
           $editArea.append('<div class="cell_edit_hint">' + g.cellEditHint + '</div>');
         } else if ($td.is('.timefield, .datefield, .datetimefield, .timestampfield')) {
-          var $inputField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box');
+          const $inputField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box');
           // remember current datetime value in $input_field, if it is not null
-          var datetimeValue = !isNull ? $inputField.val() : '';
-          var showMillisec = false;
-          var showMicrosec = false;
-          var timeFormat = 'HH:mm:ss';
+          let datetimeValue = !isNull ? $inputField.val() : '';
+          let showMillisec = false;
+          let showMicrosec = false;
+          let timeFormat = 'HH:mm:ss';
           // check for decimal places of seconds
           if (Number($td.attr('data-decimals')) > 0 && $td.attr('data-type').indexOf('time') !== -1) {
             if (datetimeValue && datetimeValue.indexOf('.') === -1) {
@@ -1080,7 +1082,7 @@ const makeGrid = function (t) {
           // @ts-ignore
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('mousedown', (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker)._checkExternalClick); // eslint-disable-line no-underscore-dangle
           // move ui-datepicker-div inside cEdit div
-          var datepickerDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ui-datepicker-div');
+          const datepickerDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ui-datepicker-div');
           datepickerDiv.css({
             'top': 0,
             'left': 0,
@@ -1119,86 +1121,86 @@ const makeGrid = function (t) {
       /**
        * @var relationFields Array containing the name/value pairs of relational fields
        */
-      var relationFields = {};
+      const relationFields = {};
       /**
        * @var relationalDisplay string 'K' if relational key, 'D' if relational display column
        */
-      var relationalDisplay = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('input[name=relational_display]:checked').val();
+      const relationalDisplay = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('input[name=relational_display]:checked').val();
       /**
        * @var transformFields    Array containing the name/value pairs for transformed fields
        */
-      var transformFields = {};
+      const transformFields = {};
       /**
        * @var transformationFields   Boolean, if there are any transformed fields in the edited cells
        */
-      var transformationFields = false;
+      let transformationFields = false;
       /**
        * @var fullSqlQuery String containing the complete SQL query to update this table
        */
-      var fullSqlQuery = '';
+      const fullSqlQuery = '';
       /**
        * @var relFieldsList  String, url encoded representation of {@link relations_fields}
        */
-      var relFieldsList = '';
+      let relFieldsList = '';
       /**
        * @var transformFieldsList  String, url encoded representation of {@link transformFields}
        */
-      var transformFieldsList = '';
+      let transformFieldsList = '';
       /**
        * @var fullWhereClause Array containing where clause for updated fields
        */
-      var fullWhereClause = [];
+      const fullWhereClause = [];
       /**
        * @var isUnique   Boolean, whether the rows in this table is unique or not
        */
-      var isUnique = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('td.edit_row_anchor').is('.nonunique') ? 0 : 1;
+      const isUnique = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('td.edit_row_anchor').is('.nonunique') ? 0 : 1;
       /**
        * multi edit variables
        */
-      var multiEditFieldsName = [];
-      var multiEditFieldsType = [];
-      var multiEditFields = [];
-      var multiEditFieldsNull = [];
+      const multiEditFieldsName = [];
+      const multiEditFieldsType = [];
+      const multiEditFields = [];
+      const multiEditFieldsNull = [];
       // alert user if edited table is not unique
       if (!isUnique) {
         alert(g.alertNonUnique);
       }
       // loop each edited row
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('td.to_be_saved').parents('tr').each(function () {
-        var $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-        var whereClause = $tr.find('.where_clause').val();
+        const $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        let whereClause = $tr.find('.where_clause').val();
         if (typeof whereClause === 'undefined') {
           whereClause = '';
         }
         fullWhereClause.push(whereClause);
-        var conditionArrayContent = $tr.find('.condition_array').val();
+        let conditionArrayContent = $tr.find('.condition_array').val();
         if (typeof conditionArrayContent === 'undefined') {
           conditionArrayContent = '{}';
         }
-        var conditionArray = JSON.parse(conditionArrayContent);
+        const conditionArray = JSON.parse(conditionArrayContent);
         /**
          * multi edit variables, for current row
          * @TODO array indices are still not correct, they should be md5 of field's name
          */
-        var fieldsName = [];
-        var fieldsType = [];
-        var fields = [];
-        var fieldsNull = [];
+        const fieldsName = [];
+        const fieldsType = [];
+        const fields = [];
+        const fieldsNull = [];
         // loop each edited cell in a row
         $tr.find('.to_be_saved').each(function () {
           /**
            * @var $thisField    Object referring to the td that is being edited
            */
-          var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+          const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
           /**
            * @var fieldName  String containing the name of this field.
            * @see window.Sql.getFieldName()
            */
-          var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+          const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
           /**
            * @var thisFieldParams   Array temporary storage for the name/value of current field
            */
-          var thisFieldParams = {};
+          const thisFieldParams = {};
           if ($thisField.is('.transformed')) {
             transformationFields = true;
           }
@@ -1206,7 +1208,7 @@ const makeGrid = function (t) {
           /**
            * @var isNull String capturing whether 'checkbox_null_<field_name>_<row_index>' is checked.
            */
-          var isNull = thisFieldParams[fieldName] === null;
+          const isNull = thisFieldParams[fieldName] === null;
           fieldsName.push(fieldName);
           if (isNull) {
             fieldsNull.push('on');
@@ -1224,7 +1226,7 @@ const makeGrid = function (t) {
               const JSONString = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.stringifyJSON)($thisField.data('value'));
               fields.push(JSONString);
             }
-            var cellIndex = $thisField.index('.to_be_saved');
+            const cellIndex = $thisField.index('.to_be_saved');
             if ($thisField.is(':not(.relation, .enum, .set, .bit)')) {
               if ($thisField.is('.transformed')) {
                 transformFields[cellIndex] = {};
@@ -1237,8 +1239,8 @@ const makeGrid = function (t) {
           }
           // check if edited field appears in WHERE clause
           if (whereClause.indexOf(window.Sql.urlEncode(fieldName)) > -1) {
-            var fieldStr = '`' + g.table + '`.' + '`' + fieldName + '`';
-            for (var field in conditionArray) {
+            const fieldStr = '`' + g.table + '`.' + '`' + fieldName + '`';
+            for (let field in conditionArray) {
               if (field.indexOf(fieldStr) > -1) {
                 conditionArray[field] = isNull ? 'IS NULL' : '= \'' + thisFieldParams[fieldName].replace(/'/g, '\'\'') + '\'';
                 break;
@@ -1247,8 +1249,8 @@ const makeGrid = function (t) {
           }
         }); // end of loop for every edited cells in a row
         // save new_clause
-        var newClause = '';
-        for (var field in conditionArray) {
+        let newClause = '';
+        for (let field in conditionArray) {
           newClause += field + ' ' + conditionArray[field] + ' AND ';
         }
         newClause = newClause.substring(0, newClause.length - 5); // remove the last AND
@@ -1266,7 +1268,7 @@ const makeGrid = function (t) {
       /**
        * @var postParams Object containing parameters for the POST request
        */
-      var postParams = {
+      const postParams = {
         'ajax_request': true,
         'sql_query': fullSqlQuery,
         'server': g.server,
@@ -1309,11 +1311,11 @@ const makeGrid = function (t) {
             }
             // update where_clause related data in each edited row
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('td.to_be_saved').parents('tr').each(function () {
-              var newClause = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('new_clause');
-              var $whereClause = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause');
-              var oldClause = $whereClause.val();
-              var decodedOldClause = oldClause;
-              var decodedNewClause = newClause;
+              const newClause = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('new_clause');
+              const $whereClause = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause');
+              const oldClause = $whereClause.val();
+              const decodedOldClause = oldClause;
+              const decodedNewClause = newClause;
               $whereClause.val(newClause);
               // update Edit, Copy, and Delete links also
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').each(function () {
@@ -1327,9 +1329,9 @@ const makeGrid = function (t) {
               });
               // update the multi edit checkboxes
               jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[type=checkbox]').each(function () {
-                var $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-                var checkboxName = $checkbox.attr('name');
-                var checkboxValue = $checkbox.val();
+                const $checkbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+                const checkboxName = $checkbox.attr('name');
+                const checkboxValue = $checkbox.val();
                 $checkbox.attr('name', checkboxName.replace(oldClause, newClause));
                 $checkbox.val(checkboxValue.replace(decodedOldClause, decodedNewClause));
               });
@@ -1337,13 +1339,13 @@ const makeGrid = function (t) {
             // update the display of executed SQL query command
             if (typeof data.sql_query !== 'undefined') {
               // extract query box
-              var $resultQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()(jquery__WEBPACK_IMPORTED_MODULE_0___default().parseHTML(data.sql_query));
-              var sqlOuter = $resultQuery.find('.sqlOuter').wrap('<p>').parent().html();
-              var tools = $resultQuery.find('.tools').wrap('<p>').parent().html();
+              const $resultQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()(jquery__WEBPACK_IMPORTED_MODULE_0___default().parseHTML(data.sql_query));
+              const sqlOuter = $resultQuery.find('.sqlOuter').wrap('<p>').parent().html();
+              const tools = $resultQuery.find('.tools').wrap('<p>').parent().html();
               // sqlOuter and tools will not be present if 'Show SQL queries' configuration is off
               if (typeof sqlOuter !== 'undefined' && typeof tools !== 'undefined') {
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.result_query').not(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.result_query').last()).remove();
-                var $existingQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.result_query');
+                const $existingQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.result_query');
                 // If two query box exists update query in second else add a second box
                 if ($existingQuery.find('div.sqlOuter').length > 1) {
                   $existingQuery.children().eq(3).remove();
@@ -1384,22 +1386,22 @@ const makeGrid = function (t) {
       /**
        * @var $thisField    Object referring to the td that is being edited
        */
-      var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-      var $testElement = null; // to test the presence of a element
-      var needToPost = false;
+      const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+      let $testElement = null; // to test the presence of a element
+      let needToPost = false;
       /**
        * @var fieldName  String containing the name of this field.
        * @see window.Sql.getFieldName()
        */
-      var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+      const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
       /**
        * @var thisFieldParams   Array temporary storage for the name/value of current field
        */
-      var thisFieldParams = {};
+      const thisFieldParams = {};
       /**
        * @var isNull String capturing whether 'checkbox_null_<field_name>_<row_index>' is checked.
        */
-      var isNull = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('input:checkbox').is(':checked');
+      const isNull = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('input:checkbox').is(':checked');
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_area').is('.edit_area_loading')) {
         // the edit area is still loading (retrieving cell data), no need to post
         needToPost = false;
@@ -1425,7 +1427,7 @@ const makeGrid = function (t) {
           if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val().match(/^(0x)?[a-f0-9]*$/i) !== null) {
             thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val();
           } else {
-            var hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
+            const hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(hexError, false);
             thisFieldParams[fieldName] = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getCellValue)(g.currentEditCell);
           }
@@ -1460,7 +1462,7 @@ const makeGrid = function (t) {
      */
     saveOrPostEditedCell: function () {
       let options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-      var saved = g.saveEditedCell();
+      const saved = g.saveEditedCell();
       // Check if $cfg['SaveCellsAtOnce'] is false
       if (!g.saveCellsAtOnce) {
         // Check if need_to_post is true
@@ -1514,10 +1516,10 @@ const makeGrid = function (t) {
       g.cRsz = document.createElement('div');
       g.cRsz.className = 'cRsz';
       // get data columns in the first row of the table
-      var $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
+      const $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
       // create column borders
       $firstRowCols.each(function () {
-        var cb = document.createElement('div'); // column border
+        const cb = document.createElement('div'); // column border
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(cb).addClass('colborder').on('mousedown', function (e) {
           g.dragStartRsz(e, this);
         });
@@ -1542,10 +1544,10 @@ const makeGrid = function (t) {
       // assign column reordering hint
       g.reorderHint = window.Messages.strColOrderHint;
       // get data columns in the first row of the table
-      var $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
+      const $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
       // initialize column order
-      var $colOrder = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.col_order'); // check if column order is passed from PHP
-      var i;
+      const $colOrder = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.col_order'); // check if column order is passed from PHP
+      let i;
       if ($colOrder.length > 0) {
         g.colOrder = $colOrder.val().split(',');
         for (i = 0; i < g.colOrder.length; i++) {
@@ -1579,7 +1581,7 @@ const makeGrid = function (t) {
         });
       }).on('dblclick', function (e) {
         e.preventDefault();
-        var res = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.copyToClipboard)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('column'));
+        const res = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.copyToClipboard)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('column'));
         if (res) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strCopyColumnSuccess, false, 'success');
         } else {
@@ -1617,10 +1619,10 @@ const makeGrid = function (t) {
       // assign column visibility related hints
       g.showAllColText = window.Messages.strShowAllCol;
       // get data columns in the first row of the table
-      var $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
-      var i;
+      const $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('tr').first().find('th.draggable');
+      let i;
       // initialize column visibility
-      var $colVisib = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.col_visib'); // check if column visibility is passed from PHP
+      const $colVisib = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('.col_visib'); // check if column visibility is passed from PHP
       if ($colVisib.length > 0) {
         g.colVisib = $colVisib.val().split(',');
         for (i = 0; i < g.colVisib.length; i++) {
@@ -1645,7 +1647,7 @@ const makeGrid = function (t) {
         });
         // create column visibility drop-down arrow(s)
         $colVisibTh.each(function () {
-          var cd = document.createElement('div'); // column drop-down arrow
+          const cd = document.createElement('div'); // column drop-down arrow
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(cd).addClass('coldrop').on('click', function () {
             if (g.cList.style.display === 'none') {
               g.showColList(this);
@@ -1657,22 +1659,22 @@ const makeGrid = function (t) {
         });
         // add column visibility control
         g.cList.innerHTML = '<div class="lDiv"></div>';
-        var $listDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).find('div');
-        var tempClick = function () {
+        const $listDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).find('div');
+        const tempClick = function () {
           if (g.toggleCol(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).index())) {
             g.afterToggleCol();
           }
         };
         for (i = 0; i < $firstRowCols.length; i++) {
-          var currHeader = $firstRowCols[i];
-          var listElmt = document.createElement('div');
+          const currHeader = $firstRowCols[i];
+          const listElmt = document.createElement('div');
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(listElmt).text(jquery__WEBPACK_IMPORTED_MODULE_0___default()(currHeader).text()).prepend('<input type="checkbox" ' + (g.colVisib[i] ? 'checked ' : '') + '>');
           $listDiv.append(listElmt);
           // add event on click
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(listElmt).on('click', tempClick);
         }
         // add "show all column" button
-        var showAll = document.createElement('div');
+        const showAll = document.createElement('div');
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(showAll).addClass('showAllColBtn').text(g.showAllColText);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).append(showAll);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(showAll).on('click', function () {
@@ -1680,7 +1682,7 @@ const makeGrid = function (t) {
         });
         // prepend "show all column" button at top if the list is too long
         if ($firstRowCols.length > 10) {
-          var clone = showAll.cloneNode(true);
+          const clone = showAll.cloneNode(true);
           // @ts-ignore
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cList).prepend(clone);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(clone).on('click', function () {
@@ -1693,7 +1695,7 @@ const makeGrid = function (t) {
         g.hideColList();
       });
       // attach to first row first col of the grid
-      var thFirst = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.d-print-none');
+      const thFirst = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).find('th.d-print-none');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(thFirst).append(g.cDrop);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(thFirst).append(g.cList);
       // some adjustment
@@ -1707,14 +1709,14 @@ const makeGrid = function (t) {
      */
     moveUp: function (e) {
       e.preventDefault();
-      var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-      var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
-      var whereClause = $thisField.parents('tr').first().find('.where_clause').val();
+      const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+      const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+      let whereClause = $thisField.parents('tr').first().find('.where_clause').val();
       if (typeof whereClause === 'undefined') {
         whereClause = '';
       }
-      var found = false;
-      var $prevRow;
+      let found = false;
+      let $prevRow;
       $thisField.parents('tr').first().parents('tbody').children().each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause').val() === whereClause) {
           found = true;
@@ -1723,7 +1725,7 @@ const makeGrid = function (t) {
           $prevRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         }
       });
-      var newCell;
+      let newCell;
       if (found && $prevRow) {
         $prevRow.children('td').each(function () {
           if (window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)) === fieldName) {
@@ -1746,16 +1748,16 @@ const makeGrid = function (t) {
      */
     moveDown: function (e) {
       e.preventDefault();
-      var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-      var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
-      var whereClause = $thisField.parents('tr').first().find('.where_clause').val();
+      const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+      const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+      let whereClause = $thisField.parents('tr').first().find('.where_clause').val();
       if (typeof whereClause === 'undefined') {
         whereClause = '';
       }
-      var found = false;
-      var $nextRow;
-      var j = 0;
-      var nextRowFound = false;
+      let found = false;
+      let $nextRow;
+      let j = 0;
+      let nextRowFound = false;
       $thisField.parents('tr').first().parents('tbody').children().each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause').val() === whereClause) {
           found = true;
@@ -1769,7 +1771,7 @@ const makeGrid = function (t) {
           }
         }
       });
-      var newCell;
+      let newCell;
       if (found && $nextRow) {
         $nextRow.children('td').each(function () {
           if (window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)) === fieldName) {
@@ -1792,22 +1794,22 @@ const makeGrid = function (t) {
      */
     moveLeft: function (e) {
       e.preventDefault();
-      var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-      var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
-      var whereClause = $thisField.parents('tr').first().find('.where_clause').val();
+      const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+      const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+      let whereClause = $thisField.parents('tr').first().find('.where_clause').val();
       if (typeof whereClause === 'undefined') {
         whereClause = '';
       }
-      var found = false;
-      var $foundRow;
+      let found = false;
+      let $foundRow;
       $thisField.parents('tr').first().parents('tbody').children().each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause').val() === whereClause) {
           found = true;
           $foundRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         }
       });
-      var leftCell;
-      var cellFound = false;
+      let leftCell;
+      let cellFound = false;
       if (found) {
         $foundRow.children('td.grid_edit').each(function () {
           if (window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)) === fieldName) {
@@ -1833,24 +1835,24 @@ const makeGrid = function (t) {
      */
     moveRight: function (e) {
       e.preventDefault();
-      var $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
-      var fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
-      var whereClause = $thisField.parents('tr').first().find('.where_clause').val();
+      const $thisField = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.currentEditCell);
+      const fieldName = window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), $thisField);
+      let whereClause = $thisField.parents('tr').first().find('.where_clause').val();
       if (typeof whereClause === 'undefined') {
         whereClause = '';
       }
-      var found = false;
-      var $foundRow;
-      var j = 0;
+      let found = false;
+      let $foundRow;
+      let j = 0;
       $thisField.parents('tr').first().parents('tbody').children().each(function () {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('.where_clause').val() === whereClause) {
           found = true;
           $foundRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         }
       });
-      var rightCell;
-      var cellFound = false;
-      var nextCellFound = false;
+      let rightCell;
+      let cellFound = false;
+      let nextCellFound = false;
       if (found) {
         $foundRow.children('td.grid_edit').each(function () {
           if (window.Sql.getFieldName(jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)) === fieldName) {
@@ -1925,19 +1927,19 @@ const makeGrid = function (t) {
         }
       });
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.t).on('click', 'td.data.click2', function (e) {
-        var $cell = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+        const $cell = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
         // In the case of relational link, We want single click on the link
         // to goto the link and double click to start grid-editing.
-        var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target);
+        const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target);
         if ($link.is('.grid_edit.relation a')) {
           e.preventDefault();
           // get the click count and increase
-          var clicks = $cell.data('clicks');
+          let clicks = $cell.data('clicks');
           clicks = typeof clicks === 'undefined' ? 1 : clicks + 1;
           if (clicks === 1) {
             // if there are no previous clicks,
             // start the single click timer
-            var timer = setTimeout(function () {
+            const timer = setTimeout(function () {
               // temporarily remove ajax class so the page loader will not handle it,
               // submit and then add it back
               $link.removeClass('ajax');
@@ -2385,7 +2387,7 @@ const makeGrid = function (t) {
   // enclosing .sqlqueryresults div
   g.o = jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).parents('.sqlqueryresults');
   // get data columns in the first row of the table
-  var $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('tr').first().find('th.draggable');
+  const $firstRowCols = jquery__WEBPACK_IMPORTED_MODULE_0___default()(t).find('tr').first().find('th.draggable');
   // initialize visible headers count
   g.visibleHeadersCount = $firstRowCols.filter(':visible').length;
   // assign first column (actions) span
@@ -2404,7 +2406,7 @@ const makeGrid = function (t) {
   g.markHint = window.Messages.strColMarkHint;
   g.copyHint = window.Messages.strColNameCopyHint;
   // assign common hidden inputs
-  var $commonHiddenInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('div.common_hidden_inputs');
+  const $commonHiddenInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.o).find('div.common_hidden_inputs');
   g.server = $commonHiddenInputs.find('input[name=server]').val();
   g.db = $commonHiddenInputs.find('input[name=db]').val();
   g.table = $commonHiddenInputs.find('input[name=table]').val();

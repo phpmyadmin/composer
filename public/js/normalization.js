@@ -28,9 +28,9 @@ __webpack_require__.r(__webpack_exports__);
  * AJAX scripts for normalization
  *
  */
-var normalizeto = '1nf';
-var primaryKey;
-var dataParsed = null;
+let normalizeto = '1nf';
+let primaryKey;
+let dataParsed = null;
 function appendHtmlColumnsList() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/get-columns', {
     'ajax_request': true,
@@ -44,7 +44,7 @@ function appendHtmlColumnsList() {
   });
 }
 function goTo3NFStep1(newTables) {
-  var tables = newTables;
+  let tables = newTables;
   if (Object.keys(tables).length === 1) {
     tables = [_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')];
   }
@@ -60,8 +60,8 @@ function goTo3NFStep1(newTables) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent').find('p').html(data.subText);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent').find('#extra').html(data.extra);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').find('form').each(function () {
-      var formId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
-      var colName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('colname');
+      const formId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
+      const colName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('colname');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + formId + ' input[value=\'' + colName + '\']').next().remove();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + formId + ' input[value=\'' + colName + '\']').remove();
     });
@@ -134,7 +134,7 @@ function goToStep4() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent #extra').html(data.extra);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent #newCols').html('');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-footer').html('');
-    for (var pk in primaryKey) {
+    for (let pk in primaryKey) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[value=\'' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeJsString)(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
     }
   });
@@ -155,7 +155,7 @@ function goToStep3() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent #newCols').html('');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-footer').html('');
     primaryKey = JSON.parse(data.primary_key);
-    for (var pk in primaryKey) {
+    for (let pk in primaryKey) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[value=\'' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeJsString)(primaryKey[pk]) + '\']').attr('disabled', 'disabled');
     }
   });
@@ -192,11 +192,11 @@ function goToStep2() {
   });
 }
 function goTo2NFFinish(pd) {
-  var tables = {};
-  for (var dependson in pd) {
+  const tables = {};
+  for (let dependson in pd) {
     tables[dependson] = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[name="' + dependson + '"]').val();
   }
-  var datastring = {
+  const datastring = {
     'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -233,16 +233,16 @@ function goTo2NFFinish(pd) {
   });
 }
 function goTo3NFFinish(newTables) {
-  for (var table in newTables) {
-    for (var newtbl in newTables[table]) {
-      var updatedname = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[name="' + newtbl + '"]').val();
+  for (let table in newTables) {
+    for (let newtbl in newTables[table]) {
+      const updatedname = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[name="' + newtbl + '"]').val();
       newTables[table][updatedname] = newTables[table][newtbl];
       if (updatedname !== newtbl) {
         delete newTables[table][newtbl];
       }
     }
   }
-  var datastring = {
+  const datastring = {
     'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -271,15 +271,15 @@ function goTo3NFFinish(newTables) {
     }
   });
 }
-var backup = '';
+let backup = '';
 function goTo2NFStep2(pd, primaryKey) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-header').html(window.Messages.strStep + ' 2.2 ' + window.Messages.strConfirmPd);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent h4').html(window.Messages.strSelectedPd);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent p').html(window.Messages.strPdHintNote);
-  var extra = '<div class="dependencies_box">';
-  var pdFound = false;
-  for (var dependson in pd) {
+  let extra = '<div class="dependencies_box">';
+  let pdFound = false;
+  for (let dependson in pd) {
     if (dependson !== primaryKey) {
       pdFound = true;
       extra += '<p class="d-block m-1">' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(dependson) + ' -> ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(pd[dependson].toString()) + '</p>';
@@ -290,7 +290,7 @@ function goTo2NFStep2(pd, primaryKey) {
     extra += '</div>';
   } else {
     extra += '</div>';
-    var datastring = {
+    const datastring = {
       'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -322,11 +322,11 @@ function goTo3NFStep2(pd, tablesTds) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-header').html(window.Messages.strStep + ' 3.2 ' + window.Messages.strConfirmTd);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent h4').html(window.Messages.strSelectedTd);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent p').html(window.Messages.strPdHintNote);
-  var extra = '<div class="dependencies_box">';
-  var pdFound = false;
-  for (var table in tablesTds) {
-    for (var i in tablesTds[table]) {
-      var dependson = tablesTds[table][i];
+  let extra = '<div class="dependencies_box">';
+  let pdFound = false;
+  for (let table in tablesTds) {
+    for (let i in tablesTds[table]) {
+      const dependson = tablesTds[table][i];
       if (dependson !== '' && dependson !== table) {
         pdFound = true;
         extra += '<p class="d-block m-1">' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(dependson) + ' -> ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(pd[dependson].toString()) + '</p>';
@@ -338,7 +338,7 @@ function goTo3NFStep2(pd, tablesTds) {
     extra += '</div>';
   } else {
     extra += '</div>';
-    var datastring = {
+    const datastring = {
       'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'tables': JSON.stringify(tablesTds),
@@ -372,13 +372,13 @@ function goTo3NFStep2(pd, tablesTds) {
 }
 function processDependencies(primaryKey) {
   let isTransitive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-  var pk = primaryKey;
-  var pd = {};
-  var tablesTds = {};
-  var dependsOn;
+  let pk = primaryKey;
+  const pd = {};
+  const tablesTds = {};
+  let dependsOn;
   pd[pk] = [];
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra form').each(function () {
-    var tblname;
+    let tblname;
     if (isTransitive === true) {
       tblname = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('tablename');
       pk = tblname;
@@ -387,7 +387,7 @@ function processDependencies(primaryKey) {
       }
       tablesTds[tblname].push(pk);
     }
-    var formId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
+    const formId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + formId + ' input[type=checkbox]:not(:checked)').prop('checked', false);
     dependsOn = '';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + formId + ' input[type=checkbox]:checked').each(function () {
@@ -421,8 +421,8 @@ function processDependencies(primaryKey) {
   return false;
 }
 function moveRepeatingGroup(repeatingCols) {
-  var newTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupTable]').val();
-  var newColumn = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupColumn]').val();
+  const newTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupTable]').val();
+  const newColumn = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupColumn]').val();
   if (!newTable) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupTable]').trigger('focus');
     return false;
@@ -431,7 +431,7 @@ function moveRepeatingGroup(repeatingCols) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=repeatGroupColumn]').trigger('focus');
     return false;
   }
-  var datastring = {
+  const datastring = {
     'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -474,7 +474,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('normalizati
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').off('click', '#noRedundantColumn');
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization.js', function () {
-  var selectedCol;
+  let selectedCol;
   normalizeto = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent').data('normalizeto');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').on('click', '#selectNonAtomicCol', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() === 'no_such_col') {
@@ -487,7 +487,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     if (!selectedCol || selectedCol === '') {
       return false;
     }
-    var numField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#numField').val();
+    const numField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#numField').val();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/create-new-column', {
       'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -524,8 +524,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols #field_0_1').trigger('focus');
       return false;
     }
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-    var datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    let datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
     datastring += argsep + 'ajax_request=1' + argsep + 'do_save_data=1' + argsep + 'field_where=last';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/add-field', datastring, function (data) {
       if (data.success) {
@@ -586,8 +586,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     return false;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-footer').on('click', '#saveNewPrimary', function () {
-    var datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
+    let datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     datastring += argsep + 'field_key[0]=primary_0' + argsep + 'ajax_request=1' + argsep + 'do_save_data=1' + argsep + 'field_where=last';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/add-field', datastring, function (data) {
       if (data.success === true) {
@@ -605,7 +605,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').on('click', '#removeRedundant', function () {
-    var dropQuery = 'ALTER TABLE `' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` ';
+    let dropQuery = 'ALTER TABLE `' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` ';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').each(function () {
       dropQuery += 'DROP `' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() + '`, ';
     });
@@ -626,14 +626,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').on('click', '#moveRepeatingGroup', function () {
-    var repeatingCols = '';
+    let repeatingCols = '';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').each(function () {
       repeatingCols += jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val() + ', ';
     });
     if (repeatingCols !== '') {
-      var newColName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').first().val();
+      const newColName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').first().val();
       repeatingCols = repeatingCols.slice(0, -2);
-      var confirmStr = window.sprintf(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
+      let confirmStr = window.sprintf(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
       confirmStr += '<input type="text" name="repeatGroupTable" placeholder="' + window.Messages.strNewTablePlaceholder + '">' + '( ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(primaryKey.toString()) + ', <input type="text" name="repeatGroupColumn" placeholder="' + window.Messages.strNewColumnPlaceholder + '" value="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(newColName) + '">)' + '</ol>';
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html(confirmStr);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
@@ -655,7 +655,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent p').on('click', '#createPrimaryKey', function (event) {
     event.preventDefault();
-    var url = {
+    const url = {
       'create_index': 1,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -667,7 +667,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
       },
       'ajax_request': true
     };
-    var title = window.Messages.strAddPrimaryKey;
+    const title = window.Messages.strAddPrimaryKey;
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexEditorDialog)(url, title, function () {
       // on success
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults').remove();
@@ -707,13 +707,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent').on('click', '.pickPd', function () {
-    var strColsLeft = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next('.determinants').html();
-    var colsLeft = strColsLeft.split(',');
-    var strColsRight = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next().next().html();
-    var colsRight = strColsRight.split(',');
-    for (var i in colsRight) {
+    const strColsLeft = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next('.determinants').html();
+    const colsLeft = strColsLeft.split(',');
+    const strColsRight = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).next().next().html();
+    const colsRight = strColsRight.split(',');
+    for (let i in colsRight) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[data-colname="' + colsRight[i].trim() + '"] input[type="checkbox"]').prop('checked', false);
-      for (var j in colsLeft) {
+      for (let j in colsLeft) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[data-colname="' + colsRight[i].trim() + '"] input[value="' + colsLeft[j].trim() + '"]').prop('checked', true);
       }
     }

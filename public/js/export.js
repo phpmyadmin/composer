@@ -46,10 +46,10 @@ function enableDumpSomeRowsSubOptions() {
  * @return {object} template data
  */
 function getTemplateData() {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name="dump"]');
-  var excludeList = ['token', 'server', 'db', 'table', 'single_table', 'export_type', 'export_method', 'sql_query', 'template_id'];
-  var obj = {};
-  var arr = $form.serializeArray();
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name="dump"]');
+  const excludeList = ['token', 'server', 'db', 'table', 'single_table', 'export_type', 'export_method', 'sql_query', 'template_id'];
+  const obj = {};
+  const arr = $form.serializeArray();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(arr, function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray(this.name, excludeList) < 0) {
       if (obj[this.name] !== undefined) {
@@ -83,8 +83,8 @@ function getTemplateData() {
  * @param name name of the template
  */
 function createTemplate(name) {
-  var templateData = Export.getTemplateData();
-  var params = {
+  const templateData = Export.getTemplateData();
+  const params = {
     'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -115,7 +115,7 @@ function createTemplate(name) {
  * @param id ID of the template to load
  */
 function loadTemplate(id) {
-  var params = {
+  const params = {
     'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -126,15 +126,15 @@ function loadTemplate(id) {
   (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/export/template/load', params, function (response) {
     if (response.success === true) {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name="dump"]');
-      var options = JSON.parse(response.data);
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name="dump"]');
+      const options = JSON.parse(response.data);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(options, function (key, value) {
         if (typeof key === 'symbol') {
           // Continue to next iteration.
           return true;
         }
-        var localValue = value;
-        var $element = $form.find('[name="' + key + '"]');
+        let localValue = value;
+        const $element = $form.find('[name="' + key + '"]');
         if ($element.length) {
           if ($element.is('input') && $element.attr('type') === 'checkbox' && localValue === null) {
             $element.prop('checked', false);
@@ -162,8 +162,8 @@ function loadTemplate(id) {
  * @param id ID of the template to update
  */
 function updateTemplate(id) {
-  var templateData = Export.getTemplateData();
-  var params = {
+  const templateData = Export.getTemplateData();
+  const params = {
     'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -187,7 +187,7 @@ function updateTemplate(id) {
  * @param id ID of the template to delete
  */
 function deleteTemplate(id) {
-  var params = {
+  const params = {
     'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -234,7 +234,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('export.js',
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#showsqlquery').on('click', function () {
     // Creating a dialog box similar to preview sql container to show sql query
-    var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#showSqlQueryModal');
+    const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#showSqlQueryModal');
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#showSqlQueryModalLabel').first().html(window.Messages.strQuery);
@@ -247,7 +247,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   // create a new template
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="createTemplate"]').on('click', function (e) {
     e.preventDefault();
-    var name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="templateName"]').val();
+    const name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="templateName"]').val();
     if (name.length) {
       Export.createTemplate(name);
     }
@@ -255,7 +255,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   // load an existing template
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="template"]').on('change', function (e) {
     e.preventDefault();
-    var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
     if (id.length) {
       Export.loadTemplate(id);
     }
@@ -263,7 +263,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   // update an existing template with new criteria
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="updateTemplate"]').on('click', function (e) {
     e.preventDefault();
-    var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="template"]').val();
+    const id = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="template"]').val();
     if (id.length) {
       Export.updateTemplate(id);
     }
@@ -271,7 +271,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   // delete an existing template
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="deleteTemplate"]').on('click', function (e) {
     e.preventDefault();
-    var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="template"]').val();
+    const id = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="template"]').val();
     if (id.length) {
       Export.deleteTemplate(id);
     }
@@ -282,15 +282,15 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').on('change', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#format_specific_opts').find('div.format_specific_options').addClass('d-none');
-    var selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
+    const selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + selectedPluginName + '_options').removeClass('d-none');
   });
   /**
    * Toggles the enabling and disabling of the SQL plugin's comment options that apply only when exporting structure
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name=\'sql_structure_or_data\']').on('change', function () {
-    var commentsArePresent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_include_comments').prop('checked');
-    var show = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name=\'sql_structure_or_data\']:checked').val();
+    const commentsArePresent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_include_comments').prop('checked');
+    const show = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name=\'sql_structure_or_data\']:checked').val();
     if (show === 'data') {
       // disable the SQL comment options
       if (commentsArePresent) {
@@ -314,7 +314,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   });
   // When MS Excel is selected as the Format automatically Switch to Character Set as windows-1252
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').on('change', function () {
-    var selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
+    const selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
     if (selectedPluginName === 'excel') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_charset').val('windows-1252');
     } else {
@@ -337,9 +337,9 @@ function setupTableStructureOrData() {
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'export_type\']').val() !== 'database') {
     return;
   }
-  var pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
-  var formElemName = pluginName + '_structure_or_data';
-  var forceStructureOrData = !jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'' + formElemName + '_default\']').length;
+  const pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
+  const formElemName = pluginName + '_structure_or_data';
+  const forceStructureOrData = !jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'' + formElemName + '_default\']').length;
   if (forceStructureOrData === true) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="structure_or_data_forced"]').val(1);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.export_structure input[type="checkbox"], .export_data input[type="checkbox"]').prop('disabled', true);
@@ -348,7 +348,7 @@ function setupTableStructureOrData() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="structure_or_data_forced"]').val(0);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.export_structure input[type="checkbox"], .export_data input[type="checkbox"]').prop('disabled', false);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.export_structure, .export_data').fadeTo('fast', 1);
-    var structureOrData = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="' + formElemName + '_default"]').val();
+    const structureOrData = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="' + formElemName + '_default"]').val();
     if (structureOrData === 'structure') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.export_data input[type="checkbox"]').prop('checked', false);
     } else if (structureOrData === 'data') {
@@ -374,11 +374,11 @@ function setupTableStructureOrData() {
  * options
  */
 function toggleStructureDataOpts() {
-  var pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select#plugins').val();
-  var radioFormName = pluginName + '_structure_or_data';
-  var dataDiv = '#' + pluginName + '_data';
-  var structureDiv = '#' + pluginName + '_structure';
-  var show = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name=\'' + radioFormName + '\']:checked').val();
+  const pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select#plugins').val();
+  const radioFormName = pluginName + '_structure_or_data';
+  const dataDiv = '#' + pluginName + '_data';
+  const structureDiv = '#' + pluginName + '_structure';
+  const show = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name=\'' + radioFormName + '\']:checked').val();
   // Show the #rows if 'show' is not structure
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rows').toggle(show !== 'structure');
   if (show === 'data') {
@@ -397,7 +397,7 @@ function toggleStructureDataOpts() {
  * Toggles the disabling of the "save to file" options
  */
 function toggleSaveToFile() {
-  var $ulSaveAsfile = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_save_asfile');
+  const $ulSaveAsfile = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_save_asfile');
   if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#radio_dump_asfile').prop('checked')) {
     $ulSaveAsfile.find('> li').fadeTo('fast', 0.4);
     $ulSaveAsfile.find('> li > input').prop('disabled', true);
@@ -417,7 +417,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
  */
 function toggleSqlIncludeComments() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_include_comments').on('change', function () {
-    var $ulIncludeComments = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_include_comments');
+    const $ulIncludeComments = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_include_comments');
     if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_include_comments').prop('checked')) {
       $ulIncludeComments.find('> li').fadeTo('fast', 0.4);
       $ulIncludeComments.find('> li > input').prop('disabled', true);
@@ -433,11 +433,11 @@ function toggleSqlIncludeComments() {
   });
 }
 function checkTableSelectAll() {
-  var total = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_select[]"]').length;
-  var strChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_structure[]"]:checked').length;
-  var dataChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_data[]"]:checked').length;
-  var strAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_structure_all');
-  var dataAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_data_all');
+  const total = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_select[]"]').length;
+  const strChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_structure[]"]:checked').length;
+  const dataChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_data[]"]:checked').length;
+  const strAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_structure_all');
+  const dataAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_data_all');
   if (strChecked === total) {
     strAll.prop('indeterminate', false).prop('checked', true);
   } else if (strChecked === 0) {
@@ -454,10 +454,10 @@ function checkTableSelectAll() {
   }
 }
 function checkTableSelectStructureOrData() {
-  var dataChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_data[]"]:checked').length;
-  var autoIncrement = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_auto_increment');
-  var pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select#plugins').val();
-  var dataDiv = '#' + pluginName + '_data';
+  const dataChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_data[]"]:checked').length;
+  const autoIncrement = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_auto_increment');
+  const pluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select#plugins').val();
+  const dataDiv = '#' + pluginName + '_data';
   if (dataChecked === 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(dataDiv).slideUp('slow');
     autoIncrement.prop('disabled', true).parent().fadeTo('fast', 0.4);
@@ -467,7 +467,7 @@ function checkTableSelectStructureOrData() {
   }
 }
 function toggleTableSelectAllStr() {
-  var strAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_structure_all').is(':checked');
+  const strAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_structure_all').is(':checked');
   if (strAll) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_structure[]"]').prop('checked', true);
   } else {
@@ -475,7 +475,7 @@ function toggleTableSelectAllStr() {
   }
 }
 function toggleTableSelectAllData() {
-  var dataAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_data_all').is(':checked');
+  const dataAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_data_all').is(':checked');
   if (dataAll) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table_data[]"]').prop('checked', true);
   } else {
@@ -488,12 +488,12 @@ function checkSelectedTables() {
   });
 }
 function checkTableSelected(row) {
-  var $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(row);
-  var tableSelect = $row.find('input[name="table_select[]"]');
-  var strCheck = $row.find('input[name="table_structure[]"]');
-  var dataCheck = $row.find('input[name="table_data[]"]');
-  var data = dataCheck.is(':checked:not(:disabled)');
-  var structure = strCheck.is(':checked:not(:disabled)');
+  const $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(row);
+  const tableSelect = $row.find('input[name="table_select[]"]');
+  const strCheck = $row.find('input[name="table_structure[]"]');
+  const dataCheck = $row.find('input[name="table_data[]"]');
+  const data = dataCheck.is(':checked:not(:disabled)');
+  const structure = strCheck.is(':checked:not(:disabled)');
   if (data && structure) {
     tableSelect.prop({
       checked: true,
@@ -515,8 +515,8 @@ function checkTableSelected(row) {
   }
 }
 function toggleTableSelect(row) {
-  var $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(row);
-  var tableSelected = $row.find('input[name="table_select[]"]').is(':checked');
+  const $row = jquery__WEBPACK_IMPORTED_MODULE_0___default()(row);
+  const tableSelected = $row.find('input[name="table_select[]"]').is(':checked');
   if (tableSelected) {
     $row.find('input[type="checkbox"]:not(:disabled)').prop('checked', true);
     $row.addClass('marked');
@@ -536,8 +536,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   /**
    * For SQL plugin, if "CREATE TABLE options" is checked/unchecked, check/uncheck each of its sub-options
    */
-  var $create = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table_statements');
-  var $createOptions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_create_table_statements').find('input');
+  const $create = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table_statements');
+  const $createOptions = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ul_create_table_statements').find('input');
   $create.on('change', function () {
     $createOptions.prop('checked', jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('checked'));
   });
@@ -597,10 +597,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=\'export_type\']').val() === 'database') {
     // Hide structure or data radio buttons
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name$=\'_structure_or_data\']').each(function () {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-      var name = $this.prop('name');
-      var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="' + name + '"]:checked').val();
-      var nameDefault = name + '_default';
+      const $this = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const name = $this.prop('name');
+      const val = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="' + name + '"]:checked').val();
+      const nameDefault = name + '_default';
       if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="' + nameDefault + '"]').length) {
         $this.after(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden" name="' + nameDefault + '" value="' + val + '" disabled>')).after(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden" name="' + name + '" value="structure_and_data">'));
         $this.parent().find('label').remove();
@@ -610,9 +610,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=\'radio\'][name$=\'_structure_or_data\']').remove();
     // Disable CREATE table checkbox for sql
-    var createTableCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table');
+    const createTableCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table');
     createTableCheckbox.prop('checked', true);
-    var dummyCreateTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table').clone().removeAttr('id').attr('type', 'hidden');
+    const dummyCreateTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#checkbox_sql_create_table').clone().removeAttr('id').attr('type', 'hidden');
     createTableCheckbox.prop('disabled', true).after(dummyCreateTable).parent().fadeTo('fast', 0.4);
     Export.setupTableStructureOrData();
   }
@@ -662,9 +662,9 @@ function toggleQuickOrCustom() {
   }
   pluginOptionsElement.classList.remove('d-none');
 }
-var timeOut;
+let timeOut;
 function checkTimeOut(timeLimit) {
-  var limit = timeLimit;
+  let limit = timeLimit;
   if (typeof limit === 'undefined' || limit === 0) {
     return true;
   }
@@ -689,24 +689,24 @@ function checkTimeOut(timeLimit) {
  */
 function createAliasModal(event) {
   event.preventDefault();
-  var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#renameExportModal');
+  const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#renameExportModal');
   modal.modal('show');
   modal.on('shown.bs.modal', function () {
-    var db = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db');
+    const db = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db');
     if (db) {
-      var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
+      const option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
       option.text(db);
       option.attr('value', db);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').append(option).val(db).trigger('change');
     } else {
-      var params = {
+      const params = {
         'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
       };
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/databases', params, function (response) {
         if (response.success === true) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(response.databases, function (idx, value) {
-            var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
+            const option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
             option.text(value);
             option.attr('value', value);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').append(option);
@@ -718,7 +718,7 @@ function createAliasModal(event) {
     }
   });
   modal.on('hidden.bs.modal', function () {
-    var isEmpty = true;
+    let isEmpty = true;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[type="text"]').each(function () {
       // trim empty input fields on close
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()) {
@@ -735,7 +735,7 @@ function createAliasModal(event) {
   });
 }
 function aliasToggleRow(elm) {
-  var inputs = elm.parents('tr').find('input,button');
+  const inputs = elm.parents('tr').find('input,button');
   if (elm.val()) {
     inputs.attr('disabled', false);
   } else {
@@ -749,7 +749,7 @@ function addAlias(type, name, field, value) {
   if (Export.aliasRow === null) {
     Export.aliasRow = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alias_data tfoot tr');
   }
-  var row = Export.aliasRow.clone();
+  const row = Export.aliasRow.clone();
   row.find('th').text(type);
   row.find('td').first().text(name);
   row.find('input').attr('name', field);
@@ -757,7 +757,7 @@ function addAlias(type, name, field, value) {
   row.find('.alias_remove').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr').remove();
   });
-  var matching = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alias_data [name="' + jquery__WEBPACK_IMPORTED_MODULE_0___default().escapeSelector(field) + '"]');
+  const matching = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alias_data [name="' + jquery__WEBPACK_IMPORTED_MODULE_0___default().escapeSelector(field) + '"]');
   if (matching.length > 0) {
     matching.parents('tr').remove();
   }
@@ -818,24 +818,24 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').on('change', function () {
     Export.aliasToggleRow(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
-    var table = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table');
+    const table = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table');
     if (table) {
-      var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
+      const option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
       option.text(table);
       option.attr('value', table);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').append(option).val(table).trigger('change');
     } else {
-      var database = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-      var params = {
+      const database = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+      const params = {
         'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'db': database
       };
-      var url = 'index.php?route=/tables';
+      const url = 'index.php?route=/tables';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (response) {
         if (response.success === true) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().each(response.tables, function (idx, value) {
-            var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
+            const option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
             option.text(value);
             option.attr('value', value);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').append(option);
@@ -848,19 +848,19 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').on('change', function () {
     Export.aliasToggleRow(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
-    var database = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
-    var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-    var params = {
+    const database = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
+    const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    const params = {
       'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': database,
       'table': table
     };
-    var url = 'index.php?route=/columns';
+    const url = 'index.php?route=/columns';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (response) {
       if (response.success === true) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().each(response.columns, function (idx, value) {
-          var option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
+          const option = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>');
           option.text(value);
           option.attr('value', value);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_select').append(option);
@@ -875,26 +875,26 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_button').on('click', function (e) {
     e.preventDefault();
-    var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
+    const db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
     Export.addAlias(window.Messages.strAliasDatabase, db, 'aliases[' + db + '][alias]', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_name').val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_name').val('');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_button').on('click', function (e) {
     e.preventDefault();
-    var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
-    var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').val();
+    const db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
+    const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').val();
     Export.addAlias(window.Messages.strAliasTable, db + '.' + table, 'aliases[' + db + '][tables][' + table + '][alias]', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_name').val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_name').val('');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_button').on('click', function (e) {
     e.preventDefault();
-    var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
-    var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').val();
-    var column = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_select').val();
+    const db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
+    const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table_alias_select').val();
+    const column = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_select').val();
     Export.addAlias(window.Messages.strAliasColumn, db + '.' + table + '.' + column, 'aliases[' + db + '][tables][' + table + '][colums][' + column + ']', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_name').val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column_alias_name').val('');
   });
-  var setDbSelectOptions = function (doCheck) {
+  const setDbSelectOptions = function (doCheck) {
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.setSelectOptions)('dump', 'db_select[]', doCheck);
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_select_all').on('click', function (e) {
@@ -906,7 +906,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
     setDbSelectOptions(false);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buttonGo').on('click', function () {
-    var timeLimit = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-exec-time-limit'));
+    const timeLimit = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-exec-time-limit'));
     // If the time limit set is zero,
     // then time out won't occur so no need to check for time out.
     if (timeLimit > 0) {

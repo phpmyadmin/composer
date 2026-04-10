@@ -32,9 +32,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 const checkIfDataTypeNumericOrDate = function (dataType) {
   // To test for numeric data-types.
-  var numericRegExp = new RegExp('TINYINT|SMALLINT|MEDIUMINT|INT|BIGINT|DECIMAL|FLOAT|DOUBLE|REAL', 'i');
+  const numericRegExp = new RegExp('TINYINT|SMALLINT|MEDIUMINT|INT|BIGINT|DECIMAL|FLOAT|DOUBLE|REAL', 'i');
   // To test for date data-types.
-  var dateRegExp = new RegExp('DATETIME|DATE|TIMESTAMP|TIME|YEAR', 'i');
+  const dateRegExp = new RegExp('DATETIME|DATE|TIMESTAMP|TIME|YEAR', 'i');
   // Return matched data-type
   if (numericRegExp.test(dataType)) {
     return numericRegExp.exec(dataType)[0];
@@ -67,7 +67,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
   // don't show it until we have results on-screen
   .hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tbl_search_form').slideToggle();
     if ($link.text() === window.Messages.strHideSearchCriteria) {
       $link.text(window.Messages.strShowSearchCriteria);
@@ -77,7 +77,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
     // avoid default click action
     return false;
   });
-  var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldset_table_qbe select.column-operator');
+  const tableRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldset_table_qbe select.column-operator');
   jquery__WEBPACK_IMPORTED_MODULE_0___default().each(tableRows, function (index, item) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(item).on('change', function () {
       window.changeValueFieldType(this, index);
@@ -88,10 +88,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
    * Ajax event handler for Table search
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#tbl_search_form.ajax', function (event) {
-    var unaryFunctions = ['IS NULL', 'IS NOT NULL', '= \'\'', '!= \'\''];
-    var geomUnaryFunctions = ['IsEmpty', 'IsSimple', 'IsRing', 'IsClosed'];
+    const unaryFunctions = ['IS NULL', 'IS NOT NULL', '= \'\'', '!= \'\''];
+    const geomUnaryFunctions = ['IsEmpty', 'IsSimple', 'IsRing', 'IsClosed'];
     // jQuery object to reuse
-    var $searchForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $searchForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     event.preventDefault();
     // Dispose tooltips. See #19950
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.datefield, input.timefield').each(function () {
@@ -102,11 +102,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
     });
     // empty previous search results while we are waiting for new results
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').empty();
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strSearching, false);
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strSearching, false);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.prepareForAjaxRequest)($searchForm);
-    var values = {};
+    const values = {};
     $searchForm.find(':input').each(function () {
-      var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'radio') {
         if ($input.is(':checked')) {
           values[this.name] = $input.val();
@@ -115,9 +115,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
         values[this.name] = $input.val();
       }
     });
-    var columnCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="columnsToDisplay[]"] option').length;
+    const columnCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('select[name="columnsToDisplay[]"] option').length;
     // Submit values only for the columns that have unary column operator or a search criteria
-    for (var a = 0; a < columnCount; a++) {
+    for (let a = 0; a < columnCount; a++) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray(values['criteriaColumnOperators[' + a + ']'], unaryFunctions) >= 0) {
         continue;
       }
@@ -174,19 +174,19 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
   // Initially hide all the open_search_gis_editor spans
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.open_search_gis_editor').hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select.geom_func').on('change', function () {
-    var $geomFuncSelector = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var binaryFunctions = ['Contains', 'Crosses', 'Disjoint', 'Equals', 'Intersects', 'Overlaps', 'Touches', 'Within', 'MBRContains', 'MBRDisjoint', 'MBREquals', 'MBRIntersects', 'MBROverlaps', 'MBRTouches', 'MBRWithin', 'ST_Contains', 'ST_Crosses', 'ST_Disjoint', 'ST_Equals', 'ST_Intersects', 'ST_Overlaps', 'ST_Touches', 'ST_Within'];
-    var tempArray = ['Envelope', 'EndPoint', 'StartPoint', 'ExteriorRing', 'Centroid', 'PointOnSurface'];
-    var outputGeomFunctions = binaryFunctions.concat(tempArray);
+    const $geomFuncSelector = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const binaryFunctions = ['Contains', 'Crosses', 'Disjoint', 'Equals', 'Intersects', 'Overlaps', 'Touches', 'Within', 'MBRContains', 'MBRDisjoint', 'MBREquals', 'MBRIntersects', 'MBROverlaps', 'MBRTouches', 'MBRWithin', 'ST_Contains', 'ST_Crosses', 'ST_Disjoint', 'ST_Equals', 'ST_Intersects', 'ST_Overlaps', 'ST_Touches', 'ST_Within'];
+    const tempArray = ['Envelope', 'EndPoint', 'StartPoint', 'ExteriorRing', 'Centroid', 'PointOnSurface'];
+    const outputGeomFunctions = binaryFunctions.concat(tempArray);
     // If the chosen function takes two geometry objects as parameters
-    var $operator = $geomFuncSelector.parents('tr').find('td').eq(4).find('select');
+    const $operator = $geomFuncSelector.parents('tr').find('td').eq(4).find('select');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray($geomFuncSelector.val(), binaryFunctions) >= 0) {
       $operator.prop('readonly', true);
     } else {
       $operator.prop('readonly', false);
     }
     // if the chosen function's output is a geometry, enable GIS editor
-    var $editorSpan = $geomFuncSelector.parents('tr').find('.open_search_gis_editor');
+    const $editorSpan = $geomFuncSelector.parents('tr').find('.open_search_gis_editor');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default().inArray($geomFuncSelector.val(), outputGeomFunctions) >= 0) {
       $editorSpan.show();
     } else {
@@ -222,9 +222,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('change', 'select[name*="criteriaColumnOperators"]', function () {
     // Get the column name.
-    var columnName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('th').first().text();
+    const columnName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('th').first().text();
     // Get the data-type of column excluding size.
-    var dataType = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('td[data-type]').attr('data-type');
+    let dataType = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').find('td[data-type]').attr('data-type');
     dataType = TableSelect.checkIfDataTypeNumericOrDate(dataType);
     // Get the operator.
     const operator = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
@@ -232,7 +232,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
     $targetField.prop('disabled', opIsUnary(operator));
     $targetField.siblings('.ui-datepicker-trigger').eq(0).toggle(!opIsUnary(operator));
     if ((operator === 'BETWEEN' || operator === 'NOT BETWEEN') && dataType) {
-      var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
+      const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         url: 'index.php?route=/table/search',
         type: 'POST',
@@ -248,9 +248,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
           if (response.success) {
             // Get the column min value.
-            var min = response.column_data.min ? '(' + window.Messages.strColumnMin + ' ' + response.column_data.min + ')' : '';
+            const min = response.column_data.min ? '(' + window.Messages.strColumnMin + ' ' + response.column_data.min + ')' : '';
             // Get the column max value.
-            var max = response.column_data.max ? '(' + window.Messages.strColumnMax + ' ' + response.column_data.max + ')' : '';
+            const max = response.column_data.max ? '(' + window.Messages.strColumnMax + ' ' + response.column_data.max + ')' : '';
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rangeSearchModal').modal('show');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rangeSearchLegend').first().html(operator);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rangeSearchMin').first().text(min);
@@ -262,18 +262,18 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value'), dataType);
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value'), dataType);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rangeSearchModalGo').on('click', function () {
-              var minValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value').val();
-              var maxValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value').val();
-              var finalValue = '';
+              const minValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#min_value').val();
+              const maxValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#max_value').val();
+              let finalValue = '';
               if (minValue.length && maxValue.length) {
                 finalValue = minValue + ', ' + maxValue;
               }
               // If target field is a select list.
               if ($targetField.is('select')) {
                 $targetField.val(finalValue);
-                var $options = $targetField.find('option');
-                var $closestMin = null;
-                var $closestMax = null;
+                const $options = $targetField.find('option');
+                let $closestMin = null;
+                let $closestMax = null;
                 // Find closest min and max value.
                 $options.each(function () {
                   if ($closestMin === null || Math.abs(Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()) - Number(minValue)) < Math.abs(Number($closestMin.val()) - Number(minValue))) {
@@ -301,7 +301,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
       });
     }
   });
-  var windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
+  const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.jsresponsive').css('max-width', windowWidth - 69 + 'px');
 });
 

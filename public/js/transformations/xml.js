@@ -14,13 +14,13 @@ __webpack_require__.r(__webpack_exports__);
  * XML syntax highlighting transformation plugin
  */
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('transformations/xml.js', function () {
-  var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content').find('code.xml');
+  const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content').find('code.xml');
   $elm.each(function () {
-    var $json = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var $pre = $json.closest('pre');
+    const $json = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $pre = $json.closest('pre');
     /* We only care about visible elements to avoid double processing */
     if ($json.is(':visible')) {
-      var $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="xml-highlight cm-s-default"></div>');
+      const $highlight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="xml-highlight cm-s-default"></div>');
       $pre.append($highlight);
       // @ts-ignore
       window.CodeMirror.runMode($json.text(), 'application/xml', $highlight[0]);

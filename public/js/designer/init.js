@@ -38,7 +38,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 
-var designerTables = [{
+const designerTables = [{
   name: 'pdf_pages',
   key: 'pgNr',
   autoIncrement: true
@@ -47,11 +47,11 @@ var designerTables = [{
   key: 'id',
   autoIncrement: true
 }];
-var DesignerOfflineDB = function () {
+const DesignerOfflineDB = function () {
   /**
    * @type {IDBDatabase|null}
    */
-  var datastore = null;
+  let datastore = null;
   /**
    * @param {string} table
    * @return {IDBTransaction}
@@ -64,8 +64,8 @@ var DesignerOfflineDB = function () {
    * @return {IDBObjectStore}
    */
   const getObjectStore = function (table) {
-    var transaction = designerDB.getTransaction(table);
-    var objStore = transaction.objectStore(table);
+    const transaction = designerDB.getTransaction(table);
+    const objStore = transaction.objectStore(table);
     return objStore;
   };
   /**
@@ -74,21 +74,21 @@ var DesignerOfflineDB = function () {
    * @return {IDBObjectStore}
    */
   const getCursorRequest = function (transaction, table) {
-    var objStore = transaction.objectStore(table);
-    var keyRange = IDBKeyRange.lowerBound(0);
-    var cursorRequest = objStore.openCursor(keyRange);
+    const objStore = transaction.objectStore(table);
+    const keyRange = IDBKeyRange.lowerBound(0);
+    const cursorRequest = objStore.openCursor(keyRange);
     return cursorRequest;
   };
   /**
    * @param {Function} callback
    */
   const open = function (callback) {
-    var version = 1;
-    var request = window.indexedDB.open('pma_designer', version);
+    const version = 1;
+    const request = window.indexedDB.open('pma_designer', version);
     request.onupgradeneeded = function (e) {
-      var db = e.target.result;
+      const db = e.target.result;
       e.target.transaction.onerror = designerDB.onerror;
-      var t;
+      let t;
       for (t in designerTables) {
         if (db.objectStoreNames.contains(designerTables[t].name)) {
           db.deleteObjectStore(designerTables[t].name);
@@ -121,8 +121,8 @@ var DesignerOfflineDB = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__.ajaxShowMessage)(window.Messages.strIndexedDBNotWorking, null, 'error');
       return;
     }
-    var objStore = designerDB.getObjectStore(table);
-    var cursorRequest = objStore.get(parseInt(id));
+    const objStore = designerDB.getObjectStore(table);
+    const cursorRequest = objStore.get(parseInt(id));
     cursorRequest.onsuccess = function (e) {
       callback(e.target.result);
     };
@@ -137,14 +137,14 @@ var DesignerOfflineDB = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__.ajaxShowMessage)(window.Messages.strIndexedDBNotWorking, null, 'error');
       return;
     }
-    var transaction = designerDB.getTransaction(table);
-    var cursorRequest = designerDB.getCursorRequest(transaction, table);
-    var results = [];
+    const transaction = designerDB.getTransaction(table);
+    const cursorRequest = designerDB.getCursorRequest(transaction, table);
+    const results = [];
     transaction.oncomplete = function () {
       callback(results);
     };
     cursorRequest.onsuccess = function (e) {
-      var result = e.target.result;
+      const result = e.target.result;
       if (Boolean(result) === false) {
         return;
       }
@@ -162,14 +162,14 @@ var DesignerOfflineDB = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__.ajaxShowMessage)(window.Messages.strIndexedDBNotWorking, null, 'error');
       return;
     }
-    var transaction = designerDB.getTransaction(table);
-    var cursorRequest = designerDB.getCursorRequest(transaction, table);
-    var firstResult = null;
+    const transaction = designerDB.getTransaction(table);
+    const cursorRequest = designerDB.getCursorRequest(transaction, table);
+    let firstResult = null;
     transaction.oncomplete = function () {
       callback(firstResult);
     };
     cursorRequest.onsuccess = function (e) {
-      var result = e.target.result;
+      const result = e.target.result;
       if (Boolean(result) === false) {
         return;
       }
@@ -188,8 +188,8 @@ var DesignerOfflineDB = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__.ajaxShowMessage)(window.Messages.strIndexedDBNotWorking, null, 'error');
       return;
     }
-    var objStore = designerDB.getObjectStore(table);
-    var request = objStore.put(obj);
+    const objStore = designerDB.getObjectStore(table);
+    const request = objStore.put(obj);
     request.onsuccess = function (e) {
       if (typeof callback === 'function') {
         callback(e.currentTarget.result);
@@ -208,8 +208,8 @@ var DesignerOfflineDB = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_0__.ajaxShowMessage)(window.Messages.strIndexedDBNotWorking, null, 'error');
       return;
     }
-    var objStore = designerDB.getObjectStore(table);
-    var request = objStore.delete(parseInt(id));
+    const objStore = designerDB.getObjectStore(table);
+    const request = objStore.delete(parseInt(id));
     request.onsuccess = function () {
       if (typeof callback === 'function') {
         callback(true);
@@ -224,7 +224,7 @@ var DesignerOfflineDB = function () {
     // eslint-disable-next-line no-console
     console.log(e);
   };
-  var designerDB = {
+  const designerDB = {
     getTransaction: getTransaction,
     getObjectStore: getObjectStore,
     getCursorRequest: getCursorRequest,
@@ -265,7 +265,7 @@ __webpack_require__.r(__webpack_exports__);
  * @requires    jQuery
  * @requires    move.js
  */
-var gIndex;
+let gIndex;
 /**
  * To display details of objects(where,rename,Having,aggregate,groupby,orderby,having)
  *
@@ -273,8 +273,8 @@ var gIndex;
  * @return {string}
  */
 const detail = function (index) {
-  var type = DesignerHistory.historyArray[index].getType();
-  var str;
+  const type = DesignerHistory.historyArray[index].getType();
+  let str;
   if (type === 'Where') {
     str = 'Where ' + DesignerHistory.historyArray[index].getColumnName() + DesignerHistory.historyArray[index].getObj().getRelationOperator() + DesignerHistory.historyArray[index].getObj().getQuery();
   } else if (type === 'Rename') {
@@ -307,12 +307,12 @@ const detail = function (index) {
  * @return {string}
  */
 const display = function (init, finit) {
-  var str;
-  var i;
-  var j;
-  var k;
-  var sto;
-  var temp;
+  let str;
+  let i;
+  let j;
+  let k;
+  let sto;
+  let temp;
   // this part sorts the history array based on table name,this is needed for clubbing all object of same name together.
   for (i = init; i < finit; i++) {
     sto = DesignerHistory.historyArray[i];
@@ -330,7 +330,7 @@ const display = function (init, finit) {
   }
   // this part generates HTML code for history tab.adds delete,edit,and/or and detail features with objects.
   str = ''; // string to store Html code for history tab
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     temp = DesignerHistory.historyArray[i].getTab(); // + '.' + DesignerHistory.historyArray[i].getObjNo(); for Self JOIN
     str += '<h3 class="tiger"><a href="#">' + temp + '</a></h3>';
@@ -346,10 +346,10 @@ const display = function (init, finit) {
       }
       str += '<td style="padding-left: 5px;" class="text-end">' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('b_sbrowse', window.Messages.strColumnName) + '</td>' + '<td width="175" style="padding-left: 5px">' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(DesignerHistory.historyArray[i].getColumnName()).html() + '<td>';
       if (DesignerHistory.historyArray[i].getType() === 'GroupBy' || DesignerHistory.historyArray[i].getType() === 'OrderBy') {
-        var detailDescGroupBy = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(DesignerHistory.detail(i)).html();
+        const detailDescGroupBy = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(DesignerHistory.detail(i)).html();
         str += '<td class="text-center">' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDescGroupBy + '">' + DesignerHistory.historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('b_drop', window.Messages.strDelete) + '</td>';
       } else {
-        var detailDesc = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(DesignerHistory.detail(i)).html();
+        const detailDesc = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(DesignerHistory.detail(i)).html();
         str += '<td class="text-center">' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('s_info', DesignerHistory.detail(i)) + '</td>' + '<td title="' + detailDesc + '">' + DesignerHistory.historyArray[i].getType() + '</td>' + '<td onclick=DesignerHistory.historyEdit(' + i + ')>' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('b_edit', window.Messages.strEdit) + '</td>' + '<td onclick=DesignerHistory.historyDelete(' + i + ')>' + (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__["default"])('b_drop', window.Messages.strDelete) + '</td>';
       }
       str += '</tr></thead>';
@@ -376,7 +376,7 @@ const andOr = function (index) {
   } else {
     DesignerHistory.historyArray[index].setAndOr(1);
   }
-  var existingDiv = document.getElementById('ab');
+  const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
 };
@@ -386,15 +386,15 @@ const andOr = function (index) {
  * @param {number} index of DesignerHistory.historyArray[] which is to be deleted
  */
 const historyDelete = function (index) {
-  var fromArrayLength = window.fromArray.length;
-  for (var k = 0; k < fromArrayLength; k++) {
+  const fromArrayLength = window.fromArray.length;
+  for (let k = 0; k < fromArrayLength; k++) {
     if (window.fromArray[k] === DesignerHistory.historyArray[index].getTab()) {
       window.fromArray.splice(k, 1);
       break;
     }
   }
   DesignerHistory.historyArray.splice(index, 1);
-  var existingDiv = document.getElementById('ab');
+  const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
 };
@@ -402,7 +402,7 @@ const historyDelete = function (index) {
  * @param {string} elementId
  */
 const changeStyle = function (elementId) {
-  var element = document.getElementById(elementId);
+  const element = document.getElementById(elementId);
   element.style.left = '530px';
   element.style.top = '130px';
   element.style.position = 'absolute';
@@ -417,7 +417,7 @@ const changeStyle = function (elementId) {
  */
 const historyEdit = function (index) {
   gIndex = index;
-  var type = DesignerHistory.historyArray[index].getType();
+  const type = DesignerHistory.historyArray[index].getType();
   if (type === 'Where') {
     document.getElementById('eQuery').value = DesignerHistory.historyArray[index].getObj().getQuery();
     document.getElementById('erel_opt').value = DesignerHistory.historyArray[index].getObj().getRelationOperator();
@@ -468,7 +468,7 @@ const edit = function (type) {
     }
     document.getElementById('query_having').style.visibility = 'hidden';
   }
-  var existingDiv = document.getElementById('ab');
+  const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = DesignerHistory.display(0, 0);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
 };
@@ -483,12 +483,12 @@ const edit = function (type) {
  *
  */
 const HistoryObj = function (nColumnName, nObj, nTab, nObjNo, nType) {
-  var andOr;
-  var obj;
-  var tab;
-  var columnName;
-  var objNo;
-  var type;
+  let andOr;
+  let obj;
+  let tab;
+  let columnName;
+  let objNo;
+  let type;
   this.setColumnName = function (nColumnName) {
     columnName = nColumnName;
   };
@@ -543,8 +543,8 @@ const HistoryObj = function (nColumnName, nObj, nTab, nObjNo, nType) {
  *
  */
 const Where = function (nRelationOperator, nQuery) {
-  var relationOperator;
-  var query;
+  let relationOperator;
+  let query;
   this.setRelationOperator = function (nRelationOperator) {
     relationOperator = nRelationOperator;
   };
@@ -566,7 +566,7 @@ const Where = function (nRelationOperator, nQuery) {
  * @param nOrder order, ASC or DESC
  */
 const OrderBy = function (nOrder) {
-  var order;
+  let order;
   this.setOrder = function (nOrder) {
     order = nOrder;
   };
@@ -583,9 +583,9 @@ const OrderBy = function (nOrder) {
  * @param nOperator          operator
  */
 const Having = function (nRelationOperator, nQuery, nOperator) {
-  var relationOperator;
-  var query;
-  var operator;
+  let relationOperator;
+  let query;
+  let operator;
   this.setOperator = function (nOperator) {
     operator = nOperator;
   };
@@ -615,7 +615,7 @@ const Having = function (nRelationOperator, nQuery, nOperator) {
  *
  */
 const Rename = function (nRenameTo) {
-  var renameTo;
+  let renameTo;
   this.setRenameTo = function (nRenameTo) {
     renameTo = nRenameTo;
   };
@@ -631,7 +631,7 @@ const Rename = function (nRenameTo) {
  *
  */
 const Aggregate = function (nOperator) {
-  var operator;
+  let operator;
   this.setOperator = function (nOperator) {
     operator = nOperator;
   };
@@ -647,10 +647,10 @@ const Aggregate = function (nOperator) {
  * @return unique array
  */
 const unique = function (arrayName) {
-  var newArray = [];
-  uniquetop: for (var i = 0; i < arrayName.length; i++) {
-    var newArrayLength = newArray.length;
-    for (var j = 0; j < newArrayLength; j++) {
+  const newArray = [];
+  uniquetop: for (let i = 0; i < arrayName.length; i++) {
+    const newArrayLength = newArray.length;
+    for (let j = 0; j < newArrayLength; j++) {
       if (newArray[j] === arrayName[i]) {
         continue uniquetop;
       }
@@ -667,8 +667,8 @@ const unique = function (arrayName) {
  * @param value  value which is to be searched in the array
  */
 const found = function (arrayName, value) {
-  var arrayNameLength = arrayName.length;
-  for (var i = 0; i < arrayNameLength; i++) {
+  const arrayNameLength = arrayName.length;
+  for (let i = 0; i < arrayNameLength; i++) {
     if (arrayName[i] === value) {
       return 1;
     }
@@ -684,8 +684,8 @@ const found = function (arrayName, value) {
  * @return {obj[]}
  */
 const addArray = function (add, arr) {
-  var addLength = add.length;
-  for (var i = 0; i < addLength; i++) {
+  const addLength = add.length;
+  for (let i = 0; i < addLength; i++) {
     arr.push(add[i]);
   }
   return arr;
@@ -700,10 +700,10 @@ const addArray = function (add, arr) {
  *
  */
 const removeArray = function (rem, arr) {
-  var remLength = rem.length;
-  for (var i = 0; i < remLength; i++) {
-    var arrLength = arr.length;
-    for (var j = 0; j < arrLength; j++) {
+  const remLength = rem.length;
+  for (let i = 0; i < remLength; i++) {
+    const arrLength = arr.length;
+    for (let j = 0; j < arrLength; j++) {
       if (rem[i] === arr[j]) {
         arr.splice(j, 1);
       }
@@ -716,9 +716,9 @@ const removeArray = function (rem, arr) {
  * @return {string}
  */
 const queryGroupBy = function () {
-  var i;
-  var str = '';
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  let str = '';
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     if (DesignerHistory.historyArray[i].getType() === 'GroupBy') {
       str += '`' + DesignerHistory.historyArray[i].getColumnName() + '`, ';
@@ -732,9 +732,9 @@ const queryGroupBy = function () {
  * @return {string}
  */
 const queryHaving = function () {
-  var i;
-  var and = '(';
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  let and = '(';
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     if (DesignerHistory.historyArray[i].getType() === 'Having') {
       if (DesignerHistory.historyArray[i].getObj().getOperator() !== 'None') {
@@ -757,9 +757,9 @@ const queryHaving = function () {
  * @return {string}
  */
 const queryOrderBy = function () {
-  var i;
-  var str = '';
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  let str = '';
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     if (DesignerHistory.historyArray[i].getType() === 'OrderBy') {
       str += '`' + DesignerHistory.historyArray[i].getColumnName() + '` ' + DesignerHistory.historyArray[i].getObj().getOrder() + ', ';
@@ -773,10 +773,10 @@ const queryOrderBy = function () {
  * @return {string}
  */
 const queryWhere = function () {
-  var i;
-  var and = '(';
-  var or = '(';
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  let and = '(';
+  let or = '(';
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     if (DesignerHistory.historyArray[i].getType() === 'Where') {
       if (DesignerHistory.historyArray[i].getAndOr() === 0) {
@@ -804,10 +804,10 @@ const queryWhere = function () {
   return and;
 };
 const checkAggregate = function (idThis) {
-  var i;
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
-    var temp = '`' + DesignerHistory.historyArray[i].getTab() + '`.`' + DesignerHistory.historyArray[i].getColumnName() + '`';
+    const temp = '`' + DesignerHistory.historyArray[i].getTab() + '`.`' + DesignerHistory.historyArray[i].getColumnName() + '`';
     if (temp === idThis && DesignerHistory.historyArray[i].getType() === 'Aggregate') {
       return DesignerHistory.historyArray[i].getObj().getOperator() + '(' + idThis + ')';
     }
@@ -815,10 +815,10 @@ const checkAggregate = function (idThis) {
   return '';
 };
 const checkRename = function (idThis) {
-  var i;
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  let i;
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
-    var temp = '`' + DesignerHistory.historyArray[i].getTab() + '`.`' + DesignerHistory.historyArray[i].getColumnName() + '`';
+    const temp = '`' + DesignerHistory.historyArray[i].getTab() + '`.`' + DesignerHistory.historyArray[i].getColumnName() + '`';
     if (temp === idThis && DesignerHistory.historyArray[i].getType() === 'Rename') {
       return ' AS `' + DesignerHistory.historyArray[i].getObj().getRenameTo() + '`';
     }
@@ -832,25 +832,25 @@ const checkRename = function (idThis) {
  * @return {string}
  */
 const queryFrom = function () {
-  var i;
-  var tabLeft = [];
-  var tabUsed = [];
-  var tTabLeft = [];
-  var temp;
-  var query = '';
-  var quer = '';
-  var parts = [];
-  var tArray = [];
+  let i;
+  let tabLeft = [];
+  let tabUsed = [];
+  let tTabLeft = [];
+  let temp;
+  let query = '';
+  let quer = '';
+  let parts = [];
+  let tArray = [];
   tArray = window.fromArray;
-  var K = 0;
-  var k;
-  var key;
-  var key2;
-  var key3;
-  var parts1;
+  let K = 0;
+  let k;
+  let key;
+  let key2;
+  let key3;
+  let parts1;
   // the constraints that have been used in the LEFT JOIN
-  var constraintsAdded = [];
-  var historyArrayLength = DesignerHistory.historyArray.length;
+  const constraintsAdded = [];
+  const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     window.fromArray.push(DesignerHistory.historyArray[i].getTab());
   }
@@ -942,11 +942,11 @@ const queryFrom = function () {
  * @uses DesignerHistory.queryOrderBy()
  */
 const buildQuery = function () {
-  var qSelect = 'SELECT ';
-  var temp;
-  var selectFieldLength = DesignerHistory.selectField.length;
+  let qSelect = 'SELECT ';
+  let temp;
+  const selectFieldLength = DesignerHistory.selectField.length;
   if (selectFieldLength > 0) {
-    for (var i = 0; i < selectFieldLength; i++) {
+    for (let i = 0; i < selectFieldLength; i++) {
       temp = DesignerHistory.checkAggregate(DesignerHistory.selectField[i]);
       if (temp !== '') {
         qSelect += temp;
@@ -962,25 +962,25 @@ const buildQuery = function () {
     qSelect += '* ';
   }
   qSelect += '\nFROM ' + DesignerHistory.queryFrom();
-  var qWhere = DesignerHistory.queryWhere();
+  const qWhere = DesignerHistory.queryWhere();
   if (qWhere !== '') {
     qSelect += '\nWHERE ' + qWhere;
   }
-  var qGroupBy = DesignerHistory.queryGroupBy();
+  const qGroupBy = DesignerHistory.queryGroupBy();
   if (qGroupBy !== '') {
     qSelect += '\nGROUP BY ' + qGroupBy;
   }
-  var qHaving = DesignerHistory.queryHaving();
+  const qHaving = DesignerHistory.queryHaving();
   if (qHaving !== '') {
     qSelect += '\nHAVING ' + qHaving;
   }
-  var qOrderBy = DesignerHistory.queryOrderBy();
+  const qOrderBy = DesignerHistory.queryOrderBy();
   if (qOrderBy !== '') {
     qSelect += '\nORDER BY ' + qOrderBy;
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buildQuerySubmitButton').on('click', function () {
     if (DesignerHistory.vqbEditor) {
-      var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buildQueryModal').find('textarea');
+      const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buildQueryModal').find('textarea');
       DesignerHistory.vqbEditor.save();
       $elm.val(DesignerHistory.vqbEditor.getValue());
     }
@@ -994,7 +994,7 @@ const buildQuery = function () {
      * @var $elm jQuery object containing the reference
      *           to the query textarea.
      */
-    var $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buildQueryModal').find('textarea');
+    const $elm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buildQueryModal').find('textarea');
     if (!DesignerHistory.vqbEditor) {
       DesignerHistory.vqbEditor = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getSqlEditor)($elm);
     }
@@ -1102,9 +1102,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('designer/in
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').show();
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init.js', function () {
-  var $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
-  var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
-  var $span = $img.siblings('span');
+  const $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+  const $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
+  const $span = $img.siblings('span');
   $content.css({
     'margin-left': '3px'
   });
@@ -1122,7 +1122,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('designer/init
       $span.text($span.data('enter'));
       // Saving the fullscreen state in config when
       // designer exists fullscreen mode via ESC key
-      var valueSent = 'off';
+      const valueSent = 'off';
       _move_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerMove.saveValueInConfig('full_screen', valueSent);
     }
   });
@@ -1381,9 +1381,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var change = 0; // variable to track any change in designer layout.
-var showRelationLines = true;
-var alwaysShowText = false;
+let change = 0; // variable to track any change in designer layout.
+let showRelationLines = true;
+let alwaysShowText = false;
 const markSaved = function () {
   change = 0;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saved_state').text('');
@@ -1392,32 +1392,32 @@ const markUnsaved = function () {
   change = 1;
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saved_state').text('*');
 };
-var mainDirection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'rtl' ? 'right' : 'left';
+const mainDirection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'rtl' ? 'right' : 'left';
 // Will be used to multiply the offsetLeft by -1 if the direction is rtl.
-var directionEffect = mainDirection === 'right' ? -1 : 1;
-var curClick = null;
-var smS = 0;
-var smAdd = 10;
-var sLeft = 0;
-var sRight = 0;
-var onRelation = 0;
-var onGrid = 0;
-var onDisplayField = 0;
+const directionEffect = mainDirection === 'right' ? -1 : 1;
+let curClick = null;
+const smS = 0;
+const smAdd = 10;
+let sLeft = 0;
+let sRight = 0;
+let onRelation = 0;
+let onGrid = 0;
+let onDisplayField = 0;
 // relation_style: 0 - angular 1 - direct
-var onAngularDirect = 1;
-var clickField = 0;
-var linkRelation = '';
-var canvasWidth = 0;
-var canvasHeight = 0;
-var osnTabWidth = 0;
-var osnTabHeight = 0;
-var heightField = 7;
-var globX;
-var globY;
-var layerMenuCurClick = 0;
+let onAngularDirect = 1;
+let clickField = 0;
+let linkRelation = '';
+let canvasWidth = 0;
+let canvasHeight = 0;
+let osnTabWidth = 0;
+let osnTabHeight = 0;
+const heightField = 7;
+let globX;
+let globY;
+let layerMenuCurClick = 0;
 window.fromArray = [];
-var menuMoved = false;
-var gridSize = 10;
+let menuMoved = false;
+const gridSize = 10;
 // ------------------------------------------------------------------------------
 const mouseDown = function (e) {
   globX = e.pageX;
@@ -1440,19 +1440,19 @@ const mouseMove = function (e) {
   if (e.preventDefault) {
     e.preventDefault();
   }
-  var newDx = e.pageX;
-  var newDy = e.pageY;
-  var deltaX = globX - newDx;
-  var deltaY = globY - newDy;
+  const newDx = e.pageX;
+  const newDy = e.pageY;
+  let deltaX = globX - newDx;
+  const deltaY = globY - newDy;
   globX = newDx;
   globY = newDy;
   if (curClick !== null) {
     DesignerMove.markUnsaved();
-    var $curClick = jquery__WEBPACK_IMPORTED_MODULE_0___default()(curClick);
-    var curX = parseFloat($curClick.attr('data-' + mainDirection) || $curClick.css(mainDirection));
-    var curY = parseFloat($curClick.attr('data-top') || $curClick.css('top'));
-    var newX = curX - directionEffect * deltaX;
-    var newY = curY - deltaY;
+    const $curClick = jquery__WEBPACK_IMPORTED_MODULE_0___default()(curClick);
+    const curX = parseFloat($curClick.attr('data-' + mainDirection) || $curClick.css(mainDirection));
+    const curY = parseFloat($curClick.attr('data-top') || $curClick.css('top'));
+    let newX = curX - directionEffect * deltaX;
+    let newY = curY - deltaY;
     $curClick.attr('data-' + mainDirection, newX);
     $curClick.attr('data-top', newY);
     if (onGrid) {
@@ -1470,8 +1470,8 @@ const mouseMove = function (e) {
     if (menuMoved) {
       deltaX = -deltaX;
     }
-    var $layerMenu = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#layer_menu');
-    var newWidth = $layerMenu.width() + directionEffect * deltaX;
+    const $layerMenu = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#layer_menu');
+    let newWidth = $layerMenu.width() + directionEffect * deltaX;
     if (newWidth < 150) {
       newWidth = 150;
     }
@@ -1513,7 +1513,7 @@ const setDefaultValuesFromSavedState = function () {
     onGrid = 0;
   }
   DesignerMove.grid();
-  var $relLineInvert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert');
+  const $relLineInvert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#relLineInvert');
   if ($relLineInvert.attr('class') === 'M_butt') {
     showRelationLines = false;
     $relLineInvert.attr('class', 'M_butt');
@@ -1528,13 +1528,13 @@ const setDefaultValuesFromSavedState = function () {
   } else {
     alwaysShowText = false;
   }
-  var $keySbAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all');
+  const $keySbAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_SB_all');
   if ($keySbAll.attr('class') === 'M_butt_Selected_down') {
     $keySbAll.trigger('click');
     $keySbAll.toggleClass('M_butt_Selected_down');
     $keySbAll.toggleClass('M_butt');
   }
-  var $keyLeftRight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right');
+  const $keyLeftRight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Left_Right');
   if ($keyLeftRight.attr('class') === 'M_butt_Selected_down') {
     $keyLeftRight.trigger('click');
   }
@@ -1549,11 +1549,11 @@ const main = function () {
   DesignerMove.setDefaultValuesFromSavedState();
 };
 const resizeOsnTab = function () {
-  var maxX = 0;
-  var maxY = 0;
-  for (var key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
-    var kX = parseInt(document.getElementById(key).style[mainDirection], 10) + document.getElementById(key).offsetWidth;
-    var kY = parseInt(document.getElementById(key).style.top, 10) + document.getElementById(key).offsetHeight;
+  let maxX = 0;
+  let maxY = 0;
+  for (let key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
+    const kX = parseInt(document.getElementById(key).style[mainDirection], 10) + document.getElementById(key).offsetWidth;
+    const kY = parseInt(document.getElementById(key).style.top, 10) + document.getElementById(key).offsetHeight;
     maxX = maxX < kX ? kX : maxX;
     maxY = maxY < kY ? kY : maxY;
   }
@@ -1579,16 +1579,16 @@ const drawLine0 = function (x1, x2, y1, y2, osnTab, colorTarget) {
  */
 const reload = function () {
   DesignerMove.resizeOsnTab();
-  var n;
-  var x1;
-  var x2;
-  var a = [];
-  var K;
-  var key;
-  var key2;
-  var key3;
+  let n;
+  let x1;
+  let x2;
+  const a = [];
+  let K;
+  let key;
+  let key2;
+  let key3;
   DesignerMove.clear();
-  var osnTab = document.getElementById('osn_tab');
+  const osnTab = document.getElementById('osn_tab');
   for (K in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
     for (key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
       // contr name
@@ -1600,16 +1600,16 @@ const reload = function () {
             // if hide
             continue;
           }
-          var x1Left = document.getElementById(key2).offsetLeft + 1;
-          var x1Right = x1Left + document.getElementById(key2).offsetWidth;
-          var x2Left = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft;
-          var x2Right = x2Left + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
+          const x1Left = document.getElementById(key2).offsetLeft + 1;
+          const x1Right = x1Left + document.getElementById(key2).offsetWidth;
+          const x2Left = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft;
+          const x2Right = x2Left + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
           a[0] = Math.abs(x1Left - x2Left);
           a[1] = Math.abs(x1Left - x2Right);
           a[2] = Math.abs(x1Right - x2Left);
           a[3] = Math.abs(x1Right - x2Right);
           n = sLeft = sRight = 0;
-          for (var i = 1; i < 4; i++) {
+          for (let i = 1; i < 4; i++) {
             if (a[n] > a[i]) {
               n = i;
             }
@@ -1638,28 +1638,28 @@ const reload = function () {
             x2 = x2Left - smS;
             sLeft = 1;
           }
-          var rowOffsetTop = 0;
-          var tabHideButton = document.getElementById('id_hide_tbody_' + key2);
+          let rowOffsetTop = 0;
+          let tabHideButton = document.getElementById('id_hide_tbody_' + key2);
           if (tabHideButton.innerHTML === 'v') {
-            var fromColumn = document.getElementById(key2 + '.' + key3);
+            const fromColumn = document.getElementById(key2 + '.' + key3);
             if (fromColumn) {
               rowOffsetTop = fromColumn.offsetTop;
             } else {
               continue;
             }
           }
-          var y1 = document.getElementById(key2).offsetTop + rowOffsetTop + heightField;
+          const y1 = document.getElementById(key2).offsetTop + rowOffsetTop + heightField;
           rowOffsetTop = 0;
           tabHideButton = document.getElementById('id_hide_tbody_' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]);
           if (tabHideButton.innerHTML === 'v') {
-            var toColumn = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
+            const toColumn = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
             if (toColumn) {
               rowOffsetTop = toColumn.offsetTop;
             } else {
               continue;
             }
           }
-          var y2 = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + rowOffsetTop + heightField;
+          const y2 = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + rowOffsetTop + heightField;
           DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]);
         }
       }
@@ -1675,8 +1675,8 @@ const reload = function () {
  * @param colorLine
  */
 const line = function (x1, y1, x2, y2, colorLine) {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
   ctx.strokeStyle = colorLine;
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -1713,8 +1713,8 @@ const line0 = function (x1, y1, x2, y2, colorLine) {
  * @param colorLine
  */
 const line2 = function (x1, y1, x2, y2, colorLine) {
-  var x1Local = x1;
-  var x2Local = x2;
+  let x1Local = x1;
+  let x2Local = x2;
   if (sRight) {
     x1Local += smAdd;
     x2Local += smAdd;
@@ -1741,8 +1741,8 @@ const line2 = function (x1, y1, x2, y2, colorLine) {
  * @param colorLine
  */
 const line3 = function (x1, y1, x2, y2, colorLine) {
-  var x1Local = x1;
-  var x2Local = x2;
+  let x1Local = x1;
+  let x2Local = x2;
   if (sRight) {
     if (x1 < x2) {
       x1Local += x2 - x1 + smAdd;
@@ -1769,13 +1769,13 @@ const line3 = function (x1, y1, x2, y2, colorLine) {
     DesignerMove.line(x1Local, y1, x2Local, y2, colorLine);
     return;
   }
-  var xS = (x1 + x2) / 2;
+  const xS = (x1 + x2) / 2;
   DesignerMove.line(x1, y1, xS, y1, colorLine);
   DesignerMove.line(xS, y2, x2, y2, colorLine);
   DesignerMove.line(xS, y1, xS, y2, colorLine);
 };
 const circle = function (x, y, r, w, color) {
-  var ctx = document.getElementById('canvas').getContext('2d');
+  const ctx = document.getElementById('canvas').getContext('2d');
   ctx.beginPath();
   ctx.moveTo(x, y);
   ctx.lineWidth = w;
@@ -1784,12 +1784,12 @@ const circle = function (x, y, r, w, color) {
   ctx.stroke();
 };
 const clear = function () {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 };
 const rect = function (x1, y1, w, h, color) {
-  var ctx = document.getElementById('canvas').getContext('2d');
+  const ctx = document.getElementById('canvas').getContext('2d');
   ctx.fillStyle = color;
   ctx.fillRect(x1, y1, w, h);
 };
@@ -1816,10 +1816,10 @@ const fullscreenEnabled = function () {
   document.msFullscreenEnabled;
 };
 const toggleFullscreen = function () {
-  var valueSent = '';
-  var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
-  var $span = $img.siblings('span');
-  var $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
+  let valueSent = '';
+  const $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggleFullscreen').find('img');
+  const $span = $img.siblings('span');
+  const $content = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_content');
   const pageContent = document.getElementById('page_content');
   if (!DesignerMove.fullscreenEnabled()) {
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strFullscreenRequestDenied, null, 'error');
@@ -1855,13 +1855,13 @@ const toggleFullscreen = function () {
   DesignerMove.saveValueInConfig('full_screen', valueSent);
 };
 const addTableToTablesList = function (index, tableDom) {
-  var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('db');
-  var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('table_name');
-  var dbEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('db_url');
-  var tableEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('table_name_url');
-  var tableIsChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).css('display') === 'block' ? 'checked' : '';
-  var checkboxStatus = tableIsChecked === 'checked' ? window.Messages.strHide : window.Messages.strShow;
-  var $newTableLine = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tr>' + '    <td title="' + window.Messages.strStructure + '"' + '        width="1px"' + '        class="L_butt2_1">' + '        <img alt=""' + '            db="' + dbEncoded + '"' + '            table_name="' + tableEncoded + '"' + '            class="scroll_tab_struct"' + '            src="' + window.themeImagePath + 'designer/exec.png"/>' + '    </td>' + '    <td width="1px">' + '        <input class="scroll_tab_checkbox"' + '            title="' + checkboxStatus + '"' + '            id="check_vis_' + dbEncoded + '.' + tableEncoded + '"' + '            style="margin:0;"' + '            type="checkbox"' + '            value="' + dbEncoded + '.' + tableEncoded + '"' + tableIsChecked + '            />' + '    </td>' + '    <td class="designer_Tabs"' + '        designer_url_table_name="' + dbEncoded + '.' + tableEncoded + '">' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(db + '.' + table).html() + '</td>' + '</tr>');
+  const db = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('db');
+  const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('table_name');
+  const dbEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('db_url');
+  const tableEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).find('.small_tab_pref').attr('table_name_url');
+  const tableIsChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableDom).css('display') === 'block' ? 'checked' : '';
+  const checkboxStatus = tableIsChecked === 'checked' ? window.Messages.strHide : window.Messages.strShow;
+  const $newTableLine = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<tr>' + '    <td title="' + window.Messages.strStructure + '"' + '        width="1px"' + '        class="L_butt2_1">' + '        <img alt=""' + '            db="' + dbEncoded + '"' + '            table_name="' + tableEncoded + '"' + '            class="scroll_tab_struct"' + '            src="' + window.themeImagePath + 'designer/exec.png"/>' + '    </td>' + '    <td width="1px">' + '        <input class="scroll_tab_checkbox"' + '            title="' + checkboxStatus + '"' + '            id="check_vis_' + dbEncoded + '.' + tableEncoded + '"' + '            style="margin:0;"' + '            type="checkbox"' + '            value="' + dbEncoded + '.' + tableEncoded + '"' + tableIsChecked + '            />' + '    </td>' + '    <td class="designer_Tabs"' + '        designer_url_table_name="' + dbEncoded + '.' + tableEncoded + '">' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div/>').text(db + '.' + table).html() + '</td>' + '</tr>');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_scroll_tab table').first().append($newTableLine);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()($newTableLine).find('.scroll_tab_struct').on('click', function () {
     DesignerMove.startTabUpd(db, table);
@@ -1875,7 +1875,7 @@ const addTableToTablesList = function (index, tableDom) {
     });
     DesignerMove.visibleTab(this, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
   });
-  var $tablesCounter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tables_counter');
+  const $tablesCounter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tables_counter');
   $tablesCounter.text(parseInt($tablesCounter.text(), 10) + 1);
 };
 /**
@@ -1887,7 +1887,7 @@ const addTableToTablesList = function (index, tableDom) {
  * @return {object} modal;
  */
 const displayModal = function (form, heading, type) {
-  var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()(type);
+  const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()(type);
   modal.one('hidden.bs.modal', function () {
     modal.find('*').off('click'); // Unregister all click events when the modal is hidden
   });
@@ -1897,9 +1897,9 @@ const displayModal = function (form, heading, type) {
   return modal;
 };
 const addOtherDbTables = function () {
-  var $selectDb = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<select id="add_table_from"></select>');
+  const $selectDb = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<select id="add_table_from"></select>');
   $selectDb.append('<option value="">' + window.Messages.strNone + '</option>');
-  var $selectTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<select id="add_table"></select>');
+  const $selectTable = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<select id="add_table"></select>');
   $selectTable.append('<option value="">' + window.Messages.strNone + '</option>');
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
     'ajax_request': true,
@@ -1907,17 +1907,17 @@ const addOtherDbTables = function () {
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
   }, function (data) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
-      var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)[0].innerText;
+      const val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)[0].innerText;
       $selectDb.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>').val(val).text(val));
     });
   });
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form action="" class="ajax"></form>').append($selectDb).append($selectTable);
-  var modal = DesignerMove.displayModal($form, window.Messages.strAddTables, '#designerGoModal');
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form action="" class="ajax"></form>').append($selectDb).append($selectTable);
+  const modal = DesignerMove.displayModal($form, window.Messages.strAddTables, '#designerGoModal');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
-    var db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table_from').val();
-    var table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table').val();
+    const db = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table_from').val();
+    const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table').val();
     // Check if table already imported or not.
-    var $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
+    const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
     if ($table.length !== 0) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
       return;
@@ -1929,10 +1929,10 @@ const addOtherDbTables = function () {
       'table': table,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
     }, function (data) {
-      var $newTableDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
+      const $newTableDom = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
       $newTableDom.find('a').first().remove();
-      var dbEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()($newTableDom).find('.small_tab_pref').attr('db_url');
-      var tableEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()($newTableDom).find('.small_tab_pref').attr('table_name_url');
+      const dbEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()($newTableDom).find('.small_tab_pref').attr('db_url');
+      const tableEncoded = jquery__WEBPACK_IMPORTED_MODULE_0___default()($newTableDom).find('.small_tab_pref').attr('table_name_url');
       if (typeof dbEncoded === 'string' && typeof tableEncoded === 'string') {
         // Do not try to add if attr not found !
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#container-form').append($newTableDom);
@@ -1946,8 +1946,8 @@ const addOtherDbTables = function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_table_from').on('change', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()) {
-      var dbName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
-      var sqlQuery = 'SHOW tables;';
+      const dbName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+      const sqlQuery = 'SHOW tables;';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
         'ajax_request': true,
         'sql_query': sqlQuery,
@@ -1955,12 +1955,12 @@ const addOtherDbTables = function () {
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
       }, function (data) {
         $selectTable.html('');
-        var rows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message).find('table.table_results.data.ajax').find('td.data');
+        const rows = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message).find('table.table_results.data.ajax').find('td.data');
         if (rows.length === 0) {
           $selectTable.append('<option value="">' + window.Messages.strNone + '</option>');
         }
         rows.each(function () {
-          var val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)[0].innerText;
+          const val = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this)[0].innerText;
           $selectTable.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<option></option>').val(val).text(val));
         });
       });
@@ -1976,7 +1976,7 @@ const newPage = function () {
 // ------------------------------ SAVE ------------------------------------------
 // (del?) no for pdf
 const save = function (url) {
-  for (var key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
+  for (let key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     document.getElementById('t_x_' + key + '_').value = parseInt(document.getElementById(key).style.left, 10).toString();
     document.getElementById('t_y_' + key + '_').value = parseInt(document.getElementById(key).style.top, 10).toString();
     document.getElementById('t_v_' + key + '_').value = document.getElementById('id_tbody_' + key).style.display === 'none' ? '0' : '1';
@@ -1987,11 +1987,11 @@ const save = function (url) {
 };
 const getUrlPos = function () {
   let forceString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
-  var key;
+  let key;
   if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled || forceString) {
-    var poststr = '';
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var i = 1;
+    let poststr = '';
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let i = 1;
     for (key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
       poststr += argsep + 't_x[' + i + ']=' + parseInt(document.getElementById(key).style.left, 10);
       poststr += argsep + 't_y[' + i + ']=' + parseInt(document.getElementById(key).style.top, 10);
@@ -2003,12 +2003,12 @@ const getUrlPos = function () {
     }
     return poststr;
   } else {
-    var coords = [];
+    const coords = [];
     for (key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
       if (document.getElementById('check_vis_' + key).checked) {
-        var x = parseInt(document.getElementById(key).style.left, 10);
-        var y = parseInt(document.getElementById(key).style.top, 10);
-        var tbCoords = new _objects_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerObjects.TableCoordinate(jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.getElementById(key)).attr('db_url'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.getElementById(key)).attr('table_name_url'), -1, x, y);
+        const x = parseInt(document.getElementById(key).style.left, 10);
+        const y = parseInt(document.getElementById(key).style.top, 10);
+        const tbCoords = new _objects_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerObjects.TableCoordinate(jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.getElementById(key)).attr('db_url'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.getElementById(key)).attr('table_name_url'), -1, x, y);
         coords.push(tbCoords);
       }
     }
@@ -2017,11 +2017,11 @@ const getUrlPos = function () {
 };
 const save2 = function (callback) {
   if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    var poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let poststr = 'operation=savePage' + argsep + 'save_page=same' + argsep + 'ajax_request=true';
     poststr += argsep + 'server=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + encodeURIComponent(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db) + argsep + 'selected_page=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage;
     poststr += DesignerMove.getUrlPos();
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', poststr, function (data) {
       if (data.success === false) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
@@ -2035,7 +2035,7 @@ const save2 = function (callback) {
       }
     });
   } else {
-    var name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_name').html().trim();
+    const name = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#page_name').html().trim();
     _page_ts__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage, name, DesignerMove.getUrlPos(), function () {
       DesignerMove.markSaved();
       if (typeof callback !== 'undefined') {
@@ -2045,15 +2045,15 @@ const save2 = function (callback) {
   }
 };
 const submitSaveDialogAndClose = function (callback, modal) {
-  var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_page');
-  var name = $form.find('input[name="selected_value"]').val().trim();
+  const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_page');
+  const name = $form.find('input[name="selected_value"]').val().trim();
   if (name === '') {
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strEnterValidPageName, false);
     return;
   }
   modal.modal('hide');
   if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_1__.prepareForAjaxRequest)($form);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
       if (data.success === false) {
@@ -2088,14 +2088,14 @@ const save3 = function () {
   if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage !== -1) {
     DesignerMove.save2(callback);
   } else {
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form action="index.php?route=/database/designer" method="post" name="save_page" id="save_page" class="ajax"></form>').append('<input type="hidden" name="server" value="' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + '">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden" name="db" />').val(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db)).append('<input type="hidden" name="operation" value="savePage">').append('<input type="hidden" name="save_page" value="new">').append('<label for="selected_value">' + window.Messages.strPageName + '</label>:<input type="text" name="selected_value">');
-    var modal = DesignerMove.displayModal($form, window.Messages.strSavePage, '#designerGoModal');
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<form action="index.php?route=/database/designer" method="post" name="save_page" id="save_page" class="ajax"></form>').append('<input type="hidden" name="server" value="' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + '">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden" name="db" />').val(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db)).append('<input type="hidden" name="operation" value="savePage">').append('<input type="hidden" name="save_page" value="new">').append('<label for="selected_value">' + window.Messages.strPageName + '</label>:<input type="text" name="selected_value">');
+    const modal = DesignerMove.displayModal($form, window.Messages.strSavePage, '#designerGoModal');
     $form.on('submit', function (e) {
       e.preventDefault();
       DesignerMove.submitSaveDialogAndClose(callback, modal);
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_page');
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_page');
       $form.trigger('submit');
       modal.modal('hide');
     });
@@ -2104,7 +2104,7 @@ const save3 = function () {
 // ------------------------------ EDIT PAGES ------------------------------------------
 const editPages = function () {
   DesignerMove.promptToSaveCurrentPage(function () {
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
       'ajax_request': true,
       'server': _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
@@ -2120,10 +2120,10 @@ const editPages = function () {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selected_page').append(options);
           });
         }
-        var modal = DesignerMove.displayModal(data.message, window.Messages.strOpenPage, '#designerGoModal');
+        const modal = DesignerMove.displayModal(data.message, window.Messages.strOpenPage, '#designerGoModal');
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
-          var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_delete_pages');
-          var selected = $form.find('select[name="selected_page"]').val();
+          const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_delete_pages');
+          const selected = $form.find('select[name="selected_page"]').val();
           if (selected === '0') {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
             return;
@@ -2137,7 +2137,7 @@ const editPages = function () {
 };
 // -----------------------------  DELETE PAGES ---------------------------------------
 const deletePages = function () {
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
@@ -2153,16 +2153,16 @@ const deletePages = function () {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selected_page').append(options);
         });
       }
-      var modal = DesignerMove.displayModal(data.message, window.Messages.strDeletePage, '#designerGoModal');
+      const modal = DesignerMove.displayModal(data.message, window.Messages.strDeletePage, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
-        var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_delete_pages');
-        var selected = $form.find('select[name="selected_page"]').val();
+        const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_delete_pages');
+        const selected = $form.find('select[name="selected_page"]').val();
         if (selected === '0') {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
           return;
         }
-        var $messageBox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        var deletingCurrentPage = parseInt(selected) === _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage;
+        const $messageBox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+        const deletingCurrentPage = parseInt(selected) === _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage;
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_1__.prepareForAjaxRequest)($form);
         if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
@@ -2198,7 +2198,7 @@ const deletePages = function () {
 };
 // ------------------------------ SAVE AS PAGES ---------------------------------------
 const saveAs = function () {
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
@@ -2214,14 +2214,14 @@ const saveAs = function () {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selected_page').append(options);
         });
       }
-      var modal = DesignerMove.displayModal(data.message, window.Messages.strSavePageAs, '#designerGoModal');
+      const modal = DesignerMove.displayModal(data.message, window.Messages.strSavePageAs, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages').on('submit', function (e) {
         e.preventDefault();
-        var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages');
-        var selectedValue = $form.find('input[name="selected_value"]').val().trim();
-        var $selectedPage = $form.find('select[name="selected_page"]');
-        var choice = $form.find('input[name="save_page"]:checked').val();
-        var name = '';
+        const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save_as_pages');
+        const selectedValue = $form.find('input[name="selected_value"]').val().trim();
+        const $selectedPage = $form.find('select[name="selected_page"]');
+        const choice = $form.find('input[name="save_page"]:checked').val();
+        let name = '';
         if (choice === 'same') {
           if ($selectedPage.val() === '0') {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strSelectPage, 2000);
@@ -2235,7 +2235,7 @@ const saveAs = function () {
           }
           name = selectedValue;
         }
-        var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+        const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
         if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_1__.prepareForAjaxRequest)($form);
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + DesignerMove.getUrlPos(), function (data) {
@@ -2252,7 +2252,7 @@ const saveAs = function () {
           }); // end $.post()
         } else {
           if (choice === 'same') {
-            var selectedPageId = $selectedPage.find('option:selected').val();
+            const selectedPageId = $selectedPage.find('option:selected').val();
             _page_ts__WEBPACK_IMPORTED_MODULE_8__.DesignerPage.saveToSelectedPage(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db, selectedPageId, name, DesignerMove.getUrlPos(), function (page) {
               (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
               DesignerMove.markSaved();
@@ -2286,7 +2286,7 @@ const saveAs = function () {
 };
 const promptToSaveCurrentPage = function (callback) {
   if (change === 1 || _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.selectedPage === -1) {
-    var modal = DesignerMove.displayModal('<div>' + window.Messages.strLeavingPage + '</div>', window.Messages.strSavePage, '#designerPromptModal');
+    const modal = DesignerMove.displayModal('<div>' + window.Messages.strLeavingPage + '</div>', window.Messages.strSavePage, '#designerPromptModal');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalYesButton').on('click', function () {
       modal.modal('hide');
       DesignerMove.save3(callback);
@@ -2301,8 +2301,8 @@ const promptToSaveCurrentPage = function (callback) {
 };
 // ------------------------------ EXPORT PAGES ---------------------------------------
 const exportPages = function () {
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
-  var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+  const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
     'ajax_request': true,
     'server': _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server,
@@ -2314,24 +2314,24 @@ const exportPages = function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
     } else {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
-      var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
+      const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(data.message);
       if (!_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
         $form.append('<input type="hidden" name="offline_export" value="true">');
       }
       jquery__WEBPACK_IMPORTED_MODULE_0___default().each(DesignerMove.getUrlPos(true).substring(1).split(argsep), function () {
-        var pair = this.split('=');
-        var input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden">');
+        const pair = this.split('=');
+        const input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input type="hidden">');
         input.attr('name', pair[0]);
         input.attr('value', pair[1]);
         $form.append(input);
       });
-      var $formatDropDown = $form.find('#plugins');
+      const $formatDropDown = $form.find('#plugins');
       $formatDropDown.on('change', function () {
-        var format = $formatDropDown.val();
+        const format = $formatDropDown.val();
         $form.find('.format_specific_options').hide();
         $form.find('#' + format + '_options').show();
       }).trigger('change');
-      var modal = DesignerMove.displayModal($form, window.Messages.strExportRelationalSchema, '#designerGoModal');
+      const modal = DesignerMove.displayModal($form, window.Messages.strExportRelationalSchema, '#designerGoModal');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#designerModalGoButton').on('click', function () {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_export_pages').trigger('submit');
         modal.modal('hide');
@@ -2341,8 +2341,8 @@ const exportPages = function () {
 };
 const loadPage = function (page) {
   if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.designerTablesEnabled) {
-    var paramPage = '';
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    let paramPage = '';
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     if (page !== null) {
       paramPage = argsep + 'page=' + page;
     }
@@ -2359,7 +2359,7 @@ const loadPage = function (page) {
   DesignerMove.markSaved();
 };
 const grid = function () {
-  var valueSent = '';
+  let valueSent = '';
   if (!onGrid) {
     onGrid = 1;
     valueSent = 'on';
@@ -2372,7 +2372,7 @@ const grid = function () {
   DesignerMove.saveValueInConfig('snap_to_grid', valueSent);
 };
 const angularDirect = function () {
-  var valueSent = '';
+  let valueSent = '';
   if (onAngularDirect) {
     onAngularDirect = 0;
     valueSent = 'angular';
@@ -2419,8 +2419,8 @@ const startRelation = function () {
 };
 // table field
 const clickTableField = function (db, T, f, pk) {
-  var pkLocal = parseInt(pk);
-  var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  const pkLocal = parseInt(pk);
+  const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   if (onRelation) {
     if (!clickField) {
       // .style.display=='none'        .style.display = 'none'
@@ -2439,18 +2439,18 @@ const clickTableField = function (db, T, f, pk) {
       if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs[db + '.' + T] !== 1 || !pkLocal) {
         document.getElementById('foreign_relation').style.display = 'none';
       }
-      var left = globX - (document.getElementById('layer_new_relation').offsetWidth >> 1);
+      const left = globX - (document.getElementById('layer_new_relation').offsetWidth >> 1);
       document.getElementById('layer_new_relation').style.left = left + 'px';
-      var top = globY - document.getElementById('layer_new_relation').offsetHeight;
+      const top = globY - document.getElementById('layer_new_relation').offsetHeight;
       document.getElementById('layer_new_relation').style.top = top + 'px';
       document.getElementById('layer_new_relation').style.display = 'block';
       linkRelation += argsep + 'DB2=' + db + argsep + 'T2=' + T + argsep + 'F2=' + f;
     }
   }
   if (onDisplayField) {
-    var fieldNameToSend = decodeURIComponent(f);
-    var newDisplayFieldClass = 'tab_field';
-    var oldTabField = document.getElementById('id_tr_' + T + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
+    let fieldNameToSend = decodeURIComponent(f);
+    let newDisplayFieldClass = 'tab_field';
+    const oldTabField = document.getElementById('id_tr_' + T + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
     // if is display field
     if (_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T] === f) {
       // The display field is already the one defined, user wants to remove it
@@ -2473,7 +2473,7 @@ const clickTableField = function (db, T, f, pk) {
         delete _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T];
       }
       _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T] = f;
-      var tabField = document.getElementById('id_tr_' + T + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
+      const tabField = document.getElementById('id_tr_' + T + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.displayField[T]);
       if (tabField) {
         // Set new display field class
         tabField.className = newDisplayFieldClass;
@@ -2483,7 +2483,7 @@ const clickTableField = function (db, T, f, pk) {
     document.getElementById('designer_hint').innerHTML = '';
     document.getElementById('designer_hint').style.display = 'none';
     document.getElementById('display_field_button').className = 'M_butt';
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
       'operation': 'setDisplayField',
       'ajax_request': true,
@@ -2503,11 +2503,11 @@ const clickTableField = function (db, T, f, pk) {
 };
 const newRelation = function () {
   document.getElementById('layer_new_relation').style.display = 'none';
-  var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   linkRelation += argsep + 'server=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db + argsep + 'db2=p';
   linkRelation += argsep + 'on_delete=' + document.getElementById('on_delete').value + argsep + 'on_update=' + document.getElementById('on_update').value;
   linkRelation += argsep + 'operation=addNewRelation' + argsep + 'ajax_request=true';
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', linkRelation, function (data) {
     if (data.success === false) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
@@ -2531,8 +2531,8 @@ const startTabUpd = function (db, table) {
 // --------------------------- hide tables --------------------------------------
 // max/min all tables
 const smallTabAll = function (idThis) {
-  var icon = idThis.children[0];
-  var valueSent = '';
+  const icon = idThis.children[0];
+  let valueSent = '';
   if (icon.alt === 'v') {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.designer_tab .small_tab,.small_tab2').each(function (index, element) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).text() === 'v') {
@@ -2559,7 +2559,7 @@ const smallTabAll = function (idThis) {
 };
 // invert max/min all tables
 const smallTabInvert = function () {
-  for (var key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
+  for (let key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     DesignerMove.smallTab(key, 0);
   }
   DesignerMove.reload();
@@ -2572,15 +2572,15 @@ const relationLinesInvert = function () {
   DesignerMove.reload();
 };
 const smallTabRefresh = function () {
-  for (var key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
+  for (let key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.jTabs) {
     if (document.getElementById('id_hide_tbody_' + key).innerHTML !== 'v') {
       DesignerMove.smallTab(key, 0);
     }
   }
 };
 const smallTab = function (t, reload) {
-  var id = document.getElementById('id_tbody_' + t);
-  var idThis = document.getElementById('id_hide_tbody_' + t);
+  const id = document.getElementById('id_tbody_' + t);
+  const idThis = document.getElementById('id_hide_tbody_' + t);
   if (idThis.innerHTML === 'v') {
     // ---CROSS
     id.style.display = 'none';
@@ -2594,40 +2594,40 @@ const smallTab = function (t, reload) {
   }
 };
 const selectTab = function (t) {
-  var idZag = document.getElementById('id_zag_' + t);
+  const idZag = document.getElementById('id_zag_' + t);
   if (idZag.className !== 'tab_zag_3') {
     document.getElementById('id_zag_' + t).className = 'tab_zag_2';
   } else {
     document.getElementById('id_zag_' + t).className = 'tab_zag';
   }
   // ----------
-  var idT = document.getElementById(t);
+  const idT = document.getElementById(t);
   window.scrollTo(parseInt(idT.style.left, 10) - 300, parseInt(idT.style.top, 10) - 300);
   setTimeout(function () {
     document.getElementById('id_zag_' + t).className = 'tab_zag';
   }, 800);
 };
 const canvasClick = function (id, event) {
-  var n = 0;
-  var selected = 0;
-  var a = [];
-  var Key0;
-  var Key1;
-  var Key2;
-  var Key3;
-  var Key;
-  var x1;
-  var x2;
-  var K;
-  var key;
-  var key2;
-  var key3;
-  var localX = event.pageX;
-  var localY = event.pageY;
+  let n = 0;
+  let selected = 0;
+  const a = [];
+  let Key0;
+  let Key1;
+  let Key2;
+  let Key3;
+  let Key;
+  let x1;
+  let x2;
+  let K;
+  let key;
+  let key2;
+  let key3;
+  let localX = event.pageX;
+  let localY = event.pageY;
   localX -= jquery__WEBPACK_IMPORTED_MODULE_0___default()('#osn_tab').offset().left;
   localY -= jquery__WEBPACK_IMPORTED_MODULE_0___default()('#osn_tab').offset().top;
   DesignerMove.clear();
-  var osnTab = document.getElementById('osn_tab');
+  const osnTab = document.getElementById('osn_tab');
   for (K in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
     for (key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
       for (key2 in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key]) {
@@ -2635,16 +2635,16 @@ const canvasClick = function (id, event) {
           if (!document.getElementById('check_vis_' + key2).checked || !document.getElementById('check_vis_' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).checked) {
             continue; // if hide
           }
-          var x1Left = document.getElementById(key2).offsetLeft + 1; // document.getElementById(key2+"."+key3).offsetLeft;
-          var x1Right = x1Left + document.getElementById(key2).offsetWidth;
-          var x2Left = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft; // +document.getElementById(contr[K][key2][key3][0]+"."+contr[K][key2][key3][1]).offsetLeft
-          var x2Right = x2Left + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
+          const x1Left = document.getElementById(key2).offsetLeft + 1; // document.getElementById(key2+"."+key3).offsetLeft;
+          const x1Right = x1Left + document.getElementById(key2).offsetWidth;
+          const x2Left = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetLeft; // +document.getElementById(contr[K][key2][key3][0]+"."+contr[K][key2][key3][1]).offsetLeft
+          const x2Right = x2Left + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetWidth;
           a[0] = Math.abs(x1Left - x2Left);
           a[1] = Math.abs(x1Left - x2Right);
           a[2] = Math.abs(x1Right - x2Left);
           a[3] = Math.abs(x1Right - x2Right);
           n = sLeft = sRight = 0;
-          for (var i = 1; i < 4; i++) {
+          for (let i = 1; i < 4; i++) {
             if (a[n] > a[i]) {
               n = i;
             }
@@ -2673,8 +2673,8 @@ const canvasClick = function (id, event) {
             x2 = x2Left - smS;
             sLeft = 1;
           }
-          var y1 = document.getElementById(key2).offsetTop + document.getElementById(key2 + '.' + key3).offsetTop + heightField;
-          var y2 = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]).offsetTop + heightField;
+          const y1 = document.getElementById(key2).offsetTop + document.getElementById(key2 + '.' + key3).offsetTop + heightField;
+          const y2 = document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0]).offsetTop + document.getElementById(_config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][0] + '.' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K][key][key2][key3][1]).offsetTop + heightField;
           if (!selected && localX > x1 - 10 && localX < x1 + 10 && localY > y1 - 7 && localY < y1 + 7) {
             DesignerMove.drawLine0(x1, x2, y1, y2, osnTab, 'rgba(255,0,0,1)');
             selected = 1;
@@ -2692,21 +2692,21 @@ const canvasClick = function (id, event) {
   }
   if (selected) {
     // select relations
-    var left = globX - (document.getElementById('layer_upd_relation').offsetWidth >> 1);
+    const left = globX - (document.getElementById('layer_upd_relation').offsetWidth >> 1);
     document.getElementById('layer_upd_relation').style.left = left + 'px';
-    var top = globY - document.getElementById('layer_upd_relation').offsetHeight - 10;
+    const top = globY - document.getElementById('layer_upd_relation').offsetHeight - 10;
     document.getElementById('layer_upd_relation').style.top = top + 'px';
     document.getElementById('layer_upd_relation').style.display = 'block';
-    var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+    const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     linkRelation = 'T1=' + Key0 + argsep + 'F1=' + Key1 + argsep + 'T2=' + Key2 + argsep + 'F2=' + Key3 + argsep + 'K=' + Key;
   }
 };
 const updRelation = function () {
   document.getElementById('layer_upd_relation').style.display = 'none';
-  var argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
   linkRelation += argsep + 'server=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.server + argsep + 'db=' + _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.db;
   linkRelation += argsep + 'operation=removeRelation' + argsep + 'ajax_request=true';
-  var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+  const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', linkRelation, function (data) {
     if (data.success === false) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.error, false);
@@ -2735,9 +2735,9 @@ const hideTabAll = function (idThis) {
     idThis.alt = 'v';
     idThis.src = idThis.dataset.down;
   }
-  var E = document.getElementById('container-form');
-  var EelementsLength = E.elements.length;
-  for (var i = 0; i < EelementsLength; i++) {
+  const E = document.getElementById('container-form');
+  const EelementsLength = E.elements.length;
+  for (let i = 0; i < EelementsLength; i++) {
     if (E.elements[i].type === 'checkbox' && E.elements[i].id.startsWith('check_vis_')) {
       if (idThis.alt === 'v') {
         E.elements[i].checked = true;
@@ -2751,8 +2751,8 @@ const hideTabAll = function (idThis) {
   DesignerMove.reload();
 };
 const inArrayK = function (x, m) {
-  var b = 0;
-  for (var u in m) {
+  let b = 0;
+  for (let u in m) {
     if (x === u) {
       b = 1;
       break;
@@ -2761,11 +2761,11 @@ const inArrayK = function (x, m) {
   return b;
 };
 const noHaveConstr = function (idThis) {
-  var a = [];
-  var K;
-  var key;
-  var key2;
-  var key3;
+  const a = [];
+  let K;
+  let key;
+  let key2;
+  let key3;
   for (K in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr) {
     for (key in _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.contr[K]) {
       // contr name
@@ -2785,9 +2785,9 @@ const noHaveConstr = function (idThis) {
     idThis.alt = 'v';
     idThis.src = idThis.dataset.down;
   }
-  var E = document.getElementById('container-form');
-  var EelementsLength = E.elements.length;
-  for (var i = 0; i < EelementsLength; i++) {
+  const E = document.getElementById('container-form');
+  const EelementsLength = E.elements.length;
+  for (let i = 0; i < EelementsLength; i++) {
     if (E.elements[i].type === 'checkbox' && E.elements[i].id.startsWith('check_vis_')) {
       if (!DesignerMove.inArrayK(E.elements[i].value, a)) {
         if (idThis.alt === 'v') {
@@ -2803,7 +2803,7 @@ const noHaveConstr = function (idThis) {
 };
 // max/min all tables
 const showLeftMenu = function (idThis) {
-  var icon = idThis.children[0];
+  const icon = idThis.children[0];
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#key_Show_left_menu').toggleClass('M_butt_Selected_down');
   if (icon.alt === 'v') {
     document.getElementById('layer_menu').style.top = '0px';
@@ -2820,12 +2820,12 @@ const showLeftMenu = function (idThis) {
 const sideMenuRight = function (idThis) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#side_menu').toggleClass('right');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#layer_menu').toggleClass('float-start');
-  var moveMenuIcon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(idThis.getElementsByTagName('img')[0]);
-  var resizeIcon = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#layer_menu_sizer > img').toggleClass('float-start').toggleClass('float-end');
-  var srcResizeIcon = resizeIcon.attr('src');
+  const moveMenuIcon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(idThis.getElementsByTagName('img')[0]);
+  const resizeIcon = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#layer_menu_sizer > img').toggleClass('float-start').toggleClass('float-end');
+  const srcResizeIcon = resizeIcon.attr('src');
   resizeIcon.attr('src', resizeIcon.attr('data-right'));
   resizeIcon.attr('data-right', srcResizeIcon);
-  var srcMoveIcon = moveMenuIcon.attr('src');
+  const srcMoveIcon = moveMenuIcon.attr('src');
   moveMenuIcon.attr('src', moveMenuIcon.attr('data-right'));
   moveMenuIcon.attr('data-right', srcMoveIcon);
   menuMoved = !menuMoved;
@@ -2863,28 +2863,28 @@ const startDisplayField = function () {
     onDisplayField = 0;
   }
 };
-var TargetColors = [];
+const TargetColors = [];
 const getColorByTarget = function (target) {
-  var color = ''; // "rgba(0,100,150,1)";
-  for (var targetColor in TargetColors) {
+  let color = ''; // "rgba(0,100,150,1)";
+  for (let targetColor in TargetColors) {
     if (TargetColors[targetColor][0] === target) {
       color = TargetColors[targetColor][1];
       break;
     }
   }
   if (color.length === 0) {
-    var i = TargetColors.length + 1;
-    var d = i % 6;
-    var j = (i - d) / 6;
+    const i = TargetColors.length + 1;
+    const d = i % 6;
+    let j = (i - d) / 6;
     j = j % 4;
     j++;
-    var colorCase = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1]];
-    var a = colorCase[d][0];
-    var b = colorCase[d][1];
-    var c = colorCase[d][2];
-    var e = 1 - (j - 1) / 6;
-    var r = Math.round(a * 200 * e);
-    var g = Math.round(b * 200 * e);
+    const colorCase = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1]];
+    const a = colorCase[d][0];
+    let b = colorCase[d][1];
+    const c = colorCase[d][2];
+    const e = 1 - (j - 1) / 6;
+    const r = Math.round(a * 200 * e);
+    const g = Math.round(b * 200 * e);
     b = Math.round(c * 200 * e);
     color = 'rgba(' + r + ',' + g + ',' + b + ',1)';
     TargetColors.push([target, color]);
@@ -2892,8 +2892,8 @@ const getColorByTarget = function (target) {
   return color;
 };
 const clickOption = function (dbName, tableName, columnName, tableDbNameUrl, optionColNameString) {
-  var designerOptions = document.getElementById('designer_optionse');
-  var left = globX - (designerOptions.offsetWidth >> 1);
+  const designerOptions = document.getElementById('designer_optionse');
+  const left = globX - (designerOptions.offsetWidth >> 1);
   designerOptions.style.left = left + 'px';
   // var top = Glob_Y - designerOptions.offsetHeight - 10;
   designerOptions.style.top = screen.height / 4 + 'px';
@@ -2917,8 +2917,8 @@ const closeOption = function () {
   document.getElementById('orderby').value = '---';
 };
 const selectAll = function (tableName, dbName, idSelectAll) {
-  var parentIsChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + idSelectAll).is(':checked');
-  var checkboxAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#container-form input[id_check_all=\'' + idSelectAll + '\']:checkbox');
+  const parentIsChecked = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + idSelectAll).is(':checked');
+  const checkboxAll = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#container-form input[id_check_all=\'' + idSelectAll + '\']:checkbox');
   checkboxAll.each(function () {
     // already checked and then check parent
     if (parentIsChecked === true && this.checked) {
@@ -2933,13 +2933,13 @@ const selectAll = function (tableName, dbName, idSelectAll) {
     _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.selectField.push('`' + tableName + '`.*');
     window.fromArray.push(tableName);
   } else {
-    var i;
+    let i;
     for (i = 0; i < _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.selectField.length; i++) {
       if (_history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.selectField[i] === '`' + tableName + '`.*') {
         _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.selectField.splice(i, 1);
       }
     }
-    var k;
+    let k;
     for (k = 0; k < window.fromArray.length; k++) {
       if (window.fromArray[k] === tableName) {
         window.fromArray.splice(k, 1);
@@ -2950,7 +2950,7 @@ const selectAll = function (tableName, dbName, idSelectAll) {
   DesignerMove.reload();
 };
 const tableOnOver = function (idThis, val, buil) {
-  var builLocal = parseInt(buil);
+  const builLocal = parseInt(buil);
   if (!val) {
     document.getElementById('id_zag_' + idThis).className = 'tab_zag_2';
     if (builLocal) {
@@ -2972,9 +2972,9 @@ const tableOnOver = function (idThis, val, buil) {
  * @param {string} checkboxId
  */
 const storeColumn = function (tableName, colName, checkboxId) {
-  var i;
-  var k;
-  var selectKeyField = '`' + tableName + '`.`' + colName + '`';
+  let i;
+  let k;
+  const selectKeyField = '`' + tableName + '`.`' + colName + '`';
   if (document.getElementById(checkboxId).checked === true) {
     _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.selectField.push(selectKeyField);
     window.fromArray.push(tableName);
@@ -3004,11 +3004,11 @@ const storeColumn = function (tableName, colName, checkboxId) {
  * @param {string} dbTableNameUrl
  */
 const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
-  var p;
-  var whereObj;
-  var rel = document.getElementById('rel_opt');
-  var sum = 0;
-  var init = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length;
+  let p;
+  let whereObj;
+  const rel = document.getElementById('rel_opt');
+  let sum = 0;
+  const init = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length;
   if (rel.value !== '--') {
     if (document.getElementById('Query').value === '') {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strQueryEmpty));
@@ -3020,12 +3020,12 @@ const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     sum = sum + 1;
   }
   if (document.getElementById('new_name').value !== '') {
-    var renameObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Rename(document.getElementById('new_name').value); // make Rename object
+    const renameObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Rename(document.getElementById('new_name').value); // make Rename object
     _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, renameObj, tableName, _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Rename'));
     sum = sum + 1;
   }
   if (document.getElementById('operator').value !== '---') {
-    var aggregateObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Aggregate(document.getElementById('operator').value);
+    const aggregateObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.Aggregate(document.getElementById('operator').value);
     _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, aggregateObj, tableName, _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'Aggregate'));
     sum = sum + 1;
     // make aggregate operator
@@ -3045,14 +3045,14 @@ const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     // make having
   }
   if (document.getElementById('orderby').value !== '---') {
-    var orderByObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.OrderBy(document.getElementById('orderby').value);
+    const orderByObj = new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.OrderBy(document.getElementById('orderby').value);
     _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.push(new _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.HistoryObj(colName, orderByObj, tableName, _config_ts__WEBPACK_IMPORTED_MODULE_9__.DesignerConfig.hTabs[dbTableNameUrl], 'OrderBy'));
     sum = sum + 1;
     // make orderby
   }
   (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strObjectsCreated, sum));
   // output sum new objects created
-  var existingDiv = document.getElementById('ab');
+  const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.display(init, _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length);
   DesignerMove.closeOption();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#ab').accordion('refresh');
@@ -3094,7 +3094,7 @@ const enableTableEvents = function (index, element) {
     DesignerMove.clickOption(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('db_name'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('table_name'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('col_name'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('db_table_name_url'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('option_col_name_modal'));
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).on('click', '.tab_field_2,.tab_field_3,.tab_field', function () {
-    var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('click_field_param').split(',');
+    const params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('click_field_param').split(',');
     DesignerMove.clickField(params[3], params[0], params[1], params[2]);
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).find('.tab_zag_noquery').on('mouseover', function () {
@@ -3196,7 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DesignerObjects: function() { return /* binding */ DesignerObjects; }
 /* harmony export */ });
-var DesignerObjects = {
+const DesignerObjects = {
   PdfPage: function (dbName, pageDescr, tblCords) {
     // no dot set the auto increment before put() in the database
     // issue #12900
@@ -3256,15 +3256,15 @@ function showTablesInLandingPage(db) {
 function saveToNewPage(db, pageName, tablePositions, callback) {
   DesignerPage.createNewPage(db, pageName, function (page) {
     if (page) {
-      var tblCords = [];
-      var saveCallback = function (id) {
+      const tblCords = [];
+      const saveCallback = function (id) {
         tblCords.push(id);
         if (tablePositions.length === tblCords.length) {
           page.tblCords = tblCords;
           _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.addObject('pdf_pages', page);
         }
       };
-      for (var pos = 0; pos < tablePositions.length; pos++) {
+      for (let pos = 0; pos < tablePositions.length; pos++) {
         tablePositions[pos].pdfPgNr = page.pgNr;
         DesignerPage.saveTablePositions(tablePositions[pos], saveCallback);
       }
@@ -3284,7 +3284,7 @@ function saveToSelectedPage(db, pageId, pageName, tablePositions, callback) {
   });
 }
 function createNewPage(db, pageName, callback) {
-  var newPage = new _objects_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerObjects.PdfPage(db, pageName, []);
+  const newPage = new _objects_ts__WEBPACK_IMPORTED_MODULE_6__.DesignerObjects.PdfPage(db, pageName, []);
   _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.addObject('pdf_pages', newPage, function (pgNr) {
     newPage.pgNr = pgNr;
     if (typeof callback !== 'undefined') {
@@ -3297,9 +3297,9 @@ function saveTablePositions(positions, callback) {
 }
 function createPageList(db, callback) {
   _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
-    var html = '';
-    for (var p = 0; p < pages.length; p++) {
-      var page = pages[p];
+    let html = '';
+    for (let p = 0; p < pages.length; p++) {
+      const page = pages[p];
       if (page.dbName === db) {
         html += '<option value="' + page.pgNr + '">';
         html += (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(page.pageDescr) + '</option>';
@@ -3314,7 +3314,7 @@ function deletePage(pageId) {
   let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
   _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
     if (page) {
-      for (var i = 0; i < page.tblCords.length; i++) {
+      for (let i = 0; i < page.tblCords.length; i++) {
         _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.deleteObject('table_coords', page.tblCords[i]);
       }
       _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.deleteObject('pdf_pages', pageId, callback);
@@ -3323,9 +3323,9 @@ function deletePage(pageId) {
 }
 function loadFirstPage(db, callback) {
   _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadAllObjects('pdf_pages', function (pages) {
-    var firstPage = null;
-    for (var i = 0; i < pages.length; i++) {
-      var page = pages[i];
+    let firstPage = null;
+    for (let i = 0; i < pages.length; i++) {
+      const page = pages[i];
       if (page.dbName === db) {
         // give preference to a page having same name as the db
         if (page.pageDescr === db) {
@@ -3341,12 +3341,12 @@ function loadFirstPage(db, callback) {
   });
 }
 function showNewPageTables(check) {
-  var allTables = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_scroll_tab').find('td input:checkbox');
+  const allTables = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#id_scroll_tab').find('td input:checkbox');
   allTables.prop('checked', check);
-  for (var tab = 0; tab < allTables.length; tab++) {
-    var input = allTables[tab];
+  for (let tab = 0; tab < allTables.length; tab++) {
+    const input = allTables[tab];
     if (input.value) {
-      var element = document.getElementById(input.value);
+      const element = document.getElementById(input.value);
       element.style.top = DesignerPage.getRandom(550, 20) + 'px';
       element.style.left = DesignerPage.getRandom(700, 20) + 'px';
       _move_ts__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.visibleTab(input, input.value);
@@ -3360,17 +3360,17 @@ function loadHtmlForPage(pageId) {
   DesignerPage.showNewPageTables(true);
   DesignerPage.loadPageObjects(pageId, function (page, tblCords) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#name-panel').find('#page_name').text(page.pageDescr);
-    var tableMissing = false;
-    for (var t = 0; t < tblCords.length; t++) {
-      var tbId = _config_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.db + '.' + tblCords[t].tableName;
-      var table = document.getElementById(tbId);
+    let tableMissing = false;
+    for (let t = 0; t < tblCords.length; t++) {
+      const tbId = _config_ts__WEBPACK_IMPORTED_MODULE_3__.DesignerConfig.db + '.' + tblCords[t].tableName;
+      const table = document.getElementById(tbId);
       if (table === null) {
         tableMissing = true;
         continue;
       }
       table.style.top = tblCords[t].y + 'px';
       table.style.left = tblCords[t].x + 'px';
-      var checkbox = document.getElementById('check_vis_' + tbId);
+      const checkbox = document.getElementById('check_vis_' + tbId);
       checkbox.checked = true;
       _move_ts__WEBPACK_IMPORTED_MODULE_5__.DesignerMove.visibleTab(checkbox, checkbox.value);
     }
@@ -3384,9 +3384,9 @@ function loadHtmlForPage(pageId) {
 }
 function loadPageObjects(pageId, callback) {
   _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('pdf_pages', pageId, function (page) {
-    var tblCords = [];
-    var count = page.tblCords.length;
-    for (var i = 0; i < count; i++) {
+    const tblCords = [];
+    const count = page.tblCords.length;
+    for (let i = 0; i < count; i++) {
       _database_ts__WEBPACK_IMPORTED_MODULE_4__.DesignerOfflineDB.loadObject('table_coords', page.tblCords[i], function (tblCord) {
         tblCords.push(tblCord);
         if (tblCords.length === count) {
@@ -3399,7 +3399,7 @@ function loadPageObjects(pageId, callback) {
   });
 }
 function getRandom(max, min) {
-  var val = Math.random() * (max - min) + min;
+  const val = Math.random() * (max - min) + min;
   return Math.floor(val);
 }
 const DesignerPage = {

@@ -58,14 +58,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
-    var oldDbName = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
-    var newDbName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#new_db_name').val();
+    const oldDbName = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db');
+    const newDbName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#new_db_name').val();
     if (newDbName === oldDbName) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strDatabaseRenameToSameName, false, 'error');
       return false;
     }
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var question = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)('CREATE DATABASE ' + newDbName + ' / DROP DATABASE ' + oldDbName);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)('CREATE DATABASE ' + newDbName + ' / DROP DATABASE ' + oldDbName);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     $form.confirm(question, $form.attr('action'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strRenamingDatabases, false);
@@ -75,7 +75,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
           _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.newname));
           _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(function () {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('a:not(\'.expander\')').each(function () {
-              var $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+              const $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
               if ($thisAnchor.text() === data.newname) {
                 // simulate a click on the new db name
                 // in navigation
@@ -99,7 +99,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
       return false;
     }
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyingDatabase, false);
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
       // use messages that stay on screen
@@ -133,7 +133,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#change_db_charset_form.ajax', function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strChangingCharset);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
@@ -149,13 +149,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#drop_db_anchor.ajax', function (event) {
     event.preventDefault();
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /**
      * @var {string} question String containing the question to be asked for confirmation
      */
-    var question = window.Messages.strDropDatabaseStrongWarning + ' ';
+    let question = window.Messages.strDropDatabaseStrongWarning + ' ';
     question += window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db') + '`'));
-    var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $link.getPostData());
+    const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $link.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {

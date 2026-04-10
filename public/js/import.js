@@ -30,7 +30,7 @@ function changePluginOpts() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#format_specific_opts').find('div.format_specific_options').each(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hide();
   });
-  var selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
+  const selectedPluginName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#plugins').find('option:selected').val();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + selectedPluginName + '_options').fadeIn('slow');
   const importNotification = document.getElementById('import_notification');
   if (importNotification) {
@@ -47,10 +47,10 @@ function changePluginOpts() {
  * @param {string} fname
  */
 function matchFile(fname) {
-  var fnameArray = fname.toLowerCase().split('.');
-  var len = fnameArray.length;
+  const fnameArray = fname.toLowerCase().split('.');
+  let len = fnameArray.length;
   if (len !== 0) {
-    var extension = fnameArray[len - 1];
+    const extension = fnameArray[len - 1];
     if (extension === 'gz' || extension === 'bz2' || extension === 'zip') {
       len--;
     }
@@ -76,11 +76,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('import.js',
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', function () {
   // import_file_form validation.
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#import_file_form', function () {
-    var radioLocalImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#localFileTab');
-    var radioImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#uploadFileTab');
-    var fileMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strImportDialogMessage + '</div>';
-    var wrongTblNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strTableNameDialogMessage + '</div>';
-    var wrongDBNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strDBNameDialogMessage + '</div>';
+    const radioLocalImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#localFileTab');
+    const radioImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#uploadFileTab');
+    const fileMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strImportDialogMessage + '</div>';
+    const wrongTblNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strTableNameDialogMessage + '</div>';
+    const wrongDBNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strDBNameDialogMessage + '</div>';
     if (radioLocalImport.length !== 0) {
       // remote upload.
       if (radioImport.hasClass('active') && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_import_file').val() === '') {
@@ -107,14 +107,14 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
         return false;
       }
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_tbl_name').length > 0) {
-        var newTblName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_tbl_name').val();
+        const newTblName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_tbl_name').val();
         if (newTblName.length > 0 && newTblName.trim().length === 0) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongTblNameMsg, false);
           return false;
         }
       }
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_db_name').length > 0) {
-        var newDBName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_db_name').val();
+        const newDBName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_db_name').val();
         if (newDBName.length > 0 && newDBName.trim().length === 0) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongDBNameMsg, false);
           return false;
@@ -162,13 +162,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#upload_form_form').css('display', 'none');
     const clockImage = '<img src="' + window.themeImagePath + 'ajax_clock_small.gif" width="16" height="16" alt="ajax clock">';
     if (handler !== 'PhpMyAdmin\\Plugins\\Import\\Upload\\UploadNoplugin') {
-      var finished = false;
-      var percent = 0.0;
-      var total = 0;
-      var complete = 0;
-      var originalTitle = parent && parent.document ? parent.document.title : false;
-      var importStart;
-      var performUpload = function () {
+      let finished = false;
+      let percent = 0.0;
+      let total = 0;
+      let complete = 0;
+      const originalTitle = parent && parent.document ? parent.document.title : false;
+      let importStart;
+      const performUpload = function () {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('index.php?route=/import-status', {
           'id': uploadId,
           'import_status': 1,
@@ -182,9 +182,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#upload_form_status_info').html(clockImage + ' ' + window.Messages.uploadProgressMaximumAllowedSize);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#upload_form_status').css('display', 'none');
           } else {
-            var nowDate = new Date();
+            const nowDate = new Date();
             const now = Date.UTC(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours(), nowDate.getMinutes(), nowDate.getSeconds()) + nowDate.getMilliseconds() - 1000;
-            var statusText = window.sprintf(window.Messages.uploadProgressStatusText, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete, 1, window.Messages.strDecimalSeparator), (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(total, 1, window.Messages.strDecimalSeparator));
+            let statusText = window.sprintf(window.Messages.uploadProgressStatusText, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete, 1, window.Messages.strDecimalSeparator), (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(total, 1, window.Messages.strDecimalSeparator));
             if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#importmain').is(':visible')) {
               // Show progress UI
               jquery__WEBPACK_IMPORTED_MODULE_0___default()('#importmain').hide();
@@ -193,12 +193,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
               importStart = now;
             } else if (percent > 9 || complete > 2000000) {
               // Calculate estimated time
-              var usedTime = now - importStart;
-              var seconds = parseInt(((total - complete) / complete * usedTime / 1000).toString());
-              var speed = window.sprintf(window.Messages.uploadProgressPerSecond, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete / usedTime * 1000, 1, window.Messages.strDecimalSeparator));
-              var minutes = parseInt((seconds / 60).toString());
+              const usedTime = now - importStart;
+              let seconds = parseInt(((total - complete) / complete * usedTime / 1000).toString());
+              const speed = window.sprintf(window.Messages.uploadProgressPerSecond, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete / usedTime * 1000, 1, window.Messages.strDecimalSeparator));
+              const minutes = parseInt((seconds / 60).toString());
               seconds %= 60;
-              var estimatedTime;
+              let estimatedTime;
               if (minutes > 0) {
                 estimatedTime = window.Messages.uploadProgressRemainingMin.replace('%MIN', minutes.toString()).replace('%SEC', seconds.toString());
               } else {
@@ -206,7 +206,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
               }
               statusText += '<br>' + speed + '<br><br>' + estimatedTime;
             }
-            var percentString = Math.round(percent) + '%';
+            const percentString = Math.round(percent) + '%';
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#status').animate({
               width: percentString
             }, 150);

@@ -33,11 +33,11 @@ const DropDatabases = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     /**
      * @var selected_dbs Array containing the names of the checked databases
      */
-    var selectedDbs = [];
+    const selectedDbs = [];
     // loop over all checked checkboxes, except the .checkall_box checkbox
     $form.find('input:checkbox:checked:not(.checkall_box)').each(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr').addClass('removeMe');
@@ -50,21 +50,21 @@ const DropDatabases = {
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-    var question = window.Messages.strDropDatabaseStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
+    const question = window.Messages.strDropDatabaseStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
     const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
     modal.modal('show');
     const url = 'index.php?route=/server/databases/destroy&' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropDatabaseModalDropButton').on('click', function () {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest, false);
-      var parts = url.split('?');
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, parts[1]);
+      const parts = url.split('?');
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, parts[1]);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(parts[0], params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
-          var $rowsToRemove = $form.find('tr.removeMe');
-          var $databasesCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filter-rows-count');
-          var newCount = parseInt($databasesCount.text(), 10) - $rowsToRemove.length;
+          const $rowsToRemove = $form.find('tr.removeMe');
+          const $databasesCount = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filter-rows-count');
+          const newCount = parseInt($databasesCount.text(), 10) - $rowsToRemove.length;
           $databasesCount.text(newCount);
           $rowsToRemove.remove();
           $form.find('tbody').sortTable('.name');
@@ -92,9 +92,9 @@ const CreateDatabase = {
    */
   handleEvent: function (event) {
     event.preventDefault();
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     // TODO Remove this section when all browsers support HTML5 "required" property
-    var newDbNameInput = $form.find('input[name=new_db]');
+    const newDbNameInput = $form.find('input[name=new_db]');
     if (newDbNameInput.val() === '') {
       newDbNameInput.trigger('focus');
       alert(window.Messages.strFormEmpty);
@@ -106,14 +106,14 @@ const CreateDatabase = {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.message);
-        var $databasesCountObject = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filter-rows-count');
-        var databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
+        const $databasesCountObject = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#filter-rows-count');
+        const databasesCount = parseInt($databasesCountObject.text(), 10) + 1;
         $databasesCountObject.text(databasesCount);
         _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         // make ajax request to load db structure page - taken from ajax.js
-        var dbStructUrl = data.url;
+        let dbStructUrl = data.url;
         dbStructUrl = dbStructUrl.replace(/amp;/ig, '');
-        var params = 'ajax_request=true' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
+        const params = 'ajax_request=true' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
         jquery__WEBPACK_IMPORTED_MODULE_0___default().get(dbStructUrl, params, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       } else {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);

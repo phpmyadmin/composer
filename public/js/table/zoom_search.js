@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {false}
  **/
 function displayHelp() {
-  var modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModal');
+  const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModal');
   modal.modal('show');
   modal.find('.modal-body').first().html(window.Messages.strDisplayHelp);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModalLabel').first().html(window.Messages.strHelpTitle);
@@ -65,7 +65,7 @@ function isNumeric(n) {
  * @return {boolean}
  **/
 function isEmpty(obj) {
-  var name;
+  let name;
   for (name in obj) {
     return false;
   }
@@ -117,23 +117,23 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('table/zoom_
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_search.js', function () {
   let currentChart = null;
-  var searchedDataKey = null;
-  var xLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_0').val();
-  var yLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_1').val();
+  let searchedDataKey = null;
+  let xLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_0').val();
+  let yLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_1').val();
   // will be updated via Ajax
-  var xType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_0').val();
-  var yType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_1').val();
-  var dataLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dataLabel').val();
+  let xType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_0').val();
+  let yType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_1').val();
+  const dataLabel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dataLabel').val();
   // Get query result
-  var searchedData;
+  let searchedData;
   try {
     searchedData = JSON.parse(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#querydata').html());
   } catch (err) {
     searchedData = null;
   }
   // adding event listener on select after AJAX request
-  var comparisonOperatorOnChange = function () {
-    var tableRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#inputSection select.column-operator');
+  const comparisonOperatorOnChange = function () {
+    const tableRows = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#inputSection select.column-operator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().each(tableRows, function (index, item) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(item).on('change', function () {
         window.changeValueFieldType(this, index);
@@ -253,7 +253,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
   // don't show it until we have results on-screen
   .hide();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#zoom_search_form').slideToggle();
     if ($link.text() === window.Messages.strHideSearchCriteria) {
       $link.text(window.Messages.strShowSearchCriteria);
@@ -263,23 +263,27 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
     // avoid default click action
     return false;
   });
+  let selectedRow;
+  let yCord = [];
+  let xCord = [];
+  let series = [];
   /**
    * Handle saving of a row in the editor
    */
-  var dataPointSave = function () {
+  const dataPointSave = function () {
     // Find changed values by comparing form values with selectedRow Object
-    var newValues = {}; // Stores the values changed from original
-    var sqlTypes = {};
-    var it = 0;
-    var xChange = false;
-    var yChange = false;
-    var key;
-    var tempGetVal = function () {
+    const newValues = {}; // Stores the values changed from original
+    const sqlTypes = {};
+    let it = 0;
+    let xChange = false;
+    let yChange = false;
+    let key;
+    const tempGetVal = function () {
       return jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
     };
     for (key in selectedRow) {
-      var oldVal = selectedRow[key];
-      var newVal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fields_null_id_' + it).prop('checked') ? null : jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + it).val();
+      const oldVal = selectedRow[key];
+      let newVal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fields_null_id_' + it).prop('checked') ? null : jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + it).val();
       if (newVal instanceof Array) {
         // when the column is of type SET
         newVal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + it).map(tempGetVal).get().join(',');
@@ -295,7 +299,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
           searchedData[searchedDataKey][yLabel] = newVal;
         }
       }
-      var $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + it);
+      const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + it);
       if ($input.hasClass('bit')) {
         sqlTypes[key] = 'bit';
       } else {
@@ -354,10 +358,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
     } // End plot update
     // Generate SQL query for update
     if (!isEmpty(newValues)) {
-      var sqlQuery = 'UPDATE `' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` SET ';
+      let sqlQuery = 'UPDATE `' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table') + '` SET ';
       for (key in newValues) {
         sqlQuery += '`' + key + '`=';
-        var value = newValues[key];
+        const value = newValues[key];
         // null
         if (value === null) {
           sqlQuery += 'NULL, ';
@@ -422,14 +426,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#zoom_search_form').slideToggle().hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').text(window.Messages.strShowSearchCriteria);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformdiv').show();
-    var selectedRow;
-    var series = [];
-    var xCord = [];
-    var yCord = [];
-    var xVal;
-    var yVal;
-    var format;
-    var options = {
+    series = [];
+    xCord = [];
+    yCord = [];
+    let xVal;
+    let yVal;
+    let format;
+    const options = {
       series: [
       // for a scatter plot
       {
@@ -470,8 +473,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
     yType = getType(yType);
     // could have multiple series but we'll have just one
     series[0] = [];
+    let originalXType;
+    let originalYType;
     if (xType === 'time') {
-      var originalXType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_0').val();
+      originalXType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_0').val();
       if (originalXType === 'date') {
         format = '%Y-%m-%d';
       }
@@ -488,7 +493,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
       });
     }
     if (yType === 'time') {
-      var originalYType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_1').val();
+      originalYType = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#types_1').val();
       if (originalYType === 'date') {
         format = '%Y-%m-%d';
       }
@@ -606,8 +611,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
           }
           const data = activeElements[0].element.$context.raw.row;
           searchedDataKey = data[4]; // key from searchedData (global)
-          var fieldId = 0;
-          var postParams = {
+          let fieldId = 0;
+          const postParams = {
             'ajax_request': true,
             'get_data_row': true,
             'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -619,10 +624,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/zoom-search', postParams, function (data) {
             // Row is contained in data.row_info,
             // now fill the displayResultForm with row values
-            var key;
+            let key;
             for (key in data.row_info) {
-              var $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + fieldId);
-              var $fieldNull = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fields_null_id_' + fieldId);
+              const $field = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fieldID_' + fieldId);
+              const $fieldNull = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#edit_fields_null_id_' + fieldId);
               if (data.row_info[key] === null) {
                 $fieldNull.prop('checked', true);
                 $field.val('');

@@ -222,9 +222,9 @@ __webpack_require__.r(__webpack_exports__);
  * @param {JQuery<HTMLElement>} $this
  */
 function handleCreateViewModal($this) {
-  var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
-  var sep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  var params = (0,_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
+  let $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)();
+  const sep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+  let params = (0,_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(this, $this.getPostData());
   params += sep + 'ajax_dialog=1';
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post($this.attr('href'), params, function (data) {
     if (typeof data !== 'undefined' && data.success === true) {
@@ -279,8 +279,8 @@ let ctrlKeyHistory = 0;
  * @param {object} event data
  */
 const onKeyDownArrowsHandler = function (event) {
-  var e = event || window.event;
-  var o = e.srcElement || e.target;
+  const e = event || window.event;
+  const o = e.srcElement || e.target;
   if (!o) {
     return;
   }
@@ -307,12 +307,12 @@ const onKeyDownArrowsHandler = function (event) {
     return;
   }
   e.preventDefault();
-  var pos = o.id.split('_');
+  const pos = o.id.split('_');
   if (pos[0] !== 'field' || typeof pos[2] === 'undefined') {
     return;
   }
-  var x = pos[2];
-  var y = pos[1];
+  let x = pos[2];
+  let y = pos[1];
   switch (e.keyCode) {
     case 38:
       // up
@@ -333,8 +333,8 @@ const onKeyDownArrowsHandler = function (event) {
     default:
       return;
   }
-  var id = 'field_' + y + '_' + x;
-  var nO = document.getElementById(id);
+  let id = 'field_' + y + '_' + x;
+  let nO = document.getElementById(id);
   if (!nO) {
     id = 'field_' + y + '_' + x + '_0';
     nO = document.getElementById(id);
@@ -430,7 +430,7 @@ function onloadNavigation() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#pma_navigation_tree a.expander', function (event) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      var $icon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('img');
+      const $icon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('img');
       if ($icon.is('.ic_b_plus')) {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.expandTreeNode(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
       } else {
@@ -444,7 +444,7 @@ function onloadNavigation() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#pma_navigation_reload', function (event) {
       event.preventDefault();
       // Find the loading symbol and show it
-      var $iconThrobberSrc = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').find('.throbber');
+      const $iconThrobberSrc = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').find('.throbber');
       $iconThrobberSrc.show();
       // TODO Why is a loading symbol both hidden, and invisible?
       $iconThrobberSrc.css('visibility', '');
@@ -469,7 +469,7 @@ function onloadNavigation() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#pma_navigation_collapse', function (event) {
       event.preventDefault();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('a.expander').each(function () {
-        var $icon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('img');
+        const $icon = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('img');
         if ($icon.is('.ic_b_minus')) {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).trigger('click');
         }
@@ -481,8 +481,8 @@ function onloadNavigation() {
      */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseenter', '#pma_navigation_sync', function (event) {
       event.preventDefault();
-      var synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
-      var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
+      const synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
+      const $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
       if (synced) {
         $img.removeClass('ic_s_link').addClass('ic_s_unlink');
       } else {
@@ -495,8 +495,8 @@ function onloadNavigation() {
      */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mouseout', '#pma_navigation_sync', function (event) {
       event.preventDefault();
-      var synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
-      var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
+      const synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
+      const $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
       if (synced) {
         $img.removeClass('ic_s_unlink').addClass('ic_s_link');
       } else {
@@ -509,8 +509,8 @@ function onloadNavigation() {
      */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#pma_navigation_sync', function (event) {
       event.preventDefault();
-      var synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
-      var $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
+      const synced = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced');
+      const $img = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_sync').children('img');
       if (synced) {
         $img.removeClass('ic_s_unlink').addClass('ic_s_link').attr('alt', window.Messages.linkWithMain).attr('title', window.Messages.linkWithMain);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').removeClass('synced').find('li.selected').removeClass('selected');
@@ -553,8 +553,8 @@ function onloadNavigation() {
     /** Hide navigation tree item */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.hideNavItem.ajax', function (event) {
       event.preventDefault();
-      var argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-      var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
+      const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+      let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
       params += argSep + 'ajax_request=true' + argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: 'POST',
@@ -572,9 +572,9 @@ function onloadNavigation() {
     /** Display a dialog to choose hidden navigation items to show */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.showUnhide.ajax', function (event) {
       event.preventDefault();
-      var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
-      var argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-      var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
+      const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+      const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+      let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
       params += argSep + 'ajax_request=true';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
@@ -589,10 +589,10 @@ function onloadNavigation() {
     /** Show a hidden navigation tree item */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.unhideNavItem.ajax', function (event) {
       event.preventDefault();
-      var $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr');
-      var $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
-      var argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-      var params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
+      const $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('tr');
+      const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
+      const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
+      let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
       params += argSep + 'ajax_request=true' + argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: 'POST',
@@ -612,15 +612,15 @@ function onloadNavigation() {
     // Add/Remove favorite table using Ajax.
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.favorite_table_anchor', function (event) {
       event.preventDefault();
-      var $self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      const $self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       if ($self.data('favtargetn') !== null) {
-        var $dataFavTargets = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a[data-favtargets="' + $self.data('favtargetn') + '"]');
+        const $dataFavTargets = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a[data-favtargets="' + $self.data('favtargetn') + '"]');
         if ($dataFavTargets.length > 0) {
           $dataFavTargets.trigger('click');
           return;
         }
       }
-      var hasLocalStorage = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined';
+      const hasLocalStorage = (0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('localStorage') && typeof window.localStorage.favoriteTables !== 'undefined';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         url: $self.attr('href'),
         cache: false,
@@ -647,7 +647,7 @@ function onloadNavigation() {
     });
     // Check if session storage is supported
     if ((0,_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('sessionStorage')) {
-      var storage = window.sessionStorage;
+      const storage = window.sessionStorage;
       // remove tree from storage if Navi_panel config form is submitted
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', 'form.config-form', function () {
         storage.removeItem('navTreePaths');
@@ -695,7 +695,7 @@ function createPageSettingsModal() {
 function showSettings(selector) {
   createPageSettingsModal();
   // Keeping a clone to restore in case the user cancels the operation
-  var $clone = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').clone(true);
+  const $clone = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector + ' .page_settings').clone(true);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pageSettingsModalApplyButton').on('click', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.config-form').trigger('submit');
   });

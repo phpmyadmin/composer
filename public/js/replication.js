@@ -22,12 +22,12 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @requires    jQueryUI
  */
-var randomServerId = Math.floor(Math.random() * 10000000);
-var confPrefix = 'server-id=' + randomServerId + '\nlog_bin=mysql-bin\nlog_error=mysql-bin.err\n';
+const randomServerId = Math.floor(Math.random() * 10000000);
+const confPrefix = 'server-id=' + randomServerId + '\nlog_bin=mysql-bin\nlog_error=mysql-bin.err\n';
 function updateConfig() {
-  var confIgnore = 'binlog_ignore_db=';
-  var confDo = 'binlog_do_db=';
-  var databaseList = '';
+  const confIgnore = 'binlog_ignore_db=';
+  const confDo = 'binlog_do_db=';
+  let databaseList = '';
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_select option:selected').length === 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rep').text(confPrefix);
   } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_type option:selected').val() === 'all') {
@@ -90,12 +90,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('replication.j
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#reset_replica').on('click', function (e) {
     e.preventDefault();
-    var $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var question = window.Messages.strResetReplicaWarning;
+    const $anchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const question = window.Messages.strResetReplicaWarning;
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $anchor;
-      var params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])({
+      const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])({
         'ajax_page_request': true,
         'ajax_request': true
       }, $anchor.getPostData());

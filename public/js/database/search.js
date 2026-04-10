@@ -47,7 +47,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('database/se
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/search.js', function () {
   /** Hide the table link in the initial search result */
-  var icon = (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('s_tbl', '', {
+  const icon = (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('s_tbl', '', {
     'id': 'table-image'
   }).toString();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table-info').prepend(icon).hide();
@@ -68,7 +68,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
    * the hide/show criteria in search result forms
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchresultlink').html(window.Messages.strHideSearchResults).on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#searchresults').slideToggle();
     if ($link.text() === window.Messages.strHideSearchResults) {
       $link.text(window.Messages.strShowSearchResults);
@@ -88,7 +88,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
    * the hide/show criteria in search form
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').hide().on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').slideToggle('medium');
     if ($link.text() === window.Messages.strHideQueryBox) {
       $link.text(window.Messages.strShowQueryBox);
@@ -104,7 +104,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
    * the hide/show criteria in search criteria form
    */
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglesearchformlink').html(window.Messages.strShowSearchCriteria).on('click', function () {
-    var $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_search_form').slideToggle();
     if ($link.text() === window.Messages.strHideSearchCriteria) {
       $link.text(window.Messages.strShowSearchCriteria);
@@ -120,18 +120,18 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.browse_results', function (e) {
     e.preventDefault();
     /**   Hides the results shown by the delete criteria */
-    var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strBrowsing, false);
+    const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strBrowsing, false);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').hide();
     /**  Load the browse results to the page */
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table-info').show();
-    var tableName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name');
+    const tableName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#table-link').attr({
       'href': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href')
     }).text(tableName);
-    var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href') + '#searchresults';
-    var browseSql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('browse-sql');
-    var params = {
+    const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href') + '#searchresults';
+    const browseSql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('browse-sql');
+    const params = {
       'ajax_request': true,
       'is_js_confirmed': true,
       'sql_query': browseSql
@@ -163,17 +163,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').hide();
     /** Conformation message for deletion */
-    var msg = window.sprintf(window.Messages.strConfirmDeleteResults, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name'));
+    const msg = window.sprintf(window.Messages.strConfirmDeleteResults, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name'));
     if (confirm(msg)) {
-      var $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strDeleting, false);
+      const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strDeleting, false);
       /** Load the deleted option to the page*/
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').html('');
-      var params = {
+      const params = {
         'ajax_request': true,
         'is_js_confirmed': true,
         'sql_query': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('delete-sql')
       };
-      var url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href');
+      const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, function (data) {
         if (typeof data === 'undefined' || !data.success) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
@@ -203,11 +203,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strNoTableSelected);
       return;
     }
-    var $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSearching, false);
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSearching, false);
     // jQuery object to reuse
-    var $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
-    var url = $form.serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'submit_search=' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buttonGo').val();
+    const url = $form.serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'submit_search=' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buttonGo').val();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), url, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         // found results
