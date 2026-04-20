@@ -122,9 +122,13 @@ const DatabaseEvents = {
         eventsExportModal.querySelector('.modal-body').innerHTML = eventsExportTextarea;
         document.getElementById('eventsExportTextarea').textContent = data.message;
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#eventsExportTextarea'));
+      }, {
+        once: true
       });
       eventsExportModal.addEventListener('hidden.bs.modal', function () {
         eventsExportModal.querySelector('.modal-body').innerHTML = eventsExportTextarea;
+      }, {
+        once: true
       });
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(eventsExportModal).show();
     }
@@ -294,11 +298,15 @@ const DatabaseEvents = {
         };
         that.syntaxHiglighter = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)($elm, {}, 'vertical', linterOptions);
         window.codeMirrorEditor = that.syntaxHiglighter;
+      }, {
+        once: true
       });
       eventsEditorModal.addEventListener('hidden.bs.modal', function () {
         const eventsEditorModalSaveButton = document.getElementById('eventsEditorModalSaveButton');
         eventsEditorModalSaveButton === null || eventsEditorModalSaveButton === void 0 || eventsEditorModalSaveButton.removeEventListener('click', eventsEditorModalSaveEventHandler);
         document.getElementById('eventsEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
+      }, {
+        once: true
       });
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(eventsEditorModal).show();
     });

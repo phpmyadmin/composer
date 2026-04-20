@@ -136,9 +136,13 @@ const DatabaseRoutines = {
         routinesExportModal.querySelector('.modal-body').innerHTML = routinesExportTextarea;
         document.getElementById('routinesExportTextarea').textContent = data.message;
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#routinesExportTextarea'));
+      }, {
+        once: true
       });
       routinesExportModal.addEventListener('hidden.bs.modal', function () {
         routinesExportModal.querySelector('.modal-body').innerHTML = routinesExportTextarea;
+      }, {
+        once: true
       });
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(routinesExportModal).show();
     }
@@ -312,11 +316,15 @@ const DatabaseRoutines = {
         window.codeMirrorEditor = that.syntaxHiglighter;
         // Execute item-specific code
         that.postDialogShow(data);
+      }, {
+        once: true
       });
       routinesEditorModal.addEventListener('hidden.bs.modal', function () {
         const routinesEditorModalSaveButton = document.getElementById('routinesEditorModalSaveButton');
         routinesEditorModalSaveButton === null || routinesEditorModalSaveButton === void 0 || routinesEditorModalSaveButton.removeEventListener('click', routinesEditorModalSaveEventHandler);
         document.getElementById('routinesEditorModal').querySelector('.modal-body').innerHTML = '<div class="spinner-border" role="status">' + '<span class="visually-hidden">' + window.Messages.strLoading + '</span></div>';
+      }, {
+        once: true
       });
       bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(routinesEditorModal).show();
     });
@@ -743,6 +751,8 @@ const DatabaseRoutines = {
         routinesExecuteModal.querySelector('.modal-body').innerHTML = '';
         const routinesExecuteModalExecuteButton = document.getElementById('routinesExecuteModalExecuteButton');
         routinesExecuteModalExecuteButton === null || routinesExecuteModalExecuteButton === void 0 || routinesExecuteModalExecuteButton.removeEventListener('click', routinesExecuteButtonEventHandler);
+      }, {
+        once: true
       });
       routinesExecuteModal.addEventListener('shown.bs.modal', function () {
         routinesExecuteModal.querySelector('.modal-title').textContent = data.title;
@@ -783,6 +793,8 @@ const DatabaseRoutines = {
             modal.hide();
           });
         });
+      }, {
+        once: true
       });
       modal.show();
     });
