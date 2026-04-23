@@ -441,6 +441,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerTeardown('sql.js', fu
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', '#sqlquery');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'input.sqlbutton');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsSelect').off('dblclick');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#simulateDmlModal').modal('hide');
 });
 /**
  * @description <p>Ajax scripts for sql and browse pages</p>
