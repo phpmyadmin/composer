@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-04-26 00:48+0000\n"
-"PO-Revision-Date: 2026-04-27 03:09+0000\n"
+"PO-Revision-Date: 2026-04-30 10:09+0000\n"
 "Last-Translator: Adam Havránek <adamhavra@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "cs/>\n"
@@ -31,22 +31,16 @@ msgid "phpMyAdmin documentation"
 msgstr "Dokumentace phpMyAdmina"
 
 #: resources/templates/base.twig:66
-#, fuzzy
-#| msgid "MariaDB Documentation"
 msgid "MariaDB documentation"
 msgstr "Dokumentace MariaDB"
 
 #: resources/templates/base.twig:66
-#, fuzzy
-#| msgid "MySQL Documentation"
 msgid "MySQL documentation"
 msgstr "Dokumentace MySQL"
 
 #: resources/templates/base.twig:77
-#, fuzzy
-#| msgid "Appearance settings"
 msgid "Appearance:"
-msgstr "Nastavení vzhledu"
+msgstr "Vzhled:"
 
 #: resources/templates/base.twig:80 resources/templates/home/index.twig:149
 msgid "Color mode for the theme"
@@ -1241,10 +1235,8 @@ msgid "OK"
 msgstr "OK"
 
 #: resources/templates/console/display.twig:178
-#, fuzzy
-#| msgid "Restore default value"
 msgid "Restore default values"
-msgstr "Obnovit výchozí hodnotu"
+msgstr "Obnovit výchozí hodnoty"
 
 #: resources/templates/console/display.twig:185 src/Config/Descriptions.php:956
 msgid "Always expand query messages"
@@ -1745,10 +1737,8 @@ msgid "Select page"
 msgstr "Zvolte stránku"
 
 #: resources/templates/database/designer/schema_export.twig:6
-#, fuzzy
-#| msgid "Select Export Relational Type"
 msgid "Select export relational type:"
-msgstr "Zvolte typ výstupu relací"
+msgstr "Vyberte typ relačního exportu:"
 
 #: resources/templates/database/events/editor_form.twig:10
 #: resources/templates/database/routines/editor_form.twig:11
@@ -1955,10 +1945,8 @@ msgid "OFF"
 msgstr "Vypnuto"
 
 #: resources/templates/database/events/index.twig:161
-#, fuzzy
-#| msgid "Excel edition"
 msgid "Event editor"
-msgstr "Verze Excelu"
+msgstr "Editor událostí"
 
 #: resources/templates/database/events/index.twig:166
 #: resources/templates/database/routines/index.twig:83
@@ -1983,10 +1971,8 @@ msgid "Save changes"
 msgstr "Uložit změny"
 
 #: resources/templates/database/events/index.twig:181
-#, fuzzy
-#| msgid "Export of event %s"
 msgid "Export event"
-msgstr "Exportovat událost %s"
+msgstr "Exportovat událost"
 
 #: resources/templates/database/export/index.twig:61
 msgid ""
@@ -2144,10 +2130,8 @@ msgid "Update query"
 msgstr "Aktualizovat dotaz"
 
 #: resources/templates/database/multi_table_query/form.twig:175
-#, fuzzy
-#| msgid "Update query"
 msgid "Copy query"
-msgstr "Aktualizovat dotaz"
+msgstr "Kopírovat dotaz"
 
 #: resources/templates/database/multi_table_query/form.twig:176
 #: src/Html/Generator.php:558

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-04-26 00:48+0000\n"
-"PO-Revision-Date: 2026-04-28 20:09+0000\n"
+"PO-Revision-Date: 2026-04-30 10:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/hr/>\n"
@@ -1985,10 +1985,8 @@ msgstr "Uredi ili izvozi relacijske šeme"
 #: resources/templates/database/routines/editor_form.twig:11
 #: resources/templates/triggers/editor_form.twig:14
 #: resources/templates/view_create.twig:11
-#, fuzzy
-#| msgid "Details…"
 msgid "Details"
-msgstr "Detalji…"
+msgstr "Detalji"
 
 #: resources/templates/database/events/editor_form.twig:24
 #, fuzzy
@@ -2222,9 +2220,8 @@ msgstr "Excel izdanje"
 #: resources/templates/table/structure/display_structure.twig:348
 #: resources/templates/triggers/list.twig:86
 #: src/Controllers/JavaScriptMessagesController.php:320
-#, fuzzy
 msgid "Loading…"
-msgstr "Lokalno"
+msgstr "Učitavanje …"
 
 #: resources/templates/database/events/index.twig:171
 #: resources/templates/database/routines/index.twig:88
@@ -3118,10 +3115,8 @@ msgstr "Dodaj vrijednost AUTO_INCREMENT"
 #: resources/templates/table/delete/confirm.twig:13
 #: resources/templates/table/structure/drop_confirm.twig:7
 #: resources/templates/table/structure/primary.twig:3
-#, fuzzy
-#| msgid "Do you really want to "
 msgid "Do you really want to execute the following query?"
-msgstr "Želite li zaista  "
+msgstr "Stvarno želiš izvršiti sljedeći upit ponovo?"
 
 #: resources/templates/database/structure/drop_form.twig:15
 #: resources/templates/database/structure/empty_form.twig:15
@@ -3953,9 +3948,8 @@ msgid ""
 "change root, debian-sys-maint and pma users. More information is available "
 "at %s."
 msgstr ""
-"Koristite demo server. Ovdje možete raditi bilo što, ali molim vas da ne "
-"mijenjajte root, debian-sys-maint i pma korisnike. Više informacija je "
-"dostupno na %s."
+"Koristiš demo server. Ovdje možeš raditi bilo što, ali molim te da ne "
+"mijenjaš root, debian-sys-maint i pma korisnike. Više informacija na %s."
 
 #: resources/templates/home/index.twig:30
 #, fuzzy
@@ -4057,7 +4051,7 @@ msgstr "PHP ekstenzija:"
 
 #: resources/templates/home/index.twig:238
 msgid "PHP version:"
-msgstr "PHP  verzija:"
+msgstr "PHP verzija:"
 
 #: resources/templates/home/index.twig:245
 msgid "Show PHP information"
@@ -4073,11 +4067,11 @@ msgstr "Službena stranica programa phpMyAdmin"
 
 #: resources/templates/home/index.twig:274
 msgid "Contribute"
-msgstr "Doprinijeti"
+msgstr "Doprinesi"
 
 #: resources/templates/home/index.twig:279
 msgid "Get support"
-msgstr ""
+msgstr "Dobij podršku"
 
 #: resources/templates/home/index.twig:284
 msgid "List of changes"
@@ -4769,10 +4763,8 @@ msgid "phpMyAdmin configuration storage"
 msgstr "phpMyAdmin dokumentacija"
 
 #: resources/templates/relation/check_relations.twig:9
-#, fuzzy
-#| msgid "Modifications have been saved"
 msgid "Configuration of pmadb…"
-msgstr "Izmjene su spremljene"
+msgstr "Konfiguracija pmadb-a …"
 
 #: resources/templates/relation/check_relations.twig:10
 #: resources/templates/relation/check_relations.twig:56
@@ -6471,23 +6463,21 @@ msgstr "Osvježi"
 
 #: resources/templates/server/status/monitor/index.twig:28
 #: resources/templates/server/status/processes/index.twig:39
-#, fuzzy, php-format
-#| msgid "per second"
+#, php-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] "po sekundi"
-msgstr[1] "po sekundi"
-msgstr[2] "po sekundi"
+msgstr[0] "%d sekunda"
+msgstr[1] "%d sekunde"
+msgstr[2] "%d sekundi"
 
 #: resources/templates/server/status/monitor/index.twig:30
 #: resources/templates/server/status/processes/index.twig:41
-#, fuzzy, php-format
-#| msgid "per minute"
+#, php-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "po minuti"
-msgstr[1] "po minuti"
-msgstr[2] "po minuti"
+msgstr[0] "%d minuta"
+msgstr[1] "%d minute"
+msgstr[2] "%d minuta"
 
 #: resources/templates/server/status/monitor/index.twig:38
 #, fuzzy
@@ -7261,10 +7251,8 @@ msgstr "Pogrešni parametri!"
 #: resources/templates/sql/query.twig:63
 #: src/Navigation/Nodes/NodeColumnContainer.php:24
 #: src/Navigation/Nodes/NodeColumnContainer.php:26
-#, fuzzy
-#| msgid "Column names"
 msgid "Columns"
-msgstr "Nazivi stupaca"
+msgstr "Stupci"
 
 #: resources/templates/sql/query.twig:85
 #, fuzzy
@@ -12172,10 +12160,8 @@ msgid "Show functions in tree"
 msgstr "Veze od zadnjeg osvježavanja"
 
 #: src/Config/Descriptions.php:830
-#, fuzzy
-#| msgid "Show processes"
 msgid "Show procedures in tree"
-msgstr "Prikaži procese"
+msgstr "Prikaži procedure u stablu"
 
 #: src/Config/Descriptions.php:831
 #, fuzzy
@@ -14229,10 +14215,8 @@ msgid ""
 msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:274
-#, fuzzy
-#| msgid "Analyze"
 msgid "Analyzing…"
-msgstr "Analiziraj"
+msgstr "Analiziranje …"
 
 #: src/Controllers/JavaScriptMessagesController.php:275
 #, fuzzy
@@ -15119,10 +15103,8 @@ msgid "Copying failed!"
 msgstr "Kopiraj bazu podataka u"
 
 #: src/Controllers/JavaScriptMessagesController.php:638
-#, fuzzy
-#| msgid "Show this query here again"
 msgid "Execute this query again?"
-msgstr "Ovaj upit ponovno prikaži ovdje"
+msgstr "Ovaj upit ponovo izvršiti?"
 
 #: src/Controllers/JavaScriptMessagesController.php:639
 #, fuzzy
@@ -18040,18 +18022,14 @@ msgid "Collapse all"
 msgstr ""
 
 #: src/Navigation/Nodes/NodeColumnContainer.php:34
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new column"
 msgid "New"
-msgstr "Novo"
+msgstr "Novi"
 
 #: src/Navigation/Nodes/NodeDatabaseContainer.php:46
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new database"
 msgid "New"
-msgstr "Novo"
+msgstr "Nova"
 
 #: src/Navigation/Nodes/NodeDatabase.php:196
 #, fuzzy
@@ -18060,11 +18038,9 @@ msgid "Show hidden items"
 msgstr "Prikaži mrežu"
 
 #: src/Navigation/Nodes/NodeEventContainer.php:33
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new event"
 msgid "New"
-msgstr "Novo"
+msgstr "Novi"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
@@ -18073,18 +18049,14 @@ msgid "Functions"
 msgstr "Funkcije"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:38
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new function"
 msgid "New"
-msgstr "Novo"
+msgstr "Nova"
 
 #: src/Navigation/Nodes/NodeIndexContainer.php:34
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new index"
 msgid "New"
-msgstr "Novo"
+msgstr "Novi"
 
 #: src/Navigation/Nodes/Node.php:562
 msgid "Expand/Collapse"
@@ -18097,38 +18069,28 @@ msgid "Procedures"
 msgstr "Postupci"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:38
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new procedure"
 msgid "New"
-msgstr "Novo"
+msgstr "Nova"
 
 #: src/Navigation/Nodes/NodeProcedure.php:27
-#, fuzzy
-#| msgid "Procedures"
 msgid "Procedure"
-msgstr "Postupci"
+msgstr "Procedura"
 
 #: src/Navigation/Nodes/NodeTableContainer.php:34
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new table"
 msgid "New"
-msgstr "Novo"
+msgstr "Nova"
 
 #: src/Navigation/Nodes/NodeTriggerContainer.php:34
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new trigger"
 msgid "New"
-msgstr "Novo"
+msgstr "Novi"
 
 #: src/Navigation/Nodes/NodeViewContainer.php:34
-#, fuzzy
-#| msgid "New"
 msgctxt "Create new view"
 msgid "New"
-msgstr "Novo"
+msgstr "Novi"
 
 #: src/Normalization.php:205
 msgid "Make all columns atomic"
