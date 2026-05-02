@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-04-26 00:48+0000\n"
-"PO-Revision-Date: 2026-04-30 10:09+0000\n"
+"PO-Revision-Date: 2026-05-02 17:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/hr/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 #, fuzzy
@@ -1669,10 +1669,9 @@ msgid "Select \"%s\""
 msgstr "Odaberi sve"
 
 #: resources/templates/database/designer/database_tables.twig:111
-#, fuzzy, php-format
-#| msgid "Add an option for column "
+#, php-format
 msgid "Add an option for column \"%s\"."
-msgstr "Dodaj opciju stupcu "
+msgstr "Dodaj opciju za stupac „%s”."
 
 #: resources/templates/database/designer/edit_delete_pages.twig:5
 #, fuzzy
@@ -3948,8 +3947,8 @@ msgid ""
 "change root, debian-sys-maint and pma users. More information is available "
 "at %s."
 msgstr ""
-"Koristiš demo server. Ovdje možeš raditi bilo što, ali molim te da ne "
-"mijenjaš root, debian-sys-maint i pma korisnike. Više informacija na %s."
+"Koristiš demo server. Ovdje možeš raditi bilo što, ali ne mijenjaj root, "
+"debian-sys-maint i pma korisnike.  Više informacije je dostupno kod %s."
 
 #: resources/templates/home/index.twig:30
 #, fuzzy
@@ -4831,11 +4830,9 @@ msgstr ""
 #: resources/templates/relation/check_relations.twig:450
 #: resources/templates/relation/check_relations.twig:475
 #: resources/templates/relation/check_relations.twig:500
-#, fuzzy
-#| msgid "OK"
 msgctxt "Correctly working"
 msgid "OK"
-msgstr "U redu  "
+msgstr "U redu"
 
 #: resources/templates/relation/check_relations.twig:62
 #, fuzzy
@@ -15757,10 +15754,8 @@ msgid "The file is being processed, please be patient."
 msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:801
-#, fuzzy
-#| msgid "Format of imported file"
 msgid "Uploading your import file…"
-msgstr "Oblikovanje uvezene datoteke"
+msgstr "Prijenos tvoje datoteke za uvoz …"
 
 #: src/Controllers/JavaScriptMessagesController.php:803
 msgid ""
@@ -15774,10 +15769,8 @@ msgstr ""
 
 #: src/Controllers/Normalization/GetColumnsController.php:29
 #: src/Normalization.php:225
-#, fuzzy
-#| msgid "Add/Delete Field Columns"
 msgid "Select one…"
-msgstr "Dodaj/Izbriši stupce polja"
+msgstr "Odaberi jedan …"
 
 #: src/Controllers/Normalization/GetColumnsController.php:30
 #: src/Normalization.php:226
@@ -17964,20 +17957,20 @@ msgstr[1] "%1$d zahvaćena retka."
 msgstr[2] "%1$d zahvaćenih redaka."
 
 #: src/Message.php:202
-#, fuzzy, php-format
-#| msgid "%1$d row(s) deleted."
+#, php-format
 msgid "%1$d row deleted."
 msgid_plural "%1$d rows deleted."
-msgstr[0] "Izbrisano redaka: %1$d."
-msgstr[1] "Izbrisano redaka: %1$d."
+msgstr[0] "Izbrisan je %1$d redak."
+msgstr[1] "Izbrisana su %1$d retka."
+msgstr[2] "Izbrisano je %1$d redaka."
 
 #: src/Message.php:219
-#, fuzzy, php-format
-#| msgid "%1$d row(s) inserted."
+#, php-format
 msgid "%1$d row inserted."
 msgid_plural "%1$d rows inserted."
-msgstr[0] "Umetnuto redaka: %1$d."
-msgstr[1] "Umetnuto redaka: %1$d."
+msgstr[0] "Umetnut je %1$d redak."
+msgstr[1] "Umetnuta su %1$d retka."
+msgstr[2] "Umetnuto je %1$d redaka."
 
 #: src/Navigation/Navigation.php:221
 msgid "Groups:"
@@ -19021,10 +19014,8 @@ msgid ""
 msgstr ""
 
 #: src/Plugins/Import/ImportLdi.php:69
-#, fuzzy
-#| msgid "Column names"
 msgid "Column names: "
-msgstr "Nazivi stupaca"
+msgstr "Nazivi stupaca: "
 
 #: src/Plugins/Import/ImportLdi.php:122
 msgid "This plugin does not support compressed imports!"
