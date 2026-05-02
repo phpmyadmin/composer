@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-25 10:35-0300\n"
-"PO-Revision-Date: 2026-04-30 10:09+0000\n"
+"PO-Revision-Date: 2026-05-02 17:09+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/phpmyadmin/5-2/"
 "ru/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -1881,7 +1881,7 @@ msgstr "Введите открытый ключ для службы reCAPTCHA �
 
 #: libraries/classes/Config/Descriptions.php:110
 msgid "Enter your private key for your domain reCAPTCHA service."
-msgstr "Введите ваш закрытый ключ для сервиса reCAPTCHA вашего домена."
+msgstr "Введите ваш закрытый ключ для службы reCAPTCHA вашего домена."
 
 #: libraries/classes/Config/Descriptions.php:111
 msgid "Enter your siteverify URL for your reCAPTCHA service."
@@ -4490,11 +4490,11 @@ msgstr "Параметр ответа для reCAPTCHA v2 API"
 
 #: libraries/classes/Config/Descriptions.php:971
 msgid "Public key for reCAPTCHA"
-msgstr "Публичный ключ для reCAPTCHA"
+msgstr "Открытый ключ для reCAPTCHA"
 
 #: libraries/classes/Config/Descriptions.php:972
 msgid "Private key for reCAPTCHA"
-msgstr "Приватный ключ для reCAPTCHA"
+msgstr "Закрытый ключ для reCAPTCHA"
 
 #: libraries/classes/Config/Descriptions.php:973
 msgid "URL for reCAPTCHA siteverify"
@@ -7106,7 +7106,7 @@ msgstr "Выберите внешний ключ"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:518
 msgid "Please select the primary key or a unique key!"
-msgstr "Выберите поле основного индекса (PRIMARY) или уникального индекса!"
+msgstr "Пожалуйста, выберите первичный ключ или уникальный ключ!"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:519
 #: templates/database/designer/main.twig:98
@@ -10860,7 +10860,7 @@ msgstr "Отсутствует проверка reCAPTCHA, возможно, о�
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:283
 msgid "Failed to connect to the reCAPTCHA service!"
-msgstr "Не удалось соединиться с сервисом reCAPTCHA!"
+msgstr "Не удалось соединиться со службой reCAPTCHA!"
 
 #: libraries/classes/Plugins/Auth/AuthenticationCookie.php:285
 msgid "Entered captcha is wrong, try again!"
