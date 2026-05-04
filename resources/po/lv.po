@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-05-03 00:53+0000\n"
-"PO-Revision-Date: 2026-04-17 00:09+0000\n"
+"PO-Revision-Date: 2026-05-04 18:09+0000\n"
 "Last-Translator: \"ℂ𝕠𝕠𝕠𝕝 (𝕘𝕚𝕥𝕙𝕦𝕓.𝕔𝕠𝕞/ℂ𝕠𝕠𝕠𝕝)\" <coool@mail.lv>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/lv/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -40,9 +40,8 @@ msgid "MySQL documentation"
 msgstr "Dokumentācija"
 
 #: resources/templates/base.twig:77
-#, fuzzy
 msgid "Appearance:"
-msgstr "Izskata iestatījumi"
+msgstr "Izskats:"
 
 #: resources/templates/base.twig:80 resources/templates/home/index.twig:149
 msgid "Color mode for the theme"
@@ -865,7 +864,7 @@ msgstr "Netika labots"
 #: resources/templates/config/form_display/display.twig:46
 #: src/Controllers/JavaScriptMessagesController.php:317
 msgid "Apply"
-msgstr ""
+msgstr "Pielietot"
 
 #: resources/templates/config/form_display/display.twig:47
 #: resources/templates/preferences/manage/main.twig:113
@@ -1011,14 +1010,14 @@ msgstr ""
 #: resources/templates/console/display.twig:116
 #: resources/templates/console/display.twig:208
 msgid "Collapse"
-msgstr ""
+msgstr "Sakļaut"
 
 #: resources/templates/console/bookmark_content.twig:8
 #: resources/templates/console/display.twig:51
 #: resources/templates/console/display.twig:117
 #: resources/templates/console/display.twig:209
 msgid "Expand"
-msgstr ""
+msgstr "Izvērst"
 
 #: resources/templates/console/bookmark_content.twig:9
 #: resources/templates/console/display.twig:52
@@ -1103,7 +1102,7 @@ msgstr "SQL vaicājums"
 
 #: resources/templates/console/display.twig:16 src/Config/Descriptions.php:764
 msgid "Console"
-msgstr ""
+msgstr "Konsole"
 
 #: resources/templates/console/display.twig:19
 #: resources/templates/setup/home/index.twig:169
@@ -1232,9 +1231,8 @@ msgid "Hide trace"
 msgstr "Pievienot jaunu lauku"
 
 #: resources/templates/console/display.twig:120
-#, fuzzy
 msgid "Count:"
-msgstr "Lauks"
+msgstr "Skaits:"
 
 #: resources/templates/console/display.twig:121
 #: src/Controllers/JavaScriptMessagesController.php:645
@@ -1367,9 +1365,8 @@ msgstr "Centrālais kolonnu saraksts pašreizējai datubāzei ir tukšs."
 
 #: resources/templates/database/central_columns/main.twig:168
 #: resources/templates/display/results/table.twig:139
-#, fuzzy
 msgid "Filter rows:"
-msgstr "Filtrs"
+msgstr "Atlasīt ierakstu rindas:"
 
 #: resources/templates/database/central_columns/main.twig:171
 #: resources/templates/display/results/table.twig:143
@@ -3377,9 +3374,8 @@ msgid "Select a template"
 msgstr "Izvēlieties tabulas"
 
 #: resources/templates/export.twig:16
-#, fuzzy
 msgid "Export templates:"
-msgstr "Eksporta veids"
+msgstr "Izgūt veidnes:"
 
 #: resources/templates/export.twig:20
 msgid "New template:"
@@ -3417,9 +3413,8 @@ msgid "Show SQL query"
 msgstr "Rādīt pilnos vaicājumus"
 
 #: resources/templates/export.twig:102
-#, fuzzy
 msgid "Export method:"
-msgstr "Eksporta veids"
+msgstr "Izgūšanas veids:"
 
 #: resources/templates/export.twig:106
 msgid "Quick - display only the minimal options"
@@ -3439,9 +3434,8 @@ msgid "File format to export"
 msgstr "Daļēji teksti"
 
 #: resources/templates/export.twig:131
-#, fuzzy
 msgid "Rows:"
-msgstr "Rindas"
+msgstr "Ierakstu rindas:"
 
 #: resources/templates/export.twig:135
 msgid "Dump all rows"
@@ -3508,14 +3502,12 @@ msgid "Define new aliases"
 msgstr ""
 
 #: resources/templates/export.twig:268
-#, fuzzy
 msgid "Select database:"
-msgstr "Izvēlieties tabulas"
+msgstr "Atlasiet datubāzi:"
 
 #: resources/templates/export.twig:284
-#, fuzzy
 msgid "Select table:"
-msgstr "Izvēlieties tabulas"
+msgstr "Atlasiet tabulu:"
 
 #: resources/templates/export.twig:292
 #, fuzzy
@@ -3523,9 +3515,8 @@ msgid "New table name"
 msgstr "Nav tabulu"
 
 #: resources/templates/export.twig:300
-#, fuzzy
 msgid "Select column:"
-msgstr "Izvēlies 2 kolonnas"
+msgstr "Atlasiet kolonnu:"
 
 #: resources/templates/export.twig:308
 #, fuzzy
@@ -3608,9 +3599,8 @@ msgid "The size is measured in MiB."
 msgstr ""
 
 #: resources/templates/export.twig:476 resources/templates/import.twig:173
-#, fuzzy
 msgid "Format-specific options:"
-msgstr "Transformācijas opcijas"
+msgstr "Formāta parametri:"
 
 #: resources/templates/export.twig:485 resources/templates/import.twig:182
 msgid "Encoding Conversion:"
@@ -3624,9 +3614,8 @@ msgstr ""
 
 #: resources/templates/filter.twig:4
 #: resources/templates/server/status/variables/index.twig:12
-#, fuzzy
 msgid "Containing the word:"
-msgstr "Nemainīt paroli"
+msgstr "Satur vārdu:"
 
 #: resources/templates/gis_data_editor_form.twig:26
 #, fuzzy
@@ -3740,9 +3729,8 @@ msgid "Server:"
 msgstr "Serveris:"
 
 #: resources/templates/home/index.twig:185
-#, fuzzy
 msgid "Hostname:"
-msgstr "Lietotājvārds"
+msgstr "Resursdators:"
 
 #: resources/templates/home/index.twig:189
 msgid "Server type:"
@@ -3998,9 +3986,8 @@ msgid "Password:"
 msgstr "Parole:"
 
 #: resources/templates/login/form.twig:93
-#, fuzzy
 msgid "Server choice:"
-msgstr "Servera izvēle"
+msgstr "Servera izvēle:"
 
 #: resources/templates/login/header.twig:10
 #: src/Plugins/Auth/AuthenticationConfig.php:80
@@ -4028,9 +4015,8 @@ msgstr ""
 
 #: resources/templates/login/twofactor/application_configure.twig:16
 #: resources/templates/login/twofactor/application.twig:2
-#, fuzzy
 msgid "Authentication code:"
-msgstr "Dokumentācija"
+msgstr "Autentifikācijas kods:"
 
 #: resources/templates/login/twofactor/application.twig:5
 msgid ""
@@ -4543,9 +4529,8 @@ msgid "Designer and creation of PDFs:"
 msgstr "PDF failu izveide"
 
 #: resources/templates/relation/check_relations.twig:150
-#, fuzzy
 msgid "Displaying column comments:"
-msgstr "Rādu kolonnu komentārus"
+msgstr "Rāda kolonnas komentārus:"
 
 #: resources/templates/relation/check_relations.twig:160
 #, fuzzy
@@ -4564,9 +4549,8 @@ msgid "Bookmarked SQL query:"
 msgstr "Saglabātie SQL vaicājumi"
 
 #: resources/templates/relation/check_relations.twig:220
-#, fuzzy
 msgid "SQL history:"
-msgstr "SQL vēsture"
+msgstr "SQL vaicājumu vēsture:"
 
 #: resources/templates/relation/check_relations.twig:245
 #, fuzzy
@@ -4591,14 +4575,12 @@ msgid "User preferences:"
 msgstr "Lietotāja iestatījumi:"
 
 #: resources/templates/relation/check_relations.twig:383
-#, fuzzy
 msgid "Configurable menus:"
-msgstr "Labojumi tika saglabāti"
+msgstr "Pielāgojamas izvēlnes:"
 
 #: resources/templates/relation/check_relations.twig:408
-#, fuzzy
 msgid "Hide/show navigation items:"
-msgstr "Rādīt režģi"
+msgstr "Slēpt/rādīt navigācijas vienumus:"
 
 #: resources/templates/relation/check_relations.twig:433
 msgid "Saving Query-By-Example searches:"
@@ -4975,10 +4957,9 @@ msgstr "Atkārtojiet"
 
 #: resources/templates/server/privileges/change_password.twig:38
 #: resources/templates/server/privileges/login_information_fields.twig:55
-#, fuzzy
 msgctxt "Password strength"
 msgid "Strength:"
-msgstr "Rindas garums"
+msgstr "Sarežģītības pakāpe:"
 
 #: resources/templates/server/privileges/change_password.twig:48
 #, fuzzy
@@ -12384,7 +12365,7 @@ msgstr ""
 #: src/Controllers/Database/TrackingController.php:71
 #: src/Controllers/Database/TrackingController.php:97
 msgid "Tracking data deleted successfully."
-msgstr "Atsekošanas dati veiksmīgi dzēsti."
+msgstr "Izsekošanas dati veiksmīgi dzēsti."
 
 #: src/Controllers/Database/TrackingController.php:82
 #, php-format
@@ -13654,7 +13635,7 @@ msgstr "Līnija"
 
 #: src/Controllers/JavaScriptMessagesController.php:473
 msgid "Polygon"
-msgstr ""
+msgstr "Daudzstūris"
 
 #: src/Controllers/JavaScriptMessagesController.php:475
 #, fuzzy
