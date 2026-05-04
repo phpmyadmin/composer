@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-25 10:35-0300\n"
-"PO-Revision-Date: 2026-04-19 12:09+0000\n"
+"PO-Revision-Date: 2026-05-04 18:09+0000\n"
 "Last-Translator: \"ℂ𝕠𝕠𝕠𝕝 (𝕘𝕚𝕥𝕙𝕦𝕓.𝕔𝕠𝕞/ℂ𝕠𝕠𝕠𝕝)\" <coool@mail.lv>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/phpmyadmin/5-2/"
 "lv/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -3542,7 +3542,7 @@ msgstr ""
 #: libraries/classes/Config/Descriptions.php:786
 #: templates/console/display.twig:4
 msgid "Console"
-msgstr ""
+msgstr "Konsole"
 
 #: libraries/classes/Config/Descriptions.php:787
 msgid "GZip"
@@ -5109,7 +5109,7 @@ msgstr ""
 #: libraries/classes/Controllers/Database/TrackingController.php:83
 #: libraries/classes/Controllers/Database/TrackingController.php:103
 msgid "Tracking data deleted successfully."
-msgstr "Atsekošanas dati veiksmīgi dzēsti."
+msgstr "Izsekošanas dati veiksmīgi dzēsti."
 
 #: libraries/classes/Controllers/Database/TrackingController.php:90
 #, php-format
@@ -6386,7 +6386,7 @@ msgstr "Mainīt uzstādījumus"
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:328
 #: templates/config/form_display/display.twig:46
 msgid "Apply"
-msgstr ""
+msgstr "Pielietot"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:331
 #: templates/home/index.twig:302 templates/modals/index_dialog_modal.twig:26
@@ -6933,7 +6933,7 @@ msgstr "Līnija"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:483
 msgid "Polygon"
-msgstr ""
+msgstr "Daudzstūris"
 
 #: libraries/classes/Controllers/JavaScriptMessagesController.php:484
 #: templates/display/results/table.twig:177
@@ -8810,7 +8810,7 @@ msgstr "Vai:"
 #: libraries/classes/Database/Qbe.php:760
 #: templates/database/qbe/ins_del_and_or_cell.twig:9
 msgid "And:"
-msgstr ""
+msgstr "Un:"
 
 #: libraries/classes/Database/Qbe.php:766
 msgid "Ins"
@@ -13454,11 +13454,11 @@ msgstr "O"
 
 #: libraries/config.values.php:193 templates/javascript/variables.twig:51
 msgid "Wednesday"
-msgstr ""
+msgstr "Trešdiena"
 
 #: libraries/config.values.php:194 templates/javascript/variables.twig:52
 msgid "Thursday"
-msgstr ""
+msgstr "Ceturtdiena"
 
 #: libraries/config.values.php:195 templates/javascript/variables.twig:53
 #, fuzzy
@@ -13468,7 +13468,7 @@ msgstr "Pk"
 
 #: libraries/config.values.php:196 templates/javascript/variables.twig:54
 msgid "Saturday"
-msgstr ""
+msgstr "Sestdiena"
 
 #: libraries/config.values.php:197 templates/javascript/variables.twig:48
 #, fuzzy
@@ -13962,12 +13962,12 @@ msgstr ""
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:31
 #: templates/console/display.twig:84 templates/console/display.twig:175
 msgid "Collapse"
-msgstr ""
+msgstr "Sakļaut"
 
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:31
 #: templates/console/display.twig:84 templates/console/display.twig:175
 msgid "Expand"
-msgstr ""
+msgstr "Izvērst"
 
 #: templates/console/bookmark_content.twig:7 templates/console/display.twig:31
 #: templates/console/display.twig:175
@@ -15629,9 +15629,8 @@ msgid "Select a template"
 msgstr "Izvēlieties tabulas"
 
 #: templates/export.twig:14
-#, fuzzy
 msgid "Export templates:"
-msgstr "Eksporta veids"
+msgstr "Izgūt veidnes:"
 
 #: templates/export.twig:18
 msgid "New template:"
@@ -15664,10 +15663,8 @@ msgid "Show SQL query"
 msgstr "Rādīt pilnos vaicājumus"
 
 #: templates/export.twig:104
-#, fuzzy
-#| msgid "Export type"
 msgid "Export method:"
-msgstr "Eksporta veids"
+msgstr "Izgūšanas veids:"
 
 #: templates/export.twig:108
 msgid "Quick - display only the minimal options"
@@ -15684,10 +15681,8 @@ msgid "File format to export"
 msgstr "Daļēji teksti"
 
 #: templates/export.twig:137
-#, fuzzy
-#| msgid "Rows"
 msgid "Rows:"
-msgstr "Rindas"
+msgstr "Ierakstu rindas:"
 
 #: templates/export.twig:141
 msgid "Dump all rows"
@@ -15729,16 +15724,12 @@ msgid "Define new aliases"
 msgstr ""
 
 #: templates/export.twig:274
-#, fuzzy
-#| msgid "Select Tables"
 msgid "Select database:"
-msgstr "Izvēlieties tabulas"
+msgstr "Atlasiet datubāzi:"
 
 #: templates/export.twig:290
-#, fuzzy
-#| msgid "Select Tables"
 msgid "Select table:"
-msgstr "Izvēlieties tabulas"
+msgstr "Atlasiet tabulu:"
 
 #: templates/export.twig:298
 #, fuzzy
@@ -15747,10 +15738,8 @@ msgid "New table name"
 msgstr "Nav tabulu"
 
 #: templates/export.twig:306
-#, fuzzy
-#| msgid "Select two columns"
 msgid "Select column:"
-msgstr "Izvēlies 2 kolonnas"
+msgstr "Atlasiet kolonnu:"
 
 #: templates/export.twig:314
 #, fuzzy
@@ -15837,10 +15826,8 @@ msgid "The size is measured in MiB."
 msgstr ""
 
 #: templates/export.twig:482 templates/import.twig:182
-#, fuzzy
-#| msgid "Transformation options"
 msgid "Format-specific options:"
-msgstr "Transformācijas opcijas"
+msgstr "Formāta parametri:"
 
 #: templates/export.twig:491 templates/import.twig:191
 msgid "Encoding Conversion:"
@@ -15852,10 +15839,8 @@ msgid "Filters"
 msgstr ""
 
 #: templates/filter.twig:4 templates/server/status/variables/index.twig:12
-#, fuzzy
-#| msgid "Do not change the password"
 msgid "Containing the word:"
-msgstr "Nemainīt paroli"
+msgstr "Satur vārdu:"
 
 #: templates/footer.twig:7 templates/footer.twig:9 templates/footer.twig:11
 msgid "Open new phpMyAdmin window"
@@ -16311,7 +16296,7 @@ msgstr "Binārais"
 
 #: templates/javascript/variables.twig:21
 msgid "February"
-msgstr ""
+msgstr "Februāris"
 
 #: templates/javascript/variables.twig:22
 #, fuzzy
@@ -16351,7 +16336,7 @@ msgstr "Aug"
 
 #: templates/javascript/variables.twig:28
 msgid "September"
-msgstr ""
+msgstr "Septembris"
 
 #: templates/javascript/variables.twig:29
 #, fuzzy
@@ -16361,11 +16346,11 @@ msgstr "Okt"
 
 #: templates/javascript/variables.twig:30
 msgid "November"
-msgstr ""
+msgstr "Novembris"
 
 #: templates/javascript/variables.twig:31
 msgid "December"
-msgstr ""
+msgstr "Decembris"
 
 #. l10n: Short week day name for Sunday
 #: templates/javascript/variables.twig:57
@@ -16427,11 +16412,11 @@ msgstr "S"
 #. l10n: Column header for week of the year in calendar
 #: templates/javascript/variables.twig:74
 msgid "Wk"
-msgstr ""
+msgstr "Ned."
 
 #: templates/javascript/variables.twig:82
 msgid "Hour"
-msgstr ""
+msgstr "Stunda"
 
 #: templates/javascript/variables.twig:83
 #, fuzzy
@@ -16581,10 +16566,8 @@ msgid "Password:"
 msgstr "Parole:"
 
 #: templates/login/form.twig:95
-#, fuzzy
-#| msgid "Server Choice"
 msgid "Server choice:"
-msgstr "Servera izvēle"
+msgstr "Servera izvēle:"
 
 #: templates/login/header.twig:17
 msgid ""
@@ -16605,10 +16588,8 @@ msgstr ""
 
 #: templates/login/twofactor/application_configure.twig:16
 #: templates/login/twofactor/application.twig:2
-#, fuzzy
-#| msgid "Documentation"
 msgid "Authentication code:"
-msgstr "Dokumentācija"
+msgstr "Autentifikācijas kods:"
 
 #: templates/login/twofactor/application.twig:5
 msgid ""
@@ -17077,10 +17058,8 @@ msgid "Designer and creation of PDFs:"
 msgstr "PDF failu izveide"
 
 #: templates/relation/check_relations.twig:150
-#, fuzzy
-#| msgid "Displaying Column Comments"
 msgid "Displaying column comments:"
-msgstr "Rādu kolonnu komentārus"
+msgstr "Rāda kolonnas komentārus:"
 
 #: templates/relation/check_relations.twig:160
 #, fuzzy
@@ -17103,10 +17082,8 @@ msgid "Bookmarked SQL query:"
 msgstr "Saglabātie SQL vaicājumi"
 
 #: templates/relation/check_relations.twig:220
-#, fuzzy
-#| msgid "SQL history"
 msgid "SQL history:"
-msgstr "SQL vēsture"
+msgstr "SQL vaicājumu vēsture:"
 
 #: templates/relation/check_relations.twig:245
 #, fuzzy
@@ -17133,16 +17110,12 @@ msgid "User preferences:"
 msgstr "Lietotāja iestatījumi:"
 
 #: templates/relation/check_relations.twig:383
-#, fuzzy
-#| msgid "Modifications have been saved"
 msgid "Configurable menus:"
-msgstr "Labojumi tika saglabāti"
+msgstr "Pielāgojamas izvēlnes:"
 
 #: templates/relation/check_relations.twig:408
-#, fuzzy
-#| msgid "Show grid"
 msgid "Hide/show navigation items:"
-msgstr "Rādīt režģi"
+msgstr "Slēpt/rādīt navigācijas vienumus:"
 
 #: templates/relation/check_relations.twig:433
 msgid "Saving Query-By-Example searches:"
@@ -17394,11 +17367,9 @@ msgstr ""
 
 #: templates/server/privileges/change_password.twig:28
 #: templates/server/privileges/login_information_fields.twig:54
-#, fuzzy
-#| msgid "Row length"
 msgctxt "Password strength"
 msgid "Strength:"
-msgstr "Rindas garums"
+msgstr "Sarežģītības pakāpe:"
 
 #: templates/server/privileges/change_password.twig:32
 #: templates/server/privileges/login_information_fields.twig:60
