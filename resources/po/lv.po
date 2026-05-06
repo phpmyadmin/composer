@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-05-03 00:53+0000\n"
-"PO-Revision-Date: 2026-05-04 18:09+0000\n"
+"PO-Revision-Date: 2026-05-06 13:11+0000\n"
 "Last-Translator: \"ℂ𝕠𝕠𝕠𝕝 (𝕘𝕚𝕥𝕙𝕦𝕓.𝕔𝕠𝕞/ℂ𝕠𝕠𝕠𝕝)\" <coool@mail.lv>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/lv/>\n"
@@ -848,9 +848,8 @@ msgid "Input transformation"
 msgstr "Pārlūkprogrammas transformācija"
 
 #: resources/templates/columns_definitions/table_fields_definitions.twig:104
-#, fuzzy
 msgid "Input transformation options"
-msgstr "Transformācijas opcijas"
+msgstr "Ievades pārveidošanas parametri"
 
 #: resources/templates/components/_preview_sql.twig:3
 #: src/Controllers/Database/Structure/DropTableController.php:44
@@ -1121,9 +1120,8 @@ msgstr "Vēsture"
 #: resources/templates/database/routines/editor_form.twig:58
 #: resources/templates/table/structure/display_table_stats.twig:94
 #: src/Import/Import.php:1168 src/Import/Import.php:1226
-#, fuzzy
 msgid "Options"
-msgstr "Darbības"
+msgstr "Parametri"
 
 #: resources/templates/console/display.twig:29
 #: resources/templates/console/display.twig:130
@@ -1549,9 +1547,9 @@ msgid "Select \"%s\""
 msgstr "Atlasīt \"%s\""
 
 #: resources/templates/database/designer/database_tables.twig:111
-#, fuzzy, php-format
+#, php-format
 msgid "Add an option for column \"%s\"."
-msgstr "Kolonnas vērtība \"%s\""
+msgstr "Pievienot parametru \"%s\" kolonnai."
 
 #: resources/templates/database/designer/edit_delete_pages.twig:5
 msgid "Page to open"
@@ -1795,9 +1793,8 @@ msgid "Operator"
 msgstr "Operators"
 
 #: resources/templates/database/designer/main.twig:1087
-#, fuzzy
 msgid "Active options"
-msgstr "Tabulas opcijas"
+msgstr "Aktīvie parametri"
 
 #: resources/templates/database/designer/main.twig:1138
 #: resources/templates/sql/query.twig:181
@@ -2528,9 +2525,8 @@ msgid "Return length/values"
 msgstr "Garums/Vērtības*"
 
 #: resources/templates/database/routines/editor_form.twig:95
-#, fuzzy
 msgid "Return options"
-msgstr "Tabulas opcijas"
+msgstr "Atgriezt parametrus"
 
 #: resources/templates/database/routines/editor_form.twig:99
 #: resources/templates/database/routines/parameter_row.twig:31
@@ -2759,9 +2755,8 @@ msgstr ""
 
 #: resources/templates/database/structure/bulk_action_modal.twig:12
 #: resources/templates/database/structure/check_all_tables.twig:58
-#, fuzzy
 msgid "Continue"
-msgstr "Piedalies"
+msgstr "Turpināt"
 
 #: resources/templates/database/structure/change_prefix_form.twig:4
 #, fuzzy
@@ -3224,9 +3219,8 @@ msgstr "Kārtot pēc atslēgas:"
 
 #: resources/templates/display/results/table.twig:200
 #: resources/templates/table/search/index.twig:101
-#, fuzzy
 msgid "Extra options"
-msgstr "Tabulas opcijas"
+msgstr "Papildu parametri"
 
 #: resources/templates/display/results/table.twig:212
 #: src/Display/Results.php:1112
@@ -3293,7 +3287,7 @@ msgstr ""
 #: src/Controllers/JavaScriptMessagesController.php:467
 #: src/Export/Export.php:716
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopēt starpliktuvē"
 
 #: resources/templates/display/results/table.twig:372
 #: resources/templates/table/chart/tbl_chart.twig:2
@@ -3418,11 +3412,11 @@ msgstr "Izgūšanas veids:"
 
 #: resources/templates/export.twig:106
 msgid "Quick - display only the minimal options"
-msgstr ""
+msgstr "Ātrais - rāda tikai nepieciešamos parametrus"
 
 #: resources/templates/export.twig:110
 msgid "Custom - display all possible options"
-msgstr ""
+msgstr "Pielāgotais - rāda visus iespējamos parametrus"
 
 #: resources/templates/export.twig:117 src/Plugins/Export/ExportCodegen.php:71
 msgid "Format:"
@@ -3454,9 +3448,9 @@ msgid "Output:"
 msgstr ""
 
 #: resources/templates/export.twig:169 resources/templates/export.twig:364
-#, fuzzy, php-format
+#, php-format
 msgid "Save on server in the directory <strong>%s</strong>"
-msgstr "Saglabāt uz servera direktorijā %s"
+msgstr "Saglabāt serverī <strong>%s</strong> mapē"
 
 #: resources/templates/export.twig:176 resources/templates/export.twig:371
 #: src/Config/Descriptions.php:679 src/Config/Descriptions.php:682
@@ -3658,7 +3652,7 @@ msgstr ""
 #: resources/templates/home/git_info.twig:25
 #, fuzzy, php-format
 msgid "committed on %s by %s"
-msgstr "Servera versija"
+msgstr "ievietoja %s %s"
 
 #: resources/templates/home/git_info.twig:32
 #, fuzzy, php-format
@@ -3730,7 +3724,7 @@ msgstr "Serveris:"
 
 #: resources/templates/home/index.twig:185
 msgid "Hostname:"
-msgstr "Resursdators:"
+msgstr "Resursdatora nosaukums:"
 
 #: resources/templates/home/index.twig:189
 msgid "Server type:"
@@ -3928,9 +3922,8 @@ msgid "Skip this number of queries (for SQL) starting from the first one:"
 msgstr ""
 
 #: resources/templates/import.twig:149
-#, fuzzy
 msgid "Other options"
-msgstr "Darbības"
+msgstr "Pārējie parametri"
 
 #: resources/templates/indexes.twig:40
 #: resources/templates/table/structure/display_structure.twig:503
@@ -4815,9 +4808,9 @@ msgid "Latched pages"
 msgstr ""
 
 #: resources/templates/server/engines/_innodb_buffer_pool.twig:34
-#, fuzzy, php-format
+#, php-format
 msgid "%s pages"
-msgstr "Lietotājvārds"
+msgstr "%s lapas"
 
 #: resources/templates/server/engines/_innodb_buffer_pool.twig:41
 msgid "Buffer pool activity"
@@ -4951,9 +4944,8 @@ msgstr ""
 #: resources/templates/server/privileges/change_password.twig:32
 #: resources/templates/server/privileges/login_information_fields.twig:61
 #: resources/templates/server/replication/primary_add_replica_user.twig:62
-#, fuzzy
 msgid "Re-type:"
-msgstr "Atkārtojiet"
+msgstr "Atkārtot:"
 
 #: resources/templates/server/privileges/change_password.twig:38
 #: resources/templates/server/privileges/login_information_fields.twig:55
@@ -5167,9 +5159,8 @@ msgstr ""
 "Aizstājējzīmes _ un % jāaizsargā ar \\ priekšā, lai izmantotu tās burtiski."
 
 #: resources/templates/server/privileges/privileges_summary.twig:72
-#, fuzzy
 msgid "Add privileges on the following table:"
-msgstr "Pievienot privilēģijas uz sekojošo tabulu"
+msgstr "Pievienot privilēģijas šai tabulai:"
 
 #: resources/templates/server/privileges/privileges_summary.twig:87
 #, fuzzy
@@ -5472,7 +5463,7 @@ msgstr "Resursu ierobežojumi"
 
 #: resources/templates/server/privileges/privileges_table.twig:737
 msgid "Note: Setting these options to 0 (zero) removes the limit."
-msgstr "Piezīme: Šo opciju uzstādīšana uz 0 (nulli) atceļ ierobežojumus."
+msgstr "Piezīme: Šo parametru iestatīšana uz 0 (nulli) atceļ ierobežojumus."
 
 #: resources/templates/server/privileges/privileges_table.twig:743
 #: resources/templates/server/privileges/privileges_table.twig:750
@@ -5992,21 +5983,21 @@ msgstr "Atjaunot"
 
 #: resources/templates/server/status/monitor/index.twig:28
 #: resources/templates/server/status/processes/index.twig:39
-#, fuzzy, php-format
+#, php-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] "sekundē"
-msgstr[1] "sekundē"
-msgstr[2] "sekundē"
+msgstr[0] "%d sekunde"
+msgstr[1] "%d sekundes"
+msgstr[2] "%d sekundes"
 
 #: resources/templates/server/status/monitor/index.twig:30
 #: resources/templates/server/status/processes/index.twig:41
-#, fuzzy, php-format
+#, php-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "minūtē"
-msgstr[1] "minūtē"
-msgstr[2] "minūtē"
+msgstr[0] "%d minūte"
+msgstr[1] "%d minūtes"
+msgstr[2] "%d minūtes"
 
 #: resources/templates/server/status/monitor/index.twig:38
 #, fuzzy
@@ -6155,9 +6146,8 @@ msgid "Log statistics"
 msgstr "Rindas statistika"
 
 #: resources/templates/server/status/monitor/index.twig:229
-#, fuzzy
 msgid "Selected time range:"
-msgstr "Iezīmēt visu"
+msgstr "Atlasītais laika posms:"
 
 #: resources/templates/server/status/monitor/index.twig:237
 msgid "Only retrieve SELECT,INSERT,UPDATE and DELETE Statements"
@@ -6286,6 +6276,7 @@ msgstr ""
 
 #: resources/templates/server/status/processes/list.twig:44
 #: src/Display/Results.php:2432
+#, fuzzy
 msgid "Kill"
 msgstr "Apturēt"
 
@@ -6300,21 +6291,21 @@ msgstr ""
 
 #. l10n: Average per hour
 #: resources/templates/server/status/queries/index.twig:15
-#, fuzzy, php-format
+#, php-format
 msgid "ø per hour: %s"
-msgstr "stundā"
+msgstr "ø stundā: %s"
 
 #. l10n: Average per minute
 #: resources/templates/server/status/queries/index.twig:16
-#, fuzzy, php-format
+#, php-format
 msgid "ø per minute: %s"
-msgstr "minūtē"
+msgstr "ø minūtē: %s"
 
 #. l10n: Average per second
 #: resources/templates/server/status/queries/index.twig:18
-#, fuzzy, php-format
+#, php-format
 msgid "ø per second: %s"
-msgstr "sekundē"
+msgstr "ø sekundē: %s"
 
 #: resources/templates/server/status/queries/index.twig:32
 msgid "Statements"
@@ -6981,9 +6972,8 @@ msgid "Index choice:"
 msgstr "Indeksa nosaukums&nbsp;:"
 
 #: resources/templates/table/index_form.twig:57
-#, fuzzy
 msgid "Advanced options"
-msgstr "Tabulas opcijas"
+msgstr "Papildu parametri"
 
 #: resources/templates/table/index_form.twig:67
 msgid "Key block size:"
@@ -7142,7 +7132,7 @@ msgstr "Pārvietot tabulu uz (datubāze<b>.</b>tabula)"
 
 #: resources/templates/table/operations/index.twig:102
 msgid "Table options"
-msgstr "Tabulas opcijas"
+msgstr "Tabulas parametri"
 
 #: resources/templates/table/operations/index.twig:106
 msgid "Rename table to"
@@ -9406,11 +9396,11 @@ msgstr "Struktūra un dati"
 
 #: src/Config/ConfigFile.php:669
 msgid "Quick - display only the minimal options to configure"
-msgstr ""
+msgstr "Ātrais - rāda tikai nepieciešamos konfigurācijas parametrus"
 
 #: src/Config/ConfigFile.php:670
 msgid "Custom - display all possible options to configure"
-msgstr ""
+msgstr "Pielāgotais - rāda visus iespējamos konfigurācijas parametrus"
 
 #: src/Config/ConfigFile.php:671
 msgid "Custom - like above, but without the quick/custom choice"
@@ -9596,6 +9586,8 @@ msgid ""
 "Advanced server configuration, do not change these options unless you know "
 "what they are for."
 msgstr ""
+"Papildu servera konfigurācija, mainiet šos parametrus tikai tad, ja ziniet, "
+"ko dariet. Ir izpratne par parametru nozīmi."
 
 #: src/Config/Descriptions.php:189
 msgid ""
@@ -9637,21 +9629,19 @@ msgstr "Datubāzu eksporta opcijas"
 
 #: src/Config/Descriptions.php:203
 msgid "Set some commonly used options."
-msgstr ""
+msgstr "Iestatīt dažus bieži izmantotus parametrus."
 
 #: src/Config/Descriptions.php:204
-#, fuzzy
 msgid "Customize default common import options."
-msgstr "Datubāzu eksporta opcijas"
+msgstr "Pielāgot noklusējuma kopējos ievietošanas parametrus."
 
 #: src/Config/Descriptions.php:205
 msgid "Set import and export directories and compression options."
 msgstr ""
 
 #: src/Config/Descriptions.php:207
-#, fuzzy
 msgid "Databases display options."
-msgstr "Datubāzu eksporta opcijas"
+msgstr "Datubāzu attēlošanas parametri."
 
 #: src/Config/Descriptions.php:208
 #, fuzzy
@@ -9664,14 +9654,12 @@ msgid "Customize the navigation tree."
 msgstr "Datubāzu eksporta opcijas"
 
 #: src/Config/Descriptions.php:210
-#, fuzzy
 msgid "Servers display options."
-msgstr "Datubāzu eksporta opcijas"
+msgstr "Serveru attēlošanas parametri."
 
 #: src/Config/Descriptions.php:211
-#, fuzzy
 msgid "Tables display options."
-msgstr "Datubāzu eksporta opcijas"
+msgstr "Tabulu attēlošanas parametri."
 
 #: src/Config/Descriptions.php:214
 msgid "Settings that didn't fit anywhere else."
@@ -10267,6 +10255,8 @@ msgid ""
 "When disabled, users cannot set any of the options below, regardless of the "
 "checkbox on the right."
 msgstr ""
+"Ja tas ir atspējots, lietotāji nevarēs iestatīt nevienu no tālāk "
+"norādītajiem parametriem neatkarīgi no izvēles rūtiņas labajā pusē."
 
 #: src/Config/Descriptions.php:515
 msgid ""
@@ -12433,8 +12423,8 @@ msgid ""
 "The phpMyAdmin configuration storage is not completely configured, some "
 "extended features have been deactivated. %sFind out why%s. "
 msgstr ""
-"phpMyAdmin iestatījumu glabātuve nav pilnīgi iestatīta, dažas papildiespējas "
-"ir izslēgtas. %sUzziniet kāpēc%s. "
+"phpMyAdmin konfigurācijas krātuve nav pilnībā nokonfigurēta, un dažas "
+"paplašinātās funkcijas ir deaktivizētas. %sNoskaidrot iemeslu%s. "
 
 #: src/Controllers/HomeController.php:203
 msgid ""
@@ -13113,9 +13103,9 @@ msgstr "Izslēgt %s"
 
 #. l10n: %d seconds
 #: src/Controllers/JavaScriptMessagesController.php:249
-#, fuzzy, php-format
+#, php-format
 msgid "Set long_query_time to %d seconds."
-msgstr "Iestatiet long_query_time parametru uz %d sekundēm."
+msgstr "Iestatīt long_query_time parametru uz %d sekundēm."
 
 #: src/Controllers/JavaScriptMessagesController.php:251
 msgid ""
@@ -13185,7 +13175,6 @@ msgid "Profiling results"
 msgstr "Profilēšanas rezultāti"
 
 #: src/Controllers/JavaScriptMessagesController.php:280
-#, fuzzy
 msgctxt "Display format"
 msgid "Table"
 msgstr "Tabula"
@@ -13197,7 +13186,7 @@ msgstr "Diagramma"
 #. l10n: A collection of available filters
 #: src/Controllers/JavaScriptMessagesController.php:288
 msgid "Log table filter options"
-msgstr "Žurnālu tabulas filtrēšanas opcijas"
+msgstr "Žurnāla tabulas atlasīšanas parametri"
 
 #. l10n: Filter as in "Start Filtering"
 #: src/Controllers/JavaScriptMessagesController.php:290
@@ -15796,9 +15785,9 @@ msgid "The row has been deleted."
 msgstr "Ieraksts tika dzēsts"
 
 #: src/Display/Results.php:2973 src/Display/Results.php:3295 src/Sql.php:910
-#, fuzzy, php-format
+#, php-format
 msgid "Query took %01.4f seconds."
-msgstr "Vaicājums ilga %01.4f s"
+msgstr "Vaicājums ilga %01.4f sekundes."
 
 #: src/Display/Results.php:3263
 #, php-format
@@ -15820,8 +15809,9 @@ msgid "Link not found!"
 msgstr "Saite nav atrasta!"
 
 #: src/Engines/Innodb.php:30
+#, fuzzy
 msgid "Data home directory"
-msgstr ""
+msgstr "Datu mājas mape"
 
 #: src/Engines/Innodb.php:31
 msgid "The common part of the directory path for all InnoDB data files."
@@ -16091,7 +16081,7 @@ msgid "Insufficient space to save the file %s."
 msgstr "Nepietiek vietas, lai saglabātu failu %s."
 
 #: src/Export/OutputHandler.php:195
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "File %s already exists on server, change filename or check overwrite option."
 msgstr ""
@@ -16214,7 +16204,7 @@ msgstr ""
 
 #: src/Html/Generator.php:332
 msgid "The PHP function password_hash() with default options."
-msgstr ""
+msgstr "PHP password_hash() funkcija ar noklusējuma parametriem."
 
 #: src/Html/Generator.php:333
 msgid "password_hash() PHP function"
@@ -16961,9 +16951,8 @@ msgstr "Excel versija:"
 #: src/Plugins/Export/ExportLatex.php:174 src/Plugins/Export/ExportOdt.php:121
 #: src/Plugins/Export/ExportTexytext.php:80
 #: src/Plugins/Export/ExportXml.php:125
-#, fuzzy
 msgid "Data dump options"
-msgstr "Datubāzu eksporta opcijas"
+msgstr "Datu izguves parametri"
 
 #: src/Plugins/Export/ExportHtmlword.php:167
 #: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2097
@@ -17014,9 +17003,8 @@ msgstr "Tabulas __TABLE__ struktūra"
 
 #: src/Plugins/Export/ExportLatex.php:124 src/Plugins/Export/ExportOdt.php:89
 #: src/Plugins/Export/ExportSql.php:278
-#, fuzzy
 msgid "Object creation options"
-msgstr "Transformācijas opcijas"
+msgstr "Objekta izveides parametri"
 
 #: src/Plugins/Export/ExportLatex.php:129
 #: src/Plugins/Export/ExportLatex.php:184
@@ -17167,9 +17155,8 @@ msgid ""
 msgstr ""
 
 #: src/Plugins/Export/ExportSql.php:413
-#, fuzzy
 msgid "Data creation options"
-msgstr "Transformācijas opcijas"
+msgstr "Datu izveides parametri"
 
 #: src/Plugins/Export/ExportSql.php:417 src/Plugins/Export/ExportSql.php:2060
 msgid "Truncate table before insert"
@@ -17348,7 +17335,7 @@ msgstr "Izveidošana"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
-msgstr ""
+msgstr "Objekta izveides parametri (ieteicams atlasīt visus)"
 
 #: src/Plugins/Export/ExportXml.php:130
 msgid "Export contents"
@@ -17365,11 +17352,11 @@ msgstr ""
 
 #: src/Plugins/Import/ImportCsv.php:93
 msgid "Name of the new table (optional):"
-msgstr ""
+msgstr "Jaunās tabulas nosaukums (neobligāti):"
 
 #: src/Plugins/Import/ImportCsv.php:102
 msgid "Name of the new database (optional):"
-msgstr ""
+msgstr "Jaunās datubāzes nosaukums (neobligāti):"
 
 #: src/Plugins/Import/ImportCsv.php:111 src/Plugins/Import/ImportCsv.php:129
 msgid "Import these many number of rows (optional):"
@@ -17482,9 +17469,8 @@ msgid "XML"
 msgstr "XML"
 
 #: src/Plugins.php:406
-#, fuzzy
 msgid "This format has no options"
-msgstr "Šim formātam nav opciju"
+msgstr "Šim formātam nav parametru"
 
 #: src/Plugins/Schema/Dia/TableStatsDia.php:66
 #: src/Plugins/Schema/Eps/TableStatsEps.php:78
@@ -17664,6 +17650,7 @@ msgid "Image preview here"
 msgstr ""
 
 #: src/Plugins/Transformations/Abs/InlineTransformationsPlugin.php:30
+#, fuzzy
 msgid ""
 "Displays a clickable thumbnail. The options are the maximum width and height "
 "in pixels. The original aspect ratio is preserved."
@@ -17719,25 +17706,24 @@ msgid ""
 msgstr ""
 
 #: src/Plugins/Transformations/Abs/TextImageLinkTransformationsPlugin.php:30
-#, fuzzy
 msgid ""
 "Displays an image and a link; the column contains the filename. The first "
 "option is a URL prefix like \"https://www.example.com/\". The second and "
 "third options are the width and the height in pixels."
 msgstr ""
-"Parāda attēlu un linku, lauks satur faila nosauumu; pirmā opcija ir "
-"prefikss, piemēram, \"https://domens.lv/\", otrā opcija ir platums pikseļos, "
-"trešā ir augstums."
+"Parāda attēlu un saiti; kolonna satur datnes nosaukumu. Pirmais parametrs ‐ "
+"URL prefikss, piemēram, \"https://domens.lv/\". Otrais parametrs ­‐ platums "
+"pikseļos, trešais ‐ augstums."
 
 #: src/Plugins/Transformations/Abs/TextLinkTransformationsPlugin.php:29
-#, fuzzy
 msgid ""
 "Displays a link; the column contains the filename. The first option is a URL "
 "prefix like \"https://www.example.com/\". The second option is a title for "
 "the link."
 msgstr ""
-"Parāda attēlu un linku, lauks satur faila nosauumu; pirmā opcija ir "
-"prefikss, piemēram, \"https://domens.lv/\", otrā opcija ir linka nosaukums."
+"Parāda saiti; kolonna satur datnes nosaukumu. Pirmais parametrs - URL "
+"prefikss, piemēram, \"https://domens.lv/\". Otrais parametrs - saites "
+"nosaukums."
 
 #: src/Plugins/Transformations/Input/Text_Plain_Iptobinary.php:31
 msgid "Converts an Internet network address in (IPv4/IPv6) format to binary"
