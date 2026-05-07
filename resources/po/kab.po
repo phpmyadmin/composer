@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-05-03 00:53+0000\n"
-"PO-Revision-Date: 2026-03-20 22:11+0000\n"
+"PO-Revision-Date: 2026-05-07 18:11+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Kabyle <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "kab/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -13510,7 +13510,7 @@ msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:586
 msgid "Hide panel"
-msgstr "Ɣumm s wudem awurman"
+msgstr "Ɣumm agalis"
 
 #: src/Controllers/JavaScriptMessagesController.php:588
 #: src/Navigation/NavigationTree.php:1261
