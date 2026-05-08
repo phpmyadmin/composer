@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 5.2.4-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-02-25 10:35-0300\n"
-"PO-Revision-Date: 2026-04-27 10:09+0000\n"
+"PO-Revision-Date: 2026-05-08 20:11+0000\n"
 "Last-Translator: Adam Havránek <adamhavra@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/5-2/cs/>"
 "\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.5-dev\n"
 
 #: libraries/advisory_rules_generic.php:9
 msgid "Uptime below one day"
@@ -5437,7 +5437,7 @@ msgid ""
 msgstr ""
 "Bohužel během posledního pokusu nebyla žádná data načtena. Toto obvykle "
 "znamená, že phpMyAdmin nebude schopen načíst tento soubor, pokud nezvýšíte "
-"časové limity v PHP."
+"časové limity v PHP."
 
 #: libraries/classes/Controllers/Import/ImportController.php:736
 #: libraries/classes/Controllers/Sql/SqlController.php:162
@@ -7694,9 +7694,10 @@ msgid ""
 "to increase the tmp_table_size  value to cause temporary tables to be memory-"
 "based instead of disk-based."
 msgstr ""
-"Počet dočasných tabulek vytvořených serverem na disku při provádění dotazů. "
-"Pokud je tato hodnota velká, můžete zvětšit parametr tmp_table_size  a MySQL "
-"bude používat větší dočasné tabulky v paměti."
+"Počet dočasných tabulek na disku, které server automaticky vytváří při "
+"provádění příkazů. Pokud je hodnota Created_tmp_disk_tables vysoká, může být "
+"vhodné zvýšit hodnotu tmp_table_size, aby se dočasné tabulky ukládaly do "
+"paměti namísto na disk."
 
 #: libraries/classes/Controllers/Server/Status/VariablesController.php:256
 msgid "How many temporary files mysqld has created."
@@ -7860,7 +7861,7 @@ msgstr ""
 
 #: libraries/classes/Controllers/Server/Status/VariablesController.php:335
 msgid "Total size of buffer pool, in pages."
-msgstr "Celková velikost InnoDB bufferů, ve stránkách."
+msgstr "Celková velikost vyrovnávací paměti v stránkách."
 
 #: libraries/classes/Controllers/Server/Status/VariablesController.php:337
 msgid ""
@@ -11335,7 +11336,7 @@ msgstr "VZTAHY TABULKY"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2144
 msgid "It appears your table uses triggers;"
-msgstr "Vaše tabulka zřejmě využívá triggery;"
+msgstr "Zdá se, že vaše tabulka využívá triggery;"
 
 #: libraries/classes/Plugins/Export/ExportSql.php:2174
 #, php-format
@@ -11459,7 +11460,7 @@ msgstr "Chybný formát mediawiki dat na řádku: <br>%s."
 #: libraries/classes/Plugins/Import/ImportOds.php:80
 msgid "Import percentages as proper decimals <i>(ex. 12.00% to .12)</i>"
 msgstr ""
-"Importovat procenta jako desetinná čísla <i>např. (0.12 místo 12.00%)</i>"
+"Importujte procenta jako desetinná čísla <i>(např. 12,00 % jako 0,12)</i>"
 
 #: libraries/classes/Plugins/Import/ImportOds.php:86
 msgid "Import currencies <i>(ex. $5.00 to 5.00)</i>"
@@ -11926,7 +11927,7 @@ msgid ""
 "The server is not responding (or the local server's socket is not correctly "
 "configured)."
 msgstr ""
-"Server neodpovídá (nebo není správně nastaven lokální socket MySQL serveru)."
+"Server neodpovídá (nebo není správně nakonfigurován socket místního serveru)."
 
 #: libraries/classes/Query/Utilities.php:100
 msgid "The server is not responding."
@@ -12220,8 +12221,7 @@ msgstr "Umožňuje odstranit databáze a tabulky."
 #: templates/server/privileges/privileges_table.twig:602
 msgid "Allows reloading server settings and flushing the server's caches."
 msgstr ""
-"Umožňuje znovu načíst nastavení a vyprázdnění vyrovnávacích pamětí MySQL "
-"serveru."
+"Umožňuje znovu načíst nastavení serveru a vyprázdnit mezipaměti serveru."
 
 #: libraries/classes/Server/Privileges.php:386
 #: templates/server/privileges/privileges_table.twig:612
