@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-05-03 00:53+0000\n"
-"PO-Revision-Date: 2026-04-30 10:09+0000\n"
+"PO-Revision-Date: 2026-05-08 20:11+0000\n"
 "Last-Translator: Adam Havránek <adamhavra@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/phpmyadmin/master/"
 "cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.5-dev\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -2437,10 +2437,8 @@ msgid "Function"
 msgstr "Funkce"
 
 #: resources/templates/database/routines/execute_form.twig:54
-#, fuzzy
-#| msgid "This page does not contain any tables!"
 msgid "This routine does not require any parameters."
-msgstr "Tato stránka neobsahuje žádné tabulky!"
+msgstr "Tato rutina nevyžaduje žádné parametry."
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
 #: src/Util.php:1385
@@ -2473,16 +2471,12 @@ msgid "Returns"
 msgstr "Vrací"
 
 #: resources/templates/database/routines/index.twig:78
-#, fuzzy
-#| msgid "Routine name"
 msgid "Routine editor"
-msgstr "Název rutiny"
+msgstr "Editor rutin"
 
 #: resources/templates/database/routines/index.twig:98
-#, fuzzy
-#| msgid "Export of routine %s"
 msgid "Export routine"
-msgstr "Export rutiny %s"
+msgstr "Export rutiny"
 
 #: resources/templates/database/routines/index.twig:113
 #: src/Controllers/Database/RoutinesController.php:354
@@ -2546,7 +2540,7 @@ msgstr "Nastavení:"
 
 #: resources/templates/database/search/main.twig:40
 msgid "include hex matches"
-msgstr ""
+msgstr "zahrnout shody v hexadecimálním formátu"
 
 #: resources/templates/database/search/main.twig:45
 msgid "Inside tables:"
@@ -5207,8 +5201,7 @@ msgstr "Umožňuje prohlížet procesy všech uživatelů."
 #: src/Server/Privileges.php:325
 msgid "Allows reloading server settings and flushing the server's caches."
 msgstr ""
-"Umožňuje znovu načíst nastavení a vyprázdnění vyrovnávacích pamětí MySQL "
-"serveru."
+"Umožňuje znovu načíst nastavení serveru a vyprázdnit mezipaměti serveru."
 
 #: resources/templates/server/privileges/privileges_table.twig:623
 #: resources/templates/server/privileges/privileges_table.twig:626
@@ -12570,7 +12563,7 @@ msgid ""
 msgstr ""
 "Bohužel během posledního pokusu nebyla žádná data načtena. Toto obvykle "
 "znamená, že phpMyAdmin nebude schopen načíst tento soubor, pokud nezvýšíte "
-"časové limity v PHP."
+"časové limity v PHP."
 
 #: src/Controllers/Import/ImportController.php:637
 #: src/Controllers/Sql/SqlController.php:138
@@ -14634,9 +14627,10 @@ msgid ""
 "to increase the tmp_table_size  value to cause temporary tables to be memory-"
 "based instead of disk-based."
 msgstr ""
-"Počet dočasných tabulek vytvořených serverem na disku při provádění dotazů. "
-"Pokud je tato hodnota velká, můžete zvětšit parametr tmp_table_size  a MySQL "
-"bude používat větší dočasné tabulky v paměti."
+"Počet dočasných tabulek na disku, které server automaticky vytváří při "
+"provádění příkazů. Pokud je hodnota Created_tmp_disk_tables vysoká, může být "
+"vhodné zvýšit hodnotu tmp_table_size, aby se dočasné tabulky ukládaly do "
+"paměti namísto na disk."
 
 #: src/Controllers/Server/Status/VariablesController.php:238
 msgid "How many temporary files mysqld has created."
@@ -14800,7 +14794,7 @@ msgstr ""
 
 #: src/Controllers/Server/Status/VariablesController.php:317
 msgid "Total size of buffer pool, in pages."
-msgstr "Celková velikost InnoDB bufferů, ve stránkách."
+msgstr "Celková velikost vyrovnávací paměti v stránkách."
 
 #: src/Controllers/Server/Status/VariablesController.php:319
 msgid ""
@@ -17409,7 +17403,7 @@ msgstr "VZTAHY TABULKY"
 
 #: src/Plugins/Export/ExportSql.php:1880
 msgid "It appears your table uses triggers;"
-msgstr "Zdá se, že Vaše tabulka používá triggery;"
+msgstr "Zdá se, že vaše tabulka využívá triggery;"
 
 #: src/Plugins/Export/ExportSql.php:1914
 #, php-format
@@ -17551,7 +17545,7 @@ msgstr "Chybný formát mediawiki dat na řádku: <br>%s."
 #: src/Plugins/Import/ImportOds.php:86
 msgid "Import percentages as proper decimals <i>(ex. 12.00% to .12)</i>"
 msgstr ""
-"Importovat procenta jako desetinná čísla <i>např. (0.12 místo 12.00%)</i>"
+"Importujte procenta jako desetinná čísla <i>(např. 12,00 % jako 0,12)</i>"
 
 #: src/Plugins/Import/ImportOds.php:92
 msgid "Import currencies <i>(ex. $5.00 to 5.00)</i>"
@@ -17988,7 +17982,7 @@ msgid ""
 "The server is not responding (or the local server's socket is not correctly "
 "configured)."
 msgstr ""
-"Server neodpovídá (nebo není správně nastaven lokální socket MySQL serveru)."
+"Server neodpovídá (nebo není správně nakonfigurován socket místního serveru)."
 
 #: src/Query/Utilities.php:96
 msgid "The server is not responding."
