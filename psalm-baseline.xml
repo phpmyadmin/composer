@@ -4855,9 +4855,6 @@
       <code><![CDATA[$lastCumulativeSize->scale]]></code>
       <code><![CDATA[$lastCumulativeSize->scale]]></code>
     </PossiblyInvalidPropertyFetch>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$row[$columnIndex]]]></code>
-    </PossiblyUndefinedArrayOffset>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[ImportSettings::$runQuery]]></code>
     </RiskyTruthyFalsyComparison>

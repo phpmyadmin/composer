@@ -854,21 +854,21 @@ final class Import
                     ) {
                         $tempSQLStr .= (string) $row[$columnIndex];
                     } else {
+                        $value = (string) $row[$columnIndex];
                         if ($analyses !== null) {
                             $isVarchar = $analyses[$tableIndex][$columnIndex]->type === ColumnType::Varchar;
                         } else {
-                            $isVarchar = ! is_numeric($row[$columnIndex])
-                                && ! preg_match('/^0x[0-9a-f]+$/', (string) $row[$columnIndex]);
+                            $isVarchar = ! preg_match('/^0x[0-9a-f]+$/', $value)
+                                && $value !== (string) (int) $value
+                                && $value !== (string) (float) $value;
                         }
 
                         /* Don't put quotes around NULL fields */
-                        if ((string) $row[$columnIndex] === 'NULL') {
+                        if ($value === 'NULL') {
                             $isVarchar = false;
                         }
 
-                        $tempSQLStr .= $isVarchar
-                            ? $this->dbi->quoteString((string) $row[$columnIndex])
-                            : (string) $row[$columnIndex];
+                        $tempSQLStr .= $isVarchar ? $this->dbi->quoteString($value) : $value;
                     }
 
                     if ($columnIndex === $lastColumnKey) {

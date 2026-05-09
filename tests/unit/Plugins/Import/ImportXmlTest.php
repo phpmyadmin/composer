@@ -178,6 +178,49 @@ final class ImportXmlTest extends AbstractTestCase
     }
 
     /**
+     * Test for doImport with numeric-looking string values
+     */
+    #[RequiresPhpExtension('simplexml')]
+    public function testDoImportNumericStringValues(): void
+    {
+        $dbi = $this->getMockBuilder(DatabaseInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $dbi->expects(self::any())
+            ->method('quoteString')
+            ->willReturnCallback(static fn (string $string): string => "'" . $string . "'");
+
+        ImportSettings::$importFile = 'tests/test_data/phpmyadmin_importXML_Numeric_String_For_Testing.xml';
+
+        $importHandle = new File(ImportSettings::$importFile);
+        $importHandle->open();
+
+        $importXml = $this->getImportXml($dbi);
+        $importXml->doImport($importHandle);
+
+        $expectedQuery = <<<'SQL'
+            CREATE DATABASE IF NOT EXISTS `testdata` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;USE `testdata`;
+            CREATE TABLE IF NOT EXISTS `test_data` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `data` varchar(255) DEFAULT NULL,
+              PRIMARY KEY (`id`),
+              UNIQUE KEY `data` (`data`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+                        ;INSERT INTO `testdata`.`test_data` (`id`, `data`) VALUES (3, '01234'),
+             (2, 1234),
+             (1, 'abcd');
+            SQL;
+
+        self::assertSame($expectedQuery, Current::$sqlQuery);
+        self::assertStringContainsString(
+            'The following structures have either been created or altered.',
+            ImportSettings::$importNotice,
+        );
+        self::assertStringContainsString('Go to table: `test_data`', ImportSettings::$importNotice);
+        self::assertTrue(ImportSettings::$finished);
+    }
+
+    /**
      * Test for doImport using the no database dataset
      */
     #[RequiresPhpExtension('simplexml')]
