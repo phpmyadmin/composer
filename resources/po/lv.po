@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
 "POT-Creation-Date: 2026-05-10 00:55+0000\n"
-"PO-Revision-Date: 2026-05-06 13:11+0000\n"
+"PO-Revision-Date: 2026-05-15 23:22+0000\n"
 "Last-Translator: \"ℂ𝕠𝕠𝕠𝕝 (𝕘𝕚𝕥𝕙𝕦𝕓.𝕔𝕠𝕞/ℂ𝕠𝕠𝕠𝕝)\" <coool@mail.lv>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/phpmyadmin/"
 "master/lv/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: resources/templates/base.twig:40 resources/templates/login/header.twig:13
 msgid "Javascript must be enabled past this point!"
@@ -1307,9 +1307,9 @@ msgid "Switch to dark theme"
 msgstr "Pārslēgties uz nokopēto tabulu"
 
 #: resources/templates/create_tracking_version.twig:10
-#, fuzzy, php-format
+#, php-format
 msgid "Create version %1$s of %2$s"
-msgstr "Servera versija"
+msgstr "Izveidot %1$s versiju no %2$s"
 
 #: resources/templates/create_tracking_version.twig:15
 #, php-format
@@ -3524,9 +3524,9 @@ msgid "Save & close"
 msgstr "Saglabāt kā failu"
 
 #: resources/templates/export.twig:341
-#, fuzzy, php-format
+#, php-format
 msgid "Use %s statement"
-msgstr "Parametrs"
+msgstr "Izmantot %s izteiksmi"
 
 #: resources/templates/export.twig:350
 #, fuzzy
@@ -3886,9 +3886,8 @@ msgid "Select from the web server upload directory [strong]%s[/strong]:"
 msgstr "Atlasiet no tīmekļa servera augšupielādes mapes [strong]%s[/strong]:"
 
 #: resources/templates/import.twig:65 resources/templates/import.twig:91
-#, fuzzy
 msgid "There are no files to import!"
-msgstr "Daļēji teksti"
+msgstr "Nav nevienas datnes, ko ievietot!"
 
 #: resources/templates/import.twig:95
 msgid "File uploads are not allowed on this server."
@@ -6308,6 +6307,7 @@ msgid "ø per second: %s"
 msgstr "ø sekundē: %s"
 
 #: resources/templates/server/status/queries/index.twig:32
+#, fuzzy
 msgid "Statements"
 msgstr "Parametrs"
 
@@ -11502,9 +11502,8 @@ msgid "Add DROP VIEW"
 msgstr ""
 
 #: src/Config/Descriptions.php:899
-#, fuzzy
 msgid "Statements to track"
-msgstr "Parametrs"
+msgstr "Izteiksmes, kas jāizseko"
 
 #: src/Config/Descriptions.php:900
 msgid "SQL query tracking table"
@@ -13529,9 +13528,8 @@ msgid "Selected dependencies are as follows:"
 msgstr ""
 
 #: src/Controllers/JavaScriptMessagesController.php:427
-#, fuzzy
 msgid "No dependencies selected!"
-msgstr "Datubāze nav izvēlēta."
+msgstr "Nav atlasītas atkarības!"
 
 #: src/Controllers/JavaScriptMessagesController.php:428
 #, fuzzy
@@ -14660,9 +14658,8 @@ msgstr ""
 "izbeigts."
 
 #: src/Controllers/Server/Status/QueriesController.php:91
-#, fuzzy
 msgid "Other statements"
-msgstr "Parametrs"
+msgstr "Citas/Pārējās izteiksmes"
 
 #: src/Controllers/Server/Status/StatusController.php:131
 msgid "Received"
@@ -17122,17 +17119,16 @@ msgid "Export metadata"
 msgstr "Eksporta veids"
 
 #: src/Plugins/Export/ExportSql.php:285
-#, fuzzy
 msgid "Add statements:"
-msgstr "Parametrs"
+msgstr "Pievienot izteiksmes:"
 
 #: src/Plugins/Export/ExportSql.php:293 src/Plugins/Export/ExportSql.php:302
 #: src/Plugins/Export/ExportSql.php:319 src/Plugins/Export/ExportSql.php:328
 #: src/Plugins/Export/ExportSql.php:352 src/Plugins/Export/ExportSql.php:380
 #: src/Plugins/Export/ExportSql.php:389
-#, fuzzy, php-format
+#, php-format
 msgid "Add %s statement"
-msgstr "Parametrs"
+msgstr "Pievienot %s izteiksmi"
 
 #: src/Plugins/Export/ExportSql.php:335
 msgid "(less efficient as indexes will be generated during table creation)"
