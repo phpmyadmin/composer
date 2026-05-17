@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-05-10 00:55+0000\n"
+"POT-Creation-Date: 2026-05-17 00:56+0000\n"
 "PO-Revision-Date: 2026-05-15 16:11+0000\n"
 "Last-Translator: Salvador Peña <salvadorp74@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -2447,7 +2447,7 @@ msgstr "Función"
 
 #: resources/templates/database/routines/execute_form.twig:54
 msgid "This routine does not require any parameters."
-msgstr "Esta rutina no requiere ningún parámetro"
+msgstr "Esta rutina no requiere ningún parámetro."
 
 #: resources/templates/database/routines/index.twig:3 src/Menu.php:375
 #: src/Util.php:1385
@@ -3716,8 +3716,8 @@ msgstr ""
 #, php-format
 msgid "Select from the web server upload directory [strong]%s[/strong]:"
 msgstr ""
-"Seleccionar directorio en el servidor web para subir los archivos "
-"[strong]%s[/strong]:"
+"Seleccionar directorio en el servidor web para subir los archivos [strong]"
+"%s[/strong]:"
 
 #: resources/templates/import.twig:65 resources/templates/import.twig:91
 msgid "There are no files to import!"
@@ -4467,8 +4467,8 @@ msgid ""
 "code>), for example by starting from <code>config.sample.inc.php</code>."
 msgstr ""
 "Habilitar funcionalidades avanzadas en el archivo de configuración "
-"(<code>config.inc.php</code>), por ejemplo comenzando desde <code>config."
-"sample.inc.php</code>."
+"(<code>config.inc.php</code>), por ejemplo comenzando desde "
+"<code>config.sample.inc.php</code>."
 
 #: resources/templates/relation/check_relations.twig:535
 msgid "Re-login to phpMyAdmin to load the updated configuration file."
@@ -4572,10 +4572,9 @@ msgid "Check privileges"
 msgstr "Seleccionar privilegios"
 
 #: resources/templates/server/databases/index.twig:244
-#, fuzzy, php-format
-#| msgid "Run SQL query/queries on database %s"
+#, php-format
 msgid "Run SQL queries on database \"%s\"."
-msgstr "Ejecutar la(s) consulta(s) SQL en la base de datos %s"
+msgstr "Ejecutar la(s) consulta(s) SQL en la base de datos \"%s\"."
 
 #: resources/templates/server/databases/index.twig:245
 #: src/Config/ConfigFile.php:520 src/Config/ConfigFile.php:534
@@ -5967,13 +5966,13 @@ msgstr "Aplicar una división"
 #: resources/templates/server/status/monitor/index.twig:181
 #: src/Controllers/JavaScriptMessagesController.php:205 src/Util.php:311
 msgid "KiB"
-msgstr "KB"
+msgstr "KiB"
 
 #. l10n: shortcuts for Megabyte
 #: resources/templates/server/status/monitor/index.twig:182
 #: src/Controllers/JavaScriptMessagesController.php:206 src/Util.php:313
 msgid "MiB"
-msgstr "MB"
+msgstr "MiB"
 
 #: resources/templates/server/status/monitor/index.twig:188
 msgid "Append unit to data values"
@@ -7844,14 +7843,14 @@ msgstr "Método de caché sub-óptimo."
 #: src/Advisory/Rules.php:217
 msgid ""
 "You are using the MySQL Query cache with a fairly high traffic database. It "
-"might be worth considering to use <a href=\"https://dev.mysql.com/doc/"
-"refman/5.6/en/ha-memcached.html\">memcached</a> instead of the MySQL Query "
-"cache, especially if you have multiple replicas."
+"might be worth considering to use <a href=\"https://dev.mysql.com/doc/refman/"
+"5.6/en/ha-memcached.html\">memcached</a> instead of the MySQL Query cache, "
+"especially if you have multiple replicas."
 msgstr ""
 "Está utilizando el caché de consultas MySQL en una base de datos de bastante "
-"tráfico. Probablemente quiera considerar utilizar <a href=\"https://dev."
-"mysql.com/doc/refman/5.6/en/ha-memcached.html\">memcached</a> en lugar del "
-"caché de consultas de MySQL, especialmente si tiene muchas réplicas."
+"tráfico. Probablemente quiera considerar utilizar <a href=\"https://"
+"dev.mysql.com/doc/refman/5.6/en/ha-memcached.html\">memcached</a> en lugar "
+"del caché de consultas de MySQL, especialmente si tiene muchas réplicas."
 
 #: src/Advisory/Rules.php:223
 #, php-format
@@ -8084,8 +8083,8 @@ msgstr ""
 "independientemente del valor de estas variables. Para eliminarlas deberá re-"
 "escribir las consultas para evitar estas condiciones (en una tabla temporal: "
 "la presencia de una columna «BLOB» o «TEXT», o la presencia de una columna "
-"mayor a 512 bytes) como se menciona al comienzo del <a href=\"https://www."
-"facebook.com/note.php?note_id=10150111255065841&comments\">artículo de "
+"mayor a 512 bytes) como se menciona al comienzo del <a href=\"https://"
+"www.facebook.com/note.php?note_id=10150111255065841&comments\">artículo de "
 "Pythian Group</a>"
 
 #: src/Advisory/Rules.php:362
@@ -8532,8 +8531,8 @@ msgid ""
 "note however that you cannot simply change the value of this variable. You "
 "need to shutdown the server, remove the InnoDB log files, set the new value "
 "in my.cnf, start the server, then check the error logs if everything went "
-"fine. See also <a href=\"https://mysqldatabaseadministration.blogspot."
-"com/2007/01/increase-innodblogfilesize-proper-way.html\">this blog entry</a>"
+"fine. See also <a href=\"https://mysqldatabaseadministration.blogspot.com/"
+"2007/01/increase-innodblogfilesize-proper-way.html\">this blog entry</a>"
 msgstr ""
 "Especialmente en un sistema con gran cantidad de escrituras a tablas InnoDB, "
 "debería de configurar «innodb_log_file_size» a aproximadamente 25% de "
@@ -8580,13 +8579,13 @@ msgstr ""
 "Normalmente es suficiente definir {innodb_log_file_size} a el 25% del valor "
 "de {innodb_buffer_pool_size}. Un valor muy alto de {innodb_log_file_size} "
 "reduce considerablemente la velocidad de la recuperación luego de una caída "
-"de la base de datos. Revise también <a href=\"https://www.percona.com/"
-"blog/2006/07/03/choosing-proper-innodb_log_file_size/\">este artículo</a>. "
+"de la base de datos. Revise también <a href=\"https://www.percona.com/blog/"
+"2006/07/03/choosing-proper-innodb_log_file_size/\">este artículo</a>. "
 "Necesitará cerrar el servidor, eliminar los archivos de registros InnoDB, "
 "definir el nuevo valor en el archivo 'my.cnf', iniciar el servidor y luego "
 "verificar los registros de error para asegurarse que no hubo inconvenientes. "
-"Revise también <a href=\"https://mysqldatabaseadministration.blogspot."
-"com/2007/01/increase-innodblogfilesize-proper-way.html\">este artículo</a>"
+"Revise también <a href=\"https://mysqldatabaseadministration.blogspot.com/"
+"2007/01/increase-innodblogfilesize-proper-way.html\">este artículo</a>"
 
 #: src/Advisory/Rules.php:717
 #, php-format
@@ -8655,8 +8654,9 @@ msgid ""
 "refman/5.5/en/concurrent-inserts.html\">MySQL Documentation</a>"
 msgstr ""
 "Definir «concurrent_insert» a 1 reduce la competencia entre lectores y "
-"escritores en una tabla particular. Revise también la <a href=\"https://dev."
-"mysql.com/doc/refman/5.5/en/concurrent-inserts.html\">documentación MySQL</a>"
+"escritores en una tabla particular. Revise también la <a href=\"https://"
+"dev.mysql.com/doc/refman/5.5/en/concurrent-inserts.html\">documentación "
+"MySQL</a>"
 
 #: src/Advisory/Rules.php:757
 msgid "concurrent_insert is set to 0"
@@ -8761,9 +8761,8 @@ msgstr ""
 "tiempo). Ajustar cuidadosamente «query_cache_min_res_unit» a un valor menor "
 "podría ayudar también; por ejemplo, podría definirlo como el tamaño promedio "
 "de las consultas en el caché utilizando la siguiente fórmula: "
-"(«query_cache_size» - «qcache_free_memory») / "
-"«qcache_queries_in_cache» ((tamaño_caché - memoria_libre_caché) / "
-"cantidad_consultas_en_caché)"
+"(«query_cache_size» - «qcache_free_memory») / «qcache_queries_in_cache» "
+"((tamaño_caché - memoria_libre_caché) / cantidad_consultas_en_caché)"
 
 #: src/Advisory/Rules.php:829
 #, php-format
@@ -9972,13 +9971,13 @@ msgstr ""
 
 #: src/Config/Descriptions.php:355
 msgid ""
-"More information on [a@https://github.com/phpmyadmin/phpmyadmin/"
-"issues/8970]phpMyAdmin issue tracker[/a] and [a@https://bugs.mysql."
-"com/19588]MySQL Bugs[/a]"
+"More information on [a@https://github.com/phpmyadmin/phpmyadmin/issues/"
+"8970]phpMyAdmin issue tracker[/a] and [a@https://bugs.mysql.com/19588]MySQL "
+"Bugs[/a]"
 msgstr ""
-"Más información en[a@https://github.com/phpmyadmin/phpmyadmin/"
-"issues/8970]Rastreador de problemas de phpMyAdmin[/a] y[a@https://bugs.mysql."
-"com/19588]Errores de MySQL[/a]"
+"Más información en[a@https://github.com/phpmyadmin/phpmyadmin/issues/"
+"8970]Rastreador de problemas de phpMyAdmin[/a] y[a@https://bugs.mysql.com/"
+"19588]Errores de MySQL[/a]"
 
 #: src/Config/Descriptions.php:359
 msgid ""
@@ -10181,7 +10180,9 @@ msgstr ""
 msgid ""
 "A user-friendly description of this server. Leave blank to display the "
 "hostname instead."
-msgstr "Nombre del servidor donde el servidor SQL se está ejecutando."
+msgstr ""
+"Una descripción amigable al usuario de este servidor. Déjelo en blanco para "
+"mostrar el nombre del host en su lugar."
 
 #: src/Config/Descriptions.php:452
 msgid "Leave blank if not used."
@@ -11132,7 +11133,7 @@ msgstr "No abortar si ocurre un error con INSERT"
 
 #: src/Config/Descriptions.php:775 src/Plugins/Import/ImportCsv.php:157
 msgid "Import empty values as NULL"
-msgstr ""
+msgstr "Importar valores vacíos como NULL"
 
 #: src/Config/Descriptions.php:776 src/Config/Descriptions.php:783
 msgid "Add ON DUPLICATE KEY UPDATE"
@@ -12286,7 +12287,7 @@ msgstr "No se seleccionaron bases de datos."
 
 #: src/Controllers/Database/EventsController.php:69
 msgid "The event was dropped immediately after creation."
-msgstr ""
+msgstr "El evento ha sido descartado inmediatamente después de su creación."
 
 #: src/Controllers/Database/EventsController.php:136
 msgid "Add event"
@@ -12558,15 +12559,17 @@ msgstr ""
 
 #: src/Controllers/HomeController.php:267
 msgid ""
-"Your PHP parameter [a@https://www.php.net/manual/en/session.configuration."
-"php#ini.session.gc-maxlifetime@_blank]session.gc_maxlifetime[/a] is lower "
-"than cookie validity configured in phpMyAdmin, because of this, your login "
-"might expire sooner than configured in phpMyAdmin."
+"Your PHP parameter [a@https://www.php.net/manual/en/"
+"session.configuration.php#ini.session.gc-"
+"maxlifetime@_blank]session.gc_maxlifetime[/a] is lower than cookie validity "
+"configured in phpMyAdmin, because of this, your login might expire sooner "
+"than configured in phpMyAdmin."
 msgstr ""
-"El parámetro [a@https://www.php.net/manual/en/session.configuration.php#ini."
-"session.gc-maxlifetime@_blank]session.gc_maxlifetime[/a] es menor que la "
-"validez de la cookie configurada en phpMyAdmin. Por ello, la sesión expirará "
-"antes de lo configurado en phpMyAdmin."
+"El parámetro [a@https://www.php.net/manual/en/"
+"session.configuration.php#ini.session.gc-"
+"maxlifetime@_blank]session.gc_maxlifetime[/a] es menor que la validez de la "
+"cookie configurada en phpMyAdmin. Por ello, la sesión expirará antes de lo "
+"configurado en phpMyAdmin."
 
 #: src/Controllers/HomeController.php:287
 msgid ""
@@ -12658,9 +12661,9 @@ msgid ""
 "to not work properly. Please refer to [doc@faq1-46]documentation[/doc] for "
 "possible issues."
 msgstr ""
-"La variable [code]HTTP_HOST[/code] no se encuentra, lo cual puede causar que "
-"phpMyAdmin no funcione correctamente. Por favor consulte "
-"[doc@faq1-46]documentation[/doc] para posibles problemas."
+"Falta la variable [code]HTTP_HOST[/code], lo cual puede provocar que "
+"phpMyAdmin no funcione adecuadamente. Por favor revise los problemas "
+"posibles en la [doc@faq1-46]documentación[/doc]."
 
 #: src/Controllers/HomeController.php:468
 msgid ""
@@ -12937,7 +12940,7 @@ msgstr "¡Introduzca una longitud válida!"
 
 #: src/Controllers/JavaScriptMessagesController.php:119
 msgid "does not support the UNSIGNED attribute."
-msgstr ""
+msgstr "no es compatible con el atributo UNSIGNED."
 
 #: src/Controllers/JavaScriptMessagesController.php:120
 msgid "Add index"
@@ -13129,22 +13132,22 @@ msgstr "B"
 #. l10n: shortcuts for Gigabyte
 #: src/Controllers/JavaScriptMessagesController.php:207 src/Util.php:315
 msgid "GiB"
-msgstr "GB"
+msgstr "GiB"
 
 #. l10n: shortcuts for Terabyte
 #: src/Controllers/JavaScriptMessagesController.php:208 src/Util.php:317
 msgid "TiB"
-msgstr "TB"
+msgstr "TiB"
 
 #. l10n: shortcuts for Petabyte
 #: src/Controllers/JavaScriptMessagesController.php:209 src/Util.php:319
 msgid "PiB"
-msgstr "PB"
+msgstr "PiB"
 
 #. l10n: shortcuts for Exabyte
 #: src/Controllers/JavaScriptMessagesController.php:210 src/Util.php:321
 msgid "EiB"
-msgstr "EB"
+msgstr "EiB"
 
 # singular: tabla
 # plural: tablas
@@ -14111,7 +14114,7 @@ msgstr "¡Error al copiar el nombre de la columna en el portapapeles!"
 
 #: src/Controllers/JavaScriptMessagesController.php:634
 msgid "Successfully copied!"
-msgstr "¡Copiado OK!"
+msgstr "¡Copiado exitoso!"
 
 #: src/Controllers/JavaScriptMessagesController.php:635
 msgid "Copying failed!"
@@ -14267,6 +14270,8 @@ msgid ""
 "The fullscreen request was denied because the Fullscreen API is disabled by "
 "user preference in the browser."
 msgstr ""
+"La petición de pantalla completa fue denegada porque la API de pantalla "
+"completa está deshabilitada en las preferencias del usuario del navegador."
 
 #: src/Controllers/JavaScriptMessagesController.php:701
 msgctxt "Month name"
@@ -15652,13 +15657,11 @@ msgstr "No se encontró columna espacial para esta consulta SQL."
 
 #: src/Controllers/Table/GisVisualizationController.php:121
 msgid "Invalid file format, expected one of: "
-msgstr ""
+msgstr "Formato de archivo no válido, se esperaba uno de: "
 
 #: src/Controllers/Table/GisVisualizationController.php:129
-#, fuzzy
-#| msgid "Failed to write file to disk."
 msgid "Failed to create image"
-msgstr "No fue posible grabar el archivo a disco."
+msgstr "No fue posible crear la imagen"
 
 #: src/Controllers/Table/Maintenance/AnalyzeController.php:67
 #: src/Controllers/Table/Maintenance/CheckController.php:67
@@ -16210,8 +16213,8 @@ msgid ""
 msgstr ""
 "Esta es la cantidad de memoria asignada al caché de registros utilizado para "
 "el caché de los datos de la tabla. El valor predeterminado es 32MB. Esta "
-"memoria se utiliza para el caché de cambios a los archivos de datos handle (."
-"xtd) y apuntador de la fila (.xtr)."
+"memoria se utiliza para el caché de cambios a los archivos de datos handle "
+"(.xtd) y apuntador de la fila (.xtr)."
 
 #: src/Engines/Pbxt.php:52
 msgid "Log cache size"
@@ -16332,10 +16335,10 @@ msgid ""
 "will be deleted, otherwise they are renamed and given the next highest "
 "number."
 msgstr ""
-"Este es el número de archivos de registro de transacción (pbxt/system/xlog*."
-"xt) que mantendrá el sistema. Si el número de archivos excede este valor los "
-"registros antiguos se eliminarán; si no, su nombre cambia y recibe el "
-"siguiente número más alto."
+"Este es el número de archivos de registro de transacción (pbxt/system/"
+"xlog*.xt) que mantendrá el sistema. Si el número de archivos excede este "
+"valor los registros antiguos se eliminarán; si no, su nombre cambia y recibe "
+"el siguiente número más alto."
 
 #: src/Engines/Pbxt.php:179
 #, php-format
@@ -16420,8 +16423,8 @@ msgstr "El archivo no era un archivo subido."
 #: src/File.php:216
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
-"El archivo que intentó subir excede la directiva upload_max_filesize en php."
-"ini."
+"El archivo que intentó subir excede la directiva upload_max_filesize en "
+"php.ini."
 
 #: src/File.php:221
 msgid ""
@@ -16466,10 +16469,8 @@ msgstr ""
 "doc]."
 
 #: src/File.php:372
-#, fuzzy
-#| msgid "Cannot read uploaded file."
 msgid "Cannot create temporary file."
-msgstr "No se pudo leer el archivo subido."
+msgstr "No se pudo crear el archivo temporal."
 
 #: src/File.php:383
 msgid "Error while moving uploaded file."
@@ -16527,10 +16528,8 @@ msgid "Skip Explain SQL"
 msgstr "Omitir la explicación del SQL"
 
 #: src/Html/Generator.php:517
-#, fuzzy
-#| msgid "Skip Validate SQL"
 msgid "Skip Analyze SQL"
-msgstr "Saltar la validación de SQL"
+msgstr "Saltar el análisis de SQL"
 
 #: src/Html/Generator.php:549
 msgid "Without PHP code"
@@ -17544,8 +17543,8 @@ msgid ""
 "(1,2,3)</code>"
 msgstr ""
 "incluir los nombres de las columnas en cada <code>INSERT</code> declaración "
-"<br> &nbsp; &nbsp; &nbsp; &nbsp; Ejemplo: <code>INSERT INTO tbl_name (col_A,"
-"col_B,col_C,col_C) VALUES (1,2,3)</code>"
+"<br> &nbsp; &nbsp; &nbsp; &nbsp; Ejemplo: <code>INSERT INTO tbl_name "
+"(col_A,col_B,col_C,col_C) VALUES (1,2,3)</code>"
 
 #: src/Plugins/Export/ExportSql.php:477
 msgid ""
@@ -17695,10 +17694,8 @@ msgstr ""
 "maximizar la compatibilidad de la salida:"
 
 #: src/Plugins/Export/ExportToon.php:67
-#, fuzzy
-#| msgid "Orientation"
 msgid "Indentation:"
-msgstr "Orientación"
+msgstr "Indentación:"
 
 #: src/Plugins/Export/ExportXml.php:86
 msgid "Object creation options (all are recommended)"
@@ -17800,8 +17797,8 @@ msgstr "Formato no válido de entrada de mediawiki en línea: <br>%s."
 #: src/Plugins/Import/ImportOds.php:86
 msgid "Import percentages as proper decimals <i>(ex. 12.00% to .12)</i>"
 msgstr ""
-"Importar porcentakes como decimales propios <i>(por ejemplo: 12.00% "
-"como .12)</i>"
+"Importar porcentakes como decimales propios <i>(por ejemplo: 12.00% como "
+".12)</i>"
 
 #: src/Plugins/Import/ImportOds.php:92
 msgid "Import currencies <i>(ex. $5.00 to 5.00)</i>"
@@ -17944,8 +17941,8 @@ msgid ""
 "TRUE, second for FALSE. Nonzero=true."
 msgstr ""
 "Convierte los valores booleanos a texto («T» y «F» de forma predeterminada). "
-"La primera opcion es para «TRUE» (verdadero), y la segunda por "
-"«FALSE» (falso). Distinto a cero = verdadero."
+"La primera opcion es para «TRUE» (verdadero), y la segunda por «FALSE» "
+"(falso). Distinto a cero = verdadero."
 
 #: src/Plugins/Transformations/Abs/DateFormatTransformationsPlugin.php:42
 msgid ""
@@ -18968,19 +18965,17 @@ msgstr ""
 "«%2$s»"
 
 #: src/Types.php:209
-#, fuzzy
-#| msgid ""
-#| "A timestamp, range is 1970-01-01 00:00:01 UTC to 2038-01-09 03:14:07 UTC, "
-#| "stored as the number of seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgid ""
 "A timestamp, range is 1970-01-01 00:00:01 UTC to 2038-01-19 03:14:07 UTC on "
 "32-bit platforms (MariaDB 11.3 and earlier), and up to 2106-02-07 06:28:15 "
 "UTC on 64-bit platforms (MariaDB 11.5 and later), stored as the number of "
 "seconds since the epoch (1970-01-01 00:00:00 UTC)"
 msgstr ""
-"Una marca temporal; el rango es de «01-Ene-1970 00:00:01» UTC a «09-Ene-2038 "
-"03:14:07» UTC almacenados como la cantidad de segundos desde el «epoch» («01-"
-"Ene-1970 00:00:00» UTC)"
+"Una marca temporal; el rango es desde 1970-01-01 00:00:01 UTC hasta "
+"2038-01-19 03:14:07 UTC en plataformas de 32 bits (MariaDB 11.3 y "
+"anteriores) y hasta 2106-02-07 06:28:15 UTC en plataformas de 64 bits "
+"(MariaDB 11.5 y posteriores), almacenados como la cantidad de segundos desde "
+"el «epoch» (1970-01-01 00:00:00 UTC)"
 
 #: src/Types.php:215
 #, php-format
@@ -19171,10 +19166,12 @@ msgid ""
 "Stores vector data optimized for operations such as similarity search and "
 "machine learning applications"
 msgstr ""
+"Almacena datos de vector optimizados para operaciones como búsqueda por "
+"similitud y aplicaciones de machine learning"
 
 #: src/Types.php:296
 msgid "Intended for storage of XML data"
-msgstr ""
+msgstr "Destinado para almacenamiento de datos XML"
 
 #: src/Types.php:607
 msgctxt "numeric types"
@@ -19272,9 +19269,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "¡No se pudo leer el archivo de configuración!"
 
 #, fuzzy
-#~| msgid ""
-#~| "This usually means there is a syntax error in it, please check any "
-#~| "errors shown below."
 #~ msgid "This usually means there is a syntax error in it."
 #~ msgstr ""
 #~ "Esto generalmente significa que tiene un error de sintáxis, revisa los "
@@ -19352,7 +19346,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Texto"
 
 #, fuzzy
-#~| msgid "Use tables"
 #~ msgid "One table"
 #~ msgid_plural "%count% tables"
 #~ msgstr[0] "Usar tablas"
@@ -19699,7 +19692,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ "ignore las opciones de los demás formatos."
 
 #, fuzzy
-#~| msgid "Browse your computer:"
 #~ msgid "Browse your computer"
 #~ msgstr "Buscar en su ordenador:"
 
@@ -19738,7 +19730,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "¡No se encontró la ruta del tema %s!"
 
 #, fuzzy
-#~| msgid "New"
 #~ msgctxt "Create new routine"
 #~ msgid "New"
 #~ msgstr "Nuevo"
@@ -19835,7 +19826,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Usar la tabla Anfitrión (Host)"
 
 #, fuzzy
-#~| msgid "Description"
 #~ msgctxt "for media (MIME) type transformation"
 #~ msgid "Description"
 #~ msgstr "Descripción"
@@ -19860,16 +19850,12 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Valor incorrecto del atributo de archivo («file») en GET"
 
 #, fuzzy
-#~| msgid "%d second"
-#~| msgid_plural "%d seconds"
 #~ msgid "%count% second"
 #~ msgid_plural "%count% seconds"
 #~ msgstr[0] "%d segundo"
 #~ msgstr[1] "%d segundos"
 
 #, fuzzy
-#~| msgid "%d minute"
-#~| msgid_plural "%d minutes"
 #~ msgid "%count% minute"
 #~ msgid_plural "%count% minutes"
 #~ msgstr[0] "%d minuto"
@@ -19882,7 +19868,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Mostrar las consultas enteras"
 
 #, fuzzy
-#~| msgid "No databases"
 #~ msgid "%count% database"
 #~ msgid_plural "%count% databases"
 #~ msgstr[0] "No hay bases de datos"
@@ -19939,7 +19924,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Valor global"
 
 #, fuzzy
-#~| msgid "Right"
 #~ msgctxt "Collation variant"
 #~ msgid "weight=2"
 #~ msgstr "Derecha"
@@ -20020,7 +20004,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Cargar"
 
 #, fuzzy
-#~| msgid "Column names"
 #~ msgid "Column parser"
 #~ msgstr "Nombre de las columnas"
 
@@ -20154,12 +20137,10 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Este tipo de cláusula no es válida en consultas multi-tabla."
 
 #, fuzzy
-#~| msgid "errors."
 #~ msgid "error #1"
 #~ msgstr "errores."
 
 #, fuzzy
-#~| msgid "Gather errors"
 #~ msgid "strict error"
 #~ msgstr "Agrupar los errores"
 
@@ -20382,7 +20363,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Llevándolo a %s."
 
 #, fuzzy
-#~| msgid "Authentication"
 #~ msgid "MySQL Native Authentication"
 #~ msgstr "Autentificación"
 
@@ -20601,17 +20581,14 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "(Deshabilitado)"
 
 #, fuzzy
-#~| msgid "Disable foreign key checks"
 #~ msgid "Temporarily disable foreign key checks while importing"
 #~ msgstr "Deshabilitar la revisión de las claves foráneas"
 
 #, fuzzy
-#~| msgid "Disable foreign key checks"
 #~ msgid "Disable foreign key check"
 #~ msgstr "Deshabilitar la revisión de las claves foráneas"
 
 #, fuzzy
-#~| msgid "Reloading Privileges"
 #~ msgid "Realign Privileges"
 #~ msgstr "Recargando Privilegios"
 
@@ -20658,7 +20635,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "Borrar los datos de seguimiento para esta tabla"
 
 #, fuzzy
-#~| msgid "Table structure"
 #~ msgid "Table Structure"
 #~ msgstr "Estructura de tabla"
 
@@ -20673,7 +20649,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "En línea"
 
 #, fuzzy
-#~| msgid "after %s"
 #~ msgid "after"
 #~ msgstr "después de %s"
 
@@ -20778,7 +20753,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgstr "El plugin está desactivado"
 
 #, fuzzy
-#~| msgid "Link with main panel"
 #~ msgid "Unlink with main panel"
 #~ msgstr "Enlace al panel principal"
 
@@ -20791,14 +20765,12 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 # Used as description for SQL syntax Export Type (options are INSERT, UPDATE
 # and REPLACE)
 #, fuzzy
-#~| msgid "Export type"
 #~ msgid "eps export page"
 #~ msgstr "Tipo de exportación"
 
 # Used as description for SQL syntax Export Type (options are INSERT, UPDATE
 # and REPLACE)
 #, fuzzy
-#~| msgid "Invalid export type"
 #~ msgid "pdf export page"
 #~ msgstr "Tipo de exportación inválido"
 
@@ -21001,7 +20973,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ "extensiones PHP necesarias, como indica la %sdocumentación%s."
 
 #, fuzzy
-#~| msgid "Error: Relation not added."
 #~ msgid "Error: Relation could not be added."
 #~ msgstr "Error: no se añadió la relación."
 
@@ -21009,9 +20980,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ "<b>One or more errors have occurred while processing your request:</b>"
 #~ msgstr "<b>Ocurrieron uno o más errores al procesar el pedido:</b>"
 
-#~| msgid ""
-#~| "After saving or loading a search, you can rename it and save the new "
-#~| "criteria."
 #~ msgid ""
 #~ "After saving or loading a bookmarked search, you can rename it and save "
 #~ "the new criteria."
@@ -21185,7 +21153,6 @@ msgstr "¡No se hallaron archivos dentro del archivo ZIP!"
 #~ msgid "Cookies must be enabled past this point."
 #~ msgstr "Las cookies deben estar activadas."
 
-#~| msgid "Done rearranging/editing charts"
 #~ msgid "Rearrange/edit charts"
 #~ msgstr "Reorganizar/editar gráficos"
 
