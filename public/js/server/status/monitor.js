@@ -1015,8 +1015,25 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#clearSeriesLink').show();
     return false;
   });
+  // @ts-ignore
+  if (!(jquery__WEBPACK_IMPORTED_MODULE_0___default().ui).autocomplete.resizeReplaced) {
+    // @ts-ignore
+    (jquery__WEBPACK_IMPORTED_MODULE_0___default().ui).autocomplete.resizeReplaced = true;
+    // eslint-disable-next-line no-underscore-dangle
+    const originalResizeMenu = (jquery__WEBPACK_IMPORTED_MODULE_0___default().ui).autocomplete.prototype._resizeMenu;
+    // Make sure the autocomplete menu does not overflow the browser window
+    // eslint-disable-next-line no-underscore-dangle
+    (jquery__WEBPACK_IMPORTED_MODULE_0___default().ui).autocomplete.prototype._resizeMenu = function () {
+      const containerRect = this.menu.element[0].parentNode.getBoundingClientRect();
+      const inputRect = this.element[0].getBoundingClientRect();
+      const maxMenuSize = Math.max(100, containerRect.height - inputRect.bottom - 5);
+      this.menu.element[0].style.maxHeight = maxMenuSize + 'px';
+      return originalResizeMenu.apply(this, arguments);
+    };
+  }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#variableInput').autocomplete({
-    source: window.variableNames
+    source: window.variableNames,
+    appendTo: '#addChartModal'
   });
   /* Initializes the monitor, called only once */
   function initGrid() {

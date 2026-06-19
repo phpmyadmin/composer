@@ -572,9 +572,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
               },
               mode: 'xy',
               onZoomComplete(_ref) {
-                let {
-                  chart
-                } = _ref;
+                let chart = _ref.chart;
                 chart.update('none');
               }
             }
