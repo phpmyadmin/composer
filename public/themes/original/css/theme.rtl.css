@@ -12038,7 +12038,13 @@ input#auto_increment_opt {
   padding-right: 20px;
 }
 
-/* css for timepicker */
+.ui-autocomplete {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .ui-timepicker-div .ui-widget-header {
   margin-bottom: 8px;
 }
