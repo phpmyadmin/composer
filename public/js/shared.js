@@ -6805,15 +6805,22 @@ function traverseForPaths() {
  *
  * @param $expandElem expander
  * @param callback    callback function
+ * @param skipTreeAnimation skip tree opening animation when true
  */
 function expandTreeNode($expandElem) {
   let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+  let skipTreeAnimation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   let $children = $expandElem.closest('li').children('div.list_container');
   const $icon = $expandElem.find('img');
   if ($expandElem.hasClass('loaded')) {
     if ($icon.is('.ic_b_plus')) {
       $icon.removeClass('ic_b_plus').addClass('ic_b_minus');
-      $children.slideDown('fast');
+      // check whether to show tree immediately or play animation
+      if (skipTreeAnimation) {
+        $children.show();
+      } else {
+        $children.slideDown('fast');
+      }
     }
     if (callback && typeof callback === 'function') {
       callback.call();
@@ -6831,7 +6838,12 @@ function expandTreeNode($expandElem) {
         const $destination = $expandElem.closest('li');
         $icon.removeClass('ic_b_plus').addClass('ic_b_minus');
         $children = $destination.children('div.list_container');
-        $children.slideDown('fast');
+        // check whether to show tree immediately or play animation
+        if (skipTreeAnimation) {
+          $children.show();
+        } else {
+          $children.slideDown('fast');
+        }
         if ($destination.find('ul > li').length === 1) {
           $destination.find('ul > li').find('a.expander.container').trigger('click');
         }
@@ -6874,8 +6886,11 @@ function scrollToView($element, $forceToTop) {
 }
 /**
  * Expand the navigation and highlight the current database or table/view
+ *
+ * @param {boolean} skipTreeAnimation skip tree opening animation when true (passed down into expandTreeNode from fullExpand)
  */
 function showCurrent() {
+  let skipTreeAnimation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   const db = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('db');
   const table = _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('table');
   const autoexpand = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('autoexpand');
@@ -6898,7 +6913,7 @@ function showCurrent() {
         handleTableOrDb(table, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content'));
       }
     } else if ($dbItem) {
-      fullExpand(table, $dbItem);
+      fullExpand(table, $dbItem, skipTreeAnimation);
     }
   } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').length && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').val()) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#navi_db_select').val('').hide().trigger('change');
@@ -6914,16 +6929,16 @@ function showCurrent() {
       }
     });
     $dbItem = findLoadedItem(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('> div'), dbItemName, 'database', !table);
-    fullExpand(table, $dbItem);
+    fullExpand(table, $dbItem, skipTreeAnimation);
   }
   Navigation.showFullName(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree'));
-  function fullExpand(table, $dbItem) {
+  function fullExpand(table, $dbItem, skipTreeAnimation) {
     const $expander = $dbItem.children('div').first().children('a.expander');
     // if not loaded or loaded but collapsed
     if (!$expander.hasClass('loaded') || $expander.find('img').is('.ic_b_plus')) {
       Navigation.expandTreeNode($expander, function () {
         handleTableOrDb(table, $dbItem);
-      });
+      }, skipTreeAnimation);
     } else {
       handleTableOrDb(table, $dbItem);
     }
@@ -7103,7 +7118,7 @@ function reload() {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').html(data.message).children('div').show();
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').hasClass('synced')) {
           Navigation.selectCurrentDatabase();
-          Navigation.showCurrent();
+          Navigation.showCurrent(paths !== null); // skip tree opening animation when there is tree state in sessionStorage
         }
         // Fire the callback, if any
         if (typeof callback === 'function') {

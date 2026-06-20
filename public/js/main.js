@@ -655,7 +655,8 @@ function onloadNavigation() {
       // Initialize if no previous state is defined
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree_content').length && typeof storage.navTreePaths === 'undefined') {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
-      } else if (_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server') === storage.server && _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('token') === storage.token) {
+        // sessionStorage only stores strings, so cast the current page's server id to a string as well
+      } else if (String(_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')) === storage.server && _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('token') === storage.token) {
         // Reload the tree to the state before page refresh
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload(_navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.filterStateRestore, JSON.parse(storage.navTreePaths));
       } else {
