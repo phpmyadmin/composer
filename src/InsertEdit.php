@@ -68,6 +68,8 @@ class InsertEdit
         'UTC_TIMESTAMP',
         'UUID',
         'UUID_SHORT',
+        'UUID_v4',
+        'UUID_v7',
         'VERSION',
     ];
 
@@ -1211,6 +1213,32 @@ class InsertEdit
             return '';
         }
 
+        // For uuid type, generate uuid value
+        // if empty value but not set null or value is uuid() function
+        if (
+            $editField->type === 'uuid'
+                && ! $editField->isNull
+                && in_array($editField->value, ["''", '', "'uuid()'", 'uuid()'], true)
+        ) {
+            return 'uuid()';
+        }
+
+        if (
+            $editField->type === 'uuid'
+            && ! $editField->isNull
+            && $editField->value === "'uuid_v4()'"
+        ) {
+            return 'uuid_v4()';
+        }
+
+        if (
+            $editField->type === 'uuid'
+            && ! $editField->isNull
+            && $editField->value === "'uuid_v7()'"
+        ) {
+            return 'uuid_v7()';
+        }
+
         if ($editField->value === '') {
             // When the field is autoIncrement, the best way to avoid problems
             // in strict mode is to set the value to null (works also in non-strict mode)
@@ -1231,16 +1259,6 @@ class InsertEdit
             $currentValue = (string) preg_replace('/[^01]/', '0', $editField->value);
 
             return 'b' . $this->dbi->quoteString($currentValue);
-        }
-
-        // For uuid type, generate uuid value
-        // if empty value but not set null or value is uuid() function
-        if (
-            $editField->type === 'uuid'
-                && ! $editField->isNull
-                && in_array($editField->value, ["''", '', "'uuid()'", 'uuid()'], true)
-        ) {
-            return 'uuid()';
         }
 
         if (
