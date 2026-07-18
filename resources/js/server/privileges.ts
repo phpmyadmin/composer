@@ -13,6 +13,7 @@ import { CommonParams } from '../modules/common.ts';
 import { Navigation } from '../modules/navigation.ts';
 import { ajaxRemoveMessage, ajaxShowMessage } from '../modules/ajax-message.ts';
 import getImageTag from '../modules/functions/getImageTag.ts';
+import { sprintf } from 'locutus/php/strings/sprintf';
 
 /**
  * Export privileges modal handler
@@ -243,7 +244,7 @@ const RevokeUser = {
         $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
             const $dropUsersDbCheckbox = $('#dropUsersDbCheckbox');
             if ($dropUsersDbCheckbox.is(':checked')) {
-                const isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
+                const isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
                 if (! isConfirmed) {
                     // Uncheck the drop users database checkbox
                     $dropUsersDbCheckbox.prop('checked', false);
@@ -534,9 +535,7 @@ AJAX.registerTeardown('server/privileges.js', function () {
     $('#text_pma_change_pw2').off('change');
 
     const editUserGroupModal = document.getElementById('editUserGroupModal');
-    if (editUserGroupModal) {
-        editUserGroupModal.removeEventListener('show.bs.modal', EditUserGroup);
-    }
+    editUserGroupModal?.removeEventListener('show.bs.modal', EditUserGroup);
 
     $(document).off('click', 'button.mult_submit[value=export]');
     $(document).off('click', 'a.export_user_anchor.ajax');
@@ -559,9 +558,7 @@ AJAX.registerOnload('server/privileges.js', function () {
     $(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
 
     const editUserGroupModal = document.getElementById('editUserGroupModal');
-    if (editUserGroupModal) {
-        editUserGroupModal.addEventListener('show.bs.modal', EditUserGroup);
-    }
+    editUserGroupModal?.addEventListener('show.bs.modal', EditUserGroup);
 
     $(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent);
 

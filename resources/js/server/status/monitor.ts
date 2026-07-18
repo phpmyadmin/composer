@@ -8,6 +8,7 @@ import { escapeHtml } from '../../modules/functions/escape.ts';
 import getImageTag from '../../modules/functions/getImageTag.ts';
 import isStorageSupported from '../../modules/functions/isStorageSupported.ts';
 import chartByteFormatter from '../../modules/functions/chartByteFormatter.ts';
+import { sprintf } from 'locutus/php/strings/sprintf';
 
 /**
  * @fileoverview    Javascript functions used in server status monitor page
@@ -533,9 +534,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         monitorSettings.gridRefresh = parseInt(this.value, 10) * 1000;
         clearTimeout(runtime.refreshTimeout);
 
-        if (runtime.refreshRequest) {
-            runtime.refreshRequest.abort();
-        }
+        runtime.refreshRequest?.abort();
 
         runtime.xmin = new Date().getTime() - serverTimeDiff - runtime.gridMaxPoints * monitorSettings.gridRefresh;
         // fixing chart shift towards left on refresh rate change
@@ -805,13 +804,13 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                 if (logVars.slow_query_log === 'ON') {
                     if (logVars.long_query_time > 2) {
                         str += getImageTag('s_attention') + ' ';
-                        str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
+                        str += sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
                         str += '<br>';
                     }
 
                     if (logVars.long_query_time < 2) {
                         str += getImageTag('s_success') + ' ';
-                        str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
+                        str += sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
                         str += '<br>';
                     }
                 }
@@ -829,26 +828,26 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     }
 
                     str += '- <a class="set" href="#log_output-' + varValue + '">';
-                    str += window.sprintf(window.Messages.strSetLogOutput, varValue);
+                    str += sprintf(window.Messages.strSetLogOutput, varValue);
                     str += ' </a><br>';
 
                     if (logVars.general_log !== 'ON') {
                         str += '- <a class="set" href="#general_log-ON">';
-                        str += window.sprintf(window.Messages.strEnableVar, 'general_log');
+                        str += sprintf(window.Messages.strEnableVar, 'general_log');
                         str += ' </a><br>';
                     } else {
                         str += '- <a class="set" href="#general_log-OFF">';
-                        str += window.sprintf(window.Messages.strDisableVar, 'general_log');
+                        str += sprintf(window.Messages.strDisableVar, 'general_log');
                         str += ' </a><br>';
                     }
 
                     if (logVars.slow_query_log !== 'ON') {
                         str += '- <a class="set" href="#slow_query_log-ON">';
-                        str += window.sprintf(window.Messages.strEnableVar, 'slow_query_log');
+                        str += sprintf(window.Messages.strEnableVar, 'slow_query_log');
                         str += ' </a><br>';
                     } else {
                         str += '- <a class="set" href="#slow_query_log-OFF">';
-                        str += window.sprintf(window.Messages.strDisableVar, 'slow_query_log');
+                        str += sprintf(window.Messages.strDisableVar, 'slow_query_log');
                         str += ' </a><br>';
                     }
 
@@ -858,7 +857,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                     }
 
                     str += '- <a class="set" href="#long_query_time-' + varValue + '">';
-                    str += window.sprintf(window.Messages.setSetLongQueryTime, varValue);
+                    str += sprintf(window.Messages.setSetLongQueryTime, varValue);
                     str += ' </a><br>';
                 } else {
                     str += window.Messages.strNoSuperUser + '<br>';
@@ -974,7 +973,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         }
 
         let str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
-        str += serie.valueDivisor ? (', ' + window.sprintf(window.Messages.strDividedBy, serie.valueDivisor)) : '';
+        str += serie.valueDivisor ? (', ' + sprintf(window.Messages.strDividedBy, serie.valueDivisor)) : '';
         str += serie.unit ? (', ' + window.Messages.strUnit + ': ' + serie.unit) : '';
 
         const newSeries = {
@@ -1209,11 +1208,11 @@ AJAX.registerOnload('server/status/monitor.js', function () {
             settings.axes.yaxis.tickOptions = {
                 formatter: function (format, val) {
                     if (Math.abs(val) >= 1000000) {
-                        return window.sprintf('%.3g M', val / 1000000);
+                        return sprintf('%.3g M', val / 1000000);
                     } else if (Math.abs(val) >= 1000) {
-                        return window.sprintf('%.3g k', val / 1000);
+                        return sprintf('%.3g k', val / 1000);
                     } else {
-                        return window.sprintf('%d', val);
+                        return sprintf('%d', val);
                     }
                 }
             };
@@ -1275,7 +1274,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                 } else if (plot.series[0]._yaxis.tickOptions.formatString) { // eslint-disable-line no-underscore-dangle
                     // using format string
                     // eslint-disable-next-line no-underscore-dangle
-                    seriesValue = window.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
+                    seriesValue = sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
                 }
 
                 tooltipHtml += '<br><span style="color:' + seriesColor + '">' +
@@ -1333,7 +1332,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
                                 stepSize: settings.axes.yaxis.tickInterval,
                                 callback: function (value, index, ticks) {
                                     if (settings.axes.yaxis?.tickOptions?.formatString) {
-                                        return window.sprintf(settings.axes.yaxis.tickOptions.formatString, value);
+                                        return sprintf(settings.axes.yaxis.tickOptions.formatString, value);
                                     }
 
                                     if (settings.axes.yaxis?.tickOptions?.formatter) {
@@ -1696,9 +1695,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
         const analysingLogsModal = document.getElementById('analysingLogsModal');
 
         analysingLogsModal.addEventListener('hidden.bs.modal', function () {
-            if (logRequest !== null) {
-                logRequest.abort();
-            }
+            logRequest?.abort();
         });
 
         bootstrap.Modal.getOrCreateInstance(analysingLogsModal).show();
@@ -2102,9 +2099,7 @@ AJAX.registerOnload('server/status/monitor.js', function () {
             const queryAnalyzerModalAnalyseButton = document.getElementById('queryAnalyzerModalAnalyseButton');
             queryAnalyzerModalAnalyseButton?.removeEventListener('click', queryAnalyzerModalSaveEventHandler);
 
-            if (profilingChart !== null) {
-                profilingChart.destroy();
-            }
+            profilingChart?.destroy();
 
             queryAnalyzerModal.querySelector('div.placeHolder').textContent = '';
             if (window.codeMirrorEditor) {
