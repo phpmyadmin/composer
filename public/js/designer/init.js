@@ -1371,6 +1371,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _history_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/designer/history.ts");
 /* harmony import */ var _page_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/designer/page.ts");
 /* harmony import */ var _config_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/designer/config.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -1919,7 +1921,7 @@ const addOtherDbTables = function () {
     // Check if table already imported or not.
     const $table = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[id="' + encodeURIComponent(db) + '.' + encodeURIComponent(table) + '"]');
     if ($table.length !== 0) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strTableAlreadyExists, db + '.' + table), undefined, 'error');
       return;
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/designer', {
@@ -3011,7 +3013,7 @@ const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
   const init = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length;
   if (rel.value !== '--') {
     if (document.getElementById('Query').value === '') {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strQueryEmpty));
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strQueryEmpty));
       return;
     }
     p = document.getElementById('Query');
@@ -3050,7 +3052,7 @@ const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     sum = sum + 1;
     // make orderby
   }
-  (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.sprintf(window.Messages.strObjectsCreated, sum));
+  (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strObjectsCreated, sum));
   // output sum new objects created
   const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.display(init, _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length);

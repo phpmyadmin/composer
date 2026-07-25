@@ -102,6 +102,7 @@ function extractDate(dateString) {
   return null;
 }
 function queryChart(data, columnNames, settings) {
+  var _queryChart;
   const queryChartCanvas = document.getElementById('queryChartCanvas');
   if (!queryChartCanvas) {
     return null;
@@ -286,9 +287,7 @@ function queryChart(data, columnNames, settings) {
   }
   // @ts-ignore
   let queryChart = window.Chart.getChart('queryChartCanvas');
-  if (queryChart) {
-    queryChart.destroy();
-  }
+  (_queryChart = queryChart) === null || _queryChart === void 0 || _queryChart.destroy();
   // @ts-ignore
   queryChart = new window.Chart(queryChartCanvas, chartOptions);
   if (settings.type === 'spline') {
@@ -298,12 +297,11 @@ function queryChart(data, columnNames, settings) {
   return queryChart;
 }
 function drawChart() {
+  var _currentChart;
   currentSettings.width = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#resizer').width() - 20;
   currentSettings.height = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#resizer').height() - 20;
   // TODO: a better way using .redraw() ?
-  if (currentChart !== null) {
-    currentChart.destroy();
-  }
+  (_currentChart = currentChart) === null || _currentChart === void 0 || _currentChart.destroy();
   const columnNames = [];
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#chartXAxisSelect option').each(function () {
     columnNames.push((0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_4__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text()));

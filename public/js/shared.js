@@ -182,6 +182,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions_handleRedirectAndReload_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/handleRedirectAndReload.ts");
 /* harmony import */ var _functions_checkNumberOfFields_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/checkNumberOfFields.ts");
 /* harmony import */ var _functions_mainMenuResizerCallback_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./resources/js/modules/functions/mainMenuResizerCallback.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -1025,9 +1027,9 @@ const AJAX = {
           return;
         }
         if (request.status !== 0) {
-          details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(window.sprintf(window.Messages.strErrorCode, request.status)) + '</div>';
+          details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__.sprintf)(window.Messages.strErrorCode, request.status)) + '</div>';
         }
-        details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(window.sprintf(window.Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
+        details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__.sprintf)(window.Messages.strErrorText, request.statusText + ' (' + state + ')')) + '</div>';
         if (state === 'rejected' || state === 'timeout') {
           details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(window.Messages.strErrorConnection) + '</div>';
         }
@@ -1050,6 +1052,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CommonParams: function() { return /* binding */ CommonParams; }
 /* harmony export */ });
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 /**
  * Holds common parameters such as server, db, table, etc
  *
@@ -1129,7 +1133,7 @@ const CommonParams = function () {
         // Else add it
         common = common.endsWith(argsep) ? common : common + argsep;
       }
-      return window.sprintf('%s%sserver=%s' + argsep + 'db=%s' + argsep + 'table=%s', sep, common, encodeURIComponent(this.get('server')), encodeURIComponent(this.get('db')), encodeURIComponent(this.get('table')));
+      return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_0__.sprintf)('%s%sserver=%s' + argsep + 'db=%s' + argsep + 'table=%s', sep, common, encodeURIComponent(this.get('server')), encodeURIComponent(this.get('db')), encodeURIComponent(this.get('table')));
     }
   };
 }();
@@ -1151,6 +1155,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 /* harmony import */ var _functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
 /* harmony import */ var _functions_formatDateTime_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/functions/formatDateTime.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -1423,7 +1429,7 @@ const validators = {
     if (isNaN(val)) {
       return true;
     }
-    return val <= maxValue ? true : window.sprintf(window.Messages.configErrorInvalidUpperBound, maxValue);
+    return val <= maxValue ? true : (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_5__.sprintf)(window.Messages.configErrorInvalidUpperBound, maxValue);
   },
   // field validators
   field: {},
@@ -2030,6 +2036,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions_mainMenuResizerCallback_ts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("./resources/js/modules/functions/mainMenuResizerCallback.ts");
 /* harmony import */ var _functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
 /* harmony import */ var _functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("./resources/js/modules/functions/adjustTotals.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -2514,7 +2522,7 @@ function confirmLink(theLink, theSqlQuery) {
   if (window.Messages.strDoYouReally === '' || typeof window.opera !== 'undefined') {
     return true;
   }
-  const isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, theSqlQuery));
+  const isConfirmed = window.confirm((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.strDoYouReally, theSqlQuery));
   if (isConfirmed) {
     if (typeof theLink.href !== 'undefined') {
       theLink.href += _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'is_js_confirmed=1';
@@ -2557,7 +2565,7 @@ function confirmQuery(theForm1, sqlQuery1) {
     } else {
       message = sqlQuery1;
     }
-    const isConfirmed = window.confirm(window.sprintf(window.Messages.strDoYouReally, message));
+    const isConfirmed = window.confirm((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.strDoYouReally, message));
     // statement is confirmed -> update the
     // "is_js_confirmed" form field so the confirm test won't be
     // run on the server side and allows to submit the form
@@ -2660,7 +2668,7 @@ function checkFormElementInRange(theForm, theFieldName, message) {
     return false;
   } else if (val < min || val > max) {
     theField.select();
-    alert(window.sprintf(message, val));
+    alert((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(message, val));
     theField.focus();
     return false;
   } else {
@@ -4078,7 +4086,7 @@ function onloadEnumSetEditor() {
     /**
      * @var dialog HTML code for the ENUM/SET dialog
      */
-    const dialog = '<div id="enum_editor" class="card">' + '<div class="card-header">' + title + '</div>' + '<div class="card-body">' + '<p>' + (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values"><tbody>' + fields + '</tbody></table>' + '</div><div class="card-footer">' + '<table class="table table-borderless add"><tr><td>' + '<div class="slider"></div>' + '</td><td>' + '<form><div><input type="submit" class="add_value btn btn-primary" value="' + window.sprintf(window.Messages.enum_addValue, 1) + '"></div></form>' + '</td></tr></table>' + '<input type="hidden" value="' +
+    const dialog = '<div id="enum_editor" class="card">' + '<div class="card-header">' + title + '</div>' + '<div class="card-body">' + '<p>' + (0,_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('s_notice') + window.Messages.enum_hint + '</p>' + '<table class="table table-borderless values"><tbody>' + fields + '</tbody></table>' + '</div><div class="card-footer">' + '<table class="table table-borderless add"><tr><td>' + '<div class="slider"></div>' + '</td><td>' + '<form><div><input type="submit" class="add_value btn btn-primary" value="' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.enum_addValue, 1) + '"></div></form>' + '</td></tr></table>' + '<input type="hidden" value="' +
     // So we know which column's data is being edited
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('input').attr('id') + '">' + '</div>' + '</div>';
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#enumEditorGoButton').on('click', function () {
@@ -4115,7 +4123,7 @@ function onloadEnumSetEditor() {
       min: 1,
       max: 9,
       slide: function (event, ui) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('input[type=submit]').val(window.sprintf(window.Messages.enum_addValue, ui.value));
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('input[type=submit]').val((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.enum_addValue, ui.value));
       }
     });
     // Focus the slider, otherwise it looks nearly transparent
@@ -4172,7 +4180,7 @@ function onloadEnumSetEditor() {
     let resultPointer = i;
     let searchIn = '<input type="text" class="filter_rows" placeholder="' + window.Messages.searchList + '">';
     if (fields === '') {
-      fields = window.sprintf(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(db) + '\'');
+      fields = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.strEmptyCentralList, '\'' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(db) + '\'');
       searchIn = '';
     }
     let seeMore = '';
@@ -4406,7 +4414,7 @@ function showIndexEditDialog($outer) {
     min: 1,
     max: 16,
     slide: function (event, ui) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('input[type=submit]').val(window.sprintf(window.Messages.strAddToIndex, ui.value));
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.card-body').find('input[type=submit]').val((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_16__.sprintf)(window.Messages.strAddToIndex, ui.value));
     }
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.add_fields').removeClass('hide');
@@ -5157,6 +5165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 /**
  * Adjust number of rows and total size in the summary
@@ -5243,7 +5253,7 @@ function adjustTotals() {
   overheadSum = Math.round(overheadSum * 10) / 10;
   // Update summary with new data
   const $summary = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tbl_summary_row');
-  $summary.find('.tbl_num').text(window.sprintf(window.Messages.strNTables, tableSum));
+  $summary.find('.tbl_num').text((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_1__.sprintf)(window.Messages.strNTables, tableSum));
   if (rowSumApproximated) {
     $summary.find('.row_count_sum').text(strRowSum);
   } else {
@@ -5265,6 +5275,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 /**
@@ -5282,7 +5294,7 @@ function checkNumberOfFields() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('form').each(function () {
     const nbInputs = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(':input').length;
     if (nbInputs > window.maxInputVars) {
-      const warning = window.sprintf(window.Messages.strTooManyInputs, window.maxInputVars);
+      const warning = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__.sprintf)(window.Messages.strTooManyInputs, window.maxInputVars);
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(warning);
       return false;
     }
@@ -7607,9 +7619,7 @@ const FastFilter = {
       event.stopPropagation();
       // Clear the input and apply the fast filter with empty input
       const filter = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('div.list_container').data('fastFilter');
-      if (filter) {
-        filter.restore();
-      }
+      filter === null || filter === void 0 || filter.restore();
       const value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev()[0].defaultValue;
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prev().val(value).trigger('keyup');
     }
@@ -7631,6 +7641,7 @@ FastFilter.Filter.prototype.update = function (searchClause) {
  * Multiple calls to this function will always abort the previous request
  */
 FastFilter.Filter.prototype.request = function () {
+  var _self$xhr;
   const self = this;
   if (self.$this.find('li.fast_filter').find('img.throbber').length === 0) {
     self.$this.find('li.fast_filter').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="throbber"></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_content').find('img.throbber').clone().css({
@@ -7638,9 +7649,7 @@ FastFilter.Filter.prototype.request = function () {
       display: 'block'
     })));
   }
-  if (self.xhr) {
-    self.xhr.abort();
-  }
+  (_self$xhr = self.xhr) === null || _self$xhr === void 0 || _self$xhr.abort();
   let params = self.$this.find('> ul > li > form.fast_filter').first().serialize();
   if (self.$this.find('> ul > li > form.fast_filter').first().find('input[name=searchClause]').length === 0) {
     const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_tree').find('li.fast_filter.db_fast_filter input.searchClause');
@@ -7815,6 +7824,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 /**
  * Definition of links to MySQL documentation.
@@ -8188,7 +8199,7 @@ function documentationAdd($elm, params) {
   if (typeof window.mysqlDocTemplate === 'undefined') {
     return;
   }
-  let url = window.sprintf(decodeURIComponent(window.mysqlDocTemplate), params[0]);
+  let url = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_1__.sprintf)(decodeURIComponent(window.mysqlDocTemplate), params[0]);
   if (params.length > 1) {
     // The # needs to be escaped to be part of the destination URL
     url += encodeURIComponent('#') + params[1];
@@ -8317,6 +8328,209 @@ const ThemeColorModeToggle = {
     });
   }
 };
+
+/***/ }),
+
+/***/ "./node_modules/locutus/esm/php/strings/sprintf.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   sprintf: function() { return /* binding */ sprintf; }
+/* harmony export */ });
+function sprintf(format, ...args) {
+    //      discuss at: https://locutus.io/php/sprintf/
+    // parity verified: PHP 8.3
+    //     original by: Ash Searle (https://hexmen.com/blog/)
+    //     improved by: Michael White (https://getsprink.com)
+    //     improved by: Jack
+    //     improved by: Kevin van Zonneveld (https://kvz.io)
+    //     improved by: Kevin van Zonneveld (https://kvz.io)
+    //     improved by: Kevin van Zonneveld (https://kvz.io)
+    //     improved by: Dj
+    //     improved by: Allidylls
+    //        input by: Paulo Freitas
+    //        input by: Brett Zamir (https://brett-zamir.me)
+    //     improved by: Rafał Kukawski (https://kukawski.pl)
+    //       example 1: sprintf("%01.2f", 123.1)
+    //       returns 1: '123.10'
+    //       example 2: sprintf("[%10s]", 'monkey')
+    //       returns 2: '[    monkey]'
+    //       example 3: sprintf("[%'#10s]", 'monkey')
+    //       returns 3: '[####monkey]'
+    //       example 4: sprintf("%d", 123456789012345)
+    //       returns 4: '123456789012345'
+    //       example 5: sprintf('%-03s', 'E')
+    //       returns 5: 'E00'
+    //       example 6: sprintf('%+010d', 9)
+    //       returns 6: '+000000009'
+    //       example 7: sprintf('%+0\'@10d', 9)
+    //       returns 7: '@@@@@@@@+9'
+    //       example 8: sprintf('%.f', 3.14)
+    //       returns 8: '3.140000'
+    //       example 9: sprintf('%% %2$d', 1, 2)
+    //       returns 9: '% 2'
+    const regex = /%%|%(?:(\d+)\$)?((?:[-+#0 ]|'[\s\S])*)(\d+)?(?:\.(\d*))?([\s\S])/g;
+    const callArgs = [format, ...args];
+    let i = 1;
+    const _pad = function (str, len, chr, leftJustify) {
+        if (!chr) {
+            chr = ' ';
+        }
+        const padding = str.length >= len ? '' : new Array((1 + len - str.length) >>> 0).join(chr);
+        return leftJustify ? str + padding : padding + str;
+    };
+    const justify = function (value, prefix, leftJustify, minWidth, padChar) {
+        const diff = minWidth - value.length;
+        if (diff > 0) {
+            // when padding with zeros
+            // on the left side
+            // keep sign (+ or -) in front
+            if (!leftJustify && padChar === '0') {
+                value = [value.slice(0, prefix.length), _pad('', diff, '0', true), value.slice(prefix.length)].join('');
+            }
+            else {
+                value = _pad(value, minWidth, padChar, leftJustify);
+            }
+        }
+        return value;
+    };
+    const _formatBaseX = function (value, base, leftJustify, minWidth, precision, padChar) {
+        // Note: casts negative numbers to positive ones
+        const number = Number(value) >>> 0;
+        const padded = _pad(number.toString(base), precision || 0, '0', false);
+        return justify(padded, '', leftJustify, minWidth, padChar);
+    };
+    // _formatString()
+    const _formatString = function (value, leftJustify, minWidth, precision, customPadChar) {
+        if (precision !== null && precision !== undefined) {
+            value = value.slice(0, precision);
+        }
+        return justify(value, '', leftJustify, minWidth, customPadChar);
+    };
+    // doFormat()
+    const doFormat = function (substring, argIndex, modifiers, minWidthRaw, precisionRaw, specifier) {
+        let number = 0;
+        let prefix = '';
+        let value;
+        if (substring === '%%') {
+            return '%';
+        }
+        // parse modifiers
+        let padChar = ' '; // pad with spaces by default
+        let leftJustify = false;
+        let positiveNumberPrefix = '';
+        let j = 0;
+        let l = 0;
+        for (j = 0, l = modifiers.length; j < l; j++) {
+            switch (modifiers.charAt(j)) {
+                case ' ':
+                case '0':
+                    padChar = modifiers.charAt(j);
+                    break;
+                case '+':
+                    positiveNumberPrefix = '+';
+                    break;
+                case '-':
+                    leftJustify = true;
+                    break;
+                case "'":
+                    if (j + 1 < l) {
+                        padChar = modifiers.charAt(j + 1);
+                        j++;
+                    }
+                    break;
+            }
+        }
+        let minWidthNum = 0;
+        if (!minWidthRaw) {
+            minWidthNum = 0;
+        }
+        else {
+            minWidthNum = +minWidthRaw;
+        }
+        if (!isFinite(minWidthNum)) {
+            throw new Error('Width must be finite');
+        }
+        let precisionNum;
+        if (!precisionRaw) {
+            precisionNum = specifier === 'd' ? 0 : 'fFeE'.includes(specifier) ? 6 : undefined;
+        }
+        else {
+            precisionNum = +precisionRaw;
+        }
+        if (argIndex && +argIndex === 0) {
+            throw new Error('Argument number must be greater than zero');
+        }
+        if (argIndex && +argIndex >= callArgs.length) {
+            throw new Error('Too few arguments');
+        }
+        value = argIndex ? callArgs[+argIndex] : callArgs[i++];
+        switch (specifier) {
+            case '%':
+                return '%';
+            case 's':
+                return _formatString(String(value), leftJustify, minWidthNum, precisionNum, padChar);
+            case 'c':
+                return _formatString(String.fromCharCode(+String(value)), leftJustify, minWidthNum, precisionNum, padChar);
+            case 'b':
+                return _formatBaseX(value, 2, leftJustify, minWidthNum, precisionNum, padChar);
+            case 'o':
+                return _formatBaseX(value, 8, leftJustify, minWidthNum, precisionNum, padChar);
+            case 'x':
+                return _formatBaseX(value, 16, leftJustify, minWidthNum, precisionNum, padChar);
+            case 'X':
+                return _formatBaseX(value, 16, leftJustify, minWidthNum, precisionNum, padChar).toUpperCase();
+            case 'u':
+                return _formatBaseX(value, 10, leftJustify, minWidthNum, precisionNum, padChar);
+            case 'i':
+            case 'd':
+                number = +String(value) || 0;
+                // Plain Math.round doesn't just truncate
+                number = Math.round(number - (number % 1));
+                prefix = number < 0 ? '-' : positiveNumberPrefix;
+                value = prefix + _pad(String(Math.abs(number)), precisionNum ?? 0, '0', false);
+                if (leftJustify && padChar === '0') {
+                    // can't right-pad 0s on integers
+                    padChar = ' ';
+                }
+                return justify(String(value), prefix, leftJustify, minWidthNum, padChar);
+            case 'e':
+            case 'E':
+            case 'f': // @todo: Should handle locales (as per setlocale)
+            case 'F':
+            case 'g':
+            case 'G': {
+                number = +String(value);
+                prefix = number < 0 ? '-' : positiveNumberPrefix;
+                const methodIndex = 'efg'.indexOf(specifier.toLowerCase());
+                const absNumber = Math.abs(number);
+                let floatResult = '';
+                if (methodIndex === 0) {
+                    floatResult = absNumber.toExponential(precisionNum);
+                }
+                else if (methodIndex === 1) {
+                    floatResult = absNumber.toFixed(precisionNum);
+                }
+                else {
+                    floatResult = absNumber.toPrecision(precisionNum);
+                }
+                const justified = justify(prefix + floatResult, prefix, leftJustify, minWidthNum, padChar);
+                return 'eEfFgG'.indexOf(specifier) % 2 === 0 ? justified : justified.toUpperCase();
+            }
+            default:
+                // unsupported specifier, consume that char and return empty
+                return '';
+        }
+    };
+    try {
+        return format.replace(regex, doFormat);
+    }
+    catch (_err) {
+        return false;
+    }
+}
+
 
 /***/ })
 

@@ -17,6 +17,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -158,7 +160,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
         // User wants to submit the form
         // If Collation is changed, Warn and Confirm
         if (checkIfConfirmRequired($form)) {
-          const question = window.sprintf(window.Messages.strChangeColumnCollation, 'https://wiki.phpmyadmin.net/pma/Garbled_data');
+          const question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__.sprintf)(window.Messages.strChangeColumnCollation, 'https://wiki.phpmyadmin.net/pma/Garbled_data');
           $form.confirm(question, $form.attr('action'), function () {
             submitForm();
           });
@@ -193,7 +195,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     /**
      * @var question String containing the question to be asked for confirmation
      */
-    const question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
+    const question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__.sprintf)(window.Messages.strDoYouReally, 'ALTER TABLE `' + currTableName + '` DROP `' + currColumnName + '`;');
     const $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
       const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strDroppingColumn, false);
@@ -254,7 +256,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     } else if ($this.is('.add_fulltext_anchor')) {
       addClause = 'ADD FULLTEXT';
     }
-    const question = window.sprintf(window.Messages.strDoYouReally, 'ALTER TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currTableName) + '` ' + addClause + '(`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName) + '`);');
+    const question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_11__.sprintf)(window.Messages.strDoYouReally, 'ALTER TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currTableName) + '` ' + addClause + '(`' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_9__.escapeHtml)(currColumnName) + '`);');
     const $thisAnchor = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();

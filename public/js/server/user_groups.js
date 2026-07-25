@@ -8,6 +8,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/ajax.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 /**
@@ -30,7 +32,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/user_g
   deleteUserGroupModal.on('show.bs.modal', function (event) {
     // @ts-ignore
     const userGroupName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.relatedTarget).data('user-group');
-    this.querySelector('.modal-body').innerText = window.sprintf(window.Messages.strDropUserGroupWarning, userGroupName);
+    this.querySelector('.modal-body').innerText = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__.sprintf)(window.Messages.strDropUserGroupWarning, userGroupName);
   });
   deleteUserGroupModal.on('shown.bs.modal', function (event) {
     // @ts-ignore

@@ -13,6 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/sql-highlight.ts");
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 /* harmony import */ var _modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/functions/getImageTag.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -163,7 +165,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#togglequerybox').hide();
     /** Conformation message for deletion */
-    const msg = window.sprintf(window.Messages.strConfirmDeleteResults, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name'));
+    const msg = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_7__.sprintf)(window.Messages.strConfirmDeleteResults, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('table-name'));
     if (confirm(msg)) {
       const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strDeleting, false);
       /** Load the deleted option to the page*/

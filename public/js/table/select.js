@@ -96,9 +96,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
     // Dispose tooltips. See #19950
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('input.datefield, input.timefield').each(function () {
       const tooltipInstance = bootstrap__WEBPACK_IMPORTED_MODULE_1__.Tooltip.getInstance(this);
-      if (tooltipInstance) {
-        tooltipInstance.dispose();
-      }
+      tooltipInstance === null || tooltipInstance === void 0 || tooltipInstance.dispose();
     });
     // empty previous search results while we are waiting for new results
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').empty();

@@ -16,6 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -56,7 +58,7 @@ const confirmAndPost = function (linkObject, action) {
   } else if (action === 'DELETE') {
     question += window.Messages.strDeleteTableStrongWarning + ' ';
   }
-  question += window.sprintf(window.Messages.strDoYouReally, linkObject.data('query'));
+  question += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, linkObject.data('query'));
   question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
   linkObject.confirm(question, linkObject.attr('href'), function (url) {
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
@@ -272,7 +274,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
      * @var {string} question String containing the question to be asked for confirmation
      */
     let question = window.Messages.strDropTableStrongWarning + ' ';
-    question += window.sprintf(window.Messages.strDoYouReally, $link[0].getAttribute('data-query'));
+    question += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, $link[0].getAttribute('data-query'));
     question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.getForeignKeyCheckboxLoader)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
       const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
@@ -300,7 +302,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
      * @var {string} question String containing the question to be asked for confirmation
      */
     let question = window.Messages.strDropTableStrongWarning + ' ';
-    question += window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table') + '`'));
+    question += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table') + '`'));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
       const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $link.getPostData());

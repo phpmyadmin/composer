@@ -37,6 +37,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navigation_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/navigation.ts");
 /* harmony import */ var _console_config_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/console/config.ts");
 /* harmony import */ var _functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -1173,7 +1175,7 @@ const ConsoleDebug = {
   formatFunctionArgs: function (dbgStep) {
     const $args = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>');
     if (dbgStep.args.length) {
-      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text(window.sprintf(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
+      $args.append('<div class="message welcome">').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message welcome">').text((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_8__.sprintf)(window.Messages.strConsoleDebugArgsSummary, dbgStep.args.length)));
       for (let i = 0; i < dbgStep.args.length; i++) {
         $args.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="message">').html('<pre>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(JSON.stringify(dbgStep.args[i], null, '  ')) + '</pre>'));
       }
@@ -1317,7 +1319,7 @@ const ConsoleDebug = {
     }
     uniqueQueries = uniqueArray;
     // Show summary
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text(window.sprintf(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="debug_summary">').text((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_8__.sprintf)(window.Messages.strConsoleDebugSummary, totalUnique, totalExec, totalTime)));
     if (url) {
       const decodedUrl = new URLSearchParams(url.split('?')[1]);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#debug_console').find('.debug>.welcome').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="script_name">').text(decodedUrl.has('route') ? decodedUrl.get('route') : url));

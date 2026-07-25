@@ -14,6 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/navigation.ts");
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 /* harmony import */ var _modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/getImageTag.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -216,7 +218,7 @@ const RevokeUser = {
     $thisButton.confirm(window.Messages.strDropUserWarning, $form.attr('action'), function (url) {
       const $dropUsersDbCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropUsersDbCheckbox');
       if ($dropUsersDbCheckbox.is(':checked')) {
-        const isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE'));
+        const isConfirmed = confirm(window.Messages.strDropDatabaseStrongWarning + '\n' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_8__.sprintf)(window.Messages.strDoYouReally, 'DROP DATABASE'));
         if (!isConfirmed) {
           // Uncheck the drop users database checkbox
           $dropUsersDbCheckbox.prop('checked', false);
@@ -456,9 +458,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerTeardown('server/priv
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_pma_change_pw').off('change');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_pma_change_pw2').off('change');
   const editUserGroupModal = document.getElementById('editUserGroupModal');
-  if (editUserGroupModal) {
-    editUserGroupModal.removeEventListener('show.bs.modal', EditUserGroup);
-  }
+  editUserGroupModal === null || editUserGroupModal === void 0 || editUserGroupModal.removeEventListener('show.bs.modal', EditUserGroup);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'button.mult_submit[value=export]');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', 'a.export_user_anchor.ajax');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('button.jsAccountLocking').off('click');
@@ -478,9 +478,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/privil
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '#select_authentication_plugin', ShowSha256PasswordNotice.handleEvent);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#deleteUserCard .btn.ajax', RevokeUser.handleEvent);
   const editUserGroupModal = document.getElementById('editUserGroupModal');
-  if (editUserGroupModal) {
-    editUserGroupModal.addEventListener('show.bs.modal', EditUserGroup);
-  }
+  editUserGroupModal === null || editUserGroupModal === void 0 || editUserGroupModal.addEventListener('show.bs.modal', EditUserGroup);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'button.mult_submit[value=export]', ExportPrivileges.handleEvent);
   // if exporting non-ajax, highlight anyways
   (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getSqlEditor)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('textarea.export'));

@@ -15,6 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -154,7 +156,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
      * @var {string} question String containing the question to be asked for confirmation
      */
     let question = window.Messages.strDropDatabaseStrongWarning + ' ';
-    question += window.sprintf(window.Messages.strDoYouReally, 'DROP DATABASE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db') + '`'));
+    question += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_9__.sprintf)(window.Messages.strDoYouReally, 'DROP DATABASE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db') + '`'));
     const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__["default"])(this, $link.getPostData());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).confirm(question, jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strProcessingRequest);

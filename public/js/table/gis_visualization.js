@@ -493,9 +493,7 @@ class GisVisualizationController {
   selectVisualization() {
     const showOl = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#useOsmAsBaseLayerSwitch').prop('checked') === true;
     const oldVis = showOl ? this.svgVis : this.olVis;
-    if (oldVis) {
-      oldVis.hide();
-    }
+    oldVis === null || oldVis === void 0 || oldVis.hide();
     let newVis;
     if (showOl) {
       if (!this.olVis) {
@@ -514,13 +512,10 @@ class GisVisualizationController {
    * Cleanup events when no longer needed
    */
   dispose() {
+    var _this$svgVis, _this$olVis;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).off('click', '#useOsmAsBaseLayerSwitch');
-    if (this.svgVis) {
-      this.svgVis.dispose();
-    }
-    if (this.olVis) {
-      this.olVis.dispose();
-    }
+    (_this$svgVis = this.svgVis) === null || _this$svgVis === void 0 || _this$svgVis.dispose();
+    (_this$olVis = this.olVis) === null || _this$olVis === void 0 || _this$olVis.dispose();
   }
 }
 window.GisVisualizationController = GisVisualizationController;

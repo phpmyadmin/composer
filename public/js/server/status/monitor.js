@@ -8,6 +8,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ chartByteFormatter; }
 /* harmony export */ });
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 function formatByte(value, index) {
   let val = value;
   let i = index;
@@ -20,7 +22,7 @@ function formatByte(value, index) {
   if (Math.floor(val) === val) {
     format = '%.0f';
   }
-  return window.sprintf(format + ' ' + units[i], val);
+  return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_0__.sprintf)(format + ' ' + units[i], val);
 }
 /**
  * The index indicates what unit the incoming data will be in.
@@ -60,6 +62,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/getImageTag.ts");
 /* harmony import */ var _modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
 /* harmony import */ var _modules_functions_chartByteFormatter_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/chartByteFormatter.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -641,11 +645,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     saveMonitor(); // Save settings
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#monitorChartRefreshRateSelect').on('change', function () {
+    var _runtime$refreshReque;
     monitorSettings.gridRefresh = parseInt(this.value, 10) * 1000;
     clearTimeout(runtime.refreshTimeout);
-    if (runtime.refreshRequest) {
-      runtime.refreshRequest.abort();
-    }
+    (_runtime$refreshReque = runtime.refreshRequest) === null || _runtime$refreshReque === void 0 || _runtime$refreshReque.abort();
     runtime.xmin = new Date().getTime() - serverTimeDiff - runtime.gridMaxPoints * monitorSettings.gridRefresh;
     // fixing chart shift towards left on refresh rate change
     // runtime.xmax = new Date().getTime() - serverTimeDiff + monitorSettings.gridRefresh;
@@ -859,12 +862,12 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       if (logVars.slow_query_log === 'ON') {
         if (logVars.long_query_time > 2) {
           str += (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('s_attention') + ' ';
-          str += window.sprintf(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strSmallerLongQueryTimeAdvice, logVars.long_query_time);
           str += '<br>';
         }
         if (logVars.long_query_time < 2) {
           str += (0,_modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_7__["default"])('s_success') + ' ';
-          str += window.sprintf(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strLongQueryTimeSet, logVars.long_query_time);
           str += '<br>';
         }
       }
@@ -878,24 +881,24 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
           varValue = 'FILE';
         }
         str += '- <a class="set" href="#log_output-' + varValue + '">';
-        str += window.sprintf(window.Messages.strSetLogOutput, varValue);
+        str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strSetLogOutput, varValue);
         str += ' </a><br>';
         if (logVars.general_log !== 'ON') {
           str += '- <a class="set" href="#general_log-ON">';
-          str += window.sprintf(window.Messages.strEnableVar, 'general_log');
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strEnableVar, 'general_log');
           str += ' </a><br>';
         } else {
           str += '- <a class="set" href="#general_log-OFF">';
-          str += window.sprintf(window.Messages.strDisableVar, 'general_log');
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDisableVar, 'general_log');
           str += ' </a><br>';
         }
         if (logVars.slow_query_log !== 'ON') {
           str += '- <a class="set" href="#slow_query_log-ON">';
-          str += window.sprintf(window.Messages.strEnableVar, 'slow_query_log');
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strEnableVar, 'slow_query_log');
           str += ' </a><br>';
         } else {
           str += '- <a class="set" href="#slow_query_log-OFF">';
-          str += window.sprintf(window.Messages.strDisableVar, 'slow_query_log');
+          str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDisableVar, 'slow_query_log');
           str += ' </a><br>';
         }
         varValue = 5;
@@ -903,7 +906,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
           varValue = 1;
         }
         str += '- <a class="set" href="#long_query_time-' + varValue + '">';
-        str += window.sprintf(window.Messages.setSetLongQueryTime, varValue);
+        str += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.setSetLongQueryTime, varValue);
         str += ' </a><br>';
       } else {
         str += window.Messages.strNoSuperUser + '<br>';
@@ -997,7 +1000,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       serie.unit = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="valueUnit"]').val();
     }
     let str = serie.display === 'differential' ? ', ' + window.Messages.strDifferential : '';
-    str += serie.valueDivisor ? ', ' + window.sprintf(window.Messages.strDividedBy, serie.valueDivisor) : '';
+    str += serie.valueDivisor ? ', ' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDividedBy, serie.valueDivisor) : '';
     str += serie.unit ? ', ' + window.Messages.strUnit + ': ' + serie.unit : '';
     const newSeries = {
       label: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#variableInput').val().replace(/_/g, ' ')
@@ -1192,11 +1195,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       settings.axes.yaxis.tickOptions = {
         formatter: function (format, val) {
           if (Math.abs(val) >= 1000000) {
-            return window.sprintf('%.3g M', val / 1000000);
+            return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)('%.3g M', val / 1000000);
           } else if (Math.abs(val) >= 1000) {
-            return window.sprintf('%.3g k', val / 1000);
+            return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)('%.3g k', val / 1000);
           } else {
-            return window.sprintf('%d', val);
+            return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)('%d', val);
           }
         }
       };
@@ -1247,7 +1250,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
           // eslint-disable-line no-underscore-dangle
           // using format string
           // eslint-disable-next-line no-underscore-dangle
-          seriesValue = window.sprintf(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
+          seriesValue = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(plot.series[0]._yaxis.tickOptions.formatString, seriesValue);
         }
         tooltipHtml += '<br><span style="color:' + seriesColor + '">' + seriesLabel + ': ' + seriesValue + '</span>';
       }
@@ -1310,7 +1313,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
               callback: function (value, index, ticks) {
                 var _settings$axes$yaxis, _settings$axes$yaxis2;
                 if ((_settings$axes$yaxis = settings.axes.yaxis) !== null && _settings$axes$yaxis !== void 0 && (_settings$axes$yaxis = _settings$axes$yaxis.tickOptions) !== null && _settings$axes$yaxis !== void 0 && _settings$axes$yaxis.formatString) {
-                  return window.sprintf(settings.axes.yaxis.tickOptions.formatString, value);
+                  return (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(settings.axes.yaxis.tickOptions.formatString, value);
                 }
                 if ((_settings$axes$yaxis2 = settings.axes.yaxis) !== null && _settings$axes$yaxis2 !== void 0 && (_settings$axes$yaxis2 = _settings$axes$yaxis2.tickOptions) !== null && _settings$axes$yaxis2 !== void 0 && _settings$axes$yaxis2.formatter) {
                   return settings.axes.yaxis.tickOptions.formatter(null, value);
@@ -1585,9 +1588,8 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     }
     const analysingLogsModal = document.getElementById('analysingLogsModal');
     analysingLogsModal.addEventListener('hidden.bs.modal', function () {
-      if (logRequest !== null) {
-        logRequest.abort();
-      }
+      var _logRequest;
+      (_logRequest = logRequest) === null || _logRequest === void 0 || _logRequest.abort();
     });
     bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance(analysingLogsModal).show();
     let url = 'index.php?route=/server/status/monitor/slow-log';
@@ -1900,11 +1902,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       }
     });
     queryAnalyzerModal.addEventListener('hidden.bs.modal', function () {
+      var _profilingChart;
       const queryAnalyzerModalAnalyseButton = document.getElementById('queryAnalyzerModalAnalyseButton');
       queryAnalyzerModalAnalyseButton === null || queryAnalyzerModalAnalyseButton === void 0 || queryAnalyzerModalAnalyseButton.removeEventListener('click', queryAnalyzerModalSaveEventHandler);
-      if (profilingChart !== null) {
-        profilingChart.destroy();
-      }
+      (_profilingChart = profilingChart) === null || _profilingChart === void 0 || _profilingChart.destroy();
       queryAnalyzerModal.querySelector('div.placeHolder').textContent = '';
       if (window.codeMirrorEditor) {
         window.codeMirrorEditor.setValue('');

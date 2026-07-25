@@ -13,15 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerTeardown('home.js', () => {
   const themesModal = document.getElementById('themesModal');
-  if (themesModal) {
-    themesModal.removeEventListener('show.bs.modal', _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
-  }
+  themesModal === null || themesModal === void 0 || themesModal.removeEventListener('show.bs.modal', _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
 });
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_0__.AJAX.registerOnload('home.js', () => {
   const themesModal = document.getElementById('themesModal');
-  if (themesModal) {
-    themesModal.addEventListener('show.bs.modal', _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
-  }
+  themesModal === null || themesModal === void 0 || themesModal.addEventListener('show.bs.modal', _modules_themes_manager_ts__WEBPACK_IMPORTED_MODULE_2__.ThemesManager.handleEvent);
   (0,_modules_git_info_ts__WEBPACK_IMPORTED_MODULE_1__.showGitVersion)();
 });
 
@@ -38,6 +34,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/common.ts");
 /* harmony import */ var _functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -100,7 +98,7 @@ const GitInfo = {
       versionInformationMessage.appendChild(prefixMessage);
       versionInformationMessage.appendChild(versionInformationMessageLink);
       if (latest > current) {
-        const message = window.sprintf(window.Messages.strNewerVersion, (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.version), (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.date));
+        const message = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_3__.sprintf)(window.Messages.strNewerVersion, (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.version), (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_2__.escapeHtml)(data.date));
         let htmlClass = 'alert alert-primary';
         if (Math.floor(latest / 10000) === Math.floor(current / 10000)) {
           /* Security update */

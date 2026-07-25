@@ -15,6 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -50,7 +52,7 @@ const DropDatabases = {
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-    const question = window.Messages.strDropDatabaseStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
+    const question = window.Messages.strDropDatabaseStrongWarning + ' ' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_9__.sprintf)(window.Messages.strDoYouReally, selectedDbs.join('<br>'));
     const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#dropDatabaseModal');
     modal.find('.modal-body').html(question);
     modal.modal('show');

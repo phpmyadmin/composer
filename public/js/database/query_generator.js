@@ -8,6 +8,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 /**
@@ -99,14 +101,14 @@ function generateCondition(criteriaDiv, table) {
         }
       });
       criteriaText = joinWrappingElementsWith(critertiaTextArray, '\'');
-      query += window.sprintf(formatsText[criteriaOp], criteriaText);
+      query += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__.sprintf)(formatsText[criteriaOp], criteriaText);
     } else if (acceptsTwoValues(criteriaOp)) {
       const formatsText = getFormatsText();
       const valuesInputs = criteriaDiv.find('input.val');
-      query += window.sprintf(formatsText[criteriaOp], valuesInputs[0].value, valuesInputs[1].value);
+      query += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__.sprintf)(formatsText[criteriaOp], valuesInputs[0].value, valuesInputs[1].value);
     } else {
       const formatsText = getFormatsText();
-      query += window.sprintf(formatsText[criteriaOp], criteriaText);
+      query += (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_2__.sprintf)(formatsText[criteriaOp], criteriaText);
     }
   } else {
     query += ' ' + criteriaOp;

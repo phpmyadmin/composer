@@ -165,17 +165,13 @@ __webpack_require__.r(__webpack_exports__);
     resize: function () {
       return this.each(function () {
         const self = $(this).data('menuResizer');
-        if (self) {
-          self.resize();
-        }
+        self === null || self === void 0 || self.resize();
       });
     },
     destroy: function () {
       return this.each(function () {
         const self = $(this).data('menuResizer');
-        if (self) {
-          self.destroy();
-        }
+        self === null || self === void 0 || self.destroy();
       });
     }
   };

@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/common.ts");
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -115,7 +117,7 @@ function goToFinish1NF() {
     return true;
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-header').html(window.Messages.strEndStep);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent h4').html('<h3>' + window.sprintf(window.Messages.strFinishMsg, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'))) + '</h3>');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent h4').html('<h3>' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.strFinishMsg, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'))) + '</h3>');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent p').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent #extra').html('');
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent #newCols').html('');
@@ -633,7 +635,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     if (repeatingCols !== '') {
       const newColName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').first().val();
       repeatingCols = repeatingCols.slice(0, -2);
-      let confirmStr = window.sprintf(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
+      let confirmStr = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
       confirmStr += '<input type="text" name="repeatGroupTable" placeholder="' + window.Messages.strNewTablePlaceholder + '">' + '( ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(primaryKey.toString()) + ', <input type="text" name="repeatGroupColumn" placeholder="' + window.Messages.strNewColumnPlaceholder + '" value="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(newColName) + '">)' + '</ol>';
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html(confirmStr);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({

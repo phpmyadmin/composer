@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/navigation.ts");
 /* harmony import */ var _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/common.ts");
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -184,7 +186,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
           } else {
             const nowDate = new Date();
             const now = Date.UTC(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours(), nowDate.getMinutes(), nowDate.getSeconds()) + nowDate.getMilliseconds() - 1000;
-            let statusText = window.sprintf(window.Messages.uploadProgressStatusText, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete, 1, window.Messages.strDecimalSeparator), (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(total, 1, window.Messages.strDecimalSeparator));
+            let statusText = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.uploadProgressStatusText, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete, 1, window.Messages.strDecimalSeparator), (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(total, 1, window.Messages.strDecimalSeparator));
             if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#importmain').is(':visible')) {
               // Show progress UI
               jquery__WEBPACK_IMPORTED_MODULE_0___default()('#importmain').hide();
@@ -195,7 +197,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
               // Calculate estimated time
               const usedTime = now - importStart;
               let seconds = parseInt(((total - complete) / complete * usedTime / 1000).toString());
-              const speed = window.sprintf(window.Messages.uploadProgressPerSecond, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete / usedTime * 1000, 1, window.Messages.strDecimalSeparator));
+              const speed = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.uploadProgressPerSecond, (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.formatBytes)(complete / usedTime * 1000, 1, window.Messages.strDecimalSeparator));
               const minutes = parseInt((seconds / 60).toString());
               seconds %= 60;
               let estimatedTime;

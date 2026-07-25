@@ -82,20 +82,19 @@ const DragDropImport = {
   sendFileToServer: function (formData, hash) {
     const jqXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       xhr: function () {
+        var _xhrobj$upload;
         const xhrobj = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajaxSettings.xhr();
-        if (xhrobj.upload) {
-          xhrobj.upload.addEventListener('progress', function (event) {
-            let percent = 0;
-            // @ts-ignore
-            const position = event.loaded || event.position;
-            const total = event.total;
-            if (event.lengthComputable) {
-              percent = Math.ceil(position / total * 100);
-            }
-            // Set progress
-            DragDropImport.setProgress(hash, percent);
-          }, false);
-        }
+        (_xhrobj$upload = xhrobj.upload) === null || _xhrobj$upload === void 0 || _xhrobj$upload.addEventListener('progress', function (event) {
+          let percent = 0;
+          // @ts-ignore
+          const position = event.loaded || event.position;
+          const total = event.total;
+          if (event.lengthComputable) {
+            percent = Math.ceil(position / total * 100);
+          }
+          // Set progress
+          DragDropImport.setProgress(hash, percent);
+        }, false);
         return xhrobj;
       },
       url: 'index.php?route=/import',

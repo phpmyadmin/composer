@@ -629,25 +629,15 @@ function toggleQuickOrCustom() {
   const radioCustomExportElement = document.getElementById('radio_custom_export');
   const isCustomExport = isCustomNoFormOption || radioCustomExportElement instanceof HTMLInputElement && radioCustomExportElement.checked;
   const databasesAndTablesElement = document.getElementById('databases_and_tables');
-  if (databasesAndTablesElement) {
-    databasesAndTablesElement.classList.toggle('d-none', !isCustomExport);
-  }
+  databasesAndTablesElement === null || databasesAndTablesElement === void 0 || databasesAndTablesElement.classList.toggle('d-none', !isCustomExport);
   const rowsElement = document.getElementById('rows');
-  if (rowsElement) {
-    rowsElement.classList.toggle('d-none', !isCustomExport);
-  }
+  rowsElement === null || rowsElement === void 0 || rowsElement.classList.toggle('d-none', !isCustomExport);
   const outputElement = document.getElementById('output');
-  if (outputElement) {
-    outputElement.classList.toggle('d-none', !isCustomExport);
-  }
+  outputElement === null || outputElement === void 0 || outputElement.classList.toggle('d-none', !isCustomExport);
   const formatSpecificOptionsElement = document.getElementById('format_specific_opts');
-  if (formatSpecificOptionsElement) {
-    formatSpecificOptionsElement.classList.toggle('d-none', !isCustomExport);
-  }
+  formatSpecificOptionsElement === null || formatSpecificOptionsElement === void 0 || formatSpecificOptionsElement.classList.toggle('d-none', !isCustomExport);
   const outputQuickExportElement = document.getElementById('output_quick_export');
-  if (outputQuickExportElement) {
-    outputQuickExportElement.classList.toggle('d-none', isCustomExport);
-  }
+  outputQuickExportElement === null || outputQuickExportElement === void 0 || outputQuickExportElement.classList.toggle('d-none', isCustomExport);
   if (!isCustomExport) {
     return;
   }
@@ -657,10 +647,7 @@ function toggleQuickOrCustom() {
     return;
   }
   const pluginOptionsElement = document.getElementById(selectedPluginName + '_options');
-  if (!pluginOptionsElement) {
-    return;
-  }
-  pluginOptionsElement.classList.remove('d-none');
+  pluginOptionsElement === null || pluginOptionsElement === void 0 || pluginOptionsElement.classList.remove('d-none');
 }
 let timeOut;
 function checkTimeOut(timeLimit) {

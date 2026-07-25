@@ -16,6 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./resources/js/modules/functions/adjustTotals.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -211,7 +213,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('database/stru
     /**
      * @var question    String containing the question to be asked for confirmation
      */
-    const question = window.Messages.strTruncateTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'TRUNCATE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`') + (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getForeignKeyCheckboxLoader)();
+    const question = window.Messages.strTruncateTableStrongWarning + ' ' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, 'TRUNCATE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`') + (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getForeignKeyCheckboxLoader)();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(this, $thisAnchor.getPostData());
@@ -253,9 +255,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('database/stru
      */
     let question;
     if (!isView) {
-      question = window.Messages.strDropTableStrongWarning + ' ' + window.sprintf(window.Messages.strDoYouReally, 'DROP TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
+      question = window.Messages.strDropTableStrongWarning + ' ' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, 'DROP TABLE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
     } else {
-      question = window.sprintf(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
+      question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strDoYouReally, 'DROP VIEW `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_8__.escapeHtml)(currTableName) + '`');
     }
     question += (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getForeignKeyCheckboxLoader)();
     $thisAnchor.confirm(question, $thisAnchor.attr('href'), function (url) {

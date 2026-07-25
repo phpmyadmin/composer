@@ -71,6 +71,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
  * @return {boolean|void}
  */
 function ajaxValidate(parent, id, values) {
+  var _$parent$data;
   let $parent = jquery__WEBPACK_IMPORTED_MODULE_0___default()(parent);
   // ensure that parent is a fieldset
   if ($parent.attr('tagName') !== 'FIELDSET') {
@@ -79,9 +80,7 @@ function ajaxValidate(parent, id, values) {
       return false;
     }
   }
-  if ($parent.data('ajax') !== null) {
-    $parent.data('ajax').abort();
-  }
+  (_$parent$data = $parent.data('ajax')) === null || _$parent$data === void 0 || _$parent$data.abort();
   $parent.data('ajax', jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     url: '../setup/index.php?route=/setup/validate',
     cache: false,

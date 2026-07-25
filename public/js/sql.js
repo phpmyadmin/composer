@@ -19,6 +19,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
 /* harmony import */ var _modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./resources/js/modules/functions/refreshMainContent.ts");
 /* harmony import */ var _modules_functions_isStorageSupported_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("./resources/js/modules/functions/isStorageSupported.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -499,7 +501,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
   // Delete row from SQL results
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.delete_row.ajax', function (e) {
     e.preventDefault();
-    const question = window.sprintf(window.Messages.strDoYouReally, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('div').text()));
+    const question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_13__.sprintf)(window.Messages.strDoYouReally, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_10__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('td').find('div').text()));
     const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     $link.confirm(question, $link.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
@@ -699,7 +701,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     $varDiv.empty();
     for (let i = 1; i <= varCount; i++) {
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="mb-3">'));
-      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<label for="bookmarkVariable' + i + '">' + window.sprintf(window.Messages.strBookmarkVariable, i) + '</label>'));
+      $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<label for="bookmarkVariable' + i + '">' + (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_13__.sprintf)(window.Messages.strBookmarkVariable, i) + '</label>'));
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input class="form-control" type="text" size="10" name="bookmark_variable[' + i + ']" id="bookmarkVariable' + i + '">'));
       $varDiv.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('</div>'));
     }

@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 /* harmony import */ var _modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/functions/getJsConfirmCommonParam.ts");
 /* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+/* harmony import */ var locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/locutus/esm/php/strings/sprintf.js");
+
 
 
 
@@ -196,7 +198,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/relatio
     // Object containing reference to the current field's row
     const $currRow = $anchor.parents('tr');
     const dropQuery = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)($currRow.children('td').children('.drop_foreign_key_msg').val());
-    const question = window.sprintf(window.Messages.strDoYouReally, dropQuery);
+    const question = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.strDoYouReally, dropQuery);
     $anchor.confirm(question, $anchor.attr('href'), function (url) {
       const $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strDroppingForeignKey, false);
       const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(this, $anchor.getPostData());
