@@ -1476,8 +1476,8 @@ function setConfigValue(key, value) {
     value: value
   }).fail(function (data) {
     if (typeof data !== 'undefined' && data.responseJSON) {
-      const message = '<div class="alert alert-danger" role="alert">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(data.responseJSON.error) + '</div>';
-      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(message, false);
+      const message = (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_3__.escapeHtml)(data.responseJSON.error);
+      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_1__.ajaxShowMessage)(message, false, 'error');
     }
   });
 }

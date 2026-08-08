@@ -173,7 +173,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
       dataType: 'json',
       success: function (data) {
         if (data.message !== '1') {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + data.message + '</div>', false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(data.message, false, 'error');
         } else {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#f_' + rownum + ' td input[id=checkbox_row_' + rownum + ']').val(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#f_' + rownum + ' input[name=col_name]').val()).html();
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#f_' + rownum + ' td[name=col_name] span').text(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#f_' + rownum + ' input[name=col_name]').val()).html();
@@ -192,7 +192,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableslistcontainer').find('.checkall').show();
       },
       error: function () {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + '</div>', false);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest, false, 'error');
       }
     });
   });

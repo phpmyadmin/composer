@@ -80,24 +80,24 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#import_file_form', function () {
     const radioLocalImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#localFileTab');
     const radioImport = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#uploadFileTab');
-    const fileMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strImportDialogMessage + '</div>';
-    const wrongTblNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strTableNameDialogMessage + '</div>';
-    const wrongDBNameMsg = '<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strDBNameDialogMessage + '</div>';
+    const fileMsg = '<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strImportDialogMessage;
+    const wrongTblNameMsg = '<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strTableNameDialogMessage;
+    const wrongDBNameMsg = '<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error">' + window.Messages.strDBNameDialogMessage;
     if (radioLocalImport.length !== 0) {
       // remote upload.
       if (radioImport.hasClass('active') && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_import_file').trigger('focus');
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false, 'error');
         return false;
       }
       if (radioLocalImport.hasClass('active')) {
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_local_import_file').length === 0) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile + ' </div>', false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strNoImportFile, false, 'error');
           return false;
         }
         if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_local_import_file').val() === '') {
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_local_import_file').trigger('focus');
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false, 'error');
           return false;
         }
       }
@@ -105,20 +105,20 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('import.js', f
       // local upload.
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_import_file').val() === '') {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input_import_file').trigger('focus');
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(fileMsg, false, 'error');
         return false;
       }
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_tbl_name').length > 0) {
         const newTblName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_tbl_name').val();
         if (newTblName.length > 0 && newTblName.trim().length === 0) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongTblNameMsg, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongTblNameMsg, false, 'error');
           return false;
         }
       }
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_db_name').length > 0) {
         const newDBName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#text_csv_new_db_name').val();
         if (newDBName.length > 0 && newDBName.trim().length === 0) {
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongDBNameMsg, false);
+          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(wrongDBNameMsg, false, 'error');
           return false;
         }
       }

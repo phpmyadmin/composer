@@ -46,7 +46,7 @@ const DropDatabases = {
       selectedDbs[selectedDbs.length] = 'DROP DATABASE `' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val()) + '`;';
     });
     if (!selectedDbs.length) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="alert alert-warning" role="alert"></div>').text(window.Messages.strNoDatabasesSelected), 2000);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strNoDatabasesSelected, 2000, 'warning');
       return;
     }
     /**

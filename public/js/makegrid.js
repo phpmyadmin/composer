@@ -424,10 +424,7 @@ const makeGrid = function (t) {
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql/set-column-preferences', postParams, function (data) {
           if (data.success !== true) {
-            const $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()(document.createElement('div'));
-            $tempDiv.html(data.error);
-            $tempDiv.addClass('alert alert-danger');
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($tempDiv, false);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false, 'error');
           }
         });
       }
@@ -1433,8 +1430,7 @@ const makeGrid = function (t) {
           if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val().match(/^(0x)?[a-f0-9]*$/i) !== null) {
             thisFieldParams[fieldName] = jquery__WEBPACK_IMPORTED_MODULE_0___default()(g.cEdit).find('.edit_box').val();
           } else {
-            const hexError = '<div class="alert alert-danger" role="alert">' + window.Messages.strEnterValidHex + '</div>';
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(hexError, false);
+            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strEnterValidHex, false, 'error');
             thisFieldParams[fieldName] = (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.getCellValue)(g.currentEditCell);
           }
         } else {

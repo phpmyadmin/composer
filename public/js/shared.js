@@ -44,79 +44,50 @@ let ajaxMessageCount = 0;
  * This will show a message that will not disappear automatically, but it
  * can be dismissed by the user after they have finished reading it.
  *
- * @param {string|null} message string containing the message to be shown.
- *                              optional, defaults to 'Loading...'
- * @param {any} timeout         number of milliseconds for the message to be visible
- *                              optional, defaults to 5000. If set to 'false', the
- *                              notification will never disappear
- * @param {string|null} type    string to dictate the type of message shown.
- *                              optional, defaults to normal notification.
- *                              If set to 'error', the notification will show message
- *                              with red background.
- *                              If set to 'success', the notification will show with
- *                              a green background.
- * @return {JQuery<Element>}   jQuery Element that holds the message div
- *                              this object can be passed to ajaxRemoveMessage()
- *                              to remove the notification
+ * @param message string containing the message to be shown.
+ *                optional, defaults to 'Loading...'
+ * @param timeout number of milliseconds for the message to be visible
+ *                optional, defaults to 5000. If set to 'false', the notification will never disappear
+ * @param type    string to dictate the type of message shown. optional, defaults to normal notification.
+ *                If set to 'error', the notification will show message with red background.
+ *                If set to 'warning', the notification will show with a yellow background.
+ *                If set to 'success', the notification will show with a green background.
+ * @return        jQuery Element that holds the message div this object can be passed
+ *                to ajaxRemoveMessage() to remove the notification
  */
 const ajaxShowMessage = function () {
   let message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   let timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   let type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  let msg = message;
-  let newTimeOut = timeout;
-  /**
-   * @var self_closing Whether the notification will automatically disappear
-   */
-  let selfClosing = true;
-  /**
-   * @var dismissable Whether the user will be able to remove
-   *                  the notification by clicking on it
-   */
-  let dismissable = true;
   // Handle the case when a empty data.message is passed.
   // We don't want the empty message
-  if (msg === '') {
+  if (message === '') {
     return true;
-  } else if (!msg) {
-    // If the message is undefined, show the default
-    msg = window.Messages.strLoading;
-    dismissable = false;
-    selfClosing = false;
-  } else if (msg === window.Messages.strProcessingRequest) {
-    // This is another case where the message should not disappear
-    dismissable = false;
-    selfClosing = false;
-  }
-  // Figure out whether (or after how long) to remove the notification
-  if (newTimeOut === undefined || newTimeOut === null) {
-    newTimeOut = 5000;
-  } else if (newTimeOut === false) {
-    selfClosing = false;
-  }
-  // Determine type of message, add styling as required
-  if (type === 'error') {
-    msg = '<div class="alert alert-danger" role="alert">' + msg + '</div>';
-  } else if (type === 'success') {
-    msg = '<div class="alert alert-success" role="alert">' + msg + '</div>';
   }
   // Create a parent element for the AJAX messages, if necessary
   if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#loading_parent').length === 0) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id="loading_parent"></div>').prependTo('#page_content');
   }
-  // Update message count to create distinct message elements every time
-  ajaxMessageCount++;
   // Remove all old messages, if any
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('[role="tooltip"]').remove();
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.ajax_notification[id^=ajax_message_num]').remove();
-  /**
-   * @var $retval    a jQuery object containing the reference
-   *                 to the created AJAX message
-   */
-  const $retval = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<span class="ajax_notification" id="ajax_message_num_' + ajaxMessageCount + '"></span>').hide().appendTo('#loading_parent').html(msg).show();
+  const msg = message !== null && message !== void 0 ? message : window.Messages.strLoading;
+  // Determine type of message, add styling as required
+  let html = msg;
+  if (type === 'error') {
+    html = "<div class=\"alert alert-danger\" role=\"alert\">".concat(msg, "</div>");
+  } else if (type === 'warning') {
+    html = "<div class=\"alert alert-warning\" role=\"alert\">".concat(msg, "</div>");
+  } else if (type === 'success') {
+    html = "<div class=\"alert alert-success\" role=\"alert\">".concat(msg, "</div>");
+  }
+  /** A jQuery object containing the reference to the created AJAX message with unique id */
+  const $retval = jquery__WEBPACK_IMPORTED_MODULE_0___default()("<span class=\"ajax_notification\" id=\"ajax_message_num_".concat(++ajaxMessageCount, "\"></span>")).hide().appendTo('#loading_parent').html(html).show();
   // If the notification is self-closing we should create a callback to remove it
+  /** Whether the notification will automatically disappear */
+  const selfClosing = msg !== window.Messages.strLoading && msg !== window.Messages.strProcessingRequest && timeout !== false;
   if (selfClosing) {
-    $retval.delay(newTimeOut).fadeOut('medium', function () {
+    $retval.delay(timeout !== null && timeout !== void 0 ? timeout : 5000).fadeOut('medium', function () {
       var _bootstrap$Tooltip$ge;
       (_bootstrap$Tooltip$ge = bootstrap__WEBPACK_IMPORTED_MODULE_1__.Tooltip.getInstance(this)) === null || _bootstrap$Tooltip$ge === void 0 || _bootstrap$Tooltip$ge.dispose();
       // Remove the notification
@@ -125,6 +96,7 @@ const ajaxShowMessage = function () {
   }
   // If the notification is dismissable we need to add the relevant class to it
   // and add a tooltip so that the users know that it can be removed
+  const dismissable = msg !== window.Messages.strLoading && msg !== window.Messages.strProcessingRequest;
   if (dismissable) {
     $retval.addClass('dismissable').css('cursor', 'pointer');
     /**
@@ -1021,7 +993,7 @@ const AJAX = {
         let details = '';
         const state = request.state();
         if ('responseJSON' in request && 'isErrorResponse' in request.responseJSON && request.responseJSON.isErrorResponse) {
-          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(request.responseJSON.error) + '</div>', false);
+          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)((0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(request.responseJSON.error), false, 'error');
           AJAX.active = false;
           AJAX.xhr = null;
           return;
@@ -1033,7 +1005,7 @@ const AJAX = {
         if (state === 'rejected' || state === 'timeout') {
           details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(window.Messages.strErrorConnection) + '</div>';
         }
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + window.Messages.strErrorProcessingRequest + details + '</div>', false);
+        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + details, false, 'error');
         AJAX.active = false;
         AJAX.xhr = null;
       }
@@ -3616,7 +3588,7 @@ function onloadCreateTableEvents() {
       // User wants to submit the form
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
         if (typeof data === 'undefined' || data.success !== true) {
-          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + data.error + '</div>', false);
+          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false, 'error');
           return;
         }
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#properties_message').removeClass('alert-danger').html('');
@@ -5976,7 +5948,7 @@ const addIndexGo = function (sourceArray, arrayIndex, index, colIndex) {
   if (!isMissingValue) {
     Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
   } else {
-    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
+    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strMissingColumn, false, 'error');
     return false;
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addIndexModal').modal('hide');
@@ -6085,7 +6057,7 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
         if (!isMissingValue) {
           Indexes.addColumnToIndex(sourceArray, arrayIndex, index.Index_choice, colIndex);
         } else {
-          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt=""' + ' class="icon ic_s_error"> ' + window.Messages.strMissingColumn + ' </div>', false);
+          (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strMissingColumn, false, 'error');
           return false;
         }
       }
@@ -6124,7 +6096,7 @@ function indexTypeSelectionDialog(sourceArray, indexChoice, colIndex) {
     }
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#composite_index').is(':checked')) {
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="composite_with"]').length !== 0 && jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="composite_with"]:checked').length === 0) {
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title=""' + ' alt="" class="icon ic_s_error"> ' + window.Messages.strFormEmpty + ' </div>', false);
+        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)('<img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> ' + window.Messages.strFormEmpty, false, 'error');
         return false;
       }
       const arrayIndex = Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="composite_with"]:checked').val());

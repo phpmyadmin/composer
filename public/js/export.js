@@ -664,7 +664,7 @@ function checkTimeOut(timeLimit) {
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (data) {
       if (data.message === 'timeout') {
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)('<div class="alert alert-danger" role="alert">' + window.Messages.strTimeOutError + '</div>', false);
+        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strTimeOutError, false, 'error');
       }
     });
   }, limit * 1000);
