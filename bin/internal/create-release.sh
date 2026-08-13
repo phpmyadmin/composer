@@ -586,7 +586,7 @@ for kit in $KITS ; do
         # Template test files
         rm -r resources/templates/test/
         rm phpunit.xml
-        rm .editorconfig .browserslistrc .eslintignore .jshintrc .eslintrc.json .stylelintrc.json psalm.xml psalm-baseline.xml phpstan.neon.dist phpstan-baseline.neon phpcs.xml.dist jest.config.cjs infection.json5.dist .phpstorm.meta.php
+        rm .editorconfig .browserslistrc .eslintignore .jshintrc .eslintrc.json .stylelintrc.json psalm.xml psalm-baseline.xml phpstan.neon.dist phpstan-baseline.neon phpcs.xml jest.config.cjs infection.json5.dist .phpstorm.meta.php
         # Gettext po files (if they were not removed by ./bin/internal/lang-cleanup.sh)
         rm -rf resources/po
         # Documentation source code
@@ -671,6 +671,7 @@ done
 if [ $do_daily -eq 1 ] ; then
     cat > "$kit_prefix".json << EOT
 {
+    "version": "$version",
     "date": "$(date --iso-8601=seconds)",
     "commit": "$git_head"
 }

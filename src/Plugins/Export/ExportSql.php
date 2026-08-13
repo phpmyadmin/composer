@@ -1422,10 +1422,7 @@ class ExportSql extends ExportPlugin
                 assert($statement instanceof CreateStatement);
 
                 // exclude definition of current user
-                if (
-                    $this->config->settings['Export']['remove_definer_from_definitions']
-                    || $this->viewCurrentUser
-                ) {
+                if ($this->config->settings['Export']['remove_definer_from_definitions'] || $this->viewCurrentUser) {
                     $statement->options->remove('DEFINER');
                 }
 
@@ -1651,10 +1648,7 @@ class ExportSql extends ExportPlugin
 
                 // Removing the `AUTO_INCREMENT` attribute from the `CREATE TABLE`
                 // too.
-                if (
-                    $statement->entityOptions !== null
-                    && (! $this->ifNotExists || ! $this->autoIncrement)
-                ) {
+                if ($statement->entityOptions !== null && (! $this->ifNotExists || ! $this->autoIncrement)) {
                     $statement->entityOptions->remove('AUTO_INCREMENT');
                 }
 
@@ -2118,9 +2112,7 @@ class ExportSql extends ExportPlugin
                 // NULL
                 if ($row[$j] === null) {
                     $values[] = 'NULL';
-                } elseif (
-                    $metaInfo->isNumeric
-                ) {
+                } elseif ($metaInfo->isNumeric) {
                     // a number
                     $values[] = $row[$j];
                 } elseif ($metaInfo->isBinary && $this->hexForBinary) {
@@ -2511,6 +2503,10 @@ class ExportSql extends ExportPlugin
 
     private function getTableStatus(string $db, string $table): string
     {
+        if (! $this->doDates) {
+            return '';
+        }
+
         $newCrlf = "\n";
         $schemaCreate = '';
 
@@ -2521,7 +2517,7 @@ class ExportSql extends ExportPlugin
         if ($result !== false && $result->numRows() > 0) {
             $tmpres = $result->fetchAssoc();
 
-            if ($this->doDates && ! empty($tmpres['Create_time'])) {
+            if (! empty($tmpres['Create_time'])) {
                 $schemaCreate .= $this->exportComment(
                     __('Creation:') . ' '
                     . Util::localisedDate(new DateTimeImmutable($tmpres['Create_time'])),
@@ -2529,7 +2525,7 @@ class ExportSql extends ExportPlugin
                 $newCrlf = $this->exportComment() . "\n";
             }
 
-            if ($this->doDates && ! empty($tmpres['Update_time'])) {
+            if (! empty($tmpres['Update_time'])) {
                 $schemaCreate .= $this->exportComment(
                     __('Last update:') . ' '
                     . Util::localisedDate(new DateTimeImmutable($tmpres['Update_time'])),
@@ -2537,7 +2533,7 @@ class ExportSql extends ExportPlugin
                 $newCrlf = $this->exportComment() . "\n";
             }
 
-            if ($this->doDates && ! empty($tmpres['Check_time'])) {
+            if (! empty($tmpres['Check_time'])) {
                 $schemaCreate .= $this->exportComment(
                     __('Last check:') . ' '
                     . Util::localisedDate(new DateTimeImmutable($tmpres['Check_time'])),
